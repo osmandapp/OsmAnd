@@ -45,7 +45,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -109,118 +108,6 @@ public class MenuBuilder {
 		void onCollapseExpand(boolean collapsed);
 	}
 
-	public class PlainMenuItem {
-		private int iconId;
-		private String buttonText;
-		private String text;
-		private boolean needLinks;
-		private boolean url;
-		private boolean collapsable;
-		private CollapsableView collapsableView;
-		private OnClickListener onClickListener;
-
-		public PlainMenuItem(int iconId, String buttonText, String text, boolean needLinks, boolean url,
-							 boolean collapsable, CollapsableView collapsableView,
-							 OnClickListener onClickListener) {
-			this.iconId = iconId;
-			this.buttonText = buttonText;
-			this.text = text;
-			this.needLinks = needLinks;
-			this.url = url;
-			this.collapsable = collapsable;
-			this.collapsableView = collapsableView;
-			this.onClickListener = onClickListener;
-		}
-
-		public int getIconId() {
-			return iconId;
-		}
-
-		public String getButtonText() {
-			return buttonText;
-		}
-
-		public String getText() {
-			return text;
-		}
-
-		public boolean isNeedLinks() {
-			return needLinks;
-		}
-
-		public boolean isUrl() {
-			return url;
-		}
-
-		public boolean isCollapsable() {
-			return collapsable;
-		}
-
-		public CollapsableView getCollapsableView() {
-			return collapsableView;
-		}
-
-		public OnClickListener getOnClickListener() {
-			return onClickListener;
-		}
-	}
-
-	public static class CollapsableView {
-
-		private View contenView;
-		private MenuBuilder menuBuilder;
-		private OsmandPreference<Boolean> collapsedPref;
-		private boolean collapsed;
-		private CollapseExpandListener collapseExpandListener;
-
-		public CollapsableView(@NonNull View contenView, MenuBuilder menuBuilder,
-							   @NonNull OsmandPreference<Boolean> collapsedPref) {
-			this.contenView = contenView;
-			this.menuBuilder = menuBuilder;
-			this.collapsedPref = collapsedPref;
-		}
-
-		public CollapsableView(@NonNull View contenView, MenuBuilder menuBuilder, boolean collapsed) {
-			this.contenView = contenView;
-			this.collapsed = collapsed;
-			this.menuBuilder = menuBuilder;
-		}
-
-		public View getContenView() {
-			return contenView;
-		}
-
-		public boolean isCollapsed() {
-			if (collapsedPref != null) {
-				return collapsedPref.get();
-			} else {
-				return collapsed;
-			}
-		}
-
-		public void setCollapsed(boolean collapsed) {
-			if (collapsedPref != null) {
-				collapsedPref.set(collapsed);
-			} else {
-				this.collapsed = collapsed;
-			}
-			if (collapseExpandListener != null) {
-				collapseExpandListener.onCollapseExpand(collapsed);
-			}
-			if (menuBuilder != null && menuBuilder.collapseExpandListener != null) {
-				menuBuilder.collapseExpandListener.onCollapseExpand(collapsed);
-			}
-		}
-
-		public CollapseExpandListener getCollapseExpandListener() {
-			return collapseExpandListener;
-		}
-
-		public void setCollapseExpandListener(CollapseExpandListener collapseExpandListener) {
-			this.collapseExpandListener = collapseExpandListener;
-		}
-	}
-
 	public MenuBuilder(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
@@ -232,6 +119,10 @@ public class MenuBuilder {
 			preferredMapAppLang = app.getLanguage();
 		}
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+	}
+
+	public CollapseExpandListener getCollapseExpandListener() {
+		return collapseExpandListener;
 	}
 
 	public void setCollapseExpandListener(CollapseExpandListener collapseExpandListener) {
@@ -355,7 +246,7 @@ public class MenuBuilder {
 
 	protected void buildPlainMenuItems(View view) {
 		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getButtonText(), item.getText(), 0, item.collapsable, item.collapsableView,
+			buildRow(view, item.getIconId(), item.getButtonText(), item.getText(), 0, item.isCollapsable(), item.getCollapsableView(),
 					item.isNeedLinks(), 0, item.isUrl(), item.getOnClickListener(), false);
 		}
 	}
@@ -668,31 +559,31 @@ public class MenuBuilder {
 			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
 			iconViewCollapse.setLayoutParams(llIconCollapseParams);
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContenView().getVisibility() == View.GONE));
+			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContentView().getVisibility() == View.GONE));
 			llIconCollapse.addView(iconViewCollapse);
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (collapsableView.getContenView().getVisibility() == View.VISIBLE) {
-						collapsableView.getContenView().setVisibility(View.GONE);
+					if (collapsableView.getContentView().getVisibility() == View.VISIBLE) {
+						collapsableView.getContentView().setVisibility(View.GONE);
 						iconViewCollapse.setImageDrawable(getCollapseIcon(true));
 						collapsableView.setCollapsed(true);
 					} else {
-						collapsableView.getContenView().setVisibility(View.VISIBLE);
+						collapsableView.getContentView().setVisibility(View.VISIBLE);
 						iconViewCollapse.setImageDrawable(getCollapseIcon(false));
 						collapsableView.setCollapsed(false);
 					}
 				}
 			});
 			if (collapsableView.isCollapsed()) {
-				collapsableView.getContenView().setVisibility(View.GONE);
+				collapsableView.getContentView().setVisibility(View.GONE);
 				iconViewCollapse.setImageDrawable(getCollapseIcon(true));
 			}
-			if (collapsableView.getContenView().getParent() != null) {
-				((ViewGroup) collapsableView.getContenView().getParent())
-					.removeView(collapsableView.getContenView());
+			if (collapsableView.getContentView().getParent() != null) {
+				((ViewGroup) collapsableView.getContentView().getParent())
+					.removeView(collapsableView.getContentView());
 			}
-			baseView.addView(collapsableView.getContenView());
+			baseView.addView(collapsableView.getContentView());
 		}
 
 		if (onClickListener != null) {

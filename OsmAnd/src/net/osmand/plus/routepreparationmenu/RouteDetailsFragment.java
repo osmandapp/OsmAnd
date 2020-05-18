@@ -68,7 +68,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
-import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapsableView;
+import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -870,12 +870,12 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL|Gravity.START;
 			iconViewCollapse.setLayoutParams(llIconCollapseParams);
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContenView().getVisibility() == View.GONE));
+			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContentView().getVisibility() == View.GONE));
 			llIconCollapse.addView(iconViewCollapse);
 			ll.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					LinearLayout contentView = (LinearLayout) collapsableView.getContenView();
+					LinearLayout contentView = (LinearLayout) collapsableView.getContentView();
 					if (contentView.getVisibility() == View.VISIBLE) {
 						contentView.setVisibility(View.GONE);
 						iconViewCollapse.setImageDrawable(getCollapseIcon(true));
@@ -890,10 +890,10 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				}
 			});
 			if (collapsableView.isCollapsed()) {
-				collapsableView.getContenView().setVisibility(View.GONE);
+				collapsableView.getContentView().setVisibility(View.GONE);
 				iconViewCollapse.setImageDrawable(getCollapseIcon(true));
 			}
-			baseView.addView(collapsableView.getContenView());
+			baseView.addView(collapsableView.getContentView());
 		}
 
 		if (onClickListener != null) {

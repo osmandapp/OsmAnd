@@ -20,6 +20,7 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
