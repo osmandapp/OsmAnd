@@ -447,7 +447,7 @@
     <string name="simulate_your_location">Simuli pozicion</string>
     <string name="drawer">Plata listo</string>
     <string name="short_location_on_map">Lat: %1$s
-Lon: %2$s</string>
+\nLon: %2$s</string>
     <string name="tips_and_tricks_descr">Oftaj demandoj, lastaj ŝanĝoj kaj aliaj.</string>
     <string name="shared_string_do_not_use">Ne uzi</string>
     <string name="shared_string_selected_lowercase">elektitaj</string>
@@ -1528,8 +1528,7 @@ Lon: %2$s</string>
     <string name="lang_en_gb">Angla (Brita)</string>
     <string name="level_to_switch_vector_raster_descr">Uzi kahelajn mapojn de tiu ĉi pligrandigo.</string>
     <string name="level_to_switch_vector_raster">Minimuma vektora skal-nivelo</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>Enreta OSM</u> map-klasigo kun bildoj.</string>
+    <string name="create_poi_link_to_osm_doc"><u>Enreta OSM</u> map-klasigo kun bildoj.</string>
     <string name="error_doing_search">Ne povas serĉi eksterrete.</string>
     <string name="search_osm_offline">Serĉi per pozici-trova servo</string>
     <string name="preferred_locale_descr">Elekti lingvon de fasado (post ŝanĝi necesas restarti la aplikaĵon).</string>
@@ -2174,11 +2173,11 @@ Lon: %2$s</string>
     <string name="quick_action_map_underlay_switch">Subtavolo de mapo ŝanĝita al \"%s\".</string>
     <string name="navigate_point_olc">Malferma pozicia kodo (OLC)</string>
     <string name="navigate_point_olc_info_invalid">Erara OLC
-</string>
+\n</string>
     <string name="navigate_point_olc_info_short">Mallonga OLC
-Bonvolu enigi plenan kodon</string>
-    <string name="navigate_point_olc_info_area">"Ĝusta plena OLC
-Indikas lokon:  %1$s x %2$s"</string>
+\nBonvolu enigi plenan kodon</string>
+    <string name="navigate_point_olc_info_area">Ĝusta plena OLC 
+\nReprezentata areo: %1$s×%2$s</string>
     <string name="quick_action_page_list_descr">Butono por foliumi tra la suba listo.</string>
     <string name="auto_split_recording_title">Aŭtomate dividi registraĵojn post paŭzo</string>
     <string name="auto_split_recording_descr">Komenci novan segmenton post 6 min paŭzo, novan registraĵon post 2 h, kaj novan dosieron post pli longaj paŭzoj, se dato ŝanĝiĝis.</string>
@@ -2243,7 +2242,8 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n • Map-pligrandigo alĝustiĝas al via rapido 
 \n • Serĉi cel-lokojn laŭ adreso, laŭ speco (ekz. parkumejo, restoracio, hotelo, benzinejo, muzeo) aŭ laŭ geografiaj koordinatoj 
 \n • Subteno por interceloj sur via kurso 
-\n • Registri vian propran GPX-spuron kaj sekvi ĝin</string>
+\n • Registri vian propran GPX-spuron kaj sekvi ĝin
+\n</string>
     <string name="osmand_extended_description_part3">Mapo 
 \n • Montrado de interesejoj (punktoj de intereso) ĉirkaŭ vi 
 \n • Orientiĝado de mapo laŭ via direkto de movo (aŭ laŭ kompaso) 
@@ -2251,7 +2251,8 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n • Diskonigi vian pozicion por ke viaj amikoj povu trovi vin 
 \n • Konservi viajn plej gravajn ejojn en listo de “ŝatataj” 
 \n • Ebligas al vi elekti kiel vidigi nomojn sur la mapo: esperante, en loka lingvo aŭ en fonetika transskribo 
-\n • Montras specialajn enretajn kahelojn, satelitan vidon (de Bing), diversajn surtavolojn kiel piediradajn kursojn kaj aldonajn tavolojn kun agordebla diafaneco</string>
+\n • Montras specialajn enretajn kahelojn, satelitan vidon (de Bing), diversajn surtavolojn kiel piediradajn kursojn kaj aldonajn tavolojn kun agordebla diafaneco
+\n</string>
     <string name="osmand_extended_description_part4">Skiado 
 \n La kromprogramo de OsmAnd “skiada map-vido” ebligas al vi vidigi skivojojn kun ilia facileco kaj aliajn taŭgajn informojn, kiel lokojn de skiliftoj kaj aliajn ejojn.</string>
     <string name="osmand_extended_description_part5">Biciklado 
@@ -2265,11 +2266,13 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n • Vikipedio en via lingvo eblas rakonti al vi multe dum via vizitado de urbo 
 \n • Haltejoj de publika transporto (aŭtobusaj, tramaj, fervojaj) kaj nomoj de linioj por helpi al vi navigi en urbo 
 \n • GPS-navigado en piedirada reĝimo kalkulas kursojn uzante piediradajn kursojn 
-\n • Alŝuti kaj postsekvi GPX-spuron aŭ registri kaj diskonigi vian propran</string>
+\n • Alŝuti kaj postsekvi GPX-spuron aŭ registri kaj diskonigi vian propran
+\n</string>
     <string name="osmand_extended_description_part7">Kontribui al OSM 
 \n • Raporti erarojn pri datumoj 
 \n • Alŝuti GPX-spurojn al OSM senpere de la aplikaĵo 
-\n • Aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se eksterrete)</string>
+\n • Aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se eksterrete)
+\n</string>
     <string name="osmand_extended_description_part8">OsmAnd estas malfermkoda kaj daŭre evoluigata programaro. Ĉiu povas kontribui al la aplikaĵo per raporti erarojn, plibonigi tradukojn aŭ programi novajn funkciojn. La projekto baziĝas sur monaj donacoj por fondi kodumadon kaj testi novajn funkciojn. 
 \n Proksimuma map-atingo kaj kvalito: 
 \n • Okcidenta Eŭropo: **** 
@@ -3126,21 +3129,25 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_crash">Paneo</string>
     <string name="last_launch_crashed">OsmAnd paneis dum la antaŭa starto. Helpu al ni plibonigi la aplikaĵon per sendi mesaĝon pri eraro.</string>
     <string name="app_mode_ufo">NIFO</string>
-    <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro 
+    <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro
 \n 
-\n• agordo por aldoni kutiman, minimuman kaj maksimuman rapidon por profilo (por kalkuli esperatan alvenan tempon) 
+\n • agordo por aldoni kutiman, minimuman kaj maksimuman rapidon por profilo (por kalkuli esperatan tempon de alveno)
 \n 
-\n• fenestraĵo montranta koordinatojn 
+\n • fenestraĵo montranta koordinatojn 
 \n 
-\n• eblo montri kompason kun angul-mezurilo sur la mapo 
+\n • eblo montri kompason kun angul-mezurilo sur la mapo
 \n 
-\n• plibonigita elŝuto de mapoj fone 
+\n • riparita registrado de spuro fone
 \n 
-\n• riparita elekto de lingvo por Vikipedio 
+\n • restarigita eblaĵo “teni ekranon ŝaltita”
 \n 
-\n• riparita sinteno de kompaso butono dum navigado 
+\n • plibonigita elŝuto de mapoj fone
 \n 
-\n• riparoj de aliaj eraroj
+\n • riparita elekto de lingvo por Vikipedio
+\n 
+\n • riparita sinteno de kompaso butono dum navigado
+\n 
+\n • riparoj de aliaj eraroj
 \n
 \n</string>
     <string name="app_mode_personal_transporter">Persona transportilo</string>
