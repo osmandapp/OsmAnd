@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 
 class AppVersionUpgradeOnInit {
@@ -32,16 +33,20 @@ class AppVersionUpgradeOnInit {
 	static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
 	private OsmandApplication app;
+	private SharedPreferences startPrefs;
 	private int prevAppVersion;
 	private boolean appVersionChanged;
 	private boolean firstTime;
 
 	AppVersionUpgradeOnInit(OsmandApplication app) {
 		this.app = app;
+		startPrefs = app.getSharedPreferences(
+				getLocalClassName(app.getAppCustomization().getMapActivity().getName()),
+				Context.MODE_PRIVATE);
 	}
 
 	@SuppressLint("ApplySharedPref")
-	void upgradeVersion(SharedPreferences startPrefs, int lastVersion) {
+	void upgradeVersion(int lastVersion) {
 		if(!startPrefs.contains(NUMBER_OF_STARTS)) {
 			startPrefs.edit().putInt(NUMBER_OF_STARTS, 1).commit();
 		} else {
@@ -129,20 +134,20 @@ class AppVersionUpgradeOnInit {
 		return prevAppVersion;
 	}
 
-	public void resetFirstTimeRun(SharedPreferences startPrefs) {
+	public void resetFirstTimeRun() {
 		if(startPrefs != null) {
 			startPrefs.edit().remove(FIRST_TIME_APP_RUN).commit();
 		}
 	}
 
-	public int getNumberOfStarts(SharedPreferences startPrefs) {
+	public int getNumberOfStarts() {
 		if(startPrefs == null) {
 			return 0;
 		}
 		return startPrefs.getInt(NUMBER_OF_STARTS, 1);
 	}
 
-	public long getFirstInstalledDays(SharedPreferences startPrefs) {
+	public long getFirstInstalledDays() {
 		if(startPrefs == null) {
 			return 0;
 		}
@@ -153,5 +158,15 @@ class AppVersionUpgradeOnInit {
 
 	public boolean isFirstTime() {
 		return firstTime;
+	}
+
+	private String getLocalClassName(String cls) {
+		final String pkg = app.getPackageName();
+		int packageLen = pkg.length();
+		if (!cls.startsWith(pkg) || cls.length() <= packageLen
+				|| cls.charAt(packageLen) != '.') {
+			return cls;
+		}
+		return cls.substring(packageLen + 1);
 	}
 }

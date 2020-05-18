@@ -38,6 +38,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
@@ -105,7 +106,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			WptPt wpt = editor.getWptPt();
 			this.wpt = wpt;
 			color = wpt.getColor(0);
-			iconName = wpt.getIconName();
+			iconName = wpt.getIconNameOrDefault();
 			categoriesMap = editor.getGpxFile().getWaypointCategoriesWithColors(false);
 			backgroundTypeName = wpt.getBackgroundType();
 		}
@@ -443,7 +444,8 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	public int getIconIdFromName(String iconName) {
-		return app.getResources().getIdentifier("mx_" + iconName, "drawable", app.getPackageName());
+		int iconId = app.getResources().getIdentifier("mx_" + iconName, "drawable", app.getPackageName());
+		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
 	}
 
 	@Override

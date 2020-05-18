@@ -219,7 +219,7 @@ public class FavoriteImageDrawable extends Drawable {
 		FavouritePoint point = null;
 		if (pt != null) {
 			point = new FavouritePoint(pt.getLatitude(), pt.getLongitude(), pt.name, pt.category);
-			point.setIconIdFromName(a, pt.getIconName());
+			point.setIconIdFromName(a, pt.getIconNameOrDefault());
 			point.setBackgroundType(BackgroundType.getByTypeName(pt.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
 		}
 		return point;

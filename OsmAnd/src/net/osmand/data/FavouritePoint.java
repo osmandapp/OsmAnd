@@ -5,7 +5,6 @@ import android.content.Context;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.FavouritesDbHelper;
@@ -354,7 +353,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (iconName != null) {
 			fp.setIconIdFromName(ctx, iconName);
 		}
-		BackgroundType backgroundType = BackgroundType.getByTypeName(pt.getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
+		BackgroundType backgroundType = BackgroundType.getByTypeName(pt.getBackgroundType(), null);
 		fp.setBackgroundType(backgroundType);
 		return fp;
 	}
@@ -369,13 +368,13 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (isAddressSpecified()) {
 			pt.getExtensionsToWrite().put(ADDRESS_EXTENSION, getAddress());
 		}
-		if (iconId != 0 && iconId != DEFAULT_UI_ICON_ID) {
+		if (iconId != 0) {
 			pt.setIconName(getIconEntryName(ctx).substring(3));
 		}
-		if (backgroundType != null && backgroundType != DEFAULT_BACKGROUND_TYPE) {
+		if (backgroundType != null) {
 			pt.setBackgroundType(backgroundType.typeName);
 		}
-		if (getColor() != 0 && getColor() != ContextCompat.getColor(ctx, R.color.color_favorite)) {
+		if (getColor() != 0) {
 			pt.setColor(getColor());
 		}
 		pt.name = getName();

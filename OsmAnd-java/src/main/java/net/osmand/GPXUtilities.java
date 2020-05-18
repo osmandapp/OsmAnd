@@ -46,7 +46,6 @@ public class GPXUtilities {
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String DEFAULT_ICON_NAME = "special_star";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
-	private static final String DEFAULT_BACKGROUND_TYPE_NAME = "circle";
 
 	private final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
 	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
@@ -280,6 +279,10 @@ public class GPXUtilities {
 		}
 
 		public String getIconName() {
+			return getExtensionsToRead().get(ICON_NAME_EXTENSION);
+		}
+
+		public String getIconNameOrDefault() {
 			String iconName = getExtensionsToRead().get(ICON_NAME_EXTENSION);
 			if (iconName == null) {
 				iconName = DEFAULT_ICON_NAME;
@@ -292,11 +295,7 @@ public class GPXUtilities {
 		}
 
 		public String getBackgroundType() {
-			String backgroundType = getExtensionsToRead().get(BACKGROUND_TYPE_EXTENSION);
-			if (backgroundType == null) {
-				backgroundType = DEFAULT_BACKGROUND_TYPE_NAME;
-			}
-			return backgroundType;
+			return getExtensionsToRead().get(BACKGROUND_TYPE_EXTENSION);
 		}
 
 		public void setBackgroundType(String backType) {

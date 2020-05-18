@@ -117,7 +117,6 @@ public class AppInitializer implements IProgress {
 	private List<String> warnings = new ArrayList<>();
 	private String taskName;
 	private List<AppInitializeListener> listeners = new ArrayList<>();
-	private SharedPreferences startPrefs;
 
 	public enum InitEvents {
 		FAVORITES_INITIALIZED, NATIVE_INITIALIZED,
@@ -159,23 +158,21 @@ public class AppInitializer implements IProgress {
 			return;
 		}
 		ApplicationMode.onApplicationStart(app);
-		startPrefs = app.getSharedPreferences(
-				getLocalClassName(app.getAppCustomization().getMapActivity().getName()),
-				Context.MODE_PRIVATE);
-		appVersionUpgrade.upgradeVersion(startPrefs, LAST_APP_VERSION);
+
+		appVersionUpgrade.upgradeVersion(LAST_APP_VERSION);
 		initSettings = true;
 	}
 
 	public int getNumberOfStarts() {
-		return appVersionUpgrade.getNumberOfStarts(startPrefs);
+		return appVersionUpgrade.getNumberOfStarts();
 	}
 
 	public long getFirstInstalledDays() {
-		return appVersionUpgrade.getFirstInstalledDays(startPrefs);
+		return appVersionUpgrade.getFirstInstalledDays();
 	}
 
 	public void resetFirstTimeRun() {
-		appVersionUpgrade.resetFirstTimeRun(startPrefs);
+		appVersionUpgrade.resetFirstTimeRun();
 	}
 
 	public boolean isFirstTime() {
@@ -931,13 +928,4 @@ public class AppInitializer implements IProgress {
 		this.listeners.remove(listener);
 	}
 
-	private String getLocalClassName(String cls) {
-		final String pkg = app.getPackageName();
-		int packageLen = pkg.length();
-		if (!cls.startsWith(pkg) || cls.length() <= packageLen
-				|| cls.charAt(packageLen) != '.') {
-			return cls;
-		}
-		return cls.substring(packageLen+1);
-	}
 }
