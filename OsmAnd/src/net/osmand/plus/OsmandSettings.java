@@ -728,32 +728,47 @@ public class OsmandSettings {
 			registeredPreferences.put(id, this);
 		}
 
-		public CommonPreference<T> makeGlobal() {
+		// Methods to possibly override
+		protected abstract T getValue(Object prefs, T defaultValue);
+
+		protected abstract boolean setValue(Object prefs, T val);
+
+		public abstract T parseString(String s);
+
+		protected String toString(T o) {
+			return o == null ?  null : o.toString();
+		}
+
+
+		// common methods
+
+		public final CommonPreference<T> makeGlobal() {
 			global = true;
 			return this;
 		}
 
-		public CommonPreference<T> cache() {
+		public final CommonPreference<T> cache() {
 			cache = true;
 			return this;
 		}
 
-		public CommonPreference<T> makeProfile() {
+		public final CommonPreference<T> makeProfile() {
 			global = false;
 			return this;
 		}
 
-		protected Object getPreferences() {
+		protected final Object getPreferences() {
 			return global ? globalPreferences : profilePreferences;
 		}
 
-		public void setModeDefaultValue(ApplicationMode mode, T defValue) {
+		public final void setModeDefaultValue(ApplicationMode mode, T defValue) {
 			if (defaultValues == null) {
 				defaultValues = new LinkedHashMap<ApplicationMode, T>();
 			}
 			defaultValues.put(mode, defValue);
 		}
 
+		// TODO final
 		@Override
 		public boolean setModeValue(ApplicationMode mode, T obj) {
 			if (global) {
@@ -770,6 +785,7 @@ public class OsmandSettings {
 			return valueSaved;
 		}
 
+		// TODO final
 		public T getProfileDefaultValue(ApplicationMode mode) {
 			if (global) {
 				return defaultValue;
@@ -784,28 +800,27 @@ public class OsmandSettings {
 			return defaultValue;
 		}
 
-		public boolean hasDefaultValues() {
+		public final boolean hasDefaultValues() {
 			return defaultValues != null && !defaultValues.isEmpty();
 		}
 
-		public boolean hasDefaultValueForMode(ApplicationMode mode) {
+		public final boolean hasDefaultValueForMode(ApplicationMode mode) {
 			return defaultValues != null && defaultValues.containsKey(mode);
 		}
 
+		// TODO final
 		protected T getDefaultValue() {
 			return getProfileDefaultValue(currentMode);
 		}
 
 		@Override
-		public void overrideDefaultValue(T newDefaultValue) {
+		public final void overrideDefaultValue(T newDefaultValue) {
 			this.defaultValue = newDefaultValue;
 		}
 
-		protected abstract T getValue(Object prefs, T defaultValue);
 
 
-		protected abstract boolean setValue(Object prefs, T val);
-
+		// TODO final
 		@Override
 		public T getModeValue(ApplicationMode mode) {
 			if (global) {
@@ -815,6 +830,7 @@ public class OsmandSettings {
 			return getValue(getProfilePreferences(mode), defaultV);
 		}
 
+		// TODO final
 		@Override
 		public T get() {
 			if (cache && cachedValue != null && cachedPreference == getPreferences()) {
@@ -826,18 +842,18 @@ public class OsmandSettings {
 		}
 
 		@Override
-		public String getId() {
+		public final String getId() {
 			return id;
 		}
 
 		@Override
-		public void resetToDefault() {
+		public final void resetToDefault() {
 			T o = getProfileDefaultValue(currentMode);
 			set(o);
 		}
 
 		@Override
-		public void resetModeToDefault(ApplicationMode mode) {
+		public final void resetModeToDefault(ApplicationMode mode) {
 			if (global) {
 				resetToDefault();
 			} else {
@@ -846,6 +862,7 @@ public class OsmandSettings {
 			}
 		}
 
+		// TODO final
 		@Override
 		public boolean set(T obj) {
 			Object prefs = getPreferences();
@@ -858,7 +875,7 @@ public class OsmandSettings {
 			return false;
 		}
 
-		public boolean isSet() {
+		public final  boolean isSet() {
 			return settingsAPI.contains(getPreferences(), getId());
 		}
 
@@ -866,10 +883,11 @@ public class OsmandSettings {
 			return settingsAPI.contains(getProfilePreferences(mode), getId());
 		}
 
-		public boolean isGlobal() {
+		public final boolean isGlobal() {
 			return global;
 		}
 
+		// TODO final
 		@Override
 		public boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException {
 			if (appMode != null) {
@@ -889,7 +907,7 @@ public class OsmandSettings {
 			}
 			return false;
 		}
-
+		// TODO final
 		@Override
 		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
 			if (appMode != null) {
@@ -904,15 +922,15 @@ public class OsmandSettings {
 		}
 
 		@Override
-		public String asString() {
+		public final String asString() {
 			T o = get();
-			return o != null ? o.toString() : null;
+			return toString(o);
 		}
 
 		@Override
-		public String asStringModeValue(ApplicationMode m) {
+		public final String asStringModeValue(ApplicationMode m) {
 			T v = getModeValue(m);
-			return v != null ? v.toString() : null;
+			return toString(v);
 		}
 	}
 
@@ -1195,6 +1213,12 @@ public class OsmandSettings {
 			return settingsAPI.edit(prefs).putString(getId(), val.writeToJsonString(idScheme)).commit();
 		}
 
+
+		@Override
+		protected String toString(ContextMenuItemsSettings o) {
+			return o.writeToJsonString(idScheme);
+		}
+
 		@Override
 		public ContextMenuItemsSettings parseString(String s) {
 			return readValue(s);
@@ -1356,13 +1380,8 @@ public class OsmandSettings {
 		}
 
 		@Override
-		public String asString() {
-			return get().name();
-		}
-
-		@Override
-		public String asStringModeValue(ApplicationMode m) {
-			return getModeValue(m).name();
+		protected String toString(E o) {
+			return o.name();
 		}
 
 		@Override
@@ -1581,14 +1600,10 @@ public class OsmandSettings {
 		}
 
 		@Override
-		public String asString() {
-			return appModeToString(get());
+		protected String toString(ApplicationMode o) {
+			return appModeToString(o);
 		}
 
-		@Override
-		public String asStringModeValue(ApplicationMode m) {
-			return appModeToString(m);
-		}
 
 		@Override
 		public ApplicationMode parseString(String s) {
@@ -1626,14 +1641,10 @@ public class OsmandSettings {
 		}
 
 		@Override
-		public String asString() {
-			return appModeToString(get());
+		protected String toString(ApplicationMode o) {
+			return appModeToString(o);
 		}
 
-		@Override
-		public String asStringModeValue(ApplicationMode m) {
-			return appModeToString(m);
-		}
 
 		@Override
 		public ApplicationMode parseString(String s) {
