@@ -186,10 +186,12 @@ public class OsmandSettings {
 
 
 
+	// TODO doesn't look correct package visibility
 	public Object getProfilePreferences(ApplicationMode mode) {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
 	}
 
+	// TODO doesn't look correct package visibility
 	public Object getProfilePreferences(String modeKey) {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesNameForKey(modeKey));
 	}
@@ -198,16 +200,19 @@ public class OsmandSettings {
 		return registeredPreferences.get(key);
 	}
 
+	// TODO doesn't look correct
 	public void setPreferenceForAllModes(String key, Object value) {
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			setPreference(key, value, mode);
 		}
 	}
 
+	// TODO doesn't look correct
 	public boolean setPreference(String key, Object value) {
 		return setPreference(key, value, APPLICATION_MODE.get());
 	}
 
+	// TODO doesn't look correct
 	@SuppressWarnings("unchecked")
 	public boolean setPreference(String key, Object value, ApplicationMode mode) {
 		OsmandPreference<?> preference = registeredPreferences.get(key);
