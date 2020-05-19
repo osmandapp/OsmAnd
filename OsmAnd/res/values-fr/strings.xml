@@ -179,8 +179,7 @@
     <string name="install_more">Installer plus…</string>
     <string name="level_to_switch_vector_raster_descr">Utiliser les cartes matricielles (raster) à partir de ce niveau de zoom.</string>
     <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel minimal</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>OSM en ligne</u> classification des cartes en images</string>
+    <string name="create_poi_link_to_osm_doc"><u>OSM en ligne</u> classification des cartes avec images.</string>
     <string name="error_doing_search">Impossible d\'effectuer la recherche hors-ligne.</string>
     <string name="search_osm_offline">Rechercher par geo location</string>
     <string name="system_locale">Système</string>
@@ -396,8 +395,8 @@
     <string name="transport_stop_to_go_out">Sélectionnez l\'arrêt où descendre</string>
     <string name="transport_to_go_after">parcourir ensuite</string>
     <string name="transport_to_go_before">parcourir au préalable</string>
-    <string name="transport_stops_to_pass">nombre d\'arrêts :</string>
-    <string name="transport_route_distance">Distance de l\'itinéraire :</string>
+    <string name="transport_stops_to_pass">nombre d\'arrêts</string>
+    <string name="transport_route_distance">Distance de l\'itinéraire</string>
     <string name="transport">Transport</string>
     <string name="shared_string_ok">OK</string>
     <string name="show_transport_over_map_description">Afficher les arrêts de transport publics sur la carte</string>
@@ -410,10 +409,10 @@
     <string name="update_poi_is_not_available_for_zoom">Zoomer permet de mettre à jour les points d\'intérêt</string>
     <string name="context_menu_item_update_poi">Mettre à jour les points d\'intérêt</string>
     <string name="context_menu_item_update_map_confirm">Mettre à jour les données locales via Internet ?</string>
-    <string name="search_history_city">Ville :\n{0}</string>
-    <string name="search_history_street">Rue :\n{0}\n{1}</string>
-    <string name="search_history_int_streets">Intersection :\n{0} x {1} à {2}</string>
-    <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
+    <string name="search_history_city">Ville : {0}</string>
+    <string name="search_history_street">Rue : {0}, {1}</string>
+    <string name="search_history_int_streets">Intersection : {0} x {1} à {2}</string>
+    <string name="search_history_building">Bâtiment : {0}, {1}, {2}</string>
     <string name="favorite">Favoris</string>
     <string name="shared_string_clear_all">Tout supprimer</string>
     <string name="shared_string_history">Historique</string>
@@ -466,12 +465,12 @@
     <string name="empty_route_calculated">L\'itinéraire calculé est vide.</string>
     <string name="new_route_calculated_dist">Itinéraire recalculé, distance</string>
     <string name="arrived_at_destination">Vous êtes arrivés.</string>
-    <string name="invalid_locations">Coordonnées invalides !</string>
+    <string name="invalid_locations">Coordonnées invalides</string>
     <string name="go_back_to_osmand">Retourner à la carte</string>
     <string name="shared_string_close">Fermer</string>
     <string name="loading_data">Chargement des données</string>
     <string name="reading_indexes">Lecture des index…</string>
-    <string name="previous_run_crashed">Oups … OsmAnd a planté. Souhaitez-vous nous envoyer le fichier journal ?</string>
+    <string name="previous_run_crashed">La dernière exécution d\'OsmAnd a plantée. Le fichier journal se trouve sur {0}. Veuillez signaler cette anomalie et joindre le fichier journal.</string>
     <string name="saving_gpx_tracks">Enregistrement du fichier GPX…</string>
     <string name="finished_task">Terminé</string>
     <string name="use_online_routing_descr">Utiliser Internet pour calculer l\'itinéraire</string>
@@ -2174,11 +2173,11 @@
     <string name="quick_action_map_underlay_switch">Sous-couche de la carte modifiée pour « %s ».</string>
     <string name="navigate_point_olc">Ouvrir un code d\'emplacement</string>
     <string name="navigate_point_olc_info_invalid">Code d\'emplacement incorrect
-</string>
-    <string name="navigate_point_olc_info_short">Code d\'emplacement court
-Merci d\'indiquer un code long</string>
+\n</string>
+    <string name="navigate_point_olc_info_short">Code d\'emplacement court.
+\nMerci d\'indiquer un code long.</string>
     <string name="navigate_point_olc_info_area">Code d\'emplacement valide
-représentant la zone : %1$s x %2$s</string>
+\nreprésentant la zone : %1$s x %2$s</string>
     <string name="auto_split_recording_title">Découper automatiquement les enregistrements</string>
     <string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier en cas de changement de date.</string>
     <string name="quick_action_page_list_descr">Bouton pour faire défiler la liste ci-dessous.</string>
@@ -2240,7 +2239,7 @@ représentant la zone : %1$s x %2$s</string>
 \n • Téléversez des traces GPX vers OSM directement depuis l\'application 
 \n • Ajoutez des Points d\'intérêt et téléversez-les vers OSM (immédiatement ou plus tard si vous êtes hors ligne)
 \n</string>
-    <string name="osmand_plus_extended_description_part8">Couverture et qualité des cartes (de 1 à 4 étoiles) 
+    <string name="osmand_plus_extended_description_part8">Couverture et qualité des cartes (de 1 à 4 étoiles) :
 \n • Europe de l\'Ouest : **** (4) 
 \n • Europe de l\'Est : *** (3) 
 \n • Russie : *** (3) 
@@ -2251,13 +2250,15 @@ représentant la zone : %1$s x %2$s</string>
 \n • Moyen-Orient : ** (2) 
 \n • Afrique : ** (2) 
 \n • Antarctique : * (1) 
-\n La grande majorité des pays sont couverts de l\'Afghanistan au Zimbabwe, téléchargez les cartes dont vous avez besoin !</string>
+\n La grande majorité des pays sont couverts de l\'Afghanistan au Zimbabwe, téléchargez les cartes dont vous avez besoin !
+\n</string>
     <string name="fonts_header">Polices de caractères sur la carte</string>
-    <string name="osmand_plus_extended_description_part5">Fonctions liées à la sécurité
-\n • Bascule automatique en mode jour / nuit (option)
-\n • Affichage des limitations de vitesse avec rappels en cas de dépassement (option)
-\n • Zoom adapté à la vitesse (option)
-\n • Partage de votre position afin qu\'on puisse vous rejoindre rapidement</string>
+    <string name="osmand_plus_extended_description_part5">Fonctions liées à la sécurité 
+\n • Bascule automatique en mode jour / nuit (option) 
+\n • Affichage des limitations de vitesse avec rappels en cas de dépassement (option) 
+\n • Zoom adapté à la vitesse (option) 
+\n • Partage de votre position afin qu\'on puisse vous rejoindre rapidement
+\n</string>
     <string name="restore_purchases">Restaurer vos achats</string>
     <string name="shared_string_visible">Visible</string>
     <string name="osmand_plus_extended_description_part7">Contribuez concrètement à l\'amélioration d\'OpenStreetMap : 
@@ -2269,7 +2270,7 @@ représentant la zone : %1$s x %2$s</string>
 \nOsmAnd est une application open source très active. Toutes les contributions sont bienvenues que ce soit en signalant des bugs, en participant à la traduction ou en développant de nouvelles fonctionnalités. Grâce aux interactions entre les utilisateurs et les développeurs l\'application est en évolution permanente. Le projet est bien sûr ouvert à toute participation financière pour accélérer encore son développement.
 \n</string>
     <string name="analyze_on_map">Analyser sur la carte</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel ; découvrez des points d\'intérêt ; créez et gérez des traces GPX ; installez des greffons pour visualiser l\'altitude et les courbes de niveaux ; utilisez les modes Automobile, Piéton, Cycliste ; contribuez à l\'amélioration des cartes et bien plus encore ! 
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel ; découvrez des points d\'intérêt ; créez et gérez des traces GPX ; installez des greffons pour visualiser l\'altitude et les courbes de niveaux ; utilisez les modes Automobile, Piéton, Cycliste ; contribuez à l\'amélioration des cartes et bien plus encore !
 \n 
 \nOsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités et recevez les dernières mises à jour. 
 \n 
@@ -2353,14 +2354,15 @@ représentant la zone : %1$s x %2$s</string>
 \n • Possibilité d\'ajouter des points de passage à votre itinéraire 
 \n • Enregistrez votre itinéraire au format GPX ou téléversez une trace GPX existante et suivez-la
 \n</string>
-    <string name="osmand_extended_description_part3">Carte
-\n • Affichage des points d’intérêt autour de vous
-\n • Orientation de la carte selon votre direction de déplacement (ou selon la boussole)
-\n • Indication de votre position et de votre orientation
-\n • Partagez votre position pour que vos proches puissent vous trouver
-\n • Enregistrez vos endroits préférés comme Favoris
-\n • Sélectionnez les noms affichés sur la carte : en anglais, noms locaux ou phonétique
-\n • Affichez des tuiles en lignes spécialisées, la vue satellite (source Bing), un itinéraires GPX et bien d\'autres couches avec transparence personnalisée</string>
+    <string name="osmand_extended_description_part3">Carte 
+\n • Affichage des points d’intérêt autour de vous 
+\n • Orientation de la carte selon votre direction de déplacement (ou selon la boussole) 
+\n • Indication de votre position et de votre orientation 
+\n • Partagez votre position pour que vos proches puissent vous trouver 
+\n • Enregistrez vos endroits préférés comme Favoris 
+\n • Sélectionnez les noms affichés sur la carte : en anglais, noms locaux ou phonétique 
+\n • Affichez des tuiles en lignes spécialisées, la vue satellite (source Bing), un itinéraires GPX et bien d\'autres couches avec transparence personnalisée
+\n</string>
     <string name="osmand_extended_description_part5">Cyclisme 
 \n • Trouvez des pistes cyclables sur la carte 
 \n • Le guidage GPS en mode vélo calcule votre itinéraire en empruntant les pistes cyclables 
@@ -2482,7 +2484,8 @@ représentant la zone : %1$s x %2$s</string>
 \n• En option : indication des voies, affichage du nom des rues et de l\'heure estimée d\'arrivée 
 \n• Ajout d\'étapes sur votre itinéraire 
 \n• Recalcule automatique de la route si vous vous écartez de l\'itinéraire 
-\n• Recherchez des lieux par adresse, par type (par exemple : restaurant, hôtel, station-service, musée) ou par coordonnées géographiques</string>
+\n• Recherchez des lieux par adresse, par type (par exemple : restaurant, hôtel, station-service, musée) ou par coordonnées géographiques
+\n</string>
     <string name="osmand_plus_extended_description_part3">Affichage de la carte : 
 \n• Affichez votre position et votre orientation 
 \n• Orientez la carte au choix selon la boussole ou selon la direction de votre déplacement 
@@ -2738,7 +2741,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="start_editing_card_description">Vous pouvez contribuer aux articles sur Wikivoyage et ainsi partager vos connaissances, vos expériences et votre talent.</string>
     <string name="start_editing">Démarrer les modifications</string>
     <string name="get_unlimited_access">Obtenir un accès illimité</string>
-    <string name="welcome_to_open_beta">Bienvenue dans cette bêta ouverte !</string>
+    <string name="welcome_to_open_beta">Bienvenue dans cette bêta publique</string>
     <string name="contour_lines_hillshade_maps">Cartes avec courbes de niveaux et ombrage du relief</string>
     <string name="download_wikipedia_description">Téléchargez les articles Wikipédia pour %1$s afin de pouvoir les lire hors ligne.</string>
     <string name="download_wikipedia_label">Télécharger les données Wikipedia</string>
@@ -2750,7 +2753,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="paid_app">Application payante</string>
     <string name="paid_plugin">Greffon payant</string>
     <string name="popular_destinations">Destinations populaires</string>
-    <string name="welcome_to_open_beta_description">"Les guides de voyage s’appuient sur Wikivoyage. Durant la phase bêta, évaluez toutes les fonctionnalités gratuitement. Par la suite, les guides de voyage seront accessibles aux abonnés de OsmAnd illimité ainsi qu\'aux propriétaires d\'OsmAnd+. "</string>
+    <string name="welcome_to_open_beta_description">Les guides de voyage s’appuient sur Wikivoyage. Durant la phase bêta, évaluez toutes les fonctionnalités gratuitement. Par la suite, les guides de voyage seront accessibles aux abonnés de OsmAnd illimité ainsi qu\'aux propriétaires d\'OsmAnd+.</string>
     <string name="wiki_article_search_text">Recherche de l\'article Wiki correspondant</string>
     <string name="osmand_team">Équipe OsmAnd</string>
     <string name="maps_you_need_descr">D\'après les articles que vous avez marqué comme favori, nous vous conseillons de télécharger les cartes suivantes :</string>
@@ -3030,7 +3033,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="app_mode_subway">Métro</string>
     <string name="app_mode_horse">À cheval</string>
     <string name="app_mode_helicopter">Hélicoptère</string>
-    <string name="osmand_routing_promo">"Vous pouvez ajouter votre propre version du fichier routing.xml dans  ..osmand/routing"</string>
+    <string name="osmand_routing_promo">Vous pouvez ajouter votre propre version du fichier routing.xml dans ..osmand/routing</string>
     <string name="app_mode_skiing">À ski</string>
     <string name="settings_routing_mode_string">Mode : %s</string>
     <string name="routing_profile_ski">Ski</string>
@@ -3702,4 +3705,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_resume">Reprendre</string>
     <string name="shared_string_add_profile">Ajouter un profil</string>
     <string name="change_application_profile">Modifier le profil d\'application</string>
+    <string name="index_item_world_basemap_detailed">Carte mondiale générale (plus détaillée)</string>
 </resources>
