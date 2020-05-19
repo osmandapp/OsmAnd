@@ -28,7 +28,6 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
-import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -585,11 +584,6 @@ public class OsmandSettings {
 			if (valueSaved) {
 				currentMode = val;
 				profilePreferences = getProfilePreferences(currentMode);
-
-				OsmandAidlApi aidlApi = ctx.getAidlApi();
-				if (aidlApi != null) {
-					ctx.poiFilters.loadSelectedPoiFilters();
-				}
 
 				fireEvent(oldMode);
 			}
