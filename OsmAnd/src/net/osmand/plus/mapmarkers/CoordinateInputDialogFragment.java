@@ -43,6 +43,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
@@ -642,20 +643,17 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				itemTv.setText((String) item);
 				itemIv.setVisibility(View.GONE);
 				itemBottomSpace.setVisibility(View.VISIBLE);
-			} else if (item instanceof Integer) {
+			} else if (item instanceof Drawable) {
 				itemTopSpace.setVisibility(View.GONE);
 				itemTv.setVisibility(View.GONE);
 				itemIv.setVisibility(View.VISIBLE);
 				itemBottomSpace.setVisibility(View.GONE);
-				Drawable icon = null;
+				Drawable icon = DrawableCompat.wrap((Drawable) item);
 				if (lightTheme) {
-					Drawable drawable = AppCompatResources.getDrawable(ctx, (Integer) item);
-					if (drawable != null) {
-						icon = DrawableCompat.wrap(drawable);
-						DrawableCompat.setTintList(icon, numberColorStateList);
-					}
+					DrawableCompat.setTintList(icon, numberColorStateList);
 				} else {
-					icon = getColoredIcon((Integer) item, R.color.keyboard_item_divider_control_color_dark);
+					int color = ContextCompat.getColor(ctx, R.color.keyboard_item_divider_control_color_dark);
+					DrawableCompat.setTint(icon, color);
 				}
 				itemIv.setImageDrawable(icon);
 			}
@@ -663,6 +661,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private Object getItemObjectById(@IdRes int id) {
+		Context ctx = requireContext();
 		if (id == R.id.keyboard_item_0) {
 			return "0";
 		} else if (id == R.id.keyboard_item_1) {
@@ -686,11 +685,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		} else if (id == R.id.keyboard_item_clear) {
 			return getString(R.string.shared_string_clear);
 		} else if (id == R.id.keyboard_item_next_field) {
-			return R.drawable.ic_keyboard_next_field;
+			Drawable normal = AppCompatResources.getDrawable(ctx, R.drawable.ic_action_next_field_stroke);
+			Drawable pressed = AppCompatResources.getDrawable(ctx, R.drawable.ic_action_next_field_fill);
+			return AndroidUtils.createPressedStateListDrawable(normal, pressed);
 		} else if (id == R.id.keyboard_item_backspace) {
-			return R.drawable.ic_keyboard_backspace;
+			Drawable normal = AppCompatResources.getDrawable(ctx, R.drawable.ic_action_backspace_stroke);
+			Drawable pressed = AppCompatResources.getDrawable(ctx, R.drawable.ic_action_backspace_fill);
+			return AndroidUtils.createPressedStateListDrawable(normal, pressed);
 		} else if (id == R.id.keyboard_item_hide) {
-			return R.drawable.ic_action_keyboard_hide;
+			return AppCompatResources.getDrawable(ctx, R.drawable.ic_action_keyboard_hide);
 		}
 		return -1;
 	}
