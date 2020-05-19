@@ -3587,4 +3587,6 @@
     <string name="shared_string_languages">Језици</string>
     <string name="shared_string_language">Језик</string>
     <string name="shared_string_all_languages">Сви језици</string>
+    <string name="profiles_for_action_not_found">Не може се наћи такав профил.</string>
+    <string name="index_item_world_basemap_detailed">Светска општа мапа (детаљна)</string>
 </resources>
