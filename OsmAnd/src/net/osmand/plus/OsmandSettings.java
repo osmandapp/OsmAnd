@@ -339,7 +339,7 @@ public class OsmandSettings {
 		}
 	}
 
-	publicvoid migrateHomeWorkParkingToFavorites() {
+	public void migrateHomeWorkParkingToFavorites() {
 		FavouritesDbHelper favorites = ctx.getFavorites();
 
 		LatLon homePoint = null;
@@ -4217,7 +4217,8 @@ public class OsmandSettings {
 			DRIVING_REGION_AUTOMATIC
 	};
 
-	String[] appModeBeanPrefsIds = new String[] {
+	String[]
+			appModeBeanPrefsIds = new String[] {
 			ICON_COLOR.getId(),
 			ICON_RES_NAME.getId(),
 			PARENT_APP_MODE.getId(),
