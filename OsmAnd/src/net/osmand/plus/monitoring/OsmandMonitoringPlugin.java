@@ -392,8 +392,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable Activity activity) {
-
-		// #8911: Include stopRecording in saveCurrentTrack
 		stopRecording();
 
 		final WeakReference<Activity> activityRef = activity != null ? new WeakReference<>(activity) : null;
