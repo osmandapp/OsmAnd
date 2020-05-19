@@ -21,7 +21,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,7 +43,6 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -70,6 +68,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
@@ -281,7 +280,7 @@ public class MenuBuilder {
 	}
 
 	protected void buildNearestWikiRow(View view) {
-		if (processNearstWiki() && nearestWiki.size() > 0) {
+		if (processNearestWiki() && nearestWiki.size() > 0) {
 			buildRow(view, R.drawable.ic_action_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size()+")", 0,
 					true, getCollapsableWikiView(view.getContext(), true),
 					false, 0, false, null, false);
@@ -697,62 +696,20 @@ public class MenuBuilder {
 
 	}
 
-	protected CollapsableView getDistanceCollapsableView(Map<OsmandSettings.MetricsConstants, String> distanceData) {
+	protected CollapsableView getDistanceCollapsableView(Set<String> distanceData) {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
-		for (final Map.Entry<OsmandSettings.MetricsConstants, String> line : distanceData.entrySet()) {
+		for (final String distance : distanceData) {
 			TextView button = buildButtonInCollapsableView(mapActivity, false, false);
-			button.setText(line.getValue());
+			button.setText(distance);
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					copyToClipboard(line.getValue(), mapActivity);
+					copyToClipboard(distance, mapActivity);
 				}
 			});
 			llv.addView(button);
 		}
 		return new CollapsableView(llv, this, true);
-	}
-
-	protected void buildButtonRow(final View view, Drawable buttonIcon, String text, OnClickListener onClickListener) {
-		LinearLayout ll = new LinearLayout(view.getContext());
-		ll.setOrientation(LinearLayout.HORIZONTAL);
-		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		ll.setLayoutParams(llParams);
-		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
-
-		// Empty
-		LinearLayout llIcon = new LinearLayout(view.getContext());
-		llIcon.setOrientation(LinearLayout.HORIZONTAL);
-		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(62f), dpToPx(58f)));
-		llIcon.setGravity(Gravity.CENTER_VERTICAL);
-		ll.addView(llIcon);
-
-
-		// Button
-		LinearLayout llButton = new LinearLayout(view.getContext());
-		llButton.setOrientation(LinearLayout.VERTICAL);
-		ll.addView(llButton);
-
-		Button buttonView = new Button(view.getContext());
-		LinearLayout.LayoutParams llBtnParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		buttonView.setLayoutParams(llBtnParams);
-		AndroidUtils.setPadding(buttonView, dpToPx(10f), 0, dpToPx(10f), 0);
-		buttonView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-		//buttonView.setTextSize(view.getResources().getDimension(resolveAttribute(view.getContext(), R.dimen.default_desc_text_size)));
-		buttonView.setTextColor(view.getResources().getColor(AndroidUtils.resolveAttribute(view.getContext(), R.attr.contextMenuButtonColor)));
-		buttonView.setText(text);
-
-		if (buttonIcon != null) {
-			buttonView.setCompoundDrawablesWithIntrinsicBounds(buttonIcon, null, null, null);
-			buttonView.setCompoundDrawablePadding(dpToPx(8f));
-		}
-		llButton.addView(buttonView);
-
-		((LinearLayout) view).addView(ll);
-
-		ll.setOnClickListener(onClickListener);
-
-		rowBuilt();
 	}
 
 	public void buildRowDivider(View view) {
@@ -1027,7 +984,7 @@ public class MenuBuilder {
 		return button;
 	}
 
-	protected boolean processNearstWiki() {
+	protected boolean processNearestWiki() {
 		if (showNearestWiki && latLon != null) {
 			QuadRect rect = MapUtils.calculateLatLonBbox(
 					latLon.getLatitude(), latLon.getLongitude(), 250);
