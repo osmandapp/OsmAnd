@@ -35,6 +35,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -312,7 +313,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		}
 
 		public void add(LocalIndexInfo info) {
-			OsmandSettings.CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(
+			CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(
 					info.getFileName(), getSettings());
 			if (preference.get()) {
 				dataShouldUpdate.add(info);
@@ -324,7 +325,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		public void notifyLiveUpdatesChanged() {
 			Set<LocalIndexInfo> changedSet = new HashSet<>();
 			for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
-				OsmandSettings.CommonPreference<Boolean> preference =
+				CommonPreference<Boolean> preference =
 						preferenceLiveUpdatesOn(localIndexInfo.getFileName(), getSettings());
 				if (!preference.get()) {
 					changedSet.add(localIndexInfo);
@@ -334,7 +335,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			dataShouldNotUpdate.addAll(changedSet);
 			changedSet.clear();
 			for (LocalIndexInfo localIndexInfo : dataShouldNotUpdate) {
-				OsmandSettings.CommonPreference<Boolean> preference =
+				CommonPreference<Boolean> preference =
 						preferenceLiveUpdatesOn(localIndexInfo.getFileName(), getSettings());
 				if (preference.get()) {
 					changedSet.add(localIndexInfo);
@@ -475,9 +476,9 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				PendingIntent alarmIntent = getPendingIntent(getActivity(),
 						fileName);
 				if (enable) {
-					final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
+					final CommonPreference<Integer> updateFrequencyPreference =
 							preferenceUpdateFrequency(fileName, getSettings());
-					final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
+					final CommonPreference<Integer> timeOfDayPreference =
 							preferenceTimeOfDayToUpdate(fileName, getSettings());
 					UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyPreference.get()];
 					TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayPreference.get()];
@@ -572,7 +573,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 
 		public void bindLocalIndexInfo(@NonNull final String item, boolean isLastChild) {
 			OsmandApplication context = fragment.getMyActivity().getMyApplication();
-			final OsmandSettings.CommonPreference<Boolean> shouldUpdatePreference =
+			final CommonPreference<Boolean> shouldUpdatePreference =
 					preferenceLiveUpdatesOn(item, fragment.getSettings());
 			IncrementalChangesManager changesManager = context.getResourceManager().getChangesManager();
 
@@ -602,7 +603,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 					Algorithms.getFileNameWithoutExtension(new File(item));
 			final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 			final long lastCheck = preferenceLastCheck(item, fragment.getSettings()).get();
-			OsmandSettings.CommonPreference<Boolean> liveUpdateOn = preferenceLiveUpdatesOn(item, fragment.getSettings());
+			CommonPreference<Boolean> liveUpdateOn = preferenceLiveUpdatesOn(item, fragment.getSettings());
 			if(liveUpdateOn.get() && lastCheck != DEFAULT_LAST_CHECK) {
 				String lastCheckString = formatDateTime(fragment.getActivity(), lastCheck );
 				descriptionTextView.setText(context.getString(R.string.last_update, lastCheckString));

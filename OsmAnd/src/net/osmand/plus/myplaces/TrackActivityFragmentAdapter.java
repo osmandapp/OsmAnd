@@ -49,6 +49,7 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -760,7 +761,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 		if (color == 0) {
 			final RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-			final OsmandSettings.CommonPreference<String> prefColor
+			final CommonPreference<String> prefColor
 					= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
 			color = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColor(renderer, prefColor.get());
 		}

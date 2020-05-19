@@ -35,7 +35,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -1178,7 +1178,7 @@ public class RouteInfoWidgetsFactory {
 		private String cacheRulerText;
 		private int maxWidth;
 		private float cacheMapDensity;
-		private OsmandSettings.OsmandPreference<Float> mapDensity;
+		private OsmandPreference<Float> mapDensity;
 		private int cacheRulerZoom;
 		private double cacheRulerTileX;
 		private double cacheRulerTileY;

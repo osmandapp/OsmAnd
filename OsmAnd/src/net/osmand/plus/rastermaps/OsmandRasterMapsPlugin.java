@@ -35,7 +35,7 @@ import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -626,7 +626,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		OsmandMapTileView mapView = mapActivity.getMapView();
 		CommonPreference<String> mapTypePreference;
 		CommonPreference<String> exMapTypePreference;
-		OsmandSettings.CommonPreference<Integer> mapTransparencyPreference;
+		CommonPreference<Integer> mapTransparencyPreference;
 
 		//boolean isMapSelected;
 		MapTileLayer layer;

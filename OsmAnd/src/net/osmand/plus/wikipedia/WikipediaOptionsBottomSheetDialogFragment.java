@@ -9,7 +9,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings.WikiArticleShowImages;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -28,7 +28,7 @@ public class WikipediaOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
-		final OsmandSettings.CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
+		final CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 

@@ -57,6 +57,7 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -569,7 +570,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		// Action buttons
 		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
 		List<ContextMenuItem> items = adapter.getVisibleItems();
-		List<String> mainIds = ((OsmandSettings.MainContextMenuItemsSettings) app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS.get()).getMainIds();
+		List<String> mainIds = ((MainContextMenuItemsSettings) app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS.get()).getMainIds();
 		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
 		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());
 

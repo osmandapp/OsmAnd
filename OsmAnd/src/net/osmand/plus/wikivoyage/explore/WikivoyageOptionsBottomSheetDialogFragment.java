@@ -15,7 +15,7 @@ import androidx.appcompat.widget.PopupMenu;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings.WikiArticleShowImages;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -44,7 +44,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 		if (app == null) {
 			return;
 		}
-		final OsmandSettings.CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
+		final CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
 		final TravelDbHelper dbHelper = app.getTravelDbHelper();
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));

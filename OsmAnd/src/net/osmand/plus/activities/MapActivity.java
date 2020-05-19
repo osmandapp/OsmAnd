@@ -77,6 +77,7 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -548,7 +549,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			@Override
 			public void requestPrivateAccessRouting() {
 				if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(getRoutingHelper().getAppMode())) {
-					final OsmandSettings.CommonPreference<Boolean> allowPrivate
+					final CommonPreference<Boolean> allowPrivate
 							= settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE, false);
 					final List<ApplicationMode> modes = ApplicationMode.values(app);
 					for (ApplicationMode mode : modes) {

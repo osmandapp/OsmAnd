@@ -30,6 +30,7 @@ import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.EnumAdapter;
@@ -355,7 +356,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						if (itemId == R.string.layer_osm_bugs) {
-							OsmandSettings.OsmandPreference<Boolean> showOsmBugs = settings.SHOW_OSM_BUGS;
+							OsmandPreference<Boolean> showOsmBugs = settings.SHOW_OSM_BUGS;
 							showOsmBugs.set(isChecked);
 							adapter.getItem(pos).setColorRes(showOsmBugs.get() ?
 									R.color.osmand_orange : ContextMenuItem.INVALID_ID);
@@ -378,7 +379,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						if (itemId == R.string.layer_osm_edits) {
-							OsmandSettings.OsmandPreference<Boolean> showOsmEdits = settings.SHOW_OSM_EDITS;
+							OsmandPreference<Boolean> showOsmEdits = settings.SHOW_OSM_EDITS;
 							showOsmEdits.set(isChecked);
 							adapter.getItem(pos).setColorRes(showOsmEdits.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 							adapter.notifyDataSetChanged();

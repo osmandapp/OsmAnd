@@ -17,6 +17,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -43,7 +44,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private ApplicationMode appMode;
-	private OsmandSettings.CommonPreference<Float> preference;
+	private CommonPreference<Float> preference;
 
 	private Slider slider;
 	private TextView tvSliderTitle;

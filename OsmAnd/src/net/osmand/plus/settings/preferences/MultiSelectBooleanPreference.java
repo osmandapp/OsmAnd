@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.PreferenceDataStore;
 
-import net.osmand.plus.settings.backend.OsmandSettings.PreferencesDataStore;
+import net.osmand.plus.settings.backend.OsmAndPreferencesDataStore;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -79,8 +79,8 @@ public class MultiSelectBooleanPreference extends MultiSelectListPreference {
 			return;
 		}
 		PreferenceDataStore dataStore = getPreferenceDataStore();
-		if (dataStore instanceof PreferencesDataStore) {
-			PreferencesDataStore preferencesDataStore = (PreferencesDataStore) dataStore;
+		if (dataStore instanceof OsmAndPreferencesDataStore) {
+			OsmAndPreferencesDataStore preferencesDataStore = (OsmAndPreferencesDataStore) dataStore;
 
 			for (String prefId : getPrefsIds()) {
 				preferencesDataStore.putBoolean(prefId, getValues().contains(prefId));
@@ -96,8 +96,8 @@ public class MultiSelectBooleanPreference extends MultiSelectListPreference {
 		Set<String> enabledPrefs = new HashSet<>();
 		PreferenceDataStore dataStore = getPreferenceDataStore();
 
-		if (dataStore instanceof PreferencesDataStore && getEntryValues() != null) {
-			PreferencesDataStore preferencesDataStore = (PreferencesDataStore) dataStore;
+		if (dataStore instanceof OsmAndPreferencesDataStore && getEntryValues() != null) {
+			OsmAndPreferencesDataStore preferencesDataStore = (OsmAndPreferencesDataStore) dataStore;
 
 			for (String prefId : getPrefsIds()) {
 				boolean enabled = preferencesDataStore.getBoolean(prefId, false);

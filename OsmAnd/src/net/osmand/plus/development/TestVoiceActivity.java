@@ -19,7 +19,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.routing.data.StreetName;
@@ -149,7 +149,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			v += "\n \u25CF BT SCO: The current app profile is not set to use 'Phone call audio'.";
 		}
 
-		OsmandSettings.OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[stream];
+		OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[stream];
 		if(pref != null) {
 			v += "\n \u25CF Voice prompt delay for selected output: " + pref.get() + "\u00A0ms";
 		}
@@ -288,7 +288,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 				}
 				if (description.startsWith("\u25BA (11.2)")) {
 					int ams = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get();
-					OsmandSettings.OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams];
+					OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams];
 					if (pref != null) {
 						if (pref.get() >= 3000) {
 							pref.set(0);

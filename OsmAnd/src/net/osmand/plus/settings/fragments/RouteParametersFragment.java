@@ -25,8 +25,9 @@ import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.BooleanPreference;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.BooleanPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.SettingsBaseActivity;
@@ -218,7 +219,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 					String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, p.getId(), p.getDescription());
 
 					if (p.getType() == RoutingParameterType.BOOLEAN) {
-						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
+						OsmandPreference pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 
 						SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_with_descr_dialog_and_switch);
 						switchPreferenceEx.setDescription(description);
@@ -234,7 +235,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 						for (Object o : vls) {
 							svlss[i++] = o.toString();
 						}
-						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingProperty(p.getId(), p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+						OsmandPreference pref = settings.getCustomRoutingProperty(p.getId(), p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
 
 						ListPreferenceEx listPreferenceEx = (ListPreferenceEx) createListPreferenceEx(pref.getId(), p.getPossibleValueDescriptions(), svlss, title, R.layout.preference_with_descr);
 						listPreferenceEx.setDescription(description);
@@ -381,10 +382,10 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 		for (RoutingParameter parameter : otherRoutingParameters) {
 			if (parameter.getType() == RoutingParameterType.BOOLEAN) {
-				OsmandSettings.CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+				CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
 				pref.addListener(booleanRoutingPrefListener);
 			} else {
-				OsmandSettings.CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+				CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
 				pref.addListener(customRoutingPrefListener);
 			}
 		}
@@ -396,10 +397,10 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 		for (RoutingParameter parameter : otherRoutingParameters) {
 			if (parameter.getType() == RoutingParameterType.BOOLEAN) {
-				OsmandSettings.CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+				CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
 				pref.removeListener(booleanRoutingPrefListener);
 			} else {
-				OsmandSettings.CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+				CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
 				pref.removeListener(customRoutingPrefListener);
 			}
 		}

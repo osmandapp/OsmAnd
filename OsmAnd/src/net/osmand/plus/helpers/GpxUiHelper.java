@@ -80,6 +80,7 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -513,9 +514,9 @@ public class GpxUiHelper {
 				} else {
 					final View apprTitleView = View.inflate(new ContextThemeWrapper(activity, themeRes), R.layout.select_gpx_appearance_title, null);
 
-					final OsmandSettings.CommonPreference<String> prefWidth
+					final CommonPreference<String> prefWidth
 							= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR);
-					final OsmandSettings.CommonPreference<String> prefColor
+					final CommonPreference<String> prefColor
 							= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
 
 					updateAppearanceTitle(activity, app, trackWidthProp, renderer, apprTitleView, prefWidth.get(), prefColor.get());
@@ -567,7 +568,7 @@ public class GpxUiHelper {
 				public void onClick(DialogInterface dialog, int which) {
 					if (gpxAppearanceParams.size() > 0) {
 						for (Map.Entry<String, String> entry : gpxAppearanceParams.entrySet()) {
-							final OsmandSettings.CommonPreference<String> pref
+							final CommonPreference<String> pref
 									= app.getSettings().getCustomRenderProperty(entry.getKey());
 							pref.set(entry.getValue());
 						}

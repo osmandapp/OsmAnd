@@ -9,11 +9,11 @@ import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.StringPreference;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.router.GeneralRouter;
 
@@ -77,7 +77,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, parameterId, parameter.getDescription());
 
 		String defValue = parameter.getType() == GeneralRouter.RoutingParameterType.NUMERIC ? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;
-		OsmandSettings.StringPreference pref = (OsmandSettings.StringPreference) app.getSettings().getCustomRoutingProperty(parameterId, defValue);
+		StringPreference pref = (StringPreference) app.getSettings().getCustomRoutingProperty(parameterId, defValue);
 
 		Object[] values = parameter.getPossibleValues();
 		String[] valuesStr = new String[values.length];

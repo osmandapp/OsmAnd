@@ -48,6 +48,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.RulerMode;
 import net.osmand.plus.R;
@@ -167,7 +168,7 @@ public class MapInfoWidgetsFactory {
 		public static final int COMPASS_CONTROL_WIDGET_STATE_SHOW = R.id.compass_ruler_control_widget_state_show;
 		public static final int COMPASS_CONTROL_WIDGET_STATE_HIDE = R.id.compass_ruler_control_widget_state_hide;
 
-		private final OsmandSettings.OsmandPreference<Boolean> showCompass;
+		private final OsmandPreference<Boolean> showCompass;
 
 		public CompassRulerControlWidgetState(OsmandApplication ctx) {
 			super(ctx);

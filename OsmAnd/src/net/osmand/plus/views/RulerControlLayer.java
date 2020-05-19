@@ -29,6 +29,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.AngularConstants;
 import net.osmand.plus.settings.backend.OsmandSettings.RulerMode;
@@ -67,7 +68,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 
 	private QuadPoint cacheCenter;
 	private float cacheMapDensity;
-	private OsmandSettings.OsmandPreference<Float> mapDensity;
+	private OsmandPreference<Float> mapDensity;
 	private OsmandSettings.MetricsConstants cacheMetricSystem;
 	private int cacheIntZoom;
 	private LatLon cacheCenterLatLon;

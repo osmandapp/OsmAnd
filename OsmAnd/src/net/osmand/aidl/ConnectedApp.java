@@ -15,7 +15,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.AidlMapLayer;
@@ -54,7 +54,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	private Map<String, AidlMapLayerWrapper> layers = new ConcurrentHashMap<>();
 	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 
-	private OsmandSettings.CommonPreference<Boolean> layersPref;
+	private CommonPreference<Boolean> layersPref;
 
 	private String pack;
 	private String name;

@@ -43,8 +43,9 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -1225,7 +1226,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 			@Override
 			public boolean onLongClick(View notUseCouldBeNull) {
-				final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
+				final OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				int p = (int) (mapDensity.get() * 100);
 				final TIntArrayList tlist = new TIntArrayList(new int[]{25, 33, 50, 75, 100, 125, 150, 200, 300, 400});

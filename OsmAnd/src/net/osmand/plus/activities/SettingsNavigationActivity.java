@@ -35,9 +35,10 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.AutoZoomMap;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings.SpeedConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -406,7 +407,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	}
 
 	public static boolean isRoutingParameterSelected(OsmandSettings settings, ApplicationMode am, RoutingParameter routingParameter) {
-		final OsmandSettings.CommonPreference<Boolean> property =
+		final CommonPreference<Boolean> property =
 				settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
 		if(am != null) {
 			return property.getModeValue(am);
@@ -416,7 +417,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	}
 
 	public static void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode am, String routingParameterId, boolean defaultBoolean, boolean isChecked) {
-		final OsmandSettings.CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(routingParameterId, defaultBoolean);
+		final CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(routingParameterId, defaultBoolean);
 		if (am != null) {
 			property.setModeValue(am, isChecked);
 		} else {

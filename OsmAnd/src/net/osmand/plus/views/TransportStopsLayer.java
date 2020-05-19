@@ -25,6 +25,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -60,7 +61,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private MapLayerData<List<TransportStop>> data;
 	private TransportStopRoute stopRoute = null;
 
-	private OsmandSettings.CommonPreference<Boolean> showTransportStops;
+	private CommonPreference<Boolean> showTransportStops;
 
 	private Path path;
 	private float backgroundIconHalfWidth;

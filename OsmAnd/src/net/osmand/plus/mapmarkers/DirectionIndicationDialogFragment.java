@@ -33,7 +33,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.MapMarkersMode;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;

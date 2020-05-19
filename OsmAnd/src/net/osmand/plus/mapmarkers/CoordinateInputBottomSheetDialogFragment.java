@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -83,7 +84,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 					@Override
 					public void onClick(View v) {
 						if (listener != null) {
-							OsmandSettings.CommonPreference<Boolean> pref = settings.COORDS_INPUT_TWO_DIGITS_LONGTITUDE;
+							CommonPreference<Boolean> pref = settings.COORDS_INPUT_TWO_DIGITS_LONGTITUDE;
 							pref.set(!pref.get());
 							listener.onInputSettingsChanged();
 						}
@@ -108,7 +109,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 						@Override
 						public void onClick(View v) {
 							if (listener != null) {
-								OsmandSettings.CommonPreference<Boolean> pref = settings.COORDS_INPUT_USE_RIGHT_SIDE;
+								CommonPreference<Boolean> pref = settings.COORDS_INPUT_USE_RIGHT_SIDE;
 								pref.set(!pref.get());
 								listener.onHandChanged();
 							}

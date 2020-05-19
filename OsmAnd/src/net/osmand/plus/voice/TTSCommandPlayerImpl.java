@@ -17,7 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.routing.VoiceRouter;
@@ -127,7 +127,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 				// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
 				if (ctx != null) {
 					Integer streamModeValue = ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode());
-					OsmandSettings.OsmandPreference<Integer> pref = ctx.getSettings().VOICE_PROMPT_DELAY[streamModeValue];
+					OsmandPreference<Integer> pref = ctx.getSettings().VOICE_PROMPT_DELAY[streamModeValue];
 					int vpd = pref == null ? 0 : pref.getModeValue(getApplicationMode());
 					if (vpd > 0) {
 						ttsRequests++;

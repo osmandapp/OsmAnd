@@ -30,7 +30,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -906,6 +905,19 @@ public class SettingsHelper {
 			};
 		}
 	}
+
+	String[]
+			appModeBeanPrefsIds = new String[] {
+			ICON_COLOR.getId(),
+			ICON_RES_NAME.getId(),
+			PARENT_APP_MODE.getId(),
+			ROUTING_PROFILE.getId(),
+			ROUTE_SERVICE.getId(),
+			USER_PROFILE_NAME.getId(),
+			LOCATION_ICON.getId(),
+			NAVIGATION_ICON.getId(),
+			APP_MODE_ORDER.getId()
+	};
 
 	public static class ProfileSettingsItem extends OsmandSettingsItem {
 

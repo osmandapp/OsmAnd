@@ -3,7 +3,7 @@ package net.osmand.plus.audionotes;
 import android.os.Bundle;
 import android.view.View;
 
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings.NotesSortByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -53,7 +53,7 @@ public class SortByMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	private void selectSortByMode(NotesSortByMode mode) {
-		final OsmandSettings.CommonPreference<NotesSortByMode> sortByMode = getMyApplication().getSettings().NOTES_SORT_BY_MODE;
+		final CommonPreference<NotesSortByMode> sortByMode = getMyApplication().getSettings().NOTES_SORT_BY_MODE;
 		if (sortByMode.get() != mode) {
 			sortByMode.set(mode);
 			if (listener != null) {

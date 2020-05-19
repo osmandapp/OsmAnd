@@ -13,7 +13,8 @@ import androidx.preference.Preference;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
@@ -288,11 +289,11 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if (SAVE_GLOBAL_TRACK_INTERVAL.equals(prefId)) {
-			OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
+			OsmandPreference pref = settings.getPreference(prefId);
 			if (newValue instanceof Boolean) {
 				applyPreference(settings.SAVE_GLOBAL_TRACK_REMEMBER.getId(), applyToAllProfiles, false);
-			} else if (pref instanceof OsmandSettings.CommonPreference
-					&& !((OsmandSettings.CommonPreference) pref).hasDefaultValueForMode(getSelectedAppMode())) {
+			} else if (pref instanceof CommonPreference
+					&& !((CommonPreference) pref).hasDefaultValueForMode(getSelectedAppMode())) {
 				applyPreference(SAVE_GLOBAL_TRACK_INTERVAL, applyToAllProfiles, newValue);
 				applyPreference(settings.SAVE_GLOBAL_TRACK_REMEMBER.getId(), applyToAllProfiles, true);
 			}

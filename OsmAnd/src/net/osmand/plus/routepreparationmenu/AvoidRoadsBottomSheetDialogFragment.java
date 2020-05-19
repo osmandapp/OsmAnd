@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment;
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -292,7 +292,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			GeneralRouter.RoutingParameter parameter = routingOptionsHelper.getRoutingPrefsForAppModeById(app.getRoutingHelper().getAppMode(), parameterId);
 			if (parameter != null) {
 				boolean checked = entry.getValue();
-				OsmandSettings.CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+				CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
 				preference.setModeValue(app.getRoutingHelper().getAppMode(), checked);
 			}
 		}
@@ -318,7 +318,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		List<GeneralRouter.RoutingParameter> avoidParameters = routingOptionsHelper.getAvoidRoutingPrefsForAppMode(app.getRoutingHelper().getAppMode());
 
 		for (GeneralRouter.RoutingParameter parameter : avoidParameters) {
-			OsmandSettings.CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+			CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
 			res.put(parameter.getId(), preference.getModeValue(app.getRoutingHelper().getAppMode()));
 		}
 

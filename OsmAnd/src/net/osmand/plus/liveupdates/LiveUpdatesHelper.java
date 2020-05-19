@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -32,7 +33,7 @@ public class LiveUpdatesHelper {
 
 	public static final int DEFAULT_LAST_CHECK = -1;
 
-	private static <T> OsmandSettings.CommonPreference<T> checkPref(OsmandSettings.CommonPreference<T> p) {
+	private static <T> CommonPreference<T> checkPref(CommonPreference<T> p) {
 		if (p.isSet()) {
 			T vl = p.get();
 			p = p.makeGlobal();
@@ -44,37 +45,37 @@ public class LiveUpdatesHelper {
 		}
 		return p;
 	}
-	public static OsmandSettings.CommonPreference<Boolean> preferenceForLocalIndex(
+	public static CommonPreference<Boolean> preferenceForLocalIndex(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + LIVE_UPDATES_ON_POSTFIX;
 		return checkPref(settings.registerBooleanPreference(settingId, false));
 	}
 
-	public static OsmandSettings.CommonPreference<Boolean> preferenceLiveUpdatesOn(
+	public static CommonPreference<Boolean> preferenceLiveUpdatesOn(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + LIVE_UPDATES_ON_POSTFIX;
 		return checkPref(settings.registerBooleanPreference(settingId, false));
 	}
 
-	public static OsmandSettings.CommonPreference<Boolean> preferenceDownloadViaWiFi(
+	public static CommonPreference<Boolean> preferenceDownloadViaWiFi(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + DOWNLOAD_VIA_WIFI_POSTFIX;
 		return checkPref(settings.registerBooleanPreference(settingId, false));
 	}
 
-	public static OsmandSettings.CommonPreference<Integer> preferenceUpdateFrequency(
+	public static CommonPreference<Integer> preferenceUpdateFrequency(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + UPDATE_TIMES_POSTFIX;
 		return checkPref(settings.registerIntPreference(settingId, UpdateFrequency.HOURLY.ordinal()));
 	}
 
-	public static OsmandSettings.CommonPreference<Integer> preferenceTimeOfDayToUpdate(
+	public static CommonPreference<Integer> preferenceTimeOfDayToUpdate(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + TIME_OF_DAY_TO_UPDATE_POSTFIX;
 		return checkPref(settings.registerIntPreference(settingId, TimeOfDay.NIGHT.ordinal()));
 	}
 
-	public static OsmandSettings.CommonPreference<Long> preferenceLastCheck(
+	public static CommonPreference<Long> preferenceLastCheck(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + LAST_UPDATE_ATTEMPT_ON_POSTFIX;
 		return checkPref(settings.registerLongPreference(settingId, DEFAULT_LAST_CHECK));
