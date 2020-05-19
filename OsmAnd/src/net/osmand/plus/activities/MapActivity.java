@@ -77,7 +77,6 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -135,6 +134,7 @@ import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationP
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment;
@@ -1450,6 +1450,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void updateApplicationModeSettings() {
 		changeKeyguardFlags();
 		updateMapSettings();
+		app.getPoiFilters().loadSelectedPoiFilters();
 		mapViewTrackingUtilities.updateSettings();
 		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());
 		if (mapLayers.getMapInfoLayer() != null) {
