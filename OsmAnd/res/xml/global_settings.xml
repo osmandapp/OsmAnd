@@ -21,7 +21,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
 		android:title="@string/application_dir"
-		app:fragment="net.osmand.plus.settings.DataStorageFragment"
+		app:fragment="net.osmand.plus.settings.fragments.DataStorageFragment"
 		tools:icon="@drawable/ic_action_folder" />
 
 	<Preference
@@ -48,7 +48,7 @@
 		android:persistent="false"
 		android:title="@string/dialogs_and_notifications_title"
 		android:summary="@string/shared_string_all"
-		app:fragment="net.osmand.plus.settings.DialogsAndNotificationsSettingsFragment"
+		app:fragment="net.osmand.plus.settings.fragments.DialogsAndNotificationsSettingsFragment"
 		tools:icon="@drawable/ic_action_notification" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
