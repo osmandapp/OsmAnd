@@ -125,7 +125,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 		if (holder instanceof DescriptionHolder) {
 			DescriptionHolder h = (DescriptionHolder) holder;
 			ScreenType screenType = (ScreenType) item.value;
-			int paddingStart = (int) app.getResources().getDimension(R.dimen.toolbar_height);
+			int paddingStart = (int) app.getResources().getDimension(R.dimen.dashboard_map_toolbar);
 			int paddingTop = (int) app.getResources().getDimension(R.dimen.content_padding);
 			h.description.setText(String.format(app.getString(R.string.reorder_or_hide_from), app.getString(screenType.titleRes)));
 			h.image.setImageResource(nightMode ? screenType.imageNightRes : screenType.imageDayRes);

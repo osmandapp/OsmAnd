@@ -1574,7 +1574,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private int getRoutesBadgesColumnsPerRow(@Nullable String nearInDistance, int minBadgeWidth) {
 		try {
 			double gridSpacing = getResources().getDimension(R.dimen.context_menu_transport_grid_spacing);
-			double gridPadding = getResources().getDimension(R.dimen.context_menu_padding_margin_default);
+			double gridPadding = getResources().getDimension(R.dimen.content_padding);
 			int availableSpace;
 			if (nearInDistance == null) {
 				availableSpace = (int) (routesBadgesContainer.getWidth() - gridPadding * 2);

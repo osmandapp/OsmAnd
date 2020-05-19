@@ -39,14 +39,11 @@
 	<dimen name="map_routing_progress_width">150dp</dimen>
 	<dimen name="map_mode_button_width">48dp</dimen>
 
-
 	<dimen name="map_button_inset_shadow">3dp</dimen>
 	<dimen name="map_button_inset">3dp</dimen>
 	<dimen name="map_button_rect_rad">3dp</dimen>
-	
 
 	<dimen name="map_widget_icon_margin">3dp</dimen>
-
 
 	<!-- ContextMenu -->
 	<dimen name="context_menu_top_shadow_h">30dp</dimen>
@@ -56,33 +53,22 @@
 	<dimen name="context_menu_top_right_button_min_width">114dp</dimen>
 	<dimen name="context_menu_button_padding_x">15dp</dimen>
 	<dimen name="context_menu_buttons_top_margin">-24dp</dimen>
-	<dimen name="context_menu_buttons_padding_bottom">6dp</dimen>
 	<dimen name="context_menu_progress_min_height">80dp</dimen>
 	<dimen name="context_menu_progress_cancel_button_size">66dp</dimen>
-	<dimen name="context_menu_action_buttons_h">80dp</dimen>
 	<dimen name="context_menu_sub_info_height">36dp</dimen>
-	<dimen name="context_menu_buttons_bottom_height">63dp</dimen>
 	<dimen name="context_menu_padding_margin_large">30dp</dimen>
 	<dimen name="context_menu_padding_margin_default">24dp</dimen>
 	<dimen name="context_menu_padding_margin_medium">15dp</dimen>
-	<dimen name="context_menu_padding_margin_small">12dp</dimen>
 	<dimen name="context_menu_padding_margin_tiny">9dp</dimen>
 	<dimen name="context_menu_title_padding">23dp</dimen>
-	<dimen name="context_menu_controller_height">54dp</dimen>
 	<dimen name="context_menu_progress_padding_left">27dp</dimen>
 	<dimen name="context_menu_progress_padding_right">3dp</dimen>
-	<dimen name="context_menu_action_buttons_height">84dp</dimen>
 	<dimen name="context_menu_subtitle_margin">5dp</dimen>
 	<dimen name="context_menu_direction_margin">18dp</dimen>
 	<dimen name="context_menu_transport_stop_item_height">24dp</dimen>
 	<dimen name="context_menu_main_actions_padding_top">11dp</dimen>
 	<dimen name="context_menu_main_actions_padding_bottom">9dp</dimen>
 	<dimen name="context_menu_main_actions_icon_margin">5dp</dimen>
-	<dimen name="context_menu_transport_grid_spacing">6dp</dimen>
-	<dimen name="context_menu_transport_grid_item_width">48dp</dimen>
-	<dimen name="context_menu_transport_grid_item_height">27dp</dimen>
-	<dimen name="context_menu_transport_icon_size">24dp</dimen>
-	<dimen name="context_menu_transport_padding_top">18dp</dimen>
 	<dimen name="context_menu_big_icon_size">54dp</dimen>
 
 	<dimen name="fab_size_with_shadow">90dp</dimen>
@@ -90,7 +76,6 @@
 	<dimen name="fab_margin_bottom_big">108dp</dimen>
 
 	<!-- General -->
-
 
 	<dimen name="measurement_tool_select_radius">30dp</dimen>
 	<dimen name="measurement_tool_divider_margin">12dp</dimen>
@@ -108,33 +93,22 @@
 	<dimen name="measurement_tool_button_padding">12dp</dimen>
 	<dimen name="measurement_tool_button_height">54dp</dimen>
 
-
 	<dimen name="shadow_height">8dp</dimen>
 
 	<!--Route info-->
-	<dimen name="route_info_buttons_padding_top_bottom">24dp</dimen>
 	<dimen name="route_info_buttons_padding_left_right">33dp</dimen>
 	<dimen name="route_info_button_go_margin">5dp</dimen>
 	<dimen name="route_info_button_go_drawable_padding">21dp</dimen>
 	<dimen name="route_info_directions_margin">72dp</dimen>
 	<dimen name="route_info_icon_padding_left">18dp</dimen>
-	<dimen name="route_info_icon_padding_right">24dp</dimen>
 	<dimen name="route_info_modes_height">72dp</dimen>
-	<dimen name="route_info_start_divider_margin">96dp</dimen>
-	<dimen name="route_info_end_divider_margin">84dp</dimen>
-	<dimen name="route_info_list_item_height">72dp</dimen>
-	<dimen name="route_info_buttons_height">54dp</dimen>
 	<dimen name="route_info_details_padding">18dp</dimen>
-	<dimen name="route_info_icon_vertical_padding">9dp</dimen>
 	<dimen name="route_info_settings_buttons_height">48dp</dimen>
 	<dimen name="route_info_app_modes_padding">60dp</dimen>
 	<dimen name="route_info_card_row_min_height">90dp</dimen>
 	<dimen name="route_info_card_item_height">84dp</dimen>
 	<dimen name="route_info_list_text_padding">78dp</dimen>
-	<dimen name="route_info_legend_padding">12dp</dimen>
 	<dimen name="route_info_warning_padding">27dp</dimen>
-	<dimen name="route_info_chart_height">106dp</dimen>
-	<dimen name="route_info_control_buttons_height">72dp</dimen>
 	<dimen name="route_info_button_bg_line_radius">27dp</dimen>
 	<dimen name="route_info_card_details_margin">13dp</dimen>
 	<dimen name="route_info_legend_item_size">60dp</dimen>
@@ -152,5 +126,7 @@
 
 	<dimen name="bottom_sheet_menu_peek_height">450dp</dimen>
 	<dimen name="side_of_the_world_button_size">54dp</dimen>
+
+    <dimen name="toolbar_height">64dp</dimen>
 
 </resources>
