@@ -10,7 +10,9 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 
---> <string name="index_item_world_basemap_detailed">World overview map (detailed)</string>
+-->
+    <string name="unsupported_type_error">Unsupported type</string>
+    <string name="index_item_world_basemap_detailed">World overview map (detailed)</string>
     <string name="profiles_for_action_not_found">Could not find any such profiles.</string>
     <string name="change_application_profile">Change app profile</string>
     <string name="shared_string_add_profile">Add profile</string>

@@ -41,13 +41,6 @@ import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.SettingsHelper;
-import net.osmand.plus.settings.backend.SettingsHelper.CheckDuplicatesListener;
-import net.osmand.plus.settings.backend.SettingsHelper.PluginSettingsItem;
-import net.osmand.plus.settings.backend.SettingsHelper.ProfileSettingsItem;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsCollectListener;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsImportListener;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -58,12 +51,21 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.settings.backend.SettingsHelper;
+import net.osmand.plus.settings.backend.SettingsHelper.CheckDuplicatesListener;
+import net.osmand.plus.settings.backend.SettingsHelper.PluginSettingsItem;
+import net.osmand.plus.settings.backend.SettingsHelper.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.SettingsHelper.SettingsCollectListener;
+import net.osmand.plus.settings.backend.SettingsHelper.SettingsImportListener;
+import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
 import net.osmand.plus.settings.fragments.ImportSettingsFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -109,7 +111,8 @@ public class ImportHelper {
 	
 	public enum ImportType {
 		SETTINGS(OSMAND_SETTINGS_FILE_EXT),
-		ROUTING(ROUTING_FILE_EXT);
+		ROUTING(ROUTING_FILE_EXT),
+		RENDERING(RENDERER_INDEX_EXT);
 
 		ImportType(String extension) {
 			this.extension = extension;
@@ -194,10 +197,8 @@ public class ImportHelper {
 			handleSqliteTileImport(intentUri, fileName);
 		} else if (fileName != null && fileName.endsWith(OSMAND_SETTINGS_FILE_EXT)) {
 			handleOsmAndSettingsImport(intentUri, fileName, extras, null);
-		} else if (fileName != null && fileName.endsWith(RENDERER_INDEX_EXT)) {
-			handleRenderingFileImport(intentUri, fileName);
 		} else if (fileName != null && fileName.endsWith(ROUTING_FILE_EXT)) {
-			handleRoutingFileImport(intentUri, fileName, null);
+			handleXmlFileImport(intentUri, fileName);
 		} else {
 			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
 		}
@@ -896,46 +897,129 @@ public class ImportHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void handleRenderingFileImport(final Uri intentUri, final String fileName) {
+	private void handleXmlFileImport(final Uri intentUri, final String fileName) {
 		final AsyncTask<Void, Void, String> renderingImportTask = new AsyncTask<Void, Void, String>() {
 
-			String mFileName;
-			ProgressDialog progress;
+			private String destFileName;
+			private ImportType importType;
+			private ProgressDialog progress;
 
 			@Override
 			protected void onPreExecute() {
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
 				}
-				mFileName = fileName;
+				destFileName = fileName;
 			}
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				File renderingDir = app.getAppPath(IndexConstants.RENDERERS_DIR);
-				if (!renderingDir.exists()) {
-					renderingDir.mkdirs();
+				checkImportType();
+				if (importType != null) {
+					File dest = getDestinationFile();
+					if (dest != null) {
+						return copyFile(app, dest, intentUri, true);
+					}
 				}
-				File dest = new File(renderingDir, mFileName);
-				while (dest.exists()) {
-					mFileName = AndroidUtils.createNewFileName(mFileName);
-					dest = new File(renderingDir, mFileName);
-				}
-				return copyFile(app, dest, intentUri, true);
+				return app.getString(R.string.file_import_error, destFileName, app.getString(R.string.unsupported_type_error));
 			}
 
 			@Override
 			protected void onPostExecute(String error) {
-				File renderingDir = app.getAppPath(IndexConstants.RENDERERS_DIR);
-				File file = new File(renderingDir, mFileName);
+				File destDir = getDestinationDir();
+				File file = new File(destDir, destFileName);
 				if (error == null && file.exists()) {
-					app.getRendererRegistry().updateExternalRenderers();
-					app.showShortToastMessage(app.getString(R.string.file_imported_successfully, mFileName));
+					if (importType == ImportType.RENDERING) {
+						app.getRendererRegistry().updateExternalRenderers();
+						app.showShortToastMessage(app.getString(R.string.file_imported_successfully, destFileName));
+						hideProgress();
+					} else if (importType == ImportType.ROUTING) {
+						loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
+							@Override
+							public void onRoutingFilesLoaded() {
+								hideProgress();
+								RoutingConfiguration.Builder builder = app.getCustomRoutingConfig(destFileName);
+								if (builder != null) {
+									app.showShortToastMessage(app.getString(R.string.file_imported_successfully, destFileName));
+								} else {
+									app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, destFileName));
+								}
+							}
+						});
+					}
 				} else {
-					app.showShortToastMessage(app.getString(R.string.file_import_error, mFileName, error));
+					hideProgress();
+					app.showShortToastMessage(app.getString(R.string.file_import_error, destFileName, error));
 				}
+			}
+
+			private void hideProgress() {
 				if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
+				}
+			}
+
+			private File getDestinationDir() {
+				if (importType == ImportType.ROUTING) {
+					return app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+				} else if (importType == ImportType.RENDERING) {
+					return app.getAppPath(IndexConstants.RENDERERS_DIR);
+				}
+				return null;
+			}
+
+			private File getDestinationFile() {
+				File destDir = getDestinationDir();
+				if (destDir != null) {
+					if (!destDir.exists()) {
+						destDir.mkdirs();
+					}
+					File destFile = new File(destDir, destFileName);
+					while (destFile.exists()) {
+						destFileName = AndroidUtils.createNewFileName(destFileName);
+						destFile = new File(destDir, destFileName);
+					}
+					return destFile;
+				}
+				return null;
+			}
+
+			private void checkImportType() {
+				InputStream is = null;
+				try {
+					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(intentUri, "r");
+					if (pFD != null) {
+						is = new FileInputStream(pFD.getFileDescriptor());
+						XmlPullParser parser = PlatformUtil.newXMLPullParser();
+						parser.setInput(is, "UTF-8");
+						int tok;
+						while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+							if (tok == XmlPullParser.START_TAG) {
+								String name = parser.getName();
+								if ("osmand_routing_config".equals(name)) {
+									importType = ImportType.ROUTING;
+								} else if ("renderingStyle".equals(name)) {
+									importType = ImportType.RENDERING;
+								}
+								break;
+							}
+						}
+						try {
+							pFD.close();
+						} catch (IOException e) {
+							log.error(e);
+						}
+					}
+				} catch (FileNotFoundException | XmlPullParserException e) {
+					log.error(e);
+				} catch (IOException e) {
+					log.error(e);
+				} finally {
+					if (is != null) try {
+						is.close();
+					} catch (IOException e) {
+						log.error(e);
+					}
 				}
 			}
 		};
