@@ -2071,7 +2071,7 @@
     <string name="save_track_to_gpx_globally_headline">On demand track logging</string>
     <string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX logging widget on the map.</string>
     <string name="save_current_track_descr">Save current track as GPX file now.</string>
-    <string name="save_current_track">Stop and save current track</string>
+    <string name="save_current_track">Save current track</string>
     <string name="save_track_to_gpx">Auto-record track during navigation</string>
     <string name="save_track_to_gpx_descrp">A GPX track is automatically saved to the tracks folder during navigation.</string>
     <string name="save_track_interval_globally">Logging interval</string>
