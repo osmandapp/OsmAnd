@@ -23,7 +23,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;

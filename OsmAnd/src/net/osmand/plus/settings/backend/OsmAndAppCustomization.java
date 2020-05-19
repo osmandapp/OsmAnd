@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.settings.backend;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,6 +21,12 @@ import net.osmand.JsonUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.ConnectedApp;
 import net.osmand.data.LocationPoint;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
@@ -30,7 +36,6 @@ import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
@@ -601,7 +606,7 @@ public class OsmAndAppCustomization {
 	}
 
 	private void notifySettingsCustomized() {
-		app.uiHandler.post(new Runnable() {
+		app.runInUIThread(new Runnable() {
 
 			@Override
 			public void run() {
