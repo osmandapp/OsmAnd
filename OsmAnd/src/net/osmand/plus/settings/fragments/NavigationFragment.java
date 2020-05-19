@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;

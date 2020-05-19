@@ -16,7 +16,7 @@
 		android:persistent="false"
 		android:summary="@string/general_settings_profile_descr"
 		android:title="@string/general_settings_2"
-		app:fragment="net.osmand.plus.settings.GeneralProfileSettingsFragment"
+		app:fragment="net.osmand.plus.settings.fragments.GeneralProfileSettingsFragment"
 		tools:icon="@drawable/ic_action_settings" />
 
 	<Preference
@@ -25,7 +25,7 @@
 		android:persistent="false"
 		android:summary="@string/configure_navigation"
 		android:title="@string/routing_settings_2"
-		app:fragment="net.osmand.plus.settings.NavigationFragment"
+		app:fragment="net.osmand.plus.settings.fragments.NavigationFragment"
 		tools:icon="@drawable/ic_action_gdirections_dark" />
 
 	<Preference

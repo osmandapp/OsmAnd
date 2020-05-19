@@ -2,7 +2,7 @@ package net.osmand.plus.api;
 
 import net.osmand.PlatformUtil;
 
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import org.apache.commons.logging.Log;
 

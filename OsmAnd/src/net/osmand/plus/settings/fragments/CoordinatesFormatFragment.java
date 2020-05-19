@@ -18,7 +18,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
