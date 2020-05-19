@@ -101,8 +101,8 @@
     <string name="offline_navigation_not_available">OsmAnd offline navigering er midlertidig ikke tilgjengelig.</string>
     <string name="left_side_navigation">Venstrekjøring</string>
     <string name="left_side_navigation_descr">For land hvor det kjøres på venstre side av veien.</string>
-    <string name="unknown_from_location">Startpunkt ikke bestemt enda</string>
-    <string name="unknown_location">Posisjon ennå ikke kjent</string>
+    <string name="unknown_from_location">Startpunkt ikke bestemt enda.</string>
+    <string name="unknown_location">Posisjon enda ikke kjent.</string>
     <string name="local_indexes_cat_tile">Nettbaserte kart og hurtigbufrede fliskart</string>
     <string name="local_indexes_cat_map">Standardkart (vektor)</string>
     <string name="index_settings_descr">Last ned og håndter offline-kart lagret på enheten.</string>
@@ -244,8 +244,8 @@
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Nei takk</string>
     <string name="basemap_missing">Last ned basiskartet for verden for å få en oversikt som dekker hele verden ved lave zoomnivåer.</string>
-    <string name="local_index_gpx_info_show">" 
-\n 
+    <string name="local_index_gpx_info_show">"
+\n
 \nTrykk lenge for alternativer"</string>
     <string name="local_index_descr_title">Karthåndtering.</string>
     <string name="local_index_mi_restore">Aktiver</string>
@@ -265,7 +265,7 @@
     <string name="map_text_size">Skriftstørrelse for kart</string>
     <string name="internet_connection_required_for_online_route">Nettbasert navigering fungerer ikke frakoblet.</string>
     <string name="tts_language_not_supported_title">Språk ikke støttet</string>
-    <string name="tts_language_not_supported">Det valgte språket støttes ikke av den installerte motoren for Android TTS (tekst-til-tale). Vil du se etter en annen TTS-motor i markedet? Ellers vil det forhåndsinnstilte TTS-språket brukes.</string>
+    <string name="tts_language_not_supported">Det valgte språket støttes ikke av Android TTS-motoren (tekst-til-tale). Det forhåndsinnstilte TTS-språket vil brukes. Vil du se etter en annen TTS-motor i markedet\?</string>
     <string name="tts_missing_language_data_title">Manglende data</string>
     <string name="switch_to_vector_map_to_see">Offline-vektorkart foreligger for dette stedet. 
 \n\t
@@ -428,7 +428,7 @@
     <string name="save_current_track_descr">Lagre nåværende spor som GPX-fil nå.</string>
     <string name="save_current_track">Lagre gjeldende spor</string>
     <string name="save_track_interval">Loggeintervall under navigering</string>
-    <string name="save_track_interval_descr">Velg loggingsintervall for opptak av spor under navigering.</string>
+    <string name="save_track_interval_descr">Angi loggingsintervall for opptak av spor under navigering</string>
     <string name="save_track_to_gpx_descrp">Et GPX-spor lagres automatisk i spor-mappen under navigering.</string>
     <string name="save_track_to_gpx">Auto-opptak av spor under navigering</string>
     <string name="update_tile">Oppdater kart</string>
@@ -447,7 +447,7 @@
     <string name="map_view_3d">3D-kartvisning</string>
     <string name="show_poi_over_map_description">Vis sist valgte interessepunktsoverlegg.</string>
     <string name="show_poi_over_map">Vis interessepunktoverlegg</string>
-    <string name="map_tile_source_descr">Velg kilde for nettbaserte eller hurtigbufrede kart</string>
+    <string name="map_tile_source_descr">Velg kilde for nettbaserte eller hurtiglagrede kart.</string>
     <string name="map_tile_source">Fliskartkilde</string>
     <string name="map_source">Kartkilde</string>
     <string name="use_internet">Bruk Internett</string>
@@ -792,9 +792,9 @@
     <string name="rendering_attr_lessDetailed_name">Færre detaljer</string>
     <string name="sort_by_distance">Sorter etter avstand</string>
     <string name="sort_by_name">Sorter etter navn</string>
-    <string name="selected_gpx_info_show">" 
-\n 
-\nLangt trykk for å vise på kartet"</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nTrykk lenge for å vise på kartet"</string>
     <string name="gpx_info_waypoints">Rutepunkter: %1$s</string>
     <string name="loading_streets">Laster gater…</string>
     <string name="loading_cities">Laster byer…</string>
@@ -1006,7 +1006,7 @@
     <string name="map_underlay_descr">Velg underlagskart</string>
     <string name="layer_overlay">Overleggskart…</string>
     <string name="map_overlay">Overleggskart</string>
-    <string name="map_overlay_descr">Velg overleggskartet.</string>
+    <string name="map_overlay_descr">Velg overleggskartet</string>
     <string name="audionotes_plugin_name">Audio/video-notater</string>
     <string name="osm_settings">OSM-redigering</string>
     <string name="osmand_srtm_long_description_1000_chars">Dette programtillegget gir både et lag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. 
@@ -1551,7 +1551,7 @@
     <string name="dist_away_from_my_location">Søk %1$s unna</string>
     <string name="share_history_subject">delt via OsmAnd</string>
     <string name="rendering_attr_horseRoutes_name">Hesteruter</string>
-    <string name="world_ski_missing">For å vise skikart må det spesielle offline-kartet lastes ned</string>
+    <string name="world_ski_missing">For å vise skikart må det spesielle frakoblede kartet lastes ned.</string>
     <string name="route_stops_before">%1$s stopp før</string>
     <string name="coords_search">Koordinatsøk</string>
     <string name="advanced_coords_search">Avansert koordinatsøk</string>
@@ -1700,7 +1700,7 @@
 \n - Ingen nettfrakoblet tilgang til interessepunkter fra Wikipedia 
 \n 
 \n OsmAnd utvikles aktivt, og prosjektet vårt og dets videre framdrift avhenger av finansielle bidrag for å drive utviklingen og testingen av nye funksjoner. Overvei å kjøpe OsmAnd+ eller støtte spesifikke nye funksjoner eller bidra med en generell donasjon på https://osmand.net.</string>
-    <string name="upload_osm_note_description">Last opp ditt OSM-notat anonymt eller ved å bruke din profil hos OpenStreetMap.org</string>
+    <string name="upload_osm_note_description">Last opp ditt OSM-notat anonymt eller ved å bruke din profil hos OpenStreetMap.org.</string>
     <string name="gpx_no_tracks_title">Du har ingen GPX-filer enda</string>
     <string name="gpx_no_tracks_title_folder">Du kan også legge til GPX-filer i mappen</string>
     <string name="gpx_add_track">Legg til mer…</string>
@@ -1780,7 +1780,7 @@
     <string name="track_points">Sporpunkter</string>
     <string name="share_note">Del notat</string>
     <string name="notes">Notater</string>
-    <string name="nautical_maps_missing">For å vise sjøkart, må det spesielle offline-kartet lastes ned</string>
+    <string name="nautical_maps_missing">For å vise sjøkart, må det spesielle frakoblede kartet lastes ned.</string>
     <string name="navigation_over_track">Starte navigering langs spor\?</string>
     <string name="avoid_roads_msg">Utløs en alternativ rute ved å velge veier å unngå</string>
     <string name="routing_attr_no_new_routing_name">Ingen v1.9-regler for ruteplanlegging</string>
@@ -1872,7 +1872,7 @@
     <string name="lang_kab">Kabylsk</string>
     <string name="lang_zh_hk">Kinesisk (Hongkong)</string>
     <string name="use_displayed_track_for_navigation">Bruk vist spor for navigering\?</string>
-    <string name="local_osm_changes_backup_failed">Kunne ikke sikkerhetskopiere OSM-endringer</string>
+    <string name="local_osm_changes_backup_failed">Kunne ikke sikkerhetskopiere OSM-endringer.</string>
     <string name="use_distance_measurement_help">* Trykk for å markere et punkt. 
 \n * Langt trykk på kartet for å slette forrige punkt. 
 \n * Langt trykk på et punkt for å vise og legge til beskrivelse. 
@@ -2210,7 +2210,7 @@
     <string name="live_monitoring_interval">Nettbasert sporingsintervall</string>
     <string name="live_monitoring_url">Nettadresse for nettbasert sporing</string>
     <string name="live_monitoring_max_interval_to_send">Tidsbuffer for nettbasert sporing</string>
-    <string name="live_monitoring_max_interval_to_send_desrc">"Angi tidsbuffer for å beholde posisjoner som skal sendes når  internettforbindelse mangler"</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Angi tidsbuffer for å beholde posisjoner som skal sendes når internettforbindelse mangler</string>
     <string name="shared_string_others">Andre</string>
     <string name="trace_rendering">Opptegningfeilsøkingsinfo</string>
     <string name="trace_rendering_descr">Vis opptegningsytelsen.</string>
@@ -2245,7 +2245,7 @@
     <string name="saving_gpx_tracks">Lagrer GPX-fil…</string>
     <string name="data_settings_descr">Angi språk, last ned/gjeninnlast data.</string>
     <string name="av_camera_focus">Kameraets fokusmetode</string>
-    <string name="av_camera_focus_descr">Velg fokusmodus for kameraet.</string>
+    <string name="av_camera_focus_descr">Kamerafokusmodus:</string>
     <string name="av_camera_focus_infinity">Uendelig fokus</string>
     <string name="av_camera_focus_macro">Makrofokus (nærbilde)</string>
     <string name="av_camera_focus_continuous">Kameraet prøver kontinuerlig å fokusere</string>
@@ -2616,13 +2616,13 @@
 \n • Valgfri fartsavhengig zoom 
 \n • Del din posisjon slik at dine venner kan finne deg 
 \n</string>
-    <string name="osmand_plus_extended_description_part6">"Sykkel- og fotgjengerfunksjoner 
-\n • Visning av gang-, vandring- og sykkelstier, flott for utendørsaktiviteter 
-\n • Spesielle ruteplanleggings- og visningsmoduser for syklister og fotgjengere 
-\n • Visning av stoppesteder for offentlig transport (buss, trikk, tog) inkludert linjenavn (alternativ) 
-\n • Turopptak til lokal GPX-fil eller nettbasert tjeneste (alternativ) 
-\n • Hastighet- og høydevisning  (alternativ) 
-\n • Visning av koter og relieffskygger (via programtillegg)"</string>
+    <string name="osmand_plus_extended_description_part6">Sykkel- og fotgjengerfunksjoner
+\n • Visning av gang-, vandring- og sykkelstier, flott for utendørsaktiviteter
+\n • Spesielle ruteplanleggings- og visningsmoduser for syklister og fotgjengere
+\n • Visning av stoppesteder for offentlig transport (buss, trikk, tog) inkludert linjenavn (alternativ)
+\n • Turopptak til lokal GPX-fil eller nettbasert tjeneste (alternativ)
+\n • Hastighet- og høydevisning (alternativ)
+\n • Visning av koter og relieffskygger (via programtillegg)</string>
     <string name="live_monitoring_url_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="wikivoyage_download_pics_descr">Bilder fra artikler kan lastes ned for frakoblet bruk. 
 \nKan alltid endres i \'Utforsk\' → \'Alternativer\'.</string>
@@ -2684,7 +2684,8 @@
 \n • Wikipedia på ditt foretrukne språk kan fortelle deg mye under en bytur 
 \n • Stoppesteder for offentlig transport (buss, trikk, tog), inkludert linjenavn, hjelper til med å navigere i en ny by 
 \n • GPS-navigering i fotgjengermodus lager ruten ved hjelp av gangstier 
-\n • Last opp og følg en GPX-rute eller ta opp og del din egen</string>
+\n • Last opp og følg en GPX-rute eller ta opp og del din egen
+\n</string>
     <string name="osmand_extended_description_part8">OsmAnd blir aktivt utviklet og er programvare med åpen kildekode. Alle kan komme med bidrag til programmet ved å rapportere feil, forbedre oversettelser eller ved koding av nye funksjoner. I tillegg er prosjektet avhengig av økonomiske bidrag til å finansiere koding og testing av nye funksjoner. 
 \nOmtrentlig kartdekning og kvalitet: 
 \n • Vest-Europa: **** 
@@ -2871,7 +2872,7 @@
     <string name="run_full_osmand_msg">Du bruker {0}-kart, muliggjort av OsmAnd. Ønsker du å ta i bruk fullversjonen av OsmAnd\?</string>
     <string name="run_full_osmand_header">Kjør OsmAnd\?</string>
     <string name="lang_gn_py">Guaraní</string>
-    <string name="quick_action_switch_day_night_descr">Trykk på denne knappen for å veksle mellom dag- og nattmodus i OsmAnd</string>
+    <string name="quick_action_switch_day_night_descr">Vekselvender mellom dag- og nattmodus i OsmAnd</string>
     <string name="quick_action_switch_day_mode">Dagmodus</string>
     <string name="quick_action_switch_night_mode">Nattmodus</string>
     <string name="quick_action_day_night_switch_mode">Veksle dag-/nattmodus</string>
@@ -2916,7 +2917,7 @@
     <string name="exit_at">Gå av på</string>
     <string name="sit_on_the_stop">Sitt på stoppet</string>
     <string name="quick_action_show_hide_gpx_tracks">Vis/skjul GPX-spor</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Å trykke på denne knappen viser eller skjuler valgte GPX-spor på kartet</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Knapp som viser eller skjuler valgte GPX-spor på kartet.</string>
     <string name="quick_action_gpx_tracks_hide">Skjul GPX-spor</string>
     <string name="quick_action_gpx_tracks_show">Vis GPX-spor</string>
     <string name="release_3_3">• Ny \'Anvisninger\'-skjerm: Viser hjem og arbeid som målknapper, snarvei til \"tidligere rute\", liste over aktive GPX-spor og markører, søkehistorikk
@@ -3038,7 +3039,7 @@
     <string name="coordinates_widget">Koordinat-miniprogram</string>
     <string name="rate_dialog_descr">Del din tilbakemelding og legg til en vurdering på Google Play.</string>
     <string name="shared_string_privacy_policy">Personvernspraksis</string>
-    <string name="help_us_make_osmand_better">Hjelp oss å forbedre OsmAnd.</string>
+    <string name="help_us_make_osmand_better">Hjelp oss å forbedre OsmAnd</string>
     <string name="make_osmand_better_descr">Tillat OsmAnd å samle inn og behandle anonym programbruksdata. Vi samler ikke inn eller lagrer data om din plassering, eller om plasseringer ser på på kartet. 
 \n 
 \nDu kan alltid endre ditt valg i Innstillinger &gt; Personvern og sikkerhet.</string>
@@ -3263,10 +3264,10 @@
     <string name="quick_action_hillshade_show">Vis relieffskygge</string>
     <string name="quick_action_hillshade_hide">Skjul relieffskygge</string>
     <string name="quick_action_show_hide_hillshade">Vis/skjul relieffskygge</string>
-    <string name="tts_initialization_error">Kan ikke starte tekst-til-tale-motor</string>
+    <string name="tts_initialization_error">Kan ikke starte tekst-til-tale-motor.</string>
     <string name="simulate_your_location_gpx_descr">Simuler posisjonen din ved bruk av et innspilt GPX-spor.</string>
     <string name="exported_osmand_profile">OsmAnd-profil: %1$s</string>
-    <string name="profile_import">Profil-import:</string>
+    <string name="profile_import">Profil-import</string>
     <string name="rendering_value_white_name">Hvit</string>
     <string name="default_speed_dialog_msg">Brukes til å estimere ankomsttid for ukjente veityper, og for å begrense farten på alle veier (kan endre rute)</string>
     <string name="track_storage_directory">Spor-lagringsmappe</string>
@@ -3311,7 +3312,7 @@
     <string name="routeInfo_winter_ice_road_name">Vinter- og isveier</string>
     <string name="enter_path_to_folder">Skriv inn sti til mappen</string>
     <string name="paste_Osmand_data_folder_path">Lim inn sti til mappen inneholdende OsmAnd-data</string>
-    <string name="internal_app_storage_description">Internlagring, skjult fra bruker og andre programmer, kun tilgjengelig for OsmAnd</string>
+    <string name="internal_app_storage_description">Internlagring for OsmAnd, (skjult fra bruker og andre programmer).</string>
     <string name="change_data_storage_folder">Endre datalagringsmappe</string>
     <string name="rendering_attr_piste_type_snow_park_name">Snøpark</string>
     <string name="rendering_attr_piste_type_nordic_name">Langrenn</string>
@@ -3322,7 +3323,7 @@
     <string name="empty_filename">Filnavnet er tomt</string>
     <string name="turn_screen_on_router">Vekk for sving</string>
     <string name="turn_screen_on_time_descr">Juster hvor lenge skjermen skal forbli påslått.</string>
-    <string name="turn_screen_on_sensor">Bruk nærhetssensor.</string>
+    <string name="turn_screen_on_sensor">Bruk nærhetssensor</string>
     <string name="turn_screen_on_sensor_descr">Vift hånden din over toppen av skjermen for å skru den på under navigasjon.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Klasse 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Klasse 2</string>
@@ -3398,9 +3399,9 @@
     <string name="clear_confirmation_msg">Tøm %1$s\?</string>
     <string name="download_map_dialog">Kartnedlastingsdialog</string>
     <string name="dialogs_and_notifications_title">Dialogvinduer og merknader</string>
-    <string name="dialogs_and_notifications_descr">Kontroller oppsprettsvinduer, dialogvinduer og merknader som OsmAnd viser under bruk.</string>
+    <string name="dialogs_and_notifications_descr">Kontroller oppsprettsvinduer, dialogvinduer og merknader.</string>
     <string name="suggested_maps">Foreslåtte kart</string>
-    <string name="suggested_maps_descr">Disse kartene må brukes med programtillegg</string>
+    <string name="suggested_maps_descr">Disse kartene kreves av programtillegget.</string>
     <string name="added_profiles">Tillagte profiler</string>
     <string name="added_profiles_descr">Programtillegg legger til ny profil i OsmAnd</string>
     <string name="shared_string_turn_off">Skru av</string>
@@ -3442,7 +3443,7 @@
     <string name="live_monitoring">Nettbasert sporing</string>
     <string name="save_track_logging_accuracy">Loggingsnøyaktighet</string>
     <string name="tracks_view_descr">Du kan finne alle dine innspilte spor i %1$s, eller i OsmAnd-mappen.</string>
-    <string name="multimedia_notes_view_descr">Du finner alle dine notater i %1$sr</string>
+    <string name="multimedia_notes_view_descr">Du finner alle dine OSM-notater i %1$s.</string>
     <string name="video_notes">Videonotater</string>
     <string name="photo_notes">Bildenotater</string>
     <string name="route_recalculation">Ruteomberegning</string>
@@ -3551,5 +3552,42 @@
     <string name="create_edit_poi">Legg til/rediger interessepunkt</string>
     <string name="quick_action_show_hide_transport">Vis/skjul offentlig transport</string>
     <string name="shared_string_add_profile">Legg til profil</string>
-    <string name="quick_action_transport_descr"></string>
+    <string name="quick_action_transport_descr">En knapp for å vise eller skjule offentlig transport på kartet.</string>
+    <string name="routing_profile_direct_to">Direkte-til-punkt</string>
+    <string name="clear_recorded_data">Tøm lagret data</string>
+    <string name="shared_string_include_data">Inkluder ytterligere data</string>
+    <string name="live_monitoring_tracking_interval">Sporingsintervall</string>
+    <string name="live_monitoring_time_buffer">Tidsmellomlager</string>
+    <string name="multimedia_photo_play_sound">Kameralukker-lyd</string>
+    <string name="shared_string_resume">Fortsett</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="lang_zhyue">Standard kantonesisk</string>
+    <string name="lang_zhminnan">Sørlig min</string>
+    <string name="lang_yo">Joruba</string>
+    <string name="lang_war">Waray-waray</string>
+    <string name="lang_uz">Usbekisk</string>
+    <string name="lang_ur">Lashkari</string>
+    <string name="lang_tt">Tatarisk</string>
+    <string name="lang_tg">Tadsjikisk</string>
+    <string name="lang_sco">Skotsk</string>
+    <string name="lang_scn">Siciliansk</string>
+    <string name="lang_pnb">Panjabi</string>
+    <string name="lang_ne">Gurkhali</string>
+    <string name="lang_nap">Napolitansk-kalabresisk</string>
+    <string name="lang_my">Burmesisk</string>
+    <string name="lang_mn">Mongolsk</string>
+    <string name="lang_min">Minangkabau</string>
+    <string name="lang_mg">Madagassisk</string>
+    <string name="lang_ky">Kirgisisk</string>
+    <string name="lang_kk">Kasakhisk</string>
+    <string name="lang_jv">Javanesisk</string>
+    <string name="lang_gu">Gujarati</string>
+    <string name="lang_cv">Tsjuvasjisk</string>
+    <string name="lang_ce">Tsjetsjensk</string>
+    <string name="lang_bar">Bairisk</string>
+    <string name="lang_ba">Basjkirsk</string>
+    <string name="lang_an">Aragonesisk</string>
+    <string name="lang_lmo">Langobardisk</string>
+    <string name="parking_positions">Parkeringsposisjoner</string>
+    <string name="add_edit_favorite">Legg til / rediger profil</string>
 </resources>
