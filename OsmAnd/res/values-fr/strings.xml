@@ -2027,7 +2027,7 @@
     <string name="osmand_plus_banner_desc">Téléchargements illimités des cartes, des mises à jour et des données pour le greffon Wikipédia.</string>
     <string name="donation_to_osm">Don à la communauté OpenStreetMap</string>
     <string name="osm_live_subscription_desc">L\'abonnement permet de bénéficier des mises à jour horaires, quotidiennes, hebdomadaires et de télécharger de nouvelles cartes sans limite.</string>
-    <string name="osm_live_payment_desc">Abonnement facturé chaque mois. Annulation possible à tout moment depuis Google Play.</string>
+    <string name="osm_live_payment_desc">Abonnement facturé périodiquement. Annulation possible à tout moment depuis Google Play.</string>
     <string name="donation_to_osm_desc">Une partie de votre don sera reversée aux contributeurs OSM qui mettent à jour OpenStreetMap. Le coût de l\'abonnement reste identique.</string>
     <string name="driving_region_australia">Australie</string>
     <string name="lang_kab">Kabyle</string>
@@ -3402,7 +3402,7 @@
     <string name="choose_icon_color_name">Icône, couleur et nom</string>
     <string name="reorder_profiles">Modifiez la liste des profils</string>
     <string name="selected_profile">Profil sélectionné</string>
-    <string name="reset_confirmation_descr">Cliquer sur %1$s effacera toutes vos modifications.</string>
+    <string name="reset_confirmation_descr">Cliquer sur %1$s ignore toutes vos modifications.</string>
     <string name="reset_all_profile_settings_descr">Réinitialiser tous les paramètres de profil aux valeurs par défaut.</string>
     <string name="reset_all_profile_settings">Ré-initialiser tous les paramètres de profil \?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s : %2$s</string>
@@ -3471,7 +3471,7 @@
     <string name="rearrange_categories">Réorganiser les catégories</string>
     <string name="create_custom_categories_list_promo">Modifiez l\'ordre de tri de la liste, masquez des catégories. Vous pouvez importer et exporter toutes vos modifications via les profils.</string>
     <string name="reset_to_default_category_button_promo">Restaurer les valeurs par défaut réinitialisera l\'ordre de tri.</string>
-    <string name="accessibility_mode_disabled">Le mode d\'accessibilité est désactivé dans votre système.</string>
+    <string name="accessibility_mode_disabled">Le mode d\'accessibilité est désactivé dans votre système Android.</string>
     <string name="add_new_custom_category_button_promo">Vous pouvez ajouter une catégorie personnelle en sélectionnant la ou les catégories souhaitées.</string>
     <string name="use_system_screen_timeout">Utiliser le délai système pour mettre en veille l\'écran</string>
     <string name="use_system_screen_timeout_promo">Inactif par défaut (lorsqu\'OsmAnd s’exécute en avant-plan, l\'écran reste toujours allumé). 
@@ -3516,11 +3516,11 @@
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Calcul d\'itinéraire</string>
     <string name="shared_string_include_data">Inclure des données supplémentaires</string>
-    <string name="import_profile_dialog_description">Le profil importé contient des données supplémentaires. Cliquez sur Importer pour n\'importer que les données de profil ou sélectionnez des données supplémentaires à importer.</string>
+    <string name="import_profile_dialog_description">Le profil importé contient des données supplémentaires. Cliquez sur Importer pour n\'importer que les données de profil ou sélectionnez les données supplémentaires à importer.</string>
     <string name="export_profile_dialog_description">Vous pouvez sélectionner des données supplémentaires à exporter en même temps que le profil.</string>
     <string name="index_name_antarctica">Antarctique</string>
     <string name="shared_string_app_default_w_val">Par défaut pour l\'application (%s)</string>
-    <string name="no_recalculation_setting">Désactiver le re-calcul</string>
+    <string name="no_recalculation_setting">Sans re-calcul</string>
     <string name="route_recalculation_dist_title">Distance à partir de laquelle recalculer l’itinéraire</string>
     <string name="route_recalculation_dist_descr">L’itinéraire sera recalculé si votre éloignement de l\'itinéraire est supérieur à ce paramètre</string>
     <string name="profile_type_custom_string">Profil personnel</string>
@@ -3576,7 +3576,7 @@
     <string name="terrain_empty_state_text">Permet d\'afficher l\'ombrage du relief ou les pistes. Vous pouvez en apprendre plus sur ces types de cartes sur notre site.</string>
     <string name="shared_string_hillshade">Ombrage du relief</string>
     <string name="download_slope_maps">Pistes</string>
-    <string name="quick_action_show_hide_terrain">Afficher/masquer le terrain</string>
+    <string name="quick_action_show_hide_terrain">Afficher / masquer le terrain</string>
     <string name="quick_action_terrain_hide">Masquer le terrain</string>
     <string name="quick_action_terrain_show">Afficher le terrain</string>
     <string name="quick_action_terrain_descr">Un bouton pour afficher ou masquer la couche terrain sur la carte.</string>
@@ -3602,9 +3602,9 @@
     <string name="shared_string_all_languages">Toutes les langues</string>
     <string name="wiki_menu_download_descr">D’autres cartes sont nécessaires pour afficher les POI Wikipédia sur la carte.</string>
     <string name="divider_descr">Éléments sous ce point isolés par un séparateur.</string>
-    <string name="ui_customization_description">Personnalisez le nombre d’éléments dans le panneau déroulant, paramétrez la carte et le menu contextuel.
-\n
-\nVous pouvez désactiver les greffons inutilisés, pour masquer leurs contrôles dans l’application %1$s.</string>
+    <string name="ui_customization_description">Personnalisez le nombre d’éléments dans le panneau déroulant, le menu Paramétrer la carte et le menu contextuel. 
+\n 
+\nVous pouvez désactiver les greffons inutilisés, pour masquer leurs contrôles. %1$s.</string>
     <string name="hidden_items_descr">Ces éléments sont masqués dans le menu mais les options présentes ou les greffons continueront à fonctionner.</string>
     <string name="reset_items_descr">Masquer les paramètres les réinitialise à leurs valeurs par défaut.</string>
     <string name="ui_customization_short_descr">Éléments du panneau déroulant, menu contextuel</string>
@@ -3615,7 +3615,7 @@
     <string name="context_menu_actions">Actions du menu contextuel</string>
     <string name="shared_string_divider">Séparateur</string>
     <string name="shared_string_hidden">Masqué</string>
-    <string name="main_actions_descr">Les actions principales contiennent seulement 4 boutons.</string>
+    <string name="main_actions_descr">Seulement 4 boutons.</string>
     <string name="main_actions">Actions principales</string>
     <string name="developer_plugin">Greffon de développement</string>
     <string name="shared_string_items">Éléments</string>
@@ -3657,11 +3657,11 @@
 \n
 \nVous pouvez gérer et annuler vos abonnements dans vos paramètres Google Play.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="search_poi_types_descr">Combinez des PI de différentes catégories. Appuyez pour tout sélectionner, appuyez sur le côté gauche pour sélectionner les catégories.</string>
+    <string name="search_poi_types_descr">Combinez des PI de différentes catégories. Appuyez sur \"basculer\" pour tout sélectionner, le côté gauche sélectionne une catégorie.</string>
     <string name="search_poi_types">Rechercher des types de PI</string>
     <string name="radius_ruler_item">Règle de mesure par rayon</string>
     <string name="map_markers_item">Marques</string>
-    <string name="legend_item_description">Le guide des symboles cartographiques</string>
+    <string name="legend_item_description">Le guide des symboles cartographiques.</string>
     <string name="tracker_item">OsmAnd Tracker</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Action rapide</string>
@@ -3675,7 +3675,7 @@
 \n 
 \n - Personnalisation complète des favoris et des points de passage GPX - couleurs, icônes et formes personnalisées 
 \n 
-\n - Personnalisez l\'ordre des éléments dans le menu contextuel, configurez la carte et le panneau déroulant
+\n - Personnalisez l\'ordre des éléments dans le menu contextuel, le menu configurer la carte et le panneau déroulant 
 \n 
 \n - Wikipédia comme couche séparée dans Paramétrer la carte, sélectionnez uniquement les langues nécessaires 
 \n 
@@ -3700,8 +3700,8 @@
     <string name="add_edit_favorite">Ajouter / Modifier un favori</string>
     <string name="reset_deafult_order">Rétablir l\'ordre par défaut des éléments</string>
     <string name="back_to_editing">Retour en modification</string>
-    <string name="quick_action_switch_profile_descr">Appuyer sur le bouton d’action basculera entre les profils sélectionnés.</string>
-    <string name="profiles_for_action_not_found">Les profils sélectionnés pour cette action sont introuvables.</string>
+    <string name="quick_action_switch_profile_descr">Le bouton d’action bascule entre les profils sélectionnés.</string>
+    <string name="profiles_for_action_not_found">Ces profils sont introuvables.</string>
     <string name="shared_string_resume">Reprendre</string>
     <string name="shared_string_add_profile">Ajouter un profil</string>
     <string name="change_application_profile">Modifier le profil d\'application</string>
