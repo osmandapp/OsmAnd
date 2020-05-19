@@ -1802,7 +1802,7 @@
     <string name="live_monitoring_m">Nettbasert sporing (GPX kreves)</string>
     <string name="live_monitoring_start">Start nettbasert sporing</string>
     <string name="live_monitoring_stop">Stopp nettbasert sporing</string>
-    <string name="gpx_monitoring_start">Start GPX-logging</string>
+    <string name="gpx_monitoring_start">Fortsett GPX-logging</string>
     <string name="select_index_file_to_download">Fant ikke noe. Hvis du ikke finner din region, kan du lage den selv (se https://osmand.net).</string>
     <string name="none_selected_gpx">Ingen GPX-filer valgt. Velg en ved lang-trykking.</string>
     <string name="gpx_split_interval">Oppdelingsintervall</string>
