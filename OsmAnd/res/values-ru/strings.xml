@@ -2250,7 +2250,7 @@
     <string name="osm_live_banner_desc">Получайте неограниченное количество загрузок карт, вдобавок к еженедельным, ежедневным и даже почасовым обновлениям.</string>
     <string name="osmand_plus_banner_desc">Неограниченный доступ к картам, обновлениям и плагину Wikipedia.</string>
     <string name="select_voice_provider">Выберите голосовое сопровождение</string>
-    <string name="osm_live_payment_desc">Абонентская плата взимается ежемесячно. Отменить подписку можно в Google Play в любой момент.</string>
+    <string name="osm_live_payment_desc">Абонентская плата взимается за выбранный период. Отменить подписку можно в Google Play в любой момент.</string>
     <string name="donation_to_osm">Пожертвование для сообщества OSM</string>
     <string name="donation_to_osm_desc">Часть вашего пожертвования будет отправлена участникам OSM. Стоимость подписки при этом остаётся прежней.</string>
     <string name="osm_live_subscription_desc">Подписка позволяет получать ежечасные, ежедневные, еженедельные обновления и неограниченные загрузки для всех карт по всему миру.</string>
@@ -3421,7 +3421,7 @@
     <string name="added_profiles_descr">Профили, добавленные плагином</string>
     <string name="shared_string_turn_off">Выключить</string>
     <string name="new_plugin_added">Добавлен новый плагин</string>
-    <string name="reset_confirmation_descr">Нажимая %1$s, вы отмените все сделанные изменения.</string>
+    <string name="reset_confirmation_descr">Нажатие %1$s отменит все сделанные изменения.</string>
     <string name="reset_all_profile_settings_descr">Все настройки профиля будут сброшены в значения по умолчанию после установки.</string>
     <string name="reset_all_profile_settings">Сбросить все настройки профиля\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
@@ -3481,7 +3481,7 @@
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Маршрутизация</string>
     <string name="shared_string_include_data">Включить дополнительные данные</string>
-    <string name="import_profile_dialog_description">Импортированный профиль содержит дополнительные данные. Нажмите «Импорт», чтобы импортировать только данные профиля, или выберите дополнительные данные для импорта.</string>
+    <string name="import_profile_dialog_description">Импортируемый профиль содержит дополнительные данные. Нажмите «Импорт», чтобы импортировать только данные профиля, или выберите дополнительные данные.</string>
     <string name="export_profile_dialog_description">Вы можете выбрать дополнительные данные для экспорта вместе с профилем.</string>
     <string name="shared_string_app_default_w_val">Приложение по умолчанию (%s)</string>
     <string name="no_recalculation_setting">Отключить перерасчёт</string>
@@ -3620,7 +3620,7 @@
     <string name="wiki_menu_download_descr">Для просмотра POI Википедии на карте необходимы дополнительные карты.</string>
     <string name="ui_customization_description">Настройка количества элементов в разделах «Панель», «Настройка карты» и контекстном меню. 
 \n 
-\nМожно отключить неиспользуемые плагины, чтобы скрыть их элементы управления из приложения %1$s.</string>
+\nМожно отключить неиспользуемые плагины, чтобы скрыть их элементы управления. %1$s.</string>
     <string name="ui_customization_short_descr">Элементы панели, контекстное меню</string>
     <string name="shared_string_drawer">Панель</string>
     <string name="divider_descr">Элементы ниже разделённые делителем.</string>
@@ -3632,7 +3632,7 @@
     <string name="shared_string_hidden">Скрыто</string>
     <string name="hidden_items_descr">Эти элементы скрыты из меню, но представляемые ими функции или плагины продолжают работать.</string>
     <string name="reset_items_descr">Скрытие настроек сбрасывает их в исходное состояние.</string>
-    <string name="main_actions_descr">«Основные действия» содержат только 4 кнопки.</string>
+    <string name="main_actions_descr">Только четыре кнопки.</string>
     <string name="main_actions">Основные действия</string>
     <string name="move_inside_category">Перемещать элементы можно только внутри данной категории.</string>
     <string name="developer_plugin">Плагин для разработчиков</string>
@@ -3685,25 +3685,25 @@
     <string name="map_markers_item">Маркеры</string>
     <string name="subscription_osmandlive_item">Подписка — OsmAnd Live</string>
     <string name="osmand_purchases_item">Покупки OsmAnd</string>
-    <string name="legend_item_description">Справка по символике карты</string>
+    <string name="legend_item_description">Справка по символике карты.</string>
     <string name="favorites_item">Избранное</string>
     <string name="navigation_profiles_item">Профили навигации</string>
-    <string name="release_3_7">• Новые автономные карты склонов
-\n
-\n • Полная настройка избранных и путевых точек GPX: пользовательские цвета, значки, формы
-\n
-\n • Изменение порядка элементов в контекстном меню, настройках карты, панели
-\n
-\n • Википедия как отдельный слой в настройках карты, можно выбрать только нужные языки
-\n
-\n • Можно создать собственный очень гибкий фильтр POI/карты
-\n
-\n • Добавлены параметры для восстановления настроек пользовательских профилей
-\n
-\n • Полные GPX-маршруты в «Навигации» с поддержкой полос движения и подробными инструкциями поворотов
-\n
-\n • Исправлены размеры интерфейса на планшетах
-\n
+    <string name="release_3_7">• Новые автономные карты склонов 
+\n 
+\n • Полная настройка избранных и путевых точек GPX: пользовательские цвета, значки, формы 
+\n 
+\n • Изменение порядка элементов в контекстном меню, настройках карты и панели 
+\n 
+\n • Википедия как отдельный слой в настройках карты, можно выбрать только нужные языки 
+\n 
+\n • Можно создать собственный очень гибкий фильтр POI/карты 
+\n 
+\n • Добавлены параметры для восстановления настроек пользовательских профилей 
+\n 
+\n • Полные GPX-маршруты в «Навигации» с поддержкой полос движения и подробными инструкциями поворотов 
+\n 
+\n • Исправлены размеры интерфейса на планшетах 
+\n 
 \n • Исправлены ошибки для языков, пишущихся справа налево
 \n
 \n</string>
@@ -3712,7 +3712,7 @@
     <string name="quick_action_transport_show">Показать общественный транспорт</string>
     <string name="quick_action_show_hide_transport">Показать/скрыть общественный транспорт</string>
     <string name="add_edit_favorite">Добавить/редактировать избранные</string>
-    <string name="create_edit_poi">Создать/редактировать POI</string>
+    <string name="create_edit_poi">Создать/изменить POI</string>
     <string name="back_to_editing">Возврат к редактированию</string>
     <string name="parking_positions">Место стоянки</string>
     <string name="quick_action_transport_descr">Переключатель, чтобы отобразить или скрыть общественный транспорт на карте.</string>
@@ -3720,7 +3720,7 @@
     <string name="quick_action_switch_profile_descr">Нажатие кнопки «Действия» переключает между выбранными профилями.</string>
     <string name="shared_string_add_profile">Добавить профиль</string>
     <string name="change_application_profile">Изменить профиль приложения</string>
-    <string name="profiles_for_action_not_found">Профили, выбранные для данного действия, не найдены.</string>
+    <string name="profiles_for_action_not_found">Не найдено подходящих профилей.</string>
     <string name="shared_string_resume">Продолжить</string>
     <string name="index_item_world_basemap_detailed">Мировая обзорная карта (подробная)</string>
 </resources>
