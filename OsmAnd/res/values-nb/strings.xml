@@ -752,7 +752,7 @@
     <string name="safe_mode_description">Kjør programmet i sikker modus (med tregere Android i stedet for egen kode).</string>
     <string name="safe_mode">Sikker modus</string>
     <string name="native_library_not_running">Programmet kjører i sikker modus (skru det av i \'Innstillinger\').</string>
-    <string name="interrupt_music_descr">Avbryt musikk ved talemeldinger (ikke bare senk volumet).</string>
+    <string name="interrupt_music_descr">Talemeldinger stopper midlertidig musikkavspilling.</string>
     <string name="interrupt_music">Avbryt musikk</string>
     <string name="gpxup_public">Offentlig</string>
     <string name="rendering_attr_appMode_description">Optimaliser kart for</string>
@@ -1667,7 +1667,7 @@
     <string name="proxy_host_title">Mellomtjenervert</string>
     <string name="proxy_host_descr">Angi din mellomtjeners vertsnavn (f.eks. 127.0.0.1).</string>
     <string name="proxy_port_title">Mellomtjener-port</string>
-    <string name="gpx_monitoring_stop">Stopp GPX-logging</string>
+    <string name="gpx_monitoring_stop">Ta en pause i GPX-logging</string>
     <string name="gpx_start_new_segment">Start nytt segment</string>
     <string name="no_index_file_to_download">Ingen nedlastinger funnet, sjekk din internettforbindelse.</string>
     <string name="gpx_info_subtracks">Underspor: %1$s</string>
@@ -1882,7 +1882,7 @@
     <string name="global_app_allocated_memory_descr">Tildelt minne %1$s MB (Android-grense %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Tildelt minne</string>
     <string name="osmand_parking_event">Finn bilen der den er parkert</string>
-    <string name="osmand_parking_warning_text">En merknad om å hente bilen har blitt lagt til i kalenderen din. Den vil finnes der til du sletter den manuelt.</string>
+    <string name="osmand_parking_warning_text">Et varsel om å hente bilen er lagt til i kalenderen din og kan redigeres eller fjernes der.</string>
     <string name="osmand_parking_time_limit_title">Angi tidsgrense for parkering</string>
     <string name="osmand_parking_delete_confirm">Slett parkeringsmarkøren\?</string>
     <string name="osmand_parking_choose_type">Velg parkeringstype</string>
