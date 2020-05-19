@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.settings.backend;
 
 import androidx.annotation.DrawableRes;
 
@@ -7,12 +7,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 
 import net.osmand.StateChangedListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;

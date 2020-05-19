@@ -52,7 +52,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilitySettingsFragment;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;

@@ -66,7 +66,7 @@ import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.HuaweiDrmHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;

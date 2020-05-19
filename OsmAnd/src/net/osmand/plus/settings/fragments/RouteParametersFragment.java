@@ -22,7 +22,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.StateChangedListener;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;

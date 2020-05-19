@@ -23,7 +23,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.ValueHolder;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;

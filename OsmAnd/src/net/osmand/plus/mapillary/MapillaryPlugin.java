@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;

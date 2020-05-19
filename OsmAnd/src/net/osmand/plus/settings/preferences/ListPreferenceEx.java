@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import androidx.preference.DialogPreference;
 import androidx.preference.PreferenceDataStore;
 
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings.PreferencesDataStore;
 
 public class ListPreferenceEx extends DialogPreference {
