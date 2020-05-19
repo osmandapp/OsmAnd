@@ -2222,7 +2222,7 @@
     <string name="poi_health_specialty_psychiatry_yes">醫療專業：精神科</string>
     <string name="poi_health_specialty_neurology_yes">醫療專業：神經科</string>
     <string name="poi_seamark_dyke">防波堤</string>
-    <string name="poi_historic_period_villager">"歷史時期：村民 (新時代 I, II, 西元前 1580 年  – 西元 133 年)"</string>
+    <string name="poi_historic_period_villager">"歷史時期：村民（新時代 I, II, 西元前1580年  – 西元133年）"</string>
     <string name="poi_historic_period_urban">歷史時期：城市（新時代 III，西元 133 年 - 西元 374 年）</string>
     <string name="poi_fuel_type">燃料類型</string>
     <string name="poi_fuel_avia_type">燃料類型 (avia)</string>
@@ -3822,4 +3822,5 @@
     <string name="poi_fire_hydrant_style_water_source_groundwater">地下水</string>
     <string name="poi_fire_hydrant_type_pipe">管線</string>
     <string name="poi_fire_hydrant_pressure_filter">壓力</string>
+    <string name="poi_pump_status_missing_beam">幫浦狀態：無桿</string>
 </resources>
