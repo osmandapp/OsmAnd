@@ -1494,7 +1494,7 @@
     <string name="layer_amenity_label">Метки точек</string>
     <string name="selected_gpx_info_show">"
 \n
-\nДолго удерживайте для просмотра на карте"</string>
+\nУдерживайте для просмотра на карте"</string>
     <string name="gpx_info_waypoints">Путевые точки: %1$s </string>
     <string name="gpx_selection_number_of_points"> %1$s точек</string>
     <string name="gpx_selection_point">Точка %1$s</string>
@@ -3722,4 +3722,5 @@
     <string name="change_application_profile">Изменить профиль приложения</string>
     <string name="profiles_for_action_not_found">Профили, выбранные для данного действия, не найдены.</string>
     <string name="shared_string_resume">Продолжить</string>
+    <string name="index_item_world_basemap_detailed">Мировая обзорная карта (подробная)</string>
 </resources>

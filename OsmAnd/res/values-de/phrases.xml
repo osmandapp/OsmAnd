@@ -1450,7 +1450,7 @@
     <string name="poi_automated_yes">ja</string>
     <string name="poi_automated_no">Nicht automatisiert</string>
     <string name="poi_brushless_no">Bürstenlos: nein</string>
-    <string name="poi_car_wash_no">Autowäsche: nein</string>
+    <string name="poi_car_wash_no">Nein</string>
     <string name="poi_male_yes">Männlich</string>
     <string name="poi_male_no">Für Männer verboten</string>
     <string name="poi_female_yes">Weiblich</string>
@@ -1795,7 +1795,7 @@
     <string name="poi_service_electrical">Reparatur von elektrischen Fahrzeugen</string>
     <string name="poi_motorcycle_repair">Motorradreparatur</string>
     <string name="poi_self_service_yes">ja</string>
-    <string name="poi_self_service_no">Keine Selbstbedienung</string>
+    <string name="poi_self_service_no">Nein</string>
     <string name="poi_full_service_yes">Rundumservice</string>
     <string name="poi_aeroway_fuel">Flugzeugtankstelle</string>
     <string name="poi_public_bath">Öffentliches Bad</string>

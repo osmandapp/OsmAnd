@@ -1882,7 +1882,7 @@
     <string name="global_app_allocated_memory_descr">Tildelt minne %1$s MB (Android-grense %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Tildelt minne</string>
     <string name="osmand_parking_event">Finn bilen der den er parkert</string>
-    <string name="osmand_parking_warning_text">Et varsel om å hente bilen er lagt til i kalenderen din og kan redigeres eller fjernes der.</string>
+    <string name="osmand_parking_warning_text">En merknad om å hente bilen er lagt til i kalenderen din, og kan redigeres eller fjernes der.</string>
     <string name="osmand_parking_time_limit_title">Angi tidsgrense for parkering</string>
     <string name="osmand_parking_delete_confirm">Slett parkeringsmarkøren\?</string>
     <string name="osmand_parking_choose_type">Velg parkeringstype</string>
@@ -3590,4 +3590,16 @@
     <string name="lang_lmo">Langobardisk</string>
     <string name="parking_positions">Parkeringsposisjoner</string>
     <string name="add_edit_favorite">Legg til / rediger profil</string>
+    <string name="import_complete_description">All data fra %1$s er importert, du kan bruke knappene nedenfor for å åpne den delen du trenger for å håndtere den.</string>
+    <string name="restore_all_profile_settings_descr">Alle profilinnstillinger vil bli gjenopprette til deres opprinnelige tilstand etter opprettelse/import av denne profilen.</string>
+    <string name="clear_recorded_data_warning">Er du sikker på at du vil tømme lagret data\?</string>
+    <string name="recalculate_route_in_deviation">Anvis ny rute ved avvik</string>
+    <string name="download_slope_maps">Løyper</string>
+    <string name="ui_customization_short_descr">Skuffeelementer, bindeleddsmeny</string>
+    <string name="ui_customization">Grensesnittstilpasning</string>
+    <string name="shared_string_drawer">Skuff</string>
+    <string name="tracker_item">OsmAnd-sporer</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_switch_profile_descr">Handlingsknappen veksler mellom valgte profiler.</string>
+    <string name="change_application_profile">Endre programprofil</string>
 </resources>

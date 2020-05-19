@@ -3678,4 +3678,5 @@
     <string name="shared_string_add_profile">Profil ekle</string>
     <string name="change_application_profile">Uygulama profilini değiştir</string>
     <string name="profiles_for_action_not_found">Bu eylem için seçilen profiller bulunamadı.</string>
+    <string name="index_item_world_basemap_detailed">Dünya genel bakış haritası (ayrıntılı)</string>
 </resources>

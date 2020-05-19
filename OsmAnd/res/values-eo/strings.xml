@@ -3716,4 +3716,5 @@
     <string name="shared_string_add_profile">Aldoni profilon</string>
     <string name="change_application_profile">Ŝanĝi aplikaĵan profilon</string>
     <string name="profiles_for_action_not_found">Ne trovis profilojn elektitajn por tiu ĉi ago.</string>
+    <string name="index_item_world_basemap_detailed">Fundamenta mapo de mondo (detala)</string>
 </resources>
