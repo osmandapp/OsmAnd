@@ -184,26 +184,24 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         quickActionRegistry.updateQuickActions(adapter.getQuickActions());
     }
 
-    void createAndShowDeleteDialog(final int itemPosition, final String itemName) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getContext(), !isLightContent));
+    static void showConfirmActionDeleteDialog(Context ctx, QuickAction action, boolean nightMode, DialogInterface.OnClickListener listener) {
+        OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(ctx, nightMode));
         builder.setTitle(R.string.quick_actions_delete);
-        builder.setMessage(getResources().getString(R.string.quick_actions_delete_text, itemName));
-        builder.setIcon(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_delete_dark));
-        builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                adapter.deleteItem(itemPosition);
-                dialog.dismiss();
-            }
-        });
+        builder.setMessage(app.getString(R.string.quick_actions_delete_text, ctx.getString(action.getNameRes())));
+        builder.setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_delete_dark));
+        builder.setPositiveButton(R.string.shared_string_yes, listener);
         builder.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
             }
         });
         AlertDialog dialog = builder.show();
-        int activeColorPrimaryResId = isLightContent ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
-        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(getContext(), activeColorPrimaryResId));
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(getContext(), activeColorPrimaryResId));
+        int activeColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+        int activeColor = ContextCompat.getColor(ctx, activeColorId);
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(activeColor);
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(activeColor);
     }
 
     @Override
@@ -257,7 +255,16 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                 itemVH.closeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        createAndShowDeleteDialog(holder.getAdapterPosition(), getResources().getString(item.getNameRes()));
+                        Context ctx = getContext();
+                        if (ctx != null) {
+                            DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    adapter.deleteItem(holder.getAdapterPosition());
+                                    dialog.dismiss();
+                                }
+                            };
+                            showConfirmActionDeleteDialog(ctx, item, !isLightContent, listener);
+                        }
                     }
                 });
 
