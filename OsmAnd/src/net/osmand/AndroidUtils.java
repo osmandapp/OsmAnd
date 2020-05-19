@@ -46,6 +46,7 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.AttrRes;
@@ -375,12 +376,17 @@ public class AndroidUtils {
 	}
 
 	public static void updateImageButton(Context ctx, ImageButton button, int iconLightId, int iconDarkId, int bgLightId, int bgDarkId, boolean night) {
-		button.setImageDrawable(AppCompatResources.getDrawable(ctx, night ? iconDarkId : iconLightId));
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 			button.setBackground(AppCompatResources.getDrawable(ctx, night ? bgDarkId : bgLightId));
 		} else {
 			button.setBackgroundDrawable(AppCompatResources.getDrawable(ctx, night ? bgDarkId : bgLightId));
 		}
+		int btnSizePx = button.getLayoutParams().height;
+		int iconSizePx = (int) button.getContext().getResources().getDimension(R.dimen.map_widget_icon);
+		int iconPadding = (btnSizePx - iconSizePx) / 2;
+		button.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
+		button.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		button.setImageDrawable(AppCompatResources.getDrawable(ctx, night ? iconDarkId : iconLightId));
 	}
 
 	public static void setDashButtonBackground(Context ctx, View view, boolean night) {

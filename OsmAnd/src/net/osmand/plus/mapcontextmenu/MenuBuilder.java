@@ -824,8 +824,8 @@ public class MenuBuilder {
 		baseView.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		baseView.setLayoutParams(llBaseViewParams);
-		AndroidUtils.setPadding(baseView, dpToPx(16), 0, dpToPx(16), dpToPx(12));
 		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		AndroidUtils.setPadding(baseView, dpToPx(16), 0, dpToPx(16), dpToPx(12));
 
 		TextViewEx transportRect = new TextViewEx(view.getContext());
 		LinearLayout.LayoutParams trParams = new LinearLayout.LayoutParams(dpToPx(32), dpToPx(18));

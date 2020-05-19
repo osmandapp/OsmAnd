@@ -10,6 +10,8 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -65,11 +67,13 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private Path path;
 	private float backgroundIconHalfWidth;
 	private float backgroundIconHalfHeight;
+	private float textScale;
 
 	public TransportStopsLayer(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		showTransportStops = settings.getCustomRenderBooleanProperty(TRANSPORT_STOPS_OVER_MAP).cache();
+		textScale = settings.TEXT_SCALE.get();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -233,7 +237,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		}
 
 		if (objects != null) {
-			float iconSize = stopBus.getWidth() * 3 / 2.5f;
+			textScale = mapActivity.getMyApplication().getSettings().TEXT_SCALE.get();
+			float iconSize = stopBus.getWidth() * 3 / 2.5f * textScale;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
 			List<TransportStop> fullObjects = new ArrayList<>();
 			for (TransportStop o : objects) {
@@ -254,17 +259,27 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 					TransportStopType type = TransportStopType.findType(stopRoute.route.getType());
 					if (type != null) {
 						Drawable foregroundIcon = RenderingIcons.getDrawableIcon(mapActivity, type.getResName(), false);
-						canvas.drawBitmap(backgroundIcon, x - backgroundIconHalfWidth, y - backgroundIconHalfHeight, paintIcon);
+						float scaledWidth = backgroundIcon.getWidth() * textScale;
+						float scaledHeight = backgroundIcon.getHeight() * textScale;
+						RectF rct = new RectF(0, 0, scaledWidth, scaledHeight);
+						rct.offset(x - scaledWidth / 2f, y - scaledHeight / 2f);
+						canvas.drawBitmap(backgroundIcon, null, rct, paintIcon);
 						canvas.save();
-						canvas.translate(x - foregroundIcon.getIntrinsicWidth() / 2f, y - foregroundIcon.getIntrinsicHeight() / 2f);
-						foregroundIcon.setBounds(0, 0, foregroundIcon.getIntrinsicWidth(), foregroundIcon.getIntrinsicHeight());
+						scaledWidth = foregroundIcon.getIntrinsicWidth() * textScale;
+						scaledHeight = foregroundIcon.getIntrinsicHeight() * textScale;
+						canvas.translate(x - scaledWidth / 2f, y - scaledHeight / 2f);
+						foregroundIcon.setBounds(0, 0, (int) scaledWidth, (int) scaledHeight);
 						foregroundIcon.setColorFilter(nightMode ? paintDarkIconFilter : paintLightIconFilter);
 						foregroundIcon.draw(canvas);
 						canvas.restore();
 					}
 				} else {
 					Bitmap b = stopBus;
-					canvas.drawBitmap(b, x - b.getWidth() / 2f, y - b.getHeight() / 2f, paintIcon);
+					float scaledWidth = b.getWidth() * textScale;
+					float scaledHeight = b.getHeight() * textScale;
+					RectF rct = new RectF(0, 0, scaledWidth, scaledHeight);
+					rct.offset(x - scaledWidth / 2f, y - scaledHeight / 2f);
+					canvas.drawBitmap(b, null, rct, paintIcon);
 				}
 			}
 		}
