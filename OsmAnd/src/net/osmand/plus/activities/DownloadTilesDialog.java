@@ -51,11 +51,12 @@ public class DownloadTilesDialog {
 	
 	public void openDialog(){
 		BaseMapLayer mainLayer = mapView.getMainLayer();
-		if(!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()){
+		if (!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()) {
 			Toast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+			return;
 		}
 		final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
-		if(mapSource == null || !mapSource.couldBeDownloadedFromInternet()){
+		if (mapSource == null || !mapSource.couldBeDownloadedFromInternet()) {
 			Toast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 			return;
 		}
@@ -66,29 +67,28 @@ public class DownloadTilesDialog {
 		
 		// calculate pixel rectangle
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-		LayoutInflater inflater = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.download_tiles, null);
-		
-		
-		
-		((TextView)view.findViewById(R.id.MinZoom)).setText(zoom+""); //$NON-NLS-1$
-		((TextView)view.findViewById(R.id.MaxZoom)).setText(max+""); //$NON-NLS-1$
+
+		((TextView) view.findViewById(R.id.MinZoom)).setText(String.valueOf(zoom));
+		((TextView) view.findViewById(R.id.MaxZoom)).setText(String.valueOf(max));
+
 		final Slider slider = (Slider) view.findViewById(R.id.ZoomToDownload);
-		slider.setValueTo(max - zoom);
-		int progress = (max - zoom) / 2;
-		slider.setValue(progress);
-		
 		final TextView downloadText = ((TextView) view.findViewById(R.id.DownloadDescription));
 		final String template = ctx.getString(R.string.tiles_to_download_estimated_size);
-		
-		
+
 		updateLabel(zoom, rb.getLatLonBounds(), downloadText, template, (int) slider.getValue());
-		slider.addOnChangeListener(new Slider.OnChangeListener() {
-			@Override
-			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-				updateLabel(zoom, rb.getLatLonBounds(), downloadText, template, (int) value);
-			}
-		});
+		if (max > zoom) {
+			slider.setValueTo(max - zoom);
+			int progress = (max - zoom) / 2;
+			slider.setValue(progress);
+			slider.addOnChangeListener(new Slider.OnChangeListener() {
+				@Override
+				public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+					updateLabel(zoom, rb.getLatLonBounds(), downloadText, template, (int) value);
+				}
+			});
+		}
 		
 		builder.setPositiveButton(R.string.shared_string_download, new DialogInterface.OnClickListener(){
 			@Override

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,8 +166,9 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	@Override
 	public void setCategory(String name, int color) {
 		FavouritesDbHelper helper = getHelper();
-		if (helper != null) {
-			FavoriteGroup group = helper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(requireContext(), name));
+		Context ctx = getContext();
+		if (helper != null && ctx != null) {
+			FavoriteGroup group = helper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(ctx, name));
 			this.group = group;
 			super.setCategory(name, group != null ? group.getColor() : 0);
 		}
@@ -176,10 +176,13 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	protected String getLastUsedGroup() {
-		OsmandApplication app = requireMyApplication();
-		String lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
-		if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
-			lastCategory = "";
+		String lastCategory = "";
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
+			if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
+				lastCategory = "";
+			}
 		}
 		return lastCategory;
 	}
@@ -325,11 +328,14 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	private void doEditFavorite(FavouritePoint favorite, String name, String category, String description,
 	                            @ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId,
 	                            FavouritesDbHelper helper) {
-		requireMyApplication().getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
-		favorite.setColor(color);
-		favorite.setBackgroundType(backgroundType);
-		favorite.setIconId(iconId);
-		helper.editFavouriteName(favorite, name, category, description);
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
+			favorite.setColor(color);
+			favorite.setBackgroundType(backgroundType);
+			favorite.setIconId(iconId);
+			helper.editFavouriteName(favorite, name, category, description);
+		}
 	}
 
 	private void doAddFavorite(String name, String category, String description, @ColorInt int color,

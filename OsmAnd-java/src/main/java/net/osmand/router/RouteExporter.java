@@ -11,6 +11,7 @@ import net.osmand.binary.RouteDataBundle;
 import net.osmand.binary.StringBundle;
 import net.osmand.binary.StringBundleWriter;
 import net.osmand.binary.StringBundleXmlWriter;
+import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlSerializer;
 
@@ -38,20 +39,22 @@ public class RouteExporter {
 		RouteDataResources resources = new RouteDataResources(locations);
 		final RouteDataBundle bundle = new RouteDataBundle(resources);
 
-		for (RouteSegmentResult sr : route) {
-			sr.collectTypes(resources);
-		}
-		for (RouteSegmentResult sr : route) {
-			sr.collectNames(resources);
-		}
+		if (!Algorithms.isEmpty(route)) {
+			for (RouteSegmentResult sr : route) {
+				sr.collectTypes(resources);
+			}
+			for (RouteSegmentResult sr : route) {
+				sr.collectNames(resources);
+			}
 
-		List<StringBundle> routeItems = new ArrayList<>();
-		for (RouteSegmentResult sr : route) {
-			RouteDataBundle itemBundle = new RouteDataBundle(resources);
-			sr.writeToBundle(itemBundle);
-			routeItems.add(itemBundle);
+			List<StringBundle> routeItems = new ArrayList<>();
+			for (RouteSegmentResult sr : route) {
+				RouteDataBundle itemBundle = new RouteDataBundle(resources);
+				sr.writeToBundle(itemBundle);
+				routeItems.add(itemBundle);
+			}
+			bundle.putBundleList("route", "segment", routeItems);
 		}
-		bundle.putBundleList("route", "segment", routeItems);
 
 		List<StringBundle> typeList = new ArrayList<>();
 		Map<RouteTypeRule, Integer> rules = resources.getRules();
