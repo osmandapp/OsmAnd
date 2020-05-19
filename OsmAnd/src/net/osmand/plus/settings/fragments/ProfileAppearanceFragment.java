@@ -41,7 +41,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
-import net.osmand.plus.SettingsHelper;
+import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.profiles.LocationIcon;

@@ -13,9 +13,10 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandSettings.AngularConstants;
-import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.OsmandSettings.SpeedConstants;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.AngularConstants;
+import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
+import net.osmand.plus.settings.backend.OsmandSettings.SpeedConstants;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormatSymbols;

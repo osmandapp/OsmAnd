@@ -21,7 +21,7 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -33,7 +33,7 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 
 import java.util.Set;
 
-import static net.osmand.plus.OsmandSettings.VOICE_PROVIDER_NOT_USE;
+import static net.osmand.plus.settings.backend.OsmandSettings.VOICE_PROVIDER_NOT_USE;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.activities.SettingsNavigationActivity.MORE_VALUE;
 

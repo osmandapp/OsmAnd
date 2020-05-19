@@ -38,8 +38,8 @@ import net.osmand.plus.activities.SettingsBaseActivity;
 
 import java.util.Map;
 
-import static net.osmand.plus.OsmandSettings.MONTHLY_DIRECTORY;
-import static net.osmand.plus.OsmandSettings.REC_DIRECTORY;
+import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
+import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
 
 public class SettingsMonitoringActivity extends SettingsBaseActivity {
 

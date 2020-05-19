@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.notifications.OsmandNotification;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class NavigationService extends Service implements LocationListener {
 

@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.settings.backend;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,10 +20,17 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
+import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.CustomOsmandPlugin.SuggestedDownloadItem;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.CustomRegion;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;

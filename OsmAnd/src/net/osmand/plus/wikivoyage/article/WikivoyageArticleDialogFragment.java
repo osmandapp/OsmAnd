@@ -30,7 +30,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
@@ -49,7 +49,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.osmand.plus.OsmandSettings.WikiArticleShowImages.OFF;
+import static net.osmand.plus.settings.backend.OsmandSettings.WikiArticleShowImages.OFF;
 
 
 public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragment {

@@ -30,6 +30,7 @@ import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 

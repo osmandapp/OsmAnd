@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.settings.backend;
 
 
 import android.annotation.SuppressLint;
@@ -36,8 +36,13 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
+import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.api.SettingsAPI;

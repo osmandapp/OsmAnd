@@ -14,7 +14,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;

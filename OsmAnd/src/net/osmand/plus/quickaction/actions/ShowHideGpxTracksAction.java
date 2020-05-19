@@ -4,19 +4,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.IndexConstants;
+
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 

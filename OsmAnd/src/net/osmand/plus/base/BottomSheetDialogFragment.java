@@ -18,7 +18,7 @@ import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 
 public abstract class BottomSheetDialogFragment extends DialogFragment {

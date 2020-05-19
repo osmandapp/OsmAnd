@@ -41,7 +41,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
