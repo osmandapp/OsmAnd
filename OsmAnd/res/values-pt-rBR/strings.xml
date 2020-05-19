@@ -578,7 +578,7 @@
     <string name="route_descr_destination">Destino</string>
     <string name="route_to">Para:</string>
     <string name="clear_dest_confirm">Confirma que deseja remover o destino (inclusive os intermediários)?</string>
-    <string name="av_settings">"Configurar áudio/vídeo "</string>
+    <string name="av_settings">Configurar áudio/vídeo</string>
     <string name="route_via">Via:</string>
     <string name="route_from">De:</string>
     <string name="settings_preset">Perfil predefinido</string>
@@ -1208,8 +1208,7 @@ Pôr do Sol: %2$s</string>
     <string name="install_more">Instalar mais…</string>
     <string name="level_to_switch_vector_raster_descr">Use mapas raster para qualquer coisa além desse nível.</string>
     <string name="level_to_switch_vector_raster">Mínimo nível de zoom vetorial</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>OSM on-line</u> classificação de mapa com imagens.</string>
+    <string name="create_poi_link_to_osm_doc"><u>OSM on-line</u> classificação de mapa com imagens.</string>
     <string name="error_doing_search">Não foi possível realizar a pesquisa off-line.</string>
     <string name="system_locale">Sistema</string>
     <string name="preferred_locale_descr">Idioma de exibição do aplicativo (usado após o reinício do OsmAnd).</string>
@@ -2290,7 +2289,7 @@ Pôr do Sol: %2$s</string>
     <string name="upload_osm_note_description">Envie sua Nota OSM anonimamente ou através do seu perfil do OpenStreetMap.org.</string>
     <string name="trip_rec_notification_settings_desc">Exibir uma notificação do sistema permitindo a gravação de viagem.</string>
     <string name="christmas_desc">Antecipando os feriados de Natal e ano novo, você pode optar por exibir POIs relacionados ao Natal, como árvores de Natal, mercados, etc.</string>
-    <string name="osm_live_payment_desc">Assinatura cobrada mensalmente. Pode ser cancelada no Google Play a qualquer momento.</string>
+    <string name="osm_live_payment_desc">Assinatura cobrada por período selecionado. Cancele-o no Google Play a qualquer momento.</string>
     <string name="donation_to_osm_desc">Parte da sua doação é enviada aos colaboradores do OSM. O custo da assinatura permanece o mesmo.</string>
     <string name="osm_live_subscription_desc">A assinatura permite atualizações a cada hora, diariamente e semanais, e downloads ilimitados para todos os mapas globalmente.</string>
     <string name="get_it">Adquira já</string>
@@ -3410,7 +3409,7 @@ Pôr do Sol: %2$s</string>
     <string name="choose_icon_color_name">Ícone, cor e nome</string>
     <string name="reorder_profiles">Editar lista de perfil</string>
     <string name="selected_profile">Perfil selecionado</string>
-    <string name="reset_confirmation_descr">Tocar em %1$s descartará todas as suas alterações.</string>
+    <string name="reset_confirmation_descr">Tocar em %1$s descarta todas as suas alterações.</string>
     <string name="reset_all_profile_settings_descr">Redefina todas as configurações de perfil para os padrões de instalação.</string>
     <string name="reset_all_profile_settings">Redefinir todas as configurações de perfil\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
@@ -3479,7 +3478,7 @@ Pôr do Sol: %2$s</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Pôr do sol em %1$s</string>
     <string name="sunrise_at">Nascer do sol em %1$s</string>
-    <string name="accessibility_mode_disabled">Modo de acessibilidade desativado em seu sistema.</string>
+    <string name="accessibility_mode_disabled">Modo de acessibilidade desativado no seu Android.</string>
     <string name="reset_to_default_category_button_promo">Redefinir como padrão redefinirá a ordem de classificação para o estado padrão após a instalação.</string>
     <string name="use_system_screen_timeout">Usar tempo limite da tela do sistema</string>
     <string name="use_system_screen_timeout_promo">Desabilitada por padrão, se OsmAnd estiver sendo executado em primeiro plano, a tela não atingirá o tempo limite.
@@ -3524,11 +3523,11 @@ Pôr do Sol: %2$s</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Roteamento</string>
     <string name="shared_string_include_data">Incluir dados adicionais</string>
-    <string name="import_profile_dialog_description">O perfil importado contém dados adicionais. Clique em Importar para importar apenas dados do perfil ou selecione dados adicionais a serem importados.</string>
+    <string name="import_profile_dialog_description">O perfil importado contém dados adicionais. Clique em \"Importar\" para importar apenas dados do perfil ou selecione dados adicionais.</string>
     <string name="export_profile_dialog_description">Você pode selecionar dados adicionais para exportar junto com o perfil.</string>
     <string name="index_name_antarctica">Antártida</string>
     <string name="shared_string_app_default_w_val">Aplicativo padrão (%s)</string>
-    <string name="no_recalculation_setting">Desativar recálculo</string>
+    <string name="no_recalculation_setting">Sem recálculo</string>
     <string name="route_recalculation_dist_title">Distância mínima para recalcular a rota</string>
     <string name="route_recalculation_dist_descr">A rota será recalculada se a distância até a rota for maior que o parâmetro especificado</string>
     <string name="profile_type_custom_string">Perfil personalizado</string>
@@ -3583,7 +3582,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_hillshade">Sombras de relevo</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Encostas</string>
-    <string name="quick_action_show_hide_terrain">Mostrar/ocultar terreno</string>
+    <string name="quick_action_show_hide_terrain">Mostrar / ocultar terreno</string>
     <string name="quick_action_terrain_hide">Ocultar terreno</string>
     <string name="quick_action_terrain_show">Mostrar terreno</string>
     <string name="quick_action_terrain_descr">Um botão para mostrar ou ocultar a camada do terreno no mapa.</string>
@@ -3608,9 +3607,9 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_language">Idioma</string>
     <string name="shared_string_all_languages">Todos os idiomas</string>
     <string name="wiki_menu_download_descr">Mapas adicionais são necessários para visualizar os POIs da Wikipédia no mapa.</string>
-    <string name="ui_customization_description">Personalize a quantidade de itens na gaveta, configure o mapa e o menu de contexto.
-\n
-\nVocê pode desativar os plugins não utilizados para ocultar todos os controles do aplicativo %1$s.</string>
+    <string name="ui_customization_description">Personalize a quantidade de itens na \"gaveta\", \"configure o mapa\" e o \"menu de contexto\". 
+\n 
+\nDesative plugins não utilizados para ocultar todos os seus controles. %1$s.</string>
     <string name="ui_customization_short_descr">Itens da gaveta, menu de contexto</string>
     <string name="ui_customization">Personalização da interface do usuário</string>
     <string name="shared_string_drawer">Gaveta</string>
@@ -3621,7 +3620,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_hidden">Escondido</string>
     <string name="hidden_items_descr">Esses itens estão ocultos no menu, mas as opções ou plug-ins representados continuarão funcionando.</string>
     <string name="reset_items_descr">Ocultar configurações redefine-as para o estado original.</string>
-    <string name="main_actions_descr">\'Ações principais\' contém apenas 4 botões.</string>
+    <string name="main_actions_descr">Só tem quatro botões.</string>
     <string name="main_actions">Principais ações</string>
     <string name="move_inside_category">Você pode mover itens somente dentro desta categoria.</string>
     <string name="developer_plugin">Plugin do desenvolvedor</string>
@@ -3665,7 +3664,7 @@ Pôr do Sol: %2$s</string>
 \n
 \n  Você pode gerenciar e cancelar suas assinaturas acessando as configurações do Google Play.</string>
     <string name="search_poi_types">Pesquisar tipos de POI</string>
-    <string name="search_poi_types_descr">Combine tipos de PIs de diferentes categorias. Toque em \"Alternar\" para selecionar todos, toque no lado esquerdo para selecionar a categoria.</string>
+    <string name="search_poi_types_descr">Combine tipos de POI de diferentes categorias. Tocar em \"Alternar\" seleciona tudo e o lado esquerdo seleciona a categoria.</string>
     <string name="tracker_item">Rastreador do OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Ação rápida</string>
@@ -3676,40 +3675,41 @@ Pôr do Sol: %2$s</string>
     <string name="favorites_item">Favoritos</string>
     <string name="subscription_osmandlive_item">Assinatura - OsmAnd Live</string>
     <string name="osmand_purchases_item">Compras no OsmAnd</string>
-    <string name="legend_item_description">O guia para a simbologia de um mapa</string>
+    <string name="legend_item_description">O guia para a simbologia de um mapa.</string>
     <string name="navigation_profiles_item">Perfis de navegação</string>
-    <string name="release_3_7">• Novos mapas de inclinação offline
-\n
-\n  • Personalização completa de Favoritos e Waypoints GPX - cores, ícones e formas personalizados
-\n
-\n  • Personalize a ordem dos itens no menu de contexto, configurar mapa, gaveta
-\n
-\n  • Wikipédia como uma camada separada no mapa Configurar, selecione apenas os idiomas necessários
-\n
-\n  • Crie seu próprio filtro / mapa de POI com total flexibilidade
-\n
-\n  • Adicionadas opções para restaurar configurações de perfis personalizados
-\n
-\n  • Rotas GPX completas das faixas de tráfego da Navigation Support e instruções completas de curva
-\n
-\n  • Corrigir tamanhos de interface do usuário em tablets
-\n
+    <string name="release_3_7">• Novos mapas de inclinação offline 
+\n 
+\n  • Personalização completa de Favoritos e Waypoints GPX - cores, ícones e formas personalizados 
+\n 
+\n  • Personalize a ordem dos itens no menu de contexto, configurar mapa, gaveta 
+\n 
+\n  • Wikipédia como uma camada separada no mapa Configurar, selecione apenas os idiomas necessários 
+\n 
+\n  • Crie seu próprio filtro / mapa de POI com total flexibilidade 
+\n 
+\n  • Adicionadas opções para restaurar configurações de perfis personalizados 
+\n 
+\n  • Rotas GPX completas das faixas de tráfego da Navigation Support e instruções completas de curva 
+\n 
+\n  • Corrigir tamanhos de interface do usuário em tablets 
+\n 
 \n  • Corrija bugs com RTL
 \n
 \n</string>
     <string name="additional_actions_descr">Você pode acessar essas ações tocando no botão “%1$s”.</string>
     <string name="quick_action_transport_hide">Ocultar transporte público</string>
     <string name="quick_action_transport_show">Mostrar transporte público</string>
-    <string name="quick_action_show_hide_transport">Mostrar/ocultar transporte público</string>
-    <string name="quick_action_transport_descr">Um botão para mostrar ou ocultar o transporte público no mapa.</string>
-    <string name="create_edit_poi">Criar/Editar POI</string>
+    <string name="quick_action_show_hide_transport">Mostrar / ocultar transporte público</string>
+    <string name="quick_action_transport_descr">Botão que mostra ou oculta o transporte público no mapa.</string>
+    <string name="create_edit_poi">Criar / Editar POI</string>
     <string name="parking_positions">Posições de estacionamento</string>
     <string name="add_edit_favorite">Adicionar / Editar favorito</string>
     <string name="reset_deafult_order">Restaurar ordem de itens padrão</string>
     <string name="back_to_editing">Voltar à edição</string>
     <string name="shared_string_resume">Retomar</string>
-    <string name="quick_action_switch_profile_descr">Tocar no botão de ação alterna entre os perfis selecionados.</string>
+    <string name="quick_action_switch_profile_descr">O botão de ação alterna entre os perfis selecionados.</string>
     <string name="shared_string_add_profile">Adicionar perfil</string>
     <string name="change_application_profile">Alterar perfil do aplicativo</string>
-    <string name="profiles_for_action_not_found">Perfis selecionados para esta ação não encontrados.</string>
+    <string name="profiles_for_action_not_found">Não foi possível encontrar nenhum desses perfis.</string>
+    <string name="index_item_world_basemap_detailed">Mapa geral do mundo (detalhado)</string>
 </resources>
