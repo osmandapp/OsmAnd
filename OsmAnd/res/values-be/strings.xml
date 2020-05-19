@@ -3619,4 +3619,5 @@
     <string name="index_item_world_basemap_detailed">Аглядная мапа свету (падрабязная)</string>
     <string name="quick_action_transport_hide">Схаваць грамадскі транспарт</string>
     <string name="quick_action_show_hide_transport">Паказаць/схаваць грамадскі транспарт</string>
+    <string name="recalculate_route_in_deviation">Пералічыць маршрут у выпадку адхілення</string>
 </resources>
