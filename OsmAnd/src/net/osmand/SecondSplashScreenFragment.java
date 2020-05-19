@@ -98,7 +98,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		RelativeLayout.LayoutParams logoLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		if (isSmartphone()) {
 			logoLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-			logoLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+			logoLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 		} else {
 			logoLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 		}

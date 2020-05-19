@@ -282,10 +282,15 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     }
 
 	private void updateQuickActionButton(boolean widgetVisible) {
-		quickActionButton.setImageDrawable(app.getUIUtilities().getMapIcon(
+        quickActionButton.setBackgroundResource(
+                nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle_trans);
+        int btnSizePx = quickActionButton.getLayoutParams().height;
+        int iconSizePx = (int) quickActionButton.getContext().getResources().getDimension(R.dimen.map_widget_icon);
+        int iconPadding = (btnSizePx - iconSizePx) / 2;
+        quickActionButton.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
+        quickActionButton.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        quickActionButton.setImageDrawable(app.getUIUtilities().getMapIcon(
                 !widgetVisible ? R.drawable.map_quick_action : R.drawable.ic_action_close, !nightMode));
-		quickActionButton.setBackgroundResource(
-				nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle_trans);
 		quickActionButton.setContentDescription(mapActivity.getString(!widgetVisible ? R.string.configure_screen_quick_action : R.string.shared_string_cancel));
 	}
 
