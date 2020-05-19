@@ -616,7 +616,7 @@
     <string name="update_poi_is_not_available_for_zoom">התקרבות למפה מאפשר עדכון נקודות עניין</string>
     <string name="context_menu_item_update_poi">עדכון נ״ע</string>
     <string name="context_menu_item_update_map_confirm">לעדכן את הנתונים המקומיים שלך מהאינטרנט?</string>
-    <string name="search_history_city">עיר:\n {0}</string>
+    <string name="search_history_city">עיר: {0}</string>
     <string name="background_service_provider_descr">שיטת מיקום לשימוש על ידי שירות הרקע:</string>
     <string name="background_service_provider">ספק מיקום</string>
     <string name="background_router_service_descr">מעקב אחר המיקום שלך כשהמסך כבוי.</string>
@@ -830,7 +830,7 @@
     <string name="edit_filter_delete_message">המסנן ‚%1$s’ נמחק</string>
     <string name="edit_filter_create_message">המסנן ‚%1$s’ נוצר</string>
     <string name="email">דוא״ל</string>
-    <string name="search_history_street">רחוב:\n {0}, {1}</string>
+    <string name="search_history_street">רחוב: {0}, {1}</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+‎ ‏(OSM הכוונת ניווט אוטומטית)
 \n
 \n OsmAnd+‎ הנו יישום ניווט בקוד פתוח עם גישה למגוון רחב של נתוני OSM. ניתן לשמור את כל נתוני המפה על כרטיס הזיכרון של הטלפון לצורך שימוש ללא אינטרנט. OsmAnd מציעה גם תכונת טוויית מסלול הפועלת עם וללא אינטרנט וכוללת הנחייה קולית לכל פנייה ופנייה. 
@@ -2383,10 +2383,11 @@
     <string name="routing_attr_avoid_motorway_name">ללא כבישים סלולים</string>
     <string name="routing_attr_avoid_motorway_description">נמנע מכבישים סלולים</string>
     <string name="interrupt_music_descr">הנחיות קוליות משהות מוזיקה שברקע.</string>
-    <string name="osmand_extended_description_part7">תרומה ל־OSM
-\n • דיווח על תקלה בנתונים
-\n • העלאת מסלולי GPX ישירות מהיישומון אל OSM
-\n • הוספת נקודות עניין והעלאה ישירה שלהן ל־OSM (או לאחר מכן אם אין חיבור)</string>
+    <string name="osmand_extended_description_part7">תרומה ל־OSM 
+\n • דיווח על תקלה בנתונים 
+\n • העלאת מסלולי GPX ישירות מהיישומון אל OSM 
+\n • הוספת נקודות עניין והעלאה ישירה שלהן ל־OSM (או לאחר מכן אם אין חיבור)
+\n</string>
     <string name="arrival_distance_descr">כמה לפני המועד ברצונך להיוודע על הגעה ליעד?</string>
     <string name="live_monitoring_max_interval_to_send">חוצץ זמן למעקב מקוון</string>
     <string name="osm_edit_removed_note">הערת OSM נמחקה</string>
@@ -2526,11 +2527,12 @@
     <string name="app_modes_choose_descr">נא לבחור את הפרופילים שיופיעו.</string>
     <string name="base_world_map">מפת בסיס עולמית</string>
     <string name="map_widget_fps_info">פרטי ניפוי שגיאות לתמונות לשנייה</string>
-    <string name="osmand_plus_extended_description_part5">תכונות בטיחות
-\n • החלפה אוטומטית בין מצבי יום/לילה לבחירתך
-\n • הצגת מגבלת מהירות כרשות, עם תזכורת במקרה של חריגה
-\n • תקריב תלוי מהירות
-\n • שיתוף המיקום שלך כדי שחברים יוכלו למצוא אותך</string>
+    <string name="osmand_plus_extended_description_part5">תכונות בטיחות 
+\n • החלפה אוטומטית בין מצבי יום/לילה לבחירתך 
+\n • הצגת מגבלת מהירות כרשות, עם תזכורת במקרה של חריגה 
+\n • תקריב תלוי מהירות 
+\n • שיתוף המיקום שלך כדי שחברים יוכלו למצוא אותך
+\n</string>
     <string name="osmand_plus_extended_description_part6">תכונות אופניים והולכי רגל
 \n • הצגת נתיבי הליכה ברגל, טיפוס הרים ואופניים, נהדר לפעילויות חוץ
 \n • מצבי ניווט ותצוגה מיוחדים לאופניים ולהולכי רגל
@@ -2565,14 +2567,15 @@
     <string name="images_cache">זיכרון מטמון תמונות</string>
     <string name="delete_search_history">מחיקת היסטוריית חיפוש</string>
     <string name="show_images">הצגת תמונות</string>
-    <string name="osmand_extended_description_part3">מפה 
+    <string name="osmand_extended_description_part3">מפה
 \n • הצגת נקודות עניין מסביבך 
 \n • התאמת המפה לכיוון התנועה שלך (או המצפן) 
 \n • הצגת המיקום שלך וכיוון המבט שלך 
 \n • שיתוף המיקום שלך כדי שחברים יוכלו למצוא אותך 
 \n • שמירה על המקומות החשובים ביותר ב‚מועדפים’ 
 \n • בחירה איך להציג שמות במפה: באנגלית, השם המקומי או איות לפי צליל 
-\n • הצגת אריחים מקוונים מיוחדים, תצוגת לוויין (מ־Bing), שכבות על נוספות כגון מסלולי GPX לסיור/ניווט ושכבות נוספות עם שקיפות מתכווננת</string>
+\n • הצגת אריחים מקוונים מיוחדים, תצוגת לוויין (מ־Bing), שכבות על נוספות כגון מסלולי GPX לסיור/ניווט ושכבות נוספות עם שקיפות מתכווננת
+\n</string>
     <string name="shared_string_dont">לא לעשות</string>
     <string name="shared_string_do">לעשות</string>
     <string name="shared_string_only_with_wifi">רק עם רשת אלחוטית</string>
@@ -2705,13 +2708,15 @@
     <string name="wiki_article_not_found">הערך לא נמצא</string>
     <string name="how_to_open_wiki_title">כיצד לפתוח ערכים בוויקיפדיה?</string>
     <string name="plugin_touringview_descr">הפעלת תצוגה זו משנה את סגנון המפה של OsmAnd ל‚תצוגת סיור’, מדובר בתצוגה מיוחדת עם פרטים רבים למטיילים ולנהגים מקצועיים. 
-\n
+\n 
 \nתצוגה זו מספקת, בכל רמת תקריב שהיא, את כמות הפרטים המרבית לצורך הטיול בנתוני המפה (בעיקר דרכים, מסילות, מסלולים וצייני כיוון). 
 \n
+\nהיא גם מציינת את כל סוגי הדרכים באופן מובחן באמצעות קוד צבע שעשוי להיות מאוד שימוש כאשר נוהגים בכלי רכב גדולים למשל.
+\n 
 \nהתצוגה גם מספקת אפשרויות סיור מיוחדות כגון הצגת מסלולי אופניים או מסלולי הרים אלפינים. 
-\n
+\n 
 \nלא נדרשת הורדה של מפה מיוחדת, התצוגה נוצרת מהמפות הרגילות שלנו. 
-\n
+\n 
 \nניתן לצאת מתצוגה זו על ידי השבתתה או על ידי שינוי ‚סגנון המפה’ תחת ‚הגדרת המפה’ כרצונך.</string>
     <string name="rendering_attr_alpineHiking_name">דרגות קושי בטיפוס (SAC - מועדון האלפים השווייצרי)</string>
     <string name="rendering_attr_alpineHiking_description">עיבוד מסלולים לפי מדד מועדון האלפים השווייצרי (SAC).</string>
@@ -3724,4 +3729,5 @@
     <string name="shared_string_add_profile">הוספת פרופיל</string>
     <string name="change_application_profile">החלפת פרופיל יישומון</string>
     <string name="profiles_for_action_not_found">הפרופיל שנבחרו לפעולה הזאת לא נמצאו.</string>
+    <string name="index_item_world_basemap_detailed">מפת סקירת העולם (מפורטת)</string>
 </resources>
