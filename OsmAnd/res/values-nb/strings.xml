@@ -2759,7 +2759,7 @@
     <string name="nautical_render_descr">Nautisk navigasjonsstil. Har bøyer, fyr, vannveier, skipsleder og merker, havner, sjømerketjenester, dybdekonturer.</string>
     <string name="ski_map_render_descr">Skistil. Har bakker, heiser og andre skifunksjoner osv. Demper sekundære kartobjekter.</string>
     <string name="light_rs_render_descr">Enkel kjørestil. Skånsomt nattmodus. Koter, kontrasterende oransje veier, dempede sekundære kartobjekter.</string>
-    <string name="topo_render_descr">For turgåing, vandring og sykling i naturen. Lesbar utendørs. Kontrasterende veier og naturlige objekter, forskjellige rutetyper, koter med avanserte innstillinger, flere detaljer. Overflatevalg muliggjør skjelning av veikvalitet. Inget nattmodus.</string>
+    <string name="topo_render_descr">For turgåing, vandring og sykling i naturen. Lesbar utendørs. Kontrasterende veier og naturlige objekter, forskjellige rutetyper, avanserte kotealternativer, flere detaljer. Justering av overflate gjør det mulig å skjelne veikvalitet. Ingen nattmodus.</string>
     <string name="mapnik_render_descr">Gammel forvalgt \'Mapnik\'-stil. Lignende farger som \"Mapnik\".</string>
     <string name="touring_view_render_descr">Høydetaljert kontraststil for turformål. Alle innstillingsmulighetene til forvalgsstilen med så høy detaljvisning som mulig, i særdeleshet veier, stier og andre måter å reise på. Klar \"reiseatlas\"-forskjell mellom alle ulike typer veier. Egnet for utendørs bruk, dag- og nattmodus.</string>
     <string name="default_render_descr">Stil for generell bruk. Renere opptegning i tett befolkede byer. Har koter, ruter, overflatekvalitet, tilgangsbegrensninger, veinummer, stiopptegning i henhold til SAC-skala, raftingsfunksjoner.</string>
