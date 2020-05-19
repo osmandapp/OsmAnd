@@ -89,14 +89,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:completionThreshold="1"
-                    android:drawableTint="@color/osmand_orange"
-                    android:drawableRight="@drawable/ic_action_arrow_drop_down"
+                    osmand:drawableTint="@color/osmand_orange"
+                    osmand:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
+                    osmand:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
                     android:hint="@string/poi_dialog_poi_type"
                     android:imeOptions="actionSend"
                     android:inputType="text"
                     android:layout_marginLeft="-4dp"
                     tools:text="@string/lorem_ipsum"
-	                android:drawableEnd="@drawable/ic_action_arrow_drop_down"
 	                android:layout_marginStart="-4dp" />
 
             </com.google.android.material.textfield.TextInputLayout>

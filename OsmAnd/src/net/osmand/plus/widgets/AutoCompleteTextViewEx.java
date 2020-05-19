@@ -7,7 +7,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.AutoCompleteTextView;
 
-public class AutoCompleteTextViewEx extends AutoCompleteTextView {
+public class AutoCompleteTextViewEx extends androidx.appcompat.widget.AppCompatAutoCompleteTextView {
 	public AutoCompleteTextViewEx(Context context) {
 		super(context);
 	}
@@ -18,12 +18,6 @@ public class AutoCompleteTextViewEx extends AutoCompleteTextView {
 
 	public AutoCompleteTextViewEx(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-	}
-
-	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
-	public AutoCompleteTextViewEx(Context context, AttributeSet attrs, int defStyleAttr,
-								  int defStyleRes) {
-		super(context, attrs, defStyleAttr, defStyleRes);
 	}
 
 	@Override
