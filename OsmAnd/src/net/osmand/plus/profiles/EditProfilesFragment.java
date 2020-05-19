@@ -32,7 +32,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
 import java.util.ArrayList;

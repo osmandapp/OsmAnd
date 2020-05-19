@@ -313,7 +313,7 @@ public class OsmandSettings {
 		}
 	}
 
-	void migrateEnumPreferences() {
+	public void migrateEnumPreferences() {
 		for (OsmandPreference pref : registeredPreferences.values()) {
 			if (pref instanceof EnumStringPreference) {
 				EnumStringPreference enumPref = (EnumStringPreference) pref;
@@ -339,7 +339,7 @@ public class OsmandSettings {
 		}
 	}
 
-	void migrateHomeWorkParkingToFavorites() {
+	publicvoid migrateHomeWorkParkingToFavorites() {
 		FavouritesDbHelper favorites = ctx.getFavorites();
 
 		LatLon homePoint = null;
@@ -665,7 +665,7 @@ public class OsmandSettings {
 		return true;
 	}
 
-	protected ApplicationMode readApplicationMode() {
+	public ApplicationMode readApplicationMode() {
 		String s = settingsAPI.getString(globalPreferences, APPLICATION_MODE.getId(), ApplicationMode.DEFAULT.getStringKey());
 		return ApplicationMode.valueOfStringKey(s, ApplicationMode.DEFAULT);
 	}

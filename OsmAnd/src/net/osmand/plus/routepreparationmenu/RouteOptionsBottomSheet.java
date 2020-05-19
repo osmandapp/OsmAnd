@@ -46,7 +46,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRou
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.TimeConditionalRoutingItem;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.router.GeneralRouter;
 
 import java.io.File;

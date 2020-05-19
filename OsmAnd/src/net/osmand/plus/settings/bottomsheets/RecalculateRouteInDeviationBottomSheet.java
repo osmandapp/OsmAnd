@@ -27,12 +27,12 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.ApplyQueryType;
-import net.osmand.plus.settings.OnConfirmPreferenceChange;
+import net.osmand.plus.settings.fragments.ApplyQueryType;
+import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-import static net.osmand.plus.settings.RouteParametersFragment.DEFAULT_MODE;
-import static net.osmand.plus.settings.RouteParametersFragment.DISABLE_MODE;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.DEFAULT_MODE;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.DISABLE_MODE;
 
 public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBottomSheet {
 

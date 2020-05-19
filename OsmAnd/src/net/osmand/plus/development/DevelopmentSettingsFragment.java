@@ -9,7 +9,7 @@ import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.util.SunriseSunset;
 

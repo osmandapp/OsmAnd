@@ -18,14 +18,14 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.BaseSettingsFragment;
-import net.osmand.plus.settings.DataStorageMenuItem;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.DataStorageMenuItem;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 
-import static net.osmand.plus.settings.DataStorageHelper.MANUALLY_SPECIFIED;
+import static net.osmand.plus.settings.fragments.DataStorageHelper.MANUALLY_SPECIFIED;
 
 public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 
