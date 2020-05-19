@@ -95,12 +95,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:completionThreshold="1"
-                        android:drawableRight="@drawable/ic_action_arrow_drop_down"
+                        app:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
+                        app:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
                         android:importantForAutofill="noExcludeDescendants"
                         android:imeOptions="actionSend"
                         android:inputType="text"
-                        tools:text="@string/lorem_ipsum"
-                        android:drawableEnd="@drawable/ic_action_arrow_drop_down" />
+                        tools:text="@string/lorem_ipsum" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
