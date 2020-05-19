@@ -28,16 +28,16 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
@@ -529,10 +529,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			if ("ele".equals(key)) {
 				try {
 					float distance = Float.parseFloat(vl);
+					vl = OsmAndFormatter.getFormattedDistance(distance, app, true, metricSystem);
 					Map<MetricsConstants, String> distanceData = OsmAndFormatter.getDistanceData(app, distance);
-					MetricsConstants currentFormat = app.getSettings().METRIC_SYSTEM.get();
-					vl = OsmAndFormatter.getFormattedDistance(distance, app, true, currentFormat);
-					collapsableView = getDistanceCollapsableView(distanceData);
+					collapsableView = getDistanceCollapsableView(new LinkedHashSet<>(distanceData.values()));
 					collapsable = true;
 				} catch (NumberFormatException ex) {
 					LOG.error(ex);
@@ -654,7 +653,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildAmenityRow(view, info);
 		}
 
-		if (processNearstWiki() && nearestWiki.size() > 0) {
+		if (processNearestWiki() && nearestWiki.size() > 0) {
 			AmenityInfoRow wikiInfo = new AmenityInfoRow(
 					"nearest_wiki", R.drawable.ic_plugin_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size() + ")", true,
 					getCollapsableWikiView(view.getContext(), true),
