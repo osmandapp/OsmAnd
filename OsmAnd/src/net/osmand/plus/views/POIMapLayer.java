@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.text.util.Linkify;
 import android.util.TypedValue;
@@ -65,6 +66,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private Bitmap poiBackground;
 	private Bitmap poiBackgroundSmall;
 	private PorterDuffColorFilter poiColorFilter;
+	private float textScale;
 	private int poiSize;
 
 	private OsmandMapTileView view;
@@ -84,6 +86,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		routingHelper = activity.getRoutingHelper();
 		routingHelper.addListener(this);
 		app = activity.getMyApplication();
+		textScale = app.getSettings().TEXT_SCALE.get();
 		data = new OsmandMapLayer.MapLayerData<List<Amenity>>() {
 
 			Set<PoiUIFilter> calculatedFilters;
@@ -220,7 +223,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				data.queryNewData(tileBox);
 				objects = data.getResults();
 				if (objects != null) {
-					float iconSize = poiBackground.getWidth() * 3 / 2;
+					textScale = app.getSettings().TEXT_SCALE.get();
+					float iconSize = poiBackground.getWidth() * 3 / 2 * textScale;
 					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 					WaypointHelper wph = app.getWaypointHelper();
 
@@ -233,7 +237,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						if (tileBox.containsPoint(x, y, iconSize)) {
 							if (intersects(boundIntersections, x, y, iconSize, iconSize) ||
 									(app.getSettings().SHOW_NEARBY_POI.get() && wph.isRouteCalculated() && !wph.isAmenityNoPassed(o))) {
-								canvas.drawBitmap(poiBackgroundSmall, x - poiBackgroundSmall.getWidth() / 2, y - poiBackgroundSmall.getHeight() / 2, paintIconBackground);
+								float scaledWidth = poiBackgroundSmall.getWidth() * textScale;
+								float scaledHeight = poiBackgroundSmall.getHeight() * textScale;
+								RectF rct = new RectF(0, 0, scaledWidth, scaledHeight);
+								rct.offset(x - scaledWidth / 2f, y - scaledHeight / 2f);
+								canvas.drawBitmap(poiBackgroundSmall, null, rct, paintIconBackground);
 								smallObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
 										o.getLocation().getLongitude()));
 							} else {
@@ -249,7 +257,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
 						if (tileBox.containsPoint(x, y, iconSize)) {
-							canvas.drawBitmap(poiBackground, x - poiBackground.getWidth() / 2, y - poiBackground.getHeight() / 2, paintIconBackground);
+							float scaledWidth = poiBackground.getWidth() * textScale;
+							float scaledHeight = poiBackground.getHeight() * textScale;
+							RectF rct = new RectF(0, 0, scaledWidth, scaledHeight);
+							rct.offset(x - scaledWidth / 2f, y - scaledHeight / 2f);
+							canvas.drawBitmap(poiBackground, null, rct, paintIconBackground);
 							String id = null;
 							PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
 							if (st != null) {
@@ -262,9 +274,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 							if (id != null) {
 								Drawable img = RenderingIcons.getDrawableIcon(view.getContext(), id, false);
 								if (img != null) {
+									int scaledPoiSize = (int) (poiSize * textScale);
 									canvas.save();
-									canvas.translate(x - poiSize / 2f, y - poiSize / 2f);
-									img.setBounds(0, 0, poiSize, poiSize);
+									canvas.translate(x - scaledPoiSize / 2f, y - scaledPoiSize / 2f);
+									img.setBounds(0, 0, scaledPoiSize, scaledPoiSize);
 									img.setColorFilter(poiColorFilter);
 									img.draw(canvas);
 									canvas.restore();
