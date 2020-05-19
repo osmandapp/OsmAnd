@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
 import java.io.IOException;
 import java.util.HashMap;

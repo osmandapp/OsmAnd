@@ -19,7 +19,7 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.Version;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;

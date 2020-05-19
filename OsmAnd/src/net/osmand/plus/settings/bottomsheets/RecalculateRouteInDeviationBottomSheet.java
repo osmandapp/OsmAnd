@@ -14,10 +14,10 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -27,12 +27,12 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.ApplyQueryType;
-import net.osmand.plus.settings.OnConfirmPreferenceChange;
+import net.osmand.plus.settings.fragments.ApplyQueryType;
+import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-import static net.osmand.plus.settings.RouteParametersFragment.DEFAULT_MODE;
-import static net.osmand.plus.settings.RouteParametersFragment.DISABLE_MODE;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.DEFAULT_MODE;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.DISABLE_MODE;
 
 public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBottomSheet {
 

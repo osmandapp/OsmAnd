@@ -24,7 +24,7 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;

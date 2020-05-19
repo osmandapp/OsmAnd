@@ -2,7 +2,7 @@ package net.osmand.plus.dashboard.tools;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 

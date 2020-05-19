@@ -18,7 +18,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;

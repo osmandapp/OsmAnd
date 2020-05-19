@@ -30,15 +30,15 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.AutoZoomMap;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
-import net.osmand.plus.OsmandSettings.SpeedConstants;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.AutoZoomMap;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings.SpeedConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;

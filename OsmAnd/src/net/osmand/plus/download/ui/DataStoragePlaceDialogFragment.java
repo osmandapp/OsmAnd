@@ -24,7 +24,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment;

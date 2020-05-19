@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -33,7 +33,7 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;

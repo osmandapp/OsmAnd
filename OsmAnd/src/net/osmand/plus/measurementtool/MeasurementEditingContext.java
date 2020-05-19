@@ -10,7 +10,7 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.routing.RouteCalculationParams;

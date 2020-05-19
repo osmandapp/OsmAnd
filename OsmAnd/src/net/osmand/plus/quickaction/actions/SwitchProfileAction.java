@@ -10,9 +10,9 @@ import androidx.appcompat.widget.SwitchCompat;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.SelectMultipleProfilesBottomSheet;

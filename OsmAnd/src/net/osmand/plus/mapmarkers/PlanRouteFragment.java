@@ -38,13 +38,13 @@ import net.osmand.TspAnt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -66,8 +66,8 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
-import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
+import static net.osmand.plus.settings.backend.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
+import static net.osmand.plus.settings.backend.OsmandSettings.MIDDLE_TOP_CONSTANT;
 
 public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocationListener {
 

@@ -13,10 +13,10 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

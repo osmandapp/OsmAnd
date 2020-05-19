@@ -7,7 +7,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;

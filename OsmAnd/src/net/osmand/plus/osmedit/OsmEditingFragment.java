@@ -13,13 +13,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.BaseSettingsFragment;
-import net.osmand.plus.settings.OnPreferenceChanged;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;

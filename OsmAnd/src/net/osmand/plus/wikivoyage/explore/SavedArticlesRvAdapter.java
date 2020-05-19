@@ -18,7 +18,7 @@ import com.squareup.picasso.RequestCreator;
 
 import net.osmand.PicassoUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;

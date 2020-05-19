@@ -12,14 +12,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.osmedit.SettingsOsmEditingActivity;
-import net.osmand.plus.settings.OnPreferenceChanged;
+import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 
 public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 

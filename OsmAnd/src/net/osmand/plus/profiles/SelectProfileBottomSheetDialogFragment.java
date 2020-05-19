@@ -29,9 +29,9 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.MainSettingsFragment;
-import net.osmand.plus.settings.NavigationFragment;
-import net.osmand.plus.settings.ProfileAppearanceFragment;
+import net.osmand.plus.settings.fragments.MainSettingsFragment;
+import net.osmand.plus.settings.fragments.NavigationFragment;
+import net.osmand.plus.settings.fragments.ProfileAppearanceFragment;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.router.RoutingConfiguration;
 

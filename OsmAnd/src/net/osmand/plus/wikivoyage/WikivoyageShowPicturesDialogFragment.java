@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings.WikiArticleShowImages;
+import net.osmand.plus.settings.backend.OsmandSettings.WikiArticleShowImages;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;

@@ -34,7 +34,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings.NotesSortByMode;
+import net.osmand.plus.settings.backend.OsmandSettings.NotesSortByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;

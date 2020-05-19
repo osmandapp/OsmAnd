@@ -36,8 +36,11 @@ import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.OsmandSettings.ContextMenuItemsPreference;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.ContextMenuItemsPreference;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

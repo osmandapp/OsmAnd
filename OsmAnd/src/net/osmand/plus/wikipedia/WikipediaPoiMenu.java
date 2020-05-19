@@ -1,17 +1,16 @@
 package net.osmand.plus.wikipedia;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;

@@ -14,7 +14,7 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings.TerrainMode;
+import net.osmand.plus.settings.backend.OsmandSettings.TerrainMode;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -31,7 +31,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 
-import static net.osmand.plus.OsmandSettings.TerrainMode.HILLSHADE;
+import static net.osmand.plus.settings.backend.OsmandSettings.TerrainMode.HILLSHADE;
 
 public class TerrainLayer extends MapTileLayer {
 

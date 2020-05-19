@@ -3538,4 +3538,7 @@
     <string name="add_edit_favorite">Дадаць / рэдагаваць улюбёнае</string>
     <string name="reset_deafult_order">Аднавіць прадвызначаны парадак элементаў</string>
     <string name="back_to_editing">Вярнуцца да рэдагавання</string>
+    <string name="quick_action_transport_show">Паказаць грамадскі транспарт</string>
+    <string name="quick_action_transport_descr">Кнопка, каб паказаць ці схаваць грамадскі транспарт на карце.</string>
+    <string name="shared_string_add_profile">Дадаць профіль</string>
 </resources>

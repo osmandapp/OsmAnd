@@ -8,10 +8,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.DialogPreference.TargetFragment;
 import androidx.preference.Preference;
 
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.settings.ApplyQueryType;
+import net.osmand.plus.settings.fragments.ApplyQueryType;
 
 import java.util.List;
 

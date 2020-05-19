@@ -3,7 +3,7 @@ package net.osmand.plus.wikivoyage;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.RequestCreator;
 
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class WikivoyageUtils {
 

@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

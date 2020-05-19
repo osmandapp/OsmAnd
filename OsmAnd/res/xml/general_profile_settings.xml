@@ -53,7 +53,7 @@
 		android:key="coordinates_format"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/coords_format"
-		app:fragment="net.osmand.plus.settings.CoordinatesFormatFragment" />
+		app:fragment="net.osmand.plus.settings.fragments.CoordinatesFormatFragment" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="angular_measurement"

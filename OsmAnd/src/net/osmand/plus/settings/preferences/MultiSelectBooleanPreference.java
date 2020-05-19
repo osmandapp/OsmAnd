@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.PreferenceDataStore;
 
-import net.osmand.plus.OsmandSettings.PreferencesDataStore;
+import net.osmand.plus.settings.backend.OsmandSettings.PreferencesDataStore;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -8,12 +8,12 @@ import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
 public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfileMenuAdapter> extends MenuBottomSheetDialogFragment 
 		implements AbstractProfileMenuAdapter.ButtonPressedListener, AbstractProfileMenuAdapter.ProfilePressedListener {

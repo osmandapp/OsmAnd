@@ -15,15 +15,14 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.LayerTransparencySeekbarMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

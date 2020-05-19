@@ -20,7 +20,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;

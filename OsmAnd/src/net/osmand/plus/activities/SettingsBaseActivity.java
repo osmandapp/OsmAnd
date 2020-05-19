@@ -23,11 +23,11 @@ import androidx.appcompat.app.AlertDialog.Builder;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.AppProfileArrayAdapter;
 import net.osmand.plus.profiles.ProfileDataObject;

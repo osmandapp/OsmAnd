@@ -40,7 +40,7 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;

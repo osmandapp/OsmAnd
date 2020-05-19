@@ -1,6 +1,7 @@
 package net.osmand.plus.quickaction;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -30,6 +33,8 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 
 import java.util.List;
+
+import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmActionDeleteDialog;
 
 /**
  * Created by rosty on 12/27/16.
@@ -168,6 +173,32 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
                 dismiss();
             }
         });
+        if (!isNew) {
+            Menu menu = toolbar.getMenu();
+            menu.clear();
+
+            MenuItem item = menu.add(R.string.shared_string_delete).setIcon(R.drawable.ic_action_delete_dark);
+            item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    Context ctx = getContext();
+                    if (ctx != null) {
+                        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                quickActionRegistry.deleteQuickAction(action);
+                                quickActionRegistry.notifyUpdates();
+
+                                dialog.dismiss();
+                                dismiss();
+                            }
+                        };
+                        showConfirmActionDeleteDialog(ctx, action, !isLightContent, listener);
+                    }
+                    return true;
+                }
+            });
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
     }
 
     private void setupHeader(View root, Bundle savedInstanceState){

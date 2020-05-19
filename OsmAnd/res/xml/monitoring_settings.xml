@@ -109,7 +109,7 @@
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/live_monitoring"
-		app:fragment="net.osmand.plus.settings.LiveMonitoringFragment"
+		app:fragment="net.osmand.plus.settings.fragments.LiveMonitoringFragment"
 		tools:icon="@drawable/ic_world_globe_dark" />
 
 	<Preference

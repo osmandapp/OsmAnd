@@ -66,18 +66,17 @@ import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.HuaweiDrmHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OnDismissDialogFragmentListener;
-import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -135,14 +134,15 @@ import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationP
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
-import net.osmand.plus.settings.BaseSettingsFragment;
-import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.settings.ConfigureMenuItemsFragment;
-import net.osmand.plus.settings.ConfigureProfileFragment;
-import net.osmand.plus.settings.DataStorageFragment;
-import net.osmand.plus.settings.ImportCompleteFragment;
-import net.osmand.plus.settings.ImportSettingsFragment;
-import net.osmand.plus.settings.ProfileAppearanceFragment;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment;
+import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
+import net.osmand.plus.settings.fragments.DataStorageFragment;
+import net.osmand.plus.settings.fragments.ImportCompleteFragment;
+import net.osmand.plus.settings.fragments.ImportSettingsFragment;
+import net.osmand.plus.settings.fragments.ProfileAppearanceFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -173,9 +173,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.OsmandSettings.GENERIC_EXTERNAL_DEVICE;
-import static net.osmand.plus.OsmandSettings.PARROT_EXTERNAL_DEVICE;
-import static net.osmand.plus.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
+import static net.osmand.plus.settings.backend.OsmandSettings.GENERIC_EXTERNAL_DEVICE;
+import static net.osmand.plus.settings.backend.OsmandSettings.PARROT_EXTERNAL_DEVICE;
+import static net.osmand.plus.settings.backend.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -1450,6 +1450,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void updateApplicationModeSettings() {
 		changeKeyguardFlags();
 		updateMapSettings();
+		app.getPoiFilters().loadSelectedPoiFilters();
 		mapViewTrackingUtilities.updateSettings();
 		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());
 		if (mapLayers.getMapInfoLayer() != null) {

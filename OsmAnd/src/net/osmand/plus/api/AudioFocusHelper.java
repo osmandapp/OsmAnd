@@ -2,7 +2,7 @@ package net.osmand.plus.api;
 
 import android.content.Context;
 
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 public interface AudioFocusHelper {
 

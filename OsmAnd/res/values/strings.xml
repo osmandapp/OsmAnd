@@ -11,31 +11,31 @@
 	Thx - Hardy
 
 --> <string name="index_item_world_basemap_detailed">World overview map (detailed)</string>
-    <string name="profiles_for_action_not_found">Profiles selected for this action not found.</string>
-    <string name="change_application_profile">Change application profile</string>
+    <string name="profiles_for_action_not_found">Could not find any such profiles.</string>
+    <string name="change_application_profile">Change app profile</string>
     <string name="shared_string_add_profile">Add profile</string>
-    <string name="quick_action_switch_profile_descr">Taping action button will switch between selected profiles.</string>
+    <string name="quick_action_switch_profile_descr">The action button switches between selected profiles.</string>
     <string name="back_to_editing">Back to editing</string>
     <string name="reset_deafult_order">Restore default items order</string>
     <string name="add_edit_favorite">Add / Edit Favorite</string>
     <string name="parking_positions">Parking positions</string>
-    <string name="create_edit_poi">Create/Edit POI</string>
-    <string name="quick_action_transport_descr">A button to show or hide public transport on the map.</string>
-    <string name="quick_action_show_hide_transport">Show/hide public transport</string>
+    <string name="create_edit_poi">Create / Edit POI</string>
+    <string name="quick_action_transport_descr">Button showing or hiding public transport on the map.</string>
+    <string name="quick_action_show_hide_transport">Show / hide public transport</string>
     <string name="quick_action_transport_show">Show public transport</string>
     <string name="quick_action_transport_hide">Hide public transport</string>
     <string name="release_3_7">
     • New offline Slope maps\n\n
     • Full customization of Favorites and GPX Waypoints – custom colors, icons, shapes\n\n
-    • Customize items order in Context Menu, Configure Map, Drawer\n\n
+    • Customize items order in \"Context Menu\", \"Configure Map\" and \"Drawer\"\n\n
     • Wikipedia as a separate layer in Configure map, select only needed languages\n\n
-    • Create your own POI filter/maps with total flexibility\n\n
+    • Create your own POI filter / maps with total flexibility\n\n
     • Added options to restore settings for custom profiles\n\n
-    • Full GPX routes from Navigation support traffic lanes and complete turn instructions\n\n
+    • Full GPX routes from navigation support traffic lanes and complete turn instructions\n\n
     • Fix UI sizes on tablets\n\n
     • Fix bugs with RTL\n\n</string>
     <string name="navigation_profiles_item">Navigation profiles</string>
-    <string name="legend_item_description">The guide to a map\'s symbology</string>
+    <string name="legend_item_description">The guide to a map\'s symbology.</string>
     <string name="osmand_purchases_item">OsmAnd purchases</string>
     <string name="subscription_osmandlive_item">Subscription - OsmAnd Live</string>
     <string name="favorites_item">Favorites</string>
@@ -48,7 +48,7 @@
     <string name="tracker_item">OsmAnd tracker</string>
     <string name="download_unsupported_action">Unsupported action %1$s</string>
     <string name="extra_maps_menu_group">Extra maps</string>
-    <string name="search_poi_types_descr">Combine POI types from different categories. Tap \"Switch\" to select all, tap the left side for category selection.</string>
+    <string name="search_poi_types_descr">Combine POI types from different categories. Tapping \"Switch\" selects all, and the left side selects category.</string>
     <string name="search_poi_types">Search for POI types</string>
     <string name="osm_live_payment_subscription_management">Payment will be charged to your Google Play account at the confirmation of purchase.\n\n Subscription automatically renews unless it is canceled before the renewal date. Your account will be charged for renewal period(month/three month/year) only on the renewal date.\n\n You can manage and cancel your subscriptions by going to your Google Play settings.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
@@ -100,7 +100,7 @@
     <string name="move_inside_category">You can move items only inside this category.</string>
     <string name="additional_actions_descr">You can access these actions by tapping the “%1$s” button.</string>
     <string name="main_actions">Main actions</string>
-    <string name="main_actions_descr">\'Main actions\' only contains 4 buttons.</string>
+    <string name="main_actions_descr">Only has four buttons.</string>
     <string name="reset_items_descr">Hiding settings resets them to their original state.</string>
     <string name="hidden_items_descr">These items are hidden from the menu, but the represented options or plugins will continue to work.</string>
     <string name="shared_string_hidden">Hidden</string>
@@ -111,7 +111,7 @@
     <string name="shared_string_drawer">Drawer</string>
     <string name="ui_customization">UI Customization</string>
     <string name="ui_customization_short_descr">Drawer items, context menu</string>
-    <string name="ui_customization_description">Customize the quantity of items in Drawer, Configure Map and Context Menu.\n\nYou can turn off unused plugins, to hide all their controls from the application. %1$s.</string>
+    <string name="ui_customization_description">Customize the quantity of items in \"Drawer\", \"Configure Map\" and \"Context Menu\".\n\nTurn off unused plugins to hide all their controls. %1$s.</string>
     <string name="shared_string_min">Min</string>
     <string name="shared_string_square">Square</string>
     <string name="shared_string_octagon">Octagon</string>
@@ -123,7 +123,7 @@
     <string name="quick_action_terrain_descr">A button to show or hide terrain layer on the map.</string>
     <string name="quick_action_terrain_show">Show terrain</string>
     <string name="quick_action_terrain_hide">Hide terrain</string>
-    <string name="quick_action_show_hide_terrain">Show/hide terrain</string>
+    <string name="quick_action_show_hide_terrain">Show / hide terrain</string>
     <string name="download_slope_maps">Slopes</string>
     <string name="n_items_of_z">%1$s of %2$s</string>
     <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>
@@ -173,9 +173,9 @@
     <string name="import_duplicates_title">Some items already exist</string>
     <string name="select_data_to_import">Select the data to be imported.</string>
     <string name="please_provide_profile_name_message">Please provide a name for the profile</string>
-    <string name="no_recalculation_setting">Disable recalculation</string>
+    <string name="no_recalculation_setting">No recalculation</string>
     <string name="open_settings">Open settings</string>
-    <string name="plugin_disabled">Plugin disabled</string>
+    <string name="plugin_disabled">Plugin off</string>
     <string name="plugin_disabled_descr">This plugin is a separate app, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
@@ -201,7 +201,7 @@
     <string name="reset_to_default_category_button_promo">Reset to default will reset sort order to the default state after installation.</string>
     <string name="use_system_screen_timeout">Use system screen timeout</string>
     <string name="use_system_screen_timeout_promo">Disabled by default, if OsmAnd running on foreground, the screen doesn’t time out.\n\nIf enabled OsmAnd will use system timeout settings.</string>
-    <string name="accessibility_mode_disabled">Accessibility mode disabled in your system.</string>
+    <string name="accessibility_mode_disabled">Accessibility mode turned off in your Android.</string>
     <string name="rearrange_categories">Rearrange categories</string>
     <string name="create_custom_categories_list_promo">Change the sort order of the list, hide unnecessary categories. You can import or export all changes with profiles.</string>
     <string name="add_new_custom_category_button_promo">You can add a new custom category by selecting one or a few needed categories.</string>
@@ -216,7 +216,7 @@
     <string name="shared_string_routing">Routing</string>
     <string name="shared_string_rendering_style">Rendering style</string>
     <string name="shared_string_include_data">Include additional data</string>
-    <string name="import_profile_dialog_description">The imported profile contains additional data. Click Import to import only profile data or select additional data to import.</string>
+    <string name="import_profile_dialog_description">The imported profile contains additional data. Click \"Import\" to import only profile data, or select additional data.</string>
     <string name="export_profile_dialog_description">You can select additional data to export along with the profile.</string>
     <string name="permission_is_required">Permission is required to use this option.</string>
     <string name="logcat_buffer_descr">Check and share detailed logs of the app</string>
@@ -271,7 +271,7 @@
     <string name="select_map_icon_descr">Icon shown at rest.</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
-    <string name="reset_confirmation_descr">Tapping %1$s will discard all your changes.</string>
+    <string name="reset_confirmation_descr">Tapping %1$s discards all your changes.</string>
     <string name="reset_all_profile_settings_descr">Reset all profile settings to installation defaults.</string>
     <string name="reset_all_profile_settings">Reset all profile settings?</string>
     <string name="select_navigation_icon">Position icon while moving</string>
@@ -1343,7 +1343,7 @@
     <string name="delete_filter">Delete filter</string>
     <string name="new_filter">New filter</string>
     <string name="new_filter_desc">Please enter a name for the new filter, this will be added to your \'Categories\' tab.</string>
-    <string name="osm_live_payment_desc">Subscription charged per month. Cancel it on Google Play at any time.</string>
+    <string name="osm_live_payment_desc">Subscription charged per selected period. Cancel it on Google Play at any time.</string>
     <string name="donation_to_osm">Donation to the OSM community</string>
     <string name="donation_to_osm_desc">Part of your donation is sent to OSM contributors. The subscription cost remains the same.</string>
     <string name="osm_live_subscription_desc">Subscription enables hourly, daily, weekly updates, and unlimited downloads for all maps globally.</string>

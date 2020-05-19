@@ -3,8 +3,8 @@ package net.osmand.plus.audionotes;
 import android.os.Bundle;
 import android.view.View;
 
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.NotesSortByMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.NotesSortByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;

@@ -19,13 +19,11 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.NavigationFragment;
+import net.osmand.plus.settings.fragments.NavigationFragment;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet {
 

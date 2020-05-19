@@ -14,20 +14,20 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.BooleanPreference;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.BooleanPreference;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.ApplyQueryType;
-import net.osmand.plus.settings.OnConfirmPreferenceChange;
-import net.osmand.plus.settings.OnPreferenceChanged;
+import net.osmand.plus.settings.fragments.ApplyQueryType;
+import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import org.apache.commons.logging.Log;

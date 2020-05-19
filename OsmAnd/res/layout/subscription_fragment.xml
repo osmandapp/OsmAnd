@@ -179,14 +179,14 @@
                                     android:id="@+id/selectCountryEdit"
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
-                                    android:drawableRight="@drawable/ic_action_arrow_drop_down"
+                                    app:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
+                                    app:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
                                     android:editable="false"
                                     android:paddingLeft="2dp"
                                     android:paddingRight="0dp"
                                     android:text="Ukraine"
 	                                android:paddingStart="2dp"
-	                                android:paddingEnd="0dp"
-	                                android:drawableEnd="@drawable/ic_action_arrow_drop_down" />
+	                                android:paddingEnd="0dp" />
 
                                 <TextView
                                     android:layout_width="match_parent"

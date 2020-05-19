@@ -16,7 +16,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;

@@ -57,7 +57,7 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
@@ -89,7 +89,7 @@ import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
-import static net.osmand.plus.settings.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
+import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
 
 
 public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents {

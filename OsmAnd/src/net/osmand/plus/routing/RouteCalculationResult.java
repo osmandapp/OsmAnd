@@ -3,7 +3,6 @@ package net.osmand.plus.routing;
 import android.content.Context;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -12,12 +11,11 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.router.ExitInfo;
-import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
@@ -26,7 +24,6 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

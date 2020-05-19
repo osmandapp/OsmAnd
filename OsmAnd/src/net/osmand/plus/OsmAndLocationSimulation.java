@@ -19,6 +19,7 @@ import net.osmand.Location;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.util.ArrayList;
 import java.util.List;
