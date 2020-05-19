@@ -2063,7 +2063,7 @@
     <string name="none_point_error">Legg til minst et punkt.</string>
     <string name="enter_gpx_name">GPX-filnavn:</string>
     <string name="quick_action_resume_pause_navigation">Navigering: sett på pause/gjenoppta</string>
-    <string name="quick_action_resume_pause_navigation_descr">Trykk på denne knappen for å sette på pause eller gjenoppta navigeringen.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Knapp for å ta en pause i eller gjenoppta navigeringen.</string>
     <string name="right_side_navigation">Høyrekjøring</string>
     <string name="quick_action_start_stop_navigation_descr">Trykk på denne knappen for å starte eller avslutte navigeringen.</string>
     <string name="store_tracks_in_monthly_directories">Lagre spor som er tatt opp i månedlige mapper</string>
