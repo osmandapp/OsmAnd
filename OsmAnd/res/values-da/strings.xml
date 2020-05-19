@@ -2339,13 +2339,13 @@ Repræsenterer område: %1$s x %2$s</string>
 \n • Valgfri visning af hastighedsgrænse med påmindelse ved overskridelse 
 \n • Valgfri hastighedsafhængig zoom  
 \n • Del placering, så dine venner kan finde dig</string>
-    <string name="osmand_plus_extended_description_part6">Cykel og fodgænger-funktioner 
-\n  • Visning af gang-, vandre- og cykelstier, fantastisk til udendørsaktiviteter 
-\n  • Særlige navigations- og visningstilstande for cyklister og fodgængere 
-\n  • Valgfrie stoppesteder for offentlig transport (bus, sporvogn, tog), herunder også linjenavne 
-\n  • Valgfri ruteoptagelse til lokal GPX-fil eller online tjeneste 
-\n  • Valgfri hastigheds og højdevisning 
-\n  • Visning af højdekurver og relieflag (med ekstra udvidelse)</string>
+    <string name="osmand_plus_extended_description_part6">Cykel og fodgænger-funktioner
+\n • Visning af gang-, vandre- og cykelstier, fantastisk til udendørsaktiviteter
+\n • Særlige navigations- og visningstilstande for cyklister og fodgængere
+\n • Valgfrie stoppesteder for offentlig transport (bus, sporvogn, tog), herunder også linjenavne
+\n • Valgfri ruteoptagelse til lokal GPX-fil eller online tjeneste
+\n • Valgfri hastigheds og højdevisning
+\n • Visning af højdekurver og relieflag (med ekstra udvidelse)</string>
     <string name="osmand_plus_extended_description_part8">Anslået kortdækning og kvalitet:
 \n • Vesteuropa: ****
 \n • Østeuropa: ***
