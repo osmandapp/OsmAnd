@@ -101,7 +101,7 @@ import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.ImportHelper;
-import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
+import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
