@@ -31,8 +31,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase;
@@ -340,58 +338,45 @@ public class ImportHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	private void importFavoritesImpl(final GPXFile gpxFile, final String fileName, final boolean forceImportFavourites) {
-		if(!app.isApplicationInitializing()) {
-			new AsyncTask<Void, Void, GPXFile>() {
-				ProgressDialog progress = null;
+		final AsyncTask<Void, Void, GPXFile> favoritesImportTask = new AsyncTask<Void, Void, GPXFile>() {
+			ProgressDialog progress = null;
 
-				@Override
-				protected void onPreExecute() {
-					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""),
-										app.getString(R.string.loading_data));
-					}
+			@Override
+			protected void onPreExecute() {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""),
+							app.getString(R.string.loading_data));
 				}
+			}
 
-				@Override
-				protected GPXFile doInBackground(Void... nothing) {
-					final List<FavouritePoint> favourites = asFavourites(gpxFile.getPoints(),
+			@Override
+			protected GPXFile doInBackground(Void... nothing) {
+				final List<FavouritePoint> favourites = asFavourites(gpxFile.getPoints(),
 						fileName, forceImportFavourites);
-					final FavouritesDbHelper favoritesHelper = app.getFavorites();
-					for (final FavouritePoint favourite : favourites) {
-						favoritesHelper.deleteFavourite(favourite, false);
-						favoritesHelper.addFavourite(favourite, false);
-					}
-					favoritesHelper.sortAll();
-					favoritesHelper.saveCurrentPointsIntoFile();
-					return null;
+				final FavouritesDbHelper favoritesHelper = app.getFavorites();
+				for (final FavouritePoint favourite : favourites) {
+					favoritesHelper.deleteFavourite(favourite, false);
+					favoritesHelper.addFavourite(favourite, false);
 				}
+				favoritesHelper.sortAll();
+				favoritesHelper.saveCurrentPointsIntoFile();
+				return null;
+			}
 
-				@Override
-				protected void onPostExecute(GPXFile result) {
-					if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
-						progress.dismiss();
-					}
-					Toast.makeText(activity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG)
-						.show();
-					final Intent newIntent = new Intent(activity,
+			@Override
+			protected void onPostExecute(GPXFile result) {
+				if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
+				Toast.makeText(activity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
+				final Intent newIntent = new Intent(activity,
 						app.getAppCustomization().getFavoritesActivity());
-					newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					newIntent.putExtra(TAB_ID, FAV_TAB);
-					activity.startActivity(newIntent);
-				}
-			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		} else {
-			app.getAppInitializer().addListener(new AppInitializeListener() {
-
-				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {}
-
-				@Override
-				public void onFinish(AppInitializer init) {
-					importFavoritesImpl(gpxFile, fileName, forceImportFavourites);
-				}
-			});
-		}
+				newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				newIntent.putExtra(TAB_ID, FAV_TAB);
+				activity.startActivity(newIntent);
+			}
+		};
+		executeImportTask(favoritesImportTask);
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -751,20 +736,7 @@ public class ImportHelper {
 				}
 			}
 		};
-		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
-				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
-					settingsImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-			});
-		} else {
-			settingsImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		}
+		executeImportTask(settingsImportTask);
 	}
 
 	private void handlePluginImport(final PluginSettingsItem pluginItem, final File file) {
@@ -953,20 +925,7 @@ public class ImportHelper {
 				}
 			}
 		};
-		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
-				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
-					renderingImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-			});
-		} else {
-			renderingImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		}
+		executeImportTask(renderingImportTask);
 	}
 
 	private void handleResult(final GPXFile result, final String name, final boolean save,
@@ -1210,5 +1169,22 @@ public class ImportHelper {
 			}
 		}
 		return favourites;
+	}
+
+	private void executeImportTask(final AsyncTask<?, ?, ?> importTask) {
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				}
+			});
+		} else {
+			importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
 	}
 }
