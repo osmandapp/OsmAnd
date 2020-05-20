@@ -298,10 +298,16 @@ public class MapPoiTypes {
 			if (!lastCategory.getKeyName().equals("Other")) {
 				lastCategory.setTopVisible(true);
 			}
-			categories.add(lastCategory);
+			addCategory(lastCategory);
 			return lastCategory;
 		}
 		return otherCategory;
+	}
+
+	private void addCategory(PoiCategory category) {
+		List<PoiCategory> copy = new ArrayList<>(categories);
+		copy.add(category);
+		categories = copy;
 	}
 
 	public PoiTranslator getPoiTranslator() {
@@ -348,7 +354,7 @@ public class MapPoiTypes {
 		final Map<String, PoiType> allTypes = new LinkedHashMap<String, PoiType>();
 		final Map<String, List<PoiType>> categoryPoiAdditionalMap = new LinkedHashMap<String, List<PoiType>>();
 		final Map<AbstractPoiType, Set<String>> abstractTypeAdditionalCategories = new LinkedHashMap<AbstractPoiType, Set<String>>();
-		this.categories.clear();
+		this.categories = new ArrayList<>();
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			int tok;
@@ -375,7 +381,7 @@ public class MapPoiTypes {
 							lastCategory.addExcludedPoiAdditionalCategories(parser.getAttributeValue("", "excluded_poi_additional_category").split(","));
 							lastCategoryPoiAdditionalsCategories.removeAll(lastCategory.getExcludedPoiAdditionalCategories());
 						}
-						categories.add(lastCategory);
+						addCategory(lastCategory);
 					} else if (name.equals("poi_filter")) {
 						PoiFilter tp = new PoiFilter(this, lastCategory, parser.getAttributeValue("", "name"));
 						tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
