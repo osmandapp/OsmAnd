@@ -3644,22 +3644,22 @@
     <string name="osmand_purchases_item">OsmAnd satın almaları</string>
     <string name="legend_item_description">Bir haritadaki sembollerin rehberi.</string>
     <string name="navigation_profiles_item">Navigasyon profilleri</string>
-    <string name="release_3_7">• Yeni çevrim dışı Yamaç haritaları 
-\n 
-\n • Sık Kullanılanlar ve GPX Ara Noktalarını tamamen özelleştirme – özel renkler, simgeler, şekiller 
-\n 
-\n • İçerik Menüsü, Harita Yapılandırma, Çekmece ögelerinin sırasını özelleştirme 
-\n 
-\n • Harita yapılandırma bölümünde ayrı bir katman olarak Wikipedia, yalnızca gerekli dilleri seçin 
-\n 
-\n • Tamamen esnek olarak kendi POI filtrenizi / haritalarınızı oluşturun 
-\n 
-\n • Özel profiller için ayarları geri yükleme seçenekleri eklendi 
-\n 
-\n • GPX rota navigasyonu için trafik şeritleri ve dönüş talimatları için tam destek 
-\n 
-\n • Tabletlerde kullanıcı arayüzü boyutlarını düzeltme 
-\n 
+    <string name="release_3_7">• Yeni çevrim dışı Yamaç haritaları
+\n
+\n • Sık Kullanılanlar ve GPX Ara Noktalarını tamamen özelleştirme – özel renkler, simgeler, şekiller
+\n
+\n • İçerik Menüsü, Harita Yapılandırma, Çekmece ögelerinin sırasını özelleştirme
+\n
+\n • Harita yapılandırma bölümünde ayrı bir katman olarak Wikipedia, yalnızca gerekli dilleri seçin
+\n
+\n • Tamamen esnek olarak kendi POI filtrenizi / haritalarınızı oluşturun
+\n
+\n • Özel profiller için ayarları geri yükleme seçenekleri eklendi
+\n
+\n • GPX rota navigasyonu için trafik şeritleri ve dönüş talimatları için tam destek
+\n
+\n • Tabletlerde kullanıcı arayüzü boyutlarını düzeltme
+\n
 \n • RTL hatalarını düzeltme
 \n
 \n</string>
