@@ -203,8 +203,7 @@ public class MapPoiTypes {
 
 	public Map<String, PoiType> getAllTranslatedNames(boolean skipNonEditable) {
 		Map<String, PoiType> translation = new HashMap<String, PoiType>();
-		for (int i = 0; i < categories.size(); i++) {
-			PoiCategory pc = categories.get(i);
+		for (PoiCategory pc : categories) {
 			if (skipNonEditable && pc.isNotEditableOsm()) {
 				continue;
 			}
