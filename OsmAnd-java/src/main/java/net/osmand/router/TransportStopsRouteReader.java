@@ -252,7 +252,13 @@ public class TransportStopsRouteReader {
 	}
 
 	private List<List<TransportStop>> combineSegmentsOfSameRoute(LinkedList<List<TransportStop>> segments) {
-		List<List<TransportStop>> resultSegments = new ArrayList<List<TransportStop>>();
+		LinkedList<List<TransportStop>> tempResultSegments = mergeSegments(segments, new LinkedList<List<TransportStop>>(), false);
+		return mergeSegments(tempResultSegments, new ArrayList<List<TransportStop>>(), true);
+	}
+	
+	
+	private <T extends List<List<TransportStop>>> T mergeSegments(LinkedList<List<TransportStop>> segments, T resultSegments, 
+			boolean mergeMissingSegs) {
 		while (!segments.isEmpty()) {
 			List<TransportStop> firstSegment = segments.poll();
 			boolean merged = true;
@@ -261,7 +267,11 @@ public class TransportStopsRouteReader {
 				Iterator<List<TransportStop>> it = segments.iterator();
 				while (it.hasNext()) {
 					List<TransportStop> segmentToMerge = it.next();
-					merged = tryToMerge(firstSegment, segmentToMerge);
+					if (mergeMissingSegs) {
+						merged = tryToMergeMissingStops(firstSegment, segmentToMerge);
+					} else {						
+						merged = tryToMerge(firstSegment, segmentToMerge);
+					}
 
 					if (merged) {
 						it.remove();
@@ -313,7 +323,7 @@ public class TransportStopsRouteReader {
 			// merge first part
 			if (commonStopFirst < commonStopSecond
 					|| (commonStopFirst == commonStopSecond && firstSegment.get(0).isMissingStop())) {
-				for (int i = 0; i < commonStopFirst; i++) {
+				for (int i = 0; i <= commonStopFirst; i++) {
 					firstSegment.remove(0);
 				}
 				for (int i = commonStopSecond; i >= 0; i--) {
@@ -323,18 +333,25 @@ public class TransportStopsRouteReader {
 			return true;
 
 		}
+
+		return false;
+	}
+
+	private boolean tryToMergeMissingStops(List<TransportStop> firstSegment, List<TransportStop> segmentToMerge) {
 		// no common stops, so try to connect to the end or beginning
 		// beginning
 		boolean merged = false;
 		if (MapUtils.getDistance(firstSegment.get(0).getLocation(),
-				segmentToMerge.get(segmentToMerge.size() - 1).getLocation()) < MISSING_STOP_SEARCH_RADIUS) {
+				segmentToMerge.get(segmentToMerge.size() - 1).getLocation()) < MISSING_STOP_SEARCH_RADIUS 
+				&& firstSegment.get(0).isMissingStop() && segmentToMerge.get(segmentToMerge.size() - 1).isMissingStop()) {
 			firstSegment.remove(0);
 			for (int i = segmentToMerge.size() - 2; i >= 0; i--) {
 				firstSegment.add(0, segmentToMerge.get(i));
 			}
 			merged = true;
 		} else if (MapUtils.getDistance(firstSegment.get(firstSegment.size() - 1).getLocation(),
-				segmentToMerge.get(0).getLocation()) < MISSING_STOP_SEARCH_RADIUS) {
+				segmentToMerge.get(0).getLocation()) < MISSING_STOP_SEARCH_RADIUS
+				&& segmentToMerge.get(0).isMissingStop() && firstSegment.get(firstSegment.size() - 1).isMissingStop()) {
 			firstSegment.remove(firstSegment.size() - 1);
 			for (int i = 1; i < segmentToMerge.size(); i++) {
 				firstSegment.add(segmentToMerge.get(i));
