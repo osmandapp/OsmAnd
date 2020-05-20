@@ -978,7 +978,7 @@ public class RoutingHelper {
 			if (rs != null) {
 				streetName.text = getRouteSegmentStreetName(rs, false);
 				if (Algorithms.isEmpty(streetName.text)) {
-					isSet = Algorithms.isEmpty(getRouteSegmentStreetName(rs, true));
+					isSet = !Algorithms.isEmpty(getRouteSegmentStreetName(rs, true));
 				} else {
 					isSet = true;
 				}
@@ -991,11 +991,6 @@ public class RoutingHelper {
 			RouteSegmentResult rs = getNextStreetSegmentResult();
 			if (rs != null) {
 				streetName.text = getRouteSegmentStreetName(rs, false);
-				if (Algorithms.isEmpty(streetName.text)) {
-					isSet = Algorithms.isEmpty(getRouteSegmentStreetName(rs, true));
-				} else {
-					isSet = true;
-				}
 				streetName.turnType = TurnType.valueOf(TurnType.C, false);
 				streetName.shieldObject = rs.getObject();
 			}
