@@ -48,6 +48,7 @@ import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.router.TransportRoutePlanner.TransportRoutingContext;
+import net.osmand.router.TransportStopsRouteReader;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -208,7 +209,7 @@ public class ResourceManager {
 	private final Map<String, RegionAddressRepository> addressMap = new ConcurrentHashMap<String, RegionAddressRepository>();
 	protected final Map<String, AmenityIndexRepository> amenityRepositories =  new ConcurrentHashMap<String, AmenityIndexRepository>();
 //	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new ConcurrentHashMap<String, BinaryMapIndexReader>();
-	protected final Map<String, TransportIndexRepository> transportRepositories = new ConcurrentHashMap<String, TransportIndexRepository>();
+	protected final Map<String, BinaryMapReaderResource> transportRepositories = new ConcurrentHashMap<String, BinaryMapReaderResource>();
 	
 	protected final Map<String, String> indexFileNames = new ConcurrentHashMap<String, String>();
 	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<String, String>();
@@ -742,7 +743,7 @@ public class ResourceManager {
 						addressMap.put(f.getName(), rarb);
 					}
 					if (mapReader.hasTransportData()) {
-						transportRepositories.put(f.getName(), new TransportIndexRepositoryBinary(resource));
+						transportRepositories.put(f.getName(), resource);
 					}
 					// disable osmc for routing temporarily due to some bugs
 					if (mapReader.containsRouteData() && (!f.getParentFile().equals(liveDir) || 
@@ -989,51 +990,31 @@ public class ResourceManager {
 	
 	////////////////////////////////////////////// Working with transport ////////////////////////////////////////////////
 
-	public LinkedHashMap<String, TransportIndexRepository> getTransportRepositories() {
+	private List<BinaryMapIndexReader> getTransportRepositories(double topLat, double leftLon, double bottomLat, double rightLon) {
 		List<String> fileNames = new ArrayList<>(transportRepositories.keySet());
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
-		LinkedHashMap<String, TransportIndexRepository> res = new LinkedHashMap<>();
+		List<BinaryMapIndexReader> res = new ArrayList<>();
 		for (String fileName : fileNames) {
-			TransportIndexRepository r = transportRepositories.get(fileName);
-			if (r != null) {
-				res.put(fileName, r);
+			BinaryMapReaderResource r = transportRepositories.get(fileName);
+			if (r != null && r.isUseForPublicTransport() &&
+					r.getShallowReader().containTransportData(topLat, leftLon, bottomLat, rightLon)) {
+				res.add(r.getReader(BinaryMapReaderResourceType.TRANSPORT));
 			}
 		}
 		return res;
 	}
 
-	public List<TransportIndexRepository> searchTransportRepositories(double latitude, double longitude) {
-		List<TransportIndexRepository> repos = new ArrayList<>();
-		for (TransportIndexRepository index : getTransportRepositories().values()) {
-			if (index.isUseForPublicTransport() && index.checkContains(latitude,longitude)) {
-				repos.add(index);
-			}
-		}
-		return repos;
-	}
 
 	public List<TransportStop> searchTransportSync(double topLat, double leftLon, double bottomLat, double rightLon,
 												   ResultMatcher<TransportStop> matcher) throws IOException {
-		List<TransportIndexRepository> repos = new ArrayList<>();
-		TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<>();
-		for (TransportIndexRepository index : getTransportRepositories().values()) {
-			if (index.isUseForPublicTransport() && index.checkContains(topLat, leftLon, bottomLat, rightLon)) {
-				repos.add(index);
-			}
-		}
-		if (!repos.isEmpty()) {
-			for (TransportIndexRepository r : repos) {
-				List<TransportStop> stops = new ArrayList<>();
-				r.searchTransportStops(topLat, leftLon, bottomLat, rightLon, -1, stops, matcher);
-				BinaryMapIndexReader reader = ((TransportIndexRepositoryBinary) r).getOpenFile();
-				if (reader != null) {
-					TransportRoutingContext.mergeTransportStops(reader, loadedTransportStops, stops, null, null);
-				}
-			}
-		}
+		TransportStopsRouteReader readers =
+				new TransportStopsRouteReader(getTransportRepositories(topLat, leftLon, bottomLat, rightLon));
 		List<TransportStop> stops = new ArrayList<>();
-		for (TransportStop s : loadedTransportStops.valueCollection()) {
-			if (!s.isDeleted()) {
+		BinaryMapIndexReader.SearchRequest<TransportStop> req = BinaryMapIndexReader.buildSearchTransportRequest(MapUtils.get31TileNumberX(leftLon),
+				MapUtils.get31TileNumberX(rightLon), MapUtils.get31TileNumberY(topLat),
+				MapUtils.get31TileNumberY(bottomLat), -1, stops);
+		for (TransportStop s : readers.readMergedTransportStops(req)) {
+			if (!s.isDeleted() && !s.isMissingStop()) {
 				stops.add(s);
 			}
 		}
@@ -1041,19 +1022,11 @@ public class ResourceManager {
 	}
 
 	public List<TransportRoute> getRoutesForStop(TransportStop stop) {
-		List<TransportRoute> routes = new ArrayList<>();
-		LinkedHashMap<String, TransportIndexRepository> repositories = getTransportRepositories();
-		LinkedHashMap<String, int[]> referencesToRoutes = stop.getReferencesToRoutesMap();
-		if (referencesToRoutes != null) {
-			for (Entry<String, int[]> refs : referencesToRoutes.entrySet()) {
-				TransportIndexRepository r = repositories.get(refs.getKey());
-				if (r != null) {
-					List<TransportRoute> rr = r.getRoutesForReferences(refs.getValue());
-					routes.addAll(rr);
-				}
-			}
+		List<TransportRoute> rts = stop.getRoutes();
+		if(rts != null) {
+			return rts;
 		}
-		return routes;
+		return Collections.emptyList();
 	}
 
 	////////////////////////////////////////////// Working with map ////////////////////////////////////////////////

@@ -159,7 +159,7 @@ public class TransportStopController extends MenuController {
 
 	private void addTransportStopRoutes(OsmandApplication app, List<TransportStop> stops, List<TransportStopRoute> routes, boolean useEnglishNames) {
 		for (TransportStop tstop : stops) {
-			if (tstop.hasReferencesToRoutesMap()) {
+			if (!tstop.isDeleted()) {
 				addRoutes(app, routes, useEnglishNames, tstop, transportStop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
 			}
 		}
