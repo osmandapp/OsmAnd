@@ -365,6 +365,7 @@ public class MapPoiTypes {
 			PoiType lastType = null;
 			Set<String> lastTypePoiAdditionalsCategories = new TreeSet<String>();
 			String lastPoiAdditionalCategory = null;
+			List<PoiCategory> categoriesCopy = new ArrayList<>(categories);
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String name = parser.getName();
@@ -380,7 +381,7 @@ public class MapPoiTypes {
 							lastCategory.addExcludedPoiAdditionalCategories(parser.getAttributeValue("", "excluded_poi_additional_category").split(","));
 							lastCategoryPoiAdditionalsCategories.removeAll(lastCategory.getExcludedPoiAdditionalCategories());
 						}
-						addCategory(lastCategory);
+						categoriesCopy.add(lastCategory);
 					} else if (name.equals("poi_filter")) {
 						PoiFilter tp = new PoiFilter(this, lastCategory, parser.getAttributeValue("", "name"));
 						tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
@@ -482,6 +483,7 @@ public class MapPoiTypes {
 					}
 				}
 			}
+			categories = categoriesCopy;
 			is.close();
 		} catch (IOException e) {
 			log.error("Unexpected error", e); //$NON-NLS-1$
