@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.SwitchCompat;
@@ -72,6 +74,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	private TextView barSubTitle;
 	private boolean editMode;
 	private boolean nightMode;
+	private boolean wasChanged;
 	private EditText searchEditText;
 	private FrameLayout button;
 	private List<PoiCategory> poiCategoryList;
@@ -130,7 +133,11 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				if (wasChanged) {
+					showExitDialog();
+				} else {
+					dismiss();
+				}
 			}
 		});
 		toolbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
@@ -251,6 +258,29 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		super.onDismiss(dialog);
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
+			@Override
+			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+				if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
+					if (event.getAction() == KeyEvent.ACTION_DOWN) {
+						return true;
+					} else {
+						if (wasChanged) {
+							showExitDialog();
+						} else {
+							dismiss();
+						}
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+	}
+
 	private QuickSearchDialogFragment getQuickSearchDialogFragment() {
 		Fragment parent = getParentFragment();
 		if (parent instanceof QuickSearchDialogFragment) {
@@ -285,6 +315,21 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		} else {
 			return 0;
 		}
+	}
+
+	private void showExitDialog() {
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
+		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
+		dismissDialog.setTitle(getString(R.string.shared_string_dismiss));
+		dismissDialog.setMessage(getString(R.string.exit_without_saving));
+		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
+		dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dismiss();
+			}
+		});
+		dismissDialog.show();
 	}
 
 	public static void showDialog(DialogFragment parentFragment, String filterId) {
@@ -367,10 +412,11 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					wasChanged = true;
 					if (check.isChecked()) {
 						FragmentManager fm = getFragmentManager();
 						if (fm != null) {
-							showSubCategoriesFragment(fm, category, true);
+							showSubCategoriesFragment(fm, category, false);
 						}
 					} else {
 						filter.setTypeToAccept(category, false);
@@ -487,6 +533,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	}
 
 	private void updateFilter(List<PoiType> selectedPoiCategoryList) {
+		wasChanged = true;
 		if (selectedPoiCategoryList.isEmpty()) {
 			return;
 		}
@@ -544,6 +591,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 						}
 						saveFilter();
 						categoryListAdapter.notifyDataSetChanged();
+						wasChanged = true;
 					}
 				});
 	}
