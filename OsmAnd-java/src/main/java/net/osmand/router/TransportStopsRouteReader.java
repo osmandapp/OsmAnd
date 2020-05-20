@@ -57,8 +57,11 @@ public class TransportStopsRouteReader {
 				if (rrs != null && !multifileStop.isDeleted()) {
 					for (int rr : rrs) {
 						TransportRoute route = routesToLoad.get(rr);
-						if (route == null && routesToLoad.containsKey(rr)) {
-							System.err.println(String.format("Something went wrong by loading combined route %d for stop %s", rr, stop));
+						if (route == null) {
+							if (routesToLoad.containsKey(rr)) {
+								System.err.println(String.format(
+										"Something went wrong by loading combined route %d for stop %s", rr, stop));
+							}
 						} else {
 							TransportRoute combinedRoute = getCombinedRoute(route);
 							if (multifileStop == stop || (!multifileStop.hasRoute(combinedRoute.getId())
