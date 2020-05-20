@@ -90,9 +90,11 @@ public class Algorithms {
 		return def;
 	}
 
-
 	public static String getFileNameWithoutExtension(File f) {
-		String name = f.getName();
+		return getFileNameWithoutExtension(f.getName());
+	}
+
+	public static String getFileNameWithoutExtension(String name) {
 		int i = name.indexOf('.');
 		if (i >= 0) {
 			name = name.substring(0, i);
