@@ -945,7 +945,13 @@ public class RoutingHelper {
 //		return false;
 //	}
 
-	public synchronized String getCurrentName(TurnType[] next, NextDirectionInfo n){
+
+	public static class CurrentStreetName {
+		public String text;
+	}
+
+	public synchronized CurrentStreetName getCurrentName(TurnType[] next, NextDirectionInfo n){
+		CurrentStreetName streetName = new CurrentStreetName();
 		Location l = lastFixedLocation;
 		float speed = 0;
 		if(l != null && l.hasSpeed()) {
@@ -959,27 +965,27 @@ public class RoutingHelper {
 			String nm = n.directionInfo.getStreetName();
 			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
-
-			return formatStreetName(nm, null, dn, "»");
+			streetName.text = formatStreetName(nm, null, dn, "»");
+			return streetName;
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();
 		if(rs != null) {
-			String name = getRouteSegmentStreetName(rs);
-			if (!Algorithms.isEmpty(name)) {
-				return name;
+			streetName.text = getRouteSegmentStreetName(rs);
+			if (!Algorithms.isEmpty(streetName.text )) {
+				return streetName;
 			}
 		}
 		rs = getNextStreetSegmentResult();
 		if(rs != null) {
-			String name = getRouteSegmentStreetName(rs);
-			if (!Algorithms.isEmpty(name)) {
+			streetName.text = getRouteSegmentStreetName(rs);
+			if (!Algorithms.isEmpty(streetName.text)) {
 				if(next != null) {
 					next[0] = TurnType.valueOf(TurnType.C, false);
 				}
-				return name;
+				return streetName;
 			}
 		}
-		return null;
+		return streetName;
 	}
 
 	private String getRouteSegmentStreetName(RouteSegmentResult rs) {
