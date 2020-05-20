@@ -203,8 +203,7 @@ public class MapPoiTypes {
 
 	public Map<String, PoiType> getAllTranslatedNames(boolean skipNonEditable) {
 		Map<String, PoiType> translation = new HashMap<String, PoiType>();
-		for (int i = 0; i < categories.size(); i++) {
-			PoiCategory pc = categories.get(i);
+		for (PoiCategory pc : categories) {
 			if (skipNonEditable && pc.isNotEditableOsm()) {
 				continue;
 			}
@@ -298,10 +297,16 @@ public class MapPoiTypes {
 			if (!lastCategory.getKeyName().equals("Other")) {
 				lastCategory.setTopVisible(true);
 			}
-			categories.add(lastCategory);
+			addCategory(lastCategory);
 			return lastCategory;
 		}
 		return otherCategory;
+	}
+
+	private void addCategory(PoiCategory category) {
+		List<PoiCategory> copy = new ArrayList<>(categories);
+		copy.add(category);
+		categories = copy;
 	}
 
 	public PoiTranslator getPoiTranslator() {
@@ -348,7 +353,7 @@ public class MapPoiTypes {
 		final Map<String, PoiType> allTypes = new LinkedHashMap<String, PoiType>();
 		final Map<String, List<PoiType>> categoryPoiAdditionalMap = new LinkedHashMap<String, List<PoiType>>();
 		final Map<AbstractPoiType, Set<String>> abstractTypeAdditionalCategories = new LinkedHashMap<AbstractPoiType, Set<String>>();
-		this.categories.clear();
+		List<PoiCategory> categoriesList = new ArrayList<>();
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			int tok;
@@ -364,7 +369,7 @@ public class MapPoiTypes {
 				if (tok == XmlPullParser.START_TAG) {
 					String name = parser.getName();
 					if (name.equals("poi_category")) {
-						lastCategory = new PoiCategory(this, parser.getAttributeValue("", "name"), categories.size());
+						lastCategory = new PoiCategory(this, parser.getAttributeValue("", "name"), categoriesList.size());
 						lastCategory.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
 						lastCategory.setNotEditableOsm("true".equals(parser.getAttributeValue("", "no_edit")));
 						lastCategory.setDefaultTag(parser.getAttributeValue("", "default_tag"));
@@ -375,7 +380,7 @@ public class MapPoiTypes {
 							lastCategory.addExcludedPoiAdditionalCategories(parser.getAttributeValue("", "excluded_poi_additional_category").split(","));
 							lastCategoryPoiAdditionalsCategories.removeAll(lastCategory.getExcludedPoiAdditionalCategories());
 						}
-						categories.add(lastCategory);
+						categoriesList.add(lastCategory);
 					} else if (name.equals("poi_filter")) {
 						PoiFilter tp = new PoiFilter(this, lastCategory, parser.getAttributeValue("", "name"));
 						tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
@@ -477,6 +482,7 @@ public class MapPoiTypes {
 					}
 				}
 			}
+			categories = categoriesList;
 			is.close();
 		} catch (IOException e) {
 			log.error("Unexpected error", e); //$NON-NLS-1$
