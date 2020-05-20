@@ -2334,7 +2334,7 @@
     <string name="create_custom_poi">יצירת מסנן בהתאמה אישית</string>
     <string name="custom_search">חיפוש בהתאמה אישית</string>
     <string name="new_filter_desc">נא להקליד שם למסנן החדש, שם זה יצטרף ללשוניות ה‚קטגוריות’ שלך.</string>
-    <string name="osm_live_payment_desc">עמלת המינוי תיגבה כל חודש. ניתן לבטל את המינוי ב־Google Play בכל עת.</string>
+    <string name="osm_live_payment_desc">עמלת המינוי תיגבה בהתאם לתקופה הנבחרת. ניתן לבטל את המינוי ב־Google Play בכל עת.</string>
     <string name="donation_to_osm">תרומה לקהילת OSM</string>
     <string name="donation_to_osm_desc">חלק מהתרומה שלך נשלחת למתנדבי OSM. עלות המינוי נותרת בעינה.</string>
     <string name="osm_live_subscription_desc">מינוי מאפשר עדכונים שעתיים, יומיים או שבועיים ואפשרות להורדת כל המפות בכל העולם ללא הגבלה.</string>
@@ -3420,7 +3420,7 @@
     <string name="choose_icon_color_name">סמל, צבע ושם</string>
     <string name="reorder_profiles">עריכת רשימת הפרופילים</string>
     <string name="selected_profile">פרופיל נבחר</string>
-    <string name="reset_confirmation_descr">נגיעה ב־%1$s תוביל לאבדן כל השינויים שערכת.</string>
+    <string name="reset_confirmation_descr">נגיעה ב־%1$s תסלק את כל השינויים שערכת.</string>
     <string name="reset_all_profile_settings_descr">איפוס כל הגדרות הפרופיל לבררות המחדל של ההתקנה.</string>
     <string name="reset_all_profile_settings">לאפס את הגדרות הפרופיל\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s:‏ %2$s</string>
@@ -3462,17 +3462,17 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">שקיעה ב־%1$s</string>
     <string name="sunrise_at">זריחה ב־%1$s</string>
-    <string name="accessibility_mode_disabled">מצב נגישות מושבת במערכת שלך.</string>
+    <string name="accessibility_mode_disabled">מצב הנגישות כבוי ב־Android שלך.</string>
     <string name="please_provide_profile_name_message">נא לבחור שם לפרופיל</string>
     <string name="open_settings">פתיחת ההגדרות</string>
-    <string name="plugin_disabled">התוסף מושבת</string>
+    <string name="plugin_disabled">התוסף כבוי</string>
     <string name="clear_recorded_data">מחיקת הנתונים שהוקלטו</string>
     <string name="copy_coordinates">העתקת נקודות ציון</string>
     <string name="plugin_disabled_descr">תוסף זה הוא יישומון נפרד, יהיה עליך להסיר אותו בנפרד אם אין לך כוונה להשתמש בו עוד.
 \n
 \nהתוסף יישאר על המכשיר גם לאחר הסרת OsmAnd.</string>
     <string name="shared_string_menu">תפריט</string>
-    <string name="no_recalculation_setting">השבתת חישוב מחדש</string>
+    <string name="no_recalculation_setting">ללא חישוב מחדש</string>
     <string name="route_recalculation_dist_title">מרחק מזערי לחישוב המסלול מחדש</string>
     <string name="route_recalculation_dist_descr">המסלול יחושב מחדש אם המרחק למסלול הוא ארוך מהמשתנה שצוין</string>
     <string name="navigation_notification_desc">להציג את התראות המערכת בזמן הניווט עם הנחיות ניווט.</string>
@@ -3518,7 +3518,7 @@
     <string name="shared_string_rendering_style">סגנון העיבוד</string>
     <string name="import_duplicates_title">חלק מהפריטים קיימים</string>
     <string name="select_data_to_import">נא לבחור את הנתונים לייבוא.</string>
-    <string name="import_profile_dialog_description">הפרופיל המיובא מכיל נתונים נוספים. יש ללחוץ על ייבוא כדי לייבא את נתוני הפרופיל בלבד או לבחור בנתונים נוספים לייבוא.</string>
+    <string name="import_profile_dialog_description">הפרופיל המיובא מכיל נתונים נוספים. יש ללחוץ על „ייבוא” כדי לייבא את נתוני הפרופיל בלבד או לבחור בנתונים נוספים.</string>
     <string name="shared_string_preparing">בהכנה</string>
     <string name="shared_string_poi_types">סוגי נקודות עניין</string>
     <string name="shared_string_nothing_selected">שום דבר לא נבחר</string>
@@ -3622,9 +3622,9 @@
 \nניתן יהיה להחליף בין כל השפות הזמינות בזמן קריאת הערך.</string>
     <string name="shared_string_items">פריטים</string>
     <string name="developer_plugin">תוסף מפתח</string>
-    <string name="ui_customization_description">התאמת כמות הפריטים במגירה, הגדרת המפה ותפריט ההקשר. 
+    <string name="ui_customization_description">התאמת כמות הפריטים ב„מגירה”, „הגדרת המפה” ו„תפריט ההקשר”. 
 \n 
-\nניתן לכבות את התוספים שאינם בשימוש כדי להסתיר את כל הפקדים שלהם מהיישומון %1$s.</string>
+\nכיבוי התוספים שאינם בשימוש מסתיר את כל הפקדים שלהם. %1$s.</string>
     <string name="ui_customization_short_descr">פריטי מגירה, תפריט הקשר</string>
     <string name="ui_customization">התאמות מנשק משתמש</string>
     <string name="shared_string_drawer">מגירה</string>
@@ -3635,7 +3635,7 @@
     <string name="shared_string_hidden">מוסתר</string>
     <string name="hidden_items_descr">הפריטים האלו מוסתרים מהתפריט אבל האפשרויות המיוצגות או התוספים ימשיכו לעבוד.</string>
     <string name="reset_items_descr">הסתרת הגדרות מאפסת אותן למצבן ההתחלתי.</string>
-    <string name="main_actions_descr">‚פעולות ראשיות’ מכילות 4 כפתורים בלבד.</string>
+    <string name="main_actions_descr">מכילות 4 כפתורים בלבד.</string>
     <string name="main_actions">פעולות ראשית</string>
     <string name="move_inside_category">ניתן להעביר פריטים בתוך קטגוריה זו בלבד.</string>
     <string name="select_wikipedia_article_langs">נא לבחור את השפות בהן יופיעו ערכים של ויקיפדיה במפה. ניתן להחליף בין כל השפות הזמינות בזמן קריאת הערך.</string>
@@ -3677,7 +3677,7 @@
 \n 
 \nניתן לנהל ולבטל את המינויים שלך דרך ההגדרות שלך ב־Google Play.</string>
     <string name="search_poi_types">חיפוש סוגי נקודות עניין</string>
-    <string name="search_poi_types_descr">שילוב סוגי נקודות עניין מקטגוריות שונות. יש לגעת ב„החלפה” כדי לבחור את כולן, נגיעה בצד השמאלי לבחירת קטגוריה.</string>
+    <string name="search_poi_types_descr">שילוב סוגי נקודות עניין מקטגוריות שונות. נגיעה ב„החלפה” בוחרת את כולן, נגיעה בצד השמאלי בוחרת קטגוריה.</string>
     <string name="tracker_item">עוקב OsmAnd</string>
     <string name="mapillary_item">OsmAnd ו־Mapillary</string>
     <string name="quick_action_item">פעולה מהירה</string>
@@ -3688,7 +3688,7 @@
     <string name="favorites_item">מועדפים</string>
     <string name="subscription_osmandlive_item">מינוי - OsmAnd Live</string>
     <string name="osmand_purchases_item">רכישות OsmAnd</string>
-    <string name="legend_item_description">המדריך לסמלי מפה</string>
+    <string name="legend_item_description">המדריך לסמלי מפה.</string>
     <string name="navigation_profiles_item">פרופילי ניווט</string>
     <string name="navigate_point_format_utm">תקן מר״ב</string>
     <string name="utm_format_descr">ב־OsmAnd נעשה שימוש בתקן מר״ב, שדומה אך לא זהה לתצורת המר״ב של נאט״ו.</string>
@@ -3706,28 +3706,28 @@
     <string name="navigate_point_format_olc">Open Location Code</string>
     <string name="monitoring_min_accuracy_descr_remark">הערה: אם ה־GPS היה כבוי מיד לפני ההקלטה, יתכן שהדיוק של הנקודה הראשונה יהיה נמוך, לכן בקוד שלנו אנו מעדיפים להמתין כשנייה בטרם הקלטת נקודה (או להקליט את הטובה מבין שלוש נקודות רציפות, וכו׳) אך תכונה זו טרם הוטמעה.</string>
     <string name="shared_string_resume">חידוש</string>
-    <string name="release_3_7">• מפות שיפועים בלתי מקוונות חדשות
-\n
-\n • התאמה מלאה של מועדפים ונקודת דרך GPX - צבעים, סמלים וצורות בהתאמה אישית
-\n
-\n • התאמת סדר הפריטים בתפריט ההקשר, הגדרת המפה, מגירה
-\n
-\n • ויקיפדיה כשכבה נפרדת בהגדרת המפה, אפשרות לבחור את השפה הנדרשת בלבד
-\n
-\n • יצירת מסנני/מפות נקודות עניין משלך בגמישות מלאה
-\n
-\n • נוספו אפשרויות לשחזר הגדרות לפרופילים מותאמים אישית
-\n
-\n • מסלולי GPX מלאים מניווט עם תמיכה בנתיבי תנועה והנחיות פנייה מלאות
-\n
-\n • תיקון גודלי מנשקי משתמש במחשבי לוח
-\n
+    <string name="release_3_7">• מפות שיפועים בלתי מקוונות חדשות 
+\n 
+\n • התאמה מלאה של מועדפים ונקודת דרך GPX - צבעים, סמלים וצורות בהתאמה אישית 
+\n 
+\n • התאמת סדר הפריטים ב„תפריט ההקשר”, „הגדרת המפה”, „מגירה”
+\n 
+\n • ויקיפדיה כשכבה נפרדת בהגדרת המפה, אפשרות לבחור את השפה הנדרשת בלבד 
+\n 
+\n • יצירת מסנני/מפות נקודות עניין משלך בגמישות מלאה 
+\n 
+\n • נוספו אפשרויות לשחזר הגדרות לפרופילים מותאמים אישית 
+\n 
+\n • מסלולי GPX מלאים מניווט עם תמיכה בנתיבי תנועה והנחיות פנייה מלאות 
+\n 
+\n • תיקון גודלי מנשקי משתמש במחשבי לוח 
+\n 
 \n • תיקון תקלות ביישור מימין לשמאל
 \n
 \n</string>
-    <string name="quick_action_switch_profile_descr">לחיצה על כפתור הפעולה תחליף בין הפרופילים הנבחרים.</string>
+    <string name="quick_action_switch_profile_descr">כפתור הפעולה מחליף בין הפרופילים הנבחרים.</string>
     <string name="shared_string_add_profile">הוספת פרופיל</string>
     <string name="change_application_profile">החלפת פרופיל יישומון</string>
-    <string name="profiles_for_action_not_found">הפרופיל שנבחרו לפעולה הזאת לא נמצאו.</string>
+    <string name="profiles_for_action_not_found">לא ניתן למצוא פרופילים שכאלו.</string>
     <string name="index_item_world_basemap_detailed">מפת סקירת העולם (מפורטת)</string>
 </resources>
