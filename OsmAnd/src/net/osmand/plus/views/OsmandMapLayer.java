@@ -14,6 +14,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -622,6 +623,18 @@ public abstract class OsmandMapLayer {
 			r = 18;
 		}
 		return (int) (r * tb.getDensity());
+	}
+
+	public Rect getIconDestinationRect(float x, float y, int width, int height, float scale) {
+		int scaledWidth = width;
+		int scaledHeight = height;
+		if (scale != 1.0f) {
+			scaledWidth = (int) (width * scale);
+			scaledHeight = (int) (height * scale);
+		}
+		Rect rect = new Rect(0, 0, scaledWidth, scaledHeight);
+		rect.offset((int) x - scaledWidth / 2, (int) y - scaledHeight / 2);
+		return rect;
 	}
 
 	public abstract class MapLayerData<T> {
