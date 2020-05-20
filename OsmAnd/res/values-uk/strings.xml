@@ -1874,7 +1874,7 @@
     <string name="show_map_markers_description">Показати елементи з позначок мапи.</string>
     <string name="clear_active_markers_q">Вилучити усі задіяні позначки\?</string>
     <string name="clear_markers_history_q">Очистити історію позначок мапи\?</string>
-    <string name="active_markers">Поточні позназчки</string>
+    <string name="active_markers">Наявні позназчки</string>
     <string name="map_markers">Позначки</string>
     <string name="map_marker">Позначка мапи</string>
     <string name="consider_turning_polygons_off">Рекомендується вимкнути промальовку полігонів.</string>
@@ -2042,7 +2042,7 @@
     <string name="delete_filter">Вилучити фільтр</string>
     <string name="new_filter">Новий фільтр</string>
     <string name="new_filter_desc">Введіть назву для нового фільтра. Ви зможете його знайти у списку категорій.</string>
-    <string name="osm_live_payment_desc">Передплата стягується щомісячно. Скасувати передплату можна в Google Play у будь-який момент.</string>
+    <string name="osm_live_payment_desc">Передплата стягується раз на вибраний період. Скасувати передплату можна в Google Play у будь-який момент.</string>
     <string name="donation_to_osm">Допомога спільноті OSM</string>
     <string name="donation_to_osm_desc">Частина вашої допомоги надсилається до OSM-вкладників. Вартість передплати залишається однаковою.</string>
     <string name="osm_live_subscription_desc">Передплата включає щогодинні, щоденні та щотижневі оновлення, а також, необмежену кількість доступних завантажень для всіх мап з усього світу.</string>
@@ -2161,12 +2161,12 @@
     <string name="auto_split_recording_title">Авто-розрив запису після перерви</string>
     <string name="auto_split_recording_descr">Почати новий сегмент після 6 хвилинної перерви, новий трек після 2 годинної перерви, або новий файл після тривалої перерви (якщо змінилася дата).</string>
     <string name="select_gpx_folder">Оберіть файлову теку GPX</string>
-    <string name="navigate_point_olc_info_invalid">Некоректний OLC
-</string>
-    <string name="navigate_point_olc_info_short">Короткий OLC 
-Будь ласка, введіть повний код</string>
-    <string name="navigate_point_olc_info_area">Коректний повний OLC
-Описує область: %1$s x %2$s</string>
+    <string name="navigate_point_olc_info_invalid">Нечинний OLC
+\n</string>
+    <string name="navigate_point_olc_info_short">Закороткий OLC
+\nБудь ласка, введіть увесь код</string>
+    <string name="navigate_point_olc_info_area">Чинний повний OLC
+\nОписує область: %1$s x %2$s</string>
     <string name="quick_action_navigation_voice">Голос увімк/вимк</string>
     <string name="quick_action_navigation_voice_off">Зняти приглушення голосу</string>
     <string name="quick_action_navigation_voice_on">Приглушити голос</string>
@@ -2382,12 +2382,13 @@
 \n• Може відображати назви на мапі: українською, англійською, локальною чи з фонетичним написанням 
 \n</string>
     <string name="osmand_plus_extended_description_part4">Використовуйте дані OSM та Вікіпедії 
-\n • Відомості високої якості від найкращих спільних проєктів світу 
-\n • Дані OSM доступні за країною чи регіоном 
-\n • Цікаві місця (POI) з Вікіпедії, чудово підходить для огляду визначних місць 
-\n • Необмежена кількість безкоштовних звантажень, прямо з застосунку 
-\n • Компактні автономні векторні мапи оновлюються не рідше одного разу на місяць 
-\n • Вибір між повними даними регіону та лише дорожньою мережею (приклад: уся Японія займає 700 МБ та лише 200 МБ займає її дорожня мережа)</string>
+\n• Відомості високої якості від найкращих спільних проєктів світу 
+\n• Дані OSM доступні за країною чи регіоном 
+\n• Цікаві місця (POI) з Вікіпедії, чудово підходить для огляду визначних місць 
+\n• Необмежена кількість безкоштовних звантажень, прямо з застосунку 
+\n• Компактні автономні векторні мапи оновлюються не рідше одного разу на місяць 
+\n
+\n• Вибір між повними даними регіону та лише дорожньою мережею (приклад: уся Японія займає 700 МБ та лише 200 МБ займає її дорожня мережа)</string>
     <string name="osmand_plus_extended_description_part5">Засоби безпеки 
 \n• Опціональне автоматичне перемикання між режимами день/ніч 
 \n• Опціональне відображення обмеження швидкості з нагадуванням, якщо Ви перевищите його 
@@ -3415,7 +3416,7 @@
     <string name="choose_icon_color_name">Значок, колір та назва</string>
     <string name="reorder_profiles">Редагувати список профілів</string>
     <string name="selected_profile">Вибраний профіль</string>
-    <string name="reset_confirmation_descr">Торкніться %1$S, щоб відхилити всі зміни.</string>
+    <string name="reset_confirmation_descr">Торкання %1$s відхилить всі зміни.</string>
     <string name="reset_all_profile_settings_descr">Скиньте всі параметри профілю до усталено встановлених.</string>
     <string name="reset_all_profile_settings">Скинути всі налаштування профілю\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
@@ -3484,7 +3485,7 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Захід сонця о %1$s</string>
     <string name="sunrise_at">Схід сонця о %1$s</string>
-    <string name="accessibility_mode_disabled">У Вашій системі вимкнено режим доступності.</string>
+    <string name="accessibility_mode_disabled">Режим доступності вимкнено у вашому Android.</string>
     <string name="reset_to_default_category_button_promo">Скидання до усталених після установки усталить упорядкування.</string>
     <string name="use_system_screen_timeout">Використовувати системний час очікування екрана</string>
     <string name="use_system_screen_timeout_promo">Усталено вимкнено, якщо OsmAnd працює на передньому плані, час очікування не закінчується. 
@@ -3521,7 +3522,7 @@
     <string name="sort_by_category">Впорядкувати за категоріями</string>
     <string name="please_provide_profile_name_message">Укажіть назву профілю</string>
     <string name="open_settings">Відкрити налаштування</string>
-    <string name="plugin_disabled">Втулок вимкнено</string>
+    <string name="plugin_disabled">Плагін вимкнено</string>
     <string name="plugin_disabled_descr">Цей плагін є окремою програмою, якщо ви не плануєте користуватися ним надалі, його потрібно буде видалити окремо.
 \n 
 \nВтулок залишиться на пристрої після видалення OsmAnd.</string>
@@ -3529,11 +3530,11 @@
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Маршрутизація</string>
     <string name="shared_string_include_data">Включати додаткові дані</string>
-    <string name="import_profile_dialog_description">Імпортований профіль містить додаткові дані. Натисніть кнопку імпортувати, щоб імпортувати лише дані профілю або вибрати додаткові дані для імпорту.</string>
+    <string name="import_profile_dialog_description">Імпортований профіль містить додаткові дані. Натисніть кнопку \"Імпорт\", щоб імпортувати дані профілю, або оберіть додаткові дані.</string>
     <string name="export_profile_dialog_description">Ви можете вибрати додаткові дані для експорту разом із профілем.</string>
     <string name="index_name_antarctica">Антарктида</string>
     <string name="shared_string_app_default_w_val">Усталений застосунок (%s)</string>
-    <string name="no_recalculation_setting">Вимкнути перерахунок</string>
+    <string name="no_recalculation_setting">Без перерахунку</string>
     <string name="route_recalculation_dist_title">Найменша відстань для перерахунку маршруту</string>
     <string name="route_recalculation_dist_descr">Маршрут буде перераховано, якщо відстань до нього перевищує вказане</string>
     <string name="profile_type_custom_string">Користувацький профіль</string>
@@ -3589,7 +3590,7 @@
     <string name="shared_string_hillshade">Пагорб</string>
     <string name="n_items_of_z">%1$s з %2$s</string>
     <string name="download_slope_maps">Схили</string>
-    <string name="quick_action_show_hide_terrain">Показати/приховати місцевість</string>
+    <string name="quick_action_show_hide_terrain">Показати / приховати місцевість</string>
     <string name="quick_action_terrain_hide">Сховати місцевість</string>
     <string name="quick_action_terrain_show">Показати місцевість</string>
     <string name="quick_action_terrain_descr">Кнопка для відображення або приховування шару місцевості на мапі.</string>
@@ -3614,9 +3615,9 @@
     <string name="shared_string_language">Мова</string>
     <string name="shared_string_all_languages">Усі мови</string>
     <string name="wiki_menu_download_descr">Для перегляду POI Вікіпедії на мапі потрібні додаткові мапи.</string>
-    <string name="ui_customization_description">Налаштуйте кількість елементів у скриньці, налаштуйте мапу та контекстне меню.
-\n
-\nВи можете вимкнути непотрібні плагіни, щоби приховати всі їхні елементи керування у програмі%1$s.</string>
+    <string name="ui_customization_description">Встановлення кількості елементів меню \"Скринька\", \"Налаштувати мапу\" та \"Контекстне меню\". 
+\n 
+\nВимкніть непотрібні плагіни, щоби приховати всі їхні елементи керування %1$s.</string>
     <string name="ui_customization_short_descr">Елементи скриньки, контекстне меню</string>
     <string name="ui_customization">Налаштування інтерфейсу</string>
     <string name="shared_string_drawer">Скринька</string>
@@ -3627,7 +3628,7 @@
     <string name="shared_string_hidden">Приховано</string>
     <string name="hidden_items_descr">Ці елементи приховані з меню, але встановлені параметри або плагіни продовжать роботу.</string>
     <string name="reset_items_descr">Приховування налаштувань призведе до скидання до їхнього початкового стану.</string>
-    <string name="main_actions_descr">\'Основні дії\' містять лише 4 кнопки.</string>
+    <string name="main_actions_descr">Має лише 4 кнопки.</string>
     <string name="main_actions">Основні дії</string>
     <string name="move_inside_category">Ви можете переміщувати елементи лише всередині цієї категорії.</string>
     <string name="developer_plugin">Втулок розробника</string>
@@ -3675,40 +3676,40 @@
     <string name="favorites_item">Закладки</string>
     <string name="subscription_osmandlive_item">Передплата - OsmAnd Live</string>
     <string name="osmand_purchases_item">OsmAnd покупки</string>
-    <string name="legend_item_description">Довідник умовних позначень мапи</string>
+    <string name="legend_item_description">Довідник умовних позначень мапи.</string>
     <string name="osm_live_payment_subscription_management">Оплата буде списана з рахунку, прив\'язаного до вашого облікового запису Google Play, при підтвердженні придбання. 
 \n
 \nПередплата продовжується автоматично, якщо ви не скасуєте її до дати продовження. З вашого рахунку буде стягуватися плата за період продовження (щомісяця/щотримісяці/щорік) разово в день продовження. 
 \n
 \nВи можете керувати передплатами та скасовувати їх у налаштуваннях Google Play.</string>
     <string name="search_poi_types">Пошук видів POI</string>
-    <string name="search_poi_types_descr">Поєднуйте види POI з різних категорій. Торкніться \"Переключити\", щоб вибрати все, торкніться лівої сторони для вибору категорії.</string>
+    <string name="search_poi_types_descr">Поєднуйте види POI з різних категорій. Торкніться \"Перемикача\", щоб вибрати усі, торкніться лівої сторони для вибору категорії.</string>
     <string name="navigation_profiles_item">Профілі навігації</string>
-    <string name="release_3_7">• Нові безмережеві мапи схилів
+    <string name="release_3_7">• Нові автономні мапи схилів
 \n
-\n • Повне налаштування вибраних та GPX шляхових точок - спеціальні кольори, значки, форми
+\n• Налаштування вибраних та GPX шляхових точок - спеціальні кольори, піктограми, форми
 \n
-\n • Налаштування порядку елементів у контекстному меню, Налаштувати мапу, панелі
+\n• Налаштування порядку елементів меню \"Контекстне меню\", \"Налаштувати мапу\" та \"Скринька\"
 \n
-\n • Вікіпедія як окремий шар у Налаштувати мапу, вибір лише потрібних мов
+\n• Вікіпедія, як окремий шар. У налаштуваннях мапи вибір лише потрібних мов
 \n
-\n • Створіть власний фільтр POI/мапи з цілковитою гнучкістю
+\n• Створіть власний фільтр POI / мап з цілковитою гнучкістю
 \n
-\n • Додані параметри для відновлення налаштувань для користувацьких профілів
+\n• Додані параметри для відновлення налаштувань користувацьких профілів
 \n
-\n • Повні маршрути GPX з Навігації підтримують смуги руху та повні вказівки повороту
+\n• Маршрути GPX навігації підтримують смуги руху, та вказівки повороту
 \n
-\n • Виправлено розміри інтерфейсу на планшетах
+\n• Виправлено розміри інтерфейсу на планшетах
 \n
-\n • Виправлено помилки для мов що пишуться справа наліво
+\n• Виправлено помилки для мов, що пишуться справа наліво
 \n
 \n</string>
     <string name="parking_positions">Розташування припаркованого авто</string>
     <string name="quick_action_transport_hide">Приховати громадський транспорт</string>
     <string name="quick_action_transport_show">Показати громадський транспорт</string>
-    <string name="quick_action_show_hide_transport">Показати/приховати громадський транспорт</string>
+    <string name="quick_action_show_hide_transport">Показати / приховати громадський транспорт</string>
     <string name="quick_action_transport_descr">Кнопка показу або приховування громадського транспорту на мапі.</string>
-    <string name="create_edit_poi">Створити/змінити POI</string>
+    <string name="create_edit_poi">Створити / змінити POI</string>
     <string name="add_edit_favorite">Додати / редагувати вибране</string>
     <string name="reset_deafult_order">Відновити типовий порядок елементів</string>
     <string name="back_to_editing">Повернутися до редагування</string>
@@ -3717,5 +3718,7 @@
     <string name="quick_action_switch_profile_descr">Перемикання між профілями здійснюється торканням до кнопки дій.</string>
     <string name="shared_string_add_profile">Додати профіль</string>
     <string name="change_application_profile">Змінити профіль програми</string>
-    <string name="profiles_for_action_not_found">Профілі, вибрані для цієї дії, не знайдено.</string>
+    <string name="profiles_for_action_not_found">Не вдалося знайти жодного профілю.</string>
+    <string name="index_item_world_basemap_detailed">Оглядова карта світу (детальна)</string>
+    <string name="unsupported_type_error">Непідтримуваний тип</string>
 </resources>
