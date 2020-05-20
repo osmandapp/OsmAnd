@@ -948,17 +948,21 @@ public class RoutingHelper {
 
 	public static class CurrentStreetName {
 		public String text;
+		public TurnType turnType;
+		public boolean showMarker; // turn type has priority over showMarker
+		public RouteDataObject shieldObject;
+		public String exitRef;
 	}
 
-	public synchronized CurrentStreetName getCurrentName(TurnType[] next, NextDirectionInfo n){
+	public synchronized CurrentStreetName getCurrentName(NextDirectionInfo n){
 		CurrentStreetName streetName = new CurrentStreetName();
 		Location l = lastFixedLocation;
 		float speed = 0;
 		if(l != null && l.hasSpeed()) {
 			speed = l.getSpeed();
 		}
-		if(next != null && n.directionInfo != null) {
-			next[0] = n.directionInfo.getTurnType();
+		if(n.directionInfo != null) {
+			streetName.turnType = n.directionInfo.getTurnType();
 		}
 		if(n.distanceTo > 0  && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() &&
 				voiceRouter.isDistanceLess(speed, n.distanceTo, voiceRouter.PREPARE_DISTANCE * 0.75f)) {
@@ -966,24 +970,38 @@ public class RoutingHelper {
 			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
 			streetName.text = formatStreetName(nm, null, dn, "»");
-			return streetName;
 		}
-		RouteSegmentResult rs = getCurrentSegmentResult();
-		if(rs != null) {
-			streetName.text = getRouteSegmentStreetName(rs);
-			if (!Algorithms.isEmpty(streetName.text )) {
-				return streetName;
+		if (Algorithms.isEmpty(streetName.text)) {
+			RouteSegmentResult rs = getCurrentSegmentResult();
+			if (rs != null) {
+				streetName.text = getRouteSegmentStreetName(rs);
 			}
 		}
-		rs = getNextStreetSegmentResult();
-		if(rs != null) {
-			streetName.text = getRouteSegmentStreetName(rs);
-			if (!Algorithms.isEmpty(streetName.text)) {
-				if(next != null) {
-					next[0] = TurnType.valueOf(TurnType.C, false);
+		if (Algorithms.isEmpty(streetName.text)) {
+			RouteSegmentResult rs = getNextStreetSegmentResult();
+			if (rs != null) {
+				streetName.text = getRouteSegmentStreetName(rs);
+				if (!Algorithms.isEmpty(streetName.text)) {
+					if (streetName.turnType != null) {
+						streetName.turnType = TurnType.valueOf(TurnType.C, false);
+					}
 				}
-				return streetName;
 			}
+		}
+		// show exit ref
+		if (n.directionInfo != null && n.directionInfo.getExitInfo() != null &&
+				n.imminent >= 0) {
+			streetName.exitRef = n.directionInfo.getExitInfo().getRef();
+			if (!Algorithms.isEmpty(n.directionInfo.getExitInfo().getExitStreetName())) {
+				streetName.text = n.directionInfo.getExitInfo().getExitStreetName();
+			}
+		}
+		// show shield
+		if (n.directionInfo != null) {
+			streetName.shieldObject = n.directionInfo.getRouteDataObject();
+		}
+		if (streetName.turnType == null) {
+			streetName.showMarker = true;
 		}
 		return streetName;
 	}
