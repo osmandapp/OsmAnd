@@ -2,22 +2,20 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 	<item>
 		<shape android:shape="oval">
-			<solid android:color="@color/color_transparent"/>
+			<solid android:color="@color/color_transparent" />
 			<size
 				android:width="28dp"
-				android:height="28dp"/>
+				android:height="28dp" />
 		</shape>
 	</item>
+
 	<item
 		android:id="@+id/placeholder_icon"
 		android:bottom="2dp"
+		android:drawable="@drawable/ic_action_placeholder_city"
 		android:left="2dp"
 		android:right="2dp"
-		android:top="2dp">
+		android:tint="@color/icon_color_default_light"
+		android:top="2dp" />
 
-		<bitmap
-			android:gravity="center"
-			android:src="@drawable/ic_action_placeholder_city"
-			android:tint="@color/icon_color_default_light"/>
-	</item>
 </layer-list>
