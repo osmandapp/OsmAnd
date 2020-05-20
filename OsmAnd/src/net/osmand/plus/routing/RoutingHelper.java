@@ -915,9 +915,6 @@ public class RoutingHelper {
 
 
 	public static String formatStreetName(String name, String ref, String destination, String towards) {
-	//Hardy, 2016-08-05:
-	//Now returns: (ref) + ((" ")+name) + ((" ")+"toward "+dest) or ""
-
 		String formattedStreetName = "";
 		if (ref != null && ref.length() > 0) {
 			formattedStreetName = ref;
@@ -938,56 +935,78 @@ public class RoutingHelper {
 
 	}
 
-//	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed){
-//		if(dist < etalon || ((dist / currentSpeed) < (etalon / defSpeed))){
-//			return true;
-//		}
-//		return false;
-//	}
 
-	public synchronized String getCurrentName(TurnType[] next, NextDirectionInfo n){
+	public static class CurrentStreetName {
+		public String text;
+		public TurnType turnType;
+		public boolean showMarker; // turn type has priority over showMarker
+		public RouteDataObject shieldObject;
+		public String exitRef;
+	}
+
+	public synchronized CurrentStreetName getCurrentName(NextDirectionInfo n){
+		CurrentStreetName streetName = new CurrentStreetName();
 		Location l = lastFixedLocation;
 		float speed = 0;
-		if(l != null && l.hasSpeed()) {
+		if (l != null && l.hasSpeed()) {
 			speed = l.getSpeed();
 		}
-		if(next != null && n.directionInfo != null) {
-			next[0] = n.directionInfo.getTurnType();
-		}
-		if(n.distanceTo > 0  && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() &&
+		boolean isSet = false;
+		// 1. turn is imminent
+		if (n.distanceTo > 0 && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() &&
 				voiceRouter.isDistanceLess(speed, n.distanceTo, voiceRouter.PREPARE_DISTANCE * 0.75f)) {
 			String nm = n.directionInfo.getStreetName();
 			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
-
-			return formatStreetName(nm, null, dn, "»");
-		}
-		RouteSegmentResult rs = getCurrentSegmentResult();
-		if(rs != null) {
-			String name = getRouteSegmentStreetName(rs);
-			if (!Algorithms.isEmpty(name)) {
-				return name;
+			isSet = !(Algorithms.isEmpty(nm) && Algorithms.isEmpty(rf) && Algorithms.isEmpty(dn));
+			streetName.text = formatStreetName(nm, null, dn, "»");
+			streetName.turnType = n.directionInfo.getTurnType();
+			streetName.shieldObject = n.directionInfo.getRouteDataObject();
+			if (streetName.turnType == null) {
+				streetName.turnType = TurnType.valueOf(TurnType.C, false);
 			}
-		}
-		rs = getNextStreetSegmentResult();
-		if(rs != null) {
-			String name = getRouteSegmentStreetName(rs);
-			if (!Algorithms.isEmpty(name)) {
-				if(next != null) {
-					next[0] = TurnType.valueOf(TurnType.C, false);
+			if (n.directionInfo.getExitInfo() != null) {
+				streetName.exitRef = n.directionInfo.getExitInfo().getRef();
+				if (!Algorithms.isEmpty(n.directionInfo.getExitInfo().getExitStreetName())) {
+					streetName.text = n.directionInfo.getExitInfo().getExitStreetName();
 				}
-				return name;
 			}
 		}
-		return null;
+		// 2. display current road street name
+		if (!isSet) {
+			RouteSegmentResult rs = getCurrentSegmentResult();
+			if (rs != null) {
+				streetName.text = getRouteSegmentStreetName(rs, false);
+				if (Algorithms.isEmpty(streetName.text)) {
+					isSet = !Algorithms.isEmpty(getRouteSegmentStreetName(rs, true));
+				} else {
+					isSet = true;
+				}
+				streetName.showMarker = true;
+				streetName.shieldObject = rs.getObject();
+			}
+		}
+		// 3. display next road street name if this one empty
+		if (!isSet) {
+			RouteSegmentResult rs = getNextStreetSegmentResult();
+			if (rs != null) {
+				streetName.text = getRouteSegmentStreetName(rs, false);
+				streetName.turnType = TurnType.valueOf(TurnType.C, false);
+				streetName.shieldObject = rs.getObject();
+			}
+		}
+		if (streetName.turnType == null) {
+			streetName.showMarker = true;
+		}
+		return streetName;
 	}
 
-	private String getRouteSegmentStreetName(RouteSegmentResult rs) {
+	private String getRouteSegmentStreetName(RouteSegmentResult rs, boolean includeRef) {
 		String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());
-//		String rf = rs.getObject().getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
+		String rf = rs.getObject().getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
 		String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
 				settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
-		return formatStreetName(nm, null, dn, "»");
+		return formatStreetName(nm, includeRef ? rf : null, dn, "»");
 	}
 
 	public RouteSegmentResult getCurrentSegmentResult() {
