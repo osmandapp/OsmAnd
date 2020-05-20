@@ -104,9 +104,6 @@ public class FavoriteImageDrawable extends Drawable {
 			int offsetY = bounds.centerY() - uiListIcon.getIntrinsicHeight() / 2;
 			uiListIcon.setBounds(offsetX, offsetY, uiListIcon.getIntrinsicWidth() + offsetX,
 					uiListIcon.getIntrinsicHeight() + offsetY);
-		} else if (withShadow) {
-			bs.inset(bs.width() / 3, bs.height() / 3);
-			favIcon.setBounds(bs);
 		}
 	}
 
@@ -151,17 +148,16 @@ public class FavoriteImageDrawable extends Drawable {
 	}
 
 	public void drawBitmap(@NonNull Canvas canvas, Rect bs, Bitmap bitmap, Paint paintBackground) {
-		canvas.drawBitmap(bitmap, bs.exactCenterX() - bitmap.getWidth() / 2f,
-				bs.exactCenterY() - bitmap.getHeight() / 2f, paintBackground);
+		canvas.drawBitmap(bitmap, null, bs, paintBackground);
 	}
 
-	public void drawBitmapInCenter(Canvas canvas, float x, float y, boolean history) {
+	public void drawBitmapInCenter(Canvas canvas, Rect destRect, boolean history) {
 		this.history = history;
-		float dx = x - getIntrinsicWidth() / 2f;
-		float dy = y - getIntrinsicHeight() / 2f;
-		canvas.translate(dx, dy);
+		setBounds(destRect);
+		Rect bounds = new Rect(destRect);
+		bounds.inset(bounds.width() / 3, bounds.height() / 3);
+		favIcon.setBounds(bounds);
 		draw(canvas);
-		canvas.translate(-dx, -dy);
 	}
 
 	@Override
