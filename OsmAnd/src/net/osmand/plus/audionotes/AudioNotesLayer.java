@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+import android.graphics.Rect;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -89,14 +90,16 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		if (contextMenuLayer.getMoveableObject() instanceof Recording) {
 			Recording objectInMotion = (Recording) contextMenuLayer.getMoveableObject();
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			drawRecording(canvas, objectInMotion, pf.x, pf.y);
+			float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
+			drawRecording(canvas, objectInMotion, pf.x, pf.y, textScale);
 		}
 	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
-			float iconSize = audio.getWidth() * 3 / 2.5f;
+			float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
+			float iconSize = audio.getWidth() * 3 / 2.5f * textScale;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 			DataTileManager<Recording> recs = plugin.getRecordings();
@@ -111,7 +114,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 
 					if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-						canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
+						Rect destRect = getIconDestinationRect(x, y, pointSmall.getWidth(), pointSmall.getHeight(), textScale);
+						canvas.drawBitmap(pointSmall, null, destRect, paintIcon);
 						smallObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 					} else {
 						fullObjects.add(o);
@@ -122,14 +126,14 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 			for (Recording o : fullObjects) {
 				float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 				float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-				drawRecording(canvas, o, x, y);
+				drawRecording(canvas, o, x, y, textScale);
 			}
 			this.fullObjectsLatLon = fullObjectsLatLon;
 			this.smallObjectsLatLon = smallObjectsLatLon;
 		}
 	}
 
-	private void drawRecording(Canvas canvas, Recording o, float x, float y) {
+	private void drawRecording(Canvas canvas, Recording o, float x, float y, float textScale) {
 		Bitmap b;
 		if (o.isPhoto()) {
 			b = photo;
@@ -138,7 +142,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		} else {
 			b = video;
 		}
-		canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+		Rect destRect = getIconDestinationRect(x, y, b.getWidth(), b.getHeight(), textScale);
+		canvas.drawBitmap(b, null, destRect, paintIcon);
 	}
 
 	@Override
