@@ -2027,7 +2027,7 @@
     <string name="get_for">獲得 %1$s</string>
     <string name="no_update_info_desc">不要檢查新版本或 OsmAnd 相關的折扣。</string>
     <string name="get_it">獲得</string>
-    <string name="osm_live_payment_desc">每個月會收取訂閱費用。您隨時都能在 Google Play 取消。</string>
+    <string name="osm_live_payment_desc">會定時收取訂閱費用。您隨時都能在 Google Play 取消。</string>
     <string name="donation_to_osm">捐款給 OSM 的社群</string>
     <string name="osm_live_subscription_desc">啟用認購可每小時、每天、每週的更新以及世界各地所有的地圖無限制的下載。</string>
     <string name="driving_region_australia">澳洲</string>
@@ -3412,7 +3412,7 @@
     <string name="choose_icon_color_name">圖示、顏色與名稱</string>
     <string name="reorder_profiles">編輯設定檔清單</string>
     <string name="selected_profile">選定的設定檔</string>
-    <string name="reset_confirmation_descr">點擊 %1$s 將會丟棄您所有的變更。</string>
+    <string name="reset_confirmation_descr">點擊 %1$s 會丟棄您所有的變更。</string>
     <string name="reset_all_profile_settings_descr">將所有設定檔設定重設為安裝時的預設值。</string>
     <string name="reset_all_profile_settings">重設所有設定檔的設定？</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s：%2$s</string>
@@ -3481,7 +3481,7 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">日落於 %1$s</string>
     <string name="sunrise_at">日出於 %1$s</string>
-    <string name="accessibility_mode_disabled">您的系統停用了無障礙模式。</string>
+    <string name="accessibility_mode_disabled">您的 Android 關閉了無障礙模式。</string>
     <string name="reset_to_default_category_button_promo">重設為預設值將會把排序重設回安裝後的預設值。</string>
     <string name="use_system_screen_timeout">使用系統畫面逾時</string>
     <string name="use_system_screen_timeout_promo">預設停用，如果 OsmAnd 在前景執行，畫面就不會有逾時的問題。
@@ -3518,7 +3518,7 @@
     <string name="sort_by_category">按分類排序</string>
     <string name="please_provide_profile_name_message">請為設定檔命名</string>
     <string name="open_settings">開啟設定</string>
-    <string name="plugin_disabled">外掛程式已停用</string>
+    <string name="plugin_disabled">外掛程式關閉</string>
     <string name="plugin_disabled_descr">此外掛程式是獨立的應用程式，如果您不打算再使用它，請將其移除。
 \n
 \n在您移除 OsmAnd 後，這類的外掛程式仍將繼續存在於裝置上。</string>
@@ -3526,7 +3526,7 @@
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">路徑</string>
     <string name="shared_string_include_data">包含額外資料</string>
-    <string name="import_profile_dialog_description">已匯入的設定檔包含了額外資料。點擊匯入僅匯入設定檔資料或選取額外的資料以匯入。</string>
+    <string name="import_profile_dialog_description">已匯入的設定檔包含了額外資料。點擊匯入僅匯入設定檔資料或選取額外的資料。</string>
     <string name="export_profile_dialog_description">您可以選取額外的資料以與設定檔一起匯出。</string>
     <string name="index_name_antarctica">南極洲</string>
     <string name="shared_string_app_default_w_val">應用程式預設值 (%s)</string>
@@ -3613,7 +3613,7 @@
     <string name="wiki_menu_download_descr">需要額外的地圖才能在地圖上檢視維基百科的 POI。</string>
     <string name="ui_customization_description">在「抽屜」、「設定地圖」與情境選單中自訂項目數量。 
 \n 
-\n您可以關閉未使用的外掛程式，以從應用程式 %1$s 中隱藏它們的控制元件。</string>
+\n您可以關閉未使用的外掛程式，以從 %1$s 中隱藏它們的控制元件。</string>
     <string name="ui_customization_short_descr">抽屜項目，情境選單</string>
     <string name="ui_customization">自訂使用者介面</string>
     <string name="shared_string_drawer">抽屜</string>
@@ -3624,7 +3624,7 @@
     <string name="shared_string_hidden">已隱藏</string>
     <string name="hidden_items_descr">這些項目已從選單隱藏，但對應的選項或外掛程式將會繼續運作。</string>
     <string name="reset_items_descr">隱藏設定將會把它們重設回原始狀態。</string>
-    <string name="main_actions_descr">主要動作僅包含 4 個按鈕。</string>
+    <string name="main_actions_descr">僅有四個按鈕。</string>
     <string name="main_actions">主要動作</string>
     <string name="move_inside_category">您只能在此分類中移動項目。</string>
     <string name="developer_plugin">開發者外掛程式</string>
@@ -3679,24 +3679,24 @@
     <string name="favorites_item">收藏</string>
     <string name="subscription_osmandlive_item">訂閱 - OsmAnd Live</string>
     <string name="osmand_purchases_item">OsmAnd 購買</string>
-    <string name="legend_item_description">地圖符號系統指南</string>
+    <string name="legend_item_description">地圖符號系統指南。</string>
     <string name="navigation_profiles_item">導航設定檔</string>
-    <string name="release_3_7">• 新的離線坡度圖
-\n
-\n • 對收藏與 GPX 路徑點的完整自訂能力 — 自訂顏色、圖示、形狀
-\n
-\n • 自訂情境選單、設定地圖、抽屜中的項目順序
-\n
-\n • 設定地圖中可將維基百科選取為單獨的圖層，並僅選取需要的語言
-\n
-\n • 在超強的彈性下建立您自己的 POI 過濾器／地圖
-\n
-\n • 新增選項以恢復自訂設定檔中的選項
-\n
-\n • 對 GPX 路徑導航完整支援車道與轉彎提示
-\n
-\n • 修復平板電腦上的使用者介面大小
-\n
+    <string name="release_3_7">• 新的離線坡度圖 
+\n 
+\n • 對收藏與 GPX 路徑點的完整自訂能力 — 自訂顏色、圖示、形狀 
+\n 
+\n • 自訂情境選單、設定地圖與抽屜中的項目順序 
+\n 
+\n • 設定地圖中可將維基百科選取為單獨的圖層，並僅選取需要的語言 
+\n 
+\n • 在超強的彈性下建立您自己的 POI 過濾器／地圖 
+\n 
+\n • 新增選項以恢復自訂設定檔中的選項 
+\n 
+\n • 對 GPX 路徑導航完整支援車道與轉彎提示 
+\n 
+\n • 修復平板電腦上的使用者介面大小 
+\n 
 \n • 修復 RTL 的臭蟲
 \n
 \n</string>
@@ -3711,8 +3711,9 @@
     <string name="reset_deafult_order">恢復預設項目排序</string>
     <string name="back_to_editing">返回編輯</string>
     <string name="shared_string_resume">恢復</string>
-    <string name="quick_action_switch_profile_descr">點擊動作按鈕將會在選取的設定檔間切換。</string>
+    <string name="quick_action_switch_profile_descr">點擊動作按鈕會在選取的設定檔間切換。</string>
     <string name="shared_string_add_profile">新增設定檔</string>
     <string name="change_application_profile">變更應用程式設定檔</string>
-    <string name="profiles_for_action_not_found">找不到為此動作選取的設定檔。</string>
+    <string name="profiles_for_action_not_found">找不到任何這類的設定檔。</string>
+    <string name="index_item_world_basemap_detailed">全球地圖總覽（詳細）</string>
 </resources>
