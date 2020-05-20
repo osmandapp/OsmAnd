@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -143,6 +144,19 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 		listView = root.findViewById(R.id.list);
+		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView absListView, int i) {
+				if (i == SCROLL_STATE_TOUCH_SCROLL) {
+					AndroidUtils.hideSoftKeyboard(requireActivity(), searchEditText);
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView absListView, int first, int visibleCount, int totalCount) {
+
+			}
+		});
 		headerShadow = inflater.inflate(R.layout.list_shadow_header, listView, false);
 		footerShadow = inflater.inflate(R.layout.list_shadow_footer, listView, false);
 		headerSelectAll = inflater.inflate(R.layout.select_all_switch_list_item, listView, false);

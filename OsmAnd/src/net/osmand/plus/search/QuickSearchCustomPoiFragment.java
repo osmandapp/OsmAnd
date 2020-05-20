@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -169,6 +170,19 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				if (fm != null && category != null) {
 					showSubCategoriesFragment(fm, category, false);
 				}
+			}
+		});
+		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView absListView, int i) {
+				if (i == SCROLL_STATE_TOUCH_SCROLL) {
+					AndroidUtils.hideSoftKeyboard(requireActivity(), searchEditText);
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView absListView, int first, int visibleCount, int totalCount) {
+
 			}
 		});
 
