@@ -3602,4 +3602,13 @@
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_switch_profile_descr">Handlingsknappen veksler mellom valgte profiler.</string>
     <string name="change_application_profile">Endre programprofil</string>
+    <string name="replace_all_desc">Nåværende elementer vil erstattes med elementer fra filen</string>
+    <string name="recalc_angle_dialog_title">Minimumsvinkel mellom min plassering og rute</string>
+    <string name="import_rendering_file">Importer opptegningsfil</string>
+    <string name="slope_description">Løyper bruker farger for å visualisere bratthet.</string>
+    <string name="slope_download_description">Ytterligere kart trengs for å vise løyper på kartet.</string>
+    <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
+    <string name="reset_deafult_order">Gjenopprett forvalgt elementrekkefølge</string>
+    <string name="profiles_for_action_not_found">Fant ingen slike profiler.</string>
+    <string name="index_item_world_basemap_detailed">Verdensoversiktskart (detaljert)</string>
 </resources>
