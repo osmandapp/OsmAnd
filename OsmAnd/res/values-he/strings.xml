@@ -3672,7 +3672,6 @@
 \n 
 \nניתן לנהל ולבטל את המינויים שלך דרך ההגדרות שלך ב־Google Play.</string>
     <string name="search_poi_types">חיפוש סוגי נקודות עניין</string>
-    <string name="search_poi_types_descr">שילוב סוגי נקודות עניין מקטגוריות שונות. יש לגעת ב„החלפה” כדי לבחור את כולן, נגיעה בצד השמאלי לבחירת קטגוריה.</string>
     <string name="tracker_item">עוקב OsmAnd</string>
     <string name="mapillary_item">OsmAnd ו־Mapillary</string>
     <string name="quick_action_item">פעולה מהירה</string>

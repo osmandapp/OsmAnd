@@ -3674,7 +3674,6 @@ Lon %2$s</string>
 \nund wenn es abläuft (nach einem Monat, drei Monaten oder einem Jahr)
 \nverlängert es sich nicht von selbst, wenn es vorher in Ihren Google Play-Einstellungen gekündigt wurde.</string>
     <string name="search_poi_types">Suche nach POI-Typen</string>
-    <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf \"Wechseln\", um alle auszuwählen, tippen Sie auf die linke Seite für die Kategorieauswahl.</string>
     <string name="shared_string_divider">Trenner</string>
     <string name="quick_action_item">Schnellaktion</string>
     <string name="radius_ruler_item">Zirkel</string>

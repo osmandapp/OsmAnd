@@ -3665,7 +3665,6 @@ Pôr do Sol: %2$s</string>
 \n
 \n  Você pode gerenciar e cancelar suas assinaturas acessando as configurações do Google Play.</string>
     <string name="search_poi_types">Pesquisar tipos de POI</string>
-    <string name="search_poi_types_descr">Combine tipos de PIs de diferentes categorias. Toque em \"Alternar\" para selecionar todos, toque no lado esquerdo para selecionar a categoria.</string>
     <string name="tracker_item">Rastreador do OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Ação rápida</string>

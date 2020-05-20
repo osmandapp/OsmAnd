@@ -3653,7 +3653,6 @@
 \nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. Se le cobrará a su cuenta el período de renovación (mes / tres meses / año) solo en la fecha de renovación. 
 \n
 \nPuede administrar y cancelar sus suscripciones yendo a la configuración de Google Play.</string>
-    <string name="search_poi_types_descr">Combina tipos de POI de diferentes categorías. Toque \"Cambiar\" para seleccionar todo, toque el lado izquierdo para la selección de categoría.</string>
     <string name="reset_deafult_order">Restaurar pedido de artículos predeterminado</string>
     <string name="quick_action_switch_profile_descr">El botón de acción de grabación cambiará entre los perfiles seleccionados.</string>
     <string name="index_name_antarctica">Antártida</string>

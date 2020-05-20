@@ -3422,7 +3422,6 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_circle">cirkel</string>
     <string name="shared_string_rhomb">Ruit</string>
     <string name="shared_string_min">Min</string>
-    <string name="search_poi_types_descr">Combineer POI-types uit verschillende categorieën. Tik op \"Schakelen\" om alles te selecteren, tik op de linkerkant voor de categoriekeuze.</string>
     <string name="extra_maps_menu_group">Extra kaarten</string>
     <string name="download_unsupported_action">Niet ondersteunde actie %1$s</string>
     <string name="tracker_item">OsmAnd zoeker</string>

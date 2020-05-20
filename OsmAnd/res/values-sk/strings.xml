@@ -3669,7 +3669,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 \n
 \n Vaše predplatné môžete spravovať a zrušiť v nastaveniach Google Play.</string>
     <string name="search_poi_types">Hľadať typy bodov záujmu</string>
-    <string name="search_poi_types_descr">Skombinovať typy bodov záujmov z rôznych kategórií. Stlačte \"Prepnúť\" pre zvolenie všetkých, stlačte ľavú stranu pre výber kategórií.</string>
     <string name="tracker_item">Stopovanie OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Rýchla akcia</string>

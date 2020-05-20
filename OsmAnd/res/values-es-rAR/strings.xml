@@ -3682,7 +3682,6 @@
 \n
 \nPuedes administrar y cancelar las suscripciones accediendo a los ajustes de Google Play.</string>
     <string name="search_poi_types">Buscar por tipos de PDI</string>
-    <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Pulsa «Alternar» para marcar todo, pulsa el lado izquierdo para elegir una categoría.</string>
     <string name="tracker_item">OsmAnd Tracker</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Acción rápida</string>
