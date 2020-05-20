@@ -90,9 +90,11 @@ public class Algorithms {
 		return def;
 	}
 
-
 	public static String getFileNameWithoutExtension(File f) {
-		String name = f.getName();
+		return getFileNameWithoutExtension(f.getName());
+	}
+
+	public static String getFileNameWithoutExtension(String name) {
 		int i = name.indexOf('.');
 		if (i >= 0) {
 			name = name.substring(0, i);
@@ -248,6 +250,32 @@ public class Algorithms {
 		int test = readInt(in);
 		in.close();
 		return test == 0x504b0304;
+	}
+
+	/**
+	 * Checks, whether the child directory is a subdirectory of the parent
+	 * directory.
+	 *
+	 * @param parent the parent directory.
+	 * @param child  the suspected child directory.
+	 * @return true if the child is a subdirectory of the parent directory.
+	 */
+	public static boolean isSubDirectory(File parent, File child) {
+		try {
+			parent = parent.getCanonicalFile();
+			child = child.getCanonicalFile();
+
+			File dir = child;
+			while (dir != null) {
+				if (parent.equals(dir)) {
+					return true;
+				}
+				dir = dir.getParentFile();
+			}
+		} catch (IOException e) {
+			return false;
+		}
+		return false;
 	}
 
 	private static int readInt(InputStream in) throws IOException {

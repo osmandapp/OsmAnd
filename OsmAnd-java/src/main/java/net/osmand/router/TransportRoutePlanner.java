@@ -834,13 +834,17 @@ public class TransportRoutePlanner {
 			
 			// could be global ?
 			TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<TransportStop>();
-			TIntObjectHashMap<TransportRoute> localFileRoutes = new TIntObjectHashMap<>(); //reference, route
+			
 			for (BinaryMapIndexReader r : routeMap.keySet()) {
 				sr.clearSearchResults();
 				List<TransportStop> stops = r.searchTransportIndex(sr);
 
-				localFileRoutes.clear();
-				mergeTransportStops(r, loadedTransportStops, stops, localFileRoutes, routeMap.get(r));
+				TIntArrayList routesToLoad = mergeTransportStops(r, loadedTransportStops, stops);
+				
+				TIntObjectHashMap<TransportRoute> loadedRoutes = routeMap.get(r);
+//				localFileRoutes.clear();
+				TIntObjectHashMap<TransportRoute> localFileRoutes = new TIntObjectHashMap<>(); //reference, route
+				loadRoutes(r, localFileRoutes, loadedRoutes, routesToLoad);
 					
 				for (TransportStop stop : stops) {
 					// skip missing stops
@@ -850,7 +854,7 @@ public class TransportRoutePlanner {
 					long stopId = stop.getId();
 					TransportStop multifileStop = loadedTransportStops.get(stopId);
 					int[] rrs = stop.getReferencesToRoutes();
-					// clear up so it won't be used as it is multi file stop
+					// clear up so it won't be used because there is multi file stop
 					stop.setReferencesToRoutes(null);
 					if (rrs != null && !multifileStop.isDeleted()) {
 						for (int rr : rrs) {
@@ -880,15 +884,11 @@ public class TransportRoutePlanner {
 		}
 
 		
-		public static List<TransportStop> mergeTransportStops(BinaryMapIndexReader reader,
-															  TLongObjectHashMap<TransportStop> loadedTransportStops,
-															  List<TransportStop> stops,
-															  TIntObjectHashMap<TransportRoute> localFileRoutes,
-															  TIntObjectHashMap<TransportRoute> loadedRoutes 
-															  ) throws IOException {
+		public TIntArrayList mergeTransportStops(BinaryMapIndexReader reader, TLongObjectHashMap<TransportStop> loadedTransportStops,
+															  List<TransportStop> stops) throws IOException {
 			TIntArrayList routesToLoad = new TIntArrayList();
-			TIntArrayList localRoutesToLoad = new TIntArrayList();
 			Iterator<TransportStop> it = stops.iterator();
+			TIntArrayList localRoutesToLoad = new TIntArrayList();
 			while (it.hasNext()) {
 				TransportStop stop = it.next();
 				long stopId = stop.getId();
@@ -899,7 +899,7 @@ public class TransportRoutePlanner {
 				if (multifileStop == null) {
 					loadedTransportStops.put(stopId, stop);
 					multifileStop = stop;
-					if(!stop.isDeleted()) {
+					if (!stop.isDeleted()) {
 						localRoutesToLoad.addAll(stop.getReferencesToRoutes());
 					}
 				} else if (multifileStop.isDeleted()){
@@ -932,7 +932,11 @@ public class TransportRoutePlanner {
 				routesToLoad.addAll(localRoutesToLoad);
 				multifileStop.putReferencesToRoutes(reader.getFile().getName(), localRoutesToLoad.toArray()); //add valid stop and references to routes 
 			}
+			return routesToLoad;
+		}
 
+		private void loadRoutes(BinaryMapIndexReader reader, TIntObjectHashMap<TransportRoute> localFileRoutes,
+				TIntObjectHashMap<TransportRoute> loadedRoutes, TIntArrayList routesToLoad) throws IOException {
 			// load/combine routes
 			if (routesToLoad.size() > 0) {
 				routesToLoad.sort();
@@ -954,8 +958,6 @@ public class TransportRoutePlanner {
 					loadedRoutes.putAll(localFileRoutes);
 				}
 			}
-
-			return stops;
 		}
 		
 		private TransportRoute getCombinedRoute(TransportRoute route) throws IOException {
