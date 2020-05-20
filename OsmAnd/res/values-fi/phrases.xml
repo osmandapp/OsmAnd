@@ -1448,4 +1448,14 @@
     <string name="poi_caravans_no">Asuntovaunut: ei</string>
     <string name="poi_group_only_no">Vain ryhmä: ei</string>
     <string name="poi_group_only_yes">Ainoastaan ryhmä: kyllä</string>
+    <string name="poi_radar">Tutka</string>
+    <string name="poi_mast">Masto</string>
+    <string name="poi_astronomical_observatory">Tähtitieteellinen</string>
+    <string name="poi_vineyard">Viinitarha</string>
+    <string name="poi_recycling_foil">Folio</string>
+    <string name="poi_recycling_cork">Korkki</string>
+    <string name="poi_recycling_tetrapak">Tetrapak</string>
+    <string name="poi_recycling_low_energy_bulbs">Matalaenergialamput</string>
+    <string name="poi_watermill">Vesimylly</string>
+    <string name="poi_aerialway_goods">Tavara hissi</string>
 </resources>

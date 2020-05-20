@@ -2227,9 +2227,7 @@ POIの更新は利用できません</string>
     <string name="quick_action_replace_destination">目的地を置き換え</string>
     <string name="quick_action_add_first_intermediate">最初の中間地点を追加</string>
     <string name="quick_action_add_destination_desc">画面の中心を目的地として設定するボタンです。以前の目的地は最後に寄る経由地点として置き換わります。</string>
-    <string name="quick_action_replace_destination_desc">アクションボタンをタップすると、画面中央アイコンの地点を新しい目的地として置き換えます。
-\n
-\n画面の中心を新しい目的地に設定するするボタンです。既存の目的地が存在する場合は置き換わります。</string>
+    <string name="quick_action_replace_destination_desc">画面中央を新しい目的地として設定するボタンで、以前に選択した目的地がある場合は置き換わります。</string>
     <string name="quick_action_add_first_intermediate_desc">画面中央アイコンの地点を最初の経由地点として追加するボタンです。</string>
     <string name="no_overlay">オーバーレイ無し</string>
     <string name="no_underlay">アンダーレイ無し</string>
@@ -3607,4 +3605,18 @@ POIの更新は利用できません</string>
     <string name="shared_string_square">四角形</string>
     <string name="shared_string_rhomb">ひし形</string>
     <string name="shared_string_min">最小</string>
+    <string name="quick_action_transport_hide">公共交通機関を非表示</string>
+    <string name="quick_action_transport_show">公共交通機関を表示</string>
+    <string name="quick_action_show_hide_transport">公共交通機関の表示/非表示</string>
+    <string name="quick_action_transport_descr">マップ内公共交通機関の表示/非表示を切り替えるボタンです。</string>
+    <string name="create_edit_poi">POIの作成/編集</string>
+    <string name="parking_positions">駐車位置</string>
+    <string name="add_edit_favorite">お気に入りの追加/編集</string>
+    <string name="reset_deafult_order">アイテム順序をデフォルトに戻す</string>
+    <string name="back_to_editing">編集に戻る</string>
+    <string name="quick_action_switch_profile_descr">選択したプロファイルを切り替えるボタンです。</string>
+    <string name="shared_string_add_profile">プロファイルの追加</string>
+    <string name="change_application_profile">アプリプロファイルの変更</string>
+    <string name="index_item_world_basemap_detailed">世界地図(詳細)</string>
+    <string name="profiles_for_action_not_found">それらしいプロファイルは見つかりませんでした。</string>
 </resources>

@@ -3683,7 +3683,7 @@
 \n
 \nبرای مدیریت یا لغو اشتراک خود، به تنظیمات گوگل‌پلی بروید.</string>
     <string name="tracker_item">OsmAnd tracker</string>
-    <string name="legend_item_description">راهنمای نمادهای نقشه</string>
+    <string name="legend_item_description">راهنمای نمادشناسی نقشه.</string>
     <string name="navigation_profiles_item">پروفایل‌های ناوبری</string>
     <string name="lang_zhyue">کانتونی</string>
     <string name="lang_zhminnan">مین‌نانی</string>
@@ -3748,5 +3748,6 @@
     <string name="quick_action_switch_profile_descr">با لمس دکمهٔ عملیاتی بین پروفایل‌های انتخاب‌شده جابه‌جا شوید.</string>
     <string name="shared_string_add_profile">افزودن پروفایل</string>
     <string name="change_application_profile">تغییر پروفایل برنامه</string>
-    <string name="profiles_for_action_not_found">پروفایل‌های انتخاب‌شده برای این کنش، پیدا نشدند.</string>
+    <string name="profiles_for_action_not_found">چنین پروفایلی پیدا نشد.</string>
+    <string name="index_item_world_basemap_detailed">نقشهٔ نمای کلی جهان ( با جزئیات)</string>
 </resources>

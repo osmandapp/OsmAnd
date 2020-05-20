@@ -3612,7 +3612,7 @@
     <string name="shared_string_language">Lingvo</string>
     <string name="shared_string_all_languages">Ĉiuj lingvoj</string>
     <string name="wiki_menu_download_descr">Kromaj mapoj estas necesaj por vidigi punktojn de Vikipedio sur la mapo.</string>
-    <string name="main_actions_descr">La “ĉefaj agoj” povas enhavi nur 4 butonojn.</string>
+    <string name="main_actions_descr">Povas enhavi nur kvar butonojn.</string>
     <string name="main_actions">Ĉefaj agoj</string>
     <string name="move_inside_category">Vi povas movi elementojn nur ene tiu ĉi kategorio.</string>
     <string name="developer_plugin">Programista kromprogramo</string>
@@ -3668,7 +3668,7 @@
 \n La abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La pago estos prenita por la renoviĝa periodo (monato/tri monatoj/jaro) nur je la data de renoviĝo.
 \n
 \n Vi povas administri kaj rezigni viajn abonojn per agordoj de Google Play.</string>
-    <string name="search_poi_types_descr">Miksi specojn de interesejoj el diversaj kategorioj. Frapetu “ŝaltilon” por elekti ĉiujn, frapetu ĉe maldekstre por elekti el la kategorio.</string>
+    <string name="search_poi_types_descr">Miksi specojn de interesejoj el diversaj kategorioj. Frapetu ŝaltilon por elekti la tutan kategorion, frapetu ĉe maldekstre por elekti detala(j)n objekto(j)n el la kategorio.</string>
     <string name="search_poi_types">Serĉi specojn de interesejoj</string>
     <string name="favorites_item">Ŝatataj ejoj</string>
     <string name="subscription_osmandlive_item">Aboni OsmAnd Live</string>
@@ -3680,23 +3680,23 @@
     <string name="measure_distance_item">Distanc-mezurilo</string>
     <string name="travel_item">Vojaĝo (Vikivojaĝoj kaj Vikipedio)</string>
     <string name="map_markers_item">Map‑markoj</string>
-    <string name="legend_item_description">Priskribo al simboloj sur la mapo</string>
+    <string name="legend_item_description">Gvidilo al simboloj sur la mapo.</string>
     <string name="navigation_profiles_item">Profiloj de navigo</string>
-    <string name="release_3_7">• novaj mapoj de dekliveco por malkonekta uzado
+    <string name="release_3_7">• novaj mapoj de dekliveco por malkonekta uzado 
 \n 
-\n • plena alĝustigo de ŝatataj punktoj kaj GPX‑navigadpunktoj: propraj koloroj, emblemoj kaj formoj
+\n • plena alĝustigo de ŝatataj punktoj kaj GPX‑navigadpunktoj: propraj koloroj, emblemoj kaj formoj 
 \n 
-\n • reordigi elementojn de la kunteksta menuo, menuo “konfiguri mapon” kaj tirmenuo
+\n • reordigi elementojn de la kunteksta menuo, menuo “konfiguri mapon” kaj tirmenuo 
 \n 
-\n • Vikipedio kiel aparta tavolo vidigebla per la menuo “konfiguri mapon”, eblo elekti nur bezonatajn lingvojn
+\n • Vikipedio kiel aparta tavolo vidigebla per la menuo “konfiguri mapon”, eblo elekti nur bezonatajn lingvojn 
 \n 
-\n • krei viajn proprajn filtrilojn/mapojn de interesejoj, tute agordeblaj
+\n • krei viajn proprajn filtrilojn/mapojn de interesejoj, tute agordeblaj 
 \n 
-\n • restarigi agordojn por propraj profiloj
+\n • restarigi agordojn por propraj profiloj 
 \n 
-\n • plenaj GPX‑spuroj en navigo, subteno por instrukcioj pri (voj)koridoroj kaj turnoj
+\n • plenaj GPX‑spuroj en navigo, subteno por instrukcioj pri (voj)koridoroj kaj turnoj 
 \n 
-\n • riparita grando de fasado ĉe tabulkomputiloj
+\n • riparita grando de fasado ĉe tabulkomputiloj 
 \n 
 \n • riparitaj eraroj pri lingvoj skribataj dekstre-maldekstren
 \n
@@ -3715,6 +3715,6 @@
     <string name="quick_action_switch_profile_descr">Butono por baskuli inter elektitaj profiloj.</string>
     <string name="shared_string_add_profile">Aldoni profilon</string>
     <string name="change_application_profile">Ŝanĝi aplikaĵan profilon</string>
-    <string name="profiles_for_action_not_found">Ne trovis profilojn elektitajn por tiu ĉi ago.</string>
+    <string name="profiles_for_action_not_found">Ne trovis tiajn profilojn.</string>
     <string name="index_item_world_basemap_detailed">Fundamenta mapo de mondo (detala)</string>
 </resources>
