@@ -3627,4 +3627,24 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="search_poi_types_descr">Kombináljon POI típusokat különböző kategóriákból. Koppintson egy kapcsolóra az összes altípus kiválasztásához, vagy koppintson egy szövegre az egyes altípusok kijelöléséhez.</string>
     <string name="search_poi_types">POI típusok keresése</string>
     <string name="index_item_world_basemap_detailed">Áttekintő világtérkép (részletes)</string>
+    <string name="release_3_7">• Új offline lejtőtérkép
+\n
+\n • Kedvencek és GPX-útpontok teljes testreszabhatósága – egyéni színek, ikonok, formák
+\n
+\n • Opciók menü, Térkép beállítása és Főmenü elemeinek sorrendje testreszabhatók
+\n
+\n • Wikipédia külön rétegként szerepel a Térkép beállítása menüben, a kívánt nyelvek kiválaszthatók
+\n
+\n • Saját POI szűrők létrehozhatók / térképek teljes rugalmassággal
+\n
+\n • Egyéni profilok beállításainak visszaállíthatósága
+\n
+\n • Teljeskörű GPX útvonalak létrehozása a navigációból, mely támogatja a forgalmi sávokat és a teljes navigációs utasításokat
+\n
+\n • Felhasználói felület méreteinek javítása táblagépeken
+\n
+\n • Jobbról balra írt nyelvekkel kapcsolatos hibák javítása
+\n
+\n</string>
+    <string name="unsupported_type_error">Nem támogatott típus</string>
 </resources>
