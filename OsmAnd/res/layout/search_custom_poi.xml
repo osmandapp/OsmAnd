@@ -75,10 +75,10 @@
                 android:id="@+id/search_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/content_padding"
-                android:layout_marginLeft="@dimen/content_padding"
-                android:layout_marginEnd="@dimen/list_content_padding_large"
-                android:layout_marginRight="@dimen/list_content_padding_large"
+                android:paddingStart="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingEnd="@dimen/list_content_padding_large"
+                android:paddingRight="@dimen/list_content_padding_large"
                 tools:src="@drawable/ic_action_search_dark" />
 
             <EditText

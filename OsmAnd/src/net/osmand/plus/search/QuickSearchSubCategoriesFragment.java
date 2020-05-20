@@ -178,6 +178,13 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		});
 		ImageView searchIcon = root.findViewById(R.id.search_icon);
 		searchIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_search_dark, nightMode));
+		searchIcon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				searchEditText.requestFocus();
+				AndroidUtils.showSoftKeyboard(searchEditText);
+			}
+		});
 		ImageView searchCloseIcon = root.findViewById(R.id.search_close);
 		searchCloseIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_cancel, nightMode));
 		searchCloseIcon.setOnClickListener(new View.OnClickListener() {
