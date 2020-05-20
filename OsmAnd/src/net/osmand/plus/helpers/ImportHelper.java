@@ -876,6 +876,10 @@ public class ImportHelper {
 					if (!destDir.exists()) {
 						destDir.mkdirs();
 					}
+					if (importType == ImportType.RENDERING && !destFileName.endsWith(RENDERER_INDEX_EXT)) {
+						String fileName = Algorithms.getFileNameWithoutExtension(destFileName);
+						destFileName = fileName + RENDERER_INDEX_EXT;
+					}
 					File destFile = new File(destDir, destFileName);
 					while (destFile.exists()) {
 						destFileName = AndroidUtils.createNewFileName(destFileName);
@@ -1171,7 +1175,8 @@ public class ImportHelper {
 		return favourites;
 	}
 
-	private void executeImportTask(final AsyncTask<?, ?, ?> importTask) {
+	@SuppressWarnings("unchecked")
+	private <P> void executeImportTask(final AsyncTask<P, ?, ?> importTask, final P... requests) {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
 				@Override
@@ -1180,11 +1185,11 @@ public class ImportHelper {
 
 				@Override
 				public void onFinish(AppInitializer init) {
-					importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 				}
 			});
 		} else {
-			importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 		}
 	}
 }
