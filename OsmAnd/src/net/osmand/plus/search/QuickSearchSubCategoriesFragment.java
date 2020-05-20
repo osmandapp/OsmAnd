@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -53,6 +54,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	private View headerSelectAll;
 	private View headerShadow;
 	private View footerShadow;
+	private FrameLayout addButton;
 	private boolean selectAll;
 	private boolean nightMode;
 
@@ -91,6 +93,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 			public void onCategoryClick(boolean allSelected) {
 				selectAll = allSelected;
 				selectAllSwitch.setChecked(allSelected);
+				updateAddBtnVisibility();
 			}
 		});
 		if (selectAll || acceptedCategories == null) {
@@ -126,16 +129,19 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				LinkedHashSet<String> list = new LinkedHashSet<>();
-				for (PoiType poiType : adapter.getSelectedItems()) {
-					list.add(poiType.getKeyName());
-				}
-				listener.onFiltersSelected(poiCategory, list);
-				dismiss();
+				dismissFragment();
 			}
 		});
 		TextView title = root.findViewById(R.id.title);
 		title.setText(poiCategory.getTranslation());
+		addButton = root.findViewById(R.id.add_button);
+		updateAddBtnVisibility();
+		addButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				dismissFragment();
+			}
+		});
 		listView = root.findViewById(R.id.list);
 		headerShadow = inflater.inflate(R.layout.list_shadow_header, listView, false);
 		footerShadow = inflater.inflate(R.layout.list_shadow_footer, listView, false);
@@ -148,6 +154,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 				selectAll = !selectAll;
 				selectAllSwitch.setChecked(selectAll);
 				adapter.selectAll(selectAll);
+				updateAddBtnVisibility();
 			}
 		});
 		listView.addFooterView(footerShadow);
@@ -193,18 +200,28 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 					if (event.getAction() == KeyEvent.ACTION_DOWN) {
 						return true;
 					} else {
-						LinkedHashSet<String> list = new LinkedHashSet<>();
-						for (PoiType poiType : adapter.getSelectedItems()) {
-							list.add(poiType.getKeyName());
-						}
-						listener.onFiltersSelected(poiCategory, list);
-						dismiss();
+						dismissFragment();
 						return true;
 					}
 				}
 				return false;
 			}
 		});
+	}
+
+	private void updateAddBtnVisibility() {
+		if (addButton != null) {
+			addButton.setVisibility(adapter.getSelectedItems().isEmpty() ? View.GONE : View.VISIBLE);
+		}
+	}
+
+	private void dismissFragment() {
+		LinkedHashSet<String> list = new LinkedHashSet<>();
+		for (PoiType poiType : adapter.getSelectedItems()) {
+			list.add(poiType.getKeyName());
+		}
+		listener.onFiltersSelected(poiCategory, list);
+		dismiss();
 	}
 
 	private void clearSearch() {

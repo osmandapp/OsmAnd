@@ -109,9 +109,43 @@
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:divider="@null"
         android:dividerHeight="0dp"
         android:drawSelectorOnTop="true" />
+
+    <include layout="@layout/divider" />
+
+    <FrameLayout
+        android:id="@+id/add_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_button_ex_height"
+        android:background="?attr/bg_color"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_button_height"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/content_padding"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:background="?attr/dlg_btn_primary"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="@string/shared_string_add"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/default_list_text_size" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>
