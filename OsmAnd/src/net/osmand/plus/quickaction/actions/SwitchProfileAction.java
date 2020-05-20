@@ -10,9 +10,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.SelectMultipleProfilesBottomSheet;
@@ -20,7 +18,8 @@ import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
-import net.osmand.plus.views.MapQuickActionLayer;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -131,11 +130,6 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 			settings.APPLICATION_MODE.set(appMode);
 
 			app.getQuickActionRegistry().setQuickActionFabState(true);
-
-			MapQuickActionLayer mil = activity.getMapLayers().getMapQuickActionLayer();
-			if (mil != null) {
-				mil.refreshLayer();
-			}
 
 			String message = String.format(activity.getString(
 					R.string.application_profile_changed), appMode.toHumanString());
