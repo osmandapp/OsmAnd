@@ -1614,7 +1614,7 @@
 \n 
 \nللعودة إلى واحدة من أنماط الخريطة التقليدية، ببساطة إما عطل هذه الأداة مرة أخرى أو غير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
-    <string name="active_markers">نشطة</string>
+    <string name="active_markers">العلامات النشطة</string>
     <string name="map_markers">علامات الخريطة</string>
     <string name="routing_attr_avoid_borders_name">تخطي الحدود</string>
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل.</string>
