@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
@@ -104,7 +105,8 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 			FavouritePoint objectInMotion = (FavouritePoint) contextMenuLayer.getMoveableObject();
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
-			drawBigPoint(canvas, objectInMotion, pf.x, pf.y, mapMarker);
+			float textScale = this.settings.TEXT_SCALE.get();
+			drawBigPoint(canvas, objectInMotion, pf.x, pf.y, mapMarker, textScale);
 		}
 	}
 
@@ -113,8 +115,9 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		cache.clear();
 		if (this.settings.SHOW_FAVORITES.get() && favorites.isFavoritesLoaded()) {
 			if (tileBox.getZoom() >= startZoom) {
+				float textScale = this.settings.TEXT_SCALE.get();
 				float iconSize = FavoriteImageDrawable.getOrCreate(view.getContext(), 0,
-						 true, (FavouritePoint) null).getIntrinsicWidth() * 3 / 2.5f;
+						true, (FavouritePoint) null).getIntrinsicWidth() * 3 / 2.5f * textScale;
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 				// request to load
@@ -147,17 +150,15 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 									color = grayColor;
 								} else {
 									color = favorites.getColorWithCategory(o,defaultColor);
-//									color = o.getColor() == 0  ? defaultColor : o.getColor();
 								}
 								paintIcon.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
 								Bitmap pointSmallTop = getBitmap(o, "top");
 								Bitmap pointSmallCenter = getBitmap(o, "center");
 								Bitmap pointSmallBottom = getBitmap(o, "bottom");
-								float left = x - pointSmallTop.getWidth() / 2f;
-								float top = y - pointSmallTop.getHeight() / 2f;
-								canvas.drawBitmap(pointSmallBottom, left, top, null);
-								canvas.drawBitmap(pointSmallCenter, left, top, paintIcon);
-								canvas.drawBitmap(pointSmallTop, left, top, null);
+								Rect destRect = getIconDestinationRect(x, y, pointSmallTop.getWidth(), pointSmallTop.getHeight(), textScale);
+								canvas.drawBitmap(pointSmallBottom, null, destRect, null);
+								canvas.drawBitmap(pointSmallCenter, null, destRect, paintIcon);
+								canvas.drawBitmap(pointSmallTop, null, destRect, null);
 								smallObjectsLatLon.add(new LatLon(lat, lon));
 							} else {
 								fullObjects.add(new Pair<>(o, marker));
@@ -169,7 +170,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 						FavouritePoint o = pair.first;
 						float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 						float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-						drawBigPoint(canvas, o, x, y, pair.second);
+						drawBigPoint(canvas, o, x, y, pair.second, textScale);
 					}
 				}
 				this.fullObjectsLatLon = fullObjectsLatLon;
@@ -190,7 +191,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		return pointSmall;
 	}
 
-	private void drawBigPoint(Canvas canvas, FavouritePoint o, float x, float y, @Nullable MapMarker marker) {
+	private void drawBigPoint(Canvas canvas, FavouritePoint o, float x, float y, @Nullable MapMarker marker, float textScale) {
 		FavoriteImageDrawable fid;
 		boolean history = false;
 		if (marker != null) {
@@ -199,7 +200,8 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		} else {
 			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), favorites.getColorWithCategory(o,defaultColor), true, o);
 		}
-		fid.drawBitmapInCenter(canvas, x, y, history);
+		Rect destRest = getIconDestinationRect(x, y, fid.getIntrinsicWidth(), fid.getIntrinsicHeight(), textScale);
+		fid.drawBitmapInCenter(canvas, destRest, history);
 	}
 
 	private int getSmallIconId(String layer, int iconId) {
