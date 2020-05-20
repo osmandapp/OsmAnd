@@ -3723,4 +3723,5 @@
     <string name="profiles_for_action_not_found">Не найдено подходящих профилей.</string>
     <string name="shared_string_resume">Продолжить</string>
     <string name="index_item_world_basemap_detailed">Мировая обзорная карта (подробная)</string>
+    <string name="unsupported_type_error">Неподдерживаемый тип</string>
 </resources>
