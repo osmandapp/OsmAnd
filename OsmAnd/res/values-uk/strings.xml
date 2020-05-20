@@ -262,7 +262,7 @@
     <string name="trace_rendering">Налагоджувальні відомості про відмалювання</string>
     <string name="trace_rendering_descr">Відображає плідність відмалювання.</string>
     <string name="installing_new_resources">Розпаковуються нові дані…</string>
-    <string name="internet_connection_required_for_online_route">Мережева служба навігації обрана, але Ви не підключені до Всемережжя.</string>
+    <string name="internet_connection_required_for_online_route">Вибрано мережеву службу навігації, але ви не підключені до Інтернету.</string>
     <string name="tts_language_not_supported_title">Мова не підтримується</string>
     <string name="tts_language_not_supported">Вибрана мова не підтримується встановленим двигуном Android TTS (текстовим мовленням), замість цього буде використана його попередньо налаштована мова TTS. Шукаєте інший двигун TTS\?</string>
     <string name="tts_missing_language_data_title">Дані відсутні</string>
@@ -801,7 +801,7 @@
     <string name="shared_string_control_stop">Стоп</string>
     <string name="shared_string_control_start">Почати</string>
     <string name="map_widget_av_notes">Звуко/відео-нотатки</string>
-    <string name="osmand_srtm_short_description_80_chars">Втулок OsmAnd для відображення горизонталей в автономному режимі</string>
+    <string name="osmand_srtm_short_description_80_chars">Плагін OsmAnd для показу горизонталей в автономному режимі</string>
     <string name="av_use_external_camera">Використовувати програму Камера</string>
     <string name="av_settings_descr">Налаштування авдіо/відео запису.</string>
     <string name="av_settings">Налаштування аудіо/відео</string>
@@ -830,9 +830,9 @@
     <string name="audionotes_plugin_name">Звуко/відео-нотатки</string>
     <string name="index_srtm_parts">частин</string>
     <string name="index_srtm_ele">Горизонталі</string>
-    <string name="srtm_plugin_description">Цей втулок показує як шар горизонталей, так і шар рельєфу поверх усталених мап OsmAnd. Ця функціональність стане в нагоді спортсменам, туристам, мандрівникам та будь-кому, хто цікавиться структурою рельєфу місцевості. (Зверніть увагу, що дані про горизонталі є окремими від даних про рельєф; додаткові завантаження доступні після задіювання втулку.) 
+    <string name="srtm_plugin_description">Цей втулок показує як шар горизонталей, так і шар рельєфу поверх усталених мап OsmAnd. Ця функціональність стане в пригоді спортсменам, туристам, мандрівникам та будь-кому, хто цікавиться структурою рельєфу місцевості. (Зверніть увагу, що дані про горизонталі є окремими від даних про рельєф; додаткові завантаження доступні після задіювання втулку.) 
 \n 
-\nВсесвітні дані (між 70° на півночі і 70° на півдні) засновано на вимірюваннях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), даних інструменту відмальовування Terra, флагманського супутника устрою спостереження Землі від NASA. ASTER — це підсумок спільної роботи NASA, міністерства економіки Японії, міністерства торгівлі і промисловості Японії (METI), агенції космічних систем Японії (J-spacesystems).</string>
+\nВсесвітні дані (між 70° на півночі й 70° на півдні) засновано на вимірюваннях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), даних інструменту відмальовування Terra, флагманського супутника устрою спостереження Землі від NASA. ASTER — це підсумок спільної роботи NASA, міністерства економіки Японії, міністерства торгівлі та промисловості Японії (METI), агенції космічних систем Японії (J-spacesystems).</string>
     <string name="srtm_plugin_name">Горизонталі</string>
     <string name="download_select_map_types">Інші мапи</string>
     <string name="download_roads_only_item">Тільки дороги</string>
@@ -1306,9 +1306,9 @@
     <string name="rendering_value_car_name">Автівка</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пішки</string>
-    <string name="record_plugin_description">Цей втулок задіює можливість записувати та зберігати Ваші треки вручну, торкаючись віджету записування GPX на екрані мапи, або автоматично записувати всі Ваші подорожі у файл GPX. 
+    <string name="record_plugin_description">Цей втулок додає функцію запису та збереження ваших пересувань вручну, торканням віджету записування GPX на екрані мапи, або автоматично записувати всі ваші подорожі у файл GPX. 
 \n 
-\nЗаписаними треками можна поділитись з Вашими друзями або іншими учасниками спільноти OSM. Атлети можуть використовувати записані треки для відстежування власних тренувань. Основний розбір треків наявний безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість й т.п., звісно, записані треки можна також проаналізувати за допомогою іншого програмного забезпечення.</string>
+\nЗаписаними маршрутами можна поділитись з вашими друзями або іншими учасниками спільноти OSM. Атлети можуть користуватися записаними маршрутами для відстеження власних тренувань. Основні деталі маршрутів наявний безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість тощо, звісно, записані маршрути, також можна проаналізувати за допомогою сторонніх інструментів.</string>
     <string name="save_track_to_gpx_globally">Писати трек у файл GPX</string>
     <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна ввімкнути або вимкнути кнопкою запис GPX на екрані з мапою.</string>
     <string name="save_track_interval_globally">Інтервал записування</string>
@@ -1445,7 +1445,7 @@
     <string name="shared_string_enable">Увімкнути</string>
     <string name="shared_string_disable">Вимкнути</string>
     <string name="plugin_description_title">Опис</string>
-    <string name="plugin_install_needs_network">Для встановлення цього втулку вам потрібне з’єднання з Всемережжям.</string>
+    <string name="plugin_install_needs_network">Для встановлення цього втулка вам потрібне з’єднання з Інтернетом.</string>
     <string name="get_plugin">Отримати</string>
     <string name="plugin_nautical_descr">Цей втулок збагачує OsmAnd морськими мапами для човнів, вітрильного спорту та інших видів водних видів спорту. 
 \n 
@@ -1700,7 +1700,7 @@
     <string name="simulate_your_location_stop_descr">Зупинити симуляцію Вашої позиції.</string>
     <string name="looking_up_address">Пошук адреси</string>
     <string name="av_locations">Місця</string>
-    <string name="plugin_settings">Втулки</string>
+    <string name="plugin_settings">Плагіни</string>
     <string name="routing_attr_avoid_shuttle_train_name">Без приміських поїздів</string>
     <string name="routing_attr_avoid_shuttle_train_description">Уникати приміських поїздів</string>
     <string name="traffic_warning_hazard">Небезпека</string>
@@ -2242,11 +2242,11 @@
     <string name="sorted_by_distance">Відсортоване за відстанню</string>
     <string name="search_favorites">Пошук у закладках</string>
     <string name="hillshade_menu_download_descr">Для того, щоб відобразити затінення рельєфу, потрібно завантажити спеціальну мапу для цієї області.</string>
-    <string name="hillshade_purchase_header">Щоб побачити рельєф місцевості на мапі, вам потрібно придбати та встановити втулок \'Горизонталі\' (\'Contour Lines\').</string>
+    <string name="hillshade_purchase_header">Щоб побачити рельєф місцевості на мапі, вам потрібно придбати та встановити плагін \'Горизонталі\' (\'Contour Lines\').</string>
     <string name="hide_from_zoom_level">Приховати від рівня масштабування</string>
     <string name="srtm_menu_download_descr">Завантажте мапу \'Горизонталі\' (\'Contour Line\') для використання у цій області.</string>
     <string name="shared_string_plugin">Втулок</string>
-    <string name="srtm_purchase_header">Щоб побачити горизонталі на мапі, вам потрібно придбати і встановити відповідний однойменний втулок (\'Contour Lines\').</string>
+    <string name="srtm_purchase_header">Щоб побачити горизонталі на мапі, вам потрібно придбати та встановити втулок \'Горизонталі\'.</string>
     <string name="srtm_color_scheme">Схема кольорів</string>
     <string name="show_from_zoom_level">Відображення від рівня масштабування</string>
     <string name="routing_attr_allow_private_name">Дозволити приватний доступ</string>
@@ -2470,7 +2470,7 @@
     <string name="quick_action_start_stop_navigation_descr">Натисніть цю кнопку, щоб почати або закінчити навігацію.</string>
     <string name="live_monitoring_max_interval_to_send">Час буферизації для мережевого стеження</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Задає час буферизації для збереження місць для відправки в автономному режимі</string>
-    <string name="mappilary_no_internet_desc">Ви повинні бути підключені до Всемережжя для перегляду світлин від Mapillary.</string>
+    <string name="mappilary_no_internet_desc">Ви повинні бути підключені до Інтернету для перегляду світлин від Mapillary.</string>
     <string name="retry">Повторити</string>
     <string name="measurement_tool_action_bar">Перегляньте мапу і додайте точки</string>
     <string name="measurement_tool">Вимірювання відстані</string>
@@ -2689,7 +2689,7 @@
     <string name="coord_input_add_point">Додати точку</string>
     <string name="coord_input_save_as_track">Зберегти як трек</string>
     <string name="quick_action_edit_actions">Редагувати дії</string>
-    <string name="get_osmand_live">Отримайте OsmAnd Live, аби розблокувати всі функції: щоденні оновлення мапи з необмеженими завантаженнями, всі платні та безкоштовні втулки, Вікіпедію, Вікімандри та багато іншого.</string>
+    <string name="get_osmand_live">Отримайте OsmAnd Live, аби розблокувати всі функції: щоденні оновлення мапи з необмеженими завантаженнями, всі платні та безплатні втулки, Вікіпедію, Вікімандри та багато іншого.</string>
     <string name="shared_string_bookmark">Закладка</string>
     <string name="hide_full_description">Приховати повний опис</string>
     <string name="show_full_description">Показати повний опис</string>
@@ -3275,7 +3275,7 @@
     <string name="osmand_settings_descr">Впливає на весь застосунок</string>
     <string name="voice_announces_descr">Навігаційні вказівки та оголошення</string>
     <string name="logcat_buffer">Буфер logcat</string>
-    <string name="plugins_settings">Налаштування втулка</string>
+    <string name="plugins_settings">Налаштування плагіна</string>
     <string name="shared_string_by_default">Усталено</string>
     <string name="default_speed_dialog_msg">Розраховує час прибуття для невідомих типів доріг і обмежує швидкість для всіх доріг (може вплинути на маршрутизацію)</string>
     <string name="download_detailed_map">Завантажте докладну мапу %s, щоб переглянути цю область.</string>
@@ -3480,7 +3480,7 @@
     <string name="shared_string_available">Доступні</string>
     <string name="add_custom_category">Додати власну категорію</string>
     <string name="rendering_attr_streetLightingNight_name">Показувати лише вночі</string>
-    <string name="plugin_prefs_reset_successful">Усі налаштування втулка відновлено до усталеного стану.</string>
+    <string name="plugin_prefs_reset_successful">Усі налаштування плагіна відновлено до типового стану.</string>
     <string name="profile_prefs_reset_successful">Усі налаштування профілю відновлено до усталеного стану.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Захід сонця о %1$s</string>
@@ -3523,9 +3523,9 @@
     <string name="please_provide_profile_name_message">Укажіть назву профілю</string>
     <string name="open_settings">Відкрити налаштування</string>
     <string name="plugin_disabled">Плагін вимкнено</string>
-    <string name="plugin_disabled_descr">Цей плагін є окремою програмою, якщо ви не плануєте користуватися ним надалі, його потрібно буде видалити окремо.
+    <string name="plugin_disabled_descr">Цей втулок є окремою програмою, якщо ви не плануєте користуватися ним надалі, його потрібно буде видалити окремо. 
 \n 
-\nВтулок залишиться на пристрої після видалення OsmAnd.</string>
+\nВін залишиться на пристрої після видалення OsmAnd.</string>
     <string name="shared_string_menu">Меню</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Маршрутизація</string>
@@ -3617,7 +3617,7 @@
     <string name="wiki_menu_download_descr">Для перегляду POI Вікіпедії на мапі потрібні додаткові мапи.</string>
     <string name="ui_customization_description">Встановлення кількості елементів меню \"Скринька\", \"Налаштувати мапу\" та \"Контекстне меню\". 
 \n 
-\nВимкніть непотрібні плагіни, щоби приховати всі їхні елементи керування %1$s.</string>
+\nВимкніть непотрібні втулки, щоби приховати всі їхні елементи керування %1$s.</string>
     <string name="ui_customization_short_descr">Елементи скриньки, контекстне меню</string>
     <string name="ui_customization">Налаштування інтерфейсу</string>
     <string name="shared_string_drawer">Скринька</string>
