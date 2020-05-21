@@ -7,9 +7,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -21,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.SwitchCompat;
@@ -51,7 +54,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class QuickSearchCustomPoiFragment extends DialogFragment {
+public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFiltersSelectedListener {
 
 	public static final String TAG = "QuickSearchCustomPoiFragment";
 	private static final String QUICK_SEARCH_CUSTOM_POI_FILTER_ID_KEY = "quick_search_custom_poi_filter_id_key";
@@ -71,6 +74,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	private TextView barSubTitle;
 	private boolean editMode;
 	private boolean nightMode;
+	private boolean wasChanged;
 	private EditText searchEditText;
 	private FrameLayout button;
 	private List<PoiCategory> poiCategoryList;
@@ -129,7 +133,11 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				if (wasChanged) {
+					showExitDialog();
+				} else {
+					dismiss();
+				}
 			}
 		});
 		toolbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
@@ -171,6 +179,19 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				}
 			}
 		});
+		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView absListView, int i) {
+				if (i == SCROLL_STATE_TOUCH_SCROLL) {
+					AndroidUtils.hideSoftKeyboard(requireActivity(), searchEditText);
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView absListView, int first, int visibleCount, int totalCount) {
+
+			}
+		});
 
 		bottomBarShadow = view.findViewById(R.id.bottomBarShadow);
 		bottomBar = view.findViewById(R.id.bottomBar);
@@ -180,6 +201,13 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 
 		ImageView searchIcon = view.findViewById(R.id.search_icon);
 		searchIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_search_dark, nightMode));
+		searchIcon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				searchEditText.requestFocus();
+				AndroidUtils.showSoftKeyboard(searchEditText);
+			}
+		});
 		ImageView searchCloseIcon = view.findViewById(R.id.search_close);
 		searchCloseIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_cancel, nightMode));
 		searchCloseIcon.setOnClickListener(new View.OnClickListener() {
@@ -206,7 +234,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 
 			}
 		});
-
+		view.findViewById(R.id.topBarShadow).setVisibility(View.VISIBLE);
 		return view;
 	}
 
@@ -228,6 +256,29 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			}
 		}
 		super.onDismiss(dialog);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
+			@Override
+			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+				if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
+					if (event.getAction() == KeyEvent.ACTION_DOWN) {
+						return true;
+					} else {
+						if (wasChanged) {
+							showExitDialog();
+						} else {
+							dismiss();
+						}
+						return true;
+					}
+				}
+				return false;
+			}
+		});
 	}
 
 	private QuickSearchDialogFragment getQuickSearchDialogFragment() {
@@ -266,6 +317,21 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		}
 	}
 
+	private void showExitDialog() {
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
+		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
+		dismissDialog.setTitle(getString(R.string.shared_string_dismiss));
+		dismissDialog.setMessage(getString(R.string.exit_without_saving));
+		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
+		dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dismiss();
+			}
+		});
+		dismissDialog.show();
+	}
+
 	public static void showDialog(DialogFragment parentFragment, String filterId) {
 		Bundle bundle = new Bundle();
 		if (filterId != null) {
@@ -274,6 +340,28 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		QuickSearchCustomPoiFragment fragment = new QuickSearchCustomPoiFragment();
 		fragment.setArguments(bundle);
 		fragment.show(parentFragment.getChildFragmentManager(), TAG);
+	}
+
+	@Override
+	public void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters) {
+		List<String> subCategories = new ArrayList<>();
+		Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
+		if (acceptedCategories != null) {
+			subCategories.addAll(acceptedCategories);
+		}
+		for (PoiType pt : poiCategory.getPoiTypes()) {
+			subCategories.add(pt.getKeyName());
+		}
+		if (subCategories.size() == filters.size()) {
+			filter.selectSubTypesToAccept(poiCategory, null);
+		} else if (filters.size() == 0) {
+			filter.setTypeToAccept(poiCategory, false);
+		} else {
+			filter.selectSubTypesToAccept(poiCategory, filters);
+		}
+		saveFilter();
+		categoryListAdapter.notifyDataSetChanged();
+		wasChanged = true;
 	}
 
 	private class CategoryListAdapter extends ArrayAdapter<PoiCategory> {
@@ -346,10 +434,11 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					wasChanged = true;
 					if (check.isChecked()) {
 						FragmentManager fm = getFragmentManager();
 						if (fm != null) {
-							showSubCategoriesFragment(fm, category, true);
+							showSubCategoriesFragment(fm, category, false);
 						}
 					} else {
 						filter.setTypeToAccept(category, false);
@@ -466,6 +555,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	}
 
 	private void updateFilter(List<PoiType> selectedPoiCategoryList) {
+		wasChanged = true;
 		if (selectedPoiCategoryList.isEmpty()) {
 			return;
 		}
@@ -502,28 +592,10 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 										   @NonNull PoiCategory poiCategory,
 										   boolean selectAll) {
 		Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
-		QuickSearchSubCategoriesFragment.showInstance(fm, poiCategory, acceptedCategories, selectAll,
-				new QuickSearchSubCategoriesFragment.OnFiltersSelectedListener() {
-					@Override
-					public void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters) {
-						List<String> subCategories = new ArrayList<>();
-						Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
-						if (acceptedCategories != null) {
-							subCategories.addAll(acceptedCategories);
-						}
-						for (PoiType pt : poiCategory.getPoiTypes()) {
-							subCategories.add(pt.getKeyName());
-						}
-						if (subCategories.size() == filters.size()) {
-							filter.selectSubTypesToAccept(poiCategory, null);
-						} else if (filters.size() == 0) {
-							filter.setTypeToAccept(poiCategory, false);
-						} else {
-							filter.selectSubTypesToAccept(poiCategory, filters);
-						}
-						saveFilter();
-						categoryListAdapter.notifyDataSetChanged();
-					}
-				});
+		QuickSearchSubCategoriesFragment.showInstance(fm, this, poiCategory, acceptedCategories, selectAll);
 	}
+}
+
+interface OnFiltersSelectedListener {
+	void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters);
 }
