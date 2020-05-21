@@ -254,7 +254,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 			list.add(poiType.getKeyName());
 		}
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof QuickSearchCustomPoiFragment) {
+		if (fragment instanceof OnFiltersSelectedListener) {
 			((QuickSearchCustomPoiFragment) fragment).onFiltersSelected(poiCategory, list);
 		}
 		dismiss();
