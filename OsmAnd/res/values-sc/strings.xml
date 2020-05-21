@@ -2034,7 +2034,7 @@
     <string name="first_usage_greeting">Retzi indicatziones e iscoberi logos noos chene una connessione a ìnternet</string>
     <string name="get_for">Retzi pro %1$s</string>
     <string name="osm_live_banner_desc">Iscàrriga iscarrigamentos de mapas chene lìmites e agiornamentos pro cada chida, cada die o fintzas cada ora.</string>
-    <string name="osm_live_payment_desc">Costu mensile de s\'abbonamentu. Podes iscantzellare s\'iscritzione tua in Google Play cando boles.</string>
+    <string name="osm_live_payment_desc">Costu periòdicu de s\'abbonamentu. Lu podes anullare in Google Play cando boles.</string>
     <string name="donation_to_osm">Donatzione a sa comunidade de OpenStreetMap</string>
     <string name="donation_to_osm_desc">Parte de sa donatzione tua benit imbiada a sos impreadores chi faghent modìficas in OpenStreetMap. Su costu de iscritzione abarrat su matessi.</string>
     <string name="osm_live_subscription_desc">S\'iscritzione abilitat agiornamentos cada ora, die o chida e sa possibilidade de iscarrigare totu sas mapas chene lìmites.</string>
@@ -3137,7 +3137,7 @@
     <string name="default_speed_setting_descr">Muda sas impostatziones predefinidas de lestresa</string>
     <string name="minmax_speed_dialog_title">Imposta sa lestresa mìnima/màssima</string>
     <string name="new_profile">Profilu nou</string>
-    <string name="shared_string_crash">Errore</string>
+    <string name="shared_string_crash">Serradura arrepente</string>
     <string name="last_launch_crashed">S\'ùrtima sessione de OsmAnd s\'est serrada. Pro praghere agiuda·nos a megiorare OsmAnd cumpartzende su messàgiu de errore.</string>
     <string name="app_mode_ufo">OVNI (UFO)</string>
     <string name="release_3_4">• Profilos de s\'aplicatzione: crea unu profilu personalizadu pro sas netzessidades tuas, cun un\'icona e unu colore personalizados 
@@ -3487,7 +3487,7 @@
     <string name="sunrise_at">Arbèschida a sas %1$s</string>
     <string name="monitoring_min_accuracy_descr">Custu at a registrare petzi sos puntos medidos cun un\'acuradesa mìnima indicada (in metros/pees, comente benit sinnaladu dae Android pro su chipset tuo). S\'acuradesa si riferit a sa dispersione de movimentos torrados a repìtere, e no est ligada diretamente a sa pretzisione, chi definit canto sa medida tua est a curtzu a sa positzione bera tua.</string>
     <string name="reset_to_default_category_button_promo">Ripristinende sos valores predefinidos as a torrare a impostare s\'istadu predefinidu a pustis de s\'installatzione.</string>
-    <string name="accessibility_mode_disabled">Sa modalidade de atzessibilidade est disabilitada in su sistema tuo.</string>
+    <string name="accessibility_mode_disabled">Sa modalidade de atzessibilidade est istudada in su sistema Android tuo.</string>
     <string name="use_system_screen_timeout">Imprea su tempus de isetu de s\'ischermu de su sistema</string>
     <string name="use_system_screen_timeout_promo">Disabilitadu in sas impostatziones predefinidas. Si OsmAnd est traballende in primu pranu, s\'ischermu non s\'at a mòrrere.
 \n
@@ -3497,7 +3497,7 @@
     <string name="routing_profile_direct_to">Deretu a su puntu</string>
     <string name="please_provide_profile_name_message">Issèbera unu nùmene pro su profilu</string>
     <string name="open_settings">Aberi sas impostatziones</string>
-    <string name="plugin_disabled">Estensione disabilitada</string>
+    <string name="plugin_disabled">Estensione istudada</string>
     <string name="plugin_disabled_descr">S\'estensione est un\'aplicatzione a banda. L\'as a dèpere bogare a banda si non la cheres prus impreare.
 \n
 \nS\'estensione at a abarrare in su dispositivu a pustis de b\'àere bogadu OsmAnd.</string>
@@ -3505,7 +3505,7 @@
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Càrculu de s\'àndala</string>
     <string name="shared_string_include_data">Inclue datos additzionales</string>
-    <string name="import_profile_dialog_description">Su profilu importadu tenet datos additzionales. Incarca in \"Importa\" pro importare sos datos de su profilu ebbia o ischerta sos datos additzionales de importare.</string>
+    <string name="import_profile_dialog_description">Su profilu importadu tenet datos additzionales. Incarca in \"Importa\" pro importare sos datos de su profilu ebbia, o ischerta sos datos additzionales.</string>
     <string name="export_profile_dialog_description">Podes ischertare datos additzionales de esportare in paris cun su profilu.</string>
     <string name="monitoring_min_speed_descr_remark">Nota: verìfica de lestresa &gt; 0: sa majoria de sos insiemes integrados (sos \"chipsets\") GPS frunit unu valore de lestresa petzi si s\'algoritmu determinat chi ses in movimentu, e perunu si non lu ses. Pro custa resone s\'impreu de s\'impostatzione&gt; 0 in custu filtru, in unu tzertu sensu, impreat su rilevamentu de su movimentu de s\'insieme integradu GPS. Ma, fintzas si non benint filtradas inoghe in su momentu de sa registratzione, impreamus su matessi custa funtzionalidade in s\'anàlisi nostra de sas rastas GPX pro determinare sa distàntzia curreta. Est a nàrrere chi su valore ammustradu in cussu campu est sa distàntzia registrada durante su movimentu.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Efetu segundàriu: pro more de su filtru pro acuradesa unos cantos puntos diant pòdere fartare de su totu. A es. in suta de sos pontes, de sos àrbores, intre sos fàbricos artos, o in unas cantas cunditziones metereològicas.</string>
@@ -3542,7 +3542,7 @@
     <string name="sort_by_category">Òrdina pro categoria</string>
     <string name="index_name_antarctica">Antàrticu</string>
     <string name="shared_string_app_default_w_val">Predefinidu in s\'aplicatzione (%s)</string>
-    <string name="no_recalculation_setting">Disabìlita su ri-càrculu de s\'àndala</string>
+    <string name="no_recalculation_setting">Perunu ri-càrculu</string>
     <string name="route_recalculation_dist_title">Distàntzia mìnima pro torrare a carculare s\'àndala</string>
     <string name="route_recalculation_dist_descr">S\'àndala at a bènnere carculada torra si sa distàntzia dae s\'àndala est prus manna de cussa dislindada</string>
     <string name="profile_type_custom_string">Profilu personalizadu</string>
@@ -3597,7 +3597,7 @@
     <string name="shared_string_hillshade">Umbraduras de sos rilievos</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Pistas</string>
-    <string name="quick_action_show_hide_terrain">Ammustra/cua su terrinu</string>
+    <string name="quick_action_show_hide_terrain">Ammustra / cua su terrinu</string>
     <string name="quick_action_terrain_hide">Cua su terrinu</string>
     <string name="quick_action_terrain_show">Ammustra su terrinu</string>
     <string name="quick_action_terrain_descr">Unu butone pro ammustrare o cuare s\'istratu de su terrinu in sa mapa.</string>
@@ -3635,7 +3635,7 @@
     <string name="shared_string_hidden">Cuadu</string>
     <string name="hidden_items_descr">Custos elementos sunt cuados dae su menù, ma sas optziones o sas estensiones rapresentadas ant a sighire a funtzionare.</string>
     <string name="reset_items_descr">Cuende sas impostatziones las as a torrare a sos istados predefinidos issoro.</string>
-    <string name="main_actions_descr">Sas \'atziones printzipales\' cuntenent 4 butones ebbia.</string>
+    <string name="main_actions_descr">Tenet 4 butones ebbia.</string>
     <string name="main_actions">Atziones printzipales</string>
     <string name="move_inside_category">Podes mòere elementos in intro de custa categoria ebbia.</string>
     <string name="developer_plugin">Estensione pro sos isvilupadores</string>
@@ -3678,7 +3678,7 @@
 \n
 \nPodes amministrare e annullare sos abbonamentos tuos intrende in sas impostatziones de Google Play tuas.</string>
     <string name="search_poi_types">Chirca castas de PDI</string>
-    <string name="search_poi_types_descr">Cumbina castas de PDI de catogorias diferentes. Incarca su butone pro ischertare totu, incarca s\'ala a manca pro sa seletzione de sas categorias.</string>
+    <string name="search_poi_types_descr">Cumbina castas de PDI de catogorias diferentes. Incarchende su butone as a ischertare totu, e s\'ala a manca seletzionat una categoria.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="tracker_item">Arrastadore de OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
@@ -3692,22 +3692,22 @@
     <string name="osmand_purchases_item">Còmporas de OsmAnd</string>
     <string name="legend_item_description">Sa ghia pro sa simbologia de sa mapa.</string>
     <string name="navigation_profiles_item">Profilos de navigatzione</string>
-    <string name="release_3_7">• Mapas noas non in lìnia de sas pendèntzias
-\n
-\n • Peronalizazione intrea de sos preferidos e de sos puntos de coladòrgiu - colores, iconas e formas personalizados
-\n
-\n • Personaliza s\'oòrdine de sos elementos in su Menù de cuntestu, in Cunfigura mapa e in su Calàssiu
-\n
-\n • Wikipedia comente un\'istratu a banda in Cunfigura mapa, in ue podes ischertare petzi sas limbas chi cheres
-\n
-\n • Crea su filtru tuo/sa mapa tua cun sos PDI cun una flessibilidade totale
-\n
-\n • Optzione pro ripristinare sas impostatziones pro sos profilos personalizados annànghida
-\n
-\n • Àndalas GPX intreas cun suportu pro sa navigatzione, corsias de tzirculatzione eistrutzione de bortada cumpridas
-\n
-\n • Mannària de interfache gràfica in sas tauleddas acontzadas
-\n
+    <string name="release_3_7">• Mapas noas non in lìnia de sas pendèntzias 
+\n 
+\n • Peronalizazione intrea de sos preferidos e de sos puntos de coladòrgiu - colores, iconas e formas personalizados 
+\n 
+\n • Personaliza s\'oòrdine de sos elementos in su \"Menù de cuntestu\", in \"Cunfigura mapa\" e in su \"Calàssiu\" 
+\n 
+\n • Wikipedia comente un\'istratu a banda in Cunfigura mapa, in ue podes ischertare petzi sas limbas chi cheres 
+\n 
+\n • Crea su filtru tuo/sa mapa tua cun sos PDI cun una flessibilidade totale 
+\n 
+\n • Optzione pro ripristinare sas impostatziones pro sos profilos personalizados annànghida 
+\n 
+\n • Àndalas GPX intreas cun suportu pro sa navigatzione, corsias de tzirculatzione eistrutzione de bortada cumpridas 
+\n 
+\n • Mannària de interfache gràfica in sas tauleddas acontzadas 
+\n 
 \n • Faddinas cun RTL acontzadas
 \n
 \n</string>
@@ -3715,16 +3715,17 @@
     <string name="additional_actions_descr">Podes atzèdere a custas atziones incarchende su butone \"%1$s\".</string>
     <string name="quick_action_transport_hide">Cua su trasportu pùblicu</string>
     <string name="quick_action_transport_show">Ammustra su trasportu pùblicu</string>
-    <string name="quick_action_show_hide_transport">Ammustra/cua su trasportu pùblicu</string>
-    <string name="quick_action_transport_descr">Unu butone pro ammustrare o cuare su trasportu pùblicu in sa mapa.</string>
-    <string name="create_edit_poi">Crea/Modìfica unu PDI</string>
+    <string name="quick_action_show_hide_transport">Ammustra / cua su trasportu pùblicu</string>
+    <string name="quick_action_transport_descr">Butone pro ammustrare o cuare su trasportu pùblicu in sa mapa.</string>
+    <string name="create_edit_poi">Crea / Modìfica unu PDI</string>
     <string name="parking_positions">Logos de parchègiu</string>
     <string name="add_edit_favorite">Annanghe / Modìfica unu preferidu</string>
     <string name="reset_deafult_order">Riprìstina s\'òrdine predefinidu de sos elementos</string>
     <string name="back_to_editing">Torra a modificare</string>
-    <string name="quick_action_switch_profile_descr">Tocende su butone de atzione as a colare dae unu profilu ischertadu a s\'àteru.</string>
+    <string name="quick_action_switch_profile_descr">Su butone de atzione faghet colare dae unu profilu ischertadu a s\'àteru.</string>
     <string name="shared_string_add_profile">Annanghe unu profilu</string>
     <string name="change_application_profile">Càmbia su profilu de s\'aplicatzione</string>
-    <string name="profiles_for_action_not_found">Sos profilos ischertados pro custa atzione non s\'agatant.</string>
+    <string name="profiles_for_action_not_found">Impossìbile a agatare custos profilos.</string>
     <string name="index_item_world_basemap_detailed">Mapa mundiale generale (a sa minuda)</string>
+    <string name="unsupported_type_error">Casta non suportada</string>
 </resources>
