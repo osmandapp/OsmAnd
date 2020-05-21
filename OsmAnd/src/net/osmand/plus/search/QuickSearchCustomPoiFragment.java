@@ -54,7 +54,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class QuickSearchCustomPoiFragment extends DialogFragment {
+public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFiltersSelectedListener {
 
 	public static final String TAG = "QuickSearchCustomPoiFragment";
 	private static final String QUICK_SEARCH_CUSTOM_POI_FILTER_ID_KEY = "quick_search_custom_poi_filter_id_key";
@@ -342,6 +342,28 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		fragment.show(parentFragment.getChildFragmentManager(), TAG);
 	}
 
+	@Override
+	public void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters) {
+		List<String> subCategories = new ArrayList<>();
+		Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
+		if (acceptedCategories != null) {
+			subCategories.addAll(acceptedCategories);
+		}
+		for (PoiType pt : poiCategory.getPoiTypes()) {
+			subCategories.add(pt.getKeyName());
+		}
+		if (subCategories.size() == filters.size()) {
+			filter.selectSubTypesToAccept(poiCategory, null);
+		} else if (filters.size() == 0) {
+			filter.setTypeToAccept(poiCategory, false);
+		} else {
+			filter.selectSubTypesToAccept(poiCategory, filters);
+		}
+		saveFilter();
+		categoryListAdapter.notifyDataSetChanged();
+		wasChanged = true;
+	}
+
 	private class CategoryListAdapter extends ArrayAdapter<PoiCategory> {
 
 		private OsmandApplication app;
@@ -572,34 +594,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
 		QuickSearchSubCategoriesFragment.showInstance(fm, this, poiCategory, acceptedCategories, selectAll);
 	}
+}
 
-	public OnFiltersSelectedListener getFiltersSelectedListener() {
-		return new OnFiltersSelectedListener() {
-			@Override
-			public void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters) {
-				List<String> subCategories = new ArrayList<>();
-				Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
-				if (acceptedCategories != null) {
-					subCategories.addAll(acceptedCategories);
-				}
-				for (PoiType pt : poiCategory.getPoiTypes()) {
-					subCategories.add(pt.getKeyName());
-				}
-				if (subCategories.size() == filters.size()) {
-					filter.selectSubTypesToAccept(poiCategory, null);
-				} else if (filters.size() == 0) {
-					filter.setTypeToAccept(poiCategory, false);
-				} else {
-					filter.selectSubTypesToAccept(poiCategory, filters);
-				}
-				saveFilter();
-				categoryListAdapter.notifyDataSetChanged();
-				wasChanged = true;
-			}
-		};
-	}
-
-	public interface OnFiltersSelectedListener {
-		void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters);
-	}
+interface OnFiltersSelectedListener {
+	void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters);
 }

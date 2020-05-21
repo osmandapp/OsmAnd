@@ -30,7 +30,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.search.QuickSearchCustomPoiFragment.OnFiltersSelectedListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -256,10 +255,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		}
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof QuickSearchCustomPoiFragment) {
-			OnFiltersSelectedListener listener = ((QuickSearchCustomPoiFragment) fragment).getFiltersSelectedListener();
-			if (listener instanceof OnFiltersSelectedListener) {
-				listener.onFiltersSelected(poiCategory, list);
-			}
+			((QuickSearchCustomPoiFragment) fragment).onFiltersSelected(poiCategory, list);
 		}
 		dismiss();
 	}
