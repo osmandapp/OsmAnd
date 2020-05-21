@@ -175,7 +175,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		poiSize = (int) app.getResources().getDimension(R.dimen.poi_icon_size);
+		poiSize = app.getResources().getDimensionPixelSize(R.dimen.poi_icon_size);
 		poiColorFilter = new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 		paintIconBackground = new Paint();
 		poiBackground = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield);
