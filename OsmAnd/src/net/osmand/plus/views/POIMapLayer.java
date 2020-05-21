@@ -153,9 +153,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		if (objects != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			final int rp = getRadiusPoi(tb);
-			int compare = rp;
-			int radius = rp * 3 / 2;
+			int compare = getScaledTouchRadius(view.getApplication(), getRadiusPoi(tb));
+			int radius = compare * 3 / 2;
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					Amenity n = objects.get(i);
@@ -176,8 +175,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-
-		poiSize = dpToPx(view.getContext(), 16f);
+		poiSize = app.getResources().getDimensionPixelSize(R.dimen.poi_icon_size);
 		poiColorFilter = new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 		paintIconBackground = new Paint();
 		poiBackground = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield);

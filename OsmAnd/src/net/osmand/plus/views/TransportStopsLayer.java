@@ -144,7 +144,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 							  List<TransportStop> objects) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		final int rp = getRadiusPoi(tb);
+		final int rp = getScaledTouchRadius(mapActivity.getMyApplication(), getRadiusPoi(tb));
 		int radius = rp * 3 / 2;
 		try {
 			TreeSet<String> ms = new TreeSet<>();
