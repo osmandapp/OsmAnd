@@ -63,6 +63,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	private boolean nightMode;
 
 	public static void showInstance(@NonNull FragmentManager fm,
+									@Nullable Fragment targetFragment,
 									@NonNull PoiCategory poiCategory,
 									@Nullable Set<String> acceptedCategories,
 									boolean selectAll,
@@ -72,6 +73,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		fragment.setSelectAll(selectAll);
 		fragment.setAcceptedCategories(acceptedCategories);
 		fragment.setListener(listener);
+		fragment.setTargetFragment(targetFragment, 0);
 		fragment.show(fm, TAG);
 	}
 
@@ -257,13 +259,10 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		if (listener != null) {
 			listener.onFiltersSelected(poiCategory, list);
 		} else {
-			FragmentManager fm = getFragmentManager();
-			if (fm != null) {
-				Fragment fragment = fm.findFragmentByTag(QuickSearchCustomPoiFragment.TAG);
-				if (fragment instanceof QuickSearchCustomPoiFragment) {
-					listener = ((QuickSearchCustomPoiFragment) fragment).getFiltersSelectedListener();
-					listener.onFiltersSelected(poiCategory, list);
-				}
+			Fragment fragment = getTargetFragment();
+			if (fragment instanceof QuickSearchCustomPoiFragment) {
+				listener = ((QuickSearchCustomPoiFragment) fragment).getFiltersSelectedListener();
+				listener.onFiltersSelected(poiCategory, list);
 			}
 		}
 		dismiss();

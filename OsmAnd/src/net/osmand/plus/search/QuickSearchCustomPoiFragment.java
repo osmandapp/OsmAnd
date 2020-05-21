@@ -570,7 +570,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 										   @NonNull PoiCategory poiCategory,
 										   boolean selectAll) {
 		Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
-		QuickSearchSubCategoriesFragment.showInstance(fm, poiCategory, acceptedCategories, selectAll, getFiltersSelectedListener());
+		QuickSearchSubCategoriesFragment.showInstance(fm, this, poiCategory, acceptedCategories, selectAll, getFiltersSelectedListener());
 	}
 
 	public QuickSearchSubCategoriesFragment.OnFiltersSelectedListener getFiltersSelectedListener() {
