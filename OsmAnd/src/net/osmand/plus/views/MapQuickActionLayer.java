@@ -29,7 +29,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -41,6 +40,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -209,15 +209,17 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 	 * @return true, if state was changed
 	 */
 	public boolean setLayerState(boolean showWidget) {
+		// check if state change is needed
+		if (currentWidgetState == showWidget) {
+			return false;
+		}
 		currentWidgetState = showWidget;
-		if (isWidgetVisible() == showWidget)    // check if state change is needed
-		    return false;
 
 		updateQuickActionButton(showWidget);
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
-		    quickActionsWidget.setVisibility(!showWidget ? View.GONE : View.VISIBLE);
+			quickActionsWidget.setVisibility(!showWidget ? View.GONE : View.VISIBLE);
 		} else {
-		    animateWidget(showWidget);
+			animateWidget(showWidget);
 		}
 		mapActivity.updateStatusBarColor();
 

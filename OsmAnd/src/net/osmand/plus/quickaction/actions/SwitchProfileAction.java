@@ -116,8 +116,6 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 			nextProfile = profiles.get(index + 1);
 		}
 		executeWithParams(activity, nextProfile);
-
-		super.execute(activity);
 	}
 
 	@Override
