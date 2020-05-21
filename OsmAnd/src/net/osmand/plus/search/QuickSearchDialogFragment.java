@@ -995,6 +995,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			outState.putDouble(QUICK_SEARCH_LON_KEY, centerLatLon.getLongitude());
 		}
 		outState.putBoolean(QUICK_SEARCH_FAB_VISIBLE_KEY, fabVisible);
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override

@@ -637,6 +637,14 @@ public abstract class OsmandMapLayer {
 		return rect;
 	}
 
+	public int getScaledTouchRadius(OsmandApplication app, int radiusPoi) {
+		float textScale = app.getSettings().TEXT_SCALE.get();
+		if (textScale < 1.0f) {
+			textScale = 1.0f;
+		}
+		return (int) textScale * radiusPoi;
+	}
+
 	public abstract class MapLayerData<T> {
 		public int ZOOM_THRESHOLD = 1;
 		public RotatedTileBox queriedBox;

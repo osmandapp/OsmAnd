@@ -580,7 +580,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	public void getWptFromPoint(RotatedTileBox tb, PointF point, List<? super WptPt> res) {
-		int r = getDefaultRadiusPoi(tb);
+		int r = getScaledTouchRadius(view.getApplication(), getDefaultRadiusPoi(tb));
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		List<SelectedGpxFile> selectedGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());

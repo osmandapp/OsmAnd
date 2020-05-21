@@ -51,6 +51,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 
 public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
@@ -291,10 +293,13 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 				}
 				int hiddenCount = ConfigureMenuItemsFragment.getSettingForScreen(app, type).getModeValue(appMode).getHiddenIds().size();
 				List<ContextMenuItem> allItems = ConfigureMenuItemsFragment.getCustomizableDefaultItems(contextMenuAdapter.getDefaultItems());
-				if (type == ScreenType.DRAWER) {
+				if (type == ScreenType.DRAWER || type == ScreenType.CONFIGURE_MAP) {
 					Iterator<ContextMenuItem> iterator = allItems.iterator();
 					while (iterator.hasNext()) {
-						if (DRAWER_DIVIDER_ID.equals(iterator.next().getId())) {
+						String id = iterator.next().getId();
+						if (DRAWER_DIVIDER_ID.equals(id)
+								|| SHOW_CATEGORY_ID.equals(id)
+								|| MAP_RENDERING_CATEGORY_ID.equals(id)) {
 							iterator.remove();
 						}
 					}
