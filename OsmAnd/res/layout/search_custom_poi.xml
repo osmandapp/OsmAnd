@@ -103,8 +103,6 @@
 
         </LinearLayout>
 
-        <include layout="@layout/divider" />
-
     </LinearLayout>
 
     <FrameLayout
@@ -128,6 +126,16 @@
             android:scaleType="fitXY"
             app:srcCompat="@drawable/bg_shadow_onmap"
             android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/topBarShadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:rotation="180"
+            android:scaleType="fitXY"
+            android:visibility="gone"
+            app:srcCompat="@drawable/bg_shadow_onmap" />
 
     </FrameLayout>
 

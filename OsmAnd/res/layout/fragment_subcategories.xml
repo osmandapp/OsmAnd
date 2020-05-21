@@ -102,18 +102,31 @@
 
         </LinearLayout>
 
-        <include layout="@layout/divider" />
-
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
+    <FrameLayout
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        android:drawSelectorOnTop="true" />
+        android:layout_width="match_parent"
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:drawSelectorOnTop="true" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/topBarShadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:rotation="180"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/bg_shadow_onmap" />
+
+    </FrameLayout>
 
     <include layout="@layout/divider" />
 

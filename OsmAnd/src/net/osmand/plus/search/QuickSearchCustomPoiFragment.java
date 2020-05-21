@@ -234,7 +234,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 
 			}
 		});
-
+		view.findViewById(R.id.topBarShadow).setVisibility(View.VISIBLE);
 		return view;
 	}
 
