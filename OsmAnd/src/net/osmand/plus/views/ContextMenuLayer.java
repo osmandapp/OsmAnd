@@ -21,7 +21,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -223,15 +222,21 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 			}
 		}
+		float scale = 1f;
+		if (!pressedLatLonSmall.isEmpty() || !pressedLatLonFull.isEmpty()) {
+			scale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
+		}
 		for (LatLon latLon : pressedLatLonSmall) {
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-			canvas.drawBitmap(pressedBitmapSmall, x - pressedBitmapSmall.getWidth() / 2, y - pressedBitmapSmall.getHeight() / 2, paint);
+			Rect destRect = getIconDestinationRect(x, y, pressedBitmapSmall.getWidth(), pressedBitmapSmall.getHeight(), scale);
+			canvas.drawBitmap(pressedBitmapSmall, null, destRect, paint);
 		}
 		for (LatLon latLon : pressedLatLonFull) {
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-			canvas.drawBitmap(pressedBitmap, x - pressedBitmap.getWidth() / 2, y - pressedBitmap.getHeight() / 2, paint);
+			Rect destRect = getIconDestinationRect(x, y, pressedBitmap.getWidth(), pressedBitmap.getHeight(), scale);
+			canvas.drawBitmap(pressedBitmap, null, destRect, paint);
 		}
 
 		if (mapQuickActionLayer != null && mapQuickActionLayer.isInMovingMarkerMode())
