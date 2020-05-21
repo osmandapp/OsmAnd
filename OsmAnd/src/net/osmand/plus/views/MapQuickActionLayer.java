@@ -210,7 +210,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 	 */
 	public boolean setLayerState(boolean showWidget) {
 		// check if state change is needed
-		if (currentWidgetState != null && currentWidgetState == showWidget) {
+		if (currentWidgetState != null && currentWidgetState == showWidget || isWidgetVisible() == showWidget) {
 			return false;
 		}
 		currentWidgetState = showWidget;
@@ -348,7 +348,10 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
             double lon = tileBox.getLonFromPixel(rb.getCenterPixelX(), rb.getCenterPixelY());
             view.setLatLon(lat, lon);
         }
-        view.setMapPosition(previousMapPosition);
+        int currentPosition = view.getMapPosition();
+        if (previousMapPosition != currentPosition && currentPosition == OsmandSettings.MIDDLE_BOTTOM_CONSTANT) {
+            view.setMapPosition(previousMapPosition);
+        }
 
         inMovingMarkerMode = false;
         mark(View.VISIBLE, R.id.map_ruler_layout,
