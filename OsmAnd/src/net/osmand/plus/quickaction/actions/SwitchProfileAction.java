@@ -119,20 +119,22 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public void executeWithParams(MapActivity activity, String params) {
-		OsmandApplication app = activity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
+	public void executeWithParams(final MapActivity activity, final String params) {
+		final OsmandApplication app = activity.getMyApplication();
+		app.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				ApplicationMode appMode = getModeForKey(params);
+				if (appMode != null) {
+					app.getSettings().APPLICATION_MODE.set(appMode);
+					app.getQuickActionRegistry().setQuickActionFabState(true);
 
-		ApplicationMode appMode = getModeForKey(params);
-		if (appMode != null) {
-			settings.APPLICATION_MODE.set(appMode);
-
-			app.getQuickActionRegistry().setQuickActionFabState(true);
-
-			String message = String.format(activity.getString(
-					R.string.application_profile_changed), appMode.toHumanString());
-			Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-		}
+					String message = String.format(activity.getString(
+							R.string.application_profile_changed), appMode.toHumanString());
+					Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
 	}
 
 	@Override
