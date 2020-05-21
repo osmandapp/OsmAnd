@@ -3649,6 +3649,7 @@
     <string name="subscription_osmandlive_item">Suscripción - OsmAnd Live</string>
     <string name="some_articles_may_not_available_in_lang">Es posible que algunos artículos de Wikipedia no estén disponibles en tu idioma.</string>
     <string name="select_wikipedia_article_langs">Marca los idiomas en los que los artículos de Wikipedia aparecerán en el mapa. Puedes cambiar entre todos los idiomas disponibles mientras lees el artículo.</string>
+    <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Pulsa «Alternar» para marcar todo, pulsa el lado izquierdo para elegir una categoría.</string>
     <string name="search_poi_types">Buscar por tipos de PDI</string>
     <string name="radius_ruler_item">Regla radial</string>
     <string name="quick_action_item">Acción rápida</string>

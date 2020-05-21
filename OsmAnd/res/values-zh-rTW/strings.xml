@@ -3668,6 +3668,7 @@
 \n
 \n您可以透過您的 Google Play 設定管理並取消您的訂閱。</string>
     <string name="search_poi_types">搜尋 POI 類型</string>
+    <string name="search_poi_types_descr">組合來自不同分類的 POI 類型。點擊開關以全選，點擊左側選取分類。</string>
     <string name="tracker_item">OsmAnd tracker</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">快速動作</string>

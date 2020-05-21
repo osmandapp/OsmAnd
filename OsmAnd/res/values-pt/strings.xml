@@ -3686,4 +3686,5 @@
     <string name="lang_an">Aragonês</string>
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Cor customizada</string>
+    <string name="search_poi_types_descr">Combinar tipos de POI de diferentes categorias. Toque em \"Trocar\" para selecionar tudo, toque no lado esquerdo para seleção da categoria.</string>
 </resources>

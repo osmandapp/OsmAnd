@@ -3631,6 +3631,7 @@
 \n
 \n Google Play ayarlarınıza giderek aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
     <string name="search_poi_types">POI türleri ara</string>
+    <string name="search_poi_types_descr">Farklı kategorilerdeki POI türlerini birleştirin. Tümünü seçmek için \"Değiştir\" düğmesine, kategori seçimi için sol tarafa dokunun.</string>
     <string name="radius_ruler_item">Yarıçap cetveli</string>
     <string name="tracker_item">OsmAnd izleyici</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>

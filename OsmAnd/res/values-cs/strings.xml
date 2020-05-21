@@ -3422,6 +3422,7 @@ Zobrazená oblast: %1$s x %2$s</string>
 \n
 \nSvé předplatné můžete spravovat nebo zrušit v nastavení Google Play.</string>
     <string name="search_poi_types">Hledat typy bodů zájmu</string>
+    <string name="search_poi_types_descr">Zkombinujte body zájmu různých kategorií. Klepnutím na přepínač vyberete všechny, klepnutím na levou stranu vyberete kategorie.</string>
     <string name="extra_maps_menu_group">Další mapy</string>
     <string name="download_unsupported_action">Nepodporovaná akce %1$s</string>
     <string name="context_menu_actions">Akce kontextového menu</string>

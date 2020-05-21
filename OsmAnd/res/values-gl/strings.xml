@@ -3698,6 +3698,7 @@ Lon %2$s</string>
 \n 
 \n  Podes xestionar e desbotar as túas subscricións entrando nos axustes da Google Play."</string>
     <string name="search_poi_types">Procurar tipos de PDI</string>
+    <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Preme en \"Trocar\" para marcar todo, preme o lado esquerdo para escoller unha categoría.</string>
     <string name="download_unsupported_action">Acción %1$s non admitida</string>
     <string name="tracker_item">Rastrexador do OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
