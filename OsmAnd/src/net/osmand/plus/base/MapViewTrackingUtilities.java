@@ -20,11 +20,11 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
@@ -269,9 +269,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE || routePlanningMode) {
 				mapView.setRotate(0, true);
 			}
-			mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING
-					&& !settings.CENTER_POSITION_ON_MAP.get() ?
-					OsmandSettings.BOTTOM_CONSTANT : OsmandSettings.CENTER_CONSTANT);
+			if (isMapLinkedToLocation) {
+				mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING
+						&& !settings.CENTER_POSITION_ON_MAP.get() ?
+						OsmandSettings.BOTTOM_CONSTANT : OsmandSettings.CENTER_CONSTANT);
+			}
 		}
 		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation(), false);
 	}
@@ -390,13 +392,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
+		this.isMapLinkedToLocation = isMapLinkedToLocation;
 		if (!isMapLinkedToLocation) {
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
 			if (autoFollow > 0 && app.getRoutingHelper().isFollowingMode() && !routePlanningMode) {
 				backToLocationWithDelay(autoFollow);
 			}
+		} else {
+			updateSettings();
 		}
-		this.isMapLinkedToLocation = isMapLinkedToLocation;
 	}
 
 	@Override
