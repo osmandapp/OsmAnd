@@ -74,7 +74,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     private boolean isLayerOn;
 
     private boolean nightMode;
-    private boolean currentWidgetState;
+    private Boolean currentWidgetState;
 
     public MapQuickActionLayer(MapActivity activity, ContextMenuLayer contextMenuLayer) {
         this.mapActivity = activity;
@@ -210,7 +210,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 	 */
 	public boolean setLayerState(boolean showWidget) {
 		// check if state change is needed
-		if (currentWidgetState == showWidget) {
+		if (currentWidgetState != null && currentWidgetState == showWidget) {
 			return false;
 		}
 		currentWidgetState = showWidget;
