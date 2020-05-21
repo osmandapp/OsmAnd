@@ -203,8 +203,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	public void getRecordingsFromPoint(PointF point, RotatedTileBox tileBox, List<? super Recording> am) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
-		int compare = getRadiusPoi(tileBox) * (int) textScale;
+		int compare = getScaledTouchRadius(activity.getMyApplication(), getRadiusPoi(tileBox));
 		int radius = compare * 3 / 2;
 		for (Recording n : plugin.getAllRecordings()) {
 			int x = (int) tileBox.getPixXFromLatLon(n.getLatitude(), n.getLongitude());

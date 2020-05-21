@@ -153,10 +153,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		if (objects != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			final int rp = getRadiusPoi(tb);
-			float textScale = app.getSettings().TEXT_SCALE.get();
-			int compare = rp * (int) textScale;
-			int radius = rp * 3 / 2;
+			int compare = getScaledTouchRadius(view.getApplication(), getRadiusPoi(tb));
+			int radius = compare * 3 / 2;
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					Amenity n = objects.get(i);
