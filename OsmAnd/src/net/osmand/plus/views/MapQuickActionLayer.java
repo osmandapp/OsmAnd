@@ -349,7 +349,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
             view.setLatLon(lat, lon);
         }
         int currentPosition = view.getMapPosition();
-        if (previousMapPosition != currentPosition && currentPosition == OsmandSettings.MIDDLE_BOTTOM_CONSTANT) {
+        if (currentPosition == OsmandSettings.MIDDLE_BOTTOM_CONSTANT) {
             view.setMapPosition(previousMapPosition);
         }
 
