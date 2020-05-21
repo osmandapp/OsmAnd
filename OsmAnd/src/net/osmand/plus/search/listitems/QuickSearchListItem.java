@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.binary.BinaryMapIndexReader;
@@ -279,8 +280,9 @@ public class QuickSearchListItem {
 		return getIcon(app, searchResult);
 	}
 
+	@Nullable
 	public static String getPoiTypeIconName(AbstractPoiType abstractPoiType) {
-		if (RenderingIcons.containsBigIcon(abstractPoiType.getIconKeyName())) {
+		if (abstractPoiType != null && RenderingIcons.containsBigIcon(abstractPoiType.getIconKeyName())) {
 			return abstractPoiType.getIconKeyName();
 		} else if (abstractPoiType instanceof PoiType
 				&& RenderingIcons.containsBigIcon(
