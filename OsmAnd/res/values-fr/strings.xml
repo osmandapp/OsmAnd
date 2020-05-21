@@ -3706,4 +3706,5 @@
     <string name="shared_string_add_profile">Ajouter un profil</string>
     <string name="change_application_profile">Modifier le profil d\'application</string>
     <string name="index_item_world_basemap_detailed">Carte mondiale générale (plus détaillée)</string>
+    <string name="unsupported_type_error">Type non pris en charge</string>
 </resources>
