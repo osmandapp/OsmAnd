@@ -30,6 +30,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.search.QuickSearchCustomPoiFragment.OnFiltersSelectedListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +46,6 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	private static final String CATEGORY_NAME_KEY = "category_key";
 	private static final String ALL_SELECTED_KEY = "all_selected";
 	private static final String ACCEPTED_CATEGORIES_KEY = "accepted_categories";
-	private OnFiltersSelectedListener listener;
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 	private PoiCategory poiCategory;
@@ -66,13 +66,11 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 									@Nullable Fragment targetFragment,
 									@NonNull PoiCategory poiCategory,
 									@Nullable Set<String> acceptedCategories,
-									boolean selectAll,
-									@NonNull OnFiltersSelectedListener listener) {
+									boolean selectAll) {
 		QuickSearchSubCategoriesFragment fragment = new QuickSearchSubCategoriesFragment();
 		fragment.setPoiCategory(poiCategory);
 		fragment.setSelectAll(selectAll);
 		fragment.setAcceptedCategories(acceptedCategories);
-		fragment.setListener(listener);
 		fragment.setTargetFragment(targetFragment, 0);
 		fragment.show(fm, TAG);
 	}
@@ -256,12 +254,10 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		for (PoiType poiType : adapter.getSelectedItems()) {
 			list.add(poiType.getKeyName());
 		}
-		if (listener != null) {
-			listener.onFiltersSelected(poiCategory, list);
-		} else {
-			Fragment fragment = getTargetFragment();
-			if (fragment instanceof QuickSearchCustomPoiFragment) {
-				listener = ((QuickSearchCustomPoiFragment) fragment).getFiltersSelectedListener();
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof QuickSearchCustomPoiFragment) {
+			OnFiltersSelectedListener listener = ((QuickSearchCustomPoiFragment) fragment).getFiltersSelectedListener();
+			if (listener instanceof OnFiltersSelectedListener) {
 				listener.onFiltersSelected(poiCategory, list);
 			}
 		}
@@ -303,15 +299,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		this.poiCategory = poiCategory;
 	}
 
-	public void setListener(OnFiltersSelectedListener listener) {
-		this.listener = listener;
-	}
-
 	public void setAcceptedCategories(Set<String> acceptedCategories) {
 		this.acceptedCategories = acceptedCategories;
-	}
-
-	public interface OnFiltersSelectedListener {
-		void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters);
 	}
 }

@@ -570,11 +570,11 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 										   @NonNull PoiCategory poiCategory,
 										   boolean selectAll) {
 		Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
-		QuickSearchSubCategoriesFragment.showInstance(fm, this, poiCategory, acceptedCategories, selectAll, getFiltersSelectedListener());
+		QuickSearchSubCategoriesFragment.showInstance(fm, this, poiCategory, acceptedCategories, selectAll);
 	}
 
-	public QuickSearchSubCategoriesFragment.OnFiltersSelectedListener getFiltersSelectedListener() {
-		return new QuickSearchSubCategoriesFragment.OnFiltersSelectedListener() {
+	public OnFiltersSelectedListener getFiltersSelectedListener() {
+		return new OnFiltersSelectedListener() {
 			@Override
 			public void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters) {
 				List<String> subCategories = new ArrayList<>();
@@ -597,5 +597,9 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				wasChanged = true;
 			}
 		};
+	}
+
+	public interface OnFiltersSelectedListener {
+		void onFiltersSelected(PoiCategory poiCategory, LinkedHashSet<String> filters);
 	}
 }
