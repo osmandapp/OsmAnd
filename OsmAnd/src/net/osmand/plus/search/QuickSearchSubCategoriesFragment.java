@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -33,6 +34,7 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,6 +44,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = QuickSearchSubCategoriesFragment.class.getName();
 	private static final String CATEGORY_NAME_KEY = "category_key";
 	private static final String ALL_SELECTED_KEY = "all_selected";
+	private static final String ACCEPTED_CATEGORIES_KEY = "accepted_categories";
 	private OnFiltersSelectedListener listener;
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
@@ -81,6 +84,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		if (savedInstanceState != null) {
 			poiCategory = app.getPoiTypes().getPoiCategoryByName(savedInstanceState.getString(CATEGORY_NAME_KEY));
 			selectAll = savedInstanceState.getBoolean(ALL_SELECTED_KEY);
+			acceptedCategories = new HashSet<>(savedInstanceState.getStringArrayList(ACCEPTED_CATEGORIES_KEY));
 		}
 		poiTypeList = new ArrayList<>(poiCategory.getPoiTypes());
 		Collections.sort(poiTypeList, new Comparator<PoiType>() {
@@ -116,6 +120,15 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		super.onSaveInstanceState(outState);
 		outState.putString(CATEGORY_NAME_KEY, poiCategory.getKeyName());
 		outState.putBoolean(ALL_SELECTED_KEY, selectAll);
+		outState.putStringArrayList(ACCEPTED_CATEGORIES_KEY, new ArrayList<>(getSelectedSubCategories()));
+	}
+
+	private List<String> getSelectedSubCategories() {
+		List<String> subCategories = new ArrayList<>();
+		for (PoiType poiType : adapter.getSelectedItems()) {
+			subCategories.add(poiType.getKeyName());
+		}
+		return subCategories;
 	}
 
 	@Nullable
@@ -241,7 +254,18 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		for (PoiType poiType : adapter.getSelectedItems()) {
 			list.add(poiType.getKeyName());
 		}
-		listener.onFiltersSelected(poiCategory, list);
+		if (listener != null) {
+			listener.onFiltersSelected(poiCategory, list);
+		} else {
+			FragmentManager fm = getFragmentManager();
+			if (fm != null) {
+				Fragment fragment = fm.findFragmentByTag(QuickSearchCustomPoiFragment.TAG);
+				if (fragment instanceof QuickSearchCustomPoiFragment) {
+					listener = ((QuickSearchCustomPoiFragment) fragment).getFiltersSelectedListener();
+					listener.onFiltersSelected(poiCategory, list);
+				}
+			}
+		}
 		dismiss();
 	}
 
