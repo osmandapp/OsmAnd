@@ -1161,10 +1161,11 @@ public class MapMarkersHelper {
 					removeGroupActiveMarkers(group, true);
 					return;
 				}
-				List<FavouritePoint> favPoints = new ArrayList<>(favGroup.getPoints());
-				for (FavouritePoint fp : favPoints) {
+				for (FavouritePoint fp : favGroup.getPoints()) {
 					addNewMarkerIfNeeded(group, groupMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), fp, null);
 				}
+
+
 			} else if (group.getType() == MapMarkersGroup.GPX_TYPE) {
 				GpxSelectionHelper gpxHelper = ctx.getSelectedGpxHelper();
 				File file = new File(group.getId());
