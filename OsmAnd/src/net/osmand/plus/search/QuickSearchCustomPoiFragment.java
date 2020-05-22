@@ -261,6 +261,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 	@Override
 	public void onResume() {
 		super.onResume();
+		saveFilter();
 		getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
 			@Override
 			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
@@ -496,6 +497,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 				categoryListAdapter.notifyDataSetChanged();
 				removeAllHeaders();
 				listView.addHeaderView(headerDescription, null, false);
+				saveFilter();
 			} else {
 				listView.setAdapter(subCategoriesAdapter);
 				subCategoriesAdapter.clear();
@@ -503,6 +505,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 				subCategoriesAdapter.notifyDataSetChanged();
 				removeAllHeaders();
 				listView.addHeaderView(headerShadow, null, false);
+				setupAddButton();
 			}
 		} else {
 			for (PoiCategory category : poiCategoryList) {
@@ -518,8 +521,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 			subCategoriesAdapter.notifyDataSetChanged();
 			removeAllHeaders();
 			listView.addHeaderView(headerShadow, null, false);
+			setupAddButton();
 		}
-		setupAddButton();
 	}
 
 	private void removeAllHeaders() {
