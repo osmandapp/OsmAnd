@@ -1807,7 +1807,7 @@
     <string name="gpx_monitoring_stop">GPX kaydını duraklat</string>
     <string name="gpx_start_new_segment">Yeni bir segment başlat</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Araç olmayan otoyollar</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Ahşap ve scrubs</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Ağaç ve çalılıklar</string>
     <string name="rendering_attr_buildings15zoom_name">Binalar üzerinde yakınlaştırma 15</string>
     <string name="rendering_attr_hideAccess_name">Erişim kısıtlamaları</string>
     <string name="rendering_attr_showAccess_name">Geçiş hakkındaki kısıtlamaları ve geçiş ücretlerini göster</string>
