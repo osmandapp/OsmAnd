@@ -393,7 +393,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 			canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2, box.getCenterPixelY() - contextMarker.getHeight());
 			contextMarker.draw(canvas);
 		}
-		if (this.nightMode != nightMode) {
+		if (this.nightMode != nightMode && currentWidgetState != null) {
 			this.nightMode = nightMode;
 			updateQuickActionButton(currentWidgetState);
 		}
