@@ -387,6 +387,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 				AppCompatImageView iconView = (AppCompatImageView) row.findViewById(R.id.icon);
 				row.findViewById(R.id.secondary_icon).setVisibility(View.GONE);
 				AppCompatTextView titleView = (AppCompatTextView) row.findViewById(R.id.title);
+				titleView.setMaxLines(Integer.MAX_VALUE);
+				titleView.setEllipsize(null);
 				AppCompatTextView descView = (AppCompatTextView) row.findViewById(R.id.description);
 				SwitchCompat check = (SwitchCompat) row.findViewById(R.id.toggle_item);
 				UiUtilities.setupCompoundButton(check, nightMode, UiUtilities.CompoundButtonType.GLOBAL);

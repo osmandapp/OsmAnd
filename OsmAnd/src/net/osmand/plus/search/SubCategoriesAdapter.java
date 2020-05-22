@@ -72,6 +72,8 @@ public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 		int tintIconColorRes = selected ? activeIconColorRes : secondaryColorRes;
 		if (poiType != null) {
 			TextView title = convertView.findViewById(R.id.title_tv);
+			title.setMaxLines(Integer.MAX_VALUE);
+			title.setEllipsize(null);
 			title.setText(poiType.getTranslation());
 			final CheckBox checkBox = convertView.findViewById(R.id.check_box);
 			checkBox.setChecked(selected);
