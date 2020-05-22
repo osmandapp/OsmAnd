@@ -164,7 +164,6 @@
     <dimen name="context_menu_first_line_bottom_margin">16dp</dimen>
     <dimen name="context_menu_second_line_top_margin">4dp</dimen>
     <dimen name="context_menu_top_right_button_min_width">76dp</dimen>
-    <dimen name="context_menu_button_padding_x">10dp</dimen>
     <dimen name="context_menu_buttons_top_margin">-16dp</dimen>
     <dimen name="context_menu_buttons_padding_bottom">4dp</dimen>
     <dimen name="context_menu_progress_min_height">54dp</dimen>

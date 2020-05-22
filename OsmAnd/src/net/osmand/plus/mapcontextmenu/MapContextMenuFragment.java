@@ -1150,7 +1150,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					Drawable leftIcon = leftTitleButtonController.getLeftIcon();
 					Drawable rightIcon = leftTitleButtonController.getRightIcon();
 					leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
-					leftTitleButton.setCompoundDrawablePadding(dpToPx(8f));
+					leftTitleButton.setCompoundDrawablePadding(view.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
 					((LinearLayout) leftTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
 				} else {
 					leftTitleButtonView.setVisibility(View.INVISIBLE);
@@ -1169,7 +1169,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				Drawable leftIcon = rightTitleButtonController.getLeftIcon();
 				Drawable rightIcon = rightTitleButtonController.getRightIcon();
 				rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
-				rightTitleButton.setCompoundDrawablePadding(dpToPx(8f));
+				rightTitleButton.setCompoundDrawablePadding(view.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
 				((LinearLayout) rightTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
 			} else {
 				rightTitleButtonView.setVisibility(View.INVISIBLE);
@@ -1185,7 +1185,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				Drawable leftIcon = bottomTitleButtonController.getLeftIcon();
 				Drawable rightIcon = bottomTitleButtonController.getRightIcon();
 				bottomTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
-				bottomTitleButton.setCompoundDrawablePadding(dpToPx(8f));
+				bottomTitleButton.setCompoundDrawablePadding(view.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
 				((LinearLayout) bottomTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
 			} else {
 				bottomTitleButtonView.setVisibility(View.GONE);
@@ -1209,7 +1209,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				Drawable leftIcon = leftDownloadButtonController.getLeftIcon();
 				Drawable rightIcon = leftDownloadButtonController.getRightIcon();
 				leftDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
-				leftDownloadButton.setCompoundDrawablePadding(dpToPx(8f));
+				leftDownloadButton.setCompoundDrawablePadding(view.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
 				((LinearLayout) leftDownloadButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
 			} else {
 				leftDownloadButtonView.setVisibility(View.INVISIBLE);
@@ -1225,7 +1225,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				Drawable leftIcon = rightDownloadButtonController.getLeftIcon();
 				Drawable rightIcon = rightDownloadButtonController.getRightIcon();
 				rightDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
-				rightDownloadButton.setCompoundDrawablePadding(dpToPx(8f));
+				rightDownloadButton.setCompoundDrawablePadding(view.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
 				((LinearLayout) rightDownloadButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
 			} else {
 				rightDownloadButtonView.setVisibility(View.INVISIBLE);
@@ -1295,7 +1295,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			Drawable leftIcon = buttonController.getLeftIcon();
 			Drawable rightIcon = buttonController.getRightIcon();
 			buttonText.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
-			buttonText.setCompoundDrawablePadding(dpToPx(8f));
+			buttonText.setCompoundDrawablePadding(view.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
 			((LinearLayout) buttonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
 			buttonView.setOnClickListener(new View.OnClickListener() {
 				@Override
