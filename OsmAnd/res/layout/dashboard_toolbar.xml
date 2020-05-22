@@ -7,8 +7,8 @@
     android:layout_width="fill_parent"
     android:layout_height="@dimen/dashboard_map_toolbar"
     android:background="@color/app_bar_color_light"
-    app:contentInsetLeft="4dp"
-    app:contentInsetStart="4dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
     app:contentInsetRight="0dp"
     app:contentInsetEnd="0dp">
 
@@ -25,17 +25,18 @@
             android:gravity="start"
             android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageButton
                 android:id="@+id/toolbar_back"
+                style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+                android:layout_width="@dimen/acceptable_touch_radius"
+                android:layout_height="@dimen/acceptable_touch_radius"
+                android:layout_marginStart="@dimen/list_item_button_padding"
+                android:layout_marginLeft="@dimen/list_item_button_padding"
+                android:layout_marginEnd="@dimen/list_item_button_padding"
+                android:layout_marginRight="@dimen/list_item_button_padding"
                 android:contentDescription="@string/back_to_map"
-                android:layout_marginLeft="@dimen/multi_selection_menu_padding_top"
-                android:layout_marginRight="@dimen/multi_selection_menu_padding_top"
-                android:layout_width="@dimen/standard_icon_size"
-                android:layout_height="match_parent"
-                android:background="@drawable/dashboard_button_light"
-                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_arrow_back"
-                tools:visibility="visible"/>
+                tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_list"
@@ -53,6 +54,7 @@
                 android:id="@+id/toolbar_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:scaleType="center"
                 android:textColor="@color/abc_primary_text_material_dark"
                 android:textSize="@dimen/abc_text_size_large_material"
