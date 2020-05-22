@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentActivity;
@@ -36,15 +37,6 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		return (MapActivity) getActivity();
 	}
 
-	private boolean hasNavBar() {
-		int id = getResources().getIdentifier("config_showNavigationBar", "bool", "android");
-		if (id > 0) {
-			return getResources().getBoolean(id);
-		} else {
-			return false;
-		}
-	}
-
 	private int getStatusBarHeight() {
 		int statusBarHeight = 0;
 		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -55,7 +47,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	}
 
 	private int getNavigationBarHeight() {
-		if (!hasNavBar())
+		if (!AndroidUtils.hasNavBar(getContext()) && !AndroidUtils.isNavBarVisible(getMapActivity()))
 			return 0;
 		int orientation = getResources().getConfiguration().orientation;
 		if (isSmartphone() && Configuration.ORIENTATION_LANDSCAPE == orientation)
@@ -67,7 +59,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	}
 
 	private int getNavigationBarWidth() {
-		if (!hasNavBar())
+		if (!AndroidUtils.hasNavBar(getContext()) && !AndroidUtils.isNavBarVisible(getMapActivity()))
 			return 0;
 		int orientation = getResources().getConfiguration().orientation;
 		if (orientation == Configuration.ORIENTATION_LANDSCAPE && isSmartphone()) {
@@ -80,7 +72,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		OsmandApplication app = requireMyApplication();
 		FragmentActivity activity = requireActivity();
 
@@ -130,11 +122,11 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		RelativeLayout.LayoutParams osmTextLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		osmTextLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		osmTextLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-		
-		int defaultLogoMarginTop = (int) getResources().getDimension(R.dimen.splash_screen_logo_top);
+
+		int defaultLogoMarginTop = getResources().getDimensionPixelSize(R.dimen.splash_screen_logo_top);
 		int logoMarginTop = defaultLogoMarginTop - (Build.VERSION.SDK_INT >= 21 ? 0 : getStatusBarHeight());
-		int textMarginBottom = (int) getResources().getDimension(R.dimen.splash_screen_text_bottom);
-		int osmTextMarginBottom = (int) getResources().getDimension(R.dimen.splash_screen_osm_text_bottom);
+		int textMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_text_bottom);
+		int osmTextMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_osm_text_bottom);
 		int elementsPaddingLeft = 0;
 		int elementsPaddingRight = 0;
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
