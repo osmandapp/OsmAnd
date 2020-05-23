@@ -617,6 +617,10 @@ public class PoiFiltersHelper {
 	}
 
 	public void loadSelectedPoiFilters() {
+		// don't deal with not loaded poi types
+		if(!application.getPoiTypes().isInit()) {
+			return;
+		}
 		selectedPoiFilters.clear();
 		OsmandSettings settings = application.getSettings();
 		Set<String> filters = settings.getSelectedPoiFilters();
