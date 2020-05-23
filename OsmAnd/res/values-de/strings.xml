@@ -2043,7 +2043,7 @@ Lon %2$s</string>
     <string name="osmand_plus_banner_desc">Unbegrenzte Karten-Downloads, -Aktualisierungen und die Wikipedia-Erweiterung.</string>
     <string name="get_for">Für %1$s abonnieren</string>
     <string name="get_it">Abonnieren</string>
-    <string name="osm_live_payment_desc">Monatliche Abonnementabrechnung. Jederzeit auf Google Play kündbar.</string>
+    <string name="osm_live_payment_desc">Das Abonnement wird pro ausgewähltem Zeitraum berechnet. Sie können das Abonnement jederzeit über Google Play kündigen.</string>
     <string name="donation_to_osm">Spende an die OSM-Gemeinschaft</string>
     <string name="donation_to_osm_desc">Ein Teil Ihrer Spende erhalten OSM-Mitwirkende. Die Abonnementskosten bleiben gleich.</string>
     <string name="osm_live_subscription_desc">Das Abonnement macht stündliche, tägliche und wöchentliche Updates sowie unbegrenzte Downloads aller Karten weltweit möglich.</string>
@@ -3427,7 +3427,7 @@ Lon %2$s</string>
     <string name="choose_icon_color_name">Symbol, Farbe und Name</string>
     <string name="reorder_profiles">Profilliste bearbeiten</string>
     <string name="selected_profile">Ausgewähltes Profil</string>
-    <string name="reset_confirmation_descr">Durch Tippen auf %1$s werden alle Ihre Änderungen verworfen.</string>
+    <string name="reset_confirmation_descr">Durch Antippen von %1$s werden alle Ihre Änderungen verworfen.</string>
     <string name="reset_all_profile_settings_descr">Alle Profil-Einstellungen auf den Ausgangszustand zurücksetzen.</string>
     <string name="reset_all_profile_settings">Alle Profil-Einstellungen zurücksetzen\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
@@ -3483,7 +3483,7 @@ Lon %2$s</string>
     <string name="multimedia_use_system_camera">System-App verwenden</string>
     <string name="multimedia_photo_play_sound">Auslöseton der Kamera</string>
     <string name="reset_to_default_category_button_promo">Durch das Zurücksetzen auf die Standardeinstellung wird die Sortierung auf den Standardzustand nach der Installation zurückgesetzt.</string>
-    <string name="accessibility_mode_disabled">Eingabehilfenmodus ist in Ihrem System deaktiviert.</string>
+    <string name="accessibility_mode_disabled">Der Zugänglichkeitsmodus ist in Ihrem Android ausgeschaltet.</string>
     <string name="use_system_screen_timeout">Zeitlimit für den Systembildschirm verwenden</string>
     <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert. Wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet.
 \n
@@ -3526,7 +3526,7 @@ Lon %2$s</string>
     <string name="tracks_view_descr">Ihre aufgezeichneten Tracks befinden sich in %1$s oder im OsmAnd-Ordner.</string>
     <string name="please_provide_profile_name_message">Bitte geben Sie einen Namen für das Profil an</string>
     <string name="open_settings">Einstellungen öffnen</string>
-    <string name="plugin_disabled">Plugin deaktiviert</string>
+    <string name="plugin_disabled">Plugin aus</string>
     <string name="plugin_disabled_descr">Dieses Plugin ist eine separate Anwendung, Sie müssen es separat entfernen, wenn Sie nicht mehr vorhaben, es zu verwenden.
 \n
 \nDas Plugin verbleibt nach dem Entfernen von OsmAnd auf dem Gerät.</string>
@@ -3534,7 +3534,7 @@ Lon %2$s</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Routing</string>
     <string name="shared_string_include_data">Zusätzliche Daten einschließen</string>
-    <string name="import_profile_dialog_description">Das importierte Profil enthält zusätzliche Daten. Klicken Sie auf \'Importieren\', um nur Profildaten zu importieren, oder wählen Sie zusätzliche Daten zum Importieren aus.</string>
+    <string name="import_profile_dialog_description">Das importierte Profil enthält zusätzliche Daten. Klicken Sie auf \"Importieren\", um nur Profildaten zu importieren, oder wählen Sie zusätzliche Daten aus.</string>
     <string name="export_profile_dialog_description">Sie können zusätzliche Daten zum Exportieren zusammen mit dem Profil auswählen.</string>
     <string name="index_name_antarctica">Antarktis</string>
     <string name="osm_edits_view_descr">Sie finden Ihre noch nicht übertragenen Änderungen oder OSM-Fehler in %1$s. Hochgeladene Punkte werden nicht mehr angezeigt.</string>
@@ -3545,7 +3545,7 @@ Lon %2$s</string>
     <string name="routing_profile_direct_to">Auf direktem Weg</string>
     <string name="search_offline_geo_error">Geo-Intent \'%s\' konnte nicht analysiert werden.</string>
     <string name="shared_string_app_default_w_val">App-Standard (%s)</string>
-    <string name="no_recalculation_setting">Neuberechnung deaktivieren</string>
+    <string name="no_recalculation_setting">Keine Neuberechnung</string>
     <string name="route_recalculation_dist_title">Mindestabstand für Neuberechnung der Route</string>
     <string name="route_recalculation_dist_descr">Die Route wird neu berechnet, wenn der Abstand zur Route größer ist als der festgelegte Wert</string>
     <string name="profile_type_custom_string">Benutzerdefiniertes Profil</string>
@@ -3596,7 +3596,7 @@ Lon %2$s</string>
     <string name="quick_action_terrain_descr">Eine Schaltfläche zum Ein- und Ausblenden der Geländeebene auf der Karte.</string>
     <string name="quick_action_terrain_show">Gelände einblenden</string>
     <string name="quick_action_terrain_hide">Gelände ausblenden</string>
-    <string name="quick_action_show_hide_terrain">Gelände ein-/ausblenden</string>
+    <string name="quick_action_show_hide_terrain">Gelände ein- / ausblenden</string>
     <string name="shared_string_hillshade">Schummerung</string>
     <string name="shared_string_zoom_levels">Zoomstufen</string>
     <string name="shared_string_transparency">Transparenz</string>
@@ -3665,7 +3665,7 @@ Lon %2$s</string>
     <string name="lang_ce">Tschetschenisch</string>
     <string name="lang_bar">Bairisch</string>
     <string name="lang_ba">Baschkirisch</string>
-    <string name="main_actions_descr">Hauptaktionen enthalten nur 4 Schaltflächen.</string>
+    <string name="main_actions_descr">Hat nur vier Schaltflächen.</string>
     <string name="select_wikipedia_article_langs">Wählen Sie die Sprachen aus, in denen Wikipedia-Artikel auf der Karte erscheinen sollen. Sie können zwischen allen verfügbaren Sprachen wechseln, während Sie den Artikel lesen.</string>
     <string name="hidden_items_descr">Diese Elemente werden aus dem Menü ausgeblendet, aber die entsprechenden Optionen oder Plugins funktionieren weiterhin.</string>
     <string name="reorder_or_hide_from">Ordnen Sie Elemente aus %1$s neu an oder blenden Sie sie aus.</string>
@@ -3674,7 +3674,7 @@ Lon %2$s</string>
 \nund wenn es abläuft (nach einem Monat, drei Monaten oder einem Jahr)
 \nverlängert es sich nicht von selbst, wenn es vorher in Ihren Google Play-Einstellungen gekündigt wurde.</string>
     <string name="search_poi_types">Suche nach POI-Typen</string>
-    <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf \"Wechseln\", um alle auszuwählen, tippen Sie auf die linke Seite für die Kategorieauswahl.</string>
+    <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Wenn Sie auf \"Wechseln\" tippen, werden alle ausgewählt, und auf der linken Seite wird die Kategorie ausgewählt.</string>
     <string name="shared_string_divider">Trenner</string>
     <string name="quick_action_item">Schnellaktion</string>
     <string name="radius_ruler_item">Zirkel</string>
@@ -3687,24 +3687,24 @@ Lon %2$s</string>
     <string name="travel_item">Reisen (Wikivoyage und Wikipedia)</string>
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
     <string name="osmand_purchases_item">OsmAnd Einkäufe</string>
-    <string name="legend_item_description">Der Leitfaden zur Symbolik einer Karte</string>
+    <string name="legend_item_description">Der Leitfaden zur Symbolik einer Karte.</string>
     <string name="navigation_profiles_item">Navigationsprofile</string>
-    <string name="release_3_7">• Neue Offline-Steigungskarten
-\n
-\n• Vollständige Anpassung von Favoriten und GPX-Wegpunkten - benutzerdefinierte Farben, Symbole, Formen
-\n
-\n• Anpassen der Reihenfolge der Elemente im Kontextmenü, Karte konfigurieren, Schublade
-\n
-\n• Wikipedia als separate Ebene in Karte konfigurieren, nur benötigte Sprachen auswählen
-\n
-\n• Erstellen Sie Ihre eigenen POI-Filter/Karten mit absoluter Flexibilität
-\n
-\n• Optionen zur Wiederherstellung von Einstellungen für benutzerdefinierte Profile hinzugefügt
-\n
-\n• Vollständige GPX-Routen aus der Navigation unterstützen Verkehrsspuren und vollständige Abbiegeanweisungen
-\n
-\n• Größe der Bedienoberfläche auf Tablets verbessert
-\n
+    <string name="release_3_7">• Neue Offline-Steigungskarten 
+\n 
+\n• Vollständige Anpassung von Favoriten und GPX-Wegpunkten - benutzerdefinierte Farben, Symbole, Formen 
+\n 
+\n• Anpassen der Reihenfolge der Elemente im \"Kontextmenü\", \"Karte konfigurieren\" und \"Schublade\" 
+\n 
+\n• Wikipedia als separate Ebene in Karte konfigurieren, nur benötigte Sprachen auswählen 
+\n 
+\n• Erstellen Sie Ihre eigenen POI-Filter / Karten mit absoluter Flexibilität 
+\n 
+\n• Optionen zur Wiederherstellung von Einstellungen für benutzerdefinierte Profile hinzugefügt 
+\n 
+\n• Vollständige GPX-Routen aus der Navigation unterstützen Verkehrsspuren und vollständige Abbiegeanweisungen 
+\n 
+\n• Größe der Bedienoberfläche auf Tablets verbessert 
+\n 
 \n• Fehler mit RTL behoben
 \n
 \n</string>
@@ -3712,15 +3712,17 @@ Lon %2$s</string>
     <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche \"%1$s\" tippen.</string>
     <string name="quick_action_transport_hide">Öffentliche Verkehrsmittel ausblenden</string>
     <string name="quick_action_transport_show">Öffentliche Verkehrsmittel anzeigen</string>
-    <string name="quick_action_show_hide_transport">Öffentliche Verkehrsmittel anzeigen/ausblenden</string>
-    <string name="quick_action_transport_descr">Eine Schaltfläche zum Ein- oder Ausblenden der öffentlichen Verkehrsmittel auf der Karte.</string>
-    <string name="create_edit_poi">POI erstellen/bearbeiten</string>
+    <string name="quick_action_show_hide_transport">Öffentliche Verkehrsmittel anzeigen / ausblenden</string>
+    <string name="quick_action_transport_descr">Schaltfläche zum Ein- oder Ausblenden der öffentlichen Verkehrsmittel auf der Karte.</string>
+    <string name="create_edit_poi">POI erstellen / bearbeiten</string>
     <string name="parking_positions">Parkpositionen</string>
     <string name="add_edit_favorite">Favorit hinzufügen / bearbeiten</string>
     <string name="reset_deafult_order">Standard-Reihenfolge der Elemente wiederherstellen</string>
     <string name="back_to_editing">Zurück zur Bearbeitung</string>
-    <string name="quick_action_switch_profile_descr">Durch Antippen der Aktionsschaltfläche können Sie zwischen den ausgewählten Profilen wechseln.</string>
+    <string name="quick_action_switch_profile_descr">Die Aktionsschaltfläche schaltet zwischen den ausgewählten Profilen um.</string>
     <string name="shared_string_add_profile">Profil hinzufügen</string>
-    <string name="change_application_profile">Anwendungsprofil ändern</string>
-    <string name="profiles_for_action_not_found">Für diese Aktion ausgewählte Profile nicht gefunden.</string>
+    <string name="change_application_profile">App-Profil ändern</string>
+    <string name="profiles_for_action_not_found">Konnte keine solchen Profile finden.</string>
+    <string name="index_item_world_basemap_detailed">Weltübersichtskarte (detailliert)</string>
+    <string name="unsupported_type_error">Nicht unterstützter Typ</string>
 </resources>
