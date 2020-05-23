@@ -2027,7 +2027,7 @@
     <string name="osm_live_banner_desc">Havigu senlimigitan elŝutojn de mapoj kaj ĉiusemajnaj, ĉiutagajn kaj eĉ ĉiuhorajn ĝisdatigojn.</string>
     <string name="osmand_plus_banner_desc">Senlimigitaj map-elŝutoj, ĝisdatigoj kaj kromprogramo Vikipedio.</string>
     <string name="si_mi_meters">Mejloj/metroj</string>
-    <string name="osm_live_payment_desc">Abon-pagoj prenataj ĉiumonate. Iam ajn rezignebla per Google Play.</string>
+    <string name="osm_live_payment_desc">La abon‑pago estos prenata por la elektita periodo. Vi ĉiam povos rezigni ĝin en Google Play.</string>
     <string name="donation_to_osm">Donacoj por la OSM‑komunumo</string>
     <string name="donation_to_osm_desc">Parto de viaj donacoj estas sendata OSM‑kontribuantoj. La abonpago estas la sama.</string>
     <string name="osm_live_subscription_desc">Abonoj ebligas al vi ĉiuhorajn, ĉiutagajn aŭ ĉiusemajnajn ĝisdatigojn kaj senlimigitajn elŝutaĵojn de mapoj de la tuta mondo.</string>
@@ -3483,7 +3483,7 @@
     <string name="create_custom_categories_list_promo">Ŝanĝi ordigon de la listo, kaŝi malnecesajn kategoriojn. Vi povas enporti aŭ elporti ĉiujn ŝanĝojn kun profiloj.</string>
     <string name="add_new_custom_category_button_promo">Vi povas aldoni novan propran kategorion per elekti kelka(j)n bezonata(j)n kategorio(j)n.</string>
     <string name="reset_to_default_category_button_promo">Per restarigi implicitajn agordojn, ordigo de elementoj revenos al la postinstalada stato.</string>
-    <string name="accessibility_mode_disabled">Alirebleca reĝimo estas malaktivigita en via sistemo.</string>
+    <string name="accessibility_mode_disabled">Alirebleca reĝimo malaktivigita en Android.</string>
     <string name="use_system_screen_timeout">Malŝalti ekranon laŭ sistemaj agordoj</string>
     <string name="use_system_screen_timeout_promo">Implicite neaktiva, se OsmAnd laboras malfone, la ekrano ne malŝaltos aŭtomate.
 \n
@@ -3531,7 +3531,7 @@
     <string name="export_profile_dialog_description">Vi povas elekti kromajn datumojn por elporti kune kun la profilo.</string>
     <string name="index_name_antarctica">Antarkto</string>
     <string name="shared_string_app_default_w_val">Implicita valoro (%s)</string>
-    <string name="no_recalculation_setting">Malaktivigi rekalkulon</string>
+    <string name="no_recalculation_setting">Sen rekalkulado</string>
     <string name="route_recalculation_dist_title">Minimuma distanco por rekalkuli kurson</string>
     <string name="route_recalculation_dist_descr">Kurso estos rekalkulita se la distanco estos pli granda ol tiu ĉi valoro</string>
     <string name="profile_type_custom_string">Propra profilo</string>
@@ -3617,9 +3617,9 @@
     <string name="move_inside_category">Vi povas movi elementojn nur ene tiu ĉi kategorio.</string>
     <string name="developer_plugin">Programista kromprogramo</string>
     <string name="shared_string_items">Elementoj</string>
-    <string name="ui_customization_description">Alĝustigi kaj kaŝi elementojn en la (maldekstra) tirmenuo, menuo “agordi mapon” kaj kunteksta menuo de mapo.
-\n
-\nVi povas malaktivigi neuzatajn kromprogramojn por kaŝi ĉiujn iliajn rilatajn butonojn: %1$s.</string>
+    <string name="ui_customization_description">Alĝustigi kaj kaŝi elementojn en la (maldekstra) tirmenuo, menuo “agordi mapon” kaj kunteksta menuo de mapo. 
+\n 
+\nEblas malaktivigi neuzatajn kromprogramojn por kaŝi ĉiujn iliajn rilatajn butonojn: %1$s.</string>
     <string name="ui_customization_short_descr">Elementoj de tirmenuo, kunteksta menuo, ktp.</string>
     <string name="ui_customization">Alĝustigi fasadon</string>
     <string name="shared_string_drawer">Tirmenuo</string>
@@ -3717,4 +3717,5 @@
     <string name="change_application_profile">Ŝanĝi aplikaĵan profilon</string>
     <string name="profiles_for_action_not_found">Ne trovis tiajn profilojn.</string>
     <string name="index_item_world_basemap_detailed">Fundamenta mapo de mondo (detala)</string>
+    <string name="unsupported_type_error">Nesubtenata speco</string>
 </resources>

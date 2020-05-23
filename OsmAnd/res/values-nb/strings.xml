@@ -3513,7 +3513,7 @@
     <string name="quick_action_terrain_descr">En knapp for å vise eller skjule terrenglag på kartet.</string>
     <string name="context_menu_actions">Handlinger i bindeleddsmeny</string>
     <string name="shared_string_hidden">Skjult</string>
-    <string name="main_actions_descr">Hovedhandlinger inneholder kun 4 knapper.</string>
+    <string name="main_actions_descr">Har kun fire knapper.</string>
     <string name="main_actions">Hovedhandlinger</string>
     <string name="move_inside_category">Du kan kun flytte elementer innenfor denne kategorien.</string>
     <string name="developer_plugin">Utvikler-tillegg</string>
@@ -3552,7 +3552,7 @@
     <string name="create_edit_poi">Legg til/rediger interessepunkt</string>
     <string name="quick_action_show_hide_transport">Vis/skjul offentlig transport</string>
     <string name="shared_string_add_profile">Legg til profil</string>
-    <string name="quick_action_transport_descr">En knapp for å vise eller skjule offentlig transport på kartet.</string>
+    <string name="quick_action_transport_descr">Knapp for vising eller skjuling av offentlig transport på kartet.</string>
     <string name="routing_profile_direct_to">Direkte-til-punkt</string>
     <string name="clear_recorded_data">Tøm lagret data</string>
     <string name="shared_string_include_data">Inkluder ytterligere data</string>
@@ -3611,4 +3611,17 @@
     <string name="reset_deafult_order">Gjenopprett forvalgt elementrekkefølge</string>
     <string name="profiles_for_action_not_found">Fant ingen slike profiler.</string>
     <string name="index_item_world_basemap_detailed">Verdensoversiktskart (detaljert)</string>
+    <string name="logcat_buffer_descr">Sjekk og del detaljert loggføring fra programmet</string>
+    <string name="use_system_screen_timeout">Bruk systemets skjermtidsavbrudd</string>
+    <string name="plugin_disabled">Programtillegg av</string>
+    <string name="no_recalculation_setting">Ingen omregning</string>
+    <string name="please_provide_profile_name_message">Angi et navn for profilen</string>
+    <string name="select_data_to_import">Velg data å importere.</string>
+    <string name="slope_read_more">Du kan lese mer om løyper i %1$s.</string>
+    <string name="reorder_or_hide_from">Omarranger eller skjul elementer fra %1$s.</string>
+    <string name="divider_descr">Elementer under dette punktet er inndelt av en skillelinje.</string>
+    <string name="reset_items_descr">Skjuling av innstillinger tilbakestiller dem til forvalg.</string>
+    <string name="app_mode_ski_touring">Skigåing</string>
+    <string name="unsupported_type_error">Ustøttet type</string>
+    <string name="select_distance_route_will_recalc">Velg hvor mye avviksdistanse som skal utløse omruting.</string>
 </resources>

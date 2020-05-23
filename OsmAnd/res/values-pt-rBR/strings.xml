@@ -3712,4 +3712,5 @@ Pôr do Sol: %2$s</string>
     <string name="change_application_profile">Alterar perfil do aplicativo</string>
     <string name="profiles_for_action_not_found">Não foi possível encontrar nenhum desses perfis.</string>
     <string name="index_item_world_basemap_detailed">Mapa geral do mundo (detalhado)</string>
+    <string name="unsupported_type_error">Tipo não suportado</string>
 </resources>
