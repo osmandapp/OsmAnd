@@ -44,7 +44,7 @@
     <string name="send_my_location">Meinen Standort senden</string>
     <string name="gps_and_location">Position</string>
     <string name="open_osmand">OsmAnd öffnen</string>
-    <string name="shared_string_live">"Live "</string>
+    <string name="shared_string_live">Live</string>
     <string name="get_telegram_title">Registrierung in Telegram</string>
     <string name="get_telegram_account_first">Sie benötigen ein Telegram-Konto, um die Standortfreigabe nutzen zu können.</string>
     <string name="get_telegram_description_continue">Bitte installieren Sie Telegram und richten Sie ein Konto ein.</string>
@@ -151,9 +151,7 @@
     <string name="start_location_sharing">Standort freigeben</string>
     <string name="location_service_no_gps_available">Wählen Sie einen der Standortanbieter aus, um Ihren Standort freizugeben.</string>
     <string name="sharing_location">Standort teilen</string>
-    <string name="welcome_descr">
-        <b>OsmAnd Tracker</b> ermöglicht es Ihnen, Ihren Standort zu teilen und den anderer in OsmAnd zu sehen.<br/>
-        <br/>Die App verwendet die API von Telegram, also benötigen Sie ein Telegram-Konto.</string>
+    <string name="welcome_descr"><b>OsmAnd Tracker</b> ermöglicht es Ihnen, Ihren Standort zu teilen und den anderer in OsmAnd zu sehen.<br/> <br/>Die App verwendet die API von Telegram, also benötigen Sie ein Telegram-Konto.</string>
     <string name="enter_another_device_name">Wählen Sie einen Namen, den Sie noch nicht benutzt haben</string>
     <string name="device_added_successfully">%1$s hinzugefügt.</string>
     <string name="shared_string_add">Hinzufügen</string>
