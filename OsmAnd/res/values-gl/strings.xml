@@ -1931,7 +1931,7 @@ Lon %2$s</string>
     <string name="delete_filter">Eliminar o filtro</string>
     <string name="new_filter">Filtro novo</string>
     <string name="new_filter_desc">Insire o nome do novo filtro, que se engadirá na túa lapela das \"Categorías\".</string>
-    <string name="osm_live_payment_desc">Cobraráseche unha subscrición mensual. Podes desbotar a túa subscrición na Google Play en calquera intre.</string>
+    <string name="osm_live_payment_desc">Cobraráseche unha subscrición polo período escollido. Podes desbotar a túa subscrición na Google Play en calquera intre.</string>
     <string name="donation_to_osm">Doazón á comunidade do OSM</string>
     <string name="donation_to_osm_desc">Parte da túa doazón envíase ós contribuíntes do OSM. O custo da subscrición segue sendo a mesma.</string>
     <string name="osm_live_subscription_desc">A subscrición permite actualizacións a cada hora, día ou semana e descargas ilimitadas de xeito global para todo os mapas.</string>
@@ -2222,7 +2222,7 @@ Lon %2$s</string>
     <string name="shared_string_install">Instalar</string>
     <string name="improve_coverage_mapillary">Mellorar a cobertura das imaxes co Mapillary</string>
     <string name="open_mapillary">Abrir Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Instala o Mapillary para engadir unha ou máis imaxes a esta localización do mapa.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instala o Mapillary para engadir imaxes a esta localización do mapa.</string>
     <string name="online_photos">Imaxes da rede</string>
     <string name="quick_action_resume_pause_navigation">Deter/Voltar á navegación</string>
     <string name="quick_action_resume_pause_navigation_descr">Un botón para deter ou voltar á navegación.</string>
@@ -2337,7 +2337,7 @@ Lon %2$s</string>
     <string name="show_guide_line_descr">No mapa aparece unha liña que conecta a túa posición até as localizacións das marcaxes activas.</string>
     <string name="show_arrows_descr">No mapa amósanse unha ou dúas frechas que indican a dirección ás marcaxes activas.</string>
     <string name="distance_indication_descr">Escolle de que xeito che gostaría ollar a distancia ás marcaxes activas.</string>
-    <string name="active_markers_descr">Especifica o número de indicadores de dirección:</string>
+    <string name="active_markers_descr">Especifica o número de indicadores de dirección.</string>
     <string name="digits_quantity">Número de díxitos decimais</string>
     <string name="shared_string_right">Dereita</string>
     <string name="shared_string_left">Esquerda</string>
@@ -2412,7 +2412,7 @@ Lon %2$s</string>
     <string name="shared_string_actions">Accións</string>
     <string name="shared_string_marker">Marcaxe</string>
     <string name="empty_state_osm_edits">Crear ou modificar obxectos de OSM</string>
-    <string name="empty_state_osm_edits_descr">Crear ou modificar PDI do OSM, abrir ou comentar Notas do OSM e contribuír con ficheiros GPX gravados.</string>
+    <string name="empty_state_osm_edits_descr">Crear ou modificar PDI do OSM, abrir ou comentar notas no OSM e contribuír con ficheiros GPX gravados.</string>
     <string name="shared_string_deleted">Eliminado</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Engadido</string>
@@ -2420,7 +2420,7 @@ Lon %2$s</string>
     <string name="one_tap_active_descr">Preme nunha marcaxe do mapa para movela cara a parte de enriba das marcaxes activas sen abrir o menú contextual.</string>
     <string name="one_tap_active">Activar cun toque</string>
     <string name="empty_state_av_notes">Crea notas!</string>
-    <string name="empty_state_av_notes_desc">Engada unha nota de son, vídeo ou imaxe a cada punto do mapa empregando o trebello ou o menú de contexto.</string>
+    <string name="empty_state_av_notes_desc">Engadir notas de son, vídeo ou imaxe a calquera punto do mapa empregando os trebellos ou os menús contextuais.</string>
     <string name="notes_by_date">Notas A/V por data</string>
     <string name="by_date">Por data</string>
     <string name="by_type">Por tipo</string>
@@ -3443,7 +3443,7 @@ Lon %2$s</string>
     <string name="choose_icon_color_name">Icona, cor e nome</string>
     <string name="reorder_profiles">Editar a listaxe de perfís</string>
     <string name="selected_profile">Perfil seleccionado</string>
-    <string name="reset_confirmation_descr">Ó premer en %1$s, serán desbotadas todas as túas modificacións.</string>
+    <string name="reset_confirmation_descr">Ó premer en %1$s desbotas todas as túas modificacións.</string>
     <string name="reset_all_profile_settings_descr">Restabelecer todos os axustes do perfil ós valores por defecto da instalación.</string>
     <string name="reset_all_profile_settings">Restabelecer todos os axustes do perfil\?</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
@@ -3512,7 +3512,7 @@ Lon %2$s</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Solpor ás %1$s</string>
     <string name="sunrise_at">Amencer ás %1$s</string>
-    <string name="accessibility_mode_disabled">Modo de accesibilidade desactivado no teu sistema.</string>
+    <string name="accessibility_mode_disabled">Modo de accesibilidade desactivado no teu Android.</string>
     <string name="use_system_screen_timeout">Empregar o tempo de espera da pantalla do sistema</string>
     <string name="use_system_screen_timeout_promo">Desactivado de xeito predefinido, se o OsmAnd é executado en primeiro plano, a pantalla manterase acendida. 
 \n 
@@ -3556,13 +3556,13 @@ Lon %2$s</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Enrutamento</string>
     <string name="shared_string_include_data">Incluír datos adicionais</string>
-    <string name="import_profile_dialog_description">O perfil importado contén datos adicionais. Preme en \"Importar\" para importar só datos de perfil ou marca datos adicionais para importar.</string>
+    <string name="import_profile_dialog_description">O perfil importado contén datos adicionais. Preme en \"Importar\" para importar só datos de perfil ou marca datos adicionais.</string>
     <string name="export_profile_dialog_description">Podes marcar datos adicionais para exportar ó carón do perfil.</string>
     <string name="index_name_antarctica">Antártida</string>
     <string name="navigation_notification_desc">Amosar notificación do sistema durante a navegación con instrucións de navegación.</string>
     <string name="navigation_notification">Notificación de navegación</string>
     <string name="shared_string_app_default_w_val">Aplicación por defecto (%s)</string>
-    <string name="no_recalculation_setting">Desactivar recálculo</string>
+    <string name="no_recalculation_setting">Sen recálculo</string>
     <string name="route_recalculation_dist_title">Distancia mínima para recalcular a ruta</string>
     <string name="route_recalculation_dist_descr">A ruta será recalculada se a distancia á ruta é maior que o parámetro especificado</string>
     <string name="profile_type_custom_string">Perfil personalizado</string>
@@ -3606,7 +3606,7 @@ Lon %2$s</string>
     <string name="shared_string_language">Lingua</string>
     <string name="shared_string_all_languages">Todas as linguas</string>
     <string name="wiki_menu_download_descr">Precísanse mapas adicionais para ollar os PDI da Wikipedia no mapa.</string>
-    <string name="main_actions_descr">As \"Accións principais\" conteñen só 4 botóns.</string>
+    <string name="main_actions_descr">Só ten catro botóns.</string>
     <string name="main_actions">Accións principais</string>
     <string name="move_inside_category">Só podes mover obxectos dentro desta categoría.</string>
     <string name="select_wikipedia_article_langs">Escolle as linguas nas que os artigos da Wikipedia aparecerán no mapa. Podes trocar entre todos as linguas dispoñíbeis en canto leas o artigo.</string>
@@ -3666,7 +3666,7 @@ Lon %2$s</string>
     <string name="recalculate_route_distance_promo">A ruta será recalculada se a distancia á localización actual é maior que o valor escollido.</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Pendentes</string>
-    <string name="quick_action_show_hide_terrain">Amosar/agochar terreo</string>
+    <string name="quick_action_show_hide_terrain">Amosar / agochar terreo</string>
     <string name="quick_action_terrain_hide">Agochar terreo</string>
     <string name="quick_action_terrain_show">Amosar terreo</string>
     <string name="quick_action_terrain_descr">Un botón que amosa ou agocha a capa do terreo no mapa.</string>
@@ -3678,9 +3678,9 @@ Lon %2$s</string>
     <string name="shared_string_octagon">Octógono</string>
     <string name="shared_string_square">Cadrado</string>
     <string name="shared_string_min">Mín</string>
-    <string name="ui_customization_description">Personaliza a morea de elementos na gabeta, na configuración do mapa e o menú contextual. 
+    <string name="ui_customization_description">Personaliza a cantidade de elementos na \"Gabeta\", na \"Configuración do mapa\" e no \"Menú contextual\". 
 \n 
-\nPodes desactivar os plugins non enpregados, para agochar todos os seus controis da aplicación %1$s.</string>
+\nDesactiva os plugins non enpregados, para agochar todos os seus controis da aplicación %1$s.</string>
     <string name="ui_customization_short_descr">Elementos da gabeta, menú contextual</string>
     <string name="ui_customization">Personalización da interface de usuario</string>
     <string name="shared_string_drawer">Gabeta</string>
@@ -3698,7 +3698,7 @@ Lon %2$s</string>
 \n 
 \n  Podes xestionar e desbotar as túas subscricións entrando nos axustes da Google Play."</string>
     <string name="search_poi_types">Procurar tipos de PDI</string>
-    <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Preme en \"Trocar\" para marcar todo, preme o lado esquerdo para escoller unha categoría.</string>
+    <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Preme en \"trocar\" para marcar todo, preme o lado esquerdo para escoller unha categoría.</string>
     <string name="download_unsupported_action">Acción %1$s non admitida</string>
     <string name="tracker_item">Rastrexador do OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
@@ -3710,17 +3710,17 @@ Lon %2$s</string>
     <string name="favorites_item">Favoritos</string>
     <string name="subscription_osmandlive_item">Subscrición - OsmAnd Live</string>
     <string name="osmand_purchases_item">Compras do OsmAnd</string>
-    <string name="legend_item_description">A guía para a simboloxía dun mapa</string>
+    <string name="legend_item_description">A guía para a simboloxía dun mapa.</string>
     <string name="navigation_profiles_item">Perfís de navegación</string>
     <string name="release_3_7">• Novos mapas sen conexión das pendentes 
 \n 
 \n • Personalización máis completa dos favoritos e puntos de referencia GPX (cores personalizadas, iconas, formas) 
 \n 
-\n • Nova personalización na orde dos elementos en Configurar mapa, menú contextual e menú lateral 
+\n • Nova personalización na orde dos elementos en \"Configurar mapa\", \"menú contextual\" e \"gabeta\"
 \n 
 \n • A Wikipedia agora visualízase coma una capa separada en Configurar mapa, escolle só as linguas precisas 
 \n 
-\n • Crea o teu propio filtro/mapas de puntos de interese, con total flexibilidade 
+\n • Crea o teu propio filtro / mapas de puntos de interese, con total flexibilidade 
 \n 
 \n • Engadíronse opcións para restabelecer os axustes dos perfís personalizados 
 \n 
@@ -3735,15 +3735,17 @@ Lon %2$s</string>
     <string name="additional_actions_descr">Podes acceder a estas accións premendo no botón “%1$s”.</string>
     <string name="quick_action_transport_hide">Agochar transporte público</string>
     <string name="quick_action_transport_show">Amosar transporte público</string>
-    <string name="quick_action_show_hide_transport">Amosar/agochar transporte público</string>
-    <string name="quick_action_transport_descr">Un botón que amosa ou agocha o transporte público no mapa.</string>
-    <string name="create_edit_poi">Crear/Editar PDI</string>
+    <string name="quick_action_show_hide_transport">Amosar / agochar transporte público</string>
+    <string name="quick_action_transport_descr">Botón que amosa ou agocha o transporte público no mapa.</string>
+    <string name="create_edit_poi">Crear / Editar PDI</string>
     <string name="parking_positions">Posicións de aparcamento</string>
     <string name="add_edit_favorite">Engadir / Editar favorito</string>
     <string name="reset_deafult_order">Restabelecer a orde dos elementos predefinidos</string>
     <string name="back_to_editing">Voltar á edición</string>
-    <string name="quick_action_switch_profile_descr">Premendo no botón de acción mudarase entre os perfís escollidos.</string>
+    <string name="quick_action_switch_profile_descr">O botón de acción troca entre os perfís escollidos.</string>
     <string name="shared_string_add_profile">Engadir perfil</string>
     <string name="change_application_profile">Mudar perfil da aplicación</string>
-    <string name="profiles_for_action_not_found">Non se atoparon os perfís marcados para esta acción.</string>
+    <string name="profiles_for_action_not_found">Non foi posíbel atopar ningún destes perfís.</string>
+    <string name="index_item_world_basemap_detailed">Mapa xeral do mundo (detallado)</string>
+    <string name="unsupported_type_error">Tipo non admitido</string>
 </resources>
