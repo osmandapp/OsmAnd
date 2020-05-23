@@ -379,7 +379,7 @@
     <string name="favorite_friends_category">Freunde</string>
     <string name="favorite_places_category">Sehenswertes</string>
     <string name="shared_string_others">Andere</string>
-    <string name="shared_string_name">"Name "</string>
+    <string name="shared_string_name">Name</string>
     <string name="favourites_edit_dialog_category">Kategorie</string>
     <string name="shared_string_no_thanks">Nicht verwendet</string>
     <string name="basemap_missing">Laden Sie die Basis-Weltkarte herunter, um einen Überblick über die ganze Welt bei niedrigen Vergrößerungsstufen zu erhalten.</string>
@@ -2077,7 +2077,7 @@ Lon %2$s</string>
     <string name="save_track_precision_descr">Filter: Mindestgenauigkeit für die Aufzeichnung eines Punktes.</string>
     <string name="rendering_attr_contourColorScheme_description">Farbschema für Höhenlinien</string>
     <string name="shared_string_continue">Fortfahren</string>
-    <string name="shared_string_pause">"Pause "</string>
+    <string name="shared_string_pause">Pause</string>
     <string name="shared_string_recorded">Aufgezeichnet</string>
     <string name="gpx_logging_no_data">Keine Daten</string>
     <string name="shared_string_trip">Strecke</string>
@@ -3615,7 +3615,7 @@ Lon %2$s</string>
     <string name="app_mode_ski_touring">Skitouren</string>
     <string name="app_mode_ski_snowmobile">Schneemobil</string>
     <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
-    <string name="slope_description">Farbliche Kennzeichnung von Pisten im Gelände.</string>
+    <string name="slope_description">Pisten verwendet Farben, um die Geländesteilheit zu visualisieren.</string>
     <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen</string>
     <string name="changes_applied_to_profile">Die Änderungen wurden auf das \'%1$s\' Profil angewendet.</string>
     <string name="settings_item_read_error">Konnte nicht von \'%1$s\' lesen.</string>
@@ -3725,4 +3725,9 @@ Lon %2$s</string>
     <string name="profiles_for_action_not_found">Konnte keine solchen Profile finden.</string>
     <string name="index_item_world_basemap_detailed">Weltübersichtskarte (detailliert)</string>
     <string name="unsupported_type_error">Nicht unterstützter Typ</string>
+    <string name="ui_customization_description">Passen Sie die Menge der Elemente in \"Schublade\", \"Karte konfigurieren\" und \"Kontextmenü\" an.
+\n
+\nSchalten Sie nicht verwendete Plugins aus, um alle ihre Steuerelemente auszublenden. %1$s.</string>
+    <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
+    <string name="shared_string_drawer">Schublade</string>
 </resources>
