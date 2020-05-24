@@ -651,6 +651,10 @@ public class SearchUICore {
 			this.parentSearchResult = parentSearchResult;
 			return prev;
 		}
+		
+		public SearchResult getParentSearchResult() {
+			return parentSearchResult;
+		}
 
 		public List<SearchResult> getRequestResults() {
 			return requestResults;
@@ -730,9 +734,9 @@ public class SearchUICore {
 				object.localeName = object.alternateName;
 				object.alternateName = null;
 			}
+			object.parentSearchResult = parentSearchResult;
 			if (matcher == null || matcher.publish(object)) {
 				count++;
-				object.parentSearchResult = parentSearchResult;
 				if (totalLimit == -1 || count < totalLimit) {
 					requestResults.add(object);
 				}
@@ -740,6 +744,7 @@ public class SearchUICore {
 			}
 			return false;
 		}
+		
 		@Override
 		public boolean isCancelled() {
 			boolean cancelled = request != requestNumber.get();
