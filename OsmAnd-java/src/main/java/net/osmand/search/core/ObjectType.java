@@ -45,27 +45,27 @@ public enum ObjectType {
 		return null;
 	}
 
-	public static double getTypeWeight(ObjectType t) {
+	public static int getTypeWeight(ObjectType t) {
 		if (t == null) {
-			return 1.0;
+			return 1;
 		}
 		switch (t) {
 			case CITY:
-				return 1.0;
+				return 1;
 			case VILLAGE:
-				return 1.0;
+				return 1;
 			case POSTCODE:
-				return 1.0;
+				return 1;
 			case STREET:
-				return 2.0;
+				return 2;
 			case HOUSE:
-				return 3.0;
+				return 3;
 			case STREET_INTERSECTION:
-				return 3.0;
+				return 3;
 			case POI:
-				return 2.0;
+				return 2;
 			default:
-				return 1.0;
+				return 1;
 		}
 	}
 }
