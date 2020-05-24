@@ -872,14 +872,16 @@ public class SearchUICore {
 					return topVisible1 ? -1 : 1;
 				}
 				break;
-			case UNKNOWN_PHRASE_MATCH_WEIGHT: 
-				if (o1.getUnknownPhraseMatchWeight() != o2.getUnknownPhraseMatchWeight()) {
-					return -Double.compare(o1.getUnknownPhraseMatchWeight(), o2.getUnknownPhraseMatchWeight());
-				}
-				break;
 			case FOUND_WORD_COUNT: 
 				if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
 					return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
+				}
+				break;
+			case UNKNOWN_PHRASE_MATCH_WEIGHT:
+				// here we check how much each sub search result matches the phrase
+				// also we sort it by type house -> street/poi -> city/postcode/village/other
+				if (o1.getUnknownPhraseMatchWeight() != o2.getUnknownPhraseMatchWeight()) {
+					return -Double.compare(o1.getUnknownPhraseMatchWeight(), o2.getUnknownPhraseMatchWeight());
 				}
 				break;
 			case SEARCH_DISTANCE_IF_NOT_BY_NAME: 
