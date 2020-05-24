@@ -465,7 +465,7 @@
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Standort mitteilen mittels</string>
     <string name="send_location_sms_pattern">Standort: %1$s
-%2$s</string>
+\n%2$s</string>
     <string name="send_location_email_pattern">Um den Ort zu sehen, folgen Sie dem Weblink %1$s oder dem Android-Intent-Link %2$s</string>
     <string name="send_location">Standort senden</string>
     <string name="context_menu_item_share_location">Standort mitteilen</string>
@@ -541,7 +541,7 @@
     <string name="shared_string_refresh">Aktualisieren</string>
     <string name="fast_route_mode">Schnellste Route</string>
     <string name="fast_route_mode_descr">Zur Berechnung der schnellsten Route aktivieren oder für eine kraftstoffsparende Route deaktivieren.</string>
-    <string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln\n ({2} MB)</string>
+    <string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln ({2} MB)</string>
     <string name="shared_string_download_map">Karte herunterladen</string>
     <string name="select_max_zoom_preload_area">Größte zu ladende Vergrößerung</string>
     <string name="maps_could_not_be_downloaded">Diese Karte konnte nicht geladen werden</string>
@@ -1492,8 +1492,8 @@
 \nDiese Ansicht kann zurückgestellt werden, indem sie hier wieder deaktiviert wird oder die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.</string>
     <string name="shared_string_audio">Audio</string>
     <string name="location_on_map">Standort:
- Lat %1$s
- Lon %2$s</string>
+\n Lat %1$s
+\n Lon %2$s</string>
     <string name="notes">Audio-/Video-Notizen</string>
     <string name="online_map">Online-Karte</string>
     <string name="roads_only">Nur Straßen</string>
@@ -1567,7 +1567,7 @@
     <string name="shared_string_release">Veröffentlicht</string>
     <string name="search_poi_category_hint">Suchbegriff</string>
     <string name="short_location_on_map">Lat %1$s
-Lon %2$s</string>
+\nLon %2$s</string>
     <string name="shared_string_logoff">Abmelden</string>
     <string name="rendering_value_disabled_name">Deaktiviert</string>
     <string name="routing_attr_height_name">Höhenbeschränkung</string>
@@ -2439,7 +2439,7 @@ Lon %2$s</string>
     <string name="no_photos_descr">Keine Fotos hier.</string>
     <string name="plugin_mapillary_descr">Fotos von der Straße für jedermann. Plätze entdecken, mitwirken, die Welt im Bild festhalten.</string>
     <string name="improve_coverage_mapillary">Verbessern Sie die Bildberichterstattung mit Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Installieren Sie die App \'Mapillary\', um dieser Kartenposition ein oder mehrere Fotos hinzuzufügen.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installieren Sie Mapillary, um Fotos zu dieser Kartenposition hinzuzufügen.</string>
     <string name="open_mapillary">Mapillary öffnen</string>
     <string name="mapillary_image">Mapillary-Foto</string>
     <string name="shared_string_permissions">Berechtigungen</string>
@@ -2554,7 +2554,7 @@ Lon %2$s</string>
     <string name="hide_passed">Passierte ausblenden</string>
     <string name="marker_show_distance_descr">Auswahl der Entfernungs- und Richtungsangabe für Kartenmarkierungen in der Karte:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartenausrichtungsgrenzwert</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet.</string>
     <string name="marker_moved_to_history">Kartenmarkierung in den Verlauf verschoben</string>
     <string name="osn_modify_dialog_error">Notiz konnte nicht geändert werden.</string>
     <string name="osn_modify_dialog_title">Notiz ändern</string>
@@ -2612,7 +2612,7 @@ Lon %2$s</string>
     <string name="by_date">Nach Datum</string>
     <string name="by_type">Nach Typ</string>
     <string name="import_gpx_file_description">kann als Favoriten oder GPX-Datei importiert werden.</string>
-    <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Bedienelement oder Kontextmenü hinzufügen.</string>
+    <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu einem beliebigen Punkt auf der Karte hinzufügen, indem Sie die Widgets oder Kontextmenüs verwenden.</string>
     <string name="notes_by_date">Audio-/Video-Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuertasten und Bedienelemente um.</string>
     <string name="release_3_0">• Neu: Unterstützung weltweiter Offline-Reiseführer. Verknüpfung beschriebener Sehenswürdigkeiten zur Landkarte. Die Inhalte basieren derzeit auf Wikivoyage.
@@ -2650,7 +2650,7 @@ Lon %2$s</string>
     <string name="show_guide_line_descr">Richtungsanzeiger von Ihrem Standort zu aktiven Markierungspunkten einblenden.</string>
     <string name="show_arrows_descr">Ein oder zwei Pfeile anzeigen, die die Richtung zu den aktiven Markierungen angeben.</string>
     <string name="distance_indication_descr">Wählen Sie aus, wie der Abstand zu aktiven Markierungen angezeigt werden soll.</string>
-    <string name="active_markers_descr">Wählen Sie die Anzahl der Fahrtrichtungsanzeiger:</string>
+    <string name="active_markers_descr">Wählen Sie die Anzahl der Fahrtrichtungsanzeiger.</string>
     <string name="osm_recipient_stat">%1$s bearbeitet, Summe %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-Empfänger</string>
     <string name="total_donations">Spenden insgesamt</string>
@@ -2806,8 +2806,9 @@ Lon %2$s</string>
     <string name="coord_input_save_as_track">Als Track speichern</string>
     <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie einen Dateinamen ein und klicken Sie auf „Speichern“.</string>
     <string name="point_deleted">Punkt %1$s gelöscht</string>
-    <string name="send_search_query_description">Ihre Suchanfrage wird zusammen mit Ihrem Standort gesendet an: „%1$s“.
-\nPersönliche Daten werden nicht gesammelt, zur Verbesserung der Suche werden nur die Suchdaten benötigt.</string>
+    <string name="send_search_query_description">Ihre Suchanfrage wird an: \"%1 s\" gesendet, zusammen mit Ihrem Standort.
+\n
+\nPersönliche Informationen werden nicht gesammelt, sondern nur Suchdaten, die zur Verbesserung der Suche benötigt werden.</string>
     <string name="search_no_results_description">Keine Ergebnisse?
 \nNehmen Sie Kontakt mit uns auf.</string>
     <string name="send_search_query">Suchanfrage senden?</string>
@@ -3670,11 +3671,13 @@ Lon %2$s</string>
     <string name="hidden_items_descr">Diese Elemente werden aus dem Menü ausgeblendet, aber die entsprechenden Optionen oder Plugins funktionieren weiterhin.</string>
     <string name="reorder_or_hide_from">Ordnen Sie Elemente aus %1$s neu an oder blenden Sie sie aus.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">Ihr Google Play-Konto wird beim Kauf eines Abonnements belastet,
-\nund wenn es abläuft (nach einem Monat, drei Monaten oder einem Jahr)
-\nverlängert es sich nicht von selbst, wenn es vorher in Ihren Google Play-Einstellungen gekündigt wurde.</string>
+    <string name="osm_live_payment_subscription_management">Die Bezahlung wird Ihrem Google Play-Konto bei der Bestätigung des Kaufs belastet.
+\n
+\n Das Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
+\n
+\n Sie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren Google Play-Einstellungen gehen.</string>
     <string name="search_poi_types">Suche nach POI-Typen</string>
-    <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Wenn Sie auf \"Wechseln\" tippen, werden alle ausgewählt, und auf der linken Seite wird die Kategorie ausgewählt.</string>
+    <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf den Schalter, um alle auszuwählen, tippen Sie auf die linke Seite zur Kategorieauswahl.</string>
     <string name="shared_string_divider">Trenner</string>
     <string name="quick_action_item">Schnellaktion</string>
     <string name="radius_ruler_item">Zirkel</string>

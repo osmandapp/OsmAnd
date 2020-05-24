@@ -2347,7 +2347,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="distance_moving">Poprawiona odległość</string>
     <string name="shared_string_permissions">Uprawnienia</string>
     <string name="import_gpx_failed_descr">Nie można zaimportować pliku. Proszę sprawdzić czy program posiada uprawnienia do jego odczytywania.</string>
-    <string name="map_widget_ruler_control">Linijka promieniowa</string>
+    <string name="map_widget_ruler_control">Cyrkiel</string>
     <string name="shared_string_reload">Załaduj ponownie</string>
     <string name="mapillary_menu_title_username">Nazwa użytkownika</string>
     <string name="mapillary_menu_title_dates">Data</string>
@@ -3683,7 +3683,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="navigation_profiles_item">Profile nawigacji</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Szybka czynność</string>
-    <string name="radius_ruler_item">Pomiar kąta</string>
+    <string name="radius_ruler_item">Cyrkiel</string>
     <string name="measure_distance_item">Mierzenie odległości</string>
     <string name="travel_item">Podróże (Wikipodróże i Wikipedia)</string>
     <string name="map_markers_item">Znaczniki</string>

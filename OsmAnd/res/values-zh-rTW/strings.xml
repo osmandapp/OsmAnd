@@ -2426,7 +2426,7 @@
     <string name="no_photos_descr">這裡沒有照片。</string>
     <string name="shared_string_install">安裝</string>
     <string name="improve_coverage_mapillary">提高 Mapillary 照片覆蓋的範圍</string>
-    <string name="improve_coverage_install_mapillary_desc">安裝 Mapillary 以將一張或更多張的照片增加到此地圖位置。</string>
+    <string name="improve_coverage_install_mapillary_desc">安裝 Mapillary 以將照片增加到此地圖位置。</string>
     <string name="open_mapillary">開啟 Mapillary</string>
     <string name="mapillary_image">Mapillary 圖片</string>
     <string name="distance_moving">距離已校正</string>
@@ -2490,7 +2490,7 @@
     <string name="empty_state_my_tracks">新增 GPX 檔案</string>
     <string name="empty_state_my_tracks_desc">匯入 GPX 檔案或錄製軌跡。</string>
     <string name="empty_state_favourites">增加到我的收藏</string>
-    <string name="empty_state_favourites_desc">匯入最愛或透過地圖上的標記點新增。</string>
+    <string name="empty_state_favourites_desc">匯入最愛或透過地圖上的標記點來新增它們。</string>
     <string name="import_track">匯入 GPX 檔案</string>
     <string name="import_track_desc">%1$s 檔案不包含航點，要將其匯入軌跡嗎？</string>
     <string name="move_point">移動標點</string>
@@ -2588,7 +2588,7 @@
     <string name="shared_string_two">二</string>
     <string name="shared_string_one">一</string>
     <string name="distance_indication_descr">選擇如何顯示活動標記的距離。</string>
-    <string name="active_markers_descr">指定方向指示數量：</string>
+    <string name="active_markers_descr">指定方向指示數量。</string>
     <string name="empty_state_markers_history_desc">標記為已通過的標點將顯現在此螢幕上。</string>
     <string name="show_guide_line_descr">顯示指引路線到活動標記位置。</string>
     <string name="show_arrows_descr">顯示一個或兩個箭頭指示方向到活動標記。</string>
@@ -2602,7 +2602,7 @@
     <string name="marker_activated">標記 %s 已啟動。</string>
     <string name="one_tap_active">「點一下」啟動</string>
     <string name="empty_state_av_notes">加註記！</string>
-    <string name="empty_state_av_notes_desc">使用小工具或內容選單，增加音訊、視訊或照片附註在地圖上的每個標點。</string>
+    <string name="empty_state_av_notes_desc">使用小工具或內容選單，增加音訊、視訊或照片附註在地圖上的任何標點。</string>
     <string name="notes_by_date">以日期排序的音訊／視訊註記</string>
     <string name="by_date">按照日期</string>
     <string name="by_type">按照類型</string>

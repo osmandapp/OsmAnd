@@ -779,24 +779,24 @@
 \n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM)
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
 \n 
-\nOsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz.
+\nOsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz. 
 \n 
-\n OsmAnd+ es la versión de pago de la aplicación, comprándola ayudas al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones.
+\n OsmAnd+ es la versión de pago de la aplicación, comprándola ayudas al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
 \n 
-\n Algunas de las funciones fundamentales:
-\n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
-\n - Mapas mundiales vectoriales compactos disponibles
-\n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación
-\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, Favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
+\n Algunas de las funciones fundamentales: 
+\n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
+\n - Mapas mundiales vectoriales compactos disponibles 
+\n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación 
+\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, Favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
 \n 
-\n - Búsqueda sin conexión de direcciones y sitios (PDI)
-\n - Rutas sin conexión para distancias de rango medio
-\n - Modos de automóvil, bicicleta y peatón con opcional:
-\n - Cambio automático de modo diurno/nocturno
-\n - Zoom del mapa según la velocidad
-\n - Alineación del mapa, según brújula o dirección del movimiento
+\n - Búsqueda sin conexión de direcciones y sitios (PDI) 
+\n - Rutas sin conexión para distancias de rango medio 
+\n - Modos de automóvil, bicicleta y peatón con opcional: 
+\n - Cambio automático de modo diurno/nocturno 
+\n - Zoom del mapa según la velocidad 
+\n - Alineación del mapa, según brújula o dirección del movimiento 
 \n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
 \n</string>
     <string name="filterpoi_activity">Crear filtro PDI</string>
@@ -2437,7 +2437,7 @@
     <string name="no_photos_descr">Sin fotos aquí.</string>
     <string name="shared_string_install">Instalar</string>
     <string name="improve_coverage_mapillary">Mejorar cobertura de fotos con Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Instala Mapillary para añadir una o más fotos a esta ubicación del mapa.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instala Mapillary para añadir fotos a esta ubicación del mapa.</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="mapillary_image">Imagen de Mapillary</string>
     <string name="distance_moving">Distancia recorrida</string>
@@ -2501,7 +2501,7 @@
     <string name="empty_state_my_tracks">Añadir archivos GPX</string>
     <string name="empty_state_my_tracks_desc">Importa archivos GPX o graba trazas.</string>
     <string name="empty_state_favourites">Añadir favoritos</string>
-    <string name="empty_state_favourites_desc">Importar Favoritos o añadir mediante puntos de marcación en el mapa.</string>
+    <string name="empty_state_favourites_desc">Importa los Favoritos o añádelos marcando puntos en el mapa.</string>
     <string name="import_track">Importar archivo GPX</string>
     <string name="import_track_desc">El archivo «%1$s» no contiene puntos de referencia, ¿Quieres importarlo como una traza?</string>
     <string name="move_point">Mover punto</string>
@@ -2601,7 +2601,7 @@
     <string name="show_guide_line_descr">Muestra líneas direccionales desde su ubicación hasta los marcadores activos.</string>
     <string name="show_arrows_descr">Muestra una o dos flechas indicando la dirección a los marcadores activos.</string>
     <string name="distance_indication_descr">Elige cómo mostrar la distancia a los marcadores activos.</string>
-    <string name="active_markers_descr">Define el número de indicadores de dirección:</string>
+    <string name="active_markers_descr">Define el número de indicadores de dirección.</string>
     <string name="appearance_on_the_map">Aspecto en el mapa</string>
     <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de referencia</string>
     <string name="shared_string_more_without_dots">Más</string>
@@ -2614,7 +2614,7 @@
     <string name="one_tap_active_descr">Pulsa un marcador en el mapa para moverlo al primer lugar de los marcadores activos, sin abrir el menú contextual.</string>
     <string name="one_tap_active">Activar «Una pulsación»</string>
     <string name="empty_state_av_notes">¡Hacer notas multimedia!</string>
-    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el widget o el menú contextual.</string>
+    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto a cualquier punto del mapa, usando el widget o el menú contextual.</string>
     <string name="notes_by_date">Notas multimedia por fecha</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
@@ -3142,21 +3142,21 @@
     <string name="shared_string_crash">Error</string>
     <string name="last_launch_crashed">OsmAnd falló la última vez. Por favor, ayúdanos a mejorar OsmAnd compartiendo el mensaje de error.</string>
     <string name="app_mode_ufo">OVNI</string>
-    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado
+    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado 
 \n 
-\n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil
+\n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil 
 \n 
-\n • Se ha añadido un widget para las coordenadas actuales
+\n • Se ha añadido un widget para las coordenadas actuales 
 \n 
-\n • Se añadieron opciones para mostrar la brújula y una regla radial en el mapa
+\n • Se añadieron opciones para mostrar la brújula y una regla radial en el mapa 
 \n 
-\n • Se ha corregido la grabación de trazas en segundo plano
+\n • Se ha corregido la grabación de trazas en segundo plano 
 \n 
-\n • Se mejoraron las descargas de mapas en segundo plano
+\n • Se mejoraron las descargas de mapas en segundo plano 
 \n 
-\n • Se ha corregido la selección de idioma de Wikipedia
+\n • Se ha corregido la selección de idioma de Wikipedia 
 \n 
-\n • Se ha corregido el comportamiento de los botones de la brújula durante la navegación
+\n • Se ha corregido el comportamiento de los botones de la brújula durante la navegación 
 \n 
 \n • Otras correcciones de errores
 \n

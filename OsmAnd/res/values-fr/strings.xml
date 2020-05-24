@@ -2376,7 +2376,7 @@
     <string name="mapillary">Mapillary</string>
     <string name="open_mapillary">Ouvrir Mapillary</string>
     <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter une ou plusieurs photos à cet emplacement de la carte.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter des photos à cet emplacement de la carte.</string>
     <string name="mapillary_action_descr">Partagez vos photos de rue via Mapillary.</string>
     <string name="mapillary_widget">Gadget Mapillary</string>
     <string name="mapillary_widget_descr">Permet de contribuer facilement à Mapillary.</string>
@@ -2444,7 +2444,7 @@
     <string name="empty_state_my_tracks">Ajouter des fichiers GPX</string>
     <string name="empty_state_my_tracks_desc">Importer des fichiers GPX ou enregistrer des traces.</string>
     <string name="empty_state_favourites">Ajouter des favoris</string>
-    <string name="empty_state_favourites_desc">Importez des favoris ou ajoutez-en depuis la carte.</string>
+    <string name="empty_state_favourites_desc">Importez des favoris ou créez des favoris sur la carte.</string>
     <string name="import_track">Importer le fichier GPX</string>
     <string name="import_track_desc">Le fichier %1$s ne contient aucune étape, l\'importer comme trace ?</string>
     <string name="move_point">Déplacer le point</string>
@@ -2590,7 +2590,7 @@
     <string name="show_guide_line_descr">Afficher les instructions de guidage de votre position vers les marques actives.</string>
     <string name="show_arrows_descr">Afficher une ou deux flèches indiquant la direction vers les marques actives.</string>
     <string name="distance_indication_descr">Indiquez comment afficher la distance avec les marques actives.</string>
-    <string name="active_markers_descr">Indiquez le nombre d\'indications de direction à afficher :</string>
+    <string name="active_markers_descr">Définir le nombre d\'indications de direction à afficher.</string>
     <string name="shared_string_more_without_dots">Plus</string>
     <string name="looking_for_tracks_with_waypoints">Recherche de fichiers de trace GPX avec points de passage</string>
     <string name="empty_state_osm_edits">Créer et modifier des éléments OSM</string>

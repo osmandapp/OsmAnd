@@ -2344,7 +2344,7 @@
     <string name="mapillary_menu_filter_description">Фильтровать фотографии по отправителю, дате или типу. Фильтры применяются только для больших масштабов.</string>
     <string name="import_gpx_failed_descr">Не удалось импортировать файл. Пожалуйста, убедитесь что OsmAnd имеет разрешение на его чтение.</string>
     <string name="distance_moving">Откорректированное расстояние</string>
-    <string name="improve_coverage_install_mapillary_desc">Установите Mapillary, чтобы добавить одну или несколько фотографий к этому месту на карте.</string>
+    <string name="improve_coverage_install_mapillary_desc">Установите Mapillary, чтобы добавить фотографии этого места.</string>
     <string name="route_altitude">Высота маршрута</string>
     <string name="enter_gpx_name">Имя файла GPX:</string>
     <string name="show_on_map_after_saving">Показать на карте после сохранения</string>
@@ -2478,7 +2478,7 @@
     <string name="show_guide_line_descr">Отображать направляющие линии от вашего местоположения до активных маркеров.</string>
     <string name="show_arrows_descr">Отображать одну или две стрелки, указывающие направление на активные маркеры.</string>
     <string name="distance_indication_descr">Выберите способ отображения расстояния до активных маркеров.</string>
-    <string name="active_markers_descr">Выберите количество указателей направления:</string>
+    <string name="active_markers_descr">Выберите количество указателей направления.</string>
     <string name="digits_quantity">Количество десятичных цифр</string>
     <string name="shared_string_paste">Вставить</string>
     <string name="go_to_next_field">Следующее поле</string>
@@ -2600,9 +2600,9 @@
     <string name="waypoint_one">Путевая точка 1</string>
     <string name="route_point_one">Точка маршрута 1</string>
     <string name="empty_state_my_tracks">Добавить файлы GPX</string>
-    <string name="empty_state_my_tracks_desc">Импорт файлов GPX, или запись треков.</string>
+    <string name="empty_state_my_tracks_desc">Импорт файлов GPX или запись треков.</string>
     <string name="empty_state_favourites">Добавить избранные</string>
-    <string name="empty_state_favourites_desc">Импортируйте избранное, или добавляйте, отмечая точки на карте.</string>
+    <string name="empty_state_favourites_desc">Избранное можно импортировать или создать, отмечая точки на карте.</string>
     <string name="import_track">Импортировать файл GPX</string>
     <string name="move_point">Переместить точку</string>
     <string name="add_segment_to_the_track">Добавить в файл GPX</string>
@@ -3674,7 +3674,7 @@
 \nПодписка продлевается автоматически, если вы не отмените её до даты продления. С вашего счёта будет взиматься плата за период продления (месяц/три месяца/год) разово в день продления. 
 \n
 \nВы можете управлять подписками и отменять их в настройках Google Play.</string>
-    <string name="search_poi_types_descr">Можно объединить типы POI из разных категорий. Нажмите «Переключить», чтобы выбрать все; нажмите слева, чтобы выбрать категорию.</string>
+    <string name="search_poi_types_descr">Можно объединить типы POI из разных категорий. Нажмите переключатель, чтобы выбрать все; нажмите слева, чтобы выбрать категорию.</string>
     <string name="search_poi_types">Поиск типов POI</string>
     <string name="mapillary_item">OsmAnd и Mapillary</string>
     <string name="travel_item">Путешествие (Викигид и Википедия)</string>

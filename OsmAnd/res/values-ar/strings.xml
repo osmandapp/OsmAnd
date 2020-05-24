@@ -725,9 +725,9 @@
     <string name="gpx_option_reverse_route">عكس المسار</string>
     <string name="gpx_option_destination_point">استخدم الوجهة الحالية</string>
     <string name="gpx_option_from_start_point">يمر على طول المسار باكمله</string>
-    <string name="switch_to_vector_map_to_see">"خريطة التنقل المتوفرة حاليا لهذا الموقع.
-\n
-\nلتفعليها  \'القائمة\' → \'تكوين الخريطة\' → \'مصدر الخريطة ...\' → \'خرائط متجهة بدون اتصال\'."</string>
+    <string name="switch_to_vector_map_to_see">خريطة التنقل المتوفرة حاليا لهذا الموقع. 
+\n 
+\nلتفعليها \'القائمة\' → \'تكوين الخريطة\' → \'مصدر الخريطة ...\' → \'خرائط متجهة بدون اتصال\'.</string>
     <string name="choose_audio_stream">مصدر التوجيه الصوتي</string>
     <string name="choose_audio_stream_descr">اختيار قناة لتشغيل التوجيه الصوتي.</string>
     <string name="voice_stream_voice_call">صوت المكالمة الهاتفية ( كما يحاول قطع ستريو بلوتوث السيارة )</string>
@@ -2870,7 +2870,7 @@
     <string name="show_guide_line_descr">خط مباشر من موقعك إلى العلامة النشطة.</string>
     <string name="show_arrows_descr">عرض سهم واحد أو اثنين ليشير إلى اتجاه العلامة النشطة.</string>
     <string name="distance_indication_descr">طريقة عرض المسافة من موقعي إلى العلامات النشطة.</string>
-    <string name="active_markers_descr">عدد الأسهم تجاه العلامات النشطة ( للملاحة في الصحراء):</string>
+    <string name="active_markers_descr">عدد الأسهم تجاه العلامات النشطة ( للملاحة في الصحراء).</string>
     <string name="rendering_value_black_name">أسود</string>
     <string name="shared_string_gpx_files">ملفات GPX</string>
     <string name="shared_string_launch">تشغيل</string>
@@ -3282,8 +3282,8 @@
     <string name="coordinates_widget">عرض الإحداثيات</string>
     <string name="shared_string_privacy_policy">سياسة الخصوصية</string>
     <string name="help_us_make_osmand_better">ساعدنا في جعل أوسماند أفضل</string>
-    <string name="make_osmand_better_descr">السماح لـ OsmAnd بجمع ومعالجة بيانات استخدام التطبيق المجهول. لا يتم جمع بيانات حول موقعك أو المواقع التي تعرضها على الخريطة.
-\n
+    <string name="make_osmand_better_descr">السماح ل OsmAnd بجمع ومعالجة بيانات استخدام التطبيق المجهول. لا يتم جمع بيانات حول موقعك أو المواقع التي تعرضها على الخريطة. 
+\n 
 \nقم بإعدادها في أي وقت لاحق في \'الإعدادات\' → \'الخصوصية والأمان\'.</string>
     <string name="choose_data_to_share">اختر نوع البيانات التي تريد مشاركتها:</string>
     <string name="downloaded_maps">الخرائط التي تم تنزيلها</string>

@@ -2492,7 +2492,7 @@
     <string name="empty_state_my_tracks">Pridať súbory GPX</string>
     <string name="empty_state_my_tracks_desc">Importovať súbory GPX alebo zaznamenať stopy.</string>
     <string name="empty_state_favourites">Pridať obľúbené</string>
-    <string name="empty_state_favourites_desc">Importovať Obľúbené body alebo pridať označením bodov na mape.</string>
+    <string name="empty_state_favourites_desc">Importovať Obľúbené body alebo pridať ich označením bodov na mape.</string>
     <string name="import_track">Importovať súbor GPX</string>
     <string name="import_track_desc">Súbor %1$s neobsahuje body trasy, naimportovať ako stopu?</string>
     <string name="move_point">Presunúť bod</string>
@@ -2593,7 +2593,7 @@
     <string name="show_guide_line_descr">Zobraziť smerové čiary z vašej polohy k polohám aktívnych značiek.</string>
     <string name="show_arrows_descr">Zobraziť jednu alebo dve šípky smerujúce k aktívnym značkám.</string>
     <string name="distance_indication_descr">Zvoliť ako chcete zobraziť vzdialenosť k aktívnym značkám.</string>
-    <string name="active_markers_descr">Zadajte počet smerových šípok:</string>
+    <string name="active_markers_descr">Zadajte počet smerových šípok.</string>
     <string name="shared_string_more_without_dots">Viac</string>
     <string name="looking_for_tracks_with_waypoints">Hľadajú sa stopy s waypointami</string>
     <string name="empty_state_osm_edits">Vytvoriť alebo upraviť objekty OSM</string>
@@ -2604,7 +2604,7 @@
     <string name="marker_activated">Značka %s aktivovaná.</string>
     <string name="one_tap_active_descr">Potlačte značku na mape na jej presunutie na prvé miesto v aktívnych značkách bez otvárania kontextového menu.</string>
     <string name="empty_state_av_notes">Urobte poznámky!</string>
-    <string name="empty_state_av_notes_desc">Pridajte zvukové, video alebo fotografické poznámky ku každému bodu na mape, pomocou nástroja alebo kontextového menu.</string>
+    <string name="empty_state_av_notes_desc">Pridajte zvukové, video alebo fotografické poznámky k ľubovoľnému bodu na mape, pomocou nástroja alebo kontextového menu.</string>
     <string name="notes_by_date">Mediálne poznámky podľa dátumu</string>
     <string name="by_date">Podľa dátumu</string>
     <string name="by_type">Podľa typu</string>
@@ -3675,7 +3675,7 @@
 \n
 \n Vaše predplatné môžete spravovať a zrušiť v nastaveniach Google Play.</string>
     <string name="search_poi_types">Hľadať typy bodov záujmu</string>
-    <string name="search_poi_types_descr">Skombinovať typy bodov záujmov z rôznych kategórií. Stlačenie \"Prepnúť\" vyberie všetky, stlačenie ľavej strany vyberie kategóriu.</string>
+    <string name="search_poi_types_descr">Skombinovať typy bodov záujmov z rôznych kategórií. Stlačte prepínač pre vybratie všetkých, stlačte ľavú stranu pre vybratie kategórie.</string>
     <string name="tracker_item">Stopovanie OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Rýchla akcia</string>
