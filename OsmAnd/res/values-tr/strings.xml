@@ -2109,7 +2109,7 @@
     <string name="one_tap_active_descr">İçerik menüsünü açmadan, harita üzerinde bir belirtecin üzerine bas ve aktif belirteçlerin üzerine sürükle.</string>
     <string name="one_tap_active">\'Tek basış\' aktif</string>
     <string name="empty_state_av_notes">Not alın!</string>
-    <string name="empty_state_av_notes_desc">Widget veya içerik menüsünü kullanarak, harita üzerinde her nokta için ses, video veya fotoğraf notları al.</string>
+    <string name="empty_state_av_notes_desc">Widget veya içerik menülerini kullanarak, haritadaki herhangi bir nokta için ses, video veya fotoğraf notları ekleyin.</string>
     <string name="notes_by_date">Tarihe göre sesli/görüntülü notlar</string>
     <string name="by_date">Tarihe göre</string>
     <string name="by_type">Türe göre</string>
@@ -2123,7 +2123,7 @@
     <string name="empty_state_markers_groups">Grupları al</string>
     <string name="shared_string_two">İki</string>
     <string name="shared_string_one">Bir</string>
-    <string name="active_markers_descr">Yön göstergelerinin sayısını belirtin:</string>
+    <string name="active_markers_descr">Yön göstergelerinin sayısını belirtin.</string>
     <string name="digits_quantity">Ondalık hane sayısı</string>
     <string name="shared_string_right">Sağ</string>
     <string name="shared_string_left">Sol</string>
@@ -2183,7 +2183,7 @@
     <string name="shared_string_permissions">İzinler</string>
     <string name="import_gpx_failed_descr">Dosya içe aktarılamadı. Lütfen OsmAnd\'ın okuma iznine sahip olduğundan emin olun.</string>
     <string name="improve_coverage_mapillary">Mapillary ile fotoğraf kapsama alanını geliştir</string>
-    <string name="improve_coverage_install_mapillary_desc">Bu harita konumuna bir ya da daha fazla fotoğraf eklemek için Mapillary yükleyin.</string>
+    <string name="improve_coverage_install_mapillary_desc">Bu harita konumuna fotoğraf eklemek için Mapillary yükleyin.</string>
     <string name="online_photos">Çevrim-içi fotoğraflar</string>
     <string name="shared_string_add_photos">Fotoğraf ekle</string>
     <string name="no_photos_descr">Burada fotoğraf yok.</string>
@@ -3631,7 +3631,7 @@
 \n
 \n Google Play ayarlarınıza giderek aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
     <string name="search_poi_types">POI türleri ara</string>
-    <string name="search_poi_types_descr">Farklı kategorilerdeki POI türlerini birleştirin. \"Değiştir\" düğmesine dokunmak hepsini, sol taraf kategoriyi seçer.</string>
+    <string name="search_poi_types_descr">Farklı kategorilerdeki POI türlerini birleştirin. Tümünü seçmek için düğmeye, kategori seçimi için sol tarafa dokunun.</string>
     <string name="radius_ruler_item">Yarıçap cetveli</string>
     <string name="tracker_item">OsmAnd izleyici</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
@@ -3679,4 +3679,5 @@
     <string name="change_application_profile">Uygulama profilini değiştir</string>
     <string name="profiles_for_action_not_found">Böyle bir profil bulunamadı.</string>
     <string name="index_item_world_basemap_detailed">Dünya genel bakış haritası (ayrıntılı)</string>
+    <string name="unsupported_type_error">Desteklenmeyen tür</string>
 </resources>
