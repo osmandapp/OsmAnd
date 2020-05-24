@@ -3501,22 +3501,22 @@ Lon %2$s</string>
     <string name="multimedia_photo_play_sound">Son do obturador da cámara</string>
     <string name="osm_authorization_success">A autorización foi correcta</string>
     <string name="rearrange_categories">Reorganizar categorías</string>
-    <string name="create_custom_categories_list_promo">Muda a orde de clasificación da listaxe ou agocha as categorías innecesarias. Podes importar ou exportar todos as modificacións cos perfís.</string>
-    <string name="add_new_custom_category_button_promo">Podes engadir unha nova categoría personalizada marcando unha ou varias categorías necesarias.</string>
-    <string name="reset_to_default_category_button_promo">Restabelecer ó valor por defecto, restabelecerá a orde de clasificación ó estado por defecto após a instalación.</string>
+    <string name="create_custom_categories_list_promo">Mudar a orde de clasificación da listaxe ou agochar categorías. Podes importar ou exportar todas as modificacións cos perfís.</string>
+    <string name="add_new_custom_category_button_promo">Podes engadir unha nova categoría personalizada marcando unha ou máis categorías.</string>
+    <string name="reset_to_default_category_button_promo">\'Restabelecer ó valor por defecto\' restabelecerá a orde de clasificación ós valores por defecto da instalación.</string>
     <string name="shared_string_available">Dispoñíbel</string>
     <string name="add_custom_category">Engadir categoría personalizada</string>
     <string name="rendering_attr_streetLightingNight_name">Amosar só á noite</string>
-    <string name="plugin_prefs_reset_successful">Todos os axustes do plugin restabelecéronse ó estado por defecto.</string>
-    <string name="profile_prefs_reset_successful">Todos os axustes do perfil restabelecéronse ó estado por defecto.</string>
+    <string name="plugin_prefs_reset_successful">Todos os axustes do plugin restabelecéronse por defecto.</string>
+    <string name="profile_prefs_reset_successful">Todos os axustes do perfil restabelecéronse por defecto.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Solpor ás %1$s</string>
     <string name="sunrise_at">Amencer ás %1$s</string>
-    <string name="accessibility_mode_disabled">Modo de accesibilidade desactivado no teu Android.</string>
+    <string name="accessibility_mode_disabled">O modo de accesibilidade está desactivado no teu sistema.</string>
     <string name="use_system_screen_timeout">Empregar o tempo de espera da pantalla do sistema</string>
-    <string name="use_system_screen_timeout_promo">Desactivado de xeito predefinido, se o OsmAnd é executado en primeiro plano, a pantalla manterase acendida. 
-\n 
-\nSe se activa, o OsmAnd empregará os axustes de tempo de espera do sistema.</string>
+    <string name="use_system_screen_timeout_promo">Desactivado por defecto: mentres o OsmAnd está a executarse en primeiro plano, a pantalla non se apagará.
+\n
+\nSe está activado, o OsmAnd empregará a configuración de tempo de espera do sistema.</string>
     <string name="clear_recorded_data">Limpar datos gravados</string>
     <string name="release_3_6">• Perfís: agora podes mudar a orde, definir a icona para o mapa, mudar todos os axustes para os perfís base e restabelecelos de novo ó valores por defecto 
 \n 
@@ -3735,7 +3735,7 @@ Lon %2$s</string>
     <string name="additional_actions_descr">Podes acceder a estas accións premendo no botón “%1$s”.</string>
     <string name="quick_action_transport_hide">Agochar transporte público</string>
     <string name="quick_action_transport_show">Amosar transporte público</string>
-    <string name="quick_action_show_hide_transport">Amosar / agochar transporte público</string>
+    <string name="quick_action_show_hide_transport">Amosar/agochar transporte público</string>
     <string name="quick_action_transport_descr">Botón que amosa ou agocha o transporte público no mapa.</string>
     <string name="create_edit_poi">Crear / Editar PDI</string>
     <string name="parking_positions">Posicións de aparcamento</string>
