@@ -463,23 +463,24 @@ public class SearchPhrase {
 		SearchPhrase sp = new SearchPhrase(this.settings, this.clt);
 		addResult(res, sp);
 		SearchResult prnt = res.parentSearchResult;
-		while(prnt != null) {
+		while (prnt != null) {
 			addResult(prnt, sp);
 			prnt = prnt.parentSearchResult;
 		}
 		sp.words.addAll(0, this.words);	
 		if (unknownWords != null) {
 			sp.lastUnknownSearchWordComplete = lastComplete;
+			StringBuilder genUnknownSearchPhrase = new StringBuilder();
 			for (int i = 0; i < unknownWords.size(); i++) {
 				if (i == 0) {
 					sp.unknownSearchWordTrim = unknownWords.get(0);
 				} else {
 					sp.unknownWords.add(unknownWords.get(i));
 				}
+				genUnknownSearchPhrase.append(unknownWords.get(i)).append(" ");
 			}
-			// TODO
-//			sp.rawUnknownSearchPhrase = rawUnknownSearchPhrase;
-//			sp.unknownSearchPhrase = unknownSearchPhrase;
+			
+			sp.rawUnknownSearchPhrase = sp.unknownSearchPhrase = genUnknownSearchPhrase.toString().trim();
 		}
 		return sp;
 	}

@@ -179,14 +179,13 @@ public class SearchUICoreTest {
 		for (SearchResult result : searchResults) {
 			String expected = results.get(i++);
 			String present = result.toString();
-			//System.out.println(present);
-			if(!Algorithms.stringsEqual(expected, present)) {
+			if (!Algorithms.stringsEqual(expected, present)) {
 				System.out.println(String.format("Mismatch for '%s' != '%s' (%d, %.3f, %s). Result: ", expected, 
 						present, result.getFoundWordCount(), result.getUnknownPhraseMatchWeight(), result.objectType.toString()));
 				for (SearchResult r : searchResults) {
-					System.out.println(String.format("\t\"%s\",", r.toString()));
-//					System.out.println(String.format("\"%s\", (%d, %.3f, %s),", r.toString(), 
-//							r.getFoundWordCount(), r.getUnknownPhraseMatchWeight(), r.objectType.toString()));
+//					System.out.println(String.format("\t\"%s\",", r.toString()));
+					System.out.println(String.format("\"%s\", (%d, %.3f, %s),", r.toString(), 
+							r.getFoundWordCount(), r.getUnknownPhraseMatchWeight(), r.objectType.toString()));
 				}
 			}
 			Assert.assertEquals(expected, present);
