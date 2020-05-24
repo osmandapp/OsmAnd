@@ -33,13 +33,17 @@ public class SearchResult {
 		this.requiredSearchPhrase = sp;
 	}
 
-	public int getUnknownPhraseMatchWeight() {
+	public double getUnknownPhraseMatchWeight() {
+		// if result is a complete match in the search we prioritize it highers
+		double res  = 0;
 		if (unknownPhraseMatches) {
-			return ObjectType.getTypeWeight(objectType);
-		} else if (parentSearchResult != null) {
-			return parentSearchResult.getUnknownPhraseMatchWeight();
+			res = ObjectType.getTypeWeight(objectType);
 		}
-		return 0;
+		if (parentSearchResult != null) {
+			// 5 is a maximum type
+			res += parentSearchResult.getUnknownPhraseMatchWeight() / 5;
+		}
+		return res;
 	}
 
 	public int getFoundWordCount() {

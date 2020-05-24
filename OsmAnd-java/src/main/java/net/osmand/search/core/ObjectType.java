@@ -50,20 +50,16 @@ public enum ObjectType {
 			return 1;
 		}
 		switch (t) {
-			case CITY:
-				return 1;
-			case VILLAGE:
-				return 1;
-			case POSTCODE:
-				return 1;
-			case STREET:
-				return 2;
 			case HOUSE:
-				return 3;
 			case STREET_INTERSECTION:
 				return 3;
+			case STREET:
 			case POI:
 				return 2;
+			case CITY:
+			case VILLAGE:
+			case POSTCODE:
+				return 1;
 			default:
 				return 1;
 		}
