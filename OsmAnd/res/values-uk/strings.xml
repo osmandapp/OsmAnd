@@ -2435,7 +2435,7 @@
     <string name="open_mapillary">Відкрити Mapillary</string>
     <string name="shared_string_install">Встановити</string>
     <string name="improve_coverage_mapillary">Поліпшити фотопокриття Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Встановіть Mapillary, щоб додати одну або кілька світлин до цього місця на мапі.</string>
+    <string name="improve_coverage_install_mapillary_desc">Встановіть Mapillary, щоб додати світлини до цього місця на мапі.</string>
     <string name="mapillary_image">Зображення Mapillary</string>
     <string name="distance_moving">Відстань виправлена</string>
     <string name="shared_string_permissions">Права доступу</string>
@@ -2597,7 +2597,7 @@
     <string name="show_guide_line_descr">Відображати напрямні смуги від Вашого місця розташування до задіяних позначок.</string>
     <string name="show_arrows_descr">Відображати одну або дві стрілки, що вказують напрямок на задіяні позначки.</string>
     <string name="distance_indication_descr">Виберіть спосіб відображення відстані до задіяних позначок.</string>
-    <string name="active_markers_descr">Виберіть, скільки відображати показників напрямку:</string>
+    <string name="active_markers_descr">Виберіть, скільки відображати показників напрямку.</string>
     <string name="shared_string_right">Направо</string>
     <string name="shared_string_left">Наліво</string>
     <string name="looking_for_tracks_with_waypoints">Пошук треків з шляховими точками</string>
