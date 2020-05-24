@@ -958,7 +958,7 @@
     <string name="poi_topmark">Marmarko: supra-marko</string>
     <string name="poi_small_craft_facility">Marnavigado: eta metiejo</string>
     <string name="poi_pile">Marmarko: bolardo</string>
-    <string name="poi_radar_transponder">Marmarko: radara transsend-respond-ilo (ang. transponder)</string>
+    <string name="poi_radar_transponder">Marmarko: radara transsend‑respondilo</string>
     <string name="poi_radio_station">Marmarko: radiostacio</string>
     <string name="poi_signal_station_traffic">Signalstacio: trafiko</string>
     <string name="poi_signal_station_warning">Signalstacio: averto</string>
@@ -1289,8 +1289,8 @@
     <string name="poi_capacity_parent_yes">Kun dediĉitaj ejoj por gepatroj</string>
     <string name="poi_capacity_parent_no">Sen dediĉitaj ejoj por gepatroj</string>
     <string name="poi_capacity_parent">Dediĉitaj ejoj por gepatroj</string>
-    <string name="poi_aerialway_occupancy">Nombro da homoj en vagoneto/seĝo</string>
-    <string name="poi_aerialway_capacity">Nombro da homoj hore</string>
+    <string name="poi_aerialway_occupancy">Nombro de homoj en vagoneto/seĝo</string>
+    <string name="poi_aerialway_capacity">Nombro de homoj hore</string>
     <string name="poi_aerialway_duration">Mezuma vojaĝ-tempo (en minutoj)</string>
     <string name="poi_aerialway_bubble_yes">Tegmenteto</string>
     <string name="poi_aerialway_bubble_no">Sen tegmenteto</string>
@@ -1489,7 +1489,7 @@
     <string name="poi_female_no">Inoj malpermesataj</string>
     <string name="poi_drive_in_no">Sen-elaŭtiĝa servo (aŭtoparko): ne</string>
     <string name="poi_drive_through_yes">jes</string>
-    <string name="poi_drive_through_no">Sen-elaŭtiĝa servo (trans-veturo): ne</string>
+    <string name="poi_drive_through_no">Sen-elaŭtiĝa servo (transveturo): ne</string>
     <string name="poi_brewery_additional">Nomo de bierfarejo</string>
     <string name="poi_microbrewery_yes">jes</string>
     <string name="poi_microbrewery_no">Sen bierfarejeto-restoracio</string>
@@ -1969,8 +1969,8 @@
     <string name="poi_power_supply_cee_7_4">Energifonto (ŝtopilo): CEE 7/4 (F-tipo)</string>
     <string name="poi_power_supply_cee_7_5">Energifonto (ŝtopilo): CEE 7/5 (E-tipo)</string>
     <string name="poi_power_supply_nema_5_15">Energifonto (ŝtopilo): NEMA 5-15 (B-tipo)</string>
-    <string name="poi_capacity_tents">Nombro da tendoj</string>
-    <string name="poi_capacity_caravans">Nombro da kampad‑veturiloj</string>
+    <string name="poi_capacity_tents">Nombro de tendoj</string>
+    <string name="poi_capacity_caravans">Nombro de kampad‑veturiloj</string>
     <string name="poi_dog_yes">Hundoj permesataj</string>
     <string name="poi_dog_no">Hundoj malpermesataj</string>
     <string name="poi_bandstand">Orkestrejeto</string>
@@ -1978,7 +1978,7 @@
     <string name="poi_wheelchair_description">Informo por malkapabluloj</string>
     <string name="poi_blind_description">Informo por blinduloj</string>
     <string name="poi_deaf_description">Informo por surduloj</string>
-    <string name="poi_step_count">Kiom da ŝtupoj</string>
+    <string name="poi_step_count">Nombro de ŝtupoj</string>
     <string name="poi_cairn">Ŝtonstaka marko</string>
     <string name="poi_defibrillator">Defibrililo</string>
     <string name="poi_animal_training">Dresejo</string>
@@ -2417,7 +2417,7 @@
     <string name="poi_health_facility_type_field_hospital">San-servejo: kampa malsanulejo</string>
     <string name="poi_fire_hydrant_diameter">Diametro de hidranto</string>
     <string name="poi_fire_hydrant_pressure">Premo de hidranto</string>
-    <string name="poi_fire_hydrant_count">Kiom da hidrantoj</string>
+    <string name="poi_fire_hydrant_count">Nombro de hidrantoj</string>
     <string name="poi_depth">Profundo</string>
     <string name="poi_telescope">Teleskopo</string>
     <string name="poi_health_facility_type_counselling_centre">San-servejo: kuracistejo</string>
@@ -2436,7 +2436,7 @@
     <string name="poi_fire_hydrant_type_dry_barrel">supertersurfaca (frost-imuna)</string>
     <string name="poi_health_amenity_type_first_aid_kit">Manapoteko</string>
     <string name="poi_health_amenity_type_scales">Pesilo publika</string>
-    <string name="poi_capacity_beds">Nombro da litoj</string>
+    <string name="poi_capacity_beds">Nombro de litoj</string>
     <string name="poi_office_physician">Kabineto de doktoro de medicino</string>
     <string name="poi_office_therapist">Kabineto de terapiisto</string>
     <string name="poi_office_podologist">Kabineto de piedisto</string>
@@ -2808,8 +2808,8 @@
     <string name="poi_outdoor_seating">Seĝoj ekstere</string>
     <string name="poi_fee">Pago</string>
     <string name="poi_delivery">Hejmliverado</string>
-    <string name="poi_drive_in">Sen-elaŭtiga servo (aŭtoparko)</string>
-    <string name="poi_drive_through">Sen-elaŭtiga servo (trans-veturo)</string>
+    <string name="poi_drive_in">Sen-elaŭtiĝa servo (aŭtoparko)</string>
+    <string name="poi_drive_through">Sen-elaŭtiĝa servo (transveturo)</string>
     <string name="poi_takeaway">Elportado</string>
     <string name="poi_cocktails">Kokteloj</string>
     <string name="poi_microbrewery">Metia bierfarejeto</string>
