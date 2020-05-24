@@ -2354,7 +2354,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
     <string name="quick_action_resume_pause_navigation">Navigáció szüneteltetése/folytatása</string>
-    <string name="quick_action_resume_pause_navigation_descr">A navigáció szüneteltetéséhez vagy folytatásához koppintson erre a gombra.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Gomb a navigáció szüneteltetéséhez vagy folytatásához.</string>
     <string name="quick_action_show_navigation_finish_dialog">„Navigáció véget ért” panel megjelenítése</string>
     <string name="quick_action_start_stop_navigation">Navigáció indítása/megállítása</string>
     <string name="quick_action_start_stop_navigation_descr">A navigáció elkezdéséhez vagy befejezéséhez koppintson erre a gombra.</string>
@@ -3631,7 +3631,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
 \n
 \n • Kedvencek és GPX-útpontok teljes testreszabhatósága – egyéni színek, ikonok, formák
 \n
-\n • Opciók menü, Térkép beállítása és Főmenü elemeinek sorrendje testreszabhatók
+\n • Opciók menü, Térkép beállítása és Főmenü elemeinek sorrendje testreszabható
 \n
 \n • Wikipédia külön rétegként szerepel a Térkép beállítása menüben, a kívánt nyelvek kiválaszthatók
 \n
@@ -3647,4 +3647,5 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
 \n
 \n</string>
     <string name="unsupported_type_error">Nem támogatott típus</string>
+    <string name="shared_string_resume">Folytatás</string>
 </resources>

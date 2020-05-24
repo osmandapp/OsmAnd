@@ -1181,7 +1181,7 @@
     <string name="index_item_nation_addresses">Adresy krajowe</string>
     <string name="index_item_world_basemap">Podstawowa mapa świata</string>
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
-    <string name="interrupt_music_descr">Komunikaty głosowe wstrzymają odtwarzanie muzyki.</string>
+    <string name="interrupt_music_descr">Komunikaty głosowe zatrzymają odtwarzanie muzyki.</string>
     <string name="interrupt_music">Przerywanie muzyki</string>
     <string name="always_center_position_on_map">Zawsze wyśrodkowane położenie</string>
     <string name="voice_pref_title">Głos</string>
@@ -1263,7 +1263,7 @@
     <string name="live_monitoring_start">Rozpocznij śledzenie online</string>
     <string name="live_monitoring_stop">Zakończ śledzenie online</string>
     <string name="gpx_monitoring_start">Kontynuuj rejestrowanie śladu</string>
-    <string name="gpx_monitoring_stop">Wstrzymaj rejestrowanie śladu</string>
+    <string name="gpx_monitoring_stop">Zatrzymaj rejestrowanie śladu</string>
     <string name="gpx_start_new_segment">Rozpocznij nowy segment</string>
     <string name="rendering_attr_hideBuildings_name">Budynki</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Trasy niedostępne dla aut</string>
@@ -1293,7 +1293,7 @@
     <string name="rendering_value_pedestrian_name">Pieszo</string>
     <string name="rendering_attr_coloredBuildings_name">Różne kolory typów budynków</string>
     <string name="continue_navigation">Kontynuuj nawigację</string>
-    <string name="pause_navigation">Wstrzymaj nawigację</string>
+    <string name="pause_navigation">Zatrzymaj nawigację</string>
     <string name="rendering_attr_alpineHiking_name">Klasyfikacja trudności wspinaczki alpinistycznej (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Renderuj ścieżki zgodnie ze skalą SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Szlaki turystyczne</string>
@@ -2070,7 +2070,7 @@ Długość %2$s</string>
     <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki, itp.</string>
     <string name="christmas_desc_q">Wyświetlać świąteczne miejsca?</string>
     <string name="shared_string_continue">Kontynuuj</string>
-    <string name="shared_string_pause">Wstrzymaj</string>
+    <string name="shared_string_pause">Zatrzymaj</string>
     <string name="shared_string_trip">Ślad</string>
     <string name="shared_string_recorded">Zarejestrowany</string>
     <string name="shared_string_record">Rejestruj</string>
@@ -2368,7 +2368,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="ascent_descent">Podjazd/zjazd</string>
     <string name="moving_time">Czas w ruchu</string>
     <string name="max_min">Maks./min.</string>
-    <string name="quick_action_resume_pause_navigation">Wstrzymaj/wznów nawigację</string>
+    <string name="quick_action_resume_pause_navigation">Zatrzymaj/wznów nawigację</string>
     <string name="quick_action_resume_pause_navigation_descr">Przycisk do wstrzymania lub wznowienia nawigacji.</string>
     <string name="quick_action_start_stop_navigation">Rozpocznij/zakończ nawigację</string>
     <string name="quick_action_start_stop_navigation_descr">Przycisk rozpoczęcia lub zakończenia nawigacji.</string>
@@ -3270,7 +3270,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="configure_navigation">Konfiguruje nawigację</string>
     <string name="screen_alerts_descr">Alerty będą wyświetlane w lewym dolnym rogu podczas nawigacji.</string>
     <string name="reset_to_default">Przywróć ustawienia domyślne</string>
-    <string name="osmand_settings_descr">Konfiguruje opcje działające w całej aplikacji</string>
+    <string name="osmand_settings_descr">Konfiguruje opcje dotyczące całej aplikacji</string>
     <string name="turn_screen_on">Włącz ekran</string>
     <string name="map_during_navigation_info">Mapa podczas nawigacji</string>
     <string name="map_during_navigation">Mapa podczas nawigacji</string>
@@ -3480,7 +3480,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="multimedia_photo_play_sound">Dźwięk migawki aparatu</string>
     <string name="reset_to_default_category_button_promo">Przywrócenie domyślnej kolejności sortowania spowoduje przywrócenie porządku sortowania do stanu domyślnego po instalacji.</string>
     <string name="accessibility_mode_disabled">Tryb ułatwień dostępu wyłączony w twoim systemie.</string>
-    <string name="use_system_screen_timeout">Użyj czasu wyświetlania ekranu systemowego</string>
+    <string name="use_system_screen_timeout">Wygaś ekran zgodnie z ustawieniami systemu</string>
     <string name="clear_recorded_data">Wyczyść zarejestrowane dane</string>
     <string name="release_3_6">- Profile: teraz można zmienić kolejność, ustawić ikonę dla mapy, zmienić wszystkie ustawienia dla profili bazowych i przywrócić je do domyślnych ustawień.
 \n
@@ -3728,4 +3728,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="parking_positions">Miejsca parkingowe</string>
     <string name="reset_deafult_order">Przywróć domyślną kolejność elementów</string>
     <string name="profiles_for_action_not_found">Nie znaleziono profili wybranych dla tej czynności.</string>
+    <string name="index_item_world_basemap_detailed">Mapa przeglądowa świata (szczegółowa)</string>
+    <string name="unsupported_type_error">Nieobsługiwany typ</string>
 </resources>
