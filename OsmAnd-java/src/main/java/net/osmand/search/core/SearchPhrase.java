@@ -724,16 +724,17 @@ public class SearchPhrase {
 	}
 	
 	public void countUnknownWordsMatch(SearchResult sr, String localeName, Collection<String> otherNames) {
-		if(unknownWords.size() > 0) {
-			for(int i = 0; i < unknownWords.size(); i++) {
-				if(unknownWordsMatcher.size() == i) {
-					unknownWordsMatcher.add(new NameStringMatcher(unknownWords.get(i), 
-							i < unknownWords.size() - 1 || isLastUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE :
-								StringMatcherMode.CHECK_STARTS_FROM_SPACE));
+		if (unknownWords.size() > 0) {
+			for (int i = 0; i < unknownWords.size(); i++) {
+				if (unknownWordsMatcher.size() == i) {
+					unknownWordsMatcher.add(new NameStringMatcher(unknownWords.get(i),
+							i < unknownWords.size() - 1 || isLastUnknownSearchWordComplete()
+									? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
+									: StringMatcherMode.CHECK_STARTS_FROM_SPACE));
 				}
 				NameStringMatcher ms = unknownWordsMatcher.get(i);
-				if(ms.matches(localeName) || ms.matches(otherNames)) {
-					if(sr.otherWordsMatch == null) {
+				if (ms.matches(localeName) || ms.matches(otherNames)) {
+					if (sr.otherWordsMatch == null) {
 						sr.otherWordsMatch = new TreeSet<>();
 					}
 					sr.otherWordsMatch.add(unknownWords.get(i));

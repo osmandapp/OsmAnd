@@ -33,20 +33,13 @@ public class SearchResult {
 		this.requiredSearchPhrase = sp;
 	}
 
-	public double getUnknownPhraseMatchWeight() {
-		return getUnknownPhraseMatchWeight(false);
-	}
-
-	private double getUnknownPhraseMatchWeight(boolean isHouse) {
-		double res = 0;
-		isHouse = isHouse || objectType == ObjectType.HOUSE;
+	public int getUnknownPhraseMatchWeight() {
 		if (unknownPhraseMatches) {
-			res = isHouse ? ObjectType.getTypeWeight(ObjectType.HOUSE) : ObjectType.getTypeWeight(objectType);
+			return ObjectType.getTypeWeight(objectType);
+		} else if (parentSearchResult != null) {
+			return parentSearchResult.getUnknownPhraseMatchWeight();
 		}
-		if (res == 0 && parentSearchResult != null) {
-			return parentSearchResult.getUnknownPhraseMatchWeight(isHouse);
-		}
-		return res;
+		return 0;
 	}
 
 	public int getFoundWordCount() {
