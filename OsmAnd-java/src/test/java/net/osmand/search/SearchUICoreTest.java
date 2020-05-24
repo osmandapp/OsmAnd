@@ -1,34 +1,10 @@
 package net.osmand.search;
 
-import net.osmand.OsmAndCollator;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.Amenity;
-import net.osmand.data.Building;
-import net.osmand.data.City;
-import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
-import net.osmand.data.Street;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.search.SearchUICore.SearchResultCollection;
-import net.osmand.search.SearchUICore.SearchResultMatcher;
-import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchSettings;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Assert;
-import org.junit.Test;
-import org.xmlpull.v1.XmlPullParserException;
-
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,16 +12,61 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class SearchCoreUITest {
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.xmlpull.v1.XmlPullParserException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import net.osmand.OsmAndCollator;
+import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
+import net.osmand.data.Building;
+import net.osmand.data.City;
+import net.osmand.data.MapObject;
+import net.osmand.data.Street;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.router.RouteTestingTest;
+import net.osmand.router.TestEntry;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.SearchUICore.SearchResultMatcher;
+import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
+import net.osmand.util.Algorithms;
+
+@RunWith(Parameterized.class)
+public class SearchUICoreTest {
 
 	private static final String SEARCH_RESOURCES_PATH = "src/test/resources/search/";
-	private static Map<String, String> enPhrases = new HashMap<>();
-	private static Map<String, String> phrases = new HashMap<>();
+	
+	private File testFile;
 
-	static {
+    public SearchUICoreTest(String name, File file) {
+        this.testFile = file;
+    }
+	
+
+	@BeforeClass
+	public static void setUp() {
+		defaultSetup();
+	}
+
+
+	static void defaultSetup() {
 		MapPoiTypes.setDefault(new MapPoiTypes("src/test/resources/poi_types.xml"));
 		MapPoiTypes poiTypes = MapPoiTypes.getDefault();
-
+		Map<String, String> enPhrases = new HashMap<>();
+		Map<String, String> phrases = new HashMap<>();
 		try {
 			enPhrases = Algorithms.parseStringsXml(new File("src/test/resources/phrases/en/phrases.xml"));
 			//phrases = Algorithms.parseStringsXml(new File("src/test/resources/phrases/ru/phrases.xml"));
@@ -56,178 +77,29 @@ public class SearchCoreUITest {
 			e.printStackTrace();
 		}
 
-		poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
-
-			@Override
-			public String getTranslation(AbstractPoiType type) {
-				AbstractPoiType baseLangType = type.getBaseLangType();
-				if (baseLangType != null) {
-					return getTranslation(baseLangType) + " (" + type.getLang().toLowerCase() + ")";
-				}
-				return getTranslation(type.getIconKeyName());
-			}
-
-			@Override
-			public String getTranslation(String keyName) {
-				String val = phrases.get("poi_" + keyName);
-				if (val != null) {
-					int ind = val.indexOf(';');
-					if (ind > 0) {
-						return val.substring(0, ind);
-					}
-				}
-				return val;
-			}
-
-			@Override
-			public String getSynonyms(AbstractPoiType type) {
-				AbstractPoiType baseLangType = type.getBaseLangType();
-				if (baseLangType != null) {
-					return getSynonyms(baseLangType);
-				}
-				return getSynonyms(type.getIconKeyName());
-			}
-
-
-			@Override
-			public String getSynonyms(String keyName) {
-				String val = phrases.get("poi_" + keyName);
-				if (val != null) {
-					int ind = val.indexOf(';');
-					if (ind > 0) {
-						return val.substring(ind + 1);
-					}
-					return "";
-				}
-				return null;
-			}
-
-			@Override
-			public String getEnTranslation(AbstractPoiType type) {
-				AbstractPoiType baseLangType = type.getBaseLangType();
-				if (baseLangType != null) {
-					return getEnTranslation(baseLangType) + " (" + type.getLang().toLowerCase() + ")";
-				}
-				return getEnTranslation(type.getIconKeyName());
-			}
-
-			@Override
-			public String getEnTranslation(String keyName) {
-				if (enPhrases.isEmpty()) {
-					return Algorithms.capitalizeFirstLetter(keyName.replace('_', ' '));
-				}
-				String val = enPhrases.get("poi_" + keyName);
-				if (val != null) {
-					int ind = val.indexOf(';');
-					if (ind > 0) {
-						return val.substring(0, ind);
-					}
-				}
-				return val;
-			}
-		});
-	}
-
-	@Test
-	public void testDuplicates() throws IOException {
-		SearchSettings ss = new SearchSettings((SearchSettings)null);
-		ss = ss.setOriginalLocation(new LatLon(0, 0));
-		SearchPhrase phrase = new SearchPhrase(ss, OsmAndCollator.primaryCollator());
-		SearchResultCollection cll = new SearchUICore.SearchResultCollection(phrase);
-		List<SearchResult> rs = new ArrayList<>();
-		SearchResult a1 = searchResult(rs, phrase, "a", 100);
-		SearchResult b2 = searchResult(rs, phrase, "b", 200);
-		SearchResult b1 = searchResult(rs, phrase, "b", 100);
-		/*SearchResult a3 = */ searchResult(rs, phrase, "a", 100);
-		cll.addSearchResults(rs, true, true);
-		Assert.assertEquals(3, cll.getCurrentSearchResults().size());
-		Assert.assertSame(a1, cll.getCurrentSearchResults().get(0));
-		Assert.assertSame(b1, cll.getCurrentSearchResults().get(1));
-		Assert.assertSame(b2, cll.getCurrentSearchResults().get(2));
-	}
-	
-	@Test
-	public void testNoResort() throws IOException {
-		SearchSettings ss = new SearchSettings((SearchSettings)null);
-		ss = ss.setOriginalLocation(new LatLon(0, 0));
-		SearchPhrase phrase = new SearchPhrase(ss, OsmAndCollator.primaryCollator());
-		SearchResultCollection cll = new SearchUICore.SearchResultCollection(phrase);
-		List<SearchResult> rs = new ArrayList<>();
-		SearchResult a1 = searchResult(rs, phrase, "a", 100);
-		cll.addSearchResults(rs, false, true);
-		rs.clear();
-		
-		SearchResult b2 = searchResult(rs, phrase, "b", 200);
-		cll.addSearchResults(rs, false, true);
-		rs.clear();
-		
-		SearchResult b1 = searchResult(rs, phrase, "b", 100);
-		cll.addSearchResults(rs, false, true);
-		rs.clear();
-		
-		/*SearchResult a3 = */ searchResult(rs, phrase, "a", 100);
-		cll.addSearchResults(rs, false, true);
-		rs.clear();
-		
-		Assert.assertEquals(3, cll.getCurrentSearchResults().size());
-		Assert.assertSame(a1, cll.getCurrentSearchResults().get(0));
-		Assert.assertSame(b2, cll.getCurrentSearchResults().get(1));
-		Assert.assertSame(b1, cll.getCurrentSearchResults().get(2));
-		
-		
-		
+		poiTypes.setPoiTranslator(new TestSearchTranslator(phrases, enPhrases));
 	}
 	
 	
-	@Test
-	public void testNoResortDuplicate() throws IOException {
-		SearchSettings ss = new SearchSettings((SearchSettings)null);
-		ss = ss.setOriginalLocation(new LatLon(0, 0));
-		SearchPhrase phrase = new SearchPhrase(ss, OsmAndCollator.primaryCollator());
-		SearchResultCollection cll = new SearchUICore.SearchResultCollection(phrase);
-		List<SearchResult> rs = new ArrayList<>();
-		SearchResult a1 = searchResult(rs, phrase, "a", 100);
-		SearchResult b2 = searchResult(rs, phrase, "b", 200);
-		SearchResult b1 = searchResult(rs, phrase, "b", 100);
-		cll.addSearchResults(rs, false, true);
-		rs.clear();
-		/*SearchResult a3 = */ searchResult(rs, phrase, "a", 100);
-		cll.addSearchResults(rs, false, true);
-		rs.clear();
-		
-		Assert.assertEquals(3, cll.getCurrentSearchResults().size());
-		Assert.assertSame(a1, cll.getCurrentSearchResults().get(0));
-		Assert.assertSame(b1, cll.getCurrentSearchResults().get(1));
-		Assert.assertSame(b2, cll.getCurrentSearchResults().get(2));
-		
-		
-	}
-
-	private SearchResult searchResult(List<SearchResult> rs, SearchPhrase phrase, String text, int dist) {
-		SearchResult res = new SearchResult(phrase);
-		res.localeName = text;
-		double d1 = MapUtils.getDistance(0, 0, 0, 1);
-		res.location = new LatLon(0, dist / d1);
-		rs.add(res);
-		return res;
-	}
-
-	@Test
-	public void testSearchJsons() throws IOException {
-		final File[] files = new File(SEARCH_RESOURCES_PATH).listFiles(new FilenameFilter() {
-			@Override
-			public boolean accept(File dir, String filename) {
-				return filename.endsWith(".json");
-			}
-		});
-		if (files != null) {
-			for (File f : files) {
-				testSearchImpl(f);
+	@Parameterized.Parameters(name = "{index}: {0}")
+    public static Iterable<Object[]> data() throws IOException {
+    	final File[] files = new File(SEARCH_RESOURCES_PATH).listFiles();
+    	ArrayList<Object[]> arrayList = new ArrayList<>();
+    	if (files != null) {
+			for (File file : files) {
+				String fileName = file.getName();
+				if(fileName.endsWith(".json")) {
+					String name = fileName.substring(0, fileName.length() - ".json".length());
+					arrayList.add(new Object[] {name, file});
+				}
 			}
 		}
-	}
+    	return arrayList;
+    }
 
-	private void testSearchImpl(File jsonFile) throws IOException, JSONException {
+    @Test
+	public void testSearchImpl() throws IOException, JSONException {
+		File jsonFile = testFile;
 		String sourceJsonText = Algorithms.getFileAsString(jsonFile);
 		Assert.assertNotNull(sourceJsonText);
 		Assert.assertTrue(sourceJsonText.length() > 0);
@@ -316,6 +188,84 @@ public class SearchCoreUITest {
 		}
 	}
 
+	static class TestSearchTranslator implements MapPoiTypes.PoiTranslator {
+
+		private Map<String, String> enPhrases;
+		private Map<String, String> phrases;
+		public TestSearchTranslator(Map<String, String> phrases, Map<String, String> enPhrases) {
+			this.phrases = phrases;
+			this.enPhrases = enPhrases;
+		}
+
+		@Override
+		public String getTranslation(AbstractPoiType type) {
+			AbstractPoiType baseLangType = type.getBaseLangType();
+			if (baseLangType != null) {
+				return getTranslation(baseLangType) + " (" + type.getLang().toLowerCase() + ")";
+			}
+			return getTranslation(type.getIconKeyName());
+		}
+
+		@Override
+		public String getTranslation(String keyName) {
+			String val = phrases.get("poi_" + keyName);
+			if (val != null) {
+				int ind = val.indexOf(';');
+				if (ind > 0) {
+					return val.substring(0, ind);
+				}
+			}
+			return val;
+		}
+
+		@Override
+		public String getSynonyms(AbstractPoiType type) {
+			AbstractPoiType baseLangType = type.getBaseLangType();
+			if (baseLangType != null) {
+				return getSynonyms(baseLangType);
+			}
+			return getSynonyms(type.getIconKeyName());
+		}
+
+
+		@Override
+		public String getSynonyms(String keyName) {
+			String val = phrases.get("poi_" + keyName);
+			if (val != null) {
+				int ind = val.indexOf(';');
+				if (ind > 0) {
+					return val.substring(ind + 1);
+				}
+				return "";
+			}
+			return null;
+		}
+
+		@Override
+		public String getEnTranslation(AbstractPoiType type) {
+			AbstractPoiType baseLangType = type.getBaseLangType();
+			if (baseLangType != null) {
+				return getEnTranslation(baseLangType) + " (" + type.getLang().toLowerCase() + ")";
+			}
+			return getEnTranslation(type.getIconKeyName());
+		}
+
+		@Override
+		public String getEnTranslation(String keyName) {
+			if (enPhrases.isEmpty()) {
+				return Algorithms.capitalizeFirstLetter(keyName.replace('_', ' '));
+			}
+			String val = enPhrases.get("poi_" + keyName);
+			if (val != null) {
+				int ind = val.indexOf(';');
+				if (ind > 0) {
+					return val.substring(0, ind);
+				}
+			}
+			return val;
+		}
+	};
+	
 	private static class BinaryMapIndexReaderTest extends BinaryMapIndexReader {
 
 		List<Amenity> amenities = Collections.emptyList();
