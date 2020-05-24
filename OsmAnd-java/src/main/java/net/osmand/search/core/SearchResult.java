@@ -40,8 +40,9 @@ public class SearchResult {
 			res = ObjectType.getTypeWeight(objectType);
 		}
 		if (parentSearchResult != null) {
-			// 5 is a maximum type
-			res += parentSearchResult.getUnknownPhraseMatchWeight() / 5;
+			// 10 > maximum type
+			// res = Math.max(res,parentSearchResult.getUnknownPhraseMatchWeight()) ;
+			res += parentSearchResult.getUnknownPhraseMatchWeight() / 10;
 		}
 		return res;
 	}
