@@ -121,7 +121,7 @@ public class SearchPhrase {
 				int i1 = CommonWords.getCommonSearch(o1.toLowerCase());
 				int i2 = CommonWords.getCommonSearch(o2.toLowerCase());
 				if (i1 != i2) {
-					return icompare(i1, i2);
+					return -icompare(i1, i2);
 				}
 				// compare length without numbers to not include house numbers
 				return -icompare(lengthWithoutNumbers(o1), lengthWithoutNumbers(o2));
