@@ -2354,7 +2354,7 @@
     <string name="show_guide_line_descr">Vis retningsbestemte linjer fra din posisjon til de aktive markørplasseringene.</string>
     <string name="show_arrows_descr">Vis én eller to piler som indikerer retningen til de aktive markørene.</string>
     <string name="distance_indication_descr">Velg hvordan avstanden til aktive markører skal vises.</string>
-    <string name="active_markers_descr">Velg antall retningsindikatorer:</string>
+    <string name="active_markers_descr">Velg antall retningsindikatorer.</string>
     <string name="tap_on_map_to_hide_interface_descr">Et trykk på kartet skjuler/viser kontrollknappene og miniprogrammene.</string>
     <string name="mark_passed">Marker som passert</string>
     <string name="osn_modify_dialog_error">Kunne ikke endre notatet.</string>
@@ -3285,7 +3285,7 @@
 \n 
 \n • Ny kartnedlasting-dialog foreslår et kart til nedlasting mens man utforsker 
 \n 
-\n • Nattdraktfikser 
+\n • Fikser for mørke drakter
 \n 
 \n • Flere rutingsproblemer rundt om i verden fikset 
 \n 
@@ -3624,4 +3624,27 @@
     <string name="app_mode_ski_touring">Skigåing</string>
     <string name="unsupported_type_error">Ustøttet type</string>
     <string name="select_distance_route_will_recalc">Velg hvor mye avviksdistanse som skal utløse omruting.</string>
+    <string name="export_profile_dialog_description">Du kan velge ytterligere data å eksportere sammen med profilen.</string>
+    <string name="import_profile_dialog_description">Importer profil inneholder ytterligere data. Klikk «Import» for å importere kun profildata, eller velg ytterligere data.</string>
+    <string name="plugin_prefs_reset_successful">Alle programtilleggsinnstillinger tilbakestilt til opprinnelse.</string>
+    <string name="add_new_custom_category_button_promo">Du kan legge til en ny egendefinert kategori ved å velge én eller flere nødvendige kategorier.</string>
+    <string name="create_custom_categories_list_promo">Endre listens sorteringsrekkefølge, skjul unødvendige kategorier. Du kan importere eller eksportere alle endringer med profiler.</string>
+    <string name="rearrange_categories">Endre kategoriforordning</string>
+    <string name="route_recalculation_dist_descr">Ruten vil bli kalkulert igjen hvis distansen til ruten er lengre enn angitt parameter</string>
+    <string name="plugin_disabled_descr">Dette programtillegget er et eget program, du vil måtte fjerne det for seg hvis du ikke lenger vil bruke det.
+\n
+\nDette programtillegget vil forbli på enheten etter fjerning av OsmAnd.</string>
+    <string name="keep_both_desc">Importerte elementer vil bli lagt til med fortegnelse</string>
+    <string name="ui_customization_description">Tilpass mengden elementer i \"Skuff\", \"Sett opp kart\", og \"Bindeleddsmeny\".
+\n
+\nSkru av ubrukte programtillegg for å skjule alle deres styringskontroller. %1$s.</string>
+    <string name="hidden_items_descr">Disse elementene er skjult fra menyen, men de representerte valgene eller programtilleggene vil fortsette å virke.</string>
+    <string name="select_wikipedia_article_langs">Velg språkene Wikipedia-artikler skal vises på i kartet. Du kan bytte mellom alle tilgjengelige språk mens du leser artikkelen.</string>
+    <string name="legend_item_description">Veiledning til kartets merking.</string>
+    <string name="shared_string_routing">Ruteplanlegging</string>
+    <string name="route_recalculation_dist_title">Minste avvik for anvisning av ny rute.</string>
+    <string name="import_duplicates_description">OsmAnd har allerede elementer med samme navn som de i importen.
+\n
+\nVelg en handling.</string>
+    <string name="search_poi_types_descr">Kombiner interessepunkttyper fra forskjellige kategorier. Trykk for å velge alle, og venstre side for kategorivalg.</string>
 </resources>
