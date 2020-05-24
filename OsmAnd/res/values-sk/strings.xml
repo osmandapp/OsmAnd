@@ -3467,9 +3467,9 @@
     <string name="multimedia_photo_play_sound">Zvuk spúšte fotoaparátu</string>
     <string name="osm_authorization_success">Prihlásenie je úspešné</string>
     <string name="rearrange_categories">Usporiadať kategórie</string>
-    <string name="create_custom_categories_list_promo">Zmeňte poradie triedenia zoznamu, skryte nepotrebné kategórie. Môžete importovať a exportovať všetky zmeny s profilmi.</string>
+    <string name="create_custom_categories_list_promo">Zmeňte poradie triedenia zoznamu, skryte kategórie. Môžete importovať a exportovať všetky zmeny s profilmi.</string>
     <string name="add_new_custom_category_button_promo">Môžete pridať novú kategóriu zvolením jednej alebo viacerých existujúcich.</string>
-    <string name="reset_to_default_category_button_promo">Obnovenie do východzieho nastavenia vymaže poradie triedenia ako po novej inštalácii.</string>
+    <string name="reset_to_default_category_button_promo">\"Obnovenie do východzieho nastavenia\" obnoví poradie triedenia ako po novej inštalácii.</string>
     <string name="shared_string_available">Dostupné</string>
     <string name="add_custom_category">Pridať vlastnú kategóriu</string>
     <string name="rendering_attr_streetLightingNight_name">Zobraziť iba v noci</string>
@@ -3478,10 +3478,10 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Západ slnka o %1$s</string>
     <string name="sunrise_at">Východ slnka o %1$s</string>
-    <string name="accessibility_mode_disabled">Režim uľahčenia prístupu je vo vašom Androide vypnutý.</string>
+    <string name="accessibility_mode_disabled">Režim uľahčenia prístupu je vo vašom systéme Android vypnutý.</string>
     <string name="use_system_screen_timeout">Použiť systémový časový limit obrazovky</string>
-    <string name="use_system_screen_timeout_promo">Predvolene vypnuté, ak OsmAnd beží v popredí, obrazovka nezhasne.
-\n
+    <string name="use_system_screen_timeout_promo">Predvolene vypnuté: ak OsmAnd beží v popredí, obrazovka nezhasne. 
+\n 
 \nAk je zapnuté, OsmAnd zhasne obrazovku podľa limitu nastaveného v systéme.</string>
     <string name="shared_string_app_default_w_val">Predvolená hodnota aplikácie (%s)</string>
     <string name="profile_type_custom_string">Vlastný profil</string>
@@ -3709,7 +3709,7 @@
 \n</string>
     <string name="quick_action_transport_hide">Skryť verejnú dopravu</string>
     <string name="quick_action_transport_show">Zobraziť verejnú dopravu</string>
-    <string name="quick_action_show_hide_transport">Zobraziť / skryť verejnú dopravu</string>
+    <string name="quick_action_show_hide_transport">Zobraziť/skryť verejnú dopravu</string>
     <string name="quick_action_transport_descr">Tlačidlo na zobrazenie alebo skrytie verejnej dopravy na mape.</string>
     <string name="create_edit_poi">Vytvoriť / Upraviť bod záujmu</string>
     <string name="parking_positions">Parkovacie miesta</string>
