@@ -1,10 +1,7 @@
 package net.osmand.search;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,9 +19,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.xmlpull.v1.XmlPullParserException;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -35,8 +29,6 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.router.RouteTestingTest;
-import net.osmand.router.TestEntry;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase;
@@ -48,6 +40,7 @@ import net.osmand.util.Algorithms;
 public class SearchUICoreTest {
 
 	private static final String SEARCH_RESOURCES_PATH = "src/test/resources/search/";
+	private static boolean TEST_EXTRA_RESULTS = true;
 	
 	private File testFile;
 
@@ -98,7 +91,7 @@ public class SearchUICoreTest {
     }
 
     @Test
-	public void testSearchImpl() throws IOException, JSONException {
+	public void testSearch() throws IOException, JSONException {
 		File jsonFile = testFile;
 		String sourceJsonText = Algorithms.getFileAsString(jsonFile);
 		Assert.assertNotNull(sourceJsonText);
@@ -149,6 +142,12 @@ public class SearchUICoreTest {
 				results.add(resultsArr.getString(i));
 			}
 		}
+		if (TEST_EXTRA_RESULTS && sourceJson.has("extra-results")) {
+			JSONArray resultsArr = sourceJson.getJSONArray("extra-results");
+			for (int i = 0; i < resultsArr.length(); i++) {
+				results.add(resultsArr.getString(i));
+			}
+		}
 
 		SearchSettings s = SearchSettings.parseJSON(settingsJson);
 		s.setOfflineIndexes(Collections.singletonList(reader));
@@ -181,6 +180,12 @@ public class SearchUICoreTest {
 			String expected = results.get(i++);
 			String present = result.toString();
 			//System.out.println(present);
+			if(!Algorithms.stringsEqual(expected, present)) {
+				System.out.println(String.format("Mismatch for '%s' != '%s'. Result: ", expected, present));
+				for (SearchResult r : searchResults) {
+					System.out.println("\t\""+r.toString()+"\",");
+				}
+			}
 			Assert.assertEquals(expected, present);
 			if (i >= results.size()) {
 				break;
