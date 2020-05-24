@@ -3483,7 +3483,7 @@ Lon %2$s</string>
     <string name="multimedia_use_system_camera">System-App verwenden</string>
     <string name="multimedia_photo_play_sound">Auslöseton der Kamera</string>
     <string name="reset_to_default_category_button_promo">Durch das Zurücksetzen auf die Standardeinstellung wird die Sortierung auf den Standardzustand nach der Installation zurückgesetzt.</string>
-    <string name="accessibility_mode_disabled">Der Zugänglichkeitsmodus ist in Ihrem Android ausgeschaltet.</string>
+    <string name="accessibility_mode_disabled">Einstellung \'Eingabehilfe\' ist in Ihrem Android System ausgeschaltet.</string>
     <string name="use_system_screen_timeout">Zeitlimit für den Systembildschirm verwenden</string>
     <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert. Wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet.
 \n
