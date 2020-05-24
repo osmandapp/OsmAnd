@@ -2424,13 +2424,13 @@
     <string name="no_photos_descr">Neniuj fotoj tie ĉi.</string>
     <string name="shared_string_install">Instali</string>
     <string name="improve_coverage_mapillary">Pliigi fotan atingon de Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Instalu Mapillary por aldoni unu aŭ pli fotojn al tiu ĉi loko sur la mapo.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instalu Mapillary por aldoni fotojn al tiu ĉi loko sur la mapo.</string>
     <string name="open_mapillary">Malfermi Mapillary</string>
     <string name="mapillary_image">Mapillary-foto</string>
     <string name="distance_moving">Korektita distanco</string>
     <string name="shared_string_permissions">Permesoj</string>
     <string name="import_gpx_failed_descr">Ne povas enporti dosieron. Bonvolu kontroli, ĉu OsmAnd estas permesata por legi ĝin.</string>
-    <string name="map_widget_ruler_control">Radiusa mezurilo</string>
+    <string name="map_widget_ruler_control">Cirkelo</string>
     <string name="shared_string_reload">Reŝargi</string>
     <string name="mapillary_menu_descr_tile_cache">Reŝargi kahelojn por ĝisdatigi datumojn.</string>
     <string name="mapillary_menu_title_tile_cache">Kahela memoro</string>
@@ -2589,7 +2589,7 @@
     <string name="show_guide_line_descr">Vidigi direktantan linion el via pozicio al pozicioj de aktivaj map-markoj.</string>
     <string name="show_arrows_descr">Vidigi unu aŭ du sagetojn indikantajn direkton al map-markoj.</string>
     <string name="distance_indication_descr">Elekti kiel vidigi distancon al aktivaj map-markoj.</string>
-    <string name="active_markers_descr">Nombro da indikiloj de direkto por vidigi:</string>
+    <string name="active_markers_descr">Nombro da indikiloj de direkto por vidigi.</string>
     <string name="looking_for_tracks_with_waypoints">Serĉado de kursoj kun navigadpunktoj</string>
     <string name="shared_string_more_without_dots">Pli</string>
     <string name="empty_state_osm_edits">Krei aŭ redakti OSM-objektojn</string>
@@ -2891,7 +2891,7 @@
     <string name="routeInfo_roadClass_name">Speco de vojo</string>
     <string name="routeInfo_surface_name">Pavimo</string>
     <string name="routeInfo_smoothness_name">Glateco</string>
-    <string name="routeInfo_steepness_name">Klineco</string>
+    <string name="routeInfo_steepness_name">Dekliveco</string>
     <string name="add_home">Aldoni hejmon</string>
     <string name="add_work">Aldoni laborejon</string>
     <string name="work_button">Laborejo</string>
@@ -3129,23 +3129,23 @@
     <string name="shared_string_crash">Paneo</string>
     <string name="last_launch_crashed">OsmAnd paneis dum la antaŭa starto. Helpu al ni plibonigi la aplikaĵon per sendi mesaĝon pri eraro.</string>
     <string name="app_mode_ufo">NIFO</string>
-    <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro
+    <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro 
 \n 
-\n • agordo por aldoni kutiman, minimuman kaj maksimuman rapidon por profilo (por kalkuli esperatan tempon de alveno)
+\n • agordo por aldoni kutiman, minimuman kaj maksimuman rapidon por profilo (por kalkuli esperatan tempon de alveno) 
 \n 
 \n • fenestraĵo montranta koordinatojn 
 \n 
-\n • eblo montri kompason kun angul-mezurilo sur la mapo
+\n • eblo mezuri distancojn per cirkelo 
 \n 
-\n • riparita registrado de spuro fone
+\n • riparita registrado de spuro fone 
 \n 
-\n • restarigita eblaĵo “teni ekranon ŝaltita”
+\n • restarigita eblaĵo “teni ekranon ŝaltita” 
 \n 
-\n • plibonigita elŝuto de mapoj fone
+\n • plibonigita elŝuto de mapoj fone 
 \n 
-\n • riparita elekto de lingvo por Vikipedio
+\n • riparita elekto de lingvo por Vikipedio 
 \n 
-\n • riparita sinteno de kompaso butono dum navigado
+\n • riparita sinteno de kompaso butono dum navigado 
 \n 
 \n • riparoj de aliaj eraroj
 \n
@@ -3676,7 +3676,7 @@
     <string name="tracker_item">Enreta spurilo</string>
     <string name="quick_action_item">Butono de rapida ago</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
-    <string name="radius_ruler_item">Radius‑mezurilo</string>
+    <string name="radius_ruler_item">Cirkelo</string>
     <string name="measure_distance_item">Distanc-mezurilo</string>
     <string name="travel_item">Vojaĝo (Vikivojaĝoj kaj Vikipedio)</string>
     <string name="map_markers_item">Map‑markoj</string>
