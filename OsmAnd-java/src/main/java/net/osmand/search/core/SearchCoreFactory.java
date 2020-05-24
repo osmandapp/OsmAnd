@@ -146,7 +146,7 @@ public class SearchCoreFactory {
 			phrase.countUnknownWordsMatch(res);
 //			int cnt = resultMatcher.getCount();
 			List<String> ws = phrase.getUnknownSearchWords(res.otherWordsMatch);
-			if(!res.firstUnknownWordMatches) {
+			if (!res.firstUnknownWordMatches) {
 				ws.add(phrase.getUnknownSearchWord());
 			}
 			// publish result to set parentSearchResult before search

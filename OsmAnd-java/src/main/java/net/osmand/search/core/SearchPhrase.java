@@ -468,7 +468,7 @@ public class SearchPhrase {
 			prnt = prnt.parentSearchResult;
 		}
 		sp.words.addAll(0, this.words);	
-		if(unknownWords != null) {
+		if (unknownWords != null) {
 			sp.lastUnknownSearchWordComplete = lastComplete;
 			for (int i = 0; i < unknownWords.size(); i++) {
 				if (i == 0) {
@@ -477,6 +477,9 @@ public class SearchPhrase {
 					sp.unknownWords.add(unknownWords.get(i));
 				}
 			}
+			// TODO
+//			sp.rawUnknownSearchPhrase = rawUnknownSearchPhrase;
+//			sp.unknownSearchPhrase = unknownSearchPhrase;
 		}
 		return sp;
 	}
