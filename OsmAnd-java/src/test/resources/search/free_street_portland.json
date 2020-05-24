@@ -12,17 +12,20 @@
   "phrase": "48 Free Street Portland",
   "results": [
     "48.0, <input> ",
-    "48, Free Street (Downtown), Portland",
-    "48, Portland Street, North Berwick",
-    "48, Portland Avenue, Old Orchard Beach",
-    "Portland Street (Downtown), Portland",
-    "Portland Street Pier, South Portland",
-    "Portland Street, Yarmouth",
-    "Portland Street, North Berwick",
-    "Portland Street, Berwick",
-    "Portland Street, South Berwick",
-    "Portland Street, Fryeburg",
-    "Portland Square, Portland"
+	"48, Free Street (Downtown), Portland"],
+  "extra-results": [
+	"48, Portland Street, North Berwick",
+	"Free Street (Downtown), Portland",
+	"Free Street (Ferry Village), South Portland",
+	"Portland Street",
+	"48, Portland Avenue, Old Orchard Beach",
+	"Portland Street (Downtown), Portland",
+	"Portland Street Pier, South Portland",
+	"Portland Street, Yarmouth",
+	"Portland Street, North Berwick",
+	"Portland Street, Berwick",
+	"Portland Street, South Berwick",
+	"Portland Street, Fryeburg"
   ],
   "amenities": [
     {
