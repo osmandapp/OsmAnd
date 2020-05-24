@@ -2055,7 +2055,7 @@ Pôr do Sol: %2$s</string>
     <string name="open_mapillary">Abrir o Mapillary</string>
     <string name="shared_string_install">Instalar</string>
     <string name="improve_coverage_mapillary">Melhorar a cobertura fotográfica com Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Instale Mapillary para adicionar uma ou mais fotos para este local do mapa.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instale Mapillary para adicionar fotos neste local do mapa.</string>
     <string name="online_photos">Fotos on-line</string>
     <string name="shared_string_add_photos">Adicionar fotos</string>
     <string name="no_photos_descr">Não há fotos aqui.</string>
@@ -2160,7 +2160,7 @@ Pôr do Sol: %2$s</string>
     <string name="show_guide_line_descr">Mostrar linha direcional desde a sua posição até os locais dos marcadores ativos.</string>
     <string name="show_arrows_descr">Mostrar uma ou duas setas indicando a direção para os marcadores ativos.</string>
     <string name="distance_indication_descr">Escolher como exibir a distância para os marcadores ativos.</string>
-    <string name="active_markers_descr">Especifique o número de indicadores de direção:</string>
+    <string name="active_markers_descr">Especifique o número de indicadores de direção.</string>
     <string name="digits_quantity">Número de casas decimais</string>
     <string name="shared_string_right">Direita</string>
     <string name="shared_string_left">Esqueda</string>
@@ -2278,7 +2278,7 @@ Pôr do Sol: %2$s</string>
     <string name="translit_names">Transliterar nomes</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
     <string name="add_segment_to_the_track">Adicionar a um arquivo GPX</string>
-    <string name="empty_state_av_notes_desc">Adicione notas de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou o menu de contexto.</string>
+    <string name="empty_state_av_notes_desc">Adicione notas de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou os menus de contexto.</string>
     <string name="quick_action_add_destination_desc">Um botão para fazer com que a tela centralize o destino da rota, um destino selecionado anteriormente se tornaria o último destino intermediário.</string>
     <string name="quick_action_replace_destination_desc">Um botão para fazer com que a tela centralize o novo destino da rota, substituindo o destino selecionado anteriormente (se houver).</string>
     <string name="quick_action_add_first_intermediate_desc">Um botão para fazer com que a tela centralize o primeiro destino intermediário.</string>
@@ -2539,7 +2539,7 @@ Pôr do Sol: %2$s</string>
     <string name="empty_state_my_tracks">Adicione arquivos GPX</string>
     <string name="empty_state_my_tracks_desc">Importe arquivos GPX ou grave trilhas.</string>
     <string name="empty_state_favourites">Adicione Favoritos</string>
-    <string name="empty_state_favourites_desc">Importe Favoritos ou adicione novos marcando pontos do mapa.</string>
+    <string name="empty_state_favourites_desc">Importe Favoritos ou adicione-os marcando pontos do mapa.</string>
     <string name="import_track">Importar arquivo GPX</string>
     <string name="move_point">Mover Ponto</string>
     <string name="osm_recipients_label">Destinatários OSM</string>
@@ -2718,8 +2718,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_gpx_files">Arquivos GPX</string>
     <string name="access_intermediate_arrival_time">Hora de chegada intermediária</string>
     <string name="map_widget_intermediate_time">Hora intermediária</string>
-    <string name="get_osmand_live">Adquira OsmAnd Live para desbloquear todos estes recursos:
-\nAtualização diária de mapa com downloads ilimitados, todos os plugins grátis e pagos, Wikipédia, Wikivoyage e muito mais.</string>
+    <string name="get_osmand_live">Adquira OsmAnd Live para desbloquear todos estes recursos: Atualização diária de mapa com downloads ilimitados, todos os plugins pagos grátis, Wikipédia, Wikivoyage e muito mais.</string>
     <string name="unirs_render_descr">Modificação do estilo padrão para aumentar o contraste de vias de pedestre e bicicleta. Usa as cores Mapnik antigo.</string>
     <string name="off_road_render_descr">Para condução off-road com base no estilo \"Topo\" e para utilização com imagens de satélite verdes como mapa de fundo. Espessura de via principal reduzido, espessura das trilhas, caminhos, ciclovias e outras vias aumentado.</string>
     <string name="nautical_render_descr">Para navegação náutica. Apresenta boias, faróis, vias fluviais, vias e sinais marítimos, portos, serviços de navegação e curvas batimétricas.</string>
@@ -3451,7 +3450,7 @@ Pôr do Sol: %2$s</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Efeito colateral: como resultado da filtragem por precisão, os pontos podem estar totalmente ausentes por ex. embaixo de pontes, sob árvores, entre prédios altos ou com certas condições climáticas.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recomendação: É difícil prever o que será gravado e o que não será, talvez seja melhor desativar esse filtro.</string>
     <string name="monitoring_min_accuracy_descr_remark">Observação: se o GPS estava desligado imediatamente antes de uma gravação, o primeiro ponto medido pode ter uma precisão diminuída; portanto, em nosso código, podemos esperar um segundo antes da gravação de um ponto (ou gravar o melhor de três pontos consecutivos, etc.), mas isso ainda não foi implementado.</string>
-    <string name="monitoring_min_distance_descr">Esse filtro evita que pontos duplicados sejam gravados onde muito pouco movimento real possa ter ocorrido, cria uma aparência espacial mais agradável das faixas que não são processadas posteriormente posteriormente.</string>
+    <string name="monitoring_min_distance_descr">Esse filtro evita que pontos duplicados sejam gravados onde muito pouco movimento real possa ter ocorrido, cria uma aparência espacial mais agradável das trilhas que não são processadas posteriormente.</string>
     <string name="monitoring_min_distance_descr_side_effect">Efeitos colaterais: Períodos em repouso não são registrados em absoluto ou em apenas um ponto cada. Pequenos movimentos (do mundo real) (por exemplo, de lado, para marcar um possível desvio na sua viagem) podem ser filtrados. Seu arquivo contém menos informações para pós-processamento e possui estatísticas piores ao filtrar pontos obviamente redundantes no tempo de gravação, mantendo potencialmente artefatos causados por má recepção ou efeitos de chipset GPS.</string>
     <string name="monitoring_min_distance_descr_recommendation">Recomendação: Uma configuração de 5 metros pode funcionar bem se você não precisar capturar detalhes mais refinados do que isso e não desejar capturar dados explicitamente enquanto estiver em repouso.</string>
     <string name="live_monitoring_time_buffer">Buffer de tempo</string>
