@@ -120,7 +120,7 @@
         android:contentDescription="@string/shared_string_more"
         android:focusable="false"
         android:scaleType="center"
-        osmand:srcCompat="@drawable/map_overflow_menu_white"
+        osmand:srcCompat="@drawable/ic_actions_menu"
         android:visibility="gone"
 	    android:layout_marginEnd="2dp" />
 

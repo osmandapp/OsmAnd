@@ -513,9 +513,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		zoomInButtonView = (ImageButton) view.findViewById(R.id.context_menu_zoom_in_button);
 		zoomOutButtonView = (ImageButton) view.findViewById(R.id.context_menu_zoom_out_button);
 		if (menu.zoomButtonsVisible()) {
-			AndroidUtils.updateImageButton(mapActivity, zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
+			AndroidUtils.updateImageButton(app, zoomInButtonView, R.drawable.ic_zoom_in, R.drawable.ic_zoom_in,
 					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-			AndroidUtils.updateImageButton(mapActivity, zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
+			AndroidUtils.updateImageButton(app, zoomOutButtonView, R.drawable.ic_zoom_out, R.drawable.ic_zoom_out,
 					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
 			zoomInButtonView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -622,7 +622,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 		});
 		TextView directionsButton = (TextView) view.findViewById(R.id.context_menu_directions_button);
-		int iconResId = R.drawable.map_directions;
+		int iconResId = R.drawable.ic_action_gdirections_dark;
 		if (menu.navigateInPedestrianMode()) {
 			iconResId = R.drawable.ic_action_pedestrian_dark;
 		}
