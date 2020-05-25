@@ -3474,21 +3474,21 @@
     <string name="multimedia_photo_play_sound">相機快門聲</string>
     <string name="osm_authorization_success">驗證成功</string>
     <string name="rearrange_categories">重新排列分類</string>
-    <string name="create_custom_categories_list_promo">變更清單順序，隱藏不需要的分類。你可以匯入或匯出所有包含變更的設定檔。</string>
-    <string name="add_new_custom_category_button_promo">您可以透過選取一個或多個需要的分類來新增自訂的分類。</string>
+    <string name="create_custom_categories_list_promo">變更清單順序、隱藏分類。你可以匯入或匯出所有包含變更的設定檔。</string>
+    <string name="add_new_custom_category_button_promo">您可以透過選取一個或多個分類來新增自訂的分類。</string>
     <string name="shared_string_available">可用</string>
     <string name="add_custom_category">新增自訂分類</string>
     <string name="rendering_attr_streetLightingNight_name">僅在夜間顯示</string>
-    <string name="plugin_prefs_reset_successful">所有外掛程式設定都已恢復為預設狀態。</string>
-    <string name="profile_prefs_reset_successful">所有設定檔的設定都已恢復為預設狀態。</string>
+    <string name="plugin_prefs_reset_successful">所有外掛程式設定都已恢復為預設值。</string>
+    <string name="profile_prefs_reset_successful">所有設定檔的設定都已恢復為預設值。</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">日落於 %1$s</string>
     <string name="sunrise_at">日出於 %1$s</string>
-    <string name="accessibility_mode_disabled">您的 Android 關閉了無障礙模式。</string>
-    <string name="reset_to_default_category_button_promo">重設為預設值將會把排序重設回安裝後的預設值。</string>
+    <string name="accessibility_mode_disabled">您的 Android 系統關閉了無障礙模式。</string>
+    <string name="reset_to_default_category_button_promo">「重設為預設值」會將排序恢復為安裝時的預設值。</string>
     <string name="use_system_screen_timeout">使用系統畫面逾時</string>
-    <string name="use_system_screen_timeout_promo">預設停用，如果 OsmAnd 在前景執行，畫面就不會有逾時的問題。
-\n
+    <string name="use_system_screen_timeout_promo">預設停用：當 OsmAnd 在前景執行時，畫面就不會有逾時的問題。 
+\n 
 \n若啟用，OsmAnd 將會使用系統逾時設定。</string>
     <string name="clear_recorded_data">清除已紀錄的資料</string>
     <string name="release_3_6">• 設定檔：現在您可以變更順序、設定地圖圖示、變更基本設定檔的所有設定以及將它們復原 
