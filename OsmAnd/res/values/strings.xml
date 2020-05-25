@@ -23,7 +23,7 @@
     <string name="parking_positions">Parking positions</string>
     <string name="create_edit_poi">Create / Edit POI</string>
     <string name="quick_action_transport_descr">Button showing or hiding public transport on the map.</string>
-    <string name="quick_action_show_hide_transport">Show / hide public transport</string>
+    <string name="quick_action_show_hide_transport">Show/hide public transport</string>
     <string name="quick_action_transport_show">Show public transport</string>
     <string name="quick_action_transport_hide">Hide public transport</string>
     <string name="release_3_7">

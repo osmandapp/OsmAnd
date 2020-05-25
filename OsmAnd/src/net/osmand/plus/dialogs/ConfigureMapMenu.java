@@ -37,9 +37,6 @@ import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.ListStringPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -51,6 +48,9 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings.ListStringPreference;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -529,6 +529,9 @@ public class ConfigureMapMenu {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
+						if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+							return false;
+						}
 						final OsmandMapTileView view = activity.getMapView();
 						AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 						bld.setTitle(R.string.daynight);
@@ -570,6 +573,9 @@ public class ConfigureMapMenu {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
+						if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+							return false;
+						}
 						final OsmandMapTileView view = activity.getMapView();
 						final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 						AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
@@ -638,6 +644,9 @@ public class ConfigureMapMenu {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
+						if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+							return false;
+						}
 						final OsmandMapTileView view = activity.getMapView();
 						AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 						// test old descr as title
@@ -682,6 +691,9 @@ public class ConfigureMapMenu {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
+						if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+							return false;
+						}
 						final OsmandMapTileView view = activity.getMapView();
 						AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 
@@ -991,7 +1003,9 @@ public class ConfigureMapMenu {
 	                                     final int themeRes,
 	                                     final boolean nightMode,
 	                                     @ColorInt final int selectedProfileColor) {
-
+		if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+			return;
+		}
 		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		boolean[] checkedItems = new boolean[prefs.size()];
 		final boolean[] tempPrefs = new boolean[prefs.size()];
@@ -1245,7 +1259,10 @@ public class ConfigureMapMenu {
 
 						@Override
 						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad,
-														  final int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
+						                                  final int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
+							if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+								return false;
+							}
 							AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 							// test old descr as title
 							b.setTitle(propertyDescr);
