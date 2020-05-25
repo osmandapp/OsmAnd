@@ -514,7 +514,7 @@ public class MapActivityActions implements DialogProvider {
 			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
 			params.setUseIntermediatePointsRTE(settings.GPX_CALCULATE_RTEPT.get());
 			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
-			List<Location> ps = params.getPoints();
+			List<Location> ps = params.getPoints(settings.getContext());
 			mapActivity.getRoutingHelper().setGpxParams(params);
 			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
 			if (!ps.isEmpty()) {
