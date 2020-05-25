@@ -39,7 +39,7 @@
                 android:layout_height="@dimen/dashboard_map_toolbar"
                 android:background="@color/osmand_orange"
                 android:minHeight="@dimen/dashboard_map_toolbar"
-	            android:padding="0dp"
+                android:padding="0dp"
                 android:theme="?attr/toolbar_theme"
                 android:visibility="gone"
                 app:contentInsetLeft="54dp"
