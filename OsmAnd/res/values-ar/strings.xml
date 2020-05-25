@@ -3471,7 +3471,7 @@
     <string name="shared_string_available">متاح</string>
     <string name="add_custom_category">إضافة فئة مخصصة</string>
     <string name="rendering_attr_streetLightingNight_name">اظهر في الليل فقط</string>
-    <string name="plugin_prefs_reset_successful">استعادة جميع إعدادات البرنامج المساعد plugin إلى الحالة الافتراضية.</string>
+    <string name="plugin_prefs_reset_successful">استعادة جميع إعدادات البرنامج المساعد إلى الحالة الافتراضية.</string>
     <string name="profile_prefs_reset_successful">تمت استعادة جميع إعدادات الوضع إلى الحالة الافتراضية.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">غروب الشمس على %1$s</string>
