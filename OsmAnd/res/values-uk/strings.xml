@@ -1373,7 +1373,7 @@
     <string name="traffic_warning_speed_camera">Камера контролю швидкості</string>
     <string name="traffic_warning">Попередження на дорозі</string>
     <string name="local_index_description">Натисніть на будь-який наявний елемент для перегляду додаткових відомостей, довго утримуйте, щоб знедіяти або вилучити. Наявні дані на пристрої (%1$s вільно):</string>
-    <string name="watch">Годинник</string>
+    <string name="watch">Перегляд</string>
     <string name="rendering_attr_pisteRoutes_name">Лижні траси</string>
     <string name="rendering_attr_pisteGrooming_name">Тип лижні</string>
     <string name="routing_attr_no_new_routing_name">Не використовувати маршрутизацію версії 1.9</string>
@@ -3475,12 +3475,12 @@
     <string name="multimedia_photo_play_sound">Звук затвору камери</string>
     <string name="osm_authorization_success">Авторизація пройшла успішно</string>
     <string name="rearrange_categories">Перевпорядкувати категорії</string>
-    <string name="create_custom_categories_list_promo">Змінюйте порядок сортування списку, приховайте непотрібні категорії. Ви можете імпортувати або експортувати всі зміни з профілями.</string>
+    <string name="create_custom_categories_list_promo">Змінюйте впорядкування списку, приховайте непотрібні категорії. Ви можете імпортувати або експортувати всі зміни з профілями.</string>
     <string name="add_new_custom_category_button_promo">Ви можете додати нову власну категорію, вибравши одну або кілька необхідних категорій.</string>
     <string name="shared_string_available">Доступні</string>
     <string name="add_custom_category">Додати власну категорію</string>
     <string name="rendering_attr_streetLightingNight_name">Показувати лише вночі</string>
-    <string name="plugin_prefs_reset_successful">Усі налаштування плагіна відновлено до типового стану.</string>
+    <string name="plugin_prefs_reset_successful">Усі налаштування втулка відновлено до усталеного стану.</string>
     <string name="profile_prefs_reset_successful">Усі налаштування профілю відновлено до усталеного стану.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Захід сонця о %1$s</string>
@@ -3707,7 +3707,7 @@
     <string name="parking_positions">Розташування припаркованого авто</string>
     <string name="quick_action_transport_hide">Приховати громадський транспорт</string>
     <string name="quick_action_transport_show">Показати громадський транспорт</string>
-    <string name="quick_action_show_hide_transport">Показати / приховати громадський транспорт</string>
+    <string name="quick_action_show_hide_transport">Показати/приховати громадський транспорт</string>
     <string name="quick_action_transport_descr">Кнопка показу або приховування громадського транспорту на мапі.</string>
     <string name="create_edit_poi">Створити / змінити POI</string>
     <string name="add_edit_favorite">Додати / редагувати вибране</string>

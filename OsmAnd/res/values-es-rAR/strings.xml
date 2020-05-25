@@ -3483,21 +3483,21 @@
     <string name="multimedia_photo_play_sound">Reproducir sonido al fotografiar</string>
     <string name="osm_authorization_success">Autorización exitosa</string>
     <string name="rearrange_categories">Reordenar categorías</string>
-    <string name="create_custom_categories_list_promo">Cambia el orden de clasificación de la lista u oculta las categorías innecesarias. Puedes importar o exportar todos los cambios con los perfiles.</string>
-    <string name="add_new_custom_category_button_promo">Puedes añadir una nueva categoría personalizada marcando una o varias categorías necesarias.</string>
+    <string name="create_custom_categories_list_promo">Cambia el orden de clasificación de la lista u oculta las categorías. Puedes importar o exportar todos los cambios con los perfiles.</string>
+    <string name="add_new_custom_category_button_promo">Puedes añadir una nueva categoría personalizada marcando una o varias categorías.</string>
     <string name="shared_string_available">Disponible</string>
     <string name="add_custom_category">Añadir categoría personalizada</string>
     <string name="rendering_attr_streetLightingNight_name">Mostrar solo de noche</string>
-    <string name="plugin_prefs_reset_successful">Todos los ajustes del complemento se restauraron al estado predefinido.</string>
-    <string name="profile_prefs_reset_successful">Todos los ajustes del perfil se restauraron al estado predefinido.</string>
+    <string name="plugin_prefs_reset_successful">Todos los ajustes del complemento se restauraron al valor predefinido.</string>
+    <string name="profile_prefs_reset_successful">Todos los ajustes del perfil se restauraron al valor predefinido.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Atardecer a las %1$s</string>
     <string name="sunrise_at">Amanecer a las %1$s</string>
-    <string name="reset_to_default_category_button_promo">Restablecer al valor predefinido, restablecerá el orden de clasificación al estado predefinido después de la instalación.</string>
+    <string name="reset_to_default_category_button_promo">«Restablecer al valor predefinido», restablecerá el orden de clasificación al valor predefinido de la instalación.</string>
     <string name="accessibility_mode_disabled">El modo de accesibilidad se encuentra desactivado en el sistema.</string>
     <string name="use_system_screen_timeout">Usar el tiempo de espera de la pantalla del sistema</string>
-    <string name="use_system_screen_timeout_promo">Desactivado de forma predefinida, si OsmAnd se ejecuta en primer plano, la pantalla se mantendrá encendida.
-\n
+    <string name="use_system_screen_timeout_promo">Desactivado de forma predefinida: Mientras OsmAnd se ejecute en primer plano, la pantalla no se apagará. 
+\n 
 \nSi se activa, OsmAnd utilizará los ajustes de tiempo de espera del sistema.</string>
     <string name="clear_recorded_data">Vaciar datos grabados</string>
     <string name="release_3_6">• Perfiles: ahora puedes cambiar el orden, definir el icono para el mapa, cambiar todos los ajustes para los perfiles base y restaurarlos de nuevo a los valores predefinidos

@@ -3435,22 +3435,22 @@
     <string name="multimedia_photo_play_sound">Kamera deklanşör sesi</string>
     <string name="osm_authorization_success">Yetkilendirme başarılı</string>
     <string name="rearrange_categories">Kategorileri yeniden düzenle</string>
-    <string name="create_custom_categories_list_promo">Listenin sıralama düzenini değiştirin, gereksiz kategorileri gizleyin. Profillerle tüm değişiklikleri içe veya dışa aktarabilirsiniz.</string>
-    <string name="add_new_custom_category_button_promo">Bir veya birkaç gerekli kategori seçerek yeni bir özel kategori ekleyebilirsiniz.</string>
+    <string name="create_custom_categories_list_promo">Liste sıralama düzenini değiştirin, kategorileri gizleyin. Profillerle tüm değişiklikleri içe veya dışa aktarabilirsiniz.</string>
+    <string name="add_new_custom_category_button_promo">Bir veya daha fazla kategori seçerek yeni bir özel kategori ekleyebilirsiniz.</string>
     <string name="shared_string_available">Mevcut</string>
     <string name="add_custom_category">Özel kategori ekle</string>
     <string name="rendering_attr_streetLightingNight_name">Sadece geceleri göster</string>
-    <string name="plugin_prefs_reset_successful">Tüm eklenti ayarları öntanımlı durumuna geri yüklendi.</string>
-    <string name="profile_prefs_reset_successful">Tüm profil ayarları öntanımlı durumuna geri yüklendi.</string>
+    <string name="plugin_prefs_reset_successful">Tüm eklenti ayarları öntanımlı değerlerine geri yüklendi.</string>
+    <string name="profile_prefs_reset_successful">Tüm profil ayarları öntanımlı değerlerine geri yüklendi.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">%1$s\'de gün batımı</string>
     <string name="sunrise_at">%1$s\'de gün doğumu</string>
-    <string name="accessibility_mode_disabled">Android cihazınızda erişilebilirlik modu kapalı.</string>
-    <string name="reset_to_default_category_button_promo">Öntanımlılara sıfırla, sıralama düzenini kurulumdan sonraki öntanımlı duruma sıfırlayacaktır.</string>
+    <string name="accessibility_mode_disabled">Android sisteminizde erişilebilirlik modu kapalı.</string>
+    <string name="reset_to_default_category_button_promo">\'Öntanımlılara sıfırla\', sıralama düzenini öntanımlı kurulum durumuna geri döndürecektir.</string>
     <string name="use_system_screen_timeout">Sistem ekran zaman aşımını kullan</string>
-    <string name="use_system_screen_timeout_promo">Öntanımlı olarak devre dışıdır, OsmAnd ön planda çalışıyorsa ekran zaman aşımına uğramaz. 
+    <string name="use_system_screen_timeout_promo">Öntanımlı olarak devre dışıdır: OsmAnd ön planda çalışırken ekran zaman aşımına uğramayacaktır. 
 \n 
-\nEtkinleştirilirse OsmAnd sistem zaman aşımı ayarlarını kullanacaktır.</string>
+\nEtkinleştirilirse, OsmAnd sistem zaman aşımı ayarını kullanacaktır.</string>
     <string name="clear_recorded_data">Kaydedilen verileri temizle</string>
     <string name="release_3_6">• Profiller: artık sırayı değiştirebilir, harita simgesini ayarlayabilir, temel profiller için tüm ayarları değiştirebilir ve bunları öntanımlılara geri yükleyebilirsiniz 
 \n 
@@ -3667,7 +3667,7 @@
     <string name="additional_actions_descr">Bu eylemlere “%1$s” düğmesine dokunarak erişebilirsiniz.</string>
     <string name="quick_action_transport_hide">Toplu taşıma araçlarını gizle</string>
     <string name="quick_action_transport_show">Toplu taşıma araçlarını göster</string>
-    <string name="quick_action_show_hide_transport">Toplu taşıma araçlarını göster / gizle</string>
+    <string name="quick_action_show_hide_transport">Toplu taşıma araçlarını göster/gizle</string>
     <string name="quick_action_transport_descr">Haritada toplu taşıma araçlarını gösteren veya gizleyen düğme.</string>
     <string name="create_edit_poi">POI Oluştur / Düzenle</string>
     <string name="parking_positions">Park etme alanları</string>
