@@ -3467,21 +3467,21 @@ Pôr do Sol: %2$s</string>
     <string name="multimedia_photo_play_sound">Som do obturador da câmera</string>
     <string name="osm_authorization_success">Autorização bem sucedida</string>
     <string name="rearrange_categories">Reorganizar categorias</string>
-    <string name="create_custom_categories_list_promo">Altere a ordem de classificação da lista, oculte categorias desnecessárias. Você pode importar ou exportar todas as alterações com perfis.</string>
-    <string name="add_new_custom_category_button_promo">Você pode adicionar uma nova categoria personalizada selecionando uma ou algumas categorias necessárias.</string>
+    <string name="create_custom_categories_list_promo">Altere a ordem de classificação da lista, oculte as categorias. Você pode importar ou exportar todas as alterações com perfis.</string>
+    <string name="add_new_custom_category_button_promo">Você pode adicionar uma nova categoria personalizada selecionando uma ou mais categorias.</string>
     <string name="shared_string_available">Disponível</string>
     <string name="add_custom_category">Adicionar categoria personalizada</string>
     <string name="rendering_attr_streetLightingNight_name">Mostrar apenas à noite</string>
-    <string name="plugin_prefs_reset_successful">Todas as configurações de plug-in restauradas para o estado padrão.</string>
-    <string name="profile_prefs_reset_successful">Todas as configurações de perfil restauradas para o estado padrão.</string>
+    <string name="plugin_prefs_reset_successful">Todas as configurações de plug-in restauradas para o padrão.</string>
+    <string name="profile_prefs_reset_successful">Todas as configurações de perfil são restauradas para o padrão.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Pôr do sol em %1$s</string>
     <string name="sunrise_at">Nascer do sol em %1$s</string>
-    <string name="accessibility_mode_disabled">Modo de acessibilidade desativado no seu Android.</string>
-    <string name="reset_to_default_category_button_promo">Redefinir como padrão redefinirá a ordem de classificação para o estado padrão após a instalação.</string>
+    <string name="accessibility_mode_disabled">O modo de acessibilidade está desativado no seu sistema Android.</string>
+    <string name="reset_to_default_category_button_promo">\'Redefinir para padrão\' restabelecerá a ordem de classificação para o padrão de instalação.</string>
     <string name="use_system_screen_timeout">Usar tempo limite da tela do sistema</string>
-    <string name="use_system_screen_timeout_promo">Desabilitada por padrão, se OsmAnd estiver sendo executado em primeiro plano, a tela não atingirá o tempo limite.
-\n
+    <string name="use_system_screen_timeout_promo">Desabilitado por padrão: Enquanto o OsmAnd estiver sendo executado em primeiro plano, a tela não atingirá o tempo limite
+\n 
 \nSe ativado, o OsmAnd usará as configurações de tempo limite do sistema.</string>
     <string name="clear_recorded_data">Limpar dados gravados</string>
     <string name="release_3_6">• Perfis: agora você pode alterar a ordem, definir o ícone para o mapa, alterar todas as configurações dos perfis básicos e restaurá-los para os padrões
@@ -3663,7 +3663,7 @@ Pôr do Sol: %2$s</string>
 \n
 \n  Você pode gerenciar e cancelar suas assinaturas acessando as configurações do Google Play.</string>
     <string name="search_poi_types">Pesquisar tipos de POI</string>
-    <string name="search_poi_types_descr">Combine tipos de POI de diferentes categorias. Tocar em \"Alternar\" seleciona tudo e o lado esquerdo seleciona a categoria.</string>
+    <string name="search_poi_types_descr">Combine tipos de POI de diferentes categorias. Toque em para selecionar tudo, toque em lado esquerdo para selecionar a categoria.</string>
     <string name="tracker_item">Rastreador do OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Ação rápida</string>
@@ -3698,7 +3698,7 @@ Pôr do Sol: %2$s</string>
     <string name="additional_actions_descr">Você pode acessar essas ações tocando no botão “%1$s”.</string>
     <string name="quick_action_transport_hide">Ocultar transporte público</string>
     <string name="quick_action_transport_show">Mostrar transporte público</string>
-    <string name="quick_action_show_hide_transport">Mostrar / ocultar transporte público</string>
+    <string name="quick_action_show_hide_transport">Mostrar/ocultar transporte público</string>
     <string name="quick_action_transport_descr">Botão que mostra ou oculta o transporte público no mapa.</string>
     <string name="create_edit_poi">Criar / Editar POI</string>
     <string name="parking_positions">Posições de estacionamento</string>
