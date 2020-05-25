@@ -25,19 +25,19 @@ import com.google.android.material.slider.Slider;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -333,18 +333,20 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 						startGPXMonitoring(activity, showTrackSelection);
 					}
 				} else if (item == R.string.clear_recorded_data) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
-					builder.setTitle(R.string.clear_recorded_data);
-					builder.setMessage(R.string.are_you_sure);
-					builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
-							R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									app.getSavingTrackHelper().clearRecordedData(true);
-									app.getNotificationHelper().refreshNotifications();
-								}
-							});
-					builder.show();
+					if (AndroidUtils.isActivityNotDestroyed(activity)) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
+						builder.setTitle(R.string.clear_recorded_data);
+						builder.setMessage(R.string.are_you_sure);
+						builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
+								R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										app.getSavingTrackHelper().clearRecordedData(true);
+										app.getNotificationHelper().refreshNotifications();
+									}
+								});
+						builder.show();
+					}
 				} else if(item == R.string.gpx_monitoring_stop) {
 					stopRecording();
 				} else if(item == R.string.gpx_start_new_segment) {
@@ -481,19 +483,21 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 
-
-	public static void showIntervalChooseDialog(final Context uiCtx, final String patternMsg,
+	public static void showIntervalChooseDialog(final Activity activity, final String patternMsg,
 												String title, final int[] seconds, final int[] minutes,
 												final ValueHolder<Boolean> choice, final ValueHolder<Integer> v,
 												final boolean showTrackSelection, OnClickListener onclick) {
-		final OsmandApplication app = (OsmandApplication) uiCtx.getApplicationContext();
+		if (!AndroidUtils.isActivityNotDestroyed(activity)) {
+			return;
+		}
+		final OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		boolean nightMode;
-		if (uiCtx instanceof MapActivity) {
+		if (activity instanceof MapActivity) {
 			nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		} else {
 			nightMode = !app.getSettings().isLightContent();
 		}
-		Context themedContext = UiUtilities.getThemedContext(uiCtx, nightMode);
+		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder dlg = new AlertDialog.Builder(themedContext);
 		dlg.setTitle(title);
 		LinearLayout ll = createIntervalChooseLayout(app, themedContext, patternMsg, seconds, minutes, choice, v, showTrackSelection, nightMode);

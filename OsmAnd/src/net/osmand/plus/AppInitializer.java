@@ -553,7 +553,8 @@ public class AppInitializer implements IProgress {
 
 									customConfigs.put(fileName, builder);
 								} catch (XmlPullParserException | IOException e) {
-									throw new IllegalStateException(e);
+									Algorithms.removeAllFiles(f);
+									LOG.error(e);
 								}
 							}
 						}
