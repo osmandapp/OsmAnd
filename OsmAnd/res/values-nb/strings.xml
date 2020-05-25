@@ -3040,9 +3040,9 @@
     <string name="rate_dialog_descr">Del din tilbakemelding og legg til en vurdering på Google Play.</string>
     <string name="shared_string_privacy_policy">Personvernspraksis</string>
     <string name="help_us_make_osmand_better">Hjelp oss å forbedre OsmAnd</string>
-    <string name="make_osmand_better_descr">Tillat OsmAnd å samle inn og behandle anonym programbruksdata. Vi samler ikke inn eller lagrer data om din plassering, eller om plasseringer ser på på kartet. 
+    <string name="make_osmand_better_descr">Tillat OsmAnd å samle inn og behandle anonym programbruksdata. Ingen data om din plassering, eller om plasseringer ser på på kartet blir samlet inn. 
 \n 
-\nDu kan alltid endre ditt valg i Innstillinger &gt; Personvern og sikkerhet.</string>
+\nDu kan alltid endre ditt valg i \"Innstillinger\" → \"Personvern og sikkerhet\".</string>
     <string name="choose_data_to_share">Velg hvilken data du ønsker å dele:</string>
     <string name="downloaded_maps">Nedlastede kart</string>
     <string name="visited_screens">Besøkte skjermer</string>
