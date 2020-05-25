@@ -1212,7 +1212,7 @@
     <string name="i_am_here">Mi estas tie ĉi</string>
     <string name="free_version_title">Senpaga versio</string>
     <string name="favorite_home_category">Hejmo</string>
-    <string name="preferred_locale">Fasada lingvo</string>
+    <string name="preferred_locale">Lingvo de aplikaĵo</string>
     <string name="incomplete_locale">nekompleta</string>
     <string name="map_online_plugin_is_not_installed">Aktivigu la kromprogramon “enretaj mapoj” por elekti aliajn fontojn de mapoj</string>
     <string name="map_online_data">Enretaj kaj kahelaj mapoj</string>
