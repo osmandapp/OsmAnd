@@ -2435,7 +2435,7 @@
     <string name="open_mapillary">Aberi Mapillary</string>
     <string name="shared_string_install">Installa</string>
     <string name="improve_coverage_mapillary">Megiora sa cobertura fotogràfica cun Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Installa Mapillary pro annànghere una o prus fotografias a custa positzione de sa mapa.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installa Mapillary pro annànghere fotografias a custa positzione de sa mapa.</string>
     <string name="mapillary_image">Immàgine de Mapillary</string>
     <string name="distance_moving">Distàntzia curreta</string>
     <string name="shared_string_permissions">Autorizatziones</string>
@@ -2496,9 +2496,9 @@
     <string name="add_route_points">Annanghe puntos a s\'àndala</string>
     <string name="add_line">Annanghe una lìnia</string>
     <string name="empty_state_my_tracks">Annanghe documentos GPX</string>
-    <string name="empty_state_my_tracks_desc">Importa documentos GPX, o registra rastas.</string>
+    <string name="empty_state_my_tracks_desc">Importa documentos GPX o registra rastas.</string>
     <string name="empty_state_favourites">Annanghe preferidos</string>
-    <string name="empty_state_favourites_desc">Importa preferidos, o annanghe·los pro mèdiu de marcadores in sa mapa.</string>
+    <string name="empty_state_favourites_desc">Importa preferidos o annanghe·los pro mèdiu de marcadores in sa mapa.</string>
     <string name="import_track">Importa unu documentu GPX</string>
     <string name="import_track_desc">Su documentu %1$s non cuntenit puntos de coladòrgiu, importare comente rasta?</string>
     <string name="move_point">Move puntu</string>
@@ -2599,11 +2599,11 @@
     <string name="show_guide_line_descr">Ammustra lìnias diretzionales dae sa positzione tua a sos marcadores ativos.</string>
     <string name="show_arrows_descr">Ammustra una o duas fritzas chi indicant sa diretzione cara a sos marcadores ativos.</string>
     <string name="distance_indication_descr">Issèbera comente ammustrare sa distàntzia cun sos marcadores ativos.</string>
-    <string name="active_markers_descr">Dislinda su nùmeru de indicadores de diretzione de ammustrare:</string>
+    <string name="active_markers_descr">Dislinda su nùmeru de indicadores de diretzione.</string>
     <string name="shared_string_more_without_dots">Àteru</string>
     <string name="looking_for_tracks_with_waypoints">Chirchende rastas cun puntos de coladòrgiu</string>
     <string name="empty_state_osm_edits">Crea o modìfica ogetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Crea o modìfica PDI OSM, aberi o cummenta notas OSM, e contribui cun documentos GPX registrados.</string>
+    <string name="empty_state_osm_edits_descr">Crea o modìfica PDI OSM, aberi o cummenta sas notas OSM, e contribui cun documentos GPX registrados.</string>
     <string name="shared_string_deleted">Iscantzelladu</string>
     <string name="shared_string_edited">Modificadu</string>
     <string name="shared_string_added">Annantu</string>
@@ -2611,7 +2611,7 @@
     <string name="one_tap_active_descr">Incarca in unu marcadore in sa mapa pro lu moere in sa prima positzione in sos marcadores ativos, chene abèrrere su menù contestuale.</string>
     <string name="one_tap_active">\'Un\'incarcu\' ativu</string>
     <string name="empty_state_av_notes">Piga notas!</string>
-    <string name="empty_state_av_notes_desc">Annanghe notas sonoras, vìdeos o fotografias a cada puntu in sa mapa, impreende su widget o su menù contestuale.</string>
+    <string name="empty_state_av_notes_desc">Annanghe notas sonoras, vìdeos o fotografias a cada puntu in sa mapa, impreende su widget o sos menùs cuntestuales.</string>
     <string name="notes_by_date">Notas sonoras/in vìdeu pro data</string>
     <string name="by_date">Pro data</string>
     <string name="by_type">Pro casta</string>
@@ -3475,8 +3475,8 @@
     <string name="monitoring_min_accuracy_descr_recommendation">Impòsitu: est prus difìtzile a intzertare ite at a èssere registradu e ite nono. Diat èssere mègius a istudare custu filtru.</string>
     <string name="live_monitoring_time_buffer">Durada de sa memòria tampone (buffer)</string>
     <string name="rearrange_categories">Torra a ordinare sas categorias</string>
-    <string name="create_custom_categories_list_promo">Modìfica s\'òrdine de sa lista e cua sas categorias chi non ti serbint. Podes importare o esportare totu sas modìficas cun sos profilos.</string>
-    <string name="add_new_custom_category_button_promo">Podes annànghere una categoria personalizada noa ischertende·nde una o unas cantas pagas chi ti serbint.</string>
+    <string name="create_custom_categories_list_promo">Modìfica s\'òrdine de sa lista e cua sas categorias. Podes importare o esportare totu sas modìficas cun sos profilos.</string>
+    <string name="add_new_custom_category_button_promo">Podes annànghere una categoria personalizada noa ischertende·nde una o prus de una.</string>
     <string name="shared_string_available">Disponìbile</string>
     <string name="add_custom_category">Annanghe una categoria personalizada</string>
     <string name="rendering_attr_streetLightingNight_name">Ammustra a de note ebbia</string>
@@ -3486,7 +3486,7 @@
     <string name="sunset_at">Intrinada a sas %1$s</string>
     <string name="sunrise_at">Arbèschida a sas %1$s</string>
     <string name="monitoring_min_accuracy_descr">Custu at a registrare petzi sos puntos medidos cun un\'acuradesa mìnima indicada (in metros/pees, comente benit sinnaladu dae Android pro su chipset tuo). S\'acuradesa si riferit a sa dispersione de movimentos torrados a repìtere, e no est ligada diretamente a sa pretzisione, chi definit canto sa medida tua est a curtzu a sa positzione bera tua.</string>
-    <string name="reset_to_default_category_button_promo">Ripristinende sos valores predefinidos as a torrare a impostare s\'istadu predefinidu a pustis de s\'installatzione.</string>
+    <string name="reset_to_default_category_button_promo">\'Riprìstina sos valores predefinidos\' at a torrare a impostare s\'òrdine predefinidu de installatzione.</string>
     <string name="accessibility_mode_disabled">Sa modalidade de atzessibilidade est istudada in su sistema Android tuo.</string>
     <string name="use_system_screen_timeout">Imprea su tempus de isetu de s\'ischermu de su sistema</string>
     <string name="use_system_screen_timeout_promo">Disabilitadu in sas impostatziones predefinidas. Si OsmAnd est traballende in primu pranu, s\'ischermu non s\'at a mòrrere.
@@ -3678,7 +3678,7 @@
 \n
 \nPodes amministrare e annullare sos abbonamentos tuos intrende in sas impostatziones de Google Play tuas.</string>
     <string name="search_poi_types">Chirca castas de PDI</string>
-    <string name="search_poi_types_descr">Cumbina castas de PDI de catogorias diferentes. Incarchende su butone as a ischertare totu, e s\'ala a manca seletzionat una categoria.</string>
+    <string name="search_poi_types_descr">Cumbina castas de PDI de catogorias diferentes. Incarca su butone pro ischertare totu, incarca in s\'ala a manca pro ischertare una categoria.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="tracker_item">Arrastadore de OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
@@ -3715,7 +3715,7 @@
     <string name="additional_actions_descr">Podes atzèdere a custas atziones incarchende su butone \"%1$s\".</string>
     <string name="quick_action_transport_hide">Cua su trasportu pùblicu</string>
     <string name="quick_action_transport_show">Ammustra su trasportu pùblicu</string>
-    <string name="quick_action_show_hide_transport">Ammustra / cua su trasportu pùblicu</string>
+    <string name="quick_action_show_hide_transport">Ammustra/cua su trasportu pùblicu</string>
     <string name="quick_action_transport_descr">Butone pro ammustrare o cuare su trasportu pùblicu in sa mapa.</string>
     <string name="create_edit_poi">Crea / Modìfica unu PDI</string>
     <string name="parking_positions">Logos de parchègiu</string>
