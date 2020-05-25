@@ -455,7 +455,7 @@
     <string name="auto_follow_location_enabled">Автоцентр просмотра карты во время использования.</string>
     <string name="shared_string_gpx_route">Маршрут GPX</string>
     <string name="poi_query_by_name_matches_categories">Найдено несколько связанных категорий POI.</string>
-    <string name="data_to_search_poi_not_available">Загрузите данные для автономного поиска POI.</string>
+    <string name="data_to_search_poi_not_available">Загрузите данные для локального поиска POI.</string>
     <string name="poi_filter_by_name">Поиск по имени</string>
     <string name="old_poi_file_should_be_deleted">Данные POI «%1$s» устарели и могут быть удалены.</string>
     <string name="update_poi_file_not_found">Файл с обновляемыми POI не найден и не может быть создан.</string>
@@ -786,12 +786,12 @@
     <string name="searching_address">Поиск адреса…</string>
     <string name="search_osm_nominatim">Поиск адреса в OSM Nominatim</string>
     <string name="hint_search_online">Онлайн поиск: Номер дома, улица, Город</string>
-    <string name="search_offline_address">Автономный поиск</string>
+    <string name="search_offline_address">Локальный поиск</string>
     <string name="search_online_address">Онлайн поиск</string>
     <string name="max_level_download_tile">Уровень детализации</string>
     <string name="max_level_download_tile_descr">Выберите максимальный масштаб для загрузки тайлов карт из интернета.</string>
     <string name="route_general_information">Общая протяжённость = %1$s, время в пути = %2$d ч. %3$d м.</string>
-    <string name="router_service_descr">Онлайн или автономный сервис для прокладки маршрута.</string>
+    <string name="router_service_descr">Онлайн или локальный сервис для прокладки маршрута.</string>
     <string name="router_service">Прокладка маршрута</string>
     <string name="sd_dir_not_accessible">Папка для хранения данных на SD-карте недоступна!</string>
     <string name="download_question">Загрузить {0} — {1}\?</string>
@@ -1374,7 +1374,7 @@
     <string name="guidance_preferences_descr">Настройки навигации</string>
     <string name="routing_preferences_descr">Настройки маршрутизации</string>
     <string name="app_mode_truck">Грузовик</string>
-    <string name="calculate_osmand_route_gpx">Автономно рассчитать маршрут OsmAnd</string>
+    <string name="calculate_osmand_route_gpx">Локально рассчитать маршрут OsmAnd</string>
     <string name="copying_osmand_files">Копирование файлов данных OsmAnd…</string>
     <string name="speech_rate">Скорость произношения</string>
     <string name="app_modes_choose_descr">Выберите отображаемые профили.</string>
@@ -1796,7 +1796,7 @@
     <string name="welcome_select_region">Для правильного отображения дорожных знаков и правил, пожалуйста, выберите свой регион вождения:</string>
     <string name="welcome_header">Добро пожаловать</string>
     <string name="mark_to_delete">Отметить для удаления</string>
-    <string name="welcome_text">OsmAnd обеспечивает глобальный автономный просмотр карт и автономную навигацию.</string>
+    <string name="welcome_text">OsmAnd обеспечивает глобальный локальный просмотр карт и автономную навигацию.</string>
     <string name="osm_changes_added_to_local_edits">OSM изменения добавлены в локальную базу данных</string>
     <string name="confirm_usage_speed_cameras">Во многих странах (Германия, Франция, Италия и другие) использование предупреждения о камерах контроля скорости не допускается законом. OsmAnd не несёт никакой ответственности, если вы нарушите закон. Пожалуйста, нажмите «Да» только если вы имеете право использовать эту функцию.</string>
     <string name="agps_info">Информация A-GPS</string>
@@ -3512,7 +3512,7 @@
     <string name="import_profile">Импорт профиля</string>
     <string name="monitoring_prefs_descr">Навигация, точность ведения журнала</string>
     <string name="multimedia_notes_prefs_descr">Размер изображения, качество звука и видео</string>
-    <string name="osm_editing_prefs_descr">Логин, пароль, автономное редактирование</string>
+    <string name="osm_editing_prefs_descr">Логин, пароль, локальное редактирование</string>
     <string name="accessibility_prefs_descr">Выберите значок, цвет и имя</string>
     <string name="live_monitoring_descr">Позволяет обмениваться текущим местоположением с помощью записи поездки.</string>
     <string name="live_monitoring">Онлайн-отслеживание</string>
