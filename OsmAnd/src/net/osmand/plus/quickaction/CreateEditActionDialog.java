@@ -1,7 +1,6 @@
 package net.osmand.plus.quickaction;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -34,13 +33,14 @@ import net.osmand.plus.activities.MapActivity;
 
 import java.util.List;
 
-import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmActionDeleteDialog;
+import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmDeleteAnActionBottomSheet;
 
 /**
  * Created by rosty on 12/27/16.
  */
 
-public class CreateEditActionDialog extends DialogFragment implements CallbackWithObject<Object> {
+public class CreateEditActionDialog extends DialogFragment
+        implements CallbackWithObject<Object>, ConfirmationBottomSheet.OnConfirmButtonClickListener {
 
     public static final String TAG = CreateEditActionDialog.class.getSimpleName();
 
@@ -181,19 +181,9 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
             item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
-                    Context ctx = getContext();
-                    if (ctx != null) {
-                        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                quickActionRegistry.deleteQuickAction(action);
-                                quickActionRegistry.notifyUpdates();
-
-                                dialog.dismiss();
-                                dismiss();
-                            }
-                        };
-                        showConfirmActionDeleteDialog(ctx, action, !isLightContent, listener);
-                    }
+                    showConfirmDeleteAnActionBottomSheet(
+                            getActivity(), CreateEditActionDialog.this,
+                            action, false);
                     return true;
                 }
             });
@@ -295,5 +285,12 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
             ((SwitchableAction) action).onItemsSelected(getContext(), (List) result);
         }
         return false;
+    }
+
+    @Override
+    public void onConfirmButtonClick() {
+        quickActionRegistry.deleteQuickAction(action);
+        quickActionRegistry.notifyUpdates();
+        dismiss();
     }
 }

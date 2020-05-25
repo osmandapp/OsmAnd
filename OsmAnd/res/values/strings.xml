@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_selected_n_with_colon">Selected: %d</string>
+    <string name="delete_all_actions_message_q">Are you sure you want to irrevocably delete %d quick actions?</string>
+    <string name="shared_string_delete_all_q">Delete all?</string>
+    <string name="export_import_quick_actions_with_profiles_promo">You can Export or Import quick actions with application profiles.</string>
     <string name="unsupported_type_error">Unsupported type</string>
     <string name="index_item_world_basemap_detailed">World overview map (detailed)</string>
     <string name="profiles_for_action_not_found">Could not find any such profiles.</string>

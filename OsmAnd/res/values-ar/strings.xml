@@ -2107,8 +2107,7 @@
     <string name="quick_action_add_favorite">إضافة للمفضلة</string>
     <string name="dialog_add_action_title">إضافة إجراء</string>
     <string name="quick_actions_delete">حذف إجراء</string>
-    <string name="quick_actions_delete_text">هل تريد حذف الإجراء
-\n \"%s\" ؟</string>
+    <string name="quick_actions_delete_text">هل تريد حذف الإجراء\n \"%s\" ؟</string>
     <string name="shared_string_action_name">اسم الإجراء</string>
     <string name="quick_action_add_osm_bug">إضافة خطأ إلى OSM</string>
     <string name="quick_favorites_show_favorites_dialog">عرض مربع حوار الأماكن المفضلة</string>
