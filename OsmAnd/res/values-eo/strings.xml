@@ -1177,7 +1177,7 @@
     <string name="route_roundabout">Trafikcirklo: enveturu %1$d-an elveturejon</string>
     <string name="route_kl">Veturu je maldekstra koridoro</string>
     <string name="route_kr">Veturu je dekstra koridoro</string>
-    <string name="map_widget_battery">Pila nivelo</string>
+    <string name="map_widget_battery">Nivelo de baterio</string>
     <string name="move_marker_bottom_sheet_title">Movu la mapon por ŝanĝi pozicion de marko</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="rendering_attr_noPolygons_name">Pluranguloj</string>
@@ -3054,8 +3054,8 @@
     <string name="osmand_routing_promo">Vi povas aldoni propran modifitan version de la dosiero routing.xml al “..osmand/routing”</string>
     <string name="app_mode_skiing">Skiado</string>
     <string name="base_profile_descr_ski">Skiado</string>
-    <string name="show_compass_ruler">Montri mezurilon de kompaso</string>
-    <string name="hide_compass_ruler">Kaŝi mezurilon de kompaso</string>
+    <string name="show_compass_ruler">Montri kompasrozon</string>
+    <string name="hide_compass_ruler">Kaŝi kompasrozon</string>
     <string name="select_icon_profile_dialog_title">Elekti emblemon</string>
     <string name="settings_routing_mode_string">Reĝimo: %s</string>
     <string name="settings_derived_routing_mode_string">Reĝimo de uzanto bazita sur %s</string>
@@ -3470,8 +3470,8 @@
     <string name="shared_string_available">Disponeblaj</string>
     <string name="add_custom_category">Aldoni propran kategorion</string>
     <string name="rendering_attr_streetLightingNight_name">Montri nur dum nokto</string>
-    <string name="plugin_prefs_reset_successful">Rekomencigis ĉiujn agordojn pri kromprogramoj.</string>
-    <string name="profile_prefs_reset_successful">Rekomencigis ĉiujn agordojn pri profiloj.</string>
+    <string name="plugin_prefs_reset_successful">Restarigis ĉiujn agordojn pri kromprogramoj al implicitaj valoroj.</string>
+    <string name="profile_prefs_reset_successful">Restarigis ĉiujn agordojn pri profiloj al implicitaj valoroj.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Sunsubiro je %1$s</string>
     <string name="sunrise_at">Sunleviĝo je %1$s</string>
@@ -3480,14 +3480,14 @@
     <string name="live_monitoring_tracking_interval">Registrada intertempo</string>
     <string name="search_offline_geo_error">Ne povas pritrakti koordinat‑peton “%s”.</string>
     <string name="rearrange_categories">Reordigi kategoriojn</string>
-    <string name="create_custom_categories_list_promo">Ŝanĝi ordigon de la listo, kaŝi malnecesajn kategoriojn. Vi povas enporti aŭ elporti ĉiujn ŝanĝojn kun profiloj.</string>
-    <string name="add_new_custom_category_button_promo">Vi povas aldoni novan propran kategorion per elekti kelka(j)n bezonata(j)n kategorio(j)n.</string>
-    <string name="reset_to_default_category_button_promo">Per restarigi implicitajn agordojn, ordigo de elementoj revenos al la postinstalada stato.</string>
+    <string name="create_custom_categories_list_promo">Ŝanĝi ordigon de la listo, kaŝi kategoriojn. Vi povas enporti aŭ elporti ĉiujn ŝanĝojn kun profiloj.</string>
+    <string name="add_new_custom_category_button_promo">Vi povas aldoni novan propran kategorion per elekti unu aŭ pli kategoriojn.</string>
+    <string name="reset_to_default_category_button_promo">Frapetu “restarigi implicitajn” por ke la ordigo de elementoj revenu al la postinstalada stato.</string>
     <string name="accessibility_mode_disabled">Alirebleca reĝimo malaktivigita en Android.</string>
     <string name="use_system_screen_timeout">Malŝalti ekranon laŭ sistemaj agordoj</string>
-    <string name="use_system_screen_timeout_promo">Implicite neaktiva, se OsmAnd laboras malfone, la ekrano ne malŝaltos aŭtomate.
-\n
-\nAktivigu tion ĉi por ke OsmAnd uzu sisteman agordon pri malŝalti ekranon.</string>
+    <string name="use_system_screen_timeout_promo">Implicite neaktiva: se OsmAnd laboras malfone, la ekrano ne malŝaltos aŭtomate. 
+\n 
+\nAktivigu tion ĉi por ke OsmAnd uzu la sisteman agordon pri malŝalti ekranon.</string>
     <string name="clear_recorded_data">Forviŝi registritajn datumojn</string>
     <string name="release_3_6">• profiloj: eblo ŝanĝi ilian ordigon, agordi emblemon por mapo, ŝanĝi ĉiujn agordojn por bazaj profiloj kaj restarigi implicitajn valorojn 
 \n 
