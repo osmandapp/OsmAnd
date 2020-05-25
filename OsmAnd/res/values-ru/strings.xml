@@ -3429,9 +3429,9 @@
     <string name="permission_is_required">Для использования этой функции требуется разрешение.</string>
     <string name="monitoring_min_speed_descr">Это низкоскоростной фильтр отсечки, чтобы не записывать точки ниже определённой скорости. Это может сделать записанные треки более гладкими при просмотре на карте.</string>
     <string name="rearrange_categories">Упорядочить категории</string>
-    <string name="create_custom_categories_list_promo">Изменяйте порядок сортировки списка, скрывайте ненужные категории. Вы можете импортировать или экспортировать все изменения с профилями.</string>
-    <string name="add_new_custom_category_button_promo">Вы можете добавить новую пользовательскую категорию, выбрав одну или несколько необходимых категорий.</string>
-    <string name="reset_to_default_category_button_promo">Сброс к настройкам по умолчанию приведёт к сбросу порядка сортировки к настройкам по умолчанию после установки.</string>
+    <string name="create_custom_categories_list_promo">Изменяйте порядок сортировки списка, скрывайте категории. Вы можете импортировать или экспортировать все изменения с профилями.</string>
+    <string name="add_new_custom_category_button_promo">Вы можете добавить новую пользовательскую категорию, выбрав одну или несколько категорий.</string>
+    <string name="reset_to_default_category_button_promo">Сброс к настройкам по умолчанию приведёт к возврату порядка сортировки по умолчанию.</string>
     <string name="add_custom_category">Добавить пользовательскую категорию</string>
     <string name="rendering_attr_streetLightingNight_name">Показывать только ночью</string>
     <string name="plugin_prefs_reset_successful">Все настройки плагина восстановлены до состояния по умолчанию.</string>
@@ -3441,8 +3441,8 @@
     <string name="sunrise_at">Восход в %1$s</string>
     <string name="accessibility_mode_disabled">Режим специальных возможностей отключён в системе.</string>
     <string name="use_system_screen_timeout">Использовать системную блокировку экрана</string>
-    <string name="use_system_screen_timeout_promo">По умолчанию отключено, если OsmAnd работает на переднем плане, экран не отключается.
-\n
+    <string name="use_system_screen_timeout_promo">По умолчанию отключено: пока OsmAnd работает на переднем плане, экран не отключается. 
+\n 
 \nЕсли включено, OsmAnd будет использовать системные настройки блокировки экрана.</string>
     <string name="clear_recorded_data">Очистить записанные данные</string>
     <string name="release_3_6">• Профили: теперь вы можете изменить порядок, установить значок для карты, изменить все настройки для базовых профилей и вернуть их к настройкам по умолчанию 
