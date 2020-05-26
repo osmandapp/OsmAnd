@@ -115,7 +115,7 @@
     <string name="routing_attr_driving_style_balance_name">Сбалансированный</string>
     <string name="routing_attr_driving_style_safety_name">Предпочитать переулки</string>
     <string name="relief_smoothness_factor_descr">Предпочтительный рельеф: равнинный или холмистый.</string>
-    <string name="shared_string_slope">Уклон</string>
+    <string name="shared_string_slope">Склон</string>
     <string name="add_new_folder">Добавить новую папку</string>
     <string name="points_delete_multiple_succesful">Точки удалены.</string>
     <string name="points_delete_multiple">Вы уверены, что хотите удалить %1$d точки\?</string>
