@@ -82,6 +82,8 @@ public class SQLiteTileSource implements ITileSource {
 					if (is.getName().equalsIgnoreCase(sourceName)) {
 						base = is;
 						urlTemplate = is.getUrlTemplate();
+						expirationTimeMillis = is.getExpirationTimeMillis();
+						inversiveZoom = is.getInversiveZoom();
 						break;
 					}
 				}
@@ -336,6 +338,8 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void updateFromTileSourceTemplate(TileSourceTemplate r) {
+		db = ctx.getSQLiteAPI().getOrCreateDatabase(
+				ctx.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, false);
 		if (!onlyReadonlyAvailable) {
 			int maxZoom = r.getMaximumZoomSupported();
 			int minZoom = r.getMinimumZoomSupported();
@@ -347,10 +351,10 @@ public class SQLiteTileSource implements ITileSource {
 			if (getUrlTemplate() != null && !getUrlTemplate().equals(r.getUrlTemplate())) {
 				db.execSQL("update info set " + URL + " = '" + r.getUrlTemplate() + "'");
 			}
-			if (r.getMinimumZoomSupported() != minZoom) {
+			if (minZoom != this.minZoom) {
 				db.execSQL("update info set " + MIN_ZOOM + " = '" + minZoom + "'");
 			}
-			if (r.getMaximumZoomSupported() != maxZoom) {
+			if (maxZoom != this.maxZoom) {
 				db.execSQL("update info set " + MAX_ZOOM + " = '" + maxZoom + "'");
 			}
 			if (r.isEllipticYTile() != isEllipticYTile()) {

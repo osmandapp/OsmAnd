@@ -789,4 +789,16 @@
     <style name="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:padding">0dp</item>
     </style>
+
+    <style name="InputLayoutStyle.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:minHeight">@dimen/favorites_list_item_height</item>
+        <item name="android:textColorHint">?android:textColorSecondary</item>
+        <item name="boxBackgroundColor">@color/input_layout_bg_color</item>
+        <item name="errorEnabled">true</item>
+        <item name="helperTextEnabled">true</item>
+        <item name="helperTextTextColor">?android:textColorSecondary</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="hintTextColor">?android:textColorSecondary</item>
+    </style>
+
 </resources>

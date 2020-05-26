@@ -63,6 +63,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
@@ -81,7 +82,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 
-public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents {
+public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents, EditMapSourceDialogFragment.OnMapSourceUpdateListener {
 	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 
@@ -242,19 +243,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			confirm.setMessage(getString(R.string.clear_confirmation_msg, fn));
 			confirm.show();
 		} else if (resId == R.string.shared_string_edit) {
-			OsmandRasterMapsPlugin.defineNewEditLayer(getDownloadActivity(),
-					new ResultMatcher<TileSourceManager.TileSourceTemplate>() {
-				@Override
-				public boolean isCancelled() {
-					return false;
-				}
-
-				@Override
-				public boolean publish(TileSourceManager.TileSourceTemplate object) {
-					getDownloadActivity().reloadLocalIndexes();
-					return true;
-				}
-					}, info.getFileName());
+			OsmandRasterMapsPlugin.defineNewEditLayer(getDownloadActivity().getSupportFragmentManager(), this, info.getFileName());
 		} else if (resId == R.string.local_index_mi_restore) {
 			new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.RESTORE_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 		} else if (resId == R.string.shared_string_delete) {
@@ -339,7 +328,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	private static File renameSQLiteFile(OsmandApplication ctx, File source, String newName,
+	public static File renameSQLiteFile(OsmandApplication ctx, File source, String newName,
 	                                     RenameCallback callback) {
 		File dest = checkRenamePossibility(ctx, source, newName, false);
 		if (dest == null) {
@@ -405,6 +394,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		return dest;
 	}
 
+	@Override
+	public void onMapSourceUpdated() {
+		getDownloadActivity().reloadLocalIndexes();
+	}
 
 	public class LoadLocalIndexTask extends AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>>
 			implements AbstractLoadLocalIndexTask {

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="?attr/actionModeBackground"
+        android:theme="?attr/toolbar_theme"
+        app:title="@string/edit_online_source"
+        osmand:titleTextColor="?android:textColorPrimary">
+
+        <ImageView
+            android:id="@+id/toolbar_action"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
+            android:layout_gravity="end"
+            android:layout_marginStart="@dimen/content_padding"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            tools:src="@drawable/ic_action_help" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/name_input_layout"
+                style="@style/InputLayoutStyle.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/content_padding"
+                android:hint="@string/shared_string_name"
+                app:helperText="@string/online_map_name_helper_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/url_input_layout"
+                style="@style/InputLayoutStyle.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginBottom="@dimen/content_padding"
+                android:hint="@string/edit_tilesource_url_to_load"
+                app:helperText="@string/online_map_url_helper_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/url_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/divider_color_basic" />
+
+            <LinearLayout
+                android:id="@+id/content_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/divider_color_basic" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/bg_color"
+        android:minHeight="@dimen/dialog_button_ex_height"
+        android:paddingStart="@dimen/content_padding"
+        android:paddingTop="@dimen/content_padding_small"
+        android:paddingEnd="@dimen/content_padding"
+        android:paddingBottom="@dimen/content_padding_small">
+
+        <FrameLayout
+            android:id="@+id/save_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_button_height"
+            android:layout_gravity="center"
+            android:background="?attr/dlg_btn_primary">
+
+            <TextView
+                android:id="@+id/save_button_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="@string/shared_string_save"
+                android:textColor="?attr/dlg_btn_primary_text" />
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
