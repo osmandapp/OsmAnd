@@ -415,7 +415,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 
 		DashboardActionButton myLocationButton = new DashboardActionButton();
-		myLocationButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.map_my_location);
+		myLocationButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.ic_my_location);
 		myLocationButton.text = mapActivity.getString(R.string.map_widget_back_to_loc);
 		myLocationButton.onClickListener = new View.OnClickListener() {
 			@Override
@@ -430,7 +430,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		};
 
 		DashboardActionButton navigateButton = new DashboardActionButton();
-		navigateButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.map_start_navigation);
+		navigateButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.ic_action_start_navigation);
 		navigateButton.text = mapActivity.getString(R.string.follow);
 		navigateButton.onClickListener = new View.OnClickListener() {
 			@Override
@@ -441,7 +441,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		};
 
 		DashboardActionButton routeButton = new DashboardActionButton();
-		routeButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.map_directions);
+		routeButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.ic_action_gdirections_dark);
 		routeButton.text = mapActivity.getString(R.string.layer_route);
 		routeButton.onClickListener = new View.OnClickListener() {
 			@Override

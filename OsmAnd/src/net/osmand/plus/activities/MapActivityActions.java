@@ -368,7 +368,7 @@ public class MapActivityActions implements DialogProvider {
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.shared_string_actions, mapActivity)
 				.setId(MAP_CONTEXT_MENU_MORE_ID)
-				.setIcon(R.drawable.map_overflow_menu_white)
+				.setIcon(R.drawable.ic_actions_menu)
 				.setOrder(40)
 				.createItem());
 
@@ -776,7 +776,7 @@ public class MapActivityActions implements DialogProvider {
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.home, mapActivity)
 				.setId(DRAWER_DASHBOARD_ID)
-				.setIcon(R.drawable.map_dashboard)
+				.setIcon(R.drawable.ic_dashboard)
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
