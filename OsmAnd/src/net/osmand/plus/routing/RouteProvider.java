@@ -19,15 +19,15 @@ import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
@@ -173,12 +173,14 @@ public class RouteProvider {
 			return passWholeRoute;
 		}
 
-		public GPXRouteParams build(Location start, OsmandSettings settings) {
+		public GPXRouteParams build(OsmandApplication app) {
 			GPXRouteParams res = new GPXRouteParams();
-			res.prepareGPXFile(this);
-//			if (passWholeRoute && start != null) {
-//				res.points.add(0, start);
-//			}
+			try {
+				res.prepareGPXFile(this);
+			} catch (RuntimeException e) {
+				log.error(e.getMessage(), e);
+				app.showShortToastMessage(app.getString(R.string.gpx_parse_error) + " " + e.getMessage());
+			}
 			return res;
 		}
 
@@ -190,9 +192,8 @@ public class RouteProvider {
 			return file;
 		}
 
-		public List<Location> getPoints() {
-			GPXRouteParams copy = new GPXRouteParams();
-			copy.prepareGPXFile(this);
+		public List<Location> getPoints(OsmandApplication app) {
+			GPXRouteParams copy = build(app);
 			return copy.getPoints();
 		}
 	}

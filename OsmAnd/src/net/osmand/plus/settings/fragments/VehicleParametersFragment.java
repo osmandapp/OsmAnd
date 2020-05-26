@@ -7,13 +7,13 @@ import android.widget.ImageView;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.router.GeneralRouter;
 
@@ -123,7 +123,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(GeneralRouter.DEFAULT_SPEED)) {
 			RouteService routeService = getSelectedAppMode().getRouteService();
-			showSeekbarSettingsDialog(getActivity(), routeService == RouteService.STRAIGHT, getSelectedAppMode());
+			boolean defaultSpeedOnly = routeService == RouteService.STRAIGHT || routeService == RouteService.DIRECT_TO;
+			showSeekbarSettingsDialog(getActivity(), defaultSpeedOnly, getSelectedAppMode());
 			return true;
 		}
 		return super.onPreferenceClick(preference);
