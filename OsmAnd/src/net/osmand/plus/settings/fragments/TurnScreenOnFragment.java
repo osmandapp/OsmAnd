@@ -90,11 +90,12 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	}
 
 	private void setupTurnScreenOnTimePref() {
-		Integer[] entryValues = new Integer[] {0, 5, 10, 15, 20, 30, 45, 60};
+		Integer[] entryValues = new Integer[] {-1, 0, 5, 10, 15, 20, 30, 45, 60};
 		String[] entries = new String[entryValues.length];
 
-		entries[0] = getString(R.string.shared_string_never);
-		for (int i = 1; i < entryValues.length; i++) {
+		entries[0] = getString(R.string.shared_string_always);
+		entries[1] = getString(R.string.shared_string_never);
+		for (int i = 2; i < entryValues.length; i++) {
 			entries[i] = entryValues[i] + " " + getString(R.string.int_seconds);
 		}
 

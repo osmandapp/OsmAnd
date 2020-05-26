@@ -104,7 +104,8 @@ public class LockHelper implements SensorEventListener {
 
 	private void lock() {
 		releaseWakeLocks();
-		if (lockUIAdapter != null && isFollowingMode()) {
+		int unlockTime = turnScreenOnTime.get();
+		if (lockUIAdapter != null && isFollowingMode() && unlockTime != -1) {
 			lockUIAdapter.lock();
 		}
 	}
@@ -125,13 +126,19 @@ public class LockHelper implements SensorEventListener {
 				}
 			});
 		}
-		uiHandler.postDelayed(lockRunnable, millis);
+		if (millis > 0) {
+			uiHandler.postDelayed(lockRunnable, millis);
+		}
 	}
 
 	private void unlockEvent() {
 		int unlockTime = turnScreenOnTime.get();
-		if (unlockTime > 0 && turnScreenOnEnabled.get()) {
-			timedUnlock(unlockTime * 1000L);
+		if (turnScreenOnEnabled.get()) {
+			if (unlockTime > 0) {
+				timedUnlock(unlockTime * 1000L);
+			} else if (unlockTime == -1) {
+				timedUnlock(-1);
+			}
 		}
 	}
 
