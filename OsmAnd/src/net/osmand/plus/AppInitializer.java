@@ -554,7 +554,7 @@ public class AppInitializer implements IProgress {
 									customConfigs.put(fileName, builder);
 								} catch (XmlPullParserException | IOException e) {
 									Algorithms.removeAllFiles(f);
-									LOG.error(e);
+									LOG.error(e.getMessage(), e);
 								}
 							}
 						}
