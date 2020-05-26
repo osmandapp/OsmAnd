@@ -177,9 +177,9 @@ public class RouteProvider {
 			GPXRouteParams res = new GPXRouteParams();
 			try {
 				res.prepareGPXFile(this);
-			} catch (Exception e) {
-				log.error(e);
-				app.showShortToastMessage(app.getString(R.string.gpx_parse_error));
+			} catch (RuntimeException e) {
+				log.error(e.getMessage(), e);
+				app.showShortToastMessage(app.getString(R.string.gpx_parse_error) + " " + e.getMessage());
 			}
 			return res;
 		}
