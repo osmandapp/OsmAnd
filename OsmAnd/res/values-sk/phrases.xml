@@ -1475,13 +1475,13 @@
     <string name="poi_service_electrical">Oprava elektrických vozidiel</string>
     <string name="poi_motorcycle_repair">Oprava motocyklov</string>
     <string name="poi_self_service_yes">Áno</string>
-    <string name="poi_self_service_no">Bez samoobsluhy</string>
+    <string name="poi_self_service_no">Nie</string>
     <string name="poi_automated_yes">Áno</string>
     <string name="poi_automated_no">Neautomatizované</string>
     <string name="poi_full_service_yes">Všetky služby</string>
     <string name="poi_brushless_yes">Áno</string>
     <string name="poi_brushless_no">S kefami</string>
-    <string name="poi_car_wash_no">Bez autoumyvárne</string>
+    <string name="poi_car_wash_no">Nie</string>
     <string name="poi_aeroway_fuel">Čerpacia stanica pre lietadlá</string>
     <string name="poi_public_bath">Verejná sprcha</string>
     <string name="poi_male_yes">Muži</string>
@@ -3361,7 +3361,7 @@
     <string name="poi_surface_clay">Antuka</string>
     <string name="poi_source_biomass">Zdroj energie: biomasa</string>
     <string name="poi_snowmobile_filter">Prístup snežným skútrom</string>
-    <string name="poi_access_bus">"Prístup  autobusom"</string>
+    <string name="poi_access_bus">Prístup autobusom</string>
     <string name="poi_access_caravan">Prístup karavanom</string>
     <string name="poi_access_motorhome">Prístup obytným autom</string>
     <string name="poi_access_trailer">Prístup s autom s prívesom</string>

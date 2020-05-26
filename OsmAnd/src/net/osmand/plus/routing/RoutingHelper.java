@@ -1172,7 +1172,7 @@ public class RoutingHelper {
 			params.start = start;
 			params.end = end;
 			params.intermediates = intermediates;
-			params.gpxRoute = gpxRoute == null ? null : gpxRoute.build(start, settings);
+			params.gpxRoute = gpxRoute == null ? null : gpxRoute.build(app);
 			params.onlyStartPointChanged = onlyStartPointChanged;
 			if (recalculateCountInInterval < RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE
 					|| (gpxRoute != null && gpxRoute.isPassWholeRoute() && isDeviatedFromRoute)) {

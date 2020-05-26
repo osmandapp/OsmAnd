@@ -3632,4 +3632,15 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="custom_color">Kolore pertsonalizatua</string>
     <string name="extra_maps_menu_group">Mapa gehigarriak</string>
     <string name="download_unsupported_action">onartu gabeko ekintza %1$s</string>
+    <string name="create_edit_poi">Sortu / aldatu POIa</string>
+    <string name="parking_positions">Aparkaleku-posizioak</string>
+    <string name="add_edit_favorite">Gehitu / aldatu gogokoa</string>
+    <string name="reset_deafult_order">Berrezarri lehenetsitako ordena</string>
+    <string name="back_to_editing">Itzuli ediziora</string>
+    <string name="quick_action_switch_profile_descr">Ekintza botoiak hautatutako profilen artean txandakatzen du.</string>
+    <string name="shared_string_add_profile">Gehitu profila</string>
+    <string name="change_application_profile">Aldatu aplikazioaren profila</string>
+    <string name="profiles_for_action_not_found">Ezin izan dira profil horiek aurkitu.</string>
+    <string name="index_item_world_basemap_detailed">Munduaren gainbegirada mapa (xehetsua)</string>
+    <string name="unsupported_type_error">Onartu gabeko mota</string>
 </resources>

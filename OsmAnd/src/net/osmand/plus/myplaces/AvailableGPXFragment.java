@@ -784,7 +784,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			i++;
 		}
 		menuAdapter.addItem(itemBuilder.setTitleId(R.string.add_new_folder, app)
-				.setIcon(R.drawable.map_zoom_in).setTag(-1).createItem());
+				.setIcon(R.drawable.ic_zoom_in).setTag(-1).createItem());
 		final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		final ArrayAdapter<ContextMenuItem> listAdapter =
 				menuAdapter.createListAdapter(getActivity(), app.getSettings().isLightContent());

@@ -3628,4 +3628,18 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \nDurante la lettura potrai cambiare fra tutte le lingue disponibili.</string>
     <string name="developer_plugin">Plugin sviluppatore</string>
     <string name="shared_string_items">Oggetti</string>
+    <string name="quick_action_transport_hide">Nascondi i trasporti pubblici</string>
+    <string name="quick_action_transport_show">Mostra i trasporti pubblici</string>
+    <string name="quick_action_show_hide_transport">Mostra/nascondi i trasporti pubblici</string>
+    <string name="quick_action_transport_descr">Il pulsante mostra o nasconde nella mappa i trasporti pubblici.</string>
+    <string name="create_edit_poi">Crea/Modifica PDI</string>
+    <string name="parking_positions">Posizione di parcheggio</string>
+    <string name="add_edit_favorite">Aggiungi/Modifica Preferito</string>
+    <string name="reset_deafult_order">Ripristina l\'ordine preimpostato degli oggetti</string>
+    <string name="back_to_editing">Ritorna alla modifica</string>
+    <string name="quick_action_switch_profile_descr">Il pulsante azione cambia fra i profili selezionati.</string>
+    <string name="shared_string_add_profile">Aggiungi profilo</string>
+    <string name="change_application_profile">Cambia il profilo dell\'app</string>
+    <string name="profiles_for_action_not_found">Non è possibile trovare alcun profilo.</string>
+    <string name="index_item_world_basemap_detailed">Mappa mondiale generale (dettagliata)</string>
 </resources>

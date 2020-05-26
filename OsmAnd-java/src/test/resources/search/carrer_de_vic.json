@@ -1,0 +1,6956 @@
+{
+  "settings": {
+    "lat": "41.42389",
+    "lon": "1.96645",
+    "radiusLevel": 1,
+    "totalLimit": -1,
+    "lang": "",
+    "transliterateIfMissing": false,
+    "emptyQueryAllowed": false,
+    "sortByName": false
+  },
+  "phrase": "carrer de Vic, Sant Bartomeu del grau",
+  "results": [
+    "Carrer de Sant Bartomeu del Grau, Vic",
+    "Carrer de Vic, Sant Bartomeu del Grau",
+    "carrer Ponent, Sant Bartomeu del Grau",
+    "Carrer Pla de l'Oratori, Sant Bartomeu del Grau",
+    "carrer de Dalt, Sant Bartomeu del Grau",
+    "Carrer de la Migjorn, Sant Bartomeu del Grau",
+    "Carrer de la Tramuntana, Sant Bartomeu del Grau",
+    "Carrer de la Codina (Xalet Mas Reig), Sant Bartomeu del Grau",
+    "Carrer de Sant Bartomeu, Sant Cugat del Vallès",
+    "Carretera de Sant Bartomeu del Grau, Muntanyola",
+    "Carretera de Sant Bartomeu del Grau, Sant Bartomeu del Grau",
+    "Carretera de Sant Bartomeu, Sant Bartomeu del Grau",
+    "Carretera de Sant Bartomeu del Grau, Xalet Mas Reig",
+    "Camí de St. Bartomeu al Sorreig (Xalet Mas Reig), Sant Bartomeu del Grau",
+    "Carrer Tres Creus, Sant Bartomeu del Grau",
+    "Carrer del Mig, Sant Bartomeu del Grau",
+    "carrer Vell, Sant Bartomeu del Grau",
+    "Carrer Nou, Sant Bartomeu del Grau"
+  ],
+  "amenities": [
+    {
+      "name": "Collada de Sant Bartomeu",
+      "lat": "42.13254",
+      "lon": "2.36052",
+      "id": 7047523056,
+      "subType": "saddle",
+      "type": "natural",
+      "additionalInfo": {
+        "ele": "1289"
+      }
+    },
+    {
+      "name": "Esgèsia de Sant Bartomeu",
+      "lat": "41.26087",
+      "lon": "1.43803",
+      "id": 626076983,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Esgèsia de Sant Bartomeu",
+      "lat": "41.26087",
+      "lon": "1.43803",
+      "id": 626076983,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.16079",
+      "lon": "0.92000",
+      "id": 773636589,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_chapel": "chapel",
+        "abandoned": "yes",
+        "denomination_roman_catholic": "roman_catholic",
+        "religion_christian": "christian",
+        "ruins": "yes"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.16079",
+      "lon": "0.92000",
+      "id": 773636589,
+      "subType": "abandoned_poi",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_chapel": "chapel",
+        "abandoned": "yes",
+        "denomination_roman_catholic": "roman_catholic",
+        "religion_christian": "christian",
+        "ruins": "yes"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.16079",
+      "lon": "0.92000",
+      "id": 773636589,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_chapel": "chapel",
+        "abandoned": "yes",
+        "denomination_roman_catholic": "roman_catholic",
+        "religion_christian": "christian",
+        "ruins": "yes"
+      }
+    },
+    {
+      "name": "Esglèsia de Sant Bartomeu",
+      "lat": "41.24611",
+      "lon": "1.48642",
+      "id": 589407255,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Església de Sant Bartomeu",
+      "lat": "42.12274",
+      "lon": "2.96206",
+      "id": 594632519,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Església de Sant Bartomeu",
+      "lat": "42.12274",
+      "lon": "2.96206",
+      "id": 594632519,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Carretera de Sant Bartomeu",
+      "lat": "41.95210",
+      "lon": "2.23660",
+      "id": 192305229,
+      "subType": "bridge",
+      "type": "man_made",
+      "additionalInfo": {
+        "bridge_car": "yes",
+        "ref": "BV-4601"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.20114",
+      "lon": "2.19935",
+      "id": 1199378759,
+      "subType": "building",
+      "type": "man_made"
+    },
+    {
+      "name": "riera de Sant Bartomeu",
+      "lat": "41.93689",
+      "lon": "2.17600",
+      "id": 761300829,
+      "subType": "stream",
+      "type": "natural"
+    },
+    {
+      "name": "Coll de Sant Bartomeu",
+      "lat": "41.56389",
+      "lon": "2.34339",
+      "id": 2834790858,
+      "subType": "saddle",
+      "type": "natural"
+    },
+    {
+      "name": "Cal Bartomeus",
+      "lat": "41.89541",
+      "lon": "1.78277",
+      "id": 442258781,
+      "subType": "building",
+      "type": "man_made"
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.51886",
+      "lon": "1.70758",
+      "id": 595599237,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_roman_catholic": "roman_catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.51886",
+      "lon": "1.70758",
+      "id": 595599237,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "denomination_roman_catholic": "roman_catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Monument a Bartomeu Robert",
+      "names": {
+        "ca": "Monument a Bartomeu Robert"
+      },
+      "lat": "41.39489",
+      "lon": "2.17555",
+      "id": 4538261640,
+      "subType": "monument",
+      "type": "tourism",
+      "additionalInfo": {
+        "artwork_type_statue": "statue",
+        "material_metal": "metal",
+        "length": "11.25",
+        "artist_name": "Josep Llimona",
+        "end_date": "1010-11-13",
+        "alt_name": "Monument al Doctor Robert",
+        "height": "12.6",
+        "width": "9.26",
+        "start_date": "1904-01-31",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Monument al Doctor Robert"
+      }
+    },
+    {
+      "name": "Sant Bartomeu i Santa Tecla",
+      "lat": "41.23469",
+      "lon": "1.81169",
+      "id": 463621227,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu i Santa Tecla",
+      "lat": "41.23469",
+      "lon": "1.81169",
+      "id": 463621227,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Mas Bartomeu",
+      "lat": "41.20394",
+      "lon": "1.54401",
+      "id": 8655443378,
+      "subType": "internet_access_wlan",
+      "type": "service",
+      "additionalInfo": {
+        "website": "http://www.barthomeus.com/en/rural-tourism/",
+        "phone": "+34 6007188857"
+      }
+    },
+    {
+      "name": "Mas Bartomeu",
+      "lat": "41.20394",
+      "lon": "1.54401",
+      "id": 8655443378,
+      "subType": "isolated_dwelling",
+      "type": "administrative",
+      "additionalInfo": {
+        "website": "http://www.barthomeus.com/en/rural-tourism/",
+        "phone": "+34 6007188857"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Favà",
+      "lat": "42.24723",
+      "lon": "1.20547",
+      "id": 1566711339,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Favà"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Favà",
+      "lat": "42.24723",
+      "lon": "1.20547",
+      "id": 1566711339,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Favà"
+      }
+    },
+    {
+      "name": "Ferrer i Bassa - Bartomeu Bermejo",
+      "lat": "41.38650",
+      "lon": "2.09169",
+      "id": 10822050304,
+      "subType": "public_transport_platform",
+      "type": "transportation",
+      "additionalInfo": {
+        "ref": "108121",
+        "route_bus_ref": "EP2"
+      }
+    },
+    {
+      "name": "Sant Bartomeu Sesgorgues",
+      "lat": "42.01482",
+      "lon": "2.36041",
+      "id": 591049713,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu Sesgorgues",
+      "lat": "42.01482",
+      "lon": "2.36041",
+      "id": 591049713,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Carrer de Sant Bartomeu",
+      "lat": "41.75358",
+      "lon": "1.90508",
+      "id": 668389083,
+      "subType": "bridge",
+      "type": "man_made",
+      "additionalInfo": {
+        "bridge_car": "yes",
+        "route_hiking_ref_poi": "GR 151",
+        "operator": "GR"
+      }
+    },
+    {
+      "name": "Torrent de Mas Bartomeu",
+      "lat": "41.29506",
+      "lon": "1.49365",
+      "id": 1142622473,
+      "subType": "stream",
+      "type": "natural"
+    },
+    {
+      "name": "Circumval·lació - Sant Bartomeu",
+      "lat": "41.44305",
+      "lon": "2.21619",
+      "id": 11194749018,
+      "subType": "public_transport_stop_position",
+      "type": "transportation",
+      "additionalInfo": {
+        "bus_yes": "yes",
+        "ref": "101619",
+        "route_bus_ref": "B3, B5, B81",
+        "operator": "AMT (Autoritat Metropolitana del Transport)"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Cabanyes",
+      "lat": "41.56242",
+      "lon": "2.34329",
+      "id": 396898673,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_chapel": "chapel",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "tourism_yes": "yes",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Cabanyes"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Cabanyes",
+      "lat": "41.56242",
+      "lon": "2.34329",
+      "id": 396898673,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_chapel": "chapel",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "tourism_yes": "yes",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Cabanyes"
+      }
+    },
+    {
+      "name": "Circumval·lació - Sant Bartomeu",
+      "lat": "41.44302",
+      "lon": "2.21623",
+      "id": 4298586344,
+      "subType": "public_transport_platform",
+      "type": "transportation",
+      "additionalInfo": {
+        "covered_yes": "yes",
+        "bench_yes": "yes",
+        "bus_yes": "yes",
+        "operator": "AMT (Autoritat Metropolitana del Transport)",
+        "ref": "101619",
+        "route_bus_ref": "B3, B5, B81"
+      }
+    },
+    {
+      "name": "Bartomeu",
+      "lat": "41.60580",
+      "lon": "1.84918",
+      "id": 13759518204,
+      "subType": "restaurant",
+      "type": "sustenance"
+    },
+    {
+      "name": "Riera de Sant Bartomeu",
+      "lat": "41.42218",
+      "lon": "2.03183",
+      "id": 569985689,
+      "subType": "stream",
+      "type": "natural"
+    },
+    {
+      "name": "Barranc de Sant Bartomeu",
+      "lat": "41.32223",
+      "lon": "0.81964",
+      "id": 1345538897,
+      "subType": "stream",
+      "type": "natural",
+      "additionalInfo": {
+        "intermittent": "yes"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.33647",
+      "lon": "1.68994",
+      "id": 14053259716,
+      "subType": "locality",
+      "type": "administrative"
+    },
+    {
+      "name": "Ermita de Sant Bartomeu",
+      "lat": "42.51543",
+      "lon": "1.14232",
+      "id": 455023675,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Ermita de Sant Bartomeu",
+      "lat": "42.51543",
+      "lon": "1.14232",
+      "id": 455023675,
+      "subType": "historic_ruins",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Ermita de Sant Bartomeu",
+      "lat": "42.51543",
+      "lon": "1.14232",
+      "id": 455023675,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Riera de Sant Bartomeu",
+      "lat": "41.41853",
+      "lon": "2.02412",
+      "id": 569985685,
+      "subType": "stream",
+      "type": "natural",
+      "additionalInfo": {
+        "tunnel_waterway": "yes"
+      }
+    },
+    {
+      "name": "Riera de Sant Bartomeu",
+      "lat": "41.41853",
+      "lon": "2.02412",
+      "id": 569985685,
+      "subType": "tunnel",
+      "type": "man_made",
+      "additionalInfo": {
+        "tunnel_waterway": "yes"
+      }
+    },
+    {
+      "name": "Riera de Sant Bartomeu",
+      "lat": "41.41623",
+      "lon": "2.01698",
+      "id": 569985687,
+      "subType": "stream",
+      "type": "natural"
+    },
+    {
+      "name": "Torrent de Sant Bartomeu",
+      "lat": "41.56362",
+      "lon": "2.33994",
+      "id": 1533043985,
+      "subType": "stream",
+      "type": "natural",
+      "additionalInfo": {
+        "tunnel_waterway": "yes"
+      }
+    },
+    {
+      "name": "Torrent de Sant Bartomeu",
+      "lat": "41.56362",
+      "lon": "2.33994",
+      "id": 1533043985,
+      "subType": "tunnel",
+      "type": "man_made",
+      "additionalInfo": {
+        "tunnel_waterway": "yes"
+      }
+    },
+    {
+      "name": "Sant Bartomeu - Av. Amèrica",
+      "lat": "41.44208",
+      "lon": "2.21696",
+      "id": 1209841198,
+      "subType": "public_transport_platform",
+      "type": "transportation",
+      "additionalInfo": {
+        "covered_yes": "yes",
+        "bench_yes": "yes",
+        "bus_yes": "yes",
+        "operator": "AMT (Autoritat Metropolitana del Transport)",
+        "ref": "106952",
+        "route_bus_ref": "B3"
+      }
+    },
+    {
+      "name": "Torrent de Sant Bartomeu",
+      "lat": "41.56328",
+      "lon": "2.34007",
+      "id": 1533043987,
+      "subType": "stream",
+      "type": "natural"
+    },
+    {
+      "name": "CEIP Sant Bartomeu",
+      "lat": "41.77346",
+      "lon": "0.95373",
+      "id": 4567668722,
+      "subType": "school",
+      "type": "education"
+    },
+    {
+      "name": "Serra de Sant Bartomeu",
+      "lat": "42.04293",
+      "lon": "0.67967",
+      "id": 2483310648,
+      "subType": "locality",
+      "type": "administrative"
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.25161",
+      "lon": "0.48567",
+      "id": 4818161750,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Plana del Mas de Bartomeu",
+      "lat": "41.32518",
+      "lon": "1.50174",
+      "id": 2483585588,
+      "subType": "locality",
+      "type": "administrative"
+    },
+    {
+      "name": "Sant Bartomeu de Covildases",
+      "lat": "42.12366",
+      "lon": "2.36092",
+      "id": 408311831,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "tourism_yes": "yes",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Covildases"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.09004",
+      "lon": "1.83173",
+      "id": 751409033,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "building_type_church": "church",
+        "religion_christian": "christian",
+        "tourism_yes": "yes",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de la Valldan"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.09004",
+      "lon": "1.83173",
+      "id": 751409033,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "building_type_church": "church",
+        "religion_christian": "christian",
+        "tourism_yes": "yes",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de la Valldan"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "40.98393",
+      "lon": "0.40540",
+      "id": 365424263,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "40.98393",
+      "lon": "0.40540",
+      "id": 365424263,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.12533",
+      "lon": "2.36084",
+      "id": 408311829,
+      "subType": "isolated_dwelling",
+      "type": "administrative"
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.12533",
+      "lon": "2.36084",
+      "id": 408311829,
+      "subType": "building",
+      "type": "man_made"
+    },
+    {
+      "name": "Riera de Sant Bartomeu",
+      "lat": "42.12108",
+      "lon": "2.36333",
+      "id": 408311827,
+      "subType": "stream",
+      "type": "natural"
+    },
+    {
+      "name": "Parròquia de Sant Bartomeu",
+      "lat": "41.35682",
+      "lon": "2.14362",
+      "id": 4416472365056,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.08986",
+      "lon": "1.83047",
+      "id": 14626078594,
+      "subType": "public_transport_stop_position",
+      "type": "transportation",
+      "additionalInfo": {
+        "bus_yes": "yes",
+        "route_bus_ref": "L2"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.20096",
+      "lon": "2.19939",
+      "id": 11409298500,
+      "subType": "peak",
+      "type": "natural",
+      "additionalInfo": {
+        "ele": "907.3"
+      }
+    },
+    {
+      "name": "Font de Sant Bartomeu",
+      "lat": "41.56263",
+      "lon": "2.34039",
+      "id": 2838332968,
+      "subType": "drinking_water",
+      "type": "man_made"
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.14971",
+      "lon": "2.43931",
+      "id": 6957707196,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.14971",
+      "lon": "2.43931",
+      "id": 6957707196,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.45913",
+      "lon": "0.35922",
+      "id": 881250253,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_roman_catholic": "roman_catholic",
+        "religion_christian": "christian",
+        "tourism_yes": "yes"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.45913",
+      "lon": "0.35922",
+      "id": 881250253,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_roman_catholic": "roman_catholic",
+        "religion_christian": "christian",
+        "tourism_yes": "yes"
+      }
+    },
+    {
+      "name": "Refugi Bartomeu Puiggrós",
+      "lat": "41.61103",
+      "lon": "1.81783",
+      "id": 356628491,
+      "subType": "alpine_hut",
+      "type": "tourism",
+      "additionalInfo": {
+        "reservation_no": "no",
+        "fee_no": "no",
+        "website": "https://www.feec.cat/refugi/refugi-santa-cecilia-bartomeu-puiggros-actualment-fora-de-servei/",
+        "operator": "Federació d'Entitats Excursionistes de Catalunya",
+        "ele": "678"
+      }
+    },
+    {
+      "name": "Refugi Bartomeu Puiggrós",
+      "lat": "41.61103",
+      "lon": "1.81783",
+      "id": 356628491,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "reservation_no": "no",
+        "fee_no": "no",
+        "website": "https://www.feec.cat/refugi/refugi-santa-cecilia-bartomeu-puiggros-actualment-fora-de-servei/",
+        "operator": "Federació d'Entitats Excursionistes de Catalunya",
+        "ele": "678"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.60533",
+      "lon": "1.19184",
+      "id": 4915765324,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Serrat de Sant Bartomeu",
+      "lat": "42.01369",
+      "lon": "1.52899",
+      "id": 5287221800,
+      "subType": "peak",
+      "type": "natural",
+      "additionalInfo": {
+        "ele": "869.7",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Serrat de Sant Bartomeu"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de la Quadra",
+      "lat": "41.42595",
+      "lon": "2.03766",
+      "id": 4303985092,
+      "subType": "village",
+      "type": "administrative"
+    },
+    {
+      "name": "Carretera de Sant Bartomeu",
+      "lat": "41.94291",
+      "lon": "2.24117",
+      "id": 618135959,
+      "subType": "bridge",
+      "type": "man_made",
+      "additionalInfo": {
+        "bridge_car": "yes",
+        "foot_no": "no",
+        "operator": "Eix-Bus, SA, Sagalés",
+        "ref": "BV-4601",
+        "route_bus_ref": "L0324, L9"
+      }
+    },
+    {
+      "name": "Barranc de Sant Bartomeu",
+      "lat": "41.31632",
+      "lon": "0.82661",
+      "id": 365845663,
+      "subType": "stream",
+      "type": "natural",
+      "additionalInfo": {
+        "intermittent": "yes"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Malgrat",
+      "lat": "42.29904",
+      "lon": "1.30587",
+      "id": 1567304955,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Malgrat"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Malgrat",
+      "lat": "42.29904",
+      "lon": "1.30587",
+      "id": 1567304955,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Malgrat"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de la Quadra",
+      "lat": "41.42596",
+      "lon": "2.03734",
+      "id": 792807189,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.62957",
+      "lon": "0.83176",
+      "id": 806154843,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.62957",
+      "lon": "0.83176",
+      "id": 806154843,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Església de Sant Bartomeu",
+      "lat": "41.13746",
+      "lon": "0.90953",
+      "id": 1522708629,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Església de Sant Bartomeu",
+      "lat": "41.13746",
+      "lon": "0.90953",
+      "id": 1522708629,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu del Portell",
+      "lat": "42.18459",
+      "lon": "2.78257",
+      "id": 503402073,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu del Portell",
+      "lat": "42.18459",
+      "lon": "2.78257",
+      "id": 503402073,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Bac de Sant Bartomeu",
+      "lat": "42.01525",
+      "lon": "2.36002",
+      "id": 819238709,
+      "subType": "cliff",
+      "type": "natural"
+    },
+    {
+      "name": "St. Bartomeu del Grau / Gurb",
+      "lat": "41.94245",
+      "lon": "2.23168",
+      "id": 287970188,
+      "subType": "motorway_junction",
+      "type": "transportation",
+      "additionalInfo": {
+        "ref": "178"
+      }
+    },
+    {
+      "name": "St. Bartomeu del Grau / Gurb",
+      "lat": "41.93913",
+      "lon": "2.23220",
+      "id": 4186739438,
+      "subType": "motorway_junction",
+      "type": "transportation",
+      "additionalInfo": {
+        "ref": "62"
+      }
+    },
+    {
+      "name": "Torrent de Mas Bartomeu",
+      "lat": "41.31308",
+      "lon": "1.49760",
+      "id": 1346167445,
+      "subType": "stream",
+      "type": "natural",
+      "additionalInfo": {
+        "intermittent": "yes"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.91855",
+      "lon": "1.14670",
+      "id": 1272049979,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "building_type_church": "church",
+        "religion_christian": "christian",
+        "tourism_yes": "yes",
+        "website": "http://www.ponts.cat/ca/administracio/ajuntamentponts/llocs-dinteres/sant-bartomeu-del-tossal/109580.html"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.91855",
+      "lon": "1.14670",
+      "id": 1272049979,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "building_type_church": "church",
+        "religion_christian": "christian",
+        "tourism_yes": "yes",
+        "website": "http://www.ponts.cat/ca/administracio/ajuntamentponts/llocs-dinteres/sant-bartomeu-del-tossal/109580.html"
+      }
+    },
+    {
+      "name": "Baga de Sant Bartomeu",
+      "lat": "42.11861",
+      "lon": "2.36346",
+      "id": 2483114606,
+      "subType": "locality",
+      "type": "administrative"
+    },
+    {
+      "name": "Coll de Sant Bartomeu",
+      "lat": "41.56226",
+      "lon": "2.34337",
+      "id": 4171544074,
+      "subType": "saddle",
+      "type": "natural"
+    },
+    {
+      "name": "Església Sant Bartomeu",
+      "lat": "41.18621",
+      "lon": "1.45425",
+      "id": 478522345,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Església Sant Bartomeu",
+      "lat": "41.18621",
+      "lon": "1.45425",
+      "id": 478522345,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Font d'en Bartomeu",
+      "lat": "41.46683",
+      "lon": "2.21259",
+      "id": 10342753736,
+      "subType": "spring",
+      "type": "natural"
+    },
+    {
+      "name": "Coveta de Mas Bartomeu",
+      "lat": "41.31638",
+      "lon": "1.49745",
+      "id": 13741861990,
+      "subType": "locality",
+      "type": "administrative"
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.15953",
+      "lon": "0.98349",
+      "id": 615003673,
+      "subType": "historic_ruins",
+      "type": "tourism"
+    },
+    {
+      "name": "Sant Bartomeu de Navarcles",
+      "lat": "41.75479",
+      "lon": "1.90593",
+      "id": 383189027,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_chapel": "chapel",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Navarcles"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Navarcles",
+      "lat": "41.75479",
+      "lon": "1.90593",
+      "id": 383189027,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_chapel": "chapel",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Navarcles"
+      }
+    },
+    {
+      "name": "Farmàcia Fullana Fiol, Bartomeu",
+      "names": {
+        "es": "Farmacia Fullana Fior"
+      },
+      "lat": "41.11690",
+      "lon": "1.24882",
+      "id": 8741907834,
+      "subType": "pharmacy",
+      "type": "healthcare",
+      "openingHours": "Mo-Su 09:00-22:00",
+      "additionalInfo": {
+        "wheelchair_yes": "yes",
+        "dispensing_yes": "yes",
+        "opening_hours": "Mo-Su 09:00-22:00",
+        "website": "http://www.farmaciafullana.com",
+        "phone": "+34977214517",
+        "ref": "3622889"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.11643",
+      "lon": "0.53704",
+      "id": 200405579,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.26557",
+      "lon": "1.36593",
+      "id": 438850967,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.26557",
+      "lon": "1.36593",
+      "id": 438850967,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Ermita de Sant Bartomeu",
+      "lat": "41.69527",
+      "lon": "2.23484",
+      "id": 494172861,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Ermita de Sant Bartomeu",
+      "lat": "41.69527",
+      "lon": "2.23484",
+      "id": 494172861,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Església Sant Bartomeu",
+      "lat": "41.66652",
+      "lon": "0.55528",
+      "id": 662608051,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church"
+      }
+    },
+    {
+      "name": "Biblioteca pública Sant Bartomeu",
+      "lat": "41.66605",
+      "lon": "0.55723",
+      "id": 662585265,
+      "subType": "public_bookcase",
+      "type": "entertainment"
+    },
+    {
+      "name": "Sant Bartomeu del Grau",
+      "lat": "41.98077",
+      "lon": "2.17504",
+      "id": 1100085252,
+      "subType": "village",
+      "type": "administrative",
+      "additionalInfo": {
+        "population": "967",
+        "ele": "869"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de la Vall de Vilaramó",
+      "lat": "41.96298",
+      "lon": "1.94203",
+      "id": 1571465203,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de la Vall de Vilaramó"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de la Vall de Vilaramó",
+      "lat": "41.96298",
+      "lon": "1.94203",
+      "id": 1571465203,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de la Vall de Vilaramó"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Pincaró",
+      "lat": "42.33474",
+      "lon": "2.67644",
+      "id": 732345343,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Pincaró"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Pincaró",
+      "lat": "42.33474",
+      "lon": "2.67644",
+      "id": 732345343,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Pincaró"
+      }
+    },
+    {
+      "name": "Sant Bartomeu i Sant Roc",
+      "lat": "40.63480",
+      "lon": "0.27983",
+      "id": 4403358244864,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.95434",
+      "lon": "1.00070",
+      "id": 794066121,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_roman_catholic": "roman_catholic",
+        "religion_christian": "christian",
+        "tourism_yes": "yes"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.95434",
+      "lon": "1.00070",
+      "id": 794066121,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_roman_catholic": "roman_catholic",
+        "religion_christian": "christian",
+        "tourism_yes": "yes"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de la Quadra",
+      "lat": "41.42818",
+      "lon": "2.03951",
+      "id": 305746279,
+      "subType": "village",
+      "type": "administrative",
+      "additionalInfo": {
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de la Quadra"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de la Quadra",
+      "lat": "41.42818",
+      "lon": "2.03951",
+      "id": 305746279,
+      "subType": "protected_area",
+      "type": "natural",
+      "additionalInfo": {
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de la Quadra"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de la Quadra",
+      "lat": "41.42818",
+      "lon": "2.03951",
+      "id": 305746279,
+      "subType": "residential",
+      "type": "administrative",
+      "additionalInfo": {
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de la Quadra"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.33564",
+      "lon": "1.68801",
+      "id": 7517265072,
+      "subType": "isolated_dwelling",
+      "type": "administrative"
+    },
+    {
+      "name": "Sant Bartomeu - Av. Amèrica",
+      "lat": "41.44205",
+      "lon": "2.21692",
+      "id": 11457138432,
+      "subType": "public_transport_stop_position",
+      "type": "transportation",
+      "additionalInfo": {
+        "bus_yes": "yes",
+        "ref": "106952",
+        "route_bus_ref": "B3",
+        "operator": "AMT (Autoritat Metropolitana del Transport)"
+      }
+    },
+    {
+      "name": "Mas Bartomeu",
+      "lat": "41.32159",
+      "lon": "1.49588",
+      "id": 643259774,
+      "subType": "historic_ruins",
+      "type": "tourism"
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.31766",
+      "lon": "0.82526",
+      "id": 365845729,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Parròquia de Sant Bartomeu",
+      "lat": "41.36558",
+      "lon": "2.13993",
+      "id": 434957341,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Parròquia de Sant Bartomeu",
+      "lat": "41.36558",
+      "lon": "2.13993",
+      "id": 434957341,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Cal Bartomeu",
+      "lat": "41.41150",
+      "lon": "1.62267",
+      "id": 638360509,
+      "subType": "building",
+      "type": "man_made"
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.59165",
+      "lon": "1.14919",
+      "id": 918469451,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "42.59165",
+      "lon": "1.14919",
+      "id": 918469451,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Esglesia de Sant Bartomeu",
+      "lat": "41.12553",
+      "lon": "0.73351",
+      "id": 8392486606,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Roc de Sant Bartomeu",
+      "lat": "42.45785",
+      "lon": "1.37662",
+      "id": 2483279296,
+      "subType": "locality",
+      "type": "administrative"
+    },
+    {
+      "name": "Coves de Bartomeu",
+      "lat": "40.58388",
+      "lon": "0.49745",
+      "id": 9431002076,
+      "subType": "cave_entrance",
+      "type": "natural"
+    },
+    {
+      "name": "Collada de Sant Bartomeu",
+      "lat": "42.11591",
+      "lon": "2.36923",
+      "id": 10218636968,
+      "subType": "saddle",
+      "type": "natural",
+      "additionalInfo": {
+        "ele": "1251.9"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.44287",
+      "lon": "1.40528",
+      "id": 7959004006,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.29483",
+      "lon": "1.30596",
+      "id": 7723017360,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu del Grau",
+      "lat": "41.98385",
+      "lon": "2.17291",
+      "id": 843592333,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu del Grau",
+      "lat": "41.98385",
+      "lon": "2.17291",
+      "id": 843592333,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu d'Erta",
+      "lat": "42.42590",
+      "lon": "0.84369",
+      "id": 1569661771,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu d'Erta"
+      }
+    },
+    {
+      "name": "Sant Bartomeu d'Erta",
+      "lat": "42.42590",
+      "lon": "0.84369",
+      "id": 1569661771,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu d'Erta"
+      }
+    },
+    {
+      "name": "Baixada de Sant Bartomeu",
+      "lat": "42.43109",
+      "lon": "1.92945",
+      "id": 380780603,
+      "subType": "highway_steps",
+      "type": "transportation"
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.99774",
+      "lon": "0.84477",
+      "id": 4413779894272,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de la Baronia de Sant Oïsme"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.99774",
+      "lon": "0.84477",
+      "id": 4413779894272,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de la Baronia de Sant Oïsme"
+      }
+    },
+    {
+      "name": "Tossal de Sant Bartomeu",
+      "lat": "41.67410",
+      "lon": "0.53977",
+      "id": 2483336656,
+      "subType": "locality",
+      "type": "administrative"
+    },
+    {
+      "name": "Bartomeu Robert",
+      "lat": "41.35378",
+      "lon": "2.15326",
+      "id": 4696518112,
+      "subType": "memorial",
+      "type": "tourism"
+    },
+    {
+      "name": "Sant Bartomeu de Burg",
+      "lat": "42.50447",
+      "lon": "1.27216",
+      "id": 794417303,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "building_type_church": "church",
+        "religion_christian": "christian",
+        "tourism_yes": "yes",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Burg"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Burg",
+      "lat": "42.50447",
+      "lon": "1.27216",
+      "id": 794417303,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "denomination_catholic": "catholic",
+        "building_type_church": "church",
+        "religion_christian": "christian",
+        "tourism_yes": "yes",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Burg"
+      }
+    },
+    {
+      "name": "Capella de Sant Bartomeu",
+      "lat": "41.95946",
+      "lon": "2.66841",
+      "id": 1590434589,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Capella de Sant Bartomeu",
+      "lat": "41.95946",
+      "lon": "2.66841",
+      "id": 1590434589,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Llaés",
+      "lat": "42.15470",
+      "lon": "2.24838",
+      "id": 843966623,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Llaés",
+      "lat": "42.15470",
+      "lon": "2.24838",
+      "id": 843966623,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian"
+      }
+    },
+    {
+      "name": "Frutería Casa Bartomeus - Tiendadefruta.es",
+      "lat": "41.73356",
+      "lon": "1.83158",
+      "id": 6585869656,
+      "subType": "greengrocer",
+      "type": "shop",
+      "additionalInfo": {
+        "wheelchair_yes": "yes",
+        "website": "https://www.tiendadefruta.es/",
+        "phone": "+34 93 8730959",
+        "description:es": "Tienda de fruta expertos en frutas tropicales y exóticas. Disponen de guanábana, mangostán, ñame, ..."
+      }
+    },
+    {
+      "name": "Torrent de Sant Bartomeu",
+      "lat": "41.56515",
+      "lon": "2.33831",
+      "id": 454746319,
+      "subType": "stream",
+      "type": "natural"
+    },
+    {
+      "name": "Sant Bartomeu de Carbasí",
+      "lat": "41.61024",
+      "lon": "1.43063",
+      "id": 1570663755,
+      "subType": "place_of_worship",
+      "type": "tourism",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Carbasí"
+      }
+    },
+    {
+      "name": "Sant Bartomeu de Carbasí",
+      "lat": "41.61024",
+      "lon": "1.43063",
+      "id": 1570663755,
+      "subType": "building",
+      "type": "man_made",
+      "additionalInfo": {
+        "building_type_church": "church",
+        "denomination_catholic": "catholic",
+        "religion_christian": "christian",
+        "wikipedia": "http://ca.wikipedia.org/wiki/Sant Bartomeu de Carbasí"
+      }
+    },
+    {
+      "name": "Sant Bartomeu",
+      "lat": "41.31775",
+      "lon": "0.82535",
+      "id": 3865575034,
+      "subType": "attraction",
+      "type": "tourism"
+    },
+    {
+      "name": "Plaça de Sant Bartomeu",
+      "lat": "41.29449",
+      "lon": "1.30596",
+      "id": 1124433115,
+      "subType": "square",
+      "type": "man_made"
+    }
+  ],
+  "cities": [
+    {
+      "name": "Arganda del Rey",
+      "lat": "40.30077",
+      "lon": "-3.43807",
+      "id": 256329511,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Fruitós de Bages",
+      "lat": "41.75327",
+      "lon": "1.87494",
+      "id": 1470839177,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Muntanyola",
+      "lat": "41.87693",
+      "lon": "2.17908",
+      "id": 1460478703,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carretera de Sant Bartomeu del Grau",
+          "lat": "41.95777",
+          "lon": "2.13628",
+          "id": 81162
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Sant Joan de Vilatorrada",
+      "lat": "41.74221",
+      "lon": "1.80362",
+      "id": 1470839184,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Villanueva de la Cañada",
+      "lat": "40.44721",
+      "lon": "-4.00280",
+      "id": 269160430,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Lliçà de Vall",
+      "lat": "41.59155",
+      "lon": "2.24224",
+      "id": 1460478693,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Bartomeu Rosselló Porcel",
+          "lat": "41.60258",
+          "lon": "2.21767",
+          "id": 40502
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Cambrils",
+      "lat": "41.06794",
+      "lon": "1.06576",
+      "id": 1470838172,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Masllorenç",
+      "lat": "41.27017",
+      "lon": "1.41449",
+      "id": 935240588,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu (Masarbonès)",
+          "lat": "41.25990",
+          "lon": "1.43844",
+          "id": 105689,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de Sant Antoni (Masarbonès)",
+              "lat": "41.25981",
+              "lon": "1.43687"
+            },
+            {
+              "name": "Carrer Major (Masarbonès)",
+              "lat": "41.25989",
+              "lon": "1.43796"
+            },
+            {
+              "name": "Carrer de Bonastre (Masarbonès)",
+              "lat": "41.25992",
+              "lon": "1.43848"
+            },
+            {
+              "name": "Carrer de les Fassines (Masarbonès)",
+              "lat": "41.26018",
+              "lon": "1.43874"
+            },
+            {
+              "name": "Plaça de l'Om (Masarbonès)",
+              "lat": "41.26040",
+              "lon": "1.43854"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Almacelles",
+      "lat": "41.72950",
+      "lon": "0.44048",
+      "id": 352498933,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Bartomeu Blanch 'lo Català'",
+          "lat": "41.72985",
+          "lon": "0.44291",
+          "id": 87670
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Caldes de Montbui",
+      "names": {
+        "es": "Caldes de Montbui"
+      },
+      "lat": "41.63227",
+      "lon": "2.16764",
+      "id": 1470838164,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sobremunt",
+      "lat": "42.03530",
+      "lon": "2.16516",
+      "id": 539466271,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Camí de St. Bartomeu al Sorreig",
+          "lat": "42.00629",
+          "lon": "2.17995",
+          "id": 122291
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Calonge",
+      "lat": "41.86210",
+      "lon": "3.07723",
+      "id": 1470838168,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Bellmunt d'Urgell",
+      "lat": "41.77399",
+      "lon": "0.95381",
+      "id": 390491452,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Baixada de Sant Bartomeu",
+          "lat": "41.77357",
+          "lon": "0.95115",
+          "id": 96278,
+          "intersectedStreets": [
+            {
+              "name": "Camí de Linyola",
+              "lat": "41.77341",
+              "lon": "0.95096"
+            },
+            {
+              "name": "Avinguda de Domènec Cardenal",
+              "lat": "41.77347",
+              "lon": "0.95107"
+            },
+            {
+              "name": "Carrer del Terral",
+              "lat": "41.77379",
+              "lon": "0.95148"
+            },
+            {
+              "name": "Carrer del Bancal",
+              "lat": "41.77390",
+              "lon": "0.95184"
+            },
+            {
+              "name": "Carrer de Barcelona",
+              "names": {
+                "ca": "carrer de Barcelona"
+              },
+              "lat": "41.77411",
+              "lon": "0.95195"
+            },
+            {
+              "name": "Carretera de Bellmunt d'Urgell",
+              "lat": "41.77214",
+              "lon": "0.95002"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Calella",
+      "lat": "41.61329",
+      "lon": "2.65761",
+      "id": 1470838165,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Cervera",
+      "lat": "41.67680",
+      "lon": "1.27499",
+      "id": 9205876,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Ripollet",
+      "lat": "41.49934",
+      "lon": "2.15731",
+      "id": 3538816683,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "San Agustín del Guadalix",
+      "names": {
+        "ru": "Сан-Агустин-дель-Гвадаликс",
+        "uk": "Сан-Агустін-дель-Гуадалікс"
+      },
+      "lat": "40.67905",
+      "lon": "-3.61660",
+      "id": 258640685,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Girona",
+      "names": {
+        "ast": "Xirona",
+        "be": "Жырона",
+        "ru": "Жирона",
+        "ko": "지로나",
+        "pt": "Gerunda",
+        "gl": "Xirona",
+        "el": "Ζιρόνα",
+        "lt": "Žirona",
+        "fr": "Gérone",
+        "an": "Chirona",
+        "es": "Gerona",
+        "zh": "赫罗纳",
+        "eu": "Girona",
+        "ar": "جرندة",
+        "oc": "Girona",
+        "uk": "Жірона",
+        "ja": "ジローナ",
+        "fa": "خرنا",
+        "he": "ז'ירונה",
+        "ca": "Girona",
+        "nl": "Gerona",
+        "sr": "Ђирона"
+      },
+      "lat": "41.97930",
+      "lon": "2.81994",
+      "id": 30894545,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Tres Cantos",
+      "names": {
+        "ru": "Трес-Кантос",
+        "uk": "Трес-Кантос"
+      },
+      "lat": "40.60658",
+      "lon": "-3.70653",
+      "id": 319938844,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Súria",
+      "lat": "41.83281",
+      "lon": "1.75266",
+      "id": 5045067902,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Palamós",
+      "lat": "41.84954",
+      "lon": "3.12788",
+      "id": 1470838632,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Andreu de la Barca",
+      "lat": "41.45182",
+      "lon": "1.97248",
+      "id": 1470839144,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Palafrugell",
+      "lat": "41.91836",
+      "lon": "3.16199",
+      "id": 1470838631,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Andreu de Llavaneres",
+      "names": {
+        "ca": "Sant Andreu de Llavaneres"
+      },
+      "lat": "41.57395",
+      "lon": "2.48282",
+      "id": 1470839142,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Villaviciosa de Odón",
+      "lat": "40.35738",
+      "lon": "-3.90023",
+      "id": 306574423,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "San Martín de la Vega",
+      "lat": "40.21105",
+      "lon": "-3.57718",
+      "id": 4350968640,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Camallera",
+      "lat": "42.12271",
+      "lon": "2.96347",
+      "id": 365041119,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "42.12202",
+          "lon": "2.96408",
+          "id": 35207,
+          "intersectedStreets": [
+            {
+              "name": "Carrer del Doctor Lluís Fàbrega",
+              "lat": "42.12202",
+              "lon": "2.96408"
+            },
+            {
+              "name": "Carrer de Vicenç Bou",
+              "lat": "42.12142",
+              "lon": "2.96453"
+            },
+            {
+              "name": "Carrer de l'Estació",
+              "lat": "42.12142",
+              "lon": "2.96453"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Tossa de Mar",
+      "names": {
+        "ca": "Tossa de Mar"
+      },
+      "lat": "41.71978",
+      "lon": "2.93122",
+      "id": 331106659,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Mataró",
+      "names": {
+        "ar": "ماتارو",
+        "ru": "Матаро",
+        "uk": "Матаро",
+        "el": "Ματαρό",
+        "lt": "Mataro",
+        "ca": "Mataró",
+        "es": "Mataró"
+      },
+      "lat": "41.53983",
+      "lon": "2.44489",
+      "id": 65523130,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Celoni",
+      "lat": "41.69014",
+      "lon": "2.49167",
+      "id": 1470839157,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Vielha",
+      "names": {
+        "oc": "Vielha",
+        "es": "Viella"
+      },
+      "lat": "42.70176",
+      "lon": "0.79547",
+      "id": 1098278678,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Leganés",
+      "enName": "Leganés",
+      "names": {
+        "ru": "Леганес",
+        "uk": "Леганес",
+        "ja": "レガネス",
+        "hu": "Leganés",
+        "sr": "Леганес"
+      },
+      "lat": "40.32819",
+      "lon": "-3.76527",
+      "id": 306524644,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Cervera",
+      "lat": "41.67307",
+      "lon": "1.27294",
+      "id": 1470838211,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Viladecans",
+      "lat": "41.31631",
+      "lon": "2.01560",
+      "id": 2375518653,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Ponts",
+      "lat": "41.91601",
+      "lon": "1.18825",
+      "id": 1470838746,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Camí de Sant Bartomeu (el Tossal)",
+          "lat": "41.91443",
+          "lon": "1.15028",
+          "id": 110593,
+          "intersectedStreets": [
+            {
+              "name": "Camí del Tossal (el Tossal)",
+              "lat": "41.91492",
+              "lon": "1.15232"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Cubelles",
+      "names": {
+        "ca": "Cubelles"
+      },
+      "lat": "41.20834",
+      "lon": "1.67305",
+      "id": 1470838239,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Carles de la Ràpita",
+      "names": {
+        "ca": "Sant Carles de la Ràpita"
+      },
+      "lat": "40.61766",
+      "lon": "0.58993",
+      "id": 1407801234,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Santa Coloma de Farners",
+      "lat": "41.86031",
+      "lon": "2.66590",
+      "id": 1470839251,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Colmenar Viejo",
+      "lat": "40.65879",
+      "lon": "-3.76632",
+      "id": 256291070,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Cornellà de Llobregat",
+      "lat": "41.35572",
+      "lon": "2.07062",
+      "id": 1470838232,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Corbera de Llobregat",
+      "lat": "41.41662",
+      "lon": "1.93386",
+      "id": 1470838229,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Galapagar",
+      "lat": "40.57750",
+      "lon": "-4.00377",
+      "id": 4279257425,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Cardona",
+      "lat": "41.91428",
+      "lon": "1.68133",
+      "id": 1470838186,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Cardedeu",
+      "names": {
+        "ar": "كارديديو",
+        "uk": "Кардазеу",
+        "el": "Καρδεδέου"
+      },
+      "lat": "41.63852",
+      "lon": "2.35584",
+      "id": 1470838185,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Vicenç dels Horts",
+      "lat": "41.39342",
+      "lon": "2.00995",
+      "id": 1470839216,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Pineda de Mar",
+      "lat": "41.62762",
+      "lon": "2.68976",
+      "id": 1470838702,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "l'Escala",
+      "names": {
+        "es": "La Escala"
+      },
+      "lat": "42.11354",
+      "lon": "3.13874",
+      "id": 339019326,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Canet de Mar",
+      "lat": "41.59009",
+      "lon": "2.57780",
+      "id": 1470838178,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "San Sebastián de los Reyes",
+      "names": {
+        "ru": "Сан-Себастиан-де-лос-Рейес",
+        "uk": "Сан-Себастьян-де-лос-Реєс",
+        "lt": "San Sebastian de los Rejesas",
+        "es": "San Sebastián de los Reyes"
+      },
+      "lat": "40.54737",
+      "lon": "-3.62606",
+      "id": 256150800,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Villanueva del Pardillo",
+      "lat": "40.49492",
+      "lon": "-3.96001",
+      "id": 254637858,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Antoni de Calonge",
+      "lat": "41.84727",
+      "lon": "3.10260",
+      "id": 338084408,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Castelldefels",
+      "lat": "41.28610",
+      "lon": "1.98242",
+      "id": 1470838201,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Òrrius",
+      "names": {
+        "ca": "Òrrius"
+      },
+      "lat": "41.55519",
+      "lon": "2.35494",
+      "id": 1460478298,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Camí de Vilassar de Dalt a Sant Bartomeu",
+          "lat": "41.54631",
+          "lon": "2.34333",
+          "id": 56311,
+          "intersectedStreets": [
+            {
+              "name": "Camí de Òrrius",
+              "lat": "41.54813",
+              "lon": "2.34120"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Alcobendas",
+      "names": {
+        "ar": "ألكوبينداس",
+        "ru": "Алькобендас",
+        "hu": "Alcobendas",
+        "sr": "Алкобендас"
+      },
+      "lat": "40.54001",
+      "lon": "-3.63585",
+      "id": 256150802,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Agramunt",
+      "lat": "41.78767",
+      "lon": "1.09868",
+      "id": 1470837683,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Aiguaviva",
+      "lat": "41.35223",
+      "lon": "1.50317",
+      "id": 721174118,
+      "type": "HAMLET",
+      "listOfStreets": [
+        {
+          "name": "Camí d'Aiguaviva a Mas Bartomeu",
+          "lat": "41.33443",
+          "lon": "1.49972",
+          "id": 25803
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Navalcarnero",
+      "lat": "40.28772",
+      "lon": "-4.01430",
+      "id": 258123001,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Terrassa",
+      "names": {
+        "ar": "تاراسا",
+        "ru": "Террасса",
+        "el": "Τεράσα",
+        "lt": "Terasa",
+        "ca": "Terrassa",
+        "es": "Tarrasa",
+        "sr": "Тараса"
+      },
+      "lat": "41.56299",
+      "lon": "2.01024",
+      "id": 288139569,
+      "type": "CITY",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Bartomeu Amat",
+          "lat": "41.57033",
+          "lon": "2.01221",
+          "id": 22750,
+          "intersectedStreets": [
+            {
+              "name": "Passeig del Vint-i-dos de Juliol",
+              "names": {
+                "alt_name": "Pont de les Arenes (les Arenes)"
+              },
+              "lat": "41.57033",
+              "lon": "2.01221"
+            },
+            {
+              "name": "Carrer de Sant Leopold",
+              "lat": "41.57016",
+              "lon": "2.01217"
+            },
+            {
+              "name": "Avinguda de l'Abat Marcet (Pere Parres)",
+              "lat": "41.57489",
+              "lon": "2.01219"
+            },
+            {
+              "name": "Carrer de les Campiones olímpiques",
+              "lat": "41.57489",
+              "lon": "2.01219"
+            },
+            {
+              "name": "Carrer de l'Autonomia (Sant Pere)",
+              "lat": "41.57393",
+              "lon": "2.01224"
+            },
+            {
+              "name": "Carrer Transversal (Sant Pere)",
+              "lat": "41.57300",
+              "lon": "2.01228"
+            },
+            {
+              "name": "Plaça del Triomf",
+              "lat": "41.57250",
+              "lon": "2.01228"
+            },
+            {
+              "name": "Carrer de Catalunya (Sant Pere)",
+              "lat": "41.57173",
+              "lon": "2.01226"
+            },
+            {
+              "name": "Carrer de Mossèn Pursals",
+              "lat": "41.57134",
+              "lon": "2.01226"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Castellbisbal",
+      "lat": "41.47651",
+      "lon": "1.98330",
+      "id": 1470838200,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Castellar del Vallès",
+      "lat": "41.61381",
+      "lon": "2.08760",
+      "id": 1470838199,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Mollerussa",
+      "lat": "41.63309",
+      "lon": "0.89549",
+      "id": 1470838540,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Solsona",
+      "lat": "41.99458",
+      "lon": "1.51840",
+      "id": 1954570210,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Avinguda de Sant Bartomeu",
+          "lat": "41.99840",
+          "lon": "1.52549",
+          "id": 68567,
+          "intersectedStreets": [
+            {
+              "name": "Carrer del Turb",
+              "lat": "41.99557",
+              "lon": "1.52916"
+            },
+            {
+              "name": "Carrer del Capolatell",
+              "lat": "41.99599",
+              "lon": "1.52873"
+            },
+            {
+              "name": "Carrer de Busa",
+              "lat": "41.99640",
+              "lon": "1.52832"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Molins de Rei",
+      "names": {
+        "es": "Molins de Rei"
+      },
+      "lat": "41.41381",
+      "lon": "2.01596",
+      "id": 1470838538,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "G-06 Sant Bartomeu - Can Planes - Les escletxes",
+          "lat": "41.42627",
+          "lon": "2.03408",
+          "id": 54004,
+          "intersectedStreets": [
+            {
+              "name": "G-14 Cami de la Riera Nova a G-06",
+              "lat": "41.42712",
+              "lon": "2.03393"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Vilanova i la Geltrú",
+      "names": {
+        "ca": "Vilanova i la Geltrú",
+        "es": "Vilanova y Geltrú"
+      },
+      "lat": "41.22420",
+      "lon": "1.72563",
+      "id": 1470839561,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Griñón",
+      "lat": "40.21366",
+      "lon": "-3.85815",
+      "id": 306948272,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "el Tossal",
+      "lat": "41.91560",
+      "lon": "1.15097",
+      "id": 6000716046,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Camí de Sant Bartomeu",
+          "lat": "41.91443",
+          "lon": "1.15030",
+          "id": 110594
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Mollet del Vallès",
+      "lat": "41.53935",
+      "lon": "2.21309",
+      "id": 1470838541,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer del Doctor Bartomeu Robert",
+          "lat": "41.54199",
+          "lon": "2.21671",
+          "id": 81016,
+          "intersectedStreets": [
+            {
+              "name": "Carrer del Carme",
+              "lat": "41.54265",
+              "lon": "2.21720"
+            },
+            {
+              "name": "Carrer de Roger de Llúria",
+              "lat": "41.54194",
+              "lon": "2.21666"
+            }
+          ]
+        },
+        {
+          "name": "Passatge Bartomeu Robert",
+          "lat": "41.54125",
+          "lon": "2.21608",
+          "id": 81527,
+          "intersectedStreets": [
+            {
+              "name": "Carrer del Sol",
+              "lat": "41.54125",
+              "lon": "2.21608"
+            },
+            {
+              "name": "Plaça de l'Artesania",
+              "lat": "41.54037",
+              "lon": "2.21499"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Lleida",
+      "names": {
+        "ar": "لاردة",
+        "ru": "Ллейда",
+        "oc": "Lhèida",
+        "el": "Λιέιδα",
+        "lt": "Lerida",
+        "fr": "Lérida",
+        "ca": "Lleida",
+        "es": "Lérida",
+        "sr": "Љеида"
+      },
+      "lat": "41.61476",
+      "lon": "0.62678",
+      "id": 124083658,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Mollerussa",
+      "lat": "41.63360",
+      "lon": "0.89126",
+      "id": 10598414,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "San Lorenzo de El Escorial",
+      "lat": "40.59267",
+      "lon": "-4.14716",
+      "id": 64835892,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Montornès del Vallès",
+      "lat": "41.54255",
+      "lon": "2.26706",
+      "id": 1470838556,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer Bartomeu",
+          "lat": "41.54066",
+          "lon": "2.26763",
+          "id": 108860,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de Sant Sadurní",
+              "lat": "41.54059",
+              "lon": "2.26677"
+            },
+            {
+              "name": "Baixada de l'Església",
+              "lat": "41.54066",
+              "lon": "2.26763"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Montgat",
+      "lat": "41.46670",
+      "lon": "2.27897",
+      "id": 1470838553,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Móra d'Ebre",
+      "names": {
+        "ca": "Móra d'Ebre"
+      },
+      "lat": "41.08934",
+      "lon": "0.64129",
+      "id": 1470838559,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sabadell",
+      "names": {
+        "ru": "Сабадель",
+        "el": "Σαβαδέλ",
+        "lt": "Sabadelis",
+        "ca": "Sabadell"
+      },
+      "lat": "41.54210",
+      "lon": "2.11390",
+      "id": 252566396,
+      "type": "CITY",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Joan Bartomeu",
+          "lat": "41.52620",
+          "lon": "2.10800",
+          "id": 57906,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de Josep Guardiet",
+              "lat": "41.52604",
+              "lon": "2.10835"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Velilla de San Antonio",
+      "names": {
+        "ru": "Велилья-де-Сан-Антонио",
+        "uk": "Велілья-де-Сан-Антоніо",
+        "es": "Velilla de San Antonio"
+      },
+      "lat": "40.36717",
+      "lon": "-3.48744",
+      "id": 311127037,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Cabrera de Mar",
+      "lat": "41.52770",
+      "lon": "2.39251",
+      "id": 523051419,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.52744",
+          "lon": "2.40262",
+          "id": 134131,
+          "intersectedStreets": [
+            {
+              "name": "carrer de Sant Sebastià",
+              "lat": "41.52680",
+              "lon": "2.40292"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Cassà de la Selva",
+      "lat": "41.88747",
+      "lon": "2.87425",
+      "id": 5417486419,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "el Pont de Suert",
+      "names": {
+        "el": "Ποντ ντε Σουέρτ",
+        "ca": "el Pont de Suert"
+      },
+      "lat": "42.40761",
+      "lon": "0.74025",
+      "id": 151063417,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Collado Villalba",
+      "names": {
+        "ru": "Кольядо-Вильяльба",
+        "uk": "Кольядо-Вільяльба"
+      },
+      "lat": "40.64301",
+      "lon": "-3.99273",
+      "id": 256407477,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Manresa",
+      "names": {
+        "ru": "Манреса",
+        "ja": "マンレザ"
+      },
+      "lat": "41.72889",
+      "lon": "1.82868",
+      "id": 1470838508,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu (Les Escodines)",
+          "lat": "41.72261",
+          "lon": "1.82989",
+          "id": 83012,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de les Escodines (Les Escodines)",
+              "lat": "41.72296",
+              "lon": "1.82912"
+            },
+            {
+              "name": "Carrer de l'Aiguader (Les Escodines)",
+              "lat": "41.72261",
+              "lon": "1.82989"
+            },
+            {
+              "name": "Carrer Nou de Santa Clara (Les Escodines)",
+              "lat": "41.72237",
+              "lon": "1.83070"
+            },
+            {
+              "name": "Carrer dels Caputxins (Les Escodines)",
+              "lat": "41.72237",
+              "lon": "1.83070"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Manlleu",
+      "lat": "41.99998",
+      "lon": "2.28412",
+      "id": 1470838507,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Villarejo de Salvanés",
+      "lat": "40.16836",
+      "lon": "-3.27388",
+      "id": 249871398,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Arroyomolinos",
+      "enName": "Arroyomolinos",
+      "names": {
+        "ru": "Арройомолинос",
+        "uk": "Арройомолінос",
+        "ja": "アロヨモリノス"
+      },
+      "lat": "40.27292",
+      "lon": "-3.91580",
+      "id": 311114762,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Torrelodones",
+      "names": {
+        "ru": "Торрелодонес",
+        "uk": "Торрелодонес"
+      },
+      "lat": "40.57628",
+      "lon": "-3.92860",
+      "id": 255328636,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Valls",
+      "names": {
+        "ru": "Вальс",
+        "uk": "Бальш"
+      },
+      "lat": "41.28354",
+      "lon": "1.24736",
+      "id": 1470839529,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Vic",
+      "enName": "Vic",
+      "names": {
+        "ca": "Vic",
+        "es": "Vic",
+        "zh": "比克"
+      },
+      "lat": "41.93020",
+      "lon": "2.25459",
+      "id": 1470839536,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu del Grau",
+          "lat": "41.93676",
+          "lon": "2.24741",
+          "id": 58467
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Arbúcies",
+      "names": {
+        "ar": "أربوثياس"
+      },
+      "lat": "41.81606",
+      "lon": "2.51415",
+      "id": 1470837987,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sevilla la Nueva",
+      "lat": "40.34754",
+      "lon": "-4.02753",
+      "id": 309167783,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "El Escorial",
+      "lat": "40.58364",
+      "lon": "-4.12814",
+      "id": 64835924,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Coll de Nargó",
+      "lat": "42.17391",
+      "lon": "1.31613",
+      "id": 262635753,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "42.17490",
+          "lon": "1.31784",
+          "id": 90301,
+          "intersectedStreets": [
+            {
+              "name": "Plaça del Cap del Roc",
+              "lat": "42.17497",
+              "lon": "1.31767"
+            },
+            {
+              "name": "Carrer de la Rosa",
+              "lat": "42.17444",
+              "lon": "1.31716"
+            },
+            {
+              "name": "La Costerota",
+              "lat": "42.17468",
+              "lon": "1.31761"
+            },
+            {
+              "name": "Carrer Hospital",
+              "lat": "42.17479",
+              "lon": "1.31767"
+            },
+            {
+              "name": "Camí Estret",
+              "lat": "42.17382",
+              "lon": "1.31628"
+            },
+            {
+              "name": "Carrer de la Carretera Nova",
+              "lat": "42.17382",
+              "lon": "1.31628"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Vilafranca del Penedès",
+      "names": {
+        "ca": "Vilafranca del Penedès"
+      },
+      "lat": "41.34638",
+      "lon": "1.69952",
+      "id": 1470839547,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Brunete",
+      "lat": "40.40505",
+      "lon": "-3.99799",
+      "id": 256477660,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Humanes de Madrid",
+      "enName": "Humanes de Madrid",
+      "names": {
+        "ru": "Уманес-де-Мадрид",
+        "ja": "ウマネス・デ・マドリード",
+        "zh": "乌马内斯德马德里德"
+      },
+      "lat": "40.25088",
+      "lon": "-3.82710",
+      "id": 306946784,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Alpedrete",
+      "lat": "40.65990",
+      "lon": "-4.02512",
+      "id": 64835913,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Badia del Vallès",
+      "lat": "41.50782",
+      "lon": "2.11534",
+      "id": 2794611208,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Argentona",
+      "lat": "41.55543",
+      "lon": "2.40028",
+      "id": 1470838014,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "la Bisbal del Penedès",
+      "lat": "41.27784",
+      "lon": "1.49056",
+      "id": 331028206,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Camí de Mas Bartomeu",
+          "lat": "41.31413",
+          "lon": "1.51637",
+          "id": 25250,
+          "intersectedStreets": [
+            {
+              "name": "Camí de la Costa (el Papagai)",
+              "lat": "41.29803",
+              "lon": "1.50905"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Arenys de Mar",
+      "lat": "41.57970",
+      "lon": "2.54916",
+      "id": 1470838013,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Vilanova del Camí",
+      "lat": "41.57143",
+      "lon": "1.63614",
+      "id": 1470839540,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Martorell",
+      "lat": "41.47692",
+      "lon": "1.92840",
+      "id": 1470838514,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.47494",
+          "lon": "1.93668",
+          "id": 34900,
+          "intersectedStreets": [
+            {
+              "name": "Carretera de Terrassa",
+              "lat": "41.47436",
+              "lon": "1.93692"
+            },
+            {
+              "name": "Passeig Quarter",
+              "lat": "41.47494",
+              "lon": "1.93668"
+            },
+            {
+              "name": "Passeig del Quarter",
+              "lat": "41.47494",
+              "lon": "1.93668"
+            },
+            {
+              "name": "Carrer d'Àngela Benaca",
+              "lat": "41.47516",
+              "lon": "1.93660"
+            },
+            {
+              "name": "Carrer del Riu",
+              "lat": "41.47539",
+              "lon": "1.93651"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Vila-seca",
+      "lat": "41.10915",
+      "lon": "1.14649",
+      "id": 1470839538,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "l'Ametlla del Vallès",
+      "lat": "41.66933",
+      "lon": "2.26145",
+      "id": 393906088,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carretera de Sant Bartomeu",
+          "lat": "41.69352",
+          "lon": "2.24520",
+          "id": 45384,
+          "intersectedStreets": [
+            {
+              "name": "Carrer d'Albeniz",
+              "lat": "41.69068",
+              "lon": "2.24797"
+            },
+            {
+              "name": "Carrer d'Amadeu Vives",
+              "lat": "41.69099",
+              "lon": "2.24756"
+            },
+            {
+              "name": "Carrer de la Cardenera",
+              "lat": "41.69354",
+              "lon": "2.24520"
+            },
+            {
+              "name": "Carrer d'Apel·les Mestres",
+              "lat": "41.69418",
+              "lon": "2.24419"
+            },
+            {
+              "name": "Carrer de Tomás Breton",
+              "lat": "41.69666",
+              "lon": "2.23786"
+            },
+            {
+              "name": "Carrer de Tarragó",
+              "lat": "41.69624",
+              "lon": "2.23598"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Vilassar de Mar",
+      "names": {
+        "ca": "Vilassar de Mar",
+        "es": "Vilasar de Mar"
+      },
+      "lat": "41.50640",
+      "lon": "2.39139",
+      "id": 1470839541,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Santa Oliva",
+      "lat": "41.25329",
+      "lon": "1.55101",
+      "id": 388127102,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.23670",
+          "lon": "1.54313",
+          "id": 95166,
+          "intersectedStreets": [
+            {
+              "name": "Avinguda de Nostra Senyora del Pilar",
+              "lat": "41.23622",
+              "lon": "1.54287"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Montellà",
+      "lat": "42.35448",
+      "lon": "1.70488",
+      "id": 1035806046,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Pista de San t Bartomeu - GR 150",
+          "lat": "42.34938",
+          "lon": "1.69994",
+          "id": 116709
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Navarcles",
+      "lat": "41.75316",
+      "lon": "1.90336",
+      "id": 1470838604,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.75351",
+          "lon": "1.90506",
+          "id": 72318,
+          "intersectedStreets": [
+            {
+              "name": "Passeig d'Àngel Vivó",
+              "lat": "41.75347",
+              "lon": "1.90503"
+            },
+            {
+              "name": "Passeig de les Fonts",
+              "lat": "41.75347",
+              "lon": "1.90503"
+            },
+            {
+              "name": "Carrer de la Sardana",
+              "lat": "41.75550",
+              "lon": "1.90696"
+            },
+            {
+              "name": "Carrer de la Renaixença",
+              "lat": "41.75561",
+              "lon": "1.90701"
+            },
+            {
+              "name": "Carrer de la Font de la Cura",
+              "lat": "41.75561",
+              "lon": "1.90701"
+            },
+            {
+              "name": "Carrer del Bages",
+              "lat": "41.75383",
+              "lon": "1.90508"
+            },
+            {
+              "name": "Carrer de Tarragona",
+              "names": {
+                "ca": "Carrer de Tarragona"
+              },
+              "lat": "41.75439",
+              "lon": "1.90546"
+            },
+            {
+              "name": "Carrer de Lleida",
+              "names": {
+                "ca": "carrer de Lleida"
+              },
+              "lat": "41.75454",
+              "lon": "1.90563"
+            },
+            {
+              "name": "Carrer de Girona",
+              "lat": "41.75476",
+              "lon": "1.90598"
+            },
+            {
+              "name": "Passatge de Badalona",
+              "lat": "41.75492",
+              "lon": "1.90626"
+            },
+            {
+              "name": "Carrer Badalona",
+              "lat": "41.75507",
+              "lon": "1.90649"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Mas de Bondia",
+      "lat": "41.60545",
+      "lon": "1.19076",
+      "id": 2457882661,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.60509",
+          "lon": "1.19298",
+          "id": 101922
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Montcada i Reixac",
+      "lat": "41.48231",
+      "lon": "2.18700",
+      "id": 427061659,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Banyoles",
+      "names": {
+        "ca": "Banyoles"
+      },
+      "lat": "42.11805",
+      "lon": "2.76536",
+      "id": 1470838085,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Coslada",
+      "lat": "40.42380",
+      "lon": "-3.55529",
+      "id": 264240976,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Olot",
+      "lat": "42.18222",
+      "lon": "2.48902",
+      "id": 1470838619,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Casserres",
+      "names": {
+        "es": "Casserres"
+      },
+      "lat": "42.01382",
+      "lon": "1.84304",
+      "id": 303713456,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer Sant Bartomeu",
+          "lat": "42.01378",
+          "lon": "1.84195",
+          "id": 34434,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de la Creu",
+              "lat": "42.01393",
+              "lon": "1.84216"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Blanes",
+      "names": {
+        "ru": "Бланес"
+      },
+      "lat": "41.67562",
+      "lon": "2.79324",
+      "id": 1470838110,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer Sant Bartomeu",
+          "lat": "41.68081",
+          "lon": "2.78145",
+          "id": 31366,
+          "intersectedStreets": [
+            {
+              "name": "Carrer del Bosc",
+              "lat": "41.68041",
+              "lon": "2.78224"
+            },
+            {
+              "name": "Carrer Josep Maria de Segarra",
+              "lat": "41.68081",
+              "lon": "2.78145"
+            },
+            {
+              "name": "Carrer Prudenci Bertrana",
+              "lat": "41.68081",
+              "lon": "2.78145"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Villanueva de la Torre",
+      "lat": "40.58309",
+      "lon": "-3.29936",
+      "id": 1456260091,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Esplugues de Llobregat",
+      "lat": "41.37768",
+      "lon": "2.08997",
+      "id": 1460478908,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Bartomeu Bermejo",
+          "lat": "41.38677",
+          "lon": "2.08946",
+          "id": 7658,
+          "intersectedStreets": [
+            {
+              "name": "Avinguda de la Mestra Dolors Barceló",
+              "lat": "41.38640",
+              "lon": "2.08993"
+            },
+            {
+              "name": "Carrer de Pau Vergós",
+              "lat": "41.38697",
+              "lon": "2.09150"
+            },
+            {
+              "name": "Carrer de Ferrer Bassa (Ciutat Diagonal)",
+              "lat": "41.38697",
+              "lon": "2.09150"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Majadahonda",
+      "lat": "40.47306",
+      "lon": "-3.87241",
+      "id": 256456063,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Berga",
+      "lat": "42.10115",
+      "lon": "1.84548",
+      "id": 1470838103,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Camí de Sant Bartomeu (la Valldan)",
+          "lat": "42.09442",
+          "lon": "1.82216",
+          "id": 22894,
+          "intersectedStreets": [
+            {
+              "name": "Camí de Serra Farriols",
+              "lat": "42.09612",
+              "lon": "1.82062"
+            },
+            {
+              "name": "carrer Germans Farguell",
+              "lat": "42.09466",
+              "lon": "1.82195"
+            },
+            {
+              "name": "carrer dels Germans Farguell",
+              "lat": "42.09442",
+              "lon": "1.82216"
+            },
+            {
+              "name": "carrer Bernat Sala",
+              "lat": "42.09337",
+              "lon": "1.82309"
+            },
+            {
+              "name": "Camí de Garreta",
+              "lat": "42.08999",
+              "lon": "1.82815"
+            },
+            {
+              "name": "Carretera de Solsona",
+              "lat": "42.08993",
+              "lon": "1.83051"
+            },
+            {
+              "name": "Carrer del Camí de Cardona",
+              "lat": "42.09295",
+              "lon": "1.83504"
+            },
+            {
+              "name": "Carrer de Fontcaldes",
+              "lat": "42.09039",
+              "lon": "1.82579"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Montblanc",
+      "lat": "41.37623",
+      "lon": "1.16207",
+      "id": 331949813,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Olesa de Montserrat",
+      "lat": "41.54305",
+      "lon": "1.89319",
+      "id": 1470838615,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Pozuelo de Alarcón",
+      "lat": "40.43465",
+      "lon": "-3.81483",
+      "id": 256455561,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Artés",
+      "lat": "41.79867",
+      "lon": "1.95489",
+      "id": 1470838058,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Valdemoro",
+      "names": {
+        "ru": "Вальдеморо"
+      },
+      "lat": "40.18880",
+      "lon": "-3.67162",
+      "id": 308218525,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Boadilla del Monte",
+      "lat": "40.40535",
+      "lon": "-3.87647",
+      "id": 256551822,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Bartomeu del Grau",
+      "lat": "41.98077",
+      "lon": "2.17504",
+      "id": 550042626,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Camí de Sant Genís",
+          "lat": "41.97583",
+          "lon": "2.14111",
+          "id": 121621
+        },
+        {
+          "name": "Carrer Llevant",
+          "lat": "41.98452",
+          "lon": "2.17699",
+          "id": 91662
+        },
+        {
+          "name": "Carrer Nou",
+          "lat": "41.98372",
+          "lon": "2.17089",
+          "id": 91661
+        },
+        {
+          "name": "Carrer Tres Creus",
+          "lat": "41.98052",
+          "lon": "2.17731",
+          "id": 96366
+        },
+        {
+          "name": "Carrer de Vic",
+          "lat": "41.98061",
+          "lon": "2.17654",
+          "id": 125251
+        },
+        {
+          "name": "Carrer de la Tramuntana",
+          "lat": "41.98219",
+          "lon": "2.19076",
+          "id": 121637
+        },
+        {
+          "name": "Carrer del Garbí",
+          "lat": "41.98184",
+          "lon": "2.19044",
+          "id": 91666
+        },
+        {
+          "name": "Carrer del Gregal",
+          "lat": "41.98195",
+          "lon": "2.19055",
+          "id": 91667
+        },
+        {
+          "name": "Carrer del Mig",
+          "lat": "41.98155",
+          "lon": "2.17630",
+          "id": 91668
+        },
+        {
+          "name": "Carrer del Xaloc",
+          "lat": "41.98277",
+          "lon": "2.19126",
+          "id": 91665
+        },
+        {
+          "name": "Carretera de Sant Bartomeu",
+          "lat": "41.97446",
+          "lon": "2.17682",
+          "id": 79220
+        },
+        {
+          "name": "Carretera de Sant Bartomeu del Grau",
+          "names": {
+            "alt_name": "Camí de les Farreres"
+          },
+          "lat": "41.97414",
+          "lon": "2.14622",
+          "id": 55369
+        },
+        {
+          "name": "Carretera del Cementiri",
+          "lat": "41.97994",
+          "lon": "2.18340",
+          "id": 91670
+        },
+        {
+          "name": "Eix Transversal",
+          "names": {
+            "es": "eje transversal"
+          },
+          "lat": "41.93309",
+          "lon": "2.16735",
+          "id": 90386
+        },
+        {
+          "name": "GR 3",
+          "lat": "41.98010",
+          "lon": "2.16776",
+          "id": 55366
+        },
+        {
+          "name": "carrer Ponent",
+          "names": {
+            "ca": "carrer de Ponent"
+          },
+          "lat": "41.98063",
+          "lon": "2.17435",
+          "id": 105163
+        },
+        {
+          "name": "carrer Vell",
+          "lat": "41.98249",
+          "lon": "2.17388",
+          "id": 19061
+        },
+        {
+          "name": "carrer de Dalt",
+          "lat": "41.98178",
+          "lon": "2.17564",
+          "id": 105164
+        },
+        {
+          "name": "Camí d'Alboquers (Pere-riera)",
+          "lat": "41.93153",
+          "lon": "2.13051",
+          "id": 112325
+        },
+        {
+          "name": "Camí de St. Bartomeu al Sorreig (Xalet Mas Reig)",
+          "lat": "41.98958",
+          "lon": "2.16821",
+          "id": 111514
+        },
+        {
+          "name": "Carrer de la Codina (Xalet Mas Reig)",
+          "lat": "41.98738",
+          "lon": "2.16695",
+          "id": 91664
+        },
+        {
+          "name": "Túnel de la Fontfreda (Pere-riera)",
+          "lat": "41.91702",
+          "lon": "2.13495",
+          "id": 90385
+        },
+        {
+          "name": "<Sant Bartomeu del Grau>",
+          "lat": "41.98028",
+          "lon": "2.17767",
+          "id": 96365
+        },
+        {
+          "name": "Camí de Ca la Burra",
+          "lat": "41.92538",
+          "lon": "2.13864",
+          "id": 114618
+        },
+        {
+          "name": "Camí de Rogers",
+          "lat": "41.97493",
+          "lon": "2.17115",
+          "id": 49207
+        },
+        {
+          "name": "Carrer Pla de l'Oratori",
+          "lat": "41.98100",
+          "lon": "2.17669",
+          "id": 105166
+        },
+        {
+          "name": "Carrer de la Migjorn",
+          "lat": "41.98157",
+          "lon": "2.19141",
+          "id": 121636
+        },
+        {
+          "name": "Eix Transversal C-25 Viaducte de Pere-riera",
+          "lat": "41.92259",
+          "lon": "2.14062",
+          "id": 90387
+        },
+        {
+          "name": "Passeig del Grau",
+          "lat": "41.97996",
+          "lon": "2.17731",
+          "id": 96367
+        },
+        {
+          "name": "Plaça del Doctor Griera",
+          "lat": "41.98120",
+          "lon": "2.17478",
+          "id": 105165
+        }
+      ],
+      "matchCity": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Artesa de Segre",
+      "lat": "41.89629",
+      "lon": "1.04711",
+      "id": 1470838054,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Alcorcón",
+      "enName": "Alcorcón",
+      "names": {
+        "ru": "Алькоркон",
+        "uk": "Алькоркон",
+        "ja": "アルコルコン",
+        "lt": "Alkorkonas",
+        "hu": "Alcorcón",
+        "zh": "阿尔科尔孔",
+        "sr": "Алкоркон"
+      },
+      "lat": "40.34930",
+      "lon": "-3.82843",
+      "id": 306524300,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Balaguer",
+      "lat": "41.78972",
+      "lon": "0.80549",
+      "id": 1470838076,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Fuenlabrada",
+      "enName": "Fuenlabrada",
+      "names": {
+        "ru": "Фуэнлабрада",
+        "uk": "Фуенлабрада",
+        "ja": "フエンラブラダ",
+        "hu": "Fuenlabrada",
+        "zh": "丰拉夫拉达",
+        "sr": "Фуенлабрада"
+      },
+      "lat": "40.28248",
+      "lon": "-3.79234",
+      "id": 305072315,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Pinto",
+      "enName": "Pinto",
+      "names": {
+        "ru": "Пинто",
+        "ja": "ピント"
+      },
+      "lat": "40.24099",
+      "lon": "-3.70051",
+      "id": 306620052,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Boi de Lluçanès",
+      "lat": "42.05784",
+      "lon": "2.15111",
+      "id": 539465394,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Camí ramader de Sant Bartomeu",
+          "names": {
+            "alt_name": "Camí de Vernera"
+          },
+          "lat": "42.02972",
+          "lon": "2.13703",
+          "id": 91597
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Canovelles",
+      "names": {
+        "ca": "Canovelles"
+      },
+      "lat": "41.61739",
+      "lon": "2.28288",
+      "id": 1460478422,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer Bartomeu Brufalt",
+          "lat": "41.61608",
+          "lon": "2.29569",
+          "id": 56296,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de Provença",
+              "lat": "41.61657",
+              "lon": "2.29584"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Rubí",
+      "lat": "41.49362",
+      "lon": "2.03195",
+      "id": 3248338760,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Santa Susanna",
+      "names": {
+        "ca": "Santa Susanna"
+      },
+      "lat": "41.63573",
+      "lon": "2.70659",
+      "id": 571272919,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "carrer del Doctor Bartomeu",
+          "lat": "41.63463",
+          "lon": "2.70579",
+          "id": 73937,
+          "intersectedStreets": [
+            {
+              "name": "Rambla Onze de Setembre",
+              "lat": "41.63419",
+              "lon": "2.70594"
+            },
+            {
+              "name": "Carrer Josep Pla",
+              "lat": "41.63463",
+              "lon": "2.70579"
+            },
+            {
+              "name": "Carrer Jaume Ir",
+              "lat": "41.63511",
+              "lon": "2.70560"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Igualada",
+      "names": {
+        "ru": "Игуалада"
+      },
+      "lat": "41.57902",
+      "lon": "1.61735",
+      "id": 1470838412,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.57823",
+          "lon": "1.61905",
+          "id": 84219,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de Sant Jaume",
+              "lat": "41.57828",
+              "lon": "1.61872"
+            },
+            {
+              "name": "Carrer de Custiol",
+              "lat": "41.57828",
+              "lon": "1.61872"
+            },
+            {
+              "name": "Carreró de Sant Jaume",
+              "lat": "41.57828",
+              "lon": "1.61872"
+            },
+            {
+              "name": "Plaça del Rei",
+              "lat": "41.57821",
+              "lon": "1.61956"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Valdemorillo",
+      "lat": "40.50168",
+      "lon": "-4.06889",
+      "id": 26541174,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Porqueres",
+      "names": {
+        "es": "Porqueras"
+      },
+      "lat": "42.12139",
+      "lon": "2.74786",
+      "id": 3302537661,
+      "type": "HAMLET",
+      "listOfStreets": [
+        {
+          "name": "Camí de Sant Bartomeu de Matamala",
+          "lat": "42.12680",
+          "lon": "2.72392",
+          "id": 108826
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Massalcoreig",
+      "lat": "41.45918",
+      "lon": "0.35965",
+      "id": 865313399,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Travessia de Sant Bartomeu",
+          "lat": "41.45995",
+          "lon": "0.36036",
+          "id": 123119
+        },
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.46095",
+          "lon": "0.36377",
+          "id": 123151
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Guadarrama",
+      "lat": "40.67345",
+      "lon": "-4.08939",
+      "id": 283475406,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Daganzo de Arriba",
+      "lat": "40.54520",
+      "lon": "-3.45785",
+      "id": 255463444,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Meco",
+      "lat": "40.55375",
+      "lon": "-3.32816",
+      "id": 310569328,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Parla",
+      "names": {
+        "ar": "بارلا",
+        "ru": "Парла",
+        "uk": "Парла",
+        "el": "Πάρλα",
+        "ja": "パルラ",
+        "fa": "پارلا",
+        "hu": "Parla",
+        "ur": "پرلا",
+        "zh": "帕尔拉",
+        "sr": "Парла"
+      },
+      "lat": "40.23740",
+      "lon": "-3.77189",
+      "id": 306620202,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Pere de Ribes",
+      "names": {
+        "ca": "Sant Pere de Ribes"
+      },
+      "lat": "41.26192",
+      "lon": "1.77214",
+      "id": 1470838938,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "la Bisbal d'Empordà",
+      "lat": "41.95987",
+      "lon": "3.03962",
+      "id": 1470838432,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Pere Bartomeu",
+          "lat": "41.95708",
+          "lon": "3.03742",
+          "id": 67806
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Sitges",
+      "lat": "41.23667",
+      "lon": "1.82281",
+      "id": 1470839456,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Passeig de Bartomeu Soler",
+          "lat": "41.24569",
+          "lon": "1.80002",
+          "id": 90642,
+          "intersectedStreets": [
+            {
+              "name": "Passeig de Sant Dídac",
+              "lat": "41.24695",
+              "lon": "1.80152"
+            },
+            {
+              "name": "Passeig del Fondac",
+              "lat": "41.24459",
+              "lon": "1.79714"
+            }
+          ]
+        },
+        {
+          "name": "Carrer Bartomeu Robert",
+          "lat": "41.22941",
+          "lon": "1.78884",
+          "id": 28471,
+          "intersectedStreets": [
+            {
+              "name": "Avinguda de Navarra",
+              "lat": "41.22930",
+              "lon": "1.78777"
+            },
+            {
+              "name": "Carrer Ferran Casablancas",
+              "lat": "41.22930",
+              "lon": "1.78777"
+            },
+            {
+              "name": "Carrer de Josep Planas Robert (Alt Vinyet)",
+              "lat": "41.22941",
+              "lon": "1.78884"
+            },
+            {
+              "name": "Carrer de Balmes",
+              "names": {
+                "ca": "Carrer de Balmes"
+              },
+              "lat": "41.22952",
+              "lon": "1.78996"
+            },
+            {
+              "name": "Carrer del Pintor Roig i Soler (Alt Vinyet)",
+              "lat": "41.22952",
+              "lon": "1.78996"
+            }
+          ]
+        },
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.23758",
+          "lon": "1.80899",
+          "id": 28352,
+          "intersectedStreets": [
+            {
+              "name": "Carrer Jesús",
+              "lat": "41.23682",
+              "lon": "1.80978"
+            },
+            {
+              "name": "Carrer de Sant Gaudenci",
+              "lat": "41.23758",
+              "lon": "1.80899"
+            },
+            {
+              "name": "Avinguda d'Artur Carbonell",
+              "lat": "41.23854",
+              "lon": "1.80796"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Sils",
+      "lat": "41.80894",
+      "lon": "2.74147",
+      "id": 1470839455,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Cerdanyola del Vallès",
+      "lat": "41.49103",
+      "lon": "2.13750",
+      "id": 1470839444,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Avinguda de Bartomeu",
+          "lat": "41.50070",
+          "lon": "2.08863",
+          "id": 86367,
+          "intersectedStreets": [
+            {
+              "name": "Carretera de Bellaterra",
+              "lat": "41.50078",
+              "lon": "2.08678"
+            },
+            {
+              "name": "Carrer del Mestre Nicolau (Bellaterra)",
+              "lat": "41.50085",
+              "lon": "2.08676"
+            },
+            {
+              "name": "Camí de la Font de la Bonaigua",
+              "lat": "41.50078",
+              "lon": "2.08794"
+            },
+            {
+              "name": "Carrer de Ramon Llull (Bellaterra)",
+              "lat": "41.50085",
+              "lon": "2.08903"
+            },
+            {
+              "name": "Avinguda de Joan Fàbregas",
+              "lat": "41.50117",
+              "lon": "2.09036"
+            },
+            {
+              "name": "Avinguda de Josep Maria Marcet",
+              "lat": "41.50117",
+              "lon": "2.09036"
+            },
+            {
+              "name": "Carrer de Terranova",
+              "lat": "41.49759",
+              "lon": "2.08652"
+            },
+            {
+              "name": "Carrer de la Bonaigua (Bellaterra)",
+              "lat": "41.49914",
+              "lon": "2.08811"
+            },
+            {
+              "name": "Carrer del Pintor Fortuny (Bellaterra)",
+              "lat": "41.49914",
+              "lon": "2.08811"
+            },
+            {
+              "name": "Carrer d'Octavi Bruix",
+              "lat": "41.49966",
+              "lon": "2.08708"
+            },
+            {
+              "name": "Carrer de Casas i Amigó (Bellaterra)",
+              "lat": "41.50006",
+              "lon": "2.08693"
+            }
+          ]
+        },
+        {
+          "name": "Avinguda Bartomeu",
+          "lat": "41.49930",
+          "lon": "2.08798",
+          "id": 3263
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Moralzarzal",
+      "lat": "40.67914",
+      "lon": "-3.97210",
+      "id": 256406580,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "la Seu d'Urgell",
+      "names": {
+        "ru": "Сео-де-Уржель",
+        "uk": "Ла-Сеу-д'Уржель",
+        "ca": "la Seu d'Urgell",
+        "es": "Seo de Urgel"
+      },
+      "lat": "42.35757",
+      "lon": "1.45601",
+      "id": 1470839447,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Parets del Vallès",
+      "lat": "41.57299",
+      "lon": "2.23293",
+      "id": 395368559,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Torrejón de Ardoz",
+      "names": {
+        "ru": "Торрехон-де-Ардос",
+        "uk": "Торрехон-де-Ардос",
+        "lt": "Torechon de Ardosas",
+        "hu": "Torrejón de Ardoz",
+        "es": "Torrejón de Ardoz",
+        "sr": "Торехон де Ардос"
+      },
+      "lat": "40.45878",
+      "lon": "-3.47933",
+      "id": 230421116,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Fontcoberta",
+      "lat": "42.14254",
+      "lon": "2.78978",
+      "id": 1460477966,
+      "type": "HAMLET",
+      "listOfStreets": [
+        {
+          "name": "Camí de Sant Bartomeu",
+          "lat": "42.12563",
+          "lon": "2.81407",
+          "id": 130778
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Deltebre",
+      "names": {
+        "fr": "Deltèbre",
+        "ca": "Deltebre",
+        "es": "Deltebre"
+      },
+      "lat": "40.72039",
+      "lon": "0.72434",
+      "id": 2055370119,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Rivas Vaciamadrid",
+      "names": {
+        "ru": "Ривас-Васиамадрид",
+        "uk": "Рівас-Васіамадрид"
+      },
+      "lat": "40.35361",
+      "lon": "-3.53109",
+      "id": 311129997,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Joan les Fonts",
+      "lat": "42.21330",
+      "lon": "2.51343",
+      "id": 260446338,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer Mossèn Bartomeu",
+          "lat": "42.21457",
+          "lon": "2.51372",
+          "id": 67149
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Esparreguera",
+      "lat": "41.53933",
+      "lon": "1.86945",
+      "id": 1460478465,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Just Desvern",
+      "lat": "41.38158",
+      "lon": "2.07507",
+      "id": 1470838887,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Getafe",
+      "enName": "Getafe",
+      "names": {
+        "ru": "Хетафе",
+        "ja": "ヘタフェ",
+        "hu": "Getafe",
+        "zh": "赫塔费"
+      },
+      "lat": "40.30818",
+      "lon": "-3.73027",
+      "id": 2697472985,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Barberà del Vallès",
+      "lat": "41.51725",
+      "lon": "2.12659",
+      "id": 1460477981,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Alió",
+      "lat": "41.29359",
+      "lon": "1.30627",
+      "id": 1460477969,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Plaça de Sant Bartomeu",
+          "lat": "41.29462",
+          "lon": "1.30568",
+          "id": 88748,
+          "intersectedStreets": [
+            {
+              "name": "Plaça Nova",
+              "lat": "41.29459",
+              "lon": "1.30613"
+            },
+            {
+              "name": "Carrer Major",
+              "lat": "41.29462",
+              "lon": "1.30568"
+            },
+            {
+              "name": "Carrer del Pou",
+              "lat": "41.29478",
+              "lon": "1.30557"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Montornès de Segarra",
+      "lat": "41.60095",
+      "lon": "1.23120",
+      "id": 1460477972,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu (Mas de Bondia)",
+          "lat": "41.60508",
+          "lon": "1.19296",
+          "id": 101921
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Santa Coloma de Gramenet",
+      "names": {
+        "ru": "Санта-Колома-де-Граменет"
+      },
+      "lat": "41.45156",
+      "lon": "2.20834",
+      "id": 346353020,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Feliu de Llobregat",
+      "lat": "41.38129",
+      "lon": "2.04464",
+      "id": 1389000150,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Lloret de Mar",
+      "names": {
+        "ru": "Льорет де Мар"
+      },
+      "lat": "41.69735",
+      "lon": "2.83924",
+      "id": 1470838480,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.69990",
+          "lon": "2.84896",
+          "id": 64875,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de la Vila",
+              "lat": "41.69990",
+              "lon": "2.84896"
+            },
+            {
+              "name": "Passeig de Jacint Verdaguer",
+              "lat": "41.69935",
+              "lon": "2.84932"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Sant Bartomeu de la Quadra",
+      "lat": "41.42594",
+      "lon": "2.03766",
+      "id": 2151992546,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de l'Església",
+          "lat": "41.42596",
+          "lon": "2.03788",
+          "id": 118868
+        },
+        {
+          "name": "Carrer de la Font Fresca",
+          "lat": "41.42667",
+          "lon": "2.04047",
+          "id": 107069
+        },
+        {
+          "name": "Carrer del Bosc",
+          "lat": "41.42841",
+          "lon": "2.03880",
+          "id": 107063
+        },
+        {
+          "name": "Carrer del Canigó",
+          "lat": "41.42797",
+          "lon": "2.03891",
+          "id": 107065
+        },
+        {
+          "name": "Carretera Veïnal de Molins de Rei a Vallvidrera",
+          "lat": "41.42617",
+          "lon": "2.03665",
+          "id": 129706
+        },
+        {
+          "name": "Antic Camí de l'Església",
+          "lat": "41.42580",
+          "lon": "2.03745",
+          "id": 118866
+        },
+        {
+          "name": "Carrer de la Pepeta de Cal Bardissa",
+          "lat": "41.42653",
+          "lon": "2.03850",
+          "id": 86088
+        },
+        {
+          "name": "Carrer de les Penyes d'en Castellví",
+          "lat": "41.43042",
+          "lon": "2.03856",
+          "id": 107067
+        },
+        {
+          "name": "Carrer del Turó del Quirze",
+          "lat": "41.42707",
+          "lon": "2.04017",
+          "id": 86086
+        },
+        {
+          "name": "Carretera de la Rierada",
+          "lat": "41.42752",
+          "lon": "2.04015",
+          "id": 92335
+        }
+      ],
+      "matchCity": 1
+    },
+    {
+      "name": "Tarragona",
+      "names": {
+        "be": "Тарагона",
+        "ru": "Таррагона",
+        "ko": "타라고나",
+        "el": "Ταρραγόνα",
+        "lt": "Taragona",
+        "fr": "Tarragone",
+        "es": "Tarragona",
+        "zh": "塔拉戈纳",
+        "ar": "طراغونة",
+        "oc": "Tarragona",
+        "la": "Tarraco",
+        "uk": "Таррагона",
+        "ja": "タラゴナ",
+        "fa": "تاراگونا",
+        "he": "טרגונה",
+        "sr": "Тарагона"
+      },
+      "lat": "41.11724",
+      "lon": "1.25461",
+      "id": 152377920,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Torelló",
+      "lat": "42.04783",
+      "lon": "2.26434",
+      "id": 1470839496,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer Sant Bartomeu",
+          "lat": "42.04652",
+          "lon": "2.26550",
+          "id": 107577,
+          "intersectedStreets": [
+            {
+              "name": "Carrer dels Estudis",
+              "lat": "42.04728",
+              "lon": "2.26454"
+            },
+            {
+              "name": "carrer Sant Miquel",
+              "lat": "42.04728",
+              "lon": "2.26454"
+            },
+            {
+              "name": "Carrer de Capsavila",
+              "lat": "42.04728",
+              "lon": "2.26454"
+            },
+            {
+              "name": "Carreró de la Torrentera",
+              "lat": "42.04641",
+              "lon": "2.26567"
+            },
+            {
+              "name": "Carrer Puigdassalit",
+              "lat": "42.04612",
+              "lon": "2.26610"
+            },
+            {
+              "name": "Carrer Diputació",
+              "lat": "42.04509",
+              "lon": "2.26754"
+            },
+            {
+              "name": "carrer Manlleu",
+              "lat": "42.04509",
+              "lon": "2.26754"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Aranjuez",
+      "lat": "40.03221",
+      "lon": "-3.60396",
+      "id": 252751393,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Masies de Sansuies",
+      "lat": "41.30747",
+      "lon": "1.48370",
+      "id": 4864470659,
+      "type": "HAMLET",
+      "listOfStreets": [
+        {
+          "name": "Camí de Mas Bartomeu",
+          "lat": "41.32017",
+          "lon": "1.49697",
+          "id": 122234
+        },
+        {
+          "name": "Camí del Coll d'Arca a Mas Bartomeu",
+          "lat": "41.32517",
+          "lon": "1.48665",
+          "id": 108931,
+          "intersectedStreets": [
+            {
+              "name": "Camí d'Aiguaviva a Mas Bartomeu",
+              "lat": "41.32228",
+              "lon": "1.49401"
+            }
+          ]
+        },
+        {
+          "name": "Camí d'Aiguaviva a Mas Bartomeu",
+          "lat": "41.32467",
+          "lon": "1.49702",
+          "id": 25801,
+          "intersectedStreets": [
+            {
+              "name": "Camí del Coll d'Arca a Mas Bartomeu",
+              "lat": "41.32228",
+              "lon": "1.49401"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Tàrrega",
+      "lat": "41.64728",
+      "lon": "1.14091",
+      "id": 1470839515,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Platja d'Aro",
+      "names": {
+        "ru": "Кастель-Пладжа-де-Аро",
+        "uk": "Кастель-Платжа-д'Ару",
+        "lt": "Kastiljo de Aras",
+        "es": "Playa de Aro"
+      },
+      "lat": "41.81847",
+      "lon": "3.06880",
+      "id": 290730984,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Torroella de Montgrí",
+      "lat": "42.04098",
+      "lon": "3.12620",
+      "id": 1470839507,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Tortosa",
+      "lat": "40.81102",
+      "lon": "0.52093",
+      "id": 1470839509,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Passeig de Mossèn Valls Bartomeu",
+          "lat": "40.82737",
+          "lon": "0.51041",
+          "id": 121894
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "l'Esquirol",
+      "names": {
+        "ru": "Санта-Мария-де-Корко"
+      },
+      "lat": "42.03402",
+      "lon": "2.36971",
+      "id": 1360757797,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "42.03584",
+          "lon": "2.36891",
+          "id": 53228,
+          "intersectedStreets": [
+            {
+              "name": "Carrer Major",
+              "lat": "42.03619",
+              "lon": "2.36854"
+            },
+            {
+              "name": "Carrer Nou",
+              "lat": "42.03514",
+              "lon": "2.36895"
+            },
+            {
+              "name": "Passeig de les Gorgues",
+              "lat": "42.03514",
+              "lon": "2.36895"
+            }
+          ]
+        },
+        {
+          "name": "Camí de Sant Bartomeu",
+          "lat": "42.01598",
+          "lon": "2.37285",
+          "id": 108831
+        },
+        {
+          "name": "Carrer de Sant Bartomeu (Les Planes)",
+          "lat": "42.03441",
+          "lon": "2.40064",
+          "id": 83257,
+          "intersectedStreets": [
+            {
+              "name": "Camí de l'Esquirol",
+              "lat": "42.03742",
+              "lon": "2.40122"
+            },
+            {
+              "name": "Carrer Major (Cantonigròs)",
+              "names": {
+                "ca": "carrer de Sant Roc (Cantonigròs)"
+              },
+              "lat": "42.03742",
+              "lon": "2.40122"
+            },
+            {
+              "name": "Carrer de Pere Gabarró Majoral",
+              "lat": "42.03610",
+              "lon": "2.40107"
+            },
+            {
+              "name": "Carrer de Pompeu Fabra (Les Planes)",
+              "names": {
+                "ca": "carrer de Pompeu Fabra (Les Planes)"
+              },
+              "lat": "42.03447",
+              "lon": "2.40064"
+            },
+            {
+              "name": "Carrer de Osona",
+              "lat": "42.03275",
+              "lon": "2.40028"
+            },
+            {
+              "name": "Carrer de Sant Martí",
+              "lat": "42.03140",
+              "lon": "2.40008"
+            },
+            {
+              "name": "Carrer de la Pineda",
+              "lat": "42.03065",
+              "lon": "2.39989"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Vallromanes",
+      "lat": "41.53232",
+      "lon": "2.29893",
+      "id": 1460478032,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.54108",
+          "lon": "2.28709",
+          "id": 71373,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de Sant Joan",
+              "lat": "41.54048",
+              "lon": "2.28713"
+            },
+            {
+              "name": "Carrer de Sant Antoni",
+              "lat": "41.54169",
+              "lon": "2.28747"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Palau-solità i Plegamans",
+      "lat": "41.58739",
+      "lon": "2.18068",
+      "id": 1460479055,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Bartomeu Soler",
+          "lat": "41.59683",
+          "lon": "2.17630",
+          "id": 60908,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de la Pineda",
+              "lat": "41.59665",
+              "lon": "2.17392"
+            },
+            {
+              "name": "Carrer de la Bonança",
+              "lat": "41.59670",
+              "lon": "2.17450"
+            },
+            {
+              "name": "Carrer de les Piscines",
+              "lat": "41.59675",
+              "lon": "2.17514"
+            },
+            {
+              "name": "Carrer de Manresa",
+              "lat": "41.59678",
+              "lon": "2.17564"
+            },
+            {
+              "name": "Carrer de Can Ceferí",
+              "lat": "41.59683",
+              "lon": "2.17630"
+            },
+            {
+              "name": "Carrer del Sol",
+              "lat": "41.59688",
+              "lon": "2.17677"
+            },
+            {
+              "name": "Carrer de Bonavista",
+              "lat": "41.59677",
+              "lon": "2.17793"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Madrid",
+      "enName": "Madrid",
+      "names": {
+        "be-tarask": "Мадрыд",
+        "de": "Madrid",
+        "hi": "मद्रिद",
+        "rue": "Мадрід",
+        "koi": "Мадрид",
+        "lt": "Madridas",
+        "lv": "Madride",
+        "hu": "Madrid",
+        "xmf": "მადრიდი",
+        "yi": "מאדריד",
+        "hy": "Մադրիդ",
+        "uk": "Мадрид",
+        "ur": "میدرد",
+        "mk": "Мадрид",
+        "haw": "Makelika",
+        "ml": "മാഡ്രിഡ്",
+        "ext": "Mairil",
+        "lez": "Мадрид",
+        "ab": "Мaдрид",
+        "mn": "Мадрид",
+        "tet": "Madríd",
+        "mr": "माद्रिद",
+        "pnb": "میڈرڈ",
+        "el": "Μαδρίτη",
+        "eo": "Madrido",
+        "is": "Madrid",
+        "am": "ማድሪድ",
+        "an": "Madrit",
+        "es": "Madrid",
+        "zh": "馬德里",
+        "eu": "Madril",
+        "ar": "مدريد",
+        "bat-smg": "Madrids",
+        "mhr": "Мадрид",
+        "ja": "マドリード",
+        "fa": "مادرید",
+        "ba": "Мадрид",
+        "udm": "Мадрид",
+        "no": "Madrid",
+        "be": "Мадрыд",
+        "ru": "Мадрид",
+        "bg": "Мадрид",
+        "yue": "馬德里",
+        "myv": "Мадрид ош",
+        "bn": "মাদ্রিদ",
+        "fr": "Madrid",
+        "bo": "མ་ད་རིད།",
+        "sa": "मद्रिद्",
+        "arc": "ܡܕܪܝܕ",
+        "oc": "Madrid",
+        "ka": "მადრიდი",
+        "sk": "Madrid",
+        "sl": "Madrid",
+        "ga": "Maidrid",
+        "sah": "Мадрид",
+        "ca": "Madrid",
+        "sq": "Madridi",
+        "sr": "Мадрид",
+        "kk": "Мадрид",
+        "mzn": "مادرید",
+        "kn": "ಮಾದ್ರಿದ್",
+        "sv": "Madrid",
+        "ko": "마드리드",
+        "mrj": "Мадрид",
+        "os": "Мадрид",
+        "szl": "Madryt",
+        "nds-nl": "Medrid",
+        "arz": "مدريد",
+        "ku": "Madrîd",
+        "kv": "Мадрид",
+        "co": "Madridi",
+        "kbd": "Мадрид",
+        "ta": "மத்ரித்",
+        "ky": "Мадрид",
+        "cv": "Мадрид",
+        "tg": "Мадрид",
+        "th": "มาดริด",
+        "la": "Matritum",
+        "ckb": "مادرید",
+        "zh_pinyin": "Mǎdélǐ",
+        "pl": "Madryt",
+        "he": "מדריד"
+      },
+      "lat": "40.41670",
+      "lon": "-3.70358",
+      "id": 21068295,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Móstoles",
+      "enName": "Móstoles",
+      "names": {
+        "ar": "موستولس",
+        "ru": "Мостолес",
+        "el": "Μόστολες",
+        "ja": "モストレス",
+        "fa": "موستولس",
+        "hu": "Móstoles",
+        "ur": "موستولس",
+        "zh": "莫斯托莱斯",
+        "sr": "Мостолес"
+      },
+      "lat": "40.32385",
+      "lon": "-3.86492",
+      "id": 306524430,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "la Garriga",
+      "lat": "41.68491",
+      "lon": "2.28658",
+      "id": 1470838435,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Reus",
+      "names": {
+        "ru": "Реус",
+        "uk": "Реус",
+        "el": "Ρέους",
+        "lt": "Reusas"
+      },
+      "lat": "41.15556",
+      "lon": "1.10761",
+      "id": 152377926,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Torredembarra",
+      "lat": "41.14616",
+      "lon": "1.39595",
+      "id": 1460478559,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Badalona",
+      "names": {
+        "kk": "Бадалона",
+        "be": "Бадалона",
+        "ru": "Бадалона",
+        "ko": "바달로나",
+        "bg": "Бадалона",
+        "el": "Μπαδαλόνα",
+        "sa": "बाडालोना",
+        "zh": "巴达洛纳",
+        "ar": "بادالونا",
+        "hy": "Բադալոնա",
+        "th": "บาดาโลนา",
+        "ka": "ბადალონა",
+        "uk": "Бадалона",
+        "ja": "バダロナ",
+        "fa": "بادالونا",
+        "sr": "Бадалона"
+      },
+      "lat": "41.44935",
+      "lon": "2.24825",
+      "id": 52228684,
+      "type": "CITY",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu (Sant Antoni de Llefià)",
+          "names": {
+            "wikipedia": "ca:Bartomeu apòstol"
+          },
+          "lat": "41.44260",
+          "lon": "2.21649",
+          "id": 11531,
+          "intersectedStreets": [
+            {
+              "name": "avinguda d'Amèrica (Sant Joan de Llefià)",
+              "names": {
+                "wikipedia": "ca:Amèrica (Sant Joan de Llefià)"
+              },
+              "lat": "41.44192",
+              "lon": "2.21722"
+            },
+            {
+              "name": "carrer de Sant Frederic",
+              "names": {
+                "wikipedia": "ca:Frederic d'Utrecht"
+              },
+              "lat": "41.44194",
+              "lon": "2.21711"
+            },
+            {
+              "name": "carrer de Bellavista (Sant Antoni de Llefià)",
+              "lat": "41.44239",
+              "lon": "2.21653"
+            },
+            {
+              "name": "carrer de la Circumval·lació",
+              "lat": "41.44284",
+              "lon": "2.21591"
+            }
+          ]
+        },
+        {
+          "name": "carrer del Doctor Robert (Bufalà)",
+          "names": {
+            "wikipedia": "ca:Bartomeu Robert i Yarzábal (Bufalà)"
+          },
+          "lat": "41.46008",
+          "lon": "2.24254",
+          "id": 15319,
+          "intersectedStreets": [
+            {
+              "name": "carrer de Sant Jordi",
+              "names": {
+                "wikipedia": "ca:Sant Jordi"
+              },
+              "lat": "41.45603",
+              "lon": "2.24353"
+            },
+            {
+              "name": "carrer de Jacint Verdaguer (Dalt de la Vila)",
+              "names": {
+                "wikipedia": "ca:Jacint Verdaguer i Santaló (Dalt de la Vila)"
+              },
+              "lat": "41.45603",
+              "lon": "2.24353"
+            },
+            {
+              "name": "carrer de Baldomer Galofre",
+              "names": {
+                "wikipedia": "ca:Baldomer Galofre i Giménez"
+              },
+              "lat": "41.45603",
+              "lon": "2.24353"
+            },
+            {
+              "name": "carrer de Sant Felip i d'en Rosés",
+              "names": {
+                "wikipedia": "ca:Felip l'Evangelista"
+              },
+              "lat": "41.45603",
+              "lon": "2.24353"
+            },
+            {
+              "name": "carrer del Doctor Daudí",
+              "lat": "41.45698",
+              "lon": "2.24338"
+            },
+            {
+              "name": "avinguda de Bufalà",
+              "names": {
+                "wikipedia": "ca:Bufalà"
+              },
+              "lat": "41.45873",
+              "lon": "2.24310"
+            },
+            {
+              "name": "carrer del Bruc (Bufalà)",
+              "names": {
+                "wikipedia": "ca:Batalla del Bruc (Bufalà)"
+              },
+              "lat": "41.45918",
+              "lon": "2.24299"
+            },
+            {
+              "name": "carrer de Roncesvalls",
+              "names": {
+                "wikipedia": "ca:Batalla de Roncesvalls"
+              },
+              "lat": "41.45952",
+              "lon": "2.24291"
+            },
+            {
+              "name": "Carrer de Girona (Bufalà)",
+              "names": {
+                "wikipedia": "ca:Setge de Girona de 1809 (Bufalà)"
+              },
+              "lat": "41.45969",
+              "lon": "2.24280"
+            },
+            {
+              "name": "carrer de Rubió i Ors",
+              "names": {
+                "wikipedia": "ca:Joaquim Rubió i Ors"
+              },
+              "lat": "41.46021",
+              "lon": "2.24256"
+            },
+            {
+              "name": "carrer de Bailén",
+              "names": {
+                "wikipedia": "ca:Batalla de Bailèn"
+              },
+              "lat": "41.46043",
+              "lon": "2.24246"
+            },
+            {
+              "name": "carrer d'Ibèria",
+              "names": {
+                "wikipedia": "ca:Ibèria"
+              },
+              "lat": "41.46053",
+              "lon": "2.24241"
+            },
+            {
+              "name": "carrer de Castillejos",
+              "names": {
+                "wikipedia": "ca:Batalla de Castillejos"
+              },
+              "lat": "41.46096",
+              "lon": "2.24209"
+            },
+            {
+              "name": "carrer de la Sardana (Bufalà)",
+              "names": {
+                "wikipedia": "ca:Sardana (Bufalà)"
+              },
+              "lat": "41.46153",
+              "lon": "2.24170"
+            },
+            {
+              "name": "carrer de l'Alcalde de Móstoles",
+              "names": {
+                "wikipedia": "ca:Ban dels alcaldes de Móstoles"
+              },
+              "lat": "41.46207",
+              "lon": "2.24132"
+            },
+            {
+              "name": "avinguda de la Cerdanya",
+              "names": {
+                "wikipedia": "ca:Cerdanya"
+              },
+              "lat": "41.46373",
+              "lon": "2.24007"
+            },
+            {
+              "name": "carreró de Can Pontons",
+              "lat": "41.46384",
+              "lon": "2.23969"
+            },
+            {
+              "name": "carrer de la Independència",
+              "names": {
+                "wikipedia": "ca:Guerra del Francès"
+              },
+              "lat": "41.46387",
+              "lon": "2.23954"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "la Roca del Vallès",
+      "lat": "41.58834",
+      "lon": "2.33146",
+      "id": 1470838451,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Garraf",
+      "lat": "41.25274",
+      "lon": "1.90247",
+      "id": 5025041121,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Passeig de Bartomeu Soler",
+          "lat": "41.24571",
+          "lon": "1.80002",
+          "id": 90643,
+          "intersectedStreets": [
+            {
+              "name": "Passeig de Sant Dídac",
+              "lat": "41.24697",
+              "lon": "1.80152"
+            },
+            {
+              "name": "Passeig del Fondac",
+              "lat": "41.24461",
+              "lon": "1.79714"
+            }
+          ]
+        },
+        {
+          "name": "Carrer Bartomeu Robert",
+          "lat": "41.22943",
+          "lon": "1.78884",
+          "id": 28472,
+          "intersectedStreets": [
+            {
+              "name": "Avinguda de Navarra (Sitges)",
+              "lat": "41.22931",
+              "lon": "1.78777"
+            },
+            {
+              "name": "Carrer Ferran Casablancas",
+              "lat": "41.22931",
+              "lon": "1.78777"
+            },
+            {
+              "name": "Carrer de Josep Planas Robert (Sitges)",
+              "lat": "41.22943",
+              "lon": "1.78884"
+            },
+            {
+              "name": "Carrer de Balmes (Sitges)",
+              "names": {
+                "ca": "Carrer de Balmes (Sitges)"
+              },
+              "lat": "41.22954",
+              "lon": "1.78996"
+            },
+            {
+              "name": "Carrer del Pintor Roig i Soler (Sitges)",
+              "lat": "41.22954",
+              "lon": "1.78996"
+            }
+          ]
+        },
+        {
+          "name": "Carrer de Sant Bartomeu (Sitges)",
+          "lat": "41.23759",
+          "lon": "1.80899",
+          "id": 28353,
+          "intersectedStreets": [
+            {
+              "name": "Carrer Jesús (Sitges)",
+              "lat": "41.23683",
+              "lon": "1.80978"
+            },
+            {
+              "name": "Carrer de Sant Gaudenci (Sitges)",
+              "lat": "41.23759",
+              "lon": "1.80899"
+            },
+            {
+              "name": "Avinguda d'Artur Carbonell",
+              "lat": "41.23856",
+              "lon": "1.80796"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Calafell",
+      "lat": "41.20146",
+      "lon": "1.56803",
+      "id": 440667418,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Jaume de Llierca",
+      "lat": "42.21198",
+      "lon": "2.60743",
+      "id": 864892113,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Bartomeu Terrades",
+          "lat": "42.21120",
+          "lon": "2.60797",
+          "id": 96353
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Alcalá de Henares",
+      "names": {
+        "ar": "القلعة الحجارة",
+        "ru": "Алькала-де-Энарес",
+        "uk": "Алькала-де-Енарес",
+        "el": "Αλκαλά ντε Ενάρες",
+        "lt": "Alkala de Henaresas",
+        "fa": "الکالا د هنارس",
+        "hu": "Alcalá de Henares",
+        "ur": "الکالا دے ایناریس",
+        "es": "Alcalá de Henares",
+        "sr": "Алкала де Енарес"
+      },
+      "lat": "40.48184",
+      "lon": "-3.36450",
+      "id": 209144042,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Quirze del Vallès",
+      "names": {
+        "es:1857-1976": "San Quirico de Tarrasa"
+      },
+      "lat": "41.53014",
+      "lon": "2.08201",
+      "id": 1470838966,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Figueres",
+      "names": {
+        "fr": "Figueres",
+        "ca": "Figueres",
+        "es": "Figueras"
+      },
+      "lat": "42.26663",
+      "lon": "2.96384",
+      "id": 1470838284,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Falset",
+      "lat": "41.14510",
+      "lon": "0.81962",
+      "id": 1470838282,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Puigcerdà",
+      "names": {
+        "lt": "Puigserda"
+      },
+      "lat": "42.43180",
+      "lon": "1.92787",
+      "id": 1470838793,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Baixada de Sant Bartomeu",
+          "lat": "42.43146",
+          "lon": "1.92919",
+          "id": 72687
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Paracuellos de Jarama",
+      "lat": "40.50510",
+      "lon": "-3.53185",
+      "id": 256245933,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Gurb",
+      "lat": "41.94099",
+      "lon": "2.24330",
+      "id": 7099361433,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carretera de Sant Bartomeu",
+          "lat": "41.94163",
+          "lon": "2.24205",
+          "id": 74041,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de Colom",
+              "lat": "41.94163",
+              "lon": "2.24205"
+            },
+            {
+              "name": "Carrer de Sant Roc",
+              "names": {
+                "ca": "Carrer de Sant Roc"
+              },
+              "lat": "41.94216",
+              "lon": "2.24166"
+            },
+            {
+              "name": "Carrer de Mossèn Jacint Verdaguer",
+              "lat": "41.94382",
+              "lon": "2.24052"
+            },
+            {
+              "name": "Carrer del Ginebrar",
+              "lat": "41.94543",
+              "lon": "2.23941"
+            },
+            {
+              "name": "Plaça de l'Amistat",
+              "lat": "41.94586",
+              "lon": "2.23911"
+            },
+            {
+              "name": "Passeig de Prixana",
+              "lat": "41.94589",
+              "lon": "2.23909"
+            },
+            {
+              "name": "Carrer del Castell",
+              "lat": "41.94624",
+              "lon": "2.23885"
+            },
+            {
+              "name": "Carrer de la Clàudia",
+              "lat": "41.94696",
+              "lon": "2.23834"
+            },
+            {
+              "name": "Carrer de la Carlota",
+              "lat": "41.94739",
+              "lon": "2.23804"
+            },
+            {
+              "name": "Carrer Diagonal",
+              "lat": "41.94784",
+              "lon": "2.23771"
+            },
+            {
+              "name": "Carrer del Canigó",
+              "lat": "41.94786",
+              "lon": "2.23769"
+            },
+            {
+              "name": "Pont de Can Sila",
+              "lat": "41.96598",
+              "lon": "2.22402"
+            },
+            {
+              "name": "Pont de l'Argila",
+              "lat": "41.97067",
+              "lon": "2.21733"
+            },
+            {
+              "name": "Carretera de Vespella",
+              "lat": "41.97300",
+              "lon": "2.21312"
+            },
+            {
+              "name": "BV-4602",
+              "lat": "41.97174",
+              "lon": "2.21709"
+            },
+            {
+              "name": "Camí de Sant Julià Sassorba a Sant Bartomeu",
+              "lat": "41.97007",
+              "lon": "2.17504"
+            },
+            {
+              "name": "Carrer del Montsseny",
+              "lat": "41.97725",
+              "lon": "2.20066"
+            }
+          ]
+        },
+        {
+          "name": "Camí de Sant Julià Sassorba a Sant Bartomeu",
+          "lat": "41.96394",
+          "lon": "2.17851",
+          "id": 79968,
+          "intersectedStreets": [
+            {
+              "name": "Carretera de Sant Bartomeu",
+              "lat": "41.97007",
+              "lon": "2.17506"
+            }
+          ]
+        },
+        {
+          "name": "Camí de St. Julià Sassorba a St. Bartomeu",
+          "lat": "41.94417",
+          "lon": "2.17607",
+          "id": 79969
+        },
+        {
+          "name": "BV-4601 - Carretera de Sant Bartomeu",
+          "lat": "41.95368",
+          "lon": "2.23540",
+          "id": 1670
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Gavà",
+      "lat": "41.30509",
+      "lon": "2.00631",
+      "id": 1470838298,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Olost",
+      "lat": "41.98529",
+      "lon": "2.09416",
+      "id": 247461646,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Camí d'Olost a la Carretera de Sant Bartomeu",
+          "lat": "41.98659",
+          "lon": "2.09888",
+          "id": 85617,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de les Escoles",
+              "lat": "41.98572",
+              "lon": "2.09817"
+            },
+            {
+              "name": "Camí de Pela",
+              "lat": "41.98698",
+              "lon": "2.10047"
+            }
+          ]
+        },
+        {
+          "name": "Camí d'Olost a la carretera de Sant Bartomeu",
+          "lat": "42.01593",
+          "lon": "2.12459",
+          "id": 87495
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Roses",
+      "names": {
+        "ca": "Roses",
+        "es": "Rosas"
+      },
+      "lat": "42.26320",
+      "lon": "3.17553",
+      "id": 1470838814,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Santa Perpètua de Mogoda",
+      "lat": "41.53281",
+      "lon": "2.18233",
+      "id": 1470839326,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Las Rozas de Madrid",
+      "names": {
+        "es": "Las Rozas de Madrid",
+        "zh": "奥特莱斯"
+      },
+      "lat": "40.49331",
+      "lon": "-3.87584",
+      "id": 256552113,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Gandesa",
+      "lat": "41.05204",
+      "lon": "0.43890",
+      "id": 1470838296,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Ripoll",
+      "lat": "42.19824",
+      "lon": "2.19325",
+      "id": 1470838807,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer Sant Bartomeu",
+          "lat": "42.19804",
+          "lon": "2.19426",
+          "id": 60239,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de l'estació",
+              "lat": "42.19778",
+              "lon": "2.19381"
+            },
+            {
+              "name": "Carrer del Progrés",
+              "lat": "42.19804",
+              "lon": "2.19426"
+            },
+            {
+              "name": "Carrer Indústria",
+              "lat": "42.19839",
+              "lon": "2.19480"
+            },
+            {
+              "name": "Carretera d'Olot",
+              "lat": "42.19842",
+              "lon": "2.19488"
+            },
+            {
+              "name": "Carrer Palmerola",
+              "lat": "42.19858",
+              "lon": "2.19512"
+            },
+            {
+              "name": "Carrer Costabona",
+              "lat": "42.19866",
+              "lon": "2.19525"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Xalet Mas Reig",
+      "lat": "41.98740",
+      "lon": "2.16424",
+      "id": 3588223523,
+      "type": "HAMLET",
+      "listOfStreets": [
+        {
+          "name": "Carretera de Sant Bartomeu del Grau",
+          "names": {
+            "alt_name": "Camí de les Farreres"
+          },
+          "lat": "41.98642",
+          "lon": "2.16519",
+          "id": 55368
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Cunit",
+      "lat": "41.19760",
+      "lon": "1.63446",
+      "id": 1470838245,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Barcelona",
+      "names": {
+        "de": "Barcelona",
+        "hi": "बार्सॆलोना",
+        "be": "Барселона",
+        "kn": "ಬಾರ್ಸೆಲೋನಾ",
+        "ru": "Барселона",
+        "pt": "Barcelona",
+        "gl": "Barcelona",
+        "el": "Βαρκελώνη",
+        "lt": "Barselona",
+        "it": "Barcellona",
+        "fr": "Barcelone",
+        "es": "Barcelona",
+        "zh": "巴塞罗那",
+        "eu": "Bartzelona",
+        "ar": "برشلونة",
+        "oc": "Barcelona",
+        "uk": "Барселона",
+        "ja": "バルセロナ",
+        "ckb": "بارسێلۆنا",
+        "ca": "Barcelona",
+        "mk": "Барселона",
+        "sr": "Барселона"
+      },
+      "lat": "41.38289",
+      "lon": "2.17743",
+      "id": 152364165,
+      "type": "CITY",
+      "listOfStreets": [
+        {
+          "name": "Carrer Bartomeu Pi",
+          "lat": "41.36963",
+          "lon": "2.13886",
+          "id": 1156,
+          "intersectedStreets": [
+            {
+              "name": "Carrer Tort (la Bordeta)",
+              "lat": "41.37042",
+              "lon": "2.13984"
+            },
+            {
+              "name": "Carrer de Viladecans (la Bordeta)",
+              "lat": "41.36961",
+              "lon": "2.13894"
+            },
+            {
+              "name": "Carrer de Mossèn Amadeu Oller (la Bordeta)",
+              "lat": "41.36900",
+              "lon": "2.13819"
+            },
+            {
+              "name": "Carrer de Navarra (la Bordeta)",
+              "lat": "41.37072",
+              "lon": "2.14019"
+            }
+          ]
+        },
+        {
+          "name": "Carrer de Sant Bartomeu (el Raval)",
+          "lat": "41.37816",
+          "lon": "2.16924",
+          "id": 18565,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de la Riereta (el Raval)",
+              "lat": "41.37786",
+              "lon": "2.16879"
+            },
+            {
+              "name": "Rambla del Raval",
+              "lat": "41.37835",
+              "lon": "2.16941"
+            }
+          ]
+        },
+        {
+          "name": "Carrer de Sant Bartomeu de la Quadra (les Corts)",
+          "lat": "41.38987",
+          "lon": "2.10388",
+          "id": 121254,
+          "intersectedStreets": [
+            {
+              "name": "Costa de Sant Bartomeu de la Quadra (les Corts)",
+              "lat": "41.38966",
+              "lon": "2.10382"
+            }
+          ]
+        },
+        {
+          "name": "Costa de Sant Bartomeu de la Quadra (les Corts)",
+          "lat": "41.38943",
+          "lon": "2.10410",
+          "id": 13505,
+          "intersectedStreets": [
+            {
+              "name": "Carrer del Torrent de les Roses (les Corts)",
+              "lat": "41.38964",
+              "lon": "2.10365"
+            },
+            {
+              "name": "Carrer de Sant Bartomeu de la Quadra (les Corts)",
+              "lat": "41.38966",
+              "lon": "2.10382"
+            },
+            {
+              "name": "Passatge de Santa de Vilalba (les Corts)",
+              "lat": "41.38964",
+              "lon": "2.10410"
+            },
+            {
+              "name": "Carrer dels Herois del Bruc (les Corts)",
+              "lat": "41.38917",
+              "lon": "2.10429"
+            },
+            {
+              "name": "Plaça del Coll de Finestrelles (les Corts)",
+              "lat": "41.38917",
+              "lon": "2.10429"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Balenyà",
+      "lat": "41.82161",
+      "lon": "2.22241",
+      "id": 4800634741,
+      "type": "HAMLET",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu (els Hostalets de Balenyà)",
+          "lat": "41.81121",
+          "lon": "2.23308",
+          "id": 96720,
+          "intersectedStreets": [
+            {
+              "name": "Avinguda d'Osona (els Hostalets de Balenyà)",
+              "lat": "41.81139",
+              "lon": "2.23507"
+            },
+            {
+              "name": "Carrer de la Verge Montserrat",
+              "lat": "41.81139",
+              "lon": "2.23507"
+            },
+            {
+              "name": "Carrer d'Alfons Amic",
+              "lat": "41.81097",
+              "lon": "2.23368"
+            },
+            {
+              "name": "Carrer de Cervantes (els Hostalets de Balenyà)",
+              "lat": "41.81121",
+              "lon": "2.23308"
+            },
+            {
+              "name": "Carretera de Ribes (la Cugullada)",
+              "lat": "41.81153",
+              "lon": "2.23231"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "el Prat de Llobregat",
+      "names": {
+        "ru": "Эль-Прат-де-Льобрегат",
+        "ca": "el Prat de Llobregat",
+        "es": "El Prat de Llobregat"
+      },
+      "lat": "41.32463",
+      "lon": "2.09526",
+      "id": 1470838266,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Premià de Mar",
+      "lat": "41.49268",
+      "lon": "2.36058",
+      "id": 1470838783,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "el Vendrell",
+      "names": {
+        "ca": "el Vendrell"
+      },
+      "lat": "41.21997",
+      "lon": "1.53486",
+      "id": 1470838269,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "el Masnou",
+      "lat": "41.47969",
+      "lon": "2.31183",
+      "id": 1470838263,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Castelló d'Empuries",
+      "lat": "42.25935",
+      "lon": "3.07338",
+      "id": 1949049715,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Gelida",
+      "lat": "41.44089",
+      "lon": "1.86343",
+      "id": 1460478611,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Bartomeu Raurell",
+          "lat": "41.44302",
+          "lon": "1.86574",
+          "id": 18243,
+          "intersectedStreets": [
+            {
+              "name": "Avinguda del Funicular",
+              "lat": "41.44302",
+              "lon": "1.86474"
+            },
+            {
+              "name": "Carrer del Poeta Jaume Vila",
+              "lat": "41.44300",
+              "lon": "1.86510"
+            },
+            {
+              "name": "Carretera de Sant Llorenç d'Hortons",
+              "lat": "41.44298",
+              "lon": "1.86637"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Reus",
+      "lat": "41.15510",
+      "lon": "1.10871",
+      "id": 6948959184,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Vistabella",
+      "lat": "41.20940",
+      "lon": "1.26508",
+      "id": 886148850,
+      "type": "HAMLET",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.20959",
+          "lon": "1.26502",
+          "id": 106354,
+          "intersectedStreets": [
+            {
+              "name": "Plaça de l'Alcalde Joaquim Celma",
+              "lat": "41.20919",
+              "lon": "1.26463"
+            },
+            {
+              "name": "Carrer del Roser",
+              "lat": "41.20959",
+              "lon": "1.26502"
+            },
+            {
+              "name": "Carrer Vell",
+              "lat": "41.20999",
+              "lon": "1.26542"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "San Fernando de Henares",
+      "lat": "40.42485",
+      "lon": "-3.53504",
+      "id": 280130897,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sort",
+      "lat": "42.41140",
+      "lon": "1.12977",
+      "id": 151060133,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Ciempozuelos",
+      "lat": "40.15801",
+      "lon": "-3.62055",
+      "id": 308517254,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Vallbona d'Anoia",
+      "lat": "41.51948",
+      "lon": "1.70829",
+      "id": 347532113,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer Bartomeu",
+          "lat": "41.51862",
+          "lon": "1.70619",
+          "id": 3769,
+          "intersectedStreets": [
+            {
+              "name": "Carrer Major",
+              "lat": "41.51873",
+              "lon": "1.70608"
+            },
+            {
+              "name": "Carrer Nou",
+              "lat": "41.51809",
+              "lon": "1.70642"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Tremp",
+      "lat": "42.16637",
+      "lon": "0.89462",
+      "id": 3890310157,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "la Secuita",
+      "lat": "41.20319",
+      "lon": "1.27914",
+      "id": 886148842,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu (Vistabella)",
+          "lat": "41.20959",
+          "lon": "1.26502",
+          "id": 106353,
+          "intersectedStreets": [
+            {
+              "name": "Plaça de l'Alcalde Joaquim Celma",
+              "lat": "41.20919",
+              "lon": "1.26463"
+            },
+            {
+              "name": "Carrer del Roser (Vistabella)",
+              "lat": "41.20959",
+              "lon": "1.26502"
+            },
+            {
+              "name": "Carrer Vell (Vistabella)",
+              "lat": "41.20999",
+              "lon": "1.26542"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Mejorada del Campo",
+      "lat": "40.39718",
+      "lon": "-3.48961",
+      "id": 303821734,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Masarbonès",
+      "lat": "41.26018",
+      "lon": "1.43825",
+      "id": 1896326329,
+      "type": "HAMLET",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.25992",
+          "lon": "1.43844",
+          "id": 105690,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de Sant Antoni",
+              "lat": "41.25984",
+              "lon": "1.43687"
+            },
+            {
+              "name": "Carrer Major",
+              "lat": "41.25992",
+              "lon": "1.43796"
+            },
+            {
+              "name": "Carrer de Bonastre",
+              "lat": "41.25995",
+              "lon": "1.43848"
+            },
+            {
+              "name": "Carrer de les Fassines",
+              "lat": "41.26021",
+              "lon": "1.43874"
+            },
+            {
+              "name": "Plaça de l'Om",
+              "lat": "41.26044",
+              "lon": "1.43854"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Algete",
+      "names": {
+        "ar": "الشط"
+      },
+      "lat": "40.59617",
+      "lon": "-3.49742",
+      "id": 1487216934,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sant Cugat del Vallès",
+      "lat": "41.47284",
+      "lon": "2.08178",
+      "id": 1470838828,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.47405",
+          "lon": "2.08290",
+          "id": 54668,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de Santa Anna",
+              "lat": "41.47421",
+              "lon": "2.08279"
+            },
+            {
+              "name": "Carrer de les Escaletes",
+              "lat": "41.47405",
+              "lon": "2.08290"
+            },
+            {
+              "name": "Carrer de Sant Martí",
+              "lat": "41.47396",
+              "lon": "2.08296"
+            },
+            {
+              "name": "Carrer de l'Hospital",
+              "lat": "41.47341",
+              "lon": "2.08356"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Òdena",
+      "lat": "41.60688",
+      "lon": "1.64222",
+      "id": 355898040,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer sant Bartomeu",
+          "lat": "41.58110",
+          "lon": "1.63784",
+          "id": 24402,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de la carretera",
+              "lat": "41.58093",
+              "lon": "1.63769"
+            },
+            {
+              "name": "Carrer de la Calç",
+              "lat": "41.58110",
+              "lon": "1.63784"
+            },
+            {
+              "name": "Carrer de Sant Jaume",
+              "lat": "41.58142",
+              "lon": "1.63801"
+            },
+            {
+              "name": "Carrer de la Línia",
+              "lat": "41.58142",
+              "lon": "1.63801"
+            }
+          ]
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Sant Boi de Llobregat",
+      "lat": "41.34590",
+      "lon": "2.04137",
+      "id": 1470838825,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer Bartomeu Garcia i Subirà",
+          "lat": "41.33342",
+          "lon": "2.03535",
+          "id": 106600,
+          "intersectedStreets": [
+            {
+              "name": "Avinguda de la Torre de la Vila (Casablanca)",
+              "lat": "41.33377",
+              "lon": "2.03494"
+            },
+            {
+              "name": "carrer d'Aleix Parés i Valls",
+              "lat": "41.33338",
+              "lon": "2.03539"
+            },
+            {
+              "name": "Carrer de la Joventut (Casablanca)",
+              "lat": "41.33298",
+              "lon": "2.03584"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Riba-roja d'Ebre",
+      "lat": "41.25135",
+      "lon": "0.48730",
+      "id": 637456379,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.25056",
+          "lon": "0.48812",
+          "id": 100817
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Sant Feliu de Guíxols",
+      "names": {
+        "ca": "Sant Feliu de Guíxols"
+      },
+      "lat": "41.78388",
+      "lon": "3.02832",
+      "id": 1470838830,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Villalbilla",
+      "names": {
+        "ru": "Вильяльбилья",
+        "uk": "Вільяльбілья",
+        "es": "Villalbilla"
+      },
+      "lat": "40.43247",
+      "lon": "-3.29862",
+      "id": 311122244,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Granollers",
+      "lat": "41.60796",
+      "lon": "2.28760",
+      "id": 1470838306,
+      "type": "TOWN",
+      "listOfStreets": [
+        {
+          "name": "Carrer Bartomeu Brufalt (Bellavista)",
+          "lat": "41.61450",
+          "lon": "2.29526",
+          "id": 116993,
+          "intersectedStreets": [
+            {
+              "name": "Avinguda de Francesc Ribas (Joan Prim)",
+              "lat": "41.61328",
+              "lon": "2.29464"
+            },
+            {
+              "name": "Carrer Zorrilla",
+              "lat": "41.61450",
+              "lon": "2.29526"
+            },
+            {
+              "name": "Carrer de Manuel Cornellà (Bellavista)",
+              "lat": "41.61523",
+              "lon": "2.29543"
+            }
+          ]
+        },
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.60821",
+          "lon": "2.28567",
+          "id": 132663,
+          "intersectedStreets": [
+            {
+              "name": "Carrer de Sant Jaume",
+              "lat": "41.60817",
+              "lon": "2.28559"
+            },
+            {
+              "name": "Carrer Constància (Centre)",
+              "lat": "41.60878",
+              "lon": "2.28610"
+            },
+            {
+              "name": "Carrer de Santa Anna (Centre)",
+              "lat": "41.60878",
+              "lon": "2.28610"
+            }
+          ]
+        },
+        {
+          "name": "Carrer de Bartomeu Serret i Argemi",
+          "lat": "41.59588",
+          "lon": "2.28739",
+          "id": 54706,
+          "intersectedStreets": [
+            {
+              "name": "Carrer Maria Aurèlia Campmany",
+              "lat": "41.59595",
+              "lon": "2.28702"
+            },
+            {
+              "name": "Carrer del Pla de Baix",
+              "lat": "41.59580",
+              "lon": "2.28825"
+            },
+            {
+              "name": "Carrer d'Esteve Terrades",
+              "lat": "41.59558",
+              "lon": "2.29013"
+            },
+            {
+              "name": "Carrer Ramon Dagà",
+              "lat": "41.59568",
+              "lon": "2.28938"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "Sant Adrià de Besòs",
+      "names": {
+        "ca": "Sant Adrià de Besòs"
+      },
+      "lat": "41.43048",
+      "lon": "2.21828",
+      "id": 1470838823,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Salt",
+      "enName": "Salt",
+      "names": {
+        "es": "Salt"
+      },
+      "lat": "41.97417",
+      "lon": "2.79499",
+      "id": 1470838822,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Salou",
+      "lat": "41.07682",
+      "lon": "1.14404",
+      "id": 1470838821,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Corbins",
+      "lat": "41.69057",
+      "lon": "0.69308",
+      "id": 2202651293,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.69298",
+          "lon": "0.69304",
+          "id": 35417
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Alpicat",
+      "lat": "41.66512",
+      "lon": "0.55607",
+      "id": 796917354,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.66806",
+          "lon": "0.55494",
+          "id": 110134
+        },
+        {
+          "name": "Travessia de Sant Bartomeu",
+          "lat": "41.66854",
+          "lon": "0.55387",
+          "id": 131137
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Sant Joan Despí",
+      "lat": "41.36680",
+      "lon": "2.05703",
+      "id": 1470838836,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Guissona",
+      "names": {
+        "es": "Guissona"
+      },
+      "lat": "41.78524",
+      "lon": "1.28903",
+      "id": 1470838323,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "l'Hospitalet de Llobregat",
+      "names": {
+        "ru": "Оспиталет-де-Льобрегат",
+        "el": "Οσπιταλέτ ντε Λιοβρεγάτ",
+        "ca": "l'Hospitalet de Llobregat",
+        "sr": "Лоспиталет де Љобрегат"
+      },
+      "lat": "41.35986",
+      "lon": "2.09979",
+      "id": 939880925,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "la Llagosta",
+      "lat": "41.51399",
+      "lon": "2.19121",
+      "id": 1460478680,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Amposta",
+      "lat": "40.70799",
+      "lon": "0.58276",
+      "id": 4678926078,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Montagut",
+      "lat": "42.23093",
+      "lon": "2.59674",
+      "id": 1297380489,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "42.22612",
+          "lon": "2.57677",
+          "id": 110634
+        }
+      ],
+      "matchStreet": 1
+    },
+    {
+      "name": "Sidamon",
+      "lat": "41.62752",
+      "lon": "0.83082",
+      "id": 1460478674,
+      "type": "VILLAGE",
+      "listOfStreets": [
+        {
+          "name": "Torrent de Sant Bartomeu",
+          "lat": "41.62890",
+          "lon": "0.83348",
+          "id": 97566
+        },
+        {
+          "name": "Carrer de Sant Bartomeu",
+          "lat": "41.62887",
+          "lon": "0.83256",
+          "id": 97567
+        }
+      ],
+      "matchStreet": 1
+    }
+  ]
+}

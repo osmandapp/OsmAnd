@@ -319,7 +319,7 @@
     <string name="poi_motorcycle_parking">Motorradparkplatz</string>
     <string name="poi_motorcycle">Motorradgeschäft</string>
     <string name="poi_motorway_junction">Autobahnkreuz</string>
-    <string name="poi_mountain_pass">Passstraße</string>
+    <string name="poi_mountain_pass">Gebirgspass</string>
     <string name="poi_sport_multi">Multi-Sport</string>
     <string name="poi_museum">Museum</string>
     <string name="poi_musical_instrument">Musikinstrumente</string>
@@ -2711,8 +2711,8 @@
     <string name="poi_hygrometer_no">Hygrometer: nein</string>
     <string name="poi_date_yes">Datumsanzeige</string>
     <string name="poi_date_no">Datumsanzeige: nein</string>
-    <string name="poi_passenger_information_display_yes">Informationsanzeige für Passagiere: ja</string>
-    <string name="poi_passenger_information_display_no">Informationsanzeige für Passagiere: nein</string>
+    <string name="poi_passenger_information_display_yes">Fahrgastinformationsanzeige: ja</string>
+    <string name="poi_passenger_information_display_no">Fahrgastinformationsanzeige: nein</string>
     <string name="poi_min_age">Mindestalter</string>
     <string name="poi_traffic_mirror">Verkehrsspiegel</string>
     <string name="poi_diplomatic_delegation">Delegation</string>
@@ -3826,4 +3826,5 @@
     <string name="poi_fire_hydrant_style_water_source_groundwater">Grundwasser</string>
     <string name="poi_fire_hydrant_type_pipe">Rohr</string>
     <string name="poi_fire_hydrant_pressure_filter">Druck</string>
+    <string name="poi_pump_status_missing_beam">Pumpenzustand: fehlender Arm</string>
 </resources>
