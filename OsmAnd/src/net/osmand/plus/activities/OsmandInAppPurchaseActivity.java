@@ -166,17 +166,18 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
+		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (purchaseHelper != null && purchaseHelper.getLiveUpdates().containsSku(sku)) {
 			getMyApplication().logEvent("live_osm_subscription_purchased");
 
-			if (!active) {
+			if (!active && !fragmentManager.isStateSaved()) {
 				OsmLiveRestartBottomSheetDialogFragment fragment = new OsmLiveRestartBottomSheetDialogFragment();
 				fragment.setUsedOnMap(this instanceof MapActivity);
-				fragment.show(getSupportFragmentManager(), OsmLiveRestartBottomSheetDialogFragment.TAG);
+				fragment.show(fragmentManager, OsmLiveRestartBottomSheetDialogFragment.TAG);
 			}
 		}
 		onInAppPurchaseItemPurchased(sku);
-		fireInAppPurchaseItemPurchasedOnFragments(getSupportFragmentManager(), sku, active);
+		fireInAppPurchaseItemPurchasedOnFragments(fragmentManager, sku, active);
 	}
 
 	public void fireInAppPurchaseItemPurchasedOnFragments(@NonNull FragmentManager fragmentManager,
