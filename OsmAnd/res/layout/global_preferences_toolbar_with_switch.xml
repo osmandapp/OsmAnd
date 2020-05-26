@@ -6,6 +6,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/actionModeBackground"
+	android:minHeight="@dimen/toolbar_height"
 	app:contentInsetLeft="0dp"
 	app:contentInsetStart="0dp"
 	app:contentInsetRight="0dp"
