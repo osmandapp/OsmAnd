@@ -46,6 +46,20 @@
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/turn_screen_on_sensor" />
+		android:title="@string/turn_screen_on_proximity_sensor" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="turn_screen_on_navigation_instructions"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/turn_screen_on_navigation_instructions" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="turn_screen_on_power_button"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/turn_screen_on_power_button" />
 
 </PreferenceScreen>

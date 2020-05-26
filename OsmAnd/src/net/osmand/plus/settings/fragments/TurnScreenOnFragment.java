@@ -2,10 +2,12 @@ package net.osmand.plus.settings.fragments;
 
 import android.widget.ImageView;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.bottomsheets.ScreenTimeoutBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -18,6 +20,8 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		setupUseSystemScreenTimeout();
 		setupTurnScreenOnTimePref();
 		setupTurnScreenOnSensorPref();
+		setupTurnScreenOnNavigationInstructionsPref();
+		setupTurnScreenOnPowerButtonPref();
 	}
 
 	@Override
@@ -33,10 +37,21 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		}
 	}
 
+	@Override
+	public void onDisplayPreferenceDialog(Preference preference) {
+		if (settings.USE_SYSTEM_SCREEN_TIMEOUT.getId().equals(preference.getKey())) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ScreenTimeoutBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, getSelectedAppMode(), getApplyQueryType(), isProfileDependent());
+			}
+		} else {
+			super.onDisplayPreferenceDialog(preference);
+		}
+	}
+
 	private void setupUseSystemScreenTimeout() {
-		SwitchPreferenceEx useSystemScreenTimeout = (SwitchPreferenceEx) findPreference(settings.USE_SYSTEM_SCREEN_TIMEOUT.getId());
-		useSystemScreenTimeout.setTitle(app.getString(R.string.system_screen_timeout));
-		useSystemScreenTimeout.setDescription(app.getString(R.string.system_screen_timeout_descr));
+		SwitchPreferenceEx systemScreenTimeout = (SwitchPreferenceEx) findPreference(settings.USE_SYSTEM_SCREEN_TIMEOUT.getId());
+		systemScreenTimeout.setDescription(R.string.system_screen_timeout_descr);
 	}
 
 	private void setupTurnScreenOnTimePref() {
@@ -58,7 +73,18 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	private void setupTurnScreenOnSensorPref() {
 		SwitchPreferenceEx turnScreenOnSensor = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_SENSOR.getId());
 		turnScreenOnSensor.setIcon(getPersistentPrefIcon(R.drawable.ic_action_sensor_interaction));
-		turnScreenOnSensor.setTitle(R.string.turn_screen_on_sensor);
 		turnScreenOnSensor.setDescription(R.string.turn_screen_on_sensor_descr);
+	}
+
+	private void setupTurnScreenOnNavigationInstructionsPref() {
+		SwitchPreferenceEx turnScreenOnNavigationInstructions = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS.getId());
+		turnScreenOnNavigationInstructions.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification_navigation));
+		turnScreenOnNavigationInstructions.setDescription(R.string.turn_screen_on_navigation_instructions_descr);
+	}
+
+	private void setupTurnScreenOnPowerButtonPref() {
+		SwitchPreferenceEx turnScreenOnPowerButton = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_POWER_BUTTON.getId());
+		turnScreenOnPowerButton.setIcon(getPersistentPrefIcon(R.drawable.ic_action_power_button));
+		turnScreenOnPowerButton.setDescription(R.string.turn_screen_on_power_button_descr);
 	}
 }
