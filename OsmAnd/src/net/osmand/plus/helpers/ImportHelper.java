@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.widget.Toast;
@@ -60,7 +59,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -165,7 +163,7 @@ public class ImportHelper {
 		return false;
 	}
 
-	public void handleFavouritesImport(@NonNull Uri uri) {
+	public void handleGpxOrFavouritesImport(@NonNull Uri uri) {
 		String scheme = uri.getScheme();
 		boolean isFileIntent = "file".equals(scheme);
 		boolean isContentIntent = "content".equals(scheme);
@@ -177,7 +175,7 @@ public class ImportHelper {
 		} else if (isContentIntent) {
 			fileName = getNameFromContentUri(app, uri);
 		}
-		handleFavouritesImport(uri, fileName, saveFile, false, true);
+		handleGpxOrFavouritesImport(uri, fileName, saveFile, false, true);
 	}
 
 	public void handleFileImport(Uri intentUri, String fileName, Bundle extras, boolean useImportDir) {
@@ -186,40 +184,48 @@ public class ImportHelper {
 
 		final boolean saveFile = !isFileIntent || !isOsmandSubdir;
 
-		if (fileName != null && fileName.endsWith(KML_SUFFIX)) {
+		if (fileName == null) {
+			handleGpxOrFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
+		} else  if (fileName.endsWith(KML_SUFFIX)) {
 			handleKmlImport(intentUri, fileName, saveFile, useImportDir);
-		} else if (fileName != null && fileName.endsWith(KMZ_SUFFIX)) {
+		} else if (fileName.endsWith(KMZ_SUFFIX)) {
 			handleKmzImport(intentUri, fileName, saveFile, useImportDir);
-		} else if (fileName != null && fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+		} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 			handleObfImport(intentUri, fileName);
-		} else if (fileName != null && fileName.endsWith(IndexConstants.SQLITE_EXT)) {
+		} else if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			handleSqliteTileImport(intentUri, fileName);
-		} else if (fileName != null && fileName.endsWith(OSMAND_SETTINGS_FILE_EXT)) {
+		} else if (fileName.endsWith(OSMAND_SETTINGS_FILE_EXT)) {
 			handleOsmAndSettingsImport(intentUri, fileName, extras, null);
-		} else if (fileName != null && fileName.endsWith(ROUTING_FILE_EXT)) {
+		} else if (fileName.endsWith(ROUTING_FILE_EXT)) {
 			handleXmlFileImport(intentUri, fileName, null);
 		} else {
-			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
+			handleGpxOrFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
 		}
 	}
 
 	public static String getNameFromContentUri(OsmandApplication app, Uri contentUri) {
-		final String name;
-		final Cursor returnCursor = app.getContentResolver().query(contentUri, new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null);
-		if (returnCursor != null && returnCursor.moveToFirst()) {
-			int columnIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-			if (columnIndex != -1) {
-				name = returnCursor.getString(columnIndex);
+		try {
+			final String name;
+			final Cursor returnCursor = app.getContentResolver().query(contentUri, new String[]{OpenableColumns.DISPLAY_NAME}, null, null, null);
+			if (returnCursor != null && returnCursor.moveToFirst()) {
+				int columnIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+				if (columnIndex != -1) {
+					name = returnCursor.getString(columnIndex);
+				} else {
+					name = contentUri.getLastPathSegment();
+				}
 			} else {
-				name = contentUri.getLastPathSegment();
+				name = null;
 			}
-		} else {
-			name = null;
+			if (returnCursor != null && !returnCursor.isClosed()) {
+				returnCursor.close();
+			}
+			return name;
+		} catch (RuntimeException e) {
+			log.error(e.getMessage(), e);
+			return null;
 		}
-		if (returnCursor != null && !returnCursor.isClosed()) {
-			returnCursor.close();
-		}
-		return name;
+
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -236,10 +242,8 @@ public class ImportHelper {
 			protected GPXFile doInBackground(Void... nothing) {
 				InputStream is = null;
 				try {
-					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(gpxFile, "r");
-
-					if (pFD != null) {
-						is = new FileInputStream(pFD.getFileDescriptor());
+					is = app.getContentResolver().openInputStream(gpxFile);
+					if (is != null) {
 						return GPXUtilities.loadGPXFile(is);
 					}
 				} catch (FileNotFoundException e) {
@@ -264,7 +268,7 @@ public class ImportHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void handleFavouritesImport(final Uri fileUri, final String fileName, final boolean save, final boolean useImportDir, final boolean forceImportFavourites) {
+	private void handleGpxOrFavouritesImport(final Uri fileUri, final String fileName, final boolean save, final boolean useImportDir, final boolean forceImportFavourites) {
 		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
 
@@ -278,10 +282,8 @@ public class ImportHelper {
 				InputStream is = null;
 				ZipInputStream zis = null;
 				try {
-					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(fileUri, "r");
-					if (pFD != null) {
-						is = new FileInputStream(pFD.getFileDescriptor());
-
+					is = app.getContentResolver().openInputStream(fileUri);
+					if (is != null) {
 						if (fileName != null && fileName.endsWith(KML_SUFFIX)) {
 							final String result = Kml2Gpx.toGpx(is);
 							if (result != null) {
@@ -331,7 +333,7 @@ public class ImportHelper {
 					progress.dismiss();
 				}
 
-				importFavourites(result, fileName, save, useImportDir, forceImportFavourites);
+				importGpxOrFavourites(result, fileName, save, useImportDir, forceImportFavourites);
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -394,9 +396,8 @@ public class ImportHelper {
 				InputStream is = null;
 				ZipInputStream zis = null;
 				try {
-					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(kmzFile, "r");
-					if (pFD != null) {
-						is = new FileInputStream(pFD.getFileDescriptor());
+					is = app.getContentResolver().openInputStream(kmzFile);
+					if (is != null) {
 						zis = new ZipInputStream(is);
 						zis.getNextEntry();
 						final String result = Kml2Gpx.toGpx(zis);
@@ -449,9 +450,8 @@ public class ImportHelper {
 			protected GPXFile doInBackground(Void... nothing) {
 				InputStream is = null;
 				try {
-					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(kmlFile, "r");
-					if (pFD != null) {
-						is = new FileInputStream(pFD.getFileDescriptor());
+					is = app.getContentResolver().openInputStream(kmlFile);
+					if (is != null) {
 						final String result = Kml2Gpx.toGpx(is);
 						if (result != null) {
 							try {
@@ -533,13 +533,12 @@ public class ImportHelper {
 		InputStream in = null;
 		OutputStream out = null;
 		try {
-			final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(uri, "r");
-			if (pFD != null) {
-				in = new FileInputStream(pFD.getFileDescriptor());
+			in = app.getContentResolver().openInputStream(uri);
+			if (in != null) {
 				out = new FileOutputStream(dest);
 				Algorithms.streamCopy(in, out);
 				try {
-					pFD.close();
+					in.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -893,9 +892,8 @@ public class ImportHelper {
 			private void checkImportType() {
 				InputStream is = null;
 				try {
-					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(intentUri, "r");
-					if (pFD != null) {
-						is = new FileInputStream(pFD.getFileDescriptor());
+					is = app.getContentResolver().openInputStream(intentUri);
+					if (is != null) {
 						XmlPullParser parser = PlatformUtil.newXMLPullParser();
 						parser.setInput(is, "UTF-8");
 						int tok;
@@ -911,7 +909,7 @@ public class ImportHelper {
 							}
 						}
 						try {
-							pFD.close();
+							is.close();
 						} catch (IOException e) {
 							log.error(e);
 						}
@@ -1101,8 +1099,8 @@ public class ImportHelper {
 		}
 	}
 
-	private void importFavourites(final GPXFile gpxFile, final String fileName, final boolean save,
-								  final boolean useImportDir, final boolean forceImportFavourites) {
+	private void importGpxOrFavourites(final GPXFile gpxFile, final String fileName, final boolean save,
+									   final boolean useImportDir, final boolean forceImportFavourites) {
 		if (gpxFile == null || gpxFile.isPointsEmpty()) {
 			if (forceImportFavourites) {
 				final DialogInterface.OnClickListener importAsTrackListener = new DialogInterface.OnClickListener() {
