@@ -291,9 +291,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 			updateTopToolbar(nightMode);
 			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius / 2);
 			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor,  (int) (2 * view.getDensity()));
-			int padding = this.expand.getPaddingLeft();
-			this.expand.setBackgroundResource(ts.expand);
-			this.expand.setPadding(padding, padding, padding, padding);
+			int padding = expand.getPaddingLeft();
+			expand.setBackgroundResource(ts.expand);
+			expand.setPadding(padding, padding, padding, padding);
 			rightStack.invalidate();
 			leftStack.invalidate();
 		}

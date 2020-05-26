@@ -1,6 +1,7 @@
 package net.osmand.plus.dashboard;
 
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,7 +97,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 
 	public void setupFavorites() {
 		View mainView = getView();
-		OsmandApplication app = getMyApplication();
+		final OsmandApplication app = getMyApplication();
 		if (mainView == null || app == null) {
 			return;
 		}
@@ -112,7 +113,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			Collections.sort(points, new Comparator<FavouritePoint>() {
 				@Override
 				public int compare(FavouritePoint point, FavouritePoint point2) {
-					// LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
+					// LatLon lastKnownMapLocation = app.getSettings().getLastKnownMapLocation();
 					int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 							loc.getLatitude(), loc.getLongitude()));
 					int dist2 = (int) (MapUtils.getDistance(point2.getLatitude(), point2.getLongitude(),
@@ -123,7 +124,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 		}
 		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);
 		favorites.removeAllViews();
-		DashboardOnMap.handleNumberOfRows(points, getMyApplication().getSettings(), ROW_NUMBER_TAG);
+		DashboardOnMap.handleNumberOfRows(points, app.getSettings(), ROW_NUMBER_TAG);
 		List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
 		for (final FavouritePoint point : points) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -136,38 +137,40 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 			ImageView groupImage = (ImageView)view.findViewById(R.id.group_image);
 			if (point.getCategory().length() > 0) {
-				((TextView) view.findViewById(R.id.group_name)).setText(point.getCategoryDisplayName(getMyApplication()));
-				groupImage.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_group_name_16));
+				((TextView) view.findViewById(R.id.group_name)).setText(point.getCategoryDisplayName(app));
+				groupImage.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_group_name_16));
 			} else {
 				groupImage.setVisibility(View.GONE);
 			}
 
-			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(FavoriteImageDrawable.getOrCreate(
-					getActivity(), app.getFavorites().getColorWithCategory(point, getResources().getColor(R.color.color_favorite)), false, point));
+			int iconColor = app.getFavorites().getColorWithCategory(point, getResources().getColor(R.color.color_favorite));
+			Drawable favoriteIcon = FavoriteImageDrawable.getOrCreate(app, iconColor, false, point);
+			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(favoriteIcon);
 			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),
 					point.getLongitude()));
 			distances.add(dv);
 
-			name.setText(point.getDisplayName(getMyApplication()));
+			name.setText(point.getDisplayName(app));
 			name.setTypeface(Typeface.DEFAULT, point.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
 			view.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);
 
-			((ImageView) view.findViewById(R.id.navigate_to)).setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_gdirections_dark));
+			Drawable directionIcon = app.getUIUtilities().getThemedIcon(R.drawable.ic_action_gdirections_dark);
+			((ImageView) view.findViewById(R.id.navigate_to)).setImageDrawable(directionIcon);
 			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), point.getLatitude(),
 							point.getLongitude(),
-							new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getDisplayName(getMyApplication())));
+							new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getDisplayName(app)));
 				}
 			});
 			
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					getMyApplication().getSettings().setMapLocationToShow(point.getLatitude(), point.getLongitude(),
-							15, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getDisplayName(getMyApplication())), true,
-							point); //$NON-NLS-1$
+					app.getSettings().setMapLocationToShow(point.getLatitude(), point.getLongitude(),
+							15, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getDisplayName(app)),
+							true, point);
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			});
