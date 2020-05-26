@@ -79,7 +79,7 @@ public class OsmAndLocationSimulation {
 							@Override
 							public boolean processResult(GPXUtilities.GPXFile[] result) {
 								GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(result[0], app.getSettings());
-								startAnimationThread(app, builder.getPoints(), true, speedup.getValue() + 1);
+								startAnimationThread(app, builder.getPoints(app), true, speedup.getValue() + 1);
 								if (runnable != null) {
 									runnable.run();
 								}

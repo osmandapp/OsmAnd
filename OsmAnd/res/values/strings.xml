@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact support team to investigate further</string>
     <string name="unsupported_type_error">Unsupported type</string>
     <string name="index_item_world_basemap_detailed">World overview map (detailed)</string>
     <string name="profiles_for_action_not_found">Could not find any such profiles.</string>

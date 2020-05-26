@@ -12,12 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -124,7 +125,9 @@ public class WikivoyageWebViewClient extends WebViewClient {
 			}
 		} else {
 			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-			activity.startActivity(i);
+			if (AndroidUtils.isIntentSafe(activity, i)) {
+				activity.startActivity(i);
+			}
 		}
 		return true;
 	}

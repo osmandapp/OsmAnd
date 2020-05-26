@@ -504,7 +504,7 @@ public class ConfigureMapMenu {
 
 		String description = "";
 		SunriseSunset sunriseSunset = activity.getMyApplication().getDaynightHelper().getSunriseSunset();
-		if (sunriseSunset != null) {
+		if (sunriseSunset != null && sunriseSunset.getSunrise() != null && sunriseSunset.getSunset() != null) {
 			DateFormat dateFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
 			String sunriseTime = dateFormat.format(sunriseSunset.getSunrise());
 			String sunsetTime = dateFormat.format(sunriseSunset.getSunset());
