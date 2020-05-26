@@ -2288,6 +2288,10 @@ public class OsmandSettings {
 		TURN_SCREEN_ON_SENSOR.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 
+	public final CommonPreference<Boolean> TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS = new BooleanPreference("turn_screen_on_navigation_instructions", false).makeProfile();
+
+	public final CommonPreference<Boolean> TURN_SCREEN_ON_POWER_BUTTON = new BooleanPreference("turn_screen_on_power_button", false).makeProfile();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	// try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
 	//public final CommonPreference<Boolean> AUTO_FOLLOW_ROUTE_NAV = new BooleanPreference("auto_follow_route_navigation", true, false);

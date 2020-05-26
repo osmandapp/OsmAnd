@@ -1,24 +1,13 @@
 package net.osmand.plus.settings.fragments;
 
-import android.graphics.drawable.ColorDrawable;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public class TurnScreenOnFragment extends BaseSettingsFragment {
 
@@ -26,29 +15,9 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-		Preference turnScreenOnInfo = findPreference("turn_screen_on_info");
-		turnScreenOnInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-
+		setupUseSystemScreenTimeout();
 		setupTurnScreenOnTimePref();
 		setupTurnScreenOnSensorPref();
-		enableDisablePreferences(settings.TURN_SCREEN_ON_ENABLED.getModeValue(getSelectedAppMode()));
-	}
-
-	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
-		super.createToolbar(inflater, view);
-
-		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				ApplicationMode selectedMode = getSelectedAppMode();
-				boolean checked = !settings.TURN_SCREEN_ON_ENABLED.getModeValue(selectedMode);
-				onConfirmPreferenceChange(
-						settings.TURN_SCREEN_ON_ENABLED.getId(), checked, ApplyQueryType.SNACK_BAR);
-				updateToolbarSwitch();
-				enableDisablePreferences(checked);
-			}
-		});
 	}
 
 	@Override
@@ -64,29 +33,10 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		}
 	}
 
-	@Override
-	protected void updateToolbar() {
-		super.updateToolbar();
-		updateToolbarSwitch();
-	}
-
-	private void updateToolbarSwitch() {
-		View view = getView();
-		if (view == null) {
-			return;
-		}
-		boolean checked = settings.TURN_SCREEN_ON_ENABLED.getModeValue(getSelectedAppMode());
-
-		int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
-		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
-		AndroidUtils.setBackground(switchContainer, new ColorDrawable(color));
-
-		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
-		switchView.setChecked(checked);
-		UiUtilities.setupCompoundButton(switchView, isNightMode(), TOOLBAR);
-
-		TextView title = switchContainer.findViewById(R.id.switchButtonText);
-		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);
+	private void setupUseSystemScreenTimeout() {
+		SwitchPreferenceEx useSystemScreenTimeout = (SwitchPreferenceEx) findPreference(settings.USE_SYSTEM_SCREEN_TIMEOUT.getId());
+		useSystemScreenTimeout.setTitle(app.getString(R.string.system_screen_timeout));
+		useSystemScreenTimeout.setDescription(app.getString(R.string.system_screen_timeout_descr));
 	}
 
 	private void setupTurnScreenOnTimePref() {
@@ -106,12 +56,9 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	}
 
 	private void setupTurnScreenOnSensorPref() {
-		String title = getString(R.string.turn_screen_on_sensor);
-		String description = getString(R.string.turn_screen_on_sensor_descr);
-
 		SwitchPreferenceEx turnScreenOnSensor = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_SENSOR.getId());
 		turnScreenOnSensor.setIcon(getPersistentPrefIcon(R.drawable.ic_action_sensor_interaction));
-		turnScreenOnSensor.setTitle(title);
-		turnScreenOnSensor.setDescription(description);
+		turnScreenOnSensor.setTitle(R.string.turn_screen_on_sensor);
+		turnScreenOnSensor.setDescription(R.string.turn_screen_on_sensor_descr);
 	}
 }
