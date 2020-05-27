@@ -1161,7 +1161,6 @@ public class MapMarkersHelper {
 					removeGroupActiveMarkers(group, true);
 					return;
 				}
-
 				for (FavouritePoint fp : favGroup.getPoints()) {
 					addNewMarkerIfNeeded(group, groupMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), fp, null);
 				}

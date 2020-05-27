@@ -17,11 +17,8 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.UiUtilities;
@@ -33,6 +30,9 @@ import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -627,19 +627,20 @@ public class WaypointHelper {
                 amenities.addAll(pf.searchAmenitiesOnThePath(locs, poiSearchDeviationRadius));
 			}
 			for (Amenity a : amenities) {
-				AmenityRoutePoint rp = a.getRoutePoint();
-				int i = locs.indexOf(rp.pointA);
-				if (i >= 0) {
-					LocationPointWrapper lwp = new LocationPointWrapper(route, POI, new AmenityLocationPoint(a),
-							(float) rp.deviateDistance, i);
-					lwp.deviationDirectionRight = rp.deviationDirectionRight;
-					lwp.setAnnounce(announcePOI);
-					locationPoints.add(lwp);
+				AmenityRoutePoint routePoint = a.getRoutePoint();
+				if (routePoint != null) {
+					int i = locs.indexOf(routePoint.pointA);
+					if (i >= 0) {
+						LocationPointWrapper lwp = new LocationPointWrapper(route, POI, new AmenityLocationPoint(a),
+								(float) routePoint.deviateDistance, i);
+						lwp.deviationDirectionRight = routePoint.deviationDirectionRight;
+						lwp.setAnnounce(announcePOI);
+						locationPoints.add(lwp);
+					}
 				}
 			}
 		}
 	}
-
 
 	private void calculateAlarms(RouteCalculationResult route, List<LocationPointWrapper> array, ApplicationMode mode) {
 		AlarmInfo prevSpeedCam = null;

@@ -29,7 +29,7 @@
     <string name="contribution_activity">نصب نسخه</string>
     <string name="choose_osmand_theme_descr">ظاهر برنامه را به‌دلخواه تنظیم کنید.</string>
     <string name="choose_osmand_theme">پوستهٔ برنامه</string>
-    <string name="accessibility_options">تنظیمات دسترسی آسان</string>
+    <string name="accessibility_options">تنظیمات قابلیت دسترسی</string>
     <string name="select_address_activity">مشخص‌کردن نشانی</string>
     <string name="favourites_list_activity">انتخاب نقطهٔ موردعلاقه</string>
     <string name="local_openstreetmap_act_title">تغییرات OsmAnd</string>
@@ -423,7 +423,7 @@
     <string name="shared_string_help">راهنما</string>
     <string name="shared_string_on">روشن</string>
     <string name="shared_string_off">خاموش</string>
-    <string name="accessibility_default">طبق تنظیمات کلی دستگاه</string>
+    <string name="accessibility_default">طبق تنظیمات دستگاه</string>
     <string name="backToMenu">برگشتن به منو</string>
     <string name="zoomOut">ریزتر</string>
     <string name="zoomIn">درشت‌تر</string>
@@ -985,13 +985,13 @@
     <string name="osm_editing_plugin_description">با ایجاد یا اصلاح نقاط توجه (POI)، ایجاد یادداشت‌های OSM یا نظردادن روی آن‌ها و بارگذاری فایل‌های GPXای که ضبط کرده‌اید در تکمیل نقشهٔ OSM مشارکت کنید. برای این منظور لازم است نام کاربری و گذرواژهٔ خود را در OsmAnd وارد کنید. OpenStreetMap.org یک پروژهٔ نقشه‌کشی جامعه‌محور، جهانی و در مالکیت عمومی است.</string>
     <string name="play_commands_of_currently_selected_voice">گفتاری را انتخاب کنید و با پخش پیام‌ها، آن را امتحان کنید:</string>
     <string name="native_rendering">رندر بومی</string>
-    <string name="accessibility_mode">حالت دسترسی آسان</string>
+    <string name="accessibility_mode">حالت قابلیت دسترسی</string>
     <string name="accessibility_mode_descr">امکانات موردنیاز برای کاربران مبتلا به نارسایی جسمی را فعال می‌کند.</string>
     <string name="direction_style_sidewise">جهت‌ها (۸سویه)</string>
     <string name="zoom_by_trackball_descr">میزان بزرگ‌نمایی نقشه را با حرکت افقی گوی مکان‌نما تغییر دهید.</string>
     <string name="zoom_by_trackball">استفاده از گوی مکان‌نما برای کنترل بزرگ‌نمایی</string>
-    <string name="accessibility_preferences_descr">تنظیمات مربوط به دسترسی آسان.</string>
-    <string name="shared_string_accessibility">دسترسی آسان</string>
+    <string name="accessibility_preferences_descr">تنظیمات مربوط به قابلیت دسترسی.</string>
+    <string name="shared_string_accessibility">قابلیت دسترسی</string>
     <string name="live_monitoring_url_descr">نشانی اینترنتی را با این پارامترها تعریف کنید: 
 \nlat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
     <string name="live_monitoring_url">نشانی اینترنتی ردیابی آنلاین</string>
@@ -1638,7 +1638,7 @@
     <string name="rendering_attr_alpineHiking_name">مقیاس پیاده‌گردی آلپاین (SAC)</string>
     <string name="opening_at">بازکردن در</string>
     <string name="closing_at">بستن در</string>
-    <string name="osm_live_payment_desc">هزینهٔ اشتراک ماهانه است. هر زمان که خواستید، اشتراک خود را در گوگل‌پلی لغو کنید.</string>
+    <string name="osm_live_payment_desc">هزینهٔ اشتراک مطابق دورهٔ انتخابی است. هر زمان که خواستید، اشتراک خود را در گوگل‌پلی لغو کنید.</string>
     <string name="donation_to_osm">کمک مالی به جامعهٔ OSM</string>
     <string name="donation_to_osm_desc">بخشی از کمک‌های مالی به مشارکت‌کنندگان OSM داده می‌شود. هزینهٔ اشتراک تغییری نمی‌کند.</string>
     <string name="osm_live_subscription_desc">این اشتراک، به‌روزرسانی‌های ساعتی، روزانه و هفتگی و نیز امکان دانلود نامحدود همهٔ نقشه‌ها را فعال می‌کند.</string>
@@ -2240,7 +2240,7 @@
     <string name="retry">تلاش مجدد</string>
     <string name="add_line">افزودن خط</string>
     <string name="empty_state_favourites">افزودن نقاط موردعلاقه</string>
-    <string name="empty_state_favourites_desc">نقاط موردعلاقه را درون‌برد کنید یا آن‌ها را روی نقشه علامت بزنید.</string>
+    <string name="empty_state_favourites_desc">علاقه‌مندی‌ها را درون‌برد کنید یا با علامت‌گذاری روی نقشه آن‌ها را اضافه کنید.</string>
     <string name="move_point">جابه‌جاکردن نقطه</string>
     <string name="make_round_trip_descr">یک کپی از مبدأ را به‌عنوان مقصد بیفزا.</string>
     <string name="make_round_trip">ایجاد سفر رفت‌وبرگشتی</string>
@@ -2298,7 +2298,7 @@
     <string name="open_mapillary">بازکردن مپیلاری</string>
     <string name="shared_string_install">نصب</string>
     <string name="improve_coverage_mapillary">با مَپیلاری پوشش تصویری را بهتر کنید</string>
-    <string name="improve_coverage_install_mapillary_desc">برنامهٔ Mapillary را نصب کنید و یک یا چند عکس به این نقطه از نقشه اضافه کنید.</string>
+    <string name="improve_coverage_install_mapillary_desc">برنامهٔ Mapillary را نصب کنید و به این موقعیت در نقشه چند عکس اضافه کنید.</string>
     <string name="online_photos">تصاویر آنلاین</string>
     <string name="shared_string_add_photos">افزودن تصویر</string>
     <string name="no_photos_descr">اینجا عکسی ندارد.</string>
@@ -2614,7 +2614,7 @@
     <string name="show_guide_line_descr">خطوط جهت‌داری را از موقعیت شما به‌سمت نشانه‌های فعال نمایش می‌دهد.</string>
     <string name="show_arrows_descr">با یک یا دو پیکان، سمت قرارگیری نشانه‌های فعال روی نقشه را نمایش می‌دهد.</string>
     <string name="distance_indication_descr">مشخص کنید مسافت شما تا نشانه‌های فعال کجا نشان داده شود.</string>
-    <string name="active_markers_descr">تعداد جهت‌نماها را مشخص کنید:</string>
+    <string name="active_markers_descr">تعداد جهت‌نماها را مشخص کنید.</string>
     <string name="appearance_on_the_map">تنظیمات ظاهری</string>
     <string name="add_track_to_markers_descr">ردّی را انتخاب کنید تا نقاط بین‌راهیِ آن را به نشانه‌ها اضافه کنید.</string>
     <string name="add_favourites_group_to_markers_descr">دسته‌ای از نقاط موردعلاقه را انتخاب کنید تا به نشانه‌ها اضافه شود.</string>
@@ -2639,7 +2639,7 @@
     <string name="one_tap_active">فعال‌سازی «با یک لمس»</string>
     <string name="empty_state_av_notes">یادداشت بگذارید!</string>
     <string name="empty_state_av_notes_desc">با استفاده از ابزارک یا منوی زمینه، برای هر نقطه‌ای روی نقشه یادداشت صوتی، عکسی یا ویدئویی بگذارید.</string>
-    <string name="notes_by_date">یادداشت‌های OSM بر اساس تاریخ</string>
+    <string name="notes_by_date">یادداشت‌های صوتی/تصویری بر اساس تاریخ</string>
     <string name="by_date">بر اساس تاریخ</string>
     <string name="by_type">بر اساس نوع</string>
     <string name="modify_the_search_query">جست‌وجوی خود را تغییر دهید.</string>
@@ -3449,7 +3449,7 @@
     <string name="choose_icon_color_name">نماد، رنگ و نام</string>
     <string name="reorder_profiles">ویرایش لیست پروفایل</string>
     <string name="selected_profile">پروفایل انتخاب‌شده</string>
-    <string name="reset_confirmation_descr">با زدن روی %1$s، همهٔ تغییرات شما از بین می‌رود.</string>
+    <string name="reset_confirmation_descr">زدن روی %1$s، همهٔ تغییراتتان را از بین می‌برد.</string>
     <string name="reset_all_profile_settings_descr">همهٔ تنظیمات پروفایل به حالت اولیهٔ پس از نصب بازنشانی می‌شود.</string>
     <string name="reset_all_profile_settings">همهٔ تنظیمات پروفایل را بازنشانی می‌کنید؟</string>
     <string name="ltr_or_rtl_combine">%1$s: ‪%2$s‬</string>
@@ -3518,7 +3518,7 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s‏/%2$s</string>
     <string name="sunset_at">غروب خورشید در %1$s</string>
     <string name="sunrise_at">طلوع خورشید در %1$s</string>
-    <string name="accessibility_mode_disabled">حالت دسترسی آسان در دستگاه شما غیرفعال است.</string>
+    <string name="accessibility_mode_disabled">حالت قابلیت دسترسی در دستگاهتان خاموش شده است.</string>
     <string name="use_system_screen_timeout">استفاده از زمان خاموشی صفحهٔ دستگاه</string>
     <string name="use_system_screen_timeout_promo">پیشفرض غیرفعال است، اگر OsmAnd در پیش‌زمینه اجرا باشد صفحه خاموش نمی‌شود. 
 \n 
@@ -3555,7 +3555,7 @@
     <string name="shared_string_available">قابل‌استفاده</string>
     <string name="please_provide_profile_name_message">لطفاً یک نام برای پروفایل بنویسید</string>
     <string name="open_settings">بازکردن تنظیمات</string>
-    <string name="plugin_disabled">افزونه غیرفعال شد</string>
+    <string name="plugin_disabled">افزونه خاموش</string>
     <string name="plugin_disabled_descr">این افزونه یک برنامهٔ جداگانه است. اگر دیگر لازمش نداشتید باید جداگانه آن را حذف کنید.
 \n
 \nبا حذف OsmAnd، این افزونه روی دستگاه باقی می‌ماند.</string>
@@ -3563,12 +3563,12 @@
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">مسیریابی</string>
     <string name="shared_string_include_data">شامل دادهٔ افزوده</string>
-    <string name="import_profile_dialog_description">پروفایلِ درون‌بردی حاوی دادهٔ افزوده است. «درون‌برد» را بزنید تا فقط دادهٔ پروفایل درون‌برد شود. «دادهٔ افزوده» را انتخاب کنید تا آن را نیز درون‌برد کنید.</string>
+    <string name="import_profile_dialog_description">پروفایلِ درون‌بردی حاوی دادهٔ افزوده است. «درون‌برد» را بزنید تا فقط دادهٔ پروفایل درون‌برد شود، یا «دادهٔ افزوده» را انتخاب کنید تا آن را نیز درون‌برد کنید.</string>
     <string name="export_profile_dialog_description">می‌توانید همراه پروفایل، دادهٔ افزوده را نیز برون‌برد کنید.</string>
     <string name="index_name_antarctica">جنوبگان</string>
     <string name="accessibility_announce">اعلام</string>
     <string name="shared_string_app_default_w_val">پیشفرض برنامه (%s)</string>
-    <string name="no_recalculation_setting">غیرفعال‌سازی محاسبهٔ مجدد</string>
+    <string name="no_recalculation_setting">بدون محاسبهٔ مجدد</string>
     <string name="route_recalculation_dist_title">مسافت کمینی برای مسیریابی مجدد</string>
     <string name="route_recalculation_dist_descr">اگر مسافت تا مسیر بیش از پارامتر تعیین‌شده باشد، مسیر دوباره محاسبه می‌شود</string>
     <string name="profile_type_custom_string">پروفایل سفارشی</string>
@@ -3650,9 +3650,9 @@
     <string name="shared_string_languages">زبان‌ها</string>
     <string name="shared_string_language">زبان</string>
     <string name="shared_string_all_languages">همهٔ زبان‌ها</string>
-    <string name="ui_customization_description">تعداد اقلام کشو را به‌دلخواه تنظیم کنید، نقشه و منوی زمینه را پیکربندی نمایید. 
+    <string name="ui_customization_description">تعداد اقلام «کشو»، «پیکربندی نقشه» و «منوی زمینه» را به‌دلخواه تنظیم کنید.
 \n 
-\nمی‌توانید افزونهٔ بی‌استفاده را غیرفعال کنید تا همهٔ کنترل‌های آن از برنامه پنهان شود.</string>
+\nافزونه‌های بی‌استفاده را غیرفعال کنید تا همهٔ کنترل‌های آن‌ها از برنامه پنهان شود.</string>
     <string name="reset_items_descr">پنهان‌سازی تنظیمات آن‌ها را به حالت اولیه بازنشانی می‌کند.</string>
     <string name="hidden_items_descr">این اقلام از منو پنهان می‌شوند، اما گزینه‌ها یا افزونه‌های متناظر همچنان کار می‌کنند.</string>
     <string name="shared_string_hidden">پنهان</string>
@@ -3662,7 +3662,7 @@
     <string name="ui_customization_short_descr">اقلام کشو، منوی زمینه</string>
     <string name="ui_customization">سفارشی‌سازی واسط کاربری</string>
     <string name="context_menu_actions">کنش‌های منوی زمینه</string>
-    <string name="main_actions_descr">کنش‌های اصلی فقط ۴ دکمه است.</string>
+    <string name="main_actions_descr">فقط چهار دکمه دارد.</string>
     <string name="main_actions">کنش‌های اصلی</string>
     <string name="developer_plugin">افزونهٔ توسعه‌دهنده</string>
     <string name="divider_descr">چیزهایی که از این نقطه به پایین قرار می‌گیرند، با جداکننده جدا می‌شوند.</string>
@@ -3750,4 +3750,6 @@
     <string name="change_application_profile">تغییر پروفایل برنامه</string>
     <string name="profiles_for_action_not_found">چنین پروفایلی پیدا نشد.</string>
     <string name="index_item_world_basemap_detailed">نقشهٔ نمای کلی جهان ( با جزئیات)</string>
+    <string name="shared_string_resume">ازسرگیری</string>
+    <string name="unsupported_type_error">نوع پشتیبانی‌نشده</string>
 </resources>

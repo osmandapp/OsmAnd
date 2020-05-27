@@ -121,7 +121,12 @@ public class SearchPhrase {
 				int i1 = CommonWords.getCommonSearch(o1.toLowerCase());
 				int i2 = CommonWords.getCommonSearch(o2.toLowerCase());
 				if (i1 != i2) {
-					return icompare(i1, i2);
+					if(i1 == -1) {
+						return -1;
+					} else if(i2 == -1) {
+						return 1;
+					}
+					return -icompare(i1, i2);
 				}
 				// compare length without numbers to not include house numbers
 				return -icompare(lengthWithoutNumbers(o1), lengthWithoutNumbers(o2));
@@ -458,20 +463,24 @@ public class SearchPhrase {
 		SearchPhrase sp = new SearchPhrase(this.settings, this.clt);
 		addResult(res, sp);
 		SearchResult prnt = res.parentSearchResult;
-		while(prnt != null) {
+		while (prnt != null) {
 			addResult(prnt, sp);
 			prnt = prnt.parentSearchResult;
 		}
 		sp.words.addAll(0, this.words);	
-		if(unknownWords != null) {
+		if (unknownWords != null) {
 			sp.lastUnknownSearchWordComplete = lastComplete;
+			StringBuilder genUnknownSearchPhrase = new StringBuilder();
 			for (int i = 0; i < unknownWords.size(); i++) {
 				if (i == 0) {
 					sp.unknownSearchWordTrim = unknownWords.get(0);
 				} else {
 					sp.unknownWords.add(unknownWords.get(i));
 				}
+				genUnknownSearchPhrase.append(unknownWords.get(i)).append(" ");
 			}
+			
+			sp.rawUnknownSearchPhrase = sp.unknownSearchPhrase = genUnknownSearchPhrase.toString().trim();
 		}
 		return sp;
 	}
@@ -724,16 +733,17 @@ public class SearchPhrase {
 	}
 	
 	public void countUnknownWordsMatch(SearchResult sr, String localeName, Collection<String> otherNames) {
-		if(unknownWords.size() > 0) {
-			for(int i = 0; i < unknownWords.size(); i++) {
-				if(unknownWordsMatcher.size() == i) {
-					unknownWordsMatcher.add(new NameStringMatcher(unknownWords.get(i), 
-							i < unknownWords.size() - 1 || isLastUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE :
-								StringMatcherMode.CHECK_STARTS_FROM_SPACE));
+		if (unknownWords.size() > 0) {
+			for (int i = 0; i < unknownWords.size(); i++) {
+				if (unknownWordsMatcher.size() == i) {
+					unknownWordsMatcher.add(new NameStringMatcher(unknownWords.get(i),
+							i < unknownWords.size() - 1 || isLastUnknownSearchWordComplete()
+									? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
+									: StringMatcherMode.CHECK_STARTS_FROM_SPACE));
 				}
 				NameStringMatcher ms = unknownWordsMatcher.get(i);
-				if(ms.matches(localeName) || ms.matches(otherNames)) {
-					if(sr.otherWordsMatch == null) {
+				if (ms.matches(localeName) || ms.matches(otherNames)) {
+					if (sr.otherWordsMatch == null) {
 						sr.otherWordsMatch = new TreeSet<>();
 					}
 					sr.otherWordsMatch.add(unknownWords.get(i));

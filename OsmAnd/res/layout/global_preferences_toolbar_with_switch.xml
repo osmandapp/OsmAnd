@@ -27,14 +27,9 @@
 			<ImageButton
 				android:id="@+id/close_button"
 				style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginStart="@dimen/content_padding"
-				android:layout_marginRight="@dimen/content_padding"
-				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_width="@dimen/toolbar_height"
+				android:layout_height="@dimen/toolbar_height"
 				android:contentDescription="@string/access_shared_string_navigate_up"
-				android:scaleType="fitCenter"
 				app:srcCompat="@drawable/ic_arrow_back" />
 
 			<net.osmand.plus.widgets.TextViewEx

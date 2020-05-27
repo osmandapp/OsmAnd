@@ -146,7 +146,7 @@ public class SearchCoreFactory {
 			phrase.countUnknownWordsMatch(res);
 //			int cnt = resultMatcher.getCount();
 			List<String> ws = phrase.getUnknownSearchWords(res.otherWordsMatch);
-			if(!res.firstUnknownWordMatches) {
+			if (!res.firstUnknownWordMatches) {
 				ws.add(phrase.getUnknownSearchWord());
 			}
 			// publish result to set parentSearchResult before search
@@ -154,14 +154,10 @@ public class SearchCoreFactory {
 			if (!ws.isEmpty() && api != null && api.isSearchAvailable(phrase)) {
 				SearchPhrase nphrase = phrase.selectWord(res, ws,
 						phrase.isLastUnknownSearchWordComplete());
-				SearchResult prev = resultMatcher.setParentSearchResult(res);
-				res.parentSearchResult = prev;
+				resultMatcher.setParentSearchResult(res);
 				api.search(nphrase, resultMatcher);
-				resultMatcher.setParentSearchResult(prev);
+				resultMatcher.setParentSearchResult(res.parentSearchResult);
 			}
-//			if (resultMatcher.getCount() == cnt) {
-//				resultMatcher.publish(res);
-//			}
 		}
 
 		@Override

@@ -455,7 +455,7 @@
     <string name="auto_follow_location_enabled">Автоцентр просмотра карты во время использования.</string>
     <string name="shared_string_gpx_route">Маршрут GPX</string>
     <string name="poi_query_by_name_matches_categories">Найдено несколько связанных категорий POI.</string>
-    <string name="data_to_search_poi_not_available">Загрузите данные для автономного поиска POI.</string>
+    <string name="data_to_search_poi_not_available">Загрузите данные для локального поиска POI.</string>
     <string name="poi_filter_by_name">Поиск по имени</string>
     <string name="old_poi_file_should_be_deleted">Данные POI «%1$s» устарели и могут быть удалены.</string>
     <string name="update_poi_file_not_found">Файл с обновляемыми POI не найден и не может быть создан.</string>
@@ -786,12 +786,12 @@
     <string name="searching_address">Поиск адреса…</string>
     <string name="search_osm_nominatim">Поиск адреса в OSM Nominatim</string>
     <string name="hint_search_online">Онлайн поиск: Номер дома, улица, Город</string>
-    <string name="search_offline_address">Автономный поиск</string>
+    <string name="search_offline_address">Локальный поиск</string>
     <string name="search_online_address">Онлайн поиск</string>
     <string name="max_level_download_tile">Уровень детализации</string>
     <string name="max_level_download_tile_descr">Выберите максимальный масштаб для загрузки тайлов карт из интернета.</string>
     <string name="route_general_information">Общая протяжённость = %1$s, время в пути = %2$d ч. %3$d м.</string>
-    <string name="router_service_descr">Онлайн или автономный сервис для прокладки маршрута.</string>
+    <string name="router_service_descr">Онлайн или локальный сервис для прокладки маршрута.</string>
     <string name="router_service">Прокладка маршрута</string>
     <string name="sd_dir_not_accessible">Папка для хранения данных на SD-карте недоступна!</string>
     <string name="download_question">Загрузить {0} — {1}\?</string>
@@ -1374,7 +1374,7 @@
     <string name="guidance_preferences_descr">Настройки навигации</string>
     <string name="routing_preferences_descr">Настройки маршрутизации</string>
     <string name="app_mode_truck">Грузовик</string>
-    <string name="calculate_osmand_route_gpx">Автономно рассчитать маршрут OsmAnd</string>
+    <string name="calculate_osmand_route_gpx">Локально рассчитать маршрут OsmAnd</string>
     <string name="copying_osmand_files">Копирование файлов данных OsmAnd…</string>
     <string name="speech_rate">Скорость произношения</string>
     <string name="app_modes_choose_descr">Выберите отображаемые профили.</string>
@@ -1796,7 +1796,7 @@
     <string name="welcome_select_region">Для правильного отображения дорожных знаков и правил, пожалуйста, выберите свой регион вождения:</string>
     <string name="welcome_header">Добро пожаловать</string>
     <string name="mark_to_delete">Отметить для удаления</string>
-    <string name="welcome_text">OsmAnd обеспечивает глобальный автономный просмотр карт и автономную навигацию.</string>
+    <string name="welcome_text">OsmAnd обеспечивает глобальный локальный просмотр карт и автономную навигацию.</string>
     <string name="osm_changes_added_to_local_edits">OSM изменения добавлены в локальную базу данных</string>
     <string name="confirm_usage_speed_cameras">Во многих странах (Германия, Франция, Италия и другие) использование предупреждения о камерах контроля скорости не допускается законом. OsmAnd не несёт никакой ответственности, если вы нарушите закон. Пожалуйста, нажмите «Да» только если вы имеете право использовать эту функцию.</string>
     <string name="agps_info">Информация A-GPS</string>
@@ -2344,7 +2344,7 @@
     <string name="mapillary_menu_filter_description">Фильтровать фотографии по отправителю, дате или типу. Фильтры применяются только для больших масштабов.</string>
     <string name="import_gpx_failed_descr">Не удалось импортировать файл. Пожалуйста, убедитесь что OsmAnd имеет разрешение на его чтение.</string>
     <string name="distance_moving">Откорректированное расстояние</string>
-    <string name="improve_coverage_install_mapillary_desc">Установите Mapillary, чтобы добавить одну или несколько фотографий к этому месту на карте.</string>
+    <string name="improve_coverage_install_mapillary_desc">Установите Mapillary, чтобы добавить фотографии этого места.</string>
     <string name="route_altitude">Высота маршрута</string>
     <string name="enter_gpx_name">Имя файла GPX:</string>
     <string name="show_on_map_after_saving">Показать на карте после сохранения</string>
@@ -2478,7 +2478,7 @@
     <string name="show_guide_line_descr">Отображать направляющие линии от вашего местоположения до активных маркеров.</string>
     <string name="show_arrows_descr">Отображать одну или две стрелки, указывающие направление на активные маркеры.</string>
     <string name="distance_indication_descr">Выберите способ отображения расстояния до активных маркеров.</string>
-    <string name="active_markers_descr">Выберите количество указателей направления:</string>
+    <string name="active_markers_descr">Выберите количество указателей направления.</string>
     <string name="digits_quantity">Количество десятичных цифр</string>
     <string name="shared_string_paste">Вставить</string>
     <string name="go_to_next_field">Следующее поле</string>
@@ -2600,9 +2600,9 @@
     <string name="waypoint_one">Путевая точка 1</string>
     <string name="route_point_one">Точка маршрута 1</string>
     <string name="empty_state_my_tracks">Добавить файлы GPX</string>
-    <string name="empty_state_my_tracks_desc">Импорт файлов GPX, или запись треков.</string>
+    <string name="empty_state_my_tracks_desc">Импорт файлов GPX или запись треков.</string>
     <string name="empty_state_favourites">Добавить избранные</string>
-    <string name="empty_state_favourites_desc">Импортируйте избранное, или добавляйте, отмечая точки на карте.</string>
+    <string name="empty_state_favourites_desc">Избранное можно импортировать или создать, отмечая точки на карте.</string>
     <string name="import_track">Импортировать файл GPX</string>
     <string name="move_point">Переместить точку</string>
     <string name="add_segment_to_the_track">Добавить в файл GPX</string>
@@ -3429,9 +3429,9 @@
     <string name="permission_is_required">Для использования этой функции требуется разрешение.</string>
     <string name="monitoring_min_speed_descr">Это низкоскоростной фильтр отсечки, чтобы не записывать точки ниже определённой скорости. Это может сделать записанные треки более гладкими при просмотре на карте.</string>
     <string name="rearrange_categories">Упорядочить категории</string>
-    <string name="create_custom_categories_list_promo">Изменяйте порядок сортировки списка, скрывайте ненужные категории. Вы можете импортировать или экспортировать все изменения с профилями.</string>
-    <string name="add_new_custom_category_button_promo">Вы можете добавить новую пользовательскую категорию, выбрав одну или несколько необходимых категорий.</string>
-    <string name="reset_to_default_category_button_promo">Сброс к настройкам по умолчанию приведёт к сбросу порядка сортировки к настройкам по умолчанию после установки.</string>
+    <string name="create_custom_categories_list_promo">Изменяйте порядок сортировки списка, скрывайте категории. Вы можете импортировать или экспортировать все изменения с профилями.</string>
+    <string name="add_new_custom_category_button_promo">Вы можете добавить новую пользовательскую категорию, выбрав одну или несколько категорий.</string>
+    <string name="reset_to_default_category_button_promo">Сброс к настройкам по умолчанию приведёт к возврату порядка сортировки по умолчанию.</string>
     <string name="add_custom_category">Добавить пользовательскую категорию</string>
     <string name="rendering_attr_streetLightingNight_name">Показывать только ночью</string>
     <string name="plugin_prefs_reset_successful">Все настройки плагина восстановлены до состояния по умолчанию.</string>
@@ -3441,8 +3441,8 @@
     <string name="sunrise_at">Восход в %1$s</string>
     <string name="accessibility_mode_disabled">Режим специальных возможностей отключён в системе.</string>
     <string name="use_system_screen_timeout">Использовать системную блокировку экрана</string>
-    <string name="use_system_screen_timeout_promo">По умолчанию отключено, если OsmAnd работает на переднем плане, экран не отключается.
-\n
+    <string name="use_system_screen_timeout_promo">По умолчанию отключено: пока OsmAnd работает на переднем плане, экран не отключается. 
+\n 
 \nЕсли включено, OsmAnd будет использовать системные настройки блокировки экрана.</string>
     <string name="clear_recorded_data">Очистить записанные данные</string>
     <string name="release_3_6">• Профили: теперь вы можете изменить порядок, установить значок для карты, изменить все настройки для базовых профилей и вернуть их к настройкам по умолчанию 
@@ -3512,7 +3512,7 @@
     <string name="import_profile">Импорт профиля</string>
     <string name="monitoring_prefs_descr">Навигация, точность ведения журнала</string>
     <string name="multimedia_notes_prefs_descr">Размер изображения, качество звука и видео</string>
-    <string name="osm_editing_prefs_descr">Логин, пароль, автономное редактирование</string>
+    <string name="osm_editing_prefs_descr">Логин, пароль, локальное редактирование</string>
     <string name="accessibility_prefs_descr">Выберите значок, цвет и имя</string>
     <string name="live_monitoring_descr">Позволяет обмениваться текущим местоположением с помощью записи поездки.</string>
     <string name="live_monitoring">Онлайн-отслеживание</string>
@@ -3674,7 +3674,7 @@
 \nПодписка продлевается автоматически, если вы не отмените её до даты продления. С вашего счёта будет взиматься плата за период продления (месяц/три месяца/год) разово в день продления. 
 \n
 \nВы можете управлять подписками и отменять их в настройках Google Play.</string>
-    <string name="search_poi_types_descr">Можно объединить типы POI из разных категорий. Нажмите «Переключить», чтобы выбрать все; нажмите слева, чтобы выбрать категорию.</string>
+    <string name="search_poi_types_descr">Можно объединить типы POI из разных категорий. Нажмите переключатель, чтобы выбрать все; нажмите слева, чтобы выбрать категорию.</string>
     <string name="search_poi_types">Поиск типов POI</string>
     <string name="mapillary_item">OsmAnd и Mapillary</string>
     <string name="travel_item">Путешествие (Викигид и Википедия)</string>

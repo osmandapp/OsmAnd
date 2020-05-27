@@ -144,7 +144,7 @@ public class UiUtilities {
 	}
 
 	public Drawable getMapIcon(@DrawableRes int id, boolean light) {
-		return getDrawable(id, light ? R.color.icon_color_default_light : 0);
+		return getDrawable(id, light ? R.color.map_button_icon_color_light : R.color.map_button_icon_color_dark);
 	}
 
 	public static Drawable getSelectableDrawable(Context ctx) {

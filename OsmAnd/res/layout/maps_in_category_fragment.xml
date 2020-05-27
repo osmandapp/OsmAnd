@@ -11,11 +11,12 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/dashboard_map_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="?attr/pstsTabBackground"
-            android:minHeight="@dimen/dashboard_map_toolbar"
+            android:minHeight="@dimen/toolbar_height"
             android:theme="?attr/toolbar_theme"
+            android:padding="0dp"
             app:contentInsetLeft="72dp"
             app:contentInsetStart="72dp"
             app:contentInsetRight="0dp"

@@ -2125,10 +2125,10 @@
     <string name="favorite_empty_place_name">Emplacement</string>
     <string name="quick_action_duplicates">Ce nom existe déjà, l\'action rapide a été renommée en %1$s.</string>
     <string name="quick_action_duplicate">Nom d\'action rapide en double</string>
-    <string name="quick_action_showhide_favorites_title">Afficher / Masquer les favoris</string>
+    <string name="quick_action_showhide_favorites_title">Afficher / masquer les favoris</string>
     <string name="quick_action_favorites_show">Afficher les favoris</string>
     <string name="quick_action_favorites_hide">Masquer les favoris</string>
-    <string name="quick_action_showhide_poi_title">Afficher / Masquer les points d\'intérêt</string>
+    <string name="quick_action_showhide_poi_title">Afficher / masquer les points d\'intérêt</string>
     <string name="quick_action_poi_show">Afficher %1$s</string>
     <string name="quick_action_poi_hide">Masquer %1$s</string>
     <string name="quick_action_add_category">Ajouter une catégorie</string>
@@ -2376,7 +2376,7 @@
     <string name="mapillary">Mapillary</string>
     <string name="open_mapillary">Ouvrir Mapillary</string>
     <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter une ou plusieurs photos à cet emplacement de la carte.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter des photos à cet emplacement de la carte.</string>
     <string name="mapillary_action_descr">Partagez vos photos de rue via Mapillary.</string>
     <string name="mapillary_widget">Gadget Mapillary</string>
     <string name="mapillary_widget_descr">Permet de contribuer facilement à Mapillary.</string>
@@ -2444,7 +2444,7 @@
     <string name="empty_state_my_tracks">Ajouter des fichiers GPX</string>
     <string name="empty_state_my_tracks_desc">Importer des fichiers GPX ou enregistrer des traces.</string>
     <string name="empty_state_favourites">Ajouter des favoris</string>
-    <string name="empty_state_favourites_desc">Importez des favoris ou ajoutez-en depuis la carte.</string>
+    <string name="empty_state_favourites_desc">Importez des favoris ou créez des favoris sur la carte.</string>
     <string name="import_track">Importer le fichier GPX</string>
     <string name="import_track_desc">Le fichier %1$s ne contient aucune étape, l\'importer comme trace ?</string>
     <string name="move_point">Déplacer le point</string>
@@ -2590,7 +2590,7 @@
     <string name="show_guide_line_descr">Afficher les instructions de guidage de votre position vers les marques actives.</string>
     <string name="show_arrows_descr">Afficher une ou deux flèches indiquant la direction vers les marques actives.</string>
     <string name="distance_indication_descr">Indiquez comment afficher la distance avec les marques actives.</string>
-    <string name="active_markers_descr">Indiquez le nombre d\'indications de direction à afficher :</string>
+    <string name="active_markers_descr">Définir le nombre d\'indications de direction à afficher.</string>
     <string name="shared_string_more_without_dots">Plus</string>
     <string name="looking_for_tracks_with_waypoints">Recherche de fichiers de trace GPX avec points de passage</string>
     <string name="empty_state_osm_edits">Créer et modifier des éléments OSM</string>
@@ -2649,7 +2649,7 @@
     <string name="copy_location_name">Copier l\'emplacement / le nom du point</string>
     <string name="toast_empty_name_error">Emplacement sans nom</string>
     <string name="show_closed_notes">Afficher les notes fermées</string>
-    <string name="switch_osm_notes_visibility_desc">Afficher / Masquer les notes OSM sur la carte.</string>
+    <string name="switch_osm_notes_visibility_desc">Afficher / masquer les notes OSM sur la carte.</string>
     <string name="gpx_file_desc">GPX - adapté à l\'export vers JOSM et d\'autres éditeurs OSM.</string>
     <string name="osc_file_desc">OSC - adapté à l\'export vers OSM.</string>
     <string name="shared_string_gpx_file">Fichier GPX</string>
@@ -3345,11 +3345,11 @@
     <string name="quick_action_contour_lines_descr">Bouton affichant ou masquant les courbes de niveaux sur la carte.</string>
     <string name="quick_action_contour_lines_show">Afficher les courbes de niveaux</string>
     <string name="quick_action_contour_lines_hide">Masquer les courbes de niveaux</string>
-    <string name="quick_action_show_hide_contour_lines">Afficher/Masquer les courbes de niveaux</string>
+    <string name="quick_action_show_hide_contour_lines">Afficher / masquer les courbes de niveaux</string>
     <string name="quick_action_hillshade_descr">Bouton affichant ou masquant l\'ombrage du relief sur la carte.</string>
     <string name="quick_action_hillshade_show">Afficher l\'ombrage du relief</string>
     <string name="quick_action_hillshade_hide">Masquer l\'ombrage du relief</string>
-    <string name="quick_action_show_hide_hillshade">Afficher/Masquer l\'ombrage du relief</string>
+    <string name="quick_action_show_hide_hillshade">Afficher / masquer l\'ombrage du relief</string>
     <string name="tts_initialization_error">Impossible de démarrer le moteur de synthèse vocale.</string>
     <string name="simulate_your_location_gpx_descr">Simulez votre position à l\'aide d\'une trace GPX enregistrée.</string>
     <string name="export_profile">Exporter le profil</string>
@@ -3472,9 +3472,9 @@
     <string name="create_custom_categories_list_promo">Modifiez l\'ordre de tri de la liste, masquez des catégories. Vous pouvez importer et exporter toutes vos modifications via les profils.</string>
     <string name="reset_to_default_category_button_promo">Restaurer les valeurs par défaut réinitialisera l\'ordre de tri.</string>
     <string name="accessibility_mode_disabled">Le mode d\'accessibilité est désactivé dans votre système Android.</string>
-    <string name="add_new_custom_category_button_promo">Vous pouvez ajouter une catégorie personnelle en sélectionnant la ou les catégories souhaitées.</string>
-    <string name="use_system_screen_timeout">Utiliser le délai système pour mettre en veille l\'écran</string>
-    <string name="use_system_screen_timeout_promo">Inactif par défaut (lorsqu\'OsmAnd s’exécute en avant-plan, l\'écran reste toujours allumé). 
+    <string name="add_new_custom_category_button_promo">Vous pouvez ajouter une catégorie personnelle en sélectionnant une ou plusieurs catégories.</string>
+    <string name="use_system_screen_timeout">Utiliser le délai système de mise en veille de l\'écran</string>
+    <string name="use_system_screen_timeout_promo">Inactif par défaut : lorsqu\'OsmAnd s’exécute en avant-plan, l\'écran reste toujours allumé. 
 \n 
 \nSi actif, OsmAnd utilisera le délai système pour mettre en veille l\'écran.</string>
     <string name="clear_recorded_data">Effacer les données enregistrées</string>
@@ -3706,4 +3706,5 @@
     <string name="shared_string_add_profile">Ajouter un profil</string>
     <string name="change_application_profile">Modifier le profil d\'application</string>
     <string name="index_item_world_basemap_detailed">Carte mondiale générale (plus détaillée)</string>
+    <string name="unsupported_type_error">Type non pris en charge</string>
 </resources>

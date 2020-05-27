@@ -132,7 +132,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if(ACTIVITY_TO_INSTALL == requestCode && resultCode != RESULT_OK){
+		if (ACTIVITY_TO_INSTALL == requestCode && resultCode != RESULT_OK && currentInstalledDate != null) {
 			updateInstalledApp(false, currentInstalledDate);
 		}
 	}

@@ -761,13 +761,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int itemId = item.getItemId();
-		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
-			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
-			if (itemId == contextMenuItem.getTitleId()) {
-				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false, null);
-				return true;
+	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+		if (optionsMenuAdapter != null) {
+			int itemId = item.getItemId();
+			for (int i = 0; i < optionsMenuAdapter.length(); i++) {
+				ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
+				if (itemId == contextMenuItem.getTitleId()) {
+					contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false, null);
+					return true;
+				}
 			}
 		}
 		return super.onOptionsItemSelected(item);

@@ -128,6 +128,8 @@
 	<color name="map_widget_light_pressed">#e5e5e5</color>
 	<color name="map_widget_blue">#536dfe</color>
 	<color name="map_widget_blue_pressed">#485dd9</color>
+	<color name="map_button_icon_color_light">#727272</color>
+	<color name="map_button_icon_color_dark">#cccccc</color>
 
 	<color name="map_progress_bar_bg_light">#f0f0f0</color>
 	<color name="map_progress_bar_bg_dark">#1b1d1f</color>

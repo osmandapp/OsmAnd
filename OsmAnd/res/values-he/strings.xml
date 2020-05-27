@@ -1119,7 +1119,7 @@
     <string name="open_mapillary">פתיחת Mapillary</string>
     <string name="shared_string_install">התקנה</string>
     <string name="improve_coverage_mapillary">שיפור כיסוי התמונות עם Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">ניתן להתקין את Mapillary כדי להוסיף תמונה אחת או יותר למיקום הזה במפה.</string>
+    <string name="improve_coverage_install_mapillary_desc">ניתן להתקין את Mapillary כדי להוסיף תמונות למיקום הזה במפה.</string>
     <string name="online_photos">תמונות מקוונות</string>
     <string name="shared_string_add_photos">הוספת תמונות</string>
     <string name="no_photos_descr">אין כאן תמונות.</string>
@@ -1327,7 +1327,7 @@
     <string name="show_guide_line_descr">הצגת קווי כיוון מהמיקום שלך למיקומי הסמנים הפעילים.</string>
     <string name="show_arrows_descr">הצגת חץ או שניים המציינים את כיוון הסמנים הפעילים.</string>
     <string name="distance_indication_descr">ניתן לבחור כיצד להציג את המרחק עד לסמנים הפעילים.</string>
-    <string name="active_markers_descr">ציון כמות מחווני כיוון:</string>
+    <string name="active_markers_descr">ציון כמות מחווני כיוון.</string>
     <string name="digits_quantity">כמות הספרות העשרוניות</string>
     <string name="shared_string_right">ימין</string>
     <string name="shared_string_left">שמאל</string>
@@ -1712,7 +1712,7 @@
     <string name="empty_state_my_tracks">הוספת קובצי GPX</string>
     <string name="empty_state_my_tracks_desc">ייבוא קובצי GPX או הקלטת מסלולים.</string>
     <string name="empty_state_favourites">הוספת מועדפים</string>
-    <string name="empty_state_favourites_desc">ייבוא מועדפים או הוספה על ידי סימון נקודות במפה.</string>
+    <string name="empty_state_favourites_desc">ייבוא מועדפים או הוספתם על ידי סימון נקודות במפה.</string>
     <string name="import_track">ייבוא קובץ GPX</string>
     <string name="import_track_desc">הקובץ %1$s אינו מכיל נקודות דרך, לייבא אותו כמסלול?</string>
     <string name="move_point">הזזת נקודה</string>
@@ -2004,7 +2004,7 @@
     <string name="shared_string_added">נוספה</string>
     <string name="marker_activated">הסמן %s הופעל.</string>
     <string name="empty_state_av_notes">אפשר ליצור הערות!</string>
-    <string name="empty_state_av_notes_desc">ניתן להוסיף הערה מסוג שמע, וידאו או תמונה לכל נקודה במפה באמצעות וידג׳ט או תפריט הקשר.</string>
+    <string name="empty_state_av_notes_desc">ניתן להוסיף הערה מסוג שמע, וידאו או תמונה לכל נקודה במפה באמצעות הווידג׳טים או תפריטי ההקשר.</string>
     <string name="notes_by_date">הערות שמע/וידאו לפי תאריך</string>
     <string name="by_date">לפי תאריך</string>
     <string name="by_type">לפי סוג</string>
@@ -3451,18 +3451,18 @@
     <string name="logcat_buffer_descr">לבדוק ולשתף תיעוד מפורט של יומני היישומון</string>
     <string name="permission_is_required">נדרשת הרשאה כדי להשתמש באפשרות הזו.</string>
     <string name="rearrange_categories">סידור הקטגוריות מחדש</string>
-    <string name="create_custom_categories_list_promo">ניתן להחליף את סדר הרשימה ולהסתיר קטגוריות בלתי נחוצות. כמו כן, אפשר לייבא או לייצא את כל השינויים עם פרופילים.</string>
-    <string name="add_new_custom_category_button_promo">ניתן להוסיף קטגוריה חדשה מותאמת אישית על ידי בחירה בקטגוריה נחוצה אחת או יותר.</string>
-    <string name="reset_to_default_category_button_promo">איפוס לבררת מחדל יחזיר את הסדר למצב בררת המחדל כמו לאחר ההתקנה.</string>
+    <string name="create_custom_categories_list_promo">ניתן להחליף את סדר הרשימה ולהסתיר קטגוריות בלתי נחוצות. אפשר לייבא או לייצא את כל השינויים עם פרופילים.</string>
+    <string name="add_new_custom_category_button_promo">ניתן להוסיף קטגוריה חדשה מותאמת אישית על ידי בחירה בקטגוריה אחת או יותר.</string>
+    <string name="reset_to_default_category_button_promo">‚איפוס לבררת מחדל’ יחזיר את הסדר למצב בררת המחדל כמו בהתקנה.</string>
     <string name="shared_string_available">זמין</string>
     <string name="add_custom_category">הוספת קטגוריה מותאמת אישית</string>
     <string name="rendering_attr_streetLightingNight_name">הצגה רק בלילה</string>
-    <string name="plugin_prefs_reset_successful">כל הגדרות התוסף שוחזרו למצב בררת המחדל.</string>
-    <string name="profile_prefs_reset_successful">כל הגדרות הפרופיל אופסו למצב בררת המחדל.</string>
+    <string name="plugin_prefs_reset_successful">כל הגדרות התוסף שוחזרו לבררת המחדל.</string>
+    <string name="profile_prefs_reset_successful">כל הגדרות הפרופיל אופסו לבררת המחדל.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">שקיעה ב־%1$s</string>
     <string name="sunrise_at">זריחה ב־%1$s</string>
-    <string name="accessibility_mode_disabled">מצב הנגישות כבוי ב־Android שלך.</string>
+    <string name="accessibility_mode_disabled">מצב הנגישות כבוי במערכת ה־Android שלך.</string>
     <string name="please_provide_profile_name_message">נא לבחור שם לפרופיל</string>
     <string name="open_settings">פתיחת ההגדרות</string>
     <string name="plugin_disabled">התוסף כבוי</string>
@@ -3485,8 +3485,8 @@
     <string name="recalc_angle_dialog_title">הזווית המזערית בין המיקום שלי והמסלול</string>
     <string name="monitoring_min_accuracy_descr_recommendation">המלצה: קשה לחזות מה יוקלט ומה לא, יכול להיות שעדיף לכבות את המסנן הזה.</string>
     <string name="use_system_screen_timeout">להשתמש בתפוגת שומר המסך של המערכת</string>
-    <string name="use_system_screen_timeout_promo">מושבת כבררת מחדל, אם OsmAnd מופעל בחזית, המסך לא נכבה.
-\n
+    <string name="use_system_screen_timeout_promo">מושבת כבררת מחדל: בזמן ש־OsmAnd מופעל בחזית, המסך לא יכבה. 
+\n 
 \nאם פעיל, OsmAnd ישתמש בהגדרות כיבוי המסך של המערכת.</string>
     <string name="release_3_6">• פרופילים: מעתה ניתן לשנות סדר, להגדיר סמל למפה, לשנות את כל ההגדרות לפרופיל הבסיסי ולשחזר אותן לבררות המחדל
 \n
@@ -3730,4 +3730,5 @@
     <string name="change_application_profile">החלפת פרופיל יישומון</string>
     <string name="profiles_for_action_not_found">לא ניתן למצוא פרופילים שכאלו.</string>
     <string name="index_item_world_basemap_detailed">מפת סקירת העולם (מפורטת)</string>
+    <string name="unsupported_type_error">סוג לא נתמך</string>
 </resources>

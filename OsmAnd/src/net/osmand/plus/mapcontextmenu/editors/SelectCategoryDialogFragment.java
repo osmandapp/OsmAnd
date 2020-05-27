@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -99,7 +98,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		}
 		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_category_dialog_item, null);
 		Button button = (Button)itemView.findViewById(R.id.button);
-		button.setCompoundDrawablesWithIntrinsicBounds(getIcon(activity, R.drawable.map_zoom_in), null, null, null);
+		button.setCompoundDrawablesWithIntrinsicBounds(getIcon(activity, R.drawable.ic_zoom_in), null, null, null);
 		button.setCompoundDrawablePadding(AndroidUtils.dpToPx(activity,15f));
 		button.setText(activity.getResources().getText(R.string.favorite_category_add_new));
 		button.setOnClickListener(new View.OnClickListener() {

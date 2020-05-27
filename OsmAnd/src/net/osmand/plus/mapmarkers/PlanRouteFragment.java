@@ -525,7 +525,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 								if (loc != null) {
 									end = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
 											new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
-													getString(R.string.shared_string_my_location)));
+													mapActivity.getString(R.string.shared_string_my_location)));
 								}
 							}
 							if (end != null) {

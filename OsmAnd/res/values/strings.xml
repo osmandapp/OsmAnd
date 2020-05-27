@@ -28,6 +28,7 @@
     <string name="sqlite_db_file">SQLiteDB file</string>
     <string name="one_image_per_tile">One image file per tile</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercator projection</string>
+    <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact support team to investigate further</string>
     <string name="unsupported_type_error">Unsupported type</string>
     <string name="index_item_world_basemap_detailed">World overview map (detailed)</string>
     <string name="profiles_for_action_not_found">Could not find any such profiles.</string>
@@ -40,7 +41,7 @@
     <string name="parking_positions">Parking positions</string>
     <string name="create_edit_poi">Create / Edit POI</string>
     <string name="quick_action_transport_descr">Button showing or hiding public transport on the map.</string>
-    <string name="quick_action_show_hide_transport">Show / hide public transport</string>
+    <string name="quick_action_show_hide_transport">Show/hide public transport</string>
     <string name="quick_action_transport_show">Show public transport</string>
     <string name="quick_action_transport_hide">Hide public transport</string>
     <string name="release_3_7">
@@ -217,18 +218,18 @@
     • Added Antarctica map\n\n
     </string>
     <string name="copy_coordinates">Copy coordinates</string>
-    <string name="reset_to_default_category_button_promo">Reset to default will reset sort order to the default state after installation.</string>
-    <string name="use_system_screen_timeout">Use system screen timeout</string>
-    <string name="use_system_screen_timeout_promo">Disabled by default, if OsmAnd running on foreground, the screen doesn’t time out.\n\nIf enabled OsmAnd will use system timeout settings.</string>
-    <string name="accessibility_mode_disabled">Accessibility mode turned off in your Android.</string>
+    <string name="reset_to_default_category_button_promo">\'Reset to default\' will reinstate the sort order to the installation default.</string>
+    <string name="use_system_screen_timeout">Use the system screen timeout</string>
+    <string name="use_system_screen_timeout_promo">Disabled by default: While OsmAnd is running in the foreground, the screen will not time out.\n\nIf enabled, OsmAnd will use the system timeout setting.</string>
+    <string name="accessibility_mode_disabled">Accessibility mode is turned off in your Android system.</string>
     <string name="rearrange_categories">Rearrange categories</string>
-    <string name="create_custom_categories_list_promo">Change the sort order of the list, hide unnecessary categories. You can import or export all changes with profiles.</string>
-    <string name="add_new_custom_category_button_promo">You can add a new custom category by selecting one or a few needed categories.</string>
+    <string name="create_custom_categories_list_promo">Change the list sort order, hide categories. You can import or export all changes with profiles.</string>
+    <string name="add_new_custom_category_button_promo">You can add a new custom category by selecting one or more categories.</string>
     <string name="shared_string_available">Available</string>
     <string name="add_custom_category">Add custom category</string>
     <string name="rendering_attr_streetLightingNight_name">Show only at night</string>
-    <string name="plugin_prefs_reset_successful">All plugin settings restored to default state.</string>
-    <string name="profile_prefs_reset_successful">All profile settings restored to default state.</string>
+    <string name="plugin_prefs_reset_successful">All plugin settings restored to default.</string>
+    <string name="profile_prefs_reset_successful">All profile settings restored to default.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Sunset at %1$s</string>
     <string name="sunrise_at">Sunrise at %1$s</string>
@@ -976,7 +977,7 @@
     <string name="shared_string_actions">Actions</string>
     <string name="shared_string_marker">Marker</string>
     <string name="empty_state_osm_edits">Create or modify OSM objects</string>
-    <string name="empty_state_osm_edits_descr">Create or modify OSM POIs, open or comment OSM notes, and contribute recorded GPX files.</string>
+    <string name="empty_state_osm_edits_descr">Create or modify OSM POIs, open or comment on OSM notes, and contribute recorded GPX files.</string>
     <string name="shared_string_deleted">Deleted</string>
     <string name="shared_string_edited">Edited</string>
     <string name="shared_string_added">Added</string>
@@ -984,7 +985,7 @@
     <string name="one_tap_active_descr">Tap a marker on the map to move it to the top of the active markers without opening the context menu.</string>
     <string name="one_tap_active">\'One tap\' active</string>
     <string name="empty_state_av_notes">Make notes!</string>
-    <string name="empty_state_av_notes_desc">Add audio, video or photo note to every point on the map, using widget or context menu.</string>
+    <string name="empty_state_av_notes_desc">Add audio, video, or photo notes to any point on the map by using the widgets or context menus.</string>
     <string name="notes_by_date">A/V notes by date</string>
     <string name="by_date">By date</string>
     <string name="by_type">By type</string>
@@ -1007,7 +1008,7 @@
     <string name="show_guide_line_descr">Show directional line from your position to the active marker locations.</string>
     <string name="show_arrows_descr">Show one or two arrows indicating the direction to the active markers.</string>
     <string name="distance_indication_descr">Choose how to display the distance to active markers.</string>
-    <string name="active_markers_descr">Specify number of direction indicators:</string>
+    <string name="active_markers_descr">Specify number of direction indicators.</string>
     <string name="digits_quantity">Number of decimal digits</string>
     <string name="shared_string_right">Right</string>
     <string name="shared_string_left">Left</string>
@@ -1134,7 +1135,7 @@
     <string name="open_mapillary">Open Mapillary</string>
     <string name="shared_string_install">Install</string>
     <string name="improve_coverage_mapillary">Improve photo coverage with Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Install Mapillary to add one or more photos to this map location.</string>
+    <string name="improve_coverage_install_mapillary_desc">Install Mapillary to add photos to this map location.</string>
     <string name="online_photos">Online photos</string>
     <string name="shared_string_add_photos">Add photos</string>
     <string name="no_photos_descr">No photos here.</string>
@@ -3698,9 +3699,9 @@
     <string name="waypoint_one">Waypoint 1</string>
     <string name="route_point_one">Route Point 1</string>
     <string name="empty_state_my_tracks">Add GPX files</string>
-    <string name="empty_state_my_tracks_desc">Import GPX files, or record tracks.</string>
+    <string name="empty_state_my_tracks_desc">Import GPX files or record tracks.</string>
     <string name="empty_state_favourites">Add Favorites</string>
-    <string name="empty_state_favourites_desc">Import Favorites, or add by marking points on the map.</string>
+    <string name="empty_state_favourites_desc">Import Favorites or add them by marking points on the map.</string>
     <string name="import_track">Import GPX file</string>
     <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
     <string name="move_point">Move Point</string>

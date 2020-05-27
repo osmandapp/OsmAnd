@@ -154,7 +154,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
                         android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-                        tools:src="@drawable/map_directions"/>
+                        tools:src="@drawable/ic_action_gdirections_dark"/>
 
                     <TextView
                         android:layout_width="wrap_content"

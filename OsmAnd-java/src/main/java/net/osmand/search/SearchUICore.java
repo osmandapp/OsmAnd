@@ -651,6 +651,10 @@ public class SearchUICore {
 			this.parentSearchResult = parentSearchResult;
 			return prev;
 		}
+		
+		public SearchResult getParentSearchResult() {
+			return parentSearchResult;
+		}
 
 		public List<SearchResult> getRequestResults() {
 			return requestResults;
@@ -730,9 +734,9 @@ public class SearchUICore {
 				object.localeName = object.alternateName;
 				object.alternateName = null;
 			}
+			object.parentSearchResult = parentSearchResult;
 			if (matcher == null || matcher.publish(object)) {
 				count++;
-				object.parentSearchResult = parentSearchResult;
 				if (totalLimit == -1 || count < totalLimit) {
 					requestResults.add(object);
 				}
@@ -740,6 +744,7 @@ public class SearchUICore {
 			}
 			return false;
 		}
+		
 		@Override
 		public boolean isCancelled() {
 			boolean cancelled = request != requestNumber.get();
@@ -848,12 +853,121 @@ public class SearchUICore {
 			return json;
 		}
 	}
+	
+	private enum ResultCompareStep {
+		TOP_VISIBLE,
+		FOUND_WORD_COUNT,
+		UNKNOWN_PHRASE_MATCH_WEIGHT,
+		SEARCH_DISTANCE_IF_NOT_BY_NAME,
+		COMPARE_FIRST_NUMBER_IN_NAME,
+		COMPARE_DISTANCE_TO_PARENT_SEARCH_RESULT, // makes sense only for inner subqueries
+		COMPARE_BY_NAME,
+		COMPARE_BY_DISTANCE,
+		AMENITY_LAST_AND_SORT_BY_SUBTYPE
+		;
+		
+		// -1 - means 1st is less (higher) than 2nd
+		public int compare(SearchResult o1, SearchResult o2, SearchResultComparator c) {
+			switch(this) {
+			case TOP_VISIBLE: 
+				boolean topVisible1 = ObjectType.isTopVisible(o1.objectType);
+				boolean topVisible2 = ObjectType.isTopVisible(o2.objectType);
+				if (topVisible1 != topVisible2) {
+					// -1 - means 1st is less than 2nd
+					return topVisible1 ? -1 : 1;
+				}
+				break;
+			case FOUND_WORD_COUNT: 
+				if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
+					return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
+				}
+				break;
+			case UNKNOWN_PHRASE_MATCH_WEIGHT:
+				// here we check how much each sub search result matches the phrase
+				// also we sort it by type house -> street/poi -> city/postcode/village/other
+				if (o1.getUnknownPhraseMatchWeight() != o2.getUnknownPhraseMatchWeight()) {
+					return -Double.compare(o1.getUnknownPhraseMatchWeight(), o2.getUnknownPhraseMatchWeight());
+				}
+				break;
+			case SEARCH_DISTANCE_IF_NOT_BY_NAME: 
+				if (!c.sortByName) {
+					double s1 = o1.getSearchDistance(c.loc);
+					double s2 = o2.getSearchDistance(c.loc);
+					if (s1 != s2) {
+						return Double.compare(s1, s2);
+					}
+				}
+				break;
+			case COMPARE_FIRST_NUMBER_IN_NAME: {
+				String localeName1 = o1.localeName == null ? "" : o1.localeName;
+				String localeName2 = o2.localeName == null ? "" : o2.localeName;
+				int st1 = Algorithms.extractFirstIntegerNumber(localeName1);
+				int st2 = Algorithms.extractFirstIntegerNumber(localeName2);
+				if (st1 != st2) {
+					return Algorithms.compare(st1, st2);
+				}
+				break;
+			}
+			case COMPARE_DISTANCE_TO_PARENT_SEARCH_RESULT: 
+				double ps1 = o1.parentSearchResult == null ? 0 : o1.parentSearchResult.getSearchDistance(c.loc);
+				double ps2 = o2.parentSearchResult == null ? 0 : o2.parentSearchResult.getSearchDistance(c.loc);
+				if (ps1 != ps2) {
+					return Double.compare(ps1, ps2);
+				}
+				break;
+			case COMPARE_BY_NAME: {
+				String localeName1 = o1.localeName == null ? "" : o1.localeName;
+				String localeName2 = o2.localeName == null ? "" : o2.localeName;
+				int cmp = c.collator.compare(localeName1, localeName2);
+				if (cmp != 0) {
+					return cmp;
+				}
+				break;
+			}
+			case COMPARE_BY_DISTANCE:
+				double s1 = o1.getSearchDistance(c.loc, 1);
+				double s2 = o2.getSearchDistance(c.loc, 1);
+				if (s1 != s2) {
+					return Double.compare(s1, s2);
+				}
+				break;
+			case AMENITY_LAST_AND_SORT_BY_SUBTYPE: {
+				boolean am1 = o1.object instanceof Amenity;
+				boolean am2 = o2.object instanceof Amenity;
+				if (am1 != am2) {
+					// amenity second
+					return am1 ? 1 : -1;
+				} else if (am1 && am2) {
+					// here 2 points are amenity
+					Amenity a1 = (Amenity) o1.object;
+					Amenity a2 = (Amenity) o2.object;
+					String type1 = a1.getType().getKeyName();
+					String type2 = a2.getType().getKeyName();
+					int cmp = c.collator.compare(type1, type2);
+					if (cmp != 0) {
+						return cmp;
+					}
+
+					String subType1 = a1.getSubType() == null ? "" : a1.getSubType();
+					String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
+					cmp = c.collator.compare(subType1, subType2);
+					if (cmp != 0) {
+						return cmp;
+					}
+				}
+				break;
+			}
+			}
+			return 0;
+		}
+	}
 
 	public static class SearchResultComparator implements Comparator<SearchResult> {
 		private SearchPhrase sp;
 		private Collator collator;
 		private LatLon loc;
 		private boolean sortByName;
+		
 
 		public SearchResultComparator(SearchPhrase sp) {
 			this.sp = sp;
@@ -865,66 +979,10 @@ public class SearchUICore {
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
-			boolean topVisible1 = ObjectType.isTopVisible(o1.objectType);
-			boolean topVisible2 = ObjectType.isTopVisible(o2.objectType);
-			if (topVisible1 != topVisible2) {
-				// -1 - means 1st is less than 2nd
-				return topVisible1 ? -1 : 1;
-			}
-			if (o1.getUnknownPhraseMatchWeight() != o2.getUnknownPhraseMatchWeight()) {
-				return -Double.compare(o1.getUnknownPhraseMatchWeight(), o2.getUnknownPhraseMatchWeight());
-			}
-			if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
-				return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
-			}
-			if (!sortByName) {
-				double s1 = o1.getSearchDistance(loc);
-				double s2 = o2.getSearchDistance(loc);
-				if (s1 != s2) {
-					return Double.compare(s1, s2);
-				}
-			}
-			String localeName1 = o1.localeName == null ? "" : o1.localeName;
-			String localeName2 = o2.localeName == null ? "" : o2.localeName;
-			int st1 = Algorithms.extractFirstIntegerNumber(localeName1);
-			int st2 = Algorithms.extractFirstIntegerNumber(localeName2);
-			if (st1 != st2) {
-				return Algorithms.compare(st1, st2);
-			}
-			double s1 = o1.getSearchDistance(loc, 1);
-			double s2 = o2.getSearchDistance(loc, 1);
-			double ps1 = o1.parentSearchResult == null ? 0 : o1.parentSearchResult.getSearchDistance(loc);
-			double ps2 = o2.parentSearchResult == null ? 0 : o2.parentSearchResult.getSearchDistance(loc);
-			if (ps1 != ps2) {
-				return Double.compare(ps1, ps2);
-			}
-			int cmp = collator.compare(localeName1, localeName2);
-			if (cmp != 0) {
-				return cmp;
-			}
-			if (s1 != s2) {
-				return Double.compare(s1, s2);
-			}
-			boolean am1 = o1.object instanceof Amenity;
-			boolean am2 = o2.object instanceof Amenity;
-			if (am1 != am2) {
-				return Boolean.compare(am1, am2);
-			} else if (am1 && am2) {
-				// here 2 points are amenity
-				Amenity a1 = (Amenity) o1.object;
-				Amenity a2 = (Amenity) o2.object;
-				String type1 = a1.getType().getKeyName();
-				String type2 = a2.getType().getKeyName();
-				cmp = collator.compare(type1, type2);
-				if (cmp != 0) {
-					return cmp;
-				}
-
-				String subType1 = a1.getSubType() == null ? "" : a1.getSubType();
-				String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
-				cmp = collator.compare(subType1, subType2);
-				if (cmp != 0) {
-					return cmp;
+			for(ResultCompareStep step : ResultCompareStep.values()) {
+				int r = step.compare(o1, o2, this);
+				if(r != 0) {
+					return r;
 				}
 			}
 			return 0;

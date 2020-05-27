@@ -340,11 +340,7 @@ public class PoiFiltersHelper {
 	public List<PoiUIFilter> getSortedPoiFilters(@NonNull ApplicationMode appMode, boolean onlyActive) {
 		initPoiUIFiltersState(appMode);
 		List<PoiUIFilter> allFilters = new ArrayList<>();
-		for (PoiUIFilter filter : getTopDefinedPoiFilters()) {
-			if (!filter.isWikiFilter()) {
-				allFilters.add(filter);
-			}
-		}
+		allFilters.addAll(getTopDefinedPoiFilters());
 		allFilters.addAll(getSearchPoiFilters());
 		Collections.sort(allFilters);
 		if (onlyActive) {
@@ -617,6 +613,10 @@ public class PoiFiltersHelper {
 	}
 
 	public void loadSelectedPoiFilters() {
+		// don't deal with not loaded poi types
+		if(!application.getPoiTypes().isInit()) {
+			return;
+		}
 		selectedPoiFilters.clear();
 		OsmandSettings settings = application.getSettings();
 		Set<String> filters = settings.getSelectedPoiFilters();

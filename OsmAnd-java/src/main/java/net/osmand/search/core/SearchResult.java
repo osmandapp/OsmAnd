@@ -34,17 +34,15 @@ public class SearchResult {
 	}
 
 	public double getUnknownPhraseMatchWeight() {
-		return getUnknownPhraseMatchWeight(false);
-	}
-
-	private double getUnknownPhraseMatchWeight(boolean isHouse) {
-		double res = 0;
-		isHouse = isHouse || objectType == ObjectType.HOUSE;
+		// if result is a complete match in the search we prioritize it highers
+		double res  = 0;
 		if (unknownPhraseMatches) {
-			res = isHouse ? ObjectType.getTypeWeight(ObjectType.HOUSE) : ObjectType.getTypeWeight(objectType);
+			res = ObjectType.getTypeWeight(objectType);
 		}
-		if (res == 0 && parentSearchResult != null) {
-			return parentSearchResult.getUnknownPhraseMatchWeight(isHouse);
+		if (parentSearchResult != null) {
+			// 10 > maximum type
+			// res = Math.max(res,parentSearchResult.getUnknownPhraseMatchWeight()) ;
+			res += parentSearchResult.getUnknownPhraseMatchWeight() / 10;
 		}
 		return res;
 	}

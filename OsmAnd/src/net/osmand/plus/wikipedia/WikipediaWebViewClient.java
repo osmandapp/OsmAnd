@@ -8,6 +8,7 @@ import android.webkit.WebViewClient;
 
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.Amenity;
 
 import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
@@ -41,7 +42,9 @@ public class WikipediaWebViewClient extends WebViewClient {
 			WikiArticleHelper.warnAboutExternalLoad(url, context, nightMode);
 		} else {
 			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-			context.startActivity(i);
+			if (AndroidUtils.isIntentSafe(context, i)) {
+				context.startActivity(i);
+			}
 		}
 		return true;
 	}
