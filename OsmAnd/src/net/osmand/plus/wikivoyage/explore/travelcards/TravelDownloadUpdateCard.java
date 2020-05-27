@@ -68,7 +68,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 			DownloadUpdateVH holder = (DownloadUpdateVH) viewHolder;
 			this.ref = new WeakReference<TravelDownloadUpdateCard.DownloadUpdateVH>(holder);
 			holder.title.setText(getTitle(loading));
-			holder.icon.setImageDrawable(getIcon());
+			holder.icon.setImageResource(getIcon());
 			holder.description.setText(getDescription());
 			if (indexItem == null) {
 				holder.fileDataContainer.setVisibility(View.GONE);
@@ -117,9 +117,8 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 		return app.getString(download ? R.string.download_file : R.string.update_is_available);
 	}
 
-	private Drawable getIcon() {
-		int id = download ? R.drawable.travel_card_download_icon : R.drawable.travel_card_update_icon;
-		return AppCompatResources.getDrawable(app, id);
+	private int getIcon() {
+		return download ? R.drawable.travel_card_download_icon : R.drawable.travel_card_update_icon;
 	}
 
 	@NonNull
