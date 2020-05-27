@@ -196,7 +196,7 @@
     <string name="edit_filter_save_as_menu_item">ذخیره با نام</string>
     <string name="edit_filter_delete_dialog_title">این پالایه حذف شود؟</string>
     <string name="edit_filter_delete_message">پالایهٔ «%1$s» حذف شد</string>
-    <string name="edit_filter_create_message">پالایهٔ «%1$s» ایجاد شد</string>
+    <string name="edit_filter_create_message">پالایهٔ «%1$s» ساخته شد</string>
     <string name="shared_string_clear">پاک‌کردن</string>
     <string name="filter_current_poiButton">پالایش</string>
     <string name="poi_dialog_other_tags_message">همهٔ برچسب‌های دیگر حفظ شد</string>
@@ -480,7 +480,7 @@
     <string name="amenity_type_tourism">گردشگری</string>
     <string name="amenity_type_transportation">حمل‌ونقل</string>
     <string name="poi_filter_closest_poi">نزدیک‌ترین مکان‌ها</string>
-    <string name="poi_filter_custom_filter">فیلتر سفارشی</string>
+    <string name="poi_filter_custom_filter">پالایهٔ سفارشی</string>
     <string name="poi_filter_namefinder">نام‌یاب آنلاین</string>
     <string name="poi_search_desc">جست‌وجوی POIها (نقاط توجه)</string>
     <string name="poi_dialog_comment_default">تغییر POI</string>
@@ -512,7 +512,7 @@
     <string name="osmand_short_description_80_chars">برنامهٔ همراه برای مشاهدهٔ نقشه جهانی و ناوبری با نقشه‌های آفلاین و آنلاین OSM</string>
     <string name="osmand_plus_play_title_30_chars">نقشه و ناوبری با OsmAnd+‎</string>
     <string name="osmand_plus_short_description_80_chars">برنامهٔ همراه برای مشاهدهٔ نقشهٔ جهانی و ناوبری با نقشه‌های آفلاین و آنلاین OSM</string>
-    <string name="filterpoi_activity">ایجاد فیلتر POI</string>
+    <string name="filterpoi_activity">ساخت پالایهٔ POI</string>
     <string name="osmand_distance_planning_plugin_name">مسافت‌سنج و ابزار طرح‌ریزی سفر</string>
     <string name="distance_measurement_finish_subtrack">شروع یک زیررَد جدید</string>
     <string name="use_kalman_filter_compass_descr">اغتشاشات قطب‌نما را کاهش می‌دهد اما اینرسی را بیشتر می‌کند.</string>
@@ -1867,7 +1867,7 @@
     <string name="edit_filter">ویرایش دسته‌ها</string>
     <string name="subcategories">زیردسته‌ها</string>
     <string name="selected_categories">دسته‌های انتخاب‌شده</string>
-    <string name="create_custom_poi">ایجاد پالایهٔ سفارشی</string>
+    <string name="create_custom_poi">ساخت پالایهٔ سفارشی</string>
     <string name="custom_search">جست‌وجوی سفارشی</string>
     <string name="shared_string_filters">پالایه‌ها</string>
     <string name="apply_filters">به‌کارگیری پالایه‌ها</string>
@@ -3465,7 +3465,7 @@
     <string name="monitoring_min_speed_descr_side_effect">اثر جانبی: همهٔ قطعه‌هایی که در آن‌ها به حداقل سرعت معیار نرسید از رد حذف خواهد شد (مثلاً هنگامی که دوچرخه‌تان را بالای یک تپه با شیب تند می‌برید). همچنین هیچ اطلاعاتی دربارهٔ بازه‌های توقف، مانند استراحت‌ها، ضبط نمی‌شود. این مسئله بر همهٔ تحلیل‌ها یا پس‌پردازش‌ها تأثیر می‌گذارد، مانند زمانی که بخواهید مسافت کلی سفر، مدت حرکت یا سرعت متوسط خود را بدانید.</string>
     <string name="monitoring_min_speed_descr_recommendation">توصیه: ابتدا از پالایهٔ «کمترین جابه‌جایی» به‌منظور تشخیص حرکت استفاده کنید (B). این‌گونه شاید نتایج بهتری بگیرید و همچنین دادهٔ کمتری از دست می‌دهید. اگر ردها در سرعت‌های پایین نویز دارد، برای اینجا از مقدارهای غیرصفر استفاده کنید. لطفاً توجه نمایید که برخی اندازه‌گیری‌ها ممکن است اصلاً هیچ سرعتی را گزارش نکنند (برخی روش‌های مبتنی بر شبکه)، که در این صورت هیچ چیزی ضبط نخواهد شد.</string>
     <string name="monitoring_min_speed_descr_remark">توجه: بیشتر چیپست‌های GPS فقط در صورتی مقدار سرعت را گزارش می‌کنند که الگوریتم، شما را در حال حرکت تشخیص دهد و اگر در حال حرکت نباشید چیزی گزارش نمی‌کنند. بنابراین استفاده از گزینهٔ «&gt;۰» در این پالایه، به تشخیص حرکت توسط چیپست GPS وابسته است. البته حتی اگر این پالایش در زمان ضبط انجام نشود، ما از این ویژگی در تحلیل‌های GPX خود استفاده می‌کنیم تا مسافت اصلاح‌شده را محاسبه کنیم؛ یعنی مقداری که برای «مسافت اصلاح‌شده» گزارش می‌کنیم میزان مسافتی است که در هنگام حرکت ضبط شده.</string>
-    <string name="monitoring_min_accuracy_descr">این مورد فقط نقاطی را ضبط می‌کند که با شاخص کمترین صحت (به متر/فوت، مطابق گزارش اندروید از چیپست) اندازه‌گیری شده‌اند. منظور از صحت، پراکندگی اندازه‌گیری‌های تکراری است و مستقیماً مربوط به دقت نمی‌شود (دقت: میزان نزدیکی اندازه‌گیری‌ها به موقعیت واقعی).</string>
+    <string name="monitoring_min_accuracy_descr">این مورد فقط نقاطی را ضبط می‌کند که با شاخص کمترین صحت (به متر/فوت، مطابق گزارش اندروید از چیپست) اندازه‌گیری شده‌اند. منظور از صحت، میزان نزدیکی اندازه‌گیری‌ها به موقعیت واقعی شماست و مستقیماً مربوط به دقت نمی‌شود (دقت: میزان پراکندگی اندازه‌گیری‌های تکراری).</string>
     <string name="monitoring_min_accuracy_descr_side_effect">اثر جانبی: درنتیجهٔ پالایش بر اساس صحت، ممکن است مثلاً زیر پل‌ها، زیر درختان، میان ساختمان‌های بلند یا در شرایط جوّی بخصوص، نقاط تماماً از دست بروند.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">توصیه: سخت است آنچه ثبت می‌شود یا آنچه ثبت نمی‌شود را پیشبینی کنیم. شاید بهتر باشد این پالایه را خاموش کنید.</string>
     <string name="monitoring_min_accuracy_descr_remark">توجه: اگر بلافاصله پیش از ضبط، GPS خاموش بوده، ممکن است نخستین نقطه صحت کمتری داشته باشد؛ بنابراین ممکن است بخواهیم طوری کدنویسی کنیم که یک نقطه با یک یا چند ثانیه تأخیر ضبط شود یا از سه نقطهٔ پی‌درپی بهترینشان را ضبط کنیم و... . البته این هنوز پیاده‌سازی نشده است.</string>
@@ -3752,4 +3752,9 @@
     <string name="index_item_world_basemap_detailed">نقشهٔ نمای کلی جهان ( با جزئیات)</string>
     <string name="shared_string_resume">ازسرگیری</string>
     <string name="unsupported_type_error">نوع پشتیبانی‌نشده</string>
+    <string name="search_poi_types_descr">گونه‌های POI را از دسته‌های مختلف با هم ترکیب کنید. کلید را روشن کنید تا همهٔ گونه‌ها انتخاب شود. فضای سمت راست را لمس کنید تا گونه‌های دلخواه را برگزینید.</string>
+    <string name="search_poi_types">جست‌وجوی گونه‌های POI</string>
+    <string name="parking_positions">جاهای پارک</string>
+    <string name="reset_deafult_order">بازنشانی ترتیب پیشفرض اقلام</string>
+    <string name="gpx_parse_error">‏OsmAnd GPX قالب درستی ندارد. لطفاً برای بررسی بیشتر با گروه پشتیبانی تماس بگیرید</string>
 </resources>
