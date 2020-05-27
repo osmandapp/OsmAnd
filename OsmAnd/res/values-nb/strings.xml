@@ -3497,9 +3497,9 @@
     <string name="shared_string_circle">Sirkel</string>
     <string name="shared_string_octagon">Oktogon</string>
     <string name="shared_string_square">Kvadrat</string>
-    <string name="settings_item_read_error">Kunne ikke lese %1$s.</string>
+    <string name="settings_item_read_error">Kunne ikke lese fra \"%1$s\".</string>
     <string name="settings_item_import_error">Kunne ikke importere %1$s.</string>
-    <string name="settings_item_write_error">Kunne ikke skrive %1$s.</string>
+    <string name="settings_item_write_error">Kunne ikke skrive til \"%1$s\".</string>
     <string name="shared_string_languages">Språk</string>
     <string name="shared_string_language">Språk</string>
     <string name="shared_string_all_languages">Alle språk</string>

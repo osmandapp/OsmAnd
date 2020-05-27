@@ -3715,7 +3715,7 @@
     <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche \"%1$s\" tippen.</string>
     <string name="quick_action_transport_hide">Öffentliche Verkehrsmittel ausblenden</string>
     <string name="quick_action_transport_show">Öffentliche Verkehrsmittel anzeigen</string>
-    <string name="quick_action_show_hide_transport">Öffentliche Verkehrsmittel anzeigen / ausblenden</string>
+    <string name="quick_action_show_hide_transport">Öffentliche Verkehrsmittel anzeigen/ausblenden</string>
     <string name="quick_action_transport_descr">Schaltfläche zum Ein- oder Ausblenden der öffentlichen Verkehrsmittel auf der Karte.</string>
     <string name="create_edit_poi">POI erstellen / bearbeiten</string>
     <string name="parking_positions">Parkpositionen</string>

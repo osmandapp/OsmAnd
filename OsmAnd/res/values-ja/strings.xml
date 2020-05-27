@@ -705,7 +705,7 @@ POIの更新は利用できません</string>
     <string name="day_night_info">昼/夜判別情報</string>
     <string name="map_widget_vector_attributes">描画方法の属性</string>
     <string name="map_widget_renderer">マップスタイル</string>
-    <string name="layer_map_appearance">UI設定</string>
+    <string name="layer_map_appearance">画面構成</string>
     <string name="show_lanes">車線</string>
     <string name="avoid_unpaved">未舗装の道路を避ける</string>
     <string name="avoid_ferries">フェリーを使わない</string>
@@ -719,7 +719,7 @@ POIの更新は利用できません</string>
     <string name="int_continuosly">可能な限り継続</string>
     <string name="screen_is_locked">ロックアイコンのタップでロックが解除されます</string>
     <string name="map_widget_top_text">道路名称(国道、高速道路等)</string>
-    <string name="map_widget_config">UI設定</string>
+    <string name="map_widget_config">画面構成</string>
     <string name="map_widget_back_to_loc">現在地点を表示</string>
     <string name="map_widget_lock_screen">ロック</string>
     <string name="map_widget_compass">コンパス</string>
@@ -2823,7 +2823,7 @@ POIの更新は利用できません</string>
     <string name="waypoint_one">経由地点 1</string>
     <string name="route_point_one">ルートポイント 1</string>
     <string name="empty_state_favourites">お気に入りの追加</string>
-    <string name="empty_state_favourites_desc">お気に入りからインポートするか、マップ上でマークした地点を追加します。</string>
+    <string name="empty_state_favourites_desc">お気に入りはインポートするか、マップ上でマークした地点を追加できます。</string>
     <string name="move_point">ポイントの移動</string>
     <string name="total_donations">寄付総額</string>
     <string name="day_off_label">OFF</string>
@@ -3040,7 +3040,7 @@ POIの更新は利用できません</string>
     <string name="edit_profile_setup_title">プロファイルの個別設定</string>
     <string name="edit_profile_setup_subtitle">設定した値は各プロファイルごとに保持されます</string>
     <string name="edit_profile_setup_map_subtitle">指定プロファイルのマップ設定</string>
-    <string name="edit_profile_screen_options_subtitle">指定プロファイルのUI(ユーザーインターフェース)設定</string>
+    <string name="edit_profile_screen_options_subtitle">指定プロファイルの画面構成</string>
     <string name="edit_profile_nav_settings_subtitle">指定プロファイルのナビゲーション設定</string>
     <string name="routing_attr_max_num_changes_description">乗り換えの上限を指定します</string>
     <string name="routing_attr_max_num_changes_name">乗り換え数</string>
@@ -3619,4 +3619,67 @@ POIの更新は利用できません</string>
     <string name="change_application_profile">アプリプロファイルの変更</string>
     <string name="index_item_world_basemap_detailed">世界地図(詳細)</string>
     <string name="profiles_for_action_not_found">それらしいプロファイルは見つかりませんでした。</string>
+    <string name="lang_pnb">パンジャーブ語</string>
+    <string name="lang_ne">ネパール語</string>
+    <string name="lang_nap">ナポリ語</string>
+    <string name="lang_my">ビルマ語</string>
+    <string name="lang_mn">モンゴル語</string>
+    <string name="lang_min">ミナンカバウ語</string>
+    <string name="lang_mg">マダガスカル語</string>
+    <string name="lang_ky">キルギス語</string>
+    <string name="lang_kk">カザフ語</string>
+    <string name="lang_jv">ジャワ語</string>
+    <string name="lang_ce">チェチェン語</string>
+    <string name="lang_bar">バイエルン語</string>
+    <string name="lang_ba">バシキール語</string>
+    <string name="lang_an">アラゴン語</string>
+    <string name="lang_lmo">ロンバルド語</string>
+    <string name="custom_color">カスタムカラー</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="osm_live_payment_subscription_management">お支払いは、購入の確認後にGoogle Playアカウントに請求されます。
+\n
+\nサブスクリプションは更新日より前にキャンセルしない限り、自動的に更新されます。アカウントの更新期間(月/ 3ヶ月/年)に準じた更新日に請求されます。
+\n
+\nサブスクリプションの管理およびキャンセルはGoogle Playの設定からおこなえます。</string>
+    <string name="search_poi_types">POIのタイプで検索</string>
+    <string name="search_poi_types_descr">異なるカテゴリのPOIタイプを組み合わせます。スイッチをタップしてすべてを選択し、左側をタップしてカテゴリを選択します。</string>
+    <string name="ui_customization_description">\"ドロワー\"、\"マップ設定\"、\"コンテキストメニュー\"で表示される項目の数をカスタマイズします。
+\n
+\n未使用プラグインをオフにし、必要のない項目を非表示にできます。%1$s.</string>
+    <string name="ui_customization_short_descr">コンテキストメニューの表示項目</string>
+    <string name="ui_customization">ユーザーインターフェイスのカスタマイズ</string>
+    <string name="extra_maps_menu_group">追加マップ</string>
+    <string name="download_unsupported_action">%1$sのアクションはサポートされていません</string>
+    <string name="tracker_item">OsmAnd Tracker</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">クイックアクション</string>
+    <string name="radius_ruler_item">半径定規</string>
+    <string name="measure_distance_item">距離を測定</string>
+    <string name="travel_item">旅行(Wikivoyage and Wikipedia)</string>
+    <string name="map_markers_item">マップマーカー</string>
+    <string name="favorites_item">お気に入り</string>
+    <string name="subscription_osmandlive_item">OsmAnd Liveのサブスクリプション</string>
+    <string name="osmand_purchases_item">OsmAndの購入</string>
+    <string name="legend_item_description">マップ上シンボルへのガイドです。</string>
+    <string name="navigation_profiles_item">ナビゲーションプロファイル</string>
+    <string name="release_3_7">• 新しいオフライン傾斜マップ
+\n
+\n• お気に入りとGPX経由地点の色、アイコン、形状のカスタマイズを可能に
+\n
+\n• \"コンテキストメニュー\"、\"マップ設定\"、\"ドロワー\"でのメニュー項目順序などをカスタマイズを可能に
+\n
+\n• マップ設定でのウィキペディア情報を別のレイヤーとして扱う様に、また必要な言語のみを選択可能に
+\n
+\n• 完全な柔軟性を備えた独自のPOIフィルター/マップを作成可能に
+\n
+\n• カスタムプロファイルの設定を復元するオプションを追加
+\n
+\n• GPXルート利用時、車線のナビゲーションサポートとより精度の高いターン指示ができるように
+\n
+\n• タブレット向けにユーザーインターフェイスサイズを修正
+\n
+\n• RTLのバグを修正
+\n
+\n</string>
+    <string name="unsupported_type_error">サポートされていないタイプです</string>
 </resources>
