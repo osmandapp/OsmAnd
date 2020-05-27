@@ -1322,7 +1322,7 @@
     <string name="rendering_attr_showSurfaces_name">سطح راه</string>
     <string name="rendering_attr_showCycleRoutes_name">مسیرهای دوچرخه</string>
     <string name="save_global_track_interval_descr">بازهٔ زمانی برای ضبط رد را انتخاب کنید (که از طریق ابزار ضبط GPX روی نقشه فعال می‌شود).</string>
-    <string name="save_global_track_interval">بازهٔ زمانی ثبت سراسری</string>
+    <string name="save_global_track_interval">بازهٔ زمانی ثبت (سراسری)</string>
     <string name="save_track_to_gpx_globally_descr">می‌توانید با استفاده از ابزارک ضبط GPX روی نقشه، ردنگاری در فایل GPX را خاموش یا روشن کنید.</string>
     <string name="save_track_interval_globally">بازهٔ زمانی ثبت</string>
     <string name="record_plugin_description">این افزونه یک ابزارک ضبط GPX روی نقشه اضافه می‌کند و با انتخاب آن می‌توانید رد خود را ضبط و در قالب فایل GPX ذخیره کنید. همچنین این امکان را فراهم می‌کند که هنگام مسیریابی، به‌طور خودکار این کار برای شما انجام شود. 
@@ -2031,8 +2031,8 @@
     <string name="lang_new">نپال بهاسایی</string>
     <string name="lang_gl">گالیسیایی</string>
     <string name="gps_network_not_enabled">موقعیت‌یاب خاموش است. روشن شود؟</string>
-    <string name="disable_recording_once_app_killed">از ورود خوداتکای داده‌ها جلوگیری شود</string>
-    <string name="disable_recording_once_app_killed_descrp">هنگامی که برنامه را از طریق برنامه‌های اخیر ببندید ورود اطلاعات جی‌پی‌ایکس موقتاً متوقف می‌شود. (نشانگر اجرای پس‌زمینه از نوار اعلان حذف می‌شود.)</string>
+    <string name="disable_recording_once_app_killed">جلوگیری از ثبت خوداتکا</string>
+    <string name="disable_recording_once_app_killed_descrp">هنگامی که برنامه را از طریق برنامه‌های اخیر ببندید ثبت اطلاعات GPX موقتاً متوقف می‌شود. (نشانگر اجرای پس‌زمینه از نوار اعلان حذف می‌شود.)</string>
     <string name="shared_string_import2osmand">درون‌برد به OsmAnd</string>
     <string name="read_full_article">مقالهٔ کامل را بخوانید (آنلاین)</string>
     <string name="shared_string_wikipedia">ویکی‌پدیا</string>
@@ -3508,9 +3508,9 @@
     <string name="multimedia_photo_play_sound">صدای شاتر دوربین</string>
     <string name="osm_authorization_success">احراز هویت موفقیت‌آمیز بود</string>
     <string name="rearrange_categories">مرتب‌سازی دسته‌ها</string>
-    <string name="create_custom_categories_list_promo">ترتیب لیست را تغییر دهید، دسته‌های غیرلازم را مخفی کنید. می‌توانید همهٔ تغییرات را همراه پروفایل‌ها برون‌برد یا درون‌برد کنید.</string>
-    <string name="add_new_custom_category_button_promo">با انتخاب یک یا چند دستهٔ موردنیاز می‌توانید یک دستهٔ سفارشیِ تازه بیفزایید.</string>
-    <string name="reset_to_default_category_button_promo">بازنشانی به پیشفرض، ترتیب را به حالت اولیهٔ پس از نصب برمی‌گرداند.</string>
+    <string name="create_custom_categories_list_promo">ترتیب لیست را تغییر دهید و دسته‌ها را مخفی کنید. می‌توانید همهٔ تغییرات را همراه پروفایل‌ها برون‌برد یا درون‌برد کنید.</string>
+    <string name="add_new_custom_category_button_promo">با انتخاب یک یا چند دسته می‌توانید یک دستهٔ شخصیِ تازه بیفزایید.</string>
+    <string name="reset_to_default_category_button_promo">«بازنشانی به پیشفرض»، ترتیب را به حالت اولیهٔ پس از نصب برمی‌گرداند.</string>
     <string name="add_custom_category">افزودن دستهٔ سفارشی</string>
     <string name="rendering_attr_streetLightingNight_name">فقط هنگام شب نشان بده</string>
     <string name="plugin_prefs_reset_successful">همهٔ تنظیمات افزونه به حالت پیشفرض بازگشت.</string>
@@ -3520,7 +3520,7 @@
     <string name="sunrise_at">طلوع خورشید در %1$s</string>
     <string name="accessibility_mode_disabled">حالت قابلیت دسترسی در دستگاهتان خاموش شده است.</string>
     <string name="use_system_screen_timeout">استفاده از زمان خاموشی صفحهٔ دستگاه</string>
-    <string name="use_system_screen_timeout_promo">پیشفرض غیرفعال است، اگر OsmAnd در پیش‌زمینه اجرا باشد صفحه خاموش نمی‌شود. 
+    <string name="use_system_screen_timeout_promo">پیشفرض غیرفعال است: هنگامی که OsmAnd در پیش‌زمینه اجرا باشد صفحه خاموش نمی‌شود. 
 \n 
 \nاگر فعال باشد، OsmAnd از تنظیمات دستگاه برای زمان خاموشی صفحه استفاده می‌کند.</string>
     <string name="clear_recorded_data">پاک‌سازی دادهٔ ضبط‌شده</string>
