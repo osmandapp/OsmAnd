@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -38,7 +39,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final String SLIDER_DESCR_RES_KEY = "slider_descr_key";
 	private static final String DIALOG_DESCR_RES_KEY = "dialog_descr_key";
 	private static final int SLIDER_FROM = 1;
-	private static final int SLIDER_TO = 20;
+	private static final int SLIDER_TO = 22;
 	@StringRes
 	private int sliderDescrRes;
 	@StringRes
@@ -63,13 +64,14 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		OsmandApplication app = requiredMyApplication();
 		if (savedInstanceState != null) {
 			minZoom = savedInstanceState.getInt(MIN_ZOOM_KEY);
 			maxZoom = savedInstanceState.getInt(MAX_ZOOM_KEY);
 			dialogDescrRes = savedInstanceState.getInt(DIALOG_DESCR_RES_KEY);
 			sliderDescrRes = savedInstanceState.getInt(SLIDER_DESCR_RES_KEY);
 		}
-		LayoutInflater inflater = UiUtilities.getInflater(requiredMyApplication(), nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.shared_string_zoom_levels));
 		items.add(titleItem);
 		final View sliderView = inflater.inflate(R.layout.zoom_levels_with_descr, null);
@@ -88,8 +90,8 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		final TextView maxZoomValue = sliderView.findViewById(R.id.zoom_value_max);
 		maxZoomValue.setText(String.valueOf(maxZoom));
 		Slider slider = sliderView.findViewById(R.id.zoom_slider);
-		int colorProfileRes = requiredMyApplication().getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
-		int colorProfile = ContextCompat.getColor(requiredMyApplication(), colorProfileRes);
+		int colorProfileRes = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
+		int colorProfile = ContextCompat.getColor(app, colorProfileRes);
 		UiUtilities.setupSlider(slider, nightMode, colorProfile, true);
 		slider.setValueFrom(SLIDER_FROM);
 		slider.setValueTo(SLIDER_TO);
@@ -136,7 +138,6 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		super.onRightBottomButtonClick();
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnZoomSetListener) {
 			((OnZoomSetListener) fragment).onZoomSet(minZoom, maxZoom);

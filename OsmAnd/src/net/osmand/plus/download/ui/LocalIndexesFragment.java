@@ -41,7 +41,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
-import net.osmand.ResultMatcher;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ContextMenuAdapter;
@@ -63,7 +62,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
+import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
@@ -82,7 +81,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 
-public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents, EditMapSourceDialogFragment.OnMapSourceUpdateListener {
+public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents,
+		OnMapSourceUpdateListener {
 	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 

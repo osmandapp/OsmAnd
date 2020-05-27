@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -15,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -45,6 +46,7 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		OsmandApplication app = requiredMyApplication();
 		if (savedInstanceState != null) {
 			expireValue = savedInstanceState.getInt(EXPIRE_VALUE_KEY, EXPIRE_TIME_NEVER);
 		}
@@ -58,8 +60,8 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 			editText.setText(String.valueOf(expireValue));
 		}
 		int boxStrokeColor = nightMode
-				? getResources().getColor(R.color.app_bar_color_light)
-				: getResources().getColor(R.color.active_buttons_and_links_bg_pressed_dark);
+				? ContextCompat.getColor(app, R.color.app_bar_color_light)
+				: ContextCompat.getColor(app, R.color.active_buttons_and_links_bg_pressed_dark);
 		TextInputLayout textInputLayout = inputValueLayout.findViewById(R.id.value_input_layout);
 		textInputLayout.setBoxStrokeColor(boxStrokeColor);
 		final SimpleBottomSheetItem editTextItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
@@ -70,13 +72,12 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		outState.putLong(EXPIRE_VALUE_KEY, getExpireValue());
+		outState.putInt(EXPIRE_VALUE_KEY, getExpireValue());
 		super.onSaveInstanceState(outState);
 	}
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		super.onRightBottomButtonClick();
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnExpireValueSetListener) {
 			((OnExpireValueSetListener) fragment).onExpireValueSet(getExpireValue());

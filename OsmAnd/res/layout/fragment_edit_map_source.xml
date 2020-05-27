@@ -16,16 +16,18 @@
         app:title="@string/edit_online_source"
         osmand:titleTextColor="?android:textColorPrimary">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/toolbar_action"
-            android:layout_width="@dimen/standard_icon_size"
-            android:layout_height="@dimen/standard_icon_size"
+            style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+            android:layout_width="@dimen/acceptable_touch_radius"
+            android:layout_height="@dimen/acceptable_touch_radius"
             android:layout_gravity="end"
-            android:layout_marginStart="@dimen/content_padding"
-            android:layout_marginLeft="@dimen/content_padding"
-            android:layout_marginEnd="@dimen/content_padding"
-            android:layout_marginRight="@dimen/content_padding"
-            tools:src="@drawable/ic_action_help" />
+            android:layout_marginStart="@dimen/list_item_button_padding"
+            android:layout_marginLeft="@dimen/list_item_button_padding"
+            android:layout_marginEnd="@dimen/list_item_button_padding"
+            android:layout_marginRight="@dimen/list_item_button_padding"
+            android:contentDescription="@string/back_to_map"
+            app:srcCompat="@drawable/ic_action_help" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -94,7 +96,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/bg_color"
+        android:background="?attr/list_background_color"
         android:minHeight="@dimen/dialog_button_ex_height"
         android:paddingStart="@dimen/content_padding"
         android:paddingTop="@dimen/content_padding_small"

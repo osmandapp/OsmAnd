@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -52,12 +54,11 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.List;
 
-import static net.osmand.plus.download.ui.LocalIndexesFragment.ILLEGAL_FILE_NAME_CHARACTERS;
 import static net.osmand.plus.download.ui.LocalIndexesFragment.renameSQLiteFile;
 
 public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		implements OnZoomSetListener, OnExpireValueSetListener, OnMercatorSelectedListener,
-		OnTileStorageFormatSelectedListener, View.OnClickListener {
+		OnTileStorageFormatSelectedListener {
 
 	public static final String TAG = EditMapSourceDialogFragment.class.getName();
 	static final int EXPIRE_TIME_NEVER = -1;
@@ -118,10 +119,10 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			elliptic = savedInstanceState.getBoolean(ELLIPTIC_KEY);
 			sqliteDB = savedInstanceState.getBoolean(SQLITE_DB_KEY);
 		}
-		View root = UiUtilities.getMaterialInflater(getContext(), nightMode).inflate(R.layout.fragment_edit_map_source, container, false);
+		View root = UiUtilities.getMaterialInflater(app, nightMode).inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
-		ImageView iconHelp = root.findViewById(R.id.toolbar_action);
-		Drawable closeDrawable = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back,
+		ImageButton iconHelp = root.findViewById(R.id.toolbar_action);
+		Drawable closeDrawable = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
 				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
 		Drawable helpDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_help,
 				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
@@ -141,8 +142,8 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			}
 		});
 		int boxStrokeColor = nightMode
-				? getResources().getColor(R.color.app_bar_color_light)
-				: getResources().getColor(R.color.active_buttons_and_links_bg_pressed_dark);
+				? ContextCompat.getColor(app, R.color.app_bar_color_light)
+				: ContextCompat.getColor(app, R.color.active_buttons_and_links_bg_pressed_dark);
 		TextInputLayout nameInputLayout = root.findViewById(R.id.name_input_layout);
 		nameInputLayout.setBoxStrokeColor(boxStrokeColor);
 		nameEditText = root.findViewById(R.id.name_edit_text);
@@ -154,7 +155,13 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		contentContainer = root.findViewById(R.id.content_container);
 		saveBtn = root.findViewById(R.id.save_button);
 		saveBtnTitle = root.findViewById(R.id.save_button_title);
-		saveBtn.setOnClickListener(this);
+		saveBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				saveTemplate();
+				dismiss();
+			}
+		});
 		template = new TileSourceManager.TileSourceTemplate("", "", PNG_EXT, MAX_ZOOM, MIN_ZOOM, TILE_SIZE, BIT_DENSITY, AVG_SIZE);
 		if (editedLayerName != null) {
 			if (!editedLayerName.endsWith(IndexConstants.SQLITE_EXT)) {
@@ -222,19 +229,15 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 
 	@Override
 	public void onZoomSet(int min, int max) {
-		if (isAdded()) {
 			minZoom = min;
 			maxZoom = max;
 			updateDescription(ConfigurationItem.ZOOM_LEVELS);
-		}
 	}
 
 	@Override
 	public void onExpireValueSet(int expireValue) {
-		if (isAdded()) {
 			expireTimeMinutes = expireValue;
 			updateDescription(ConfigurationItem.EXPIRE_TIME);
-		}
 	}
 
 	@Override
@@ -250,14 +253,6 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		if (isAdded()) {
 			this.sqliteDB = sqliteDb;
 			updateDescription(ConfigurationItem.STORAGE_FORMAT);
-		}
-	}
-
-	@Override
-	public void onClick(View view) {
-		if (view.getId() == R.id.save_button) {
-			saveTemplate();
-			dismiss();
 		}
 	}
 
@@ -390,7 +385,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			@Override
 			public void onClick(View view) {
 				FragmentManager fm = getFragmentManager();
-				if (fm != null) {
+				if (fm != null && !fm.isStateSaved()) {
 					switch (item) {
 						case ZOOM_LEVELS:
 							InputZoomLevelsBottomSheet.showInstance(
@@ -415,7 +410,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void addConfigurationItems(ConfigurationItem... items) {
-		LayoutInflater inflater = UiUtilities.getMaterialInflater(getContext(), nightMode);
+		LayoutInflater inflater = UiUtilities.getMaterialInflater(app, nightMode);
 		for (ConfigurationItem item : items) {
 			View view = inflater.inflate(R.layout.list_item_ui_customization, null);
 			((ImageView) view.findViewById(R.id.icon)).setImageDrawable(app.getUIUtilities().getIcon(item.iconRes, nightMode));
