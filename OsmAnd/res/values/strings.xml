@@ -11,6 +11,23 @@
 	Thx - Hardy
 
 -->
+    <string name="tiles_storage_descr">Choose how downloaded tiles will be stored.</string>
+    <string name="expire_time_descr">Expiration time in minutes. Cached tiles will be reloaded after specified time.
+        Leave this field empty if you do not need to reload tiles for this source.
+        \n\nOne day is 1440 minutes.\nOne week is 10 080 minutes.\nOne month is 43 829 minutes.</string>
+    <string name="map_source_zoom_levels_descr">This parameters will affect the map display when used as a map type or overlay/underlay.
+        \n\n%1$s: the map will be limited to the selected zooms. \n\n%2$s: Zoom levels at which
+        tiles will be visible. Upscale or downscale will occur above or below the set values.</string>
+    <string name="map_source_zoom_levels">Set the minimum and maximum zoom level at which the online map will be displayed or loaded.</string>
+    <string name="storage_format">Storage format</string>
+    <string name="mercator_projection">Mercator Projection</string>
+    <string name="expire_time">Expire time</string>
+    <string name="edit_online_source">Edit online source</string>
+    <string name="online_map_url_helper_text">Enter or paste URL for online source.</string>
+    <string name="online_map_name_helper_text">Provide name for online map source.</string>
+    <string name="sqlite_db_file">SQLiteDB file</string>
+    <string name="one_image_per_tile">One image file per tile</string>
+    <string name="pseudo_mercator_projection">Pseudo-Mercator projection</string>
     <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact support team to investigate further</string>
     <string name="unsupported_type_error">Unsupported type</string>
     <string name="index_item_world_basemap_detailed">World overview map (detailed)</string>
