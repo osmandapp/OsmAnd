@@ -1177,7 +1177,7 @@
     <string name="poi_seats">Seĝoj</string>
     <string name="poi_backrest_yes">Seĝodorso(j): jes</string>
     <string name="poi_backrest_no">Seĝodorso(j): ne</string>
-    <string name="poi_intermittent">Sezona</string>
+    <string name="poi_intermittent">Periode sekiĝanta</string>
     <string name="poi_generator_source_coal">Energifonto: karbo</string>
     <string name="poi_generator_source_gas">Energifonto: gaso</string>
     <string name="poi_generator_source_nuclear">Energifonto: nuklea</string>
