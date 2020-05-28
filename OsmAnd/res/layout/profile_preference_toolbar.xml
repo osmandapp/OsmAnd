@@ -33,6 +33,10 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_weight="1"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding"
 			android:paddingTop="@dimen/content_padding_half"
 			android:paddingBottom="@dimen/content_padding_half"
 			android:background="?attr/card_and_list_background_basic"
@@ -43,15 +47,11 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
-				android:paddingLeft="@dimen/content_padding"
-				android:paddingRight="@dimen/content_padding"
 				android:maxLines="2"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/dialog_header_text_size"
 				osmand:typeface="@string/font_roboto_medium"
-				tools:text="@string/routing_settings_2"
-				android:paddingEnd="@dimen/content_padding"
-				android:paddingStart="@dimen/content_padding" />
+				tools:text="@string/routing_settings_2" />
 
 			<TextView
 				android:id="@+id/toolbar_subtitle"
@@ -59,12 +59,8 @@
 				android:layout_height="wrap_content"
 				android:ellipsize="end"
 				android:maxLines="2"
-				android:paddingLeft="@dimen/content_padding"
-				android:paddingRight="@dimen/content_padding"
 				android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-				tools:text="Some description"
-				android:paddingStart="@dimen/content_padding"
-				android:paddingEnd="@dimen/content_padding" />
+				tools:text="Some description" />
 		</LinearLayout>
 
 	</LinearLayout>

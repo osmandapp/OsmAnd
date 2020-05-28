@@ -15,7 +15,6 @@ public class DialogsAndNotificationsSettingsFragment extends BaseSettingsFragmen
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
 		super.createToolbar(inflater, view);
-		view.findViewById(R.id.toolbar_switch_container).setVisibility(View.GONE);
 	}
 
 	@Override

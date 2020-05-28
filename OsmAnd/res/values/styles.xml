@@ -288,10 +288,19 @@
         <item name="stroked_buttons_and_links_outline">@color/stroked_buttons_and_links_outline_light</item>
         <item name="btn_bg_border_inactive">@drawable/btn_bg_border_inactive_light</item>
         <item name="actionBarSize">@dimen/action_bar_height</item>
+        <item name="android:toolbarStyle">@style/ToolbarStyle</item>
+        <item name="toolbarStyle">@style/ToolbarStyle</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="titleMargin">0dp</item>
+        <item name="contentInsetStartWithNavigation">@dimen/toolbar_inset_start_with_navigation</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
         <item name="srcCompat">@drawable/ic_overflow_menu_white</item>
+        <item name="android:tint">?attr/app_bar_primary_item_color</item>
     </style>
 
     <style name="PopupMenuLight" parent="@style/Widget.AppCompat.Light.PopupMenu">
@@ -558,6 +567,8 @@
         <item name="stroked_buttons_and_links_outline">@color/stroked_buttons_and_links_outline_dark</item>
         <item name="btn_bg_border_inactive">@drawable/btn_bg_border_inactive_dark</item>
         <item name="actionBarSize">@dimen/action_bar_height</item>
+        <item name="android:toolbarStyle">@style/ToolbarStyle</item>
+        <item name="toolbarStyle">@style/ToolbarStyle</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
@@ -790,5 +801,6 @@
 
     <style name="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:padding">0dp</item>
+        <item name="titleMargin">0dp</item>
     </style>
 </resources>
