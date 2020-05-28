@@ -3733,4 +3733,5 @@
 \nSchalten Sie nicht verwendete Plugins aus, um alle ihre Steuerelemente auszublenden. %1$s.</string>
     <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
     <string name="shared_string_drawer">Schublade</string>
+    <string name="gpx_parse_error">OsmAnd GPX ist nicht gut geformt. Bitte wenden Sie sich an das Support-Team, um weitere Informationen zu erhalten</string>
 </resources>
