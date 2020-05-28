@@ -230,15 +230,19 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 
 	@Override
 	public void onZoomSet(int min, int max) {
+		if (isAdded()) {
 			minZoom = min;
 			maxZoom = max;
 			updateDescription(ConfigurationItem.ZOOM_LEVELS);
+		}
 	}
 
 	@Override
 	public void onExpireValueSet(int expireValue) {
+		if (isAdded()) {
 			expireTimeMinutes = expireValue;
 			updateDescription(ConfigurationItem.EXPIRE_TIME);
+		}
 	}
 
 	@Override
@@ -310,7 +314,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				if (!f.exists() || f.isDirectory()) {
 					SQLiteTileSource sqLiteTileSource =
 							new SQLiteTileSource(app, newName, minZoom,
-									maxZoom, urlToLoad, "0,1,2,3",
+									maxZoom, urlToLoad, "",
 									elliptic, false, "", expireTimeMinutes > 0,
 									expireTimeMinutes * 60 * 1000L, false, ""
 							);
