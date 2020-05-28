@@ -33,6 +33,7 @@ public class LockHelper implements SensorEventListener {
 	private OsmandApplication app;
 	private CommonPreference<Integer> turnScreenOnTime;
 	private CommonPreference<Boolean> turnScreenOnSensor;
+	private CommonPreference<Boolean> turnScreenOnNavigationInstructions;
 
 	@Nullable
 	private LockUIAdapter lockUIAdapter;
@@ -52,6 +53,7 @@ public class LockHelper implements SensorEventListener {
 		OsmandSettings settings = app.getSettings();
 		turnScreenOnTime = settings.TURN_SCREEN_ON_TIME_INT;
 		turnScreenOnSensor = settings.TURN_SCREEN_ON_SENSOR;
+		turnScreenOnNavigationInstructions = settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
 
 		lockRunnable = new Runnable() {
 			@Override
@@ -62,7 +64,9 @@ public class LockHelper implements SensorEventListener {
 		voiceMessageListener = new VoiceMessageListener() {
 			@Override
 			public void onVoiceMessage(List<String> listCommands, List<String> played) {
-				unlockEvent();
+				if (turnScreenOnNavigationInstructions.get()) {
+					unlockEvent();
+				}
 			}
 		};
 		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
@@ -71,6 +75,7 @@ public class LockHelper implements SensorEventListener {
 				OsmandSettings settings = app.getSettings();
 				turnScreenOnTime = settings.TURN_SCREEN_ON_TIME_INT;
 				turnScreenOnSensor = settings.TURN_SCREEN_ON_SENSOR;
+				turnScreenOnNavigationInstructions = settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
 			}
 		};
 		app.getAppCustomization().addListener(customizationListener);
