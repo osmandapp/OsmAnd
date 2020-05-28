@@ -57,15 +57,15 @@
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
+                    android:paddingLeft="@dimen/content_padding"
+                    android:paddingRight="@dimen/content_padding"
                     android:text="@string/shared_string_options"
                     android:textAllCaps="true"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/default_list_text_size"
                     osmand:typeface="@string/font_roboto_medium"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp" />
+                    android:paddingStart="@dimen/content_padding"
+                    android:paddingEnd="@dimen/content_padding" />
 
             </LinearLayout>
 
