@@ -11,7 +11,7 @@ import net.osmand.plus.settings.bottomsheets.ScreenTimeoutBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-public class TurnScreenOnFragment extends BaseSettingsFragment {
+public class TurnScreenOnFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	public static final String TAG = TurnScreenOnFragment.class.getSimpleName();
 
@@ -65,6 +65,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		}
 
 		ListPreferenceEx turnScreenOnTime = (ListPreferenceEx) findPreference(settings.TURN_SCREEN_ON_TIME_INT.getId());
+		turnScreenOnTime.setEnabled(!settings.USE_SYSTEM_SCREEN_TIMEOUT.getModeValue(getSelectedAppMode()));
 		turnScreenOnTime.setEntries(entries);
 		turnScreenOnTime.setEntryValues(entryValues);
 		turnScreenOnTime.setIcon(getPersistentPrefIcon(R.drawable.ic_action_time_span));
@@ -86,5 +87,15 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		SwitchPreferenceEx turnScreenOnPowerButton = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_POWER_BUTTON.getId());
 		turnScreenOnPowerButton.setIcon(getPersistentPrefIcon(R.drawable.ic_action_power_button));
 		turnScreenOnPowerButton.setDescription(R.string.turn_screen_on_power_button_descr);
+	}
+
+	@Override
+	public void onPreferenceChanged(String prefId) {
+		if (settings.USE_SYSTEM_SCREEN_TIMEOUT.getId().equals(prefId)) {
+			Preference turnScreenOnTime = findPreference(settings.TURN_SCREEN_ON_TIME_INT.getId());
+			if (turnScreenOnTime != null) {
+				turnScreenOnTime.setEnabled(!settings.USE_SYSTEM_SCREEN_TIMEOUT.getModeValue(getSelectedAppMode()));
+			}
+		}
 	}
 }
