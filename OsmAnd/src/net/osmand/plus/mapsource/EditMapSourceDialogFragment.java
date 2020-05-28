@@ -54,7 +54,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.List;
 
-import static net.osmand.plus.download.ui.LocalIndexesFragment.renameSQLiteFile;
+import static net.osmand.FileUtils.renameSQLiteFile;
 
 public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		implements OnZoomSetListener, OnExpireValueSetListener, OnMercatorSelectedListener,
