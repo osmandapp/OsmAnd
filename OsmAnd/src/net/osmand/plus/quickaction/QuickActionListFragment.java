@@ -534,8 +534,12 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                     h.itemContainer.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
-                            dialog.show(getFragmentManager(), AddQuickActionDialog.TAG);
+                            CreateEditActionDialog dialog =
+                                    CreateEditActionDialog.newInstance(action.id);
+                            FragmentManager fm = getFragmentManager();
+                            if (fm != null && !dialog.isStateSaved()) {
+                                dialog.show(fm, CreateEditActionDialog.TAG);
+                            }
                         }
                     });
 
@@ -871,8 +875,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     private void showAddQuickActionDialog() {
         FragmentManager fm = getFragmentManager();
         if (fm != null) {
-            AddQuickActionDialog dialog = new AddQuickActionDialog();
-            dialog.show(fm, AddQuickActionDialog.TAG);
+            AddQuickActionDialog.showInstance(fm, false);
         }
     }
 
