@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -36,6 +37,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -82,7 +84,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private LinearLayout contentContainer;
 	private FrameLayout saveBtn;
 	private TextView saveBtnTitle;
-	private TileSourceManager.TileSourceTemplate template;
+	private TileSourceTemplate template;
 	@Nullable
 	private String editedLayerName;
 	private String urlToLoad = "";
@@ -162,19 +164,19 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				dismiss();
 			}
 		});
-		template = new TileSourceManager.TileSourceTemplate("", "", PNG_EXT, MAX_ZOOM, MIN_ZOOM, TILE_SIZE, BIT_DENSITY, AVG_SIZE);
+		template = new TileSourceTemplate("", "", PNG_EXT, MAX_ZOOM, MIN_ZOOM, TILE_SIZE, BIT_DENSITY, AVG_SIZE);
 		if (editedLayerName != null) {
 			if (!editedLayerName.endsWith(IndexConstants.SQLITE_EXT)) {
 				File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + editedLayerName);
 				template = TileSourceManager.createTileSourceTemplate(f);
 				sqliteDB = false;
 			} else {
-				List<TileSourceManager.TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
+				List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
 				File tPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 				File dir = new File(tPath, editedLayerName);
 				SQLiteTileSource sqLiteTileSource = new SQLiteTileSource(app, dir, knownTemplates);
 				sqLiteTileSource.couldBeDownloadedFromInternet();
-				template = new TileSourceManager.TileSourceTemplate(sqLiteTileSource.getName(),
+				template = new TileSourceTemplate(sqLiteTileSource.getName(),
 						sqLiteTileSource.getUrlTemplate(), PNG_EXT, sqLiteTileSource.getMaximumZoomSupported(),
 						sqLiteTileSource.getMinimumZoomSupported(), sqLiteTileSource.getTileSize(),
 						sqLiteTileSource.getBitDensity(), AVG_SIZE);
@@ -315,7 +317,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 							);
 					sqLiteTileSource.createDataBase();
 				} else {
-					List<TileSourceManager.TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
+					List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
 					SQLiteTileSource sqLiteTileSource = new SQLiteTileSource(app, f, knownTemplates);
 					sqLiteTileSource.couldBeDownloadedFromInternet();
 					sqLiteTileSource.updateFromTileSourceTemplate(template);
@@ -380,7 +382,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		}
 	}
 
-	private View.OnClickListener getClickListener(final ConfigurationItem item) {
+	private OnClickListener getClickListener(final ConfigurationItem item) {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

@@ -338,9 +338,8 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void updateFromTileSourceTemplate(TileSourceTemplate r) {
-		db = ctx.getSQLiteAPI().getOrCreateDatabase(
-				ctx.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, false);
-		if (!onlyReadonlyAvailable) {
+		db = getDatabase();
+		if (!onlyReadonlyAvailable && db != null) {
 			int maxZoom = r.getMaximumZoomSupported();
 			int minZoom = r.getMinimumZoomSupported();
 			if (inversiveZoom) {
