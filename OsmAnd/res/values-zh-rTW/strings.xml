@@ -3453,7 +3453,7 @@
     <string name="monitoring_min_speed_descr_side_effect">副作用：您的軌跡將會遺失所有未達到最低速度標準的部份（例如，您將自行車推上陡峭的山坡）。此外，也將沒有其餘的資訊，如休息等。這會影響任何分析或後處理，例如試圖確定行程的總長度，運動時間或平均速度時。</string>
     <string name="monitoring_min_speed_descr_recommendation">建議：先試著透過紀錄最小位移過濾器 (B) 來使用運動偵測，這可能會生成更好的結果，您也會遺失更少的資料。如果您的軌跡在低速時仍然有相當多的雜訊，請在此處嘗試使用非零的值。請注意，某些測量可能根本就不會回報任何速度值（某些以網路為基礎的方法），在這種情況下就不會記錄任何內容。</string>
     <string name="monitoring_min_speed_descr_remark">備註：移動檢查：大多數 GPS 晶片只在演算法確定您處於運動狀態時回報速度值，否則就不回報速度值。因此，在某種意義上在此過濾器中使用 &gt; 0 的設定將會使用 GPS 晶片的運動偵測。但是，即使在錄製時未在此處過濾，我們仍會在 GPX 分析中使用此功能來確定校正後的距離，即該欄位中顯示的值是運動時記錄的距離。</string>
-    <string name="monitoring_min_accuracy_descr">這將僅記錄以最小精度指示（以公尺／英呎為單位，由 Android 為您的晶片組回報）測量的點。精密度是指重複測量的分散性，與準確度沒有直接關係，準確度定義了測量與實際位置的接近程度。</string>
+    <string name="monitoring_min_accuracy_descr">這將僅記錄以最小精度指示（以公尺／英呎為單位，由 Android 以您的晶片組回報）測量的點。準確度指的是您的測量與真實位置的接近程度，與精密度（重覆測量的分散性）沒有直接關係。</string>
     <string name="monitoring_min_accuracy_descr_side_effect">副作用：由於按精密度進行過濾，因此，在橋樑下，樹木下，高層建築之間或在特定天氣條件下，點將會完全遺失。</string>
     <string name="monitoring_min_accuracy_descr_recommendation">建議：很難預測將要記錄什麼而不記錄什麼，最好關閉此過濾器。</string>
     <string name="monitoring_min_accuracy_descr_remark">備註：如果 GPS 在記錄之前已關閉，則測量的第一個點的精密度可能會降低，因此在我們的程式碼中，我們可能要等一秒鐘左右再記錄一個點（或記錄三個連續點中的最佳點，依此類推），但尚未實作。</string>
@@ -3720,4 +3720,5 @@
     <string name="profiles_for_action_not_found">找不到任何這類的設定檔。</string>
     <string name="index_item_world_basemap_detailed">全球地圖總覽（詳細）</string>
     <string name="unsupported_type_error">不支援的類型</string>
+    <string name="gpx_parse_error">OsmAnd GPX 格式不正確，請聯絡支援團隊以進一步調查</string>
 </resources>
