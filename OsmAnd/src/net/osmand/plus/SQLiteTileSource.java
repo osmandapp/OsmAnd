@@ -337,6 +337,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void updateFromTileSourceTemplate(TileSourceTemplate r) {
+		boolean openedBefore = isDbOpened();
 		SQLiteConnection db = getDatabase();
 		if (!onlyReadonlyAvailable && db != null) {
 			int maxZoom = r.getMaximumZoomSupported();
@@ -362,9 +363,13 @@ public class SQLiteTileSource implements ITileSource {
 				db.execSQL("update info set " + EXPIRE_MINUTES + " = '" + r.getExpirationTimeMinutes() + "'");
 			}
 		}
-		if (db != null) {
+		if (db != null && !openedBefore) {
 			db.close();
 		}
+	}
+
+	public boolean isDbOpened() {
+		return db != null && !db.isClosed();
 	}
 
 	private void addInfoColumn(SQLiteConnection db, String columnName, String value) {

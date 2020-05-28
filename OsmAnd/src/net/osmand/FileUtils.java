@@ -46,8 +46,9 @@ public class FileUtils {
 				public void afterTextChanged(Editable s) {
 					Editable text = editText.getText();
 					if (text.length() >= 1) {
-						if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(text).find()) {
-							editText.setError(weakActivity.get().getString(R.string.file_name_containes_illegal_char));
+						Activity activity = weakActivity.get();
+						if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(text).find() && activity != null) {
+							editText.setError(activity.getString(R.string.file_name_containes_illegal_char));
 						}
 					}
 				}
@@ -67,16 +68,19 @@ public class FileUtils {
 							new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									OsmandApplication app = (OsmandApplication) weakActivity.get().getApplication();
-									if (ext.equals(SQLiteTileSource.EXT)) {
-										if (renameSQLiteFile(app, f, editText.getText().toString() + ext,
-												callback) != null) {
-											alertDialog.dismiss();
-										}
-									} else {
-										if (renameGpxFile(app, f, editText.getText().toString() + ext,
-												false, callback) != null) {
-											alertDialog.dismiss();
+									Activity activity = weakActivity.get();
+									if (activity != null) {
+										OsmandApplication app = (OsmandApplication) activity.getApplication();
+										if (ext.equals(SQLiteTileSource.EXT)) {
+											if (renameSQLiteFile(app, f, editText.getText().toString() + ext,
+													callback) != null) {
+												alertDialog.dismiss();
+											}
+										} else {
+											if (renameGpxFile(app, f, editText.getText().toString() + ext,
+													false, callback) != null) {
+												alertDialog.dismiss();
+											}
 										}
 									}
 								}
