@@ -21,8 +21,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height"
 			android:background="?attr/card_and_list_background_basic"
-			android:minHeight="@dimen/toolbar_height"
 			osmand:subtitleTextColor="?android:textColorPrimary"
+			app:contentInsetStartWithNavigation="@dimen/toolbar_inset_start_with_navigation"
 			osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar"
 			osmand:titleTextColor="?android:textColorPrimary">
 
