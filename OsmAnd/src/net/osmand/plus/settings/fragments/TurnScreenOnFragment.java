@@ -1,116 +1,117 @@
 package net.osmand.plus.settings.fragments;
 
-import android.graphics.drawable.ColorDrawable;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.bottomsheets.ScreenTimeoutBottomSheet;
+import net.osmand.plus.settings.bottomsheets.WakeTimeBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
-
-public class TurnScreenOnFragment extends BaseSettingsFragment {
+public class TurnScreenOnFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	public static final String TAG = TurnScreenOnFragment.class.getSimpleName();
 
 	@Override
 	protected void setupPreferences() {
-		Preference turnScreenOnInfo = findPreference("turn_screen_on_info");
-		turnScreenOnInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-
+		setupUseSystemScreenTimeout();
 		setupTurnScreenOnTimePref();
 		setupTurnScreenOnSensorPref();
-		enableDisablePreferences(settings.TURN_SCREEN_ON_ENABLED.getModeValue(getSelectedAppMode()));
-	}
-
-	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
-		super.createToolbar(inflater, view);
-
-		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				ApplicationMode selectedMode = getSelectedAppMode();
-				boolean checked = !settings.TURN_SCREEN_ON_ENABLED.getModeValue(selectedMode);
-				onConfirmPreferenceChange(
-						settings.TURN_SCREEN_ON_ENABLED.getId(), checked, ApplyQueryType.SNACK_BAR);
-				updateToolbarSwitch();
-				enableDisablePreferences(checked);
-			}
-		});
+		setupTurnScreenOnNavigationInstructionsPref();
+		setupTurnScreenOnPowerButtonPref();
 	}
 
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
-		if (settings.TURN_SCREEN_ON_TIME_INT.getId().equals(preference.getKey()) && preference instanceof ListPreferenceEx) {
+		String prefId = preference.getKey();
+		if (settings.TURN_SCREEN_ON_TIME_INT.getId().equals(prefId) && preference instanceof ListPreferenceEx) {
 			Object currentValue = ((ListPreferenceEx) preference).getValue();
 			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
 			if (imageView != null && currentValue instanceof Integer) {
-				boolean enabled = preference.isEnabled() && (Integer) currentValue > 0;
+				boolean enabled = preference.isEnabled() && (Integer) currentValue != 0;
 				imageView.setEnabled(enabled);
+			}
+		} else if ("turn_screen_on_info".equals(prefId) || "turn_screen_on_options_info".equals(prefId)) {
+			TextView titleView = (TextView) holder.findViewById(android.R.id.title);
+			if (titleView != null) {
+				titleView.setTextColor(getDisabledTextColor());
 			}
 		}
 	}
 
 	@Override
-	protected void updateToolbar() {
-		super.updateToolbar();
-		updateToolbarSwitch();
+	public void onDisplayPreferenceDialog(Preference preference) {
+		FragmentManager fragmentManager = getFragmentManager();
+		ApplicationMode appMode = getSelectedAppMode();
+		String prefId = preference.getKey();
+		if (settings.USE_SYSTEM_SCREEN_TIMEOUT.getId().equals(prefId)) {
+			if (fragmentManager != null) {
+				ScreenTimeoutBottomSheet.showInstance(fragmentManager, prefId, this, false, appMode, getApplyQueryType(), isProfileDependent());
+			}
+		} else if (settings.TURN_SCREEN_ON_TIME_INT.getId().equals(prefId)) {
+			if (fragmentManager != null) {
+				WakeTimeBottomSheet.showInstance(fragmentManager, prefId, this, false, appMode, getApplyQueryType(), isProfileDependent());
+			}
+		} else {
+			super.onDisplayPreferenceDialog(preference);
+		}
 	}
 
-	private void updateToolbarSwitch() {
-		View view = getView();
-		if (view == null) {
-			return;
-		}
-		boolean checked = settings.TURN_SCREEN_ON_ENABLED.getModeValue(getSelectedAppMode());
-
-		int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
-		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
-		AndroidUtils.setBackground(switchContainer, new ColorDrawable(color));
-
-		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
-		switchView.setChecked(checked);
-		UiUtilities.setupCompoundButton(switchView, isNightMode(), TOOLBAR);
-
-		TextView title = switchContainer.findViewById(R.id.switchButtonText);
-		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);
+	private void setupUseSystemScreenTimeout() {
+		SwitchPreferenceEx systemScreenTimeout = (SwitchPreferenceEx) findPreference(settings.USE_SYSTEM_SCREEN_TIMEOUT.getId());
+		systemScreenTimeout.setDescription(R.string.system_screen_timeout_descr);
 	}
 
 	private void setupTurnScreenOnTimePref() {
-		Integer[] entryValues = new Integer[] {0, 5, 10, 15, 20, 30, 45, 60};
+		Integer[] entryValues = new Integer[] {-1, 0, 5, 10, 15, 20, 30, 45, 60};
 		String[] entries = new String[entryValues.length];
 
-		entries[0] = getString(R.string.shared_string_never);
-		for (int i = 1; i < entryValues.length; i++) {
+		entries[0] = getString(R.string.shared_string_always);
+		entries[1] = getString(R.string.shared_string_never);
+		for (int i = 2; i < entryValues.length; i++) {
 			entries[i] = entryValues[i] + " " + getString(R.string.int_seconds);
 		}
 
 		ListPreferenceEx turnScreenOnTime = (ListPreferenceEx) findPreference(settings.TURN_SCREEN_ON_TIME_INT.getId());
+		turnScreenOnTime.setEnabled(!settings.USE_SYSTEM_SCREEN_TIMEOUT.getModeValue(getSelectedAppMode()));
 		turnScreenOnTime.setEntries(entries);
 		turnScreenOnTime.setEntryValues(entryValues);
+		turnScreenOnTime.setDescription(getString(R.string.turn_screen_on_wake_time_descr, getString(R.string.keep_screen_on)));
 		turnScreenOnTime.setIcon(getPersistentPrefIcon(R.drawable.ic_action_time_span));
 	}
 
 	private void setupTurnScreenOnSensorPref() {
-		String title = getString(R.string.turn_screen_on_sensor);
-		String description = getString(R.string.turn_screen_on_sensor_descr);
-
 		SwitchPreferenceEx turnScreenOnSensor = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_SENSOR.getId());
 		turnScreenOnSensor.setIcon(getPersistentPrefIcon(R.drawable.ic_action_sensor_interaction));
-		turnScreenOnSensor.setTitle(title);
-		turnScreenOnSensor.setDescription(description);
+		turnScreenOnSensor.setDescription(R.string.turn_screen_on_sensor_descr);
+	}
+
+	private void setupTurnScreenOnNavigationInstructionsPref() {
+		SwitchPreferenceEx turnScreenOnNavigationInstructions = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS.getId());
+		turnScreenOnNavigationInstructions.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification_navigation));
+		turnScreenOnNavigationInstructions.setDescription(R.string.turn_screen_on_navigation_instructions_descr);
+	}
+
+	private void setupTurnScreenOnPowerButtonPref() {
+		SwitchPreferenceEx turnScreenOnPowerButton = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_POWER_BUTTON.getId());
+		turnScreenOnPowerButton.setIcon(getPersistentPrefIcon(R.drawable.ic_action_power_button));
+		turnScreenOnPowerButton.setDescription(R.string.turn_screen_on_power_button_descr);
+	}
+
+	@Override
+	public void onPreferenceChanged(String prefId) {
+		if (settings.USE_SYSTEM_SCREEN_TIMEOUT.getId().equals(prefId)) {
+			Preference turnScreenOnTime = findPreference(settings.TURN_SCREEN_ON_TIME_INT.getId());
+			if (turnScreenOnTime != null) {
+				turnScreenOnTime.setEnabled(!settings.USE_SYSTEM_SCREEN_TIMEOUT.getModeValue(getSelectedAppMode()));
+			}
+		}
 	}
 }

@@ -10,12 +10,12 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 
 public class TitleItem extends SimpleBottomSheetItem {
 
-	public TitleItem(String title) {
+	public TitleItem(CharSequence title) {
 		this.title = title;
 		this.layoutId = R.layout.bottom_sheet_item_title;
 	}
 
-	public TitleItem(String title, @ColorRes int titleColorId) {
+	public TitleItem(CharSequence title, @ColorRes int titleColorId) {
 		this.title = title;
 		this.layoutId = R.layout.bottom_sheet_item_title;
 		this.titleColorId = titleColorId;
