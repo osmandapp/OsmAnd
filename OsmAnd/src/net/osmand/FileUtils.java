@@ -13,7 +13,6 @@ import androidx.appcompat.app.AlertDialog;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -25,7 +24,7 @@ public class FileUtils {
 	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 
-	public static void renameFile(Activity a, final File f, final LocalIndexesFragment.RenameCallback callback) {
+	public static void renameFile(Activity a, final File f, final RenameCallback callback) {
 		final WeakReference<Activity> weakActivity = new WeakReference<>(a);
 		AlertDialog.Builder b = new AlertDialog.Builder(a);
 		if (f.exists()) {
@@ -89,7 +88,7 @@ public class FileUtils {
 	}
 
 	public static File renameSQLiteFile(OsmandApplication ctx, File source, String newName,
-										LocalIndexesFragment.RenameCallback callback) {
+										RenameCallback callback) {
 		File dest = checkRenamePossibility(ctx, source, newName, false);
 		if (dest == null) {
 			return null;
@@ -116,7 +115,7 @@ public class FileUtils {
 	}
 
 	public static File renameGpxFile(OsmandApplication ctx, File source, String newName, boolean dirAllowed,
-									 LocalIndexesFragment.RenameCallback callback) {
+									 RenameCallback callback) {
 		File dest = checkRenamePossibility(ctx, source, newName, dirAllowed);
 		if (dest == null) {
 			return null;
@@ -152,5 +151,9 @@ public class FileUtils {
 			return null;
 		}
 		return dest;
+	}
+
+	public interface RenameCallback {
+		void renamedTo(File file);
 	}
 }

@@ -126,7 +126,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void createDataBase() {
-		db = ctx.getSQLiteAPI().getOrCreateDatabase(
+		SQLiteConnection db = ctx.getSQLiteAPI().getOrCreateDatabase(
 				ctx.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + name + SQLITE_EXT, true);
 
 		db.execSQL("CREATE TABLE IF NOT EXISTS tiles (x int, y int, z int, s int, image blob, time long, PRIMARY KEY (x,y,z,s))");
@@ -134,14 +134,13 @@ public class SQLiteTileSource implements ITileSource {
 		db.execSQL("CREATE TABLE IF NOT EXISTS info(tilenumbering,minzoom,maxzoom)");
 		db.execSQL("INSERT INTO info (tilenumbering,minzoom,maxzoom) VALUES ('simple','" + minZoom + "','" + maxZoom + "');");
 
-		addInfoColumn(URL, urlTemplate);
-		addInfoColumn(RANDOMS, randoms);
-		addInfoColumn(ELLIPSOID, isEllipsoid ? "1" : "0");
-		addInfoColumn(INVERTED_Y, invertedY ? "1" : "0");
-		addInfoColumn(REFERER, referer);
-		addInfoColumn(TIME_COLUMN, timeSupported ? "yes" : "no");
-		addInfoColumn(EXPIRE_MINUTES, String.valueOf(getExpirationTimeMinutes()));
-
+		addInfoColumn(db, URL, urlTemplate);
+		addInfoColumn(db, RANDOMS, randoms);
+		addInfoColumn(db, ELLIPSOID, isEllipsoid ? "1" : "0");
+		addInfoColumn(db, INVERTED_Y, invertedY ? "1" : "0");
+		addInfoColumn(db, REFERER, referer);
+		addInfoColumn(db, TIME_COLUMN, timeSupported ? "yes" : "no");
+		addInfoColumn(db, EXPIRE_MINUTES, String.valueOf(getExpirationTimeMinutes()));
 
 		db.close();
 	}
@@ -270,14 +269,14 @@ public class SQLiteTileSource implements ITileSource {
 						inversiveZoom = BIG_PLANET_TILE_NUMBERING.equalsIgnoreCase(cursor.getString(tnumbering));
 					} else {
 						inversiveZoom = true;
-						addInfoColumn(TILENUMBERING, BIG_PLANET_TILE_NUMBERING);
+						addInfoColumn(db, TILENUMBERING, BIG_PLANET_TILE_NUMBERING);
 					}
 					int timecolumn = list.indexOf(TIME_COLUMN);
 					if (timecolumn != -1) {
 						timeSupported = "yes".equalsIgnoreCase(cursor.getString(timecolumn));
 					} else {
-						timeSupported = hasTimeColumn();
-						addInfoColumn(TIME_COLUMN, timeSupported? "yes" : "no");
+						timeSupported = hasTimeColumn(db);
+						addInfoColumn(db, TIME_COLUMN, timeSupported ? "yes" : "no");
 					}
 					int expireminutes = list.indexOf(EXPIRE_MINUTES);
 					this.expirationTimeMillis = -1;
@@ -287,7 +286,7 @@ public class SQLiteTileSource implements ITileSource {
 							this.expirationTimeMillis = minutes * 60 * 1000l;
 						}
 					} else {
-						addInfoColumn(EXPIRE_MINUTES, "0");
+						addInfoColumn(db, EXPIRE_MINUTES, "0");
 					}
 					int tsColumn = list.indexOf(TILESIZE);
 					this.tileSizeSpecified = tsColumn != -1;
@@ -338,7 +337,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void updateFromTileSourceTemplate(TileSourceTemplate r) {
-		db = getDatabase();
+		SQLiteConnection db = getDatabase();
 		if (!onlyReadonlyAvailable && db != null) {
 			int maxZoom = r.getMaximumZoomSupported();
 			int minZoom = r.getMinimumZoomSupported();
@@ -363,9 +362,12 @@ public class SQLiteTileSource implements ITileSource {
 				db.execSQL("update info set " + EXPIRE_MINUTES + " = '" + r.getExpirationTimeMinutes() + "'");
 			}
 		}
+		if (db != null) {
+			db.close();
+		}
 	}
 
-	private void addInfoColumn(String columnName, String value) {
+	private void addInfoColumn(SQLiteConnection db, String columnName, String value) {
 		if(!onlyReadonlyAvailable) {
 			try {
 				db.execSQL("alter table info add column " + columnName + " TEXT");
@@ -376,7 +378,7 @@ public class SQLiteTileSource implements ITileSource {
 		}
 	}
 
-	private boolean hasTimeColumn() {
+	private boolean hasTimeColumn(SQLiteConnection db) {
 		SQLiteCursor cursor;
 		cursor = db.rawQuery("SELECT * FROM tiles", null);
 		cursor.moveToFirst();
@@ -476,7 +478,7 @@ public class SQLiteTileSource implements ITileSource {
 			} else if(!tileSizeSpecified &&
 					tileSize != bmp.getWidth() && bmp.getWidth() > 0) {
 				tileSize = bmp.getWidth();
-				addInfoColumn("tilesize", tileSize+"");
+				addInfoColumn(db, "tilesize", tileSize + "");
 				tileSizeSpecified = true;
 			}
 			return bmp;

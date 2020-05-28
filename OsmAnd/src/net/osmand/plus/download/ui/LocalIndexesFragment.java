@@ -36,6 +36,7 @@ import androidx.core.view.MenuItemCompat;
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.FileUtils;
+import net.osmand.FileUtils.RenameCallback;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.ITileSource;
@@ -1206,8 +1207,4 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		return (DownloadActivity) getActivity();
 	}
 
-	public interface RenameCallback {
-
-		public void renamedTo(File file);
-	}
 }

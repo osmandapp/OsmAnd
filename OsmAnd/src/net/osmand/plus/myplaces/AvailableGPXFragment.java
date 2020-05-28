@@ -47,6 +47,7 @@ import androidx.core.view.MenuItemCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
+import net.osmand.FileUtils.RenameCallback;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -76,7 +77,6 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.download.ui.LocalIndexesFragment.RenameCallback;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
