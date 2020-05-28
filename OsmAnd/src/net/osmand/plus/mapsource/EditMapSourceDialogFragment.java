@@ -34,6 +34,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.TileSourceManager;
@@ -55,8 +56,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.List;
-
-import static net.osmand.FileUtils.renameSQLiteFile;
 
 public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		implements OnZoomSetListener, OnExpireValueSetListener, OnMercatorSelectedListener,
@@ -301,7 +300,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				String originalName = extIndex == -1 ? f.getName() : f.getName().substring(0, extIndex);
 				if (!Algorithms.objectEquals(newName, originalName)) {
 					if (IndexConstants.SQLITE_EXT.equals(ext) && sqliteDB) {
-						renameSQLiteFile(app, f, newName, null);
+						FileUtils.renameSQLiteFile(app, f, newName, null);
 					} else if (!sqliteDB) {
 						f.renameTo(app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName));
 					}

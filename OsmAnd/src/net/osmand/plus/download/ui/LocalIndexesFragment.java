@@ -35,6 +35,7 @@ import androidx.core.view.MenuItemCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
+import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.ITileSource;
@@ -74,16 +75,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
-
-import static net.osmand.FileUtils.renameFile;
-
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents,
 		OnMapSourceUpdateListener {
-	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
-	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
-
 	private LoadLocalIndexTask asyncLoader;
 	private Map<String, IndexItem> filesToUpdate = new HashMap<>();
 	private LocalIndexesAdapter listAdapter;
@@ -219,7 +213,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	private boolean performBasicOperation(int resId, final LocalIndexInfo info) {
 		if (resId == R.string.shared_string_rename) {
-			renameFile(getActivity(), new File(info.getPathToData()), new RenameCallback() {
+			FileUtils.renameFile(getActivity(), new File(info.getPathToData()), new RenameCallback() {
 
 				@Override
 				public void renamedTo(File file) {

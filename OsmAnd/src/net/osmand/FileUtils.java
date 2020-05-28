@@ -17,14 +17,16 @@ import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.regex.Pattern;
-
-import static net.osmand.plus.download.ui.LocalIndexesFragment.ILLEGAL_FILE_NAME_CHARACTERS;
-import static net.osmand.plus.download.ui.LocalIndexesFragment.ILLEGAL_PATH_NAME_CHARACTERS;
 
 public class FileUtils {
 
-	public static void renameFile(final Activity a, final File f, final LocalIndexesFragment.RenameCallback callback) {
+	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
+	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
+
+	public static void renameFile(Activity a, final File f, final LocalIndexesFragment.RenameCallback callback) {
+		final WeakReference<Activity> weakActivity = new WeakReference<>(a);
 		AlertDialog.Builder b = new AlertDialog.Builder(a);
 		if (f.exists()) {
 			int xt = f.getName().lastIndexOf('.');
@@ -46,7 +48,7 @@ public class FileUtils {
 					Editable text = editText.getText();
 					if (text.length() >= 1) {
 						if (ILLEGAL_FILE_NAME_CHARACTERS.matcher(text).find()) {
-							editText.setError(a.getString(R.string.file_name_containes_illegal_char));
+							editText.setError(weakActivity.get().getString(R.string.file_name_containes_illegal_char));
 						}
 					}
 				}
@@ -66,7 +68,7 @@ public class FileUtils {
 							new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									OsmandApplication app = (OsmandApplication) a.getApplication();
+									OsmandApplication app = (OsmandApplication) weakActivity.get().getApplication();
 									if (ext.equals(SQLiteTileSource.EXT)) {
 										if (renameSQLiteFile(app, f, editText.getText().toString() + ext,
 												callback) != null) {

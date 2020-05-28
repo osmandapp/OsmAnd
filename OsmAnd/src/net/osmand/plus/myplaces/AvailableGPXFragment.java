@@ -46,6 +46,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -100,7 +101,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import static net.osmand.FileUtils.renameFile;
 import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
@@ -1482,7 +1482,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				renameFile(getActivity(), gpxInfo.file, new RenameCallback() {
+				FileUtils.renameFile(getActivity(), gpxInfo.file, new RenameCallback() {
 					@Override
 					public void renamedTo(File file) {
 						asyncLoader = new LoadGpxTask();

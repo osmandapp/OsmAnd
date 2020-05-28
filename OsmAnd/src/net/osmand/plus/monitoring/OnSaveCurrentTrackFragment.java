@@ -43,7 +43,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.download.ui.LocalIndexesFragment.ILLEGAL_FILE_NAME_CHARACTERS;
+import static net.osmand.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
 public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 
