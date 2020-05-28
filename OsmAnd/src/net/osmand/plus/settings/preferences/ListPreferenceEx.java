@@ -87,7 +87,7 @@ public class ListPreferenceEx extends DialogPreference {
 		return -1;
 	}
 
-	private int getValueIndex() {
+	public int getValueIndex() {
 		return findIndexOfValue(selectedValue);
 	}
 

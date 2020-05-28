@@ -1,13 +1,16 @@
 package net.osmand.plus.settings.fragments;
 
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ScreenTimeoutBottomSheet;
+import net.osmand.plus.settings.bottomsheets.WakeTimeBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -27,22 +30,34 @@ public class TurnScreenOnFragment extends BaseSettingsFragment implements OnPref
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
-		if (settings.TURN_SCREEN_ON_TIME_INT.getId().equals(preference.getKey()) && preference instanceof ListPreferenceEx) {
+		String prefId = preference.getKey();
+		if (settings.TURN_SCREEN_ON_TIME_INT.getId().equals(prefId) && preference instanceof ListPreferenceEx) {
 			Object currentValue = ((ListPreferenceEx) preference).getValue();
 			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
 			if (imageView != null && currentValue instanceof Integer) {
-				boolean enabled = preference.isEnabled() && (Integer) currentValue > 0;
+				boolean enabled = preference.isEnabled() && (Integer) currentValue != 0;
 				imageView.setEnabled(enabled);
+			}
+		} else if ("turn_screen_on_info".equals(prefId) || "turn_screen_on_options_info".equals(prefId)) {
+			TextView titleView = (TextView) holder.findViewById(android.R.id.title);
+			if (titleView != null) {
+				titleView.setTextColor(getDisabledTextColor());
 			}
 		}
 	}
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
-		if (settings.USE_SYSTEM_SCREEN_TIMEOUT.getId().equals(preference.getKey())) {
-			FragmentManager fragmentManager = getFragmentManager();
+		FragmentManager fragmentManager = getFragmentManager();
+		ApplicationMode appMode = getSelectedAppMode();
+		String prefId = preference.getKey();
+		if (settings.USE_SYSTEM_SCREEN_TIMEOUT.getId().equals(prefId)) {
 			if (fragmentManager != null) {
-				ScreenTimeoutBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, getSelectedAppMode(), getApplyQueryType(), isProfileDependent());
+				ScreenTimeoutBottomSheet.showInstance(fragmentManager, prefId, this, false, appMode, getApplyQueryType(), isProfileDependent());
+			}
+		} else if (settings.TURN_SCREEN_ON_TIME_INT.getId().equals(prefId)) {
+			if (fragmentManager != null) {
+				WakeTimeBottomSheet.showInstance(fragmentManager, prefId, this, false, appMode, getApplyQueryType(), isProfileDependent());
 			}
 		} else {
 			super.onDisplayPreferenceDialog(preference);
@@ -68,6 +83,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment implements OnPref
 		turnScreenOnTime.setEnabled(!settings.USE_SYSTEM_SCREEN_TIMEOUT.getModeValue(getSelectedAppMode()));
 		turnScreenOnTime.setEntries(entries);
 		turnScreenOnTime.setEntryValues(entryValues);
+		turnScreenOnTime.setDescription(getString(R.string.turn_screen_on_wake_time_descr, getString(R.string.keep_screen_on)));
 		turnScreenOnTime.setIcon(getPersistentPrefIcon(R.drawable.ic_action_time_span));
 	}
 

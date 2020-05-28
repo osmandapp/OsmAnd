@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="screen_timeout_descr">If the \"%1$s\" option is enabled, the activity time will depend on it.</string>
+    <string name="keep_screen_off">Keep screen off</string>
+    <string name="keep_screen_on">Keep screen on</string>
+    <string name="turn_screen_on_wake_time_descr">Select the screen activity time after waking up, the screen will not turn off if \"%1$s\" is enabled.</string>
     <string name="turn_screen_on_proximity_sensor">Proximity sensor</string>
     <string name="turn_screen_on_power_button">Power button</string>
     <string name="turn_screen_on_power_button_descr">Press on the device power button to turn on screen with OsmAnd on the foreground.</string>
