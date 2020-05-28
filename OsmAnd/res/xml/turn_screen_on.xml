@@ -1,24 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-	android:title="@string/turn_screen_on">
+	android:title="@string/screen_control">
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="use_system_screen_timeout"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/system_screen_timeout" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="turn_screen_on"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/turn_screen_on" />
 
 	<Preference
 		android:key="turn_screen_on_info"
 		android:layout="@layout/preference_info"
 		android:persistent="false"
 		android:selectable="false"
-		android:title="@string/turn_screen_on_info" />
+		android:title="@string/turn_screen_on_descr" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="turn_screen_on_time_int"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/wake_time" />
 
+	<Preference
+		android:layout="@layout/divider_half_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="turn_screen_on_options_info"
+		android:layout="@layout/preference_info"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/turn_screen_on_options_descr" />
+
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="turn_screen_on_sensor"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_off"
-		android:summaryOn="@string/shared_string_on"
-		android:title="@string/turn_screen_on_sensor" />
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/turn_screen_on_proximity_sensor" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="turn_screen_on_navigation_instructions"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/turn_screen_on_navigation_instructions" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="turn_screen_on_power_button"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/turn_screen_on_power_button" />
 
 </PreferenceScreen>

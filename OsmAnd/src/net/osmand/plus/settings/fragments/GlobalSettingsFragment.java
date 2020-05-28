@@ -10,12 +10,12 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -36,7 +36,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		setupSendAnonymousDataPref();
 		setupDialogsAndNotificationsPref();
 		setupEnableProxyPref();
-		setupUseSystemScreenTimeout();
 	}
 
 	@Override
@@ -191,11 +190,5 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 	private void setupEnableProxyPref() {
 		SwitchPreferenceEx enableProxy = (SwitchPreferenceEx) findPreference(settings.ENABLE_PROXY.getId());
 		enableProxy.setIcon(getPersistentPrefIcon(R.drawable.ic_action_proxy));
-	}
-
-	private void setupUseSystemScreenTimeout() {
-		SwitchPreferenceEx useSystemScreenTimeout = (SwitchPreferenceEx) findPreference(settings.USE_SYSTEM_SCREEN_TIMEOUT.getId());
-		useSystemScreenTimeout.setTitle(app.getString(R.string.use_system_screen_timeout));
-		useSystemScreenTimeout.setDescription(app.getString(R.string.use_system_screen_timeout_promo));
 	}
 }
