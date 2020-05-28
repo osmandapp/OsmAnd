@@ -23,6 +23,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -181,9 +182,12 @@ public class CreateEditActionDialog extends DialogFragment
             item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
-                    showConfirmDeleteAnActionBottomSheet(
-                            getActivity(), CreateEditActionDialog.this,
-                            action, false);
+                    FragmentActivity activity = getActivity();
+                    if (activity != null) {
+                        showConfirmDeleteAnActionBottomSheet(
+                                activity, CreateEditActionDialog.this,
+                                action, false);
+                    }
                     return true;
                 }
             });

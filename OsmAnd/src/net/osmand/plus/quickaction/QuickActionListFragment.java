@@ -77,12 +77,12 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     private Toolbar toolbar;
     private View toolbarSwitchContainer;
     private ImageView navigationIcon;
-    private ImageView deleteIconInToolbar;
+    private View deleteIconContainer;
 
     private QuickActionAdapter adapter;
     private ItemTouchHelper touchHelper;
     private QuickActionRegistry quickActionRegistry;
-    private ArrayList<String> actionsToDelete = new ArrayList<>();
+    private ArrayList<Long> actionsToDelete = new ArrayList<>();
     private int screenType = REORDER_SCREEN_TYPE;
 
     private boolean fromDashboard;
@@ -93,7 +93,12 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             fromDashboard = savedInstanceState.getBoolean(FROM_DASHBOARD_KEY, false);
-            actionsToDelete = savedInstanceState.getStringArrayList(ACTIONS_TO_DELETE_KEY);
+            long[] array = savedInstanceState.getLongArray(ACTIONS_TO_DELETE_KEY);
+            if (array != null) {
+                for (long id : array) {
+                    actionsToDelete.add(id);
+                }
+            }
             screenType = savedInstanceState.getInt(SCREEN_TYPE_KEY, REORDER_SCREEN_TYPE);
         }
     }
@@ -105,7 +110,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         OsmandApplication app = requireMyApplication();
         nightMode = !app.getSettings().isLightContent();
 
-        View view = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.quick_action_list, container, false);
+        View view = UiUtilities.getInflater(getContext(), nightMode)
+                .inflate(R.layout.quick_action_list, container, false);
 
         rv = (RecyclerView) view.findViewById(R.id.recycler_view);
         fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
@@ -128,10 +134,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         btnSelectAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                actionsToDelete = new ArrayList<>();
+                actionsToDelete.clear();
                 for (QuickAction action : adapter.getQuickActions()) {
-                    String id = String.valueOf(action.id);
-                    actionsToDelete.add(id);
+                    actionsToDelete.add(action.id);
                 }
                 updateListItems();
                 updateToolbarTitle();
@@ -151,7 +156,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         navigationIcon = toolbar.findViewById(R.id.close_button);
-        deleteIconInToolbar = toolbar.findViewById(R.id.action_button);
+        deleteIconContainer = toolbar.findViewById(R.id.action_button);
         toolbarSwitchContainer = toolbar.findViewById(R.id.toolbar_switch_container);
         setUpToolbar();
 
@@ -211,7 +216,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment
             navigationIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    requireActivity().onBackPressed();
+                    FragmentActivity activity = getActivity();
+                    if (activity != null) {
+                        activity.onBackPressed();
+                    }
                 }
             });
         } else {
@@ -262,11 +270,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                             new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    actionsToDelete = new ArrayList<>();
+                                    actionsToDelete.clear();
                                     for (ListItem item : adapter.items) {
                                         if (item.type == ItemType.ACTION) {
                                             QuickAction action = (QuickAction) item.value;
-                                            actionsToDelete.add(String.valueOf(action.id));
+                                            actionsToDelete.add(action.id);
                                         }
                                     }
                                     showConfirmDeleteActionsBottomSheet(ma);
@@ -282,17 +290,17 @@ public class QuickActionListFragment extends BaseOsmAndFragment
             fab.setVisibility(View.VISIBLE);
             bottomPanel.setVisibility(View.GONE);
             toolbarSwitchContainer.setVisibility(View.VISIBLE);
-            deleteIconInToolbar.setVisibility(View.VISIBLE);
+            deleteIconContainer.setVisibility(View.VISIBLE);
         } else {
             fab.setVisibility(View.GONE);
             bottomPanel.setVisibility(View.VISIBLE);
             toolbarSwitchContainer.setVisibility(View.GONE);
-            deleteIconInToolbar.setVisibility(View.GONE);
+            deleteIconContainer.setVisibility(View.GONE);
         }
     }
 
     private void changeScreen() {
-        actionsToDelete = new ArrayList<>();
+        actionsToDelete.clear();
         screenType = screenType == REORDER_SCREEN_TYPE ?
                 DELETING_SCREEN_TYPE : REORDER_SCREEN_TYPE;
         updateToolbarTitle();
@@ -303,7 +311,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
     private void updateToolbarActionButton() {
         OsmandApplication app = requireMyApplication();
-        ImageView deletingModeIcon = toolbar.findViewById(R.id.action_button);
+        View deleteIconContainer = toolbar.findViewById(R.id.action_button);
+        ImageView deletingModeIcon = toolbar.findViewById(R.id.action_button_icon);
         int activeButtonsColorResId = nightMode ?
                 R.color.active_buttons_and_links_text_dark :
                 R.color.active_buttons_and_links_text_light;
@@ -314,13 +323,13 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         Drawable deleteIcon = getPaintedContentIcon(
                 R.drawable.ic_action_delete_dark, deleteIconColor);
         deletingModeIcon.setImageDrawable(deleteIcon);
-        deletingModeIcon.setOnClickListener(new View.OnClickListener() {
+        deleteIconContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeScreen();
             }
         });
-        deletingModeIcon.setEnabled(hasActiveQuickActions);
+        deleteIconContainer.setEnabled(hasActiveQuickActions);
     }
 
     private void updateToolbarTitle() {
@@ -331,7 +340,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment
             } else {
                 int selectedCount = actionsToDelete != null ? actionsToDelete.size() : 0;
                 String title = String.format(
-                        getString(R.string.shared_string_selected_n_with_colon), selectedCount);
+                        getString(R.string.ltr_or_rtl_combine_via_colon),
+                        getString(R.string.shared_string_selected),
+                        String.valueOf(selectedCount));
                 tvTitle.setText(title);
             }
         }
@@ -394,7 +405,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(FROM_DASHBOARD_KEY, fromDashboard);
-        outState.putStringArrayList(ACTIONS_TO_DELETE_KEY, actionsToDelete);
+        long[] array = new long[actionsToDelete.size()];
+        for (int i = 0; i < actionsToDelete.size(); i++) {
+            array[i] = actionsToDelete.get(i);
+        }
+        outState.putLongArray(ACTIONS_TO_DELETE_KEY, array);
         outState.putInt(SCREEN_TYPE_KEY, screenType);
     }
 
@@ -420,7 +435,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     public void onConfirmButtonClick() {
         if (adapter != null && actionsToDelete != null) {
             adapter.deleteItems(actionsToDelete);
-            actionsToDelete = new ArrayList<>();
+            actionsToDelete.clear();
             if (screenType == DELETING_SCREEN_TYPE) {
                 changeScreen();
             } else {
@@ -509,8 +524,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                     h.deleteBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            actionsToDelete = new ArrayList<>();
-                            actionsToDelete.add(String.valueOf(action.id));
+                            actionsToDelete.clear();
+                            actionsToDelete.add(action.id);
                             showConfirmDeleteAnActionBottomSheet(getActivity(),
                                     QuickActionListFragment.this, action, nightMode);
                         }
@@ -534,20 +549,17 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                     h.itemContainer.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String id = String.valueOf(action.id);
-                            boolean isChecked = actionsToDelete.contains(id);
+                            boolean isChecked = actionsToDelete.contains(action.id);
                             h.checkbox.setChecked(!isChecked);
                             if (!isChecked) {
-                                actionsToDelete.add(id);
+                                actionsToDelete.add(action.id);
                             } else {
-                                actionsToDelete.remove(id);
+                                actionsToDelete.remove(action.id);
                             }
                             updateToolbarTitle();
                         }
                     });
-
-                    String id = String.valueOf(action.id);
-                    h.checkbox.setChecked(actionsToDelete.contains(id));
+                    h.checkbox.setChecked(actionsToDelete.contains(action.id));
                 }
 
                 List<QuickAction> actions = getQuickActions();
@@ -587,9 +599,12 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 if (buttonInfo.iconRes == R.drawable.ic_action_delete_dark) {
                     boolean hasActiveActions = getQuickActions().size() > 0;
                     h.container.setEnabled(hasActiveActions);
-                    int deleteAllIconColor = ContextCompat.getColor(app, R.color.color_osm_edit_delete);
-                    iconColor = hasActiveActions ? deleteAllIconColor : UiUtilities.getColorWithAlpha(deleteAllIconColor, 0.25f);
-                    titleColor = hasActiveActions ? titleColor : UiUtilities.getColorWithAlpha(titleColor, 0.25f);
+                    int deleteAllIconColor = ContextCompat.getColor(app,
+                            R.color.color_osm_edit_delete);
+                    iconColor = hasActiveActions ? deleteAllIconColor :
+                            UiUtilities.getColorWithAlpha(deleteAllIconColor, 0.25f);
+                    titleColor = hasActiveActions ? titleColor :
+                            UiUtilities.getColorWithAlpha(titleColor, 0.25f);
                     h.divider.setVisibility(View.GONE);
                 } else {
                     h.container.setEnabled(true);
@@ -618,16 +633,16 @@ public class QuickActionListFragment extends BaseOsmAndFragment
             return item.type.ordinal();
         }
 
-        public void deleteItems(List<String> actionsToDelete) {
+        public void deleteItems(List<Long> actionsToDelete) {
             if (actionsToDelete != null && actionsToDelete.size() > 0) {
                 Iterator<ListItem> it = items.iterator();
                 while (it.hasNext()) {
                     ListItem item = it.next();
                     if (item.type == ItemType.ACTION) {
-                        for (String actionId : actionsToDelete) {
+                        for (Long actionId : actionsToDelete) {
                             QuickAction qa = (QuickAction) item.value;
                             if (actionId != null) {
-                                if (qa.getId() == Long.parseLong(actionId)) {
+                                if (actionId.equals(qa.getId())) {
                                     it.remove();
                                     break;
                                 }
@@ -717,9 +732,12 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 checkbox = (CompoundButton) itemView.findViewById(R.id.checkbox);
                 itemContainer = itemView.findViewById(R.id.searchListItemLayout);
 
-                deleteBtn.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_remove, R.color.color_osm_edit_delete));
-                handleView.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_item_move));
-                UiUtilities.setupCompoundButton(checkbox, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
+                deleteBtn.setImageDrawable(app.getUIUtilities()
+                        .getIcon(R.drawable.ic_action_remove, R.color.color_osm_edit_delete));
+                handleView.setImageDrawable(app.getUIUtilities()
+                        .getThemedIcon(R.drawable.ic_action_item_move));
+                UiUtilities.setupCompoundButton(checkbox, nightMode,
+                        UiUtilities.CompoundButtonType.GLOBAL);
             }
         }
 
