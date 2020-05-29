@@ -1968,7 +1968,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void changeKeyguardFlags() {
-		boolean enabled = settings.TURN_SCREEN_ON_ENABLED.get() && settings.TURN_SCREEN_ON_TIME_INT.get() > 0;
+		boolean turnScreenOnEnabled = getRoutingHelper().isFollowingMode();
+		int turnScreenOnTime = settings.TURN_SCREEN_ON_TIME_INT.get();
+		boolean enabled = turnScreenOnEnabled && (turnScreenOnTime > 0 || turnScreenOnTime == -1);
 		boolean keepScreenOn = !settings.USE_SYSTEM_SCREEN_TIMEOUT.get();
 		changeKeyguardFlags(enabled, keepScreenOn);
 	}

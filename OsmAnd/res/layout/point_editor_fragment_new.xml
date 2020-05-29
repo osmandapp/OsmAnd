@@ -21,8 +21,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height"
 			android:background="?attr/card_and_list_background_basic"
-			android:minHeight="@dimen/toolbar_height"
 			osmand:subtitleTextColor="?android:textColorPrimary"
+			app:contentInsetStartWithNavigation="@dimen/toolbar_inset_start_with_navigation"
 			osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar"
 			osmand:titleTextColor="?android:textColorPrimary">
 
@@ -75,7 +75,7 @@
 							android:layout_height="wrap_content"
 							android:layout_weight="1"
 							android:hint="@string/shared_string_name"
-							app:boxBackgroundColor="#4DCCCCCC">
+							app:boxBackgroundColor="@color/input_layout_bg_color">
 
 							<com.google.android.material.textfield.TextInputEditText
 								android:id="@+id/name_edit"
@@ -128,7 +128,7 @@
 						android:layout_marginRight="@dimen/content_padding"
 						android:layout_weight="1"
 						android:hint="@string/shared_string_description"
-						app:boxBackgroundColor="#4DCCCCCC">
+						app:boxBackgroundColor="@color/input_layout_bg_color">
 
 						<com.google.android.material.textfield.TextInputEditText
 							android:id="@+id/description_edit"

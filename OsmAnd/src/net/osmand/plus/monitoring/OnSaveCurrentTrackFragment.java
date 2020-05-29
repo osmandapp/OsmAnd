@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
@@ -32,7 +33,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -43,7 +43,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.download.ui.LocalIndexesFragment.ILLEGAL_FILE_NAME_CHARACTERS;
+import static net.osmand.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
 public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 
@@ -185,7 +185,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
 			return null;
 		}
-		return LocalIndexesFragment.renameGpxFile(app, savedFile, newGpxName + IndexConstants.GPX_FILE_EXT, true, null);
+		return FileUtils.renameGpxFile(app, savedFile, newGpxName + IndexConstants.GPX_FILE_EXT, true, null);
 	}
 
 	private void showOnMap(File f, boolean animated) {

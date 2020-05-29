@@ -11,7 +11,39 @@
 	Thx - Hardy
 
 -->
-    <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact support team to investigate further</string>
+    <string name="tiles_storage_descr">Choose how downloaded tiles will be stored.</string>
+    <string name="expire_time_descr">Expiration time in minutes. Cached tiles will be reloaded after specified time.
+        Leave this field empty to never refresh tiles for this source.
+        \n\nOne day is 1440 minutes.\nOne week is 10 080 minutes.\nOne month is 43 829 minutes.</string>
+    <string name="map_source_zoom_levels_descr">These parameters will affect the display when used as map or overlay/underlay.
+        \n\n%1$s: The map will be limited to the selected zooms. \n\n%2$s: Zoom levels at which
+        the original tiles will be visible. Upscaling or downscaling will occur outside these values.</string>
+    <string name="map_source_zoom_levels">Set the minimum and maximum zoom level at which the online map will be displayed or loaded.</string>
+    <string name="storage_format">Storage format</string>
+    <string name="mercator_projection">Mercator Projection</string>
+    <string name="expire_time">Expiry time</string>
+    <string name="edit_online_source">Edit online source</string>
+    <string name="online_map_url_helper_text">Enter or paste the URL for the online source.</string>
+    <string name="online_map_name_helper_text">Provide a name for the online map source.</string>
+    <string name="sqlite_db_file">SQLiteDB file</string>
+    <string name="one_image_per_tile">One image file per tile</string>
+    <string name="pseudo_mercator_projection">Pseudo-Mercator projection</string>
+    <string name="screen_timeout_descr">If the \"%1$s\" option is enabled, the activity time will depend on it.</string>
+    <string name="keep_screen_off">Keep screen off</string>
+    <string name="keep_screen_on">Keep screen on</string>
+    <string name="turn_screen_on_wake_time_descr">Select the screen activity time after waking up, the screen will not turn off if \"%1$s\" is enabled.</string>
+    <string name="turn_screen_on_proximity_sensor">Proximity sensor</string>
+    <string name="turn_screen_on_power_button">Power button</string>
+    <string name="turn_screen_on_power_button_descr">Press on the device power button to turn on screen with OsmAnd on the foreground.</string>
+    <string name="turn_screen_on_navigation_instructions">Navigation instructions</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Screen will turn on automatically a few seconds before navigation instructions for a specified time in “Wake time” option.\n\nWork only while navigation.</string>
+    <string name="turn_screen_on_descr">Those options will work, only if OsmAnd will be on the foreground when the device will be locked.</string>
+    <string name="turn_screen_on_options_descr">Use these options to wake up screen with OsmAnd on the foreground.</string>
+    <string name="system_screen_timeout">Screen timeout</string>
+    <string name="system_screen_timeout_descr">Enable so the screen turns off after a certain period of inactivity, the time specified in the system settings of your device will be used.</string>
+    <string name="screen_control">Screen control</string>
+    <string name="shared_string_always">Always</string>
+    <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact the support team to investigate further.</string>
     <string name="unsupported_type_error">Unsupported type</string>
     <string name="index_item_world_basemap_detailed">World overview map (detailed)</string>
     <string name="profiles_for_action_not_found">Could not find any such profiles.</string>
@@ -229,7 +261,7 @@
     <string name="monitoring_min_speed_descr_side_effect">Side effect: Your track will be missing all sections where the minimum speed criterion was not met (e.g. where you push your bike up a steep hill). Also, there will be no information about periods at rest, like breaks. This has effects on any analysis or post-processing, like when trying to determine the total length of your trip, time in motion, or your average speed.</string>
     <string name="monitoring_min_speed_descr_recommendation">Recommendation: Try using the motion detection via the "logging minimum displacement" filter (B) first, it may produce better results, and you will lose less data. If your tracks remain noisy at low speeds, try non-zero values here. Please note that some measurements may not report any speed value at all (some network-based methods), in which case you would not record anything.</string>
     <string name="monitoring_min_speed_descr_remark">Remark: "speed > 0" check: Most GPS chipsets report a speed value only if the algorithm determines you are in motion, and none if you are not. Hence using the "> 0" setting in this filter in a sense uses the motion detection of the GPS chipset. But even if not filtered here at recording time, we still use this feature in our GPX analysis to determine the "Distance corrected", i.e. the value displayed in that field is the "distance recorded while in motion".</string>
-    <string name="monitoring_min_accuracy_descr">This will record only points measured with a minimum "accuracy" indication (in meters/feet, as reported by Android for your chipset). Accuracy refers to the scatter of repeated measurements, and is not directly related to precision, which defines how close your measurements are to your "true" position.</string>
+    <string name="monitoring_min_accuracy_descr">This will record only points measured with a minimum "accuracy" indication (in meters/feet, as reported by Android for your chipset). Accuracy is the proximity of measurements to the true position, and is not directly related to precision, which is the scatter of repeated measurements.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Side effect: As a result of filtering by accuracy, points may be entirely missing for e.g. below bridges, under trees, between high buildings, or with certain weather conditions.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recommendation: It is hard to predict what will be recorded and what not, it may be best to turn this filter off.</string>
     <string name="monitoring_min_accuracy_descr_remark">Remark: If GPS had been off immediately before a recording, the first point measured may have a decreased accuracy,so in our code we may want to wait a second or so before recording a point (or record the best of 3 consecutive points, etc.), but this is not yet implemented.</string>

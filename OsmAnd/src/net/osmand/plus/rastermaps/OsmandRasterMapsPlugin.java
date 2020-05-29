@@ -6,23 +6,17 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
@@ -38,10 +32,9 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
-import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadTilesDialog;
+import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
@@ -51,7 +44,6 @@ import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +53,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_U
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
@@ -483,133 +474,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static void defineNewEditLayer(final Activity activity, final ResultMatcher<TileSourceTemplate> resultMatcher, final String editedLayerName) {
-		final OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final OsmandSettings settings = app.getSettings();
-		final Map<String, String> entriesMap = settings.getTileSourceEntries(true);
-		final SQLiteTileSource[] sqLiteTileSource = new SQLiteTileSource[1];
-		boolean nightMode = isNightMode(activity, app);
-		final int dp8 = AndroidUtils.dpToPx(app, 8f);
-		int textColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
-		TileSourceTemplate ts = new TileSourceTemplate("NewMapnik", "http://mapnik.osmand.net/{0}/{1}/{2}.png",
-				"png", 17, 5, 256, 16, 32000);
-		final TileSourceTemplate[] result = new TileSourceTemplate[]{ts};
-		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(activity, getThemeRes(activity, app)));
-		View view = UiUtilities.getInflater(activity, isNightMode(activity, app)).inflate(R.layout.editing_tile_source, null);
-		final EditText name = (EditText) view.findViewById(R.id.Name);
-		final Spinner existing = (Spinner) view.findViewById(R.id.TileSourceSpinner);
-		final TextView existingHint = (TextView) view.findViewById(R.id.TileSourceHint);
-		final EditText urlToLoad = (EditText) view.findViewById(R.id.URLToLoad);
-		final EditText minZoom = (EditText) view.findViewById(R.id.MinZoom);
-		final EditText maxZoom = (EditText) view.findViewById(R.id.MaxZoom);
-		final EditText expire = (EditText) view.findViewById(R.id.ExpirationTime);
-		final AppCompatCheckBox elliptic = (AppCompatCheckBox) view.findViewById(R.id.EllipticMercator);
-		elliptic.setTextColor(textColorPrimary);
-		elliptic.setPadding(dp8, 0, 0, 0);
-		UiUtilities.setupCompoundButton(elliptic, nightMode, PROFILE_DEPENDENT);
-		updateTileSourceEditView(ts, name, urlToLoad, minZoom, maxZoom, expire, elliptic);
-
-		final ArrayList<String> templates = new ArrayList<>(entriesMap.keySet());
-		templates.add(0, "");
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(),
-				android.R.layout.simple_spinner_item,
-				templates
-		);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		existing.setAdapter(adapter);
-		TileSourceTemplate template;
-		if (editedLayerName != null) {
-			name.setFocusable(false);
-			name.setFocusableInTouchMode(false);
-			if (!editedLayerName.endsWith(IndexConstants.SQLITE_EXT)) {
-				File f = ((OsmandApplication) activity.getApplication()).getAppPath(
-						IndexConstants.TILES_INDEX_DIR + editedLayerName);
-				template = TileSourceManager.createTileSourceTemplate(f);
-			} else {
-				List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
-				File tPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
-				File dir = new File(tPath, editedLayerName);
-				sqLiteTileSource[0] = new SQLiteTileSource(app, dir, knownTemplates);
-				sqLiteTileSource[0].couldBeDownloadedFromInternet();
-				template = new TileSourceManager.TileSourceTemplate(sqLiteTileSource[0].getName(),
-						sqLiteTileSource[0].getUrlTemplate(), "png", sqLiteTileSource[0].getMaximumZoomSupported(),
-						sqLiteTileSource[0].getMinimumZoomSupported(), sqLiteTileSource[0].getTileSize(),
-						sqLiteTileSource[0].getBitDensity(), 32000);
-				template.setExpirationTimeMinutes(sqLiteTileSource[0].getExpirationTimeMinutes());
-				template.setEllipticYTile(sqLiteTileSource[0].isEllipticYTile());
-			}
-			if (template != null) {
-				result[0] = template.copy();
-				updateTileSourceEditView(result[0], name, urlToLoad, minZoom, maxZoom, expire, elliptic);
-			}
-			existingHint.setVisibility(View.GONE);
-			existing.setVisibility(View.GONE);
-		}
-		existing.setSelection(0);
-		existing.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				if (position > 0) {
-					File f = ((OsmandApplication) activity.getApplication()).getAppPath(IndexConstants.TILES_INDEX_DIR + templates.get(position));
-					TileSourceTemplate template = TileSourceManager.createTileSourceTemplate(f);
-					if (template != null) {
-						result[0] = template.copy();
-						updateTileSourceEditView(result[0], name, urlToLoad, minZoom, maxZoom, expire, elliptic);
-					}
-				}
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-			}
-		});
-
-		bld.setView(view);
-		bld.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				TileSourceTemplate r = result[0];
-				try {
-					r.setName(name.getText().toString());
-					r.setExpirationTimeMinutes(expire.getText().length() == 0 ? -1 :
-							Integer.parseInt(expire.getText().toString()));
-					r.setMinZoom(Integer.parseInt(minZoom.getText().toString()));
-					r.setMaxZoom(Integer.parseInt(maxZoom.getText().toString()));
-					r.setEllipticYTile(elliptic.isChecked());
-					r.setUrlToLoad(urlToLoad.getText().toString().equals("") ? null : urlToLoad.getText().toString().replace("{$x}", "{1}")
-							.replace("{$y}", "{2}").replace("{$z}", "{0}"));
-					if (sqLiteTileSource[0] != null) {
-						sqLiteTileSource[0].updateFromTileSourceTemplate(r);
-					} else {
-						if (r.getName().length() > 0) {
-							if (settings.installTileSource(r)) {
-								Toast.makeText(activity, activity.getString(R.string.edit_tilesource_successfully, r.getName()),
-										Toast.LENGTH_SHORT).show();
-								resultMatcher.publish(r);
-							}
-						}
-					}
-				} catch (RuntimeException e) {
-					Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
-		bld.setNegativeButton(R.string.shared_string_cancel, null);
-		bld.show();
-	}
-
-	private static void updateTileSourceEditView(TileSourceTemplate ts, EditText name, final EditText urlToLoad, final EditText minZoom,
-												 final EditText maxZoom, EditText expire, final CheckBox elliptic) {
-		minZoom.setText(String.valueOf(ts.getMinimumZoomSupported()));
-		maxZoom.setText(String.valueOf(ts.getMaximumZoomSupported()));
-		name.setText(ts.getName());
-		expire.setText(ts.getExpirationTimeMinutes() < 0 ? "" : ts.getExpirationTimeMinutes() + "");
-		urlToLoad.setText(ts.getUrlTemplate() == null ? "" :
-				ts.getUrlTemplate().replace("{$x}", "{1}").replace("{$y}", "{2}").replace("{$z}", "{0}"));
-		elliptic.setChecked(ts.isEllipticYTile());
+	public static void defineNewEditLayer(@NonNull FragmentManager fm, @Nullable Fragment targetFragment, @Nullable String editedLayerName) {
+		EditMapSourceDialogFragment.showInstance(fm, targetFragment, editedLayerName);
 	}
 
 	public MapTileLayer getUnderlayLayer() {

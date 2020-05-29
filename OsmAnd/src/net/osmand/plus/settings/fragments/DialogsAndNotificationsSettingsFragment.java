@@ -1,8 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.view.LayoutInflater;
-import android.view.View;
-
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
@@ -11,12 +8,6 @@ import net.osmand.plus.R;
 public class DialogsAndNotificationsSettingsFragment extends BaseSettingsFragment {
 
 	public static final String TAG = DialogsAndNotificationsSettingsFragment.class.getSimpleName();
-
-	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
-		super.createToolbar(inflater, view);
-		view.findViewById(R.id.toolbar_switch_container).setVisibility(View.GONE);
-	}
 
 	@Override
 	protected void setupPreferences() {

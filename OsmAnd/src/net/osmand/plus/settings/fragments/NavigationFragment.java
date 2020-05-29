@@ -57,12 +57,10 @@ public class NavigationFragment extends BaseSettingsFragment {
 
 		Preference routeParameters = findPreference("route_parameters");
 		SwitchPreferenceCompat showRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.SHOW_ROUTING_ALARMS.getId());
-		SwitchPreferenceCompat turnScreenOn = (SwitchPreferenceCompat) findPreference(settings.TURN_SCREEN_ON_ENABLED.getId());
 		SwitchPreferenceEx animateMyLocation = (SwitchPreferenceEx) findPreference(settings.ANIMATE_MY_LOCATION.getId());
 
 		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
 		showRoutingAlarms.setIcon(getPersistentPrefIcon(R.drawable.ic_action_alert));
-		turnScreenOn.setIcon(getPersistentPrefIcon(R.drawable.ic_action_turn_screen_on));
 
 		setupSpeakRoutingAlarmsPref();
 		setupVehicleParametersPref();
