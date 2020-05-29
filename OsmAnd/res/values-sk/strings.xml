@@ -3724,4 +3724,24 @@
     <string name="index_item_world_basemap_detailed">Prehľadová mapa sveta (detailná)</string>
     <string name="unsupported_type_error">Nepodporovaný typ</string>
     <string name="shared_string_always">Vždy</string>
+    <string name="turn_screen_on_descr">Tieto možnosti budú fungovať, iba ak OsmAnd bude v popredí, keď bude zariadenie zamknuté.</string>
+    <string name="screen_timeout_descr">Ak je zapnutá možnosť \"%1$s\", čas aktivity závisí od nej.</string>
+    <string name="one_image_per_tile">Jeden obrazový súbor na dlaždicu</string>
+    <string name="system_screen_timeout">Časový limit obrazovky</string>
+    <string name="turn_screen_on_options_descr">Pomocou týchto možností sa prebudí obrazovka s OsmAnd v popredí.</string>
+    <string name="turn_screen_on_navigation_instructions">Navigačné pokyny</string>
+    <string name="turn_screen_on_power_button_descr">Stlačením tlačidla napájania zariadenia zapnite obrazovku s OsmAnd v popredí.</string>
+    <string name="turn_screen_on_power_button">Tlačidlo napájania</string>
+    <string name="turn_screen_on_proximity_sensor">Snímač priblíženia</string>
+    <string name="turn_screen_on_wake_time_descr">Vyberte čas aktivity obrazovky po prebudení, obrazovka sa nevypne, ak je zapnutá možnosť \"%1$s\".</string>
+    <string name="keep_screen_on">Nechať obrazovku zapnutú</string>
+    <string name="keep_screen_off">Nechať obrazovku vypnutú</string>
+    <string name="sqlite_db_file">Súbor SQLiteDB</string>
+    <string name="online_map_name_helper_text">Zadajte názov zdroja online mapy.</string>
+    <string name="online_map_url_helper_text">Zadajte alebo prilepte URL adresu online zdroja.</string>
+    <string name="edit_online_source">Upraviť online zdroj</string>
+    <string name="expire_time">Čas vypršania platnosti</string>
+    <string name="storage_format">Formát úložiska</string>
+    <string name="map_source_zoom_levels">Nastavte minimálnu a maximálnu úroveň priblíženia, pri ktorej sa zobrazí alebo načíta online mapa.</string>
+    <string name="tiles_storage_descr">Vyberte spôsob uloženia prevzatých dlaždíc.</string>
 </resources>
