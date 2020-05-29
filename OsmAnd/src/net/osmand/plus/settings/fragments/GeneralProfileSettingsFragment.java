@@ -46,6 +46,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		setupRotateMapPref();
 		setupCenterPositionOnMapPref();
 		setupMapScreenOrientationPref();
+		setupTurnScreenOnPref();
 
 		setupDrivingRegionPref();
 		setupUnitsOfLengthPref();
@@ -135,6 +136,11 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		mapScreenOrientation.setEntries(new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
 		mapScreenOrientation.setEntryValues(new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 		mapScreenOrientation.setIcon(getMapScreenOrientationIcon());
+	}
+
+	private void setupTurnScreenOnPref() {
+		Preference screenControl = findPreference("screen_control");
+		screenControl.setIcon(getContentIcon(R.drawable.ic_action_turn_screen_on));
 	}
 
 	private Drawable getMapScreenOrientationIcon() {

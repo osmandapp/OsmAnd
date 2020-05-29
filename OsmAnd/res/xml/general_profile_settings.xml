@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:title="@string/general_settings_2">
 
 	<PreferenceCategory
@@ -29,6 +30,13 @@
 		android:key="map_screen_orientation"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/map_screen_orientation" />
+
+	<Preference
+		android:key="screen_control"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/screen_control"
+		app:fragment="net.osmand.plus.settings.fragments.TurnScreenOnFragment"
+		tools:icon="@drawable/ic_action_turn_screen_on" />
 
 	<Preference
 		android:layout="@layout/simple_divider_item"
