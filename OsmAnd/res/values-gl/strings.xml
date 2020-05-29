@@ -3480,7 +3480,7 @@ Lon %2$s</string>
     <string name="monitoring_min_speed_descr_side_effect">Efecto secundario: No teu traxecto fallarán todos os treitos nos que non se cumprira o criterio de velocidade mínima (por exemplo, cando empurres a túa bicicleta por unha costa empinada). Ademais, non haberá información sobre os períodos de asueto, como as pausas. Isto ten efectos en calquera análise ou posprocesamento, como cando se trata de determinar a dura total da túa viaxe, o tempo en movemento ou a túa velocidade media.</string>
     <string name="monitoring_min_speed_descr_recommendation">Recomendación: Proba primeiro a empregar a detección de movemento mediante o filtro de desprazamento mínimo de rexistro (B), pode producir mellores resultados e perderás menos datos. Se as pistas seguen a ser ruidosas a baixas velocidades, proba aquí con valores distintos de cero. Ten en conta que algunhas medicións poden non informar ningún valor de velocidade (algúns métodos baseados na rede), nese caso no se rexistraría ren.</string>
     <string name="monitoring_min_speed_descr_remark">Observación: comprobacións de velocidade &gt; 0: A meirande parte dos chipsets de GPS informan un valor de velocidade só se o algoritmo determina que está en movemento. Polo tanto, o uso do axuste &gt; 0 neste filtro, en certo senso emprega a detección de movemento do conxunto de chips do GPS. Pero aínda se non se filtra aquí no intre da gravación, seguimos a empregar esta función no noso análise GPX para determinar a distancia corrixida, é dicir, o valor que se amosa nese campo é a distancia gravada en movemento.</string>
-    <string name="monitoring_min_accuracy_descr">Isto rexistrará só os puntos medidos cunha indicación de precisión mínima (en metros ou pés, segundo o informado por Android para o teu conxunto de chips). A precisión refírese a canto de preto están as túas medicións da localización real, e non está directamente relacionada coa precisión, que é a dispersión das medicións repetidas.</string>
+    <string name="monitoring_min_accuracy_descr">Isto registrará só os puntos medidos cunha indicación de precisión mínima (en metros/pés, segundo o informado polo Android para o teu conxunto de chips). A precisión é a proximidade das medicións á posición real, e non está directamente relacionada coa precisión, que é a dispersión de medicións repetidas.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Efecto secundario: Como resultado da filtraxe por precisión, poden fallar puntos por exemplo embaixo de pontes, baixo árbores, entre edificios altos ou con certas condicións climáticas.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recomendación: É difícil predicir o que se gravará e o que non, pode ser mellor apagar este filtro.</string>
     <string name="monitoring_min_accuracy_descr_remark">Observación: Se o GPS houbese apagado de xeito inmediato antes dunha gravación, o primeiro punto medido podería ter unha precisión disminuída, polo que no noso código pode que queiramos agardar un segundo máis ou menos antes de gravar un punto (ou gravar o mellor de 3 puntos consecutivos, etc.), pero isto aínda non se implementou.</string>
@@ -3748,5 +3748,43 @@ Lon %2$s</string>
     <string name="profiles_for_action_not_found">Non foi posíbel atopar ningún destes perfís.</string>
     <string name="index_item_world_basemap_detailed">Mapa xeral do mundo (detallado)</string>
     <string name="unsupported_type_error">Tipo non admitido</string>
-    <string name="gpx_parse_error">O GPX do OsmAnd non está ben formado, por favor, contacta co equipo de soporte para pescudar máis</string>
+    <string name="gpx_parse_error">O GPX do OsmAnd non está ben formado, por favor, contacta co equipo de soporte para pescudar máis.</string>
+    <string name="screen_control">Control da pantalla</string>
+    <string name="system_screen_timeout">Tempo de espera da pantalla</string>
+    <string name="turn_screen_on_descr">Esas opcións funcionarán só se o OsmAnd estea en primeiro plano cando o dispositivo sexa bloqueado.</string>
+    <string name="turn_screen_on_navigation_instructions">Instrucións de navegación</string>
+    <string name="turn_screen_on_power_button">Botón de acendido</string>
+    <string name="turn_screen_on_wake_time_descr">Escolle o tempo de actividade da pantalla após acenderse, a pantalla non se apagará se \"%1$s\" está activado.</string>
+    <string name="keep_screen_off">Manter a pantalla apagada</string>
+    <string name="pseudo_mercator_projection">Proxección pseudo-Mercator</string>
+    <string name="sqlite_db_file">Ficheiro SQLiteDB</string>
+    <string name="shared_string_always">Sempre</string>
+    <string name="system_screen_timeout_descr">Actívao para que a pantalla sexa apagada após un certo período de inactividade, empregarase o tempo especificado nos axustes do sistema do teu dispositivo.</string>
+    <string name="turn_screen_on_options_descr">Emprega estas opcións para activar a pantalla co OsmAnd no primeiro plano.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">A pantalla acenderase de xeito automático uns segundos antes das instrucións de navegación durante un tempo específico na opción \"Tempo de activación\".
+\n
+\n Traballa só mentres navegas.</string>
+    <string name="turn_screen_on_power_button_descr">Preme o botón de acendido do dispositivo para acender a pantalla co OsmAnd no primeiro plano.</string>
+    <string name="turn_screen_on_proximity_sensor">Sensor de proximidade</string>
+    <string name="keep_screen_on">Manter a pantalla acendida</string>
+    <string name="screen_timeout_descr">Se a opción \"%1$s\" está activada, o tempo de actividade dependerá diso.</string>
+    <string name="one_image_per_tile">Un ficheiro de imaxe por tesela</string>
+    <string name="online_map_name_helper_text">Fornece un nome para a fonte do mapa en liña.</string>
+    <string name="online_map_url_helper_text">Insire ou pega a URL da fonte en liña.</string>
+    <string name="edit_online_source">Editar fonte en liña</string>
+    <string name="expire_time">Tempo de caducidade</string>
+    <string name="mercator_projection">Proxección do Mercator</string>
+    <string name="storage_format">Formato de almacenamento</string>
+    <string name="map_source_zoom_levels">Estabelece o nivel de achegamento mínimo e máximo no que se amosará ou cargará o mapa en liña.</string>
+    <string name="map_source_zoom_levels_descr">Estes parámetros afectarán á pantalla cando sexan empregados como mapa normal ou mapa sobreposto/subcapa.
+\n
+\n%1$s: O mapa estará limitado ós achegamentos escollidos.
+\n
+\n%2$s: Niveis de achegamento nos que as teselas orixinais serán visíbeis. O aumento o a reducción de escala ocurrirán fóra destes valores.</string>
+    <string name="expire_time_descr">Tempo de caducidade en minutos. As teselas na caché volveranse a cargar após o tempo especificado. Deixa este campo baleiro para nunca actualizar as teselas desta fonte.
+\n
+\n Un día son 1440 minutos.
+\n Unha semana son 10080 minutos.
+\n Un mes son 43829 minutos.</string>
+    <string name="tiles_storage_descr">Escolle de que xeito serán almacenadas as teselas baixadas.</string>
 </resources>
