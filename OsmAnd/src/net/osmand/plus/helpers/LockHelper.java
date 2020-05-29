@@ -33,6 +33,8 @@ public class LockHelper implements SensorEventListener {
 	private OsmandApplication app;
 	private CommonPreference<Integer> turnScreenOnTime;
 	private CommonPreference<Boolean> turnScreenOnSensor;
+	private CommonPreference<Boolean> useSystemScreenTimeout;
+	private CommonPreference<Boolean> turnScreenOnPowerButton;
 	private CommonPreference<Boolean> turnScreenOnNavigationInstructions;
 
 	@Nullable
@@ -53,6 +55,8 @@ public class LockHelper implements SensorEventListener {
 		OsmandSettings settings = app.getSettings();
 		turnScreenOnTime = settings.TURN_SCREEN_ON_TIME_INT;
 		turnScreenOnSensor = settings.TURN_SCREEN_ON_SENSOR;
+		useSystemScreenTimeout = settings.USE_SYSTEM_SCREEN_TIMEOUT;
+		turnScreenOnPowerButton = settings.TURN_SCREEN_ON_POWER_BUTTON;
 		turnScreenOnNavigationInstructions = settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
 
 		lockRunnable = new Runnable() {
@@ -75,6 +79,8 @@ public class LockHelper implements SensorEventListener {
 				OsmandSettings settings = app.getSettings();
 				turnScreenOnTime = settings.TURN_SCREEN_ON_TIME_INT;
 				turnScreenOnSensor = settings.TURN_SCREEN_ON_SENSOR;
+				useSystemScreenTimeout = settings.USE_SYSTEM_SCREEN_TIMEOUT;
+				turnScreenOnPowerButton = settings.TURN_SCREEN_ON_POWER_BUTTON;
 				turnScreenOnNavigationInstructions = settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
 			}
 		};
@@ -107,13 +113,11 @@ public class LockHelper implements SensorEventListener {
 	private void lock() {
 		releaseWakeLocks();
 		int unlockTime = turnScreenOnTime.get();
-		if (lockUIAdapter != null && isFollowingMode() && unlockTime != -1) {
-			lockUIAdapter.lock();
+		if (lockUIAdapter != null) {
+			if (!(useSystemScreenTimeout.get() && turnScreenOnPowerButton.get()) && unlockTime != 0) {
+				lockUIAdapter.lock();
+			}
 		}
-	}
-
-	private boolean isFollowingMode() {
-		return app.getRoutingHelper().isFollowingMode();
 	}
 
 	private void timedUnlock(final long millis) {
@@ -135,10 +139,10 @@ public class LockHelper implements SensorEventListener {
 
 	private void unlockEvent() {
 		int unlockTime = turnScreenOnTime.get();
-		if (unlockTime > 0) {
+		if (unlockTime > 0 && !useSystemScreenTimeout.get()) {
 			timedUnlock(unlockTime * 1000L);
-		} else if (unlockTime == -1) {
-			timedUnlock(-1);
+		} else {
+			timedUnlock(0);
 		}
 	}
 
@@ -156,14 +160,6 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	private void switchSensorOn() {
-		switchSensor(true);
-	}
-
-	private void switchSensorOff() {
-		switchSensor(false);
-	}
-
 	private void switchSensor(boolean on) {
 		SensorManager sensorManager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
 		if (sensorManager != null) {
@@ -176,23 +172,18 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	private boolean isSensorEnabled() {
-		return turnScreenOnSensor.get() && isFollowingMode();
-	}
-
 	public void onStart(@NonNull Activity activity) {
-		switchSensorOff();
+		switchSensor(false);
 	}
 
 	public void onStop(@NonNull Activity activity) {
 		lock();
-		if (!activity.isFinishing() && isSensorEnabled()) {
-			switchSensorOn();
+		if (!activity.isFinishing() && turnScreenOnSensor.get()) {
+			switchSensor(true);
 		}
 	}
 
 	public void setLockUIAdapter(@Nullable LockUIAdapter adapter) {
 		lockUIAdapter = adapter;
 	}
-
 }

@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
@@ -32,11 +31,9 @@ public class TurnScreenOnFragment extends BaseSettingsFragment implements OnPref
 		super.onBindPreferenceViewHolder(preference, holder);
 		String prefId = preference.getKey();
 		if (settings.TURN_SCREEN_ON_TIME_INT.getId().equals(prefId) && preference instanceof ListPreferenceEx) {
-			Object currentValue = ((ListPreferenceEx) preference).getValue();
-			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
-			if (imageView != null && currentValue instanceof Integer) {
-				boolean enabled = preference.isEnabled() && (Integer) currentValue != 0;
-				imageView.setEnabled(enabled);
+			TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
+			if (summaryView != null && !preference.isEnabled()) {
+				summaryView.setText(R.string.default_screen_timeout);
 			}
 		} else if ("turn_screen_on_info".equals(prefId) || "turn_screen_on_options_info".equals(prefId)) {
 			TextView titleView = (TextView) holder.findViewById(android.R.id.title);
@@ -70,12 +67,11 @@ public class TurnScreenOnFragment extends BaseSettingsFragment implements OnPref
 	}
 
 	private void setupTurnScreenOnTimePref() {
-		Integer[] entryValues = new Integer[] {-1, 0, 5, 10, 15, 20, 30, 45, 60};
+		Integer[] entryValues = new Integer[] {0, 5, 10, 15, 20, 30, 45, 60};
 		String[] entries = new String[entryValues.length];
 
-		entries[0] = getString(R.string.shared_string_always);
-		entries[1] = getString(R.string.shared_string_never);
-		for (int i = 2; i < entryValues.length; i++) {
+		entries[0] = getString(R.string.keep_screen_on);
+		for (int i = 1; i < entryValues.length; i++) {
 			entries[i] = entryValues[i] + " " + getString(R.string.int_seconds);
 		}
 
@@ -100,9 +96,12 @@ public class TurnScreenOnFragment extends BaseSettingsFragment implements OnPref
 	}
 
 	private void setupTurnScreenOnPowerButtonPref() {
+		ApplicationMode appMode = getSelectedAppMode();
+		boolean enabled = settings.TURN_SCREEN_ON_TIME_INT.getModeValue(appMode) == 0 || settings.USE_SYSTEM_SCREEN_TIMEOUT.getModeValue(appMode);
 		SwitchPreferenceEx turnScreenOnPowerButton = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_POWER_BUTTON.getId());
-		turnScreenOnPowerButton.setIcon(getPersistentPrefIcon(R.drawable.ic_action_power_button));
+		turnScreenOnPowerButton.setEnabled(enabled);
 		turnScreenOnPowerButton.setDescription(R.string.turn_screen_on_power_button_descr);
+		turnScreenOnPowerButton.setIcon(getPersistentPrefIcon(R.drawable.ic_action_power_button));
 	}
 
 	@Override
