@@ -10,19 +10,25 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 
+import org.apache.commons.logging.Log;
+
 import java.util.List;
 
 public class LockHelper implements SensorEventListener {
+
+	private static final Log LOG = PlatformUtil.getLog(LockHelper.class);
 
 	private static final int SENSOR_SENSITIVITY = 4;
 
@@ -138,12 +144,27 @@ public class LockHelper implements SensorEventListener {
 	}
 
 	private void unlockEvent() {
-		int unlockTime = turnScreenOnTime.get();
-		if (unlockTime > 0 && !useSystemScreenTimeout.get()) {
+		int unlockTime = getUnlockTime();
+		if (unlockTime > 0) {
 			timedUnlock(unlockTime * 1000L);
 		} else {
 			timedUnlock(0);
 		}
+	}
+
+	private int getUnlockTime() {
+		int unlockTime = turnScreenOnTime.get();
+		if (useSystemScreenTimeout.get()) {
+			try {
+				int screenOffTimeout = Settings.System.getInt(app.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0);
+				if (screenOffTimeout > 0) {
+					unlockTime = screenOffTimeout / 1000;
+				}
+			} catch (Exception e) {
+				LOG.error(e.getMessage(), e);
+			}
+		}
+		return unlockTime;
 	}
 
 	@Override
