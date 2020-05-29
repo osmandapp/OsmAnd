@@ -3238,7 +3238,7 @@
     <string name="analytics_pref_title">Analiziloj</string>
     <string name="turn_screen_on_info">Montri mapon sur la ŝlos‑ekrano dum navigado.</string>
     <string name="route_parameters_info">Agordoj pri kurs‑difinado por la elektita profilo “%1$s”.</string>
-    <string name="wake_time">Tempo de irado</string>
+    <string name="wake_time">Aktiveca periodo</string>
     <string name="units_and_formats">Unuoj kaj formoj</string>
     <string name="appearance">Aspekto</string>
     <string name="map_look_descr">Alĝustigi mapon</string>
@@ -3718,5 +3718,43 @@
     <string name="profiles_for_action_not_found">Ne trovis tiajn profilojn.</string>
     <string name="index_item_world_basemap_detailed">Fundamenta mapo de mondo (detala)</string>
     <string name="unsupported_type_error">Nesubtenata speco</string>
-    <string name="gpx_parse_error">Tiu ĉi GPX-dosiero estas misformita, kontaktu la helpteamon por sciiĝi pli</string>
+    <string name="gpx_parse_error">Tiu ĉi GPX-dosiero estas misformita, kontaktu la helpteamon por sciiĝi pli.</string>
+    <string name="shared_string_always">Ĉiam</string>
+    <string name="screen_control">Aktiveco de ekrano</string>
+    <string name="system_screen_timeout_descr">Aktivigu tion ĉi por malaktivigi la ekranon post difinita tempo de neaktiveco, la tempo difinita en sistemaj agordoj de via aparato estos uzita.</string>
+    <string name="system_screen_timeout">Aŭtomate malŝalti ekranon</string>
+    <string name="turn_screen_on_options_descr">Tiuj ĉi agordoj ŝaltos la ekranon kun OsmAnd en la malfono.</string>
+    <string name="turn_screen_on_descr">Tiuj ĉi agordoj funkcios nur kiam OsmAnd laboros malfone kaj la aparato estos ŝlosita.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">La ekrano aŭtomate aktiviĝos kelkaj sekundoj antaŭ la sekva gvidilo; tiu ĉi tempo estas difinita per la agordo “aktiveca periodo”.
+\n
+\nFunkcias nur dum navigi.</string>
+    <string name="turn_screen_on_navigation_instructions">Navigaj gvidiloj</string>
+    <string name="turn_screen_on_power_button_descr">Premi la ek-butonon de la aparato por ŝalti ekranon kun OsmAnd en la malfono.</string>
+    <string name="turn_screen_on_power_button">Ek-butono</string>
+    <string name="turn_screen_on_proximity_sensor">Proksimec-sentilo</string>
+    <string name="turn_screen_on_wake_time_descr">Elekti aktivecan periodon de la ekrano post vekiĝi, la ekrano ne malŝaltiĝos se “%1$s” estos aktiva.</string>
+    <string name="keep_screen_on">Teni ekranon aktiva</string>
+    <string name="keep_screen_off">Teni ekranon malaktiva</string>
+    <string name="screen_timeout_descr">Se la agordo “%1$s” estas ŝaltita, ĝi influos la periodon de aktiveco.</string>
+    <string name="pseudo_mercator_projection">Kvazaŭ-merkatora projekcio</string>
+    <string name="one_image_per_tile">Po unu bild‑dosiero per kahelo</string>
+    <string name="sqlite_db_file">SQLiteDB-dosiero</string>
+    <string name="online_map_name_helper_text">Enigu nomon por la enreta fonto.</string>
+    <string name="online_map_url_helper_text">Enigu ligilon por la enreta fonto de map‑kaheloj.</string>
+    <string name="edit_online_source">Redakti enretan fonton</string>
+    <string name="expire_time">Tempo de senvalidiĝo</string>
+    <string name="mercator_projection">Merkatora projekcio</string>
+    <string name="storage_format">Formo de konservado</string>
+    <string name="map_source_zoom_levels">Agordi la minimuman kaj maksimuman skal‑nivelojn ĉe kiuj la enreta mapo estos montrata.</string>
+    <string name="map_source_zoom_levels_descr">La jenaj valoroj efikos sur vidigo de mapa sur-/sub-tavolo.
+\n
+\n%1$s: la mapo estos limigita al la elektitaj skal‑niveloj.
+\n
+\n%2$s: skal‑niveloj inter kiuj la originalaj kaheloj estos montrataj. Kaheloj estos pli-/mal-grandigitaj ekster tiu ĉi rango.</string>
+    <string name="expire_time_descr">Tempo de senvalidiĝo en minutoj. Kaŝmemorigitaj kaheloj estos reelŝutitaj post la difinita tempo. Lasu tiun ĉi kampon malplena por neniam refreŝigi kahelojn el tiu ĉi fonto.
+\n
+\nUnu tago egalas al 1440 minutoj.
+\nUnu semajno egalas al 10 080 minutoj.
+\nUnu jaro egalas al 43 829 minutoj.</string>
+    <string name="tiles_storage_descr">Elekti kiel konservi elŝutitajn kahelojn.</string>
 </resources>
