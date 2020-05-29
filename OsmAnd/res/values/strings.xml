@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="default_screen_timeout">Default screen timeout</string>
     <string name="tiles_storage_descr">Choose how downloaded tiles will be stored.</string>
     <string name="expire_time_descr">Expiration time in minutes. Cached tiles will be reloaded after specified time.
         Leave this field empty to never refresh tiles for this source.

@@ -53,8 +53,8 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 			keepScreenOnEnabled = savedInstanceState.getBoolean(KEEP_SCREEN_ON_ENABLED);
 		} else {
 			int savedValIndex = listPreference.getValueIndex();
-			keepScreenOnEnabled = savedValIndex == 0;
-			selectedEntryIndex = savedValIndex != 0 ? savedValIndex : 1;
+			keepScreenOnEnabled = savedValIndex <= 0;
+			selectedEntryIndex = savedValIndex > 0 ? savedValIndex : 1;
 		}
 
 		items.add(new TitleItem(listPreference.getDialogTitle()));
