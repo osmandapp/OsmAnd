@@ -121,6 +121,4 @@
 	<dimen name="bottom_sheet_menu_peek_height">450dp</dimen>
 	<dimen name="side_of_the_world_button_size">54dp</dimen>
 
-	<dimen name="poi_icon_size">24dp</dimen>
-
 </resources>
