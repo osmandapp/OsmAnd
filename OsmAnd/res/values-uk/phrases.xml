@@ -3810,4 +3810,6 @@
     <string name="poi_osmand_fire_hydrant_pressure_suction">Всмоктування</string>
     <string name="poi_fire_hydrant_type_pipe">Труба</string>
     <string name="poi_fire_hydrant_pressure_filter">Тиск</string>
+    <string name="poi_pump_status_missing_beam">Стан насосу: відсутній важіль</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Підземні води</string>
 </resources>
