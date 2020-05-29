@@ -3495,7 +3495,7 @@
     <string name="shared_string_quick_actions">Rýchle akcie</string>
     <string name="shared_string_profiles">Profily</string>
     <string name="monitoring_min_speed_descr_remark">Poznámka: kontrola na nenulovú rýchlosť: Väčšina čipov GPS hlási hodnotu rýchlosti len ak algoritmus usúdi, že sa pohybujete, inak nevráti žiadnu rýchlosť. Preto použitie nenulového nastavenia v tomto filtri vlastne použije detekciu pohybu v GPS čipe. Ale aj keď nebude rýchlosť filtrovaná tu pri zázname, použijeme túto funkciu pri analýze GPX pre zistenie Opravenej vzdialenosti, teda hodnoty zobrazenej v tomto poli je vzdialenosť zaznamenaná počas pohybu.</string>
-    <string name="monitoring_min_accuracy_descr">Toto zaznamená len body zmerané pri indikovanej minimálnej presnosti (v metroch/stopách, ako ju hlási Android pre vaše zariadenie). Presnosť znamená rozptyl opakovaných meraní a nesúvisí priamo s presnosťou, ktorá určuje ako blízko je vaše meranie k skutočnej polohe.</string>
+    <string name="monitoring_min_accuracy_descr">Toto zaznamená len body zmerané pri indikovanej minimálnej presnosti (v metroch/stopách, ako ju hlási Android pre vaše zariadenie). Presnosť je blízkosť meraní k skutočnej polohe, a nesúvisí priamo s presnosťou, ktorá určuje rozptyl opakovaných meraní.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Vedľajší efekt: Následkom filtrovania podľa presnosti môžu celkom chýbať body napr. pod mostami, stromami, medzi vysokými budovami alebo pri niektorých poveternostných podmienkach.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Odporúčanie: Je ťažké predpovedať, čo bude zaznamenané a čo nie, preto môže byť vhodné tento filter vypnúť.</string>
     <string name="monitoring_min_accuracy_descr_remark">Poznámka: ak bolo GPS vypnuté tesne pred zaznamenávaním, prvý zmeraný bod môže znížiť presnosť a preto by sme mohli v našom programe chvíľu počkať pred zaznamenaním prvého bodu (alebo zaznamenať najlepší z troch po sebe idúcich bodov), ale toto ešte nie je implementované.</string>
@@ -3723,4 +3723,5 @@
     <string name="profiles_for_action_not_found">Nenašli sa žiadne vhodné profily.</string>
     <string name="index_item_world_basemap_detailed">Prehľadová mapa sveta (detailná)</string>
     <string name="unsupported_type_error">Nepodporovaný typ</string>
+    <string name="shared_string_always">Vždy</string>
 </resources>
