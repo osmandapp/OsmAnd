@@ -3671,4 +3671,15 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="reset_deafult_order">Gendan standardrækkefølge for elementer</string>
     <string name="back_to_editing">Tilbage til redigering</string>
     <string name="shared_string_add_profile">Tilføj profil</string>
+    <string name="shared_string_resume">Fortsæt</string>
+    <string name="ui_customization_description">Tilpas mængden af elementer i \"Panel\", \"Konfigurer Kort\" og \"Menu\".
+\n
+\nDeaktivere ubrugte programudvidelser for at skjule deres kontroller. %1$s.</string>
+    <string name="additional_actions_descr">Få adgang til handlinger ved at trykke på knappen “%1$s”.</string>
+    <string name="legend_item_description">Vejledning til symbolik på kort.</string>
+    <string name="quick_action_switch_profile_descr">Handlingsknappen skifter mellem valgte profiler.</string>
+    <string name="change_application_profile">Ændre programprofil</string>
+    <string name="profiles_for_action_not_found">Kunne ikke finde sådanne profiler.</string>
+    <string name="index_item_world_basemap_detailed">Verdensoversigtskort (detaljeret)</string>
+    <string name="unsupported_type_error">Ikke understøttet type</string>
 </resources>

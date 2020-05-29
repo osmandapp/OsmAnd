@@ -2224,7 +2224,7 @@
     <string name="track_points_category_name">Wegpunkte, POI, markierte Orte</string>
     <string name="route_points_category_name">Richtungsänderungen entlang dieser Route</string>
     <string name="add_new_folder">Neuen Ordner hinzufügen</string>
-    <string name="shared_string_slope">Gefälle</string>
+    <string name="shared_string_slope">Hangneigung</string>
     <string name="relief_smoothness_factor_descr">Bevorzugte Geländeform: flach oder bergig.</string>
     <string name="lang_ber">Berber</string>
     <string name="do_not_send_anonymous_app_usage">Keine anonymen App-Nutzungsdaten versenden</string>
@@ -3603,11 +3603,11 @@
     <string name="shared_string_transparency">Transparenz</string>
     <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
     <string name="shared_string_terrain">Gelände</string>
-    <string name="download_slope_maps">Gefälle</string>
-    <string name="terrain_empty_state_text">Aktivieren Sie diese Option, um die Schatten- oder Hangkarte anzuzeigen. Weitere Informationen zu diesen Kartentypen finden Sie auf unserer Website.</string>
+    <string name="download_slope_maps">Hangneigungen</string>
+    <string name="terrain_empty_state_text">Aktivieren Sie diese Option, um die Schummerungs- oder Hangneigungskarte anzuzeigen. Weitere Informationen zu diesen Kartentypen finden Sie auf unserer Website.</string>
     <string name="shared_string_legend">Legende</string>
-    <string name="slope_read_more">Lesen Sie mehr über Gefällekarten in %1$s.</string>
-    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Gefälle auf der Karte anzuzeigen.</string>
+    <string name="slope_read_more">Lesen Sie mehr über Hangneigungskarten in %1$s.</string>
+    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hangneigungen auf der Karte anzuzeigen.</string>
     <string name="hillshade_download_description">Für die Darstellung der Schummerung werden zusätzliche Karten benötigt.</string>
     <string name="shared_string_min">Min</string>
     <string name="hillshade_description">Schummerungs-Karte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Niederungen.</string>
@@ -3616,7 +3616,7 @@
     <string name="app_mode_ski_touring">Skitouren</string>
     <string name="app_mode_ski_snowmobile">Schneemobil</string>
     <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
-    <string name="slope_description">Gefällekarten verwendet Farben, um die Geländesteilheit zu visualisieren.</string>
+    <string name="slope_description">Hangneigungskarten verwendet Farben, um die Geländesteilheit zu visualisieren.</string>
     <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen</string>
     <string name="changes_applied_to_profile">Die Änderungen wurden auf das \'%1$s\' Profil angewendet.</string>
     <string name="settings_item_read_error">Konnte nicht von \'%1$s\' lesen.</string>
@@ -3692,7 +3692,7 @@
     <string name="osmand_purchases_item">OsmAnd Einkäufe</string>
     <string name="legend_item_description">Der Leitfaden zur Symbolik einer Karte.</string>
     <string name="navigation_profiles_item">Navigationsprofile</string>
-    <string name="release_3_7">• Neue Offline-Steigungskarten 
+    <string name="release_3_7">• Neue Offline-Hangneigungskarten 
 \n 
 \n• Vollständige Anpassung von Favoriten und GPX-Wegpunkten - benutzerdefinierte Farben, Symbole, Formen 
 \n 
@@ -3715,7 +3715,7 @@
     <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche \"%1$s\" tippen.</string>
     <string name="quick_action_transport_hide">Öffentliche Verkehrsmittel ausblenden</string>
     <string name="quick_action_transport_show">Öffentliche Verkehrsmittel anzeigen</string>
-    <string name="quick_action_show_hide_transport">Öffentliche Verkehrsmittel anzeigen / ausblenden</string>
+    <string name="quick_action_show_hide_transport">Öffentliche Verkehrsmittel anzeigen/ausblenden</string>
     <string name="quick_action_transport_descr">Schaltfläche zum Ein- oder Ausblenden der öffentlichen Verkehrsmittel auf der Karte.</string>
     <string name="create_edit_poi">POI erstellen / bearbeiten</string>
     <string name="parking_positions">Parkpositionen</string>
@@ -3733,4 +3733,5 @@
 \nSchalten Sie nicht verwendete Plugins aus, um alle ihre Steuerelemente auszublenden. %1$s.</string>
     <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
     <string name="shared_string_drawer">Schublade</string>
+    <string name="gpx_parse_error">OsmAnd GPX ist nicht gut geformt. Bitte wenden Sie sich an das Support-Team, um weitere Informationen zu erhalten</string>
 </resources>

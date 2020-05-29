@@ -294,7 +294,7 @@
     <string name="lang_th">Taja</string>
     <string name="lang_te">Telegua</string>
     <string name="lang_nn">Norvega Nynorsk</string>
-    <string name="lang_new">Nepala</string>
+    <string name="lang_new">Nevara</string>
     <string name="lang_ms">Malaja</string>
     <string name="lang_ht">Haitia kreola</string>
     <string name="lang_gl">Galega</string>
@@ -3464,7 +3464,7 @@
     <string name="osm_authorization_success">Rajtigo sukcesis</string>
     <string name="monitoring_min_speed_descr_recommendation">Konsilo: provu unue uzi la movsentilon per agordi la filtrilon “minimuma delokiĝo” (B) – por ebla pli bona rezulto kaj malplia perdo de datumoj. Se viaj spuroj plue estos bruaj je malalta rapido, provu enigi tien ĉi malnulajn valorojn. Bonvolu rimarki, ke iuj mezuroj povas tute ne enhavi rapidojn (uzante ret‑bazitajn pozici‑trovajn servojn), do via spuro estos malplena.</string>
     <string name="monitoring_min_speed_descr_remark">Rimarko: kontrolo pri rapido &gt; 0: plejparto de GPS‑cirkvitaroj raportas valoron de rapido nur kiam la algoritmo determinas ke vi moviĝas, kaj raportas neniun valoron alie. Per uzi la valoron &gt; 0 en tiu ĉi filtrilo, la movsentilo de la GPS‑cirkvitaro estos uzata. Sed eĉ kiam ĝi ne estos filtrita tie ĉi, tiu ĉi funkcio plue estos uzata por analizi GPX‑spuron por kalkuli la valoron “korektita distanco” – distanco registrita dum moviĝo.</string>
-    <string name="monitoring_min_accuracy_descr">Registritaj estos nur punktoj mezuritaj kun la minimuma precizo (en metroj kiel raportitaj fare de Androido per la GPS‑cirkvitaro). Precizo rilatas al disiĝo de valoro dum ripetaj mezuroj kaj ne ĉiam rilatas al ekzakteco, kiu determinas proksimecon de mezuroj al via vera pozicio.</string>
+    <string name="monitoring_min_accuracy_descr">Registritaj estos nur punktoj mezuritaj kun la minimuma precizo (en metroj kiel raportitaj fare de Android per la GPS‑cirkvitaro). Precizo rilatas al disiĝo de valoro dum ripetaj mezuroj kaj ne ĉiam rilatas al ekzakteco, kiu determinas proksimecon de mezuroj al via vera pozicio.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Kromefiko: pro filtri laŭ precizo, iuj punktoj – mezuritaj ekz. sub pontoj aŭ arboj, inter altaj konstruaĵoj, aŭ dum malbonaj veteraj kondiĉoj – povos manki.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Konsilo: estas malfacile antaŭscii pri kio estos registra kaj kio estos filtrita, do estus bone ne aktivigi tiun ĉi filtrilon.</string>
     <string name="shared_string_available">Disponeblaj</string>
@@ -3643,7 +3643,7 @@
     <string name="lang_sco">Skota</string>
     <string name="lang_scn">Sicilia</string>
     <string name="lang_pnb">Panĝaba (okcidenta)</string>
-    <string name="lang_ne">Nepalia</string>
+    <string name="lang_ne">Nepala</string>
     <string name="lang_nap">Napola</string>
     <string name="lang_my">Birma</string>
     <string name="lang_mn">Mongola</string>
@@ -3718,4 +3718,5 @@
     <string name="profiles_for_action_not_found">Ne trovis tiajn profilojn.</string>
     <string name="index_item_world_basemap_detailed">Fundamenta mapo de mondo (detala)</string>
     <string name="unsupported_type_error">Nesubtenata speco</string>
+    <string name="gpx_parse_error">Tiu ĉi GPX-dosiero estas misformita, kontaktu la helpteamon por sciiĝi pli</string>
 </resources>

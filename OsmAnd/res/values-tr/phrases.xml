@@ -39,7 +39,7 @@
     <string name="poi_craft">El sanatı</string>
     <string name="poi_finance">Finans</string>
     <string name="poi_natural">Doğal</string>
-    <string name="poi_seamark">Denizcilik</string>
+    <string name="poi_seamark">Deniz</string>
     <string name="poi_military">Askeri</string>
     <string name="poi_osmwiki">Vikipedi</string>
     <string name="poi_user_defined_other">Kullanıcı tanımlı</string>
@@ -180,7 +180,7 @@
     <string name="poi_city_wall">Şehir duvarı</string>
     <string name="poi_lift_gate">Asansör kapısı</string>
     <string name="poi_toll_booth">Gişe</string>
-    <string name="poi_border_control">Sınır kontrolü</string>
+    <string name="poi_border_control">Sınır denetimi</string>
     <string name="poi_traffic_calming_bump">Kasis</string>
     <string name="poi_traffic_calming_hump">Hız Tümseği</string>
     <string name="poi_traffic_calming_cushion">Hız Tamponu</string>
@@ -930,7 +930,7 @@
     <string name="poi_full_height_turnstile">Tam yükseklikte turnike</string>
     <string name="poi_bump_gate">Çarpma kapı</string>
     <string name="poi_general_barrier">Genel bariyer</string>
-    <string name="poi_stile">Stil</string>
+    <string name="poi_stile">Çit basamağı</string>
     <string name="poi_kissing_gate">Öpüşme kapısı</string>
     <string name="poi_sally_port">Sally bağlantı noktası</string>
     <string name="poi_lcn_ref">Yerel döngü ağ düğümü</string>
@@ -954,7 +954,7 @@
     <string name="vk">VKontakte</string>
     <string name="poi_google_plus">Google+</string>
     <string name="poi_mobile">Mobil</string>
-    <string name="poi_maxweight">Maksimum ağırlık</string>
+    <string name="poi_maxweight">Azami ağırlık</string>
     <string name="poi_abandoned">Terk edilmiş</string>
     <string name="poi_abandoned_poi">Terk edilmiş nesne</string>
     <string name="poi_disused">Terkedilmiş</string>
@@ -968,7 +968,7 @@
     <string name="poi_seasonal_autumn">Sonbahar</string>
     <string name="poi_seasonal_winter">Kış</string>
     <string name="poi_crossing_traffic_signals">Fren lambaları ile</string>
-    <string name="poi_crossing_uncontrolled">Kontrolsüz</string>
+    <string name="poi_crossing_uncontrolled">Denetimsiz</string>
     <string name="poi_crossing_unmarked">İşaretlenmemiş</string>
     <string name="poi_access_private">Özel erişim</string>
     <string name="poi_access_no">Erişim yok</string>
@@ -1100,7 +1100,7 @@
     <string name="poi_water_supply_type">Su kaynağı türü</string>
     <string name="poi_water_purification">Su arıtma</string>
     <string name="poi_water_place_access">Su yeri erişimi</string>
-    <string name="poi_climbing_style">Tırmanma stili</string>
+    <string name="poi_climbing_style">Tırmanma tarzı</string>
     <string name="poi_socket">Soket</string>
     <string name="poi_socket_chademo_output_filter">CHAdeMO çıkışı</string>
     <string name="poi_socket_type2_output_filter">Tip 2 çıkış</string>
@@ -1109,7 +1109,7 @@
     <string name="poi_socket_cee_blue_output_filter">CEE mavi çıkış</string>
     <string name="poi_socket_schuko_output_filter">Schuko çıkışı</string>
     <string name="poi_glacier_type">Buzul türü</string>
-    <string name="poi_checkpoint_type">Kontrol noktası türü</string>
+    <string name="poi_checkpoint_type">Denetim noktası türü</string>
     <string name="poi_bulk_purchase">Toplu satın alma</string>
     <string name="poi_landfill_waste_nuclear">Nükleer atık</string>
     <string name="poi_brownfield">Terkedilmiş endüstriyel bölge</string>
@@ -1297,7 +1297,7 @@
     <string name="poi_wiki_lang_nap">Napolitence wiki</string>
     <string name="reddit">Reddit</string>
     <string name="poi_service_times">Servis zamanları</string>
-    <string name="poi_maxheight">Maksimum yükseklik</string>
+    <string name="poi_maxheight">Azami yükseklik</string>
     <string name="poi_brand">Marka</string>
     <string name="poi_drinking_water_no">Hayır</string>
     <string name="poi_seasonal_yes">Evet</string>
@@ -1907,7 +1907,7 @@
     <string name="poi_internet_access_type_public">İnternet erişim türü: genel</string>
     <string name="poi_internet_access_type_service">İnternet erişim türü: servis</string>
     <string name="poi_internet_access_type_no">İnternet erişimi yok</string>
-    <string name="poi_maxwidth">Maksimum genişlik</string>
+    <string name="poi_maxwidth">Azami genişlik</string>
     <string name="poi_iata">IATA kodu</string>
     <string name="poi_icao">ICAO kodu</string>
     <string name="poi_faa">FAA kodu</string>
@@ -2209,8 +2209,8 @@
     <string name="poi_power_supply_cee_7_4">Güç kaynağı (soket): CEE 7/4</string>
     <string name="poi_power_supply_cee_7_5">Güç kaynağı (soket): CEE 7/5</string>
     <string name="poi_power_supply_nema_5_15">Güç kaynağı (soket): NEMA 5-15</string>
-    <string name="poi_capacity_tents">Maksimum çadır</string>
-    <string name="poi_capacity_caravans">Maksimum karavan</string>
+    <string name="poi_capacity_tents">En fazla çadır</string>
+    <string name="poi_capacity_caravans">En fazla karavan</string>
     <string name="poi_dog_yes">Köpeklere izin veriliyor</string>
     <string name="poi_dog_no">Köpeklere izin verilmiyor</string>
     <string name="poi_refugee_yes">Mülteciler için olanaklar</string>
@@ -2391,4 +2391,5 @@
     <string name="poi_stone_type_conciliation_cross">Tür: uzlaşma haçı</string>
     <string name="poi_horse_no">Atlara izin verilmiyor</string>
     <string name="poi_cuisine">Mutfak</string>
+    <string name="poi_url">URL</string>
 </resources>

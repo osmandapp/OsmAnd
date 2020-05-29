@@ -3831,4 +3831,5 @@
     <string name="poi_fire_hydrant_style_water_source_groundwater">Grundvand</string>
     <string name="poi_fire_hydrant_type_pipe">Rør</string>
     <string name="poi_fire_hydrant_pressure_filter">Lufttryk</string>
+    <string name="poi_pump_status_missing_beam">Pumpens tilstand: ingen håndtag</string>
 </resources>
