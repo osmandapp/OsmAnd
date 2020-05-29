@@ -1064,7 +1064,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="local_index_tile_data_minzoom">Minimális zoom: %1$s</string>
     <string name="local_index_tile_data_name">Csempeadat: %1$s</string>
     <string name="edit_tilesource_successfully">%1$s csempeforrás elmentve</string>
-    <string name="edit_tilesource_elliptic_tile">Elliptikus Merkátor</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptikus Mercator</string>
     <string name="edit_tilesource_maxzoom">Maximális zoom</string>
     <string name="edit_tilesource_expiration_time">Lejárat (perc)</string>
     <string name="edit_tilesource_minzoom">Minimális zoom</string>
@@ -2338,14 +2338,14 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="mapillary_menu_descr_tile_cache">Csempék újratöltése naprakész adatok megjelenítéséhez.</string>
     <string name="mapillary_menu_title_tile_cache">Csempegyorsítótár</string>
     <string name="wrong_user_name">Hibás felhasználónév</string>
-    <string name="shared_string_to">Ide:</string>
+    <string name="shared_string_to">Eddig:</string>
     <string name="mapillary_menu_date_from">Ettől:</string>
     <string name="mapillary_menu_descr_dates">Csak a hozzáadott képek megtekintése</string>
     <string name="mapillary_menu_title_dates">Dátum</string>
     <string name="mapillary_menu_edit_text_hint">Felhasználónév megadása</string>
     <string name="mapillary_menu_descr_username">Csak az általa hozzáadott képek megtekintése:</string>
     <string name="mapillary_menu_title_username">Felhasználónév</string>
-    <string name="mapillary_menu_filter_description">A képek szűrése feltöltő, dátum vagy típus szerint. Csak erős nagyításnál használhatóak.</string>
+    <string name="mapillary_menu_filter_description">A képek szűrése feltöltő, dátum vagy típus szerint. Csak erős nagyításnál használhatók.</string>
     <string name="map_widget_ruler_control">Sugaras vonalzó</string>
     <string name="average">Átlag</string>
     <string name="of">%1$d / %2$d</string>
@@ -3648,4 +3648,39 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
 \n</string>
     <string name="unsupported_type_error">Nem támogatott típus</string>
     <string name="shared_string_resume">Folytatás</string>
+    <string name="map_source_zoom_levels_descr">Ezek a paraméterek a térképként vagy rátét/alátétként való használatkor befolyásolják a megjelenítést.
+\n
+\n%1$s: A térkép ezen nagyítási szintek közé lesz kotlátozva.
+\n
+\n%2$s: Ezen nagyítási szintek között az eredeti csempék jelennek meg, ezeken kívül pedig felskálázásra vagy leskálázásra kerülnek.</string>
+    <string name="shared_string_always">Mindig</string>
+    <string name="screen_control">Kijelző beállításai</string>
+    <string name="system_screen_timeout">Kijelző időtúllépés</string>
+    <string name="turn_screen_on_options_descr">Ezekkel a beállításokkal az OsmAnddal az előtérben ébresztheti fel a kijelzőt.</string>
+    <string name="turn_screen_on_descr">Ezek a beállítások csak akkor működnek, ha az eszköz az OsmAnddal az előtérben kerül lezárásra.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">A kijelző automatikusan bekapcsol néhány másodperccel a navigációs utasítás előtt a \"Felébresztési idő\" opcióban megadott időtartamra.
+\n
+\nKizárólag navigáció közben működik.</string>
+    <string name="turn_screen_on_navigation_instructions">Navigációs utasítások</string>
+    <string name="turn_screen_on_power_button_descr">A feloldógomb megnyomásakor a kijelző az OsmAnddal az előtérben fog megjelenni.</string>
+    <string name="turn_screen_on_power_button">Lezárógomb</string>
+    <string name="turn_screen_on_proximity_sensor">Közelségérzékelő</string>
+    <string name="keep_screen_on">Kijelző maradjon bekapcsolva</string>
+    <string name="keep_screen_off">Kijelző maradjon kicsapcsolva</string>
+    <string name="one_image_per_tile">Egy képfájl csempénként</string>
+    <string name="pseudo_mercator_projection">Pszeudo-Mercator vetület</string>
+    <string name="online_map_url_helper_text">Adja meg vagy illessze be az online forrás URL-jét.</string>
+    <string name="online_map_name_helper_text">Nevezze el az online térképforrást.</string>
+    <string name="sqlite_db_file">SQLiteDB fájl</string>
+    <string name="edit_online_source">Online forrás szerkesztése</string>
+    <string name="expire_time">Lejárati idő</string>
+    <string name="mercator_projection">Mercator vetület</string>
+    <string name="storage_format">Tárolás formátuma</string>
+    <string name="map_source_zoom_levels">Adja meg a legkisebb és legnagyobb nagyítási szintet, amelyen az online térkép megjelenjen vagy letöltésre kerüljön.</string>
+    <string name="expire_time_descr">Lejárati idő percben megadva. A gyorsítótárazott csempék a megadott idő után újratöltésre kerülnek. A mezőt üresen hagyva ezek a csempék soha nem fognak frissülni.
+\n
+\nEgy nap 1440 perc.
+\nEgy hét 10 080 perc.
+\nEgy hónap 43 829 perc.</string>
+    <string name="tiles_storage_descr">Válassza ki a letöltött csempék tárolási módját.</string>
 </resources>
