@@ -58,6 +58,7 @@
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="turn_screen_on_power_button"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:persistent="false"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/turn_screen_on_power_button" />
