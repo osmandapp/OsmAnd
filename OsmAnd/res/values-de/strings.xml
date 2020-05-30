@@ -2416,7 +2416,7 @@
     <string name="quick_action_showhide_osmbugs_descr">Schaltfläche zum Ein- oder Ausblenden von OSM-Notizen auf der Karte.</string>
     <string name="sorted_by_distance">Nach Entfernung sortiert</string>
     <string name="search_favorites">In Favoriten suchen</string>
-    <string name="hillshade_menu_download_descr">Laden Sie die Schummerungs-Karte herunter, um vertikale Schattierungen anzuzeigen.</string>
+    <string name="hillshade_menu_download_descr">Laden Sie die Schummerungskarte herunter, um vertikale Schattierungen anzuzeigen.</string>
     <string name="shared_string_plugin">Erweiterung</string>
     <string name="srtm_purchase_header">Kaufen und installieren Sie die Erweiterung \'Höhenlinien\', um abgestufte vertikale Flächen anzuzeigen.</string>
     <string name="srtm_menu_download_descr">Laden Sie die Höhenlinienkarte zu dieser Region herunter.</string>
@@ -3610,7 +3610,7 @@
     <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hangneigungen auf der Karte anzuzeigen.</string>
     <string name="hillshade_download_description">Für die Darstellung der Schummerung werden zusätzliche Karten benötigt.</string>
     <string name="shared_string_min">Min</string>
-    <string name="hillshade_description">Schummerungs-Karte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Niederungen.</string>
+    <string name="hillshade_description">Schummerungskarte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Ebenen.</string>
     <string name="n_items_of_z">%1$s von %2$s</string>
     <string name="shared_string_octagon">Achteck</string>
     <string name="app_mode_ski_touring">Skitouren</string>
@@ -3734,4 +3734,38 @@
     <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
     <string name="shared_string_drawer">Schublade</string>
     <string name="gpx_parse_error">OsmAnd GPX ist nicht gut geformt. Bitte wenden Sie sich an das Support-Team, um weitere Informationen zu erhalten</string>
+    <string name="map_source_zoom_levels_descr">Diese Parameter beeinflussen die Darstellung, wenn sie als Karte oder Overlay/Underlay verwendet werden. %1$s: Die Karte wird auf die gewählten Zoomstufen begrenzt. %2$s: Zoomstufen, bei denen die Originalkacheln sichtbar sind. Außerhalb dieser Werte tritt eine Skalierung nach oben oder unten ein.</string>
+    <string name="map_source_zoom_levels">Legen Sie die kleinste und größte Zoomstufe fest, bei denen die Online-Karte angezeigt oder geladen wird.</string>
+    <string name="shared_string_always">Immer</string>
+    <string name="screen_control">Bildschirmsteuerung</string>
+    <string name="system_screen_timeout_descr">Aktivieren Sie es, damit sich der Bildschirm nach einer gewissen Zeit der Inaktivität ausschaltet. Dafür wird die in den Systemeinstellungen Ihres Geräts festgelegte Zeit verwendet.</string>
+    <string name="system_screen_timeout">Bildschirmabschaltung</string>
+    <string name="turn_screen_on_options_descr">Verwenden Sie diese Optionen, um den Bildschirm mit OsmAnd im Vordergrund aufzuwecken.</string>
+    <string name="turn_screen_on_descr">Diese Optionen funktionieren nur wenn OsmAnd im Vordergrund ist, wenn das Gerät gesperrt wird.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Der Bildschirm schaltet sich automatisch einige Sekunden vor Navigationsanweisungen für die unter „Aufweckzeiten“ festgelegte Dauer ein.
+\n
+\nFunktioniert nur während der Navigation.</string>
+    <string name="turn_screen_on_navigation_instructions">Navigationsanweisungen</string>
+    <string name="turn_screen_on_power_button_descr">Drücken Sie den Einschaltknopf des Geräts, um den Bildschirm mit OsmAnd im Vordergrund einzuschalten.</string>
+    <string name="turn_screen_on_power_button">Einschaltknopf</string>
+    <string name="turn_screen_on_proximity_sensor">Näherungssensor</string>
+    <string name="turn_screen_on_wake_time_descr">Wählen Sie die Dauer der Bildschirmaktivität nach dem Aufwecken, der Bildschirm wird sich nicht ausschalten, wenn „%1$s“ aktiviert ist.</string>
+    <string name="keep_screen_on">Bildschirm eingeschaltet lassen</string>
+    <string name="keep_screen_off">Bildschirm ausgeschaltet lassen</string>
+    <string name="screen_timeout_descr">Wenn die Option „%1$s“ aktiviert ist, hängt die Aktivitätszeit von ihr ab.</string>
+    <string name="pseudo_mercator_projection">Pseudo-Mercator-Projektion</string>
+    <string name="one_image_per_tile">Eine Bilddatei pro Kachel</string>
+    <string name="sqlite_db_file">SQLiteDB-Datei</string>
+    <string name="online_map_name_helper_text">Benennen Sie die Online-Kartenquelle.</string>
+    <string name="online_map_url_helper_text">Tragen oder fügen Sie die URL für die Online-Quelle ein.</string>
+    <string name="edit_online_source">Online-Quelle bearbeiten</string>
+    <string name="expire_time">Verfallsdatum</string>
+    <string name="mercator_projection">Mercator-Projektion</string>
+    <string name="storage_format">Speicherformat</string>
+    <string name="expire_time_descr">Verfallsdatum in Minuten. Kacheln im Zwischenspeicher werden nach der festgelegten Zeit neu geladen. Lassen Sie das Feld leer, wenn die Karten aus dieser Quelle nie aktualisiert werden sollen. 
+\n
+\nEin Tag hat 1440 Minuten.
+\nEine Woche hat 10 080 Minuten.
+\nEin Monat hat 43 829 Minuten.</string>
+    <string name="tiles_storage_descr">Wählen Sie aus, wie heruntergeladene Kacheln gespeichert werden.</string>
 </resources>
