@@ -1538,7 +1538,7 @@
     <string name="poi_diaper_yes">Tablo por ŝanĝi vindotukojn</string>
     <string name="poi_diaper_no">Sen tablo ŝanĝi vindotukojn</string>
     <string name="poi_diaper_room">Ĉambro por ŝanĝi vindotukojn</string>
-    <string name="poi_maxstay">Tempolimo de parkumado</string>
+    <string name="poi_maxstay">Templimo de parkumado</string>
     <string name="poi_vending_parking_tickets">parkum-biletoj</string>
     <string name="poi_vending_cigarettes">cigaredoj</string>
     <string name="poi_vending_excrement_bags">saketoj por fekaĵoj</string>
@@ -1960,8 +1960,8 @@
     <string name="poi_caravans_no">Kampad‑veturiloj: malpermesataj</string>
     <string name="poi_impromptu_yes">Neformala: jes</string>
     <string name="poi_impromptu_no">Neformala: ne</string>
-    <string name="poi_sanitary_dump_station_yes">Ejo por forigado de fekaĵoj: jes</string>
-    <string name="poi_sanitary_dump_station_no">Ejo por forigado de fekaĵoj: ne</string>
+    <string name="poi_sanitary_dump_station_yes">Stacio de forigo de fekaĵoj: jes</string>
+    <string name="poi_sanitary_dump_station_no">Stacio de forigo de fekaĵoj: ne</string>
     <string name="poi_sanitary_dump_station_customers">Ejo por forigado de fekaĵoj: nur por klientoj</string>
     <string name="poi_power_supply_yes">jes</string>
     <string name="poi_power_supply_no">Energifonto: ne</string>
@@ -2362,7 +2362,7 @@
     <string name="poi_free_flying_guest_guidelines_yes">instrukcioj por gastoj: jes</string>
     <string name="poi_free_flying_guest_guidelines_no">instrukcioj por gastoj: ne</string>
     <string name="poi_tanning_salon">Sunbrunigejo</string>
-    <string name="poi_sanitary_dump_station">Stacio de forigado de fekaĵoj</string>
+    <string name="poi_sanitary_dump_station">Stacio de forigo de fekaĵoj</string>
     <string name="poi_medical_system_western_yes">Okcidenta</string>
     <string name="poi_medical_system_chinese_yes">Ĉina kontraŭ-medicino</string>
     <string name="poi_medical_system_unknown_yes">Medicina sistemo: tradicia</string>
