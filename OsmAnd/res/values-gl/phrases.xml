@@ -31,7 +31,7 @@
     <string name="poi_hunting">Equipamento para a caza</string>
     <string name="poi_interior_decoration">Tenda de decoración interior</string>
     <string name="poi_jewelry">Xoiaría</string>
-    <string name="poi_kiosk">Quiosque</string>
+    <string name="poi_kiosk">Quiosco</string>
     <string name="poi_kitchen">Móbeis de cociña</string>
     <string name="poi_mobile_phone">Tenda de telefonía móbil</string>
     <string name="poi_motorcycle">Tenda de motos</string>
@@ -3221,7 +3221,7 @@
     <string name="poi_location_rooftop">Localización: tellado</string>
     <string name="poi_location_indoor">Localización: interior</string>
     <string name="poi_location_platform">Localización: plataforma</string>
-    <string name="poi_location_kiosk">Localización: quiosque</string>
+    <string name="poi_location_kiosk">Localización: quiosco</string>
     <string name="poi_location_bridge">Localización: ponte</string>
     <string name="poi_location_wall">Localización: muro</string>
     <string name="poi_location_entrance">Localización: entrada</string>
