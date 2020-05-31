@@ -3713,4 +3713,20 @@ Pôr do Sol: %2$s</string>
     <string name="index_item_world_basemap_detailed">Mapa geral do mundo (detalhado)</string>
     <string name="unsupported_type_error">Tipo não suportado</string>
     <string name="gpx_parse_error">OsmA GPX não está bem formado, entre em contato com a equipe de suporte para investigar mais</string>
+    <string name="expire_time">Tempo de expiração</string>
+    <string name="mercator_projection">Projeção de Mercator</string>
+    <string name="storage_format">Formato de armazenamento</string>
+    <string name="map_source_zoom_levels">Defina o nível mínimo e máximo de zoom no qual o mapa online será exibido ou carregado.</string>
+    <string name="map_source_zoom_levels_descr">Esses parâmetros afetarão a exibição quando usados como mapa ou sobreposição/subjacência.
+\n
+\n%1$s: O mapa será limitado aos zooms selecionados.
+\n
+\n%2$s: Níveis de zoom nos quais os blocos originais estarão visíveis. O aumento ou redução do tamanho ocorrerá fora desses valores.</string>
+    <string name="expire_time_descr">Tempo de expiração em minutos. Os mosaicos em cache serão recarregados após o tempo especificado. Deixe esse campo em branco para nunca atualizar mosaicos para esta fonte.
+\n
+\nUm dia é 1440 minutos.
+\nUma semana é de 10 080 minutos.
+\nUm mês é 43 829 minutos.</string>
+    <string name="tiles_storage_descr">Escolha como os mosaicos baixados serão armazenados.</string>
+    <string name="default_screen_timeout">Tempo limite da tela do sistema</string>
 </resources>
