@@ -2675,7 +2675,7 @@
     <string name="turn_screen_on_router">Dönüşte uyan</string>
     <string name="turn_screen_on_time_descr">Ekranın ne kadar süre açık kalacağını ayarlayın.</string>
     <string name="turn_screen_on_sensor">Yakınlık sensörü kullan</string>
-    <string name="turn_screen_on_sensor_descr">Navigasyon esnasında açmak için elinizi ekranın üst kısmına doğru sallayın.</string>
+    <string name="turn_screen_on_sensor_descr">Elinizi ekran boyunca salladığınızda açılacaktır.</string>
     <string name="turn_on_profile_desc">Bu ayarı kullanmak için lütfen en az bir uygulama profilini açın.</string>
     <string name="rendering_attr_winter_road_name">Kış yolu</string>
     <string name="rendering_attr_ice_road_name">Buz yolu</string>
@@ -3447,7 +3447,7 @@
     <string name="sunrise_at">%1$s\'de gün doğumu</string>
     <string name="accessibility_mode_disabled">Android sisteminizde erişilebilirlik modu kapalı.</string>
     <string name="reset_to_default_category_button_promo">\'Öntanımlılara sıfırla\', sıralama düzenini öntanımlı kurulum durumuna geri döndürecektir.</string>
-    <string name="use_system_screen_timeout">Sistem ekran zaman aşımını kullan</string>
+    <string name="use_system_screen_timeout">Sistemin ekran zaman aşımını kullan</string>
     <string name="use_system_screen_timeout_promo">Öntanımlı olarak devre dışıdır: OsmAnd ön planda çalışırken ekran zaman aşımına uğramayacaktır. 
 \n 
 \nEtkinleştirilirse, OsmAnd sistem zaman aşımı ayarını kullanacaktır.</string>
@@ -3683,21 +3683,19 @@
     <string name="gpx_parse_error">OsmAnd GPX doğru biçimlendirilmemiş, daha derinlemesine incelemek için lütfen destek ekibiyle iletişime geçin.</string>
     <string name="shared_string_always">Her zaman</string>
     <string name="screen_control">Ekran denetimi</string>
-    <string name="system_screen_timeout_descr">Belirli bir süre işlem yapılmadığında ekranın kapanması için etkinleştirin, aygıtınızın sistem ayarlarında belirtilen süre kullanılacaktır.</string>
-    <string name="system_screen_timeout">Ekran zaman aşımı</string>
-    <string name="turn_screen_on_options_descr">OsmAnd ön plandayken ekranı uyandırmak için bu seçenekleri kullanın.</string>
-    <string name="turn_screen_on_descr">Bu seçenekler, sadece aygıt kilitleneceğinde OsmAnd ön planda olacaksa çalışacaktır.</string>
-    <string name="turn_screen_on_navigation_instructions_descr">Ekran, navigasyon talimatlarından birkaç saniye önce “Uyanma zamanı” seçeneğinde belirtilen süre boyunca otomatik olarak açılacaktır.
-\n
-\nSadece navigasyon sırasında çalışır.</string>
+    <string name="system_screen_timeout_descr">Sistemin ekran zaman aşımından sonra ekranı kapatır.</string>
+    <string name="system_screen_timeout">Sistemin ekran zaman aşımını kullan</string>
+    <string name="turn_screen_on_options_descr">Ekran uyandırma seçenekleri:</string>
+    <string name="turn_screen_on_descr">Ekran uyandırma seçeneklerini seçin (aygıt kilitlenirken OsmAnd\'ın ön planda olduğundan emin olun):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Her navigasyon talimatı ekranı açacaktır.</string>
     <string name="turn_screen_on_navigation_instructions">Navigasyon talimatları</string>
-    <string name="turn_screen_on_power_button_descr">OsmAnd ön plandayken ekranı açmak için aygıtın güç düğmesine basın.</string>
+    <string name="turn_screen_on_power_button_descr">Aygıtın güç düğmesine basmak, OsmAnd kilit ekranının üstünde olacak şekilde ekranı açacaktır.</string>
     <string name="turn_screen_on_power_button">Güç düğmesi</string>
     <string name="turn_screen_on_proximity_sensor">Yakınlık sensörü</string>
-    <string name="turn_screen_on_wake_time_descr">Uyandıktan sonra ekran etkinlik süresini seçin, \"%1$s\" etkinse ekran kapanmayacaktır.</string>
+    <string name="turn_screen_on_wake_time_descr">Uyandıktan sonra ekran zaman aşımını seçin. (\"%1$s\" zaman aşımı uygulamaz.)</string>
     <string name="keep_screen_on">Ekranı açık tut</string>
     <string name="keep_screen_off">Ekranı kapalı tut</string>
-    <string name="screen_timeout_descr">\"%1$s\" seçeneği etkinse, etkinlik zamanı ona bağlı olacaktır.</string>
+    <string name="screen_timeout_descr">Etkinse \"%1$s\" ile sınırlıdır.</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercator projeksiyon</string>
     <string name="one_image_per_tile">Döşeme başına bir görüntü dosyası</string>
     <string name="sqlite_db_file">SQLiteDB dosyası</string>
@@ -3719,4 +3717,5 @@
 \nBir hafta 10 080 dakikadır.
 \nBir ay 43 829 dakikadır.</string>
     <string name="tiles_storage_descr">İndirilen döşemelerin nasıl saklanacağını seçin.</string>
+    <string name="default_screen_timeout">Sistemin ekran zaman aşımı</string>
 </resources>
