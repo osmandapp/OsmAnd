@@ -1493,9 +1493,9 @@
     <string name="poi_brewery_additional">Nomo de bierfarejo</string>
     <string name="poi_microbrewery_yes">jes</string>
     <string name="poi_microbrewery_no">Sen bierfarejeto-restoracio</string>
-    <string name="poi_takeaway_yes">Elportado</string>
-    <string name="poi_takeaway_no">Sen elportado</string>
-    <string name="poi_takeaway_only">Nur elportado</string>
+    <string name="poi_takeaway_yes">Forporti manĝaĵon</string>
+    <string name="poi_takeaway_no">Forporti manĝaĵon: ne</string>
+    <string name="poi_takeaway_only">Nur forportebla manĝaĵo</string>
     <string name="poi_delivery_yes">Hejmliverado</string>
     <string name="poi_delivery_no">Sen hejmliverado</string>
     <string name="poi_delivery_only">Nur hejmliverado</string>
@@ -2810,7 +2810,7 @@
     <string name="poi_delivery">Hejmliverado</string>
     <string name="poi_drive_in">Sen-elaŭtiĝa servo (aŭtoparko)</string>
     <string name="poi_drive_through">Sen-elaŭtiĝa servo (transveturo)</string>
-    <string name="poi_takeaway">Elportado</string>
+    <string name="poi_takeaway">Forporti manĝaĵon</string>
     <string name="poi_cocktails">Kokteloj</string>
     <string name="poi_microbrewery">Metia bierfarejeto</string>
     <string name="poi_beauty_salon_service">Servo</string>
