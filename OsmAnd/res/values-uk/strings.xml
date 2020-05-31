@@ -3724,7 +3724,7 @@
     <string name="gpx_parse_error">OsmAnd GPX недостатньо сформований. Зверніться до служби підтримки для подальшого дослідження.</string>
     <string name="shared_string_always">Завжди</string>
     <string name="screen_control">Керування екраном</string>
-    <string name="system_screen_timeout_descr">Увімкніть, щоб екран вимкнувся після певного проміжку бездіяльності, буде використаний час, визначений у системних налаштуваннях вашого пристрою.</string>
+    <string name="system_screen_timeout_descr">Увімкніть, щоб екран вимкнувся після певного проміжку бездіяльності, буде використано час, визначений у системних налаштуваннях вашого пристрою.</string>
     <string name="system_screen_timeout">Час очікування екрана</string>
     <string name="turn_screen_on_options_descr">Використовуйте ці параметри, щоб пробудити екран із OsmAnd на передньому плані.</string>
     <string name="turn_screen_on_descr">Ці параметри працюватимуть, лише якщо OsmAnd буде на передньому плані, коли пристрій буде заблоковано.</string>
