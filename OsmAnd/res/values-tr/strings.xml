@@ -1508,7 +1508,7 @@
     <string name="unit_of_length">Uzunluk birimleri</string>
     <string name="keep_informing_never">Yalnızca elle ayarlama (oka basın)</string>
     <string name="keep_informing_descr">Navigasyon talimatlarını düzenli aralıklarla yeniden duyurun.</string>
-    <string name="keep_informing">Navigasyon yönergelerini tekrarla</string>
+    <string name="keep_informing">Navigasyon talimatlarını tekrarla</string>
     <string name="poi_filter_nominatim">özellikle online olarak</string>
     <string name="shared_string_others">Diğerleri</string>
     <string name="vector_data_missing">Haritaları çevrim dışı kullanmak için (\'çevrim dışı\') verilerini indirin.</string>
@@ -3414,7 +3414,7 @@
     <string name="monitoring_min_speed_descr_side_effect">Yan etki: Kaydedilen yolunuzda en düşük hız kriterinin karşılanmadığı tüm bölümler eksik olacaktır (örn. bisikletinizi dik bir tepeye doğru ittiğiniz yer). Ayrıca, molalar gibi dinlenme süreleri hakkında hiçbir bilgi olmayacaktır. Bunun, seyahatinizin toplam uzunluğunu, hareket zamanını veya ortalama hızınızı belirlemeye çalışırken olduğu gibi herhangi bir inceleme veya sonrasındaki işlemler üzerinde etkileri vardır.</string>
     <string name="monitoring_min_speed_descr_recommendation">Öneri: Önce asgari yer değiştirme kayıt filtresi (B) üzerinden hareket algılamayı kullanmayı deneyin, daha iyi sonuçlar üretebilir ve daha az veri kaybedersiniz. Kaydettiğiniz yollarınız düşük hızlarda gürültülü kalırsa, burada sıfır olmayan değerleri deneyin. Bazı ölçümlerin herhangi bir hız değeri bildirmeyebileceğini (bazı ağ tabanlı yöntemler) unutmayın, bu durumda hiçbir şey kaydetmezsiniz.</string>
     <string name="monitoring_min_speed_descr_remark">Not: hız &gt; 0 denetimi: Çoğu GPS yonga seti, sadece algoritma hareket halinde olduğunuzu belirlerse bir hız değeri bildirir ve değilseniz hiçbir şey bildirmez. Dolayısıyla bu filtrede &gt; 0 ayarını kullanmak bir anlamda GPS yonga setinin hareket algılamasını kullanır. Ancak burada kayıt zamanında filtrelenmemiş olsa bile, düzeltilen mesafeyi belirlemek için GPX analizimizde bu özelliği kullanmaya devam ediyoruz, yani bu alanda görüntülenen değer hareket halindeyken kaydedilen mesafedir.</string>
-    <string name="monitoring_min_accuracy_descr">Bu, sadece asgari doğruluk göstergesiyle ölçülen noktaları kaydedecektir (Android tarafından yonga setiniz için bildirildiği gibi metre/feet cinsinden). Doğruluk, ölçümlerinizin gerçek konumunuza ne kadar yakın olduğu anlamına gelir ve tekrarlanan ölçümlerin dağılımı olan hassasiyetle doğrudan ilişkili değildir.</string>
+    <string name="monitoring_min_accuracy_descr">Bu, sadece asgari doğruluk göstergesiyle ölçülen noktaları kaydedecektir (Android tarafından yonga setiniz için bildirildiği gibi metre/feet cinsinden). Doğruluk, ölçümlerin gerçek konuma ne kadar yakın olduğudur ve tekrarlanan ölçümlerin dağılımı olan hassasiyetle doğrudan ilişkili değildir.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Yan etki: Doğruluğa göre filtrelemenin bir sonucu olarak, örn. köprülerin altında, ağaçların altında, yüksek binalar arasında veya belirli hava koşullarında noktalar tamamen eksik olabilir.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Öneri: Neyin kaydedileceğini ve kaydedilmeyeceğini tahmin etmek zordur, bu filtreyi kapatmak en iyisi olabilir.</string>
     <string name="monitoring_min_accuracy_descr_remark">Not: GPS bir kayıttan hemen önce kapalıysa, ölçülen ilk noktanın doğruluğu azalabilir, bu nedenle kodumuzda bir nokta kaydetmeden önce bir saniye beklemek isteyebiliriz (veya art arda 3 noktanın en iyisini kaydedebiliriz, vs.), ancak bu henüz uygulanmadı.</string>
@@ -3680,5 +3680,43 @@
     <string name="profiles_for_action_not_found">Böyle bir profil bulunamadı.</string>
     <string name="index_item_world_basemap_detailed">Dünya genel bakış haritası (ayrıntılı)</string>
     <string name="unsupported_type_error">Desteklenmeyen tür</string>
-    <string name="gpx_parse_error">OsmAnd GPX doğru biçimlendirilmemiş, daha derinlemesine incelemek için lütfen destek ekibiyle iletişime geçin</string>
+    <string name="gpx_parse_error">OsmAnd GPX doğru biçimlendirilmemiş, daha derinlemesine incelemek için lütfen destek ekibiyle iletişime geçin.</string>
+    <string name="shared_string_always">Her zaman</string>
+    <string name="screen_control">Ekran denetimi</string>
+    <string name="system_screen_timeout_descr">Belirli bir süre işlem yapılmadığında ekranın kapanması için etkinleştirin, aygıtınızın sistem ayarlarında belirtilen süre kullanılacaktır.</string>
+    <string name="system_screen_timeout">Ekran zaman aşımı</string>
+    <string name="turn_screen_on_options_descr">OsmAnd ön plandayken ekranı uyandırmak için bu seçenekleri kullanın.</string>
+    <string name="turn_screen_on_descr">Bu seçenekler, sadece aygıt kilitleneceğinde OsmAnd ön planda olacaksa çalışacaktır.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Ekran, navigasyon talimatlarından birkaç saniye önce “Uyanma zamanı” seçeneğinde belirtilen süre boyunca otomatik olarak açılacaktır.
+\n
+\nSadece navigasyon sırasında çalışır.</string>
+    <string name="turn_screen_on_navigation_instructions">Navigasyon talimatları</string>
+    <string name="turn_screen_on_power_button_descr">OsmAnd ön plandayken ekranı açmak için aygıtın güç düğmesine basın.</string>
+    <string name="turn_screen_on_power_button">Güç düğmesi</string>
+    <string name="turn_screen_on_proximity_sensor">Yakınlık sensörü</string>
+    <string name="turn_screen_on_wake_time_descr">Uyandıktan sonra ekran etkinlik süresini seçin, \"%1$s\" etkinse ekran kapanmayacaktır.</string>
+    <string name="keep_screen_on">Ekranı açık tut</string>
+    <string name="keep_screen_off">Ekranı kapalı tut</string>
+    <string name="screen_timeout_descr">\"%1$s\" seçeneği etkinse, etkinlik zamanı ona bağlı olacaktır.</string>
+    <string name="pseudo_mercator_projection">Pseudo-Mercator projeksiyon</string>
+    <string name="one_image_per_tile">Döşeme başına bir görüntü dosyası</string>
+    <string name="sqlite_db_file">SQLiteDB dosyası</string>
+    <string name="online_map_name_helper_text">Çevrim içi harita kaynağı için bir ad girin.</string>
+    <string name="online_map_url_helper_text">Çevrim içi kaynağın URL\'sini girin veya yapıştırın.</string>
+    <string name="edit_online_source">Çevrim içi kaynağı düzenle</string>
+    <string name="expire_time">Sona erme zamanı</string>
+    <string name="mercator_projection">Mercator Projeksiyonu</string>
+    <string name="storage_format">Depolama biçimi</string>
+    <string name="map_source_zoom_levels">Çevrim içi haritanın görüntüleneceği veya yükleneceği en düşük ve en yüksek yakınlaştırma seviyelerini ayarlayın.</string>
+    <string name="map_source_zoom_levels_descr">Bu parametreler, harita veya üst/alt katman olarak kullanıldığında görüntüyü etkileyecektir.
+\n
+\n%1$s: Harita seçilen yakınlaştırmalarla sınırlı olacaktır.
+\n
+\n%2$s: Orijinal döşemelerin görüneceği yakınlaştırma seviyeleri. Ölçeği arttırma veya azaltma, bu değerlerin dışında meydana gelecektir.</string>
+    <string name="expire_time_descr">Dakika cinsinden geçerliliğin sona erme süresi. Önbelleğe alınan döşemeler belirtilen süreden sonra yeniden yüklenecektir. Bu kaynak için döşemeleri hiçbir zaman yeniden yüklememek için bu alanı boş bırakın.
+\n
+\nBir gün 1440 dakikadır.
+\nBir hafta 10 080 dakikadır.
+\nBir ay 43 829 dakikadır.</string>
+    <string name="tiles_storage_descr">İndirilen döşemelerin nasıl saklanacağını seçin.</string>
 </resources>

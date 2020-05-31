@@ -3495,7 +3495,7 @@
     <string name="shared_string_quick_actions">Rýchle akcie</string>
     <string name="shared_string_profiles">Profily</string>
     <string name="monitoring_min_speed_descr_remark">Poznámka: kontrola na nenulovú rýchlosť: Väčšina čipov GPS hlási hodnotu rýchlosti len ak algoritmus usúdi, že sa pohybujete, inak nevráti žiadnu rýchlosť. Preto použitie nenulového nastavenia v tomto filtri vlastne použije detekciu pohybu v GPS čipe. Ale aj keď nebude rýchlosť filtrovaná tu pri zázname, použijeme túto funkciu pri analýze GPX pre zistenie Opravenej vzdialenosti, teda hodnoty zobrazenej v tomto poli je vzdialenosť zaznamenaná počas pohybu.</string>
-    <string name="monitoring_min_accuracy_descr">Toto zaznamená len body zmerané pri indikovanej minimálnej presnosti (v metroch/stopách, ako ju hlási Android pre vaše zariadenie). Presnosť znamená rozptyl opakovaných meraní a nesúvisí priamo s presnosťou, ktorá určuje ako blízko je vaše meranie k skutočnej polohe.</string>
+    <string name="monitoring_min_accuracy_descr">Toto zaznamená len body zmerané pri indikovanej minimálnej presnosti (v metroch/stopách, ako ju hlási Android pre vaše zariadenie). Presnosť je blízkosť meraní k skutočnej polohe, a nesúvisí priamo s presnosťou, ktorá určuje rozptyl opakovaných meraní.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Vedľajší efekt: Následkom filtrovania podľa presnosti môžu celkom chýbať body napr. pod mostami, stromami, medzi vysokými budovami alebo pri niektorých poveternostných podmienkach.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Odporúčanie: Je ťažké predpovedať, čo bude zaznamenané a čo nie, preto môže byť vhodné tento filter vypnúť.</string>
     <string name="monitoring_min_accuracy_descr_remark">Poznámka: ak bolo GPS vypnuté tesne pred zaznamenávaním, prvý zmeraný bod môže znížiť presnosť a preto by sme mohli v našom programe chvíľu počkať pred zaznamenaním prvého bodu (alebo zaznamenať najlepší z troch po sebe idúcich bodov), ale toto ešte nie je implementované.</string>
@@ -3723,4 +3723,25 @@
     <string name="profiles_for_action_not_found">Nenašli sa žiadne vhodné profily.</string>
     <string name="index_item_world_basemap_detailed">Prehľadová mapa sveta (detailná)</string>
     <string name="unsupported_type_error">Nepodporovaný typ</string>
+    <string name="shared_string_always">Vždy</string>
+    <string name="turn_screen_on_descr">Tieto možnosti budú fungovať, iba ak OsmAnd bude v popredí, keď bude zariadenie zamknuté.</string>
+    <string name="screen_timeout_descr">Ak je zapnutá možnosť \"%1$s\", čas aktivity závisí od nej.</string>
+    <string name="one_image_per_tile">Jeden obrazový súbor na dlaždicu</string>
+    <string name="system_screen_timeout">Časový limit obrazovky</string>
+    <string name="turn_screen_on_options_descr">Pomocou týchto možností sa prebudí obrazovka s OsmAnd v popredí.</string>
+    <string name="turn_screen_on_navigation_instructions">Navigačné pokyny</string>
+    <string name="turn_screen_on_power_button_descr">Stlačením tlačidla napájania zariadenia zapnite obrazovku s OsmAnd v popredí.</string>
+    <string name="turn_screen_on_power_button">Tlačidlo napájania</string>
+    <string name="turn_screen_on_proximity_sensor">Snímač priblíženia</string>
+    <string name="turn_screen_on_wake_time_descr">Vyberte čas aktivity obrazovky po prebudení, obrazovka sa nevypne, ak je zapnutá možnosť \"%1$s\".</string>
+    <string name="keep_screen_on">Nechať obrazovku zapnutú</string>
+    <string name="keep_screen_off">Nechať obrazovku vypnutú</string>
+    <string name="sqlite_db_file">Súbor SQLiteDB</string>
+    <string name="online_map_name_helper_text">Zadajte názov zdroja online mapy.</string>
+    <string name="online_map_url_helper_text">Zadajte alebo prilepte URL adresu online zdroja.</string>
+    <string name="edit_online_source">Upraviť online zdroj</string>
+    <string name="expire_time">Čas vypršania platnosti</string>
+    <string name="storage_format">Formát úložiska</string>
+    <string name="map_source_zoom_levels">Nastavte minimálnu a maximálnu úroveň priblíženia, pri ktorej sa zobrazí alebo načíta online mapa.</string>
+    <string name="tiles_storage_descr">Vyberte spôsob uloženia prevzatých dlaždíc.</string>
 </resources>
