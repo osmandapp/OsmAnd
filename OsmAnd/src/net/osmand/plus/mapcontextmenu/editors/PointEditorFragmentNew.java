@@ -19,7 +19,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -63,7 +62,6 @@ import java.util.Set;
 import static net.osmand.data.FavouritePoint.*;
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
@@ -463,8 +461,21 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					e.printStackTrace();
 				}
 			}
-			IconCategoriesAdapter iconCategoriesAdapter = new IconCategoriesAdapter();
+			IconCategoriesAdapter iconCategoriesAdapter = new IconCategoriesAdapter(app);
 			iconCategoriesAdapter.setItems(new ArrayList<>(iconCategories.keySet()));
+			iconCategoriesAdapter.setListenerCategory(new IconCategoriesAdapter.IconCategoriesAdapterListener() {
+				@Override
+				public void onItemClick(String item) {
+					selectedIconCategory = item;
+					createIconForCategory();
+					updateIconSelector(selectedIcon, PointEditorFragmentNew.this.view);
+				}
+
+				@Override
+				public String getSelectedItem() {
+					return selectedIconCategory;
+				}
+			});
 			RecyclerView iconCategoriesRecyclerView = view.findViewById(R.id.group_name_recycler_view);
 			iconCategoriesRecyclerView.setAdapter(iconCategoriesAdapter);
 			iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
@@ -892,73 +903,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			groupName = itemView.findViewById(R.id.groupName);
 			groupIcon = itemView.findViewById(R.id.groupIcon);
 			groupButton = itemView.findViewById(R.id.outlineRect);
-		}
-	}
-
-	class IconCategoriesAdapter extends RecyclerView.Adapter<NameViewHolder> {
-
-		List<String> items;
-
-		public void setItems(List<String> items) {
-			this.items = items;
-		}
-
-		@NonNull
-		@Override
-		public NameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			View view;
-			view = LayoutInflater.from(parent.getContext()).inflate(R.layout.point_editor_icon_category_item, parent, false);
-			return new NameViewHolder(view);
-		}
-
-		@Override
-		public void onBindViewHolder(@NonNull NameViewHolder holder, final int position) {
-			final String category = items.get(position);
-			TextView textView = holder.buttonText;
-			int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-			if (category.equals(selectedIconCategory)) {
-				AndroidUtils.setBackground(holder.button, app.getUIUtilities().getPaintedIcon(R.drawable.bg_select_icon_group_button,
-						ContextCompat.getColor(app, activeColorResId)));
-				textView.setTextColor(ContextCompat.getColor(app, R.color.color_white));
-			} else {
-				textView.setTextColor(ContextCompat.getColor(app, R.color.preference_category_title));
-				GradientDrawable buttonBackground = (GradientDrawable) AppCompatResources.getDrawable(app,
-						R.drawable.bg_select_icon_group_button).mutate();
-				buttonBackground.setStroke(AndroidUtils.dpToPx(app, 1), ContextCompat.getColor(app,
-						nightMode ? R.color.stroked_buttons_and_links_outline_dark
-								: R.color.stroked_buttons_and_links_outline_light));
-				buttonBackground.setColor(ContextCompat.getColor(app, R.color.color_transparent));
-				AndroidUtils.setBackground(holder.button, buttonBackground);
-			}
-			textView.setText(capitalizeFirstLetter(category));
-			holder.button.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					selectedIconCategory = category;
-					createIconForCategory();
-					updateIconSelector(selectedIcon, PointEditorFragmentNew.this.view);
-				}
-			});
-		}
-
-		@Override
-		public int getItemCount() {
-			return items.size();
-		}
-
-		int getItemPosition(String name) {
-			return items.indexOf(name);
-		}
-	}
-
-	static class NameViewHolder extends RecyclerView.ViewHolder {
-		final TextView buttonText;
-		final LinearLayout button;
-
-		NameViewHolder(@NonNull View itemView) {
-			super(itemView);
-			buttonText = itemView.findViewById(R.id.button_text);
-			button = itemView.findViewById(R.id.button_container);
 		}
 	}
 }
