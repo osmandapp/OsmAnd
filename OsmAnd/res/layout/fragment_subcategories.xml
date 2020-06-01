@@ -34,8 +34,8 @@
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textColor="@color/color_white"
-                    android:textSize="@dimen/dialog_header_text_size"
-                    osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/dialog_header_text_size"
+                        osmand:typeface="@string/font_roboto_medium"
                         tools:text="Education" />
 
             </LinearLayout>
