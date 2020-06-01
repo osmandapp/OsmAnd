@@ -152,7 +152,7 @@ public class SearchUICoreTest {
 		SearchSettings s = SearchSettings.parseJSON(settingsJson);
 		s.setOfflineIndexes(Collections.singletonList(reader));
 
-		SearchPhrase phrase = new SearchPhrase(s, OsmAndCollator.primaryCollator());
+		SearchPhrase phrase = SearchPhrase.emptyPhrase(s);
 		phrase = phrase.generateNewPhrase(phraseText, s);
 
 		final SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);

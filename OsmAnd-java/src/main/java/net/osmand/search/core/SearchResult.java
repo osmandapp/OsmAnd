@@ -16,18 +16,33 @@ import java.util.Collection;
 public class SearchResult {
 	// search phrase that makes search result valid 
 	public SearchPhrase requiredSearchPhrase;
+
+	// internal package fields (used for sorting)
+	public SearchResult parentSearchResult;
+	String wordsSpan ;
+	// TODO
+	boolean firstUnknownWordMatches = true;
+	Collection<String> otherWordsMatch = null;
+	boolean unknownPhraseMatches = false;
+
 	
 	public Object object;
 	public ObjectType objectType;
 	public BinaryMapIndexReader file;
-	
+
 	public double priority;
 	public double priorityDistance;
-	public String wordsSpan ;
-	public SearchResult parentSearchResult;
-	public Collection<String> otherWordsMatch = null;
-	public boolean firstUnknownWordMatches = true;
-	public boolean unknownPhraseMatches = false;
+
+	public LatLon location;
+	public int preferredZoom = 15;
+
+	public String localeName;
+	public String alternateName;
+	public Collection<String> otherNames;
+	
+	public String localeRelatedObjectName;
+	public Object relatedObject;
+	public double distRelatedObjectName;
 
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
@@ -40,9 +55,14 @@ public class SearchResult {
 			res = ObjectType.getTypeWeight(objectType);
 		}
 		if (parentSearchResult != null) {
+			// TODO
 			// 10 > maximum type
-			// res = Math.max(res,parentSearchResult.getUnknownPhraseMatchWeight()) ;
-			res += parentSearchResult.getUnknownPhraseMatchWeight() / 10;
+//			double x = parentSearchResult.getUnknownPhraseMatchWeight();
+//			if (x == 0) {
+//				return 0;
+//			}
+			// res = Math.max(res, parentSearchResult.getUnknownPhraseMatchWeight());
+			 res += parentSearchResult.getUnknownPhraseMatchWeight() / 10;
 		}
 		return res;
 	}
@@ -77,16 +97,6 @@ public class SearchResult {
 		return priority - 1 / (1 + pd * distance);
 	}
 	
-	public LatLon location;
-	public int preferredZoom = 15;
-	public String localeName;
-	public String alternateName;
-	
-	public Collection<String> otherNames;
-	
-	public String localeRelatedObjectName;
-	public Object relatedObject;
-	public double distRelatedObjectName;
 
 	@Override
 	public String toString() {
