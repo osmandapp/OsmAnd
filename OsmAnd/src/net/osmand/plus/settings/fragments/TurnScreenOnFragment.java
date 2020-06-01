@@ -97,7 +97,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment implements OnPref
 
 	private void setupTurnScreenOnPowerButtonPref() {
 		ApplicationMode appMode = getSelectedAppMode();
-		boolean enabled = settings.TURN_SCREEN_ON_TIME_INT.get() == 0 || settings.USE_SYSTEM_SCREEN_TIMEOUT.get();
+		boolean enabled = settings.TURN_SCREEN_ON_TIME_INT.getModeValue(appMode) == 0 || settings.USE_SYSTEM_SCREEN_TIMEOUT.getModeValue(appMode);
 		SwitchPreferenceEx turnScreenOnPowerButton = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_POWER_BUTTON.getId());
 		turnScreenOnPowerButton.setEnabled(enabled);
 		turnScreenOnPowerButton.setDescription(R.string.turn_screen_on_power_button_descr);
