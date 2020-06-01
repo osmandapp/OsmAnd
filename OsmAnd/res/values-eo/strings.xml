@@ -219,7 +219,7 @@
     <string name="favorite_category_add_new">Aldoni novan</string>
     <string name="favorite_category_select">Elekti kategorion</string>
     <string name="default_speed_system_descr">Difini unuon de rapido.</string>
-    <string name="default_speed_system">Rapid-unuo</string>
+    <string name="default_speed_system">Unuoj de rapido</string>
     <string name="nm">nm</string>
     <string name="si_nm">Marmejloj</string>
     <string name="si_kmh">Kilometroj en horo</string>
@@ -1101,7 +1101,7 @@
     <string name="select_navigation_mode">Speco de transporto:</string>
     <string name="layer_map_appearance">Agordi ekranon</string>
     <string name="map_widget_renderer">Map-aspekto</string>
-    <string name="show_lanes">Koridoroj</string>
+    <string name="show_lanes">Vetur-koridoroj</string>
     <string name="avoid_unpaved">Sen tervojoj</string>
     <string name="avoid_ferries">Sen pramoj</string>
     <string name="avoid_in_routing_title">Eviti…</string>
@@ -3166,7 +3166,7 @@
     <string name="turn_screen_on_router">Teni ekranon ŝaltita</string>
     <string name="turn_screen_on_time_descr">Agordi por kiom longe la ekrano estos ŝaltita.</string>
     <string name="turn_screen_on_sensor">Uzi proksimec‑sentilon</string>
-    <string name="turn_screen_on_sensor_descr">Svingu vian manon antaŭ la ekrano por ŝalti ĝin dum navigi.</string>
+    <string name="turn_screen_on_sensor_descr">Svingu vian manon antaŭ la ekrano por ŝalti ĝin.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Firma</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Plejparte firma</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Mezkvalita</string>
@@ -3721,21 +3721,19 @@
     <string name="gpx_parse_error">Tiu ĉi GPX-dosiero estas misformita, kontaktu la helpteamon por sciiĝi pli.</string>
     <string name="shared_string_always">Ĉiam</string>
     <string name="screen_control">Aktiveco de ekrano</string>
-    <string name="system_screen_timeout_descr">Aktivigu tion ĉi por malaktivigi la ekranon post difinita tempo de neaktiveco, la tempo difinita en sistemaj agordoj de via aparato estos uzita.</string>
-    <string name="system_screen_timeout">Aŭtomate malŝalti ekranon</string>
-    <string name="turn_screen_on_options_descr">Tiuj ĉi agordoj ŝaltos la ekranon kun OsmAnd en la malfono.</string>
-    <string name="turn_screen_on_descr">Tiuj ĉi agordoj funkcios nur kiam OsmAnd laboros malfone kaj la aparato estos ŝlosita.</string>
-    <string name="turn_screen_on_navigation_instructions_descr">La ekrano aŭtomate aktiviĝos kelkaj sekundoj antaŭ la sekva gvidilo; tiu ĉi tempo estas difinita per la agordo “aktiveca periodo”.
-\n
-\nFunkcias nur dum navigi.</string>
+    <string name="system_screen_timeout_descr">Malŝaltas la ekranon post la difinita tempo (laŭ agordo de Android).</string>
+    <string name="system_screen_timeout">Sistema agordo pri malŝalti ekranon</string>
+    <string name="turn_screen_on_options_descr">Kondiĉoj por ŝalti ekranon:</string>
+    <string name="turn_screen_on_descr">Alĝustigi kiam ŝalti ekranon (certiĝu, ke OsmAnd laboras malfone kiam la aparato estas ŝlosita):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Ĉiu naviga gvidilo ŝaltos la ekranon.</string>
     <string name="turn_screen_on_navigation_instructions">Navigaj gvidiloj</string>
-    <string name="turn_screen_on_power_button_descr">Premi la ek-butonon de la aparato por ŝalti ekranon kun OsmAnd en la malfono.</string>
+    <string name="turn_screen_on_power_button_descr">Premu la ek-butonon de la aparato por ŝalti ekranon kun OsmAnd sur la ŝlos‑ekrano.</string>
     <string name="turn_screen_on_power_button">Ek-butono</string>
     <string name="turn_screen_on_proximity_sensor">Proksimec-sentilo</string>
     <string name="turn_screen_on_wake_time_descr">Elekti aktivecan periodon de la ekrano post vekiĝi, la ekrano ne malŝaltiĝos se “%1$s” estos aktiva.</string>
     <string name="keep_screen_on">Teni ekranon aktiva</string>
     <string name="keep_screen_off">Teni ekranon malaktiva</string>
-    <string name="screen_timeout_descr">Se la agordo “%1$s” estas ŝaltita, ĝi influos la periodon de aktiveco.</string>
+    <string name="screen_timeout_descr">Limigita al “%1$s”, se aktiva.</string>
     <string name="pseudo_mercator_projection">Kvazaŭ-merkatora projekcio</string>
     <string name="one_image_per_tile">Po unu bild‑dosiero per kahelo</string>
     <string name="sqlite_db_file">SQLiteDB-dosiero</string>
@@ -3757,4 +3755,5 @@
 \nUnu semajno egalas al 10 080 minutoj.
 \nUnu jaro egalas al 43 829 minutoj.</string>
     <string name="tiles_storage_descr">Elekti kiel konservi elŝutitajn kahelojn.</string>
+    <string name="default_screen_timeout">Laŭ sistema agordo</string>
 </resources>

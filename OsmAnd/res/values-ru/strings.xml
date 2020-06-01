@@ -1697,8 +1697,8 @@
     <string name="back_to_map">Вернуться на карту</string>
     <string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_enabled">Включён</string>
-    <string name="shared_string_disabled">Выключен</string>
+    <string name="shared_string_enabled">Включено</string>
+    <string name="shared_string_disabled">Выключено</string>
     <string name="shared_string_never">Никогда</string>
     <string name="shared_string_and">и</string>
     <string name="shared_string_or">или</string>
@@ -3193,7 +3193,7 @@
     <string name="app_mode_personal_transporter">Персональный транспортёр</string>
     <string name="routing_attr_max_num_changes_name">Количество изменений</string>
     <string name="turn_screen_on_time_descr">Настройте, как долго экран должен быть включён.</string>
-    <string name="turn_screen_on_sensor_descr">При навигации включать экран движением руки над верхней частью.</string>
+    <string name="turn_screen_on_sensor_descr">Включать экран движением руки по нему.</string>
     <string name="external_input_device">Внешние устройства ввода</string>
     <string name="external_input_device_descr">Выберите внешнее устройство управления, например, клавиатуру или WunderLINQ.</string>
     <string name="sett_no_ext_input">Нет</string>
@@ -3387,7 +3387,7 @@
     <string name="routing_attr_allow_classic_only_name">Разрешить только классические маршруты</string>
     <string name="routing_attr_allow_classic_only_description">Маршруты, подготовленные только для классического стиля без конькобежных трасс. Сюда входят маршруты, подготовленные небольшим снегоходом с более свободной лыжнёй и трассами, подготовленные вручную лыжниками.</string>
     <string name="routing_attr_difficulty_preference_description">Предпочитать маршруты заданной сложности, хотя прокладка маршрута по более сложным или лёгким трассам всё же возможна, если они короче.</string>
-    <string name="turn_screen_on_router">Пробуждаться на повороте</string>
+    <string name="turn_screen_on_router">Включать на повороте</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Класс 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Класс 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Класс 3</string>
@@ -3725,19 +3725,17 @@
     <string name="index_item_world_basemap_detailed">Мировая обзорная карта (подробная)</string>
     <string name="unsupported_type_error">Неподдерживаемый тип</string>
     <string name="gpx_parse_error">OsmAnd сформировал GPX не совсем правильно, пожалуйста, свяжитесь со службой поддержки для дальнейшего расследования.</string>
-    <string name="turn_screen_on_navigation_instructions_descr">Экран автоматически включится за несколько секунд до выполнения инструкций по навигации на указанное в параметре «Время пробуждения» время. 
-\n 
-\nРаботает только во время навигации.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Каждая навигационная инструкция включает экран.</string>
     <string name="turn_screen_on_navigation_instructions">Инструкции по навигации</string>
-    <string name="screen_timeout_descr">Если выбран параметр «%1$s», время активности будет зависеть от него.</string>
-    <string name="turn_screen_on_wake_time_descr">Время работы экрана после пробуждения. Экран не выключится, если выбран параметр «%1$s».</string>
-    <string name="turn_screen_on_power_button_descr">Нажатие кнопки питания устройства включит экран с OsmAnd на переднем плане.</string>
+    <string name="screen_timeout_descr">Если используется, ограничено «%1$s».</string>
+    <string name="turn_screen_on_wake_time_descr">Время работы экрана после включения. («%1$s» отключает выключение экрана.)</string>
+    <string name="turn_screen_on_power_button_descr">Нажатие кнопки питания устройства включит экран с OsmAnd на переднем плане экрана блокировки.</string>
     <string name="pseudo_mercator_projection">Псевдо-проекция Меркатора</string>
     <string name="one_image_per_tile">Каждый тайл в своём файле</string>
     <string name="edit_online_source">Изменить онлайн-источник</string>
     <string name="map_source_zoom_levels">Установите минимальный и максимальный уровни масштабирования, при которых будет отображаться или загружаться онлайн-карта.</string>
     <string name="shared_string_always">Всегда</string>
-    <string name="system_screen_timeout">Задержка до отключения экрана</string>
+    <string name="system_screen_timeout">Использовать системную настройку</string>
     <string name="turn_screen_on_power_button">Кнопка питания</string>
     <string name="turn_screen_on_proximity_sensor">Датчик приближения</string>
     <string name="keep_screen_off">Держать экран отключённым</string>
@@ -3754,13 +3752,14 @@
 \nОдна неделя — 10 080 минут.
 \nОдин месяц — 43 829 минут.</string>
     <string name="tiles_storage_descr">Выберите способ хранения загруженных тайлов.</string>
-    <string name="system_screen_timeout_descr">Включите, чтобы экран отключался после определённого периода бездействия, указанного в системных настройках вашего устройства.</string>
+    <string name="system_screen_timeout_descr">Экран будет отключаться после периода бездействия, указанного в системных настройках устройства.</string>
     <string name="map_source_zoom_levels_descr">Эти параметры влияют на отображение при использовании в качестве карты или подложки.
 \n
 \n%1$s: карта будет ограничена выбранными масштабами. 
 \n
 \n%2$s: уровни масштабирования, при которых будут видны оригинальные тайлы. Увеличение и уменьшение масштаба может происходить вне этих значений.</string>
     <string name="screen_control">Управление экраном</string>
-    <string name="turn_screen_on_options_descr">Используйте эти функции для включения экрана с OsmAnd на переднем плане.</string>
-    <string name="turn_screen_on_descr">Эти функции будут работать правильно, только если перед блокировкой устройства OsmAnd будет находиться на переднем плане.</string>
+    <string name="turn_screen_on_options_descr">Параметры включения экрана:</string>
+    <string name="turn_screen_on_descr">Настройки включения экрана (убедитесь, что перед блокировкой устройства OsmAnd находится на переднем плане):</string>
+    <string name="default_screen_timeout">Системная настройка отключения экрана</string>
 </resources>

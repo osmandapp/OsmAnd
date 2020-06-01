@@ -3093,7 +3093,7 @@
     <string name="routing_attr_max_num_changes_description">Indiquez le nombre maximum de correspondances</string>
     <string name="turn_screen_on_router">Allumer lors des changements de direction</string>
     <string name="turn_screen_on_time_descr">Définir la durée pendant laquelle l\'écran restera allumé.</string>
-    <string name="turn_screen_on_sensor_descr">Agitez la main en haut de l\'écran pour allumer l\'écran pendant la navigation.</string>
+    <string name="turn_screen_on_sensor_descr">Balayer l\'écran de la main allumera l\'écran.</string>
     <string name="rendering_attr_winter_road_name">Route sur neige</string>
     <string name="rendering_attr_ice_road_name">Route sur glace</string>
     <string name="routeInfo_winter_ice_road_name">Route sur neige et glace</string>
@@ -3708,17 +3708,15 @@
     <string name="index_item_world_basemap_detailed">Carte mondiale générale (plus détaillée)</string>
     <string name="unsupported_type_error">Type non pris en charge</string>
     <string name="gpx_parse_error">Le fichier GPX OsmAnd n\'est pas construit correctement. Vous pouvez transmettre ce fichier à l\'équipe support OsmAnd pour investiguer.</string>
-    <string name="system_screen_timeout_descr">Activez cette option pour que l\'écran s\'éteigne après une certaine période d\'inactivité. Le temps spécifié dans les paramètres systèmes de votre appareil sera utilisé.</string>
+    <string name="system_screen_timeout_descr">L\'écran s\'éteindra après le délai système.</string>
     <string name="map_source_zoom_levels_descr">Ces paramètres affecteront l\'affichage lorsqu\'ils seront utilisés comme carte ou sur-couche / sous-couche.
 \n
 \n%1$s : La carte sera limitée aux zooms sélectionnés.
 \n
 \n%2$s : Niveaux de zoom auxquels les tuiles originales seront visibles. En dehors de ces valeurs, il y aura une augmentation ou une diminution d\'échelle.</string>
-    <string name="turn_screen_on_navigation_instructions_descr">L\'écran s\'allumera automatiquement quelques secondes avant les instructions de navigation pour la durée indiquée dans l\'option \"Durée d\'allumage\".
-\n
-\nFonctionne uniquement pendant la navigation.</string>
-    <string name="turn_screen_on_wake_time_descr">Sélectionnez le temps d\'activité de l\'écran après allumage, l\'écran ne s\'éteindra pas si \"%1$s\" est activé.</string>
-    <string name="screen_timeout_descr">Le temps d\'activité dépendra de l\'option \"%1$s\" si elle est activée.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">L\'écran s\'allumera pour afficher les instructions de navigation.</string>
+    <string name="turn_screen_on_wake_time_descr">Sélectionnez le temps d\'affichage de l\'écran après allumage (\"%1$s\" signifie pas d\'extinction).</string>
+    <string name="screen_timeout_descr">Limité par l\'option \"%1$s\" si elle est activée.</string>
     <string name="expire_time_descr">Délai d\'expiration en minutes. Les tuiles en cache seront rechargées après ce délai. Laissez ce champ vide pour ne jamais rafraîchir les tuiles pour cette source.
 \n
 \nUn jour correspond à 1440 minutes.
@@ -3726,11 +3724,11 @@
 \nUn mois correspond à 43 829 minutes.</string>
     <string name="shared_string_always">Toujours</string>
     <string name="screen_control">Contrôle de l\'écran</string>
-    <string name="system_screen_timeout">Délai d’extinction de l\'écran</string>
-    <string name="turn_screen_on_options_descr">Utilisez ces options pour allumer l\'écran avec OsmAnd au premier plan.</string>
-    <string name="turn_screen_on_descr">Ces options ne fonctionneront que si OsmAnd est au premier plan au moment du verrouillage de l\'appareil.</string>
+    <string name="system_screen_timeout">Utiliser le délai système pour l’extinction de l\'écran</string>
+    <string name="turn_screen_on_options_descr">Options de réveil de l\'écran :</string>
+    <string name="turn_screen_on_descr">Sélectionnez les options de réveil de l’écran (assurez-vous qu’OsmAnd est au premier plan au moment du verrouillage de l’appareil) :</string>
     <string name="turn_screen_on_navigation_instructions">Instructions de navigation</string>
-    <string name="turn_screen_on_power_button_descr">Appuyez sur le bouton d\'alimentation de l\'appareil pour allumer l\'écran avec OsmAnd au premier plan.</string>
+    <string name="turn_screen_on_power_button_descr">Appuyez sur le bouton d\'alimentation de l\'appareil pour allumer l\'écran avec OsmAnd par dessus l’écran de verrouillage.</string>
     <string name="turn_screen_on_power_button">Bouton marche / arrêt</string>
     <string name="turn_screen_on_proximity_sensor">Capteur de proximité</string>
     <string name="keep_screen_on">Conserver l\'écran allumé</string>
@@ -3746,4 +3744,5 @@
     <string name="storage_format">Format de stockage</string>
     <string name="map_source_zoom_levels">Définissez les niveaux de zoom minimum et maximum auxquels la carte en ligne sera affichée ou chargée.</string>
     <string name="tiles_storage_descr">Sélectionnez comment les tuiles téléchargées seront stockées.</string>
+    <string name="default_screen_timeout">Délai système de veille écran</string>
 </resources>

@@ -3642,4 +3642,57 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="change_application_profile">Cambia il profilo dell\'app</string>
     <string name="profiles_for_action_not_found">Non è possibile trovare alcun profilo.</string>
     <string name="index_item_world_basemap_detailed">Mappa mondiale generale (dettagliata)</string>
+    <string name="extra_maps_menu_group">Mappe extra</string>
+    <string name="download_unsupported_action">Azione non supportata %1$s</string>
+    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Azione veloce</string>
+    <string name="radius_ruler_item">Righello radiale</string>
+    <string name="measure_distance_item">Misuratore della distanza</string>
+    <string name="travel_item">Viaggi (Wikivoyage e Wikipedia)</string>
+    <string name="map_markers_item">Marcatori mappa</string>
+    <string name="favorites_item">Preferiti</string>
+    <string name="subscription_osmandlive_item">Sottoscrizione - OsmAnd Live</string>
+    <string name="osmand_purchases_item">Acquisti OsmAnd</string>
+    <string name="legend_item_description">La guida ai simboli della mappa.</string>
+    <string name="navigation_profiles_item">Profili di navigazione</string>
+    <string name="unsupported_type_error">Tipo non supportato</string>
+    <string name="gpx_parse_error">Il GPX OsmAnd non è ben formattato, per favore contatta il supporto per ulteriori informazioni.</string>
+    <string name="shared_string_always">Sempre</string>
+    <string name="screen_control">Controllo dello schermo</string>
+    <string name="system_screen_timeout_descr">Spegni lo schermo dopo il tempo di spegnimento di sistema dello schermo.</string>
+    <string name="system_screen_timeout">Usa lo spegnimento dello schermo di sistema</string>
+    <string name="turn_screen_on_options_descr">Opzioni di accensione dello schermo:</string>
+    <string name="turn_screen_on_descr">Scegli l\'opzione di risveglio (assicurati che OsmAnd sia in primo piano quando stai per bloccare il dispositivo):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">A ogni indicazione di navigazione lo schermo si accenderà.</string>
+    <string name="turn_screen_on_navigation_instructions">Indicazioni di navigazione</string>
+    <string name="turn_screen_on_power_button_descr">Premendo il pulsante di accensione del dispositivo lo schermo si accenderà con OsmAnd nella schermata di sblocco.</string>
+    <string name="turn_screen_on_power_button">Pulsante di accensione</string>
+    <string name="turn_screen_on_proximity_sensor">Sensore di prossimità</string>
+    <string name="turn_screen_on_wake_time_descr">Scegli il tempo di spegnimento dopo l\'accensione dello schermo. (\"%1$s\" applica nessun tempo di attesa.)</string>
+    <string name="keep_screen_on">Mantieni lo schermo acceso</string>
+    <string name="keep_screen_off">Mantieni lo schermo spento</string>
+    <string name="screen_timeout_descr">Limitata a \"%1$s\", se abilitata.</string>
+    <string name="pseudo_mercator_projection">Proiezione pseudo-Mercatore</string>
+    <string name="one_image_per_tile">Un file immagine per mattonella</string>
+    <string name="sqlite_db_file">File SQLiteDB</string>
+    <string name="online_map_name_helper_text">Fornisci u nome per la sorgente della mappe online.</string>
+    <string name="online_map_url_helper_text">Immetti o incolla l\'URL della sorgente online.</string>
+    <string name="edit_online_source">Modifica le sorgenti online</string>
+    <string name="expire_time">Tempo di scadenza</string>
+    <string name="mercator_projection">Proiezione Mercatore</string>
+    <string name="storage_format">Formato dell\'archivio</string>
+    <string name="map_source_zoom_levels">Imposta il livello minimo e massimo a cui saranno caricate o visualizzate le mappe online.</string>
+    <string name="map_source_zoom_levels_descr">Questi parametri avranno effetto sullo schermo quando è utilizzato come mappa o sfondo/sovrapposizione. 
+\n
+\n%1$s: La mappa sarà limitata ai livelli di zoom selezionati. 
+\n
+\n%2$s: Livelli di zoom a cui le mattonelle originali saranno visibili. Al di fuori di questi valori avverrà un\'interpolazione.</string>
+    <string name="expire_time_descr">Tempo di scadenza in minuti. Le mattonelle salvate nella cache saranno ricaricate dopo l\'intervallo specificato. Lascia vuoto il campo per non ricaricare mai le mattonelle per questa sorgente. 
+\n
+\nUn giorno corrisponde a 1440 minuti.
+\nUna settimana corrisponde a 10080 minuti.
+\nUn mese corrisponde a 43829 minuti.</string>
+    <string name="tiles_storage_descr">Scegli come le mattonelle scaricate saranno conservate.</string>
+    <string name="default_screen_timeout">Tempo attivazione salvaschermo</string>
 </resources>

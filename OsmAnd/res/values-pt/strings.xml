@@ -64,7 +64,7 @@
     <string name="osmand_service_descr">Executar o serviço de segundo plano para usar OsmAnd enquanto o ecrã está desligado.</string>
     <string name="fast_route_mode">Caminho mais rápido</string>
     <string name="fast_route_mode_descr">Ativar para calcular a rota mais rápida ou desativar para a rota de poupança de combustível.</string>
-    <string name="tiles_to_download_estimated_size">Zoom {0}: descarregar {1} quadrículas ({2} MB )</string>
+    <string name="tiles_to_download_estimated_size">Ampliação {0}: descarregar {1} quadrículas ({2} MB)</string>
     <string name="shared_string_download_map">Descarregar mapa</string>
     <string name="select_max_zoom_preload_area">Zoom máximo para decarregar</string>
     <string name="maps_could_not_be_downloaded">Não é possível descarregar este mapa</string>
@@ -200,7 +200,7 @@
     <string name="update_poi_error_local">Não foi possível atualizar a lista de POIs locais</string>
     <string name="update_poi_error_loading">Não foi possível carregar dados do servidor</string>
     <string name="update_poi_no_offline_poi_index">Não há dados offline para esta região</string>
-    <string name="update_poi_is_not_available_for_zoom">O zoom permite-lhe atualizar os POIs</string>
+    <string name="update_poi_is_not_available_for_zoom">A ampliação permite-lhe atualizar os POIs</string>
     <string name="context_menu_item_update_poi">Atualizar pontos de interesse</string>
     <string name="context_menu_item_update_map_confirm">Atualizar dados locais da Internet\?</string>
     <string name="search_history_city">Cidade: {0}</string>
@@ -220,7 +220,7 @@
     <string name="search_offline_address">Offline</string>
     <string name="search_online_address">Internet</string>
     <string name="max_level_download_tile">Nível de zoom máx</string>
-    <string name="max_level_download_tile_descr">Não navegar em quadrículas de mapa online para níveis de zoom além deste.</string>
+    <string name="max_level_download_tile_descr">Não navegar em mapas on-line para níveis de ampliação além deste.</string>
     <string name="route_general_information">Distância total %1$s, tempo de viagem %2$d h %3$d min.</string>
     <string name="router_service_descr">Escolha um serviço de navegação online ou offline.</string>
     <string name="router_service">Serviço de navegação</string>
@@ -276,7 +276,7 @@
     <string name="data_settings">Dados</string>
     <string name="osm_settings">OSM</string>
     <string name="auto_zoom_map_descr">O nível de Zoom de acordo com a sua velocidade (enquanto o mapa é sincronizado com a posição atual).</string>
-    <string name="auto_zoom_map">Zoom automático do mapa</string>
+    <string name="auto_zoom_map">Ampliação automática do mapa</string>
     <string name="additional_settings">Outras definições</string>
     <string name="settings_preset_descr">A visão do mapa e as configurações de navegação são guardadas por perfil. Defina aqui o seu.</string>
     <string name="settings_preset">Perfil predefinido</string>
@@ -479,7 +479,7 @@
     <string name="auto_announce_on">Iniciar anúncio automático</string>
     <string name="auto_announce_off">Parar o anúncio automático</string>
     <string name="i_am_here">Estou aqui</string>
-    <string name="zoom_by_trackball_descr">Alterar zoom do mapa por movimentos horizontais da trackball.</string>
+    <string name="zoom_by_trackball_descr">Alterar ampliação do mapa por movimentos horizontais da trackball.</string>
     <string name="zoom_by_trackball">Usar trackball para controlo da ampliação</string>
     <string name="accessibility_preferences_descr">Preferências relacionadas com a acessibilidade.</string>
     <string name="shared_string_accessibility">Acessibilidade</string>
@@ -584,7 +584,7 @@
     <string name="shared_string_name">Nome</string>
     <string name="favourites_edit_dialog_category">Categoria</string>
     <string name="shared_string_no_thanks">Não, obrigado</string>
-    <string name="basemap_missing">Descarregue o mapa base do mundo para obter uma visão geral cobrindo o mundo inteiro em níveis baixos de zoom.</string>
+    <string name="basemap_missing">Descarregue o mapa base do mundo para obter uma visão geral cobrindo o mundo inteiro em níveis baixos de ampliação.</string>
     <string name="vector_data_missing">Descarregue (\'offline\') dados para utilizar mapas offline.</string>
     <string name="local_index_gpx_info_show">"
 \n
@@ -1035,17 +1035,17 @@
     <string name="about_version">Versão:</string>
     <string name="shared_string_about">Sobre</string>
     <string name="about_settings_descr">Versão, licenças, membros do projeto</string>
-    <string name="local_index_tile_data_zooms">Zoom transferidas: %1$s</string>
+    <string name="local_index_tile_data_zooms">Ampliações transferidas: %1$s</string>
     <string name="local_index_tile_data_expire">Expira (minutos): %1$s</string>
     <string name="local_index_tile_data_downloadable">Transferível: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom máximo: %1$s</string>
-    <string name="local_index_tile_data_minzoom">Zoom Mínimo: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Ampliação Mínima: %1$s</string>
     <string name="local_index_tile_data_name">Dados do mosaico: %1$s</string>
     <string name="edit_tilesource_successfully">A origem do mosaico %1$s foi guardada</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elíptico</string>
     <string name="edit_tilesource_maxzoom">Zoom máximo</string>
     <string name="edit_tilesource_expiration_time">Expira (minutos)</string>
-    <string name="edit_tilesource_minzoom">Zoom mínimo</string>
+    <string name="edit_tilesource_minzoom">Ampliação mínima</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Escolher existente…</string>
     <string name="maps_define_edit">Definir/Editar…</string>
@@ -1073,7 +1073,7 @@
 \n - Orientação do mapa de acordo com a bússola ou a direção do movimento.
 \n - Orientação por faixas de rodagem, indicação do limite de velocidade, vozes gravadas e TTS.
 \n"</string>
-    <string name="auto_zoom_none">Sem zoom automático</string>
+    <string name="auto_zoom_none">Sem ampliação automático</string>
     <string name="auto_zoom_close">Aproximar</string>
     <string name="auto_zoom_far">Visão intermédia</string>
     <string name="auto_zoom_farthest">Mais abrangente</string>
@@ -1241,7 +1241,7 @@
     <string name="gpx_info_end_time">Hora de fim: %1$tF, %1$tT </string>
     <string name="gpx_info_average_speed">Velocidade média: %1$s </string>
     <string name="gpx_info_diff_altitude">Intervalo de altitude: %1$s</string>
-    <string name="show_zoom_buttons_navigation_descr">Mostrar botões de zoom durante a navegação.</string>
+    <string name="show_zoom_buttons_navigation_descr">Mostrar botões de ampliação durante a navegação.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botões de zoom</string>
     <string name="text_size_descr">Defina o tamanho do texto no mapa.</string>
     <string name="text_size">Tamanho do texto</string>
@@ -1527,7 +1527,7 @@
     <string name="rendering_attr_hideProposed_name">Objetos propostos</string>
     <string name="shared_string_upload">Enviar</string>
     <string name="osm_edit_created_poi">POI OSM adicionado</string>
-    <string name="world_map_download_descr">Mapa base mundial (cobrindo o mundo inteiro em baixo nível de zoom) ausente ou ultrapassado. Por favor, considere descarregá-lo para uma visão global.</string>
+    <string name="world_map_download_descr">Mapa base mundial (cobrindo o mundo inteiro em baixo nível de ampliação) ausente ou ultrapassado. Por favor, considere descarregá-lo para uma visão global.</string>
     <string name="shared_string_qr_code">Código QR</string>
     <string name="map_downloaded_descr">O mapa %1$s está pronto para ser usado.</string>
     <string name="map_downloaded">Mapa descarregado</string>
@@ -1900,7 +1900,7 @@
     <string name="mapillary_menu_edit_text_hint">Introduza nome de utilizador</string>
     <string name="mapillary_menu_descr_username">Ver imagens adicionadas por</string>
     <string name="mapillary_menu_title_username">Nome de utilizador</string>
-    <string name="mapillary_menu_filter_description">Pode filtrar imagens por quem submeteu, por data our por tipo. Filtros aplicáveis apenas para zoom de proximidade.</string>
+    <string name="mapillary_menu_filter_description">Pode filtrar imagens por quem submeteu, por data ou por tipo. Filtros aplicáveis apenas para ampliação de proximidade.</string>
     <string name="map_widget_ruler_control">Régua de raio</string>
     <string name="shared_string_permissions">Permissões</string>
     <string name="import_gpx_failed_descr">Não foi possível importar o ficheiro. Por favor, certifique-se de que OsmAnd tem permissão para lê-lo.</string>
@@ -1937,7 +1937,7 @@
     <string name="shared_string_plugin">Complemento</string>
     <string name="srtm_purchase_header">Compre e instale o plugin \'Curvas de nível\' para mostrar as áreas verticais graduadas.</string>
     <string name="srtm_color_scheme">Esquema de cores</string>
-    <string name="show_from_zoom_level">Mostrar a partir do nível de zoom</string>
+    <string name="show_from_zoom_level">Mostrar a partir do nível de ampliação</string>
     <string name="routing_attr_allow_private_name">Permitir acesso privado</string>
     <string name="routing_attr_allow_private_description">Permitir acesso a áreas privadas.</string>
     <string name="display_zoom_level">Mostrar nível de zoom: %1$s</string>
@@ -1955,9 +1955,9 @@
     <string name="nearest_cities">Cidades próximas</string>
     <string name="select_city">Selecionar cidade</string>
     <string name="select_postcode">Pesquisa por código postal</string>
-    <string name="quick_action_auto_zoom">Auto zoom do mapa ativado/desativado</string>
+    <string name="quick_action_auto_zoom">Auto ampliação do mapa ativado/desativado</string>
     <string name="quick_action_auto_zoom_desc">Botão para ativar ou desativar o zoom automático controlado por velocidade.</string>
-    <string name="quick_action_auto_zoom_on">Ativar o zoom automático</string>
+    <string name="quick_action_auto_zoom_on">Ativar a ampliação automática</string>
     <string name="quick_action_auto_zoom_off">Desativar o zoom automático</string>
     <string name="quick_action_add_destination">Definir destino</string>
     <string name="quick_action_replace_destination">Substituir destino</string>
@@ -2529,7 +2529,7 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">Estradas não trafegáveis</string>
     <string name="rendering_attr_hideText_name">Texto</string>
     <string name="rendering_attr_hideWoodScrubs_name">Matas e arbustos</string>
-    <string name="rendering_attr_buildings15zoom_name">Edifícios em zoom 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Edifícios em ampliação 15</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalhes</string>
     <string name="rendering_attr_hideAccess_name">Restrições de acesso</string>
     <string name="no_index_file_to_download">Descarregamentos não encontrados, por favor verifique a sua ligação à Internet.</string>
@@ -2571,12 +2571,12 @@
 \n• Orientação por voz passo-a-passo lhe guia ao longo do caminho (vozes gravadas e sintetizadas) 
 \n• A rota se recalcula sempre que se desviar dela 
 \n• Orientação de pista, nomes de ruas e tempo estimado de chegada ajudará ao longo do caminho 
-\n• Para fazer sua viagem mais segura, modo dia/noite se alterna automaticamente 
+\n• Para fazer a sua viagem mais segura, modo dia/noite se alterna automaticamente 
 \n• Visualize limites de velocidade e receba aviso se ultrapassá-los 
-\n• Zoom do mapa se ajusta a sua velocidade 
+\n• Ampliação do mapa se ajusta a sua velocidade 
 \n• Pesquise destinos pelo endereço, tipo (p. ex.: estacionamento, restaurante, hotel, posto de gasolina, museu) ou coordenadas geográficas 
-\n• Suporta pontos intermédios em seu itinerário 
-\n• Grave ou carregue uma trilha GPX e siga-a 
+\n• Suporta pontos intermédios no seu itinerário 
+\n• Grave ou envie uma trilha GPX e siga-a
 \n</string>
     <string name="osmand_extended_description_part3">Mapa 
 \n• Mostra POIs (ponto de interesse) perto de si 
@@ -3434,7 +3434,7 @@
     <string name="slope_download_description">Mapas adicionais são necessários para ver Pistas no mapa.</string>
     <string name="slope_read_more">Pode ler mais sobre Inclinações em %1$s.</string>
     <string name="shared_string_transparency">Transparência</string>
-    <string name="shared_string_zoom_levels">Níveis de zoom</string>
+    <string name="shared_string_zoom_levels">Níveis de ampliação</string>
     <string name="shared_string_legend">Legenda</string>
     <string name="terrain_empty_state_text">Ativar ver o mapa de colinas ou encostas. Pode ler mais sobre este tipo de mapa no nosso site</string>
     <string name="shared_string_hillshade">Sombras de relevo</string>
@@ -3648,7 +3648,7 @@
     <string name="favorites_item">Favoritos</string>
     <string name="subscription_osmandlive_item">Assinatura - OsmAnd Live</string>
     <string name="osmand_purchases_item">Compras de OsmAnd</string>
-    <string name="legend_item_description">O guia para a simbologia de um mapa</string>
+    <string name="legend_item_description">O guia para a simbologia de um mapa.</string>
     <string name="navigation_profiles_item">Perfis de navegação</string>
     <string name="search_poi_types">Pesquisar tipos de poi</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
@@ -3687,4 +3687,57 @@
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Cor customizada</string>
     <string name="search_poi_types_descr">Combinar tipos de POI de diferentes categorias. Toque em \"Trocar\" para selecionar tudo, toque no lado esquerdo para seleção da categoria.</string>
+    <string name="quick_action_transport_hide">Ocultar o transporte público</string>
+    <string name="quick_action_transport_show">Mostrar transporte público</string>
+    <string name="quick_action_show_hide_transport">Mostrar/ocultar transporte público</string>
+    <string name="quick_action_transport_descr">Botão que mostra ou oculta o transporte público no mapa.</string>
+    <string name="create_edit_poi">Criar / Editar POI</string>
+    <string name="parking_positions">Posições de estacionamento</string>
+    <string name="add_edit_favorite">Adicionar / Editar Favorito</string>
+    <string name="reset_deafult_order">Restaurar ordem de itens padrão</string>
+    <string name="back_to_editing">Voltar à edição</string>
+    <string name="quick_action_switch_profile_descr">O botão de ação alterna entre os perfis selecionados.</string>
+    <string name="shared_string_add_profile">Adicionar perfil</string>
+    <string name="change_application_profile">Alterar o perfil de app</string>
+    <string name="profiles_for_action_not_found">Não consegui encontrar nenhum perfil desse tipo.</string>
+    <string name="index_item_world_basemap_detailed">Mapa geral do mundo (detalhado)</string>
+    <string name="unsupported_type_error">Tipo não suportado</string>
+    <string name="gpx_parse_error">OsmAnd GPX não está bem formado, por favor entre em contacto com a equipa de suporte para investigar mais.</string>
+    <string name="shared_string_always">Sempre</string>
+    <string name="screen_control">Controle de ecrã</string>
+    <string name="system_screen_timeout_descr">Desliga o ecrã após o tempo limite do ecrã do sistema.</string>
+    <string name="system_screen_timeout">Usar o tempo limite do ecrã do sistema</string>
+    <string name="turn_screen_on_options_descr">Opções de acordar o ecrã:</string>
+    <string name="turn_screen_on_descr">Selecione as opções de acordar o ecrã (certifique-se de que OsmAnd está em primeiro plano quando o aparelho está a ser bloqueado):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Cada instrução de navegação irá ligar o ecrã.</string>
+    <string name="turn_screen_on_navigation_instructions">Instruções de navegação</string>
+    <string name="turn_screen_on_power_button_descr">Pressionando o botão de ligar o aparelho ligará o ecrã com OsmAnd acima do ecrã de bloqueio.</string>
+    <string name="turn_screen_on_power_button">Botão de ligar</string>
+    <string name="turn_screen_on_proximity_sensor">Sensor de proximidade</string>
+    <string name="turn_screen_on_wake_time_descr">Selecione o tempo limite do ecrã após acordar. (\"%1$s\" não aplica tempo limite).</string>
+    <string name="keep_screen_on">Manter o ecrã ligado</string>
+    <string name="keep_screen_off">Manter o ecrã desligado</string>
+    <string name="screen_timeout_descr">Limitado por \"%1$s\", se ativado.</string>
+    <string name="pseudo_mercator_projection">Projeção pseudo-Mercator</string>
+    <string name="one_image_per_tile">Um ficheiro de imagem por quadrícula</string>
+    <string name="sqlite_db_file">Ficheiro SQLiteDB</string>
+    <string name="online_map_name_helper_text">Forneça um nome para a fonte do mapa on-line.</string>
+    <string name="online_map_url_helper_text">Insira ou cole a URL para a fonte on-line.</string>
+    <string name="edit_online_source">Editar fonte on-line</string>
+    <string name="expire_time">Tempo de validade</string>
+    <string name="mercator_projection">Projeção Mercator</string>
+    <string name="storage_format">Formato de armazenamento</string>
+    <string name="map_source_zoom_levels">Defina o nível mínimo e máximo de ampliação no qual o mapa on-line será exibido ou carregado.</string>
+    <string name="map_source_zoom_levels_descr">Estes parâmetros irão afetar a visualização quando utilizados como mapa ou sobreposição/sub-camada.
+\n
+\n%1$s: O mapa será limitado às ampliações selecionados.
+\n
+\n%2$s: Níveis de ampliação em que os azulejos originais serão visíveis. O aumento ou redução de escala ocorrerá fora destes valores.</string>
+    <string name="expire_time_descr">Tempo de expiração em minutos. As quadrículas em cache serão carregadas novamente após um tempo especificado. Deixe este campo vazio para nunca atualizar as quadrículas para esta fonte.
+\n
+\nUm dia são 1440 minutos.
+\nUma semana são 10 080 minutos.
+\nUm mês são 43 829 minutos.</string>
+    <string name="tiles_storage_descr">Escolha como as quadrículas descarregadas serão armazenadas.</string>
+    <string name="default_screen_timeout">Tempo limite do ecrã do sistema</string>
 </resources>

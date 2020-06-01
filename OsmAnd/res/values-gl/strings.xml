@@ -3194,7 +3194,7 @@ Lon %2$s</string>
     <string name="turn_screen_on_router">Espertar ó xirar</string>
     <string name="turn_screen_on_time_descr">Estabelece o tempo durante o cal ten que estar encendida a pantalla.</string>
     <string name="turn_screen_on_sensor">Empregar sensor de proximidade</string>
-    <string name="turn_screen_on_sensor_descr">Move a túa man sobre a parte superior da pantalla para acendela mentres navegas.</string>
+    <string name="turn_screen_on_sensor_descr">Ó mover a man pola pantalla, acenderase.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Grao 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Grao 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Grao 3</string>
@@ -3750,24 +3750,24 @@ Lon %2$s</string>
     <string name="unsupported_type_error">Tipo non admitido</string>
     <string name="gpx_parse_error">O GPX do OsmAnd non está ben formado, por favor, contacta co equipo de soporte para pescudar máis.</string>
     <string name="screen_control">Control da pantalla</string>
-    <string name="system_screen_timeout">Tempo de espera da pantalla</string>
-    <string name="turn_screen_on_descr">Esas opcións funcionarán só se o OsmAnd estea en primeiro plano cando o dispositivo sexa bloqueado.</string>
+    <string name="system_screen_timeout">Emprega o tempo de espera da pantalla do sistema</string>
+    <string name="turn_screen_on_descr">Escolle as opcións de acender a pantalla (asegúrate de que o OsmAnd está no primeiro plano cando o dispositivo está a ser bloqueado):</string>
     <string name="turn_screen_on_navigation_instructions">Instrucións de navegación</string>
     <string name="turn_screen_on_power_button">Botón de acendido</string>
-    <string name="turn_screen_on_wake_time_descr">Escolle o tempo de actividade da pantalla após acenderse, a pantalla non se apagará se \"%1$s\" está activado.</string>
+    <string name="turn_screen_on_wake_time_descr">Escolle o tempo de espera da pantalla após acender. (\"%1$s\" non aplica tempo de espera).</string>
     <string name="keep_screen_off">Manter a pantalla apagada</string>
     <string name="pseudo_mercator_projection">Proxección pseudo-Mercator</string>
     <string name="sqlite_db_file">Ficheiro SQLiteDB</string>
     <string name="shared_string_always">Sempre</string>
-    <string name="system_screen_timeout_descr">Actívao para que a pantalla sexa apagada após un certo período de inactividade, empregarase o tempo especificado nos axustes do sistema do teu dispositivo.</string>
-    <string name="turn_screen_on_options_descr">Emprega estas opcións para activar a pantalla co OsmAnd no primeiro plano.</string>
+    <string name="system_screen_timeout_descr">Apaga a apantalla após o tempo de espera da pantalla do sistema.</string>
+    <string name="turn_screen_on_options_descr">Opcións de acendido da pantalla:</string>
     <string name="turn_screen_on_navigation_instructions_descr">A pantalla acenderase de xeito automático uns segundos antes das instrucións de navegación durante un tempo específico na opción \"Tempo de activación\".
 \n
 \n Traballa só mentres navegas.</string>
-    <string name="turn_screen_on_power_button_descr">Preme o botón de acendido do dispositivo para acender a pantalla co OsmAnd no primeiro plano.</string>
+    <string name="turn_screen_on_power_button_descr">Premendo o botón de acendido do dispositivo acenderá a pantalla co OsmAnd na pantalla de bloqueo.</string>
     <string name="turn_screen_on_proximity_sensor">Sensor de proximidade</string>
     <string name="keep_screen_on">Manter a pantalla acendida</string>
-    <string name="screen_timeout_descr">Se a opción \"%1$s\" está activada, o tempo de actividade dependerá diso.</string>
+    <string name="screen_timeout_descr">Limitado por \"%1$s\", se está activado.</string>
     <string name="one_image_per_tile">Un ficheiro de imaxe por tesela</string>
     <string name="online_map_name_helper_text">Fornece un nome para a fonte do mapa en liña.</string>
     <string name="online_map_url_helper_text">Insire ou pega a URL da fonte en liña.</string>
@@ -3787,4 +3787,5 @@ Lon %2$s</string>
 \n Unha semana son 10080 minutos.
 \n Un mes son 43829 minutos.</string>
     <string name="tiles_storage_descr">Escolle de que xeito serán almacenadas as teselas baixadas.</string>
+    <string name="default_screen_timeout">Tempo de espera da pantalla do sistema</string>
 </resources>

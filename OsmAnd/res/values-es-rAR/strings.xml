@@ -3177,7 +3177,7 @@
     <string name="turn_screen_on_router">Despertar al girar</string>
     <string name="turn_screen_on_time_descr">Define durante cuánto tiempo debe estar encendida la pantalla.</string>
     <string name="turn_screen_on_sensor">Usar sensor de proximidad</string>
-    <string name="turn_screen_on_sensor_descr">Mueve la mano sobre la parte superior de la pantalla para encenderla mientras navegas.</string>
+    <string name="turn_screen_on_sensor_descr">Al mover la mano por la pantalla, se encenderá.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Grado 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Grado 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Grado 3</string>
@@ -3734,19 +3734,19 @@
     <string name="gpx_parse_error">El GPX de OsmAnd no está bien formado, por favor, contacta con el equipo de soporte para investigar más a fondo.</string>
     <string name="shared_string_always">Siempre</string>
     <string name="screen_control">Control de pantalla</string>
-    <string name="system_screen_timeout_descr">Activar para que la pantalla se apague después de un cierto período de inactividad, se utilizará el tiempo indicado en los ajustes del sistema del dispositivo.</string>
-    <string name="system_screen_timeout">Tiempo de espera de la pantalla</string>
-    <string name="turn_screen_on_options_descr">Usar estas opciones para encender la pantalla con OsmAnd en primer plano.</string>
-    <string name="turn_screen_on_descr">Estas opciones funcionarán, sólo si OsmAnd funciona en primer plano al bloquear el dispositivo.</string>
+    <string name="system_screen_timeout_descr">Apaga la pantalla después del tiempo de espera del sistema.</string>
+    <string name="system_screen_timeout">Usar el tiempo de espera de la pantalla del sistema</string>
+    <string name="turn_screen_on_options_descr">Opciones de activación de la pantalla:</string>
+    <string name="turn_screen_on_descr">Elige las opciones de activación de la pantalla (asegúrate de que OsmAnd esté en primer plano al bloquear el dispositivo):</string>
     <string name="turn_screen_on_navigation_instructions">Indicaciones de navegación</string>
-    <string name="turn_screen_on_navigation_instructions_descr">La pantalla se encenderá automáticamente unos segundos antes de las indicaciones de navegación durante el tiempo indicado en la opción \"Tiempo de encendido\".</string>
-    <string name="turn_screen_on_power_button_descr">Pulsa el botón de encendido del dispositivo para encender la pantalla con OsmAnd en primer plano.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Cada indicación de navegación activará la pantalla.</string>
+    <string name="turn_screen_on_power_button_descr">Al pulsar el botón de encendido del dispositivo, se encenderá la pantalla de bloqueo con OsmAnd sobre ella.</string>
     <string name="turn_screen_on_power_button">Botón de encendido</string>
     <string name="turn_screen_on_proximity_sensor">Sensor de proximidad</string>
-    <string name="turn_screen_on_wake_time_descr">Elige el tiempo de encendido de la pantalla, esta no se apagará si «%1$s» está activado.</string>
+    <string name="turn_screen_on_wake_time_descr">Elige el tiempo de espera de la pantalla luego del encendido. («%1$s» no aplica ningún tiempo de espera.)</string>
     <string name="keep_screen_on">Mantener la pantalla encendida</string>
     <string name="keep_screen_off">Mantener la pantalla apagada</string>
-    <string name="screen_timeout_descr">Si la opción «%1$s» está activada, el tiempo de actividad dependerá de ello.</string>
+    <string name="screen_timeout_descr">Limitado por «%1$s», si está activado.</string>
     <string name="pseudo_mercator_projection">Proyección de pseudo-Mercator</string>
     <string name="one_image_per_tile">Un archivo de imagen por tesela</string>
     <string name="sqlite_db_file">Archivo SQLiteDB</string>
@@ -3768,4 +3768,5 @@
 \nUna semana son 10 080 minutos.
 \nUn mes son 43 829 minutos.</string>
     <string name="tiles_storage_descr">Elige cómo se almacenarán las teselas descargadas.</string>
+    <string name="default_screen_timeout">Tiempo de espera de la pantalla del sistema</string>
 </resources>
