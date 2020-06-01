@@ -40,6 +40,7 @@ import net.osmand.data.Amenity;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -298,8 +299,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 	}
 
 	private void updateCloseSearchIcon(boolean searching) {
-		searchProgressBar.setVisibility(searching ? View.VISIBLE : View.GONE);
-		searchCloseIcon.setVisibility(searching ? View.GONE : View.VISIBLE);
+		AndroidUiHelper.updateVisibility(searchProgressBar, searching);
+		AndroidUiHelper.updateVisibility(searchCloseIcon, !searching);
 	}
 
 	private void searchSubCategory(String text) {
