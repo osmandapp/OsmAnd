@@ -311,9 +311,7 @@ public class WikipediaPoiMenu {
 
 	public static void refreshWikipediaOnMap(MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		hideWikipediaFromMap(app);
-		showWikipediaOnMap(app);
-		app.getPoiFilters().setUpdatePoiFiltersOnMap(true);
+		app.getPoiFilters().loadSelectedPoiFilters();
 		mapActivity.getDashboard().refreshContent(true);
 		mapActivity.refreshMap();
 	}
@@ -321,6 +319,7 @@ public class WikipediaPoiMenu {
 	private static void showWikipediaOnMap(OsmandApplication app) {
 		PoiFiltersHelper ph = app.getPoiFilters();
 		PoiUIFilter wiki = ph.getTopWikiPoiFilter();
+		ph.loadSelectedPoiFilters();
 		ph.addSelectedPoiFilter(wiki);
 	}
 

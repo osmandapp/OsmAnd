@@ -58,7 +58,6 @@ public class PoiFiltersHelper {
 	private PoiUIFilter topWikiPoiFilter;
 	private List<PoiUIFilter> cacheTopStandardFilters;
 	private Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>();
-	private boolean updatePoiFiltersOnMap;
 
 	private static final String UDF_CAR_AID = "car_aid";
 	private static final String UDF_FOR_TOURISTS = "for_tourists";
@@ -487,7 +486,7 @@ public class PoiFiltersHelper {
 	}
 
 	public Set<PoiUIFilter> getSelectedPoiFilters(PoiUIFilter ... filtersToExclude) {
-		if (filtersToExclude != null) {
+		if (filtersToExclude != null && filtersToExclude.length > 0) {
 			Set<PoiUIFilter> filters = new TreeSet<>();
 			for (PoiUIFilter filter : selectedPoiFilters) {
 				boolean skip = false;
@@ -592,7 +591,7 @@ public class PoiFiltersHelper {
 		if(!application.getPoiTypes().isInit()) {
 			return;
 		}
-		selectedPoiFilters.clear();
+		selectedPoiFilters = new TreeSet<>();
 		for (String f : application.getSettings().getSelectedPoiFilters()) {
 			PoiUIFilter filter = getFilterById(f);
 			if (filter != null) {
@@ -602,7 +601,6 @@ public class PoiFiltersHelper {
 				selectedPoiFilters.add(filter);
 			}
 		}
-		updatePoiFiltersOnMap = true;
 	}
 
 	@Nullable
@@ -638,16 +636,6 @@ public class PoiFiltersHelper {
 			filters.add(filter.filterId);
 		}
 		application.getSettings().setSelectedPoiFilters(filters);
-	}
-
-	public boolean shouldUpdatePoiFiltersOnMap() {
-		boolean shouldUpdate = updatePoiFiltersOnMap;
-		updatePoiFiltersOnMap = false;
-		return shouldUpdate;
-	}
-
-	public void setUpdatePoiFiltersOnMap(boolean updatePoiFiltersOnMap) {
-		this.updatePoiFiltersOnMap = updatePoiFiltersOnMap;
 	}
 
 	public class PoiFilterDbHelper {
