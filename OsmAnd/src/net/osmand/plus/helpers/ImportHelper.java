@@ -71,6 +71,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import static android.app.Activity.RESULT_OK;
@@ -314,13 +315,17 @@ public class ImportHelper {
 						} else if (fileName != null && fileName.endsWith(KMZ_SUFFIX)) {
 							try {
 								zis = new ZipInputStream(is);
-								zis.getNextEntry();
-								final String result = Kml2Gpx.toGpx(zis);
-								if (result != null) {
-									try {
-										return GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes("UTF-8")));
-									} catch (UnsupportedEncodingException e) {
-										return null;
+								ZipEntry entry;
+								while ((entry = zis.getNextEntry()) != null) {
+									if (entry.getName().endsWith(KML_SUFFIX)) {
+										final String result = Kml2Gpx.toGpx(zis);
+										if (result != null) {
+											try {
+												return GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes("UTF-8")));
+											} catch (UnsupportedEncodingException e) {
+												return null;
+											}
+										}
 									}
 								}
 							} catch (Exception e) {
@@ -418,13 +423,18 @@ public class ImportHelper {
 					is = app.getContentResolver().openInputStream(kmzFile);
 					if (is != null) {
 						zis = new ZipInputStream(is);
-						zis.getNextEntry();
-						final String result = Kml2Gpx.toGpx(zis);
-						if (result != null) {
-							try {
-								return GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes("UTF-8")));
-							} catch (UnsupportedEncodingException e) {
-								return null;
+
+						ZipEntry entry;
+						while ((entry = zis.getNextEntry()) != null) {
+							if (entry.getName().endsWith(KML_SUFFIX)) {
+								final String result = Kml2Gpx.toGpx(zis);
+								if (result != null) {
+									try {
+										return GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes("UTF-8")));
+									} catch (UnsupportedEncodingException e) {
+										return null;
+									}
+								}
 							}
 						}
 					}
