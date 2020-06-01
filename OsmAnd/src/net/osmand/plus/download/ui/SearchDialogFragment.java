@@ -157,7 +157,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
 		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
-		clearButton.setColorFilter(iconColorResId);
+		clearButton.setColorFilter(ContextCompat.getColor(getMyApplication(), iconColorResId));
 		clearButton.setVisibility(View.GONE);
 
 		searchEditText.addTextChangedListener(new TextWatcher() {
