@@ -207,7 +207,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		Set<PoiUIFilter> selectedPoiFilters = app.getPoiFilters().getSelectedPoiFilters();
 		if (this.filters != selectedPoiFilters) {
-            this.filters = selectedPoiFilters;
+			this.filters = selectedPoiFilters;
 			data.clearCache();
 		}
 
