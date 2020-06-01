@@ -88,10 +88,10 @@ public class FavoriteImageDrawable extends Drawable {
 		if (point != null) {
 			int iconId = point.getBackgroundType().getIconId();
 			String iconName = ctx.getResources().getResourceEntryName(iconId);
-			return ctx.getResources().getIdentifier("map_" + iconName + "_" + layer
+			return ctx.getResources().getIdentifier("ic_" + iconName + "_" + layer
 					, "drawable", ctx.getPackageName());
 		}
-		return R.drawable.map_white_favorite_shield;
+		return R.drawable.ic_white_favorite_shield;
 	}
 
 	@Override
