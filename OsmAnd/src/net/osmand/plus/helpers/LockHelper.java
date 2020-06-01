@@ -10,19 +10,25 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
-import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
+
+import org.apache.commons.logging.Log;
 
 import java.util.List;
 
 public class LockHelper implements SensorEventListener {
+
+	private static final Log LOG = PlatformUtil.getLog(LockHelper.class);
 
 	private static final int SENSOR_SENSITIVITY = 4;
 
@@ -33,7 +39,9 @@ public class LockHelper implements SensorEventListener {
 	private OsmandApplication app;
 	private CommonPreference<Integer> turnScreenOnTime;
 	private CommonPreference<Boolean> turnScreenOnSensor;
-	private CommonPreference<Boolean> turnScreenOnEnabled;
+	private CommonPreference<Boolean> useSystemScreenTimeout;
+	private CommonPreference<Boolean> turnScreenOnPowerButton;
+	private CommonPreference<Boolean> turnScreenOnNavigationInstructions;
 
 	@Nullable
 	private LockUIAdapter lockUIAdapter;
@@ -51,9 +59,11 @@ public class LockHelper implements SensorEventListener {
 		this.app = app;
 		uiHandler = new Handler();
 		OsmandSettings settings = app.getSettings();
-		turnScreenOnEnabled = settings.TURN_SCREEN_ON_ENABLED;
 		turnScreenOnTime = settings.TURN_SCREEN_ON_TIME_INT;
 		turnScreenOnSensor = settings.TURN_SCREEN_ON_SENSOR;
+		useSystemScreenTimeout = settings.USE_SYSTEM_SCREEN_TIMEOUT;
+		turnScreenOnPowerButton = settings.TURN_SCREEN_ON_POWER_BUTTON;
+		turnScreenOnNavigationInstructions = settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
 
 		lockRunnable = new Runnable() {
 			@Override
@@ -64,16 +74,20 @@ public class LockHelper implements SensorEventListener {
 		voiceMessageListener = new VoiceMessageListener() {
 			@Override
 			public void onVoiceMessage(List<String> listCommands, List<String> played) {
-				unlockEvent();
+				if (turnScreenOnNavigationInstructions.get()) {
+					unlockEvent();
+				}
 			}
 		};
 		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
 			@Override
 			public void onOsmAndSettingsCustomized() {
 				OsmandSettings settings = app.getSettings();
-				turnScreenOnEnabled = settings.TURN_SCREEN_ON_ENABLED;
 				turnScreenOnTime = settings.TURN_SCREEN_ON_TIME_INT;
 				turnScreenOnSensor = settings.TURN_SCREEN_ON_SENSOR;
+				useSystemScreenTimeout = settings.USE_SYSTEM_SCREEN_TIMEOUT;
+				turnScreenOnPowerButton = settings.TURN_SCREEN_ON_POWER_BUTTON;
+				turnScreenOnNavigationInstructions = settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
 			}
 		};
 		app.getAppCustomization().addListener(customizationListener);
@@ -104,13 +118,12 @@ public class LockHelper implements SensorEventListener {
 
 	private void lock() {
 		releaseWakeLocks();
-		if (lockUIAdapter != null && isFollowingMode()) {
-			lockUIAdapter.lock();
+		int unlockTime = turnScreenOnTime.get();
+		if (lockUIAdapter != null) {
+			if (!(useSystemScreenTimeout.get() && turnScreenOnPowerButton.get()) && unlockTime != 0) {
+				lockUIAdapter.lock();
+			}
 		}
-	}
-
-	private boolean isFollowingMode() {
-		return app.getRoutingHelper().isFollowingMode();
 	}
 
 	private void timedUnlock(final long millis) {
@@ -125,14 +138,33 @@ public class LockHelper implements SensorEventListener {
 				}
 			});
 		}
-		uiHandler.postDelayed(lockRunnable, millis);
+		if (millis > 0) {
+			uiHandler.postDelayed(lockRunnable, millis);
+		}
 	}
 
 	private void unlockEvent() {
-		int unlockTime = turnScreenOnTime.get();
-		if (unlockTime > 0 && turnScreenOnEnabled.get()) {
+		int unlockTime = getUnlockTime();
+		if (unlockTime > 0) {
 			timedUnlock(unlockTime * 1000L);
+		} else {
+			timedUnlock(0);
 		}
+	}
+
+	private int getUnlockTime() {
+		int unlockTime = turnScreenOnTime.get();
+		if (useSystemScreenTimeout.get()) {
+			try {
+				int screenOffTimeout = Settings.System.getInt(app.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 0);
+				if (screenOffTimeout > 0) {
+					unlockTime = screenOffTimeout / 1000;
+				}
+			} catch (Exception e) {
+				LOG.error(e.getMessage(), e);
+			}
+		}
+		return unlockTime;
 	}
 
 	@Override
@@ -149,14 +181,6 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	private void switchSensorOn() {
-		switchSensor(true);
-	}
-
-	private void switchSensorOff() {
-		switchSensor(false);
-	}
-
 	private void switchSensor(boolean on) {
 		SensorManager sensorManager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
 		if (sensorManager != null) {
@@ -169,23 +193,18 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	private boolean isSensorEnabled() {
-		return turnScreenOnSensor.get() && isFollowingMode();
-	}
-
 	public void onStart(@NonNull Activity activity) {
-		switchSensorOff();
+		switchSensor(false);
 	}
 
 	public void onStop(@NonNull Activity activity) {
 		lock();
-		if (!activity.isFinishing() && turnScreenOnEnabled.get() && isSensorEnabled()) {
-			switchSensorOn();
+		if (!activity.isFinishing() && turnScreenOnSensor.get()) {
+			switchSensor(true);
 		}
 	}
 
 	public void setLockUIAdapter(@Nullable LockUIAdapter adapter) {
 		lockUIAdapter = adapter;
 	}
-
 }

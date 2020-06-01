@@ -9,7 +9,7 @@
 	<dimen name="wpt_list_category_height">60dp</dimen>
 	<dimen name="wpt_list_item_height">56dp</dimen>
 	<dimen name="list_item_button_padding">4dp</dimen>
-	<dimen name="action_bar_height">64dp</dimen>
+	<dimen name="action_bar_height">56dp</dimen>
 	<dimen name="list_content_padding_large">32dp</dimen>
 	<dimen name="title_padding">20dp</dimen>
     <dimen name="title_text_size">28sp</dimen>
@@ -164,7 +164,6 @@
     <dimen name="context_menu_first_line_bottom_margin">16dp</dimen>
     <dimen name="context_menu_second_line_top_margin">4dp</dimen>
     <dimen name="context_menu_top_right_button_min_width">76dp</dimen>
-    <dimen name="context_menu_button_padding_x">10dp</dimen>
     <dimen name="context_menu_buttons_top_margin">-16dp</dimen>
     <dimen name="context_menu_buttons_padding_bottom">4dp</dimen>
     <dimen name="context_menu_progress_min_height">54dp</dimen>
@@ -336,6 +335,7 @@
 
 	<dimen name="toolbar_height">56dp</dimen>
 	<dimen name="toolbar_height_expanded">96dp</dimen>
+	<dimen name="toolbar_inset_start_with_navigation">72dp</dimen>
 
 	<dimen name="wikivoyage_search_list_header_height">36dp</dimen>
 	<dimen name="wikivoyage_article_card_icon_size">80dp</dimen>

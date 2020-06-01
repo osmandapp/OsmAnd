@@ -319,7 +319,7 @@
     <string name="poi_motorcycle_parking">Motorradparkplatz</string>
     <string name="poi_motorcycle">Motorradgeschäft</string>
     <string name="poi_motorway_junction">Autobahnkreuz</string>
-    <string name="poi_mountain_pass">Passstraße</string>
+    <string name="poi_mountain_pass">Gebirgspass</string>
     <string name="poi_sport_multi">Multi-Sport</string>
     <string name="poi_museum">Museum</string>
     <string name="poi_musical_instrument">Musikinstrumente</string>
@@ -1450,7 +1450,7 @@
     <string name="poi_automated_yes">ja</string>
     <string name="poi_automated_no">Nicht automatisiert</string>
     <string name="poi_brushless_no">Bürstenlos: nein</string>
-    <string name="poi_car_wash_no">Autowäsche: nein</string>
+    <string name="poi_car_wash_no">Nein</string>
     <string name="poi_male_yes">Männlich</string>
     <string name="poi_male_no">Für Männer verboten</string>
     <string name="poi_female_yes">Weiblich</string>
@@ -1795,7 +1795,7 @@
     <string name="poi_service_electrical">Reparatur von elektrischen Fahrzeugen</string>
     <string name="poi_motorcycle_repair">Motorradreparatur</string>
     <string name="poi_self_service_yes">ja</string>
-    <string name="poi_self_service_no">Keine Selbstbedienung</string>
+    <string name="poi_self_service_no">Nein</string>
     <string name="poi_full_service_yes">Rundumservice</string>
     <string name="poi_aeroway_fuel">Flugzeugtankstelle</string>
     <string name="poi_public_bath">Öffentliches Bad</string>
@@ -2711,8 +2711,8 @@
     <string name="poi_hygrometer_no">Hygrometer: nein</string>
     <string name="poi_date_yes">Datumsanzeige</string>
     <string name="poi_date_no">Datumsanzeige: nein</string>
-    <string name="poi_passenger_information_display_yes">Informationsanzeige für Passagiere: ja</string>
-    <string name="poi_passenger_information_display_no">Informationsanzeige für Passagiere: nein</string>
+    <string name="poi_passenger_information_display_yes">Fahrgastinformationsanzeige: ja</string>
+    <string name="poi_passenger_information_display_no">Fahrgastinformationsanzeige: nein</string>
     <string name="poi_min_age">Mindestalter</string>
     <string name="poi_traffic_mirror">Verkehrsspiegel</string>
     <string name="poi_diplomatic_delegation">Delegation</string>
@@ -3488,7 +3488,7 @@
     <string name="poi_glacier_type_ice_tongue">Eiszunge</string>
     <string name="poi_glacier_ele_top">Höchster Punkt</string>
     <string name="poi_glacier_ele_bottom">Tiefster Punkt</string>
-    <string name="poi_glacier_slope">Durchschnittliche Steigung</string>
+    <string name="poi_glacier_slope">Durchschnittliche Hangneigung</string>
     <string name="poi_glacier_type_hanging">Hängend</string>
     <string name="poi_glacier_type_remnant">Überrest</string>
     <string name="poi_checkpoint_type">Checkpoint-Typ</string>
@@ -3826,4 +3826,5 @@
     <string name="poi_fire_hydrant_style_water_source_groundwater">Grundwasser</string>
     <string name="poi_fire_hydrant_type_pipe">Rohr</string>
     <string name="poi_fire_hydrant_pressure_filter">Druck</string>
+    <string name="poi_pump_status_missing_beam">Pumpenzustand: fehlender Arm</string>
 </resources>

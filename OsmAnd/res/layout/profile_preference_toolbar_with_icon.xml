@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="?attr/actionModeBackground"
     android:minHeight="@dimen/toolbar_height"
+    android:padding="0dp"
     osmand:contentInsetLeft="0dp"
     osmand:contentInsetStart="0dp"
     osmand:contentInsetRight="0dp"

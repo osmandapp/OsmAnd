@@ -340,11 +340,7 @@ public class PoiFiltersHelper {
 	public List<PoiUIFilter> getSortedPoiFilters(@NonNull ApplicationMode appMode, boolean onlyActive) {
 		initPoiUIFiltersState(appMode);
 		List<PoiUIFilter> allFilters = new ArrayList<>();
-		for (PoiUIFilter filter : getTopDefinedPoiFilters()) {
-			if (!filter.isWikiFilter()) {
-				allFilters.add(filter);
-			}
-		}
+		allFilters.addAll(getTopDefinedPoiFilters());
 		allFilters.addAll(getSearchPoiFilters());
 		Collections.sort(allFilters);
 		if (onlyActive) {

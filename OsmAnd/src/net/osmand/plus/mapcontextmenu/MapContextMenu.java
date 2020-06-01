@@ -914,7 +914,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public int getFabIconId() {
-		int res = R.drawable.map_directions;
+		int res = R.drawable.ic_action_gdirections_dark;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();

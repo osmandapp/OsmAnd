@@ -455,7 +455,7 @@ public class MapWidgetRegistry {
 		boolean selected = app.getQuickActionRegistry().isQuickActionOn();
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.configure_screen_quick_action, mapActivity)
-				.setIcon(R.drawable.map_quick_action)
+				.setIcon(R.drawable.ic_quick_action)
 				.setSelected(selected)
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setSecondaryIcon( R.drawable.ic_action_additional_option)

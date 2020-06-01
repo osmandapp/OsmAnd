@@ -216,4 +216,13 @@
     <string name="search_contacts_descr">Procura en tódolos teus grupos e contactos.</string>
     <string name="type_contact_or_group_name">Escribe o nome do contacto ou do grupo</string>
     <string name="shared_string_search">Procurar</string>
+    <string name="status_widget_title">Estado do Rastrexador do OsmAnd</string>
+    <string name="shared_string_suggested">Suxerido</string>
+    <string name="back_to_osmand">Voltar ó OsmAnd</string>
+    <string name="duration_ago">hai %1$s</string>
+    <string name="last_response_duration">Última resposta: hai %1$s</string>
+    <string name="last_update_from_telegram_duration">Última actualización dende o Telegram: hai %1$s</string>
+    <string name="last_response_date">Última resposta: %1$s</string>
+    <string name="last_update_from_telegram_date">Última actualización dende o Telegram: %1$s</string>
+    <string name="shared_string_error_short">ERR</string>
 </resources>

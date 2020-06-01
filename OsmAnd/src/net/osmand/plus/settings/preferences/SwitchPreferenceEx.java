@@ -33,6 +33,10 @@ public class SwitchPreferenceEx extends SwitchPreferenceCompat {
 		this.description = description;
 	}
 
+	public void setDescription(int titleResId) {
+		setDescription(getContext().getString(titleResId));
+	}
+
 	@Override
 	protected void onClick() {
 		if (getFragment() == null && getIntent() == null) {

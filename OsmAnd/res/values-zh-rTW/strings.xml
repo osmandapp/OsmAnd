@@ -80,6 +80,7 @@
 \n- 全球離線向量圖資 
 \n- 直接由手機下載各國或區域圖資 
 \n- 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的收藏、等高線、大眾運輸停靠站 
+\n
 \n- 離線查詢地址、場所(POI) 
 \n- 中程距離的離線路線 
 \n- 汽車、自行車、步行模式有多種選項： 
@@ -1196,8 +1197,7 @@
     <string name="layer_amenity_label">POI 覆蓋標籤</string>
     <string name="show_zoom_buttons_navigation_descr">在導航期間顯示縮放按鈕。</string>
     <string name="show_zoom_buttons_navigation">顯示縮放按鈕</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>線上 OSM</u> 地圖的分類與影像。</string>
+    <string name="create_poi_link_to_osm_doc"><u>線上 OSM</u> 地圖的分類與影像。</string>
     <string name="sort_by_distance">按距離排序</string>
     <string name="sort_by_name">按名稱排序</string>
     <string name="none_selected_gpx">先長按來指定 GPX 檔案。</string>
@@ -1478,7 +1478,7 @@
     <string name="shared_string_photo">照片</string>
     <string name="simulate_your_location">模擬您的位置</string>
     <string name="short_location_on_map">緯度 %1$s
-經度 %2$s</string>
+\n經度 %2$s</string>
     <string name="tips_and_tricks_descr">常見的問題，最近的更改以及其它。</string>
     <string name="routing_settings_2">導航設定</string>
     <string name="general_settings_2">一般設定</string>
@@ -1868,7 +1868,7 @@
     <string name="show_map_markers_description">啟動地圖標記功能。</string>
     <string name="clear_active_markers_q">移除所有的活動標記嗎？</string>
     <string name="clear_markers_history_q">清除地圖標記歷史記錄嗎？</string>
-    <string name="active_markers">活動標記</string>
+    <string name="active_markers">活躍標記</string>
     <string name="map_markers">地圖標記</string>
     <string name="map_marker">地圖標記</string>
     <string name="add_points_to_map_markers_q">新增所有的標點到地圖標記嗎？</string>
@@ -1988,7 +1988,7 @@
     <string name="city_type_neighbourhood">鄰里</string>
     <string name="search_categories">類別</string>
     <string name="postcode">郵遞區號</string>
-    <string name="share_history_subject">"透過 OsmAnd  分享"</string>
+    <string name="share_history_subject">透過 OsmAnd 分享</string>
     <string name="lang_hsb">索布語 (上游)</string>
     <string name="back_to_search">返回查詢</string>
     <string name="confirmation_to_delete_history_items">自「歷程」移除已選取的項目嗎？</string>
@@ -2027,7 +2027,7 @@
     <string name="get_for">獲得 %1$s</string>
     <string name="no_update_info_desc">不要檢查新版本或 OsmAnd 相關的折扣。</string>
     <string name="get_it">獲得</string>
-    <string name="osm_live_payment_desc">每個月會收取訂閱費用。您隨時都能在 Google Play 取消。</string>
+    <string name="osm_live_payment_desc">會定時收取訂閱費用。您隨時都能在 Google Play 取消。</string>
     <string name="donation_to_osm">捐款給 OSM 的社群</string>
     <string name="osm_live_subscription_desc">啟用認購可每小時、每天、每週的更新以及世界各地所有的地圖無限制的下載。</string>
     <string name="driving_region_australia">澳洲</string>
@@ -2164,7 +2164,7 @@
     <string name="quick_action_add_poi_descr">在畫面中央新增 POI 的按鈕。</string>
     <string name="navigate_point_olc">打開位置編碼(OLC)</string>
     <string name="navigate_point_olc_info_invalid">無效的 OLC
-</string>
+\n</string>
     <string name="quick_action_navigation_voice_descr">停用或啟用導航時的語音導引的開關。</string>
     <string name="quick_action_add_parking_descr">在畫面中央新增停車位置的按鈕。</string>
     <string name="quick_action_duplicates">快速動作已重新命名為 %1$s 以避免重複。</string>
@@ -2175,9 +2175,9 @@
     <string name="quick_action_map_underlay_switch">地圖底層變更為「%s」。</string>
     <string name="shared_string_action_name">動作名稱</string>
     <string name="navigate_point_olc_info_short">簡短 OLC
-請提供完整的編碼</string>
+\n請提供完整的編碼</string>
     <string name="navigate_point_olc_info_area">有效完整的 OLC
-代表區域：%1$s x %2$s</string>
+\n代表區域：%1$s x %2$s</string>
     <string name="quick_action_page_list_descr">用於翻閱下方列表的按鈕。</string>
     <string name="auto_split_recording_title">自動分割錄製之後的間隙</string>
     <string name="auto_split_recording_descr">如果日期已更改，開始新區段在6分鐘後的間隔，新軌跡在2小時後的間隔，或新檔案在更長的間隔之後。</string>
@@ -2294,21 +2294,23 @@
 \n享有語音和視覺的導航，檢視 POI（興趣點），建立和管理 GPX 軌跡，使用視覺化的等高線和海拔資訊（透過外掛元件），能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。</string>
     <string name="osmand_extended_description_part2">GPS 導航 
 \n• 您可以在離線（當您在國外時就不需要國際漫遊費用了）或連線（快速）兩種模式間選擇 
-\n• 轉向建議(turn by turn)語音導航（真人和合成語音） 
-\n• 當您偏離了行駛路線，重建改道規劃 
-\n• 車道導引、街道名稱和預計抵達時間會有一路的幫助 
-\n• 為了讓您的行程安全，有日/夜模式自動切換 
-\n• 顯示車速限制，如果超速了則可以獲得提醒 
+\n• 轉向建議語音導航（真人和合成語音） 
+\n• 當您偏離了行駛路線時將會重新計算路線 
+\n• 車道導引、街道名稱和預計抵達時間將會一路陪伴您 
+\n• 為了讓您的旅程更安全，有日／夜模式自動切換 
+\n• 顯示速度限制，如果超速了則會提醒您 
 \n• 依您的速度調整地圖縮放 
-\n• 按照地址、類別（例如：停車場、餐廳、旅店、加油站、博物館）或地理坐標搜尋目的地 
-\n• 支援中轉點於您的旅程 
-\n• 錄製自己的或上傳一個 GPX 軌跡並跟隨它</string>
+\n• 按照地址、類別（例如：停車場、餐廳、旅店、加油站、博物館）或地理座標搜尋目的地 
+\n• 支援在您的旅程中加入中轉點 
+\n• 錄製自己的或上傳一個 GPX 軌跡並跟隨它
+\n</string>
     <string name="osmand_plus_extended_description_part4">使用 OSM 和維基百科的資料 
 \n• 來自世界最好的協作專案所得的高品質資訊 
 \n• OSM 資料可用在每個國家或地區 
 \n• 維基百科 POI 卓越的觀光景點 
 \n• 直接從應用程式，無限制的免費下載 
-\n• 密集的離線向量地圖更新，至少每月一次 
+\n• 密集的離線向量地圖更新，至少每月一次
+\n 
 \n• 可在完整的區域資料還是只有公路網之間選擇（舉例來說：整個日本就有 700 MB 而公路網部分僅有 200 MB）</string>
     <string name="osmand_plus_extended_description_part2">導航
 \n• 您可以在離線（當您在國外時就不需要國際漫遊費用了）或連線（快速）兩種模式間選擇
@@ -2331,11 +2333,12 @@
     <string name="osmand_extended_description_part3">地圖 
 \n• 顯示您週遭的 POI（興趣點） 
 \n• 調整地圖到您的移動方向（或羅盤） 
-\n• 顯示的位置和您正在觀看的方向
+\n• 顯示的位置和您正在觀看的方向 
 \n• 分享您的位置，讓您的朋友能找到您 
 \n• 保存您最重要的地點於我的收藏 
 \n• 允許您選擇怎樣在地圖上顯示名稱：使用英文、裝置端或語言的拼寫 
-\n• 顯示專用的線上地圖圖磚、衛星照片（來自 Bing）、不同的疊加層如旅遊/導航 GPX 軌跡以及可自定透明度的附加層</string>
+\n• 顯示專用的線上地圖圖磚、衛星照片（來自 Bing）、不同的疊加層如旅遊／導航 GPX 軌跡以及可自訂透明度的額外圖層
+\n</string>
     <string name="osmand_extended_description_part5">自行車 
 \n• 在地圖找到自行車道 
 \n• GPS 導航在自行車模式下，使用自行車道構建您的路線 
@@ -2367,13 +2370,13 @@
 \n• 地圖會顯示您的步行和登山健行路徑 
 \n• 維基百科以您喜好的語言在市區旅遊中可以告訴您很多事 
 \n• 大眾運輸停靠站（公共汽車、電車、火車），包括路線名稱，有助於在新的城市裡導航 
-\n• GPS 導航在行人模式下，使用步行路徑構建您的路線
-\n• 上傳並且跟隨 GPX 路線或著記錄和分享您自己的路線</string>
+\n• GPS 導航在行人模式下，使用步行路徑構建您的路線 
+\n• 上傳並且跟隨 GPX 路線或著記錄和分享您自己的路線
+\n</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) 是一個地圖和導航應用程式，可以免費存取全球性且高品質的 OSM 圖資。 
 \n享有語音和視覺的導航、檢視 POI（興趣點）、建立和管理 GPX 軌跡、使用視覺化的等高線和海拔資訊，能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。 
 \n 
 \nOsmAnd+ 是 OsmAnd 的付費版本，透過購買這個應用程式來資助開發新功能，並收到最新的更新。 
-\n 
 \n 
 \n一些主要特點：</string>
     <string name="quick_action_auto_zoom_desc">用於速度控制自動縮放開關的按鈕。</string>
@@ -2423,7 +2426,7 @@
     <string name="no_photos_descr">這裡沒有照片。</string>
     <string name="shared_string_install">安裝</string>
     <string name="improve_coverage_mapillary">提高 Mapillary 照片覆蓋的範圍</string>
-    <string name="improve_coverage_install_mapillary_desc">安裝 Mapillary 以將一張或更多張的照片增加到此地圖位置。</string>
+    <string name="improve_coverage_install_mapillary_desc">安裝 Mapillary 以將照片增加到此地圖位置。</string>
     <string name="open_mapillary">開啟 Mapillary</string>
     <string name="mapillary_image">Mapillary 圖片</string>
     <string name="distance_moving">距離已校正</string>
@@ -2487,7 +2490,7 @@
     <string name="empty_state_my_tracks">新增 GPX 檔案</string>
     <string name="empty_state_my_tracks_desc">匯入 GPX 檔案或錄製軌跡。</string>
     <string name="empty_state_favourites">增加到我的收藏</string>
-    <string name="empty_state_favourites_desc">匯入最愛或透過地圖上的標記點新增。</string>
+    <string name="empty_state_favourites_desc">匯入最愛或透過地圖上的標記點來新增它們。</string>
     <string name="import_track">匯入 GPX 檔案</string>
     <string name="import_track_desc">%1$s 檔案不包含航點，要將其匯入軌跡嗎？</string>
     <string name="move_point">移動標點</string>
@@ -2585,7 +2588,7 @@
     <string name="shared_string_two">二</string>
     <string name="shared_string_one">一</string>
     <string name="distance_indication_descr">選擇如何顯示活動標記的距離。</string>
-    <string name="active_markers_descr">指定方向指示數量：</string>
+    <string name="active_markers_descr">指定方向指示數量。</string>
     <string name="empty_state_markers_history_desc">標記為已通過的標點將顯現在此螢幕上。</string>
     <string name="show_guide_line_descr">顯示指引路線到活動標記位置。</string>
     <string name="show_arrows_descr">顯示一個或兩個箭頭指示方向到活動標記。</string>
@@ -2599,7 +2602,7 @@
     <string name="marker_activated">標記 %s 已啟動。</string>
     <string name="one_tap_active">「點一下」啟動</string>
     <string name="empty_state_av_notes">加註記！</string>
-    <string name="empty_state_av_notes_desc">使用小工具或內容選單，增加音訊、視訊或照片附註在地圖上的每個標點。</string>
+    <string name="empty_state_av_notes_desc">使用小工具或內容選單，增加音訊、視訊或照片附註在地圖上的任何標點。</string>
     <string name="notes_by_date">以日期排序的音訊／視訊註記</string>
     <string name="by_date">按照日期</string>
     <string name="by_type">按照類型</string>
@@ -2754,7 +2757,7 @@
     <string name="osmand_team">OsmAnd 團隊</string>
     <string name="shared_string_restart">重新啟動應用程式</string>
     <string name="show_images">顯示圖片</string>
-    <string name="purchase_cancelled_dialog_title">"您已取消您的 OsmAnd  Live 訂閱"</string>
+    <string name="purchase_cancelled_dialog_title">您已取消您的 OsmAnd Live 訂閱</string>
     <string name="purchase_cancelled_dialog_descr">恢復訂閱以繼續使用所有的功能：</string>
     <string name="maps_you_need_descr">根據您已存書籤的文章，建議您去下載下方的地圖：</string>
     <string name="maps_you_need">您需要的地圖</string>
@@ -3412,7 +3415,7 @@
     <string name="choose_icon_color_name">圖示、顏色與名稱</string>
     <string name="reorder_profiles">編輯設定檔清單</string>
     <string name="selected_profile">選定的設定檔</string>
-    <string name="reset_confirmation_descr">點擊 %1$s 將會丟棄您所有的變更。</string>
+    <string name="reset_confirmation_descr">點擊 %1$s 會丟棄您所有的變更。</string>
     <string name="reset_all_profile_settings_descr">將所有設定檔設定重設為安裝時的預設值。</string>
     <string name="reset_all_profile_settings">重設所有設定檔的設定？</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s：%2$s</string>
@@ -3450,7 +3453,7 @@
     <string name="monitoring_min_speed_descr_side_effect">副作用：您的軌跡將會遺失所有未達到最低速度標準的部份（例如，您將自行車推上陡峭的山坡）。此外，也將沒有其餘的資訊，如休息等。這會影響任何分析或後處理，例如試圖確定行程的總長度，運動時間或平均速度時。</string>
     <string name="monitoring_min_speed_descr_recommendation">建議：先試著透過紀錄最小位移過濾器 (B) 來使用運動偵測，這可能會生成更好的結果，您也會遺失更少的資料。如果您的軌跡在低速時仍然有相當多的雜訊，請在此處嘗試使用非零的值。請注意，某些測量可能根本就不會回報任何速度值（某些以網路為基礎的方法），在這種情況下就不會記錄任何內容。</string>
     <string name="monitoring_min_speed_descr_remark">備註：移動檢查：大多數 GPS 晶片只在演算法確定您處於運動狀態時回報速度值，否則就不回報速度值。因此，在某種意義上在此過濾器中使用 &gt; 0 的設定將會使用 GPS 晶片的運動偵測。但是，即使在錄製時未在此處過濾，我們仍會在 GPX 分析中使用此功能來確定校正後的距離，即該欄位中顯示的值是運動時記錄的距離。</string>
-    <string name="monitoring_min_accuracy_descr">這將僅記錄以最小精度指示（以公尺／英呎為單位，由 Android 為您的晶片組回報）測量的點。精密度是指重複測量的分散性，與準確度沒有直接關係，準確度定義了測量與實際位置的接近程度。</string>
+    <string name="monitoring_min_accuracy_descr">這將僅記錄以最小精度指示（以公尺／英呎為單位，由 Android 以您的晶片組回報）測量的點。準確度指的是您的測量與真實位置的接近程度，與精密度（重覆測量的分散性）沒有直接關係。</string>
     <string name="monitoring_min_accuracy_descr_side_effect">副作用：由於按精密度進行過濾，因此，在橋樑下，樹木下，高層建築之間或在特定天氣條件下，點將會完全遺失。</string>
     <string name="monitoring_min_accuracy_descr_recommendation">建議：很難預測將要記錄什麼而不記錄什麼，最好關閉此過濾器。</string>
     <string name="monitoring_min_accuracy_descr_remark">備註：如果 GPS 在記錄之前已關閉，則測量的第一個點的精密度可能會降低，因此在我們的程式碼中，我們可能要等一秒鐘左右再記錄一個點（或記錄三個連續點中的最佳點，依此類推），但尚未實作。</string>
@@ -3471,21 +3474,21 @@
     <string name="multimedia_photo_play_sound">相機快門聲</string>
     <string name="osm_authorization_success">驗證成功</string>
     <string name="rearrange_categories">重新排列分類</string>
-    <string name="create_custom_categories_list_promo">變更清單順序，隱藏不需要的分類。你可以匯入或匯出所有包含變更的設定檔。</string>
-    <string name="add_new_custom_category_button_promo">您可以透過選取一個或多個需要的分類來新增自訂的分類。</string>
+    <string name="create_custom_categories_list_promo">變更清單順序、隱藏分類。你可以匯入或匯出所有包含變更的設定檔。</string>
+    <string name="add_new_custom_category_button_promo">您可以透過選取一個或多個分類來新增自訂的分類。</string>
     <string name="shared_string_available">可用</string>
     <string name="add_custom_category">新增自訂分類</string>
     <string name="rendering_attr_streetLightingNight_name">僅在夜間顯示</string>
-    <string name="plugin_prefs_reset_successful">所有外掛程式設定都已恢復為預設狀態。</string>
-    <string name="profile_prefs_reset_successful">所有設定檔的設定都已恢復為預設狀態。</string>
+    <string name="plugin_prefs_reset_successful">所有外掛程式設定都已恢復為預設值。</string>
+    <string name="profile_prefs_reset_successful">所有設定檔的設定都已恢復為預設值。</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">日落於 %1$s</string>
     <string name="sunrise_at">日出於 %1$s</string>
-    <string name="accessibility_mode_disabled">您的系統停用了無障礙模式。</string>
-    <string name="reset_to_default_category_button_promo">重設為預設值將會把排序重設回安裝後的預設值。</string>
+    <string name="accessibility_mode_disabled">您的 Android 系統關閉了無障礙模式。</string>
+    <string name="reset_to_default_category_button_promo">「重設為預設值」會將排序恢復為安裝時的預設值。</string>
     <string name="use_system_screen_timeout">使用系統畫面逾時</string>
-    <string name="use_system_screen_timeout_promo">預設停用，如果 OsmAnd 在前景執行，畫面就不會有逾時的問題。
-\n
+    <string name="use_system_screen_timeout_promo">預設停用：當 OsmAnd 在前景執行時，畫面就不會有逾時的問題。 
+\n 
 \n若啟用，OsmAnd 將會使用系統逾時設定。</string>
     <string name="clear_recorded_data">清除已紀錄的資料</string>
     <string name="release_3_6">• 設定檔：現在您可以變更順序、設定地圖圖示、變更基本設定檔的所有設定以及將它們復原 
@@ -3518,7 +3521,7 @@
     <string name="sort_by_category">按分類排序</string>
     <string name="please_provide_profile_name_message">請為設定檔命名</string>
     <string name="open_settings">開啟設定</string>
-    <string name="plugin_disabled">外掛程式已停用</string>
+    <string name="plugin_disabled">外掛程式關閉</string>
     <string name="plugin_disabled_descr">此外掛程式是獨立的應用程式，如果您不打算再使用它，請將其移除。
 \n
 \n在您移除 OsmAnd 後，這類的外掛程式仍將繼續存在於裝置上。</string>
@@ -3526,7 +3529,7 @@
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">路徑</string>
     <string name="shared_string_include_data">包含額外資料</string>
-    <string name="import_profile_dialog_description">已匯入的設定檔包含了額外資料。點擊匯入僅匯入設定檔資料或選取額外的資料以匯入。</string>
+    <string name="import_profile_dialog_description">已匯入的設定檔包含了額外資料。點擊匯入僅匯入設定檔資料或選取額外的資料。</string>
     <string name="export_profile_dialog_description">您可以選取額外的資料以與設定檔一起匯出。</string>
     <string name="index_name_antarctica">南極洲</string>
     <string name="shared_string_app_default_w_val">應用程式預設值 (%s)</string>
@@ -3613,7 +3616,7 @@
     <string name="wiki_menu_download_descr">需要額外的地圖才能在地圖上檢視維基百科的 POI。</string>
     <string name="ui_customization_description">在「抽屜」、「設定地圖」與情境選單中自訂項目數量。 
 \n 
-\n您可以關閉未使用的外掛程式，以從應用程式 %1$s 中隱藏它們的控制元件。</string>
+\n您可以關閉未使用的外掛程式，以從 %1$s 中隱藏它們的控制元件。</string>
     <string name="ui_customization_short_descr">抽屜項目，情境選單</string>
     <string name="ui_customization">自訂使用者介面</string>
     <string name="shared_string_drawer">抽屜</string>
@@ -3624,7 +3627,7 @@
     <string name="shared_string_hidden">已隱藏</string>
     <string name="hidden_items_descr">這些項目已從選單隱藏，但對應的選項或外掛程式將會繼續運作。</string>
     <string name="reset_items_descr">隱藏設定將會把它們重設回原始狀態。</string>
-    <string name="main_actions_descr">主要動作僅包含 4 個按鈕。</string>
+    <string name="main_actions_descr">僅有四個按鈕。</string>
     <string name="main_actions">主要動作</string>
     <string name="move_inside_category">您只能在此分類中移動項目。</string>
     <string name="developer_plugin">開發者外掛程式</string>
@@ -3679,24 +3682,24 @@
     <string name="favorites_item">收藏</string>
     <string name="subscription_osmandlive_item">訂閱 - OsmAnd Live</string>
     <string name="osmand_purchases_item">OsmAnd 購買</string>
-    <string name="legend_item_description">地圖符號系統指南</string>
+    <string name="legend_item_description">地圖符號系統指南。</string>
     <string name="navigation_profiles_item">導航設定檔</string>
-    <string name="release_3_7">• 新的離線坡度圖
-\n
-\n • 對收藏與 GPX 路徑點的完整自訂能力 — 自訂顏色、圖示、形狀
-\n
-\n • 自訂情境選單、設定地圖、抽屜中的項目順序
-\n
-\n • 設定地圖中可將維基百科選取為單獨的圖層，並僅選取需要的語言
-\n
-\n • 在超強的彈性下建立您自己的 POI 過濾器／地圖
-\n
-\n • 新增選項以恢復自訂設定檔中的選項
-\n
-\n • 對 GPX 路徑導航完整支援車道與轉彎提示
-\n
-\n • 修復平板電腦上的使用者介面大小
-\n
+    <string name="release_3_7">• 新的離線坡度圖 
+\n 
+\n • 對收藏與 GPX 路徑點的完整自訂能力 — 自訂顏色、圖示、形狀 
+\n 
+\n • 自訂情境選單、設定地圖與抽屜中的項目順序 
+\n 
+\n • 設定地圖中可將維基百科選取為單獨的圖層，並僅選取需要的語言 
+\n 
+\n • 在超強的彈性下建立您自己的 POI 過濾器／地圖 
+\n 
+\n • 新增選項以恢復自訂設定檔中的選項 
+\n 
+\n • 對 GPX 路徑導航完整支援車道與轉彎提示 
+\n 
+\n • 修復平板電腦上的使用者介面大小 
+\n 
 \n • 修復 RTL 的臭蟲
 \n
 \n</string>
@@ -3711,8 +3714,49 @@
     <string name="reset_deafult_order">恢復預設項目排序</string>
     <string name="back_to_editing">返回編輯</string>
     <string name="shared_string_resume">恢復</string>
-    <string name="quick_action_switch_profile_descr">點擊動作按鈕將會在選取的設定檔間切換。</string>
+    <string name="quick_action_switch_profile_descr">點擊動作按鈕會在選取的設定檔間切換。</string>
     <string name="shared_string_add_profile">新增設定檔</string>
     <string name="change_application_profile">變更應用程式設定檔</string>
-    <string name="profiles_for_action_not_found">找不到為此動作選取的設定檔。</string>
+    <string name="profiles_for_action_not_found">找不到任何這類的設定檔。</string>
+    <string name="index_item_world_basemap_detailed">全球地圖總覽（詳細）</string>
+    <string name="unsupported_type_error">不支援的類型</string>
+    <string name="gpx_parse_error">OsmAnd GPX 格式不正確，請聯絡支援團隊以進一步調查。</string>
+    <string name="shared_string_always">總是</string>
+    <string name="screen_control">螢幕控制</string>
+    <string name="system_screen_timeout_descr">啟用以在一段不活躍的時間後關閉螢幕，將會使用在您裝置的系統設定中指定的時間。</string>
+    <string name="system_screen_timeout">螢幕逾時</string>
+    <string name="turn_screen_on_options_descr">使用這些選項以在 OsmAnd 位於前景時喚醒螢幕。</string>
+    <string name="turn_screen_on_descr">僅當 OsmAnd 在前景時鎖定裝置的時候，那些選項才有效。</string>
+    <string name="turn_screen_on_navigation_instructions_descr">螢幕將會在導航說明前數秒自動開啟螢幕，這個時間需在「喚醒時間」中指定。
+\n
+\n僅在導航時有用。</string>
+    <string name="turn_screen_on_navigation_instructions">導航說明</string>
+    <string name="turn_screen_on_power_button_descr">按下裝置電源按鈕以在前景打開 OsmAnd 並開啟螢幕。</string>
+    <string name="turn_screen_on_power_button">電源按鈕</string>
+    <string name="turn_screen_on_proximity_sensor">近接感測器</string>
+    <string name="turn_screen_on_wake_time_descr">選取喚醒後的螢幕活動時間，如果「%1$s」啟用，螢幕將不會關閉。</string>
+    <string name="keep_screen_on">保持螢幕開啟</string>
+    <string name="keep_screen_off">保持螢幕關閉</string>
+    <string name="screen_timeout_descr">如果啟用了「%1$s」選項，則活動時間將取決於它。</string>
+    <string name="pseudo_mercator_projection">偽麥卡托投影</string>
+    <string name="mercator_projection">麥卡托投影</string>
+    <string name="one_image_per_tile">每個圖磚一個圖片檔案</string>
+    <string name="sqlite_db_file">SQLiteDB 檔案</string>
+    <string name="online_map_name_helper_text">提供線上地圖來源的名稱。</string>
+    <string name="online_map_url_helper_text">輸入或貼上線上來源的 URL。</string>
+    <string name="edit_online_source">編輯線上來源</string>
+    <string name="expire_time">過期時間</string>
+    <string name="storage_format">儲存格式</string>
+    <string name="map_source_zoom_levels">設定線上地圖顯示或載入的最小與最大縮放等級。</string>
+    <string name="map_source_zoom_levels_descr">當用於地圖或覆蓋層／底圖時，這些參數將會影響其顯示。
+\n
+\n%1$s：地圖將會受限於選定的區域。
+\n
+\n%2$s：可見的原始圖磚縮放等級。在這些值以外的將會升降縮放等級。</string>
+    <string name="expire_time_descr">到期時間（以分鐘為單位）。快取圖磚將會在指定的時間後重新載入。將此欄留空就不會從此來源重新整理圖磚。
+\n
+\n一天是1440分鐘。
+\n一週是10080分鐘。
+\n一個月是43829分鐘。</string>
+    <string name="tiles_storage_descr">選擇要如何儲存下載的圖磚。</string>
 </resources>

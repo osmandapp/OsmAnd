@@ -5,7 +5,9 @@
 	android:id="@+id/toolbar"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:minHeight="@dimen/toolbar_height"
 	android:background="?attr/actionModeBackground"
+	android:padding="0dp"
 	app:contentInsetLeft="0dp"
 	app:contentInsetStart="0dp"
 	app:contentInsetRight="0dp"
@@ -30,10 +32,10 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
-			android:paddingLeft="@dimen/content_padding"
-			android:paddingRight="@dimen/content_padding"
-			android:paddingStart="@dimen/content_padding"
-			android:paddingEnd="@dimen/content_padding">
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding">
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/toolbar_title"

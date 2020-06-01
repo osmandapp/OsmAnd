@@ -368,7 +368,7 @@ public class MapActivityActions implements DialogProvider {
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.shared_string_actions, mapActivity)
 				.setId(MAP_CONTEXT_MENU_MORE_ID)
-				.setIcon(R.drawable.map_overflow_menu_white)
+				.setIcon(R.drawable.ic_actions_menu)
 				.setOrder(40)
 				.createItem());
 
@@ -514,7 +514,7 @@ public class MapActivityActions implements DialogProvider {
 			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
 			params.setUseIntermediatePointsRTE(settings.GPX_CALCULATE_RTEPT.get());
 			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
-			List<Location> ps = params.getPoints();
+			List<Location> ps = params.getPoints(settings.getContext());
 			mapActivity.getRoutingHelper().setGpxParams(params);
 			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
 			if (!ps.isEmpty()) {
@@ -776,7 +776,7 @@ public class MapActivityActions implements DialogProvider {
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.home, mapActivity)
 				.setId(DRAWER_DASHBOARD_ID)
-				.setIcon(R.drawable.map_dashboard)
+				.setIcon(R.drawable.ic_dashboard)
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {

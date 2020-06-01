@@ -2,6 +2,7 @@ package net.osmand.plus.views;
 
 
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -237,8 +238,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		expand.setVisibility(mapInfoControls.hasCollapsibles(settings.getApplicationMode())? 
 				View.VISIBLE : View.GONE);
-		this.expand.setImageResource(expanded ? R.drawable.map_up :
-			R.drawable.map_down);
+		Drawable expandIcon = map.getMyApplication().getUIUtilities().getMapIcon(expanded ? R.drawable.ic_action_arrow_up :
+				R.drawable.ic_action_arrow_down, true);
+		setMapButtonIcon(expand, expandIcon);
 		expand.setContentDescription(map.getString(expanded ? R.string.shared_string_collapse : R.string.access_widget_expand));
 		expand.setOnClickListener(new OnClickListener() {
 			
@@ -289,7 +291,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 			updateTopToolbar(nightMode);
 			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius / 2);
 			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor,  (int) (2 * view.getDensity()));
-			this.expand.setBackgroundResource(ts.expand);
+			int padding = expand.getPaddingLeft();
+			expand.setBackgroundResource(ts.expand);
+			expand.setPadding(padding, padding, padding, padding);
 			rightStack.invalidate();
 			leftStack.invalidate();
 		}

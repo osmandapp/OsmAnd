@@ -734,7 +734,7 @@
     <string name="gpx_timemoving">Време кретања: %1$s</string>
     <string name="gpx_selection_segment_title">Одсечак</string>
     <string name="gpx_selection_number_of_points">%1$s тачака</string>
-    <string name="gpx_selection_point">"Тачка  %1$s"</string>
+    <string name="gpx_selection_point">Тачка %1$s</string>
     <string name="gpx_selection_route_points">%1$s\nТачке путање %2$s</string>
     <string name="gpx_selection_points">%1$s\nТачака</string>
     <string name="gpx_selection_track">%1$s\nСтаза %2$s</string>
@@ -974,7 +974,7 @@
     <string name="gpx_no_tracks_title">Још увек немате ниједан GPX фајл</string>
     <string name="gpx_no_tracks_title_folder">Такође, можете додати GPX фајлове у фасциклу</string>
     <string name="gpx_add_track">Додај још…</string>
-    <string name="shared_string_appearance">Приказ</string>
+    <string name="shared_string_appearance">Изглед</string>
     <string name="trip_rec_notification_settings">Укључи брзо снимање</string>
     <string name="trip_rec_notification_settings_desc">Приказуј обавештење које омогућава снимање путовања.</string>
     <string name="shared_string_notifications">Обавештења</string>
@@ -2596,8 +2596,7 @@
     <string name="zoom_by_trackball">Користите трекбол за зумирање</string>
     <string name="vector_data_missing">Скините податке (\'ван мреже\') да користити карте ван мреже.</string>
     <string name="warning_tile_layer_not_downloadable">Апликација не може да скине слој са картама %1$s, поновна инсталација апликације можда помогне.</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>Интернет ОСМ</u> класификација карти са сликама.</string>
+    <string name="create_poi_link_to_osm_doc"><u>Интернет ОСМ</u> класификација карти са сликама.</string>
     <string name="poi_filter_namefinder">NameFinder на мрежи</string>
     <string name="tiles_to_download_estimated_size">На нивоу увећања {0} треба скинути {1} сличица ({2} MB)</string>
     <string name="transport_searching_transport">Резултати превоза (без одредишта):</string>
@@ -3587,4 +3586,11 @@
     <string name="shared_string_languages">Језици</string>
     <string name="shared_string_language">Језик</string>
     <string name="shared_string_all_languages">Сви језици</string>
+    <string name="profiles_for_action_not_found">Не може се наћи такав профил.</string>
+    <string name="index_item_world_basemap_detailed">Светска општа мапа (детаљна)</string>
+    <string name="create_edit_poi">Креирај / Уреди ПОИ</string>
+    <string name="add_edit_favorite">Додај / Уреди фаворит</string>
+    <string name="back_to_editing">Повратак уређивању</string>
+    <string name="shared_string_add_profile">Додај профил</string>
+    <string name="change_application_profile">Промени профил апликације</string>
 </resources>

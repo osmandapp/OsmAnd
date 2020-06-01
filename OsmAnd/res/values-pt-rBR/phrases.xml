@@ -242,7 +242,7 @@
     <string name="poi_aerialway_drag_lift">Telesquis</string>
     <string name="poi_aerialway_rope_tow">Telecorda</string>
     <string name="poi_aerialway_goods">Teleférico de carga</string>
-    <string name="poi_aerialway_magic_carpet">"Esteira rolante "</string>
+    <string name="poi_aerialway_magic_carpet">Esteira rolante</string>
     <string name="poi_tunnel">Túnel</string>
     <string name="poi_bridge">Ponte</string>
     <string name="poi_speed_camera">Radar</string>
@@ -1809,11 +1809,11 @@
     <string name="poi_service_bicycle_rental_no">Aluguel de bicicletas: não</string>
     <string name="poi_service_bicycle_pump_yes">Bomba</string>
     <string name="poi_service_bicycle_pump_no">Bomba de bicicleta: não</string>
-    <string name="poi_service_bicycle_diy_yes">"Ferramentas para reparação "</string>
+    <string name="poi_service_bicycle_diy_yes">Ferramentas para reparação</string>
     <string name="poi_service_bicycle_diy_no">Ferramentas para reparação de bicicleta DIY: não</string>
-    <string name="poi_service_bicycle_cleaning_yes">"Limpeza "</string>
+    <string name="poi_service_bicycle_cleaning_yes">Limpeza</string>
     <string name="poi_service_bicycle_cleaning_no">Limpeza de bicicletas: não</string>
-    <string name="poi_service_bicycle_chaintool_yes">"Correia "</string>
+    <string name="poi_service_bicycle_chaintool_yes">Correia</string>
     <string name="poi_service_bicycle_chaintool_no">Ferramenta para correia de bicicleta: não</string>
     <string name="poi_service_bicycle_second_hand_yes">Venda de bicicletas de segunda mão</string>
     <string name="poi_service_bicycle_second_hand_no">Venda de bicicletas de segunda mão: não</string>
@@ -2091,7 +2091,7 @@
     <string name="poi_historic_period_old_kingdom">Período histórico: império antigo (2686 – 2181 a.C.)</string>
     <string name="poi_historic_period_first_intermediate_period">Período histórico: primeiro período intermediário (2181 – 2055 a.C.)</string>
     <string name="poi_historic_period_second_intermediate_period">Período histórico: segundo período intermediário (1650 – 1550 a.C.)</string>
-    <string name="poi_historic_period_third_intermediate_period">"Período histórico: terceiro período intermediário (1069 – 664 a.C.) "</string>
+    <string name="poi_historic_period_third_intermediate_period">Período histórico: terceiro período intermediário (1069 – 664 a.C.)</string>
     <string name="poi_historic_period_first_persian_period">Período histórico: primeiro período persa</string>
     <string name="poi_historic_period_late_period">Período histórico: último período (664 – 332 a.C.)</string>
     <string name="poi_historic_period_second_persian_period">Período histórico: segundo período persa</string>
@@ -3502,7 +3502,7 @@
     <string name="poi_outcrop">Afloramento</string>
     <string name="poi_payment_contactless_yes">Sem contato</string>
     <string name="poi_payment_contactless_no">Não aceita Contactless</string>
-    <string name="poi_hazard_nuclear">"Risco nuclear "</string>
+    <string name="poi_hazard_nuclear">Risco nuclear</string>
     <string name="poi_hazard_erosion">Risco de erosão</string>
     <string name="poi_hazard_avalanche">Risco de avalanche</string>
     <string name="poi_hazard_slippery_road">Via escorregadia</string>
@@ -3544,7 +3544,7 @@
     <string name="poi_books_academic">Acadêmicos</string>
     <string name="poi_books_children">Crianças</string>
     <string name="poi_atoll">Atol</string>
-    <string name="poi_toll_gantry">"Portal de pedágio "</string>
+    <string name="poi_toll_gantry">Portal de pedágio</string>
     <string name="poi_childcare">Creche</string>
     <string name="poi_denotation">Denotação</string>
     <string name="poi_denotation_natural_monument">Monumento natural</string>

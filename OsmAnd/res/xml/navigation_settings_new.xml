@@ -57,15 +57,6 @@
 		app:fragment="net.osmand.plus.settings.fragments.MapDuringNavigationFragment" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="turn_screen_on_enabled"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_off"
-		android:summaryOn="@string/shared_string_on"
-		android:title="@string/turn_screen_on"
-		app:fragment="net.osmand.plus.settings.fragments.TurnScreenOnFragment"
-		tools:icon="@drawable/ic_action_turn_screen_on" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="animate_my_location"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_off"

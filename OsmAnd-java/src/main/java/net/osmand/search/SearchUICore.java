@@ -786,22 +786,23 @@ public class SearchUICore {
 				cities = new HashSet<>();
 			}
 			Set<Street> streets = new HashSet<>();
-
-			for (MapObject obj : exportedObjects) {
-				if (obj instanceof Amenity) {
-					amenities.add((Amenity) obj);
-				} else if (obj instanceof Street) {
-					Street street = (Street) obj;
-					streets.add(street);
-					if (street.getCity() != null) {
-						final City city = street.getCity();
+			if (exportedObjects != null) {
+				for (MapObject obj : exportedObjects) {
+					if (obj instanceof Amenity) {
+						amenities.add((Amenity) obj);
+					} else if (obj instanceof Street) {
+						Street street = (Street) obj;
+						streets.add(street);
+						if (street.getCity() != null) {
+							final City city = street.getCity();
+							cities.add(city);
+							streetCities.add(city);
+						}
+					} else if (obj instanceof City) {
+						City city = (City) obj;
 						cities.add(city);
-						streetCities.add(city);
+						matchedCities.add(city);
 					}
-				} else if (obj instanceof City) {
-					City city = (City) obj;
-					cities.add(city);
-					matchedCities.add(city);
 				}
 			}
 			for (City city : cities) {
@@ -834,7 +835,7 @@ public class SearchUICore {
 				JSONArray citiesArr = new JSONArray();
 				for (City city : cities) {
 					final JSONObject cityObj = city.toJSON(exportSettings.isExportBuildings());
-					if (exportedCities.contains(city)) {
+					if (exportedCities != null && exportedCities.contains(city)) {
 						if (!exportSettings.isExportEmptyCities()) {
 							continue;
 						}

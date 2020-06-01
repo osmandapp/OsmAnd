@@ -20,6 +20,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Pair;
 import android.view.MotionEvent;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.core.graphics.ColorUtils;
@@ -643,6 +644,15 @@ public abstract class OsmandMapLayer {
 			textScale = 1.0f;
 		}
 		return (int) textScale * radiusPoi;
+	}
+
+	public void setMapButtonIcon(ImageView imageView, Drawable icon) {
+		int btnSizePx = imageView.getLayoutParams().height;
+		int iconSizePx = imageView.getContext().getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
+		int iconPadding = (btnSizePx - iconSizePx) / 2;
+		imageView.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
+		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		imageView.setImageDrawable(icon);
 	}
 
 	public abstract class MapLayerData<T> {

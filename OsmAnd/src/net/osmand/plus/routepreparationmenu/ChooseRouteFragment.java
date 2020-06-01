@@ -352,9 +352,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		ImageButton zoomOutButtonView = (ImageButton) view.findViewById(R.id.map_zoom_out_button);
 		ImageButton myLocButtonView = (ImageButton) view.findViewById(R.id.map_my_location_button);
 		this.myLocButtonView = myLocButtonView;
-		AndroidUtils.updateImageButton(app, zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
+		AndroidUtils.updateImageButton(app, zoomInButtonView, R.drawable.ic_zoom_in, R.drawable.ic_zoom_in,
 				R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-		AndroidUtils.updateImageButton(app, zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
+		AndroidUtils.updateImageButton(app, zoomOutButtonView, R.drawable.ic_zoom_out, R.drawable.ic_zoom_out,
 				R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
 		zoomInButtonView.setOnClickListener(new OnClickListener() {
 			@Override
@@ -402,14 +402,14 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		ImageButton myLocButtonView = this.myLocButtonView;
 		if (myLocButtonView != null) {
 			if (!enabled) {
-				myLocButtonView.setImageDrawable(getIcon(R.drawable.map_my_location, R.color.icon_color_default_light));
+				myLocButtonView.setImageDrawable(getIcon(R.drawable.ic_my_location, R.color.icon_color_default_light));
 				AndroidUtils.setBackground(app, myLocButtonView, nightMode, R.drawable.btn_circle, R.drawable.btn_circle_night);
 				myLocButtonView.setContentDescription(mapActivity.getString(R.string.unknown_location));
 			} else if (tracked) {
-				myLocButtonView.setImageDrawable(getIcon(R.drawable.map_my_location, R.color.color_myloc_distance));
+				myLocButtonView.setImageDrawable(getIcon(R.drawable.ic_my_location, R.color.color_myloc_distance));
 				AndroidUtils.setBackground(app, myLocButtonView, nightMode, R.drawable.btn_circle, R.drawable.btn_circle_night);
 			} else {
-				myLocButtonView.setImageResource(R.drawable.map_my_location);
+				myLocButtonView.setImageResource(R.drawable.ic_my_location);
 				AndroidUtils.setBackground(app, myLocButtonView, nightMode, R.drawable.btn_circle_blue, R.drawable.btn_circle_blue);
 				myLocButtonView.setContentDescription(mapActivity.getString(R.string.map_widget_back_to_loc));
 			}

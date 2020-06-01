@@ -44,9 +44,6 @@ public class GpxNotification extends OsmandNotification {
 				final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.saveCurrentTrack();
-					if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-						plugin.stopRecording();
-					}
 				}
 			}
 		}, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION));
