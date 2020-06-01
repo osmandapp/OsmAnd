@@ -946,8 +946,8 @@
     <string name="incomplete_locale">incompleto</string>
     <string name="shared_string_next">Seguinte</string>
     <string name="shared_string_previous">Anterior</string>
-    <string name="unit_of_length_descr">Muda en que unidades se mide a distancia.</string>
-    <string name="unit_of_length">Unidades da lonxitude</string>
+    <string name="unit_of_length_descr">Mudar as unidades de lonxitude.</string>
+    <string name="unit_of_length">Unidades de lonxitude</string>
     <string name="si_mi_feet">Millas/pés</string>
     <string name="si_mi_yard">Millas/iardas</string>
     <string name="si_km_m">Quilómetros/metros</string>
@@ -1870,7 +1870,7 @@ Lon %2$s</string>
     <string name="shared_string_remove">Eliminar</string>
     <string name="shared_string_read_more">Ler máis</string>
     <string name="road_blocked">Estrada bloqueada</string>
-    <string name="shared_string_select">Seleccionar</string>
+    <string name="shared_string_select">Escoller</string>
     <string name="switch_start_finish">Inverter o punto de partida e o destino</string>
     <string name="rendering_attr_hideIcons_name">Iconas de puntos de interese</string>
     <string name="item_removed">Elemento retirado</string>

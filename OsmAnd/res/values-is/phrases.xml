@@ -632,7 +632,7 @@
     <string name="poi_wiki_lang_uk">Wiki á úkranísku</string>
     <string name="poi_wiki_lang_bs">Wiki á bosnísku</string>
     <string name="poi_wiki_lang_ga">Wiki á írsku</string>
-    <string name="poi_wiki_lang_is">"Wiki á  íslensku"</string>
+    <string name="poi_wiki_lang_is">Wiki á íslensku</string>
     <string name="poi_wiki_lang_mn">Wiki á mongólsku</string>
     <string name="poi_block">Reitur</string>
     <string name="poi_entrance_main">Aðalinngangur</string>
@@ -949,7 +949,7 @@
     <string name="poi_service_repair">Bílaviðgerðir</string>
     <string name="poi_service_repair_no">Engar viðgerðir</string>
     <string name="poi_self_service_yes">Já</string>
-    <string name="poi_self_service_no">Ekki sjálfsafgreiðsla</string>
+    <string name="poi_self_service_no">Nei</string>
     <string name="poi_automated_yes">Já</string>
     <string name="poi_full_service_yes">Full þjónusta</string>
     <string name="poi_brushless_yes">Já</string>
@@ -2026,7 +2026,7 @@
     <string name="poi_diet_gluten_free_no">Glútenlaus matur: nei</string>
     <string name="poi_automated_no">Ekki sjálfvirkt</string>
     <string name="poi_brushless_no">Burstalaust: nei</string>
-    <string name="poi_car_wash_no">Bílaþvottur: nei</string>
+    <string name="poi_car_wash_no">Nei</string>
     <string name="poi_male_yes">Karlar</string>
     <string name="poi_male_no">Bannað körlum</string>
     <string name="poi_female_yes">Konur</string>
@@ -3664,7 +3664,7 @@
     <string name="poi_tourist_bus_no">Aðgangur hópferðabíla: nei</string>
     <string name="poi_coach_yes">Aðgangur langferðabifreiða: já</string>
     <string name="poi_coach_no">Aðgangur langferðabifreiða: nei</string>
-    <string name="poi_ski_yes">"Aðgangur skíðandi:  já"</string>
+    <string name="poi_ski_yes">Aðgangur skíðandi: já</string>
     <string name="poi_ski_no">Aðgangur skíðandi: nei</string>
     <string name="poi_snowmobile_private">Aðgangur vélsleða: einka</string>
     <string name="poi_snowmobile_no">Aðgangur vélsleða: nei</string>
@@ -3803,4 +3803,10 @@
     <string name="poi_seamark_water_level_part_submerged">Vatnsyfirborð: að hluta í kafi</string>
     <string name="poi_tactile_paving_primitive">Gróft</string>
     <string name="poi_internet_access_fee_customers">Merki til að finna staurinn</string>
+    <string name="poi_pump_status_missing_beam">Staða dælu: vantar bita</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">Sog</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Undir þrýstingi</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Grunnvatn</string>
+    <string name="poi_fire_hydrant_type_pipe">Leiðsla</string>
+    <string name="poi_fire_hydrant_pressure_filter">Þrýstingur</string>
 </resources>
