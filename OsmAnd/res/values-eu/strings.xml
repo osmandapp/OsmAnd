@@ -3668,7 +3668,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_resume">Jarraitu</string>
     <string name="ui_customization_description">Pertsonalizatu \"Tiradera\", \"Konfiguratu mapa\" eta \"Laster-menua\" ataletan dauden elementu kopurua.
 \n
-\nItzali erabili gabeko pluginak, eta ezkutatu bere kontrol guztiak. % 1 $ s.</string>
+\nItzali erabili gabeko pluginak, eta ezkutatu bere kontrol guztiak. %1$s.</string>
     <string name="ui_customization_short_descr">Tiraderako elementuak, laster-menua</string>
     <string name="ui_customization">Interfazearen pertsonalizazioa</string>
     <string name="shared_string_drawer">Tiradera</string>
