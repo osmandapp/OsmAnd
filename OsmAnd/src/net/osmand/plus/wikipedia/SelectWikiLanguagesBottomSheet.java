@@ -151,6 +151,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 				languages.add(new WikiLanguageItem(locale, WikipediaPoiMenu.getTranslation(app, locale), checked, topDefined));
 			}
 		} else {
+			isGlobalWikiPoiEnabled = true;
 			for (String locale : app.getPoiTypes().getAllAvailableWikiLocales()) {
 				boolean topDefined = preferredLocales.contains(locale);
 				languages.add(new WikiLanguageItem(locale, WikipediaPoiMenu.getTranslation(app, locale), false, topDefined));
