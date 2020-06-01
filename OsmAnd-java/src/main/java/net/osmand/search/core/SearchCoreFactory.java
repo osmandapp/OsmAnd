@@ -48,8 +48,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-import gnu.trove.list.array.TIntArrayList;
-
 
 public class SearchCoreFactory {
 
@@ -678,7 +676,7 @@ public class SearchCoreFactory {
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			boolean showTopFiltersOnly = !phrase.isUnknownSearchWordPresent();
-			NameStringMatcher nm = phrase.getFullUnknownNameMatcher();
+			NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
 			initPoiTypes();
 			List<AbstractPoiType> poiTypes = topVisibleFilters;
 			if (!showTopFiltersOnly) {
@@ -818,18 +816,18 @@ public class SearchCoreFactory {
 					throw new UnsupportedOperationException();
 				}
 			} else if (searchAmenityTypesAPI != null) {
-				NameStringMatcher nm = phrase.getFullUnknownNameMatcher();
+				NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
 				searchAmenityTypesAPI.initPoiTypes();
 				List<AbstractPoiType> presentPoiTypes = searchAmenityTypesAPI.getPoiTypeResults(nm, false);
-				// TODO get first ?
-				AbstractPoiType poiType = phrase.getUnknownSearchWordPoiType();
-				if (poiType != null) {
-					poiTypeFilter = getPoiTypeFilter(poiType);
-					nameFilter = phrase.getPoiNameFilter(poiType);
-					if (nameFilter != null) {
-						phrase.setUnknownSearchWordPoiType(poiType);
-					}
-				}
+				// TODO get first ? !!!
+//				AbstractPoiType poiType = phrase.getUnknownSearchWordPoiType();
+//				if (poiType != null) {
+//					poiTypeFilter = getPoiTypeFilter(poiType);
+//					nameFilter = phrase.getPoiNameFilter(poiType);
+//					if (nameFilter != null) {
+//						phrase.setUnknownSearchWordPoiType(poiType);
+//					}
+//				}
 			}
 			if (poiTypeFilter != null) {
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
@@ -853,7 +851,7 @@ public class SearchCoreFactory {
 		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchResultMatcher resultMatcher,
 														final String nameFilter, final BinaryMapIndexReader selected,
 														final Set<String> searchedPois) {
-			// TODO
+			// TODO !!!
 //			String unknownSearchPhrase = phrase.getUnknownSearchPhrase().trim();
 //			final NameStringMatcher phraseMatcher;
 //			if (!Algorithms.isEmpty(unknownSearchPhrase)) {
@@ -861,13 +859,14 @@ public class SearchCoreFactory {
 //			} else {
 //				phraseMatcher = null;
 //			}
-			final NameStringMatcher ns;
-			final boolean hasCustomName = !Algorithms.isEmpty(nameFilter);
-			if (hasCustomName) {
-				ns = phrase.getNameStringMatcher(nameFilter, phrase.isLastUnknownSearchWordComplete());
-			} else {
-				ns = phrase.getFirstUnknownNameStringMatcher();
-			}
+//			final NameStringMatcher ns;
+//			final boolean hasCustomName = !Algorithms.isEmpty(nameFilter);
+//			if (hasCustomName) {
+//				ns = phrase.getNameStringMatcher(nameFilter, phrase.isLastUnknownSearchWordComplete());
+//			} else {
+//				ns = phrase.getFirstUnknownNameStringMatcher();
+//			}
+			NameStringMatcher ns = phrase.getFirstUnknownNameStringMatcher();
 			return new ResultMatcher<Amenity>() {
 
 				@Override
@@ -914,16 +913,17 @@ public class SearchCoreFactory {
 					res.priority = SEARCH_AMENITY_BY_TYPE_PRIORITY;
 					res.priorityDistance = 1;
 					
-					if (phraseMatcher != null) {
-						boolean unknownPhraseMatches = phraseMatcher.matches(res.localeName);
-						AbstractPoiType unknownSearchWordPoiType = phrase.getUnknownSearchWordPoiType();
-						if (unknownPhraseMatches && unknownSearchWordPoiType != null) {
-							unknownPhraseMatches = !phraseMatcher.matches(unknownSearchWordPoiType.getTranslation())
-									&& !phraseMatcher.matches(unknownSearchWordPoiType.getEnTranslation())
-									&& !phraseMatcher.matches(unknownSearchWordPoiType.getSynonyms());
-						}
-						res.unknownPhraseMatches = unknownPhraseMatches;
-					}
+					// TODO !!!
+//					if (phraseMatcher != null) {
+//						boolean unknownPhraseMatches = phraseMatcher.matches(res.localeName);
+//						AbstractPoiType unknownSearchWordPoiType = phrase.getUnknownSearchWordPoiType();
+//						if (unknownPhraseMatches && unknownSearchWordPoiType != null) {
+//							unknownPhraseMatches = !phraseMatcher.matches(unknownSearchWordPoiType.getTranslation())
+//									&& !phraseMatcher.matches(unknownSearchWordPoiType.getEnTranslation())
+//									&& !phraseMatcher.matches(unknownSearchWordPoiType.getSynonyms());
+//						}
+//						res.unknownPhraseMatches = unknownPhraseMatches;
+//					}
 					res.objectType = ObjectType.POI;
 					resultMatcher.publish(res);
 					return false;

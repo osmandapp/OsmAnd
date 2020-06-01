@@ -55,14 +55,15 @@ public class SearchResult {
 			res = ObjectType.getTypeWeight(objectType);
 		}
 		if (parentSearchResult != null) {
-			// TODO
-			// 10 > maximum type
 //			double x = parentSearchResult.getUnknownPhraseMatchWeight();
 //			if (x == 0) {
 //				return 0;
 //			}
 			// res = Math.max(res, parentSearchResult.getUnknownPhraseMatchWeight());
-			 res += parentSearchResult.getUnknownPhraseMatchWeight() / 10;
+			// res += parentSearchResult.getUnknownPhraseMatchWeight() / 10;
+			// 20 > maximum type
+			// TODO explain comment
+			res = res / 20 + parentSearchResult.getUnknownPhraseMatchWeight() / 20;
 		}
 		return res;
 	}

@@ -25,9 +25,6 @@ public class CollatorStringMatcher implements StringMatcher {
 		CHECK_STARTS_FROM_SPACE_NOT_BEGINNING,
 		// tests all words (split by space) and one of word should be equal to part
 		CHECK_EQUALS_FROM_SPACE,
-		// TO DO: make a separate method
-		// trims part to make shorter then full text and tests only first word as base starts with part
-		TRIM_AND_CHECK_ONLY_STARTS_WITH,
 		// simple collator contains in any part of the base		
 		CHECK_CONTAINS,
 		// simple collator equals
@@ -61,11 +58,6 @@ public class CollatorStringMatcher implements StringMatcher {
 		case CHECK_STARTS_FROM_SPACE_NOT_BEGINNING:
 			return cstartsWith(collator, fullName, part, false, true, false);
 		case CHECK_ONLY_STARTS_WITH:
-			return cstartsWith(collator, fullName, part, true, false, false);
-		case TRIM_AND_CHECK_ONLY_STARTS_WITH:
-			if (part.length() > fullName.length()) {
-				part = part.substring(0, fullName.length());
-			}
 			return cstartsWith(collator, fullName, part, true, false, false);
 		case CHECK_EQUALS:
 			return cstartsWith(collator, fullName, part, false, false, true);

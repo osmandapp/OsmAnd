@@ -293,15 +293,6 @@ public class SearchPhrase {
 		return lastUnknownSearchWordComplete;
 	}
 	
-	public NameStringMatcher getFullUnknownNameMatcher() {
-		// TODO investigate diesel 95
-		if (isLastUnknownSearchWordComplete() || hasMoreThanOneUnknownSearchWord()) {
-			return new NameStringMatcher(unknownSearchPhrase, StringMatcherMode.TRIM_AND_CHECK_ONLY_STARTS_WITH);
-		} else {
-			return new NameStringMatcher(unknownSearchPhrase, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
-		}
-	}
-
 	public boolean hasMoreThanOneUnknownSearchWord() {
 		return otherUnknownWords.size() > 0;
 	}
@@ -534,7 +525,7 @@ public class SearchPhrase {
 	
 	public NameStringMatcher getUnknownNameStringMatcher(int i) {
 		while (unknownWordsMatcher.size() <= i) {
-			int ind = unknownWordsMatcher.size() - 1;
+			int ind = unknownWordsMatcher.size();
 			boolean completeMatch = ind < otherUnknownWords.size() - 1 || isLastUnknownSearchWordComplete();
 			unknownWordsMatcher.add(getNameStringMatcher(otherUnknownWords.get(ind), completeMatch));
 		}

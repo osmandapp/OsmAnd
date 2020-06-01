@@ -71,7 +71,7 @@ public class SearchUICore {
 		taskQueue = new LinkedBlockingQueue<Runnable>();
 		searchSettings = new SearchSettings(new ArrayList<BinaryMapIndexReader>());
 		searchSettings = searchSettings.setLang(locale, transliterate);
-		phrase = SearchPhrase.emptyPhrase();
+		phrase = SearchPhrase.emptyPhrase(searchSettings);
 		currentSearchResult = new SearchResultCollection(phrase);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
 	}
