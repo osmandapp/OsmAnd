@@ -66,8 +66,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     public static final String ACTIONS_TO_DELETE_KEY = "actions_to_delete";
     public static final String SCREEN_TYPE_KEY = "screen_type";
 
-    private static final int REORDER_SCREEN_TYPE = 0;
-    private static final int DELETING_SCREEN_TYPE = 1;
+    private static final int SCREEN_TYPE_REORDER = 0;
+    private static final int SCREEN_TYPE_DELETE = 1;
 
     private static final int ITEMS_IN_GROUP = 6;
 
@@ -83,7 +83,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     private ItemTouchHelper touchHelper;
     private QuickActionRegistry quickActionRegistry;
     private ArrayList<Long> actionsToDelete = new ArrayList<>();
-    private int screenType = REORDER_SCREEN_TYPE;
+    private int screenType = SCREEN_TYPE_REORDER;
 
     private boolean fromDashboard;
     private boolean nightMode;
@@ -99,7 +99,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                     actionsToDelete.add(id);
                 }
             }
-            screenType = savedInstanceState.getInt(SCREEN_TYPE_KEY, REORDER_SCREEN_TYPE);
+            screenType = savedInstanceState.getInt(SCREEN_TYPE_KEY, SCREEN_TYPE_REORDER);
         }
     }
 
@@ -176,7 +176,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (screenType == REORDER_SCREEN_TYPE) {
+                if (screenType == SCREEN_TYPE_REORDER) {
                     if (dy > 0 && fab.getVisibility() == View.VISIBLE)
                         fab.hide();
                     else if (dy < 0 && fab.getVisibility() != View.VISIBLE)
@@ -208,7 +208,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 R.color.active_buttons_and_links_text_dark :
                 R.color.active_buttons_and_links_text_light;
 
-        if (screenType == REORDER_SCREEN_TYPE) {
+        if (screenType == SCREEN_TYPE_REORDER) {
             Drawable icBack = app.getUIUtilities().getIcon(
                     AndroidUtils.getNavigationIconResId(app),
                     activeButtonsColorResId);
@@ -222,13 +222,13 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                     }
                 }
             });
-        } else {
+        } else if (screenType == SCREEN_TYPE_DELETE) {
             Drawable icClose = getIcon(R.drawable.ic_action_close, activeButtonsColorResId);
             navigationIcon.setImageDrawable(icClose);
             navigationIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    changeScreen();
+                    changeScreenType(SCREEN_TYPE_REORDER);
                 }
             });
         }
@@ -251,7 +251,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 items.add(new ListItem(ItemType.ACTION, actions.get(i)));
             }
         }
-        if (screenType == REORDER_SCREEN_TYPE) {
+        if (screenType == SCREEN_TYPE_REORDER) {
             items.add(new ListItem(ItemType.LIST_DIVIDER));
             String promo = app.getString(R.string.export_import_quick_actions_with_profiles_promo);
             items.add(new ListItem(ItemType.DESCRIPTION, promo));
@@ -286,12 +286,12 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     }
 
     private void updateVisibility() {
-        if (screenType == REORDER_SCREEN_TYPE) {
+        if (screenType == SCREEN_TYPE_REORDER) {
             fab.setVisibility(View.VISIBLE);
             bottomPanel.setVisibility(View.GONE);
             toolbarSwitchContainer.setVisibility(View.VISIBLE);
             deleteIconContainer.setVisibility(View.VISIBLE);
-        } else {
+        } else if (screenType == SCREEN_TYPE_DELETE) {
             fab.setVisibility(View.GONE);
             bottomPanel.setVisibility(View.VISIBLE);
             toolbarSwitchContainer.setVisibility(View.GONE);
@@ -299,10 +299,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         }
     }
 
-    private void changeScreen() {
+    private void changeScreenType(int screenType) {
+        this.screenType = screenType;
         actionsToDelete.clear();
-        screenType = screenType == REORDER_SCREEN_TYPE ?
-                DELETING_SCREEN_TYPE : REORDER_SCREEN_TYPE;
         updateToolbarTitle();
         updateToolbarNavigationIcon();
         updateListItems();
@@ -326,7 +325,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         deleteIconContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeScreen();
+                changeScreenType(SCREEN_TYPE_DELETE);
             }
         });
         deleteIconContainer.setEnabled(hasActiveQuickActions);
@@ -335,9 +334,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     private void updateToolbarTitle() {
         if (toolbar != null) {
             TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
-            if (screenType == REORDER_SCREEN_TYPE) {
+            if (screenType == SCREEN_TYPE_REORDER) {
                 tvTitle.setText(getString(R.string.configure_screen_quick_action));
-            } else {
+            } else if (screenType == SCREEN_TYPE_DELETE) {
                 int selectedCount = actionsToDelete != null ? actionsToDelete.size() : 0;
                 String title = String.format(
                         getString(R.string.ltr_or_rtl_combine_via_colon),
@@ -436,9 +435,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         if (adapter != null && actionsToDelete != null) {
             adapter.deleteItems(actionsToDelete);
             actionsToDelete.clear();
-            if (screenType == DELETING_SCREEN_TYPE) {
-                changeScreen();
-            } else {
+            if (screenType == SCREEN_TYPE_DELETE) {
+                changeScreenType(SCREEN_TYPE_REORDER);
+            } else if (screenType == SCREEN_TYPE_REORDER) {
                 updateToolbarActionButton();
             }
         }
@@ -505,7 +504,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 final QuickActionVH h = (QuickActionVH) holder;
                 final QuickAction action = (QuickAction) item.value;
 
-                if (screenType == REORDER_SCREEN_TYPE) {
+                if (screenType == SCREEN_TYPE_REORDER) {
                     h.handleView.setVisibility(View.VISIBLE);
                     h.deleteBtn.setVisibility(View.VISIBLE);
                     h.checkbox.setVisibility(View.GONE);
@@ -543,7 +542,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                         }
                     });
 
-                } else {
+                } else if (screenType == SCREEN_TYPE_DELETE) {
                     h.handleView.setVisibility(View.GONE);
                     h.deleteBtn.setVisibility(View.GONE);
                     h.checkbox.setVisibility(View.VISIBLE);
@@ -663,7 +662,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         private void showFABIfNotScrollable() {
             LinearLayoutManager layoutManager = (LinearLayoutManager) rv.getLayoutManager();
             int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
-            if (screenType == REORDER_SCREEN_TYPE &&
+            if (screenType == SCREEN_TYPE_REORDER &&
                     (lastVisibleItemPosition == items.size() - 1
                             || lastVisibleItemPosition == items.size()) &&
                     layoutManager.findFirstVisibleItemPosition() == 0 &&
