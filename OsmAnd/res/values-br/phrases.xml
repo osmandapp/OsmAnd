@@ -270,4 +270,6 @@
     <string name="poi_trade">Braswerzher</string>
     <string name="poi_tyres">Stal-vandennoù rod</string>
     <string name="poi_transport_construction">O sevel un doare da veajiñ</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_video_telephone">Video</string>
 </resources>
