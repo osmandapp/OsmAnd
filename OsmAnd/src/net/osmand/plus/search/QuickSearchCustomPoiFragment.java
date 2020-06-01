@@ -271,6 +271,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 				quickSearchDialogFragment.reloadCategories();
 			}
 		}
+		searchUICore.getSearchSettings().resetSearchTypes();
 		super.onDismiss(dialog);
 	}
 
