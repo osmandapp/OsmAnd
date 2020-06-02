@@ -65,8 +65,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
-
 /**
  * Object is responsible to maintain layers using by map activity
  */
@@ -273,7 +271,9 @@ public class MapActivityLayers {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		final List<PoiUIFilter> list = new ArrayList<>();
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
-			addFilterToList(adapter, list, f, true);
+			if (!f.isTopWikiFilter()) {
+				addFilterToList(adapter, list, f, true);
+			}
 		}
 		list.add(poiFilters.getCustomPOIFilter());
 		adapter.setProfileDependent(true);
@@ -306,9 +306,9 @@ public class MapActivityLayers {
 								if (filter.isStandardFilter()) {
 									filter.removeUnsavedFilterByName();
 								}
-								poiFilters.addSelectedPoiFilter(PoiTemplateList.POI, filter);
+								poiFilters.addSelectedPoiFilter(filter);
 							} else {
-								poiFilters.removeSelectedPoiFilter(PoiTemplateList.POI, filter);
+								poiFilters.removeSelectedPoiFilter(filter);
 							}
 						}
 						mapView.refreshMap();
@@ -351,7 +351,9 @@ public class MapActivityLayers {
 		final List<PoiUIFilter> list = new ArrayList<>();
 		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
-			addFilterToList(adapter, list, f, false);
+			if (!f.isTopWikiFilter()) {
+				addFilterToList(adapter, list, f, false);
+			}
 		}
 
 		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !isNightMode(app));
@@ -370,8 +372,9 @@ public class MapActivityLayers {
 					if (pf.isStandardFilter()) {
 						pf.removeUnsavedFilterByName();
 					}
-					poiFilters.clearSelectedPoiFilters(PoiTemplateList.POI);
-					poiFilters.addSelectedPoiFilter(PoiTemplateList.POI, pf);
+					PoiUIFilter wiki = poiFilters.getTopWikiPoiFilter();
+					poiFilters.clearSelectedPoiFilters(wiki);
+					poiFilters.addSelectedPoiFilter(pf);
 					mapView.refreshMap();
 				}
 			}
