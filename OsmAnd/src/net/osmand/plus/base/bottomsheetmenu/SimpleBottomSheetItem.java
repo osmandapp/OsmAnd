@@ -18,12 +18,15 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
 	private Drawable background;
 	private Drawable icon;
+	private boolean iconHidden;
+	private boolean showDivider;
 	protected CharSequence title;
 	@ColorRes
 	protected int titleColorId = INVALID_ID;
 
 	private TextView titleTv;
 	private ImageView iconView;
+	private View divider;
 
 	public SimpleBottomSheetItem(View customView,
 								 @LayoutRes int layoutId,
@@ -34,12 +37,16 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 								 Drawable icon,
 								 Drawable background,
 								 CharSequence title,
-								 @ColorRes int titleColorId) {
+								 @ColorRes int titleColorId,
+								 boolean iconHidden,
+								 boolean showDivider) {
 		super(customView, layoutId, tag, disabled, onClickListener, position);
 		this.icon = icon;
 		this.background = background;
 		this.title = title;
 		this.titleColorId = titleColorId;
+		this.iconHidden = iconHidden;
+		this.showDivider = showDivider;
 	}
 
 	protected SimpleBottomSheetItem() {
@@ -67,6 +74,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 		iconView = ((ImageView) view.findViewById(R.id.icon));
 		if (iconView != null) {
 			iconView.setImageDrawable(icon);
+			iconView.setVisibility(iconHidden ? View.GONE : View.VISIBLE);
 		}
 		titleTv = (TextView) view.findViewById(R.id.title);
 		if (title != null && titleTv != null) {
@@ -78,6 +86,10 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 		if (background != null) {
 			AndroidUtils.setBackground(view, background);
 		}
+		divider = view.findViewById(R.id.divider);
+		if (divider != null) {
+			divider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
+		}
 	}
 
 	public static class Builder extends BaseBottomSheetItem.Builder {
@@ -87,6 +99,8 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 		protected CharSequence title;
 		@ColorRes
 		protected int titleColorId = INVALID_ID;
+		protected boolean iconHidden;
+		protected boolean showDivider;
 
 		public Builder setIcon(Drawable icon) {
 			this.icon = icon;
@@ -108,6 +122,16 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 			return this;
 		}
 
+		public Builder setIconHidden(boolean iconHidden) {
+			this.iconHidden = iconHidden;
+			return this;
+		}
+
+		public Builder setShowDivider(boolean showDivider) {
+			this.showDivider = showDivider;
+			return this;
+		}
+
 		public SimpleBottomSheetItem create() {
 			return new SimpleBottomSheetItem(customView,
 					layoutId,
@@ -118,7 +142,9 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 					icon,
 					background,
 					title,
-					titleColorId);
+					titleColorId,
+					iconHidden,
+					showDivider);
 		}
 	}
 }
