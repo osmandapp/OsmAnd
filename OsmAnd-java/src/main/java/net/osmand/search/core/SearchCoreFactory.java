@@ -1,6 +1,7 @@
 package net.osmand.search.core;
 
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
@@ -624,38 +625,27 @@ public class SearchCoreFactory {
 			}
 		}
 		
-		public List<AbstractPoiType> getPoiTypeResults(NameStringMatcher nm, boolean includeAdditionals) {
-			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>();
+		public Map<AbstractPoiType, List<String>> getPoiTypeResults(NameStringMatcher nm, boolean includeAdditionals) {
+			Map<AbstractPoiType, List<String>> results = new LinkedHashMap<>();
 			for (AbstractPoiType pf : topVisibleFilters) {
-				if (nm.matches(pf.getTranslation()) || nm.matches(pf.getEnTranslation())
-						|| nm.matches(pf.getSynonyms())) {
-					results.add(pf);
-				}
+				checkPoiType(nm, pf, results);
 			}
 			for (PoiCategory c : categories) {
-				if (!results.contains(c) && (nm.matches(c.getTranslation()) || nm.matches(c.getEnTranslation())
-						|| nm.matches(c.getSynonyms()))) {
-					results.add(c);
-				}
+				checkPoiType(nm, c, results);
 			}
 			Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
 			while (it.hasNext()) {
 				Entry<String, PoiType> e = it.next();
 				PoiType pt = e.getValue();
 				if (pt.getCategory() != types.getOtherMapCategory()) {
-					if (!results.contains(pt) && (nm.matches(pt.getEnTranslation()) || nm.matches(pt.getTranslation())
-							|| nm.matches(pt.getSynonyms()))) {
-						results.add(pt);
-					}
+					checkPoiType(nm, pt, results);
 					List<PoiType> additionals = pt.getPoiAdditionals();
 					if (additionals != null && includeAdditionals) {
 						for (PoiType a : additionals) {
-							if (!results.contains(a)) {
+							if (!results.containsKey(a)) {
 								String enTranslation = a.getEnTranslation().toLowerCase();
-								if (!"yes".equals(enTranslation) && !"no".equals(enTranslation)
-										&& (nm.matches(enTranslation) || nm.matches(a.getTranslation())
-												|| nm.matches(a.getSynonyms()))) {
-									results.add(a);
+								if (!"yes".equals(enTranslation) && !"no".equals(enTranslation)) {
+									checkPoiType(nm, a, results);
 								}
 							}
 						}
@@ -663,6 +653,33 @@ public class SearchCoreFactory {
 				}
 			}
 			return results;
+		}
+
+		private void checkPoiType(NameStringMatcher nm, AbstractPoiType pf, Map<AbstractPoiType, List<String>> results) {
+			List<String> lst = results.get(pf);
+			if (nm.matches(pf.getTranslation())) {
+				lst = addToList(pf.getTranslation(), lst);
+			}
+			if (nm.matches(pf.getEnTranslation())) {
+				lst = addToList(pf.getEnTranslation(), lst);
+			}
+
+			if (nm.matches(pf.getSynonyms())) {
+				String[] synonyms = pf.getSynonyms().split(";");
+				for (String synonym : synonyms) {
+					if (nm.matches(synonym)) {
+						lst = addToList(synonym, lst);
+					}
+				}
+			}
+		}
+
+		private List<String> addToList(String s, List<String> lst) {
+			if(lst == null) {
+				lst = new ArrayList<>();
+			}
+			lst.add(s);
+			return lst;
 		}
 
 		private void initPoiTypes() {
@@ -678,15 +695,36 @@ public class SearchCoreFactory {
 			boolean showTopFiltersOnly = !phrase.isUnknownSearchWordPresent();
 			NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
 			initPoiTypes();
-			List<AbstractPoiType> poiTypes = topVisibleFilters;
-			if (!showTopFiltersOnly) {
-				poiTypes = getPoiTypeResults(nm, true);
-			}
-			for (AbstractPoiType pt : poiTypes) {
-				SearchResult res = new SearchResult(phrase);
-				res.localeName = pt.getTranslation();
-				res.object = pt;
-				addPoiTypeResult(phrase, resultMatcher, showTopFiltersOnly, getStandardFilterId(pt), res);
+			if (showTopFiltersOnly) {
+				for (AbstractPoiType pt : topVisibleFilters) {
+					SearchResult res = new SearchResult(phrase);
+					res.localeName = pt.getTranslation();
+					res.object = pt;
+					addPoiTypeResult(phrase, resultMatcher, showTopFiltersOnly, getStandardFilterId(pt), res);
+				}
+				
+			} else {
+				Map<AbstractPoiType, List<String>> poiTypes = getPoiTypeResults(nm, true);
+				for (Entry<AbstractPoiType, List<String>> pt : poiTypes.entrySet()) {
+					boolean match = !phrase.isFirstUnknownSearchWordComplete();
+					if (!match) {
+						for (String foundName : pt.getValue()) {
+							CollatorStringMatcher csm = new CollatorStringMatcher(foundName, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+							match = csm.matches(phrase.getUnknownSearchPhrase());
+							if (match) {
+								break;
+							}
+						}
+						// TODO properly count matching words
+					}
+					if (match) {
+						SearchResult res = new SearchResult(phrase);
+						res.localeName = pt.getKey().getTranslation();
+						res.object = pt.getKey();
+						addPoiTypeResult(phrase, resultMatcher, showTopFiltersOnly, getStandardFilterId(pt.getKey()),
+								res);
+					}
+				}
 			}
 			for (int i = 0; i < customPoiFilters.size(); i++) {
 				CustomSearchPoiFilter csf = customPoiFilters.get(i);
@@ -815,25 +853,31 @@ public class SearchCoreFactory {
 				} else {
 					throw new UnsupportedOperationException();
 				}
-			} else if (searchAmenityTypesAPI != null) {
+			} else if (searchAmenityTypesAPI != null && phrase.isFirstUnknownSearchWordComplete()) {
 				NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
 				searchAmenityTypesAPI.initPoiTypes();
-				List<AbstractPoiType> presentPoiTypes = searchAmenityTypesAPI.getPoiTypeResults(nm, false);
-				
-				// TODO get first ? !!!
-				// TODO SELECT WORD
-//				AbstractPoiType poiType = phrase.getUnknownSearchWordPoiType();
-//				if (poiType != null) {
-//					poiTypeFilter = getPoiTypeFilter(poiType);
-//					nameFilter = phrase.getPoiNameFilter(poiType);
-//					if (nameFilter != null) {
-//						phrase.setUnknownSearchWordPoiType(poiType);
-//					}
-//				}
-//				unknownPhraseMatches = !phraseMatcher.matches(unknownSearchWordPoiType.getTranslation())
-//						&& !phraseMatcher.matches(unknownSearchWordPoiType.getEnTranslation())
-//						&& !phraseMatcher.matches(unknownSearchWordPoiType.getSynonyms());
-//			}
+				Map<AbstractPoiType, List<String>> poiTypeResults = searchAmenityTypesAPI.getPoiTypeResults(nm, false);
+				// find first full match only
+				for (Entry<AbstractPoiType, List<String>> poiType : poiTypeResults.entrySet()) {
+					for (String foundName : poiType.getValue()) {
+						CollatorStringMatcher csm = new CollatorStringMatcher(foundName, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+						// matches only completely
+						if (csm.matches(phrase.getUnknownSearchPhrase())) {
+							int words = phrase.countWords(foundName) - 1;
+							List<String> otherSearchWords = phrase.getUnknownSearchWords(null);
+							if (words < otherSearchWords.size()) {
+								nameFilter = "";
+								for(int k = words; k < otherSearchWords.size(); k++) {
+									nameFilter = otherSearchWords.get(k) + SearchPhrase.DELIMITER;
+								}
+								nameFilter = nameFilter.trim();
+							}
+							poiTypeFilter = getPoiTypeFilter(poiType.getKey());
+							break;
+						}
+					}
+				}
+				// TODO count correctly matching words !
 			}
 			if (poiTypeFilter != null) {
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);

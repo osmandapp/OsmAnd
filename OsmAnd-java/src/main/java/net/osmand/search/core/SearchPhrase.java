@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 // Immutable object !
 public class SearchPhrase {
-	private static final String DELIMITER = " ";
+	public static final String DELIMITER = " ";
 	private static final String ALLDELIMITERS = "\\s|,";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private static Comparator<String> commonWordsComparator;
@@ -223,6 +223,18 @@ public class SearchPhrase {
 		return sp;
 	}
 	
+	public int countWords(String w) {
+		String[] ws = w.split(ALLDELIMITERS);
+		int cnt = 0;
+		for (int i = 0; i < ws.length; i++) {
+			String wd = ws[i].trim();
+			if (wd.length() > 0) {
+				cnt++;
+			}
+		}
+		return cnt;
+	}
+	
 	public SearchPhrase selectWord(SearchResult res, List<String> unknownWords, boolean lastComplete) {
 		SearchPhrase sp = new SearchPhrase(this.settings, this.clt);
 		addResult(res, sp);
@@ -310,6 +322,10 @@ public class SearchPhrase {
 	
 	public String getFirstUnknownSearchWord() {
 		return firstUnknownSearchWord;
+	}
+	
+	public boolean isFirstUnknownSearchWordComplete() {
+		return hasMoreThanOneUnknownSearchWord() || isLastUnknownSearchWordComplete();
 	}
 
 	public String getFullSearchPhrase() {
@@ -841,6 +857,8 @@ public class SearchPhrase {
 		}
 		return lastUnknownSearchWordComplete;
 	}
+
+	
 
 	
 }
