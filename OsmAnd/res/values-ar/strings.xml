@@ -3731,7 +3731,7 @@
     <string name="turn_screen_on_wake_time_descr">حدد مهلة الشاشة بعد الاستيقاظ. (\"%1$s\" لا ينطبق أي مهلة.)</string>
     <string name="keep_screen_on">إبقاء الشاشة قيد التشغيل</string>
     <string name="keep_screen_off">إبقاء الشاشة مطفأة</string>
-    <string name="screen_timeout_descr">محدد ب \"٪ 1 $ s\" ، إذا تم تمكينه.</string>
+    <string name="screen_timeout_descr">محدد ب \"٪1$s\" ، إذا تم تمكينه.</string>
     <string name="pseudo_mercator_projection">إسقاط ميركاتور الوهمي</string>
     <string name="one_image_per_tile">ملف صورة واحد لكل إطار متجانب</string>
     <string name="sqlite_db_file">ملف SQLiteDB</string>
