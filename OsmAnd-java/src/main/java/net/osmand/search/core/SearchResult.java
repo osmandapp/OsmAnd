@@ -22,7 +22,6 @@ public class SearchResult {
 	String wordsSpan ;
 	boolean firstUnknownWordMatches = true;
 	Collection<String> otherWordsMatch = null;
-	boolean unknownPhraseMatches = false;
 
 	
 	public Object object;
@@ -54,10 +53,7 @@ public class SearchResult {
 	// [0, 1[ - if there is parent search result
 	public double getUnknownPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it highers
-		double res = 0;
-		if (unknownPhraseMatches) {
-			res = ObjectType.getTypeWeight(objectType);
-		}
+		double res = ObjectType.getTypeWeight(objectType);
 		if (parentSearchResult != null) {
 			res = (res + parentSearchResult.getUnknownPhraseMatchWeight() / MAX_TYPE_WEIGHT) / MAX_TYPE_WEIGHT;
 		}

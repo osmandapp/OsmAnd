@@ -857,8 +857,8 @@ public class SearchUICore {
 	
 	private enum ResultCompareStep {
 		TOP_VISIBLE,
-		FOUND_WORD_COUNT,
-		UNKNOWN_PHRASE_MATCH_WEIGHT,
+		FOUND_WORD_COUNT, // more is better (top)
+		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
 		COMPARE_FIRST_NUMBER_IN_NAME,
 		COMPARE_DISTANCE_TO_PARENT_SEARCH_RESULT, // makes sense only for inner subqueries
