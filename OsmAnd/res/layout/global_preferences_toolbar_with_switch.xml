@@ -6,6 +6,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/actionModeBackground"
+	android:minHeight="@dimen/toolbar_height"
+	android:padding="0dp"
 	app:contentInsetLeft="0dp"
 	app:contentInsetStart="0dp"
 	app:contentInsetRight="0dp"
@@ -36,15 +38,15 @@
 				android:id="@+id/toolbar_title"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:paddingLeft="@dimen/content_padding"
-				android:paddingRight="@dimen/content_padding"
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
 				android:maxLines="2"
 				android:textColor="?attr/app_bar_primary_item_color"
 				android:textSize="@dimen/dialog_header_text_size"
 				app:typeface="@string/font_roboto_medium"
-				tools:text="@string/routing_settings_2"
-				android:paddingEnd="@dimen/content_padding"
-				android:paddingStart="@dimen/content_padding" />
+				tools:text="@string/routing_settings_2" />
 
 		</LinearLayout>
 

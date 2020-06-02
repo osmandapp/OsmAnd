@@ -57,7 +57,6 @@
 	<dimen name="context_menu_sub_info_height">36dp</dimen>
 	<dimen name="context_menu_padding_margin_large">30dp</dimen>
 	<dimen name="context_menu_padding_margin_medium">15dp</dimen>
-	<dimen name="context_menu_padding_margin_tiny">9dp</dimen>
 	<dimen name="context_menu_title_padding">23dp</dimen>
 	<dimen name="context_menu_progress_padding_left">27dp</dimen>
 	<dimen name="context_menu_progress_padding_right">3dp</dimen>
@@ -67,10 +66,6 @@
 	<dimen name="context_menu_main_actions_padding_top">11dp</dimen>
 	<dimen name="context_menu_main_actions_padding_bottom">9dp</dimen>
 	<dimen name="context_menu_main_actions_icon_margin">5dp</dimen>
-
-	<dimen name="fab_size_with_shadow">90dp</dimen>
-	<dimen name="fab_margin_right">18dp</dimen>
-	<dimen name="fab_margin_bottom_big">108dp</dimen>
 
 	<!-- General -->
 
@@ -107,12 +102,7 @@
 	<dimen name="route_info_card_details_margin">13dp</dimen>
 	<dimen name="route_info_legend_item_size">60dp</dimen>
 
-	<dimen name="multi_selection_header_height">78dp</dimen>
-
 	<dimen name="wikipedia_button_left_padding">29dp</dimen>
-
-	<dimen name="multi_selection_menu_padding_top">20dp</dimen>
-	<dimen name="multi_selection_menu_padding_bottom">23dp</dimen>
 
 	<dimen name="grid_menu_item_width">180dp</dimen>
 	<dimen name="grid_menu_item_bottom_top_margin">24dp</dimen>
@@ -120,8 +110,5 @@
 
 	<dimen name="bottom_sheet_menu_peek_height">450dp</dimen>
 	<dimen name="side_of_the_world_button_size">54dp</dimen>
-
-	<dimen name="toolbar_height">64dp</dimen>
-	<dimen name="poi_icon_size">24dp</dimen>
 
 </resources>
