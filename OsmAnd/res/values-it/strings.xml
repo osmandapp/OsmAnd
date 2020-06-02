@@ -43,7 +43,8 @@
     <string name="osmand_service_descr">OsmAnd funziona in backgroung con lo schermo spento.</string>
     <string name="switch_to_raster_map_to_see">Scarica una mappa vettoriale offline per questa regione da \'Impostazioni\' (\'Scarica mappe\'), o passa al componente aggiuntivo \'Mappe online\'.</string>
     <string name="download_files_not_enough_space">Non c\'è abbastanza spazio per scaricare %1$s MB (liberi: %2$s).</string>
-    <string name="download_files_question_space">Scaricare {0} file\? {1} MB (di {2} MB) saranno usati.</string>
+    <string name="download_files_question_space">Scaricare {0} file\?
+\n {1} MB (di {2} MB) saranno usati.</string>
     <string name="use_transparent_map_theme">Tema trasparente</string>
     <string name="native_library_not_supported">Libreria Nativa non supportata da questo dispositivo.</string>
     <string name="init_native_library">Inizializzazione libreria nativa…</string>
@@ -687,10 +688,9 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Punto di parcheggio</string>
-    <string name="osmand_parking_plugin_description">Il plugin della posizione di parcheggio ti permette di memorizzare dove l\'auto è parcheggiata e quanto tempo rimane (se il parcheggio è a tempo). 
-\n
-\nPuoi trovare il luogo di parcheggio e il tempo rimanente nella scheda del plugin e nel widget sulla mappa.
-\nSi può aggiungere un promemoria al calendario di Android per ricordarsi della scadenza.</string>
+    <string name="osmand_parking_plugin_description">Ti permette di memorizzare dove l\'auto è parcheggiata e quanto tempo rimane.
+\n Puoi trovare il luogo di parcheggio e il tempo rimanente nel pannello di controllo e nel widget sulla mappa. 
+\nSi può aggiungere un promemoria al calendario di Android.</string>
     <string name="osmand_parking_plugin_name">Posizione parcheggio</string>
     <string name="context_menu_item_add_parking_point">Marca come posizione di parcheggio</string>
     <string name="context_menu_item_delete_parking_point">Elimina marcatore di parcheggio</string>
@@ -698,8 +698,8 @@
     <string name="shared_location">Posizione condivisa</string>
     <string name="global_app_allocated_memory_descr">Memoria allocata %1$s MB (limite di Android %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Memoria allocata</string>
-    <string name="native_app_allocated_memory_descr">Memoria nativa totale allocata dall\'app %1$s MB (Dalvik %2$s MB, altro %3$s MB).
-Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</string>
+    <string name="native_app_allocated_memory_descr">Memoria nativa totale allocata dall\'app %1$s MB (Dalvik %2$s MB, altro %3$s MB). 
+\nMemoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Memoria nativa totale</string>
     <string name="select_animate_speedup">Velocità della simulazione del percorso:</string>
     <string name="osmand_parking_hours">Ore</string>
@@ -756,7 +756,8 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="int_continuosly">Continuo</string>
     <string name="email">e-mail</string>
     <string name="osmand_short_description_80_chars">Visualizzazione e navigazione in mobilità di mappe mondiali OSM</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automatizzata Navigazione Direzioni)↵ ↵ 
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automatizzata Navigazione Direzioni)
+\n
 \nOsmAnd è un\'applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida svolta per svolta.↵ 
 \n↵ 
 \n Alcune delle caratteristiche principali:↵ 
@@ -769,11 +770,13 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 \n - Modalità automobile, bicicletta e pedonale con:↵ 
 \n - Commutazione automatica della vista giorno/notte↵ 
 \n - Zoom automatico in base alla velocità↵ 
-\n - Allineamento della mappa in base alla direzione o alla bussola↵
-\n- Indicazioni di corsia, visualizzazione del limite di velocità, voci registrate e dal testo-alla-voce ↵↵ 
+\n - Allineamento della mappa in base alla direzione o alla bussola↵ 
+\n- Indicazioni di corsia, visualizzazione del limite di velocità, voci registrate e dal testo-alla-voce 
+\n
 \n - Limitazioni di questa versione gratuita di OsmAnd:↵ 
 \n - Numero di mappe scaricabili limitato↵ 
-\n - Non funziona l\'accesso ai PDI offline di Wikipedia↵ ↵ 
+\n - Non funziona l\'accesso ai PDI offline di Wikipedia
+\n
 \n OsmAnd è continuamente in sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Ti preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su https://osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">Visualizzazione &amp; navigazione mobile con le mappe mondiali OSM online e offline</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automatizzate Navigazione e Direzioni) 
@@ -1254,10 +1257,9 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="speak_poi">PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="shared_string_all">Tutti</string>
-    <string name="record_plugin_description">Questo componente aggiuntivo attiva la funzionalità di registrare e salvare le tue tracce, o manualmente attraverso il pulsante dedicato nella mappa, oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX. 
+    <string name="record_plugin_description">"Questo componente aggiuntivo attiva la funzionalità di registrare e salvare le tue tracce, o manualmente attraverso il pulsante dedicato nella mappa, oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX.  
 \n 
-\n 
-\nLe tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli atleti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcune analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni.</string>
+\nLe tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli atleti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcune analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni."</string>
     <string name="record_plugin_name">Registrazione viaggio</string>
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>
@@ -1631,7 +1633,8 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="shared_string_undo">Annulla azione</string>
     <string name="shared_string_skip">Salta</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="offline_maps_and_navigation">Mappe offline &amp; Navigazione</string>
+    <string name="offline_maps_and_navigation">Mappe offline 
+\n&amp; Navigazione</string>
     <string name="lang_new">Newa/Bhasa del Nepal</string>
     <string name="plugin_settings">Componenti aggiuntivi</string>
     <string name="routing_attr_avoid_shuttle_train_name">Evita i treni navetta</string>
@@ -1877,8 +1880,11 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="shared_string_widgets">Widget</string>
     <string name="select_map_marker">Scegli marcatore</string>
     <string name="map_markers_other">Altri marcatori</string>
-    <string name="download_files_error_not_enough_space">Manca spazio! Servirebbero {3} MB temporaneamente, {1} MB permanentemente. (Disponibili solo {2} MB.)</string>
-    <string name="download_files_question_space_with_temp">Scaricare {0} file\? Servirebbero {3} MB temporaneamente e {1} MB permanentemente. (Di {2} MB.)</string>
+    <string name="download_files_error_not_enough_space">Manca spazio!
+\n Servirebbero {3} MB temporaneamente, {1} MB permanentemente. 
+\n (Disponibili solo {2} MB.)</string>
+    <string name="download_files_question_space_with_temp">Scaricare {0} file\? 
+\n {3} MB sono utilizzati temporaneamente e {1} MB permanentemente. (Di {2} MB.)</string>
     <string name="upload_osm_note_description">Puoi inviare le tue note OSM anonimamente, o utilizzando il tuo profilo OpenStreetMap.org.</string>
     <string name="upload_osm_note">Carica nota OSM</string>
     <string name="donations">Donazioni</string>
@@ -2133,11 +2139,11 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="favorite_empty_place_name">Luogo</string>
     <string name="navigate_point_olc">Codifica Open Location</string>
     <string name="navigate_point_olc_info_invalid">OLC non valido
-</string>
+\n</string>
     <string name="navigate_point_olc_info_short">OLC breve
 \nPer favore inserisci il codice completo</string>
-    <string name="navigate_point_olc_info_area">Un OLC valido
-Rappresenta l\'area: %1$s x %2$s</string>
+    <string name="navigate_point_olc_info_area">OLC valido
+\nRappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_duplicates">L\'azione rapida specificata è stata rinominata in %1$s per evitare duplicati.</string>
     <string name="quick_action_duplicate">Nome dell\'azione veloce duplicato</string>
     <string name="quick_action_showhide_favorites_descr">Questo pulsante d’azione mostra o nasconde i preferiti sulla mappa.</string>
@@ -2290,32 +2296,20 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="edit_name">Modifica il nome</string>
     <string name="route_is_too_long_v2">Per lunghe distanze: aggiungere delle mete intermedie se non si ottiene un risultato entro 10 minuti.</string>
     <string name="save_poi_too_many_uppercase">Il nome contiene troppe maiuscole. Continuare\?</string>
-    <string name="osmand_plus_extended_description_part8">Copertura e qualità approssimativa delle mappe: 
-\n
-\n • Ovest Europa: **** 
-\n
-\n • Est Europa: *** 
-\n
-\n • Russia: *** 
-\n
-\n • Nord America: *** 
-\n
-\n • Sud America: ** 
-\n
-\n • Asia: ** 
-\n
-\n • Giappone e Corea: *** 
-\n
-\n • Medio Oriente: ** 
-\n
-\n • Africa: ** 
-\n
-\n • Antartide: * 
-\n
-\n Molte nazioni del mondo disponibili come download! 
-\n
-\n Dall\'Afghanistan al Zimbabwe, dall\'Australia agli USA. Argentina, Brasile, Canada, Francia, Germania, Messico, Gran Bretagna, Spagna, …
-\n</string>
+    <string name="osmand_plus_extended_description_part8">"Copertura e qualità approssimativa delle mappe: 
+\n  • Ovest Europa: **** 
+\n  • Est Europa: *** 
+\n  • Russia: *** 
+\n  • Nord America: *** 
+\n  • Sud America: ** 
+\n  • Asia: ** 
+\n  • Giappone e Corea: *** 
+\n  • Medio Oriente: ** 
+\n  • Africa: ** 
+\n  • Antartide: * 
+\n  Molte nazioni del mondo disponibili come download! 
+\n  Dall\'Afghanistan al Zimbabwe, dall\'Australia agli USA. Argentina, Brasile, Canada, Francia, Germania, Messico, Gran Bretagna, Spagna, …
+\n"</string>
     <string name="osmand_plus_extended_description_part7">Contribuisci direttamente a OSM 
 \n • Segnala errori nei dati 
 \n • Contribuisci tracce GPX a OSM direttamente dall\'app 
@@ -2337,10 +2331,11 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n • Antartide: * 
 \nLa maggior parte delle nazioni del mondo sono disponibili per il download! 
 \n Scarica un affidabile navigatore del tuo paese - sia che tu sia in Francia, Germania, Messico, Gran Bretagna, Spagna, Olanda, USA, Russia, Brasile o qualsiasi altra.</string>
-    <string name="osmand_extended_description_part7">Contribuire a OSM
-\n • Segnala errori nei dati
-\n • Carica tracce GPX in OSM direttamente dall\'app
-\n • Aggiungi PDI e caricali direttamente in OSM (o successivamente se sei offline)</string>
+    <string name="osmand_extended_description_part7">Contribuire a OSM 
+\n • Segnala errori nei dati 
+\n • Carica tracce GPX in OSM direttamente dall\'app 
+\n • Aggiungi PDI e caricali direttamente in OSM (o successivamente se sei offline)
+\n</string>
     <string name="mapillary">Mapillary</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automatizzata Navigazione Direzioni ) è un\'app di navigazione e mappe con accesso ai dati gratuiti, mondiali e di alta qualità di OpenStreetMap (OSM). 
 \n 
@@ -2464,25 +2459,27 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="show_arrows_on_the_map">Mostra le frecce nella mappa</string>
     <string name="show_passed">Mostra superati</string>
     <string name="hide_passed">Nascondi i superati</string>
-    <string name="osmand_extended_description_part2">Navigazione GPS
-\n • Puoi scegliere fra la modalità offline (nessun costo di roaming quando sei all\'estero) oppure online (più veloce)
-\n • La guida vocale svolta per svolta ti guida lungo il percorso (voci registrate e sintetizzate)
-\n • Il percorso viene ricalcolato quando devii
-\n • Indicazioni di corsia, nomi delle strade e tempo di arrivo stimato saranno d\'aiuto lungo il percorso
-\n • Per rendere il percorso più veloce il passaggio dalla modalità diurna/notturna automatico
-\n •Puoi scegliere di visualizzare i limiti di velocità, ed essere avvisato quando li superi
-\n • Lo zoom della mappa si adegua alla velocità
-\n • Puoi cercare le destinazioni per indirizzo, per categoria (es.: parcheggio, ristorante, hotel, stazione di rifornimento, museo), oppure tramite le coordinate geografiche
-\n • Supporta i punti intermedi nel tuo itinerario
-\n • Registra la tua traccia GPX oppure caricarne una e seguirla</string>
+    <string name="osmand_extended_description_part2">Navigazione GPS 
+\n • Puoi scegliere fra la modalità offline (nessun costo di roaming quando sei all\'estero) oppure online (più veloce) 
+\n • La guida vocale svolta per svolta ti guida lungo il percorso (voci registrate e sintetizzate) 
+\n • Il percorso viene ricalcolato quando devii 
+\n • Indicazioni di corsia, nomi delle strade e tempo di arrivo stimato saranno d\'aiuto lungo il percorso 
+\n • Per rendere il percorso più veloce il passaggio dalla modalità diurna/notturna automatico 
+\n •Puoi scegliere di visualizzare i limiti di velocità, ed essere avvisato quando li superi 
+\n • Lo zoom della mappa si adegua alla velocità 
+\n • Puoi cercare le destinazioni per indirizzo, per categoria (es.: parcheggio, ristorante, hotel, stazione di rifornimento, museo), oppure tramite le coordinate geografiche 
+\n • Supporta i punti intermedi nel tuo itinerario 
+\n • Registra la tua traccia GPX oppure caricarne una e seguirla
+\n</string>
     <string name="osmand_extended_description_part3">"Mappa 
 \n • Mostra i PDI (punti di interesse) vicino a te 
 \n • Disponi la mappa nella direzione del movimento (o della bussola) 
 \n • Mostra dove sei e  la direzione verso cui sei rivolto 
 \n • Condividi la tua posizione così i tuoi amici possano trovarti 
-\n • Raccogli i luoghi più importanti nei \'Favoriti\' 
+\n • Raccogli i luoghi più importanti nei \'Preferiti\' 
 \n • Ti permette di scegliere come visualizzare i nomi nella mappa: in inglese, in lingua locale, oppure secondo la pronuncia 
-\n • Visualizza mattonelle online speciali, vista satellitare (da Bing), diverse sovrapposizioni come turistico/navigazione tracce GPX e strati aggiuntivi con trasparenze personalizzabili"</string>
+\n • Visualizza mattonelle online speciali, vista satellitare (da Bing), diverse sovrapposizioni come turistico/navigazione tracce GPX e strati aggiuntivi con trasparenze personalizzabili
+\n"</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automatizzata Navigazione Direzioni) è un\'applicazione di navigazione con l\'accesso ai dati delle mappe mondiali, gratuite e di grande qualità di OpenStreetMap (OSM). 
 \n Goditi la navigazione con indicazioni visive e vocali, la visualizzazione dei PDI (punti di interesse), creando e gestendo le tracce GPX, usando visualizzazione delle linee isoipse e dell\'altitudine, scegliendo fra le modalità auto, bici, pedone, modifiche OSM e molto altro. 
 \n 
@@ -2812,6 +2809,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="commiting_way">Sottoponi la via…</string>
     <string name="increase_search_radius_to">Aumenta il raggio di ricerca a %1$s</string>
     <string name="send_search_query_description">Invieremo la tua ricerca, assieme alla tua localizzazione a: \"%1$s\". 
+\n
 \nNon raccogliamo informazioni personali, i dati delle ricerche sono usati per migliorare l\'algoritmo di ricerca.</string>
     <string name="send_search_query">Inviare i dati delle ricerche?</string>
     <string name="shared_string_world">Mondo</string>
@@ -3615,10 +3613,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_octagon">Ottagono</string>
     <string name="app_mode_ski_snowmobile">Motoslitta</string>
     <string name="custom_osmand_plugin">Componente aggiuntivo OsmAnd personalizzato</string>
-    <string name="changes_applied_to_profile">Modifiche applicate al profilo %1$s.</string>
-    <string name="settings_item_read_error">Non posso leggere %1$s.</string>
-    <string name="settings_item_write_error">Non posso scrivere %1$s.</string>
-    <string name="settings_item_import_error">Non posso importare %1$s.</string>
+    <string name="changes_applied_to_profile">Modifiche applicate al profilo \'%1$s\'.</string>
+    <string name="settings_item_read_error">Non posso leggere da \'%1$s\'.</string>
+    <string name="settings_item_write_error">Non posso scrivere su \'%1$s\'.</string>
+    <string name="settings_item_import_error">Non posso importare da \'%1$s\'.</string>
     <string name="wiki_menu_download_descr">Sono necessarie mappe aggiuntive per visualizzare sulla mappa i PDI Wikipedia.</string>
     <string name="select_track_file">Scegli il file della traccia</string>
     <string name="shared_string_languages">Lingue</string>
@@ -3669,7 +3667,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="turn_screen_on_power_button_descr">Premendo il pulsante di accensione del dispositivo lo schermo si accenderà con OsmAnd nella schermata di sblocco.</string>
     <string name="turn_screen_on_power_button">Pulsante di accensione</string>
     <string name="turn_screen_on_proximity_sensor">Sensore di prossimità</string>
-    <string name="turn_screen_on_wake_time_descr">Scegli il tempo di spegnimento dopo l\'accensione dello schermo. (\"%1$s\" applica nessun tempo di attesa.)</string>
+    <string name="turn_screen_on_wake_time_descr">Scegli il tempo di spegnimento dopo l\'accensione dello schermo. (\"%1$s\" imposta nessun tempo di attesa.)</string>
     <string name="keep_screen_on">Mantieni lo schermo acceso</string>
     <string name="keep_screen_off">Mantieni lo schermo spento</string>
     <string name="screen_timeout_descr">Limitata a \"%1$s\", se abilitata.</string>
@@ -3694,5 +3692,79 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \nUna settimana corrisponde a 10080 minuti.
 \nUn mese corrisponde a 43829 minuti.</string>
     <string name="tiles_storage_descr">Scegli come le mattonelle scaricate saranno conservate.</string>
-    <string name="default_screen_timeout">Tempo attivazione salvaschermo</string>
+    <string name="default_screen_timeout">Tempo di sistema attivazione salvaschermo</string>
+    <string name="main_actions_descr">Ha solo 4 pulsanti.</string>
+    <string name="lang_zhminnan">Min meridionale</string>
+    <string name="lang_war">Wáray</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="osm_live_payment_subscription_management">"Il tuo account Google Play viene addebitato al momento dell\'acquisto di una sottoscrizione.
+\n
+\n La sottoscrizione si rinnova automaticamente finché non viene cancellata prima del rinnovo. Il tuo account verrà addebitato per il rinnovo periodico (mensile, trimestrale, annuale) solo alla data di rinnovo.
+\n
+\n Puoi gestire  e cancellare la tua sottoscrizione dalle impostazioni del tuo account Google Play."</string>
+    <string name="search_poi_types_descr">Combina PDI di più categorie. Tappa il pulsante per selezionarle tutte, oppure sul lato sinistro per una selezione puntuale.</string>
+    <string name="lang_gu">Gujarati</string>
+    <string name="lang_ba">Baschiro</string>
+    <string name="lang_jv">Giavanese</string>
+    <string name="lang_cv">Ciuvascia</string>
+    <string name="release_3_7">• Nuove mappe dei pendii
+\n
+\n • Personalizzazione completa dei Preferiti e dei Waypoint GPX – colori personalizzati, icone, forme
+\n
+\n • Personalizza l\'ordine degli oggetti nel \"Menu contestuale\", \"Configura la mappa\" e \"Pannello\"
+\n
+\n • In Configura la mappa Wikipedia come livello separato, selezione solo le lingue che utilizzi
+\n
+\n • Crea filtri personalizzati per i PDI/mappe con totale flessibiità
+\n
+\n • Aggiunta l\'opzione per reimpostare le impostazioni dei profili personalizzati
+\n
+\n • Navigazione percorsi GPX completa, dalla navigazione all\'indicazione delle corsie alla navigazione svolta per svolta
+\n
+\n • Corretto la dimensione della IU nei tablet
+\n
+\n • Corretti i bug con RTL
+\n
+\n</string>
+    <string name="ui_customization_description">Personalizza la quantità di elementi nel \"Pannello\", \"Configura la mappa\" e il \"Menù contestuale\".
+\n
+\nPuoi disattivare i plugin inutilizzati, per nascondere tutti i loro controlli. %1$s.</string>
+    <string name="ui_customization_short_descr">Elementi pannello, menù contestuale</string>
+    <string name="ui_customization">Personalizzazione Interfaccia Grafica</string>
+    <string name="shared_string_drawer">Pannello</string>
+    <string name="context_menu_actions">Azioni menù contestuale</string>
+    <string name="reorder_or_hide_from">Riordina o nascondi elementi dal %1$s.</string>
+    <string name="shared_string_divider">Divisore</string>
+    <string name="divider_descr">Gli elementi al di sotto di questo punto separati da un divisore.</string>
+    <string name="shared_string_hidden">Nascosto</string>
+    <string name="hidden_items_descr">Questi elementi sono nascosti dal menu, ma le opzioni rappresentate o i plugins continueranno a funzionare.</string>
+    <string name="reset_items_descr">Nascondere le opzioni le reimposta al loro valore originale.</string>
+    <string name="main_actions">Azioni principali</string>
+    <string name="additional_actions_descr">Puoi accedere a queste azioni toccando il pulsante \"Azioni aggiuntive\".</string>
+    <string name="move_inside_category">Puoi spostare gli elementi solo all\'interno di questa categoria</string>
+    <string name="select_wikipedia_article_langs">Seleziona i linguaggi in cui gli articoli di Wikipedia appariranno sulla mappa. Puoi cambiare fra tutte le lingue disponibili mentre leggi questo articolo.</string>
+    <string name="some_articles_may_not_available_in_lang">Alcuni articoli di Wikipedia potrebbero non essere disponibili nella tua lingua.</string>
+    <string name="lang_zhyue">Cantonese</string>
+    <string name="lang_yo">Yoruba</string>
+    <string name="lang_uz">Uzbeco</string>
+    <string name="lang_ur">Urdu</string>
+    <string name="lang_tt">Tataro</string>
+    <string name="lang_tg">Tagiko</string>
+    <string name="lang_sco">Scozzese</string>
+    <string name="lang_scn">Siciliano</string>
+    <string name="lang_pnb">Punjabi</string>
+    <string name="lang_ne">Nepalese</string>
+    <string name="lang_nap">Napoletano</string>
+    <string name="lang_my">Burmese</string>
+    <string name="lang_mn">Mongolo</string>
+    <string name="lang_min">Minangkabau</string>
+    <string name="lang_mg">Malgascio</string>
+    <string name="lang_ky">Chirghiso</string>
+    <string name="lang_kk">Kazako</string>
+    <string name="lang_ce">Ceceno</string>
+    <string name="lang_bar">Bavarese</string>
+    <string name="lang_an">Aragonese</string>
+    <string name="lang_lmo">Lombardo</string>
+    <string name="custom_color">Colori personalizzati</string>
+    <string name="search_poi_types">Cerca in base al PDI</string>
 </resources>
