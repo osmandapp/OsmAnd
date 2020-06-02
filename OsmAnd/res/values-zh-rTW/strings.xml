@@ -3169,7 +3169,7 @@
     <string name="turn_screen_on_router">輪流喚醒</string>
     <string name="turn_screen_on_time_descr">調整螢幕應開啟多久。</string>
     <string name="turn_screen_on_sensor">使用距離感測器</string>
-    <string name="turn_screen_on_sensor_descr">導航時，將您的手在螢幕上方揮一揮以開啟螢幕。</string>
+    <string name="turn_screen_on_sensor_descr">將您的手在螢幕上方揮一揮就能開啟螢幕。</string>
     <string name="rendering_attr_highway_class_track_grade1_name">等級 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">等級 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">等級 3</string>
@@ -3723,21 +3723,19 @@
     <string name="gpx_parse_error">OsmAnd GPX 格式不正確，請聯絡支援團隊以進一步調查。</string>
     <string name="shared_string_always">總是</string>
     <string name="screen_control">螢幕控制</string>
-    <string name="system_screen_timeout_descr">啟用以在一段不活躍的時間後關閉螢幕，將會使用在您裝置的系統設定中指定的時間。</string>
-    <string name="system_screen_timeout">螢幕逾時</string>
-    <string name="turn_screen_on_options_descr">使用這些選項以在 OsmAnd 位於前景時喚醒螢幕。</string>
-    <string name="turn_screen_on_descr">僅當 OsmAnd 在前景時鎖定裝置的時候，那些選項才有效。</string>
-    <string name="turn_screen_on_navigation_instructions_descr">螢幕將會在導航說明前數秒自動開啟螢幕，這個時間需在「喚醒時間」中指定。
-\n
-\n僅在導航時有用。</string>
+    <string name="system_screen_timeout_descr">在系統螢幕逾時後關閉螢幕。</string>
+    <string name="system_screen_timeout">使用系統螢幕逾時</string>
+    <string name="turn_screen_on_options_descr">螢幕喚醒選項：</string>
+    <string name="turn_screen_on_descr">選取螢幕喚醒選項（確保裝置鎖定時，OsmAnd 在前景）：</string>
+    <string name="turn_screen_on_navigation_instructions_descr">每次導航說明都將開啟螢幕。</string>
     <string name="turn_screen_on_navigation_instructions">導航說明</string>
-    <string name="turn_screen_on_power_button_descr">按下裝置電源按鈕以在前景打開 OsmAnd 並開啟螢幕。</string>
+    <string name="turn_screen_on_power_button_descr">按下裝置的電源按鈕將會在鎖定畫面上方開啟 OsmAnd。</string>
     <string name="turn_screen_on_power_button">電源按鈕</string>
     <string name="turn_screen_on_proximity_sensor">近接感測器</string>
-    <string name="turn_screen_on_wake_time_descr">選取喚醒後的螢幕活動時間，如果「%1$s」啟用，螢幕將不會關閉。</string>
+    <string name="turn_screen_on_wake_time_descr">選取喚醒後的螢幕逾時。（「%1$s」不適用逾時。）</string>
     <string name="keep_screen_on">保持螢幕開啟</string>
     <string name="keep_screen_off">保持螢幕關閉</string>
-    <string name="screen_timeout_descr">如果啟用了「%1$s」選項，則活動時間將取決於它。</string>
+    <string name="screen_timeout_descr">若啟用的話則由「%1$s」限制。</string>
     <string name="pseudo_mercator_projection">偽麥卡托投影</string>
     <string name="mercator_projection">麥卡托投影</string>
     <string name="one_image_per_tile">每個圖磚一個圖片檔案</string>
@@ -3759,4 +3757,5 @@
 \n一週是10080分鐘。
 \n一個月是43829分鐘。</string>
     <string name="tiles_storage_descr">選擇要如何儲存下載的圖磚。</string>
+    <string name="default_screen_timeout">系統螢幕逾時</string>
 </resources>
