@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/content_padding"
+    android:paddingRight="@dimen/content_padding"
+    android:paddingTop="@dimen/content_padding_small"
+    android:paddingBottom="@dimen/content_padding_small"
+    android:minHeight="@dimen/card_row_min_height"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:minHeight="@dimen/bottom_sheet_descr_height"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="@dimen/default_desc_text_size"
+        android:linksClickable="true"
+        android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+        tools:text="Some long description" />
+
+</LinearLayout>

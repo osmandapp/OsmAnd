@@ -1,25 +1,20 @@
 package net.osmand.plus.quickaction;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 import java.util.List;
 
@@ -27,160 +22,59 @@ import java.util.List;
  * Created by rosty on 12/22/16.
  */
 
-public class AddQuickActionDialog extends DialogFragment {
+public class AddQuickActionDialog extends MenuBottomSheetDialogFragment {
 
     public static final String TAG = AddQuickActionDialog.class.getSimpleName();
-    
-    private boolean isLightContent;
-
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-        OsmandApplication application = (OsmandApplication) getActivity().getApplication();
-        isLightContent = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
-
-        return new Dialog(UiUtilities.getThemedContext(getActivity(), !isLightContent, R.style.Dialog90Light, R.style.Dialog90Dark), getTheme());
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-		QuickActionRegistry quickActionRegistry = ((MapActivity) getActivity())
-				.getMyApplication()
-				.getQuickActionRegistry();
-
-        View root = UiUtilities.getInflater(getActivity(), !isLightContent).inflate(R.layout.quick_action_add_dialog, container, false);
-        Adapter adapter = new Adapter(quickActionRegistry.produceTypeActionsListWithHeaders());
-
-        TextView tvTitle = root.findViewById(R.id.tvTitle);
-        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.recycler_view);
-        Button btnDismiss = (Button) root.findViewById(R.id.btnDismiss);
-
-        tvTitle.setTextColor(ContextCompat.getColor(getContext(),
-                isLightContent ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
-        
-        btnDismiss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
-
-        recyclerView.setAdapter(adapter);
-
-        return root;
-    }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
+    public void createMenuItems(Bundle savedInstanceState) {
+        OsmandApplication app = requiredMyApplication();
+        final FragmentActivity activity = getActivity();
+        LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+        QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
 
-    public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-        private static final int HEADER = 1;
-        private static final int ITEM = 2;
-
-        private List<QuickActionType> data;
-
-        public class ItemViewHolder extends RecyclerView.ViewHolder {
-
-            private TextView title;
-            private ImageView icon;
-
-            public ItemViewHolder(View v) {
-                super(v);
-
-                title = (TextView) v.findViewById(R.id.title);
-                icon = (ImageView) v.findViewById(R.id.image);
-            }
-        }
-
-        public class HeaderViewHolder extends RecyclerView.ViewHolder {
-
-            private TextView header;
-            private View divider;
-
-            public HeaderViewHolder(View v) {
-                super(v);
-
-                header = (TextView) v.findViewById(R.id.header);
-                divider = v.findViewById(R.id.divider);
-            }
-        }
-
-        public Adapter(List<QuickActionType> data) {
-            this.data = data;
-        }
-
-
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-            if (viewType == HEADER) {
-
-                return new HeaderViewHolder(LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.quick_action_add_dialog_header, parent, false));
-
+        items.add(new TitleItem(getString(R.string.dialog_add_action_title)));
+        List<QuickActionType> actions = quickActionRegistry.produceTypeActionsListWithHeaders();
+        boolean firstHeader = true;
+        for (final QuickActionType action : actions) {
+            if (action.getId() == 0) {
+                View itemView = inflater.inflate(R.layout.quick_action_add_dialog_header,
+                        null, false);
+                TextView title = itemView.findViewById(R.id.header);
+                View divider = itemView.findViewById(R.id.divider);
+                title.setText(action.getNameRes());
+                divider.setVisibility(firstHeader ? View.GONE : View.VISIBLE);
+                items.add(new BaseBottomSheetItem.Builder()
+                        .setCustomView(itemView)
+                        .create());
+                firstHeader = false;
             } else {
-
-                return new ItemViewHolder(LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.quick_action_add_dialog_item, parent, false));
+                View itemView = inflater.inflate(R.layout.quick_action_add_dialog_item,
+                        null, false);
+                TextView title = itemView.findViewById(R.id.title);
+                ImageView icon = itemView.findViewById(R.id.image);
+                title.setText(action.getNameRes());
+                icon.setImageResource(action.getIconRes());
+                items.add(new BaseBottomSheetItem.Builder()
+                        .setCustomView(itemView)
+                        .setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                CreateEditActionDialog dialog =
+                                        CreateEditActionDialog.newInstance(action.getId());
+                                dialog.show(activity.getSupportFragmentManager(),
+                                        CreateEditActionDialog.TAG);
+                                dismiss();
+                            }
+                        })
+                        .create());
             }
         }
+    }
 
-
-        @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-            final QuickActionType action = data.get(position);
-
-            if (getItemViewType(position) == HEADER) {
-
-                HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
-
-                headerHolder.header.setText(action.getNameRes());
-                if (position == 0) headerHolder.divider.setVisibility(View.GONE);
-                else headerHolder.divider.setVisibility(View.VISIBLE);
-
-            } else {
-
-                ItemViewHolder itemHolder = (ItemViewHolder) holder;
-
-                itemHolder.title.setText(action.getNameRes());
-                itemHolder.title.setTextColor(ContextCompat.getColor(getContext(), 
-                        isLightContent ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
-                itemHolder.icon.setImageResource(action.getIconRes());
-
-                itemHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.getId());
-                        dialog.show(getFragmentManager(), CreateEditActionDialog.TAG);
-
-                        dismiss();
-                    }
-                });
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            return data.size();
-
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-
-            if (data.get(position).getId() == 0)
-                return HEADER;
-
-            return ITEM;
-        }
+    public static void showInstance(FragmentManager fm, boolean usedOnMap) {
+        AddQuickActionDialog fragment = new AddQuickActionDialog();
+        fragment.setUsedOnMap(usedOnMap);
+        fragment.show(fm, AddQuickActionDialog.TAG);
     }
 }
