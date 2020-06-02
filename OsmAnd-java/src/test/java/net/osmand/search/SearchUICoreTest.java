@@ -177,25 +177,19 @@ public class SearchUICoreTest {
 		collection.addSearchResults(matcher.getRequestResults(), true, true);
 		List<SearchResult> searchResults = collection.getCurrentSearchResults();
 		int i = 0;
+		boolean simpleTest = true;
 		for (SearchResult result : searchResults) {
 			String expected = results.get(i++);
-			String present = result.toString();
-			boolean fullFormat = true;
-			String fmt = fullFormat? "\"%s\", (%d, %s, %.3f, %.2f km)," : "\t\"%s\",";
+			if(simpleTest && expected.indexOf('[') != -1) {
+				expected = expected.substring(0, expected.indexOf('[')).trim();
+			}
+//			String present = result.toString();
+			String present = formatResult(simpleTest, result, phrase);
 			if (!Algorithms.stringsEqual(expected, present)) {
-				System.out.println(String.format("Mismatch for '%s' != '%s' (%d, %s, %.3f). Result: ", expected, 
-						present, result.getFoundWordCount(), result.objectType.toString(),
-						result.getUnknownPhraseMatchWeight()));
+				System.out.println(String.format("Mismatch for '%s' != '%s'. Result: ", expected, 
+						present));
 				for (SearchResult r : searchResults) {
-					double dist = 0;
-					if(r.location != null) {
-						dist = MapUtils.getDistance(r.location, phrase.getLastTokenLocation());
-					}
-					System.out.println(String.format(fmt, r.toString(), 
-							r.getFoundWordCount(), r.objectType.toString(),
-							r.getUnknownPhraseMatchWeight(),
-							dist / 1000
-							));
+					System.out.println(String.format("\t\"%s\",", formatResult(simpleTest, r, phrase)));
 				}
 			}
 			Assert.assertEquals(expected, present);
@@ -203,6 +197,21 @@ public class SearchUICoreTest {
 				break;
 			}
 		}
+	}
+
+	private String formatResult(boolean simpleTest, SearchResult r, SearchPhrase phrase) {
+		if (simpleTest) {
+			return r.toString();
+		}
+		double dist = 0;
+		if(r.location != null) {
+			dist = MapUtils.getDistance(r.location, phrase.getLastTokenLocation());
+		}
+		return String.format("%s [[%d, %s, %.3f, %.2f km]]", r.toString(), 
+				r.getFoundWordCount(), r.objectType.toString(),
+				r.getUnknownPhraseMatchWeight(),
+				dist / 1000
+				);
 	}
 
 	static class TestSearchTranslator implements MapPoiTypes.PoiTranslator {
