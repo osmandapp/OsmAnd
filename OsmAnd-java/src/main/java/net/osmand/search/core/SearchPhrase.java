@@ -783,7 +783,7 @@ public class SearchPhrase {
 		}
 		if (startWith > 0) {
 			sr.firstUnknownWordMatches = true;
-		} else if (!sr.firstUnknownWordMatches) {
+		} else {
 			sr.firstUnknownWordMatches = localeName.equals(getFirstUnknownSearchWord())
 					|| getFirstUnknownNameStringMatcher().matches(localeName)
 					|| getFirstUnknownNameStringMatcher().matches(otherNames);
