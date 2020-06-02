@@ -189,7 +189,7 @@ public class SearchUICoreTest {
 				System.out.println(String.format("Mismatch for '%s' != '%s'. Result: ", expected, 
 						present));
 				for (SearchResult r : searchResults) {
-					System.out.println(String.format("\t\"%s\",", formatResult(simpleTest, r, phrase)));
+					System.out.println(String.format("\t\"%s\",", formatResult(false, r, phrase)));
 				}
 			}
 			Assert.assertEquals(expected, present);
@@ -201,7 +201,7 @@ public class SearchUICoreTest {
 
 	private String formatResult(boolean simpleTest, SearchResult r, SearchPhrase phrase) {
 		if (simpleTest) {
-			return r.toString();
+			return r.toString().trim();
 		}
 		double dist = 0;
 		if(r.location != null) {
