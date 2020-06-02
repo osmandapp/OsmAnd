@@ -3169,7 +3169,7 @@
     <string name="turn_screen_on_router">Prebudiť pri odbočení</string>
     <string name="turn_screen_on_time_descr">Nastavte ako dlho bude obrazovka zapnutá.</string>
     <string name="turn_screen_on_sensor">Použiť senzor priblíženia</string>
-    <string name="turn_screen_on_sensor_descr">Zamávajte rukou ponad hornú stranu obrazovky pre jej zapnutie počas navigácie.</string>
+    <string name="turn_screen_on_sensor_descr">Zamávanie rukou ponad obrazovku ju zapne.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Stupeň 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Stupeň 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Stupeň 3</string>
@@ -3727,10 +3727,10 @@
     <string name="turn_screen_on_descr">Vyberte možnosti prebudenia obrazovky (pri uzamknutí zariadenia sa uistite, že je OsmAnd v popredí):</string>
     <string name="screen_timeout_descr">Limitované \"%1$s\", ak je povolené.</string>
     <string name="one_image_per_tile">Jeden obrazový súbor na dlaždicu</string>
-    <string name="system_screen_timeout">Časový limit obrazovky</string>
+    <string name="system_screen_timeout">Použiť systémový časový limit obrazovky</string>
     <string name="turn_screen_on_options_descr">Možnosti prebudenia obrazovky:</string>
     <string name="turn_screen_on_navigation_instructions">Navigačné pokyny</string>
-    <string name="turn_screen_on_power_button_descr">Stlačením tlačidla napájania zariadenia zapnite obrazovku s OsmAnd v popredí.</string>
+    <string name="turn_screen_on_power_button_descr">Stlačenie tlačidla napájania zariadenia zapne obrazovku s OsmAndom nad zámkom obrazovky.</string>
     <string name="turn_screen_on_power_button">Tlačidlo napájania</string>
     <string name="turn_screen_on_proximity_sensor">Snímač priblíženia</string>
     <string name="turn_screen_on_wake_time_descr">Vyberte časový limit vypnutia obrazovky po prebudení. (\"%1$s\" platí bez časového limitu.)</string>
@@ -3744,4 +3744,21 @@
     <string name="storage_format">Formát úložiska</string>
     <string name="map_source_zoom_levels">Nastavte minimálnu a maximálnu úroveň priblíženia, pri ktorej sa zobrazí alebo načíta online mapa.</string>
     <string name="tiles_storage_descr">Vyberte spôsob uloženia prevzatých dlaždíc.</string>
+    <string name="gpx_parse_error">GPX OsmAndu nemá správny tvar, prosím kontaktuje tím podpory pre bližšie preverenie.</string>
+    <string name="screen_control">Ovládanie obrazovky</string>
+    <string name="system_screen_timeout_descr">Vypne obrazovku po systémovom časovom limite.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Každý navigačný pokyn zapne obrazovku.</string>
+    <string name="pseudo_mercator_projection">Pseudo-Mercatorovo zobrazenie</string>
+    <string name="mercator_projection">Mercatorovo zobrazenie</string>
+    <string name="map_source_zoom_levels_descr">Tieto parametre ovplyvňujú zobrazenie keď sa použije ako mapa alebo podkladová/prekryvná vrstva. 
+\n
+\n%1$s: Mapa bude obmedzená na zvolené priblíženia. 
+\n
+\n%2$s: Úrovne priblíženia, pri ktorých budú viditeľné pôvodné dlaždice. Mimo týchto hodnôt nastane prepočítanie bodov obrázkov.</string>
+    <string name="expire_time_descr">Doba platnosti v minútach. Uložené dlaždice budú znovu načítané z Internetu po tomto čase. Ponechajte toto pole prázdne ak sa pre tento zdroj nemajú dlaždice nikdy obnovovať. 
+\n
+\nJeden deň je 1440 minút.
+\nJeden týždeň je 10 080 minút.
+\nJeden mesiac je 43 829 minút.</string>
+    <string name="default_screen_timeout">Systémový časový limit obrazovky</string>
 </resources>
