@@ -21,6 +21,7 @@
 	<color name="app_bar_color_dark">#252727</color>
 	<color name="status_bar_color_light">#e68200</color>
 	<color name="status_bar_color_dark">#232525</color>
+	<color name="material_text_input_layout_bg">#4DCCCCCC</color>
 
 	<color name="active_buttons_and_links_bg_pressed_light">#0f67eb</color>
 	<color name="active_buttons_and_links_bg_pressed_dark">#b87114</color>

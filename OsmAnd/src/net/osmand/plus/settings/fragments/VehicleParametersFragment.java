@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -14,7 +15,9 @@ import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.bottomsheets.VehicleParametersNumericBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.router.GeneralRouter;
 
 import java.util.Map;
@@ -78,17 +81,29 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 
 		String defValue = parameter.getType() == GeneralRouter.RoutingParameterType.NUMERIC ? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;
 		OsmandSettings.StringPreference pref = (OsmandSettings.StringPreference) app.getSettings().getCustomRoutingProperty(parameterId, defValue);
-
 		Object[] values = parameter.getPossibleValues();
 		String[] valuesStr = new String[values.length];
 		for (int i = 0; i < values.length; i++) {
 			valuesStr[i] = values[i].toString();
 		}
+		String[] entriesStr = parameter.getPossibleValueDescriptions().clone();
+		entriesStr[0] = app.getString(R.string.shared_string_none);
 
-		ListPreferenceEx listPreference = createListPreferenceEx(pref.getId(), parameter.getPossibleValueDescriptions(), valuesStr, title, R.layout.preference_with_descr);
-		listPreference.setDescription(description);
-		listPreference.setIcon(getPreferenceIcon(parameterId));
-		getPreferenceScreen().addPreference(listPreference);
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+		SizePreference vehicleSizePref = new SizePreference(ctx);
+		vehicleSizePref.setKey(pref.getId());
+		vehicleSizePref.setAssets(VehicleParametersNumericBottomSheet.VehicleSizeAssets.getAssets(parameterId));
+		vehicleSizePref.setDefaultValue(defValue);
+		vehicleSizePref.setTitle(title);
+		vehicleSizePref.setEntries(entriesStr);
+		vehicleSizePref.setEntryValues(valuesStr);
+		vehicleSizePref.setSummary(description);
+		vehicleSizePref.setIcon(getPreferenceIcon(parameterId));
+		vehicleSizePref.setLayoutResource(R.layout.preference_with_descr);
+		getPreferenceScreen().addPreference(vehicleSizePref);
 	}
 
 	private void setupDefaultSpeedPref() {
@@ -128,6 +143,18 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 			return true;
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onDisplayPreferenceDialog(Preference preference) {
+		if (preference instanceof SizePreference) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				VehicleParametersNumericBottomSheet.showInstance(getFragmentManager(), preference.getKey(), this, false, getSelectedAppMode());
+			}
+		} else {
+			super.onDisplayPreferenceDialog(preference);
+		}
 	}
 
 	@Override

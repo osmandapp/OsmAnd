@@ -270,6 +270,7 @@
 	<dimen name="bottom_sheet_image_text_margin_start">10dp</dimen>
 	<dimen name="bottom_sheet_selected_item_title_height">56dp</dimen>
 	<dimen name="bottom_sheet_text_spacing_multiplier" format="float">1.25</dimen>
+	<dimen name="bottom_sheet_info_spacing_multiplier" format="float">1.5</dimen>
 	<dimen name="bottom_sheet_big_item_height">128dp</dimen>
 
 	<dimen name="action_bar_image_width_land">236dp</dimen>

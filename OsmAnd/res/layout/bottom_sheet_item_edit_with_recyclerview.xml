@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding">
+
+		<LinearLayout
+			android:id="@+id/text"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:baselineAligned="false">
+
+			<com.google.android.material.textfield.TextInputLayout
+				style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+				android:id="@+id/text_caption"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				app:hintEnabled="false"
+				android:gravity="start"
+				android:layout_weight="1"
+				app:boxBackgroundColor="@color/material_text_input_layout_bg">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/text_edit"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="end"
+					android:inputType="numberDecimal"
+					android:maxLines="1"
+					android:maxLength="5"
+					android:minHeight="@dimen/favorites_list_item_height"
+					android:paddingBottom="@dimen/card_content_padding_large"
+					android:paddingStart="@dimen/content_padding_small"
+					android:paddingLeft="@dimen/content_padding_small"
+					android:paddingRight="@dimen/content_padding_small"
+					android:paddingEnd="@dimen/content_padding_small"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="@string/lorem_ipsum" />
+
+			</com.google.android.material.textfield.TextInputLayout>
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/metric"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:paddingStart="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding_small"
+			android:paddingEnd="@dimen/content_padding_small"
+			android:paddingLeft="@dimen/content_padding_small"
+			android:text="@string/shared_string_meters" />
+	</FrameLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycler_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingBottom="@dimen/content_padding_small"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding"
+		android:clipToPadding="false"
+		android:orientation="horizontal"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		tools:itemCount="3"
+		tools:listitem="@layout/point_editor_icon_category_item" />
+
+</LinearLayout>
