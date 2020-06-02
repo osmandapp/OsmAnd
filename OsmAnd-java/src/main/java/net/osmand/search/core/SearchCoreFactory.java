@@ -21,7 +21,6 @@ import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
@@ -657,6 +656,7 @@ public class SearchCoreFactory {
 
 		private void checkPoiType(NameStringMatcher nm, AbstractPoiType pf, Map<AbstractPoiType, List<String>> results) {
 			List<String> lst = results.get(pf);
+			boolean nl = lst == null;
 			if (nm.matches(pf.getTranslation())) {
 				lst = addToList(pf.getTranslation(), lst);
 			}
@@ -671,6 +671,9 @@ public class SearchCoreFactory {
 						lst = addToList(synonym, lst);
 					}
 				}
+			}
+			if(lst != null && nl) {
+				results.put(pf, lst);
 			}
 		}
 
@@ -715,7 +718,7 @@ public class SearchCoreFactory {
 								break;
 							}
 						}
-						// TODO properly count matching words
+						// TODO properly count matching words fuel diesel 
 					}
 					if (match) {
 						SearchResult res = new SearchResult(phrase);
@@ -792,9 +795,11 @@ public class SearchCoreFactory {
 	public static class SearchAmenityByTypeAPI extends SearchBaseAPI {
 		private static final int BBOX_RADIUS = 10000;
 		private SearchAmenityTypesAPI searchAmenityTypesAPI;
-
 		private MapPoiTypes types;
-
+		private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
+				LinkedHashSet<String>>();
+		private Map<String, PoiType> poiAdditionals = new HashMap<String, PoiType>();
+		
 		public SearchAmenityByTypeAPI(MapPoiTypes types, SearchAmenityTypesAPI searchAmenityTypesAPI) {
 			super(ObjectType.POI);
 			this.types = types;
@@ -816,27 +821,11 @@ public class SearchCoreFactory {
 			return phrase.getNextRadiusSearch(BBOX_RADIUS);
 		}
 
-		private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
-				LinkedHashSet<String>>();
-		private Map<String, PoiType> poiAdditionals = new HashMap<String, PoiType>();
+		
 		public void updateTypesToAccept(AbstractPoiType pt) {
 			pt.putTypes(acceptedTypes);
 			if (pt instanceof PoiType && ((PoiType) pt).isAdditional() && ((PoiType) pt).getParentType() != null) {
-				fillPoiAdditionals(((PoiType) pt).getParentType());
-			} else {
-				fillPoiAdditionals(pt);
-			}
-		}
-
-		private void fillPoiAdditionals(AbstractPoiType pt) {
-			for (PoiType add : pt.getPoiAdditionals()) {
-				poiAdditionals.put(add.getKeyName().replace('_', ':').replace(' ', ':'), add);
-				poiAdditionals.put(add.getTranslation().replace(' ', ':').toLowerCase(), add);
-			}
-			if (pt instanceof PoiFilter && !(pt instanceof PoiCategory)) {
-				for (PoiType ps : ((PoiFilter) pt).getPoiTypes()) {
-					fillPoiAdditionals(ps);
-				}
+				poiAdditionals.put(pt.getKeyName(), (PoiType) pt);
 			}
 		}
 
@@ -853,38 +842,43 @@ public class SearchCoreFactory {
 				} else {
 					throw new UnsupportedOperationException();
 				}
+				nameFilter = phrase.getUnknownSearchPhrase();
 			} else if (searchAmenityTypesAPI != null && phrase.isFirstUnknownSearchWordComplete()) {
 				NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
 				searchAmenityTypesAPI.initPoiTypes();
-				Map<AbstractPoiType, List<String>> poiTypeResults = searchAmenityTypesAPI.getPoiTypeResults(nm, false);
+				Map<AbstractPoiType, List<String>> poiTypeResults = searchAmenityTypesAPI.getPoiTypeResults(nm, true);
 				// find first full match only
+				int maxwords = 0;
 				for (Entry<AbstractPoiType, List<String>> poiType : poiTypeResults.entrySet()) {
 					for (String foundName : poiType.getValue()) {
 						CollatorStringMatcher csm = new CollatorStringMatcher(foundName, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 						// matches only completely
-						if (csm.matches(phrase.getUnknownSearchPhrase())) {
-							int words = phrase.countWords(foundName) - 1;
+						int mwords = phrase.countWords(foundName) ;
+						if (csm.matches(phrase.getUnknownSearchPhrase()) && maxwords < mwords) {
+							maxwords = phrase.countWords(foundName);
 							List<String> otherSearchWords = phrase.getUnknownSearchWords(null);
-							if (words < otherSearchWords.size()) {
+							nameFilter = null;
+							if (maxwords - 1 < otherSearchWords.size()) {
 								nameFilter = "";
-								for(int k = words; k < otherSearchWords.size(); k++) {
-									nameFilter = otherSearchWords.get(k) + SearchPhrase.DELIMITER;
+								for(int k = maxwords - 1; k < otherSearchWords.size(); k++) {
+									if(nameFilter.length() > 0) {
+										nameFilter += SearchPhrase.DELIMITER;
+									}
+									nameFilter += otherSearchWords.get(k);
 								}
-								nameFilter = nameFilter.trim();
 							}
 							poiTypeFilter = getPoiTypeFilter(poiType.getKey());
-							break;
 						}
 					}
 				}
-				// TODO count correctly matching words !
+				// TODO count correctly matching words ! fuel diesel 
 			}
 			if (poiTypeFilter != null) {
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
 				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
 				Set<String> searchedPois = new TreeSet<>();
 				for (BinaryMapIndexReader r : offlineIndexes) {
-					ResultMatcher<Amenity> rm = getResultMatcher(phrase, resultMatcher, nameFilter, r, searchedPois);
+					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, r, searchedPois);
 					if (poiTypeFilter instanceof CustomSearchPoiFilter) {
 						rm = ((CustomSearchPoiFilter) poiTypeFilter).wrapResultMatcher(rm);
 					}
@@ -898,10 +892,11 @@ public class SearchCoreFactory {
 		}
 
 
-		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchResultMatcher resultMatcher,
-														final String nameFilter, final BinaryMapIndexReader selected,
-														final Set<String> searchedPois) {
-			NameStringMatcher ns = phrase.getFirstUnknownNameStringMatcher();
+		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchPoiTypeFilter poiTypeFilter, 
+														final SearchResultMatcher resultMatcher, final String nameFilter, 
+														final BinaryMapIndexReader selected, final Set<String> searchedPois) {
+			
+			NameStringMatcher ns = nameFilter == null ? null : new NameStringMatcher(nameFilter, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 			return new ResultMatcher<Amenity>() {
 
 				@Override
@@ -917,6 +912,18 @@ public class SearchCoreFactory {
 					if (object.isClosed()) {
 						return false;
 					}
+					if (!poiAdditionals.isEmpty()) {
+						boolean found = false;
+						for (String add : poiAdditionals.keySet()) {
+							if(object.getAdditionalInfo().containsKey(add)) {
+								found = true;
+								break;
+							}
+						}
+						if (!found) {
+							return false;
+						}
+					}
 					res.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = object.getAllNames(true);
 					if (Algorithms.isEmpty(res.localeName)) {
@@ -927,7 +934,7 @@ public class SearchCoreFactory {
 							res.localeName = object.getSubType();
 						}
 					}
-					if (phrase.isUnknownSearchWordPresent()) {
+					if (ns != null) {
 						if (ns.matches(res.localeName) || ns.matches(res.otherNames)) {
 							phrase.countUnknownWordsMatchMainResult(res);
 						} else {
