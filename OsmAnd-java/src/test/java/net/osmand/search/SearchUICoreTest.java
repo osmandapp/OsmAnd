@@ -35,6 +35,7 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 @RunWith(Parameterized.class)
 public class SearchUICoreTest {
@@ -179,12 +180,22 @@ public class SearchUICoreTest {
 		for (SearchResult result : searchResults) {
 			String expected = results.get(i++);
 			String present = result.toString();
+			boolean fullFormat = true;
+			String fmt = fullFormat? "\"%s\", (%d, %s, %.3f, %.2f km)," : "\t\"%s\",";
 			if (!Algorithms.stringsEqual(expected, present)) {
-				System.out.println(String.format("Mismatch for '%s' != '%s' (%d, %.3f, %s). Result: ", expected, 
-						present, result.getFoundWordCount(), result.getUnknownPhraseMatchWeight(), result.objectType.toString()));
+				System.out.println(String.format("Mismatch for '%s' != '%s' (%d, %s, %.3f). Result: ", expected, 
+						present, result.getFoundWordCount(), result.objectType.toString(),
+						result.getUnknownPhraseMatchWeight()));
 				for (SearchResult r : searchResults) {
-					System.out.println(String.format("\"%s\", (%d, %.3f, %s),", r.toString(), 
-							r.getFoundWordCount(), r.getUnknownPhraseMatchWeight(), r.objectType.toString()));
+					double dist = 0;
+					if(r.location != null) {
+						dist = MapUtils.getDistance(r.location, phrase.getLastTokenLocation());
+					}
+					System.out.println(String.format(fmt, r.toString(), 
+							r.getFoundWordCount(), r.objectType.toString(),
+							r.getUnknownPhraseMatchWeight(),
+							dist / 1000
+							));
 				}
 			}
 			Assert.assertEquals(expected, present);
