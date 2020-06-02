@@ -178,8 +178,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		poiSize = app.getResources().getDimensionPixelSize(R.dimen.poi_icon_size);
 		poiColorFilter = new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 		paintIconBackground = new Paint();
-		poiBackground = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield);
-		poiBackgroundSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield_small);
+		poiBackground = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_white_orange_poi_shield);
+		poiBackgroundSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_white_orange_poi_shield_small);
 
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}

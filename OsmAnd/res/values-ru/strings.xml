@@ -372,7 +372,7 @@
     <string name="online_map_settings_descr">Выберите источник онлайн или кешированных растровых карт.</string>
     <string name="osmand_rastermaps_plugin_description">Получение доступа ко множеству видов онлайн-карт (тайловых или растровых): от предопределённых тайловых OSM (как Mapnik), до спутниковых снимков и слоёв специального назначения, таких как карты погоды, климатические карты, геологических карты, слои затемнения высот и т. д. 
 \n 
-\n Любая из этих карт может быть использована в качестве основной (базовой) карты для отображения или в виде наложения или подложки к другой базовой карте (например стандартной автономной карте OsmAnd). Некоторые элементы векторной карты OsmAnd могут быть по желанию скрыты через меню «Настройки карты». 
+\n Любая из этих карт может быть использована в качестве основной (базовой) карты для отображения или в виде наложения или подложки к другой базовой карте (например стандартной локальной карте OsmAnd). Некоторые элементы векторной карты OsmAnd могут быть по желанию скрыты через меню «Настройки карты». 
 \n 
 \n Карты можно загрузить непосредственно из интернета или подготовить для использования в автономном режиме (и вручную скопировать в папку данных OsmAnd) в виде базы данных sqlite, которая может быть создана с помощью различных инструментов подготовки карт сторонних производителей.</string>
     <string name="osmand_background_plugin_description">Показывает настройки для включения фонового отслеживания и навигации путём периодического пробуждения устройства GPS (с выключенным экраном).</string>
@@ -387,7 +387,7 @@
     <string name="debugging_and_development">Отладка и разработка</string>
     <string name="native_rendering">Быстрая отрисовка</string>
     <string name="test_voice_prompts">Тест голосовых подсказок</string>
-    <string name="switch_to_raster_map_to_see">Скачайте автономную векторную карту для этой локации в меню «Настройки» («Управление файлами карт»), или переключитесь на плагин «Онлайн карты».</string>
+    <string name="switch_to_raster_map_to_see">Скачайте локальную векторную карту для этой локации в меню «Настройки» («Управление файлами карт»), или переключитесь на плагин «Онлайн карты».</string>
     <string name="send_files_to_osm">Отправить файлы GPX в OSM\?</string>
     <string name="gpx_visibility_txt">Видимость</string>
     <string name="gpx_tags_txt">Теги</string>
@@ -400,15 +400,15 @@
     <string name="use_fluorescent_overlays">Флуоресцентные цвета</string>
     <string name="use_fluorescent_overlays_descr">Использовать флуоресцентные цвета для отображения треков и маршрутов.</string>
     <string name="offline_edition">Локальное редактирование</string>
-    <string name="offline_edition_descr">Всегда использовать локальное редактирование.</string>
-    <string name="update_poi_does_not_change_indexes">Изменение POI в приложении не меняет POI загруженные из интернета, однако все изменения сохраняются в локальный файл.</string>
+    <string name="offline_edition_descr">Всегда использовать редактирование на устройстве.</string>
+    <string name="update_poi_does_not_change_indexes">Изменение POI в приложении не меняет POI загруженные из интернета, однако все изменения сохраняются в локальный файл на устройстве.</string>
     <string name="local_openstreetmap_uploading">Выгрузка…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/заметок выгружено</string>
     <string name="local_openstreetmap_uploadall">Выгрузить все</string>
     <string name="local_openstreetmap_upload">Отправить изменения в OSM</string>
     <string name="local_openstreetmap_delete">Удалить правку</string>
-    <string name="local_openstreetmap_descr_title">Автономное дополнение:</string>
-    <string name="local_openstreetmap_settings">Локально сохранённые OSM POI/заметки</string>
+    <string name="local_openstreetmap_descr_title">Локальное дополнение:</string>
+    <string name="local_openstreetmap_settings">OSM POI/заметки на устройстве</string>
     <string name="local_openstreetmap_settings_descr">Просмотр и управление OSM POI/заметками в локальной базе данных.</string>
     <string name="live_monitoring_interval_descr">Укажите интервал онлайн слежения.</string>
     <string name="live_monitoring_interval">Интервал онлайн слежения</string>
@@ -486,7 +486,7 @@
     <string name="shared_string_others">Другое</string>
     <string name="shared_string_no_thanks">Не нужно</string>
     <string name="basemap_missing">Отсутствует базовая карта, покрывающая весь мир на мелком масштабе. Пожалуйста загрузите World_basemap_x.obf для полноценный работы приложения.</string>
-    <string name="vector_data_missing">Локальные данные отсутствуют на SD-карте. Пожалуйста, загрузите их для того, чтобы использовать приложение без интернета.</string>
+    <string name="vector_data_missing">На устройстве отсутствуют локальные данные. Пожалуйста, загрузите их для того, чтобы использовать приложение без интернета.</string>
     <string name="local_index_gpx_info_show">"
 \n
 \nУдерживайте для вызова настроек"</string>
@@ -546,7 +546,7 @@
     <string name="install_more">Загрузить ещё…</string>
     <string name="level_to_switch_vector_raster_descr">Минимальный масштаб для использования векторных карт.</string>
     <string name="level_to_switch_vector_raster">Минимальный масштаб векторных карт</string>
-    <string name="error_doing_search">Не удалось выполнить автономный поиск.</string>
+    <string name="error_doing_search">Не удалось выполнить локальный поиск.</string>
     <string name="search_osm_offline">Поиск по географическому положению</string>
     <string name="system_locale">Системная</string>
     <string name="preferred_locale_descr">Язык интерфейса приложения (будет использован после перезапуска OsmAnd).</string>
@@ -609,7 +609,7 @@
     <string name="reading_cached_tiles">Чтение кешированных растровых карт…</string>
     <string name="version_index_is_big_for_memory">Недостаточно памяти для локальной карты «{0}»</string>
     <string name="version_index_is_not_supported">Версия локальной карты «{0}» не поддерживается</string>
-    <string name="osmand_routing_experimental">Автономная навигация OsmAnd является экспериментальной функцией и не работает на длинные расстояния более 20 километров. 
+    <string name="osmand_routing_experimental">Локальная навигация OsmAnd является экспериментальной функцией и не работает на длинные расстояния более 20 километров. 
 \n 
 \nНавигация временно переключена на онлайн-сервис CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Невозможно найти указанную папку.</string>
@@ -1120,10 +1120,10 @@
     <string name="map_widget_renderer">Стиль карты</string>
     <string name="email">Эл. почта</string>
     <string name="day_night_info">Восход/закат</string>
-    <string name="osmand_short_description_80_chars">Мобильный просмотр и навигация по онлайн и автономным картам OSM всего мира</string>
+    <string name="osmand_short_description_80_chars">Мобильный просмотр и навигация по онлайн и локальным картам OSM всего мира</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (Open Street Maps Automated Navigation Directions) 
 \n 
-\n OsmAnd — это навигационное приложение с открытым исходным кодом и доступом к картам и данным на основе OSM. Все данные карт (векторные или растровые) могут быть сохранены на карту памяти устройства для использования без подключения к интернету. OsmAnd также предоставляет автономные и онлайн средства построения маршрута, включая голосовые инструкции по маршруту. 
+\n OsmAnd — это навигационное приложение с открытым исходным кодом и доступом к картам и данным на основе OSM. Все данные карт (векторные или растровые) могут быть сохранены на карту памяти устройства для использования без подключения к интернету. OsmAnd также предоставляет локальные и онлайн средства построения маршрута, включая голосовые инструкции по маршруту. 
 \n 
 \n Некоторые из основных возможностей приложения: 
 \n — работа с векторными и растровыми картами без доступа в интернет (для этого нужно предварительно сохранить карты на карту памяти устройства); 
@@ -1146,19 +1146,19 @@
     <string name="osmand_plus_short_description_80_chars">OsmAnd — это навигационное приложение для путешествий с открытым исходным кодом</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
 \n 
-\n OsmAnd+ — это навигационное приложение с открытым исходным кодом и доступом к широкому спектру глобальных данных OpenStreetMap (OSM). Все данные карт (векторные или растровые/тайловые) могут быть сохранены на карту памяти устройства для автономного использования, без подключения к сети интернет. OsmAnd также предоставляет автономные и онлайн средства построения маршрута, включая пошаговые голосовые подсказки. 
+\n OsmAnd+ — это навигационное приложение с открытым исходным кодом и доступом к широкому спектру глобальных данных OpenStreetMap (OSM). Все данные карт (векторные или растровые/тайловые) могут быть сохранены на карту памяти устройства для автономного использования, без подключения к сети интернет. OsmAnd также предоставляет локальные и онлайн средства построения маршрута, включая пошаговые голосовые подсказки. 
 \n 
 \n OsmAnd+ — это платная версия приложения, покупая которую вы поддерживаете проект, финансируете разработку новых функций и получаете последние обновления. 
 \n 
 \n Некоторые из основных возможностей приложения: 
 \n — Полностью автономная работа без доступа в сеть интернет (для этого нужно предварительно сохранить карты в память устройства); 
-\n — Компактные автономные векторные карты для всех стран мира; 
+\n — Компактные локальные векторные карты для всех стран мира; 
 \n — Неограниченная загрузка карт для страны или региона из самого приложения; 
-\n — Автономная Википедия (необходимо предварительно загрузить Wikipedia POI), отличный вариант для достопримечательностей; 
+\n — Локальная Википедия (необходимо предварительно загрузить Wikipedia POI), отличный вариант для достопримечательностей; 
 \n — Наложение на карту дополнительных слоёв, например, GPX-треки или навигационные пути, точки интереса POI, избранные местоположения, контурные линии высот, остановки общественного транспорта, дополнительные карты с настраиваемой прозрачностью; 
 \n 
-\n — Автономный поиск адресов и точек интереса POI без доступа в интернет; 
-\n — Автономное построение маршрутов на средние расстояния без доступа в интернет; 
+\n — Локальный поиск адресов и точек интереса POI без доступа в интернет; 
+\n — Локальное построение маршрутов на средние расстояния без доступа в интернет; 
 \n — Режимы работы приложения для автомобиля, велосипеда или пешехода с возможностями: 
 \n — автоматического переключения на дневной/ночной режим отрисовки карты; 
 \n — изменения масштабы карты в зависимости от скорости; 
@@ -1639,7 +1639,7 @@
     <string name="navigate_point_zone">Зона</string>
     <string name="rendering_attr_transportStops_name">Остановки транспорта</string>
     <string name="shared_string_dismiss">Отклонить</string>
-    <string name="dash_download_msg_none">Загрузить автономные карты\?</string>
+    <string name="dash_download_msg_none">Загрузить локальные карты\?</string>
     <string name="dash_download_msg">Загружено карт: %1$s</string>
     <string name="dash_download_new_one">Загрузить новую карту</string>
     <string name="dash_download_manage">Менеджер загрузок</string>
@@ -1687,8 +1687,8 @@
     <string name="get_plugin">Получить</string>
     <string name="plugin_ski_name">Лыжные карты</string>
     <string name="plugin_nautical_name">Морские карты</string>
-    <string name="world_ski_missing">Для отображения лыжных объектов необходимо загрузить специализированную автономную карту.</string>
-    <string name="nautical_maps_missing">Для отображения морских объектов необходимо загрузить специализированную автономную карту.</string>
+    <string name="world_ski_missing">Для отображения лыжных объектов необходимо загрузить специализированную локальную карту.</string>
+    <string name="nautical_maps_missing">Для отображения морских объектов необходимо загрузить специализированную локальную карту.</string>
     <string name="device_memory">Память устройства</string>
     <string name="free">Свободно %1$s</string>
     <string name="roads_only">Только дороги</string>
@@ -1697,8 +1697,8 @@
     <string name="back_to_map">Вернуться на карту</string>
     <string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_enabled">Включён</string>
-    <string name="shared_string_disabled">Выключен</string>
+    <string name="shared_string_enabled">Включено</string>
+    <string name="shared_string_disabled">Выключено</string>
     <string name="shared_string_never">Никогда</string>
     <string name="shared_string_and">и</string>
     <string name="shared_string_or">или</string>
@@ -1796,7 +1796,7 @@
     <string name="welcome_select_region">Для правильного отображения дорожных знаков и правил, пожалуйста, выберите свой регион вождения:</string>
     <string name="welcome_header">Добро пожаловать</string>
     <string name="mark_to_delete">Отметить для удаления</string>
-    <string name="welcome_text">OsmAnd обеспечивает глобальный локальный просмотр карт и автономную навигацию.</string>
+    <string name="welcome_text">OsmAnd обеспечивает глобальный локальный просмотр карт и локальную навигацию.</string>
     <string name="osm_changes_added_to_local_edits">OSM изменения добавлены в локальную базу данных</string>
     <string name="confirm_usage_speed_cameras">Во многих странах (Германия, Франция, Италия и другие) использование предупреждения о камерах контроля скорости не допускается законом. OsmAnd не несёт никакой ответственности, если вы нарушите закон. Пожалуйста, нажмите «Да» только если вы имеете право использовать эту функцию.</string>
     <string name="agps_info">Информация A-GPS</string>
@@ -1861,7 +1861,7 @@
     <string name="lang_et">Эстонский</string>
     <string name="lang_ceb">Себуанский</string>
     <string name="archive_wikipedia_data">У вас имеются старые несовместимые данные из Википедии. Заархивировать их?</string>
-    <string name="disable_recording_once_app_killed">Остановить автономную запись</string>
+    <string name="disable_recording_once_app_killed">Остановить локальную запись</string>
     <string name="lang_pms">Пьемонтский</string>
     <string name="lang_tl">Тагальский</string>
     <string name="lang_sh">Сербохорватский</string>
@@ -1918,7 +1918,7 @@
     <string name="shared_string_skip">Пропустить</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="plugin_settings">Плагины</string>
-    <string name="offline_maps_and_navigation">Автономные карты
+    <string name="offline_maps_and_navigation">Локальные карты 
 \nи Навигация</string>
     <string name="building_number">Номер дома</string>
     <string name="rendering_attr_pisteGrooming_name">Тип лыжной трассы</string>
@@ -2611,8 +2611,8 @@
 \n• Данные OSM доступны по каждой стране или региону 
 \n• Интересные места (POI) из Википедии прекрасно подходят для осмотра достопримечательностей 
 \n• Неограниченное количество бесплатных скачиваний непосредственно из приложения 
-\n• Компактные автономные векторные карты, обновляемые как минимум раз в месяц 
-\n
+\n• Компактные локальные векторные карты, обновляемые как минимум раз в месяц 
+\n 
 \n• Выбор между полными данными региона и только дорожной сетью (например, вся Япония занимает 700 МБ, а только дорожная сеть — 200 МБ)</string>
     <string name="osmand_plus_extended_description_part5">Функции безопасности 
 \n• Возможность автоматического переключения режима день/ночь 
@@ -2762,9 +2762,9 @@
     <string name="in_app_purchase">Покупка в приложении</string>
     <string name="in_app_purchase_desc">Разовый платёж</string>
     <string name="purchase_unlim_title">Купить — %1$s</string>
-    <string name="wikivoyage_offline">Автономный Викигид</string>
+    <string name="wikivoyage_offline">Локальный Викигид</string>
     <string name="unlimited_downloads">Неограниченные загрузки</string>
-    <string name="wikipedia_offline">Автономная Википедия</string>
+    <string name="wikipedia_offline">Локальная Википедия</string>
     <string name="unlock_all_features">Разблокировать все функции OsmAnd</string>
     <string name="monthly_map_updates">Обновления карт: ежемесячные
     </string>
@@ -3126,7 +3126,7 @@
     <string name="settings_routing_mode_string">Режим: %s</string>
     <string name="settings_derived_routing_mode_string">Режим пользователя, полученный из: %s</string>
     <string name="profile_alert_duplicate_name_title">Повторяющееся имя</string>
-    <string name="routing_profile_broutrer">BRouter (автономно)</string>
+    <string name="routing_profile_broutrer">BRouter (локально)</string>
     <string name="routing_attr_piste_type_downhill_name">Альпийские/горные лыжи</string>
     <string name="routing_attr_piste_type_downhill_description">Склоны для катания на альпийских или горных лыжах и доступ к подъёмникам.</string>
     <string name="routing_attr_piste_type_skitour_name">Лыжные туры</string>
@@ -3193,7 +3193,7 @@
     <string name="app_mode_personal_transporter">Персональный транспортёр</string>
     <string name="routing_attr_max_num_changes_name">Количество изменений</string>
     <string name="turn_screen_on_time_descr">Настройте, как долго экран должен быть включён.</string>
-    <string name="turn_screen_on_sensor_descr">При навигации включать экран движением руки над верхней частью.</string>
+    <string name="turn_screen_on_sensor_descr">Включать экран движением руки по нему.</string>
     <string name="external_input_device">Внешние устройства ввода</string>
     <string name="external_input_device_descr">Выберите внешнее устройство управления, например, клавиатуру или WunderLINQ.</string>
     <string name="sett_no_ext_input">Нет</string>
@@ -3387,7 +3387,7 @@
     <string name="routing_attr_allow_classic_only_name">Разрешить только классические маршруты</string>
     <string name="routing_attr_allow_classic_only_description">Маршруты, подготовленные только для классического стиля без конькобежных трасс. Сюда входят маршруты, подготовленные небольшим снегоходом с более свободной лыжнёй и трассами, подготовленные вручную лыжниками.</string>
     <string name="routing_attr_difficulty_preference_description">Предпочитать маршруты заданной сложности, хотя прокладка маршрута по более сложным или лёгким трассам всё же возможна, если они короче.</string>
-    <string name="turn_screen_on_router">Пробуждаться на повороте</string>
+    <string name="turn_screen_on_router">Включать на повороте</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Класс 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Класс 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Класс 3</string>
@@ -3688,7 +3688,7 @@
     <string name="legend_item_description">Справка по символике карты.</string>
     <string name="favorites_item">Избранное</string>
     <string name="navigation_profiles_item">Профили навигации</string>
-    <string name="release_3_7">• Новые автономные карты склонов 
+    <string name="release_3_7">• Новые локальные карты склонов 
 \n 
 \n • Полная настройка избранных и путевых точек GPX: пользовательские цвета, значки, формы 
 \n 
@@ -3704,8 +3704,8 @@
 \n 
 \n • Исправлены размеры интерфейса на планшетах 
 \n 
-\n • Исправлены ошибки для языков, пишущихся справа налево
-\n
+\n • Исправлены ошибки для языков, пишущихся справа налево 
+\n 
 \n</string>
     <string name="additional_actions_descr">Доступ к этим действиям можно получить, нажав кнопку «%1$s».</string>
     <string name="quick_action_transport_hide">Скрыть общественный транспорт</string>
@@ -3725,19 +3725,17 @@
     <string name="index_item_world_basemap_detailed">Мировая обзорная карта (подробная)</string>
     <string name="unsupported_type_error">Неподдерживаемый тип</string>
     <string name="gpx_parse_error">OsmAnd сформировал GPX не совсем правильно, пожалуйста, свяжитесь со службой поддержки для дальнейшего расследования.</string>
-    <string name="turn_screen_on_navigation_instructions_descr">Экран автоматически включится за несколько секунд до выполнения инструкций по навигации на указанное в параметре \"Время пробуждения\" время.
-\n
-\nРаботает только во время навигации.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Каждая навигационная инструкция включает экран.</string>
     <string name="turn_screen_on_navigation_instructions">Инструкции по навигации</string>
-    <string name="screen_timeout_descr">Если выбран параметр \"%1$s\", время активности будет зависеть от него.</string>
-    <string name="turn_screen_on_wake_time_descr">Время работы экрана после пробуждения. Экран не выключится, если выбран параметр \"%1$s\".</string>
-    <string name="turn_screen_on_power_button_descr">Нажатие кнопки питания устройства включит экран с OsmAnd на переднем плане.</string>
+    <string name="screen_timeout_descr">Если используется, ограничено «%1$s».</string>
+    <string name="turn_screen_on_wake_time_descr">Время работы экрана после включения. («%1$s» отключает выключение экрана.)</string>
+    <string name="turn_screen_on_power_button_descr">Нажатие кнопки питания устройства включит экран с OsmAnd на переднем плане экрана блокировки.</string>
     <string name="pseudo_mercator_projection">Псевдо-проекция Меркатора</string>
     <string name="one_image_per_tile">Каждый тайл в своём файле</string>
     <string name="edit_online_source">Изменить онлайн-источник</string>
     <string name="map_source_zoom_levels">Установите минимальный и максимальный уровни масштабирования, при которых будет отображаться или загружаться онлайн-карта.</string>
     <string name="shared_string_always">Всегда</string>
-    <string name="system_screen_timeout">Задержка до отключения экрана</string>
+    <string name="system_screen_timeout">Использовать системную настройку</string>
     <string name="turn_screen_on_power_button">Кнопка питания</string>
     <string name="turn_screen_on_proximity_sensor">Датчик приближения</string>
     <string name="keep_screen_off">Держать экран отключённым</string>
@@ -3754,4 +3752,14 @@
 \nОдна неделя — 10 080 минут.
 \nОдин месяц — 43 829 минут.</string>
     <string name="tiles_storage_descr">Выберите способ хранения загруженных тайлов.</string>
+    <string name="system_screen_timeout_descr">Экран будет отключаться после периода бездействия, указанного в системных настройках устройства.</string>
+    <string name="map_source_zoom_levels_descr">Эти параметры влияют на отображение при использовании в качестве карты или подложки.
+\n
+\n%1$s: карта будет ограничена выбранными масштабами. 
+\n
+\n%2$s: уровни масштабирования, при которых будут видны оригинальные тайлы. Увеличение и уменьшение масштаба может происходить вне этих значений.</string>
+    <string name="screen_control">Управление экраном</string>
+    <string name="turn_screen_on_options_descr">Параметры включения экрана:</string>
+    <string name="turn_screen_on_descr">Настройки включения экрана (убедитесь, что перед блокировкой устройства OsmAnd находится на переднем плане):</string>
+    <string name="default_screen_timeout">Системная настройка отключения экрана</string>
 </resources>

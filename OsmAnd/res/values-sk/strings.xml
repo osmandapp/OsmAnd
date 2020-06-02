@@ -3169,7 +3169,7 @@
     <string name="turn_screen_on_router">Prebudiť pri odbočení</string>
     <string name="turn_screen_on_time_descr">Nastavte ako dlho bude obrazovka zapnutá.</string>
     <string name="turn_screen_on_sensor">Použiť senzor priblíženia</string>
-    <string name="turn_screen_on_sensor_descr">Zamávajte rukou ponad hornú stranu obrazovky pre jej zapnutie počas navigácie.</string>
+    <string name="turn_screen_on_sensor_descr">Zamávanie rukou ponad obrazovku ju zapne.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Stupeň 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Stupeň 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Stupeň 3</string>
@@ -3495,7 +3495,7 @@
     <string name="shared_string_quick_actions">Rýchle akcie</string>
     <string name="shared_string_profiles">Profily</string>
     <string name="monitoring_min_speed_descr_remark">Poznámka: kontrola na nenulovú rýchlosť: Väčšina čipov GPS hlási hodnotu rýchlosti len ak algoritmus usúdi, že sa pohybujete, inak nevráti žiadnu rýchlosť. Preto použitie nenulového nastavenia v tomto filtri vlastne použije detekciu pohybu v GPS čipe. Ale aj keď nebude rýchlosť filtrovaná tu pri zázname, použijeme túto funkciu pri analýze GPX pre zistenie Opravenej vzdialenosti, teda hodnoty zobrazenej v tomto poli je vzdialenosť zaznamenaná počas pohybu.</string>
-    <string name="monitoring_min_accuracy_descr">Toto zaznamená len body zmerané pri indikovanej minimálnej presnosti (v metroch/stopách, ako ju hlási Android pre vaše zariadenie). Presnosť znamená rozptyl opakovaných meraní a nesúvisí priamo s presnosťou, ktorá určuje ako blízko je vaše meranie k skutočnej polohe.</string>
+    <string name="monitoring_min_accuracy_descr">Toto zaznamená len body zmerané pri indikovanej minimálnej presnosti (v metroch/stopách, ako ju hlási Android pre vaše zariadenie). Presnosť je blízkosť meraní k skutočnej polohe, a nesúvisí priamo s presnosťou, ktorá určuje rozptyl opakovaných meraní.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Vedľajší efekt: Následkom filtrovania podľa presnosti môžu celkom chýbať body napr. pod mostami, stromami, medzi vysokými budovami alebo pri niektorých poveternostných podmienkach.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Odporúčanie: Je ťažké predpovedať, čo bude zaznamenané a čo nie, preto môže byť vhodné tento filter vypnúť.</string>
     <string name="monitoring_min_accuracy_descr_remark">Poznámka: ak bolo GPS vypnuté tesne pred zaznamenávaním, prvý zmeraný bod môže znížiť presnosť a preto by sme mohli v našom programe chvíľu počkať pred zaznamenaním prvého bodu (alebo zaznamenať najlepší z troch po sebe idúcich bodov), ale toto ešte nie je implementované.</string>
@@ -3723,4 +3723,42 @@
     <string name="profiles_for_action_not_found">Nenašli sa žiadne vhodné profily.</string>
     <string name="index_item_world_basemap_detailed">Prehľadová mapa sveta (detailná)</string>
     <string name="unsupported_type_error">Nepodporovaný typ</string>
+    <string name="shared_string_always">Vždy</string>
+    <string name="turn_screen_on_descr">Vyberte možnosti prebudenia obrazovky (pri uzamknutí zariadenia sa uistite, že je OsmAnd v popredí):</string>
+    <string name="screen_timeout_descr">Limitované \"%1$s\", ak je povolené.</string>
+    <string name="one_image_per_tile">Jeden obrazový súbor na dlaždicu</string>
+    <string name="system_screen_timeout">Použiť systémový časový limit obrazovky</string>
+    <string name="turn_screen_on_options_descr">Možnosti prebudenia obrazovky:</string>
+    <string name="turn_screen_on_navigation_instructions">Navigačné pokyny</string>
+    <string name="turn_screen_on_power_button_descr">Stlačenie tlačidla napájania zariadenia zapne obrazovku s OsmAndom nad zámkom obrazovky.</string>
+    <string name="turn_screen_on_power_button">Tlačidlo napájania</string>
+    <string name="turn_screen_on_proximity_sensor">Snímač priblíženia</string>
+    <string name="turn_screen_on_wake_time_descr">Vyberte časový limit vypnutia obrazovky po prebudení. (\"%1$s\" platí bez časového limitu.)</string>
+    <string name="keep_screen_on">Nechať obrazovku zapnutú</string>
+    <string name="keep_screen_off">Nechať obrazovku vypnutú</string>
+    <string name="sqlite_db_file">Súbor SQLiteDB</string>
+    <string name="online_map_name_helper_text">Zadajte názov zdroja online mapy.</string>
+    <string name="online_map_url_helper_text">Zadajte alebo prilepte URL adresu online zdroja.</string>
+    <string name="edit_online_source">Upraviť online zdroj</string>
+    <string name="expire_time">Čas vypršania platnosti</string>
+    <string name="storage_format">Formát úložiska</string>
+    <string name="map_source_zoom_levels">Nastavte minimálnu a maximálnu úroveň priblíženia, pri ktorej sa zobrazí alebo načíta online mapa.</string>
+    <string name="tiles_storage_descr">Vyberte spôsob uloženia prevzatých dlaždíc.</string>
+    <string name="gpx_parse_error">GPX OsmAndu nemá správny tvar, prosím kontaktuje tím podpory pre bližšie preverenie.</string>
+    <string name="screen_control">Ovládanie obrazovky</string>
+    <string name="system_screen_timeout_descr">Vypne obrazovku po systémovom časovom limite.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Každý navigačný pokyn zapne obrazovku.</string>
+    <string name="pseudo_mercator_projection">Pseudo-Mercatorovo zobrazenie</string>
+    <string name="mercator_projection">Mercatorovo zobrazenie</string>
+    <string name="map_source_zoom_levels_descr">Tieto parametre ovplyvňujú zobrazenie keď sa použije ako mapa alebo podkladová/prekryvná vrstva. 
+\n
+\n%1$s: Mapa bude obmedzená na zvolené priblíženia. 
+\n
+\n%2$s: Úrovne priblíženia, pri ktorých budú viditeľné pôvodné dlaždice. Mimo týchto hodnôt nastane prepočítanie bodov obrázkov.</string>
+    <string name="expire_time_descr">Doba platnosti v minútach. Uložené dlaždice budú znovu načítané z Internetu po tomto čase. Ponechajte toto pole prázdne ak sa pre tento zdroj nemajú dlaždice nikdy obnovovať. 
+\n
+\nJeden deň je 1440 minút.
+\nJeden týždeň je 10 080 minút.
+\nJeden mesiac je 43 829 minút.</string>
+    <string name="default_screen_timeout">Systémový časový limit obrazovky</string>
 </resources>

@@ -3073,7 +3073,7 @@
     <string name="turn_screen_on_router">להתעורר בפניות</string>
     <string name="turn_screen_on_time_descr">להגדיר את זמן פעילות המסך.</string>
     <string name="turn_screen_on_sensor">להשתמש בחיישן מרחק</string>
-    <string name="turn_screen_on_sensor_descr">יש לנופף ביד מול החלק העליון של חזית המכשיר כדי להדליק אותו בזמן ניווט.</string>
+    <string name="turn_screen_on_sensor_descr">נפנוף היד מול המסך תדליק אותו.</string>
     <string name="shared_string_track_is_saved">המסלול %s נשמר</string>
     <string name="profile_alert_cant_delete_base">לא ניתן למחוק את הפרופילים הבסיסיים של OsmAnd</string>
     <string name="profile_alert_need_save_title">שמירת שינויים</string>
@@ -3616,7 +3616,7 @@
     <string name="search_offline_geo_error">לא ניתן לפענח את המציין הגאוגרפי ‚%s’.</string>
     <string name="monitoring_min_distance_descr_recommendation">מומלץ: הגדרה של 5 מטרים עשויה לעבוד כמו שצריך אם אין לך צורך ללכוד פריטים באבחנה דקה מזאת ולא מעניין אותך ללכוד נתונים באופן מפורש בזמן מנוחה.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">תופעת לוואי: כתוצאה מסינון לפי דיוק, ייתכן שכמה נקודות תיעלמנה עבור למשל מתחת לגשרים, מתחת לעצים, בין בניינים גבוהים או בתנאי מזג אוויר מסוימים.</string>
-    <string name="monitoring_min_accuracy_descr">פעולה זו תקליט רק נקודות שנמדדו עם חיווי של דיוק מזערי (במטרים/רגל כפי שדווח על ידי Android עבור ערכת השבבים שלך). דיוק מתייחס לכמה קרובות המדידות שלך למיקום האמתי שלך ואינו קשור ישירות לדיוק שהוא פיזור של מדידות חוזרות ונשנות.</string>
+    <string name="monitoring_min_accuracy_descr">פעולה זו תקליט רק נקודות שנמדדו עם חיווי של דיוק מזערי (במטרים/רגל כפי שדווח על ידי Android עבור ערכת השבבים שלך). דיוק מתייחס למרחק המדידות שלך מהמיקום האמתי שלך ואינו קשור ישירות לדיוק שהוא פיזור של מדידות חוזרות ונשנות.</string>
     <string name="monitoring_min_speed_descr_recommendation">המלצה: כדאי לנסות להשתמש בזיהוי תנועה דרך המסנן לסף תנועה תחתון (B) קודם לכן, הוא עשוי להביא לתוצאות טובות יותר ופחות מידע ילך לאיבוד. אם המסלולים שלך עדיין רועשים במהירויות נמוכות, כדי לנסות כאן ערכים שונים מאפס. נא לשים לב שחלק מהמדידות לא תדווחנה נתוני מהירות כלל (שיטות מבוססות רשת), שבמקרים כאלה לא יוקלט שום דבר.</string>
     <string name="wikipedia_poi_languages_promo">חלק מהערכים בוויקיפדיה לא יהיו זמינים בשם שצוין, יש לבחור את השפות בהן יופיעו הערכים של ויקיפדיה במפה.
 \nניתן יהיה להחליף בין כל השפות הזמינות בזמן קריאת הערך.</string>
@@ -3733,5 +3733,42 @@
     <string name="unsupported_type_error">סוג לא נתמך</string>
     <string name="monitoring_min_distance_descr_side_effect">תופעות לוואי: תקופות מנוחה אינן מוקלטות בכלל או מצוינות בנקודה בודדת. תנועות קטנות (בעולם האמתי - כלומר לצדדים, כדי לסמן סטייה מהמסלול שלך) עשויות להסתנן החוצה. הקובץ שלך מכיל פחות מידע לעיבוד מאוחר יותר וגורע מיכולת ההסקה הסטטיסטית על ידי סינון החוצה נקודות מיותרות בזמן ההקלטה תוך שמירה אפשרית של זגזוגים משניים שנגרמו על ידי קליטה חלשה או השפעות של ערכת השבבים של ה־GPS.</string>
     <string name="monitoring_min_speed_descr_remark">הערה: בדיקת מהירות &gt; 0: רוב ערכות שבבי ה־GPS (איכון) מדווחים על ערך מהירות רק אם האלגוריתם מזהה שהמכשיר בתנועה ואינו מדווח אם אין תנועה. לפיכך להשתמש בהגדרה &gt; 0 במסנן הזה בצורה מסוימת משתמש בזיהוי התנועה של ערכת השבבים של ה־GPS. אבל אפילו אם אין סינון כאן בזמן ההקלטה, אנו עדיין משתמשים בתכונה הזאת בניתוח ה־GPX שלנו כדי לקבוע את המרחק עם תיקונים, כלומר הערך שמופיע בשדה הזה הוא המרחק שהוקלט בזמן תנועה.</string>
-    <string name="gpx_parse_error">ה־GPX של OsmAnd אינו מסודר כראוי, נא ליצור קשר עם צוות התמיכה כדי להעמיק את המחקר</string>
+    <string name="gpx_parse_error">ה־GPX של OsmAnd אינו מסודר כראוי, נא ליצור קשר עם צוות התמיכה כדי להעמיק את המחקר.</string>
+    <string name="one_image_per_tile">קובץ תמונה אחד לאריח</string>
+    <string name="sqlite_db_file">קובץ SQLiteDB</string>
+    <string name="online_map_name_helper_text">נא לספק שם עבור מקור המפה המקוונת.</string>
+    <string name="online_map_url_helper_text">נא למלא או להדביק את כתובת המקור המקוון.</string>
+    <string name="edit_online_source">עריכת מקור מקוון</string>
+    <string name="expire_time">זמן תפוגה</string>
+    <string name="mercator_projection">היטל מרקטור</string>
+    <string name="storage_format">תצורת שמירה</string>
+    <string name="map_source_zoom_levels">יש להגדיר את רמת התקריב המזערית והמרבית שבהן המפה המקוונת תוצג או תיטען.</string>
+    <string name="map_source_zoom_levels_descr">המשתנים האלו ישפיעו על התצוגה כאשר נעשה בהם שימוש כמפה או כשכבה עליונה/תחתונה.
+\n
+\n%1$s: המפה תוגבל לרמות התקריב הנבחרות. 
+\n
+\n%2$s: רמות תקריב שבהן האריחים המקוריים יהיו גלויים. הגדלה או הקטנה ייתרחשו מחוץ לערכים האלו.</string>
+    <string name="expire_time_descr">זמן התפוגה בדקות. אריחים שנשמרו במטמון ייטענו מחדש לאחר זמן מסוים. יש להשאיר את השדה הזה ריק כדי לא לרענן את האריחים ממקור זה. 
+\n
+\nיום מלא הוא 1440 דקות.
+\nשבוע מלא הוא 10,080 דקות.
+\nחודש מלא הוא 43,829 דקות.</string>
+    <string name="tiles_storage_descr">נא לבחור כיצד אריחים שהתקבלו יאוחסנו.</string>
+    <string name="pseudo_mercator_projection">היטל דמוי מרקטור</string>
+    <string name="shared_string_always">תמיד</string>
+    <string name="screen_control">בקרת מסך</string>
+    <string name="system_screen_timeout_descr">לכבות את המסך לאחר תפוגת שומר המסך של המערכת.</string>
+    <string name="system_screen_timeout">להשתמש בתפוגת שומר המסך של המערכת</string>
+    <string name="turn_screen_on_options_descr">אפשרות יקיצת מסך:</string>
+    <string name="turn_screen_on_descr">נא לבחור את אפשרויות יקיצת המסך (נא לוודא ש־OsmAnd בחזית כאשר המכשיר ננעל):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">כל הנחיית ניווט תפעיל את המסך.</string>
+    <string name="turn_screen_on_navigation_instructions">הנחיות ניווט</string>
+    <string name="turn_screen_on_power_button_descr">לחיצה על כפתור ההפעלה תפעיל את המסך עם OsmAnd על גבי מסך הנעילה.</string>
+    <string name="turn_screen_on_power_button">כפתור הפעלה/כיבוי</string>
+    <string name="turn_screen_on_proximity_sensor">חיישן מרחק</string>
+    <string name="turn_screen_on_wake_time_descr">לבחור את זמן תפוגת שומר המסך של המערכת לאחר ההתעוררות. („%1$s” - ללא זמן תפוגה.)</string>
+    <string name="keep_screen_on">להשאיר את המסך פעיל</string>
+    <string name="keep_screen_off">להשאיר את המסך כבוי</string>
+    <string name="screen_timeout_descr">מוגבל על ידי „%1$s”, אם פעיל.</string>
+    <string name="default_screen_timeout">תפוגת שומר המסך של המערכת</string>
 </resources>

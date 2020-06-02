@@ -3647,4 +3647,14 @@
 \n
 \nVelg en handling.</string>
     <string name="search_poi_types_descr">Kombiner interessepunkttyper fra forskjellige kategorier. Trykk for å velge alle, og venstre side for kategorivalg.</string>
+    <string name="online_map_name_helper_text">Angi navn for nettbasert kartkilde.</string>
+    <string name="online_map_url_helper_text">Skriv eller lim inn nettadresse for nettbasert kilde.</string>
+    <string name="edit_online_source">Rediger nettbasert kilde</string>
+    <string name="mercator_projection">Merkatorprojeksjon</string>
+    <string name="one_image_per_tile">Én bildefil per flis</string>
+    <string name="shared_string_always">Alltid</string>
+    <string name="sqlite_db_file">SQLiteDB-fil</string>
+    <string name="expire_time">Utløpstid</string>
+    <string name="storage_format">Lagringsformat</string>
+    <string name="tiles_storage_descr">Velg hvordan nedlastede fliskart lagres.</string>
 </resources>

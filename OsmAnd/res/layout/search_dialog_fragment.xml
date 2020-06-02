@@ -287,7 +287,8 @@
 		android:background="@drawable/fab_background_style"
 		android:clickable="true"
 		android:contentDescription="@string/save_filter"
-		android:scaleType="center"
+		android:scaleType="fitXY"
+		android:padding="@dimen/fab_icon_padding"
 		app:srcCompat="@drawable/ic_action_save"
 		tools:layout_marginBottom="@dimen/action_bar_image_top_margin_land"
 		android:layout_marginEnd="@dimen/fab_margin_right" />

@@ -1108,8 +1108,8 @@
     <string name="lang_he">Hebreera</string>
     <string name="forward">Aurrera</string>
     <string name="home">Kontrol panela</string>
-    <string name="gpx_monitoring_start">Hasi GPXa grabatzen</string>
-    <string name="gpx_monitoring_stop">Gelditu GPX grabaketa</string>
+    <string name="gpx_monitoring_start">Jarraitu GPXa grabatzen</string>
+    <string name="gpx_monitoring_stop">Pausatu GPX grabaketa</string>
     <string name="gpx_start_new_segment">Hasi segmentu berria</string>
     <string name="rendering_attr_hideBuildings_name">Eraikinak</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ez-ibilgailu bideak</string>
@@ -2040,7 +2040,7 @@ mapak eta nabigazioa</string>
     <string name="osmand_plus_banner_desc">Mapen deskarga eta eguneraketa mugagabea, Wikipedia plugina.</string>
     <string name="si_mi_meters">Miliak/metroak</string>
     <string name="get_it">Eskuratu</string>
-    <string name="osm_live_payment_desc">Harpidetzaren kuota hilabetero kargatuko da. Zure harpidetza noiznahi eten dezakezu Google Play bitartez.</string>
+    <string name="osm_live_payment_desc">Harpidetzaren kuota hautatutako aldiro kargatuko da. Zure harpidetza noiznahi eten dezakezu Google Play bitartez.</string>
     <string name="donation_to_osm">Dohaintza OSM komunitateari</string>
     <string name="donation_to_osm_desc">Zure dohaintzaren zati bat OSM parte-hartzaileei doa. Harpidetzaren kostua berbera da.</string>
     <string name="osm_live_subscription_desc">Harpidetzak orduero, egunero edo astero eguneraketak jasotzea eta mugarik gabe mapak deskargatzea ahalbidetzen du.</string>
@@ -2335,7 +2335,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="open_mapillary">Ireki Mapillary</string>
     <string name="shared_string_install">Instalatu</string>
     <string name="improve_coverage_mapillary">Eskuratu argazki gehiago Mapillary bitartez</string>
-    <string name="improve_coverage_install_mapillary_desc">Instalatu Mapillary argazki bat edo gehiago maparen kokaleku honetara gehitzeko.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instalatu Mapillary argazkiak gehitzeko maparen kokaleku honetan.</string>
     <string name="online_photos">Sareko argazkiak</string>
     <string name="no_photos_descr">Argazkirik ez hemen.</string>
     <string name="mapillary">Mapillary</string>
@@ -2503,7 +2503,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="add_route_points">Gehitu ibilbide-puntuak</string>
     <string name="add_line">Gehitu lerroa</string>
     <string name="empty_state_my_tracks">Gehitu GPX fitxategiak</string>
-    <string name="empty_state_my_tracks_desc">Inportatu GPX fitxategiak, edo grabatu lorratzak.</string>
+    <string name="empty_state_my_tracks_desc">Inportatu GPX fitxategiak edo grabatu lorratzak.</string>
     <string name="empty_state_favourites">Gehitu gogokoak</string>
     <string name="empty_state_favourites_desc">Inportatu gogokoak, edo gehitu mapan puntuak markatuz.</string>
     <string name="import_track">Inportatu GPX fitxategia</string>
@@ -2552,7 +2552,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="one_tap_active">\'Ukitu bat\' aktibatuta</string>
     <string name="empty_state_av_notes">Hartu oharrak!</string>
     <string name="empty_state_av_notes_desc">Gehitu audioa, bideoa edo argazkia mapako edozein punturentzat, trepeta edo laster-menua erabiliz.</string>
-    <string name="notes_by_date">OSM oharrak datako</string>
+    <string name="notes_by_date">Audio/bideo oharrak datako</string>
     <string name="by_date">Datako</string>
     <string name="by_type">Motako</string>
     <string name="looking_for_tracks_with_waypoints">Bide-puntuak dituzten lorratzak bilatzen</string>
@@ -2574,7 +2574,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Bistaratu norabide-lerroa zure kokalekutik markatzaile aktiboen kokalekuetara.</string>
     <string name="show_arrows_descr">Bistaratu gezi bat edo bi markatzaile aktiboetara norabidea adierazteko.</string>
     <string name="distance_indication_descr">Hautatu nola bistaratu markatzaile aktiboetara distantzia.</string>
-    <string name="active_markers_descr">Zehaztu norabide adierazle kopurua:</string>
+    <string name="active_markers_descr">Zehaztu norabide adierazle kopurua.</string>
     <string name="digits_quantity">Dezimal kopurua</string>
     <string name="shared_string_right">Eskuina</string>
     <string name="shared_string_left">Ezkerra</string>
@@ -2860,7 +2860,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="osm_live_payment_annual_title">Urtero</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / hilero</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / hilero</string>
-    <string name="osm_live_payment_discount_descr">Gorde %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Gorde %1$s</string>
     <string name="osm_live_payment_current_subscription">Oraingo harpidetza</string>
     <string name="osm_live_payment_renews_monthly">Hilero berritzen da</string>
     <string name="osm_live_payment_renews_quarterly">Hiru hilero berritzen da</string>
@@ -3139,7 +3139,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="turn_screen_on_router">Piztu pantaila biraketetan</string>
     <string name="turn_screen_on_time_descr">Ezarri pantaila piztuta mantentzeko denbora.</string>
     <string name="turn_screen_on_sensor">Erabili gertutasun sentsorea</string>
-    <string name="turn_screen_on_sensor_descr">Agurtu eskuarekin pantailaren goialdean nabigazioan zehar hau pizteko.</string>
+    <string name="turn_screen_on_sensor_descr">Agurtu eskuarekin pantaila pizteko.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">1. gradua</string>
     <string name="rendering_attr_highway_class_track_grade2_name">2. gradua</string>
     <string name="rendering_attr_highway_class_track_grade3_name">3. gradua</string>
@@ -3448,25 +3448,25 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="monitoring_min_speed_descr_side_effect">Albo-efektua: Zure ibilbidean gutxieneko abiadura irizpidea betetzen ez duten zati guztiak faltako zaizkizu (adibidez, bizikletaz aldapa bat igotzen duzunean). Gainera, ez da atsedenaldi-epeei buruzko informaziorik egongo,. Horrek edozein azterketeta edo post-prozesuri eragingo dio, adibidez, bidaiaren guztizko iraupena, denbora martxan, edo batez besteko abiadura zehazten saiatzean.</string>
     <string name="monitoring_min_speed_descr_recommendation">Gomendioa: Saiatu lehenbizi mugimenduaren detekzioa erregistroko gutxieneko desplazamendu iragazkiaren bidez (B), emaitza hobeak sor ditzake eta datu gutxiago galduko dituzu. Zure ibilbideak abiadura baxuan zaratatsuak badira, saiatu zeroz kanpoko balioak hemen. Kontuan izan behar da neurketa batzuek ez dutela abiadura balioa emango (sarean oinarritutako metodo batzuk), kasu horretan ez zenuke ezer grabatuko.</string>
     <string name="monitoring_min_speed_descr_remark">Oharra: abiadura&gt; 0 egiaztatzea: GPS txip gehienek algoritmoak mugimenduan zaudela zehazten duenean bakarrik adierazten dute abiaduraren balioa, eta deus ez bestela. Hori dela eta, iragazki honetan &gt; 0 ezarpena erabiltzean GPS txiparen mugimendua detekzioa erabiltzen duzula esan daiteke. Baina grabaketa garaian hemen iragazi ez bada ere, funtzio hau erabiltzen dugu gure GPX azterketan zuzendutako distantzia zehazteko, hau da, eremu horretan erakutsitako balioa mugimenduan grabatutako distantzia da.</string>
-    <string name="monitoring_min_accuracy_descr">Honek gutxieneko zehaztasun adierazlearekin neurtutako puntuak soilik erregistratuko ditu (metro edo oinetan, Android-ek zure txiperako jakinarazi duen moduan). Zehaztasunak neurri errepikatuen sakabanaketari egiten dio erreferentzia, eta ez du prezisioarekin lotura zuzena, azken honek neurriak zure benetako posiziotik zenbat aldentzen diren definitzen du.</string>
+    <string name="monitoring_min_accuracy_descr">Honek gutxieneko zehaztasun adierazlearekin neurtutako puntuak soilik erregistratuko ditu (metro edo oinetan, Android-ek zure txiperako jakinarazi duen moduan). Zehaztasuna neurketa eta egiazko posizioaren arteko hurbiltasuna da, ez dago prezisioarekin lotua, hori errepikatutako neurketen sakabanaketa da.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Albo-efektua: Zehaztasunaren arabera iragaztearen ondorioz, puntuak falta daitezke, adibidez, zubien azpian, zuhaitzen azpian, eraikin altuen artean, edo eguraldi jakin batzuekin.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Gomendioa: Zaila da zer grabatuko den eta zer ez aurreikustea, agian egokiena iragazki hau desaktibatzea da.</string>
     <string name="rearrange_categories">Berrantolatu kategoriak</string>
-    <string name="create_custom_categories_list_promo">Aldatu zerrendaren ordena, ezkutatu behar ez dituzun kategoriak. Aldaketa guztiak profilekin inportatu eta esportatu daiteke.</string>
-    <string name="add_new_custom_category_button_promo">Kategoria pertsonalizatu berri bat gehi dezakezu behar diren kategoria bat edo batzuk hautatuta.</string>
-    <string name="reset_to_default_category_button_promo">Lehenetsitakoak berrezartzea ordenazio irizpidea instalazioaren unekora itzuliko du.</string>
+    <string name="create_custom_categories_list_promo">Aldatu zerrendaren ordena, ezkutatu kategoriak. Aldaketa guztiak profilekin inportatu eta esportatu daiteke.</string>
+    <string name="add_new_custom_category_button_promo">Kategoria pertsonalizatu berri bat gehi dezakezu kategoria bat edo batzuk hautatuta.</string>
+    <string name="reset_to_default_category_button_promo">\'Lehenetsitakoak berrezartzea\' ordenazio irizpidea instalazioaren unekora itzuliko du.</string>
     <string name="shared_string_available">Eskuragarri</string>
     <string name="add_custom_category">Gehitu kategoria pertsonalizatua</string>
     <string name="rendering_attr_streetLightingNight_name">Erakutsi gauez bakarrik</string>
-    <string name="plugin_prefs_reset_successful">Gehigarriaren ezarpen guztiak lehenetsitako egoerara leheneratu dira.</string>
-    <string name="profile_prefs_reset_successful">Profileko ezarpen guztiak lehenetsitako egoerara leheneratu dira.</string>
+    <string name="plugin_prefs_reset_successful">Gehigarriaren ezarpen guztiak lehenespenetara berrezarri dira.</string>
+    <string name="profile_prefs_reset_successful">Profileko ezarpen guztiak lehenespenetara berrezarri dira.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Ilunabarra %1$s-tan</string>
     <string name="sunrise_at">Egunsentia %1$s-tan</string>
-    <string name="accessibility_mode_disabled">Irisgarritasun modua desgaituta dago zure sisteman.</string>
+    <string name="accessibility_mode_disabled">Irisgarritasun modua itzalita dago zure Android sisteman.</string>
     <string name="use_system_screen_timeout">Erabili sistemaren pantaila denbora-muga</string>
-    <string name="use_system_screen_timeout_promo">Berez desgaituta dago, OsmAnd lehen planoan exekutatzen bada, pantailak ez du denbora mugarik.
-\n
+    <string name="use_system_screen_timeout_promo">Berez desgaituta dago, OsmAnd lehen planoan exekutatzen dagoenean, pantailak ez du denbora mugarik agortuko.
+\n 
 \nGaituta badago OsmAnd-ek sistemaren denbora-muga ezarpenak erabiliko ditu.</string>
     <string name="clear_recorded_data">Garbitu grabatutako datuak</string>
     <string name="release_3_6">• Profilak: orain ordena aldatu ahal izango duzu, maparen ikonoa ezarri, oinarrizko profilen ezarpen guztiak aldatu, eta lehenetsitako balioetara leheneratu
@@ -3498,7 +3498,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="routing_profile_direct_to">Zuzen puntura</string>
     <string name="please_provide_profile_name_message">Eman izena profilari</string>
     <string name="open_settings">Ireki ezarpenak</string>
-    <string name="plugin_disabled">Gehigarria desgaituta</string>
+    <string name="plugin_disabled">Gehigarria itzalita</string>
     <string name="plugin_disabled_descr">Gehigarri hau aparteko aplikazioa da, hura kendu beharko duzu erabiltzeko asmorik ez baduzu.
 \n
 \nOsmAnd kendu ondoren gehigarria gailuan geratuko da.</string>
@@ -3507,12 +3507,12 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_routing">Ibilbidea</string>
     <string name="shared_string_custom_rendering_style">Errendatzeko estilo pertsonalizatua</string>
     <string name="shared_string_include_data">Gehitu datu osagarriak</string>
-    <string name="import_profile_dialog_description">Inportatutako profilak datu osagarriak ditu. Sakatu Inportatu profileko datuak bakarrik inportatzeko edo hautatu inportatu beharreko datu gehigarriak.</string>
+    <string name="import_profile_dialog_description">Inportatutako profilak datu osagarriak ditu. Sakatu Inportatu profileko datuak bakarrik inportatzeko edo hautatu datu gehigarriak.</string>
     <string name="export_profile_dialog_description">Datu osagarriak hauta ditzakezu profilarekin batera esportatzeko.</string>
     <string name="navigation_notification_desc">Erakutsi sistemaren jakinarazpena nabigazioan zehar nabigazio argibideekin.</string>
     <string name="navigation_notification">Nabigazio-jakinarazpena</string>
     <string name="shared_string_app_default_w_val">Aplikazioan lehenetsia (%s)</string>
-    <string name="no_recalculation_setting">Desgaitu berkalkulua</string>
+    <string name="no_recalculation_setting">Birkalkulorik ez</string>
     <string name="route_recalculation_dist_title">Gutxieneko distantzia ibilbidea birkalkulatzeko</string>
     <string name="route_recalculation_dist_descr">Ibilbidea berriro kalkulatuko da ibilbidera distantzia zehaztutako parametroa baino luzeagoa bada</string>
     <string name="profile_type_custom_string">Profil pertsonalizatua</string>
@@ -3599,10 +3599,10 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_terrain_descr">Mapako terreno geruza erakutsi edo ezkutatzeko botoia.</string>
     <string name="quick_action_terrain_show">Erakutsi terrenoa</string>
     <string name="quick_action_terrain_hide">Ezkutatu terrenoa</string>
-    <string name="quick_action_show_hide_terrain">Erakutsi/ezkutatu terrenoa</string>
+    <string name="quick_action_show_hide_terrain">Erakutsi / ezkutatu terrenoa</string>
     <string name="download_slope_maps">Maldak</string>
     <string name="shared_string_hillshade">Erliebea</string>
-    <string name="terrain_empty_state_text">Gaitu erliebea edo malda mapa ikusteko. Mapa mota honi buruz gehiago irakur dezakezu gure gunean</string>
+    <string name="terrain_empty_state_text">Gaitu erliebea edo malda mapa ikusteko. Mapa mota hauei buruz gehiago irakur dezakezu gure gunean</string>
     <string name="shared_string_legend">Legenda</string>
     <string name="shared_string_zoom_levels">Zoom mailak</string>
     <string name="shared_string_transparency">Gardentasuna</string>
@@ -3610,7 +3610,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="slope_download_description">Mapa gehigarriak behar dira Maldak mapan ikusteko.</string>
     <string name="hillshade_download_description">Mapa gehigarriak behar dira erliebea mapan ikusteko.</string>
     <string name="terrain_slider_description">Ezarri geruza bistaratuko den gutxieneko eta gehieneko zoom maila.</string>
-    <string name="slope_description">Malda terrenoaren koloreztatutako ikuspegiak dira.</string>
+    <string name="slope_description">Maldak koloreak erabiltzen ditu terrenoaren pikotasuna adierazteko.</string>
     <string name="hillshade_description">Eman erliebea mapari itzalak erabiliz maldak, gailurrak eta behe-lauak erakusteko.</string>
     <string name="shared_string_terrain">Terrenoa</string>
     <string name="n_items_of_z">%1$s / %2$s</string>
@@ -3620,10 +3620,10 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="app_mode_ski_touring">Mendiko eskia</string>
     <string name="app_mode_ski_snowmobile">Elur-motorra</string>
     <string name="custom_osmand_plugin">OsmAnd gehigarri pertsonala</string>
-    <string name="changes_applied_to_profile">Aldaketak aplikatuta %1$s profilean.</string>
-    <string name="settings_item_read_error">Ezin izan da %1$s irakurri.</string>
-    <string name="settings_item_write_error">Ezin izan da %1$s idatzi.</string>
-    <string name="settings_item_import_error">Ezin izan da %1$s inportatu.</string>
+    <string name="changes_applied_to_profile">Aldaketak aplikatuta \'%1$s\' profilean.</string>
+    <string name="settings_item_read_error">Ezin izan da %1$s-tik irakurri.</string>
+    <string name="settings_item_write_error">Ezin izan da %1$s-ra idatzi.</string>
+    <string name="settings_item_import_error">Ezin izan da %1$s-tik inportatu.</string>
     <string name="select_track_file">Hautatu lorratz fitxategia</string>
     <string name="shared_string_languages">Hizkuntzak</string>
     <string name="shared_string_language">Hizkuntza</string>
@@ -3664,4 +3664,113 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_transport_hide">Ezkutatu garraio publikoa</string>
     <string name="quick_action_transport_show">Erakutsi garraio publikoa</string>
     <string name="quick_action_show_hide_transport">Erakutsi/ezkutatu garraio publikoa</string>
+    <string name="tracker_item">OsmAnd Aztarnaria</string>
+    <string name="shared_string_resume">Jarraitu</string>
+    <string name="ui_customization_description">Pertsonalizatu \"Tiradera\", \"Konfiguratu mapa\" eta \"Laster-menua\" ataletan dauden elementu kopurua.
+\n
+\nItzali erabili gabeko pluginak, eta ezkutatu bere kontrol guztiak. %1$s.</string>
+    <string name="ui_customization_short_descr">Tiraderako elementuak, laster-menua</string>
+    <string name="ui_customization">Interfazearen pertsonalizazioa</string>
+    <string name="shared_string_drawer">Tiradera</string>
+    <string name="context_menu_actions">Laster-menuko ekintzak</string>
+    <string name="reorder_or_hide_from">Berrantolatzeko edo ezkutatu %1$s-ko elementuak.</string>
+    <string name="shared_string_divider">Banatzailea</string>
+    <string name="divider_descr">Puntu honen azpitik dauden elementuak banatzaile batekin bereizten dira.</string>
+    <string name="shared_string_hidden">Ezkutatuta</string>
+    <string name="hidden_items_descr">Elementu hauek menuan ezkutatuta daude, baina irudikatutako aukerak edo gehigarriak funtzionatzen jarraituko dute.</string>
+    <string name="reset_items_descr">Ezarpenak ezkutatzean jatorrizko egoerara berrezartzen dira.</string>
+    <string name="main_actions_descr">Lau botoi besterik ez ditu.</string>
+    <string name="main_actions">Ekintza nagusiak</string>
+    <string name="additional_actions_descr">“%1$s” botoia sakatuz atzitu ditzakezu ekintza hauek.</string>
+    <string name="move_inside_category">Elementuak kategoria honen barruan mugitu ditzakezu soilik.</string>
+    <string name="developer_plugin">Garatzaileen gehigarria</string>
+    <string name="shared_string_items">Elementuak</string>
+    <string name="turn_screen_on_power_button_descr">Gailuaren itzaltze botoia sakatzean pantaila piztuko da OsmAnd blokeo-pantailaren gainean dagoela.</string>
+    <string name="lang_zhyue">Kantonera</string>
+    <string name="lang_zhminnan">Hegoaldeko Min</string>
+    <string name="lang_yo">Jorubera</string>
+    <string name="lang_war">Warayera</string>
+    <string name="lang_uz">Uzbekera</string>
+    <string name="lang_ur">Urdua</string>
+    <string name="lang_tt">Tatariera</string>
+    <string name="lang_tg">Tadjikera</string>
+    <string name="lang_sco">Eskoziera</string>
+    <string name="lang_scn">Siziliera</string>
+    <string name="lang_pnb">Punjabera</string>
+    <string name="lang_ne">Nepalera</string>
+    <string name="lang_nap">Napoliera</string>
+    <string name="lang_my">Birmaniera</string>
+    <string name="lang_mn">Mongoliera</string>
+    <string name="lang_min">Minangkabauera</string>
+    <string name="lang_ky">Kirgizera</string>
+    <string name="lang_kk">Kazakhera</string>
+    <string name="lang_jv">Javera</string>
+    <string name="lang_gu">Gujaratera</string>
+    <string name="lang_cv">Chuvashera</string>
+    <string name="lang_ce">Txetxeniera</string>
+    <string name="lang_bar">Bavariera</string>
+    <string name="lang_ba">Baxkirera</string>
+    <string name="lang_lmo">Lonbardira</string>
+    <string name="osm_live_payment_subscription_management">Ordainketa Google Play kontuan kobratuko da erosketa baieztatzean.
+\n
+\n Harpidetza automatikoki berrituko da berritze data baino lehen bertan behera uzten ez bada. Berritze-aldian (hilabetea / hiru hilabetea / urtea) kobratuko da kontua.
+\n
+\n Zure harpidetzak kudeatu eta bertan behera utzi ditzakezu Google Play ezarpenetara joanez.</string>
+    <string name="search_poi_types_descr">Konbinatu kategoria desberdinetako POI motak. Ukitu pizgailua guztiak hautatzeko, ukitu ezkerreko aldea kategoria aukeratzeko.</string>
+    <string name="release_3_7">• Lineaz kanpoko malda-mapa berriak
+\n
+\n • Gogokoen eta GPX bide-puntuen pertsonalizazio osoa - kolore, ikono, eta forma pertsonalizatuak
+\n
+\n • Pertsonalizatu elementuen ordena \"Testuinguru menua\", \"Konfiguratu mapa\" eta \"Tiradera\" ataletan.
+\n
+\n • Wikipedia bereizitako geruza gisa \"Konfiguratu mapa\" atalean, hautatu behar diren hizkuntzak soilik
+\n
+\n • Sortu zure POI iragazkia / mapak malgutasun osoz
+\n
+\n • Aukerak gehitu profil pertsonalizatuetarako ezarpenak leheneratzeko
+\n
+\n • Nabigazioko GPX ibilbide osoak, erreiak eta biratzeko jarraibide osoak onartzen ditu
+\n
+\n • Tabletako interfazearen neurriak konponduta
+\n
+\n • RTL erroreak konponduta
+\n
+\n</string>
+    <string name="gpx_parse_error">OsmAnd GPX hori ez dago ondo osatuta, jarri harremanetan laguntza taldearekin gehiago ikertzeko.</string>
+    <string name="shared_string_always">Beti</string>
+    <string name="screen_control">Pantailaren kontrola</string>
+    <string name="system_screen_timeout_descr">Pantaila itzaltzen du sistemako pantailaren denbora-muga agortzean.</string>
+    <string name="system_screen_timeout">Erabili sistemako pantailaren denbora-muga</string>
+    <string name="turn_screen_on_options_descr">Pantaila esnatzeko aukerak:</string>
+    <string name="turn_screen_on_descr">Hautatu pantailako esnatzeko aukerak (ziurtatu OsmAnd lehen planoan dagoela gailua blokeatzean):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Nabigazio instrukzio bakoitzak pantaila piztuko du.</string>
+    <string name="turn_screen_on_navigation_instructions">Nabigaziorako argibideak</string>
+    <string name="turn_screen_on_power_button">Itzaltze botoia</string>
+    <string name="turn_screen_on_proximity_sensor">Hurbiltasun sentsorea</string>
+    <string name="turn_screen_on_wake_time_descr">Hautatu pantailaren denbora-muga esnatu ondoren. (\"%1$s\" ez da aplikatzen denbora-muga.)</string>
+    <string name="keep_screen_on">Mantendu pantaila piztuta</string>
+    <string name="keep_screen_off">Mantendu pantaila itzalita</string>
+    <string name="screen_timeout_descr">\"%1$s\"-k mugatua, gaituta badago.</string>
+    <string name="pseudo_mercator_projection">Sasi-Mercator proiekzioa</string>
+    <string name="one_image_per_tile">Irudi fitxategi bat lauzako</string>
+    <string name="sqlite_db_file">SQLiteDB fitxategia</string>
+    <string name="online_map_name_helper_text">Eman izena lineako maparen jatorriari.</string>
+    <string name="online_map_url_helper_text">Idatzi edo itsatsi lineako jatorriaren URLa.</string>
+    <string name="edit_online_source">Editatu lineako jatorria</string>
+    <string name="expire_time">Iraungitze ordua</string>
+    <string name="mercator_projection">Mercator proiekzioa</string>
+    <string name="storage_format">Biltegiratze formatua</string>
+    <string name="map_source_zoom_levels">Ezarri zoom maila minimo eta maximoa lineaz kanpoko mapa bistaratu edo kargatzeko.</string>
+    <string name="map_source_zoom_levels_descr">Parametro hauek bistaratzeari eragingo diote maparen gainazal edo azpiazal gisa erabiltzean.
+\n
+\n%1$s: Mapa hautatutako zoom mailetara mugatuko da.
+\n
+\n%2$s: Jatorrizko lauzak ikusgai egongo diren zoom mailak. Balio hauetatik kanpo eskalatu egingo dira.</string>
+    <string name="expire_time_descr">Iraungitze denbora minutuetan. Cachean gordetako lauzak denbora batera birkargatuko dira. Laga eremu hau hutsik lauzak inoiz ez berrizteko jatorri honentzat.
+\n
+\nEgun bat 1440 minutu dira.
+\nAste bat 10080 minutu dira.
+\nHilabete bat 43829 minutu dira.</string>
+    <string name="tiles_storage_descr">Aukeratu nola gorde deskargatutako lauzak.</string>
+    <string name="default_screen_timeout">Sistemako pantailaren denbora-muga</string>
 </resources>

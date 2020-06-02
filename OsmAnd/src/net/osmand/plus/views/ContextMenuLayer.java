@@ -146,8 +146,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		contextMarker.layout(0, 0, minw, minh);
 
 		paint = new Paint();
-		pressedBitmap = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_shield_tap);
-		pressedBitmapSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_shield_tap_small);
+		pressedBitmap = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_shield_tap);
+		pressedBitmapSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_shield_tap_small);
 
 		outlinePaint = new Paint();
 		outlinePaint.setStyle(Paint.Style.STROKE);

@@ -3093,7 +3093,7 @@
     <string name="routing_attr_max_num_changes_description">Indiquez le nombre maximum de correspondances</string>
     <string name="turn_screen_on_router">Allumer lors des changements de direction</string>
     <string name="turn_screen_on_time_descr">Définir la durée pendant laquelle l\'écran restera allumé.</string>
-    <string name="turn_screen_on_sensor_descr">Agitez la main en haut de l\'écran pour allumer l\'écran pendant la navigation.</string>
+    <string name="turn_screen_on_sensor_descr">Balayer l\'écran de la main allumera l\'écran.</string>
     <string name="rendering_attr_winter_road_name">Route sur neige</string>
     <string name="rendering_attr_ice_road_name">Route sur glace</string>
     <string name="routeInfo_winter_ice_road_name">Route sur neige et glace</string>
@@ -3248,7 +3248,7 @@
     <string name="analytics_pref_title">Analyses</string>
     <string name="turn_screen_on_info">Afficher la carte sur l\'écran de verrouillage pendant la navigation.</string>
     <string name="route_parameters_info">Paramètres de calcul d\'itinéraire pour le profil sélectionné : « %1$s ».</string>
-    <string name="wake_time">Heure de réveil</string>
+    <string name="wake_time">Durée d\'allumage</string>
     <string name="map_look_descr">Apparence de la carte</string>
     <string name="map_look">Apparence de la carte</string>
     <string name="general_settings_profile_descr">Thème de l\'application, unités, région</string>
@@ -3455,7 +3455,7 @@
     <string name="monitoring_min_distance_descr_recommendation">Recommandation : un paramètre de 5 mètres est adapté si vous n\'avez pas besoin de détails et ne souhaitez pas enregistrer des points au repos.</string>
     <string name="monitoring_min_speed_descr_side_effect">Effet secondaire : votre trace ne contiendra pas les parties où la vitesse minimale n\'a pas été atteinte (par exemple lorsque vous poussez votre vélo en montée ou pendant une pause). De ce fait certaines informations de votre trace seront faussées comme la durée de déplacement ou la vitesse moyenne.</string>
     <string name="monitoring_min_speed_descr_recommendation">Recommandation : commencez par utiliser la détection de mouvement via le filtre de déplacement minimum (B) vous pourriez obtenir de meilleurs résultats en perdant moins de données. Si vos traces restent bruyantes à basse vitesse, essayez ici des valeurs non nulles. Veuillez noter que certaines mesures peuvent retourner une vitesse nulle (en raison de méthodes basées sur le réseau), dans ce cas rien ne sera enregistré.</string>
-    <string name="monitoring_min_accuracy_descr">Seuls les points mesurés avec un minimum de précision en mètres/pieds (information communiquée par votre puce GPS) seront enregistrés. La précision est la distance entre la position donnée par le GPS et votre position réelle. La précision est différente de l\'exactitude qui est la dispersion de plusieurs mesures de position successives.</string>
+    <string name="monitoring_min_accuracy_descr">Seuls les points mesurés avec un minimum de précision en mètres/pieds (information communiquée par votre puce GPS) seront enregistrés. La précision est la distance entre la position donnée par le GPS et votre position réelle. La précision est différente de la fluctuation qui est la dispersion de plusieurs mesures de position successives.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Effet secondaire : avec le filtrage de précision certains points peuvent manquer ; par exemple : sous un pont, en forêt, entre de hauts bâtiments ou dans certaines conditions météorologiques.</string>
     <string name="monitoring_min_accuracy_descr_remark">Remarque : si la localisation GPS est activée juste avant le début d\'enregistrement, la première position peut être imprécise. L\'application pourrait attendre quelques secondes avant d\'enregistrer un point (ou enregistrer le meilleur de 3 points successifs, etc), mais ces évolutions ne sont pas encore disponibles.</string>
     <string name="monitoring_min_speed_descr_remark">Remarque : vérification de vitesse &gt; 0. La plupart des puces GPS fournissent une vitesse uniquement lorsque vous êtes en mouvement. Par conséquent, l\'indication du paramètre &gt; 0 pour ce filtre utilise la détection de mouvement par la puce GPS. Mais même s\'il n\'est pas filtré ici au moment de l\'enregistrement, nous utilisons toujours cette fonctionnalité dans notre analyse des traces GPX pour déterminer la distance corrigée, c\'est-à-dire que la valeur affichée dans ce champ est la distance enregistrée en déplacement.</string>
@@ -3707,5 +3707,42 @@
     <string name="change_application_profile">Modifier le profil d\'application</string>
     <string name="index_item_world_basemap_detailed">Carte mondiale générale (plus détaillée)</string>
     <string name="unsupported_type_error">Type non pris en charge</string>
-    <string name="gpx_parse_error">Le fichier GPX n\'est pas construit correctement. Vous pouvez transmettre ce fichier à l\'équipe support OsmAnd pour investiguer.</string>
+    <string name="gpx_parse_error">Le fichier GPX OsmAnd n\'est pas construit correctement. Vous pouvez transmettre ce fichier à l\'équipe support OsmAnd pour investiguer.</string>
+    <string name="system_screen_timeout_descr">L\'écran s\'éteindra après le délai système.</string>
+    <string name="map_source_zoom_levels_descr">Ces paramètres affecteront l\'affichage lorsqu\'ils seront utilisés comme carte ou sur-couche / sous-couche.
+\n
+\n%1$s : La carte sera limitée aux zooms sélectionnés.
+\n
+\n%2$s : Niveaux de zoom auxquels les tuiles originales seront visibles. En dehors de ces valeurs, il y aura une augmentation ou une diminution d\'échelle.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">L\'écran s\'allumera pour afficher les instructions de navigation.</string>
+    <string name="turn_screen_on_wake_time_descr">Sélectionnez le temps d\'affichage de l\'écran après allumage (\"%1$s\" signifie pas d\'extinction).</string>
+    <string name="screen_timeout_descr">Limité par l\'option \"%1$s\" si elle est activée.</string>
+    <string name="expire_time_descr">Délai d\'expiration en minutes. Les tuiles en cache seront rechargées après ce délai. Laissez ce champ vide pour ne jamais rafraîchir les tuiles pour cette source.
+\n
+\nUn jour correspond à 1440 minutes.
+\nUne semaine correspond à 10 080 minutes.
+\nUn mois correspond à 43 829 minutes.</string>
+    <string name="shared_string_always">Toujours</string>
+    <string name="screen_control">Contrôle de l\'écran</string>
+    <string name="system_screen_timeout">Utiliser le délai système pour l’extinction de l\'écran</string>
+    <string name="turn_screen_on_options_descr">Options de réveil de l\'écran :</string>
+    <string name="turn_screen_on_descr">Sélectionnez les options de réveil de l’écran (assurez-vous qu’OsmAnd est au premier plan au moment du verrouillage de l’appareil) :</string>
+    <string name="turn_screen_on_navigation_instructions">Instructions de navigation</string>
+    <string name="turn_screen_on_power_button_descr">Appuyez sur le bouton d\'alimentation de l\'appareil pour allumer l\'écran avec OsmAnd par dessus l’écran de verrouillage.</string>
+    <string name="turn_screen_on_power_button">Bouton marche / arrêt</string>
+    <string name="turn_screen_on_proximity_sensor">Capteur de proximité</string>
+    <string name="keep_screen_on">Conserver l\'écran allumé</string>
+    <string name="keep_screen_off">Conserver l\'écran éteint</string>
+    <string name="pseudo_mercator_projection">Pseudo-projection de Mercator</string>
+    <string name="one_image_per_tile">Un fichier image par tuile</string>
+    <string name="sqlite_db_file">Fichier SQLiteDB</string>
+    <string name="online_map_name_helper_text">Donnez un nom à la source de carte en ligne.</string>
+    <string name="online_map_url_helper_text">Saisissez ou collez l\'URL de la source.</string>
+    <string name="edit_online_source">Modifier la source en ligne</string>
+    <string name="expire_time">Date d\'expiration</string>
+    <string name="mercator_projection">Projection de Mercator</string>
+    <string name="storage_format">Format de stockage</string>
+    <string name="map_source_zoom_levels">Définissez les niveaux de zoom minimum et maximum auxquels la carte en ligne sera affichée ou chargée.</string>
+    <string name="tiles_storage_descr">Sélectionnez comment les tuiles téléchargées seront stockées.</string>
+    <string name="default_screen_timeout">Délai système de veille écran</string>
 </resources>

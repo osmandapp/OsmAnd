@@ -53,8 +53,8 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 			keepScreenOnEnabled = savedInstanceState.getBoolean(KEEP_SCREEN_ON_ENABLED);
 		} else {
 			int savedValIndex = listPreference.getValueIndex();
-			keepScreenOnEnabled = savedValIndex == 0;
-			selectedEntryIndex = savedValIndex != 0 ? savedValIndex : 1;
+			keepScreenOnEnabled = savedValIndex <= 0;
+			selectedEntryIndex = savedValIndex > 0 ? savedValIndex : 1;
 		}
 
 		items.add(new TitleItem(listPreference.getDialogTitle()));
@@ -66,7 +66,7 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 		items.add(preferenceDescription);
 
 		final String on = getString(R.string.keep_screen_on);
-		final String off = getString(R.string.keep_screen_off);
+		final String off = getString(R.string.keep_screen_on); // also needs to say 'on' the way the dialog is designed.
 		final BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
 		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(keepScreenOnEnabled)
@@ -98,7 +98,7 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 		Context themedCtx = UiUtilities.getThemedContext(ctx, nightMode);
 
 		TextView tvSliderTitle = sliderView.findViewById(android.R.id.title);
-		tvSliderTitle.setText(getString(R.string.shared_string_time));
+		tvSliderTitle.setText(getString(R.string.wake_time));
 
 		final TextView tvSliderSummary = sliderView.findViewById(android.R.id.summary);
 		tvSliderSummary.setText(listPreference.getEntries()[selectedEntryIndex]);
