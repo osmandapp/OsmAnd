@@ -455,7 +455,7 @@ public class SearchCoreFactory {
 							City ct = ((Street) res.object).getCity();
 							phrase.countUnknownWordsMatch(res, 
 									ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate()),
-									ct.getAllNames(true));
+									ct.getAllNames(true), 0);
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi);
 						} else {
 							subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
@@ -482,15 +482,12 @@ public class SearchCoreFactory {
 			if (!phrase.isUnknownSearchWordPresent()) {
 				return false;
 			}
-			// TODO
-			// consider 'bar' - 'Hospital 512'
 			if (!phrase.isNoSelectedType()) {
 				// don't search by name when type is selected or poi type is part of name
 				return false;
 			}
-			// boolean hasUnselectedType = phrase.isNoSelectedType() && phrase.isUnknownSearchWordPresent()
-			//						&& phrase.isMainUnknownSearchWordComplete() && phrase.hasUnknownSearchWordPoiTypes();
-			// Check feedback before it was searching exact match of whole phrase.getUnknownSearchPhrase()
+			// Take into account POI [bar] - 'Hospital 512'
+			// BEFORE: it was searching exact match of whole phrase.getUnknownSearchPhrase() [ Check feedback ] 
 			
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
@@ -718,7 +715,6 @@ public class SearchCoreFactory {
 								break;
 							}
 						}
-						// TODO properly count matching words fuel diesel 
 					}
 					if (match) {
 						SearchResult res = new SearchResult(phrase);
@@ -833,6 +829,7 @@ public class SearchCoreFactory {
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			SearchPoiTypeFilter poiTypeFilter = null;
 			String nameFilter = null;
+			int countExtraWords = 0;
 			if (phrase.isLastWord(ObjectType.POI_TYPE)) {
 				Object obj = phrase.getLastSelectedWord().getResult().object;
 				if (obj instanceof AbstractPoiType) {
@@ -848,19 +845,18 @@ public class SearchCoreFactory {
 				searchAmenityTypesAPI.initPoiTypes();
 				Map<AbstractPoiType, List<String>> poiTypeResults = searchAmenityTypesAPI.getPoiTypeResults(nm, true);
 				// find first full match only
-				int maxwords = 0;
 				for (Entry<AbstractPoiType, List<String>> poiType : poiTypeResults.entrySet()) {
 					for (String foundName : poiType.getValue()) {
 						CollatorStringMatcher csm = new CollatorStringMatcher(foundName, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 						// matches only completely
 						int mwords = phrase.countWords(foundName) ;
-						if (csm.matches(phrase.getUnknownSearchPhrase()) && maxwords < mwords) {
-							maxwords = phrase.countWords(foundName);
+						if (csm.matches(phrase.getUnknownSearchPhrase()) && countExtraWords < mwords) {
+							countExtraWords = phrase.countWords(foundName);
 							List<String> otherSearchWords = phrase.getUnknownSearchWords(null);
 							nameFilter = null;
-							if (maxwords - 1 < otherSearchWords.size()) {
+							if (countExtraWords - 1 < otherSearchWords.size()) {
 								nameFilter = "";
-								for(int k = maxwords - 1; k < otherSearchWords.size(); k++) {
+								for(int k = countExtraWords - 1; k < otherSearchWords.size(); k++) {
 									if(nameFilter.length() > 0) {
 										nameFilter += SearchPhrase.DELIMITER;
 									}
@@ -871,14 +867,13 @@ public class SearchCoreFactory {
 						}
 					}
 				}
-				// TODO count correctly matching words ! fuel diesel 
 			}
 			if (poiTypeFilter != null) {
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
 				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
 				Set<String> searchedPois = new TreeSet<>();
 				for (BinaryMapIndexReader r : offlineIndexes) {
-					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, r, searchedPois);
+					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, r, searchedPois, countExtraWords);
 					if (poiTypeFilter instanceof CustomSearchPoiFilter) {
 						rm = ((CustomSearchPoiFilter) poiTypeFilter).wrapResultMatcher(rm);
 					}
@@ -894,7 +889,8 @@ public class SearchCoreFactory {
 
 		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchPoiTypeFilter poiTypeFilter, 
 														final SearchResultMatcher resultMatcher, final String nameFilter, 
-														final BinaryMapIndexReader selected, final Set<String> searchedPois) {
+														final BinaryMapIndexReader selected, final Set<String> searchedPois, 
+														final int countExtraWords) {
 			
 			NameStringMatcher ns = nameFilter == null ? null : new NameStringMatcher(nameFilter, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 			return new ResultMatcher<Amenity>() {
@@ -936,13 +932,13 @@ public class SearchCoreFactory {
 					}
 					if (ns != null) {
 						if (ns.matches(res.localeName) || ns.matches(res.otherNames)) {
-							phrase.countUnknownWordsMatchMainResult(res);
+							phrase.countUnknownWordsMatchMainResult(res, countExtraWords);
 						} else {
 							String ref = object.getTagContent(Amenity.REF, null);
 							if (ref == null || !ns.matches(ref)) {
 								return false;
 							} else {
-								phrase.countUnknownWordsMatch(res, ref, null);
+								phrase.countUnknownWordsMatch(res, ref, null, countExtraWords);
 								res.localeName += " " + ref;
 							}
 						}

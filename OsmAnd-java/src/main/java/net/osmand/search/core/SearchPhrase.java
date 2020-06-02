@@ -753,15 +753,27 @@ public class SearchPhrase {
 	}
 	
 	public void countUnknownWordsMatchMainResult(SearchResult sr) {
-		countUnknownWordsMatch(sr, sr.localeName, sr.otherNames);
+		countUnknownWordsMatch(sr, sr.localeName, sr.otherNames, 0);
+	}
+	
+	public void countUnknownWordsMatchMainResult(SearchResult sr, int startsWith) {
+		countUnknownWordsMatch(sr, sr.localeName, sr.otherNames, startsWith);
 	}
 	
 	
-	public void countUnknownWordsMatch(SearchResult sr, String localeName, Collection<String> otherNames) {
+	public void countUnknownWordsMatch(SearchResult sr, String localeName, Collection<String> otherNames, int startWith) {
 		if (otherUnknownWords.size() > 0) {
 			for (int i = 0; i < otherUnknownWords.size(); i++) {
-				NameStringMatcher ms = getUnknownNameStringMatcher(i);
-				if (ms.matches(localeName) || ms.matches(otherNames)) {
+				boolean match = false;
+				if (i < startWith - 1) {
+					match = true;
+				} else {
+					NameStringMatcher ms = getUnknownNameStringMatcher(i);
+					if (ms.matches(localeName) || ms.matches(otherNames)) {
+						match = true;
+					}
+				}
+				if (match) {
 					if (sr.otherWordsMatch == null) {
 						sr.otherWordsMatch = new TreeSet<>();
 					}
@@ -769,10 +781,12 @@ public class SearchPhrase {
 				}
 			}
 		}
-		if(!sr.firstUnknownWordMatches) {
-			sr.firstUnknownWordMatches = localeName.equals(getFirstUnknownSearchWord()) ||
-					getFirstUnknownNameStringMatcher().matches(localeName) || 
-					getFirstUnknownNameStringMatcher().matches(otherNames);	
+		if (startWith > 0) {
+			sr.firstUnknownWordMatches = true;
+		} else if (!sr.firstUnknownWordMatches) {
+			sr.firstUnknownWordMatches = localeName.equals(getFirstUnknownSearchWord())
+					|| getFirstUnknownNameStringMatcher().matches(localeName)
+					|| getFirstUnknownNameStringMatcher().matches(otherNames);
 		}
 		
 	}
