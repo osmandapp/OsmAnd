@@ -111,7 +111,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
 import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
@@ -388,8 +387,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							} else {
 								filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
 							}
-							app.getPoiFilters().clearSelectedPoiFilters(PoiTemplateList.POI);
-							app.getPoiFilters().addSelectedPoiFilter(PoiTemplateList.POI, filter);
+							app.getPoiFilters().clearSelectedPoiFilters();
+							app.getPoiFilters().addSelectedPoiFilter(filter);
 
 							mapActivity.getContextMenu().closeActiveToolbar();
 							showToolbar();
@@ -864,7 +863,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void closeSearch() {
-		app.getPoiFilters().clearSelectedPoiFilters(PoiTemplateList.POI);
+		app.getPoiFilters().clearSelectedPoiFilters();
 		dismiss();
 	}
 
