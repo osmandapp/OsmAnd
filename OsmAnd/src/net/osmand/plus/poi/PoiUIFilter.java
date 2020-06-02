@@ -4,6 +4,7 @@ package net.osmand.plus.poi;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -150,8 +151,11 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	public boolean isWikiFilter() {
-		return filterId.startsWith(STD_PREFIX + WIKI_PLACE)
-				|| filterId.equals(STD_PREFIX + OSM_WIKI_CATEGORY);
+		return filterId.startsWith(STD_PREFIX + WIKI_PLACE) || isTopWikiFilter();
+	}
+
+	public boolean isTopWikiFilter() {
+		return filterId.equals(STD_PREFIX + OSM_WIKI_CATEGORY);
 	}
 
 	public String getFilterByName() {

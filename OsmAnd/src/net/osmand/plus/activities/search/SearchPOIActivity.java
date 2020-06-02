@@ -78,8 +78,6 @@ import java.util.TreeMap;
 
 import gnu.trove.set.hash.TLongHashSet;
 
-import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
-
 /**
  * Search poi activity
  */
@@ -166,7 +164,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			public boolean onMenuItemClick(MenuItem item) {
 				OsmandSettings settings = app.getSettings();
 				filter.setFilterByName(searchFilter.getText().toString().trim());
-				app.getPoiFilters().addSelectedPoiFilter(PoiTemplateList.POI, filter);
+				app.getPoiFilters().addSelectedPoiFilter(filter);
 				if (location != null) {
 					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(), 15);
 				}
