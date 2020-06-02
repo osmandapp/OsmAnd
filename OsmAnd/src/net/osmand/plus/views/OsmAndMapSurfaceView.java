@@ -1,8 +1,6 @@
 package net.osmand.plus.views;
 
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -102,20 +100,8 @@ public class OsmAndMapSurfaceView extends SurfaceView implements Callback {
 		}
 		return mapView.onTouchEvent(event);
 	}
-	
-	@Override
-	protected void onDraw(Canvas canvas) {
-		if(mapView == null) {
-			return;
-		}
-		boolean nightMode = mapView.getApplication().getDaynightHelper().isNightMode();
-		DrawSettings drawSettings = new DrawSettings(nightMode, false);
-		mapView.drawOverMap(canvas, mapView.getCurrentRotatedTileBox().copy(), drawSettings);
-	}
-	
 
 	public OsmandMapTileView getMapView() {
 		return mapView;
 	}
-
 }
