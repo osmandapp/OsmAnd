@@ -20,7 +20,6 @@ public class SearchResult {
 	// internal package fields (used for sorting)
 	public SearchResult parentSearchResult;
 	String wordsSpan ;
-	// TODO
 	boolean firstUnknownWordMatches = true;
 	Collection<String> otherWordsMatch = null;
 	boolean unknownPhraseMatches = false;
@@ -47,23 +46,20 @@ public class SearchResult {
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
 	}
+	private static final double MAX_TYPE_WEIGHT = 10;
 
+	// maximum corresponds to the top entry
+	// this method returns: 
+	// [1, 4] - if there is no parent search result
+	// [0, 1[ - if there is parent search result
 	public double getUnknownPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it highers
-		double res  = 0;
+		double res = 0;
 		if (unknownPhraseMatches) {
 			res = ObjectType.getTypeWeight(objectType);
 		}
 		if (parentSearchResult != null) {
-//			double x = parentSearchResult.getUnknownPhraseMatchWeight();
-//			if (x == 0) {
-//				return 0;
-//			}
-			// res = Math.max(res, parentSearchResult.getUnknownPhraseMatchWeight());
-			// res += parentSearchResult.getUnknownPhraseMatchWeight() / 10;
-			// 20 > maximum type
-			// TODO explain comment
-			res = res / 20 + parentSearchResult.getUnknownPhraseMatchWeight() / 20;
+			res = (res + parentSearchResult.getUnknownPhraseMatchWeight() / MAX_TYPE_WEIGHT) / MAX_TYPE_WEIGHT;
 		}
 		return res;
 	}

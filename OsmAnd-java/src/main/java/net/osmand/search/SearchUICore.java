@@ -713,7 +713,7 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
-			// TODO  first , other?
+			// TODO  Check names and count first , other?
 			if (phrase != null && object.otherNames != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
 				for (String s : object.otherNames) {
 					if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {

@@ -9,8 +9,6 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.CommonWords;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
 import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
@@ -284,7 +282,6 @@ public class SearchPhrase {
 
 	public boolean isMainUnknownSearchWordComplete() {
 		// return lastUnknownSearchWordComplete || otherUnknownWords.size() > 0 || unknownSearchWordPoiType != null;
-		// TODO unknownSearchWordPoiType != null;!!!
 		return mainUnknownSearchWordComplete;
 	}
 	
