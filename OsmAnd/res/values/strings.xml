@@ -33,7 +33,7 @@
     <string name="sqlite_db_file">SQLiteDB file</string>
     <string name="one_image_per_tile">One image file per tile</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercator projection</string>
-    <string name="screen_timeout_descr">Limited by \"%1$s\", if enabled.</string>
+    <string name="screen_timeout_descr">This is only effective if \"%1$s\" is disabled.</string>
     <string name="keep_screen_off">Keep screen off</string>
     <string name="keep_screen_on">Keep screen on</string>
     <string name="turn_screen_on_wake_time_descr">Select the screen timeout after waking up. (\"%1$s\" applies no timeout.)</string>
