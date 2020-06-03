@@ -15,7 +15,8 @@ import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.bottomsheets.VehicleParametersNumericBottomSheet;
+import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
+import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.router.GeneralRouter;
@@ -95,7 +96,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		}
 		SizePreference vehicleSizePref = new SizePreference(ctx);
 		vehicleSizePref.setKey(pref.getId());
-		vehicleSizePref.setAssets(VehicleParametersNumericBottomSheet.VehicleSizeAssets.getAssets(parameterId));
+		vehicleSizePref.setAssets(VehicleSizeAssets.getAssets(parameterId));
 		vehicleSizePref.setDefaultValue(defValue);
 		vehicleSizePref.setTitle(title);
 		vehicleSizePref.setEntries(entriesStr);
@@ -150,7 +151,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		if (preference instanceof SizePreference) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				VehicleParametersNumericBottomSheet.showInstance(fragmentManager, preference.getKey(),
+				VehicleParametersBottomSheet.showInstance(fragmentManager, preference.getKey(),
 						this, false, getSelectedAppMode());
 			}
 		} else {

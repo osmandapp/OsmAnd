@@ -5,8 +5,7 @@ import android.content.Context;
 import androidx.preference.DialogPreference;
 
 import net.osmand.plus.R;
-
-import static net.osmand.plus.settings.bottomsheets.VehicleParametersNumericBottomSheet.*;
+import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
 
 public class SizePreference extends DialogPreference {
 
