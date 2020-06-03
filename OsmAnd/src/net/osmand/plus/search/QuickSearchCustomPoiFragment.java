@@ -319,7 +319,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 			}
 		} else {
 			updateCloseSearchIcon(true);
-			subCategoriesAdapter.setSelectedItems(new ArrayList<>(getSelectedSubCategories()));
+			subCategoriesAdapter.setSelectedItems(getSelectedSubCategories());
 			startSearchSubCategories(text);
 		}
 	}
@@ -355,8 +355,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 		updateCloseSearchIcon(false);
 	}
 
-	private Set<PoiType> getSelectedSubCategories() {
-		Set<PoiType> poiTypes = new HashSet<>();
+	private List<PoiType> getSelectedSubCategories() {
+		List<PoiType> poiTypes = new ArrayList<>();
 		for (Map.Entry<PoiCategory, LinkedHashSet<String>> entry : filter.getAcceptedTypes().entrySet()) {
 			if (entry.getValue() == null) {
 				poiTypes.addAll(entry.getKey().getPoiTypes());
@@ -369,6 +369,12 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 				}
 			}
 		}
+		Collections.sort(poiTypes, new Comparator<PoiType>() {
+			@Override
+			public int compare(PoiType poiType, PoiType t1) {
+				return OsmAndCollator.primaryCollator().compare(poiType.getTranslation(), t1.getTranslation());
+			}
+		});
 		return poiTypes;
 	}
 
