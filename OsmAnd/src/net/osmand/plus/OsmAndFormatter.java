@@ -26,9 +26,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.LinkedHashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import static net.osmand.data.PointDescription.getLocationOlcName;
@@ -276,27 +274,13 @@ public class OsmAndFormatter {
 		}
 	}
 
-	public static Map<MetricsConstants, String> getDistanceData(OsmandApplication app, float meters) {
-		Map<MetricsConstants, String> results = new LinkedHashMap<>();
-
-		String kilometersAndMeters = getFormattedDistance(meters, app, true, MetricsConstants.KILOMETERS_AND_METERS);
-		String milesAndFeet = getFormattedDistance(meters, app, true, MetricsConstants.MILES_AND_FEET);
-		String milesAndMeters = getFormattedDistance(meters, app, true, MetricsConstants.MILES_AND_METERS);
-		String milesAndYards = getFormattedDistance(meters, app, true, MetricsConstants.MILES_AND_YARDS);
-		String nauticalMiles = getFormattedDistance(meters, app, true, MetricsConstants.NAUTICAL_MILES);
-
-		results.put(MetricsConstants.KILOMETERS_AND_METERS, kilometersAndMeters);
-		results.put(MetricsConstants.MILES_AND_FEET, milesAndFeet);
-		results.put(MetricsConstants.MILES_AND_METERS, milesAndMeters);
-		results.put(MetricsConstants.MILES_AND_YARDS, milesAndYards);
-		results.put(MetricsConstants.NAUTICAL_MILES, nauticalMiles);
-
-		return results;
-	}
-
 	public static String getFormattedAlt(double alt, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		return getFormattedAlt(alt, ctx, mc);
+	}
+
+	public static String getFormattedAlt(double alt, OsmandApplication ctx, MetricsConstants mc) {
 		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
 		if (!useFeet) {
 			return ((int) (alt + 0.5)) + " " + ctx.getString(R.string.m);
