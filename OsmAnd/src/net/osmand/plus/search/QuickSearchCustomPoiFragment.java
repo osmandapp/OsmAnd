@@ -35,6 +35,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -92,6 +93,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 	private ProgressBar searchProgressBar;
 	private ImageView searchCloseIcon;
 	private SearchUICore searchUICore;
+	private Collator collator;
 
 	public QuickSearchCustomPoiFragment() {
 	}
@@ -103,6 +105,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		collator = OsmAndCollator.primaryCollator();
 		app = getMyApplication();
 		uiUtilities = app.getUIUtilities();
 		searchUICore = app.getSearchUICore().getCore();
@@ -371,8 +374,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 		}
 		Collections.sort(poiTypes, new Comparator<PoiType>() {
 			@Override
-			public int compare(PoiType poiType, PoiType t1) {
-				return OsmAndCollator.primaryCollator().compare(poiType.getTranslation(), t1.getTranslation());
+			public int compare(PoiType poiType1, PoiType poiType2) {
+				return collator.compare(poiType1.getTranslation(), poiType2.getTranslation());
 			}
 		});
 		return poiTypes;
