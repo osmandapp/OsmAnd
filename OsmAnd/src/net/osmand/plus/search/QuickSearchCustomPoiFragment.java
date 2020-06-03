@@ -37,32 +37,34 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
+import net.osmand.ResultMatcher;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.search.SearchUICore;
-import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static net.osmand.search.core.ObjectType.SEARCH_FINISHED;
 
 public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFiltersSelectedListener {
 
@@ -93,6 +95,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 	private ProgressBar searchProgressBar;
 	private ImageView searchCloseIcon;
 	private SearchUICore searchUICore;
+	private boolean searchCancelled;
 	private Collator collator;
 
 	public QuickSearchCustomPoiFragment() {
@@ -305,6 +308,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 
 	private void searchSubCategory(String text) {
 		if (text.isEmpty()) {
+			cancelSearchSubCategories();
 			if (subCategoriesAdapter.getSelectedItems().isEmpty()) {
 				listView.setAdapter(categoryListAdapter);
 				categoryListAdapter.notifyDataSetChanged();
@@ -314,37 +318,64 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 			} else {
 				listView.setAdapter(subCategoriesAdapter);
 				subCategoriesAdapter.clear();
-				subCategoriesAdapter.addAll(new ArrayList<>(subCategoriesAdapter.getSelectedItems()));
+				subCategoriesAdapter.addAll(subCategoriesAdapter.getSelectedItems());
 				subCategoriesAdapter.notifyDataSetChanged();
 				removeAllHeaders();
 				listView.addHeaderView(headerShadow, null, false);
 				setupAddButton();
 			}
 		} else {
-			updateCloseSearchIcon(true);
-			subCategoriesAdapter.setSelectedItems(getSelectedSubCategories());
 			startSearchSubCategories(text);
 		}
 	}
 
-	private void startSearchSubCategories(String text) {
-		try {
-			SearchUICore.SearchResultCollection res = searchUICore.shallowSearch(SearchCoreFactory.SearchAmenityTypesAPI.class, text, null);
-			List<PoiType> results = new ArrayList<>();
-			for (SearchResult result : res.getCurrentSearchResults()) {
-				Object poiObject = result.object;
-				if (poiObject instanceof PoiType) {
-					PoiType poiType = (PoiType) poiObject;
-					if (!poiType.isAdditional()) {
-						results.add(poiType);
+	private void cancelSearchSubCategories() {
+		searchCancelled = true;
+		searchUICore.getSearchSettings().resetSearchTypes();
+		updateCloseSearchIcon(false);
+	}
+
+	private void startSearchSubCategories(final String text) {
+		updateCloseSearchIcon(true);
+		searchCancelled = false;
+		SearchSettings searchSettings = searchUICore.getSearchSettings().setSearchTypes(ObjectType.POI_TYPE);
+		searchUICore.updateSettings(searchSettings);
+		searchUICore.search(text, true, new ResultMatcher<SearchResult>() {
+			@Override
+			public boolean publish(SearchResult searchResult) {
+				if (searchResult.objectType == SEARCH_FINISHED) {
+					final List<PoiType> selectedSubCategories = getSelectedSubCategories();
+					SearchResultCollection resultCollection = searchUICore.getCurrentSearchResult();
+					final List<PoiType> results = new ArrayList<>();
+					for (SearchResult result : resultCollection.getCurrentSearchResults()) {
+						Object poiObject = result.object;
+						if (poiObject instanceof PoiType) {
+							PoiType poiType = (PoiType) poiObject;
+							if (!poiType.isAdditional()) {
+								results.add(poiType);
+							}
+						}
 					}
+					app.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							searchUICore.getSearchSettings().resetSearchTypes();
+							if (!searchCancelled) {
+								subCategoriesAdapter.setSelectedItems(selectedSubCategories);
+								showSearchResults(results);
+							}
+							updateCloseSearchIcon(false);
+						}
+					});
 				}
+				return true;
 			}
-			showSearchResults(results);
-		} catch (IOException e) {
-			app.showToastMessage(e.getMessage());
-			updateCloseSearchIcon(false);
-		}
+
+			@Override
+			public boolean isCancelled() {
+				return searchCancelled;
+			}
+		});
 	}
 
 	private void showSearchResults(List<PoiType> poiTypes) {
@@ -355,7 +386,6 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 		removeAllHeaders();
 		listView.addHeaderView(headerShadow, null, false);
 		setupAddButton();
-		updateCloseSearchIcon(false);
 	}
 
 	private List<PoiType> getSelectedSubCategories() {
