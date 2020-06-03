@@ -62,8 +62,8 @@ public class SearchUICoreTest {
 		Map<String, String> enPhrases = new HashMap<>();
 		Map<String, String> phrases = new HashMap<>();
 		try {
-			enPhrases = Algorithms.parseStringsXml(new File("src/test/resources/en/phrases.xml"));
-			//phrases = Algorithms.parseStringsXml(new File("src/test/resources/ru/phrases.xml"));
+			enPhrases = Algorithms.parseStringsXml(new File("src/test/resources/phrases/en/phrases.xml"));
+			//phrases = Algorithms.parseStringsXml(new File("src/test/resources/phrases/ru/phrases.xml"));
 			phrases = enPhrases;
 		} catch (IOException e) {
 			e.printStackTrace();
