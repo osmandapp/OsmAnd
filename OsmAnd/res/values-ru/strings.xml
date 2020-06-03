@@ -3762,4 +3762,7 @@
     <string name="turn_screen_on_options_descr">Параметры включения экрана:</string>
     <string name="turn_screen_on_descr">Настройки включения экрана (убедитесь, что перед блокировкой устройства OsmAnd находится на переднем плане):</string>
     <string name="default_screen_timeout">Системная настройка отключения экрана</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Вы можете экспортировать или импортировать быстрые действия вместе с профилями.</string>
+    <string name="shared_string_delete_all_q">Удалить все\?</string>
+    <string name="delete_all_actions_message_q">Вы уверены, что хотите безвозвратно удалить %d быстрых действий\?</string>
 </resources>

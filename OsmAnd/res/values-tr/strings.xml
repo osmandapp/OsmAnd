@@ -3718,4 +3718,7 @@
 \nBir ay 43 829 dakikadır.</string>
     <string name="tiles_storage_descr">İndirilen döşemelerin nasıl saklanacağını seçin.</string>
     <string name="default_screen_timeout">Sistemin ekran zaman aşımı</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Uygulama profilleri ile hızlı eylemleri içe veya dışa aktarabilirsiniz.</string>
+    <string name="shared_string_delete_all_q">Hepsini sil\?</string>
+    <string name="delete_all_actions_message_q">%d hızlı eylemi geri döndürülemez bir şekilde silmek istediğinizden emin misiniz\?</string>
 </resources>
