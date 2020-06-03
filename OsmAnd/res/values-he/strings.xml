@@ -3771,4 +3771,7 @@
     <string name="keep_screen_off">להשאיר את המסך כבוי</string>
     <string name="screen_timeout_descr">מוגבל על ידי „%1$s”, אם פעיל.</string>
     <string name="default_screen_timeout">תפוגת שומר המסך של המערכת</string>
+    <string name="export_import_quick_actions_with_profiles_promo">ניתן לייצא או לייבא פעולות מהירות עם פרופילי יישומון.</string>
+    <string name="shared_string_delete_all_q">למחוק הכול\?</string>
+    <string name="delete_all_actions_message_q">למחוק %d פעולות מהירות באופן בלתי הפיך\?</string>
 </resources>
