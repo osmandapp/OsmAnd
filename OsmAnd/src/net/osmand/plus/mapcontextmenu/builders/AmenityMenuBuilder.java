@@ -58,11 +58,13 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
@@ -529,9 +531,16 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			if ("ele".equals(key)) {
 				try {
 					float distance = Float.parseFloat(vl);
-					vl = OsmAndFormatter.getFormattedDistance(distance, app, true, metricSystem);
-					Map<MetricsConstants, String> distanceData = OsmAndFormatter.getDistanceData(app, distance);
-					collapsableView = getDistanceCollapsableView(new LinkedHashSet<>(distanceData.values()));
+					vl = OsmAndFormatter.getFormattedAlt(distance, app, metricSystem);
+					String collapsibleVal;
+					if (metricSystem == MetricsConstants.MILES_AND_FEET || metricSystem == MetricsConstants.MILES_AND_YARDS) {
+						collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MetricsConstants.KILOMETERS_AND_METERS);
+					} else {
+						collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MetricsConstants.MILES_AND_FEET);
+					}
+					Set<String> elevationData = new HashSet<>();
+					elevationData.add(collapsibleVal);
+					collapsableView = getDistanceCollapsableView(elevationData);
 					collapsable = true;
 				} catch (NumberFormatException ex) {
 					LOG.error(ex);
