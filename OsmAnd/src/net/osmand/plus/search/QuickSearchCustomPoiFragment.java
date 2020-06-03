@@ -35,8 +35,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
-import net.osmand.ResultMatcher;
-import net.osmand.data.Amenity;
+import net.osmand.OsmAndCollator;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
@@ -48,12 +47,12 @@ import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.SearchUICore;
-import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -107,9 +106,6 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 		app = getMyApplication();
 		uiUtilities = app.getUIUtilities();
 		searchUICore = app.getSearchUICore().getCore();
-		SearchSettings settings = searchUICore.getSearchSettings()
-				.setSearchTypes(ObjectType.POI, ObjectType.POI_TYPE);
-		searchUICore.updateSettings(settings);
 		this.nightMode = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME;
 		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		poiCategoryList = app.getPoiTypes().getCategories(false);
@@ -329,62 +325,42 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 	}
 
 	private void startSearchSubCategories(String text) {
-		searchUICore.search(text, false, new ResultMatcher<SearchResult>() {
+		try {
+			SearchUICore.SearchResultCollection res = searchUICore.shallowSearch(SearchCoreFactory.SearchAmenityTypesAPI.class, text, null);
 			Set<PoiType> results = new HashSet<>();
-
-			@Override
-			public boolean publish(final SearchResult searchResult) {
-				switch (searchResult.objectType) {
-					case POI_TYPE:
-						Object poiObject = searchResult.object;
-						if (poiObject instanceof PoiType) {
-							PoiType poiType = (PoiType) poiObject;
-							if (poiType.getParentType() == null) {
-								results.add(poiType);
-							}
-						} else if (poiObject instanceof PoiCategory) {
-							results.addAll(((PoiCategory) poiObject).getPoiTypes());
-						}
-						break;
-					case POI:
-						if (searchResult.object instanceof Amenity) {
-							PoiType poiType = app.getPoiTypes().getPoiTypeByKey(((Amenity) searchResult.object).getSubType());
-							if (poiType != null) {
-								results.add(poiType);
-							}
-						}
-						break;
-					case SEARCH_FINISHED:
-						app.runInUIThread(new Runnable() {
-							@Override
-							public void run() {
-								List<PoiType> poiTypes = new ArrayList<>(results);
-								Collections.sort(poiTypes, new Comparator<PoiType>() {
-									@Override
-									public int compare(PoiType poiType, PoiType t1) {
-										return poiType.getTranslation().compareTo(t1.getTranslation());
-									}
-								});
-								listView.setAdapter(subCategoriesAdapter);
-								subCategoriesAdapter.clear();
-								subCategoriesAdapter.addAll(poiTypes);
-								subCategoriesAdapter.notifyDataSetChanged();
-								removeAllHeaders();
-								listView.addHeaderView(headerShadow, null, false);
-								setupAddButton();
-								updateCloseSearchIcon(false);
-							}
-						});
-						break;
+			for (SearchResult result : res.getCurrentSearchResults()) {
+				Object poiObject = result.object;
+				if (poiObject instanceof PoiType) {
+					PoiType poiType = (PoiType) poiObject;
+					if (!poiType.isAdditional()) {
+						results.add(poiType);
+					}
+				} else if (poiObject instanceof PoiCategory) {
+					results.addAll(((PoiCategory) poiObject).getPoiTypes());
 				}
-				return true;
 			}
+			showSearchResults(new ArrayList<>(results));
+		} catch (IOException e) {
+			app.showToastMessage(e.getMessage());
+			updateCloseSearchIcon(false);
+		}
+	}
 
+	private void showSearchResults(List<PoiType> poiTypes) {
+		Collections.sort(poiTypes, new Comparator<PoiType>() {
 			@Override
-			public boolean isCancelled() {
-				return false;
+			public int compare(PoiType poiType, PoiType t1) {
+				return OsmAndCollator.primaryCollator().compare(poiType.getTranslation(), t1.getTranslation());
 			}
 		});
+		listView.setAdapter(subCategoriesAdapter);
+		subCategoriesAdapter.clear();
+		subCategoriesAdapter.addAll(poiTypes);
+		subCategoriesAdapter.notifyDataSetChanged();
+		removeAllHeaders();
+		listView.addHeaderView(headerShadow, null, false);
+		setupAddButton();
+		updateCloseSearchIcon(false);
 	}
 
 	private Set<PoiType> getSelectedSubCategories() {
