@@ -11,7 +11,6 @@
   },
   "phrase": "Calle de las eras 5, Navacerrada",
   "results": [
-<<<<<<< HEAD
     "5, Calle de las Eras (Uranización Los Corales), Navacerrada"
   ],
   "extra-results": [
@@ -74,45 +73,7 @@
 	"Calle Dos Castillas, Puerto de Navacerrada",
 	"Travesía de las Huertas, Navacerrada",
 	"Vereda de las Encinillas, Navacerrada",
-	"Centro Municipal de Mayores «Navacerrada»",
-=======
-    "5, Calle de las Eras (Uranización Los Corales), Navacerrada",
-    "5, Calle Navacerrada (Urb. Las Suertes), Las Suertes",
-    "50, Calle de Francisco Navacerrada, Salamanca",
-    "52, Calle de Francisco Navacerrada, Salamanca",
-    "53, Calle de Francisco Navacerrada, Salamanca",
-    "54, Calle de Francisco Navacerrada, Salamanca",
-    "55, Calle de Francisco Navacerrada, Salamanca",
-    "56, Calle de Francisco Navacerrada, Salamanca",
-    "57, Calle de Francisco Navacerrada, Salamanca",
-    "58, Calle de Francisco Navacerrada, Salamanca",
-    "59, Calle de Francisco Navacerrada, Salamanca",
-    "Calle del Puerto de Navacerrada, Las Nieves",
-    "Calle Puerto de Navacerrada, La Poveda",
-    "Calle del Embalse de Navacerrada, Villa de Vallecas",
-    "Calle del Puerto de Navacerrada, Puente de Vallecas",
-    "Calle de Francisco Navacerrada, Salamanca",
-    "Calle de Navacerrada, Moraleja de Enmedio",
-    "Calle Navacerrada (Urb. Las Suertes), Las Suertes",
-    "Calle Puerto de Navacerrada, Roman Candelas",
-    "Calle Navacerrada, Becerril de la Sierra",
-    "Carretera de Collado Villalba a Navacerrada, El Baillo y las Hojarascas",
-    "Calle Navacerrada (Cerceda), El Boalo",
-    "Calle Navacerrada (El Pedregal), Bustarviejo",
-    "Calle Navacerrada, Buitrago del Lozoya",
-    "Carretera de Colmenar Viejo a Navacerrada, Becerril de la Sierra",
-    "Carretera de Colmenar Viejo a Navacerrada, Manzanares el Real",
-    "Carretera de Collado Villalba a Navacerrada, Dehesa Boyal",
-    "Carretera de Collado Villalba a Navacerrada, Polideportivo Dehesa Boyal",
-    "Carretera de Navacerrada, Jazmines",
-    "Carretera de Colmenar Viejo a Navacerrada (Cerceda), El Boalo",
-    "Carretera de Collado Villalba a Navacerrada, Cerca de Cascarrilla",
-    "Carretera de Navacerrada, El Boalo",
-    "Carretera de Collado Villalba a Navacerrada, Collado Mediano",
-    "Camino de Navacerrada (Serranía de la Paloma), Collado Mediano",
-    "Camino de Los Molinos a Navacerrada, Collado Mediano",
-    "Carretera de Collado Villalba a Navacerrada, Navacerrada"
->>>>>>> e69e0d95cc... Added search test
+	"Centro Municipal de Mayores «Navacerrada»"
   ],
   "amenities": [
     {
