@@ -1977,11 +1977,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (enable) {
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
 					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-			setKeepScreenOn(true);
 		} else {
 			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-			setKeepScreenOn(forceKeepScreenOn);
 		}
+		setKeepScreenOn(forceKeepScreenOn);
 	}
 
 	@Override
@@ -1991,7 +1990,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void unlock() {
-		changeKeyguardFlags(true, false);
+		changeKeyguardFlags(true, true);
 	}
 
 	@Override

@@ -118,7 +118,7 @@ public class LockHelper implements SensorEventListener {
 
 	private void lock() {
 		releaseWakeLocks();
-		if (lockUIAdapter != null && !(useSystemScreenTimeout.get() && turnScreenOnPowerButton.get())) {
+		if (lockUIAdapter != null) {
 			lockUIAdapter.lock();
 		}
 	}
