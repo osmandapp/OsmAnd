@@ -327,7 +327,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 	private void startSearchSubCategories(String text) {
 		try {
 			SearchUICore.SearchResultCollection res = searchUICore.shallowSearch(SearchCoreFactory.SearchAmenityTypesAPI.class, text, null);
-			Set<PoiType> results = new HashSet<>();
+			List<PoiType> results = new ArrayList<>();
 			for (SearchResult result : res.getCurrentSearchResults()) {
 				Object poiObject = result.object;
 				if (poiObject instanceof PoiType) {
@@ -335,11 +335,9 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 					if (!poiType.isAdditional()) {
 						results.add(poiType);
 					}
-				} else if (poiObject instanceof PoiCategory) {
-					results.addAll(((PoiCategory) poiObject).getPoiTypes());
 				}
 			}
-			showSearchResults(new ArrayList<>(results));
+			showSearchResults(results);
 		} catch (IOException e) {
 			app.showToastMessage(e.getMessage());
 			updateCloseSearchIcon(false);
@@ -347,12 +345,6 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 	}
 
 	private void showSearchResults(List<PoiType> poiTypes) {
-		Collections.sort(poiTypes, new Comparator<PoiType>() {
-			@Override
-			public int compare(PoiType poiType, PoiType t1) {
-				return OsmAndCollator.primaryCollator().compare(poiType.getTranslation(), t1.getTranslation());
-			}
-		});
 		listView.setAdapter(subCategoriesAdapter);
 		subCategoriesAdapter.clear();
 		subCategoriesAdapter.addAll(poiTypes);
