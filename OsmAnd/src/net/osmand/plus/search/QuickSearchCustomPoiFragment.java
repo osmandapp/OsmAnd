@@ -338,7 +338,10 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 					case POI_TYPE:
 						Object poiObject = searchResult.object;
 						if (poiObject instanceof PoiType) {
-							results.add((PoiType) poiObject);
+							PoiType poiType = (PoiType) poiObject;
+							if (poiType.getParentType() == null) {
+								results.add(poiType);
+							}
 						} else if (poiObject instanceof PoiCategory) {
 							results.addAll(((PoiCategory) poiObject).getPoiTypes());
 						}
@@ -355,9 +358,16 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 						app.runInUIThread(new Runnable() {
 							@Override
 							public void run() {
+								List<PoiType> poiTypes = new ArrayList<>(results);
+								Collections.sort(poiTypes, new Comparator<PoiType>() {
+									@Override
+									public int compare(PoiType poiType, PoiType t1) {
+										return poiType.getTranslation().compareTo(t1.getTranslation());
+									}
+								});
 								listView.setAdapter(subCategoriesAdapter);
 								subCategoriesAdapter.clear();
-								subCategoriesAdapter.addAll(results);
+								subCategoriesAdapter.addAll(poiTypes);
 								subCategoriesAdapter.notifyDataSetChanged();
 								removeAllHeaders();
 								listView.addHeaderView(headerShadow, null, false);
@@ -576,7 +586,10 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 				if (filters == null || filters.size() > 1) {
 					name = category.getTranslation();
 				} else {
-					name = category.getPoiTypeByKeyName(filters.iterator().next()).getTranslation();
+					PoiType poiType = category.getPoiTypeByKeyName(filters.iterator().next());
+					if (poiType != null) {
+						name = poiType.getTranslation();
+					}
 				}
 				if (!Algorithms.isEmpty(name)) {
 					filter.setName(Algorithms.capitalizeFirstLetter(name));
