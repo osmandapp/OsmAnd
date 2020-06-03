@@ -1992,7 +1992,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void unlock() {
-		changeKeyguardFlags(true, false);
+		changeKeyguardFlags(true, true);
 	}
 
 	@Override
