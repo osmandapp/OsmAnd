@@ -22,7 +22,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.mapcontextmenu.editors.IconCategoriesAdapter;
+import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
@@ -124,12 +124,13 @@ public class VehicleParametersNumericBottomSheet extends BasePreferenceBottomShe
 	private BaseBottomSheetItem createComboView(OsmandApplication app, final SizePreference preference) {
 		View mainView = UiUtilities.getMaterialInflater(app, nightMode)
 				.inflate(R.layout.bottom_sheet_item_edit_with_recyclerview, null);
-		final IconCategoriesAdapter adapter = new IconCategoriesAdapter(app);
+		final HorizontalSelectionAdapter adapter = new HorizontalSelectionAdapter(app, nightMode);
 		final TextView metric = mainView.findViewById(R.id.metric);
 		metric.setText(app.getString(preference.getAssets().getMetricRes()));
 		final TextView text = mainView.findViewById(R.id.text_edit);
 		currentValue = Float.parseFloat(preference.getValue());
 		selectedItem = preference.getEntryFromValue(preference.getValue());
+
 		String currentValueStr = currentValue == 0.0f ? "" : String.valueOf(currentValue + 0.01f);
 		text.setText(currentValueStr);
 		text.addTextChangedListener(new TextWatcher() {
@@ -149,30 +150,25 @@ public class VehicleParametersNumericBottomSheet extends BasePreferenceBottomShe
 					currentValue = 0.0f;
 				}
 				selectedItem = preference.getEntryFromValue(String.valueOf(currentValue));
-				adapter.notifyDataSetChanged();
+				adapter.setSelectedItem(selectedItem);
 			}
 		});
 
 		adapter.setItems(Arrays.asList(preference.getEntries()));
-		adapter.setListenerCategory(new IconCategoriesAdapter.IconCategoriesAdapterListener() {
+		adapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
 			@Override
-			public void onItemClick(String item) {
+			public void onItemSelected(String item) {
 				selectedItem = item;
 				currentValue = preference.getValueFromEntries(selectedItem);
 				String currentValueStr = currentValue == 0.0f ? "" : String.valueOf(currentValue + 0.01f);
 				text.setText(currentValueStr);
 				adapter.notifyDataSetChanged();
 			}
-
-			@Override
-			public String getSelectedItem() {
-				return selectedItem;
-			}
 		});
 
 		RecyclerView recyclerView = mainView.findViewById(R.id.recycler_view);
 		recyclerView.setAdapter(adapter);
-		adapter.notifyDataSetChanged();
+		adapter.setSelectedItem(selectedItem);
 		return new BaseBottomSheetItem.Builder()
 				.setCustomView(mainView)
 				.create();
@@ -189,7 +185,7 @@ public class VehicleParametersNumericBottomSheet extends BasePreferenceBottomShe
 		if (target instanceof OnConfirmPreferenceChange) {
 
 			((OnConfirmPreferenceChange) target).onConfirmPreferenceChange(
-					getPreference().getKey(), String.valueOf(currentValue), ApplyQueryType.BOTTOM_SHEET);
+					getPreference().getKey(), String.valueOf(currentValue), ApplyQueryType.SNACK_BAR);
 		}
 		dismiss();
 	}

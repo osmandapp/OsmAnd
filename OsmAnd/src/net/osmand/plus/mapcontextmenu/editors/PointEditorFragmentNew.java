@@ -45,6 +45,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.util.Algorithms;
 
@@ -461,26 +462,21 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					e.printStackTrace();
 				}
 			}
-			IconCategoriesAdapter iconCategoriesAdapter = new IconCategoriesAdapter(app);
-			iconCategoriesAdapter.setItems(new ArrayList<>(iconCategories.keySet()));
-			iconCategoriesAdapter.setListenerCategory(new IconCategoriesAdapter.IconCategoriesAdapterListener() {
+			HorizontalSelectionAdapter horizontalSelectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
+			horizontalSelectionAdapter.setItems(new ArrayList<>(iconCategories.keySet()));
+			horizontalSelectionAdapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
 				@Override
-				public void onItemClick(String item) {
+				public void onItemSelected(String item) {
 					selectedIconCategory = item;
 					createIconForCategory();
 					updateIconSelector(selectedIcon, PointEditorFragmentNew.this.view);
 				}
-
-				@Override
-				public String getSelectedItem() {
-					return selectedIconCategory;
-				}
 			});
 			RecyclerView iconCategoriesRecyclerView = view.findViewById(R.id.group_name_recycler_view);
-			iconCategoriesRecyclerView.setAdapter(iconCategoriesAdapter);
+			iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
 			iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
-			iconCategoriesAdapter.notifyDataSetChanged();
-			iconCategoriesRecyclerView.smoothScrollToPosition(iconCategoriesAdapter.getItemPosition(selectedIconCategory));
+			horizontalSelectionAdapter.notifyDataSetChanged();
+			iconCategoriesRecyclerView.smoothScrollToPosition(horizontalSelectionAdapter.getItemPosition(selectedIconCategory));
 			for (String name : iconNameList) {
 				selectIcon.addView(createIconItemView(name, selectIcon), new FlowLayout.LayoutParams(0, 0));
 			}

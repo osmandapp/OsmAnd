@@ -150,7 +150,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		if (preference instanceof SizePreference) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				VehicleParametersNumericBottomSheet.showInstance(getFragmentManager(), preference.getKey(), this, false, getSelectedAppMode());
+				VehicleParametersNumericBottomSheet.showInstance(fragmentManager, preference.getKey(),
+						this, false, getSelectedAppMode());
 			}
 		} else {
 			super.onDisplayPreferenceDialog(preference);
