@@ -211,7 +211,7 @@ public class SearchUICoreTest {
 					}
 				}
 				Assert.assertEquals(expected, present);
-				if (i >= results.size()) {
+				if (i >= result.size()) {
 					break;
 				}
 			}
