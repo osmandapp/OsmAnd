@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="screen_timeout">Screen timeout</string>
     <string name="delete_all_actions_message_q">Are you sure you want to irrevocably delete %d quick actions?</string>
     <string name="shared_string_delete_all_q">Delete all?</string>
     <string name="export_import_quick_actions_with_profiles_promo">You can Export or Import quick actions with application profiles.</string>
@@ -42,7 +43,7 @@
     <string name="turn_screen_on_navigation_instructions">Navigation instructions</string>
     <string name="turn_screen_on_navigation_instructions_descr">Each navigation instruction will turn the screen on.</string>
     <string name="turn_screen_on_descr">Select screen wake-up options (make sure OsmAnd is in the foreground when the device is being locked):</string>
-    <string name="turn_screen_on_options_descr">Screen wake-up options:</string>
+    <!--string name="turn_screen_on_options_descr">Screen wake-up options:</string-->
     <string name="system_screen_timeout">Use system screen timeout</string>
     <string name="system_screen_timeout_descr">Turns the screen off after the system\'s screen timeout.</string>
     <string name="screen_control">Screen control</string>
@@ -462,7 +463,7 @@
     <string name="analytics_pref_title">Analytics</string>
     <string name="turn_screen_on_info">Show map on the lock screen during navigation.</string>
     <string name="route_parameters_info">Settings for routing in the selected profile \"%1$s\".</string>
-    <string name="wake_time">Wake time</string>
+    <string name="wake_time">Custom screen timeout</string>
     <string name="units_and_formats">Units &amp; formats</string>
     <string name="map_look_descr">Map appearance</string>
     <string name="map_look">Map look</string>
