@@ -3758,4 +3758,7 @@
 \n一個月是43829分鐘。</string>
     <string name="tiles_storage_descr">選擇要如何儲存下載的圖磚。</string>
     <string name="default_screen_timeout">系統螢幕逾時</string>
+    <string name="export_import_quick_actions_with_profiles_promo">您可以使用應用程式設定檔匯出或匯入快速動作。</string>
+    <string name="shared_string_delete_all_q">刪除全部？</string>
+    <string name="delete_all_actions_message_q">您確定您想要刪除 %d 快速動作嗎？</string>
 </resources>
