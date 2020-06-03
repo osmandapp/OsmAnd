@@ -172,6 +172,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		headerShadow = inflater.inflate(R.layout.list_shadow_header, listView, false);
 		footerShadow = inflater.inflate(R.layout.list_shadow_footer, listView, false);
 		headerSelectAll = inflater.inflate(R.layout.select_all_switch_list_item, listView, false);
+		headerSelectAll.setVerticalScrollBarEnabled(false);
 		selectAllSwitch = headerSelectAll.findViewById(R.id.select_all);
 		selectAllSwitch.setChecked(selectAll);
 		selectAllSwitch.setOnClickListener(new View.OnClickListener() {
