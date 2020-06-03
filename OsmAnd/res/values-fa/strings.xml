@@ -3182,7 +3182,7 @@
     <string name="turn_screen_on_router">بیدارباش سر پیچ</string>
     <string name="turn_screen_on_time_descr">مدت روشن‌ماندن نمایشگر را تنظیم کنید.</string>
     <string name="turn_screen_on_sensor">استفاده از حسگر مجاورت</string>
-    <string name="turn_screen_on_sensor_descr">در هنگام ناوبری، دست خود را بر فراز نمایشگر تکان دهید تا نمایشگر روشن شود.</string>
+    <string name="turn_screen_on_sensor_descr">با تکان‌دادن دست خود بر فراز نمایشگر آن را روشن می‌کنید.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">سطح ۱</string>
     <string name="rendering_attr_highway_class_track_grade2_name">سطح ۲</string>
     <string name="rendering_attr_highway_class_track_grade3_name">سطح ۳</string>
@@ -3757,24 +3757,22 @@
     <string name="parking_positions">جاهای پارک</string>
     <string name="reset_deafult_order">بازنشانی ترتیب پیشفرض اقلام</string>
     <string name="gpx_parse_error">‏OsmAnd GPX قالب درستی ندارد. لطفاً برای بررسی بیشتر با گروه پشتیبانی تماس بگیرید.</string>
-    <string name="turn_screen_on_wake_time_descr">پس از بیدارباش، صفحه چقدر روشن بماند. اگر «%1$s» فعال باشد صفحه خاموش نخواهد شد.</string>
-    <string name="screen_timeout_descr">اگر گزینهٔ «%1$s» فعال باشد، زمان روشن‌ماندن صفحه به آن وابسته خواهد بود.</string>
+    <string name="turn_screen_on_wake_time_descr">زمان خاموشی صفحه پس از بیدارباش را انتخاب کنید. («%1$s» یعنی خاموش نشود)</string>
+    <string name="screen_timeout_descr">محدودشده به‌وسیلهٔ «%1$s»، اگر فعال باشد.</string>
     <string name="shared_string_always">همیشه</string>
     <string name="screen_control">کنترل صفحه</string>
-    <string name="system_screen_timeout_descr">فعال کنید تا صفحه پس از مدتی بی‌کارماندن خاموش شود. از زمان مشخص‌شده در تنظیمات دستگاه استفاده می‌شود.</string>
-    <string name="system_screen_timeout">زمان خاموشی صفحه</string>
-    <string name="turn_screen_on_options_descr">از این گزینه‌ها برای بیدارباش صفحه هنگامی که OsmAnd در پیش‌زمینه است استفاده کنید.</string>
-    <string name="turn_screen_on_descr">آن گزینه‌ها فقط زمانی کار می‌کنند که هنگام قفل‌شدن دستگاه، OsmAnd در پیش‌زمینه باشد.</string>
-    <string name="turn_screen_on_navigation_instructions_descr">چند ثانیه پیش از فرمان‌های ناوبری، صفحه به‌طور خودکار به‌اندازهٔ مدت‌زمانی که در گزینهٔ «زمان بیدارباش» مشخص شده، روشن می‌شود.
-\n
-\nفقط هنگام ناوبری کار می‌کند.</string>
+    <string name="system_screen_timeout_descr">هنگامی که زمان خاموشی صفحه مطابق تنظیمات دستگاه سر برسد، صفحه را خاموش می‌کند.</string>
+    <string name="system_screen_timeout">استفاده از زمان خاموشی صفحه در دستگاه</string>
+    <string name="turn_screen_on_options_descr">گزینه‌های بیدارباش صفحه:</string>
+    <string name="turn_screen_on_descr">گزینه‌های بیدارباش صفحه را انتخاب کنید (مطمئن شوید هنگام قفل‌کردن دستگاه، OsmAnd در پیش‌زمینه باشد):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">هر یک از فرمان‌های ناوبری، صفحه را روشن خواهد کرد.</string>
     <string name="turn_screen_on_navigation_instructions">فرمان‌های ناوبری</string>
-    <string name="turn_screen_on_power_button_descr">دکمهٔ خاموش/روشن دستگاه را فشار دهید تا صفحه در حالی که OsmAnd در پیش‌زمینه قرار دارد، روشن شود.</string>
+    <string name="turn_screen_on_power_button_descr">فشردن دکمهٔ خاموش/روشن دستگاه، صفحه را روشن می‌کند و OsmAnd را روی صفحهٔ قفل نمایش می‌دهد.</string>
     <string name="turn_screen_on_power_button">دکمهٔ خاموش/روشن</string>
     <string name="turn_screen_on_proximity_sensor">حسگر مجاورتی</string>
     <string name="keep_screen_on">صفحه را روشن نگه دار</string>
     <string name="keep_screen_off">صفحه را خاموش نگه دار</string>
-    <string name="mercator_projection"></string>
+    <string name="mercator_projection"/>
     <string name="one_image_per_tile">یک فایل تصویر برای هر کاشی</string>
     <string name="map_source_zoom_levels_descr">این پارامترها هنگام استفاده از منبع به‌عنوان نقشه یا رولایه/زیرلایه، بر نمایش آن اثر می‌گذارند. 
 \n
@@ -3794,4 +3792,8 @@
 \nیک هفته ۱۰ ۰۸۰ دقیقه است.
 \nیک ماه ۴۳ ۸۲۹ دقیقه است.</string>
     <string name="tiles_storage_descr">شیوهٔ ذخیره‌سازی کاشی‌های دانلودشده را انتخاب کنید.</string>
+    <string name="default_screen_timeout">زمان خاموشی صفحه در دستگاه</string>
+    <string name="export_import_quick_actions_with_profiles_promo">می‌توانید کنش‌های فوری را همراه با پروفایل‌های برنامه برون‌برد یا درون‌برد کنید.</string>
+    <string name="shared_string_delete_all_q">همه حذف شود؟</string>
+    <string name="delete_all_actions_message_q">آیا %d کنش فوری را حذف می‌کنید؟ (برگشت‌ناپذیر است)</string>
 </resources>
