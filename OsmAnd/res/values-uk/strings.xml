@@ -1025,7 +1025,7 @@
     <string name="av_camera_focus_edof">Збільшення глибини різкості</string>
     <string name="av_camera_focus_infinity">Фокус встановлюється на нескінченність</string>
     <string name="av_photo_play_sound">Відтворювати звук затвору камери</string>
-    <string name="av_photo_play_sound_descr">Під час знімкування відтворювати звук.</string>
+    <string name="av_photo_play_sound_descr">Програвання звуку затвора камери.</string>
     <string name="osmand_net_previously_installed">Всі локальні дані зі старого встановленого застосунку будуть підтримуватися новим, але Закладки потрібно експортувати зі старого застосунку та імпортувати в новий.</string>
     <string name="speak_speed_limit">Обмеження швидкості</string>
     <string name="speak_cameras">Камери детектування швидкості</string>
@@ -1076,7 +1076,7 @@
     <string name="gpx_file_is_empty">Порожній GPX-файл</string>
     <string name="shared_string_tracks">Треки</string>
     <string name="shared_string_my_favorites">Закладки</string>
-    <string name="shared_string_my_places">Місця</string>
+    <string name="shared_string_my_places">Місця та треки</string>
     <string name="rendering_value_pink_name">рожевий</string>
     <string name="rendering_value_brown_name">Коричневий</string>
     <string name="osmo_edit_color">Колір</string>
@@ -1105,7 +1105,7 @@
     <string name="rendering_attr_hideWoodScrubs_name">Дерева та кущі</string>
     <string name="rendering_attr_buildings15zoom_name">Будинки на масштабі 15</string>
     <string name="rendering_attr_moreDetailed_name">Докладніше</string>
-    <string name="rendering_attr_lessDetailed_name">Спрощено</string>
+    <string name="rendering_attr_lessDetailed_name">Спрощеніше</string>
     <string name="rendering_attr_hideAccess_name">Обмеження доступу</string>
     <string name="rendering_attr_showAccess_name">Показати обмеження доступу та збір</string>
     <string name="rendering_attr_showSurfaceGrade_name">Показувати якість доріг</string>
@@ -1514,7 +1514,7 @@
     <string name="shared_string_go">Вирушаємо</string>
     <string name="shared_string_do_not_use">Не використовувати</string>
     <string name="shared_string_address">Адреса</string>
-    <string name="plugin_touringview_descr">Задіювання цього виду змінює стиль мапи OsmAnd на „Туристичну мапу“ – особливий стиль з докладною деталізацією для мандрівників та професіональних водіїв. 
+    <string name="plugin_touringview_descr">Задіювання цього вигляду змінює стиль мапи OsmAnd на „Туристичну мапу“ – особливий стиль з докладною деталізацією для мандрівників та професіональних водіїв. 
 \n 
 \nЦей режим надає, на будь-якому масштабі, найбільшу кількість відомостей потрібну для подорожніх (дороги, путівці, стежки та орієнтири). 
 \n 
@@ -1658,7 +1658,7 @@
     <string name="lang_mk">Македонська</string>
     <string name="lang_fy">Західнофризька</string>
     <string name="lang_als">Албанська (Тоскська)</string>
-    <string name="read_more">Детальніше</string>
+    <string name="read_more">Докладніше</string>
     <string name="whats_new">Що нового у</string>
     <string name="shared_string_upload">Вивантажити</string>
     <string name="osm_edit_created_poi">OSM POI створено</string>
@@ -1855,7 +1855,7 @@
     <string name="shared_string_status">Стан</string>
     <string name="shared_string_save_changes">Зберегти зміни</string>
     <string name="shared_string_email_address">Адреса електронної пошти</string>
-    <string name="shared_string_read_more">Детальніше</string>
+    <string name="shared_string_read_more">Докладніше</string>
     <string name="clear_updates_proposition_message">Завантажені поновлення можна вилучити і повернутися до початкової редакції мапи</string>
     <string name="rec_split">Розбиття на кліпи</string>
     <string name="rec_split_title">Використовувати розбиття на кліпи</string>
@@ -2706,7 +2706,7 @@
     <string name="show_images">Показати зображення</string>
     <string name="off_road_render_descr">Для позашляхового руху, заснованого на стилі \"Topo\", та для використання із зеленими супутниковими зображеннями в якості підкладки. Зменшення товщини основної дороги, збільшення товщини доріжок, путівців, велосипедних та інших маршрутів.</string>
     <string name="light_rs_render_descr">Простий і контрастний стиль для автомобільної навігації. Зручний для очей в нічному режимі. Ключові особливості: горизонталі, контрастні помаранчеві дороги, менш відволікаючі другорядні об\'єкти мапи.</string>
-    <string name="topo_render_descr">Для походів і катання на природі. Читання на відкритому повітрі. Контрастні дороги та природні об’єкти, різні типи маршрутів, розширені варіанти контуру, додаткові деталі. Регулювання цілісності поверхні відрізняє якість дороги. Нічного режиму немає.</string>
+    <string name="topo_render_descr">Для походів і катання на природі. Читання на відкритому повітрі. Контрастні дороги та природні об’єкти, різні типи маршрутів, розширені варіанти контуру, більше подробиць. Регулювання цілісності поверхні відрізняє якість дороги. Нічного режиму немає.</string>
     <string name="mapnik_render_descr">Старий усталений стиль \"Mapnik\". Подібні кольори до \'Mapnik\'.</string>
     <string name="touring_view_render_descr">Туристичний стиль з високим контрастом і щонайбільшою деталізацією. Включає всі усталені параметри стилю OsmAnd, відображаючи при цьому найдетальніші відомості, зокрема дороги, путі та інші шляхи подорожі. Чіткий \"туристичний атлас\" відрізняє типи доріг. Підходить для денного, нічного та зовнішнього використання.</string>
     <string name="default_render_descr">Стиль загального призначення. Густі міста показані чисто. Особливості горизонталей, маршрутів, якості поверхні, обмеження доступу, дорожні щити, надання доріжок за шкалою SAC, пункти біловодних видів спорту.</string>
@@ -3269,7 +3269,7 @@
     <string name="pref_selected_by_default_for_profiles">Це налаштування вибране як усталене для профілів: %s</string>
     <string name="turn_screen_on_info">Показати мапу на екрані блокування під час навігації.</string>
     <string name="route_parameters_info">Налаштування для маршрутизації у вибраному профілі: %1$s.</string>
-    <string name="wake_time">Час пробудження</string>
+    <string name="wake_time">Час очікування екрана</string>
     <string name="screen_alerts_descr">Попередження відображаються внизу зліва під час навігації.</string>
     <string name="language_and_output">Мова та вивід</string>
     <string name="osmand_settings_descr">Впливає на весь застосунок</string>
@@ -3342,16 +3342,16 @@
 \n 
 \n • Виправлення нічного режиму 
 \n 
-\n • Виправлено кілька проблем з маршрутизацією по всьому світу 
+\n • Виправлено кілька помилок з маршрутизацією по всьому світу 
 \n 
-\n • Оновлена основна мапа з детальнішою дорожньою мережею 
+\n • Оновлена основна мапа з докладнішою дорожньою мережею 
 \n 
 \n • Виправлено затоплені території по всьому світу 
 \n 
-\n • Лижні маршрути: Додано профіль висоти та складність маршруту до деталей маршруту 
+\n • Лижні маршрути: Додано профіль висоти та складність маршруту до подробиць маршруту 
 \n 
-\n • Інші виправлення 
-\n 
+\n • Інші виправлення
+\n
 \n</string>
     <string name="apply_preference_to_all_profiles">Цю зміну можна застосувати до всіх або лише до виділеного профілю.</string>
     <string name="shared_preference">Спільний</string>
@@ -3403,7 +3403,7 @@
     <string name="personal_category_name">Особистий</string>
     <string name="shared_string_downloading_formatted">Завантаження %s</string>
     <string name="rendering_value_thick_name">Товсто</string>
-    <string name="desert_render_descr">Для пустель та інших малонаселених ділянок. Більше докладностей.</string>
+    <string name="desert_render_descr">Для пустель та інших малонаселених ділянок. Докладніше.</string>
     <string name="select_navigation_icon">Значок положення під час руху</string>
     <string name="select_map_icon">Позиція значка в спокої</string>
     <string name="delete_profiles_descr">Натиснення \"Застосувати\" видалить профілі назавжди.</string>
@@ -3447,7 +3447,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок відображається під час навігації чи переміщення.</string>
     <string name="select_map_icon_descr">Значок показано в спокої.</string>
-    <string name="logcat_buffer_descr">Перевіряти та обмінюватися докладними журналами програми</string>
+    <string name="logcat_buffer_descr">Перевіряти та обмінюватися докладними журналами застосунку</string>
     <string name="search_offline_geo_error">Не вдалося розібрати метод \'%s\'.</string>
     <string name="permission_is_required">Для використання цього параметра потрібен дозвіл.</string>
     <string name="monitoring_min_speed_descr">Це низькошвидкісний відсічний фільтр, щоб не записувати точки нижче певної швидкості. Це може призвести до плавнішого вигляду записаних треків при перегляді на мапі.</string>
@@ -3719,7 +3719,7 @@
     <string name="shared_string_add_profile">Додати профіль</string>
     <string name="change_application_profile">Змінити профіль програми</string>
     <string name="profiles_for_action_not_found">Не вдалося знайти жодного профілю.</string>
-    <string name="index_item_world_basemap_detailed">Оглядова карта світу (детальна)</string>
+    <string name="index_item_world_basemap_detailed">Всесвітня оглядова мапа (докладна)</string>
     <string name="unsupported_type_error">Непідтримуваний тип</string>
     <string name="gpx_parse_error">OsmAnd GPX недостатньо сформований. Зверніться до служби підтримки для подальшого дослідження.</string>
     <string name="shared_string_always">Завжди</string>
@@ -3738,7 +3738,7 @@
     <string name="turn_screen_on_wake_time_descr">Час очікування екрану після увімкнення. («%1$s» вимикає вимкнення екрану.)</string>
     <string name="keep_screen_on">Тримати екран увімкненим</string>
     <string name="keep_screen_off">Тримати екран вимкненим</string>
-    <string name="screen_timeout_descr">Обмежено \"%1$s\", якщо ввімкнено.</string>
+    <string name="screen_timeout_descr">Використовується, тільки якщо \"%1$s\" вимкнено.</string>
     <string name="pseudo_mercator_projection">Псевдопроєкція Меркатора</string>
     <string name="one_image_per_tile">Один файл зображення на плитку</string>
     <string name="sqlite_db_file">Файл SQLiteDB</string>
@@ -3761,4 +3761,8 @@
 \nОдин місяць - 43 829 хвилин.</string>
     <string name="tiles_storage_descr">Виберіть спосіб зберігання завантажених плиток.</string>
     <string name="default_screen_timeout">Системний час очікування екрану</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Ви можете експортувати або імпортувати швидкі дії з профілями застосунку.</string>
+    <string name="shared_string_delete_all_q">Видалити все\?</string>
+    <string name="delete_all_actions_message_q">Ви дійсно бажаєте безповоротно видалити %d швидких дій\?</string>
+    <string name="screen_timeout">Час очікування екрана</string>
 </resources>
