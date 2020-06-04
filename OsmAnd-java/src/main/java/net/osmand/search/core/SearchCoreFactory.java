@@ -746,7 +746,8 @@ public class SearchCoreFactory {
 				}
 				
 			} else {
-				Map<AbstractPoiType, List<String>> poiTypes = getPoiTypeResults(nm, true);
+				boolean includeAdditional = !phrase.hasMoreThanOneUnknownSearchWord();
+				Map<AbstractPoiType, List<String>> poiTypes = getPoiTypeResults(nm, includeAdditional);
 				for (Entry<AbstractPoiType, List<String>> pt : poiTypes.entrySet()) {
 					boolean match = !phrase.isFirstUnknownSearchWordComplete();
 					if (!match) {

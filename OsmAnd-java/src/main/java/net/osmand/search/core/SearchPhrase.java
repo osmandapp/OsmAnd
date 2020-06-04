@@ -202,7 +202,7 @@ public class SearchPhrase {
 		sp.words = foundWords;
 		sp.fullTextSearchPhrase = fullText;
 		sp.unknownSearchPhrase = textToSearch;
-		
+		sp.lastUnknownSearchWordComplete = isTextComplete(fullText) ;
 		if (!reg.matcher(textToSearch).find()) {
 			sp.firstUnknownSearchWord = sp.unknownSearchPhrase.trim();
 		} else {
@@ -211,7 +211,9 @@ public class SearchPhrase {
 			boolean first = true;
 			for (int i = 0; i < ws.length ; i++) {
 				String wd = ws[i].trim();
-				if (wd.length() > 0 && !conjunctions.contains(wd.toLowerCase())) {
+				boolean conjunction = conjunctions.contains(wd.toLowerCase());
+				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
+				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
 						sp.firstUnknownSearchWord = wd;
 						first = false;
@@ -221,7 +223,7 @@ public class SearchPhrase {
 				}
 			}
 		}
-		sp.lastUnknownSearchWordComplete = isTextComplete(fullText) ;
+		
 		return sp;
 	}
 	

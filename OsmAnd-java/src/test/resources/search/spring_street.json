@@ -12,9 +12,6 @@
   "phrase": "spring street",
   "results": [
   	"Spring (Natural) [[1, POI_TYPE, 1.000, 0.00 km]]",
-	"Spring (Spring / Natural) [[1, POI_TYPE, 1.000, 0.00 km]]",
-	"Spring (Ice rink / Sport) [[1, POI_TYPE, 1.000, 0.00 km]]",
-	"Spring (Bridge / Transport construction) [[1, POI_TYPE, 1.000, 0.00 km]]",
 	"Spring Street, South Nyack [[2, STREET, 3.000, 10.57 km]]",
 	"Spring Street, Tomkins Cove [[2, STREET, 3.000, 16.77 km]]",
 	"Spring Street, Southfields [[2, STREET, 3.000, 18.10 km]]",
