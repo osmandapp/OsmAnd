@@ -1631,4 +1631,10 @@
     <string name="poi_access_motorcycle">مدخل دراجات نارية</string>
     <string name="poi_access_disabled">مدخل معاقين</string>
     <string name="poi_cash_withdrawal_bank_card">سحب نقدي</string>
+    <string name="poi_access_motorhome">عربة منزل متنقل</string>
+    <string name="poi_access_caravan">مدخل منازل متنقلة</string>
+    <string name="poi_snowmobile_filter">مدخل دراجة جليد</string>
+    <string name="poi_socket_schuko_output_filter">مخرج Schuko</string>
+    <string name="poi_socket_cee_blue_output_filter">مخرج CEE أزرق</string>
+    <string name="poi_socket_type3_output_filter">مخرج نوع 3</string>
 </resources>
