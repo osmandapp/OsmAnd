@@ -3622,7 +3622,7 @@
 \n 
 \nМожно отключить неиспользуемые плагины, чтобы скрыть их элементы управления. %1$s.</string>
     <string name="ui_customization_short_descr">Элементы панели, контекстное меню</string>
-    <string name="shared_string_drawer">Панель</string>
+    <string name="shared_string_drawer">Боковое меню</string>
     <string name="divider_descr">Элементы ниже разделённые делителем.</string>
     <string name="shared_string_items">Элементы</string>
     <string name="ui_customization">Настройка интерфейса</string>
