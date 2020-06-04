@@ -121,7 +121,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public void refreshFilterOrders() {
 		PoiFiltersHelper filtersHelper = app.getPoiFilters();
-		core.setFilterOrders(filtersHelper.getPoiFilterOrders(true));
+		core.setActivePoiFiltersByOrder(filtersHelper.getPoiFilterOrders(true));
 	}
 
 	public void setRepositoriesForSearchUICore(final OsmandApplication app) {
@@ -351,7 +351,7 @@ public class QuickSearchHelper implements ResourceListener {
 		public boolean search(SearchPhrase phrase, SearchResultMatcher matcher) throws IOException {
 			double lat = phrase.getSettings().getOriginalLocation().getLatitude();
 			double lon = phrase.getSettings().getOriginalLocation().getLongitude();
-			String text = phrase.getRawUnknownSearchPhrase();
+			String text = phrase.getFullSearchPhrase();
 			filter.setFilterByName(text);
 			publishAmenities(phrase, matcher, filter.initializeNewSearch(lat, lon,
 					-1, null, phrase.getRadiusLevel() + 3));

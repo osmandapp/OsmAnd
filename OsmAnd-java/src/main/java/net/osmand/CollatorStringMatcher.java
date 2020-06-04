@@ -17,12 +17,17 @@ public class CollatorStringMatcher implements StringMatcher {
 	private final String part;
 	
 	public static enum StringMatcherMode {
+		// tests only first word as base starts with part
 		CHECK_ONLY_STARTS_WITH,
+		// tests all words (split by space) and one of word should start with a given part
 		CHECK_STARTS_FROM_SPACE,
+		// tests all words except first (split by space) and one of word should start with a given part
 		CHECK_STARTS_FROM_SPACE_NOT_BEGINNING,
+		// tests all words (split by space) and one of word should be equal to part
 		CHECK_EQUALS_FROM_SPACE,
+		// simple collator contains in any part of the base		
 		CHECK_CONTAINS,
-		CHECK_ONLY_STARTS_WITH_TRIM,
+		// simple collator equals
 		CHECK_EQUALS,
 	}
 
@@ -42,22 +47,20 @@ public class CollatorStringMatcher implements StringMatcher {
 	}
 	
 	
-	public static boolean cmatches(Collator collator, String base, String part, StringMatcherMode mode){
+	public static boolean cmatches(Collator collator, String fullName, String part, StringMatcherMode mode){
 		switch (mode) {
 		case CHECK_CONTAINS:
-			return ccontains(collator, base, part); 
+			return ccontains(collator, fullName, part); 
 		case CHECK_EQUALS_FROM_SPACE:
-			return cstartsWith(collator, base, part, true, true, true, false);
+			return cstartsWith(collator, fullName, part, true, true, true);
 		case CHECK_STARTS_FROM_SPACE:
-			return cstartsWith(collator, base, part, true, true, false, false);
+			return cstartsWith(collator, fullName, part, true, true, false);
 		case CHECK_STARTS_FROM_SPACE_NOT_BEGINNING:
-			return cstartsWith(collator, base, part, false, true, false, false);
+			return cstartsWith(collator, fullName, part, false, true, false);
 		case CHECK_ONLY_STARTS_WITH:
-			return cstartsWith(collator, base, part, true, false, false, false);
-		case CHECK_ONLY_STARTS_WITH_TRIM:
-			return cstartsWith(collator, base, part, true, false, false, true);
+			return cstartsWith(collator, fullName, part, true, false, false);
 		case CHECK_EQUALS:
-			return cstartsWith(collator, base, part, false, false, true, false);
+			return cstartsWith(collator, fullName, part, false, false, true);
 		}
 		return false;
 	}
@@ -116,21 +119,14 @@ public class CollatorStringMatcher implements StringMatcher {
 	 * Special check try to find as well in the middle of name
 	 * 
 	 * @param collator
-	 * @param searchInParam
+	 * @param fullText
 	 * @param theStart
-	 * @param trim - trim theStart to searchInParam length if searchInParam non empty
 	 * @return true if searchIn starts with token
 	 */
-	public static boolean cstartsWith(Collator collator, String searchInParam, String theStart, 
-			boolean checkBeginning, boolean checkSpaces, boolean equals, boolean trim) {
-		String searchIn = searchInParam.toLowerCase(Locale.getDefault());
-		if (trim && searchIn.length() > 0) {
-			searchIn += " ";
-		}
+	public static boolean cstartsWith(Collator collator, String fullText, String theStart, 
+			boolean checkBeginning, boolean checkSpaces, boolean equals) {
+		String searchIn = fullText.toLowerCase(Locale.getDefault());
 		int searchInLength = searchIn.length();
-		if (trim && searchInLength > 0 && theStart.length() > searchInLength) {
-			theStart = theStart.substring(0, searchInLength);
-		}
 		int startLength = theStart.length();
 		if (startLength == 0) {
 			return true;
