@@ -35,6 +35,7 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 @RunWith(Parameterized.class)
 public class SearchUICoreTest {
@@ -99,7 +100,20 @@ public class SearchUICoreTest {
 
 		BinaryMapIndexReaderTest reader = new BinaryMapIndexReaderTest();
 		JSONObject sourceJson = new JSONObject(sourceJsonText);
-		String phraseText = sourceJson.getString("phrase");
+		JSONArray phrasesJson = sourceJson.optJSONArray("phrases");
+		String singlePhrase = sourceJson.optString("phrase", null);
+		List<String> phrases = new ArrayList<>();
+		if (singlePhrase != null) {
+			phrases.add(singlePhrase);
+		}
+		if (phrasesJson != null) {
+			for (int i = 0; i < phrasesJson.length(); i++) {
+				String phrase = phrasesJson.optString(i);
+				if (phrase != null) {
+					phrases.add(phrase);
+				}
+			}
+		}
 		JSONObject settingsJson = sourceJson.getJSONObject("settings");
 		if (sourceJson.has("amenities")) {
 			JSONArray amenitiesArr = sourceJson.getJSONArray("amenities");
@@ -135,25 +149,24 @@ public class SearchUICoreTest {
 			reader.matchedCities = matchedCities;
 			reader.streetCities = streetCities;
 		}
-		List<String> results = new ArrayList<>();
+		List<List<String>> results = new ArrayList<>();
+		for (int i = 0; i < phrases.size(); i++) {
+			results.add(new ArrayList<String>());
+		}
 		if (sourceJson.has("results")) {
-			JSONArray resultsArr = sourceJson.getJSONArray("results");
-			for (int i = 0; i < resultsArr.length(); i++) {
-				results.add(resultsArr.getString(i));
-			}
+			parseResults(sourceJson, "results", results);
 		}
 		if (TEST_EXTRA_RESULTS && sourceJson.has("extra-results")) {
-			JSONArray resultsArr = sourceJson.getJSONArray("extra-results");
-			for (int i = 0; i < resultsArr.length(); i++) {
-				results.add(resultsArr.getString(i));
-			}
+			parseResults(sourceJson, "extra-results", results);
+		}
+
+		Assert.assertEquals(phrases.size(), results.size());
+		if (phrases.size() != results.size()) {
+			return;
 		}
 
 		SearchSettings s = SearchSettings.parseJSON(settingsJson);
 		s.setOfflineIndexes(Collections.singletonList(reader));
-
-		SearchPhrase phrase = new SearchPhrase(s, OsmAndCollator.primaryCollator());
-		phrase = phrase.generateNewPhrase(phraseText, s);
 
 		final SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
 		core.init();
@@ -169,30 +182,74 @@ public class SearchUICoreTest {
 				return false;
 			}
 		};
-		SearchResultMatcher matcher = new SearchResultMatcher(rm, phrase, 1, new AtomicInteger(1), -1);
-		core.searchInternal(phrase, matcher);
 
-		SearchResultCollection collection = new SearchResultCollection(phrase);
-		collection.addSearchResults(matcher.getRequestResults(), true, true);
-		List<SearchResult> searchResults = collection.getCurrentSearchResults();
-		int i = 0;
-		for (SearchResult result : searchResults) {
-			String expected = results.get(i++);
-			String present = result.toString();
-			if (!Algorithms.stringsEqual(expected, present)) {
-				System.out.println(String.format("Mismatch for '%s' != '%s' (%d, %.3f, %s). Result: ", expected, 
-						present, result.getFoundWordCount(), result.getUnknownPhraseMatchWeight(), result.objectType.toString()));
-				for (SearchResult r : searchResults) {
-//					System.out.println(String.format("\t\"%s\",", r.toString()));
-					System.out.println(String.format("\"%s\", (%d, %.3f, %s),", r.toString(), 
-							r.getFoundWordCount(), r.getUnknownPhraseMatchWeight(), r.objectType.toString()));
+		boolean simpleTest = true;
+		SearchPhrase emptyPhrase = SearchPhrase.emptyPhrase(s);
+		for (int k = 0; k < phrases.size(); k++) {
+			String text = phrases.get(k);
+			List<String> result = results.get(k);
+			SearchPhrase phrase = emptyPhrase.generateNewPhrase(text, s);
+			SearchResultMatcher matcher = new SearchResultMatcher(rm, phrase, 1, new AtomicInteger(1), -1);
+			core.searchInternal(phrase, matcher);
+
+			SearchResultCollection collection = new SearchResultCollection(phrase);
+			collection.addSearchResults(matcher.getRequestResults(), true, true);
+			List<SearchResult> searchResults = collection.getCurrentSearchResults();
+			int i = 0;
+			for (SearchResult res : searchResults) {
+				String expected = result.get(i++);
+				if (simpleTest && expected.indexOf('[') != -1) {
+					expected = expected.substring(0, expected.indexOf('[')).trim();
+				}
+//				String present = result.toString();
+				String present = formatResult(simpleTest, res, phrase);
+				if (!Algorithms.stringsEqual(expected, present)) {
+					System.out.println(String.format("Phrase: %s", phrase));
+					System.out.println(String.format("Mismatch for '%s' != '%s'. Result: ", expected, present));
+					for (SearchResult r : searchResults) {
+						System.out.println(String.format("\t\"%s\",", formatResult(false, r, phrase)));
+					}
+				}
+				Assert.assertEquals(expected, present);
+				if (i >= result.size()) {
+					break;
 				}
 			}
-			Assert.assertEquals(expected, present);
-			if (i >= results.size()) {
-				break;
+		}
+	}
+
+	private void parseResults(JSONObject sourceJson, String tag, List<List<String>> results) {
+		List<String> result = results.get(0);
+		JSONArray resultsArr = sourceJson.getJSONArray(tag);
+		boolean hasInnerArray = resultsArr.length() > 0 && resultsArr.optJSONArray(0) != null;
+		for (int i = 0; i < resultsArr.length(); i++) {
+			if (hasInnerArray) {
+				JSONArray innerArray = resultsArr.optJSONArray(i);
+				if (innerArray != null && results.size() > i) {
+					result = results.get(i);
+					for (int k = 0; k < innerArray.length(); k++) {
+						result.add(innerArray.getString(k));
+					}
+				}
+			} else {
+				result.add(resultsArr.getString(i));
 			}
 		}
+	}
+
+	private String formatResult(boolean simpleTest, SearchResult r, SearchPhrase phrase) {
+		if (simpleTest) {
+			return r.toString().trim();
+		}
+		double dist = 0;
+		if(r.location != null) {
+			dist = MapUtils.getDistance(r.location, phrase.getLastTokenLocation());
+		}
+		return String.format("%s [[%d, %s, %.3f, %.2f km]]", r.toString(), 
+				r.getFoundWordCount(), r.objectType.toString(),
+				r.getUnknownPhraseMatchWeight(),
+				dist / 1000
+				);
 	}
 
 	static class TestSearchTranslator implements MapPoiTypes.PoiTranslator {

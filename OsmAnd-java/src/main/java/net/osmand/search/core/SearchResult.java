@@ -16,35 +16,57 @@ import java.util.Collection;
 public class SearchResult {
 	// search phrase that makes search result valid 
 	public SearchPhrase requiredSearchPhrase;
+
+	// internal package fields (used for sorting)
+	public SearchResult parentSearchResult;
+	String wordsSpan ;
+	boolean firstUnknownWordMatches;
+	Collection<String> otherWordsMatch = null;
+
 	
 	public Object object;
 	public ObjectType objectType;
 	public BinaryMapIndexReader file;
-	
+
 	public double priority;
 	public double priorityDistance;
-	public String wordsSpan ;
-	public SearchResult parentSearchResult;
-	public Collection<String> otherWordsMatch = null;
-	public boolean firstUnknownWordMatches = true;
-	public boolean unknownPhraseMatches = false;
+
+	public LatLon location;
+	public int preferredZoom = 15;
+
+	public String localeName;
+	public String alternateName;
+	public Collection<String> otherNames;
+	
+	public String localeRelatedObjectName;
+	public Object relatedObject;
+	public double distRelatedObjectName;
 
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
 	}
+	private static final double MAX_TYPE_WEIGHT = 10;
 
+	// maximum corresponds to the top entry
 	public double getUnknownPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it highers
-		double res  = 0;
-		if (unknownPhraseMatches) {
-			res = ObjectType.getTypeWeight(objectType);
-		}
+		return getSumPhraseMatchWeight() / Math.pow(MAX_TYPE_WEIGHT, getDepth() - 1);
+	}
+	
+	public double getSumPhraseMatchWeight() {
+		// if result is a complete match in the search we prioritize it highers
+		double res = ObjectType.getTypeWeight(objectType);
 		if (parentSearchResult != null) {
-			// 10 > maximum type
-			// res = Math.max(res,parentSearchResult.getUnknownPhraseMatchWeight()) ;
-			res += parentSearchResult.getUnknownPhraseMatchWeight() / 10;
+			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
 		return res;
+	}
+
+	public int getDepth() {
+		if (parentSearchResult != null) {
+			return 1 + parentSearchResult.getDepth();
+		}
+		return 1;
 	}
 
 	public int getFoundWordCount() {
@@ -77,16 +99,6 @@ public class SearchResult {
 		return priority - 1 / (1 + pd * distance);
 	}
 	
-	public LatLon location;
-	public int preferredZoom = 15;
-	public String localeName;
-	public String alternateName;
-	
-	public Collection<String> otherNames;
-	
-	public String localeRelatedObjectName;
-	public Object relatedObject;
-	public double distRelatedObjectName;
 
 	@Override
 	public String toString() {

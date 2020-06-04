@@ -13,10 +13,6 @@ public class CommonWords {
 		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
 	}
 	public static int getCommon(String name) {
-//		if(true) {
-//			// not ready for old versions yet
-//			return -1;
-//		}
 		Integer i = commonWordsDictionary.get(name);
 		return i == null ? -1 : i.intValue();
 	}
@@ -28,7 +24,15 @@ public class CommonWords {
 
 	public static int getCommonSearch(String name) {
 		Integer i = commonWordsDictionary.get(name);
-		return i == null ? getFrequentlyUsed(name) : i.intValue() + frequentlyUsedWordsDictionary.size();
+		// higher means better for search
+		if (i == null) {
+			int fq = getFrequentlyUsed(name);
+			if (fq != -1) {
+				return commonWordsDictionary.size() + fq;
+			}
+			return -1;
+		}
+		return i.intValue();
 	}
 	
 	public static int getCommonGeocoding(String name) {

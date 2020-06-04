@@ -350,11 +350,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						cancelSearch();
 						SearchPhrase searchPhrase = searchUICore.getPhrase();
 						if (foundPartialLocation) {
-							QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getUnknownSearchWord());
+							QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
 						} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
 							PoiUIFilter filter;
 							if (searchPhrase.isNoSelectedType()) {
-								if (isOnlineSearch() && !Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
+								if (isOnlineSearch() && !Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
 									app.getPoiFilters().resetNominatimFilters();
 									filter = app.getPoiFilters().getNominatimPOIFilter();
 									filter.setFilterByName(searchPhrase.getUnknownSearchPhrase());
@@ -368,8 +368,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 									}
 								} else {
 									filter = app.getPoiFilters().getSearchByNamePOIFilter();
-									if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
-										filter.setFilterByName(searchPhrase.getUnknownSearchWord());
+									if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
+										filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
 										filter.clearCurrentResults();
 									}
 								}
@@ -381,8 +381,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 											.getResult().object;
 									filter = new PoiUIFilter(abstractPoiType, app, "");
 								}
-								if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
-									filter.setFilterByName(searchPhrase.getUnknownSearchWord());
+								if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
+									filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
 								}
 							} else {
 								filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
@@ -627,9 +627,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					@Override
 					public void onClick(View v) {
 						if (searchEditText.getText().length() > 0) {
-							String newText = searchUICore.getPhrase().getTextWithoutLastWord();
-							searchEditText.setText(newText);
-							searchEditText.setSelection(newText.length());
+							clearLastWord();
 						} else if (useMapCenter && location != null) {
 							useMapCenter = false;
 							centerLatLon = null;
