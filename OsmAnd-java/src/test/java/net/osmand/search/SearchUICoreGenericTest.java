@@ -8,7 +8,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import net.osmand.OsmAndCollator;
 import net.osmand.data.LatLon;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.SearchPhrase;
@@ -29,7 +28,7 @@ public class SearchUICoreGenericTest {
 	public void testDuplicates() throws IOException {
 		SearchSettings ss = new SearchSettings((SearchSettings)null);
 		ss = ss.setOriginalLocation(new LatLon(0, 0));
-		SearchPhrase phrase = new SearchPhrase(ss, OsmAndCollator.primaryCollator());
+		SearchPhrase phrase = SearchPhrase.emptyPhrase(ss);
 		SearchResultCollection cll = new SearchUICore.SearchResultCollection(phrase);
 		List<SearchResult> rs = new ArrayList<>();
 		SearchResult a1 = searchResult(rs, phrase, "a", 100);
@@ -47,7 +46,7 @@ public class SearchUICoreGenericTest {
 	public void testNoResort() throws IOException {
 		SearchSettings ss = new SearchSettings((SearchSettings)null);
 		ss = ss.setOriginalLocation(new LatLon(0, 0));
-		SearchPhrase phrase = new SearchPhrase(ss, OsmAndCollator.primaryCollator());
+		SearchPhrase phrase = SearchPhrase.emptyPhrase(ss);
 		SearchResultCollection cll = new SearchUICore.SearchResultCollection(phrase);
 		List<SearchResult> rs = new ArrayList<>();
 		SearchResult a1 = searchResult(rs, phrase, "a", 100);
@@ -80,7 +79,7 @@ public class SearchUICoreGenericTest {
 	public void testNoResortDuplicate() throws IOException {
 		SearchSettings ss = new SearchSettings((SearchSettings)null);
 		ss = ss.setOriginalLocation(new LatLon(0, 0));
-		SearchPhrase phrase = new SearchPhrase(ss, OsmAndCollator.primaryCollator());
+		SearchPhrase phrase = SearchPhrase.emptyPhrase(ss);
 		SearchResultCollection cll = new SearchUICore.SearchResultCollection(phrase);
 		List<SearchResult> rs = new ArrayList<>();
 		SearchResult a1 = searchResult(rs, phrase, "a", 100);

@@ -785,13 +785,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 		runCoreSearch(txt, false, false);
 	}
 
-	public void clearLastWord() {
-		if (searchEditText.getText().length() > 0) {
-			String newText = searchUICore.getPhrase().getTextWithoutLastWord();
-			searchEditText.setText(newText);
-			searchEditText.setSelection(newText.length());
-		}
-	}
 
 	private void addMoreButton() {
 		QuickSearchMoreListItem moreListItem =

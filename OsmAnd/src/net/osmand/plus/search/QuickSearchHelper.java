@@ -121,7 +121,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public void refreshFilterOrders() {
 		PoiFiltersHelper filtersHelper = app.getPoiFilters();
-		core.setFilterOrders(filtersHelper.getPoiFilterOrders(true));
+		core.setActivePoiFiltersByOrder(filtersHelper.getPoiFilterOrders(true));
 	}
 
 	public void setRepositoriesForSearchUICore(final OsmandApplication app) {
@@ -201,9 +201,9 @@ public class QuickSearchHelper implements ResourceListener {
 						//sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
 						sr.relatedObject = selectedGpx.getGpxFile();
 						sr.preferredZoom = 17;
-						if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
+						if (phrase.getFirstUnknownSearchWord().length() <= 1 && phrase.isNoSelectedType()) {
 							resultMatcher.publish(sr);
-						} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
+						} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
 							resultMatcher.publish(sr);
 						}
 					}
@@ -249,7 +249,7 @@ public class QuickSearchHelper implements ResourceListener {
 					sr.priority = SEARCH_FAVORITE_CATEGORY_PRIORITY;
 					sr.objectType = ObjectType.FAVORITE_GROUP;
 					sr.preferredZoom = 17;
-					if (phrase.getNameStringMatcher().matches(sr.localeName)) {
+					if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
 						if (group.getPoints().size() < 5) {
 							for (FavouritePoint point : group.getPoints()) {
 								SearchResult srp = new SearchResult(phrase);
@@ -313,10 +313,10 @@ public class QuickSearchHelper implements ResourceListener {
 						continue;
 					}
 				}
-				if (phrase.getUnknownSearchWordLength() <= 1
+				if (phrase.getFirstUnknownSearchWord().length() <= 1
 						&& (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.FAVORITE_GROUP))) {
 					resultMatcher.publish(sr);
-				} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
+				} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
 					resultMatcher.publish(sr);
 				}
 			}
@@ -351,7 +351,7 @@ public class QuickSearchHelper implements ResourceListener {
 		public boolean search(SearchPhrase phrase, SearchResultMatcher matcher) throws IOException {
 			double lat = phrase.getSettings().getOriginalLocation().getLatitude();
 			double lon = phrase.getSettings().getOriginalLocation().getLongitude();
-			String text = phrase.getRawUnknownSearchPhrase();
+			String text = phrase.getFullSearchPhrase();
 			filter.setFilterByName(text);
 			publishAmenities(phrase, matcher, filter.initializeNewSearch(lat, lon,
 					-1, null, phrase.getRadiusLevel() + 3));
@@ -457,9 +457,9 @@ public class QuickSearchHelper implements ResourceListener {
 				}
 				if (publish) {
 					sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (p++);
-					if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
+					if (phrase.getFirstUnknownSearchWord().length() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
-					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
+					} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
 						resultMatcher.publish(sr);
 					}
 				}
