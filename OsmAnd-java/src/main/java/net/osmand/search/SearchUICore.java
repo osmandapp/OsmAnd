@@ -9,6 +9,7 @@ import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
@@ -858,6 +859,7 @@ public class SearchUICore {
 		TOP_VISIBLE,
 		FOUND_WORD_COUNT, // more is better (top)
 		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
+		COMPARE_AMENITY_TYPE_ADDITIONAL,
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
 		COMPARE_FIRST_NUMBER_IN_NAME,
 		COMPARE_DISTANCE_TO_PARENT_SEARCH_RESULT, // makes sense only for inner subqueries
@@ -905,6 +907,17 @@ public class SearchUICore {
 				int st2 = Algorithms.extractFirstIntegerNumber(localeName2);
 				if (st1 != st2) {
 					return Algorithms.compare(st1, st2);
+				}
+				break;
+			}
+			case COMPARE_AMENITY_TYPE_ADDITIONAL: {
+				if(o1.object instanceof AbstractPoiType && o2.object instanceof AbstractPoiType ) {
+					boolean additional1 = ((AbstractPoiType) o1.object).isAdditional();
+					boolean additional2 = ((AbstractPoiType) o2.object).isAdditional();
+					if (additional1 != additional2) {
+						// -1 - means 1st is less than 2nd
+						return additional1 ? 1 : -1;
+					}
 				}
 				break;
 			}

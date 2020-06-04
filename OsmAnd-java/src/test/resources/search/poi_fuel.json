@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "lat": "51.04933",
+    "lon": "13.73815",
+    "radiusLevel": 1,
+    "totalLimit": -1,
+    "lang": "",
+    "transliterateIfMissing": false,
+    "emptyQueryAllowed": false,
+    "sortByName": false
+  },
+  "phrase": ["Fuel", "Fuel "],
+  "results": [[
+	"Aircraft fuel station (Filling station) [[1, POI_TYPE, 1.000, 0.00 km]]",
+	"Gas station (Filling station) [[1, POI_TYPE, 1.000, 0.00 km]]",
+	"Gas station for boats (Filling station) [[1, POI_TYPE, 1.000, 0.00 km]]"
+  ], 
+  [
+	"Aircraft fuel station (Filling station) [[1, POI_TYPE, 1.000, 0.00 km]]",
+	"Gas station (Filling station) [[1, POI_TYPE, 1.000, 0.00 km]]",
+	"Gas station for boats (Filling station) [[1, POI_TYPE, 1.000, 0.00 km]]"
+  ]],
+  "amenities": [],
+  "cities": []
+}
