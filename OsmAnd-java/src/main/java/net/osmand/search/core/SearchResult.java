@@ -48,16 +48,25 @@ public class SearchResult {
 	private static final double MAX_TYPE_WEIGHT = 10;
 
 	// maximum corresponds to the top entry
-	// this method returns: 
-	// [1, 4] - if there is no parent search result
-	// [0, 1[ - if there is parent search result
 	public double getUnknownPhraseMatchWeight() {
+		// if result is a complete match in the search we prioritize it highers
+		return getSumPhraseMatchWeight() / Math.pow(MAX_TYPE_WEIGHT, getDepth() - 1);
+	}
+	
+	public double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it highers
 		double res = ObjectType.getTypeWeight(objectType);
 		if (parentSearchResult != null) {
-			res = (res + parentSearchResult.getUnknownPhraseMatchWeight() / MAX_TYPE_WEIGHT) / MAX_TYPE_WEIGHT;
+			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
 		return res;
+	}
+
+	public int getDepth() {
+		if (parentSearchResult != null) {
+			return 1 + parentSearchResult.getDepth();
+		}
+		return 1;
 	}
 
 	public int getFoundWordCount() {

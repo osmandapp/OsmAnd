@@ -23,9 +23,9 @@
     ],
     [
      	"100.0, <input>  [[1, PARTIAL_LOCATION, 1.000, 5591.91 km]]",
-		"100, Bridge Street, Westbrook [[4, HOUSE, 0.430, 11.29 km]]",
-		"Bridge Street, Westbrook [[3, STREET, 3.000, 11.35 km]]",
+		"100, Bridge Street, Westbrook [[4, HOUSE, 0.043, 11.29 km]]",
 		"100, Bridge Street, Yarmouth [[3, HOUSE, 0.430, 23.69 km]]",
+		"Bridge Street, Westbrook [[3, STREET, 0.310, 11.35 km]]",
 		"Bridge Street, Frenchtown [[2, STREET, 3.000, 11.35 km]]",
 		"Bridge Street, Yarmouth [[2, STREET, 3.000, 23.44 km]]",
 		"Bridge Street, Cornish [[2, STREET, 3.000, 27.39 km]]",

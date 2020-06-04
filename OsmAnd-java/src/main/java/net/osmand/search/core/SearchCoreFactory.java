@@ -159,13 +159,26 @@ public class SearchCoreFactory {
 				cityResult.localeRelatedObjectName = res.file.getRegionName();
 				cityResult.file = res.file;
 				phrase.countUnknownWordsMatchMainResult(cityResult);
-				boolean match = cityResult.firstUnknownWordMatches;
-				if (cityResult.firstUnknownWordMatches) {
+				boolean match = false;
+				if (firstUnknownWordMatches) {
+					cityResult.firstUnknownWordMatches = false; // don't count same name twice
+				} else if (cityResult.firstUnknownWordMatches) {
 					firstUnknownWordMatches = true;
+					match = true;
 				}
 				if (cityResult.otherWordsMatch != null) {
-					match = match || leftUnknownSearchWords.removeAll(cityResult.otherWordsMatch);
+					Iterator<String> iterator = cityResult.otherWordsMatch.iterator();
+					while (iterator.hasNext()) {
+						String n = iterator.next();
+						boolean wasPresent = leftUnknownSearchWords.remove(n);
+						if (!wasPresent) {
+							iterator.remove(); // don't count same name twice
+						} else {
+							match = true;
+						}
+					}
 				}
+				// include parent search result even if it is empty
 				if (match) {
 					newParentSearchResult = cityResult;
 				}
