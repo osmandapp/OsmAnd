@@ -935,7 +935,7 @@ public class SearchCoreFactory {
 														final BinaryMapIndexReader selected, final Set<String> searchedPois, 
 														final int countExtraWords) {
 			
-			NameStringMatcher ns = nameFilter == null ? null : new NameStringMatcher(nameFilter, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+			final NameStringMatcher ns = nameFilter == null ? null : new NameStringMatcher(nameFilter, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 			return new ResultMatcher<Amenity>() {
 
 				@Override
