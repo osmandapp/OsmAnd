@@ -3248,7 +3248,7 @@
     <string name="analytics_pref_title">Analyses</string>
     <string name="turn_screen_on_info">Afficher la carte sur l\'écran de verrouillage pendant la navigation.</string>
     <string name="route_parameters_info">Paramètres de calcul d\'itinéraire pour le profil sélectionné : « %1$s ».</string>
-    <string name="wake_time">Durée d\'allumage</string>
+    <string name="wake_time">Durée personnalisée de veille de l’écran</string>
     <string name="map_look_descr">Apparence de la carte</string>
     <string name="map_look">Apparence de la carte</string>
     <string name="general_settings_profile_descr">Thème de l\'application, unités, région</string>
@@ -3716,7 +3716,7 @@
 \n%2$s : Niveaux de zoom auxquels les tuiles originales seront visibles. En dehors de ces valeurs, il y aura une augmentation ou une diminution d\'échelle.</string>
     <string name="turn_screen_on_navigation_instructions_descr">L\'écran s\'allumera pour afficher les instructions de navigation.</string>
     <string name="turn_screen_on_wake_time_descr">Sélectionnez le temps d\'affichage de l\'écran après allumage (\"%1$s\" signifie pas d\'extinction).</string>
-    <string name="screen_timeout_descr">Limité par l\'option \"%1$s\" si elle est activée.</string>
+    <string name="screen_timeout_descr">Actif uniquement si \"%1$s\" est désactivé.</string>
     <string name="expire_time_descr">Délai d\'expiration en minutes. Les tuiles en cache seront rechargées après ce délai. Laissez ce champ vide pour ne jamais rafraîchir les tuiles pour cette source.
 \n
 \nUn jour correspond à 1440 minutes.
@@ -3748,4 +3748,5 @@
     <string name="export_import_quick_actions_with_profiles_promo">Vous pouvez exporter ou importer les actions rapides avec les profils d’application.</string>
     <string name="shared_string_delete_all_q">Tout supprimer \?</string>
     <string name="delete_all_actions_message_q">Voulez-vous vraiment supprimer définitivement %d actions rapides \?</string>
+    <string name="screen_timeout">Délai de veille de l’écran</string>
 </resources>
