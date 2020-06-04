@@ -2416,7 +2416,7 @@
     <string name="quick_action_showhide_osmbugs_descr">Schaltfläche zum Ein- oder Ausblenden von OSM-Notizen auf der Karte.</string>
     <string name="sorted_by_distance">Nach Entfernung sortiert</string>
     <string name="search_favorites">In Favoriten suchen</string>
-    <string name="hillshade_menu_download_descr">Laden Sie die Schummerungs-Karte herunter, um vertikale Schattierungen anzuzeigen.</string>
+    <string name="hillshade_menu_download_descr">Laden Sie die Schummerungskarte herunter, um vertikale Schattierungen anzuzeigen.</string>
     <string name="shared_string_plugin">Erweiterung</string>
     <string name="srtm_purchase_header">Kaufen und installieren Sie die Erweiterung \'Höhenlinien\', um abgestufte vertikale Flächen anzuzeigen.</string>
     <string name="srtm_menu_download_descr">Laden Sie die Höhenlinienkarte zu dieser Region herunter.</string>
@@ -3187,7 +3187,7 @@
     <string name="turn_screen_on_router">Bei Richtungsänderung aufwecken</string>
     <string name="turn_screen_on_time_descr">Stellen Sie ein, wie lange der Bildschirm eingeschaltet bleiben soll.</string>
     <string name="turn_screen_on_sensor">Annäherungssensor verwenden</string>
-    <string name="turn_screen_on_sensor_descr">Streichen Sie mit der Hand über den oberen Teil des Bildschirms, um ihn während der Navigation einzuschalten.</string>
+    <string name="turn_screen_on_sensor_descr">Wenn Sie mit der Hand über den Bildschirm fahren, wird er eingeschaltet.</string>
     <string name="turn_on_profile_desc">Bitte wenigstens ein App-Profil einschalten, um diese Einstellung zu verwenden.</string>
     <string name="rendering_attr_winter_road_name">Schneepiste</string>
     <string name="rendering_attr_ice_road_name">Eispiste</string>
@@ -3474,16 +3474,16 @@
     <string name="sunset_at">Sonnenuntergang um %1$s</string>
     <string name="sunrise_at">Sonnenaufgang um %1$s</string>
     <string name="rearrange_categories">Kategorien neu ordnen</string>
-    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierung der Liste, blenden Sie unnötige Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
-    <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere benötigte Kategorien auswählen.</string>
+    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierung der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
+    <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere Kategorien auswählen.</string>
     <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
-    <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen werden auf den Standardzustand zurückgesetzt.</string>
-    <string name="profile_prefs_reset_successful">Alle Profil-Einstellungen werden auf den Standardzustand zurückgesetzt.</string>
+    <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen wurden auf den Standardzustand zurückgesetzt.</string>
+    <string name="profile_prefs_reset_successful">Alle Profileinstellungen werden auf die Standardeinstellungen zurückgesetzt.</string>
     <string name="accessibility_announce">Ankündigung</string>
     <string name="select_map_icon_descr">Symbol, das im Ruhezustand angezeigt wird.</string>
     <string name="multimedia_use_system_camera">System-App verwenden</string>
     <string name="multimedia_photo_play_sound">Auslöseton der Kamera</string>
-    <string name="reset_to_default_category_button_promo">Durch das Zurücksetzen auf die Standardeinstellung wird die Sortierung auf den Standardzustand nach der Installation zurückgesetzt.</string>
+    <string name="reset_to_default_category_button_promo">Mit \'Auf Standard zurücksetzen\' wird die Sortierreihenfolge wieder auf den Standard der Installation zurückgesetzt.</string>
     <string name="accessibility_mode_disabled">Einstellung \'Eingabehilfe\' ist in Ihrem Android System ausgeschaltet.</string>
     <string name="use_system_screen_timeout">Zeitlimit für den Systembildschirm verwenden</string>
     <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert. Wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet.
@@ -3610,7 +3610,7 @@
     <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hangneigungen auf der Karte anzuzeigen.</string>
     <string name="hillshade_download_description">Für die Darstellung der Schummerung werden zusätzliche Karten benötigt.</string>
     <string name="shared_string_min">Min</string>
-    <string name="hillshade_description">Schummerungs-Karte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Niederungen.</string>
+    <string name="hillshade_description">Schummerungskarte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Ebenen.</string>
     <string name="n_items_of_z">%1$s von %2$s</string>
     <string name="shared_string_octagon">Achteck</string>
     <string name="app_mode_ski_touring">Skitouren</string>
@@ -3733,5 +3733,44 @@
 \nSchalten Sie nicht verwendete Plugins aus, um alle ihre Steuerelemente auszublenden. %1$s.</string>
     <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
     <string name="shared_string_drawer">Schublade</string>
-    <string name="gpx_parse_error">OsmAnd GPX ist nicht gut geformt. Bitte wenden Sie sich an das Support-Team, um weitere Informationen zu erhalten</string>
+    <string name="gpx_parse_error">OsmAnd GPX ist nicht optimal geformt, bitte kontaktieren Sie das Support-Team, um weitere Nachforschungen anzustellen.</string>
+    <string name="map_source_zoom_levels_descr">Diese Parameter beeinflussen die Darstellung, wenn sie als Karte oder Overlay/Underlay verwendet werden. 
+\n
+\n%1$s: Die Karte wird auf die gewählten Zoomstufen begrenzt. 
+\n
+\n%2$s: Zoomstufen, bei denen die Originalkacheln sichtbar sind. Außerhalb dieser Werte tritt eine Skalierung nach oben oder unten ein.</string>
+    <string name="map_source_zoom_levels">Legen Sie die kleinste und größte Zoomstufe fest, bei denen die Online-Karte angezeigt oder geladen wird.</string>
+    <string name="shared_string_always">Immer</string>
+    <string name="screen_control">Bildschirmsteuerung</string>
+    <string name="system_screen_timeout_descr">Schaltet den Bildschirm nach dem Bildschirm-Timeout des Systems aus.</string>
+    <string name="system_screen_timeout">Systembildschirm-Timeout verwenden</string>
+    <string name="turn_screen_on_options_descr">Optionen zum Aktivieren des Bildschirms:</string>
+    <string name="turn_screen_on_descr">Wählen Sie Optionen zum Aufwecken des Bildschirms (stellen Sie sicher, dass OsmAnd im Vordergrund ist, wenn das Gerät gesperrt wird):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Der Bildschirm schaltet sich automatisch einige Sekunden vor Navigationsanweisungen für die unter „Aufweckzeiten“ festgelegte Dauer ein.
+\n
+\nFunktioniert nur während der Navigation.</string>
+    <string name="turn_screen_on_navigation_instructions">Navigationsanweisungen</string>
+    <string name="turn_screen_on_power_button_descr">Drücken Sie den Einschaltknopf des Geräts, um den Bildschirm mit OsmAnd im Vordergrund einzuschalten.</string>
+    <string name="turn_screen_on_power_button">Einschaltknopf</string>
+    <string name="turn_screen_on_proximity_sensor">Näherungssensor</string>
+    <string name="turn_screen_on_wake_time_descr">Wählen Sie das Bildschirm-Timeout nach dem Aufwachen. (\"%1$s\" wendet keine Zeitüberschreitung an).</string>
+    <string name="keep_screen_on">Bildschirm eingeschaltet lassen</string>
+    <string name="keep_screen_off">Bildschirm ausgeschaltet lassen</string>
+    <string name="screen_timeout_descr">Begrenzt durch \"%1$s\", falls aktiviert.</string>
+    <string name="pseudo_mercator_projection">Pseudo-Mercator-Projektion</string>
+    <string name="one_image_per_tile">Eine Bilddatei pro Kachel</string>
+    <string name="sqlite_db_file">SQLiteDB-Datei</string>
+    <string name="online_map_name_helper_text">Benennen Sie die Online-Kartenquelle.</string>
+    <string name="online_map_url_helper_text">Tragen oder fügen Sie die URL für die Online-Quelle ein.</string>
+    <string name="edit_online_source">Online-Quelle bearbeiten</string>
+    <string name="expire_time">Verfallsdatum</string>
+    <string name="mercator_projection">Mercator-Projektion</string>
+    <string name="storage_format">Speicherformat</string>
+    <string name="expire_time_descr">Verfallsdatum in Minuten. Kacheln im Zwischenspeicher werden nach der festgelegten Zeit neu geladen. Lassen Sie das Feld leer, wenn die Karten aus dieser Quelle nie aktualisiert werden sollen. 
+\n
+\nEin Tag hat 1440 Minuten.
+\nEine Woche hat 10 080 Minuten.
+\nEin Monat hat 43 829 Minuten.</string>
+    <string name="tiles_storage_descr">Wählen Sie aus, wie heruntergeladene Kacheln gespeichert werden.</string>
+    <string name="default_screen_timeout">Zeitüberschreitung des Systembildschirms</string>
 </resources>

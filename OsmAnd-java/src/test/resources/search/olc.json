@@ -1,0 +1,17 @@
+{
+  "settings": {
+    "lat": "55.75138",
+    "lon": "37.62940",
+    "radiusLevel": 1,
+    "totalLimit": -1,
+    "lang": "",
+    "transliterateIfMissing": false,
+    "emptyQueryAllowed": false,
+    "sortByName": false
+  },
+  "phrase": "QHW6+CQ",
+  "results": [
+    "55.796062, 37.56194"
+  ],
+  "cities": []
+}

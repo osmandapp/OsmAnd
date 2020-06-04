@@ -195,8 +195,9 @@
 	<dimen name="context_menu_big_icon_size">40dp</dimen>
 
 	<dimen name="fab_size_with_shadow">62dp</dimen>
-    <dimen name="fab_margin_right">12dp</dimen>
-    <dimen name="fab_margin_bottom_big">72dp</dimen>
+	<dimen name="fab_margin_right">12dp</dimen>
+	<dimen name="fab_margin_bottom_big">72dp</dimen>
+	<dimen name="fab_icon_padding">18dp</dimen>
 
     <!-- TextSizes -->
     <dimen name="default_list_text_size_large">19sp</dimen>
@@ -318,6 +319,7 @@
 	<dimen name="multi_selection_header_height">52dp</dimen>
 
 	<dimen name="wikipedia_button_left_padding">19dp</dimen>
+	<dimen name="wikipedia_options_button_width">48dp</dimen>
 
 	<dimen name="multi_selection_menu_padding_top">13dp</dimen>
 	<dimen name="multi_selection_menu_padding_bottom">15dp</dimen>
@@ -383,4 +385,6 @@
 
 	<dimen name="download_description_images_height">132dp</dimen>
 	<dimen name="info_description_line_spacing_multiplier" format="float">1.4</dimen>
+
+	<dimen name="screen_alert_big_warning_icon_size">92dp</dimen>
 </resources>

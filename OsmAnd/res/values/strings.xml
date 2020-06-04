@@ -11,9 +11,11 @@
 	Thx - Hardy
 
 -->
+
     <string name="shared_string_all_time">All time</string>
     <string name="shared_string_night_map">Night map</string>
     <string name="details_dialog_decr">Control visibility of additional details showed on the map</string>
+    <string name="default_screen_timeout">System screen timeout</string>
     <string name="tiles_storage_descr">Choose how downloaded tiles will be stored.</string>
     <string name="expire_time_descr">Expiration time in minutes. Cached tiles will be reloaded after specified time.
         Leave this field empty to never refresh tiles for this source.
@@ -31,19 +33,19 @@
     <string name="sqlite_db_file">SQLiteDB file</string>
     <string name="one_image_per_tile">One image file per tile</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercator projection</string>
-    <string name="screen_timeout_descr">If the \"%1$s\" option is enabled, the activity time will depend on it.</string>
+    <string name="screen_timeout_descr">Limited by \"%1$s\", if enabled.</string>
     <string name="keep_screen_off">Keep screen off</string>
     <string name="keep_screen_on">Keep screen on</string>
-    <string name="turn_screen_on_wake_time_descr">Select the screen activity time after waking up, the screen will not turn off if \"%1$s\" is enabled.</string>
+    <string name="turn_screen_on_wake_time_descr">Select the screen timeout after waking up. (\"%1$s\" applies no timeout.)</string>
     <string name="turn_screen_on_proximity_sensor">Proximity sensor</string>
     <string name="turn_screen_on_power_button">Power button</string>
-    <string name="turn_screen_on_power_button_descr">Press on the device power button to turn on screen with OsmAnd on the foreground.</string>
+    <string name="turn_screen_on_power_button_descr">Pressing the device power button will turn the screen on with OsmAnd on top of the lock screen.</string>
     <string name="turn_screen_on_navigation_instructions">Navigation instructions</string>
-    <string name="turn_screen_on_navigation_instructions_descr">Screen will turn on automatically a few seconds before navigation instructions for a specified time in “Wake time” option.\n\nWork only while navigation.</string>
-    <string name="turn_screen_on_descr">Those options will work, only if OsmAnd will be on the foreground when the device will be locked.</string>
-    <string name="turn_screen_on_options_descr">Use these options to wake up screen with OsmAnd on the foreground.</string>
-    <string name="system_screen_timeout">Screen timeout</string>
-    <string name="system_screen_timeout_descr">Enable so the screen turns off after a certain period of inactivity, the time specified in the system settings of your device will be used.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Each navigation instruction will turn the screen on.</string>
+    <string name="turn_screen_on_descr">Select screen wake-up options (make sure OsmAnd is in the foreground when the device is being locked):</string>
+    <string name="turn_screen_on_options_descr">Screen wake-up options:</string>
+    <string name="system_screen_timeout">Use system screen timeout</string>
+    <string name="system_screen_timeout_descr">Turns the screen off after the system\'s screen timeout.</string>
     <string name="screen_control">Screen control</string>
     <string name="shared_string_always">Always</string>
     <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact the support team to investigate further.</string>
@@ -533,7 +535,7 @@
     <string name="turn_screen_on_router">Wake on turn</string>
     <string name="turn_screen_on_time_descr">Adjust how long the screen should be on for.</string>
     <string name="turn_screen_on_sensor">Use proximity sensor</string>
-    <string name="turn_screen_on_sensor_descr">Wave your hand over the top of the screen to turn it on while navigating.</string>
+    <string name="turn_screen_on_sensor_descr">Waving your hand across the screen will turn it on.</string>
     <string name="app_mode_offroad">Offroad</string>
     <string name="edit_profile_setup_title">Set up profile</string>
     <string name="edit_profile_setup_subtitle">The profile keeps its own settings</string>

@@ -3721,4 +3721,43 @@
     <string name="profiles_for_action_not_found">Не вдалося знайти жодного профілю.</string>
     <string name="index_item_world_basemap_detailed">Оглядова карта світу (детальна)</string>
     <string name="unsupported_type_error">Непідтримуваний тип</string>
+    <string name="gpx_parse_error">OsmAnd GPX недостатньо сформований. Зверніться до служби підтримки для подальшого дослідження.</string>
+    <string name="shared_string_always">Завжди</string>
+    <string name="screen_control">Керування екраном</string>
+    <string name="system_screen_timeout_descr">Увімкніть, щоб екран вимкнувся після певного проміжку бездіяльності, буде використано час, визначений у системних налаштуваннях вашого пристрою.</string>
+    <string name="system_screen_timeout">Час очікування екрана</string>
+    <string name="turn_screen_on_options_descr">Використовуйте ці параметри, щоб пробудити екран із OsmAnd на передньому плані.</string>
+    <string name="turn_screen_on_descr">Ці параметри працюватимуть, лише якщо OsmAnd буде на передньому плані, коли пристрій буде заблоковано.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Екран увімкнеться автоматично за кілька секунд до вказівки щодо навігації за визначений час у опції «Час пробудження».
+\n
+\nПрацює лише під час навігації.</string>
+    <string name="turn_screen_on_navigation_instructions">Вказівки з навігації</string>
+    <string name="turn_screen_on_power_button_descr">Натисніть кнопку живлення пристрою, щоб увімкнути екран на передньому плані з OsmAnd.</string>
+    <string name="turn_screen_on_power_button">Кнопка живлення</string>
+    <string name="turn_screen_on_proximity_sensor">Датчик наближення</string>
+    <string name="turn_screen_on_wake_time_descr">Виберіть час діяльності екрана після пробудження, екран не вимкнеться, якщо ввімкнено \"%1$s\".</string>
+    <string name="keep_screen_on">Тримати екран увімкненим</string>
+    <string name="keep_screen_off">Тримати екран вимкненим</string>
+    <string name="screen_timeout_descr">Якщо параметр \"%1$s\" увімкнено, час активності буде залежати від нього.</string>
+    <string name="pseudo_mercator_projection">Псевдопроєкція Меркатора</string>
+    <string name="one_image_per_tile">Один файл зображення на плитку</string>
+    <string name="sqlite_db_file">Файл SQLiteDB</string>
+    <string name="online_map_name_helper_text">Укажіть назву джерела мережевої мапи.</string>
+    <string name="online_map_url_helper_text">Введіть або вставте URL-адресу для мережевого джерела.</string>
+    <string name="edit_online_source">Редагувати мережеве джерело</string>
+    <string name="expire_time">Строк дії</string>
+    <string name="mercator_projection">Проєкція Меркатора</string>
+    <string name="storage_format">Формат зберігання</string>
+    <string name="map_source_zoom_levels">Встановіть щонайменший та щонайбільший рівень масштабування, при якому мережева мапа буде відображатися або завантажуватися.</string>
+    <string name="map_source_zoom_levels_descr">Ці параметри впливатимуть на дисплей як мапи або накладки/підкладки.
+\n
+\n%1$s: мапа буде обмежена вибраними масштабами.
+\n
+\n%2$s: рівні масштабу, на яких будуть видні первинні плитки. Масштабування буде відбуватися поза цими значеннями.</string>
+    <string name="expire_time_descr">Час дії в хвилинах. Кешована плитка буде завантажена через визначений час. Залиште це поле порожнім, щоб ніколи не оновлювати плитки для цього джерела.
+\n
+\nОдин день - 1440 хвилин.
+\nОдин тиждень - 10 080 хвилин.
+\nОдин місяць - 43 829 хвилин.</string>
+    <string name="tiles_storage_descr">Виберіть спосіб зберігання завантажених плиток.</string>
 </resources>

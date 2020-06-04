@@ -77,7 +77,7 @@
     <string name="shared_string_back">Atzera</string>
     <string name="start_location_sharing">Partekatu kokapena</string>
     <string name="show_on_map">Erakutsi mapan</string>
-    <string name="app_name">OsmAnd Online GPS Tracker</string>
+    <string name="app_name">OsmAnd lineako GPS aztarnaria</string>
     <string name="phone_number_title">Telefono zenbakia</string>
     <string name="phone_number_descr">Telefono zenbakia formatu internazionalean</string>
     <string name="shared_string_password">Pasahitza</string>
@@ -100,7 +100,7 @@
     <string name="shared_string_distance">Distantzia</string>
     <string name="share_location">Partekatu kokapena</string>
     <string name="sharing_location">Partekatzen kokapena</string>
-    <string name="process_service">OsmAnd Tracker zebitzua</string>
+    <string name="process_service">OsmAnd aztarnaria zerbitzua</string>
     <string name="osmand_logo">OsmAnd logoa</string>
     <string name="install_osmand_dialog_message">OsmAnd doako edo ordainpeko bertsioa instalatu behar duzu lehenik</string>
     <string name="install_osmand">Instalatu OsmAnd</string>
@@ -199,15 +199,15 @@
     <string name="buffer_time_descr">Bufferraren puntuak gordetzeko gehieneko denbora</string>
     <string name="buffer_time">Bufferraren iraungitze-denbora</string>
     <string name="shared_string_suggested">Iradokita</string>
-    <string name="status_widget_title">OsmAnd Tracker-en egoera</string>
+    <string name="status_widget_title">OsmAnd aztarnariaren egoera</string>
     <string name="back_to_osmand">Atzera OsmAnd-era</string>
     <string name="last_response_date">Azken erantzuna: %1$s</string>
     <string name="last_update_from_telegram_duration">Telegram-en azken eguneraketa duela %1$s</string>
     <string name="last_response_duration">Azken erantzuna duela %1$s</string>
     <string name="duration_ago">duela %1$s</string>
-    <string name="welcome_descr"><b>OsmAnd Tracker</b>-ri esker, kokapena partekatu dezakezu eta besteena OsmAnd-en ikus. <br/> <br/> Aplikazioak Telegram APIa erabiltzen du eta, beraz, Telegram kontua behar duzu.</string>
+    <string name="welcome_descr"><b>OsmAnd aztarnaria</b>-ri esker, kokapena partekatu dezakezu eta besteena OsmAnd-en ikus. <br/> <br/> Aplikazioak Telegram APIa erabiltzen du eta, beraz, Telegram kontua behar duzu.</string>
     <string name="shared_string_authorization_descr">Sartu zure Telegram-eko telefono zenbakia nazioarteko formatuan</string>
-    <string name="osmand_service_descr">OsmAnd Tracker atzeko planoan exekutatzen da pantaila itzalita dagoenean.</string>
+    <string name="osmand_service_descr">OsmAnd aztarnaria atzeko planoan exekutatzen da pantaila itzalita dagoenean.</string>
     <string name="location_service_no_gps_available">Hautatu kokapen-hornitzaileetako bat zure kokapena partekatzeko.</string>
     <string name="no_location_permission">Aplikazioak ez du kokapena atzitzeko baimenik.</string>
     <string name="authentication_code_descr">"Telegramek kode bat bidali dizu OsmAnd-ek  zure kontuan saioa hasteko."</string>
@@ -234,11 +234,11 @@
     <string name="stale_location_desc">Kontaktu bat mugitu zen azken aldia.</string>
     <string name="location_history_desc">Ezkutatu denbora jakin batean mugitu ez diren kontaktuak</string>
     <string name="osmand_connect">OsmAnd konexioa</string>
-    <string name="osmand_connect_desc">Aukeratu OsmAnd Tracker-ek posizioak bistaratzeko erabiliko duen OsmAnd bertsioa.</string>
+    <string name="osmand_connect_desc">Aukeratu OsmAnd aztarnariak posizioak bistaratzeko erabiliko duen OsmAnd bertsioa.</string>
     <string name="in_time">%1$s-n</string>
-    <string name="logout_help_desc">Nola itzali OsmAnd Tracker Telegram-etik</string>
-    <string name="disconnect_from_telegram">Nola itzali OsmAnd Tracker Telegram-etik</string>
-    <string name="disconnect_from_telegram_desc">Kokapena partekatzeko sarbidea baliogabetzeko. Ireki Telegram, joan Ezarpenak → Pribatutasuna eta segurtasuna → Saioak eta amaitu OsmAnd Tracker saioa atalera.</string>
+    <string name="logout_help_desc">Nola itzali OsmAnd aztarnaria Telegram-etik</string>
+    <string name="disconnect_from_telegram">Nola itzali OsmAnd aztarnaria Telegram-etik</string>
+    <string name="disconnect_from_telegram_desc">Kokapena partekatzeko sarbidea baliogabetzeko. Ireki Telegram, joan Ezarpenak → Pribatutasuna eta segurtasuna → Saioak eta amaitu OsmAnd aztarnariaren saioa atalera.</string>
     <string name="logout_no_internet_msg">"Konektatu Internetera Telegram saioa behar bezala  amaiatzeko."</string>
     <string name="last_response">Azken erantzuna</string>
     <string name="disable_all_sharing_desc">Kokapena partekatzea itzaltzen du hautatutako txat guztietan (%1$d).</string>
@@ -246,8 +246,8 @@
     <string name="by_group">Taldearen arabera</string>
     <string name="by_name">Izenaren arabera</string>
     <string name="by_distance">Distantziaren arabera</string>
-    <string name="logout_from_osmand_telegram">Amaitu OsmAnd Tracker saioa\?</string>
-    <string name="logout_from_osmand_telegram_descr">Ziur zaude OsmAnd Tracker saioa amaitu nahi duzula\? Ezingo duzu kokapena partekatu edo besteen kokapena ikusi</string>
+    <string name="logout_from_osmand_telegram">Amaitu OsmAnd aztarnariaren saioa\?</string>
+    <string name="logout_from_osmand_telegram_descr">Ziur zaude OsmAnd aztarnariaren saioa amaitu nahi duzula\? Ezingo duzu kokapena partekatu edo besteen kokapena ikusi</string>
     <string name="live_now_description">Zurekin kokapena partekatzen duten kontaktuak eta taldeak.</string>
     <string name="location_sharing_status">Partekatzen:% 1 $ s</string>
     <string name="sharing_status">Partekatze egoera</string>
@@ -255,7 +255,7 @@
     <string name="not_found_yet">Oraindik ez da aurkitu</string>
     <string name="not_sent_yet">Oraindik ez da bidali</string>
     <string name="sharing_in_background">Atzeko planoan partekatzea</string>
-    <string name="battery_optimization_description">Itzali bateriaren optimizazioa OsmAnd Trackerrentzat, bat-batean itzali ez dadin bigarren planoan dagoela.</string>
+    <string name="battery_optimization_description">Itzali bateriaren optimizazioa OsmAnd aztarnariarentzat, bat-batean itzali ez dadin bigarren planoan dagoela.</string>
     <string name="background_work">Bigarren planoko lana</string>
     <string name="background_work_description">Aldatu bateriaren optimizazio ezarpenak kokapena partekatzea egonkortzeko.</string>
     <string name="waiting_for_response_from_telegram">Telegram-en erantzunaren zain</string>
@@ -265,6 +265,6 @@
     <string name="share_location_as_description">Hainbat gailu Telegram kontu bakarrera konektatu nahi badituzu, gailu desberdinak erabili behar dituzu kokapena partekatzeko.</string>
     <string name="share_location_as_description_second_line">Telegrama bezeroan gailuaren IDa sortu eta ikusi dezakezu %1$s txat bota erabiliz. % 2 $ s</string>
     <string name="privacy_policy_agree">\"Jarraitu\" sakatuz, Telegram eta OsmAnd pribatutasun-politiken baldintzak onartzen dituzu.</string>
-    <string name="privacy_policy_telegram_client">OsmAnd tracker-ek Telegram plataforma irekia erabiltzen duten bezeroetako bat da. Zure kontaktuek Telegram-eko beste edozein bezero erabil dezakete.</string>
+    <string name="privacy_policy_telegram_client">OsmAnd aztarnariak Telegram plataforma irekia erabiltzen duten bezeroetako bat da. Zure kontaktuek Telegram-eko beste edozein bezero erabil dezakete.</string>
     <string name="last_update_from_telegram_date">Telegram-eko azken eguneratzea: %1$s</string>
 </resources>

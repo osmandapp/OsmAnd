@@ -59,11 +59,11 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		pointAltUI.setColor(0xa0FF3344);
 		pointAltUI.setStyle(Style.FILL);
 
-		audio = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_audio);
-		video = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_video);
-		photo = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_photo);
+		audio = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_note_audio);
+		video = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_note_video);
+		photo = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_note_photo);
 
-		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_small);
+		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_note_small);
 
 		paintIcon = new Paint();
 
