@@ -11,9 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -48,7 +48,6 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	private List<BottomSheetItemWithCompoundButton> languageItems;
 
 	private ArrayList<WikiLanguageItem> languages;
-	private CallbackWithObject<Boolean> languageChangedCallback;
 	private boolean isGlobalWikiPoiEnabled = false;
 
 	@Override
@@ -56,6 +55,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
 		settings = app.getSettings();
+		appMode = settings.getApplicationMode();
 		initLanguagesData();
 	}
 
@@ -192,8 +192,9 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 		settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.setStringsListForProfile(appMode, localesForSaving);
 		settings.GLOBAL_WIKIPEDIA_POI_ENABLED.setModeValue(appMode, isGlobalWikiPoiEnabled);
-		if (languageChangedCallback != null) {
-			languageChangedCallback.processResult(true);
+		MapActivity ma = getMapActivity();
+		if (ma != null) {
+			WikipediaPoiMenu.updateWikipediaState(ma);
 		}
 		dismiss();
 	}
@@ -227,12 +228,13 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	public void setAppMode(ApplicationMode appMode) {
-		this.appMode = appMode;
-	}
-
-	public void setLanguageChangedCallback(CallbackWithObject<Boolean> languageChangedCallback) {
-		this.languageChangedCallback = languageChangedCallback;
+	@Nullable
+	private MapActivity getMapActivity() {
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			return (MapActivity) activity;
+		}
+		return null;
 	}
 
 	private class WikiLanguageItem implements Comparable<WikiLanguageItem> {
@@ -276,13 +278,9 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity,
-	                                @NonNull ApplicationMode appMode,
-	                                boolean usedOnMap,
-	                                CallbackWithObject<Boolean> callback) {
+	                                boolean usedOnMap) {
 		SelectWikiLanguagesBottomSheet fragment = new SelectWikiLanguagesBottomSheet();
-		fragment.setAppMode(appMode);
 		fragment.setUsedOnMap(usedOnMap);
-		fragment.setLanguageChangedCallback(callback);
 		fragment.show(mapActivity.getSupportFragmentManager(), SelectWikiLanguagesBottomSheet.TAG);
 	}
 }
