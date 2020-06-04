@@ -273,7 +273,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 				quickSearchDialogFragment.reloadCategories();
 			}
 		}
-		searchUICore.getSearchSettings().resetSearchTypes();
+		resetSearchTypes();
 		super.onDismiss(dialog);
 	}
 
@@ -299,6 +299,10 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 				return false;
 			}
 		});
+	}
+
+	private void resetSearchTypes() {
+		searchUICore.updateSettings(searchUICore.getSearchSettings().resetSearchTypes());
 	}
 
 	private void updateCloseSearchIcon(boolean searching) {
@@ -331,7 +335,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 
 	private void cancelSearchSubCategories() {
 		searchCancelled = true;
-		searchUICore.getSearchSettings().resetSearchTypes();
+		resetSearchTypes();
 		updateCloseSearchIcon(false);
 	}
 
@@ -359,7 +363,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 					app.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							searchUICore.getSearchSettings().resetSearchTypes();
+							resetSearchTypes();
 							if (!searchCancelled) {
 								subCategoriesAdapter.setSelectedItems(selectedSubCategories);
 								showSearchResults(results);
