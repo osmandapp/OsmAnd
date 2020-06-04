@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_meters">meters</string>
+    <string name="shared_string_tones">tones</string>
+    <string name="default_screen_timeout">Default screen timeout</string>
+    <string name="screen_timeout_descr">If the \"%1$s\" option is enabled, the activity time will depend on it.</string>
     <string name="screen_timeout">Screen timeout</string>
     <string name="delete_all_actions_message_q">Are you sure you want to irrevocably delete %d quick actions?</string>
     <string name="shared_string_delete_all_q">Delete all?</string>
@@ -49,6 +53,9 @@
     <string name="screen_control">Screen control</string>
     <string name="shared_string_always">Always</string>
     <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact the support team to investigate further.</string>
+    <string name="weight_limit_description">Provide your vehicle weight, some routes restrictions may be applied for heavy vehicles.</string>
+    <string name="height_limit_description">Provide your vehicle height, some routes restrictions may apply for high vehicles.</string>
+    <string name="width_limit_description">Provide your vehicle width some routes restrictions may be applied for wide vehicles.</string>
     <string name="unsupported_type_error">Unsupported type</string>
     <string name="index_item_world_basemap_detailed">World overview map (detailed)</string>
     <string name="profiles_for_action_not_found">Could not find any such profiles.</string>
