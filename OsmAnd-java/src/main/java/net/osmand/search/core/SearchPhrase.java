@@ -41,9 +41,11 @@ public class SearchPhrase {
 	// Object consists of 2 part [known + unknown] 
 	private String fullTextSearchPhrase = "";
 	private String unknownSearchPhrase = "";
+
+	// words to be used for words span
+	private List<SearchWord> words = new ArrayList<>();
 	
 	// Words of 2 parts
-	private List<SearchWord> words = new ArrayList<>();
 	private String firstUnknownSearchWord = "";
 	private List<String> otherUnknownWords = new ArrayList<>();
 	private boolean lastUnknownSearchWordComplete;
@@ -306,17 +308,8 @@ public class SearchPhrase {
 		return otherUnknownWords.size() > 0;
 	}
 
-	public List<String> getUnknownSearchWords(Collection<String> exclude) {
-		if(exclude == null || otherUnknownWords.size() == 0 || exclude.size() == 0) {
-			return otherUnknownWords;
-		}
-		List<String> l = new ArrayList<>();
-		for(String uw : otherUnknownWords) {
-			if(exclude == null || !exclude.contains(uw)) {
-				l.add(uw);
-			}
-		}
-		return l;
+	public List<String> getUnknownSearchWords() {
+		return otherUnknownWords;
 	}
 	
 	
@@ -752,20 +745,21 @@ public class SearchPhrase {
 		
 	}
 	
-	public void countUnknownWordsMatchMainResult(SearchResult sr) {
-		countUnknownWordsMatch(sr, sr.localeName, sr.otherNames, 0);
+	public int countUnknownWordsMatchMainResult(SearchResult sr) {
+		return countUnknownWordsMatch(sr, sr.localeName, sr.otherNames, 0);
 	}
 	
-	public void countUnknownWordsMatchMainResult(SearchResult sr, int startsWith) {
-		countUnknownWordsMatch(sr, sr.localeName, sr.otherNames, startsWith);
+	public int countUnknownWordsMatchMainResult(SearchResult sr, int amountMatchingWords) {
+		return countUnknownWordsMatch(sr, sr.localeName, sr.otherNames, amountMatchingWords);
 	}
 	
 	
-	public void countUnknownWordsMatch(SearchResult sr, String localeName, Collection<String> otherNames, int startWith) {
+	public int countUnknownWordsMatch(SearchResult sr, String localeName, Collection<String> otherNames, int amountMatchingWords) {
+		int r = 0;
 		if (otherUnknownWords.size() > 0) {
 			for (int i = 0; i < otherUnknownWords.size(); i++) {
 				boolean match = false;
-				if (i < startWith - 1) {
+				if (i < amountMatchingWords - 1) {
 					match = true;
 				} else {
 					NameStringMatcher ms = getUnknownNameStringMatcher(i);
@@ -778,17 +772,23 @@ public class SearchPhrase {
 						sr.otherWordsMatch = new TreeSet<>();
 					}
 					sr.otherWordsMatch.add(otherUnknownWords.get(i));
+					r++;
 				}
 			}
 		}
-		if (startWith > 0) {
+		if (amountMatchingWords > 0) {
 			sr.firstUnknownWordMatches = true;
+			r++;
 		} else {
-			sr.firstUnknownWordMatches = localeName.equals(getFirstUnknownSearchWord())
+			boolean match = localeName.equals(getFirstUnknownSearchWord())
 					|| getFirstUnknownNameStringMatcher().matches(localeName)
 					|| getFirstUnknownNameStringMatcher().matches(otherNames);
+			if(match) {
+				r++;
+			}
+			sr.firstUnknownWordMatches =  match || sr.firstUnknownWordMatches;
 		}
-		
+		return r;
 	}
 
 	

@@ -20,7 +20,7 @@ public class SearchResult {
 	// internal package fields (used for sorting)
 	public SearchResult parentSearchResult;
 	String wordsSpan ;
-	boolean firstUnknownWordMatches = true;
+	boolean firstUnknownWordMatches;
 	Collection<String> otherWordsMatch = null;
 
 	

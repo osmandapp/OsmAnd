@@ -141,18 +141,51 @@ public class SearchCoreFactory {
 		protected void subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api) 
 				throws IOException {
 			phrase.countUnknownWordsMatchMainResult(res);
-			// TODO select word & delete found words
-			List<String> ws = phrase.getUnknownSearchWords(res.otherWordsMatch);
-			if (!res.firstUnknownWordMatches) {
-				ws.add(phrase.getFirstUnknownSearchWord());
+			boolean firstUnknownWordMatches = res.firstUnknownWordMatches;
+			List<String> leftUnknownSearchWords = new ArrayList<String>(phrase.getUnknownSearchWords());
+			if(res.otherWordsMatch != null) {
+				leftUnknownSearchWords.removeAll(res.otherWordsMatch);
+			}
+			SearchResult newParentSearchResult = null;
+			if (res.parentSearchResult == null && resultMatcher.getParentSearchResult() == null && 
+					res.objectType == ObjectType.STREET && res.object instanceof Street && ((Street) res.object).getCity() != null) {
+				City ct = ((Street) res.object).getCity();
+				SearchResult cityResult = new SearchResult(phrase);
+				cityResult.object = ct;
+				cityResult.objectType = ObjectType.CITY;
+				cityResult.localeName = ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+				cityResult.otherNames = ct.getAllNames(true);
+				cityResult.location = ct.getLocation();
+				cityResult.localeRelatedObjectName = res.file.getRegionName();
+				cityResult.file = res.file;
+				phrase.countUnknownWordsMatchMainResult(cityResult);
+				boolean match = cityResult.firstUnknownWordMatches;
+				if (cityResult.firstUnknownWordMatches) {
+					firstUnknownWordMatches = true;
+				}
+				if (cityResult.otherWordsMatch != null) {
+					match = match || leftUnknownSearchWords.removeAll(cityResult.otherWordsMatch);
+				}
+				if (match) {
+					newParentSearchResult = cityResult;
+				}
+			}
+			if (!firstUnknownWordMatches) {
+				leftUnknownSearchWords.add(0, phrase.getFirstUnknownSearchWord());
 			}
 			// publish result to set parentSearchResult before search
-			resultMatcher.publish(res);
-			if (!ws.isEmpty() && api != null && api.isSearchAvailable(phrase)) {
-				SearchPhrase nphrase = phrase.selectWord(res, ws, phrase.isLastUnknownSearchWordComplete());
-				resultMatcher.setParentSearchResult(res);
+			if(newParentSearchResult != null) {
+				SearchResult prev = resultMatcher.setParentSearchResult(newParentSearchResult);
+				resultMatcher.publish(res);
+				resultMatcher.setParentSearchResult(prev);
+			} else {
+				resultMatcher.publish(res);
+			}
+			if (!leftUnknownSearchWords.isEmpty() && api != null && api.isSearchAvailable(phrase)) {
+				SearchPhrase nphrase = phrase.selectWord(res, leftUnknownSearchWords, phrase.isLastUnknownSearchWordComplete());
+				SearchResult prev = resultMatcher.setParentSearchResult(res);
 				api.search(nphrase, resultMatcher);
-				resultMatcher.setParentSearchResult(res.parentSearchResult);
+				resultMatcher.setParentSearchResult(prev);
 			}
 		}
 
@@ -452,10 +485,6 @@ public class SearchCoreFactory {
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {
 						if (res.objectType == ObjectType.STREET) {
-							City ct = ((Street) res.object).getCity();
-							phrase.countUnknownWordsMatch(res, 
-									ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate()),
-									ct.getAllNames(true), 0);
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi);
 						} else {
 							subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
@@ -852,7 +881,7 @@ public class SearchCoreFactory {
 						int mwords = phrase.countWords(foundName) ;
 						if (csm.matches(phrase.getUnknownSearchPhrase()) && countExtraWords < mwords) {
 							countExtraWords = phrase.countWords(foundName);
-							List<String> otherSearchWords = phrase.getUnknownSearchWords(null);
+							List<String> otherSearchWords = phrase.getUnknownSearchWords();
 							nameFilter = null;
 							if (countExtraWords - 1 < otherSearchWords.size()) {
 								nameFilter = "";
