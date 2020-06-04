@@ -34,12 +34,11 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 										  CharSequence title,
 										  @ColorRes int titleColorId,
 										  boolean iconHidden,
-										  boolean showDivider,
 										  CharSequence description,
 										  @ColorRes int descriptionColorId,
 										  int descriptionMaxLines,
 										  boolean descriptionLinksClickable) {
-		super(customView, layoutId, tag, disabled, onClickListener, position, icon, background, title, titleColorId, iconHidden, showDivider);
+		super(customView, layoutId, tag, disabled, onClickListener, position, icon, background, title, titleColorId, iconHidden);
 		this.description = description;
 		this.descriptionColorId = descriptionColorId;
 		this.descriptionMaxLines = descriptionMaxLines;
@@ -129,7 +128,6 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 					title,
 					titleColorId,
 					iconHidden,
-					showDivider,
 					description,
 					descriptionColorId,
 					descriptionMaxLines,

@@ -51,7 +51,6 @@ public class BottomSheetItemTwoChoicesButton extends BottomSheetItemWithCompound
 										   CharSequence title,
 										   int titleColorId,
 										   boolean iconHidden,
-										   boolean showDivider,
 										   CharSequence description,
 										   int descriptionColorId,
 										   int descriptionMaxLines,
@@ -75,7 +74,6 @@ public class BottomSheetItemTwoChoicesButton extends BottomSheetItemWithCompound
 				title,
 				titleColorId,
 				iconHidden,
-				showDivider,
 				description,
 				descriptionColorId,
 				descriptionMaxLines,
@@ -147,6 +145,11 @@ public class BottomSheetItemTwoChoicesButton extends BottomSheetItemWithCompound
 		updateBottomButtons();
 	}
 
+	public void setIsLeftBtnSelected(boolean isLeftBtnSelected) {
+		this.isLeftBtnSelected = isLeftBtnSelected;
+		updateBottomButtons();
+	}
+
 	private void updateBottomButtons() {
 		if (bottomBtnBg == null || rightBtn == null || rightBtnContainer == null || leftBtn == null || leftBtnContainer == null) {
 			return;
@@ -207,7 +210,6 @@ public class BottomSheetItemTwoChoicesButton extends BottomSheetItemWithCompound
 					title,
 					titleColorId,
 					iconHidden,
-					showDivider,
 					description,
 					descriptionColorId,
 					descriptionMaxLines,
