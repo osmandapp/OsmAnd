@@ -3171,7 +3171,7 @@
     <string name="turn_screen_on_router">Прокидатися перед поворотом</string>
     <string name="turn_screen_on_time_descr">Відрегулюйте, як довго повинен бути ввімкнений екран.</string>
     <string name="turn_screen_on_sensor">Використовувати датчик наближення</string>
-    <string name="turn_screen_on_sensor_descr">Вмикати екран махом руки.</string>
+    <string name="turn_screen_on_sensor_descr">Вмикати екран помахом руки.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">1 клас</string>
     <string name="rendering_attr_highway_class_track_grade2_name">2 клас</string>
     <string name="rendering_attr_highway_class_track_grade3_name">3 клас</string>
