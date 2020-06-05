@@ -839,9 +839,7 @@ public class SearchCoreFactory {
 		private static final int BBOX_RADIUS = 10000;
 		private SearchAmenityTypesAPI searchAmenityTypesAPI;
 		private MapPoiTypes types;
-		private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
-				LinkedHashSet<String>>();
-		private Map<String, PoiType> poiAdditionals = new HashMap<String, PoiType>();
+		
 		
 		public SearchAmenityByTypeAPI(MapPoiTypes types, SearchAmenityTypesAPI searchAmenityTypesAPI) {
 			super(ObjectType.POI);
@@ -864,23 +862,16 @@ public class SearchCoreFactory {
 			return phrase.getNextRadiusSearch(BBOX_RADIUS);
 		}
 
-		
-		public void updateTypesToAccept(AbstractPoiType pt) {
-			pt.putTypes(acceptedTypes);
-			if (pt instanceof PoiType && ((PoiType) pt).isAdditional() && ((PoiType) pt).getParentType() != null) {
-				poiAdditionals.put(pt.getKeyName(), (PoiType) pt);
-			}
-		}
-
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			SearchPoiTypeFilter poiTypeFilter = null;
 			String nameFilter = null;
 			int countExtraWords = 0;
+			Map<String, PoiType> poiAdditionals = new LinkedHashMap<String, PoiType>();
 			if (phrase.isLastWord(ObjectType.POI_TYPE)) {
 				Object obj = phrase.getLastSelectedWord().getResult().object;
 				if (obj instanceof AbstractPoiType) {
-					poiTypeFilter = getPoiTypeFilter((AbstractPoiType) obj);
+					poiTypeFilter = getPoiTypeFilter((AbstractPoiType) obj, poiAdditionals);
 				} else if (obj instanceof SearchPoiTypeFilter) {
 					poiTypeFilter = (SearchPoiTypeFilter) obj;
 				} else {
@@ -910,7 +901,7 @@ public class SearchCoreFactory {
 									nameFilter += otherSearchWords.get(k);
 								}
 							}
-							poiTypeFilter = getPoiTypeFilter(poiType.getKey());
+							poiTypeFilter = getPoiTypeFilter(poiType.getKey(), poiAdditionals);
 						}
 					}
 				}
@@ -920,7 +911,8 @@ public class SearchCoreFactory {
 				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
 				Set<String> searchedPois = new TreeSet<>();
 				for (BinaryMapIndexReader r : offlineIndexes) {
-					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, r, searchedPois, countExtraWords);
+					ResultMatcher<Amenity> rm = getResultMatcher(phrase, poiTypeFilter, resultMatcher, nameFilter, r, 
+							searchedPois, poiAdditionals, countExtraWords);
 					if (poiTypeFilter instanceof CustomSearchPoiFilter) {
 						rm = ((CustomSearchPoiFilter) poiTypeFilter).wrapResultMatcher(rm);
 					}
@@ -936,8 +928,9 @@ public class SearchCoreFactory {
 
 		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchPoiTypeFilter poiTypeFilter, 
 														final SearchResultMatcher resultMatcher, final String nameFilter, 
-														final BinaryMapIndexReader selected, final Set<String> searchedPois, 
-														final int countExtraWords) {
+														final BinaryMapIndexReader selected, final Set<String> searchedPois,
+														final Map<String, PoiType> poiAdditionals, final int countExtraWords) {
+			
 			
 			final NameStringMatcher ns = nameFilter == null ? null : new NameStringMatcher(nameFilter, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 			return new ResultMatcher<Amenity>() {
@@ -1009,10 +1002,14 @@ public class SearchCoreFactory {
 			};
 		}
 
-		private SearchPoiTypeFilter getPoiTypeFilter(AbstractPoiType pt) {
-			acceptedTypes.clear();
+		private SearchPoiTypeFilter getPoiTypeFilter(AbstractPoiType pt, Map<String, PoiType> poiAdditionals ) {
+			final Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
+					LinkedHashSet<String>>();
+			pt.putTypes(acceptedTypes);
 			poiAdditionals.clear();
-			updateTypesToAccept(pt);
+			if (pt instanceof PoiType && ((PoiType) pt).isAdditional() && ((PoiType) pt).getParentType() != null) {
+				poiAdditionals.put(pt.getKeyName(), (PoiType) pt);
+			}
 			return new SearchPoiTypeFilter() {
 
 				@Override
