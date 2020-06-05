@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
+import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -26,6 +27,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
+	private static final String UNINSTALL_SPEED_CAMERAS_PREF_ID = "uninstall_speed_cameras";
 
 	@Override
 	protected void setupPreferences() {
@@ -36,6 +38,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		setupSendAnonymousDataPref();
 		setupDialogsAndNotificationsPref();
 		setupEnableProxyPref();
+		setupUninstallSpeedCamerasPref();
 	}
 
 	@Override
@@ -106,6 +109,18 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 	@Override
 	public void onAnalyticsPrefsUpdate() {
 		setupSendAnonymousDataPref();
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		String prefId = preference.getKey();
+		if (UNINSTALL_SPEED_CAMERAS_PREF_ID.equals(prefId)) {
+			FragmentManager fm = getFragmentManager();
+			if (fm != null) {
+				SpeedCamerasBottomSheet.showInstance(fm);
+			}
+		}
+		return super.onPreferenceClick(preference);
 	}
 
 	private void setupDefaultAppModePref() {
@@ -190,5 +205,10 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 	private void setupEnableProxyPref() {
 		SwitchPreferenceEx enableProxy = (SwitchPreferenceEx) findPreference(settings.ENABLE_PROXY.getId());
 		enableProxy.setIcon(getPersistentPrefIcon(R.drawable.ic_action_proxy));
+	}
+
+	private void setupUninstallSpeedCamerasPref() {
+		Preference uninstallSpeedCameras = (Preference) findPreference(UNINSTALL_SPEED_CAMERAS_PREF_ID);
+		uninstallSpeedCameras.setIcon(getPersistentPrefIcon(R.drawable.ic_speed_camera_disabled));
 	}
 }

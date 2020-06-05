@@ -252,6 +252,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				Object currentValue = ((ListPreferenceEx) preference).getValue();
 				imageView.setEnabled(preference.isEnabled() && !OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(currentValue));
 			}
+		} else if (settings.SPEAK_SPEED_CAMERA.getId().equals(preference.getKey())) {
+			ScreenAlertsFragment.setupSpeedCamerasAlert(app, requireMyActivity(), holder, isNightMode());
 		}
 	}
 

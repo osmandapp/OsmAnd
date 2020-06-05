@@ -28,7 +28,7 @@
 
 	<SwitchPreferenceCompat
 		android:key="show_cameras"
-		android:layout="@layout/preference_switch"
+		android:layout="@layout/preference_switch_with_alert"
 		android:title="@string/show_cameras" />
 
 	<SwitchPreferenceCompat

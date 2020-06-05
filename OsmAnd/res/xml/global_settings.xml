@@ -60,4 +60,15 @@
 		app:fragment="net.osmand.plus.settings.fragments.ProxySettingsFragment"
 		tools:icon="@drawable/ic_action_proxy" />
 
+	<PreferenceCategory
+		android:key="legal"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/shared_string_legal" />
+
+	<Preference
+		android:key="uninstall_speed_cameras"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/uninstall_speed_cameras"
+		tools:icon="@drawable/ic_speed_camera_disabled" />
+
 </PreferenceScreen>

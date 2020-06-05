@@ -11,6 +11,16 @@
 	Thx - Hardy
 
 -->
+    <string name="speed_cameras_alert">Speed cameras alerts in some countries is prohibited by the law.</string>
+    <string name="shared_string_uninstall">Uninstall</string>
+    <string name="keep_active">Keep active</string>
+    <string name="speed_cameras_legal_descr">In some countries or regions, the use of speed camera warning applications is prohibited by law.
+        \n\nYou need to make a choice depending on the law of your country.
+        \n\nSelect %1$s and you will receive alerts and warnings about speed cameras.
+        \n\nSelect %2$s. All data related to speed cameras: alerts, notifications, POIs will be deleted until OsmAnd is completely reinstalled.</string>
+    <string name="speed_camera_pois">Speed camera POI’s</string>
+    <string name="shared_string_legal">Legal</string>
+    <string name="uninstall_speed_cameras">Uninstall speed cameras</string>
     <string name="screen_timeout">Screen timeout</string>
     <string name="delete_all_actions_message_q">Are you sure you want to irrevocably delete %d quick actions?</string>
     <string name="shared_string_delete_all_q">Delete all?</string>

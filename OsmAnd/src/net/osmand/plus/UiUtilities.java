@@ -1,10 +1,12 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.hardware.Sensor;
@@ -12,6 +14,8 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.text.style.StyleSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -31,6 +35,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -46,11 +51,15 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
+
+import java.lang.ref.WeakReference;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -644,5 +653,30 @@ public class UiUtilities {
 			LOG.error("Error trying to find index of " + textToStyle + " " + e);
 			return spannable;
 		}
+	}
+
+	public static SpannableString setWordsMediumFont(@NonNull Context ctx, @NonNull String text, @NonNull String... textToStyle) {
+		SpannableString spannable = new SpannableString(text);
+		for (String t : textToStyle) {
+			try {
+				int startIndex = text.indexOf(t);
+				spannable.setSpan(
+						new CustomTypefaceSpan(FontCache.getRobotoMedium(ctx)),
+						startIndex,
+						startIndex + t.length(),
+						Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+			} catch (RuntimeException e) {
+				LOG.error("Error trying to find index of " + t + " " + e);
+			}
+		}
+		return spannable;
+	}
+
+	public static GradientDrawable getRoundedBackgroundDrawable(@NonNull Context context, @ColorRes int colorRes, int radius) {
+		int r = AndroidUtils.dpToPx(context, radius);
+		GradientDrawable background = new GradientDrawable();
+		background.setColor(ContextCompat.getColor(context, colorRes));
+		background.setCornerRadius(r);
+		return background;
 	}
 }
