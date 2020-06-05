@@ -468,7 +468,7 @@
     <string name="analytics_pref_title">Analytics</string>
     <string name="turn_screen_on_info">Show map on the lock screen during navigation.</string>
     <string name="route_parameters_info">Settings for routing in the selected profile \"%1$s\".</string>
-    <string name="wake_time">Custom screen timeout</string>
+    <string name="wake_time">Timeout after wake-up</string>
     <string name="units_and_formats">Units &amp; formats</string>
     <string name="map_look_descr">Map appearance</string>
     <string name="map_look">Map look</string>
