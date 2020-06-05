@@ -733,7 +733,6 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
-			// TODO  Check names and count first , other?
 			if (phrase != null && object.otherNames != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
 				for (String s : object.otherNames) {
 					if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
@@ -741,7 +740,6 @@ public class SearchUICore {
 						break;
 					}
 				}
-				// TODO
 				if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {
 					for (String value : ((Amenity) object.object).getAdditionalInfo().values()) {
 						if (phrase.getFirstUnknownNameStringMatcher().matches(value)) {
@@ -880,6 +878,7 @@ public class SearchUICore {
 		TOP_VISIBLE,
 		FOUND_WORD_COUNT, // more is better (top)
 		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
+		COMPARE_AMENITY_TYPE_ADDITIONAL,
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
 		COMPARE_FIRST_NUMBER_IN_NAME,
 		COMPARE_DISTANCE_TO_PARENT_SEARCH_RESULT, // makes sense only for inner subqueries
@@ -927,6 +926,17 @@ public class SearchUICore {
 				int st2 = Algorithms.extractFirstIntegerNumber(localeName2);
 				if (st1 != st2) {
 					return Algorithms.compare(st1, st2);
+				}
+				break;
+			}
+			case COMPARE_AMENITY_TYPE_ADDITIONAL: {
+				if(o1.object instanceof AbstractPoiType && o2.object instanceof AbstractPoiType ) {
+					boolean additional1 = ((AbstractPoiType) o1.object).isAdditional();
+					boolean additional2 = ((AbstractPoiType) o2.object).isAdditional();
+					if (additional1 != additional2) {
+						// -1 - means 1st is less than 2nd
+						return additional1 ? 1 : -1;
+					}
 				}
 				break;
 			}

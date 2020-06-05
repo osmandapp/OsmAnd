@@ -702,6 +702,9 @@ public class SearchCoreFactory {
 			if (nm.matches(pf.getEnTranslation())) {
 				lst = addToList(pf.getEnTranslation(), lst);
 			}
+			if (nm.matches(pf.getKeyName())) {
+				lst = addToList(pf.getKeyName().replace('_', ' '), lst);
+			}
 
 			if (nm.matches(pf.getSynonyms())) {
 				String[] synonyms = pf.getSynonyms().split(";");
@@ -784,6 +787,7 @@ public class SearchCoreFactory {
 				String stdFilterId , SearchResult res) {
 			res.priorityDistance = 0;
 			res.objectType = ObjectType.POI_TYPE;
+			res.firstUnknownWordMatches = true;
 			if (showTopFiltersOnly) {
 				if (activePoiFilters.containsKey(stdFilterId)) {
 					res.priority = getPoiTypePriority(stdFilterId);

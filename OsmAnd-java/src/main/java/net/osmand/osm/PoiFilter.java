@@ -7,38 +7,58 @@ import java.util.List;
 import java.util.Map;
 
 public class PoiFilter extends AbstractPoiType {
-	
-	private PoiCategory pc; 
+
+	private PoiCategory pc;
 	private List<PoiType> poiTypes = new ArrayList<PoiType>();
 	private Map<String, PoiType> map = new LinkedHashMap<String, PoiType>();
 
-	public PoiFilter(MapPoiTypes registry, PoiCategory pc, String keyName){
+	public PoiFilter(MapPoiTypes registry, PoiCategory pc, String keyName) {
 		super(keyName, registry);
 		this.pc = pc;
 	}
-	
+
 	public PoiCategory getPoiCategory() {
 		return pc;
 	}
-	
+
 	public PoiType getPoiTypeByKeyName(String kn) {
 		return map.get(kn);
 	}
-	
+
+
+	public void addExtraPoiTypes(Map<String, PoiType> poiTypesToAdd) {
+		List<PoiType> npoiTypes = null;
+		Map<String, PoiType> nmap = null;
+		for (PoiType poiType : poiTypesToAdd.values()) {
+			if (!map.containsKey(poiType.getKeyName())) {
+				if (npoiTypes == null) {
+					npoiTypes = new ArrayList<PoiType>(this.poiTypes);
+					nmap = new LinkedHashMap<>(map);
+				}
+				npoiTypes.add(poiType);
+				nmap.put(poiType.getKeyName(), poiType);
+			}
+		}
+		if (npoiTypes != null) {
+			poiTypes = npoiTypes;
+			map = nmap;
+		}
+	}
+
 	public void addPoiType(PoiType type) {
 		if (!map.containsKey(type.getKeyName())) {
 			poiTypes.add(type);
 			map.put(type.getKeyName(), type);
 		} else {
 			PoiType prev = map.get(type.getKeyName());
-			if(prev.isReference()) {
+			if (prev.isReference()) {
 				poiTypes.remove(prev);
 				poiTypes.add(type);
 				map.put(type.getKeyName(), type);
 			}
 		}
 	}
-	
+
 	public Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
 		if (!acceptedTypes.containsKey(pc)) {
 			acceptedTypes.put(pc, new LinkedHashSet<String>());
@@ -65,9 +85,10 @@ public class PoiFilter extends AbstractPoiType {
 			}
 		}
 	}
-	
+
 	public List<PoiType> getPoiTypes() {
 		return poiTypes;
 	}
+
 
 }

@@ -1,11 +1,12 @@
 package net.osmand.plus.srtmplugin;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.os.AsyncTask;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -14,22 +15,21 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings.TerrainMode;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.settings.backend.OsmandSettings.TerrainMode;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import android.annotation.SuppressLint;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.os.AsyncTask;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static net.osmand.plus.settings.backend.OsmandSettings.TerrainMode.HILLSHADE;
 
@@ -86,11 +86,11 @@ public class TerrainLayer extends MapTileLayer {
                         new File(cacheDir, mode == HILLSHADE ? HILLSHADE_CACHE : SLOPE_CACHE).getPath(),
 						 null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING
 						    | SQLiteDatabase.CREATE_IF_NECESSARY );
-				if(sqliteDb.getVersion() == 0) {
+				if (sqliteDb.getVersion() == 0) {
 					sqliteDb.setVersion(1);
-					sqliteDb.execSQL("CREATE TABLE TILE_SOURCES(filename varchar2(256), date_modified int, left int, right int, top int, bottom int)");
 				}
-				
+				sqliteDb.execSQL("CREATE TABLE IF NOT EXISTS TILE_SOURCES(filename varchar2(256), date_modified int, left int, right int, top int, bottom int)");
+
 				Map<String, Long> fileModified = new HashMap<String, Long>();
 				Map<String, SQLiteTileSource> rs = readFiles(app, tilesDir, fileModified);
 				indexCachedResources(fileModified, rs);
