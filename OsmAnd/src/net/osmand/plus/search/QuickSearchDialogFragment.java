@@ -1248,7 +1248,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 									@Override
 									public void onApplyPoiFiltersState(final ApplicationMode appMode, boolean stateChanged) {
 										if (stateChanged) {
-											searchHelper.refreshFilterOrders();
+											searchHelper.refreshCustomPoiFilters();
 											reloadCategoriesInternal();
 										}
 										View containerView = getView();
@@ -1268,7 +1268,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 																settings.POI_FILTERS_ORDER.setModeValue(mode, orders);
 																settings.INACTIVE_POI_FILTERS.setModeValue(mode, inactive);
 															}
-															searchHelper.refreshFilterOrders();
+															searchHelper.refreshCustomPoiFilters();
 															reloadCategoriesInternal();
 														}
 													});

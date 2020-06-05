@@ -648,6 +648,7 @@ public class SearchCoreFactory {
 
 		public void clearCustomFilters() {
 			this.customPoiFilters.clear();
+			this.activePoiFilters.clear();
 		}
 
 		public void addCustomFilter(CustomSearchPoiFilter poiFilter, int priority) {

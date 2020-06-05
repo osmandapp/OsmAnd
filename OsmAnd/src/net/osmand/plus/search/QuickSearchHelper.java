@@ -112,14 +112,17 @@ public class QuickSearchHelper implements ResourceListener {
 			core.addCustomSearchPoiFilter(udf, 0);
 		}
 		PoiUIFilter topWikiPoiFilter = poiFilters.getTopWikiPoiFilter();
-		if (topWikiPoiFilter != null) {
+		if (topWikiPoiFilter != null && topWikiPoiFilter.isActive()) {
 			core.addCustomSearchPoiFilter(topWikiPoiFilter, 1);
 		}
-		core.addCustomSearchPoiFilter(poiFilters.getShowAllPOIFilter(), 1);
+		PoiUIFilter showAllPOIFilter = poiFilters.getShowAllPOIFilter();
+		if (showAllPOIFilter != null && showAllPOIFilter.isActive()) {
+			core.addCustomSearchPoiFilter(showAllPOIFilter, 1);
+		}
 		refreshFilterOrders();
 	}
 
-	public void refreshFilterOrders() {
+	private void refreshFilterOrders() {
 		PoiFiltersHelper filtersHelper = app.getPoiFilters();
 		core.setActivePoiFiltersByOrder(filtersHelper.getPoiFilterOrders(true));
 	}
