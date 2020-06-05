@@ -236,9 +236,9 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (contourLinesProp != null) {
 			final OsmandSettings.CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
 			if (!Algorithms.isEmpty(pref.get())) {
-				contourLinesEnabled = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
+				contourLinesEnabled = !CONTOUR_LINES_DISABLED_VALUE.equals(pref.get());
 			} else {
-				contourLinesEnabled = !contourLinesProp.getDefaultValueDescription().equals(CONTOUR_LINES_DISABLED_VALUE);
+				contourLinesEnabled = !CONTOUR_LINES_DISABLED_VALUE.equals(contourLinesProp.getDefaultValueDescription());
 			}
 		}
 		return contourLinesEnabled;

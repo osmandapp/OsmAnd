@@ -10,7 +10,7 @@ import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
 public class SizePreference extends DialogPreference {
 
 	private String[] entries;
-	private Object[] entryValues;
+	private String[] entryValues;
 	private String description;
 	private VehicleSizeAssets assets;
 
@@ -40,11 +40,11 @@ public class SizePreference extends DialogPreference {
 		this.entries = entries;
 	}
 
-	public Object[] getEntryValues() {
+	public String[] getEntryValues() {
 		return entryValues;
 	}
 
-	public void setEntryValues(Object[] entryValues) {
+	public void setEntryValues(String[] entryValues) {
 		this.entryValues = entryValues;
 	}
 
@@ -69,7 +69,11 @@ public class SizePreference extends DialogPreference {
 		String[] entries = getEntries();
 		for (int i = 0; i < entries.length; i++) {
 			if (entries[i].equals(item)) {
-				return Float.parseFloat(getEntryValues()[i].toString());
+				try {
+					return Float.parseFloat(entryValues[i]);
+				} catch (NumberFormatException e) {
+					return 0.0f;
+				}
 			}
 		}
 		return 0.0f;
@@ -77,12 +81,18 @@ public class SizePreference extends DialogPreference {
 
 	@Override
 	public CharSequence getSummary() {
+		String summary = "-";
 		String persistedString = getValue();
 		if (!persistedString.equals(defaultValue)) {
-			persistedString = String.valueOf(Float.parseFloat(persistedString) + 0.01f);
-			return String.format(getContext().getString(R.string.ltr_or_rtl_combine_via_space), persistedString, getContext().getString(assets.getMetricShortRes()));
+			try {
+				persistedString = String.valueOf(Float.parseFloat(persistedString) + 0.01f);
+				summary = String.format(getContext().getString(R.string.ltr_or_rtl_combine_via_space),
+						persistedString, getContext().getString(assets.getMetricShortRes()));
+			} catch (NumberFormatException e) {
+				summary = "-";
+			}
 		}
-		return "-";
+		return summary;
 	}
 
 	public String getValue() {
