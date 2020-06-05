@@ -68,14 +68,12 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -92,6 +90,8 @@ import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.search.SearchUICore;
@@ -354,15 +354,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
 							PoiUIFilter filter;
 							if (searchPhrase.isNoSelectedType()) {
+								AbstractPoiType uselectedPoiType = searchUICore.getUnselectedPoiType();
 								if (isOnlineSearch() && !Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
 									app.getPoiFilters().resetNominatimFilters();
 									filter = app.getPoiFilters().getNominatimPOIFilter();
 									filter.setFilterByName(searchPhrase.getUnknownSearchPhrase());
 									filter.clearCurrentResults();
-								} else if (searchPhrase.hasUnknownSearchWordPoiType()) {
-									AbstractPoiType pt = searchPhrase.getUnknownSearchWordPoiType();
-									filter = new PoiUIFilter(pt, app, "");
-									String customName = searchPhrase.getPoiNameFilter();
+								} else if (uselectedPoiType != null) {
+									filter = new PoiUIFilter(uselectedPoiType, app, "");
+									String customName = searchUICore.getCustomNameFilter();
 									if (!Algorithms.isEmpty(customName)) {
 										filter.setFilterByName(customName);
 									}
