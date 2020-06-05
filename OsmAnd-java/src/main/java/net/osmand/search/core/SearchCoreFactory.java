@@ -842,11 +842,21 @@ public class SearchCoreFactory {
 		private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
 				LinkedHashSet<String>>();
 		private Map<String, PoiType> poiAdditionals = new HashMap<String, PoiType>();
+		private AbstractPoiType unselectedPoiType;
+		private String nameFilter;
 		
 		public SearchAmenityByTypeAPI(MapPoiTypes types, SearchAmenityTypesAPI searchAmenityTypesAPI) {
 			super(ObjectType.POI);
 			this.types = types;
 			this.searchAmenityTypesAPI = searchAmenityTypesAPI;
+		}
+
+		public AbstractPoiType getUnselectedPoiType() {
+			return unselectedPoiType;
+		}
+
+		public String getNameFilter() {
+			return nameFilter;
 		}
 
 		@Override
@@ -874,6 +884,7 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
+			unselectedPoiType = null;
 			SearchPoiTypeFilter poiTypeFilter = null;
 			String nameFilter = null;
 			int countExtraWords = 0;
@@ -911,10 +922,12 @@ public class SearchCoreFactory {
 								}
 							}
 							poiTypeFilter = getPoiTypeFilter(poiType.getKey());
+							unselectedPoiType = poiType.getKey();
 						}
 					}
 				}
 			}
+			this.nameFilter = nameFilter;
 			if (poiTypeFilter != null) {
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
 				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
