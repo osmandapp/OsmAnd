@@ -3795,4 +3795,12 @@
     <string name="poi_pump_status_missing_beam">Состояние насоса: отсутствует рычаг</string>
     <string name="poi_socket_tesla_standard_yes">Tesla standard</string>
     <string name="poi_cuisine_suki">Суки (тайский горячий горшок)</string>
+    <string name="poi_seamark_water_level_awash"></string>
+    <string name="poi_seamark_water_level_dry">Уровень воды: сухо</string>
+    <string name="poi_seamark_water_level_submerged">Уровень воды: погружено</string>
+    <string name="poi_seamark_water_level_part_submerged">Уровень воды: частично погружено</string>
+    <string name="poi_memorial_ghost_bike">Велосипед Ghost</string>
+    <string name="poi_psv_no">Доступ к PSV: нет</string>
+    <string name="poi_psv_yes">Доступ к PSV: да</string>
+    <string name="poi_checkpoint_type_needler">Игольник</string>
 </resources>
