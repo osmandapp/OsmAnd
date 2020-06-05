@@ -54,7 +54,6 @@ public class PoiFiltersHelper {
 	private PoiUIFilter searchByNamePOIFilter;
 	private PoiUIFilter customPOIFilter;
 	private PoiUIFilter showAllPOIFilter;
-	private PoiUIFilter localWikiPoiFilter;
 	private PoiUIFilter topWikiPoiFilter;
 	private List<PoiUIFilter> cacheTopStandardFilters;
 	private Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>();
@@ -118,20 +117,6 @@ public class PoiFiltersHelper {
 			customPOIFilter = filter;
 		}
 		return customPOIFilter;
-	}
-
-	public PoiUIFilter getLocalWikiPOIFilter() {
-		if (localWikiPoiFilter == null) {
-			PoiType place = application.getPoiTypes().getPoiTypeByKey(WIKI_PLACE);
-			if (place != null && !Algorithms.isEmpty(application.getLanguage())) {
-				PoiUIFilter filter = new PoiUIFilter(place, application, " " +
-						application.getLangTranslation(application.getLanguage()));
-				filter.setSavedFilterByName("wiki:lang:" + application.getLanguage());
-				filter.setStandardFilter(true);
-				localWikiPoiFilter = filter;
-			}
-		}
-		return localWikiPoiFilter;
 	}
 
 	public void prepareTopWikiFilter(@NonNull PoiUIFilter wiki) {
@@ -217,8 +202,7 @@ public class PoiFiltersHelper {
 			}
 		}
 		PoiUIFilter ff = getFilterById(filterId, getCustomPOIFilter(), getSearchByNamePOIFilter(),
-				getTopWikiPoiFilter(), getLocalWikiPOIFilter(), getShowAllPOIFilter(),
-				getNominatimPOIFilter(), getNominatimAddressFilter());
+				getTopWikiPoiFilter(), getShowAllPOIFilter(), getNominatimPOIFilter(), getNominatimAddressFilter());
 		if (ff != null) {
 			return ff;
 		}
@@ -284,9 +268,6 @@ public class PoiFiltersHelper {
 			top = new ArrayList<>();
 			// user defined
 			top.addAll(getUserDefinedPoiFilters(true));
-			if (getLocalWikiPOIFilter() != null) {
-				top.add(getLocalWikiPOIFilter());
-			}
 			// default
 			MapPoiTypes poiTypes = application.getPoiTypes();
 			for (AbstractPoiType t : poiTypes.getTopVisibleFilters()) {

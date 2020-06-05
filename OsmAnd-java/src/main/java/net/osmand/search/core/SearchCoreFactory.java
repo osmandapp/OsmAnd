@@ -731,6 +731,7 @@ public class SearchCoreFactory {
 			if (translatedNames.isEmpty()) {
 				translatedNames = types.getAllTranslatedNames(false);
 				topVisibleFilters = types.getTopVisibleFilters();
+				topVisibleFilters.remove(types.getOsmwiki());
 				categories = types.getCategories(false);
 			}
 		}
