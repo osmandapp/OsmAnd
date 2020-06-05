@@ -559,7 +559,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							if (getActivity() instanceof MapActivity) {
 								((MapActivity) getActivity()).getMapView().refreshMap(true);
 							}
-							dismiss();
+							dismissAllowingStateLoss();
 						} else {
 							OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 							mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
