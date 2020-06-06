@@ -3256,7 +3256,7 @@
     <string name="analytics_pref_title">Analyseinstrumente</string>
     <string name="turn_screen_on_info">Karte während der Navigation auf dem Sperrbildschirm anzeigen.</string>
     <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils „%1$s“.</string>
-    <string name="wake_time">Aufwachdauer</string>
+    <string name="wake_time">Zeitüberschreitung nach dem Aufwachen</string>
     <string name="units_and_formats">Einheiten und Formate</string>
     <string name="appearance">Aussehen</string>
     <string name="map_look_descr">Kartendarstellung</string>
@@ -3728,9 +3728,9 @@
     <string name="profiles_for_action_not_found">Konnte keine solchen Profile finden.</string>
     <string name="index_item_world_basemap_detailed">Weltübersichtskarte (detailliert)</string>
     <string name="unsupported_type_error">Nicht unterstützter Typ</string>
-    <string name="ui_customization_description">Passen Sie die Menge der Elemente in \"Schublade\", \"Karte konfigurieren\" und \"Kontextmenü\" an.
+    <string name="ui_customization_description">Passen Sie die Menge der Elemente in „Schublade”, „Karte konfigurieren” und „Kontextmenü” an.
 \n
-\nSchalten Sie nicht verwendete Plugins aus, um alle ihre Steuerelemente auszublenden. %1$s.</string>
+\nDeaktivieren Sie ungenutzte Plugins, um deren Steuerelemente auszublenden. %1$s.</string>
     <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
     <string name="shared_string_drawer">Schublade</string>
     <string name="gpx_parse_error">OsmAnd GPX ist nicht optimal geformt, bitte kontaktieren Sie das Support-Team, um weitere Nachforschungen anzustellen.</string>
@@ -3746,17 +3746,15 @@
     <string name="system_screen_timeout">Systembildschirm-Timeout verwenden</string>
     <string name="turn_screen_on_options_descr">Optionen zum Aktivieren des Bildschirms:</string>
     <string name="turn_screen_on_descr">Wählen Sie Optionen zum Aufwecken des Bildschirms (stellen Sie sicher, dass OsmAnd im Vordergrund ist, wenn das Gerät gesperrt wird):</string>
-    <string name="turn_screen_on_navigation_instructions_descr">Der Bildschirm schaltet sich automatisch einige Sekunden vor Navigationsanweisungen für die unter „Aufweckzeiten“ festgelegte Dauer ein.
-\n
-\nFunktioniert nur während der Navigation.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Für jede Navigationsanweisung wird der Bildschirm eingeschaltet.</string>
     <string name="turn_screen_on_navigation_instructions">Navigationsanweisungen</string>
     <string name="turn_screen_on_power_button_descr">Drücken Sie den Einschaltknopf des Geräts, um den Bildschirm mit OsmAnd im Vordergrund einzuschalten.</string>
     <string name="turn_screen_on_power_button">Einschaltknopf</string>
     <string name="turn_screen_on_proximity_sensor">Näherungssensor</string>
-    <string name="turn_screen_on_wake_time_descr">Wählen Sie das Bildschirm-Timeout nach dem Aufwachen. (\"%1$s\" wendet keine Zeitüberschreitung an).</string>
+    <string name="turn_screen_on_wake_time_descr">Wählen Sie die Zeitüberschreitung des Bildschirms nach dem Aufwachen. („%1$s”, um keine Zeitüberschreitung anzuwenden.)</string>
     <string name="keep_screen_on">Bildschirm eingeschaltet lassen</string>
     <string name="keep_screen_off">Bildschirm ausgeschaltet lassen</string>
-    <string name="screen_timeout_descr">Begrenzt durch \"%1$s\", falls aktiviert.</string>
+    <string name="screen_timeout_descr">Wenn die Option „%1$s” aktiviert ist, ist die Dauer der Aktivität davon abhängig.</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercator-Projektion</string>
     <string name="one_image_per_tile">Eine Bilddatei pro Kachel</string>
     <string name="sqlite_db_file">SQLiteDB-Datei</string>
@@ -3772,5 +3770,13 @@
 \nEine Woche hat 10 080 Minuten.
 \nEin Monat hat 43 829 Minuten.</string>
     <string name="tiles_storage_descr">Wählen Sie aus, wie heruntergeladene Kacheln gespeichert werden.</string>
-    <string name="default_screen_timeout">Zeitüberschreitung des Systembildschirms</string>
+    <string name="default_screen_timeout">Zeitüberschreitung des Standardbildschirms</string>
+    <string name="width_limit_description">Bitte geben Sie Ihre Fahrzeugbreite an. Für breite Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
+    <string name="height_limit_description">Bitte geben Sie Ihre Fahrzeughöhe an. Für hohe Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
+    <string name="weight_limit_description">Bitte geben Sie Ihr Fahrzeuggewicht an. Für schwere Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Sie können Schnellaktionen mit Anwendungsprofilen exportieren oder importieren.</string>
+    <string name="shared_string_delete_all_q">Alle löschen\?</string>
+    <string name="delete_all_actions_message_q">Möchten Sie %d Schnellaktionen wirklich unwiderruflich löschen\?</string>
+    <string name="shared_string_tones">Töne</string>
+    <string name="shared_string_meters">Meter</string>
 </resources>
