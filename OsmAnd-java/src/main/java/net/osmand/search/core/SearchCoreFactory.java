@@ -648,6 +648,7 @@ public class SearchCoreFactory {
 
 		public void clearCustomFilters() {
 			this.customPoiFilters.clear();
+			this.activePoiFilters.clear();
 		}
 
 		public void addCustomFilter(CustomSearchPoiFilter poiFilter, int priority) {
@@ -731,6 +732,7 @@ public class SearchCoreFactory {
 			if (translatedNames.isEmpty()) {
 				translatedNames = types.getAllTranslatedNames(false);
 				topVisibleFilters = types.getTopVisibleFilters();
+				topVisibleFilters.remove(types.getOsmwiki());
 				categories = types.getCategories(false);
 			}
 		}
