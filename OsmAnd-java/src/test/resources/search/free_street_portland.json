@@ -11,17 +11,18 @@
   },
   "phrase": "48 Free Street Portland",
   "results": [
-    "48.0, <input> ",
-	"48, Free Street (Downtown), Portland"
+    "48.0, <input>  [[0, PARTIAL_LOCATION, 1.000, 5274.99 km]]",
+	"48, Free Street (Downtown), Portland [[4, HOUSE, 0.043, 0.09 km]]",
+	"48, Portland Street, North Berwick [[3, HOUSE, 0.430, 54.48 km]]",
+	"Free Street (Downtown), Portland [[3, STREET, 0.310, 0.03 km]]",
+	"Free Street (Ferry Village), South Portland [[3, STREET, 0.310, 1.69 km]]",
   ],
   "extra-results": [
-    "48, Portland Street, North Berwick",
-	"Free Street (Downtown), Portland",
-	"Free Street (Ferry Village), South Portland",
-	"Portland Street",
-	"Portland Street (Downtown), Portland",
-	"Portland Street Pier, South Portland",
-	"Portland Street, Yarmouth"
+   "Portland Street (Downtown), Portland [[2, STREET, 3.000, 0.62 km]]",
+	"Portland Street Pier, South Portland [[2, STREET, 3.000, 1.43 km]]",
+	"Portland Street, Yarmouth [[2, STREET, 3.000, 16.13 km]]",
+	"Portland Street, North Berwick [[2, STREET, 3.000, 54.37 km]]",
+	"Portland Street, Berwick [[2, STREET, 3.000, 59.60 km]]"
   ],
   "amenities": [
     {

@@ -206,7 +206,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 
 	private int getSmallIconId(String layer, int iconId) {
 		String iconName = view.getResources().getResourceEntryName(iconId);
-		return view.getResources().getIdentifier("map_" + iconName + "_" + layer + "_small"
+		return view.getResources().getIdentifier("ic_" + iconName + "_" + layer + "_small"
 				, "drawable", view.getContext().getPackageName());
 	}
 

@@ -24,9 +24,7 @@ public class NewAction extends QuickAction {
 
 	@Override
 	public void execute(MapActivity activity) {
-
-		AddQuickActionDialog dialog = new AddQuickActionDialog();
-		dialog.show(activity.getSupportFragmentManager(), AddQuickActionDialog.TAG);
+		AddQuickActionDialog.showInstance(activity.getSupportFragmentManager(), true);
 	}
 
 	@Override

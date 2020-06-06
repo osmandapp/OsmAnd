@@ -3769,4 +3769,7 @@
 \nUn mes son 43 829 minutos.</string>
     <string name="tiles_storage_descr">Elige cómo se almacenarán las teselas descargadas.</string>
     <string name="default_screen_timeout">Tiempo de espera de la pantalla del sistema</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Puedes exportar o importar acciones rápidas con perfiles de aplicación.</string>
+    <string name="shared_string_delete_all_q">¿Borrar todo\?</string>
+    <string name="delete_all_actions_message_q">¿Borrar irrevocablemente %d acciones rápidas\?</string>
 </resources>

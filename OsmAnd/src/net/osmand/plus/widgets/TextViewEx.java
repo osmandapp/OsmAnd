@@ -14,7 +14,7 @@ import androidx.appcompat.text.AllCapsTransformationMethod;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
 
-public class TextViewEx extends TextView {
+public class TextViewEx extends androidx.appcompat.widget.AppCompatTextView {
 	public TextViewEx(Context context) {
 		super(context);
 	}
@@ -29,13 +29,6 @@ public class TextViewEx extends TextView {
 		super(context, attrs, defStyleAttr);
 
 		parseAttributes(this, attrs, defStyleAttr, 0);
-	}
-
-	@TargetApi(21)
-	public TextViewEx(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-		super(context, attrs, defStyleAttr, defStyleRes);
-
-		parseAttributes(this, attrs, defStyleAttr, defStyleRes);
 	}
 
 	/*internal*/ static void parseAttributes(TextView target, AttributeSet attrs, int defStyleAttr,

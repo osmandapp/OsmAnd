@@ -1054,12 +1054,10 @@
     <string name="quick_action_poi_show">Sken %1$S</string>
     <string name="quick_action_favorites_hide">Inurifen</string>
     <string name="quick_action_favorites_show">Sken inurifen</string>
-    <string name="quick_actions_delete_text">Tebɣiḍ ad tekseḍ tigawt-agi\?</string>
     <string name="quick_actions_delete">Kkes tigawt</string>
     <string name="quick_action_edit_action">Tigawt</string>
     <string name="quick_action_navigation_voice_on">Taɣect:</string>
     <string name="quick_action_add_poi">Rnu</string>
-    <string name="quick_action_item_screen">Agdil</string>
     <string name="upload_poi">Ali</string>
     <string name="rendering_value_fine_name">Ṣeggem akken iwat anadi-ik</string>
     <string name="gpx_add_track">Rnu ugar...</string>

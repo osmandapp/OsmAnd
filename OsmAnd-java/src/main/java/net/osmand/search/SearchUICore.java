@@ -1,7 +1,6 @@
 package net.osmand.search;
 
 import net.osmand.Collator;
-import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -10,11 +9,13 @@ import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchCoreFactory.SearchAmenityByTypeAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
@@ -72,7 +73,7 @@ public class SearchUICore {
 		taskQueue = new LinkedBlockingQueue<Runnable>();
 		searchSettings = new SearchSettings(new ArrayList<BinaryMapIndexReader>());
 		searchSettings = searchSettings.setLang(locale, transliterate);
-		phrase = new SearchPhrase(searchSettings, OsmAndCollator.primaryCollator());
+		phrase = SearchPhrase.emptyPhrase(searchSettings);
 		currentSearchResult = new SearchResultCollection(phrase);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
 	}
@@ -325,7 +326,7 @@ public class SearchUICore {
 		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI());
 		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
-		apis.add(new SearchCoreFactory.SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
+		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
 		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
 		SearchBuildingAndIntersectionsByStreetAPI streetsApi =
 				new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
@@ -351,10 +352,10 @@ public class SearchUICore {
 		}
 	}
 	
-	public void setFilterOrders(List<String> filterOrders) {
+	public void setActivePoiFiltersByOrder(List<String> filterOrders) {
 		for (SearchCoreAPI capi : apis) {
 			if (capi instanceof SearchAmenityTypesAPI) {
-				((SearchAmenityTypesAPI) capi).setFilterOrders(filterOrders);
+				((SearchAmenityTypesAPI) capi).setActivePoiFiltersByOrder(filterOrders);
 			}
 		}
 	}
@@ -404,7 +405,7 @@ public class SearchUICore {
 	}
 
 	private boolean filterOneResult(SearchResult object, SearchPhrase phrase) {
-		NameStringMatcher nameStringMatcher = phrase.getNameStringMatcher();
+		NameStringMatcher nameStringMatcher = phrase.getFirstUnknownNameStringMatcher();
 		return nameStringMatcher.matches(object.localeName) || nameStringMatcher.matches(object.otherNames);
 	}
 
@@ -573,6 +574,24 @@ public class SearchUICore {
 		return radius;
 	}
 
+	public AbstractPoiType getUnselectedPoiType() {
+		for (SearchCoreAPI capi : apis) {
+			if (capi instanceof SearchAmenityByTypeAPI) {
+				return ((SearchAmenityByTypeAPI) capi).getUnselectedPoiType();
+			}
+		}
+		return null;
+	}
+
+	public String getCustomNameFilter() {
+		for (SearchCoreAPI capi : apis) {
+			if (capi instanceof SearchAmenityByTypeAPI) {
+				return ((SearchAmenityByTypeAPI) capi).getNameFilter();
+			}
+		}
+		return null;
+	}
+
 	void searchInternal(final SearchPhrase phrase, SearchResultMatcher matcher) {
 		preparePhrase(phrase);
 		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);
@@ -714,16 +733,16 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
-			if (phrase != null && object.otherNames != null && !phrase.getNameStringMatcher().matches(object.localeName)) {
+			if (phrase != null && object.otherNames != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
 				for (String s : object.otherNames) {
-					if (phrase.getNameStringMatcher().matches(s)) {
+					if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
 						object.alternateName = s;
 						break;
 					}
 				}
 				if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {
 					for (String value : ((Amenity) object.object).getAdditionalInfo().values()) {
-						if (phrase.getNameStringMatcher().matches(value)) {
+						if (phrase.getFirstUnknownNameStringMatcher().matches(value)) {
 							object.alternateName = value;
 							break;
 						}
@@ -759,14 +778,28 @@ public class SearchUICore {
 			return exportedCities;
 		}
 
-		public void exportObject(MapObject object) {
+		public void exportObject(SearchPhrase phrase, MapObject object) {
+			double maxDistance = phrase.getSettings().getExportSettings().getMaxDistance();
+			if (maxDistance > 0) {
+				double distance = MapUtils.getDistance(phrase.getSettings().getOriginalLocation(), object.getLocation());
+				if (distance > maxDistance) {
+					return;
+				}
+			}
 			if (exportedObjects == null) {
 				exportedObjects = new ArrayList<>();
 			}
 			exportedObjects.add(object);
 		}
 
-		public void exportCity(City city) {
+		public void exportCity(SearchPhrase phrase, City city) {
+			double maxDistance = phrase.getSettings().getExportSettings().getMaxDistance();
+			if (maxDistance > 0) {
+				double distance = MapUtils.getDistance(phrase.getSettings().getOriginalLocation(), city.getLocation());
+				if (distance > maxDistance) {
+					return;
+				}
+			}
 			if (exportedCities == null) {
 				exportedCities = new ArrayList<>();
 			}
@@ -816,7 +849,7 @@ public class SearchUICore {
 
 			SearchExportSettings exportSettings = phrase.getSettings().getExportSettings();
 			json.put("settings", phrase.getSettings().toJSON());
-			json.put("phrase", phrase.getRawUnknownSearchPhrase());
+			json.put("phrase", phrase.getFullSearchPhrase());
 			if (searchResult.searchResults != null && searchResult.searchResults.size() > 0) {
 				JSONArray resultsArr = new JSONArray();
 				for (SearchResult r : searchResult.searchResults) {
@@ -857,8 +890,9 @@ public class SearchUICore {
 	
 	private enum ResultCompareStep {
 		TOP_VISIBLE,
-		FOUND_WORD_COUNT,
-		UNKNOWN_PHRASE_MATCH_WEIGHT,
+		FOUND_WORD_COUNT, // more is better (top)
+		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
+		COMPARE_AMENITY_TYPE_ADDITIONAL,
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
 		COMPARE_FIRST_NUMBER_IN_NAME,
 		COMPARE_DISTANCE_TO_PARENT_SEARCH_RESULT, // makes sense only for inner subqueries
@@ -906,6 +940,17 @@ public class SearchUICore {
 				int st2 = Algorithms.extractFirstIntegerNumber(localeName2);
 				if (st1 != st2) {
 					return Algorithms.compare(st1, st2);
+				}
+				break;
+			}
+			case COMPARE_AMENITY_TYPE_ADDITIONAL: {
+				if(o1.object instanceof AbstractPoiType && o2.object instanceof AbstractPoiType ) {
+					boolean additional1 = ((AbstractPoiType) o1.object).isAdditional();
+					boolean additional2 = ((AbstractPoiType) o2.object).isAdditional();
+					if (additional1 != additional2) {
+						// -1 - means 1st is less than 2nd
+						return additional1 ? 1 : -1;
+					}
 				}
 				break;
 			}
@@ -964,14 +1009,12 @@ public class SearchUICore {
 	}
 
 	public static class SearchResultComparator implements Comparator<SearchResult> {
-		private SearchPhrase sp;
 		private Collator collator;
 		private LatLon loc;
 		private boolean sortByName;
 		
 
 		public SearchResultComparator(SearchPhrase sp) {
-			this.sp = sp;
 			this.collator = sp.getCollator();
 			loc = sp.getLastTokenLocation();
 			sortByName = sp.isSortByName();

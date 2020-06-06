@@ -46,6 +46,7 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -101,7 +102,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
 import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
@@ -258,7 +258,8 @@ public class ConfigureMapMenu {
 		}
 
 		@Override
-		public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
+		public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId,
+		                                  final int pos, boolean isChecked, int[] viewCoordinates) {
 			final OsmandSettings settings = ma.getMyApplication().getSettings();
 			final PoiFiltersHelper poiFiltersHelper = ma.getMyApplication().getPoiFilters();
 			final ContextMenuItem item = cm.getItem(pos);
@@ -266,12 +267,13 @@ public class ConfigureMapMenu {
 				item.setColorRes(isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 			}
 			if (itemId == R.string.layer_poi) {
-				poiFiltersHelper.clearSelectedPoiFilters(PoiTemplateList.POI);
+				PoiUIFilter wiki = poiFiltersHelper.getTopWikiPoiFilter();
+				poiFiltersHelper.clearSelectedPoiFilters(wiki);
 				if (isChecked) {
 					showPoiFilterDialog(adapter, adapter.getItem(pos));
 				} else {
 					adapter.getItem(pos).setDescription(
-							poiFiltersHelper.getSelectedPoiFiltersName(PoiTemplateList.POI));
+							poiFiltersHelper.getSelectedPoiFiltersName(wiki));
 				}
 			} else if (itemId == R.string.layer_amenity_label) {
 				settings.SHOW_POI_LABEL.set(isChecked);
@@ -286,17 +288,17 @@ public class ConfigureMapMenu {
 					showGpxSelectionDialog(adapter, adapter.getItem(pos));
 				}
 			} else if (itemId == R.string.shared_string_wikipedia) {
-				WikipediaPoiMenu.toggleWikipediaPoi(ma, isChecked, true,
-						new CallbackWithObject<Boolean>() {
-							@Override
-							public boolean processResult(Boolean selected) {
-								item.setSelected(selected);
-								item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-								item.setDescription(selected ? WikipediaPoiMenu.getLanguagesSummary(ma.getMyApplication()) : null);
-								adapter.notifyDataSetChanged();
-								return true;
-							}
-						});
+				WikipediaPoiMenu.toggleWikipediaPoi(ma, isChecked, new CallbackWithObject<Boolean>() {
+					@Override
+					public boolean processResult(Boolean selected) {
+						item.setSelected(selected);
+						item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						item.setDescription(selected ?
+								WikipediaPoiMenu.getLanguagesSummary(ma.getMyApplication()) : null);
+						adapter.notifyDataSetChanged();
+						return true;
+					}
+				});
 			} else if (itemId == R.string.rendering_category_transport) {
 				boolean selected = TransportLinesMenu.isShowLines(ma.getMyApplication());
 				TransportLinesMenu.toggleTransportLines(ma, !selected, new CallbackWithObject<Boolean>() {
@@ -346,19 +348,20 @@ public class ConfigureMapMenu {
 		protected void showPoiFilterDialog(final ArrayAdapter<ContextMenuItem> adapter,
 										   final ContextMenuItem item) {
 			final PoiFiltersHelper poiFiltersHelper = ma.getMyApplication().getPoiFilters();
+			final PoiUIFilter wiki = poiFiltersHelper.getTopWikiPoiFilter();
 			MapActivityLayers.DismissListener dismissListener =
 					new MapActivityLayers.DismissListener() {
 						@Override
 						public void dismiss() {
 							PoiFiltersHelper pf = ma.getMyApplication().getPoiFilters();
-							boolean selected = pf.isShowingAnyPoi(PoiTemplateList.POI);
+							boolean selected = pf.isShowingAnyPoi(wiki);
 							item.setSelected(selected);
-							item.setDescription(pf.getSelectedPoiFiltersName(PoiTemplateList.POI));
+							item.setDescription(pf.getSelectedPoiFiltersName(wiki));
 							item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 							adapter.notifyDataSetChanged();
 						}
 					};
-			if (poiFiltersHelper.isShowingAnyPoi(PoiTemplateList.POI)) {
+			if (poiFiltersHelper.isShowingAnyPoi(wiki)) {
 				ma.getMapLayers().showMultichoicePoiFilterDialog(ma.getMapView(),
 						dismissListener);
 			} else {
@@ -390,12 +393,13 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(makeDeleteAction(settings.SHOW_FAVORITES))
 				.setListener(l)
 				.createItem());
-		selected = app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.POI);
+		PoiUIFilter wiki = app.getPoiFilters().getTopWikiPoiFilter();
+		selected = app.getPoiFilters().isShowingAnyPoi(wiki);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(POI_OVERLAY_ID)
 				.setTitleId(R.string.layer_poi, activity)
 				.setSelected(selected)
-				.setDescription(app.getPoiFilters().getSelectedPoiFiltersName(PoiTemplateList.POI))
+				.setDescription(app.getPoiFilters().getSelectedPoiFiltersName(wiki))
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_info_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
@@ -431,7 +435,7 @@ public class ConfigureMapMenu {
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
 
-		selected = app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.WIKI);
+		selected = app.getPoiFilters().isTopWikiFilterSelected();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(WIKIPEDIA_ID)
 				.setTitleId(R.string.shared_string_wikipedia, activity)
@@ -440,7 +444,6 @@ public class ConfigureMapMenu {
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_plugin_wikipedia)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setItemDeleteAction(makeDeleteAction(settings.SHOW_WIKIPEDIA_POI))
 				.setListener(l).createItem());
 
 		selected = settings.SHOW_MAP_MARKERS.get();

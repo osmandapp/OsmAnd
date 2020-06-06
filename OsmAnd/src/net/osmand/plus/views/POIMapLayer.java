@@ -39,6 +39,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -205,8 +206,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		Set<PoiUIFilter> selectedPoiFilters = app.getPoiFilters().getSelectedPoiFilters();
-		if (!this.filters.equals(selectedPoiFilters)) {
-            this.filters = new TreeSet<>(selectedPoiFilters);
+		if (this.filters != selectedPoiFilters) {
+			this.filters = selectedPoiFilters;
 			data.clearCache();
 		}
 

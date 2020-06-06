@@ -2383,13 +2383,12 @@
 \nمعظم البلدان في جميع أنحاء العالم متاحة للتحميل! 
 \nاحصل على برنامج تنقل موثوق به في بلدك - سواءاً في فرنسا، ألمانيا، المكسيك، المملكة المتحدة، إسبانيا، هولندا، الولايات المتحدة الأمريكية، روسيا، البرازيل أو أي دولة أخرى.</string>
     <string name="osmand_plus_extended_description_part1">أوسماند بلس (توجيهات OSM للملاحة الآلية) تطبيق خريطة وملاحة مع إمكانية الوصول إلى بيانات الموقع مجاناً وفي جميع أنحاء العالم، وبجودة عالية. 
-\n
-\nاستمتع بالملاحة بصوت والصورة، عرض النقاط المهمة حولك (POI)، وإنشاء وإدارة مسارات GPX باستخدام معلومات عن تصور وعلو الخطوط الكنتورية، خياراً بين القيادة، ركوب الدراجات، وضع المشاة، التعديل على OSM وأكثر من ذلك بكثير.
-\n
-\nأوسماند بلس هو إصدار للتطبيق مدفوع الأجر. قبل شرائه، ادعم المشروع، بتمويل لتطوير الميزات الجديدة والحصول على آخر التحديثات.
-\n
+\nاستمتع بالملاحة بصوت والصورة، عرض النقاط المهمة حولك (POI)، وإنشاء وإدارة مسارات GPX باستخدام معلومات عن تصور وعلو الخطوط الكنتورية، خياراً بين القيادة، ركوب الدراجات، وضع المشاة، التعديل على OSM وأكثر من ذلك بكثير. 
+\n 
+\nأوسماند بلس هو إصدار للتطبيق مدفوع الأجر. قبل شرائه، ادعم المشروع، بتمويل لتطوير الميزات الجديدة والحصول على آخر التحديثات. 
+\n 
 \n بعض الميزات الرئيسية:</string>
-    <string name="osmand_plus_extended_description_part2">الملاحة 
+    <string name="osmand_plus_extended_description_part2">الملاحة
 \n• يعمل على الإنترنت (سريع) أو في وضع غير متصل (لا رسوم تجوال خارج الوطن) 
 \n• توجيه صوتي بالتفصيل (الأصوات المسجلة أو مدرجة) 
 \n• موجه مسار اختياري، عرض اسم الشارع، والوقت المقدر للوصول 
@@ -3716,4 +3715,45 @@
     <string name="profiles_for_action_not_found">لم يتم العثور على ملفات التعريف المحددة لهذا الإجراء.</string>
     <string name="index_item_world_basemap_detailed">خريطة عامة للعالم (تفصيلية)</string>
     <string name="unsupported_type_error">نوع غير معتمد</string>
+    <string name="gpx_parse_error">لم يتم تكوين OsmAnd GPX بشكل جيد ، يرجى الاتصال بفريق الدعم لمزيد من التحقيقات.</string>
+    <string name="shared_string_always">دائما</string>
+    <string name="screen_control">التحكم في الشاشة</string>
+    <string name="system_screen_timeout_descr">إيقاف تشغيل الشاشة بعد انتهاء مهلة شاشة النظام.</string>
+    <string name="system_screen_timeout">استخدام مهلة انطفاء شاشة النظام</string>
+    <string name="turn_screen_on_options_descr">خيارات تنبيه الشاشة:</string>
+    <string name="turn_screen_on_descr">حدد خيارات تنبيه الشاشة (تأكد من وجود أوسماند في المقدمة عند قفل الجهاز):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">ستقوم كل تعليمات تنقل بتشغيل الشاشة.</string>
+    <string name="turn_screen_on_navigation_instructions">تعليمات الملاحة</string>
+    <string name="turn_screen_on_power_button_descr">سيؤدي الضغط على زر طاقة الجهاز إلى تشغيل الشاشة باستخدام أوسماند أعلى شاشة القفل.</string>
+    <string name="turn_screen_on_power_button">زر الطاقة</string>
+    <string name="turn_screen_on_proximity_sensor">مستشعر القرب</string>
+    <string name="turn_screen_on_wake_time_descr">حدد مهلة الشاشة بعد الاستيقاظ. (\"%1$s\" لا ينطبق أي مهلة.)</string>
+    <string name="keep_screen_on">إبقاء الشاشة قيد التشغيل</string>
+    <string name="keep_screen_off">إبقاء الشاشة مطفأة</string>
+    <string name="screen_timeout_descr">محدد ب \"٪1$s\" ، إذا تم تمكينه.</string>
+    <string name="pseudo_mercator_projection">إسقاط ميركاتور الوهمي</string>
+    <string name="one_image_per_tile">ملف صورة واحد لكل إطار متجانب</string>
+    <string name="sqlite_db_file">ملف SQLiteDB</string>
+    <string name="online_map_name_helper_text">توفير اسم لمصدر الخريطة عبر الإنترنت.</string>
+    <string name="online_map_url_helper_text">أدخل عنوان URL للمصدر عبر الإنترنت أو لصقه.</string>
+    <string name="edit_online_source">تحرير المصدر عبر الإنترنت</string>
+    <string name="expire_time">وقت انتهاء الصلاحية</string>
+    <string name="mercator_projection">إسقاط مركاتور</string>
+    <string name="storage_format">تنسيق التخزين</string>
+    <string name="map_source_zoom_levels">تعيين الحد الأدنى والحد الأقصى لمستوى التكبير/التصغير الذي سيتم عرض الخريطة عبر الإنترنت أو تحميله.</string>
+    <string name="map_source_zoom_levels_descr">ستؤثر هذه المعلمات على العرض عند استخدامها كخريطة أو تراكب/وضع. 
+\n
+\n%1$s: ستقتصر الخريطة على التكبيرات المحددة. 
+\n
+\n%2$s: مستويات التكبير التي ستكون فيها الإطارات المتجانبة الأصلية مرئية. سوف يحدث التحجيم أو التحجيم خارج هذه القيم.</string>
+    <string name="expire_time_descr">وقت انتهاء الصلاحية بالدقائق. سيتم إعادة تحميل الإطارات المتجانبة المخزنة مؤقتًا بعد الوقت المحدد. اترك هذا الحقل فارغًا لعدم تحديث الإطارات المتجانبة لهذا المصدر. 
+\n
+\nيوم واحد هو 1440 دقيقة.
+\nأسبوع واحد هو 10080 دقيقة.
+\nشهر واحد هو 43 829 دقيقة.</string>
+    <string name="tiles_storage_descr">اختر كيفية تخزين الطبقات التي تم تنزيلها.</string>
+    <string name="default_screen_timeout">مهلة شاشة النظام</string>
+    <string name="export_import_quick_actions_with_profiles_promo">يمكنك تصدير أو استيراد إجراءات سريعة باستخدام ملفات تعريف بروفايل التطبيق.</string>
+    <string name="shared_string_delete_all_q">حذف الكل؟</string>
+    <string name="delete_all_actions_message_q">هل أنت متأكد من رغبتك في حذف الإجراءات السريعة %d نهائيًا؟</string>
 </resources>

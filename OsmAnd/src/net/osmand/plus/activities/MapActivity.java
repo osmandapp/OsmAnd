@@ -730,13 +730,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			prevActivityIntent = null;
 			return;
 		}
-		if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed()) {
-			return;
-		}
 		QuickActionListFragment quickActionListFragment = getQuickActionListFragment();
-		if (quickActionListFragment != null && quickActionListFragment.isVisible()
-				&& quickActionListFragment.fromDashboard()) {
-			this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
+		if (quickActionListFragment != null && quickActionListFragment.isVisible()) {
+			if (quickActionListFragment.fromDashboard()) {
+				this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
+			} else {
+				getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed();
+			}
+		} else if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed()) {
+			return;
 		}
 		ImportSettingsFragment importSettingsFragment = getImportSettingsFragment();
 		if (importSettingsFragment != null) {
@@ -1990,7 +1992,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void unlock() {
-		changeKeyguardFlags(true, false);
+		changeKeyguardFlags(true, true);
 	}
 
 	@Override

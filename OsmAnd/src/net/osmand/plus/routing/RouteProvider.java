@@ -1040,9 +1040,8 @@ public class RouteProvider {
 			points.add(pt);
 		}
 
-		int currentRoute = route.currentRoute;
-		List<Location> locations = route.getRouteLocations();
-		List<RouteSegmentResult> originalRoute = route.getOriginalRoute(currentRoute);
+		List<Location> locations = route.getImmutableAllLocations();
+		List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
 		RouteExporter exporter = new RouteExporter(name, originalRoute, locations, points);
 		return exporter.exportRoute();
 	}

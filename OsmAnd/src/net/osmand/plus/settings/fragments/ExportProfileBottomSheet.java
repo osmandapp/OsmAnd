@@ -26,13 +26,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.settings.backend.SettingsHelper;
-import net.osmand.plus.settings.backend.SettingsHelper.FileSettingsItem;
-import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -42,8 +38,12 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.settings.fragments.ExportImportSettingsAdapter.Type;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.SettingsHelper;
+import net.osmand.plus.settings.backend.SettingsHelper.FileSettingsItem;
+import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.settings.fragments.ExportImportSettingsAdapter.Type;
 
 import org.apache.commons.logging.Log;
 
@@ -403,7 +403,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		try {
 			final Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND);
-			sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.exported_osmand_profile, profile.toHumanString()));
+			sendIntent.putExtra(Intent.EXTRA_SUBJECT, profile.toHumanString() + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
 			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), file));
 			sendIntent.setType("*/*");
 			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

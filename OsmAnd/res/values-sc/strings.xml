@@ -3728,4 +3728,8 @@
     <string name="profiles_for_action_not_found">Impossìbile a agatare custos profilos.</string>
     <string name="index_item_world_basemap_detailed">Mapa mundiale generale (a sa minuda)</string>
     <string name="unsupported_type_error">Casta non suportada</string>
+    <string name="tiles_storage_descr">Issèbera comente sos tasseddos iscarrigados ant a èssere sarvados.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Podes esportare o importare atziones lestras cun profilos de s\'aplicatzione.</string>
+    <string name="shared_string_delete_all_q">Iscantzellare totu\?</string>
+    <string name="delete_all_actions_message_q">Ses seguru de chèrrere iscantzellare definitivamente %d atziones lestras\?</string>
 </resources>

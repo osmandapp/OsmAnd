@@ -103,6 +103,15 @@
                 android:layout_marginRight="@dimen/content_padding"
                 tools:src="@drawable/ic_action_cancel" />
 
+            <ProgressBar
+                android:id="@+id/searchProgressBar"
+                android:layout_width="@dimen/card_button_progress_size"
+                android:layout_height="@dimen/card_button_progress_size"
+                android:layout_marginEnd="@dimen/content_padding_half"
+                android:layout_marginRight="@dimen/content_padding_half"
+                android:indeterminate="true"
+                android:visibility="gone" />
+
         </LinearLayout>
 
     </LinearLayout>

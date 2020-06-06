@@ -3171,7 +3171,7 @@
     <string name="turn_screen_on_router">Прокидатися перед поворотом</string>
     <string name="turn_screen_on_time_descr">Відрегулюйте, як довго повинен бути ввімкнений екран.</string>
     <string name="turn_screen_on_sensor">Використовувати датчик наближення</string>
-    <string name="turn_screen_on_sensor_descr">Проведіть рукою над екраном, щоб увімкнути його під час навігації.</string>
+    <string name="turn_screen_on_sensor_descr">Вмикати екран махом руки.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">1 клас</string>
     <string name="rendering_attr_highway_class_track_grade2_name">2 клас</string>
     <string name="rendering_attr_highway_class_track_grade3_name">3 клас</string>
@@ -3724,10 +3724,10 @@
     <string name="gpx_parse_error">OsmAnd GPX недостатньо сформований. Зверніться до служби підтримки для подальшого дослідження.</string>
     <string name="shared_string_always">Завжди</string>
     <string name="screen_control">Керування екраном</string>
-    <string name="system_screen_timeout_descr">Увімкніть, щоб екран вимкнувся після певного проміжку бездіяльності, буде використано час, визначений у системних налаштуваннях вашого пристрою.</string>
-    <string name="system_screen_timeout">Час очікування екрана</string>
-    <string name="turn_screen_on_options_descr">Використовуйте ці параметри, щоб пробудити екран із OsmAnd на передньому плані.</string>
-    <string name="turn_screen_on_descr">Ці параметри працюватимуть, лише якщо OsmAnd буде на передньому плані, коли пристрій буде заблоковано.</string>
+    <string name="system_screen_timeout_descr">Екран буде вимикатися після певного періоду бездіяльності, зазначеного в системних налаштуваннях пристрою.</string>
+    <string name="system_screen_timeout">Використовувати системний час очікування</string>
+    <string name="turn_screen_on_options_descr">Параметри увімкнення екрана</string>
+    <string name="turn_screen_on_descr">Параметри увімкнення екрану (переконайтесь, що OsmAnd стоїть на передньому плані, коли пристрій заблоковано):</string>
     <string name="turn_screen_on_navigation_instructions_descr">Екран увімкнеться автоматично за кілька секунд до вказівки щодо навігації за визначений час у опції «Час пробудження».
 \n
 \nПрацює лише під час навігації.</string>
@@ -3735,10 +3735,10 @@
     <string name="turn_screen_on_power_button_descr">Натисніть кнопку живлення пристрою, щоб увімкнути екран на передньому плані з OsmAnd.</string>
     <string name="turn_screen_on_power_button">Кнопка живлення</string>
     <string name="turn_screen_on_proximity_sensor">Датчик наближення</string>
-    <string name="turn_screen_on_wake_time_descr">Виберіть час діяльності екрана після пробудження, екран не вимкнеться, якщо ввімкнено \"%1$s\".</string>
+    <string name="turn_screen_on_wake_time_descr">Час очікування екрану після увімкнення. («%1$s» вимикає вимкнення екрану.)</string>
     <string name="keep_screen_on">Тримати екран увімкненим</string>
     <string name="keep_screen_off">Тримати екран вимкненим</string>
-    <string name="screen_timeout_descr">Якщо параметр \"%1$s\" увімкнено, час активності буде залежати від нього.</string>
+    <string name="screen_timeout_descr">Обмежено \"%1$s\", якщо ввімкнено.</string>
     <string name="pseudo_mercator_projection">Псевдопроєкція Меркатора</string>
     <string name="one_image_per_tile">Один файл зображення на плитку</string>
     <string name="sqlite_db_file">Файл SQLiteDB</string>
@@ -3760,4 +3760,5 @@
 \nОдин тиждень - 10 080 хвилин.
 \nОдин місяць - 43 829 хвилин.</string>
     <string name="tiles_storage_descr">Виберіть спосіб зберігання завантажених плиток.</string>
+    <string name="default_screen_timeout">Системний час очікування екрану</string>
 </resources>

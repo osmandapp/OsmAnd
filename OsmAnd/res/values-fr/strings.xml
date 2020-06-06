@@ -3745,4 +3745,7 @@
     <string name="map_source_zoom_levels">Définissez les niveaux de zoom minimum et maximum auxquels la carte en ligne sera affichée ou chargée.</string>
     <string name="tiles_storage_descr">Sélectionnez comment les tuiles téléchargées seront stockées.</string>
     <string name="default_screen_timeout">Délai système de veille écran</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Vous pouvez exporter ou importer les actions rapides avec les profils d’application.</string>
+    <string name="shared_string_delete_all_q">Tout supprimer \?</string>
+    <string name="delete_all_actions_message_q">Voulez-vous vraiment supprimer définitivement %d actions rapides \?</string>
 </resources>

@@ -37,7 +37,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="wrap_content"
+        android:minHeight="72dp"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
         android:background="?attr/actionModeBackground">
@@ -64,7 +65,7 @@
             android:textColorHint="@color/white_80_transparent"
             android:textSize="@dimen/default_list_text_size_large"
             android:hint="@string/shared_string_action_name"
-            android:maxLines="1"
+            android:maxLines="5"
             android:layout_marginLeft="-4dp"
             android:layout_marginRight="16dp"
             android:layout_alignLeft="@+id/title"

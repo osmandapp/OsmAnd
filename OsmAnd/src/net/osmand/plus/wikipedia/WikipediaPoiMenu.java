@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Set;
 
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
-import static net.osmand.plus.poi.PoiFiltersHelper.PoiTemplateList;
 
 public class WikipediaPoiMenu {
 
@@ -39,14 +38,12 @@ public class WikipediaPoiMenu {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
 	private OsmandSettings settings;
-	private ApplicationMode appMode;
 	private boolean nightMode;
 
 	public WikipediaPoiMenu(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.settings = app.getSettings();
-		this.appMode = settings.getApplicationMode();
 		this.nightMode = app.getDaynightHelper().isNightModeForMapControls();
 	}
 
@@ -54,19 +51,11 @@ public class WikipediaPoiMenu {
 		final int toggleActionStringId = R.string.shared_string_wikipedia;
 		final int languageActionStringId = R.string.shared_string_language;
 		final int spaceHeight = app.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_big_item_height);
-		final boolean enabled = app.getPoiFilters().isShowingAnyPoi(PoiTemplateList.WIKI);
+		final boolean enabled = app.getPoiFilters().isTopWikiFilterSelected();
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		adapter.setDefaultLayoutId(R.layout.dash_item_with_description_72dp);
 		adapter.setProfileDependent(true);
 		adapter.setNightMode(nightMode);
-
-		final CallbackWithObject<Boolean> callback = new CallbackWithObject<Boolean>() {
-			@Override
-			public boolean processResult(Boolean result) {
-				mapActivity.getDashboard().refreshContent(true);
-				return true;
-			}
-		};
 
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
@@ -76,11 +65,11 @@ public class WikipediaPoiMenu {
 					app.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							toggleWikipediaPoi(mapActivity, !enabled, true, callback);
+							toggleWikipediaPoi(mapActivity, !enabled, null);
 						}
 					});
 				} else if (itemId == languageActionStringId) {
-					showLanguagesDialog(mapActivity, appMode, true, true, callback);
+					SelectWikiLanguagesBottomSheet.showInstance(mapActivity, true);
 				}
 				return false;
 			}
@@ -231,33 +220,15 @@ public class WikipediaPoiMenu {
 		return adapter;
 	}
 
-	private static void showLanguagesDialog(@NonNull final MapActivity mapActivity,
-	                                        @NonNull final ApplicationMode appMode,
-	                                        final boolean usedOnMap,
-	                                        final boolean refresh,
-	                                        final CallbackWithObject<Boolean> callback) {
-		final OsmandApplication app = mapActivity.getMyApplication();
-		SelectWikiLanguagesBottomSheet.showInstance(mapActivity, appMode, usedOnMap,
-				new CallbackWithObject<Boolean>() {
-					@Override
-					public boolean processResult(Boolean result) {
-						if (result) {
-							Bundle wikiPoiSetting = getWikiPoiSettingsForProfile(app, appMode);
-							if (wikiPoiSetting != null) {
-								boolean globalWikiEnabled =
-										wikiPoiSetting.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
-								if (refresh) {
-									refreshWikiPoi(mapActivity, globalWikiEnabled);
-								} else {
-									toggleWikipediaPoi(mapActivity, true, usedOnMap, callback);
-								}
-							} else {
-								toggleWikipediaPoi(mapActivity, false, usedOnMap, callback);
-							}
-						}
-						return true;
-					}
-				});
+	public static void updateWikipediaState(MapActivity ma) {
+		final OsmandApplication app = ma.getMyApplication();
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		Bundle wikiPoiSetting = getWikiPoiSettingsForProfile(app, appMode);
+		if (wikiPoiSetting != null) {
+			refreshWikipediaOnMap(ma);
+		} else {
+			toggleWikipediaPoi(ma, false, null);
+		}
 	}
 
 	public static String getTranslation(OsmandApplication app, String locale) {
@@ -304,65 +275,48 @@ public class WikipediaPoiMenu {
 	}
 
 	public static void toggleWikipediaPoi(final MapActivity mapActivity, boolean enable,
-	                                      boolean usedOnMap, CallbackWithObject<Boolean> callback) {
+	                                      CallbackWithObject<Boolean> callback) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
 		if (enable) {
-			Bundle wikiPoiSettings = getWikiPoiSettings(app);
-			if (wikiPoiSettings != null) {
-				settings.SHOW_WIKIPEDIA_POI.set(true);
-				boolean globalWikiEnabled = wikiPoiSettings.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
-				showWikiOnMap(app, globalWikiEnabled);
-			} else {
-				ApplicationMode appMode = settings.getApplicationMode();
-				showLanguagesDialog(mapActivity, appMode, usedOnMap, false, callback);
-			}
+			showWikipediaOnMap(app);
 		} else {
-			settings.SHOW_WIKIPEDIA_POI.set(false);
-			hideWikiFromMap(app);
+			hideWikipediaFromMap(app);
 		}
 		if (callback != null) {
-			callback.processResult(settings.SHOW_WIKIPEDIA_POI.get());
+			callback.processResult(enable);
+		} else {
+			mapActivity.getDashboard().refreshContent(true);
 		}
 		mapActivity.refreshMap();
 	}
 
-	public static void refreshWikiPoi(MapActivity mapActivity, boolean globalWikiEnabled) {
+	public static void refreshWikipediaOnMap(MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		hideWikiFromMap(app);
-		showWikiOnMap(app, globalWikiEnabled);
+		app.getPoiFilters().loadSelectedPoiFilters();
 		mapActivity.getDashboard().refreshContent(true);
 		mapActivity.refreshMap();
 	}
 
-	private static void showWikiOnMap(OsmandApplication app, boolean globalWikiEnabled) {
+	private static void showWikipediaOnMap(OsmandApplication app) {
 		PoiFiltersHelper ph = app.getPoiFilters();
-		if (globalWikiEnabled) {
-			ph.addSelectedPoiFilter(PoiTemplateList.WIKI, ph.getGlobalWikiPoiFilter());
-		} else {
-			List<PoiUIFilter> filters = ph.getLocalWikipediaPoiFilters(true);
-			for (PoiUIFilter filter : filters) {
-				ph.addSelectedPoiFilter(PoiTemplateList.WIKI, filter);
-			}
-		}
+		PoiUIFilter wiki = ph.getTopWikiPoiFilter();
+		ph.loadSelectedPoiFilters();
+		ph.addSelectedPoiFilter(wiki);
 	}
 
-	private static void hideWikiFromMap(OsmandApplication app) {
+	private static void hideWikipediaFromMap(OsmandApplication app) {
 		PoiFiltersHelper ph = app.getPoiFilters();
-		for (PoiUIFilter filter : ph.getSelectedPoiFilters(PoiTemplateList.WIKI)) {
-			ph.removePoiFilter(filter);
-		}
-		ph.clearSelectedPoiFilters(PoiTemplateList.WIKI);
+		PoiUIFilter wiki = ph.getTopWikiPoiFilter();
+		ph.removePoiFilter(wiki);
+		ph.removeSelectedPoiFilter(wiki);
 	}
 
 	public static String getLanguagesSummary(OsmandApplication app) {
-		Bundle wikiLanguagesSetting = getWikiPoiSettings(app);
-		if (wikiLanguagesSetting != null) {
-			boolean globalWikiEnabled = wikiLanguagesSetting.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
-			List<String> enabledLocales = wikiLanguagesSetting.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
-			if (globalWikiEnabled) {
-				return app.getString(R.string.shared_string_all_languages);
-			} else if (enabledLocales != null) {
+		Bundle wikiSetting = getWikiPoiSettings(app);
+		if (wikiSetting != null) {
+			boolean globalWikiEnabled = wikiSetting.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
+			List<String> enabledLocales = wikiSetting.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
+			if (!globalWikiEnabled && enabledLocales != null) {
 				List<String> translations = new ArrayList<>();
 				for (String locale : enabledLocales) {
 					translations.add(getTranslation(app, locale));
@@ -370,11 +324,7 @@ public class WikipediaPoiMenu {
 				return android.text.TextUtils.join(", ", translations);
 			}
 		}
-		return null;
-	}
-
-	public static boolean isWikiPoiEnabled(OsmandApplication app) {
-		return app.getSettings().SHOW_WIKIPEDIA_POI.get() && getWikiPoiSettings(app) != null;
+		return app.getString(R.string.shared_string_all_languages);
 	}
 
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
@@ -385,7 +335,7 @@ public class WikipediaPoiMenu {
 	                                            @NonNull Set<String> availableArticleLangs,
 	                                            String preferredLanguage) {
 		Bundle wikiPoiSettings = getWikiPoiSettings(app);
-		if (!app.getSettings().SHOW_WIKIPEDIA_POI.get() || wikiPoiSettings == null) {
+		if (!app.getPoiFilters().isTopWikiFilterSelected() || wikiPoiSettings == null) {
 			// Wikipedia POI setting disabled
 			return preferredLanguage;
 		}
