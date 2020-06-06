@@ -3250,7 +3250,7 @@
     <string name="navigate_point_format_olc">Open Location Code</string>
     <string name="coordinates_format_info">قالب انتخابی در همه‌جای برنامه به کار خواهد رفت.</string>
     <string name="start_up_message_pref">پیام راه‌اندازی</string>
-    <string name="wake_time">زمان بیدارباش</string>
+    <string name="wake_time">زمان خاموشی پس از بیدارباش</string>
     <string name="units_and_formats">یکاها و قالب‌ها</string>
     <string name="appearance">ظاهر</string>
     <string name="map_look">چهرهٔ نقشه</string>
@@ -3758,7 +3758,7 @@
     <string name="reset_deafult_order">بازنشانی ترتیب پیشفرض اقلام</string>
     <string name="gpx_parse_error">‏OsmAnd GPX قالب درستی ندارد. لطفاً برای بررسی بیشتر با گروه پشتیبانی تماس بگیرید.</string>
     <string name="turn_screen_on_wake_time_descr">زمان خاموشی صفحه پس از بیدارباش را انتخاب کنید. («%1$s» یعنی خاموش نشود)</string>
-    <string name="screen_timeout_descr">محدودشده به‌وسیلهٔ «%1$s»، اگر فعال باشد.</string>
+    <string name="screen_timeout_descr">اگر گزینهٔ «%1$s» فعال باشد، زمان فعالیت به آن وابسته خواهد بود.</string>
     <string name="shared_string_always">همیشه</string>
     <string name="screen_control">کنترل صفحه</string>
     <string name="system_screen_timeout_descr">هنگامی که زمان خاموشی صفحه مطابق تنظیمات دستگاه سر برسد، صفحه را خاموش می‌کند.</string>
@@ -3792,9 +3792,14 @@
 \nیک هفته ۱۰ ۰۸۰ دقیقه است.
 \nیک ماه ۴۳ ۸۲۹ دقیقه است.</string>
     <string name="tiles_storage_descr">شیوهٔ ذخیره‌سازی کاشی‌های دانلودشده را انتخاب کنید.</string>
-    <string name="default_screen_timeout">زمان خاموشی صفحه در دستگاه</string>
+    <string name="default_screen_timeout">زمان خاموشی پیشفرض صفحه</string>
     <string name="export_import_quick_actions_with_profiles_promo">می‌توانید کنش‌های فوری را همراه با پروفایل‌های برنامه برون‌برد یا درون‌برد کنید.</string>
     <string name="shared_string_delete_all_q">همه حذف شود؟</string>
     <string name="delete_all_actions_message_q">آیا %d کنش فوری را حذف می‌کنید؟ (برگشت‌ناپذیر است)</string>
     <string name="screen_timeout">زمان خاموشی صفحه</string>
+    <string name="width_limit_description">عرض وسیلهٔ نقلیهٔ خود را مشخص کنید. ممکن است محدودیت‌های مسیر برای وسایل نقلیهٔ عریض اِعمال شود.</string>
+    <string name="height_limit_description">ارتفاع وسیلهٔ نقلیهٔ خود را مشخص کنید. ممکن است محدودیت‌های مسیر برای وسایل نقلیهٔ بلند اِعمال شود.</string>
+    <string name="weight_limit_description">وزن وسیلهٔ نقلیهٔ خود را مشخص کنید. ممکن است محدودیت‌های مسیر برای وسایل نقلیهٔ سنگین اِعمال شود.</string>
+    <string name="shared_string_tones">تُن</string>
+    <string name="shared_string_meters">متر</string>
 </resources>
