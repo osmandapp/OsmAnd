@@ -3241,7 +3241,7 @@
     <string name="coordinates_format_info">Выбранный формат будет применён во всём приложении.</string>
     <string name="pref_selected_by_default_for_profiles">Параметр выбран по умолчанию для профилей: %s</string>
     <string name="route_parameters_info">Настройки для маршрутизации в выбранном профиле «%1$s».</string>
-    <string name="wake_time">Время пробуждения</string>
+    <string name="wake_time">Время пробуждения экрана</string>
     <string name="appearance">Внешний вид</string>
     <string name="configure_navigation">Настроить навигацию</string>
     <string name="screen_alerts_descr">Предупреждения отображаются в левом нижнем углу во время навигации.</string>
@@ -3727,7 +3727,7 @@
     <string name="gpx_parse_error">OsmAnd сформировал GPX не совсем правильно, пожалуйста, свяжитесь со службой поддержки для дальнейшего расследования.</string>
     <string name="turn_screen_on_navigation_instructions_descr">Каждая навигационная инструкция включает экран.</string>
     <string name="turn_screen_on_navigation_instructions">Инструкции по навигации</string>
-    <string name="screen_timeout_descr">Если используется, ограничено «%1$s».</string>
+    <string name="screen_timeout_descr">Используется только если «%1$s» отключено.</string>
     <string name="turn_screen_on_wake_time_descr">Время работы экрана после включения. («%1$s» отключает выключение экрана.)</string>
     <string name="turn_screen_on_power_button_descr">Нажатие кнопки питания устройства включит экран с OsmAnd на переднем плане экрана блокировки.</string>
     <string name="pseudo_mercator_projection">Псевдо-проекция Меркатора</string>
@@ -3765,4 +3765,5 @@
     <string name="export_import_quick_actions_with_profiles_promo">Вы можете экспортировать или импортировать быстрые действия вместе с профилями.</string>
     <string name="shared_string_delete_all_q">Удалить все\?</string>
     <string name="delete_all_actions_message_q">Вы уверены, что хотите безвозвратно удалить %d быстрых действий\?</string>
+    <string name="screen_timeout">Время экрана</string>
 </resources>

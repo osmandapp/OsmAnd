@@ -3138,7 +3138,7 @@
     <string name="utm_format_descr">يستخدم أوسماند تنسيق UTM وهو مشابه ولكن غير مطابق لتنسيق UTM الناتو.</string>
     <string name="shared_string_example">مثال</string>
     <string name="navigate_point_format_utm">معيار الإحداثيات</string>
-    <string name="navigate_point_format_olc">رمز موقع مفتوح</string>
+    <string name="navigate_point_format_olc">Open Location Code</string>
     <string name="coordinates_format_info">سيتم تطبيق التنسيق المحدد في كل أنحاء التطبيق.</string>
     <string name="pref_selected_by_default_for_profiles">يتم تحديد هذا الاعداد بشكل افتراضي للأوضاع: %s</string>
     <string name="change_default_settings">تغيير الإعدادات</string>
@@ -3147,7 +3147,7 @@
     <string name="start_up_message_pref">رسالة البدء</string>
     <string name="analytics_pref_title">تحليل</string>
     <string name="turn_screen_on_info">إظهار الخريطة على شاشة القفل أثناء التنقل.</string>
-    <string name="wake_time">وقت الاستيقاظ</string>
+    <string name="wake_time">مهلة شاشة مخصصة</string>
     <string name="units_and_formats">الوحدات والأشكال</string>
     <string name="appearance">المظهر</string>
     <string name="map_look_descr">مظهر الخريطة</string>
@@ -3756,4 +3756,5 @@
     <string name="export_import_quick_actions_with_profiles_promo">يمكنك تصدير أو استيراد إجراءات سريعة باستخدام ملفات تعريف بروفايل التطبيق.</string>
     <string name="shared_string_delete_all_q">حذف الكل؟</string>
     <string name="delete_all_actions_message_q">هل أنت متأكد من رغبتك في حذف الإجراءات السريعة %d نهائيًا؟</string>
+    <string name="screen_timeout">مهلة الشاشة</string>
 </resources>
