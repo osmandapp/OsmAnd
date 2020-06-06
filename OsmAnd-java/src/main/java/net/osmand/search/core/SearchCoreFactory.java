@@ -226,7 +226,7 @@ public class SearchCoreFactory {
 					sr.objectType = ObjectType.REGION;
 					sr.location = bmir.getRegionCenter();
 					sr.preferredZoom = 6;
-					if (phrase.getFirstUnknownSearchWord().length() <= 1 && phrase.isNoSelectedType()) {
+					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
 					} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
 						resultMatcher.publish(sr);
@@ -648,6 +648,7 @@ public class SearchCoreFactory {
 
 		public void clearCustomFilters() {
 			this.customPoiFilters.clear();
+			this.activePoiFilters.clear();
 		}
 
 		public void addCustomFilter(CustomSearchPoiFilter poiFilter, int priority) {
@@ -731,6 +732,7 @@ public class SearchCoreFactory {
 			if (translatedNames.isEmpty()) {
 				translatedNames = types.getAllTranslatedNames(false);
 				topVisibleFilters = types.getTopVisibleFilters();
+				topVisibleFilters.remove(types.getOsmwiki());
 				categories = types.getCategories(false);
 			}
 		}

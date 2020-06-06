@@ -111,15 +111,18 @@ public class QuickSearchHelper implements ResourceListener {
 		for (CustomSearchPoiFilter udf : poiFilters.getUserDefinedPoiFilters(false)) {
 			core.addCustomSearchPoiFilter(udf, 0);
 		}
-		PoiUIFilter localWikiPoiFilter = poiFilters.getLocalWikiPOIFilter();
-		if (localWikiPoiFilter != null) {
-			core.addCustomSearchPoiFilter(localWikiPoiFilter, 1);
+		PoiUIFilter topWikiPoiFilter = poiFilters.getTopWikiPoiFilter();
+		if (topWikiPoiFilter != null && topWikiPoiFilter.isActive()) {
+			core.addCustomSearchPoiFilter(topWikiPoiFilter, 1);
 		}
-		core.addCustomSearchPoiFilter(poiFilters.getShowAllPOIFilter(), 1);
+		PoiUIFilter showAllPOIFilter = poiFilters.getShowAllPOIFilter();
+		if (showAllPOIFilter != null && showAllPOIFilter.isActive()) {
+			core.addCustomSearchPoiFilter(showAllPOIFilter, 1);
+		}
 		refreshFilterOrders();
 	}
 
-	public void refreshFilterOrders() {
+	private void refreshFilterOrders() {
 		PoiFiltersHelper filtersHelper = app.getPoiFilters();
 		core.setActivePoiFiltersByOrder(filtersHelper.getPoiFilterOrders(true));
 	}
@@ -201,7 +204,7 @@ public class QuickSearchHelper implements ResourceListener {
 						//sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
 						sr.relatedObject = selectedGpx.getGpxFile();
 						sr.preferredZoom = 17;
-						if (phrase.getFirstUnknownSearchWord().length() <= 1 && phrase.isNoSelectedType()) {
+						if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 							resultMatcher.publish(sr);
 						} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
 							resultMatcher.publish(sr);
@@ -313,7 +316,7 @@ public class QuickSearchHelper implements ResourceListener {
 						continue;
 					}
 				}
-				if (phrase.getFirstUnknownSearchWord().length() <= 1
+				if (phrase.getFullSearchPhrase().length() <= 1
 						&& (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.FAVORITE_GROUP))) {
 					resultMatcher.publish(sr);
 				} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
@@ -457,7 +460,7 @@ public class QuickSearchHelper implements ResourceListener {
 				}
 				if (publish) {
 					sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (p++);
-					if (phrase.getFirstUnknownSearchWord().length() <= 1 && phrase.isNoSelectedType()) {
+					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
 					} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
 						resultMatcher.publish(sr);
