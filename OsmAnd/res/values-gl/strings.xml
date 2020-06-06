@@ -1571,7 +1571,7 @@ Lon %2$s</string>
     <string name="we_really_care_about_your_opinion">A túa opinión e comentarios son valorados.</string>
     <string name="rate_this_app">Avalía esta aplicación</string>
     <string name="rate_this_app_long">Dálle unha valoración ó OsmAnd na Google Play</string>
-    <string name="user_hates_app_get_feedback">Díganos o porque.</string>
+    <string name="user_hates_app_get_feedback">Dinos o por que.</string>
     <string name="user_hates_app_get_feedback_long">Por favor, fáganos saber calquera suxestión.</string>
     <string name="delete_change">Eliminar modificación</string>
     <string name="successfully_uploaded_pattern">Subido {0}/{1}</string>
@@ -3266,7 +3266,7 @@ Lon %2$s</string>
     <string name="analytics_pref_title">Análises</string>
     <string name="turn_screen_on_info">Amosar o mapa na pantalla de bloqueo durante a navegación.</string>
     <string name="route_parameters_info">Axustes para a navegación do perfil escollido \"%1$s\".</string>
-    <string name="wake_time">Hora de espertado</string>
+    <string name="wake_time">Tempo de espera da pantalla personalizado</string>
     <string name="units_and_formats">Unidades e formatos</string>
     <string name="appearance">Aparencia</string>
     <string name="map_look_descr">Aparencia do mapa</string>
@@ -3767,7 +3767,7 @@ Lon %2$s</string>
     <string name="turn_screen_on_power_button_descr">Premendo o botón de acendido do dispositivo acenderá a pantalla co OsmAnd na pantalla de bloqueo.</string>
     <string name="turn_screen_on_proximity_sensor">Sensor de proximidade</string>
     <string name="keep_screen_on">Manter a pantalla acendida</string>
-    <string name="screen_timeout_descr">Limitado por \"%1$s\", se está activado.</string>
+    <string name="screen_timeout_descr">Isto só é efectivo se \"%1$s\" está desactivado.</string>
     <string name="one_image_per_tile">Un ficheiro de imaxe por tesela</string>
     <string name="online_map_name_helper_text">Fornece un nome para a fonte do mapa en liña.</string>
     <string name="online_map_url_helper_text">Insire ou pega a URL da fonte en liña.</string>
@@ -3788,4 +3788,8 @@ Lon %2$s</string>
 \n Un mes son 43829 minutos.</string>
     <string name="tiles_storage_descr">Escolle de que xeito serán almacenadas as teselas baixadas.</string>
     <string name="default_screen_timeout">Tempo de espera da pantalla do sistema</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Podes exportar ou importar accións rápidas con perfís de aplicación.</string>
+    <string name="shared_string_delete_all_q">Eliminar todo\?</string>
+    <string name="delete_all_actions_message_q">Eliminar de xeito irrevogábel %d accións rápidas\?</string>
+    <string name="screen_timeout">Tempo de espera da pantalla</string>
 </resources>

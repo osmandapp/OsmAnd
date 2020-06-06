@@ -219,7 +219,7 @@
     <string name="favorite_category_add_new">Aldoni novan</string>
     <string name="favorite_category_select">Elekti kategorion</string>
     <string name="default_speed_system_descr">Difini unuon de rapido.</string>
-    <string name="default_speed_system">Unuoj de rapido</string>
+    <string name="default_speed_system">Unuo de rapido</string>
     <string name="nm">nm</string>
     <string name="si_nm">Marmejloj</string>
     <string name="si_kmh">Kilometroj en horo</string>
@@ -3238,7 +3238,7 @@
     <string name="analytics_pref_title">Analiziloj</string>
     <string name="turn_screen_on_info">Montri mapon sur la ŝlos‑ekrano dum navigado.</string>
     <string name="route_parameters_info">Agordoj pri kurs‑difinado por la elektita profilo “%1$s”.</string>
-    <string name="wake_time">Aktiveca periodo</string>
+    <string name="wake_time">Propra aktiveca periodo de ekrano</string>
     <string name="units_and_formats">Unuoj kaj formoj</string>
     <string name="appearance">Aspekto</string>
     <string name="map_look_descr">Alĝustigi mapon</string>
@@ -3733,7 +3733,7 @@
     <string name="turn_screen_on_wake_time_descr">Elekti aktivecan periodon de la ekrano post vekiĝi, la ekrano ne malŝaltiĝos se “%1$s” estos aktiva.</string>
     <string name="keep_screen_on">Teni ekranon aktiva</string>
     <string name="keep_screen_off">Teni ekranon malaktiva</string>
-    <string name="screen_timeout_descr">Limigita al “%1$s”, se aktiva.</string>
+    <string name="screen_timeout_descr">Funkcias nur kiam “%1$s” estas malŝaltita.</string>
     <string name="pseudo_mercator_projection">Kvazaŭ-merkatora projekcio</string>
     <string name="one_image_per_tile">Po unu bild‑dosiero per kahelo</string>
     <string name="sqlite_db_file">SQLiteDB-dosiero</string>
@@ -3756,4 +3756,8 @@
 \nUnu jaro egalas al 43 829 minutoj.</string>
     <string name="tiles_storage_descr">Elekti kiel konservi elŝutitajn kahelojn.</string>
     <string name="default_screen_timeout">Laŭ sistema agordo</string>
+    <string name="screen_timeout">Aktiveca periodo de ekrano</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Vi povas enporti aŭ elporti rapidajn agojn kune kun profiloj de aplikaĵo.</string>
+    <string name="shared_string_delete_all_q">Ĉu forigi ĉiujn\?</string>
+    <string name="delete_all_actions_message_q">Ĉu vi certe volas neinversigeble forigi %d rapidajn agojn\?</string>
 </resources>

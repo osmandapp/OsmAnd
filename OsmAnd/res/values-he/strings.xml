@@ -3221,7 +3221,7 @@
     <string name="analytics_pref_title">ניתוח</string>
     <string name="turn_screen_on_info">להציג מפה על מסך הנעילה במהלך הניווט.</string>
     <string name="route_parameters_info">הגדרות לניווט בפרופיל הנבחר: „%1$s”.</string>
-    <string name="wake_time">זמן התעוררות</string>
+    <string name="wake_time">זמן תפוגת שומר מסך בהתאמה אישית</string>
     <string name="units_and_formats">יחידות ותבניות</string>
     <string name="appearance">מראה</string>
     <string name="map_look_descr">מראה המפה</string>
@@ -3769,9 +3769,10 @@
     <string name="turn_screen_on_wake_time_descr">לבחור את זמן תפוגת שומר המסך של המערכת לאחר ההתעוררות. („%1$s” - ללא זמן תפוגה.)</string>
     <string name="keep_screen_on">להשאיר את המסך פעיל</string>
     <string name="keep_screen_off">להשאיר את המסך כבוי</string>
-    <string name="screen_timeout_descr">מוגבל על ידי „%1$s”, אם פעיל.</string>
+    <string name="screen_timeout_descr">חל רק אם „%1$s” מושבת.</string>
     <string name="default_screen_timeout">תפוגת שומר המסך של המערכת</string>
     <string name="export_import_quick_actions_with_profiles_promo">ניתן לייצא או לייבא פעולות מהירות עם פרופילי יישומון.</string>
     <string name="shared_string_delete_all_q">למחוק הכול\?</string>
     <string name="delete_all_actions_message_q">למחוק %d פעולות מהירות באופן בלתי הפיך\?</string>
+    <string name="screen_timeout">תפוגת זמן שומר מסך</string>
 </resources>

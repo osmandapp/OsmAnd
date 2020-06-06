@@ -3241,7 +3241,7 @@
     <string name="analytics_pref_title">Analýzy</string>
     <string name="turn_screen_on_info">Zobraziť mapu na zamknutej obrazovke počas navigácie.</string>
     <string name="route_parameters_info">Nastavenia navigácie v zvolenom profile \"%1$s\".</string>
-    <string name="wake_time">Čas zobudenia</string>
+    <string name="wake_time">Vlastný časový limit obrazovky</string>
     <string name="units_and_formats">Jednotky &amp; formáty</string>
     <string name="appearance">Zobrazenie</string>
     <string name="map_look_descr">Zobrazenie mapy</string>
@@ -3725,7 +3725,7 @@
     <string name="unsupported_type_error">Nepodporovaný typ</string>
     <string name="shared_string_always">Vždy</string>
     <string name="turn_screen_on_descr">Vyberte možnosti prebudenia obrazovky (pri uzamknutí zariadenia sa uistite, že je OsmAnd v popredí):</string>
-    <string name="screen_timeout_descr">Limitované \"%1$s\", ak je povolené.</string>
+    <string name="screen_timeout_descr">Toto sa uplatní len ak je \"%1$s\" vypnuté.</string>
     <string name="one_image_per_tile">Jeden obrazový súbor na dlaždicu</string>
     <string name="system_screen_timeout">Použiť systémový časový limit obrazovky</string>
     <string name="turn_screen_on_options_descr">Možnosti prebudenia obrazovky:</string>
@@ -3761,4 +3761,8 @@
 \nJeden týždeň je 10 080 minút.
 \nJeden mesiac je 43 829 minút.</string>
     <string name="default_screen_timeout">Systémový časový limit obrazovky</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Rýchle akcie môžete exportovať a importovať spolu s profilmi aplikácie.</string>
+    <string name="shared_string_delete_all_q">Odstrániť všetko\?</string>
+    <string name="delete_all_actions_message_q">Naozaj chcete nevratne odstrániť %d rýchlych akcií\?</string>
+    <string name="screen_timeout">Časový limit obrazovky</string>
 </resources>

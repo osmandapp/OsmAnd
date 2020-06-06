@@ -3796,4 +3796,5 @@
     <string name="export_import_quick_actions_with_profiles_promo">می‌توانید کنش‌های فوری را همراه با پروفایل‌های برنامه برون‌برد یا درون‌برد کنید.</string>
     <string name="shared_string_delete_all_q">همه حذف شود؟</string>
     <string name="delete_all_actions_message_q">آیا %d کنش فوری را حذف می‌کنید؟ (برگشت‌ناپذیر است)</string>
+    <string name="screen_timeout">زمان خاموشی صفحه</string>
 </resources>

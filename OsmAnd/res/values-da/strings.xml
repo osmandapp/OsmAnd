@@ -3682,4 +3682,20 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="profiles_for_action_not_found">Kunne ikke finde sådanne profiler.</string>
     <string name="index_item_world_basemap_detailed">Verdensoversigtskort (detaljeret)</string>
     <string name="unsupported_type_error">Ikke understøttet type</string>
+    <string name="shared_string_always">Altid</string>
+    <string name="screen_control">Skærmstyring</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Hver navigationsinstruktion tænder skærmen.</string>
+    <string name="turn_screen_on_navigation_instructions">Navigationsinstruktioner</string>
+    <string name="turn_screen_on_power_button">Tænd/sluk-knap</string>
+    <string name="turn_screen_on_proximity_sensor">Nærhedssensor</string>
+    <string name="keep_screen_on">Hold skærmen tændt</string>
+    <string name="keep_screen_off">Hold skærmen slukket</string>
+    <string name="pseudo_mercator_projection">Pseudo-Mercatorprojektion</string>
+    <string name="sqlite_db_file">SQLiteDB fil</string>
+    <string name="online_map_name_helper_text">Angiv et navn til onlinekortkilden.</string>
+    <string name="edit_online_source">Rediger onlinekilde</string>
+    <string name="expire_time">Udløbstid</string>
+    <string name="mercator_projection">Mercatorprojektion</string>
+    <string name="storage_format">Lagerformat</string>
+    <string name="shared_string_delete_all_q">Slet alt\?</string>
 </resources>

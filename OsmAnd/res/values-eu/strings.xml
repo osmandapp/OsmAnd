@@ -3233,7 +3233,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="analytics_pref_title">Analitikak</string>
     <string name="turn_screen_on_info">Erakutsi mapa blokeo pantailan nabigazioan zehar.</string>
     <string name="route_parameters_info">Ibilbide ezarpenak hautatutako \"%1$s.\" profilean.</string>
-    <string name="wake_time">Esnatze ordua</string>
+    <string name="wake_time">Pantaila denbora-muga pertsonalizatua</string>
     <string name="units_and_formats">Unitate eta formatuak</string>
     <string name="appearance">Itxura</string>
     <string name="map_look_descr">Maparen itxura</string>
@@ -3750,7 +3750,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="turn_screen_on_wake_time_descr">Hautatu pantailaren denbora-muga esnatu ondoren. (\"%1$s\" ez da aplikatzen denbora-muga.)</string>
     <string name="keep_screen_on">Mantendu pantaila piztuta</string>
     <string name="keep_screen_off">Mantendu pantaila itzalita</string>
-    <string name="screen_timeout_descr">\"%1$s\"-k mugatua, gaituta badago.</string>
+    <string name="screen_timeout_descr">Hau eraginkorra izateko \"%1$s\" desgaitu behar da.</string>
     <string name="pseudo_mercator_projection">Sasi-Mercator proiekzioa</string>
     <string name="one_image_per_tile">Irudi fitxategi bat lauzako</string>
     <string name="sqlite_db_file">SQLiteDB fitxategia</string>
@@ -3773,4 +3773,8 @@ Area honi dagokio: %1$s x %2$s</string>
 \nHilabete bat 43829 minutu dira.</string>
     <string name="tiles_storage_descr">Aukeratu nola gorde deskargatutako lauzak.</string>
     <string name="default_screen_timeout">Sistemako pantailaren denbora-muga</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Ekintza azkarrak esportatu edo inportatu ditzakezu aplikazio-profilekin.</string>
+    <string name="shared_string_delete_all_q">Ezabatu denak\?</string>
+    <string name="delete_all_actions_message_q">Ziur behin betiko ezabatu nahi dituzula %d ekintza azkar\?</string>
+    <string name="screen_timeout">Pantailaren denbora-muga</string>
 </resources>

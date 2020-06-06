@@ -3241,7 +3241,7 @@
     <string name="analytics_pref_title">分析</string>
     <string name="turn_screen_on_info">導航時在鎖定畫面上顯示地圖。</string>
     <string name="route_parameters_info">在選定的設定檔「%1$s」的路徑設定。</string>
-    <string name="wake_time">喚醒時間</string>
+    <string name="wake_time">自訂螢幕逾時</string>
     <string name="units_and_formats">單位與格式</string>
     <string name="appearance">外觀</string>
     <string name="map_look_descr">地圖外觀</string>
@@ -3735,7 +3735,7 @@
     <string name="turn_screen_on_wake_time_descr">選取喚醒後的螢幕逾時。（「%1$s」不適用逾時。）</string>
     <string name="keep_screen_on">保持螢幕開啟</string>
     <string name="keep_screen_off">保持螢幕關閉</string>
-    <string name="screen_timeout_descr">若啟用的話則由「%1$s」限制。</string>
+    <string name="screen_timeout_descr">僅在「%1$s」停用時才有效。</string>
     <string name="pseudo_mercator_projection">偽麥卡托投影</string>
     <string name="mercator_projection">麥卡托投影</string>
     <string name="one_image_per_tile">每個圖磚一個圖片檔案</string>
@@ -3761,4 +3761,5 @@
     <string name="export_import_quick_actions_with_profiles_promo">您可以使用應用程式設定檔匯出或匯入快速動作。</string>
     <string name="shared_string_delete_all_q">刪除全部？</string>
     <string name="delete_all_actions_message_q">您確定您想要刪除 %d 快速動作嗎？</string>
+    <string name="screen_timeout">螢幕逾時</string>
 </resources>

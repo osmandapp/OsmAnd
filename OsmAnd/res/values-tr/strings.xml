@@ -1619,7 +1619,7 @@
     <string name="shared_string_waypoint">Mevki</string>
     <string name="selected_gpx_info_show">"
 \n
-\nGörmek için harita üzerinde basılı tutun"</string>
+\nHaritada görüntülemek için uzun dokunun"</string>
     <string name="delay_navigation_start">Otomatik dönüş rehberlik dönüş başlayın</string>
     <string name="gpx_info_subtracks">Alt-rotalar: %1$s</string>
     <string name="gpx_info_waypoints">Yol işaretleri: %1$s</string>
@@ -2603,7 +2603,7 @@
     <string name="analytics_pref_title">Analytics</string>
     <string name="turn_screen_on_info">Navigasyon sırasında haritayı kilit ekranında göster.</string>
     <string name="route_parameters_info">Seçili profildeki yönlendirme ayarları \"%1$s\".</string>
-    <string name="wake_time">Uyanma zamanı</string>
+    <string name="wake_time">Özel ekran zaman aşımı</string>
     <string name="units_and_formats">Birimler ve biçimler</string>
     <string name="appearance">Görünüm</string>
     <string name="map_look_descr">Harita görünümü</string>
@@ -3695,7 +3695,7 @@
     <string name="turn_screen_on_wake_time_descr">Uyandıktan sonra ekran zaman aşımını seçin. (\"%1$s\" zaman aşımı uygulamaz.)</string>
     <string name="keep_screen_on">Ekranı açık tut</string>
     <string name="keep_screen_off">Ekranı kapalı tut</string>
-    <string name="screen_timeout_descr">Etkinse \"%1$s\" ile sınırlıdır.</string>
+    <string name="screen_timeout_descr">Bu sadece \"%1$s\" devre dışı bırakılmışsa etkilidir.</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercator projeksiyon</string>
     <string name="one_image_per_tile">Döşeme başına bir görüntü dosyası</string>
     <string name="sqlite_db_file">SQLiteDB dosyası</string>
@@ -3721,4 +3721,5 @@
     <string name="export_import_quick_actions_with_profiles_promo">Uygulama profilleri ile hızlı eylemleri içe veya dışa aktarabilirsiniz.</string>
     <string name="shared_string_delete_all_q">Hepsini sil\?</string>
     <string name="delete_all_actions_message_q">%d hızlı eylemi geri döndürülemez bir şekilde silmek istediğinizden emin misiniz\?</string>
+    <string name="screen_timeout">Ekran zaman aşımı</string>
 </resources>

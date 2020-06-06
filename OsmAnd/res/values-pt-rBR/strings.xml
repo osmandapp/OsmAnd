@@ -3236,7 +3236,7 @@ Pôr do Sol: %2$s</string>
     <string name="analytics_pref_title">Análises</string>
     <string name="turn_screen_on_info">Mostrar mapa na tela de bloqueio durante a navegação.</string>
     <string name="route_parameters_info">Configurações para roteamento no perfil selecionado \"%1$s\".</string>
-    <string name="wake_time">Tempo de despertar</string>
+    <string name="wake_time">Tempo limite da tela personalizada</string>
     <string name="units_and_formats">Unidades e formatos</string>
     <string name="appearance">Aparência</string>
     <string name="map_look_descr">Aparência do mapa</string>
@@ -3743,7 +3743,7 @@ Pôr do Sol: %2$s</string>
     <string name="turn_screen_on_wake_time_descr">Selecionar o tempo limite da tela depois de acordar. (\"%1$s\" não se aplica a tempo limite.)</string>
     <string name="keep_screen_on">Manter a tela ligada</string>
     <string name="keep_screen_off">Manter a tela desligada</string>
-    <string name="screen_timeout_descr">Limitado por \"%1$s\", se ativado.</string>
+    <string name="screen_timeout_descr">Isso só é efetivo se \"%1$s\" estiver desativado.</string>
     <string name="pseudo_mercator_projection">Projeção pseudo-Mercator</string>
     <string name="one_image_per_tile">Um arquivo de imagem por mosaico</string>
     <string name="sqlite_db_file">Arquivo SQLiteDB</string>
@@ -3753,4 +3753,5 @@ Pôr do Sol: %2$s</string>
     <string name="export_import_quick_actions_with_profiles_promo">Você pode exportar ou importar ações rápidas com perfis de aplicativos.</string>
     <string name="shared_string_delete_all_q">Excluir tudo\?</string>
     <string name="delete_all_actions_message_q">Tem certeza de que deseja excluir irrevogavelmente %d ações rápidas\?</string>
+    <string name="screen_timeout">Tempo limite da tela</string>
 </resources>
