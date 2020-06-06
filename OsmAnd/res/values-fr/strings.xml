@@ -3248,7 +3248,7 @@
     <string name="analytics_pref_title">Analyses</string>
     <string name="turn_screen_on_info">Afficher la carte sur l\'écran de verrouillage pendant la navigation.</string>
     <string name="route_parameters_info">Paramètres de calcul d\'itinéraire pour le profil sélectionné : « %1$s ».</string>
-    <string name="wake_time">Durée personnalisée de veille de l’écran</string>
+    <string name="wake_time">Durée d\'allumage de l’écran</string>
     <string name="map_look_descr">Apparence de la carte</string>
     <string name="map_look">Apparence de la carte</string>
     <string name="general_settings_profile_descr">Thème de l\'application, unités, région</string>
@@ -3716,7 +3716,7 @@
 \n%2$s : Niveaux de zoom auxquels les tuiles originales seront visibles. En dehors de ces valeurs, il y aura une augmentation ou une diminution d\'échelle.</string>
     <string name="turn_screen_on_navigation_instructions_descr">L\'écran s\'allumera pour afficher les instructions de navigation.</string>
     <string name="turn_screen_on_wake_time_descr">Sélectionnez le temps d\'affichage de l\'écran après allumage (\"%1$s\" signifie pas d\'extinction).</string>
-    <string name="screen_timeout_descr">Actif uniquement si \"%1$s\" est désactivé.</string>
+    <string name="screen_timeout_descr">Si l\'option \"%1$s\" est activée, le temps d\'activité en dépendra.</string>
     <string name="expire_time_descr">Délai d\'expiration en minutes. Les tuiles en cache seront rechargées après ce délai. Laissez ce champ vide pour ne jamais rafraîchir les tuiles pour cette source.
 \n
 \nUn jour correspond à 1440 minutes.
@@ -3744,9 +3744,14 @@
     <string name="storage_format">Format de stockage</string>
     <string name="map_source_zoom_levels">Définissez les niveaux de zoom minimum et maximum auxquels la carte en ligne sera affichée ou chargée.</string>
     <string name="tiles_storage_descr">Sélectionnez comment les tuiles téléchargées seront stockées.</string>
-    <string name="default_screen_timeout">Délai système de veille écran</string>
+    <string name="default_screen_timeout">Délai par défaut de veille écran</string>
     <string name="export_import_quick_actions_with_profiles_promo">Vous pouvez exporter ou importer les actions rapides avec les profils d’application.</string>
     <string name="shared_string_delete_all_q">Tout supprimer \?</string>
     <string name="delete_all_actions_message_q">Voulez-vous vraiment supprimer définitivement %d actions rapides \?</string>
     <string name="screen_timeout">Délai de veille de l’écran</string>
+    <string name="height_limit_description">Indiquez la hauteur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules hauts.</string>
+    <string name="weight_limit_description">Indiquez le poids de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules lourds.</string>
+    <string name="width_limit_description">Indiquez la largeur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules larges.</string>
+    <string name="shared_string_tones">sonneries</string>
+    <string name="shared_string_meters">mètres</string>
 </resources>
