@@ -3754,4 +3754,7 @@
     <string name="width_limit_description">Indiquez la largeur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules larges.</string>
     <string name="shared_string_tones">sonneries</string>
     <string name="shared_string_meters">mètres</string>
+    <string name="details_dialog_decr">Contrôler la visibilité des autres détails affichés sur la carte</string>
+    <string name="shared_string_night_map">Carte nocturne</string>
+    <string name="shared_string_all_time">Tout le temps</string>
 </resources>
