@@ -343,7 +343,7 @@ public class SearchCoreFactory {
 				int limit = 0;
 				for (City c : resArray) {
 					if (phrase.getSettings().isExportObjects()) {
-						resultMatcher.exportCity(c);
+						resultMatcher.exportCity(phrase, c);
 					}
 					SearchResult res = new SearchResult(phrase);
 					res.object = c;
@@ -388,7 +388,7 @@ public class SearchCoreFactory {
 					@Override
 					public boolean publish(MapObject object) {
 						if (phrase.getSettings().isExportObjects()) {
-							resultMatcher.exportObject(object);
+							resultMatcher.exportObject(phrase, object);
 						}
 						if (isCancelled()) {
 							return false;
@@ -546,7 +546,7 @@ public class SearchCoreFactory {
 						@Override
 						public boolean publish(Amenity object) {
 							if (phrase.getSettings().isExportObjects()) {
-								resultMatcher.exportObject(object);
+								resultMatcher.exportObject(phrase, object);
 							}
 							if (limit++ > LIMIT) {
 								return false;
@@ -952,7 +952,7 @@ public class SearchCoreFactory {
 				@Override
 				public boolean publish(Amenity object) {
 					if (phrase.getSettings().isExportObjects()) {
-						resultMatcher.exportObject(object);
+						resultMatcher.exportObject(phrase, object);
 					}
 					SearchResult res = new SearchResult(phrase);
 					String poiID = object.getType().getKeyName() + "_" + object.getId();
