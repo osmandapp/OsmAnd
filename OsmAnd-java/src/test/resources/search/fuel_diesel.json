@@ -1,0 +1,1090 @@
+{
+  "settings": {
+    "lat": "52.37277",
+    "lon": "4.89359",
+    "radiusLevel": 1,
+    "totalLimit": -1,
+    "lang": "",
+    "transliterateIfMissing": false,
+    "emptyQueryAllowed": false,
+    "sortByName": false
+  },
+  "phrases": ["Fuel diesel", "Fuel diesel BP", "Fuel diesel "],
+  "results": [
+  	[
+	    "Gas station (Filling station)",
+	    "Diesel",
+	    "Diesel",
+	    "Diesel/Benzin",
+	    "Diesel",
+	    "Diesel",
+	    "Texaco Marnixstraat",
+	    "Argos",
+	    "BP",
+	    "Isolatorweg",
+	    "AVIA Marees Isolatorweg 40",
+	    "Pin & Drive",
+	    "Hansa",
+	    "BP Coentunnel",
+	    "Shell Europaboulevard",
+	    "Kriterion",
+	    "BP Kadoelen",
+	    "Esso",
+	    "Tango",
+	    "Esso"
+    ],
+    [
+		"Gas station (Filling station)",
+	    "BP",
+	    "BP Coentunnel",
+	    "BP Kadoelen",
+	    "Diesel",
+	    "Diesel",
+	    "Diesel/Benzin",
+	    "Diesel",
+	    "Diesel"
+    ],
+    [
+	    "Gas station (Filling station)",
+	    "Diesel",
+	    "Diesel",
+	    "Diesel/Benzin",
+	    "Diesel",
+	    "Diesel",
+	    "Texaco Marnixstraat",
+	    "Argos",
+	    "BP",
+	    "Isolatorweg",
+	    "AVIA Marees Isolatorweg 40",
+	    "Pin & Drive",
+	    "Hansa",
+	    "BP Coentunnel",
+	    "Shell Europaboulevard",
+	    "Kriterion",
+	    "BP Kadoelen",
+	    "Esso",
+	    "Tango",
+	    "Esso"
+    ]
+  ],
+  "amenities": [
+    {
+      "name": "Smitsven",
+      "lat": "52.43833",
+      "lon": "4.84435",
+      "id": 93229168,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Total",
+      "lat": "52.43126",
+      "lon": "4.85310",
+      "id": 5792135070,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "lat": "52.38280",
+      "lon": "4.87072",
+      "id": 297151392,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "Gulf"
+      }
+    },
+    {
+      "name": "Tango",
+      "lat": "52.39063",
+      "lon": "4.80105",
+      "id": 1125848178,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Argos",
+      "lat": "52.42714",
+      "lon": "4.87797",
+      "id": 11836600936,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "lat": "52.38321",
+      "lon": "4.83377",
+      "id": 13447465828,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Argos",
+      "lat": "52.37679",
+      "lon": "4.86739",
+      "id": 2864423190,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "fuel_octane_95": "yes",
+        "fuel_diesel": "yes",
+        "access_private": "private",
+        "website": "https://www.argos.nl/tankstation/argos-amsterdam-jan-van-galenstraat-besloten-terrein/",
+        "operator": "Argos Amsterdam",
+        "brand": "Argos",
+        "note": "Not public accessible, in restricted commercial area."
+      }
+    },
+    {
+      "name": "Total",
+      "lat": "52.33424",
+      "lon": "4.92848",
+      "id": 570682093,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "Total"
+      }
+    },
+    {
+      "lat": "52.34905",
+      "lon": "4.85531",
+      "id": 1224007749,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "surface_paved": "paved",
+        "covered_yes": "yes"
+      }
+    },
+    {
+      "name": "Tango",
+      "lat": "52.34189",
+      "lon": "4.79429",
+      "id": 1125841260,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "fuel_octane_95": "yes",
+        "fuel_diesel": "yes",
+        "fuel_octane_98": "yes",
+        "payment_maestro_yes": "yes",
+        "payment_cash_no": "no"
+      }
+    },
+    {
+      "lat": "52.34941",
+      "lon": "4.89467",
+      "id": 11533103330,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "note": "Total Selfservicestation De Pijp",
+        "operator": "Total"
+      }
+    },
+    {
+      "name": "BP Buitenveldert",
+      "lat": "52.33599",
+      "lon": "4.86834",
+      "id": 115716311,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "BP",
+        "start_date": "1982"
+      }
+    },
+    {
+      "name": "Shell express",
+      "lat": "52.42085",
+      "lon": "4.95104",
+      "id": 9162110312,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Shell Westpoort",
+      "lat": "52.39624",
+      "lon": "4.80092",
+      "id": 5473469574,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Esso Osdorp",
+      "lat": "52.35525",
+      "lon": "4.81030",
+      "id": 890452205,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "brand": "Esso",
+        "alt_name": "Texaco Meer en Vaart"
+      }
+    },
+    {
+      "name": "Diesel",
+      "lat": "52.36778",
+      "lon": "4.89119",
+      "id": 5448077178,
+      "subType": "clothes",
+      "type": "shop",
+      "openingHours": "Tu-We,Fr-Sa 10:00-18:00; Su-Mo 12:00-18:00; Th 10:00-21:00",
+      "additionalInfo": {
+        "wheelchair_yes": "yes",
+        "opening_hours": "Tu-We,Fr-Sa 10:00-18:00; Su-Mo 12:00-18:00; Th 10:00-21:00",
+        "phone": "+31 20 638 4082",
+        "brand": "Diesel"
+      }
+    },
+    {
+      "lat": "52.34893",
+      "lon": "4.85527",
+      "id": 1224007735,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "surface_paved": "paved",
+        "covered_yes": "yes"
+      }
+    },
+    {
+      "name": "BP Slagboom",
+      "lat": "52.34744",
+      "lon": "4.92569",
+      "id": 671496197,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "24/7",
+      "additionalInfo": {
+        "opening_hours": "24/7",
+        "operator": "NP"
+      }
+    },
+    {
+      "name": "Baarsjesweg",
+      "lat": "52.36767",
+      "lon": "4.86201",
+      "id": 1230247896,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "BP Oude Haagseweg",
+      "lat": "52.33749",
+      "lon": "4.81813",
+      "id": 3197728670,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "Mo-Fr 06:00-24:00; Sa 07:00-24:00; Su 08:00-24:00",
+      "additionalInfo": {
+        "fuel_octane_95": "yes",
+        "fuel_octane_98": "yes",
+        "opening_hours": "Mo-Fr 06:00-24:00; Sa 07:00-24:00; Su 08:00-24:00",
+        "operator": "BP"
+      }
+    },
+    {
+      "name": "BP Sloterplas",
+      "lat": "52.37374",
+      "lon": "4.82729",
+      "id": 671496195,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "BP"
+      }
+    },
+    {
+      "name": "Diesel",
+      "lat": "52.35958",
+      "lon": "4.87847",
+      "id": 9413553430,
+      "subType": "clothes",
+      "type": "shop"
+    },
+    {
+      "name": "BP De Vries & Van Slooten",
+      "lat": "52.40107",
+      "lon": "4.90718",
+      "id": 671496193,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "BP"
+      }
+    },
+    {
+      "name": "Shell",
+      "lat": "52.42951",
+      "lon": "4.84336",
+      "id": 5793072844,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Shell",
+      "lat": "52.34968",
+      "lon": "4.88544",
+      "id": 9092747702,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "brand": "Shell"
+      }
+    },
+    {
+      "name": "Esso",
+      "lat": "52.38703",
+      "lon": "4.92479",
+      "id": 470389254,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "Esso",
+        "brand": "Esso"
+      }
+    },
+    {
+      "name": "Avia",
+      "lat": "52.43224",
+      "lon": "4.87578",
+      "id": 11836723214,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "lat": "52.34897",
+      "lon": "4.85544",
+      "id": 1224007739,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "surface_paved": "paved",
+        "covered_yes": "yes",
+        "horse_no": "no"
+      }
+    },
+    {
+      "name": "Osdorperweg",
+      "lat": "52.36775",
+      "lon": "4.78274",
+      "id": 92736522,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "AVIA Marees Isolatorweg 40",
+      "lat": "52.39425",
+      "lon": "4.85076",
+      "id": 3437131090,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "fuel_octane_95": "yes",
+        "fuel_diesel": "yes",
+        "operator": "Marees",
+        "brand": "AVIA"
+      }
+    },
+    {
+      "name": "Esso",
+      "lat": "52.42867",
+      "lon": "4.79980",
+      "id": 6592660390,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "fuel_octane_95": "yes",
+        "shop_additional_yes": "yes",
+        "fuel_diesel": "yes",
+        "fuel_octane_98": "yes",
+        "fuel_e85": "yes",
+        "fuel_lpg": "yes",
+        "operator": "Texaco Pouw BV"
+      }
+    },
+    {
+      "name": "Isolatorweg",
+      "lat": "52.39422",
+      "lon": "4.85079",
+      "id": 5257482314,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "fuel_octane_95": "yes",
+        "shop_additional_yes": "yes",
+        "fuel_diesel": "yes",
+        "operator": "Olthof",
+        "brand": "Avia"
+      }
+    },
+    {
+      "name": "BP Westerspoor-Zuid",
+      "lat": "52.43067",
+      "lon": "4.80388",
+      "id": 571547525,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "BP",
+        "start_date": "2002"
+      }
+    },
+    {
+      "name": "Tinq",
+      "lat": "52.36690",
+      "lon": "4.78388",
+      "id": 1132779156,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "lat": "52.43117",
+      "lon": "4.85362",
+      "id": 93189782,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "Kok Tankstations BV"
+      }
+    },
+    {
+      "name": "Tamoil",
+      "lat": "52.31194",
+      "lon": "4.87454",
+      "id": 1201991038,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "24/7",
+      "additionalInfo": {
+        "opening_hours": "24/7",
+        "phone": "+31884007321"
+      }
+    },
+    {
+      "name": "Esso",
+      "names": {
+        "nl": "ESSO Diemen"
+      },
+      "lat": "52.33298",
+      "lon": "4.98215",
+      "id": 3325409264,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "fuel_octane_95": "yes",
+        "fuel_diesel": "yes",
+        "fuel_octane_98": "yes",
+        "self_service_yes": "yes",
+        "fuel_lpg": "yes",
+        "website": "https://www.essofuelfinder.nl/nl-nl/diemen--essodiemen-100359738",
+        "operator": "EG Group",
+        "brand": "Esso"
+      }
+    },
+    {
+      "name": "Esso",
+      "lat": "52.33215",
+      "lon": "4.91194",
+      "id": 5680960518,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "Esso"
+      }
+    },
+    {
+      "name": "BP",
+      "lat": "52.41550",
+      "lon": "4.87426",
+      "id": 89648457,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "start_date": "1973"
+      }
+    },
+    {
+      "name": "Diesel",
+      "lat": "52.96288",
+      "lon": "4.78116",
+      "id": 2720685942,
+      "subType": "waterway_fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Diesel",
+      "lat": "52.96288",
+      "lon": "4.78116",
+      "id": 2720685942,
+      "subType": "small_craft_facility",
+      "type": "seamark"
+    },
+    {
+      "lat": "52.43279",
+      "lon": "4.88108",
+      "id": 99445647,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "Avia"
+      }
+    },
+    {
+      "name": "Shell A9 Amstelveen Noordzijde",
+      "lat": "52.30592",
+      "lon": "4.83609",
+      "id": 5562850742,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "24/7",
+      "additionalInfo": {
+        "opening_hours": "24/7",
+        "operator": "Shell"
+      }
+    },
+    {
+      "name": "Pin & Drive",
+      "lat": "52.38304",
+      "lon": "4.83373",
+      "id": 1343255990,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "fuel_diesel": "yes",
+        "website": "http://pinendrive.nl",
+        "note": "diesel & benzine",
+        "alt_name": "Tankstation Haris BV"
+      }
+    },
+    {
+      "name": "Autoradam",
+      "lat": "52.38359",
+      "lon": "4.86014",
+      "id": 11758107894,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "24/7",
+      "additionalInfo": {
+        "opening_hours": "24/7"
+      }
+    },
+    {
+      "name": "TinQ Badhoevedo",
+      "lat": "52.34212",
+      "lon": "4.78536",
+      "id": 1202042180,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "TinQ"
+      }
+    },
+    {
+      "name": "Shell Europaboulevard",
+      "lat": "52.32815",
+      "lon": "4.88954",
+      "id": 5637411240,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "fuel_octane_95": "yes",
+        "fuel_diesel": "yes",
+        "fuel_octane_98": "yes",
+        "brand": "Shell"
+      }
+    },
+    {
+      "name": "Texaco Marnixstraat",
+      "lat": "52.36993",
+      "lon": "4.87696",
+      "id": 92756650,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "fuel_diesel": "yes",
+        "fuel_lpg": "yes",
+        "operator": "EFR SERVICES NETHERLANDS B.V."
+      }
+    },
+    {
+      "name": "Kok",
+      "lat": "52.43544",
+      "lon": "4.81444",
+      "id": 562350380,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "brand": "AVIA"
+      }
+    },
+    {
+      "name": "Total Kadoelen",
+      "lat": "52.41648",
+      "lon": "4.91233",
+      "id": 5693092218,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Total Vlugtlaan",
+      "lat": "52.38012",
+      "lon": "4.82800",
+      "id": 890388131,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "Total Amsterdam",
+        "brand": "Total"
+      }
+    },
+    {
+      "name": "BP Oude Haagseweg",
+      "lat": "52.33758",
+      "lon": "4.81817",
+      "id": 5616941048,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "BP"
+      }
+    },
+    {
+      "name": "Tinq",
+      "lat": "52.35049",
+      "lon": "4.93896",
+      "id": 1132783038,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "brand": "Tinq"
+      }
+    },
+    {
+      "name": "BP Kadoelen",
+      "lat": "52.41960",
+      "lon": "4.91218",
+      "id": 62007626,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "24/7",
+      "additionalInfo": {
+        "fuel_octane_95": "yes",
+        "fuel_diesel": "yes",
+        "fuel_octane_98": "yes",
+        "fuel_lpg": "yes",
+        "opening_hours": "24/7"
+      }
+    },
+    {
+      "lat": "52.34604",
+      "lon": "4.97816",
+      "id": 460257555,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "Shell"
+      }
+    },
+    {
+      "name": "Hansa",
+      "lat": "52.34407",
+      "lon": "4.84205",
+      "id": 236323756,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "24/7",
+      "additionalInfo": {
+        "fuel_diesel": "yes",
+        "fuel_octane_98": "yes",
+        "payment_maestro_yes": "yes",
+        "payment_notes_yes": "yes",
+        "payment_coins_yes": "yes",
+        "fuel_octane_95": "yes",
+        "fuel_octane_100": "yes",
+        "opening_hours": "24/7",
+        "website": "https://find.shell.com/nl/fuel/12661638-shell-station-hansa/nl_NL",
+        "phone": "+31206177018",
+        "operator": "Shell",
+        "brand": "Shell"
+      }
+    },
+    {
+      "name": "Esso",
+      "lat": "52.31786",
+      "lon": "4.87008",
+      "id": 61912014,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Shell",
+      "lat": "52.39634",
+      "lon": "4.80079",
+      "id": 972110096,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "Shell"
+      }
+    },
+    {
+      "name": "Argos",
+      "lat": "52.39909",
+      "lon": "4.94018",
+      "id": 5696605642,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Argos",
+      "lat": "52.36382",
+      "lon": "4.83536",
+      "id": 5384852724,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Makro Amsterdam",
+      "lat": "52.32508",
+      "lon": "4.92529",
+      "id": 9423577524,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "fuel_cng": "yes",
+        "wheelchair_yes": "yes",
+        "fuel_lpg": "yes",
+        "toilets_wheelchair_yes": "yes"
+      }
+    },
+    {
+      "name": "Shell van Slingelandtstraat",
+      "lat": "52.38410",
+      "lon": "4.86475",
+      "id": 297151412,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "Shell"
+      }
+    },
+    {
+      "name": "Diesel/Benzin",
+      "lat": "52.36818",
+      "lon": "4.96599",
+      "id": 8988805510,
+      "subType": "small_craft_facility",
+      "type": "seamark",
+      "additionalInfo": {
+        "description": "Diesel, Benzin"
+      }
+    },
+    {
+      "name": "Lukoil Zaandam",
+      "lat": "52.44236",
+      "lon": "4.81197",
+      "id": 9041702382,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "website": "http://www.lukoil.nl/go/lukoil_station.cfm?id=469",
+        "brand": "Lukoil"
+      }
+    },
+    {
+      "lat": "52.42963",
+      "lon": "4.84334",
+      "id": 871250152,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "Shell"
+      }
+    },
+    {
+      "name": "BP Nieuwe Hemweg",
+      "lat": "52.39374",
+      "lon": "4.86503",
+      "id": 3266785854,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "24/7",
+      "additionalInfo": {
+        "opening_hours": "24/7",
+        "website": "https://www.bp.com/",
+        "phone": "+3120-4889514",
+        "description": "AH to go",
+        "operator": "BP"
+      }
+    },
+    {
+      "name": "BP",
+      "lat": "52.33593",
+      "lon": "4.86849",
+      "id": 1118602024,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "BP"
+      }
+    },
+    {
+      "name": "Tango",
+      "lat": "52.36246",
+      "lon": "4.82753",
+      "id": 11435170396,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "BP Coentunnel",
+      "lat": "52.41546",
+      "lon": "4.87452",
+      "id": 178863395,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "fuel_octane_95": "yes",
+        "fuel_diesel": "yes",
+        "operator": "BP",
+        "brand": "BP"
+      }
+    },
+    {
+      "name": "BP",
+      "lat": "52.34904",
+      "lon": "4.85531",
+      "id": 61987006,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "fuel_octane_95": "yes",
+        "fuel_diesel": "yes",
+        "fuel_lpg": "yes",
+        "website": "https://www.bp.com/",
+        "phone": "+31 (0) 20 671 4678",
+        "operator": "BP"
+      }
+    },
+    {
+      "name": "Esso",
+      "lat": "52.35600",
+      "lon": "4.82452",
+      "id": 1185962557,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "phone": "0204084081",
+        "brand": "Esso"
+      }
+    },
+    {
+      "name": "Kriterion",
+      "lat": "52.36889",
+      "lon": "4.97071",
+      "id": 60237274,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "Mo-Su 06:00-23:00",
+      "additionalInfo": {
+        "fuel_octane_95": "yes",
+        "payment_visa_yes": "yes",
+        "payment_mastercard_yes": "yes",
+        "fuel_diesel": "yes",
+        "payment_maestro_yes": "yes",
+        "payment_cash_yes": "yes",
+        "opening_hours": "Mo-Su 06:00-23:00",
+        "brand": "Shell",
+        "note": "owned and operated by students; fuel brand: Shell."
+      }
+    },
+    {
+      "name": "Tinq",
+      "lat": "52.34032",
+      "lon": "4.89716",
+      "id": 1132780364,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "Mo-Su 07:00-23:00",
+      "additionalInfo": {
+        "opening_hours": "Mo-Su 07:00-23:00",
+        "brand": "Tinq"
+      }
+    },
+    {
+      "lat": "52.30504",
+      "lon": "4.92280",
+      "id": 60500940,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "24/7",
+      "additionalInfo": {
+        "opening_hours": "24/7",
+        "operator": "Esso"
+      }
+    },
+    {
+      "name": "Total",
+      "lat": "52.34267",
+      "lon": "4.85699",
+      "id": 60675146,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "wheelchair_yes": "yes",
+        "website": "http://www.total.nl",
+        "description": "selfservicestation",
+        "operator": "Total"
+      }
+    },
+    {
+      "name": "Total Flierbos",
+      "lat": "52.31563",
+      "lon": "4.96408",
+      "id": 502639714,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Tinq",
+      "lat": "52.33639",
+      "lon": "4.94681",
+      "id": 1134367690,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Esso Express",
+      "lat": "52.31725",
+      "lon": "4.86960",
+      "id": 497051574,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Esso",
+      "lat": "52.43040",
+      "lon": "4.86394",
+      "id": 5750021548,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "phone": "+3175-6159517",
+        "brand": "Esso"
+      }
+    },
+    {
+      "name": "Diesel",
+      "lat": "52.36770",
+      "lon": "4.89132",
+      "id": 6919427832,
+      "subType": "clothes",
+      "type": "shop"
+    },
+    {
+      "name": "Total",
+      "lat": "52.43621",
+      "lon": "4.81671",
+      "id": 5787172710,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "BP Gooiseweg",
+      "lat": "52.34768",
+      "lon": "4.92636",
+      "id": 5660457972,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "24/7",
+      "additionalInfo": {
+        "opening_hours": "24/7",
+        "operator": "BP"
+      }
+    },
+    {
+      "name": "Garage Lux",
+      "lat": "52.35263",
+      "lon": "4.92883",
+      "id": 1486917817,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "Garage Lux"
+      }
+    },
+    {
+      "name": "Total Ganzenhoef",
+      "lat": "52.31761",
+      "lon": "4.96301",
+      "id": 502639726,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Texaco Sarphatistraat",
+      "lat": "52.36694",
+      "lon": "4.92430",
+      "id": 53224118,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "operator": "EFR Services",
+        "brand": "Texaco"
+      }
+    },
+    {
+      "name": "BP Zuiderzeeweg",
+      "lat": "52.38918",
+      "lon": "4.96470",
+      "id": 2264161136,
+      "subType": "fuel",
+      "type": "transportation",
+      "openingHours": "24/7",
+      "additionalInfo": {
+        "opening_hours": "24/7",
+        "website": "https://www.bp.com/",
+        "phone": "+31204942593",
+        "operator": "BP",
+        "brand": "BP"
+      }
+    },
+    {
+      "lat": "52.30575",
+      "lon": "4.93400",
+      "id": 14491874838,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "name": "Gulf Badhoevedorp",
+      "lat": "52.34104",
+      "lon": "4.78309",
+      "id": 1202042172,
+      "subType": "fuel",
+      "type": "transportation",
+      "additionalInfo": {
+        "phone": "020-6593527",
+        "operator": "Gulf"
+      }
+    },
+    {
+      "name": "Jan van Gentstraat",
+      "lat": "52.33569",
+      "lon": "4.79489",
+      "id": 92453470,
+      "subType": "fuel",
+      "type": "transportation"
+    },
+    {
+      "lat": "52.41498",
+      "lon": "4.89739",
+      "id": 1094649633,
+      "subType": "fuel",
+      "type": "transportation"
+    }
+  ],
+  "cities": []
+}

@@ -1,0 +1,2705 @@
+{
+  "settings": {
+    "lat": "50.78244",
+    "lon": "6.08911",
+    "radiusLevel": 1,
+    "totalLimit": -1,
+    "lang": "",
+    "transliterateIfMissing": false,
+    "emptyQueryAllowed": false,
+    "sortByName": false
+  },
+  "phrases": ["8 rolandstrasse ", "8 rolandstraße ", "rolandstraße 8 "],
+  "results": [
+  	[
+	    "8.0, <input>  [[0, PARTIAL_LOCATION, 1.000, 4791.59 km]]",
+		"8, Rolandstraße, Aachen [[2, HOUSE, 0.430, 0.03 km]]",
+		"Rolandstraße, Aachen [[1, STREET, 3.000, 0.39 km]]",
+		"8, Rolandplatz, Aachen [[1, HOUSE, 0.430, 0.31 km]]",
+		"8, Rehmplatz, Aachen [[1, HOUSE, 0.430, 0.86 km]]",
+		"8, Reimanstraße, Aachen [[1, HOUSE, 0.430, 0.89 km]]",
+		"8, Rudolfstraße (Rehmviertel), Aachen [[1, HOUSE, 0.430, 0.75 km]]",
+		"8, Reihstraße, Aachen [[1, HOUSE, 0.430, 1.02 km]]",
+		"Rolandplatz, Aachen [[0, STREET, 3.000, 0.35 km]]",
+		"Rochusstraße, Aachen [[0, STREET, 3.000, 0.40 km]]",
+		"Robensstraße, Aachen [[0, STREET, 3.000, 0.70 km]]",
+		"Rethelstraße, Aachen [[0, STREET, 3.000, 0.76 km]]",
+		"Rommelsgasse, Aachen [[0, STREET, 3.000, 0.80 km]]",
+		"Romaneygasse, Aachen [[0, STREET, 3.000, 0.84 km]]",
+		"Rehmplatz, Aachen [[0, STREET, 3.000, 0.88 km]]",
+		"Reimanstraße, Aachen [[0, STREET, 3.000, 0.90 km]]",
+		"Ritter-Chorus-Straße, Aachen [[0, STREET, 3.000, 0.90 km]]",
+		"Rudolfstraße (Rehmviertel), Aachen [[0, STREET, 3.000, 0.94 km]]",
+		"Hans-von-Reutlingen-Gasse, Aachen [[0, STREET, 3.000, 0.99 km]]",
+		"Reihstraße, Aachen [[0, STREET, 3.000, 0.99 km]]",
+		"Rennbahn, Aachen [[0, STREET, 3.000, 1.00 km]]",
+		"6-8, Robensstraße, Aachen [[0, HOUSE, 0.430, 0.64 km]]"
+	],
+  	[
+	    "8.0, <input>  [[0, PARTIAL_LOCATION, 1.000, 4791.59 km]]",
+		"8, Rolandstraße, Aachen [[2, HOUSE, 0.430, 0.03 km]]",
+		"Rolandstraße, Aachen [[1, STREET, 3.000, 0.39 km]]",
+		"8, Rolandplatz, Aachen [[1, HOUSE, 0.430, 0.31 km]]",
+		"8, Rehmplatz, Aachen [[1, HOUSE, 0.430, 0.86 km]]",
+		"8, Reimanstraße, Aachen [[1, HOUSE, 0.430, 0.89 km]]",
+		"8, Rudolfstraße (Rehmviertel), Aachen [[1, HOUSE, 0.430, 0.75 km]]",
+		"8, Reihstraße, Aachen [[1, HOUSE, 0.430, 1.02 km]]",
+		"Rolandplatz, Aachen [[0, STREET, 3.000, 0.35 km]]",
+		"Rochusstraße, Aachen [[0, STREET, 3.000, 0.40 km]]",
+		"Robensstraße, Aachen [[0, STREET, 3.000, 0.70 km]]",
+		"Rethelstraße, Aachen [[0, STREET, 3.000, 0.76 km]]",
+		"Rommelsgasse, Aachen [[0, STREET, 3.000, 0.80 km]]",
+		"Romaneygasse, Aachen [[0, STREET, 3.000, 0.84 km]]",
+		"Rehmplatz, Aachen [[0, STREET, 3.000, 0.88 km]]",
+		"Reimanstraße, Aachen [[0, STREET, 3.000, 0.90 km]]",
+		"Ritter-Chorus-Straße, Aachen [[0, STREET, 3.000, 0.90 km]]",
+		"Rudolfstraße (Rehmviertel), Aachen [[0, STREET, 3.000, 0.94 km]]",
+		"Hans-von-Reutlingen-Gasse, Aachen [[0, STREET, 3.000, 0.99 km]]",
+		"Reihstraße, Aachen [[0, STREET, 3.000, 0.99 km]]",
+		"Rennbahn, Aachen [[0, STREET, 3.000, 1.00 km]]",
+		"6-8, Robensstraße, Aachen [[0, HOUSE, 0.430, 0.64 km]]"
+  	],
+  	[
+		"8, Rolandstraße, Aachen [[2, HOUSE, 0.430, 0.03 km]]",
+		"Rolandstraße, Aachen [[1, STREET, 3.000, 0.39 km]]",
+		"8, Rolandplatz, Aachen [[1, HOUSE, 0.430, 0.31 km]]",
+		"8, Rehmplatz, Aachen [[1, HOUSE, 0.430, 0.86 km]]",
+		"8, Reimanstraße, Aachen [[1, HOUSE, 0.430, 0.89 km]]",
+		"8, Rudolfstraße (Rehmviertel), Aachen [[1, HOUSE, 0.430, 0.75 km]]",
+		"8, Reihstraße, Aachen [[1, HOUSE, 0.430, 1.02 km]]",
+		"Rolandplatz, Aachen [[0, STREET, 3.000, 0.35 km]]",
+		"Rochusstraße, Aachen [[0, STREET, 3.000, 0.40 km]]",
+		"Robensstraße, Aachen [[0, STREET, 3.000, 0.70 km]]",
+		"Rethelstraße, Aachen [[0, STREET, 3.000, 0.76 km]]",
+		"Rommelsgasse, Aachen [[0, STREET, 3.000, 0.80 km]]",
+		"Romaneygasse, Aachen [[0, STREET, 3.000, 0.84 km]]",
+		"Rehmplatz, Aachen [[0, STREET, 3.000, 0.88 km]]",
+		"Reimanstraße, Aachen [[0, STREET, 3.000, 0.90 km]]",
+		"Ritter-Chorus-Straße, Aachen [[0, STREET, 3.000, 0.90 km]]",
+		"Rudolfstraße (Rehmviertel), Aachen [[0, STREET, 3.000, 0.94 km]]",
+		"Hans-von-Reutlingen-Gasse, Aachen [[0, STREET, 3.000, 0.99 km]]",
+		"Reihstraße, Aachen [[0, STREET, 3.000, 0.99 km]]",
+		"Rennbahn, Aachen [[0, STREET, 3.000, 1.00 km]]",
+		"6-8, Robensstraße, Aachen [[0, HOUSE, 0.430, 0.64 km]]"
+  	]
+  ],
+  "cities": [
+    {
+      "name": "Aachen",
+      "names": {
+        "de": "Aachen",
+        "ru": "Ахен",
+        "pt": "Aquisgrão",
+        "eo": "Aĥeno",
+        "it": "Aquisgrana",
+        "fr": "Aix-la-Chapelle",
+        "es": "Aquisgrán",
+        "cs": "Cáchy",
+        "eu": "Akisgran",
+        "ar": "آخن",
+        "nb": "Aachen",
+        "la": "Aquisgranum",
+        "lb": "Oochen",
+        "fa": "آخن",
+        "nds": "Aken",
+        "pl": "Akwizgran",
+        "ur": "آخن",
+        "ca": "Aquisgrà",
+        "nl": "Aken",
+        "sr": "Ахен"
+      },
+      "lat": "50.77635",
+      "lon": "6.08386",
+      "id": 240041315,
+      "type": "CITY",
+      "listOfStreets": [
+        {
+          "name": "Rolandstraße",
+          "lat": "50.78507",
+          "lon": "6.09271",
+          "id": 7074,
+          "buildings": [
+            {
+              "name": "1",
+              "lat": "50.78427",
+              "lon": "6.09091",
+              "postcode": "52070"
+            },
+            {
+              "name": "2",
+              "lat": "50.78232",
+              "lon": "6.08891",
+              "postcode": "52070"
+            },
+            {
+              "name": "2a",
+              "lat": "50.78243",
+              "lon": "6.08904",
+              "postcode": "52070"
+            },
+            {
+              "name": "3",
+              "lat": "50.78438",
+              "lon": "6.09125",
+              "postcode": "52070"
+            },
+            {
+              "name": "3a",
+              "lat": "50.78493",
+              "lon": "6.09256",
+              "postcode": "52070"
+            },
+            {
+              "name": "4",
+              "lat": "50.78248",
+              "lon": "6.08926",
+              "postcode": "52070"
+            },
+            {
+              "name": "4a",
+              "lat": "50.78484",
+              "lon": "6.09278",
+              "postcode": "52070"
+            },
+            {
+              "name": "5",
+              "lat": "50.78445",
+              "lon": "6.09134",
+              "postcode": "52070"
+            },
+            {
+              "name": "6",
+              "lat": "50.78255",
+              "lon": "6.08932",
+              "postcode": "52070"
+            },
+            {
+              "name": "7",
+              "lat": "50.78456",
+              "lon": "6.09162",
+              "postcode": "52070"
+            },
+            {
+              "name": "8",
+              "lat": "50.78259",
+              "lon": "6.08943",
+              "postcode": "52070"
+            },
+            {
+              "name": "9",
+              "lat": "50.78463",
+              "lon": "6.09170",
+              "postcode": "52070"
+            },
+            {
+              "name": "10",
+              "lat": "50.78265",
+              "lon": "6.08954",
+              "postcode": "52070"
+            },
+            {
+              "name": "10a",
+              "lat": "50.78285",
+              "lon": "6.08962",
+              "postcode": "52070"
+            },
+            {
+              "name": "11",
+              "lat": "50.78469",
+              "lon": "6.09192",
+              "postcode": "52070"
+            },
+            {
+              "name": "12",
+              "lat": "50.78293",
+              "lon": "6.08971",
+              "postcode": "52070"
+            },
+            {
+              "name": "13",
+              "lat": "50.78507",
+              "lon": "6.09271",
+              "postcode": "52070"
+            },
+            {
+              "name": "14",
+              "lat": "50.78285",
+              "lon": "6.08975",
+              "postcode": "52070"
+            },
+            {
+              "name": "15",
+              "lat": "50.78517",
+              "lon": "6.09280",
+              "postcode": "52070"
+            },
+            {
+              "name": "16",
+              "lat": "50.78294",
+              "lon": "6.08986",
+              "postcode": "52070"
+            },
+            {
+              "name": "18",
+              "lat": "50.78300",
+              "lon": "6.08994",
+              "postcode": "52070"
+            },
+            {
+              "name": "20",
+              "lat": "50.78308",
+              "lon": "6.09005",
+              "postcode": "52070"
+            },
+            {
+              "name": "21",
+              "lat": "50.78547",
+              "lon": "6.09299",
+              "postcode": "52070"
+            },
+            {
+              "name": "22",
+              "lat": "50.78311",
+              "lon": "6.09020",
+              "postcode": "52070"
+            },
+            {
+              "name": "23",
+              "lat": "50.78567",
+              "lon": "6.09318",
+              "postcode": "52070"
+            },
+            {
+              "name": "24",
+              "lat": "50.78323",
+              "lon": "6.09022",
+              "postcode": "52070"
+            },
+            {
+              "name": "25",
+              "lat": "50.78574",
+              "lon": "6.09325",
+              "postcode": "52070"
+            },
+            {
+              "name": "26",
+              "lat": "50.78330",
+              "lon": "6.09040",
+              "postcode": "52070"
+            },
+            {
+              "name": "27",
+              "lat": "50.78581",
+              "lon": "6.09331",
+              "postcode": "52070"
+            },
+            {
+              "name": "28",
+              "lat": "50.78341",
+              "lon": "6.09055",
+              "postcode": "52070"
+            },
+            {
+              "name": "29",
+              "lat": "50.78587",
+              "lon": "6.09338",
+              "postcode": "52070"
+            },
+            {
+              "name": "30",
+              "lat": "50.78351",
+              "lon": "6.09070",
+              "postcode": "52070"
+            },
+            {
+              "name": "31",
+              "lat": "50.78600",
+              "lon": "6.09351",
+              "postcode": "52070"
+            },
+            {
+              "name": "32",
+              "lat": "50.78364",
+              "lon": "6.09085",
+              "postcode": "52070"
+            },
+            {
+              "name": "33",
+              "lat": "50.78608",
+              "lon": "6.09357",
+              "postcode": "52070"
+            },
+            {
+              "name": "34",
+              "lat": "50.78373",
+              "lon": "6.09100",
+              "postcode": "52070"
+            },
+            {
+              "name": "35",
+              "lat": "50.78623",
+              "lon": "6.09374",
+              "postcode": "52070"
+            },
+            {
+              "name": "36",
+              "lat": "50.78406",
+              "lon": "6.09134",
+              "postcode": "52070"
+            },
+            {
+              "name": "37",
+              "lat": "50.78630",
+              "lon": "6.09383",
+              "postcode": "52070"
+            },
+            {
+              "name": "38",
+              "lat": "50.78412",
+              "lon": "6.09145",
+              "postcode": "52070"
+            },
+            {
+              "name": "39",
+              "lat": "50.78644",
+              "lon": "6.09398",
+              "postcode": "52070"
+            },
+            {
+              "name": "40",
+              "lat": "50.78421",
+              "lon": "6.09151",
+              "postcode": "52070"
+            },
+            {
+              "name": "41",
+              "lat": "50.78650",
+              "lon": "6.09404",
+              "postcode": "52070"
+            },
+            {
+              "name": "42",
+              "lat": "50.78429",
+              "lon": "6.09166",
+              "postcode": "52070"
+            },
+            {
+              "name": "43",
+              "lat": "50.78665",
+              "lon": "6.09415",
+              "postcode": "52070"
+            },
+            {
+              "name": "44",
+              "lat": "50.78499",
+              "lon": "6.09293",
+              "postcode": "52070"
+            },
+            {
+              "name": "45",
+              "lat": "50.78677",
+              "lon": "6.09432",
+              "postcode": "52070"
+            },
+            {
+              "name": "46",
+              "lat": "50.78507",
+              "lon": "6.09301",
+              "postcode": "52070"
+            },
+            {
+              "name": "47",
+              "lat": "50.78689",
+              "lon": "6.09445",
+              "postcode": "52070"
+            },
+            {
+              "name": "48",
+              "lat": "50.78531",
+              "lon": "6.09338",
+              "postcode": "52070"
+            },
+            {
+              "name": "49",
+              "lat": "50.78703",
+              "lon": "6.09458",
+              "postcode": "52070"
+            },
+            {
+              "name": "50",
+              "lat": "50.78543",
+              "lon": "6.09351",
+              "postcode": "52070"
+            },
+            {
+              "name": "51",
+              "lat": "50.78711",
+              "lon": "6.09462",
+              "postcode": "52070"
+            },
+            {
+              "name": "52",
+              "lat": "50.78555",
+              "lon": "6.09364",
+              "postcode": "52070"
+            },
+            {
+              "name": "53",
+              "lat": "50.78722",
+              "lon": "6.09475",
+              "postcode": "52070"
+            },
+            {
+              "name": "54",
+              "lat": "50.78562",
+              "lon": "6.09370",
+              "postcode": "52070"
+            },
+            {
+              "name": "55",
+              "lat": "50.78729",
+              "lon": "6.09479",
+              "postcode": "52070"
+            },
+            {
+              "name": "56",
+              "lat": "50.78575",
+              "lon": "6.09381",
+              "postcode": "52070"
+            },
+            {
+              "name": "57",
+              "lat": "50.78734",
+              "lon": "6.09482",
+              "postcode": "52070"
+            },
+            {
+              "name": "58",
+              "lat": "50.78582",
+              "lon": "6.09389",
+              "postcode": "52070"
+            },
+            {
+              "name": "59",
+              "lat": "50.78739",
+              "lon": "6.09486",
+              "postcode": "52070"
+            },
+            {
+              "name": "60",
+              "lat": "50.78587",
+              "lon": "6.09394",
+              "postcode": "52070"
+            },
+            {
+              "name": "61",
+              "lat": "50.78745",
+              "lon": "6.09490",
+              "postcode": "52070"
+            },
+            {
+              "name": "62",
+              "lat": "50.78593",
+              "lon": "6.09400",
+              "postcode": "52070"
+            },
+            {
+              "name": "64",
+              "lat": "50.78598",
+              "lon": "6.09406",
+              "postcode": "52070"
+            },
+            {
+              "name": "66",
+              "lat": "50.78613",
+              "lon": "6.09419",
+              "postcode": "52070"
+            },
+            {
+              "name": "68",
+              "lat": "50.78619",
+              "lon": "6.09426",
+              "postcode": "52070"
+            },
+            {
+              "name": "70",
+              "lat": "50.78623",
+              "lon": "6.09430",
+              "postcode": "52070"
+            },
+            {
+              "name": "72",
+              "lat": "50.78625",
+              "lon": "6.09437",
+              "postcode": "52070"
+            },
+            {
+              "name": "74",
+              "lat": "50.78632",
+              "lon": "6.09439",
+              "postcode": "52070"
+            },
+            {
+              "name": "76",
+              "lat": "50.78644",
+              "lon": "6.09452",
+              "postcode": "52070"
+            },
+            {
+              "name": "78",
+              "lat": "50.78657",
+              "lon": "6.09462",
+              "postcode": "52070"
+            },
+            {
+              "name": "80",
+              "lat": "50.78662",
+              "lon": "6.09471",
+              "postcode": "52070"
+            },
+            {
+              "name": "82",
+              "lat": "50.78676",
+              "lon": "6.09486",
+              "postcode": "52070"
+            },
+            {
+              "name": "84",
+              "lat": "50.78689",
+              "lon": "6.09499",
+              "postcode": "52070"
+            },
+            {
+              "name": "86",
+              "lat": "50.78695",
+              "lon": "6.09509",
+              "postcode": "52070"
+            },
+            {
+              "name": "88",
+              "lat": "50.78711",
+              "lon": "6.09516",
+              "postcode": "52070"
+            },
+            {
+              "name": "90",
+              "lat": "50.78716",
+              "lon": "6.09522",
+              "postcode": "52070"
+            },
+            {
+              "name": "92",
+              "lat": "50.78719",
+              "lon": "6.09529",
+              "postcode": "52070"
+            },
+            {
+              "name": "94",
+              "lat": "50.78722",
+              "lon": "6.09537",
+              "postcode": "52070"
+            },
+            {
+              "name": "96",
+              "lat": "50.78723",
+              "lon": "6.09546",
+              "postcode": "52070"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Rolandplatz",
+              "lat": "50.78479",
+              "lon": "6.09256"
+            },
+            {
+              "name": "Margratenstraße",
+              "lat": "50.78528",
+              "lon": "6.09308"
+            },
+            {
+              "name": "Passstraße",
+              "lat": "50.78756",
+              "lon": "6.09529"
+            },
+            {
+              "name": "Krefelder Straße",
+              "lat": "50.78335",
+              "lon": "6.08999"
+            },
+            {
+              "name": "Pippinstraße",
+              "lat": "50.78393",
+              "lon": "6.09097"
+            },
+            {
+              "name": "Ludwigsallee",
+              "lat": "50.78221",
+              "lon": "6.08855"
+            },
+            {
+              "name": "Monheimsallee",
+              "lat": "50.78221",
+              "lon": "6.08855"
+            }
+          ]
+        },
+        {
+          "name": "Hans-von-Reutlingen-Gasse",
+          "lat": "50.77426",
+          "lon": "6.08364",
+          "id": 30018,
+          "intersectedStreets": [
+            {
+              "name": "Münsterplatz",
+              "lat": "50.77425",
+              "lon": "6.08364"
+            },
+            {
+              "name": "Schmiedstraße",
+              "lat": "50.77425",
+              "lon": "6.08364"
+            }
+          ]
+        },
+        {
+          "name": "Romaneygasse",
+          "lat": "50.77547",
+          "lon": "6.08454",
+          "id": 7748,
+          "buildings": [
+            {
+              "name": "4",
+              "lat": "50.77547",
+              "lon": "6.08454",
+              "postcode": "52062"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Hühnermarkt",
+              "lat": "50.77559",
+              "lon": "6.08447"
+            },
+            {
+              "name": "Krämerstraße",
+              "lat": "50.77556",
+              "lon": "6.08437"
+            },
+            {
+              "name": "Hof",
+              "lat": "50.77544",
+              "lon": "6.08482"
+            }
+          ]
+        },
+        {
+          "name": "Reihstraße",
+          "lat": "50.77351",
+          "lon": "6.08898",
+          "id": 7687,
+          "buildings": [
+            {
+              "name": "1",
+              "lat": "50.77304",
+              "lon": "6.08866",
+              "postcode": "52062"
+            },
+            {
+              "name": "1",
+              "lat": "50.77308",
+              "lon": "6.08868",
+              "postcode": "52062"
+            },
+            {
+              "name": "2",
+              "lat": "50.77303",
+              "lon": "6.08891",
+              "postcode": "52062"
+            },
+            {
+              "name": "3",
+              "lat": "50.77315",
+              "lon": "6.08870",
+              "postcode": "52062"
+            },
+            {
+              "name": "3",
+              "lat": "50.77315",
+              "lon": "6.08872",
+              "postcode": "52062"
+            },
+            {
+              "name": "4",
+              "lat": "50.77312",
+              "lon": "6.08896",
+              "postcode": "52062"
+            },
+            {
+              "name": "5",
+              "lat": "50.77322",
+              "lon": "6.08868",
+              "postcode": "52062"
+            },
+            {
+              "name": "6",
+              "lat": "50.77322",
+              "lon": "6.08900",
+              "postcode": "52062"
+            },
+            {
+              "name": "7",
+              "lat": "50.77326",
+              "lon": "6.08879",
+              "postcode": "52062"
+            },
+            {
+              "name": "8",
+              "lat": "50.77331",
+              "lon": "6.08907",
+              "postcode": "52062"
+            },
+            {
+              "name": "9",
+              "lat": "50.77332",
+              "lon": "6.08872",
+              "postcode": "52062"
+            },
+            {
+              "name": "10",
+              "lat": "50.77376",
+              "lon": "6.08960",
+              "postcode": "52062"
+            },
+            {
+              "name": "10",
+              "lat": "50.77377",
+              "lon": "6.08962",
+              "postcode": "52062"
+            },
+            {
+              "name": "11",
+              "lat": "50.77338",
+              "lon": "6.08874",
+              "postcode": "52062"
+            },
+            {
+              "name": "13",
+              "lat": "50.77343",
+              "lon": "6.08874",
+              "postcode": "52062"
+            },
+            {
+              "name": "15",
+              "lat": "50.77347",
+              "lon": "6.08887",
+              "postcode": "52062"
+            },
+            {
+              "name": "17",
+              "lat": "50.77351",
+              "lon": "6.08898",
+              "postcode": "52062"
+            },
+            {
+              "name": "19",
+              "lat": "50.77369",
+              "lon": "6.08907",
+              "postcode": "52062"
+            },
+            {
+              "name": "21",
+              "lat": "50.77375",
+              "lon": "6.08915",
+              "postcode": "52062"
+            },
+            {
+              "name": "23",
+              "lat": "50.77380",
+              "lon": "6.08922",
+              "postcode": "52062"
+            },
+            {
+              "name": "25",
+              "lat": "50.77392",
+              "lon": "6.08928",
+              "postcode": "52062"
+            },
+            {
+              "name": "28",
+              "lat": "50.77399",
+              "lon": "6.08988",
+              "postcode": "52062"
+            },
+            {
+              "name": "43",
+              "lat": "50.77446",
+              "lon": "6.09022",
+              "postcode": "52062"
+            },
+            {
+              "name": "46",
+              "lat": "50.77472",
+              "lon": "6.09106",
+              "postcode": "52062"
+            },
+            {
+              "name": "51",
+              "lat": "50.77463",
+              "lon": "6.09059",
+              "postcode": "52062"
+            },
+            {
+              "name": "55",
+              "lat": "50.77476",
+              "lon": "6.09085",
+              "postcode": "52062"
+            },
+            {
+              "name": "61",
+              "lat": "50.77490",
+              "lon": "6.09093",
+              "postcode": "52062"
+            },
+            {
+              "name": "63",
+              "lat": "50.77494",
+              "lon": "6.09102",
+              "postcode": "52062"
+            },
+            {
+              "name": "65",
+              "lat": "50.77501",
+              "lon": "6.09110",
+              "postcode": "52062"
+            },
+            {
+              "name": "67",
+              "lat": "50.77503",
+              "lon": "6.09113",
+              "postcode": "52062"
+            },
+            {
+              "name": "69",
+              "lat": "50.77506",
+              "lon": "6.09119",
+              "postcode": "52062"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Wespienstraße",
+              "lat": "50.77354",
+              "lon": "6.08907"
+            },
+            {
+              "name": "Elisengalerie",
+              "lat": "50.77354",
+              "lon": "6.08907"
+            },
+            {
+              "name": "Wirichsbongardstraße",
+              "lat": "50.77289",
+              "lon": "6.08870"
+            },
+            {
+              "name": "Harscampstraße",
+              "lat": "50.77499",
+              "lon": "6.09132"
+            },
+            {
+              "name": "Siederstraße",
+              "lat": "50.77446",
+              "lon": "6.09055"
+            }
+          ]
+        },
+        {
+          "name": "Rochusstraße",
+          "lat": "50.77963",
+          "lon": "6.08563",
+          "id": 5032,
+          "buildings": [
+            {
+              "name": "1",
+              "lat": "50.77984",
+              "lon": "6.08518",
+              "postcode": "52062"
+            },
+            {
+              "name": "2-14",
+              "lat": "50.77973",
+              "lon": "6.08482",
+              "postcode": "52062"
+            },
+            {
+              "name": "3",
+              "lat": "50.77984",
+              "lon": "6.08527",
+              "postcode": "52062"
+            },
+            {
+              "name": "5",
+              "lat": "50.77985",
+              "lon": "6.08542",
+              "postcode": "52062"
+            },
+            {
+              "name": "7",
+              "lat": "50.77984",
+              "lon": "6.08550",
+              "postcode": "52062"
+            },
+            {
+              "name": "9,11",
+              "lat": "50.77985",
+              "lon": "6.08561",
+              "postcode": "52062"
+            },
+            {
+              "name": "13",
+              "lat": "50.77988",
+              "lon": "6.08582",
+              "postcode": "52062"
+            },
+            {
+              "name": "15",
+              "lat": "50.77989",
+              "lon": "6.08595",
+              "postcode": "52062"
+            },
+            {
+              "name": "16",
+              "lat": "50.77963",
+              "lon": "6.08563",
+              "postcode": "52062"
+            },
+            {
+              "name": "17",
+              "lat": "50.77992",
+              "lon": "6.08610",
+              "postcode": "52062"
+            },
+            {
+              "name": "18",
+              "lat": "50.77965",
+              "lon": "6.08572",
+              "postcode": "52062"
+            },
+            {
+              "name": "19",
+              "lat": "50.77993",
+              "lon": "6.08619",
+              "postcode": "52062"
+            },
+            {
+              "name": "20",
+              "lat": "50.77966",
+              "lon": "6.08580",
+              "postcode": "52062"
+            },
+            {
+              "name": "21",
+              "lat": "50.77995",
+              "lon": "6.08630",
+              "postcode": "52062"
+            },
+            {
+              "name": "22,24",
+              "lat": "50.77985",
+              "lon": "6.08666",
+              "postcode": "52062"
+            },
+            {
+              "name": "23",
+              "lat": "50.77996",
+              "lon": "6.08638",
+              "postcode": "52062"
+            },
+            {
+              "name": "25",
+              "lat": "50.77999",
+              "lon": "6.08647",
+              "postcode": "52062"
+            },
+            {
+              "name": "26",
+              "lat": "50.77988",
+              "lon": "6.08683",
+              "postcode": "52062"
+            },
+            {
+              "name": "27",
+              "lat": "50.78001",
+              "lon": "6.08658",
+              "postcode": "52062"
+            },
+            {
+              "name": "28",
+              "lat": "50.77989",
+              "lon": "6.08696",
+              "postcode": "52062"
+            },
+            {
+              "name": "29",
+              "lat": "50.78001",
+              "lon": "6.08668",
+              "postcode": "52062"
+            },
+            {
+              "name": "30",
+              "lat": "50.77991",
+              "lon": "6.08705",
+              "postcode": "52062"
+            },
+            {
+              "name": "31",
+              "lat": "50.78004",
+              "lon": "6.08677",
+              "postcode": "52062"
+            },
+            {
+              "name": "32",
+              "lat": "50.77993",
+              "lon": "6.08716",
+              "postcode": "52062"
+            },
+            {
+              "name": "33",
+              "lat": "50.78005",
+              "lon": "6.08685",
+              "postcode": "52062"
+            },
+            {
+              "name": "35",
+              "lat": "50.78007",
+              "lon": "6.08696",
+              "postcode": "52062"
+            },
+            {
+              "name": "37",
+              "lat": "50.78010",
+              "lon": "6.08709",
+              "postcode": "52062"
+            },
+            {
+              "name": "38",
+              "lat": "50.77996",
+              "lon": "6.08728",
+              "postcode": "52062"
+            },
+            {
+              "name": "39",
+              "lat": "50.78011",
+              "lon": "6.08720",
+              "postcode": "52062"
+            },
+            {
+              "name": "40",
+              "lat": "50.77997",
+              "lon": "6.08741",
+              "postcode": "52062"
+            },
+            {
+              "name": "41",
+              "lat": "50.78014",
+              "lon": "6.08728",
+              "postcode": "52062"
+            },
+            {
+              "name": "42",
+              "lat": "50.78000",
+              "lon": "6.08754",
+              "postcode": "52062"
+            },
+            {
+              "name": "43",
+              "lat": "50.78014",
+              "lon": "6.08739",
+              "postcode": "52062"
+            },
+            {
+              "name": "44",
+              "lat": "50.78001",
+              "lon": "6.08767",
+              "postcode": "52062"
+            },
+            {
+              "name": "45",
+              "lat": "50.78018",
+              "lon": "6.08765",
+              "postcode": "52062"
+            },
+            {
+              "name": "46",
+              "lat": "50.78004",
+              "lon": "6.08780",
+              "postcode": "52062"
+            },
+            {
+              "name": "47",
+              "lat": "50.78018",
+              "lon": "6.08771",
+              "postcode": "52062"
+            },
+            {
+              "name": "48",
+              "lat": "50.78007",
+              "lon": "6.08795",
+              "postcode": "52062"
+            },
+            {
+              "name": "49",
+              "lat": "50.78031",
+              "lon": "6.08825",
+              "postcode": "52062"
+            },
+            {
+              "name": "51",
+              "lat": "50.78034",
+              "lon": "6.08846",
+              "postcode": "52062"
+            },
+            {
+              "name": "52",
+              "lat": "50.77973",
+              "lon": "6.09016",
+              "postcode": "52062"
+            },
+            {
+              "name": "53",
+              "lat": "50.78035",
+              "lon": "6.08859",
+              "postcode": "52062"
+            },
+            {
+              "name": "54",
+              "lat": "50.77981",
+              "lon": "6.09001",
+              "postcode": "52062"
+            },
+            {
+              "name": "55",
+              "lat": "50.78038",
+              "lon": "6.08870",
+              "postcode": "52062"
+            },
+            {
+              "name": "56",
+              "lat": "50.77993",
+              "lon": "6.08986",
+              "postcode": "52062"
+            },
+            {
+              "name": "57",
+              "lat": "50.78039",
+              "lon": "6.08879",
+              "postcode": "52062"
+            },
+            {
+              "name": "58",
+              "lat": "50.78004",
+              "lon": "6.08979",
+              "postcode": "52062"
+            },
+            {
+              "name": "59",
+              "lat": "50.78042",
+              "lon": "6.08894",
+              "postcode": "52062"
+            },
+            {
+              "name": "60",
+              "lat": "50.78015",
+              "lon": "6.08973",
+              "postcode": "52062"
+            },
+            {
+              "name": "61",
+              "lat": "50.78043",
+              "lon": "6.08907",
+              "postcode": "52062"
+            },
+            {
+              "name": "62",
+              "lat": "50.78024",
+              "lon": "6.08971",
+              "postcode": "52062"
+            },
+            {
+              "name": "63",
+              "lat": "50.78046",
+              "lon": "6.08917",
+              "postcode": "52062"
+            },
+            {
+              "name": "64",
+              "lat": "50.78039",
+              "lon": "6.08999",
+              "postcode": "52062"
+            },
+            {
+              "name": "65",
+              "lat": "50.78053",
+              "lon": "6.08934",
+              "postcode": "52062"
+            },
+            {
+              "name": "66",
+              "lat": "50.78043",
+              "lon": "6.09020",
+              "postcode": "52062"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Bergdriesch",
+              "lat": "50.77981",
+              "lon": "6.08479"
+            },
+            {
+              "name": "Bergstraße (Pontviertel)",
+              "lat": "50.77981",
+              "lon": "6.08479"
+            },
+            {
+              "name": "Martinstraße",
+              "lat": "50.77980",
+              "lon": "6.08613"
+            },
+            {
+              "name": "Sandkaulstraße",
+              "lat": "50.78015",
+              "lon": "6.08812"
+            },
+            {
+              "name": "Heinzenstraße",
+              "lat": "50.77954",
+              "lon": "6.09037"
+            },
+            {
+              "name": "Monheimsallee",
+              "lat": "50.78062",
+              "lon": "6.09037"
+            }
+          ]
+        },
+        {
+          "name": "Reimanstraße",
+          "lat": "50.77868",
+          "lon": "6.10046",
+          "id": 6665,
+          "buildings": [
+            {
+              "name": "2",
+              "lat": "50.77825",
+              "lon": "6.09960",
+              "postcode": "52070"
+            },
+            {
+              "name": "3",
+              "lat": "50.77835",
+              "lon": "6.09941",
+              "postcode": "52070"
+            },
+            {
+              "name": "4",
+              "lat": "50.77836",
+              "lon": "6.09979",
+              "postcode": "52070"
+            },
+            {
+              "name": "5",
+              "lat": "50.77843",
+              "lon": "6.09956",
+              "postcode": "52070"
+            },
+            {
+              "name": "6",
+              "lat": "50.77847",
+              "lon": "6.10001",
+              "postcode": "52070"
+            },
+            {
+              "name": "7",
+              "lat": "50.77866",
+              "lon": "6.09956",
+              "postcode": "52070"
+            },
+            {
+              "name": "8",
+              "lat": "50.77858",
+              "lon": "6.10022",
+              "postcode": "52070"
+            },
+            {
+              "name": "9",
+              "lat": "50.77859",
+              "lon": "6.09986",
+              "postcode": "52070"
+            },
+            {
+              "name": "10",
+              "lat": "50.77868",
+              "lon": "6.10046",
+              "postcode": "52070"
+            },
+            {
+              "name": "11",
+              "lat": "50.77867",
+              "lon": "6.10001",
+              "postcode": "52070"
+            },
+            {
+              "name": "12",
+              "lat": "50.77879",
+              "lon": "6.10067",
+              "postcode": "52070"
+            },
+            {
+              "name": "13",
+              "lat": "50.77878",
+              "lon": "6.10022",
+              "postcode": "52070"
+            },
+            {
+              "name": "14",
+              "lat": "50.77877",
+              "lon": "6.10080",
+              "postcode": "52070"
+            },
+            {
+              "name": "15",
+              "lat": "50.77887",
+              "lon": "6.10042",
+              "postcode": "52070"
+            },
+            {
+              "name": "16",
+              "lat": "50.77882",
+              "lon": "6.10085",
+              "postcode": "52070"
+            },
+            {
+              "name": "17",
+              "lat": "50.77897",
+              "lon": "6.10061",
+              "postcode": "52070"
+            },
+            {
+              "name": "18",
+              "lat": "50.77886",
+              "lon": "6.10091",
+              "postcode": "52070"
+            },
+            {
+              "name": "19",
+              "lat": "50.77905",
+              "lon": "6.10076",
+              "postcode": "52070"
+            },
+            {
+              "name": "20",
+              "lat": "50.77889",
+              "lon": "6.10100",
+              "postcode": "52070"
+            },
+            {
+              "name": "21",
+              "lat": "50.77911",
+              "lon": "6.10085",
+              "postcode": "52070"
+            },
+            {
+              "name": "22",
+              "lat": "50.77893",
+              "lon": "6.10106",
+              "postcode": "52070"
+            },
+            {
+              "name": "23",
+              "lat": "50.77913",
+              "lon": "6.10093",
+              "postcode": "52070"
+            },
+            {
+              "name": "24",
+              "lat": "50.77896",
+              "lon": "6.10115",
+              "postcode": "52070"
+            },
+            {
+              "name": "25",
+              "lat": "50.77919",
+              "lon": "6.10100",
+              "postcode": "52070"
+            },
+            {
+              "name": "26",
+              "lat": "50.77900",
+              "lon": "6.10121",
+              "postcode": "52070"
+            },
+            {
+              "name": "28",
+              "lat": "50.77904",
+              "lon": "6.10130",
+              "postcode": "52070"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Blücherplatz",
+              "lat": "50.77923",
+              "lon": "6.10138"
+            },
+            {
+              "name": "Hein-Janssen-Straße",
+              "lat": "50.77813",
+              "lon": "6.09921"
+            }
+          ]
+        },
+        {
+          "name": "Rolandplatz",
+          "lat": "50.78453",
+          "lon": "6.09284",
+          "id": 7050,
+          "buildings": [
+            {
+              "name": "1",
+              "lat": "50.78480",
+              "lon": "6.09209",
+              "postcode": "52070"
+            },
+            {
+              "name": "2",
+              "lat": "50.78487",
+              "lon": "6.09220",
+              "postcode": "52070"
+            },
+            {
+              "name": "3",
+              "lat": "50.78490",
+              "lon": "6.09235",
+              "postcode": "52070"
+            },
+            {
+              "name": "4",
+              "lat": "50.78474",
+              "lon": "6.09282",
+              "postcode": "52070"
+            },
+            {
+              "name": "5",
+              "lat": "50.78464",
+              "lon": "6.09286",
+              "postcode": "52070"
+            },
+            {
+              "name": "6",
+              "lat": "50.78453",
+              "lon": "6.09284",
+              "postcode": "52070"
+            },
+            {
+              "name": "7",
+              "lat": "50.78437",
+              "lon": "6.09237",
+              "postcode": "52070"
+            },
+            {
+              "name": "8",
+              "lat": "50.78448",
+              "lon": "6.09211",
+              "postcode": "52070"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Rolandstraße",
+              "lat": "50.78479",
+              "lon": "6.09256"
+            },
+            {
+              "name": "Chlodwigstraße",
+              "lat": "50.78452",
+              "lon": "6.09261"
+            }
+          ]
+        },
+        {
+          "name": "Rethelstraße",
+          "lat": "50.77617",
+          "lon": "6.08467",
+          "id": 25292,
+          "buildings": [
+            {
+              "name": "1",
+              "lat": "50.77609",
+              "lon": "6.08447",
+              "postcode": "52062"
+            },
+            {
+              "name": "2",
+              "lat": "50.77600",
+              "lon": "6.08467",
+              "postcode": "52062"
+            },
+            {
+              "name": "3",
+              "lat": "50.77619",
+              "lon": "6.08467",
+              "postcode": "52062"
+            },
+            {
+              "name": "4",
+              "lat": "50.77604",
+              "lon": "6.08482",
+              "postcode": "52062"
+            },
+            {
+              "name": "6",
+              "lat": "50.77613",
+              "lon": "6.08488",
+              "postcode": "52062"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Hühnermarkt",
+              "lat": "50.77604",
+              "lon": "6.08449"
+            },
+            {
+              "name": "Krämerstraße",
+              "lat": "50.77592",
+              "lon": "6.08428"
+            },
+            {
+              "name": "Rommelsgasse",
+              "lat": "50.77597",
+              "lon": "6.08445"
+            },
+            {
+              "name": "Büchel",
+              "lat": "50.77632",
+              "lon": "6.08488"
+            }
+          ]
+        },
+        {
+          "name": "Rudolfstraße (Rehmviertel)",
+          "lat": "50.77669",
+          "lon": "6.09898",
+          "id": 4276,
+          "buildings": [
+            {
+              "name": "1-7",
+              "lat": "50.77862",
+              "lon": "6.09788",
+              "postcode": "52070"
+            },
+            {
+              "name": "6",
+              "lat": "50.77841",
+              "lon": "6.09756",
+              "postcode": "52070"
+            },
+            {
+              "name": "8",
+              "lat": "50.77837",
+              "lon": "6.09758",
+              "postcode": "52070"
+            },
+            {
+              "name": "9-11",
+              "lat": "50.77843",
+              "lon": "6.09778",
+              "postcode": "52070"
+            },
+            {
+              "name": "10",
+              "lat": "50.77828",
+              "lon": "6.09763",
+              "postcode": "52070"
+            },
+            {
+              "name": "12",
+              "lat": "50.77822",
+              "lon": "6.09765",
+              "postcode": "52070"
+            },
+            {
+              "name": "13",
+              "lat": "50.77839",
+              "lon": "6.09778",
+              "postcode": "52070"
+            },
+            {
+              "name": "14",
+              "lat": "50.77817",
+              "lon": "6.09767",
+              "postcode": "52070"
+            },
+            {
+              "name": "15",
+              "lat": "50.77825",
+              "lon": "6.09784",
+              "postcode": "52070"
+            },
+            {
+              "name": "16",
+              "lat": "50.77809",
+              "lon": "6.09771",
+              "postcode": "52070"
+            },
+            {
+              "name": "17",
+              "lat": "50.77820",
+              "lon": "6.09786",
+              "postcode": "52070"
+            },
+            {
+              "name": "18",
+              "lat": "50.77798",
+              "lon": "6.09739",
+              "postcode": "52070"
+            },
+            {
+              "name": "19",
+              "lat": "50.77809",
+              "lon": "6.09793",
+              "postcode": "52070"
+            },
+            {
+              "name": "20",
+              "lat": "50.77794",
+              "lon": "6.09771",
+              "postcode": "52070"
+            },
+            {
+              "name": "22",
+              "lat": "50.77786",
+              "lon": "6.09782",
+              "postcode": "52070"
+            },
+            {
+              "name": "23",
+              "lat": "50.77797",
+              "lon": "6.09797",
+              "postcode": "52070"
+            },
+            {
+              "name": "24-26",
+              "lat": "50.77772",
+              "lon": "6.09786",
+              "postcode": "52070"
+            },
+            {
+              "name": "27",
+              "lat": "50.77780",
+              "lon": "6.09806",
+              "postcode": "52070"
+            },
+            {
+              "name": "29",
+              "lat": "50.77759",
+              "lon": "6.09823",
+              "postcode": "52070"
+            },
+            {
+              "name": "29",
+              "lat": "50.77761",
+              "lon": "6.09823",
+              "postcode": "52070"
+            },
+            {
+              "name": "30",
+              "lat": "50.77695",
+              "lon": "6.09821",
+              "postcode": "52070"
+            },
+            {
+              "name": "32",
+              "lat": "50.77678",
+              "lon": "6.09829",
+              "postcode": "52070"
+            },
+            {
+              "name": "34",
+              "lat": "50.77673",
+              "lon": "6.09831",
+              "postcode": "52070"
+            },
+            {
+              "name": "35",
+              "lat": "50.77730",
+              "lon": "6.09827",
+              "postcode": "52070"
+            },
+            {
+              "name": "36",
+              "lat": "50.77665",
+              "lon": "6.09836",
+              "postcode": "52070"
+            },
+            {
+              "name": "37-39",
+              "lat": "50.77726",
+              "lon": "6.09829",
+              "postcode": "52070"
+            },
+            {
+              "name": "38",
+              "lat": "50.77659",
+              "lon": "6.09838",
+              "postcode": "52070"
+            },
+            {
+              "name": "40",
+              "lat": "50.77653",
+              "lon": "6.09840",
+              "postcode": "52070"
+            },
+            {
+              "name": "41",
+              "lat": "50.77707",
+              "lon": "6.09838",
+              "postcode": "52070"
+            },
+            {
+              "name": "42",
+              "lat": "50.77631",
+              "lon": "6.09851",
+              "postcode": "52070"
+            },
+            {
+              "name": "43-45",
+              "lat": "50.77699",
+              "lon": "6.09842",
+              "postcode": "52070"
+            },
+            {
+              "name": "44",
+              "lat": "50.77619",
+              "lon": "6.09814",
+              "postcode": "52070"
+            },
+            {
+              "name": "46",
+              "lat": "50.77620",
+              "lon": "6.09853",
+              "postcode": "52070"
+            },
+            {
+              "name": "47",
+              "lat": "50.77687",
+              "lon": "6.09846",
+              "postcode": "52070"
+            },
+            {
+              "name": "48",
+              "lat": "50.77616",
+              "lon": "6.09857",
+              "postcode": "52070"
+            },
+            {
+              "name": "49",
+              "lat": "50.77684",
+              "lon": "6.09848",
+              "postcode": "52070"
+            },
+            {
+              "name": "50",
+              "lat": "50.77611",
+              "lon": "6.09859",
+              "postcode": "52070"
+            },
+            {
+              "name": "51",
+              "lat": "50.77669",
+              "lon": "6.09898",
+              "postcode": "52070"
+            },
+            {
+              "name": "51",
+              "lat": "50.77674",
+              "lon": "6.09853",
+              "postcode": "52070"
+            },
+            {
+              "name": "52",
+              "lat": "50.77600",
+              "lon": "6.09853",
+              "postcode": "52070"
+            },
+            {
+              "name": "53",
+              "lat": "50.77668",
+              "lon": "6.09855",
+              "postcode": "52070"
+            },
+            {
+              "name": "54",
+              "lat": "50.77594",
+              "lon": "6.09829",
+              "postcode": "52070"
+            },
+            {
+              "name": "55",
+              "lat": "50.77662",
+              "lon": "6.09857",
+              "postcode": "52070"
+            },
+            {
+              "name": "56-58",
+              "lat": "50.77585",
+              "lon": "6.09872",
+              "postcode": "52070"
+            },
+            {
+              "name": "59",
+              "lat": "50.77627",
+              "lon": "6.09883",
+              "postcode": "52070"
+            },
+            {
+              "name": "60-62",
+              "lat": "50.77574",
+              "lon": "6.09876",
+              "postcode": "52070"
+            },
+            {
+              "name": "61",
+              "lat": "50.77615",
+              "lon": "6.09891",
+              "postcode": "52070"
+            },
+            {
+              "name": "63",
+              "lat": "50.77607",
+              "lon": "6.09894",
+              "postcode": "52070"
+            },
+            {
+              "name": "64",
+              "lat": "50.77565",
+              "lon": "6.09881",
+              "postcode": "52070"
+            },
+            {
+              "name": "65-67",
+              "lat": "50.77596",
+              "lon": "6.09898",
+              "postcode": "52070"
+            },
+            {
+              "name": "66",
+              "lat": "50.77555",
+              "lon": "6.09874",
+              "postcode": "52070"
+            },
+            {
+              "name": "68",
+              "lat": "50.77541",
+              "lon": "6.09891",
+              "postcode": "52070"
+            },
+            {
+              "name": "68a",
+              "lat": "50.77531",
+              "lon": "6.09896",
+              "postcode": "52070"
+            },
+            {
+              "name": "69",
+              "lat": "50.77585",
+              "lon": "6.09898",
+              "postcode": "52070"
+            },
+            {
+              "name": "70",
+              "lat": "50.77521",
+              "lon": "6.09900",
+              "postcode": "52070"
+            },
+            {
+              "name": "71",
+              "lat": "50.77578",
+              "lon": "6.09904",
+              "postcode": "52070"
+            },
+            {
+              "name": "72-74",
+              "lat": "50.77512",
+              "lon": "6.09904",
+              "postcode": "52070"
+            },
+            {
+              "name": "73",
+              "lat": "50.77570",
+              "lon": "6.09915",
+              "postcode": "52070"
+            },
+            {
+              "name": "75",
+              "lat": "50.77560",
+              "lon": "6.09911",
+              "postcode": "52070"
+            },
+            {
+              "name": "76",
+              "lat": "50.77498",
+              "lon": "6.09911",
+              "postcode": "52070"
+            },
+            {
+              "name": "77",
+              "lat": "50.77554",
+              "lon": "6.09913",
+              "postcode": "52070"
+            },
+            {
+              "name": "78",
+              "lat": "50.77489",
+              "lon": "6.09915",
+              "postcode": "52070"
+            },
+            {
+              "name": "79-81",
+              "lat": "50.77546",
+              "lon": "6.09921",
+              "postcode": "52070"
+            },
+            {
+              "name": "80",
+              "lat": "50.77484",
+              "lon": "6.09917",
+              "postcode": "52070"
+            },
+            {
+              "name": "83",
+              "lat": "50.77536",
+              "lon": "6.09928",
+              "postcode": "52070"
+            },
+            {
+              "name": "85",
+              "lat": "50.77527",
+              "lon": "6.09928",
+              "postcode": "52070"
+            },
+            {
+              "name": "87",
+              "lat": "50.77514",
+              "lon": "6.09934",
+              "postcode": "52070"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Steinkaulstraße",
+              "lat": "50.77494",
+              "lon": "6.09924"
+            },
+            {
+              "name": "Rehmplatz",
+              "lat": "50.77712",
+              "lon": "6.09825"
+            },
+            {
+              "name": "Adalbertsteinweg (Kaiserplatz)",
+              "lat": "50.77464",
+              "lon": "6.09934"
+            },
+            {
+              "name": "Sigmundstraße",
+              "lat": "50.77742",
+              "lon": "6.09810"
+            },
+            {
+              "name": "Jülicher Straße",
+              "lat": "50.77885",
+              "lon": "6.09748"
+            }
+          ]
+        },
+        {
+          "name": "Rommelsgasse",
+          "lat": "50.77582",
+          "lon": "6.08484",
+          "id": 34452,
+          "buildings": [
+            {
+              "name": "2-3",
+              "lat": "50.77584",
+              "lon": "6.08503",
+              "postcode": "52062"
+            },
+            {
+              "name": "4",
+              "lat": "50.77589",
+              "lon": "6.08497",
+              "postcode": "52062"
+            },
+            {
+              "name": "5",
+              "lat": "50.77589",
+              "lon": "6.08488",
+              "postcode": "52062"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Hühnermarkt",
+              "lat": "50.77581",
+              "lon": "6.08477"
+            },
+            {
+              "name": "Körbergasse",
+              "lat": "50.77575",
+              "lon": "6.08512"
+            },
+            {
+              "name": "Hof",
+              "lat": "50.77574",
+              "lon": "6.08514"
+            },
+            {
+              "name": "Krämerstraße",
+              "lat": "50.77603",
+              "lon": "6.08426"
+            },
+            {
+              "name": "Rethelstraße",
+              "lat": "50.77594",
+              "lon": "6.08445"
+            }
+          ]
+        },
+        {
+          "name": "Rehmplatz",
+          "lat": "50.77711",
+          "lon": "6.09827",
+          "id": 27833,
+          "buildings": [
+            {
+              "name": "1",
+              "lat": "50.77741",
+              "lon": "6.09737",
+              "postcode": "52070"
+            },
+            {
+              "name": "3",
+              "lat": "50.77744",
+              "lon": "6.09750",
+              "postcode": "52070"
+            },
+            {
+              "name": "4-6",
+              "lat": "50.77684",
+              "lon": "6.09737",
+              "postcode": "52070"
+            },
+            {
+              "name": "5",
+              "lat": "50.77746",
+              "lon": "6.09761",
+              "postcode": "52070"
+            },
+            {
+              "name": "7",
+              "lat": "50.77748",
+              "lon": "6.09771",
+              "postcode": "52070"
+            },
+            {
+              "name": "8",
+              "lat": "50.77684",
+              "lon": "6.09750",
+              "postcode": "52070"
+            },
+            {
+              "name": "9",
+              "lat": "50.77757",
+              "lon": "6.09793",
+              "postcode": "52070"
+            },
+            {
+              "name": "10",
+              "lat": "50.77688",
+              "lon": "6.09763",
+              "postcode": "52070"
+            },
+            {
+              "name": "12",
+              "lat": "50.77691",
+              "lon": "6.09773",
+              "postcode": "52070"
+            },
+            {
+              "name": "14",
+              "lat": "50.77693",
+              "lon": "6.09786",
+              "postcode": "52070"
+            },
+            {
+              "name": "16",
+              "lat": "50.77696",
+              "lon": "6.09795",
+              "postcode": "52070"
+            },
+            {
+              "name": "18",
+              "lat": "50.77697",
+              "lon": "6.09803",
+              "postcode": "52070"
+            },
+            {
+              "name": "20",
+              "lat": "50.77695",
+              "lon": "6.09821",
+              "postcode": "52070"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Ottostraße (Kaiserplatz)",
+              "lat": "50.77688",
+              "lon": "6.09700"
+            },
+            {
+              "name": "Rudolfstraße (Rehmviertel)",
+              "lat": "50.77711",
+              "lon": "6.09827"
+            },
+            {
+              "name": "Sigmundstraße",
+              "lat": "50.77742",
+              "lon": "6.09810"
+            }
+          ]
+        },
+        {
+          "name": "Robensstraße",
+          "lat": "50.78083",
+          "lon": "6.09866",
+          "id": 27706,
+          "buildings": [
+            {
+              "name": "1",
+              "lat": "50.77889",
+              "lon": "6.09593",
+              "postcode": "52070"
+            },
+            {
+              "name": "2",
+              "lat": "50.77901",
+              "lon": "6.09653",
+              "postcode": "52070"
+            },
+            {
+              "name": "3",
+              "lat": "50.77896",
+              "lon": "6.09585",
+              "postcode": "52070"
+            },
+            {
+              "name": "3a",
+              "lat": "50.77898",
+              "lon": "6.09608",
+              "postcode": "52070"
+            },
+            {
+              "name": "4",
+              "lat": "50.77909",
+              "lon": "6.09655",
+              "postcode": "52070"
+            },
+            {
+              "name": "5",
+              "lat": "50.77906",
+              "lon": "6.09625",
+              "postcode": "52070"
+            },
+            {
+              "name": "6-8",
+              "lat": "50.77920",
+              "lon": "6.09655",
+              "postcode": "52070"
+            },
+            {
+              "name": "7",
+              "lat": "50.77920",
+              "lon": "6.09630",
+              "postcode": "52070"
+            },
+            {
+              "name": "10",
+              "lat": "50.77929",
+              "lon": "6.09660",
+              "postcode": "52070"
+            },
+            {
+              "name": "11",
+              "lat": "50.77932",
+              "lon": "6.09634",
+              "postcode": "52070"
+            },
+            {
+              "name": "12",
+              "lat": "50.77935",
+              "lon": "6.09662",
+              "postcode": "52070"
+            },
+            {
+              "name": "13-15",
+              "lat": "50.77940",
+              "lon": "6.09636",
+              "postcode": "52070"
+            },
+            {
+              "name": "14",
+              "lat": "50.77943",
+              "lon": "6.09664",
+              "postcode": "52070"
+            },
+            {
+              "name": "16",
+              "lat": "50.77953",
+              "lon": "6.09664",
+              "postcode": "52070"
+            },
+            {
+              "name": "17",
+              "lat": "50.77948",
+              "lon": "6.09638",
+              "postcode": "52070"
+            },
+            {
+              "name": "18",
+              "lat": "50.77958",
+              "lon": "6.09668",
+              "postcode": "52070"
+            },
+            {
+              "name": "19",
+              "lat": "50.78011",
+              "lon": "6.09589",
+              "postcode": "52070"
+            },
+            {
+              "name": "20-22",
+              "lat": "50.77966",
+              "lon": "6.09679",
+              "postcode": "52070"
+            },
+            {
+              "name": "23",
+              "lat": "50.77969",
+              "lon": "6.09638",
+              "postcode": "52070"
+            },
+            {
+              "name": "24",
+              "lat": "50.77981",
+              "lon": "6.09692",
+              "postcode": "52070"
+            },
+            {
+              "name": "27",
+              "lat": "50.77982",
+              "lon": "6.09651",
+              "postcode": "52070"
+            },
+            {
+              "name": "28",
+              "lat": "50.77988",
+              "lon": "6.09703",
+              "postcode": "52070"
+            },
+            {
+              "name": "30",
+              "lat": "50.77993",
+              "lon": "6.09711",
+              "postcode": "52070"
+            },
+            {
+              "name": "31",
+              "lat": "50.77993",
+              "lon": "6.09660",
+              "postcode": "52070"
+            },
+            {
+              "name": "32",
+              "lat": "50.77997",
+              "lon": "6.09720",
+              "postcode": "52070"
+            },
+            {
+              "name": "33",
+              "lat": "50.78000",
+              "lon": "6.09668",
+              "postcode": "52070"
+            },
+            {
+              "name": "34",
+              "lat": "50.78000",
+              "lon": "6.09728",
+              "postcode": "52070"
+            },
+            {
+              "name": "35",
+              "lat": "50.78004",
+              "lon": "6.09679",
+              "postcode": "52070"
+            },
+            {
+              "name": "36",
+              "lat": "50.78004",
+              "lon": "6.09735",
+              "postcode": "52070"
+            },
+            {
+              "name": "37",
+              "lat": "50.78010",
+              "lon": "6.09688",
+              "postcode": "52070"
+            },
+            {
+              "name": "38",
+              "lat": "50.78008",
+              "lon": "6.09743",
+              "postcode": "52070"
+            },
+            {
+              "name": "39",
+              "lat": "50.78015",
+              "lon": "6.09696",
+              "postcode": "52070"
+            },
+            {
+              "name": "40",
+              "lat": "50.78014",
+              "lon": "6.09750",
+              "postcode": "52070"
+            },
+            {
+              "name": "41",
+              "lat": "50.78020",
+              "lon": "6.09705",
+              "postcode": "52070"
+            },
+            {
+              "name": "42",
+              "lat": "50.78018",
+              "lon": "6.09758",
+              "postcode": "52070"
+            },
+            {
+              "name": "43",
+              "lat": "50.78046",
+              "lon": "6.09660",
+              "postcode": "52070"
+            },
+            {
+              "name": "44",
+              "lat": "50.78020",
+              "lon": "6.09767",
+              "postcode": "52070"
+            },
+            {
+              "name": "46",
+              "lat": "50.78023",
+              "lon": "6.09778",
+              "postcode": "52070"
+            },
+            {
+              "name": "48",
+              "lat": "50.78029",
+              "lon": "6.09786",
+              "postcode": "52070"
+            },
+            {
+              "name": "49",
+              "lat": "50.78041",
+              "lon": "6.09730",
+              "postcode": "52070"
+            },
+            {
+              "name": "50",
+              "lat": "50.78037",
+              "lon": "6.09799",
+              "postcode": "52070"
+            },
+            {
+              "name": "51",
+              "lat": "50.78090",
+              "lon": "6.09722",
+              "postcode": "52070"
+            },
+            {
+              "name": "52",
+              "lat": "50.78081",
+              "lon": "6.09891",
+              "postcode": "52070"
+            },
+            {
+              "name": "54",
+              "lat": "50.78087",
+              "lon": "6.09902",
+              "postcode": "52070"
+            },
+            {
+              "name": "56",
+              "lat": "50.78092",
+              "lon": "6.09913",
+              "postcode": "52070"
+            },
+            {
+              "name": "57",
+              "lat": "50.78077",
+              "lon": "6.09840",
+              "postcode": "52070"
+            },
+            {
+              "name": "58",
+              "lat": "50.78103",
+              "lon": "6.09936",
+              "postcode": "52070"
+            },
+            {
+              "name": "59",
+              "lat": "50.78080",
+              "lon": "6.09846",
+              "postcode": "52070"
+            },
+            {
+              "name": "60",
+              "lat": "50.78129",
+              "lon": "6.09984",
+              "postcode": "52070"
+            },
+            {
+              "name": "61",
+              "lat": "50.78091",
+              "lon": "6.09853",
+              "postcode": "52070"
+            },
+            {
+              "name": "62",
+              "lat": "50.78137",
+              "lon": "6.10001",
+              "postcode": "52070"
+            },
+            {
+              "name": "63",
+              "lat": "50.78098",
+              "lon": "6.09868",
+              "postcode": "52070"
+            },
+            {
+              "name": "65",
+              "lat": "50.78103",
+              "lon": "6.09876",
+              "postcode": "52070"
+            },
+            {
+              "name": "67",
+              "lat": "50.78106",
+              "lon": "6.09885",
+              "postcode": "52070"
+            },
+            {
+              "name": "69",
+              "lat": "50.78110",
+              "lon": "6.09896",
+              "postcode": "52070"
+            },
+            {
+              "name": "71",
+              "lat": "50.78121",
+              "lon": "6.09917",
+              "postcode": "52070"
+            },
+            {
+              "name": "73",
+              "lat": "50.78141",
+              "lon": "6.09949",
+              "postcode": "52070"
+            },
+            {
+              "name": "75",
+              "lat": "50.78157",
+              "lon": "6.09979",
+              "postcode": "52070"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Thomashofstraße",
+              "lat": "50.78118",
+              "lon": "6.09934"
+            },
+            {
+              "name": "Passstraße",
+              "lat": "50.78056",
+              "lon": "6.09808"
+            },
+            {
+              "name": "Jülicher Straße",
+              "lat": "50.77864",
+              "lon": "6.09623"
+            },
+            {
+              "name": "Ottostraße (Kaiserplatz)",
+              "lat": "50.77864",
+              "lon": "6.09623"
+            }
+          ]
+        },
+        {
+          "name": "Rennbahn",
+          "lat": "50.77464",
+          "lon": "6.08216",
+          "id": 11036,
+          "buildings": [
+            {
+              "name": "1",
+              "lat": "50.77464",
+              "lon": "6.08216",
+              "postcode": "52062"
+            },
+            {
+              "name": "1",
+              "lat": "50.77463",
+              "lon": "6.08213",
+              "postcode": "52062"
+            },
+            {
+              "name": "3",
+              "lat": "50.77467",
+              "lon": "6.08203",
+              "postcode": "52062"
+            },
+            {
+              "name": "5,7",
+              "lat": "50.77465",
+              "lon": "6.08190",
+              "postcode": "52062"
+            },
+            {
+              "name": "9,11",
+              "lat": "50.77457",
+              "lon": "6.08181",
+              "postcode": "52062"
+            },
+            {
+              "name": "13",
+              "lat": "50.77456",
+              "lon": "6.08166",
+              "postcode": "52062"
+            },
+            {
+              "name": "13a",
+              "lat": "50.77452",
+              "lon": "6.08151",
+              "postcode": "52062"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Klappergasse",
+              "lat": "50.77464",
+              "lon": "6.08151"
+            },
+            {
+              "name": "Bendelstraße",
+              "lat": "50.77464",
+              "lon": "6.08151"
+            },
+            {
+              "name": "Fischmarkt",
+              "lat": "50.77475",
+              "lon": "6.08239"
+            },
+            {
+              "name": "Schmiedstraße",
+              "lat": "50.77476",
+              "lon": "6.08265"
+            },
+            {
+              "name": "Domhof",
+              "lat": "50.77476",
+              "lon": "6.08265"
+            },
+            {
+              "name": "Johannes-Paul-II.-Straße",
+              "names": {
+                "old_name": "Klostergasse"
+              },
+              "lat": "50.77476",
+              "lon": "6.08265"
+            }
+          ]
+        },
+        {
+          "name": "Ritter-Chorus-Straße",
+          "lat": "50.77537",
+          "lon": "6.08280",
+          "id": 4926,
+          "buildings": [
+            {
+              "name": "1,3",
+              "lat": "50.77546",
+              "lon": "6.08346",
+              "postcode": "52062"
+            },
+            {
+              "name": "1-4",
+              "lat": "50.77536",
+              "lon": "6.08304",
+              "postcode": "52062"
+            },
+            {
+              "name": "5",
+              "lat": "50.77537",
+              "lon": "6.08304",
+              "postcode": "52062"
+            },
+            {
+              "name": "6",
+              "lat": "50.77556",
+              "lon": "6.08269",
+              "postcode": "52062"
+            },
+            {
+              "name": "7",
+              "lat": "50.77537",
+              "lon": "6.08280",
+              "postcode": "52062"
+            }
+          ],
+          "intersectedStreets": [
+            {
+              "name": "Johannes-Paul-II.-Straße",
+              "names": {
+                "old_name": "Klostergasse"
+              },
+              "lat": "50.77546",
+              "lon": "6.08250"
+            },
+            {
+              "name": "Katschhof",
+              "lat": "50.77548",
+              "lon": "6.08349"
+            }
+          ]
+        }
+      ],
+      "init": 1,
+      "matchStreet": 1
+    }
+  ]
+}
