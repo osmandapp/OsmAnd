@@ -3771,4 +3771,7 @@
     <string name="weight_limit_description">Укажите вес автомобиля, для тяжёлых транспортных средств могут применяться ограничения на некоторых маршрутах.</string>
     <string name="shared_string_tones">тонны</string>
     <string name="shared_string_meters">метры</string>
+    <string name="details_dialog_decr">Управление отображением дополнительных деталей на карте</string>
+    <string name="shared_string_all_time">Всё время</string>
+    <string name="shared_string_night_map">Ночная карта</string>
 </resources>
