@@ -3757,4 +3757,12 @@
     <string name="shared_string_delete_all_q">حذف الكل؟</string>
     <string name="delete_all_actions_message_q">هل أنت متأكد من رغبتك في حذف الإجراءات السريعة %d نهائيًا؟</string>
     <string name="screen_timeout">مهلة الشاشة</string>
+    <string name="shared_string_tones">أساليب</string>
+    <string name="width_limit_description">أدل بعرض مركبتك، قد يتم تطبيق بعض القيود على المركبات العريضة.</string>
+    <string name="height_limit_description">أدل بارتفاع مركبتك ،قد يتم تطبيق بعض القيود على المركبات المرتفعة.</string>
+    <string name="weight_limit_description">أدل بوزن مركبتك ،قد يتم تطبيق بعض القيود على المركبات الثقيلة.</string>
+    <string name="shared_string_meters">أمتار</string>
+    <string name="details_dialog_decr">اظهار التحكم في رؤية التفاصيل الإضافية على الخريطة</string>
+    <string name="shared_string_night_map">خريطة ليلية</string>
+    <string name="shared_string_all_time">كل الوقت</string>
 </resources>
