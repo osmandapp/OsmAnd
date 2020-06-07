@@ -3795,7 +3795,7 @@
     <string name="poi_pump_status_missing_beam">Состояние насоса: отсутствует рычаг</string>
     <string name="poi_socket_tesla_standard_yes">Tesla standard</string>
     <string name="poi_cuisine_suki">Суки (тайский горячий горшок)</string>
-    <string name="poi_seamark_water_level_awash"></string>
+    <string name="poi_seamark_water_level_awash">Уровень воды: наводнение</string>
     <string name="poi_seamark_water_level_dry">Уровень воды: сухо</string>
     <string name="poi_seamark_water_level_submerged">Уровень воды: погружено</string>
     <string name="poi_seamark_water_level_part_submerged">Уровень воды: частично погружено</string>
@@ -3803,4 +3803,13 @@
     <string name="poi_psv_no">Доступ к PSV: нет</string>
     <string name="poi_psv_yes">Доступ к PSV: да</string>
     <string name="poi_checkpoint_type_needler">Игольник</string>
+    <string name="poi_seamark_water_level_floating">Уровень воды: плавающий</string>
+    <string name="poi_seamark_water_level_covers">Уровень воды: покрыт</string>
+    <string name="poi_psv_designated">Доступ к PSV: предписанный</string>
+    <string name="poi_fire_hydrant_type_pipe">Труба</string>
+    <string name="poi_seamark_water_level_below_mwl">Уровень воды: ниже среднего уровня</string>
+    <string name="poi_seamark_water_level_above_mwl">Уровень воды: выше среднего уровня</string>
+    <string name="poi_seamark_water_level_floods">Уровень воды: наводнение</string>
+    <string name="poi_coach_no">Доступ к автобусу: нет</string>
+    <string name="poi_coach_yes">Доступ к автобусу: да</string>
 </resources>
