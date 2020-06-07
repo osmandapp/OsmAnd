@@ -778,14 +778,28 @@ public class SearchUICore {
 			return exportedCities;
 		}
 
-		public void exportObject(MapObject object) {
+		public void exportObject(SearchPhrase phrase, MapObject object) {
+			double maxDistance = phrase.getSettings().getExportSettings().getMaxDistance();
+			if (maxDistance > 0) {
+				double distance = MapUtils.getDistance(phrase.getSettings().getOriginalLocation(), object.getLocation());
+				if (distance > maxDistance) {
+					return;
+				}
+			}
 			if (exportedObjects == null) {
 				exportedObjects = new ArrayList<>();
 			}
 			exportedObjects.add(object);
 		}
 
-		public void exportCity(City city) {
+		public void exportCity(SearchPhrase phrase, City city) {
+			double maxDistance = phrase.getSettings().getExportSettings().getMaxDistance();
+			if (maxDistance > 0) {
+				double distance = MapUtils.getDistance(phrase.getSettings().getOriginalLocation(), city.getLocation());
+				if (distance > maxDistance) {
+					return;
+				}
+			}
 			if (exportedCities == null) {
 				exportedCities = new ArrayList<>();
 			}

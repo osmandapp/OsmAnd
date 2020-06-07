@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_all_time">All time</string>
+    <string name="shared_string_night_map">Night map</string>
+    <string name="details_dialog_decr">Control visibility of additional details shown on the map</string>
     <string name="shared_string_meters">meters</string>
     <string name="shared_string_tones">tones</string>
     <string name="default_screen_timeout">Default screen timeout</string>

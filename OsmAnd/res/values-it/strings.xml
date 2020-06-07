@@ -920,7 +920,7 @@
     <string name="prefer_in_routing_descr">Preferisci autostrade.</string>
     <string name="prefer_motorways">Preferisci le autostrade</string>
     <string name="prefer_in_routing_title">Preferisci…</string>
-    <string name="av_def_action_choose">Su richiesta\?</string>
+    <string name="av_def_action_choose">Chiedi</string>
     <string name="item_checked">segnato</string>
     <string name="item_unchecked">non segnato</string>
     <string name="access_arrival_time">Orario di arrivo</string>
@@ -2563,7 +2563,7 @@
     <string name="one_tap_active">\'Un tap\' attivo</string>
     <string name="empty_state_av_notes">Prendi delle note!</string>
     <string name="empty_state_av_notes_desc">Aggiungi note audio, video o foto in qualsiasi punto sulla mappa, utilizzando il widget o il menù contestuale.</string>
-    <string name="notes_by_date">Note ordinate per data</string>
+    <string name="notes_by_date">Note a/v per data</string>
     <string name="by_date">Per data</string>
     <string name="by_type">Per tipo</string>
     <string name="modify_the_search_query">Cambia la tua ricerca.</string>
@@ -3767,4 +3767,8 @@
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Colori personalizzati</string>
     <string name="search_poi_types">Cerca in base al PDI</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Puoi Esportare o importare le azioni veloci con i profili dell\'applicazione.</string>
+    <string name="shared_string_delete_all_q">Cancellare tutto\?</string>
+    <string name="delete_all_actions_message_q">Sei sicuro di volere cancellare definitivamente l\'azione veloce %d \?</string>
+    <string name="screen_timeout">Tempo del blocco schermo</string>
 </resources>
