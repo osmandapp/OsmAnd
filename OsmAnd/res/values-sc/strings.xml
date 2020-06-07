@@ -3732,4 +3732,5 @@
     <string name="export_import_quick_actions_with_profiles_promo">Podes esportare o importare atziones lestras cun profilos de s\'aplicatzione.</string>
     <string name="shared_string_delete_all_q">Iscantzellare totu\?</string>
     <string name="delete_all_actions_message_q">Ses seguru de chèrrere iscantzellare definitivamente %d atziones lestras\?</string>
+    <string name="shared_string_all_time">Totu su tempus</string>
 </resources>
