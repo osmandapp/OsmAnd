@@ -216,7 +216,7 @@
     <string name="routing_attr_prefer_motorway_description">Preferir as autoestradas</string>
     <string name="routing_attr_avoid_toll_name">Sen estradas de portaxe ou peaxe</string>
     <string name="routing_attr_avoid_toll_description">Evitar estradas de portaxe ou peaxe</string>
-    <string name="routing_attr_avoid_unpaved_name">Non hai estradas sen pavimentar</string>
+    <string name="routing_attr_avoid_unpaved_name">Sen estradas non pavimentadas</string>
     <string name="routing_attr_avoid_unpaved_description">Evitar estradas sen pavimentar</string>
     <string name="routing_attr_avoid_ferries_name">Sen ferris</string>
     <string name="routing_attr_avoid_ferries_description">Evitar ferris</string>
@@ -559,7 +559,7 @@
     <string name="map_widget_renderer">Estilo do mapa</string>
     <string name="layer_map_appearance">Configurar a pantalla</string>
     <string name="show_lanes">Faixas ou carrís</string>
-    <string name="avoid_unpaved">Non hai estradas sen pavimentar</string>
+    <string name="avoid_unpaved">Sen estradas non pavimentadas</string>
     <string name="avoid_ferries">Sen ferris</string>
     <string name="avoid_in_routing_title">Evitar…</string>
     <string name="map_widget_fluorescent">Rotas fluorescentes</string>
@@ -3680,7 +3680,7 @@ Lon %2$s</string>
     <string name="shared_string_min">Mín</string>
     <string name="ui_customization_description">Personaliza a cantidade de elementos na \"Gabeta\", na \"Configuración do mapa\" e no \"Menú contextual\". 
 \n 
-\nDesactiva os plugins non enpregados, para agochar todos os seus controis da aplicación %1$s.</string>
+\nDesactiva os plugins non empregados para agochar todos os seus controis. %1$s.</string>
     <string name="ui_customization_short_descr">Elementos da gabeta, menú contextual</string>
     <string name="ui_customization">Personalización da interface de usuario</string>
     <string name="shared_string_drawer">Gabeta</string>
