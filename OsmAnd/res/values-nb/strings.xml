@@ -3657,4 +3657,6 @@
     <string name="expire_time">Utløpstid</string>
     <string name="storage_format">Lagringsformat</string>
     <string name="tiles_storage_descr">Velg hvordan nedlastede fliskart lagres.</string>
+    <string name="details_dialog_decr">Kontroller synlighet for ytterligere detaljer vist på kartet</string>
+    <string name="shared_string_night_map">Nattkart</string>
 </resources>

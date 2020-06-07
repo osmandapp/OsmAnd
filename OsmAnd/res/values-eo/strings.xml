@@ -813,9 +813,9 @@
     <string name="routing_attr_avoid_stairs_description">Eviti ŝtuparojn</string>
     <string name="routing_attr_avoid_borders_name">Sen landlimaj trairejoj</string>
     <string name="routing_attr_avoid_borders_description">Eviti landlimajn trairejojn</string>
-    <string name="routing_attr_weight_name">Pezlimo</string>
+    <string name="routing_attr_weight_name">Limigo de pezo</string>
     <string name="routing_attr_weight_description">Agordi maksimuman permesatan pezon de veturilo.</string>
-    <string name="routing_attr_height_name">Altlimo</string>
+    <string name="routing_attr_height_name">Limigo de alto</string>
     <string name="routing_attr_height_description">Agordi maksimuman permesan alton de veturilo.</string>
     <string name="android_19_location_disabled">Ekde la versio 4.4 (KitKat) de Android, la antaŭa dosierujo (%s) estas evitinda. Ĉu kopii ĉiujn dosierojn de OsmAnd al la nova dosierujo\? 
 \n Rimarko 1: viaj malnovaj dosieroj ne estos ŝanĝitaj (tamen vi povos forigi ilin permane). 
@@ -1227,7 +1227,7 @@
     <string name="switch_to_raster_map_to_see">Elŝutu malkonektan vektoran mapon por tiu ĉi loko per “elŝuti mapojn”, aŭ aktivigu la kromprogramon “enretaj mapoj”.</string>
     <string name="send_files_to_osm">Ĉu alŝuti GPX-dosierojn al OSM?</string>
     <string name="gpx_tags_txt">Etikedoj</string>
-    <string name="gpx_visibility_txt">Videbleco</string>
+    <string name="gpx_visibility_txt">Videblo</string>
     <string name="shared_string_description">Priskribo</string>
     <string name="validate_gpx_upload_name_pwd">Bonvolu enmeti vian uzantnomon kaj pasvorton al OSM por alŝuti GPX-dosierojn.</string>
     <string name="default_buttons_support">Subteni</string>
@@ -3237,8 +3237,8 @@
     <string name="start_up_message_pref">Mesaĝo je starto</string>
     <string name="analytics_pref_title">Analiziloj</string>
     <string name="turn_screen_on_info">Montri mapon sur la ŝlos‑ekrano dum navigado.</string>
-    <string name="route_parameters_info">Agordoj pri kurs‑difinado por la elektita profilo “%1$s”.</string>
-    <string name="wake_time">Propra aktiveca periodo de ekrano</string>
+    <string name="route_parameters_info">Agordoj pri kurs‑difinado por la elektita profilo: “%1$s”.</string>
+    <string name="wake_time">Aktiveca periodo de ekrano</string>
     <string name="units_and_formats">Unuoj kaj formoj</string>
     <string name="appearance">Aspekto</string>
     <string name="map_look_descr">Alĝustigi mapon</string>
@@ -3733,7 +3733,7 @@
     <string name="turn_screen_on_wake_time_descr">Elekti aktivecan periodon de la ekrano post vekiĝi, la ekrano ne malŝaltiĝos se “%1$s” estos aktiva.</string>
     <string name="keep_screen_on">Teni ekranon aktiva</string>
     <string name="keep_screen_off">Teni ekranon malaktiva</string>
-    <string name="screen_timeout_descr">Funkcias nur kiam “%1$s” estas malŝaltita.</string>
+    <string name="screen_timeout_descr">Nur kiam la agordo “%1$s” estas ŝaltita, aktiveca periodo de la ekrano dependos de ĝi.</string>
     <string name="pseudo_mercator_projection">Kvazaŭ-merkatora projekcio</string>
     <string name="one_image_per_tile">Po unu bild‑dosiero per kahelo</string>
     <string name="sqlite_db_file">SQLiteDB-dosiero</string>
@@ -3755,9 +3755,17 @@
 \nUnu semajno egalas al 10 080 minutoj.
 \nUnu jaro egalas al 43 829 minutoj.</string>
     <string name="tiles_storage_descr">Elekti kiel konservi elŝutitajn kahelojn.</string>
-    <string name="default_screen_timeout">Laŭ sistema agordo</string>
+    <string name="default_screen_timeout">Implicita aktiveco de ekrano</string>
     <string name="screen_timeout">Aktiveca periodo de ekrano</string>
     <string name="export_import_quick_actions_with_profiles_promo">Vi povas enporti aŭ elporti rapidajn agojn kune kun profiloj de aplikaĵo.</string>
     <string name="shared_string_delete_all_q">Ĉu forigi ĉiujn\?</string>
     <string name="delete_all_actions_message_q">Ĉu vi certe volas neinversigeble forigi %d rapidajn agojn\?</string>
+    <string name="width_limit_description">Enigu larĝon de via veturilo, iuj vojaj limigoj aplikas al larĝaj veturiloj.</string>
+    <string name="height_limit_description">Enigu alton de via veturilo, iuj vojaj limigoj aplikas al altaj veturiloj.</string>
+    <string name="weight_limit_description">Enigu pezon de via veturilo, iuj vojaj limigoj aplikas al pezaj veturiloj.</string>
+    <string name="shared_string_tones">tunoj</string>
+    <string name="shared_string_meters">metroj</string>
+    <string name="details_dialog_decr">Alĝustigi videblon de pliaj detaloj montrataj sur la mapo</string>
+    <string name="shared_string_night_map">Nokta mapo</string>
+    <string name="shared_string_all_time">Ĉiam</string>
 </resources>

@@ -190,7 +190,7 @@
     <string name="wiki_around">Статьи Википедии рядом</string>
     <string name="search_map_hint">Город или регион</string>
     <string name="route_roundabout_short">Сверните на %1$d съезд</string>
-    <string name="upload_poi">Выгрузить POI</string>
+    <string name="upload_poi">Отправить POI</string>
     <string name="route_calculation">Построение маршрута</string>
     <string name="gpx_no_tracks_title">У вас пока нет файлов GPX</string>
     <string name="gpx_no_tracks_title_folder">Вы также можете добавить файлы GPX в папку</string>
@@ -392,7 +392,7 @@
     <string name="gpx_visibility_txt">Видимость</string>
     <string name="gpx_tags_txt">Теги</string>
     <string name="shared_string_description">Описание</string>
-    <string name="validate_gpx_upload_name_pwd">Пожалуйста, укажите имя и пароль пользователя OSM для выгрузки файлов GPX.</string>
+    <string name="validate_gpx_upload_name_pwd">Пожалуйста, укажите имя и пароль пользователя OSM для отправки файлов GPX.</string>
     <string name="default_buttons_support">Поддержка</string>
     <string name="support_new_features">Поддержать разработку новых функций</string>
     <string name="show_ruler_level">Показывать масштаб</string>
@@ -402,9 +402,9 @@
     <string name="offline_edition">Локальное редактирование</string>
     <string name="offline_edition_descr">Всегда использовать редактирование на устройстве.</string>
     <string name="update_poi_does_not_change_indexes">Изменение POI в приложении не меняет POI загруженные из интернета, однако все изменения сохраняются в локальный файл на устройстве.</string>
-    <string name="local_openstreetmap_uploading">Выгрузка…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} POI/заметок выгружено</string>
-    <string name="local_openstreetmap_uploadall">Выгрузить все</string>
+    <string name="local_openstreetmap_uploading">Отправка…</string>
+    <string name="local_openstreetmap_were_uploaded">{0} POI/заметок отправлено</string>
+    <string name="local_openstreetmap_uploadall">Отправить все</string>
     <string name="local_openstreetmap_upload">Отправить изменения в OSM</string>
     <string name="local_openstreetmap_delete">Удалить правку</string>
     <string name="local_openstreetmap_descr_title">Локальное дополнение:</string>
@@ -473,8 +473,8 @@
     <string name="route_successfully_saved_at">Маршрут успешно сохранён в «%1$s».</string>
     <string name="filename_input">Имя файла: </string>
     <string name="file_with_name_already_exist">Файл с таким именем уже существует.</string>
-    <string name="local_index_upload_gpx_description">Выгрузить файлы GPX в сообщество OSM. Они будут использованы для улучшения карты.</string>
-    <string name="local_index_items_uploaded">%1$d из %2$d объектов успешно загружены.</string>
+    <string name="local_index_upload_gpx_description">Отправить файлы GPX в сообщество OSM. Они будут использованы для улучшения карты.</string>
+    <string name="local_index_items_uploaded">%1$d из %2$d объектов успешно отправлены.</string>
     <string name="local_index_mi_upload_gpx">Отправить в OSM</string>
     <string name="show_more_map_detail">Детализированная карта</string>
     <string name="show_more_map_detail_descr">Показывать детали (дороги и др.), начиная с мелких масштабов.</string>
@@ -779,8 +779,8 @@
     <string name="search_history_int_streets">Пересечение улиц: {0} x {1} в {2}</string>
     <string name="search_history_building">Здание: {0}, {1}, {2}</string>
     <string name="favorite">Избранное</string>
-    <string name="uploading_data">Загрузка данных…</string>
-    <string name="uploading">Загрузка…</string>
+    <string name="uploading_data">Отправка данных…</string>
+    <string name="uploading">Отправка…</string>
     <string name="search_nothing_found">По вашему запросу ничего не найдено</string>
     <string name="searching">Поиск…</string>
     <string name="searching_address">Поиск адреса…</string>
@@ -1907,9 +1907,9 @@
     <string name="rendering_attr_currentTrackColor_name">Цвет трека GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Толщина трека GPX</string>
     <string name="no_updates_available">Нет доступных обновлений</string>
-    <string name="failed_to_upload">Не удалось закачать</string>
+    <string name="failed_to_upload">Не удалось отправить</string>
     <string name="delete_change">Удалить изменения</string>
-    <string name="successfully_uploaded_pattern">Успешно загружены {0}/{1}</string>
+    <string name="successfully_uploaded_pattern">Отправлены {0}/{1}</string>
     <string name="error_message_pattern">Ошибка: {0}</string>
     <string name="we_really_care_about_your_opinion">Ваше мнение и отзывы ценятся.</string>
     <string name="user_hates_app_get_feedback">Скажите нам почему.</string>
@@ -1940,7 +1940,7 @@
     <string name="working_days">Рабочие дни</string>
     <string name="favourites">Избранные</string>
     <string name="saved_at_time">Успешно сохранён в: %1$s</string>
-    <string name="poi_deleted_localy">POI будут удалены после того как вы загрузите ваши изменения</string>
+    <string name="poi_deleted_localy">POI будут удалены после того как вы отправите ваши изменения</string>
     <string name="show_gpx">Показать данные GPX</string>
     <string name="poi_action_delete">удалить</string>
     <string name="recent_places">Недавние места</string>
@@ -2028,7 +2028,7 @@
     <string name="plugins_menu_group">Плагины</string>
     <string name="map_legend">Легенда</string>
     <string name="shared_string_update">Обновить</string>
-    <string name="shared_string_upload">Загрузить</string>
+    <string name="shared_string_upload">Отправить</string>
     <string name="osm_edit_created_poi">Создана OSM POI</string>
     <string name="osmand_running_in_background">Запустить в фоновом режиме</string>
     <string name="av_locations">Места</string>
@@ -2104,7 +2104,7 @@
 \nЕсли вы любите OsmAnd и OSM и хотите поддержать их, данная подписка — отличный способ сделать это.</string>
     <string name="select_map_marker">Выберите маркер</string>
     <string name="map_markers_other">Другие маркеры</string>
-    <string name="upload_anonymously">Загрузить анонимно</string>
+    <string name="upload_anonymously">Отправить анонимно</string>
     <string name="map_marker_1st">Первый маркер</string>
     <string name="map_marker_2nd">Второй маркер</string>
     <string name="shared_string_toolbar">Панель инструментов</string>
@@ -2135,8 +2135,8 @@
     <string name="download_files_error_not_enough_space">Недостаточно места!
 \nНеобходимо {3} МБ временного хранилища и {1} МБ постоянного. 
 \n(Доступно только {2} МБ)</string>
-    <string name="upload_osm_note_description">Загрузите свою заметку OSM анонимно или используя свой профиль OpenStreetMap.org.</string>
-    <string name="upload_osm_note">Загрузить OSM заметку</string>
+    <string name="upload_osm_note_description">Отправьте свою заметку OSM анонимно или используя свой профиль OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Отправить OSM заметку</string>
     <string name="use_drawer_btn">Использовать меню</string>
     <string name="use_dashboard_btn">Использовать панель управления</string>
     <string name="dashboard_or_drawer_title">Панель управления или меню</string>
@@ -2534,7 +2534,7 @@
 \n• Карта масштабируется соответственно вашей скорости 
 \n• Поиск места по адресу, типу (паркинг, ресторан, отель, заправка, музей и т.д.) или географическим координатам 
 \n• Поддержка промежуточных точек маршрута 
-\n• Запись собственного или загрузка GPX трека и следование ему
+\n• Запись собственного или отправка GPX трека и следование ему
 \n</string>
     <string name="osmand_extended_description_part3">Карта 
 \n• Отображает POI (точки интереса) около вас 
@@ -2553,17 +2553,17 @@
 \n• Просмотр вашей скорости и высоты над уровнем моря 
 \n• Функция записи GPX позволяет вам записывать ваше путешествие и делиться им 
 \n• Через приложение вы можете включить отображение контурных линий и затемнение рельефа</string>
-    <string name="osmand_extended_description_part6">Прогулки, пеший туризм, экскурсии
-\n• Карта показывает пешеходные и треккинговые тропы
-\n• Википедия на предпочитаемом вами языке может многое рассказать вам во время экскурсии по городу
-\n• Остановки общественного транспорта (автобус, трамвай, поезд), включая названия маршрутов, помогут ориентироваться в новом городе
-\n• GPS навигация в пешеходном режиме высчитывает маршрут, используя пешеходные тропы
-\n• Загрузите и следуйте по маршруту GPX или запишите и поделитесь своим собственным
+    <string name="osmand_extended_description_part6">Прогулки, пеший туризм, экскурсии 
+\n• Карта показывает пешеходные и треккинговые тропы 
+\n• Википедия на предпочитаемом вами языке может многое рассказать вам во время экскурсии по городу 
+\n• Остановки общественного транспорта (автобус, трамвай, поезд), включая названия маршрутов, помогут ориентироваться в новом городе 
+\n• GPS навигация в пешеходном режиме высчитывает маршрут, используя пешеходные тропы 
+\n• Отправьте и следуйте по маршруту GPX или запишите и поделитесь своим собственным
 \n</string>
     <string name="osmand_extended_description_part7">Внесение вклада в OSM 
 \n• Сообщения об ошибках 
-\n• Загрузка треков GPX в OSM напрямую из программы 
-\n• Добавление точек интереса (POI) и загрузка их в OSM (или позже, если интернет недоступен)
+\n• Отправка треков GPX в OSM напрямую из программы 
+\n• Добавление точек интереса (POI) и отправка их в OSM (или позже, если интернет недоступен)
 \n</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) — картографическая и навигационная программа с доступом к свободным, мировым и высококачественным данным OSM.
 \n Получайте наслаждение от голосовой и визуальной навигации, просматривайте точки интереса (англ. POI, points of interest), создавайте и управляйте треками GPX, используйте визуализацию контурных линий и данных высот, переключайтесь между режимами автомобиль, велосипед и пешеход, редактируйте данные OSM и многое другое.
@@ -2629,8 +2629,8 @@
 \n• Отображение контурных линий и затенения высот (через дополнительный плагин)</string>
     <string name="osmand_plus_extended_description_part7">Непосредственный вклад в OSM 
 \n • Сообщения об ошибках в данных 
-\n • Загрузка GPX треков в OSM непосредственно из приложения 
-\n • Добавление точек интереса (POI) и непосредственная загрузка их в OSM (или позже, если в автономном режиме) 
+\n • Отправка GPX треков в OSM непосредственно из приложения 
+\n • Добавление точек интереса (POI) и непосредственная отправка их в OSM (или позже, если в автономном режиме) 
 \n • Возможность записи путешествие в фоновом режиме (в то время, как устройство находится в спящем режиме) 
 \n OsmAnd это активно развивающееся программное обеспечение с открытым исходным кодом. Каждый может внести свой вклад в приложение, сообщая об ошибках, улучшая переводы или кодируя новые функции. Кроме того, проект опирается на финансовые взносы для финансирования разработки и тестирования новых функциональных возможностей.
 \n</string>
@@ -3525,7 +3525,7 @@
     <string name="login_and_pass">Имя пользователя и пароль</string>
     <string name="plugin_global_prefs_info">Эти настройки применяются ко всем профилям.</string>
     <string name="osm_editing">Редактирование OSM</string>
-    <string name="osm_edits_view_descr">Просмотр ваших исправлений или ошибок OSM, ещё не загруженных в %1$s. Загруженные точки больше не будут отображаться.</string>
+    <string name="osm_edits_view_descr">Просмотр ваших исправлений или ошибок OSM, ещё не отправленных в %1$s. Отправленные точки больше не будут отображаться.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок, отображаемый во время навигации или движения.</string>
     <string name="select_map_icon_descr">Значок, отображаемый в состоянии покоя.</string>
@@ -3771,4 +3771,7 @@
     <string name="weight_limit_description">Укажите вес автомобиля, для тяжёлых транспортных средств могут применяться ограничения на некоторых маршрутах.</string>
     <string name="shared_string_tones">тонны</string>
     <string name="shared_string_meters">метры</string>
+    <string name="details_dialog_decr">Управление отображением дополнительных деталей на карте</string>
+    <string name="shared_string_all_time">Всё время</string>
+    <string name="shared_string_night_map">Ночная карта</string>
 </resources>
