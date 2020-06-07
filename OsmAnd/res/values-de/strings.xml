@@ -3775,8 +3775,11 @@
     <string name="height_limit_description">Bitte geben Sie Ihre Fahrzeughöhe an. Für hohe Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
     <string name="weight_limit_description">Bitte geben Sie Ihr Fahrzeuggewicht an. Für schwere Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Sie können Schnellaktionen mit Anwendungsprofilen exportieren oder importieren.</string>
-    <string name="shared_string_delete_all_q">Alle löschen\?</string>
+    <string name="shared_string_delete_all_q">Alles Löschen\?</string>
     <string name="delete_all_actions_message_q">Möchten Sie %d Schnellaktionen wirklich unwiderruflich löschen\?</string>
     <string name="shared_string_tones">Töne</string>
     <string name="shared_string_meters">Meter</string>
+    <string name="screen_timeout">Bildschirm-Zeitlimit</string>
+    <string name="details_dialog_decr">Kontrollieren Sie die Sichtbarkeit zusätzlicher Details, die auf der Karte angezeigt werden</string>
+    <string name="shared_string_night_map">Nachtkarte</string>
 </resources>
