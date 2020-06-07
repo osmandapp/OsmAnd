@@ -2534,7 +2534,7 @@ Lon %2$s</string>
     <string name="topo_render_descr">Para practicar andainas, sendeirismo e ciclismo na natureza. Lexíbel ao ar libre. Camiños e obxectos naturais en contraste, diferentes tipos de percorridos, opcións avanzadas en curvas de nivel, detalles adicionais. Axustar a integridade da superficie, distingue a calidade do camiño. Sen modo noite.</string>
     <string name="mapnik_render_descr">Antigo estilo predefinido do Mapnik. Cores semellantes ó Mapnik.</string>
     <string name="touring_view_render_descr">Estilo turístico con alto contraste e máximo detalle. Inclúe todas as opcións do estilo predefinido do OsmAnd, mentres que amosa tantos detalles como sexa posíbel, en camiños, sendeiros e outros xeitos de viaxe. Clara distinción do \"atlas turístico\" entre tipos de camiños. Axeitado para emprego de día, de noite e ao ar libre.</string>
-    <string name="default_render_descr">Estilo de emprego xeral. Cidade densas amosadas de xeito limpi. Conta con curvas de nivel, percorridos, calidade da superficie, restricións de acceso, sinais, visualización de camiños segundo a escala SA e elementos de deportes acuáticos.</string>
+    <string name="default_render_descr">Estilo de emprego xeral. Cidade densas amosadas de xeito limpo. Conta con curvas de nivel, percorridos, calidade da superficie, restricións de acceso, sinais, visualización de camiños segundo a escala SA e elementos de deportes acuáticos.</string>
     <string name="open_wikipedia_link_online">Abrir ligazón da Wikipedia en liña</string>
     <string name="open_wikipedia_link_online_description">A ligazón abrirase nun navegador web.</string>
     <string name="how_to_open_link">De que xeito abrir a ligazón\?</string>
@@ -3266,7 +3266,7 @@ Lon %2$s</string>
     <string name="analytics_pref_title">Análises</string>
     <string name="turn_screen_on_info">Amosar o mapa na pantalla de bloqueo durante a navegación.</string>
     <string name="route_parameters_info">Axustes para a navegación do perfil escollido \"%1$s\".</string>
-    <string name="wake_time">Tempo de espera da pantalla personalizado</string>
+    <string name="wake_time">Tempo de espera da pantalla após acender</string>
     <string name="units_and_formats">Unidades e formatos</string>
     <string name="appearance">Aparencia</string>
     <string name="map_look_descr">Aparencia do mapa</string>
@@ -3767,7 +3767,7 @@ Lon %2$s</string>
     <string name="turn_screen_on_power_button_descr">Premendo o botón de acendido do dispositivo acenderá a pantalla co OsmAnd na pantalla de bloqueo.</string>
     <string name="turn_screen_on_proximity_sensor">Sensor de proximidade</string>
     <string name="keep_screen_on">Manter a pantalla acendida</string>
-    <string name="screen_timeout_descr">Isto só é efectivo se \"%1$s\" está desactivado.</string>
+    <string name="screen_timeout_descr">Se a opción \"%1$s\" está activada, o tempo de actividade dependerá diso.</string>
     <string name="one_image_per_tile">Un ficheiro de imaxe por tesela</string>
     <string name="online_map_name_helper_text">Fornece un nome para a fonte do mapa en liña.</string>
     <string name="online_map_url_helper_text">Insire ou pega a URL da fonte en liña.</string>
@@ -3787,9 +3787,17 @@ Lon %2$s</string>
 \n Unha semana son 10080 minutos.
 \n Un mes son 43829 minutos.</string>
     <string name="tiles_storage_descr">Escolle de que xeito serán almacenadas as teselas baixadas.</string>
-    <string name="default_screen_timeout">Tempo de espera da pantalla do sistema</string>
+    <string name="default_screen_timeout">Tempo de espera da pantalla por defecto</string>
     <string name="export_import_quick_actions_with_profiles_promo">Podes exportar ou importar accións rápidas con perfís de aplicación.</string>
     <string name="shared_string_delete_all_q">Eliminar todo\?</string>
     <string name="delete_all_actions_message_q">Eliminar de xeito irrevogábel %d accións rápidas\?</string>
     <string name="screen_timeout">Tempo de espera da pantalla</string>
+    <string name="height_limit_description">Fornece a altura do teu vehículo, algunhas restricións de ruta poden ser aplicadas para vehículos altos.</string>
+    <string name="weight_limit_description">Fornece o peso do teu vehículo, algunhas restricións de ruta poden ser aplicadas a vehículos pesados.</string>
+    <string name="width_limit_description">Fornece a largura do teu vehículo. Algunhas restricións de ruta poden ser aplicadas a vehículos largos.</string>
+    <string name="shared_string_tones">tons</string>
+    <string name="shared_string_meters">metros</string>
+    <string name="details_dialog_decr">Controlar a visibilidade dos detalles adicionais amosados no mapa</string>
+    <string name="shared_string_night_map">Mapa de noite</string>
+    <string name="shared_string_all_time">Todo o tempo</string>
 </resources>
