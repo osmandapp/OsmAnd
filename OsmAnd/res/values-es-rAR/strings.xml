@@ -3249,7 +3249,7 @@
     <string name="analytics_pref_title">Análisis</string>
     <string name="turn_screen_on_info">Mostrar el mapa en la pantalla de bloqueo durante la navegación.</string>
     <string name="route_parameters_info">Ajustes para la navegación del perfil elegido «%1$s».</string>
-    <string name="wake_time">Duración del encendido</string>
+    <string name="wake_time">Tiempo de espera después del encendido</string>
     <string name="units_and_formats">Unidades y formatos</string>
     <string name="appearance">Aspecto</string>
     <string name="map_look_descr">Apariencia del mapa</string>
@@ -3746,7 +3746,7 @@
     <string name="turn_screen_on_wake_time_descr">Elige el tiempo de espera de la pantalla luego del encendido. («%1$s» no aplica ningún tiempo de espera.)</string>
     <string name="keep_screen_on">Mantener la pantalla encendida</string>
     <string name="keep_screen_off">Mantener la pantalla apagada</string>
-    <string name="screen_timeout_descr">Limitado por «%1$s», si está activado.</string>
+    <string name="screen_timeout_descr">Si la opción «%1$s» está activada, el tiempo de actividad dependerá de ello.</string>
     <string name="pseudo_mercator_projection">Proyección de pseudo-Mercator</string>
     <string name="one_image_per_tile">Un archivo de imagen por tesela</string>
     <string name="sqlite_db_file">Archivo SQLiteDB</string>
@@ -3768,8 +3768,17 @@
 \nUna semana son 10 080 minutos.
 \nUn mes son 43 829 minutos.</string>
     <string name="tiles_storage_descr">Elige cómo se almacenarán las teselas descargadas.</string>
-    <string name="default_screen_timeout">Tiempo de espera de la pantalla del sistema</string>
+    <string name="default_screen_timeout">Tiempo predefinido de la espera de la pantalla</string>
     <string name="export_import_quick_actions_with_profiles_promo">Puedes exportar o importar acciones rápidas con perfiles de aplicación.</string>
     <string name="shared_string_delete_all_q">¿Borrar todo\?</string>
     <string name="delete_all_actions_message_q">¿Borrar irrevocablemente %d acciones rápidas\?</string>
+    <string name="width_limit_description">Proporciona el ancho del vehículo. Se pueden aplicar algunas restricciones de ruta para vehículos anchos.</string>
+    <string name="height_limit_description">Proporciona la altura del vehículo, se pueden aplicar algunas restricciones de ruta para vehículos altos.</string>
+    <string name="weight_limit_description">Proporciona el peso del vehículo, se pueden aplicar algunas restricciones de ruta para vehículos pesados.</string>
+    <string name="screen_timeout">Tiempo de espera de la pantalla</string>
+    <string name="shared_string_tones">tonos</string>
+    <string name="shared_string_meters">metros</string>
+    <string name="details_dialog_decr">Controla la visibilidad de los detalles adicionales que se muestran en el mapa</string>
+    <string name="shared_string_night_map">Mapa nocturno</string>
+    <string name="shared_string_all_time">Todo el tiempo</string>
 </resources>
