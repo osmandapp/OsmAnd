@@ -3147,7 +3147,7 @@
     <string name="start_up_message_pref">رسالة البدء</string>
     <string name="analytics_pref_title">تحليل</string>
     <string name="turn_screen_on_info">إظهار الخريطة على شاشة القفل أثناء التنقل.</string>
-    <string name="wake_time">مهلة شاشة مخصصة</string>
+    <string name="wake_time">المهلة بعد الاستيقاظ</string>
     <string name="units_and_formats">الوحدات والأشكال</string>
     <string name="appearance">المظهر</string>
     <string name="map_look_descr">مظهر الخريطة</string>
@@ -3730,7 +3730,7 @@
     <string name="turn_screen_on_wake_time_descr">حدد مهلة الشاشة بعد الاستيقاظ. (\"%1$s\" لا ينطبق أي مهلة.)</string>
     <string name="keep_screen_on">إبقاء الشاشة قيد التشغيل</string>
     <string name="keep_screen_off">إبقاء الشاشة مطفأة</string>
-    <string name="screen_timeout_descr">محدد ب \"٪1$s\" ، إذا تم تمكينه.</string>
+    <string name="screen_timeout_descr">إذا تم تفعيل الخيار \"%1$s\" ، فسوف يعتمد وقت النشاط عليه.</string>
     <string name="pseudo_mercator_projection">إسقاط ميركاتور الوهمي</string>
     <string name="one_image_per_tile">ملف صورة واحد لكل إطار متجانب</string>
     <string name="sqlite_db_file">ملف SQLiteDB</string>
@@ -3752,7 +3752,7 @@
 \nأسبوع واحد هو 10080 دقيقة.
 \nشهر واحد هو 43 829 دقيقة.</string>
     <string name="tiles_storage_descr">اختر كيفية تخزين الطبقات التي تم تنزيلها.</string>
-    <string name="default_screen_timeout">مهلة شاشة النظام</string>
+    <string name="default_screen_timeout">مهلة الشاشة الافتراضية</string>
     <string name="export_import_quick_actions_with_profiles_promo">يمكنك تصدير أو استيراد إجراءات سريعة باستخدام ملفات تعريف بروفايل التطبيق.</string>
     <string name="shared_string_delete_all_q">حذف الكل؟</string>
     <string name="delete_all_actions_message_q">هل أنت متأكد من رغبتك في حذف الإجراءات السريعة %d نهائيًا؟</string>
@@ -3762,7 +3762,7 @@
     <string name="height_limit_description">أدل بارتفاع مركبتك ،قد يتم تطبيق بعض القيود على المركبات المرتفعة.</string>
     <string name="weight_limit_description">أدل بوزن مركبتك ،قد يتم تطبيق بعض القيود على المركبات الثقيلة.</string>
     <string name="shared_string_meters">أمتار</string>
-    <string name="details_dialog_decr">اظهار التحكم في رؤية التفاصيل الإضافية على الخريطة</string>
+    <string name="details_dialog_decr">التحكم في رؤية التفاصيل الإضافية الظاهرة على الخريطة</string>
     <string name="shared_string_night_map">خريطة ليلية</string>
     <string name="shared_string_all_time">كل الوقت</string>
 </resources>
