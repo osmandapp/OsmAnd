@@ -217,6 +217,9 @@ android {
 	buildTypes {
 		debug {
 			signingConfig signingConfigs.development
+			debuggable false
+			jniDebuggable false
+			buildConfigField "boolean", "USE_DEBUG_LIBRARIES", "false"
 		}
 		release {
 			signingConfig signingConfigs.publishing
