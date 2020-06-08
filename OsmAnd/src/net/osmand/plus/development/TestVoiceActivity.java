@@ -40,7 +40,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 	private String osmandVoice ="";
 	private String osmandVoiceLang ="";
-	private Button infoButton;
+	private Button buttonInfo;
+	private Button buttonDelay;
+	private Button buttonDisplay;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -149,10 +151,10 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			v += "\n \u25CF BT SCO: The current app profile is not set to use 'Phone call audio'.";
 		}
 
-		OsmandSettings.OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[stream];
-		if(pref != null) {
-			v += "\n \u25CF Voice prompt delay for selected output: " + pref.get() + "\u00A0ms";
-		}
+		//OsmandSettings.OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[stream];
+		//if(pref != null) {
+		//	v += "\n \u25CF Voice prompt delay for selected output: " + pref.get() + "\u00A0ms";
+		//}
 		return v;
 	}
 
@@ -234,8 +236,12 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (10.4) You are back on the route", builder(p).backOnRoute());
 
 		addButton(ll, "Voice system info:", builder(p));
-		addButton(ll, "\u25BA (11.1) (Tap to fully populate)\n" + getVoiceSystemInfo(), builder(p).attention(""));
-		addButton(ll, "\u25BA (11.2) Tap to change the above voice prompt delay (if car stereo cuts off prompts). Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.", builder(p).attention(""));
+		addButton(ll, "\u25BA (11.1) (TAP TO FULLY POPULATE)\n" + getVoiceSystemInfo(), builder(p).attention(""));
+		addButton(ll, "\u25BA (11.2) (TAP TO CHANGE)\n \u25CF Voice prompt delay for selected output: " +
+				((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get()].get() +
+				"\u00A0ms.\nAvoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.", builder(p).attention(""));
+		addButton(ll, "\u25BA (11.3) (TAP TO TOGGLE)\n \u25CF Display each TTS utterance on screen: " +
+				((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.get().toString(), builder(p).attention(""));
 		ll.forceLayout();
 	}
 
@@ -273,7 +279,12 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			button.setPadding(40, 5, 10, 5);
 		}
 		if (description.startsWith("\u25BA (11.1)")) {
-			infoButton = button;
+			// Buttons with refreshable caption
+			buttonInfo = button;
+		} else if (description.startsWith("\u25BA (11.2)")) {
+			buttonDelay = button;
+		} else if (description.startsWith("\u25BA (11.3)")) {
+			buttonDisplay = button;
 		}
 		
 		layout.addView(button);
@@ -283,7 +294,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			public void onClick(View v) {
 				builder.play();
 				if (description.startsWith("\u25BA (11.1)")) {
-					infoButton.setText("\u25BA (11.1) Info detected:\n" + getVoiceSystemInfo());
+					buttonInfo.setText("\u25BA (11.1) Info detected:\n" + getVoiceSystemInfo());
 					// Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
 				}
 				if (description.startsWith("\u25BA (11.2)")) {
@@ -297,8 +308,18 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 						}
 						// Toast.makeText(TestVoiceActivity.this, "Voice prompt delay changed to " + pref.get() + "\u00A0ms.", Toast.LENGTH_LONG).show();
 					}
-					infoButton.setText("\u25BA (11.1) Info detected:\n" + getVoiceSystemInfo());
-
+					buttonDelay.setText("\u25BA (11.2) (TAP TO CHANGE)\n \u25CF Voice prompt delay for selected output: " +
+							((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get()].get() +
+							"\u00A0ms.\nAvoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.");
+				}
+				if (description.startsWith("\u25BA (11.3)")) {
+					if (((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.get() == false) {
+						((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.set(true);
+					} else {
+						((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.set(false);
+					}
+					buttonDisplay.setText("\u25BA (11.3) (TAP TO TOGGLE)\n \u25CF Display each TTS utterance on screen: " +
+							((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.get().toString());
 				}
 			}
 		});

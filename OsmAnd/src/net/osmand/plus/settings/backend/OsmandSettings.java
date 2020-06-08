@@ -2362,6 +2362,7 @@ public class OsmandSettings {
 		VOICE_PROMPT_DELAY[3] = new IntPreference("voice_prompt_delay_3", 0).makeGlobal().cache();    /*AudioManager.STREAM_MUSIC*/
 		VOICE_PROMPT_DELAY[5] = new IntPreference("voice_prompt_delay_5", 0).makeGlobal().cache();    /*AudioManager.STREAM_NOTIFICATION*/
 	}
+	public final OsmandPreference<Boolean> DISPLAY_TTS_UTTERANCE = new BooleanPreference("display_tts_utterance", false).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference("map_online_data", false).makeProfile();
