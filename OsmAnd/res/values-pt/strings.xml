@@ -3717,7 +3717,7 @@
     <string name="turn_screen_on_wake_time_descr">Selecione o tempo limite do ecrã após acordar. (\"%1$s\" não aplica tempo limite).</string>
     <string name="keep_screen_on">Manter o ecrã ligado</string>
     <string name="keep_screen_off">Manter o ecrã desligado</string>
-    <string name="screen_timeout_descr">Limitado por \"%1$s\", se ativado.</string>
+    <string name="screen_timeout_descr">Se a opção \"%1$s\" estiver ativada, o tempo de atividade dependerá disso.</string>
     <string name="pseudo_mercator_projection">Projeção pseudo-Mercator</string>
     <string name="one_image_per_tile">Um ficheiro de imagem por quadrícula</string>
     <string name="sqlite_db_file">Ficheiro SQLiteDB</string>
@@ -3739,5 +3739,17 @@
 \nUma semana são 10 080 minutos.
 \nUm mês são 43 829 minutos.</string>
     <string name="tiles_storage_descr">Escolha como as quadrículas descarregadas serão armazenadas.</string>
-    <string name="default_screen_timeout">Tempo limite do ecrã do sistema</string>
+    <string name="default_screen_timeout">Padrão de tempo limite do ecrã</string>
+    <string name="width_limit_description">Forneça a largura do seu veículo, algumas restrições de rotas podem ser aplicadas a veículos largos.</string>
+    <string name="height_limit_description">Forneça a altura do seu veículo, algumas restrições de rotas podem ser aplicadas a veículos altos.</string>
+    <string name="weight_limit_description">Forneça o peso do seu veículo, algumas restrições de rotas podem ser aplicadas a veículos pesados.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Pode Exportar ou Importar ações rápidas com perfis de aplicações.</string>
+    <string name="shared_string_delete_all_q">Apagar tudo\?</string>
+    <string name="delete_all_actions_message_q">Tem certeza de que deseja apagar de forma irrevogável %d de ações rápidas\?</string>
+    <string name="screen_timeout">Tempo limite do ecrã</string>
+    <string name="shared_string_tones">tons</string>
+    <string name="shared_string_meters">metros</string>
+    <string name="details_dialog_decr">Controla a visibilidade de detalhes adicionais mostrados no mapa</string>
+    <string name="shared_string_night_map">Mapa noturno</string>
+    <string name="shared_string_all_time">O tempo todo</string>
 </resources>
