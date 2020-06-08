@@ -53,7 +53,7 @@
 		android:key="turn_screen_on_power_button"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:persistent="false"
-		android:summaryOff="@string/turn_screen_on_power_button_disabled"
+		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/turn_screen_on_power_button" />
 

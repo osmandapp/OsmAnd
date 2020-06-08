@@ -103,6 +103,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment implements OnPref
 		turnScreenOnPowerButton.setDescription(R.string.turn_screen_on_power_button_descr);
 		turnScreenOnPowerButton.setIcon(getPersistentPrefIcon(R.drawable.ic_action_power_button));
 		turnScreenOnPowerButton.setChecked(enabled && settings.TURN_SCREEN_ON_POWER_BUTTON.getModeValue(appMode));
+		turnScreenOnPowerButton.setSummaryOff(enabled ? R.string.shared_string_disabled : R.string.turn_screen_on_power_button_disabled);
 	}
 
 	@Override
