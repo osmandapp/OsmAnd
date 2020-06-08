@@ -2938,7 +2938,7 @@
     <string name="poi_surface_metal_grid">Grille métallique</string>
     <string name="poi_location_underground">Emplacement : souterrain</string>
     <string name="poi_location_underwater">Emplacement : sous l\'eau</string>
-    <string name="poi_location_overground">Emplacement : au dessus du sol</string>
+    <string name="poi_location_overground">Emplacement : en surface</string>
     <string name="poi_location_overhead">Emplacement : aérien</string>
     <string name="poi_location_roof">Emplacement : toit</string>
     <string name="poi_location_rooftop">Emplacement : dessus du toit</string>
