@@ -3179,7 +3179,7 @@
     <string name="route_parameters">معلمات الطريق</string>
     <string name="application_profile_changed">تم تغيير وضع التطبيق إلى \"%s\"</string>
     <string name="logcat_buffer">سجل الاستخدام</string>
-    <string name="plugins_settings">إعدادات البرنامج المساعد</string>
+    <string name="plugins_settings">ضبط الملحقات</string>
     <string name="shared_string_by_default">بشكل افتراضي</string>
     <string name="download_detailed_map">قم بتنزيل خريطة مفصلة%s لعرض هذه المنطقة.</string>
     <string name="internal_app_storage_description">تخزين داخلي ، مخفي عن المستخدم والتطبيقات الأخرى ، يمكن الوصول إليه حصريا من أوسماند.</string>
@@ -3459,7 +3459,7 @@
     <string name="monitoring_min_speed">الحد الأدنى للسرعة</string>
     <string name="monitoring_min_accuracy">دقة الحد الأدنى</string>
     <string name="monitoring_min_distance">الحد الأدنى للإزاحة</string>
-    <string name="reset_plugin_to_default">إعادة تعيين إعدادات البرنامج المساعد الافتراضي</string>
+    <string name="reset_plugin_to_default">إعادة ضبط الملحقات للافتراضي</string>
     <string name="multimedia_rec_split_title">تقسيم المسجل</string>
     <string name="multimedia_use_system_camera">استخدام تطبيق النظام</string>
     <string name="multimedia_photo_play_sound">صوت الكاميرا</string>
@@ -3470,7 +3470,7 @@
     <string name="shared_string_available">متاح</string>
     <string name="add_custom_category">إضافة فئة مخصصة</string>
     <string name="rendering_attr_streetLightingNight_name">اظهر في الليل فقط</string>
-    <string name="plugin_prefs_reset_successful">استعادة جميع إعدادات البرنامج المساعد إلى الحالة الافتراضية.</string>
+    <string name="plugin_prefs_reset_successful">استعادة ضبط الملحق للافتراضي.</string>
     <string name="profile_prefs_reset_successful">تمت استعادة جميع إعدادات الوضع إلى الحالة الافتراضية.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">غروب الشمس على %1$s</string>
@@ -3486,19 +3486,19 @@
 \n 
 \n• إضافة رقم الخروج في الملاحة 
 \n 
-\n• إعادة صياغة إعدادات البرنامج المساعد 
+\n• إعادة صياغة ضبط الملحقات 
 \n 
-\n• إعادة صياغة شاشة الإعدادات للوصول السريع إلى جميع الأوضاع
+\n• إعادة صياغة شاشة الإعدادات للوصول السريع إلى جميع الأوضاع 
 \n 
-\n• إضافة خيار لنسخ الإعدادات من ملف شخصي آخر 
+\n• إضافة خيار لنسخ الإعدادات من وضع آخر 
 \n 
 \n• إضافة القدرة على تغيير أمر أو إخفاء فئات POI في البحث 
 \n 
 \n• رموز POI محاذاة بشكل صحيح على الخريطة 
 \n 
-\n• إضافة بيانات غروب الشمس / شروق الشمس لتكوين الخريطة 
+\n• إضافة بيانات غروب/شروق الشمس لتكوين الخريطة 
 \n 
-\n• إضافة رموز المنزل / العمل على الخريطة 
+\n• إضافة رموز المنزل/العمل على الخريطة 
 \n 
 \n• إضافة دعم للوصف متعدد الأسطر في الإعدادات 
 \n 
