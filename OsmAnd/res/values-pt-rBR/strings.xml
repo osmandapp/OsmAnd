@@ -3759,7 +3759,7 @@ Pôr do Sol: %2$s</string>
     <string name="weight_limit_description">Forneça o peso do veículo, algumas restrições de rotas podem ser aplicadas a veículos pesados.</string>
     <string name="shared_string_tones">tons</string>
     <string name="shared_string_meters">metros</string>
-    <string name="details_dialog_decr">Controlar a visibilidade de detalhes adicionais mostrados no mapa</string>
+    <string name="details_dialog_decr">Controlar a visibilidade dos detalhes adicionais mostrados no mapa</string>
     <string name="shared_string_night_map">Mapa noturno</string>
     <string name="shared_string_all_time">Tempo todo</string>
 </resources>
