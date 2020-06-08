@@ -234,8 +234,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (10.4) You are back on the route", builder(p).backOnRoute());
 
 		addButton(ll, "Voice system info:", builder(p));
-		addButton(ll, "\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo(), builder(p).attention(""));
-		addButton(ll, "\u25BA (11.2) Tap to change voice prompt delay (if car stereo cuts off prompts). Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.", builder(p).attention(""));
+		addButton(ll, "\u25BA (11.1) (Tap to fully populate)\n" + getVoiceSystemInfo(), builder(p).attention(""));
+		addButton(ll, "\u25BA (11.2) Tap to change the above voice prompt delay (if car stereo cuts off prompts). Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.", builder(p).attention(""));
 		ll.forceLayout();
 	}
 
@@ -283,8 +283,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			public void onClick(View v) {
 				builder.play();
 				if (description.startsWith("\u25BA (11.1)")) {
-					infoButton.setText("\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo());
-					Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
+					infoButton.setText("\u25BA (11.1) Info detected:\n" + getVoiceSystemInfo());
+					// Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
 				}
 				if (description.startsWith("\u25BA (11.2)")) {
 					int ams = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get();
@@ -295,9 +295,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 						} else {
 							pref.set(pref.get() + 500);
 						}
-						Toast.makeText(TestVoiceActivity.this, "Voice prompt delay changed to " + pref.get() + "\u00A0ms.", Toast.LENGTH_LONG).show();
+						// Toast.makeText(TestVoiceActivity.this, "Voice prompt delay changed to " + pref.get() + "\u00A0ms.", Toast.LENGTH_LONG).show();
 					}
-					infoButton.setText("\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo());
+					infoButton.setText("\u25BA (11.1) Info detected:\n" + getVoiceSystemInfo());
 
 				}
 			}
