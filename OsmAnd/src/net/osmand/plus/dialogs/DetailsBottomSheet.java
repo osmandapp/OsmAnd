@@ -101,7 +101,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 					final BottomSheetItemTwoChoicesButton[] item = new BottomSheetItemTwoChoicesButton[1];
 					item[0] = (BottomSheetItemTwoChoicesButton) new BottomSheetItemTwoChoicesButton.Builder()
 							.setLeftBtnSelected(!streetLightsNightPref.get())
-							.setLeftBtnTitleRes(R.string.shared_string_all_time)
+							.setLeftBtnTitleRes(R.string.shared_string_always)
 							.setRightBtnTitleRes(R.string.shared_string_night_map)
 							.setOnBottomBtnClickListener(new OnBottomBtnClickListener() {
 								@Override

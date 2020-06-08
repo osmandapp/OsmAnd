@@ -11,7 +11,7 @@
 	Thx - Hardy
 
 -->
-    <string name="shared_string_all_time">All time</string>
+    <!-- string name="shared_string_all_time">All time</string -->
     <string name="shared_string_night_map">Night map</string>
     <string name="details_dialog_decr">Control visibility of additional details shown on the map</string>
     <string name="shared_string_meters">meters</string>
@@ -45,6 +45,7 @@
     <string name="turn_screen_on_proximity_sensor">Proximity sensor</string>
     <string name="turn_screen_on_power_button">Power button</string>
     <string name="turn_screen_on_power_button_descr">Pressing the device power button will turn the screen on with OsmAnd on top of the lock screen.</string>
+    <string name="turn_screen_on_power_button_disabled">Disabled. Requires \'Keep screen on\' under \'Timeout after wake-up\'.</string>
     <string name="turn_screen_on_navigation_instructions">Navigation instructions</string>
     <string name="turn_screen_on_navigation_instructions_descr">Each navigation instruction will turn the screen on.</string>
     <string name="turn_screen_on_descr">Select screen wake-up options (make sure OsmAnd is in the foreground when the device is being locked):</string>
