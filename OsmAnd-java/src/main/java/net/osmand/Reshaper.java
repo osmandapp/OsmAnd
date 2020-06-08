@@ -24,7 +24,8 @@ public class Reshaper {
 //			return s;
 //		}
 		try {
-			ArabicShaping as = new ArabicShaping(ArabicShaping.LETTERS_SHAPE | ArabicShaping.LENGTH_GROW_SHRINK);
+			ArabicShaping as = new ArabicShaping(ArabicShaping.LETTERS_SHAPE | ArabicShaping.LENGTH_GROW_SHRINK
+					);
 			try {
 				s = as.shape(s);
 			} catch (ArabicShapingException e) {
@@ -86,20 +87,30 @@ public class Reshaper {
 	public static void main(String[] args) {
 //		char[] c = new char[] {'א', 'ד','ם', ' ', '1', '2'} ;
 //		String reshape = "אדם";
-		char[] c = new char[] {'א', 'ד','ם'} ;
-		String reshape = reshape(new String(c));
-		for(int i=0; i < reshape.length(); i++) {
-			System.out.println(reshape.charAt(i));
-		}
+//		char[] c = new char[] {'א', 'ד','ם'} ;
+//		String reshape = reshape(new String(c));
+//		for (int i = 0; i < reshape.length(); i++) {
+//			System.out.println(reshape.charAt(i));
+//		}
 		test2();
+//		test3();
+	}
+	
+	private static void test3() {
+		String s = "מרכז מסחרי/השלום (40050)";
+		String reshape = reshape(s);
+		String expected = "(40050) םולשה/ירחסמ זכרמ";
+		if (!reshape.equals(expected)) {
+			throw new IllegalArgumentException(String.format("Bug: expected '%s', reshaped '%s'", expected, reshape));
+		}
 	}
 
 	private static void test2() {
 		String s = "گچ پژ نمکی باللغة العربي";
 		String reshape = reshape(s);
-
-		if (!reshape.equals("ﻲﺑﺮﻌﻟﺍ ﺔﻐﻠﻟﺎﺑ ﯽﮑﻤﻧ ﮋﭘ ﭻﮔ")) {
-			throw new IllegalArgumentException("BUG!!!");
+		String expected = "ﻲﺑﺮﻌﻟﺍ ﺔﻐﻠﻟﺎﺑ ﯽﮑﻤﻧ ﮋﭘ ﭻﮔ";
+		if (!reshape.equals(expected)) {
+			throw new IllegalArgumentException(String.format("Bug: expected '%s', reshaped '%s'", expected, reshape));
 		}
 	}
 
