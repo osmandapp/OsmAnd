@@ -90,8 +90,10 @@ public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment 
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					tileStorageFormat = m;
-					populateValuesList();
+					if (tileStorageFormat != m) {
+						tileStorageFormat = m;
+						dismiss();
+					}
 				}
 			});
 		}
