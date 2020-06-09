@@ -3,11 +3,14 @@ package net.osmand.plus.parkingpoint;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 
@@ -17,9 +20,12 @@ public class ParkingPositionMenuController extends MenuController {
 	private String parkingStartDescription = "";
 	private String parkingLeftDescription = "";
 	private String parkingTitle = "";
+	private FavouritePoint fav;
 
-	public ParkingPositionMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription) {
+	public ParkingPositionMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription,
+	                                     FavouritePoint fav) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+		this.fav = fav;
 		plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
 			buildParkingDescription(mapActivity);
@@ -99,9 +105,14 @@ public class ParkingPositionMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-
-		return getIcon( plugin == null || plugin.getParkingTime() <= 0 ?
-				R.drawable.mx_parking : R.drawable.mx_special_parking_time_limited, R.color.map_widget_blue);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(),
+					ContextCompat.getColor(mapActivity, R.color.parking_icon_background), false, fav);
+		} else {
+			return getIcon(plugin == null || plugin.getParkingTime() <= 0 ?
+					R.drawable.mx_parking : R.drawable.mx_special_parking_time_limited, R.color.map_widget_blue);
+		}
 	}
 
 	@NonNull

@@ -94,8 +94,8 @@
 
 	<color name="audio_video_icon_color">#128a89</color>
     <color name="created_poi_icon_color">#4caf50</color>
-    <color name="osm_bug_unresolved_icon_color">#d44a4a</color>
-    <color name="osm_bug_resolved_icon_color">#4caf50</color>
+	<color name="osm_bug_unresolved_icon_color">#D42020</color>
+	<color name="osm_bug_resolved_icon_color">#12B21A</color>
 
 	<color name="osmand_orange">#ff8f00</color>
 	<color name="app_mode_icon_color">#33B4E4</color>
@@ -190,6 +190,8 @@
 
 	<color name="color_favorite">#eecc22</color>
 	<color name="color_favorite_gray">#b3b3b3</color>
+	<color name="parking_icon_background">#244DBD</color>
+	<color name="transport_stop_icon_background">#5870FE</color>
 
 	<!-- Themed color list items -->
 	<!-- invalid -red, localindex not supported,  -->

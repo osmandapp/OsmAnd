@@ -1,18 +1,14 @@
 package net.osmand.plus.audionotes;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.PointF;
-import android.graphics.Rect;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.data.DataTileManager;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -21,6 +17,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -36,14 +33,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	private static final int startZoom = 10;
 	private MapActivity activity;
 	private AudioVideoNotesPlugin plugin;
-	private Paint pointAltUI;
-	private Paint paintIcon;
 	private OsmandMapTileView view;
-	private Bitmap audio;
-	private Bitmap video;
-	private Bitmap photo;
-	private Bitmap pointSmall;
-
 	private ContextMenuLayer contextMenuLayer;
 
 	public AudioNotesLayer(MapActivity activity, AudioVideoNotesPlugin plugin) {
@@ -54,24 +44,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-
-		pointAltUI = new Paint();
-		pointAltUI.setColor(0xa0FF3344);
-		pointAltUI.setStyle(Style.FILL);
-
-		audio = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_note_audio);
-		video = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_note_video);
-		photo = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_note_photo);
-
-		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_note_small);
-
-		paintIcon = new Paint();
-
-		Paint point = new Paint();
-		point.setColor(Color.GRAY);
-		point.setAntiAlias(true);
-		point.setStyle(Style.STROKE);
-
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 
@@ -99,7 +71,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
 			float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
-			float iconSize = audio.getWidth() * 3 / 2.5f * textScale;
+			float iconSize = getIconSize(activity) * 3 / 2.5f * textScale;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 			DataTileManager<Recording> recs = plugin.getRecordings();
@@ -114,8 +86,11 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 
 					if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-						Rect destRect = getIconDestinationRect(x, y, pointSmall.getWidth(), pointSmall.getHeight(), textScale);
-						canvas.drawBitmap(pointSmall, null, destRect, paintIcon);
+						FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(activity,
+								ContextCompat.getColor(activity, R.color.audio_video_icon_color), true,
+								new FavouritePoint(0, 0, "", ""));
+						fid.setAlpha(0.8f);
+						fid.drawSmallPoint(canvas, x, y, textScale);
 						smallObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 					} else {
 						fullObjects.add(o);
@@ -134,16 +109,20 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	}
 
 	private void drawRecording(Canvas canvas, Recording o, float x, float y, float textScale) {
-		Bitmap b;
+		int iconId;
 		if (o.isPhoto()) {
-			b = photo;
+			iconId = R.drawable.mx_special_photo_camera;
 		} else if (o.isAudio()) {
-			b = audio;
+			iconId = R.drawable.mx_special_microphone;
 		} else {
-			b = video;
+			iconId = R.drawable.mx_special_video_camera;
 		}
-		Rect destRect = getIconDestinationRect(x, y, b.getWidth(), b.getHeight(), textScale);
-		canvas.drawBitmap(b, null, destRect, paintIcon);
+		FavouritePoint fp = new FavouritePoint(0, 0, "", "");
+		fp.setIconId(iconId);
+		FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(activity,
+				ContextCompat.getColor(activity, R.color.audio_video_icon_color), true, fp);
+		fid.setAlpha(0.8f);
+		fid.drawPoint(canvas, x, y, textScale, false);
 	}
 
 	@Override
@@ -154,7 +133,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	public boolean drawInScreenPixels() {
 		return true;
 	}
-
 
 	@Override
 	public PointDescription getObjectName(Object o) {
@@ -226,7 +204,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		}
 		return null;
 	}
-
 
 	@Override
 	public boolean isObjectMovable(Object o) {

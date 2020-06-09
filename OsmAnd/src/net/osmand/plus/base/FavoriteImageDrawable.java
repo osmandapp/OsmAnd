@@ -12,6 +12,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities;
@@ -35,6 +36,9 @@ public class FavoriteImageDrawable extends Drawable {
 	private Bitmap favBackgroundTop;
 	private Bitmap favBackgroundCenter;
 	private Bitmap favBackgroundBottom;
+	private Bitmap favBackgroundTopSmall;
+	private Bitmap favBackgroundCenterSmall;
+	private Bitmap favBackgroundBottomSmall;
 	private Bitmap syncedStroke;
 	private Bitmap syncedColor;
 	private Bitmap syncedShadow;
@@ -45,8 +49,10 @@ public class FavoriteImageDrawable extends Drawable {
 	private Paint paintBackground = new Paint();
 	private ColorFilter colorFilter;
 	private ColorFilter grayFilter;
+	private float scale = 1.0f;
 
-	private FavoriteImageDrawable(Context ctx, int color, boolean withShadow, boolean synced, FavouritePoint point) {
+	private FavoriteImageDrawable(Context ctx, @ColorInt int color, boolean withShadow, boolean synced,
+	                              FavouritePoint point) {
 		this.withShadow = withShadow;
 		this.synced = synced;
 		Resources res = ctx.getResources();
@@ -70,10 +76,16 @@ public class FavoriteImageDrawable extends Drawable {
 		favBackgroundTop = BitmapFactory.decodeResource(res, mapBackgroundIconIdTop);
 		favBackgroundCenter = BitmapFactory.decodeResource(res, mapBackgroundIconIdCenter);
 		favBackgroundBottom = BitmapFactory.decodeResource(res, mapBackgroundIconIdBottom);
-		syncedStroke = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_stroke);
-		syncedColor = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_color);
-		syncedShadow = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_shadow);
-		syncedIcon = BitmapFactory.decodeResource(res, R.drawable.map_marker_point_14dp);
+		int mapBackgroundIconIdTopSmall = getMapBackgroundIconIdSmall(ctx, point, "top");
+		int mapBackgroundIconIdCenterSmall = getMapBackgroundIconIdSmall(ctx, point, "center");
+		int mapBackgroundIconIdBottomSmall = getMapBackgroundIconIdSmall(ctx, point, "bottom");
+		favBackgroundTopSmall = BitmapFactory.decodeResource(res, mapBackgroundIconIdTopSmall);
+		favBackgroundCenterSmall = BitmapFactory.decodeResource(res, mapBackgroundIconIdCenterSmall);
+		favBackgroundBottomSmall = BitmapFactory.decodeResource(res, mapBackgroundIconIdBottomSmall);
+		syncedStroke = BitmapFactory.decodeResource(res, R.drawable.ic_shield_marker_point_stroke);
+		syncedColor = BitmapFactory.decodeResource(res, R.drawable.ic_shield_marker_point_color);
+		syncedShadow = BitmapFactory.decodeResource(res, R.drawable.ic_shield_marker_point_shadow);
+		syncedIcon = BitmapFactory.decodeResource(res, R.drawable.ic_marker_point_14dp);
 		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN);
 		grayFilter = new PorterDuffColorFilter(res.getColor(R.color.color_favorite_gray), PorterDuff.Mode.MULTIPLY);
 	}
@@ -82,6 +94,16 @@ public class FavoriteImageDrawable extends Drawable {
 		String iconName = ctx.getResources().getResourceEntryName(iconId);
 		return ctx.getResources().getIdentifier(iconName
 				.replaceFirst("mx_", "mm_"), "drawable", ctx.getPackageName());
+	}
+
+	private int getMapBackgroundIconIdSmall(Context ctx, FavouritePoint point, String layer) {
+		if (point != null) {
+			int iconId = point.getBackgroundType().getIconId();
+			String iconName = ctx.getResources().getResourceEntryName(iconId);
+			return ctx.getResources().getIdentifier("ic_" + iconName + "_" + layer + "_small",
+					"drawable", ctx.getPackageName());
+		}
+		return R.drawable.ic_white_shield_small;
 	}
 
 	private int getMapBackgroundIconId(Context ctx, FavouritePoint point, String layer) {
@@ -99,7 +121,8 @@ public class FavoriteImageDrawable extends Drawable {
 		super.onBoundsChange(bounds);
 		Rect bs = new Rect(bounds);
 		if (!withShadow && !synced) {
-			uiBackgroundIcon.setBounds(0, 0, uiBackgroundIcon.getIntrinsicWidth(), uiBackgroundIcon.getIntrinsicHeight());
+			uiBackgroundIcon.setBounds(0, 0,
+					uiBackgroundIcon.getIntrinsicWidth(), uiBackgroundIcon.getIntrinsicHeight());
 			int offsetX = bounds.centerX() - uiListIcon.getIntrinsicWidth() / 2;
 			int offsetY = bounds.centerY() - uiListIcon.getIntrinsicHeight() / 2;
 			uiListIcon.setBounds(offsetX, offsetY, uiListIcon.getIntrinsicWidth() + offsetX,
@@ -151,13 +174,43 @@ public class FavoriteImageDrawable extends Drawable {
 		canvas.drawBitmap(bitmap, null, bs, paintBackground);
 	}
 
-	public void drawBitmapInCenter(Canvas canvas, Rect destRect, boolean history) {
+	private void drawInCenter(Canvas canvas, Rect destRect, boolean history) {
 		this.history = history;
 		setBounds(destRect);
-		Rect bounds = new Rect(destRect);
-		bounds.inset(bounds.width() / 3, bounds.height() / 3);
-		favIcon.setBounds(bounds);
+		int offsetX = destRect.centerX() - (int) (favIcon.getIntrinsicWidth() / 2 * scale);
+		int offsetY = destRect.centerY() - (int) (favIcon.getIntrinsicHeight() / 2 * scale);
+		favIcon.setBounds(offsetX, offsetY, (int) (offsetX + favIcon.getIntrinsicWidth() * scale),
+				offsetY + (int) (favIcon.getIntrinsicHeight() * scale));
 		draw(canvas);
+	}
+
+	public void drawPoint(Canvas canvas, float x, float y, float scale, boolean history) {
+		this.scale = scale;
+		int scaledWidth = getIntrinsicWidth();
+		int scaledHeight = getIntrinsicHeight();
+		if (scale != 1.0f) {
+			scaledWidth *= scale;
+			scaledHeight *= scale;
+		}
+		Rect rect = new Rect(0, 0, scaledWidth, scaledHeight);
+		rect.offset((int) x - scaledWidth / 2, (int) y - scaledHeight / 2);
+		drawInCenter(canvas, rect, history);
+	}
+
+	public void drawSmallPoint(Canvas canvas, float x, float y, float scale) {
+		this.scale = scale;
+		paintBackground.setColorFilter(history ? grayFilter : colorFilter);
+		int scaledWidth = favBackgroundBottomSmall.getWidth();
+		int scaledHeight = favBackgroundBottomSmall.getHeight();
+		if (scale != 1.0f) {
+			scaledWidth *= scale;
+			scaledHeight *= scale;
+		}
+		Rect destRect = new Rect(0, 0, scaledWidth, scaledHeight);
+		destRect.offset((int) x - scaledWidth / 2, (int) y - scaledHeight / 2);
+		canvas.drawBitmap(favBackgroundBottomSmall, null, destRect, null);
+		canvas.drawBitmap(favBackgroundCenterSmall, null, destRect, paintBackground);
+		canvas.drawBitmap(favBackgroundTopSmall, null, destRect, null);
 	}
 
 	@Override
@@ -165,6 +218,9 @@ public class FavoriteImageDrawable extends Drawable {
 		return 0;
 	}
 
+	public void setAlpha(float alpha) {
+		setAlpha((int) (255 * alpha));
+	}
 	@Override
 	public void setAlpha(int alpha) {
 		paintBackground.setAlpha(alpha);
@@ -175,9 +231,14 @@ public class FavoriteImageDrawable extends Drawable {
 		paintIcon.setColorFilter(cf);
 	}
 
+	public void setScale(float scale) {
+		this.scale = scale;
+	}
+
 	private static TreeMap<String, FavoriteImageDrawable> cache = new TreeMap<>();
 
-	private static FavoriteImageDrawable getOrCreate(Context ctx, int color, boolean withShadow, boolean synced, FavouritePoint point) {
+	private static FavoriteImageDrawable getOrCreate(Context ctx, @ColorInt int color, boolean withShadow,
+	                                                 boolean synced, FavouritePoint point) {
 		String uniqueId = "";
 		if (point != null) {
 			uniqueId = point.getIconEntryName(ctx);
@@ -195,27 +256,29 @@ public class FavoriteImageDrawable extends Drawable {
 		return drawable;
 	}
 
-	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, FavouritePoint point) {
-		return getOrCreate(a, color, withShadow, false, point);
+	public static FavoriteImageDrawable getOrCreate(Context ctx, @ColorInt int color, boolean withShadow,
+	                                                FavouritePoint point) {
+		return getOrCreate(ctx, color, withShadow, false, point);
 	}
 
-	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, GPXUtilities.WptPt pt) {
-		return getOrCreate(a, color, withShadow, false, getFavouriteFromWpt(a, pt));
+	public static FavoriteImageDrawable getOrCreate(Context ctx, @ColorInt int color, boolean withShadow,
+	                                                GPXUtilities.WptPt pt) {
+		return getOrCreate(ctx, color, withShadow, false, getFavouriteFromWpt(ctx, pt));
 	}
 
-	public static FavoriteImageDrawable getOrCreateSyncedIcon(Context a, int color, FavouritePoint point) {
-		return getOrCreate(a, color, false, true, point);
+	public static FavoriteImageDrawable getOrCreateSyncedIcon(Context ctx, @ColorInt int color, FavouritePoint point) {
+		return getOrCreate(ctx, color, false, true, point);
 	}
 
-	public static FavoriteImageDrawable getOrCreateSyncedIcon(Context a, int color, GPXUtilities.WptPt pt) {
-		return getOrCreate(a, color, false, true, getFavouriteFromWpt(a, pt));
+	public static FavoriteImageDrawable getOrCreateSyncedIcon(Context ctx, @ColorInt int color, GPXUtilities.WptPt pt) {
+		return getOrCreate(ctx, color, false, true, getFavouriteFromWpt(ctx, pt));
 	}
 
-	private static FavouritePoint getFavouriteFromWpt(Context a, GPXUtilities.WptPt pt) {
+	private static FavouritePoint getFavouriteFromWpt(Context ctx, GPXUtilities.WptPt pt) {
 		FavouritePoint point = null;
 		if (pt != null) {
 			point = new FavouritePoint(pt.getLatitude(), pt.getLongitude(), pt.name, pt.category);
-			point.setIconIdFromName(a, pt.getIconNameOrDefault());
+			point.setIconIdFromName(ctx, pt.getIconNameOrDefault());
 			point.setBackgroundType(BackgroundType.getByTypeName(pt.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
 		}
 		return point;

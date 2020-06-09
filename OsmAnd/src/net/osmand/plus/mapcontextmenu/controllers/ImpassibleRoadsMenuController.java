@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -69,7 +68,7 @@ public class ImpassibleRoadsMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return AppCompatResources.getDrawable(mapActivity, R.drawable.map_pin_avoid_road);
+			return AppCompatResources.getDrawable(mapActivity, R.drawable.ic_pin_avoid_road);
 		} else {
 			return null;
 		}

@@ -1,7 +1,5 @@
 package net.osmand.plus.views;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -9,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
-import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
@@ -77,7 +74,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private int cachedHash;
 	private int cachedColor;
 	private Paint paintIcon;
-	private Bitmap pointSmall;
 	private int currentTrackColor;
 
 	private LayerDrawable selectedPoint;
@@ -178,7 +174,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
         paintGridOuterCircle.setAlpha(204);
 
 		paintIcon = new Paint();
-		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
 		selectedPoint = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), R.drawable.map_location_default);
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
@@ -373,8 +368,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawSelectedFilesPoints(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
 		if (tileBox.getZoom() >= startZoom) {
 			float textScale = view.getSettings().TEXT_SCALE.get();
-			float iconSize = FavoriteImageDrawable.getOrCreate(view.getContext(), 0,
-					true, (WptPt) null).getIntrinsicWidth() * 3 / 2.5f * textScale;
+			float iconSize = getIconSize(view.getContext()) * 3 / 2.5f * textScale;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 			List<LatLon> fullObjectsLatLon = new ArrayList<>();
@@ -409,9 +403,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 							} else {
 								color = getPointColor(o, fileColor);
 							}
-							paintIcon.setColorFilter(new PorterDuffColorFilter(color | 0xff000000, PorterDuff.Mode.MULTIPLY));
-							Rect destRect = getIconDestinationRect(x, y, pointSmall.getWidth(), pointSmall.getHeight(), textScale);
-							canvas.drawBitmap(pointSmall, null, destRect, paintIcon);
+							FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), color,
+									true, o);
+							fid.drawSmallPoint(canvas, x, y, textScale);
 							smallObjectsLatLon.add(new LatLon(o.lat, o.lon));
 						} else {
 							fullObjects.add(new Pair<>(o, marker));
@@ -510,8 +504,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		} else {
 			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true, o);
 		}
-		Rect destRest = getIconDestinationRect(x, y, fid.getIntrinsicWidth(), fid.getIntrinsicHeight(), textScale);
-		fid.drawBitmapInCenter(canvas, destRest, history);
+		fid.drawPoint(canvas, x, y, textScale, history);
 	}
 
 	@ColorInt
