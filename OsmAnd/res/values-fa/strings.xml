@@ -3770,7 +3770,7 @@
     <string name="turn_screen_on_power_button_descr">فشردن دکمهٔ خاموش/روشن دستگاه، صفحه را روشن می‌کند و OsmAnd را روی صفحهٔ قفل نمایش می‌دهد.</string>
     <string name="turn_screen_on_power_button">دکمهٔ خاموش/روشن</string>
     <string name="turn_screen_on_proximity_sensor">حسگر مجاورتی</string>
-    <string name="keep_screen_on">صفحه را روشن نگه دار</string>
+    <string name="keep_screen_on">روشن نگه داشتن صفحه</string>
     <string name="keep_screen_off">صفحه را خاموش نگه دار</string>
     <string name="mercator_projection"/>
     <string name="one_image_per_tile">یک فایل تصویر برای هر کاشی</string>
@@ -3805,4 +3805,5 @@
     <string name="details_dialog_decr">نمایانی جزئیات اضافه‌تر روی نقشه را کنترل کنید</string>
     <string name="shared_string_night_map">نقشهٔ شب</string>
     <string name="shared_string_all_time">همیشه</string>
+    <string name="turn_screen_on_power_button_disabled">غیرفعال است. به گزینهٔ «روشن نگه داشتن صفحه» در قسمت «زمان خاموشی پس از بیدارباش» نیاز دارد.</string>
 </resources>
