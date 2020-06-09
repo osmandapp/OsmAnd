@@ -57,8 +57,8 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		VehicleSizeAssets vehicleSizeAssets = VehicleSizeAssets.getAssets(parameterName);
 		if (vehicleSizeAssets != null) {
 			ImageView imageView = mainView.findViewById(R.id.image_view);
-			imageView.setImageDrawable(ContextCompat.getDrawable(app,
-					!nightMode ? vehicleSizeAssets.getDayIconId() : vehicleSizeAssets.getNightIconId()));
+			imageView.setImageDrawable(app.getUIUtilities()
+					.getIcon(!nightMode ? vehicleSizeAssets.getDayIconId() : vehicleSizeAssets.getNightIconId()));
 			TextView description = mainView.findViewById(R.id.description);
 			description.setText(app.getString(vehicleSizeAssets.getDescriptionRes()));
 		}

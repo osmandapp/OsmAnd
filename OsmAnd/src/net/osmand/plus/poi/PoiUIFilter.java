@@ -4,7 +4,6 @@ package net.osmand.plus.poi;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -380,17 +379,23 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	private AmenityNameFilter getNameFilterInternal(StringBuilder nmFilter,
 													final boolean allTime, final boolean open, final List<PoiType> poiAdditionals) {
-		final CollatorStringMatcher sm =
-				nmFilter.length() > 0 ?
-						new CollatorStringMatcher(nmFilter.toString().trim(), StringMatcherMode.CHECK_CONTAINS) : null;
+		final CollatorStringMatcher sm = nmFilter.length() > 0 ?
+				new CollatorStringMatcher(nmFilter.toString().trim(), StringMatcherMode.CHECK_CONTAINS) : null;
 		return new AmenityNameFilter() {
 
 			@Override
 			public boolean accept(Amenity a) {
 				if (sm != null) {
-					String lower = OsmAndFormatter.getPoiStringWithoutType(a,
+					List<String> names = OsmAndFormatter.getPoiStringsWithoutType(a,
 							app.getSettings().MAP_PREFERRED_LOCALE.get(), app.getSettings().MAP_TRANSLITERATE_NAMES.get());
-					if (!sm.matches(lower)) {
+					boolean match = false;
+					for (String name : names) {
+						if (sm.matches(name)) {
+							match = true;
+							break;
+						}
+					}
+					if (!match) {
 						return false;
 					}
 				}

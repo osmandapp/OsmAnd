@@ -67,7 +67,6 @@ import net.osmand.osm.edit.OSMSettings;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -75,6 +74,7 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -465,8 +465,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private String isTextLengthInRange() {
-		for (Entry<String, String> s: editPoiData.getTagValues().entrySet()) {
-			if (s.getValue().length() > AMENITY_TEXT_LENGTH) {
+		for (Entry<String, String> s : editPoiData.getTagValues().entrySet()) {
+			if (!Algorithms.isEmpty(s.getValue()) && s.getValue().length() > AMENITY_TEXT_LENGTH) {
 				return s.getKey();
 			}
 		}
@@ -559,7 +559,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							if (getActivity() instanceof MapActivity) {
 								((MapActivity) getActivity()).getMapView().refreshMap(true);
 							}
-							dismiss();
+							dismissAllowingStateLoss();
 						} else {
 							OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 							mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();

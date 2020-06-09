@@ -15,6 +15,7 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchCoreFactory.SearchAmenityByTypeAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
@@ -325,7 +326,7 @@ public class SearchUICore {
 		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI());
 		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
-		apis.add(new SearchCoreFactory.SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
+		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
 		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
 		SearchBuildingAndIntersectionsByStreetAPI streetsApi =
 				new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
@@ -573,6 +574,24 @@ public class SearchUICore {
 		return radius;
 	}
 
+	public AbstractPoiType getUnselectedPoiType() {
+		for (SearchCoreAPI capi : apis) {
+			if (capi instanceof SearchAmenityByTypeAPI) {
+				return ((SearchAmenityByTypeAPI) capi).getUnselectedPoiType();
+			}
+		}
+		return null;
+	}
+
+	public String getCustomNameFilter() {
+		for (SearchCoreAPI capi : apis) {
+			if (capi instanceof SearchAmenityByTypeAPI) {
+				return ((SearchAmenityByTypeAPI) capi).getNameFilter();
+			}
+		}
+		return null;
+	}
+
 	void searchInternal(final SearchPhrase phrase, SearchResultMatcher matcher) {
 		preparePhrase(phrase);
 		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);
@@ -759,14 +778,28 @@ public class SearchUICore {
 			return exportedCities;
 		}
 
-		public void exportObject(MapObject object) {
+		public void exportObject(SearchPhrase phrase, MapObject object) {
+			double maxDistance = phrase.getSettings().getExportSettings().getMaxDistance();
+			if (maxDistance > 0) {
+				double distance = MapUtils.getDistance(phrase.getSettings().getOriginalLocation(), object.getLocation());
+				if (distance > maxDistance) {
+					return;
+				}
+			}
 			if (exportedObjects == null) {
 				exportedObjects = new ArrayList<>();
 			}
 			exportedObjects.add(object);
 		}
 
-		public void exportCity(City city) {
+		public void exportCity(SearchPhrase phrase, City city) {
+			double maxDistance = phrase.getSettings().getExportSettings().getMaxDistance();
+			if (maxDistance > 0) {
+				double distance = MapUtils.getDistance(phrase.getSettings().getOriginalLocation(), city.getLocation());
+				if (distance > maxDistance) {
+					return;
+				}
+			}
 			if (exportedCities == null) {
 				exportedCities = new ArrayList<>();
 			}
