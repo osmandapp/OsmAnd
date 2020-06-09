@@ -122,6 +122,8 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		}
 		View root = UiUtilities.getMaterialInflater(app, nightMode).inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
+		toolbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
+		toolbar.setTitleTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light));
 		ImageButton iconHelp = root.findViewById(R.id.toolbar_action);
 		Drawable closeDrawable = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
 				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
@@ -145,6 +147,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		int boxStrokeColor = nightMode
 				? ContextCompat.getColor(app, R.color.app_bar_color_light)
 				: ContextCompat.getColor(app, R.color.active_buttons_and_links_bg_pressed_dark);
+		int btnBgColorRes = nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 		TextInputLayout nameInputLayout = root.findViewById(R.id.name_input_layout);
 		nameInputLayout.setBoxStrokeColor(boxStrokeColor);
 		nameEditText = root.findViewById(R.id.name_edit_text);
@@ -155,7 +158,12 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		urlEditText.addTextChangedListener(getTextWatcher());
 		contentContainer = root.findViewById(R.id.content_container);
 		saveBtn = root.findViewById(R.id.save_button);
+		saveBtn.setBackgroundResource(nightMode ? R.drawable.dlg_btn_primary_dark : R.drawable.dlg_btn_primary_light);
+		FrameLayout saveBtnBg = root.findViewById(R.id.save_button_bg);
+		saveBtnBg.setBackgroundColor(ContextCompat.getColor(app, btnBgColorRes));
 		saveBtnTitle = root.findViewById(R.id.save_button_title);
+		saveBtnTitle.setTextColor(ContextCompat.getColorStateList(app,
+				nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
 		saveBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
