@@ -1305,7 +1305,14 @@
     <string name="live_monitoring_interval">Intervalo de enreta kurs-registrado</string>
     <string name="live_monitoring_interval_descr">Difini intervalon de enreta kurs-registrado.</string>
     <string name="live_monitoring_url">Adreso de enreta kurs-registrado</string>
-    <string name="live_monitoring_url_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, birado={6}.</string>
+    <string name="live_monitoring_url_descr">Difini la retadreson uzante la jenajn argumentojn:
+\n lat={0} (latitudo),
+\n lon={1} (longitudo),
+\n timestamp={2} (tempmarko),
+\n hdop={3} (horizontala diluo de precizo),
+\n altitude={4} (altitudo),
+\n speed={5} (rapido),
+\n bearing={6} (birado).</string>
     <string name="change_markers_position">Ŝanĝi pozicion de marko</string>
     <string name="current_track">Nuna spuro</string>
     <string name="gpx_monitoring_disabled_warn">Konservu kurson uzante GPX-fenestraĵon aŭ per \'Registrado de kurso\' agordoj.</string>
@@ -3768,4 +3775,5 @@
     <string name="details_dialog_decr">Alĝustigi videblon de pliaj detaloj montrataj sur la mapo</string>
     <string name="shared_string_night_map">Nokta mapo</string>
     <string name="shared_string_all_time">Ĉiam</string>
+    <string name="turn_screen_on_power_button_disabled">Malŝaltita. Postulas “teni ekranon aktiva” en la sekcio “aktiveca periodo de ekrano”.</string>
 </resources>
