@@ -3147,7 +3147,7 @@
     <string name="start_up_message_pref">رسالة البدء</string>
     <string name="analytics_pref_title">تحليل</string>
     <string name="turn_screen_on_info">إظهار الخريطة على شاشة القفل أثناء التنقل.</string>
-    <string name="wake_time">مهلة شاشة مخصصة</string>
+    <string name="wake_time">المهلة بعد الاستيقاظ</string>
     <string name="units_and_formats">الوحدات والأشكال</string>
     <string name="appearance">المظهر</string>
     <string name="map_look_descr">مظهر الخريطة</string>
@@ -3179,7 +3179,7 @@
     <string name="route_parameters">معلمات الطريق</string>
     <string name="application_profile_changed">تم تغيير وضع التطبيق إلى \"%s\"</string>
     <string name="logcat_buffer">سجل الاستخدام</string>
-    <string name="plugins_settings">إعدادات البرنامج المساعد</string>
+    <string name="plugins_settings">ضبط الملحقات</string>
     <string name="shared_string_by_default">بشكل افتراضي</string>
     <string name="download_detailed_map">قم بتنزيل خريطة مفصلة%s لعرض هذه المنطقة.</string>
     <string name="internal_app_storage_description">تخزين داخلي ، مخفي عن المستخدم والتطبيقات الأخرى ، يمكن الوصول إليه حصريا من أوسماند.</string>
@@ -3459,7 +3459,7 @@
     <string name="monitoring_min_speed">الحد الأدنى للسرعة</string>
     <string name="monitoring_min_accuracy">دقة الحد الأدنى</string>
     <string name="monitoring_min_distance">الحد الأدنى للإزاحة</string>
-    <string name="reset_plugin_to_default">إعادة تعيين إعدادات البرنامج المساعد الافتراضي</string>
+    <string name="reset_plugin_to_default">إعادة ضبط الملحقات للافتراضي</string>
     <string name="multimedia_rec_split_title">تقسيم المسجل</string>
     <string name="multimedia_use_system_camera">استخدام تطبيق النظام</string>
     <string name="multimedia_photo_play_sound">صوت الكاميرا</string>
@@ -3470,7 +3470,7 @@
     <string name="shared_string_available">متاح</string>
     <string name="add_custom_category">إضافة فئة مخصصة</string>
     <string name="rendering_attr_streetLightingNight_name">اظهر في الليل فقط</string>
-    <string name="plugin_prefs_reset_successful">استعادة جميع إعدادات البرنامج المساعد إلى الحالة الافتراضية.</string>
+    <string name="plugin_prefs_reset_successful">استعادة ضبط الملحق للافتراضي.</string>
     <string name="profile_prefs_reset_successful">تمت استعادة جميع إعدادات الوضع إلى الحالة الافتراضية.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">غروب الشمس على %1$s</string>
@@ -3486,19 +3486,19 @@
 \n 
 \n• إضافة رقم الخروج في الملاحة 
 \n 
-\n• إعادة صياغة إعدادات البرنامج المساعد 
+\n• إعادة صياغة ضبط الملحقات 
 \n 
-\n• إعادة صياغة شاشة الإعدادات للوصول السريع إلى جميع الأوضاع
+\n• إعادة صياغة شاشة الإعدادات للوصول السريع إلى جميع الأوضاع 
 \n 
-\n• إضافة خيار لنسخ الإعدادات من ملف شخصي آخر 
+\n• إضافة خيار لنسخ الإعدادات من وضع آخر 
 \n 
 \n• إضافة القدرة على تغيير أمر أو إخفاء فئات POI في البحث 
 \n 
 \n• رموز POI محاذاة بشكل صحيح على الخريطة 
 \n 
-\n• إضافة بيانات غروب الشمس / شروق الشمس لتكوين الخريطة 
+\n• إضافة بيانات غروب/شروق الشمس لتكوين الخريطة 
 \n 
-\n• إضافة رموز المنزل / العمل على الخريطة 
+\n• إضافة رموز المنزل/العمل على الخريطة 
 \n 
 \n• إضافة دعم للوصف متعدد الأسطر في الإعدادات 
 \n 
@@ -3730,7 +3730,7 @@
     <string name="turn_screen_on_wake_time_descr">حدد مهلة الشاشة بعد الاستيقاظ. (\"%1$s\" لا ينطبق أي مهلة.)</string>
     <string name="keep_screen_on">إبقاء الشاشة قيد التشغيل</string>
     <string name="keep_screen_off">إبقاء الشاشة مطفأة</string>
-    <string name="screen_timeout_descr">محدد ب \"٪1$s\" ، إذا تم تمكينه.</string>
+    <string name="screen_timeout_descr">إذا تم تفعيل الخيار \"%1$s\" ، فسوف يعتمد وقت النشاط عليه.</string>
     <string name="pseudo_mercator_projection">إسقاط ميركاتور الوهمي</string>
     <string name="one_image_per_tile">ملف صورة واحد لكل إطار متجانب</string>
     <string name="sqlite_db_file">ملف SQLiteDB</string>
@@ -3752,7 +3752,7 @@
 \nأسبوع واحد هو 10080 دقيقة.
 \nشهر واحد هو 43 829 دقيقة.</string>
     <string name="tiles_storage_descr">اختر كيفية تخزين الطبقات التي تم تنزيلها.</string>
-    <string name="default_screen_timeout">مهلة شاشة النظام</string>
+    <string name="default_screen_timeout">مهلة الشاشة الافتراضية</string>
     <string name="export_import_quick_actions_with_profiles_promo">يمكنك تصدير أو استيراد إجراءات سريعة باستخدام ملفات تعريف بروفايل التطبيق.</string>
     <string name="shared_string_delete_all_q">حذف الكل؟</string>
     <string name="delete_all_actions_message_q">هل أنت متأكد من رغبتك في حذف الإجراءات السريعة %d نهائيًا؟</string>
@@ -3762,7 +3762,7 @@
     <string name="height_limit_description">أدل بارتفاع مركبتك ،قد يتم تطبيق بعض القيود على المركبات المرتفعة.</string>
     <string name="weight_limit_description">أدل بوزن مركبتك ،قد يتم تطبيق بعض القيود على المركبات الثقيلة.</string>
     <string name="shared_string_meters">أمتار</string>
-    <string name="details_dialog_decr">اظهار التحكم في رؤية التفاصيل الإضافية على الخريطة</string>
+    <string name="details_dialog_decr">التحكم في رؤية التفاصيل الإضافية الظاهرة على الخريطة</string>
     <string name="shared_string_night_map">خريطة ليلية</string>
     <string name="shared_string_all_time">كل الوقت</string>
 </resources>
