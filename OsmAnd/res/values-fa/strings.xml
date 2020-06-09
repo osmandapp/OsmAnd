@@ -3772,7 +3772,7 @@
     <string name="turn_screen_on_proximity_sensor">حسگر مجاورتی</string>
     <string name="keep_screen_on">روشن نگه داشتن صفحه</string>
     <string name="keep_screen_off">صفحه را خاموش نگه دار</string>
-    <string name="mercator_projection"/>
+    <string name="mercator_projection">فراتابی مرکاتور</string>
     <string name="one_image_per_tile">یک فایل تصویر برای هر کاشی</string>
     <string name="map_source_zoom_levels_descr">این پارامترها هنگام استفاده از منبع به‌عنوان نقشه یا رولایه/زیرلایه، بر نمایش آن اثر می‌گذارند. 
 \n
@@ -3806,4 +3806,7 @@
     <string name="shared_string_night_map">نقشهٔ شب</string>
     <string name="shared_string_all_time">همیشه</string>
     <string name="turn_screen_on_power_button_disabled">غیرفعال است. به گزینهٔ «روشن نگه داشتن صفحه» در قسمت «زمان خاموشی پس از بیدارباش» نیاز دارد.</string>
+    <string name="pseudo_mercator_projection">فراتابی شبه مرکاتور</string>
+    <string name="rendering_attr_piste_type_connection_name">اتصال</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">اتصال</string>
 </resources>
