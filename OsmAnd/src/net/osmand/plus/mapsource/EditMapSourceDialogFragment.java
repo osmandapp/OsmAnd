@@ -279,19 +279,22 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 
 			@Override
 			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-				String s = charSequence.toString();
-				if (Algorithms.isEmpty(s)) {
-					saveBtn.setEnabled(false);
-					saveBtnTitle.setEnabled(false);
-				} else {
-					saveBtn.setEnabled(true);
-					saveBtnTitle.setEnabled(true);
-				}
+
 			}
 
 			@Override
 			public void afterTextChanged(Editable editable) {
-
+				if (nameEditText.getText() != null && urlEditText.getText() != null) {
+					String name = nameEditText.getText().toString().trim();
+					String url = urlEditText.getText().toString().trim();
+					if (Algorithms.isEmpty(name) || Algorithms.isEmpty(url)) {
+						saveBtn.setEnabled(false);
+						saveBtnTitle.setEnabled(false);
+					} else {
+						saveBtn.setEnabled(true);
+						saveBtnTitle.setEnabled(true);
+					}
+				}
 			}
 		};
 	}
