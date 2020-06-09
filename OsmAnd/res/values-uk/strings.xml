@@ -3738,7 +3738,7 @@
     <string name="turn_screen_on_wake_time_descr">Час очікування екрану після увімкнення. («%1$s» вимикає вимкнення екрану.)</string>
     <string name="keep_screen_on">Тримати екран увімкненим</string>
     <string name="keep_screen_off">Тримати екран вимкненим</string>
-    <string name="screen_timeout_descr">Використовується, тільки якщо \"%1$s\" вимкнено.</string>
+    <string name="screen_timeout_descr">Якщо функція «%1$s» увімкнена, час роботи буде залежати від неї.</string>
     <string name="pseudo_mercator_projection">Псевдопроєкція Меркатора</string>
     <string name="one_image_per_tile">Один файл зображення на плитку</string>
     <string name="sqlite_db_file">Файл SQLiteDB</string>
@@ -3760,9 +3760,14 @@
 \nОдин тиждень - 10 080 хвилин.
 \nОдин місяць - 43 829 хвилин.</string>
     <string name="tiles_storage_descr">Виберіть спосіб зберігання завантажених плиток.</string>
-    <string name="default_screen_timeout">Системний час очікування екрану</string>
+    <string name="default_screen_timeout">Усталений час очікування екрану</string>
     <string name="export_import_quick_actions_with_profiles_promo">Ви можете експортувати або імпортувати швидкі дії з профілями застосунку.</string>
     <string name="shared_string_delete_all_q">Видалити все\?</string>
     <string name="delete_all_actions_message_q">Ви дійсно бажаєте безповоротно видалити %d швидких дій\?</string>
     <string name="screen_timeout">Час очікування екрана</string>
+    <string name="weight_limit_description">Вкажіть вагу транспортного засобу, для важких транспортних засобів можуть застосовуватися деякі обмеження на маршрути.</string>
+    <string name="shared_string_tones">тонни</string>
+    <string name="shared_string_meters">метри</string>
+    <string name="details_dialog_decr">Керування відображенням додаткових деталей на мапі</string>
+    <string name="shared_string_night_map">Нічна мапа</string>
 </resources>
