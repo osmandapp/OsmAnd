@@ -67,11 +67,13 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -766,16 +768,27 @@ public class ResourceManager {
 				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_big_for_memory), f.getName()));
 			}
 		}
+		Map<PoiCategory, Map<String, PoiType>> toAddPoiTypes = new HashMap<>();
 		for (AmenityIndexRepository repo : amenityRepositories.values()) {
 			Map<String, List<String>> categories = ((AmenityIndexRepositoryBinary) repo).getDeltaPoiCategories();
 			if (!categories.isEmpty()) {
 				for (Map.Entry<String, List<String>> entry : categories.entrySet()) {
 					PoiCategory poiCategory = context.getPoiTypes().getPoiCategoryByName(entry.getKey(), true);
+					if (!toAddPoiTypes.containsKey(poiCategory)) {
+						toAddPoiTypes.put(poiCategory, new TreeMap<String, PoiType>());
+					}
+					Map<String, PoiType> poiTypes = toAddPoiTypes.get(poiCategory);
 					for (String s : entry.getValue()) {
-						poiCategory.addPoiType(new PoiType(MapPoiTypes.getDefault(), poiCategory, null, s));
+						poiTypes.put(s, new PoiType(MapPoiTypes.getDefault(), poiCategory, null, s));
 					}
 				}
 			}
+		}
+		Iterator<Entry<PoiCategory, Map<String, PoiType>>> it = toAddPoiTypes.entrySet().iterator();
+		while(it.hasNext()) {
+			Entry<PoiCategory, Map<String, PoiType>> next = it.next();
+			PoiCategory category = next.getKey();
+			category.addExtraPoiTypes(next.getValue());
 		}
 		log.debug("All map files initialized " + (System.currentTimeMillis() - val) + " ms");
 		if (files.size() > 0 && (!indCache.exists() || indCache.canWrite())) {

@@ -24,7 +24,7 @@ public class SearchSettings {
 	private boolean emptyQueryAllowed;
 	private boolean sortByName;
 	private SearchExportSettings exportSettings;
-	//private SearchExportSettings exportSettings = new SearchExportSettings(false, false);
+	//private SearchExportSettings exportSettings = new SearchExportSettings(false, false, -1);
 
 	public SearchSettings(SearchSettings s) {
 		if(s != null) {

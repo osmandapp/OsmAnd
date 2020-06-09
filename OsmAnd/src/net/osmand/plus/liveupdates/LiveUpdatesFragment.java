@@ -35,7 +35,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper;
@@ -50,6 +49,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.resources.IncrementalChangesManager;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -82,6 +82,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			return lhs.getName().compareTo(rhs.getName());
 		}
 	};
+
+	private OsmandApplication app;
 	private View subscriptionHeader;
 	private ExpandableListView listView;
 	private LocalIndexesAdapter adapter;
@@ -109,6 +111,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		app = getMyApplication();
 		if (getActivity() instanceof OsmLiveActivity) {
 			showSettingsOnly = ((OsmLiveActivity) getActivity()).isShowSettingOnly();
 		}
@@ -120,7 +123,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		View view = inflater.inflate(R.layout.fragment_live_updates, container, false);
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 
-		final OsmandApplication app = getMyApplication();
 		boolean nightMode = !app.getSettings().isLightContent();
 		final SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh);
 		int swipeColor = ContextCompat.getColor(app, nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange);
@@ -141,7 +143,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-				if (!processing && InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
+				if (!processing && InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
 					final FragmentManager fragmentManager = getChildFragmentManager();
 					LiveUpdatesSettingsDialogFragment
 							.createInstance(adapter.getChild(groupPosition, childPosition).getFileName())
@@ -155,7 +157,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 
 		progressBar = (ProgressBar) view.findViewById(R.id.progress);
 
-		if (!Version.isDeveloperVersion(getMyApplication())) {
+		if (!Version.isDeveloperVersion(app)) {
 			subscriptionHeader = inflater.inflate(R.layout.live_updates_header, listView, false);
 			updateSubscriptionHeader();
 			listView.addHeaderView(subscriptionHeader, "subscriptionHeader", false);
@@ -172,22 +174,22 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		if (getActivity() instanceof OsmLiveActivity && subscriptionHeader != null) {
 			View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
 			View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
-			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
+			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
 				ImageView statusIcon = (ImageView) subscriptionHeader.findViewById(R.id.statusIcon);
 				TextView statusTextView = (TextView) subscriptionHeader.findViewById(R.id.statusTextView);
 				TextView regionNameHeaderTextView = (TextView) subscriptionHeader.findViewById(R.id.regionHeaderTextView);
 				TextView regionNameTextView = (TextView) subscriptionHeader.findViewById(R.id.regionTextView);
 				statusTextView.setText(getString(R.string.osm_live_active));
-				statusIcon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_done));
+				statusIcon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_done));
 
 				regionNameHeaderTextView.setText(R.string.osm_live_support_region);
-				String countryName = getSettings().BILLING_USER_COUNTRY.get();
+				String countryName = app.getSettings().BILLING_USER_COUNTRY.get();
 				InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
 				if (purchaseHelper != null) {
 					InAppSubscription monthlyPurchased = purchaseHelper.getPurchasedMonthlyLiveUpdates();
 					if (monthlyPurchased != null && monthlyPurchased.isDonationSupported()) {
 						if (Algorithms.isEmpty(countryName)) {
-							if (getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
+							if (app.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
 								regionNameHeaderTextView.setText(R.string.default_buttons_support);
 								countryName = getString(R.string.osmand_team);
 							} else {
@@ -277,10 +279,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	}
 
 	public void notifyLiveUpdatesChanged() {
-		if (getActivity() != null) {
-			if (adapter != null && getMyApplication() != null) {
-				adapter.notifyLiveUpdatesChanged();
-			}
+		if (getActivity() != null && adapter != null) {
+			adapter.notifyLiveUpdatesChanged();
 		}
 	}
 
@@ -313,7 +313,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 
 		public void add(LocalIndexInfo info) {
 			OsmandSettings.CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(
-					info.getFileName(), getSettings());
+					info.getFileName(), app.getSettings());
 			if (preference.get()) {
 				dataShouldUpdate.add(info);
 			} else {
@@ -325,7 +325,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			Set<LocalIndexInfo> changedSet = new HashSet<>();
 			for (LocalIndexInfo localIndexInfo : dataShouldUpdate) {
 				OsmandSettings.CommonPreference<Boolean> preference =
-						preferenceLiveUpdatesOn(localIndexInfo.getFileName(), getSettings());
+						preferenceLiveUpdatesOn(localIndexInfo.getFileName(), app.getSettings());
 				if (!preference.get()) {
 					changedSet.add(localIndexInfo);
 				}
@@ -335,7 +335,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			changedSet.clear();
 			for (LocalIndexInfo localIndexInfo : dataShouldNotUpdate) {
 				OsmandSettings.CommonPreference<Boolean> preference =
-						preferenceLiveUpdatesOn(localIndexInfo.getFileName(), getSettings());
+						preferenceLiveUpdatesOn(localIndexInfo.getFileName(), app.getSettings());
 				if (preference.get()) {
 					changedSet.add(localIndexInfo);
 				}
@@ -410,11 +410,11 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						if (isChecked) {
-							if (InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
+							if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
 								switchOnLiveUpdates(settings);
 							} else {
 								liveUpdatesSwitch.setChecked(false);
-								getMyApplication().showToastMessage(getString(R.string.osm_live_ask_for_purchase));
+								app.showToastMessage(getString(R.string.osm_live_ask_for_purchase));
 							}
 						} else {
 							settings.IS_LIVE_UPDATES_ON.set(false);
@@ -447,16 +447,16 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		private void showUpdateDialog() {
 			if(dataShouldUpdate.size() > 0) {
 				if (dataShouldUpdate.size() == 1) {
-					runLiveUpdate(getMyApplication(), dataShouldUpdate.get(0).getFileName(), false);
+					runLiveUpdate(app, dataShouldUpdate.get(0).getFileName(), false);
 				} else {
-					Builder bld = new AlertDialog.Builder(getActivity());
+					Builder bld = new AlertDialog.Builder(ctx);
 					bld.setMessage(R.string.update_all_maps_now);
 					bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							for (LocalIndexInfo li : dataShouldUpdate) {
-								runLiveUpdate(getMyApplication(), li.getFileName(), false);
+								runLiveUpdate(app, li.getFileName(), false);
 							}
 							notifyDataSetChanged();
 						}
@@ -468,17 +468,15 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		}
 		
 		private void enableLiveUpdates(boolean enable) {
-			AlarmManager alarmMgr = (AlarmManager) getActivity()
-					.getSystemService(Context.ALARM_SERVICE);
+			AlarmManager alarmMgr = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
 			for (LocalIndexInfo li : dataShouldUpdate) {
 				String fileName = li.getFileName();
-				PendingIntent alarmIntent = getPendingIntent(getActivity(),
-						fileName);
+				PendingIntent alarmIntent = getPendingIntent(ctx, fileName);
 				if (enable) {
 					final OsmandSettings.CommonPreference<Integer> updateFrequencyPreference =
-							preferenceUpdateFrequency(fileName, getSettings());
+							preferenceUpdateFrequency(fileName, app.getSettings());
 					final OsmandSettings.CommonPreference<Integer> timeOfDayPreference =
-							preferenceTimeOfDayToUpdate(fileName, getSettings());
+							preferenceTimeOfDayToUpdate(fileName, app.getSettings());
 					UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyPreference.get()];
 					TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayPreference.get()];
 					setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
@@ -713,8 +711,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 
 	@Override
 	public void onGetItems() {
-		if (!InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
-			getSettings().IS_LIVE_UPDATES_ON.set(false);
+		if (!InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+			app.getSettings().IS_LIVE_UPDATES_ON.set(false);
 			adapter.enableLiveUpdates(false);
 		}
 		disableProgress();
