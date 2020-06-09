@@ -124,6 +124,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
 		toolbar.setTitleTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light));
+		toolbar.setTitle(editedLayerName == null ? R.string.add_online_source : R.string.edit_online_source);
 		ImageButton iconHelp = root.findViewById(R.id.toolbar_action);
 		Drawable closeDrawable = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
 				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
