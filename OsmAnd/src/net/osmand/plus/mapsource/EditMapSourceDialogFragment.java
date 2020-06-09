@@ -408,7 +408,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 							InputZoomLevelsBottomSheet.showInstance(
 									fm, EditMapSourceDialogFragment.this,
 									R.string.map_source_zoom_levels, R.string.map_source_zoom_levels_descr,
-									minZoom, maxZoom
+									minZoom, maxZoom, editedLayerName != null
 							);
 							break;
 						case EXPIRE_TIME:

@@ -1,5 +1,7 @@
 package net.osmand.plus.mapsource;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -38,6 +41,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final String MAX_ZOOM_KEY = "max_zoom_key";
 	private static final String SLIDER_DESCR_RES_KEY = "slider_descr_key";
 	private static final String DIALOG_DESCR_RES_KEY = "dialog_descr_key";
+	private static final String SHOW_WARNING_KEY = "show_warning_key";
 	private static final int SLIDER_FROM = 1;
 	private static final int SLIDER_TO = 22;
 	@StringRes
@@ -46,19 +50,22 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	private int dialogDescrRes;
 	private int minZoom;
 	private int maxZoom;
+	private boolean showWarning;
 
 	public static void showInstance(@NonNull FragmentManager fm,
 									@Nullable Fragment targetFragment,
 									int sliderDescr,
 									int dialogDescr,
 									int minZoom,
-									int maxZoom) {
+									int maxZoom,
+									boolean showWarning) {
 		InputZoomLevelsBottomSheet bottomSheet = new InputZoomLevelsBottomSheet();
 		bottomSheet.setTargetFragment(targetFragment, 0);
 		bottomSheet.setSliderDescrRes(sliderDescr);
 		bottomSheet.setDialogDescrRes(dialogDescr);
 		bottomSheet.setMinZoom(Math.max(minZoom, SLIDER_FROM));
 		bottomSheet.setMaxZoom(Math.min(maxZoom, SLIDER_TO));
+		bottomSheet.setShowWarning(showWarning);
 		bottomSheet.show(fm, TAG);
 	}
 
@@ -70,6 +77,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			maxZoom = savedInstanceState.getInt(MAX_ZOOM_KEY);
 			dialogDescrRes = savedInstanceState.getInt(DIALOG_DESCR_RES_KEY);
 			sliderDescrRes = savedInstanceState.getInt(SLIDER_DESCR_RES_KEY);
+			showWarning = savedInstanceState.getBoolean(SHOW_WARNING_KEY);
 		}
 		LayoutInflater inflater = UiUtilities.getMaterialInflater(app, nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.shared_string_zoom_levels));
@@ -133,16 +141,17 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putInt(MAX_ZOOM_KEY, maxZoom);
 		outState.putInt(SLIDER_DESCR_RES_KEY, sliderDescrRes);
 		outState.putInt(DIALOG_DESCR_RES_KEY, dialogDescrRes);
+		outState.putBoolean(SHOW_WARNING_KEY, showWarning);
 		super.onSaveInstanceState(outState);
 	}
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnZoomSetListener) {
-			((OnZoomSetListener) fragment).onZoomSet(minZoom, maxZoom);
+		if (showWarning) {
+			showWarningDialog();
+		} else {
+			applySelectedZooms();
 		}
-		dismiss();
 	}
 
 	@Override
@@ -153,6 +162,29 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	protected int getRightBottomButtonTextId() {
 		return R.string.shared_string_apply;
+	}
+
+	private void showWarningDialog() {
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
+		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
+		dismissDialog.setTitle(getString(R.string.osmand_parking_warning));
+		dismissDialog.setMessage(getString(R.string.clear_tiles_warning));
+		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
+		dismissDialog.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				applySelectedZooms();
+			}
+		});
+		dismissDialog.show();
+	}
+
+	private void applySelectedZooms() {
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof OnZoomSetListener) {
+			((OnZoomSetListener) fragment).onZoomSet(minZoom, maxZoom);
+		}
+		dismiss();
 	}
 
 	private SpannableString createSpannableString(@NonNull String text, @NonNull String... textToStyle) {
@@ -186,6 +218,10 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void setMaxZoom(int maxZoom) {
 		this.maxZoom = maxZoom;
+	}
+
+	public void setShowWarning(boolean showWarning) {
+		this.showWarning = showWarning;
 	}
 
 	public interface OnZoomSetListener {
