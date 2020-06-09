@@ -120,7 +120,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			elliptic = savedInstanceState.getBoolean(ELLIPTIC_KEY);
 			sqliteDB = savedInstanceState.getBoolean(SQLITE_DB_KEY);
 		}
-		View root = UiUtilities.getMaterialInflater(app, nightMode).inflate(R.layout.fragment_edit_map_source, container, false);
+		View root = UiUtilities.getMaterialInflater(requireContext(), nightMode).inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
 		toolbar.setTitleTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light));
