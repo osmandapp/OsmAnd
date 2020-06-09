@@ -3802,4 +3802,7 @@
     <string name="weight_limit_description">وزن وسیلهٔ نقلیهٔ خود را مشخص کنید. ممکن است محدودیت‌های مسیر برای وسایل نقلیهٔ سنگین اِعمال شود.</string>
     <string name="shared_string_tones">تُن</string>
     <string name="shared_string_meters">متر</string>
+    <string name="details_dialog_decr">نمایانی جزئیات اضافه‌تر روی نقشه را کنترل کنید</string>
+    <string name="shared_string_night_map">نقشهٔ شب</string>
+    <string name="shared_string_all_time">همیشه</string>
 </resources>

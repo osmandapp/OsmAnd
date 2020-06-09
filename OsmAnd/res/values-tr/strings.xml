@@ -3729,4 +3729,5 @@
     <string name="details_dialog_decr">Haritada gösterilen ek ayrıntıların görünürlüğünü denetleyin</string>
     <string name="shared_string_night_map">Gece haritası</string>
     <string name="shared_string_all_time">Her zaman</string>
+    <string name="shared_string_tones">ton</string>
 </resources>
