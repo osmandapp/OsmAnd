@@ -2430,7 +2430,7 @@
     <string name="distance_measurement_finish_subtrack">Begin a new subtrack</string>
     <string name="distance_measurement_clear_route">Clear all points</string>
     <string name="distance_measurement_load_gpx">Open existing GPX file</string>
-    <string name="wait_current_task_finished">Please wait for the current to finish</string>
+    <string name="wait_current_task_finished">Please wait until current task is finished</string>
     <string name="use_kalman_filter_compass_descr">Reduces noise in compass readings but adds inertia.</string>
     <string name="use_kalman_filter_compass">Use Kalman filter</string>
     <string name="use_magnetic_sensor_descr">For the compass reading, use the magnetic sensor instead of the orientation sensor.</string>
