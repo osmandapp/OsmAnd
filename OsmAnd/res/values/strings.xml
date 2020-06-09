@@ -24,7 +24,7 @@
     <string name="export_import_quick_actions_with_profiles_promo">You can export or import quick actions with app profiles.</string>
     <string name="tiles_storage_descr">Choose how to store downloaded tiles.</string>
     <string name="expire_time_descr">Temporarily downloaded tiles will be redownloaded after a specified amount of minutes.
-        Left empty tiles will never be redownloaded for this source.
+        Left empty tiles will never be re-downloaded for this source.
         \n\nOne day is 1440 minutes.\nOne week is 10 080 minutes.\nOne month is 43 829 minutes.</string>
     <string name="map_source_zoom_levels_descr">Affects the screen when used as map or overlay/underlay.
         \n\n%1$s: The map is limited to the range zoom levels selected. \n\n%2$s is the level all original tiles visible at. Changing level always fetches new tiles.</string>
