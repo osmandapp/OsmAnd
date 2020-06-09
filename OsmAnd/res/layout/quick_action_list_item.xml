@@ -17,23 +17,30 @@
         android:orientation="horizontal">
 
         <FrameLayout
+            android:id="@+id/action_button"
             android:layout_width="@dimen/acceptable_touch_radius"
             android:layout_height="@dimen/acceptable_touch_radius"
-            android:layout_gravity="center">
+            android:layout_marginLeft="@dimen/dashCardMargin"
+            android:layout_marginRight="@dimen/dashCardMargin"
+            android:layout_gravity="center"
+            android:padding="@dimen/content_padding_small">
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/action_icon"
-                style="@style/Widget.AppCompat.ActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+                android:clickable="false"
+                android:focusable="false"
+                android:duplicateParentState="true"
                 tools:src="@drawable/ic_action_remove"
                 tools:tint="@color/icon_color_default_light" />
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/checkbox"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 tools:tint="@color/icon_color_default_light" />
 
@@ -103,17 +110,18 @@
 
                 <FrameLayout
                     android:id="@+id/move_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/acceptable_touch_radius"
+                    android:layout_height="@dimen/acceptable_touch_radius"
+                    android:layout_marginLeft="@dimen/dashCardMargin"
+                    android:layout_marginRight="@dimen/dashCardMargin"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/content_padding_half"
-                    android:layout_marginRight="@dimen/content_padding_half"
                     android:padding="@dimen/content_padding_small">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/move_icon"
                         android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="@dimen/standard_icon_size"
+                        android:layout_gravity="center"
                         android:tint="?attr/secondary_icon_color"
                         osmand:srcCompat="@drawable/ic_action_item_move" />
 
