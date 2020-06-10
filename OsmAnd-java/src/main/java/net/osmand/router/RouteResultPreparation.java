@@ -1,6 +1,24 @@
 package net.osmand.router;
 
-import net.osmand.NativeLibrary;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import gnu.trove.iterator.TIntIterator;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -18,26 +36,6 @@ import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import gnu.trove.iterator.TIntIterator;
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.set.hash.TIntHashSet;
 
 public class RouteResultPreparation {
 
@@ -623,7 +621,7 @@ public class RouteResultPreparation {
 //		calculateStatistics(result);
 	}
 
-	private void calculateStatistics(List<RouteSegmentResult> result) {
+	protected void calculateStatistics(List<RouteSegmentResult> result) {
 		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
 		final Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
 		try {
@@ -800,13 +798,22 @@ public class RouteResultPreparation {
 					}
 					if (dist < mergeDistance) {
 						mergeTurnLanes(leftside, currentSegment, nextSegment);
-						inferCommonActiveLane(currentSegment.getTurnType(), nextSegment.getTurnType());
+						TurnType turnType = currentSegment.getTurnType();
+						TIntHashSet possibleTurn = getPossibleTurnsFromActiveLanes(turnType.getLanes(), true);
+						if (possibleTurn.size() == 1) {
+							TurnType tt = TurnType.valueOf(possibleTurn.iterator().next(), currentSegment.getTurnType().isLeftSide());
+							tt.setLanes(turnType.getLanes());
+							tt.setSkipToSpeak(turnType.isSkipToSpeak());
+							currentSegment.setTurnType(tt);
+							turnType = tt;
+						}
+						inferCommonActiveLane(turnType, nextSegment.getTurnType());
 						merged = true;
 					}
 				}
 				if (!merged) {
 					TurnType tt = currentSegment.getTurnType();
-					inferActiveTurnLanesFromTurn(tt, TurnType.C);
+					inferActiveTurnLanesFromTurn(tt, tt.getValue());
 				}
 				nextSegment = currentSegment;
 				dist = 0;
@@ -984,11 +991,9 @@ public class RouteResultPreparation {
 		if(turnSet.size() == 1) {
 			singleTurn = turnSet.iterator().next();
 		} else if(currentTurn.goAhead() && turnSet.contains(nextTurn.getValue())) {
-			if(currentTurn.isPossibleLeftTurn() && 
-					TurnType.isLeftTurn(nextTurn.getValue())) {
-				singleTurn = nextTurn.getValue();	
-			} else if(currentTurn.isPossibleLeftTurn() && 
-					TurnType.isLeftTurn(nextTurn.getActiveCommonLaneTurn())) {
+			if (currentTurn.isPossibleLeftTurn() && TurnType.isLeftTurn(nextTurn.getValue())) {
+				singleTurn = nextTurn.getValue();
+			} else if (currentTurn.isPossibleLeftTurn() && TurnType.isLeftTurn(nextTurn.getActiveCommonLaneTurn())) {
 				singleTurn = nextTurn.getActiveCommonLaneTurn();
 			} else if(currentTurn.isPossibleRightTurn() && 
 					TurnType.isRightTurn(nextTurn.getValue())) {
@@ -1054,7 +1059,7 @@ public class RouteResultPreparation {
 			// add description about turn
 			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(), rr.getBearingBegin());
 			if(noAttachedRoads){
-				// TODO VICTOR : look at the comment inside direction route
+				// VICTOR : look at the comment inside direction route
 				// ? avoid small zigzags is covered at (search for "zigzags") 
 //				double begin = rr.getObject().directionRoute(rr.getStartPointIndex(), rr.getStartPointIndex() < 
 //						rr.getEndPointIndex(), 25);
@@ -1269,17 +1274,8 @@ public class RouteResultPreparation {
 			String[] splitLaneOptions = turnLanes.split("\\|", -1);
 			int activeBeginIndex = findActiveIndex(rawLanes, splitLaneOptions, rs.leftLanes, true, 
 					rs.leftLanesInfo, rs.roadsOnLeft, rs.addRoadsOnLeft);
-			
-			if(!rs.keepLeft && activeBeginIndex != -1 && 
-					splitLaneOptions.length > 0 && !splitLaneOptions[splitLaneOptions.length - 1].contains(";")) {
-				activeBeginIndex = Math.max(activeBeginIndex, 1);
-			}
 			int activeEndIndex = findActiveIndex(rawLanes, splitLaneOptions, rs.rightLanes, false, 
 					rs.rightLanesInfo, rs.roadsOnRight, rs.addRoadsOnRight);
-			if(!rs.keepRight && activeEndIndex != -1  && 
-					splitLaneOptions.length > 0 && !splitLaneOptions[0].contains(";") ) {
-				activeEndIndex = Math.min(activeEndIndex, rawLanes.length - 1);
-			}
 			if (activeBeginIndex == -1 || activeEndIndex == -1 || activeBeginIndex > activeEndIndex) {
 				// something went wrong
 				return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
@@ -1292,6 +1288,12 @@ public class RouteResultPreparation {
 			int tp = inferSlightTurnFromLanes(rawLanes, rs);
 			if (tp != t.getValue() && tp != 0) {
 				t = TurnType.valueOf(tp, leftSide);
+			} else {
+				if (rs.keepRight && TurnType.getSecondaryTurn(rawLanes[activeEndIndex]) == 0) {
+					t = TurnType.valueOf(TurnType.getPrimaryTurn(rawLanes[activeEndIndex]), leftSide);
+				} else if (rs.keepLeft && TurnType.getSecondaryTurn(rawLanes[activeBeginIndex]) == 0) {
+					t = TurnType.valueOf(TurnType.getPrimaryTurn(rawLanes[activeBeginIndex]), leftSide);
+				}
 			}
 		} else {
 			for (int k = 0; k < rawLanes.length; k++) {
@@ -1597,59 +1599,11 @@ public class RouteResultPreparation {
 	}
 
 	private int inferSlightTurnFromLanes(int[] oLanes, RoadSplitStructure rs) {
-		TIntHashSet possibleTurns = new TIntHashSet();
-		for (int i = 0; i < oLanes.length; i++) {
-			if ((oLanes[i] & 1) == 0) {
-				continue;
-			}
-			if (possibleTurns.isEmpty()) {
-				// Nothing is in the list to compare to, so add the first elements
-				possibleTurns.add(TurnType.getPrimaryTurn(oLanes[i]));
-				if (TurnType.getSecondaryTurn(oLanes[i]) != 0) {
-					possibleTurns.add(TurnType.getSecondaryTurn(oLanes[i]));
-				}
-				if (TurnType.getTertiaryTurn(oLanes[i]) != 0) {
-					possibleTurns.add(TurnType.getTertiaryTurn(oLanes[i]));
-				}
-			} else {
-				TIntArrayList laneTurns = new TIntArrayList();
-				laneTurns.add(TurnType.getPrimaryTurn(oLanes[i]));
-				if (TurnType.getSecondaryTurn(oLanes[i]) != 0) {
-					laneTurns.add(TurnType.getSecondaryTurn(oLanes[i]));
-				}
-				if (TurnType.getTertiaryTurn(oLanes[i]) != 0) {
-					laneTurns.add(TurnType.getTertiaryTurn(oLanes[i]));
-				}
-				possibleTurns.retainAll(laneTurns);
-				if (possibleTurns.isEmpty()) {
-					// No common turns, so can't determine anything.
-					return 0;
-				}
-			}
+		TIntHashSet possibleTurns = getPossibleTurnsFromActiveLanes(oLanes, false);
+		if (possibleTurns.isEmpty()) {
+			// No common turns, so can't determine anything.
+			return 0;
 		}
-
-		// Remove all turns from lanes not selected...because those aren't it
-		for (int i = 0; i < oLanes.length; i++) {
-			if ((oLanes[i] & 1) == 0 && !possibleTurns.isEmpty()) {
-				possibleTurns.remove((Integer) TurnType.getPrimaryTurn(oLanes[i]));
-				if (TurnType.getSecondaryTurn(oLanes[i]) != 0) {
-					possibleTurns.remove((Integer) TurnType.getSecondaryTurn(oLanes[i]));
-				}
-				if (TurnType.getTertiaryTurn(oLanes[i]) != 0) {
-					possibleTurns.remove((Integer) TurnType.getTertiaryTurn(oLanes[i]));
-				}
-			}
-		}
-		// remove all non-slight turns // TEST don't pass 
-//		if(possibleTurns.size() > 1) {
-//			TIntIterator it = possibleTurns.iterator();
-//			while(it.hasNext()) {
-//				int nxt = it.next();
-//				if(!TurnType.isSlightTurn(nxt)) {
-//					it.remove();
-//				}
-//			}
-//		}
 		int infer = 0;
 		if (possibleTurns.size() == 1) {
 			infer = possibleTurns.iterator().next();
@@ -1686,6 +1640,53 @@ public class RouteResultPreparation {
 			}
 		}
 		return infer;
+	}
+
+	private TIntHashSet getPossibleTurnsFromActiveLanes(int[] oLanes, boolean onlyPrimary) {
+		TIntHashSet possibleTurns = new TIntHashSet();
+		for (int i = 0; i < oLanes.length; i++) {
+			if ((oLanes[i] & 1) == 0) {
+				continue;
+			}
+			if (possibleTurns.isEmpty()) {
+				// Nothing is in the list to compare to, so add the first elements
+				possibleTurns.add(TurnType.getPrimaryTurn(oLanes[i]));
+				if (!onlyPrimary && TurnType.getSecondaryTurn(oLanes[i]) != 0) {
+					possibleTurns.add(TurnType.getSecondaryTurn(oLanes[i]));
+				}
+				if (!onlyPrimary && TurnType.getTertiaryTurn(oLanes[i]) != 0) {
+					possibleTurns.add(TurnType.getTertiaryTurn(oLanes[i]));
+				}
+			} else {
+				TIntArrayList laneTurns = new TIntArrayList();
+				laneTurns.add(TurnType.getPrimaryTurn(oLanes[i]));
+				if (!onlyPrimary && TurnType.getSecondaryTurn(oLanes[i]) != 0) {
+					laneTurns.add(TurnType.getSecondaryTurn(oLanes[i]));
+				}
+				if (!onlyPrimary && TurnType.getTertiaryTurn(oLanes[i]) != 0) {
+					laneTurns.add(TurnType.getTertiaryTurn(oLanes[i]));
+				}
+				possibleTurns.retainAll(laneTurns);
+				if (possibleTurns.isEmpty()) {
+					// No common turns, so can't determine anything.
+					return possibleTurns;
+				}
+			}
+		}
+
+		// Remove all turns from lanes not selected...because those aren't it
+		for (int i = 0; i < oLanes.length; i++) {
+			if ((oLanes[i] & 1) == 0 && !possibleTurns.isEmpty()) {
+				possibleTurns.remove((Integer) TurnType.getPrimaryTurn(oLanes[i]));
+				if (TurnType.getSecondaryTurn(oLanes[i]) != 0) {
+					possibleTurns.remove((Integer) TurnType.getSecondaryTurn(oLanes[i]));
+				}
+				if (TurnType.getTertiaryTurn(oLanes[i]) != 0) {
+					possibleTurns.remove((Integer) TurnType.getTertiaryTurn(oLanes[i]));
+				}
+			}
+		}
+		return possibleTurns;
 	}
 
 	private boolean isMotorway(RouteSegmentResult s){

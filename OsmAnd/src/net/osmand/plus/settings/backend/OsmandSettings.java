@@ -3791,7 +3791,7 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SAFE_MODE = new BooleanPreference("safe_mode", false).makeGlobal();
-	public final OsmandPreference<Boolean> PT_SAFE_MODE = new BooleanPreference("pt_safe_mode", true).makeGlobal();
+	public final OsmandPreference<Boolean> PT_SAFE_MODE = new BooleanPreference("pt_safe_mode", false).makeGlobal();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference("native_rendering_failed_init", false).makeGlobal();
 
 	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference("use_opengl_render",
@@ -4135,23 +4135,27 @@ public class OsmandSettings {
 	 */
 	public enum DrivingRegion {
 
-		EUROPE_ASIA(R.string.driving_region_europe_asia, MetricsConstants.KILOMETERS_AND_METERS, false, false),
-		US(R.string.driving_region_us, MetricsConstants.MILES_AND_FEET, false, true),
-		CANADA(R.string.driving_region_canada, MetricsConstants.KILOMETERS_AND_METERS, false, true),
-		UK_AND_OTHERS(R.string.driving_region_uk, MetricsConstants.MILES_AND_METERS, true, false),
-		JAPAN(R.string.driving_region_japan, MetricsConstants.KILOMETERS_AND_METERS, true, false),
-		AUSTRALIA(R.string.driving_region_australia, MetricsConstants.KILOMETERS_AND_METERS, true, true);
+		EUROPE_ASIA(R.string.driving_region_europe_asia, MetricsConstants.KILOMETERS_AND_METERS, false),
+		US(R.string.driving_region_us, MetricsConstants.MILES_AND_FEET, false),
+		CANADA(R.string.driving_region_canada, MetricsConstants.KILOMETERS_AND_METERS, false),
+		UK_AND_OTHERS(R.string.driving_region_uk, MetricsConstants.MILES_AND_METERS, true),
+		JAPAN(R.string.driving_region_japan, MetricsConstants.KILOMETERS_AND_METERS, true),
+		AUSTRALIA(R.string.driving_region_australia, MetricsConstants.KILOMETERS_AND_METERS, true);
 
 		public final boolean leftHandDriving;
-		public final boolean americanSigns;
 		public final MetricsConstants defMetrics;
 		public final int name;
 
-		DrivingRegion(int name, MetricsConstants def, boolean leftHandDriving, boolean americanSigns) {
+		DrivingRegion(int name, MetricsConstants def, boolean leftHandDriving) {
 			this.name = name;
 			defMetrics = def;
 			this.leftHandDriving = leftHandDriving;
-			this.americanSigns = americanSigns;
+		}
+
+		public boolean isAmericanTypeSigns() {
+			return this == OsmandSettings.DrivingRegion.AUSTRALIA ||
+					this == OsmandSettings.DrivingRegion.US ||
+					this == OsmandSettings.DrivingRegion.CANADA;
 		}
 
 		public String getDescription(Context ctx) {

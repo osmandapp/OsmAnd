@@ -3762,4 +3762,5 @@ Pôr do Sol: %2$s</string>
     <string name="details_dialog_decr">Controlar a visibilidade dos detalhes adicionais mostrados no mapa</string>
     <string name="shared_string_night_map">Mapa noturno</string>
     <string name="shared_string_all_time">Tempo todo</string>
+    <string name="turn_screen_on_power_button_disabled">Desativado. Requer \'manter a tela ligada\' em \'tempo limite após a ativação\'.</string>
 </resources>

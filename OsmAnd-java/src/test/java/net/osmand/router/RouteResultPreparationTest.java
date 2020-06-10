@@ -38,15 +38,13 @@ public class RouteResultPreparationTest {
     private static RoutePlannerFrontEnd fe;
     private static RoutingContext ctx;
 
-    private String testName;
     private LatLon startPoint;
     private LatLon endPoint;
     private Map<Long, String> expectedResults;
 
-    private Log log = PlatformUtil.getLog(RouteResultPreparationTest.class);
+    protected Log log = PlatformUtil.getLog(RouteResultPreparationTest.class);
 
     public RouteResultPreparationTest(String testName, LatLon startPoint, LatLon endPoint, Map<Long, String> expectedResults) {
-        this.testName = testName;
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         this.expectedResults = expectedResults;
