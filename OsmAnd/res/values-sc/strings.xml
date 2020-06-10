@@ -3733,4 +3733,7 @@
     <string name="shared_string_delete_all_q">Iscantzellare totu\?</string>
     <string name="delete_all_actions_message_q">Ses seguru de chèrrere iscantzellare definitivamente %d atziones lestras\?</string>
     <string name="shared_string_all_time">Totu su tempus</string>
+    <string name="shared_string_meters">metros</string>
+    <string name="details_dialog_decr">Controlla sa visibilidade de delàllios additzionales ammustrados in sa mapa</string>
+    <string name="shared_string_night_map">Mapa noturna</string>
 </resources>
