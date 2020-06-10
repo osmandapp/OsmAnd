@@ -3738,7 +3738,7 @@
     <string name="turn_screen_on_wake_time_descr">Час очікування екрану після увімкнення. («%1$s» вимикає вимкнення екрану.)</string>
     <string name="keep_screen_on">Тримати екран увімкненим</string>
     <string name="keep_screen_off">Тримати екран вимкненим</string>
-    <string name="screen_timeout_descr">Якщо функція «%1$s» увімкнена, час роботи буде залежати від неї.</string>
+    <string name="screen_timeout_descr">Якщо функцію \"%1$s\" увімкнено, час роботи залежатиме від неї.</string>
     <string name="pseudo_mercator_projection">Псевдопроєкція Меркатора</string>
     <string name="one_image_per_tile">Один файл зображення на плитку</string>
     <string name="sqlite_db_file">Файл SQLiteDB</string>
