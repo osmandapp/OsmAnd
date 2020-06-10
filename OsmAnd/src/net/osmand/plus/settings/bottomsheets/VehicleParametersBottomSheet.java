@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +48,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
 	private BaseBottomSheetItem createBottomSheetItem(OsmandApplication app) {
 		final SizePreference preference = (SizePreference) getPreference();
-		View mainView = UiUtilities.getMaterialInflater(app, nightMode)
+		View mainView = UiUtilities.getMaterialInflater(getContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_edit_with_recyclerview, null);
 		String key = preference.getKey();
 		TextView title = mainView.findViewById(R.id.title);
@@ -65,7 +65,8 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		final HorizontalSelectionAdapter adapter = new HorizontalSelectionAdapter(app, nightMode);
 		final TextView metric = mainView.findViewById(R.id.metric);
 		metric.setText(app.getString(preference.getAssets().getMetricRes()));
-		final TextView text = mainView.findViewById(R.id.text_edit);
+		final RecyclerView recyclerView = mainView.findViewById(R.id.recycler_view);
+		final EditText text = mainView.findViewById(R.id.text_edit);
 		try {
 			currentValue = Float.parseFloat(preference.getValue());
 		} catch (NumberFormatException e) {
@@ -97,6 +98,10 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 				}
 				selectedItem = preference.getEntryFromValue(String.valueOf(currentValue));
 				adapter.setSelectedItem(selectedItem);
+				int itemPosition = adapter.getItemPosition(selectedItem);
+				if (itemPosition >= 0) {
+					recyclerView.smoothScrollToPosition(itemPosition);
+				}
 			}
 		});
 
@@ -108,11 +113,11 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 				currentValue = preference.getValueFromEntries(selectedItem);
 				String currentValueStr = currentValue == 0.0f ? "" : String.valueOf(currentValue + 0.01f);
 				text.setText(currentValueStr);
+				text.requestFocus();
+				text.setSelection(text.getText().length());
 				adapter.notifyDataSetChanged();
 			}
 		});
-
-		RecyclerView recyclerView = mainView.findViewById(R.id.recycler_view);
 		recyclerView.setAdapter(adapter);
 		adapter.setSelectedItem(selectedItem);
 		return new BaseBottomSheetItem.Builder()

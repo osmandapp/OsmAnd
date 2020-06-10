@@ -43,7 +43,7 @@
 		android:paddingBottom="@dimen/content_padding"
 		android:textColor="?android:textColorSecondary"
 		android:textSize="@dimen/default_list_text_size"
-		android:lineSpacingMultiplier="@dimen/bottom_sheet_info_spacing_multiplier"
+		android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
 		osmand:typeface="@string/font_roboto_regular"
 		tools:text="@string/weight_limit_description"
 		android:paddingEnd="@dimen/content_padding"
@@ -52,15 +52,14 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/content_padding_half"
 		android:layout_marginLeft="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding">
 
 		<LinearLayout
 			android:id="@+id/text"
-			android:paddingTop="@dimen/content_padding_half"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:gravity="center_vertical"
 			android:orientation="horizontal"
 			android:baselineAligned="false">
 
@@ -70,20 +69,19 @@
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				osmand:hintEnabled="false"
-				android:gravity="start"
 				android:layout_weight="1"
 				osmand:boxBackgroundColor="@color/material_text_input_layout_bg">
 
 				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/text_edit"
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:gravity="end"
+					android:layout_height="@dimen/favorites_list_item_height"
+					android:gravity="end|center_vertical"
 					android:inputType="numberDecimal"
 					android:maxLines="1"
 					android:maxLength="5"
-					android:minHeight="@dimen/favorites_list_item_height"
-					android:paddingBottom="@dimen/card_content_padding_large"
+					android:paddingTop="0dp"
+					android:paddingBottom="0dp"
 					android:paddingStart="@dimen/content_padding_small"
 					android:paddingLeft="@dimen/content_padding_small"
 					android:paddingRight="@dimen/content_padding_small"

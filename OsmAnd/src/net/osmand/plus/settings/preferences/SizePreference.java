@@ -81,7 +81,7 @@ public class SizePreference extends DialogPreference {
 
 	@Override
 	public CharSequence getSummary() {
-		String summary = "-";
+		String summary = entries[0];
 		String persistedString = getValue();
 		if (!persistedString.equals(defaultValue)) {
 			try {
@@ -89,7 +89,7 @@ public class SizePreference extends DialogPreference {
 				summary = String.format(getContext().getString(R.string.ltr_or_rtl_combine_via_space),
 						persistedString, getContext().getString(assets.getMetricShortRes()));
 			} catch (NumberFormatException e) {
-				summary = "-";
+				summary = entries[0];
 			}
 		}
 		return summary;
