@@ -63,6 +63,7 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 		app.getSettings().SPEED_CAMERAS_UNINSTALLED.set(true);
 		app.getSettings().SPEAK_SPEED_CAMERA.set(false);
 		app.getSettings().SHOW_CAMERAS.set(false);
+		app.getPoiTypes().excludeSpeedCameraPoiType();
 		SearchResultMatcher.setSpeedCamerasUninstalled(true);
 		Fragment targetFragment = getTargetFragment();
 		if (targetFragment instanceof OnSpeedCamerasUninstallListener) {

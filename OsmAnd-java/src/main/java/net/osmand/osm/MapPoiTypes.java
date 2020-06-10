@@ -945,4 +945,17 @@ public class MapPoiTypes {
 			return pat.isText();
 		}
 	}
+
+	public void excludeSpeedCameraPoiType() {
+		Iterator<PoiCategory> categoryIter = categories.iterator();
+		while (categoryIter.hasNext()) {
+			Iterator<PoiType> poiIter = categoryIter.next().getPoiTypes().iterator();
+			while (poiIter.hasNext()) {
+				PoiType poiType = poiIter.next();
+				if ("speed_camera".equals(poiType.getKeyName())) {
+					poiIter.remove();
+				}
+			}
+		}
+	}
 }
