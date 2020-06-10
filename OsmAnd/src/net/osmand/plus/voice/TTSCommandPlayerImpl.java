@@ -147,6 +147,10 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		} else if (ctx != null && vrt.isMute()) {
 			// sendAlertToAndroidWear(ctx, bld.toString());
 		}
+		// #5966: TTS Utterance for debugging
+		if (ctx != null && ctx.getSettings().DISPLAY_TTS_UTTERANCE.get()) {
+			((OsmandApplication) ctx.getApplicationContext()).showToastMessage(bld.toString());
+		}
 		return execute;
 	}
 

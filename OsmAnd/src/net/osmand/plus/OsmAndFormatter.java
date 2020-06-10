@@ -25,7 +25,10 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 
@@ -372,24 +375,55 @@ public class OsmAndFormatter {
 	public static String getPoiStringWithoutType(Amenity amenity, String locale, boolean transliterate) {
 		PoiCategory pc = amenity.getType();
 		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-		String nm = amenity.getSubType();
+		String typeName = amenity.getSubType();
 		if (pt != null) {
-			nm = pt.getTranslation();
-		} else if(nm != null){
-			nm = Algorithms.capitalizeFirstLetterAndLowercase(nm.replace('_', ' '));
+			typeName = pt.getTranslation();
+		} else if(typeName != null){
+			typeName = Algorithms.capitalizeFirstLetterAndLowercase(typeName.replace('_', ' '));
 		}
-		String n = amenity.getName(locale, transliterate);
-		if (n.indexOf(nm) != -1) {
+		String localName = amenity.getName(locale, transliterate);
+		if (typeName != null && localName.contains(typeName)) {
 			// type is contained in name e.g.
-			// n = "Bakery the Corner"
+			// localName = "Bakery the Corner"
 			// type = "Bakery"
 			// no need to repeat this
-			return n;
+			return localName;
 		}
-		if (n.length() == 0) {
-			return nm;
+		if (localName.length() == 0) {
+			return typeName;
 		}
-		return nm + " " + n; //$NON-NLS-1$
+		return typeName + " " + localName; //$NON-NLS-1$
+	}
+
+	public static List<String> getPoiStringsWithoutType(Amenity amenity, String locale, boolean transliterate) {
+		PoiCategory pc = amenity.getType();
+		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
+		String typeName = amenity.getSubType();
+		if (pt != null) {
+			typeName = pt.getTranslation();
+		} else if(typeName != null){
+			typeName = Algorithms.capitalizeFirstLetterAndLowercase(typeName.replace('_', ' '));
+		}
+		List<String> res = new ArrayList<>();
+		String localName = amenity.getName(locale, transliterate);
+		addPoiString(typeName, localName, res);
+		for (String name : amenity.getAllNames(true)) {
+			addPoiString(typeName, name, res);
+		}
+		for (String name : amenity.getAdditionalInfo().values()) {
+			addPoiString(typeName, name, res);
+		}
+		return res;
+	}
+
+	private static void addPoiString(String poiTypeName, String poiName, List<String> res) {
+		if (poiTypeName != null && poiName.contains(poiTypeName)) {
+			res.add(poiName);
+		}
+		if (poiName.length() == 0) {
+			res.add(poiTypeName);
+		}
+		res.add(poiTypeName + " " + poiName);
 	}
 
 	public static String getAmenityDescriptionContent(OsmandApplication ctx, Amenity amenity, boolean shortDescription) {

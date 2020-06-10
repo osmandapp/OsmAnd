@@ -1,0 +1,2143 @@
+{
+  "settings": {
+    "lat": "28.65172",
+    "lon": "77.22193",
+    "radiusLevel": 1,
+    "totalLimit": -1,
+    "lang": "",
+    "transliterateIfMissing": false,
+    "emptyQueryAllowed": false,
+    "sortByName": false
+  },
+  "phrase": "421, Sector 15A, Hisar",
+  "results": [
+    "421.25, <input>",
+    "421, Sector 15A, Hisar",
+    "Sector 15A, Hisar",
+    "Hisar",
+    "پل حصار",
+    "Hisarcık",
+    "Демир Хисар",
+    "Бачка Паланка",
+    "Tanwar Hospital, Hisar",
+    "Hisar",
+    "Eye-Q Super Speciality Eye Hospitals, Hisar, Jindal Chowk",
+    "Ravindra Hospital And Heart Center - Hisar",
+    "Kailash Hospital, Hisar",
+    "Sharda Hospital, Hisar",
+    "Geetanjali Hospital, Hisar",
+    "N. D. Hospital, Hisar",
+    "Jain Eye Hospital, Hisar",
+    "Sai Hospital, Hisar",
+    "Hisar",
+    "Surya Hospital, Hisar",
+    "Goverment Polytechnic Hisar",
+    "Hisar Children Hospital",
+    "Hisar Junction",
+    "Sharma Nursing Home, Hisar",
+    "Eye Q Super Speciality Eye Hospitals, Hisar",
+    "Aakash Hospital, Hisar",
+    "Hisar Bus Stand",
+    "Malik Nursing Home, Hisar",
+    "District Civil Hospital Hisar",
+    "Veer Hospital, Hisar",
+    "Sangwan Hospital, Hisar"
+  ],
+  "amenities": [
+    {
+      "name": "Hisarcık",
+      "lat": "39.25052",
+      "lon": "29.23127",
+      "id": -28899,
+      "subType": "town",
+      "type": "administrative"
+    },
+    {
+      "name": "Sangwan Hospital, Hisar",
+      "lat": "29.50597",
+      "lon": "75.88285",
+      "id": 14018526132,
+      "subType": "hospital",
+      "type": "healthcare"
+    },
+    {
+      "name": "Goverment Polytechnic Hisar",
+      "lat": "29.17199",
+      "lon": "75.74159",
+      "id": 367272909,
+      "subType": "college",
+      "type": "education"
+    },
+    {
+      "name": "Surya Hospital, Hisar",
+      "lat": "29.13962",
+      "lon": "75.73537",
+      "id": 14002788814,
+      "subType": "hospital",
+      "type": "healthcare"
+    },
+    {
+      "name": "Демир Хисар",
+      "enName": "Demir Hisar",
+      "lat": "41.21991",
+      "lon": "21.20207",
+      "id": -28017,
+      "subType": "town",
+      "type": "administrative"
+    },
+    {
+      "name": "Hisar",
+      "names": {
+        "ja": "ヒサール"
+      },
+      "lat": "29.17879",
+      "lon": "75.75726",
+      "id": 366474597,
+      "subType": "aerodrome",
+      "type": "transportation",
+      "additionalInfo": {
+        "iata": "HSS"
+      }
+    },
+    {
+      "name": "Hisar Bus Stand",
+      "lat": "29.16556",
+      "lon": "75.71857",
+      "id": 367259217,
+      "subType": "bus_station",
+      "type": "transportation",
+      "additionalInfo": {
+        "bus_yes": "yes"
+      }
+    },
+    {
+      "name": "Hisar Bus Stand",
+      "lat": "29.16556",
+      "lon": "75.71857",
+      "id": 367259217,
+      "subType": "public_transport_station",
+      "type": "transportation",
+      "additionalInfo": {
+        "bus_yes": "yes"
+      }
+    },
+    {
+      "name": "Veer Hospital, Hisar",
+      "lat": "29.50171",
+      "lon": "75.88705",
+      "id": 14016686980,
+      "subType": "hospital",
+      "type": "healthcare"
+    },
+    {
+      "name": "Ravindra Hospital And Heart Center - Hisar",
+      "lat": "29.13312",
+      "lon": "75.74616",
+      "id": 13994070504,
+      "subType": "hospital",
+      "type": "healthcare"
+    },
+    {
+      "name": "Hisar Children Hospital",
+      "lat": "29.14841",
+      "lon": "75.72445",
+      "id": 14006901018,
+      "subType": "hospital",
+      "type": "healthcare"
+    },
+    {
+      "name": "Geetanjali Hospital, Hisar",
+      "lat": "29.13213",
+      "lon": "75.74344",
+      "id": 13995400392,
+      "subType": "hospital",
+      "type": "healthcare",
+      "additionalInfo": {
+        "website": "http://www.geetanjalihospitalhisar.com",
+        "email": "geetanjalihospitalhisar@gmail.com"
+      }
+    },
+    {
+      "name": "Hisar",
+      "names": {
+        "ar": "حصار",
+        "hi": "हिसार",
+        "de": "Hisar",
+        "ru": "Хисар",
+        "kn": "ಹಿಸಾರ್",
+        "ja": "ヒサール",
+        "fa": "حصار",
+        "fr": "Hisar",
+        "ta": "ஹிசார்",
+        "es": "Hisar"
+      },
+      "lat": "29.15628",
+      "lon": "75.72921",
+      "id": -81021,
+      "subType": "city",
+      "type": "administrative",
+      "additionalInfo": {
+        "population": "301240"
+      }
+    },
+    {
+      "name": "Tanwar Hospital, Hisar",
+      "lat": "29.09366",
+      "lon": "75.95949",
+      "id": 14017613498,
+      "subType": "hospital",
+      "type": "healthcare"
+    },
+    {
+      "name": "Eye-Q Super Speciality Eye Hospitals, Hisar, Jindal Chowk",
+      "lat": "29.13408",
+      "lon": "75.74666",
+      "id": 14002391512,
+      "subType": "hospital",
+      "type": "healthcare",
+      "additionalInfo": {
+        "website": "http://www.eyeqindia.com/"
+      }
+    },
+    {
+      "name": "Kailash Hospital, Hisar",
+      "lat": "29.13050",
+      "lon": "75.74309",
+      "id": 13994689126,
+      "subType": "hospital",
+      "type": "healthcare"
+    },
+    {
+      "name": "Aakash Hospital, Hisar",
+      "lat": "29.16350",
+      "lon": "75.71775",
+      "id": 14003764922,
+      "subType": "hospital",
+      "type": "healthcare"
+    },
+    {
+      "name": "Hisar",
+      "names": {
+        "hi": "हिसार",
+        "pa": "ਹਿਸਾਰ",
+        "de": "Hisar",
+        "ar": "حصار",
+        "kn": "ಹಿಸಾರ್",
+        "ru": "Хисар",
+        "ja": "ヒサール",
+        "fa": "حصار",
+        "fr": "Hisar",
+        "ur": "حصار",
+        "ta": "ஹிசார்",
+        "es": "Hisar"
+      },
+      "lat": "29.15628",
+      "lon": "75.72921",
+      "id": 1542464122,
+      "subType": "city",
+      "type": "administrative",
+      "additionalInfo": {
+        "population": "301240",
+        "wikipedia": "http://en.wikipedia.org/wiki/Hisar (city)"
+      }
+    },
+    {
+      "name": "پل حصار",
+      "enName": "Pul-e Hisar",
+      "lat": "35.62017",
+      "lon": "69.46578",
+      "id": -35021,
+      "subType": "town",
+      "type": "administrative"
+    },
+    {
+      "name": "N. D. Hospital, Hisar",
+      "lat": "29.13376",
+      "lon": "75.74337",
+      "id": 13987934828,
+      "subType": "hospital",
+      "type": "healthcare"
+    },
+    {
+      "name": "Sharda Hospital, Hisar",
+      "lat": "29.13415",
+      "lon": "75.74430",
+      "id": 14020205240,
+      "subType": "hospital",
+      "type": "healthcare"
+    },
+    {
+      "name": "Hisar Junction",
+      "lat": "29.15235",
+      "lon": "75.72458",
+      "id": 3886032948,
+      "subType": "public_transport_station",
+      "type": "transportation",
+      "additionalInfo": {
+        "network": "IR",
+        "ref": "HSR",
+        "operator": "NR",
+        "wikipedia": "http://en.wikipedia.org/wiki/Hisar Junction railway station"
+      }
+    },
+    {
+      "name": "Hisar Junction",
+      "lat": "29.15235",
+      "lon": "75.72458",
+      "id": 3886032948,
+      "subType": "railway_station",
+      "type": "transportation",
+      "additionalInfo": {
+        "network": "IR",
+        "ref": "HSR",
+        "operator": "NR",
+        "wikipedia": "http://en.wikipedia.org/wiki/Hisar Junction railway station"
+      }
+    },
+    {
+      "name": "Malik Nursing Home, Hisar",
+      "lat": "29.15555",
+      "lon": "75.71372",
+      "id": 14020678628,
+      "subType": "clinic",
+      "type": "healthcare"
+    },
+    {
+      "name": "Hisar",
+      "lat": "29.10361",
+      "lon": "75.88634",
+      "id": 250986657,
+      "subType": "power_substation",
+      "type": "man_made",
+      "additionalInfo": {
+        "substation_transmission": "transmission",
+        "voltage": "400000;220000"
+      }
+    },
+    {
+      "name": "Бачка Паланка",
+      "enName": "Bačka Palanka",
+      "names": {
+        "de": "Plankenburg",
+        "ru": "Бачка Паланка",
+        "sk": "Báčska Palanka",
+        "hu": "Palánka",
+        "tr": "Küçük Hisar",
+        "sr": "Бачка Паланка"
+      },
+      "lat": "45.25025",
+      "lon": "19.39608",
+      "id": -90393,
+      "subType": "town",
+      "type": "administrative",
+      "additionalInfo": {
+        "population": "29449"
+      }
+    },
+    {
+      "name": "Sharma Nursing Home, Hisar",
+      "lat": "29.15231",
+      "lon": "75.71674",
+      "id": 13995732832,
+      "subType": "hospital",
+      "type": "healthcare",
+      "additionalInfo": {
+        "website": "http://snhhisar.4t.com/",
+        "email": "snhhisar@sancharnet.in"
+      }
+    },
+    {
+      "name": "District Civil Hospital Hisar",
+      "lat": "29.16992",
+      "lon": "75.71855",
+      "id": 14015078342,
+      "subType": "hospital",
+      "type": "healthcare",
+      "additionalInfo": {
+        "description": "Civil Hospital"
+      }
+    },
+    {
+      "name": "Jain Eye Hospital, Hisar",
+      "lat": "29.13286",
+      "lon": "75.74142",
+      "id": 13987934496,
+      "subType": "hospital",
+      "type": "healthcare"
+    },
+    {
+      "name": "Eye Q Super Speciality Eye Hospitals, Hisar",
+      "lat": "29.16957",
+      "lon": "75.72136",
+      "id": 13988029790,
+      "subType": "hospital",
+      "type": "healthcare"
+    },
+    {
+      "name": "Sai Hospital, Hisar",
+      "lat": "29.13241",
+      "lon": "75.74093",
+      "id": 13995541100,
+      "subType": "hospital",
+      "type": "healthcare"
+    }
+  ],
+  "cities": [
+    {
+      "name": "Bhuna",
+      "names": {
+        "hi": "भूना"
+      },
+      "lat": "29.53355",
+      "lon": "75.70522",
+      "id": 1798597526,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Ladwa",
+      "lat": "29.99482",
+      "lon": "77.04969",
+      "id": 7251240345,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sangarya",
+      "names": {
+        "ta": "சங்கரிய"
+      },
+      "lat": "29.79144",
+      "lon": "74.46440",
+      "id": 245768836,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Thanesar",
+      "names": {
+        "ar": "تانيسر",
+        "hi": "थानेसर",
+        "kn": "ಥಾನೇಸರ್",
+        "ur": "تھانیسر"
+      },
+      "lat": "29.97506",
+      "lon": "76.83094",
+      "id": 245769218,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Ferozepur Jhirka",
+      "names": {
+        "hi": "फ़िरोज़पुर झिरका"
+      },
+      "lat": "27.78768",
+      "lon": "76.94649",
+      "id": 1777068877,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Nising",
+      "names": {
+        "hi": "निसिंग"
+      },
+      "lat": "29.69030",
+      "lon": "76.75050",
+      "id": 245768718,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Bawal",
+      "names": {
+        "hi": "बावल",
+        "uk": "Бавал"
+      },
+      "lat": "28.07136",
+      "lon": "76.58089",
+      "id": 3195684306,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Pundri",
+      "names": {
+        "hi": "पूण्डरी"
+      },
+      "lat": "29.76076",
+      "lon": "76.55905",
+      "id": 245768843,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sonipat",
+      "names": {
+        "ar": "سوني بت",
+        "hi": "सोनीपत",
+        "pa": "ਸੋਨੀਪਤ",
+        "ru": "Сонипат",
+        "ja": "ソーニーパト",
+        "ta": "சோனிபத்",
+        "ur": "سونی پت"
+      },
+      "lat": "29.00331",
+      "lon": "77.01673",
+      "id": 245767308,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Panchkula",
+      "names": {
+        "hi": "पंचकुला",
+        "pa": "ਪੰਚਕੁਲਾ",
+        "ja": "パンチクラー",
+        "ta": "பஞ்ச்குலா"
+      },
+      "lat": "30.69754",
+      "lon": "76.85511",
+      "id": 1432932807,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Shahzadpur",
+      "lat": "30.44641",
+      "lon": "77.03342",
+      "id": 6600814817,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Narnaul",
+      "names": {
+        "hi": "नारनौल"
+      },
+      "lat": "28.04385",
+      "lon": "76.10620",
+      "id": 1739310619,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sadhaura",
+      "names": {
+        "hi": "साढौरा"
+      },
+      "lat": "30.38535",
+      "lon": "77.22123",
+      "id": 1804140668,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Gurugram",
+      "enName": "Gurugram",
+      "names": {
+        "ar": "غرو غرام",
+        "hi": "गुरुग्राम",
+        "kn": "ಗುರುಗ್ರಾಮ",
+        "ja": "グルガーオン",
+        "fa": "گورگان",
+        "ta": "குர்காவுன்",
+        "ur": "گرو گرام"
+      },
+      "lat": "28.46461",
+      "lon": "77.02992",
+      "id": 2718939516,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Faridabad",
+      "enName": "Faridabád",
+      "names": {
+        "de": "Faridabad",
+        "hi": "फ़रीदाबाद",
+        "ar": "فريد آباد",
+        "pa": "ਫ਼ਰੀਦਾਬਾਦ",
+        "kn": "ಫರೀದಬಾದ್",
+        "ru": "Фаридабад",
+        "uk": "Фарідабад",
+        "ja": "ファリーダーバード",
+        "fr": "Faridabad",
+        "ta": "பரிதாபாது",
+        "ur": "فریدآباد",
+        "es": "Faridabad"
+      },
+      "lat": "28.40284",
+      "lon": "77.30856",
+      "id": 245765268,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Radaur",
+      "names": {
+        "hi": "रादौर"
+      },
+      "lat": "30.03020",
+      "lon": "77.15119",
+      "id": 311934434,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Shahbad",
+      "lat": "30.16617",
+      "lon": "76.86786",
+      "id": 7090718615,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Kalka",
+      "names": {
+        "hi": "कालका"
+      },
+      "lat": "30.83668",
+      "lon": "76.93693",
+      "id": 245770782,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Kalanwali",
+      "names": {
+        "hi": "कालांवाली"
+      },
+      "lat": "29.83306",
+      "lon": "74.97609",
+      "id": 1396800702,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Dharuhera",
+      "lat": "28.20552",
+      "lon": "76.79531",
+      "id": 3159106993,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Mandi Dabwali",
+      "names": {
+        "hi": "मंडी डबवाली",
+        "pa": "ਮੰਡੀ ਡੱਬਵਾਲੀ"
+      },
+      "lat": "29.96571",
+      "lon": "74.70294",
+      "id": 1396800704,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Hansi",
+      "names": {
+        "ar": "هانسي",
+        "hi": "हांसी",
+        "ja": "ハーンシー",
+        "ur": "ہانسی"
+      },
+      "lat": "29.10532",
+      "lon": "75.96341",
+      "id": 1396151305,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Charkhi Dadri",
+      "names": {
+        "hi": "चरखी दादरी",
+        "pa": "ਚਰਖੀ ਦਾਦਰੀ",
+        "ja": "チャルキ・ダドリ"
+      },
+      "lat": "28.59199",
+      "lon": "76.27198",
+      "id": 245766042,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Uklana",
+      "names": {
+        "hi": "उकलाना"
+      },
+      "lat": "29.51244",
+      "lon": "75.87820",
+      "id": 1396322940,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Narwana",
+      "names": {
+        "hi": "नरवाना",
+        "ta": "நார்வேனா"
+      },
+      "lat": "29.59576",
+      "lon": "76.11857",
+      "id": 1396221563,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Hisar",
+      "enName": "Hisar",
+      "names": {
+        "de": "Hisar",
+        "hi": "हिसार",
+        "ar": "حصار",
+        "pa": "ਹਿਸਾਰ",
+        "kn": "ಹಿಸಾರ್",
+        "ru": "Хисар",
+        "ja": "ヒサール",
+        "fa": "حصار",
+        "fr": "Hisar",
+        "ta": "ஹிசார்",
+        "ur": "حصار",
+        "es": "Hisar"
+      },
+      "lat": "29.15627",
+      "lon": "75.72923",
+      "id": 771232061,
+      "type": "CITY",
+      "listOfStreets": [
+        {
+          "name": "Hissar Ambala Road",
+          "lat": "29.20453",
+          "lon": "75.74565",
+          "id": 856
+        },
+        {
+          "name": "<Hisar>",
+          "enName": "<Hisar>",
+          "names": {
+            "de": "<Hisar>",
+            "hi": "<हिसार>",
+            "ar": "<حصار>",
+            "pa": "<ਹਿਸਾਰ>",
+            "kn": "<ಹಿಸಾರ್>",
+            "ru": "<Хисар>",
+            "ja": "<ヒサール>",
+            "fa": "<حصار>",
+            "fr": "<Hisar>",
+            "ta": "<ஹிசார்>",
+            "ur": "<حصار>",
+            "es": "<Hisar>"
+          },
+          "lat": "29.14695",
+          "lon": "75.70780",
+          "id": 1470
+        },
+        {
+          "name": "Airport Road",
+          "lat": "29.17738",
+          "lon": "75.75277",
+          "id": 868
+        },
+        {
+          "name": "Bhai Parmanand Marg",
+          "names": {
+            "hi": "भाई पर्मानंद मार्ग"
+          },
+          "lat": "29.13758",
+          "lon": "75.72243",
+          "id": 870
+        },
+        {
+          "name": "Hisar Cantt",
+          "lat": "29.11387",
+          "lon": "75.81706",
+          "id": 1097
+        },
+        {
+          "name": "Raipur Road",
+          "lat": "29.15968",
+          "lon": "75.76535",
+          "id": 869
+        },
+        {
+          "name": "Satya Nagar",
+          "lat": "29.16106",
+          "lon": "75.70730",
+          "id": 87
+        },
+        {
+          "name": "Sector 15A",
+          "lat": "29.13385",
+          "lon": "75.71799",
+          "id": 198,
+          "buildings": [
+            {
+              "name": "394",
+              "lat": "29.13394",
+              "lon": "75.71696"
+            },
+            {
+              "name": "395",
+              "lat": "29.13406",
+              "lon": "75.71702"
+            },
+            {
+              "name": "395",
+              "lat": "29.13415",
+              "lon": "75.71713"
+            },
+            {
+              "name": "396",
+              "lat": "29.13411",
+              "lon": "75.71722"
+            },
+            {
+              "name": "397",
+              "lat": "29.13408",
+              "lon": "75.71730"
+            },
+            {
+              "name": "398",
+              "lat": "29.13406",
+              "lon": "75.71739"
+            },
+            {
+              "name": "399",
+              "lat": "29.13402",
+              "lon": "75.71747"
+            },
+            {
+              "name": "400",
+              "lat": "29.13400",
+              "lon": "75.71756"
+            },
+            {
+              "name": "401",
+              "lat": "29.13398",
+              "lon": "75.71764"
+            },
+            {
+              "name": "402",
+              "lat": "29.13396",
+              "lon": "75.71773"
+            },
+            {
+              "name": "403",
+              "lat": "29.13393",
+              "lon": "75.71782"
+            },
+            {
+              "name": "404",
+              "lat": "29.13389",
+              "lon": "75.71790"
+            },
+            {
+              "name": "405",
+              "lat": "29.13385",
+              "lon": "75.71799"
+            },
+            {
+              "name": "406",
+              "lat": "29.13383",
+              "lon": "75.71810"
+            },
+            {
+              "name": "407",
+              "lat": "29.13378",
+              "lon": "75.71818"
+            },
+            {
+              "name": "421",
+              "lat": "29.13488",
+              "lon": "75.71852"
+            },
+            {
+              "name": "422",
+              "lat": "29.13483",
+              "lon": "75.71848"
+            },
+            {
+              "name": "423",
+              "lat": "29.13473",
+              "lon": "75.71844"
+            },
+            {
+              "name": "424",
+              "lat": "29.13466",
+              "lon": "75.71842"
+            },
+            {
+              "name": "425",
+              "lat": "29.13458",
+              "lon": "75.71835"
+            },
+            {
+              "name": "426",
+              "lat": "29.13453",
+              "lon": "75.71833"
+            },
+            {
+              "name": "427",
+              "lat": "29.13445",
+              "lon": "75.71829"
+            },
+            {
+              "name": "428",
+              "lat": "29.13438",
+              "lon": "75.71822"
+            },
+            {
+              "name": "429",
+              "lat": "29.13432",
+              "lon": "75.71820"
+            },
+            {
+              "name": "430",
+              "lat": "29.13424",
+              "lon": "75.71816"
+            },
+            {
+              "name": "431",
+              "lat": "29.13419",
+              "lon": "75.71812"
+            },
+            {
+              "name": "432",
+              "lat": "29.13406",
+              "lon": "75.71803"
+            },
+            {
+              "name": "432",
+              "lat": "29.13408",
+              "lon": "75.71807"
+            },
+            {
+              "name": "433",
+              "lat": "29.13490",
+              "lon": "75.71724"
+            },
+            {
+              "name": "434",
+              "lat": "29.13483",
+              "lon": "75.71719"
+            },
+            {
+              "name": "435",
+              "lat": "29.13475",
+              "lon": "75.71715"
+            },
+            {
+              "name": "436",
+              "lat": "29.13468",
+              "lon": "75.71713"
+            },
+            {
+              "name": "437",
+              "lat": "29.13460",
+              "lon": "75.71709"
+            },
+            {
+              "name": "438",
+              "lat": "29.13451",
+              "lon": "75.71707"
+            },
+            {
+              "name": "439",
+              "lat": "29.13445",
+              "lon": "75.71704"
+            },
+            {
+              "name": "440",
+              "lat": "29.13438",
+              "lon": "75.71702"
+            },
+            {
+              "name": "441",
+              "lat": "29.13432",
+              "lon": "75.71698"
+            },
+            {
+              "name": "442",
+              "lat": "29.13426",
+              "lon": "75.71694"
+            },
+            {
+              "name": "443",
+              "lat": "29.13417",
+              "lon": "75.71689"
+            },
+            {
+              "name": "444",
+              "lat": "29.13409",
+              "lon": "75.71685"
+            },
+            {
+              "name": "445",
+              "lat": "29.13400",
+              "lon": "75.71681"
+            },
+            {
+              "name": "446-P",
+              "lat": "29.13393",
+              "lon": "75.71679"
+            },
+            {
+              "name": "460",
+              "lat": "29.13505",
+              "lon": "75.71702"
+            },
+            {
+              "name": "461-P",
+              "lat": "29.13518",
+              "lon": "75.71700"
+            },
+            {
+              "name": "462",
+              "lat": "29.13514",
+              "lon": "75.71709"
+            },
+            {
+              "name": "463",
+              "lat": "29.13513",
+              "lon": "75.71719"
+            },
+            {
+              "name": "464",
+              "lat": "29.13509",
+              "lon": "75.71728"
+            },
+            {
+              "name": "465",
+              "lat": "29.13505",
+              "lon": "75.71734"
+            },
+            {
+              "name": "466",
+              "lat": "29.13503",
+              "lon": "75.71743"
+            },
+            {
+              "name": "467",
+              "lat": "29.13499",
+              "lon": "75.71752"
+            },
+            {
+              "name": "468",
+              "lat": "29.13496",
+              "lon": "75.71758"
+            },
+            {
+              "name": "469",
+              "lat": "29.13492",
+              "lon": "75.71764"
+            },
+            {
+              "name": "470",
+              "lat": "29.13488",
+              "lon": "75.71773"
+            },
+            {
+              "name": "471",
+              "lat": "29.13486",
+              "lon": "75.71779"
+            },
+            {
+              "name": "472",
+              "lat": "29.13481",
+              "lon": "75.71790"
+            },
+            {
+              "name": "473",
+              "lat": "29.13477",
+              "lon": "75.71801"
+            },
+            {
+              "name": "474",
+              "lat": "29.13471",
+              "lon": "75.71812"
+            },
+            {
+              "name": "476",
+              "lat": "29.13490",
+              "lon": "75.71831"
+            }
+          ]
+        },
+        {
+          "name": "Tosham Road",
+          "lat": "29.13102",
+          "lon": "75.74170",
+          "id": 773
+        },
+        {
+          "name": "gali no 3",
+          "lat": "29.12693",
+          "lon": "75.70822",
+          "id": 117
+        }
+      ],
+      "init": 1,
+      "matchCity": 1,
+      "matchStreet": 1
+    },
+    {
+      "name": "New Delhi",
+      "enName": "New Delhi",
+      "names": {
+        "hi": "नई दिल्ली",
+        "pt": "Nova Deli",
+        "hr": "New Delhi",
+        "ht": "Niou Deli",
+        "hu": "Újdelhi",
+        "lmo": "New Delhi",
+        "yi": "ניי דעלי",
+        "hy": "Նյու Դելի",
+        "nah": "Yancuīc Deli",
+        "yo": "New Delhi",
+        "pms": "New Delhi",
+        "ia": "Nove Delhi",
+        "nan": "Sin Delhi",
+        "id": "New Delhi",
+        "sco": "New Delhi",
+        "scn": "Nova Delhi",
+        "ext": "Nueva Delhi",
+        "qu": "Musuq Dilhi",
+        "af": "Nieu-Delhi",
+        "pnb": "نئی دلی",
+        "io": "Nova-Delhi",
+        "is": "Nýja Delí",
+        "it": "Nuova Delhi",
+        "am": "ኒው ዴሊ",
+        "an": "Nueva Delhi",
+        "zh": "新德里",
+        "ar": "دلهي الجديدة",
+        "ja": "ニューデリー",
+        "ro": "New Delhi",
+        "be": "Нью-Дэлі",
+        "ru": "Нью-Дели",
+        "bg": "Ню Делхи",
+        "bn": "নতুন দিল্লি",
+        "jv": "New Delhi",
+        "bo": "ནེའུ་དིལ་ལི།",
+        "sa": "नवदेहली",
+        "br": "New Delhi",
+        "bs": "New Delhi",
+        "ka": "ნიუ-დელი",
+        "si": "නව දිල්ලිය",
+        "sk": "Naí Dillí",
+        "sl": "New Delhi",
+        "so": "New Delhi",
+        "ca": "Nova Delhi",
+        "sq": "New Delhi",
+        "sr": "Њу Делхи",
+        "kk": "Нью-Дели",
+        "mzn": "نو دهلی",
+        "kl": "New Delhi",
+        "kn": "ಹೊಸ ದೆಹಲಿ",
+        "sv": "New Delhi",
+        "ko": "뉴델리",
+        "sw": "New Delhi",
+        "ks": "نٔو دلھی",
+        "ku": "Delhiya Nû",
+        "co": "New Delhi",
+        "ta": "புது தில்லி",
+        "cs": "Nové Dillí",
+        "te": "క్రొత్త ఢిల్లీ",
+        "tg": "Ню-Дели",
+        "th": "นิวเดลี",
+        "la": "Dellium Novum",
+        "cy": "Delhi Newydd",
+        "lb": "Nei-Delhi",
+        "tl": "Bagong Delhi",
+        "da": "New Delhi",
+        "tr": "Yeni Delhi",
+        "be-tarask": "Нью-Дэлі",
+        "de": "Neu-Delhi",
+        "ace": "New delhi",
+        "hif": "New Delhi",
+        "lt": "Naujasis Delis",
+        "lv": "Ņūdeli",
+        "simple": "New Delhi",
+        "lij": "Neuva Delhi",
+        "diq": "Delhiyo Newe",
+        "dv": "ނިއުދިއްލީ",
+        "ug": "Yéngi Déhli",
+        "uk": "Нью-Делі",
+        "fiu-vro": "New Delhi",
+        "mg": "New Delhi",
+        "mi": "New Delhi",
+        "pam": "New Delhi",
+        "ur": "نئی دہلی",
+        "mk": "Њу Делхи",
+        "ml": "ന്യൂ ഡെൽഹി",
+        "mn": "Шинэ Дели",
+        "mr": "नवी दिल्ली",
+        "ms": "New Delhi",
+        "el": "Νέο Δελχί",
+        "eo": "Nov-Delhio",
+        "my": "နယူးဒေလီမြို့",
+        "es": "Nueva Delhi",
+        "et": "New Delhi",
+        "eu": "New Delhi",
+        "vi": "Tân Delhi",
+        "bat-smg": "Naujasės Delės",
+        "ne": "नयाँ दिल्ली",
+        "fa": "دهلی نو",
+        "nl": "New Delhi",
+        "nn": "New Delhi",
+        "no": "New Delhi",
+        "fi": "New Delhi",
+        "yue": "新德里",
+        "fr": "New Delhi",
+        "fy": "Nij Delly",
+        "nov": "Novi Deli",
+        "oc": "Nòva Delhi",
+        "crh": "Nyu Deli",
+        "ga": "Nua-Deilí",
+        "ang": "Nīƿe Delhi",
+        "sah": "Саҥа Дели",
+        "gd": "New Delhi",
+        "os": "Нью-Дели",
+        "gl": "Nova Deli - नई दिल्ली",
+        "war": "New Delhi",
+        "bpy": "নুৱা দিল্লী",
+        "gv": "Delhi Noa",
+        "pa": "ਨਵੀਂ ਦਿੱਲੀ",
+        "cbk-zam": "Nueva Delhi",
+        "ckb": "نیودلھی",
+        "pl": "Nowe Delhi",
+        "he": "ניו דלהי"
+      },
+      "lat": "28.61418",
+      "lon": "77.20227",
+      "id": 16173236,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Barwala",
+      "names": {
+        "hi": "बरवाला"
+      },
+      "lat": "29.36612",
+      "lon": "75.90707",
+      "id": 1396322291,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Barara",
+      "lat": "30.21422",
+      "lon": "77.03836",
+      "id": 7090772207,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Hassanpur",
+      "names": {
+        "hi": "हसनपुर"
+      },
+      "lat": "27.96892",
+      "lon": "77.49422",
+      "id": 2429775200,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Bawani Khera",
+      "names": {
+        "hi": "बवानी खेड़ा"
+      },
+      "lat": "28.94977",
+      "lon": "76.03175",
+      "id": 1395398114,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Bhiwani",
+      "enName": "Bhiwani",
+      "names": {
+        "de": "Bhiwani",
+        "hi": "भिवानी",
+        "pa": "ਭਿਵਾਨੀ",
+        "kn": "ಭಿವಾನಿ",
+        "ru": "Вхивани",
+        "ja": "ビワーニー",
+        "fr": "Bhiwani",
+        "es": "Bhiwani"
+      },
+      "lat": "28.79317",
+      "lon": "76.13913",
+      "id": 1395398115,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Manesar",
+      "names": {
+        "ja": "マネサル"
+      },
+      "lat": "28.35639",
+      "lon": "76.93718",
+      "id": 1996955018,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Taraori",
+      "names": {
+        "ar": "تراوري",
+        "hi": "तरावड़ी",
+        "ur": "تراوری"
+      },
+      "lat": "29.80046",
+      "lon": "76.92738",
+      "id": 2634530968,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Chandhat",
+      "names": {
+        "hi": "चाँदहट"
+      },
+      "lat": "28.12234",
+      "lon": "77.44651",
+      "id": 2429803332,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Kharkhoda",
+      "names": {
+        "hi": "खरखौदा"
+      },
+      "lat": "28.87773",
+      "lon": "76.91180",
+      "id": 2737939553,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Jhajjar",
+      "names": {
+        "hi": "झज्जर",
+        "pa": "ਝੱਜਰ"
+      },
+      "lat": "28.60668",
+      "lon": "76.65808",
+      "id": 1397401437,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Taoru",
+      "names": {
+        "hi": "तावड़ू"
+      },
+      "lat": "28.20571",
+      "lon": "76.94506",
+      "id": 2953319839,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Safidon",
+      "names": {
+        "hi": "सफीदों",
+        "kn": "ಸಫೀದೋಂ"
+      },
+      "lat": "29.40476",
+      "lon": "76.65991",
+      "id": 1802090175,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Jind",
+      "enName": "Jind",
+      "names": {
+        "ar": "جند",
+        "de": "Jind",
+        "hi": "जीन्द",
+        "pa": "ਜੀਂਦ",
+        "kn": "ಜಿಂದ್",
+        "ja": "ジンド",
+        "fr": "Jind",
+        "ur": "جند",
+        "es": "Jind"
+      },
+      "lat": "29.31404",
+      "lon": "76.31795",
+      "id": 1144143339,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Loharu",
+      "lat": "28.42795",
+      "lon": "75.80548",
+      "id": 245765373,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Rewari",
+      "enName": "Rewari",
+      "names": {
+        "hi": "रेवाड़ी",
+        "pa": "ਰੇਵਾੜੀ",
+        "kn": "ರೇವರಿ",
+        "ja": "レーワーリー",
+        "ta": "ரேவாரி"
+      },
+      "lat": "28.19565",
+      "lon": "76.61652",
+      "id": 520986776,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Mohna",
+      "names": {
+        "hi": "मोहना"
+      },
+      "lat": "28.22288",
+      "lon": "77.44479",
+      "id": 2429827919,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Indri",
+      "names": {
+        "hi": "इन्द्री"
+      },
+      "lat": "29.87894",
+      "lon": "77.05206",
+      "id": 311937677,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Bapoli",
+      "lat": "29.33729",
+      "lon": "77.08514",
+      "id": 7250349820,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Gohana",
+      "names": {
+        "ar": "غوهانا",
+        "hi": "गोहाना",
+        "kn": "ಗೊಹಾನ",
+        "ja": "ゴハナ",
+        "ta": "கோஹனா",
+        "ur": "گوہانا"
+      },
+      "lat": "29.13722",
+      "lon": "76.70452",
+      "id": 245767678,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Karnal",
+      "enName": "Karnal",
+      "names": {
+        "ar": "كرنال",
+        "de": "Karnal",
+        "hi": "करनाल",
+        "pa": "ਕਰਨਾਲ",
+        "kn": "ಕರ್ನಾಲ್",
+        "ja": "カルナール",
+        "bn": "কার্নাল",
+        "fr": "Karnal",
+        "ta": "கர்னால்",
+        "ur": "کرنال",
+        "es": "Karnal"
+      },
+      "lat": "29.68033",
+      "lon": "76.98963",
+      "id": 982143511,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Chhatar",
+      "names": {
+        "hi": "छतर"
+      },
+      "lat": "29.51294",
+      "lon": "76.31348",
+      "id": 5286438532,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Badhra",
+      "names": {
+        "hi": "बाढड़ा",
+        "ja": "バドラ"
+      },
+      "lat": "28.51086",
+      "lon": "75.93739",
+      "id": 3669656933,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Siwani",
+      "names": {
+        "hi": "सिवानी",
+        "kn": "ಸಿವಾನಿ",
+        "ja": "シワニ"
+      },
+      "lat": "28.91103",
+      "lon": "75.61234",
+      "id": 1757600990,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Matenhail",
+      "lat": "28.57789",
+      "lon": "76.46811",
+      "id": 7090767302,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Ambala",
+      "enName": "Ambala",
+      "names": {
+        "de": "Ambala",
+        "hi": "अम्बाला",
+        "pa": "ਅੰਬਾਲਾ",
+        "kn": "ಅಂಬಾಲ",
+        "ru": "Амбала",
+        "ja": "アンバーラー",
+        "fr": "Ambala",
+        "ta": "அம்பாலா",
+        "es": "Ambala"
+      },
+      "lat": "30.38437",
+      "lon": "76.77042",
+      "id": 176044062,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Mahendragarh",
+      "names": {
+        "hi": "महेन्द्रगढ़",
+        "pa": "ਮਹਿੰਦਰਗੜ੍ਹ",
+        "ta": "மஹேந்திரங்கார்ஹ்"
+      },
+      "lat": "28.26591",
+      "lon": "76.15148",
+      "id": 1739279693,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Cheeka",
+      "names": {
+        "hi": "चीका"
+      },
+      "lat": "30.04810",
+      "lon": "76.33386",
+      "id": 2628723655,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Delhi",
+      "enName": "Delhi",
+      "names": {
+        "de": "Delhi",
+        "hi": "दिल्ली",
+        "ru": "Дели",
+        "pt": "Deli",
+        "lv": "Deli",
+        "bn": "দিল্লি",
+        "fr": "Delhi",
+        "oc": "Delhi",
+        "uk": "Делі",
+        "ur": "دہلی",
+        "ml": "ഡെൽഹി",
+        "kn": "ದೆಹಲಿ",
+        "ko": "델리",
+        "ms": "Delhi",
+        "el": "Δελχί",
+        "eo": "Delhio",
+        "ku": "Delhî",
+        "my": "ဒေလီမြို့",
+        "ta": "தில்லி",
+        "es": "Delhi",
+        "zh": "德里",
+        "cs": "Dillí",
+        "ar": "دلهي",
+        "pa": "ਦਿੱਲੀ",
+        "th": "เดลี",
+        "ja": "デリー",
+        "ne": "दिल्ली",
+        "ckb": "دێلهی",
+        "fa": "دهلی",
+        "he": "דלהי"
+      },
+      "lat": "28.65172",
+      "lon": "77.22194",
+      "id": 2702400314,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Israna",
+      "lat": "29.27818",
+      "lon": "76.85082",
+      "id": 7090767304,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sirsa",
+      "enName": "Sirsa",
+      "names": {
+        "ar": "سرسا",
+        "de": "Sirsa",
+        "hi": "सिरसा",
+        "pa": "ਸਿਰਸਾ",
+        "kn": "ಸಿರ್ಸಾ",
+        "ru": "Сирса",
+        "ja": "シルサ",
+        "fr": "Sirsa",
+        "ur": "سرسا",
+        "es": "Sirsa"
+      },
+      "lat": "29.53728",
+      "lon": "75.03776",
+      "id": 245768393,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Yamunanagar",
+      "enName": "Yamunanagar",
+      "names": {
+        "ar": "جمنا نغر",
+        "de": "Yamunanaga",
+        "hi": "यमुनानगर",
+        "pa": "ਯਮੁਨਾਨਗਰ",
+        "kn": "ಯಮುನನಗರ",
+        "uk": "Ямунанаґар",
+        "ja": "ヤムナーナガル",
+        "fr": "Yamunanaga",
+        "ta": "யமுனா நகர்",
+        "ur": "جمنا نگر",
+        "es": "Yamuna Naga"
+      },
+      "lat": "30.12313",
+      "lon": "77.28633",
+      "id": 245769418,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Tosham",
+      "names": {
+        "hi": "तोशाम"
+      },
+      "lat": "28.87020",
+      "lon": "75.91530",
+      "id": 1395403741,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Sohna",
+      "enName": "Sohna",
+      "names": {
+        "hi": "सोहना"
+      },
+      "lat": "28.24599",
+      "lon": "77.06710",
+      "id": 1307288992,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Kurukshetra",
+      "names": {
+        "ar": "كروكشيتر",
+        "hi": "कुरुक्षेत्र",
+        "pa": "ਕੁਰੂਕਸ਼ੇਤਰ",
+        "kn": "ಕುರುಕ್ಷೇತ್ರ",
+        "ja": "クルクシェトラ",
+        "ur": "کروکشیتر"
+      },
+      "lat": "29.96937",
+      "lon": "76.84828",
+      "id": 245769169,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Pehowa",
+      "names": {
+        "hi": "पिहोवा",
+        "ru": "Пехова",
+        "uk": "Пегова"
+      },
+      "lat": "29.97837",
+      "lon": "76.58324",
+      "id": 817818057,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Samana",
+      "names": {
+        "hi": "समाना",
+        "pa": "ਸਮਾਣਾ"
+      },
+      "lat": "30.15525",
+      "lon": "76.20243",
+      "id": 1144142412,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Naraingarh",
+      "names": {
+        "hi": "नारायणगढ़",
+        "pa": "ਨਰਾਇਣਗੜ੍ਹ"
+      },
+      "lat": "30.47239",
+      "lon": "77.12427",
+      "id": 302560565,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Hodal",
+      "lat": "27.89992",
+      "lon": "77.37393",
+      "id": 245762908,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Jagadhari",
+      "names": {
+        "ar": "جغادهري",
+        "hi": "जगाधरी",
+        "ur": "جگادہری"
+      },
+      "lat": "30.16890",
+      "lon": "77.30190",
+      "id": 245769511,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Gannaur",
+      "names": {
+        "hi": "गन्नौर"
+      },
+      "lat": "29.13332",
+      "lon": "77.01764",
+      "id": 311937751,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Ellenabad",
+      "names": {
+        "hi": "ऐलनाबाद",
+        "ru": "Элленабад"
+      },
+      "lat": "29.45214",
+      "lon": "74.66347",
+      "id": 245768228,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Rohtak",
+      "enName": "Rohtak",
+      "names": {
+        "ar": "روهتك",
+        "de": "Rohtak",
+        "hi": "रोहतक",
+        "pa": "ਰੋਹਤਕ",
+        "kn": "ರೋಹ್ಟಕ್",
+        "ja": "ロータク",
+        "bn": "রওহটাক",
+        "fr": "Rohtak",
+        "ur": "روہتک",
+        "es": "Rohtak"
+      },
+      "lat": "28.90109",
+      "lon": "76.58019",
+      "id": 1397139972,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Samalkha",
+      "names": {
+        "ar": "سامالكها",
+        "hi": "समालखा",
+        "ur": "سامالکھا"
+      },
+      "lat": "29.23771",
+      "lon": "77.00938",
+      "id": 311937747,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Gharaunda",
+      "names": {
+        "hi": "घरौंदा"
+      },
+      "lat": "29.53619",
+      "lon": "76.96979",
+      "id": 311937746,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Jakhal",
+      "lat": "29.80193",
+      "lon": "75.82233",
+      "id": 245768866,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Tauru",
+      "lat": "28.21093",
+      "lon": "76.95064",
+      "id": 588254168,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Bilaspur",
+      "names": {
+        "hi": "बिलासपुर",
+        "pa": "ਬਿਲਾਸਪੁਰ",
+        "ta": "பிலாசுப்பூர் (சத்தீசுகர்)"
+      },
+      "lat": "30.30426",
+      "lon": "77.30273",
+      "id": 3039967803,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Panipat",
+      "enName": "Panipat",
+      "names": {
+        "ar": "باني بت",
+        "de": "Panipat",
+        "hi": "पानीपत",
+        "pa": "ਪਾਨੀਪਤ",
+        "kn": "ಪಾನಿಪತ್",
+        "ja": "パーニーパト",
+        "fr": "Pânipat",
+        "ur": "پانی پت",
+        "es": "Panipat"
+      },
+      "lat": "29.39128",
+      "lon": "76.97717",
+      "id": 245768111,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Chhachhrauli",
+      "names": {
+        "hi": "छछरौली"
+      },
+      "lat": "30.24557",
+      "lon": "77.35923",
+      "id": 3039967804,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Kaithal",
+      "enName": "Kaithal",
+      "names": {
+        "de": "Kaithal",
+        "hi": "कैथल",
+        "pa": "ਕੈਥਲ",
+        "kn": "ಕೈತಾಲ್",
+        "ja": "カイサル",
+        "fr": "Kaithal",
+        "es": "Kaithal"
+      },
+      "lat": "29.79966",
+      "lon": "76.39899",
+      "id": 1143706658,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Asandh",
+      "names": {
+        "hi": "असन्ध"
+      },
+      "lat": "29.52127",
+      "lon": "76.60346",
+      "id": 245768365,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Pinjore",
+      "enName": "Pinjore",
+      "names": {
+        "hi": "पिंजौर"
+      },
+      "lat": "30.80424",
+      "lon": "76.91495",
+      "id": 567278081,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Palwal",
+      "names": {
+        "hi": "पलवल",
+        "pa": "ਪਲਵਲ",
+        "ja": "パルワル"
+      },
+      "lat": "28.14057",
+      "lon": "77.32598",
+      "id": 1812344279,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Ratia",
+      "names": {
+        "hi": "रतिया",
+        "ta": "ராடியா"
+      },
+      "lat": "29.68507",
+      "lon": "75.57324",
+      "id": 1396983320,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Nuh",
+      "names": {
+        "hi": "नूँह",
+        "pa": "ਨੂੰਹ",
+        "ta": "நூஹ்"
+      },
+      "lat": "28.10334",
+      "lon": "77.00480",
+      "id": 1307289465,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Shadipur Julana",
+      "names": {
+        "hi": "शादीपुर जुलाना"
+      },
+      "lat": "29.12334",
+      "lon": "76.40281",
+      "id": 1812853215,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Nilokheri",
+      "names": {
+        "hi": "नीलोखेड़ी"
+      },
+      "lat": "29.83977",
+      "lon": "76.93180",
+      "id": 982143328,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Kanina Khas",
+      "names": {
+        "hi": "कनीना खास"
+      },
+      "lat": "28.33025",
+      "lon": "76.30914",
+      "id": 1732367128,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Fatehabad",
+      "names": {
+        "ar": "فتح آباد",
+        "hi": "फ़तेहाबाद",
+        "pa": "ਫ਼ਤਿਹਾਬਾਦ",
+        "ta": "பாட்டெஹாபாத்",
+        "ur": "فتح آباد"
+      },
+      "lat": "29.51043",
+      "lon": "75.45353",
+      "id": 1396551467,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Tohana",
+      "names": {
+        "hi": "टोहाना",
+        "ta": "டோஹானா"
+      },
+      "lat": "29.71079",
+      "lon": "75.90423",
+      "id": 3183719452,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Bahadurgarh",
+      "names": {
+        "hi": "बहादुरगढ़",
+        "or": "ବାହାଦୁର୍‌ଗଡ଼",
+        "ru": "Бахадургарх",
+        "bh": "बहादुरगढ",
+        "uk": "Багадурґарг",
+        "ja": "バハードゥルガル",
+        "bn": "বাহাদুরগড়",
+        "zh": "巴哈杜尔加尔"
+      },
+      "lat": "28.69332",
+      "lon": "76.93324",
+      "id": 245766462,
+      "type": "CITY",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Bass",
+      "lat": "29.11136",
+      "lon": "76.19958",
+      "id": 7250837813,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    },
+    {
+      "name": "Kaul",
+      "names": {
+        "hi": "कौल"
+      },
+      "lat": "29.84601",
+      "lon": "76.66075",
+      "id": 2634287835,
+      "type": "TOWN",
+      "listOfStreets": [],
+      "init": 1
+    }
+  ]
+}

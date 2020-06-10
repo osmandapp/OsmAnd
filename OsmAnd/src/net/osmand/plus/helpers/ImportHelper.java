@@ -248,6 +248,8 @@ public class ImportHelper {
 					}
 				} catch (FileNotFoundException e) {
 					//
+				} catch (SecurityException e) {
+					log.error(e.getMessage(), e);
 				} finally {
 					if (is != null) try {
 						is.close();
@@ -314,6 +316,8 @@ public class ImportHelper {
 					}
 				} catch (FileNotFoundException e) {
 					//
+				} catch (SecurityException e) {
+					log.error(e.getMessage(), e);
 				} finally {
 					if (is != null) try {
 						is.close();
@@ -410,7 +414,7 @@ public class ImportHelper {
 						}
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.error(e.getMessage(), e);
 				} finally {
 					try {
 						if (is != null) {
@@ -463,6 +467,8 @@ public class ImportHelper {
 					}
 				} catch (FileNotFoundException e) {
 					//
+				} catch (SecurityException e) {
+					log.error(e.getMessage(), e);
 				} finally {
 					if (is != null) try {
 						is.close();
@@ -549,7 +555,10 @@ public class ImportHelper {
 		} catch (IOException e) {
 			e.printStackTrace();
 			error = e.getMessage();
-		} finally {
+		} catch (SecurityException e) {
+			e.printStackTrace();
+			error = e.getMessage();
+		}  finally {
 			if (in != null) {
 				try {
 					in.close();
@@ -918,6 +927,8 @@ public class ImportHelper {
 					log.error(e);
 				} catch (IOException e) {
 					log.error(e);
+				} catch (SecurityException e) {
+					log.error(e.getMessage(), e);
 				} finally {
 					if (is != null) try {
 						is.close();

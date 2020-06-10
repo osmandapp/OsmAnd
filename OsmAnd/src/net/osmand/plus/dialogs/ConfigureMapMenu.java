@@ -107,6 +107,9 @@ import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_WIDTH_ATTR;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
 
 public class ConfigureMapMenu {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
@@ -787,12 +790,12 @@ public class ConfigureMapMenu {
 				.createItem());
 
 		props = createProperties(customRules, null, R.string.rendering_category_details, R.drawable.ic_action_layers,
-				"details", null, adapter, activity, true, DETAILS_ID, themeRes, nightMode, selectedProfileColor);
+				UI_CATEGORY_DETAILS, null, adapter, activity, true, DETAILS_ID, themeRes, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
 		props = createProperties(customRules, null, R.string.rendering_category_hide, R.drawable.ic_action_hide,
-				"hide", null, adapter, activity, true, HIDE_ID, themeRes, nightMode, selectedProfileColor);
+				UI_CATEGORY_HIDE, null, adapter, activity, true, HIDE_ID, themeRes, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -804,7 +807,7 @@ public class ConfigureMapMenu {
 			}
 		}
 		props = createProperties(customRules, customRulesIncluded, R.string.rendering_category_routes, R.drawable.ic_action_map_routes,
-				"routes", null, adapter, activity, true, ROUTES_ID, themeRes, nightMode, selectedProfileColor);
+				UI_CATEGORY_ROUTES, null, adapter, activity, true, ROUTES_ID, themeRes, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -862,15 +865,15 @@ public class ConfigureMapMenu {
 											 final List<RenderingRuleProperty> customRulesIncluded,
 											 @StringRes final int strId,
 											 @DrawableRes final int icon,
-											 String category,
+											 final String category,
 											 final ListStringPreference defaultSettings,
 											 final ContextMenuAdapter adapter,
 											 final MapActivity activity,
 											 final boolean useDescription,
 											 final String id,
-	                                         final int themeRes,
-	                                         final boolean nightMode,
-	                                         @ColorInt final int selectedProfileColor) {
+											 final int themeRes,
+											 final boolean nightMode,
+											 @ColorInt final int selectedProfileColor) {
 
 		final List<RenderingRuleProperty> ps = new ArrayList<>();
 		final List<OsmandSettings.CommonPreference<Boolean>> prefs = new ArrayList<>();
@@ -918,8 +921,12 @@ public class ConfigureMapMenu {
 						refreshMapComplete(activity);
 						activity.getMapLayers().updateLayers(activity.getMapView());
 					} else {
-						showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs,
-								useDescription, defaultSettings, true, customRulesIncluded, themeRes, nightMode, selectedProfileColor);
+						if (UI_CATEGORY_DETAILS.equals(category)) {
+							DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), ps, prefs, a, adapter, pos);
+						} else {
+							showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs,
+									useDescription, defaultSettings, true, customRulesIncluded, themeRes, nightMode, selectedProfileColor);
+						}
 					}
 					return false;
 				}

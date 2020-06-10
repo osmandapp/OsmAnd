@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -1721,7 +1722,7 @@ public class RouteResultPreparation {
 			}
 		}
 		Iterator<RouteSegment> it;
-		if(rr.getPreAttachedRoutes(pointInd) != null) {
+		if (rr.getPreAttachedRoutes(pointInd) != null) {
 			final RouteSegmentResult[] list = rr.getPreAttachedRoutes(pointInd);
 			it = new Iterator<BinaryRoutePlanner.RouteSegment>() {
 				int i = 0;
@@ -1740,7 +1741,7 @@ public class RouteResultPreparation {
 				public void remove() {
 				}
 			};	
-		} else if (recalculation) {
+		} else if (recalculation || ctx.nativeLib == null) {
 			RouteSegment rt = ctx.loadRouteSegment(road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd), ctx.config.memoryLimitation);
 			it = rt == null ? null : rt.getIterator();
 		} else {

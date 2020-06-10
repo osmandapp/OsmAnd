@@ -11,6 +11,13 @@
 	Thx - Hardy
 
 -->
+    <!-- string name="shared_string_all_time">All time</string -->
+    <string name="shared_string_night_map">Night map</string>
+    <string name="details_dialog_decr">Control visibility of additional details shown on the map</string>
+    <string name="shared_string_meters">meters</string>
+    <string name="shared_string_tones">tones</string>
+    <string name="default_screen_timeout">Default screen timeout</string>
+    <string name="screen_timeout_descr">If the \"%1$s\" option is enabled, the activity time will depend on it.</string>
     <string name="speed_cameras_alert">Speed cameras alerts in some countries is prohibited by the law.</string>
     <string name="shared_string_uninstall">Uninstall</string>
     <string name="keep_active">Keep active</string>
@@ -25,7 +32,6 @@
     <string name="delete_all_actions_message_q">Are you sure you want to irrevocably delete %d quick actions?</string>
     <string name="shared_string_delete_all_q">Delete all?</string>
     <string name="export_import_quick_actions_with_profiles_promo">You can Export or Import quick actions with application profiles.</string>
-    <string name="default_screen_timeout">System screen timeout</string>
     <string name="tiles_storage_descr">Choose how downloaded tiles will be stored.</string>
     <string name="expire_time_descr">Expiration time in minutes. Cached tiles will be reloaded after specified time.
         Leave this field empty to never refresh tiles for this source.
@@ -43,13 +49,13 @@
     <string name="sqlite_db_file">SQLiteDB file</string>
     <string name="one_image_per_tile">One image file per tile</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercator projection</string>
-    <string name="screen_timeout_descr">This is only effective if \"%1$s\" is disabled.</string>
     <string name="keep_screen_off">Keep screen off</string>
     <string name="keep_screen_on">Keep screen on</string>
     <string name="turn_screen_on_wake_time_descr">Select the screen timeout after waking up. (\"%1$s\" applies no timeout.)</string>
     <string name="turn_screen_on_proximity_sensor">Proximity sensor</string>
     <string name="turn_screen_on_power_button">Power button</string>
     <string name="turn_screen_on_power_button_descr">Pressing the device power button will turn the screen on with OsmAnd on top of the lock screen.</string>
+    <string name="turn_screen_on_power_button_disabled">Disabled. Requires \'Keep screen on\' under \'Timeout after wake-up\'.</string>
     <string name="turn_screen_on_navigation_instructions">Navigation instructions</string>
     <string name="turn_screen_on_navigation_instructions_descr">Each navigation instruction will turn the screen on.</string>
     <string name="turn_screen_on_descr">Select screen wake-up options (make sure OsmAnd is in the foreground when the device is being locked):</string>
@@ -59,6 +65,9 @@
     <string name="screen_control">Screen control</string>
     <string name="shared_string_always">Always</string>
     <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact the support team to investigate further.</string>
+    <string name="weight_limit_description">Provide your vehicle weight, some routes restrictions may be applied for heavy vehicles.</string>
+    <string name="height_limit_description">Provide your vehicle height, some routes restrictions may apply for high vehicles.</string>
+    <string name="width_limit_description">Provide your vehicle width some routes restrictions may be applied for wide vehicles.</string>
     <string name="unsupported_type_error">Unsupported type</string>
     <string name="index_item_world_basemap_detailed">World overview map (detailed)</string>
     <string name="profiles_for_action_not_found">Could not find any such profiles.</string>
@@ -473,7 +482,7 @@
     <string name="analytics_pref_title">Analytics</string>
     <string name="turn_screen_on_info">Show map on the lock screen during navigation.</string>
     <string name="route_parameters_info">Settings for routing in the selected profile \"%1$s\".</string>
-    <string name="wake_time">Custom screen timeout</string>
+    <string name="wake_time">Timeout after wake-up</string>
     <string name="units_and_formats">Units &amp; formats</string>
     <string name="map_look_descr">Map appearance</string>
     <string name="map_look">Map look</string>

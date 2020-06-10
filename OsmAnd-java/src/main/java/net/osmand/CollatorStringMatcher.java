@@ -33,8 +33,9 @@ public class CollatorStringMatcher implements StringMatcher {
 
 	public CollatorStringMatcher(String part, StringMatcherMode mode) {
 		this.collator = OsmAndCollator.primaryCollator();
-		this.part = part.toLowerCase(Locale.getDefault());
+		this.part = simplifyStringAndAlignChars(part);
 		this.mode = mode;
+		
 	}
 
 	public Collator getCollator() {
@@ -123,14 +124,15 @@ public class CollatorStringMatcher implements StringMatcher {
 	 * @param theStart
 	 * @return true if searchIn starts with token
 	 */
-	public static boolean cstartsWith(Collator collator, String fullText, String theStart, 
+	public static boolean cstartsWith(Collator collator, String fullTextP, String theStart, 
 			boolean checkBeginning, boolean checkSpaces, boolean equals) {
-		String searchIn = fullText.toLowerCase(Locale.getDefault());
+		String searchIn = simplifyStringAndAlignChars(fullTextP);
 		int searchInLength = searchIn.length();
 		int startLength = theStart.length();
 		if (startLength == 0) {
 			return true;
 		}
+		// this is not correct because of Auhofstrasse != Auhofstraße
 		if (startLength > searchInLength) {
 			return false;
 		}
@@ -152,7 +154,8 @@ public class CollatorStringMatcher implements StringMatcher {
 				if (isSpace(searchIn.charAt(i - 1)) && !isSpace(searchIn.charAt(i))) {
 					if (collator.equals(searchIn.substring(i, i + startLength), theStart)) {
 						if(equals) {
-							if(i + startLength == searchInLength || isSpace(searchIn.charAt(i + startLength))) {
+							if(i + startLength == searchInLength || 
+									isSpace(searchIn.charAt(i + startLength))) {
 								return true;
 							}
 						} else {
@@ -168,7 +171,17 @@ public class CollatorStringMatcher implements StringMatcher {
 		return false;
 	}
 	
+	private static String simplifyStringAndAlignChars(String fullText) {
+		int i;
+		fullText = fullText.toLowerCase(Locale.getDefault());
+		while( (i = fullText.indexOf('ß') ) != -1 ) {
+			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i+1);
+		}
+		return fullText;
+	}
+
 	private static boolean isSpace(char c){
 		return !Character.isLetter(c) && !Character.isDigit(c);
 	}
+	
 }

@@ -91,7 +91,7 @@ public class RoutePlannerFrontEnd {
 				}
 				if (road != null) {
 					if(!transportStop) {
-						float prio = ctx.getRouter().defineSpeedPriority(road.road);
+						float prio = Math.max(ctx.getRouter().defineSpeedPriority(road.road), 0.3f);
 						if (prio > 0) {
 							road.distSquare = (road.distSquare + GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR)
 									/ (prio * prio);

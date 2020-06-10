@@ -843,6 +843,7 @@ public class CommonWords {
 		addCommon("van");
 		addCommon("road");
 		addCommon("street");
+		addCommon("sector");
 		addCommon("drive");
 		addCommon("avenue");
 		addCommon("rue");
