@@ -68,6 +68,7 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 			AndroidUtils.setBackground(holder.button, buttonBackground);
 		}
 		textView.setText(capitalizeFirstLetter(item));
+		textView.requestLayout();
 		holder.button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
