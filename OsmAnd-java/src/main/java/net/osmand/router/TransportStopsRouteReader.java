@@ -163,10 +163,6 @@ public class TransportStopsRouteReader {
 		if (c == null) {
 			c = combineRoute(route);
 			combinedRoutesCache.put(route.getId(), c);
-			System.out.println(String.format("\n>> Route name: %s, id:%d", c.getName(), c.getId()));
-			for (TransportStop s: c.getForwardStops()) {				
-				System.out.println(String.format(">> >> >> Stop name: %s, id:%d", s.getName(), s.getId()));
-			}
 		}
 		return c;
 	}
