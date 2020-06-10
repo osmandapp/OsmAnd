@@ -11,6 +11,7 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
@@ -656,6 +657,8 @@ public class SearchUICore {
 		private List<MapObject> exportedObjects;
 		private List<City> exportedCities;
 
+		private static boolean speedCamerasUninstalled = false;
+
 		public SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
 								   AtomicInteger requestNumber, int totalLimit) {
 			this.matcher = matcher;
@@ -733,6 +736,9 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
+			if (speedCamerasUninstalled && isSpeedCameraObject(object.object)) {
+				return false;
+			}
 			if (phrase != null && object.otherNames != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
 				for (String s : object.otherNames) {
 					if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
@@ -885,6 +891,20 @@ public class SearchUICore {
 				json.put("cities", citiesArr);
 			}
 			return json;
+		}
+
+		private boolean isSpeedCameraObject(Object object) {
+			String key = "";
+			if (object instanceof PoiType) {
+				key = ((PoiType) object).getKeyName();
+			} else if (object instanceof Amenity) {
+				key = ((Amenity) object).getSubType();
+			}
+			return "speed_camera".equals(key);
+		}
+
+		public static void setSpeedCamerasUninstalled(boolean speedCamerasUninstalled) {
+			SearchResultMatcher.speedCamerasUninstalled = speedCamerasUninstalled;
 		}
 	}
 	

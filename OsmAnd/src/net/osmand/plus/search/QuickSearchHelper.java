@@ -68,6 +68,7 @@ public class QuickSearchHelper implements ResourceListener {
 		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get(),
 				app.getSettings().MAP_TRANSLITERATE_NAMES.get());
 		app.getResourceManager().addResourceListener(this);
+		SearchResultMatcher.setSpeedCamerasUninstalled(app.getSettings().SPEED_CAMERAS_UNINSTALLED.get());
 	}
 
 	public SearchUICore getCore() {

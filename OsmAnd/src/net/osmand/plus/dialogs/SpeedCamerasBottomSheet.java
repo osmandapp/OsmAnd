@@ -17,6 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.search.SearchUICore.SearchResultMatcher;
 
 public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -62,6 +63,7 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 		app.getSettings().SPEED_CAMERAS_UNINSTALLED.set(true);
 		app.getSettings().SPEAK_SPEED_CAMERA.set(false);
 		app.getSettings().SHOW_CAMERAS.set(false);
+		SearchResultMatcher.setSpeedCamerasUninstalled(true);
 		Fragment targetFragment = getTargetFragment();
 		if (targetFragment instanceof OnSpeedCamerasUninstallListener) {
 			((OnSpeedCamerasUninstallListener) targetFragment).onSpeedCamerasUninstalled();
