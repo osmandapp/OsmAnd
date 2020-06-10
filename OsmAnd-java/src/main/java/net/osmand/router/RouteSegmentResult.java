@@ -21,6 +21,8 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
+	// this should be bigger (50-80m) but tests need to be fixed first
+	private static final float DIST_BEARING_DETECT = 5;
 	private final RouteDataObject object;
 	private int startPointIndex;
 	private int endPointIndex;
@@ -444,11 +446,11 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 	
 	public float getBearingBegin() {
-		return (float) (object.directionRoute(startPointIndex, startPointIndex < endPointIndex) / Math.PI * 180);
+		return (float) (object.directionRoute(startPointIndex, startPointIndex < endPointIndex, DIST_BEARING_DETECT) / Math.PI * 180);
 	}
 	
 	public float getBearing(int point, boolean plus) {
-		return (float) (object.directionRoute(point, plus) / Math.PI * 180);
+		return (float) (object.directionRoute(point, plus, DIST_BEARING_DETECT) / Math.PI * 180);
 	}
 	
 	public float getDistance(int point, boolean plus) {
@@ -456,7 +458,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 	
 	public float getBearingEnd() {
-		return (float) (MapUtils.alignAngleDifference(object.directionRoute(endPointIndex, startPointIndex > endPointIndex) - Math.PI) / Math.PI * 180);
+		return (float) (MapUtils.alignAngleDifference(object.directionRoute(endPointIndex, startPointIndex > endPointIndex, DIST_BEARING_DETECT) - Math.PI) / Math.PI * 180);
 	}
 	
 	public void setSegmentTime(float segmentTime) {
