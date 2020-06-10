@@ -1294,8 +1294,7 @@ public class RouteInfoWidgetsFactory {
 					boolean americanType = region.isAmericanTypeSigns();
 					if(alarm.getType() == AlarmInfoType.SPEED_LIMIT) {
 						if(region == OsmandSettings.DrivingRegion.CANADA) {
-							// TODO @dmpr0 canada and delete comment
-							locimgId = R.drawable.warnings_speed_limit_us;
+							locimgId = R.drawable.warnings_speed_limit_ca;
 						} else if(americanType){
 							locimgId = R.drawable.warnings_speed_limit_us;
 						//else case is done by drawing red ring

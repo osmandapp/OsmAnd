@@ -3257,7 +3257,7 @@
     <string name="analytics_pref_title">Greiningar</string>
     <string name="turn_screen_on_info">Birta kort á læsiskjá á meðan leiðsögn stendur.</string>
     <string name="route_parameters_info">Stillingar leiðarvals í valda sniðinu \"%1$s\".</string>
-    <string name="wake_time">Vökutími</string>
+    <string name="wake_time">Tímamörk eftir vöknun</string>
     <string name="units_and_formats">Einingar og snið þeirra</string>
     <string name="appearance">Útlit</string>
     <string name="map_look_descr">Útlit landakorts</string>
@@ -3724,13 +3724,13 @@
     <string name="unsupported_type_error">Óstudd tegund</string>
     <string name="turn_screen_on_navigation_instructions">Leiðsagnarleiðbeiningar</string>
     <string name="favorites_item">Eftirlæti</string>
-    <string name="screen_timeout_descr">Takmarkað af \"%1$s\", ef það er virkt.</string>
+    <string name="screen_timeout_descr">Ef \"%1$s\" valkosturinn er virkur, mun tími virkni vera háður honum.</string>
     <string name="navigation_profiles_item">Leiðsagnarsnið</string>
     <string name="shared_string_resume">Halda áfram</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="add_edit_favorite">Bæta við / breyta eftirlæti</string>
     <string name="quick_action_transport_show">Birta almenningssamgöngur</string>
-    <string name="default_screen_timeout">Tímamörk kerfis fyrir skjá</string>
+    <string name="default_screen_timeout">Sjálfgefin tímamörk fyrir skjá</string>
     <string name="quick_action_transport_descr">Hnappur til að birta eða fela almenningssamgöngur á kortinu.</string>
     <string name="turn_screen_on_proximity_sensor">Nálægðarskynjari</string>
     <string name="travel_item">Ferðalög (Wikipedia og Wikivoyage)</string>
@@ -3746,4 +3746,13 @@
 \nEin vika er 10.080 mínútur.
 \nEinn mánuður er 43 829 mínútur.</string>
     <string name="back_to_editing">Til baka í breytingar</string>
+    <string name="system_screen_timeout_descr">Slekkur á skjánum eftir að tímamörkum kerfis fyrir skjá er náð.</string>
+    <string name="delete_all_actions_message_q">Ertu viss um að þú viljir eyða %d flýtiaðgerðum\?</string>
+    <string name="quick_action_switch_profile_descr">Ef ýtt er á þennan aðgerðahnapp verður skipt á milli valinna notkunarsniða.</string>
+    <string name="shared_string_delete_all_q">Eyða öllu\?</string>
+    <string name="screen_timeout">Tímamörk skjás</string>
+    <string name="shared_string_tones">tónar</string>
+    <string name="shared_string_meters">metrar</string>
+    <string name="details_dialog_decr">Stýra sýnileika viðbótaratriða sem birtast á kortinu</string>
+    <string name="shared_string_night_map">Næturkort</string>
 </resources>

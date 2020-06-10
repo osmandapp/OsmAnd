@@ -3774,4 +3774,5 @@
     <string name="details_dialog_decr">Управление отображением дополнительных деталей на карте</string>
     <string name="shared_string_all_time">Всё время</string>
     <string name="shared_string_night_map">Ночная карта</string>
+    <string name="turn_screen_on_power_button_disabled">Отключено. Необходимо включить «Держать экран включённым» в разделе «Время работы после пробуждения».</string>
 </resources>

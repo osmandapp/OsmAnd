@@ -3770,4 +3770,5 @@
     <string name="details_dialog_decr">控制地圖上顯示的額外詳細資訊可見程度</string>
     <string name="shared_string_night_map">夜晚地圖</string>
     <string name="shared_string_all_time">全部時間</string>
+    <string name="turn_screen_on_power_button_disabled">已停用。需要「喚醒後逾時」的「保持螢幕開啟」。</string>
 </resources>

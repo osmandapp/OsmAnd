@@ -3773,4 +3773,5 @@
     <string name="details_dialog_decr">Ovládajte viditeľnosť ďalších detailov zobrazených na mape</string>
     <string name="shared_string_night_map">Nočná mapa</string>
     <string name="shared_string_all_time">Vždy</string>
+    <string name="turn_screen_on_power_button_disabled">Vypnuté. Vyžaduje \"Nechať obrazovku zapnutú\" pod \"Časový limit obrazovky po prebudení\".</string>
 </resources>
