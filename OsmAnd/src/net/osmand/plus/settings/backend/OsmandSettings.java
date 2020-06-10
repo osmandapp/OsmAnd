@@ -4135,23 +4135,27 @@ public class OsmandSettings {
 	 */
 	public enum DrivingRegion {
 
-		EUROPE_ASIA(R.string.driving_region_europe_asia, MetricsConstants.KILOMETERS_AND_METERS, false, false),
-		US(R.string.driving_region_us, MetricsConstants.MILES_AND_FEET, false, true),
-		CANADA(R.string.driving_region_canada, MetricsConstants.KILOMETERS_AND_METERS, false, true),
-		UK_AND_OTHERS(R.string.driving_region_uk, MetricsConstants.MILES_AND_METERS, true, false),
-		JAPAN(R.string.driving_region_japan, MetricsConstants.KILOMETERS_AND_METERS, true, false),
-		AUSTRALIA(R.string.driving_region_australia, MetricsConstants.KILOMETERS_AND_METERS, true, true);
+		EUROPE_ASIA(R.string.driving_region_europe_asia, MetricsConstants.KILOMETERS_AND_METERS, false),
+		US(R.string.driving_region_us, MetricsConstants.MILES_AND_FEET, false),
+		CANADA(R.string.driving_region_canada, MetricsConstants.KILOMETERS_AND_METERS, false),
+		UK_AND_OTHERS(R.string.driving_region_uk, MetricsConstants.MILES_AND_METERS, true),
+		JAPAN(R.string.driving_region_japan, MetricsConstants.KILOMETERS_AND_METERS, true),
+		AUSTRALIA(R.string.driving_region_australia, MetricsConstants.KILOMETERS_AND_METERS, true);
 
 		public final boolean leftHandDriving;
-		public final boolean americanSigns;
 		public final MetricsConstants defMetrics;
 		public final int name;
 
-		DrivingRegion(int name, MetricsConstants def, boolean leftHandDriving, boolean americanSigns) {
+		DrivingRegion(int name, MetricsConstants def, boolean leftHandDriving) {
 			this.name = name;
 			defMetrics = def;
 			this.leftHandDriving = leftHandDriving;
-			this.americanSigns = americanSigns;
+		}
+
+		public boolean isAmericanTypeSigns() {
+			return this == OsmandSettings.DrivingRegion.AUSTRALIA ||
+					this == OsmandSettings.DrivingRegion.US ||
+					this == OsmandSettings.DrivingRegion.CANADA;
 		}
 
 		public String getDescription(Context ctx) {
