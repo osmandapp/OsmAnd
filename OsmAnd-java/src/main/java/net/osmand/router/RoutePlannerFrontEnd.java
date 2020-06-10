@@ -234,6 +234,7 @@ public class RoutePlannerFrontEnd {
 		if (intermediates != null) {
 			for (LatLon l : intermediates) {
 				if (!addSegment(l, ctx, indexNotFound++, points, false)) {
+					System.out.println(points.get(points.size() - 1).getRoad().toString());
 					return null;
 				}
 			}
@@ -364,7 +365,7 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.segmentNotFound = indexNotFound;
 			return false;
 		} else {
-			log.info("Route segment found " + f.getRoad().id + " " + f.getRoad().getName());
+			log.info("Route segment found " + f.road);
 			res.add(f);
 			return true;
 		}
@@ -383,6 +384,10 @@ public class RoutePlannerFrontEnd {
 			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
 		}
 		if (ctx.nativeLib != null) {
+			ctx.startX = start.preciseX;
+			ctx.startY = start.preciseY;
+			ctx.targetX = end.preciseX;
+			ctx.targetY = end.preciseY;
 			return runNativeRouting(ctx, recalculationEnd);
 		} else {
 			refreshProgressDistance(ctx);
