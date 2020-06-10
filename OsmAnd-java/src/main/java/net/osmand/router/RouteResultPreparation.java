@@ -394,7 +394,6 @@ public class RouteResultPreparation {
 			}
 			// reverse it just to attach good direction roads
 			Collections.reverse(result);
-
 			segment = finalSegment.reverseWaySearch ? finalSegment.opposite.getParentRoute() : finalSegment;
 			int parentSegmentEnd = finalSegment.reverseWaySearch ? finalSegment.opposite.getParentSegmentEnd() : finalSegment.opposite.getSegmentStart();
 			parentRoutingTime = -1;
