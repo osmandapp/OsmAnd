@@ -3772,5 +3772,5 @@
     <string name="shared_string_night_map">Нічна мапа</string>
     <string name="width_limit_description">Вкажіть ширину автомобіля, для великих транспортних засобів можуть застосовуватися обмеження на деяких маршрутах.</string>
     <string name="height_limit_description">Вкажіть висоту автомобіля, для великих транспортних засобів можуть застосовуватися обмеження на деяких маршрутах.</string>
-    <string name="turn_screen_on_power_button_disabled">Вимкнено. Потребує \"Тримати екран увімкненим\" у розділі \"Час очікування після пробудження\".</string>
+    <string name="turn_screen_on_power_button_disabled">Вимкнено. Потребує \'Тримати екран увімкненим\' у розділі \'Час очікування після пробудження\'.</string>
 </resources>
