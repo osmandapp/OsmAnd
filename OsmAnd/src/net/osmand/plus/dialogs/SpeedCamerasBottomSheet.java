@@ -7,6 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -20,9 +23,10 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = SpeedCamerasBottomSheet.class.getName();
 	private OsmandApplication app;
 
-	public static void showInstance(@NonNull FragmentManager fm) {
+	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment) {
 		if (!fm.isStateSaved()) {
 			SpeedCamerasBottomSheet bottomSheet = new SpeedCamerasBottomSheet();
+			bottomSheet.setTargetFragment(targetFragment, 0);
 			bottomSheet.show(fm, TAG);
 		}
 	}
@@ -36,19 +40,34 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		View root = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_speed_cameras, null);
-		((ImageView) root.findViewById(R.id.icon)).setImageResource(R.drawable.img_speed_camera_warning);
+		((ImageView) root.findViewById(R.id.icon)).setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.img_speed_camera_warning));
 		((TextView) root.findViewById(R.id.description)).setText(getDescriptionText());
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(root).create());
 	}
 
 	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		UiUtilities.setupDialogButton(nightMode, rightButton, getDismissButtonType(), R.string.keep_active);
+	}
+
+	@Override
 	protected void onRightBottomButtonClick() {
-		super.onRightBottomButtonClick();
+		setDialogShowed();
+		dismiss();
 	}
 
 	@Override
 	protected void onDismissButtonClickAction() {
-		super.onDismissButtonClickAction();
+		app.getSettings().SPEED_CAMERAS_UNINSTALLED.set(true);
+		app.getSettings().SPEAK_SPEED_CAMERA.set(false);
+		app.getSettings().SHOW_CAMERAS.set(false);
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment instanceof OnSpeedCamerasUninstallListener) {
+			((OnSpeedCamerasUninstallListener) targetFragment).onSpeedCamerasUninstalled();
+		}
+		setDialogShowed();
+		dismiss();
 	}
 
 	@Override
@@ -66,5 +85,13 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 		String uninstall = getString(R.string.shared_string_uninstall);
 		String text = getString(R.string.speed_cameras_legal_descr, keepActive, uninstall);
 		return UiUtilities.setWordsMediumFont(app, text, keepActive, uninstall);
+	}
+
+	private void setDialogShowed() {
+		app.getSettings().SPEED_CAMERAS_ALERT_SHOWED.set(true);
+	}
+
+	public interface OnSpeedCamerasUninstallListener {
+		void onSpeedCamerasUninstalled();
 	}
 }
