@@ -35,9 +35,6 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.UiUtilities;
@@ -48,6 +45,9 @@ import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.RasterMapMenu;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -184,11 +184,11 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void selectMapOverlayLayer(@NonNull final OsmandMapTileView mapView,
+	public void selectMapOverlayLayer(@NonNull OsmandMapTileView mapView,
 									  @NonNull final CommonPreference<String> mapPref,
 									  @NonNull final CommonPreference<String> exMapPref,
 									  boolean force,
-									  @NonNull final MapActivity mapActivity,
+									  @NonNull MapActivity mapActivity,
 									  @Nullable final OnMapSelectedCallback callback) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		if (!force && exMapPref.get() != null) {
@@ -213,12 +213,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				MapActivity activity = mapActivityRef.get();
-				if (activity == null || activity.isFinishing()) {
+				MapActivity mapActivity = mapActivityRef.get();
+				if (mapActivity == null || mapActivity.isFinishing()) {
 					return;
 				}
 				if (which == items.length - 1) {
-					installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
+					installMapLayers(mapActivity, new ResultMatcher<TileSourceTemplate>() {
 						TileSourceTemplate template = null;
 						int count = 0;
 						boolean cancel = false;
@@ -260,11 +260,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					if (callback != null) {
 						callback.onMapSelected(false);
 					}
-					updateMapLayers(mapActivity.getMapView(), mapPref, activity.getMapLayers());
+					updateMapLayers(mapActivity.getMapView(), mapPref, mapActivity.getMapLayers());
 				}
 				dialog.dismiss();
 			}
-
 		})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setOnDismissListener(new DialogInterface.OnDismissListener() {
