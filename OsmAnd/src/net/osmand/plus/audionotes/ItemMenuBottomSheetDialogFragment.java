@@ -1,8 +1,10 @@
 package net.osmand.plus.audionotes;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -49,8 +51,12 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 					.create();
 			items.add(playItem);
 
+			Drawable shareIcon = getContentIcon(R.drawable.ic_action_gshare_dark);
+			if (shareIcon != null) {
+				AndroidUtils.getDrawableForDirection(requireContext(), shareIcon);
+			}
 			BaseBottomSheetItem shareItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
+					.setIcon(shareIcon)
 					.setTitle(getString(R.string.shared_string_share))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {

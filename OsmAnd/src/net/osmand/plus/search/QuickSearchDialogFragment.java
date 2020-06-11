@@ -242,6 +242,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							 Bundle savedInstanceState) {
 		final MapActivity mapActivity = getMapActivity();
 		final View view = inflater.inflate(R.layout.search_dialog_fragment, container, false);
+		final boolean nightMode = !app.getSettings().isLightContent();
 
 		toolbarController = new QuickSearchToolbarController();
 		toolbarController.setOnBackButtonClickListener(new OnClickListener() {
@@ -483,7 +484,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		);
 
 		titleEdit = (TextView) view.findViewById(R.id.titleEdit);
-		view.findViewById(R.id.shareButton).setOnClickListener(
+		Drawable shareIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_gshare_dark,
+				nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
+		shareIcon = AndroidUtils.getDrawableForDirection(app, shareIcon);
+		ImageView shareButton = (ImageView) view.findViewById(R.id.shareButton);
+		shareButton.setImageDrawable(shareIcon);
+		shareButton.setOnClickListener(
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {

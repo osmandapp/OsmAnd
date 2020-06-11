@@ -967,6 +967,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		final ApplicationMode applicationMode = routingHelper.getAppMode();
 		final RouteMenuAppModes mode = app.getRoutingOptionsHelper().getRouteMenuAppMode(applicationMode);
+		boolean isLayoutRTL = AndroidUtils.isLayoutRtl(app);
 
 		updateControlButtons(mapActivity, mainView);
 		LinearLayout optionsButton = (LinearLayout) mainView.findViewById(R.id.map_options_route_button);
@@ -984,7 +985,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				clickRouteParams();
 			}
 		});
-		AndroidUtils.setBackground(app, optionsButton, nightMode, R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
+		AndroidUtils.setBackground(app, optionsButton, nightMode,
+				isLayoutRTL ? R.drawable.route_info_trans_gradient_left_light : R.drawable.route_info_trans_gradient_light,
+				isLayoutRTL ? R.drawable.route_info_trans_gradient_left_dark :R.drawable.route_info_trans_gradient_dark);
 
 		HorizontalScrollView scrollView = mainView.findViewById(R.id.route_options_scroll_container);
 		scrollView.setVerticalScrollBarEnabled(false);
