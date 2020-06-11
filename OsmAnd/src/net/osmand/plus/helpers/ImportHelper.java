@@ -88,17 +88,20 @@ import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
  * @author Koen Rabaey
  */
 public class ImportHelper {
-	public final static Log log = PlatformUtil.getLog(ImportHelper.class);
-	public static final String KML_SUFFIX = ".kml";
-	public static final String KMZ_SUFFIX = ".kmz";
 
-	private final AppCompatActivity activity;
+	public final static Log log = PlatformUtil.getLog(ImportHelper.class);
+
+	public static final String KML_FILE_EXT = ".kml";
+	public static final String KMZ_FILE_EXT = ".kmz";
+
+	public static final int IMPORT_FILE_REQUEST = 1006;
+
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;
+	private final AppCompatActivity activity;
+
 	private OnGpxImportCompleteListener gpxImportCompleteListener;
 
-	public final static int IMPORT_FILE_REQUEST = 1006;
-	
 	public enum ImportType {
 		SETTINGS(OSMAND_SETTINGS_FILE_EXT),
 		ROUTING(ROUTING_FILE_EXT),
@@ -151,12 +154,12 @@ public class ImportHelper {
 				name = name.substring(0, name.length() - GPX_FILE_EXT.length()) + GPX_FILE_EXT;
 				handleGpxImport(contentUri, name, true, useImportDir);
 				return true;
-			} else if (nameLC.endsWith(KML_SUFFIX)) {
-				name = name.substring(0, name.length() - KML_SUFFIX.length()) + KML_SUFFIX;
+			} else if (nameLC.endsWith(KML_FILE_EXT)) {
+				name = name.substring(0, name.length() - KML_FILE_EXT.length()) + KML_FILE_EXT;
 				handleKmlImport(contentUri, name, true, useImportDir);
 				return true;
-			} else if (nameLC.endsWith(KMZ_SUFFIX)) {
-				name = name.substring(0, name.length() - KMZ_SUFFIX.length()) + KMZ_SUFFIX;
+			} else if (nameLC.endsWith(KMZ_FILE_EXT)) {
+				name = name.substring(0, name.length() - KMZ_FILE_EXT.length()) + KMZ_FILE_EXT;
 				handleKmzImport(contentUri, name, true, useImportDir);
 				return true;
 			}
@@ -187,9 +190,9 @@ public class ImportHelper {
 
 		if (fileName == null) {
 			handleGpxOrFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
-		} else  if (fileName.endsWith(KML_SUFFIX)) {
+		} else if (fileName.endsWith(KML_FILE_EXT)) {
 			handleKmlImport(intentUri, fileName, saveFile, useImportDir);
-		} else if (fileName.endsWith(KMZ_SUFFIX)) {
+		} else if (fileName.endsWith(KMZ_FILE_EXT)) {
 			handleKmzImport(intentUri, fileName, saveFile, useImportDir);
 		} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 			handleObfImport(intentUri, fileName);
@@ -207,7 +210,8 @@ public class ImportHelper {
 	public static String getNameFromContentUri(OsmandApplication app, Uri contentUri) {
 		try {
 			final String name;
-			final Cursor returnCursor = app.getContentResolver().query(contentUri, new String[]{OpenableColumns.DISPLAY_NAME}, null, null, null);
+			final Cursor returnCursor = app.getContentResolver().query(contentUri,
+					new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null);
 			if (returnCursor != null && returnCursor.moveToFirst()) {
 				int columnIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
 				if (columnIndex != -1) {
@@ -231,13 +235,7 @@ public class ImportHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	private void handleGpxImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir) {
-		new AsyncTask<Void, Void, GPXFile>() {
-			ProgressDialog progress = null;
-
-			@Override
-			protected void onPreExecute() {
-				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
-			}
+		AsyncTask<Void, Void, GPXFile> gpxImportTask = new BaseImportAsyncTask<Void, Void, GPXFile>() {
 
 			@Override
 			protected GPXFile doInBackground(Void... nothing) {
@@ -252,33 +250,23 @@ public class ImportHelper {
 				} catch (SecurityException e) {
 					log.error(e.getMessage(), e);
 				} finally {
-					if (is != null) try {
-						is.close();
-					} catch (IOException ignore) {
-					}
+					Algorithms.closeStream(is);
 				}
 				return null;
 			}
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress.dismiss();
-				}
+				hideProgress();
 				handleResult(result, fileName, save, useImportDir, false);
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		};
+		executeImportTask(gpxImportTask);
 	}
 
 	@SuppressLint("StaticFieldLeak")
 	private void handleGpxOrFavouritesImport(final Uri fileUri, final String fileName, final boolean save, final boolean useImportDir, final boolean forceImportFavourites) {
-		new AsyncTask<Void, Void, GPXFile>() {
-			ProgressDialog progress = null;
-
-			@Override
-			protected void onPreExecute() {
-				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
-			}
+		AsyncTask<Void, Void, GPXFile> gpxOrFavouritesImportTask = new BaseImportAsyncTask<Void, Void, GPXFile>() {
 
 			@Override
 			protected GPXFile doInBackground(Void... nothing) {
@@ -287,7 +275,7 @@ public class ImportHelper {
 				try {
 					is = app.getContentResolver().openInputStream(fileUri);
 					if (is != null) {
-						if (fileName != null && fileName.endsWith(KML_SUFFIX)) {
+						if (fileName != null && fileName.endsWith(KML_FILE_EXT)) {
 							final String result = Kml2Gpx.toGpx(is);
 							if (result != null) {
 								try {
@@ -296,12 +284,12 @@ public class ImportHelper {
 									return null;
 								}
 							}
-						} else if (fileName != null && fileName.endsWith(KMZ_SUFFIX)) {
+						} else if (fileName != null && fileName.endsWith(KMZ_FILE_EXT)) {
 							try {
 								zis = new ZipInputStream(is);
 								ZipEntry entry;
 								while ((entry = zis.getNextEntry()) != null) {
-									if (entry.getName().endsWith(KML_SUFFIX)) {
+									if (entry.getName().endsWith(KML_FILE_EXT)) {
 										final String result = Kml2Gpx.toGpx(zis);
 										if (result != null) {
 											try {
@@ -324,41 +312,24 @@ public class ImportHelper {
 				} catch (SecurityException e) {
 					log.error(e.getMessage(), e);
 				} finally {
-					if (is != null) try {
-						is.close();
-					} catch (IOException ignore) {
-					}
-					if (zis != null) try {
-						zis.close();
-					} catch (IOException ignore) {
-					}
+					Algorithms.closeStream(is);
+					Algorithms.closeStream(zis);
 				}
 				return null;
 			}
 
 			@Override
 			protected void onPostExecute(final GPXFile result) {
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress.dismiss();
-				}
-
+				hideProgress();
 				importGpxOrFavourites(result, fileName, save, useImportDir, forceImportFavourites);
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		};
+		executeImportTask(gpxOrFavouritesImportTask);
 	}
 
 	@SuppressLint("StaticFieldLeak")
 	private void importFavoritesImpl(final GPXFile gpxFile, final String fileName, final boolean forceImportFavourites) {
-		final AsyncTask<Void, Void, GPXFile> favoritesImportTask = new AsyncTask<Void, Void, GPXFile>() {
-			ProgressDialog progress = null;
-
-			@Override
-			protected void onPreExecute() {
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""),
-							app.getString(R.string.loading_data));
-				}
-			}
+		AsyncTask<Void, Void, GPXFile> favoritesImportTask = new BaseImportAsyncTask<Void, Void, GPXFile>() {
 
 			@Override
 			protected GPXFile doInBackground(Void... nothing) {
@@ -376,9 +347,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress.dismiss();
-				}
+				hideProgress();
 				Toast.makeText(activity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
 				final Intent newIntent = new Intent(activity,
 						app.getAppCustomization().getFavoritesActivity());
@@ -392,13 +361,7 @@ public class ImportHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	private void handleKmzImport(final Uri kmzFile, final String name, final boolean save, final boolean useImportDir) {
-		new AsyncTask<Void, Void, GPXFile>() {
-			ProgressDialog progress = null;
-
-			@Override
-			protected void onPreExecute() {
-				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
-			}
+		AsyncTask<Void, Void, GPXFile> kmzImportTask = new BaseImportAsyncTask<Void, Void, GPXFile>() {
 
 			@Override
 			protected GPXFile doInBackground(Void... voids) {
@@ -411,7 +374,7 @@ public class ImportHelper {
 
 						ZipEntry entry;
 						while ((entry = zis.getNextEntry()) != null) {
-							if (entry.getName().endsWith(KML_SUFFIX)) {
+							if (entry.getName().endsWith(KML_FILE_EXT)) {
 								final String result = Kml2Gpx.toGpx(zis);
 								if (result != null) {
 									try {
@@ -426,39 +389,25 @@ public class ImportHelper {
 				} catch (Exception e) {
 					log.error(e.getMessage(), e);
 				} finally {
-					try {
-						if (is != null) {
-							is.close();
-						}
-						if (zis != null) {
-							zis.close();
-						}
-					} catch (IOException ignore) {
-					}
+					Algorithms.closeStream(is);
+					Algorithms.closeStream(zis);
 				}
 				return null;
 			}
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress.dismiss();
-				}
+				hideProgress();
 				handleResult(result, name, save, useImportDir, false);
 			}
 
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		};
+		executeImportTask(kmzImportTask);
 	}
 
 	@SuppressLint("StaticFieldLeak")
 	private void handleKmlImport(final Uri kmlFile, final String name, final boolean save, final boolean useImportDir) {
-		new AsyncTask<Void, Void, GPXFile>() {
-			ProgressDialog progress = null;
-
-			@Override
-			protected void onPreExecute() {
-				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
-			}
+		AsyncTask<Void, Void, GPXFile> kmlImportTask = new BaseImportAsyncTask<Void, Void, GPXFile>() {
 
 			@Override
 			protected GPXFile doInBackground(Void... nothing) {
@@ -480,34 +429,23 @@ public class ImportHelper {
 				} catch (SecurityException e) {
 					log.error(e.getMessage(), e);
 				} finally {
-					if (is != null) try {
-						is.close();
-					} catch (IOException ignore) {
-					}
+					Algorithms.closeStream(is);
 				}
 				return null;
 			}
 
 			@Override
 			protected void onPostExecute(GPXFile result) {
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress.dismiss();
-				}
+				hideProgress();
 				handleResult(result, name, save, useImportDir, false);
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		};
+		executeImportTask(kmlImportTask);
 	}
 
 	@SuppressLint("StaticFieldLeak")
 	private void handleObfImport(final Uri obfFile, final String name) {
-		new AsyncTask<Void, Void, String>() {
-
-			ProgressDialog progress;
-
-			@Override
-			protected void onPreExecute() {
-				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
-			}
+		AsyncTask<Void, Void, String> obfImportTask = new BaseImportAsyncTask<Void, Void, String>() {
 
 			@Override
 			protected String doInBackground(Void... voids) {
@@ -522,12 +460,11 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(String message) {
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress.dismiss();
-				}
-				Toast.makeText(app, message, Toast.LENGTH_SHORT).show();
+				hideProgress();
+				app.showShortToastMessage(message);
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		};
+		executeImportTask(obfImportTask);
 	}
 
 	@NonNull
@@ -568,7 +505,7 @@ public class ImportHelper {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 			error = e.getMessage();
-		}  finally {
+		} finally {
 			if (in != null) {
 				try {
 					in.close();
@@ -589,14 +526,7 @@ public class ImportHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	private void handleSqliteTileImport(final Uri uri, final String name) {
-		new AsyncTask<Void, Void, String>() {
-
-			ProgressDialog progress;
-
-			@Override
-			protected void onPreExecute() {
-				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
-			}
+		AsyncTask<Void, Void, String> sqliteTileImportTask = new BaseImportAsyncTask<Void, Void, String>() {
 
 			@Override
 			protected String doInBackground(Void... voids) {
@@ -605,9 +535,7 @@ public class ImportHelper {
 
 			@Override
 			protected void onPostExecute(String error) {
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress.dismiss();
-				}
+				hideProgress();
 				if (error == null) {
 					OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
 					if (plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
@@ -622,7 +550,8 @@ public class ImportHelper {
 					Toast.makeText(app, app.getString(R.string.map_import_error) + ": " + error, Toast.LENGTH_SHORT).show();
 				}
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		};
+		executeImportTask(sqliteTileImportTask);
 	}
 
 	public void chooseFileToImport(final ImportType importType, final CallbackWithObject callback) {
@@ -664,11 +593,11 @@ public class ImportHelper {
 					if (fileName.endsWith(importType.getExtension())) {
 						if (importType.equals(ImportType.SETTINGS)) {
 							handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), callback);
-						} else if (importType.equals(ImportType.ROUTING)){
+						} else if (importType.equals(ImportType.ROUTING)) {
 							handleXmlFileImport(data, fileName, callback);
 						}
 					} else {
-						app.showToastMessage(app.getString(R.string.not_support_file_type_with_ext, 
+						app.showToastMessage(app.getString(R.string.not_support_file_type_with_ext,
 								importType.getExtension().replaceAll("\\.", "").toUpperCase()));
 					}
 				}
@@ -692,16 +621,7 @@ public class ImportHelper {
 	@SuppressLint("StaticFieldLeak")
 	private void handleOsmAndSettingsImport(final Uri uri, final String name, final String latestChanges, final int version,
 	                                        final CallbackWithObject<List<SettingsItem>> callback) {
-		final AsyncTask<Void, Void, String> settingsImportTask = new AsyncTask<Void, Void, String>() {
-
-			ProgressDialog progress;
-
-			@Override
-			protected void onPreExecute() {
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
-				}
-			}
+		AsyncTask<Void, Void, String> settingsImportTask = new BaseImportAsyncTask<Void, Void, String>() {
 
 			@Override
 			protected String doInBackground(Void... voids) {
@@ -721,9 +641,7 @@ public class ImportHelper {
 					app.getSettingsHelper().collectSettings(file, latestChanges, version, new SettingsCollectListener() {
 						@Override
 						public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
-							if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
-								progress.dismiss();
-							}
+							hideProgress();
 							if (succeed) {
 								List<SettingsItem> pluginIndependentItems = new ArrayList<>();
 								List<PluginSettingsItem> pluginSettingsItems = new ArrayList<>();
@@ -747,9 +665,7 @@ public class ImportHelper {
 						}
 					});
 				} else {
-					if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
-						progress.dismiss();
-					}
+					hideProgress();
 					app.showShortToastMessage(app.getString(R.string.file_import_error, name, error));
 				}
 			}
@@ -815,17 +731,14 @@ public class ImportHelper {
 	@SuppressLint("StaticFieldLeak")
 	private void handleXmlFileImport(final Uri intentUri, final String fileName,
 	                                 final CallbackWithObject routingCallback) {
-		final AsyncTask<Void, Void, String> renderingImportTask = new AsyncTask<Void, Void, String>() {
+		AsyncTask<Void, Void, String> renderingImportTask = new BaseImportAsyncTask<Void, Void, String>() {
 
 			private String destFileName;
 			private ImportType importType;
-			private ProgressDialog progress;
 
 			@Override
 			protected void onPreExecute() {
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
-				}
+				showProgress();
 				destFileName = fileName;
 			}
 
@@ -870,12 +783,6 @@ public class ImportHelper {
 				} else {
 					hideProgress();
 					app.showShortToastMessage(app.getString(R.string.file_import_error, destFileName, error));
-				}
-			}
-
-			private void hideProgress() {
-				if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress.dismiss();
 				}
 			}
 
@@ -927,11 +834,7 @@ public class ImportHelper {
 								break;
 							}
 						}
-						try {
-							is.close();
-						} catch (IOException e) {
-							log.error(e);
-						}
+						Algorithms.closeStream(is);
 					}
 				} catch (FileNotFoundException | XmlPullParserException e) {
 					log.error(e);
@@ -940,11 +843,7 @@ public class ImportHelper {
 				} catch (SecurityException e) {
 					log.error(e.getMessage(), e);
 				} finally {
-					if (is != null) try {
-						is.close();
-					} catch (IOException e) {
-						log.error(e);
-					}
+					Algorithms.closeStream(is);
 				}
 			}
 		};
@@ -961,7 +860,7 @@ public class ImportHelper {
 				}
 			} else {
 				if (save) {
-					new SaveAsyncTask(result, name, useImportDir).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					executeImportTask(new SaveAsyncTask(result, name, useImportDir));
 				} else {
 					showGpxInDetailsActivity(result);
 				}
@@ -1053,10 +952,10 @@ public class ImportHelper {
 		if ("".equals(fileName)) {
 			builder.append("import_").append(new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time))).append(GPX_FILE_EXT); //$NON-NLS-1$
 		}
-		if (fileName.endsWith(KML_SUFFIX)) {
-			builder.replace(builder.length() - KML_SUFFIX.length(), builder.length(), GPX_FILE_EXT);
-		} else if (fileName.endsWith(KMZ_SUFFIX)) {
-			builder.replace(builder.length() - KMZ_SUFFIX.length(), builder.length(), GPX_FILE_EXT);
+		if (fileName.endsWith(KML_FILE_EXT)) {
+			builder.replace(builder.length() - KML_FILE_EXT.length(), builder.length(), GPX_FILE_EXT);
+		} else if (fileName.endsWith(KMZ_FILE_EXT)) {
+			builder.replace(builder.length() - KMZ_FILE_EXT.length(), builder.length(), GPX_FILE_EXT);
 		} else if (!fileName.endsWith(GPX_FILE_EXT)) {
 			builder.append(GPX_FILE_EXT);
 		}
@@ -1081,7 +980,7 @@ public class ImportHelper {
 
 		@Override
 		protected void onPostExecute(final String warning) {
-			if(Algorithms.isEmpty(warning)) {
+			if (Algorithms.isEmpty(warning)) {
 				showGpxInDetailsActivity(result);
 			} else {
 				Toast.makeText(activity, warning, Toast.LENGTH_LONG).show();
@@ -1209,6 +1108,30 @@ public class ImportHelper {
 			});
 		} else {
 			importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
+		}
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	protected abstract class BaseImportAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
+
+		protected ProgressDialog progress;
+
+		@Override
+		protected void onPreExecute() {
+			showProgress();
+		}
+
+		protected void showProgress() {
+			if (AndroidUtils.isActivityNotDestroyed(activity)) {
+				String title = app.getString(R.string.loading_smth, "");
+				progress = ProgressDialog.show(activity, title, app.getString(R.string.loading_data));
+			}
+		}
+
+		protected void hideProgress() {
+			if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+				progress.dismiss();
+			}
 		}
 	}
 }
