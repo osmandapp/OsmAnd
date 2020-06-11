@@ -1290,8 +1290,12 @@ public class RouteInfoWidgetsFactory {
 					int locimgId = R.drawable.warnings_limit;
 					String text = "";
 					String bottomText = "";
+					OsmandSettings.DrivingRegion region = settings.DRIVING_REGION.get();
+					boolean americanType = region.isAmericanTypeSigns();
 					if(alarm.getType() == AlarmInfoType.SPEED_LIMIT) {
-						if(settings.DRIVING_REGION.get().americanSigns){
+						if(region == OsmandSettings.DrivingRegion.CANADA) {
+							locimgId = R.drawable.warnings_speed_limit_ca;
+						} else if(americanType){
 							locimgId = R.drawable.warnings_speed_limit_us;
 						//else case is done by drawing red ring
 						}
@@ -1301,7 +1305,7 @@ public class RouteInfoWidgetsFactory {
 					} else if(alarm.getType() == AlarmInfoType.BORDER_CONTROL) {
 						locimgId = R.drawable.warnings_border_control;
 					} else if(alarm.getType() == AlarmInfoType.HAZARD) {
-						if(settings.DRIVING_REGION.get().americanSigns){
+						if (americanType) {
 							locimgId = R.drawable.warnings_hazard_us;
 						} else {
 							locimgId = R.drawable.warnings_hazard;
@@ -1310,7 +1314,7 @@ public class RouteInfoWidgetsFactory {
 						//image done by drawing red ring
 						text = "$";
 					} else if(alarm.getType() == AlarmInfoType.TRAFFIC_CALMING) {
-						if(settings.DRIVING_REGION.get().americanSigns){
+						if (americanType) {
 							locimgId = R.drawable.warnings_traffic_calming_us;
 						} else {
 							locimgId = R.drawable.warnings_traffic_calming;
@@ -1318,19 +1322,19 @@ public class RouteInfoWidgetsFactory {
 					} else if(alarm.getType() == AlarmInfoType.STOP) {
 						locimgId = R.drawable.warnings_stop;
 					} else if(alarm.getType() == AlarmInfoType.RAILWAY) {
-						if(settings.DRIVING_REGION.get().americanSigns){
+						if (americanType) {
 							locimgId = R.drawable.warnings_railways_us;
 						} else {
 							locimgId = R.drawable.warnings_railways;
 						}
 					} else if(alarm.getType() == AlarmInfoType.PEDESTRIAN) {
-						if(settings.DRIVING_REGION.get().americanSigns){
+						if (americanType) {
 							locimgId = R.drawable.warnings_pedestrian_us;
 						} else {
 							locimgId = R.drawable.warnings_pedestrian;
 						}
 					} else if(alarm.getType() == AlarmInfoType.TUNNEL) {
-						if(settings.DRIVING_REGION.get().americanSigns){
+						if (americanType) {
 							locimgId = R.drawable.warnings_tunnel_us;
 						} else {
 							locimgId = R.drawable.warnings_tunnel;
@@ -1360,7 +1364,7 @@ public class RouteInfoWidgetsFactory {
 						if (!Algorithms.objectEquals(text, this.textString)) {
 							textString = text;
 							this.text.setText(this.textString);
-							if (alarm.getType() == AlarmInfoType.SPEED_LIMIT && settings.DRIVING_REGION.get().americanSigns) {
+							if (alarm.getType() == AlarmInfoType.SPEED_LIMIT && americanType) {
 								this.text.setPadding(0, AndroidUtils.dpToPx(layout.getContext(), 20f), 0, 0);
 							} else {
 								this.text.setPadding(0, 0, 0, 0);
@@ -1370,7 +1374,7 @@ public class RouteInfoWidgetsFactory {
 							bottomTextString = bottomText;
 							this.bottomText.setText(this.bottomTextString);
 							this.bottomText.setTextColor(ContextCompat.getColor(layout.getContext(),
-									settings.DRIVING_REGION.get().americanSigns ? R.color.color_black : R.color.color_white));
+									americanType ? R.color.color_black : R.color.color_white));
 						}
 					}
 				}

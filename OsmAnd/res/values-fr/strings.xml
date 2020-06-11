@@ -766,7 +766,7 @@
     <string name="bg_service_sleep_mode_on">Arrêter
 \n l\'exécution de l\'application en arrière-plan</string>
     <string name="bg_service_screen_lock_toast">L\'écran est verrouillé</string>
-    <string name="bg_service_interval">Positionner l\'intervalle d\'activation :</string>
+    <string name="bg_service_interval">Définir l\'intervalle d\'activation :</string>
     <string name="layer_map_appearance">Configurer l\'écran</string>
     <string name="show_lanes">Voies de circulation</string>
     <string name="avoid_unpaved">Éviter les voies non revêtues</string>
@@ -3715,7 +3715,7 @@
 \n
 \n%2$s : Niveaux de zoom auxquels les tuiles originales seront visibles. En dehors de ces valeurs, il y aura une augmentation ou une diminution d\'échelle.</string>
     <string name="turn_screen_on_navigation_instructions_descr">L\'écran s\'allumera pour afficher les instructions de navigation.</string>
-    <string name="turn_screen_on_wake_time_descr">Sélectionnez le temps d\'affichage de l\'écran après allumage (\"%1$s\" signifie pas d\'extinction).</string>
+    <string name="turn_screen_on_wake_time_descr">Sélectionnez la durée d\'affichage de l\'écran après allumage (\"%1$s\" signifie pas d\'extinction).</string>
     <string name="screen_timeout_descr">Si l\'option \"%1$s\" est activée, le temps d\'activité en dépendra.</string>
     <string name="expire_time_descr">Délai d\'expiration en minutes. Les tuiles en cache seront rechargées après ce délai. Laissez ce champ vide pour ne jamais rafraîchir les tuiles pour cette source.
 \n
@@ -3726,7 +3726,7 @@
     <string name="screen_control">Contrôle de l\'écran</string>
     <string name="system_screen_timeout">Utiliser le délai système pour l’extinction de l\'écran</string>
     <string name="turn_screen_on_options_descr">Options de réveil de l\'écran :</string>
-    <string name="turn_screen_on_descr">Sélectionnez les options de réveil de l’écran (assurez-vous qu’OsmAnd est au premier plan au moment du verrouillage de l’appareil) :</string>
+    <string name="turn_screen_on_descr">Sélectionnez les options d\'allumage de l’écran (assurez-vous qu’OsmAnd est au premier plan au moment du verrouillage de l’appareil) :</string>
     <string name="turn_screen_on_navigation_instructions">Instructions de navigation</string>
     <string name="turn_screen_on_power_button_descr">Appuyez sur le bouton d\'alimentation de l\'appareil pour allumer l\'écran avec OsmAnd par dessus l’écran de verrouillage.</string>
     <string name="turn_screen_on_power_button">Bouton marche / arrêt</string>
@@ -3757,4 +3757,5 @@
     <string name="details_dialog_decr">Contrôler la visibilité des autres détails affichés sur la carte</string>
     <string name="shared_string_night_map">Carte nocturne</string>
     <string name="shared_string_all_time">Tout le temps</string>
+    <string name="turn_screen_on_power_button_disabled">Désactivé. Nécessite l\'option « Garder l\'écran allumé » sous « Délai d\'affichage de l\'écran ».</string>
 </resources>

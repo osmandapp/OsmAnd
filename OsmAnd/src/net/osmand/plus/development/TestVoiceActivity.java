@@ -239,7 +239,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (11.1) (TAP TO FULLY POPULATE)\n" + getVoiceSystemInfo(), builder(p).attention(""));
 		addButton(ll, "\u25BA (11.2) (TAP TO CHANGE)\n \u25CF Voice prompt delay for selected output: " +
 				((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get()].get() +
-				"\u00A0ms.\nAvoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.", builder(p).attention(""));
+				"\u00A0ms\n (Avoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.)", builder(p).attention(""));
 		addButton(ll, "\u25BA (11.3) (TAP TO TOGGLE)\n \u25CF Display each TTS utterance on screen: " +
 				((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.get().toString(), builder(p).attention(""));
 		ll.forceLayout();
@@ -310,7 +310,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 					}
 					buttonDelay.setText("\u25BA (11.2) (TAP TO CHANGE)\n \u25CF Voice prompt delay for selected output: " +
 							((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get()].get() +
-							"\u00A0ms.\nAvoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.");
+							"\u00A0ms\n (Avoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.)");
 				}
 				if (description.startsWith("\u25BA (11.3)")) {
 					if (((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.get() == false) {

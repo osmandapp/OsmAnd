@@ -149,7 +149,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnSpee
 
 	private Drawable getWarningIcon() {
 		ApplicationMode selectedMode = getSelectedAppMode();
-		boolean americanSigns = settings.DRIVING_REGION.getModeValue(selectedMode).americanSigns;
+		boolean americanSigns = settings.DRIVING_REGION.getModeValue(selectedMode).isAmericanTypeSigns();
 		if (settings.SHOW_TRAFFIC_WARNINGS.getModeValue(selectedMode)) {
 			return getIcon(americanSigns ? R.drawable.warnings_traffic_calming_us : R.drawable.warnings_traffic_calming);
 		} else if (settings.SHOW_PEDESTRIAN.getModeValue(selectedMode)) {
