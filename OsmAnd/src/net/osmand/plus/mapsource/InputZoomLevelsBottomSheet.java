@@ -50,7 +50,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	private int dialogDescrRes;
 	private int minZoom;
 	private int maxZoom;
-	private boolean showWarning;
+	private boolean newMapSource;
 
 	public static void showInstance(@NonNull FragmentManager fm,
 									@Nullable Fragment targetFragment,
@@ -58,14 +58,14 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 									int dialogDescr,
 									int minZoom,
 									int maxZoom,
-									boolean showWarning) {
+									boolean newMapSource) {
 		InputZoomLevelsBottomSheet bottomSheet = new InputZoomLevelsBottomSheet();
 		bottomSheet.setTargetFragment(targetFragment, 0);
 		bottomSheet.setSliderDescrRes(sliderDescr);
 		bottomSheet.setDialogDescrRes(dialogDescr);
 		bottomSheet.setMinZoom(Math.max(minZoom, SLIDER_FROM));
 		bottomSheet.setMaxZoom(Math.min(maxZoom, SLIDER_TO));
-		bottomSheet.setShowWarning(showWarning);
+		bottomSheet.setNewMapSource(newMapSource);
 		bottomSheet.show(fm, TAG);
 	}
 
@@ -77,7 +77,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			maxZoom = savedInstanceState.getInt(MAX_ZOOM_KEY);
 			dialogDescrRes = savedInstanceState.getInt(DIALOG_DESCR_RES_KEY);
 			sliderDescrRes = savedInstanceState.getInt(SLIDER_DESCR_RES_KEY);
-			showWarning = savedInstanceState.getBoolean(SHOW_WARNING_KEY);
+			newMapSource = savedInstanceState.getBoolean(SHOW_WARNING_KEY);
 		}
 		LayoutInflater inflater = UiUtilities.getMaterialInflater(app, nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.shared_string_zoom_levels));
@@ -141,13 +141,13 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putInt(MAX_ZOOM_KEY, maxZoom);
 		outState.putInt(SLIDER_DESCR_RES_KEY, sliderDescrRes);
 		outState.putInt(DIALOG_DESCR_RES_KEY, dialogDescrRes);
-		outState.putBoolean(SHOW_WARNING_KEY, showWarning);
+		outState.putBoolean(SHOW_WARNING_KEY, newMapSource);
 		super.onSaveInstanceState(outState);
 	}
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		if (showWarning) {
+		if (newMapSource) {
 			showWarningDialog();
 		} else {
 			applySelectedZooms();
@@ -220,8 +220,8 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		this.maxZoom = maxZoom;
 	}
 
-	public void setShowWarning(boolean showWarning) {
-		this.showWarning = showWarning;
+	public void setNewMapSource(boolean newMapSource) {
+		this.newMapSource = newMapSource;
 	}
 
 	public interface OnZoomSetListener {
