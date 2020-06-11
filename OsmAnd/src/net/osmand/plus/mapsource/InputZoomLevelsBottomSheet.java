@@ -41,7 +41,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final String MAX_ZOOM_KEY = "max_zoom_key";
 	private static final String SLIDER_DESCR_RES_KEY = "slider_descr_key";
 	private static final String DIALOG_DESCR_RES_KEY = "dialog_descr_key";
-	private static final String SHOW_WARNING_KEY = "show_warning_key";
+	private static final String NEW_MAP_SOURCE = "new_map_source";
 	private static final int SLIDER_FROM = 1;
 	private static final int SLIDER_TO = 22;
 	@StringRes
@@ -77,7 +77,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			maxZoom = savedInstanceState.getInt(MAX_ZOOM_KEY);
 			dialogDescrRes = savedInstanceState.getInt(DIALOG_DESCR_RES_KEY);
 			sliderDescrRes = savedInstanceState.getInt(SLIDER_DESCR_RES_KEY);
-			newMapSource = savedInstanceState.getBoolean(SHOW_WARNING_KEY);
+			newMapSource = savedInstanceState.getBoolean(NEW_MAP_SOURCE);
 		}
 		LayoutInflater inflater = UiUtilities.getMaterialInflater(app, nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.shared_string_zoom_levels));
@@ -141,14 +141,14 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putInt(MAX_ZOOM_KEY, maxZoom);
 		outState.putInt(SLIDER_DESCR_RES_KEY, sliderDescrRes);
 		outState.putInt(DIALOG_DESCR_RES_KEY, dialogDescrRes);
-		outState.putBoolean(SHOW_WARNING_KEY, newMapSource);
+		outState.putBoolean(NEW_MAP_SOURCE, newMapSource);
 		super.onSaveInstanceState(outState);
 	}
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		if (newMapSource) {
-			showWarningDialog();
+		if (!newMapSource) {
+			showClearTilesWarningDialog();
 		} else {
 			applySelectedZooms();
 		}
@@ -164,7 +164,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		return R.string.shared_string_apply;
 	}
 
-	private void showWarningDialog() {
+	private void showClearTilesWarningDialog() {
 		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
 		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
 		dismissDialog.setTitle(getString(R.string.osmand_parking_warning));
