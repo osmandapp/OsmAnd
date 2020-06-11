@@ -3,6 +3,7 @@ package net.osmand.plus;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +33,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -51,6 +54,8 @@ import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
+
+import java.util.List;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -644,5 +649,44 @@ public class UiUtilities {
 			LOG.error("Error trying to find index of " + textToStyle + " " + e);
 			return spannable;
 		}
+	}
+
+	public static ListPopupWindow createListPopupWindow(Context themedCtx, View v,
+	                                                    List<SimplePopUpMenuItemAdapter.SimplePopUpMenuItem> items,
+	                                                    final AdapterView.OnItemClickListener listener) {
+		int contentPadding = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int contentPaddingHalf = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+
+		Paint paint = new Paint();
+		paint.setTextSize(themedCtx.getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
+		CharSequence longestTitle = "";
+		for (SimplePopUpMenuItemAdapter.SimplePopUpMenuItem item : items) {
+			if (item.getTitle().length() > longestTitle.length()) {
+				longestTitle = item.getTitle();
+			}
+		}
+		float titleTextWidth = paint.measureText(longestTitle.toString());
+		float itemWidth = titleTextWidth + contentPadding;
+		float minWidth = v.getWidth();
+
+		SimplePopUpMenuItemAdapter adapter =
+				new SimplePopUpMenuItemAdapter(themedCtx, R.layout.popup_menu_item, items);
+		final ListPopupWindow listPopupWindow = new ListPopupWindow(themedCtx);
+		listPopupWindow.setAnchorView(v);
+		listPopupWindow.setContentWidth((int) (Math.max(itemWidth, minWidth)));
+		listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
+		listPopupWindow.setVerticalOffset(-v.getHeight() + contentPaddingHalf);
+		listPopupWindow.setModal(true);
+		listPopupWindow.setAdapter(adapter);
+		listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				if (listener != null) {
+					listener.onItemClick(parent, view, position, id);
+				}
+				listPopupWindow.dismiss();
+			}
+		});
+		return listPopupWindow;
 	}
 }
