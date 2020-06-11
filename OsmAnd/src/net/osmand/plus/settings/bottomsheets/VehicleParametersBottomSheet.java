@@ -1,11 +1,14 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -113,16 +116,54 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 				currentValue = preference.getValueFromEntries(selectedItem);
 				String currentValueStr = currentValue == 0.0f ? "" : String.valueOf(currentValue + 0.01f);
 				text.setText(currentValueStr);
-				text.requestFocus();
-				text.setSelection(text.getText().length());
 				adapter.notifyDataSetChanged();
 			}
 		});
 		recyclerView.setAdapter(adapter);
 		adapter.setSelectedItem(selectedItem);
+
+		rightButton = mainView.findViewById(R.id.right_bottom_button);
+		UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomButtonType(), getRightBottomButtonTextId());
+		rightButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onRightBottomButtonClick();
+			}
+		});
+
 		return new BaseBottomSheetItem.Builder()
 				.setCustomView(mainView)
 				.create();
+	}
+
+	@SuppressLint("ClickableViewAccessibility")
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		final ScrollView scrollView = view.findViewById(R.id.scroll_view);
+		final EditText text = view.findViewById(R.id.text_edit);
+		text.clearFocus();
+		text.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				text.onTouchEvent(event);
+				text.setSelection(text.getText().length());
+				scrollView.postDelayed(new Runnable() {
+					public void run() {
+						View lastChild = scrollView.getChildAt(scrollView.getChildCount() - 1);
+						int bottom = lastChild.getBottom() + scrollView.getPaddingBottom();
+						int delta = bottom - (scrollView.getScrollY() + scrollView.getHeight());
+						scrollView.scrollBy(0, delta);
+					}
+				}, 100);
+				return true;
+			}
+		});
+	}
+
+	@Override
+	protected boolean hideButtonsContainer() {
+		return true;
 	}
 
 	@Override
