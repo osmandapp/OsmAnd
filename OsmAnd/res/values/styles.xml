@@ -154,6 +154,7 @@
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_light</item>
         <item name="bottom_menu_view_bg">@drawable/bg_bottom_menu_light</item>
         <item name="left_menu_view_bg">@drawable/bg_left_menu_light</item>
+        <item name="right_menu_view_bg">@drawable/bg_right_menu_light</item>
         <item name="bg_point_editor_view">@drawable/bg_point_editor_view_light</item>
         <item name="dashboard_divider">@color/divider_color_light</item>
         <item name="divider_color">@color/divider_color</item>

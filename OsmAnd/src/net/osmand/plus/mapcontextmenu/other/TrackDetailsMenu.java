@@ -172,6 +172,8 @@ public class TrackDetailsMenu {
 						}
 					}
 				});
+				int navigationIconResId = AndroidUtils.getNavigationIconResId(mapActivity);
+				toolbarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
 				toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
