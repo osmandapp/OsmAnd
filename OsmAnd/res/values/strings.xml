@@ -23,11 +23,11 @@
     <string name="shared_string_delete_all_q">Delete all?</string>
     <string name="export_import_quick_actions_with_profiles_promo">You can export or import quick actions with app profiles.</string>
     <string name="tiles_storage_descr">Choose how to store downloaded tiles.</string>
-    <string name="expire_time_descr">Temporarily downloaded tiles will be re-downloaded after a specified amount of minutes.
-        Left empty tiles will never be re-downloaded for this source.
+    <string name="expire_time_descr">Cached tiles will be re-downloaded after the specified number of minutes.
+        Leave this field empty to never refresh tiles for this source.
         \n\nOne day is 1440 minutes.\nOne week is 10 080 minutes.\nOne month is 43 829 minutes.</string>
     <string name="map_source_zoom_levels_descr">Affects the screen when used as map or overlay/underlay.
-        \n\n%1$s: The map is limited to the range zoom levels selected. \n\n%2$s is the level all original tiles visible at. Changing level always fetches new tiles.</string>
+        \n\n%1$s: The map is limited to the zoom level range selected. \n\n%2$s are the levels at which the original tiles will be visible, upscaling or downscaling will occur outside these values.</string>
     <string name="map_source_zoom_levels">Set a minimum and maximum zoom level to show or load the online map.</string>
     <string name="storage_format">Storage format</string>
     <string name="mercator_projection">Mercator projection</string>
@@ -40,20 +40,20 @@
     <string name="pseudo_mercator_projection">Pseudo-Mercator projection</string>
     <string name="keep_screen_off">Keep screen off</string>
     <string name="keep_screen_on">Keep screen on</string>
-    <string name="turn_screen_on_wake_time_descr">Select how long the screen should be kept on. (\"%1$s\" keeps the screen from turning off.)</string>
+    <string name="turn_screen_on_wake_time_descr">Select the screen timeout after waking up. (\"%1$s\" applies no timeout.)</string>
     <string name="turn_screen_on_proximity_sensor">Proximity sensor</string>
     <string name="turn_screen_on_power_button">Power button</string>
-    <string name="turn_screen_on_power_button_descr">Pressing the power button on your device turns the screen on with OsmAnd on top of the lock screen.</string>
-    <string name="turn_screen_on_power_button_disabled">Off. Requires \'Keep screen on\' under \'Timeout after wake-up\'.</string>
+    <string name="turn_screen_on_power_button_descr">Pressing the device power button will turn the screen on with OsmAnd on top of the lock screen.</string>
+    <string name="turn_screen_on_power_button_disabled">Disabled. Requires \'Keep screen on\' under \'Timeout after wake-up\'.</string>
     <string name="turn_screen_on_navigation_instructions">Navigation instructions</string>
     <string name="turn_screen_on_navigation_instructions_descr">Each navigation instruction will turn the screen on.</string>
     <string name="turn_screen_on_descr">Select screen wake-up options (make sure OsmAnd is in the foreground when the device is being locked):</string>
     <!--string name="turn_screen_on_options_descr">Screen wake-up options:</string-->
-    <string name="system_screen_timeout">Let the system decide screen timeout</string>
+    <string name="system_screen_timeout">Use system screen timeout</string>
     <string name="system_screen_timeout_descr">Turns the screen off as per the system\'s screen timeout.</string>
     <string name="screen_control">Screen control</string>
     <string name="shared_string_always">Always</string>
-    <string name="gpx_parse_error">The OsmAnd GPX file is damaged, please contact the support team.</string>
+    <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact the support team to investigate further.</string>
     <string name="weight_limit_description">Provide your vehicle weight, some route restrictions may apply for heavy vehicles.</string>
     <string name="height_limit_description">Provide your vehicle height, some route restrictions may apply for high vehicles.</string>
     <string name="width_limit_description">Provide your vehicle width some route restrictions may apply for wide vehicles.</string>
@@ -2360,7 +2360,7 @@
     <string name="shared_string_about">About</string>
     <string name="about_settings_descr">Version info, licenses, project members</string>
     <string name="local_index_tile_data_zooms">Zoom levels downloaded: %1$s</string>
-    <string name="local_index_tile_data_expire">Minutes until data expires: %1$s</string>
+    <string name="local_index_tile_data_expire">Expiration time (minutes): %1$s</string>
     <string name="local_index_tile_data_downloadable">Downloadable: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maximum zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum zoom: %1$s</string>
@@ -2368,7 +2368,7 @@
     <string name="edit_tilesource_successfully">Saved the tilesource \"%1$s\"</string>
     <string name="edit_tilesource_elliptic_tile">Elliptic Mercator projection</string>
     <string name="edit_tilesource_maxzoom">Maximum zoom</string>
-    <string name="edit_tilesource_expiration_time">Minutes until source expires</string>
+    <string name="edit_tilesource_expiration_time">Expiration time (minutes)</string>
     <string name="edit_tilesource_minzoom">Minimum zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Select existing…</string>
