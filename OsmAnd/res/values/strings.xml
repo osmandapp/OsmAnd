@@ -2366,7 +2366,7 @@
     <string name="local_index_tile_data_maxzoom">Maximum zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum zoom: %1$s</string>
     <string name="local_index_tile_data_name">Tile data: %1$s</string>
-    <string name="edit_tilesource_successfully">Saved the tilesource \"%1$s\"</string>
+    <string name="edit_tilesource_successfully">Tilesource %1$s saved</string>
     <string name="edit_tilesource_elliptic_tile">Elliptic Mercator projection</string>
     <string name="edit_tilesource_maxzoom">Maximum zoom</string>
     <string name="edit_tilesource_expiration_time">Expiration time (minutes)</string>
