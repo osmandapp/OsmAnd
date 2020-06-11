@@ -810,14 +810,12 @@ public class BinaryRoutePlanner {
 					printRoad(">?", visitedSegments.get(calculateRoutePointId(next, next.isPositive())),
 							next.isPositive());
 				}
-				if (distFromStart < next.distanceFromStart) {
-					if (ctx.config.heuristicCoefficient <= 1) {
-						System.err.println("! Alert distance from start " + distFromStart + " < "
-								+ next.distanceFromStart + " id=" + next.road.id);
-					}
-				}
 				if (distFromStart < visIt.distanceFromStart && next.getParentRoute() == null) {
 					toAdd = true;
+					if (ctx.config.heuristicCoefficient <= 1) {
+						System.err.println("! Alert distance from start " + distFromStart + " < "
+								+ visIt.distanceFromStart + " id=" + next.road.id);
+					}
 				} else {
 					toAdd = false;
 				}
