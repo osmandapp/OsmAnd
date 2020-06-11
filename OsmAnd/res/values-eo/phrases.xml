@@ -665,7 +665,7 @@
     <string name="poi_attraction_slide">Deglitejo</string>
     <string name="poi_attraction_summer_toboggan">Somera tobogano</string>
     <string name="poi_attraction_swing_carousel">Karuselo ĉenseĝa</string>
-    <string name="poi_attraction_train">Vagonareto (atrakcio)</string>
+    <string name="poi_attraction_train">Vagonareto (allogaĵo)</string>
     <string name="poi_attraction_water_slide">Akvodeglitejo</string>
     <string name="poi_religion_voodoo">Voduo</string>
     <string name="poi_religion_taoist">Daŭismo</string>
@@ -845,7 +845,7 @@
     <string name="poi_craft_gardener">Ĝardenistejo</string>
     <string name="poi_craft_glaziery">Vitristejo</string>
     <string name="poi_craft_handicraft">Manmetistejo</string>
-    <string name="poi_craft_hvac">Oficejo de isto de hejtado, aerumado, klimatizado</string>
+    <string name="poi_craft_hvac">Oficejo de isto pri hejtado, aerumado, klimatizado</string>
     <string name="poi_craft_watchmaker">Poŝ-horloĝistejo</string>
     <string name="poi_craft_insulation">Varmizolaĵistejo</string>
     <string name="poi_craft_jeweller">Juvelista laborejo</string>
@@ -1016,7 +1016,7 @@
     <string name="poi_wiki_lang_zh">Vikipedio Ĉina</string>
     <string name="facebook">Facebook</string>
     <string name="poi_skype">Skype</string>
-    <string name="poi_bollard">Paliseto</string>
+    <string name="poi_bollard">Paliso</string>
     <string name="poi_cycle_barrier">Barilo kontraŭbicikla</string>
     <string name="poi_motorcycle_barrier">Barilo kontraŭmotorcikla</string>
     <string name="poi_block">Bloko</string>
@@ -1129,7 +1129,7 @@
     <string name="poi_bicycle_parking_rack">rakoj</string>
     <string name="poi_bicycle_parking_building">speciala konstruaĵo</string>
     <string name="poi_bicycle_parking_shed">budo</string>
-    <string name="poi_bicycle_parking_bollard">paliseto</string>
+    <string name="poi_bicycle_parking_bollard">paliso</string>
     <string name="poi_bicycle_parking_informal">neformala</string>
     <string name="poi_leaf_type_broadleaved">Folihava(j)</string>
     <string name="poi_leaf_type_needleleaved">Pinglofolia(j)</string>
