@@ -88,14 +88,14 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 	}
 
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconId, int menuItemType,
-	                               boolean useLayoutDirectionForIcon) {
+	                               boolean flipIconForRtl) {
 		OsmandApplication app = requireMyApplication();
 		Drawable d = iconId == 0 ? null : app.getUIUtilities().getIcon(iconId, isLightActionBar() ?
 				R.color.active_buttons_and_links_text_light :
 				R.color.active_buttons_and_links_text_dark);
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
 		if (d != null) {
-			if (useLayoutDirectionForIcon) {
+			if (flipIconForRtl) {
 				d = AndroidUtils.getDrawableForDirection(app, d);
 			}
 			menuItem.setIcon(d);
