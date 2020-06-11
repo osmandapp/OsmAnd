@@ -1123,7 +1123,7 @@
     <string name="driving_region_japan">Japan</string>
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="driving_region_europe_asia">Europa, Asien, Lateinamerika und andere</string>
+    <string name="driving_region_europe_asia">Europa, Asien, Lateinamerika und ähnliche</string>
     <string name="driving_region_uk">UK, Indien und andere</string>
     <string name="driving_region_australia">Australien</string>
     <string name="driving_region">Verkehrsregion</string>
@@ -1131,13 +1131,13 @@
     <string name="shared_string_about">Über</string>
     <string name="about_settings_descr">Versionsinfo, Lizenz, Projektmitglieder</string>
     <string name="local_index_tile_data_zooms">Heruntergeladene Vergrößerungsstufen: %1$s</string>
-    <string name="local_index_tile_data_expire">Gültigkeit endet in (Minuten): %1$s</string>
+    <string name="local_index_tile_data_expire">Ablaufzeit (Minuten): %1$s</string>
     <string name="local_index_tile_data_downloadable">Herunterladbar: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maximale Vergrößerung: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimale Vergrößerung: %1$s</string>
     <string name="local_index_tile_data_name">Kacheldaten: %1$s</string>
-    <string name="edit_tilesource_successfully">Kachelquelle %1$s wurde gespeichert</string>
-    <string name="edit_tilesource_elliptic_tile">Elliptischer Merkator</string>
+    <string name="edit_tilesource_successfully">Kachelquelle %1$s gespeichert</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptische Mercator-Projektion</string>
     <string name="edit_tilesource_maxzoom">Maximale Vergrößerung</string>
     <string name="edit_tilesource_expiration_time">Ablaufzeit (Minuten)</string>
     <string name="edit_tilesource_minzoom">Minimale Vergrößerung</string>
@@ -3617,7 +3617,7 @@
     <string name="app_mode_ski_snowmobile">Schneemobil</string>
     <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
     <string name="slope_description">Hangneigungskarten verwendet Farben, um die Geländesteilheit zu visualisieren.</string>
-    <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen</string>
+    <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen.</string>
     <string name="changes_applied_to_profile">Die Änderungen wurden auf das \'%1$s\' Profil angewendet.</string>
     <string name="settings_item_read_error">Konnte nicht von \'%1$s\' lesen.</string>
     <string name="settings_item_write_error">Konnte nicht nach \'%1$s\' schreiben.</string>
@@ -3667,7 +3667,7 @@
     <string name="lang_bar">Bairisch</string>
     <string name="lang_ba">Baschkirisch</string>
     <string name="main_actions_descr">Hat nur vier Schaltflächen.</string>
-    <string name="select_wikipedia_article_langs">Wählen Sie die Sprachen aus, in denen Wikipedia-Artikel auf der Karte erscheinen sollen. Sie können zwischen allen verfügbaren Sprachen wechseln, während Sie den Artikel lesen.</string>
+    <string name="select_wikipedia_article_langs">Wählen Sie die Sprachen für Wikipedia-Artikel auf der Karte aus. Wechseln Sie beim Lesen des Artikels zu einer beliebigen verfügbaren Sprache.</string>
     <string name="hidden_items_descr">Diese Elemente werden aus dem Menü ausgeblendet, aber die entsprechenden Optionen oder Plugins funktionieren weiterhin.</string>
     <string name="reorder_or_hide_from">Ordnen Sie Elemente aus %1$s neu an oder blenden Sie sie aus.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
@@ -3734,15 +3734,15 @@
     <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
     <string name="shared_string_drawer">Schublade</string>
     <string name="gpx_parse_error">OsmAnd GPX ist nicht optimal geformt, bitte kontaktieren Sie das Support-Team, um weitere Nachforschungen anzustellen.</string>
-    <string name="map_source_zoom_levels_descr">Diese Parameter beeinflussen die Darstellung, wenn sie als Karte oder Overlay/Underlay verwendet werden. 
-\n
-\n%1$s: Die Karte wird auf die gewählten Zoomstufen begrenzt. 
-\n
-\n%2$s: Zoomstufen, bei denen die Originalkacheln sichtbar sind. Außerhalb dieser Werte tritt eine Skalierung nach oben oder unten ein.</string>
-    <string name="map_source_zoom_levels">Legen Sie die kleinste und größte Zoomstufe fest, bei denen die Online-Karte angezeigt oder geladen wird.</string>
+    <string name="map_source_zoom_levels_descr">Wirkt sich auf den Bildschirm aus, wenn er als Karte oder Overlay/Underlay verwendet wird. 
+\n 
+\n%1$s: Die Karte ist auf den ausgewählten Zoomstufenbereich beschränkt. 
+\n 
+\n%2$s sind die Ebenen, auf denen die ursprünglichen Kacheln sichtbar sind, eine Hoch- oder Herunterskalierung findet außerhalb dieser Werte statt.</string>
+    <string name="map_source_zoom_levels">Legen Sie eine minimale und maximale Zoomstufe fest, um die Online-Karte anzuzeigen oder zu laden.</string>
     <string name="shared_string_always">Immer</string>
     <string name="screen_control">Bildschirmsteuerung</string>
-    <string name="system_screen_timeout_descr">Schaltet den Bildschirm nach dem Bildschirm-Timeout des Systems aus.</string>
+    <string name="system_screen_timeout_descr">Schaltet den Bildschirm entsprechend dem Bildschirm-Timeout des Systems aus.</string>
     <string name="system_screen_timeout">Systembildschirm-Timeout verwenden</string>
     <string name="turn_screen_on_options_descr">Optionen zum Aktivieren des Bildschirms:</string>
     <string name="turn_screen_on_descr">Wählen Sie Optionen zum Aufwecken des Bildschirms (stellen Sie sicher, dass OsmAnd im Vordergrund ist, wenn das Gerät gesperrt wird):</string>
@@ -3754,7 +3754,7 @@
     <string name="turn_screen_on_wake_time_descr">Wählen Sie die Zeitüberschreitung des Bildschirms nach dem Aufwachen. („%1$s”, um keine Zeitüberschreitung anzuwenden.)</string>
     <string name="keep_screen_on">Bildschirm eingeschaltet lassen</string>
     <string name="keep_screen_off">Bildschirm ausgeschaltet lassen</string>
-    <string name="screen_timeout_descr">Wenn die Option „%1$s” aktiviert ist, ist die Dauer der Aktivität davon abhängig.</string>
+    <string name="screen_timeout_descr">Wenn \"%1$s\" eingeschaltet ist, hängt die Aktivitätszeit davon ab.</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercator-Projektion</string>
     <string name="one_image_per_tile">Eine Bilddatei pro Kachel</string>
     <string name="sqlite_db_file">SQLiteDB-Datei</string>
@@ -3764,22 +3764,25 @@
     <string name="expire_time">Verfallsdatum</string>
     <string name="mercator_projection">Mercator-Projektion</string>
     <string name="storage_format">Speicherformat</string>
-    <string name="expire_time_descr">Verfallsdatum in Minuten. Kacheln im Zwischenspeicher werden nach der festgelegten Zeit neu geladen. Lassen Sie das Feld leer, wenn die Karten aus dieser Quelle nie aktualisiert werden sollen. 
-\n
-\nEin Tag hat 1440 Minuten.
-\nEine Woche hat 10 080 Minuten.
+    <string name="expire_time_descr">Zwischengespeicherte Kacheln werden nach der angegebenen Anzahl von Minuten erneut heruntergeladen. Lassen Sie dieses Feld leer, um Kacheln für diese Quelle niemals zu aktualisieren. 
+\n 
+\nEin Tag hat 1440 Minuten. 
+\nEine Woche hat 10 080 Minuten. 
 \nEin Monat hat 43 829 Minuten.</string>
-    <string name="tiles_storage_descr">Wählen Sie aus, wie heruntergeladene Kacheln gespeichert werden.</string>
+    <string name="tiles_storage_descr">Wählen Sie, wie heruntergeladene Kacheln gespeichert werden sollen.</string>
     <string name="default_screen_timeout">Zeitüberschreitung des Standardbildschirms</string>
-    <string name="width_limit_description">Bitte geben Sie Ihre Fahrzeugbreite an. Für breite Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
-    <string name="height_limit_description">Bitte geben Sie Ihre Fahrzeughöhe an. Für hohe Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
-    <string name="weight_limit_description">Bitte geben Sie Ihr Fahrzeuggewicht an. Für schwere Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
+    <string name="width_limit_description">Geben Sie Ihre Fahrzeugbreite an. Für breite Fahrzeuge können einige Routenbeschränkungen gelten.</string>
+    <string name="height_limit_description">Geben Sie Ihre Fahrzeughöhe an, für hohe Fahrzeuge können einige Routenbeschränkungen gelten.</string>
+    <string name="weight_limit_description">Geben Sie Ihr Fahrzeuggewicht an, für schwere Fahrzeuge können einige Routenbeschränkungen gelten.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Sie können Schnellaktionen mit Anwendungsprofilen exportieren oder importieren.</string>
     <string name="shared_string_delete_all_q">Alles Löschen\?</string>
     <string name="delete_all_actions_message_q">Möchten Sie %d Schnellaktionen wirklich unwiderruflich löschen\?</string>
     <string name="shared_string_tones">Töne</string>
     <string name="shared_string_meters">Meter</string>
     <string name="screen_timeout">Bildschirm-Zeitlimit</string>
-    <string name="details_dialog_decr">Kontrollieren Sie die Sichtbarkeit zusätzlicher Details, die auf der Karte angezeigt werden</string>
+    <string name="details_dialog_decr">Zusätzliche Kartendetails anzeigen oder ausblenden</string>
     <string name="shared_string_night_map">Nachtkarte</string>
+    <string name="turn_screen_on_power_button_disabled">Deaktiviert. Erfordert \'Bildschirm eingeschaltet lassen\' unter \'Timeout nach dem Aufwachen\'.</string>
+    <string name="add_online_source">Online-Quelle hinzufügen</string>
+    <string name="clear_tiles_warning">Durch die Anwendung dieser Änderungen werden die zwischengespeicherten Daten für diese Kachelquelle gelöscht</string>
 </resources>
