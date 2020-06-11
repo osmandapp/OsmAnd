@@ -37,6 +37,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.TintableCompoundButton;
 
+import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
@@ -524,29 +525,63 @@ public class UiUtilities {
 			activeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.active_color_basic);
 		}
 		int activeDisableColor = getColorWithAlpha(activeColor, 0.25f);
-		ColorStateList activeCsl = new ColorStateList(states,
-				new int[] {activeColor, activeDisableColor});
-		int inactiveColor = ContextCompat.getColor(ctx,
-				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
-		ColorStateList inactiveCsl = new ColorStateList(states,
-				new int[] {inactiveColor, inactiveColor});
-		slider.setTrackColorActive(activeCsl);
-		slider.setTrackColorInactive(inactiveCsl);
-		slider.setHaloColor(activeCsl);
-		slider.setThumbColor(activeCsl);
+		ColorStateList activeCsl = new ColorStateList(states, new int[] {activeColor, activeDisableColor});
+		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
+		ColorStateList inactiveCsl = new ColorStateList(states, new int[] {inactiveColor, inactiveColor});
+		slider.setTrackActiveTintList(activeCsl);
+		slider.setTrackInactiveTintList(inactiveCsl);
+		slider.setHaloTintList(activeCsl);
+		slider.setThumbTintList(activeCsl);
 		int colorBlack = ContextCompat.getColor(ctx, R.color.color_black);
 		int ticksColor = showTicks ?
 				(nightMode ? colorBlack : getColorWithAlpha(colorBlack, 0.5f)) :
 				Color.TRANSPARENT;
-		slider.setTickColor(new ColorStateList(states, new int[] {ticksColor, ticksColor}));
+		slider.setTickTintList(new ColorStateList(states, new int[] {ticksColor, ticksColor}));
 
 		// sizes
-		int thumbRadius = ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_size);
-		int haloRadius = ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_halo_size);
-		int trackHeight = ctx.getResources().getDimensionPixelSize(R.dimen.slider_track_height);
-		slider.setThumbRadius(thumbRadius);
-		slider.setHaloRadius(haloRadius);
-		slider.setTrackHeight(trackHeight);
+		slider.setThumbRadius(ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_size));
+		slider.setHaloRadius(ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_halo_size));
+		slider.setTrackHeight(ctx.getResources().getDimensionPixelSize(R.dimen.slider_track_height));
+
+		// label behavior
+		slider.setLabelBehavior(Slider.LABEL_GONE);
+	}
+
+	public static void setupSlider(RangeSlider slider, boolean nightMode,
+								   @ColorInt Integer activeColor, boolean showTicks) {
+		Context ctx = slider.getContext();
+		if (ctx == null) {
+			return;
+		}
+		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		ctx = new ContextThemeWrapper(ctx, themeId);
+
+		// colors
+		int[][] states = new int[][] {
+				new int[] {android.R.attr.state_enabled},
+				new int[] {-android.R.attr.state_enabled}
+		};
+		if (activeColor == null) {
+			activeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.active_color_basic);
+		}
+		int activeDisableColor = getColorWithAlpha(activeColor, 0.25f);
+		ColorStateList activeCsl = new ColorStateList(states, new int[] {activeColor, activeDisableColor});
+		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
+		ColorStateList inactiveCsl = new ColorStateList(states, new int[] {inactiveColor, inactiveColor});
+		slider.setTrackActiveTintList(activeCsl);
+		slider.setTrackInactiveTintList(inactiveCsl);
+		slider.setHaloTintList(activeCsl);
+		slider.setThumbTintList(activeCsl);
+		int colorBlack = ContextCompat.getColor(ctx, R.color.color_black);
+		int ticksColor = showTicks ?
+				(nightMode ? colorBlack : getColorWithAlpha(colorBlack, 0.5f)) :
+				Color.TRANSPARENT;
+		slider.setTickTintList(new ColorStateList(states, new int[] {ticksColor, ticksColor}));
+
+		// sizes
+		slider.setThumbRadius(ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_size));
+		slider.setHaloRadius(ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_halo_size));
+		slider.setTrackHeight(ctx.getResources().getDimensionPixelSize(R.dimen.slider_track_height));
 
 		// label behavior
 		slider.setLabelBehavior(Slider.LABEL_GONE);
