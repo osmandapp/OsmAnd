@@ -160,8 +160,7 @@
     <string name="install_more">Installa altro…</string>
     <string name="level_to_switch_vector_raster_descr">Usare le mappe vettoriali per andare oltre questo livello.</string>
     <string name="level_to_switch_vector_raster">Minimo livello di zoom vettoriale</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>OSM Online</u> con immagini.</string>
+    <string name="create_poi_link_to_osm_doc"><u>OSM online</u> classificazione di mappa con immagini.</string>
     <string name="error_doing_search">Non posso effettuare una ricerca offline.</string>
     <string name="search_osm_offline">Ricerco tramite geo posizione</string>
     <string name="system_locale">Sistema</string>
@@ -688,9 +687,8 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Punto di parcheggio</string>
-    <string name="osmand_parking_plugin_description">Ti permette di memorizzare dove l\'auto è parcheggiata e quanto tempo rimane.
-\n Puoi trovare il luogo di parcheggio e il tempo rimanente nel pannello di controllo e nel widget sulla mappa. 
-\nSi può aggiungere un promemoria al calendario di Android.</string>
+    <string name="osmand_parking_plugin_description">Ti permette di memorizzare dove l\'auto è parcheggiata e quanto tempo rimane. 
+\n Puoi trovare il luogo di parcheggio e il tempo rimanente nel pannello di controllo e nel widget sulla mappa. Si può aggiungere un promemoria al calendario di Android.</string>
     <string name="osmand_parking_plugin_name">Posizione parcheggio</string>
     <string name="context_menu_item_add_parking_point">Marca come posizione di parcheggio</string>
     <string name="context_menu_item_delete_parking_point">Elimina marcatore di parcheggio</string>
@@ -1257,9 +1255,9 @@
     <string name="speak_poi">PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="shared_string_all">Tutti</string>
-    <string name="record_plugin_description">"Questo componente aggiuntivo attiva la funzionalità di registrare e salvare le tue tracce, o manualmente attraverso il pulsante dedicato nella mappa, oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX.  
-\n 
-\nLe tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli atleti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcune analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni."</string>
+    <string name="record_plugin_description">Questo componente aggiuntivo attiva la funzionalità di registrare e salvare le tue tracce, o manualmente attraverso il pulsante dedicato nella mappa, oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX. 
+\n
+\n Le tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli atleti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcune analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni.</string>
     <string name="record_plugin_name">Registrazione viaggio</string>
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>
@@ -2296,20 +2294,20 @@
     <string name="edit_name">Modifica il nome</string>
     <string name="route_is_too_long_v2">Per lunghe distanze: aggiungere delle mete intermedie se non si ottiene un risultato entro 10 minuti.</string>
     <string name="save_poi_too_many_uppercase">Il nome contiene troppe maiuscole. Continuare\?</string>
-    <string name="osmand_plus_extended_description_part8">"Copertura e qualità approssimativa delle mappe: 
-\n  • Ovest Europa: **** 
-\n  • Est Europa: *** 
-\n  • Russia: *** 
-\n  • Nord America: *** 
-\n  • Sud America: ** 
-\n  • Asia: ** 
-\n  • Giappone e Corea: *** 
-\n  • Medio Oriente: ** 
-\n  • Africa: ** 
-\n  • Antartide: * 
-\n  Molte nazioni del mondo disponibili come download! 
-\n  Dall\'Afghanistan al Zimbabwe, dall\'Australia agli USA. Argentina, Brasile, Canada, Francia, Germania, Messico, Gran Bretagna, Spagna, …
-\n"</string>
+    <string name="osmand_plus_extended_description_part8">Copertura e qualità approssimativa delle mappe: 
+\n • Ovest Europa: **** 
+\n • Est Europa: *** 
+\n • Russia: *** 
+\n • Nord America: *** 
+\n • Sud America: ** 
+\n • Asia: ** 
+\n • Giappone e Corea: *** 
+\n • Medio Oriente: ** 
+\n • Africa: ** 
+\n • Antartide: * 
+\n Molte nazioni del mondo disponibili da scaricare 
+\n Dall\'Afghanistan al Zimbabwe, dall\'Australia agli USA. Argentina, Brasile, Canada, Francia, Germania, Messico, Regno Unito, Spagna, …
+\n</string>
     <string name="osmand_plus_extended_description_part7">Contribuisci direttamente a OSM 
 \n • Segnala errori nei dati 
 \n • Contribuisci tracce GPX a OSM direttamente dall\'app 
@@ -2471,15 +2469,15 @@
 \n • Supporta i punti intermedi nel tuo itinerario 
 \n • Registra la tua traccia GPX oppure caricarne una e seguirla
 \n</string>
-    <string name="osmand_extended_description_part3">"Mappa 
+    <string name="osmand_extended_description_part3">Mappa 
 \n • Mostra i PDI (punti di interesse) vicino a te 
 \n • Disponi la mappa nella direzione del movimento (o della bussola) 
-\n • Mostra dove sei e  la direzione verso cui sei rivolto 
+\n • Mostra dove sei e la direzione verso cui sei rivolto 
 \n • Condividi la tua posizione così i tuoi amici possano trovarti 
 \n • Raccogli i luoghi più importanti nei \'Preferiti\' 
 \n • Ti permette di scegliere come visualizzare i nomi nella mappa: in inglese, in lingua locale, oppure secondo la pronuncia 
 \n • Visualizza mattonelle online speciali, vista satellitare (da Bing), diverse sovrapposizioni come turistico/navigazione tracce GPX e strati aggiuntivi con trasparenze personalizzabili
-\n"</string>
+\n</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automatizzata Navigazione Direzioni) è un\'applicazione di navigazione con l\'accesso ai dati delle mappe mondiali, gratuite e di grande qualità di OpenStreetMap (OSM). 
 \n Goditi la navigazione con indicazioni visive e vocali, la visualizzazione dei PDI (punti di interesse), creando e gestendo le tracce GPX, usando visualizzazione delle linee isoipse e dell\'altitudine, scegliendo fra le modalità auto, bici, pedone, modifiche OSM e molto altro. 
 \n 
@@ -2645,7 +2643,7 @@
     <string name="waypoints_removed_from_map_markers">Punti intermedi rimossi dai marcatori della mappa</string>
     <string name="nothing_found_in_radius">Nessun risultato trovato:</string>
     <string name="shared_string_total">Totale</string>
-    <string name="use_two_digits_longitude">"Usa  due cifre per la longitudine"</string>
+    <string name="use_two_digits_longitude">Usa due cifre per la longitudine</string>
     <string name="shared_string_travel_guides">Viaggio</string>
     <string name="select_waypoints_category_description">Aggiungi tutti i punti intermedi della traccia oppure scegli una categoria separata.</string>
     <string name="shared_string_dont">Non fare</string>
@@ -2717,13 +2715,14 @@
     <string name="wiki_article_search_text">Sto cercando l’articolo Wiki corrispondente</string>
     <string name="wiki_article_not_found">Articolo non trovato</string>
     <string name="how_to_open_wiki_title">Come aprire gli articoli di Wikipedia?</string>
-    <string name="osmand_plus_extended_description_part2">Navigazione
-\n • Funziona online (veloce) o offline (nessuna tariffa di roaming quando sei all\'estero)
-\n • Guida vocale svolta-dopo-svolta (voci registrate e sintetizzate)
+    <string name="osmand_plus_extended_description_part2">Navigazione 
+\n • Funziona online (veloce) o offline (nessuna tariffa di roaming quando sei all\'estero) 
+\n • Guida vocale svolta-dopo-svolta (voci registrate e sintetizzate) 
 \n • Guida sulla corsia opzionale, visualizzazione dei nomi delle strade, e tempo di arrivo stimato 
 \n • Supporto per punti intermedi del tuo itinerario 
 \n • Rielaborazione del percorso automatico ogni volta che si devia 
-\n • Ricerca di posti per indirizzo, per tipo (es: ristorante, albergo, stazione di servizio, museo) o per coordinate geografiche</string>
+\n • Ricerca di posti per indirizzo, per tipo (es: ristorante, albergo, stazione di servizio, museo) o per coordinate geografiche
+\n</string>
     <string name="hide_full_description">Nascondi la descrizione completa</string>
     <string name="show_full_description">Mostra la descrizione completa</string>
     <string name="nautical_render_descr">Stile per la navigazione marittima e fluviale. Caratteristiche principali: boe, fari, linee e punti per la navigazione su acqua, porti, servizi marittimi e isobate.</string>
@@ -3200,7 +3199,7 @@
     <string name="app_mode_camper">Camper</string>
     <string name="shared_string_default">Predefinita</string>
     <string name="app_mode_wagon">Familiare</string>
-    <string name="app_mode_pickup_truck">Pickup</string>
+    <string name="app_mode_pickup_truck">Pick-up</string>
     <string name="weeks_5">Settimane</string>
     <string name="month">Mese</string>
     <string name="months_2_4">Mesi</string>
@@ -3697,11 +3696,11 @@
     <string name="lang_zhminnan">Min meridionale</string>
     <string name="lang_war">Wáray</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">"Il tuo account Google Play viene addebitato al momento dell\'acquisto di una sottoscrizione.
-\n
-\n La sottoscrizione si rinnova automaticamente finché non viene cancellata prima del rinnovo. Il tuo account verrà addebitato per il rinnovo periodico (mensile, trimestrale, annuale) solo alla data di rinnovo.
-\n
-\n Puoi gestire  e cancellare la tua sottoscrizione dalle impostazioni del tuo account Google Play."</string>
+    <string name="osm_live_payment_subscription_management">Il tuo account Google Play viene addebitato al momento dell\'acquisto di una sottoscrizione. 
+\n 
+\n La sottoscrizione si rinnova automaticamente finché non viene cancellata prima del rinnovo. Il tuo account verrà addebitato per il rinnovo periodico (mensile, trimestrale, annuale) solo alla data di rinnovo. 
+\n 
+\n Puoi gestire e cancellare la tua sottoscrizione dalle impostazioni del tuo account Google Play.</string>
     <string name="search_poi_types_descr">Combina PDI di più categorie. Tappa il pulsante per selezionarle tutte, oppure sul lato sinistro per una selezione puntuale.</string>
     <string name="lang_gu">Gujarati</string>
     <string name="lang_ba">Baschiro</string>
@@ -3741,7 +3740,7 @@
     <string name="reset_items_descr">Nascondere le opzioni le reimposta al loro valore originale.</string>
     <string name="main_actions">Azioni principali</string>
     <string name="additional_actions_descr">Puoi accedere a queste azioni toccando il pulsante \"Azioni aggiuntive\".</string>
-    <string name="move_inside_category">Puoi spostare gli elementi solo all\'interno di questa categoria</string>
+    <string name="move_inside_category">Puoi spostare gli elementi solo all\'interno di questa categoria.</string>
     <string name="select_wikipedia_article_langs">Seleziona i linguaggi in cui gli articoli di Wikipedia appariranno sulla mappa. Puoi cambiare fra tutte le lingue disponibili mentre leggi questo articolo.</string>
     <string name="some_articles_may_not_available_in_lang">Alcuni articoli di Wikipedia potrebbero non essere disponibili nella tua lingua.</string>
     <string name="lang_zhyue">Cantonese</string>
@@ -3769,6 +3768,13 @@
     <string name="search_poi_types">Cerca in base al PDI</string>
     <string name="export_import_quick_actions_with_profiles_promo">Puoi Esportare o importare le azioni veloci con i profili dell\'applicazione.</string>
     <string name="shared_string_delete_all_q">Cancellare tutto\?</string>
-    <string name="delete_all_actions_message_q">Sei sicuro di volere cancellare definitivamente l\'azione veloce %d \?</string>
+    <string name="delete_all_actions_message_q">Sei sicuro di volere cancellare definitivamente %d le azioni rapide\?</string>
     <string name="screen_timeout">Tempo del blocco schermo</string>
+    <string name="width_limit_description">Indica la larghezza del veicolo, alcune restrizioni stradali potrebbero essere applicate per veicoli larghi.</string>
+    <string name="height_limit_description">Indica l\'altezza del veicolo, alcune restrizioni stradali potrebbero essere applicate per veicoli alti.</string>
+    <string name="weight_limit_description">Indica il peso del veicolo, alcune restrizioni stradali potrebbero essere applicate per veicoli pesanti.</string>
+    <string name="turn_screen_on_power_button_disabled">Disattivato. Richiede \'Mantieni lo schermo acceso\' sotto \'Tempo di accensione\'.</string>
+    <string name="shared_string_meters">metri</string>
+    <string name="details_dialog_decr">Controlla la visibilità di dettagli aggiuntivi mostrati su mappa</string>
+    <string name="shared_string_night_map">Mappa notturna</string>
 </resources>
