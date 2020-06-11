@@ -524,7 +524,7 @@ dependencies {
 	implementation 'androidx.gridlayout:gridlayout:1.0.0'
 	implementation 'androidx.cardview:cardview:1.0.0'
 	implementation 'androidx.appcompat:appcompat:1.1.0'
-	implementation 'com.google.android.material:material:1.2.0-alpha06'
+	implementation 'com.google.android.material:material:1.2.0-beta01'
 	implementation 'androidx.browser:browser:1.0.0'
 	implementation 'androidx.preference:preference:1.1.0'
 	implementation fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
