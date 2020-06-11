@@ -1075,14 +1075,14 @@
     <string name="shared_string_about">درباره</string>
     <string name="about_settings_descr">دربارهٔ نسخه، گواهی‌ها، اعضای پروژه</string>
     <string name="local_index_tile_data_zooms">زوم‌های دانلود‌شده: %1$s</string>
-    <string name="local_index_tile_data_expire">انقضا (به دقیقه): %1$s</string>
+    <string name="local_index_tile_data_expire">زمان انقضا (به دقیقه): %1$s</string>
     <string name="local_index_tile_data_downloadable">قابل‌دانلود: %1$s</string>
     <string name="local_index_tile_data_maxzoom">بیشترین زوم: %1$s</string>
     <string name="local_index_tile_data_minzoom">کمترین زوم: %1$s</string>
     <string name="local_index_tile_data_name">منبع کاشی‌ها: %1$s</string>
     <string name="edit_tilesource_successfully">منبع کاشی %1$s ذخیره شد</string>
     <string name="edit_tilesource_maxzoom">بیشترین زوم</string>
-    <string name="edit_tilesource_expiration_time">انقضا (به دقیقه)</string>
+    <string name="edit_tilesource_expiration_time">زمان انقضا (به دقیقه)</string>
     <string name="edit_tilesource_minzoom">کمترین زوم</string>
     <string name="edit_tilesource_choose_existing">انتخاب از موارد موجود…</string>
     <string name="maps_define_edit">تعریف/ویرایش…</string>
@@ -2551,7 +2551,7 @@
 \n • آفریقا: ** 
 \n • جنوبگان: * 
 \nبا این نرم‌افزار نقشهٔ بیشتر مناطق جهان را خواهید یافت. 
-\nهر کجا که باشید، فرقی نمی‌کند؛ در فرانسه، آلمان، انگلستان، مکزیک، آمریکا، هلند، ایران، روسیه، برزیل و... 
+\nهر کجا که باشید، فرقی نمی‌کند؛ در فرانسه، آلمان، انگلستان، مکزیک، آمریکا، هلند، ایران، روسیه، برزیل و...
 \n</string>
     <string name="osmand_plus_extended_description_part3">نمایش نقشه 
 \n • نمایش موقعیت و جهت قرارگیری شما 
@@ -3639,7 +3639,7 @@
     <string name="app_mode_ski_touring">تور اسکی</string>
     <string name="app_mode_ski_snowmobile">برف‌رو</string>
     <string name="custom_osmand_plugin">افزونهٔ سفارشی OsmAnd</string>
-    <string name="replace_point_descr">نقطهٔ دیگری را جانشین این کنید</string>
+    <string name="replace_point_descr">نقطهٔ دیگری را جانشین این کنید.</string>
     <string name="changes_applied_to_profile">تغییرات بر پروفایل %1$s به کار گرفته شد.</string>
     <string name="settings_item_read_error">خواندن از %1$s ناموفق بود.</string>
     <string name="settings_item_write_error">نوشتن در %1$s ناموفق بود.</string>
@@ -3668,7 +3668,7 @@
     <string name="divider_descr">چیزهایی که از این نقطه به پایین قرار می‌گیرند، با جداکننده جدا می‌شوند.</string>
     <string name="move_inside_category">اقلام را فقط درون این دسته می‌توانید جابه‌جا کنید.</string>
     <string name="shared_string_items">اقلام</string>
-    <string name="select_wikipedia_article_langs">انتخاب کنید مقاله‌های ویکی‌پدیا به چه زبان‌هایی روی نقشه نمایان شوند. هنگام مطالعهٔ مقاله می‌توانید بین زبان‌های مختلف جابه‌جا شوید.</string>
+    <string name="select_wikipedia_article_langs">زبان‌های مقاله‌های ویکی‌پدیا را برای نمایش روی نقشه انتخاب کنید. هنگام مطالعهٔ مقاله می‌توانید بین زبان‌های موجود جابه‌جا شوید.</string>
     <string name="some_articles_may_not_available_in_lang">ممکن است برخی مقاله‌های ویکی‌پدیا به زبان شما در دسترس نباشد.</string>
     <string name="lang_lmo">لومبارد</string>
     <string name="custom_color">رنگ دلخواه</string>
@@ -3758,7 +3758,7 @@
     <string name="reset_deafult_order">بازنشانی ترتیب پیشفرض اقلام</string>
     <string name="gpx_parse_error">‏OsmAnd GPX قالب درستی ندارد. لطفاً برای بررسی بیشتر با گروه پشتیبانی تماس بگیرید.</string>
     <string name="turn_screen_on_wake_time_descr">زمان خاموشی صفحه پس از بیدارباش را انتخاب کنید. («%1$s» یعنی خاموش نشود)</string>
-    <string name="screen_timeout_descr">اگر گزینهٔ «%1$s» فعال باشد، زمان فعالیت به آن وابسته خواهد بود.</string>
+    <string name="screen_timeout_descr">اگر «%1$s» روشن باشد، زمان فعالیت به آن وابسته خواهد بود.</string>
     <string name="shared_string_always">همیشه</string>
     <string name="screen_control">کنترل صفحه</string>
     <string name="system_screen_timeout_descr">هنگامی که زمان خاموشی صفحه مطابق تنظیمات دستگاه سر برسد، صفحه را خاموش می‌کند.</string>
@@ -3774,10 +3774,10 @@
     <string name="keep_screen_off">صفحه را خاموش نگه دار</string>
     <string name="mercator_projection">فراتابی مرکاتور</string>
     <string name="one_image_per_tile">یک فایل تصویر برای هر کاشی</string>
-    <string name="map_source_zoom_levels_descr">این پارامترها هنگام استفاده از منبع به‌عنوان نقشه یا رولایه/زیرلایه، بر نمایش آن اثر می‌گذارند. 
-\n
-\n‏%1$s: نقشه محدود به پارامترهای انتخاب‌شده خواهد بود.
-\n
+    <string name="map_source_zoom_levels_descr">هنگام استفاده از منبع به‌عنوان نقشه یا رولایه/زیرلایه، بر نمایش آن اثر می‌گذارند. 
+\n 
+\n‏%1$s: نقشه به دامنهٔ زوم انتخاب‌شده محدود می‌شود.
+\n 
 \n‏%2$s: درجات زوم که در آن کاشی‌های اصلی نمایان خواهند بود. خارج از این مقدارها افزایش یا کاهش مقیاس رخ خواهد داد.</string>
     <string name="sqlite_db_file">فایل SQLiteDB</string>
     <string name="online_map_name_helper_text">نامی برای منبع نقشهٔ آنلاین بنویسید.</string>
@@ -3785,11 +3785,11 @@
     <string name="edit_online_source">ویرایش منبع آنلاین</string>
     <string name="expire_time">زمان انقضا</string>
     <string name="storage_format">قالب ذخیره‌گاه</string>
-    <string name="map_source_zoom_levels">کمترین و بیشترین درجهٔ زوم که نقشهٔ آنلاین نمایان خواهد بود یا بار خواهد شد.</string>
-    <string name="expire_time_descr">زمان انقضا به دقیقه. کاشی‌های ذخیره‌شده پس از این مدت زمان مجدداً بار می‌شوند. این خانه را خالی بگذارید تا کاشی‌های این منبع هیچ‌گاه تازه‌سازی نشود.
-\n
-\nیک روز ۱ ۴۴۰ دقیقه است.
-\nیک هفته ۱۰ ۰۸۰ دقیقه است.
+    <string name="map_source_zoom_levels">کمترین و بیشترین درجهٔ زوم را برای نمایش یا بارکردن نقشهٔ آنلاین تنظیم کنید.</string>
+    <string name="expire_time_descr">کاشی‌های ذخیره‌شده پس از این مدت (به دقیقه) مجدداً دانلود می‌شوند. این خانه را خالی بگذارید تا کاشی‌های این منبع هیچ‌گاه تازه‌سازی نشود. 
+\n 
+\nیک روز ۱ ۴۴۰ دقیقه است. 
+\nیک هفته ۱۰ ۰۸۰ دقیقه است. 
 \nیک ماه ۴۳ ۸۲۹ دقیقه است.</string>
     <string name="tiles_storage_descr">شیوهٔ ذخیره‌سازی کاشی‌های دانلودشده را انتخاب کنید.</string>
     <string name="default_screen_timeout">زمان خاموشی پیشفرض صفحه</string>
@@ -3802,11 +3802,13 @@
     <string name="weight_limit_description">وزن وسیلهٔ نقلیهٔ خود را مشخص کنید. ممکن است محدودیت‌های مسیر برای وسایل نقلیهٔ سنگین اِعمال شود.</string>
     <string name="shared_string_tones">تُن</string>
     <string name="shared_string_meters">متر</string>
-    <string name="details_dialog_decr">نمایانی جزئیات اضافه‌تر روی نقشه را کنترل کنید</string>
+    <string name="details_dialog_decr">جزئیات اضافه‌تر را روی نقشه آشکار یا پنهان کنید</string>
     <string name="shared_string_night_map">نقشهٔ شب</string>
     <string name="shared_string_all_time">همیشه</string>
     <string name="turn_screen_on_power_button_disabled">غیرفعال است. به گزینهٔ «روشن نگه داشتن صفحه» در قسمت «زمان خاموشی پس از بیدارباش» نیاز دارد.</string>
     <string name="pseudo_mercator_projection">فراتابی شبه مرکاتور</string>
     <string name="rendering_attr_piste_type_connection_name">اتصال</string>
     <string name="rendering_attr_piste_difficulty_connection_name">اتصال</string>
+    <string name="add_online_source">افزودن منبع آنلاین</string>
+    <string name="clear_tiles_warning">به‌کارگیری این تغییرات، دادهٔ ذخیره‌شده برای این منبعِ کاشی را پاک می‌کند</string>
 </resources>
