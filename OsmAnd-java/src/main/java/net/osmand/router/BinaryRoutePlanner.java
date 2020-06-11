@@ -138,7 +138,7 @@ public class BinaryRoutePlanner {
 			checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() >= 0, graphDirectSegments, start, visitedDirectSegments,
 					"Route is not found from selected start point.");
 			if (ctx.planRouteIn2Directions()) {
-				forwardSearch = (nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) < 0);
+				forwardSearch = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) <= 0;
 //				if (graphDirectSegments.size() * 2 > graphReverseSegments.size()) {
 //					forwardSearch = false;
 //				} else if (graphDirectSegments.size() < 2 * graphReverseSegments.size()) {
@@ -798,40 +798,41 @@ public class BinaryRoutePlanner {
 						" distToEnd=" + distanceToEnd +
 						" segmentPoint=" + segmentPoint + " -- ", next, true);
 			}
-			if (!visitedSegments.containsKey(calculateRoutePointId(next, next.isPositive()))) {
-				if (next.getParentRoute() == null
-						|| ctx.roadPriorityComparator(next.distanceFromStart, next.distanceToEnd,
-								distFromStart, distanceToEnd) > 0) {
-					next.distanceFromStart = distFromStart;
-					next.distanceToEnd = distanceToEnd;
-					if (TRACE_ROUTING) {
-						printRoad(" "+segmentPoint+">>" , next, null);
-					}
-					// put additional information to recover whole route after
-					next.setParentRoute(segment);
-					next.setParentSegmentEnd(segmentPoint);
-					graphSegments.add(next);
-				}
-			} else {
+			RouteSegment visIt = visitedSegments.get(calculateRoutePointId(next, next.isPositive()));
+			boolean toAdd = true;
+			if (visIt != null) {
 				// the segment was already visited! We need to follow better route if it exists
-				// that is very exceptional situation and almost exception, it can happen 
+				// that is very exceptional situation and almost exception, it can happen
 				// 1. when we underestimate distnceToEnd - wrong h()
-				// 2. because we process not small segments but the whole road, it could be that 
+				// 2. because we process not small segments but the whole road, it could be that
 				// deviation from the road is faster than following the whole road itself!
+				if (TRACE_ROUTING) {
+					printRoad(">?", visitedSegments.get(calculateRoutePointId(next, next.isPositive())),
+							next.isPositive());
+				}
 				if (distFromStart < next.distanceFromStart) {
 					if (ctx.config.heuristicCoefficient <= 1) {
 						System.err.println("! Alert distance from start " + distFromStart + " < "
 								+ next.distanceFromStart + " id=" + next.road.id);
 					}
-					// A: we can't change parent route just here, because we need to update visitedSegments
-					// presumably we can do visitedSegments.put(calculateRoutePointId(next), next);
-//					next.distanceFromStart = distFromStart;
-//					next.setParentRoute(segment);
-//					next.setParentSegmentEnd(segmentPoint);
-					if (ctx.visitor != null) {
-						// ctx.visitor.visitSegment(next, false);
-					}
 				}
+				if (distFromStart < visIt.distanceFromStart && next.getParentRoute() == null) {
+					toAdd = true;
+				} else {
+					toAdd = false;
+				}
+			}
+			if (toAdd && (next.getParentRoute() == null || ctx.roadPriorityComparator(next.distanceFromStart,
+					next.distanceToEnd, distFromStart, distanceToEnd) > 0)) {
+				next.distanceFromStart = distFromStart;
+				next.distanceToEnd = distanceToEnd;
+				if (TRACE_ROUTING) {
+					printRoad(" " + segmentPoint + ">>", next, null);
+				}
+				// put additional information to recover whole route after
+				next.setParentRoute(segment);
+				next.setParentSegmentEnd(segmentPoint);
+				graphSegments.add(next);
 			}
 		}
 	}

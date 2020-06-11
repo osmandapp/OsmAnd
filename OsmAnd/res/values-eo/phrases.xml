@@ -253,7 +253,7 @@
     <string name="poi_fire_flapper">Fajrobrigada balailo</string>
     <string name="poi_fire_hose">Fajrobrigada tubo</string>
     <string name="poi_fire_water_pond">Fajrobrigada akvorezervujo</string>
-    <string name="poi_grit_bin">Salujego</string>
+    <string name="poi_grit_bin">Ujo kun sablo/salo</string>
     <string name="poi_ambulance_station">Ambulanca stacio</string>
     <string name="poi_ses_station">Stacio de civila defendo</string>
     <string name="poi_emergency_access_point">Vivsava rekonebla signo</string>
@@ -2924,7 +2924,7 @@
     <string name="poi_cuisine_suki">suki (taja varmega poto)</string>
     <string name="poi_cuisine_udon">udonoj (japanaj nudeloj)</string>
     <string name="poi_cuisine_brasserie">brasserie (steko kun terpomfingroj)</string>
-    <string name="poi_cuisine_bubble_tea">bubble tea/boba (tajvana teo-trinnkaĵo)</string>
+    <string name="poi_cuisine_bubble_tea">bobelteo/boba (tajvana teo-trinnkaĵo)</string>
     <string name="poi_cuisine_yakitori">jakitorio (rostita birdaĵo)</string>
     <string name="poi_cuisine_sagardotegia">cidroj (pomvinoj)</string>
     <string name="poi_cuisine_meat">viando</string>

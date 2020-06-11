@@ -164,7 +164,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (1.2)  New route calculated, 1350m, 3680sec (01:01:20)", builder(p).newRouteCalculated(1350, 3680));
 		addButton(ll, "\u25BA (1.3)  New route calculated 3700m, 7320sec (02:02)", builder(p).newRouteCalculated(3700, 7320));
 		addButton(ll, "\u25BA (1.4)  New route calculated 9100m, 10980sec (03:03)", builder(p).newRouteCalculated(9100, 10980));
-		addButton(ll, "\u25BA (1.5)  New route calculated, 1500m, 4280sec (01:20:20)", builder(p).newRouteCalculated(1500, 4280));
+		addButton(ll, "\u25BA (1.5)  New route calculated, 1500m, 4280sec (01:20:20)", builder(p).newRouteCalculated(1500, 4820));
 		addButton(ll, "\u25BA (2.1)  Route recalculated 11500m, 18600sec (05:10)", builder(p).routeRecalculated(11500, 18600));
 		addButton(ll, "\u25BA (2.2)  Route recalculated 19633m, 26700sec (07:25)", builder(p).routeRecalculated(19633, 26700) );
 		addButton(ll, "\u25BA (2.3)  Route recalculated 89750m, 55800sec (15:30)", builder(p).routeRecalculated(89750, 55800) );
@@ -235,11 +235,11 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (10.3) You have been off the route for 1050m", builder(p).offRoute(1050));
 		addButton(ll, "\u25BA (10.4) You are back on the route", builder(p).backOnRoute());
 
-		addButton(ll, "Voice system info:", builder(p));
+		addButton(ll, "System info and settings:", builder(p));
 		addButton(ll, "\u25BA (11.1) (TAP TO FULLY POPULATE)\n" + getVoiceSystemInfo(), builder(p).attention(""));
 		addButton(ll, "\u25BA (11.2) (TAP TO CHANGE)\n \u25CF Voice prompt delay for selected output: " +
 				((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get()].get() +
-				"\u00A0ms.\nAvoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.", builder(p).attention(""));
+				"\u00A0ms\n (Avoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.)", builder(p).attention(""));
 		addButton(ll, "\u25BA (11.3) (TAP TO TOGGLE)\n \u25CF Display each TTS utterance on screen: " +
 				((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.get().toString(), builder(p).attention(""));
 		ll.forceLayout();
@@ -294,7 +294,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			public void onClick(View v) {
 				builder.play();
 				if (description.startsWith("\u25BA (11.1)")) {
-					buttonInfo.setText("\u25BA (11.1) Info detected:\n" + getVoiceSystemInfo());
+					buttonInfo.setText("\u25BA (11.1) Voice system info:\n" + getVoiceSystemInfo());
 					// Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
 				}
 				if (description.startsWith("\u25BA (11.2)")) {
@@ -310,7 +310,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 					}
 					buttonDelay.setText("\u25BA (11.2) (TAP TO CHANGE)\n \u25CF Voice prompt delay for selected output: " +
 							((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get()].get() +
-							"\u00A0ms.\nAvoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.");
+							"\u00A0ms\n (Avoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.)");
 				}
 				if (description.startsWith("\u25BA (11.3)")) {
 					if (((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.get() == false) {

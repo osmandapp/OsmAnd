@@ -128,7 +128,8 @@ public class EditPoiData {
 			if (oldValue == null || !oldValue.equals(value)) {
 				changedTags.add(tag);
 			}
-			tagValues.put(tag, value);
+			String tagVal = value != null ? value : "";
+			tagValues.put(tag, tagVal);
 			notifyDatasetChanged(tag);
 		} finally {
 			isInEdit = false;
@@ -207,7 +208,8 @@ public class EditPoiData {
 	public void updateTypeTag(String string, boolean userChanges) {
 		checkNotInEdit();
 		try {
-			tagValues.put(POI_TYPE_TAG, string);
+			String val = string != null ? string : "";
+			tagValues.put(POI_TYPE_TAG, val);
 			if (userChanges) {
 				changedTags.add(POI_TYPE_TAG);
 			}
@@ -216,7 +218,8 @@ public class EditPoiData {
 			if (pt != null) {
 				removeTypeTagWithPrefix(!tagValues.containsKey(REMOVE_TAG_PREFIX + pt.getEditOsmTag()));
 				currentPoiType = pt;
-				tagValues.put(pt.getEditOsmTag(), pt.getEditOsmValue());
+				String tagVal = pt.getEditOsmValue() != null ? pt.getEditOsmValue() : "";
+				tagValues.put(pt.getEditOsmTag(), tagVal);
 				if (userChanges) {
 					changedTags.add(pt.getEditOsmTag());
 				}
