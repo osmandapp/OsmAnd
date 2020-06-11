@@ -39,7 +39,7 @@ public class PointDescriptionMenuController extends MenuController {
 				}
 			};
 			leftTitleButtonController.caption = mapActivity.getString(R.string.avoid_road);
-			leftTitleButtonController.leftIconId = R.drawable.ic_action_road_works_dark;
+			leftTitleButtonController.startIconId = R.drawable.ic_action_road_works_dark;
 		}
 	}
 

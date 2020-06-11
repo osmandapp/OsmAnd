@@ -32,7 +32,7 @@ public class WikivoyageWptPtMenuController extends WptPtMenuController {
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.context_menu_read_article);
-		leftTitleButtonController.leftIconId = R.drawable.ic_action_read_text;
+		leftTitleButtonController.startIconId = R.drawable.ic_action_read_text;
 	}
 
 	private static TravelArticle getTravelArticle(@NonNull MapActivity mapActivity, @NonNull WptPt wpt) {
