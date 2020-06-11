@@ -27,7 +27,8 @@
         Leave this field empty to never refresh tiles for this source.
         \n\nOne day is 1440 minutes.\nOne week is 10 080 minutes.\nOne month is 43 829 minutes.</string>
     <string name="map_source_zoom_levels_descr">Affects the screen when used as map or overlay/underlay.
-        \n\n%1$s: The map is limited to the zoom level range selected. \n\n%2$s are the levels at which the original tiles will be visible, upscaling or downscaling will occur outside these values.</string>
+        \n\n%1$s: The map is limited to the zoom level range selected. 
+        \n\n%2$s are the levels at which the original tiles will be visible, upscaling or downscaling will occur outside these values.</string>
     <string name="map_source_zoom_levels">Set a minimum and maximum zoom level to show or load the online map.</string>
     <string name="storage_format">Storage format</string>
     <string name="mercator_projection">Mercator projection</string>
