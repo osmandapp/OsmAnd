@@ -724,12 +724,12 @@
     <string name="about_version">Sürüm :</string>
     <string name="shared_string_about">Hakkında</string>
     <string name="about_settings_descr">Sürüm bilgisi, lisanslar, proje üyeleri</string>
-    <string name="local_index_tile_data_expire">Sona erecek (dakika): %1$s</string>
+    <string name="local_index_tile_data_expire">Sona erme süresi (dakika): %1$s</string>
     <string name="local_index_tile_data_downloadable">İndirilebilir: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Azami yakınlaştırma: %1$s</string>
     <string name="local_index_tile_data_minzoom">Asgari yakınlaştırma: %1$s</string>
-    <string name="edit_tilesource_elliptic_tile">Eliptik izdüşümü</string>
-    <string name="edit_tilesource_expiration_time">Sona erecek (dakika)</string>
+    <string name="edit_tilesource_elliptic_tile">Eliptik Merkatör projeksiyonu</string>
+    <string name="edit_tilesource_expiration_time">Sona erme süresi (dakika)</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Mevcut olanı seç…</string>
     <string name="maps_define_edit">Tanımla/Düzenle…</string>
@@ -1003,7 +1003,7 @@
     <string name="auto_zoom_farthest">Uzun mesafeli görüntüye</string>
     <string name="map_magnifier">Harita büyüteci</string>
     <string name="base_world_map">Dünya temel haritası</string>
-    <string name="local_index_tile_data_zooms">Zvmhay indirildi : %1$s</string>
+    <string name="local_index_tile_data_zooms">İndirilen yakınlaştırma seviyeleri: %1$s</string>
     <string name="local_index_tile_data_name">Döşeme verisi : %1$s</string>
     <string name="edit_tilesource_successfully">Tilesource %1$s kaydedildi</string>
     <string name="edit_tilesource_maxzoom">En fazla yakınlaştırma</string>
@@ -3081,7 +3081,7 @@
 \n • Doğrudan uygulamadan GPX yollarını OSM\'ye yükleyin 
 \n • POI ekleyin ve onları doğrudan (veya çevrim dışıysanız daha sonra) OSM’ye yükleyin
 \n</string>
-    <string name="osmand_extended_description_part8">OsmAnd aktif olarak geliştirilen açık kaynaklı bir yazılımdır. Herkes hataları bildirerek, çevirileri iyileştirerek veya yeni özellikler kodlayarak uygulamaya katkıda bulunabilir. Ek olarak, proje kodlama ve yeni işlevselliklerin test edilmesine fon sağlama konusunda finansal katkılara dayanmaktadır.
+    <string name="osmand_extended_description_part8">OsmAnd aktif olarak geliştirilen açık kaynaklı bir yazılımdır. Herkes hataları bildirerek, çevirileri iyileştirerek veya yeni özellikler kodlayarak uygulamaya katkıda bulunabilir. Ek olarak proje, kodlama ve yeni işlevselliklerin test edilmesine fon sağlama konusunda finansal katkılara dayanmaktadır.
 \n Yaklaşık harita kapsamı ve kalitesi:
 \n • Batı Avrupa: ****
 \n • Doğu Avrupa: ***
@@ -3150,7 +3150,7 @@
 \n • Orta Doğu: **
 \n • Afrika: **
 \n • Antarktika: *
-\n Dünya üzerindeki çoğu ülke indirme olarak mevcut
+\n Dünyadaki çoğu ülke indirmeye hazır
 \n Afganistan\'dan Zimbabve\'ye, Avustralya\'dan ABD\'ye. Arjantin, Brezilya, Kanada, Fransa, Almanya, Meksika, İngiltere, İspanya, …
 \n</string>
     <string name="save_poi_too_many_uppercase">İsim çok fazla büyük harf içermektedir. Devam et\?</string>
@@ -3561,7 +3561,7 @@
     <string name="shared_string_octagon">Sekizgen</string>
     <string name="shared_string_square">Kare</string>
     <string name="shared_string_min">Min</string>
-    <string name="replace_point_descr">Başka bir noktayı bununla değiştirin</string>
+    <string name="replace_point_descr">Başka bir noktayı bununla değiştirin.</string>
     <string name="app_mode_ski_touring">Kayak turu</string>
     <string name="app_mode_ski_snowmobile">Kar arabası</string>
     <string name="custom_osmand_plugin">Özel OsmAnd eklentisi</string>
@@ -3592,7 +3592,7 @@
     <string name="main_actions">Ana eylemler</string>
     <string name="move_inside_category">Ögeleri yalnızca bu kategorinin içine taşıyabilirsiniz.</string>
     <string name="developer_plugin">Geliştirici Eklentisi</string>
-    <string name="select_wikipedia_article_langs">Wikipedia makalelerinin haritada görüneceği dilleri seçin. Makaleyi okurken kullanılabilir bütün diller arasında geçiş yapabilirsiniz.</string>
+    <string name="select_wikipedia_article_langs">Haritadaki Wikipedia makalelerinin dillerini seçin. Makaleyi okurken kullanılabilir herhangi bir dile geçiş yapın.</string>
     <string name="some_articles_may_not_available_in_lang">Bazı Wikipedia makaleleri sizin dilinizde mevcut olmayabilir.</string>
     <string name="lang_zhyue">Kantonca</string>
     <string name="lang_zhminnan">Güney Min</string>
@@ -3683,7 +3683,7 @@
     <string name="gpx_parse_error">OsmAnd GPX doğru biçimlendirilmemiş, daha derinlemesine incelemek için lütfen destek ekibiyle iletişime geçin.</string>
     <string name="shared_string_always">Her zaman</string>
     <string name="screen_control">Ekran denetimi</string>
-    <string name="system_screen_timeout_descr">Sistemin ekran zaman aşımından sonra ekranı kapatır.</string>
+    <string name="system_screen_timeout_descr">Sistemin ekran zaman aşımına göre ekranı kapatır.</string>
     <string name="system_screen_timeout">Sistemin ekran zaman aşımını kullan</string>
     <string name="turn_screen_on_options_descr">Ekran uyandırma seçenekleri:</string>
     <string name="turn_screen_on_descr">Ekran uyandırma seçeneklerini seçin (aygıt kilitlenirken OsmAnd\'ın ön planda olduğundan emin olun):</string>
@@ -3695,7 +3695,7 @@
     <string name="turn_screen_on_wake_time_descr">Uyandıktan sonra ekran zaman aşımını seçin. (\"%1$s\" zaman aşımı uygulamaz.)</string>
     <string name="keep_screen_on">Ekranı açık tut</string>
     <string name="keep_screen_off">Ekranı kapalı tut</string>
-    <string name="screen_timeout_descr">\"%1$s\" seçeneği etkinleştirilirse, etkinlik süresi buna bağlı olacaktır.</string>
+    <string name="screen_timeout_descr">\"%1$s\" açıksa, etkinlik süresi buna bağlı olacaktır.</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercator projeksiyon</string>
     <string name="one_image_per_tile">Döşeme başına bir görüntü dosyası</string>
     <string name="sqlite_db_file">SQLiteDB dosyası</string>
@@ -3703,18 +3703,18 @@
     <string name="online_map_url_helper_text">Çevrim içi kaynağın URL\'sini girin veya yapıştırın.</string>
     <string name="edit_online_source">Çevrim içi kaynağı düzenle</string>
     <string name="expire_time">Sona erme zamanı</string>
-    <string name="mercator_projection">Mercator Projeksiyonu</string>
+    <string name="mercator_projection">Mercator projeksiyonu</string>
     <string name="storage_format">Depolama biçimi</string>
-    <string name="map_source_zoom_levels">Çevrim içi haritanın görüntüleneceği veya yükleneceği en düşük ve en yüksek yakınlaştırma seviyelerini ayarlayın.</string>
-    <string name="map_source_zoom_levels_descr">Bu parametreler, harita veya üst/alt katman olarak kullanıldığında görüntüyü etkileyecektir.
-\n
-\n%1$s: Harita seçilen yakınlaştırmalarla sınırlı olacaktır.
-\n
-\n%2$s: Orijinal döşemelerin görüneceği yakınlaştırma seviyeleri. Ölçeği arttırma veya azaltma, bu değerlerin dışında meydana gelecektir.</string>
-    <string name="expire_time_descr">Dakika cinsinden geçerliliğin sona erme süresi. Önbelleğe alınan döşemeler belirtilen süreden sonra yeniden yüklenecektir. Bu kaynak için döşemeleri hiçbir zaman yeniden yüklememek için bu alanı boş bırakın.
-\n
-\nBir gün 1440 dakikadır.
-\nBir hafta 10 080 dakikadır.
+    <string name="map_source_zoom_levels">Çevrim içi haritayı göstermek veya yüklemek için en düşük ve en yüksek yakınlaştırma seviyesini ayarlayın.</string>
+    <string name="map_source_zoom_levels_descr">Harita veya üst/alt katman olarak kullanıldığında ekranı etkiler. 
+\n 
+\n%1$s: Harita seçilen yakınlaştırma seviyesi aralığıyla sınırlıdır. 
+\n 
+\n%2$s, orijinal döşemelerin görüneceği seviyelerdir, ölçeği arttırma veya azaltma, bu değerlerin dışında gerçekleşecektir.</string>
+    <string name="expire_time_descr">Önbelleğe alınan döşemeler belirtilen dakika kadar süreden sonra yeniden indirilecektir. Bu kaynak için döşemeleri hiçbir zaman yeniden yüklememek için bu alanı boş bırakın. 
+\n 
+\nBir gün 1440 dakikadır. 
+\nBir hafta 10 080 dakikadır. 
 \nBir ay 43 829 dakikadır.</string>
     <string name="tiles_storage_descr">İndirilen döşemelerin nasıl saklanacağını seçin.</string>
     <string name="default_screen_timeout">Öntanımlı ekran zaman aşımı</string>
@@ -3726,9 +3726,11 @@
     <string name="height_limit_description">Aracınızın yüksekliğini belirtin, yüksek araçlar için bazı güzergah kısıtlamaları geçerli olabilir.</string>
     <string name="weight_limit_description">Aracınızın ağırlığını belirtin, ağır araçlar için bazı güzergah kısıtlamaları geçerli olabilir.</string>
     <string name="shared_string_meters">metre</string>
-    <string name="details_dialog_decr">Haritada gösterilen ek ayrıntıların görünürlüğünü denetleyin</string>
+    <string name="details_dialog_decr">Ek harita ayrıntılarını göster veya gizle</string>
     <string name="shared_string_night_map">Gece haritası</string>
     <string name="shared_string_all_time">Her zaman</string>
     <string name="shared_string_tones">ton</string>
     <string name="turn_screen_on_power_button_disabled">Devre dışı. \'Uyandıktan sonra zaman aşımı\' altındaki \'Ekranı açık tut\' seçeneği gerekir.</string>
+    <string name="add_online_source">Çevrim içi kaynak ekle</string>
+    <string name="clear_tiles_warning">Bu değişiklikleri uygulamak, bu döşeme kaynağı için önbelleğe alınan verileri temizleyecektir</string>
 </resources>
