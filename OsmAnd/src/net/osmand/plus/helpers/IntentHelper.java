@@ -11,6 +11,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
@@ -109,8 +110,8 @@ public class IntentHelper {
 				if (!attrs.isEmpty()) {
 					try {
 						TileSourceManager.TileSourceTemplate r = TileSourceManager.createTileSourceTemplate(attrs);
-						if (r != null && settings.installTileSource(r)) {
-							app.showShortToastMessage(app.getString(R.string.edit_tilesource_successfully, r.getName()));
+						if (r != null) {
+							EditMapSourceDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), r);
 						}
 					} catch (Exception e) {
 						LOG.error("parseAddTileSourceIntent error", e);

@@ -77,6 +77,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private static final String EXPIRE_TIME_KEY = "expire_time_key";
 	private static final String ELLIPTIC_KEY = "elliptic_key";
 	private static final String SQLITE_DB_KEY = "sqlite_db_key";
+	private static final String FROM_TEMPLATE_KEY = "from_template_key";
 	private OsmandApplication app;
 	private TextInputEditText nameEditText;
 	private TextInputEditText urlEditText;
@@ -93,6 +94,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private boolean elliptic = false;
 	private boolean sqliteDB = false;
 	private boolean nightMode;
+	private boolean fromTemplate = false;
 
 	public static void showInstance(@NonNull FragmentManager fm,
 									@Nullable Fragment targetFragment,
@@ -100,6 +102,14 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
 		fragment.setTargetFragment(targetFragment, 0);
 		fragment.setEditedLayerName(editedLayerName);
+		fragment.show(fm, TAG);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm,
+									@NonNull TileSourceTemplate template) {
+		EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
+		fragment.setTemplate(template);
+		fragment.fromTemplate = true;
 		fragment.show(fm, TAG);
 	}
 
@@ -119,6 +129,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			expireTimeMinutes = savedInstanceState.getInt(EXPIRE_TIME_KEY);
 			elliptic = savedInstanceState.getBoolean(ELLIPTIC_KEY);
 			sqliteDB = savedInstanceState.getBoolean(SQLITE_DB_KEY);
+			fromTemplate = savedInstanceState.getBoolean(FROM_TEMPLATE_KEY);
 		}
 		View root = UiUtilities.getMaterialInflater(requireContext(), nightMode).inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
@@ -172,8 +183,10 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				dismiss();
 			}
 		});
-		template = new TileSourceTemplate("", "", PNG_EXT, MAX_ZOOM, MIN_ZOOM, TILE_SIZE, BIT_DENSITY, AVG_SIZE);
-		if (editedLayerName != null) {
+		if (template == null) {
+			template = new TileSourceTemplate("", "", PNG_EXT, MAX_ZOOM, MIN_ZOOM, TILE_SIZE, BIT_DENSITY, AVG_SIZE);
+		}
+		if (editedLayerName != null && !fromTemplate) {
 			if (!editedLayerName.endsWith(IndexConstants.SQLITE_EXT)) {
 				File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + editedLayerName);
 				template = TileSourceManager.createTileSourceTemplate(f);
@@ -194,6 +207,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			}
 		}
 		if (savedInstanceState == null) {
+			editedLayerName = template.getName();
 			urlToLoad = template.getUrlTemplate();
 			expireTimeMinutes = template.getExpirationTimeMinutes();
 			minZoom = template.getMinimumZoomSupported();
@@ -212,6 +226,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		outState.putInt(EXPIRE_TIME_KEY, expireTimeMinutes);
 		outState.putBoolean(ELLIPTIC_KEY, elliptic);
 		outState.putBoolean(SQLITE_DB_KEY, sqliteDB);
+		outState.putBoolean(FROM_TEMPLATE_KEY, fromTemplate);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -408,7 +423,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 							InputZoomLevelsBottomSheet.showInstance(
 									fm, EditMapSourceDialogFragment.this,
 									R.string.map_source_zoom_levels, R.string.map_source_zoom_levels_descr,
-									minZoom, maxZoom, editedLayerName == null
+									minZoom, maxZoom, editedLayerName == null && !fromTemplate
 							);
 							break;
 						case EXPIRE_TIME:
@@ -462,6 +477,10 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 
 	private void setEditedLayerName(@Nullable String editedLayerName) {
 		this.editedLayerName = editedLayerName;
+	}
+
+	public void setTemplate(TileSourceTemplate template) {
+		this.template = template;
 	}
 
 	public interface OnMapSourceUpdateListener {
