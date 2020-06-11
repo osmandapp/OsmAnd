@@ -14,6 +14,7 @@ import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -371,6 +372,15 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
+	}
+
+	@Nullable
+	@Override
+	public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+		Animation anim = new Animation() {
+		};
+		anim.setDuration(0);
+		return anim;
 	}
 
 	@Override

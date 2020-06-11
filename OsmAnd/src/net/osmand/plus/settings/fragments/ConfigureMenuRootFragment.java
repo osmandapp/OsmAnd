@@ -74,6 +74,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			ConfigureMenuRootFragment fragment = new ConfigureMenuRootFragment();
 			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
+			fragment.disableTransitionAnimation();
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(null)
