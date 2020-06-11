@@ -54,7 +54,7 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 		items.add(new TitleItem(title));
 		items.add(new BottomSheetItemWithDescription.Builder()
 				.setDescription(message)
-				.setLayoutId(R.layout.bottom_sheet_item_preference_descr)
+				.setLayoutId(R.layout.bottom_sheet_item_primary_descr)
 				.create());
 	}
 

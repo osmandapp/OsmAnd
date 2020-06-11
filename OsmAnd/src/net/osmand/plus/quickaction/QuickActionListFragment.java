@@ -175,12 +175,13 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
         rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 if (screenType == SCREEN_TYPE_REORDER) {
-                    if (dy > 0 && fab.getVisibility() == View.VISIBLE)
+                    if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
                         fab.hide();
-                    else if (dy < 0 && fab.getVisibility() != View.VISIBLE)
+                    } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                         fab.show();
+                    }
                 }
             }
         });
@@ -505,11 +506,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 final QuickAction action = (QuickAction) item.value;
 
                 if (screenType == SCREEN_TYPE_REORDER) {
-                    h.handleView.setVisibility(View.VISIBLE);
-                    h.deleteBtn.setVisibility(View.VISIBLE);
+                    h.moveButton.setVisibility(View.VISIBLE);
+                    h.deleteIcon.setVisibility(View.VISIBLE);
                     h.checkbox.setVisibility(View.GONE);
 
-                    h.handleView.setOnTouchListener(new View.OnTouchListener() {
+                    h.moveButton.setOnTouchListener(new View.OnTouchListener() {
                         @Override
                         public boolean onTouch(View v, MotionEvent event) {
                             if (MotionEventCompat.getActionMasked(event) ==
@@ -530,6 +531,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                         }
                     });
 
+                    h.deleteBtn.setClickable(true);
+                    h.deleteBtn.setFocusable(true);
                     h.itemContainer.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -543,12 +546,14 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                     });
 
                 } else if (screenType == SCREEN_TYPE_DELETE) {
-                    h.handleView.setVisibility(View.GONE);
-                    h.deleteBtn.setVisibility(View.GONE);
+                    h.moveButton.setVisibility(View.GONE);
+                    h.deleteIcon.setVisibility(View.GONE);
                     h.checkbox.setVisibility(View.VISIBLE);
 
                     h.checkbox.setClickable(false);
 
+                    h.deleteBtn.setClickable(false);
+                    h.deleteBtn.setFocusable(false);
                     h.itemContainer.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -655,20 +660,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 }
                 saveQuickActions();
                 updateListItems();
-                showFABIfNotScrollable();
             }
-        }
-
-        private void showFABIfNotScrollable() {
-            LinearLayoutManager layoutManager = (LinearLayoutManager) rv.getLayoutManager();
-            int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
-            if (screenType == SCREEN_TYPE_REORDER &&
-                    (lastVisibleItemPosition == items.size() - 1
-                            || lastVisibleItemPosition == items.size()) &&
-                    layoutManager.findFirstVisibleItemPosition() == 0 &&
-                    fab.getVisibility() != View.VISIBLE ||
-                    items.size() == 0)
-                fab.show();
         }
 
         public List<QuickAction> getQuickActions() {
@@ -717,8 +709,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment
             public ImageView icon;
             public View itemDivider;
             public View longDivider;
-            public ImageView handleView;
-            public ImageView deleteBtn;
+            public View moveButton;
+            public ImageView moveIcon;
+            public View deleteBtn;
+            public ImageView deleteIcon;
             public CompoundButton checkbox;
             public View itemContainer;
 
@@ -730,14 +724,16 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 icon = (ImageView) itemView.findViewById(R.id.imageView);
                 itemDivider = itemView.findViewById(R.id.item_divider);
                 longDivider = itemView.findViewById(R.id.long_divider);
-                deleteBtn = (ImageView) itemView.findViewById(R.id.action_icon);
-                handleView = (ImageView) itemView.findViewById(R.id.move_icon);
+                deleteBtn = itemView.findViewById(R.id.action_button);
+                deleteIcon = (ImageView) itemView.findViewById(R.id.action_icon);
+                moveButton = itemView.findViewById(R.id.move_button);
+                moveIcon = (ImageView) itemView.findViewById(R.id.move_icon);
                 checkbox = (CompoundButton) itemView.findViewById(R.id.checkbox);
                 itemContainer = itemView.findViewById(R.id.searchListItemLayout);
 
-                deleteBtn.setImageDrawable(app.getUIUtilities()
-                        .getIcon(R.drawable.ic_action_remove, R.color.color_osm_edit_delete));
-                handleView.setImageDrawable(app.getUIUtilities()
+                deleteIcon.setImageDrawable(app.getUIUtilities()
+                        .getIcon(R.drawable.ic_action_delete_item, R.color.color_osm_edit_delete));
+                moveIcon.setImageDrawable(app.getUIUtilities()
                         .getThemedIcon(R.drawable.ic_action_item_move));
                 UiUtilities.setupCompoundButton(checkbox, nightMode,
                         UiUtilities.CompoundButtonType.GLOBAL);
