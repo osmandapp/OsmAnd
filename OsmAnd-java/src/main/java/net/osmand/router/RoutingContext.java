@@ -36,7 +36,7 @@ import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 
 public class RoutingContext {
 
-	public static final boolean SHOW_GC_SIZE = false;
+	public static boolean SHOW_GC_SIZE = false;
 	 
 	
 	private final static Log log = PlatformUtil.getLog(RoutingContext.class);

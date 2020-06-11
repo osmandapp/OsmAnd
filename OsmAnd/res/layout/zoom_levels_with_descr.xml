@@ -65,7 +65,7 @@
             android:textSize="@dimen/default_list_text_size"
             tools:text="3" />
 
-        <com.google.android.material.slider.Slider
+        <com.google.android.material.slider.RangeSlider
             android:id="@+id/zoom_slider"
             style="@style/Widget.Styled.Slider"
             android:layout_width="0dp"

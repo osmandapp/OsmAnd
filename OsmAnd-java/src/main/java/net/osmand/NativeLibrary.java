@@ -354,6 +354,7 @@ public class NativeLibrary {
 				FileInputStream fis = new FileInputStream(f);
 				Algorithms.streamCopy(fis, ous);
 				fis.close();
+				System.out.println("FONT " + name);
 				initFontType(ous.toByteArray(), name.substring(0, name.length() - 4), name.toLowerCase().contains("bold"),
 						name.toLowerCase().contains("italic"));
 			} catch (IOException e) {

@@ -20,14 +20,18 @@ public class Reshaper {
 			return "";
 		}
 	}
+	
 	public static String reshape(String s) {
 		try {
-			ArabicShaping as = new ArabicShaping(ArabicShaping.LETTERS_SHAPE |ArabicShaping.LENGTH_GROW_SHRINK);
+			ArabicShaping as = new ArabicShaping(ArabicShaping.LETTERS_SHAPE |
+					ArabicShaping.LENGTH_GROW_SHRINK);
+			//printSplit("B", s);
 			try {
 				s = as.shape(s);
 			} catch (ArabicShapingException e) {
 				LOG.error(e.getMessage(), e);
 			}
+			//printSplit("A", s);
 			Bidi line = new Bidi(s.length(), s.length());
 			line.setPara(s,  Bidi.LEVEL_DEFAULT_LTR, null);
 //			line.setPara(s, Bidi.LEVEL_DEFAULT_LTR, null);
@@ -96,33 +100,27 @@ public class Reshaper {
 		return ch;
 	}
 	public static void main(String[] args) {
-//		char[] c = new char[] {'א', 'ד','ם', ' ', '1', '2'} ;
-//		String reshape = "אדם";
-//		char[] c = new char[] {'א', 'ד','ם'} ;
-//		String reshape = reshape(new String(c));
-//		for (int i = 0; i < reshape.length(); i++) {
-//			System.out.println(reshape.charAt(i));
-//		}
 		test2();
 		test3();
 		test4();
 		test5();
 	}
 	
-	private static void test3() {
+	public static void test3() {
 		String s = "מרכז מסחרי/השלום (40050)";
 		String reshape = reshape(s);
 		String expected = "(40050) םולשה/ירחסמ זכרמ";
 		check(s, reshape, expected);
 	}
 	
-	private static void test5() {
+	public static void test5() {
 		String s = "מרכז מסחרי/השלום (מרז)";
 		String reshape = reshape(s);
 		String expected = "(זרמ) םולשה/ירחסמ זכרמ";
 		check(s, reshape, expected);
 	}
-	private static void check(String source, String reshape, String expected) {
+	
+	public static void check(String source, String reshape, String expected) {
 		printSplit("Source  ", source);
 		printSplit("Expected", expected);
 		printSplit("Reshaped", reshape);
@@ -131,19 +129,28 @@ public class Reshaper {
 			throw new IllegalArgumentException(String.format("Bug: expected '%s', reshaped '%s'", expected, reshape));
 		}
 	}
-	private static void printSplit(String p, String source) {
+	
+	static void printSplit(String p, String source) {
+		printSplit(p, source, true);
+		printSplit(p, source, false);
+	}
+	static void printSplit(String p, String source, boolean f) {
 		System.out.print(p);
 		System.out.print(": \u2066");
-		for(int i = 0; i < source.length(); i++) {
-			System.out.print(source.charAt(i));
-			System.out.print(" \u200e");
+		for (int i = 0; i < source.length(); i++) {
+			if (f) {
+				System.out.print(source.charAt(i));
+				System.out.print(" \u200e");
+			} else {
+				System.out.print(String.format("%04x ", (int) source.charAt(i)));
+			}
 		}
 //		System.out.println(Arrays.toString(source.toCharArray()));
 		System.out.println();
 		System.out.flush();
 	}
 
-	private static void test2() {
+	public static void test2() {
 		String s = "گچ پژ نمکی باللغة العربي";
 		String reshape = reshape(s);
 		String expected1 = "ﻲﺑﺮﻌﻟﺍ ﺔﻐﻠﻟﺎﺑ ﯽﮑﻤﻧ ﮋﭘ ﭻﮔ";
@@ -151,7 +158,7 @@ public class Reshaper {
 		check(s, reshape, expected1);
 	}
 	
-	private static void test4() {
+	public static void test4() {
 		String s = "Abc (123)";
 		check(s, reshape(s), s);
 	}

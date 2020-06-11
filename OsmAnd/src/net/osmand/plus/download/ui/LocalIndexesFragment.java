@@ -1141,15 +1141,17 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 			});
 		}
-		item = optionsMenu.getMenu().add(R.string.shared_string_rename)
-				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				performBasicOperation(R.string.shared_string_rename, info);
-				return true;
-			}
-		});
+		if (info.getType() != LocalIndexType.TILES_DATA) {
+			item = optionsMenu.getMenu().add(R.string.shared_string_rename)
+					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					performBasicOperation(R.string.shared_string_rename, info);
+					return true;
+				}
+			});
+		}
 		if (info.getType() == LocalIndexType.TILES_DATA
 				&& ((info.getAttachedObject() instanceof TileSourceManager.TileSourceTemplate)
 				|| ((info.getAttachedObject() instanceof SQLiteTileSource)
