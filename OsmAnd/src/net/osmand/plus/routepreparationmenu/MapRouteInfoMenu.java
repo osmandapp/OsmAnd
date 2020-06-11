@@ -44,6 +44,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.routepreparationmenu.cards.NauticalBridgeHeightWarningCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
@@ -633,6 +634,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		} else if (routeCalculationInProgress) {
 			if (app.getRoutingHelper().isPublicTransportMode()) {
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
+			} else if (app.getRoutingHelper().isBoatMode()) {
+				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
 			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate()) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
