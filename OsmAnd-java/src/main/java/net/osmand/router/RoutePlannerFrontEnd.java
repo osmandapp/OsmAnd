@@ -301,7 +301,8 @@ public class RoutePlannerFrontEnd {
 		int py = MapUtils.get31TileNumberY(point.getLatitude());
 		int pind = st ? routeSegmentResult.getStartPointIndex() : routeSegmentResult.getEndPointIndex();
 
-		RouteDataObject r = routeSegmentResult.getObject();
+		RouteDataObject r = new RouteDataObject(routeSegmentResult.getObject());
+		routeSegmentResult.setObject(r);
 		QuadPoint before = null;
 		QuadPoint after = null;
 		if (pind > 0) {

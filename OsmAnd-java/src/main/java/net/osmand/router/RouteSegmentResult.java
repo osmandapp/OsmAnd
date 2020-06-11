@@ -23,7 +23,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
 	// this should be bigger (50-80m) but tests need to be fixed first
 	private static final float DIST_BEARING_DETECT = 5;
-	private final RouteDataObject object;
+	private RouteDataObject object;
 	private int startPointIndex;
 	private int endPointIndex;
 	private List<RouteSegmentResult>[] attachedRoutes;
@@ -535,10 +535,16 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public void setObject(RouteDataObject r) {
+		this.object = r;
+	}
 
 	@Override
 	public String toString() {
 		return object.toString() + ": " + startPointIndex + "-" + endPointIndex;
 	}
+
+	
 
 }
