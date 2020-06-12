@@ -3728,7 +3728,7 @@
     <string name="gpx_parse_error">Tiu ĉi GPX-dosiero estas misformita, kontaktu la helpteamon por sciiĝi pli.</string>
     <string name="shared_string_always">Ĉiam</string>
     <string name="screen_control">Aktiveco de ekrano</string>
-    <string name="system_screen_timeout_descr">Malŝaltas la ekranon post la difinita tempo (laŭ agordo de Android).</string>
+    <string name="system_screen_timeout_descr">Malŝaltas la ekranon laŭ la sistemaj agordoj.</string>
     <string name="system_screen_timeout">Sistema agordo pri malŝalti ekranon</string>
     <string name="turn_screen_on_options_descr">Kondiĉoj por ŝalti ekranon:</string>
     <string name="turn_screen_on_descr">Alĝustigi kiam ŝalti ekranon (certiĝu, ke OsmAnd laboras malfone kiam la aparato estas ŝlosita):</string>
@@ -3750,16 +3750,16 @@
     <string name="expire_time">Tempo de senvalidiĝo</string>
     <string name="mercator_projection">Merkatora projekcio</string>
     <string name="storage_format">Formo de konservado</string>
-    <string name="map_source_zoom_levels">Agordi la minimuman kaj maksimuman skal‑nivelojn ĉe kiuj la enreta mapo estos montrata.</string>
-    <string name="map_source_zoom_levels_descr">La jenaj valoroj efikos sur vidigo de mapa sur-/sub-tavolo.
-\n
-\n%1$s: la mapo estos limigita al la elektitaj skal‑niveloj.
-\n
-\n%2$s: skal‑niveloj inter kiuj la originalaj kaheloj estos montrataj. Kaheloj estos pli-/mal-grandigitaj ekster tiu ĉi rango.</string>
-    <string name="expire_time_descr">Tempo de senvalidiĝo en minutoj. Kaŝmemorigitaj kaheloj estos reelŝutitaj post la difinita tempo. Lasu tiun ĉi kampon malplena por neniam refreŝigi kahelojn el tiu ĉi fonto.
-\n
-\nUnu tago egalas al 1440 minutoj.
-\nUnu semajno egalas al 10 080 minutoj.
+    <string name="map_source_zoom_levels">Agordi la minimuman kaj maksimuman skal‑nivelojn por montri aŭ elŝuti enretan mapon.</string>
+    <string name="map_source_zoom_levels_descr">Efikos sur vidigo de mapa sur-/sub-tavolo. 
+\n 
+\n%1$s: la mapo estos limigita al la difinitaj skal‑niveloj. 
+\n 
+\n%2$s: skal‑niveloj inter kiuj la originalaj kaheloj estos montrataj, kaheloj estos pli-/mal-grandigitaj ekster tiu ĉi rango.</string>
+    <string name="expire_time_descr">Kaŝmemorigitaj kaheloj estos reelŝutitaj post la difinita tempo (en minutoj). Lasu tiun ĉi kampon malplena por neniam refreŝigi kahelojn el tiu ĉi fonto. 
+\n 
+\nUnu tago egalas al 1440 minutoj. 
+\nUnu semajno egalas al 10 080 minutoj. 
 \nUnu jaro egalas al 43 829 minutoj.</string>
     <string name="tiles_storage_descr">Elekti kiel konservi elŝutitajn kahelojn.</string>
     <string name="default_screen_timeout">Implicita aktiveco de ekrano</string>
@@ -3772,9 +3772,10 @@
     <string name="weight_limit_description">Enigu pezon de via veturilo, iuj vojaj limigoj aplikas al pezaj veturiloj.</string>
     <string name="shared_string_tones">tunoj</string>
     <string name="shared_string_meters">metroj</string>
-    <string name="details_dialog_decr">Alĝustigi videblon de pliaj detaloj montrataj sur la mapo</string>
+    <string name="details_dialog_decr">Montri aŭ kaŝi pliajn detalojn sur la mapo</string>
     <string name="shared_string_night_map">Nokta mapo</string>
     <string name="shared_string_all_time">Ĉiam</string>
     <string name="turn_screen_on_power_button_disabled">Malŝaltita. Postulas “teni ekranon aktiva” en la sekcio “aktiveca periodo de ekrano”.</string>
     <string name="clear_tiles_warning">Per apliki tiujn ĉi ŝanĝojn, la kaŝmemorigitaj datumoj por tiu ĉi fonto de kaheloj forviŝiĝos</string>
+    <string name="add_online_source">Aldoni enretan fonton</string>
 </resources>
