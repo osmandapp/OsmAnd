@@ -3,7 +3,6 @@ package net.osmand.plus.mapsource;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -376,8 +375,14 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 					sqLiteTileSource.couldBeDownloadedFromInternet();
 					sqLiteTileSource.updateFromTileSourceTemplate(template);
 				}
+				if (f.exists() && f.isDirectory()) {
+					Algorithms.removeAllFiles(f);
+				}
 			} else {
 				getSettings().installTileSource(template);
+				if (f.exists() && !f.isDirectory()) {
+					f.delete();
+				}
 			}
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof OnMapSourceUpdateListener) {
