@@ -194,7 +194,6 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			if (!editedLayerName.endsWith(IndexConstants.SQLITE_EXT)) {
 				File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + editedLayerName);
 				template = TileSourceManager.createTileSourceTemplate(f);
-				sqliteDB = false;
 			} else {
 				List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
 				File tPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
@@ -207,11 +206,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 						sqLiteTileSource.getBitDensity(), AVG_SIZE);
 				template.setExpirationTimeMinutes(sqLiteTileSource.getExpirationTimeMinutes());
 				template.setEllipticYTile(sqLiteTileSource.isEllipticYTile());
-				sqliteDB = true;
 			}
 		}
 		if (savedInstanceState == null) {
-			editedLayerName = template.getName();
 			urlToLoad = template.getUrlTemplate();
 			expireTimeMinutes = template.getExpirationTimeMinutes();
 			minZoom = template.getMinimumZoomSupported();
@@ -232,6 +229,13 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		outState.putBoolean(SQLITE_DB_KEY, sqliteDB);
 		outState.putBoolean(FROM_TEMPLATE_KEY, fromTemplate);
 		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+		super.onViewStateRestored(savedInstanceState);
+		sqliteDB = nameEditText.getText().toString().contains(IndexConstants.SQLITE_EXT);
+		updateDescription(ConfigurationItem.STORAGE_FORMAT);
 	}
 
 	@Override
@@ -290,6 +294,13 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	public void onStorageFormatSelected(boolean sqliteDb) {
 		if (isAdded()) {
 			this.sqliteDB = sqliteDb;
+			String name = nameEditText.getText().toString();
+			if (sqliteDb && !name.contains(IndexConstants.SQLITE_EXT)) {
+				name += IndexConstants.SQLITE_EXT;
+				nameEditText.setText(name);
+			} else if (!sqliteDb) {
+				nameEditText.setText(name.replace(IndexConstants.SQLITE_EXT, ""));
+			}
 			updateDescription(ConfigurationItem.STORAGE_FORMAT);
 			wasChanged = true;
 		}
@@ -329,7 +340,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 
 	private void saveTemplate() {
 		try {
-			String newName = nameEditText.getText().toString();
+			String newName = nameEditText.getText().toString().replace(IndexConstants.SQLITE_EXT, "");
 			String urlToLoad = urlEditText.getText().toString();
 			template.setName(newName);
 			template.setUrlToLoad(urlToLoad.isEmpty() ? null : urlToLoad.replace("{$x}", "{1}").replace("{$y}", "{2}").replace("{$z}", "{0}"));
@@ -378,7 +389,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void updateUi() {
-		nameEditText.setText(editedLayerName != null ? editedLayerName.replace(IndexConstants.SQLITE_EXT, "") : "");
+		nameEditText.setText(editedLayerName);
 		urlEditText.setText(urlToLoad);
 		nameEditText.addTextChangedListener(getTextWatcher());
 		urlEditText.addTextChangedListener(getTextWatcher());
