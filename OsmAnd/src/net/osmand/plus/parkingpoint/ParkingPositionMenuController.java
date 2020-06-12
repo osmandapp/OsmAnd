@@ -110,8 +110,7 @@ public class ParkingPositionMenuController extends MenuController {
 			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(),
 					ContextCompat.getColor(mapActivity, R.color.parking_icon_background), false, fav);
 		} else {
-			return getIcon(plugin == null || plugin.getParkingTime() <= 0 ?
-					R.drawable.mx_parking : R.drawable.mx_special_parking_time_limited, R.color.map_widget_blue);
+			return null;
 		}
 	}
 

@@ -119,7 +119,6 @@ public class FavoriteImageDrawable extends Drawable {
 	@Override
 	protected void onBoundsChange(Rect bounds) {
 		super.onBoundsChange(bounds);
-		Rect bs = new Rect(bounds);
 		if (!withShadow && !synced) {
 			uiBackgroundIcon.setBounds(0, 0,
 					uiBackgroundIcon.getIntrinsicWidth(), uiBackgroundIcon.getIntrinsicHeight());
