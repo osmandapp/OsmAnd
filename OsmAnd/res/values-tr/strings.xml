@@ -3733,4 +3733,8 @@
     <string name="turn_screen_on_power_button_disabled">Devre dışı. \'Uyandıktan sonra zaman aşımı\' altındaki \'Ekranı açık tut\' seçeneği gerekir.</string>
     <string name="add_online_source">Çevrim içi kaynak ekle</string>
     <string name="clear_tiles_warning">Bu değişiklikleri uygulamak, bu döşeme kaynağı için önbelleğe alınan verileri temizleyecektir</string>
+    <string name="vessel_height_warning_link">Gemi yüksekliğini ayarla</string>
+    <string name="vessel_height_warning">Alçak köprülerden kaçınmak için gemi yüksekliğini ayarlayabilirsiniz. Köprü hareket edebiliyorsa, açık durumdaki yüksekliğini kullanacağımızı unutmayın.</string>
+    <string name="vessel_height_limit_description">Alçak köprülerden kaçınmak için gemi yüksekliğini ayarlayın. Köprü hareket edebiliyorsa, açık durumdaki yüksekliğini kullanacağımızı unutmayın.</string>
+    <string name="vessel_width_limit_description">Dar köprülerden kaçınmak için gemi genişliğini ayarlayın</string>
 </resources>
