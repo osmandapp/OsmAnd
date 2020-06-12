@@ -81,9 +81,8 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		}
 		int expandType = args.getInt(EXPAND_TYPE_KEY, -1);
 
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final View titleView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.bottom_sheet_item_toolbar_title, null);
+		final View titleView = UiUtilities.getInflater(ctx, nightMode)
+				.inflate(R.layout.bottom_sheet_item_toolbar_title, null);
 		TextView textView = (TextView) titleView.findViewById(R.id.title);
 		textView.setText(R.string.show_along_the_route);
 

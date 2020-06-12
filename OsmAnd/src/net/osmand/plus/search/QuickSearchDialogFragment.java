@@ -173,6 +173,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private SearchUICore searchUICore;
 	private SearchResultListener defaultResultListener;
 	private String searchQuery;
+	private boolean nightMode;
 
 	private LatLon centerLatLon;
 	private net.osmand.Location location = null;
@@ -229,6 +230,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
+		nightMode = !app.getSettings().isLightContent();
 		navigationInfo = new NavigationInfo(app);
 		accessibilityAssistant = new AccessibilityAssistant(getActivity());
 		boolean isLightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
@@ -242,7 +244,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							 Bundle savedInstanceState) {
 		final MapActivity mapActivity = getMapActivity();
 		final View view = inflater.inflate(R.layout.search_dialog_fragment, container, false);
-		final boolean nightMode = !app.getSettings().isLightContent();
 
 		toolbarController = new QuickSearchToolbarController();
 		toolbarController.setOnBackButtonClickListener(new OnClickListener() {

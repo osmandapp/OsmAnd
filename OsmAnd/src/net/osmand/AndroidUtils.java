@@ -425,6 +425,17 @@ public class AndroidUtils {
 				: ctx.getResources().getColor(R.color.text_color_secondary_light));
 	}
 
+	public static int getPopupMenuWidth(Context ctx, float textSize, List<String> titles) {
+		int width = 0;
+		for (String title : titles) {
+			int titleWidth = getTextWidth(textSize, title);
+			if (titleWidth > width) {
+				width = titleWidth;
+			}
+		}
+		return width + dpToPx(ctx, 34);
+	}
+
 	public static int getTextWidth(float textSize, String text) {
 		Paint paint = new Paint();
 		paint.setTextSize(textSize);

@@ -12,10 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import static net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
+
 import java.util.List;
 
 public class SimplePopUpMenuItemAdapter
-		extends ArrayAdapter<SimplePopUpMenuItemAdapter.SimplePopUpMenuItem> {
+		extends ArrayAdapter<SimplePopUpMenuItem> {
 
 	private List<SimplePopUpMenuItem> items;
 
@@ -35,7 +37,7 @@ public class SimplePopUpMenuItemAdapter
 	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 		LayoutInflater inflater = LayoutInflater.from(getContext());
 		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.popup_menu_item, null);
+			convertView = inflater.inflate(R.layout.popup_menu_item, parent, false);
 		}
 		SimplePopUpMenuItem item = getItem(position);
 		if (item != null) {

@@ -32,7 +32,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SimplePopUpMenuItemAdapter;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -47,6 +46,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 
 public class TrackDetailsMenu {
 
@@ -490,6 +491,9 @@ public class TrackDetailsMenu {
 		if (mapActivity == null || gpxItem == null) {
 			return;
 		}
+		final OsmandApplication app = mapActivity.getMyApplication();
+		final UiUtilities ic = app.getUIUtilities();
+		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		GPXTrackAnalysis analysis = gpxItem.analysis;
 		if (analysis == null || gpxItem.chartTypes == null) {
 			parentView.setVisibility(View.GONE);
@@ -576,9 +580,6 @@ public class TrackDetailsMenu {
 			}
 		});
 
-		final OsmandApplication app = mapActivity.getMyApplication();
-		final UiUtilities ic = app.getUIUtilities();
-
 		GpxUiHelper.setupGPXChart(app, chart, 4);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();
@@ -652,15 +653,15 @@ public class TrackDetailsMenu {
 			yAxis.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Context themedContext = UiUtilities.getThemedContext(v.getContext(), true);
-					List<SimplePopUpMenuItemAdapter.SimplePopUpMenuItem> items = new ArrayList<>();
+					Context themedContext = UiUtilities.getThemedContext(v.getContext(), nightMode);
+					List<SimplePopUpMenuItem> items = new ArrayList<>();
 					for (GPXDataSetType[] types : availableTypes) {
-						items.add(new SimplePopUpMenuItemAdapter.SimplePopUpMenuItem(
+						items.add(new SimplePopUpMenuItem(
 								GPXDataSetType.getName(app, types),
 								GPXDataSetType.getImageDrawable(app, types)));
 					}
 					UiUtilities.createListPopupWindow(
-							themedContext, v, items, new AdapterView.OnItemClickListener() {
+							themedContext, v, v.getWidth(), items, new AdapterView.OnItemClickListener() {
 						@Override
 						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 							GpxDisplayItem gpxItem = getGpxItem();
@@ -695,14 +696,14 @@ public class TrackDetailsMenu {
 			xAxis.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Context themedContext = UiUtilities.getThemedContext(v.getContext(), true);
-					List<SimplePopUpMenuItemAdapter.SimplePopUpMenuItem> items = new ArrayList<>();
+					Context themedContext = UiUtilities.getThemedContext(v.getContext(), nightMode);
+					List<SimplePopUpMenuItem> items = new ArrayList<>();
 					for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
-						items.add(new SimplePopUpMenuItemAdapter.SimplePopUpMenuItem(
+						items.add(new SimplePopUpMenuItem(
 								app.getString(type.getStringId()), type.getImageDrawable(app)));
 					}
 					UiUtilities.createListPopupWindow(themedContext,
-							v, items, new AdapterView.OnItemClickListener() {
+							v, v.getWidth(), items, new AdapterView.OnItemClickListener() {
 						@Override
 						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 							GpxDisplayItem gpxItem = getGpxItem();

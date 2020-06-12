@@ -55,9 +55,12 @@ import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
+
+import static net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 
 public class UiUtilities {
 
@@ -363,15 +366,15 @@ public class UiUtilities {
 		}
 		return screenOrientation;
 	}
-	
+
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode) {
 		setupSnackbar(snackbar, nightMode, null, null, null, null);
 	}
-	
+
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode, Integer maxLines) {
 		setupSnackbar(snackbar, nightMode, null, null, null, maxLines);
 	}
-	
+
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode, @ColorRes Integer backgroundColor,
 	                                 @ColorRes Integer messageColor, @ColorRes Integer actionColor, Integer maxLines) {
 		if (snackbar == null) {
@@ -556,7 +559,7 @@ public class UiUtilities {
 		// label behavior
 		slider.setLabelBehavior(Slider.LABEL_GONE);
 	}
-	
+
 	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, @StringRes int buttonTextId) {
 		setupDialogButton(nightMode, buttonView, buttonType, buttonView.getContext().getString(buttonTextId));
 	}
@@ -651,23 +654,18 @@ public class UiUtilities {
 		}
 	}
 
-	public static ListPopupWindow createListPopupWindow(Context themedCtx, View v,
-	                                                    List<SimplePopUpMenuItemAdapter.SimplePopUpMenuItem> items,
+	public static ListPopupWindow createListPopupWindow(Context themedCtx,
+	                                                    View v, int minWidth,
+	                                                    List<SimplePopUpMenuItem> items,
 	                                                    final AdapterView.OnItemClickListener listener) {
-		int contentPadding = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		int contentPaddingHalf = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+		int defaultListTextSize = themedCtx.getResources().getDimensionPixelSize(R.dimen.default_list_text_size);
 
-		Paint paint = new Paint();
-		paint.setTextSize(themedCtx.getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
-		CharSequence longestTitle = "";
-		for (SimplePopUpMenuItemAdapter.SimplePopUpMenuItem item : items) {
-			if (item.getTitle().length() > longestTitle.length()) {
-				longestTitle = item.getTitle();
-			}
+		List<String> titles = new ArrayList<>();
+		for (SimplePopUpMenuItem item : items) {
+			titles.add(String.valueOf(item.getTitle()));
 		}
-		float titleTextWidth = paint.measureText(longestTitle.toString());
-		float itemWidth = titleTextWidth + contentPadding;
-		float minWidth = v.getWidth();
+		float itemWidth = AndroidUtils.getPopupMenuWidth(themedCtx, defaultListTextSize, titles);
 
 		SimplePopUpMenuItemAdapter adapter =
 				new SimplePopUpMenuItemAdapter(themedCtx, R.layout.popup_menu_item, items);
