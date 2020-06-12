@@ -6,6 +6,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.*;
+
 public class NauticalBridgeHeightWarningCard extends WarningCard {
 
 	public NauticalBridgeHeightWarningCard(@NonNull MapActivity mapActivity) {
@@ -17,7 +19,6 @@ public class NauticalBridgeHeightWarningCard extends WarningCard {
 
 	@Override
 	protected void onLinkClicked() {
-		BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.VEHICLE_PARAMETERS,
-				mapActivity.getRoutingHelper().getAppMode());
+		BaseSettingsFragment.showInstance(mapActivity, VEHICLE_PARAMETERS, mapActivity.getRoutingHelper().getAppMode());
 	}
 }
