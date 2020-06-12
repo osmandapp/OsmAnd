@@ -3765,4 +3765,8 @@ Pôr do Sol: %2$s</string>
     <string name="turn_screen_on_power_button_disabled">Desativado. Requer \'manter a tela ligada\' em \'tempo limite após a ativação\'.</string>
     <string name="add_online_source">Adicionar fonte online</string>
     <string name="clear_tiles_warning">A aplicação dessas alterações limpará os dados em cache dessa origem de bloco</string>
+    <string name="vessel_height_warning_link">Definir altura da embarcação</string>
+    <string name="vessel_height_warning">Você pode definir a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
+    <string name="vessel_height_limit_description">Defina a altura do vaso para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
+    <string name="vessel_width_limit_description">Defina a largura da embarcação para evitar pontes estreitas</string>
 </resources>
