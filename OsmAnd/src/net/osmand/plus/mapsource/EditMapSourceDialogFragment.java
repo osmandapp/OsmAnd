@@ -177,11 +177,27 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		nameEditText = root.findViewById(R.id.name_edit_text);
 		nameEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 		nameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+		nameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(hasFocus){
+					nameEditText.setSelection(nameEditText.getText().length());
+				}
+			}
+		});
 		urlInputLayout = root.findViewById(R.id.url_input_layout);
 		urlInputLayout.setBoxStrokeColor(boxStrokeColor);
 		urlEditText = root.findViewById(R.id.url_edit_text);
 		urlEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 		urlEditText.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+		urlEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(hasFocus){
+					urlEditText.setSelection(urlEditText.getText().length());
+				}
+			}
+		});
 		contentContainer = root.findViewById(R.id.content_container);
 		saveBtn = root.findViewById(R.id.save_button);
 		saveBtn.setBackgroundResource(nightMode ? R.drawable.dlg_btn_primary_dark : R.drawable.dlg_btn_primary_light);
