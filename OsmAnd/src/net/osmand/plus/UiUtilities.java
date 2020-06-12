@@ -3,7 +3,6 @@ package net.osmand.plus;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -658,6 +657,7 @@ public class UiUtilities {
 	                                                    View v, int minWidth,
 	                                                    List<SimplePopUpMenuItem> items,
 	                                                    final AdapterView.OnItemClickListener listener) {
+		int contentPadding = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		int contentPaddingHalf = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
 		int defaultListTextSize = themedCtx.getResources().getDimensionPixelSize(R.dimen.default_list_text_size);
 
@@ -665,7 +665,8 @@ public class UiUtilities {
 		for (SimplePopUpMenuItem item : items) {
 			titles.add(String.valueOf(item.getTitle()));
 		}
-		float itemWidth = AndroidUtils.getPopupMenuWidth(themedCtx, defaultListTextSize, titles);
+		float itemWidth =
+				AndroidUtils.getTextWidth(themedCtx, defaultListTextSize, titles) + contentPadding;
 
 		SimplePopUpMenuItemAdapter adapter =
 				new SimplePopUpMenuItemAdapter(themedCtx, R.layout.popup_menu_item, items);

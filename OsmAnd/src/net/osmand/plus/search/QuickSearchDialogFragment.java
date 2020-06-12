@@ -1212,7 +1212,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			if (SearchUICore.isDebugMode()) {
 				LOG.info("UI >> Start loading categories");
 			}
-			final boolean nightMode = !app.getSettings().isLightContent();
 			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class, "", null);
 			if (res != null) {
 				List<QuickSearchListItem> rows = new ArrayList<>();
