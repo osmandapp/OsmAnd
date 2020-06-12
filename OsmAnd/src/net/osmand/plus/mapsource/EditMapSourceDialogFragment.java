@@ -96,6 +96,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private boolean sqliteDB = false;
 	private boolean nightMode;
 	private boolean fromTemplate = false;
+	private boolean wasChanged = false;
 
 	public static void showInstance(@NonNull FragmentManager fm,
 									@Nullable Fragment targetFragment,
@@ -154,7 +155,11 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showExitDialog();
+				if (wasChanged || fromTemplate) {
+					showExitDialog();
+				} else {
+					dismiss();
+				}
 			}
 		});
 		int boxStrokeColor = nightMode
@@ -167,8 +172,6 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		TextInputLayout urlInputLayout = root.findViewById(R.id.url_input_layout);
 		urlInputLayout.setBoxStrokeColor(boxStrokeColor);
 		urlEditText = root.findViewById(R.id.url_edit_text);
-		nameEditText.addTextChangedListener(getTextWatcher());
-		urlEditText.addTextChangedListener(getTextWatcher());
 		contentContainer = root.findViewById(R.id.content_container);
 		saveBtn = root.findViewById(R.id.save_button);
 		saveBtn.setBackgroundResource(nightMode ? R.drawable.dlg_btn_primary_dark : R.drawable.dlg_btn_primary_light);
@@ -242,10 +245,12 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 					if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
 						if (event.getAction() == KeyEvent.ACTION_DOWN) {
 							return true;
-						} else {
+						} else if (wasChanged || fromTemplate) {
 							showExitDialog();
-							return true;
+						} else {
+							dismiss();
 						}
+						return true;
 					}
 					return false;
 				}
@@ -259,6 +264,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			minZoom = min;
 			maxZoom = max;
 			updateDescription(ConfigurationItem.ZOOM_LEVELS);
+			wasChanged = true;
 		}
 	}
 
@@ -267,6 +273,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		if (isAdded()) {
 			expireTimeMinutes = expireValue;
 			updateDescription(ConfigurationItem.EXPIRE_TIME);
+			wasChanged = true;
 		}
 	}
 
@@ -275,6 +282,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		if (isAdded()) {
 			this.elliptic = elliptic;
 			updateDescription(ConfigurationItem.MERCATOR_PROJECTION);
+			wasChanged = true;
 		}
 	}
 
@@ -283,6 +291,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		if (isAdded()) {
 			this.sqliteDB = sqliteDb;
 			updateDescription(ConfigurationItem.STORAGE_FORMAT);
+			wasChanged = true;
 		}
 	}
 
@@ -309,6 +318,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 					} else {
 						saveBtn.setEnabled(true);
 						saveBtnTitle.setEnabled(true);
+					}
+					if (Algorithms.objectEquals(editedLayerName, name) || Algorithms.objectEquals(urlToLoad, url)) {
+						wasChanged = true;
 					}
 				}
 			}
@@ -368,6 +380,8 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private void updateUi() {
 		nameEditText.setText(editedLayerName != null ? editedLayerName.replace(IndexConstants.SQLITE_EXT, "") : "");
 		urlEditText.setText(urlToLoad);
+		nameEditText.addTextChangedListener(getTextWatcher());
+		urlEditText.addTextChangedListener(getTextWatcher());
 		addConfigurationItems(ConfigurationItem.values());
 	}
 
