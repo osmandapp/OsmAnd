@@ -55,7 +55,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/name_edit_text"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/favorites_list_item_height" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -72,7 +73,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/url_edit_text"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/favorites_list_item_height" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <include layout="@layout/divider" />
