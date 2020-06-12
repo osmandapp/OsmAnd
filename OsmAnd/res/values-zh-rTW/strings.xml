@@ -1017,12 +1017,12 @@
     <string name="driving_region_japan">日本</string>
     <string name="driving_region_us">美國</string>
     <string name="driving_region_canada">加拿大</string>
-    <string name="driving_region_europe_asia">歐洲、亞洲、拉丁美洲和同類的</string>
-    <string name="driving_region_uk">英國、印度和同類的</string>
+    <string name="driving_region_europe_asia">歐洲、亞洲、拉丁美洲與類似地區</string>
+    <string name="driving_region_uk">英國、印度與類似地區</string>
     <string name="driving_region">駕駛區域</string>
     <string name="map_widget_fps_info">FPS 除錯資訊</string>
-    <string name="local_index_tile_data_zooms">縮放已下載：%1$s</string>
-    <string name="local_index_tile_data_expire">有效時間(分鐘)：%1$s</string>
+    <string name="local_index_tile_data_zooms">縮放等級已下載：%1$s</string>
+    <string name="local_index_tile_data_expire">有效時間（分鐘）：%1$s</string>
     <string name="local_index_tile_data_downloadable">可下載：%1$s</string>
     <string name="local_index_tile_data_maxzoom">最大縮放比：%1$s</string>
     <string name="local_index_tile_data_minzoom">最小縮放比：%1$s</string>
@@ -1031,7 +1031,7 @@
     <string name="edit_tilesource_elliptic_tile">橢圓麥卡托投影</string>
     <string name="edit_tilesource_maxzoom">最大縮放比</string>
     <string name="edit_tilesource_minzoom">最小縮放比</string>
-    <string name="edit_tilesource_expiration_time">有效時間(分鐘)</string>
+    <string name="edit_tilesource_expiration_time">有效時間（分鐘）</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">選取既有的……</string>
     <string name="maps_define_edit">定義/編輯…</string>
@@ -2255,18 +2255,18 @@
     <string name="right_side_navigation">靠右行駛</string>
     <string name="driving_region_automatic">自動</string>
     <string name="shared_string_paused">暫停</string>
-    <string name="osmand_plus_extended_description_part8">大概的地圖覆蓋區域和品質：
-\n• 西歐： ****
-\n• 東歐： ***
-\n• 俄羅斯： ***
-\n• 北美洲： ***
-\n• 南美洲： **
-\n• 亞洲：**
-\n• 日本和韓國： ***
-\n• 中東： **
-\n• 非洲： **
-\n• 南極洲： *
-\n全球大多數國家都可以下載
+    <string name="osmand_plus_extended_description_part8">大概的地圖覆蓋區域和品質： 
+\n• 西歐： **** 
+\n• 東歐： *** 
+\n• 俄羅斯： *** 
+\n• 北美洲： *** 
+\n• 南美洲： ** 
+\n• 亞洲：** 
+\n• 日本與韓國： *** 
+\n• 中東： ** 
+\n• 非洲： ** 
+\n• 南極洲： * 
+\n全球大多數國家都可以下載 
 \n從阿富汗到辛巴威，從澳洲到美國、阿根廷、巴西、加拿大、法國、德國、墨西哥、英國、 西班牙 …
 \n</string>
     <string name="osmand_plus_extended_description_part5">安全功能
@@ -2345,7 +2345,7 @@
 \n• 看到您的速度和海拔高度 
 \n• GPX 錄製選項使您能去記錄您的旅程並且分享 
 \n• 通過附加的外掛元件，您可以啟用等高線和地形陰影</string>
-    <string name="osmand_extended_description_part8">OsmAnd 正在積極的開發的開放原始碼軟體。每個人都可以透過回報錯誤、改進翻譯或編寫新功能，為應用程式做出貢獻。此外，該專案依靠提供資金捐款資助編寫程式碼和測試新的功能。
+    <string name="osmand_extended_description_part8">OsmAnd 正在積極的開發的開放原始碼軟體。每個人都可以透過回報錯誤、改進翻譯或編寫新功能，為應用程式做出貢獻。此外，該專案依靠提供資金捐款資助編寫程式碼和測試新的功能。 
 \n大概的地圖覆蓋區域和品質： 
 \n• 西歐： **** 
 \n• 東歐： *** 
@@ -2353,7 +2353,7 @@
 \n• 北美洲： *** 
 \n• 南美洲： ** 
 \n• 亞洲： ** 
-\n• 日本和韓國： *** 
+\n• 日本與韓國： *** 
 \n• 中東： ** 
 \n• 非洲： ** 
 \n• 南極洲： * 
@@ -3604,7 +3604,7 @@
     <string name="app_mode_ski_touring">滑雪旅遊</string>
     <string name="app_mode_ski_snowmobile">雪地摩托車</string>
     <string name="custom_osmand_plugin">自訂 OsmAnd 外掛程式</string>
-    <string name="replace_point_descr">以此取代另一點</string>
+    <string name="replace_point_descr">以此取代另一點。</string>
     <string name="changes_applied_to_profile">變更已套用至「%1$s」設定檔。</string>
     <string name="settings_item_read_error">無法從「%1$s」讀取。</string>
     <string name="settings_item_write_error">無法寫入至「%1$s」。</string>
@@ -3632,7 +3632,7 @@
     <string name="move_inside_category">您只能在此分類中移動項目。</string>
     <string name="developer_plugin">開發者外掛程式</string>
     <string name="shared_string_items">項目</string>
-    <string name="select_wikipedia_article_langs">選取維基百科的文章在地圖上顯示時的語言。您可以在閱讀文章時在所有可用的語言間切換。</string>
+    <string name="select_wikipedia_article_langs">選取維基百科文章在地圖上顯示的語言。在閱讀文章時可切換至任何可用的語言。</string>
     <string name="some_articles_may_not_available_in_lang">某些維基百科的文章可能無法以您的語言提供。</string>
     <string name="lang_zhyue">粵語</string>
     <string name="lang_zhminnan">閩南語</string>
@@ -3723,7 +3723,7 @@
     <string name="gpx_parse_error">OsmAnd GPX 格式不正確，請聯絡支援團隊以進一步調查。</string>
     <string name="shared_string_always">總是</string>
     <string name="screen_control">螢幕控制</string>
-    <string name="system_screen_timeout_descr">在系統螢幕逾時後關閉螢幕。</string>
+    <string name="system_screen_timeout_descr">根據系統的螢幕逾時關閉螢幕。</string>
     <string name="system_screen_timeout">使用系統螢幕逾時</string>
     <string name="turn_screen_on_options_descr">螢幕喚醒選項：</string>
     <string name="turn_screen_on_descr">選取螢幕喚醒選項（確保裝置鎖定時，OsmAnd 在前景）：</string>
@@ -3735,7 +3735,7 @@
     <string name="turn_screen_on_wake_time_descr">選取喚醒後的螢幕逾時。（「%1$s」不適用逾時。）</string>
     <string name="keep_screen_on">保持螢幕開啟</string>
     <string name="keep_screen_off">保持螢幕關閉</string>
-    <string name="screen_timeout_descr">如果「%1$s」選項已啟用，則活動時間將取決於它。</string>
+    <string name="screen_timeout_descr">若「%1$s」開啟，則活動時間將取決於它。</string>
     <string name="pseudo_mercator_projection">偽麥卡托投影</string>
     <string name="mercator_projection">麥卡托投影</string>
     <string name="one_image_per_tile">每個圖磚一個圖片檔案</string>
@@ -3746,15 +3746,15 @@
     <string name="expire_time">過期時間</string>
     <string name="storage_format">儲存格式</string>
     <string name="map_source_zoom_levels">設定線上地圖顯示或載入的最小與最大縮放等級。</string>
-    <string name="map_source_zoom_levels_descr">當用於地圖或覆蓋層／底圖時，這些參數將會影響其顯示。
-\n
-\n%1$s：地圖將會受限於選定的區域。
-\n
-\n%2$s：可見的原始圖磚縮放等級。在這些值以外的將會升降縮放等級。</string>
-    <string name="expire_time_descr">到期時間（以分鐘為單位）。快取圖磚將會在指定的時間後重新載入。將此欄留空就不會從此來源重新整理圖磚。
-\n
-\n一天是1440分鐘。
-\n一週是10080分鐘。
+    <string name="map_source_zoom_levels_descr">會在用於地圖或覆蓋層／底圖時生效。 
+\n 
+\n%1$s：地圖會受限於選定的縮放等級。 
+\n 
+\n%2$s 是可見的原始圖磚縮放等級。在這些值以外的將會升降縮放等級。</string>
+    <string name="expire_time_descr">在指定的分鐘數後重新下載快取圖磚。將此欄留空就不會從此來源重新整理圖磚。 
+\n 
+\n一天是1440分鐘。 
+\n一週是10080分鐘。 
 \n一個月是43829分鐘。</string>
     <string name="tiles_storage_descr">選擇要如何儲存下載的圖磚。</string>
     <string name="default_screen_timeout">預設螢幕逾時</string>
@@ -3767,8 +3767,10 @@
     <string name="weight_limit_description">提供您的車輛重量，某些路線的限制可能適用於重型車輛。</string>
     <string name="shared_string_tones">色調</string>
     <string name="shared_string_meters">公尺</string>
-    <string name="details_dialog_decr">控制地圖上顯示的額外詳細資訊可見程度</string>
+    <string name="details_dialog_decr">顯示或隱藏額外的地圖詳細資訊</string>
     <string name="shared_string_night_map">夜晚地圖</string>
     <string name="shared_string_all_time">全部時間</string>
     <string name="turn_screen_on_power_button_disabled">已停用。需要「喚醒後逾時」的「保持螢幕開啟」。</string>
+    <string name="add_online_source">新增線上來源</string>
+    <string name="clear_tiles_warning">套用這些變更將會清除這個圖磚來源的快取資料</string>
 </resources>
