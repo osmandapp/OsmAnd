@@ -45,6 +45,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapsource.InputZoomLevelsBottomSheet.OnZoomSetListener;
 import net.osmand.plus.mapsource.ExpireTimeBottomSheet.OnExpireValueSetListener;
 import net.osmand.plus.mapsource.MercatorProjectionBottomSheet.OnMercatorSelectedListener;
@@ -179,6 +180,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		FrameLayout saveBtnBg = root.findViewById(R.id.save_button_bg);
 		saveBtnBg.setBackgroundColor(ContextCompat.getColor(app, btnBgColorRes));
 		saveBtnTitle = root.findViewById(R.id.save_button_title);
+		saveBtnTitle.setTypeface(FontCache.getRobotoMedium(requireContext()));
 		saveBtnTitle.setTextColor(ContextCompat.getColorStateList(app,
 				nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
 		saveBtn.setOnClickListener(new View.OnClickListener() {
