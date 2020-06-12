@@ -82,6 +82,8 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private static final String SQLITE_DB_KEY = "sqlite_db_key";
 	private static final String FROM_TEMPLATE_KEY = "from_template_key";
 	private OsmandApplication app;
+	private TextInputLayout nameInputLayout;
+	private TextInputLayout urlInputLayout;
 	private TextInputEditText nameEditText;
 	private TextInputEditText urlEditText;
 	private LinearLayout contentContainer;
@@ -168,10 +170,10 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				? ContextCompat.getColor(app, R.color.icon_color_osmand_dark)
 				: ContextCompat.getColor(app, R.color.icon_color_osmand_light);
 		int btnBgColorRes = nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
-		TextInputLayout nameInputLayout = root.findViewById(R.id.name_input_layout);
+		nameInputLayout = root.findViewById(R.id.name_input_layout);
 		nameInputLayout.setBoxStrokeColor(boxStrokeColor);
 		nameEditText = root.findViewById(R.id.name_edit_text);
-		TextInputLayout urlInputLayout = root.findViewById(R.id.url_input_layout);
+		urlInputLayout = root.findViewById(R.id.url_input_layout);
 		urlInputLayout.setBoxStrokeColor(boxStrokeColor);
 		urlEditText = root.findViewById(R.id.url_edit_text);
 		contentContainer = root.findViewById(R.id.content_container);
@@ -323,36 +325,18 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		}
 	}
 
-	private TextWatcher getTextWatcher() {
-		return new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+	private void setSaveBtnEnabled() {
+		boolean enabled = !nameEditText.getText().toString().isEmpty()
+				&& !urlEditText.getText().toString().isEmpty();
+		saveBtn.setEnabled(enabled);
+		saveBtnTitle.setEnabled(enabled);
+	}
 
-			}
-
-			@Override
-			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable editable) {
-				if (nameEditText.getText() != null && urlEditText.getText() != null) {
-					String name = nameEditText.getText().toString().trim();
-					String url = urlEditText.getText().toString().trim();
-					if (Algorithms.isEmpty(name) || Algorithms.isEmpty(url)) {
-						saveBtn.setEnabled(false);
-						saveBtnTitle.setEnabled(false);
-					} else {
-						saveBtn.setEnabled(true);
-						saveBtnTitle.setEnabled(true);
-					}
-					if (Algorithms.objectEquals(editedLayerName, name) || Algorithms.objectEquals(urlToLoad, url)) {
-						wasChanged = true;
-					}
-				}
-			}
-		};
+	private void checkWasChanged() {
+		if (!Algorithms.objectEquals(editedLayerName, nameEditText.getText().toString())
+				|| !Algorithms.objectEquals(urlToLoad, urlEditText.getText().toString())) {
+			wasChanged = true;
+		}
 	}
 
 	private void saveTemplate() {
@@ -414,8 +398,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private void updateUi() {
 		nameEditText.setText(editedLayerName);
 		urlEditText.setText(urlToLoad);
-		nameEditText.addTextChangedListener(getTextWatcher());
-		urlEditText.addTextChangedListener(getTextWatcher());
+		nameEditText.addTextChangedListener(new MapSourceTextWatcher(nameInputLayout));
+		urlEditText.addTextChangedListener(new MapSourceTextWatcher(urlInputLayout));
+		setSaveBtnEnabled();
 		addConfigurationItems(ConfigurationItem.values());
 	}
 
@@ -526,6 +511,35 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 
 	public void setTemplate(TileSourceTemplate template) {
 		this.template = template;
+	}
+
+	class MapSourceTextWatcher implements TextWatcher {
+		private TextInputLayout relatedInputLayout;
+
+		public MapSourceTextWatcher(TextInputLayout textInputLayout) {
+			this.relatedInputLayout = textInputLayout;
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+		}
+
+		@Override
+		public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+		}
+
+		@Override
+		public void afterTextChanged(Editable editable) {
+			if (editable.toString().isEmpty()) {
+				relatedInputLayout.setError(relatedInputLayout.getHelperText());
+			} else {
+				relatedInputLayout.setError(null);
+			}
+			setSaveBtnEnabled();
+			checkWasChanged();
+		}
 	}
 
 	public interface OnMapSourceUpdateListener {
