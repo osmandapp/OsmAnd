@@ -3776,4 +3776,5 @@
     <string name="shared_string_night_map">Nokta mapo</string>
     <string name="shared_string_all_time">Ĉiam</string>
     <string name="turn_screen_on_power_button_disabled">Malŝaltita. Postulas “teni ekranon aktiva” en la sekcio “aktiveca periodo de ekrano”.</string>
+    <string name="clear_tiles_warning">Per apliki tiujn ĉi ŝanĝojn, la kaŝmemorigitaj datumoj por tiu ĉi fonto de kaheloj forviŝiĝos</string>
 </resources>
