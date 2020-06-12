@@ -665,8 +665,7 @@ public class UiUtilities {
 		for (SimplePopUpMenuItem item : items) {
 			titles.add(String.valueOf(item.getTitle()));
 		}
-		float itemWidth =
-				AndroidUtils.getTextWidth(themedCtx, defaultListTextSize, titles) + contentPadding;
+		float itemWidth = AndroidUtils.getTextMaxWidth(defaultListTextSize, titles) + contentPadding;
 
 		SimplePopUpMenuItemAdapter adapter =
 				new SimplePopUpMenuItemAdapter(themedCtx, R.layout.popup_menu_item, items);

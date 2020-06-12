@@ -425,7 +425,7 @@ public class AndroidUtils {
 				: ctx.getResources().getColor(R.color.text_color_secondary_light));
 	}
 
-	public static int getTextWidth(Context ctx, float textSize, List<String> titles) {
+	public static int getTextMaxWidth(float textSize, List<String> titles) {
 		int width = 0;
 		for (String title : titles) {
 			int titleWidth = getTextWidth(textSize, title);
