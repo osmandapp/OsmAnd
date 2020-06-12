@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="vessel_width_limit_description">Set vessel width to avoid narrow bridges</string>
+    <string name="vessel_height_limit_description">Set vessel height to avoid low bridges. Keep in mind, if the bridge is movable, we will use its height in the open state.</string>
+    <string name="vessel_height_warning">You can set vessel height to avoid low bridges. Keep in mind, if the bridge is movable, we will use its height in the open state.</string>
+    <string name="vessel_height_warning_link">Set vessel height</string>
     <string name="clear_tiles_warning">Applying these changes will clear the cached data for this tile source</string>
     <string name="add_online_source">Add online source</string>
     <!-- string name="shared_string_all_time">All time</string -->

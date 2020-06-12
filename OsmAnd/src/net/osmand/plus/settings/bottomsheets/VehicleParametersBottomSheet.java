@@ -49,11 +49,9 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		final SizePreference preference = (SizePreference) getPreference();
 		View mainView = UiUtilities.getMaterialInflater(app, nightMode)
 				.inflate(R.layout.bottom_sheet_item_edit_with_recyclerview, null);
-		String key = preference.getKey();
 		TextView title = mainView.findViewById(R.id.title);
 		title.setText(preference.getTitle().toString());
-		String parameterName = key.substring(key.lastIndexOf("_") + 1);
-		VehicleSizeAssets vehicleSizeAssets = VehicleSizeAssets.getAssets(parameterName);
+		VehicleSizeAssets vehicleSizeAssets = preference.getAssets();
 		if (vehicleSizeAssets != null) {
 			ImageView imageView = mainView.findViewById(R.id.image_view);
 			imageView.setImageDrawable(app.getUIUtilities()
