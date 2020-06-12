@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
@@ -537,7 +538,7 @@ public class MapActivityLayers {
 							default:
 								settings.MAP_TILE_SOURCES.set(layerKey);
 								settings.MAP_ONLINE_DATA.set(true);
-								updateItem(it, adapter, layerKey);
+								updateItem(it, adapter, layerKey.replace(IndexConstants.SQLITE_EXT, ""));
 								updateMapSource(mapView, settings.MAP_TILE_SOURCES);
 								break;
 						}
