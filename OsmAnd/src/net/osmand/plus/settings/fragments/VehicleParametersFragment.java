@@ -20,6 +20,7 @@ import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 
 import java.util.Map;
 
@@ -48,21 +49,22 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		if (routeService == RouteService.OSMAND) {
 			GeneralRouter router = app.getRouter(mode);
 			if (router != null) {
+				GeneralRouterProfile routerProfile = router.getProfile();
 				Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
 
 				GeneralRouter.RoutingParameter vehicleHeight = parameters.get(GeneralRouter.VEHICLE_HEIGHT);
 				if (vehicleHeight != null) {
-					setupCustomRoutingPropertyPref(vehicleHeight);
+					setupCustomRoutingPropertyPref(vehicleHeight, routerProfile);
 				}
 				GeneralRouter.RoutingParameter vehicleWeight = parameters.get(GeneralRouter.VEHICLE_WEIGHT);
 				if (vehicleWeight != null) {
-					setupCustomRoutingPropertyPref(vehicleWeight);
+					setupCustomRoutingPropertyPref(vehicleWeight, routerProfile);
 				}
 				GeneralRouter.RoutingParameter vehicleWidth = parameters.get(GeneralRouter.VEHICLE_WIDTH);
 				if (vehicleWidth != null) {
-					setupCustomRoutingPropertyPref(vehicleWidth);
+					setupCustomRoutingPropertyPref(vehicleWidth, routerProfile);
 				}
-				if (router.getProfile() != GeneralRouter.GeneralRouterProfile.PUBLIC_TRANSPORT) {
+				if (router.getProfile() != GeneralRouterProfile.PUBLIC_TRANSPORT) {
 					setupDefaultSpeedPref();
 				}
 			}
@@ -71,7 +73,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		}
 	}
 
-	private void setupCustomRoutingPropertyPref(GeneralRouter.RoutingParameter parameter) {
+	private void setupCustomRoutingPropertyPref(GeneralRouter.RoutingParameter parameter,
+	                                            GeneralRouterProfile routerProfile) {
 		OsmandApplication app = getMyApplication();
 		if (app == null) {
 			return;
@@ -80,8 +83,10 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		String title = SettingsBaseActivity.getRoutingStringPropertyName(app, parameterId, parameter.getName());
 		String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, parameterId, parameter.getDescription());
 
-		String defValue = parameter.getType() == GeneralRouter.RoutingParameterType.NUMERIC ? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;
-		OsmandSettings.StringPreference pref = (OsmandSettings.StringPreference) app.getSettings().getCustomRoutingProperty(parameterId, defValue);
+		String defValue = parameter.getType() == GeneralRouter.RoutingParameterType.NUMERIC
+				? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;
+		OsmandSettings.StringPreference pref = (OsmandSettings.StringPreference) app.getSettings()
+				.getCustomRoutingProperty(parameterId, defValue);
 		Object[] values = parameter.getPossibleValues();
 		String[] valuesStr = new String[values.length];
 		for (int i = 0; i < values.length; i++) {
@@ -96,7 +101,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		}
 		SizePreference vehicleSizePref = new SizePreference(ctx);
 		vehicleSizePref.setKey(pref.getId());
-		vehicleSizePref.setAssets(VehicleSizeAssets.getAssets(parameterId));
+		vehicleSizePref.setAssets(VehicleSizeAssets.getAssets(parameterId, routerProfile));
 		vehicleSizePref.setDefaultValue(defValue);
 		vehicleSizePref.setTitle(title);
 		vehicleSizePref.setEntries(entriesStr);

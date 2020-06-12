@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -53,7 +55,12 @@ import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gnu.trove.map.hash.TLongObjectHashMap;
+
+import static net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 
 public class UiUtilities {
 
@@ -359,15 +366,15 @@ public class UiUtilities {
 		}
 		return screenOrientation;
 	}
-	
+
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode) {
 		setupSnackbar(snackbar, nightMode, null, null, null, null);
 	}
-	
+
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode, Integer maxLines) {
 		setupSnackbar(snackbar, nightMode, null, null, null, maxLines);
 	}
-	
+
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode, @ColorRes Integer backgroundColor,
 	                                 @ColorRes Integer messageColor, @ColorRes Integer actionColor, Integer maxLines) {
 		if (snackbar == null) {
@@ -586,7 +593,7 @@ public class UiUtilities {
 		// label behavior
 		slider.setLabelBehavior(Slider.LABEL_GONE);
 	}
-	
+
 	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, @StringRes int buttonTextId) {
 		setupDialogButton(nightMode, buttonView, buttonType, buttonView.getContext().getString(buttonTextId));
 	}
@@ -679,5 +686,40 @@ public class UiUtilities {
 			LOG.error("Error trying to find index of " + textToStyle + " " + e);
 			return spannable;
 		}
+	}
+
+	public static ListPopupWindow createListPopupWindow(Context themedCtx,
+	                                                    View v, int minWidth,
+	                                                    List<SimplePopUpMenuItem> items,
+	                                                    final AdapterView.OnItemClickListener listener) {
+		int contentPadding = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int contentPaddingHalf = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+		int defaultListTextSize = themedCtx.getResources().getDimensionPixelSize(R.dimen.default_list_text_size);
+
+		List<String> titles = new ArrayList<>();
+		for (SimplePopUpMenuItem item : items) {
+			titles.add(String.valueOf(item.getTitle()));
+		}
+		float itemWidth = AndroidUtils.getTextMaxWidth(defaultListTextSize, titles) + contentPadding;
+
+		SimplePopUpMenuItemAdapter adapter =
+				new SimplePopUpMenuItemAdapter(themedCtx, R.layout.popup_menu_item, items);
+		final ListPopupWindow listPopupWindow = new ListPopupWindow(themedCtx);
+		listPopupWindow.setAnchorView(v);
+		listPopupWindow.setContentWidth((int) (Math.max(itemWidth, minWidth)));
+		listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
+		listPopupWindow.setVerticalOffset(-v.getHeight() + contentPaddingHalf);
+		listPopupWindow.setModal(true);
+		listPopupWindow.setAdapter(adapter);
+		listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				if (listener != null) {
+					listener.onItemClick(parent, view, position, id);
+				}
+				listPopupWindow.dismiss();
+			}
+		});
+		return listPopupWindow;
 	}
 }

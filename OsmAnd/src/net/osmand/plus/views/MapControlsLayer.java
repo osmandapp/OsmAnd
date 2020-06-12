@@ -396,6 +396,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanningBtn = createHudButton(routePlanButton, R.drawable.ic_action_gdirections_dark, ROUTE_PLANNING_HUD_ID)
 				.setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark)
 				.setBg(R.drawable.btn_round, R.drawable.btn_round_night);
+		routePlanningBtn.flipIconForRtl = true;
 		controls.add(routePlanningBtn);
 		routePlanButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -990,6 +991,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int resClrLight = R.color.map_button_icon_color_light;
 		int resClrDark = R.color.map_button_icon_color_dark;
 		String id;
+		boolean flipIconForRtl;
 
 		boolean nightMode = false;
 		boolean f = true;
@@ -1158,6 +1160,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 				d = ctx.getUIUtilities().getIcon(resLightId);
 			} else if (resId != 0) {
 				d = ctx.getUIUtilities().getIcon(resId, nightMode ? resClrDark : resClrLight);
+				if (flipIconForRtl) {
+					d = AndroidUtils.getDrawableForDirection(ctx, d);
+				}
 			}
 			if (iv instanceof ImageView) {
 				if (compass) {

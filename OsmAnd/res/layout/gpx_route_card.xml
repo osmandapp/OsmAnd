@@ -77,7 +77,7 @@
 				android:id="@+id/show_all_title"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
+				android:layout_gravity="center_vertical|start"
 				android:paddingTop="@dimen/list_header_padding"
 				android:paddingBottom="@dimen/list_header_padding"
 				android:layout_marginStart="@dimen/route_info_list_text_padding"

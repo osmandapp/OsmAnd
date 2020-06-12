@@ -52,10 +52,10 @@ public class TargetPointMenuController extends MenuController {
 		};
 		if (nav && intermediatePointsCount == 0 && !targetPoint.start) {
 			leftTitleButtonController.caption = mapActivity.getString(R.string.cancel_navigation);
-			leftTitleButtonController.leftIconId = R.drawable.ic_action_remove_dark;
+			leftTitleButtonController.startIconId = R.drawable.ic_action_remove_dark;
 		} else {
 			leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_remove);
-			leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+			leftTitleButtonController.startIconId = R.drawable.ic_action_delete_dark;
 		}
 	}
 

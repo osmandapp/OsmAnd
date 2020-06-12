@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.DrawableRes;
@@ -485,6 +486,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	private void buildMenuButtons(@NonNull View view) {
+		OsmandApplication app = getMyApplication();
 		AppCompatImageView backButton = (AppCompatImageView) view.findViewById(R.id.back_button);
 		AppCompatImageButton backButtonFlow = (AppCompatImageButton) view.findViewById(R.id.back_button_flow);
 		OnClickListener backOnClick = new OnClickListener() {
@@ -525,8 +527,13 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		saveRoute.setOnClickListener(saveOnClick);
 		saveRouteFlow.setOnClickListener(saveOnClick);
 
-		View shareRoute = view.findViewById(R.id.share_as_gpx);
-		View shareRouteFlow = view.findViewById(R.id.share_as_gpx_flow);
+		ImageView shareRoute = (ImageView) view.findViewById(R.id.share_as_gpx);
+		ImageView shareRouteFlow = (ImageView) view.findViewById(R.id.share_as_gpx_flow);
+		Drawable shareIcon = getIcon(R.drawable.ic_action_gshare_dark, nightMode ?
+				R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
+		shareIcon = AndroidUtils.getDrawableForDirection(app, shareIcon);
+		shareRoute.setImageDrawable(shareIcon);
+		shareRouteFlow.setImageDrawable(shareIcon);
 		OnClickListener shareOnClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
