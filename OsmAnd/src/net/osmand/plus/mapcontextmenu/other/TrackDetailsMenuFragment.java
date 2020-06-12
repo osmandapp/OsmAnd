@@ -30,6 +30,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	private TrackDetailsMenu menu;
 	private View mainView;
 	private boolean paused = true;
+	private boolean nightMode;
 
 	@Nullable
 	private MapActivity getMapActivity() {
@@ -46,7 +47,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 							 Bundle savedInstanceState) {
 		MapActivity mapActivity = requireMapActivity();
 		menu = mapActivity.getTrackDetailsMenu();
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		ContextThemeWrapper context =
 				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		View view = LayoutInflater.from(context).inflate(R.layout.track_details, container, false);
@@ -192,7 +193,6 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 		if (ctx != null) {
 			boolean portraitMode = AndroidUiHelper.isOrientationPortrait(ctx);
 			boolean landscapeLayout = !portraitMode;
-			boolean nightMode = ctx.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 			if (!landscapeLayout) {
 				AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 			} else {

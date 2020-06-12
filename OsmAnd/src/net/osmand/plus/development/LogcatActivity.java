@@ -1,5 +1,6 @@
 package net.osmand.plus.development;
 
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -94,8 +96,10 @@ public class LogcatActivity extends ActionBarProgressActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		OsmandApplication app = getMyApplication();
+		Drawable shareIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_gshare_dark);
 		MenuItem share = menu.add(0, SHARE_ID, 0, R.string.shared_string_export);
-		share.setIcon(R.drawable.ic_action_gshare_dark);
+		share.setIcon(AndroidUtils.getDrawableForDirection(app, shareIcon));
 		share.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 

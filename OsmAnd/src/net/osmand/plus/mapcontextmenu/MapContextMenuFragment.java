@@ -628,7 +628,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		Drawable drawable = getIcon(iconResId, bottomButtonsColor);
 		directionsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
-		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(directionsButton, null, null, drawable, null);
+		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+				directionsButton, null, null, drawable, null);
 		int contentPaddingHalf = (int) getResources().getDimension(R.dimen.content_padding_half);
 		directionsButton.setCompoundDrawablePadding(contentPaddingHalf);
 		directionsButton.setOnClickListener(new View.OnClickListener() {
@@ -1147,11 +1148,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				setupButton(leftTitleButtonView, leftTitleButtonController.enabled, title);
 				if (leftTitleButtonController.visible) {
 					leftTitleButtonView.setVisibility(View.VISIBLE);
-					Drawable leftIcon = leftTitleButtonController.getLeftIcon();
-					Drawable rightIcon = leftTitleButtonController.getRightIcon();
-					leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+					Drawable startIcon = leftTitleButtonController.getStartIcon();
+					Drawable endIcon = leftTitleButtonController.getEndIcon();
+					AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+							leftTitleButton, startIcon, null, endIcon, null);
 					leftTitleButton.setCompoundDrawablePadding(view.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
-					((LinearLayout) leftTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
+					((LinearLayout) leftTitleButtonView).setGravity(endIcon != null ? Gravity.END : Gravity.START);
 				} else {
 					leftTitleButtonView.setVisibility(View.INVISIBLE);
 				}
@@ -1166,11 +1168,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				setupButton(rightTitleButtonView, rightTitleButtonController.enabled, rightTitleButtonController.caption);
 				rightTitleButtonView.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
-				Drawable leftIcon = rightTitleButtonController.getLeftIcon();
-				Drawable rightIcon = rightTitleButtonController.getRightIcon();
-				rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+				Drawable startIcon = rightTitleButtonController.getStartIcon();
+				Drawable endIcon = rightTitleButtonController.getEndIcon();
+				AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+						rightTitleButton, startIcon, null, endIcon, null);
 				rightTitleButton.setCompoundDrawablePadding(view.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
-				((LinearLayout) rightTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
+				((LinearLayout) rightTitleButtonView).setGravity(endIcon != null ? Gravity.END : Gravity.START);
 			} else {
 				rightTitleButtonView.setVisibility(View.INVISIBLE);
 			}
@@ -1182,11 +1185,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				setupButton(bottomTitleButtonView, bottomTitleButtonController.enabled, bottomTitleButtonController.caption);
 				bottomTitleButtonView.setVisibility(bottomTitleButtonController.visible ? View.VISIBLE : View.GONE);
 
-				Drawable leftIcon = bottomTitleButtonController.getLeftIcon();
-				Drawable rightIcon = bottomTitleButtonController.getRightIcon();
-				bottomTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+				Drawable startIcon = bottomTitleButtonController.getStartIcon();
+				Drawable endIcon = bottomTitleButtonController.getEndIcon();
+				AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+						bottomTitleButton, startIcon, null, endIcon, null);
 				bottomTitleButton.setCompoundDrawablePadding(view.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
-				((LinearLayout) bottomTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
+				((LinearLayout) bottomTitleButtonView).setGravity(endIcon != null ? Gravity.END : Gravity.START);
 			} else {
 				bottomTitleButtonView.setVisibility(View.GONE);
 			}
@@ -1206,11 +1210,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				setupButton(leftDownloadButtonView, leftDownloadButtonController.enabled, leftDownloadButtonController.caption);
 				leftDownloadButtonView.setVisibility(leftDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
-				Drawable leftIcon = leftDownloadButtonController.getLeftIcon();
-				Drawable rightIcon = leftDownloadButtonController.getRightIcon();
-				leftDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+				Drawable startIcon = leftDownloadButtonController.getStartIcon();
+				Drawable endIcon = leftDownloadButtonController.getEndIcon();
+				AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+						leftDownloadButton, startIcon, null, endIcon, null);
 				leftDownloadButton.setCompoundDrawablePadding(view.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
-				((LinearLayout) leftDownloadButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
+				((LinearLayout) leftDownloadButtonView).setGravity(endIcon != null ? Gravity.END : Gravity.START);
 			} else {
 				leftDownloadButtonView.setVisibility(View.INVISIBLE);
 			}
@@ -1222,11 +1227,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				setupButton(rightDownloadButtonView, rightDownloadButtonController.enabled, rightDownloadButtonController.caption);
 				rightDownloadButtonView.setVisibility(rightDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
-				Drawable leftIcon = rightDownloadButtonController.getLeftIcon();
-				Drawable rightIcon = rightDownloadButtonController.getRightIcon();
-				rightDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+				Drawable startIcon = rightDownloadButtonController.getStartIcon();
+				Drawable endIcon = rightDownloadButtonController.getEndIcon();
+				AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+						rightDownloadButton, startIcon, null, endIcon, null);
 				rightDownloadButton.setCompoundDrawablePadding(view.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
-				((LinearLayout) rightDownloadButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
+				((LinearLayout) rightDownloadButtonView).setGravity(endIcon != null ? Gravity.END : Gravity.START);
 			} else {
 				rightDownloadButtonView.setVisibility(View.INVISIBLE);
 			}
@@ -1292,11 +1298,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			setupButton(buttonView, buttonController.enabled, buttonController.caption);
 			buttonView.setVisibility(buttonController.visible ? View.VISIBLE : View.INVISIBLE);
 
-			Drawable leftIcon = buttonController.getLeftIcon();
-			Drawable rightIcon = buttonController.getRightIcon();
-			buttonText.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+			Drawable startIcon = buttonController.getStartIcon();
+			Drawable endIcon = buttonController.getEndIcon();
+			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+					buttonText, startIcon, null, endIcon, null);
 			buttonText.setCompoundDrawablePadding(view.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
-			((LinearLayout) buttonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
+			((LinearLayout) buttonView).setGravity(endIcon != null ? Gravity.END : Gravity.START);
 			buttonView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -1805,7 +1812,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				if (!Algorithms.isEmpty(typeStr)) {
 					line2Str.append(typeStr);
 					Drawable icon = menu.getTypeIcon();
-					line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+					AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+							line2, icon, null, null, null);
 					line2.setCompoundDrawablePadding(dpToPx(5f));
 				}
 				if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {
@@ -1830,7 +1838,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				line3.setVisibility(View.VISIBLE);
 				line3.setText(subtypeStr);
 				Drawable icon = menu.getSubtypeIcon();
-				line3.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+				AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+						line3, icon, null, null, null);
 				line3.setCompoundDrawablePadding(dpToPx(5f));
 			}
 

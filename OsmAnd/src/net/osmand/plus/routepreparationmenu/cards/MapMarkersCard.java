@@ -114,7 +114,7 @@ public class MapMarkersCard extends BaseCard {
 			if (i > 0) {
 				View div = new View(ctx);
 				LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(ctx, 1f));
-				p.setMargins(listTextPadding, 0, 0, 0);
+				AndroidUtils.setMargins(p, listTextPadding, 0, 0, 0);
 				div.setLayoutParams(p);
 				AndroidUtils.setBackgroundColor(ctx, div, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 				div.setVisibility(View.VISIBLE);
