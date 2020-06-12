@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.slider.Slider;
+import com.google.android.material.slider.RangeSlider;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -97,16 +97,16 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		minZoomValue.setText(String.valueOf(minZoom));
 		final TextView maxZoomValue = sliderView.findViewById(R.id.zoom_value_max);
 		maxZoomValue.setText(String.valueOf(maxZoom));
-		Slider slider = sliderView.findViewById(R.id.zoom_slider);
+		RangeSlider slider = sliderView.findViewById(R.id.zoom_slider);
 		int colorProfileRes = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
 		int colorProfile = ContextCompat.getColor(app, colorProfileRes);
 		UiUtilities.setupSlider(slider, nightMode, colorProfile, true);
 		slider.setValueFrom(SLIDER_FROM);
 		slider.setValueTo(SLIDER_TO);
 		slider.setValues((float) minZoom, (float) maxZoom);
-		slider.addOnChangeListener(new Slider.OnChangeListener() {
+		slider.addOnChangeListener(new RangeSlider.OnChangeListener() {
 			@Override
-			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+			public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
 				List<Float> values = slider.getValues();
 				if (values.size() > 0) {
 					minZoomValue.setText(String.valueOf(values.get(0).intValue()));
@@ -114,14 +114,13 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 				}
 			}
 		});
-		slider.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+		slider.addOnSliderTouchListener(new RangeSlider.OnSliderTouchListener() {
 			@Override
-			public void onStartTrackingTouch(@NonNull Slider slider) {
-
+			public void onStartTrackingTouch(@NonNull RangeSlider slider) {
 			}
 
 			@Override
-			public void onStopTrackingTouch(@NonNull Slider slider) {
+			public void onStopTrackingTouch(@NonNull RangeSlider slider) {
 				List<Float> values = slider.getValues();
 				if (values.size() > 0) {
 					minZoom = values.get(0).intValue();
