@@ -485,7 +485,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 							MercatorProjectionBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, elliptic);
 							break;
 						case STORAGE_FORMAT:
-							TileStorageFormatBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, sqliteDB);
+							TileStorageFormatBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, sqliteDB, editedLayerName == null && !fromTemplate);
 							break;
 					}
 				}
