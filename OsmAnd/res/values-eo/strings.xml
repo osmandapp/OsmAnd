@@ -176,7 +176,7 @@
     <string name="driving_region_us">Usono</string>
     <string name="driving_region_canada">Kanado</string>
     <string name="driving_region_europe_asia">Eŭropo, Azio, Latin-Ameriko kaj similaj</string>
-    <string name="driving_region_uk">Britujo, Barato kaj similaj</string>
+    <string name="driving_region_uk">Britujo, Hindujo kaj similaj</string>
     <string name="index_name_north_america">Nordameriko</string>
     <string name="index_name_netherlands">Eŭropo - Nederlando</string>
     <string name="index_name_us">Nordameriko - Usono</string>
@@ -852,15 +852,15 @@
     <string name="base_world_map">Fundamenta mapo de mondo</string>
     <string name="map_magnifier">Map-skalado</string>
     <string name="local_index_tile_data_zooms">Elŝutitaj niveloj de pligrandigo: %1$s</string>
-    <string name="local_index_tile_data_expire">Senvalidiĝos (minutoj): %1$s</string>
+    <string name="local_index_tile_data_expire">Senvalidiĝos post (minutoj): %1$s</string>
     <string name="local_index_tile_data_downloadable">Elŝuteblaj: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maksimuma skalo: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimuma skalo: %1$s</string>
     <string name="local_index_tile_data_name">Kahelaj datumoj: %1$s</string>
     <string name="edit_tilesource_successfully">Konservis kahelfonton %1$s</string>
-    <string name="edit_tilesource_elliptic_tile">Elipsa merkatora</string>
+    <string name="edit_tilesource_elliptic_tile">Elipsa merkatora projekcio</string>
     <string name="edit_tilesource_maxzoom">Maksimuma skalo</string>
-    <string name="edit_tilesource_expiration_time">Senvalidiĝos (minutoj)</string>
+    <string name="edit_tilesource_expiration_time">Senvalidiĝos post (minutoj)</string>
     <string name="edit_tilesource_minzoom">Minimuma skalo</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Elekti ekzistantan…</string>
@@ -2344,17 +2344,17 @@
 \n OsmAnd estas malfermkoda kaj daŭre evoluigata programaro. Ĉiu povas kontribui al la aplikaĵo per raporti erarojn, plibonigi tradukojn aŭ programi novajn funkciojn. La projekto baziĝas sur monaj donacoj por fondi kodumadon kaj testi novajn funkciojn.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Proksimuma map‑atingo kaj kvalito: 
-\n • Okcidenta Eŭropo: ☆☆☆☆
-\n • Orienta Eŭropo: ☆☆☆
-\n • Rusujo: ☆☆☆
-\n • Nordameriko: ☆☆☆
-\n • Sudameriko: ☆☆
-\n • Azio: ☆☆
-\n • Japanujo kaj Koreujo: ☆☆☆
-\n • Proksim-Oriento: ☆☆
-\n • Afriko: ☆☆
-\n • Antarkto: ☆
-\nMapoj de preskaŭ ĉiuj landoj de la mondo estas elŝuteblaj!
+\n • Okcidenta Eŭropo: ☆☆☆☆ 
+\n • Orienta Eŭropo: ☆☆☆ 
+\n • Rusujo: ☆☆☆ 
+\n • Nordameriko: ☆☆☆ 
+\n • Sudameriko: ☆☆ 
+\n • Azio: ☆☆ 
+\n • Japanujo kaj Koreujo: ☆☆☆ 
+\n • Proksim-Oriento: ☆☆ 
+\n • Afriko: ☆☆ 
+\n • Antarkto: ☆ 
+\nMapoj de preskaŭ ĉiuj landoj de la mondo estas elŝuteblaj! 
 \nDe Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Francujo, Germanujo, Meksiko, Britujo, Hispanujo…
 \n</string>
     <string name="restore_purchases">Restarigi aĉetaĵojn</string>
@@ -3609,7 +3609,7 @@
     <string name="app_mode_ski_touring">Ski‑ekskursado</string>
     <string name="app_mode_ski_snowmobile">Motorsledo</string>
     <string name="custom_osmand_plugin">Propra OsmAnd-kromprogramo</string>
-    <string name="replace_point_descr">Anstataŭigi alian punkton per tiu ĉi</string>
+    <string name="replace_point_descr">Anstataŭigi alian punkton per tiu ĉi.</string>
     <string name="changes_applied_to_profile">Aplikis ŝanĝojn al la profilo “%1$s”.</string>
     <string name="settings_item_read_error">Ne povas legi el “%1$s”.</string>
     <string name="settings_item_write_error">Ne povas skribi al “%1%s”.</string>
@@ -3637,7 +3637,7 @@
     <string name="hidden_items_descr">La jenaj elementoj estas kaŝitaj el la menuo, sed la rilataj eblaĵoj kaj kromprogramoj plue funkcios.</string>
     <string name="shared_string_hidden">Kaŝitaj</string>
     <string name="reset_items_descr">Per kaŝi agordojn, ili revenos al la implicitaj valoroj.</string>
-    <string name="select_wikipedia_article_langs">Elektu lingvojn, en kiuj artikoloj de Vikipedio montriĝos sur la mapo. Vi povos baskuli inter ĉiuj disponeblaj lingvoj dum legi artikolon.</string>
+    <string name="select_wikipedia_article_langs">Elektu lingvojn por artikoloj de Vikipedio montrataj sur la mapo. Eblos baskuli inter ĉiuj disponeblaj lingvoj dum legi artikolon.</string>
     <string name="some_articles_may_not_available_in_lang">Iuj artikoloj de Vikipedio povas ne esti disponeblaj en via lingvo.</string>
     <string name="lang_zhyue">Kantona</string>
     <string name="lang_zhminnan">Minnana</string>
@@ -3778,4 +3778,8 @@
     <string name="turn_screen_on_power_button_disabled">Malŝaltita. Postulas “teni ekranon aktiva” en la sekcio “aktiveca periodo de ekrano”.</string>
     <string name="clear_tiles_warning">Per apliki tiujn ĉi ŝanĝojn, la kaŝmemorigitaj datumoj por tiu ĉi fonto de kaheloj forviŝiĝos</string>
     <string name="add_online_source">Aldoni enretan fonton</string>
+    <string name="vessel_height_warning_link">Enigu alton de akvoveturilo</string>
+    <string name="vessel_height_warning">Vi povas enigi alton de via akvoveturilo por eviti malaltajn pontojn. Estu konscia, ke se ponto estas movebla, la alto en ĝia malfermita stato estos uzata.</string>
+    <string name="vessel_height_limit_description">Enigu alton de akvoveturilo por eviti malaltajn pontojn. Estu konscia, ke se ponto estas movebla, la alto en ĝia malfermita stato estos uzata.</string>
+    <string name="vessel_width_limit_description">Enigu larĝon de akvoveturilo por eviti mallarĝajn pontojn</string>
 </resources>
