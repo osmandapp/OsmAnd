@@ -13,10 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
@@ -184,6 +186,20 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			public void onClick(View view) {
 				saveTemplate();
 				dismiss();
+			}
+		});
+		final ScrollView scrollView = root.findViewById(R.id.scroll_view);
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+			int pastY = 0;
+
+			@Override
+			public void onScrollChanged() {
+				int y = scrollView.getScrollY();
+				if (pastY != y) {
+					pastY = y;
+					View view = getDialog().getCurrentFocus();
+					AndroidUtils.hideSoftKeyboard(requireActivity(), view);
+				}
 			}
 		});
 		if (template == null) {
