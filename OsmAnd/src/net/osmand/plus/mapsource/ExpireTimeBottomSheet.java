@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -78,6 +79,7 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
+		AndroidUtils.hideSoftKeyboard(requireActivity(), editText);
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnExpireValueSetListener) {
 			((OnExpireValueSetListener) fragment).onExpireValueSet(getExpireValue());

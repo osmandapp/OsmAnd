@@ -175,7 +175,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		dismissDialog.setTitle(activity.getString(R.string.osmand_parking_warning));
 		dismissDialog.setMessage(activity.getString(R.string.clear_tiles_warning));
 		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
-		dismissDialog.setPositiveButton(R.string.shared_string_ok, onPositiveListener);
+		dismissDialog.setPositiveButton(R.string.shared_string_continue, onPositiveListener);
 		dismissDialog.show();
 	}
 
