@@ -165,8 +165,8 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			}
 		});
 		int boxStrokeColor = nightMode
-				? ContextCompat.getColor(app, R.color.app_bar_color_light)
-				: ContextCompat.getColor(app, R.color.active_buttons_and_links_bg_pressed_dark);
+				? ContextCompat.getColor(app, R.color.icon_color_osmand_dark)
+				: ContextCompat.getColor(app, R.color.icon_color_osmand_light);
 		int btnBgColorRes = nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 		TextInputLayout nameInputLayout = root.findViewById(R.id.name_input_layout);
 		nameInputLayout.setBoxStrokeColor(boxStrokeColor);
