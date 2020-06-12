@@ -52,6 +52,7 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
@@ -115,6 +116,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				String transparencyStr = (int) value + "%";
 				transparencyValueTv.setText(transparencyStr);
 				srtmPlugin.setTerrainTransparency((int) Math.ceil(value * 2.55), srtmPlugin.getTerrainMode());
+				refreshMap();
 			}
 		}
 	};
@@ -127,9 +129,19 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				minZoomTv.setText(String.valueOf(values.get(0).intValue()));
 				maxZoomTv.setText(String.valueOf(values.get(1).intValue()));
 				srtmPlugin.setTerrainZoomValues(values.get(0).intValue(), values.get(1).intValue(), srtmPlugin.getTerrainMode());
+				refreshMap();
 			}
 		}
 	};
+
+	@Nullable
+	private MapActivity getMapActivity() {
+		Activity activity = getActivity();
+		if (activity instanceof MapActivity && !activity.isFinishing()) {
+			return (MapActivity) activity;
+		}
+		return null;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -365,13 +377,17 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		}
 	}
 
+	private void refreshMap() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapView().refreshMap();
+		}
+	}
+
 	private void updateLayers() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			srtmPlugin.updateLayers(
-					((MapActivity) activity).getMapView(),
-					(MapActivity) activity
-			);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			srtmPlugin.updateLayers(mapActivity.getMapView(), mapActivity);
 		}
 	}
 
@@ -381,10 +397,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		adapter.setProfileDependent(true);
 		adapter.setNightMode(nightMode);
 
-		final Activity mapActivity = getActivity();
-		if (!(mapActivity instanceof MapActivity)) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
 			return;
 		}
+		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 
 		final DownloadIndexesThread downloadThread = app.getDownloadThread();
 		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
@@ -425,22 +442,25 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 								.setListener(new ContextMenuAdapter.ItemClickListener() {
 									@Override
 									public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-										ContextMenuItem item = adapter.getItem(position);
-										if (downloadThread.isDownloading(indexItem)) {
-											downloadThread.cancelDownload(indexItem);
-											if (item != null) {
-												item.setProgress(ContextMenuItem.INVALID_ID);
-												item.setLoading(false);
-												item.setSecondaryIcon(R.drawable.ic_action_import);
-												adapter.notifyDataSetChanged();
-											}
-										} else {
-											new DownloadValidationManager(app).startDownload((MapActivity) mapActivity, indexItem);
-											if (item != null) {
-												item.setProgress(ContextMenuItem.INVALID_ID);
-												item.setLoading(true);
-												item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-												adapter.notifyDataSetChanged();
+										MapActivity mapActivity = mapActivityRef.get();
+										if (mapActivity != null && !mapActivity.isFinishing()) {
+											ContextMenuItem item = adapter.getItem(position);
+											if (downloadThread.isDownloading(indexItem)) {
+												downloadThread.cancelDownload(indexItem);
+												if (item != null) {
+													item.setProgress(ContextMenuItem.INVALID_ID);
+													item.setLoading(false);
+													item.setSecondaryIcon(R.drawable.ic_action_import);
+													adapter.notifyDataSetChanged();
+												}
+											} else {
+												new DownloadValidationManager(app).startDownload(mapActivity, indexItem);
+												if (item != null) {
+													item.setProgress(ContextMenuItem.INVALID_ID);
+													item.setLoading(true);
+													item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
+													adapter.notifyDataSetChanged();
+												}
 											}
 										}
 										return false;
