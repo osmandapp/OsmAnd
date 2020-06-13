@@ -3709,11 +3709,11 @@
     <string name="unsupported_type_error">Type non pris en charge</string>
     <string name="gpx_parse_error">Le fichier GPX OsmAnd n\'est pas construit correctement. Vous pouvez transmettre ce fichier à l\'équipe support OsmAnd pour investiguer.</string>
     <string name="system_screen_timeout_descr">Éteint l\'écran en fonction du délai système.</string>
-    <string name="map_source_zoom_levels_descr">Ces paramètres affecteront l\'affichage lorsqu\'ils seront utilisés comme carte ou sur-couche / sous-couche.
-\n
-\n%1$s : La carte sera limitée aux zooms sélectionnés.
-\n
-\n%2$s : Niveaux de zoom auxquels les tuiles originales seront visibles. En dehors de ces valeurs, il y aura une augmentation ou une diminution d\'échelle.</string>
+    <string name="map_source_zoom_levels_descr">Affecte l\'affichage de la carte ou des sur-couche / sous-couche. 
+\n 
+\n%1$s : La carte est limitée aux zooms sélectionnés. 
+\n 
+\n%2$s sont les niveaux de zoom auxquels les tuiles originales seront visibles. En dehors de ces valeurs, il y aura une augmentation ou une diminution d\'échelle.</string>
     <string name="turn_screen_on_navigation_instructions_descr">L\'écran s\'allumera pour afficher les instructions de navigation.</string>
     <string name="turn_screen_on_wake_time_descr">Sélectionnez la durée d\'affichage de l\'écran après allumage (\"%1$s\" signifie pas d\'extinction).</string>
     <string name="screen_timeout_descr">Si \"%1$s\" est activé, le temps d\'activité en dépendra.</string>
@@ -3760,4 +3760,8 @@
     <string name="turn_screen_on_power_button_disabled">Désactivé. Nécessite l\'option « Garder l\'écran allumé » sous « Délai d\'affichage de l\'écran ».</string>
     <string name="add_online_source">Ajouter une source en ligne</string>
     <string name="clear_tiles_warning">Appliquer ces modifications effacera les données mises en cache pour cette source de tuiles</string>
+    <string name="vessel_height_warning_link">Définir la hauteur du navire</string>
+    <string name="vessel_height_warning">Vous pouvez définir la hauteur du navire pour éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
+    <string name="vessel_height_limit_description">Définir la hauteur du navire afin d\'éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
+    <string name="vessel_width_limit_description">Définir la largeur du navire pour éviter les ponts étroits</string>
 </resources>
