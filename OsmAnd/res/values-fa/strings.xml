@@ -297,7 +297,7 @@
     <string name="follow">شروع هدایت</string>
     <string name="mark_final_location_first">لطفاً ابتدا مقصد را تنظیم کنید</string>
     <string name="get_directions">مسیریابی</string>
-    <string name="opening_hours">ساعات کاری</string>
+    <string name="opening_hours">ساعت کاری</string>
     <string name="shared_string_history">سابقه</string>
     <string name="search_nothing_found">چیزی پیدا نشد</string>
     <string name="searching">در حال جست‌وجو…</string>
@@ -3811,4 +3811,8 @@
     <string name="rendering_attr_piste_difficulty_connection_name">اتصال</string>
     <string name="add_online_source">افزودن منبع آنلاین</string>
     <string name="clear_tiles_warning">به‌کارگیری این تغییرات، دادهٔ ذخیره‌شده برای این منبعِ کاشی را پاک می‌کند</string>
+    <string name="vessel_height_warning_link">تنظیم ارتفاع کشتی</string>
+    <string name="vessel_height_warning">می‌توانید ارتفاع کشتی را برای پرهیز از پل‌های کوتاه وارد کنید. به یاد داشته باشید که اگر پل متحرک است، در حالت باز نیز ارتفاع کشتی را در نظر می‌گیریم.</string>
+    <string name="vessel_height_limit_description">ارتفاع کشتی را برای پرهیز از پل‌های کوتاه وارد کنید. به یاد داشته باشید که اگر پل متحرک است، در حالت باز نیز ارتفاع کشتی را در نظر می‌گیریم.</string>
+    <string name="vessel_width_limit_description">عرض کشتی را برای پرهیز از پل های باریک وارد کنید</string>
 </resources>
