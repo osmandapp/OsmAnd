@@ -212,11 +212,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					log.debug("Filename: " + f);
 					File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
 					if (!data.get(f).isEmpty()) {
+						Locale locale = Locale.getDefault();
 						WptPt pt = data.get(f).findPointToShow();
-						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
+						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", locale).format(new Date(pt.time)); //$NON-NLS-1$
 						Integer track_storage_directory = ctx.getSettings().TRACK_STORAGE_DIRECTORY.get();
-						if (track_storage_directory != OsmandSettings.REC_DIRECTORY) {
-							SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM");
+						if (!track_storage_directory.equals(OsmandSettings.REC_DIRECTORY)) {
+							SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM", locale);
 //							if (track_storage_directory == OsmandSettings.DAILY_DIRECTORY) {
 //								dateDirFormat = new SimpleDateFormat("yyyy-MM-dd");
 //							}
