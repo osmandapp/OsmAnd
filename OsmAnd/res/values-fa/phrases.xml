@@ -1377,7 +1377,7 @@
     <string name="poi_trees_coconut">نارگیل</string>
     <string name="poi_trees_banana">موز</string>
     <string name="poi_trees_almond">بادام</string>
-    <string name="poi_trees_orange">پرتغال</string>
+    <string name="poi_trees_orange">پرتقال</string>
     <string name="poi_bicycle_parking_informal">غیررسمی</string>
     <string name="poi_bicycle_parking_building">ساختمان ویژه</string>
     <string name="poi_nudism_no">ممنوع</string>
@@ -1403,7 +1403,7 @@
     <string name="poi_email">رایانامه</string>
     <string name="poi_website">وب‌گاه</string>
     <string name="poi_phone">تلفن</string>
-    <string name="poi_opening_hours">ساعت باز شد</string>
+    <string name="poi_opening_hours">ساعت کاری</string>
     <string name="poi_entrance_exit">خروج</string>
     <string name="poi_entrance_main">ورودی اصلی</string>
     <string name="poi_height_restrictor">محدودکننده ارتفاع</string>
