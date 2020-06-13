@@ -3786,4 +3786,8 @@
     <string name="turn_screen_on_power_button_disabled">מושבת. נדרשת ההגדרה ‚להשאיר את המסך פעיל’ תחת ‚תפוגת זמן לאחר התעוררות’.</string>
     <string name="add_online_source">הוספת מקור מקוון</string>
     <string name="clear_tiles_warning">החלת השינויים האלו תפנה את הנתונים שנשמרו עבור מקור אריחים זה</string>
+    <string name="vessel_height_warning_link">הגדרת גובה כלי השיט</string>
+    <string name="vessel_height_warning">ניתן להגדיר את גובה כלי השיט כדי להימנע מגשרים נמוכים. נא לשים לב שאם הגשר נע, אנו נשתמש בגובהו במצב הפתוח.</string>
+    <string name="vessel_height_limit_description">יש להגדיר את גובה כלי השיט כדי להימנע מגשרים נמוכים. נא לשים לב שאם הגשר נע, אנו נשתמש בגובהו במצב הפתוח.</string>
+    <string name="vessel_width_limit_description">הגדרת רוחב כלי השיט כדי להימנע מגשרים צרים</string>
 </resources>
