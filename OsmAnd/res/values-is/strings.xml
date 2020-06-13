@@ -1608,7 +1608,7 @@
     <string name="amenity_type_seamark">Sjómerki</string>
     <string name="animate_routing_route_not_calculated">Reikna leiðina fyrst</string>
     <string name="local_index_tile_data_name">Kortaflísagögn: %1$s</string>
-    <string name="edit_tilesource_elliptic_tile">Sporöskjulagað Mercator</string>
+    <string name="edit_tilesource_elliptic_tile">Sporöskjulöguð Mercator</string>
     <string name="speak_traffic_warnings">Aðvaranir vegna umferðar</string>
     <string name="osb_author_or_password_not_specified">Settu OSM-notandanafn og lykilorð inn í stillingarnar</string>
     <string name="context_menu_item_directions_to">Leiðir til</string>
@@ -2027,19 +2027,19 @@
 \n • Sendu inn GPX-ferla til OSM beint úr forritinu 
 \n • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar)
 \n</string>
-    <string name="osmand_extended_description_part8">OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.
-\n Gæði og áætluð þekja landakorta:
-\n • Vestur-Evrópa: ****
-\n • Austur-Evrópa: ***
-\n • Rússland: ***
-\n • Norður-Ameríka: ***
-\n • Suður-Ameríka: **
-\n • Asía: **
-\n • Japan &amp; Kórea: ***
-\n • Miðausturlönd: **
-\n • Afríka: **
-\n • Suðurskautslandið: *
-\n Hægt er að sækja kort frá flestum heimsins löndum á netinu!
+    <string name="osmand_extended_description_part8">OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir. 
+\n Gæði og áætluð þekja landakorta: 
+\n • Vestur-Evrópa: **** 
+\n • Austur-Evrópa: *** 
+\n • Rússland: *** 
+\n • Norður-Ameríka: *** 
+\n • Suður-Ameríka: ** 
+\n • Asía: ** 
+\n • Japan og Kórea: *** 
+\n • Miðausturlönd: ** 
+\n • Afríka: ** 
+\n • Suðurskautslandið: * 
+\n Hægt er að sækja kort frá flestum heimsins löndum á netinu! 
 \n Frá Afghanistan til Zimbabwe, frá Ástralíu til BNA. Argentína, Brasilía, Kanada, Frakkland, Þýskaland, Mexíkó, Spánn, eða eitthvað annað.</string>
     <string name="osmand_plus_short_description_80_chars">Almenn skoðun landakorta í farsíma og flakk á ónettengdum sem nettengdum OSM-landakortum</string>
     <string name="osmand_plus_extended_description_part7">Leggðu þitt fram til OSM
@@ -2345,10 +2345,10 @@
 \n • Asía: ** 
 \n • Japan &amp; Kórea: *** 
 \n • Miðausturlönd: ** 
-\n • Afríka: **
+\n • Afríka: ** 
 \n • Antarktíka: * 
-\n Flest lönd í heiminum eru tiltæk sem niðurhalspakkar! 
-\n Frá Afghanistan til Simbabve, frá Ástralíu til BNA. Argentína, Brasilía, Kanada, Frakkland, Þýskaland, Mexíkó, UK, Spánn, …
+\n Flest lönd í heiminum eru tiltæk sem niðurhalspakkar
+\n Frá Afghanistan til Simbabve, frá Ástralíu til BNA. Argentína, Brasilía, Kanada, Frakkland, Þýskaland, Mexíkó, Bretland, Spánn, … 
 \n</string>
     <string name="rendering_attr_contourLines_description">Birta frá aðdráttarstigi (krefst hæðarlínugagna):</string>
     <string name="live_monitoring_max_interval_to_send">Tímabiðminni fyrir rakningu með netstuðningi</string>
@@ -3617,7 +3617,7 @@
     <string name="shared_string_circle">Hringur</string>
     <string name="shared_string_rhomb">Tígull</string>
     <string name="shared_string_square">Ferningur</string>
-    <string name="replace_point_descr">Skipta út öðrum punkti með þessum</string>
+    <string name="replace_point_descr">Skipta út öðrum punkti með þessum.</string>
     <string name="changes_applied_to_profile">Breytingum beitt á \'%1$s\' sniðið.</string>
     <string name="settings_item_read_error">Gat ekki lesið úr \'%1$s\'.</string>
     <string name="settings_item_write_error">Gat ekki skrifað \'%1$s\'.</string>
@@ -3724,7 +3724,7 @@
     <string name="unsupported_type_error">Óstudd tegund</string>
     <string name="turn_screen_on_navigation_instructions">Leiðsagnarleiðbeiningar</string>
     <string name="favorites_item">Eftirlæti</string>
-    <string name="screen_timeout_descr">Ef \"%1$s\" valkosturinn er virkur, mun tími virkni vera háður honum.</string>
+    <string name="screen_timeout_descr">Ef \"%1$s\" er virkt, mun tími virkni vera háður því.</string>
     <string name="navigation_profiles_item">Leiðsagnarsnið</string>
     <string name="shared_string_resume">Halda áfram</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
@@ -3740,19 +3740,40 @@
     <string name="online_map_name_helper_text">Settu inn nafn á nettengdum kortagjafa.</string>
     <string name="measure_distance_item">Mæla vegalengd</string>
     <string name="pseudo_mercator_projection">Gervi-Mercatorvörpun</string>
-    <string name="expire_time_descr">Gildistími í mínútum. Kortaflísar í skyndiminni verða endurlesnar eftir tiltekinn tíma. Skildu þennan reit eftir auðan ef þú þarft ekki að láta endurlesa kortaflísar frá þessum kortagjafa.
-\n
-\nEinn dagur er 1.440 mínútur.
-\nEin vika er 10.080 mínútur.
-\nEinn mánuður er 43 829 mínútur.</string>
+    <string name="expire_time_descr">Kortaflísar í skyndiminni verða endurlesnar eftir tiltekinn tíma. Skildu þennan reit eftir auðan ef þú þarft ekki að láta endurlesa kortaflísar frá þessum kortagjafa. 
+\n 
+\nEinn dagur er 1.440 mínútur. 
+\nEin vika er 10.080 mínútur. 
+\nEinn mánuður er 43.829 mínútur.</string>
     <string name="back_to_editing">Til baka í breytingar</string>
-    <string name="system_screen_timeout_descr">Slekkur á skjánum eftir að tímamörkum kerfis fyrir skjá er náð.</string>
+    <string name="system_screen_timeout_descr">Slekkur á skjánum miðað við tímamörk kerfisins.</string>
     <string name="delete_all_actions_message_q">Ertu viss um að þú viljir eyða %d flýtiaðgerðum\?</string>
     <string name="quick_action_switch_profile_descr">Ef ýtt er á þennan aðgerðahnapp verður skipt á milli valinna notkunarsniða.</string>
     <string name="shared_string_delete_all_q">Eyða öllu\?</string>
     <string name="screen_timeout">Tímamörk skjás</string>
     <string name="shared_string_tones">tónar</string>
     <string name="shared_string_meters">metrar</string>
-    <string name="details_dialog_decr">Stýra sýnileika viðbótaratriða sem birtast á kortinu</string>
+    <string name="details_dialog_decr">Birta eða fela viðbótaratriði á kortinu</string>
     <string name="shared_string_night_map">Næturkort</string>
+    <string name="map_source_zoom_levels_descr">Hefur áhrif á skjáinn þegar er notað sem kort eða yfirlag/undirlag. 
+\n
+\n%1$s: Kortið takmarkast við svið valinna aðdráttarstiga. 
+\n
+\n%2$s eru þau aðdráttarstig þar sem upprunalegir kortatíglar eru sýnilegir, kvörðun upp/niður mun eiga sér stað utan þessara gilda.</string>
+    <string name="add_online_source">Bæta við gagnagjafa á netinu</string>
+    <string name="turn_screen_on_descr">Veldu hvernig skjárinn er vakinn úr dvala (gakktu úr skugga um að OsmAnd sé í forgrunni þegar tækinu er læst):</string>
+    <string name="vessel_height_limit_description">Settu hæð skips til að geta forðast lágar brýr. Hafðu í huga að ef um hreyfanlega brú er að ræða, þá er miðað við hæð í opinni stöðu.</string>
+    <string name="vessel_height_warning">Þú getur stillt hæð skips til að geta forðast lágar brýr. Hafðu í huga að ef um hreyfanlega brú er að ræða, þá er miðað við hæð í opinni stöðu.</string>
+    <string name="vessel_width_limit_description">Settu breidd skips til að geta forðast þröngar brýr</string>
+    <string name="clear_tiles_warning">Séu þessar breytingar virkjaðar mun það hreinsa skyndiminnið fyrir þennan kortatíglagjafa</string>
+    <string name="weight_limit_description">Settu inn þyngd farartækisins, takmarkanir geta verið á sumum leiðum varðandi þyngd farartækja.</string>
+    <string name="turn_screen_on_wake_time_descr">Veldu tímamörk skjás eftir vöknun. (\"%1$s\" setur engin tímamörk.)</string>
+    <string name="turn_screen_on_power_button_disabled">Óvirkt. Krefst þess að valið sé \'Halda skjá í gangi\' undir \'Tímamörk eftir vöknun\'.</string>
+    <string name="vessel_height_warning_link">Settu hæð skips</string>
+    <string name="height_limit_description">Settu inn hæð farartækisins, takmarkanir geta verið á sumum leiðum varðandi hæð farartækja.</string>
+    <string name="width_limit_description">Settu inn breidd farartækisins, takmarkanir geta verið á sumum leiðum varðandi breidd farartækja.</string>
+    <string name="map_source_zoom_levels">Stilltu lágmarks og hámarks aðdráttarstig þess að nettengt kort verður birt eða hlaðið inn.</string>
+    <string name="gpx_parse_error">GPX-ferill OsmAnd er gallaður, hafðu samband við aðstoðarteymið til að fá botn í þetta.</string>
+    <string name="turn_screen_on_power_button_descr">Ef ýtt er á aflhappinn verður kveikt á skjánum með OsmAnd ofan á læsiskjánum.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Þú getur flutt flýtiaðgerðir inn eða út með forritasniðum.</string>
 </resources>
