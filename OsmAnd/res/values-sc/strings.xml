@@ -3780,4 +3780,8 @@
     <string name="default_screen_timeout">Tempus de blocu de s\'ischermu predefinidu</string>
     <string name="add_online_source">Annanghe una mitza in lìnia</string>
     <string name="clear_tiles_warning">Aplichende custas modìficas as a isboidare sa memòria temporànea pro custa mitza de tasseddos</string>
+    <string name="vessel_height_warning_link">Imposta s\'artària de sa barca</string>
+    <string name="vessel_height_warning">Podes impostare s\'artària de sa barca pro evitare sos pontes bassos. Ammenta·ti chi, si su ponte est mòbile, amus a impreare s\'artària sua de cando est abertu.</string>
+    <string name="vessel_height_limit_description">Imposta s\'artària de sa barca pro evitare sos pontes bassos. Ammenta·ti chi, si su ponte est mòbile, amus a impreare s\'artària sua de cando est abertu.</string>
+    <string name="vessel_width_limit_description">Imposta sa largària de sa barca pro evitare pontes astrintos</string>
 </resources>
