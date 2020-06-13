@@ -2088,7 +2088,7 @@
     <string name="rendering_value_fine_name">اللون والسمك</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="search_map_hint">المدينة أو المنطقة</string>
-    <string name="wiki_around">مقالات ويكيبيديا القريبة</string>
+    <string name="wiki_around">مقالات ويكيبيديا المجاورة</string>
     <string name="routing_attr_allow_motorway_name">استخدام الطرق السريعة</string>
     <string name="routing_attr_allow_motorway_description">السماح للطرق السريعة.</string>
     <string name="lang_sr_latn">الصربية (اللاتينية)</string>
@@ -3138,7 +3138,7 @@
     <string name="utm_format_descr">يستخدم أوسماند تنسيق UTM وهو مشابه ولكن غير مطابق لتنسيق UTM الناتو.</string>
     <string name="shared_string_example">مثال</string>
     <string name="navigate_point_format_utm">معيار الإحداثيات</string>
-    <string name="navigate_point_format_olc">Open Location Code</string>
+    <string name="navigate_point_format_olc">فتح رمز الموقع</string>
     <string name="coordinates_format_info">سيتم تطبيق التنسيق المحدد في كل أنحاء التطبيق.</string>
     <string name="pref_selected_by_default_for_profiles">يتم تحديد هذا الاعداد بشكل افتراضي للأوضاع: %s</string>
     <string name="change_default_settings">تغيير الإعدادات</string>
@@ -3599,7 +3599,7 @@
     <string name="app_mode_ski_touring">جولة التزلج</string>
     <string name="app_mode_ski_snowmobile">الثلج</string>
     <string name="custom_osmand_plugin">مخصص البرنامج المساعد أوسماند</string>
-    <string name="replace_point_descr">استبدل نقطة أخرى بالحالية</string>
+    <string name="replace_point_descr">استبدل نقطة أخرى بالحالية.</string>
     <string name="changes_applied_to_profile">تم تطبيق التغييرات على %1$s ملف تعريف.</string>
     <string name="settings_item_read_error">لايمكن قراءة %1$s.</string>
     <string name="settings_item_write_error">لايمكن كتابة %1$s.</string>
@@ -3757,13 +3757,19 @@
     <string name="shared_string_delete_all_q">حذف الكل؟</string>
     <string name="delete_all_actions_message_q">هل أنت متأكد من رغبتك في حذف الإجراءات السريعة %d نهائيًا؟</string>
     <string name="screen_timeout">مهلة الشاشة</string>
-    <string name="shared_string_tones">أساليب</string>
+    <string name="shared_string_tones">نغمات</string>
     <string name="width_limit_description">أدل بعرض مركبتك، قد يتم تطبيق بعض القيود على المركبات العريضة.</string>
     <string name="height_limit_description">أدل بارتفاع مركبتك ،قد يتم تطبيق بعض القيود على المركبات المرتفعة.</string>
     <string name="weight_limit_description">أدل بوزن مركبتك ،قد يتم تطبيق بعض القيود على المركبات الثقيلة.</string>
     <string name="shared_string_meters">أمتار</string>
-    <string name="details_dialog_decr">التحكم في رؤية التفاصيل الإضافية الظاهرة على الخريطة</string>
+    <string name="details_dialog_decr">إظهار أو إخفاء التفاصيل الإضافية للخريطة</string>
     <string name="shared_string_night_map">خريطة ليلية</string>
     <string name="shared_string_all_time">كل الوقت</string>
     <string name="turn_screen_on_power_button_disabled">ذوي الاحتياجات الخاصه. يتطلب \"إبقاء الشاشة قيد تشغيل\" تحت \"المهلة بعد الاستيقاظ\".</string>
+    <string name="vessel_height_limit_description">ضبط الارتفاع لتجنب الجسور المنخفضة. ضع في اعتبارك أنه إذا كان الجسر متحركاً ، فسوف نستخدم ارتفاعه في الحالة المفتوحة.</string>
+    <string name="add_online_source">إضافة مصدر عبر الإنترنت</string>
+    <string name="clear_tiles_warning">سيؤدي تطبيق التغييرات إلى مسح البيانات المخزنة مؤقتاً للمصدر هذا</string>
+    <string name="vessel_height_warning_link">ضبط ارتفاع السفينة</string>
+    <string name="vessel_height_warning">يمكنك ضبط ارتفاع الحاوية لتجنب الجسور المنخفضة. ضع في اعتبارك أنه إذا كان الجسر متحركاً ، فسوف نستخدم ارتفاعه في الحالة المفتوحة.</string>
+    <string name="vessel_width_limit_description">تحديد عرض السفينة لتجنب الجسور الضيقة</string>
 </resources>
