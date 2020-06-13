@@ -3777,4 +3777,8 @@
     <string name="turn_screen_on_power_button_disabled">Отключено. Необходимо включить «Держать экран включённым» в разделе «Время работы после пробуждения».</string>
     <string name="clear_tiles_warning">Применение этих изменений приведёт к очистке кешированных данных этого источника тайлов</string>
     <string name="add_online_source">Добавить онлайн-источник</string>
+    <string name="vessel_height_warning_link">Указать высоту судна</string>
+    <string name="vessel_height_warning">Вы можете указать высоту судна, чтобы избегать низких мостов. Имейте в виду, что если мост раздвижной, будет использована его высота в открытом состоянии.</string>
+    <string name="vessel_height_limit_description">Укажите высоту судна, чтобы избежать низких мостов. Имейте в виду, что если мост раздвижной, будет использована его высота в открытом состоянии.</string>
+    <string name="vessel_width_limit_description">Укажите ширину судна, чтобы избежать узких мостов</string>
 </resources>
