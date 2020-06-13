@@ -3805,4 +3805,8 @@ Lon %2$s</string>
     <string name="turn_screen_on_power_button_disabled">Desactivado. Require \'manter a pantalla acendida\' en \'tempo de espera após o acendido\'.</string>
     <string name="add_online_source">Engadir fonte en liña</string>
     <string name="clear_tiles_warning">Aplicando estas modificacións eliminarás os datos almacenados na caché para esta fonte de teselas</string>
+    <string name="vessel_height_warning_link">Definir altura da embarcación</string>
+    <string name="vessel_height_warning">Podes definir a altura da embarcación para evitar pontes baixas. Lémbrate se a ponte é móbil, empregaremos a súa altura no estado aberto.</string>
+    <string name="vessel_height_limit_description">Define o alto da embarcación para evitar pontes baixas. Lémbrate se a ponte é móbil, empregaremos a súa altura no estado aberto.</string>
+    <string name="vessel_width_limit_description">Estabelecer o largo da embarcación para evitar pontes estreitas</string>
 </resources>
