@@ -2088,7 +2088,7 @@
     <string name="rendering_value_fine_name">اللون والسمك</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="search_map_hint">المدينة أو المنطقة</string>
-    <string name="wiki_around">مقالات ويكيبيديا المجاورة</string>
+    <string name="wiki_around">مقالات ويكيبيديا مجاورة</string>
     <string name="routing_attr_allow_motorway_name">استخدام الطرق السريعة</string>
     <string name="routing_attr_allow_motorway_description">السماح للطرق السريعة.</string>
     <string name="lang_sr_latn">الصربية (اللاتينية)</string>
@@ -3730,7 +3730,7 @@
     <string name="turn_screen_on_wake_time_descr">حدد مهلة الشاشة بعد الاستيقاظ. (\"%1$s\" لا ينطبق أي مهلة.)</string>
     <string name="keep_screen_on">إبقاء الشاشة قيد التشغيل</string>
     <string name="keep_screen_off">إبقاء الشاشة مطفأة</string>
-    <string name="screen_timeout_descr">إذا تم تفعيل الخيار \"%1$s\" ، فسوف يعتمد وقت النشاط عليه.</string>
+    <string name="screen_timeout_descr">إذا تم تفعيل \"%1$s\" ، فسوف يعتمد وقت النشاط على ذلك.</string>
     <string name="pseudo_mercator_projection">إسقاط ميركاتور الوهمي</string>
     <string name="one_image_per_tile">ملف صورة واحد لكل إطار متجانب</string>
     <string name="sqlite_db_file">ملف SQLiteDB</string>
@@ -3741,19 +3741,19 @@
     <string name="mercator_projection">إسقاط مركاتور</string>
     <string name="storage_format">تنسيق التخزين</string>
     <string name="map_source_zoom_levels">تعيين الحد الأدنى والحد الأقصى لمستوى التكبير/التصغير الذي سيتم عرض الخريطة عبر الإنترنت أو تحميله.</string>
-    <string name="map_source_zoom_levels_descr">ستؤثر هذه المعلمات على العرض عند استخدامها كخريطة أو تراكب/وضع. 
-\n
-\n%1$s: ستقتصر الخريطة على التكبيرات المحددة. 
-\n
-\n%2$s: مستويات التكبير التي ستكون فيها الإطارات المتجانبة الأصلية مرئية. سوف يحدث التحجيم أو التحجيم خارج هذه القيم.</string>
+    <string name="map_source_zoom_levels_descr">يؤثر على الشاشة عند استخدامها كخريطة أو طبقة فوقية/تحتية. 
+\n 
+\n%1$s: تقتصر الخريطة على مستوى التكبير المحدد. 
+\n 
+\n%2$s هي مستويات التكبير التي ستكون فيها الإطارات المتجانبة الأصلية مرئية. سوف يحدث التحجيم للأكبر أو الأصغر خارج هذه القيم.</string>
     <string name="expire_time_descr">وقت انتهاء الصلاحية بالدقائق. سيتم إعادة تحميل الإطارات المتجانبة المخزنة مؤقتًا بعد الوقت المحدد. اترك هذا الحقل فارغًا لعدم تحديث الإطارات المتجانبة لهذا المصدر. 
 \n
 \nيوم واحد هو 1440 دقيقة.
 \nأسبوع واحد هو 10080 دقيقة.
 \nشهر واحد هو 43 829 دقيقة.</string>
-    <string name="tiles_storage_descr">اختر كيفية تخزين الطبقات التي تم تنزيلها.</string>
+    <string name="tiles_storage_descr">اختر كيفية تخزين الطبقات المنزلة.</string>
     <string name="default_screen_timeout">مهلة الشاشة الافتراضية</string>
-    <string name="export_import_quick_actions_with_profiles_promo">يمكنك تصدير أو استيراد إجراءات سريعة باستخدام ملفات تعريف بروفايل التطبيق.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">يمكنك تصدير أو استيراد إجراءات سريعة باستخدام ملفات بروفايل التطبيق .</string>
     <string name="shared_string_delete_all_q">حذف الكل؟</string>
     <string name="delete_all_actions_message_q">هل أنت متأكد من رغبتك في حذف الإجراءات السريعة %d نهائيًا؟</string>
     <string name="screen_timeout">مهلة الشاشة</string>
