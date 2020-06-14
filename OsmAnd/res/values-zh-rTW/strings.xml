@@ -3773,4 +3773,8 @@
     <string name="turn_screen_on_power_button_disabled">已停用。需要「喚醒後逾時」的「保持螢幕開啟」。</string>
     <string name="add_online_source">新增線上來源</string>
     <string name="clear_tiles_warning">套用這些變更將會清除這個圖磚來源的快取資料</string>
+    <string name="vessel_height_warning_link">設定船艦高度</string>
+    <string name="vessel_height_warning">您可以設定船艦高度以避免矮橋。請記住，如果橋是可動式的，我們將會使用其在開啟狀態的高度。</string>
+    <string name="vessel_height_limit_description">設定船艦高度以避免矮橋。請記住，如果橋是可動式的，我們將會使用其開啟狀態的高度。</string>
+    <string name="vessel_width_limit_description">設定船艦寬度以避免窄橋</string>
 </resources>
