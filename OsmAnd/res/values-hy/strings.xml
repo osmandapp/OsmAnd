@@ -64,7 +64,7 @@
     <string name="distance_measurement_load_gpx">Բացել առկա GPX ֆայլը</string>
     <string name="wait_current_task_finished">Խնդրում ենք սպասել մինջև տվյալ պրոցեսը կվերջանա</string>
     <string name="distance_measurement_finish_subtrack">Սկսել նոր ենթաճանապարհ</string>
-    <string name="osmand_distance_planning_plugin_name">Հեռավորության հաշվիչ և Պլանավորման Գործիք</string>
+    <string name="osmand_distance_planning_plugin_name">Հեռավորության հաշվիչ և պլանավորման գործիք</string>
     <string name="edit_filter_create_message">%1$s Ֆիլտրը ստեղծված է</string>
     <string name="edit_filter_delete_message">%1$s Ֆիլտրը ջնջված է</string>
     <string name="edit_filter_delete_dialog_title">Ջնջե՞լ տվյալ ֆիլտրը?</string>
@@ -133,7 +133,7 @@
     <string name="routing_attr_avoid_motorway_description">Խուսափել ավտոմայրուղիներ</string>
     <string name="routing_attr_weight_name">Առավելագույն քաշը</string>
     <string name="routing_attr_weight_description">Նշեք ճանապարհների վրա թույլատրված մեքենայի քաշի սահմանը:</string>
-    <string name="osmand_distance_planning_plugin_description">Այս plugin-նը ապահովում է քարտեզի էկրանի վրա վիջեթ, որը հնարավորություն է տալիս ստեղծել ուղիներ, քարտեզի վրա կտտացնելով, նաև օգտագործել կամ փոփոխել առկա GPX ֆայլերը, ուղեւորություն պլանավորել և չափել կետերի միջև հեռավորությունը։</string>
+    <string name="osmand_distance_planning_plugin_description">Ապահովում է քարտեզի էկրանի վրա վիջեթ, որը հնարավորություն է տալիս ստեղծել ուղիներ, քարտեզի վրա կտտացնելով, նաև օգտագործել կամ փոփոխել առկա GPX ֆայլերը, ուղեւորություն պլանավորել և չափել կետերի միջև հեռավորությունը։</string>
     <string name="shared_string_no">Ոչ</string>
     <string name="shared_string_yes">Այո</string>
     <string name="osn_modify_dialog_error">Չհաջողվեց փոփոխել նշումը:</string>
@@ -964,7 +964,7 @@
     <string name="audionotes_plugin_name">Աուդիո և վիդեո նշումներ</string>
     <string name="audionotes_plugin_description">Աուդիո/Վիդեո նշումների plugin-ը հնարավորություն են տալիս ստեղծել աուդիո/լուսանկարներ/վիդեո նշումներ վարելու ժամանակ կամ կոճակի միջոցով քարտեզի էկրանին վրա կամ անմիջապես համատեքստային մենյուի միջոցով ցանկացած դիրքի համար քարտեզի վրա:</string>
     <string name="osmand_parking_plugin_name">Ավտոկայանատեղ</string>
-    <string name="osmand_parking_plugin_description">Ավտոկայանատեղ plugin-ը թույլ է տալիս գրանցել, թե որտեղ է ձեր մեքենան կայանել և որքան ժամանակ է մնացել ավտոկայանատեղը ազատելու (եթե առկա է ժամկետ): 
+    <string name="osmand_parking_plugin_description">Թույլ է տալիս գրանցել, թե որտեղ է ձեր մեքենան կայանել և որքան ժամանակ է մնացել ավտոկայանատեղը ազատելու (եթե առկա է ժամկետ): 
 \nԹե տեղը, թե ժամանակը տեսանելի են OsmAnd-ի վահանակի վրա, ինչպես նաև քարտեզի էկրանին ինչպես նաև վիդժետի մեջ: Android օրացույցին կարելի է միացնել որպես հիշեցում:</string>
     <string name="shared_string_accessibility">Հատուկ հնարավորություններ</string>
     <string name="osmand_accessibility_description">The plugin-ն սարքի համար ավելացնում հատուկ հնարավորությունների աջակցում ուղղակիորեն OsmAnd-ում: Սա հեշտացնում է, օրինակ, TTS-ի ձայնի ելքային արագությունը հարմարեցնելու համար, կարգավորել նավիգացիայի ուղղվածությունը էկրանի վրա, վերահսկեք սանդղակը կամ ձայնային հետադարձ կապի հրամանները ավտո անոտացիաներ անելու դեպքում ձեր դիրքի վերաբերյալ:</string>
@@ -975,7 +975,7 @@
     <string name="osm_settings">OSM-ի խմբագրում</string>
     <string name="waypoints_added_to_map_markers">Կետերը ավելացվել են քարտեզի մարկերներին</string>
     <string name="osm_editing_plugin_description">Այս OsmAnd-ի plugin-ի միջոցով կարելի է ներդրում կատարել OSM-ի, ինչպիսիք են OSM POI-ի օբյեկտների ստեղծում կամ փոփոխում, OSM նշումների բացումը կամ մեկնաբանումը և վերբեռնում արձանագրված GPX ֆայլերը: OSM-ն գլոբալ հանրային քարտեզագրման նախագիծ է, որը կառավարվում է OSM համայնքի կողմից: Մանրամասների համար այցելեք https://openstreetmap.org: Ակտիվ մասնակցությունը գնահատվում է, և ներդրումները կարող են կատարվել ուղղակիորեն OsmAnd-ից, եթե նշեք ձեր անձնական OSM-ի հավատարմագրերը հավելվածում:</string>
-    <string name="osmand_development_plugin_description">Այս plugin-նը ցուցադրում է գործառույթների մշակման և կարգաբերման պարամետրեր, ինչպիսիք են երթուղու ստուգումը կամ մոդելավորումը,քարտեզի ցուցադրման կատարումը, ձայնային հուշումները ստուգելը: Այս կարգավորումները մշակողների համար են և հասարակ օգտագործողների համար անհրաժեշտ չեն:</string>
+    <string name="osmand_development_plugin_description">Կարգավորումներ զարգացման եւ կարգաբերման գործառույթների համար, ինչպիսիք են երթուղու ստուգումը կամ մոդելավորումը,քարտեզի ցուցադրման կատարումը, ձայնային հուշումները ստուգելը: Այս կարգավորումները մշակողների համար են և հասարակ օգտագործողների համար անհրաժեշտ չեն:</string>
     <string name="debugging_and_development">OsmAnd-ի կարգավորումը և զարգացումը</string>
     <string name="rename_failed">Չհաջողվեց վերանվանել:</string>
     <string name="days_behind">օր առաջ</string>
@@ -985,7 +985,7 @@
 \nԼայնությունը %1$s
 \nԵրկայնություն %2$s</string>
     <string name="watch">Դիտել</string>
-    <string name="notes">Նշումներ</string>
+    <string name="notes">A/V նշումներ</string>
     <string name="online_map">Առցանց քարտեզ</string>
     <string name="roads_only">Միայն ճանապարհները</string>
     <string name="rendering_attr_pisteRoutes_name">Լեռնադահուկային երթուղիները</string>
@@ -1077,10 +1077,10 @@
     <string name="logged_as">Դուք մուտք եք գործել որպես %1$s</string>
     <string name="speed_limit_exceed">Արագության թույլատրելի գերազանցումը</string>
     <string name="speed_limit_exceed_message">Ընտրեք արագության գերազանցման թույլատրելի արժեքը, որի գերազանցման դեպքում դուք կստանաք ձայնային նախազգուշացում։</string>
-    <string name="fav_point_emoticons_message">«Սիրված» կետի անունը փոխվել է %1$s որպեսզի հնարավոր լինի «սմայլիկ» պարունակող տողերը պահպանել ֆայլում։</string>
+    <string name="fav_point_emoticons_message">«Սիրված» կետի անունը փոխվել է %1$s, որպեսզի հնարավոր լինի «սմայլիկ» պարունակող տողերը պահպանել ֆայլում։</string>
     <string name="print_route">Տպել երթուղին</string>
     <string name="fav_point_dublicate">Կրկնօրինակել «Սիրված» կետի անունը</string>
-    <string name="fav_point_dublicate_message">«Սիրված» կետի նշված անվանումը արդեն օգտագործված է, անունների կրկնօրինակումը կանխելու համար անունը փոխվել է %1$s:</string>
+    <string name="fav_point_dublicate_message">«Սիրված» կետը վերանվանվել է %1$s, անունների կրկնօրինակումը կանխելու համար:</string>
     <string name="text_size_descr">Սահմանեք տեքստի չափը քարտեզի համար։</string>
     <string name="text_size">Տեքստի չափը</string>
     <string name="traffic_warning_speed_limit">Արագության սահմանափակումը</string>
@@ -1103,7 +1103,7 @@
     <string name="enable_sleep_mode">Միացնել GPS ֆոնի ռեժիմը</string>
     <string name="save_track_to_gpx_globally">Գրանցել տրեկը GPX ֆայլի տեքով</string>
     <string name="save_track_to_gpx_globally_headline">Տրեկի գրանցումը ըստ պահանջի</string>
-    <string name="save_track_to_gpx_globally_descr">Ընդհանուր դիրքի գրանցումը GPX ֆայլի տեսքով կարող եք միացնել կամ անջատել GPX վիջետի միջոցով քարտեզի էկրանից։</string>
+    <string name="save_track_to_gpx_globally_descr">Ընդհանուր դիրքի գրանցումը GPX ֆայլի տեսքով կարող եք միացնել կամ անջատել GPX վիջետի միջոցով քարտեզի վրա։</string>
     <string name="save_current_track_descr">Պահպանել ընթացիկ տրեկը որպես GPX ֆայլ։</string>
     <string name="save_current_track">Պահպանել ընթացիկ տրեկը</string>
     <string name="save_track_to_gpx">Նավիգացիայի ընթացքում ավտոմատ գրանցել տրեկը</string>
@@ -1116,9 +1116,9 @@
     <string name="enable_proxy_title">Միացնել HTTP proxy սերվեր</string>
     <string name="enable_proxy_descr">Կարգավորել HTTP proxy սերերը բոլոր ցանցային հարցումների համար։</string>
     <string name="proxy_host_title">Proxy սերվերի հասցեն</string>
-    <string name="proxy_host_descr">Կարգավորեք Ձեր proxy սեվերի անունը(օրինակ 127.0.0.1)։</string>
+    <string name="proxy_host_descr">Նշեք Ձեր proxy սեվերի անունը(օրինակ 127.0.0.1)։</string>
     <string name="proxy_port_title">Proxy սերվերի պորտը</string>
-    <string name="proxy_port_descr">Կարգավորեք proxy սերվերի պորտի համարը (օրինակ, 8118)։</string>
+    <string name="proxy_port_descr">Նշեք Ձեր proxy սերվերի պորտի համարը (օրինակ, 8118)։</string>
     <string name="int_hour">ժամ</string>
     <string name="duration">Տևողություն</string>
     <string name="distance">Հեռավորություն</string>
