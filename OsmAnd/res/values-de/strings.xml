@@ -3785,4 +3785,8 @@
     <string name="turn_screen_on_power_button_disabled">Deaktiviert. Erfordert \'Bildschirm eingeschaltet lassen\' unter \'Timeout nach dem Aufwachen\'.</string>
     <string name="add_online_source">Online-Quelle hinzufügen</string>
     <string name="clear_tiles_warning">Durch die Anwendung dieser Änderungen werden die zwischengespeicherten Daten für diese Kachelquelle gelöscht</string>
+    <string name="vessel_height_warning_link">Schiffshöhe einstellen</string>
+    <string name="vessel_height_warning">Sie können die Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Denken Sie daran, wenn die Brücke beweglich ist, werden wir ihre Höhe im offenen Zustand verwenden.</string>
+    <string name="vessel_height_limit_description">Stellen Sie die Schiffshöhe ein, um niedrige Brücken zu vermeiden.Denken Sie daran, wenn die Brücke beweglich ist, werden wir ihre Höhe im offenen Zustand verwenden.</string>
+    <string name="vessel_width_limit_description">Stellen Sie die Schiffsbreite ein, um schmale Brücken zu vermeiden</string>
 </resources>
