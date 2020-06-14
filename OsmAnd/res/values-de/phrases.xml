@@ -1914,7 +1914,7 @@
     <string name="poi_artwork_type_statue">Kunstart: Statue</string>
     <string name="poi_artwork_type_mural">Kunstart: Wandgemälde</string>
     <string name="poi_artwork_type_architecture">Kunstart: Architektur</string>
-    <string name="poi_artwork_type_painting">Kunstart: Bild</string>
+    <string name="poi_artwork_type_painting">Kunstart: Gemälde</string>
     <string name="poi_artwork_type_stone">Kunstart: Stein</string>
     <string name="poi_artwork_type_bust">Kunstart: Büste</string>
     <string name="poi_artwork_type_installation">Kunstart: Installation</string>
