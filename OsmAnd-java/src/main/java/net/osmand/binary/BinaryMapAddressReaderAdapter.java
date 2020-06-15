@@ -221,7 +221,7 @@ public class BinaryMapAddressReaderAdapter {
 				int fp = codedIS.getTotalBytesRead();
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
-				City c = readCityHeader(new DefaultCityMatcher(matcher), fp, additionalTagsTable);
+				City c = readCityHeader(resultMatcher, new DefaultCityMatcher(matcher), fp, additionalTagsTable);
 				if (c != null) {
 					if (resultMatcher == null || resultMatcher.publish(c)) {
 						cities.add(c);
@@ -256,6 +256,7 @@ public class BinaryMapAddressReaderAdapter {
 				int oldLimit = codedIS.pushLimit(length);
 				readStreet(s, null, false, x >> 7, y >> 7, city.isPostcode() ? city.getName() : null,
 						attributeTagsTable);
+				publishRawData(resultMatcher, s);
 				if (resultMatcher == null || resultMatcher.publish(s)) {
 					city.registerStreet(s);
 				}
@@ -303,7 +304,7 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 
-	protected City readCityHeader(CityMatcher matcher, int filePointer, List<String> additionalTagsTable) throws IOException {
+	protected City readCityHeader(SearchRequest<? super City> resultMatcher, CityMatcher matcher, int filePointer, List<String> additionalTagsTable) throws IOException {
 		int x = 0;
 		int y = 0;
 		City c = null;
@@ -313,6 +314,7 @@ public class BinaryMapAddressReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
+				publishRawData(resultMatcher, c);
 				return (matcher == null || matcher.matches(c)) ? c : null;
 			case OsmandOdb.CityIndex.CITY_TYPE_FIELD_NUMBER:
 				int type = codedIS.readUInt32();
@@ -445,6 +447,7 @@ public class BinaryMapAddressReaderAdapter {
 				if (loadBuildingsAndIntersected) {
 					int oldLimit = codedIS.pushLimit(length);
 					Building b = readBuilding(offset, x, y, additionalTagsTable);
+					publishRawData(buildingsMatcher, b);
 					if (postcodeFilter == null || postcodeFilter.equalsIgnoreCase(b.getPostcode())) {
 						if (buildingsMatcher == null || buildingsMatcher.publish(b)) {
 							s.addBuilding(b);
@@ -688,7 +691,7 @@ public class BinaryMapAddressReaderAdapter {
 								codedIS.seek(contOffset);
 								int len = codedIS.readRawVarint32();
 								int old = codedIS.pushLimit(len);
-								obj = readCityHeader(null, contOffset, reg.attributeTagsTable);
+								obj = readCityHeader(req, null, contOffset, reg.attributeTagsTable);
 								codedIS.popLimit(old);
 							}
 							if (obj != null) {
@@ -701,6 +704,7 @@ public class BinaryMapAddressReaderAdapter {
 								readStreet(s, null, false, MapUtils.get31TileNumberX(l.getLongitude()) >> 7,
 										MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null,
 										reg.attributeTagsTable);
+								publishRawData(req, s);
 								boolean matches = stringMatcher.matches(s.getName());
 								if (!matches) {
 									for (String n : s.getAllNames()) {
@@ -727,7 +731,8 @@ public class BinaryMapAddressReaderAdapter {
 							codedIS.seek(offset);
 							int len = codedIS.readRawVarint32();
 							int old = codedIS.pushLimit(len);
-							City obj = readCityHeader(cityPostcodeMatcher, list.get(j), reg.attributeTagsTable);
+							City obj = readCityHeader(req, cityPostcodeMatcher, list.get(j), reg.attributeTagsTable);
+							publishRawData(req, obj);
 							if (obj != null && !published.contains(offset)) {
 								req.publish(obj);
 								published.add(offset);
@@ -805,4 +810,9 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 
+	private <T> void publishRawData(SearchRequest<T> resultMatcher, T obj) {
+		if (resultMatcher != null && obj != null) {
+			resultMatcher.collectRawData(obj);
+		}
+	}
 }
