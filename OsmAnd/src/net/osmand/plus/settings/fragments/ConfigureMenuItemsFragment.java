@@ -106,7 +106,6 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		ConfigureMenuItemsFragment fragment = new ConfigureMenuItemsFragment();
 		fragment.setScreenType(type);
 		fragment.setAppMode(appMode);
-		fragment.disableTransitionAnimation();
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainer, fragment, TAG)
 				.addToBackStack(CONFIGURE_MENU_ITEMS_TAG)
