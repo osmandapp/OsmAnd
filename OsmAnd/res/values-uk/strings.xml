@@ -1050,7 +1050,7 @@
     <string name="driving_region_us">США</string>
     <string name="driving_region_canada">Канада</string>
     <string name="driving_region_europe_asia">Європа, Азія, Латинська Америка та подібні</string>
-    <string name="driving_region_uk">Великобританія, Індія &amp; схожі</string>
+    <string name="driving_region_uk">Великобританія, Індія та подібні</string>
     <string name="map_widget_fps_info">FPS-відомості</string>
     <string name="about_version">Версія:</string>
     <string name="shared_string_about">Про застосунок</string>
@@ -1061,7 +1061,7 @@
     <string name="local_index_tile_data_maxzoom">Максимальний масштаб: %1$s</string>
     <string name="local_index_tile_data_minzoom">Мінімальний масштаб: %1$s</string>
     <string name="local_index_tile_data_name">Дата квадрату: %1$s</string>
-    <string name="edit_tilesource_successfully">Джерело квадратів мапи %1$s збережене</string>
+    <string name="edit_tilesource_successfully">Джерело квадратів мапи %1$s збережено</string>
     <string name="edit_tilesource_elliptic_tile">Еліптичний Меркатор</string>
     <string name="edit_tilesource_maxzoom">Максимальне збільшення</string>
     <string name="edit_tilesource_expiration_time">Строк дії (в хвилинах)</string>
@@ -2421,7 +2421,7 @@
 \n • Африка: ** 
 \n • Антарктида: * 
 \nБільшість країн по всьому світу доступні для завантаження! 
-\nОтримайте надійний навігатор у Вашій країні — будь то Україна, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Росія, Бразилія чи будь-яка інша… 
+\nОтримайте надійний навігатор у Вашій країні — будь то Україна, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Росія, Бразилія чи будь-яка інша…
 \n</string>
     <string name="save_poi_too_many_uppercase">Назва містить занадто багато великих літер. Продовжити?</string>
     <string name="shared_string_add_photos">Додати світлини</string>
@@ -3602,7 +3602,7 @@
     <string name="shared_string_rhomb">Ромб</string>
     <string name="shared_string_square">Площа</string>
     <string name="shared_string_octagon">Восьмикутник</string>
-    <string name="replace_point_descr">Замінити іншу точку цією</string>
+    <string name="replace_point_descr">Замінити іншу точку цією.</string>
     <string name="app_mode_ski_touring">Гірськолижний туризм</string>
     <string name="app_mode_ski_snowmobile">Снігохід</string>
     <string name="custom_osmand_plugin">Користувацький втулок OsmAnd</string>
@@ -3633,7 +3633,7 @@
     <string name="move_inside_category">Ви можете переміщувати елементи лише всередині цієї категорії.</string>
     <string name="developer_plugin">Втулок розробника</string>
     <string name="shared_string_items">Елементи</string>
-    <string name="select_wikipedia_article_langs">Виберіть мови, якими статті на Вікіпедії з’являться на мапі. Під час читання статті ви можете перемикатися між усіма доступними мовами.</string>
+    <string name="select_wikipedia_article_langs">Виберіть мови статей Вікіпедії на мапі. Перемикайтеся між усіма доступними мовами під час читання статті.</string>
     <string name="some_articles_may_not_available_in_lang">Деякі статті у Вікіпедії можуть бути недоступними вашою мовою.</string>
     <string name="lang_zhyue">Кантонська</string>
     <string name="lang_zhminnan">Південний Мін</string>
@@ -3728,9 +3728,7 @@
     <string name="system_screen_timeout">Використовувати системний час очікування</string>
     <string name="turn_screen_on_options_descr">Параметри увімкнення екрана</string>
     <string name="turn_screen_on_descr">Параметри увімкнення екрану (переконайтесь, що OsmAnd стоїть на передньому плані, коли пристрій заблоковано):</string>
-    <string name="turn_screen_on_navigation_instructions_descr">Екран увімкнеться автоматично за кілька секунд до вказівки щодо навігації за визначений час у опції «Час пробудження».
-\n
-\nПрацює лише під час навігації.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Екран увімкнеться під час вказівки щодо навігації.</string>
     <string name="turn_screen_on_navigation_instructions">Вказівки з навігації</string>
     <string name="turn_screen_on_power_button_descr">Натисніть кнопку живлення пристрою, щоб увімкнути екран на передньому плані з OsmAnd.</string>
     <string name="turn_screen_on_power_button">Кнопка живлення</string>
@@ -3738,7 +3736,7 @@
     <string name="turn_screen_on_wake_time_descr">Час очікування екрану після увімкнення. («%1$s» вимикає вимкнення екрану.)</string>
     <string name="keep_screen_on">Тримати екран увімкненим</string>
     <string name="keep_screen_off">Тримати екран вимкненим</string>
-    <string name="screen_timeout_descr">Якщо функцію \"%1$s\" увімкнено, час роботи залежатиме від неї.</string>
+    <string name="screen_timeout_descr">Якщо параметр \"%1$s\" увімкнено, час роботи залежатиме від нього.</string>
     <string name="pseudo_mercator_projection">Псевдопроєкція Меркатора</string>
     <string name="one_image_per_tile">Один файл зображення на плитку</string>
     <string name="sqlite_db_file">Файл SQLiteDB</string>
@@ -3768,7 +3766,7 @@
     <string name="weight_limit_description">Вкажіть вагу транспортного засобу, для важких транспортних засобів можуть застосовуватися деякі обмеження на маршрути.</string>
     <string name="shared_string_tones">тонни</string>
     <string name="shared_string_meters">метри</string>
-    <string name="details_dialog_decr">Керування відображенням додаткових деталей на мапі</string>
+    <string name="details_dialog_decr">Показати або приховати додаткові деталі на мапі</string>
     <string name="shared_string_night_map">Нічна мапа</string>
     <string name="width_limit_description">Вкажіть ширину автомобіля, для великих транспортних засобів можуть застосовуватися обмеження на деяких маршрутах.</string>
     <string name="height_limit_description">Вкажіть висоту автомобіля, для великих транспортних засобів можуть застосовуватися обмеження на деяких маршрутах.</string>
