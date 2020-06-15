@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -87,6 +88,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private OsmandApplication app;
 	private View descriptionCaption;
 	private EditText descriptionEdit;
+	private int layoutHeightPrevious = 0;
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
@@ -281,8 +283,27 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				return false;
 			}
 		});
-
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
+		}
 		return view;
+	}
+
+	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
+		return new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				Rect visibleDisplayFrame = new Rect();
+				view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
+				int layoutHeight = visibleDisplayFrame.bottom;
+				if (layoutHeight != layoutHeightPrevious) {
+					FrameLayout.LayoutParams rootViewLayout = (FrameLayout.LayoutParams) view.getLayoutParams();
+					rootViewLayout.height = layoutHeight;
+					view.requestLayout();
+					layoutHeightPrevious = layoutHeight;
+				}
+			}
+		};
 	}
 
 	@Override
