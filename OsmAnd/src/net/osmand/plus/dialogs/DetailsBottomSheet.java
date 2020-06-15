@@ -148,7 +148,10 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 				String attrName = property.getAttrName();
 				if (MORE_DETAILED.equals(attrName) || SHOW_SURFACE_GRADE.equals(attrName)
 						|| COLORED_BUILDINGS.equals(attrName) || STREET_LIGHTING.equals(attrName)) {
-					items.add(new DividerItem(app));
+					int margin = (int) getResources().getDimension(R.dimen.content_padding);
+					DividerItem divider = new DividerItem(app);
+					divider.setMargins(margin, 0, 0, 0);
+					items.add(divider);
 				}
 			}
 		}
