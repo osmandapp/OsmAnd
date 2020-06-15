@@ -366,22 +366,23 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			template.setEllipticYTile(elliptic);
 			template.setExpirationTimeMinutes(expireTimeMinutes);
 			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + editedLayerName);
-			String oldExt = null;
+			String ext = null;
 			boolean storageChanged = false;
 			if (f.exists()) {
 				int extIndex = f.getName().lastIndexOf('.');
-				oldExt = extIndex == -1 ? "" : f.getName().substring(extIndex);
+				ext = extIndex == -1 ? "" : f.getName().substring(extIndex);
 				String originalName = extIndex == -1 ? f.getName() : f.getName().substring(0, extIndex);
 				if (!Algorithms.objectEquals(newName, originalName)) {
-					if (IndexConstants.SQLITE_EXT.equals(oldExt) && sqliteDB) {
-						FileUtils.renameSQLiteFile(app, f, newName, null);
-					} else if (!sqliteDB) {
+					if (IndexConstants.SQLITE_EXT.equals(ext)) {
+						f = FileUtils.renameSQLiteFile(app, f, newName + ext, null);
+					} else {
 						f.renameTo(app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName));
+						f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName);
 					}
 				}
 			}
 			if (sqliteDB) {
-				if (IndexConstants.SQLITE_EXT.equals(oldExt)) {
+				if (IndexConstants.SQLITE_EXT.equals(ext)) {
 					List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
 					SQLiteTileSource sqLiteTileSource = new SQLiteTileSource(app, f, knownTemplates);
 					sqLiteTileSource.couldBeDownloadedFromInternet();
@@ -398,7 +399,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				}
 			} else {
 				getSettings().installTileSource(template);
-				storageChanged = f.exists() && IndexConstants.SQLITE_EXT.equals(oldExt);
+				storageChanged = f != null && f.exists() && IndexConstants.SQLITE_EXT.equals(ext);
 			}
 			if (storageChanged) {
 				new DeleteTilesTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
