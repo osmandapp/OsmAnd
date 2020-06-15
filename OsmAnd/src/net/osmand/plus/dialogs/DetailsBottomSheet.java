@@ -3,8 +3,11 @@ package net.osmand.plus.dialogs;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +49,9 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	private ArrayAdapter<?> arrayAdapter;
 	private ContextMenuAdapter adapter;
 	private int position;
+	private int padding;
+	private int paddingSmall;
+	private int paddingHalf;
 
 	public static void showInstance(@NonNull FragmentManager fm,
 									List<RenderingRuleProperty> properties,
@@ -67,6 +73,9 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		padding = (int) getResources().getDimension(R.dimen.content_padding);
+		paddingSmall = (int) getResources().getDimension(R.dimen.content_padding_small);
+		paddingHalf = (int) getResources().getDimension(R.dimen.content_padding_half);
 		app = requiredMyApplication();
 		if (properties == null || preferences == null) {
 			properties = new ArrayList<>();
@@ -148,13 +157,28 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 				String attrName = property.getAttrName();
 				if (MORE_DETAILED.equals(attrName) || SHOW_SURFACE_GRADE.equals(attrName)
 						|| COLORED_BUILDINGS.equals(attrName) || STREET_LIGHTING.equals(attrName)) {
-					int margin = (int) getResources().getDimension(R.dimen.content_padding);
 					DividerItem divider = new DividerItem(app);
-					divider.setMargins(margin, 0, 0, 0);
+					divider.setMargins(padding, 0, 0, 0);
 					items.add(divider);
 				}
 			}
 		}
+	}
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		View view = super.onCreateView(inflater, parent, savedInstanceState);
+		if (view != null) {
+			float spacing = getResources().getDimension(R.dimen.line_spacing_extra_description);
+			TextView title = view.findViewById(R.id.title);
+			title.setPadding(padding, paddingHalf, padding, paddingHalf);
+			title.setMinHeight(0);
+			TextView description = view.findViewById(R.id.description);
+			description.setLineSpacing(spacing, 1.0f);
+			description.setPadding(padding, 0, padding, paddingSmall);
+		}
+		return view;
 	}
 
 	@Nullable
