@@ -28,6 +28,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -41,16 +42,19 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -64,6 +68,8 @@ import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		ContextMenuLayer.IMoveObjectProvider, MapTextProvider<WptPt> {
+
+	private static final double TOUCH_RADIUS_MULTIPLIER = 1.5;
 
 	private OsmandMapTileView view;
 
@@ -575,7 +581,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return (Math.abs(objx - ex) <= radius * 1.5 && Math.abs(objy - ey) <= radius * 1.5);
+		return (Math.abs(objx - ex) <= radius * TOUCH_RADIUS_MULTIPLIER && Math.abs(objy - ey) <= radius * TOUCH_RADIUS_MULTIPLIER);
 //		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
 	}
 
@@ -597,12 +603,99 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		}
 	}
 
+	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
+
+	public void getWptFromPoint2(RotatedTileBox tb, PointF point, List<Object> res) {
+		int r = getScaledTouchRadius(view.getApplication(), getDefaultRadiusPoi(tb));
+		int mx = (int) point.x;
+		int my = (int) point.y;
+		List<SelectedGpxFile> selectedGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
+		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
+			boolean track = false;
+			List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
+			for (TrkSegment segment : segments) {
+				track |= track(tb, segment.points, (int) (r * TOUCH_RADIUS_MULTIPLIER), mx, my);
+			}
+			if (track) {
+				res.add(selectedGpxFile);
+			}
+			log.debug("found " + track);
+		}
+	}
+
+	private boolean track(RotatedTileBox tb, List<WptPt> points, int r, int mx, int my) {
+		WptPt firstPoint = points.get(0);
+		int ppx = (int) tb.getPixXFromLatLon(firstPoint.lat, firstPoint.lon);
+		int ppy = (int) tb.getPixYFromLatLon(firstPoint.lat, firstPoint.lon);
+		int pcross = placeInBbox(ppx, ppy, mx, my, r, r);
+
+		for (int i = 1; i < points.size(); i++) {
+			WptPt point = points.get(i);
+			int px = (int) tb.getPixXFromLatLon(point.lat, point.lon);
+			int py = (int) tb.getPixYFromLatLon(point.lat, point.lon);
+			int cross = placeInBbox(px, py, mx, my, r, r);
+			if (cross == 0) {
+				return true;
+			}
+			if ((pcross & cross) == 0) {
+				int mpx = px;
+				int mpy = py;
+				int mcross = cross;
+				while (Math.abs(mpx - ppx) > r || Math.abs(mpx - ppx) > r) {
+					int mpxnew = mpx / 2 + ppx / 2;
+					int mpynew = mpy / 2 + ppy / 2;
+					int mcrossnew = placeInBbox(mpx, mpy, mx, my, r, r);
+					if (mcrossnew == 0) {
+						return true;
+					}
+					if ((mcrossnew & mcross) != 0) {
+						mpx = mpxnew;
+						mpy = mpynew;
+						mcross = mcrossnew;
+					} else if ((mcrossnew & pcross) != 0) {
+						ppx = mpxnew;
+						ppy = mpynew;
+						pcross = mcrossnew;
+					} else {
+						// this should never happen theoretically
+						break;
+					}
+				}
+			}
+			pcross = cross;
+			ppx = px;
+			ppy = py;
+		}
+		return false;
+	}
+
+	int placeInBbox(int x, int y, int mx, int my, int halfw, int halfh) {
+		int cross = 0;
+		cross |= (x < mx - halfw ? 1 : 0);
+		cross |= (x > mx + halfw ? 2 : 0);
+		cross |= (y < my - halfh ? 4 : 0);
+		cross |= (y > my + halfh ? 8 : 0);
+		return cross;
+	}
+
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof WptPt) {
 			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt) o).name); //$NON-NLS-1$
+		} else if (o instanceof SelectedGpxFile) {
+			SelectedGpxFile selectedGpxFile = (SelectedGpxFile) o;
+			String name = formatName(Algorithms.getFileWithoutDirs(selectedGpxFile.getGpxFile().path));
+			return new PointDescription(PointDescription.POINT_TYPE_WPT, name);
 		}
 		return null;
+	}
+
+	private String formatName(String name) {
+		int ext = name.lastIndexOf('.');
+		if (ext != -1) {
+			name = name.substring(0, ext);
+		}
+		return name.replace('_', ' ');
 	}
 
 	@Override
@@ -617,7 +710,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public boolean isObjectClickable(Object o) {
-		return o instanceof WptPt;
+		return o instanceof WptPt || o instanceof SelectedGpxFile;
 	}
 
 	@Override
@@ -629,6 +722,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
 		if (tileBox.getZoom() >= startZoom) {
 			getWptFromPoint(tileBox, point, res);
+			getWptFromPoint2(tileBox, point, res);
 		}
 	}
 
