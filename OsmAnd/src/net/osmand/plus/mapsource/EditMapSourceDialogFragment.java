@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -107,10 +108,12 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	public static void showInstance(@NonNull FragmentManager fm,
 									@Nullable Fragment targetFragment,
 									@Nullable String editedLayerName) {
-		EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
-		fragment.setTargetFragment(targetFragment, 0);
-		fragment.setEditedLayerName(editedLayerName);
-		fragment.show(fm, TAG);
+		if (!fm.isStateSaved()) {
+			EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.setEditedLayerName(editedLayerName);
+			fragment.show(fm, TAG);
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm,
@@ -118,7 +121,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
 		fragment.setTemplate(template);
 		fragment.fromTemplate = true;
-		fragment.show(fm, TAG);
+		fm.beginTransaction().add(fragment, TAG).commitAllowingStateLoss();
 	}
 
 	@Override
@@ -252,7 +255,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			}
 		}
 		if (savedInstanceState == null) {
-			editedLayerName = template.getName();
+			if (fromTemplate) {
+				editedLayerName = template.getName();
+			}
 			urlToLoad = template.getUrlTemplate();
 			expireTimeMinutes = template.getExpirationTimeMinutes();
 			minZoom = template.getMinimumZoomSupported();
@@ -361,12 +366,14 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			template.setEllipticYTile(elliptic);
 			template.setExpirationTimeMinutes(expireTimeMinutes);
 			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + editedLayerName);
+			String oldExt = null;
+			boolean storageChanged = false;
 			if (f.exists()) {
 				int extIndex = f.getName().lastIndexOf('.');
-				String ext = extIndex == -1 ? "" : f.getName().substring(extIndex);
+				oldExt = extIndex == -1 ? "" : f.getName().substring(extIndex);
 				String originalName = extIndex == -1 ? f.getName() : f.getName().substring(0, extIndex);
 				if (!Algorithms.objectEquals(newName, originalName)) {
-					if (IndexConstants.SQLITE_EXT.equals(ext) && sqliteDB) {
+					if (IndexConstants.SQLITE_EXT.equals(oldExt) && sqliteDB) {
 						FileUtils.renameSQLiteFile(app, f, newName, null);
 					} else if (!sqliteDB) {
 						f.renameTo(app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName));
@@ -374,7 +381,12 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				}
 			}
 			if (sqliteDB) {
-				if (!f.exists() || f.isDirectory()) {
+				if (IndexConstants.SQLITE_EXT.equals(oldExt)) {
+					List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
+					SQLiteTileSource sqLiteTileSource = new SQLiteTileSource(app, f, knownTemplates);
+					sqLiteTileSource.couldBeDownloadedFromInternet();
+					sqLiteTileSource.updateFromTileSourceTemplate(template);
+				} else {
 					SQLiteTileSource sqLiteTileSource =
 							new SQLiteTileSource(app, newName, minZoom,
 									maxZoom, urlToLoad, "",
@@ -382,20 +394,14 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 									expireTimeMinutes * 60 * 1000L, false, ""
 							);
 					sqLiteTileSource.createDataBase();
-				} else {
-					List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
-					SQLiteTileSource sqLiteTileSource = new SQLiteTileSource(app, f, knownTemplates);
-					sqLiteTileSource.couldBeDownloadedFromInternet();
-					sqLiteTileSource.updateFromTileSourceTemplate(template);
-				}
-				if (f.exists() && f.isDirectory()) {
-					Algorithms.removeAllFiles(f);
+					storageChanged = f.exists();
 				}
 			} else {
 				getSettings().installTileSource(template);
-				if (f.exists() && !f.isDirectory()) {
-					f.delete();
-				}
+				storageChanged = f.exists() && IndexConstants.SQLITE_EXT.equals(oldExt);
+			}
+			if (storageChanged) {
+				new DeleteTilesTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
 			}
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof OnMapSourceUpdateListener) {
@@ -458,13 +464,14 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			@Override
 			public void onClick(View view) {
 				FragmentManager fm = getFragmentManager();
+				boolean newMapSource = Algorithms.isEmpty(editedLayerName) || fromTemplate;
 				if (fm != null && !fm.isStateSaved()) {
 					switch (item) {
 						case ZOOM_LEVELS:
 							InputZoomLevelsBottomSheet.showInstance(
 									fm, EditMapSourceDialogFragment.this,
 									R.string.map_source_zoom_levels, R.string.map_source_zoom_levels_descr,
-									minZoom, maxZoom, editedLayerName == null && !fromTemplate
+									minZoom, maxZoom, newMapSource
 							);
 							break;
 						case EXPIRE_TIME:
@@ -474,7 +481,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 							MercatorProjectionBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, elliptic);
 							break;
 						case STORAGE_FORMAT:
-							TileStorageFormatBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, sqliteDB, editedLayerName == null && !fromTemplate);
+							TileStorageFormatBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, sqliteDB, newMapSource);
 							break;
 					}
 				}
@@ -555,5 +562,32 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 
 	public interface OnMapSourceUpdateListener {
 		void onMapSourceUpdated();
+	}
+
+	public static class DeleteTilesTask extends AsyncTask<File, Void, Void> {
+
+		private OsmandApplication app;
+
+		public DeleteTilesTask(OsmandApplication app) {
+			this.app = app;
+		}
+
+		@Override
+		protected Void doInBackground(File... files) {
+			for (File file : files) {
+				if (Algorithms.removeAllFiles(file)) {
+					app.getResourceManager().closeFile(file.getName());
+					File tShm = new File(file.getParentFile(), file.getName() + "-shm");
+					File tWal = new File(file.getParentFile(), file.getName() + "-wal");
+					if (tShm.exists()) {
+						Algorithms.removeAllFiles(tShm);
+					}
+					if (tWal.exists()) {
+						Algorithms.removeAllFiles(tWal);
+					}
+				}
+			}
+			return null;
+		}
 	}
 }
