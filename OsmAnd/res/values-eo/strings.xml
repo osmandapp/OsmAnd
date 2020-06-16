@@ -3782,4 +3782,8 @@
     <string name="vessel_height_warning">Vi povas enigi alton de via akvoveturilo por eviti malaltajn pontojn. Estu konscia, ke se ponto estas movebla, la alto en ĝia malfermita stato estos uzata.</string>
     <string name="vessel_height_limit_description">Enigu alton de akvoveturilo por eviti malaltajn pontojn. Estu konscia, ke se ponto estas movebla, la alto en ĝia malfermita stato estos uzata.</string>
     <string name="vessel_width_limit_description">Enigu larĝon de akvoveturilo por eviti mallarĝajn pontojn</string>
+    <string name="quick_action_showhide_mapillary_title">Montri/kaŝi Mapillary</string>
+    <string name="quick_action_mapillary_hide">Kaŝi Mapillary</string>
+    <string name="quick_action_mapillary_show">Montri Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Ŝaltilo por montri aŭ kaŝi tavolon de Mapillary sur la mapo.</string>
 </resources>
