@@ -96,7 +96,7 @@
 			android:id="@+id/metric"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
+			android:layout_gravity="start|center_vertical"
 			android:paddingStart="@dimen/content_padding_small"
 			android:paddingRight="@dimen/content_padding_small"
 			android:paddingEnd="@dimen/content_padding_small"
