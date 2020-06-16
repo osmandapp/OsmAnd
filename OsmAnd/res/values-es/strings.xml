@@ -3705,4 +3705,47 @@
     <string name="lang_jv">Javanés</string>
     <string name="search_poi_types">Buscar tipos de PDI</string>
     <string name="download_unsupported_action">Acción %1$s no admitida</string>
+    <string name="index_item_world_basemap_detailed">Mapa general del mundo (detallado)</string>
+    <string name="unsupported_type_error">Tipo no admitido</string>
+    <string name="width_limit_description">Proporciona la anchura de tu vehículo, algunas restricciones de rutas pueden aplicarse para los vehículos anchos.</string>
+    <string name="height_limit_description">Proporciona la altura de tu vehículo, algunas restricciones de rutas pueden aplicarse para los vehículos altos.</string>
+    <string name="weight_limit_description">Proporciona el peso de tu vehículo, algunas restricciones de rutas pueden aplicarse para los vehículos pesados.</string>
+    <string name="gpx_parse_error">OsmAnd GPX no está bien formado, por favor ponte en contacto con el equipo de soporte para investigar más a fondo.</string>
+    <string name="shared_string_always">Siempre</string>
+    <string name="screen_control">Control de pantalla</string>
+    <string name="system_screen_timeout_descr">Apaga la pantalla después del tiempo de apagado de la pantalla definido en el sistema.</string>
+    <string name="system_screen_timeout">Usar el tiempo de apagado de la pantalla del sistema</string>
+    <string name="turn_screen_on_descr">Selecciona las opciones de activación de la pantalla (asegúrate de que OsmAnd esté en primer plano cuando se bloquee el dispositivo):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Cada instrucción de navegación encenderá la pantalla.</string>
+    <string name="turn_screen_on_navigation_instructions">Instrucciones de navegación</string>
+    <string name="turn_screen_on_power_button_descr">Al pulsar el botón de encendido del dispositivo se encenderá la pantalla con OsmAnd encima de la pantalla de bloqueo.</string>
+    <string name="turn_screen_on_power_button">Botón de encendido</string>
+    <string name="turn_screen_on_proximity_sensor">Sensor de proximidad</string>
+    <string name="turn_screen_on_wake_time_descr">Selecciona el tiempo de apagado de la pantalla después de despertarte. (\"%1$s\" no la apaga.)</string>
+    <string name="keep_screen_on">Mantener la pantalla encendida</string>
+    <string name="keep_screen_off">Mantener la pantalla apagada</string>
+    <string name="pseudo_mercator_projection">Proyección Pseudo-Mercator</string>
+    <string name="one_image_per_tile">Un archivo de imagen por tesela</string>
+    <string name="sqlite_db_file">Archivo SQLiteDB</string>
+    <string name="online_map_name_helper_text">Proporciona un nombre para la fuente del mapa en línea.</string>
+    <string name="online_map_url_helper_text">Escribe o pega la URL de la fuente en línea.</string>
+    <string name="edit_online_source">Editar fuente en línea</string>
+    <string name="expire_time">Tiempo de expiración</string>
+    <string name="mercator_projection">Proyección de Mercator</string>
+    <string name="storage_format">Formato de almacenamiento</string>
+    <string name="map_source_zoom_levels">Fija el nivel de zoom mínimo y máximo en el que se mostrará o cargará el mapa en línea.</string>
+    <string name="expire_time_descr">Tiempo de expiración en minutos. Las teselas almacenadas se volverán a cargar después del tiempo especificado. Deja este campo vacío para que no se actualicen nunca las teselas de esta fuente. 
+\n
+\nUn día son 1.440 minutos.
+\nUna semana son 10.080 minutos.
+\nUn mes son 43.829 minutos.</string>
+    <string name="tiles_storage_descr">Elige cómo se guardarán las teselas descargadas</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Puedes Exportar o Importar acciones rápidas con perfiles de aplicación.</string>
+    <string name="shared_string_delete_all_q">¿Eliminar todo\?</string>
+    <string name="delete_all_actions_message_q">¿Estás seguro de que deseas eliminar irrevocablemente% d acciones rápidas\?</string>
+    <string name="screen_timeout">Tiempo de apagado de la pantalla</string>
+    <string name="screen_timeout_descr">Si la opción \"%1$s\" está habilitada, el tiempo de actividad dependerá de ella.</string>
+    <string name="shared_string_meters">metros</string>
+    <string name="details_dialog_decr">Controla la visibilidad de los detalles adicionales mostrados en el mapa</string>
+    <string name="shared_string_night_map">Mapa nocturno</string>
 </resources>

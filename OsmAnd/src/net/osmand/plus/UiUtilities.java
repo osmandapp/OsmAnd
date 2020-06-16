@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,12 +32,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.TintableCompoundButton;
 
+import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
@@ -52,7 +55,12 @@ import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gnu.trove.map.hash.TLongObjectHashMap;
+
+import static net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 
 public class UiUtilities {
 
@@ -358,15 +366,15 @@ public class UiUtilities {
 		}
 		return screenOrientation;
 	}
-	
+
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode) {
 		setupSnackbar(snackbar, nightMode, null, null, null, null);
 	}
-	
+
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode, Integer maxLines) {
 		setupSnackbar(snackbar, nightMode, null, null, null, maxLines);
 	}
-	
+
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode, @ColorRes Integer backgroundColor,
 	                                 @ColorRes Integer messageColor, @ColorRes Integer actionColor, Integer maxLines) {
 		if (snackbar == null) {
@@ -524,34 +532,68 @@ public class UiUtilities {
 			activeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.active_color_basic);
 		}
 		int activeDisableColor = getColorWithAlpha(activeColor, 0.25f);
-		ColorStateList activeCsl = new ColorStateList(states,
-				new int[] {activeColor, activeDisableColor});
-		int inactiveColor = ContextCompat.getColor(ctx,
-				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
-		ColorStateList inactiveCsl = new ColorStateList(states,
-				new int[] {inactiveColor, inactiveColor});
-		slider.setTrackColorActive(activeCsl);
-		slider.setTrackColorInactive(inactiveCsl);
-		slider.setHaloColor(activeCsl);
-		slider.setThumbColor(activeCsl);
+		ColorStateList activeCsl = new ColorStateList(states, new int[] {activeColor, activeDisableColor});
+		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
+		ColorStateList inactiveCsl = new ColorStateList(states, new int[] {inactiveColor, inactiveColor});
+		slider.setTrackActiveTintList(activeCsl);
+		slider.setTrackInactiveTintList(inactiveCsl);
+		slider.setHaloTintList(activeCsl);
+		slider.setThumbTintList(activeCsl);
 		int colorBlack = ContextCompat.getColor(ctx, R.color.color_black);
 		int ticksColor = showTicks ?
 				(nightMode ? colorBlack : getColorWithAlpha(colorBlack, 0.5f)) :
 				Color.TRANSPARENT;
-		slider.setTickColor(new ColorStateList(states, new int[] {ticksColor, ticksColor}));
+		slider.setTickTintList(new ColorStateList(states, new int[] {ticksColor, ticksColor}));
 
 		// sizes
-		int thumbRadius = ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_size);
-		int haloRadius = ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_halo_size);
-		int trackHeight = ctx.getResources().getDimensionPixelSize(R.dimen.slider_track_height);
-		slider.setThumbRadius(thumbRadius);
-		slider.setHaloRadius(haloRadius);
-		slider.setTrackHeight(trackHeight);
+		slider.setThumbRadius(ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_size));
+		slider.setHaloRadius(ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_halo_size));
+		slider.setTrackHeight(ctx.getResources().getDimensionPixelSize(R.dimen.slider_track_height));
 
 		// label behavior
 		slider.setLabelBehavior(Slider.LABEL_GONE);
 	}
-	
+
+	public static void setupSlider(RangeSlider slider, boolean nightMode,
+								   @ColorInt Integer activeColor, boolean showTicks) {
+		Context ctx = slider.getContext();
+		if (ctx == null) {
+			return;
+		}
+		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		ctx = new ContextThemeWrapper(ctx, themeId);
+
+		// colors
+		int[][] states = new int[][] {
+				new int[] {android.R.attr.state_enabled},
+				new int[] {-android.R.attr.state_enabled}
+		};
+		if (activeColor == null) {
+			activeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.active_color_basic);
+		}
+		int activeDisableColor = getColorWithAlpha(activeColor, 0.25f);
+		ColorStateList activeCsl = new ColorStateList(states, new int[] {activeColor, activeDisableColor});
+		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
+		ColorStateList inactiveCsl = new ColorStateList(states, new int[] {inactiveColor, inactiveColor});
+		slider.setTrackActiveTintList(activeCsl);
+		slider.setTrackInactiveTintList(inactiveCsl);
+		slider.setHaloTintList(activeCsl);
+		slider.setThumbTintList(activeCsl);
+		int colorBlack = ContextCompat.getColor(ctx, R.color.color_black);
+		int ticksColor = showTicks ?
+				(nightMode ? colorBlack : getColorWithAlpha(colorBlack, 0.5f)) :
+				Color.TRANSPARENT;
+		slider.setTickTintList(new ColorStateList(states, new int[] {ticksColor, ticksColor}));
+
+		// sizes
+		slider.setThumbRadius(ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_size));
+		slider.setHaloRadius(ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_halo_size));
+		slider.setTrackHeight(ctx.getResources().getDimensionPixelSize(R.dimen.slider_track_height));
+
+		// label behavior
+		slider.setLabelBehavior(Slider.LABEL_GONE);
+	}
+
 	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, @StringRes int buttonTextId) {
 		setupDialogButton(nightMode, buttonView, buttonType, buttonView.getContext().getString(buttonTextId));
 	}
@@ -644,5 +686,40 @@ public class UiUtilities {
 			LOG.error("Error trying to find index of " + textToStyle + " " + e);
 			return spannable;
 		}
+	}
+
+	public static ListPopupWindow createListPopupWindow(Context themedCtx,
+	                                                    View v, int minWidth,
+	                                                    List<SimplePopUpMenuItem> items,
+	                                                    final AdapterView.OnItemClickListener listener) {
+		int contentPadding = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int contentPaddingHalf = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+		int defaultListTextSize = themedCtx.getResources().getDimensionPixelSize(R.dimen.default_list_text_size);
+
+		List<String> titles = new ArrayList<>();
+		for (SimplePopUpMenuItem item : items) {
+			titles.add(String.valueOf(item.getTitle()));
+		}
+		float itemWidth = AndroidUtils.getTextMaxWidth(defaultListTextSize, titles) + contentPadding;
+
+		SimplePopUpMenuItemAdapter adapter =
+				new SimplePopUpMenuItemAdapter(themedCtx, R.layout.popup_menu_item, items);
+		final ListPopupWindow listPopupWindow = new ListPopupWindow(themedCtx);
+		listPopupWindow.setAnchorView(v);
+		listPopupWindow.setContentWidth((int) (Math.max(itemWidth, minWidth)));
+		listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
+		listPopupWindow.setVerticalOffset(-v.getHeight() + contentPaddingHalf);
+		listPopupWindow.setModal(true);
+		listPopupWindow.setAdapter(adapter);
+		listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				if (listener != null) {
+					listener.onItemClick(parent, view, position, id);
+				}
+				listPopupWindow.dismiss();
+			}
+		});
+		return listPopupWindow;
 	}
 }

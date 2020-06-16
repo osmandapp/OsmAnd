@@ -23,7 +23,7 @@ import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
 
 public class TransportStopsRouteReader {
-	public static final int MISSING_STOP_SEARCH_RADIUS = 15000;
+	public static final int MISSING_STOP_SEARCH_RADIUS = 30000;
 	TLongObjectHashMap<TransportRoute> combinedRoutesCache = new TLongObjectHashMap<TransportRoute>();
 	Map<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>> routesFilesCache = new LinkedHashMap<BinaryMapIndexReader, 
 			TIntObjectHashMap<TransportRoute>>();

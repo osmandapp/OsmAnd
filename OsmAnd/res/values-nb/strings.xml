@@ -1882,7 +1882,7 @@
     <string name="global_app_allocated_memory_descr">Tildelt minne %1$s MB (Android-grense %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Tildelt minne</string>
     <string name="osmand_parking_event">Finn bilen der den er parkert</string>
-    <string name="osmand_parking_warning_text">Et varsel om å hente bilen er lagt til i kalenderen din og kan redigeres eller fjernes der.</string>
+    <string name="osmand_parking_warning_text">En merknad om å hente bilen er lagt til i kalenderen din, og kan redigeres eller fjernes der.</string>
     <string name="osmand_parking_time_limit_title">Angi tidsgrense for parkering</string>
     <string name="osmand_parking_delete_confirm">Slett parkeringsmarkøren\?</string>
     <string name="osmand_parking_choose_type">Velg parkeringstype</string>
@@ -2354,7 +2354,7 @@
     <string name="show_guide_line_descr">Vis retningsbestemte linjer fra din posisjon til de aktive markørplasseringene.</string>
     <string name="show_arrows_descr">Vis én eller to piler som indikerer retningen til de aktive markørene.</string>
     <string name="distance_indication_descr">Velg hvordan avstanden til aktive markører skal vises.</string>
-    <string name="active_markers_descr">Velg antall retningsindikatorer:</string>
+    <string name="active_markers_descr">Velg antall retningsindikatorer.</string>
     <string name="tap_on_map_to_hide_interface_descr">Et trykk på kartet skjuler/viser kontrollknappene og miniprogrammene.</string>
     <string name="mark_passed">Marker som passert</string>
     <string name="osn_modify_dialog_error">Kunne ikke endre notatet.</string>
@@ -3040,9 +3040,9 @@
     <string name="rate_dialog_descr">Del din tilbakemelding og legg til en vurdering på Google Play.</string>
     <string name="shared_string_privacy_policy">Personvernspraksis</string>
     <string name="help_us_make_osmand_better">Hjelp oss å forbedre OsmAnd</string>
-    <string name="make_osmand_better_descr">Tillat OsmAnd å samle inn og behandle anonym programbruksdata. Vi samler ikke inn eller lagrer data om din plassering, eller om plasseringer ser på på kartet. 
+    <string name="make_osmand_better_descr">Tillat OsmAnd å samle inn og behandle anonym programbruksdata. Ingen data om din plassering, eller om plasseringer ser på på kartet blir samlet inn. 
 \n 
-\nDu kan alltid endre ditt valg i Innstillinger &gt; Personvern og sikkerhet.</string>
+\nDu kan alltid endre ditt valg i \"Innstillinger\" → \"Personvern og sikkerhet\".</string>
     <string name="choose_data_to_share">Velg hvilken data du ønsker å dele:</string>
     <string name="downloaded_maps">Nedlastede kart</string>
     <string name="visited_screens">Besøkte skjermer</string>
@@ -3285,7 +3285,7 @@
 \n 
 \n • Ny kartnedlasting-dialog foreslår et kart til nedlasting mens man utforsker 
 \n 
-\n • Nattdraktfikser 
+\n • Fikser for mørke drakter
 \n 
 \n • Flere rutingsproblemer rundt om i verden fikset 
 \n 
@@ -3497,9 +3497,9 @@
     <string name="shared_string_circle">Sirkel</string>
     <string name="shared_string_octagon">Oktogon</string>
     <string name="shared_string_square">Kvadrat</string>
-    <string name="settings_item_read_error">Kunne ikke lese %1$s.</string>
+    <string name="settings_item_read_error">Kunne ikke lese fra \"%1$s\".</string>
     <string name="settings_item_import_error">Kunne ikke importere %1$s.</string>
-    <string name="settings_item_write_error">Kunne ikke skrive %1$s.</string>
+    <string name="settings_item_write_error">Kunne ikke skrive til \"%1$s\".</string>
     <string name="shared_string_languages">Språk</string>
     <string name="shared_string_language">Språk</string>
     <string name="shared_string_all_languages">Alle språk</string>
@@ -3513,7 +3513,7 @@
     <string name="quick_action_terrain_descr">En knapp for å vise eller skjule terrenglag på kartet.</string>
     <string name="context_menu_actions">Handlinger i bindeleddsmeny</string>
     <string name="shared_string_hidden">Skjult</string>
-    <string name="main_actions_descr">Hovedhandlinger inneholder kun 4 knapper.</string>
+    <string name="main_actions_descr">Har kun fire knapper.</string>
     <string name="main_actions">Hovedhandlinger</string>
     <string name="move_inside_category">Du kan kun flytte elementer innenfor denne kategorien.</string>
     <string name="developer_plugin">Utvikler-tillegg</string>
@@ -3552,7 +3552,7 @@
     <string name="create_edit_poi">Legg til/rediger interessepunkt</string>
     <string name="quick_action_show_hide_transport">Vis/skjul offentlig transport</string>
     <string name="shared_string_add_profile">Legg til profil</string>
-    <string name="quick_action_transport_descr">En knapp for å vise eller skjule offentlig transport på kartet.</string>
+    <string name="quick_action_transport_descr">Knapp for vising eller skjuling av offentlig transport på kartet.</string>
     <string name="routing_profile_direct_to">Direkte-til-punkt</string>
     <string name="clear_recorded_data">Tøm lagret data</string>
     <string name="shared_string_include_data">Inkluder ytterligere data</string>
@@ -3590,4 +3590,73 @@
     <string name="lang_lmo">Langobardisk</string>
     <string name="parking_positions">Parkeringsposisjoner</string>
     <string name="add_edit_favorite">Legg til / rediger profil</string>
+    <string name="import_complete_description">All data fra %1$s er importert, du kan bruke knappene nedenfor for å åpne den delen du trenger for å håndtere den.</string>
+    <string name="restore_all_profile_settings_descr">Alle profilinnstillinger vil bli gjenopprette til deres opprinnelige tilstand etter opprettelse/import av denne profilen.</string>
+    <string name="clear_recorded_data_warning">Er du sikker på at du vil tømme lagret data\?</string>
+    <string name="recalculate_route_in_deviation">Anvis ny rute ved avvik</string>
+    <string name="download_slope_maps">Løyper</string>
+    <string name="ui_customization_short_descr">Skuffeelementer, bindeleddsmeny</string>
+    <string name="ui_customization">Grensesnittstilpasning</string>
+    <string name="shared_string_drawer">Skuff</string>
+    <string name="tracker_item">OsmAnd-sporer</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_switch_profile_descr">Handlingsknappen veksler mellom valgte profiler.</string>
+    <string name="change_application_profile">Endre programprofil</string>
+    <string name="replace_all_desc">Nåværende elementer vil erstattes med elementer fra filen</string>
+    <string name="recalc_angle_dialog_title">Minimumsvinkel mellom min plassering og rute</string>
+    <string name="import_rendering_file">Importer opptegningsfil</string>
+    <string name="slope_description">Løyper bruker farger for å visualisere bratthet.</string>
+    <string name="slope_download_description">Ytterligere kart trengs for å vise løyper på kartet.</string>
+    <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
+    <string name="reset_deafult_order">Gjenopprett forvalgt elementrekkefølge</string>
+    <string name="profiles_for_action_not_found">Fant ingen slike profiler.</string>
+    <string name="index_item_world_basemap_detailed">Verdensoversiktskart (detaljert)</string>
+    <string name="logcat_buffer_descr">Sjekk og del detaljert loggføring fra programmet</string>
+    <string name="use_system_screen_timeout">Bruk systemets skjermtidsavbrudd</string>
+    <string name="plugin_disabled">Programtillegg av</string>
+    <string name="no_recalculation_setting">Ingen omregning</string>
+    <string name="please_provide_profile_name_message">Angi et navn for profilen</string>
+    <string name="select_data_to_import">Velg data å importere.</string>
+    <string name="slope_read_more">Du kan lese mer om løyper i %1$s.</string>
+    <string name="reorder_or_hide_from">Omarranger eller skjul elementer fra %1$s.</string>
+    <string name="divider_descr">Elementer under dette punktet er inndelt av en skillelinje.</string>
+    <string name="reset_items_descr">Skjuling av innstillinger tilbakestiller dem til forvalg.</string>
+    <string name="app_mode_ski_touring">Skigåing</string>
+    <string name="unsupported_type_error">Ustøttet type</string>
+    <string name="select_distance_route_will_recalc">Velg hvor mye avviksdistanse som skal utløse omruting.</string>
+    <string name="export_profile_dialog_description">Du kan velge ytterligere data å eksportere sammen med profilen.</string>
+    <string name="import_profile_dialog_description">Importer profil inneholder ytterligere data. Klikk «Import» for å importere kun profildata, eller velg ytterligere data.</string>
+    <string name="plugin_prefs_reset_successful">Alle programtilleggsinnstillinger tilbakestilt til opprinnelse.</string>
+    <string name="add_new_custom_category_button_promo">Du kan legge til en ny egendefinert kategori ved å velge én eller flere nødvendige kategorier.</string>
+    <string name="create_custom_categories_list_promo">Endre listens sorteringsrekkefølge, skjul unødvendige kategorier. Du kan importere eller eksportere alle endringer med profiler.</string>
+    <string name="rearrange_categories">Endre kategoriforordning</string>
+    <string name="route_recalculation_dist_descr">Ruten vil bli kalkulert igjen hvis distansen til ruten er lengre enn angitt parameter</string>
+    <string name="plugin_disabled_descr">Dette programtillegget er et eget program, du vil måtte fjerne det for seg hvis du ikke lenger vil bruke det.
+\n
+\nDette programtillegget vil forbli på enheten etter fjerning av OsmAnd.</string>
+    <string name="keep_both_desc">Importerte elementer vil bli lagt til med fortegnelse</string>
+    <string name="ui_customization_description">Tilpass mengden elementer i \"Skuff\", \"Sett opp kart\", og \"Bindeleddsmeny\".
+\n
+\nSkru av ubrukte programtillegg for å skjule alle deres styringskontroller. %1$s.</string>
+    <string name="hidden_items_descr">Disse elementene er skjult fra menyen, men de representerte valgene eller programtilleggene vil fortsette å virke.</string>
+    <string name="select_wikipedia_article_langs">Velg språkene Wikipedia-artikler skal vises på i kartet. Du kan bytte mellom alle tilgjengelige språk mens du leser artikkelen.</string>
+    <string name="legend_item_description">Veiledning til kartets merking.</string>
+    <string name="shared_string_routing">Ruteplanlegging</string>
+    <string name="route_recalculation_dist_title">Minste avvik for anvisning av ny rute.</string>
+    <string name="import_duplicates_description">OsmAnd har allerede elementer med samme navn som de i importen.
+\n
+\nVelg en handling.</string>
+    <string name="search_poi_types_descr">Kombiner interessepunkttyper fra forskjellige kategorier. Trykk for å velge alle, og venstre side for kategorivalg.</string>
+    <string name="online_map_name_helper_text">Angi navn for nettbasert kartkilde.</string>
+    <string name="online_map_url_helper_text">Skriv eller lim inn nettadresse for nettbasert kilde.</string>
+    <string name="edit_online_source">Rediger nettbasert kilde</string>
+    <string name="mercator_projection">Merkatorprojeksjon</string>
+    <string name="one_image_per_tile">Én bildefil per flis</string>
+    <string name="shared_string_always">Alltid</string>
+    <string name="sqlite_db_file">SQLiteDB-fil</string>
+    <string name="expire_time">Utløpstid</string>
+    <string name="storage_format">Lagringsformat</string>
+    <string name="tiles_storage_descr">Velg hvordan nedlastede fliskart lagres.</string>
+    <string name="details_dialog_decr">Kontroller synlighet for ytterligere detaljer vist på kartet</string>
+    <string name="shared_string_night_map">Nattkart</string>
 </resources>

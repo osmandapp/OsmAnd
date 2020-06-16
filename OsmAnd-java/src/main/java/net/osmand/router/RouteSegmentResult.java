@@ -21,7 +21,9 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
-	private final RouteDataObject object;
+	// this should be bigger (50-80m) but tests need to be fixed first
+	private static final float DIST_BEARING_DETECT = 5;
+	private RouteDataObject object;
 	private int startPointIndex;
 	private int endPointIndex;
 	private List<RouteSegmentResult>[] attachedRoutes;
@@ -403,7 +405,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 	
 	public void copyPreattachedRoutes(RouteSegmentResult toCopy, int shift) {
-		if(toCopy.preAttachedRoutes != null) {
+		if (toCopy.preAttachedRoutes != null) {
 			int l = toCopy.preAttachedRoutes.length - shift;
 			preAttachedRoutes = new RouteSegmentResult[l][];
 			System.arraycopy(toCopy.preAttachedRoutes, shift, preAttachedRoutes, 0, l);
@@ -412,7 +414,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	
 	public RouteSegmentResult[] getPreAttachedRoutes(int routeInd) {
 		int st = Math.abs(routeInd - startPointIndex);
-		if(preAttachedRoutes != null && st < preAttachedRoutes.length) {
+		if (preAttachedRoutes != null && st < preAttachedRoutes.length) {
 			return preAttachedRoutes[st];
 		}
 		return null;
@@ -421,7 +423,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	public List<RouteSegmentResult> getAttachedRoutes(int routeInd) {
 		int st = Math.abs(routeInd - startPointIndex);
 		List<RouteSegmentResult> list = attachedRoutes[st];
-		if(list == null) {
+		if (list == null) {
 			return Collections.emptyList();
 		}
 		return list;
@@ -444,11 +446,11 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 	
 	public float getBearingBegin() {
-		return (float) (object.directionRoute(startPointIndex, startPointIndex < endPointIndex) / Math.PI * 180);
+		return (float) (object.directionRoute(startPointIndex, startPointIndex < endPointIndex, DIST_BEARING_DETECT) / Math.PI * 180);
 	}
 	
 	public float getBearing(int point, boolean plus) {
-		return (float) (object.directionRoute(point, plus) / Math.PI * 180);
+		return (float) (object.directionRoute(point, plus, DIST_BEARING_DETECT) / Math.PI * 180);
 	}
 	
 	public float getDistance(int point, boolean plus) {
@@ -456,7 +458,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 	
 	public float getBearingEnd() {
-		return (float) (MapUtils.alignAngleDifference(object.directionRoute(endPointIndex, startPointIndex > endPointIndex) - Math.PI) / Math.PI * 180);
+		return (float) (MapUtils.alignAngleDifference(object.directionRoute(endPointIndex, startPointIndex > endPointIndex, DIST_BEARING_DETECT) - Math.PI) / Math.PI * 180);
 	}
 	
 	public void setSegmentTime(float segmentTime) {
@@ -533,10 +535,16 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public void setObject(RouteDataObject r) {
+		this.object = r;
+	}
 
 	@Override
 	public String toString() {
 		return object.toString() + ": " + startPointIndex + "-" + endPointIndex;
 	}
+
+	
 
 }

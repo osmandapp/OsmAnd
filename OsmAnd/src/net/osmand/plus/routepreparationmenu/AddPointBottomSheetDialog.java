@@ -448,7 +448,6 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 								break;
 							case TARGET:
 								targetPointsHelper.navigateToPoint(ll, true, -1, name);
-								OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(mapActivity);
 								break;
 							case INTERMEDIATE:
 								targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), name);

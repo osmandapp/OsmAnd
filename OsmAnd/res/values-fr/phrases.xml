@@ -259,7 +259,7 @@
     <string name="poi_place_of_worship">Lieu de culte</string>
     <string name="poi_religion_christian">Christianisme</string>
     <string name="poi_religion_jewish">Judaïsme</string>
-    <string name="poi_religion_muslim">Islamisme</string>
+    <string name="poi_religion_muslim">Islam</string>
     <string name="poi_playground">Terrain de jeux pour enfants</string>
     <string name="poi_craft_plumber">Plombier</string>
     <string name="poi_police">Police</string>
@@ -1261,7 +1261,7 @@
     <string name="poi_service_electrical">Réparation de véhicules électriques</string>
     <string name="poi_motorcycle_repair">Atelier de réparation de motos</string>
     <string name="poi_self_service_yes">Oui</string>
-    <string name="poi_self_service_no">Pas de self-service</string>
+    <string name="poi_self_service_no">Non</string>
     <string name="poi_automated_yes">Oui</string>
     <string name="poi_automated_no">Non automatisé</string>
     <string name="poi_public_bath">Bains publics</string>
@@ -1469,7 +1469,7 @@
     <string name="poi_takeaway_no">Pas de vente à emporter</string>
     <string name="poi_outdoor_seating_yes">Terrasse : oui</string>
     <string name="poi_outdoor_seating_no">Pas de terrasse</string>
-    <string name="poi_car_wash_no">Lavage auto : non</string>
+    <string name="poi_car_wash_no">Non</string>
     <string name="poi_maxstay">Stationnement limité dans le temps</string>
     <string name="poi_vending_parking_tickets">Tickets de stationnement</string>
     <string name="poi_vending_sweets">Bonbons</string>
@@ -2938,7 +2938,7 @@
     <string name="poi_surface_metal_grid">Grille métallique</string>
     <string name="poi_location_underground">Emplacement : souterrain</string>
     <string name="poi_location_underwater">Emplacement : sous l\'eau</string>
-    <string name="poi_location_overground">Emplacement : au dessus du sol</string>
+    <string name="poi_location_overground">Emplacement : en surface</string>
     <string name="poi_location_overhead">Emplacement : aérien</string>
     <string name="poi_location_roof">Emplacement : toit</string>
     <string name="poi_location_rooftop">Emplacement : dessus du toit</string>
@@ -3819,4 +3819,9 @@
     <string name="poi_drinking_water_refill_network">Réseau de remplissage d\'eau potable</string>
     <string name="poi_traffic_signals_sound_locate">Uniquement si la marche est autorisée</string>
     <string name="poi_internet_access_fee_customers">Signal pour trouver le pôle</string>
+    <string name="poi_fire_hydrant_pressure_filter">Pression</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">Aspiration</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pressurisé</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Eaux souterraines</string>
+    <string name="poi_fire_hydrant_type_pipe">Tuyau</string>
 </resources>

@@ -414,7 +414,8 @@ public class SearchCoreFactory {
 							if (object.getName().startsWith("<")) {
 								return false;
 							}
-							if (!phrase.getFirstUnknownNameStringMatcher().matches(stripBraces(sr.localeName))) {
+							
+							if (!phrase.getUnknownWordToSearchBuildingNameMatcher().matches(stripBraces(sr.localeName))) {
 								sr.priorityDistance = 5;
 							}
 							sr.objectType = ObjectType.STREET;

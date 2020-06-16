@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -67,7 +68,8 @@ public abstract class BaseMenuController {
 
 	public int getSlideInAnimation() {
 		if (isLandscapeLayout()) {
-			return R.anim.slide_in_left;
+			return AndroidUtils.isLayoutRtl(getMapActivity())
+					? R.anim.slide_in_right : R.anim.slide_in_left;
 		} else {
 			return R.anim.slide_in_bottom;
 		}
@@ -75,7 +77,8 @@ public abstract class BaseMenuController {
 
 	public int getSlideOutAnimation() {
 		if (isLandscapeLayout()) {
-			return R.anim.slide_out_left;
+			return AndroidUtils.isLayoutRtl(getMapActivity())
+					? R.anim.slide_out_right : R.anim.slide_out_left;
 		} else {
 			return R.anim.slide_out_bottom;
 		}

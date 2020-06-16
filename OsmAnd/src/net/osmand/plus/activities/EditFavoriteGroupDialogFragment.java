@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -197,8 +198,12 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					.create();
 			items.add(markersGroupItem);
 
+			Drawable shareIcon = getContentIcon(R.drawable.ic_action_gshare_dark);
+			if (shareIcon != null) {
+				shareIcon = AndroidUtils.getDrawableForDirection(app, shareIcon);
+			}
 			BaseBottomSheetItem shareItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
+					.setIcon(shareIcon)
 					.setTitle(getString(R.string.shared_string_share))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {

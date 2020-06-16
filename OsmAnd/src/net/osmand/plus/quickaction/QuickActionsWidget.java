@@ -246,7 +246,7 @@ public class QuickActionsWidget extends LinearLayout {
                         if (selectionListener != null) selectionListener.onActionSelected(action);
                     }
                 });
-				if (action.isActionEditable()) {
+//				if (action.isActionEditable()) {
 					view.setOnLongClickListener(new OnLongClickListener() {
 						@Override
 						public boolean onLongClick(View v) {
@@ -262,7 +262,7 @@ public class QuickActionsWidget extends LinearLayout {
 							return true;
 						}
 					});
-				}
+//				}
                 if (!action.isActionEnable(application)) {
                     view.setEnabled(false);
                     view.setAlpha(0.5f);

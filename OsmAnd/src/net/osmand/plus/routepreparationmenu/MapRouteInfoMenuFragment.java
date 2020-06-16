@@ -511,8 +511,9 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				slideInAnim = R.anim.slide_in_bottom;
 				slideOutAnim = R.anim.slide_out_bottom;
 			} else {
-				slideInAnim = R.anim.slide_in_left;
-				slideOutAnim = R.anim.slide_out_left;
+				boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
+				slideInAnim = isLayoutRtl ? R.anim.slide_in_right : R.anim.slide_in_left;
+				slideOutAnim = isLayoutRtl ? R.anim.slide_out_right : R.anim.slide_out_left;
 			}
 		}
 

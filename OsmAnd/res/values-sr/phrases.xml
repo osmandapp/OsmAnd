@@ -163,7 +163,7 @@
     <string name="poi_musical_instrument">Музички инструменти</string>
     <string name="poi_newsagent">Новинарница</string>
     <string name="poi_optician">Оптометрија</string>
-    <string name="poi_organic">Органска храна</string>
+    <string name="poi_organic">Органски производ</string>
     <string name="poi_paint">Продавница боја</string>
     <string name="poi_pet">Продавница кућних љубимаца</string>
     <string name="poi_photo">Фото радња</string>
@@ -1869,7 +1869,7 @@
     <string name="poi_toilets_access_permissive">Приступ тоалету: допуштен</string>
     <string name="poi_toilets_access_community">Приступ тоалету: заједнички</string>
     <string name="poi_toilets_access_public">Приступ тоалету: јавни</string>
-    <string name="poi_vending_parcel_pickup_mail_in">Преузимање пакета и доспеле поште</string>
+    <string name="poi_vending_parcel_pickup_mail_in">Преузимање пакета и допремање поште</string>
     <string name="poi_vending_bicycle_tube">Бицикл вентили</string>
     <string name="poi_vending_parcel_pickup">Преузимање пакета</string>
     <string name="poi_vending_parcel_mail_in">Поштанска достава пакета</string>
@@ -2731,4 +2731,9 @@
     <string name="poi_bath_open_air">На отвореном</string>
     <string name="poi_agrarian">Пољопривредна радња</string>
     <string name="poi_meadow_agricultural">Тип: пољопривредно</string>
+    <string name="poi_fire_hydrant_pressure_filter">Притисак</string>
+    <string name="poi_video_telephone">Видео</string>
+    <string name="poi_sms">СМС</string>
+    <string name="poi_volcano_status">Статус</string>
+    <string name="poi_volcano_type">Тип</string>
 </resources>

@@ -11,28 +11,63 @@
 	Thx - Hardy
 
 -->
+    <string name="quick_action_showhide_mapillary_descr">A toggle to show or hide the Mapillary layer on the map.</string>
+    <string name="quick_action_mapillary_show">Show Mapillary</string>
+    <string name="quick_action_mapillary_hide">Hide Mapillary</string>
+    <string name="quick_action_showhide_mapillary_title">Show/hide Mapillary</string>
+    <string name="vessel_width_limit_description">Set vessel width to avoid narrow bridges</string>
+    <string name="vessel_height_limit_description">Set vessel height to avoid low bridges. Keep in mind, if the bridge is movable, we will use its height in the open state.</string>
+    <string name="vessel_height_warning">You can set vessel height to avoid low bridges. Keep in mind, if the bridge is movable, we will use its height in the open state.</string>
+    <string name="vessel_height_warning_link">Set vessel height</string>
+    <string name="clear_tiles_warning">Applying these changes will clear the cached data for this tile source</string>
+    <string name="add_online_source">Add online source</string>
+    <!-- string name="shared_string_all_time">All time</string -->
+    <string name="shared_string_night_map">Night map</string>
+    <string name="details_dialog_decr">Show or hide additional map details</string>
     <string name="shared_string_meters">meters</string>
     <string name="shared_string_tones">tones</string>
     <string name="default_screen_timeout">Default screen timeout</string>
-    <string name="screen_timeout_descr">If the \"%1$s\" option is enabled, the activity time will depend on it.</string>
+    <string name="screen_timeout_descr">If \"%1$s\" is on, the activity time will depend on it.</string>
+    <string name="screen_timeout">Screen timeout</string>
+    <string name="delete_all_actions_message_q">Are you sure you want to irrevocably delete %d quick actions?</string>
+    <string name="shared_string_delete_all_q">Delete all?</string>
+    <string name="export_import_quick_actions_with_profiles_promo">You can export or import quick actions with app profiles.</string>
+    <string name="tiles_storage_descr">Choose how to store downloaded tiles.</string>
+    <string name="expire_time_descr">Cached tiles will be re-downloaded after the specified number of minutes.
+        Leave this field empty to never refresh tiles for this source.
+        \n\nOne day is 1440 minutes.\nOne week is 10 080 minutes.\nOne month is 43 829 minutes.</string>
+    <string name="map_source_zoom_levels_descr">Affects the screen when used as map or overlay/underlay.
+        \n\n%1$s: The map is limited to the zoom level range selected. 
+        \n\n%2$s are the levels at which the original tiles will be visible, upscaling or downscaling will occur outside these values.</string>
+    <string name="map_source_zoom_levels">Set a minimum and maximum zoom level to show or load the online map.</string>
+    <string name="storage_format">Storage format</string>
+    <string name="mercator_projection">Mercator projection</string>
+    <string name="expire_time">Expiry time</string>
+    <string name="edit_online_source">Edit online source</string>
+    <string name="online_map_url_helper_text">Enter or paste the URL for the online source.</string>
+    <string name="online_map_name_helper_text">Provide a name for the online map source.</string>
+    <string name="sqlite_db_file">SQLiteDB file</string>
+    <string name="one_image_per_tile">One image file per tile</string>
+    <string name="pseudo_mercator_projection">Pseudo-Mercator projection</string>
     <string name="keep_screen_off">Keep screen off</string>
     <string name="keep_screen_on">Keep screen on</string>
-    <string name="turn_screen_on_wake_time_descr">Select the screen activity time after waking up, the screen will not turn off if \"%1$s\" is enabled.</string>
+    <string name="turn_screen_on_wake_time_descr">Select the screen timeout after waking up. (\"%1$s\" applies no timeout.)</string>
     <string name="turn_screen_on_proximity_sensor">Proximity sensor</string>
     <string name="turn_screen_on_power_button">Power button</string>
-    <string name="turn_screen_on_power_button_descr">Press on the device power button to turn on screen with OsmAnd on the foreground.</string>
+    <string name="turn_screen_on_power_button_descr">Pressing the device power button will turn the screen on with OsmAnd on top of the lock screen.</string>
+    <string name="turn_screen_on_power_button_disabled">Disabled. Requires \'Keep screen on\' under \'Timeout after wake-up\'.</string>
     <string name="turn_screen_on_navigation_instructions">Navigation instructions</string>
-    <string name="turn_screen_on_navigation_instructions_descr">Screen will turn on automatically a few seconds before navigation instructions for a specified time in “Wake time” option.\n\nWork only while navigation.</string>
-    <string name="turn_screen_on_descr">Those options will work, only if OsmAnd will be on the foreground when the device will be locked.</string>
-    <string name="turn_screen_on_options_descr">Use these options to wake up screen with OsmAnd on the foreground.</string>
-    <string name="system_screen_timeout">Screen timeout</string>
-    <string name="system_screen_timeout_descr">Enable so the screen turns off after a certain period of inactivity, the time specified in the system settings of your device will be used.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Each navigation instruction will turn the screen on.</string>
+    <string name="turn_screen_on_descr">Select screen wake-up options (make sure OsmAnd is in the foreground when the device is being locked):</string>
+    <!--string name="turn_screen_on_options_descr">Screen wake-up options:</string-->
+    <string name="system_screen_timeout">Use system screen timeout</string>
+    <string name="system_screen_timeout_descr">Turns the screen off as per the system\'s screen timeout.</string>
     <string name="screen_control">Screen control</string>
     <string name="shared_string_always">Always</string>
-    <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact support team to investigate further</string>
-    <string name="weight_limit_description">Provide your vehicle weight, some routes restrictions may be applied for heavy vehicles.</string>
-    <string name="height_limit_description">Provide your vehicle height, some routes restrictions may apply for high vehicles.</string>
-    <string name="width_limit_description">Provide your vehicle width some routes restrictions may be applied for wide vehicles.</string>
+    <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact the support team to investigate further.</string>
+    <string name="weight_limit_description">Provide your vehicle weight, some route restrictions may apply for heavy vehicles.</string>
+    <string name="height_limit_description">Provide your vehicle height, some route restrictions may apply for high vehicles.</string>
+    <string name="width_limit_description">Provide your vehicle width some route restrictions may apply for wide vehicles.</string>
     <string name="unsupported_type_error">Unsupported type</string>
     <string name="index_item_world_basemap_detailed">World overview map (detailed)</string>
     <string name="profiles_for_action_not_found">Could not find any such profiles.</string>
@@ -105,7 +140,7 @@
     <string name="lang_zhminnan">Southern Min</string>
     <string name="lang_zhyue">Cantonese</string>
     <string name="some_articles_may_not_available_in_lang">Some Wikipedia articles may not be available in your language.</string>
-    <string name="select_wikipedia_article_langs">Select the languages ​​in which Wikipedia articles will appear on the map. You can switch between all available languages​​ while reading the article.</string>
+    <string name="select_wikipedia_article_langs">Select the languages for ​​Wikipedia articles on the map.​​ Switch to any available language while reading the article.</string>
     <string name="wiki_menu_download_descr">Additional maps are needed to view Wikipedia POIs on the map.</string>
     <string name="shared_string_all_languages">All languages</string>
     <string name="shared_string_language">Language</string>
@@ -119,7 +154,7 @@
     <string name="custom_osmand_plugin">Custom OsmAnd plugin</string>
     <string name="app_mode_ski_snowmobile">Snowmobile</string>
     <string name="app_mode_ski_touring">Ski touring</string>
-    <string name="replace_point_descr">Replace another point with this</string>
+    <string name="replace_point_descr">Replace another point with this.</string>
     <string name="developer_plugin">Developer Plugin</string>
     <string name="move_inside_category">You can move items only inside this category.</string>
     <string name="additional_actions_descr">You can access these actions by tapping the “%1$s” button.</string>
@@ -222,18 +257,18 @@
     • Added Antarctica map\n\n
     </string>
     <string name="copy_coordinates">Copy coordinates</string>
-    <string name="reset_to_default_category_button_promo">Reset to default will reset sort order to the default state after installation.</string>
-    <string name="use_system_screen_timeout">Use system screen timeout</string>
-    <string name="use_system_screen_timeout_promo">Disabled by default, if OsmAnd running on foreground, the screen doesn’t time out.\n\nIf enabled OsmAnd will use system timeout settings.</string>
-    <string name="accessibility_mode_disabled">Accessibility mode turned off in your Android.</string>
+    <string name="reset_to_default_category_button_promo">\'Reset to default\' will reinstate the sort order to the installation default.</string>
+    <string name="use_system_screen_timeout">Use the system screen timeout</string>
+    <string name="use_system_screen_timeout_promo">Disabled by default: While OsmAnd is running in the foreground, the screen will not time out.\n\nIf enabled, OsmAnd will use the system timeout setting.</string>
+    <string name="accessibility_mode_disabled">Accessibility mode is turned off in your Android system.</string>
     <string name="rearrange_categories">Rearrange categories</string>
-    <string name="create_custom_categories_list_promo">Change the sort order of the list, hide unnecessary categories. You can import or export all changes with profiles.</string>
-    <string name="add_new_custom_category_button_promo">You can add a new custom category by selecting one or a few needed categories.</string>
+    <string name="create_custom_categories_list_promo">Change the list sort order, hide categories. You can import or export all changes with profiles.</string>
+    <string name="add_new_custom_category_button_promo">You can add a new custom category by selecting one or more categories.</string>
     <string name="shared_string_available">Available</string>
     <string name="add_custom_category">Add custom category</string>
     <string name="rendering_attr_streetLightingNight_name">Show only at night</string>
-    <string name="plugin_prefs_reset_successful">All plugin settings restored to default state.</string>
-    <string name="profile_prefs_reset_successful">All profile settings restored to default state.</string>
+    <string name="plugin_prefs_reset_successful">All plugin settings restored to default.</string>
+    <string name="profile_prefs_reset_successful">All profile settings restored to default.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Sunset at %1$s</string>
     <string name="sunrise_at">Sunrise at %1$s</string>
@@ -250,7 +285,7 @@
     <string name="monitoring_min_speed_descr_side_effect">Side effect: Your track will be missing all sections where the minimum speed criterion was not met (e.g. where you push your bike up a steep hill). Also, there will be no information about periods at rest, like breaks. This has effects on any analysis or post-processing, like when trying to determine the total length of your trip, time in motion, or your average speed.</string>
     <string name="monitoring_min_speed_descr_recommendation">Recommendation: Try using the motion detection via the "logging minimum displacement" filter (B) first, it may produce better results, and you will lose less data. If your tracks remain noisy at low speeds, try non-zero values here. Please note that some measurements may not report any speed value at all (some network-based methods), in which case you would not record anything.</string>
     <string name="monitoring_min_speed_descr_remark">Remark: "speed > 0" check: Most GPS chipsets report a speed value only if the algorithm determines you are in motion, and none if you are not. Hence using the "> 0" setting in this filter in a sense uses the motion detection of the GPS chipset. But even if not filtered here at recording time, we still use this feature in our GPX analysis to determine the "Distance corrected", i.e. the value displayed in that field is the "distance recorded while in motion".</string>
-    <string name="monitoring_min_accuracy_descr">This will record only points measured with a minimum "accuracy" indication (in meters/feet, as reported by Android for your chipset). Accuracy refers to the scatter of repeated measurements, and is not directly related to precision, which defines how close your measurements are to your "true" position.</string>
+    <string name="monitoring_min_accuracy_descr">This will record only points measured with a minimum "accuracy" indication (in meters/feet, as reported by Android for your chipset). Accuracy is the proximity of measurements to the true position, and is not directly related to precision, which is the scatter of repeated measurements.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Side effect: As a result of filtering by accuracy, points may be entirely missing for e.g. below bridges, under trees, between high buildings, or with certain weather conditions.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recommendation: It is hard to predict what will be recorded and what not, it may be best to turn this filter off.</string>
     <string name="monitoring_min_accuracy_descr_remark">Remark: If GPS had been off immediately before a recording, the first point measured may have a decreased accuracy,so in our code we may want to wait a second or so before recording a point (or record the best of 3 consecutive points, etc.), but this is not yet implemented.</string>
@@ -447,7 +482,7 @@
     <string name="analytics_pref_title">Analytics</string>
     <string name="turn_screen_on_info">Show map on the lock screen during navigation.</string>
     <string name="route_parameters_info">Settings for routing in the selected profile \"%1$s\".</string>
-    <string name="wake_time">Wake time</string>
+    <string name="wake_time">Timeout after wake-up</string>
     <string name="units_and_formats">Units &amp; formats</string>
     <string name="map_look_descr">Map appearance</string>
     <string name="map_look">Map look</string>
@@ -519,7 +554,7 @@
     <string name="turn_screen_on_router">Wake on turn</string>
     <string name="turn_screen_on_time_descr">Adjust how long the screen should be on for.</string>
     <string name="turn_screen_on_sensor">Use proximity sensor</string>
-    <string name="turn_screen_on_sensor_descr">Wave your hand over the top of the screen to turn it on while navigating.</string>
+    <string name="turn_screen_on_sensor_descr">Waving your hand across the screen will turn it on.</string>
     <string name="app_mode_offroad">Offroad</string>
     <string name="edit_profile_setup_title">Set up profile</string>
     <string name="edit_profile_setup_subtitle">The profile keeps its own settings</string>
@@ -981,7 +1016,7 @@
     <string name="shared_string_actions">Actions</string>
     <string name="shared_string_marker">Marker</string>
     <string name="empty_state_osm_edits">Create or modify OSM objects</string>
-    <string name="empty_state_osm_edits_descr">Create or modify OSM POIs, open or comment OSM notes, and contribute recorded GPX files.</string>
+    <string name="empty_state_osm_edits_descr">Create or modify OSM POIs, open or comment on OSM notes, and contribute recorded GPX files.</string>
     <string name="shared_string_deleted">Deleted</string>
     <string name="shared_string_edited">Edited</string>
     <string name="shared_string_added">Added</string>
@@ -989,7 +1024,7 @@
     <string name="one_tap_active_descr">Tap a marker on the map to move it to the top of the active markers without opening the context menu.</string>
     <string name="one_tap_active">\'One tap\' active</string>
     <string name="empty_state_av_notes">Make notes!</string>
-    <string name="empty_state_av_notes_desc">Add audio, video or photo note to every point on the map, using widget or context menu.</string>
+    <string name="empty_state_av_notes_desc">Add audio, video, or photo notes to any point on the map by using the widgets or context menus.</string>
     <string name="notes_by_date">A/V notes by date</string>
     <string name="by_date">By date</string>
     <string name="by_type">By type</string>
@@ -1012,7 +1047,7 @@
     <string name="show_guide_line_descr">Show directional line from your position to the active marker locations.</string>
     <string name="show_arrows_descr">Show one or two arrows indicating the direction to the active markers.</string>
     <string name="distance_indication_descr">Choose how to display the distance to active markers.</string>
-    <string name="active_markers_descr">Specify number of direction indicators:</string>
+    <string name="active_markers_descr">Specify number of direction indicators.</string>
     <string name="digits_quantity">Number of decimal digits</string>
     <string name="shared_string_right">Right</string>
     <string name="shared_string_left">Left</string>
@@ -1139,7 +1174,7 @@
     <string name="open_mapillary">Open Mapillary</string>
     <string name="shared_string_install">Install</string>
     <string name="improve_coverage_mapillary">Improve photo coverage with Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Install Mapillary to add one or more photos to this map location.</string>
+    <string name="improve_coverage_install_mapillary_desc">Install Mapillary to add photos to this map location.</string>
     <string name="online_photos">Online photos</string>
     <string name="shared_string_add_photos">Add photos</string>
     <string name="no_photos_descr">No photos here.</string>
@@ -2335,16 +2370,16 @@
     <string name="about_version">Version:</string>
     <string name="shared_string_about">About</string>
     <string name="about_settings_descr">Version info, licenses, project members</string>
-    <string name="local_index_tile_data_zooms">Zooms downloaded: %1$s</string>
-    <string name="local_index_tile_data_expire">Expire (minutes): %1$s</string>
+    <string name="local_index_tile_data_zooms">Zoom levels downloaded: %1$s</string>
+    <string name="local_index_tile_data_expire">Expiration time (minutes): %1$s</string>
     <string name="local_index_tile_data_downloadable">Downloadable: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maximum zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum zoom: %1$s</string>
     <string name="local_index_tile_data_name">Tile data: %1$s</string>
-    <string name="edit_tilesource_successfully">Tilesource %1$s was saved</string>
-    <string name="edit_tilesource_elliptic_tile">Elliptic mercator</string>
+    <string name="edit_tilesource_successfully">Tilesource %1$s saved</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptic Mercator projection</string>
     <string name="edit_tilesource_maxzoom">Maximum zoom</string>
-    <string name="edit_tilesource_expiration_time">Expire (minutes)</string>
+    <string name="edit_tilesource_expiration_time">Expiration time (minutes)</string>
     <string name="edit_tilesource_minzoom">Minimum zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Select existing…</string>
@@ -2355,8 +2390,8 @@
     <string name="driving_region_japan">Japan</string>
     <string name="driving_region_us">United States</string>
     <string name="driving_region_canada">Canada</string>
-    <string name="driving_region_europe_asia">Europe, Asia, Latin America, &amp; similar</string>
-    <string name="driving_region_uk">UK, India, &amp; similar</string>
+    <string name="driving_region_europe_asia">Europe, Asia, Latin America, and similar</string>
+    <string name="driving_region_uk">UK, India, and similar</string>
     <string name="driving_region_australia">Australia</string>
     <string name="speak_title">Announce…</string>
     <string name="speak_descr">Set up announcement of street names, traffic warnings (forced stops, speed bumps), speed camera warnings, and speed limits.</string>
@@ -2658,7 +2693,7 @@
         • North America: ***\n
         • South America: **\n
         • Asia: **\n
-        • Japan &amp; Korea: ***\n
+        • Japan and Korea: ***\n
         • Middle East: **\n
         • Africa: **\n
         • Antarctica: *\n
@@ -2756,7 +2791,7 @@
         • North America: ***\n
         • South America: **\n
         • Asia: **\n
-        • Japan &amp; Korea: ***\n
+        • Japan and Korea: ***\n
         • Middle East: **\n
         • Africa: **\n
         • Antarctica: *\n
@@ -3703,9 +3738,9 @@
     <string name="waypoint_one">Waypoint 1</string>
     <string name="route_point_one">Route Point 1</string>
     <string name="empty_state_my_tracks">Add GPX files</string>
-    <string name="empty_state_my_tracks_desc">Import GPX files, or record tracks.</string>
+    <string name="empty_state_my_tracks_desc">Import GPX files or record tracks.</string>
     <string name="empty_state_favourites">Add Favorites</string>
-    <string name="empty_state_favourites_desc">Import Favorites, or add by marking points on the map.</string>
+    <string name="empty_state_favourites_desc">Import Favorites or add them by marking points on the map.</string>
     <string name="import_track">Import GPX file</string>
     <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
     <string name="move_point">Move Point</string>

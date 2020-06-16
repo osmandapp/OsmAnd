@@ -71,7 +71,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 				}
 			};
 			rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_delete);
-			rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+			rightTitleButtonController.startIconId = R.drawable.ic_action_delete_dark;
 		}
 
 		updateData();
@@ -164,7 +164,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 		if (!mRecording.isPhoto()) {
 			if (mPlugin.isPlaying(mRecording)) {
 				leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_control_stop);
-				leftTitleButtonController.leftIconId = R.drawable.ic_action_rec_stop;
+				leftTitleButtonController.startIconId = R.drawable.ic_action_rec_stop;
 				int pos = mPlugin.getPlayingPosition();
 				String durationStr;
 				if (pos == -1) {
@@ -177,14 +177,14 @@ public class AudioVideoNoteMenuController extends MenuController {
 				rightTitleButtonController.visible = false;
 			} else {
 				leftTitleButtonController.caption = mapActivity.getString(R.string.recording_context_menu_play);
-				leftTitleButtonController.leftIconId = R.drawable.ic_play_dark;
+				leftTitleButtonController.startIconId = R.drawable.ic_play_dark;
 				String durationStr = mRecording.getPlainDuration(accessibilityEnabled);
 				leftTitleButtonController.needRightText = true;
 				leftTitleButtonController.rightTextCaption = "— " + durationStr;
 			}
 		} else {
 			leftTitleButtonController.caption = mapActivity.getString(R.string.recording_context_menu_show);
-			leftTitleButtonController.leftIconId = R.drawable.ic_action_view;
+			leftTitleButtonController.startIconId = R.drawable.ic_action_view;
 		}
 	}
 
