@@ -25,7 +25,9 @@ import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.LatLonParcelable;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.MapMarkersHelper;
@@ -92,6 +94,7 @@ public class ExternalApiHelper {
 	public static final String API_CMD_STOP_AV_REC = "stop_av_rec";
 
 	public static final String API_CMD_GET_INFO = "get_info";
+	public static final String API_CMD_GET_ROUTE = "get_route";
 
 	public static final String API_CMD_ADD_FAVORITE = "add_favorite";
 	public static final String API_CMD_ADD_MAP_MARKER = "add_map_marker";
@@ -153,6 +156,12 @@ public class ExternalApiHelper {
 	public static final String PARAM_QUICK_ACTION_TYPE = "quick_action_type";
 	public static final String PARAM_QUICK_ACTION_PARAMS = "quick_action_params";
 	public static final String PARAM_QUICK_ACTION_NUMBER = "quick_action_number";
+
+	public static final String PARAM_HAS_ROUTE = "has_route";
+	public static final String PARAM_ROUTE_POINTS = "route_points";
+	private static final String PARAM_DIRECTION_POINTS = "direction_points";
+	private static final String PARAM_ROUTE_TIME = "route_time";
+	private static final String PARAM_MODE = "mode";
 
 	public static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
 			ApplicationMode.CAR,
@@ -493,7 +502,33 @@ public class ExternalApiHelper {
 
 				finish = true;
 				resultCode = Activity.RESULT_OK;
+			} else if (API_CMD_GET_ROUTE.equals(cmd)) {
+				final RoutingHelper routingHelper = app.getRoutingHelper();
+				final boolean has_route = routingHelper.isRouteCalculated();
+				if (has_route) {
+					RouteCalculationResult route = routingHelper.getRoute();
+					// export waypoints of the route
+					List<Location> locations = route.getRouteLocations();
+					ArrayList<LatLonParcelable> route_points = new ArrayList<>(locations.size());
+					for (Location location : locations) {
+						route_points.add(new LatLonParcelable(location.getLatitude(), location.getLongitude()));
+					}
+					result.putParcelableArrayListExtra(PARAM_ROUTE_POINTS, route_points);
+					// export indexes of waypoints of the route which have routing directions
+					List<RouteDirectionInfo> directions = route.getRouteDirections();
+					ArrayList<Integer> direction_points = new ArrayList<>(directions.size());
+					for (RouteDirectionInfo direction : directions) {
+						direction_points.add(direction.routePointOffset);
+					}
+					result.putExtra(PARAM_DIRECTION_POINTS, direction_points);
+					// export miscellaneous info of the route
+					result.putExtra(PARAM_ROUTE_TIME, route.getRoutingTime());
+					result.putExtra(PARAM_MODE, routingHelper.getAppMode().getStringKey());
+				}
+				result.putExtra(PARAM_HAS_ROUTE, has_route);
 
+				finish = true;
+				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_ADD_FAVORITE.equals(cmd)) {
 				String name = uri.getQueryParameter(PARAM_NAME);
 				String desc = uri.getQueryParameter(PARAM_DESC);
