@@ -3704,4 +3704,8 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="vessel_height_limit_description">Adja meg a hajómagasságot az alacsony hidak elkerüléséhez. Ne feledje, amennyiben a híd mozdítható, a nyitott állapotú magasságát vesszük figyelembe.</string>
     <string name="vessel_height_warning">Megadhatja a hajómagasságot az alacsony hidak elkerüléséhez. Ne feledje, amennyiben a híd mozdítható, a nyitott állapotú magasságát vesszük figyelembe.</string>
     <string name="vessel_width_limit_description">Adja meg a hajószélességet a keskeny hidak elkerüléséhez</string>
+    <string name="quick_action_showhide_mapillary_title">Mapillary megjelenítése/elrejtése</string>
+    <string name="quick_action_mapillary_hide">Mapillary elrejtése</string>
+    <string name="quick_action_mapillary_show">Mapillary megjelenítése</string>
+    <string name="quick_action_showhide_mapillary_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a Mapillary réteget.</string>
 </resources>
