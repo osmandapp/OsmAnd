@@ -3,14 +3,16 @@ package net.osmand.plus.dialogs;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.ContextMenuAdapter;
@@ -18,12 +20,12 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton.OnBottomBtnClickListener;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.render.RenderingRuleProperty;
@@ -96,10 +98,27 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		int selectedProfileColorRes = app.getSettings().APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode);
-		TitleItem titleItem = new TitleItem(getString(R.string.rendering_category_details));
-		items.add(titleItem);
-		ShortDescriptionItem descriptionItem = new ShortDescriptionItem(getString(R.string.details_dialog_decr));
-		items.add(descriptionItem);
+		float spacing = getResources().getDimension(R.dimen.line_spacing_extra_description);
+		LinearLayout linearLayout = new LinearLayout(app);
+		linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+		TextView title = new TextView(app);
+		title.setPadding(padding, paddingHalf, padding, 0);
+		title.setTypeface(FontCache.getRobotoMedium(app));
+		title.setText(R.string.rendering_category_details);
+		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
+		title.setTextColor(nightMode ? ContextCompat.getColor(app, R.color.text_color_primary_dark) : ContextCompat.getColor(app, R.color.text_color_primary_light));
+
+		TextView description = new TextView(app);
+		description.setLineSpacing(spacing, 1.0f);
+		description.setPadding(padding, 0, padding, paddingSmall);
+		description.setText(R.string.details_dialog_decr);
+		description.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_desc_text_size));
+		description.setTextColor(nightMode ? ContextCompat.getColor(app, R.color.text_color_secondary_dark) : ContextCompat.getColor(app, R.color.text_color_secondary_light));
+		linearLayout.addView(title);
+		linearLayout.addView(description);
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(linearLayout).create());
 		if (preferences != null && properties != null) {
 			RenderingRuleProperty streetLightNightProp = getStreetLightNightProp();
 			for (int i = 0; i < properties.size(); i++) {
@@ -131,6 +150,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 									streetLightsNightPref.set(false);
 									item[0].setChecked(checked);
 									item[0].setIsLeftBtnSelected(true);
+									setupHeightAndBackground(getView());
 								}
 							})
 							.create();
@@ -163,22 +183,6 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 				}
 			}
 		}
-	}
-
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, parent, savedInstanceState);
-		if (view != null) {
-			float spacing = getResources().getDimension(R.dimen.line_spacing_extra_description);
-			TextView title = view.findViewById(R.id.title);
-			title.setPadding(padding, paddingHalf, padding, paddingHalf);
-			title.setMinHeight(0);
-			TextView description = view.findViewById(R.id.description);
-			description.setLineSpacing(spacing, 1.0f);
-			description.setPadding(padding, 0, padding, paddingSmall);
-		}
-		return view;
 	}
 
 	@Nullable
