@@ -23,7 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.IntermediatePointsDialog;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.AlarmInfo;
@@ -776,14 +776,14 @@ public class WaypointHelper {
 				}
 
 			} else if (type == FAVORITES ) {
-				return FavoriteImageDrawable.getOrCreate(uiCtx,
+				return PointImageDrawable.getFromFavorite(uiCtx,
 						app.getFavorites().getColorWithCategory((FavouritePoint) point,
 								app.getResources().getColor(R.color.color_favorite)), false, (FavouritePoint) point);
 			} else if (type == WAYPOINTS) {
 				if (point instanceof WptLocationPoint) {
-					return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor(), false, ((WptLocationPoint) point).getPt());
+					return PointImageDrawable.getFromWpt(uiCtx, point.getColor(), false, ((WptLocationPoint) point).getPt());
 				} else if (point instanceof GPXUtilities.WptPt) {
-					return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor(), false, (GPXUtilities.WptPt) point);
+					return PointImageDrawable.getFromWpt(uiCtx, point.getColor(), false, (GPXUtilities.WptPt) point);
 				} else {
 					return null;
 				}

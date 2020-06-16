@@ -22,7 +22,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.ValueHolder;
 import net.osmand.data.Amenity;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -32,7 +31,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
@@ -202,10 +201,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 					float iconSize = getIconSize(app) * 1.5f * textScale;
 					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 					WaypointHelper wph = app.getWaypointHelper();
-					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(),
-							ContextCompat.getColor(app, R.color.osmand_orange), true,
-							new FavouritePoint(0, 0, "", ""));
-					fid.setAlpha(0.8f);
+					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(view.getContext(),
+							ContextCompat.getColor(app, R.color.osmand_orange), true);
+					pointImageDrawable.setAlpha(0.8f);
 					for (Amenity o : objects) {
 						float x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
@@ -215,7 +213,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						if (tileBox.containsPoint(x, y, iconSize)) {
 							if (intersects(boundIntersections, x, y, iconSize, iconSize) ||
 									(app.getSettings().SHOW_NEARBY_POI.get() && wph.isRouteCalculated() && !wph.isAmenityNoPassed(o))) {
-								fid.drawSmallPoint(canvas, x, y, textScale);
+								pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 								smallObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
 										o.getLocation().getLongitude()));
 							} else {
@@ -241,7 +239,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 								}
 							}
 							if (id != null) {
-								fid.drawPoint(canvas, x, y, textScale, false);
+								pointImageDrawable = PointImageDrawable.getOrCreate(view.getContext(),
+										ContextCompat.getColor(app, R.color.osmand_orange), true,
+										RenderingIcons.getResId(id));
+								pointImageDrawable.setAlpha(0.8f);
+								pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 							}
 						}
 					}

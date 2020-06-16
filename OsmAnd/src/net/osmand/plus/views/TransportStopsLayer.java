@@ -11,7 +11,7 @@ import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.ResultMatcher;
-import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -20,7 +20,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -222,11 +222,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 
 				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(mapActivity,
-							ContextCompat.getColor(mapActivity, R.color.transport_stop_icon_background), true,
-							createUIPoint(0));
-					fid.setAlpha(0.9f);
-					fid.drawSmallPoint(canvas, x, y, textScale);
+					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(mapActivity,
+							ContextCompat.getColor(mapActivity, R.color.transport_stop_icon_background),
+					true,false ,0, BackgroundType.SQUARE);
+					pointImageDrawable.setAlpha(0.9f);
+					pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 				} else {
 					fullObjects.add(o);
 				}
@@ -247,19 +247,12 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		}
 	}
 
-	private FavouritePoint createUIPoint(int iconId) {
-		FavouritePoint fp = new FavouritePoint(0, 0, "", "");
-		fp.setIconId(iconId);
-		fp.setBackgroundType(FavouritePoint.BackgroundType.SQUARE);
-		return fp;
-	}
-
 	private void drawPoint(Canvas canvas, float textScale, float x, float y, @DrawableRes int iconId) {
-		FavouritePoint fp = createUIPoint(iconId);
-		FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(mapActivity,
-				ContextCompat.getColor(mapActivity, R.color.transport_stop_icon_background), true, fp);
-		fid.setAlpha(0.9f);
-		fid.drawPoint(canvas, x, y, textScale, false);
+		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(mapActivity,
+				ContextCompat.getColor(mapActivity, R.color.transport_stop_icon_background),
+				true,false ,iconId, BackgroundType.SQUARE);
+		pointImageDrawable.setAlpha(0.9f);
+		pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 	}
 
 	@Override

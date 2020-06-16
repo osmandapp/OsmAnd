@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.data.DataTileManager;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -17,7 +16,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -86,11 +85,10 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 
 					if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-						FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(activity,
-								ContextCompat.getColor(activity, R.color.audio_video_icon_color), true,
-								new FavouritePoint(0, 0, "", ""));
-						fid.setAlpha(0.8f);
-						fid.drawSmallPoint(canvas, x, y, textScale);
+						PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
+								ContextCompat.getColor(activity, R.color.audio_video_icon_color), true);
+						pointImageDrawable.setAlpha(0.8f);
+						pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 						smallObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
 					} else {
 						fullObjects.add(o);
@@ -117,12 +115,10 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		} else {
 			iconId = R.drawable.mx_special_video_camera;
 		}
-		FavouritePoint fp = new FavouritePoint(0, 0, "", "");
-		fp.setIconId(iconId);
-		FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(activity,
-				ContextCompat.getColor(activity, R.color.audio_video_icon_color), true, fp);
-		fid.setAlpha(0.8f);
-		fid.drawPoint(canvas, x, y, textScale, false);
+		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
+				ContextCompat.getColor(activity, R.color.audio_video_icon_color), true, iconId);
+		pointImageDrawable.setAlpha(0.8f);
+		pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 	}
 
 	@Override

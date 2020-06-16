@@ -40,7 +40,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
@@ -380,20 +380,20 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				List<Pair<WptPt, MapMarker>> fullObjects = new ArrayList<>();
 				int fileColor = getFileColor(g);
 				boolean synced = mapMarkersHelper.getMarkersGroup(g.getGpxFile()) != null;
-				for (WptPt o : getListStarPoints(g)) {
-					if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
-							&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right
-							&& o != contextMenuLayer.getMoveableObject()) {
-						pointFileMap.put(o, g);
+				for (WptPt wpt : getListStarPoints(g)) {
+					if (wpt.lat >= latLonBounds.bottom && wpt.lat <= latLonBounds.top
+							&& wpt.lon >= latLonBounds.left && wpt.lon <= latLonBounds.right
+							&& wpt != contextMenuLayer.getMoveableObject()) {
+						pointFileMap.put(wpt, g);
 						MapMarker marker = null;
 						if (synced) {
-							if ((marker = mapMarkersHelper.getMapMarker(o)) == null) {
+							if ((marker = mapMarkersHelper.getMapMarker(wpt)) == null) {
 								continue;
 							}
 						}
-						cache.add(o);
-						float x = tileBox.getPixXFromLatLon(o.lat, o.lon);
-						float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
+						cache.add(wpt);
+						float x = tileBox.getPixXFromLatLon(wpt.lat, wpt.lon);
+						float y = tileBox.getPixYFromLatLon(wpt.lat, wpt.lon);
 
 						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
 							@ColorInt
@@ -401,26 +401,26 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 							if (marker != null && marker.history) {
 								color = grayColor;
 							} else {
-								color = getPointColor(o, fileColor);
+								color = getPointColor(wpt, fileColor);
 							}
-							FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), color,
-									true, o);
-							fid.drawSmallPoint(canvas, x, y, textScale);
-							smallObjectsLatLon.add(new LatLon(o.lat, o.lon));
+							PointImageDrawable pointImageDrawable = PointImageDrawable.getFromWpt(view.getContext(), color,
+									true, wpt);
+							pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
+							smallObjectsLatLon.add(new LatLon(wpt.lat, wpt.lon));
 						} else {
-							fullObjects.add(new Pair<>(o, marker));
-							fullObjectsLatLon.add(new LatLon(o.lat, o.lon));
+							fullObjects.add(new Pair<>(wpt, marker));
+							fullObjectsLatLon.add(new LatLon(wpt.lat, wpt.lon));
 						}
 					}
-					if (o == contextMenuLayer.getMoveableObject()) {
-						pointFileMap.put(o, g);
+					if (wpt == contextMenuLayer.getMoveableObject()) {
+						pointFileMap.put(wpt, g);
 					}
 				}
 				for (Pair<WptPt, MapMarker> pair : fullObjects) {
-					WptPt o = pair.first;
-					float x = tileBox.getPixXFromLatLon(o.lat, o.lon);
-					float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
-					drawBigPoint(canvas, o, fileColor, x, y, pair.second, textScale);
+					WptPt wpt = pair.first;
+					float x = tileBox.getPixXFromLatLon(wpt.lat, wpt.lon);
+					float y = tileBox.getPixYFromLatLon(wpt.lat, wpt.lon);
+					drawBigPoint(canvas, wpt, fileColor, x, y, pair.second, textScale);
 				}
 			}
 			if (trackChartPoints != null) {
@@ -494,17 +494,17 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		return g.getColor() == 0 ? defPointColor : g.getColor();
 	}
 
-	private void drawBigPoint(Canvas canvas, WptPt o, int fileColor, float x, float y, @Nullable MapMarker marker, float textScale) {
-		int pointColor = getPointColor(o, fileColor);
-		FavoriteImageDrawable fid;
+	private void drawBigPoint(Canvas canvas, WptPt wpt, int fileColor, float x, float y, @Nullable MapMarker marker, float textScale) {
+		int pointColor = getPointColor(wpt, fileColor);
+		PointImageDrawable pointImageDrawable;
 		boolean history = false;
 		if (marker != null) {
-			fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), pointColor, o);
+			pointImageDrawable = PointImageDrawable.getOrCreateSyncedIcon(view.getContext(), pointColor, wpt);
 			history = marker.history;
 		} else {
-			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true, o);
+			pointImageDrawable = PointImageDrawable.getFromWpt(view.getContext(), pointColor, true, wpt);
 		}
-		fid.drawPoint(canvas, x, y, textScale, history);
+		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);
 	}
 
 	@ColorInt

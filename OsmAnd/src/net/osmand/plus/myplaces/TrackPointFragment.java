@@ -67,7 +67,7 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
@@ -1114,7 +1114,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				} else {
 					description.setVisibility(View.GONE);
 				}
-				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), groupColor, false, wpt));
+				icon.setImageDrawable(PointImageDrawable.getFromWpt(getActivity(), groupColor, false, wpt));
 
 			} else {
 				boolean showAll = gpxItem == null;

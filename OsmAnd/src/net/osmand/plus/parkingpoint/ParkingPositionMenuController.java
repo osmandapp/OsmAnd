@@ -10,7 +10,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 
@@ -107,7 +107,7 @@ public class ParkingPositionMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(),
+			return PointImageDrawable.getFromFavorite(mapActivity.getMyApplication(),
 					ContextCompat.getColor(mapActivity, R.color.parking_icon_background), false, fav);
 		} else {
 			return null;

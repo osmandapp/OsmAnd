@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -24,7 +23,7 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -132,8 +131,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 						} else {
 							backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 						}
-						FavoriteImageDrawable fid = getFavoriteImageDrawable(backgroundColorRes, 0);
-						fid.drawSmallPoint(canvas, x, y, textScale);
+						PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
+								ContextCompat.getColor(activity, backgroundColorRes), true);
+						pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 					} else {
 						fullObjects.add(o);
 						fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
@@ -154,23 +154,14 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 						iconId = R.drawable.mx_special_symbol_check_mark;
 						backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 					}
-					FavoriteImageDrawable fid = getFavoriteImageDrawable(backgroundColorRes, iconId);
-					fid.drawPoint(canvas, x, y, textScale, false);
+					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
+							ContextCompat.getColor(activity, backgroundColorRes), true, iconId);
+					pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 				}
 				this.fullObjectsLatLon = fullObjectsLatLon;
 				this.smallObjectsLatLon = smallObjectsLatLon;
 			}
 		}
-	}
-
-	private FavoriteImageDrawable getFavoriteImageDrawable(int backgroundColorRes, int iconId) {
-		FavouritePoint fp = new FavouritePoint(0, 0, "", "");
-		fp.setIconId(iconId);
-		FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(activity,
-				ContextCompat.getColor(activity, backgroundColorRes), true,
-				fp);
-		fid.setAlpha(0.8f);
-		return fid;
 	}
 
 	@Override
