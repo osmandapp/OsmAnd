@@ -101,7 +101,6 @@
 			android:paddingRight="@dimen/content_padding_small"
 			android:paddingEnd="@dimen/content_padding_small"
 			android:paddingLeft="@dimen/content_padding_small"
-			android:textColor="?android:textColorSecondary"
 			android:text="@string/shared_string_meters" />
 	</FrameLayout>
 
@@ -120,34 +119,4 @@
 		osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 		tools:itemCount="3"
 		tools:listitem="@layout/point_editor_icon_category_item" />
-
-	<LinearLayout
-		android:id="@+id/buttons_container_scroll"
-		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_ex_height"
-		android:gravity="center"
-		android:layout_gravity="bottom"
-		android:orientation="horizontal"
-		android:paddingLeft="@dimen/content_padding"
-		android:paddingRight="@dimen/content_padding"
-		android:paddingEnd="@dimen/content_padding"
-		android:paddingStart="@dimen/content_padding">
-
-		<include
-			android:id="@+id/dismiss_button"
-			layout="@layout/bottom_sheet_dialog_button" />
-
-		<View
-			android:id="@+id/buttons_divider"
-			android:layout_width="@dimen/content_padding"
-			android:layout_height="match_parent"
-			tools:visibility="visible" />
-
-		<include
-			android:id="@+id/right_bottom_button"
-			layout="@layout/bottom_sheet_dialog_button"
-			tools:visibility="visible" />
-
-	</LinearLayout>
-
 </LinearLayout>
