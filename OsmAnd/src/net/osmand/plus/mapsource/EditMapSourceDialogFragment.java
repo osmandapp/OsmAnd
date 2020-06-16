@@ -341,7 +341,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		}
 	}
 
-	private void setSaveBtnEnabled() {
+	private void updateSaveButton() {
 		boolean enabled = !nameEditText.getText().toString().isEmpty()
 				&& !urlEditText.getText().toString().isEmpty();
 		saveBtn.setEnabled(enabled);
@@ -418,7 +418,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		urlEditText.setText(urlToLoad);
 		nameEditText.addTextChangedListener(new MapSourceTextWatcher(nameInputLayout));
 		urlEditText.addTextChangedListener(new MapSourceTextWatcher(urlInputLayout));
-		setSaveBtnEnabled();
+		updateSaveButton();
 		addConfigurationItems(ConfigurationItem.values());
 	}
 
@@ -556,7 +556,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			} else {
 				relatedInputLayout.setError(null);
 			}
-			setSaveBtnEnabled();
+			updateSaveButton();
 			checkWasChanged();
 		}
 	}
