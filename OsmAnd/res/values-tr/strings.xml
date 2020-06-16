@@ -3737,4 +3737,8 @@
     <string name="vessel_height_warning">Alçak köprülerden kaçınmak için gemi yüksekliğini ayarlayabilirsiniz. Köprü hareket edebiliyorsa, açık durumdaki yüksekliğini kullanacağımızı unutmayın.</string>
     <string name="vessel_height_limit_description">Alçak köprülerden kaçınmak için gemi yüksekliğini ayarlayın. Köprü hareket edebiliyorsa, açık durumdaki yüksekliğini kullanacağımızı unutmayın.</string>
     <string name="vessel_width_limit_description">Dar köprülerden kaçınmak için gemi genişliğini ayarlayın</string>
+    <string name="quick_action_showhide_mapillary_title">Mapillary\'i göster/gizle</string>
+    <string name="quick_action_mapillary_hide">Mapillary\'i gizle</string>
+    <string name="quick_action_mapillary_show">Mapillary\'i göster</string>
+    <string name="quick_action_showhide_mapillary_descr">Harita üzerinde Mapillary katmanını göstermek veya gizlemek için bir geçiş.</string>
 </resources>
