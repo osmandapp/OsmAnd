@@ -34,7 +34,7 @@
     <string name="index_settings_descr">Завантаження, перегляд подробиць та керування локальними мапами.</string>
     <string name="map_online_plugin_is_not_installed">Увімкніть втулок \'Мережеві мапи\', щоб вибирати різні джерела мап</string>
     <string name="map_online_data">Мережеві мапи (растрові)</string>
-    <string name="map_online_data_descr">Використовувати мережеві мапи (завантажити та кешувати плитки на карті пам\'яті).</string>
+    <string name="map_online_data_descr">Використовувати мережеві мапи (завантажити та кешувати тайли на карті пам\'яті).</string>
     <string name="shared_string_online_maps">Мережеві мапи</string>
     <string name="online_map_settings_descr">Оберіть мережеві або кешовані джерела (тайлів) мап.</string>
     <string name="osmand_rastermaps_plugin_description">Цей втулок надає можливість отримати доступ до багатьох видів мережевих (так званих растрових) мап які Ви хочете, від попередньо створених квадратів OpenStreetMap (на зразок стилю Mapnik) до супутникових знімків та особливих шарів, як-от погодні, кліматичні та землезнавчі (геологічні) мапи, шари рельєфу тощо. 
@@ -289,7 +289,7 @@
     <string name="map_overlay">Верхній шар</string>
     <string name="map_overlay_descr">Виберіть накладку для основної мапи</string>
     <string name="tile_source_already_installed">Мапа вже встановлена, \'Налаштування\' будуть оновлені.</string>
-    <string name="select_tile_source_to_install">Виберіть (плиткові) мапи для встановлення або оновлення.</string>
+    <string name="select_tile_source_to_install">Виберіть (тайлові) мапи для встановлення або оновлення.</string>
     <string name="internet_not_available">Неможливо виконати операцію без підключення до Інтернету.</string>
     <string name="install_more">Завантажити ще…</string>
     <string name="level_to_switch_vector_raster_descr">Використовувати растрові мапи для будь-чого поза цим рівнем.</string>
@@ -404,7 +404,7 @@
     <string name="phone">телефон</string>
     <string name="download_type_to_filter">фільтрувати</string>
     <string name="use_high_res_maps">Дисплей високої роздільної здатності</string>
-    <string name="use_high_res_maps_descr">Не розтягувати (із розмиттям) плитки мап на дисплеях з високою роздільною здатністю.</string>
+    <string name="use_high_res_maps_descr">Не розтягувати (із розмиттям) тайли мап на дисплеях з високою роздільною здатністю.</string>
     <string name="context_menu_item_search_transport">Шукати громадський транспорт</string>
     <string name="transport_searching_transport">Пошук транспорту (нема цілі):</string>
     <string name="transport_searching_route">Пошук транспорту ({0} до цілі):</string>
@@ -621,7 +621,7 @@
     <string name="use_internet">Використовувати Інтернет</string>
     <string name="show_location">Показати Ваше місцерозташування</string>
     <string name="show_gps_coordinates_text">Показати GPS-координати на мапі</string>
-    <string name="use_internet_to_download_tile">Завантажити відсутні плитки мапи</string>
+    <string name="use_internet_to_download_tile">Завантажити відсутні тайли мапи</string>
     <string name="app_description">Навігаційна програма</string>
     <string name="shared_string_exit">Вихід</string>
     <string name="search_button">Пошук</string>
@@ -739,7 +739,7 @@
     <string name="continue_follow_previous_route_auto">Продовжити рух попереднім незавершеним маршрутом? (%1$s секунд)</string>
     <string name="show_cameras">Камери детектування швидкості</string>
     <string name="show_traffic_warnings">Попередження про дорожній рух</string>
-    <string name="avoid_toll_roads">Без платних доріг</string>
+    <string name="avoid_toll_roads">Уник. платних доріг</string>
     <string name="map_widget_top_text">Назва вулиці</string>
     <string name="map_widget_config">Налаштування екрана</string>
     <string name="map_widget_back_to_loc">Де я</string>
@@ -885,7 +885,7 @@
     <string name="poi_filter_emergency">Аварійні служби</string>
     <string name="non_optimal_route_calculation">Швидка побудова маршруту (можливо неоптимальна)</string>
     <string name="show_warnings_descr">Налаштування попередження про дорожній рух (обмеження швидкості, вимушені зупинки, штучні нерівності, тунелі), попередження про камери контролю швидкості, відомості про смуги руху.</string>
-    <string name="avoid_motorway">Без автомагістралей</string>
+    <string name="avoid_motorway">Уник. автомагістралей</string>
     <string name="snap_to_road_descr">Прив\'язуватися до доріг під час навігації.</string>
     <string name="snap_to_road">Прив’язуватися до доріг</string>
     <string name="osmand_short_description_80_chars">Перегляд та навігація в автономному та мережевому режимах мапами OSM</string>
@@ -903,7 +903,7 @@
     <string name="layer_map_appearance">Налаштувати екран</string>
     <string name="show_lanes">Смуги руху</string>
     <string name="avoid_unpaved">Лише асфальтовані дороги</string>
-    <string name="avoid_ferries">Без поромів</string>
+    <string name="avoid_ferries">Уник. поромів</string>
     <string name="avoid_in_routing_title">Уникати…</string>
     <string name="map_widget_fluorescent">Флуоресцентні маршрути</string>
     <string name="map_widget_show_ruler">Лінійка</string>
@@ -1055,14 +1055,14 @@
     <string name="about_version">Версія:</string>
     <string name="shared_string_about">Про застосунок</string>
     <string name="about_settings_descr">Версія, ліцензії, учасники проєкту</string>
-    <string name="local_index_tile_data_zooms">Завантажені масштаби: %1$s</string>
+    <string name="local_index_tile_data_zooms">Завантажені рівні масштабування: %1$s</string>
     <string name="local_index_tile_data_expire">Строк дії (у хвилинах): %1$s</string>
     <string name="local_index_tile_data_downloadable">Завантажувані: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Максимальний масштаб: %1$s</string>
     <string name="local_index_tile_data_minzoom">Мінімальний масштаб: %1$s</string>
     <string name="local_index_tile_data_name">Дата квадрату: %1$s</string>
     <string name="edit_tilesource_successfully">Джерело квадратів мапи %1$s збережено</string>
-    <string name="edit_tilesource_elliptic_tile">Еліптичний Меркатор</string>
+    <string name="edit_tilesource_elliptic_tile">Еліптична проєкція Меркатора</string>
     <string name="edit_tilesource_maxzoom">Максимальне збільшення</string>
     <string name="edit_tilesource_expiration_time">Строк дії (в хвилинах)</string>
     <string name="edit_tilesource_minzoom">Мінімальне збільшення</string>
@@ -1226,13 +1226,13 @@
     <string name="route_info">Відомості про маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Надавати перевагу автомагістралям</string>
     <string name="routing_attr_prefer_motorway_description">Надавати перевагу автомагістралям</string>
-    <string name="routing_attr_avoid_toll_name">Без платних доріг</string>
+    <string name="routing_attr_avoid_toll_name">Уник. платних доріг</string>
     <string name="routing_attr_avoid_toll_description">Уникати платних доріг</string>
-    <string name="routing_attr_avoid_unpaved_name">Лише неасфальтовані дороги</string>
+    <string name="routing_attr_avoid_unpaved_name">Уник. ґрунтових доріг</string>
     <string name="routing_attr_avoid_unpaved_description">Уникати ґрунтових доріг</string>
-    <string name="routing_attr_avoid_ferries_name">Без поромних переправ</string>
+    <string name="routing_attr_avoid_ferries_name">Уник. поромних переправ</string>
     <string name="routing_attr_avoid_ferries_description">Уникати поромних переправ</string>
-    <string name="routing_attr_avoid_motorway_name">Без автомагістралей</string>
+    <string name="routing_attr_avoid_motorway_name">Уник. автомагістралей</string>
     <string name="routing_attr_avoid_motorway_description">Уникати автомагістралей</string>
     <string name="routing_attr_weight_name">Обмеження по вазі</string>
     <string name="routing_attr_weight_description">Вказати дозволений ліміт ваги автомобіля на маршрутах.</string>
@@ -1496,7 +1496,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">Помічник мапера OSM</string>
     <string name="agps_info">Відомості A-GPS</string>
     <string name="shared_string_manage">Керування</string>
-    <string name="shared_string_edit">Правити</string>
+    <string name="shared_string_edit">Редагувати</string>
     <string name="shared_string_places">Місця</string>
     <string name="shared_string_search">Пошук</string>
     <string name="shared_string_show_description">Показати опис.</string>
@@ -1701,7 +1701,7 @@
     <string name="looking_up_address">Пошук адреси</string>
     <string name="av_locations">Місця</string>
     <string name="plugin_settings">Плагіни</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Без приміських поїздів</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Уник. приміських поїздів</string>
     <string name="routing_attr_avoid_shuttle_train_description">Уникати приміських поїздів</string>
     <string name="traffic_warning_hazard">Небезпека</string>
     <string name="rendering_value_boldOutline_name">Жирний контур</string>
@@ -1711,9 +1711,9 @@
     <string name="rendering_attr_currentTrackWidth_description">Товщина GPX</string>
     <string name="shared_string_wikipedia">Вікіпедія</string>
     <string name="rendering_attr_roadStyle_description">Стиль доріг</string>
-    <string name="routing_attr_avoid_stairs_name">Без сходів</string>
+    <string name="routing_attr_avoid_stairs_name">Уник. сходів</string>
     <string name="routing_attr_avoid_stairs_description">Уникати сходів</string>
-    <string name="routing_attr_avoid_borders_name">Без перетину кордону</string>
+    <string name="routing_attr_avoid_borders_name">Уник. перетину кордону</string>
     <string name="shared_string_others">Інші</string>
     <string name="favourites_context_menu_add">Додати Закладку</string>
     <string name="poi_action_delete">видалити</string>
@@ -2725,10 +2725,10 @@
     <string name="travel_card_download_descr">Завантажте путівники Вікімандрів, щоб переглянути статті про місця в усьому світі без підключення до Інтернету.</string>
     <string name="update_is_available">Доступне оновлення</string>
     <string name="download_file">Завантажити файл</string>
-    <string name="start_editing_card_image_text">Безкоштовний всесвітній путівник, який може редагувати кожен.</string>
+    <string name="start_editing_card_image_text">Безплатний всесвітній путівник, який може правити кожен.</string>
     <string name="welcome_to_open_beta_description">Туристичні путівники, в цей час, засновані на Вікімандрах. Перевірте усі функції безплатно під час відкритого бета-тестування. Потім, путівники будуть доступні передплатникам OsmAnd Unlimited і власникам OsmAnd+.</string>
-    <string name="start_editing_card_description">Вам можна і слід редагувати будь-яку статтю на Вікімандрах. Діліться знаннями, досвідом, талантом і Вашої увагою.</string>
-    <string name="start_editing">Розпочати редагування</string>
+    <string name="start_editing_card_description">Вам можна і слід правити будь-яку статтю на Вікімандрах. Діліться знаннями, досвідом, талантом і Вашої увагою.</string>
+    <string name="start_editing">Розпочати правку</string>
     <string name="get_unlimited_access">Отримати необмежений доступ</string>
     <string name="welcome_to_open_beta">Ласкаво просимо на відкрите бета-тестування</string>
     <string name="wikivoyage_travel_guide">Туристичні путівники</string>
@@ -2930,7 +2930,7 @@
     <string name="rendering_attr_surface_paved_name">Тверда</string>
     <string name="rendering_attr_surface_concrete_name">Бетон</string>
     <string name="rendering_attr_surface_sett_name">Бруківка</string>
-    <string name="rendering_attr_surface_paving_stones_name">Тротуарна плитка</string>
+    <string name="rendering_attr_surface_paving_stones_name">Бруківка</string>
     <string name="rendering_attr_surface_pebblestone_name">Галька</string>
     <string name="rendering_attr_surface_stone_name">Камінь</string>
     <string name="rendering_attr_surface_metal_name">Ковань</string>
@@ -2960,9 +2960,9 @@
     <string name="routing_attr_avoid_bus_description">Уникати автобусів і тролейбусів</string>
     <string name="routing_attr_avoid_share_taxi_name">Уникати маршрутних таксі</string>
     <string name="routing_attr_avoid_share_taxi_description">Уникати маршрутних таксі</string>
-    <string name="routing_attr_avoid_train_name">Без потягів</string>
+    <string name="routing_attr_avoid_train_name">Уник. потягів</string>
     <string name="routing_attr_avoid_train_description">Уникати потягів</string>
-    <string name="routing_attr_avoid_subway_name">Без метро</string>
+    <string name="routing_attr_avoid_subway_name">Уник. метро</string>
     <string name="routing_attr_avoid_subway_description">Уникати метро та легкого рейкового траспорту</string>
     <string name="routing_attr_avoid_ferry_name">Уникати поромних переправ</string>
     <string name="routing_attr_avoid_ferry_description">Уникати поромних переправ</string>
@@ -3014,7 +3014,7 @@
     <string name="choose_track_file_to_follow">Оберіть файл треку для слідування</string>
     <string name="quick_action_switch_day_night_descr">Перемикач для режимів дня та ночі OsmAnd.</string>
     <string name="run_full_osmand_msg">Ви використовуєте {0} мапу, надану OsmAnd. Хочете запустити повну версію OsmAnd\?</string>
-    <string name="routing_attr_avoid_sett_name">Без мостових та бруківки</string>
+    <string name="routing_attr_avoid_sett_name">Уник. мостових та бруківки</string>
     <string name="routing_attr_avoid_sett_description">Уникати мостові та бруківку</string>
     <string name="send_log">Надіслати журнал</string>
     <string name="files_moved">Переміщено %1$d файлів (%2$s).</string>
@@ -3442,7 +3442,7 @@
     <string name="accessibility_announce">Оголошення</string>
     <string name="login_and_pass">Ім\'я користувача і пароль</string>
     <string name="plugin_global_prefs_info">Ці налаштування стосуються всіх профілів.</string>
-    <string name="osm_editing">OSM-редагування</string>
+    <string name="osm_editing">OSM-правлення</string>
     <string name="osm_edits_view_descr">Ви можете переглянути всі не завантажені зміни або помилки в OSM в %1$s. Завантажені точки не відображаються в OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок відображається під час навігації чи переміщення.</string>
@@ -3710,7 +3710,7 @@
     <string name="quick_action_show_hide_transport">Показати/приховати громадський транспорт</string>
     <string name="quick_action_transport_descr">Кнопка показу або приховування громадського транспорту на мапі.</string>
     <string name="create_edit_poi">Створити / змінити POI</string>
-    <string name="add_edit_favorite">Додати / редагувати вибране</string>
+    <string name="add_edit_favorite">Додати / правити вибране</string>
     <string name="reset_deafult_order">Відновити типовий порядок елементів</string>
     <string name="back_to_editing">Повернутися до редагування</string>
     <string name="additional_actions_descr">Ви можете отримати доступ до цих дій, торкнувшись кнопки “%1$s”.</string>
@@ -3724,7 +3724,7 @@
     <string name="gpx_parse_error">OsmAnd GPX недостатньо сформований. Зверніться до служби підтримки для подальшого дослідження.</string>
     <string name="shared_string_always">Завжди</string>
     <string name="screen_control">Керування екраном</string>
-    <string name="system_screen_timeout_descr">Екран буде вимикатися після певного періоду бездіяльності, зазначеного в системних налаштуваннях пристрою.</string>
+    <string name="system_screen_timeout_descr">Вимикає екран відповідно до часу очікування екрана системи.</string>
     <string name="system_screen_timeout">Використовувати системний час очікування</string>
     <string name="turn_screen_on_options_descr">Параметри увімкнення екрана</string>
     <string name="turn_screen_on_descr">Параметри увімкнення екрану (переконайтесь, що OsmAnd стоїть на передньому плані, коли пристрій заблоковано):</string>
@@ -3738,24 +3738,24 @@
     <string name="keep_screen_off">Тримати екран вимкненим</string>
     <string name="screen_timeout_descr">Якщо параметр \"%1$s\" увімкнено, час роботи залежатиме від нього.</string>
     <string name="pseudo_mercator_projection">Псевдопроєкція Меркатора</string>
-    <string name="one_image_per_tile">Один файл зображення на плитку</string>
+    <string name="one_image_per_tile">Один файл зображення на тайл</string>
     <string name="sqlite_db_file">Файл SQLiteDB</string>
     <string name="online_map_name_helper_text">Укажіть назву джерела мережевої мапи.</string>
     <string name="online_map_url_helper_text">Введіть або вставте URL-адресу для мережевого джерела.</string>
-    <string name="edit_online_source">Редагувати мережеве джерело</string>
+    <string name="edit_online_source">Змінити мережеве джерело</string>
     <string name="expire_time">Строк дії</string>
     <string name="mercator_projection">Проєкція Меркатора</string>
     <string name="storage_format">Формат зберігання</string>
-    <string name="map_source_zoom_levels">Встановіть щонайменший та щонайбільший рівень масштабування, при якому мережева мапа буде відображатися або завантажуватися.</string>
-    <string name="map_source_zoom_levels_descr">Ці параметри впливатимуть на дисплей як мапи або накладки/підкладки.
+    <string name="map_source_zoom_levels">Встановіть найменший та найбільший рівень масштабування для відображення або завантаження мережевої мапи.</string>
+    <string name="map_source_zoom_levels_descr">Впливає на екран, коли використовується як мапа чи накладка/підкладка.
 \n
-\n%1$s: мапа буде обмежена вибраними масштабами.
+\n%1$s: мапа обмежена вибраним проміжком масштабування.
 \n
-\n%2$s: рівні масштабу, на яких будуть видні первинні плитки. Масштабування буде відбуватися поза цими значеннями.</string>
-    <string name="expire_time_descr">Час дії в хвилинах. Кешована плитка буде завантажена через визначений час. Залиште це поле порожнім, щоб ніколи не оновлювати плитки для цього джерела.
-\n
-\nОдин день - 1440 хвилин.
-\nОдин тиждень - 10 080 хвилин.
+\n%2$s: рівні масштабування, за яких буде видно первинні тайли; збільшення і зменшення масштабу може відбуватися поза цими значенями.</string>
+    <string name="expire_time_descr">Кешовані тайли буде повторно завантажено через вказану кількість хвилин. Залиште це поле порожнім, щоб ніколи не оновлювати плитки для цього джерела.
+\n 
+\nОдин день - 1440 хвилин. 
+\nОдин тиждень - 10 080 хвилин. 
 \nОдин місяць - 43 829 хвилин.</string>
     <string name="tiles_storage_descr">Виберіть спосіб зберігання завантажених плиток.</string>
     <string name="default_screen_timeout">Усталений час очікування екрану</string>
@@ -3763,7 +3763,7 @@
     <string name="shared_string_delete_all_q">Видалити все\?</string>
     <string name="delete_all_actions_message_q">Ви дійсно бажаєте безповоротно видалити %d швидких дій\?</string>
     <string name="screen_timeout">Час очікування екрана</string>
-    <string name="weight_limit_description">Вкажіть вагу транспортного засобу, для важких транспортних засобів можуть застосовуватися деякі обмеження на маршрути.</string>
+    <string name="weight_limit_description">Вкажіть вагу транспортного засобу, для важких транспортних засобів можуть застосовуватися деякі маршрутні обмеження.</string>
     <string name="shared_string_tones">тонни</string>
     <string name="shared_string_meters">метри</string>
     <string name="details_dialog_decr">Показати або приховати додаткові деталі на мапі</string>
@@ -3771,4 +3771,10 @@
     <string name="width_limit_description">Вкажіть ширину автомобіля, для великих транспортних засобів можуть застосовуватися обмеження на деяких маршрутах.</string>
     <string name="height_limit_description">Вкажіть висоту автомобіля, для великих транспортних засобів можуть застосовуватися обмеження на деяких маршрутах.</string>
     <string name="turn_screen_on_power_button_disabled">Вимкнено. Потребує \'Тримати екран увімкненим\' у розділі \'Час очікування після пробудження\'.</string>
+    <string name="add_online_source">Додати мережеве джерело</string>
+    <string name="clear_tiles_warning">Застосування цих змін очистить кешовані дані для цього джерела плиток</string>
+    <string name="vessel_height_warning_link">Встановити висоту судна</string>
+    <string name="vessel_height_warning">Ви можете встановити висоту судна, щоб уникнути низьких мостів. Майте на увазі, якщо міст рухомий, використовуватиметься його висота у відкритому стані.</string>
+    <string name="vessel_height_limit_description">Встановіть висоту судна, щоб уникнути низьких мостів. Майте на увазі, якщо міст рухомий, використовуватиметься його висота у відкритому стані.</string>
+    <string name="vessel_width_limit_description">Встановіть ширину судна, щоб уникнути вузьких мостів</string>
 </resources>
