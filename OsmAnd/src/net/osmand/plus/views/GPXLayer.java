@@ -28,7 +28,6 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -48,13 +47,13 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.ContextMenuLayer.IMoveObjectProvider;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -66,10 +65,10 @@ import java.util.Map;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
-public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
-		ContextMenuLayer.IMoveObjectProvider, MapTextProvider<WptPt> {
+public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
 	private static final double TOUCH_RADIUS_MULTIPLIER = 1.5;
+	private static final int START_ZOOM = 7;
 
 	private OsmandMapTileView view;
 
@@ -89,9 +88,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private LayerDrawable selectedPoint;
 	private TrackChartPoints trackChartPoints;
 
-	private static final int startZoom = 7;
-
-
 	private GpxSelectionHelper selectedGpxHelper;
 	private MapMarkersHelper mapMarkersHelper;
 	private Paint paintBmp;
@@ -102,14 +98,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Paint paintOuterRect;
 	private Paint paintInnerRect;
 
-    private Paint paintGridOuterCircle;
+	private Paint paintGridOuterCircle;
 	private Paint paintGridCircle;
 
 	private Paint paintTextIcon;
 
 	private OsmandRenderer osmandRenderer;
-
-	private GPXFile gpx;
 
 	private ContextMenuLayer contextMenuLayer;
 	@ColorInt
@@ -296,7 +290,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private void drawSelectedFilesSplits(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles,
 										 DrawSettings settings) {
-		if (tileBox.getZoom() >= startZoom) {
+		if (tileBox.getZoom() >= START_ZOOM) {
 			// request to load
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<GpxDisplayGroup> groups = g.getDisplayGroups(view.getApplication());
@@ -377,7 +371,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private void drawSelectedFilesPoints(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
-		if (tileBox.getZoom() >= startZoom) {
+		if (tileBox.getZoom() >= START_ZOOM) {
 			float textScale = view.getSettings().TEXT_SCALE.get();
 			float iconSize = FavoriteImageDrawable.getOrCreate(view.getContext(), 0,
 					true, (WptPt) null).getIntrinsicWidth() * 3 / 2.5f * textScale;
@@ -582,7 +576,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
 		return (Math.abs(objx - ex) <= radius && Math.abs(objy - ey) <= radius);
-
 	}
 
 	public void getWptFromPoint(RotatedTileBox tb, PointF point, List<? super WptPt> res) {
@@ -603,27 +596,24 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		}
 	}
 
-	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
-
-	public void getWptFromPoint2(RotatedTileBox tb, PointF point, List<Object> res) {
+	public void getTracksFromPoint(RotatedTileBox tb, PointF point, List<Object> res) {
 		int r = getScaledTouchRadius(view.getApplication(), getDefaultRadiusPoi(tb));
 		int mx = (int) point.x;
 		int my = (int) point.y;
 		List<SelectedGpxFile> selectedGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
-			boolean track = false;
 			List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 			for (TrkSegment segment : segments) {
-				track |= track(tb, segment.points, (int) r, mx, my);
+				boolean nearSegment = isPointNearSegment(tb, segment.points, r, mx, my);
+				if (nearSegment) {
+					res.add(selectedGpxFile);
+					break;
+				}
 			}
-			if (track) {
-				res.add(selectedGpxFile);
-			}
-			log.debug("found " + track);
 		}
 	}
 
-	private boolean track(RotatedTileBox tb, List<WptPt> points, int r, int mx, int my) {
+	private boolean isPointNearSegment(RotatedTileBox tb, List<WptPt> points, int r, int mx, int my) {
 		WptPt firstPoint = points.get(0);
 		int ppx = (int) tb.getPixXFromLatLon(firstPoint.lat, firstPoint.lon);
 		int ppy = (int) tb.getPixYFromLatLon(firstPoint.lat, firstPoint.lon);
@@ -681,11 +671,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof WptPt) {
-			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt) o).name); //$NON-NLS-1$
+			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt) o).name);
 		} else if (o instanceof SelectedGpxFile) {
 			SelectedGpxFile selectedGpxFile = (SelectedGpxFile) o;
 			String name = formatName(Algorithms.getFileWithoutDirs(selectedGpxFile.getGpxFile().path));
-			return new PointDescription(PointDescription.POINT_TYPE_WPT, name);
+			return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
 		}
 		return null;
 	}
@@ -720,9 +710,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
-		if (tileBox.getZoom() >= startZoom) {
+		if (tileBox.getZoom() >= START_ZOOM) {
 			getWptFromPoint(tileBox, point, res);
-			getWptFromPoint2(tileBox, point, res);
+			getTracksFromPoint(tileBox, point, res);
 		}
 	}
 

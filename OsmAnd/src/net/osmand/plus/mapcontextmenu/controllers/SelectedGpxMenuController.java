@@ -122,14 +122,16 @@ public class SelectedGpxMenuController extends MenuController {
 					gpxItem.chartTypes = list.toArray(new GpxUiHelper.GPXDataSetType[list.size()]);
 				}
 
-				OsmandApplication app = getMapActivity().getMyApplication();
+				MapActivity mapActivity = getMapActivity();
+				OsmandApplication app = mapActivity.getMyApplication();
 				final OsmandSettings settings = app.getSettings();
 				settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
 						settings.getLastKnownMapZoom(),
 						new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
 						false,
 						gpxItem);
-				MapActivity.launchMapActivityMoveToTop(getMapActivity());
+				mapActivity.getContextMenu().hide();
+				MapActivity.launchMapActivityMoveToTop(mapActivity);
 			}
 		}
 	}
