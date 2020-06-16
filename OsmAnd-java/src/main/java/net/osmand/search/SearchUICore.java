@@ -657,7 +657,7 @@ public class SearchUICore {
 		private List<MapObject> exportedObjects;
 		private List<City> exportedCities;
 
-		private static boolean speedCamerasUninstalled = false;
+		public static boolean speedCamerasUninstalled = false;
 
 		public SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
 								   AtomicInteger requestNumber, int totalLimit) {
@@ -901,10 +901,6 @@ public class SearchUICore {
 				key = ((Amenity) object).getSubType();
 			}
 			return "speed_camera".equals(key);
-		}
-
-		public static void setSpeedCamerasUninstalled(boolean speedCamerasUninstalled) {
-			SearchResultMatcher.speedCamerasUninstalled = speedCamerasUninstalled;
 		}
 	}
 	

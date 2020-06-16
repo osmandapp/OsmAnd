@@ -947,9 +947,8 @@ public class MapPoiTypes {
 	}
 
 	public void excludeSpeedCameraPoiType() {
-		Iterator<PoiCategory> categoryIter = categories.iterator();
-		while (categoryIter.hasNext()) {
-			Iterator<PoiType> poiIter = categoryIter.next().getPoiTypes().iterator();
+		for (PoiCategory category : categories) {
+			Iterator<PoiType> poiIter = category.getPoiTypes().iterator();
 			while (poiIter.hasNext()) {
 				PoiType poiType = poiIter.next();
 				if ("speed_camera".equals(poiType.getKeyName())) {

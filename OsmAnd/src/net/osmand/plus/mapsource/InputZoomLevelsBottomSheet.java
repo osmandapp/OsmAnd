@@ -3,6 +3,7 @@ package net.osmand.plus.mapsource;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -81,7 +82,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			String mapSource = getString(R.string.map_source);
 			String overlayUnderlay = getString(R.string.pref_overlay);
 			String dialogDesr = getString(dialogDescrRes, mapSource, overlayUnderlay);
-			dialogDescrTv.setText(createSpannableString(dialogDesr, mapSource, overlayUnderlay));
+			dialogDescrTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), dialogDesr, mapSource, overlayUnderlay));
 		} else {
 			dialogDescrTv.setText(getString(dialogDescrRes));
 		}
@@ -153,23 +154,6 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	protected int getRightBottomButtonTextId() {
 		return R.string.shared_string_apply;
-	}
-
-	private SpannableString createSpannableString(@NonNull String text, @NonNull String... textToStyle) {
-		SpannableString spannable = new SpannableString(text);
-		for (String t : textToStyle) {
-			try {
-				int startIndex = text.indexOf(t);
-				spannable.setSpan(
-						new CustomTypefaceSpan(FontCache.getRobotoMedium(requireContext())),
-						startIndex,
-						startIndex + t.length(),
-						Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-			} catch (RuntimeException e) {
-				LOG.error("Error trying to find index of " + t + " " + e);
-			}
-		}
-		return spannable;
 	}
 
 	private void setSliderDescrRes(int sliderDescrRes) {

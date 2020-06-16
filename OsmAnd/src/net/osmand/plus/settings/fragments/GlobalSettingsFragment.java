@@ -17,7 +17,6 @@ import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
-import net.osmand.plus.dialogs.SpeedCamerasBottomSheet.OnSpeedCamerasUninstallListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -25,18 +24,13 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 
 public class GlobalSettingsFragment extends BaseSettingsFragment
-		implements OnSendAnalyticsPrefsUpdate, OnPreferenceChanged,
-		OnSpeedCamerasUninstallListener {
+		implements OnSendAnalyticsPrefsUpdate, OnPreferenceChanged {
 
 	public static final String TAG = GlobalSettingsFragment.class.getSimpleName();
 
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
-	private static final String UNINSTALL_SPEED_CAMERAS_PREF_ID = "uninstall_speed_cameras";
 	private static final String LEGAL_CATEGORY_ID = "legal";
-
-	private Preference uninstallSpeedCameras;
-	private PreferenceCategory legalCategory;
 
 	@Override
 	protected void setupPreferences() {
@@ -47,12 +41,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		setupSendAnonymousDataPref();
 		setupDialogsAndNotificationsPref();
 		setupEnableProxyPref();
-		legalCategory = (PreferenceCategory) findPreference(LEGAL_CATEGORY_ID);
-		uninstallSpeedCameras = (Preference) findPreference(UNINSTALL_SPEED_CAMERAS_PREF_ID);
-		uninstallSpeedCameras.setIcon(getPersistentPrefIcon(R.drawable.ic_speed_camera_disabled));
-		if (settings.SPEED_CAMERAS_UNINSTALLED.get()) {
-			onSpeedCamerasUninstalled();
-		}
+		setupLegalCategory();
+		setupUninstallSpeedCamerasPref();
 	}
 
 	@Override
@@ -117,6 +107,9 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 				app.checkPreferredLocale();
 				app.restartApp(activity);
 			}
+		} else if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
+			setupLegalCategory();
+			setupUninstallSpeedCamerasPref();
 		}
 	}
 
@@ -128,7 +121,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		if (UNINSTALL_SPEED_CAMERAS_PREF_ID.equals(prefId)) {
+		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId)) {
 			FragmentManager fm = getFragmentManager();
 			if (fm != null) {
 				SpeedCamerasBottomSheet.showInstance(fm, this);
@@ -221,11 +214,14 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		enableProxy.setIcon(getPersistentPrefIcon(R.drawable.ic_action_proxy));
 	}
 
-	@Override
-	public void onSpeedCamerasUninstalled() {
-		if (uninstallSpeedCameras != null && legalCategory != null) {
-			uninstallSpeedCameras.setVisible(false);
-			legalCategory.setVisible(false);
-		}
+	private void setupLegalCategory() {
+		PreferenceCategory legalCategory = (PreferenceCategory) findPreference(LEGAL_CATEGORY_ID);
+		legalCategory.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
+	}
+
+	private void setupUninstallSpeedCamerasPref() {
+		Preference uninstallSpeedCameras = (Preference) findPreference(settings.SPEED_CAMERAS_UNINSTALLED.getId());
+		uninstallSpeedCameras.setIcon(getActiveIcon(R.drawable.ic_speed_camera_disabled));
+		uninstallSpeedCameras.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
 	}
 }

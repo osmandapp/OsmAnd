@@ -6,40 +6,29 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
-import net.osmand.plus.dialogs.SpeedCamerasBottomSheet.OnSpeedCamerasUninstallListener;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 
-import java.lang.ref.WeakReference;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 
-public class ScreenAlertsFragment extends BaseSettingsFragment implements OnSpeedCamerasUninstallListener {
+public class ScreenAlertsFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	public static final String TAG = ScreenAlertsFragment.class.getSimpleName();
 
 	private static final String SHOW_ROUTING_ALARMS_INFO = "show_routing_alarms_info";
 	private static final String SCREEN_ALERTS_IMAGE = "screen_alerts_image";
-	private static final String SHOW_CAMERAS = "show_cameras";
-	private SwitchPreferenceCompat showCameras;
 
 	@Override
 	protected void setupPreferences() {
@@ -47,19 +36,16 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnSpee
 		SwitchPreferenceCompat showTrafficWarnings = (SwitchPreferenceCompat) findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
 		SwitchPreferenceCompat showPedestrian = (SwitchPreferenceCompat) findPreference(settings.SHOW_PEDESTRIAN.getId());
 		SwitchPreferenceCompat showTunnels = (SwitchPreferenceCompat) findPreference(settings.SHOW_TUNNELS.getId());
-		showCameras = (SwitchPreferenceCompat) findPreference(settings.SHOW_CAMERAS.getId());
 
 		showRoutingAlarmsInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 		showTrafficWarnings.setIcon(getIcon(R.drawable.list_warnings_traffic_calming));
 		showPedestrian.setIcon(getIcon(R.drawable.list_warnings_pedestrian));
 		showTunnels.setIcon(getIcon(R.drawable.list_warnings_tunnel));
-		showCameras.setIcon(getIcon(R.drawable.list_warnings_speed_camera));
 
 		setupScreenAlertsImage();
+		setupShowCamerasPref();
+		setupSpeedCamerasAlert();
 		enableDisablePreferences(settings.SHOW_ROUTING_ALARMS.getModeValue(getSelectedAppMode()));
-		if (settings.SPEED_CAMERAS_UNINSTALLED.get()) {
-			onSpeedCamerasUninstalled();
-		}
 	}
 
 	@Override
@@ -119,8 +105,8 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnSpee
 
 				deviceImage.setImageDrawable(getDeviceImage());
 				warningIcon.setImageDrawable(getWarningIcon());
-			} else if (SHOW_CAMERAS.equals(key)) {
-				setupSpeedCamerasAlert(app, requireMyActivity(), holder, this, isNightMode());
+			} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(key)) {
+				setupPrefRoundedBg(holder);
 			}
 		}
 	}
@@ -131,8 +117,18 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnSpee
 			Preference routeParametersImage = findPreference(SCREEN_ALERTS_IMAGE);
 			updatePreference(routeParametersImage);
 		}
-
+		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(preference.getKey())) {
+			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
+		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onPreferenceChanged(String prefId) {
+		if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
+			setupShowCamerasPref();
+			setupSpeedCamerasAlert();
+		}
 	}
 
 	private void setupScreenAlertsImage() {
@@ -163,47 +159,9 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnSpee
 		return null;
 	}
 
-	public static void setupSpeedCamerasAlert(@NonNull OsmandApplication app,
-											  @NonNull FragmentActivity activity,
-											  @NonNull PreferenceViewHolder holder,
-											  @Nullable Fragment targetFragment,
-											  boolean nightMode) {
-		ImageView alertIcon = (ImageView) holder.itemView.findViewById(R.id.alert_icon);
-		TextView alertTitle = (TextView) holder.itemView.findViewById(R.id.alert_title);
-		TextView alertSubTitle = (TextView) holder.itemView.findViewById(R.id.alert_subtitle);
-		LinearLayout alertBg = (LinearLayout) holder.itemView.findViewById(R.id.alert_bg);
-
-		alertBg.setBackgroundDrawable(UiUtilities.getRoundedBackgroundDrawable(
-				app,
-				nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light,
-				6));
-		alertIcon.setImageDrawable(app.getUIUtilities().getIcon(
-				R.drawable.ic_action_alert,
-				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light));
-		alertTitle.setText(R.string.speed_cameras_alert);
-		alertTitle.setTypeface(FontCache.getRobotoMedium(app));
-		alertSubTitle.setText(R.string.read_more);
-		alertSubTitle.setTypeface(FontCache.getRobotoMedium(app));
-		alertSubTitle.setTextColor(nightMode
-				? app.getResources().getColor(R.color.active_color_primary_dark)
-				: app.getResources().getColor(R.color.active_color_primary_light));
-		final WeakReference<FragmentActivity> weakActivity = new WeakReference<>(activity);
-		final WeakReference<Fragment> weakFragment = new WeakReference<>(targetFragment);
-		alertSubTitle.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				FragmentActivity a = weakActivity.get();
-				if (a != null) {
-					SpeedCamerasBottomSheet.showInstance(a.getSupportFragmentManager(), weakFragment.get());
-				}
-			}
-		});
-	}
-
-	@Override
-	public void onSpeedCamerasUninstalled() {
-		if (showCameras != null) {
-			showCameras.setVisible(false);
-		}
+	private void setupShowCamerasPref() {
+		SwitchPreferenceCompat showCameras = (SwitchPreferenceCompat) findPreference(settings.SHOW_CAMERAS.getId());
+		showCameras.setIcon(getIcon(R.drawable.list_warnings_speed_camera));
+		showCameras.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
 	}
 }

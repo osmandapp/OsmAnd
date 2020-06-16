@@ -389,9 +389,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		lockHelper.setLockUIAdapter(this);
 
 		mIsDestroyed = false;
-		if (settings.SPEED_CAMERAS_UNINSTALLED.get()) {
-			app.getPoiTypes().excludeSpeedCameraPoiType();
-		}
 	}
 
 	public void exitFromFullScreen(View view) {

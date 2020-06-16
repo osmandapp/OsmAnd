@@ -14,9 +14,10 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.dialogs.SpeedCamerasBottomSheet.OnSpeedCamerasUninstallListener;
+import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -34,10 +35,9 @@ import static net.osmand.plus.settings.backend.OsmandSettings.VOICE_PROVIDER_NOT
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.activities.SettingsNavigationActivity.MORE_VALUE;
 
-public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnSpeedCamerasUninstallListener {
+public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
-	private Preference speakCamera;
 
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
@@ -98,10 +98,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnSp
 			setupInterruptMusicPref();
 		}
 		enableDisablePreferences(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
-		speakCamera = findPreference(settings.SPEAK_SPEED_CAMERA.getId());
-		if (settings.SPEED_CAMERAS_UNINSTALLED.get()) {
-			onSpeedCamerasUninstalled();
-		}
+		setupSpeakCamerasPref();
+		setupSpeedCamerasAlert();
 	}
 
 	private void setupSpeedLimitExceedPref() {
@@ -231,8 +229,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnSp
 				Object currentValue = ((ListPreferenceEx) preference).getValue();
 				imageView.setEnabled(preference.isEnabled() && !OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(currentValue));
 			}
-		} else if (settings.SPEAK_SPEED_CAMERA.getId().equals(preference.getKey())) {
-			ScreenAlertsFragment.setupSpeedCamerasAlert(app, requireMyActivity(), holder, this, isNightMode());
+		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(preference.getKey())) {
+			setupPrefRoundedBg(holder);
 		}
 	}
 
@@ -296,9 +294,23 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnSp
 	}
 
 	@Override
-	public void onSpeedCamerasUninstalled() {
-		if (speakCamera != null) {
-			speakCamera.setVisible(false);
+	public boolean onPreferenceClick(Preference preference) {
+		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(preference.getKey())) {
+			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
 		}
+		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onPreferenceChanged(String prefId) {
+		if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
+			setupSpeakCamerasPref();
+			setupSpeedCamerasAlert();
+		}
+	}
+
+	private void setupSpeakCamerasPref() {
+		SwitchPreferenceCompat showCameras = (SwitchPreferenceCompat) findPreference(settings.SPEAK_SPEED_CAMERA.getId());
+		showCameras.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
 	}
 }

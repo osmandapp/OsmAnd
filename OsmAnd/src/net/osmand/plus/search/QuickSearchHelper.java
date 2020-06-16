@@ -29,6 +29,7 @@ import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.search.SearchUICore;
@@ -65,10 +66,11 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public QuickSearchHelper(OsmandApplication app) {
 		this.app = app;
-		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get(),
-				app.getSettings().MAP_TRANSLITERATE_NAMES.get());
+		OsmandSettings settings = app.getSettings();
+		core = new SearchUICore(app.getPoiTypes(), settings.MAP_PREFERRED_LOCALE.get(),
+				settings.MAP_TRANSLITERATE_NAMES.get());
 		app.getResourceManager().addResourceListener(this);
-		SearchResultMatcher.setSpeedCamerasUninstalled(app.getSettings().SPEED_CAMERAS_UNINSTALLED.get());
+		SearchResultMatcher.speedCamerasUninstalled = settings.SPEED_CAMERAS_UNINSTALLED.get();
 	}
 
 	public SearchUICore getCore() {

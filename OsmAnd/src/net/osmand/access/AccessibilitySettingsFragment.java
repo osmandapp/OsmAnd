@@ -2,27 +2,20 @@ package net.osmand.access;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -215,23 +208,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		super.onBindPreferenceViewHolder(preference, holder);
 		String prefId = preference.getKey();
 		if (ACCESSIBILITY_OPTIONS.equals(prefId)) {
-			View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
-			if (selectableView != null) {
-				int color = AndroidUtils.getColorFromAttr(app, R.attr.activity_background_color);
-				int selectedColor = UiUtilities.getColorWithAlpha(getActiveProfileColor(), 0.3f);
-
-				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
-					Drawable selectable = getPaintedIcon(R.drawable.ripple_rectangle_rounded, selectedColor);
-					Drawable[] layers = {bgDrawable, selectable};
-					AndroidUtils.setBackground(selectableView, new LayerDrawable(layers));
-				} else {
-					Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
-					AndroidUtils.setBackground(selectableView, bgDrawable);
-				}
-				LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) selectableView.getLayoutParams();
-				params.setMargins(params.leftMargin, AndroidUtils.dpToPx(app, 6), params.rightMargin, params.bottomMargin);
-			}
+			setupPrefRoundedBg(holder);
 		} else if (settings.ACCESSIBILITY_MODE.getId().equals(prefId)) {
 			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
 			if (imageView != null) {

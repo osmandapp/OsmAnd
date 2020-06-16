@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -639,44 +640,32 @@ public class UiUtilities {
 		}
 	}
 
-	public static SpannableString createSpannableString(@NonNull String text, @NonNull String textToStyle, @NonNull StyleSpan styleSpan) {
-		SpannableString spannable = new SpannableString(text);
-		try {
-			int startIndex = text.indexOf(textToStyle);
-			spannable.setSpan(
-					styleSpan,
-					startIndex,
-					startIndex + textToStyle.length(),
-					Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-			return spannable;
-		} catch (RuntimeException e) {
-			LOG.error("Error trying to find index of " + textToStyle + " " + e);
-			return spannable;
-		}
-	}
-
-	public static SpannableString setWordsMediumFont(@NonNull Context ctx, @NonNull String text, @NonNull String... textToStyle) {
+	public static SpannableString createSpannableString(@NonNull String text, @NonNull StyleSpan styleSpan, @NonNull String... textToStyle) {
 		SpannableString spannable = new SpannableString(text);
 		for (String t : textToStyle) {
-			try {
-				int startIndex = text.indexOf(t);
-				spannable.setSpan(
-						new CustomTypefaceSpan(FontCache.getRobotoMedium(ctx)),
-						startIndex,
-						startIndex + t.length(),
-						Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-			} catch (RuntimeException e) {
-				LOG.error("Error trying to find index of " + t + " " + e);
-			}
+			setSpan(spannable, styleSpan, text, t);
 		}
 		return spannable;
 	}
 
-	public static GradientDrawable getRoundedBackgroundDrawable(@NonNull Context context, @ColorRes int colorRes, int radius) {
-		int r = AndroidUtils.dpToPx(context, radius);
-		GradientDrawable background = new GradientDrawable();
-		background.setColor(ContextCompat.getColor(context, colorRes));
-		background.setCornerRadius(r);
-		return background;
+	private static void setSpan(@NonNull SpannableString spannable, @NonNull Object styleSpan, @NonNull String text, @NonNull String t) {
+		try {
+			int startIndex = text.indexOf(t);
+			spannable.setSpan(
+					styleSpan,
+					startIndex,
+					startIndex + t.length(),
+					Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+		} catch (RuntimeException e) {
+			LOG.error("Error trying to find index of " + t + " " + e);
+		}
+	}
+
+	public static SpannableString createCustomFontSpannable(@NonNull Typeface typeface, @NonNull String text, @NonNull String... textToStyle) {
+		SpannableString spannable = new SpannableString(text);
+		for (String s : textToStyle) {
+			setSpan(spannable, new CustomTypefaceSpan(typeface), text, s);
+		}
+		return spannable;
 	}
 }

@@ -406,6 +406,9 @@ public class AppInitializer implements IProgress {
 				return null;
 			}
 		});
+		if (app.getSettings().SPEED_CAMERAS_UNINSTALLED.get()) {
+			app.getPoiTypes().excludeSpeedCameraPoiType();
+		}
 	}
 
 	public void onCreateApplication() {

@@ -2108,8 +2108,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SPEAK_SPEED_CAMERA = new BooleanPreference("speak_cameras", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_TUNNELS = new BooleanPreference("speak_tunnels", false).makeProfile().cache();
 
-	public final OsmandPreference<Boolean> SPEED_CAMERAS_UNINSTALLED = new BooleanPreference("speed_cameras_uninstalled", false).makeGlobal().cache();
-	public final OsmandPreference<Boolean> SPEED_CAMERAS_ALERT_SHOWED = new BooleanPreference("speed_cameras_alert_showed", false).makeGlobal().cache();
+	public final OsmandPreference<Boolean> SPEED_CAMERAS_UNINSTALLED = new BooleanPreference("speed_cameras_uninstalled", false).makeGlobal();
+	public final OsmandPreference<Boolean> SPEED_CAMERAS_ALERT_SHOWED = new BooleanPreference("speed_cameras_alert_showed", false).makeGlobal();
 
 	public final OsmandPreference<Boolean> ANNOUNCE_WPT = new BooleanPreference("announce_wpt", true) {
 		@Override
