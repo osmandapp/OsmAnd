@@ -12,7 +12,8 @@
   "phrase": "Calle de las eras 5, Navacerrada",
   "results": [
     "5, Calle de las Eras (Uranización Los Corales), Navacerrada [[6, HOUSE, 0.043, 70.17 km]]",
-    "Calle de las Eras (Uranización Los Corales), Navacerrada [[5, STREET, 0.310, 70.15 km]]"
+    "Calle de las Eras (Uranización Los Corales), Navacerrada [[5, STREET, 0.310, 70.15 km]]",
+	"Calle del Sotillo (Uranización Los Corales), Pasaje de las Eras (Uranización Los Corales), Navacerrada [[5, STREET_INTERSECTION, 0.043, 70.23 km]]"
   ],
   "extra-results": [	
   	"5, Calle Navacerrada (Urb. Las Suertes), Las Suertes [[4, HOUSE, 0.430, 60.50 km]]",
@@ -31,8 +32,7 @@
 	"Calle de las Cruces (Residencial Sanabria), Navacerrada [[4, STREET, 0.310, 70.14 km]]",
 	"Calle de las Escuelas, Navacerrada [[4, STREET, 0.310, 70.17 km]]",
 	"Calle de las Huertas (Residencial Sanabria), Navacerrada [[4, STREET, 0.310, 70.18 km]]",
-	"Calle de la Virgen de las Nieves, Puerto de Navacerrada [[4, STREET, 0.310, 74.59 km]]",
-	"Calle del Sotillo (Uranización Los Corales), Pasaje de las Eras (Uranización Los Corales), Navacerrada [[4, STREET_INTERSECTION, 0.043, 70.23 km]]"
+	"Calle de la Virgen de las Nieves, Puerto de Navacerrada [[4, STREET, 0.310, 74.59 km]]"
   ],
   "amenities": [
     {

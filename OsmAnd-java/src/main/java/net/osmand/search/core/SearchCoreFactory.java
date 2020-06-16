@@ -140,10 +140,16 @@ public class SearchCoreFactory {
 
 		protected void subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api) 
 				throws IOException {
+			subSearchApiOrPublish(phrase, resultMatcher, res, api, true);
+		}
+		
+		protected void subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api,
+				boolean publish) 
+				throws IOException {
 			phrase.countUnknownWordsMatchMainResult(res);
 			boolean firstUnknownWordMatches = res.firstUnknownWordMatches;
 			List<String> leftUnknownSearchWords = new ArrayList<String>(phrase.getUnknownSearchWords());
-			if(res.otherWordsMatch != null) {
+			if (res.otherWordsMatch != null) {
 				leftUnknownSearchWords.removeAll(res.otherWordsMatch);
 			}
 			SearchResult newParentSearchResult = null;
@@ -187,19 +193,23 @@ public class SearchCoreFactory {
 				leftUnknownSearchWords.add(0, phrase.getFirstUnknownSearchWord());
 			}
 			// publish result to set parentSearchResult before search
-			if(newParentSearchResult != null) {
-				SearchResult prev = resultMatcher.setParentSearchResult(newParentSearchResult);
-				resultMatcher.publish(res);
-				resultMatcher.setParentSearchResult(prev);
-			} else {
-				resultMatcher.publish(res);
+			if (publish) {
+				if (newParentSearchResult != null) {
+					SearchResult prev = resultMatcher.setParentSearchResult(newParentSearchResult);
+					resultMatcher.publish(res);
+					resultMatcher.setParentSearchResult(prev);
+				} else {
+					resultMatcher.publish(res);
+				}
 			}
 			if (!leftUnknownSearchWords.isEmpty() && api != null && api.isSearchAvailable(phrase)) {
 				SearchPhrase nphrase = phrase.selectWord(res, leftUnknownSearchWords, phrase.isLastUnknownSearchWordComplete());
-				SearchResult prev = resultMatcher.setParentSearchResult(res);
+				SearchResult prev = resultMatcher.setParentSearchResult(publish ? res : 
+							resultMatcher.getParentSearchResult());
 				api.search(nphrase, resultMatcher);
 				resultMatcher.setParentSearchResult(prev);
 			}
+			
 		}
 
 		@Override
@@ -1103,11 +1113,11 @@ public class SearchCoreFactory {
 					
 					res.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = object.getAllNames(true);
+					boolean pub = true;
 					if (object.getName().startsWith("<")) {
 						// streets related to city
-						continue;
-					}
-					if (phrase.isUnknownSearchWordPresent()
+						pub = false;
+					} else if (phrase.isUnknownSearchWordPresent()
 							&& !(nm.matches(res.localeName) || nm.matches(res.otherNames))) {
 						continue;
 					}
@@ -1119,7 +1129,7 @@ public class SearchCoreFactory {
 					res.priority = SEARCH_STREET_BY_CITY_PRIORITY;
 					//res.priorityDistance = 1;
 					res.objectType = ObjectType.STREET;
-					subSearchApiOrPublish(phrase, resultMatcher, res, streetsAPI);
+					subSearchApiOrPublish(phrase, resultMatcher, res, streetsAPI, pub);
 					if (limit++ > LIMIT) {
 						break;
 					}
@@ -1227,8 +1237,8 @@ public class SearchCoreFactory {
 					res.file = file;
 					res.priority = priority;
 					res.priorityDistance = 0;
-					// TOOO phrase.countUnknownWordsMatchMainResult(res);
 					res.firstUnknownWordMatches = startMatch.matches(res.localeName);
+					// phrase.countUnknownWordsMatchMainResult(res); // same as above
 					res.relatedObject = s;
 					res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.objectType = ObjectType.HOUSE;
@@ -1239,6 +1249,7 @@ public class SearchCoreFactory {
 						res.location = b.getLocation();
 					}
 					res.preferredZoom = 17;
+					
 					resultMatcher.publish(res);
 				}
 				String streetIntersection = phrase.getUnknownWordToSearch();
@@ -1252,7 +1263,6 @@ public class SearchCoreFactory {
 								|| !phrase.isSearchTypeAllowed(ObjectType.STREET_INTERSECTION)) {
 							continue;
 						}
-						// TOOO phrase.countUnknownWordsMatchMainResult(res);
 						res.otherNames = street.getAllNames(true);
 						res.localeName = street.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 						res.object = street;
@@ -1264,6 +1274,7 @@ public class SearchCoreFactory {
 						res.objectType = ObjectType.STREET_INTERSECTION;
 						res.location = street.getLocation();
 						res.preferredZoom = 16;
+						phrase.countUnknownWordsMatchMainResult(res);
 						resultMatcher.publish(res);
 					}
 				}
