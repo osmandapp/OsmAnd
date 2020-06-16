@@ -140,7 +140,7 @@
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Udostępnij położenie używając</string>
     <string name="send_location_sms_pattern">Położenie: %1$s
-%2$s</string>
+\n%2$s</string>
     <string name="send_location_email_pattern">Aby wyświetlić położenie proszę użyć odnośnika %1$s lub odnośnika intent androida %2$s</string>
     <string name="send_location">Wyślij położenie</string>
     <string name="context_menu_item_share_location">Udostępnij położenie</string>
@@ -678,8 +678,7 @@
     <string name="shared_string_name">Nazwa</string>
     <string name="favourites_edit_dialog_category">Kategoria</string>
     <string name="gpx_option_from_start_point">Przejdź wzdłuż całej trasy</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>Online OSM</u> klasyfikacja map z obrazami.</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> klasyfikacja map z obrazami.</string>
     <string name="local_index_routing_data">Dane wyznaczania tras</string>
     <string name="navigate_point_format">Format</string>
     <string name="poi_search_desc">Wyszukiwanie użytecznych miejsc</string>
@@ -961,7 +960,7 @@
     <string name="access_arrival_time">Czas przybycia</string>
     <string name="map_widget_gps_info">Dane GPS</string>
     <string name="layer_hillshade">Cieniowanie rzeźby terenu</string>
-    <string name="osmand_play_title_30_chars">"OsmAnd Mapy i nawigacja "</string>
+    <string name="osmand_play_title_30_chars">OsmAnd Mapy i nawigacja</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ mapy i nawigacja</string>
     <string name="street_name">Nazwa ulicy</string>
     <string name="hno">Numer domu</string>
@@ -1047,7 +1046,7 @@
     <string name="speak_street_names">Nazwy ulic (syntezowane)</string>
     <string name="driving_region_japan">Japonia</string>
     <string name="driving_region_us">Stany Zjednoczone</string>
-    <string name="driving_region_europe_asia">Europa i Azja, Ameryka Łaciński i podobne</string>
+    <string name="driving_region_europe_asia">Europa i Azja, Ameryka Łacińska i podobne</string>
     <string name="driving_region_uk">Wielka Brytania, Indie i inne</string>
     <string name="driving_region_descr">Wybierz region jazdy: USA, Europa, Wielka Brytania, Azja i inne.</string>
     <string name="driving_region">Region ruchu</string>
@@ -1068,8 +1067,8 @@
     <string name="edit_tilesource_minzoom">Minimalne przybliżenie</string>
     <string name="edit_tilesource_choose_existing">Zdefiniowane…</string>
     <string name="maps_define_edit">Zdefiniuj/Edytuj…</string>
-    <string name="edit_tilesource_successfully">Zapisano zasób danych kafelkowych %1$s</string>
-    <string name="edit_tilesource_elliptic_tile">Eliptyczna Merkatora</string>
+    <string name="edit_tilesource_successfully">Zapisano źródło kafelków %1$s</string>
+    <string name="edit_tilesource_elliptic_tile">Eliptyczne odwzorowanie Merkatora</string>
     <string name="route_descr_destination">Cel</string>
     <string name="base_world_map">Mapa podstawowa</string>
     <string name="map_magnifier">Przybliżenie</string>
@@ -1096,7 +1095,7 @@
     <string name="speech_rate_descr">Określ szybkość mowy dla zamiany tekstu na mowę.</string>
     <string name="speech_rate">Szybkość mowy</string>
     <string name="disable_complex_routing_descr">Wyłącza dwuetapowe wyznaczanie trasy dla nawigacji samochodowej.</string>
-    <string name="complex_route_calculation_failed">"Nie udało się szybko wyznaczyć trasę  (%s). Przełączanie na tryb powolny."</string>
+    <string name="complex_route_calculation_failed">Nie udało się szybko wyznaczyć trasy (%s). Przełączanie na tryb powolny.</string>
     <string name="disable_complex_routing">Wyłączenie złożonego wyznaczania trasy</string>
     <string name="guidance_preferences_descr">Ustawienia nawigacji</string>
     <string name="routing_preferences_descr">Ustawienia trasy</string>
@@ -1420,8 +1419,8 @@
     <string name="back_to_map">Powrót do mapy</string>
     <string name="share_note">Udostępnij uwagę</string>
     <string name="location_on_map">Położenie:
- Szer. %1$s
- Dł. %2$s</string>
+\n Szer. %1$s
+\n Dł. %2$s</string>
     <string name="notes">Notatki A/V</string>
     <string name="online_map">Mapa online</string>
     <string name="roads_only">Tylko drogi</string>
@@ -1448,7 +1447,7 @@
     <string name="waypoint_visit_before">Odwiedź wcześniej</string>
     <string name="simulate_your_location">Symulowanie położenia</string>
     <string name="short_location_on_map">Szerokość %1$s
-Długość %2$s</string>
+\nDługość %2$s</string>
     <string name="tips_and_tricks_descr">Wyświetla najczęściej zadawane pytania, ostatnie zmiany i inne.</string>
     <string name="routing_settings_2">Nawigacja</string>
     <string name="general_settings_2">Ogólne</string>
@@ -2182,11 +2181,11 @@ Długość %2$s</string>
     <string name="quick_action_map_underlay_switch">Zmieniono podkład mapy na „%s”.</string>
     <string name="navigate_point_olc">Otwarty kod lokalizacyjny (OLC)</string>
     <string name="navigate_point_olc_info_invalid">Niepoprawny OLC
-</string>
+\n</string>
     <string name="navigate_point_olc_info_short">Krótki OLC
-Podaj pełny kod</string>
+\nPodaj pełny kod</string>
     <string name="navigate_point_olc_info_area">Poprawny pełny OLC
-Reprezentuje obszar: %1$s x %2$s</string>
+\nReprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Przycisk wyświetlający poniższą listę.</string>
     <string name="auto_split_recording_title">Automatyczne dzielenie nagrań po przerwie</string>
     <string name="auto_split_recording_descr">Rozpoczyna nowy segment po 6 min przerwy, nową trasę po 2 h i nowy plik po dłuższej przerwie, jeżeli data ulegnie zmianie.</string>
@@ -2278,17 +2277,18 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_overview">Podsumowanie</string>
     <string name="animate_my_location">Animowanie położenia</string>
     <string name="animate_my_location_desc">Animuje aktualne położenie na mapie podczas nawigacji.</string>
-    <string name="osmand_extended_description_part2">Nawigacja GPS
-\n • Możesz wybrać pomiędzy trybem offline (brak kosztów roamingu za granicą) lub online (szybciej)
-\n • Podpowiedzi głosowe zakręt-za-zakrętem poprowadzą cię do celu (nagrane lub syntetyzowane głosy)
-\n • Ponowne wyznaczanie trasy po zboczeniu z niej
-\n • Informacje o pasach, nazwach ulic i przybliżonym czasie przybycia pomogą ci w trasie
-\n • Aby zwiększyć twoje bezpieczeństwo, motyw dzienny/nocny przełącza się automatycznie
-\n • Możesz skonfigurować wyświetlanie limitów prędkości i ostrzeżeń o jej przekroczeniu
-\n • Mapa skaluje się do twojej prędkości
-\n • Możesz wyszukiwać miejsca według adresu, typu (np. Parking, restauracja, hotel, stacja benzynowa, muzeum) lub współrzędnych geograficznych
-\n • Wsparcie dla celów pośrednich trasy
-\n • Możesz zarejestrować lub wysłać trasę GPX i podążać za nią</string>
+    <string name="osmand_extended_description_part2">Nawigacja GPS 
+\n • Możesz wybrać pomiędzy trybem offline (brak kosztów roamingu za granicą) lub online (szybciej) 
+\n • Podpowiedzi głosowe zakręt-za-zakrętem poprowadzą cię do celu (nagrane lub syntetyzowane głosy) 
+\n • Ponowne wyznaczanie trasy po zboczeniu z niej 
+\n • Informacje o pasach, nazwach ulic i przybliżonym czasie przybycia pomogą ci w trasie 
+\n • Aby zwiększyć twoje bezpieczeństwo, motyw dzienny/nocny przełącza się automatycznie 
+\n • Możesz skonfigurować wyświetlanie limitów prędkości i ostrzeżeń o jej przekroczeniu 
+\n • Mapa skaluje się do twojej prędkości 
+\n • Możesz wyszukiwać miejsca według adresu, typu (np. Parking, restauracja, hotel, stacja benzynowa, muzeum) lub współrzędnych geograficznych 
+\n • Wsparcie dla celów pośrednich trasy 
+\n • Możesz zarejestrować lub wysłać trasę GPX i podążać za nią
+\n</string>
     <string name="favorite_group_name">Nazwa grupy</string>
     <string name="change_color">Zmień kolor</string>
     <string name="edit_name">Zmień nazwę</string>
@@ -2362,7 +2362,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="store_tracks_in_monthly_directories">Rejestrowanie śladów do miesięcznych katalogów</string>
     <string name="store_tracks_in_monthly_directories_descrp">Przechowuje zarejestrowane ślady w podkatalogach odpowiadającym miesiącom (np. 2018-01).</string>
     <string name="shared_string_reset">Resetuj</string>
-    <string name="mapillary_menu_descr_tile_cache">"Ponowne wczytanie kafelków uaktualni  je."</string>
+    <string name="mapillary_menu_descr_tile_cache">Wczytaj ponownie kafelki, aby zobaczyć aktualne dane.</string>
     <string name="average">Średnia</string>
     <string name="of">%1$d z %2$d</string>
     <string name="ascent_descent">Podjazd/zjazd</string>
@@ -2482,7 +2482,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="waypoints_added_to_map_markers">Dodano punkty pośrednie do znaczników mapy</string>
     <string name="shared_string_gpx_waypoints">Punkty śladu</string>
     <string name="favourites_group">Kategoria ulubionych</string>
-    <string name="add_group">"Dodaj grupę "</string>
+    <string name="add_group">Dodaj grupę</string>
     <string name="add_group_descr">Importuj grupy z Ulubionych lub punkty trasy GPX.</string>
     <string name="empty_state_markers_active">Utwórz znaczniki na mapie!</string>
     <string name="empty_state_markers_active_desc">Proszę dotknąć \"Miejsca\" a następnie przycisk znacznika opatrzony flagą.</string>
@@ -2491,7 +2491,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Wyświetla na mapie linię łączącą aktualne położenie z położeniem aktywnego znacznika.</string>
     <string name="show_arrows_descr">Wyświetla na mapie jedną lub dwie strzałki wskazujące kierunek do aktywnych znaczników.</string>
     <string name="distance_indication_descr">Wybiera sposób wyświetlania odległości od aktywnego znacznika.</string>
-    <string name="active_markers_descr">Określ liczbę wskaźników kierunku:</string>
+    <string name="active_markers_descr">Określ liczbę wskaźników kierunku.</string>
     <string name="looking_for_tracks_with_waypoints">Wyszukiwanie tras z punktami</string>
     <string name="shared_string_more_without_dots">Więcej</string>
     <string name="appearance_on_the_map">Wygląd na mapie</string>
@@ -2762,8 +2762,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n• Inne poprawki błędów
 \n</string>
     <string name="increase_search_radius_to">Zwiększ promień wyszukiwania do %1$s</string>
-    <string name="send_search_query_description">Zostaną wysłane informacje o zapytaniu: „%1$s” i położeniu.
-        \nInformacje osobiste nie są gromadzone, dane wyszukiwania są używane tylko do poprawienia algorytmu wyszukiwania.</string>
+    <string name="send_search_query_description">Twoje zapytanie wraz z położeniem będzie wysłane do: „%1$s”. 
+\n
+\n Informacje osobiste nie są gromadzone, dane wyszukiwania są używane tylko do poprawienia algorytmu wyszukiwania.</string>
     <string name="search_no_results_description">Brak wyników?
 \nPowiedz nam o tym.</string>
     <string name="send_search_query">Wysłać zapytanie?</string>
@@ -3613,7 +3614,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_octagon">Ośmiokąt</string>
     <string name="app_mode_ski_touring">Turystyka narciarska</string>
     <string name="app_mode_ski_snowmobile">Skuter śnieżny</string>
-    <string name="replace_point_descr">Zastąp tym inny punkt</string>
+    <string name="replace_point_descr">Zastąp tym inny punkt.</string>
     <string name="custom_osmand_plugin">Niestandardowa wtyczka OsmAnd</string>
     <string name="changes_applied_to_profile">Zmiany zastosowano do profilu \"%1$s\".</string>
     <string name="settings_item_read_error">Nie udało się odczytać z \"%1$s\".</string>
@@ -3643,7 +3644,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="wiki_menu_download_descr">Potrzebne są dodatkowe mapy, żeby przeglądać UM Wikipedii na mapie.</string>
     <string name="some_articles_may_not_available_in_lang">Pewne artykuły Wikipedii mogą być nie dostępne w wybranym języku.</string>
     <string name="custom_color">Dostosowany kolor</string>
-    <string name="select_wikipedia_article_langs">Wybierz języki, w których będą pojawiać się artykuły z Wikipedii na mapie. Możesz przełączać się pomiędzy dostępnymi językami podczas czytania artykułu.</string>
+    <string name="select_wikipedia_article_langs">Wybierz języki, w których na mapie będą pojawiać się artykuły z Wikipedii. Możesz przełączać się pomiędzy dostępnymi językami podczas czytania artykułu.</string>
     <string name="lang_zhyue">Kantoński</string>
     <string name="lang_uz">Uzbecki</string>
     <string name="lang_ur">Urdu</string>
@@ -3679,7 +3680,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types">Szukaj typów użytecznych miejsc</string>
     <string name="search_poi_types_descr">Łącz typy użytecznych zmian z różnych kategorii. Stuknij \"Zmień\", aby zaznaczyć wszystko, stuknij lewą stronę, aby wybrać kategorię.</string>
-    <string name="legend_item_description">Przewodnik po symbolach mapy</string>
+    <string name="legend_item_description">Przewodnik po symbolach mapy.</string>
     <string name="navigation_profiles_item">Profile nawigacji</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Szybka czynność</string>
@@ -3734,27 +3735,27 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="turn_screen_on_proximity_sensor">Czujnik zbliżeniowy</string>
     <string name="keep_screen_on">Nie wyłączaj ekranu</string>
     <string name="keep_screen_off">Nie włączaj ekranu</string>
-    <string name="pseudo_mercator_projection">Projekcja Pseudo-Mercator</string>
+    <string name="pseudo_mercator_projection">Zmodyfikowane odwzorowanie Merkatora</string>
     <string name="one_image_per_tile">Jeden plik obrazu na kafelek</string>
     <string name="sqlite_db_file">Plik SQLiteDB</string>
     <string name="online_map_name_helper_text">Podaj nazwę źródła mapy online.</string>
     <string name="online_map_url_helper_text">Wpisz lub wklej URL dla źródła online.</string>
     <string name="edit_online_source">Edytuj źródło online</string>
     <string name="expire_time">Czas wygaśnięcia</string>
-    <string name="mercator_projection">Projekcja Mercatora</string>
+    <string name="mercator_projection">Odwzorowanie Merkatora</string>
     <string name="storage_format">Format pamięci masowej</string>
-    <string name="map_source_zoom_levels">Wybierz minimalny i maksymalny poziom powiększenia na którym mapy online będą wyświetlane lub wczytywane.</string>
+    <string name="map_source_zoom_levels">Wybierz minimalny i maksymalne powiększenie, przy którym mapy online będą wyświetlane lub wczytywane.</string>
     <string name="map_source_zoom_levels_descr">Te parametry wpłyną na wyświetlanie, gdy są używane jako mapa lub nakładka/podkład.
 \n
 \n%1$s: Mapa będzie ograniczona do wybranych powiększeń. 
 \n
 \n%2$s: Poziomy powiększenia na których początkowe kafelki będą widoczne. Skalowanie w dół lub w górę nastąpi niezależnie od tych wartości.</string>
-    <string name="expire_time_descr">Czas wygaśnięcia w minutach. Buforowane kafelki zostaną ponownie załadowane po określonym czasie. Pozostaw to pole puste, aby nigdy nie odświeżać kafelków dla tego źródła. 
-\n
-\nJeden dzień to 1440 minut.
-\nJeden tydzień to 10 080 minut.
+    <string name="expire_time_descr">Buforowane kafelki zostaną ponownie pobrane po określonej liczbie minut. Pozostaw to pole puste, aby nigdy nie odświeżać kafelków dla tego źródła. 
+\n 
+\nJeden dzień to 1440 minut. 
+\nJeden tydzień to 10 080 minut. 
 \nJeden miesiąc to 43 829 minut.</string>
-    <string name="tiles_storage_descr">Wybierz jak będą gromadzone pobrane kafelki.</string>
+    <string name="tiles_storage_descr">Wybierz, jak będą przechowywane pobrane kafelki.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Możesz importować lub eksportować szybkie czynności z profilami aplikacji.</string>
     <string name="shared_string_delete_all_q">Usunąć wszystko\?</string>
     <string name="delete_all_actions_message_q">Czy na pewno chcesz nieodwracalnie usunąć szybkie akcje %d\?</string>
@@ -3766,4 +3767,11 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="details_dialog_decr">Kontroluj widoczność dodatkowych szczegółów na mapie</string>
     <string name="shared_string_night_map">Mapa nocna</string>
     <string name="shared_string_all_time">Cały czas</string>
+    <string name="vessel_height_warning">Możesz ustawić wysokość statku, aby unikać niskich mostów. Uwaga: dla mostów zwodzonych liczymy wysokość podniesionego mostu.</string>
+    <string name="vessel_height_limit_description">Ustaw wysokość statku, by unikać niskich mostów. Uwaga: dla mostów zwodzonych liczymy wysokość podniesionego mostu.</string>
+    <string name="vessel_height_warning_link">Ustaw wysokość statku</string>
+    <string name="vessel_width_limit_description">Ustaw szerokość statku, by unikać wąskich mostów</string>
+    <string name="quick_action_showhide_mapillary_title">Pokaż/ukryj Mapillary</string>
+    <string name="quick_action_mapillary_hide">Ukryj Mapillary</string>
+    <string name="quick_action_mapillary_show">Pokaż Mapillary</string>
 </resources>
