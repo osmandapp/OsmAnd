@@ -581,12 +581,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return (Math.abs(objx - ex) <= radius * TOUCH_RADIUS_MULTIPLIER && Math.abs(objy - ey) <= radius * TOUCH_RADIUS_MULTIPLIER);
-//		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
+		return (Math.abs(objx - ex) <= radius && Math.abs(objy - ey) <= radius);
+
 	}
 
 	public void getWptFromPoint(RotatedTileBox tb, PointF point, List<? super WptPt> res) {
-		int r = getScaledTouchRadius(view.getApplication(), getDefaultRadiusPoi(tb));
+		int r = (int) getScaledTouchRadius(view.getApplication(), getDefaultRadiusPoi(tb)) * TOUCH_RADIUS_MULTIPLIER;
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		List<SelectedGpxFile> selectedGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
@@ -641,10 +641,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				int mpx = px;
 				int mpy = py;
 				int mcross = cross;
-				while (Math.abs(mpx - ppx) > r || Math.abs(mpx - ppx) > r) {
+				while (Math.abs(mpx - ppx) > r || Math.abs(mpy - ppy) > r) {
 					int mpxnew = mpx / 2 + ppx / 2;
 					int mpynew = mpy / 2 + ppy / 2;
-					int mcrossnew = placeInBbox(mpx, mpy, mx, my, r, r);
+					int mcrossnew = placeInBbox(mpxnew, mpynew, mx, my, r, r);
 					if (mcrossnew == 0) {
 						return true;
 					}
