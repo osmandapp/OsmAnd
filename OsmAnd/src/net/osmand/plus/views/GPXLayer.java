@@ -614,7 +614,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			boolean track = false;
 			List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 			for (TrkSegment segment : segments) {
-				track |= track(tb, segment.points, (int) (r * TOUCH_RADIUS_MULTIPLIER), mx, my);
+				track |= track(tb, segment.points, (int) r, mx, my);
 			}
 			if (track) {
 				res.add(selectedGpxFile);
