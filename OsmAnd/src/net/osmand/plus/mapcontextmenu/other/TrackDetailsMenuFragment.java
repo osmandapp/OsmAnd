@@ -91,14 +91,13 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 			});
 		}
 
-		updateInfo();
+		updateInfo(false);
 
 		ViewTreeObserver vto = mainView.getViewTreeObserver();
 		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
 			@Override
 			public void onGlobalLayout() {
-
 				ViewTreeObserver obs = mainView.getViewTreeObserver();
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 					obs.removeOnGlobalLayoutListener(this);
@@ -106,7 +105,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 					obs.removeGlobalOnLayoutListener(this);
 				}
 				if (getMapActivity() != null) {
-					updateInfo();
+					updateInfo(false);
 				}
 			}
 		});
@@ -165,7 +164,11 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public void updateInfo() {
-		menu.updateInfo(mainView);
+		updateInfo(true);
+	}
+
+	public void updateInfo(boolean forceFitTrackOnMap) {
+		menu.updateInfo(mainView, forceFitTrackOnMap);
 		applyDayNightMode();
 	}
 

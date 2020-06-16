@@ -37,7 +37,6 @@ public class SelectedGpxMenuController extends MenuController {
 			public void buttonPressed() {
 				Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
 				intent.putExtra(TrackActivity.TRACK_FILE_NAME, item.getGpxFile().path);
-				intent.putExtra(TrackActivity.OPEN_TRACKS_LIST, true);
 				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(intent);
 			}
