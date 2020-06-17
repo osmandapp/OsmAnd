@@ -957,6 +957,24 @@ public class GPXUtilities {
 		return ls;
 	}
 
+	public static QuadRect calculateBounds(List<WptPt> pts) {
+		QuadRect trackBounds = new QuadRect(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY,
+				Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+		updateBounds(trackBounds, pts, 0);
+
+		return trackBounds;
+	}
+
+	public static void updateBounds(QuadRect trackBounds, List<WptPt> pts, int startIndex) {
+		for (int i = startIndex; i < pts.size(); i++) {
+			WptPt pt = pts.get(i);
+			trackBounds.right = Math.max(trackBounds.right, pt.lon);
+			trackBounds.left = Math.min(trackBounds.left, pt.lon);
+			trackBounds.top = Math.max(trackBounds.top, pt.lat);
+			trackBounds.bottom = Math.min(trackBounds.bottom, pt.lat);
+		}
+	}
+
 	public static class GPXFile extends GPXExtensions {
 		public String author;
 		public Metadata metadata;
