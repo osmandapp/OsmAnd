@@ -3777,4 +3777,8 @@
     <string name="vessel_height_warning">您可以設定船艦高度以避免矮橋。請記住，如果橋是可動式的，我們將會使用其在開啟狀態的高度。</string>
     <string name="vessel_height_limit_description">設定船艦高度以避免矮橋。請記住，如果橋是可動式的，我們將會使用其開啟狀態的高度。</string>
     <string name="vessel_width_limit_description">設定船艦寬度以避免窄橋</string>
+    <string name="quick_action_showhide_mapillary_title">顯示／隱藏 Mapillary</string>
+    <string name="quick_action_mapillary_hide">隱藏 Mapillary</string>
+    <string name="quick_action_mapillary_show">顯示 Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">在地圖上顯示或隱藏 Mapillary 圖層的開關。</string>
 </resources>
