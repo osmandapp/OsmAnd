@@ -541,6 +541,44 @@ public class RouteDataObject {
 		}
 	}
 
+	// TODO implement
+	public void processDirectionalTags() {
+		if (pointTypes != null) {
+			for (int i = 0; i < pointTypes.length; i++) {
+				if (pointTypes[i] != null) {
+					int[] pTypes = pointTypes[i];
+					int pSz = pTypes.length;
+					if (pSz > 0) {
+						for (int j = 0; j < pSz; j++) {
+							RouteTypeRule r = region.quickGetEncodingRule(pTypes[j]);
+							if (r != null && r.directional()) {
+//								int vl = r.conditionalValue(conditionalTime);
+//								if (vl != 0) {
+//									RouteTypeRule rtr = region.quickGetEncodingRule(vl);
+//									String nonCondTag = rtr.getTag();
+//									int ks;
+//									for (ks = 0; ks < pointTypes[i].length; ks++) {
+//										RouteTypeRule toReplace = region.quickGetEncodingRule(pointTypes[i][j]);
+//										if (toReplace != null && toReplace.getTag().contentEquals(nonCondTag)) {
+//											break;
+//										}
+//									}
+//									if (ks == pTypes.length) {
+//										int[] ntypes = new int[pTypes.length + 1];
+//										System.arraycopy(pTypes, 0, ntypes, 0, pTypes.length);
+//										pTypes = ntypes;
+//									}
+//									pTypes[ks] = vl;
+//								}
+							}
+						}
+					}
+					pointTypes[i] = pTypes;
+				}
+			}
+		}
+	}
+	
 	public float getMaximumSpeed(boolean direction) {
 		int sz = types.length;
 		float maxSpeed = 0;
@@ -1054,6 +1092,4 @@ public class RouteDataObject {
 		}
 		restrictionsVia[k] = viaWay;
 	}
-
-
 }

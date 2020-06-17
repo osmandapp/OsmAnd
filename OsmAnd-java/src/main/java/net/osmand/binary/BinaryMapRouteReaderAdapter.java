@@ -73,6 +73,7 @@ public class BinaryMapRouteReaderAdapter {
 		private float floatValue;
 		private int type;
 		private List<RouteTypeCondition> conditions = null;
+		private TIntObjectHashMap<Integer> directions = null;
 		private int forward;
 
 		public RouteTypeRule() {
@@ -165,6 +166,10 @@ public class BinaryMapRouteReaderAdapter {
 			return conditions != null;
 		}
 		
+		public boolean directional() {
+			return directions != null;
+		}
+		
 		public String getNonConditionalTag() {
 			String tag = getTag();
 			if(tag != null && tag.endsWith(":conditional")) {
@@ -172,7 +177,12 @@ public class BinaryMapRouteReaderAdapter {
 			}
 			return tag;
 		}
-
+		
+		//TODO implement
+		public String getNonDirectionalTag() {
+			return null;
+		}
+		
 		public int onewayDirection(){
 			if(type == ONEWAY){
 				return intValue;
@@ -286,7 +296,12 @@ public class BinaryMapRouteReaderAdapter {
 				if (i > 0) {
 					intValue = Integer.parseInt(v.substring(0, i));
 				}
+			} else if (t.endsWith("direction") && v!=null) {
+				type = TRAFFIC_SIGNALS;
+				directions = new TIntObjectHashMap<Integer>();
+				
 			}
+			
 		}
 	}
 
@@ -344,6 +359,7 @@ public class BinaryMapRouteReaderAdapter {
 			while (routeEncodingRules.size() <= id) {
 				routeEncodingRules.add(null);
 			}
+			/**TODO delete*/ System.out.println(String.format("initRouteIncodingRule=> id: %d, tag: %s, val: %s", id, tags, val));
 			routeEncodingRules.set(id, new RouteTypeRule(tags, val));
 			if (tags.equals("name")) {
 				nameTypeRule = id;

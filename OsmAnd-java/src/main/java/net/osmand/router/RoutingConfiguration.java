@@ -47,7 +47,7 @@ public class RoutingConfiguration {
 	public float recalculateDistance = 20000f;
 	
 	// 1.6 Time to calculate all access restrictions based on conditions
-	public long routeCalculationTime = 0;
+	public long routeCalculationTime = 1592317409;//0;
 	
 	public static class Builder {
 		// Design time storage
