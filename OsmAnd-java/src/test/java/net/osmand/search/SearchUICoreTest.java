@@ -114,21 +114,24 @@ public class SearchUICoreTest {
 			}
 		}
 		JSONObject settingsJson = sourceJson.getJSONObject("settings");
+		BinaryMapIndexReader reader = null;
+		boolean useData = settingsJson.optBoolean("useData", true);
+		if (useData) {
+			boolean obfZipFileExists = obfZipFile.exists();
+			if (!obfZipFileExists) {
+				System.out.println(String.format("Could not find obf file: %s", obfZipFile.getPath()));
+				return;
+			}
+			//Assert.assertTrue(obfZipFileExists);
 
-		boolean obfZipFileExists = obfZipFile.exists();
-		if (!obfZipFileExists) {
-			System.out.println(String.format("Could not find obf file: %s", obfZipFile.getPath()));
-			return;
+			GZIPInputStream gzin = new GZIPInputStream(new FileInputStream(obfZipFile));
+			FileOutputStream fous = new FileOutputStream(obfFile);
+			Algorithms.streamCopy(gzin, fous);
+			fous.close();
+			gzin.close();
+
+			reader = new BinaryMapIndexReader(new RandomAccessFile(obfFile.getPath(), "r"), obfFile);
 		}
-		//Assert.assertTrue(obfZipFileExists);
-
-		GZIPInputStream gzin = new GZIPInputStream(new FileInputStream(obfZipFile));
-		FileOutputStream fous = new FileOutputStream(obfFile);
-		Algorithms.streamCopy(gzin, fous);
-		fous.close();
-		gzin.close();
-
-		BinaryMapIndexReader reader = new BinaryMapIndexReader(new RandomAccessFile(obfFile.getPath(), "r"), obfFile);
 		List<List<String>> results = new ArrayList<>();
 		for (int i = 0; i < phrases.size(); i++) {
 			results.add(new ArrayList<String>());
@@ -146,7 +149,9 @@ public class SearchUICoreTest {
 		}
 
 		SearchSettings s = SearchSettings.parseJSON(settingsJson);
-		s.setOfflineIndexes(Collections.singletonList(reader));
+		if (reader != null) {
+			s.setOfflineIndexes(Collections.singletonList(reader));
+		}
 
 		final SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
 		core.init();
