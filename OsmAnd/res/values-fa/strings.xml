@@ -3815,4 +3815,8 @@
     <string name="vessel_height_warning">می‌توانید ارتفاع کشتی را برای پرهیز از پل‌های کوتاه وارد کنید. به یاد داشته باشید که اگر پل متحرک است، در حالت باز نیز ارتفاع کشتی را در نظر می‌گیریم.</string>
     <string name="vessel_height_limit_description">ارتفاع کشتی را برای پرهیز از پل‌های کوتاه وارد کنید. به یاد داشته باشید که اگر پل متحرک است، در حالت باز نیز ارتفاع کشتی را در نظر می‌گیریم.</string>
     <string name="vessel_width_limit_description">عرض کشتی را برای پرهیز از پل های باریک وارد کنید</string>
+    <string name="quick_action_showhide_mapillary_title">آشکار/پنهان کردن مپیلاری</string>
+    <string name="quick_action_mapillary_show">آشکارکردن مپیلاری</string>
+    <string name="quick_action_mapillary_hide">پنهان‌کردن مپیلاری</string>
+    <string name="quick_action_showhide_mapillary_descr">دکمه‌ای برای آشکار/پنهان کردن لایهٔ مپیلاری روی نقشه.</string>
 </resources>
