@@ -397,9 +397,6 @@ public class SearchCoreFactory {
 					int limit = 0;
 					@Override
 					public boolean publish(MapObject object) {
-						if (phrase.getSettings().isExportObjects()) {
-							resultMatcher.exportObject(phrase, object);
-						}
 						if (isCancelled()) {
 							return false;
 						}
@@ -492,6 +489,23 @@ public class SearchCoreFactory {
 								resultMatcher.isCancelled();
 					}
 				};
+
+				ResultMatcher<MapObject> rawDataCollector = null;
+				if (phrase.getSettings().isExportObjects()) {
+					rawDataCollector = new ResultMatcher<MapObject>() {
+						@Override
+						public boolean publish(MapObject object) {
+							resultMatcher.exportObject(phrase, object);
+							return true;
+						}
+
+						@Override
+						public boolean isCancelled() {
+							return false;
+						}
+					};
+				}
+
 				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5,
 						SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
@@ -499,7 +513,7 @@ public class SearchCoreFactory {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
 					immediateResults.clear();
-					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, wordToSearch.toLowerCase(),
+					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 							phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
 									: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 					if (locSpecified) {
@@ -549,6 +563,22 @@ public class SearchCoreFactory {
 			final NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
 			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
 			final Set<String> ids = new HashSet<String>();
+
+			ResultMatcher<Amenity> rawDataCollector = null;
+			if (phrase.getSettings().isExportObjects()) {
+				rawDataCollector = new ResultMatcher<Amenity>() {
+					@Override
+					public boolean publish(Amenity object) {
+						resultMatcher.exportObject(phrase, object);
+						return true;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				};
+			}
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest((int) bbox.centerX(),
 					(int) bbox.centerY(), searchWord, (int) bbox.left, (int) bbox.right, (int) bbox.top,
 					(int) bbox.bottom, new ResultMatcher<Amenity>() {
@@ -556,9 +586,6 @@ public class SearchCoreFactory {
 
 						@Override
 						public boolean publish(Amenity object) {
-							if (phrase.getSettings().isExportObjects()) {
-								resultMatcher.exportObject(phrase, object);
-							}
 							if (limit++ > LIMIT) {
 								return false;
 							}
@@ -598,7 +625,7 @@ public class SearchCoreFactory {
 						public boolean isCancelled() {
 							return resultMatcher.isCancelled() && (limit < LIMIT);
 						}
-					});
+					}, rawDataCollector);
 
 			while (offlineIterator.hasNext()) {
 				BinaryMapIndexReader r = offlineIterator.next();

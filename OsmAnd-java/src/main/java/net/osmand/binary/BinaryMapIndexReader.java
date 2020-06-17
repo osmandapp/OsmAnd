@@ -1457,8 +1457,14 @@ public class BinaryMapIndexReader {
 
 	public static <T> SearchRequest<T> buildAddressByNameRequest(ResultMatcher<T> resultMatcher, String nameRequest, 
 			StringMatcherMode matcherMode) {
+		return buildAddressByNameRequest(resultMatcher, null, nameRequest, matcherMode);
+	}
+
+	public static <T> SearchRequest<T> buildAddressByNameRequest(ResultMatcher<T> resultMatcher, ResultMatcher<T> rawDataCollector, String nameRequest,
+			StringMatcherMode matcherMode) {
 		SearchRequest<T> request = new SearchRequest<T>();
 		request.resultMatcher = resultMatcher;
+		request.rawDataCollector = rawDataCollector;
 		request.nameQuery = nameRequest.trim();
 		request.matcherMode = matcherMode;
 		return request;
@@ -1542,6 +1548,10 @@ public class BinaryMapIndexReader {
 
 
 	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, int sleft, int sright, int stop, int sbottom, ResultMatcher<Amenity> resultMatcher) {
+		return buildSearchPoiRequest(x, y, nameFilter, sleft, sright, stop, sbottom, resultMatcher, null);
+	}
+
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, int sleft, int sright, int stop, int sbottom, ResultMatcher<Amenity> resultMatcher, ResultMatcher<Amenity> rawDataCollector) {
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.x = x;
 		request.y = y;
@@ -1550,6 +1560,7 @@ public class BinaryMapIndexReader {
 		request.top = stop;
 		request.bottom = sbottom;
 		request.resultMatcher = resultMatcher;
+		request.rawDataCollector = rawDataCollector;
 		request.nameQuery = nameFilter.trim();
 		return request;
 	}
@@ -1634,6 +1645,7 @@ public class BinaryMapIndexReader {
 		private boolean ocean = false;
 
 		private ResultMatcher<T> resultMatcher;
+		private ResultMatcher<T> rawDataCollector;
 
 		// 31 zoom tiles
 		// common variables
@@ -1709,6 +1721,12 @@ public class BinaryMapIndexReader {
 				return true;
 			}
 			return false;
+		}
+
+		public void collectRawData(T obj) {
+			if (rawDataCollector != null) {
+				rawDataCollector.publish(obj);
+			}
 		}
 
 		protected void publishOceanTile(boolean ocean) {
