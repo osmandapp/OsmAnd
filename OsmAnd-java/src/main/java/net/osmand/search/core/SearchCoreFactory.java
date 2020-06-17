@@ -203,7 +203,9 @@ public class SearchCoreFactory {
 				}
 			}
 			if (!leftUnknownSearchWords.isEmpty() && api != null && api.isSearchAvailable(phrase)) {
-				SearchPhrase nphrase = phrase.selectWord(res, leftUnknownSearchWords, phrase.isLastUnknownSearchWordComplete());
+				SearchPhrase nphrase = phrase.selectWord(res, leftUnknownSearchWords, 
+						phrase.isLastUnknownSearchWordComplete() || 
+						!leftUnknownSearchWords.contains(phrase.getLastUnknownSearchWord()));
 				SearchResult prev = resultMatcher.setParentSearchResult(publish ? res : 
 							resultMatcher.getParentSearchResult());
 				api.search(nphrase, resultMatcher);
