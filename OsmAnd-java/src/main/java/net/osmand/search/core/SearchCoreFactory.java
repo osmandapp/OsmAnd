@@ -1036,6 +1036,8 @@ public class SearchCoreFactory {
 								res.localeName += " " + ref;
 							}
 						}
+					} else {
+						phrase.countUnknownWordsMatch(res, "", null, countExtraWords);
 					}
 
 					res.object = object;
