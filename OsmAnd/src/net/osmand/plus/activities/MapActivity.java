@@ -673,6 +673,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		if (trackDetailsMenu.isVisible()) {
 			trackDetailsMenu.hide(true);
+			if (mapContextMenu.isActive() && mapContextMenu.getPointDescription() != null
+					&& mapContextMenu.getPointDescription().isGpxPoint()) {
+				mapContextMenu.show();
+				return;
+			}
 			if (prevActivityIntent == null) {
 				return;
 			}
