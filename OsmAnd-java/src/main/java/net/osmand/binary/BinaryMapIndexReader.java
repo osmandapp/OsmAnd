@@ -496,7 +496,7 @@ public class BinaryMapIndexReader {
 			}
 		}
 		Iterator<Entry<TransportIndex, TIntArrayList>> it = groupPoints.entrySet().iterator();
-		if (it.hasNext()) {
+		while (it.hasNext()) {
 			Entry<TransportIndex, TIntArrayList> e = it.next();
 			TransportIndex ind = e.getKey();
 			TIntArrayList pointers = e.getValue();
