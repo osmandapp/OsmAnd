@@ -1,5 +1,7 @@
 package net.osmand.plus.mapsource;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -11,11 +13,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.slider.Slider;
+import com.google.android.material.slider.RangeSlider;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -39,6 +42,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final String MAX_ZOOM_KEY = "max_zoom_key";
 	private static final String SLIDER_DESCR_RES_KEY = "slider_descr_key";
 	private static final String DIALOG_DESCR_RES_KEY = "dialog_descr_key";
+	private static final String NEW_MAP_SOURCE = "new_map_source";
 	private static final int SLIDER_FROM = 1;
 	private static final int SLIDER_TO = 22;
 	@StringRes
@@ -47,19 +51,22 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	private int dialogDescrRes;
 	private int minZoom;
 	private int maxZoom;
+	private boolean newMapSource;
 
 	public static void showInstance(@NonNull FragmentManager fm,
 									@Nullable Fragment targetFragment,
 									int sliderDescr,
 									int dialogDescr,
 									int minZoom,
-									int maxZoom) {
+									int maxZoom,
+									boolean newMapSource) {
 		InputZoomLevelsBottomSheet bottomSheet = new InputZoomLevelsBottomSheet();
 		bottomSheet.setTargetFragment(targetFragment, 0);
 		bottomSheet.setSliderDescrRes(sliderDescr);
 		bottomSheet.setDialogDescrRes(dialogDescr);
 		bottomSheet.setMinZoom(Math.max(minZoom, SLIDER_FROM));
 		bottomSheet.setMaxZoom(Math.min(maxZoom, SLIDER_TO));
+		bottomSheet.setNewMapSource(newMapSource);
 		bottomSheet.show(fm, TAG);
 	}
 
@@ -71,8 +78,9 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			maxZoom = savedInstanceState.getInt(MAX_ZOOM_KEY);
 			dialogDescrRes = savedInstanceState.getInt(DIALOG_DESCR_RES_KEY);
 			sliderDescrRes = savedInstanceState.getInt(SLIDER_DESCR_RES_KEY);
+			newMapSource = savedInstanceState.getBoolean(NEW_MAP_SOURCE);
 		}
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getMaterialInflater(app, nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.shared_string_zoom_levels));
 		items.add(titleItem);
 		final View sliderView = inflater.inflate(R.layout.zoom_levels_with_descr, null);
@@ -90,16 +98,16 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		minZoomValue.setText(String.valueOf(minZoom));
 		final TextView maxZoomValue = sliderView.findViewById(R.id.zoom_value_max);
 		maxZoomValue.setText(String.valueOf(maxZoom));
-		Slider slider = sliderView.findViewById(R.id.zoom_slider);
+		RangeSlider slider = sliderView.findViewById(R.id.zoom_slider);
 		int colorProfileRes = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
 		int colorProfile = ContextCompat.getColor(app, colorProfileRes);
 		UiUtilities.setupSlider(slider, nightMode, colorProfile, true);
 		slider.setValueFrom(SLIDER_FROM);
 		slider.setValueTo(SLIDER_TO);
 		slider.setValues((float) minZoom, (float) maxZoom);
-		slider.addOnChangeListener(new Slider.OnChangeListener() {
+		slider.addOnChangeListener(new RangeSlider.OnChangeListener() {
 			@Override
-			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+			public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
 				List<Float> values = slider.getValues();
 				if (values.size() > 0) {
 					minZoomValue.setText(String.valueOf(values.get(0).intValue()));
@@ -107,14 +115,13 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 				}
 			}
 		});
-		slider.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+		slider.addOnSliderTouchListener(new RangeSlider.OnSliderTouchListener() {
 			@Override
-			public void onStartTrackingTouch(@NonNull Slider slider) {
-
+			public void onStartTrackingTouch(@NonNull RangeSlider slider) {
 			}
 
 			@Override
-			public void onStopTrackingTouch(@NonNull Slider slider) {
+			public void onStopTrackingTouch(@NonNull RangeSlider slider) {
 				List<Float> values = slider.getValues();
 				if (values.size() > 0) {
 					minZoom = values.get(0).intValue();
@@ -134,16 +141,17 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putInt(MAX_ZOOM_KEY, maxZoom);
 		outState.putInt(SLIDER_DESCR_RES_KEY, sliderDescrRes);
 		outState.putInt(DIALOG_DESCR_RES_KEY, dialogDescrRes);
+		outState.putBoolean(NEW_MAP_SOURCE, newMapSource);
 		super.onSaveInstanceState(outState);
 	}
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnZoomSetListener) {
-			((OnZoomSetListener) fragment).onZoomSet(minZoom, maxZoom);
+		if (!newMapSource) {
+			showClearTilesWarningDialog();
+		} else {
+			applySelectedZooms();
 		}
-		dismiss();
 	}
 
 	@Override
@@ -154,6 +162,46 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	protected int getRightBottomButtonTextId() {
 		return R.string.shared_string_apply;
+	}
+
+	private void showClearTilesWarningDialog() {
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
+		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
+		dismissDialog.setTitle(getString(R.string.osmand_parking_warning));
+		dismissDialog.setMessage(getString(R.string.clear_tiles_warning));
+		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
+		dismissDialog.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				applySelectedZooms();
+			}
+		});
+		dismissDialog.show();
+	}
+
+	private void applySelectedZooms() {
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof OnZoomSetListener) {
+			((OnZoomSetListener) fragment).onZoomSet(minZoom, maxZoom);
+		}
+		dismiss();
+	}
+
+	private SpannableString createSpannableString(@NonNull String text, @NonNull String... textToStyle) {
+		SpannableString spannable = new SpannableString(text);
+		for (String t : textToStyle) {
+			try {
+				int startIndex = text.indexOf(t);
+				spannable.setSpan(
+						new CustomTypefaceSpan(FontCache.getRobotoMedium(requireContext())),
+						startIndex,
+						startIndex + t.length(),
+						Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+			} catch (RuntimeException e) {
+				LOG.error("Error trying to find index of " + t + " " + e);
+			}
+		}
+		return spannable;
 	}
 
 	private void setSliderDescrRes(int sliderDescrRes) {
@@ -170,6 +218,10 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void setMaxZoom(int maxZoom) {
 		this.maxZoom = maxZoom;
+	}
+
+	public void setNewMapSource(boolean newMapSource) {
+		this.newMapSource = newMapSource;
 	}
 
 	public interface OnZoomSetListener {

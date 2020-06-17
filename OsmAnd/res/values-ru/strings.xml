@@ -40,7 +40,7 @@
     <string name="increase_search_radius">Увеличить радиус поиска</string>
     <string name="nothing_found">Ничего не найдено</string>
     <string name="nothing_found_descr">Изменить запрос или увеличить радиус поиска.</string>
-    <string name="quick_action_showhide_osmbugs_title">Отобразить/скрыть заметки OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">Показать/скрыть заметки OSM</string>
     <string name="quick_action_osmbugs_show">Показать заметки OSM</string>
     <string name="quick_action_osmbugs_hide">Скрыть заметки OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Переключатель, чтобы отобразить или скрыть заметки OSM на карте.</string>
@@ -1322,7 +1322,7 @@
     <string name="driving_region">Регион вождения</string>
     <string name="driving_region_japan">Япония</string>
     <string name="driving_region_us">США</string>
-    <string name="driving_region_europe_asia">Европа, Азия, Латинская Америка и т.п</string>
+    <string name="driving_region_europe_asia">Европа, Азия, Латинская Америка и т.п.</string>
     <string name="driving_region_uk">Великобритания, Индия и др.</string>
     <string name="context_menu_item_directions_to">Проложить маршрут</string>
     <string name="context_menu_item_directions_from">Пункт отправления</string>
@@ -1331,14 +1331,14 @@
     <string name="local_index_tile_data_expire">Время действия (в минутах): %1$s</string>
     <string name="local_index_tile_data_downloadable">Загружаемые: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Максимальное увеличение: %1$s</string>
-    <string name="edit_tilesource_successfully">Источник тайлов %1$s успешно сохранён</string>
+    <string name="edit_tilesource_successfully">Источник тайлов %1$s сохранён</string>
     <string name="edit_tilesource_maxzoom">Максимальное увеличение</string>
     <string name="edit_tilesource_minzoom">Минимальное увеличение</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="map_widget_fps_info">Отладочная информация FPS</string>
     <string name="shared_string_about">О программе</string>
     <string name="about_settings_descr">Информация о версии, участниках проекта</string>
-    <string name="local_index_tile_data_zooms">Загружено данных по масштабам: %1$s</string>
+    <string name="local_index_tile_data_zooms">Загруженные уровни масштабирования: %1$s</string>
     <string name="local_index_tile_data_minzoom">Минимальное увеличение: %1$s</string>
     <string name="local_index_tile_data_name">Данные о тайлах: %1$s</string>
     <string name="base_world_map">Обзорная карта мира</string>
@@ -2445,7 +2445,7 @@
 \n • Африка: ** 
 \n • Антарктида: * 
 \n Большинство стран по всему миру доступны в виде загрузок 
-\n От Афганистана до Зимбабве, от Австралии до США. Аргентина, Бразилия, Канада, Франция, Германия, Мексика, Великобритания, Испания, … 
+\n От Афганистана до Зимбабве, от Австралии до США. Аргентина, Бразилия, Канада, Франция, Германия, Мексика, Великобритания, Испания, …
 \n</string>
     <string name="live_monitoring_max_interval_to_send">Временной буфер для онлайн слежения</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Укажите временной буфер для хранения местоположений при отсутствии подключения к сети</string>
@@ -3608,7 +3608,7 @@
     <string name="hillshade_description">Затенение рельефа использует тёмные оттенки для отображения склонов, вершин и низменностей.</string>
     <string name="slope_download_description">Для отображения склонов на карте необходимы дополнительные карты.</string>
     <string name="download_slope_maps">Склоны</string>
-    <string name="replace_point_descr">Заменить другую точку на эту</string>
+    <string name="replace_point_descr">Заменить другую точку на эту.</string>
     <string name="changes_applied_to_profile">Изменения применены к профилю «%1$s».</string>
     <string name="settings_item_read_error">Невозможно прочитать из «%1$s».</string>
     <string name="settings_item_write_error">Невозможно записать в «%1$s».</string>
@@ -3733,7 +3733,7 @@
     <string name="pseudo_mercator_projection">Псевдо-проекция Меркатора</string>
     <string name="one_image_per_tile">Каждый тайл в своём файле</string>
     <string name="edit_online_source">Изменить онлайн-источник</string>
-    <string name="map_source_zoom_levels">Установите минимальный и максимальный уровни масштабирования, при которых будет отображаться или загружаться онлайн-карта.</string>
+    <string name="map_source_zoom_levels">Установите минимальный и максимальный уровни масштабирования для отображения или загрузки онлайн-карты.</string>
     <string name="shared_string_always">Всегда</string>
     <string name="system_screen_timeout">Использовать системную настройку</string>
     <string name="turn_screen_on_power_button">Кнопка питания</string>
@@ -3746,33 +3746,39 @@
     <string name="expire_time">Время устаревания</string>
     <string name="mercator_projection">Проекция Меркатора</string>
     <string name="storage_format">Формат хранения</string>
-    <string name="expire_time_descr">Время устаревания в минутах. Кешированные тайлы будут перезагружены после указанного времени. Оставьте поле пустым, чтобы никогда не обновлять тайлы из этого источника. 
-\n
-\nОдин день — 1440 минут.
-\nОдна неделя — 10 080 минут.
+    <string name="expire_time_descr">Кешированные тайлы будут перезагружены после указанного количества минут. Оставьте поле пустым, чтобы никогда не обновлять тайлы из этого источника. 
+\n 
+\nОдин день — 1440 минут. 
+\nОдна неделя — 10 080 минут. 
 \nОдин месяц — 43 829 минут.</string>
     <string name="tiles_storage_descr">Выберите способ хранения загруженных тайлов.</string>
     <string name="system_screen_timeout_descr">Экран будет отключаться после периода бездействия, указанного в системных настройках устройства.</string>
-    <string name="map_source_zoom_levels_descr">Эти параметры влияют на отображение при использовании в качестве карты или подложки.
-\n
-\n%1$s: карта будет ограничена выбранными масштабами. 
-\n
-\n%2$s: уровни масштабирования, при которых будут видны оригинальные тайлы. Увеличение и уменьшение масштаба может происходить вне этих значений.</string>
+    <string name="map_source_zoom_levels_descr">Эти параметры влияют на отображение при использовании в качестве карты или подложки. 
+\n 
+\n%1$s: карта будет ограничена выбранными уровнями масштабирования. 
+\n 
+\n%2$s: уровни масштабирования, при которых будут видны оригинальные тайлы; увеличение и уменьшение масштаба может происходить вне этих значений.</string>
     <string name="screen_control">Управление экраном</string>
     <string name="turn_screen_on_options_descr">Параметры включения экрана:</string>
     <string name="turn_screen_on_descr">Настройки включения экрана (убедитесь, что перед блокировкой устройства OsmAnd находится на переднем плане):</string>
     <string name="default_screen_timeout">Настройка отключения экрана по умолчанию</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Вы можете экспортировать или импортировать быстрые действия вместе с профилями.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Вы можете экспортировать или импортировать быстрые действия вместе с профилями приложения.</string>
     <string name="shared_string_delete_all_q">Удалить все\?</string>
     <string name="delete_all_actions_message_q">Вы уверены, что хотите безвозвратно удалить %d быстрых действий\?</string>
     <string name="screen_timeout">Время экрана</string>
-    <string name="width_limit_description">Укажите ширину автомобиля, для больших транспортных средств могут применяться ограничения на некоторых маршрутах.</string>
-    <string name="height_limit_description">Укажите высоту автомобиля, для больших транспортных средств могут применяться ограничения на некоторых маршрутах.</string>
-    <string name="weight_limit_description">Укажите вес автомобиля, для тяжёлых транспортных средств могут применяться ограничения на некоторых маршрутах.</string>
+    <string name="width_limit_description">Укажите ширину автомобиля, для широких транспортных средств могут применяться ограничения на маршруте.</string>
+    <string name="height_limit_description">Укажите высоту автомобиля, для высоких транспортных средств могут применяться ограничения на маршруте.</string>
+    <string name="weight_limit_description">Укажите вес автомобиля, для тяжёлых транспортных средств могут применяться ограничения на маршруте.</string>
     <string name="shared_string_tones">тонны</string>
     <string name="shared_string_meters">метры</string>
     <string name="details_dialog_decr">Управление отображением дополнительных деталей на карте</string>
     <string name="shared_string_all_time">Всё время</string>
     <string name="shared_string_night_map">Ночная карта</string>
     <string name="turn_screen_on_power_button_disabled">Отключено. Необходимо включить «Держать экран включённым» в разделе «Время работы после пробуждения».</string>
+    <string name="clear_tiles_warning">Применение этих изменений приведёт к очистке кешированных данных этого источника тайлов</string>
+    <string name="add_online_source">Добавить онлайн-источник</string>
+    <string name="vessel_height_warning_link">Указать высоту судна</string>
+    <string name="vessel_height_warning">Вы можете указать высоту судна, чтобы избегать низких мостов. Имейте в виду, что если мост раздвижной, будет использована его высота в открытом состоянии.</string>
+    <string name="vessel_height_limit_description">Укажите высоту судна, чтобы избежать низких мостов. Имейте в виду, что если мост раздвижной, будет использована его высота в открытом состоянии.</string>
+    <string name="vessel_width_limit_description">Укажите ширину судна, чтобы избежать узких мостов</string>
 </resources>

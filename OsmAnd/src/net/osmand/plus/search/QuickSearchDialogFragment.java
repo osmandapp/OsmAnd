@@ -173,6 +173,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private SearchUICore searchUICore;
 	private SearchResultListener defaultResultListener;
 	private String searchQuery;
+	private boolean nightMode;
 
 	private LatLon centerLatLon;
 	private net.osmand.Location location = null;
@@ -229,6 +230,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
+		nightMode = !app.getSettings().isLightContent();
 		navigationInfo = new NavigationInfo(app);
 		accessibilityAssistant = new AccessibilityAssistant(getActivity());
 		boolean isLightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
@@ -483,7 +485,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		);
 
 		titleEdit = (TextView) view.findViewById(R.id.titleEdit);
-		view.findViewById(R.id.shareButton).setOnClickListener(
+		Drawable shareIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_gshare_dark,
+				nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
+		shareIcon = AndroidUtils.getDrawableForDirection(app, shareIcon);
+		ImageView shareButton = (ImageView) view.findViewById(R.id.shareButton);
+		shareButton.setImageDrawable(shareIcon);
+		shareButton.setOnClickListener(
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -1205,7 +1212,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			if (SearchUICore.isDebugMode()) {
 				LOG.info("UI >> Start loading categories");
 			}
-			final boolean nightMode = !app.getSettings().isLightContent();
 			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class, "", null);
 			if (res != null) {
 				List<QuickSearchListItem> rows = new ArrayList<>();

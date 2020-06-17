@@ -11,13 +11,23 @@
 	Thx - Hardy
 
 -->
+    <string name="quick_action_showhide_mapillary_descr">A toggle to show or hide the Mapillary layer on the map.</string>
+    <string name="quick_action_mapillary_show">Show Mapillary</string>
+    <string name="quick_action_mapillary_hide">Hide Mapillary</string>
+    <string name="quick_action_showhide_mapillary_title">Show/hide Mapillary</string>
+    <string name="vessel_width_limit_description">Set vessel width to avoid narrow bridges</string>
+    <string name="vessel_height_limit_description">Set vessel height to avoid low bridges. Keep in mind, if the bridge is movable, we will use its height in the open state.</string>
+    <string name="vessel_height_warning">You can set vessel height to avoid low bridges. Keep in mind, if the bridge is movable, we will use its height in the open state.</string>
+    <string name="vessel_height_warning_link">Set vessel height</string>
+    <string name="clear_tiles_warning">Applying these changes will clear the cached data for this tile source</string>
+    <string name="add_online_source">Add online source</string>
     <!-- string name="shared_string_all_time">All time</string -->
     <string name="shared_string_night_map">Night map</string>
-    <string name="details_dialog_decr">Control visibility of additional details shown on the map</string>
+    <string name="details_dialog_decr">Show or hide additional map details</string>
     <string name="shared_string_meters">meters</string>
     <string name="shared_string_tones">tones</string>
     <string name="default_screen_timeout">Default screen timeout</string>
-    <string name="screen_timeout_descr">If the \"%1$s\" option is enabled, the activity time will depend on it.</string>
+    <string name="screen_timeout_descr">If \"%1$s\" is on, the activity time will depend on it.</string>
     <string name="speed_cameras_alert">Speed cameras alerts in some countries is prohibited by the law.</string>
     <string name="shared_string_uninstall">Uninstall</string>
     <string name="keep_active">Keep active</string>
@@ -31,17 +41,17 @@
     <string name="screen_timeout">Screen timeout</string>
     <string name="delete_all_actions_message_q">Are you sure you want to irrevocably delete %d quick actions?</string>
     <string name="shared_string_delete_all_q">Delete all?</string>
-    <string name="export_import_quick_actions_with_profiles_promo">You can Export or Import quick actions with application profiles.</string>
-    <string name="tiles_storage_descr">Choose how downloaded tiles will be stored.</string>
-    <string name="expire_time_descr">Expiration time in minutes. Cached tiles will be reloaded after specified time.
+    <string name="export_import_quick_actions_with_profiles_promo">You can export or import quick actions with app profiles.</string>
+    <string name="tiles_storage_descr">Choose how to store downloaded tiles.</string>
+    <string name="expire_time_descr">Cached tiles will be re-downloaded after the specified number of minutes.
         Leave this field empty to never refresh tiles for this source.
         \n\nOne day is 1440 minutes.\nOne week is 10 080 minutes.\nOne month is 43 829 minutes.</string>
-    <string name="map_source_zoom_levels_descr">These parameters will affect the display when used as map or overlay/underlay.
-        \n\n%1$s: The map will be limited to the selected zooms. \n\n%2$s: Zoom levels at which
-        the original tiles will be visible. Upscaling or downscaling will occur outside these values.</string>
-    <string name="map_source_zoom_levels">Set the minimum and maximum zoom level at which the online map will be displayed or loaded.</string>
+    <string name="map_source_zoom_levels_descr">Affects the screen when used as map or overlay/underlay.
+        \n\n%1$s: The map is limited to the zoom level range selected.
+        \n\n%2$s are the levels at which the original tiles will be visible, upscaling or downscaling will occur outside these values.</string>
+    <string name="map_source_zoom_levels">Set a minimum and maximum zoom level to show or load the online map.</string>
     <string name="storage_format">Storage format</string>
-    <string name="mercator_projection">Mercator Projection</string>
+    <string name="mercator_projection">Mercator projection</string>
     <string name="expire_time">Expiry time</string>
     <string name="edit_online_source">Edit online source</string>
     <string name="online_map_url_helper_text">Enter or paste the URL for the online source.</string>
@@ -61,13 +71,13 @@
     <string name="turn_screen_on_descr">Select screen wake-up options (make sure OsmAnd is in the foreground when the device is being locked):</string>
     <!--string name="turn_screen_on_options_descr">Screen wake-up options:</string-->
     <string name="system_screen_timeout">Use system screen timeout</string>
-    <string name="system_screen_timeout_descr">Turns the screen off after the system\'s screen timeout.</string>
+    <string name="system_screen_timeout_descr">Turns the screen off as per the system\'s screen timeout.</string>
     <string name="screen_control">Screen control</string>
     <string name="shared_string_always">Always</string>
     <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact the support team to investigate further.</string>
-    <string name="weight_limit_description">Provide your vehicle weight, some routes restrictions may be applied for heavy vehicles.</string>
-    <string name="height_limit_description">Provide your vehicle height, some routes restrictions may apply for high vehicles.</string>
-    <string name="width_limit_description">Provide your vehicle width some routes restrictions may be applied for wide vehicles.</string>
+    <string name="weight_limit_description">Provide your vehicle weight, some route restrictions may apply for heavy vehicles.</string>
+    <string name="height_limit_description">Provide your vehicle height, some route restrictions may apply for high vehicles.</string>
+    <string name="width_limit_description">Provide your vehicle width some route restrictions may apply for wide vehicles.</string>
     <string name="unsupported_type_error">Unsupported type</string>
     <string name="index_item_world_basemap_detailed">World overview map (detailed)</string>
     <string name="profiles_for_action_not_found">Could not find any such profiles.</string>
@@ -140,7 +150,7 @@
     <string name="lang_zhminnan">Southern Min</string>
     <string name="lang_zhyue">Cantonese</string>
     <string name="some_articles_may_not_available_in_lang">Some Wikipedia articles may not be available in your language.</string>
-    <string name="select_wikipedia_article_langs">Select the languages ​​in which Wikipedia articles will appear on the map. You can switch between all available languages​​ while reading the article.</string>
+    <string name="select_wikipedia_article_langs">Select the languages for ​​Wikipedia articles on the map.​​ Switch to any available language while reading the article.</string>
     <string name="wiki_menu_download_descr">Additional maps are needed to view Wikipedia POIs on the map.</string>
     <string name="shared_string_all_languages">All languages</string>
     <string name="shared_string_language">Language</string>
@@ -154,7 +164,7 @@
     <string name="custom_osmand_plugin">Custom OsmAnd plugin</string>
     <string name="app_mode_ski_snowmobile">Snowmobile</string>
     <string name="app_mode_ski_touring">Ski touring</string>
-    <string name="replace_point_descr">Replace another point with this</string>
+    <string name="replace_point_descr">Replace another point with this.</string>
     <string name="developer_plugin">Developer Plugin</string>
     <string name="move_inside_category">You can move items only inside this category.</string>
     <string name="additional_actions_descr">You can access these actions by tapping the “%1$s” button.</string>
@@ -2370,16 +2380,16 @@
     <string name="about_version">Version:</string>
     <string name="shared_string_about">About</string>
     <string name="about_settings_descr">Version info, licenses, project members</string>
-    <string name="local_index_tile_data_zooms">Zooms downloaded: %1$s</string>
-    <string name="local_index_tile_data_expire">Expire (minutes): %1$s</string>
+    <string name="local_index_tile_data_zooms">Zoom levels downloaded: %1$s</string>
+    <string name="local_index_tile_data_expire">Expiration time (minutes): %1$s</string>
     <string name="local_index_tile_data_downloadable">Downloadable: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maximum zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum zoom: %1$s</string>
     <string name="local_index_tile_data_name">Tile data: %1$s</string>
-    <string name="edit_tilesource_successfully">Tilesource %1$s was saved</string>
-    <string name="edit_tilesource_elliptic_tile">Elliptic mercator</string>
+    <string name="edit_tilesource_successfully">Tilesource %1$s saved</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptic Mercator projection</string>
     <string name="edit_tilesource_maxzoom">Maximum zoom</string>
-    <string name="edit_tilesource_expiration_time">Expire (minutes)</string>
+    <string name="edit_tilesource_expiration_time">Expiration time (minutes)</string>
     <string name="edit_tilesource_minzoom">Minimum zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Select existing…</string>
@@ -2390,8 +2400,8 @@
     <string name="driving_region_japan">Japan</string>
     <string name="driving_region_us">United States</string>
     <string name="driving_region_canada">Canada</string>
-    <string name="driving_region_europe_asia">Europe, Asia, Latin America, &amp; similar</string>
-    <string name="driving_region_uk">UK, India, &amp; similar</string>
+    <string name="driving_region_europe_asia">Europe, Asia, Latin America, and similar</string>
+    <string name="driving_region_uk">UK, India, and similar</string>
     <string name="driving_region_australia">Australia</string>
     <string name="speak_title">Announce…</string>
     <string name="speak_descr">Set up announcement of street names, traffic warnings (forced stops, speed bumps), speed camera warnings, and speed limits.</string>
@@ -2693,7 +2703,7 @@
         • North America: ***\n
         • South America: **\n
         • Asia: **\n
-        • Japan &amp; Korea: ***\n
+        • Japan and Korea: ***\n
         • Middle East: **\n
         • Africa: **\n
         • Antarctica: *\n
@@ -2791,7 +2801,7 @@
         • North America: ***\n
         • South America: **\n
         • Asia: **\n
-        • Japan &amp; Korea: ***\n
+        • Japan and Korea: ***\n
         • Middle East: **\n
         • Africa: **\n
         • Antarctica: *\n

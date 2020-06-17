@@ -1583,7 +1583,7 @@
     <string name="about_version">גרסה:</string>
     <string name="shared_string_about">על אודות</string>
     <string name="edit_tilesource_maxzoom">תקריב מרבי</string>
-    <string name="edit_tilesource_expiration_time">תפוגה (דקות)</string>
+    <string name="edit_tilesource_expiration_time">זמן תפוגה (דקות)</string>
     <string name="edit_tilesource_minzoom">תקריב מזערי</string>
     <string name="edit_tilesource_url_to_load">כתובת</string>
     <string name="edit_tilesource_choose_existing">בחירה בקיים…</string>
@@ -2275,7 +2275,7 @@
     <string name="map_magnifier">מגדיל מפה</string>
     <string name="about_settings_descr">פרטי גרסה, רשיונות, חברי המיזם</string>
     <string name="local_index_tile_data_zooms">רמות תקריב שהתקבלו: %1$s</string>
-    <string name="local_index_tile_data_expire">תפוגה (דקות): %1$s</string>
+    <string name="local_index_tile_data_expire">זמן תפוגה (דקות): %1$s</string>
     <string name="local_index_tile_data_downloadable">ניתן להורדה: %1$s</string>
     <string name="local_index_tile_data_maxzoom">תקריב מרבי: %1$s</string>
     <string name="local_index_tile_data_minzoom">תקריב מזערי: %1$s</string>
@@ -2548,18 +2548,18 @@
 \n • הקלטת טיולים כרשות גם במצב רקע (כשההתקן במצב שינה)
 \n OsmAnd הנו יישומון בקוד פתוח בהליכי פיתוח פעילים. כולם יכולים לתרום ליישומון על ידי דיווח על תקלות, שיפור התרגומים או תרומת קוד לתכונות חדשות. בנוסף, המיזם תלוי גם בתרומות כלכליות לטובת פיתוח ובדיקה של תכונות חדשות.
 \n</string>
-    <string name="osmand_plus_extended_description_part8">כיסוי ואיכות מוערכים של המפה:
-\n • מערב אירופה: ****
-\n • מזרח אירופה: ***
-\n • רוסיה: ***
-\n • צפון אמריקה: ***
-\n • דרום אמריקה: **
-\n • אסיה: **
-\n • יפן וקוריאה: ***
-\n • המזרח התיכון: **
-\n • אפריקה: **
-\n • אנטארקטיקה: *
-\n רוב המדינות מסביב לעולם זמינות להורדה
+    <string name="osmand_plus_extended_description_part8">כיסוי ואיכות מוערכים של המפה: 
+\n • מערב אירופה: **** 
+\n • מזרח אירופה: *** 
+\n • רוסיה: *** 
+\n • צפון אמריקה: *** 
+\n • דרום אמריקה: ** 
+\n • אסיה: ** 
+\n • יפן וקוריאה: *** 
+\n • המזרח התיכון: ** 
+\n • אפריקה: ** 
+\n • אנטארקטיקה: * 
+\n רוב המדינות מסביב לעולם זמינות להורדה 
 \n החל מאפגניסטן ועד זימבבואה, מאוסטרליה ועד ארה״ב. ישראל, ארגנטינה, ברזיל, קנדה, צרפת, גרמניה, מקסיקו, אנגליה, ספרד…
 \n</string>
     <string name="live_monitoring_max_interval_to_send_desrc">נא לציין זיכרון זמני לשמירת מיקומים לשליחה בהעדר חיבור</string>
@@ -2777,7 +2777,7 @@
     <string name="read_wikipedia_offline_description">עליך לערוך מינוי ל־OsmAnd חי כדי לקרוא ערכים מוויקיפדיה ומוויקימסע ללא חיבור לאינטרנט.</string>
     <string name="how_to_open_link">כיצד לפתוח את הקישור?</string>
     <string name="read_wikipedia_offline">קריאת ויקיפדיה ללא חיבור לאינטרנט</string>
-    <string name="edit_tilesource_elliptic_tile">היטל כדורי</string>
+    <string name="edit_tilesource_elliptic_tile">היטל מרקטור כדורי</string>
     <string name="hide_full_description">הסתרת התיאור המלא</string>
     <string name="show_full_description">הצגת התיאור המלא</string>
     <string name="nautical_render_descr">לניווט ימי. לרבות מצופים, מגדלורים, מסלולי נהרות, סימונים ומסלולים לניווט בים, מעגנים, שירותי סימונים ימיים וקווי מתאר לתיאור עומק.</string>
@@ -3599,7 +3599,7 @@
     <string name="reset_plugin_to_default">איפוס הגדרות התוסף לבררת המחדל</string>
     <string name="live_monitoring_tracking_interval">מרווח מעקב</string>
     <string name="monitoring_min_distance_descr">מסנן זה מונע תיעוד כפילות של נקודות כשלא הייתה מספיק תנועה, יוצר תצוגה מרחבית נאה יותר של מסלולים שלא עוברים עיבוד לאחר מכן.</string>
-    <string name="replace_point_descr">החלפת נקודה אחרת בזו</string>
+    <string name="replace_point_descr">החלפת נקודה אחרת בזו.</string>
     <string name="changes_applied_to_profile">השינויים לפרופיל ‚%1$s’ חלו.</string>
     <string name="settings_item_read_error">לא ניתן לקרוא מתוך ‚%1$s’.</string>
     <string name="settings_item_write_error">לא ניתן לכתוב אל ‚%1$s’.</string>
@@ -3638,7 +3638,7 @@
     <string name="main_actions_descr">מכילות 4 כפתורים בלבד.</string>
     <string name="main_actions">פעולות ראשית</string>
     <string name="move_inside_category">ניתן להעביר פריטים בתוך קטגוריה זו בלבד.</string>
-    <string name="select_wikipedia_article_langs">נא לבחור את השפות בהן יופיעו ערכים של ויקיפדיה במפה. ניתן להחליף בין כל השפות הזמינות בזמן קריאת הערך.</string>
+    <string name="select_wikipedia_article_langs">נא לבחור את השפות לערכים של ויקיפדיה במפה. ניתן להחליף לכל אחת מהשפות הזמינות בזמן קריאת הערך.</string>
     <string name="some_articles_may_not_available_in_lang">יתכן שחלק מהערכים בוויקיפדיה לא יהיו זמינים בשפה שלך.</string>
     <string name="lang_zhyue">קנטונזית</string>
     <string name="lang_zhminnan">מין נאן</string>
@@ -3742,22 +3742,22 @@
     <string name="expire_time">זמן תפוגה</string>
     <string name="mercator_projection">היטל מרקטור</string>
     <string name="storage_format">תצורת שמירה</string>
-    <string name="map_source_zoom_levels">יש להגדיר את רמת התקריב המזערית והמרבית שבהן המפה המקוונת תוצג או תיטען.</string>
-    <string name="map_source_zoom_levels_descr">המשתנים האלו ישפיעו על התצוגה כאשר נעשה בהם שימוש כמפה או כשכבה עליונה/תחתונה.
-\n
-\n%1$s: המפה תוגבל לרמות התקריב הנבחרות. 
-\n
-\n%2$s: רמות תקריב שבהן האריחים המקוריים יהיו גלויים. הגדלה או הקטנה ייתרחשו מחוץ לערכים האלו.</string>
-    <string name="expire_time_descr">זמן התפוגה בדקות. אריחים שנשמרו במטמון ייטענו מחדש לאחר זמן מסוים. יש להשאיר את השדה הזה ריק כדי לא לרענן את האריחים ממקור זה. 
-\n
-\nיום מלא הוא 1440 דקות.
-\nשבוע מלא הוא 10,080 דקות.
+    <string name="map_source_zoom_levels">יש להגדיר רמת תקריב מזערית ומרבית להצגה או טעינה של המפה המקוונת.</string>
+    <string name="map_source_zoom_levels_descr">משפיע על המסך בעת שימוש כמפה או שכבת על/תחתונה.
+\n 
+\n%1$s: המפה מוגבלת לטווח רמות התקריב הנבחר. 
+\n 
+\n%2$s הן רמות שבהן האריחים המקוריים יהיו גלויים. הגדלה או הקטנה ייתרחשו מחוץ לערכים האלו.</string>
+    <string name="expire_time_descr">אריחים ייטענו מחדש לאחר כמות דקות מסוימת. יש להשאיר את השדה הזה ריק כדי לא לרענן את האריחים ממקור זה. 
+\n 
+\nיום מלא הוא 1440 דקות. 
+\nשבוע מלא הוא 10,080 דקות. 
 \nחודש מלא הוא 43,829 דקות.</string>
-    <string name="tiles_storage_descr">נא לבחור כיצד אריחים שהתקבלו יאוחסנו.</string>
+    <string name="tiles_storage_descr">נא לבחור כיצד לאחסן אריחים שהתקבלו.</string>
     <string name="pseudo_mercator_projection">היטל דמוי מרקטור</string>
     <string name="shared_string_always">תמיד</string>
     <string name="screen_control">בקרת מסך</string>
-    <string name="system_screen_timeout_descr">לכבות את המסך לאחר תפוגת שומר המסך של המערכת.</string>
+    <string name="system_screen_timeout_descr">לכבות את המסך בהתאם לתפוגת שומר המסך של המערכת.</string>
     <string name="system_screen_timeout">להשתמש בתפוגת שומר המסך של המערכת</string>
     <string name="turn_screen_on_options_descr">אפשרות יקיצת מסך:</string>
     <string name="turn_screen_on_descr">נא לבחור את אפשרויות יקיצת המסך (נא לוודא ש־OsmAnd בחזית כאשר המכשיר ננעל):</string>
@@ -3769,7 +3769,7 @@
     <string name="turn_screen_on_wake_time_descr">לבחור את זמן תפוגת שומר המסך של המערכת לאחר ההתעוררות. („%1$s” - ללא זמן תפוגה.)</string>
     <string name="keep_screen_on">להשאיר את המסך פעיל</string>
     <string name="keep_screen_off">להשאיר את המסך כבוי</string>
-    <string name="screen_timeout_descr">אם האפשרות „%1$s” פעילה, זמן הפעילות יהיה תלוי בה.</string>
+    <string name="screen_timeout_descr">אם „%1$s” פעילה, זמן הפעילות יהיה תלוי בה.</string>
     <string name="default_screen_timeout">ברירת מחדל של תפוגת שומר המסך</string>
     <string name="export_import_quick_actions_with_profiles_promo">ניתן לייצא או לייבא פעולות מהירות עם פרופילי יישומון.</string>
     <string name="shared_string_delete_all_q">למחוק הכול\?</string>
@@ -3780,8 +3780,14 @@
     <string name="weight_limit_description">נא לציין את משקל כלי הרכב שלך, יתכן שחלות מגבלות מעבר על כלי רכב כבדים.</string>
     <string name="shared_string_tones">גוונים</string>
     <string name="shared_string_meters">מטרים</string>
-    <string name="details_dialog_decr">שליטה בהופעה של פירוט נוסף על המפה</string>
+    <string name="details_dialog_decr">הצגה או הסתרה של פירוט נוסף על המפה</string>
     <string name="shared_string_night_map">מפת לילה</string>
     <string name="shared_string_all_time">כל הזמן</string>
     <string name="turn_screen_on_power_button_disabled">מושבת. נדרשת ההגדרה ‚להשאיר את המסך פעיל’ תחת ‚תפוגת זמן לאחר התעוררות’.</string>
+    <string name="add_online_source">הוספת מקור מקוון</string>
+    <string name="clear_tiles_warning">החלת השינויים האלו תפנה את הנתונים שנשמרו עבור מקור אריחים זה</string>
+    <string name="vessel_height_warning_link">הגדרת גובה כלי השיט</string>
+    <string name="vessel_height_warning">ניתן להגדיר את גובה כלי השיט כדי להימנע מגשרים נמוכים. נא לשים לב שאם הגשר נע, אנו נשתמש בגובהו במצב הפתוח.</string>
+    <string name="vessel_height_limit_description">יש להגדיר את גובה כלי השיט כדי להימנע מגשרים נמוכים. נא לשים לב שאם הגשר נע, אנו נשתמש בגובהו במצב הפתוח.</string>
+    <string name="vessel_width_limit_description">הגדרת רוחב כלי השיט כדי להימנע מגשרים צרים</string>
 </resources>

@@ -11,6 +11,7 @@ import java.util.PriorityQueue;
 
 import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.util.MapUtils;
 
@@ -810,14 +811,12 @@ public class BinaryRoutePlanner {
 					printRoad(">?", visitedSegments.get(calculateRoutePointId(next, next.isPositive())),
 							next.isPositive());
 				}
-				if (distFromStart < next.distanceFromStart) {
-					if (ctx.config.heuristicCoefficient <= 1) {
-						System.err.println("! Alert distance from start " + distFromStart + " < "
-								+ next.distanceFromStart + " id=" + next.road.id);
-					}
-				}
 				if (distFromStart < visIt.distanceFromStart && next.getParentRoute() == null) {
 					toAdd = true;
+					if (ctx.config.heuristicCoefficient <= 1) {
+						System.err.println("! Alert distance from start " + distFromStart + " < "
+								+ visIt.distanceFromStart + " id=" + next.road.id);
+					}
 				} else {
 					toAdd = false;
 				}
@@ -861,6 +860,12 @@ public class BinaryRoutePlanner {
 		public int preciseX;
 		public int preciseY;
 		public List<RouteSegmentPoint> others;
+		
+		public LatLon getPreciseLatLon() {
+			return new LatLon(MapUtils.get31LatitudeY(preciseY), MapUtils.get31LongitudeX(preciseX));
+			
+		}
+		
 	}
 
 	public static class RouteSegment {

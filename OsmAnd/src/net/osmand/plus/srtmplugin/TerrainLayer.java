@@ -82,21 +82,28 @@ public class TerrainLayer extends MapTileLayer {
 				File tilesDir = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 				File cacheDir = app.getCacheDir();
 				// fix http://stackoverflow.com/questions/26937152/workaround-for-nexus-9-sqlite-file-write-operations-on-external-dirs
-				sqliteDb = SQLiteDatabase.openDatabase(
-                        new File(cacheDir, mode == HILLSHADE ? HILLSHADE_CACHE : SLOPE_CACHE).getPath(),
-						 null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING
-						    | SQLiteDatabase.CREATE_IF_NECESSARY );
-				if (sqliteDb.getVersion() == 0) {
-					sqliteDb.setVersion(1);
+				try {
+					sqliteDb = SQLiteDatabase.openDatabase(
+							new File(cacheDir, mode == HILLSHADE ? HILLSHADE_CACHE : SLOPE_CACHE).getPath(),
+							null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING
+									| SQLiteDatabase.CREATE_IF_NECESSARY);
+				} catch (RuntimeException e) {
+					log.error(e.getMessage(), e);
+					sqliteDb = null;
 				}
-				sqliteDb.execSQL("CREATE TABLE IF NOT EXISTS TILE_SOURCES(filename varchar2(256), date_modified int, left int, right int, top int, bottom int)");
+				if (sqliteDb != null) {
+					if (sqliteDb.getVersion() == 0) {
+						sqliteDb.setVersion(1);
+					}
+					sqliteDb.execSQL("CREATE TABLE IF NOT EXISTS TILE_SOURCES(filename varchar2(256), date_modified int, left int, right int, top int, bottom int)");
 
-				Map<String, Long> fileModified = new HashMap<String, Long>();
-				Map<String, SQLiteTileSource> rs = readFiles(app, tilesDir, fileModified);
-				indexCachedResources(fileModified, rs);
-				indexNonCachedResources(fileModified, rs);
-				sqliteDb.close();
-				resources = rs;
+					Map<String, Long> fileModified = new HashMap<String, Long>();
+					Map<String, SQLiteTileSource> rs = readFiles(app, tilesDir, fileModified);
+					indexCachedResources(fileModified, rs);
+					indexNonCachedResources(fileModified, rs);
+					sqliteDb.close();
+					resources = rs;
+				}
 				return null;
 			}
 

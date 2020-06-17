@@ -3820,4 +3820,8 @@
     <string name="poi_traffic_signals_sound_locate">Uniquement si la marche est autorisée</string>
     <string name="poi_internet_access_fee_customers">Signal pour trouver le pôle</string>
     <string name="poi_fire_hydrant_pressure_filter">Pression</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">Aspiration</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pressurisé</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Eaux souterraines</string>
+    <string name="poi_fire_hydrant_type_pipe">Tuyau</string>
 </resources>

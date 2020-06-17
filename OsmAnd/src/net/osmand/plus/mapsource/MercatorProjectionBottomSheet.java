@@ -90,8 +90,10 @@ public class MercatorProjectionBottomSheet extends MenuBottomSheetDialogFragment
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					mercatorProjection = m;
-					populateValuesList();
+					if (mercatorProjection != m){
+						mercatorProjection = m;
+						dismiss();
+					}
 				}
 			});
 		}

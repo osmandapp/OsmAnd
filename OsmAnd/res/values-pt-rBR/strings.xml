@@ -346,7 +346,7 @@
     <string name="app_mode_truck">Caminhão</string>
     <string name="auto_zoom_far">Para nível intermediário</string>
     <string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
-    <string name="edit_tilesource_successfully">A fonte da quadrícula %1$s foi salva</string>
+    <string name="edit_tilesource_successfully">A fonte da quadrícula %1$s salva</string>
     <string name="speak_traffic_warnings">Moderadores de tráfego</string>
     <string name="context_menu_item_directions_from">Rota a partir daqui</string>
     <string name="app_mode_default">Navegar no mapa</string>
@@ -544,14 +544,14 @@
     <string name="about_version">Versão:</string>
     <string name="shared_string_about">Sobre</string>
     <string name="about_settings_descr">Versão, licenças, membros do projeto</string>
-    <string name="local_index_tile_data_zooms">Zooms baixados: %1$s</string>
-    <string name="local_index_tile_data_expire">Expirar (minutos): %1$s</string>
+    <string name="local_index_tile_data_zooms">Níveis de zoom baixados:: %1$s</string>
+    <string name="local_index_tile_data_expire">Tempo de expiração (minutos): %1$s</string>
     <string name="local_index_tile_data_downloadable">Transferível: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom máximo: %1$s</string>
     <string name="local_index_tile_data_name">Dados da quadrícula: %1$s</string>
-    <string name="edit_tilesource_elliptic_tile">Mercator elíptico</string>
+    <string name="edit_tilesource_elliptic_tile">Projeção elíptica de Mercator</string>
     <string name="edit_tilesource_maxzoom">Zoom máximo</string>
-    <string name="edit_tilesource_expiration_time">Expirar (minutos)</string>
+    <string name="edit_tilesource_expiration_time">Tempo de expiração (minutos)</string>
     <string name="edit_tilesource_minzoom">Zoom mínimo</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Selecionar existente…</string>
@@ -562,7 +562,7 @@
     <string name="driving_region_japan">Japão</string>
     <string name="driving_region_us">Estados Unidos</string>
     <string name="driving_region_canada">Canadá</string>
-    <string name="driving_region_europe_asia">Europa, Ásia, América Latina etc</string>
+    <string name="driving_region_europe_asia">Europa, Ásia, América Latina e similar</string>
     <string name="driving_region_uk">Reino Unido, Índia e similares</string>
     <string name="speak_descr">Configure o anúncio de nomes de ruas, avisos de trânsito (paradas forçadas, lombadas), avisos de radares de velocidade, limites de velocidade.</string>
     <string name="speak_street_names">Nome das ruas (TTS)</string>
@@ -2550,18 +2550,18 @@ Pôr do Sol: %2$s</string>
 \n• Gravação opcional de viagem para arquivo GPX local ou serviço on-line • Exibição opcional de velocidade e altitudes
 \n• Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
     <string name="shared_string_without_name">Sem nome</string>
-    <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada:
-\n• Europa Ocidental: ****
-\n• Europa Oriental: ***
-\n• Rússia: ***
-\n• América do Norte: ***
-\n• América do Sul: **
-\n• Ásia: **
-\n• Japão e Coreia: ***
-\n• Oriente Médio: **
-\n• África: **
-\n• Antártida: *
-\nA maioria dos países ao redor do globo disponível para baixar!
+    <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada: 
+\n• Europa Ocidental: **** 
+\n• Europa Oriental: *** 
+\n• Rússia: *** 
+\n• América do Norte: *** 
+\n• América do Sul: ** 
+\n• Ásia: ** 
+\n• Japão e Coreia: *** 
+\n• Oriente Médio: ** 
+\n• África: ** 
+\n• Antártida: * 
+\nA maioria dos países ao redor do globo disponível para baixar! 
 \nDo Afeganistão ao Zimbábue, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha, …
 \n</string>
     <string name="lang_lo">Laociano</string>
@@ -3596,7 +3596,7 @@ Pôr do Sol: %2$s</string>
     <string name="app_mode_ski_touring">Passeio de esqui</string>
     <string name="app_mode_ski_snowmobile">Moto de neve</string>
     <string name="custom_osmand_plugin">Plug-in OsmAnd personalizado</string>
-    <string name="replace_point_descr">Substitua outro ponto por este</string>
+    <string name="replace_point_descr">Substitua outro ponto por este.</string>
     <string name="changes_applied_to_profile">Alterações aplicadas ao perfil \'%1$s\'.</string>
     <string name="settings_item_read_error">Não foi possível ler a partir de \'%1$s\'.</string>
     <string name="settings_item_write_error">Não foi possível escrever para \'%1$s\'.</string>
@@ -3624,7 +3624,7 @@ Pôr do Sol: %2$s</string>
     <string name="move_inside_category">Você pode mover itens somente dentro desta categoria.</string>
     <string name="developer_plugin">Plugin do desenvolvedor</string>
     <string name="shared_string_items">Itens</string>
-    <string name="select_wikipedia_article_langs">Selecione os idiomas em que os artigos da Wikipédia aparecerão no mapa. Você pode alternar entre todos os idiomas disponíveis enquanto lê o artigo.</string>
+    <string name="select_wikipedia_article_langs">Selecione os idiomas para os artigos da Wikipedia no mapa. Alterne para qualquer idioma disponível enquanto lê o artigo.</string>
     <string name="some_articles_may_not_available_in_lang">Alguns artigos da Wikipédia podem não estar disponíveis no seu idioma.</string>
     <string name="lang_zhyue">Cantonês</string>
     <string name="lang_zhminnan">Min do Sul</string>
@@ -3716,22 +3716,22 @@ Pôr do Sol: %2$s</string>
     <string name="expire_time">Tempo de expiração</string>
     <string name="mercator_projection">Projeção de Mercator</string>
     <string name="storage_format">Formato de armazenamento</string>
-    <string name="map_source_zoom_levels">Defina o nível mínimo e máximo de zoom no qual o mapa online será exibido ou carregado.</string>
-    <string name="map_source_zoom_levels_descr">Esses parâmetros afetarão a exibição quando usados como mapa ou sobreposição/subjacência.
+    <string name="map_source_zoom_levels">Defina um nível mínimo e máximo de zoom para mostrar ou carregar o mapa online.</string>
+    <string name="map_source_zoom_levels_descr">Afeta a tela quando usada como mapa ou sobreposição / subjacência.
 \n
-\n%1$s: O mapa será limitado aos zooms selecionados.
+\n%1$s: o mapa é limitado ao nível de zoom selecionado.
 \n
-\n%2$s: Níveis de zoom nos quais os blocos originais estarão visíveis. O aumento ou redução do tamanho ocorrerá fora desses valores.</string>
-    <string name="expire_time_descr">Tempo de expiração em minutos. Os mosaicos em cache serão recarregados após o tempo especificado. Deixe esse campo em branco para nunca atualizar mosaicos para esta fonte.
-\n
-\nUm dia é 1440 minutos.
-\nUma semana é de 10 080 minutos.
+\n%2$s são os níveis em que os blocos originais estarão visíveis, o aumento ou redução do tamanho ocorrerão fora desses valores.</string>
+    <string name="expire_time_descr">Os mosaicos em cache serão baixados novamente após o número especificado de minutos. Deixe esse campo em branco para nunca atualizar mosaicos para esta fonte.
+\n 
+\nUm dia é 1440 minutos. 
+\nUma semana é de 10 080 minutos. 
 \nUm mês é 43 829 minutos.</string>
-    <string name="tiles_storage_descr">Escolha como os mosaicos baixados serão armazenados.</string>
+    <string name="tiles_storage_descr">Escolha como armazenar os mosaicos baixados.</string>
     <string name="default_screen_timeout">Tempo limite da tela padrão</string>
     <string name="shared_string_always">Sempre</string>
     <string name="screen_control">Controle de tela</string>
-    <string name="system_screen_timeout_descr">Desligar a tela após o tempo limite da tela do sistema.</string>
+    <string name="system_screen_timeout_descr">Desligar a tela conforme o tempo limite da tela do sistema.</string>
     <string name="system_screen_timeout">Usar tempo limite da tela do sistema</string>
     <string name="turn_screen_on_options_descr">Opções de ativação da tela:</string>
     <string name="turn_screen_on_descr">Selecione as opções de ativação da tela (verifique se OsmAnd está em primeiro plano quando o dispositivo está sendo bloqueado):</string>
@@ -3743,7 +3743,7 @@ Pôr do Sol: %2$s</string>
     <string name="turn_screen_on_wake_time_descr">Selecionar o tempo limite da tela depois de acordar. (\"%1$s\" não se aplica a tempo limite.)</string>
     <string name="keep_screen_on">Manter a tela ligada</string>
     <string name="keep_screen_off">Manter a tela desligada</string>
-    <string name="screen_timeout_descr">Se a opção \"%1$s\" estiver ativada, o tempo de atividade dependerá disso.</string>
+    <string name="screen_timeout_descr">Se %1$s\" estiver ativado, o tempo de atividade dependerá disso.</string>
     <string name="pseudo_mercator_projection">Projeção pseudo-Mercator</string>
     <string name="one_image_per_tile">Um arquivo de imagem por mosaico</string>
     <string name="sqlite_db_file">Arquivo SQLiteDB</string>
@@ -3754,13 +3754,19 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_delete_all_q">Excluir tudo\?</string>
     <string name="delete_all_actions_message_q">Tem certeza de que deseja excluir irrevogavelmente %d ações rápidas\?</string>
     <string name="screen_timeout">Tempo limite da tela</string>
-    <string name="width_limit_description">Forneça a largura do seu veículo. Algumas restrições de rotas podem ser aplicadas a veículos largos.</string>
-    <string name="height_limit_description">Forneça a altura do veículo, algumas restrições de rotas podem ser aplicadas para veículos altos.</string>
-    <string name="weight_limit_description">Forneça o peso do veículo, algumas restrições de rotas podem ser aplicadas a veículos pesados.</string>
+    <string name="width_limit_description">Forneça a largura do seu veículo. Algumas restrições de rota podem se aplicar a veículos largos.</string>
+    <string name="height_limit_description">Forneça a altura do veículo, algumas restrições de rota podem ser aplicadas para veículos altos.</string>
+    <string name="weight_limit_description">Forneça o peso do seu veículo. Algumas restrições de rota podem ser aplicadas a veículos pesados.</string>
     <string name="shared_string_tones">tons</string>
     <string name="shared_string_meters">metros</string>
-    <string name="details_dialog_decr">Controlar a visibilidade dos detalhes adicionais mostrados no mapa</string>
+    <string name="details_dialog_decr">Mostrar ou ocultar detalhes adicionais do mapa</string>
     <string name="shared_string_night_map">Mapa noturno</string>
     <string name="shared_string_all_time">Tempo todo</string>
     <string name="turn_screen_on_power_button_disabled">Desativado. Requer \'manter a tela ligada\' em \'tempo limite após a ativação\'.</string>
+    <string name="add_online_source">Adicionar fonte online</string>
+    <string name="clear_tiles_warning">A aplicação dessas alterações limpará os dados em cache dessa origem de bloco</string>
+    <string name="vessel_height_warning_link">Definir altura da embarcação</string>
+    <string name="vessel_height_warning">Você pode definir a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
+    <string name="vessel_height_limit_description">Defina a altura do vaso para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
+    <string name="vessel_width_limit_description">Defina a largura da embarcação para evitar pontes estreitas</string>
 </resources>

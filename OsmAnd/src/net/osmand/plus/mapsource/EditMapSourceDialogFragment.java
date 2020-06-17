@@ -120,8 +120,11 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			elliptic = savedInstanceState.getBoolean(ELLIPTIC_KEY);
 			sqliteDB = savedInstanceState.getBoolean(SQLITE_DB_KEY);
 		}
-		View root = UiUtilities.getMaterialInflater(app, nightMode).inflate(R.layout.fragment_edit_map_source, container, false);
+		View root = UiUtilities.getMaterialInflater(requireContext(), nightMode).inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
+		toolbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
+		toolbar.setTitleTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light));
+		toolbar.setTitle(editedLayerName == null ? R.string.add_online_source : R.string.edit_online_source);
 		ImageButton iconHelp = root.findViewById(R.id.toolbar_action);
 		Drawable closeDrawable = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
 				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
@@ -145,6 +148,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		int boxStrokeColor = nightMode
 				? ContextCompat.getColor(app, R.color.app_bar_color_light)
 				: ContextCompat.getColor(app, R.color.active_buttons_and_links_bg_pressed_dark);
+		int btnBgColorRes = nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 		TextInputLayout nameInputLayout = root.findViewById(R.id.name_input_layout);
 		nameInputLayout.setBoxStrokeColor(boxStrokeColor);
 		nameEditText = root.findViewById(R.id.name_edit_text);
@@ -155,7 +159,12 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		urlEditText.addTextChangedListener(getTextWatcher());
 		contentContainer = root.findViewById(R.id.content_container);
 		saveBtn = root.findViewById(R.id.save_button);
+		saveBtn.setBackgroundResource(nightMode ? R.drawable.dlg_btn_primary_dark : R.drawable.dlg_btn_primary_light);
+		FrameLayout saveBtnBg = root.findViewById(R.id.save_button_bg);
+		saveBtnBg.setBackgroundColor(ContextCompat.getColor(app, btnBgColorRes));
 		saveBtnTitle = root.findViewById(R.id.save_button_title);
+		saveBtnTitle.setTextColor(ContextCompat.getColorStateList(app,
+				nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
 		saveBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -270,19 +279,22 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 
 			@Override
 			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-				String s = charSequence.toString();
-				if (Algorithms.isEmpty(s)) {
-					saveBtn.setEnabled(false);
-					saveBtnTitle.setEnabled(false);
-				} else {
-					saveBtn.setEnabled(true);
-					saveBtnTitle.setEnabled(true);
-				}
+
 			}
 
 			@Override
 			public void afterTextChanged(Editable editable) {
-
+				if (nameEditText.getText() != null && urlEditText.getText() != null) {
+					String name = nameEditText.getText().toString().trim();
+					String url = urlEditText.getText().toString().trim();
+					if (Algorithms.isEmpty(name) || Algorithms.isEmpty(url)) {
+						saveBtn.setEnabled(false);
+						saveBtnTitle.setEnabled(false);
+					} else {
+						saveBtn.setEnabled(true);
+						saveBtnTitle.setEnabled(true);
+					}
+				}
 			}
 		};
 	}
@@ -396,7 +408,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 							InputZoomLevelsBottomSheet.showInstance(
 									fm, EditMapSourceDialogFragment.this,
 									R.string.map_source_zoom_levels, R.string.map_source_zoom_levels_descr,
-									minZoom, maxZoom
+									minZoom, maxZoom, editedLayerName == null
 							);
 							break;
 						case EXPIRE_TIME:

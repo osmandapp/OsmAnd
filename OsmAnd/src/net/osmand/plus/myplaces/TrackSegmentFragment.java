@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -152,7 +153,9 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 		GPXFile gpxFile = getGpx();
 		if (gpxFile != null) {
 			if (gpxFile.path != null && !gpxFile.showCurrentTrack) {
-				MenuItem item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark)
+				Drawable shareIcon = app.getUIUtilities().getIcon((R.drawable.ic_action_gshare_dark));
+				MenuItem item = menu.add(R.string.shared_string_share)
+						.setIcon(AndroidUtils.getDrawableForDirection(app, shareIcon))
 						.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {

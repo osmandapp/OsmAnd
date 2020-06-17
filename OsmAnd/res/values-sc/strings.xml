@@ -119,16 +119,16 @@
     <string name="about_version">Versione:</string>
     <string name="shared_string_about">Informatziones</string>
     <string name="about_settings_descr">Informatziones de sa versione, litzèntzias, membros de su progetu</string>
-    <string name="local_index_tile_data_zooms">Ismanniamentos iscarrigados: %1$s</string>
-    <string name="local_index_tile_data_expire">Iscadèntzia (minutos): %1$s</string>
+    <string name="local_index_tile_data_zooms">Livellos de ismanniamentu iscarrigados: %1$s</string>
+    <string name="local_index_tile_data_expire">Tempus de iscadèntzia (minutos): %1$s</string>
     <string name="local_index_tile_data_downloadable">Iscarrigàbiles: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Ismanniamentu màssimu: %1$s</string>
     <string name="local_index_tile_data_minzoom">Ismanniamentu mìnimu: %1$s</string>
     <string name="local_index_tile_data_name">Datos tasseddos: %1$s</string>
-    <string name="edit_tilesource_successfully">Sa mitza %1$s de sas imbrèstias est istada sarvada</string>
-    <string name="edit_tilesource_elliptic_tile">Mercatore ellitticu</string>
+    <string name="edit_tilesource_successfully">Mitza de tasseddos %1$s sarvada</string>
+    <string name="edit_tilesource_elliptic_tile">Projetzione de Mercatore ellìtica</string>
     <string name="edit_tilesource_maxzoom">Ismanniamentu màssimu</string>
-    <string name="edit_tilesource_expiration_time">Iscadèntzia (minutos)</string>
+    <string name="edit_tilesource_expiration_time">Tempus de iscadèntzia (minutos)</string>
     <string name="edit_tilesource_minzoom">Ismanniamentu mìnimu</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Ischerta intre sos esistentes…</string>
@@ -137,8 +137,8 @@
     <string name="driving_region">Regione de ghia</string>
     <string name="driving_region_us">Istados Unidos</string>
     <string name="driving_region_canada">Cànada</string>
-    <string name="driving_region_europe_asia">Europa, Àsia, Amèrica latina e sìmiles</string>
-    <string name="driving_region_uk">UK, Ìndia, e sìmiles</string>
+    <string name="driving_region_europe_asia">Europa, Àsia, Amèrica latina e simigiantes</string>
+    <string name="driving_region_uk">UK, Ìndia, e simigiantes</string>
     <string name="driving_region_descr">Issèbera sa regione de ghia: USA, Europa, UK, Àsia e àteras.</string>
     <string name="driving_region_japan">Giapone</string>
     <string name="speak_title">Annuntzia…</string>
@@ -3177,7 +3177,7 @@
     <string name="turn_screen_on_router">Allughe in sas bortadas</string>
     <string name="turn_screen_on_time_descr">Imposta pro cantu tempus s\'ischermu at a abarrare allutu.</string>
     <string name="turn_screen_on_sensor">Imprea su sensore de prossimidade</string>
-    <string name="turn_screen_on_sensor_descr">Cola sa manu tua in dae in antis de s\'ala superiore de s\'ischermu pro l\'allùghere durante sa navigatzione.</string>
+    <string name="turn_screen_on_sensor_descr">Colende sa manu tua in dae in antis de s\'ischermu l\'as a allùghere.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Gradu 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Gradu 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Gradu 3</string>
@@ -3485,7 +3485,7 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Intrinada a sas %1$s</string>
     <string name="sunrise_at">Arbèschida a sas %1$s</string>
-    <string name="monitoring_min_accuracy_descr">Custu at a registrare petzi sos puntos medidos cun un\'acuradesa mìnima indicada (in metros/pees, comente benit sinnaladu dae Android pro su chipset tuo). S\'acuradesa si riferit a sa dispersione de movimentos torrados a repìtere, e no est ligada diretamente a sa pretzisione, chi definit canto sa medida tua est a curtzu a sa positzione bera tua.</string>
+    <string name="monitoring_min_accuracy_descr">Custu at a registrare petzi sos puntos medidos cun un\'acuradesa mìnima indicada (in metros/pees, comente benit sinnaladu dae Android pro su chipset tuo). S\'acuradesa est sa prossimidade de sas medidas a sa positzione bera tua, e no est ligara diretamente a sa pretzizione, chi est sa dispersione de movimentos torrados a repìtere.</string>
     <string name="reset_to_default_category_button_promo">\'Riprìstina sos valores predefinidos\' at a torrare a impostare s\'òrdine predefinidu de installatzione.</string>
     <string name="accessibility_mode_disabled">Sa modalidade de atzessibilidade est istudada in su sistema Android tuo.</string>
     <string name="use_system_screen_timeout">Imprea su tempus de isetu de s\'ischermu de su sistema</string>
@@ -3609,7 +3609,7 @@
     <string name="shared_string_octagon">Otàgonu</string>
     <string name="shared_string_square">Cuadradu</string>
     <string name="shared_string_min">Mìn</string>
-    <string name="replace_point_descr">Remplasa un\'àteru puntu cun custu</string>
+    <string name="replace_point_descr">Remplasa un\'àteru puntu cun custu.</string>
     <string name="app_mode_ski_touring">Iscì-alpinismu</string>
     <string name="app_mode_ski_snowmobile">Motoislita</string>
     <string name="custom_osmand_plugin">Estensione de OsmAnd personalizada</string>
@@ -3640,7 +3640,7 @@
     <string name="move_inside_category">Podes mòere elementos in intro de custa categoria ebbia.</string>
     <string name="developer_plugin">Estensione pro sos isvilupadores</string>
     <string name="shared_string_items">Elementos</string>
-    <string name="select_wikipedia_article_langs">Issèbera sa limba in sa cale sos artìculos de Wikipedia ant a aparire in sa mapa. Podes colare dae una limba a s\'àtera cando ses leghende s\'artìculu.</string>
+    <string name="select_wikipedia_article_langs">Issèbera sa limba pro sos artìculos de Wikipedia in sa mapa. Cola dae una limba disponìbile a s\'àtera cando ses leghende s\'artìculu.</string>
     <string name="some_articles_may_not_available_in_lang">Unos cantos artìculos de Wikipedia diant pòdere no èssere a disponimentu in sa limba tua.</string>
     <string name="lang_zhyue">Cantonesu</string>
     <string name="lang_zhminnan">Min meridionale</string>
@@ -3728,13 +3728,60 @@
     <string name="profiles_for_action_not_found">Impossìbile a agatare custos profilos.</string>
     <string name="index_item_world_basemap_detailed">Mapa mundiale generale (a sa minuda)</string>
     <string name="unsupported_type_error">Casta non suportada</string>
-    <string name="tiles_storage_descr">Issèbera comente sos tasseddos iscarrigados ant a èssere sarvados.</string>
+    <string name="tiles_storage_descr">Issèbera comente sarvare sos tasseddos iscarrigados.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Podes esportare o importare atziones lestras cun profilos de s\'aplicatzione.</string>
     <string name="shared_string_delete_all_q">Iscantzellare totu\?</string>
     <string name="delete_all_actions_message_q">Ses seguru de chèrrere iscantzellare definitivamente %d atziones lestras\?</string>
     <string name="shared_string_all_time">Totu su tempus</string>
     <string name="shared_string_meters">metros</string>
-    <string name="details_dialog_decr">Controlla sa visibilidade de delàllios additzionales ammustrados in sa mapa</string>
+    <string name="details_dialog_decr">Ammustra o cua sos detàllios additzionales in sa mapa</string>
     <string name="shared_string_night_map">Mapa noturna</string>
     <string name="shared_string_tones">sonerias</string>
+    <string name="map_source_zoom_levels_descr">Custos paràmetros ant a influentzare sa vista cando benit impreados comente mapa o istradu superiore/inferiore.
+\n
+\n%1$s: Sa mapa at a èssere limitada a s\'intervallu de ismanniamentu ischertadu. 
+\n
+\n%2$s sunt sos livellos de ismanniamentu pro sos cales sos tasseddos originales ant a èssere visìbiles. In foras de custos valores b\'at a èssere s\'ismanniamentu o sa minimadura de iscala.</string>
+    <string name="width_limit_description">Inserta sa largària de su veìculu tuo, ca unas cantas restritziones si diat pòdere aplicare pro veìculos largos ebbia.</string>
+    <string name="height_limit_description">Inserta s\'artària de su veìculu tuo, ca unas cantas restritziones si diat pòdere aplicare pro veìculos artos ebbia.</string>
+    <string name="weight_limit_description">Inserta su pesu de su veìculu tuo, ca unas cantas restritziones si diat pòdere aplicare pro veìculos pesantes ebbia.</string>
+    <string name="gpx_parse_error">Su GPX de OsmAnd no est fraigadu bene, pro praghere cuntata s\'iscuadra de suportu pro investigare prus a fundu.</string>
+    <string name="system_screen_timeout_descr">Istudat s\'ischermu sighende sas impostatziones de sistema.</string>
+    <string name="system_screen_timeout">Imprea su tempus de istudadura de sistema</string>
+    <string name="turn_screen_on_descr">Ischerta sas optziones de allughidura de s\'ischermu (assegura·ti chi OsmAnd siat in primu pranu cando ses blochende su dispositivu):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Cada indicatzione de navigatzione at a allùghere s\'ischermu.</string>
+    <string name="turn_screen_on_navigation_instructions">Indicatziones de navigatzione</string>
+    <string name="turn_screen_on_power_button_disabled">Disabilitadu. Tenet bisòngiu de \'Mantene s\'ischermu allutu\' in suta de \'Tempus de allughidura\'.</string>
+    <string name="turn_screen_on_power_button_descr">Incarchende su butone de allughidura de su dispositivu as a allùghere s\'ischermu cun OsmAnd in subra a s\'ischermada de blocu.</string>
+    <string name="turn_screen_on_wake_time_descr">Issèbera sa longària de istudadura de s\'ischermu a pustis de s\'allughidura. (\"%1$s\" non ponet tempus perunu.)</string>
+    <string name="map_source_zoom_levels">Imposta unu livellu de ismanniamentu mìnimu e unu màssimu pro ammustrare o carrigare sa mapa in lìnia.</string>
+    <string name="expire_time_descr">Sos tasseddos ant a èssere torrados a carrigare a pustis de su nùmeru de minutos dillindados. Lassa custu campu bòidu pro no annoare mai sos tasseddos pro custa mitza. 
+\n
+\nUna die sunt 1440 minutos.
+\nUna chida sunt is 10 080 minutos.
+\nUnu mese sunt 43 829 minutos.</string>
+    <string name="shared_string_always">Semper</string>
+    <string name="screen_control">Controllu de s\'ischermu</string>
+    <string name="turn_screen_on_power_button">Butone de allughidura</string>
+    <string name="turn_screen_on_proximity_sensor">Sensore de prossimidade</string>
+    <string name="keep_screen_on">Mantene s\'ischermu allutu</string>
+    <string name="keep_screen_off">Mantene s\'ischermu istudadu</string>
+    <string name="pseudo_mercator_projection">Projetzione de psèudo-Mercadore</string>
+    <string name="one_image_per_tile">Unu documentu de immàgine pro tasseddu</string>
+    <string name="sqlite_db_file">Documentu SQLiteDB</string>
+    <string name="online_map_name_helper_text">Fruni unu nùmene pro sa mitza de sa mapa in lìnia.</string>
+    <string name="online_map_url_helper_text">Inserta o incolla s\'URL pro sa mitza in lìnia.</string>
+    <string name="edit_online_source">Modìfica sa mitza in lìnia</string>
+    <string name="expire_time">Tempus de iscadida</string>
+    <string name="mercator_projection">Projetzione de Mercatore</string>
+    <string name="storage_format">Formadu de sarvamentu</string>
+    <string name="screen_timeout">Tempus de su blocu de s\'ischermu</string>
+    <string name="screen_timeout_descr">Si \"%1$s\" est allutu, su tempus de atividade at a dipèndere dae issu.</string>
+    <string name="default_screen_timeout">Tempus de blocu de s\'ischermu predefinidu</string>
+    <string name="add_online_source">Annanghe una mitza in lìnia</string>
+    <string name="clear_tiles_warning">Aplichende custas modìficas as a isboidare sa memòria temporànea pro custa mitza de tasseddos</string>
+    <string name="vessel_height_warning_link">Imposta s\'artària de sa barca</string>
+    <string name="vessel_height_warning">Podes impostare s\'artària de sa barca pro evitare sos pontes bassos. Ammenta·ti chi, si su ponte est mòbile, amus a impreare s\'artària sua de cando est abertu.</string>
+    <string name="vessel_height_limit_description">Imposta s\'artària de sa barca pro evitare sos pontes bassos. Ammenta·ti chi, si su ponte est mòbile, amus a impreare s\'artària sua de cando est abertu.</string>
+    <string name="vessel_width_limit_description">Imposta sa largària de sa barca pro evitare pontes astrintos</string>
 </resources>

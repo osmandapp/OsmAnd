@@ -1021,7 +1021,7 @@
     <string name="speak_speed_limit">Limitations de vitesse</string>
     <string name="shared_string_about">À propos</string>
     <string name="about_settings_descr">Note de version, licences, membres du projet</string>
-    <string name="local_index_tile_data_zooms">Zooms téléchargés : %1$s</string>
+    <string name="local_index_tile_data_zooms">Niveaux de zoom téléchargés : %1$s</string>
     <string name="local_index_tile_data_expire">Expire (minutes) : %1$s</string>
     <string name="local_index_tile_data_downloadable">Téléchargeable : %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom maximum : %1$s</string>
@@ -1041,8 +1041,8 @@
     <string name="clear_intermediate_points">Supprimer les étapes</string>
     <string name="keep_intermediate_points">Conserver les étapes</string>
     <string name="local_index_tile_data_name">Données de tuile : %1$s</string>
-    <string name="edit_tilesource_successfully">Le fournisseur de tuiles %1$s a été enregistré avec succès</string>
-    <string name="edit_tilesource_elliptic_tile">Mercator elliptique</string>
+    <string name="edit_tilesource_successfully">La source de tuiles %1$s a été enregistrée</string>
+    <string name="edit_tilesource_elliptic_tile">Projection de Mercator elliptique</string>
     <string name="edit_tilesource_choose_existing">Sélectionner existant…</string>
     <string name="maps_define_edit">Définir/Éditer…</string>
     <string name="speak_descr">Paramétrer les annonces des noms de rue, alertes de circulation (bouchons, ralentissements), radars et limites de vitesse.</string>
@@ -2239,7 +2239,7 @@
 \n • Téléversez des traces GPX vers OSM directement depuis l\'application 
 \n • Ajoutez des Points d\'intérêt et téléversez-les vers OSM (immédiatement ou plus tard si vous êtes hors ligne)
 \n</string>
-    <string name="osmand_plus_extended_description_part8">Couverture et qualité des cartes (de 1 à 4 étoiles) :
+    <string name="osmand_plus_extended_description_part8">Couverture et qualité des cartes (de 1 à 4 étoiles) : 
 \n • Europe de l\'Ouest : **** (4) 
 \n • Europe de l\'Est : *** (3) 
 \n • Russie : *** (3) 
@@ -3591,7 +3591,7 @@
     <string name="app_mode_ski_touring">Ski de randonnée</string>
     <string name="app_mode_ski_snowmobile">Motoneige</string>
     <string name="custom_osmand_plugin">Greffon OsmAnd personnalisé</string>
-    <string name="replace_point_descr">Remplacer un point par celui-ci</string>
+    <string name="replace_point_descr">Remplacer un point par celui-ci.</string>
     <string name="changes_applied_to_profile">Modifications appliquées au profil \'%1$s\'.</string>
     <string name="settings_item_read_error">Impossible de lire depuis \'%1$s\'.</string>
     <string name="settings_item_write_error">Impossible d\'écrire dans \'%1$s\'.</string>
@@ -3708,19 +3708,19 @@
     <string name="index_item_world_basemap_detailed">Carte mondiale générale (plus détaillée)</string>
     <string name="unsupported_type_error">Type non pris en charge</string>
     <string name="gpx_parse_error">Le fichier GPX OsmAnd n\'est pas construit correctement. Vous pouvez transmettre ce fichier à l\'équipe support OsmAnd pour investiguer.</string>
-    <string name="system_screen_timeout_descr">L\'écran s\'éteindra après le délai système.</string>
-    <string name="map_source_zoom_levels_descr">Ces paramètres affecteront l\'affichage lorsqu\'ils seront utilisés comme carte ou sur-couche / sous-couche.
-\n
-\n%1$s : La carte sera limitée aux zooms sélectionnés.
-\n
-\n%2$s : Niveaux de zoom auxquels les tuiles originales seront visibles. En dehors de ces valeurs, il y aura une augmentation ou une diminution d\'échelle.</string>
+    <string name="system_screen_timeout_descr">Éteint l\'écran en fonction du délai système.</string>
+    <string name="map_source_zoom_levels_descr">Affecte l\'affichage de la carte ou des sur-couche / sous-couche. 
+\n 
+\n%1$s : La carte est limitée aux zooms sélectionnés. 
+\n 
+\n%2$s sont les niveaux de zoom auxquels les tuiles originales seront visibles. En dehors de ces valeurs, il y aura une augmentation ou une diminution d\'échelle.</string>
     <string name="turn_screen_on_navigation_instructions_descr">L\'écran s\'allumera pour afficher les instructions de navigation.</string>
     <string name="turn_screen_on_wake_time_descr">Sélectionnez la durée d\'affichage de l\'écran après allumage (\"%1$s\" signifie pas d\'extinction).</string>
-    <string name="screen_timeout_descr">Si l\'option \"%1$s\" est activée, le temps d\'activité en dépendra.</string>
-    <string name="expire_time_descr">Délai d\'expiration en minutes. Les tuiles en cache seront rechargées après ce délai. Laissez ce champ vide pour ne jamais rafraîchir les tuiles pour cette source.
-\n
-\nUn jour correspond à 1440 minutes.
-\nUne semaine correspond à 10 080 minutes.
+    <string name="screen_timeout_descr">Si \"%1$s\" est activé, le temps d\'activité en dépendra.</string>
+    <string name="expire_time_descr">Les tuiles en cache seront à nouveau téléchargées après ce délai (en minutes). Laissez ce champ vide pour ne jamais rafraîchir les tuiles pour cette source. 
+\n 
+\nUn jour correspond à 1440 minutes. 
+\nUne semaine correspond à 10 080 minutes. 
 \nUn mois correspond à 43 829 minutes.</string>
     <string name="shared_string_always">Toujours</string>
     <string name="screen_control">Contrôle de l\'écran</string>
@@ -3743,7 +3743,7 @@
     <string name="mercator_projection">Projection de Mercator</string>
     <string name="storage_format">Format de stockage</string>
     <string name="map_source_zoom_levels">Définissez les niveaux de zoom minimum et maximum auxquels la carte en ligne sera affichée ou chargée.</string>
-    <string name="tiles_storage_descr">Sélectionnez comment les tuiles téléchargées seront stockées.</string>
+    <string name="tiles_storage_descr">Sélectionnez comment stocker les tuiles téléchargées.</string>
     <string name="default_screen_timeout">Délai par défaut de veille écran</string>
     <string name="export_import_quick_actions_with_profiles_promo">Vous pouvez exporter ou importer les actions rapides avec les profils d’application.</string>
     <string name="shared_string_delete_all_q">Tout supprimer \?</string>
@@ -3754,8 +3754,14 @@
     <string name="width_limit_description">Indiquez la largeur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules larges.</string>
     <string name="shared_string_tones">sonneries</string>
     <string name="shared_string_meters">mètres</string>
-    <string name="details_dialog_decr">Contrôler la visibilité des autres détails affichés sur la carte</string>
+    <string name="details_dialog_decr">Afficher ou masquer les autres détails sur la carte</string>
     <string name="shared_string_night_map">Carte nocturne</string>
     <string name="shared_string_all_time">Tout le temps</string>
     <string name="turn_screen_on_power_button_disabled">Désactivé. Nécessite l\'option « Garder l\'écran allumé » sous « Délai d\'affichage de l\'écran ».</string>
+    <string name="add_online_source">Ajouter une source en ligne</string>
+    <string name="clear_tiles_warning">Appliquer ces modifications effacera les données mises en cache pour cette source de tuiles</string>
+    <string name="vessel_height_warning_link">Définir la hauteur du navire</string>
+    <string name="vessel_height_warning">Vous pouvez définir la hauteur du navire pour éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
+    <string name="vessel_height_limit_description">Définir la hauteur du navire afin d\'éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
+    <string name="vessel_width_limit_description">Définir la largeur du navire pour éviter les ponts étroits</string>
 </resources>

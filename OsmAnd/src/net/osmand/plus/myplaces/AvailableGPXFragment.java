@@ -1492,8 +1492,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		});
+		Drawable shareIcon = iconsCache.getThemedIcon((R.drawable.ic_action_gshare_dark));
 		item = optionsMenu.getMenu().add(R.string.shared_string_share)
-				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_gshare_dark));
+				.setIcon(AndroidUtils.getDrawableForDirection(app, shareIcon));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

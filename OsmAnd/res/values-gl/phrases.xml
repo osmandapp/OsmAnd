@@ -1736,7 +1736,7 @@
     <string name="poi_additional_atm_yes">Caixeiro automático: si</string>
     <string name="poi_atm_no">Caixeiro automático: non</string>
     <string name="poi_brushless">Sen vasoira</string>
-    <string name="poi_pharmacy_dispensing">Dispensa recetas médicas</string>
+    <string name="poi_pharmacy_dispensing">Dispensa receitas médicas</string>
     <string name="poi_scout_camp">Campamento de exploradores</string>
     <string name="poi_backcountry">Acampada libre</string>
     <string name="poi_drive_in">Conducir por dentro</string>
