@@ -210,16 +210,25 @@ public class TurnType {
 	public static void setPrimaryTurnShiftOthers(int[] lanes, int lane, int turnType) {
 		int pt = getPrimaryTurn(lanes[lane]);
 		int st = getSecondaryTurn(lanes[lane]);
-		//int tt = getTertiaryTurn(lanes[lane]);
+		//int tt = getTertiaryTurn(lanes[lane]); is lost here
 		setPrimaryTurnAndReset(lanes, lane, turnType);
 		setSecondaryTurn(lanes, lane, pt);
 		setTertiaryTurn(lanes, lane, st);
 	}
 	
-	public static void setSecondaryTurnShiftOthers(int[] lanes, int lane, int turnType) {
+	public static void setSecondaryToPrimary(int[] lanes, int lane) {
 		int st = getSecondaryTurn(lanes[lane]);
-		//int tt = getTertiaryTurn(lanes[lane]);
-		setSecondaryTurn(lanes, lane, turnType);
+		int pt = getPrimaryTurn(lanes[lane]);
+		setPrimaryTurn(lanes, lane, st);
+		setSecondaryTurn(lanes, lane, pt);
+	}
+	
+	public static void setTertiaryToPrimary(int[] lanes, int lane) {
+		int st = getSecondaryTurn(lanes[lane]);
+		int pt = getPrimaryTurn(lanes[lane]);
+		int tt = getTertiaryTurn(lanes[lane]);
+		setPrimaryTurn(lanes, lane, tt);
+		setSecondaryTurn(lanes, lane, pt);
 		setTertiaryTurn(lanes, lane, st);
 	}
 
