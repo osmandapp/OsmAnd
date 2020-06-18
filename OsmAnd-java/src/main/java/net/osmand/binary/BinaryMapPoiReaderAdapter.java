@@ -715,6 +715,10 @@ public class BinaryMapPoiReaderAdapter {
 						am.setRoutePoint(arp);
 					}
 				}
+				PoiType poiType = poiTypes.getPoiTypeByKeyInCategory(am.getType(), am.getSubType());
+				if (poiType != null && poiType.isForbidden()) {
+					return null;
+				}
 				return am;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DX_FIELD_NUMBER:
 				x = (codedIS.readSInt32() + (px << (24 - zoom))) << 7;

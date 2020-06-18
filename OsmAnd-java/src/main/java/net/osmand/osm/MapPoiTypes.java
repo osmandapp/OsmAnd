@@ -946,13 +946,11 @@ public class MapPoiTypes {
 		}
 	}
 
-	public void excludeSpeedCameraPoiType() {
+	public void forbidPoiType(String keyName) {
 		for (PoiCategory category : categories) {
-			Iterator<PoiType> poiIter = category.getPoiTypes().iterator();
-			while (poiIter.hasNext()) {
-				PoiType poiType = poiIter.next();
-				if ("speed_camera".equals(poiType.getKeyName())) {
-					poiIter.remove();
+			for (PoiType poiType : category.getPoiTypes()) {
+				if (keyName.equals(poiType.getKeyName())) {
+					poiType.setForbidden(true);
 				}
 			}
 		}

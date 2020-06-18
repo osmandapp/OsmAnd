@@ -86,6 +86,7 @@ import java.util.Random;
 import btools.routingapp.BRouterServiceConnection;
 
 import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
+import static net.osmand.plus.dialogs.SpeedCamerasBottomSheet.SPEED_CAMERA_KEY_NAME;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
@@ -407,7 +408,7 @@ public class AppInitializer implements IProgress {
 			}
 		});
 		if (app.getSettings().SPEED_CAMERAS_UNINSTALLED.get()) {
-			app.getPoiTypes().excludeSpeedCameraPoiType();
+			app.getPoiTypes().forbidPoiType(SPEED_CAMERA_KEY_NAME);
 		}
 	}
 

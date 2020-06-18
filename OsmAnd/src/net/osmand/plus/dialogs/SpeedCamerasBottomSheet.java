@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -21,12 +20,11 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
-import net.osmand.plus.widgets.style.CustomTypefaceSpan;
-import net.osmand.search.SearchUICore.SearchResultMatcher;
 
 public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SpeedCamerasBottomSheet.class.getName();
+	public static final String SPEED_CAMERA_KEY_NAME = "speed_camera";
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
@@ -65,8 +63,7 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 		speedCamUninstalled.set(true);
 		settings.SPEAK_SPEED_CAMERA.set(false);
 		settings.SHOW_CAMERAS.set(false);
-		app.getPoiTypes().excludeSpeedCameraPoiType();
-		SearchResultMatcher.speedCamerasUninstalled = true;
+		app.getPoiTypes().forbidPoiType(SPEED_CAMERA_KEY_NAME);
 		Fragment targetFragment = getTargetFragment();
 		if (targetFragment instanceof OnPreferenceChanged) {
 			((OnPreferenceChanged) targetFragment).onPreferenceChanged(speedCamUninstalled.getId());

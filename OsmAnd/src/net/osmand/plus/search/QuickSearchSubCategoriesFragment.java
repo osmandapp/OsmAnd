@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -86,6 +87,12 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 			acceptedCategories = new HashSet<>(savedInstanceState.getStringArrayList(ACCEPTED_CATEGORIES_KEY));
 		}
 		poiTypeList = new ArrayList<>(poiCategory.getPoiTypes());
+		Iterator<PoiType> iter = poiTypeList.iterator();
+		while (iter.hasNext()) {
+			if (iter.next().isForbidden()) {
+				iter.remove();
+			}
+		}
 		Collections.sort(poiTypeList, new Comparator<PoiType>() {
 			@Override
 			public int compare(PoiType poiType, PoiType t1) {

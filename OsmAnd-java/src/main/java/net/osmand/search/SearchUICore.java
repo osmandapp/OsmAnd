@@ -657,8 +657,6 @@ public class SearchUICore {
 		private List<MapObject> exportedObjects;
 		private List<City> exportedCities;
 
-		public static boolean speedCamerasUninstalled = false;
-
 		public SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
 								   AtomicInteger requestNumber, int totalLimit) {
 			this.matcher = matcher;
@@ -736,7 +734,7 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
-			if (speedCamerasUninstalled && isSpeedCameraObject(object.object)) {
+			if (isPoiTypeForbidden(object.object)) {
 				return false;
 			}
 			if (phrase != null && object.otherNames != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
@@ -893,14 +891,11 @@ public class SearchUICore {
 			return json;
 		}
 
-		private boolean isSpeedCameraObject(Object object) {
-			String key = "";
+		private boolean isPoiTypeForbidden(Object object) {
 			if (object instanceof PoiType) {
-				key = ((PoiType) object).getKeyName();
-			} else if (object instanceof Amenity) {
-				key = ((Amenity) object).getSubType();
+				return ((PoiType) object).isForbidden();
 			}
-			return "speed_camera".equals(key);
+			return false;
 		}
 	}
 	

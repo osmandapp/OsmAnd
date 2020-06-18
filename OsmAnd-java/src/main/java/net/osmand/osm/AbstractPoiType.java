@@ -21,6 +21,7 @@ public abstract class AbstractPoiType {
 	private String synonyms;
 	private String enTranslation;
 	private String translation;
+	private boolean isForbidden;
 
 	public AbstractPoiType(String keyName, MapPoiTypes registry) {
 		this.keyName = keyName;
@@ -67,6 +68,13 @@ public abstract class AbstractPoiType {
 		return this instanceof PoiType && this.isAdditional();
 	}
 
+	public void setForbidden(boolean forbidden) {
+		isForbidden = forbidden;
+	}
+
+	public boolean isForbidden() {
+		return isForbidden;
+	}
 
 	public String getTranslation() {
 		if(translation == null) {
