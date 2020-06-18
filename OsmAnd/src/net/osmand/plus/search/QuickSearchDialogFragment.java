@@ -86,6 +86,7 @@ import net.osmand.plus.poi.RearrangePoiFiltersFragment;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
+import net.osmand.plus.search.listitems.QuickSearchFreeBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
@@ -94,6 +95,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -848,7 +850,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		cancelPrev = false;
 		hidden = false;
 		if (interruptedSearch) {
-			addMoreButton(true);
+			addNotFoundButton(true);
 			interruptedSearch = false;
 		}
 	}
@@ -1173,7 +1175,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 				if (getResultCollection() != null) {
 					updateSearchResult(getResultCollection(), false);
-					addMoreButton(searchUICore.isSearchMoreAvailable(searchUICore.getPhrase()));
+					addNotFoundButton(searchUICore.isSearchMoreAvailable(searchUICore.getPhrase()));
 				}
 				break;
 		}
@@ -1701,7 +1703,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								searching = false;
 								if (resultListener == null || resultListener.searchFinished(object.requiredSearchPhrase)) {
 									hideProgressBar();
-									addMoreButton(searchUICore.isSearchMoreAvailable(object.requiredSearchPhrase));
+									SearchPhrase phrase = object.requiredSearchPhrase;
+									if (WikipediaPoiMenu.isWikiSearch(phrase)) {
+										if (!Version.isPaidVersion(app)) {
+											mainSearchFragment.addListItem(new QuickSearchFreeBannerListItem(app));
+										} else {
+											addNotFoundButton(searchUICore.isSearchMoreAvailable(phrase), true);
+										}
+									} else {
+										addNotFoundButton(searchUICore.isSearchMoreAvailable(phrase));
+									}
 								}
 							}
 						});
@@ -1969,10 +1980,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void addMoreButton(boolean searchMoreAvailable) {
+	private void addNotFoundButton(boolean searchMoreAvailable) {
+		addNotFoundButton(searchMoreAvailable, false);
+	}
+
+	private void addNotFoundButton(boolean searchMoreAvailable, final boolean isWiki) {
 		if (!paused && !cancelPrev && mainSearchFragment != null && !isTextEmpty()) {
 			QuickSearchMoreListItem moreListItem =
-					new QuickSearchMoreListItem(app, null, new SearchMoreItemOnClickListener() {
+					new QuickSearchMoreListItem(app, null, isWiki, new SearchMoreItemOnClickListener() {
 						@Override
 						public void increaseRadiusOnClick() {
 							if (!interruptedSearch) {
@@ -1994,11 +2009,18 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							updateTabbarVisibility(false);
 							runCoreSearch(searchQuery, false, true);
 						}
+
+						@Override
+						public void downloadWikiOnClick() {
+							WikipediaPoiMenu.showDownloadWikiScreen(getMapActivity());
+						}
 					});
 			moreListItem.setInterruptedSearch(interruptedSearch);
 			moreListItem.setEmptySearch(isResultEmpty());
 			moreListItem.setOnlineSearch(isOnlineSearch());
 			moreListItem.setSearchMoreAvailable(searchMoreAvailable);
+			moreListItem.setSecondaryButtonVisible(!isWiki ||
+					WikipediaPoiMenu.hasWikiMapsToDownload(getMapActivity()));
 			mainSearchFragment.addListItem(moreListItem);
 			updateSendEmptySearchBottomBar(isResultEmpty() && !interruptedSearch);
 		}

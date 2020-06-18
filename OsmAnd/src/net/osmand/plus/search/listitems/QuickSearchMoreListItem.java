@@ -16,11 +16,15 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 	private String findMore;
 	private String restartSearch;
 	private String increaseRadius;
+	private boolean isWiki;
+	private boolean secondaryButtonVisibility;
 
-	public QuickSearchMoreListItem(OsmandApplication app, String name, @Nullable SearchMoreItemOnClickListener onClickListener) {
+	public QuickSearchMoreListItem(OsmandApplication app, String name, boolean isWiki,
+	                               @Nullable SearchMoreItemOnClickListener onClickListener) {
 		super(app, null);
 		this.name = name;
 		this.onClickListener = onClickListener;
+		this.isWiki = isWiki;
 		findMore = app.getString(R.string.search_POI_level_btn).toUpperCase();
 		restartSearch = app.getString(R.string.restart_search).toUpperCase();
 		increaseRadius = app.getString(R.string.increase_search_radius).toUpperCase();
@@ -89,10 +93,30 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 		}
 	}
 
+	public void downloadWikiOnClick() {
+		if (onClickListener != null) {
+			onClickListener.downloadWikiOnClick();
+		}
+	}
+
+	public boolean isWiki() {
+		return isWiki;
+	}
+
+	public void setSecondaryButtonVisible(boolean secondaryButtonVisibility) {
+		this.secondaryButtonVisibility = secondaryButtonVisibility;
+	}
+
+	public boolean isSecondaryButtonVisible() {
+		return secondaryButtonVisibility;
+	}
+
 	public interface SearchMoreItemOnClickListener {
 
 		void increaseRadiusOnClick();
 
 		void onlineSearchOnClick();
+
+		void downloadWikiOnClick();
 	}
 }

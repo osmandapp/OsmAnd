@@ -196,7 +196,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		if (intent != null && intent.getExtras() != null) {
 			String region = getIntent().getStringExtra(REGION_TO_SEARCH);
 			if (region != null && !region.isEmpty()) {
-				showDialog(this, SearchDialogFragment.createInstance(region,
+				showDialog(this, SearchDialogFragment.createInstance(region, true, true,
 						getIntent().getBooleanExtra(SHOW_WIKI_KEY, false)));
 			}
 			filter = intent.getExtras().getString(FILTER_KEY);

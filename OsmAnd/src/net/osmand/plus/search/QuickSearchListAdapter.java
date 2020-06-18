@@ -1,6 +1,5 @@
 package net.osmand.plus.search;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CollatorStringMatcher;
@@ -26,6 +26,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
@@ -46,7 +47,7 @@ import static net.osmand.search.core.ObjectType.POI_TYPE;
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private OsmandApplication app;
-	private Activity activity;
+	private FragmentActivity activity;
 	private AccessibilityAssistant accessibilityAssistant;
 	private LayoutInflater inflater;
 
@@ -70,7 +71,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		void reloadData();
 	}
 
-	public QuickSearchListAdapter(OsmandApplication app, Activity activity) {
+	public QuickSearchListAdapter(OsmandApplication app, FragmentActivity activity) {
 		super(app, R.layout.search_list_item);
 		this.app = app;
 		this.activity = activity;
@@ -199,7 +200,25 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		final QuickSearchListItem listItem = getItem(position);
 		QuickSearchListItemType type = listItem.getType();
 		LinearLayout view;
-		if (type == QuickSearchListItemType.SEARCH_MORE) {
+		if (type == QuickSearchListItemType.FREE_VERSION_BANNER) {
+			if (convertView == null) {
+				view = (LinearLayout) inflater.inflate(
+						R.layout.read_wikipedia_ofline_banner, null);
+			} else {
+				view = (LinearLayout) convertView;
+			}
+
+			View btnGet = view.findViewById(R.id.btn_get);
+			if (btnGet != null) {
+				btnGet.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						ChoosePlanDialogFragment.showWikipediaInstance(
+								activity.getSupportFragmentManager());
+					}
+				});
+			}
+		} else if (type == QuickSearchListItemType.SEARCH_MORE) {
 			if (convertView == null) {
 				view = (LinearLayout) inflater.inflate(R.layout.search_more_list_item, null);
 			} else {
@@ -233,7 +252,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				textTitle = app.getString(R.string.search_nothing_found);
 			}
 			((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
-			View increaseRadiusRow = view.findViewById(R.id.increase_radius_row);
+			View primaryButton = view.findViewById(R.id.primary_button);
 
 			SearchWord word = searchPhrase.getLastSelectedWord();
 			if (word != null && word.getType() != null && word.getType().equals(POI_TYPE)) {
@@ -245,18 +264,29 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				((TextView) view.findViewById(R.id.title)).setText(app.getString(R.string.increase_search_radius));
 			}
 			
-			increaseRadiusRow.setVisibility(searchMoreItem.isSearchMoreAvailable() ? View.VISIBLE : View.GONE);
-			increaseRadiusRow.setOnClickListener(new View.OnClickListener() {
+			primaryButton.setVisibility(searchMoreItem.isSearchMoreAvailable() ? View.VISIBLE : View.GONE);
+			primaryButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					((QuickSearchMoreListItem) listItem).increaseRadiusOnClick();
 				}
 			});
 
-			if (!searchMoreItem.isOnlineSearch()) {
-				View onlineSearchRow = view.findViewById(R.id.online_search_row);
-				onlineSearchRow.setVisibility(View.VISIBLE);
-				onlineSearchRow.setOnClickListener(new View.OnClickListener() {
+			View secondaryButton = view.findViewById(R.id.secondary_button);
+			if (searchMoreItem.isWiki()) {
+				secondaryButton.setVisibility(
+						searchMoreItem.isSecondaryButtonVisible() ? View.VISIBLE : View.GONE);
+				TextView tvTitle = view.findViewById(R.id.secondary_button_title);
+				tvTitle.setText(R.string.search_download_wikipedia_maps);
+				secondaryButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						searchMoreItem.downloadWikiOnClick();
+					}
+				});
+			} else if (!searchMoreItem.isOnlineSearch()) {
+				secondaryButton.setVisibility(View.VISIBLE);
+				secondaryButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						searchMoreItem.onlineSearchOnClick();

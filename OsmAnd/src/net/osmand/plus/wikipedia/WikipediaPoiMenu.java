@@ -1,11 +1,13 @@
 package net.osmand.plus.wikipedia;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -20,6 +22,10 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 
 import java.io.IOException;
@@ -356,5 +362,39 @@ public class WikipediaPoiMenu {
 			}
 		}
 		return preferredLanguage;
+	}
+
+	public static void showDownloadWikiScreen(MapActivity mapActivity) {
+		OsmandMapTileView mv = mapActivity.getMapView();
+		DownloadedRegionsLayer dl = mv.getLayerByClass(DownloadedRegionsLayer.class);
+		String filter = dl.getFilter(new StringBuilder());
+		final Intent intent = new Intent(mapActivity,
+				mapActivity.getMyApplication().getAppCustomization().getDownloadIndexActivity());
+		intent.putExtra(DownloadActivity.FILTER_KEY, filter);
+		intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.WIKIPEDIA_FILE.getTag());
+		intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
+		mapActivity.startActivity(intent);
+	}
+
+	public static boolean hasWikiMapsToDownload(MapActivity ma) {
+		try {
+			return DownloadResources.findIndexItemsAt(ma.getMyApplication(), ma.getMapLocation(),
+					DownloadActivityType.WIKIPEDIA_FILE, false, 1).size() > 0;
+		} catch (IOException e) {
+			return false;
+		}
+	}
+
+	public static boolean isWikiSearch(SearchPhrase phrase) {
+		if (phrase.isLastWord(ObjectType.POI_TYPE)) {
+			Object obj = phrase.getLastSelectedWord().getResult().object;
+			if (obj instanceof PoiUIFilter) {
+				PoiUIFilter pf = (PoiUIFilter) obj;
+				if (pf.isWikiFilter()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
