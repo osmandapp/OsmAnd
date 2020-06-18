@@ -341,19 +341,16 @@ public class WikipediaPoiMenu {
 	                                            @NonNull Set<String> availableArticleLangs,
 	                                            String preferredLanguage) {
 		Bundle wikiPoiSettings = getWikiPoiSettings(app);
-		if (!app.getPoiFilters().isTopWikiFilterSelected() || wikiPoiSettings == null) {
-			// Wikipedia POI setting disabled
-			return preferredLanguage;
-		}
-		if (wikiPoiSettings.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY)) {
-			// global Wikipedia POI filter enabled
+		if (wikiPoiSettings == null) {
+			// Wikipedia with default settings
 			return preferredLanguage;
 		}
 		if (Algorithms.isEmpty(preferredLanguage)) {
 			preferredLanguage = app.getLanguage();
 		}
 		List<String> wikiLangs = wikiPoiSettings.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
-		if (wikiLangs != null && !wikiLangs.contains(preferredLanguage)) {
+		if (wikiLangs != null && !wikiPoiSettings.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY)
+				&& !wikiLangs.contains(preferredLanguage)) {
 			// return first matched language from enabled Wikipedia languages
 			for (String language : wikiLangs) {
 				if (availableArticleLangs.contains(language)) {
