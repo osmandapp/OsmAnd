@@ -182,7 +182,7 @@
     <string name="driving_region_japan">اليابان</string>
     <string name="driving_region_us">الولايات المتحدة</string>
     <string name="driving_region_canada">كندا</string>
-    <string name="driving_region_europe_asia">أوروبا وآسيا</string>
+    <string name="driving_region_europe_asia">أوروبا وآسيا وأمريكا اللاتينية ومناطق مماثلة</string>
     <string name="driving_region_uk">المملكة المتحدة، الهند وما شابه ذلك</string>
     <string name="speak_title">الإعلامات…</string>
     <string name="osb_author_or_password_not_specified">أدخل اسم المستخدم وكلمة السر في الإعدادات</string>
@@ -321,7 +321,7 @@
     <string name="intermediate_point">الوجهة الوسطى %1$s</string>
     <string name="context_menu_item_last_intermediate_point">أضف آخر وجهة وسيطة</string>
     <string name="context_menu_item_first_intermediate_point">إضافة كوجهة وسيطة أولى</string>
-    <string name="edit_tilesource_expiration_time">الانتهاء (دقائق)</string>
+    <string name="edit_tilesource_expiration_time">انتهاء الوقت (دقيقة)</string>
     <string name="edit_tilesource_choose_existing">اختر القائمة …</string>
     <string name="map_widget_fps_info">معلومات تنقيح FPS</string>
     <string name="settings_preset_descr">اختيار وضع افتراضي لعرض الخريطة: استعراض، سيارة، مشي .</string>
@@ -351,7 +351,7 @@
     <string name="show_warnings_descr">ضبط تحذيرات المرور ( حدود السرعة، والتوقف القسري، والمطبات الصناعية ) ، وتحذيرات كاميرا السرعة ، ومعلومات الممرات.</string>
     <string name="local_index_tile_data_zooms">التقريبات المُنزّلة: %1$s</string>
     <string name="local_index_tile_data_name">معلومات التّجانب: %1$s</string>
-    <string name="edit_tilesource_successfully">حُفِظ المصدر التّجانبي %1$s بنجاح</string>
+    <string name="edit_tilesource_successfully">مصدر التجانب %1$s المحفوظ</string>
     <string name="use_compass_navigation_descr">استخدم البوصلة عندما لا تكون هناك أي وجهة محددة.</string>
     <string name="auto_zoom_map_descr">ملائمة تقريب الخريطة تزامناً مع موقعك.</string>
     <string name="auto_zoom_map">التكبير التلقائي</string>
@@ -406,7 +406,7 @@
     <string name="osmand_parking_time_limit">وقت محدد زمنياً</string>
     <string name="osmand_parking_time_no_limit">مواقف غير محدودة زمنياً</string>
     <string name="av_photo_play_sound_descr">فعّل هذا في حال رغبتك بسماع نغمة التقاط الصّور.</string>
-    <string name="edit_tilesource_elliptic_tile">نموذج مركتور البيضوي</string>
+    <string name="edit_tilesource_elliptic_tile">نموذج مركتور البيضاوي</string>
     <string name="route_descr_lat_lon">N %1$.3f E %2$.3f</string>
     <string name="use_kalman_filter_compass_descr">يحد من شوشرة البوصلة ولكنه يضيف بطئ بسيط.</string>
     <string name="use_kalman_filter_compass">مرشح كالمان</string>
@@ -2236,7 +2236,7 @@
     <string name="select_gpx_folder">حدد مجلد المسار</string>
     <string name="shared_string_gpx_tracks">المسارات</string>
     <string name="shared_string_time">الوقت</string>
-    <string name="osmand_plus_extended_description_part8">التغطية التقريبية للخريطة و جودتها :
+    <string name="osmand_plus_extended_description_part8">التغطية التقريبية للخريطة و جودتها : 
 \n• أوروبا الغربية : **** 
 \n• أوروبا الشرقية : *** 
 \n• روسيا : *** 
@@ -3772,4 +3772,8 @@
     <string name="vessel_height_warning_link">ضبط ارتفاع السفينة</string>
     <string name="vessel_height_warning">يمكنك ضبط ارتفاع الحاوية لتجنب الجسور المنخفضة. ضع في اعتبارك أنه إذا كان الجسر متحركاً ، فسوف نستخدم ارتفاعه في الحالة المفتوحة.</string>
     <string name="vessel_width_limit_description">تحديد عرض السفينة لتجنب الجسور الضيقة</string>
+    <string name="quick_action_showhide_mapillary_title">إظهار/إخفاء مابيلاري</string>
+    <string name="quick_action_mapillary_hide">إخفاء مابيلاري</string>
+    <string name="quick_action_mapillary_show">إظهار مابيلاري</string>
+    <string name="quick_action_showhide_mapillary_descr">إظهار أو إخفاء طبقة مابيلاري على الخريطة.</string>
 </resources>

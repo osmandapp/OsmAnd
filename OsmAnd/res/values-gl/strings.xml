@@ -3809,4 +3809,8 @@ Lon %2$s</string>
     <string name="vessel_height_warning">Podes definir a altura da embarcación para evitar pontes baixas. Lémbrate se a ponte é móbil, empregaremos a súa altura no estado aberto.</string>
     <string name="vessel_height_limit_description">Define o alto da embarcación para evitar pontes baixas. Lémbrate se a ponte é móbil, empregaremos a súa altura no estado aberto.</string>
     <string name="vessel_width_limit_description">Estabelecer o largo da embarcación para evitar pontes estreitas</string>
+    <string name="quick_action_showhide_mapillary_title">Amosar/agochar o Mapillary</string>
+    <string name="quick_action_mapillary_hide">Agochar o Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Un botón para amosar ou agochar a capa do Mapillary no mapa.</string>
+    <string name="quick_action_mapillary_show">Amosar o Mapillary</string>
 </resources>

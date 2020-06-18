@@ -3789,4 +3789,8 @@
     <string name="vessel_height_warning">Sie können die Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Denken Sie daran, wenn die Brücke beweglich ist, werden wir ihre Höhe im offenen Zustand verwenden.</string>
     <string name="vessel_height_limit_description">Stellen Sie die Schiffshöhe ein, um niedrige Brücken zu vermeiden.Denken Sie daran, wenn die Brücke beweglich ist, werden wir ihre Höhe im offenen Zustand verwenden.</string>
     <string name="vessel_width_limit_description">Stellen Sie die Schiffsbreite ein, um schmale Brücken zu vermeiden</string>
+    <string name="quick_action_showhide_mapillary_title">Mapillary ein-/ausblenden</string>
+    <string name="quick_action_mapillary_hide">Mapillary ausblenden</string>
+    <string name="quick_action_mapillary_show">Mapillary anzeigen</string>
+    <string name="quick_action_showhide_mapillary_descr">Eine Umschaltfläche zum ein- oder ausblenden der Mapillary-Layer auf der Karte.</string>
 </resources>
