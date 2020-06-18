@@ -836,6 +836,13 @@ interface IOsmAndAidlInterface {
      */
     boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams params);
 
+    /**
+     * Method to get location of various objects
+     *
+     * @params locationType (int) - type of location to get
+     */
+    double[] getLocation(in int locationType);
+
     boolean importProfile(in ProfileSettingsParams params);
 
     boolean executeQuickAction(in QuickActionParams params);

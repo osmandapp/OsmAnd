@@ -29,6 +29,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
@@ -1003,6 +1004,21 @@ public class OsmandAidlApi {
 		return true;
 	}
 
+	double[] getLocation(int locationType) {
+		double lat, lon, alt = 0, speed = 0, bearing = 0;
+		switch (locationType) {
+			default: {
+				RoutingHelper rh = app.getRoutingHelper();
+				Location location = rh.getLastFixedLocation();
+				lat = location.getLatitude();
+				lon = location.getLongitude();
+				alt = location.getAltitude();
+				speed = location.getSpeed();
+				bearing = location.getBearing();
+			}
+		}
+		return new double[]{ lat, lon, alt, speed, bearing };
+	}
 
 	boolean updateMapMarker(String prevName, LatLon prevLatLon, String newName, LatLon newLatLon, boolean ignoreCoordinates) {
 		LatLon latLon = new LatLon(prevLatLon.getLatitude(), prevLatLon.getLongitude());

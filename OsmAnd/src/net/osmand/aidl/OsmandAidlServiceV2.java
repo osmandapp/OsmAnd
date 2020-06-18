@@ -1228,6 +1228,17 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		}
 
 		@Override
+		public double[] getLocation(int locationType) {
+			try {
+				OsmandAidlApi api = getApi("getLocation");
+				return api != null ? api.getLocation(locationType) : null;
+			} catch (Exception e) {
+				handleException(e);
+				return null;
+			}
+		}
+
+		@Override
 		public boolean importProfile(ProfileSettingsParams params) {
 			try {
 				OsmandAidlApi api = getApi("importProfile");
