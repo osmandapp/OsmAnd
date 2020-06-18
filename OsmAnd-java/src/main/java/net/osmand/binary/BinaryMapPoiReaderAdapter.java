@@ -715,10 +715,6 @@ public class BinaryMapPoiReaderAdapter {
 						am.setRoutePoint(arp);
 					}
 				}
-				PoiType poiType = poiTypes.getPoiTypeByKeyInCategory(am.getType(), am.getSubType());
-				if (poiType != null && poiType.isForbidden()) {
-					return null;
-				}
 				return am;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DX_FIELD_NUMBER:
 				x = (codedIS.readSInt32() + (px << (24 - zoom))) << 7;
@@ -774,6 +770,10 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				subtype = poiTypes.replaceDeprecatedSubtype(type, subtype);
+				PoiType poiType = poiTypes.getPoiTypeByKeyInCategory(type, subtype);
+				if (poiType != null && poiType.isForbidden()) {
+					return null;
+				}
 				if (req.poiTypeFilter == null || req.poiTypeFilter.accept(type, subtype)) {
 					if (amenityType == null) {
 						amenityType = type;
