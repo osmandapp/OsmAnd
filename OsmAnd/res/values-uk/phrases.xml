@@ -1463,7 +1463,7 @@
     <string name="poi_historic_civilization_helladic">Цивілізація: еладська</string>
     <string name="poi_traffic_signals_sound_yes">Так</string>
     <string name="poi_historic_civilization_cycladic">Цивілізація: кікладська</string>
-    <string name="poi_traffic_signals_sound_no">Ні</string>
+    <string name="poi_traffic_signals_sound_no">Звук: вимкнено</string>
     <string name="poi_historic_civilization_minoan">Цивілізація: мінойська</string>
     <string name="poi_traffic_signals_sound_walk">Лише коли перехід дозволений</string>
     <string name="poi_historic_civilization_tiahuanacota">Цивілізація: тіауанако</string>
@@ -3812,4 +3812,9 @@
     <string name="poi_fire_hydrant_pressure_filter">Тиск</string>
     <string name="poi_pump_status_missing_beam">Стан насосу: відсутній важіль</string>
     <string name="poi_fire_hydrant_style_water_source_groundwater">Підземні води</string>
+    <string name="poi_traffic_signals_arrow_yes">Увімкнено</string>
+    <string name="poi_traffic_signals_vibration_yes">Увімкнено</string>
+    <string name="poi_traffic_signals_vibration_no">Вібрація: вимкнено</string>
+    <string name="poi_traffic_signals_arrow">Стрілка</string>
+    <string name="poi_traffic_signals_vibration">Вібрація</string>
 </resources>
