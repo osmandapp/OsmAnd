@@ -1,6 +1,7 @@
 package net.osmand.aidlapi;
 
 import net.osmand.aidlapi.map.ALatLon;
+import net.osmand.aidlapi.map.APosition;
 import net.osmand.aidlapi.map.SetMapLocationParams;
 
 import net.osmand.aidlapi.favorite.group.AFavoriteGroup;
@@ -837,11 +838,11 @@ interface IOsmAndAidlInterface {
     boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams params);
 
     /**
-     * Method to get location of various objects
+     * Method to get position of various objects
      *
-     * @params locationType (int) - type of location to get
+     * @params positionType (int) - type of position to get
      */
-    double[] getLocation(in int locationType);
+    boolean getPosition(in int positionType, out APosition position);
 
     boolean importProfile(in ProfileSettingsParams params);
 

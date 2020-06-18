@@ -1,6 +1,7 @@
 package net.osmand.aidl;
 
 import net.osmand.aidl.map.ALatLon;
+import net.osmand.aidl.map.APosition;
 import net.osmand.aidl.map.SetMapLocationParams;
 
 import net.osmand.aidl.favorite.group.AFavoriteGroup;
@@ -838,11 +839,11 @@ interface IOsmAndAidlInterface {
     boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams params);
 
     /**
-     * Method to get location of various objects
+     * Method to get position of various objects
      *
-     * @params locationType (int) - type of location to get
+     * @params positionType (int) - type of position to get
      */
-    double[] getLocation(in int locationType);
+    boolean getPosition(in int positionType, out APosition position);
 
     /**
     * Method to get color name for gpx.

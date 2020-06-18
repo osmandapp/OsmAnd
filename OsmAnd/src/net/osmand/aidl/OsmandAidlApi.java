@@ -34,6 +34,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
+import net.osmand.aidl.map.APosition;
 import net.osmand.aidl.navigation.ADirectionInfo;
 import net.osmand.aidl.navigation.OnVoiceNavigationParams;
 import net.osmand.aidl.quickaction.QuickActionInfoParams;
@@ -1004,20 +1005,21 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	double[] getLocation(int locationType) {
-		double lat, lon, alt = 0, speed = 0, bearing = 0;
-		switch (locationType) {
-			default: {
+	public APosition getPosition(int positionType) {
+		switch (positionType) {
+			case 0: {
 				RoutingHelper rh = app.getRoutingHelper();
 				Location location = rh.getLastFixedLocation();
-				lat = location.getLatitude();
-				lon = location.getLongitude();
-				alt = location.getAltitude();
-				speed = location.getSpeed();
-				bearing = location.getBearing();
+				return new APosition(
+						location.getLatitude(),
+						location.getLongitude(),
+						location.getAltitude(),
+						location.getSpeed(),
+						location.getBearing()
+				);
 			}
 		}
-		return new double[]{ lat, lon, alt, speed, bearing };
+		return null;
 	}
 
 	boolean updateMapMarker(String prevName, LatLon prevLatLon, String newName, LatLon newLatLon, boolean ignoreCoordinates) {

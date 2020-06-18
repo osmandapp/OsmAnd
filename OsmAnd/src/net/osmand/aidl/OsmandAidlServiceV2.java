@@ -15,6 +15,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
 import net.osmand.aidl.OsmandAidlApi.SearchCompleteCallback;
+import net.osmand.aidlapi.map.APosition;
 import net.osmand.aidlapi.IOsmAndAidlCallback;
 import net.osmand.aidlapi.IOsmAndAidlInterface;
 import net.osmand.aidlapi.calculateroute.CalculateRouteParams;
@@ -1228,14 +1229,22 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		}
 
 		@Override
-		public double[] getLocation(int locationType) {
+		public boolean getPosition(int positionType, APosition position) {
 			try {
-				OsmandAidlApi api = getApi("getLocation");
-				return api != null ? api.getLocation(locationType) : null;
+				OsmandAidlApi api = getApi("getPosition");
+				if (api != null) {
+					net.osmand.aidl.map.APosition p = api.getPosition(positionType);
+					position.setLatitude(p.getLatitude());
+					position.setLongitude(p.getLongitude());
+					position.setAltitude(p.getAltitude());
+					position.setSpeed(p.getSpeed());
+					position.setBearing(p.getBearing());
+					return true;
+				}
 			} catch (Exception e) {
 				handleException(e);
-				return null;
 			}
+			return false;
 		}
 
 		@Override

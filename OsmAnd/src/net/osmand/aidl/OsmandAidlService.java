@@ -45,6 +45,7 @@ import net.osmand.aidl.gpx.ShowGpxParams;
 import net.osmand.aidl.gpx.StartGpxRecordingParams;
 import net.osmand.aidl.gpx.StopGpxRecordingParams;
 import net.osmand.aidl.map.ALatLon;
+import net.osmand.aidl.map.APosition;
 import net.osmand.aidl.map.SetMapLocationParams;
 import net.osmand.aidl.maplayer.AddMapLayerParams;
 import net.osmand.aidl.maplayer.RemoveMapLayerParams;
@@ -1279,14 +1280,22 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		}
 
 		@Override
-		public double[] getLocation(int locationType) {
+		public boolean getPosition(int positionType, APosition position) {
 			try {
-				OsmandAidlApi api = getApi("getLocation");
-				return api != null ? api.getLocation(locationType) : null;
+				OsmandAidlApi api = getApi("getPosition");
+				if (api != null) {
+					APosition p = api.getPosition(positionType);
+					position.setLatitude(p.getLatitude());
+					position.setLongitude(p.getLongitude());
+					position.setAltitude(p.getAltitude());
+					position.setSpeed(p.getSpeed());
+					position.setBearing(p.getBearing());
+					return true;
+				}
 			} catch (Exception e) {
 				handleException(e);
-				return null;
 			}
+			return false;
 		}
 
 		@Override
