@@ -16,8 +16,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.SelectedGpxMenuBuilder;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.io.File;
@@ -29,8 +29,9 @@ public class SelectedGpxMenuController extends MenuController {
 	private SelectedGpxFile item;
 
 	public SelectedGpxMenuController(@NonNull final MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final SelectedGpxFile item) {
-		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+		super(new SelectedGpxMenuBuilder(mapActivity, item), pointDescription, mapActivity);
 		this.item = item;
+		builder.setShowOnlinePhotos(false);
 
 		leftTitleButtonController = new TitleButtonController() {
 			@Override

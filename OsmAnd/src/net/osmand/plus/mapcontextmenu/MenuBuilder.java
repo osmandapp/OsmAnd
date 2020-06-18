@@ -754,6 +754,10 @@ public class MenuBuilder {
 		return iconsCache.getIcon(iconId, light ? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark);
 	}
 
+	public Drawable getThemedIcon(int iconId) {
+		return app.getUIUtilities().getThemedIcon(iconId);
+	}
+
 	public Drawable getRowIcon(Context ctx, String fileName) {
 		Drawable d = RenderingIcons.getBigIcon(ctx, fileName);
 		if (d != null) {
