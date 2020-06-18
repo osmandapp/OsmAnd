@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
@@ -21,6 +21,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -32,10 +33,12 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 	private SelectedGpxFile selectedGpxFile;
 	private GPXTrackAnalysis analysis;
+	private WptPt selectedPoint;
 
-	public SelectedGpxMenuBuilder(@NonNull MapActivity mapActivity, @NonNull SelectedGpxFile selectedGpxFile) {
+	public SelectedGpxMenuBuilder(@NonNull MapActivity mapActivity, @NonNull SelectedGpxPoint selectedGpxPoint) {
 		super(mapActivity);
-		this.selectedGpxFile = selectedGpxFile;
+		selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
+		selectedPoint = selectedGpxPoint.getSelectedPoint();
 		analysis = selectedGpxFile.getTrackAnalysis(mapActivity.getMyApplication());
 	}
 
@@ -46,7 +49,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected boolean needBuildCoordinatesRow() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -54,6 +57,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		buildOverviewRows(view);
 		buildElevationRows(view);
 		buildSpeedRows(view);
+		buildPointRows(view);
 	}
 
 	public void buildOverviewRows(View view) {
@@ -116,6 +120,27 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 					OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app), 0, null,
 					false, null, false, 0, false, false, false, null, true);
 		}
+	}
+
+	public void buildPointRows(View view) {
+		buildCategoryView(view, app.getString(R.string.plugin_distance_point));
+
+		buildRow(view, getThemedIcon(R.drawable.ic_action_polygom_dark), null, app.getString(R.string.distance),
+				OsmAndFormatter.getFormattedDistance((float) selectedPoint.distance, app), 0, null,
+				false, null, false, 0, false, false, false, null, false);
+
+		DateFormat format = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		buildRow(view, getThemedIcon(R.drawable.ic_action_time_start), null, app.getString(R.string.shared_string_time),
+				format.format(selectedPoint.time), 0, null,
+				false, null, false, 0, false, false, false, null, true);
+
+		buildRow(view, getThemedIcon(R.drawable.ic_action_altitude), null, app.getString(R.string.altitude),
+				OsmAndFormatter.getFormattedAlt(selectedPoint.ele, app), 0, null,
+				false, null, false, 0, false, false, false, null, false);
+
+		buildRow(view, getThemedIcon(R.drawable.ic_action_speed), null, app.getString(R.string.average_speed),
+				OsmAndFormatter.getFormattedSpeed((float) selectedPoint.speed, app), 0, null,
+				false, null, false, 0, false, false, false, null, false);
 	}
 
 	private void buildCategoryView(View view, String name) {

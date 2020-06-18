@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -28,9 +29,10 @@ public class SelectedGpxMenuController extends MenuController {
 
 	private SelectedGpxFile item;
 
-	public SelectedGpxMenuController(@NonNull final MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final SelectedGpxFile item) {
-		super(new SelectedGpxMenuBuilder(mapActivity, item), pointDescription, mapActivity);
-		this.item = item;
+	public SelectedGpxMenuController(@NonNull final MapActivity mapActivity, @NonNull PointDescription pointDescription,
+	                                 @NonNull SelectedGpxPoint selectedGpxPoint) {
+		super(new SelectedGpxMenuBuilder(mapActivity, selectedGpxPoint), pointDescription, mapActivity);
+		this.item = selectedGpxPoint.getSelectedGpxFile();
 		builder.setShowOnlinePhotos(false);
 
 		leftTitleButtonController = new TitleButtonController() {
@@ -174,5 +176,24 @@ public class SelectedGpxMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		int color = isLight() ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 		return getIcon(R.drawable.ic_action_polygom_dark, color);
+	}
+
+	public static class SelectedGpxPoint {
+
+		private final WptPt selectedPoint;
+		private final SelectedGpxFile selectedGpxFile;
+
+		public SelectedGpxPoint(WptPt selectedPoint, SelectedGpxFile selectedGpxFile) {
+			this.selectedPoint = selectedPoint;
+			this.selectedGpxFile = selectedGpxFile;
+		}
+
+		public WptPt getSelectedPoint() {
+			return selectedPoint;
+		}
+
+		public SelectedGpxFile getSelectedGpxFile() {
+			return selectedGpxFile;
+		}
 	}
 }
