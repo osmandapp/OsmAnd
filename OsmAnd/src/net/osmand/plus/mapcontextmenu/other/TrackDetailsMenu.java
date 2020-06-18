@@ -212,8 +212,8 @@ public class TrackDetailsMenu {
 		}
 	}
 
-	public void updateInfo(final View main) {
-		updateView(main);
+	public void updateInfo(final View main, boolean forceFitTrackOnMap) {
+		updateView(main, forceFitTrackOnMap);
 	}
 
 	@Nullable
@@ -485,7 +485,7 @@ public class TrackDetailsMenu {
 		return xAxisPoints;
 	}
 
-	private void updateView(final View parentView) {
+	private void updateView(final View parentView, boolean forceFitTrackOnMap) {
 		MapActivity mapActivity = getMapActivity();
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (mapActivity == null || gpxItem == null) {
@@ -724,7 +724,7 @@ public class TrackDetailsMenu {
 			xAxisArrow.setVisibility(View.GONE);
 		}
 
-		refreshChart(chart, true);
+		refreshChart(chart, forceFitTrackOnMap);
 	}
 
 	private void updateChart(LineChart chart) {

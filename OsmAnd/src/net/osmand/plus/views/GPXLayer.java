@@ -604,8 +604,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
 			List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 			for (TrkSegment segment : segments) {
-				boolean nearSegment = isPointNearSegment(tb, segment.points, r, mx, my);
-				if (nearSegment) {
+				QuadRect trackBounds = GPXUtilities.calculateBounds(segment.points);
+				if (QuadRect.trivialOverlap(tb.getLatLonBounds(), trackBounds) && isPointNearSegment(tb, segment.points, r, mx, my)) {
 					res.add(selectedGpxFile);
 					break;
 				}

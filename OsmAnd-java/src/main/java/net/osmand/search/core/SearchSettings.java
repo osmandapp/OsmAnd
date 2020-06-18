@@ -23,8 +23,7 @@ public class SearchSettings {
 	private ObjectType[] searchTypes;
 	private boolean emptyQueryAllowed;
 	private boolean sortByName;
-	private SearchExportSettings exportSettings;
-	//private SearchExportSettings exportSettings = new SearchExportSettings(false, false, -1);
+	private SearchExportSettings exportSettings; // = new SearchExportSettings(true, true, -1);
 
 	public SearchSettings(SearchSettings s) {
 		if(s != null) {
