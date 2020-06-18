@@ -710,7 +710,7 @@ public class SearchCoreFactory {
 			}
 		}
 		
-		public Map<String, PoiTypeResult> getPoiTypeResults(NameStringMatcher nm, boolean includeAdditionals) {
+		public Map<String, PoiTypeResult> getPoiTypeResults(NameStringMatcher nm, NameStringMatcher nmAdditional) {
 			Map<String, PoiTypeResult> results = new LinkedHashMap<>();
 			for (AbstractPoiType pf : topVisibleFilters) {
 				PoiTypeResult res = checkPoiType(nm, pf);
@@ -718,16 +718,16 @@ public class SearchCoreFactory {
 					results.put(res.pt.getKeyName(), res);
 				}
 			}
-			if (includeAdditionals) {
-				addAditonals(nm, results, types.getOtherMapCategory());
+			if (nmAdditional != null) {
+				addAditonals(nmAdditional, results, types.getOtherMapCategory());
 			}
 			for (PoiCategory c : categories) {
 				PoiTypeResult res = checkPoiType(nm, c);
 				if(res != null) {
 					results.put(res.pt.getKeyName(), res);
 				}
-				if (includeAdditionals) {
-					addAditonals(nm, results, c);
+				if (nmAdditional != null) {
+					addAditonals(nmAdditional, results, c);
 				}
 			}
 			Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
@@ -739,8 +739,8 @@ public class SearchCoreFactory {
 					if(res != null) {
 						results.put(res.pt.getKeyName(), res);
 					}
-					if (includeAdditionals) {
-						addAditonals(nm, results, pt);
+					if (nmAdditional != null) {
+						addAditonals(nmAdditional, results, pt);
 					}
 				}
 			}
@@ -821,6 +821,7 @@ public class SearchCoreFactory {
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			boolean showTopFiltersOnly = !phrase.isUnknownSearchWordPresent();
 			NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
+			
 			initPoiTypes();
 			if (showTopFiltersOnly) {
 				for (AbstractPoiType pt : topVisibleFilters) {
@@ -832,7 +833,9 @@ public class SearchCoreFactory {
 				
 			} else {
 				boolean includeAdditional = !phrase.hasMoreThanOneUnknownSearchWord();
-				Map<String, PoiTypeResult> poiTypes = getPoiTypeResults(nm, includeAdditional);
+				NameStringMatcher nmAdditional = includeAdditional ?  
+						new NameStringMatcher(phrase.getFirstUnknownSearchWord(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE) : null;
+				Map<String, PoiTypeResult> poiTypes = getPoiTypeResults(nm, nmAdditional);
 				for (PoiTypeResult ptr : poiTypes.values()) {
 					boolean match = !phrase.isFirstUnknownSearchWordComplete();
 					if (!match) {
@@ -972,8 +975,10 @@ public class SearchCoreFactory {
 				nameFilter = phrase.getUnknownSearchPhrase();
 			} else if (searchAmenityTypesAPI != null && phrase.isFirstUnknownSearchWordComplete()) {
 				NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
+				NameStringMatcher nmAdditional = new NameStringMatcher(phrase.getFirstUnknownSearchWord(), 
+						StringMatcherMode.CHECK_EQUALS_FROM_SPACE) ;
 				searchAmenityTypesAPI.initPoiTypes();
-				Map<String, PoiTypeResult> poiTypeResults = searchAmenityTypesAPI.getPoiTypeResults(nm, true);
+				Map<String, PoiTypeResult> poiTypeResults = searchAmenityTypesAPI.getPoiTypeResults(nm, nmAdditional);
 				// find first full match only
 				for (PoiTypeResult poiTypeResult : poiTypeResults.values()) {
 					for (String foundName : poiTypeResult.foundWords) {
