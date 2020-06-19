@@ -57,7 +57,8 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 					ContextCompat.getColor(app, activeColorResId)));
 			textView.setTextColor(ContextCompat.getColor(app, R.color.color_white));
 		} else {
-			textView.setTextColor(ContextCompat.getColor(app, R.color.preference_category_title));
+			textView.setTextColor(ContextCompat.getColor(app,
+					nightMode ? R.color.active_color_primary_dark : R.color.preference_category_title));
 			GradientDrawable buttonBackground = (GradientDrawable) AppCompatResources.getDrawable(app,
 					R.drawable.bg_select_icon_group_button).mutate();
 			buttonBackground.setStroke(AndroidUtils.dpToPx(app, 1), ContextCompat.getColor(app,
@@ -67,6 +68,7 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 			AndroidUtils.setBackground(holder.button, buttonBackground);
 		}
 		textView.setText(capitalizeFirstLetter(item));
+		textView.requestLayout();
 		holder.button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
