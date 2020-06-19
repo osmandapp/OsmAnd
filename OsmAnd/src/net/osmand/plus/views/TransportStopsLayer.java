@@ -1,23 +1,17 @@
 package net.osmand.plus.views;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.ResultMatcher;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -26,6 +20,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -50,12 +45,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private final MapActivity mapActivity;
 	private OsmandMapTileView view;
 
-	private Paint paintIcon;
-	private ColorFilter paintLightIconFilter;
-	private ColorFilter paintDarkIconFilter;
-	private Bitmap backgroundIcon;
-	private Bitmap stopBus;
-	private Bitmap stopSmall;
 	private RenderingLineAttributes attrs;
 
 	private MapLayerData<List<TransportStop>> data;
@@ -64,8 +53,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private OsmandSettings.CommonPreference<Boolean> showTransportStops;
 
 	private Path path;
-	private float backgroundIconHalfWidth;
-	private float backgroundIconHalfHeight;
 
 	public TransportStopsLayer(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -76,19 +63,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	@SuppressWarnings("deprecation")
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
-		backgroundIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bg);
-		backgroundIconHalfWidth = backgroundIcon.getWidth() / 2f;
-		backgroundIconHalfHeight = backgroundIcon.getWidth() / 2f;
 		this.view = view;
 		DisplayMetrics dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
-		paintIcon = new Paint();
-		paintLightIconFilter = new PorterDuffColorFilter(ContextCompat.getColor(mapActivity, R.color.active_buttons_and_links_text_light), PorterDuff.Mode.SRC_IN);
-		paintDarkIconFilter = new PorterDuffColorFilter(ContextCompat.getColor(mapActivity, R.color.active_buttons_and_links_text_dark), PorterDuff.Mode.SRC_IN);
 		path = new Path();
-		stopBus = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bus);
-		stopSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_small);
 		attrs = new RenderingLineAttributes("transport_route");
 		attrs.defaultWidth = (int) (6 * view.getDensity());
 		data = new OsmandMapLayer.MapLayerData<List<TransportStop>>() {
@@ -235,7 +214,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 		if (objects != null) {
 			float textScale = mapActivity.getMyApplication().getSettings().TEXT_SCALE.get();
-			float iconSize = stopBus.getWidth() * 3 / 2.5f * textScale;
+			float iconSize = getIconSize(mapActivity) * 3 / 2.5f * textScale;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
 			List<TransportStop> fullObjects = new ArrayList<>();
 			for (TransportStop o : objects) {
@@ -243,8 +222,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 
 				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-					Rect destRect = getIconDestinationRect(x, y, stopSmall.getWidth(), stopSmall.getHeight(), textScale);
-					canvas.drawBitmap(stopSmall, null, destRect, paintIcon);
+					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(mapActivity,
+							ContextCompat.getColor(mapActivity, R.color.transport_stop_icon_background),
+					true,false ,0, BackgroundType.SQUARE);
+					pointImageDrawable.setAlpha(0.9f);
+					pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 				} else {
 					fullObjects.add(o);
 				}
@@ -256,20 +238,21 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				if (stopRoute != null) {
 					TransportStopType type = TransportStopType.findType(stopRoute.route.getType());
 					if (type != null) {
-						Drawable foregroundIcon = RenderingIcons.getDrawableIcon(mapActivity, type.getResName(), false);
-						Rect destRect = getIconDestinationRect(x, y, backgroundIcon.getWidth(), backgroundIcon.getHeight(), textScale);
-						canvas.drawBitmap(backgroundIcon, null, destRect, paintIcon);
-						destRect = getIconDestinationRect(x, y, foregroundIcon.getIntrinsicWidth(), foregroundIcon.getIntrinsicHeight(), textScale);
-						foregroundIcon.setBounds(destRect);
-						foregroundIcon.setColorFilter(nightMode ? paintDarkIconFilter : paintLightIconFilter);
-						foregroundIcon.draw(canvas);
+						drawPoint(canvas, textScale, x, y, RenderingIcons.getResId(type.getResName()));
 					}
 				} else {
-					Rect destRect = getIconDestinationRect(x, y, stopBus.getWidth(), stopBus.getHeight(), textScale);
-					canvas.drawBitmap(stopBus, null, destRect, paintIcon);
+					drawPoint(canvas, textScale, x, y, R.drawable.mx_highway_bus_stop);
 				}
 			}
 		}
+	}
+
+	private void drawPoint(Canvas canvas, float textScale, float x, float y, @DrawableRes int iconId) {
+		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(mapActivity,
+				ContextCompat.getColor(mapActivity, R.color.transport_stop_icon_background),
+				true,false ,iconId, BackgroundType.SQUARE);
+		pointImageDrawable.setAlpha(0.9f);
+		pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 	}
 
 	@Override

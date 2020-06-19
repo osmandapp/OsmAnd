@@ -19,7 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 
 
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
@@ -67,7 +67,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		WptPt wpt = getItem(position);
 
 		holder.iconDirection.setVisibility(View.VISIBLE);
-		holder.icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(app, wpt.getColor(), false, wpt));
+		holder.icon.setImageDrawable(PointImageDrawable.getFromWpt(app, wpt.getColor(), false, wpt));
 		holder.mainLayout.setBackgroundColor(getResolvedColor(nightTheme ? R.color.list_background_color_dark : R.color.list_background_color_light));
 		holder.title.setTextColor(getResolvedColor(nightTheme ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
 		holder.divider.setBackgroundColor(getResolvedColor(nightTheme ? R.color.coordinate_input_edit_text_normal_dark : R.color.divider_color_light));

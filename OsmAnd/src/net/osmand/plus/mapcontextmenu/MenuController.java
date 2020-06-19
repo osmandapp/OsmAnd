@@ -189,7 +189,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof FavouritePoint) {
 				if (pointDescription.isParking()
 						|| (FavouritePoint.SpecialPointType.PARKING.equals(((FavouritePoint) object).getSpecialPointType()))) {
-					menuController = new ParkingPositionMenuController(mapActivity, pointDescription);
+					menuController = new ParkingPositionMenuController(mapActivity, pointDescription, (FavouritePoint) object);
 				} else {
 					menuController = new FavouritePointMenuController(mapActivity, pointDescription, (FavouritePoint) object);
 				}
@@ -218,9 +218,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof AidlMapPointWrapper) {
 				menuController = new AMapPointMenuController(mapActivity, pointDescription, (AidlMapPointWrapper) object);
 			} else if (object instanceof LatLon) {
-				if (pointDescription.isParking()) {
-					menuController = new ParkingPositionMenuController(mapActivity, pointDescription);
-				} else if (pointDescription.isMyLocation()) {
+				if (pointDescription.isMyLocation()) {
 					menuController = new MyLocationMenuController(mapActivity, pointDescription);
 				}
 			} else if (object instanceof AvoidSpecificRoads.AvoidRoadInfo) {

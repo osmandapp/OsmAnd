@@ -342,7 +342,7 @@ public class FavouritesDbHelper {
 		if (!p.getName().equals("")) {
 			p.setVisible(group.visible);
 			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
-				p.setColor(ContextCompat.getColor(context, R.color.map_widget_blue));
+				p.setColor(ContextCompat.getColor(context, R.color.parking_icon_background));
 			} else {
 				if (p.getColor() == 0) {
 					p.setColor(group.color);
@@ -485,7 +485,7 @@ public class FavouritesDbHelper {
 			FavoriteGroup pg = getOrCreateGroup(p, 0);
 			p.setVisible(pg.visible);
 			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
-				p.setColor(ContextCompat.getColor(context, R.color.map_widget_blue));
+				p.setColor(ContextCompat.getColor(context, R.color.parking_icon_background));
 			} else {
 				if (p.getColor() == 0) {
 					p.setColor(pg.color);
