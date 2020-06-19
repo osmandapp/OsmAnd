@@ -281,6 +281,11 @@ public class SearchPhrase {
 			for (String s : searchWords) {
 				if (s.length() > 0 && !Character.isDigit(s.charAt(0)) && !LocationParser.isValidOLC(s)) {
 					mainUnknownWordToSearch = s.trim();
+					if (mainUnknownWordToSearch.endsWith(".")) {
+						mainUnknownWordToSearch = mainUnknownWordToSearch.substring(0,
+								mainUnknownWordToSearch.length() - 1);
+						mainUnknownSearchWordComplete = false;
+					}
 					int unknownInd = unknownSearchWords.indexOf(s);
 					if (!lastUnknownSearchWordComplete && unknownSearchWords.size() - 1 == unknownInd) {
 						mainUnknownSearchWordComplete = false;
