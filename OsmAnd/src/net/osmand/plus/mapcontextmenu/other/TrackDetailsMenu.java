@@ -737,6 +737,14 @@ public class TrackDetailsMenu {
 			}
 			if (gpxItem.chartHighlightPos != -1) {
 				chart.highlightValue(gpxItem.chartHighlightPos, 0);
+			} else if (gpxItem.locationOnMap != null) {
+				LineData lineData = chart.getLineData();
+				List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
+				if (ds != null && ds.size() > 0) {
+					OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
+					gpxItem.chartHighlightPos = (float) (gpxItem.locationOnMap.distance / dataSet.getDivX());
+					chart.highlightValue(gpxItem.chartHighlightPos, 0);
+				}
 			} else {
 				chart.highlightValue(null);
 			}
