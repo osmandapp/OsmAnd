@@ -673,17 +673,17 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			projectionPoint.time = (long) getValueByDistInterpolation(projectionPoint.distance, prevPoint.distance, prevPoint.time, nextPoint.distance, nextPoint.time);
 		}
 
-		Location projectionLocation = new Location("");
-		projectionLocation.setLatitude(projectionPoint.lat);
-		projectionLocation.setLongitude(projectionPoint.lon);
+		Location prevPointLocation = new Location("");
+		prevPointLocation.setLatitude(prevPoint.lat);
+		prevPointLocation.setLongitude(prevPoint.lon);
 
 		Location nextPointLocation = new Location("");
 		nextPointLocation.setLatitude(nextPoint.lat);
 		nextPointLocation.setLongitude(nextPoint.lon);
 
-		projectionLocation.setBearing(projectionLocation.bearingTo(nextPointLocation));
+		prevPointLocation.setBearing(prevPointLocation.bearingTo(nextPointLocation));
 
-		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, projectionLocation);
+		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, prevPointLocation);
 	}
 
 	private double getValueByDistInterpolation(double projectionDist, double prevDist, double prevVal, double nextDist, double nextVal) {
