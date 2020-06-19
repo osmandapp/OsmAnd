@@ -359,7 +359,6 @@ public class BinaryMapRouteReaderAdapter {
 			} else if (tags.equals("destination:ref") || tags.equals("destination:ref:forward") || tags.equals("destination:ref:backward")) {
 				destinationRefTypeRule = id;
 			} else if (tags.endsWith("direction")) {
-				int d = 0;
 				if (val.equals("forward")) {
 					trafficSignalsDir.put(id, 1);
 				} else if (val.equals("backward")) {
