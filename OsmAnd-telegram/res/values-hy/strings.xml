@@ -1,2 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="search_contacts">Որոնել կոնտակտներ</string>
+    <string name="bearing">Կողմնորոշում</string>
+    <string name="altitude">Բարձրություն</string>
+    <string name="precision">Ճշգրտություն</string>
+    <string name="direction">Ուղղություն</string>
+    <string name="privacy">Գաղտնիության</string>
+    <string name="proxy">Պրոկսի</string>
+    <string name="proxy_settings">Proxy Կարգավորումներ</string>
+    <string name="proxy_disconnected">Անջատված է</string>
+    <string name="proxy_connected">Միացված է</string>
+    <string name="proxy_type">Proxy տեսակը</string>
+    <string name="shared_string_enable">Միացնել</string>
+    <string name="shared_string_connection">Կապ</string>
+    <string name="proxy_server">Սերվեր</string>
+    <string name="proxy_port">Պորտ</string>
+    <string name="proxy_credentials">Հավատարմագրման տվյալներ</string>
+    <string name="proxy_username">Օգտագործողի անունը</string>
+    <string name="proxy_password">Գաղտնաբառ</string>
+    <string name="proxy_key">Բանալի</string>
+    <string name="gpx_settings">GPX կարգավորումներ</string>
+    <string name="min_logging_speed_descr">Ֆիլտր՝ չգրանցել, քանի դեռ չի հասել անհրաժեշտ արագությանը</string>
+    <string name="min_logging_speed">Նվազագույն գրանցման արագությունը</string>
+    <string name="min_logging_accuracy_descr">Ֆիլտր՝ չգրանցել, քանի դեռ չի հասել անհրաժեշտ ճշգրտությանը</string>
+    <string name="min_logging_accuracy">Նվազագույն գրանցման ճշգրտությունը</string>
+    <string name="min_logging_distance_descr">Ֆիլտր՝ նոր կետի գրանցման համար անհրաժեշտ նվազագույն հեռավորությունը</string>
+    <string name="min_logging_distance">Նվազագույն գրանցման հեռավորությունը</string>
+    <string name="shared_string_select">Ընտրել</string>
+    <string name="timeline_no_data">Տվյալներ չկա</string>
+    <string name="timeline_no_data_descr">Ընտրված օրվա համար հավաքագրված տվյալներ չկան</string>
+    <string name="start_end_date">Սկզբ - Ավարտ ամսաթիվը</string>
+    <string name="set_time_timeline_descr">Ընտրեք ժամանակ ցուցադրելու համար</string>
+    <string name="shared_string_apply">Կիրառել</string>
+    <string name="shared_string_start">Սկիզբ</string>
+    <string name="shared_string_end">Վերջ</string>
+    <string name="saved_messages">Պահպանված հաղորդագրությունները</string>
+    <string name="unit_of_speed_system">Արագության չափման միավոր</string>
+    <string name="unit_of_speed_system_descr">Ընտրեք արագության չափման միավորը:</string>
+    <string name="unit_of_length">Հեռավորության չափման միավոր</string>
+    <string name="unit_of_length_descr">Փոխել հեռավորության չափման միավորը։</string>
+    <string name="units_and_formats">Չափման միավորներ եւ ձեւաչափեր</string>
+    <string name="time_zone">Ժամային գոտին</string>
+    <string name="time_zone_descr">Ընտրեք ժամային գոտին, որպեսզի ցույց տա ձեր գտնվելու վայրը հաղորդագրություններում:</string>
+    <string name="buffer_time">Բուֆերի ավարտման ժամկետը</string>
+    <string name="buffer_time_descr">Կետերի առավելագույն պահպանման ժամանակը բուֆերում</string>
+    <string name="status_widget_title">OsmAnd Tracker- ի կարգավիճակը</string>
+    <string name="shared_string_suggested">Առաջարկվում է</string>
+    <string name="back_to_osmand">Վերադառնալ OsmAnd</string>
+    <string name="duration_ago">%1$s առաջ</string>
+    <string name="last_response_duration">Վերջին պատասխանը՝ %1$s առաջ</string>
+    <string name="last_update_from_telegram_duration">Վերջին թարմացումը Telegram- ից՝ %1$s առաջ</string>
+    <string name="last_response_date">Վերջին պատասխանը՝ %1$s</string>
+    <string name="last_update_from_telegram_date">Վերջին թարմացումը Telegram- ից.%1$s</string>
+    <string name="shared_string_error_short">ՍԽԱԼ</string>
+</resources>
