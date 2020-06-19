@@ -27,7 +27,6 @@ import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
@@ -479,7 +478,17 @@ public class OsmAndFormatter {
 		return newStrings;
 	}
 
-	private static boolean isSameDay(Calendar cal1, Calendar cal2) {
+	public static boolean isSameDay(long startTime, long endTime) {
+		Calendar start = Calendar.getInstance();
+		Calendar end = Calendar.getInstance();
+
+		start.setTimeInMillis(startTime);
+		end.setTimeInMillis(endTime);
+
+		return isSameDay(start, end);
+	}
+
+	public static boolean isSameDay(Calendar cal1, Calendar cal2) {
 		return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&
 				cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
 				cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));

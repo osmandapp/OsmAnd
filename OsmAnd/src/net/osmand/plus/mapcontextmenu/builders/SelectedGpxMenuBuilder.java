@@ -25,7 +25,6 @@ import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 public class SelectedGpxMenuBuilder extends MenuBuilder {
@@ -73,13 +72,14 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 				timeSpan + " / " + timeMoving, 0, null,
 				false, null, false, 0, false, false, false, null, false);
 
-		Date start = new Date(analysis.startTime);
-		Date end = new Date(analysis.endTime);
-		DateFormat format = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
-
+		DateFormat startFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		DateFormat endFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		if (OsmAndFormatter.isSameDay(analysis.startTime, analysis.endTime)) {
+			endFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
+		}
 		String startEndTimeTitle = app.getString(R.string.shared_string_start_time) + " - " + app.getString(R.string.shared_string_end_time);
 		buildRow(view, getThemedIcon(R.drawable.ic_action_time_start), null, startEndTimeTitle,
-				format.format(start) + " - " + format.format(end), 0, null,
+				startFormat.format(analysis.startTime) + " - " + endFormat.format(analysis.endTime), 0, null,
 				false, null, false, 0, false, false, false, null, true);
 	}
 
