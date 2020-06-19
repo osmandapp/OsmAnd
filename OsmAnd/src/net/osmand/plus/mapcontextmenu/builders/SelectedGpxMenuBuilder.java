@@ -73,9 +73,11 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 				false, null, false, 0, false, false, false, null, false);
 
 		DateFormat startFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
-		DateFormat endFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		DateFormat endFormat;
 		if (OsmAndFormatter.isSameDay(analysis.startTime, analysis.endTime)) {
 			endFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
+		} else {
+			endFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
 		}
 		String startEndTimeTitle = app.getString(R.string.shared_string_start_time) + " - " + app.getString(R.string.shared_string_end_time);
 		buildRow(view, getThemedIcon(R.drawable.ic_action_time_start), null, startEndTimeTitle,
