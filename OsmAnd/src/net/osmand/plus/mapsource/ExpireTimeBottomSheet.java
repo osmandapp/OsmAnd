@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -60,8 +61,8 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 			editText.setText(String.valueOf(expireValue));
 		}
 		int boxStrokeColor = nightMode
-				? ContextCompat.getColor(app, R.color.app_bar_color_light)
-				: ContextCompat.getColor(app, R.color.active_buttons_and_links_bg_pressed_dark);
+				? ContextCompat.getColor(app, R.color.icon_color_osmand_dark)
+				: ContextCompat.getColor(app, R.color.icon_color_osmand_light);
 		TextInputLayout textInputLayout = inputValueLayout.findViewById(R.id.value_input_layout);
 		textInputLayout.setBoxStrokeColor(boxStrokeColor);
 		final SimpleBottomSheetItem editTextItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
@@ -78,6 +79,7 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
+		AndroidUtils.hideSoftKeyboard(requireActivity(), editText);
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnExpireValueSetListener) {
 			((OnExpireValueSetListener) fragment).onExpireValueSet(getExpireValue());

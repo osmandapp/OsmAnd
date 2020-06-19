@@ -26,15 +26,19 @@ public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment 
 
 	public static final String TAG = TileStorageFormatBottomSheet.class.getName();
 	private static final String SQLITE_DB_KEY = "sqlite_db_key";
+	private static final String NEW_MAP_SOURCE_KEY = "new_map_source_key";
 	private LinearLayout valuesContainer;
 	private TileStorageFormat tileStorageFormat;
+	private boolean newMapSource;
 
 	public static void showInstance(@NonNull FragmentManager fm,
 									@Nullable Fragment targetFragment,
-									boolean sqliteDb) {
+									boolean sqliteDb,
+									boolean newMapSource) {
 		TileStorageFormatBottomSheet bottomSheet = new TileStorageFormatBottomSheet();
 		bottomSheet.setTargetFragment(targetFragment, 0);
 		bottomSheet.setTileStorageFormat(sqliteDb);
+		bottomSheet.setNewMapSource(newMapSource);
 		bottomSheet.show(fm, TAG);
 	}
 
@@ -42,6 +46,7 @@ public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment 
 	public void createMenuItems(Bundle savedInstanceState) {
 		if (savedInstanceState != null) {
 			setTileStorageFormat(savedInstanceState.getBoolean(SQLITE_DB_KEY));
+			newMapSource = savedInstanceState.getBoolean(NEW_MAP_SOURCE_KEY);
 		}
 		Context context = requireContext();
 		TitleItem titleItem = new TitleItem(getString(R.string.mercator_projection));
@@ -63,16 +68,8 @@ public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putBoolean(SQLITE_DB_KEY, tileStorageFormat == TileStorageFormat.SQLITE_DB);
+		outState.putBoolean(NEW_MAP_SOURCE_KEY, newMapSource);
 		super.onSaveInstanceState(outState);
-	}
-
-	@Override
-	public void onDismiss(@NonNull DialogInterface dialog) {
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof OnTileStorageFormatSelectedListener) {
-			((OnTileStorageFormatSelectedListener) fragment).onStorageFormatSelected(tileStorageFormat == TileStorageFormat.SQLITE_DB);
-		}
-		super.onDismiss(dialog);
 	}
 
 	@Override
@@ -91,16 +88,36 @@ public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment 
 				@Override
 				public void onClick(View view) {
 					if (tileStorageFormat != m) {
-						tileStorageFormat = m;
-						dismiss();
+						if (newMapSource) {
+							applyTileStorageFormat(m);
+						} else {
+							InputZoomLevelsBottomSheet.showClearTilesWarningDialog(requireActivity(), nightMode, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialogInterface, int i) {
+									applyTileStorageFormat(m);
+								}
+							});
+						}
 					}
 				}
 			});
 		}
 	}
 
+	private void applyTileStorageFormat(TileStorageFormat tileStorageFormat) {
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof OnTileStorageFormatSelectedListener) {
+			((OnTileStorageFormatSelectedListener) fragment).onStorageFormatSelected(tileStorageFormat == TileStorageFormat.SQLITE_DB);
+		}
+		dismiss();
+	}
+
 	private void setTileStorageFormat(boolean sqliteDb) {
 		tileStorageFormat = sqliteDb ? TileStorageFormat.SQLITE_DB : TileStorageFormat.ONE_IMAGE_PER_TILE;
+	}
+
+	public void setNewMapSource(boolean newMapSource) {
+		this.newMapSource = newMapSource;
 	}
 
 	public enum TileStorageFormat {
