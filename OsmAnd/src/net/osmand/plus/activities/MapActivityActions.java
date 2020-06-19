@@ -466,13 +466,13 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_search) {
 					mapActivity.showQuickSearch(latitude, longitude);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
-					if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+					//if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 						enterDirectionsFromPoint(latitude, longitude);
-					} else {
-						ActivityCompat.requestPermissions(mapActivity,
-								new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-								REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION);
-					}
+					//} else {
+					//	ActivityCompat.requestPermissions(mapActivity,
+					//			new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+					//			REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION);
+					//}
 				} else if (standardId == R.string.measurement_tool) {
 					mapActivity.getContextMenu().close();
 					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), new LatLon(latitude, longitude));
