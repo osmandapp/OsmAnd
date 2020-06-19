@@ -31,7 +31,6 @@ import net.osmand.plus.quickaction.actions.NavReplaceDestinationAction;
 import net.osmand.plus.quickaction.actions.NavResumePauseAction;
 import net.osmand.plus.quickaction.actions.NavStartStopAction;
 import net.osmand.plus.quickaction.actions.NavVoiceAction;
-import net.osmand.plus.quickaction.actions.NewAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
@@ -216,7 +215,6 @@ public class QuickActionRegistry {
 
 	public List<QuickActionType> updateActionTypes() {
 		List<QuickActionType> quickActionTypes = new ArrayList<>();
-		quickActionTypes.add(NewAction.TYPE);
 		quickActionTypes.add(FavoriteAction.TYPE);
 		quickActionTypes.add(GPXAction.TYPE);
 		quickActionTypes.add(MarkerAction.TYPE);
