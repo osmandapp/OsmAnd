@@ -7,6 +7,7 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.Rect;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,7 +47,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	public void initLayer(OsmandMapTileView view) {
 		avoidSpecificRoads = activity.getMyApplication().getAvoidSpecificRoads();
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
-		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_avoid_road);
+		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_pin_avoid_road);
 		activePaint = new Paint();
 		ColorMatrix matrix = new ColorMatrix();
 		matrix.setSaturation(0);
@@ -90,14 +91,15 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	private void drawPoint(Canvas canvas, float x, float y, boolean active) {
-		float left = x - roadWorkIcon.getWidth() / 2;
-		float top = y - roadWorkIcon.getHeight();
-		canvas.drawBitmap(roadWorkIcon, left, top, active ? activePaint : paint);
+		float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
+		float left = x - roadWorkIcon.getWidth() / 2f * textScale;
+		float top = y - roadWorkIcon.getHeight() * textScale;
+		Rect destRect = getIconDestinationRect(left, top, roadWorkIcon.getWidth(), roadWorkIcon.getHeight(), textScale);
+		canvas.drawBitmap(roadWorkIcon, null, destRect, active ? activePaint : paint);
 	}
 
 	@Override
 	public void destroyLayer() {
-
 	}
 
 	@Override
@@ -144,7 +146,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		if (tileBox.getZoom() >= START_ZOOM) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			int compare = getRadiusPoi(tileBox);
+			int compare = getScaledTouchRadius(activity.getMyApplication(), getRadiusPoi(tileBox));
 			int radius = compare * 3 / 2;
 
 			for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {

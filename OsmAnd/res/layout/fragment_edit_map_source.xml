@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
         app:title="@string/edit_online_source"
-        android:theme="?attr/toolbar_theme"
         tools:background="?attr/actionModeBackground">
 
         <ImageButton
@@ -29,59 +28,78 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/name_input_layout"
-                style="@style/InputLayoutStyle.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/content_padding"
-                android:hint="@string/shared_string_name"
-                app:helperText="@string/online_map_name_helper_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/name_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/url_input_layout"
-                style="@style/InputLayoutStyle.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/content_padding"
-                android:layout_marginEnd="@dimen/content_padding"
-                android:layout_marginBottom="@dimen/content_padding"
-                android:hint="@string/edit_tilesource_url_to_load"
-                app:helperText="@string/online_map_url_helper_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/url_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <include layout="@layout/divider" />
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/content_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/name_input_layout"
+                    style="@style/InputLayoutStyle.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/content_padding"
+                    android:hint="@string/shared_string_name"
+                    app:helperText="@string/online_map_name_helper_text">
 
-    </ScrollView>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/name_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/favorites_list_item_height" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/url_input_layout"
+                    style="@style/InputLayoutStyle.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/content_padding"
+                    android:layout_marginLeft="@dimen/content_padding"
+                    android:layout_marginRight="@dimen/content_padding"
+                    android:layout_marginEnd="@dimen/content_padding"
+                    android:layout_marginBottom="@dimen/content_padding"
+                    android:hint="@string/edit_tilesource_url_to_load"
+                    app:helperText="@string/online_map_url_helper_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/url_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/favorites_list_item_height" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <include layout="@layout/divider" />
+
+                <LinearLayout
+                    android:id="@+id/content_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/topBarShadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:rotation="180"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/bg_shadow_onmap" />
+    </FrameLayout>
 
     <include layout="@layout/divider" />
 
@@ -92,6 +110,8 @@
         android:minHeight="@dimen/dialog_button_ex_height"
         android:paddingStart="@dimen/content_padding"
         android:paddingTop="@dimen/content_padding_small"
+        android:paddingLeft="@dimen/content_padding_small"
+        android:paddingRight="@dimen/content_padding_small"
         android:paddingEnd="@dimen/content_padding"
         android:paddingBottom="@dimen/content_padding_small"
         tools:background="?attr/list_background_color">

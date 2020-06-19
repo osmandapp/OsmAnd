@@ -2,15 +2,8 @@ package net.osmand.plus.views;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.util.Linkify;
 import android.util.TypedValue;
@@ -38,8 +31,8 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -63,12 +56,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	public static final org.apache.commons.logging.Log log = PlatformUtil.getLog(POIMapLayer.class);
 
-	private Paint paintIconBackground;
-	private Bitmap poiBackground;
-	private Bitmap poiBackgroundSmall;
-	private PorterDuffColorFilter poiColorFilter;
-	private int poiSize;
-
 	private OsmandMapTileView view;
 
 	private RoutingHelper routingHelper;
@@ -80,7 +67,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private MapLayerData<List<Amenity>> data;
 
 	private OsmandApplication app;
-
 
 	public POIMapLayer(final MapActivity activity) {
 		routingHelper = activity.getRoutingHelper();
@@ -98,7 +84,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			public boolean isInterrupted() {
 				return super.isInterrupted();
 			}
-
 
 			@Override
 			public void layerOnPreExecute() {
@@ -148,7 +133,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		};
 	}
 
-
 	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> am) {
 		List<Amenity> objects = data.getResults();
 		if (objects != null) {
@@ -172,16 +156,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		}
 	}
 
-
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		poiSize = app.getResources().getDimensionPixelSize(R.dimen.poi_icon_size);
-		poiColorFilter = new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-		paintIconBackground = new Paint();
-		poiBackground = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_white_orange_poi_shield);
-		poiBackgroundSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_white_orange_poi_shield_small);
-
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
 
@@ -221,10 +198,12 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				objects = data.getResults();
 				if (objects != null) {
 					float textScale = app.getSettings().TEXT_SCALE.get();
-					float iconSize = poiBackground.getWidth() * 3 / 2 * textScale;
+					float iconSize = getIconSize(app) * 1.5f * textScale;
 					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 					WaypointHelper wph = app.getWaypointHelper();
-
+					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(view.getContext(),
+							ContextCompat.getColor(app, R.color.osmand_orange), true);
+					pointImageDrawable.setAlpha(0.8f);
 					for (Amenity o : objects) {
 						float x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
@@ -234,8 +213,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						if (tileBox.containsPoint(x, y, iconSize)) {
 							if (intersects(boundIntersections, x, y, iconSize, iconSize) ||
 									(app.getSettings().SHOW_NEARBY_POI.get() && wph.isRouteCalculated() && !wph.isAmenityNoPassed(o))) {
-								Rect destRect = getIconDestinationRect(x, y, poiBackgroundSmall.getWidth(), poiBackgroundSmall.getHeight(), textScale);
-								canvas.drawBitmap(poiBackgroundSmall, null, destRect, paintIconBackground);
+								pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 								smallObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
 										o.getLocation().getLongitude()));
 							} else {
@@ -251,8 +229,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
 						if (tileBox.containsPoint(x, y, iconSize)) {
-							Rect destRect = getIconDestinationRect(x, y, poiBackground.getWidth(), poiBackground.getHeight(), textScale);
-							canvas.drawBitmap(poiBackground, null, destRect, paintIconBackground);
 							String id = null;
 							PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
 							if (st != null) {
@@ -263,13 +239,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 								}
 							}
 							if (id != null) {
-								Drawable img = RenderingIcons.getDrawableIcon(view.getContext(), id, false);
-								if (img != null) {
-									destRect = getIconDestinationRect(x, y, poiSize, poiSize, textScale);
-									img.setBounds(destRect);
-									img.setColorFilter(poiColorFilter);
-									img.draw(canvas);
-								}
+								pointImageDrawable = PointImageDrawable.getOrCreate(view.getContext(),
+										ContextCompat.getColor(app, R.color.osmand_orange), true,
+										RenderingIcons.getResId(id));
+								pointImageDrawable.setAlpha(0.8f);
+								pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 							}
 						}
 					}
@@ -419,9 +393,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public int getTextShift(Amenity amenity, RotatedTileBox rb) {
 		int radiusPoi = getRadiusPoi(rb);
 		if (isPresentInFullObjects(amenity.getLocation())) {
-			radiusPoi += poiBackground.getHeight() / 2 - poiBackgroundSmall.getHeight() / 2;
+			radiusPoi += (getIconSize(app) - app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_size_small)) / 2;
 		}
-
 		return radiusPoi;
 	}
 

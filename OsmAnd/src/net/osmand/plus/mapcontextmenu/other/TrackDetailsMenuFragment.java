@@ -23,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 
 public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	public static final String TAG = "TrackDetailsMenuFragment";
@@ -91,14 +92,20 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 			});
 		}
 
-		updateInfo();
+		MapContextMenu contextMenu = mapActivity.getContextMenu();
+		final boolean forceFitTrackOnMap;
+		if (contextMenu.isActive()) {
+			forceFitTrackOnMap = !(contextMenu.getPointDescription() != null && contextMenu.getPointDescription().isGpxPoint());
+		} else {
+			forceFitTrackOnMap = true;
+		}
+		updateInfo(forceFitTrackOnMap);
 
 		ViewTreeObserver vto = mainView.getViewTreeObserver();
 		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
 			@Override
 			public void onGlobalLayout() {
-
 				ViewTreeObserver obs = mainView.getViewTreeObserver();
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 					obs.removeOnGlobalLayoutListener(this);
@@ -106,7 +113,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 					obs.removeGlobalOnLayoutListener(this);
 				}
 				if (getMapActivity() != null) {
-					updateInfo();
+					updateInfo(forceFitTrackOnMap);
 				}
 			}
 		});
@@ -165,7 +172,11 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public void updateInfo() {
-		menu.updateInfo(mainView);
+		updateInfo(true);
+	}
+
+	public void updateInfo(boolean forceFitTrackOnMap) {
+		menu.updateInfo(mainView, forceFitTrackOnMap);
 		applyDayNightMode();
 	}
 

@@ -1,9 +1,11 @@
 package net.osmand.plus.monitoring;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -27,6 +30,7 @@ import net.osmand.Location;
 import net.osmand.ValueHolder;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -56,11 +60,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.monitoring";
 	public final static String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
+	public static final int REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING = 208;
 
+	private MapActivity mapActivity;
 	private OsmandSettings settings;
 	private TextInfoWidget monitoringControl;
 	private LiveMonitoringHelper liveMonitoringHelper;
 	private boolean isSaving;
+	private boolean showDialogWhenActivityResumed;
 
 	public OsmandMonitoringPlugin(OsmandApplication app) {
 		super(app);
@@ -291,6 +298,31 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return monitoringControl;
 	}
 
+	@Override
+	public void mapActivityResume(MapActivity activity) {
+		this.mapActivity = activity;
+		if (showDialogWhenActivityResumed) {
+			showDialogWhenActivityResumed = false;
+			controlDialog(mapActivity, true);
+		}
+	}
+
+	@Override
+	public void mapActivityPause(MapActivity activity) {
+		this.mapActivity = null;
+	}
+
+	@Override
+	public void handleRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		if (requestCode == REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING) {
+			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				showDialogWhenActivityResumed = true;
+			} else {
+				app.showToastMessage(R.string.no_location_permission);
+			}
+		}
+	}
+
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
 		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 		final boolean nightMode;
@@ -329,7 +361,15 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				if(item == R.string.save_current_track){
 					saveCurrentTrack(null, activity);
 				} else if(item == R.string.gpx_monitoring_start) {
-					if (app.getLocationProvider().checkGPSEnabled(activity)) {
+					if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
+						if (mapActivity != null) {
+							ActivityCompat.requestPermissions(mapActivity,
+									new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+									REQUEST_LOCATION_PERMISSION_FOR_GPX_RECORDING);
+						} else {
+							app.showToastMessage(R.string.no_location_permission);
+						}
+					} else if (app.getLocationProvider().checkGPSEnabled(activity)) {
 						startGPXMonitoring(activity, showTrackSelection);
 					}
 				} else if (item == R.string.clear_recorded_data) {

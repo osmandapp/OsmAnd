@@ -526,7 +526,7 @@ public class SearchPhrase {
 	
 	public NameStringMatcher getFirstUnknownNameStringMatcher() {
 		if (firstUnknownNameStringMatcher == null) {
-			firstUnknownNameStringMatcher = getNameStringMatcher(firstUnknownSearchWord, lastUnknownSearchWordComplete);
+			firstUnknownNameStringMatcher = getNameStringMatcher(firstUnknownSearchWord, isFirstUnknownSearchWordComplete());
 		}
 		return firstUnknownNameStringMatcher;
 	}
@@ -792,6 +792,13 @@ public class SearchPhrase {
 		}
 		return r;
 	}
+	
+	public String getLastUnknownSearchWord() {
+		if(otherUnknownWords.size() > 0) {
+			return otherUnknownWords.get(otherUnknownWords.size() - 1);
+		}
+		return firstUnknownSearchWord;
+	}
 
 	
 	public int getRadiusSearch(int meters, int radiusLevel) {
@@ -873,6 +880,8 @@ public class SearchPhrase {
 		}
 		return lastUnknownSearchWordComplete;
 	}
+
+	
 
 	
 

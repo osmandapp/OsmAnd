@@ -289,6 +289,10 @@ public class PointDescription {
 		return POINT_TYPE_CUSTOM_POI_FILTER.equals(type);
 	}
 
+	public boolean isGpxPoint() {
+		return POINT_TYPE_GPX.equals(type);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -32,7 +32,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -61,6 +60,7 @@ import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportRouteController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
@@ -189,7 +189,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof FavouritePoint) {
 				if (pointDescription.isParking()
 						|| (FavouritePoint.SpecialPointType.PARKING.equals(((FavouritePoint) object).getSpecialPointType()))) {
-					menuController = new ParkingPositionMenuController(mapActivity, pointDescription);
+					menuController = new ParkingPositionMenuController(mapActivity, pointDescription, (FavouritePoint) object);
 				} else {
 					menuController = new FavouritePointMenuController(mapActivity, pointDescription, (FavouritePoint) object);
 				}
@@ -218,9 +218,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof AidlMapPointWrapper) {
 				menuController = new AMapPointMenuController(mapActivity, pointDescription, (AidlMapPointWrapper) object);
 			} else if (object instanceof LatLon) {
-				if (pointDescription.isParking()) {
-					menuController = new ParkingPositionMenuController(mapActivity, pointDescription);
-				} else if (pointDescription.isMyLocation()) {
+				if (pointDescription.isMyLocation()) {
 					menuController = new MyLocationMenuController(mapActivity, pointDescription);
 				}
 			} else if (object instanceof AvoidSpecificRoads.AvoidRoadInfo) {
@@ -229,8 +227,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				menuController = new RenderedObjectMenuController(mapActivity, pointDescription, (RenderedObject) object);
 			} else if (object instanceof MapillaryImage) {
 				menuController = new MapillaryMenuController(mapActivity, pointDescription, (MapillaryImage) object);
-			} else if (object instanceof SelectedGpxFile) {
-				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxFile) object);
+			} else if (object instanceof SelectedGpxPoint) {
+				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxPoint) object);
 			}
 		}
 		if (menuController == null) {

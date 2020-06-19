@@ -26,7 +26,6 @@ import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -591,6 +590,7 @@ public class BinaryMapPoiReaderAdapter {
 						}
 					}
 					if (matches) {
+						req.collectRawData(am);
 						req.publish(am);
 					}
 				}
@@ -637,6 +637,7 @@ public class BinaryMapPoiReaderAdapter {
 						int yp = (int) MapUtils.getTileNumberY(zSkip, am.getLocation().getLatitude());
 						long valSkip = (((long) xp) << zSkip) | yp;
 						if (!toSkip.contains(valSkip)) {
+							req.collectRawData(am);
 							boolean publish = req.publish(am);
 							if (publish) {
 								read = true;
@@ -647,6 +648,7 @@ public class BinaryMapPoiReaderAdapter {
 							return read;
 						}
 					} else {
+						req.collectRawData(am);
 						if (req.publish(am)) {
 							read = true;
 						}
