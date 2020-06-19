@@ -17,7 +17,6 @@ import org.apache.commons.logging.Log;
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.map.TLongObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.NativeLibrary;
@@ -608,8 +607,6 @@ public class RoutingContext {
 		public TLongObjectMap<RouteSegment> getRoutes() {
 			return routes;
 		}
-		private TIntObjectHashMap<Integer> forwardTags;
-		private TIntObjectHashMap<Integer> backwardTags;
 		
 		public void loadAllObjects(final List<RouteDataObject> toFillIn, RoutingContext ctx, TLongObjectHashMap<RouteDataObject> excludeDuplications) {
 			if(routes != null) {

@@ -173,11 +173,6 @@ public class BinaryMapRouteReaderAdapter {
 			return tag;
 		}
 		
-		//TODO implement
-		public String getNonDirectionalTag() {
-			return null;
-		}
-		
 		public int onewayDirection(){
 			if(type == ONEWAY){
 				return intValue;
