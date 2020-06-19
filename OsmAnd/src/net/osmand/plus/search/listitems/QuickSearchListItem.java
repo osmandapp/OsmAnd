@@ -26,7 +26,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
@@ -377,11 +377,11 @@ public class QuickSearchListItem {
 				return getIcon(app, R.drawable.ic_action_world_globe);
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
-				return FavoriteImageDrawable.getOrCreate(app,
-						app.getFavorites().getColorWithCategory(fav, app.getResources().getColor(R.color.color_favorite)), false, fav);
+				int color = app.getFavorites().getColorWithCategory(fav, app.getResources().getColor(R.color.color_favorite));
+				return PointImageDrawable.getFromFavorite(app, color, false, fav);
 			case FAVORITE_GROUP:
 				FavoriteGroup group = (FavoriteGroup) searchResult.object;
-				int color = group.getColor() == 0 ? ContextCompat.getColor(app, R.color.color_favorite) : group.getColor();
+				color = group.getColor() == 0 ? ContextCompat.getColor(app, R.color.color_favorite) : group.getColor();
 				return app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_favorite, color | 0xff000000);
 			case REGION:
 				return getIcon(app, R.drawable.ic_world_globe_dark);
@@ -395,7 +395,7 @@ public class QuickSearchListItem {
 				}
 			case WPT:
 				WptPt wpt = (WptPt) searchResult.object;
-				return FavoriteImageDrawable.getOrCreate(app, wpt.getColor(), false, wpt);
+				return PointImageDrawable.getFromWpt(app, wpt.getColor(), false, wpt);
 			case UNKNOWN_NAME_FILTER:
 				break;
 		}

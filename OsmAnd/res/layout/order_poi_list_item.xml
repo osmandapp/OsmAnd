@@ -16,17 +16,16 @@
 		tools:background="?android:attr/selectableItemBackground">
 
 		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/action_icon"
+			android:id="@+id/move_icon"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_height="match_parent"
 			android:layout_gravity="center"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
-			android:minHeight="@dimen/bottom_sheet_list_item_height"
-			tools:src="@drawable/ic_action_remove"
-			tools:tint="@color/icon_color_default_light"
+			android:paddingStart="@dimen/content_padding"
 			android:paddingEnd="@dimen/content_padding"
-			android:paddingStart="@dimen/content_padding" />
+			android:tint="?attr/secondary_icon_color"
+			osmand:srcCompat="@drawable/ic_action_item_move" />
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
@@ -59,16 +58,30 @@
 			android:paddingStart="0dp" />
 
 		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/move_icon"
+			android:id="@+id/action_delete"
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:minHeight="@dimen/bottom_sheet_list_item_height"
+			android:paddingStart="@dimen/content_padding_small"
+			android:paddingLeft="@dimen/content_padding_small"
+			android:paddingEnd="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding_small"
+			tools:src="@drawable/ic_action_delete_item"
+			tools:tint="@color/icon_color_default_light" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/action_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
-			osmand:srcCompat="@drawable/ic_action_item_move"
-			android:tint="?attr/secondary_icon_color"
+			android:minHeight="@dimen/bottom_sheet_list_item_height"
 			android:paddingStart="@dimen/content_padding"
-			android:paddingEnd="@dimen/content_padding" />
+			android:paddingEnd="@dimen/content_padding"
+			tools:src="@drawable/ic_action_remove"
+			tools:tint="@color/icon_color_default_light" />
 
 	</LinearLayout>
 

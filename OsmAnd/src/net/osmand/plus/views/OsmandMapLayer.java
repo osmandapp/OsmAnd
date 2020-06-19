@@ -626,6 +626,10 @@ public abstract class OsmandMapLayer {
 		return (int) (r * tb.getDensity());
 	}
 
+	protected int getIconSize(Context ctx) {
+		return ctx.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size);
+	}
+
 	public Rect getIconDestinationRect(float x, float y, int width, int height, float scale) {
 		int scaledWidth = width;
 		int scaledHeight = height;

@@ -45,9 +45,7 @@
                 android:id="@+id/toggle_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/content_padding_half"
-                android:layout_marginLeft="@dimen/content_padding_half"
+                android:layout_gravity="center"
                 android:focusable="false"
                 android:visibility="gone"
                 tools:visibility="visible" />

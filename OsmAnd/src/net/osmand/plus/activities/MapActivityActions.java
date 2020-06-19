@@ -468,10 +468,10 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_directions_from) {
 					if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 						enterDirectionsFromPoint(latitude, longitude);
-					} else if (!ActivityCompat.shouldShowRequestPermissionRationale(mapActivity, Manifest.permission.ACCESS_FINE_LOCATION)) {
-						mapActivity.getMyApplication().showToastMessage(R.string.ask_for_location_permission);
 					} else {
-						ActivityCompat.requestPermissions(mapActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION);
+						ActivityCompat.requestPermissions(mapActivity,
+								new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+								REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION);
 					}
 				} else if (standardId == R.string.measurement_tool) {
 					mapActivity.getContextMenu().close();

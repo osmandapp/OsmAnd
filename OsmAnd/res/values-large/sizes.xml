@@ -65,7 +65,6 @@
 	<dimen name="context_menu_transport_stop_item_height">24dp</dimen>
 	<dimen name="context_menu_main_actions_padding_top">11dp</dimen>
 	<dimen name="context_menu_main_actions_padding_bottom">9dp</dimen>
-	<dimen name="context_menu_main_actions_icon_margin">5dp</dimen>
 
 	<!-- General -->
 

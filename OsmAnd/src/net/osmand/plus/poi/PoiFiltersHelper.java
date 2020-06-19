@@ -10,7 +10,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI;
@@ -19,7 +18,6 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.wikipedia.WikipediaPoiMenu;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -39,7 +37,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.plus.wikipedia.WikipediaPoiMenu.ENABLED_WIKI_POI_LANGUAGES_KEY;
 import static net.osmand.plus.wikipedia.WikipediaPoiMenu.GLOBAL_WIKI_POI_ENABLED_KEY;
 
@@ -177,7 +174,6 @@ public class PoiFiltersHelper {
 		helper.clearHistory();
 		helper.close();
 	}
-
 
 	private PoiUIFilter getFilterById(String filterId, PoiUIFilter... filters) {
 		for (PoiUIFilter pf : filters) {

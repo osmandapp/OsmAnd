@@ -15,7 +15,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
@@ -126,7 +126,7 @@ public class FavouritePointMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(),
+			return PointImageDrawable.getFromFavorite(mapActivity.getMyApplication(),
 					mapActivity.getMyApplication().getFavorites().getColorWithCategory(fav,
 							ContextCompat.getColor(mapActivity, R.color.color_favorite)), false, fav);
 		} else {
