@@ -3788,4 +3788,21 @@
     <string name="quick_action_mapillary_hide">Cua Mapillary</string>
     <string name="quick_action_mapillary_show">Ammustra Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Unu butone pro ammustrare o cuare s\'istratu de Mapillary in sa mapa.</string>
+    <string name="uninstall_speed_cameras">Disinstalla sos autovelox</string>
+    <string name="shared_string_legal">Legale</string>
+    <string name="speed_camera_pois">PDI de sos autovelox</string>
+    <string name="speed_cameras_legal_descr">In unos cantos istados o regiones, s\'impreu de aplicatziones pro avisare de sos autovelox est proibidu dae sa lege. 
+\n
+\nDepes fàghere un\'issèberu chi dipendet dae sa lege de s\'istadu tuo. 
+\n
+\nIscherta %1$s e as a retzire avisos pro sos autovelox. 
+\n
+\nIscherta %2$s. Totu sos datos relativos a sos autovelox: avisos, notìficas e PDI ant a èssere iscantzellados finas a cando OsmAnd no at a èssere torradu a installare dae nou.</string>
+    <string name="speed_cameras_alert">Sos avisos pro sos autovelox sunt proibidos dae sa lege in unos cantos istados.</string>
+    <string name="keep_active">Mantene ativu</string>
+    <string name="shared_string_uninstall">Disinstalla</string>
+    <string name="shared_string_bearing">Orientamentu</string>
+    <string name="item_deleted">%1$s iscantzelladu</string>
+    <string name="speed_cameras_restart_descr">Depes torrare a allùghere pro iscantzellare de su totu sos datos de sos autovelox.</string>
+    <string name="shared_string_uninstall_and_restart">Disinstalla e torra a allùghere</string>
 </resources>
