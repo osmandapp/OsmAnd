@@ -2,6 +2,7 @@ package net.osmand.plus.poi;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -215,6 +216,14 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		buttonsContainer = mainView.findViewById(R.id.buttons_container);
 
 		return mainView;
+	}
+
+	@Override
+	public void onDismiss(@NonNull DialogInterface dialog) {
+		if (isChanged && !orderModified && !activationModified && resultCallback != null) {
+			resultCallback.onCustomFiltersDeleted();
+		}
+		super.onDismiss(dialog);
 	}
 
 	private void createToolbar(View mainView, boolean nightMode) {
@@ -628,8 +637,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 											PoiUIFilter filter = poiHelper.getFilterById(poiInfo.filterId);
 											if (filter != null && poiHelper.removePoiFilter(filter)) {
 												filter.setDeleted(true);
-												poiHelper.updateCachedFilter(filter);
-												app.getSearchUICore().refreshCustomPoiFilters();
+												isChanged = true;
 											}
 										}
 									}
@@ -854,5 +862,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 
 	public interface OnApplyPoiFiltersState {
 		void onApplyPoiFiltersState(ApplicationMode mode, boolean stateChanged);
+
+		void onCustomFiltersDeleted();
 	}
 }

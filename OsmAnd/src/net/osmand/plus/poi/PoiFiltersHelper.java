@@ -175,13 +175,6 @@ public class PoiFiltersHelper {
 		helper.close();
 	}
 
-	public void updateCachedFilter(PoiUIFilter poiFilter) {
-		int i = cacheTopStandardFilters.indexOf(poiFilter);
-		if (i != -1) {
-			cacheTopStandardFilters.set(i, poiFilter);
-		}
-	}
-
 	private PoiUIFilter getFilterById(String filterId, PoiUIFilter... filters) {
 		for (PoiUIFilter pf : filters) {
 			if (pf != null && pf.getFilterId() != null && filterId != null && pf.getFilterId().equals(filterId)) {

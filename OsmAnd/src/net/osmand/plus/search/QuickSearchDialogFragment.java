@@ -1281,9 +1281,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 											UiUtilities.setupSnackbarVerticalLayout(snackbar);
 											UiUtilities.setupSnackbar(snackbar, nightMode);
 											snackbar.show();
+										}
 									}
-							}
-						});
+
+									@Override
+									public void onCustomFiltersDeleted() {
+										searchHelper.refreshCustomPoiFilters();
+										reloadCategoriesInternal();
+									}
+								});
 					}
 				}));
 				if (categoriesSearchFragment != null) {
