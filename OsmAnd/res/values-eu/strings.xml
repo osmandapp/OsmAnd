@@ -3784,4 +3784,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_meters">metro</string>
     <string name="details_dialog_decr">Kontrolatu mapan agertzen diren xehetasun gehigarrien ikusgaitasuna</string>
     <string name="shared_string_night_map">Gauerako mapa</string>
+    <string name="quick_action_showhide_mapillary_title">Erakutsi/ezkutatu Mapillary</string>
+    <string name="quick_action_mapillary_hide">Ezkutatu Mapillary</string>
+    <string name="quick_action_mapillary_show">Erakutsi Mapillary</string>
 </resources>

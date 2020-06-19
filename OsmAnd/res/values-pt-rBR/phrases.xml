@@ -1221,7 +1221,7 @@
     <string name="poi_tactile_paving_yes">Sim</string>
     <string name="poi_tactile_paving_no">Sem piso tátil</string>
     <string name="poi_traffic_signals_sound_yes">Sim</string>
-    <string name="poi_traffic_signals_sound_no">Não</string>
+    <string name="poi_traffic_signals_sound_no">Som: Não</string>
     <string name="poi_traffic_signals_sound_walk">Só quando permitido atravessar</string>
     <string name="poi_ford_stepping_stones">Poldras (pedras de passagem)</string>
     <string name="poi_toll_hgv_yes">Pedágio para veículos pesados</string>
@@ -3824,4 +3824,9 @@
     <string name="poi_fire_hydrant_type_pipe">Tubo</string>
     <string name="poi_fire_hydrant_pressure_filter">Pressão</string>
     <string name="poi_pump_status_missing_beam">Status da bomba: falta de feixe</string>
+    <string name="poi_traffic_signals_arrow_yes">Sim</string>
+    <string name="poi_traffic_signals_vibration_yes">Sim</string>
+    <string name="poi_traffic_signals_vibration_no">Vibração: Não</string>
+    <string name="poi_traffic_signals_arrow">Seta</string>
+    <string name="poi_traffic_signals_vibration">Vibração</string>
 </resources>

@@ -3675,10 +3675,10 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="mercator_projection">Mercator vetület</string>
     <string name="storage_format">Tárolás formátuma</string>
     <string name="map_source_zoom_levels">Adja meg a legkisebb és legnagyobb nagyítási szintet, amelyen az online térkép megjelenjen vagy letöltésre kerüljön.</string>
-    <string name="expire_time_descr">Lejárati idő percben megadva. A gyorsítótárazott csempék a megadott idő után újratöltésre kerülnek. A mezőt üresen hagyva ezek a csempék soha nem fognak frissülni.
-\n
-\nEgy nap 1440 perc.
-\nEgy hét 10 080 perc.
+    <string name="expire_time_descr">A gyorsítótárazott csempék a megadott percek letelte után újra letöltésre kerülnek. A mezőt üresen hagyva ezek a csempék soha nem fognak frissülni. 
+\n 
+\nEgy nap 1440 perc. 
+\nEgy hét 10 080 perc. 
 \nEgy hónap 43 829 perc.</string>
     <string name="tiles_storage_descr">Válassza ki a letöltött csempék tárolási módját.</string>
     <string name="width_limit_description">Adja meg a járműve szélességét, a széles járművekre útvonalkorlátozások lehetnek érvényben.</string>
@@ -3704,4 +3704,8 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="vessel_height_limit_description">Adja meg a hajómagasságot az alacsony hidak elkerüléséhez. Ne feledje, amennyiben a híd mozdítható, a nyitott állapotú magasságát vesszük figyelembe.</string>
     <string name="vessel_height_warning">Megadhatja a hajómagasságot az alacsony hidak elkerüléséhez. Ne feledje, amennyiben a híd mozdítható, a nyitott állapotú magasságát vesszük figyelembe.</string>
     <string name="vessel_width_limit_description">Adja meg a hajószélességet a keskeny hidak elkerüléséhez</string>
+    <string name="quick_action_showhide_mapillary_title">Mapillary megjelenítése/elrejtése</string>
+    <string name="quick_action_mapillary_hide">Mapillary elrejtése</string>
+    <string name="quick_action_mapillary_show">Mapillary megjelenítése</string>
+    <string name="quick_action_showhide_mapillary_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a Mapillary réteget.</string>
 </resources>
