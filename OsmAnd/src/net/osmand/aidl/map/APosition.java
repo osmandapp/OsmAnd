@@ -5,20 +5,20 @@ import android.os.Parcelable;
 
 public class APosition implements Parcelable {
 
-	public double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-
 	public double getLatitude() {
 		return latitude;
 	}
 
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 
 	public double getAltitude() {
@@ -45,18 +45,18 @@ public class APosition implements Parcelable {
 		this.bearing = bearing;
 	}
 
-	private double longitude;
 	private double latitude;
+	private double longitude;
 	private double altitude;
 	private double speed;
 	private double bearing;
 
-	public APosition(double longitude, double latitude, double altitude, double speed, double bearer) {
-		this.longitude = longitude;
+	public APosition(double latitude, double longitude, double altitude, double speed, double bearing) {
 		this.latitude = latitude;
+		this.longitude = longitude;
 		this.altitude = altitude;
 		this.speed = speed;
-		this.bearing = bearer;
+		this.bearing = bearing;
 	}
 
 	public APosition(Parcel in) {
