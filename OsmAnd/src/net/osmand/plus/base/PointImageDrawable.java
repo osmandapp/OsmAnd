@@ -160,11 +160,12 @@ public class PointImageDrawable extends Drawable {
 
 	private void drawInCenter(Canvas canvas, Rect destRect, boolean history) {
 		this.history = history;
+		final float DEFAULT_SCALE_ON_MAP_1_5 = 1.5f;
 		setBounds(destRect);
-		int offsetX = destRect.centerX() - (int) (favIcon.getIntrinsicWidth() / 2 * scale);
-		int offsetY = destRect.centerY() - (int) (favIcon.getIntrinsicHeight() / 2 * scale);
-		favIcon.setBounds(offsetX, offsetY, (int) (offsetX + favIcon.getIntrinsicWidth() * scale),
-				offsetY + (int) (favIcon.getIntrinsicHeight() * scale));
+		int offsetX = destRect.centerX() - (int) (favIcon.getIntrinsicWidth() / 2 * scale * DEFAULT_SCALE_ON_MAP_1_5);
+		int offsetY = destRect.centerY() - (int) (favIcon.getIntrinsicHeight() / 2 * scale * DEFAULT_SCALE_ON_MAP_1_5);
+		favIcon.setBounds(offsetX, offsetY, (int) (offsetX + favIcon.getIntrinsicWidth() * scale * DEFAULT_SCALE_ON_MAP_1_5),
+				offsetY + (int) (favIcon.getIntrinsicHeight() * scale * DEFAULT_SCALE_ON_MAP_1_5));
 		draw(canvas);
 	}
 
