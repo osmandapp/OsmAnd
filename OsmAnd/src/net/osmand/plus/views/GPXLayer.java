@@ -700,7 +700,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt) o).name);
 		} else if (o instanceof SelectedGpxPoint) {
 			SelectedGpxFile selectedGpxFile = ((SelectedGpxPoint) o).getSelectedGpxFile();
-			String name = formatName(Algorithms.getFileWithoutDirs(selectedGpxFile.getGpxFile().path));
+			String name;
+			if (selectedGpxFile.isShowCurrentTrack()) {
+				name = view.getContext().getString(R.string.shared_string_currently_recording_track);
+			} else {
+				name = formatName(Algorithms.getFileWithoutDirs(selectedGpxFile.getGpxFile().path));
+			}
 			return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
 		}
 		return null;
