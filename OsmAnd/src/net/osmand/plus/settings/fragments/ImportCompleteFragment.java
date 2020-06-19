@@ -77,8 +77,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		recyclerView = root.findViewById(R.id.list);
 		description.setText(UiUtilities.createSpannableString(
 				String.format(getString(R.string.import_complete_description), fileName),
-				fileName,
-				new StyleSpan(Typeface.BOLD)
+				new StyleSpan(Typeface.BOLD), fileName
 		));
 		btnClose.setOnClickListener(new View.OnClickListener() {
 			@Override

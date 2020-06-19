@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -90,7 +91,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			String mapSource = getString(R.string.map_source);
 			String overlayUnderlay = getString(R.string.pref_overlay);
 			String dialogDesr = getString(dialogDescrRes, mapSource, overlayUnderlay);
-			dialogDescrTv.setText(createSpannableString(dialogDesr, mapSource, overlayUnderlay));
+			dialogDescrTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), dialogDesr, mapSource, overlayUnderlay));
 		} else {
 			dialogDescrTv.setText(getString(dialogDescrRes));
 		}

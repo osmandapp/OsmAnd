@@ -37,6 +37,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
@@ -568,6 +569,9 @@ public class MapActivityActions implements DialogProvider {
 		}
 		if (targets.hasTooLongDistanceToNavigate()) {
 			app.showToastMessage(R.string.route_is_too_long_v2);
+		}
+		if (!settings.SPEED_CAMERAS_ALERT_SHOWED.get()) {
+			SpeedCamerasBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), null);
 		}
 	}
 
