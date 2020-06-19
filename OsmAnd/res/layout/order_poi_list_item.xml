@@ -63,10 +63,10 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:minHeight="@dimen/bottom_sheet_list_item_height"
-			android:paddingStart="@dimen/content_padding_half"
-			android:paddingLeft="@dimen/content_padding_half"
-			android:paddingEnd="@dimen/content_padding_half"
-			android:paddingRight="@dimen/content_padding_half"
+			android:paddingStart="@dimen/content_padding_small"
+			android:paddingLeft="@dimen/content_padding_small"
+			android:paddingEnd="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding_small"
 			tools:src="@drawable/ic_action_delete_item"
 			tools:tint="@color/icon_color_default_light" />
 
