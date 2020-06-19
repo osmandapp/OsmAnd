@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TLongHashSet;
 
 public class GeneralRouter implements VehicleRouter {
@@ -353,8 +354,8 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	@Override
-	public float defineObstacle(RouteDataObject road, int point) {
-		int[] pointTypes = road.getPointTypes(point);
+	public float defineObstacle(RouteDataObject road, int point, boolean dir) {
+		int[] pointTypes = filterRulesByDirection(road.getPointTypes(point), dir, road);
 		if(pointTypes != null) {
 			Float obst = getCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes);
 			if(obst == null) {
@@ -367,17 +368,49 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	@Override
-	public float defineRoutingObstacle(RouteDataObject road, int point) {
-		int[] pointTypes = road.getPointTypes(point);
-		if(pointTypes != null){
+	public float defineRoutingObstacle(RouteDataObject road, int point, boolean dir) {
+		int[] pointTypes = filterRulesByDirection(road.getPointTypes(point), dir, road);
+		if(pointTypes != null) {
 			Float obst = getCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes);
-			if(obst ==  null) {
+			if(obst == null) {
 				obst = getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
 				putCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, obst);
 			}
 			return obst;
 		}
 		return 0;
+	}
+	
+	@Override
+	public int[] filterRulesByDirection(int[] pointRules, boolean direction, RouteDataObject route) {
+		if (pointRules != null) {
+			TIntArrayList filteredRules = new TIntArrayList();
+			boolean foundDirRule = false;
+			for (int i = 0; i < pointRules.length; i++) {
+				foundDirRule = false;
+				if (route.region.isTrafficSignalsRule(pointRules[i])) {
+					for (int rid : pointRules) {
+						if (rid != pointRules[i]) {
+							//possible error if we have two different directions on one point?
+							int trafficSignalDir = route.region.getTrafficSignalDirection(rid);
+							if (trafficSignalDir != 0) {
+								if ((direction && trafficSignalDir > 0) || (!direction && trafficSignalDir < 0)) {
+									filteredRules.add(pointRules[i]);
+								} 
+								foundDirRule = true;
+							}
+						}
+					}
+					if (!foundDirRule) {
+						filteredRules.add(pointRules[i]);
+					}
+				} else if (route.region.getTrafficSignalDirection(pointRules[i]) == 0){
+					filteredRules.add(pointRules[i]);
+				}
+			} 
+			return filteredRules.size() > 0 ? filteredRules.toArray() : null;
+		}
+		return pointRules;
 	}
 	
 	@Override

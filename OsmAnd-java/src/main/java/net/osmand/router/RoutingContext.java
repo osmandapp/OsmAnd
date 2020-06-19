@@ -309,7 +309,6 @@ public class RoutingContext {
 								}
 								ts.excludedIds.add(ro.getId());
 							}
-							ro.processDirectionalTags();
 						}
 					}
 				}

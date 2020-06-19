@@ -30,7 +30,7 @@ public interface VehicleRouter {
 	/**
 	 * return delay in seconds (0 no obstacles)
 	 */
-	public float defineObstacle(RouteDataObject road, int point);
+	public float defineObstacle(RouteDataObject road, int point, boolean dir);
 	
 	/**
 	 * return delay in seconds for height obstacles
@@ -40,12 +40,17 @@ public interface VehicleRouter {
 	/**
 	 * return delay in seconds (0 no obstacles)
 	 */
-	public float defineRoutingObstacle(RouteDataObject road, int point);
+	public float defineRoutingObstacle(RouteDataObject road, int point, boolean dir);
 
 	/**
 	 * return routing speed in m/s for vehicle for specified road
 	 */
 	public float defineRoutingSpeed(RouteDataObject road);
+	
+	/**
+	 * Define if rule should be applied based on movement direction;
+	 */
+	public int[] filterRulesByDirection(int[] pointRules, boolean direction, RouteDataObject road);
 	
 	/**
 	 * return real speed in m/s for vehicle for specified road
