@@ -11,7 +11,6 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiType;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
@@ -734,9 +733,6 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
-			if (isPoiTypeForbidden(object.object)) {
-				return false;
-			}
 			if (phrase != null && object.otherNames != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
 				for (String s : object.otherNames) {
 					if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
@@ -889,13 +885,6 @@ public class SearchUICore {
 				json.put("cities", citiesArr);
 			}
 			return json;
-		}
-
-		private boolean isPoiTypeForbidden(Object object) {
-			if (object instanceof PoiType) {
-				return ((PoiType) object).isForbidden();
-			}
-			return false;
 		}
 	}
 	

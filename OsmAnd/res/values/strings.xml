@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_uninstall_and_restart">Uninstall and Restart</string>
+    <string name="speed_cameras_restart_descr">Restart is needed to completely delete speed camera data.</string>
     <string name="quick_action_showhide_mapillary_descr">A toggle to show or hide the Mapillary layer on the map.</string>
     <string name="quick_action_mapillary_show">Show Mapillary</string>
     <string name="quick_action_mapillary_hide">Hide Mapillary</string>

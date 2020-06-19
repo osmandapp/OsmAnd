@@ -692,10 +692,11 @@ public class BinaryMapPoiReaderAdapter {
 		StringBuilder retValue = new StringBuilder();
 		PoiCategory amenityType = null;
 		LinkedList<String> textTags = null;
+		boolean isForbidden = false;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
-			if (amenityType == null && (tag > OsmandOdb.OsmAndPoiBoxDataAtom.CATEGORIES_FIELD_NUMBER || tag == 0)) {
+			if (amenityType == null && (tag > OsmandOdb.OsmAndPoiBoxDataAtom.CATEGORIES_FIELD_NUMBER || tag == 0) || isForbidden) {
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				return null;
 			}
@@ -770,10 +771,7 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				subtype = poiTypes.replaceDeprecatedSubtype(type, subtype);
-				PoiType poiType = poiTypes.getPoiTypeByKeyInCategory(type, subtype);
-				if (poiType != null && poiType.isForbidden()) {
-					return null;
-				}
+				isForbidden = poiTypes.isKeyNameForbidden(subtype);
 				if (req.poiTypeFilter == null || req.poiTypeFilter.accept(type, subtype)) {
 					if (amenityType == null) {
 						amenityType = type;

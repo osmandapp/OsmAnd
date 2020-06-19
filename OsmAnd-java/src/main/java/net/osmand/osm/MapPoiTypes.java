@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -34,6 +35,7 @@ public class MapPoiTypes {
 	private static final Log log = PlatformUtil.getLog(MapRenderingTypes.class);
 	private String resourceName;
 	private List<PoiCategory> categories = new ArrayList<PoiCategory>();
+	private Set<String> forbiddenKeyNames = new HashSet<>();
 	private PoiCategory otherCategory;
 	private PoiCategory otherMapCategory;
 
@@ -946,13 +948,11 @@ public class MapPoiTypes {
 		}
 	}
 
-	public void forbidPoiType(String keyName) {
-		for (PoiCategory category : categories) {
-			for (PoiType poiType : category.getPoiTypes()) {
-				if (keyName.equals(poiType.getKeyName())) {
-					poiType.setForbidden(true);
-				}
-			}
-		}
+	public void setForbiddenKeyNames(Set<String> forbiddenKeyNames) {
+		this.forbiddenKeyNames = forbiddenKeyNames;
+	}
+
+	public boolean isKeyNameForbidden(String key) {
+		return forbiddenKeyNames.contains(key);
 	}
 }

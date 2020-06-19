@@ -18,8 +18,6 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
-import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 
 public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -59,14 +57,9 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onDismissButtonClickAction() {
-		OsmandPreference<Boolean> speedCamUninstalled = settings.SPEED_CAMERAS_UNINSTALLED;
-		speedCamUninstalled.set(true);
-		settings.SPEAK_SPEED_CAMERA.set(false);
-		settings.SHOW_CAMERAS.set(false);
-		app.getPoiTypes().forbidPoiType(SPEED_CAMERA_KEY_NAME);
-		Fragment targetFragment = getTargetFragment();
-		if (targetFragment instanceof OnPreferenceChanged) {
-			((OnPreferenceChanged) targetFragment).onPreferenceChanged(speedCamUninstalled.getId());
+		FragmentManager fm = getFragmentManager();
+		if (fm != null) {
+			SpeedCamerasUninstallRestartBottomSheet.showInstance(fm);
 		}
 		setDialogShowed();
 	}

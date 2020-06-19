@@ -74,6 +74,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -87,6 +88,7 @@ import java.util.StringTokenizer;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.dialogs.SpeedCamerasBottomSheet.SPEED_CAMERA_KEY_NAME;
 
 public class OsmandSettings {
 
@@ -2110,6 +2112,14 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SPEED_CAMERAS_UNINSTALLED = new BooleanPreference("speed_cameras_uninstalled", false).makeGlobal();
 	public final OsmandPreference<Boolean> SPEED_CAMERAS_ALERT_SHOWED = new BooleanPreference("speed_cameras_alert_showed", false).makeGlobal();
+
+	public Set<String> getForbiddenPoiKeyNames() {
+		Set<String> keyNames = new HashSet<>();
+		if (SPEED_CAMERAS_UNINSTALLED.get()) {
+			keyNames.add(SPEED_CAMERA_KEY_NAME);
+		}
+		return keyNames;
+	}
 
 	public final OsmandPreference<Boolean> ANNOUNCE_WPT = new BooleanPreference("announce_wpt", true) {
 		@Override

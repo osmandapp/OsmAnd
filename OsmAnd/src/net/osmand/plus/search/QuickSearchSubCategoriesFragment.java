@@ -87,12 +87,6 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 			acceptedCategories = new HashSet<>(savedInstanceState.getStringArrayList(ACCEPTED_CATEGORIES_KEY));
 		}
 		poiTypeList = new ArrayList<>(poiCategory.getPoiTypes());
-		Iterator<PoiType> iter = poiTypeList.iterator();
-		while (iter.hasNext()) {
-			if (iter.next().isForbidden()) {
-				iter.remove();
-			}
-		}
 		Collections.sort(poiTypeList, new Comparator<PoiType>() {
 			@Override
 			public int compare(PoiType poiType, PoiType t1) {
