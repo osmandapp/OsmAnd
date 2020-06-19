@@ -2,15 +2,14 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.content.Context;
 import android.graphics.Matrix;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -35,7 +34,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
@@ -48,6 +46,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 
 public class TrackDetailsMenu {
 
@@ -172,6 +172,8 @@ public class TrackDetailsMenu {
 						}
 					}
 				});
+				int navigationIconResId = AndroidUtils.getNavigationIconResId(mapActivity);
+				toolbarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
 				toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -210,8 +212,8 @@ public class TrackDetailsMenu {
 		}
 	}
 
-	public void updateInfo(final View main) {
-		updateView(main);
+	public void updateInfo(final View main, boolean forceFitTrackOnMap) {
+		updateView(main, forceFitTrackOnMap);
 	}
 
 	@Nullable
@@ -483,12 +485,15 @@ public class TrackDetailsMenu {
 		return xAxisPoints;
 	}
 
-	private void updateView(final View parentView) {
+	private void updateView(final View parentView, boolean forceFitTrackOnMap) {
 		MapActivity mapActivity = getMapActivity();
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (mapActivity == null || gpxItem == null) {
 			return;
 		}
+		final OsmandApplication app = mapActivity.getMyApplication();
+		final UiUtilities ic = app.getUIUtilities();
+		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		GPXTrackAnalysis analysis = gpxItem.analysis;
 		if (analysis == null || gpxItem.chartTypes == null) {
 			parentView.setVisibility(View.GONE);
@@ -575,9 +580,6 @@ public class TrackDetailsMenu {
 			}
 		});
 
-		final OsmandApplication app = mapActivity.getMyApplication();
-		final UiUtilities ic = app.getUIUtilities();
-
 		GpxUiHelper.setupGPXChart(app, chart, 4);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();
@@ -651,23 +653,22 @@ public class TrackDetailsMenu {
 			yAxis.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					PopupMenu optionsMenu = new PopupMenu(v.getContext(), v);
-					DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-					for (final GPXDataSetType[] types : availableTypes) {
-						MenuItem menuItem = optionsMenu.getMenu()
-								.add(GPXDataSetType.getName(app, types))
-								.setIcon(GPXDataSetType.getImageDrawable(app, types));
-						menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-							@Override
-							public boolean onMenuItemClick(MenuItem mItem) {
-								GpxDisplayItem gpxItem = getGpxItem();
-								gpxItem.chartTypes = types;
-								update();
-								return true;
-							}
-						});
+					Context themedContext = UiUtilities.getThemedContext(v.getContext(), nightMode);
+					List<SimplePopUpMenuItem> items = new ArrayList<>();
+					for (GPXDataSetType[] types : availableTypes) {
+						items.add(new SimplePopUpMenuItem(
+								GPXDataSetType.getName(app, types),
+								GPXDataSetType.getImageDrawable(app, types)));
 					}
-					optionsMenu.show();
+					UiUtilities.createListPopupWindow(
+							themedContext, v, v.getWidth(), items, new AdapterView.OnItemClickListener() {
+						@Override
+						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+							GpxDisplayItem gpxItem = getGpxItem();
+							gpxItem.chartTypes = availableTypes.get(position);
+							update();
+						}
+					}).show();
 				}
 			});
 			yAxisArrow.setVisibility(View.VISIBLE);
@@ -695,28 +696,25 @@ public class TrackDetailsMenu {
 			xAxis.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					final PopupMenu optionsMenu = new PopupMenu(v.getContext(), v);
-					DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-					for (final GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
-						MenuItem menuItem = optionsMenu.getMenu()
-								.add(type.getStringId()).setIcon(type.getImageDrawable(app));
-						menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-							@Override
-							public boolean onMenuItemClick(MenuItem mItem) {
-								GpxDisplayItem gpxItem = getGpxItem();
-								if (gpxItem != null) {
-									gpxItem.chartAxisType = type;
-									gpxItem.chartHighlightPos = -1;
-									gpxItem.chartMatrix = null;
-									update();
-									return true;
-								} else {
-									return false;
-								}
-							}
-						});
+					Context themedContext = UiUtilities.getThemedContext(v.getContext(), nightMode);
+					List<SimplePopUpMenuItem> items = new ArrayList<>();
+					for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
+						items.add(new SimplePopUpMenuItem(
+								app.getString(type.getStringId()), type.getImageDrawable(app)));
 					}
-					optionsMenu.show();
+					UiUtilities.createListPopupWindow(themedContext,
+							v, v.getWidth(), items, new AdapterView.OnItemClickListener() {
+						@Override
+						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+							GpxDisplayItem gpxItem = getGpxItem();
+							if (gpxItem != null) {
+								gpxItem.chartAxisType = GPXDataSetAxisType.values()[position];
+								gpxItem.chartHighlightPos = -1;
+								gpxItem.chartMatrix = null;
+								update();
+							}
+						}
+					}).show();
 				}
 			});
 			xAxisArrow.setVisibility(View.VISIBLE);
@@ -726,7 +724,7 @@ public class TrackDetailsMenu {
 			xAxisArrow.setVisibility(View.GONE);
 		}
 
-		refreshChart(chart, true);
+		refreshChart(chart, forceFitTrackOnMap);
 	}
 
 	private void updateChart(LineChart chart) {
@@ -739,6 +737,14 @@ public class TrackDetailsMenu {
 			}
 			if (gpxItem.chartHighlightPos != -1) {
 				chart.highlightValue(gpxItem.chartHighlightPos, 0);
+			} else if (gpxItem.locationOnMap != null) {
+				LineData lineData = chart.getLineData();
+				List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
+				if (ds != null && ds.size() > 0) {
+					OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
+					gpxItem.chartHighlightPos = (float) (gpxItem.locationOnMap.distance / dataSet.getDivX());
+					chart.highlightValue(gpxItem.chartHighlightPos, 0);
+				}
 			} else {
 				chart.highlightValue(null);
 			}

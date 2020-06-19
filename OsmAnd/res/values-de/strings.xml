@@ -379,7 +379,7 @@
     <string name="favorite_friends_category">Freunde</string>
     <string name="favorite_places_category">Sehenswertes</string>
     <string name="shared_string_others">Andere</string>
-    <string name="shared_string_name">"Name "</string>
+    <string name="shared_string_name">Name</string>
     <string name="favourites_edit_dialog_category">Kategorie</string>
     <string name="shared_string_no_thanks">Nicht verwendet</string>
     <string name="basemap_missing">Laden Sie die Basis-Weltkarte herunter, um einen Überblick über die ganze Welt bei niedrigen Vergrößerungsstufen zu erhalten.</string>
@@ -465,7 +465,7 @@
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Standort mitteilen mittels</string>
     <string name="send_location_sms_pattern">Standort: %1$s
-%2$s</string>
+\n%2$s</string>
     <string name="send_location_email_pattern">Um den Ort zu sehen, folgen Sie dem Weblink %1$s oder dem Android-Intent-Link %2$s</string>
     <string name="send_location">Standort senden</string>
     <string name="context_menu_item_share_location">Standort mitteilen</string>
@@ -541,7 +541,7 @@
     <string name="shared_string_refresh">Aktualisieren</string>
     <string name="fast_route_mode">Schnellste Route</string>
     <string name="fast_route_mode_descr">Zur Berechnung der schnellsten Route aktivieren oder für eine kraftstoffsparende Route deaktivieren.</string>
-    <string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln\n ({2} MB)</string>
+    <string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln ({2} MB)</string>
     <string name="shared_string_download_map">Karte herunterladen</string>
     <string name="select_max_zoom_preload_area">Größte zu ladende Vergrößerung</string>
     <string name="maps_could_not_be_downloaded">Diese Karte konnte nicht geladen werden</string>
@@ -1123,7 +1123,7 @@
     <string name="driving_region_japan">Japan</string>
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="driving_region_europe_asia">Europa, Asien, Lateinamerika und andere</string>
+    <string name="driving_region_europe_asia">Europa, Asien, Lateinamerika und ähnliche</string>
     <string name="driving_region_uk">UK, Indien und andere</string>
     <string name="driving_region_australia">Australien</string>
     <string name="driving_region">Verkehrsregion</string>
@@ -1131,13 +1131,13 @@
     <string name="shared_string_about">Über</string>
     <string name="about_settings_descr">Versionsinfo, Lizenz, Projektmitglieder</string>
     <string name="local_index_tile_data_zooms">Heruntergeladene Vergrößerungsstufen: %1$s</string>
-    <string name="local_index_tile_data_expire">Gültigkeit endet in (Minuten): %1$s</string>
+    <string name="local_index_tile_data_expire">Ablaufzeit (Minuten): %1$s</string>
     <string name="local_index_tile_data_downloadable">Herunterladbar: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maximale Vergrößerung: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimale Vergrößerung: %1$s</string>
     <string name="local_index_tile_data_name">Kacheldaten: %1$s</string>
-    <string name="edit_tilesource_successfully">Kachelquelle %1$s wurde gespeichert</string>
-    <string name="edit_tilesource_elliptic_tile">Elliptischer Merkator</string>
+    <string name="edit_tilesource_successfully">Kachelquelle %1$s gespeichert</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptische Mercator-Projektion</string>
     <string name="edit_tilesource_maxzoom">Maximale Vergrößerung</string>
     <string name="edit_tilesource_expiration_time">Ablaufzeit (Minuten)</string>
     <string name="edit_tilesource_minzoom">Minimale Vergrößerung</string>
@@ -1492,8 +1492,8 @@
 \nDiese Ansicht kann zurückgestellt werden, indem sie hier wieder deaktiviert wird oder die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.</string>
     <string name="shared_string_audio">Audio</string>
     <string name="location_on_map">Standort:
- Lat %1$s
- Lon %2$s</string>
+\n Lat %1$s
+\n Lon %2$s</string>
     <string name="notes">Audio-/Video-Notizen</string>
     <string name="online_map">Online-Karte</string>
     <string name="roads_only">Nur Straßen</string>
@@ -1567,7 +1567,7 @@
     <string name="shared_string_release">Veröffentlicht</string>
     <string name="search_poi_category_hint">Suchbegriff</string>
     <string name="short_location_on_map">Lat %1$s
-Lon %2$s</string>
+\nLon %2$s</string>
     <string name="shared_string_logoff">Abmelden</string>
     <string name="rendering_value_disabled_name">Deaktiviert</string>
     <string name="routing_attr_height_name">Höhenbeschränkung</string>
@@ -2043,7 +2043,7 @@ Lon %2$s</string>
     <string name="osmand_plus_banner_desc">Unbegrenzte Karten-Downloads, -Aktualisierungen und die Wikipedia-Erweiterung.</string>
     <string name="get_for">Für %1$s abonnieren</string>
     <string name="get_it">Abonnieren</string>
-    <string name="osm_live_payment_desc">Monatliche Abonnementabrechnung. Jederzeit auf Google Play kündbar.</string>
+    <string name="osm_live_payment_desc">Das Abonnement wird pro ausgewähltem Zeitraum berechnet. Sie können das Abonnement jederzeit über Google Play kündigen.</string>
     <string name="donation_to_osm">Spende an die OSM-Gemeinschaft</string>
     <string name="donation_to_osm_desc">Ein Teil Ihrer Spende erhalten OSM-Mitwirkende. Die Abonnementskosten bleiben gleich.</string>
     <string name="osm_live_subscription_desc">Das Abonnement macht stündliche, tägliche und wöchentliche Updates sowie unbegrenzte Downloads aller Karten weltweit möglich.</string>
@@ -2077,7 +2077,7 @@ Lon %2$s</string>
     <string name="save_track_precision_descr">Filter: Mindestgenauigkeit für die Aufzeichnung eines Punktes.</string>
     <string name="rendering_attr_contourColorScheme_description">Farbschema für Höhenlinien</string>
     <string name="shared_string_continue">Fortfahren</string>
-    <string name="shared_string_pause">"Pause "</string>
+    <string name="shared_string_pause">Pause</string>
     <string name="shared_string_recorded">Aufgezeichnet</string>
     <string name="gpx_logging_no_data">Keine Daten</string>
     <string name="shared_string_trip">Strecke</string>
@@ -2224,7 +2224,7 @@ Lon %2$s</string>
     <string name="track_points_category_name">Wegpunkte, POI, markierte Orte</string>
     <string name="route_points_category_name">Richtungsänderungen entlang dieser Route</string>
     <string name="add_new_folder">Neuen Ordner hinzufügen</string>
-    <string name="shared_string_slope">Steigung</string>
+    <string name="shared_string_slope">Hangneigung</string>
     <string name="relief_smoothness_factor_descr">Bevorzugte Geländeform: flach oder bergig.</string>
     <string name="lang_ber">Berber</string>
     <string name="do_not_send_anonymous_app_usage">Keine anonymen App-Nutzungsdaten versenden</string>
@@ -2416,7 +2416,7 @@ Lon %2$s</string>
     <string name="quick_action_showhide_osmbugs_descr">Schaltfläche zum Ein- oder Ausblenden von OSM-Notizen auf der Karte.</string>
     <string name="sorted_by_distance">Nach Entfernung sortiert</string>
     <string name="search_favorites">In Favoriten suchen</string>
-    <string name="hillshade_menu_download_descr">Laden Sie die Schummerungs-Karte herunter, um vertikale Schattierungen anzuzeigen.</string>
+    <string name="hillshade_menu_download_descr">Laden Sie die Schummerungskarte herunter, um vertikale Schattierungen anzuzeigen.</string>
     <string name="shared_string_plugin">Erweiterung</string>
     <string name="srtm_purchase_header">Kaufen und installieren Sie die Erweiterung \'Höhenlinien\', um abgestufte vertikale Flächen anzuzeigen.</string>
     <string name="srtm_menu_download_descr">Laden Sie die Höhenlinienkarte zu dieser Region herunter.</string>
@@ -2439,7 +2439,7 @@ Lon %2$s</string>
     <string name="no_photos_descr">Keine Fotos hier.</string>
     <string name="plugin_mapillary_descr">Fotos von der Straße für jedermann. Plätze entdecken, mitwirken, die Welt im Bild festhalten.</string>
     <string name="improve_coverage_mapillary">Verbessern Sie die Bildberichterstattung mit Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Installieren Sie die App \'Mapillary\', um dieser Kartenposition ein oder mehrere Fotos hinzuzufügen.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installieren Sie Mapillary, um Fotos zu dieser Kartenposition hinzuzufügen.</string>
     <string name="open_mapillary">Mapillary öffnen</string>
     <string name="mapillary_image">Mapillary-Foto</string>
     <string name="shared_string_permissions">Berechtigungen</string>
@@ -2554,7 +2554,7 @@ Lon %2$s</string>
     <string name="hide_passed">Passierte ausblenden</string>
     <string name="marker_show_distance_descr">Auswahl der Entfernungs- und Richtungsangabe für Kartenmarkierungen in der Karte:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartenausrichtungsgrenzwert</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet.</string>
     <string name="marker_moved_to_history">Kartenmarkierung in den Verlauf verschoben</string>
     <string name="osn_modify_dialog_error">Notiz konnte nicht geändert werden.</string>
     <string name="osn_modify_dialog_title">Notiz ändern</string>
@@ -2612,7 +2612,7 @@ Lon %2$s</string>
     <string name="by_date">Nach Datum</string>
     <string name="by_type">Nach Typ</string>
     <string name="import_gpx_file_description">kann als Favoriten oder GPX-Datei importiert werden.</string>
-    <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Bedienelement oder Kontextmenü hinzufügen.</string>
+    <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu einem beliebigen Punkt auf der Karte hinzufügen, indem Sie die Widgets oder Kontextmenüs verwenden.</string>
     <string name="notes_by_date">Audio-/Video-Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuertasten und Bedienelemente um.</string>
     <string name="release_3_0">• Neu: Unterstützung weltweiter Offline-Reiseführer. Verknüpfung beschriebener Sehenswürdigkeiten zur Landkarte. Die Inhalte basieren derzeit auf Wikivoyage.
@@ -2650,7 +2650,7 @@ Lon %2$s</string>
     <string name="show_guide_line_descr">Richtungsanzeiger von Ihrem Standort zu aktiven Markierungspunkten einblenden.</string>
     <string name="show_arrows_descr">Ein oder zwei Pfeile anzeigen, die die Richtung zu den aktiven Markierungen angeben.</string>
     <string name="distance_indication_descr">Wählen Sie aus, wie der Abstand zu aktiven Markierungen angezeigt werden soll.</string>
-    <string name="active_markers_descr">Wählen Sie die Anzahl der Fahrtrichtungsanzeiger:</string>
+    <string name="active_markers_descr">Wählen Sie die Anzahl der Fahrtrichtungsanzeiger.</string>
     <string name="osm_recipient_stat">%1$s bearbeitet, Summe %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-Empfänger</string>
     <string name="total_donations">Spenden insgesamt</string>
@@ -2806,8 +2806,9 @@ Lon %2$s</string>
     <string name="coord_input_save_as_track">Als Track speichern</string>
     <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie einen Dateinamen ein und klicken Sie auf „Speichern“.</string>
     <string name="point_deleted">Punkt %1$s gelöscht</string>
-    <string name="send_search_query_description">Ihre Suchanfrage wird zusammen mit Ihrem Standort gesendet an: „%1$s“.
-\nPersönliche Daten werden nicht gesammelt, zur Verbesserung der Suche werden nur die Suchdaten benötigt.</string>
+    <string name="send_search_query_description">Ihre Suchanfrage wird an: \"%1 s\" gesendet, zusammen mit Ihrem Standort.
+\n
+\nPersönliche Informationen werden nicht gesammelt, sondern nur Suchdaten, die zur Verbesserung der Suche benötigt werden.</string>
     <string name="search_no_results_description">Keine Ergebnisse?
 \nNehmen Sie Kontakt mit uns auf.</string>
     <string name="send_search_query">Suchanfrage senden?</string>
@@ -3186,7 +3187,7 @@ Lon %2$s</string>
     <string name="turn_screen_on_router">Bei Richtungsänderung aufwecken</string>
     <string name="turn_screen_on_time_descr">Stellen Sie ein, wie lange der Bildschirm eingeschaltet bleiben soll.</string>
     <string name="turn_screen_on_sensor">Annäherungssensor verwenden</string>
-    <string name="turn_screen_on_sensor_descr">Streichen Sie mit der Hand über den oberen Teil des Bildschirms, um ihn während der Navigation einzuschalten.</string>
+    <string name="turn_screen_on_sensor_descr">Wenn Sie mit der Hand über den Bildschirm fahren, wird er eingeschaltet.</string>
     <string name="turn_on_profile_desc">Bitte wenigstens ein App-Profil einschalten, um diese Einstellung zu verwenden.</string>
     <string name="rendering_attr_winter_road_name">Schneepiste</string>
     <string name="rendering_attr_ice_road_name">Eispiste</string>
@@ -3255,7 +3256,7 @@ Lon %2$s</string>
     <string name="analytics_pref_title">Analyseinstrumente</string>
     <string name="turn_screen_on_info">Karte während der Navigation auf dem Sperrbildschirm anzeigen.</string>
     <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils „%1$s“.</string>
-    <string name="wake_time">Aufwachzeit</string>
+    <string name="wake_time">Zeitüberschreitung nach dem Aufwachen</string>
     <string name="units_and_formats">Einheiten und Formate</string>
     <string name="appearance">Aussehen</string>
     <string name="map_look_descr">Kartendarstellung</string>
@@ -3427,7 +3428,7 @@ Lon %2$s</string>
     <string name="choose_icon_color_name">Symbol, Farbe und Name</string>
     <string name="reorder_profiles">Profilliste bearbeiten</string>
     <string name="selected_profile">Ausgewähltes Profil</string>
-    <string name="reset_confirmation_descr">Durch Tippen auf %1$s werden alle Ihre Änderungen verworfen.</string>
+    <string name="reset_confirmation_descr">Durch Antippen von %1$s werden alle Ihre Änderungen verworfen.</string>
     <string name="reset_all_profile_settings_descr">Alle Profil-Einstellungen auf den Ausgangszustand zurücksetzen.</string>
     <string name="reset_all_profile_settings">Alle Profil-Einstellungen zurücksetzen\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
@@ -3473,17 +3474,17 @@ Lon %2$s</string>
     <string name="sunset_at">Sonnenuntergang um %1$s</string>
     <string name="sunrise_at">Sonnenaufgang um %1$s</string>
     <string name="rearrange_categories">Kategorien neu ordnen</string>
-    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierung der Liste, blenden Sie unnötige Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
-    <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere benötigte Kategorien auswählen.</string>
+    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierung der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
+    <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere Kategorien auswählen.</string>
     <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
-    <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen werden auf den Standardzustand zurückgesetzt.</string>
-    <string name="profile_prefs_reset_successful">Alle Profil-Einstellungen werden auf den Standardzustand zurückgesetzt.</string>
+    <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen wurden auf den Standardzustand zurückgesetzt.</string>
+    <string name="profile_prefs_reset_successful">Alle Profileinstellungen werden auf die Standardeinstellungen zurückgesetzt.</string>
     <string name="accessibility_announce">Ankündigung</string>
     <string name="select_map_icon_descr">Symbol, das im Ruhezustand angezeigt wird.</string>
     <string name="multimedia_use_system_camera">System-App verwenden</string>
     <string name="multimedia_photo_play_sound">Auslöseton der Kamera</string>
-    <string name="reset_to_default_category_button_promo">Durch das Zurücksetzen auf die Standardeinstellung wird die Sortierung auf den Standardzustand nach der Installation zurückgesetzt.</string>
-    <string name="accessibility_mode_disabled">Eingabehilfenmodus ist in Ihrem System deaktiviert.</string>
+    <string name="reset_to_default_category_button_promo">Mit \'Auf Standard zurücksetzen\' wird die Sortierreihenfolge wieder auf den Standard der Installation zurückgesetzt.</string>
+    <string name="accessibility_mode_disabled">Einstellung \'Eingabehilfe\' ist in Ihrem Android System ausgeschaltet.</string>
     <string name="use_system_screen_timeout">Zeitlimit für den Systembildschirm verwenden</string>
     <string name="use_system_screen_timeout_promo">Standardmäßig deaktiviert. Wenn OsmAnd im Vordergrund läuft, wird der Bildschirm nicht ausgeblendet.
 \n
@@ -3526,7 +3527,7 @@ Lon %2$s</string>
     <string name="tracks_view_descr">Ihre aufgezeichneten Tracks befinden sich in %1$s oder im OsmAnd-Ordner.</string>
     <string name="please_provide_profile_name_message">Bitte geben Sie einen Namen für das Profil an</string>
     <string name="open_settings">Einstellungen öffnen</string>
-    <string name="plugin_disabled">Plugin deaktiviert</string>
+    <string name="plugin_disabled">Plugin aus</string>
     <string name="plugin_disabled_descr">Dieses Plugin ist eine separate Anwendung, Sie müssen es separat entfernen, wenn Sie nicht mehr vorhaben, es zu verwenden.
 \n
 \nDas Plugin verbleibt nach dem Entfernen von OsmAnd auf dem Gerät.</string>
@@ -3534,18 +3535,18 @@ Lon %2$s</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Routing</string>
     <string name="shared_string_include_data">Zusätzliche Daten einschließen</string>
-    <string name="import_profile_dialog_description">Das importierte Profil enthält zusätzliche Daten. Klicken Sie auf \'Importieren\', um nur Profildaten zu importieren, oder wählen Sie zusätzliche Daten zum Importieren aus.</string>
+    <string name="import_profile_dialog_description">Das importierte Profil enthält zusätzliche Daten. Klicken Sie auf \"Importieren\", um nur Profildaten zu importieren, oder wählen Sie zusätzliche Daten aus.</string>
     <string name="export_profile_dialog_description">Sie können zusätzliche Daten zum Exportieren zusammen mit dem Profil auswählen.</string>
     <string name="index_name_antarctica">Antarktis</string>
     <string name="osm_edits_view_descr">Sie finden Ihre noch nicht übertragenen Änderungen oder OSM-Fehler in %1$s. Hochgeladene Punkte werden nicht mehr angezeigt.</string>
     <string name="monitoring_min_speed_descr_recommendation">Empfehlung: Versuchen Sie zunächst, die Bewegungserkennung über den Filter zur Mindestabstandsmessung (B) zu verwenden. Das kann zu besseren Ergebnissen führen und Sie werden weniger Daten verlieren. Sollten Ihre Tracks bei niedrigen Geschwindigkeiten ungenau bleiben, versuchen Sie hier Werte ungleich Null. Bitte beachten Sie, dass einige Messungen (einige netzwerkbasierte Methoden) möglicherweise überhaupt keine Geschwindigkeitswerte anzeigen. In diesem Fall wird nichts aufgezeichnet.</string>
-    <string name="monitoring_min_accuracy_descr">Es werden nur Punkte aufgezeichnet, die gemäß den Angaben der Mindestgenauigkeit gemessen wurden (in Metern/Fuß, wie von Android je nach Chipsatz bereitgestellt). Die Genauigkeit bezieht sich auf die Streuung wiederholter Messungen und steht nicht unmittelbar in Bezug zur Präzision, die bestimmt, wie nah Messungen und wahre Position beieinanderliegen.</string>
+    <string name="monitoring_min_accuracy_descr">Es werden nur Punkte aufgezeichnet, die mit der gewählten Mindestgenauigkeit bestimmt wurden (in Metern/Fuß, wie von Android je nach Chipsatz bereitgestellt). Die Genauigkeit beschreibt die Nähe der Messungen zur wahren Position und steht nicht unmittelbar in Bezug zur Präzision, der Streuung wiederholter Messungen.</string>
     <string name="monitoring_min_accuracy_descr_remark">Bemerkung: Wenn das GPS unmittelbar vor einer Aufzeichnung ausgeschaltet war, kann der erste gemessene Punkt eine verminderte Genauigkeit haben, sodass wir in unserem Code vielleicht eine Sekunde oder so warten wollen, bevor ein Punkt (oder der beste von 3 aufeinanderfolgenden Punkten usw.) aufgezeichnet wird. Das ist aber noch nicht implementiert.</string>
     <string name="multimedia_rec_split_title">Aufzeichnungsteilung</string>
     <string name="routing_profile_direct_to">Auf direktem Weg</string>
     <string name="search_offline_geo_error">Geo-Intent \'%s\' konnte nicht analysiert werden.</string>
     <string name="shared_string_app_default_w_val">App-Standard (%s)</string>
-    <string name="no_recalculation_setting">Neuberechnung deaktivieren</string>
+    <string name="no_recalculation_setting">Keine Neuberechnung</string>
     <string name="route_recalculation_dist_title">Mindestabstand für Neuberechnung der Route</string>
     <string name="route_recalculation_dist_descr">Die Route wird neu berechnet, wenn der Abstand zur Route größer ist als der festgelegte Wert</string>
     <string name="profile_type_custom_string">Benutzerdefiniertes Profil</string>
@@ -3596,27 +3597,27 @@ Lon %2$s</string>
     <string name="quick_action_terrain_descr">Eine Schaltfläche zum Ein- und Ausblenden der Geländeebene auf der Karte.</string>
     <string name="quick_action_terrain_show">Gelände einblenden</string>
     <string name="quick_action_terrain_hide">Gelände ausblenden</string>
-    <string name="quick_action_show_hide_terrain">Gelände ein-/ausblenden</string>
+    <string name="quick_action_show_hide_terrain">Gelände ein- / ausblenden</string>
     <string name="shared_string_hillshade">Schummerung</string>
     <string name="shared_string_zoom_levels">Zoomstufen</string>
     <string name="shared_string_transparency">Transparenz</string>
     <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
     <string name="shared_string_terrain">Gelände</string>
-    <string name="download_slope_maps">Pisten</string>
-    <string name="terrain_empty_state_text">Aktivieren Sie diese Option, um die Schatten- oder Hangkarte anzuzeigen. Weitere Informationen zu diesen Kartentypen finden Sie auf unserer Website</string>
+    <string name="download_slope_maps">Hangneigungen</string>
+    <string name="terrain_empty_state_text">Aktivieren Sie diese Option, um die Schummerungs- oder Hangneigungskarte anzuzeigen. Weitere Informationen zu diesen Kartentypen finden Sie auf unserer Website.</string>
     <string name="shared_string_legend">Legende</string>
-    <string name="slope_read_more">Lesen Sie mehr über Pisten in %1$s.</string>
-    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Pisten auf der Karte anzuzeigen.</string>
+    <string name="slope_read_more">Lesen Sie mehr über Hangneigungskarten in %1$s.</string>
+    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hangneigungen auf der Karte anzuzeigen.</string>
     <string name="hillshade_download_description">Für die Darstellung der Schummerung werden zusätzliche Karten benötigt.</string>
     <string name="shared_string_min">Min</string>
-    <string name="hillshade_description">Schummerungs-Karte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Niederungen.</string>
+    <string name="hillshade_description">Schummerungskarte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Ebenen.</string>
     <string name="n_items_of_z">%1$s von %2$s</string>
     <string name="shared_string_octagon">Achteck</string>
     <string name="app_mode_ski_touring">Skitouren</string>
     <string name="app_mode_ski_snowmobile">Schneemobil</string>
     <string name="custom_osmand_plugin">Benutzerdefiniertes OsmAnd-Plugin</string>
-    <string name="slope_description">Farbliche Kennzeichnung von Pisten im Gelände.</string>
-    <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen</string>
+    <string name="slope_description">Hangneigungskarten verwendet Farben, um die Geländesteilheit zu visualisieren.</string>
+    <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen.</string>
     <string name="changes_applied_to_profile">Die Änderungen wurden auf das \'%1$s\' Profil angewendet.</string>
     <string name="settings_item_read_error">Konnte nicht von \'%1$s\' lesen.</string>
     <string name="settings_item_write_error">Konnte nicht nach \'%1$s\' schreiben.</string>
@@ -3665,16 +3666,18 @@ Lon %2$s</string>
     <string name="lang_ce">Tschetschenisch</string>
     <string name="lang_bar">Bairisch</string>
     <string name="lang_ba">Baschkirisch</string>
-    <string name="main_actions_descr">Hauptaktionen enthalten nur 4 Schaltflächen.</string>
-    <string name="select_wikipedia_article_langs">Wählen Sie die Sprachen aus, in denen Wikipedia-Artikel auf der Karte erscheinen sollen. Sie können zwischen allen verfügbaren Sprachen wechseln, während Sie den Artikel lesen.</string>
+    <string name="main_actions_descr">Hat nur vier Schaltflächen.</string>
+    <string name="select_wikipedia_article_langs">Wählen Sie die Sprachen für Wikipedia-Artikel auf der Karte aus. Wechseln Sie beim Lesen des Artikels zu einer beliebigen verfügbaren Sprache.</string>
     <string name="hidden_items_descr">Diese Elemente werden aus dem Menü ausgeblendet, aber die entsprechenden Optionen oder Plugins funktionieren weiterhin.</string>
     <string name="reorder_or_hide_from">Ordnen Sie Elemente aus %1$s neu an oder blenden Sie sie aus.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">Ihr Google Play-Konto wird beim Kauf eines Abonnements belastet,
-\nund wenn es abläuft (nach einem Monat, drei Monaten oder einem Jahr)
-\nverlängert es sich nicht von selbst, wenn es vorher in Ihren Google Play-Einstellungen gekündigt wurde.</string>
+    <string name="osm_live_payment_subscription_management">Die Bezahlung wird Ihrem Google Play-Konto bei der Bestätigung des Kaufs belastet.
+\n
+\n Das Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
+\n
+\n Sie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren Google Play-Einstellungen gehen.</string>
     <string name="search_poi_types">Suche nach POI-Typen</string>
-    <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf \"Wechseln\", um alle auszuwählen, tippen Sie auf die linke Seite für die Kategorieauswahl.</string>
+    <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf den Schalter, um alle auszuwählen, tippen Sie auf die linke Seite zur Kategorieauswahl.</string>
     <string name="shared_string_divider">Trenner</string>
     <string name="quick_action_item">Schnellaktion</string>
     <string name="radius_ruler_item">Zirkel</string>
@@ -3687,24 +3690,24 @@ Lon %2$s</string>
     <string name="travel_item">Reisen (Wikivoyage und Wikipedia)</string>
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
     <string name="osmand_purchases_item">OsmAnd Einkäufe</string>
-    <string name="legend_item_description">Der Leitfaden zur Symbolik einer Karte</string>
+    <string name="legend_item_description">Der Leitfaden zur Symbolik einer Karte.</string>
     <string name="navigation_profiles_item">Navigationsprofile</string>
-    <string name="release_3_7">• Neue Offline-Steigungskarten
-\n
-\n• Vollständige Anpassung von Favoriten und GPX-Wegpunkten - benutzerdefinierte Farben, Symbole, Formen
-\n
-\n• Anpassen der Reihenfolge der Elemente im Kontextmenü, Karte konfigurieren, Schublade
-\n
-\n• Wikipedia als separate Ebene in Karte konfigurieren, nur benötigte Sprachen auswählen
-\n
-\n• Erstellen Sie Ihre eigenen POI-Filter/Karten mit absoluter Flexibilität
-\n
-\n• Optionen zur Wiederherstellung von Einstellungen für benutzerdefinierte Profile hinzugefügt
-\n
-\n• Vollständige GPX-Routen aus der Navigation unterstützen Verkehrsspuren und vollständige Abbiegeanweisungen
-\n
-\n• Größe der Bedienoberfläche auf Tablets verbessert
-\n
+    <string name="release_3_7">• Neue Offline-Hangneigungskarten 
+\n 
+\n• Vollständige Anpassung von Favoriten und GPX-Wegpunkten - benutzerdefinierte Farben, Symbole, Formen 
+\n 
+\n• Anpassen der Reihenfolge der Elemente im \"Kontextmenü\", \"Karte konfigurieren\" und \"Schublade\" 
+\n 
+\n• Wikipedia als separate Ebene in Karte konfigurieren, nur benötigte Sprachen auswählen 
+\n 
+\n• Erstellen Sie Ihre eigenen POI-Filter / Karten mit absoluter Flexibilität 
+\n 
+\n• Optionen zur Wiederherstellung von Einstellungen für benutzerdefinierte Profile hinzugefügt 
+\n 
+\n• Vollständige GPX-Routen aus der Navigation unterstützen Verkehrsspuren und vollständige Abbiegeanweisungen 
+\n 
+\n• Größe der Bedienoberfläche auf Tablets verbessert 
+\n 
 \n• Fehler mit RTL behoben
 \n
 \n</string>
@@ -3713,14 +3716,77 @@ Lon %2$s</string>
     <string name="quick_action_transport_hide">Öffentliche Verkehrsmittel ausblenden</string>
     <string name="quick_action_transport_show">Öffentliche Verkehrsmittel anzeigen</string>
     <string name="quick_action_show_hide_transport">Öffentliche Verkehrsmittel anzeigen/ausblenden</string>
-    <string name="quick_action_transport_descr">Eine Schaltfläche zum Ein- oder Ausblenden der öffentlichen Verkehrsmittel auf der Karte.</string>
-    <string name="create_edit_poi">POI erstellen/bearbeiten</string>
+    <string name="quick_action_transport_descr">Schaltfläche zum Ein- oder Ausblenden der öffentlichen Verkehrsmittel auf der Karte.</string>
+    <string name="create_edit_poi">POI erstellen / bearbeiten</string>
     <string name="parking_positions">Parkpositionen</string>
     <string name="add_edit_favorite">Favorit hinzufügen / bearbeiten</string>
     <string name="reset_deafult_order">Standard-Reihenfolge der Elemente wiederherstellen</string>
     <string name="back_to_editing">Zurück zur Bearbeitung</string>
-    <string name="quick_action_switch_profile_descr">Durch Antippen der Aktionsschaltfläche können Sie zwischen den ausgewählten Profilen wechseln.</string>
+    <string name="quick_action_switch_profile_descr">Die Aktionsschaltfläche schaltet zwischen den ausgewählten Profilen um.</string>
     <string name="shared_string_add_profile">Profil hinzufügen</string>
-    <string name="change_application_profile">Anwendungsprofil ändern</string>
-    <string name="profiles_for_action_not_found">Für diese Aktion ausgewählte Profile nicht gefunden.</string>
+    <string name="change_application_profile">App-Profil ändern</string>
+    <string name="profiles_for_action_not_found">Konnte keine solchen Profile finden.</string>
+    <string name="index_item_world_basemap_detailed">Weltübersichtskarte (detailliert)</string>
+    <string name="unsupported_type_error">Nicht unterstützter Typ</string>
+    <string name="ui_customization_description">Passen Sie die Menge der Elemente in „Schublade”, „Karte konfigurieren” und „Kontextmenü” an.
+\n
+\nDeaktivieren Sie ungenutzte Plugins, um deren Steuerelemente auszublenden. %1$s.</string>
+    <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
+    <string name="shared_string_drawer">Schublade</string>
+    <string name="gpx_parse_error">OsmAnd GPX ist nicht optimal geformt, bitte kontaktieren Sie das Support-Team, um weitere Nachforschungen anzustellen.</string>
+    <string name="map_source_zoom_levels_descr">Wirkt sich auf den Bildschirm aus, wenn er als Karte oder Overlay/Underlay verwendet wird. 
+\n 
+\n%1$s: Die Karte ist auf den ausgewählten Zoomstufenbereich beschränkt. 
+\n 
+\n%2$s sind die Ebenen, auf denen die ursprünglichen Kacheln sichtbar sind, eine Hoch- oder Herunterskalierung findet außerhalb dieser Werte statt.</string>
+    <string name="map_source_zoom_levels">Legen Sie eine minimale und maximale Zoomstufe fest, um die Online-Karte anzuzeigen oder zu laden.</string>
+    <string name="shared_string_always">Immer</string>
+    <string name="screen_control">Bildschirmsteuerung</string>
+    <string name="system_screen_timeout_descr">Schaltet den Bildschirm entsprechend dem Bildschirm-Timeout des Systems aus.</string>
+    <string name="system_screen_timeout">Systembildschirm-Timeout verwenden</string>
+    <string name="turn_screen_on_options_descr">Optionen zum Aktivieren des Bildschirms:</string>
+    <string name="turn_screen_on_descr">Wählen Sie Optionen zum Aufwecken des Bildschirms (stellen Sie sicher, dass OsmAnd im Vordergrund ist, wenn das Gerät gesperrt wird):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Für jede Navigationsanweisung wird der Bildschirm eingeschaltet.</string>
+    <string name="turn_screen_on_navigation_instructions">Navigationsanweisungen</string>
+    <string name="turn_screen_on_power_button_descr">Drücken Sie den Einschaltknopf des Geräts, um den Bildschirm mit OsmAnd im Vordergrund einzuschalten.</string>
+    <string name="turn_screen_on_power_button">Einschaltknopf</string>
+    <string name="turn_screen_on_proximity_sensor">Näherungssensor</string>
+    <string name="turn_screen_on_wake_time_descr">Wählen Sie die Zeitüberschreitung des Bildschirms nach dem Aufwachen. („%1$s”, um keine Zeitüberschreitung anzuwenden.)</string>
+    <string name="keep_screen_on">Bildschirm eingeschaltet lassen</string>
+    <string name="keep_screen_off">Bildschirm ausgeschaltet lassen</string>
+    <string name="screen_timeout_descr">Wenn \"%1$s\" eingeschaltet ist, hängt die Aktivitätszeit davon ab.</string>
+    <string name="pseudo_mercator_projection">Pseudo-Mercator-Projektion</string>
+    <string name="one_image_per_tile">Eine Bilddatei pro Kachel</string>
+    <string name="sqlite_db_file">SQLiteDB-Datei</string>
+    <string name="online_map_name_helper_text">Benennen Sie die Online-Kartenquelle.</string>
+    <string name="online_map_url_helper_text">Tragen oder fügen Sie die URL für die Online-Quelle ein.</string>
+    <string name="edit_online_source">Online-Quelle bearbeiten</string>
+    <string name="expire_time">Verfallsdatum</string>
+    <string name="mercator_projection">Mercator-Projektion</string>
+    <string name="storage_format">Speicherformat</string>
+    <string name="expire_time_descr">Zwischengespeicherte Kacheln werden nach der angegebenen Anzahl von Minuten erneut heruntergeladen. Lassen Sie dieses Feld leer, um Kacheln für diese Quelle niemals zu aktualisieren. 
+\n 
+\nEin Tag hat 1440 Minuten. 
+\nEine Woche hat 10 080 Minuten. 
+\nEin Monat hat 43 829 Minuten.</string>
+    <string name="tiles_storage_descr">Wählen Sie, wie heruntergeladene Kacheln gespeichert werden sollen.</string>
+    <string name="default_screen_timeout">Zeitüberschreitung des Standardbildschirms</string>
+    <string name="width_limit_description">Geben Sie Ihre Fahrzeugbreite an. Für breite Fahrzeuge können einige Routenbeschränkungen gelten.</string>
+    <string name="height_limit_description">Geben Sie Ihre Fahrzeughöhe an, für hohe Fahrzeuge können einige Routenbeschränkungen gelten.</string>
+    <string name="weight_limit_description">Geben Sie Ihr Fahrzeuggewicht an, für schwere Fahrzeuge können einige Routenbeschränkungen gelten.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Sie können Schnellaktionen mit Anwendungsprofilen exportieren oder importieren.</string>
+    <string name="shared_string_delete_all_q">Alles Löschen\?</string>
+    <string name="delete_all_actions_message_q">Möchten Sie %d Schnellaktionen wirklich unwiderruflich löschen\?</string>
+    <string name="shared_string_tones">Töne</string>
+    <string name="shared_string_meters">Meter</string>
+    <string name="screen_timeout">Bildschirm-Zeitlimit</string>
+    <string name="details_dialog_decr">Zusätzliche Kartendetails anzeigen oder ausblenden</string>
+    <string name="shared_string_night_map">Nachtkarte</string>
+    <string name="turn_screen_on_power_button_disabled">Deaktiviert. Erfordert \'Bildschirm eingeschaltet lassen\' unter \'Timeout nach dem Aufwachen\'.</string>
+    <string name="add_online_source">Online-Quelle hinzufügen</string>
+    <string name="clear_tiles_warning">Durch die Anwendung dieser Änderungen werden die zwischengespeicherten Daten für diese Kachelquelle gelöscht</string>
+    <string name="vessel_height_warning_link">Schiffshöhe einstellen</string>
+    <string name="vessel_height_warning">Sie können die Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Denken Sie daran, wenn die Brücke beweglich ist, werden wir ihre Höhe im offenen Zustand verwenden.</string>
+    <string name="vessel_height_limit_description">Stellen Sie die Schiffshöhe ein, um niedrige Brücken zu vermeiden.Denken Sie daran, wenn die Brücke beweglich ist, werden wir ihre Höhe im offenen Zustand verwenden.</string>
+    <string name="vessel_width_limit_description">Stellen Sie die Schiffsbreite ein, um schmale Brücken zu vermeiden</string>
 </resources>

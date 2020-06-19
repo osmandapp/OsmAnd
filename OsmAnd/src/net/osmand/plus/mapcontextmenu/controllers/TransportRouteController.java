@@ -82,11 +82,11 @@ public class TransportRouteController extends MenuController {
 		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_next);
 
 		if (AndroidUtils.isLayoutRtl(mapActivity)) {
-			leftTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
-			rightTitleButtonController.leftIconId = R.drawable.ic_arrow_back;
+			leftTitleButtonController.endIconId = R.drawable.ic_arrow_forward;
+			rightTitleButtonController.startIconId = R.drawable.ic_arrow_back;
 		} else {
-			leftTitleButtonController.leftIconId = R.drawable.ic_arrow_back;
-			rightTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
+			leftTitleButtonController.startIconId = R.drawable.ic_arrow_back;
+			rightTitleButtonController.endIconId = R.drawable.ic_arrow_forward;
 		}
 	}
 

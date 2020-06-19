@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,66 +11,99 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/custom_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dashboard_map_toolbar"/>
+        <include layout="@layout/global_preferences_toolbar_with_switch" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <LinearLayout
-        android:id="@+id/top_divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/appbar"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"/>
-
-        <include layout="@layout/card_top_divider"/>
-
-    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/top_divider"
-        android:clipToPadding="false"/>
-
-    <LinearLayout
-        android:id="@+id/bottomShadowView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recycler_view"
-        android:background="?attr/activity_background_color"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/bg_shadow_list_bottom"/>
-
-        <View
-            android:id="@+id/bottomMarginView"
-            android:layout_width="match_parent"
-            android:layout_height="16dp"/>
-
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbar"
+        android:clipToPadding="false" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        app:srcCompat="@drawable/ic_action_plus"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/content_padding"
         android:contentDescription="@string/quick_action_new_action"
         app:backgroundTint="?attr/color_dialog_buttons"
-	    android:layout_alignParentEnd="true" />
+        app:srcCompat="@drawable/ic_action_plus" />
+
+    <LinearLayout
+        android:id="@+id/bottom_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <include layout="@layout/card_top_divider" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/bottom_bar_background_color"
+            android:minHeight="@dimen/bottom_sheet_list_item_height"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/select_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_margin="@dimen/content_padding_half"
+                android:background="?attr/selectableItemBackground"
+                android:padding="@dimen/content_padding_half">
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/shared_string_select_all"
+                    android:textColor="?attr/active_color_basic"
+                    android:textSize="@dimen/default_desc_text_size"
+                    app:typeface="@string/font_roboto_medium" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_margin="@dimen/content_padding_half">
+
+                <FrameLayout
+                    android:id="@+id/button_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="@dimen/content_padding_half">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/button_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:drawablePadding="@dimen/content_padding_half"
+                        android:gravity="center_vertical"
+                        android:text="@string/shared_string_delete"
+                        android:textColor="?attr/active_color_basic"
+                        android:textSize="@dimen/default_desc_text_size"
+                        app:drawableLeftCompat="@drawable/ic_action_delete_dark"
+                        app:drawableTint="?attr/active_color_basic"
+                        app:typeface="@string/font_roboto_medium" />
+
+                </FrameLayout>
+
+            </FrameLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -8,6 +8,10 @@ import net.osmand.util.TransliterationHelper;
 
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,6 +22,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.zip.GZIPInputStream;
 
 
 public abstract class MapObject implements Comparable<MapObject> {
@@ -55,7 +60,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 
 	public String getName() {
 		if (name != null) {
-			return name;
+			return unzipContent(name);
 		}
 		return ""; //$NON-NLS-1$
 	}
@@ -73,7 +78,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 			if (names == null) {
 				names = new HashMap<String, String>();
 			}
-			names.put(lang, name);
+			names.put(lang, unzipContent(name));
 		}
 	}
 
@@ -95,19 +100,25 @@ public abstract class MapObject implements Comparable<MapObject> {
 		}
 		Map<String, String> mp = new HashMap<String, String>();
 		if (names != null) {
-			mp.putAll(names);
+			Iterator<Entry<String, String>> it = mp.entrySet().iterator();
+			while(it.hasNext()) {
+				Entry<String, String> e = it.next();
+				mp.put(e.getKey(), unzipContent(e.getValue()));
+			}
 		}
-		mp.put("en", enName);
+		mp.put("en", unzipContent(enName));
 		return mp;
 	}
 
 	public List<String> getAllNames() {
 		List<String> l = new ArrayList<String>();
 		if (!Algorithms.isEmpty(enName)) {
-			l.add(enName);
+			l.add(unzipContent(enName));
 		}
 		if (names != null) {
-			l.addAll(names.values());
+			for(String nm : names.values()) { 
+				l.add(unzipContent(nm));
+			}
 		}
 		return l;
 	}
@@ -179,7 +190,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 				if (names != null) {
 					String nm = names.get(lang);
 					if (!Algorithms.isEmpty(nm)) {
-						return nm;
+						return unzipContent(nm);
 					}
 					if (transliterate) {
 						return TransliterationHelper.transliterate(getName());
@@ -192,7 +203,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 
 	public String getEnName(boolean transliterate) {
 		if (!Algorithms.isEmpty(enName)) {
-			return this.enName;
+			return unzipContent(this.enName);
 		} else if (!Algorithms.isEmpty(getName()) && transliterate) {
 			return TransliterationHelper.transliterate(getName());
 		}
@@ -322,12 +333,12 @@ public abstract class MapObject implements Comparable<MapObject> {
 
 	public JSONObject toJSON() {
 		JSONObject json = new JSONObject();
-		json.put("name", name);
-		json.put("enName", enName);
+		json.put("name", unzipContent(name));
+		json.put("enName", unzipContent(enName));
 		if (names != null && names.size() > 0) {
 			JSONObject namesObj = new JSONObject();
 			for (Entry<String, String> e : names.entrySet()) {
-				namesObj.put(e.getKey(), e.getValue());
+				namesObj.put(e.getKey(), unzipContent(e.getValue()));
 			}
 			json.put("names", namesObj);
 		}
@@ -338,6 +349,31 @@ public abstract class MapObject implements Comparable<MapObject> {
 		json.put("id", id);
 
 		return json;
+	}
+	
+	public String unzipContent(String str) {
+		if (str != null && str.startsWith(" gz ")) {
+			try {
+				int ind = 4;
+				byte[] bytes = new byte[str.length() - ind];
+				for (int i = ind; i < str.length(); i++) {
+					char ch = str.charAt(i);
+					bytes[i - ind] = (byte) ((int) ch - 128 - 32);
+				}
+				GZIPInputStream gzn = new GZIPInputStream(new ByteArrayInputStream(bytes));
+				BufferedReader br = new BufferedReader(new InputStreamReader(gzn, "UTF-8"));
+				StringBuilder bld = new StringBuilder();
+				String s;
+				while ((s = br.readLine()) != null) {
+					bld.append(s);
+				}
+				br.close();
+				str = bld.toString();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return str;
 	}
 
 	protected static void parseJSON(JSONObject json, MapObject o) {

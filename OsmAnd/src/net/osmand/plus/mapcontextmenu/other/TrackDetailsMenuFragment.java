@@ -23,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 
 public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	public static final String TAG = "TrackDetailsMenuFragment";
@@ -30,6 +31,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	private TrackDetailsMenu menu;
 	private View mainView;
 	private boolean paused = true;
+	private boolean nightMode;
 
 	@Nullable
 	private MapActivity getMapActivity() {
@@ -46,7 +48,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 							 Bundle savedInstanceState) {
 		MapActivity mapActivity = requireMapActivity();
 		menu = mapActivity.getTrackDetailsMenu();
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		ContextThemeWrapper context =
 				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		View view = LayoutInflater.from(context).inflate(R.layout.track_details, container, false);
@@ -90,14 +92,20 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 			});
 		}
 
-		updateInfo();
+		MapContextMenu contextMenu = mapActivity.getContextMenu();
+		final boolean forceFitTrackOnMap;
+		if (contextMenu.isActive()) {
+			forceFitTrackOnMap = !(contextMenu.getPointDescription() != null && contextMenu.getPointDescription().isGpxPoint());
+		} else {
+			forceFitTrackOnMap = true;
+		}
+		updateInfo(forceFitTrackOnMap);
 
 		ViewTreeObserver vto = mainView.getViewTreeObserver();
 		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
 			@Override
 			public void onGlobalLayout() {
-
 				ViewTreeObserver obs = mainView.getViewTreeObserver();
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 					obs.removeOnGlobalLayoutListener(this);
@@ -105,7 +113,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 					obs.removeGlobalOnLayoutListener(this);
 				}
 				if (getMapActivity() != null) {
-					updateInfo();
+					updateInfo(forceFitTrackOnMap);
 				}
 			}
 		});
@@ -164,7 +172,11 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public void updateInfo() {
-		menu.updateInfo(mainView);
+		updateInfo(true);
+	}
+
+	public void updateInfo(boolean forceFitTrackOnMap) {
+		menu.updateInfo(mainView, forceFitTrackOnMap);
 		applyDayNightMode();
 	}
 
@@ -192,7 +204,6 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 		if (ctx != null) {
 			boolean portraitMode = AndroidUiHelper.isOrientationPortrait(ctx);
 			boolean landscapeLayout = !portraitMode;
-			boolean nightMode = ctx.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 			if (!landscapeLayout) {
 				AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 			} else {

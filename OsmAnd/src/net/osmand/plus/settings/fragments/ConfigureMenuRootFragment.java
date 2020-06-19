@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -234,7 +235,8 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 			} else {
 				final ScreenType item = (ScreenType) currentItem;
 				ItemHolder itemHolder = (ItemHolder) holder;
-				itemHolder.icon.setImageResource(item.iconRes);
+				Drawable d = app.getUIUtilities().getIcon(item.iconRes, nightMode);
+				itemHolder.icon.setImageDrawable(AndroidUtils.getDrawableForDirection(app, d));
 				itemHolder.title.setText(item.titleRes);
 				itemHolder.subTitle.setText(getSubTitleText(item));
 				itemHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -306,7 +308,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 				}
 				int allCount = allItems.size();
 				String amount = getString(R.string.n_items_of_z, String.valueOf(allCount - hiddenCount), String.valueOf(allCount));
-				return getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_items), amount);
+				return getString(R.string.shared_string_items) + " : " + amount;
 			}
 			return "";
 		}

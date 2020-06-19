@@ -419,6 +419,9 @@
 	<color name="text_field_box_dark">#3F474B</color>
 	<color name="text_field_box_light">#eeeeee</color>
 
+	<color name="bottom_bar_background_color_dark">#252727</color>
+	<color name="bottom_bar_background_color_light">#FFFFFF</color>
+
 	<color name="preference_category_title">#7E33FF</color>
 	<color name="preference_top_switch_off">#808080</color>
 
@@ -470,5 +473,6 @@
 	<color name="switch_button_active_dark">#1AD28521</color>
 	<color name="switch_button_active_stroke">#80237BFF</color>
 	<color name="empty_hint_bg">#80000000</color>
+	<color name="input_layout_bg_color">#4DCCCCCC</color>
 
 </resources>

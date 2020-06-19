@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -248,7 +249,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		});
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-		item = menu.add(R.string.shared_string_export).setIcon(R.drawable.ic_action_gshare_dark);
+		Drawable shareIcon = getMyApplication().getUIUtilities().getIcon((R.drawable.ic_action_gshare_dark));
+		item = menu.add(R.string.shared_string_export)
+				.setIcon(AndroidUtils.getDrawableForDirection(getMyApplication(), shareIcon));
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

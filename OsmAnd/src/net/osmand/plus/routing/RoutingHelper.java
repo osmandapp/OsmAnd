@@ -1314,6 +1314,10 @@ public class RoutingHelper {
 		return mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT);
 	}
 
+	public boolean isBoatMode() {
+		return mode.isDerivedRoutingFrom(ApplicationMode.BOAT);
+	}
+
 	public boolean isOsmandRouting() {
 		return mode.getRouteService() == RouteService.OSMAND;
 	}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shared_string_suggested">Kinniget</string>
+    <string name="back_to_osmand">Distreiñ da OsmAnd</string>
+    <string name="duration_ago">%1$e \'zo</string>
+    <string name="shared_string_error_short">FAZI</string>
+</resources>

@@ -15,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.quickaction.actions.ShowHideMapillaryAction;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.actions.DayNightModeAction;
@@ -226,6 +227,7 @@ public class QuickActionRegistry {
 		quickActionTypes.add(MapStyleAction.TYPE);
 		quickActionTypes.add(DayNightModeAction.TYPE);
 		quickActionTypes.add(ShowHideTransportLinesAction.TYPE);
+		quickActionTypes.add(ShowHideMapillaryAction.TYPE);
 		// navigation
 		quickActionTypes.add(NavVoiceAction.TYPE);
 		quickActionTypes.add(NavDirectionsFromAction.TYPE);

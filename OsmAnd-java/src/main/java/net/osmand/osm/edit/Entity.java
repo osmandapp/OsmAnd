@@ -301,8 +301,11 @@ public abstract class Entity implements Serializable {
 		String values = getTag(OSMTagKey.IS_IN);
 		if (values == null) {
 			String city = getTag(OSMTagKey.ADDR_CITY);
+			String place = getTag(OSMTagKey.ADDR_PLACE);
 			if(!Algorithms.isEmpty(city)) {
 				return Collections.singleton(city.trim());	
+			} else if(!Algorithms.isEmpty(place)) {
+				return Collections.singleton(place.trim());	
 			}
 			return Collections.emptySet();
 		}

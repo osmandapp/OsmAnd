@@ -15,6 +15,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import androidx.annotation.NonNull;
 import androidx.core.view.MenuItemCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -83,10 +84,20 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 	}
 
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconId, int menuItemType) {
-		Drawable d = iconId == 0 ? null : requireMyApplication().getUIUtilities().getIcon(iconId,
-				isLightActionBar() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
+		return createMenuItem(m, id, titleRes, iconId, menuItemType, false);
+	}
+
+	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconId, int menuItemType,
+	                               boolean flipIconForRtl) {
+		OsmandApplication app = requireMyApplication();
+		Drawable d = iconId == 0 ? null : app.getUIUtilities().getIcon(iconId, isLightActionBar() ?
+				R.color.active_buttons_and_links_text_light :
+				R.color.active_buttons_and_links_text_dark);
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
 		if (d != null) {
+			if (flipIconForRtl) {
+				d = AndroidUtils.getDrawableForDirection(app, d);
+			}
 			menuItem.setIcon(d);
 		}
 		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

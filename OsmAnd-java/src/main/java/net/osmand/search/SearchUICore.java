@@ -516,7 +516,7 @@ public class SearchUICore {
 						}
 						currentSearchResult = collection;
 						if (phrase.getSettings().isExportObjects()) {
-							//rm.createTestJSON(collection);
+							rm.createTestJSON(collection);
 						}
 						rm.searchFinished(phrase);
 						if (onResultsComplete != null) {

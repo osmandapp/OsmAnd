@@ -44,6 +44,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.routepreparationmenu.cards.NauticalBridgeHeightWarningCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
@@ -294,7 +295,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				break;
 			case TARGET:
 				targetPointsHelper.navigateToPoint(latLon, true, -1, pd);
-				OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(mapActivity);
 				break;
 			case INTERMEDIATE:
 				targetPointsHelper.navigateToPoint(latLon, true, targetPointsHelper.getIntermediatePoints().size(), pd);
@@ -634,6 +634,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		} else if (routeCalculationInProgress) {
 			if (app.getRoutingHelper().isPublicTransportMode()) {
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
+			} else if (app.getRoutingHelper().isBoatMode()) {
+				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
 			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate()) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
@@ -968,6 +970,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		final ApplicationMode applicationMode = routingHelper.getAppMode();
 		final RouteMenuAppModes mode = app.getRoutingOptionsHelper().getRouteMenuAppMode(applicationMode);
+		boolean isLayoutRTL = AndroidUtils.isLayoutRtl(app);
 
 		updateControlButtons(mapActivity, mainView);
 		LinearLayout optionsButton = (LinearLayout) mainView.findViewById(R.id.map_options_route_button);
@@ -985,7 +988,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				clickRouteParams();
 			}
 		});
-		AndroidUtils.setBackground(app, optionsButton, nightMode, R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
+		AndroidUtils.setBackground(app, optionsButton, nightMode,
+				isLayoutRTL ? R.drawable.route_info_trans_gradient_left_light : R.drawable.route_info_trans_gradient_light,
+				isLayoutRTL ? R.drawable.route_info_trans_gradient_left_dark :R.drawable.route_info_trans_gradient_dark);
 
 		HorizontalScrollView scrollView = mainView.findViewById(R.id.route_options_scroll_container);
 		scrollView.setVerticalScrollBarEnabled(false);

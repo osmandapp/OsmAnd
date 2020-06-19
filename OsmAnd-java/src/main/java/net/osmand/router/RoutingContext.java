@@ -36,7 +36,7 @@ import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 
 public class RoutingContext {
 
-	public static final boolean SHOW_GC_SIZE = false;
+	public static boolean SHOW_GC_SIZE = false;
 	 
 	
 	private final static Log log = PlatformUtil.getLog(RoutingContext.class);
@@ -436,7 +436,7 @@ public class RoutingContext {
 		}
 		TLongIterator it = ts.iterator();
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			getAllObjects(it.next(), toFillIn, excludeDuplications);
 		}
 		timeToFindInitialSegments += (System.nanoTime() - now);
@@ -467,15 +467,14 @@ public class RoutingContext {
 				long h2 = runGCUsedMemory();
 				float mb = (1 << 20);
 				log.warn("Unload tiles :  estimated " + (sz1 - sz2) / mb + " ?= " + (h1 - h2) / mb + " actual");
-				log.warn("Used after " + h2 / mb + " of " + Runtime.getRuntime().totalMemory() / mb + " max "
-						+ maxMemory() / mb);
+				log.warn("Used after " + h2 / mb + " of " + Runtime.getRuntime().totalMemory() / mb );
 			} else {
 				float mb = (1 << 20);
 				int sz2 = getCurrentEstimatedSize();
 				log.warn("Unload tiles :  occupied before " + sz1 / mb + " Mb - now  " + sz2 / mb + "MB "
 						+ memoryLimit / mb + " limit MB " + config.memoryLimitation / mb);
 				long us2 = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
-				log.warn("Used memory before " + us1 / mb + "after " + us1 / mb + " of max " + maxMemory() / mb);
+				log.warn("Used memory before " + us1 / mb + "after " + us1 / mb );
 			}
 		}
 		if (!indexedSubregions.containsKey(tileId)) {
@@ -505,12 +504,6 @@ public class RoutingContext {
 		}
 		// timeToLoad += (System.nanoTime() - now);
 		return tileId;
-	}
-
-	private long maxMemory() {
-		// AVIAN FIXME
-//		return Runtime.getRuntime().maxMemory();
-		return 0;
 	}
 
 	

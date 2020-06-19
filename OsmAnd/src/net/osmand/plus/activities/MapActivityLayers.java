@@ -448,12 +448,12 @@ public class MapActivityLayers {
 
 		final String layerOsmVector = "LAYER_OSM_VECTOR";
 		final String layerInstallMore = "LAYER_INSTALL_MORE";
-		final String layerEditInstall = "LAYER_EDIT";
+		final String layerAdd = "LAYER_ADD";
 
 		entriesMap.put(layerOsmVector, getString(R.string.vector_data));
 		entriesMap.putAll(settings.getTileSourceEntries());
 		entriesMap.put(layerInstallMore, getString(R.string.install_more));
-		entriesMap.put(layerEditInstall, getString(R.string.maps_define_edit));
+		entriesMap.put(layerAdd, getString(R.string.shared_string_add));
 
 		final List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
@@ -502,26 +502,8 @@ public class MapActivityLayers {
 								updateMapSource(mapView, null);
 								updateItem(it, adapter, null);
 								break;
-							case layerEditInstall:
-								OsmandRasterMapsPlugin.defineNewEditLayer(activity, new ResultMatcher<TileSourceTemplate>() {
-
-									@Override
-									public boolean publish(TileSourceTemplate object) {
-										settings.MAP_TILE_SOURCES.set(object.getName());
-										settings.MAP_ONLINE_DATA.set(true);
-										if(it != null) {
-											it.setDescription(object.getName());
-										}
-										updateMapSource(mapView, settings.MAP_TILE_SOURCES);
-										return true;
-									}
-
-									@Override
-									public boolean isCancelled() {
-										return false;
-									}
-
-								}, null);
+							case layerAdd:
+								OsmandRasterMapsPlugin.defineNewEditLayer(activity.getSupportFragmentManager(), null, null);
 								break;
 							case layerInstallMore:
 								OsmandRasterMapsPlugin.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {

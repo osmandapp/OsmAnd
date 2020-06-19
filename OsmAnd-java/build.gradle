@@ -43,6 +43,7 @@ task collectTestResources(type: Copy) {
 	into "src/test/resources/"
 	from("../../resources/test-resources") {
 		include "*"
+		include "/search/*"
 	}
 	from("../../resources/poi") {
 		include "poi_types.xml"

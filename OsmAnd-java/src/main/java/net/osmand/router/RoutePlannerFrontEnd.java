@@ -91,7 +91,7 @@ public class RoutePlannerFrontEnd {
 				}
 				if (road != null) {
 					if(!transportStop) {
-						float prio = ctx.getRouter().defineSpeedPriority(road.road);
+						float prio = Math.max(ctx.getRouter().defineSpeedPriority(road.road), 0.3f);
 						if (prio > 0) {
 							road.distSquare = (road.distSquare + GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR)
 									/ (prio * prio);
@@ -234,6 +234,7 @@ public class RoutePlannerFrontEnd {
 		if (intermediates != null) {
 			for (LatLon l : intermediates) {
 				if (!addSegment(l, ctx, indexNotFound++, points, false)) {
+					System.out.println(points.get(points.size() - 1).getRoad().toString());
 					return null;
 				}
 			}
@@ -242,9 +243,7 @@ public class RoutePlannerFrontEnd {
 			return null;
 		}
 		ctx.calculationProgress.nextIteration();
-		List<RouteSegmentResult> res = searchRoute(ctx, points, routeDirection);
-		// make start and end more precise
-		makeStartEndPointsPrecise(res, start, end, intermediates);
+		List<RouteSegmentResult> res = searchRouteImpl(ctx, points, routeDirection);
 		if (res != null) {
 			new RouteResultPreparation().printResults(ctx, start, end, res);
 		}
@@ -255,33 +254,6 @@ public class RoutePlannerFrontEnd {
 		if (res.size() > 0) {
 			updateResult(res.get(0), start, true);
 			updateResult(res.get(res.size() - 1), end, false);
-			if (intermediates != null) {
-				int k = 1;
-				for (int i = 0; i < intermediates.size(); i++) {
-					LatLon ll = intermediates.get(i);
-					int px = MapUtils.get31TileNumberX(ll.getLongitude());
-					int py = MapUtils.get31TileNumberY(ll.getLatitude());
-					for (; k < res.size(); k++) {
-						double currentsDist = projectDistance(res, k, px, py);
-						if (currentsDist < 500 * 500) {
-							for (int k1 = k + 1; k1 < res.size(); k1++) {
-								double c2 = projectDistance(res, k1, px, py);
-								if (c2 < currentsDist) {
-									k = k1;
-									currentsDist = c2;
-								} else if (k1 - k > 15) {
-									break;
-								}
-							}
-							updateResult(res.get(k), ll, false);
-							if (k < res.size() - 1) {
-								updateResult(res.get(k + 1), ll, true);
-							}
-							break;
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -300,7 +272,8 @@ public class RoutePlannerFrontEnd {
 		int py = MapUtils.get31TileNumberY(point.getLatitude());
 		int pind = st ? routeSegmentResult.getStartPointIndex() : routeSegmentResult.getEndPointIndex();
 
-		RouteDataObject r = routeSegmentResult.getObject();
+		RouteDataObject r = new RouteDataObject(routeSegmentResult.getObject());
+		routeSegmentResult.setObject(r);
 		QuadPoint before = null;
 		QuadPoint after = null;
 		if (pind > 0) {
@@ -364,7 +337,7 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.segmentNotFound = indexNotFound;
 			return false;
 		} else {
-			log.info("Route segment found " + f.getRoad().id + " " + f.getRoad().getName());
+			log.info("Route segment found " + f.road);
 			res.add(f);
 			return true;
 		}
@@ -383,6 +356,10 @@ public class RoutePlannerFrontEnd {
 			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
 		}
 		if (ctx.nativeLib != null) {
+			ctx.startX = start.preciseX;
+			ctx.startY = start.preciseY;
+			ctx.targetX = end.preciseX;
+			ctx.targetY = end.preciseY;
 			return runNativeRouting(ctx, recalculationEnd);
 		} else {
 			refreshProgressDistance(ctx);
@@ -468,13 +445,18 @@ public class RoutePlannerFrontEnd {
 	}
 
 
-	private List<RouteSegmentResult> searchRoute(final RoutingContext ctx, List<RouteSegmentPoint> points, PrecalculatedRouteDirection routeDirection)
+	private List<RouteSegmentResult> searchRouteImpl(final RoutingContext ctx, List<RouteSegmentPoint> points, PrecalculatedRouteDirection routeDirection)
 			throws IOException, InterruptedException {
 		if (points.size() <= 2) {
+			// simple case 2 points only
 			if (!useSmartRouteRecalculation) {
 				ctx.previouslyCalculatedRoute = null;
 			}
-			return searchRoute(ctx, points.get(0), points.get(1), routeDirection);
+			pringGC(ctx, true);
+			List<RouteSegmentResult> res = searchRouteInternalPrepare(ctx, points.get(0), points.get(1), routeDirection);
+			pringGC(ctx, false);
+			makeStartEndPointsPrecise(res, points.get(0).getPreciseLatLon(), points.get(1).getPreciseLatLon(), null);
+			return res;
 		}
 
 		ArrayList<RouteSegmentResult> firstPartRecalculatedRoute = null;
@@ -516,7 +498,7 @@ public class RoutePlannerFrontEnd {
 			local.visitor = ctx.visitor;
 			local.calculationProgress = ctx.calculationProgress;
 			List<RouteSegmentResult> res = searchRouteInternalPrepare(local, points.get(i), points.get(i + 1), routeDirection);
-
+			makeStartEndPointsPrecise(res, points.get(i).getPreciseLatLon(), points.get(i + 1).getPreciseLatLon(), null);
 			results.addAll(res);
 			ctx.distinctLoadedTiles += local.distinctLoadedTiles;
 			ctx.loadedTiles += local.loadedTiles;
@@ -539,27 +521,22 @@ public class RoutePlannerFrontEnd {
 
 	}
 
-	@SuppressWarnings("static-access")
-	private List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
-	                                             PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
-		if (ctx.SHOW_GC_SIZE) {
-			long h1 = ctx.runGCUsedMemory();
+	private void pringGC(final RoutingContext ctx, boolean before) {
+		if (RoutingContext.SHOW_GC_SIZE && before) {
+			long h1 = RoutingContext.runGCUsedMemory();
 			float mb = (1 << 20);
 			log.warn("Used before routing " + h1 / mb + " actual");
-		}
-		List<RouteSegmentResult> result = searchRouteInternalPrepare(ctx, start, end, routeDirection);
-		if (RoutingContext.SHOW_GC_SIZE) {
+		} else if (RoutingContext.SHOW_GC_SIZE && !before) {
 			int sz = ctx.global.size;
 			log.warn("Subregion size " + ctx.subregionTiles.size() + " " + " tiles " + ctx.indexedSubregions.size());
-			ctx.runGCUsedMemory();
-			long h1 = ctx.runGCUsedMemory();
+			RoutingContext.runGCUsedMemory();
+			long h1 = RoutingContext.runGCUsedMemory();
 			ctx.unloadAllData();
-			ctx.runGCUsedMemory();
-			long h2 = ctx.runGCUsedMemory();
+			RoutingContext.runGCUsedMemory();
+			long h2 = RoutingContext.runGCUsedMemory();
 			float mb = (1 << 20);
 			log.warn("Unload context :  estimated " + sz / mb + " ?= " + (h1 - h2) / mb + " actual");
 		}
-		return result;
 	}
 
 

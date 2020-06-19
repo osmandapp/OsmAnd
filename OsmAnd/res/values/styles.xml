@@ -106,12 +106,16 @@
         <item name="colorPrimary">@color/active_color_primary_light</item>
         <item name="dashboard_divider">@color/divider_color_light</item>
         <item name="divider_color">@color/divider_color</item>
+        <item name="android:textColorPrimary">@color/text_color_primary_light</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
     </style>
 
     <style name="OsmandMaterialDarkTheme" parent="Theme.MaterialComponents">
         <item name="colorPrimary">@color/active_color_primary_dark</item>
         <item name="dashboard_divider">@color/divider_color_dark</item>
         <item name="divider_color">@color/divider_color_dark</item>
+        <item name="android:textColorPrimary">@color/text_color_primary_dark</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
     </style>
 
     <!-- MaterialComponents Widgets override -->
@@ -121,6 +125,7 @@
 
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+        <item name="bottom_bar_background_color">@color/bottom_bar_background_color_light</item>
         <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_color_light</item>
         <item name="mapBackground">@color/map_background_color_light</item>
@@ -154,6 +159,7 @@
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_light</item>
         <item name="bottom_menu_view_bg">@drawable/bg_bottom_menu_light</item>
         <item name="left_menu_view_bg">@drawable/bg_left_menu_light</item>
+        <item name="right_menu_view_bg">@drawable/bg_right_menu_light</item>
         <item name="bg_point_editor_view">@drawable/bg_point_editor_view_light</item>
         <item name="dashboard_divider">@color/divider_color_light</item>
         <item name="divider_color">@color/divider_color</item>
@@ -411,6 +417,7 @@
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+        <item name="bottom_bar_background_color">@color/bottom_bar_background_color_dark</item>
         <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_color_dark</item>
         <item name="mapBackground">@color/map_background_color_dark</item>
@@ -803,4 +810,16 @@
         <item name="android:padding">0dp</item>
         <item name="titleMargin">0dp</item>
     </style>
+
+    <style name="InputLayoutStyle.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:minHeight">@dimen/favorites_list_item_height</item>
+        <item name="android:textColorHint">?android:textColorSecondary</item>
+        <item name="boxBackgroundColor">@color/input_layout_bg_color</item>
+        <item name="errorEnabled">true</item>
+        <item name="helperTextEnabled">true</item>
+        <item name="helperTextTextColor">?android:textColorSecondary</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="hintTextColor">?android:textColorSecondary</item>
+    </style>
+
 </resources>

@@ -201,8 +201,8 @@ public class AMapPointMenuController extends MenuController {
 		OsmandApplication app = mapActivity.getMyApplication();
 		titleButtonController.caption = contextMenuButton.getLeftTextCaption();
 		titleButtonController.rightTextCaption = contextMenuButton.getRightTextCaption();
-		titleButtonController.leftIconId = AndroidUtils.getDrawableId(app, contextMenuButton.getLeftIconName());
-		titleButtonController.rightIconId = AndroidUtils.getDrawableId(app, contextMenuButton.getRightIconName());
+		titleButtonController.startIconId = AndroidUtils.getDrawableId(app, contextMenuButton.getLeftIconName());
+		titleButtonController.endIconId = AndroidUtils.getDrawableId(app, contextMenuButton.getRightIconName());
 		titleButtonController.enabled = contextMenuButton.isEnabled();
 		titleButtonController.tintIcon = contextMenuButton.isTintIcon();
 

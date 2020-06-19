@@ -790,18 +790,19 @@ public class WaypointHelper {
 			} else if (type == ALARMS) {
 				//assign alarm list icons manually for now
 				String typeString = ((AlarmInfo) point).getType().toString();
+				OsmandSettings.DrivingRegion region = app.getSettings().DRIVING_REGION.get();
 				if (typeString.equals("SPEED_CAMERA")) {
 					return AppCompatResources.getDrawable(uiCtx, R.drawable.mx_highway_speed_camera);
 				} else if (typeString.equals("BORDER_CONTROL")) {
 					return AppCompatResources.getDrawable(uiCtx, R.drawable.mx_barrier_border_control);
 				} else if (typeString.equals("RAILWAY")) {
-					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
+					if (region.isAmericanTypeSigns()) {
 						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_railways_us);
 					} else {
 						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_railways);
 					}
 				} else if (typeString.equals("TRAFFIC_CALMING")) {
-					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
+					if (region.isAmericanTypeSigns()) {
 						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_traffic_calming_us);
 					} else {
 						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_traffic_calming);
@@ -811,13 +812,13 @@ public class WaypointHelper {
 				} else if (typeString.equals("STOP")) {
 					return AppCompatResources.getDrawable(uiCtx, R.drawable.list_stop);
 				} else if (typeString.equals("PEDESTRIAN")) {
-					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
+					if (region.isAmericanTypeSigns()) {
 						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_pedestrian_us);
 					} else {
 						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_pedestrian);
 					}
 				} else if (typeString.equals("TUNNEL")) {
-					if (app.getSettings().DRIVING_REGION.get().americanSigns) {
+					if (region.isAmericanTypeSigns()) {
 						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_tunnel_us);
 					} else {
 						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_tunnel);
