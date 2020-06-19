@@ -1,13 +1,16 @@
 package net.osmand.search;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.SearchUICore.SearchResultMatcher;
+import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,23 +22,18 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.xmlpull.v1.XmlPullParserException;
 
-import net.osmand.OsmAndCollator;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.Amenity;
-import net.osmand.data.Building;
-import net.osmand.data.City;
-import net.osmand.data.MapObject;
-import net.osmand.data.Street;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.search.SearchUICore.SearchResultCollection;
-import net.osmand.search.SearchUICore.SearchResultMatcher;
-import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchSettings;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.zip.GZIPInputStream;
 
 @RunWith(Parameterized.class)
 public class SearchUICoreTest {
@@ -94,11 +92,12 @@ public class SearchUICoreTest {
     @Test
 	public void testSearch() throws IOException, JSONException {
 		File jsonFile = testFile;
+		File obfFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf"));
+		File obfZipFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf.gz"));
 		String sourceJsonText = Algorithms.getFileAsString(jsonFile);
 		Assert.assertNotNull(sourceJsonText);
 		Assert.assertTrue(sourceJsonText.length() > 0);
 
-		BinaryMapIndexReaderTest reader = new BinaryMapIndexReaderTest();
 		JSONObject sourceJson = new JSONObject(sourceJsonText);
 		JSONArray phrasesJson = sourceJson.optJSONArray("phrases");
 		String singlePhrase = sourceJson.optString("phrase", null);
@@ -115,39 +114,23 @@ public class SearchUICoreTest {
 			}
 		}
 		JSONObject settingsJson = sourceJson.getJSONObject("settings");
-		if (sourceJson.has("amenities")) {
-			JSONArray amenitiesArr = sourceJson.getJSONArray("amenities");
-			List<Amenity> amenities = new ArrayList<>();
-			for (int i = 0; i < amenitiesArr.length(); i++) {
-				JSONObject amenityObj = amenitiesArr.getJSONObject(i);
-				amenities.add(Amenity.parseJSON(amenityObj));
+		BinaryMapIndexReader reader = null;
+		boolean useData = settingsJson.optBoolean("useData", true);
+		if (useData) {
+			boolean obfZipFileExists = obfZipFile.exists();
+			if (!obfZipFileExists) {
+				System.out.println(String.format("Could not find obf file: %s", obfZipFile.getPath()));
+				return;
 			}
-			reader.amenities = amenities;
-		}
-		if (sourceJson.has("cities")) {
-			JSONArray citiesArr = sourceJson.getJSONArray("cities");
-			List<City> cities = new ArrayList<>();
-			List<City> initCities = new ArrayList<>();
-			List<City> matchedCities = new ArrayList<>();
-			List<City> streetCities = new ArrayList<>();
-			for (int i = 0; i < citiesArr.length(); i++) {
-				JSONObject cityObj = citiesArr.getJSONObject(i);
-				final City city = City.parseJSON(cityObj);
-				cities.add(city);
-				if (cityObj.has("init")) {
-					initCities.add(city);
-				}
-				if (cityObj.has("matchCity")) {
-					matchedCities.add(city);
-				}
-				if (cityObj.has("matchStreet")) {
-					streetCities.add(city);
-				}
-			}
-			reader.cities = cities;
-			reader.initCities = initCities;
-			reader.matchedCities = matchedCities;
-			reader.streetCities = streetCities;
+			//Assert.assertTrue(obfZipFileExists);
+
+			GZIPInputStream gzin = new GZIPInputStream(new FileInputStream(obfZipFile));
+			FileOutputStream fous = new FileOutputStream(obfFile);
+			Algorithms.streamCopy(gzin, fous);
+			fous.close();
+			gzin.close();
+
+			reader = new BinaryMapIndexReader(new RandomAccessFile(obfFile.getPath(), "r"), obfFile);
 		}
 		List<List<String>> results = new ArrayList<>();
 		for (int i = 0; i < phrases.size(); i++) {
@@ -166,7 +149,9 @@ public class SearchUICoreTest {
 		}
 
 		SearchSettings s = SearchSettings.parseJSON(settingsJson);
-		s.setOfflineIndexes(Collections.singletonList(reader));
+		if (reader != null) {
+			s.setOfflineIndexes(Collections.singletonList(reader));
+		}
 
 		final SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
 		core.init();
@@ -216,6 +201,8 @@ public class SearchUICoreTest {
 				}
 			}
 		}
+
+		obfFile.delete();
 	}
 
 	private void parseResults(JSONObject sourceJson, String tag, List<List<String>> results) {
@@ -329,116 +316,4 @@ public class SearchUICoreTest {
 			return val;
 		}
 	};
-	
-	private static class BinaryMapIndexReaderTest extends BinaryMapIndexReader {
-
-		List<Amenity> amenities = Collections.emptyList();
-		List<City> cities = Collections.emptyList();
-		List<City> initCities = Collections.emptyList();
-		List<City> matchedCities = Collections.emptyList();
-		List<City> streetCities = Collections.emptyList();
-
-		BinaryMapIndexReaderTest() throws IOException {
-			super(null, null, false);
-		}
-
-		@Override
-		public List<Amenity> searchPoiByName(SearchRequest<Amenity> req) throws IOException {
-			for (Amenity amenity : amenities) {
-				req.publish(amenity);
-			}
-			return req.getSearchResults();
-		}
-
-		@Override
-		public List<Amenity> searchPoi(SearchRequest<Amenity> req) throws IOException {
-			for (Amenity amenity : amenities) {
-				req.publish(amenity);
-			}
-			return req.getSearchResults();
-		}
-
-		@Override
-		public List<City> getCities(SearchRequest<City> resultMatcher, int cityType) throws IOException {
-			for (City city : initCities) {
-				if (resultMatcher != null) {
-					resultMatcher.publish(city);
-				}
-			}
-			return initCities;
-		}
-
-		@Override
-		public int preloadStreets(City c, SearchRequest<Street> resultMatcher) throws IOException {
-			return 0;
-		}
-
-		@Override
-		public void preloadBuildings(Street s, SearchRequest<Building> resultMatcher) throws IOException {
-			// cities must be filled with streets and buildings
-		}
-
-		@Override
-		public List<MapObject> searchAddressDataByName(SearchRequest<MapObject> req) throws IOException {
-			for (City city : streetCities) {
-				for (Street street : city.getStreets()) {
-					req.publish(street);
-				}
-			}
-			for (City city : matchedCities) {
-				req.publish(city);
-			}
-			return req.getSearchResults();
-		}
-
-		@Override
-		public String getRegionName() {
-			return "Test region";
-		}
-
-		@Override
-		public boolean containsPoiData(int left31x, int top31y, int right31x, int bottom31y) {
-			return true;
-		}
-
-		@Override
-		public boolean containsMapData() {
-			return true;
-		}
-
-		@Override
-		public boolean containsPoiData() {
-			return true;
-		}
-
-		@Override
-		public boolean containsRouteData() {
-			return true;
-		}
-
-		@Override
-		public boolean containsRouteData(int left31x, int top31y, int right31x, int bottom31y, int zoom) {
-			return true;
-		}
-
-		@Override
-		public boolean containsAddressData(int left31x, int top31y, int right31x, int bottom31y) {
-			return true;
-		}
-
-		@Override
-		public boolean containsMapData(int tile31x, int tile31y, int zoom) {
-			return true;
-		}
-
-		@Override
-		public boolean containsMapData(int left31x, int top31y, int right31x, int bottom31y, int zoom) {
-			return true;
-		}
-
-		@Override
-		public boolean containsAddressData() {
-			return true;
-		}
-	}
 }

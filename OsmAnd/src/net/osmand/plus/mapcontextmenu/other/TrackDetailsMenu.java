@@ -212,8 +212,8 @@ public class TrackDetailsMenu {
 		}
 	}
 
-	public void updateInfo(final View main) {
-		updateView(main);
+	public void updateInfo(final View main, boolean forceFitTrackOnMap) {
+		updateView(main, forceFitTrackOnMap);
 	}
 
 	@Nullable
@@ -485,7 +485,7 @@ public class TrackDetailsMenu {
 		return xAxisPoints;
 	}
 
-	private void updateView(final View parentView) {
+	private void updateView(final View parentView, boolean forceFitTrackOnMap) {
 		MapActivity mapActivity = getMapActivity();
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (mapActivity == null || gpxItem == null) {
@@ -724,7 +724,7 @@ public class TrackDetailsMenu {
 			xAxisArrow.setVisibility(View.GONE);
 		}
 
-		refreshChart(chart, true);
+		refreshChart(chart, forceFitTrackOnMap);
 	}
 
 	private void updateChart(LineChart chart) {
@@ -737,6 +737,14 @@ public class TrackDetailsMenu {
 			}
 			if (gpxItem.chartHighlightPos != -1) {
 				chart.highlightValue(gpxItem.chartHighlightPos, 0);
+			} else if (gpxItem.locationOnMap != null) {
+				LineData lineData = chart.getLineData();
+				List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
+				if (ds != null && ds.size() > 0) {
+					OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
+					gpxItem.chartHighlightPos = (float) (gpxItem.locationOnMap.distance / dataSet.getDivX());
+					chart.highlightValue(gpxItem.chartHighlightPos, 0);
+				}
 			} else {
 				chart.highlightValue(null);
 			}
