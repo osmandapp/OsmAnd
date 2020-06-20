@@ -224,7 +224,7 @@
     <string name="website">الموقع</string>
     <string name="phone">الهاتف</string>
     <string name="contribution_activity">تثبيت الإصدار</string>
-    <string name="accessibility_options">خيارات الإتاحة</string>
+    <string name="accessibility_options">خيارات إمكانية الوصول</string>
     <string name="select_address_activity">حدد عنوان</string>
     <string name="shared_string_more_actions">خيارات أخرى</string>
     <string name="edit_filter_save_as_menu_item">حفظ باسم</string>
@@ -489,8 +489,8 @@
     <string name="back_right">الأيمن الخلفي</string>
     <string name="accuracy">الدقة</string>
     <string name="altitude">الارتفاع</string>
-    <string name="accessibility_preferences_descr">التفضيلات المتعلقة بالإتاحة.</string>
-    <string name="shared_string_accessibility">الإتاحة</string>
+    <string name="accessibility_preferences_descr">الإعدادات المتعلقة بإمكانية الوصول.</string>
+    <string name="shared_string_accessibility">إمكانية الوصول</string>
     <string name="rendering_out_of_memory">ذاكرة التشغيل غير كافية لعرض المنطقة المختارة</string>
     <string name="offline_edition">التعديل دون اتصال</string>
     <string name="offline_edition_descr">استخدام التعديل دون اتصال دائماً.</string>
@@ -1837,7 +1837,7 @@
     <string name="consider_turning_polygons_off">من المستحسن إيقاف عرض المضلعات.</string>
     <string name="access_from_map_description">سحب القائمة سيفتح لوحة التحكم و ليس القائمة</string>
     <string name="confirmation_to_delete_history_items">هل تريد حذف العناصر المحددة من السجل؟</string>
-    <string name="access_direction_haptic_feedback">توجيه رد فعل الهزاز</string>
+    <string name="access_direction_haptic_feedback">اتجاهات لمسية</string>
     <string name="please_specify_poi_type_only_from_list">يرجى تحديد نوع POI الصحيح أو تخطيه.</string>
     <string name="show_on_start_description">عند الإيقاف ستبدأ واجهة الخريطة مباشرة.</string>
     <string name="osm_edit_modified_poi">OSM POI معدل</string>
