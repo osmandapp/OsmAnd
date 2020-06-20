@@ -3779,11 +3779,18 @@
     <string name="speed_camera_pois">POI كاميرا مراقبة السرعة</string>
     <string name="uninstall_speed_cameras">إلغاء تثبيت كاميرات السرعة</string>
     <string name="shared_string_legal">قانوني</string>
-    <string name="keep_active">ابقا نشطا</string>
+    <string name="keep_active">البقاء نشطا</string>
     <string name="shared_string_uninstall">إلغاء التثبيت</string>
     <string name="speed_cameras_alert">يحظر القانون تنبيهات كاميرات السرعة في بعض البلدان.</string>
     <string name="shared_string_bearing">اتجاه</string>
     <string name="item_deleted">%1$s محذوفة</string>
     <string name="speed_cameras_restart_descr">إعادة التشغيل مطلوبة لحذف بيانات كاميرا السرعة بالكامل.</string>
     <string name="shared_string_uninstall_and_restart">إلغاء التثبيت وإعادة التشغيل</string>
+    <string name="speed_cameras_legal_descr">في بعض البلدان أو المناطق، يحظر القانون استخدام تطبيقات التحذير من كاميرا السرعة. 
+\n
+\nعليك أن تختار اعتمادا على قانون بلدك. 
+\n
+\nحدد %1$s وستتلقى تنبيهات وتحذيرات حول كاميرات السرعة. 
+\n
+\nحدد %2$s. جميع البيانات المتعلقة كاميرات السرعة: التنبيهات، والإخطارات، سيتم حذف نقاط الاهتمام حتى يتم إعادة تثبيت أوسماند تماما.</string>
 </resources>
