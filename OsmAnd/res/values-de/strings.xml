@@ -3793,4 +3793,14 @@
     <string name="quick_action_mapillary_hide">Mapillary ausblenden</string>
     <string name="quick_action_mapillary_show">Mapillary anzeigen</string>
     <string name="quick_action_showhide_mapillary_descr">Eine Umschaltfläche zum ein- oder ausblenden der Mapillary-Layer auf der Karte.</string>
+    <string name="uninstall_speed_cameras">Blitzer Deinstallieren</string>
+    <string name="shared_string_legal">Rechtliches</string>
+    <string name="speed_camera_pois">Blitzer-POIs</string>
+    <string name="keep_active">Aktiviert lassen</string>
+    <string name="shared_string_uninstall">Deinstallieren</string>
+    <string name="speed_cameras_alert">Blitzer-Warnungen sind in einigen Ländern gesetzlich verboten.</string>
+    <string name="shared_string_bearing">Peilung</string>
+    <string name="item_deleted">%1$s gelöscht</string>
+    <string name="speed_cameras_restart_descr">Ein Neustart ist erforderlich, um Blitzerdaten vollständig zu löschen.</string>
+    <string name="shared_string_uninstall_and_restart">Deinstallieren und neu starten</string>
 </resources>
