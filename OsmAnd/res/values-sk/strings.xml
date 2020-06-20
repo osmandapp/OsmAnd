@@ -3780,4 +3780,25 @@
     <string name="vessel_height_warning">Môžete nastaviť výšku plavidla, aby sa dalo vyhnúť nízkym mostom. Pamätajte, že pri sklápacích alebo posuvných mostoch sa zohľadní výška v otvorenom stave.</string>
     <string name="vessel_height_limit_description">Nastavte výšku plavidla, aby sa dalo vyhnúť nízkym mostom. Pamätajte, že pri sklápacích alebo posuvných mostoch sa zohľadní výška v otvorenom stave.</string>
     <string name="vessel_width_limit_description">Nastavte šírku plavidla, aby sa dalo vyhnúť úzkym mostom</string>
+    <string name="uninstall_speed_cameras">Odinštalovať rýchlostné radary</string>
+    <string name="shared_string_legal">Právne</string>
+    <string name="speed_camera_pois">Body rýchlostných radarov</string>
+    <string name="speed_cameras_legal_descr">V niektorých krajinách alebo regiónoch je zákonom zakázané použivať aplikácie varujúce pred rýchlostnými radarmi.
+\n
+\nMusíte sa rozhodnúť podľa zákonov vašej krajiny.
+\n
+\nZvoľte %1$s a budete dostávať varovania pred rýchlostnými radarmi.
+\n
+\nZvoľte %2$s a všetky údaje o rýchlostných radaroch budú odstránené, až kým nebude OsmAnd znovu preinštalovaný.</string>
+    <string name="keep_active">Ponechať aktívne</string>
+    <string name="speed_cameras_alert">V niektorých krajinách je varovanie pred rýchlostnými radarmi zakázané zákonom.</string>
+    <string name="quick_action_showhide_mapillary_title">Zobraziť/skryť Mapillary</string>
+    <string name="quick_action_mapillary_hide">Skryť Mapillary</string>
+    <string name="quick_action_mapillary_show">Zobraziť Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Prepínač pre zobrazenie alebo skrytie vrstvy Mapillary na mape.</string>
+    <string name="shared_string_bearing">Smerovanie</string>
+    <string name="item_deleted">%1$s vymazané</string>
+    <string name="speed_cameras_restart_descr">Pre úplné odstránenie údajov o rýchlostných radaroch je potrebný reštart.</string>
+    <string name="shared_string_uninstall_and_restart">Odinštalovať a reštartovať</string>
+    <string name="shared_string_uninstall">Odinštalovať</string>
 </resources>
