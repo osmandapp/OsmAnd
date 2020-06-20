@@ -3708,4 +3708,21 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="quick_action_mapillary_hide">Mapillary elrejtése</string>
     <string name="quick_action_mapillary_show">Mapillary megjelenítése</string>
     <string name="quick_action_showhide_mapillary_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a Mapillary réteget.</string>
+    <string name="uninstall_speed_cameras">Traffipaxok eltávolítása</string>
+    <string name="shared_string_legal">Jogi</string>
+    <string name="speed_camera_pois">Traffipax POI-k</string>
+    <string name="speed_cameras_legal_descr">Bizonyos országokban és régiókban a traffipaxra figyelmeztető alkalmazások törvényileg tiltottak.
+\n
+\nDöntsön az ön országának törvényei alapján.
+\n
+\nVálaszzsa a %1$s lehetőséget, hogy figyelmeztetéseket és riasztásokat kapjon a traffipaxokról.
+\n
+\nVálaszzsa az %2$s lehetőséget, hogy az összes traffipax-szal kapcsolatos adat: riasztások, értesítések, POI-k törlésre kerüljenek az OsmAnd teljes újratelepítéséig.</string>
+    <string name="keep_active">Maradjanak</string>
+    <string name="shared_string_uninstall">Eltávolít</string>
+    <string name="speed_cameras_alert">Bizonyos országokban a traffipax riasztások törvényileg tiltottak.</string>
+    <string name="shared_string_bearing">Tájolás</string>
+    <string name="item_deleted">%1$s törölve</string>
+    <string name="speed_cameras_restart_descr">A traffipax adatok végleges eltávolításához újraindítás szükséges.</string>
+    <string name="shared_string_uninstall_and_restart">Eltávolítás és Újraindítás</string>
 </resources>
