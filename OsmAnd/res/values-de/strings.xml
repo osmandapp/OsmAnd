@@ -2928,7 +2928,7 @@
     <string name="quick_action_gpx_tracks_show">GPX-Tracks einblenden</string>
     <string name="exit_at">Aussteigen bei</string>
     <string name="sit_on_the_stop">Zusteigen an Haltestelle</string>
-    <string name="use_osm_live_public_transport_description">OsmAnd-Live-Änderungen bei öffentlichen Verkehrsmitteln aktivieren.</string>
+    <string name="use_osm_live_public_transport_description">Aktivierung von OsmAnd Live für Änderungen in öffentlichen Verkehrsmitteln.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live öffentliche Verkehrsmittel</string>
     <string name="public_transport_warning_descr_blog">Erfahren Sie in unserem Blog mehr darüber, wie OsmAnd Routen berechnet.</string>
     <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, rechnen Sie mit Fehlern und Ungenauigkeiten.</string>
