@@ -110,7 +110,7 @@
     <string name="map_widget_mini_route">نقشه مسیر کوچک</string>
     <string name="avoid_in_routing_title">پرهیز از…</string>
     <string name="bg_service_screen_lock_toast">صفحه قفل شد</string>
-    <string name="show_cameras">دوربین‌های کنترل سرعت</string>
+    <string name="show_cameras">دوربین‌های سرعت</string>
     <string name="show_traffic_warnings">هشدارهای ترافیکی</string>
     <string name="avoid_toll_roads">جاد‌هٔ عوارضی‌دار</string>
     <string name="continue_follow_previous_route_auto">ناوبری ناتمام قبلی را ادامه می‌دهید؟ (%1$s ثانیه)</string>
@@ -503,7 +503,7 @@
     <string name="non_optimal_route_calculation">برای مسافت‌های طولانی شاید بهینه‌ترین مسیر محاسبه نشود</string>
     <string name="gps_not_available">لطفاً GPS را از طریق تنظیمات فعال کنید</string>
     <string name="map_widget_monitoring_services">خدمات ثبت و ضبط</string>
-    <string name="show_warnings_descr">پیکربندی‌های مربوط به هشدارهای ترافیکی (مانند محدودیت‌های سرعت، توقف‌های اجباری، سرعتگیرها، تونل‌ها)، هشدارهای دوربین کنترل سرعت و اطلاعات خط عبوری را انجام دهید.</string>
+    <string name="show_warnings_descr">پیکربندی‌های مربوط به هشدارهای ترافیکی (مانند محدودیت‌های سرعت، توقف‌های اجباری، سرعتگیرها، تونل‌ها)، اخطارهای دوربین سرعت و اطلاعات خط عبوری را انجام دهید.</string>
     <string name="use_compass_navigation_descr">اگر جهت شناسایی نشد از قطب‌نما استفاده شود.</string>
     <string name="avoid_motorway">آزادراه</string>
     <string name="snap_to_road_descr">در هنگام ناوبری، موقعیت را به جاده‌ها بچسبان.</string>
@@ -670,7 +670,7 @@
     <string name="tts_language_not_supported_title">این زبان پشتیبانی نمی‌شود</string>
     <string name="tts_language_not_supported">موتور متن به گفتاری (TTS) که روی دستگاه شما نصب است از زبان انتخاب‌شده پشتیبانی نمی‌کند و در عوض زبان پیشفرض را به کار می‌برد. می‌خواهید در فروشگاه اندروید دنبال موتور TTS دیگری بگردید؟</string>
     <string name="tts_missing_language_data">برای دانلود زبان انتخاب‌شده به فروشگاه می‌روید؟</string>
-    <string name="preferred_locale_descr">زبان برنامه (تغییر زبان پس از راه‌اندازی مجدد انجام می‌شود).</string>
+    <string name="preferred_locale_descr">زبان برنامه (تغییر زبان پس از شروع مجدد انجام می‌شود).</string>
     <string name="preferred_locale">زبان برنامه</string>
     <string name="rotate_map_none_opt">بدون چرخش (بالا به‌طرف شمال)</string>
     <string name="rotate_map_compass_opt">در جهت قطب‌نما</string>
@@ -716,7 +716,7 @@
     <string name="tts_missing_language_data_title">داده‌ها وجود ندارد</string>
     <string name="gpx_option_reverse_route">برعکس‌کردن جهت GPX</string>
     <string name="gpx_option_destination_point">از مقصد جاری استفاده کن</string>
-    <string name="gpx_option_from_start_point">گذر از همهٔ رد</string>
+    <string name="gpx_option_from_start_point">گذر از سرتاسر رد</string>
     <string name="switch_to_vector_map_to_see">برای این محل نقشهٔ بُرداری آفلاین وجود دارد. 
 \n 
 \n\t«منو» ← «پیکربندی نقشه» ← «منبع نقشه…» ← «نقشه‌های بُرداری آفلاین».
@@ -759,7 +759,7 @@
     <string name="map_tile_source">منبع کاشی‌های نقشه</string>
     <string name="mark_point">هدف</string>
     <string name="speak_speed_limit">سرعت مجاز</string>
-    <string name="speak_cameras">دوربین‌های کنترل سرعت</string>
+    <string name="speak_cameras">دوربین‌های سرعت</string>
     <string name="speak_traffic_warnings">هشدارهای ترافیکی</string>
     <string name="osmand_distance_planning_plugin_description">با رسم مسیر روی نقشه برای سفر خود طرح بریزید یا مسافت بین نقاط را اندازه بگیرید. رسم مسیر با زدن روی صفحه امکان‌پذیر است. همچنین می‌توانید از فایل‌های GPX موجود استفاده کنید یا آن‌ها را تغییر دهید. کار نهایی نیز به‌صورت فایل GPX قابل ذخیره‌سازی است تا بعداً از آن برای راهنمایی استفاده کنید.</string>
     <string name="layer_hillshade">لایهٔ سایه‌روشن</string>
@@ -1062,7 +1062,7 @@
     <string name="route_to">به:</string>
     <string name="osb_author_dialog_password">گذرواژهٔ OSM (اختیاری)</string>
     <string name="speak_title">اعلام‌کردن…</string>
-    <string name="speak_descr">پیکربندی‌های مربوط به اعلام نام خیابان‌ها، هشدارهای ترافیکی (مانند توقف‌های اجباری، سرعتگیرها)، هشدار دوربین‌های کنترل سرعت و محدودیت‌های سرعت را انجام دهید.</string>
+    <string name="speak_descr">پیکربندی‌های مربوط به اعلام نام خیابان‌ها، هشدارهای ترافیکی (مانند توقف‌های اجباری، سرعتگیرها)، اخطارهای دوربین سرعت و محدودیت‌های سرعت را انجام دهید.</string>
     <string name="speak_street_names">نام خیابان‌ها (موتور صوتی)</string>
     <string name="map_widget_fps_info">اطلاعات عیب‌یابی FPS</string>
     <string name="driving_region_descr">منطقهٔ رانندگی را انتخاب کنید: آمریکا، اروپا، انگلستان، آسیا و سایر مناطق.</string>
@@ -1423,7 +1423,7 @@
     <string name="traffic_warning_payment">عوارضی</string>
     <string name="traffic_warning_stop">علامت ایست</string>
     <string name="traffic_warning_calming">سرعتگیر</string>
-    <string name="traffic_warning_speed_camera">دوربین کنترل سرعت</string>
+    <string name="traffic_warning_speed_camera">دوربین سرعت</string>
     <string name="traffic_warning">هشدار ترافیکی</string>
     <string name="enable_proxy_title">فعال‌کردن پروکسی HTTP</string>
     <string name="enable_proxy_descr">یک پروکسی HTTP برای همهٔ تقاضاهای شبکه تنظیم کنید.</string>
@@ -1488,7 +1488,7 @@
     <string name="shared_string_show_description">نمایش توضیحات</string>
     <string name="shared_string_message">پیام</string>
     <string name="agps_data_last_downloaded">دادهٔ A-GPS دانلود شد: %1$s</string>
-    <string name="confirm_usage_speed_cameras">در بسیاری از کشورها (آلمان، فرانسه، ایتالیا و...) استفاده از هشداردهندهٔ دوربین‌های ترافیکی غیرقانونی است. با نقض قانون از سوی شما OsmAnd هیچ‌گونه مسئولیتی بر عهده نمی‌گیرد. لطفاً فقط اگر مجاز به استفاده از این ویژگی هستید «بله» را انتخاب کنید.</string>
+    <string name="confirm_usage_speed_cameras">در بسیاری از کشورها (آلمان، فرانسه، ایتالیا و...) استفاده از هشداردهندهٔ دوربین سرعت غیرقانونی است. با نقض قانون از سوی شما OsmAnd هیچ‌گونه مسئولیتی بر عهده نمی‌گیرد. لطفاً فقط اگر مجاز به استفاده از این ویژگی هستید «بله» را انتخاب کنید.</string>
     <string name="welmode_download_maps">دانلود نقشه‌ها</string>
     <string name="welcome_select_region">برای نمایش صحیح علائم و قوانین ترافیکی، لطفاً منطقهٔ رانندگی خود را انتخاب کنید:</string>
     <string name="welcome_text">برنامهٔ OsmAnd نقشه‌گردی و ناوبری آفلاین را برایتان به ارمغان می‌آورد.</string>
@@ -1556,7 +1556,7 @@
     <string name="rendering_value_translucent_blue_name">آبی شفاف</string>
     <string name="rendering_value_purple_name">بنفش</string>
     <string name="rendering_value_translucent_purple_name">بنفش شفاف</string>
-    <string name="restart_is_required">جهت به‌کارگیری تغییر، یک بار برنامه را ببندید و باز کنید.</string>
+    <string name="restart_is_required">برای اینکه تغییرات به کار بسته شود، یک بار برنامه را ببندید و باز کنید.</string>
     <string name="light_theme">روشن</string>
     <string name="dark_theme">تیره</string>
     <string name="lang_bn">بنگالی</string>
@@ -1756,8 +1756,8 @@
     <string name="osm_live_not_active">غیرفعال</string>
     <string name="osm_live_enter_email">لطفاً یک نشانی ایمیل معتبر وارد کنید</string>
     <string name="osm_live_enter_user_name">لطفاً یک نام کاربری وارد کنید</string>
-    <string name="osm_live_thanks">سپاسگزاریم که حامی OsmAnd هستید!
-\n برنامه را دوباره راه‌اندازی کنید تا همهٔ قابلیت‌های جدید فعال شود.</string>
+    <string name="osm_live_thanks">سپاسگزاریم که حامی OsmAnd هستید! 
+\n برنامه را دوباره شروع کنید تا همهٔ قابلیت‌های جدید فعال شود.</string>
     <string name="osm_live_region_desc">بخشی از کمک‌های مالی شما به کاربرانی پرداخت می‌شود که این منطقه از نقشه را سروسامان می‌دهند.</string>
     <string name="osm_live_subscription_settings">تنظیمات اشتراک</string>
     <string name="quick_action_auto_zoom">زوم خودکار روشن/خاموش</string>
@@ -1984,7 +1984,7 @@
     <string name="map_downloaded">نقشه دانلود شد</string>
     <string name="map_downloaded_descr">نقشهٔ %1$s آمادهٔ استفاده است.</string>
     <string name="go_to_map">نقشه را نشان بده</string>
-    <string name="simulate_initial_startup_descr">با این تنظیم برنامه فکر می‌کند اولین بار است که راه‌اندازی می‌شود. تنظیمات دیگر دست‌نخورده می‌مانند.</string>
+    <string name="simulate_initial_startup_descr">با این تنظیم برنامه فکر می‌کند اولین بار است که راه‌اندازی می‌شود. تنظیماتِ دیگر دست‌نخورده می‌مانند.</string>
     <string name="simulate_initial_startup">شبیه‌سازی اولین اجرای برنامه</string>
     <string name="share_menu_location">هم‌رسانی مکان</string>
     <string name="shared_string_send">ارسال</string>
@@ -2258,7 +2258,7 @@
     <string name="coordinate_input">واردکردن مختصات</string>
     <string name="marker_save_as_track_descr">نشانه‌هایتان را در این فایل GPX برون‌برد کنید:</string>
     <string name="move_to_history">فرستادن به سابقه</string>
-    <string name="group_will_be_removed_after_restart">گروه با راه‌اندازی مجدد برنامه حذف می‌شود.</string>
+    <string name="group_will_be_removed_after_restart">بار بعد که برنامه را باز کنید، گروه حذف خواهد شد.</string>
     <string name="descendingly">نزولی</string>
     <string name="marker_show_distance_descr">مسافت تا نشانه‌ها و جهت‌گیری به‌سمت آن‌ها چگونه روی نقشه نشان داده شود:</string>
     <string name="map_orientation_change_in_accordance_with_speed">آستانهٔ تغییر جهت نقشه</string>
@@ -2790,7 +2790,7 @@
     <string name="osmand_team">تیم OsmAnd</string>
     <string name="maps_you_need_descr">بر اساس مقالاتی که نشانک زده‌اید، پیشنهاد می‌کنیم این نقشه‌ها را دانلود کنید:</string>
     <string name="maps_you_need">نقشه‌هایی که لازم دارید</string>
-    <string name="shared_string_restart">راه‌اندازی مجدد</string>
+    <string name="shared_string_restart">شروع دوبارهٔ برنامه</string>
     <string name="show_images">نمایش تصاویر</string>
     <string name="purchase_cancelled_dialog_title">اشتراک OsmAnd Live خود را لغو کردید</string>
     <string name="purchase_cancelled_dialog_descr">اشتراکتان را تجدید کنید تا از همهٔ قابلیت‌ها بهره‌مند شوید:</string>
@@ -3249,7 +3249,7 @@
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
     <string name="coordinates_format_info">قالب انتخابی در همه‌جای برنامه به کار خواهد رفت.</string>
-    <string name="start_up_message_pref">پیام راه‌اندازی</string>
+    <string name="start_up_message_pref">پیام شروع</string>
     <string name="wake_time">زمان خاموشی پس از بیدارباش</string>
     <string name="units_and_formats">یکاها و قالب‌ها</string>
     <string name="appearance">ظاهر</string>
@@ -3392,7 +3392,7 @@
     <string name="quick_action_hillshade_show">نشان‌دادن سایه‌روشن‌ها</string>
     <string name="quick_action_hillshade_hide">پنهان‌کردن سایه‌روشن‌ها</string>
     <string name="quick_action_show_hide_hillshade">آشکار/پنهان کردن سایه‌روشن‌ها</string>
-    <string name="tts_initialization_error">راه‌اندازی موتور متن به گفتار ناموفق بود.</string>
+    <string name="tts_initialization_error">شروع موتور متن به گفتار ناموفق بود.</string>
     <string name="simulate_your_location_gpx_descr">موقعیت خود را با استفاده از یک رد GPX ضبط‌شده شبیه‌سازی کنید.</string>
     <string name="exported_osmand_profile">پروفایل OsmAnd:‏ %1$s</string>
     <string name="monthly_map_updates">به‌روزرسانی‌های ماهانهٔ نقشه</string>
@@ -3819,4 +3819,20 @@
     <string name="quick_action_mapillary_show">آشکارکردن مپیلاری</string>
     <string name="quick_action_mapillary_hide">پنهان‌کردن مپیلاری</string>
     <string name="quick_action_showhide_mapillary_descr">دکمه‌ای برای آشکار/پنهان کردن لایهٔ مپیلاری روی نقشه.</string>
+    <string name="uninstall_speed_cameras">حذف نصب دوربین‌های سرعت</string>
+    <string name="shared_string_uninstall_and_restart">حذف نصب و شروع دوباره</string>
+    <string name="shared_string_legal">قانونی</string>
+    <string name="shared_string_uninstall">حذف نصب</string>
+    <string name="shared_string_bearing">سویه</string>
+    <string name="item_deleted">‏%1$s حذف شد</string>
+    <string name="speed_cameras_restart_descr">برای اینکه دادهٔ دوربین سرعت کاملاً حذف شود، یک بار برنامه را ببندید و باز کنید.</string>
+    <string name="speed_camera_pois">‏POIهای دوربین سرعت</string>
+    <string name="speed_cameras_legal_descr">قانونِ برخی کشورها استفاده از نرم‌افزارهای هشداردهندهٔ دوربین سرعت را ممنوع کرده است. 
+\n
+\nشما باید بر اساس قانون کشور خود تصمیم بگیرید.
+\n
+\nباانتخاب %1$s هشدارها و اخطارهای دوربین سرعت را دریافت می‌کنید.
+\n
+\nباانتخاب %2$s تا زمانی که OsmAnd را دوباره نصب کنید، تمام دادهٔ مربوط به دوربین‌های سرعت (هشدارها، اعلان‌ها، نقاط توجه یا POIs) حذف می‌شود.</string>
+    <string name="speed_cameras_alert">قانونِ برخی از کشورها استفاده از هشداردهندهٔ دوربین سرعت را ممنوع کرده است.</string>
 </resources>
