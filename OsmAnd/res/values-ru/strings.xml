@@ -3785,4 +3785,21 @@
     <string name="quick_action_mapillary_hide">Скрыть Mapillary</string>
     <string name="quick_action_mapillary_show">Показать Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Переключатель, чтобы показать или скрыть слой Mapillary на карте.</string>
+    <string name="shared_string_legal">Законодательство</string>
+    <string name="speed_cameras_legal_descr">В некоторых странах и регионах использование предупреждений о камерах контроля скорости запрещено законом.
+\n
+\nВам нужно сделать выбор в зависимости от законодательства вашей страны.
+\n
+\nВыберите \"%1$s\", чтобы получать предупреждения о камерах контроля скорости.
+\n
+\nВыберите \"%2$s\", чтобы удалить все данные, связанные с камерами контроля скорости (уведомления, предупреждения и POI), до полной переустановки OsmAnd.</string>
+    <string name="keep_active">Оставить включёнными</string>
+    <string name="uninstall_speed_cameras">Удалить камеры контроля скорости</string>
+    <string name="speed_camera_pois">POI камер контроля скорости</string>
+    <string name="speed_cameras_alert">Оповещение о камерах контроля скорости в некоторых странах запрещено законом.</string>
+    <string name="shared_string_bearing">Ориентация</string>
+    <string name="item_deleted">Удалено: %1$s</string>
+    <string name="speed_cameras_restart_descr">Перезапуск необходим для полного удаления данных камер контроля скорости.</string>
+    <string name="shared_string_uninstall_and_restart">Удалить и перезапустить</string>
+    <string name="shared_string_uninstall">Удалить</string>
 </resources>

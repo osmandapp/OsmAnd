@@ -3768,4 +3768,21 @@
     <string name="quick_action_mapillary_hide">Masquer Mapillary</string>
     <string name="quick_action_mapillary_show">Afficher Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Bouton pour afficher ou masquer la couche Mapillary sur la carte.</string>
+    <string name="speed_cameras_legal_descr">Dans certains pays ou régions, l\'utilisation d\'avertisseurs de radars est interdit par la loi.
+\n
+\nVous devez faire un choix en fonction de la loi de votre pays.
+\n
+\nSélectionnez %1$s et vous recevrez des alertes et des avertissements sur les radars.
+\n
+\nSélectionnez %2$s. Toutes les données relatives aux radars (alertes, notifications, PI) seront supprimées.</string>
+    <string name="keep_active">Garder actif</string>
+    <string name="speed_cameras_restart_descr">Un redémarrage est nécessaire pour supprimer complètement les données des radars.</string>
+    <string name="uninstall_speed_cameras">Désinstaller les radars</string>
+    <string name="shared_string_legal">Légal</string>
+    <string name="speed_camera_pois">PI radars</string>
+    <string name="shared_string_uninstall">Désinstaller</string>
+    <string name="speed_cameras_alert">Les alertes radars sont interdites par la loi dans certains pays.</string>
+    <string name="shared_string_bearing">Direction</string>
+    <string name="item_deleted">%1$s supprimé</string>
+    <string name="shared_string_uninstall_and_restart">Désinstaller et redémarrer</string>
 </resources>

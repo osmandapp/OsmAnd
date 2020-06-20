@@ -3776,4 +3776,14 @@
     <string name="quick_action_mapillary_hide">إخفاء مابيلاري</string>
     <string name="quick_action_mapillary_show">إظهار مابيلاري</string>
     <string name="quick_action_showhide_mapillary_descr">إظهار أو إخفاء طبقة مابيلاري على الخريطة.</string>
+    <string name="speed_camera_pois">POI كاميرا مراقبة السرعة</string>
+    <string name="uninstall_speed_cameras">إلغاء تثبيت كاميرات السرعة</string>
+    <string name="shared_string_legal">قانوني</string>
+    <string name="keep_active">ابقا نشطا</string>
+    <string name="shared_string_uninstall">إلغاء التثبيت</string>
+    <string name="speed_cameras_alert">يحظر القانون تنبيهات كاميرات السرعة في بعض البلدان.</string>
+    <string name="shared_string_bearing">اتجاه</string>
+    <string name="item_deleted">%1$s محذوفة</string>
+    <string name="speed_cameras_restart_descr">إعادة التشغيل مطلوبة لحذف بيانات كاميرا السرعة بالكامل.</string>
+    <string name="shared_string_uninstall_and_restart">إلغاء التثبيت وإعادة التشغيل</string>
 </resources>

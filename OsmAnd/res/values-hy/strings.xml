@@ -2931,4 +2931,15 @@
 \nՄի օր - 1440 րոպե:
 \nՄեկ շաբաթ - 10.080 րոպե:
 \nՄեկ ամիս - 43.829 րոպե:</string>
+    <string name="keep_active">Պահել ակտիվ</string>
+    <string name="shared_string_uninstall">Ջնջել</string>
+    <string name="speed_cameras_alert">Որոշ երկրներում արագության վերահսկողության տեսախցիկների ծանուցումը արգելված է օրենքով ։</string>
+    <string name="quick_action_showhide_mapillary_title">Ցույց տալ/Թաքցնել Mapillary</string>
+    <string name="quick_action_mapillary_hide">Թաքցնել</string>
+    <string name="quick_action_mapillary_show">Ցույց տալ Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Անջատիչ - Mapillary շերտը ցույց տալու կամ թաքցնել ու քարտեզի վրա:</string>
+    <string name="shared_string_bearing">Կողմնորոշում</string>
+    <string name="item_deleted">%1$s ջնջվեց</string>
+    <string name="speed_cameras_restart_descr">Անհրաժեշտ է վերագործարկում արագության խցիկնեևի տվյալները ամբողջությամբ ջնջելու համար:</string>
+    <string name="shared_string_uninstall_and_restart">Ջնջել և վերագործարկեք</string>
 </resources>
