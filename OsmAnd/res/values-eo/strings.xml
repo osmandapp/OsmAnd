@@ -507,7 +507,7 @@
     <string name="navigation_over_track">Ĉu ekigi navigadon laŭlonge de spuro?</string>
     <string name="avoid_roads_msg">Elekti evitendajn vojojn por montri alternativajn kursojn</string>
     <string name="speak_pedestrian">Pasejoj zebrostriaj</string>
-    <string name="rendering_attr_roadStyle_name">Voja stilo</string>
+    <string name="rendering_attr_roadStyle_name">Stilo de vojoj</string>
     <string name="rendering_attr_roadStyle_description">Kiel vidigi vojojn</string>
     <string name="rendering_value__name">Norma</string>
     <string name="rendering_value_default_name">Norma</string>
@@ -761,8 +761,8 @@
     <string name="access_hint_enter_category">Entajpu kategorion</string>
     <string name="access_hint_enter_description">Entajpu priskribon.</string>
     <string name="access_default_color">Norma koloro</string>
-    <string name="map_widget_magnetic_bearing">Magneta birado</string>
-    <string name="map_widget_bearing">Relativa birado</string>
+    <string name="map_widget_magnetic_bearing">Magneta direkto</string>
+    <string name="map_widget_bearing">Relativa direkto</string>
     <string name="access_disable_offroute_recalc">Ne ŝanĝi kurson kiam devoje</string>
     <string name="access_disable_offroute_recalc_descr">Ne aŭtomate rekalkuli kurson, kiam vi forlasis ĝustan vojon.</string>
     <string name="access_disable_wrong_direction_recalc">Ne ŝanĝi kurson kiam kontraŭdirekte</string>
@@ -1305,14 +1305,14 @@
     <string name="live_monitoring_interval">Intervalo de enreta kurs-registrado</string>
     <string name="live_monitoring_interval_descr">Difini intervalon de enreta kurs-registrado.</string>
     <string name="live_monitoring_url">Adreso de enreta kurs-registrado</string>
-    <string name="live_monitoring_url_descr">Difini la retadreson uzante la jenajn argumentojn:
-\n lat={0} (latitudo),
-\n lon={1} (longitudo),
-\n timestamp={2} (tempmarko),
-\n hdop={3} (horizontala diluo de precizo),
-\n altitude={4} (altitudo),
-\n speed={5} (rapido),
-\n bearing={6} (birado).</string>
+    <string name="live_monitoring_url_descr">Difini la retadreson uzante la jenajn argumentojn: 
+\n lat={0} (latitudo), 
+\n lon={1} (longitudo), 
+\n timestamp={2} (tempmarko), 
+\n hdop={3} (horizontala diluo de precizo), 
+\n altitude={4} (altitudo), 
+\n speed={5} (rapido), 
+\n bearing={6} (direkto).</string>
     <string name="change_markers_position">Ŝanĝi pozicion de marko</string>
     <string name="current_track">Nuna spuro</string>
     <string name="gpx_monitoring_disabled_warn">Konservu kurson uzante GPX-fenestraĵon aŭ per \'Registrado de kurso\' agordoj.</string>
@@ -3459,7 +3459,7 @@
     <string name="monitoring_min_distance_descr">Tiu ĉi filtrilo preventas de registri la ekzaktaj kopioj de punktoj, kiam malmulte da movo okazis, igas la spurojn aspekti pli bele sen antaŭa pritraktado.</string>
     <string name="monitoring_min_distance_descr_side_effect">Kromefiko: periodoj de ripozoj ne estos registritaj aŭ estos registritaj nur per unuopaj punktoj. Etaj movoj (ekz. mallongaj devojiĝoj en via ekskurso) povas ne esti registritaj. Via dosiero enhavos malpli da informoj por pritrakti kaj estos malpli preciza per escepti malnecesajn punktojn kaj havos la saman ekzaktecon (ĝustecon): mezureraroj kaŭzitaj pro misricevo aŭ difektoj de GPS-cirkvitaro plue aperos.</string>
     <string name="live_monitoring_adress">Retadreso</string>
-    <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, birado={6}.</string>
+    <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, direkto={6}.</string>
     <string name="monitoring_notification">Sciigo</string>
     <string name="monitoring_min_speed">Minimuma rapido</string>
     <string name="monitoring_min_accuracy">Minimuma precizo</string>
@@ -3786,4 +3786,21 @@
     <string name="quick_action_mapillary_hide">Kaŝi Mapillary</string>
     <string name="quick_action_mapillary_show">Montri Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Ŝaltilo por montri aŭ kaŝi tavolon de Mapillary sur la mapo.</string>
+    <string name="uninstall_speed_cameras">Malinstali informojn pri rapidkontroliloj</string>
+    <string name="shared_string_legal">Leĝaj</string>
+    <string name="speed_camera_pois">Pozicioj de rapidkontroliloj</string>
+    <string name="speed_cameras_legal_descr">En iuj landoj kaj regionoj uzado de aplikaĵoj avertantaj pri rapidkontroliloj estas kontraŭleĝa.
+\n
+\nVi devas elekti laŭleĝe de via lando.
+\n
+\nElektu “%1$s” por pluigi ricevi avertojn pri rapidkontroliloj.
+\n
+\nElektu “%2$s” por forigi (ĝis la reinstalo de OsmAnd) ĉiujn datumojn pri rapidkontrolilojn: avertojn, sciigojn, poziciojn.</string>
+    <string name="keep_active">Plue uzi</string>
+    <string name="shared_string_uninstall">Malinstali</string>
+    <string name="speed_cameras_alert">Avertoj pri rapidkontroliloj estas kontraŭleĝaj en iuj landoj.</string>
+    <string name="shared_string_bearing">Direkto</string>
+    <string name="item_deleted">%1$s forigita</string>
+    <string name="speed_cameras_restart_descr">Restarto estas necesa por tute forigi datumojn pri rapidkontroliloj.</string>
+    <string name="shared_string_uninstall_and_restart">Malinstali kaj restartigi</string>
 </resources>
