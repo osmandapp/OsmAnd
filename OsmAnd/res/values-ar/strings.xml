@@ -977,7 +977,7 @@
     <string name="shared_string_my_favorites">المفضلة</string>
     <string name="shared_string_tracks">المسارات</string>
     <string name="rendering_category_hide">إخفاء</string>
-    <string name="configure_map">تكوين الخريطة</string>
+    <string name="configure_map">إعداد الخريطة</string>
     <string name="layer_map">مصدر الخريطة…</string>
     <string name="map_source">مصدر الخريطة</string>
     <string name="layer_amenity_label">عرض أسماء المفضلة</string>
@@ -1195,7 +1195,7 @@
     <string name="rendering_attr_hideAccess_name">قيود الدخول</string>
     <string name="rendering_attr_showAccess_name">عرض قيود الدخول</string>
     <string name="rendering_attr_showSurfaces_name">عرض سطح الطريق</string>
-    <string name="rendering_attr_showCycleRoutes_name">إظهار مسارات الدراجات الهوائية</string>
+    <string name="rendering_attr_showCycleRoutes_name">إظهار مسارات الدراجات</string>
     <string name="delay_navigation_start">بدء التوجيه المفصل تلقائياً</string>
     <string name="gpx_info_subtracks">مسارات فرعية: %1$s</string>
     <string name="gpx_info_waypoints">نقاط الطريق: %1$s</string>
@@ -1669,7 +1669,7 @@
     <string name="select_voice_provider">اختر التوجيه الصوتي</string>
     <string name="select_voice_provider_descr">اختر أو قم بتحميل التوجيه الصوتي الخاص بلغتك.</string>
     <string name="no_location_permission">منح الوصول إلى بيانات الموقع.</string>
-    <string name="rendering_attr_horseRoutes_name">إظهار مسارات الخيول</string>
+    <string name="rendering_attr_horseRoutes_name">مسارات الخيول</string>
     <string name="shared_string_hide">إخفاء</string>
     <string name="av_video_quality_low">أقل جودة</string>
     <string name="av_video_quality_high">أعلى جودة</string>
@@ -1765,7 +1765,7 @@
     <string name="upload_osm_note_description">قم بتحميل مذكرة OSM الخاصة بك دون الكشف عن هويتك أو باستخدام ملف تعريف OpenStreetMap.org .</string>
     <string name="add_points_to_map_markers_q">إضافة جميع النقاط إلى علامات الخريطة؟</string>
     <string name="clear_markers_history_q">مسح السجلات ؟</string>
-    <string name="rendering_attr_showMtbRoutes_name">إظهار مسارات الدراجات الجبلية</string>
+    <string name="rendering_attr_showMtbRoutes_name">إظهار مسارات الدراجة الجبلية</string>
     <string name="clear_updates_proposition_message">يمكنك إزالة التحديثات المحملة والرجوع إلى الإصدار الأصلي للخريطة</string>
     <string name="add_time_span">إضافة فترة زمنية</string>
     <string name="item_removed">تمت إزالة العنصر</string>
@@ -1896,9 +1896,9 @@
     <string name="routing_attr_avoid_borders_description">تجنب عبور الحدود الوطنية</string>
     <string name="routing_attr_height_description">تحديد الارتفاع الأعلى المسموح به على الطرق.</string>
     <string name="disable_complex_routing_descr">تعطيل 2-مرحلة التوجيه للملاحة بالسيارة.</string>
-    <string name="rendering_attr_alpineHiking_name">إظهار مسارات تسلق جبال الألب</string>
+    <string name="rendering_attr_alpineHiking_name">مقياس التنزه في جبال الألب (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">تقديم المسارات وفقاً لمقياس SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">كيفية اظهار رموز طبقة التسلق (الهايكنق)</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">تراكب رمز التسلق</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">تقديم المسارات وفقاً لآثار OSMC.</string>
     <string name="local_index_description">انقر فوق أي عنصر لمعرفة المزيد من التفاصيل، اضغط وواصل الضغط للتعطيل أو الحذف. البيانات الحالية على الجهاز (%1$s متاح):</string>
     <string name="keep_informing_descr">إعادة إعلان تعليمات الملاحة في فترات منتظمة.</string>
@@ -2623,7 +2623,7 @@
     <string name="shared_string_total">الإجمالي</string>
     <string name="clear_all_intermediates">إزالة كافة النقاط الوسيطة</string>
     <string name="group_deleted">تم حذف المجموعة</string>
-    <string name="rendering_attr_whiteWaterSports_name">إظهار مسارات قوارب التجديف</string>
+    <string name="rendering_attr_whiteWaterSports_name">رياضات الماء المزبد</string>
     <string name="distance_farthest">المسافة: الأبعد أولاً</string>
     <string name="distance_nearest">المسافة: الأقرب أولاً</string>
     <string name="enter_lat_and_lon">أدخل خط العرض وخط الطول</string>
