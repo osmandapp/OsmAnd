@@ -87,6 +87,12 @@ public class OsmMapUtils {
 	}
 	
 	public static LatLon getComplexPolyCenter(Collection<Node> outer, List<List<Node>> inner) {
+		if (outer.size() <= 5 && inner == null) {
+			List<Node> sub = new ArrayList<>(outer);
+			
+			return getWeightCenterForNodes(sub.subList(0, sub.size()-1));
+		}
+		
 		final List<List<LatLon>> rings = new ArrayList<>();
 		List<LatLon> outerRing = new ArrayList<>();
 		
