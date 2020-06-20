@@ -3794,4 +3794,14 @@
     <string name="quick_action_mapillary_hide">הסתרת Mapillary</string>
     <string name="quick_action_mapillary_show">הצגת Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">מפסק להצגה או הסתרה של שכבת Mapillary על גבי המפה.</string>
+    <string name="uninstall_speed_cameras">הסרת מצלמות מהירות</string>
+    <string name="shared_string_legal">משפטי</string>
+    <string name="speed_camera_pois">נקודת עניין של מצלמת מהירות</string>
+    <string name="keep_active">להשאיר פעיל</string>
+    <string name="shared_string_uninstall">הסרה</string>
+    <string name="speed_cameras_alert">אזהרות מפני מצלמות מהירות אסורות על פי חוק בחלק מהמדינות.</string>
+    <string name="shared_string_bearing">תכווין</string>
+    <string name="item_deleted">%1$s נמחקו</string>
+    <string name="speed_cameras_restart_descr">נדרשת הפעלה מחדש כדי למחוק לחלוטין את נתוני מצלמות המהירות.</string>
+    <string name="shared_string_uninstall_and_restart">הסרה והפעלה מחדש</string>
 </resources>
