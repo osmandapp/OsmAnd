@@ -3745,10 +3745,10 @@
     <string name="mercator_projection">Odwzorowanie Merkatora</string>
     <string name="storage_format">Format pamięci masowej</string>
     <string name="map_source_zoom_levels">Wybierz minimalny i maksymalne powiększenie, przy którym mapy online będą wyświetlane lub wczytywane.</string>
-    <string name="map_source_zoom_levels_descr">Te parametry wpłyną na wyświetlanie, gdy są używane jako mapa lub nakładka/podkład.
-\n
+    <string name="map_source_zoom_levels_descr">Wplynie na ekran, gdy są używane jako mapa lub nakładka/podkład. 
+\n 
 \n%1$s: Mapa będzie ograniczona do wybranych powiększeń. 
-\n
+\n 
 \n%2$s: Poziomy powiększenia na których początkowe kafelki będą widoczne. Skalowanie w dół lub w górę nastąpi niezależnie od tych wartości.</string>
     <string name="expire_time_descr">Buforowane kafelki zostaną ponownie pobrane po określonej liczbie minut. Pozostaw to pole puste, aby nigdy nie odświeżać kafelków dla tego źródła. 
 \n 
@@ -3764,7 +3764,7 @@
     <string name="default_screen_timeout">Domyślne wygaszanie ekranu</string>
     <string name="shared_string_tones">tony</string>
     <string name="shared_string_meters">metry</string>
-    <string name="details_dialog_decr">Kontroluj widoczność dodatkowych szczegółów na mapie</string>
+    <string name="details_dialog_decr">Pokaż lub ukryj dodatkowe szczegóły mapy</string>
     <string name="shared_string_night_map">Mapa nocna</string>
     <string name="shared_string_all_time">Cały czas</string>
     <string name="vessel_height_warning">Możesz ustawić wysokość statku, aby unikać niskich mostów. Uwaga: dla mostów zwodzonych liczymy wysokość podniesionego mostu.</string>
@@ -3774,4 +3774,33 @@
     <string name="quick_action_showhide_mapillary_title">Pokaż/ukryj Mapillary</string>
     <string name="quick_action_mapillary_hide">Ukryj Mapillary</string>
     <string name="quick_action_mapillary_show">Pokaż Mapillary</string>
+    <string name="width_limit_description">Wprowadź szerokość pojazdu, niektóre restrykcje dróg mogą dotyczyć szerokich pojazdów.</string>
+    <string name="height_limit_description">Wprowadź wysokość pojazdu, niektóre restrykcje dróg mogą dotyczyć wysokich pojazdów.</string>
+    <string name="weight_limit_description">Wprowadź wagę pojazdu, niektóre restrykcje dróg mogą dotyczyć ciężkich pojazdów.</string>
+    <string name="shared_string_always">Zawsze</string>
+    <string name="screen_control">Kontrola ekranu</string>
+    <string name="system_screen_timeout_descr">Wyłącza ekran zgodnie z systemowym wygaszaniem ekranu.</string>
+    <string name="system_screen_timeout">Wygaś ekran zgodnie z ustawieniami systemu</string>
+    <string name="turn_screen_on_descr">Wybierz opcje przebudzania ekranu (upewnij się, że OsmAnd jest na pierwszym planie gdy urządzenie jest zablokowane):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Każda instrukcja nawigacji włączy ekran.</string>
+    <string name="turn_screen_on_navigation_instructions">Instrukcje nawigacji</string>
+    <string name="uninstall_speed_cameras">Odinstaluj fotoradary</string>
+    <string name="shared_string_legal">Prawny</string>
+    <string name="speed_camera_pois">Punkty fotoradarów</string>
+    <string name="speed_cameras_legal_descr">W niektórych krajachi regionach uzywanie aplikacji ostrzegających o fotoradarach jest zabronione przez prawo. 
+\n
+\nMusisz dokonać wyboru w zależności od prawa danego kraju. 
+\n
+\nWybierz %1$S i będziesz otrzymywać powiadomienia i ostrzeżenia o fotoradarach. 
+\n
+\nWybierz %2$s. Wszystkie dane o fotoradarach: ostrzeżenia, powiadomienia, miejsca użyteczne zostaną usunięte, aż OsmAnd zostanie zainstalowany ponownie.</string>
+    <string name="keep_active">Nie wyłączaj</string>
+    <string name="shared_string_uninstall">Odinstaluj</string>
+    <string name="speed_cameras_alert">Ostrzeżenia o fotoradarach są prawnie zabronione w niektórych krajach.</string>
+    <string name="add_online_source">Dodaj źródło online</string>
+    <string name="clear_tiles_warning">Zastosowanie tych zmian wyczyści dane z pamięci podręcznej dla tego źródła kafelków</string>
+    <string name="shared_string_bearing">Kierunek</string>
+    <string name="item_deleted">Usunięto %1$s</string>
+    <string name="speed_cameras_restart_descr">Ponowne uruchomienie jest wymagane, żeby całkowicie usunąć dane fotoradarów.</string>
+    <string name="shared_string_uninstall_and_restart">Odinstaluj i zrestartuj</string>
 </resources>
