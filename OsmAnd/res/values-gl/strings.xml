@@ -1393,7 +1393,7 @@
     <string name="anonymous_user">Usuario anónimo</string>
     <string name="logged_as">Identificado como %1$s</string>
     <string name="speak_pedestrian">Pasos de peóns</string>
-    <string name="rendering_attr_roadStyle_name">Estilo da estradas</string>
+    <string name="rendering_attr_roadStyle_name">Estilo das estradas</string>
     <string name="rendering_value_default_name">Predeterminado</string>
     <string name="rendering_value_orange_name">Laranxa</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas de estradas alemás</string>
@@ -3813,4 +3813,21 @@ Lon %2$s</string>
     <string name="quick_action_mapillary_hide">Agochar o Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Un botón para amosar ou agochar a capa do Mapillary no mapa.</string>
     <string name="quick_action_mapillary_show">Amosar o Mapillary</string>
+    <string name="uninstall_speed_cameras">Desinstalar radares de velocidade</string>
+    <string name="shared_string_legal">Legal</string>
+    <string name="speed_camera_pois">PDI de radares de velocidade</string>
+    <string name="speed_cameras_legal_descr">Nalgúns países ou rexións, o emprego de aplicacións de aviso de radares está prohibido por lei.
+\n
+\nTes que facer unha escolla, dependendo da lei do teu país.
+\n
+\nEscolle %1$s e recibirás alertas e avisos sobre radares de velocidade.
+\n
+\nEscolle %2$s. Todos os datos relacionados de radares de velocidade: alertas, notificacións e PDI serán eliminados até que o OsmAnd sexa reinstalado de xeito completo.</string>
+    <string name="keep_active">Manter activo</string>
+    <string name="shared_string_uninstall">Desinstalar</string>
+    <string name="speed_cameras_restart_descr">É necesario reiniciar para eliminar de xeito completo os datos do radar de velocidade.</string>
+    <string name="speed_cameras_alert">As alertas de radares de velocidade nalgúns países están prohibidas por lei.</string>
+    <string name="shared_string_bearing">Levando</string>
+    <string name="item_deleted">%1$s eliminado</string>
+    <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>
 </resources>
