@@ -562,8 +562,8 @@
     <string name="clear_intermediate_points">Limpiar destinos intermedios</string>
     <string name="keep_intermediate_points">Mantener destinos intermedios</string>
     <string name="new_directions_point_dialog">Ya se definieron destinos intermedios.</string>
-    <string name="context_menu_item_directions_to">Llegar hasta aquí</string>
-    <string name="context_menu_item_directions_from">Ir desde aquí</string>
+    <string name="context_menu_item_directions_to">Ir hasta</string>
+    <string name="context_menu_item_directions_from">Ir desde</string>
     <string name="route_descr_map_location">Mapa:</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
     <string name="route_descr_destination">Destino</string>
@@ -3787,4 +3787,25 @@
     <string name="vessel_height_limit_description">Define la altura de la embarcación para evitar puentes bajos. Tener en cuenta que si el puente es móvil, usaremos su altura en estado abierto.</string>
     <string name="vessel_height_warning">Puedes definir la altura de la embarcación para evitar puentes bajos. Tener en cuenta que si el puente es móvil, usaremos su altura en estado abierto.</string>
     <string name="vessel_width_limit_description">Define el ancho de la embarcación para evitar puentes estrechos</string>
+    <string name="speed_cameras_alert">Las alertas de los radares de velocidad se encuentran prohibidas por ley en algunos países.</string>
+    <string name="speed_cameras_legal_descr">En algunos países o regiones, las alertas de los radares de velocidad se encuentran prohibidas por ley.
+\n
+\nDebes elegir dependiendo de las leyes del país.
+\n
+\nPulsa en «%1$s», para recibir alertas y advertencias sobre los radares de velocidad.
+\n
+\nPulsa en «%2$s», para borrar todos los datos relacionados con los radares de velocidad (alertas, notificaciones y PDI) hasta reinstalar OsmAnd completamente.</string>
+    <string name="uninstall_speed_cameras">Desinstalar radares de velocidad</string>
+    <string name="speed_camera_pois">PDI de los radares de velocidad</string>
+    <string name="speed_cameras_restart_descr">Se debe reiniciar para borrar completamente los datos de los radares de velocidad.</string>
+    <string name="shared_string_legal">Legal</string>
+    <string name="keep_active">Mantener</string>
+    <string name="shared_string_uninstall">Desinstalar</string>
+    <string name="quick_action_showhide_mapillary_title">Mostrar/ocultar Mapillary</string>
+    <string name="quick_action_mapillary_hide">Ocultar Mapillary</string>
+    <string name="quick_action_mapillary_show">Mostrar Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Un botón que alterna la capa de Mapillary en el mapa.</string>
+    <string name="shared_string_bearing">Rumbo</string>
+    <string name="item_deleted">%1$s borrado</string>
+    <string name="shared_string_uninstall_and_restart">Desinstalar y reiniciar</string>
 </resources>
