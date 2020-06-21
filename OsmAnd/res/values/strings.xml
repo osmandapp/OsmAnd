@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="app_mode_inline_skates">Inline skates</string>
     <string name="shared_string_uninstall_and_restart">Uninstall and Restart</string>
     <string name="speed_cameras_restart_descr">Restart is needed to completely delete speed camera data.</string>
     <string name="item_deleted">%1$s deleted</string>
