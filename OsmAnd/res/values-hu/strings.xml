@@ -3485,7 +3485,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="use_system_screen_timeout_promo">Alapértelmezésben le van tiltva: amíg az OsmAnd az előtérben fut, a kijelző nem kapcsol ki. 
 \n 
 \nAmennyiben engedélyezve van, az OsmAnd az időtúllépésre vonatkozó rendszerbeállítást használja.</string>
-    <string name="use_system_screen_timeout">Kijelző időtűllépés rendszerbeállítás használata</string>
+    <string name="use_system_screen_timeout">Kijelző időtúllépés rendszerbeállítás használata</string>
     <string name="copy_coordinates">Koordináták másolása</string>
     <string name="route_recalculation_dist_descr">Az útvonal újraszámításra kerül, amennyiben az útvonaltól való távolság több, mint a megadott paraméter</string>
     <string name="route_recalculation_dist_title">Legkisebb távolság, amely felett újraszámítja az útvonalat</string>
@@ -3655,9 +3655,9 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
 \n%2$s: Ezen nagyítási szintek között az eredeti csempék jelennek meg, ezeken kívül pedig felskálázásra vagy leskálázásra kerülnek.</string>
     <string name="shared_string_always">Mindig</string>
     <string name="screen_control">Kijelző beállításai</string>
-    <string name="system_screen_timeout">Kijelző időtűllépés rendszerbeállítás használata</string>
+    <string name="system_screen_timeout">Kijelző időtúllépés rendszerbeállítás használata</string>
     <string name="turn_screen_on_options_descr">Ezekkel a beállításokkal az OsmAnddal az előtérben ébresztheti fel a kijelzőt.</string>
-    <string name="turn_screen_on_descr">Ezek a beállítások csak akkor működnek, ha az eszköz az OsmAnddal az előtérben kerül lezárásra.</string>
+    <string name="turn_screen_on_descr">Válassza ki a kijelző felébresztési lehetőségeit (fontos, hogy az OsmAnd az előtérben fusson, amikor az eszköz lezárásra kerül):</string>
     <string name="turn_screen_on_navigation_instructions_descr">Valamennyi navigációs utasítás előtt a kijelző bekapcsolásra kerül.</string>
     <string name="turn_screen_on_navigation_instructions">Navigációs utasítások</string>
     <string name="turn_screen_on_power_button_descr">A feloldógomb megnyomásakor a kijelző az OsmAnddal az előtérben fog megjelenni.</string>
@@ -3715,9 +3715,9 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
 \n
 \nDöntsön az ön országának törvényei alapján.
 \n
-\nVálaszzsa a %1$s lehetőséget, hogy figyelmeztetéseket és riasztásokat kapjon a traffipaxokról.
+\nVálassza a %1$s lehetőséget, hogy figyelmeztetéseket és riasztásokat kapjon a traffipaxokról.
 \n
-\nVálaszzsa az %2$s lehetőséget, hogy az összes traffipax-szal kapcsolatos adat: riasztások, értesítések, POI-k törlésre kerüljenek az OsmAnd teljes újratelepítéséig.</string>
+\nVálassza az %2$s lehetőséget, hogy az összes traffipax-szal kapcsolatos adat: riasztások, értesítések, POI-k törlésre kerüljenek az OsmAnd teljes újratelepítéséig.</string>
     <string name="keep_active">Maradjanak</string>
     <string name="shared_string_uninstall">Eltávolít</string>
     <string name="speed_cameras_alert">Bizonyos országokban a traffipax riasztások törvényileg tiltottak.</string>
