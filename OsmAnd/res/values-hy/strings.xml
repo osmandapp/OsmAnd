@@ -153,7 +153,7 @@
     <string name="my_location">Իմ դիրքը</string>
     <string name="shared_string_finish">Վերջ</string>
     <string name="plan_route">Պլանավորել երթուղին</string>
-    <string name="shared_string_sort">Տեսակավորել</string>
+    <string name="shared_string_sort">Դասակարգել</string>
     <string name="coordinate_input">Կոորդինատների մուտքագրում</string>
     <string name="marker_save_as_track_descr">Արտահանեք ձեր մարկերները հետևյալ GPX ֆայլի մեջ:</string>
     <string name="marker_save_as_track">Պահպանել որպես GPX ֆայլ</string>
@@ -2010,11 +2010,11 @@
     <string name="preferred_locale_descr">Հավելվածի լեզուն (ուժի մեջ է մտնում OsmAnd-ի վերագործարկումից հետո)։</string>
     <string name="preferred_locale">Տեղայնացումը (լեզուն)</string>
     <string name="incomplete_locale">թերի</string>
-    <string name="unit_of_length_descr">Երկարության և արագության չափման միավորներ։</string>
-    <string name="unit_of_length">Երկարության միավորները</string>
+    <string name="unit_of_length_descr">Փոխել հեռավորության չափման միավորը։</string>
+    <string name="unit_of_length">Հեռավորության չափման միավոր</string>
     <string name="si_mi_feet">Մղոններ/ֆուտ</string>
     <string name="si_mi_yard">Մղոններ/յարդեր</string>
-    <string name="si_km_m">Քիլոմետր/մետր</string>
+    <string name="si_km_m">Կիլոմետր/մետր</string>
     <string name="yard">յարդ</string>
     <string name="foot">ֆուտ</string>
     <string name="mile_per_hour">մղ/ժ</string>
@@ -2942,4 +2942,29 @@
     <string name="item_deleted">%1$s ջնջվեց</string>
     <string name="speed_cameras_restart_descr">Անհրաժեշտ է վերագործարկում արագության խցիկնեևի տվյալները ամբողջությամբ ջնջելու համար:</string>
     <string name="shared_string_uninstall_and_restart">Ջնջել և վերագործարկեք</string>
+    <string name="unsupported_type_error">Չապահովվող տեսակ</string>
+    <string name="width_limit_description">Նշեք մեքենայի լայնությունը, երթուղու վրա կարող են կիրառվել սահմանափակումներ ծանր տրանսպորտային միջոցների համար։</string>
+    <string name="height_limit_description">Նշեք մեքենայի բարձրությունը, երթուղու վրա կարող են կիրառվել սահմանափակումներ ծանր տրանսպորտային միջոցների համար։</string>
+    <string name="weight_limit_description">Նշեք մեքենայի քաշը, երթուղու վրա կարող են կիրառվել սահմանափակումներ ծանր տրանսպորտային միջոցների համար։</string>
+    <string name="gpx_parse_error">OsmAnd-ի լավ ձևավորված չէ GPX, խնդրում ենք կապվել աջակցության թիմի հետ հետագա քննության համար:</string>
+    <string name="shared_string_always">Միշտ</string>
+    <string name="screen_control">Էկրանի կառավարում</string>
+    <string name="system_screen_timeout_descr">Էկրանը կանջատվի սարքի անգործության ժամանակահատվածից հետո, որը նշված է համակարգի պարամետրերում։</string>
+    <string name="turn_screen_on_descr">Էկրանի միացման կարգավորումները (սարքը կողպելուց առաջ համոզվեք, որ OsmAnd-ը գտնվում է առաջին պլանում)՝</string>
+    <string name="turn_screen_on_power_button_disabled">Անջատված է: Դուք պետք է միացնել «Պահել էկրանը միացված», «Արթնանալուց հետո աշխատելու ժամանակը» բաժնում:</string>
+    <string name="turn_screen_on_power_button_descr">"Սեղմելով սարքի միացման կոճակը հնարավորություն կտա ցուցադրել  OsmAnd-ը արգելափակման էկրանին։"</string>
+    <string name="map_source_zoom_levels">Սահմանեք նվազագույն և առավելագույն մասշտաբի չափերը առցանց քարտեզը ցուցադրելու կամ ներբեռնելու համար:</string>
+    <string name="system_screen_timeout">Օգտագործել համակարգի կարգավորումը</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Յուրաքանչյուր նավիգացիոն հրահանգը կմիացնի էկրանը:</string>
+    <string name="turn_screen_on_navigation_instructions">Նավիգացիոն կարգավորումներ</string>
+    <string name="uninstall_speed_cameras">Հեռացրեք արագության տեսախցիկները</string>
+    <string name="shared_string_legal">Օրենսդրություն</string>
+    <string name="speed_camera_pois">Արագաչափ տեսախցիկների POI-ներ</string>
+    <string name="speed_cameras_legal_descr">Որոշ երկրներում և շրջաններում արագության խցիկի ազդանշանների օգտագործումը օրենքով արգելված է:
+\n
+\nԴուք պետք է ընտրություն կատարեք ՝ համաձայն ձեր երկրի օրենսդրությունից:
+\n
+\nԸնտրեք %1$s արագության տեսախցիկների վերաբերյալ ահազանգեր ստանալու համար:
+\n
+\nԸնտրեք %2$s։ Արագության խցիկների (ծանուցումների, ազդանշանների և POI- ների) հետ կապված բոլոր տվյալները ջնջելու համար, մինչև OsmAnd- ը ամբողջովին կվերատեղակայվի:</string>
 </resources>
