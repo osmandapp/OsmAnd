@@ -32,6 +32,7 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 public class PointImageDrawable extends Drawable {
 
 	private final int DEFAULT_SIZE_ON_MAP_DP = 16;
+	private final int ICON_SIZE_VECTOR_PX = 12;
 	private final int dp_12_px;
 	private boolean withShadow;
 	private boolean synced;
@@ -168,8 +169,8 @@ public class PointImageDrawable extends Drawable {
 		if(scale != this.scale || this.favsize == 0) {
 			this.scale = scale;
 			int pixels = (int) (dp_12_px * DEFAULT_SIZE_ON_MAP_DP / 12.0);
-			this.favsize = Math.round(scale *  pixels / favIcon.getIntrinsicWidth()) * favIcon.getIntrinsicWidth();
-			this.backsize = getIntrinsicWidth();
+			this.favsize = Math.round(scale *  pixels / ICON_SIZE_VECTOR_PX) * ICON_SIZE_VECTOR_PX;
+			this.backsize = (int) (scale *  getIntrinsicWidth());
 		}
 		this.history = history;
 		Rect rect = new Rect(0, 0, backsize , backsize );
