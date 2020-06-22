@@ -54,7 +54,8 @@ public class PointImageDrawable extends Drawable {
 	private ColorFilter colorFilter;
 	private ColorFilter grayFilter;
 	private float scale = 1.0f;
-	private int size = 0;
+	private int favsize = 0;
+	private int backsize = 0;
 
 	private PointImageDrawable(PointInfo pointInfo) {
 		this.withShadow = pointInfo.withShadow;
@@ -164,19 +165,20 @@ public class PointImageDrawable extends Drawable {
 	}
 
 	public void drawPoint(Canvas canvas, float x, float y, float scale, boolean history) {
-		if(scale != this.scale || this.size == 0) {
+		if(scale != this.scale || this.favsize == 0) {
 			this.scale = scale;
 			int pixels = (int) (dp_12_px * DEFAULT_SIZE_ON_MAP_DP / 12.0);
-			this.size = Math.round(scale *  pixels/ favIcon.getIntrinsicWidth()) * favIcon.getIntrinsicWidth();
+			this.favsize = Math.round(scale *  pixels / favIcon.getIntrinsicWidth()) * favIcon.getIntrinsicWidth();
+			this.backsize = getIntrinsicWidth();
 		}
 		this.history = history;
-		Rect rect = new Rect(0, 0, size, size);
-		rect.offset((int) x - size / 2, (int) y - size/ 2);
+		Rect rect = new Rect(0, 0, backsize , backsize );
+		rect.offset((int) x - backsize / 2, (int) y - backsize / 2);
 		setBounds(rect);
-		int offsetX = rect.centerX() - size / 2;
-		int offsetY = rect.centerY() - size / 2;
-		favIcon.setBounds(offsetX, offsetY, (int) (offsetX + size),
-				offsetY + size);
+		int offsetX = rect.centerX() - favsize / 2;
+		int offsetY = rect.centerY() - favsize / 2;
+		favIcon.setBounds(offsetX, offsetY, (int) (offsetX + favsize),
+				offsetY + favsize);
 		draw(canvas);
 	}
 
