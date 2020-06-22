@@ -16,6 +16,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.BackgroundType;
@@ -30,6 +31,8 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public class PointImageDrawable extends Drawable {
 
+	private final int DEFAULT_SIZE_ON_MAP_DP = 16;
+	private final int dp_12_px;
 	private boolean withShadow;
 	private boolean synced;
 	private boolean history;
@@ -51,6 +54,7 @@ public class PointImageDrawable extends Drawable {
 	private ColorFilter colorFilter;
 	private ColorFilter grayFilter;
 	private float scale = 1.0f;
+	private int size = 0;
 
 	private PointImageDrawable(PointInfo pointInfo) {
 		this.withShadow = pointInfo.withShadow;
@@ -84,6 +88,7 @@ public class PointImageDrawable extends Drawable {
 		syncedIcon = BitmapFactory.decodeResource(res, R.drawable.ic_marker_point_14dp);
 		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN);
 		grayFilter = new PorterDuffColorFilter(res.getColor(R.color.color_favorite_gray), PorterDuff.Mode.MULTIPLY);
+		dp_12_px = AndroidUtils.dpToPx(pointInfo.ctx, 12);
 	}
 
 	private int getMapIconId(Context ctx, int iconId) {
@@ -158,28 +163,21 @@ public class PointImageDrawable extends Drawable {
 		canvas.drawBitmap(bitmap, null, bs, paintBackground);
 	}
 
-	private void drawInCenter(Canvas canvas, Rect destRect, boolean history) {
-		this.history = history;
-		final float DEFAULT_SCALE_ON_MAP_1_5 = 1.5f;
-		setBounds(destRect);
-		int offsetX = destRect.centerX() - (int) (favIcon.getIntrinsicWidth() / 2 * scale * DEFAULT_SCALE_ON_MAP_1_5);
-		int offsetY = destRect.centerY() - (int) (favIcon.getIntrinsicHeight() / 2 * scale * DEFAULT_SCALE_ON_MAP_1_5);
-		favIcon.setBounds(offsetX, offsetY, (int) (offsetX + favIcon.getIntrinsicWidth() * scale * DEFAULT_SCALE_ON_MAP_1_5),
-				offsetY + (int) (favIcon.getIntrinsicHeight() * scale * DEFAULT_SCALE_ON_MAP_1_5));
-		draw(canvas);
-	}
-
 	public void drawPoint(Canvas canvas, float x, float y, float scale, boolean history) {
-		this.scale = scale;
-		int scaledWidth = getIntrinsicWidth();
-		int scaledHeight = getIntrinsicHeight();
-		if (scale != 1.0f) {
-			scaledWidth *= scale;
-			scaledHeight *= scale;
+		if(scale != this.scale || this.size == 0) {
+			this.scale = scale;
+			int pixels = (int) (dp_12_px * DEFAULT_SIZE_ON_MAP_DP / 12.0);
+			this.size = Math.round(scale *  pixels/ favIcon.getIntrinsicWidth()) * favIcon.getIntrinsicWidth();
 		}
-		Rect rect = new Rect(0, 0, scaledWidth, scaledHeight);
-		rect.offset((int) x - scaledWidth / 2, (int) y - scaledHeight / 2);
-		drawInCenter(canvas, rect, history);
+		this.history = history;
+		Rect rect = new Rect(0, 0, size, size);
+		rect.offset((int) x - size / 2, (int) y - size/ 2);
+		setBounds(rect);
+		int offsetX = rect.centerX() - size / 2;
+		int offsetY = rect.centerY() - size / 2;
+		favIcon.setBounds(offsetX, offsetY, (int) (offsetX + size),
+				offsetY + size);
+		draw(canvas);
 	}
 
 	public void drawSmallPoint(Canvas canvas, float x, float y, float scale) {
