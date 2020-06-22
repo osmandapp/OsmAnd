@@ -17,14 +17,11 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SpeedCamerasBottomSheet.class.getName();
-	public static final String SPEED_CAMERA_KEY_NAME = "speed_camera";
 	private OsmandApplication app;
-	private OsmandSettings settings;
 
 	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment) {
 		if (!fm.isStateSaved()) {
@@ -38,7 +35,6 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
-		settings = app.getSettings();
 	}
 
 	@Override

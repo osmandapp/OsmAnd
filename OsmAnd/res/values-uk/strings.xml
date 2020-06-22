@@ -3747,11 +3747,11 @@
     <string name="mercator_projection">Проєкція Меркатора</string>
     <string name="storage_format">Формат зберігання</string>
     <string name="map_source_zoom_levels">Встановіть найменший та найбільший рівень масштабування для відображення або завантаження мережевої мапи.</string>
-    <string name="map_source_zoom_levels_descr">Впливає на екран, коли використовується як мапа чи накладка/підкладка.
-\n
-\n%1$s: мапа обмежена вибраним проміжком масштабування.
-\n
-\n%2$s: рівні масштабування, за яких буде видно первинні тайли; збільшення і зменшення масштабу може відбуватися поза цими значенями.</string>
+    <string name="map_source_zoom_levels_descr">Впливає на екран, коли використовується як мапа чи накладка/підкладка. 
+\n 
+\n%1$s: мапа обмежена вибраним проміжком масштабування. 
+\n 
+\n%2$s: рівні масштабування, за яких буде видно первинні тайли; зміна масштабу може відбуватися поза цими значеннями.</string>
     <string name="expire_time_descr">Кешовані тайли буде повторно завантажено через вказану кількість хвилин. Залиште це поле порожнім, щоб ніколи не оновлювати плитки для цього джерела.
 \n 
 \nОдин день - 1440 хвилин. 
@@ -3777,4 +3777,8 @@
     <string name="vessel_height_warning">Ви можете встановити висоту судна, щоб уникнути низьких мостів. Майте на увазі, якщо міст рухомий, використовуватиметься його висота у відкритому стані.</string>
     <string name="vessel_height_limit_description">Встановіть висоту судна, щоб уникнути низьких мостів. Майте на увазі, якщо міст рухомий, використовуватиметься його висота у відкритому стані.</string>
     <string name="vessel_width_limit_description">Встановіть ширину судна, щоб уникнути вузьких мостів</string>
+    <string name="quick_action_showhide_mapillary_title">Увімкнути/вимкнути Mapillary</string>
+    <string name="quick_action_mapillary_hide">Вимкнути Mapillary</string>
+    <string name="quick_action_mapillary_show">Увімкнення шару Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Перемикач увімкнення або вимкнення шару Mapillary на мапі.</string>
 </resources>

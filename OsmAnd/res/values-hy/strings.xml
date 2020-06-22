@@ -153,7 +153,7 @@
     <string name="my_location">Իմ դիրքը</string>
     <string name="shared_string_finish">Վերջ</string>
     <string name="plan_route">Պլանավորել երթուղին</string>
-    <string name="shared_string_sort">Տեսակավորել</string>
+    <string name="shared_string_sort">Դասակարգել</string>
     <string name="coordinate_input">Կոորդինատների մուտքագրում</string>
     <string name="marker_save_as_track_descr">Արտահանեք ձեր մարկերները հետևյալ GPX ֆայլի մեջ:</string>
     <string name="marker_save_as_track">Պահպանել որպես GPX ֆայլ</string>
@@ -2010,11 +2010,11 @@
     <string name="preferred_locale_descr">Հավելվածի լեզուն (ուժի մեջ է մտնում OsmAnd-ի վերագործարկումից հետո)։</string>
     <string name="preferred_locale">Տեղայնացումը (լեզուն)</string>
     <string name="incomplete_locale">թերի</string>
-    <string name="unit_of_length_descr">Երկարության և արագության չափման միավորներ։</string>
-    <string name="unit_of_length">Երկարության միավորները</string>
+    <string name="unit_of_length_descr">Փոխել հեռավորության չափման միավորը։</string>
+    <string name="unit_of_length">Հեռավորության չափման միավոր</string>
     <string name="si_mi_feet">Մղոններ/ֆուտ</string>
     <string name="si_mi_yard">Մղոններ/յարդեր</string>
-    <string name="si_km_m">Քիլոմետր/մետր</string>
+    <string name="si_km_m">Կիլոմետր/մետր</string>
     <string name="yard">յարդ</string>
     <string name="foot">ֆուտ</string>
     <string name="mile_per_hour">մղ/ժ</string>
@@ -2931,4 +2931,110 @@
 \nՄի օր - 1440 րոպե:
 \nՄեկ շաբաթ - 10.080 րոպե:
 \nՄեկ ամիս - 43.829 րոպե:</string>
+    <string name="keep_active">Պահել ակտիվ</string>
+    <string name="shared_string_uninstall">Ջնջել</string>
+    <string name="speed_cameras_alert">Որոշ երկրներում արագության վերահսկողության տեսախցիկների ծանուցումը արգելված է օրենքով ։</string>
+    <string name="quick_action_showhide_mapillary_title">Ցույց տալ/Թաքցնել Mapillary</string>
+    <string name="quick_action_mapillary_hide">Թաքցնել</string>
+    <string name="quick_action_mapillary_show">Ցույց տալ Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Անջատիչ - Mapillary շերտը ցույց տալու կամ թաքցնել ու քարտեզի վրա:</string>
+    <string name="shared_string_bearing">Կողմնորոշում</string>
+    <string name="item_deleted">%1$s ջնջվեց</string>
+    <string name="speed_cameras_restart_descr">Անհրաժեշտ է վերագործարկում արագության խցիկնեևի տվյալները ամբողջությամբ ջնջելու համար:</string>
+    <string name="shared_string_uninstall_and_restart">Ջնջել և վերագործարկեք</string>
+    <string name="unsupported_type_error">Չապահովվող տեսակ</string>
+    <string name="width_limit_description">Նշեք մեքենայի լայնությունը, երթուղու վրա կարող են կիրառվել սահմանափակումներ ծանր տրանսպորտային միջոցների համար։</string>
+    <string name="height_limit_description">Նշեք մեքենայի բարձրությունը, երթուղու վրա կարող են կիրառվել սահմանափակումներ ծանր տրանսպորտային միջոցների համար։</string>
+    <string name="weight_limit_description">Նշեք մեքենայի քաշը, երթուղու վրա կարող են կիրառվել սահմանափակումներ ծանր տրանսպորտային միջոցների համար։</string>
+    <string name="gpx_parse_error">OsmAnd-ի լավ ձևավորված չէ GPX, խնդրում ենք կապվել աջակցության թիմի հետ հետագա քննության համար:</string>
+    <string name="shared_string_always">Միշտ</string>
+    <string name="screen_control">Էկրանի կառավարում</string>
+    <string name="system_screen_timeout_descr">Էկրանը կանջատվի սարքի անգործության ժամանակահատվածից հետո, որը նշված է համակարգի պարամետրերում։</string>
+    <string name="turn_screen_on_descr">Էկրանի միացման կարգավորումները (սարքը կողպելուց առաջ համոզվեք, որ OsmAnd-ը գտնվում է առաջին պլանում)՝</string>
+    <string name="turn_screen_on_power_button_disabled">Անջատված է: Դուք պետք է միացնել «Պահել էկրանը միացված», «Արթնանալուց հետո աշխատելու ժամանակը» բաժնում:</string>
+    <string name="turn_screen_on_power_button_descr">Սեղմելով սարքի միացման կոճակը հնարավորություն կտա ցուցադրել OsmAnd-ը արգելափակման էկրանին։</string>
+    <string name="map_source_zoom_levels">Սահմանեք նվազագույն և առավելագույն մասշտաբի չափերը առցանց քարտեզը ցուցադրելու կամ ներբեռնելու համար:</string>
+    <string name="system_screen_timeout">Օգտագործել համակարգի կարգավորումը</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Յուրաքանչյուր նավիգացիոն հրահանգը կմիացնի էկրանը:</string>
+    <string name="turn_screen_on_navigation_instructions">Նավիգացիոն կարգավորումներ</string>
+    <string name="uninstall_speed_cameras">Հեռացրեք արագության տեսախցիկները</string>
+    <string name="shared_string_legal">Օրենսդրություն</string>
+    <string name="speed_camera_pois">Արագաչափ տեսախցիկների POI-ներ</string>
+    <string name="speed_cameras_legal_descr">Որոշ երկրներում և շրջաններում արագության խցիկի ազդանշանների օգտագործումը օրենքով արգելված է:
+\n
+\nԴուք պետք է ընտրություն կատարեք ՝ համաձայն ձեր երկրի օրենսդրությունից:
+\n
+\nԸնտրեք %1$s արագության տեսախցիկների վերաբերյալ ահազանգեր ստանալու համար:
+\n
+\nԸնտրեք %2$s։ Արագության խցիկների (ծանուցումների, ազդանշանների և POI- ների) հետ կապված բոլոր տվյալները ջնջելու համար, մինչև OsmAnd- ը ամբողջովին կվերատեղակայվի:</string>
+    <string name="shared_string_items">Տարրեր</string>
+    <string name="changes_applied_to_profile">Փոփոխությունները կիրառվել են «%1$s» պրոֆիլի վրա:</string>
+    <string name="settings_item_read_error">Անհնար է կարդալ «%1$s»։</string>
+    <string name="settings_item_import_error">Անհնար է ներմուծել «%1$s»։</string>
+    <string name="settings_item_write_error">Անհնար է արձանագրել «%1$s»։</string>
+    <string name="select_track_file">Ընտրեք track-ի ֆայլը</string>
+    <string name="shared_string_languages">Լեզուներ</string>
+    <string name="shared_string_language">Լեզու</string>
+    <string name="shared_string_all_languages">Բոլոր լեզուները</string>
+    <string name="wiki_menu_download_descr">Վիքիպեդիա-ի POI-րը քարտեզի վրա դիտելու համար անհրաժեշտ են լրացուցիչ քարտեր:</string>
+    <string name="select_wikipedia_article_langs">Ընտրեք լեզուները, Վիքիպեդիայի հոդվածների համար քարտեզի վրա ցուցադրելու համար: Դուք կկարողանաք փոխել լեզուները, հոդվածը կարդու ժամանակ։</string>
+    <string name="some_articles_may_not_available_in_lang">Որոշ Վիքիփեդիայի հոդվածներ կարող են անհասանելի լինել ձեր լեզվի համար:</string>
+    <string name="lang_zhyue">Կանտոնյան Չինարեն</string>
+    <string name="lang_zhminnan">Հարավային Մին</string>
+    <string name="lang_yo">Յորուբա</string>
+    <string name="lang_war">Վարեյ</string>
+    <string name="lang_uz">Ուզբեկական</string>
+    <string name="lang_ur">Ուրդ</string>
+    <string name="lang_tt">Թաթարերեն</string>
+    <string name="lang_tg">Տաջիկերեն</string>
+    <string name="lang_sco">Շոտլանդական</string>
+    <string name="lang_scn">Сицилийский</string>
+    <string name="lang_pnb">Փանջաբի</string>
+    <string name="lang_ne">Նեպալերեն</string>
+    <string name="lang_nap">Նեապոլիտանական</string>
+    <string name="lang_my">Բիրմաներեն</string>
+    <string name="lang_mn">Մոնղոլական</string>
+    <string name="lang_min">Մինանգկաբաու</string>
+    <string name="lang_mg">Մալագասերեն</string>
+    <string name="lang_ky">Ղրղզերեն</string>
+    <string name="lang_kk">Ղազախերեն</string>
+    <string name="lang_jv">Ճավանական</string>
+    <string name="lang_gu">Գուջարաթի</string>
+    <string name="lang_cv">Չուվաշերեն</string>
+    <string name="lang_ce">Չեչենական</string>
+    <string name="lang_bar">Բավարերեն</string>
+    <string name="lang_ba">Բաշկիրերեն</string>
+    <string name="lang_an">Արագոնի</string>
+    <string name="lang_lmo">Լոմբարդի</string>
+    <string name="custom_color">Օգտվողի գույն</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="search_poi_types">Որոնում POI տեսակները</string>
+    <string name="extra_maps_menu_group">Լրացուցիչ քարտեզներ</string>
+    <string name="download_unsupported_action">Չաջակցվող գործողություն %1$s</string>
+    <string name="tracker_item">OsmAnd թրեկեր</string>
+    <string name="mapillary_item">OsmAnd և Mapillary</string>
+    <string name="quick_action_item">Արագ գործողություն</string>
+    <string name="radius_ruler_item">Շառավիղ-քանոն</string>
+    <string name="measure_distance_item">Հեռավորության չափում</string>
+    <string name="travel_item">Ճանապարհորդություն (Վիքիուղեցույց և Վիքիպեդիա)</string>
+    <string name="map_markers_item">Մարկերներ</string>
+    <string name="favorites_item">Սիրված</string>
+    <string name="subscription_osmandlive_item">Բաժանորդագրություն - OsmAnd Live</string>
+    <string name="osmand_purchases_item">OsmAnd-ի գնումները</string>
+    <string name="legend_item_description">Տեղեկանք քարտեզի խորհրդանիշներին:</string>
+    <string name="navigation_profiles_item">Նավիգացիոն պրոֆիլներ</string>
+    <string name="quick_action_transport_hide">Թաքցնել հասարակական տրանսպորտը</string>
+    <string name="quick_action_transport_show">Ցույց տալ հասարակական տրանսպորտը</string>
+    <string name="quick_action_show_hide_transport">Ցույց տալ / թաքցնել հասարակական տրանսպորտը</string>
+    <string name="quick_action_transport_descr">Կոճակ, որը ցույց է տալիս կամ թաքցնում է հասարակական տրանսպորտը քարտեզի վրա:</string>
+    <string name="create_edit_poi">Ստեղծել / Խմբագրել POI</string>
+    <string name="add_edit_favorite">Ավելացնել / Խմբագրել Սիրվածն-րը</string>
+    <string name="parking_positions">Ավտոկայանատեղ</string>
+    <string name="reset_deafult_order">Վերականգնել բնօրինակ կարգը</string>
+    <string name="back_to_editing">Վերադարծ խմբագրմանը</string>
+    <string name="quick_action_switch_profile_descr">Սեղմելով «Գործողության կոճակը» փոխում է ընտրված պրոֆիլների միջև:</string>
+    <string name="shared_string_add_profile">Ավելացնել պրոֆիլ</string>
+    <string name="change_application_profile">Փոխել hավելվածի պրոֆիլը</string>
+    <string name="profiles_for_action_not_found">Համապատասխան պրոֆիլներ չեն գտնվել:</string>
+    <string name="index_item_world_basemap_detailed">Համաշխարհային ակնարկային քարտեզ (մանրամասն)</string>
 </resources>

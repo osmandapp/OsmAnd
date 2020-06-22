@@ -632,7 +632,7 @@
     <string name="favorite_delete_multiple">%1$d Sık Kullanılanlar ve %2$d Sık Kullanılan grupları silmek istediğinizden emin misiniz\?</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nSeçenekler için uzun bas"</string>
+\nSeçenekler için uzun basın"</string>
     <string name="local_index_installed">Yerel sürüm</string>
     <string name="local_index_items_backuped">%1$d/%2$d öge devre dışı bırakıldı.</string>
     <string name="local_index_items_deleted">%1$d/%2$d öge silindi.</string>
@@ -805,7 +805,7 @@
     <string name="daynight_mode_sensor">Işık algılayıcısı</string>
     <string name="daynight_descr">Gece ve gündüz modu arasında geçişi ayarlayın.</string>
     <string name="download_files_question">{0} dosya indirilecek ({1} MB)?</string>
-    <string name="items_were_selected">{0} öğe seçildi</string>
+    <string name="items_were_selected">{0} öge seçildi</string>
     <string name="filter_existing_indexes">İndirilen</string>
     <string name="fast_route_mode_descr">En hızlı rotayı hesaplamayı etkinleştirin veya yakıt tasarrufu rotası için devre dışı bırakın.</string>
     <string name="continuous_rendering">Sürekli görselleştirme</string>
@@ -1072,7 +1072,7 @@
     <string name="shared_string_show_details">Ayrıntıları göster</string>
     <string name="rendering_value_disabled_name">Devre dışı</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ev kapı numaraları</string>
-    <string name="confirm_usage_speed_cameras">Çoğu ülkede (Almanya, Fransa, İtalya ve diğerleri) hız kamerası uyarılarının kullanımı yasal değildir. OsmAnd yasaları çiğnemeniz durumunda sorumluluk kabul etmez. Eğer bu özelliği kullanmak sizin için uygunsa \'Evet\'e tıklayın.</string>
+    <string name="confirm_usage_speed_cameras">Birçok ülkede (Almanya, Fransa, İtalya ve diğerleri) hız kamerası uyarılarının kullanımına yasalarca izin verilmemektedir. Yasaları ihlal ederseniz OsmAnd herhangi bir sorumluluk kabul etmez. Lütfen sadece bu özelliği kullanmaya uygunsanız evet seçeneğine dokunun.</string>
     <string name="shared_string_go">Git</string>
     <string name="action_create">Eylem oluştur</string>
     <string name="action_modify">Eylem düzenle</string>
@@ -1847,8 +1847,8 @@
     <string name="night">Gece</string>
     <string name="updates_size">Güncelleme boyutu</string>
     <string name="select_month_and_country">Ay ve ülke:</string>
-    <string name="item_removed">Öğe kaldırıldı</string>
-    <string name="n_items_removed">öğeler silindi</string>
+    <string name="item_removed">Öge kaldırıldı</string>
+    <string name="n_items_removed">öge kaldırıldı</string>
     <string name="shared_string_undo_all">Tümünü geri al</string>
     <string name="shared_string_type">Tür</string>
     <string name="starting_point">Başlangıç noktası</string>
@@ -3737,4 +3737,25 @@
     <string name="vessel_height_warning">Alçak köprülerden kaçınmak için gemi yüksekliğini ayarlayabilirsiniz. Köprü hareket edebiliyorsa, açık durumdaki yüksekliğini kullanacağımızı unutmayın.</string>
     <string name="vessel_height_limit_description">Alçak köprülerden kaçınmak için gemi yüksekliğini ayarlayın. Köprü hareket edebiliyorsa, açık durumdaki yüksekliğini kullanacağımızı unutmayın.</string>
     <string name="vessel_width_limit_description">Dar köprülerden kaçınmak için gemi genişliğini ayarlayın</string>
+    <string name="quick_action_showhide_mapillary_title">Mapillary\'i göster/gizle</string>
+    <string name="quick_action_mapillary_hide">Mapillary\'i gizle</string>
+    <string name="quick_action_mapillary_show">Mapillary\'i göster</string>
+    <string name="quick_action_showhide_mapillary_descr">Harita üzerinde Mapillary katmanını göstermek veya gizlemek için bir geçiş.</string>
+    <string name="uninstall_speed_cameras">Hız kameralarını kaldır</string>
+    <string name="shared_string_legal">Yasal</string>
+    <string name="speed_camera_pois">Hız kamerası POI\'leri</string>
+    <string name="speed_cameras_legal_descr">Bazı ülke veya bölgelerde hız kamerası uyarı uygulamalarının kullanımı yasalarca yasaklanmıştır.
+\n
+\nÜlkenizin yasalarına bağlı olarak bir seçim yapmanız gerekmektedir.
+\n
+\n%1$s seçeneğini seçtiğinizde hız kameraları hakkında ikaz ve uyarıları alırsınız.
+\n
+\n%2$s seçeneğini seçtiğinizde hız kameraları ile ilgili tüm veriler: uyarılar, bildirimler, POI\'ler OsmAnd tamamen yeniden kurulana kadar silinecektir.</string>
+    <string name="keep_active">Etkin tut</string>
+    <string name="speed_cameras_alert">Hız kamerası uyarıları bazı ülkelerde yasalarca yasaklanmıştır.</string>
+    <string name="shared_string_uninstall">Kaldır</string>
+    <string name="shared_string_bearing">Kerteriz</string>
+    <string name="item_deleted">%1$s silindi</string>
+    <string name="speed_cameras_restart_descr">Hız kamerası verilerini tamamen silmek için yeniden başlatma gerekmektedir.</string>
+    <string name="shared_string_uninstall_and_restart">Kaldır ve Yeniden Başlat</string>
 </resources>

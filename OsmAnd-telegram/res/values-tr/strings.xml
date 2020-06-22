@@ -103,7 +103,7 @@
     <string name="show_gps_points">GPS noktalarını göster</string>
     <string name="show_gps_points_descr">Toplanan ve gönderilen GPS noktalarının miktarını göster.</string>
     <string name="please_update_osmand">Verileri haritada görüntülemek için lütfen OsmAnd\'ı güncelleyin</string>
-    <string name="bearing">Konum açısı</string>
+    <string name="bearing">Kerteriz</string>
     <string name="gps_points_in_buffer">gönderilen (%1$d arabellekte)</string>
     <string name="points_size">%1$d nokta</string>
     <string name="shared_string_date">Tarih</string>

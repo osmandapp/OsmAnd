@@ -35,13 +35,14 @@ public class MapPoiTypes {
 	private static final Log log = PlatformUtil.getLog(MapRenderingTypes.class);
 	private String resourceName;
 	private List<PoiCategory> categories = new ArrayList<PoiCategory>();
-	private Set<String> forbiddenKeyNames = new HashSet<>();
+	private Set<String> forbiddenTypes = new HashSet<>();
 	private PoiCategory otherCategory;
 	private PoiCategory otherMapCategory;
 
 	public static final String WIKI_LANG = "wiki_lang";
 	public static final String WIKI_PLACE = "wiki_place";
 	public static final String OSM_WIKI_CATEGORY = "osmwiki";
+	public static final String SPEED_CAMERA = "speed_camera";
 
 	private PoiTranslator poiTranslator = null;
 	private boolean init;
@@ -948,11 +949,11 @@ public class MapPoiTypes {
 		}
 	}
 
-	public void setForbiddenKeyNames(Set<String> forbiddenKeyNames) {
-		this.forbiddenKeyNames = forbiddenKeyNames;
+	public void setForbiddenTypes(Set<String> forbiddenTypes) {
+		this.forbiddenTypes = forbiddenTypes;
 	}
 
-	public boolean isKeyNameForbidden(String key) {
-		return forbiddenKeyNames.contains(key);
+	public boolean isTypeForbidden(String typeName) {
+		return forbiddenTypes.contains(typeName);
 	}
 }

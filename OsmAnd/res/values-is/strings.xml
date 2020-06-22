@@ -3776,4 +3776,18 @@
     <string name="gpx_parse_error">GPX-ferill OsmAnd er gallaður, hafðu samband við aðstoðarteymið til að fá botn í þetta.</string>
     <string name="turn_screen_on_power_button_descr">Ef ýtt er á aflhappinn verður kveikt á skjánum með OsmAnd ofan á læsiskjánum.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Þú getur flutt flýtiaðgerðir inn eða út með forritasniðum.</string>
+    <string name="uninstall_speed_cameras">Fjarlægja hraðamyndavélar</string>
+    <string name="shared_string_legal">Löglegt</string>
+    <string name="speed_camera_pois">Merktar hraðamyndavélar</string>
+    <string name="keep_active">Halda virku</string>
+    <string name="speed_cameras_alert">Aðvaranir vegna hraðamyndavéla eru bannaðar með lögum í sumum löndum.</string>
+    <string name="quick_action_showhide_mapillary_title">Sýna/fela Mapillary</string>
+    <string name="quick_action_mapillary_hide">Fela Mapillary</string>
+    <string name="quick_action_mapillary_show">Sýna Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Víxlhnappur til að birta eða fela Mapillary-lagið á kortinu.</string>
+    <string name="shared_string_bearing">Stefna</string>
+    <string name="item_deleted">%1$s eytt</string>
+    <string name="speed_cameras_restart_descr">Endurræsing er nauðsynleg til að geta fjarlægt alveg gögn um hraðamyndavélar.</string>
+    <string name="shared_string_uninstall_and_restart">Fjarlægja og endurræsa</string>
+    <string name="shared_string_uninstall">Fjarlægja</string>
 </resources>

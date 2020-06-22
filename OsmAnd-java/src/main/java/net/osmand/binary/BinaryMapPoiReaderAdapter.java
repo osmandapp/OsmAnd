@@ -772,7 +772,7 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				subtype = poiTypes.replaceDeprecatedSubtype(type, subtype);
-				boolean isForbidden = poiTypes.isKeyNameForbidden(subtype);
+				boolean isForbidden = poiTypes.isTypeForbidden(subtype);
 				if (!isForbidden && (req.poiTypeFilter == null || req.poiTypeFilter.accept(type, subtype))) {
 					if (amenityType == null) {
 						amenityType = type;
