@@ -59,8 +59,13 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public int getLogoResourceId() {
+		return R.drawable.ic_plugin_wikipedia;
+	}
+
+	@Override
 	public String getName() {
-		return "";
+		return app.getString(R.string.shared_string_wikipedia);
 	}
 
 	@Override
