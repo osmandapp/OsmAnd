@@ -279,14 +279,18 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 				return false;
 			}
 			OsmandApplication app = (OsmandApplication) activity.getApplication();
+			WikipediaPlugin wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
 
 			WikipediaDialogFragment wikipediaDialogFragment = new WikipediaDialogFragment();
 			wikipediaDialogFragment.setAmenity(amenity);
-			lang = lang != null ? lang : WikipediaPoiMenu.getWikiArticleLanguage(app,
-					amenity.getSupportedContentLocales(), app.getSettings().MAP_PREFERRED_LOCALE.get());
-			wikipediaDialogFragment.setLanguage(lang);
-			wikipediaDialogFragment.setRetainInstance(true);
-			wikipediaDialogFragment.show(activity.getSupportFragmentManager(), TAG);
+			if (wikiPlugin != null) {
+				lang = lang != null ? lang : wikiPlugin.getWikiArticleLanguage(
+						amenity.getSupportedContentLocales(),
+						app.getSettings().MAP_PREFERRED_LOCALE.get());
+				wikipediaDialogFragment.setLanguage(lang);
+				wikipediaDialogFragment.setRetainInstance(true);
+				wikipediaDialogFragment.show(activity.getSupportFragmentManager(), TAG);
+			}
 			return true;
 		} catch (RuntimeException e) {
 			return false;

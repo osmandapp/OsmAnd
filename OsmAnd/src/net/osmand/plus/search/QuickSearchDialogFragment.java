@@ -74,6 +74,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -95,7 +96,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
-import net.osmand.plus.wikipedia.WikipediaPoiMenu;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -1704,7 +1705,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								if (resultListener == null || resultListener.searchFinished(object.requiredSearchPhrase)) {
 									hideProgressBar();
 									SearchPhrase phrase = object.requiredSearchPhrase;
-									if (WikipediaPoiMenu.isWikiSearch(phrase)) {
+									WikipediaPlugin wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
+									if (wikiPlugin != null && wikiPlugin.isSearchByWiki(phrase)) {
 										if (!Version.isPaidVersion(app)) {
 											mainSearchFragment.addListItem(new QuickSearchFreeBannerListItem(app));
 										} else {
@@ -1986,6 +1988,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void addNotFoundButton(boolean searchMoreAvailable, final boolean isWiki) {
 		if (!paused && !cancelPrev && mainSearchFragment != null && !isTextEmpty()) {
+			final WikipediaPlugin wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
 			QuickSearchMoreListItem moreListItem =
 					new QuickSearchMoreListItem(app, null, isWiki, new SearchMoreItemOnClickListener() {
 						@Override
@@ -2012,7 +2015,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 						@Override
 						public void downloadWikiOnClick() {
-							WikipediaPoiMenu.showDownloadWikiScreen(getMapActivity());
+							if (wikiPlugin != null) {
+								wikiPlugin.showDownloadWikiScreen();
+							}
 						}
 					});
 			moreListItem.setInterruptedSearch(interruptedSearch);
@@ -2020,7 +2025,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			moreListItem.setOnlineSearch(isOnlineSearch());
 			moreListItem.setSearchMoreAvailable(searchMoreAvailable);
 			moreListItem.setSecondaryButtonVisible(!isWiki ||
-					WikipediaPoiMenu.hasWikiMapsToDownload(getMapActivity()));
+					(wikiPlugin != null && wikiPlugin.hasMapsToDownload()));
 			mainSearchFragment.addListItem(moreListItem);
 			updateSendEmptySearchBottomBar(isResultEmpty() && !interruptedSearch);
 		}

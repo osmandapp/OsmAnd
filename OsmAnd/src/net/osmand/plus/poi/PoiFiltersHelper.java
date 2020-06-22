@@ -10,16 +10,15 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.wikipedia.WikipediaPoiMenu;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -38,10 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
-import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
-import static net.osmand.plus.wikipedia.WikipediaPoiMenu.ENABLED_WIKI_POI_LANGUAGES_KEY;
-import static net.osmand.plus.wikipedia.WikipediaPoiMenu.GLOBAL_WIKI_POI_ENABLED_KEY;
 
 public class PoiFiltersHelper {
 
@@ -121,23 +116,18 @@ public class PoiFiltersHelper {
 
 	public void prepareTopWikiFilter(@NonNull PoiUIFilter wiki) {
 		boolean prepareByDefault = true;
-		Bundle wikiSettings = WikipediaPoiMenu.getWikiPoiSettings(application);
-		if (wikiSettings != null) {
-			boolean allLanguages = wikiSettings.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
-			List<String> languages = wikiSettings
-					.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
-			if (!allLanguages && languages != null) {
-				prepareByDefault = false;
-				String wikiLang = "wiki:lang:";
-				StringBuilder sb = new StringBuilder();
-				for (String lang : languages) {
-					if (sb.length() > 1) {
-						sb.append(" ");
-					}
-					sb.append(wikiLang).append(lang);
+		WikipediaPlugin wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
+		if (wikiPlugin != null && wikiPlugin.hasCustomSettings()) {
+			prepareByDefault = false;
+			String wikiLang = "wiki:lang:";
+			StringBuilder sb = new StringBuilder();
+			for (String lang : wikiPlugin.getLanguagesToShow()) {
+				if (sb.length() > 1) {
+					sb.append(" ");
 				}
-				wiki.setFilterByName(sb.toString());
+				sb.append(wikiLang).append(lang);
 			}
+			wiki.setFilterByName(sb.toString());
 		}
 		if (prepareByDefault) {
 			wiki.setFilterByName(null);

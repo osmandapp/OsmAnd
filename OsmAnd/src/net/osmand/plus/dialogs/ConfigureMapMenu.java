@@ -220,10 +220,6 @@ public class ConfigureMapMenu {
 			} else if (itemId == R.string.layer_gpx_layer && cm.getItem(pos).getSelected()) {
 				showGpxSelectionDialog(adapter, adapter.getItem(pos));
 				return false;
-			} else if (itemId == R.string.shared_string_wikipedia) {
-				ma.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.WIKIPEDIA,
-						AndroidUtils.getCenterViewCoordinates(view));
-				return false;
 			} else if (itemId == R.string.rendering_category_transport) {
 				final ContextMenuItem item = adapter.getItem(pos);
 				TransportLinesMenu.showTransportsDialog(ma, new CallbackWithObject<Boolean>() {
@@ -287,18 +283,6 @@ public class ConfigureMapMenu {
 				} else {
 					showGpxSelectionDialog(adapter, adapter.getItem(pos));
 				}
-			} else if (itemId == R.string.shared_string_wikipedia) {
-				WikipediaPoiMenu.toggleWikipediaPoi(ma, isChecked, new CallbackWithObject<Boolean>() {
-					@Override
-					public boolean processResult(Boolean selected) {
-						item.setSelected(selected);
-						item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-						item.setDescription(selected ?
-								WikipediaPoiMenu.getLanguagesSummary(ma.getMyApplication()) : null);
-						adapter.notifyDataSetChanged();
-						return true;
-					}
-				});
 			} else if (itemId == R.string.rendering_category_transport) {
 				boolean selected = TransportLinesMenu.isShowLines(ma.getMyApplication());
 				TransportLinesMenu.toggleTransportLines(ma, !selected, new CallbackWithObject<Boolean>() {
@@ -432,17 +416,6 @@ public class ConfigureMapMenu {
 				.setDescription(app.getSelectedGpxHelper().getGpxDescription())
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_polygom_dark)
-				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setListener(l).createItem());
-
-		selected = app.getPoiFilters().isTopWikiFilterSelected();
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(WIKIPEDIA_ID)
-				.setTitleId(R.string.shared_string_wikipedia, activity)
-				.setDescription(selected ? WikipediaPoiMenu.getLanguagesSummary(app) : null)
-				.setSelected(selected)
-				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setIcon(R.drawable.ic_plugin_wikipedia)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
 

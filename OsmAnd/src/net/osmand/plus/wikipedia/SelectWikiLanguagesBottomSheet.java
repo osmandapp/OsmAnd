@@ -11,9 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -34,9 +34,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import static net.osmand.plus.wikipedia.WikipediaPoiMenu.ENABLED_WIKI_POI_LANGUAGES_KEY;
-import static net.osmand.plus.wikipedia.WikipediaPoiMenu.GLOBAL_WIKI_POI_ENABLED_KEY;
-
 public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SelectWikiLanguagesBottomSheet.class.getSimpleName();
@@ -44,6 +41,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	private OsmandApplication app;
 	private ApplicationMode appMode;
 	private OsmandSettings settings;
+	private WikipediaPlugin wikiPlugin;
 
 	private List<BottomSheetItemWithCompoundButton> languageItems;
 
@@ -56,6 +54,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		app = requiredMyApplication();
 		settings = app.getSettings();
 		appMode = settings.getApplicationMode();
+		wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
 		initLanguagesData();
 	}
 
@@ -67,7 +66,8 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		final int activeColorResId = nightMode ?
+				R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		final int profileColorResId = appMode.getIconColorInfo().getColor(nightMode);
 
 		final int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
@@ -138,23 +138,20 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		preferredLocales.add(app.getLanguage());
 		preferredLocales.add(Locale.getDefault().getLanguage());
 
-		Bundle wikiPoiSettings = WikipediaPoiMenu.getWikiPoiSettings(app);
-		List<String> enabledWikiPoiLocales = null;
-		if (wikiPoiSettings != null) {
-			isGlobalWikiPoiEnabled = wikiPoiSettings.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
-			enabledWikiPoiLocales = wikiPoiSettings.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
-		}
-		if (enabledWikiPoiLocales != null) {
+		if (wikiPlugin.hasCustomSettings()) {
+			List<String> enabledWikiPoiLocales = wikiPlugin.getLanguagesToShow();
 			for (String locale : app.getPoiTypes().getAllAvailableWikiLocales()) {
 				boolean checked = enabledWikiPoiLocales.contains(locale);
 				boolean topDefined = preferredLocales.contains(locale) || checked;
-				languages.add(new WikiLanguageItem(locale, WikipediaPoiMenu.getTranslation(app, locale), checked, topDefined));
+				languages.add(new WikiLanguageItem(locale,
+						wikiPlugin.getWikiLanguageTranslation(locale), checked, topDefined));
 			}
 		} else {
 			isGlobalWikiPoiEnabled = true;
 			for (String locale : app.getPoiTypes().getAllAvailableWikiLocales()) {
 				boolean topDefined = preferredLocales.contains(locale);
-				languages.add(new WikiLanguageItem(locale, WikipediaPoiMenu.getTranslation(app, locale), false, topDefined));
+				languages.add(new WikiLanguageItem(locale,
+						wikiPlugin.getWikiLanguageTranslation(locale), false, topDefined));
 			}
 		}
 
@@ -162,8 +159,11 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	private void setLanguageListEnable(boolean enable) {
-		int textColorPrimaryId = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
-		int disableColorId = nightMode ? R.color.active_buttons_and_links_text_disabled_dark : R.color.active_buttons_and_links_text_disabled_light;
+		int textColorPrimaryId = nightMode ?
+				R.color.text_color_primary_dark : R.color.text_color_primary_light;
+		int disableColorId = nightMode ?
+				R.color.active_buttons_and_links_text_disabled_dark :
+				R.color.active_buttons_and_links_text_disabled_light;
 		int profileColorId = appMode.getIconColorInfo().getColor(nightMode);
 		for (BottomSheetItemWithCompoundButton item : languageItems) {
 			item.getView().setEnabled(enable);
@@ -171,7 +171,8 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 			CompoundButton cb = item.getCompoundButton();
 			if (cb != null) {
 				cb.setEnabled(enable);
-				UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app, enable ? profileColorId : disableColorId), cb);
+				UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app, enable ?
+						profileColorId : disableColorId), cb);
 			}
 		}
 	}
@@ -190,12 +191,9 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 				localesForSaving.add(language.getLocale());
 			}
 		}
-		settings.WIKIPEDIA_POI_ENABLED_LANGUAGES.setStringsListForProfile(appMode, localesForSaving);
-		settings.GLOBAL_WIKIPEDIA_POI_ENABLED.setModeValue(appMode, isGlobalWikiPoiEnabled);
-		MapActivity ma = getMapActivity();
-		if (ma != null) {
-			WikipediaPoiMenu.updateWikipediaState(ma);
-		}
+		wikiPlugin.setLanguagesToShow(localesForSaving);
+		wikiPlugin.setShowAllLanguages(isGlobalWikiPoiEnabled);
+		wikiPlugin.updateWikipediaState();
 		dismiss();
 	}
 
@@ -204,7 +202,8 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		if (app == null) {
 			return null;
 		}
-		View buttonView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_title_with_swith_56dp, null);
+		View buttonView = UiUtilities.getInflater(getContext(), nightMode)
+				.inflate(R.layout.bottom_sheet_item_title_with_swith_56dp, null);
 		CompoundButton cb = buttonView.findViewById(R.id.compound_button);
 
 		int color = nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
@@ -228,16 +227,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		}
 	}
 
-	@Nullable
-	private MapActivity getMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
-	}
-
-	private class WikiLanguageItem implements Comparable<WikiLanguageItem> {
+	private static class WikiLanguageItem implements Comparable<WikiLanguageItem> {
 		private String locale;
 		private String title;
 		private boolean checked;

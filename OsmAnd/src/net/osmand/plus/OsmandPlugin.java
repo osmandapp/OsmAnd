@@ -47,6 +47,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -259,10 +260,18 @@ public abstract class OsmandPlugin {
 
 		allPlugins.clear();
 		allPlugins.add(new MapillaryPlugin(app));
+		allPlugins.add(new WikipediaPlugin(app));
 
-		if (!enabledPlugins.contains(MapillaryPlugin.ID) && !app.getSettings().getPlugins().contains("-" + MapillaryPlugin.ID)) {
+		if (!enabledPlugins.contains(MapillaryPlugin.ID)
+				&& !app.getSettings().getPlugins().contains("-" + MapillaryPlugin.ID)) {
 			enabledPlugins.add(MapillaryPlugin.ID);
 			app.getSettings().enablePlugin(MapillaryPlugin.ID, true);
+		}
+
+		if (!enabledPlugins.contains(WikipediaPlugin.ID)
+				&& !app.getSettings().getPlugins().contains("-" + WikipediaPlugin.ID)) {
+			enabledPlugins.add(WikipediaPlugin.ID);
+			app.getSettings().enablePlugin(WikipediaPlugin.ID, true);
 		}
 
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
