@@ -3790,4 +3790,11 @@
     <string name="speed_cameras_restart_descr">Endurræsing er nauðsynleg til að geta fjarlægt alveg gögn um hraðamyndavélar.</string>
     <string name="shared_string_uninstall_and_restart">Fjarlægja og endurræsa</string>
     <string name="shared_string_uninstall">Fjarlægja</string>
+    <string name="speed_cameras_legal_descr">Aðvaranir vegna hraðamyndavéla eru bannaðar með lögum í sumum löndum. 
+\n
+\nÞú þarft að velja hvernig lagaleg staða er í landinu þínu. 
+\n
+\nVeldu %1$s og þú munt fá aðvaranir og ábendingar um hraðamyndavélar. 
+\n
+\nVeldu %2$s: öllum gögnum sem tengjast hraðamyndavélum; t.d. aðvaranir, tilkynningar, staðsetningar o.fl. verður eytt þar til OsmAnd er sett inn aftur frá grunni.</string>
 </resources>
