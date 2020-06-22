@@ -3174,7 +3174,7 @@
     <string name="rendering_attr_highway_class_track_grade5_name">Grado 5</string>
     <string name="external_input_device">Dispositivi di input esterni</string>
     <string name="external_input_device_descr">Selezionare un dispositivo esterno per il controllo, ad esempio una tastiera generica o WunderLINQ.</string>
-    <string name="sett_no_ext_input">Nessuna</string>
+    <string name="sett_no_ext_input">Nessuno</string>
     <string name="sett_generic_ext_input">Tastiera</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
@@ -3471,7 +3471,7 @@
     <string name="monitoring_min_accuracy_descr_remark">Osservazione: se il GPS è stato disattivato poco prima di una registrazione, i primi punti misurati potrebbero avere una minore accuratezza, perciò nel nostro codice noi possiamo voler attendere qualche secondo prima oppure prima di registrare dei punti (o registrare i 3 migliori punti consecutivi, ecc...), ma questo non è ancora implementato .</string>
     <string name="monitoring_min_distance_descr">Questo filtro evita che punti duplicati siano registrati quando lo spostamento è troppo piccolo, crea un migliore aspetto delle tracce che non vengono successivamente elaborate.</string>
     <string name="monitoring_min_distance_descr_side_effect">Effetto collaterale: periodi di riposo non sono registrati affatto oppure con un singolo punto. Piccoli (reali) movimenti (es. lateralmente, per marcare un possible spegnimento nel tuo viaggio) possono essere scartati dal filtro. Il file contiene meno informazioni per la post-elaborazione e presenta statistiche peggiori filtrando i punti ovviamente ridondanti al momento della registrazione, mantenendo potenzialmente artefatti causati da cattiva ricezione o effetti del chipset GPS.</string>
-    <string name="monitoring_min_distance_descr_recommendation">Raccomandazione: un valore di 5 metri potrebbe funzionare bene se non necessiti di registrare dettagli che hanno una misura inferiore di questo e non vuoi chiaramente registrare dati quando sei fermo.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Raccomandazione: un valore di 5 metri potrebbe funzionare bene se non necessiti di registrare dettagli che hanno una misura inferiore di questo valore e non vuoi chiaramente registrare dati quando sei fermo.</string>
     <string name="live_monitoring_time_buffer">Tempo tampone</string>
     <string name="live_monitoring_tracking_interval">Intervallo di registrazione</string>
     <string name="live_monitoring_adress">Indirizzo web</string>
@@ -3773,8 +3773,19 @@
     <string name="width_limit_description">Indica la larghezza del veicolo, alcune restrizioni stradali potrebbero essere applicate per veicoli larghi.</string>
     <string name="height_limit_description">Indica l\'altezza del veicolo, alcune restrizioni stradali potrebbero essere applicate per veicoli alti.</string>
     <string name="weight_limit_description">Indica il peso del veicolo, alcune restrizioni stradali potrebbero essere applicate per veicoli pesanti.</string>
-    <string name="turn_screen_on_power_button_disabled">Disattivato. Richiede \'Mantieni lo schermo acceso\' sotto \'Tempo di accensione\'.</string>
+    <string name="turn_screen_on_power_button_disabled">Disattivato. Richiede \'Mantieni lo schermo acceso\' in \'Tempo di accensione\'.</string>
     <string name="shared_string_meters">metri</string>
-    <string name="details_dialog_decr">Controlla la visibilità di dettagli aggiuntivi mostrati su mappa</string>
+    <string name="details_dialog_decr">Mostra o nasconde i dettagli aggiuntivi della mappa</string>
     <string name="shared_string_night_map">Mappa notturna</string>
+    <string name="shared_string_tones">toni</string>
+    <string name="add_online_source">Aggiungi sorgente online</string>
+    <string name="clear_tiles_warning">Applicando questi cambiamenti i dati memorizzati nella cache verranno cancellati per questa sorgente di mattonelle</string>
+    <string name="vessel_height_warning_link">Imposta l\'altezza dell\'imbarcazione</string>
+    <string name="vessel_height_warning">Puoi mpostare l\'altezza dell\'imbarcazione per evitare ponti bassi. Ricorda che, se il ponte è mobile, useremo la sua altezza da aperto.</string>
+    <string name="vessel_height_limit_description">Imposta l\'altezza dell\'imbarcazione per evitare ponti bassi. Ricorda che, se il ponte è mobile, useremo la sua altezza da aperto.</string>
+    <string name="vessel_width_limit_description">Imposta la larghezza della\"imbarcazione per evitare i ponti stretti</string>
+    <string name="quick_action_showhide_mapillary_title">Mostra/nascondi Mapillary</string>
+    <string name="quick_action_mapillary_hide">Nascondi Mapilly</string>
+    <string name="quick_action_mapillary_show">Mostra Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Un pulsante per visualizzare nella mappa o nascondere il livello Mapillary .</string>
 </resources>

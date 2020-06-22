@@ -1333,7 +1333,7 @@
     <string name="poi_smoking_yes">Erlaubt</string>
     <string name="poi_smoking_separated">In einem separaten Raum</string>
     <string name="poi_traffic_signals_sound_yes">ja</string>
-    <string name="poi_traffic_signals_sound_no">nein</string>
+    <string name="poi_traffic_signals_sound_no">kein Signalton</string>
     <string name="poi_rescue_station">Rettungsstation</string>
     <string name="poi_mini_roundabout">Mini-Kreisverkehr</string>
     <string name="poi_railway_crossing">Bahnübergang</string>
@@ -3827,4 +3827,9 @@
     <string name="poi_fire_hydrant_type_pipe">Rohr</string>
     <string name="poi_fire_hydrant_pressure_filter">Druck</string>
     <string name="poi_pump_status_missing_beam">Pumpenzustand: fehlender Arm</string>
+    <string name="poi_traffic_signals_arrow_yes">Ja</string>
+    <string name="poi_traffic_signals_vibration_yes">ja</string>
+    <string name="poi_traffic_signals_vibration_no">kein Vibrieren</string>
+    <string name="poi_traffic_signals_arrow">Pfeil</string>
+    <string name="poi_traffic_signals_vibration">Vibrieren</string>
 </resources>

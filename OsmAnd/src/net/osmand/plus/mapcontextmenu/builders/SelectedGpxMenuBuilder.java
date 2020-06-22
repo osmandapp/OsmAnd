@@ -53,10 +53,10 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
+		buildPointRows(view);
 		buildOverviewRows(view);
 		buildElevationRows(view);
 		buildSpeedRows(view);
-		buildPointRows(view);
 	}
 
 	public void buildOverviewRows(View view) {
@@ -68,16 +68,18 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 		String timeSpan = Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled());
 		String timeMoving = Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled());
-		String title = app.getString(R.string.shared_string_time_span) + " / " + app.getString(R.string.shared_string_time_moving);
-		buildRow(view, getThemedIcon(R.drawable.ic_action_time_span), null, title,
+		String timeSpanTitle = app.getString(R.string.shared_string_time_span) + " / " + app.getString(R.string.shared_string_time_moving);
+		buildRow(view, getThemedIcon(R.drawable.ic_action_time_span), null, timeSpanTitle,
 				timeSpan + " / " + timeMoving, 0, null,
 				false, null, false, 0, false, false, false, null, false);
 
 		Date start = new Date(analysis.startTime);
 		Date end = new Date(analysis.endTime);
 		DateFormat format = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
-		buildRow(view, getThemedIcon(R.drawable.ic_action_time_start), null, app.getString(R.string.shared_string_start_time),
-				format.format(start) + " / " + format.format(end), 0, null,
+
+		String startEndTimeTitle = app.getString(R.string.shared_string_start_time) + " - " + app.getString(R.string.shared_string_end_time);
+		buildRow(view, getThemedIcon(R.drawable.ic_action_time_start), null, startEndTimeTitle,
+				format.format(start) + " - " + format.format(end), 0, null,
 				false, null, false, 0, false, false, false, null, true);
 	}
 
@@ -100,6 +102,10 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude_descent), null, app.getString(R.string.ascent_descent),
 					asc + " / " + desc, 0, null,
 					false, null, false, 0, false, false, false, null, true);
+
+			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude_descent), null, app.getString(R.string.distance_moving),
+					OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app), 0, null,
+					false, null, false, 0, false, false, false, null, true);
 		}
 	}
 
@@ -114,10 +120,6 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 			buildRow(view, getThemedIcon(R.drawable.ic_action_max_speed), null, app.getString(R.string.max_speed),
 					OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app), 0, null,
 					false, null, false, 0, false, false, false, null, false);
-
-			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude_descent), null, app.getString(R.string.distance_moving),
-					OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app), 0, null,
-					false, null, false, 0, false, false, false, null, true);
 		}
 	}
 
@@ -140,7 +142,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 					false, null, false, 0, false, false, false, null, false);
 		}
 		if (!Double.isNaN(selectedPoint.speed)) {
-			buildRow(view, getThemedIcon(R.drawable.ic_action_speed), null, app.getString(R.string.average_speed),
+			buildRow(view, getThemedIcon(R.drawable.ic_action_speed), null, app.getString(R.string.map_widget_speed),
 					OsmAndFormatter.getFormattedSpeed((float) selectedPoint.speed, app), 0, null,
 					false, null, false, 0, false, false, false, null, false);
 		}
