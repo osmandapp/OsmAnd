@@ -72,6 +72,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 	private boolean activationModified;
 	private boolean wasReset = false;
 	private boolean isChanged = false;
+	private boolean filterDeleted = false;
 	private ApplicationMode appMode;
 	private LinearLayout buttonsContainer;
 
@@ -222,7 +223,8 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 
 	@Override
 	public void onDismiss(@NonNull DialogInterface dialog) {
-		if (isChanged && !orderModified && !activationModified && resultCallback != null) {
+		if (filterDeleted && resultCallback != null) {
+			requireMyApplication().getPoiFilters().saveInactiveFilters(getSelectedAppMode(), availableFiltersKeys);
 			resultCallback.onCustomFiltersDeleted();
 		}
 		super.onDismiss(dialog);
@@ -584,8 +586,9 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 				final PoiUIFilterDataObject poiInfo = (PoiUIFilterDataObject) item.value;
 				int osmandOrangeColorResId = nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange;
 				h.title.setText(poiInfo.name);
+				boolean userFilter = poiInfo.filterId.startsWith(USER_PREFIX);
 				int iconRes = QuickSearchListItem.getCustomFilterIconRes(poiHelper.getFilterById(poiInfo.filterId));
-				h.icon.setImageDrawable(uiUtilities.getIcon(iconRes, osmandOrangeColorResId));
+				h.icon.setImageDrawable(uiUtilities.getIcon(userFilter ? iconRes : poiInfo.iconRes, osmandOrangeColorResId));
 				h.moveIcon.setVisibility(poiInfo.isActive ? View.VISIBLE : View.GONE);
 				h.actionIcon.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -610,7 +613,6 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 				} else {
 					h.actionIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_add, R.color.color_osm_edit_create));
 				}
-				boolean userFilter = poiInfo.filterId.startsWith(USER_PREFIX);
 				h.actionDelete.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_delete_item, R.color.color_osm_edit_delete));
 				h.actionDelete.setVisibility(userFilter ? View.VISIBLE : View.GONE);
 				h.actionDelete.setOnClickListener(new View.OnClickListener() {
@@ -639,8 +641,9 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 										if (DISMISS_EVENT_ACTION != event) {
 											PoiUIFilter filter = poiHelper.getFilterById(poiInfo.filterId);
 											if (filter != null && poiHelper.removePoiFilter(filter)) {
+												availableFiltersKeys.remove(poiInfo.filterId);
 												filter.setDeleted(true);
-												isChanged = true;
+												filterDeleted = true;
 											}
 										}
 									}
