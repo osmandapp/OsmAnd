@@ -34,6 +34,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -583,7 +584,8 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 				final PoiUIFilterDataObject poiInfo = (PoiUIFilterDataObject) item.value;
 				int osmandOrangeColorResId = nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange;
 				h.title.setText(poiInfo.name);
-				h.icon.setImageDrawable(uiUtilities.getIcon(poiInfo.iconRes, osmandOrangeColorResId));
+				int iconRes = QuickSearchListItem.getCustomFilterIconRes(poiHelper.getFilterById(poiInfo.filterId));
+				h.icon.setImageDrawable(uiUtilities.getIcon(iconRes, osmandOrangeColorResId));
 				h.moveIcon.setVisibility(poiInfo.isActive ? View.VISIBLE : View.GONE);
 				h.actionIcon.setOnClickListener(new View.OnClickListener() {
 					@Override
