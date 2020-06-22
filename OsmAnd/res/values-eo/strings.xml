@@ -419,7 +419,7 @@
     <string name="filter_poi_hint">Filtri laŭ nomo</string>
     <string name="search_poi_category_hint">Entajpu ion por serĉi</string>
     <string name="agps_info">A-GPS informoj</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">OSM-mapiga helpilo</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Etikedoj “riparu min!”</string>
     <string name="shared_string_manage">Administri</string>
     <string name="agps_data_last_downloaded">A-GPS-datumoj elŝutitaj je %1$s</string>
     <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. OsmAnd ne respondumos, se vi rompos leĝon. Bonvolu elekti “jes” nur se vi estas permesata por uzi tiun ĉi eblon.</string>
@@ -3202,7 +3202,7 @@
     <string name="app_mode_camper">Kampad‑postveturilo</string>
     <string name="app_mode_campervan">Kampad‑veturilo</string>
     <string name="rendering_attr_showLez_description">Montri zonojn nur por malalte aer‑malpurigantaj veturiloj. Ne influas al difinado de kurso.</string>
-    <string name="rendering_attr_showLez_name">Montri zonojn de restrikta emisio (LEZ)</string>
+    <string name="rendering_attr_showLez_name">Zonoj de restrikta emisio (LEZ)</string>
     <string name="temporary_conditional_routing">Konsideri portempajn limigojn</string>
     <string name="shared_string_default">Implicita</string>
     <string name="new_route_calculated_dist_dbg">Kurso: distanco %s, tempo: %s 
