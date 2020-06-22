@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MotionEventCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -642,6 +643,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 										}
 									}
 								});
+						ViewCompat.setElevation(snackbar.getView(), 0f);
 						snackbar.setAnchorView(buttonsContainer);
 						UiUtilities.setupSnackbar(snackbar, nightMode);
 						snackbar.show();
