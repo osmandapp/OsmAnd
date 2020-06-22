@@ -70,7 +70,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 	@Override
 	public CharSequence getDescription() {
-		return "";
+		return app.getString(R.string.plugin_wikipedia_description);
 	}
 
 	@Override
