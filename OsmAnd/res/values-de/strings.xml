@@ -3803,4 +3803,11 @@
     <string name="item_deleted">%1$s gelöscht</string>
     <string name="speed_cameras_restart_descr">Ein Neustart ist erforderlich, um Blitzerdaten vollständig zu löschen.</string>
     <string name="shared_string_uninstall_and_restart">Deinstallieren und neu starten</string>
+    <string name="speed_cameras_legal_descr">In einigen Ländern oder Regionen ist die Verwendung von Anwendungen zum Warnen vor Blitzern gesetzlich verboten. 
+\n
+\nEs muss anhand der Gesetzeslage des Landes entschieden werden.
+\n
+\nDie Wahl %1$s sendet Warnungen und Hinweise zu Blitzern. 
+\n
+\nDie Wahl %2$s löscht alle Daten für Warnungen, Hinweise und POIs im Zusammenhang mit Blitzern, bis OsmAnd komplett neu installiert wird.</string>
 </resources>
