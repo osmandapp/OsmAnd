@@ -3796,6 +3796,6 @@
     <string name="speed_cameras_alert">Попередження про камери контролю швидкості в деяких країнах заборонено законом.</string>
     <string name="shared_string_bearing">Орієнтація</string>
     <string name="item_deleted">Видалено: %1$s</string>
-    <string name="speed_cameras_restart_descr">Перезапуск потрібен для повного видалення даних камер контролю швидкості.</string>
+    <string name="speed_cameras_restart_descr">Потрібен перезапуск для повного видалення даних камер контролю швидкості.</string>
     <string name="shared_string_uninstall_and_restart">Видалити та перезапустити</string>
 </resources>
