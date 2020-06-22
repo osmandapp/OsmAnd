@@ -138,7 +138,8 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		preferredLocales.add(app.getLanguage());
 		preferredLocales.add(Locale.getDefault().getLanguage());
 
-		if (wikiPlugin.hasCustomSettings()) {
+		isGlobalWikiPoiEnabled = wikiPlugin.isShowAllLanguages();
+		if (wikiPlugin.hasLanguagesFilter()) {
 			List<String> enabledWikiPoiLocales = wikiPlugin.getLanguagesToShow();
 			for (String locale : app.getPoiTypes().getAllAvailableWikiLocales()) {
 				boolean checked = enabledWikiPoiLocales.contains(locale);
