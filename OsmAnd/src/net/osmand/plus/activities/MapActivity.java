@@ -389,6 +389,23 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		lockHelper.setLockUIAdapter(this);
 
 		mIsDestroyed = false;
+		handleExtraTextIntent();
+	}
+
+	private void handleExtraTextIntent() {
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+			CharSequence text = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
+			if (!Algorithms.isEmpty(text)) {
+				QuickSearchDialogFragment.showInstance(
+						this,
+						text.toString(),
+						null,
+						QuickSearchType.REGULAR,
+						QuickSearchTab.CATEGORIES,
+						null
+				);
+			}
+		}
 	}
 
 	public void exitFromFullScreen(View view) {
@@ -650,6 +667,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onNewIntent(final Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
+		handleExtraTextIntent();
 	}
 
 	@Override
