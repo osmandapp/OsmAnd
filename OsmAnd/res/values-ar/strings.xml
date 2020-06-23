@@ -3793,4 +3793,8 @@
 \nحدد %1$s وستتلقى تنبيهات وتحذيرات حول كاميرات السرعة. 
 \n
 \nحدد %2$s. جميع البيانات المتعلقة كاميرات السرعة: التنبيهات، والإخطارات، سيتم حذف نقاط الاهتمام حتى يتم إعادة تثبيت أوسماند تماما.</string>
+    <string name="routing_attr_length_description">تحديد الارتفاع الأعلى المسموح به على الطرق.</string>
+    <string name="routing_attr_length_name">طول الحد</string>
+    <string name="speed_cameras_removed_descr">هذا الجهاز لا يملك كاميرات السرعة.</string>
+    <string name="app_mode_inline_skates">أحذية تزلج</string>
 </resources>
