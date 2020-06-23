@@ -822,7 +822,7 @@ public class PoiFiltersHelper {
 						String subCategory = query.getString(2);
 						if (subCategory == null) {
 							m.put(a, null);
-						} else {
+						} else if (!mapPoiTypes.isTypeForbidden(subCategory)) {
 							if (m.get(a) == null) {
 								m.put(a, new LinkedHashSet<String>());
 							}
@@ -849,7 +849,9 @@ public class PoiFiltersHelper {
 									map.get(filterId), application);
 							filter.setSavedFilterByName(query.getString(2));
 							filter.setDeleted(deleted);
-							list.add(filter);
+							if (filter.getAcceptedTypesCount() > 0) {
+								list.add(filter);
+							}
 						}
 					} while (query.moveToNext());
 				}

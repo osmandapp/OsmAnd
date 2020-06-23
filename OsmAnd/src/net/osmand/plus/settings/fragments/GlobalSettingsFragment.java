@@ -30,7 +30,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
-	private static final String LEGAL_CATEGORY_ID = "legal";
 
 	@Override
 	protected void setupPreferences() {
@@ -41,7 +40,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		setupSendAnonymousDataPref();
 		setupDialogsAndNotificationsPref();
 		setupEnableProxyPref();
-		setupLegalCategory();
 		setupUninstallSpeedCamerasPref();
 	}
 
@@ -108,7 +106,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 				app.restartApp(activity);
 			}
 		} else if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
-			setupLegalCategory();
 			setupUninstallSpeedCamerasPref();
 		}
 	}
@@ -121,7 +118,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId)) {
+		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
 			FragmentManager fm = getFragmentManager();
 			if (fm != null) {
 				SpeedCamerasBottomSheet.showInstance(fm, this);
@@ -214,14 +211,12 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		enableProxy.setIcon(getPersistentPrefIcon(R.drawable.ic_action_proxy));
 	}
 
-	private void setupLegalCategory() {
-		PreferenceCategory legalCategory = (PreferenceCategory) findPreference(LEGAL_CATEGORY_ID);
-		legalCategory.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
-	}
-
 	private void setupUninstallSpeedCamerasPref() {
+		boolean uninstalled = settings.SPEED_CAMERAS_UNINSTALLED.get();
 		Preference uninstallSpeedCameras = (Preference) findPreference(settings.SPEED_CAMERAS_UNINSTALLED.getId());
-		uninstallSpeedCameras.setIcon(getActiveIcon(R.drawable.ic_speed_camera_disabled));
-		uninstallSpeedCameras.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
+		if (!uninstalled) {
+			uninstallSpeedCameras.setIcon(getActiveIcon(R.drawable.ic_speed_camera_disabled));
+		}
+		uninstallSpeedCameras.setTitle(uninstalled ? R.string.speed_cameras_removed_descr : R.string.uninstall_speed_cameras);
 	}
 }
