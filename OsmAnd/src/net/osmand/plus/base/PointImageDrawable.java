@@ -11,10 +11,12 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -31,19 +33,18 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public class PointImageDrawable extends Drawable {
 
-	private final int DEFAULT_SIZE_ON_MAP_DP = 16;
-	private final int ICON_SIZE_VECTOR_PX = 12;
 	private final int dp_12_px;
 	private boolean withShadow;
 	private boolean synced;
 	private boolean history;
-	private Drawable favIcon;
-	private Bitmap favBackgroundTop;
-	private Bitmap favBackgroundCenter;
-	private Bitmap favBackgroundBottom;
-	private Bitmap favBackgroundTopSmall;
-	private Bitmap favBackgroundCenterSmall;
-	private Bitmap favBackgroundBottomSmall;
+	private Drawable mapIcon;
+	private Bitmap mapIconBitmap;
+	private Bitmap mapIconBackgroundTop;
+	private Bitmap mapIconBackgroundCenter;
+	private Bitmap mapIconBackgroundBottom;
+	private Bitmap mapIconBackgroundTopSmall;
+	private Bitmap mapIconBackgroundCenterSmall;
+	private Bitmap mapIconBackgroundBottomSmall;
 	private Bitmap syncedStroke;
 	private Bitmap syncedColor;
 	private Bitmap syncedShadow;
@@ -55,8 +56,11 @@ public class PointImageDrawable extends Drawable {
 	private ColorFilter colorFilter;
 	private ColorFilter grayFilter;
 	private float scale = 1.0f;
-	private int favsize = 0;
-	private int backsize = 0;
+	private int mapIconSize = 0;
+	private int backSize = 0;
+
+	public static final int DEFAULT_SIZE_ON_MAP_DP = 16;
+	public static final int ICON_SIZE_VECTOR_PX = 12;
 
 	private PointImageDrawable(PointInfo pointInfo) {
 		this.withShadow = pointInfo.withShadow;
@@ -65,9 +69,8 @@ public class PointImageDrawable extends Drawable {
 		UiUtilities uiUtilities = ((OsmandApplication) pointInfo.ctx.getApplicationContext()).getUIUtilities();
 		int overlayIconId = pointInfo.overlayIconId;
 		int uiIconId;
-		favIcon = uiUtilities.getIcon(getMapIconId(pointInfo.ctx, overlayIconId), R.color.color_white);
+		mapIcon = uiUtilities.getIcon(getMapIconId(pointInfo.ctx, overlayIconId), R.color.color_white);
 		uiIconId = overlayIconId;
-
 		int col = pointInfo.color == 0 ? res.getColor(R.color.color_favorite) : pointInfo.color;
 		uiListIcon = uiUtilities.getIcon(uiIconId, R.color.color_white);
 		int uiBackgroundIconId = pointInfo.backgroundType.getIconId();
@@ -75,15 +78,15 @@ public class PointImageDrawable extends Drawable {
 		int mapBackgroundIconIdTop = getMapBackgroundIconId(pointInfo, "top", false);
 		int mapBackgroundIconIdCenter = getMapBackgroundIconId(pointInfo, "center", false);
 		int mapBackgroundIconIdBottom = getMapBackgroundIconId(pointInfo, "bottom", false);
-		favBackgroundTop = BitmapFactory.decodeResource(res, mapBackgroundIconIdTop);
-		favBackgroundCenter = BitmapFactory.decodeResource(res, mapBackgroundIconIdCenter);
-		favBackgroundBottom = BitmapFactory.decodeResource(res, mapBackgroundIconIdBottom);
+		mapIconBackgroundTop = BitmapFactory.decodeResource(res, mapBackgroundIconIdTop);
+		mapIconBackgroundCenter = BitmapFactory.decodeResource(res, mapBackgroundIconIdCenter);
+		mapIconBackgroundBottom = BitmapFactory.decodeResource(res, mapBackgroundIconIdBottom);
 		int mapBackgroundIconIdTopSmall = getMapBackgroundIconId(pointInfo, "top", true);
 		int mapBackgroundIconIdCenterSmall = getMapBackgroundIconId(pointInfo, "center", true);
 		int mapBackgroundIconIdBottomSmall = getMapBackgroundIconId(pointInfo, "bottom", true);
-		favBackgroundTopSmall = BitmapFactory.decodeResource(res, mapBackgroundIconIdTopSmall);
-		favBackgroundCenterSmall = BitmapFactory.decodeResource(res, mapBackgroundIconIdCenterSmall);
-		favBackgroundBottomSmall = BitmapFactory.decodeResource(res, mapBackgroundIconIdBottomSmall);
+		mapIconBackgroundTopSmall = BitmapFactory.decodeResource(res, mapBackgroundIconIdTopSmall);
+		mapIconBackgroundCenterSmall = BitmapFactory.decodeResource(res, mapBackgroundIconIdCenterSmall);
+		mapIconBackgroundBottomSmall = BitmapFactory.decodeResource(res, mapBackgroundIconIdBottomSmall);
 		syncedStroke = BitmapFactory.decodeResource(res, R.drawable.ic_shield_marker_point_stroke);
 		syncedColor = BitmapFactory.decodeResource(res, R.drawable.ic_shield_marker_point_color);
 		syncedShadow = BitmapFactory.decodeResource(res, R.drawable.ic_shield_marker_point_shadow);
@@ -126,7 +129,7 @@ public class PointImageDrawable extends Drawable {
 		if (synced) {
 			return syncedShadow.getHeight();
 		} else if (withShadow) {
-			return favBackgroundCenter.getHeight();
+			return mapIconBackgroundCenter.getHeight();
 		}
 		return uiBackgroundIcon.getIntrinsicHeight();
 	}
@@ -136,7 +139,7 @@ public class PointImageDrawable extends Drawable {
 		if (synced) {
 			return syncedShadow.getWidth();
 		} else if (withShadow) {
-			return favBackgroundCenter.getWidth();
+			return mapIconBackgroundCenter.getWidth();
 		}
 		return uiBackgroundIcon.getIntrinsicWidth();
 	}
@@ -151,10 +154,14 @@ public class PointImageDrawable extends Drawable {
 			drawBitmap(canvas, bs, syncedStroke, paintBackground);
 			drawBitmap(canvas, bs, syncedIcon, paintIcon);
 		} else if (withShadow) {
-			drawBitmap(canvas, bs, favBackgroundBottom, null);
-			drawBitmap(canvas, bs, favBackgroundCenter, paintBackground);
-			drawBitmap(canvas, bs, favBackgroundTop, null);
-			favIcon.draw(canvas);
+			drawBitmap(canvas, bs, mapIconBackgroundBottom, null);
+			drawBitmap(canvas, bs, mapIconBackgroundCenter, paintBackground);
+			drawBitmap(canvas, bs, mapIconBackgroundTop, null);
+			int offsetX = bs.centerX() - mapIconSize / 2;
+			int offsetY = bs.centerY() - mapIconSize / 2;
+			Rect mapIconBounds = new Rect(offsetX, offsetY, (offsetX + mapIconSize),
+					offsetY + mapIconSize);
+			drawBitmap(canvas, mapIconBounds, mapIconBitmap, null);
 		} else {
 			uiBackgroundIcon.draw(canvas);
 			uiListIcon.draw(canvas);
@@ -166,37 +173,49 @@ public class PointImageDrawable extends Drawable {
 	}
 
 	public void drawPoint(Canvas canvas, float x, float y, float scale, boolean history) {
-		if(scale != this.scale || this.favsize == 0) {
-			this.scale = scale;
-			int pixels = (int) (dp_12_px * DEFAULT_SIZE_ON_MAP_DP / 12.0);
-			this.favsize = Math.round(scale *  pixels / ICON_SIZE_VECTOR_PX) * ICON_SIZE_VECTOR_PX;
-			this.backsize = (int) (scale *  getIntrinsicWidth());
-		}
+		setScale(scale);
 		this.history = history;
-		Rect rect = new Rect(0, 0, backsize , backsize );
-		rect.offset((int) x - backsize / 2, (int) y - backsize / 2);
+		Rect rect = new Rect(0, 0, backSize, backSize);
+		rect.offset((int) x - backSize / 2, (int) y - backSize / 2);
 		setBounds(rect);
-		int offsetX = rect.centerX() - favsize / 2;
-		int offsetY = rect.centerY() - favsize / 2;
-		favIcon.setBounds(offsetX, offsetY, (int) (offsetX + favsize),
-				offsetY + favsize);
 		draw(canvas);
 	}
 
+	private void setScale(float scale) {
+		if (scale != this.scale || this.mapIconSize == 0) {
+			this.scale = scale;
+			int pixels = (int) (dp_12_px * DEFAULT_SIZE_ON_MAP_DP / 12.0);
+			this.mapIconSize = Math.round((scale * pixels / ICON_SIZE_VECTOR_PX * ICON_SIZE_VECTOR_PX));
+			this.backSize = (int) (scale * getIntrinsicWidth());
+			mapIconBitmap = getBitmapFromVectorDrawable(mapIcon);
+		}
+	}
+
+	public Bitmap getBitmapFromVectorDrawable(Drawable drawable) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+			drawable = (DrawableCompat.wrap(drawable)).mutate();
+		}
+		Bitmap bitmap = Bitmap.createBitmap(mapIconSize, mapIconSize, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmap);
+		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+		drawable.draw(canvas);
+		return bitmap;
+	}
+
 	public void drawSmallPoint(Canvas canvas, float x, float y, float scale) {
-		this.scale = scale;
+		setScale(scale);
 		paintBackground.setColorFilter(history ? grayFilter : colorFilter);
-		int scaledWidth = favBackgroundBottomSmall.getWidth();
-		int scaledHeight = favBackgroundBottomSmall.getHeight();
+		int scaledWidth = mapIconBackgroundBottomSmall.getWidth();
+		int scaledHeight = mapIconBackgroundBottomSmall.getHeight();
 		if (scale != 1.0f) {
 			scaledWidth *= scale;
 			scaledHeight *= scale;
 		}
 		Rect destRect = new Rect(0, 0, scaledWidth, scaledHeight);
 		destRect.offset((int) x - scaledWidth / 2, (int) y - scaledHeight / 2);
-		canvas.drawBitmap(favBackgroundBottomSmall, null, destRect, null);
-		canvas.drawBitmap(favBackgroundCenterSmall, null, destRect, paintBackground);
-		canvas.drawBitmap(favBackgroundTopSmall, null, destRect, null);
+		canvas.drawBitmap(mapIconBackgroundBottomSmall, null, destRect, null);
+		canvas.drawBitmap(mapIconBackgroundCenterSmall, null, destRect, paintBackground);
+		canvas.drawBitmap(mapIconBackgroundTopSmall, null, destRect, null);
 	}
 
 	@Override
@@ -216,10 +235,6 @@ public class PointImageDrawable extends Drawable {
 	@Override
 	public void setColorFilter(ColorFilter cf) {
 		paintIcon.setColorFilter(cf);
-	}
-
-	public void setScale(float scale) {
-		this.scale = scale;
 	}
 
 	private static TreeMap<String, PointImageDrawable> cache = new TreeMap<>();
