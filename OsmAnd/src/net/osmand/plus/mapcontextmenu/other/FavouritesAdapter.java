@@ -13,7 +13,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 			favouritesViewHolder.title.setText(favouritePoint.getDisplayName(app));
 			favouritesViewHolder.description.setText(favouritePoint.getCategoryDisplayName(app));
 			favouritesViewHolder.favouriteImage.setImageDrawable(
-					FavoriteImageDrawable.getOrCreate(app,
+					PointImageDrawable.getFromFavorite(app,
 							app.getFavorites().getColorWithCategory(favouritePoint,
 									ContextCompat.getColor(app, R.color.color_favorite)), false, favouritePoint));
 			app.getUIUtilities().updateLocationView(cache, favouritesViewHolder.arrowImage, favouritesViewHolder.distance,

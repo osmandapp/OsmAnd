@@ -3,21 +3,25 @@ package net.osmand.plus.mapsource;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewTreeObserver;
+import android.view.inputmethod.EditorInfo;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
@@ -44,10 +48,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapsource.InputZoomLevelsBottomSheet.OnZoomSetListener;
 import net.osmand.plus.mapsource.ExpireTimeBottomSheet.OnExpireValueSetListener;
 import net.osmand.plus.mapsource.MercatorProjectionBottomSheet.OnMercatorSelectedListener;
 import net.osmand.plus.mapsource.TileStorageFormatBottomSheet.OnTileStorageFormatSelectedListener;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 
@@ -77,7 +83,10 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private static final String EXPIRE_TIME_KEY = "expire_time_key";
 	private static final String ELLIPTIC_KEY = "elliptic_key";
 	private static final String SQLITE_DB_KEY = "sqlite_db_key";
+	private static final String FROM_TEMPLATE_KEY = "from_template_key";
 	private OsmandApplication app;
+	private TextInputLayout nameInputLayout;
+	private TextInputLayout urlInputLayout;
 	private TextInputEditText nameEditText;
 	private TextInputEditText urlEditText;
 	private LinearLayout contentContainer;
@@ -93,14 +102,26 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private boolean elliptic = false;
 	private boolean sqliteDB = false;
 	private boolean nightMode;
+	private boolean fromTemplate = false;
+	private boolean wasChanged = false;
 
 	public static void showInstance(@NonNull FragmentManager fm,
 									@Nullable Fragment targetFragment,
 									@Nullable String editedLayerName) {
+		if (!fm.isStateSaved()) {
+			EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.setEditedLayerName(editedLayerName);
+			fragment.show(fm, TAG);
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm,
+									@NonNull TileSourceTemplate template) {
 		EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
-		fragment.setTargetFragment(targetFragment, 0);
-		fragment.setEditedLayerName(editedLayerName);
-		fragment.show(fm, TAG);
+		fragment.setTemplate(template);
+		fragment.fromTemplate = true;
+		fm.beginTransaction().add(fragment, TAG).commitAllowingStateLoss();
 	}
 
 	@Override
@@ -119,6 +140,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			expireTimeMinutes = savedInstanceState.getInt(EXPIRE_TIME_KEY);
 			elliptic = savedInstanceState.getBoolean(ELLIPTIC_KEY);
 			sqliteDB = savedInstanceState.getBoolean(SQLITE_DB_KEY);
+			fromTemplate = savedInstanceState.getBoolean(FROM_TEMPLATE_KEY);
 		}
 		View root = UiUtilities.getMaterialInflater(requireContext(), nightMode).inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
@@ -142,27 +164,50 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showExitDialog();
+				if (wasChanged || fromTemplate) {
+					showExitDialog();
+				} else {
+					dismiss();
+				}
 			}
 		});
 		int boxStrokeColor = nightMode
-				? ContextCompat.getColor(app, R.color.app_bar_color_light)
-				: ContextCompat.getColor(app, R.color.active_buttons_and_links_bg_pressed_dark);
+				? ContextCompat.getColor(app, R.color.icon_color_osmand_dark)
+				: ContextCompat.getColor(app, R.color.icon_color_osmand_light);
 		int btnBgColorRes = nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
-		TextInputLayout nameInputLayout = root.findViewById(R.id.name_input_layout);
+		nameInputLayout = root.findViewById(R.id.name_input_layout);
 		nameInputLayout.setBoxStrokeColor(boxStrokeColor);
 		nameEditText = root.findViewById(R.id.name_edit_text);
-		TextInputLayout urlInputLayout = root.findViewById(R.id.url_input_layout);
+		nameEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+		nameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+		nameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(hasFocus){
+					nameEditText.setSelection(nameEditText.getText().length());
+				}
+			}
+		});
+		urlInputLayout = root.findViewById(R.id.url_input_layout);
 		urlInputLayout.setBoxStrokeColor(boxStrokeColor);
 		urlEditText = root.findViewById(R.id.url_edit_text);
-		nameEditText.addTextChangedListener(getTextWatcher());
-		urlEditText.addTextChangedListener(getTextWatcher());
+		urlEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+		urlEditText.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+		urlEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(hasFocus){
+					urlEditText.setSelection(urlEditText.getText().length());
+				}
+			}
+		});
 		contentContainer = root.findViewById(R.id.content_container);
 		saveBtn = root.findViewById(R.id.save_button);
 		saveBtn.setBackgroundResource(nightMode ? R.drawable.dlg_btn_primary_dark : R.drawable.dlg_btn_primary_light);
 		FrameLayout saveBtnBg = root.findViewById(R.id.save_button_bg);
 		saveBtnBg.setBackgroundColor(ContextCompat.getColor(app, btnBgColorRes));
 		saveBtnTitle = root.findViewById(R.id.save_button_title);
+		saveBtnTitle.setTypeface(FontCache.getRobotoMedium(requireContext()));
 		saveBtnTitle.setTextColor(ContextCompat.getColorStateList(app,
 				nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
 		saveBtn.setOnClickListener(new View.OnClickListener() {
@@ -172,8 +217,24 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				dismiss();
 			}
 		});
-		template = new TileSourceTemplate("", "", PNG_EXT, MAX_ZOOM, MIN_ZOOM, TILE_SIZE, BIT_DENSITY, AVG_SIZE);
-		if (editedLayerName != null) {
+		final ScrollView scrollView = root.findViewById(R.id.scroll_view);
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+			int pastY = 0;
+
+			@Override
+			public void onScrollChanged() {
+				int y = scrollView.getScrollY();
+				if (pastY != y) {
+					pastY = y;
+					View view = getDialog().getCurrentFocus();
+					AndroidUtils.hideSoftKeyboard(requireActivity(), view);
+				}
+			}
+		});
+		if (template == null) {
+			template = new TileSourceTemplate("", "", PNG_EXT, MAX_ZOOM, MIN_ZOOM, TILE_SIZE, BIT_DENSITY, AVG_SIZE);
+		}
+		if (editedLayerName != null && !fromTemplate) {
 			if (!editedLayerName.endsWith(IndexConstants.SQLITE_EXT)) {
 				File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + editedLayerName);
 				template = TileSourceManager.createTileSourceTemplate(f);
@@ -194,6 +255,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			}
 		}
 		if (savedInstanceState == null) {
+			if (fromTemplate) {
+				editedLayerName = template.getName();
+			}
 			urlToLoad = template.getUrlTemplate();
 			expireTimeMinutes = template.getExpirationTimeMinutes();
 			minZoom = template.getMinimumZoomSupported();
@@ -212,6 +276,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		outState.putInt(EXPIRE_TIME_KEY, expireTimeMinutes);
 		outState.putBoolean(ELLIPTIC_KEY, elliptic);
 		outState.putBoolean(SQLITE_DB_KEY, sqliteDB);
+		outState.putBoolean(FROM_TEMPLATE_KEY, fromTemplate);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -226,10 +291,12 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 					if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
 						if (event.getAction() == KeyEvent.ACTION_DOWN) {
 							return true;
-						} else {
+						} else if (wasChanged || fromTemplate) {
 							showExitDialog();
-							return true;
+						} else {
+							dismiss();
 						}
+						return true;
 					}
 					return false;
 				}
@@ -243,6 +310,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			minZoom = min;
 			maxZoom = max;
 			updateDescription(ConfigurationItem.ZOOM_LEVELS);
+			wasChanged = true;
 		}
 	}
 
@@ -251,6 +319,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		if (isAdded()) {
 			expireTimeMinutes = expireValue;
 			updateDescription(ConfigurationItem.EXPIRE_TIME);
+			wasChanged = true;
 		}
 	}
 
@@ -259,6 +328,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		if (isAdded()) {
 			this.elliptic = elliptic;
 			updateDescription(ConfigurationItem.MERCATOR_PROJECTION);
+			wasChanged = true;
 		}
 	}
 
@@ -267,36 +337,22 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		if (isAdded()) {
 			this.sqliteDB = sqliteDb;
 			updateDescription(ConfigurationItem.STORAGE_FORMAT);
+			wasChanged = true;
 		}
 	}
 
-	private TextWatcher getTextWatcher() {
-		return new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+	private void updateSaveButton() {
+		boolean enabled = !nameEditText.getText().toString().isEmpty()
+				&& !urlEditText.getText().toString().isEmpty();
+		saveBtn.setEnabled(enabled);
+		saveBtnTitle.setEnabled(enabled);
+	}
 
-			}
-
-			@Override
-			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable editable) {
-				if (nameEditText.getText() != null && urlEditText.getText() != null) {
-					String name = nameEditText.getText().toString().trim();
-					String url = urlEditText.getText().toString().trim();
-					if (Algorithms.isEmpty(name) || Algorithms.isEmpty(url)) {
-						saveBtn.setEnabled(false);
-						saveBtnTitle.setEnabled(false);
-					} else {
-						saveBtn.setEnabled(true);
-						saveBtnTitle.setEnabled(true);
-					}
-				}
-			}
-		};
+	private void checkWasChanged() {
+		if (!Algorithms.objectEquals(editedLayerName, nameEditText.getText().toString())
+				|| !Algorithms.objectEquals(urlToLoad, urlEditText.getText().toString())) {
+			wasChanged = true;
+		}
 	}
 
 	private void saveTemplate() {
@@ -310,20 +366,28 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			template.setEllipticYTile(elliptic);
 			template.setExpirationTimeMinutes(expireTimeMinutes);
 			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + editedLayerName);
+			String ext = null;
+			boolean storageChanged = false;
 			if (f.exists()) {
 				int extIndex = f.getName().lastIndexOf('.');
-				String ext = extIndex == -1 ? "" : f.getName().substring(extIndex);
+				ext = extIndex == -1 ? "" : f.getName().substring(extIndex);
 				String originalName = extIndex == -1 ? f.getName() : f.getName().substring(0, extIndex);
 				if (!Algorithms.objectEquals(newName, originalName)) {
-					if (IndexConstants.SQLITE_EXT.equals(ext) && sqliteDB) {
-						FileUtils.renameSQLiteFile(app, f, newName, null);
-					} else if (!sqliteDB) {
+					if (IndexConstants.SQLITE_EXT.equals(ext)) {
+						f = FileUtils.renameSQLiteFile(app, f, newName + ext, null);
+					} else {
 						f.renameTo(app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName));
+						f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + newName);
 					}
 				}
 			}
 			if (sqliteDB) {
-				if (!f.exists() || f.isDirectory()) {
+				if (IndexConstants.SQLITE_EXT.equals(ext)) {
+					List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
+					SQLiteTileSource sqLiteTileSource = new SQLiteTileSource(app, f, knownTemplates);
+					sqLiteTileSource.couldBeDownloadedFromInternet();
+					sqLiteTileSource.updateFromTileSourceTemplate(template);
+				} else {
 					SQLiteTileSource sqLiteTileSource =
 							new SQLiteTileSource(app, newName, minZoom,
 									maxZoom, urlToLoad, "",
@@ -331,14 +395,14 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 									expireTimeMinutes * 60 * 1000L, false, ""
 							);
 					sqLiteTileSource.createDataBase();
-				} else {
-					List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
-					SQLiteTileSource sqLiteTileSource = new SQLiteTileSource(app, f, knownTemplates);
-					sqLiteTileSource.couldBeDownloadedFromInternet();
-					sqLiteTileSource.updateFromTileSourceTemplate(template);
+					storageChanged = f.exists();
 				}
 			} else {
 				getSettings().installTileSource(template);
+				storageChanged = f != null && f.exists() && IndexConstants.SQLITE_EXT.equals(ext);
+			}
+			if (storageChanged) {
+				new DeleteTilesTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
 			}
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof OnMapSourceUpdateListener) {
@@ -352,15 +416,14 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private void updateUi() {
 		nameEditText.setText(editedLayerName != null ? editedLayerName.replace(IndexConstants.SQLITE_EXT, "") : "");
 		urlEditText.setText(urlToLoad);
+		nameEditText.addTextChangedListener(new MapSourceTextWatcher(nameInputLayout));
+		urlEditText.addTextChangedListener(new MapSourceTextWatcher(urlInputLayout));
+		updateSaveButton();
 		addConfigurationItems(ConfigurationItem.values());
 	}
 
 	private void onHelpClick() {
-		Intent i = new Intent(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(MAPS_PLUGINS_URL));
-		if (AndroidUtils.isIntentSafe(app, i)) {
-			startActivity(i);
-		}
+		WikipediaDialogFragment.showFullArticle(requireContext(), Uri.parse(MAPS_PLUGINS_URL), nightMode);
 	}
 
 	private void showExitDialog() {
@@ -402,13 +465,14 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			@Override
 			public void onClick(View view) {
 				FragmentManager fm = getFragmentManager();
+				boolean newMapSource = Algorithms.isEmpty(editedLayerName) || fromTemplate;
 				if (fm != null && !fm.isStateSaved()) {
 					switch (item) {
 						case ZOOM_LEVELS:
 							InputZoomLevelsBottomSheet.showInstance(
 									fm, EditMapSourceDialogFragment.this,
 									R.string.map_source_zoom_levels, R.string.map_source_zoom_levels_descr,
-									minZoom, maxZoom, editedLayerName == null
+									minZoom, maxZoom, newMapSource
 							);
 							break;
 						case EXPIRE_TIME:
@@ -418,7 +482,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 							MercatorProjectionBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, elliptic);
 							break;
 						case STORAGE_FORMAT:
-							TileStorageFormatBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, sqliteDB);
+							TileStorageFormatBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, sqliteDB, newMapSource);
 							break;
 					}
 				}
@@ -464,7 +528,67 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		this.editedLayerName = editedLayerName;
 	}
 
+	public void setTemplate(TileSourceTemplate template) {
+		this.template = template;
+	}
+
+	class MapSourceTextWatcher implements TextWatcher {
+		private TextInputLayout relatedInputLayout;
+
+		public MapSourceTextWatcher(TextInputLayout textInputLayout) {
+			this.relatedInputLayout = textInputLayout;
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+		}
+
+		@Override
+		public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+		}
+
+		@Override
+		public void afterTextChanged(Editable editable) {
+			if (editable.toString().isEmpty()) {
+				relatedInputLayout.setError(relatedInputLayout.getHelperText());
+			} else {
+				relatedInputLayout.setError(null);
+			}
+			updateSaveButton();
+			checkWasChanged();
+		}
+	}
+
 	public interface OnMapSourceUpdateListener {
 		void onMapSourceUpdated();
+	}
+
+	public static class DeleteTilesTask extends AsyncTask<File, Void, Void> {
+
+		private OsmandApplication app;
+
+		public DeleteTilesTask(OsmandApplication app) {
+			this.app = app;
+		}
+
+		@Override
+		protected Void doInBackground(File... files) {
+			for (File file : files) {
+				if (Algorithms.removeAllFiles(file)) {
+					app.getResourceManager().closeFile(file.getName());
+					File tShm = new File(file.getParentFile(), file.getName() + "-shm");
+					File tWal = new File(file.getParentFile(), file.getName() + "-wal");
+					if (tShm.exists()) {
+						Algorithms.removeAllFiles(tShm);
+					}
+					if (tWal.exists()) {
+						Algorithms.removeAllFiles(tWal);
+					}
+				}
+			}
+			return null;
+		}
 	}
 }

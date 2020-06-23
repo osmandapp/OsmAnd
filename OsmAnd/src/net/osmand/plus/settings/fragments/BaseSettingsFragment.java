@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -923,14 +924,40 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
-	protected void applyPreferenceWithSnackBar(final String prefId, final Serializable newValue) {
+	public void setupSpeedCamerasAlert() {
+		Preference speedCamerasAlert = findPreference(settings.SPEED_CAMERAS_UNINSTALLED.getId());
+		speedCamerasAlert.setIcon(getContentIcon(R.drawable.ic_action_alert));
+		speedCamerasAlert.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
+	}
+
+	public void setupPrefRoundedBg(PreferenceViewHolder holder) {
+		View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
+		if (selectableView != null) {
+			int color = AndroidUtils.getColorFromAttr(app, R.attr.activity_background_color);
+			int selectedColor = UiUtilities.getColorWithAlpha(getActiveProfileColor(), 0.3f);
+
+			Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+				Drawable selectable = getPaintedIcon(R.drawable.ripple_rectangle_rounded, selectedColor);
+				Drawable[] layers = {bgDrawable, selectable};
+				AndroidUtils.setBackground(selectableView, new LayerDrawable(layers));
+			} else {
+				AndroidUtils.setBackground(selectableView, bgDrawable);
+			}
+			LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) selectableView.getLayoutParams();
+			params.setMargins(params.leftMargin, AndroidUtils.dpToPx(app, 6), params.rightMargin, params.bottomMargin);
+		}
+	}
+
+	protected void applyPreferenceWithSnackBar(final String prefId,
+											   final Serializable newValue) {
 		onApplyPreferenceChange(prefId, false, newValue);
 		updateSetting(prefId);
 		View containerView = getView();
 		if (containerView != null) {
 			String modeName = appMode.toHumanString();
 			String text = app.getString(R.string.changes_applied_to_profile, modeName);
-			SpannableString message = UiUtilities.createSpannableString(text, modeName, new StyleSpan(Typeface.BOLD));
+			SpannableString message = UiUtilities.createSpannableString(text, new StyleSpan(Typeface.BOLD), modeName);
 			Snackbar snackbar = Snackbar.make(containerView, message, Snackbar.LENGTH_LONG)
 					.setAction(R.string.apply_to_all_profiles, new View.OnClickListener() {
 						@Override

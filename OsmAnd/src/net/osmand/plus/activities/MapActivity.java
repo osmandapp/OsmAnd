@@ -650,6 +650,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onNewIntent(final Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
+		intentHelper.parseLaunchIntents();
 	}
 
 	@Override
@@ -673,6 +674,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		if (trackDetailsMenu.isVisible()) {
 			trackDetailsMenu.hide(true);
+			if (mapContextMenu.isActive() && mapContextMenu.getPointDescription() != null
+					&& mapContextMenu.getPointDescription().isGpxPoint()) {
+				mapContextMenu.show();
+				return;
+			}
 			if (prevActivityIntent == null) {
 				return;
 			}

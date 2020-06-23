@@ -33,7 +33,16 @@ public class CollatorStringMatcher implements StringMatcher {
 
 	public CollatorStringMatcher(String part, StringMatcherMode mode) {
 		this.collator = OsmAndCollator.primaryCollator();
-		this.part = simplifyStringAndAlignChars(part);
+		part = simplifyStringAndAlignChars(part);
+		if (part.length() > 0 && part.charAt(part.length() - 1) == '.') {
+			part = part.substring(0, part.length() - 1);
+			if (mode == StringMatcherMode.CHECK_EQUALS_FROM_SPACE) {
+				mode = StringMatcherMode.CHECK_STARTS_FROM_SPACE;
+			} else if (mode == StringMatcherMode.CHECK_EQUALS) {
+				mode = StringMatcherMode.CHECK_ONLY_STARTS_WITH;
+			}
+		}
+		this.part = part;
 		this.mode = mode;
 		
 	}

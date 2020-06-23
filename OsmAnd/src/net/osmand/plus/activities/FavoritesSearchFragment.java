@@ -47,7 +47,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -463,7 +463,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 					TextView title = (TextView) view.findViewById(R.id.title);
 					TextView subtitle = (TextView) view.findViewById(R.id.subtitle);
 
-					imageView.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity,
+					imageView.setImageDrawable(PointImageDrawable.getFromFavorite(activity,
 							helper.getColorWithCategory(point, getResources().getColor(R.color.color_favorite)),
 							false, point));
 					title.setText(point.getDisplayName(app));

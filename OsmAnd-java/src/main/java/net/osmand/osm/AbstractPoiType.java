@@ -67,7 +67,6 @@ public abstract class AbstractPoiType {
 		return this instanceof PoiType && this.isAdditional();
 	}
 
-
 	public String getTranslation() {
 		if(translation == null) {
 			translation = registry.getTranslation(this);

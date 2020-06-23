@@ -249,7 +249,7 @@
     <string name="poi_shelter">Abeiro</string>
     <string name="poi_funicular">Funicular</string>
     <string name="poi_club_astronomy">Club de astronomía</string>
-    <string name="poi_club_computer">Club de informática</string>
+    <string name="poi_club_computer">Clube de informática</string>
     <string name="poi_club_board_games">Club de xogos de mesa</string>
     <string name="poi_club_motorcycle">Club de motos</string>
     <string name="poi_club_sport">Club deportivo</string>
@@ -907,7 +907,7 @@
     <string name="poi_toll_yes">Portaxe</string>
     <string name="poi_toll_no">Sen portaxe</string>
     <string name="poi_traffic_signals_sound_yes">Si</string>
-    <string name="poi_traffic_signals_sound_no">Non</string>
+    <string name="poi_traffic_signals_sound_no">Son: non</string>
     <string name="poi_services">Área de servizo</string>
     <string name="poi_bird_hide">Lugar para observar paxaros</string>
     <string name="poi_farmland">Agras</string>
@@ -3817,4 +3817,9 @@
     <string name="poi_fire_hydrant_type_pipe">Tubaxe</string>
     <string name="poi_fire_hydrant_pressure_filter">Presión</string>
     <string name="poi_pump_status_missing_beam">Estado da bomba: sen chave</string>
+    <string name="poi_traffic_signals_arrow_yes">Si</string>
+    <string name="poi_traffic_signals_vibration_yes">Si</string>
+    <string name="poi_traffic_signals_vibration_no">Vibración: non</string>
+    <string name="poi_traffic_signals_arrow">Frecha</string>
+    <string name="poi_traffic_signals_vibration">Vibración</string>
 </resources>
