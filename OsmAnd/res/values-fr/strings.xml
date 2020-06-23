@@ -3237,7 +3237,7 @@
     <string name="map_during_navigation_info">Carte pendant la navigation</string>
     <string name="map_during_navigation">Carte pendant la navigation</string>
     <string name="shared_string_other">Autre</string>
-    <string name="vehicle_parameters_descr">Poids, hauteur, vitesse</string>
+    <string name="vehicle_parameters_descr">Poids, hauteur, longueur, vitesse</string>
     <string name="vehicle_parameters">Caractéristiques du véhicule</string>
     <string name="voice_announces_info">Les annonces vocales n\'ont lieu que pendant la navigation.</string>
     <string name="voice_announces_descr">Instructions de navigation et annonces</string>
@@ -3785,4 +3785,8 @@
     <string name="shared_string_bearing">Direction</string>
     <string name="item_deleted">%1$s supprimé</string>
     <string name="shared_string_uninstall_and_restart">Désinstaller et redémarrer</string>
+    <string name="routing_attr_length_description">Indiquez la longueur du véhicule autorisée sur les routes.</string>
+    <string name="routing_attr_length_name">Limite de longueur</string>
+    <string name="speed_cameras_removed_descr">Cet appareil n\'a pas de radars.</string>
+    <string name="app_mode_inline_skates">Patins à roulettes en ligne</string>
 </resources>
