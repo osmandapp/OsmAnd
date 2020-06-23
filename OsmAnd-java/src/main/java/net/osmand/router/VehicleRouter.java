@@ -48,11 +48,6 @@ public interface VehicleRouter {
 	public float defineRoutingSpeed(RouteDataObject road);
 	
 	/**
-	 * Define if rule should be applied based on movement direction;
-	 */
-	public int[] filterRulesByDirection(int[] pointRules, boolean direction, RouteDataObject road);
-	
-	/**
 	 * return real speed in m/s for vehicle for specified road
 	 */
 	public float defineVehicleSpeed(RouteDataObject road);

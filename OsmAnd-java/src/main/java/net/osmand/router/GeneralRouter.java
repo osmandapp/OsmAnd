@@ -355,7 +355,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public float defineObstacle(RouteDataObject road, int point, boolean dir) {
-		int[] pointTypes = filterRulesByDirection(road.getPointTypes(point), dir, road);
+		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes != null) {
 			Float obst = getCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes);
 			if(obst == null) {
@@ -367,9 +367,37 @@ public class GeneralRouter implements VehicleRouter {
 		return 0;
 	}
 	
+	boolean foundDirRule = false;
+	TIntArrayList filteredRules = new TIntArrayList();
+	
 	@Override
 	public float defineRoutingObstacle(RouteDataObject road, int point, boolean dir) {
-		int[] pointTypes = filterRulesByDirection(road.getPointTypes(point), dir, road);
+		int[] pointTypes = road.getPointTypes(point);
+//		if (pointTypes != null) {			
+//			filteredRules.clear();
+//			for (int i = 0; i < pointTypes.length; i++) {
+//				foundDirRule = false;
+//				if (road.region.isTrafficSignalsRule(pointTypes[i])) {
+//					for (int rid : pointTypes) {
+//						if (rid != pointTypes[i]) {
+//							int trafficSignalDir = road.region.getTrafficSignalDirection(rid);
+//							if (trafficSignalDir != 0) {
+//								if ((dir && trafficSignalDir > 0) || (!dir && trafficSignalDir < 0)) {
+//									filteredRules.add(pointTypes[i]);
+//								} 
+//								foundDirRule = true;
+//							}
+//						}
+//					}
+//					if (!foundDirRule) {
+//						filteredRules.add(pointTypes[i]);
+//					}
+//				} else if (road.region.getTrafficSignalDirection(pointTypes[i]) == 0){
+//					filteredRules.add(pointTypes[i]);
+//				}
+//			}
+//			pointTypes = filteredRules.size() > 0 ? filteredRules.toArray() : null;
+//		}
 		if(pointTypes != null) {
 			Float obst = getCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes);
 			if(obst == null) {
@@ -379,38 +407,6 @@ public class GeneralRouter implements VehicleRouter {
 			return obst;
 		}
 		return 0;
-	}
-	
-	@Override
-	public int[] filterRulesByDirection(int[] pointRules, boolean direction, RouteDataObject route) {
-		if (pointRules != null) {
-			TIntArrayList filteredRules = new TIntArrayList();
-			boolean foundDirRule = false;
-			for (int i = 0; i < pointRules.length; i++) {
-				foundDirRule = false;
-				if (route.region.isTrafficSignalsRule(pointRules[i])) {
-					for (int rid : pointRules) {
-						if (rid != pointRules[i]) {
-							//possible error if we have two different directions on one point?
-							int trafficSignalDir = route.region.getTrafficSignalDirection(rid);
-							if (trafficSignalDir != 0) {
-								if ((direction && trafficSignalDir > 0) || (!direction && trafficSignalDir < 0)) {
-									filteredRules.add(pointRules[i]);
-								} 
-								foundDirRule = true;
-							}
-						}
-					}
-					if (!foundDirRule) {
-						filteredRules.add(pointRules[i]);
-					}
-				} else if (route.region.getTrafficSignalDirection(pointRules[i]) == 0){
-					filteredRules.add(pointRules[i]);
-				}
-			} 
-			return filteredRules.size() > 0 ? filteredRules.toArray() : null;
-		}
-		return pointRules;
 	}
 	
 	@Override
