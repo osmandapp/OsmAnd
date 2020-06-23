@@ -69,7 +69,7 @@
 		android:key="speed_cameras_uninstalled"
 		android:persistent="false"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/uninstall_speed_cameras"
+		tools:title="@string/uninstall_speed_cameras"
 		tools:icon="@drawable/ic_speed_camera_disabled" />
 
 </PreferenceScreen>

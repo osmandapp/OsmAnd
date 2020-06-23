@@ -12,6 +12,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
+import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
@@ -53,6 +54,9 @@ public class IntentHelper {
 		}
 		if (!applied) {
 			applied = parseOpenGpxIntent();
+		}
+		if (!applied) {
+			applied = parseExtraTextIntent();
 		}
 		return applied;
 	}
@@ -251,5 +255,23 @@ public class IntentHelper {
 	private void clearIntent(Intent intent) {
 		intent.setAction(null);
 		intent.setData(null);
+	}
+
+	private boolean parseExtraTextIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M && intent != null) {
+			CharSequence text = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
+			if (!Algorithms.isEmpty(text)) {
+				return QuickSearchDialogFragment.showInstance(
+						mapActivity,
+						text.toString(),
+						null,
+						QuickSearchDialogFragment.QuickSearchType.REGULAR,
+						QuickSearchDialogFragment.QuickSearchTab.CATEGORIES,
+						null
+				);
+			}
+		}
+		return false;
 	}
 }

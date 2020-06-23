@@ -469,7 +469,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 					categories.add(lastUsedGroup.getDisplayName(app));
 				}
 				for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
-					if (lastUsedGroup != null && !fg.equals(lastUsedGroup) && fg.isVisible()) {
+					if (!fg.equals(lastUsedGroup) && fg.isVisible()) {
 						categories.add(fg.getDisplayName(app));
 					}
 				}

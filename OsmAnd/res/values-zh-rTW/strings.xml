@@ -3781,4 +3781,21 @@
     <string name="quick_action_mapillary_hide">隱藏 Mapillary</string>
     <string name="quick_action_mapillary_show">顯示 Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">在地圖上顯示或隱藏 Mapillary 圖層的開關。</string>
+    <string name="uninstall_speed_cameras">解除安裝測速照相</string>
+    <string name="shared_string_legal">法律</string>
+    <string name="speed_camera_pois">測速照相 POI 的</string>
+    <string name="speed_cameras_legal_descr">在某些國家或地區，法律禁止使用測速照相的警報應用程式。
+\n
+\n您必須根據您所在國家的法律做出選擇。
+\n
+\n選取 %1$s，您將會收到關於測速照相的警報與警告。
+\n
+\n選取 %2$s。所有關於測速照相的：警報、通知與 POI 都將會被刪除，直到您完全重新安裝 OsmAnd 為止。</string>
+    <string name="keep_active">保持啟用</string>
+    <string name="shared_string_uninstall">解除安裝</string>
+    <string name="speed_cameras_alert">某些國家禁止使用測速照相的警報裝置。</string>
+    <string name="shared_string_bearing">方向</string>
+    <string name="item_deleted">%1$s 已刪除</string>
+    <string name="speed_cameras_restart_descr">必須重新啟動才能完全刪除測速照相的資料。</string>
+    <string name="shared_string_uninstall_and_restart">解除安裝並重新啟動</string>
 </resources>

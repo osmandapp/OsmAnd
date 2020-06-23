@@ -84,9 +84,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             tools:text="13.44"
-            android:layout_marginBottom="56dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginBottom="@dimen/map_button_shadow_width"
+            android:layout_marginLeft="@dimen/map_alarm_bottom_text_margin"
+            android:layout_marginStart="@dimen/map_alarm_bottom_text_margin"
             android:layout_gravity="bottom|start"
             android:textSize="@dimen/map_button_text_size"/>
 
@@ -142,7 +142,8 @@
                 android:layout_gravity="bottom"
                 android:background="@drawable/btn_circle"
                 android:visibility="gone"
-                tools:src="@drawable/ic_action_remove_dark"/>
+                tools:src="@drawable/ic_action_remove_dark"
+                android:contentDescription="@string/snap_to_road" />
 
             <FrameLayout
                 android:id="@+id/map_ruler_layout"

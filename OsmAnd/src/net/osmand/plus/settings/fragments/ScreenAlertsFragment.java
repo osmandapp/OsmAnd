@@ -150,7 +150,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnPref
 			return getIcon(americanSigns ? R.drawable.warnings_traffic_calming_us : R.drawable.warnings_traffic_calming);
 		} else if (settings.SHOW_PEDESTRIAN.getModeValue(selectedMode)) {
 			return getIcon(americanSigns ? R.drawable.warnings_pedestrian_us : R.drawable.warnings_pedestrian);
-		} else if (settings.SHOW_CAMERAS.getModeValue(selectedMode)) {
+		} else if (settings.SHOW_CAMERAS.getModeValue(selectedMode) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
 			return getIcon(R.drawable.warnings_speed_camera);
 		} else if (settings.SHOW_TUNNELS.getModeValue(selectedMode)) {
 			return getIcon(americanSigns ? R.drawable.warnings_tunnel_us : R.drawable.warnings_tunnel);

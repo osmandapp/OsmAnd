@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
@@ -334,23 +335,8 @@ public class QuickSearchListItem {
 				} else if (searchResult.object instanceof CustomSearchPoiFilter) {
 					CustomSearchPoiFilter searchPoiFilter = (CustomSearchPoiFilter) searchResult.object;
 					PoiUIFilter filter = app.getPoiFilters().getFilterById(searchPoiFilter.getFilterId());
-					iconId = R.drawable.mx_special_custom_category;
 					if (filter != null) {
-						Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = filter.getAcceptedTypes();
-						List<PoiCategory> categories = new ArrayList<>(acceptedTypes.keySet());
-						if (categories.size() == 1) {
-							String res = "";
-							PoiCategory category = categories.get(0);
-							LinkedHashSet<String> filters = acceptedTypes.get(category);
-							if (filters == null || filters.size() > 1) {
-								res = category.getIconKeyName();
-							} else {
-								res = getPoiTypeIconName(category.getPoiTypeByKeyName(filters.iterator().next()));
-							}
-							if (res != null && RenderingIcons.containsBigIcon(res)) {
-								iconId = RenderingIcons.getBigIconResourceId(res);
-							}
-						}
+						iconId = getCustomFilterIconRes(filter);
 					}
 				}
 				if (iconId > 0) {
@@ -421,5 +407,28 @@ public class QuickSearchListItem {
 	private static Drawable getIcon(OsmandApplication app, int iconId) {
 		return app.getUIUtilities().getIcon(iconId,
 				app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+	}
+
+	@DrawableRes
+	public static int getCustomFilterIconRes(PoiUIFilter filter) {
+		int iconId = 0;
+		if (filter != null) {
+			Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = filter.getAcceptedTypes();
+			List<PoiCategory> categories = new ArrayList<>(acceptedTypes.keySet());
+			if (categories.size() == 1) {
+				String res = "";
+				PoiCategory category = categories.get(0);
+				LinkedHashSet<String> filters = acceptedTypes.get(category);
+				if (filters == null || filters.size() > 1) {
+					res = category.getIconKeyName();
+				} else {
+					res = getPoiTypeIconName(category.getPoiTypeByKeyName(filters.iterator().next()));
+				}
+				if (res != null && RenderingIcons.containsBigIcon(res)) {
+					iconId = RenderingIcons.getBigIconResourceId(res);
+				}
+			}
+		}
+		return iconId > 0 ? iconId : R.drawable.mx_special_custom_category;
 	}
 }

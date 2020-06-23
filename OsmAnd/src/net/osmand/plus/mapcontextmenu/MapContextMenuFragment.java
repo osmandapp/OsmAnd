@@ -551,65 +551,17 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		View buttonsBottomBorder = view.findViewById(R.id.buttons_bottom_border);
-		View buttonsTopBorder = view.findViewById(R.id.buttons_top_border);
-		buttonsBottomBorder.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
-		buttonsTopBorder.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
-		LinearLayout buttons = view.findViewById(R.id.context_menu_buttons);
-		buttons.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light));
-		if (!menu.buttonsVisible()) {
-			buttonsTopBorder.setVisibility(View.GONE);
-			buttons.setVisibility(View.GONE);
-		}
+		int buttonsBorderColor = ContextCompat.getColor(mapActivity,
+				nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light);
+		buttonsBottomBorder.setBackgroundColor(buttonsBorderColor);
 		View bottomButtons = view.findViewById(R.id.context_menu_bottom_buttons);
-		bottomButtons.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light));
-		if (!menu.navigateButtonVisible()) {
-			bottomButtons.findViewById(R.id.context_menu_directions_button).setVisibility(View.GONE);
-		}
-
-		// Action buttons
-		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
-		List<ContextMenuItem> items = adapter.getVisibleItems();
-		List<String> mainIds = ((OsmandSettings.MainContextMenuItemsSettings) app.getSettings().CONTEXT_MENU_ACTIONS_ITEMS.get()).getMainIds();
-		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
-		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());
-
-		if (!mainIds.isEmpty()){
-			for (ContextMenuItem item : items) {
-				if (mainIds.contains(item.getId())) {
-					mainAdapter.addItem(item);
-				} else {
-					additionalAdapter.addItem(item);
-				}
-			}
-		} else {
-			for (int i = 0; i < items.size(); i++) {
-				if (i < MAIN_BUTTONS_QUANTITY) {
-					mainAdapter.addItem(items.get(i));
-				} else {
-					additionalAdapter.addItem(items.get(i));
-				}
-			}
-		}
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-				ViewGroup.LayoutParams.MATCH_PARENT,
-				ViewGroup.LayoutParams.MATCH_PARENT,
-				1f
-		);
-		buttons.removeAllViews();
-		ContextMenuItemClickListener mainListener = menu.getContextMenuItemClickListener(mainAdapter);
-		ContextMenuItemClickListener additionalListener = menu.getContextMenuItemClickListener(additionalAdapter);
-
-		if (!mainIds.isEmpty()){
-			for (ContextMenuItem item: mainAdapter.getItems()) {
-				buttons.addView(getActionView(item, mainAdapter.getItems().indexOf(item), mainAdapter, additionalAdapter, mainListener, additionalListener), params);
-			}
-		} else {
-			int mainButtonsQuantity = Math.min(MAIN_BUTTONS_QUANTITY, items.size());
-			for (int i = 0; i < mainButtonsQuantity; i++) {
-				buttons.addView(getActionView(items.get(i), i, mainAdapter, additionalAdapter, mainListener, additionalListener), params);
-			}
-		}
-		buttons.setGravity(Gravity.CENTER);
+		bottomButtons.setBackgroundColor(ContextCompat.getColor(mapActivity,
+				nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light));
+		bottomButtons.findViewById(R.id.context_menu_directions_button)
+				.setVisibility(menu.navigateButtonVisible() ? View.VISIBLE : View.GONE);
+		View buttonsTopBorder = view.findViewById(R.id.buttons_top_border);
+		buttonsTopBorder.setBackgroundColor(buttonsBorderColor);
+		buttonsTopBorder.setVisibility(menu.buttonsVisible() ? View.VISIBLE : View.GONE);
 
 		//Bottom buttons
 		int bottomButtonsColor = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
@@ -667,6 +619,58 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		created = true;
 		return view;
+	}
+
+	private void updateActionButtons(MapActivity mapActivity) {
+		LinearLayout buttons = view.findViewById(R.id.context_menu_buttons);
+		buttons.setBackgroundColor(ContextCompat.getColor(mapActivity,
+				nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light));
+		buttons.setVisibility(menu.buttonsVisible() ? View.VISIBLE : View.GONE);
+		// Action buttons
+		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
+		List<ContextMenuItem> items = adapter.getVisibleItems();
+		List<String> mainIds = ((OsmandSettings.MainContextMenuItemsSettings) mapActivity.getMyApplication()
+				.getSettings().CONTEXT_MENU_ACTIONS_ITEMS.get()).getMainIds();
+		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(requireMyApplication());
+		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(requireMyApplication());
+
+		if (!mainIds.isEmpty()) {
+			for (ContextMenuItem item : items) {
+				if (mainIds.contains(item.getId())) {
+					mainAdapter.addItem(item);
+				} else {
+					additionalAdapter.addItem(item);
+				}
+			}
+		} else {
+			for (int i = 0; i < items.size(); i++) {
+				if (i < MAIN_BUTTONS_QUANTITY) {
+					mainAdapter.addItem(items.get(i));
+				} else {
+					additionalAdapter.addItem(items.get(i));
+				}
+			}
+		}
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				ViewGroup.LayoutParams.MATCH_PARENT,
+				ViewGroup.LayoutParams.MATCH_PARENT,
+				1f
+		);
+		buttons.removeAllViews();
+		ContextMenuItemClickListener mainListener = menu.getContextMenuItemClickListener(mainAdapter);
+		ContextMenuItemClickListener additionalListener = menu.getContextMenuItemClickListener(additionalAdapter);
+
+		if (!mainIds.isEmpty()) {
+			for (ContextMenuItem item : mainAdapter.getItems()) {
+				buttons.addView(getActionView(item, mainAdapter.getItems().indexOf(item), mainAdapter, additionalAdapter, mainListener, additionalListener), params);
+			}
+		} else {
+			int mainButtonsQuantity = Math.min(MAIN_BUTTONS_QUANTITY, items.size());
+			for (int i = 0; i < mainButtonsQuantity; i++) {
+				buttons.addView(getActionView(items.get(i), i, mainAdapter, additionalAdapter, mainListener, additionalListener), params);
+			}
+		}
+		buttons.setGravity(Gravity.CENTER);
 	}
 
 	private View getActionView(ContextMenuItem contextMenuItem,
@@ -1271,6 +1275,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			} else {
 				titleProgressContainer.setVisibility(View.GONE);
 			}
+			updateActionButtons(getMapActivity());
 			updateAdditionalInfoVisibility();
 		}
 	}

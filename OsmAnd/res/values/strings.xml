@@ -12,10 +12,13 @@
 
 -->
     <string name="app_mode_inline_skates">Inline skates</string>
+    <string name="speed_cameras_removed_descr">This device doesn\'t have speed cameras.</string>
     <string name="shared_string_uninstall_and_restart">Uninstall and Restart</string>
     <string name="speed_cameras_restart_descr">Restart is needed to completely delete speed camera data.</string>
     <string name="item_deleted">%1$s deleted</string>
     <string name="shared_string_bearing">Bearing</string>
+    <string name="routing_attr_length_name">Length limit</string>
+    <string name="routing_attr_length_description">Specify vehicle length to be permitted on routes.</string>
     <string name="quick_action_showhide_mapillary_descr">A toggle to show or hide the Mapillary layer on the map.</string>
     <string name="quick_action_mapillary_show">Show Mapillary</string>
     <string name="quick_action_mapillary_hide">Hide Mapillary</string>
@@ -516,7 +519,7 @@
     <string name="map_during_navigation_info">Map during navigation</string>
     <string name="map_during_navigation">Map during navigation</string>
     <string name="shared_string_other">Other</string>
-    <string name="vehicle_parameters_descr">Weight, height, speed</string>
+    <string name="vehicle_parameters_descr">Weight, height, length, speed</string>
     <string name="vehicle_parameters">Vehicle parameters</string>
     <string name="voice_announces_info">Voice announcements only occur during navigation.</string>
     <string name="voice_announces_descr">Navigation instructions and announcements</string>

@@ -62,6 +62,8 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
+			android:layout_marginStart="@dimen/list_content_padding_large"
+			android:layout_marginLeft="@dimen/list_content_padding_large"
 			android:minHeight="@dimen/bottom_sheet_list_item_height"
 			android:paddingStart="@dimen/content_padding_small"
 			android:paddingLeft="@dimen/content_padding_small"
