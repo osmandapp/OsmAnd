@@ -539,7 +539,7 @@
     <string name="use_magnetic_sensor_descr">برای مقدار قطب‌نما به‌جای حسگر جهتی از حسگر مغناطیسی استفاده می‌کند.</string>
     <string name="show_poi_over_map">نشان‌دادن لایهٔ POIها</string>
     <string name="show_poi_over_map_description">آخرین لایهٔ مورداستفاده از POIها را نشان بده.</string>
-    <string name="data_settings">داده‌ها</string>
+    <string name="data_settings">داده</string>
     <string name="shared_string_settings">تنظیمات</string>
     <string name="additional_settings">تنظیمات دیگر</string>
     <string name="update_tile">به‌روزرسانی نقشه</string>
@@ -602,7 +602,7 @@
     <string name="save_track_interval_descr">مشخص کنید برای ضبط رد در هنگام ناوبری، فاصلهٔ زمانی ردنگاری چقدر باشد</string>
     <string name="save_track_to_gpx_descrp">هنگام ناوبری، یک رد GPX به‌صورت خودکار ضبط و در پوشهٔ ردها (tracks) ذخیره می‌شود.</string>
     <string name="osm_settings_descr">تنظیمات لازم برای ارتباط با (OpenStreetMap.org (OSM را مشخص کنید.</string>
-    <string name="data_settings_descr">زبان را مشخص و داده‌ها را دانلود/مجدداً بار کنید.</string>
+    <string name="data_settings_descr">زبان را مشخص و داده را دانلود/دوباره بار کنید.</string>
     <string name="av_photo_play_sound">پخش صدای شاتر دوربین</string>
     <string name="intermediate_items_sort_by_distance">مرتب‌کردن پشت سر هم</string>
     <string name="local_osm_changes_backup_successful">فایل تغییرات OSM ایجاد شد %1$s</string>
@@ -800,7 +800,7 @@
     <string name="opening_changeset">بازکردن بستهٔ تغییرات…</string>
     <string name="list_index_files_was_not_loaded">دریافت لیست مناطق از https://osmand.net ناموفق بود.</string>
     <string name="downloading_list_indexes">در حال دانلود لیست مناطق موجود…</string>
-    <string name="download_question_exist">داده‌های آفلاین برای {0} از قبل وجود دارد ({1}). آن را به‌روز می‌کنید ({2})؟</string>
+    <string name="download_question_exist">دادهٔ آفلاینِ {0} از قبل وجود دارد ({1}). آن را روزآمد می‌کنید ({2})؟</string>
     <string name="router_service">سرویس مسیریابی</string>
     <string name="sd_dir_not_accessible">پوشهٔ ذخیره‌سازی روی کارت حافظه قابل‌دسترسی نیست!</string>
     <string name="router_service_descr">سرویس مسیریابی آنلاین یا آفلاین.</string>
@@ -2779,7 +2779,7 @@
     <string name="welcome_to_open_beta">به ارزیابی همگانی نسخهٔ بتا خوش آمدید</string>
     <string name="contour_lines_hillshade_maps">منحنی‌های میزان و نقشه‌های سایه‌روشن</string>
     <string name="download_wikipedia_description">مقاله‌های ویکی‌سفر %1$s را دانلود کنید تا آن‌ها را آفلاین بخوانید.</string>
-    <string name="download_wikipedia_label">دانلود داده‌های ویکی‌پدیا</string>
+    <string name="download_wikipedia_label">دانلود دادهٔ ویکی‌پدیا</string>
     <string name="open_in_browser_wiki">بازکردن مقالهٔ آنلاین</string>
     <string name="open_in_browser_wiki_description">این مقاله را در مرورگر اینترنت مشاهده کنید.</string>
     <string name="download_wiki_region_placeholder">این منطقه</string>
