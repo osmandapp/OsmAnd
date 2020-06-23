@@ -88,6 +88,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;
 		OsmandSettings.StringPreference pref = (OsmandSettings.StringPreference) app.getSettings()
 				.getCustomRoutingProperty(parameterId, defValue);
+		VehicleSizeAssets assets = VehicleSizeAssets.getAssets(parameterId, routerProfile);
 		Object[] values = parameter.getPossibleValues();
 		String[] valuesStr = new String[values.length];
 		for (int i = 0; i < values.length; i++) {
@@ -98,7 +99,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		for (int i = 1; i < entriesStr.length; i++) {
 			int firstCharIndex = Algorithms.findFirstNumberEndIndex(entriesStr[i]);
 			entriesStr[i] = String.format(app.getString(R.string.ltr_or_rtl_combine_via_space),
-					entriesStr[i].substring(0, firstCharIndex), entriesStr[i].substring(firstCharIndex));
+					entriesStr[i].substring(0, firstCharIndex), getString(assets.getMetricShortRes()));
 		}
 
 		Context ctx = getContext();
@@ -107,7 +108,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		}
 		SizePreference vehicleSizePref = new SizePreference(ctx);
 		vehicleSizePref.setKey(pref.getId());
-		vehicleSizePref.setAssets(VehicleSizeAssets.getAssets(parameterId, routerProfile));
+		vehicleSizePref.setAssets(assets);
 		vehicleSizePref.setDefaultValue(defValue);
 		vehicleSizePref.setTitle(title);
 		vehicleSizePref.setEntries(entriesStr);
