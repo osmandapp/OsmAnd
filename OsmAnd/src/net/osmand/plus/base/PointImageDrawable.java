@@ -59,6 +59,9 @@ public class PointImageDrawable extends Drawable {
 	private int mapIconSize = 0;
 	private int backSize = 0;
 
+	public static final int DEFAULT_SIZE_ON_MAP_DP = 16;
+	public static final int ICON_SIZE_VECTOR_PX = 12;
+
 	private PointImageDrawable(PointInfo pointInfo) {
 		this.withShadow = pointInfo.withShadow;
 		this.synced = pointInfo.synced;
@@ -180,8 +183,6 @@ public class PointImageDrawable extends Drawable {
 
 	private void setScale(float scale) {
 		if (scale != this.scale || this.mapIconSize == 0) {
-			int DEFAULT_SIZE_ON_MAP_DP = 16;
-			int ICON_SIZE_VECTOR_PX = 12;
 			this.scale = scale;
 			int pixels = (int) (dp_12_px * DEFAULT_SIZE_ON_MAP_DP / 12.0);
 			this.mapIconSize = Math.round((scale * pixels / ICON_SIZE_VECTOR_PX * ICON_SIZE_VECTOR_PX));
