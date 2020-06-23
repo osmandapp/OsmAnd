@@ -23,6 +23,8 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.lang3.time.DateUtils;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -75,11 +77,16 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 		Date start = new Date(analysis.startTime);
 		Date end = new Date(analysis.endTime);
-		DateFormat format = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
-
+		DateFormat startFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		DateFormat endFormat;
+		if (DateUtils.isSameDay(start, end)) {
+			endFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
+		} else {
+			endFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		}
 		String startEndTimeTitle = app.getString(R.string.shared_string_start_time) + " - " + app.getString(R.string.shared_string_end_time);
 		buildRow(view, getThemedIcon(R.drawable.ic_action_time_start), null, startEndTimeTitle,
-				format.format(start) + " - " + format.format(end), 0, null,
+				startFormat.format(start) + " - " + endFormat.format(end), 0, null,
 				false, null, false, 0, false, false, false, null, true);
 	}
 
