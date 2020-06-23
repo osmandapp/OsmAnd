@@ -118,6 +118,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 				BasicOpeningHourRule rule = new BasicOpeningHourRule();
 				rule.setStartTime(9 * 60);
 				rule.setEndTime(18 * 60);
+				rule.setDays(new boolean[]{true, true, true, true, true, false, false});
 				OpeningHoursDaysDialogFragment fragment = OpeningHoursDaysDialogFragment.createInstance(rule, -1);
 				fragment.show(getChildFragmentManager(), "OpenTimeDialogFragment");
 			}
