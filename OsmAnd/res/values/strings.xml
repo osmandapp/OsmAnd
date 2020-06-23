@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="app_mode_inline_skates">Inline skates</string>
     <string name="speed_cameras_removed_descr">This device doesn\'t have speed cameras.</string>
     <string name="shared_string_uninstall_and_restart">Uninstall and Restart</string>
     <string name="speed_cameras_restart_descr">Restart is needed to completely delete speed camera data.</string>

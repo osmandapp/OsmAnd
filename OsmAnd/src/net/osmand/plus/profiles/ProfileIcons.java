@@ -28,6 +28,7 @@ public enum ProfileIcons {
 	TRANSPORTER(R.drawable.ic_action_personal_transporter, R.string.app_mode_personal_transporter, "ic_action_personal_transporter"),
 	MONOWHEEL(R.drawable.ic_action_monowheel, R.string.app_mode_monowheel, "ic_action_monowheel"),
 	SCOOTER(R.drawable.ic_action_scooter, R.string.app_mode_scooter, "ic_action_scooter"),
+	INLINE_SKATES(R.drawable.ic_action_inline_skates, R.string.app_mode_inline_skates, "ic_action_inline_skates"),
 	UFO(R.drawable.ic_action_ufo, R.string.app_mode_ufo, "ic_action_ufo"),
 	OFFROAD(R.drawable.ic_action_offroad, R.string.app_mode_offroad, "ic_action_offroad"),
 	CAMPERVAN(R.drawable.ic_action_campervan, R.string.app_mode_campervan, "ic_action_campervan"),
