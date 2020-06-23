@@ -541,9 +541,7 @@
         android:alpha="0">
 
         <androidx.appcompat.widget.Toolbar
-            xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/context_menu_toolbar"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/dashboard_map_toolbar"
@@ -597,15 +595,15 @@
 
         <LinearLayout
             android:id="@+id/context_menu_zoom_buttons"
-            android:layout_width="@dimen/fab_size_with_shadow"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginRight="@dimen/fab_margin_right"
+            android:layout_marginRight="@dimen/map_button_margin"
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone"
             tools:visibility="visible"
-	        android:layout_marginEnd="@dimen/fab_margin_right">
+            android:layout_marginEnd="@dimen/map_button_margin">
 
             <ImageButton
                 android:id="@+id/context_menu_zoom_in_button"
