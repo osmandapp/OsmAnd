@@ -286,8 +286,6 @@ public class BinaryMapRouteReaderAdapter {
 				if (i > 0) {
 					intValue = Integer.parseInt(v.substring(0, i));
 				}
-			} else if (t.endsWith("direction") && v != null) {
-				type = TRAFFIC_SIGNALS;
 			}
 		}
 	}
@@ -300,6 +298,11 @@ public class BinaryMapRouteReaderAdapter {
 		List<RouteSubregion> basesubregions = new ArrayList<RouteSubregion>();
 		TIntObjectHashMap<Integer> trafficSignalsDir = new TIntObjectHashMap<Integer>();
 		List<Integer> trafficSignalsTags = new ArrayList<>();
+		
+		int directionForward = -1;
+		int directionBackward = -1;
+		int directionTrafficSignalsForward = -1;
+		int directionTrafficSignalsBackward = -1;
 		
 		int nameTypeRule = -1;
 		int refTypeRule = -1;
@@ -357,14 +360,20 @@ public class BinaryMapRouteReaderAdapter {
 				destinationTypeRule = id;
 			} else if (tags.equals("destination:ref") || tags.equals("destination:ref:forward") || tags.equals("destination:ref:backward")) {
 				destinationRefTypeRule = id;
-			} else if (tags.endsWith("direction")) {
-				if (val.equals("forward")) {
-					trafficSignalsDir.put(id, 1);
-				} else if (val.equals("backward")) {
-					trafficSignalsDir.put(id, -1);
-				}
 			} else if (tags.equals("highway") && (val.equals("traffic_signals") || val.equals("stop") || val.equals("give_way"))){
 				trafficSignalsTags.add(id);
+			} else if (tags.equals("traffic_signals:direction")){
+				if (val.equals("forward")) {
+					directionTrafficSignalsForward = id;
+				} else if (val.equals("backward")) {
+					directionTrafficSignalsBackward = id;
+				}
+			} else if (tags.equals("direction")) {
+				if (val.equals("forward")) {
+					directionForward = id;
+				} else if (val.equals("backward")) {
+					directionBackward = id;
+				}
 			}
 		}
 		
@@ -373,12 +382,15 @@ public class BinaryMapRouteReaderAdapter {
 		}
 		
 		public int getTrafficSignalDirection(int ruleId) {
-			if (trafficSignalsDir.get(ruleId) != null) {
-				return trafficSignalsDir.get(ruleId);
+			if (ruleId == directionForward || ruleId == directionTrafficSignalsForward) {
+				return 1;
+			} else if (ruleId == directionBackward || ruleId == directionTrafficSignalsBackward) {
+				return -1;
+			} else {
+				return 0;
 			}
-			return 0;
 		}
-		
+
 		public void completeRouteEncodingRules() {
 			for(int i = 0; i < routeEncodingRules.size(); i++) {
 				RouteTypeRule rtr = routeEncodingRules.get(i);
