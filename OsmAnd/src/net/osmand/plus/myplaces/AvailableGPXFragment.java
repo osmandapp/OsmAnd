@@ -68,7 +68,6 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -82,6 +81,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -1482,11 +1482,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
+				final SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxInfo.file.getPath());
 				FileUtils.renameFile(getActivity(), gpxInfo.file, new RenameCallback() {
 					@Override
 					public void renamedTo(File file) {
 						asyncLoader = new LoadGpxTask();
 						asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
+						if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
+							selectedGpxFile.getGpxFile().path = file.getPath();
+							selectedGpxHelper.updateSelectedGpxFile(selectedGpxFile);
+						}
 					}
 				});
 				return true;
