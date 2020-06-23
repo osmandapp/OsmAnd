@@ -348,7 +348,6 @@ public class BinaryMapRouteReaderAdapter {
 			while (routeEncodingRules.size() <= id) {
 				routeEncodingRules.add(null);
 			}
-			/**TODO delete*/ System.out.println(String.format("initRouteIncodingRule=> id: %d, tag: %s, val: %s", id, tags, val));
 			routeEncodingRules.set(id, new RouteTypeRule(tags, val));
 			if (tags.equals("name")) {
 				nameTypeRule = id;
