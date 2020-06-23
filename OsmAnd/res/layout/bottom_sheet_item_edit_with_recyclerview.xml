@@ -19,7 +19,10 @@
 		android:paddingRight="@dimen/content_padding"
 		android:paddingTop="@dimen/content_padding_small"
 		android:paddingBottom="@dimen/content_padding_small"
-		android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
+		android:letterSpacing="@dimen/text_button_letter_spacing"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_list_text_size"
+		osmand:typeface="@string/font_roboto_medium"
 		tools:text="Some Title"
 		android:paddingStart="@dimen/content_padding"
 		android:paddingEnd="@dimen/content_padding" />

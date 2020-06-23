@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,12 +23,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
@@ -157,21 +158,21 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
 	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
 		final int buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
-		final int shadowHeight = AndroidUtils.dpToPx(getContext(), 8);
-		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getContext());
 		return new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
 				Rect visibleDisplayFrame = new Rect();
 				final ScrollView scrollView = getView().findViewById(R.id.scroll_view);
 				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight
-						- shadowHeight - statusBarHeight;
+				boolean showTopShadow;
+				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
 				if (contentHeightPrevious != contentHeight) {
 					if (scrollView.getHeight() > contentHeight) {
 						scrollView.getLayoutParams().height = contentHeight;
+						showTopShadow = false;
 					} else {
 						scrollView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+						showTopShadow = true;
 					}
 					scrollView.requestLayout();
 					int delay = Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP ? 300 : 1000;
@@ -181,6 +182,24 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 						}
 					}, delay);
 					contentHeightPrevious = contentHeight;
+					drawTopShadow(showTopShadow);
+				}
+			}
+
+			private void drawTopShadow(boolean showTopShadow) {
+				final Activity activity = getActivity();
+				View mainView = getView();
+				if (activity == null || mainView == null) {
+					return;
+				}
+				if (AndroidUiHelper.isOrientationPortrait(activity)) {
+					mainView.setBackgroundResource(showTopShadow ? getPortraitBgResId() : getBgColorId());
+					if (!showTopShadow) {
+						mainView.setPadding(0, 0, 0, 0);
+					}
+				} else {
+					mainView.setBackgroundResource(showTopShadow
+							? getLandscapeTopsidesBgResId() : getLandscapeSidesBgResId());
 				}
 			}
 		};
