@@ -3263,7 +3263,7 @@
     <string name="map_during_navigation_info">導航時的地圖</string>
     <string name="map_during_navigation">導航時的地圖</string>
     <string name="shared_string_other">其他</string>
-    <string name="vehicle_parameters_descr">重量、高度、速度</string>
+    <string name="vehicle_parameters_descr">重量、高度、長度、速度</string>
     <string name="vehicle_parameters">車輛參數</string>
     <string name="voice_announces_info">僅在導航時播放語音通知。</string>
     <string name="voice_announces_descr">導航指示與通知</string>
@@ -3798,4 +3798,8 @@
     <string name="item_deleted">%1$s 已刪除</string>
     <string name="speed_cameras_restart_descr">必須重新啟動才能完全刪除測速照相的資料。</string>
     <string name="shared_string_uninstall_and_restart">解除安裝並重新啟動</string>
+    <string name="routing_attr_length_description">指定路線上允許的車輛長度。</string>
+    <string name="routing_attr_length_name">長度限制</string>
+    <string name="speed_cameras_removed_descr">此裝置沒有測速照相機。</string>
+    <string name="app_mode_inline_skates">直排輪鞋</string>
 </resources>
