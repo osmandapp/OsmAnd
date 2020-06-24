@@ -3243,7 +3243,7 @@
     <string name="map_during_navigation_info">מפה במהלך ניווט</string>
     <string name="map_during_navigation">מפה במהלך ניווט</string>
     <string name="shared_string_other">אחר</string>
-    <string name="vehicle_parameters_descr">רוחב, גובה, מהירות</string>
+    <string name="vehicle_parameters_descr">רוחב, גובה, אורך, מהירות</string>
     <string name="vehicle_parameters">מאפייני כלי הרכב</string>
     <string name="voice_announces_info">הכרזות קוליות מושמעות רק במהלך הניווט.</string>
     <string name="voice_announces_descr">הנחיות והכרזות ניווט</string>
@@ -3811,4 +3811,8 @@
 \nבחירה באפשרות %1$s תוביל לכך שתישלחנה אליך התרעות על מצלמות מהירות.
 \n
 \nבחירה באפשרות %2$s תוביל לכך שנתונים שקשורים במצלמות מהירות: אזהרות, התרעות ונקודות עניין תימחקנה עד להתקנה מחדש של OsmAnd.</string>
+    <string name="app_mode_inline_skates">רולרבליידס</string>
+    <string name="routing_attr_length_description">נא לציין את אורך כלי הרכב כדי לבדוק מסלולים מורשים.</string>
+    <string name="routing_attr_length_name">מגבלת אורך</string>
+    <string name="speed_cameras_removed_descr">למכשיר הזה אין מצלמות מהירות.</string>
 </resources>
