@@ -98,6 +98,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	private GeometryWayContext wayContext;
 
 	private LayerDrawable projectionIcon;
+	private float arrowTailRatio;
 	private final static Log log = PlatformUtil.getLog(RouteLayer.class);
 	public RouteLayer(RoutingHelper helper) {
 		this.helper = helper;
@@ -112,6 +113,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		float density = view.getDensity();
 
 		actionArrow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_action_arrow, null);
+		arrowTailRatio=getArrowTailRatio();
 
 		paintIconAction = new Paint();
 		paintIconAction.setFilterBitmap(true);
@@ -295,10 +297,12 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 						// int len = (int) (distSegment / pxStep);
 						float pdx = x - px;
 						float pdy = y - py;
+						float s=attrs.paint3.getStrokeWidth()/(actionArrow.getWidth()/arrowTailRatio);
 						matrix.reset();
 						matrix.postTranslate(0, -actionArrow.getHeight() / 2f);
 						matrix.postRotate((float) angle, actionArrow.getWidth() / 2f, 0);
-						matrix.postTranslate(px + pdx - actionArrow.getWidth() / 2f, py + pdy);
+						matrix.postScale(s,s);
+						matrix.postTranslate(px + pdx - s*actionArrow.getWidth() / 2f, py + pdy);
 						canvas.drawBitmap(actionArrow, matrix, paintIconAction);
 					} else {
 						px = x;
@@ -1423,7 +1427,27 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			// ignore
 		}
 	}
+	private float getArrowTailRatio(){
+		int height = actionArrow.getHeight();
+		int width = actionArrow.getWidth();
+		int begin=-1;
+		int end=actionArrow.getWidth()-1;
+		for (int i = 0; i < width; i++) {
 
+			int alpha=Color.alpha(actionArrow.getPixel( i,height - 1));
+			if (alpha != 0 && begin == -1) {
+				begin=i;
+			}
+			if(alpha==0 &&  begin != -1){
+				end=i;
+				break;
+			}
+		}
+		//if unable to compute the ratio use 2.25 which is the current ratio in the image
+		if(begin==-1||begin==end)
+			return 2.25f;
+		return (float)width/(end-begin);
+	}
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
 		if (routeTransportStops.size() > 0) {
