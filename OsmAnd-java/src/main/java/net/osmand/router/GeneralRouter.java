@@ -373,13 +373,10 @@ public class GeneralRouter implements VehicleRouter {
 	@Override
 	public float defineRoutingObstacle(RouteDataObject road, int point, boolean dir) {
 		int[] pointTypes = road.getPointTypes(point);
-		if (pointTypes != null) {			
-			
-		}
 		if(pointTypes != null) {
 			Float obst = getCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, dir);
 			if(obst == null) {
-				int[] filteredPointTypes = filterDirectionTags(road, pointTypes, dir );
+				int[] filteredPointTypes = filterDirectionTags(road, pointTypes, dir);
 				obst = getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateFloat(road.region, filteredPointTypes, 0);
 				putCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, obst, dir);
 			}
@@ -410,7 +407,7 @@ public class GeneralRouter implements VehicleRouter {
 				if ((pointTypes[i] == road.region.stopSign || pointTypes[i] == road.region.giveWaySign)
 						&& direction == wayOppositeDirection) {
 					skip = true;
-				} else if (pointTypes[i] == road.region.trafficSignals && direction == wayOppositeDirection) {
+				} else if (pointTypes[i] == road.region.trafficSignals && tdirection == wayOppositeDirection) {
 					skip = true;
 				}
 				if (!skip) {
