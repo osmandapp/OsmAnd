@@ -236,7 +236,7 @@
     <string name="vector_data_missing">Завантажити (\'офлайн\') дані для автономного використання мап.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nДовго утримуйте для виклику налаштувань"</string>
+\nУтримуйте для виклику налаштувань"</string>
     <string name="local_index_installed">Локальна версія</string>
     <string name="local_index_items_backuped">%1$d з %2$d об’єктів знедіяно.</string>
     <string name="local_index_items_deleted">%1$d з %2$d об’єктів вилучено.</string>
@@ -3255,7 +3255,7 @@
     <string name="map_during_navigation_info">Мапа під час навігації</string>
     <string name="map_during_navigation">Мапа під час навігації</string>
     <string name="shared_string_other">Інше</string>
-    <string name="vehicle_parameters_descr">Вага, висота, швидкість</string>
+    <string name="vehicle_parameters_descr">Вага, висота, довжина, швидкість</string>
     <string name="vehicle_parameters">Параметри транспортного засобу</string>
     <string name="voice_announces_info">Голосові повідомлення відтворюються лише під час навігації.</string>
     <string name="voice_announces">Навігаційні оголошення</string>
@@ -3798,4 +3798,8 @@
     <string name="item_deleted">%1$s видалено</string>
     <string name="speed_cameras_restart_descr">Потрібен перезапуск для повного видалення даних камер контролю швидкості.</string>
     <string name="shared_string_uninstall_and_restart">Видалити та перезапустити</string>
+    <string name="routing_attr_length_description">Вкажіть довжину транспортного засобу для розрахунку маршрутів.</string>
+    <string name="routing_attr_length_name">Обмеження довжини</string>
+    <string name="speed_cameras_removed_descr">На цьому пристрої немає камер контролю швидкості.</string>
+    <string name="app_mode_inline_skates">Роликові ковзани</string>
 </resources>
