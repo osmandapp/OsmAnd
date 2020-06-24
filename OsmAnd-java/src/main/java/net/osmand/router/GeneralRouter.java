@@ -532,25 +532,33 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	class IntHolder {
-	    private final int[] array;
+		private final int[] array;
 		private final boolean extra;
 
 		IntHolder(int[] ts, boolean extra) {
 			array = ts;
 			this.extra = extra;
 		}
-	    @Override public int hashCode() { return Arrays.hashCode(array)  + (extra ? 1 : 0) ; }
-	    @Override public boolean equals(Object other) {
-	        if (array == other) { return true; }
-	        if (! (other instanceof IntHolder) ) {
-	            return false;
-	        }
+
+		@Override
+		public int hashCode() {
+			return Arrays.hashCode(array) + (extra ? 1 : 0);
+		}
+
+		@Override
+		public boolean equals(Object other) {
+			if (array == other) {
+				return true;
+			}
+			if (!(other instanceof IntHolder)) {
+				return false;
+			}
 			if (((IntHolder) other).extra != this.extra) {
 				return false;
 			}
-	        //noinspection unchecked
-	        return Arrays.equals(array, ((IntHolder) other).array);
-	    }
+			// noinspection unchecked
+			return Arrays.equals(array, ((IntHolder) other).array);
+		}
 	}
 
 	private Float getCache(RouteDataObjectAttribute attr, RouteDataObject road) {
