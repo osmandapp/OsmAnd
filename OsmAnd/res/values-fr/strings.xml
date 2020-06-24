@@ -1273,7 +1273,7 @@
     <string name="rendering_attr_showSurfaces_name">Afficher la surface des routes</string>
     <string name="rendering_attr_showCycleRoutes_name">Afficher les pistes cyclables</string>
     <string name="lang_fa">Persan</string>
-    <string name="lang_al">albanais</string>
+    <string name="lang_al">Albanais</string>
     <string name="lang_ar">Arabe</string>
     <string name="lang_sc">Sarde</string>
     <string name="lang_sr">Serbe (cyrillique)</string>
@@ -3237,7 +3237,7 @@
     <string name="map_during_navigation_info">Carte pendant la navigation</string>
     <string name="map_during_navigation">Carte pendant la navigation</string>
     <string name="shared_string_other">Autre</string>
-    <string name="vehicle_parameters_descr">Poids, hauteur, vitesse</string>
+    <string name="vehicle_parameters_descr">Poids, hauteur, longueur, vitesse</string>
     <string name="vehicle_parameters">Caractéristiques du véhicule</string>
     <string name="voice_announces_info">Les annonces vocales n\'ont lieu que pendant la navigation.</string>
     <string name="voice_announces_descr">Instructions de navigation et annonces</string>
@@ -3307,10 +3307,10 @@
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s Go libre (sur %2$s Go)</string>
     <string name="track_storage_directory">Dossier de stockage des traces</string>
-    <string name="shared_string_memory_used_tb_desc">%1$s TB utilisés</string>
-    <string name="shared_string_memory_used_gb_desc">%1$s GB utilisés</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s To utilisés</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s Go utilisés</string>
     <string name="shared_string_memory_used_mb_desc">%1$s Mo utilisés</string>
-    <string name="shared_string_memory_used_kb_desc">%1$s kB utilisés</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s ko utilisés</string>
     <string name="contour_lines_and_hillshade">Courbes de niveaux et Ombrage du relief</string>
     <string name="routing_attr_prefer_unpaved_name">Privilégier les routes non revêtues</string>
     <string name="routing_attr_prefer_unpaved_description">Privilégier les routes non revêtues.</string>
@@ -3382,7 +3382,7 @@
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les pistes cyclables</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher le réseau de nœuds de pistes cyclables</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Nœuds de transport</string>
     <string name="personal_category_name">Personnel</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
@@ -3785,4 +3785,8 @@
     <string name="shared_string_bearing">Direction</string>
     <string name="item_deleted">%1$s supprimé</string>
     <string name="shared_string_uninstall_and_restart">Désinstaller et redémarrer</string>
+    <string name="routing_attr_length_description">Indiquez la longueur du véhicule autorisée sur les routes.</string>
+    <string name="routing_attr_length_name">Limite de longueur</string>
+    <string name="speed_cameras_removed_descr">Cet appareil n\'a pas de radars.</string>
+    <string name="app_mode_inline_skates">Patins à roulettes en ligne</string>
 </resources>

@@ -664,11 +664,11 @@
     <string name="map_online_data_descr">Online térképek használata (csempék letöltése és tárolása memóriakártyán).</string>
     <string name="shared_string_online_maps">Online térképek</string>
     <string name="online_map_settings_descr">Online vagy gyorsítótárazott csempés térképek forrásainak kijelölése.</string>
-    <string name="osmand_rastermaps_plugin_description">Ezzel a bővítménnyel az online (úgynevezett csempés vagy raszteres) térképek több típusához is hozzáférhet előre meghatározott OpenStreetMap-csempéktől kezdve (mint például a Mapnik) műholdképekig és speciális célú rétegekig (pl. időjárási térképek, éghajlati térképek, földtani térképek, domborzatárnyékolási rétegek stb.).
+    <string name="osmand_rastermaps_plugin_description">Hozzáférhet többféle online (úgynevezett csempés vagy raszteres) térképhez az előre meghatározott OSM-csempéktől kezdve (mint például a Mapnik) műholdképekig és speciális célú rétegekig (pl. időjárási térképek, éghajlati térképek, földtani térképek, domborzatárnyékolási rétegek stb.).
 \n 
-\nEzek a térképek egyaránt használhatók az OsmAnd-térkép képernyőjén megjelenítendő fő (alap) térképként, illetve egy másik alaptérkép fedvényeként vagy alátétjeként (mint például az OsmAnd normál offline térképei). Az alátéttérkép láthatóbbá tétele érdekében az OsmAnd vektoros térképeinek bizonyos elemei igény szerint könnyedén elrejthetők a „Térkép beállítása” menün keresztül. 
+\nEzek a térképek egyaránt használhatók fő (alap) térképként, illetve egy másik alaptérkép fedvényeként vagy alátétjeként (mint például az OsmAnd normál offline térképei). Az OsmAnd vektoros térképeinek bizonyos elemei elrejthetők a „Térkép beállítása” menün keresztül.
 \n 
-\nA csempés térképek beszerezhetők internetes forrásokból, vagy előkészíthetők kapcsolat nélküli használathoz (és kézzel átmásolva az OsmAnd adatmappájába) SQLite adatbázisként, amely különféle harmadik féltől származó térkép-előkészítő eszközökkel állítható elő.</string>
+\nA csempés térképek letölthetők internetes forrásokból, vagy előkészíthetők kapcsolat nélküli használathoz (kézzel átmásolva az OsmAnd adatmappájába) SQLite adatbázisként, amely különféle harmadik féltől származó térkép-előkészítő eszközökkel állítható elő.</string>
     <string name="osmand_background_plugin_description">Megjeleníti a háttérben futó nyomvonalrögzítés és navigáció beállításait, ami periodikusan felébreszti a GPS modult (kikapcsolt képernyőnél).</string>
     <string name="osmand_accessibility_description">Elérhetővé teszi az eszköz akadálymentesítési lehetőségeit közvetlenül az OsmAndban. Ez megkönnyíti például a szövegfelolvasó (TTS) hangok beszédsebességének állítását, az irányító gombok képernyő navigációjának beállítását, egy görgető használatát a nagyítás vezérléséhez, vagy szövegfelolvasó visszajelzés használatát, például a pozíció automatikus bejelentésénél.</string>
     <string name="osmand_development_plugin_description">Beállítások fejlesztői és hibakeresési szolgáltatásokhoz, mint például navigáció szimulálása, a megjelenítés teljesítménye vagy hangutasítások. Fejlesztőknek szánt funkciók, nem szükségesek a normál használathoz.</string>
@@ -927,7 +927,7 @@
     <string name="recording_error">A felvétel nem sikerült</string>
     <string name="recording_camera_not_available">A kamera nem érhető el</string>
     <string name="shared_string_control_stop">Leállítás</string>
-    <string name="osmand_srtm_long_description_1000_chars">Ez a bővítmény egy szintvonal fedvényt és egy domborzatárnyékolás réteget biztosít, amelyek az OsmAnd normál térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, utazók és mindenki, akiket a táj domborzati szerkezete érdekel. 
+    <string name="osmand_srtm_long_description_1000_chars">Ez a bővítmény egy szintvonal fedvényt és egy domborzatárnyékolás réteget biztosít, amelyek az OsmAnd normál térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, utazók és mindenki, akiket a táj domborzati szerkezete érdekel.
 \n 
 \nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje.</string>
     <string name="av_widget_action_descr">Alapértelmezett widgetművelet:</string>
@@ -1308,7 +1308,7 @@
     <string name="rendering_value_car_name">Autó</string>
     <string name="rendering_value_bicycle_name">Kerékpár</string>
     <string name="rendering_value_pedestrian_name">Gyalogos</string>
-    <string name="record_plugin_description">Ez a bővítmény aktiválja a nyomvonalak rögzítésének és mentésének lehetőségét, ha megnyomja a GPX naplózó gombot a térképképernyőn, valamint képes minden navigációs útvonalat automatikusan egy GPX-fájlba naplózni. 
+    <string name="record_plugin_description">Ez a bővítmény aktiválja a nyomvonalak rögzítésének és mentésének lehetőségét, ha megnyomja a GPX naplózó gombot a térképképernyőn, valamint képes minden navigációs útvonalat automatikusan egy GPX-fájlba naplózni.
 \n 
 \nA rögzített nyomvonalak megoszthatók az ismerősökkel, vagy használhatók az OSM hozzájárulásoknál. A sportolók a rögzített nyomvonalakat az edzéseik megfigyeléséhez használhatják. Néhány alapvető nyomvonalelemzés közvetlenül az OsmAnd programon belül is végrehajtható, mint például köridők, átlagsebesség stb., és természetesen a nyomvonalak később harmadik féltől származó elemzőeszközökkel is elemezhetők.</string>
     <string name="record_plugin_name">Útvonalrögzítés</string>
@@ -3150,7 +3150,7 @@ Hosszúság: %2$s</string>
     <string name="map_during_navigation_info">Térkép navigáció közben</string>
     <string name="map_during_navigation">Térkép navigáció közben</string>
     <string name="shared_string_other">Egyéb</string>
-    <string name="vehicle_parameters_descr">Tömeg, magasság, sebesség</string>
+    <string name="vehicle_parameters_descr">Tömeg, magasság, hossz, sebesség</string>
     <string name="vehicle_parameters">Jármű paraméterek</string>
     <string name="voice_announces_info">A hangbemondások csak navigáció közben kerülnek lejátszásra.</string>
     <string name="voice_announces_descr">Navigációs utasítások és bejelentések</string>
@@ -3198,7 +3198,7 @@ Hosszúság: %2$s</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="update_all_maps">Összes térkép frissítése</string>
-    <string name="update_all_maps_q">Biztos, hogy az összes (%1$d) térképet frissíted\?</string>
+    <string name="update_all_maps_q">Biztos, hogy az összes (%1$d) térképet frissíti\?</string>
     <string name="quick_action_contour_lines_show">Szintvonalak megjelenítése</string>
     <string name="quick_action_contour_lines_hide">Szintvonalak elrejtése</string>
     <string name="quick_action_show_hide_contour_lines">Szintvonalak megjelenítése/elrejtése</string>
@@ -3729,4 +3729,7 @@ Hosszúság: %2$s</string>
     <string name="item_deleted">%1$s törölve</string>
     <string name="speed_cameras_restart_descr">A traffipax adatok végleges eltávolításához újraindítás szükséges.</string>
     <string name="shared_string_uninstall_and_restart">Eltávolítás és Újraindítás</string>
+    <string name="routing_attr_length_description">Adja meg az útvonalakon a járművekre vonatkozó hosszkorlátozást.</string>
+    <string name="routing_attr_length_name">Hosszkorlátozás</string>
+    <string name="speed_cameras_removed_descr">Az eszköz nem tartalmaz traffipax adatokat.</string>
 </resources>
