@@ -10,21 +10,24 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 	private String name;
 	private SearchMoreItemOnClickListener onClickListener;
 	private boolean emptySearch;
-	private boolean onlineSearch;
 	private boolean searchMoreAvailable;
 	private boolean interruptedSearch;
 	private String findMore;
 	private String restartSearch;
 	private String increaseRadius;
-	private boolean isWiki;
+	private SearchMoreType type;
 	private boolean secondaryButtonVisibility;
 
-	public QuickSearchMoreListItem(OsmandApplication app, String name, boolean isWiki,
+	public enum SearchMoreType {
+		STANDARD, WIKIPEDIA
+	}
+
+	public QuickSearchMoreListItem(OsmandApplication app, String name, SearchMoreType type,
 	                               @Nullable SearchMoreItemOnClickListener onClickListener) {
 		super(app, null);
 		this.name = name;
 		this.onClickListener = onClickListener;
-		this.isWiki = isWiki;
+		this.type = type;
 		findMore = app.getString(R.string.search_POI_level_btn).toUpperCase();
 		restartSearch = app.getString(R.string.restart_search).toUpperCase();
 		increaseRadius = app.getString(R.string.increase_search_radius).toUpperCase();
@@ -49,6 +52,14 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 		}
 	}
 
+	public String getSecondaryButtonTitle() {
+		if (type == SearchMoreType.WIKIPEDIA) {
+			return app.getString(R.string.search_download_wikipedia_maps);
+		} else {
+			return "";
+		}
+	}
+
 	public boolean isInterruptedSearch() {
 		return interruptedSearch;
 	}
@@ -65,14 +76,6 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 		this.emptySearch = emptySearch;
 	}
 
-	public boolean isOnlineSearch() {
-		return onlineSearch;
-	}
-
-	public void setOnlineSearch(boolean onlineSearch) {
-		this.onlineSearch = onlineSearch;
-	}
-
 	public boolean isSearchMoreAvailable() {
 		return searchMoreAvailable;
 	}
@@ -81,26 +84,16 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 		this.searchMoreAvailable = searchMoreAvailable;
 	}
 
-	public void increaseRadiusOnClick() {
+	public void onPrimaryButtonClick() {
 		if (onClickListener != null) {
-			onClickListener.increaseRadiusOnClick();
+			onClickListener.onPrimaryButtonClick();
 		}
 	}
 
-	public void onlineSearchOnClick() {
+	public void onSecondaryButtonClick() {
 		if (onClickListener != null) {
-			onClickListener.onlineSearchOnClick();
+			onClickListener.onSecondaryButtonClick();
 		}
-	}
-
-	public void downloadWikiOnClick() {
-		if (onClickListener != null) {
-			onClickListener.downloadWikiOnClick();
-		}
-	}
-
-	public boolean isWiki() {
-		return isWiki;
 	}
 
 	public void setSecondaryButtonVisible(boolean secondaryButtonVisibility) {
@@ -113,10 +106,9 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 
 	public interface SearchMoreItemOnClickListener {
 
-		void increaseRadiusOnClick();
+		void onPrimaryButtonClick();
 
-		void onlineSearchOnClick();
+		void onSecondaryButtonClick();
 
-		void downloadWikiOnClick();
 	}
 }

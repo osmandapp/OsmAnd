@@ -119,6 +119,7 @@ import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_Q
 import static net.osmand.search.core.ObjectType.POI_TYPE;
 import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
+import static net.osmand.plus.search.listitems.QuickSearchMoreListItem.*;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -1710,7 +1711,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 										if (!Version.isPaidVersion(app)) {
 											mainSearchFragment.addListItem(new QuickSearchFreeBannerListItem(app));
 										} else {
-											addNotFoundButton(searchUICore.isSearchMoreAvailable(phrase), true);
+											addNotFoundButton(searchUICore.isSearchMoreAvailable(phrase), SearchMoreType.WIKIPEDIA);
 										}
 									} else {
 										addNotFoundButton(searchUICore.isSearchMoreAvailable(phrase));
@@ -1983,16 +1984,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void addNotFoundButton(boolean searchMoreAvailable) {
-		addNotFoundButton(searchMoreAvailable, false);
+		addNotFoundButton(searchMoreAvailable, SearchMoreType.STANDARD);
 	}
 
-	private void addNotFoundButton(boolean searchMoreAvailable, final boolean isWiki) {
+	private void addNotFoundButton(boolean searchMoreAvailable, final SearchMoreType type) {
 		if (!paused && !cancelPrev && mainSearchFragment != null && !isTextEmpty()) {
 			final WikipediaPlugin wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
 			QuickSearchMoreListItem moreListItem =
-					new QuickSearchMoreListItem(app, null, isWiki, new SearchMoreItemOnClickListener() {
+					new QuickSearchMoreListItem(app, null, type, new SearchMoreItemOnClickListener() {
 						@Override
-						public void increaseRadiusOnClick() {
+						public void onPrimaryButtonClick() {
 							if (!interruptedSearch) {
 								SearchSettings settings = searchUICore.getSearchSettings();
 								searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
@@ -2001,31 +2002,34 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						}
 
 						@Override
-						public void onlineSearchOnClick() {
-							final OsmandSettings settings = app.getSettings();
-							if (!settings.isInternetConnectionAvailable()) {
-								Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
-								return;
-							}
-							startOnlineSearch();
-							mainSearchFragment.getAdapter().clear();
-							updateTabbarVisibility(false);
-							runCoreSearch(searchQuery, false, true);
-						}
-
-						@Override
-						public void downloadWikiOnClick() {
-							if (wikiPlugin != null) {
-								wikiPlugin.showDownloadWikiScreen();
+						public void onSecondaryButtonClick() {
+							if (type == SearchMoreType.WIKIPEDIA) {
+								if (wikiPlugin != null) {
+									wikiPlugin.showDownloadWikiScreen();
+								}
+							} else if (type == SearchMoreType.STANDARD) {
+								final OsmandSettings settings = app.getSettings();
+								if (!settings.isInternetConnectionAvailable()) {
+									Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+									return;
+								}
+								startOnlineSearch();
+								mainSearchFragment.getAdapter().clear();
+								updateTabbarVisibility(false);
+								runCoreSearch(searchQuery, false, true);
 							}
 						}
 					});
 			moreListItem.setInterruptedSearch(interruptedSearch);
 			moreListItem.setEmptySearch(isResultEmpty());
-			moreListItem.setOnlineSearch(isOnlineSearch());
 			moreListItem.setSearchMoreAvailable(searchMoreAvailable);
-			moreListItem.setSecondaryButtonVisible(!isWiki ||
-					(wikiPlugin != null && wikiPlugin.hasMapsToDownload()));
+			boolean secondaryButtonVisible = false;
+			if (type == SearchMoreType.STANDARD) {
+				secondaryButtonVisible = isOnlineSearch();
+			} else if (type == SearchMoreType.WIKIPEDIA) {
+				secondaryButtonVisible = wikiPlugin != null && wikiPlugin.hasMapsToDownload();
+			}
+			moreListItem.setSecondaryButtonVisible(secondaryButtonVisible);
 			mainSearchFragment.addListItem(moreListItem);
 			updateSendEmptySearchBottomBar(isResultEmpty() && !interruptedSearch);
 		}

@@ -268,31 +268,21 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			primaryButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					((QuickSearchMoreListItem) listItem).increaseRadiusOnClick();
+					((QuickSearchMoreListItem) listItem).onPrimaryButtonClick();
 				}
 			});
 
 			View secondaryButton = view.findViewById(R.id.secondary_button);
-			if (searchMoreItem.isWiki()) {
-				secondaryButton.setVisibility(
-						searchMoreItem.isSecondaryButtonVisible() ? View.VISIBLE : View.GONE);
-				TextView tvTitle = view.findViewById(R.id.secondary_button_title);
-				tvTitle.setText(R.string.search_download_wikipedia_maps);
-				secondaryButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						searchMoreItem.downloadWikiOnClick();
-					}
-				});
-			} else if (!searchMoreItem.isOnlineSearch()) {
-				secondaryButton.setVisibility(View.VISIBLE);
-				secondaryButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						searchMoreItem.onlineSearchOnClick();
-					}
-				});
-			}
+			secondaryButton.setVisibility(searchMoreItem.isSecondaryButtonVisible() ?
+					View.VISIBLE : View.GONE);
+			TextView tvSecondaryButtonTitle = view.findViewById(R.id.secondary_button_title);
+			tvSecondaryButtonTitle.setText(searchMoreItem.getSecondaryButtonTitle());
+			secondaryButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					searchMoreItem.onSecondaryButtonClick();
+				}
+			});
 		} else if (type == QuickSearchListItemType.BUTTON) {
 			if (convertView == null) {
 				view = (LinearLayout) inflater.inflate(R.layout.search_custom_list_item, null);
