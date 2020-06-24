@@ -1,7 +1,9 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Matrix;
+import android.graphics.PointF;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +18,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.BarLineChartTouchListener;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
@@ -150,7 +153,7 @@ public class TrackDetailsMenu {
 		}
 	}
 
-	public Location getMyLocation() {
+	protected Location getMyLocation() {
 		return myLocation;
 	}
 
@@ -545,6 +548,39 @@ public class TrackDetailsMenu {
 			@Override
 			public void onNothingSelected() {
 
+			}
+		});
+		final float minDragTriggerDist = AndroidUtils.dpToPx(app, 3);
+		chart.setOnTouchListener(new BarLineChartTouchListener(chart, chart.getViewPortHandler().getMatrixTouch(), 3f) {
+			private PointF touchStartPoint = new PointF();
+
+			@SuppressLint("ClickableViewAccessibility")
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				switch (event.getAction() & MotionEvent.ACTION_MASK) {
+					case MotionEvent.ACTION_DOWN:
+						saveTouchStart(event);
+						break;
+					case MotionEvent.ACTION_POINTER_DOWN:
+						if (event.getPointerCount() >= 2) {
+							saveTouchStart(event);
+						}
+						break;
+					case MotionEvent.ACTION_MOVE:
+						if (mTouchMode == NONE && mChart.hasNoDragOffset()) {
+							float touchDistance = distance(event.getX(), touchStartPoint.x, event.getY(), touchStartPoint.y);
+							if (Math.abs(touchDistance) > minDragTriggerDist) {
+								mTouchMode = DRAG;
+							}
+						}
+						break;
+				}
+				return super.onTouch(v, event);
+			}
+
+			private void saveTouchStart(MotionEvent event) {
+				touchStartPoint.x = event.getX();
+				touchStartPoint.y = event.getY();
 			}
 		});
 		chart.setOnChartGestureListener(new OnChartGestureListener() {
