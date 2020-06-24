@@ -1322,7 +1322,7 @@
     <string name="driving_region">Регион вождения</string>
     <string name="driving_region_japan">Япония</string>
     <string name="driving_region_us">США</string>
-    <string name="driving_region_europe_asia">Европа, Азия, Латинская Америка и т.п.</string>
+    <string name="driving_region_europe_asia">Европа, Азия, Латинская Америка и тому подобное</string>
     <string name="driving_region_uk">Великобритания, Индия и др.</string>
     <string name="context_menu_item_directions_to">Проложить маршрут</string>
     <string name="context_menu_item_directions_from">Пункт отправления</string>
@@ -3251,7 +3251,7 @@
     <string name="turn_screen_on">Включить экран</string>
     <string name="map_during_navigation_info">Карта во время навигации</string>
     <string name="map_during_navigation">Карта во время навигации</string>
-    <string name="vehicle_parameters_descr">Вес, высота, скорость</string>
+    <string name="vehicle_parameters_descr">Вес, высота, длина, скорость</string>
     <string name="vehicle_parameters">Параметры транспортного средства</string>
     <string name="voice_announces_info">Голосовые оповещения происходят только во время навигации.</string>
     <string name="voice_announces_descr">Навигационные инструкции и объявления</string>
@@ -3802,4 +3802,8 @@
     <string name="speed_cameras_restart_descr">Перезапуск необходим для полного удаления данных камер контроля скорости.</string>
     <string name="shared_string_uninstall_and_restart">Удалить и перезапустить</string>
     <string name="shared_string_uninstall">Удалить</string>
+    <string name="routing_attr_length_description">Укажите длину транспортного средства, разрешенную для движения по маршрутам.</string>
+    <string name="routing_attr_length_name">Предельная длина</string>
+    <string name="speed_cameras_removed_descr">В этом устройстве нет камер контроля скорости.</string>
+    <string name="app_mode_inline_skates">Роликовые коньки</string>
 </resources>

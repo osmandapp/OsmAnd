@@ -1054,6 +1054,4 @@ public class RouteDataObject {
 		}
 		restrictionsVia[k] = viaWay;
 	}
-
-
 }
