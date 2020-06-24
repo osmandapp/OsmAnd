@@ -852,7 +852,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		cancelPrev = false;
 		hidden = false;
 		if (interruptedSearch) {
-			addNotFoundButton(true);
+			addNotFoundButton(true, SearchMoreType.STANDARD);
 			interruptedSearch = false;
 		}
 	}
@@ -1177,7 +1177,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 				if (getResultCollection() != null) {
 					updateSearchResult(getResultCollection(), false);
-					addNotFoundButton(searchUICore.isSearchMoreAvailable(searchUICore.getPhrase()));
+					onNothingFound(searchUICore.getPhrase());
 				}
 				break;
 		}
@@ -1706,16 +1706,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								if (resultListener == null || resultListener.searchFinished(object.requiredSearchPhrase)) {
 									hideProgressBar();
 									SearchPhrase phrase = object.requiredSearchPhrase;
-									WikipediaPlugin wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
-									if (wikiPlugin != null && wikiPlugin.isSearchByWiki(phrase)) {
-										if (!Version.isPaidVersion(app)) {
-											mainSearchFragment.addListItem(new QuickSearchFreeBannerListItem(app));
-										} else {
-											addNotFoundButton(searchUICore.isSearchMoreAvailable(phrase), SearchMoreType.WIKIPEDIA);
-										}
-									} else {
-										addNotFoundButton(searchUICore.isSearchMoreAvailable(phrase));
-									}
+									onNothingFound(phrase);
 								}
 							}
 						});
@@ -1983,8 +1974,17 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void addNotFoundButton(boolean searchMoreAvailable) {
-		addNotFoundButton(searchMoreAvailable, SearchMoreType.STANDARD);
+	private void onNothingFound(SearchPhrase phrase) {
+		WikipediaPlugin wikiPlugin = OsmandPlugin.getEnabledPlugin(WikipediaPlugin.class);
+		if (WikipediaPlugin.isSearchByWiki(phrase)) {
+			if (wikiPlugin == null) {
+				mainSearchFragment.addListItem(new QuickSearchFreeBannerListItem(app));
+			} else {
+				addNotFoundButton(searchUICore.isSearchMoreAvailable(phrase), SearchMoreType.WIKIPEDIA);
+			}
+		} else {
+			addNotFoundButton(searchUICore.isSearchMoreAvailable(phrase), SearchMoreType.STANDARD);
+		}
 	}
 
 	private void addNotFoundButton(boolean searchMoreAvailable, final SearchMoreType type) {
@@ -2023,13 +2023,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			moreListItem.setInterruptedSearch(interruptedSearch);
 			moreListItem.setEmptySearch(isResultEmpty());
 			moreListItem.setSearchMoreAvailable(searchMoreAvailable);
-			boolean secondaryButtonVisible = false;
 			if (type == SearchMoreType.STANDARD) {
-				secondaryButtonVisible = isOnlineSearch();
+				moreListItem.setSecondaryButtonVisible(isOnlineSearch());
 			} else if (type == SearchMoreType.WIKIPEDIA) {
-				secondaryButtonVisible = wikiPlugin != null && wikiPlugin.hasMapsToDownload();
+				moreListItem.setSecondaryButtonVisible(
+						wikiPlugin != null && wikiPlugin.hasMapsToDownload());
 			}
-			moreListItem.setSecondaryButtonVisible(secondaryButtonVisible);
 			mainSearchFragment.addListItem(moreListItem);
 			updateSendEmptySearchBottomBar(isResultEmpty() && !interruptedSearch);
 		}

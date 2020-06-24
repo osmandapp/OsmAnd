@@ -260,7 +260,6 @@ public abstract class OsmandPlugin {
 
 		allPlugins.clear();
 		allPlugins.add(new MapillaryPlugin(app));
-		allPlugins.add(new WikipediaPlugin(app));
 
 		if (!enabledPlugins.contains(MapillaryPlugin.ID)
 				&& !app.getSettings().getPlugins().contains("-" + MapillaryPlugin.ID)) {
@@ -268,12 +267,7 @@ public abstract class OsmandPlugin {
 			app.getSettings().enablePlugin(MapillaryPlugin.ID, true);
 		}
 
-		if (!enabledPlugins.contains(WikipediaPlugin.ID)
-				&& !app.getSettings().getPlugins().contains("-" + WikipediaPlugin.ID)) {
-			enabledPlugins.add(WikipediaPlugin.ID);
-			app.getSettings().enablePlugin(WikipediaPlugin.ID, true);
-		}
-
+		checkPaidPlugin(app, enabledPlugins, new WikipediaPlugin(app));
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new SRTMPlugin(app));
@@ -375,6 +369,11 @@ public abstract class OsmandPlugin {
 		} catch (Exception e) {
 			LOG.error("Plugin initialization failed " + plugin.getId(), e);
 		}
+	}
+
+	private static void checkPaidPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
+		allPlugins.add(plugin);
+		plugin.setActive(Version.isPaidVersion(app));
 	}
 
 	private static void checkMarketPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {

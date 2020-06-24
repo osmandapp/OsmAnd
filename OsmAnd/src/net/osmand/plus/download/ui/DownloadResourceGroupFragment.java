@@ -405,7 +405,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		if (filter != null && filterCat != null
 				&& filterCat.equals(DownloadActivityType.WIKIPEDIA_FILE.getTag())) {
 			getDownloadActivity().showDialog(getActivity(),
-					SearchDialogFragment.createInstance(filter, false, false, true));
+					SearchDialogFragment.createInstance(filter, false,
+							DownloadActivityType.WIKIPEDIA_FILE));
 		} else if (filter != null) {
 			getDownloadActivity().showDialog(getActivity(),
 					SearchDialogFragment.createInstance(filter));

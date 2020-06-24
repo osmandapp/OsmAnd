@@ -267,7 +267,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 		intent.putExtra(DownloadActivity.FILTER_KEY, filter);
 		intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.WIKIPEDIA_FILE.getTag());
 		intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
-		app.startActivity(intent);
+		mapActivity.startActivity(intent);
 	}
 
 	public boolean hasMapsToDownload() {
@@ -275,14 +275,16 @@ public class WikipediaPlugin extends OsmandPlugin {
 			if (mapActivity == null) {
 				return false;
 			}
-			return DownloadResources.findIndexItemsAt(app, mapActivity.getMapLocation(),
-					DownloadActivityType.WIKIPEDIA_FILE, false, 1).size() > 0;
+			int mapsToDownloadCount = DownloadResources.findIndexItemsAt(app,
+					mapActivity.getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE,
+					false, 1).size();
+			return mapsToDownloadCount > 0;
 		} catch (IOException e) {
 			return false;
 		}
 	}
 
-	public boolean isSearchByWiki(SearchPhrase phrase) {
+	public static boolean isSearchByWiki(SearchPhrase phrase) {
 		if (phrase.isLastWord(ObjectType.POI_TYPE)) {
 			Object obj = phrase.getLastSelectedWord().getResult().object;
 			if (obj instanceof PoiUIFilter) {

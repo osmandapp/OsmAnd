@@ -196,8 +196,14 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		if (intent != null && intent.getExtras() != null) {
 			String region = getIntent().getStringExtra(REGION_TO_SEARCH);
 			if (region != null && !region.isEmpty()) {
-				showDialog(this, SearchDialogFragment.createInstance(region, true, true,
-						getIntent().getBooleanExtra(SHOW_WIKI_KEY, false)));
+				if (getIntent().getBooleanExtra(SHOW_WIKI_KEY, false)) {
+					showDialog(this, SearchDialogFragment.createInstance(
+							region, true, DownloadActivityType.NORMAL_FILE,
+							DownloadActivityType.WIKIPEDIA_FILE));
+				} else {
+					showDialog(this, SearchDialogFragment.createInstance(
+							region, true, DownloadActivityType.NORMAL_FILE));
+				}
 			}
 			filter = intent.getExtras().getString(FILTER_KEY);
 			filterCat = intent.getExtras().getString(FILTER_CAT);
