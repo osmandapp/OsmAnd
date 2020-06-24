@@ -3290,7 +3290,7 @@ Lon %2$s</string>
     <string name="map_during_navigation_info">Mapa durante a navegación</string>
     <string name="map_during_navigation">Mapa durante a navegación</string>
     <string name="shared_string_other">Outros</string>
-    <string name="vehicle_parameters_descr">Peso, altura, velocidade</string>
+    <string name="vehicle_parameters_descr">Peso, altura, lonxitude, velocidade</string>
     <string name="vehicle_parameters">Parámetros do vehículo</string>
     <string name="voice_announces_info">Os anuncios de voz só son reproducidos durante a navegación.</string>
     <string name="voice_announces_descr">Instrucións de navegación e anuncios</string>
@@ -3830,4 +3830,8 @@ Lon %2$s</string>
     <string name="shared_string_bearing">Levando</string>
     <string name="item_deleted">%1$s eliminado</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>
+    <string name="routing_attr_length_description">Especifica a lonxitude do vehículo para ser permitido nas rutas.</string>
+    <string name="routing_attr_length_name">Límite de lonxitude</string>
+    <string name="speed_cameras_removed_descr">Este dispositivo non ten radares de velocidade.</string>
+    <string name="app_mode_inline_skates">Patíns en liña</string>
 </resources>
