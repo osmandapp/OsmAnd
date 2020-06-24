@@ -26,6 +26,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -39,6 +40,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 
@@ -50,6 +52,8 @@ import java.util.List;
 import static net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 
 public class TrackDetailsMenu {
+
+	private static final int MAX_DISTANCE_LOCATION_PROJECTION = 20; // in meters
 
 	@Nullable
 	private MapActivity mapActivity;
@@ -66,9 +70,7 @@ public class TrackDetailsMenu {
 	private int topMarginPx;
 	private boolean visible;
 	private boolean hidding;
-
-	public TrackDetailsMenu() {
-	}
+	private Location myLocation;
 
 	@Nullable
 	public MapActivity getMapActivity() {
@@ -121,6 +123,35 @@ public class TrackDetailsMenu {
 			segment = null;
 			trackChartPoints = null;
 		}
+	}
+
+	public void updateMyLocation(View mainView, Location location) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			LineChart chart = mainView.findViewById(R.id.chart);
+			GpxDisplayItem gpxItem = getGpxItem();
+			TrkSegment segment = getTrackSegment(chart);
+			LineData lineData = chart.getLineData();
+			List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
+			if (ds != null && ds.size() > 0 && gpxItem != null && segment != null) {
+				RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox();
+				int mx = (int) tb.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
+				int my = (int) tb.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
+				int r = (int) (MAX_DISTANCE_LOCATION_PROJECTION * tb.getPixDensity());
+				WptPt point = GPXLayer.findPointNearSegment(tb, segment.points, r, mx, my);
+				if (point != null) {
+					int index = segment.points.indexOf(point);
+					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(segment.points.get(index - 1), point, tb.getLatLonFromPixel(mx, my));
+					gpxItem.chartHighlightPos = (float) (gpxItem.locationOnMap.distance / ((OrderedLineDataSet) ds.get(0)).getDivX());
+					chart.highlightValue(gpxItem.chartHighlightPos, 0);
+				}
+				myLocation = location;
+			}
+		}
+	}
+
+	public Location getMyLocation() {
+		return myLocation;
 	}
 
 	public void update() {
