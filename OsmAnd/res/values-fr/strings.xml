@@ -1273,7 +1273,7 @@
     <string name="rendering_attr_showSurfaces_name">Afficher la surface des routes</string>
     <string name="rendering_attr_showCycleRoutes_name">Afficher les pistes cyclables</string>
     <string name="lang_fa">Persan</string>
-    <string name="lang_al">albanais</string>
+    <string name="lang_al">Albanais</string>
     <string name="lang_ar">Arabe</string>
     <string name="lang_sc">Sarde</string>
     <string name="lang_sr">Serbe (cyrillique)</string>
@@ -3307,10 +3307,10 @@
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s Go libre (sur %2$s Go)</string>
     <string name="track_storage_directory">Dossier de stockage des traces</string>
-    <string name="shared_string_memory_used_tb_desc">%1$s TB utilisés</string>
-    <string name="shared_string_memory_used_gb_desc">%1$s GB utilisés</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s To utilisés</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s Go utilisés</string>
     <string name="shared_string_memory_used_mb_desc">%1$s Mo utilisés</string>
-    <string name="shared_string_memory_used_kb_desc">%1$s kB utilisés</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s ko utilisés</string>
     <string name="contour_lines_and_hillshade">Courbes de niveaux et Ombrage du relief</string>
     <string name="routing_attr_prefer_unpaved_name">Privilégier les routes non revêtues</string>
     <string name="routing_attr_prefer_unpaved_description">Privilégier les routes non revêtues.</string>
