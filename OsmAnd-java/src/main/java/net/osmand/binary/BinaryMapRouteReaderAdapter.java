@@ -296,7 +296,6 @@ public class BinaryMapRouteReaderAdapter {
 		public Map<String, Integer> decodingRules = null;
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
 		List<RouteSubregion> basesubregions = new ArrayList<RouteSubregion>();
-		TIntObjectHashMap<Integer> trafficSignalsDir = new TIntObjectHashMap<Integer>();
 		List<Integer> trafficSignalsTags = new ArrayList<>();
 		
 		int directionForward = -1;
