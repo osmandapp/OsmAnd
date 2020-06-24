@@ -78,9 +78,10 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 
 	private void drawPoint(Canvas canvas, OsmPoint o, float x, float y) {
 		float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
+		int iconId = R.drawable.mx_special_information;
 		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
 				ContextCompat.getColor(activity, R.color.created_poi_icon_color), true,
-				R.drawable.mx_special_information);
+				iconId);
 		pointImageDrawable.setAlpha(0.8f);
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 	}

@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -155,7 +156,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 						backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 					}
 					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
-							ContextCompat.getColor(activity, backgroundColorRes), true, iconId);
+							ContextCompat.getColor(activity, backgroundColorRes), true, false, iconId,
+							FavouritePoint.BackgroundType.COMMENT);
 					pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 				}
 				this.fullObjectsLatLon = fullObjectsLatLon;
