@@ -3221,7 +3221,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_example">Exemplo</string>
     <string name="change_default_settings">Alterar configuração</string>
     <string name="discard_changes">Descartar alteração</string>
-    <string name="vehicle_parameters_descr">Peso, altura, velocidade</string>
+    <string name="vehicle_parameters_descr">Peso, altura, comprimento, velocidade</string>
     <string name="vehicle_parameters">Parâmetros do veículo</string>
     <string name="screen_alerts">Alertas de tela</string>
     <string name="configure_profile_info">Configurações para o perfil:</string>
@@ -3790,4 +3790,7 @@ Pôr do Sol: %2$s</string>
     <string name="item_deleted">%1$s excluído</string>
     <string name="speed_cameras_restart_descr">É necessário reiniciar para excluir completamente os dados da câmera de velocidade.</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>
+    <string name="routing_attr_length_description">Especifique o comprimento do veículo a ser permitido nas rotas.</string>
+    <string name="routing_attr_length_name">Limite de comprimento</string>
+    <string name="speed_cameras_removed_descr">Este dispositivo não possui câmeras de velocidade.</string>
 </resources>

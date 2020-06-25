@@ -3263,7 +3263,7 @@
     <string name="map_during_navigation_info">Mapa počas navigácie</string>
     <string name="map_during_navigation">Mapa počas navigácie</string>
     <string name="shared_string_other">Iné</string>
-    <string name="vehicle_parameters_descr">Hmotnosť, výška, rýchlosť</string>
+    <string name="vehicle_parameters_descr">Hmotnosť, výška, dĺžka, rýchlosť</string>
     <string name="vehicle_parameters">Parametre vozidla</string>
     <string name="voice_announces_info">Hlasové oznámenia sú prehrávané počas navigácie.</string>
     <string name="voice_announces_descr">Navigačné pokyny a oznámenia</string>
@@ -3801,4 +3801,8 @@
     <string name="speed_cameras_restart_descr">Pre úplné odstránenie údajov o rýchlostných radaroch je potrebný reštart.</string>
     <string name="shared_string_uninstall_and_restart">Odinštalovať a reštartovať</string>
     <string name="shared_string_uninstall">Odinštalovať</string>
+    <string name="routing_attr_length_description">Zadajte aká dĺžka vozidla musí byť povolená na trase.</string>
+    <string name="routing_attr_length_name">Limit dĺžky</string>
+    <string name="speed_cameras_removed_descr">Toto zariadenie neobsahuje rýchlostné radary.</string>
+    <string name="app_mode_inline_skates">Kolieskové korčule</string>
 </resources>

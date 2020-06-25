@@ -2720,7 +2720,7 @@
     <string name="map_during_navigation_info">Navigasyon sırasında harita</string>
     <string name="map_during_navigation">Navigasyon sırasında harita</string>
     <string name="shared_string_other">Diğer</string>
-    <string name="vehicle_parameters_descr">Ağırlık, yükseklik, hız</string>
+    <string name="vehicle_parameters_descr">Ağırlık, yükseklik, uzunluk, hız</string>
     <string name="vehicle_parameters">Araç parametreleri</string>
     <string name="voice_announces_info">Sesli duyurular sadece navigasyon sırasında gerçekleşir.</string>
     <string name="voice_announces_descr">Navigasyon talimatları ve duyurular</string>
@@ -3758,4 +3758,8 @@
     <string name="item_deleted">%1$s silindi</string>
     <string name="speed_cameras_restart_descr">Hız kamerası verilerini tamamen silmek için yeniden başlatma gerekmektedir.</string>
     <string name="shared_string_uninstall_and_restart">Kaldır ve Yeniden Başlat</string>
+    <string name="speed_cameras_removed_descr">Bu aygıtta hız kameraları yok.</string>
+    <string name="app_mode_inline_skates">Paten</string>
+    <string name="routing_attr_length_description">Rotalarda izin verilecek araç uzunluğunu belirtin.</string>
+    <string name="routing_attr_length_name">Uzunluk sınırı</string>
 </resources>
