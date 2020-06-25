@@ -459,7 +459,7 @@ public class ResourceManager {
 					if (entry.getValue().contains("-tts") && entry.getValue()
 							.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
 						File oggFile = new File(appPath, entry.getValue().replace("-tts", ""));
-						if (oggFile.getParentFile().exists() && !oggFile.exists()) {
+						if (oggFile.getParentFile().exists()) {
 							copyAssets(context.getAssets(), entry.getKey(), oggFile);
 						}
 					}
