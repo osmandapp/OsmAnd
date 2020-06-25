@@ -1546,6 +1546,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				uiHandler.sendMessageDelayed(msg, LONG_KEYPRESS_DELAY);
 			}
 			return true;
+		} else if (settings.USE_VOLUME_BUTTONS_AS_ZOOM.get()) {
+			if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+				changeZoom(-1);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+				changeZoom(1);
+				return true;
+			}
 		} else if (mapScrollHelper.isScrollingDirectionKeyCode(keyCode)) {
 			return mapScrollHelper.onKeyDown(keyCode, event);
 		}
