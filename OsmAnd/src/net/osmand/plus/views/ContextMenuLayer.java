@@ -2,6 +2,7 @@ package net.osmand.plus.views;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -24,6 +25,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.RenderingContext;
 import net.osmand.aidl.AidlMapPointWrapper;
@@ -40,8 +42,10 @@ import net.osmand.core.jni.ObfMapObject;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QStringList;
 import net.osmand.core.jni.QStringStringHash;
+import net.osmand.core.jni.ResourcesManager;
 import net.osmand.core.jni.Utilities;
 import net.osmand.data.Amenity;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -58,6 +62,7 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
+import net.osmand.plus.osmedit.OsmBugsLayer;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -78,6 +83,7 @@ import java.util.Set;
 import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
@@ -95,10 +101,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private ImageView contextMarker;
 	private Paint paint;
 	private Paint outlinePaint;
-	private Bitmap pressedBitmap;
-	private Bitmap pressedBitmapSmall;
-	private List<LatLon> pressedLatLonFull = new ArrayList<>();
-	private List<LatLon> pressedLatLonSmall = new ArrayList<>();
+	private Map<LatLon, FavouritePoint.BackgroundType> pressedLatLonFull = new HashMap<>();
+	private Map<LatLon, FavouritePoint.BackgroundType> pressedLatLonSmall = new HashMap<>();
 
 	private GestureDetector movementListener;
 
@@ -146,8 +150,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		contextMarker.layout(0, 0, minw, minh);
 
 		paint = new Paint();
-		pressedBitmap = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_shield_tap);
-		pressedBitmapSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_shield_tap_small);
+		paint.setColor(0x7f000000);
 
 		outlinePaint = new Paint();
 		outlinePaint.setStyle(Paint.Style.STROKE);
@@ -226,15 +229,17 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (!pressedLatLonSmall.isEmpty() || !pressedLatLonFull.isEmpty()) {
 			scale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
 		}
-		for (LatLon latLon : pressedLatLonSmall) {
+		for (LatLon latLon : pressedLatLonSmall.keySet()) {
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			Bitmap pressedBitmapSmall = getBackground(pressedLatLonSmall.get(latLon), true);
 			Rect destRect = getIconDestinationRect(x, y, pressedBitmapSmall.getWidth(), pressedBitmapSmall.getHeight(), scale);
 			canvas.drawBitmap(pressedBitmapSmall, null, destRect, paint);
 		}
-		for (LatLon latLon : pressedLatLonFull) {
+		for (LatLon latLon : pressedLatLonFull.keySet()) {
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			Bitmap pressedBitmap = getBackground(pressedLatLonFull.get(latLon), false);
 			Rect destRect = getIconDestinationRect(x, y, pressedBitmap.getWidth(), pressedBitmap.getHeight(), scale);
 			canvas.drawBitmap(pressedBitmap, null, destRect, paint);
 		}
@@ -259,6 +264,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight());
 			contextMarker.draw(canvas);
 		}
+	}
+
+	private Bitmap getBackground(FavouritePoint.BackgroundType backgroundType, boolean isSmall) {
+		Context ctx = view.getContext();
+		Resources res = view.getResources();
+		String iconName = res.getResourceEntryName(backgroundType.getIconId());
+		String suffix = isSmall ? "_small" : "";
+		return BitmapFactory.decodeResource(res, res.getIdentifier("ic_" + iconName + "_center" + suffix,
+				"drawable", ctx.getPackageName()));
 	}
 
 	public void setSelectOnMap(CallbackWithObject<LatLon> selectOnMap) {
@@ -884,8 +898,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private Map<Object, IContextMenuProvider> selectObjectsForContextMenu(RotatedTileBox tileBox,
 																		  PointF point, boolean acquireObjLatLon,
 																		  boolean unknownLocation) {
-		List<LatLon> pressedLatLonFull = new ArrayList<>();
-		List<LatLon> pressedLatLonSmall = new ArrayList<>();
+		Map<LatLon, FavouritePoint.BackgroundType> pressedLatLonFull = new HashMap<>();
+		Map<LatLon, FavouritePoint.BackgroundType> pressedLatLonSmall = new HashMap<>();
 		Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
 		List<Object> s = new ArrayList<>();
 		for (OsmandMapLayer lt : view.getLayers()) {
@@ -897,10 +911,21 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					selectedObjects.put(o, l);
 					if (acquireObjLatLon && l.isObjectClickable(o)) {
 						LatLon latLon = l.getObjectLocation(o);
-						if (lt.isPresentInFullObjects(latLon) && !pressedLatLonFull.contains(latLon)) {
-							pressedLatLonFull.add(latLon);
-						} else if (lt.isPresentInSmallObjects(latLon) && !pressedLatLonSmall.contains(latLon)) {
-							pressedLatLonSmall.add(latLon);
+						FavouritePoint.BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
+						if (o instanceof OsmBugsLayer.OpenStreetNote) {
+							backgroundType = FavouritePoint.BackgroundType.COMMENT;
+						}
+						if (o instanceof FavouritePoint) {
+							backgroundType = ((FavouritePoint) o).getBackgroundType();
+						}
+						if (o instanceof GPXUtilities.WptPt) {
+							backgroundType = FavouritePoint.BackgroundType.getByTypeName(
+									((GPXUtilities.WptPt) o).getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
+						}
+						if (lt.isPresentInFullObjects(latLon) && !pressedLatLonFull.keySet().contains(latLon)) {
+							pressedLatLonFull.put(latLon, backgroundType);
+						} else if (lt.isPresentInSmallObjects(latLon) && !pressedLatLonSmall.keySet().contains(latLon)) {
+							pressedLatLonSmall.put(latLon, backgroundType);
 						}
 					}
 				}

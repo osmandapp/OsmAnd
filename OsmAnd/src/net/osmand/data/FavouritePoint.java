@@ -310,8 +310,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public enum BackgroundType {
 		CIRCLE("circle", R.string.shared_string_circle, R.drawable.bg_point_circle),
 		OCTAGON("octagon", R.string.shared_string_octagon, R.drawable.bg_point_octagon),
-		SQUARE("square", R.string.shared_string_square, R.drawable.bg_point_square);
-
+		SQUARE("square", R.string.shared_string_square, R.drawable.bg_point_square),
+		COMMENT("comment", -1, R.drawable.bg_point_comment);
 		private String typeName;
 		@StringRes
 		private int nameId;

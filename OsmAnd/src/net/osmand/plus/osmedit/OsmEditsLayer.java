@@ -12,16 +12,19 @@ import androidx.core.content.ContextCompat;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		ContextMenuLayer.IMoveObjectProvider {
@@ -78,11 +81,44 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 
 	private void drawPoint(Canvas canvas, OsmPoint o, float x, float y) {
 		float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
+		int iconId = getIconId(o);
 		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
 				ContextCompat.getColor(activity, R.color.created_poi_icon_color), true,
-				R.drawable.mx_special_information);
+				iconId);
 		pointImageDrawable.setAlpha(0.8f);
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
+	}
+
+
+	public int getIconId(OsmPoint osmPoint) {
+		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
+			int iconResId = 0;
+			String poiTranslation = osmP.getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+			if (poiTranslation != null && activity != null) {
+				Map<String, PoiType> poiTypeMap = activity.getMyApplication().getPoiTypes().getAllTranslatedNames(false);
+				PoiType poiType = poiTypeMap.get(poiTranslation.toLowerCase());
+				if (poiType != null) {
+					String id = null;
+					if (RenderingIcons.containsBigIcon(poiType.getIconKeyName())) {
+						id = poiType.getIconKeyName();
+					} else if (RenderingIcons.containsBigIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
+						id = poiType.getOsmTag() + "_" + poiType.getOsmValue();
+					}
+					if (id != null) {
+						iconResId = RenderingIcons.getBigIconResourceId(id);
+					}
+				}
+			}
+			if (iconResId == 0) {
+				iconResId = R.drawable.ic_action_info_dark;
+			}
+			return iconResId;
+		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+			return R.drawable.ic_action_bug_dark;
+		} else {
+			return 0;
+		}
 	}
 
 	@Override
