@@ -2660,8 +2660,10 @@ public class BinaryMapIndexReader {
 			incompleteTransportRoutes = new TLongObjectHashMap<>();
 			for (TransportIndex ti : transportIndexes) {
 				if (ti.incompleteRoutesLength > 0) {
-					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.incompleteRoutesLength,
-							ti.incompleteRoutesOffset);
+					codedIS.seek(ti.incompleteRoutesOffset);
+					int oldLimit = codedIS.pushLimit(ti.incompleteRoutesLength);
+					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes);
+					codedIS.popLimit(oldLimit);
 				}
 			}
 		}
