@@ -366,13 +366,13 @@ public class BinaryMapRouteReaderAdapter {
 				stopSign = id;
 			} else if (tags.equals("highway") && val.equals("give_way")){
 				giveWaySign = id;
-			} else if (tags.equals("traffic_signals:direction")){
+			} else if (tags.equals("traffic_signals:direction") && val != null){
 				if (val.equals("forward")) {
 					directionTrafficSignalsForward = id;
 				} else if (val.equals("backward")) {
 					directionTrafficSignalsBackward = id;
 				}
-			} else if (tags.equals("direction")) {
+			} else if (tags.equals("direction") && val != null) {
 				if (val.equals("forward")) {
 					directionForward = id;
 				} else if (val.equals("backward")) {
