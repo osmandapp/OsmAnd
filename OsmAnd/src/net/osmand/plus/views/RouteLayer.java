@@ -36,8 +36,7 @@ import net.osmand.osm.edit.Way;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
+import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -104,7 +103,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		this.transportHelper = helper.getTransportRoutingHelper();
 	}
 
-	public void setTrackChartPoints(TrackDetailsMenu.TrackChartPoints trackChartPoints) {
+	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
 		this.trackChartPoints = trackChartPoints;
 	}
 

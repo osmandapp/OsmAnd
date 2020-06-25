@@ -22,11 +22,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
-import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -637,6 +637,12 @@ public class GpxSelectionHelper {
 			newSelectedGPXFiles.remove(sf);
 		}
 		selectedGPXFiles = newSelectedGPXFiles;
+	}
+
+	public void updateSelectedGpxFile(SelectedGpxFile selectedGpxFile) {
+		if (selectedGPXFiles.contains(selectedGpxFile)) {
+			saveCurrentSelections();
+		}
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {

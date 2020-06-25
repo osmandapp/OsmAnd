@@ -40,10 +40,9 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
+import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
@@ -603,8 +602,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (TrkSegment segment : segments) {
 				QuadRect trackBounds = GPXUtilities.calculateBounds(segment.points);
 				if (QuadRect.trivialOverlap(tb.getLatLonBounds(), trackBounds)) {
-					SelectedGpxPoint selectedGpxPoint = findPointNearSegment(tb, selectedGpxFile, segment.points, r, mx, my);
-					if (selectedGpxPoint != null) {
+					WptPt nextPoint = findPointNearSegment(tb, segment.points, r, mx, my);
+					if (nextPoint != null) {
+						int index = segment.points.indexOf(nextPoint);
+						WptPt prevPoint = segment.points.get(index - 1);
+						SelectedGpxPoint selectedGpxPoint = createSelectedGpxPoint(selectedGpxFile, prevPoint, nextPoint, tb.getLatLonFromPixel(mx, my));
 						res.add(selectedGpxPoint);
 						break;
 					}
@@ -613,7 +615,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	private SelectedGpxPoint findPointNearSegment(RotatedTileBox tb, SelectedGpxFile selectedGpxFile, List<WptPt> points, int r, int mx, int my) {
+	public static WptPt findPointNearSegment(RotatedTileBox tb, List<WptPt> points, int r, int mx, int my) {
 		WptPt firstPoint = points.get(0);
 		int ppx = (int) tb.getPixXFromLatLon(firstPoint.lat, firstPoint.lon);
 		int ppy = (int) tb.getPixYFromLatLon(firstPoint.lat, firstPoint.lon);
@@ -625,7 +627,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			int py = (int) tb.getPixYFromLatLon(point.lat, point.lon);
 			int cross = placeInBbox(px, py, mx, my, r, r);
 			if (cross == 0) {
-				return createProjectionPoint(selectedGpxFile, points.get(i - 1), point, tb.getLatLonFromPixel(mx, my));
+				return point;
 			}
 			if ((pcross & cross) == 0) {
 				int mpx = px;
@@ -636,7 +638,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					int mpynew = mpy / 2 + ppy / 2;
 					int mcrossnew = placeInBbox(mpxnew, mpynew, mx, my, r, r);
 					if (mcrossnew == 0) {
-						return createProjectionPoint(selectedGpxFile, points.get(i - 1), point, tb.getLatLonFromPixel(mx, my));
+						return point;
 					}
 					if ((mcrossnew & mcross) != 0) {
 						mpx = mpxnew;
@@ -659,19 +661,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return null;
 	}
 
-	private SelectedGpxPoint createProjectionPoint(SelectedGpxFile selectedGpxFile, WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
-		LatLon projection = MapUtils.getProjection(latLon.getLatitude(), latLon.getLongitude(), prevPoint.lat, prevPoint.lon, nextPoint.lat, nextPoint.lon);
-
-		WptPt projectionPoint = new WptPt();
-		projectionPoint.lat = projection.getLatitude();
-		projectionPoint.lon = projection.getLongitude();
-		projectionPoint.heading = prevPoint.heading;
-		projectionPoint.distance = prevPoint.distance + MapUtils.getDistance(projection, prevPoint.lat, prevPoint.lon);
-		projectionPoint.ele = getValueByDistInterpolation(projectionPoint.distance, prevPoint.distance, prevPoint.ele, nextPoint.distance, nextPoint.ele);
-		projectionPoint.speed = getValueByDistInterpolation(projectionPoint.distance, prevPoint.distance, prevPoint.speed, nextPoint.distance, nextPoint.speed);
-		if (prevPoint.time != 0 && nextPoint.time != 0) {
-			projectionPoint.time = (long) getValueByDistInterpolation(projectionPoint.distance, prevPoint.distance, prevPoint.time, nextPoint.distance, nextPoint.time);
-		}
+	private SelectedGpxPoint createSelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
+		WptPt projectionPoint = createProjectionPoint(prevPoint, nextPoint, latLon);
 
 		Location prevPointLocation = new Location("");
 		prevPointLocation.setLatitude(prevPoint.lat);
@@ -686,11 +677,28 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, prevPointLocation);
 	}
 
-	private double getValueByDistInterpolation(double projectionDist, double prevDist, double prevVal, double nextDist, double nextVal) {
+	public static WptPt createProjectionPoint(WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
+		LatLon projection = MapUtils.getProjection(latLon.getLatitude(), latLon.getLongitude(), prevPoint.lat, prevPoint.lon, nextPoint.lat, nextPoint.lon);
+
+		WptPt projectionPoint = new WptPt();
+		projectionPoint.lat = projection.getLatitude();
+		projectionPoint.lon = projection.getLongitude();
+		projectionPoint.heading = prevPoint.heading;
+		projectionPoint.distance = prevPoint.distance + MapUtils.getDistance(projection, prevPoint.lat, prevPoint.lon);
+		projectionPoint.ele = getValueByDistInterpolation(projectionPoint.distance, prevPoint.distance, prevPoint.ele, nextPoint.distance, nextPoint.ele);
+		projectionPoint.speed = getValueByDistInterpolation(projectionPoint.distance, prevPoint.distance, prevPoint.speed, nextPoint.distance, nextPoint.speed);
+		if (prevPoint.time != 0 && nextPoint.time != 0) {
+			projectionPoint.time = (long) getValueByDistInterpolation(projectionPoint.distance, prevPoint.distance, prevPoint.time, nextPoint.distance, nextPoint.time);
+		}
+
+		return projectionPoint;
+	}
+
+	private static double getValueByDistInterpolation(double projectionDist, double prevDist, double prevVal, double nextDist, double nextVal) {
 		return prevVal + (projectionDist - prevDist) * ((nextVal - prevVal) / (nextDist - prevDist));
 	}
 
-	int placeInBbox(int x, int y, int mx, int my, int halfw, int halfh) {
+	private static int placeInBbox(int x, int y, int mx, int my, int halfw, int halfh) {
 		int cross = 0;
 		cross |= (x < mx - halfw ? 1 : 0);
 		cross |= (x > mx + halfw ? 2 : 0);
@@ -841,7 +849,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private void syncGpx(GPXFile gpxFile) {
 		MapMarkersGroup group = view.getApplication().getMapMarkersHelper().getMarkersGroup(gpxFile);
 		if (group != null) {
-			mapMarkersHelper.runSynchronization(group);	
+			mapMarkersHelper.runSynchronization(group);
 		}
 	}
 

@@ -57,7 +57,7 @@ public class SelectedGpxMenuController extends MenuController {
 			}
 		};
 		rightTitleButtonController.caption = mapActivity.getString(R.string.analyze_on_map);
-		rightTitleButtonController.startIconId = R.drawable.ic_action_track_16;
+		rightTitleButtonController.startIconId = R.drawable.ic_action_analyze_intervals;
 	}
 
 	private static class OpenGpxDetailsTask extends AsyncTask<Void, Void, GpxSelectionHelper.GpxDisplayItem> {
