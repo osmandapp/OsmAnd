@@ -26,6 +26,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -55,6 +56,8 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,6 +70,7 @@ import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
+	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
 	private static final double TOUCH_RADIUS_MULTIPLIER = 1.5;
 	private static final int START_ZOOM = 7;
 
@@ -81,6 +85,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private boolean isPaint_1;
 	private int cachedHash;
 	private int cachedColor;
+	private Map<String, Float> cachedWidth = new HashMap<>();
 	private Paint paintIcon;
 	private int currentTrackColor;
 
@@ -220,29 +225,30 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	}
 
-	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox) {
+	private int updatePaints(int color, String width, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox) {
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		final boolean isNight = nightMode != null && nightMode.isNightMode();
-		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity(), tileBox.getZoom(),
-			currentTrackColorPref.get(), currentTrackWidthPref.get());
+		int hsh = calculateHash(rrs, cachedWidth, routePoints, isNight, tileBox.getMapDensity(), tileBox.getZoom(),
+				currentTrackColorPref.get(), currentTrackWidthPref.get());
+		String widthKey = width;
 		if (hsh != cachedHash) {
+			log.debug("updatePaints new HASH " + width);
 			cachedHash = hsh;
 			cachedColor = ContextCompat.getColor(view.getApplication(), R.color.gpx_track);
 			if (rrs != null) {
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
-				CommonPreference<String> p = view.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
-				if (p != null && p.isSet()) {
+				if (currentTrackColorPref != null && currentTrackColorPref.isSet()) {
 					RenderingRuleProperty ctColor = rrs.PROPS.get(CURRENT_TRACK_COLOR_ATTR);
 					if (ctColor != null) {
-						req.setStringFilter(ctColor, p.get());
+						req.setStringFilter(ctColor, currentTrackColorPref.get());
 					}
 				}
-				CommonPreference<String> p2 = view.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR);
-				if (p2 != null && p2.isSet()) {
+				if (currentTrackWidthPref != null && currentTrackWidthPref.isSet()) {
 					RenderingRuleProperty ctWidth = rrs.PROPS.get(CURRENT_TRACK_WIDTH_ATTR);
 					if (ctWidth != null) {
-						req.setStringFilter(ctWidth, p2.get());
+						widthKey = width == null ? currentTrackWidthPref.get() : width;
+						req.setStringFilter(ctWidth, widthKey);
 					}
 				}
 				String additional = "";
@@ -261,6 +267,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					RenderingContext rc = new OsmandRenderer.RenderingContext(view.getContext());
 					rc.setDensityValue((float) tileBox.getMapDensity());
 					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
+
+					float widthF = rc.getComplexValue(req, req.ALL.R_STROKE_WIDTH);
+					cachedWidth.put(widthKey, widthF);
+
 					osmandRenderer.updatePaint(req, paint, 0, false, rc);
 					isPaint2 = osmandRenderer.updatePaint(req, paint2, 1, false, rc);
 					isPaint_1 = osmandRenderer.updatePaint(req, paint_1, -1, false, rc);
@@ -279,6 +289,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		paint.setColor(color == 0 ? cachedColor : color);
+		Float strikeWidth = cachedWidth.get(widthKey);
+		if (strikeWidth != null) {
+			paint.setStrokeWidth(strikeWidth);
+		}
 		return cachedColor;
 	}
 
@@ -536,6 +550,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 										  RotatedTileBox tileBox, DrawSettings settings) {
 		List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 		for (TrkSegment ts : segments) {
+			String width = selectedGpxFile.getGpxFile().getWidth(null);
+			if (!cachedWidth.containsKey(width)) {
+				cachedWidth.put(width, null);
+			}
 			int color = selectedGpxFile.getGpxFile().getColor(0);
 			if (currentTrack) {
 				color = currentTrackColor;
@@ -550,8 +568,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					ts.renderer = new Renderable.StandardTrack(ts.points, 17.2);
 				}
 			}
-			updatePaints(color, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox);
-			if(ts.renderer instanceof Renderable.RenderableSegment) {
+			updatePaints(color, width, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox);
+			if (ts.renderer instanceof Renderable.RenderableSegment) {
 				((Renderable.RenderableSegment) ts.renderer).drawSegment(view.getZoom(), paint, canvas, tileBox);
 			}
 		}

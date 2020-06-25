@@ -148,6 +148,18 @@ public class GPXUtilities {
 			getExtensionsToWrite().remove("color");
 		}
 
+		public String getWidth(String defWidth) {
+			String widthValue = null;
+			if (extensions != null) {
+				widthValue = extensions.get("width");
+			}
+			return widthValue != null ? widthValue : defWidth;
+		}
+
+		public void setWidth(String width) {
+			getExtensionsToWrite().put("width", width);
+		}
+
 		public Map<String, String> getExtensionsToWrite() {
 			if (extensions == null) {
 				extensions = new LinkedHashMap<>();

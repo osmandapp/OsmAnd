@@ -77,6 +77,12 @@ public class GpxDbHelper {
 		return res;
 	}
 
+	public boolean updateWidth(GpxDataItem item, String width) {
+		boolean res = db.updateWidth(item, width);
+		putToCache(item);
+		return res;
+	}
+
 	public boolean updateShowAsMarkers(GpxDataItem item, boolean showAsMarkers) {
 		boolean res = db.updateShowAsMarkers(item, showAsMarkers);
 		putToCache(item);

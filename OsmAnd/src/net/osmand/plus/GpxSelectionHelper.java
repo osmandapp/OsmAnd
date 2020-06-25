@@ -51,6 +51,7 @@ public class GpxSelectionHelper {
 	private static final String BACKUP = "backup";
 	private static final String BACKUPMODIFIEDTIME = "backupTime";
 	private static final String COLOR = "color";
+	private static final String WIDTH = "width";
 	private static final String SELECTED_BY_USER = "selected_by_user";
 
 	private OsmandApplication app;
@@ -515,6 +516,9 @@ public class GpxSelectionHelper {
 							int clr = Algorithms.parseColor(obj.getString(COLOR));
 							gpx.setColor(clr);
 						}
+						if (obj.has(WIDTH)) {
+							gpx.setWidth(obj.getString(WIDTH));
+						}
 						if (gpx.error != null) {
 							save = true;
 						} else if (obj.has(BACKUP)) {
@@ -553,6 +557,9 @@ public class GpxSelectionHelper {
 						obj.put(FILE, s.gpxFile.path);
 						if (s.gpxFile.getColor(0) != 0) {
 							obj.put(COLOR, Algorithms.colorToString(s.gpxFile.getColor(0)));
+						}
+						if (s.gpxFile.getWidth(null) != null) {
+							obj.put(WIDTH, s.gpxFile.getWidth(null));
 						}
 					}
 					obj.put(SELECTED_BY_USER, s.selectedByUser);
@@ -605,6 +612,9 @@ public class GpxSelectionHelper {
 				if (dataItem != null) {
 					if (dataItem.getColor() != 0) {
 						gpx.setColor(dataItem.getColor());
+					}
+					if (dataItem.getWidth() != null) {
+						gpx.setWidth(dataItem.getWidth());
 					}
 					sf.setJoinSegments(dataItem.isJoinSegments());
 				}
