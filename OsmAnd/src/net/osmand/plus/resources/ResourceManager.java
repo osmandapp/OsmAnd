@@ -47,7 +47,6 @@ import net.osmand.plus.resources.AsyncLoadingThread.OnMapLoadedListener;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.router.TransportRoutePlanner.TransportRoutingContext;
 import net.osmand.router.TransportStopsRouteReader;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -76,8 +75,8 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import gnu.trove.map.hash.TLongObjectHashMap;
 
+import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.assetMapping;
 
 /**
@@ -405,8 +404,8 @@ public class ResourceManager {
 	}
 
 
-	public List<String> indexVoiceFiles(IProgress progress){
-		File file = context.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+	public List<String> indexVoiceFiles(IProgress progress) {
+		File file = context.getAppPath(VOICE_INDEX_DIR);
 		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		if (file.exists() && file.canRead()) {
@@ -459,7 +458,7 @@ public class ResourceManager {
 					if (entry.getValue().contains("-tts") && entry.getValue()
 							.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
 						File oggFile = new File(appPath, entry.getValue().replace("-tts", ""));
-						if (oggFile.getParentFile().exists()) {
+						if (oggFile.getParentFile().exists() && !oggFile.exists()) {
 							copyAssets(context.getAssets(), entry.getKey(), oggFile);
 						}
 					}
@@ -570,22 +569,31 @@ public class ResourceManager {
 					else
 						log.error("Mode '" + mode + "' is unknown");
 				}
-				
+
 				final File destinationFile = new File(appDataDir, destination);
-				
+
 				boolean unconditional = false;
-				if(installMode != null)
+				if (installMode != null)
 					unconditional = unconditional || (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode) && isFirstInstall);
-				if(copyMode == null)
+				if (copyMode == null)
 					log.error("No copy mode was defined for " + source);
 				unconditional = unconditional || ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
-				
+
 				boolean shouldCopy = unconditional;
 				shouldCopy = shouldCopy || (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && destinationFile.exists());
 				shouldCopy = shouldCopy || (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !destinationFile.exists());
-				
-				if(shouldCopy)
+
+				if (shouldCopy) {
 					copyAssets(assetManager, source, destinationFile);
+				}
+				if (source.contains("-tts") && source.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+					File oggFile = new File(appDataDir + VOICE_INDEX_DIR, source.replace("-tts", ""));
+					if (oggFile.getParentFile().exists()
+							&& oggFile.exists()
+							&& ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode)) {
+						copyAssets(assetManager, source, oggFile);
+					}
+				}
 			}
 		}
 		
