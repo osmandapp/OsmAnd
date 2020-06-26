@@ -380,7 +380,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private void createShapeSelector() {
 		FlowLayout selectShape = view.findViewById(R.id.select_shape);
 		for (BackgroundType backgroundType : BackgroundType.values()) {
-			if (backgroundType.getNameId() != -1) {
+			if (backgroundType.isSelected()) {
 				selectShape.addView(createShapeItemView(backgroundType, selectShape),
 						new FlowLayout.LayoutParams(0, 0));
 			}

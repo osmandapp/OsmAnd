@@ -65,28 +65,24 @@ public class PointImageDrawable extends Drawable {
 	private PointImageDrawable(PointInfo pointInfo) {
 		this.withShadow = pointInfo.withShadow;
 		this.synced = pointInfo.synced;
-		Resources res = pointInfo.ctx.getResources();
-		UiUtilities uiUtilities = ((OsmandApplication) pointInfo.ctx.getApplicationContext()).getUIUtilities();
+		Context ctx = pointInfo.ctx;
+		Resources res = ctx.getResources();
+		UiUtilities uiUtilities = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities();
 		int overlayIconId = pointInfo.overlayIconId;
 		int uiIconId;
-		mapIcon = uiUtilities.getIcon(getMapIconId(pointInfo.ctx, overlayIconId), R.color.color_white);
+		mapIcon = uiUtilities.getIcon(getMapIconId(ctx, overlayIconId), R.color.color_white);
 		uiIconId = overlayIconId;
 		int col = pointInfo.color == 0 ? res.getColor(R.color.color_favorite) : pointInfo.color;
 		uiListIcon = uiUtilities.getIcon(uiIconId, R.color.color_white);
-		int uiBackgroundIconId = pointInfo.backgroundType.getIconId();
+		BackgroundType backgroundType = pointInfo.backgroundType;
+		int uiBackgroundIconId = backgroundType.getIconId();
 		uiBackgroundIcon = uiUtilities.getPaintedIcon(uiBackgroundIconId, col);
-		int mapBackgroundIconIdTop = getMapBackgroundIconId(pointInfo, "top", false);
-		int mapBackgroundIconIdCenter = getMapBackgroundIconId(pointInfo, "center", false);
-		int mapBackgroundIconIdBottom = getMapBackgroundIconId(pointInfo, "bottom", false);
-		mapIconBackgroundTop = BitmapFactory.decodeResource(res, mapBackgroundIconIdTop);
-		mapIconBackgroundCenter = BitmapFactory.decodeResource(res, mapBackgroundIconIdCenter);
-		mapIconBackgroundBottom = BitmapFactory.decodeResource(res, mapBackgroundIconIdBottom);
-		int mapBackgroundIconIdTopSmall = getMapBackgroundIconId(pointInfo, "top", true);
-		int mapBackgroundIconIdCenterSmall = getMapBackgroundIconId(pointInfo, "center", true);
-		int mapBackgroundIconIdBottomSmall = getMapBackgroundIconId(pointInfo, "bottom", true);
-		mapIconBackgroundTopSmall = BitmapFactory.decodeResource(res, mapBackgroundIconIdTopSmall);
-		mapIconBackgroundCenterSmall = BitmapFactory.decodeResource(res, mapBackgroundIconIdCenterSmall);
-		mapIconBackgroundBottomSmall = BitmapFactory.decodeResource(res, mapBackgroundIconIdBottomSmall);
+		mapIconBackgroundTop = backgroundType.getMapBackgroundIconId(ctx, "top", false);
+		mapIconBackgroundCenter = backgroundType.getMapBackgroundIconId(ctx, "center", false);
+		mapIconBackgroundBottom = backgroundType.getMapBackgroundIconId(ctx, "bottom", false);
+		mapIconBackgroundTopSmall = backgroundType.getMapBackgroundIconId(ctx, "top", true);
+		mapIconBackgroundCenterSmall = backgroundType.getMapBackgroundIconId(ctx, "center", true);
+		mapIconBackgroundBottomSmall = backgroundType.getMapBackgroundIconId(ctx, "bottom", true);
 		syncedStroke = BitmapFactory.decodeResource(res, R.drawable.ic_shield_marker_point_stroke);
 		syncedColor = BitmapFactory.decodeResource(res, R.drawable.ic_shield_marker_point_color);
 		syncedShadow = BitmapFactory.decodeResource(res, R.drawable.ic_shield_marker_point_shadow);
@@ -100,15 +96,6 @@ public class PointImageDrawable extends Drawable {
 		String iconName = ctx.getResources().getResourceEntryName(iconId);
 		return ctx.getResources().getIdentifier(iconName
 				.replaceFirst("mx_", "mm_"), "drawable", ctx.getPackageName());
-	}
-
-	private int getMapBackgroundIconId(PointInfo pointInfo, String layer, boolean isSmall) {
-		Context ctx = pointInfo.ctx;
-		int iconId = pointInfo.backgroundType.getIconId();
-		String iconName = ctx.getResources().getResourceEntryName(iconId);
-		String suffix = isSmall ? "_small" : "";
-		return ctx.getResources().getIdentifier("ic_" + iconName + "_" + layer + suffix,
-				"drawable", ctx.getPackageName());
 	}
 
 	@Override
