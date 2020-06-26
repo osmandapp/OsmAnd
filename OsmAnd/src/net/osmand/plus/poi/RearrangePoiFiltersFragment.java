@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
@@ -186,6 +187,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 							});
 					ViewCompat.setElevation(snackbar.getView(), 0f);
 					snackbar.setAnchorView(buttonsContainer);
+					snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_FADE);
 					UiUtilities.setupSnackbar(snackbar, nightMode);
 					snackbar.show();
 				}
