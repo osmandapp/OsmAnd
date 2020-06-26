@@ -9,9 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -27,6 +29,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
@@ -43,6 +46,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import static net.osmand.search.core.ObjectType.POI_TYPE;
+import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
@@ -200,7 +204,55 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		final QuickSearchListItem listItem = getItem(position);
 		QuickSearchListItemType type = listItem.getType();
 		LinearLayout view;
-		if (type == QuickSearchListItemType.FREE_VERSION_BANNER) {
+		if (type == QuickSearchListItemType.BANNER) {
+			QuickSearchBannerListItem banner = (QuickSearchBannerListItem) listItem;
+			if (convertView == null) {
+				view = (LinearLayout) inflater.inflate(R.layout.search_banner_list_item, null);
+			} else {
+				view = (LinearLayout) convertView;
+			}
+
+			((TextView) view.findViewById(R.id.empty_search_description)).setText(R.string.nothing_found_descr);
+
+			SearchUICore searchUICore = app.getSearchUICore().getCore();
+			SearchPhrase searchPhrase = searchUICore.getPhrase();
+
+			String textTitle;
+			int minimalSearchRadius = searchUICore.getMinimalSearchRadius(searchPhrase);
+			if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
+				double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
+				textTitle = app.getString(R.string.nothing_found_in_radius) + " "
+						+ OsmAndFormatter.getFormattedDistance((float) rd, app, false);
+			} else {
+				textTitle = app.getString(R.string.search_nothing_found);
+			}
+			((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
+
+			ListView buttonsList = view.findViewById(R.id.buttons_list);
+			ArrayAdapter<ButtonItem> adapter = new ArrayAdapter<ButtonItem>(
+					app, R.layout.search_banner_button_list_item, banner.getButtonItems()) {
+				@NonNull
+				@Override
+				public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+					View v = inflater.inflate(R.layout.search_banner_button_list_item, null);
+					ButtonItem buttonItem = getItem(position);
+					if (buttonItem != null) {
+						TextView title = v.findViewById(R.id.title);
+						title.setText(buttonItem.getTitle());
+						ImageView icon = v.findViewById(R.id.icon);
+						if (buttonItem.getIconId() != -1) {
+							icon.setImageResource(buttonItem.getIconId());
+							icon.setVisibility(View.VISIBLE);
+						} else {
+							icon.setVisibility(View.GONE);
+						}
+						v.setOnClickListener(buttonItem.getListener());
+					}
+					return v;
+				}
+			};
+			buttonsList.setAdapter(adapter);
+		} else if (type == QuickSearchListItemType.FREE_VERSION_BANNER) {
 			if (convertView == null) {
 				view = (LinearLayout) inflater.inflate(
 						R.layout.read_wikipedia_ofline_banner, null);
@@ -254,15 +306,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
 			View primaryButton = view.findViewById(R.id.primary_button);
 
-			SearchWord word = searchPhrase.getLastSelectedWord();
-			if (word != null && word.getType() != null && word.getType().equals(POI_TYPE)) {
-				float rd = (float) OsmAndFormatter.calculateRoundedDist(searchUICore.getNextSearchRadius(searchPhrase), app);
-				String textIncreaseRadiusTo = app.getString(R.string.increase_search_radius_to,
-						OsmAndFormatter.getFormattedDistance(rd, app, false));
-				((TextView) view.findViewById(R.id.title)).setText(textIncreaseRadiusTo);
-			} else {
-				((TextView) view.findViewById(R.id.title)).setText(app.getString(R.string.increase_search_radius));
-			}
+			((TextView) view.findViewById(R.id.title)).setText(getIncreaseSearchButtonTitle(app, searchPhrase));
 			
 			primaryButton.setVisibility(searchMoreItem.isSearchMoreAvailable() ? View.VISIBLE : View.GONE);
 			primaryButton.setOnClickListener(new View.OnClickListener() {
@@ -275,8 +319,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			View secondaryButton = view.findViewById(R.id.secondary_button);
 			secondaryButton.setVisibility(searchMoreItem.isSecondaryButtonVisible() ?
 					View.VISIBLE : View.GONE);
-			TextView tvSecondaryButtonTitle = view.findViewById(R.id.secondary_button_title);
-			tvSecondaryButtonTitle.setText(searchMoreItem.getSecondaryButtonTitle());
 			secondaryButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -467,6 +509,19 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		}
 		ViewCompat.setAccessibilityDelegate(view, accessibilityAssistant);
 		return view;
+	}
+
+	public static String getIncreaseSearchButtonTitle(OsmandApplication app, SearchPhrase searchPhrase) {
+		SearchWord word = searchPhrase.getLastSelectedWord();
+		SearchUICore searchUICore = app.getSearchUICore().getCore();
+		if (word != null && word.getType() != null && word.getType().equals(POI_TYPE)) {
+			float rd = (float) OsmAndFormatter.calculateRoundedDist(
+					searchUICore.getNextSearchRadius(searchPhrase), app);
+			return app.getString(R.string.increase_search_radius_to,
+					OsmAndFormatter.getFormattedDistance(rd, app, false));
+		} else {
+			return app.getString(R.string.increase_search_radius);
+		}
 	}
 
 	public void toggleCheckbox(int position, CheckBox ch) {

@@ -41,6 +41,7 @@ import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -48,6 +49,7 @@ import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -373,7 +375,13 @@ public abstract class OsmandPlugin {
 
 	private static void checkPaidPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
 		allPlugins.add(plugin);
-		plugin.setActive(Version.isPaidVersion(app));
+		boolean active = Version.isPaidVersion(app);
+		plugin.setActive(active);
+		if (active) {
+			enabledPlugins.add(plugin.getId());
+		} else {
+			enabledPlugins.remove(plugin.getId());
+		}
 	}
 
 	private static void checkMarketPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
@@ -538,6 +546,10 @@ public abstract class OsmandPlugin {
 	}
 
 	protected void optionsMenuFragment(Activity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
+	}
+
+	protected boolean nothingFoundInSearch(QuickSearchDialogFragment searchFragment, SearchPhrase phrase) {
+		return false;
 	}
 
 	public List<String> indexingFiles(IProgress progress) {
@@ -795,6 +807,14 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.optionsMenuFragment(activity, fragment, optionsMenuAdapter);
 		}
+	}
+
+	public static boolean onNothingFoundInSearch(QuickSearchDialogFragment searchFragment, SearchPhrase phrase) {
+		boolean processed = false;
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			processed = plugin.nothingFoundInSearch(searchFragment, phrase) || processed;
+		}
+		return processed;
 	}
 
 	public static Collection<DashFragmentData> getPluginsCardsList() {

@@ -15,19 +15,13 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 	private String findMore;
 	private String restartSearch;
 	private String increaseRadius;
-	private SearchMoreType type;
 	private boolean secondaryButtonVisibility;
 
-	public enum SearchMoreType {
-		STANDARD, WIKIPEDIA
-	}
-
-	public QuickSearchMoreListItem(OsmandApplication app, String name, SearchMoreType type,
+	public QuickSearchMoreListItem(OsmandApplication app, String name,
 	                               @Nullable SearchMoreItemOnClickListener onClickListener) {
 		super(app, null);
 		this.name = name;
 		this.onClickListener = onClickListener;
-		this.type = type;
 		findMore = app.getString(R.string.search_POI_level_btn).toUpperCase();
 		restartSearch = app.getString(R.string.restart_search).toUpperCase();
 		increaseRadius = app.getString(R.string.increase_search_radius).toUpperCase();
@@ -49,14 +43,6 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 			}
 		} else {
 			return increaseRadius;
-		}
-	}
-
-	public String getSecondaryButtonTitle() {
-		if (type == SearchMoreType.WIKIPEDIA) {
-			return app.getString(R.string.search_download_wikipedia_maps);
-		} else {
-			return "";
 		}
 	}
 

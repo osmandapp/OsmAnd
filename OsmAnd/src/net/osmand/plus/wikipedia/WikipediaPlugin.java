@@ -13,6 +13,7 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
@@ -20,6 +21,10 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.search.QuickSearchListAdapter;
+import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
+import net.osmand.plus.search.listitems.QuickSearchFreeBannerListItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -256,18 +261,17 @@ public class WikipediaPlugin extends OsmandPlugin {
 		return preferredLanguage;
 	}
 
-	public void showDownloadWikiScreen() {
-		if (mapActivity == null) {
-			return;
+	public void showDownloadWikiMapsScreen() {
+		if (mapActivity != null) {
+			OsmandMapTileView mv = mapActivity.getMapView();
+			DownloadedRegionsLayer dl = mv.getLayerByClass(DownloadedRegionsLayer.class);
+			String filter = dl.getFilter(new StringBuilder());
+			final Intent intent = new Intent(app, app.getAppCustomization().getDownloadIndexActivity());
+			intent.putExtra(DownloadActivity.FILTER_KEY, filter);
+			intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.WIKIPEDIA_FILE.getTag());
+			intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
+			mapActivity.startActivity(intent);
 		}
-		OsmandMapTileView mv = mapActivity.getMapView();
-		DownloadedRegionsLayer dl = mv.getLayerByClass(DownloadedRegionsLayer.class);
-		String filter = dl.getFilter(new StringBuilder());
-		final Intent intent = new Intent(app, app.getAppCustomization().getDownloadIndexActivity());
-		intent.putExtra(DownloadActivity.FILTER_KEY, filter);
-		intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.WIKIPEDIA_FILE.getTag());
-		intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
-		mapActivity.startActivity(intent);
 	}
 
 	public boolean hasMapsToDownload() {
@@ -275,8 +279,8 @@ public class WikipediaPlugin extends OsmandPlugin {
 			if (mapActivity == null) {
 				return false;
 			}
-			int mapsToDownloadCount = DownloadResources.findIndexItemsAt(app,
-					mapActivity.getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE,
+			int mapsToDownloadCount = DownloadResources.findIndexItemsAt(
+					app, mapActivity.getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE,
 					false, 1).size();
 			return mapsToDownloadCount > 0;
 		} catch (IOException e) {
@@ -284,7 +288,37 @@ public class WikipediaPlugin extends OsmandPlugin {
 		}
 	}
 
-	public static boolean isSearchByWiki(SearchPhrase phrase) {
+	@Override
+	protected boolean nothingFoundInSearch(final QuickSearchDialogFragment searchFragment, SearchPhrase phrase) {
+		if (isSearchByWiki(phrase)) {
+			if (!Version.isPaidVersion(app)) {
+				searchFragment.addSearchListItem(new QuickSearchFreeBannerListItem(app));
+			} else {
+				QuickSearchBannerListItem banner = new QuickSearchBannerListItem(app);
+				banner.addButton(QuickSearchListAdapter.getIncreaseSearchButtonTitle(app, phrase),
+						null, -1, new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						searchFragment.increaseSearchRadius();
+					}
+				});
+				if (hasMapsToDownload()) {
+					banner.addButton(app.getString(R.string.search_download_wikipedia_maps),
+							null, R.drawable.ic_world_globe_dark, new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									showDownloadWikiMapsScreen();
+								}
+							});
+				}
+				searchFragment.addSearchListItem(banner);
+			}
+			return true;
+		}
+		return false;
+	}
+
+	private boolean isSearchByWiki(SearchPhrase phrase) {
 		if (phrase.isLastWord(ObjectType.POI_TYPE)) {
 			Object obj = phrase.getLastSelectedWord().getResult().object;
 			if (obj instanceof PoiUIFilter) {
