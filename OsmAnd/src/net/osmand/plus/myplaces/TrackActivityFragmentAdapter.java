@@ -68,7 +68,6 @@ import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -452,7 +451,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		String width = item.getValue();
 		if (vis.isChecked()) {
 			SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpxFile, vis.isChecked(), false);
-			if (!Algorithms.isEmpty(width) && sf.getModifiableGpxFile() != null) {
+			if (width != null && sf.getModifiableGpxFile() != null) {
 				sf.getModifiableGpxFile().setWidth(width);
 				if (getGpxDataItem() != null) {
 					app.getGpxDbHelper().updateWidth(getGpxDataItem(), width);
