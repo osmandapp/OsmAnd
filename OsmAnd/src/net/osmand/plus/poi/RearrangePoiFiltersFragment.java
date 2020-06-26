@@ -617,11 +617,15 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 				PoiViewHolder h = (PoiViewHolder) holder;
 				PoiUIFilterDataObject poiInfo = (PoiUIFilterDataObject) item.value;
 				int osmandOrangeColorResId = nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange;
+				boolean isActive = poiInfo.isActive;
 				h.title.setText(poiInfo.name);
+				int padding = (int) getResources().getDimension(R.dimen.content_padding);
+				int paddingSmall = (int) getResources().getDimension(R.dimen.content_padding_small);
+				h.title.setPadding(isActive ? 0 : padding, paddingSmall, paddingSmall, padding);
 				boolean userFilter = poiInfo.filterId.startsWith(USER_PREFIX);
 				int iconRes = QuickSearchListItem.getCustomFilterIconRes(poiHelper.getFilterById(poiInfo.filterId));
 				h.icon.setImageDrawable(uiUtilities.getIcon(userFilter ? iconRes : poiInfo.iconRes, osmandOrangeColorResId));
-				h.moveIcon.setVisibility(poiInfo.isActive ? View.VISIBLE : View.GONE);
+				h.moveIcon.setVisibility(isActive ? View.VISIBLE : View.GONE);
 				h.actionIcon.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -631,7 +635,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 						}
 					}
 				});
-				if (poiInfo.isActive) {
+				if (isActive) {
 					h.actionIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_remove, R.color.color_osm_edit_delete));
 					h.moveIcon.setOnTouchListener(new View.OnTouchListener() {
 						@Override
