@@ -296,7 +296,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 			} else {
 				QuickSearchBannerListItem banner = new QuickSearchBannerListItem(app);
 				banner.addButton(QuickSearchListAdapter.getIncreaseSearchButtonTitle(app, phrase),
-						null, -1, new View.OnClickListener() {
+						null, QuickSearchBannerListItem.INVALID_ID, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						searchFragment.increaseSearchRadius();

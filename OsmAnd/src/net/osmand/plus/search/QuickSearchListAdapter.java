@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
 
@@ -240,7 +241,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 						TextView title = v.findViewById(R.id.title);
 						title.setText(buttonItem.getTitle());
 						ImageView icon = v.findViewById(R.id.icon);
-						if (buttonItem.getIconId() != -1) {
+						if (buttonItem.getIconId() != INVALID_ID) {
 							icon.setImageResource(buttonItem.getIconId());
 							icon.setVisibility(View.VISIBLE);
 						} else {

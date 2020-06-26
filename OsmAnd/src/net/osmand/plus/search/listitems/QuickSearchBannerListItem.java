@@ -9,6 +9,8 @@ import java.util.List;
 
 public class QuickSearchBannerListItem extends QuickSearchListItem {
 
+	public static final int INVALID_ID = -1;
+
 	private List<ButtonItem> buttons;
 
 	public QuickSearchBannerListItem(OsmandApplication app) {
