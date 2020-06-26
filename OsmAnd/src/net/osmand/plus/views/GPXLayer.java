@@ -20,11 +20,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -54,6 +56,8 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,6 +70,8 @@ import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
+	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
+
 	private static final double TOUCH_RADIUS_MULTIPLIER = 1.5;
 	private static final int START_ZOOM = 7;
 
@@ -73,10 +79,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private Paint paint;
 	private Paint shadowPaint;
+	private Paint paintIcon;
 	private int cachedHash;
 	private int cachedColor;
+	private float defaultTrackWidth;
 	private Map<String, Float> cachedTrackWidth = new HashMap<>();
-	private Paint paintIcon;
 	private int currentTrackColor;
 
 	private LayerDrawable selectedPoint;
@@ -209,6 +216,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (hash != cachedHash) {
 			cachedHash = hash;
 			cachedColor = ContextCompat.getColor(view.getApplication(), R.color.gpx_track);
+			defaultTrackWidth = 7 * view.getDensity();
 			if (rrs != null) {
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
@@ -252,8 +260,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						searchTrackWidth(key, rrs, req, rc);
 					}
 				} else {
-					System.err.println("Rendering attribute gpx is not found !");
-					paint.setStrokeWidth(7 * view.getDensity());
+					log.error("Rendering attribute gpx is not found !");
+					for (String key : cachedTrackWidth.keySet()) {
+						cachedTrackWidth.put(key, defaultTrackWidth);
+					}
 				}
 			}
 		}
@@ -266,13 +276,24 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void searchTrackWidth(String widthKey, RenderingRulesStorage rrs, RenderingRuleSearchRequest req, RenderingContext rc) {
-		RenderingRuleProperty ctWidth = rrs.PROPS.get(CURRENT_TRACK_WIDTH_ATTR);
-		if (ctWidth != null) {
-			req.setStringFilter(ctWidth, widthKey);
-		}
-		if (req.searchRenderingAttribute("gpx")) {
-			float widthF = rc.getComplexValue(req, req.ALL.R_STROKE_WIDTH);
-			cachedTrackWidth.put(widthKey, widthF);
+		if (!Algorithms.isEmpty(widthKey) && Algorithms.isInt(widthKey)) {
+			try {
+				int widthDp = Integer.parseInt(widthKey);
+				float widthF = AndroidUtils.dpToPx(view.getApplication(), widthDp);
+				cachedTrackWidth.put(widthKey, widthF);
+			} catch (NumberFormatException e) {
+				log.error(e.getMessage(), e);
+				cachedTrackWidth.put(widthKey, defaultTrackWidth);
+			}
+		} else {
+			RenderingRuleProperty ctWidth = rrs.PROPS.get(CURRENT_TRACK_WIDTH_ATTR);
+			if (ctWidth != null) {
+				req.setStringFilter(ctWidth, widthKey);
+			}
+			if (req.searchRenderingAttribute("gpx")) {
+				float widthF = rc.getComplexValue(req, req.ALL.R_STROKE_WIDTH);
+				cachedTrackWidth.put(widthKey, widthF);
+			}
 		}
 	}
 
