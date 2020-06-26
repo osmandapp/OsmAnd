@@ -39,6 +39,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetEntry;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -52,9 +54,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -77,7 +77,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
-import static net.osmand.plus.download.DownloadOsmandIndexesHelper.assetMapping;
 
 /**
  * Resource manager is responsible to work with all resources 
@@ -450,20 +449,20 @@ public class ResourceManager {
 
 	public void copyMissingJSAssets() {
 		try {
-			Map<String, String> mapping = assetMapping(context.getAssets());
+			List<AssetEntry> assets = DownloadOsmandIndexesHelper.getBundledAssets(context.getAssets());
 			File appPath = context.getAppPath(null);
 			if (appPath.canWrite()) {
-				for (Entry<String,String> entry : mapping.entrySet()) {
-					File jsFile = new File(appPath, entry.getValue());
-					if (entry.getValue().contains("-tts") && entry.getValue()
+				for (AssetEntry asset : assets) {
+					File jsFile = new File(appPath, asset.destination);
+					if (asset.destination.contains("-tts") && asset.destination
 							.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-						File oggFile = new File(appPath, entry.getValue().replace("-tts", ""));
+						File oggFile = new File(appPath, asset.destination.replace("-tts", ""));
 						if (oggFile.getParentFile().exists() && !oggFile.exists()) {
-							copyAssets(context.getAssets(), entry.getKey(), oggFile);
+							copyAssets(context.getAssets(), asset.source, oggFile);
 						}
 					}
 					if (jsFile.getParentFile().exists() && !jsFile.exists()) {
-						copyAssets(context.getAssets(), entry.getKey(), jsFile);
+						copyAssets(context.getAssets(), asset.source, jsFile);
 					}
 				}
 			}
@@ -541,63 +540,43 @@ public class ResourceManager {
 	private final static String ASSET_COPY_MODE__alwaysOverwriteOrCopy = "alwaysOverwriteOrCopy";
 	private final static String ASSET_COPY_MODE__copyOnlyIfDoesNotExist = "copyOnlyIfDoesNotExist";
 	private void unpackBundledAssets(AssetManager assetManager, File appDataDir, IProgress progress, boolean isFirstInstall) throws IOException, XmlPullParserException {
-		XmlPullParser xmlParser = XmlPullParserFactory.newInstance().newPullParser(); 
-		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.xml");
-		xmlParser.setInput(isBundledAssetsXml, "UTF-8");
-		
-		int next = 0;
-		while ((next = xmlParser.next()) != XmlPullParser.END_DOCUMENT) {
-			if (next == XmlPullParser.START_TAG && xmlParser.getName().equals("asset")) {
-				final String source = xmlParser.getAttributeValue(null, "source");
-				final String destination = xmlParser.getAttributeValue(null, "destination");
-				final String combinedMode = xmlParser.getAttributeValue(null, "mode");
-				
-				final String[] modes = combinedMode.split("\\|");
-				if(modes.length == 0) {
-					log.error("Mode '" + combinedMode + "' is not valid");
-					continue;
-				}
-				String installMode = null;
-				String copyMode = null;
-				for(String mode : modes) {
-					if(ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(mode))
-						installMode = mode;
-					else if(ASSET_COPY_MODE__overwriteOnlyIfExists.equals(mode) ||
-							ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(mode) ||
-							ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(mode))
-						copyMode = mode;
-					else
-						log.error("Mode '" + mode + "' is unknown");
-				}
+		List<AssetEntry> assetEntries = DownloadOsmandIndexesHelper.getBundledAssets(assetManager);
+		for (AssetEntry asset : assetEntries) {
+			final String[] modes = asset.combinedMode.split("\\|");
+			if (modes.length == 0) {
+				log.error("Mode '" + asset.combinedMode + "' is not valid");
+				continue;
+			}
+			String installMode = null;
+			String copyMode = null;
+			for (String mode : modes) {
+				if (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(mode))
+					installMode = mode;
+				else if (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(mode) ||
+						ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(mode) ||
+						ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(mode))
+					copyMode = mode;
+				else
+					log.error("Mode '" + mode + "' is unknown");
+			}
 
-				final File destinationFile = new File(appDataDir, destination);
+			final File destinationFile = new File(appDataDir, asset.destination);
 
-				boolean unconditional = false;
-				if (installMode != null)
-					unconditional = unconditional || (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode) && isFirstInstall);
-				if (copyMode == null)
-					log.error("No copy mode was defined for " + source);
-				unconditional = unconditional || ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
+			boolean unconditional = false;
+			if (installMode != null)
+				unconditional = unconditional || (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode) && isFirstInstall);
+			if (copyMode == null)
+				log.error("No copy mode was defined for " + asset.source);
+			unconditional = unconditional || ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
 
-				boolean shouldCopy = unconditional;
-				shouldCopy = shouldCopy || (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && destinationFile.exists());
-				shouldCopy = shouldCopy || (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !destinationFile.exists());
+			boolean shouldCopy = unconditional;
+			shouldCopy = shouldCopy || (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && destinationFile.exists());
+			shouldCopy = shouldCopy || (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !destinationFile.exists());
 
-				if (shouldCopy) {
-					copyAssets(assetManager, source, destinationFile);
-				}
-				if (source.contains("-tts") && source.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-					File oggFile = new File(appDataDir + VOICE_INDEX_DIR, source.replace("-tts", ""));
-					if (oggFile.getParentFile().exists()
-							&& oggFile.exists()
-							&& ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode)) {
-						copyAssets(assetManager, source, oggFile);
-					}
-				}
+			if (shouldCopy) {
+				copyAssets(assetManager, asset.source, destinationFile);
 			}
 		}
-		
-		isBundledAssetsXml.close();
 	}
 
 	public static void copyAssets(AssetManager assetManager, String assetName, File file) throws IOException {
