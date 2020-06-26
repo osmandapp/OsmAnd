@@ -29,6 +29,10 @@ public class RoutePlannerFrontEnd {
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public boolean useSmartRouteRecalculation = true;
+	
+	public static double AVERAGE_SPLIT_DISTANCE_GPX = 500;
+	public static double MINIMUM_SPLIT_DISTANCE_GPX = 100;
+	public static double DISTANCE_APPROXIMATE_THRESHOLD = 50;
 
 	
 	public RoutePlannerFrontEnd() {
@@ -146,7 +150,111 @@ public class RoutePlannerFrontEnd {
 	public void setUseFastRecalculation(boolean use) {
 		useSmartRouteRecalculation = use;
 	}
+	
+	private static class GpxApproximateContext {
+		int routeCalculations = 0;
+		double routeDistCalculations = 0;
+	}
+	
+	private static class GpxPoint {
+		public int ind;
+		public LatLon loc;
+		public double cumDist;
+		public RouteSegmentPoint pnt;
+		public List<RouteSegmentResult> routeToTarget;
+		public int targetInd = -1;
+	}
 
+	
+	public List<RouteSegmentResult> searchGpxRoute(final RoutingContext ctx, List<LatLon> points) throws IOException, InterruptedException {
+		GpxApproximateContext gctx = new GpxApproximateContext();
+		List<GpxPoint> gpxPoints = new ArrayList<>(points.size());
+		GpxPoint prev = null;
+		int firstInd = gpxPoints.size();
+		for(int i = 0; i < points.size(); i++) {
+			GpxPoint p = new GpxPoint();
+			p.ind = i;
+			p.loc = points.get(i);
+			if (prev != null) {
+				p.cumDist = MapUtils.getDistance(p.loc, prev.loc) + prev.cumDist;
+			}
+			if (firstInd == gpxPoints.size()) {
+				p.pnt = findRouteSegment(p.loc.getLatitude(), p.loc.getLongitude(), ctx, null, false);
+				if(p.pnt != null) {
+					firstInd = i;
+				}
+			}
+			gpxPoints.add(p);
+			prev = p;
+		}
+		while (firstInd < gpxPoints.size() - 1) {
+			int nextInd = findGpxRouteFromPoint(ctx, gctx, gpxPoints, firstInd);
+			if(nextInd == -1) {
+				firstInd++;
+			} else {
+				firstInd = nextInd;
+			}
+		}
+		List<RouteSegmentResult> res = new ArrayList<RouteSegmentResult>();
+		for (int i = 0; i < gpxPoints.size() - 1; i++) {
+			GpxPoint pnt = gpxPoints.get(i);
+			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
+				res.addAll(pnt.routeToTarget);
+				i = pnt.targetInd;
+			} else {
+				// TODO add straight line from i -> i+1 
+//				res.add(new RouteSegmentResult(new RouteDataObject(null)));
+			}
+		}
+		if (!res.isEmpty()) {
+			System.out.println(String.format("GPX route approximations was found by %d of %f m route calculations for %f distance",
+					gctx.routeCalculations, gctx.routeDistCalculations, gpxPoints.get(gpxPoints.size() - 1).cumDist));
+			new RouteResultPreparation().printResults(ctx, points.get(0), points.get(points.size() - 1), res);
+		}
+		return res;
+	}
+
+	private int findGpxRouteFromPoint(final RoutingContext ctx, GpxApproximateContext gctx, List<GpxPoint> gpxPoints,
+			int pointFrom) throws IOException, InterruptedException {
+		GpxPoint start = gpxPoints.get(pointFrom);
+		for (int targetInd = gpxPoints.size() - 1; targetInd > pointFrom; targetInd--) {
+			GpxPoint target = gpxPoints.get(targetInd);
+			if (target.cumDist - start.cumDist < AVERAGE_SPLIT_DISTANCE_GPX) {
+				target.pnt = findRouteSegment(target.loc.getLatitude(), target.loc.getLongitude(), ctx, null, false);
+				List<RouteSegmentResult> res = null;
+				if (target.pnt != null) {
+					gctx.routeDistCalculations += (target.cumDist - start.cumDist);
+					gctx.routeCalculations++;
+					res = searchRouteInternalPrepare(ctx, start.pnt, target.pnt, null);
+				} else if (target.cumDist - start.cumDist < MINIMUM_SPLIT_DISTANCE_GPX) {
+					// distance too short, so break here and leave non-built
+					return targetInd;
+				}
+				boolean routeIsCorrect = res != null && res.isEmpty();
+				for (int k = pointFrom + 1; k < targetInd; k++) {
+					GpxPoint ipoint = gpxPoints.get(k);
+					if (dist(ipoint, res) > DISTANCE_APPROXIMATE_THRESHOLD) {
+						routeIsCorrect = false;
+						targetInd = k;
+						break;
+					}
+				}
+
+				if (routeIsCorrect) {
+					start.routeToTarget = res;
+					start.targetInd = target.ind;
+					makeStartEndPointsPrecise(res, start.pnt.getPreciseLatLon(), target.pnt.getPreciseLatLon(), null);
+					return targetInd;
+				}
+			}
+		}
+		return -1;
+	}
+
+	private double dist(GpxPoint ipoint, List<RouteSegmentResult> res) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	private boolean needRequestPrivateAccessRouting(RoutingContext ctx, List<LatLon> points) throws IOException {
 		boolean res = false;
@@ -510,7 +618,7 @@ public class RoutePlannerFrontEnd {
 			ctx.relaxedSegments += local.relaxedSegments;
 			ctx.routingTime += local.routingTime;
 
-			local.unloadAllData(ctx);
+//			local.unloadAllData(ctx);
 			if (restPartRecalculatedRoute != null) {
 				results.addAll(restPartRecalculatedRoute);
 				break;
