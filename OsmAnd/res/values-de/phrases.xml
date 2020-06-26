@@ -3832,4 +3832,5 @@
     <string name="poi_traffic_signals_vibration_no">kein Vibrieren</string>
     <string name="poi_traffic_signals_arrow">Pfeil</string>
     <string name="poi_traffic_signals_vibration">Vibrieren</string>
+    <string name="poi_give_box">Give box</string>
 </resources>
