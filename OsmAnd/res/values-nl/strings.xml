@@ -3461,4 +3461,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_uninstall_and_restart">Verwijderen en Herstarten</string>
     <string name="speed_cameras_removed_descr">Dit apparaat bevat geen informatie over snelheidscamera’s.</string>
     <string name="app_mode_inline_skates">Inline skates</string>
+    <string name="keep_active"></string>
+    <string name="shared_string_uninstall"></string>
+    <string name="speed_cameras_alert"></string>
 </resources>
