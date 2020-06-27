@@ -3447,7 +3447,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_night_map">Nachtkaart</string>
     <string name="add_online_source">Voeg online bron toe</string>
     <string name="clear_tiles_warning">Het toepassen van deze wijzigingen wist de cache van deze tile-bron</string>
-    <string name="vessel_height_warning_link">Stel hoogte van het vaartuig in</string>
+    <string name="vessel_height_warning_link">Stel de hoogte van het vaartuig in</string>
     <string name="vessel_height_warning">Stel de hoogte van het vaartuig in om lage bruggen te vermijden. Let op, als de brug beweegbaar is, gebruiken we de hoogte in geopende toestand.</string>
     <string name="quick_action_showhide_mapillary_title">Toon/verberg Mapillary</string>
     <string name="quick_action_mapillary_hide">Verberg Mapillary</string>
@@ -3461,7 +3461,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_uninstall_and_restart">Verwijderen en Herstarten</string>
     <string name="speed_cameras_removed_descr">Dit apparaat bevat geen informatie over snelheidscamera’s.</string>
     <string name="app_mode_inline_skates">Inline skates</string>
-    <string name="keep_active"></string>
-    <string name="shared_string_uninstall"></string>
-    <string name="speed_cameras_alert"></string>
+    <string name="keep_active"/>
+    <string name="shared_string_uninstall"/>
+    <string name="speed_cameras_alert"/>
 </resources>
