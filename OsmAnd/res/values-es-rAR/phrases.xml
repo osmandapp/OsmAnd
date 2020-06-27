@@ -3836,4 +3836,5 @@
     <string name="poi_traffic_signals_vibration_no">Vibración: no</string>
     <string name="poi_traffic_signals_arrow">Flecha</string>
     <string name="poi_traffic_signals_vibration">Vibración</string>
+    <string name="poi_give_box">Caja de regalo</string>
 </resources>
