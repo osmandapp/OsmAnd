@@ -206,10 +206,13 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		QuickSearchListItemType type = listItem.getType();
 		LinearLayout view;
 		if (type == QuickSearchListItemType.BANNER) {
-			QuickSearchBannerListItem banner = (QuickSearchBannerListItem) listItem;
+			final QuickSearchBannerListItem banner = (QuickSearchBannerListItem) listItem;
+			boolean newView;
 			if (convertView == null) {
+				newView = true;
 				view = (LinearLayout) inflater.inflate(R.layout.search_banner_list_item, null);
 			} else {
+				newView = false;
 				view = (LinearLayout) convertView;
 			}
 
@@ -229,30 +232,22 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 			((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
 
-			ListView buttonsList = view.findViewById(R.id.buttons_list);
-			ArrayAdapter<ButtonItem> adapter = new ArrayAdapter<ButtonItem>(
-					app, R.layout.search_banner_button_list_item, banner.getButtonItems()) {
-				@NonNull
-				@Override
-				public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+			if (newView) {
+				for (ButtonItem button : banner.getButtonItems()) {
 					View v = inflater.inflate(R.layout.search_banner_button_list_item, null);
-					ButtonItem buttonItem = getItem(position);
-					if (buttonItem != null) {
-						TextView title = v.findViewById(R.id.title);
-						title.setText(buttonItem.getTitle());
-						ImageView icon = v.findViewById(R.id.icon);
-						if (buttonItem.getIconId() != INVALID_ID) {
-							icon.setImageResource(buttonItem.getIconId());
-							icon.setVisibility(View.VISIBLE);
-						} else {
-							icon.setVisibility(View.GONE);
-						}
-						v.setOnClickListener(buttonItem.getListener());
+					TextView title = v.findViewById(R.id.title);
+					title.setText(button.getTitle());
+					ImageView icon = v.findViewById(R.id.icon);
+					if (button.getIconId() != INVALID_ID) {
+						icon.setImageResource(button.getIconId());
+						icon.setVisibility(View.VISIBLE);
+					} else {
+						icon.setVisibility(View.GONE);
 					}
-					return v;
+					v.setOnClickListener(button.getListener());
+					view.addView(v);
 				}
-			};
-			buttonsList.setAdapter(adapter);
+			}
 		} else if (type == QuickSearchListItemType.FREE_VERSION_BANNER) {
 			if (convertView == null) {
 				view = (LinearLayout) inflater.inflate(
