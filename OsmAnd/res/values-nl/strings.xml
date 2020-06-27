@@ -3178,7 +3178,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="sett_parrot_ext_input">Papegaai</string>
     <string name="app_mode_campervan">Mobilhome</string>
     <string name="shared_string_by_default">Standaard</string>
-    <string name="app_mode_utv">naast elkaar</string>
+    <string name="app_mode_utv">Naast elkaar</string>
     <string name="shared_string_maps">Kaarten</string>
     <string name="quick_action_contour_lines_descr">Knop om hoogtelijnen al dan niet te tonen op de kaart.</string>
     <string name="quick_action_contour_lines_show">Toon de hoogtelijnen</string>
