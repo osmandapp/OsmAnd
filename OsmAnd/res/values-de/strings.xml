@@ -3598,13 +3598,13 @@
     <string name="quick_action_terrain_show">Gelände einblenden</string>
     <string name="quick_action_terrain_hide">Gelände ausblenden</string>
     <string name="quick_action_show_hide_terrain">Gelände ein- / ausblenden</string>
-    <string name="shared_string_hillshade">Schummerung</string>
+    <string name="shared_string_hillshade">Relief</string>
     <string name="shared_string_zoom_levels">Zoomstufen</string>
     <string name="shared_string_transparency">Transparenz</string>
     <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
     <string name="shared_string_terrain">Gelände</string>
     <string name="download_slope_maps">Hangneigungen</string>
-    <string name="terrain_empty_state_text">Aktivieren Sie diese Option, um die Schummerungs- oder Hangneigungskarte anzuzeigen. Weitere Informationen zu diesen Kartentypen finden Sie auf unserer Website.</string>
+    <string name="terrain_empty_state_text">Aktivieren Sie diese Option, um die Relief- oder Hangneigungskarte anzuzeigen. Weitere Informationen zu diesen Kartentypen finden Sie auf unserer Website.</string>
     <string name="shared_string_legend">Legende</string>
     <string name="slope_read_more">Lesen Sie mehr über Hangneigungskarten in %1$s.</string>
     <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hangneigungen auf der Karte anzuzeigen.</string>
