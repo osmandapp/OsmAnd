@@ -3809,4 +3809,6 @@
     <string name="routing_attr_length_name">Lìmite de longària</string>
     <string name="speed_cameras_removed_descr">Custu dispositivu non tenet autovelox.</string>
     <string name="app_mode_inline_skates">Pàtinos in lìnia</string>
+    <string name="use_volume_buttons_as_zoom_descr">Abìlita pro controllare su livellu de ismanniamentu cun sos butones de su volume de su dispositivu.</string>
+    <string name="use_volume_buttons_as_zoom">Butones de su volume pro s\'ismanniamentu</string>
 </resources>
