@@ -3700,4 +3700,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_delete_all_q">Slet alt\?</string>
     <string name="shared_string_tones">toner</string>
     <string name="shared_string_meters">meter</string>
+    <string name="item_deleted">%1$s slettet</string>
+    <string name="shared_string_uninstall_and_restart">Afinstaller og genstart</string>
+    <string name="app_mode_inline_skates">Inline-rulleskøjter</string>
 </resources>

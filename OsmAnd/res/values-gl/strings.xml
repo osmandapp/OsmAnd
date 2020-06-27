@@ -2399,7 +2399,7 @@ Lon %2$s</string>
     <string name="context_menu_read_full_article">Ler o artigo completo</string>
     <string name="context_menu_read_article">Ler o artigo</string>
     <string name="context_menu_points_of_group">Tódolos puntos do grupo</string>
-    <string name="open_from">Aberto a partires das</string>
+    <string name="open_from">Aberto dende as</string>
     <string name="open_till">Aberto até as</string>
     <string name="will_close_at">Pecha ás</string>
     <string name="will_open_at">Abre ás</string>
