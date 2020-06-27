@@ -3270,7 +3270,7 @@
     <string name="map_during_navigation_info">Mapa durante la navegación</string>
     <string name="map_during_navigation">Mapa durante la navegación</string>
     <string name="shared_string_other">Otros</string>
-    <string name="vehicle_parameters_descr">Peso, altura, velocidad</string>
+    <string name="vehicle_parameters_descr">Peso, altura, longitud, velocidad</string>
     <string name="vehicle_parameters">Parámetros del vehículo</string>
     <string name="voice_announces_info">Los anuncios de voz solo se realizan durante la navegación.</string>
     <string name="voice_announces_descr">Instrucciones de navegación y anuncios</string>
@@ -3808,4 +3808,10 @@
     <string name="shared_string_bearing">Rumbo</string>
     <string name="item_deleted">%1$s borrado</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar y reiniciar</string>
+    <string name="routing_attr_length_description">Indica la longitud permitida del vehículo en rutas.</string>
+    <string name="routing_attr_length_name">Límite de longitud</string>
+    <string name="speed_cameras_removed_descr">Este dispositivo no tiene radares de velocidad.</string>
+    <string name="app_mode_inline_skates">Patines en línea</string>
+    <string name="use_volume_buttons_as_zoom_descr">Permite controlar el nivel de zoom del mapa con los botones de volumen del dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom">Botones de volumen como zoom</string>
 </resources>
