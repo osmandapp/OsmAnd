@@ -3807,4 +3807,6 @@
     <string name="routing_attr_length_name">Limigo de longo</string>
     <string name="speed_cameras_removed_descr">Tiu ĉi aplikaĵo ne liveras informojn pri rapidkontrolliloj.</string>
     <string name="app_mode_inline_skates">Rulglitiloj</string>
+    <string name="use_volume_buttons_as_zoom">Skali per sonfortecaj butonoj</string>
+    <string name="use_volume_buttons_as_zoom_descr">Uzi la butonojn de sonforteco por pli-/mal-grandigi la mapon.</string>
 </resources>
