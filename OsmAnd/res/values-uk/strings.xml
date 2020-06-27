@@ -3802,4 +3802,6 @@
     <string name="routing_attr_length_name">Обмеження довжини</string>
     <string name="speed_cameras_removed_descr">На цьому пристрої немає камер контролю швидкості.</string>
     <string name="app_mode_inline_skates">Роликові ковзани</string>
+    <string name="use_volume_buttons_as_zoom_descr">Увімкнути для зміни масштабу мапи кнопками гучності пристрою.</string>
+    <string name="use_volume_buttons_as_zoom">Масштабування кнопками гучності</string>
 </resources>
