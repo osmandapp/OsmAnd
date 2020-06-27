@@ -1812,7 +1812,7 @@
     <string name="av_locations_descr">GPX-Datei mit Standorten.</string>
     <string name="free_downloads_used_description">Anzeige der verbleibenden freien Downloads.</string>
     <string name="shared_string_location">Standort</string>
-    <string name="hillshade_layer_disabled">Schummerungsebene deaktiviert</string>
+    <string name="hillshade_layer_disabled">Reliefebene deaktiviert</string>
     <string name="shared_string_commit">Bestätigen</string>
     <string name="av_locations">Standorte</string>
     <string name="shared_string_hide">Verbergen</string>
@@ -2217,7 +2217,7 @@
     <string name="shared_string_end_time">Beendigungszeit</string>
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
-    <string name="average_speed">Durchschnittliche Geschwindigkeit</string>
+    <string name="average_speed">Durchschnittsgeschwindigkeit</string>
     <string name="shared_string_gpx_track">Track</string>
     <string name="points_delete_multiple_succesful">Punkt(e) gelöscht.</string>
     <string name="points_delete_multiple">Es werden %1$d Punkt(e) gelöscht. Fortfahren?</string>
@@ -2416,7 +2416,7 @@
     <string name="quick_action_showhide_osmbugs_descr">Schaltfläche zum Ein- oder Ausblenden von OSM-Notizen auf der Karte.</string>
     <string name="sorted_by_distance">Nach Entfernung sortiert</string>
     <string name="search_favorites">In Favoriten suchen</string>
-    <string name="hillshade_menu_download_descr">Laden Sie die Schummerungskarte herunter, um vertikale Schattierungen anzuzeigen.</string>
+    <string name="hillshade_menu_download_descr">Laden Sie die Reliefkarte herunter, um vertikale Schattierungen anzuzeigen.</string>
     <string name="shared_string_plugin">Erweiterung</string>
     <string name="srtm_purchase_header">Kaufen und installieren Sie die Erweiterung \'Höhenlinien\', um abgestufte vertikale Flächen anzuzeigen.</string>
     <string name="srtm_menu_download_descr">Laden Sie die Höhenlinienkarte zu dieser Region herunter.</string>
@@ -2756,7 +2756,7 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Unbegrenzte Downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
-    <string name="contour_lines_hillshade_maps">Karten mit Höhenlinien und Schummerung</string>
+    <string name="contour_lines_hillshade_maps">Karten mit Höhenlinien und Relief</string>
     <string name="unlock_all_features">Alle OsmAnd-Funktionen freischalten</string>
     <string name="purchase_dialog_title">Plan auswählen</string>
     <string name="download_wikipedia_description">Laden Sie die Wikipedia-Artikel für %1$s herunter, um sie offline zu lesen.</string>
@@ -3275,7 +3275,7 @@
     <string name="copy_from_other_profile">Aus anderem Profil kopieren</string>
     <string name="turn_screen_on">Bildschirm einschalten</string>
     <string name="map_during_navigation_info">Karte während Navigation</string>
-    <string name="vehicle_parameters_descr">Gewicht, Höhe, Geschwindigkeit</string>
+    <string name="vehicle_parameters_descr">Gewicht, Höhe, Länge, Geschwindigkeit</string>
     <string name="vehicle_parameters">Fahrzeugparameter</string>
     <string name="route_parameters">Routenparameter</string>
     <string name="navigate_point_format_olc">Offener Standortcode (OLC)</string>
@@ -3341,7 +3341,7 @@
     <string name="shared_string_memory_used_gb_desc">%1$s GB verwendet</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB verwendet</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB verwendet</string>
-    <string name="contour_lines_and_hillshade">Höhenlinien und Schummerung</string>
+    <string name="contour_lines_and_hillshade">Höhenlinien und Relief</string>
     <string name="routing_attr_prefer_unpaved_name">Unbefestigte Straßen bevorzugen</string>
     <string name="routing_attr_prefer_unpaved_description">Unbefestigte Straßen bevorzugen.</string>
     <string name="update_all_maps">Alle Karten aktualisieren</string>
@@ -3608,9 +3608,9 @@
     <string name="shared_string_legend">Legende</string>
     <string name="slope_read_more">Lesen Sie mehr über Hangneigungskarten in %1$s.</string>
     <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hangneigungen auf der Karte anzuzeigen.</string>
-    <string name="hillshade_download_description">Für die Darstellung der Schummerung werden zusätzliche Karten benötigt.</string>
+    <string name="hillshade_download_description">Für die Darstellung des Reliefs werden zusätzliche Karten benötigt.</string>
     <string name="shared_string_min">Min</string>
-    <string name="hillshade_description">Schummerungskarte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Ebenen.</string>
+    <string name="hillshade_description">Reliefkarte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Ebenen.</string>
     <string name="n_items_of_z">%1$s von %2$s</string>
     <string name="shared_string_octagon">Achteck</string>
     <string name="app_mode_ski_touring">Skitouren</string>
@@ -3803,11 +3803,17 @@
     <string name="item_deleted">%1$s gelöscht</string>
     <string name="speed_cameras_restart_descr">Ein Neustart ist erforderlich, um Blitzerdaten vollständig zu löschen.</string>
     <string name="shared_string_uninstall_and_restart">Deinstallieren und neu starten</string>
-    <string name="speed_cameras_legal_descr">In einigen Ländern oder Regionen ist die Verwendung von Anwendungen zum Warnen vor Blitzern gesetzlich verboten. 
+    <string name="speed_cameras_legal_descr">In einigen Ländern oder Regionen ist die Verwendung von Blitzer-Warneinrichtungen gesetzlich verboten. 
 \n
-\nEs muss anhand der Gesetzeslage des Landes entschieden werden.
+\nSie müssen anhand der Gesetzeslage des Landes entscheiden, ob Sie
 \n
-\nDie Wahl %1$s sendet Warnungen und Hinweise zu Blitzern. 
+\n%1$s wählen und Warnungen und Hinweise zu Blitzern erhalten werden, 
 \n
-\nDie Wahl %2$s löscht alle Daten für Warnungen, Hinweise und POIs im Zusammenhang mit Blitzern, bis OsmAnd komplett neu installiert wird.</string>
+\n%2$s wählen, worauf alle Daten zu Blitzern (Warnungen, Hinweise und POIs) bis zu einer vollständigen Neuinstallation von OsmAnd gelöscht werden.</string>
+    <string name="routing_attr_length_description">Geben Sie die Fahrzeuglänge an, die auf Routen erlaubt sein soll.</string>
+    <string name="routing_attr_length_name">Längenbegrenzung</string>
+    <string name="speed_cameras_removed_descr">Dieses Gerät hat keine Blitzer.</string>
+    <string name="app_mode_inline_skates">Inline-Skates</string>
+    <string name="use_volume_buttons_as_zoom_descr">Aktivieren Sie die Steuerung der Zoomstufe der Karte mit den Lautstärketasten des Geräts.</string>
+    <string name="use_volume_buttons_as_zoom">Lautstärketasten als Zoom</string>
 </resources>
