@@ -3815,4 +3815,6 @@
     <string name="routing_attr_length_description">נא לציין את אורך כלי הרכב כדי לבדוק מסלולים מורשים.</string>
     <string name="routing_attr_length_name">מגבלת אורך</string>
     <string name="speed_cameras_removed_descr">למכשיר הזה אין מצלמות מהירות.</string>
+    <string name="use_volume_buttons_as_zoom_descr">מאפשר לשלוח ברמת התקריב של המפה עם כפתורי עצמת השמע של המכשיר.</string>
+    <string name="use_volume_buttons_as_zoom">כפתורי עצמת שמע כתקריב</string>
 </resources>
