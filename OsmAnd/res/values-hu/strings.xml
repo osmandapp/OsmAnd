@@ -3753,4 +3753,6 @@ Hosszúság: %2$s</string>
     <string name="monitoring_min_accuracy">Legkisebb pontosság</string>
     <string name="monitoring_min_distance">Legkisebb elmozdulás</string>
     <string name="reset_plugin_to_default">Bővítménybeállítások visszaállítása alapértelmezettre</string>
+    <string name="use_volume_buttons_as_zoom_descr">Engedélyezésével a térkép nagyítási szintje az eszköz hangerőgombjaival állítható.</string>
+    <string name="use_volume_buttons_as_zoom">Hangerőgombok használata nagyításhoz</string>
 </resources>
