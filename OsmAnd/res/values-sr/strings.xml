@@ -3669,4 +3669,6 @@
     <string name="item_deleted">%1$s обрисано</string>
     <string name="routing_attr_length_name">Лимит дужине</string>
     <string name="shared_string_bearing">Курс</string>
+    <string name="quick_action_showhide_mapillary_descr">Прикажи или сакриј</string>
+    <string name="routing_attr_length_description">Одаберите дужину возика која је дозвољена на путевима.</string>
 </resources>
