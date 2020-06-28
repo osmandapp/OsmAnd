@@ -3802,4 +3802,6 @@
     <string name="routing_attr_length_name">長度限制</string>
     <string name="speed_cameras_removed_descr">此裝置沒有測速照相機。</string>
     <string name="app_mode_inline_skates">直排輪鞋</string>
+    <string name="use_volume_buttons_as_zoom_descr">啟用裝置音量按鈕控制地圖縮放等級。</string>
+    <string name="use_volume_buttons_as_zoom">音量按鈕以縮放</string>
 </resources>
