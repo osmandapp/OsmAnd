@@ -3666,5 +3666,7 @@
     <string name="speed_cameras_removed_descr">Овај уређај нема камере за брзину.</string>
     <string name="app_mode_inline_skates">Ролери</string>
     <string name="speed_cameras_restart_descr">Поновно покретање је потребно да се потпуно избришу подаци о камерама за брзину.</string>
-    <string name="item_deleted">%1$s deleted</string>
+    <string name="item_deleted">%1$s обрисано</string>
+    <string name="routing_attr_length_name">Лимит дужине</string>
+    <string name="shared_string_bearing">Курс</string>
 </resources>
