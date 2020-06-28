@@ -3370,4 +3370,7 @@
     <string name="poi_diplomatic_delegation">Delegatie</string>
     <string name="poi_traffic_signals_arrow">Pijl</string>
     <string name="poi_traffic_signals_vibration">Trillen</string>
+    <string name="poi_socket_cee_blue">Stopcontact: CEE-blauw (campingstekker)</string>
+    <string name="poi_water_place_access_family">Gezin</string>
+    <string name="poi_water_place_access_multifamilies">Meerdere gezinnen</string>
 </resources>
