@@ -1139,7 +1139,7 @@
     <string name="routing_attr_avoid_motorway_name">آزادراه</string>
     <string name="routing_attr_avoid_motorway_description">از آزادراه‌ها پرهیز می‌کند</string>
     <string name="routing_attr_weight_name">وزن مجاز</string>
-    <string name="routing_attr_weight_description">وزن مجاز خودرو در راه‌ها را مشخص کنید.</string>
+    <string name="routing_attr_weight_description">وزن مجاز خودرو در مسیرها را مشخص کنید.</string>
     <string name="select_gpx">انتخاب فایل GPX…</string>
     <string name="route_descr_select_destination">مقصد را تنظیم کنید</string>
     <string name="shared_string_select_on_map">انتخاب روی نقشه</string>
@@ -1612,7 +1612,7 @@
     <string name="routing_attr_avoid_borders_name">گذر از مرز</string>
     <string name="routing_attr_avoid_borders_description">از گذر از مرزهای ملی پرهیز می‌کند</string>
     <string name="routing_attr_height_name">ارتفاع مجاز</string>
-    <string name="routing_attr_height_description">ارتفاع مجاز خودرو در راه‌ها چقدر است.</string>
+    <string name="routing_attr_height_description">ارتفاع مجاز خودرو در مسیرها را مشخص کنید.</string>
     <string name="download_wikipedia_maps">ویکی‌پدیا</string>
     <string name="rendering_attr_alpineHiking_description">راه‌ها بر اساس درجه‌بندی SAC رسم شوند.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">لایهٔ نمادهای پیاده‌گردی</string>
@@ -3266,7 +3266,7 @@
     <string name="osmand_settings">تنظیمات OsmAnd</string>
     <string name="copy_from_other_profile">کپی از پروفایل دیگر</string>
     <string name="shared_string_other">سایر</string>
-    <string name="vehicle_parameters_descr">وزن، ارتفاع، سرعت</string>
+    <string name="vehicle_parameters_descr">وزن، ارتفاع، طول، سرعت</string>
     <string name="vehicle_parameters">پارامترهای وسیله نقلیه</string>
     <string name="route_parameters_descr">پیکربندی پارامترهای مسیر</string>
     <string name="route_parameters">پارامترهای مسیر</string>
@@ -3835,4 +3835,9 @@
 \n
 \nبا انتخاب %2$s تا زمانی که OsmAnd را دوباره نصب کنید، تمام دادهٔ مربوط به دوربین‌های سرعت (هشدارها، اعلان‌ها، نقاط توجه) حذف می‌شود.</string>
     <string name="speed_cameras_alert">قانونِ برخی از کشورها استفاده از هشداردهندهٔ دوربین سرعت را ممنوع کرده است.</string>
+    <string name="use_volume_buttons_as_zoom_descr">با این گزینه می‌توانید با استفاده از دکمه‌های کم/زیاد صدای دستگاه سطح زوم را کنترل کنید.</string>
+    <string name="use_volume_buttons_as_zoom">زوم با دکمه‌های صدا</string>
+    <string name="routing_attr_length_name">طول مجاز</string>
+    <string name="routing_attr_length_description">طول مجاز خودرو در مسیرها را مشخص کنید.</string>
+    <string name="speed_cameras_removed_descr">این دستگاه دوربین‌های سرعت را ندارد.</string>
 </resources>
