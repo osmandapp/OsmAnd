@@ -3660,4 +3660,6 @@
     <string name="vessel_height_warning">Можете подесити висину пловила да избегнете ниске мостове. Имајте на уму да, уколико мост може да се помера, користићемо његову висину када је отворен.</string>
     <string name="vessel_height_limit_description">Подесите висину пловила да избегнете ниске мостове. Имајте на уму да, уколико мост може да се помера, користићемо његову висину када је отворен.</string>
     <string name="vessel_width_limit_description">Подесите ширину пловила и избегните уске мостове</string>
+    <string name="use_volume_buttons_as_zoom_descr">Укључите да омогућите контролу нивоа увећања са дугмићима за јачину звука.</string>
+    <string name="use_volume_buttons_as_zoom">Дугмићи за јачину звука за зумирање</string>
 </resources>
