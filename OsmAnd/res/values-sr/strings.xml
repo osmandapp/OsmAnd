@@ -3671,13 +3671,13 @@
     <string name="shared_string_bearing">Курс</string>
     <string name="quick_action_showhide_mapillary_descr">Прикажи или сакриј Mapillary слој на карти.</string>
     <string name="routing_attr_length_description">Одаберите дужину возика која је дозвољена на путевима.</string>
-    <string name="speed_cameras_legal_descr">In some countries or regions, the use of speed camera warning applications is prohibited by law. 
+    <string name="speed_cameras_legal_descr">У неким државама или областима, коришћење апликација за обавештавање о радарима на путу је забрањено законом.
 \n
-\nYou need to make a choice depending on the law of your country. 
+\nМорате направити избор овде, у зависности од закона Ваше државе.
 \n
-\nSelect %1$s and you will receive alerts and warnings about speed cameras. 
+\nОдаберите %1$s и примажете обавештења и упозорења о радарима и камерама за брзину.
 \n
-\nSelect %2$s. All data related to speed cameras: alerts, notifications, POIs will be deleted until OsmAnd is completely reinstalled.</string>
+\nОдаберите %2$s. Сви подаци везани за радере: упозорења, обавештења, тачке од интереса ће бити обрисане док се OsmAnd поново не инсталира.</string>
     <string name="shared_string_legal">Правно</string>
     <string name="screen_timeout_descr">Ако је „%1$s” укључен, време активности ће зависити од тога.</string>
     <string name="uninstall_speed_cameras">Избриши радаре</string>
@@ -3688,4 +3688,34 @@
     <string name="quick_action_showhide_mapillary_title">Прикажи/сакриј Mapillary</string>
     <string name="quick_action_mapillary_hide">Сакриј Mapillary</string>
     <string name="quick_action_mapillary_show">Прикажи Mapillary</string>
+    <string name="lang_yo">Јоруба</string>
+    <string name="lang_war">Варајски</string>
+    <string name="lang_tg">Таџички</string>
+    <string name="lang_uz">Узбечки</string>
+    <string name="lang_ur">Урду</string>
+    <string name="lang_tt">Татарски</string>
+    <string name="lang_sco">Шкотски</string>
+    <string name="lang_nap">Наполитански</string>
+    <string name="lang_scn">Сицилијански</string>
+    <string name="lang_pnb">Панџаби</string>
+    <string name="lang_ne">Непалски</string>
+    <string name="lang_my">Бурмански</string>
+    <string name="lang_mn">Монголски</string>
+    <string name="lang_min">Минангкабајски</string>
+    <string name="lang_mg">Малгашки</string>
+    <string name="lang_ky">Киргиски</string>
+    <string name="lang_kk">Казашки</string>
+    <string name="lang_jv">Јавански</string>
+    <string name="lang_gu">Гуџарати</string>
+    <string name="lang_cv">Чувашки</string>
+    <string name="lang_ce">Чеченски</string>
+    <string name="lang_bar">Баварски</string>
+    <string name="lang_ba">Башкирски</string>
+    <string name="lang_an">Арагонски</string>
+    <string name="lang_lmo">Ломбардијски</string>
+    <string name="custom_color">Произвољна боја</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="search_poi_types">Претрага типова тачака од интереса</string>
+    <string name="search_poi_types_descr">Комбинујте типове тачака од интереса из различитих категорија. Кликните прекидач да одабере све, кликните на леву страну да одаберете категорију.</string>
+    <string name="map_markers_item">Маркери на карти</string>
 </resources>
