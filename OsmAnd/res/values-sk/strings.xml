@@ -3805,4 +3805,6 @@
     <string name="routing_attr_length_name">Limit dĺžky</string>
     <string name="speed_cameras_removed_descr">Toto zariadenie neobsahuje rýchlostné radary.</string>
     <string name="app_mode_inline_skates">Kolieskové korčule</string>
+    <string name="use_volume_buttons_as_zoom_descr">Umožní ovládať priblíženie mapy tlačidlami hlasitosti zariadenia.</string>
+    <string name="use_volume_buttons_as_zoom">Tlačidlá hlasitosti na približovanie</string>
 </resources>
