@@ -3662,7 +3662,8 @@
     <string name="vessel_width_limit_description">Подесите ширину пловила и избегните уске мостове</string>
     <string name="use_volume_buttons_as_zoom_descr">Укључите да омогућите контролу нивоа увећања са дугмићима за јачину звука.</string>
     <string name="use_volume_buttons_as_zoom">Дугмићи за јачину звука за зумирање</string>
-    <string name="shared_string_uninstall_and_restart">"Деинсталирај  и рестартуј"</string>
+    <string name="shared_string_uninstall_and_restart">"Деинсталирај  и поново покрени"</string>
     <string name="speed_cameras_removed_descr">Овај уређај нема камере за брзину.</string>
     <string name="app_mode_inline_skates">Ролери</string>
+    <string name="speed_cameras_restart_descr">Поновно покретање је потребно да се потпуно избришу подаци о камерама за брзину.</string>
 </resources>
