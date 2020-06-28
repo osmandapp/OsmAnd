@@ -3266,7 +3266,7 @@
     <string name="map_during_navigation_info">Карта за време навођења</string>
     <string name="map_during_navigation">Карта за време навођења</string>
     <string name="shared_string_other">Остало</string>
-    <string name="vehicle_parameters_descr">Тежина, висина, брзина</string>
+    <string name="vehicle_parameters_descr">Тежина, висина, дужина, брзина</string>
     <string name="vehicle_parameters">Параметри возика</string>
     <string name="voice_announces_info">Гласовна обавештења су дешавају само за време навођења.</string>
     <string name="voice_announces_descr">Инструкције и обавештења приликом навођења</string>
@@ -3452,7 +3452,7 @@
     <string name="logcat_buffer_descr">Проверите и поделите детаљне записе апликације</string>
     <string name="search_offline_geo_error">Не могу да расчланим гео намеру ’%s’.</string>
     <string name="permission_is_required">Потребне су дозволе за коришћење ове опције.</string>
-    <string name="monitoring_min_speed_descr">Ово је филтер за одсецање малих брзина који не бележи тачке испод одређене брзине. Овим снимљене стазе изгледају.</string>
+    <string name="monitoring_min_speed_descr">Ово је филтер за одсецање малих брзина који не бележи тачке испод одређене брзине. Овим снимљене стазе изгледају глаткије када се гледају на карти.</string>
     <string name="monitoring_min_speed_descr_side_effect">Нуспојаве: Вашим стазама ће недостајати све секције где критеријум минимума брзине није био испуњен (нпр. где сте гурали бицикл узбрдо). Такође, неће бити информација о периодима мировања, као што су прављење пауза. Ово може да има ефекта на анализу или пост-процесирање, као што је одређивање укупне дужине пута, времена кретања, или просечне брзине.</string>
     <string name="monitoring_min_speed_descr_recommendation">Препорука: Покушајте прво да користите детектор кретања преко филтера минималног помераја (B) прво, пошто може дати боље резултате и изгубићете мање података. Ако Ваше стазе остану пуне шума при малим брзинама, пробајте са не-нултим вредностима овде. Пазите да неки типови мерења неће уопште давати мерења брзине (неки методи преко мреже) у ком случају нећете снимити ништа.</string>
     <string name="monitoring_min_speed_descr_remark">Опаска: провера брзине &gt; 0: већина GPS чипова пријављује вредност брзине само ако алгоритам примети да сте у покрету и ништа уколико нисте. Коришћење поставке &gt;0 у овом филтеру је заправо коришћење сензора покрета из GPS чипа. Чак иако се не филтрира овде за време снимања, ми и даље користимо ову функционалност у нашој GPX анализи да одредимо пређену удаљеност, тј. вредност коју приказујемо у том пољу је пређена удаљеност за време кретања.</string>
@@ -3663,12 +3663,29 @@
     <string name="use_volume_buttons_as_zoom_descr">Укључите да омогућите контролу нивоа увећања са дугмићима за јачину звука.</string>
     <string name="use_volume_buttons_as_zoom">Дугмићи за јачину звука за зумирање</string>
     <string name="shared_string_uninstall_and_restart">"Деинсталирај  и поново покрени"</string>
-    <string name="speed_cameras_removed_descr">Овај уређај нема камере за брзину.</string>
+    <string name="speed_cameras_removed_descr">Овај уређај нема радаре.</string>
     <string name="app_mode_inline_skates">Ролери</string>
-    <string name="speed_cameras_restart_descr">Поновно покретање је потребно да се потпуно избришу подаци о камерама за брзину.</string>
+    <string name="speed_cameras_restart_descr">Поновно покретање је потребно да се потпуно избришу подаци о радарима.</string>
     <string name="item_deleted">%1$s обрисано</string>
     <string name="routing_attr_length_name">Лимит дужине</string>
     <string name="shared_string_bearing">Курс</string>
-    <string name="quick_action_showhide_mapillary_descr">Прикажи или сакриј</string>
+    <string name="quick_action_showhide_mapillary_descr">Прикажи или сакриј Mapillary слој на карти.</string>
     <string name="routing_attr_length_description">Одаберите дужину возика која је дозвољена на путевима.</string>
+    <string name="speed_cameras_legal_descr">In some countries or regions, the use of speed camera warning applications is prohibited by law. 
+\n
+\nYou need to make a choice depending on the law of your country. 
+\n
+\nSelect %1$s and you will receive alerts and warnings about speed cameras. 
+\n
+\nSelect %2$s. All data related to speed cameras: alerts, notifications, POIs will be deleted until OsmAnd is completely reinstalled.</string>
+    <string name="shared_string_legal">Правно</string>
+    <string name="screen_timeout_descr">Ако је „%1$s” укључен, време активности ће зависити од тога.</string>
+    <string name="uninstall_speed_cameras">Избриши радаре</string>
+    <string name="speed_camera_pois">Радарске тачке од интереса</string>
+    <string name="keep_active">Држи активним</string>
+    <string name="shared_string_uninstall">Избриши</string>
+    <string name="speed_cameras_alert">Упозорења за радаре су законом забрањене у неким државама.</string>
+    <string name="quick_action_showhide_mapillary_title">Прикажи/сакриј Mapillary</string>
+    <string name="quick_action_mapillary_hide">Сакриј Mapillary</string>
+    <string name="quick_action_mapillary_show">Прикажи Mapillary</string>
 </resources>
