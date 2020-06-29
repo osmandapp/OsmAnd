@@ -294,15 +294,14 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 						// int len = (int) (distSegment / pxStep);
 						float pdx = x - px;
 						float pdy = y - py;
-						float scale=attrs.paint3.getStrokeWidth()/(actionArrow.getWidth()/2.25f);
-						float scaledWidth=actionArrow.getWidth();
+						float scale = attrs.paint3.getStrokeWidth() / ( actionArrow.getWidth() / 2.25f);
+						float scaledWidth = actionArrow.getWidth();
 						matrix.reset();
 						matrix.postTranslate(0, -actionArrow.getHeight() / 2f);
 						matrix.postRotate((float) angle, actionArrow.getWidth() / 2f, 0);
-						if(scale>=1.0f)
-						{
-							matrix.postScale(scale,scale);
-							scaledWidth*=scale;
+						if (scale > 1.0f) {
+							matrix.postScale(scale, scale);
+							scaledWidth *= scale;
 						}
 						matrix.postTranslate(px + pdx - scaledWidth/ 2f, py + pdy);
 						canvas.drawBitmap(actionArrow, matrix, paintIconAction);
