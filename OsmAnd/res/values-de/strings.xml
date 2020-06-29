@@ -3775,7 +3775,7 @@
     <string name="height_limit_description">Geben Sie Ihre Fahrzeughöhe an, für hohe Fahrzeuge können einige Routenbeschränkungen gelten.</string>
     <string name="weight_limit_description">Geben Sie Ihr Fahrzeuggewicht an, für schwere Fahrzeuge können einige Routenbeschränkungen gelten.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Sie können Schnellaktionen mit Anwendungsprofilen exportieren oder importieren.</string>
-    <string name="shared_string_delete_all_q">Alles Löschen\?</string>
+    <string name="shared_string_delete_all_q">Alles löschen\?</string>
     <string name="delete_all_actions_message_q">Möchten Sie %d Schnellaktionen wirklich unwiderruflich löschen\?</string>
     <string name="shared_string_tones">Töne</string>
     <string name="shared_string_meters">Meter</string>
@@ -3793,7 +3793,7 @@
     <string name="quick_action_mapillary_hide">Mapillary ausblenden</string>
     <string name="quick_action_mapillary_show">Mapillary anzeigen</string>
     <string name="quick_action_showhide_mapillary_descr">Eine Umschaltfläche zum ein- oder ausblenden der Mapillary-Layer auf der Karte.</string>
-    <string name="uninstall_speed_cameras">Blitzer Deinstallieren</string>
+    <string name="uninstall_speed_cameras">Blitzer deinstallieren</string>
     <string name="shared_string_legal">Rechtliches</string>
     <string name="speed_camera_pois">Blitzer-POIs</string>
     <string name="keep_active">Aktiviert lassen</string>
