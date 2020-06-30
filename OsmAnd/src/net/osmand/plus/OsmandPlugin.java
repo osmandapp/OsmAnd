@@ -814,7 +814,7 @@ public abstract class OsmandPlugin {
 
 	public static boolean onSearchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
 		boolean processed = false;
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			processed = plugin.searchFinished(searchFragment, phrase, isResultEmpty) || processed;
 		}
 		return processed;
