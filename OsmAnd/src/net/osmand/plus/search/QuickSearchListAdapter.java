@@ -413,7 +413,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					timeLayout.setVisibility(View.VISIBLE);
 					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_time_16, colorId));
 					timeText.setTextColor(app.getResources().getColor(colorId));
-					String rt = amenity.isClosed() ? app.getResources().getString(R.string.poi_operational_status_closed) : rs.getCurrentRuleTime(inst);
+					String rt = amenity.isClosed()
+							? app.getResources().getString(R.string.poi_operational_status_closed)
+							: worksNow ? rs.getCurrentRuleTime(inst) : app.getString(R.string.will_open_tomorrow_at) + " " + rs.getOpeningTomorrow(inst);
 					timeText.setText(rt == null ? "" : rt);
 				} else {
 					timeLayout.setVisibility(View.GONE);
