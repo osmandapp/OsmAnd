@@ -202,7 +202,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (s.toString().trim().isEmpty()) {
-					nameCaption.setError(app.getString(R.string.please_provide_profile_name_message));
+					nameCaption.setError(app.getString(R.string.please_provide_point_name_error));
 					saveButton.setEnabled(false);
 				} else {
 					nameCaption.setError(null);
