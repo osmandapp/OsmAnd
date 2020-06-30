@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -376,6 +377,11 @@ public class WikipediaPlugin extends OsmandPlugin {
 			if (obj instanceof PoiUIFilter) {
 				PoiUIFilter pf = (PoiUIFilter) obj;
 				if (pf.isWikiFilter()) {
+					return true;
+				}
+			} else if (obj instanceof AbstractPoiType) {
+				AbstractPoiType pt = (AbstractPoiType) obj;
+				if (pt.getKeyName().startsWith(WIKI_LANG)) {
 					return true;
 				}
 			}
