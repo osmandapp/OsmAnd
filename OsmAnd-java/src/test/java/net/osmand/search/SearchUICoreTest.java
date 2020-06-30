@@ -180,14 +180,14 @@ public class SearchUICoreTest {
 			SearchResultCollection collection = new SearchResultCollection(phrase);
 			collection.addSearchResults(matcher.getRequestResults(), true, true);
 			List<SearchResult> searchResults = collection.getCurrentSearchResults();
-			int i = 0;
-			for (SearchResult res : searchResults) {
-				String expected = result.get(i++);
+			for(int i = 0; i < result.size(); i++) {
+				String expected = result.get(i);
+				SearchResult res = i >= searchResults.size() ? null : searchResults.get(i);
 				if (simpleTest && expected.indexOf('[') != -1) {
 					expected = expected.substring(0, expected.indexOf('[')).trim();
 				}
 //				String present = result.toString();
-				String present = formatResult(simpleTest, res, phrase);
+				String present = res == null ? ("#MISSING " + (i+1)) : formatResult(simpleTest, res, phrase);
 				if (!Algorithms.stringsEqual(expected, present)) {
 					System.out.println(String.format("Phrase: %s", phrase));
 					System.out.println(String.format("Mismatch for '%s' != '%s'. Result: ", expected, present));
@@ -196,9 +196,6 @@ public class SearchUICoreTest {
 					}
 				}
 				Assert.assertEquals(expected, present);
-				if (i >= result.size()) {
-					break;
-				}
 			}
 		}
 

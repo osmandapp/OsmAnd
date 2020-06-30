@@ -36,8 +36,7 @@ import net.osmand.osm.edit.Way;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
+import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -104,7 +103,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		this.transportHelper = helper.getTransportRoutingHelper();
 	}
 
-	public void setTrackChartPoints(TrackDetailsMenu.TrackChartPoints trackChartPoints) {
+	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
 		this.trackChartPoints = trackChartPoints;
 	}
 
@@ -295,10 +294,16 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 						// int len = (int) (distSegment / pxStep);
 						float pdx = x - px;
 						float pdy = y - py;
+						float scale = attrs.paint3.getStrokeWidth() / ( actionArrow.getWidth() / 2.25f);
+						float scaledWidth = actionArrow.getWidth();
 						matrix.reset();
 						matrix.postTranslate(0, -actionArrow.getHeight() / 2f);
 						matrix.postRotate((float) angle, actionArrow.getWidth() / 2f, 0);
-						matrix.postTranslate(px + pdx - actionArrow.getWidth() / 2f, py + pdy);
+						if (scale > 1.0f) {
+							matrix.postScale(scale, scale);
+							scaledWidth *= scale;
+						}
+						matrix.postTranslate(px + pdx - scaledWidth/ 2f, py + pdy);
 						canvas.drawBitmap(actionArrow, matrix, paintIconAction);
 					} else {
 						px = x;

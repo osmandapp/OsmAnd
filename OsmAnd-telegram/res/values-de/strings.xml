@@ -124,7 +124,7 @@
     <string name="waiting_for_response_from_telegram">Warten auf Antwort von Telegram</string>
     <string name="sending_location_messages">Sende Standort</string>
     <string name="initializing">Startet</string>
-    <string name="searching_for_gps">Positioniere..…</string>
+    <string name="searching_for_gps">Positionierung …</string>
     <string name="connecting_to_the_internet">Verbindung zum Internet</string>
     <string name="background_work_description">Akkuoptimierungseinstellungen, um die Standortfreigabe zu stabilisieren.</string>
     <string name="password_descr">Telegram-Passwort</string>
@@ -180,7 +180,7 @@
     <string name="monitoring_is_disabled">Überwachung deaktiviert</string>
     <string name="time_on_the_move">Zeit in Bewegung</string>
     <string name="average_altitude">Durchschnittliche Höhe</string>
-    <string name="average_speed">Durchschnittliche Geschwindigkeit</string>
+    <string name="average_speed">Durchschnittsgeschwindigkeit</string>
     <string name="open_in_osmand">In OsmAnd anzeigen</string>
     <string name="end_date">Endzeit</string>
     <string name="start_date">Startzeit</string>

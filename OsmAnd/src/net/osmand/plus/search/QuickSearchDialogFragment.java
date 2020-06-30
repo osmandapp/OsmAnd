@@ -1265,7 +1265,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 											//show "Apply to all profiles" SnackBar
 											String modeName = appMode.toHumanString();
 											String text = app.getString(R.string.changes_applied_to_profile, modeName);
-											SpannableString message = UiUtilities.createSpannableString(text, modeName, new StyleSpan(Typeface.BOLD));
+											SpannableString message = UiUtilities.createSpannableString(text, new StyleSpan(Typeface.BOLD), modeName);
 											Snackbar snackbar = Snackbar.make(containerView, message, Snackbar.LENGTH_LONG)
 													.setAction(R.string.apply_to_all_profiles, new View.OnClickListener() {
 														@Override
@@ -1284,9 +1284,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 											UiUtilities.setupSnackbarVerticalLayout(snackbar);
 											UiUtilities.setupSnackbar(snackbar, nightMode);
 											snackbar.show();
+										}
 									}
-							}
-						});
+
+									@Override
+									public void onCustomFiltersDeleted() {
+										searchHelper.refreshCustomPoiFilters();
+										reloadCategoriesInternal();
+									}
+								});
 					}
 				}));
 				if (categoriesSearchFragment != null) {

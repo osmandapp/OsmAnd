@@ -3,6 +3,7 @@ package net.osmand.plus;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -52,11 +53,13 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -77,6 +80,7 @@ public class UiUtilities {
 	public enum DialogButtonType {
 		PRIMARY,
 		SECONDARY,
+		SECONDARY_HARMFUL,
 		STROKED
 	}
 
@@ -623,6 +627,13 @@ public class UiUtilities {
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_secondary_light, R.drawable.dlg_btn_secondary_dark);
 				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
 				break;
+			case SECONDARY_HARMFUL:
+				if (v21) {
+					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
+				}
+				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_secondary_light, R.drawable.dlg_btn_secondary_dark);
+				textAndIconColorResId =  R.color.color_osm_edit_delete;
+				break;
 			case STROKED:
 				if (v21) {
 					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
@@ -672,20 +683,33 @@ public class UiUtilities {
 		}
 	}
 
-	public static SpannableString createSpannableString(@NonNull String text, @NonNull String textToStyle, @NonNull StyleSpan styleSpan) {
+	public static SpannableString createSpannableString(@NonNull String text, @NonNull StyleSpan styleSpan, @NonNull String... textToStyle) {
 		SpannableString spannable = new SpannableString(text);
+		for (String t : textToStyle) {
+			setSpan(spannable, styleSpan, text, t);
+		}
+		return spannable;
+	}
+
+	private static void setSpan(@NonNull SpannableString spannable, @NonNull Object styleSpan, @NonNull String text, @NonNull String t) {
 		try {
-			int startIndex = text.indexOf(textToStyle);
+			int startIndex = text.indexOf(t);
 			spannable.setSpan(
 					styleSpan,
 					startIndex,
-					startIndex + textToStyle.length(),
+					startIndex + t.length(),
 					Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-			return spannable;
 		} catch (RuntimeException e) {
-			LOG.error("Error trying to find index of " + textToStyle + " " + e);
-			return spannable;
+			LOG.error("Error trying to find index of " + t + " " + e);
 		}
+	}
+
+	public static SpannableString createCustomFontSpannable(@NonNull Typeface typeface, @NonNull String text, @NonNull String... textToStyle) {
+		SpannableString spannable = new SpannableString(text);
+		for (String s : textToStyle) {
+			setSpan(spannable, new CustomTypefaceSpan(typeface), text, s);
+		}
+		return spannable;
 	}
 
 	public static ListPopupWindow createListPopupWindow(Context themedCtx,

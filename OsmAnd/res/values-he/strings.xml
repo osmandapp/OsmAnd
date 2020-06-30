@@ -3243,7 +3243,7 @@
     <string name="map_during_navigation_info">מפה במהלך ניווט</string>
     <string name="map_during_navigation">מפה במהלך ניווט</string>
     <string name="shared_string_other">אחר</string>
-    <string name="vehicle_parameters_descr">רוחב, גובה, מהירות</string>
+    <string name="vehicle_parameters_descr">רוחב, גובה, אורך, מהירות</string>
     <string name="vehicle_parameters">מאפייני כלי הרכב</string>
     <string name="voice_announces_info">הכרזות קוליות מושמעות רק במהלך הניווט.</string>
     <string name="voice_announces_descr">הנחיות והכרזות ניווט</string>
@@ -3790,4 +3790,31 @@
     <string name="vessel_height_warning">ניתן להגדיר את גובה כלי השיט כדי להימנע מגשרים נמוכים. נא לשים לב שאם הגשר נע, אנו נשתמש בגובהו במצב הפתוח.</string>
     <string name="vessel_height_limit_description">יש להגדיר את גובה כלי השיט כדי להימנע מגשרים נמוכים. נא לשים לב שאם הגשר נע, אנו נשתמש בגובהו במצב הפתוח.</string>
     <string name="vessel_width_limit_description">הגדרת רוחב כלי השיט כדי להימנע מגשרים צרים</string>
+    <string name="quick_action_showhide_mapillary_title">הצגת/הסתרת Mapillary</string>
+    <string name="quick_action_mapillary_hide">הסתרת Mapillary</string>
+    <string name="quick_action_mapillary_show">הצגת Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">מפסק להצגה או הסתרה של שכבת Mapillary על גבי המפה.</string>
+    <string name="uninstall_speed_cameras">הסרת מצלמות מהירות</string>
+    <string name="shared_string_legal">משפטי</string>
+    <string name="speed_camera_pois">נקודת עניין של מצלמת מהירות</string>
+    <string name="keep_active">להשאיר פעיל</string>
+    <string name="shared_string_uninstall">הסרה</string>
+    <string name="speed_cameras_alert">אזהרות מפני מצלמות מהירות אסורות על פי חוק בחלק מהמדינות.</string>
+    <string name="shared_string_bearing">תכווין</string>
+    <string name="item_deleted">%1$s נמחקו</string>
+    <string name="speed_cameras_restart_descr">נדרשת הפעלה מחדש כדי למחוק לחלוטין את נתוני מצלמות המהירות.</string>
+    <string name="shared_string_uninstall_and_restart">הסרה והפעלה מחדש</string>
+    <string name="speed_cameras_legal_descr">בחלק מהמדינות או האזורים השימוש ביישומוני אזהרה מפני מצלמות מהירות אסור על פי חוק.
+\n
+\nעליך להחליט כיצד לנהוג בהתאם לחוק במדינה שלך.
+\n
+\nבחירה באפשרות %1$s תוביל לכך שתישלחנה אליך התרעות על מצלמות מהירות.
+\n
+\nבחירה באפשרות %2$s תוביל לכך שנתונים שקשורים במצלמות מהירות: אזהרות, התרעות ונקודות עניין תימחקנה עד להתקנה מחדש של OsmAnd.</string>
+    <string name="app_mode_inline_skates">רולרבליידס</string>
+    <string name="routing_attr_length_description">נא לציין את אורך כלי הרכב כדי לבדוק מסלולים מורשים.</string>
+    <string name="routing_attr_length_name">מגבלת אורך</string>
+    <string name="speed_cameras_removed_descr">למכשיר הזה אין מצלמות מהירות.</string>
+    <string name="use_volume_buttons_as_zoom_descr">מאפשר לשלוח ברמת התקריב של המפה עם כפתורי עצמת השמע של המכשיר.</string>
+    <string name="use_volume_buttons_as_zoom">כפתורי עצמת שמע כתקריב</string>
 </resources>

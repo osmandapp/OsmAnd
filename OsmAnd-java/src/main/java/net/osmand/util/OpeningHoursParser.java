@@ -886,6 +886,12 @@ public class OpeningHoursParser {
 			return new TIntArrayList(endTimes);
 		}
 
+		public void setDays(boolean[] days) {
+			if (this.days.length == days.length) {
+				this.days = days;
+			}
+		}
+
 		/**
 		 * Check if the weekday of time "cal" is part of this rule
 		 *

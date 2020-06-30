@@ -30,13 +30,14 @@ public class PoiFilter extends AbstractPoiType {
 		List<PoiType> npoiTypes = null;
 		Map<String, PoiType> nmap = null;
 		for (PoiType poiType : poiTypesToAdd.values()) {
-			if (!map.containsKey(poiType.getKeyName())) {
+			String keyName = poiType.getKeyName();
+			if (!map.containsKey(keyName) && !registry.isTypeForbidden(keyName)) {
 				if (npoiTypes == null) {
 					npoiTypes = new ArrayList<PoiType>(this.poiTypes);
 					nmap = new LinkedHashMap<>(map);
 				}
 				npoiTypes.add(poiType);
-				nmap.put(poiType.getKeyName(), poiType);
+				nmap.put(keyName, poiType);
 			}
 		}
 		if (npoiTypes != null) {
@@ -46,6 +47,9 @@ public class PoiFilter extends AbstractPoiType {
 	}
 
 	public void addPoiType(PoiType type) {
+		if (registry.isTypeForbidden(type.keyName)) {
+			return;
+		}
 		if (!map.containsKey(type.getKeyName())) {
 			poiTypes.add(type);
 			map.put(type.getKeyName(), type);

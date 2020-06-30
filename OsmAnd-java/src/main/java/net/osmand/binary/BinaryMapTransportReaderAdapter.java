@@ -251,9 +251,7 @@ public class BinaryMapTransportReaderAdapter {
 		return ((char) i)+"";
 	}
 	
-	public void readIncompleteRoutesList(TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes,
-			int length, int offset) throws IOException {
-		codedIS.seek(offset);
+	public void readIncompleteRoutesList(TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes) throws IOException {
 		boolean end = false;
 		while (!end) {
 			int t = codedIS.readTag();

@@ -3263,7 +3263,7 @@
     <string name="map_during_navigation_info">導航時的地圖</string>
     <string name="map_during_navigation">導航時的地圖</string>
     <string name="shared_string_other">其他</string>
-    <string name="vehicle_parameters_descr">重量、高度、速度</string>
+    <string name="vehicle_parameters_descr">重量、高度、長度、速度</string>
     <string name="vehicle_parameters">車輛參數</string>
     <string name="voice_announces_info">僅在導航時播放語音通知。</string>
     <string name="voice_announces_descr">導航指示與通知</string>
@@ -3777,4 +3777,31 @@
     <string name="vessel_height_warning">您可以設定船艦高度以避免矮橋。請記住，如果橋是可動式的，我們將會使用其在開啟狀態的高度。</string>
     <string name="vessel_height_limit_description">設定船艦高度以避免矮橋。請記住，如果橋是可動式的，我們將會使用其開啟狀態的高度。</string>
     <string name="vessel_width_limit_description">設定船艦寬度以避免窄橋</string>
+    <string name="quick_action_showhide_mapillary_title">顯示／隱藏 Mapillary</string>
+    <string name="quick_action_mapillary_hide">隱藏 Mapillary</string>
+    <string name="quick_action_mapillary_show">顯示 Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">在地圖上顯示或隱藏 Mapillary 圖層的開關。</string>
+    <string name="uninstall_speed_cameras">解除安裝測速照相</string>
+    <string name="shared_string_legal">法律</string>
+    <string name="speed_camera_pois">測速照相 POI 的</string>
+    <string name="speed_cameras_legal_descr">在某些國家或地區，法律禁止使用測速照相的警報應用程式。
+\n
+\n您必須根據您所在國家的法律做出選擇。
+\n
+\n選取 %1$s，您將會收到關於測速照相的警報與警告。
+\n
+\n選取 %2$s。所有關於測速照相的：警報、通知與 POI 都將會被刪除，直到您完全重新安裝 OsmAnd 為止。</string>
+    <string name="keep_active">保持啟用</string>
+    <string name="shared_string_uninstall">解除安裝</string>
+    <string name="speed_cameras_alert">某些國家禁止使用測速照相的警報裝置。</string>
+    <string name="shared_string_bearing">方向</string>
+    <string name="item_deleted">%1$s 已刪除</string>
+    <string name="speed_cameras_restart_descr">必須重新啟動才能完全刪除測速照相的資料。</string>
+    <string name="shared_string_uninstall_and_restart">解除安裝並重新啟動</string>
+    <string name="routing_attr_length_description">指定路線上允許的車輛長度。</string>
+    <string name="routing_attr_length_name">長度限制</string>
+    <string name="speed_cameras_removed_descr">此裝置沒有測速照相機。</string>
+    <string name="app_mode_inline_skates">直排輪鞋</string>
+    <string name="use_volume_buttons_as_zoom_descr">啟用裝置音量按鈕控制地圖縮放等級。</string>
+    <string name="use_volume_buttons_as_zoom">音量按鈕以縮放</string>
 </resources>

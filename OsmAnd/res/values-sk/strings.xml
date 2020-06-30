@@ -3263,7 +3263,7 @@
     <string name="map_during_navigation_info">Mapa počas navigácie</string>
     <string name="map_during_navigation">Mapa počas navigácie</string>
     <string name="shared_string_other">Iné</string>
-    <string name="vehicle_parameters_descr">Hmotnosť, výška, rýchlosť</string>
+    <string name="vehicle_parameters_descr">Hmotnosť, výška, dĺžka, rýchlosť</string>
     <string name="vehicle_parameters">Parametre vozidla</string>
     <string name="voice_announces_info">Hlasové oznámenia sú prehrávané počas navigácie.</string>
     <string name="voice_announces_descr">Navigačné pokyny a oznámenia</string>
@@ -3780,4 +3780,31 @@
     <string name="vessel_height_warning">Môžete nastaviť výšku plavidla, aby sa dalo vyhnúť nízkym mostom. Pamätajte, že pri sklápacích alebo posuvných mostoch sa zohľadní výška v otvorenom stave.</string>
     <string name="vessel_height_limit_description">Nastavte výšku plavidla, aby sa dalo vyhnúť nízkym mostom. Pamätajte, že pri sklápacích alebo posuvných mostoch sa zohľadní výška v otvorenom stave.</string>
     <string name="vessel_width_limit_description">Nastavte šírku plavidla, aby sa dalo vyhnúť úzkym mostom</string>
+    <string name="uninstall_speed_cameras">Odinštalovať rýchlostné radary</string>
+    <string name="shared_string_legal">Právne</string>
+    <string name="speed_camera_pois">Body rýchlostných radarov</string>
+    <string name="speed_cameras_legal_descr">V niektorých krajinách alebo regiónoch je zákonom zakázané použivať aplikácie varujúce pred rýchlostnými radarmi.
+\n
+\nMusíte sa rozhodnúť podľa zákonov vašej krajiny.
+\n
+\nZvoľte %1$s a budete dostávať varovania pred rýchlostnými radarmi.
+\n
+\nZvoľte %2$s a všetky údaje o rýchlostných radaroch budú odstránené, až kým nebude OsmAnd znovu preinštalovaný.</string>
+    <string name="keep_active">Ponechať aktívne</string>
+    <string name="speed_cameras_alert">V niektorých krajinách je varovanie pred rýchlostnými radarmi zakázané zákonom.</string>
+    <string name="quick_action_showhide_mapillary_title">Zobraziť/skryť Mapillary</string>
+    <string name="quick_action_mapillary_hide">Skryť Mapillary</string>
+    <string name="quick_action_mapillary_show">Zobraziť Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Prepínač pre zobrazenie alebo skrytie vrstvy Mapillary na mape.</string>
+    <string name="shared_string_bearing">Smerovanie</string>
+    <string name="item_deleted">%1$s vymazané</string>
+    <string name="speed_cameras_restart_descr">Pre úplné odstránenie údajov o rýchlostných radaroch je potrebný reštart.</string>
+    <string name="shared_string_uninstall_and_restart">Odinštalovať a reštartovať</string>
+    <string name="shared_string_uninstall">Odinštalovať</string>
+    <string name="routing_attr_length_description">Zadajte aká dĺžka vozidla musí byť povolená na trase.</string>
+    <string name="routing_attr_length_name">Limit dĺžky</string>
+    <string name="speed_cameras_removed_descr">Toto zariadenie neobsahuje rýchlostné radary.</string>
+    <string name="app_mode_inline_skates">Kolieskové korčule</string>
+    <string name="use_volume_buttons_as_zoom_descr">Umožní ovládať priblíženie mapy tlačidlami hlasitosti zariadenia.</string>
+    <string name="use_volume_buttons_as_zoom">Tlačidlá hlasitosti na približovanie</string>
 </resources>

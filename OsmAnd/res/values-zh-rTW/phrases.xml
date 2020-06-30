@@ -1225,7 +1225,7 @@
     <string name="poi_toll_no">不收費</string>
     <string name="poi_toll_hgv_yes">收大貨車費用</string>
     <string name="poi_traffic_signals_sound_yes">有聲音</string>
-    <string name="poi_traffic_signals_sound_no">沒有聲音</string>
+    <string name="poi_traffic_signals_sound_no">聲音：無</string>
     <string name="poi_traffic_signals_sound_walk">當有聲响時允許行走</string>
     <string name="poi_rescue_station">救護站</string>
     <string name="poi_services">服務區</string>
@@ -3823,4 +3823,10 @@
     <string name="poi_fire_hydrant_type_pipe">管線</string>
     <string name="poi_fire_hydrant_pressure_filter">壓力</string>
     <string name="poi_pump_status_missing_beam">幫浦狀態：無桿</string>
+    <string name="poi_traffic_signals_arrow_yes">是</string>
+    <string name="poi_traffic_signals_vibration_yes">是</string>
+    <string name="poi_traffic_signals_vibration_no">震動：無</string>
+    <string name="poi_traffic_signals_arrow">箭頭</string>
+    <string name="poi_traffic_signals_vibration">震動</string>
+    <string name="poi_give_box">禮物箱</string>
 </resources>

@@ -1746,13 +1746,13 @@
     <string name="poi_service_repair_no">Brak napraw</string>
     <string name="poi_service_electrical">Naprawa aut elektrycznych</string>
     <string name="poi_self_service_yes">Tak</string>
-    <string name="poi_self_service_no">Brak samoobsługi</string>
+    <string name="poi_self_service_no">Brak</string>
     <string name="poi_automated_yes">Tak</string>
     <string name="poi_automated_no">Nie-automatyczny</string>
     <string name="poi_full_service_yes">Pełna obsługa</string>
     <string name="poi_brushless_yes">Tak</string>
     <string name="poi_brushless_no">Bezszczotkowa: nie</string>
-    <string name="poi_car_wash_no">Myjnia samochodowa: nie</string>
+    <string name="poi_car_wash_no">Brak</string>
     <string name="poi_aeroway_fuel">Stacja benzynowa dla samolotów</string>
     <string name="poi_public_bath">Łaźnia publiczna</string>
     <string name="poi_indoor_yes">Wewnątrz</string>
@@ -3823,4 +3823,6 @@
     <string name="poi_fire_hydrant_style_water_source_groundwater">Woda podziemna</string>
     <string name="poi_fire_hydrant_type_pipe">Rura</string>
     <string name="poi_fire_hydrant_pressure_filter">Ciśnienie</string>
+    <string name="poi_traffic_signals_arrow">Strzałka</string>
+    <string name="poi_traffic_signals_vibration">Wibracja</string>
 </resources>

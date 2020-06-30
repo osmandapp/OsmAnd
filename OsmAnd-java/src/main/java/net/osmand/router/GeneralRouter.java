@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TLongHashSet;
 
 public class GeneralRouter implements VehicleRouter {
@@ -353,33 +354,71 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	@Override
-	public float defineObstacle(RouteDataObject road, int point) {
+	public float defineObstacle(RouteDataObject road, int point, boolean dir) {
 		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes != null) {
-			Float obst = getCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes);
+			Float obst = getCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, dir);
 			if(obst == null) {
-				obst = getObjContext(RouteDataObjectAttribute.OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
-				putCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, obst);
+				int[] filteredPointTypes = filterDirectionTags(road, pointTypes, dir);
+				obst = getObjContext(RouteDataObjectAttribute.OBSTACLES).evaluateFloat(road.region, filteredPointTypes, 0);
+				putCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, obst, dir);
 			}
 			return obst;
 		}
 		return 0;
 	}
+	
+	TIntArrayList filteredRules = new TIntArrayList();
 	
 	@Override
-	public float defineRoutingObstacle(RouteDataObject road, int point) {
+	public float defineRoutingObstacle(RouteDataObject road, int point, boolean dir) {
 		int[] pointTypes = road.getPointTypes(point);
-		if(pointTypes != null){
-			Float obst = getCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes);
-			if(obst ==  null) {
-				obst = getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
-				putCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, obst);
+		if(pointTypes != null) {
+			Float obst = getCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, dir);
+			if(obst == null) {
+				int[] filteredPointTypes = filterDirectionTags(road, pointTypes, dir);
+				obst = getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateFloat(road.region, filteredPointTypes, 0);
+				putCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, obst, dir);
 			}
 			return obst;
 		}
 		return 0;
 	}
 	
+	private int[] filterDirectionTags(RouteDataObject road, int[] pointTypes, boolean dir) {
+		int wayOppositeDirection = dir ? -1 : 1;
+		int direction = 0;
+		int tdirection = 0;
+		for (int i = 0; i < pointTypes.length; i++) {
+			if (pointTypes[i] == road.region.directionBackward) {
+				direction = -1;
+			} else if(pointTypes[i] == road.region.directionForward) {
+				direction = 1;
+			} else if (pointTypes[i] == road.region.directionTrafficSignalsBackward) {
+				tdirection = -1;
+			} else if(pointTypes[i] == road.region.directionTrafficSignalsForward) {
+				tdirection = 1;
+			}
+		}
+		if (direction != 0 || tdirection != 0) {
+			TIntArrayList filteredRules = new TIntArrayList();
+			for (int i = 0; i < pointTypes.length; i++) {
+				boolean skip = false;
+				if ((pointTypes[i] == road.region.stopSign || pointTypes[i] == road.region.giveWaySign)
+						&& direction == wayOppositeDirection) {
+					skip = true;
+				} else if (pointTypes[i] == road.region.trafficSignals && tdirection == wayOppositeDirection) {
+					skip = true;
+				}
+				if (!skip) {
+					filteredRules.add(pointTypes[i]);
+				}
+			}
+			return filteredRules.toArray();
+		}
+		return pointTypes;
+	}
+
 	@Override
 	public double defineHeightObstacle(RouteDataObject road, short startIndex, short endIndex) {
 		if(!heightObstacles) {
@@ -463,16 +502,20 @@ public class GeneralRouter implements VehicleRouter {
 		Float sp = getCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road);
 		if(sp == null) {
 			sp = getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);
-			putCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, sp);
+			putCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, sp, false);
 		}
 		return sp;
 	}
 
 	private void putCache(RouteDataObjectAttribute attr, RouteDataObject road, Float val) {
-		putCache(attr, road.region, road.types, val);
+		putCache(attr, road.region, road.types, val, false);
 	}
 	
-	private void putCache(RouteDataObjectAttribute attr, RouteRegion reg, int[] types, Float val) {
+	private void putCache(RouteDataObjectAttribute attr, RouteDataObject road, Float val, boolean extra) {
+		putCache(attr, road.region, road.types, val, extra);
+	}
+	
+	private void putCache(RouteDataObjectAttribute attr, RouteRegion reg, int[] types, Float val, boolean extra) {
 		Map<RouteRegion, Map<IntHolder, Float>> ch = evalCache[attr.ordinal()];
 		if (USE_CACHE) {
 			Map<IntHolder, Float> rM = ch.get(reg);
@@ -480,40 +523,56 @@ public class GeneralRouter implements VehicleRouter {
 				rM = new HashMap<IntHolder, Float>();
 				ch.put(reg, rM);
 			}
-			rM.put(new IntHolder(types), val);
+			rM.put(new IntHolder(types, extra), val);
 		}
 		TIMER += System.nanoTime();
 	}
 	
 	class IntHolder {
-	    private final int[] array;
-	    IntHolder(int[] ts) { array = ts; }
-	    @Override public int hashCode() { return Arrays.hashCode(array); }
-	    @Override public boolean equals(Object other) {
-	        if (array == other) { return true; }
-	        if (! (other instanceof IntHolder) ) {
-	            return false;
-	        }
-	        //noinspection unchecked
-	        return Arrays.equals(array, ((IntHolder) other).array);
-	    }
+		private final int[] array;
+		private final boolean extra;
+
+		IntHolder(int[] ts, boolean extra) {
+			array = ts;
+			this.extra = extra;
+		}
+
+		@Override
+		public int hashCode() {
+			return Arrays.hashCode(array) + (extra ? 1 : 0);
+		}
+
+		@Override
+		public boolean equals(Object other) {
+			if (array == other) {
+				return true;
+			}
+			if (!(other instanceof IntHolder)) {
+				return false;
+			}
+			if (((IntHolder) other).extra != this.extra) {
+				return false;
+			}
+			// noinspection unchecked
+			return Arrays.equals(array, ((IntHolder) other).array);
+		}
 	}
 
 	private Float getCache(RouteDataObjectAttribute attr, RouteDataObject road) {
-		return getCache(attr, road.region, road.types);
+		return getCache(attr, road.region, road.types, false);
 	}
 	
-	private Float getCache(RouteDataObjectAttribute attr, RouteRegion reg, int[] types) {
+	private Float getCache(RouteDataObjectAttribute attr, RouteRegion reg, int[] types, boolean extra) {
 		Map<RouteRegion, Map<IntHolder, Float>> ch = evalCache[attr.ordinal()];
-		TIMER -= System.nanoTime();
+//		TIMER -= System.nanoTime();
 		if (USE_CACHE) {
 			Map<IntHolder, Float> rM = ch.get(reg);
 			if (rM == null) {
 				return null;
 			}
-			Float vl = rM.get(new IntHolder(types));
+			Float vl = rM.get(new IntHolder(types, extra));
 			if(vl != null) {
-				TIMER += System.nanoTime();
+//				TIMER += System.nanoTime();
 				return vl;
 			}
 		}

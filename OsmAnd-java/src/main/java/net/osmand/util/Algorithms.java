@@ -707,13 +707,9 @@ public class Algorithms {
 	}
 
 	public static String formatMinutesDuration(int minutes) {
-		if (minutes < 60) {
-			return String.valueOf(minutes);
-		} else {
-			int min = minutes % 60;
-			int hours = minutes / 60;
-			return String.format(Locale.UK, "%02d:%02d", hours, min);
-		}
+		int min = minutes % 60;
+		int hours = minutes / 60;
+		return String.format(Locale.UK, "%02d:%02d", hours, min);
 	}
 
 	public static <T extends Enum<T>> T parseEnumValue(T[] cl, String val, T defaultValue) {

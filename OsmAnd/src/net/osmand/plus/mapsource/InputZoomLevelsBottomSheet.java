@@ -1,10 +1,12 @@
 package net.osmand.plus.mapsource;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -89,7 +91,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			String mapSource = getString(R.string.map_source);
 			String overlayUnderlay = getString(R.string.pref_overlay);
 			String dialogDesr = getString(dialogDescrRes, mapSource, overlayUnderlay);
-			dialogDescrTv.setText(createSpannableString(dialogDesr, mapSource, overlayUnderlay));
+			dialogDescrTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), dialogDesr, mapSource, overlayUnderlay));
 		} else {
 			dialogDescrTv.setText(getString(dialogDescrRes));
 		}
@@ -147,7 +149,12 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	protected void onRightBottomButtonClick() {
 		if (!newMapSource) {
-			showClearTilesWarningDialog();
+			showClearTilesWarningDialog(requireActivity(), nightMode, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					applySelectedZooms();
+				}
+			});
 		} else {
 			applySelectedZooms();
 		}
@@ -163,18 +170,13 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		return R.string.shared_string_apply;
 	}
 
-	private void showClearTilesWarningDialog() {
-		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
+	public static void showClearTilesWarningDialog(Activity activity, boolean nightMode, DialogInterface.OnClickListener onPositiveListener) {
+		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 		AlertDialog.Builder dismissDialog = new AlertDialog.Builder(themedContext);
-		dismissDialog.setTitle(getString(R.string.osmand_parking_warning));
-		dismissDialog.setMessage(getString(R.string.clear_tiles_warning));
+		dismissDialog.setTitle(activity.getString(R.string.osmand_parking_warning));
+		dismissDialog.setMessage(activity.getString(R.string.clear_tiles_warning));
 		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
-		dismissDialog.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				applySelectedZooms();
-			}
-		});
+		dismissDialog.setPositiveButton(R.string.shared_string_continue, onPositiveListener);
 		dismissDialog.show();
 	}
 

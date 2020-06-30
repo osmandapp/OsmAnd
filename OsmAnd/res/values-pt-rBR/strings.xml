@@ -3221,7 +3221,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_example">Exemplo</string>
     <string name="change_default_settings">Alterar configuração</string>
     <string name="discard_changes">Descartar alteração</string>
-    <string name="vehicle_parameters_descr">Peso, altura, velocidade</string>
+    <string name="vehicle_parameters_descr">Peso, altura, comprimento, velocidade</string>
     <string name="vehicle_parameters">Parâmetros do veículo</string>
     <string name="screen_alerts">Alertas de tela</string>
     <string name="configure_profile_info">Configurações para o perfil:</string>
@@ -3769,4 +3769,31 @@ Pôr do Sol: %2$s</string>
     <string name="vessel_height_warning">Você pode definir a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
     <string name="vessel_height_limit_description">Defina a altura do vaso para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
     <string name="vessel_width_limit_description">Defina a largura da embarcação para evitar pontes estreitas</string>
+    <string name="quick_action_showhide_mapillary_title">Mostrar/ocultar Mapillary</string>
+    <string name="quick_action_mapillary_hide">Ocultar Mapillary</string>
+    <string name="quick_action_mapillary_show">Mostrar Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Uma alternância para mostrar ou ocultar a camada Mapillary no mapa.</string>
+    <string name="uninstall_speed_cameras">Desinstalar radares de velocidade</string>
+    <string name="shared_string_legal">Legal</string>
+    <string name="speed_camera_pois">POIs de radares de velocidade</string>
+    <string name="speed_cameras_legal_descr">Em alguns países ou regiões, o uso de aplicativos de aviso de radares é proibido por lei.
+\n
+\nVocê precisa fazer uma escolha, dependendo da lei do seu país.
+\n
+\nSelecione %1$s e você receberá alertas e avisos sobre radares de velocidade.
+\n
+\nSelecione %2$s. Todos os dados relacionados a radares de velocidade: alertas, notificações, POIs serão excluídos até que o OsmAnd seja completamente reinstalado.</string>
+    <string name="keep_active">Manter ativo</string>
+    <string name="shared_string_uninstall">Desinstalar</string>
+    <string name="speed_cameras_alert">Os alertas de radares de velocidade em alguns países são proibidos por lei.</string>
+    <string name="shared_string_bearing">Rolamento</string>
+    <string name="item_deleted">%1$s excluído</string>
+    <string name="speed_cameras_restart_descr">É necessário reiniciar para excluir completamente os dados da câmera de velocidade.</string>
+    <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>
+    <string name="routing_attr_length_description">Especifique o comprimento do veículo a ser permitido nas rotas.</string>
+    <string name="routing_attr_length_name">Limite de comprimento</string>
+    <string name="speed_cameras_removed_descr">Este dispositivo não possui câmeras de velocidade.</string>
+    <string name="app_mode_inline_skates">Patins em linha</string>
+    <string name="use_volume_buttons_as_zoom_descr">Ativar para controlar o nível de zoom do mapa com os botões de volume do dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom">Botões de volume como zoom</string>
 </resources>

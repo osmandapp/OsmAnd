@@ -234,8 +234,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 			toolbarLayout.setTitle(getString(toolbarTitleRes));
 			description.setText(UiUtilities.createSpannableString(
 					String.format(getString(descriptionRes), fileName),
-					fileName,
-					new StyleSpan(Typeface.BOLD)
+					new StyleSpan(Typeface.BOLD), fileName
 			));
 			buttonsContainer.setVisibility(View.GONE);
 			progressBar.setVisibility(View.VISIBLE);

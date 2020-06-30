@@ -236,7 +236,7 @@
     <string name="vector_data_missing">Завантажити (\'офлайн\') дані для автономного використання мап.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nДовго утримуйте для виклику налаштувань"</string>
+\nУтримуйте для виклику налаштувань"</string>
     <string name="local_index_installed">Локальна версія</string>
     <string name="local_index_items_backuped">%1$d з %2$d об’єктів знедіяно.</string>
     <string name="local_index_items_deleted">%1$d з %2$d об’єктів вилучено.</string>
@@ -274,8 +274,8 @@
     <string name="choose_audio_stream">Вивід голосових вказівок</string>
     <string name="choose_audio_stream_descr">Виберіть канал для голосових вказівок.</string>
     <string name="voice_stream_voice_call">Голосовий канал (перервати звук з динаміків автомобіля)</string>
-    <string name="voice_stream_notification">Повідомлення авдіо</string>
-    <string name="voice_stream_music">Медіа / Навігаційне авдіо</string>
+    <string name="voice_stream_notification">Повідомлення аудіо</string>
+    <string name="voice_stream_music">Медіа/навігаційне аудіо</string>
     <string name="warning_tile_layer_not_downloadable">Застосунок не може завантажити шар мапи %1$s, спробуйте перевстановити його.</string>
     <string name="overlay_transparency_descr">Змінити прозорість мапи.</string>
     <string name="overlay_transparency">Прозорість</string>
@@ -787,7 +787,7 @@
     <string name="srtm_paid_version_msg">Будь ласка, зверніть увагу на оплату втулка \"Горизонталі\" для підтримки подальшого розвитку.</string>
     <string name="srtm_paid_version_title">Втулок \'Горизонталі\'</string>
     <string name="av_def_action_video">Запис відео</string>
-    <string name="av_def_action_audio">Запис авдіо</string>
+    <string name="av_def_action_audio">Запис аудіо</string>
     <string name="av_widget_action_descr">Усталена дія віджету:</string>
     <string name="av_widget_action">Дія для віджета</string>
     <string name="precise_routing_mode_descr">Обчислити точні маршрути без глюків. Обчислення все ще обмежене відстанню і повільне.</string>
@@ -803,20 +803,20 @@
     <string name="map_widget_av_notes">Звуко/відео-нотатки</string>
     <string name="osmand_srtm_short_description_80_chars">Плагін OsmAnd для показу горизонталей в автономному режимі</string>
     <string name="av_use_external_camera">Використовувати програму Камера</string>
-    <string name="av_settings_descr">Налаштування авдіо/відео запису.</string>
+    <string name="av_settings_descr">Налаштування аудіо/відео запису.</string>
     <string name="av_settings">Налаштування аудіо/відео</string>
     <string name="recording_error">Не вдалося виконати запис</string>
     <string name="recording_camera_not_available">Камера недоступна</string>
     <string name="recording_default_name">Запис</string>
     <string name="av_def_action_choose">За запитом\?</string>
-    <string name="recording_is_recorded">Авдіо/відео зараз записується. Для зупинки натисніть на AV-віджет.</string>
-    <string name="recording_context_menu_arecord">Створити авдіо-нотатку</string>
+    <string name="recording_is_recorded">Аудіо/відео зараз записується. Для зупинки натисніть на AV-віджет.</string>
+    <string name="recording_context_menu_arecord">Створити аудіо-нотатку</string>
     <string name="recording_context_menu_vrecord">Створити відео-нотатку</string>
     <string name="recording_context_menu_delete">Вилучити запис</string>
     <string name="recording_context_menu_play">Грати</string>
     <string name="map_widget_intermediate_distance">Проміжний пункт призначення</string>
     <string name="recording_can_not_be_played">Неможливо відтворити запис.</string>
-    <string name="recording_playing">Відбувається відтворення авдіо
+    <string name="recording_playing">Відбувається відтворення аудіо 
 \n%1$s</string>
     <string name="recording_open_external_player">Відкрити зовнішній програвач</string>
     <string name="recording_delete_confirm">Вилучити цей елемент?</string>
@@ -1626,10 +1626,10 @@
     <string name="av_video_quality_high">Вища якість</string>
     <string name="av_video_quality">Якість відео</string>
     <string name="av_video_quality_descr">Виберіть якість відео.</string>
-    <string name="av_audio_format">Формат авдіо</string>
-    <string name="av_audio_format_descr">Виберіть формат авдіо.</string>
-    <string name="av_audio_bitrate">Бітова швидкість авдіо</string>
-    <string name="av_audio_bitrate_descr">Виберіть бітову швидкість авдіо.</string>
+    <string name="av_audio_format">Формат аудіо</string>
+    <string name="av_audio_format_descr">Виберіть формат аудіо.</string>
+    <string name="av_audio_bitrate">Бітова швидкість аудіо</string>
+    <string name="av_audio_bitrate_descr">Виберіть бітову швидкість аудіо.</string>
     <string name="please_specify_poi_type_only_from_list">Будь ласка, вкажіть коректний тип POI з переліку, або пропустіть його.</string>
     <string name="show_on_start">Показувати під час запуску</string>
     <string name="copied_to_clipboard">Скопійовано до буферу обміну</string>
@@ -2009,7 +2009,7 @@
     <string name="trip_rec_notification_settings_desc">Показувати сповіщення, яке дозволить почати запис мандрівки.</string>
     <string name="shared_string_notifications">Повідомлення</string>
     <string name="shared_string_continue">Продовжити</string>
-    <string name="shared_string_pause">Павза</string>
+    <string name="shared_string_pause">Призупинити</string>
     <string name="shared_string_trip">Подорож</string>
     <string name="shared_string_recorded">Записано</string>
     <string name="shared_string_record">Запис</string>
@@ -2188,13 +2188,13 @@
     <string name="quick_action_add_osm_bug">Додати нотатку OSM</string>
     <string name="rendering_value_fine_name">Дуже тонкий</string>
     <string name="navigate_point_olc">Відкритий код розташування (OLC)</string>
-    <string name="quick_action_take_audio_note">Нова авдіонотатка</string>
+    <string name="quick_action_take_audio_note">Нова аудіонотатка</string>
     <string name="quick_action_take_video_note">Нова відеонотатка</string>
     <string name="quick_action_take_photo_note">Нова світлино-нотатка</string>
     <string name="quick_favorites_name_preset">Найменування</string>
     <string name="quick_action_add_marker_descr">Кнопка для додавання позначки мапи посередині екрану.</string>
     <string name="quick_action_add_gpx_descr">Натискання на цю кнопку додасть маршрутну точку GPX посередині екрану.</string>
-    <string name="quick_action_take_audio_note_descr">Натискання цієї кнопки додає авдіонотатку посередині екрану.</string>
+    <string name="quick_action_take_audio_note_descr">Натискання цієї кнопки додає аудіонотатку посередині екрану.</string>
     <string name="quick_action_take_video_note_descr">Натискання цієї кнопки додає відеонотатку посередині екрану.</string>
     <string name="quick_action_take_photo_note_descr">Натискання цієї кнопки додає світлинонотатку посередині екрану.</string>
     <string name="quick_action_add_osm_bug_descr">Натискання цієї кнопки додає OSM-нотатку посередині екрану.</string>
@@ -2611,7 +2611,7 @@
     <string name="one_tap_active_descr">Натискання на позначку на мапі перемістить її на перше місце в списку задіяних позначок, не відкриваючи контекстне меню.</string>
     <string name="one_tap_active">Задіювання одним натисненням</string>
     <string name="empty_state_av_notes">Робіть нотатки!</string>
-    <string name="empty_state_av_notes_desc">Додайте авдіо, відео або світлино-нотатку в будь-яку точку на мапі, використовуючи віджет або контекстне меню.</string>
+    <string name="empty_state_av_notes_desc">Додайте аудіо, відео або світлино-нотатку в будь-яку точку на мапі, використовуючи віджет або контекстне меню.</string>
     <string name="notes_by_date">Примітки за датою</string>
     <string name="by_date">За датою</string>
     <string name="by_type">За типом</string>
@@ -3255,7 +3255,7 @@
     <string name="map_during_navigation_info">Мапа під час навігації</string>
     <string name="map_during_navigation">Мапа під час навігації</string>
     <string name="shared_string_other">Інше</string>
-    <string name="vehicle_parameters_descr">Вага, висота, швидкість</string>
+    <string name="vehicle_parameters_descr">Вага, висота, довжина, швидкість</string>
     <string name="vehicle_parameters">Параметри транспортного засобу</string>
     <string name="voice_announces_info">Голосові повідомлення відтворюються лише під час навігації.</string>
     <string name="voice_announces">Навігаційні оголошення</string>
@@ -3747,11 +3747,11 @@
     <string name="mercator_projection">Проєкція Меркатора</string>
     <string name="storage_format">Формат зберігання</string>
     <string name="map_source_zoom_levels">Встановіть найменший та найбільший рівень масштабування для відображення або завантаження мережевої мапи.</string>
-    <string name="map_source_zoom_levels_descr">Впливає на екран, коли використовується як мапа чи накладка/підкладка.
-\n
-\n%1$s: мапа обмежена вибраним проміжком масштабування.
-\n
-\n%2$s: рівні масштабування, за яких буде видно первинні тайли; збільшення і зменшення масштабу може відбуватися поза цими значенями.</string>
+    <string name="map_source_zoom_levels_descr">Впливає на екран, коли використовується як мапа чи накладка/підкладка. 
+\n 
+\n%1$s: мапа обмежена вибраним проміжком масштабування. 
+\n 
+\n%2$s: рівні масштабування, за яких буде видно первинні тайли; зміна масштабу може відбуватися поза цими значеннями.</string>
     <string name="expire_time_descr">Кешовані тайли буде повторно завантажено через вказану кількість хвилин. Залиште це поле порожнім, щоб ніколи не оновлювати плитки для цього джерела.
 \n 
 \nОдин день - 1440 хвилин. 
@@ -3777,4 +3777,31 @@
     <string name="vessel_height_warning">Ви можете встановити висоту судна, щоб уникнути низьких мостів. Майте на увазі, якщо міст рухомий, використовуватиметься його висота у відкритому стані.</string>
     <string name="vessel_height_limit_description">Встановіть висоту судна, щоб уникнути низьких мостів. Майте на увазі, якщо міст рухомий, використовуватиметься його висота у відкритому стані.</string>
     <string name="vessel_width_limit_description">Встановіть ширину судна, щоб уникнути вузьких мостів</string>
+    <string name="quick_action_showhide_mapillary_title">Увімкнути/вимкнути Mapillary</string>
+    <string name="quick_action_mapillary_hide">Вимкнути Mapillary</string>
+    <string name="quick_action_mapillary_show">Увімкнення шару Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Перемикач увімкнення або вимкнення шару Mapillary на мапі.</string>
+    <string name="uninstall_speed_cameras">Видалити камери контролю швидкості</string>
+    <string name="shared_string_legal">Законодавство</string>
+    <string name="speed_camera_pois">POI камер контролю швидкості</string>
+    <string name="speed_cameras_legal_descr">У деяких країнах чи регіонах користуватися попередженнями про камери контролю швидкості заборонено законом.
+\n
+\nВам потрібно зробити вибір залежно від законодавства вашої країни.
+\n
+\nВиберіть %1$s і ви отримуватимете сповіщення та попередження про камери контролю швидкості.
+\n
+\nВиберіть %2$s, щоб видалити всі дані, пов\'язані з камерами контролю швидкості (повідомлення, попередження і POI), до повного перевстановлення OsmAnd.</string>
+    <string name="keep_active">Лишати ввімкненим</string>
+    <string name="shared_string_uninstall">Видалити</string>
+    <string name="speed_cameras_alert">Попередження про камери контролю швидкості в деяких країнах заборонено законом.</string>
+    <string name="shared_string_bearing">Орієнтація</string>
+    <string name="item_deleted">%1$s видалено</string>
+    <string name="speed_cameras_restart_descr">Потрібен перезапуск для повного видалення даних камер контролю швидкості.</string>
+    <string name="shared_string_uninstall_and_restart">Видалити та перезапустити</string>
+    <string name="routing_attr_length_description">Вкажіть довжину транспортного засобу для розрахунку маршрутів.</string>
+    <string name="routing_attr_length_name">Обмеження довжини</string>
+    <string name="speed_cameras_removed_descr">На цьому пристрої немає камер контролю швидкості.</string>
+    <string name="app_mode_inline_skates">Роликові ковзани</string>
+    <string name="use_volume_buttons_as_zoom_descr">Увімкнути для зміни масштабу мапи кнопками гучності пристрою.</string>
+    <string name="use_volume_buttons_as_zoom">Масштабування кнопками гучності</string>
 </resources>

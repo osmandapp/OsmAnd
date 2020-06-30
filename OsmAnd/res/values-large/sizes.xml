@@ -45,6 +45,11 @@
 
 	<dimen name="map_widget_icon_margin">3dp</dimen>
 
+	<dimen name="widget_turn_lane_size">54dp</dimen>
+	<dimen name="widget_turn_lane_border">9dp</dimen>
+	<dimen name="widget_turn_lane_margin">3dp</dimen>
+	<dimen name="widget_turn_lane_min_delta">27dp</dimen>
+
 	<!-- ContextMenu -->
 	<dimen name="context_menu_top_shadow_h">30dp</dimen>
 	<dimen name="context_menu_icon_top_padding">25dp</dimen>
@@ -65,7 +70,6 @@
 	<dimen name="context_menu_transport_stop_item_height">24dp</dimen>
 	<dimen name="context_menu_main_actions_padding_top">11dp</dimen>
 	<dimen name="context_menu_main_actions_padding_bottom">9dp</dimen>
-	<dimen name="context_menu_main_actions_icon_margin">5dp</dimen>
 
 	<!-- General -->
 

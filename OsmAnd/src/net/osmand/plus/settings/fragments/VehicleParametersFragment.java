@@ -20,6 +20,7 @@ import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.router.GeneralRouter;
+import net.osmand.util.Algorithms;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 
 import java.util.Map;
@@ -87,6 +88,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;
 		OsmandSettings.StringPreference pref = (OsmandSettings.StringPreference) app.getSettings()
 				.getCustomRoutingProperty(parameterId, defValue);
+		VehicleSizeAssets assets = VehicleSizeAssets.getAssets(parameterId, routerProfile);
 		Object[] values = parameter.getPossibleValues();
 		String[] valuesStr = new String[values.length];
 		for (int i = 0; i < values.length; i++) {
@@ -94,6 +96,11 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		}
 		String[] entriesStr = parameter.getPossibleValueDescriptions().clone();
 		entriesStr[0] = app.getString(R.string.shared_string_none);
+		for (int i = 1; i < entriesStr.length; i++) {
+			int firstCharIndex = Algorithms.findFirstNumberEndIndex(entriesStr[i]);
+			entriesStr[i] = String.format(app.getString(R.string.ltr_or_rtl_combine_via_space),
+					entriesStr[i].substring(0, firstCharIndex), getString(assets.getMetricShortRes()));
+		}
 
 		Context ctx = getContext();
 		if (ctx == null) {
@@ -101,7 +108,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		}
 		SizePreference vehicleSizePref = new SizePreference(ctx);
 		vehicleSizePref.setKey(pref.getId());
-		vehicleSizePref.setAssets(VehicleSizeAssets.getAssets(parameterId, routerProfile));
+		vehicleSizePref.setAssets(assets);
 		vehicleSizePref.setDefaultValue(defValue);
 		vehicleSizePref.setTitle(title);
 		vehicleSizePref.setEntries(entriesStr);
@@ -133,6 +140,14 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
 			if (imageView != null) {
 				Object currentValue = ((ListPreferenceEx) preference).getValue();
+				boolean enabled = preference.isEnabled() && !ROUTING_PARAMETER_NUMERIC_DEFAULT.equals(currentValue)
+						&& !ROUTING_PARAMETER_SYMBOLIC_DEFAULT.equals(currentValue);
+				imageView.setEnabled(enabled);
+			}
+		} else if (preference instanceof SizePreference) {
+			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
+			if (imageView != null) {
+				Object currentValue = ((SizePreference) preference).getValue();
 				boolean enabled = preference.isEnabled() && !ROUTING_PARAMETER_NUMERIC_DEFAULT.equals(currentValue)
 						&& !ROUTING_PARAMETER_SYMBOLIC_DEFAULT.equals(currentValue);
 				imageView.setEnabled(enabled);

@@ -895,7 +895,7 @@
     <string name="poi_smoking_separated">Í sérherbergi</string>
     <string name="poi_tactile_paving_yes">Já</string>
     <string name="poi_traffic_signals_sound_yes">Já</string>
-    <string name="poi_traffic_signals_sound_no">Nei</string>
+    <string name="poi_traffic_signals_sound_no">Hljóð: nei</string>
     <string name="poi_bird_hide">Staður til fuglaskoðunar</string>
     <string name="poi_horse_riding">Hestaferðir</string>
     <string name="poi_scrub">Runnar</string>
@@ -3809,4 +3809,9 @@
     <string name="poi_fire_hydrant_style_water_source_groundwater">Grunnvatn</string>
     <string name="poi_fire_hydrant_type_pipe">Leiðsla</string>
     <string name="poi_fire_hydrant_pressure_filter">Þrýstingur</string>
+    <string name="poi_traffic_signals_arrow_yes">Já</string>
+    <string name="poi_traffic_signals_vibration_yes">Já</string>
+    <string name="poi_traffic_signals_vibration_no">Titringur: nei</string>
+    <string name="poi_traffic_signals_arrow">Ör</string>
+    <string name="poi_traffic_signals_vibration">Titringur</string>
 </resources>
