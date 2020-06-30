@@ -39,6 +39,7 @@ import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -555,6 +556,14 @@ public abstract class OsmandPlugin {
 	protected void newDownloadIndexes(Fragment fragment) {
 	}
 
+	protected void prepareExtraTopPoiFilters(PoiUIFilter ... filters) {
+	}
+
+	protected String getMapObjectsLocale(Set<String> supportedLocales,
+	                                     String preferredLocale) {
+		return null;
+	}
+
 	public List<String> indexingFiles(IProgress progress) {
 		return null;
 	}
@@ -821,9 +830,26 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void onNewDownloadIndexes(Fragment fragment) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.newDownloadIndexes(fragment);
 		}
+	}
+
+	public static void onPrepareExtraTopPoiFilters(PoiUIFilter ... filters) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			plugin.prepareExtraTopPoiFilters(filters);
+		}
+	}
+
+	public static String onGetMapObjectsLocale(Set<String> supportedLocales,
+	                                           String preferredLocale) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			String locale = plugin.getMapObjectsLocale(supportedLocales, preferredLocale);
+			if (locale != null) {
+				return locale;
+			}
+		}
+		return preferredLocale;
 	}
 
 	public static Collection<DashFragmentData> getPluginsCardsList() {

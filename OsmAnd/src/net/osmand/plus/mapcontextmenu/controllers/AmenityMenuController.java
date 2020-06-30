@@ -22,7 +22,6 @@ import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -160,11 +159,8 @@ public class AmenityMenuController extends MenuController {
 	public String getNameStr() {
 		String preferredLang = getPreferredMapLang();
 		if (amenity.getType().isWiki()) {
-			WikipediaPlugin wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
-			if (wikiPlugin != null) {
-				preferredLang = wikiPlugin.getWikiArticleLanguage(
-						amenity.getSupportedContentLocales(), getPreferredMapAppLang());
-			}
+			preferredLang = OsmandPlugin.onGetMapObjectsLocale(
+					amenity.getSupportedContentLocales(), getPreferredMapAppLang());
 		}
 		String name = amenity.getName(preferredLang, isTransliterateNames());
 		Map<String, String> additionalInfo = amenity.getAdditionalInfo();

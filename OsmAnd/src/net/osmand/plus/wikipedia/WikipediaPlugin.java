@@ -242,8 +242,13 @@ public class WikipediaPlugin extends OsmandPlugin {
 		return app.getString(R.string.shared_string_all_languages);
 	}
 
+	@Override
+	protected String getMapObjectsLocale(Set<String> supportedLocales, String preferredLocale) {
+		return getWikiArticleLanguage(supportedLocales, preferredLocale);
+	}
+
 	public String getWikiArticleLanguage(@NonNull Set<String> availableArticleLangs,
-	                                            String preferredLanguage) {
+	                                     String preferredLanguage) {
 		if (!hasCustomSettings()) {
 			// Wikipedia with default settings
 			return preferredLanguage;
@@ -298,10 +303,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 			} else {
 				final DownloadIndexesThread downloadThread = app.getDownloadThread();
 				if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-					if (settings.isInternetConnectionAvailable()) {
-						downloadThread.runReloadIndexFiles();
-					}
-					searchFragment.showProgressBar();
+					searchFragment.reloadIndexFiles();
 				} else {
 					addEmptyWikiBanner(searchFragment, phrase);
 				}
@@ -317,7 +319,6 @@ public class WikipediaPlugin extends OsmandPlugin {
 			final QuickSearchDialogFragment f = (QuickSearchDialogFragment) fragment;
 			SearchPhrase phrase = app.getSearchUICore().getCore().getPhrase();
 			if (f.isResultEmpty() && isSearchByWiki(phrase)) {
-				f.hideProgressBar();
 				addEmptyWikiBanner(f, phrase);
 			}
 		}
@@ -342,6 +343,31 @@ public class WikipediaPlugin extends OsmandPlugin {
 					});
 		}
 		fragment.addSearchListItem(banner);
+	}
+
+	@Override
+	protected void prepareExtraTopPoiFilters(PoiUIFilter ... filters) {
+		for (PoiUIFilter filter : filters) {
+			if (filter.isTopWikiFilter()) {
+				boolean prepareByDefault = true;
+				if (hasCustomSettings()) {
+					prepareByDefault = false;
+					String wikiLang = "wiki:lang:";
+					StringBuilder sb = new StringBuilder();
+					for (String lang : getLanguagesToShow()) {
+						if (sb.length() > 1) {
+							sb.append(" ");
+						}
+						sb.append(wikiLang).append(lang);
+					}
+					filter.setFilterByName(sb.toString());
+				}
+				if (prepareByDefault) {
+					filter.setFilterByName(null);
+				}
+				return;
+			}
+		}
 	}
 
 	private boolean isSearchByWiki(SearchPhrase phrase) {

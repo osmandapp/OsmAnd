@@ -1074,12 +1074,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
 	}
 
-	public void showProgressBar() {
+	private void showProgressBar() {
 		updateClearButtonVisibility(false);
 		progressBar.setVisibility(View.VISIBLE);
 	}
 
-	public void hideProgressBar() {
+	private void hideProgressBar() {
 		updateClearButtonVisibility(true);
 		progressBar.setVisibility(View.GONE);
 	}
@@ -2321,17 +2321,23 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	@Override
 	public void newDownloadIndexes() {
+		hideProgressBar();
 		OsmandPlugin.onNewDownloadIndexes(this);
 	}
 
 	@Override
 	public void downloadInProgress() {
-
 	}
 
 	@Override
 	public void downloadHasFinished() {
+	}
 
+	public void reloadIndexFiles() {
+		if (app.getSettings().isInternetConnectionAvailable()) {
+			app.getDownloadThread().runReloadIndexFiles();
+			showProgressBar();
+		}
 	}
 
 	public interface SearchResultListener {

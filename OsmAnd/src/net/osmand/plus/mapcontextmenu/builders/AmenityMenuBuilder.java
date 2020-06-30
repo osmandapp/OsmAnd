@@ -44,8 +44,6 @@ import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaArticleWikiLinkFragment;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-import net.osmand.plus.wikipedia.WikipediaPlugin;
-import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -408,9 +406,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			}
 
 			if (amenity.getType().isWiki()) {
-				WikipediaPlugin wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
-				if (!hasWiki && wikiPlugin != null) {
-					String articleLang = wikiPlugin.getWikiArticleLanguage(
+				if (!hasWiki) {
+					String articleLang = OsmandPlugin.onGetMapObjectsLocale(
 							amenity.getSupportedContentLocales(), preferredLang);
 					String lng = amenity.getContentLanguage("content", articleLang, "en");
 					if (Algorithms.isEmpty(lng)) {

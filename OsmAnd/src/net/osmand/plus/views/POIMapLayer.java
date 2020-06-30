@@ -45,7 +45,6 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
-import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -365,11 +364,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				if (Algorithms.isEmpty(preferredLang)) {
 					preferredLang = app.getLanguage();
 				}
-				WikipediaPlugin wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
-				if (wikiPlugin != null) {
-					preferredLang = wikiPlugin.getWikiArticleLanguage(
-							a.getSupportedContentLocales(), preferredLang);
-				}
+				preferredLang = OsmandPlugin.onGetMapObjectsLocale(
+						a.getSupportedContentLocales(), preferredLang);
 			}
 
 			return new PointDescription(PointDescription.POINT_TYPE_POI,

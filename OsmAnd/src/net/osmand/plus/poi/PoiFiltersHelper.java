@@ -1,7 +1,5 @@
 package net.osmand.plus.poi;
 
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
@@ -18,7 +16,6 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.wikipedia.WikipediaPlugin;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -114,24 +111,8 @@ public class PoiFiltersHelper {
 		return customPOIFilter;
 	}
 
-	public void prepareTopWikiFilter(@NonNull PoiUIFilter wiki) {
-		boolean prepareByDefault = true;
-		WikipediaPlugin wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
-		if (wikiPlugin != null && wikiPlugin.hasCustomSettings()) {
-			prepareByDefault = false;
-			String wikiLang = "wiki:lang:";
-			StringBuilder sb = new StringBuilder();
-			for (String lang : wikiPlugin.getLanguagesToShow()) {
-				if (sb.length() > 1) {
-					sb.append(" ");
-				}
-				sb.append(wikiLang).append(lang);
-			}
-			wiki.setFilterByName(sb.toString());
-		}
-		if (prepareByDefault) {
-			wiki.setFilterByName(null);
-		}
+	public void prepareExtraTopPoiFilters(PoiUIFilter ... filters) {
+		OsmandPlugin.onPrepareExtraTopPoiFilters(filters);
 	}
 
 	public PoiUIFilter getTopWikiPoiFilter() {
@@ -480,7 +461,7 @@ public class PoiFiltersHelper {
 
 	public void addSelectedPoiFilter(PoiUIFilter filter) {
 		if (filter.isTopWikiFilter()) {
-			prepareTopWikiFilter(filter);
+			prepareExtraTopPoiFilters(filter);
 		}
 		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
 		selectedPoiFilters.add(filter);
@@ -574,7 +555,7 @@ public class PoiFiltersHelper {
 			PoiUIFilter filter = getFilterById(f);
 			if (filter != null) {
 				if (filter.isTopWikiFilter()) {
-					prepareTopWikiFilter(filter);
+					prepareExtraTopPoiFilters(filter);
 				}
 				selectedPoiFilters.add(filter);
 			}
