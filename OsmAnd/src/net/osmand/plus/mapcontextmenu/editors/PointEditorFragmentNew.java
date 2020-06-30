@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -163,7 +165,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			}
 		});
 		view.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
-		View saveButton = view.findViewById(R.id.right_bottom_button);
+		final View saveButton = view.findViewById(R.id.right_bottom_button);
 		saveButton.setVisibility(View.VISIBLE);
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -183,11 +185,32 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		UiUtilities.setupDialogButton(nightMode, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
 		UiUtilities.setupDialogButton(nightMode, saveButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_save);
 
-		TextInputLayout nameCaption = (TextInputLayout) view.findViewById(R.id.name_caption);
+		final TextInputLayout nameCaption = (TextInputLayout) view.findViewById(R.id.name_caption);
 		nameCaption.setHint(getString(R.string.shared_string_name));
 
 		nameEdit = (EditText) view.findViewById(R.id.name_edit);
 		nameEdit.setText(getNameInitValue());
+		nameEdit.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				if (s.toString().trim().isEmpty()) {
+					nameCaption.setError(app.getString(R.string.please_provide_profile_name_message));
+					saveButton.setEnabled(false);
+				} else {
+					nameCaption.setError(null);
+					saveButton.setEnabled(true);
+				}
+			}
+		});
+
 		nameIcon = (ImageView) view.findViewById(R.id.name_icon);
 		TextView categoryEdit = view.findViewById(R.id.groupName);
 		if (categoryEdit != null) {
