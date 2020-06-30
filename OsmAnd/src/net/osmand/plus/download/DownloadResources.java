@@ -187,10 +187,11 @@ public class DownloadResources extends DownloadResourceGroup {
 					outdated = true;
 				}
 			} else {
-
 				long itemSize = item.getContentSize();
 				long oldItemSize = 0;
-				if (item.getType() == DownloadActivityType.VOICE_FILE) {
+				if (parsed && item.getTimestamp() > item.getLocalTimestamp()) {
+					outdated = true;
+				} else if (item.getType() == DownloadActivityType.VOICE_FILE) {
 					if (item instanceof AssetIndexItem) {
 						File file = new File(((AssetIndexItem) item).getDestFile());
 						oldItemSize = file.length();
@@ -213,7 +214,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				} else {
 					oldItemSize = app.getAppPath(item.getTargetFileName()).length();
 				}
-				if (itemSize != oldItemSize) {
+				if (!parsed && itemSize != oldItemSize) {
 					outdated = true;
 				}
 			}
