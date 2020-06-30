@@ -11,6 +11,7 @@ import com.google.protobuf.WireFormat;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.data.IncompleteTransportRoute;
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
 import net.osmand.data.TransportStopExit;
@@ -70,7 +71,6 @@ public class BinaryMapTransportReaderAdapter {
 		public int getBottom() {
 			return bottom;
 		}
-		
 		
 		IndexStringTable stringTable = null;
 	}
@@ -251,8 +251,9 @@ public class BinaryMapTransportReaderAdapter {
 		return ((char) i)+"";
 	}
 	
-	public void readIncompleteRoutesList(TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes) throws IOException {
+	public void readIncompleteRoutesList(TLongObjectHashMap<net.osmand.data.IncompleteTransportRoute> incompleteRoutes, int transportIndexStart) throws IOException {
 		boolean end = false;
+		int offset = codedIS.getTotalBytesRead();
 		while (!end) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -263,7 +264,7 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.IncompleteTransportRoutes.ROUTES_FIELD_NUMBER:
 				int l = codedIS.readRawVarint32();
 				int olds = codedIS.pushLimit(l);
-				net.osmand.data.IncompleteTransportRoute ir = readIncompleteRoute();
+				net.osmand.data.IncompleteTransportRoute ir = readIncompleteRoute(offset, transportIndexStart);
 				net.osmand.data.IncompleteTransportRoute itr = incompleteRoutes.get(ir.getRouteId());
 				if(itr != null) {
 					itr.setNextLinkedRoute(ir);
@@ -281,7 +282,7 @@ public class BinaryMapTransportReaderAdapter {
 		
 	}
 	
-	public net.osmand.data.IncompleteTransportRoute readIncompleteRoute() throws IOException {
+	public net.osmand.data.IncompleteTransportRoute readIncompleteRoute(int readOffset, int transportIndexStart) throws IOException {
 		net.osmand.data.IncompleteTransportRoute dataObject = new net.osmand.data.IncompleteTransportRoute();
 		boolean end = false;
 		while(!end){
@@ -295,7 +296,12 @@ public class BinaryMapTransportReaderAdapter {
 				dataObject.setRouteId(codedIS.readUInt64());
 				break;
 			case OsmandOdb.IncompleteTransportRoute.ROUTEREF_FIELD_NUMBER :
-				dataObject.setRouteOffset(codedIS.readRawVarint32());
+				int delta = codedIS.readRawVarint32();
+				if (delta > transportIndexStart) {
+					dataObject.setRouteOffset(delta);
+				} else {
+					dataObject.setRouteOffset(readOffset - delta);					
+				}
 				break;
 			case OsmandOdb.IncompleteTransportRoute.OPERATOR_FIELD_NUMBER :
 				skipUnknownField(t);
@@ -318,7 +324,6 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			}
 		}
-		
 		return dataObject;
 	}
 	
