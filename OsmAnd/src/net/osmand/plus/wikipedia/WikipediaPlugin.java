@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -18,6 +19,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -289,33 +291,57 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected boolean nothingFoundInSearch(final QuickSearchDialogFragment searchFragment, SearchPhrase phrase) {
-		if (isSearchByWiki(phrase)) {
+	protected boolean searchFinished(final QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
+		if (isResultEmpty && isSearchByWiki(phrase)) {
 			if (!Version.isPaidVersion(app)) {
 				searchFragment.addSearchListItem(new QuickSearchFreeBannerListItem(app));
 			} else {
-				QuickSearchBannerListItem banner = new QuickSearchBannerListItem(app);
-				banner.addButton(QuickSearchListAdapter.getIncreaseSearchButtonTitle(app, phrase),
-						null, QuickSearchBannerListItem.INVALID_ID, new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						searchFragment.increaseSearchRadius();
+				final DownloadIndexesThread downloadThread = app.getDownloadThread();
+				if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+					if (settings.isInternetConnectionAvailable()) {
+						downloadThread.runReloadIndexFiles();
 					}
-				});
-				if (hasMapsToDownload()) {
-					banner.addButton(app.getString(R.string.search_download_wikipedia_maps),
-							null, R.drawable.ic_world_globe_dark, new View.OnClickListener() {
-								@Override
-								public void onClick(View v) {
-									showDownloadWikiMapsScreen();
-								}
-							});
+					searchFragment.showProgressBar();
+				} else {
+					addEmptyWikiBanner(searchFragment, phrase);
 				}
-				searchFragment.addSearchListItem(banner);
 			}
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	protected void newDownloadIndexes(Fragment fragment) {
+		if (fragment instanceof QuickSearchDialogFragment) {
+			final QuickSearchDialogFragment f = (QuickSearchDialogFragment) fragment;
+			SearchPhrase phrase = app.getSearchUICore().getCore().getPhrase();
+			if (f.isResultEmpty() && isSearchByWiki(phrase)) {
+				f.hideProgressBar();
+				addEmptyWikiBanner(f, phrase);
+			}
+		}
+	}
+
+	private void addEmptyWikiBanner(final QuickSearchDialogFragment fragment, SearchPhrase phrase) {
+		QuickSearchBannerListItem banner = new QuickSearchBannerListItem(app);
+		banner.addButton(QuickSearchListAdapter.getIncreaseSearchButtonTitle(app, phrase),
+				null, QuickSearchBannerListItem.INVALID_ID, new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						fragment.increaseSearchRadius();
+					}
+				});
+		if (hasMapsToDownload()) {
+			banner.addButton(app.getString(R.string.search_download_wikipedia_maps),
+					null, R.drawable.ic_world_globe_dark, new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							showDownloadWikiMapsScreen();
+						}
+					});
+		}
+		fragment.addSearchListItem(banner);
 	}
 
 	private boolean isSearchByWiki(SearchPhrase phrase) {

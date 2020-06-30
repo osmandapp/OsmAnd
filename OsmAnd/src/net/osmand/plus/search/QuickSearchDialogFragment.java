@@ -80,6 +80,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -118,7 +119,8 @@ import static net.osmand.search.core.ObjectType.POI_TYPE;
 import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
-public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
+public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener,
+		DownloadIndexesThread.DownloadEvents {
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(QuickSearchDialogFragment.class);
 
@@ -1072,12 +1074,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
 	}
 
-	private void showProgressBar() {
+	public void showProgressBar() {
 		updateClearButtonVisibility(false);
 		progressBar.setVisibility(View.VISIBLE);
 	}
 
-	private void hideProgressBar() {
+	public void hideProgressBar() {
 		updateClearButtonVisibility(true);
 		progressBar.setVisibility(View.GONE);
 	}
@@ -1174,7 +1176,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 				if (getResultCollection() != null) {
 					updateSearchResult(getResultCollection(), false);
-					onNothingFound(searchUICore.getPhrase());
+					onSearchFinished(searchUICore.getPhrase());
 				}
 				break;
 		}
@@ -1703,7 +1705,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								if (resultListener == null || resultListener.searchFinished(object.requiredSearchPhrase)) {
 									hideProgressBar();
 									SearchPhrase phrase = object.requiredSearchPhrase;
-									onNothingFound(phrase);
+									onSearchFinished(phrase);
 								}
 							}
 						});
@@ -1971,8 +1973,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void onNothingFound(SearchPhrase phrase) {
-		if (!OsmandPlugin.onNothingFoundInSearch(this, phrase)) {
+	private void onSearchFinished(SearchPhrase phrase) {
+		if (!OsmandPlugin.onSearchFinished(this, phrase, isResultEmpty())) {
 			addMoreButton(searchUICore.isSearchMoreAvailable(phrase));
 		}
 	}
@@ -2315,6 +2317,21 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		sendEmptySearchButton.setVisibility(sendSearchQueryVisible ? View.VISIBLE : View.GONE);
 		sendEmptySearchBottomBarVisible = sendSearchQueryVisible;
 		updateFabHeight();
+	}
+
+	@Override
+	public void newDownloadIndexes() {
+		OsmandPlugin.onNewDownloadIndexes(this);
+	}
+
+	@Override
+	public void downloadInProgress() {
+
+	}
+
+	@Override
+	public void downloadHasFinished() {
+
 	}
 
 	public interface SearchResultListener {

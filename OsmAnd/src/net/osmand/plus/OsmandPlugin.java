@@ -548,8 +548,11 @@ public abstract class OsmandPlugin {
 	protected void optionsMenuFragment(Activity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
 	}
 
-	protected boolean nothingFoundInSearch(QuickSearchDialogFragment searchFragment, SearchPhrase phrase) {
+	protected boolean searchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
 		return false;
+	}
+
+	protected void newDownloadIndexes(Fragment fragment) {
 	}
 
 	public List<String> indexingFiles(IProgress progress) {
@@ -809,12 +812,18 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static boolean onNothingFoundInSearch(QuickSearchDialogFragment searchFragment, SearchPhrase phrase) {
+	public static boolean onSearchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
 		boolean processed = false;
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			processed = plugin.nothingFoundInSearch(searchFragment, phrase) || processed;
+			processed = plugin.searchFinished(searchFragment, phrase, isResultEmpty) || processed;
 		}
 		return processed;
+	}
+
+	public static void onNewDownloadIndexes(Fragment fragment) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.newDownloadIndexes(fragment);
+		}
 	}
 
 	public static Collection<DashFragmentData> getPluginsCardsList() {
