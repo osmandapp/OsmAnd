@@ -389,10 +389,6 @@ public class OpeningHoursParser {
 			return openingTime;
 		}
 
-		public String getOpeningTomorrow(Calendar calendar) {
-			return getOpeningTomorrow(calendar, ALL_SEQUENCES);
-		}
-
 		public String getOpeningDay(Calendar calendar, int sequenceIndex) {
 			Calendar cal = (Calendar) calendar.clone();
 			String openingTime = "";

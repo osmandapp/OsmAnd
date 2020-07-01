@@ -559,27 +559,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (openingHoursInfo != null) {
-				StringBuilder sb = new StringBuilder();
 				int colorOpen = mapActivity.getResources().getColor(R.color.ctx_menu_amenity_opened_text_color);
 				int colorClosed = mapActivity.getResources().getColor(R.color.ctx_menu_amenity_closed_text_color);
-				int[] pos = new int[openingHoursInfo.size()];
-				for (int i = 0; i < openingHoursInfo.size(); i++) {
-					OpeningHours.Info info = openingHoursInfo.get(i);
-					if (sb.length() > 0) {
-						sb.append("\n");
-					}
-					sb.append(info.getInfo());
-					pos[i] = sb.length();
-				}
-				SpannableString infoStr = new SpannableString(sb.toString());
-				int k = 0;
-				for (int i = 0; i < openingHoursInfo.size(); i++) {
-					OpeningHours.Info info = openingHoursInfo.get(i);
-					infoStr.setSpan(new ForegroundColorSpan(info.isOpened() ? colorOpen : colorClosed), k, pos[i], 0);
-					k = pos[i];
-				}
-				return infoStr;
-
+				return getSpannableOpeningHours(openingHoursInfo, colorOpen, colorClosed);
 			} else if (shouldShowMapSize()) {
 				return mapActivity.getString(R.string.file_size_in_mb, indexItem.getArchiveSizeMB());
 			}
@@ -595,6 +577,29 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			return R.drawable.ic_sdcard_16;
 		}
 		return 0;
+	}
+
+	public static SpannableString getSpannableOpeningHours(List<OpeningHours.Info> openingHoursInfo,
+														   int colorOpen,
+														   int colorClosed) {
+		StringBuilder sb = new StringBuilder();
+		int[] pos = new int[openingHoursInfo.size()];
+		for (int i = 0; i < openingHoursInfo.size(); i++) {
+			OpeningHours.Info info = openingHoursInfo.get(i);
+			if (sb.length() > 0) {
+				sb.append("\n");
+			}
+			sb.append(info.getInfo());
+			pos[i] = sb.length();
+		}
+		SpannableString infoStr = new SpannableString(sb.toString());
+		int k = 0;
+		for (int i = 0; i < openingHoursInfo.size(); i++) {
+			OpeningHours.Info info = openingHoursInfo.get(i);
+			infoStr.setSpan(new ForegroundColorSpan(info.isOpened() ? colorOpen : colorClosed), k, pos[i], 0);
+			k = pos[i];
+		}
+		return infoStr;
 	}
 
 	private boolean shouldShowMapSize() {
