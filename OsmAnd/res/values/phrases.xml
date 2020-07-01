@@ -4237,4 +4237,8 @@
 
 	<string name="poi_give_box">Give box</string>
 
+	<string name="poi_borough">Borough</string>
+	<string name="poi_city_block">City block</string>
+
+
 </resources>
