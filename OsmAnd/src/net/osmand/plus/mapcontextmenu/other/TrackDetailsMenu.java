@@ -145,7 +145,11 @@ public class TrackDetailsMenu {
 				if (point != null) {
 					int index = segment.points.indexOf(point);
 					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(segment.points.get(index - 1), point, tb.getLatLonFromPixel(mx, my));
-					gpxItem.chartHighlightPos = (float) (gpxItem.locationOnMap.distance / ((OrderedLineDataSet) ds.get(0)).getDivX());
+					float nextHighlightPos = (float) (gpxItem.locationOnMap.distance / ((OrderedLineDataSet) ds.get(0)).getDivX());
+					float nextVisibleX = chart.getLowestVisibleX() + (nextHighlightPos - gpxItem.chartHighlightPos);
+					gpxItem.chartHighlightPos = nextHighlightPos;
+
+					chart.moveViewToX(nextVisibleX);
 					chart.highlightValue(gpxItem.chartHighlightPos, 0);
 				}
 				myLocation = location;
