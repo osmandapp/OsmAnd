@@ -1482,7 +1482,7 @@
     <string name="poi_waterway_fuel">Tankstation voor scheepvaart</string>
     <string name="poi_ice_hockey">IJshockey</string>
     <string name="poi_internet_access_fee_yes">Internettoegang - betaald</string>
-    <string name="poi_internet_access_fee_no">Internettoegang - gratis</string>
+    <string name="poi_internet_access_fee_no">Internettoegang: gratis</string>
     <string name="poi_club_freemasonry">Vrijmetselaarsloge</string>
     <string name="poi_club_sailing">Zeilclub</string>
     <string name="poi_club_scout">Padvindersclub</string>
