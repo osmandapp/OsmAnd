@@ -389,32 +389,21 @@ public class TransportStopsRouteReader {
 		List<TransportRoute> allRoutes = null;
 		for (BinaryMapIndexReader bmir : routesFilesCache.keySet()) {
 			// here we could limit routeMap indexes by only certain bbox around start / end (check comment on field)
-			if (!bmir.getIncompleteTransportRoutes().isEmpty()) {
-				for (Entry<TransportIndex, TLongObjectHashMap<IncompleteTransportRoute>> entry : bmir.getIncompleteTransportRoutes().entrySet()) {
-					IncompleteTransportRoute ptr = entry.getValue().get(baseRoute.getId());
-					if (ptr != null) {
-						TIntArrayList lst = new TIntArrayList();
-						while (ptr != null) {
-							lst.add(ptr.getRouteOffset());
-							ptr = ptr.getNextLinkedRoute();
-						}
-						if (lst.size() > 0) {
-							if (allRoutes == null) {
-								allRoutes = new ArrayList<TransportRoute>();
-							}
-							allRoutes.addAll(bmir.getTransportRoutes(lst.toArray()).valueCollection());
-						}
+			IncompleteTransportRoute ptr = bmir.getIncompleteTransportRoutes().get(baseRoute.getId());
+			if (ptr != null) {
+				TIntArrayList lst = new TIntArrayList();
+				while (ptr != null) {
+					lst.add(ptr.getRouteOffset());
+					ptr = ptr.getNextLinkedRoute();
+				}
+				if (lst.size() > 0) {
+					if (allRoutes == null) {
+						allRoutes = new ArrayList<TransportRoute>();
 					}
+					allRoutes.addAll(bmir.getTransportRoutes(lst.toArray()).valueCollection());
 				}
 			}
 		}
 		return allRoutes;
 	}
-
-	
-
-	
-
-
-	
 }

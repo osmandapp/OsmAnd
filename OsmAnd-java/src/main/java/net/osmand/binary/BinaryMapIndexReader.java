@@ -111,7 +111,7 @@ public class BinaryMapIndexReader {
 	/*private*/ List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
 	/*private*/ List<RouteRegion> routingIndexes = new ArrayList<RouteRegion>();
 	/*private*/ List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
-	Map<TransportIndex, TLongObjectHashMap<IncompleteTransportRoute>> incompleteTransportRoutes = null;
+	TLongObjectHashMap<IncompleteTransportRoute> incompleteTransportRoutes = null;
 	
 	protected CodedInputStream codedIS;
 
@@ -2655,22 +2655,20 @@ public class BinaryMapIndexReader {
 		}
 	}
 
-	public Map<TransportIndex, TLongObjectHashMap<IncompleteTransportRoute>> getIncompleteTransportRoutes() throws InvalidProtocolBufferException, IOException {
+	
+	public TLongObjectHashMap<IncompleteTransportRoute> getIncompleteTransportRoutes() throws InvalidProtocolBufferException, IOException {
 		if (incompleteTransportRoutes == null) {
-			incompleteTransportRoutes = new HashMap<TransportIndex, TLongObjectHashMap<IncompleteTransportRoute>>();
+			incompleteTransportRoutes = new TLongObjectHashMap<>();
 			for (TransportIndex ti : transportIndexes) {
 				if (ti.incompleteRoutesLength > 0) {
-					TLongObjectHashMap<IncompleteTransportRoute> indexIncompleteRoutes = new TLongObjectHashMap<IncompleteTransportRoute>();
 					codedIS.seek(ti.incompleteRoutesOffset);
 					int oldLimit = codedIS.pushLimit(ti.incompleteRoutesLength);
-					transportAdapter.readIncompleteRoutesList(indexIncompleteRoutes, ti.filePointer);
+					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.filePointer);
 					codedIS.popLimit(oldLimit);
-					incompleteTransportRoutes.put(ti,  indexIncompleteRoutes);
 				}
 			}
 		}
 		return incompleteTransportRoutes;
 	}
-
 
 }
