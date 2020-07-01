@@ -89,8 +89,6 @@
 	<dimen name="measurement_tool_button_padding">12dp</dimen>
 	<dimen name="measurement_tool_button_height">54dp</dimen>
 
-	<dimen name="shadow_height">8dp</dimen>
-
 	<!--Route info-->
 	<dimen name="route_info_buttons_padding_left_right">33dp</dimen>
 	<dimen name="route_info_button_go_margin">5dp</dimen>
