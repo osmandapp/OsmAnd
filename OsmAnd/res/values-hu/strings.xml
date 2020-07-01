@@ -591,7 +591,7 @@
     <string name="choose_available_region">Régió kijelölése listából</string>
     <string name="choose_intersected_street">Keresztező utca kijelölése</string>
     <string name="Closest_Amenities">Legközelebbi hasznos létesítmények</string>
-    <string name="app_mode_default">Alapértelmezett</string>
+    <string name="app_mode_default">Térképböngészés</string>
     <string name="app_mode_car">Vezetés</string>
     <string name="app_mode_bicycle">Kerékpározás</string>
     <string name="app_mode_pedestrian">Gyaloglás</string>
@@ -3755,4 +3755,5 @@ Hosszúság: %2$s</string>
     <string name="reset_plugin_to_default">Bővítménybeállítások visszaállítása alapértelmezettre</string>
     <string name="use_volume_buttons_as_zoom_descr">Engedélyezésével a térkép nagyítási szintje az eszköz hangerőgombjaival állítható.</string>
     <string name="use_volume_buttons_as_zoom">Hangerőgombok használata nagyításhoz</string>
+    <string name="app_mode_inline_skates">Görkorcsolya</string>
 </resources>

@@ -1898,7 +1898,7 @@
     <string name="disable_complex_routing_descr">تعطيل 2-مرحلة التوجيه للملاحة بالسيارة.</string>
     <string name="rendering_attr_alpineHiking_name">مقياس التنزه في جبال الألب (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">تقديم المسارات وفقاً لمقياس SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">طبقة رمز التسلق</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">كيفية اظهار رموز طبقة التسلق (الهايكنق)</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">تقديم المسارات وفقاً لآثار OSMC.</string>
     <string name="local_index_description">انقر فوق أي عنصر لمعرفة المزيد من التفاصيل، اضغط وواصل الضغط للتعطيل أو الحذف. البيانات الحالية على الجهاز (%1$s متاح):</string>
     <string name="keep_informing_descr">إعادة إعلان تعليمات الملاحة في فترات منتظمة.</string>
@@ -3797,4 +3797,6 @@
     <string name="routing_attr_length_name">طول الحد</string>
     <string name="speed_cameras_removed_descr">هذا الجهاز لا يملك كاميرات السرعة.</string>
     <string name="app_mode_inline_skates">أحذية تزلج</string>
+    <string name="use_volume_buttons_as_zoom_descr">تمكين التحكم في مستوى التكبير/التصغير بالخريطة باستخدام أزرار مستوى صوت الجهاز.</string>
+    <string name="use_volume_buttons_as_zoom">أزرار مستوى الصوت</string>
 </resources>
