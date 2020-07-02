@@ -834,12 +834,19 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		if (!poiTypes.isRegisteredType(type)) {
 			type = poiTypes.getOtherPoiCategory();
 		}
-		LinkedHashSet<String> acceptedTypesSet = acceptedTypes.get(type);
-		if (acceptedTypesSet != null && acceptedTypesSet.contains(subtype)) {
-			return true;
+		if (acceptedTypes.containsKey(type)) {
+			LinkedHashSet<String> acceptedTypesSet = acceptedTypes.get(type);
+			if (acceptedTypesSet == null || acceptedTypesSet.contains(subtype)) {
+				return true;
+			}
 		}
-		acceptedTypesSet = acceptedTypesOrigin.get(type);
-		return acceptedTypesSet != null && acceptedTypesSet.contains(subtype);
+		if (acceptedTypesOrigin.containsKey(type)) {
+			LinkedHashSet<String> acceptedTypesSet = acceptedTypesOrigin.get(type);
+			if (acceptedTypesSet == null || acceptedTypesSet.contains(subtype)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

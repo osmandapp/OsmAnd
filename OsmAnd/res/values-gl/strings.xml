@@ -3834,4 +3834,6 @@ Lon %2$s</string>
     <string name="routing_attr_length_name">Límite de lonxitude</string>
     <string name="speed_cameras_removed_descr">Este dispositivo non ten radares de velocidade.</string>
     <string name="app_mode_inline_skates">Patíns en liña</string>
+    <string name="use_volume_buttons_as_zoom_descr">Activar para controlar o nivel de achegamento (zoom) do mapa cos botóns de volume do dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom">Os botóns de volume mudan o achegamento</string>
 </resources>

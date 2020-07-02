@@ -32,10 +32,6 @@ public class RoutePlannerFrontEnd {
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public boolean useSmartRouteRecalculation = true;
 	
-	public static double AVERAGE_SPLIT_DISTANCE_GPX = 1500;
-	public static double MINIMUM_POINT_APPROXIMATION = 50;
-	public static double MINIMUM_STRAIGHT_STEP_APPROXIMATION = 50;
-
 	
 	public RoutePlannerFrontEnd() {
 	}
@@ -46,13 +42,28 @@ public class RoutePlannerFrontEnd {
 		COMPLEX
 	}
 	
-	public static class GpxApproximationResult {
+	public static class GpxRouteApproximation {
+		// ! MAIN parameter to approximate (35m good for custom recorded tracks) 
+		public double MINIMUM_POINT_APPROXIMATION = 50; // 35 m good for small deviations
+		// This parameter could speed up or slow down evaluation (better to make bigger for long routes and smaller for short)
+		public double MAXIMUM_STEP_APPROXIMATION = 3000;
+		// don't search subsegments shorter than specified distance (also used to step back for car turns)
+		public double MINIMUM_STEP_APPROXIMATION = 100;
+		// Parameter to smoother the track itself (could be 0 if it's not recorded track)
+		public double SMOOTHEN_POINTS_NO_ROUTE = 2;
+		
+		public final RoutingContext ctx;
 		public int routeCalculations = 0;
 		public int routePointsSearched = 0;
 		public int routeDistCalculations = 0;
 		public List<RouteSegmentResult> res = new ArrayList<RouteSegmentResult>();
 		public int routeDistance;
+		public int routeGapDistance;
 		public int routeDistanceUnmatched;
+		
+		public GpxRouteApproximation(RoutingContext ctx) {
+			this.ctx = ctx;
+		}
 		
 		@Override
 		public String toString() {
@@ -192,91 +203,152 @@ public class RoutePlannerFrontEnd {
 	}
 
 
-	// TODO add missing turns for straight lines
-	// TODO smoothness is not correct for car routing
-	// TODO native crash
-	// TODO big gaps when there is no match
-	// TODO not correct bicycle-> pedestrian
-	// TODO slow - too many findRouteSegment
-	// TODO fix progress / timings routing /
-	// TODO smoothen straight line Douglas-Peucker (remove noise)
-	public GpxApproximationResult searchGpxRoute(final RoutingContext ctx, List<LatLon> points) throws IOException, InterruptedException {
-		GpxApproximationResult gctx = new GpxApproximationResult();
+	// TODO last segment not correct (cut) before end point and point of straight line
+	
+	// TODO add missing turns for straight lines (compare code)
+	// TODO native matches less roads
+	
+	// TODO fix progress - next iteration
+	// TODO fix timings and remove logging every iteration
+	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<LatLon> points) throws IOException, InterruptedException {
+		gctx.ctx.timeToCalculate = System.nanoTime();
+		if (gctx.ctx.calculationProgress == null) {
+			gctx.ctx.calculationProgress = new RouteCalculationProgress();
+		}
 		List<GpxPoint> gpxPoints = generageGpxPoints(points, gctx);
 		GpxPoint start = gpxPoints.size() > 0 ? gpxPoints.get(0) : null;
-		
+		boolean prevRouteFound = false;
 		while (start != null) {
-			double routeDist = AVERAGE_SPLIT_DISTANCE_GPX;
+			double routeDist = gctx.MAXIMUM_STEP_APPROXIMATION;
 			GpxPoint next = findNextGpxPointWithin(gctx, gpxPoints, start, routeDist);
 			boolean routeFound = false;
-			if (next != null && initRoutingPoint(start, gctx, ctx, MINIMUM_POINT_APPROXIMATION)) {
-				boolean firstAttempt = true;
-				while ((firstAttempt || next.cumDist - start.cumDist > MINIMUM_POINT_APPROXIMATION) && !routeFound) {
-					firstAttempt = false;
-					routeFound = initRoutingPoint(next, gctx, ctx, MINIMUM_POINT_APPROXIMATION);
+			
+			if (next != null && initRoutingPoint(start, gctx, gctx.MINIMUM_POINT_APPROXIMATION)) {
+				while (routeDist >= gctx.MINIMUM_STEP_APPROXIMATION && !routeFound) {
+					routeFound = initRoutingPoint(next, gctx, gctx.MINIMUM_POINT_APPROXIMATION);
 					if (routeFound) {
-						routeFound = findGpxRouteSegment(ctx, gctx, gpxPoints, start, next);
+						routeFound = findGpxRouteSegment(gctx, gpxPoints, start, next, prevRouteFound);
+						if (routeFound) {
+							// route is found - cut the end of the route and move to next iteration
+							boolean stepBack = stepBackAndFindPrevPointInRoute(gctx, gpxPoints, start, next);
+							if (!stepBack) {
+								// not supported case (workaround increase MAXIMUM_STEP_APPROXIMATION)
+								log.info("Consider to increase MAXIMUM_STEP_APPROXIMATION to: " + routeDist*2);
+								start.routeToTarget = null;
+								routeFound = false;
+								break;
+							}
+						}
 					}
 					if (!routeFound) {
 						// route is not found move next point closer to start point (distance / 2)
 						routeDist = routeDist / 2;
+						if (routeDist < gctx.MINIMUM_STEP_APPROXIMATION && routeDist > gctx.MINIMUM_STEP_APPROXIMATION / 2 + 1) {
+							routeDist = gctx.MINIMUM_STEP_APPROXIMATION;
+						}
 						next = findNextGpxPointWithin(gctx, gpxPoints, start, routeDist);
+						if (next != null) {
+							routeDist = Math.min(next.cumDist - start.cumDist, routeDist);
+						}
 					}
 				}
 			}
-			if (routeFound) {
-				// route is found, cut the end of the route and move to next iteration
-				start = next;
-			} else {
+			// route is not found skip segment and keep it as straight line on display
+			if (!routeFound) {
 				// route is not found, move start point by 
-				start = findNextGpxPointWithin(gctx, gpxPoints, start, MINIMUM_STRAIGHT_STEP_APPROXIMATION);
+				next = findNextGpxPointWithin(gctx, gpxPoints, start, gctx.MINIMUM_STEP_APPROXIMATION);
+				if (prevRouteFound) {
+					if (next == null) {
+						// TODO finish
+						// makeSegmentPointPrecise(prev.routeToTarget.get(prev.routeToTarget.size() - 1), start.loc, false);				
+					} else {
+						log.warn("NOT found route from: " + start.pnt.getRoad() + " at " + start.pnt.getSegmentStart());
+					}
+				}
 			}
-
+			prevRouteFound = routeFound;
+			start = next;
 		}
-		calculateGpxRoute(ctx, gctx, gpxPoints);
+		
+		calculateGpxRoute(gctx, gpxPoints);
 
 		if (!gctx.res.isEmpty()) {
-			new RouteResultPreparation().printResults(ctx, points.get(0), points.get(points.size() - 1), gctx.res);
+			new RouteResultPreparation().printResults(gctx.ctx, points.get(0), points.get(points.size() - 1), gctx.res);
 			System.out.println(gctx);
 		}
 		return gctx;
 	}
 
-	private void calculateGpxRoute(final RoutingContext ctx, GpxApproximationResult gctx, List<GpxPoint> gpxPoints) {
+	private boolean stepBackAndFindPrevPointInRoute(GpxRouteApproximation gctx,
+			List<GpxPoint> gpxPoints, GpxPoint start, GpxPoint next) throws IOException {
+		// step back to find to be sure 
+		// 1) route point is behind GpxPoint - MINIMUM_POINT_APPROXIMATION (end route point could slightly ahead)
+		// 2) we don't miss correct turn i.e. points could be attached to muliple routes
+		// 3) to make sure that we perfectly connect to RoadDataObject points
+		double STEP_BACK_DIST = Math.max(gctx.MINIMUM_POINT_APPROXIMATION, gctx.MINIMUM_STEP_APPROXIMATION);
+		double d = 0;
+		int segmendInd = start.routeToTarget.size() - 1;
+		boolean search = true;
+		mainLoop: for (; segmendInd >= 0 && search; segmendInd--) {
+			RouteSegmentResult rr = start.routeToTarget.get(segmendInd);
+			boolean minus = rr.getStartPointIndex() < rr.getEndPointIndex();
+			int nextInd;
+			for (int j = rr.getEndPointIndex(); j != rr.getStartPointIndex(); j = nextInd) {
+				nextInd = minus ? j - 1 : j + 1;
+				d += MapUtils.getDistance(rr.getPoint(j), rr.getPoint(nextInd));
+				if (d > STEP_BACK_DIST) {
+					if (nextInd == rr.getStartPointIndex()) {
+						segmendInd--;
+					} else {
+						rr.setEndPointIndex(nextInd);
+					}
+					search = false;
+					break mainLoop;
+				}
+			}
+		}
+		if (segmendInd == -1) {
+			// here all route segments - 1 is longer than needed distance to step back 
+			return false;
+		}
+		while (start.routeToTarget.size() > segmendInd + 1) {
+			start.routeToTarget.remove(segmendInd + 1);
+		}
+		RouteSegmentResult res = start.routeToTarget.get(segmendInd);
+		next.pnt = new RouteSegmentPoint(res.getObject(), res.getEndPointIndex(), 0);
+		return true;
+	}
+
+	private void calculateGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) {
 		RouteRegion reg = new RouteRegion();
 		reg.initRouteEncodingRule(0, "highway", "unmatched");
-		TIntArrayList lastStraightLine = null;
+		List<LatLon> lastStraightLine = null;
 		for (int i = 0; i < gpxPoints.size(); ) {
 			GpxPoint pnt = gpxPoints.get(i);
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
 				LatLon startPoint = pnt.routeToTarget.get(0).getStartPoint();
 				if (lastStraightLine != null) {
-					lastStraightLine.add(MapUtils.get31TileNumberX(startPoint.getLongitude()));
-					lastStraightLine.add(MapUtils.get31TileNumberY(startPoint.getLatitude()));
+					lastStraightLine.add(startPoint);
 					addStraightLine(gctx.res, lastStraightLine, reg, gctx);
 					lastStraightLine = null;
 				}
-				// TODO
-				double distLastPnt = gctx.distFromLastPoint(pnt.routeToTarget.get(0).getStartPoint());
-				double gpxDistPnt = gctx.distFromLastPoint(pnt.loc);
-				if (distLastPnt > MINIMUM_POINT_APPROXIMATION / 5 || gpxDistPnt > MINIMUM_POINT_APPROXIMATION / 5) {
-					System.out.println(String.format("????? routePnt - prevPnt = %f, gpxPoint - prevPnt = %f ",
-							distLastPnt, gpxDistPnt));
+				if (gctx.distFromLastPoint(startPoint) > 1) {
+					gctx.routeGapDistance += gctx.distFromLastPoint(startPoint);
+					System.out.println(String.format("????? gap of route point = %f, gap of actual gpxPoint = %f ",
+							gctx.distFromLastPoint(startPoint), gctx.distFromLastPoint(pnt.loc)));
 				}
 				gctx.res.addAll(pnt.routeToTarget);
 				i = pnt.targetInd;
 			} else {
 				// add straight line from i -> i+1 
 				if (lastStraightLine == null) {
-					lastStraightLine = new TIntArrayList();
+					lastStraightLine = new ArrayList<LatLon>();
 					// make smooth connection
 					if(gctx.distFromLastPoint(pnt.loc) > 1) {
-						lastStraightLine.add(MapUtils.get31TileNumberX(gctx.getLastPoint().getLongitude()));
-						lastStraightLine.add(MapUtils.get31TileNumberY(gctx.getLastPoint().getLatitude()));
+						lastStraightLine.add(gctx.getLastPoint());
 					}
 				}
-				lastStraightLine.add(MapUtils.get31TileNumberX(pnt.loc.getLongitude()));
-				lastStraightLine.add(MapUtils.get31TileNumberY(pnt.loc.getLatitude()));
+				lastStraightLine.add(pnt.loc);
 				i++;
 			}
 		}
@@ -285,10 +357,10 @@ public class RoutePlannerFrontEnd {
 			lastStraightLine = null;
 		}
 		// clean turns to recaculate them
-		cleanupResultAndAddTurns(ctx, gctx);
+		cleanupResultAndAddTurns(gctx);
 	}
 
-	private List<GpxPoint> generageGpxPoints(List<LatLon> points, GpxApproximationResult gctx) {
+	private List<GpxPoint> generageGpxPoints(List<LatLon> points, GpxRouteApproximation gctx) {
 		List<GpxPoint> gpxPoints = new ArrayList<>(points.size());
 		GpxPoint prev = null;
 		for(int i = 0; i < points.size(); i++) {
@@ -305,7 +377,7 @@ public class RoutePlannerFrontEnd {
 		return gpxPoints;
 	}
  
-	private void cleanupResultAndAddTurns(final RoutingContext ctx, GpxApproximationResult gctx) {
+	private void cleanupResultAndAddTurns(GpxRouteApproximation gctx) {
 		// cleanup double joints
 		int LOOK_AHEAD = 4;
 		for(int i = 0; i < gctx.res.size(); i++) {
@@ -325,71 +397,119 @@ public class RoutePlannerFrontEnd {
 			r.setTurnType(null);
 			r.setDescription("");
 		}
-		preparation.prepareTurnResults(ctx, gctx.res);
+		preparation.prepareTurnResults(gctx.ctx, gctx.res);
 	}
 
-	private void addStraightLine(List<RouteSegmentResult> res, TIntArrayList lastStraightLine, RouteRegion reg, GpxApproximationResult gctx) {
+	private void addStraightLine(List<RouteSegmentResult> res, List<LatLon> lastStraightLine, RouteRegion reg, GpxRouteApproximation gctx) {
 		RouteDataObject rdo = new RouteDataObject(reg);
-		int l = lastStraightLine.size() / 2;
-		rdo.pointsX = new int[l];
-		rdo.pointsY = new int[l];
-		rdo.types = new int[] { 0 } ;
-		rdo.id = -1;
-		for (int i = 0; i < l; i++) {
-			rdo.pointsX[i] = lastStraightLine.get(i * 2);
-			rdo.pointsY[i] = lastStraightLine.get(i * 2 + 1);
-			if(i > 0) {
-				double dist = MapUtils.squareRootDist31(rdo.pointsX[i], rdo.pointsY[i], rdo.pointsX[i-1], rdo.pointsY[i-1]);
-				gctx.routeDistanceUnmatched += dist; 		
+		if(gctx.SMOOTHEN_POINTS_NO_ROUTE > 0) {
+			simplifyDouglasPeucker(lastStraightLine, gctx.SMOOTHEN_POINTS_NO_ROUTE, 0, lastStraightLine.size() - 1);
+		}
+		int s = lastStraightLine.size();
+		TIntArrayList x = new TIntArrayList(s);
+		TIntArrayList y = new TIntArrayList(s);
+		for (int i = 0; i < s; i++) {
+			if(lastStraightLine.get(i) != null) {
+				LatLon l = lastStraightLine.get(i);
+				int t = x.size() - 1;
+				x.add(MapUtils.get31TileNumberX(l.getLongitude()));
+				y.add(MapUtils.get31TileNumberY(l.getLatitude()));
+				if (t >= 0) {
+					double dist = MapUtils.squareRootDist31(x.get(t), y.get(t), x.get(t + 1), y.get(t + 1));
+					gctx.routeDistanceUnmatched += dist;
+				}
 			}
 		}
+		rdo.pointsX = x.toArray();
+		rdo.pointsY = y.toArray();
+		rdo.types = new int[] { 0 } ;
+		rdo.id = -1;
+		// comment to see road without straight connections
 		res.add(new RouteSegmentResult(rdo, 0, rdo.getPointsLength() - 1));
 	}
 	
-	private boolean initRoutingPoint(GpxPoint start, GpxApproximationResult gctx, RoutingContext ctx, double distThreshold) throws IOException {
+	
+	private void simplifyDouglasPeucker(List<LatLon> l, double eps, int start, int end) {
+		double dmax = -1;
+		int index = -1;
+		LatLon s = l.get(start);
+		LatLon e = l.get(end);
+		for (int i = start + 1; i <= end - 1; i++) {
+			LatLon ip = l.get(i);
+			double dist = MapUtils.getOrthogonalDistance(ip.getLatitude(), ip.getLongitude(), s.getLatitude(), s.getLongitude(), 
+					e.getLatitude(), e.getLongitude());
+			if (dist > dmax) {
+				dmax = dist;
+				index = i;
+			}
+		}		
+		if (dmax >= eps) {
+			simplifyDouglasPeucker(l, eps, start, index);
+			simplifyDouglasPeucker(l, eps, index, end);
+		} else {
+			for(int i = start + 1; i < end; i++ ) {
+				l.set(i, null);
+			}
+		}
+	}
+
+	private boolean initRoutingPoint(GpxPoint start, GpxRouteApproximation gctx, double distThreshold) throws IOException {
 		if (start != null && start.pnt == null) {
 			gctx.routePointsSearched++;
-			RouteSegmentPoint rsp = findRouteSegment(start.loc.getLatitude(), start.loc.getLongitude(), ctx, null, false);
+			RouteSegmentPoint rsp = findRouteSegment(start.loc.getLatitude(), start.loc.getLongitude(), gctx.ctx, null, false);
 			if (MapUtils.getDistance(rsp.getPreciseLatLon(), start.loc) < distThreshold) {
 				start.pnt = rsp;
 			}
+ 		} 
+		if (start != null && start.pnt != null) {
+			return true;
  		}
-		return start != null && start.pnt != null;
+		return false;
 	}
 	
-	private GpxPoint findNextGpxPointWithin(GpxApproximationResult gctx, List<GpxPoint> gpxPoints,
+	private GpxPoint findNextGpxPointWithin(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints,
 			GpxPoint start, double dist) {
-		int targetInd = start.ind + 1;
+		// returns first point with that has slightly more than dist or last point
+		int plus = dist > 0 ? 1 : -1;
+		int targetInd = start.ind + plus;
 		GpxPoint target = null; 
-		while (targetInd < gpxPoints.size()) {
+		while (targetInd < gpxPoints.size() && targetInd >= 0) {
 			target = gpxPoints.get(targetInd);
-			if (target.cumDist - start.cumDist > dist) {
+			if (Math.abs(target.cumDist - start.cumDist) > Math.abs(dist)) {
 				break;
 			}
-			targetInd++;
+			targetInd = targetInd + plus;
 		}
 		return target;
 	}
 
-	private boolean findGpxRouteSegment(final RoutingContext ctx, GpxApproximationResult gctx, List<GpxPoint> gpxPoints,
-			GpxPoint start, GpxPoint target) throws IOException, InterruptedException {
+	private boolean findGpxRouteSegment(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints,
+			GpxPoint start, GpxPoint target, boolean prevRouteCalculated) throws IOException, InterruptedException {
 		List<RouteSegmentResult> res = null;
 		boolean routeIsCorrect = false;
 		if (start.pnt != null && target.pnt != null) {
+			start.pnt = new RouteSegmentPoint(start.pnt);
+			target.pnt = new RouteSegmentPoint(target.pnt);
 			gctx.routeDistCalculations += (target.cumDist - start.cumDist);
 			gctx.routeCalculations++;
-			res = searchRouteInternalPrepare(ctx, start.pnt, target.pnt, null);
+			res = searchRouteInternalPrepare(gctx.ctx, start.pnt, target.pnt, null);
 			routeIsCorrect = res != null && !res.isEmpty();
-			if (routeIsCorrect) {
-				makeStartEndPointsPrecise(res, start.pnt.getPreciseLatLon(), target.pnt.getPreciseLatLon(), null);
-			}
 			for (int k = start.ind + 1; routeIsCorrect && k < target.ind; k++) {
 				GpxPoint ipoint = gpxPoints.get(k);
-				if (!pointCloseEnough(ipoint, res)) {
+				if (!pointCloseEnough(gctx, ipoint, res)) {
 					routeIsCorrect = false;
 				}
 			}
 			if (routeIsCorrect) {
+				// correct start point though don't change end point
+				if (!prevRouteCalculated) {
+					// make first position precise
+					makeSegmentPointPrecise(res.get(0), start.loc, true);
+				} else {
+					assert res.get(0).getObject().getId() == start.pnt.getRoad().getId();
+					// start point could shift to +-1 due to direction
+					res.get(0).setStartPointIndex(start.pnt.getSegmentStart());
+				}
 				start.routeToTarget = res;
 				start.targetInd = target.ind;
 			}
@@ -397,10 +517,11 @@ public class RoutePlannerFrontEnd {
 		return routeIsCorrect;
 	}
 
-	private boolean pointCloseEnough(GpxPoint ipoint, List<RouteSegmentResult> res) {
+	private boolean pointCloseEnough(GpxRouteApproximation gctx, GpxPoint ipoint, List<RouteSegmentResult> res) {
 		int px = MapUtils.get31TileNumberX(ipoint.loc.getLongitude());
 		int py = MapUtils.get31TileNumberY(ipoint.loc.getLatitude());
-		double SQR = MINIMUM_POINT_APPROXIMATION * MINIMUM_POINT_APPROXIMATION * 4;
+		double SQR = gctx.MINIMUM_POINT_APPROXIMATION;
+		SQR = SQR * SQR;
 		for (RouteSegmentResult sr : res) {
 			int start = sr.getStartPointIndex();
 			int end = sr.getEndPointIndex();
@@ -525,8 +646,8 @@ public class RoutePlannerFrontEnd {
 
 	protected void makeStartEndPointsPrecise(List<RouteSegmentResult> res, LatLon start, LatLon end, List<LatLon> intermediates) {
 		if (res.size() > 0) {
-			updateResult(res.get(0), start, true);
-			updateResult(res.get(res.size() - 1), end, false);
+			makeSegmentPointPrecise(res.get(0), start, true);
+			makeSegmentPointPrecise(res.get(res.size() - 1), end, false);
 		}
 	}
 
@@ -540,7 +661,7 @@ public class RoutePlannerFrontEnd {
 		return currentsDist;
 	}
 
-	private void updateResult(RouteSegmentResult routeSegmentResult, LatLon point, boolean st) {
+	private void makeSegmentPointPrecise(RouteSegmentResult routeSegmentResult, LatLon point, boolean st) {
 		int px = MapUtils.get31TileNumberX(point.getLongitude());
 		int py = MapUtils.get31TileNumberY(point.getLatitude());
 		int pind = st ? routeSegmentResult.getStartPointIndex() : routeSegmentResult.getEndPointIndex();
