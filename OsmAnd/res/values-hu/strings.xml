@@ -591,7 +591,7 @@
     <string name="choose_available_region">Régió kijelölése listából</string>
     <string name="choose_intersected_street">Keresztező utca kijelölése</string>
     <string name="Closest_Amenities">Legközelebbi hasznos létesítmények</string>
-    <string name="app_mode_default">Alapértelmezett</string>
+    <string name="app_mode_default">Térképböngészés</string>
     <string name="app_mode_car">Vezetés</string>
     <string name="app_mode_bicycle">Kerékpározás</string>
     <string name="app_mode_pedestrian">Gyaloglás</string>
@@ -3732,4 +3732,28 @@ Hosszúság: %2$s</string>
     <string name="routing_attr_length_description">Adja meg az útvonalakon a járművekre vonatkozó hosszkorlátozást.</string>
     <string name="routing_attr_length_name">Hosszkorlátozás</string>
     <string name="speed_cameras_removed_descr">Az eszköz nem tartalmaz traffipax adatokat.</string>
+    <string name="replace_all_desc">Az jelenlegi elemek lecserélésre kerülnek a fájlban lévőkre</string>
+    <string name="keep_both_desc">Az importál elemek előtaggal kerünek hozzáadásra</string>
+    <string name="import_duplicates_description">Az OsmAnd már tartalmaz az importárttal megegyező nevű elemeket.
+\n
+\nVálasszon egy műveletet.</string>
+    <string name="import_duplicates_title">Néhány elem már létezik</string>
+    <string name="plugin_disabled_descr">Ez a bővítmény egy különálló alkalmazás, külön el kell távolítania, amennyiben a továbbiakban nem tervezi használni.
+\n
+\nA bővítmény a készüléken marad az OsmAnd eltávolítása után.</string>
+    <string name="routing_profile_direct_to">Légvonalban</string>
+    <string name="reset_to_default_category_button_promo">Az alapértelmezés visszaállítása a sorrendet visszaállítja a telepítés utáni alapértelmezett állapotba.</string>
+    <string name="accessibility_mode_disabled">A kisegítő lehetőségek a készülékén az Android rendszerben ki vannak kapcsolva.</string>
+    <string name="live_monitoring_time_buffer">Idő puffer</string>
+    <string name="live_monitoring_tracking_interval">Naplózási időköz</string>
+    <string name="live_monitoring_adress">Webcím</string>
+    <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, pontosság={3}, magasság={4}, sebesség={5}, irány={6}.</string>
+    <string name="monitoring_notification">Értesítés</string>
+    <string name="monitoring_min_speed">Legkisebb sebesség</string>
+    <string name="monitoring_min_accuracy">Legkisebb pontosság</string>
+    <string name="monitoring_min_distance">Legkisebb elmozdulás</string>
+    <string name="reset_plugin_to_default">Bővítménybeállítások visszaállítása alapértelmezettre</string>
+    <string name="use_volume_buttons_as_zoom_descr">Engedélyezésével a térkép nagyítási szintje az eszköz hangerőgombjaival állítható.</string>
+    <string name="use_volume_buttons_as_zoom">Hangerőgombok használata nagyításhoz</string>
+    <string name="app_mode_inline_skates">Görkorcsolya</string>
 </resources>

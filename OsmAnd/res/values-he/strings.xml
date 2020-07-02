@@ -3778,7 +3778,7 @@
     <string name="width_limit_description">נא לציין את רוחב כלי הרכב שלך, יתכן שחלות מגבלות מעבר על כלי רכב רחבים.</string>
     <string name="height_limit_description">נא לציין את גובה כלי הרכב שלך, יתכן שחלות מגבלות מעבר על כלי רכב גבוהים.</string>
     <string name="weight_limit_description">נא לציין את משקל כלי הרכב שלך, יתכן שחלות מגבלות מעבר על כלי רכב כבדים.</string>
-    <string name="shared_string_tones">גוונים</string>
+    <string name="shared_string_tones">טונות</string>
     <string name="shared_string_meters">מטרים</string>
     <string name="details_dialog_decr">הצגה או הסתרה של פירוט נוסף על המפה</string>
     <string name="shared_string_night_map">מפת לילה</string>
@@ -3815,4 +3815,6 @@
     <string name="routing_attr_length_description">נא לציין את אורך כלי הרכב כדי לבדוק מסלולים מורשים.</string>
     <string name="routing_attr_length_name">מגבלת אורך</string>
     <string name="speed_cameras_removed_descr">למכשיר הזה אין מצלמות מהירות.</string>
+    <string name="use_volume_buttons_as_zoom_descr">מאפשר לשלוח ברמת התקריב של המפה עם כפתורי עצמת השמע של המכשיר.</string>
+    <string name="use_volume_buttons_as_zoom">כפתורי עצמת שמע כתקריב</string>
 </resources>

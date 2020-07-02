@@ -83,6 +83,14 @@
 		android:title="@string/shared_string_other" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="use_volume_buttons_as_zoom"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/use_volume_buttons_as_zoom"
+		tools:icon="@drawable/ic_action_zoom_volume_buttons" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="use_kalman_filter_compass"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_off"

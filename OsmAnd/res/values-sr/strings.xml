@@ -1382,7 +1382,7 @@
     <string name="shared_string_actions">Радње</string>
     <string name="shared_string_marker">Ознака</string>
     <string name="empty_state_osm_edits">Стварајте или мењајте предмете ОСМ-а</string>
-    <string name="empty_state_osm_edits_descr">Стварајте или мењајте ОСМ тачке од интереса, отворите или коментаришите на ОСМ белешке и доприносите снимањем GPX фајлова.</string>
+    <string name="empty_state_osm_edits_descr">Стварајте или мењајте ОСМ тачке од интереса, отворите или коментаришите ОСМ белешке и доприносите снимањем GPX фајлова.</string>
     <string name="shared_string_deleted">Избрисано</string>
     <string name="shared_string_edited">Уређено</string>
     <string name="shared_string_added">Додато</string>
@@ -3266,7 +3266,7 @@
     <string name="map_during_navigation_info">Карта за време навођења</string>
     <string name="map_during_navigation">Карта за време навођења</string>
     <string name="shared_string_other">Остало</string>
-    <string name="vehicle_parameters_descr">Тежина, висина, брзина</string>
+    <string name="vehicle_parameters_descr">Тежина, висина, дужина, брзина</string>
     <string name="vehicle_parameters">Параметри возика</string>
     <string name="voice_announces_info">Гласовна обавештења су дешавају само за време навођења.</string>
     <string name="voice_announces_descr">Инструкције и обавештења приликом навођења</string>
@@ -3452,7 +3452,7 @@
     <string name="logcat_buffer_descr">Проверите и поделите детаљне записе апликације</string>
     <string name="search_offline_geo_error">Не могу да расчланим гео намеру ’%s’.</string>
     <string name="permission_is_required">Потребне су дозволе за коришћење ове опције.</string>
-    <string name="monitoring_min_speed_descr">Ово је филтер за одсецање малих брзина који не бележи тачке испод одређене брзине. Овим снимљене стазе изгледају.</string>
+    <string name="monitoring_min_speed_descr">Ово је филтер за одсецање малих брзина који не бележи тачке испод одређене брзине. Овим снимљене стазе изгледају глаткије када се гледају на карти.</string>
     <string name="monitoring_min_speed_descr_side_effect">Нуспојаве: Вашим стазама ће недостајати све секције где критеријум минимума брзине није био испуњен (нпр. где сте гурали бицикл узбрдо). Такође, неће бити информација о периодима мировања, као што су прављење пауза. Ово може да има ефекта на анализу или пост-процесирање, као што је одређивање укупне дужине пута, времена кретања, или просечне брзине.</string>
     <string name="monitoring_min_speed_descr_recommendation">Препорука: Покушајте прво да користите детектор кретања преко филтера минималног помераја (B) прво, пошто може дати боље резултате и изгубићете мање података. Ако Ваше стазе остану пуне шума при малим брзинама, пробајте са не-нултим вредностима овде. Пазите да неки типови мерења неће уопште давати мерења брзине (неки методи преко мреже) у ком случају нећете снимити ништа.</string>
     <string name="monitoring_min_speed_descr_remark">Опаска: провера брзине &gt; 0: већина GPS чипова пријављује вредност брзине само ако алгоритам примети да сте у покрету и ништа уколико нисте. Коришћење поставке &gt;0 у овом филтеру је заправо коришћење сензора покрета из GPS чипа. Чак иако се не филтрира овде за време снимања, ми и даље користимо ову функционалност у нашој GPX анализи да одредимо пређену удаљеност, тј. вредност коју приказујемо у том пољу је пређена удаљеност за време кретања.</string>
@@ -3482,8 +3482,8 @@
     <string name="shared_string_available">Доступно</string>
     <string name="add_custom_category">Додај произвољну категорију</string>
     <string name="rendering_attr_streetLightingNight_name">Прикажи само ноћу</string>
-    <string name="plugin_prefs_reset_successful">Све поставке додатка враћене на подразумевано стање.</string>
-    <string name="profile_prefs_reset_successful">Све поставке профила враћене на подразумевано стање.</string>
+    <string name="plugin_prefs_reset_successful">Све поставке додатка враћене на подразумевано.</string>
+    <string name="profile_prefs_reset_successful">Све поставке профила враћене на подразумевано.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Сунце залази у %1$s</string>
     <string name="sunrise_at">Сунце излази у %1$s</string>
@@ -3502,7 +3502,7 @@
     <string name="shared_string_menu">Мени</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_include_data">Укључи додатне податке</string>
-    <string name="import_profile_dialog_description">Увезени профил садржи додатне податке. Кликните на Увоз да увезете да увезете само профилне податке или одаберите које додатне податке увести.</string>
+    <string name="import_profile_dialog_description">Увезени профил садржи додатне податке. Кликните на Увоз да увезете само профилне податке или одаберите додатне податке.</string>
     <string name="export_profile_dialog_description">Поред профила, можете одабрати додатне податке за извоз.</string>
     <string name="index_name_antarctica">Антарктик</string>
     <string name="create_custom_categories_list_promo">Можете додати произвољне категорије, сакрити категорије које су Вам сувишне и променити им редослед у списку. Списак се може увести и извести са профилима.</string>
@@ -3536,7 +3536,7 @@
 \nДодатак ће остати на уређају и после уклањања OsmAnd апликације.</string>
     <string name="shared_string_routing">Рутирање</string>
     <string name="shared_string_app_default_w_val">Подразумевано у апликацију (%s)</string>
-    <string name="no_recalculation_setting">Искључи прерачунавање</string>
+    <string name="no_recalculation_setting">Без прерачунавања</string>
     <string name="route_recalculation_dist_title">Минимална удаљеност за прерачунавање пута</string>
     <string name="route_recalculation_dist_descr">Пут ће бити прерачунат ако је удаљеност до пута већа од одабраног параметра</string>
     <string name="profile_type_custom_string">Произвољни профил</string>
@@ -3565,7 +3565,7 @@
     <string name="restore_all_profile_settings">Поврати све поставке профила\?</string>
     <string name="saving_new_profile">Чувам нови профил</string>
     <string name="profile_backup_failed">Не могу да направим резервну копију профила.</string>
-    <string name="quick_action_show_hide_terrain">Прикажи/сакриј терен</string>
+    <string name="quick_action_show_hide_terrain">Прикажи / сакриј терен</string>
     <string name="quick_action_terrain_hide">Сакриј терен</string>
     <string name="quick_action_terrain_show">Прикажи терен</string>
     <string name="quick_action_terrain_descr">Дугме да прикаже или сакрите слој терена на карти.</string>
@@ -3577,11 +3577,11 @@
     <string name="shared_string_octagon">Октагон</string>
     <string name="shared_string_square">Квадрат</string>
     <string name="shared_string_min">Мин</string>
-    <string name="replace_point_descr">Замени другу тачку са овом</string>
+    <string name="replace_point_descr">Замени другу тачку са овом.</string>
     <string name="app_mode_ski_snowmobile">Сноумобил</string>
     <string name="custom_osmand_plugin">Произвољни OsmAnd додатак</string>
-    <string name="settings_item_read_error">Не могу да читам %1$s.</string>
-    <string name="settings_item_import_error">Не могу да увезем %1$s.</string>
+    <string name="settings_item_read_error">Не могу да читам из „%1$s”.</string>
+    <string name="settings_item_import_error">Не могу да увезем из „%1$s”.</string>
     <string name="settings_item_write_error">Не могу да пишем %1$s.</string>
     <string name="shared_string_languages">Језици</string>
     <string name="shared_string_language">Језик</string>
@@ -3660,4 +3660,96 @@
     <string name="vessel_height_warning">Можете подесити висину пловила да избегнете ниске мостове. Имајте на уму да, уколико мост може да се помера, користићемо његову висину када је отворен.</string>
     <string name="vessel_height_limit_description">Подесите висину пловила да избегнете ниске мостове. Имајте на уму да, уколико мост може да се помера, користићемо његову висину када је отворен.</string>
     <string name="vessel_width_limit_description">Подесите ширину пловила и избегните уске мостове</string>
+    <string name="use_volume_buttons_as_zoom_descr">Укључите да омогућите контролу нивоа увећања са дугмићима за јачину звука.</string>
+    <string name="use_volume_buttons_as_zoom">Дугмићи за јачину звука за зумирање</string>
+    <string name="shared_string_uninstall_and_restart">"Деинсталирај  и поново покрени"</string>
+    <string name="speed_cameras_removed_descr">Овај уређај нема радаре.</string>
+    <string name="app_mode_inline_skates">Ролери</string>
+    <string name="speed_cameras_restart_descr">Поновно покретање је потребно да се потпуно избришу подаци о радарима.</string>
+    <string name="item_deleted">%1$s обрисано</string>
+    <string name="routing_attr_length_name">Лимит дужине</string>
+    <string name="shared_string_bearing">Курс</string>
+    <string name="quick_action_showhide_mapillary_descr">Прикажи или сакриј Mapillary слој на карти.</string>
+    <string name="routing_attr_length_description">Одаберите дужину возика која је дозвољена на путевима.</string>
+    <string name="speed_cameras_legal_descr">У неким државама или областима, коришћење апликација за обавештавање о радарима на путу је забрањено законом.
+\n
+\nМорате направити избор овде, у зависности од закона Ваше државе.
+\n
+\nОдаберите %1$s и примажете обавештења и упозорења о радарима и камерама за брзину.
+\n
+\nОдаберите %2$s. Сви подаци везани за радере: упозорења, обавештења, тачке од интереса ће бити обрисане док се OsmAnd поново не инсталира.</string>
+    <string name="shared_string_legal">Правно</string>
+    <string name="screen_timeout_descr">Ако је „%1$s” укључен, време активности ће зависити од тога.</string>
+    <string name="uninstall_speed_cameras">Избриши радаре</string>
+    <string name="speed_camera_pois">Радарске тачке од интереса</string>
+    <string name="keep_active">Држи активним</string>
+    <string name="shared_string_uninstall">Избриши</string>
+    <string name="speed_cameras_alert">Упозорења за радаре су законом забрањене у неким државама.</string>
+    <string name="quick_action_showhide_mapillary_title">Прикажи/сакриј Mapillary</string>
+    <string name="quick_action_mapillary_hide">Сакриј Mapillary</string>
+    <string name="quick_action_mapillary_show">Прикажи Mapillary</string>
+    <string name="lang_yo">Јоруба</string>
+    <string name="lang_war">Варајски</string>
+    <string name="lang_tg">Таџички</string>
+    <string name="lang_uz">Узбечки</string>
+    <string name="lang_ur">Урду</string>
+    <string name="lang_tt">Татарски</string>
+    <string name="lang_sco">Шкотски</string>
+    <string name="lang_nap">Наполитански</string>
+    <string name="lang_scn">Сицилијански</string>
+    <string name="lang_pnb">Панџаби</string>
+    <string name="lang_ne">Непалски</string>
+    <string name="lang_my">Бурмански</string>
+    <string name="lang_mn">Монголски</string>
+    <string name="lang_min">Минангкабајски</string>
+    <string name="lang_mg">Малгашки</string>
+    <string name="lang_ky">Киргиски</string>
+    <string name="lang_kk">Казашки</string>
+    <string name="lang_jv">Јавански</string>
+    <string name="lang_gu">Гуџарати</string>
+    <string name="lang_cv">Чувашки</string>
+    <string name="lang_ce">Чеченски</string>
+    <string name="lang_bar">Баварски</string>
+    <string name="lang_ba">Башкирски</string>
+    <string name="lang_an">Арагонски</string>
+    <string name="lang_lmo">Ломбардијски</string>
+    <string name="custom_color">Произвољна боја</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="search_poi_types">Претрага типова тачака од интереса</string>
+    <string name="search_poi_types_descr">Комбинујте типове тачака од интереса из различитих категорија. Кликните прекидач да одабере све, кликните на леву страну да одаберете категорију.</string>
+    <string name="map_markers_item">Маркери на карти</string>
+    <string name="shared_string_terrain">Терен</string>
+    <string name="shared_string_transparency">Провидност</string>
+    <string name="shared_string_zoom_levels">Нивои увећања</string>
+    <string name="shared_string_legend">Легенда</string>
+    <string name="shared_string_import_complete">Увоз завршен</string>
+    <string name="items_added">Додате ставке</string>
+    <string name="shared_string_importing">Увозим</string>
+    <string name="importing_from">Увозим податке из %1$s</string>
+    <string name="clear_recorded_data_warning">Да ли сте сигурни да желите да очистите снимљене податке\?</string>
+    <string name="recalculate_route_in_deviation">Прерачунај пут у случају одступања</string>
+    <string name="select_distance_route_will_recalc">Одаберите удаљеност после које се пут прерачунава.</string>
+    <string name="recalculate_route_distance_promo">Пут ће бити прерачунат уколико је удаљеност тренутне позиције од пута већа од одабране вредности.</string>
+    <string name="n_items_of_z">%1$s од %2$s</string>
+    <string name="ui_customization">Прилагођавање корисничког интерфејса</string>
+    <string name="shared_string_drawer">Фиока</string>
+    <string name="reorder_or_hide_from">Преуреди или сакриј ставке са %1$s.</string>
+    <string name="shared_string_divider">Разделник</string>
+    <string name="divider_descr">Елементи испод ове тачке су одвојени разделником.</string>
+    <string name="shared_string_hidden">Сакривена</string>
+    <string name="hidden_items_descr">Иако су ове ставке сакривене са главног менија, опције или додаци које они представљају и даље раде.</string>
+    <string name="reset_items_descr">Сакривање поставки их ресетује на оригинално стање.</string>
+    <string name="main_actions_descr">Има само четири дугмета.</string>
+    <string name="main_actions">Главне радње</string>
+    <string name="additional_actions_descr">Можете приступити овим радњама кликтањем на дугме „%1$s”.</string>
+    <string name="move_inside_category">Можете померати ставке само унутар ове категорије.</string>
+    <string name="developer_plugin">Додатак за програмере</string>
+    <string name="app_mode_ski_touring">Ски туринг</string>
+    <string name="shared_string_items">Ставке</string>
+    <string name="changes_applied_to_profile">Измене примењене на ’%1$s’ профил.</string>
+    <string name="wiki_menu_download_descr">За приказ Википедијиних тачака од интереса су потребне додатне карте.</string>
+    <string name="select_wikipedia_article_langs">Одаберите језик за Википедијине чланке на карти. Пребаците на било који други доступни језик док читате чланак.</string>
+    <string name="some_articles_may_not_available_in_lang">Неки чланци са Википедија су можда доступни на Вашем језику.</string>
+    <string name="lang_zhyue">Кантонски</string>
+    <string name="lang_zhminnan">Јужномински</string>
 </resources>

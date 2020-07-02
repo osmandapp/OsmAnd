@@ -3271,7 +3271,7 @@
     <string name="copy_from_other_profile">Còpia dae un\'àteru profilu</string>
     <string name="map_during_navigation_info">Mapa durante sa navigatzione</string>
     <string name="map_during_navigation">Mapa durante sa navigatzione</string>
-    <string name="vehicle_parameters_descr">Pesu, artària, lestresa</string>
+    <string name="vehicle_parameters_descr">Pesu, artària, longària, lestresa</string>
     <string name="vehicle_parameters">Paràmetros de su veìculu</string>
     <string name="voice_announces_info">Sos annùntzios vocales benint riproduidos petzi durante sa navigatzione.</string>
     <string name="voice_announces_descr">Istrutziones e annùntzios de navigatzione</string>
@@ -3805,4 +3805,10 @@
     <string name="item_deleted">%1$s iscantzelladu</string>
     <string name="speed_cameras_restart_descr">Depes torrare a allùghere pro iscantzellare de su totu sos datos de sos autovelox.</string>
     <string name="shared_string_uninstall_and_restart">Disinstalla e torra a allùghere</string>
+    <string name="routing_attr_length_description">Dillinda sa longària de su veìculu pro tènnere su permissu pro sas àndalas.</string>
+    <string name="routing_attr_length_name">Lìmite de longària</string>
+    <string name="speed_cameras_removed_descr">Custu dispositivu non tenet autovelox.</string>
+    <string name="app_mode_inline_skates">Pàtinos in lìnia</string>
+    <string name="use_volume_buttons_as_zoom_descr">Abìlita pro controllare su livellu de ismanniamentu cun sos butones de su volume de su dispositivu.</string>
+    <string name="use_volume_buttons_as_zoom">Butones de su volume pro s\'ismanniamentu</string>
 </resources>

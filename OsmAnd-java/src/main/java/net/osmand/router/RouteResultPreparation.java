@@ -175,6 +175,11 @@ public class RouteResultPreparation {
 		splitRoadsAndAttachRoadSegments(ctx, result, recalculation);
 		calculateTimeSpeed(ctx, result);
 		
+		prepareTurnResults(ctx, result);
+		return result;
+	}
+
+	public void prepareTurnResults(RoutingContext ctx, List<RouteSegmentResult> result) {
 		for (int i = 0; i < result.size(); i ++) {
 			TurnType turnType = getTurnInfo(result, i, ctx.leftSideNavigation);
 			result.get(i).setTurnType(turnType);
@@ -184,7 +189,6 @@ public class RouteResultPreparation {
 		ignorePrecedingStraightsOnSameIntersection(ctx.leftSideNavigation, result);
 		justifyUTurns(ctx.leftSideNavigation, result);
 		addTurnInfoDescriptions(result);
-		return result;
 	}
 
 	protected void ignorePrecedingStraightsOnSameIntersection(boolean leftside, List<RouteSegmentResult> result) {
@@ -283,11 +287,12 @@ public class RouteResultPreparation {
 						float height = heightDistanceArray[heightIndex];
 						if (prevHeight != -99999.0f) {
 							float heightDiff = height - prevHeight;
-							if (heightDiff > 0) {  //ascent only
-								distOnRoadToPass += heightDiff * 6.0f;  //Naismith's rule: add 1 hour per every 600m of ascent
+							if (heightDiff > 0) { // ascent only
+								distOnRoadToPass += heightDiff * 6.0f; // Naismith's rule: add 1 hour per every 600m of
+																		// ascent
 							}
 						}
-					prevHeight = height;
+						prevHeight = height;
 					}
 				}
 			}
@@ -359,7 +364,7 @@ public class RouteResultPreparation {
 
 	private void checkAndInitRouteRegion(RoutingContext ctx, RouteDataObject road) throws IOException {
 		BinaryMapIndexReader reader = ctx.reverseMap.get(road.region);
-		if(reader != null) {
+		if (reader != null) {
 			reader.initRouteRegion(road.region);
 		}
 	}

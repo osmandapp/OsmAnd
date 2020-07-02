@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="use_volume_buttons_as_zoom">Volume buttons as zoom</string>
+    <string name="use_volume_buttons_as_zoom_descr">Enable to control the map zoom level with device volume buttons.</string>
     <string name="quick_action_remove_next_destination">Delete next destination point</string>
     <string name="app_mode_inline_skates">Inline skates</string>
     <string name="speed_cameras_removed_descr">This device doesn\'t have speed cameras.</string>

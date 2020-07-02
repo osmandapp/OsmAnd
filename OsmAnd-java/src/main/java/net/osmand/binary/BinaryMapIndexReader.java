@@ -2655,6 +2655,7 @@ public class BinaryMapIndexReader {
 		}
 	}
 
+	
 	public TLongObjectHashMap<IncompleteTransportRoute> getIncompleteTransportRoutes() throws InvalidProtocolBufferException, IOException {
 		if (incompleteTransportRoutes == null) {
 			incompleteTransportRoutes = new TLongObjectHashMap<>();
@@ -2662,13 +2663,12 @@ public class BinaryMapIndexReader {
 				if (ti.incompleteRoutesLength > 0) {
 					codedIS.seek(ti.incompleteRoutesOffset);
 					int oldLimit = codedIS.pushLimit(ti.incompleteRoutesLength);
-					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes);
+					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.filePointer);
 					codedIS.popLimit(oldLimit);
 				}
 			}
 		}
 		return incompleteTransportRoutes;
 	}
-
 
 }

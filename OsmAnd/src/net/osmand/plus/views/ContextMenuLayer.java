@@ -2,9 +2,7 @@ package net.osmand.plus.views;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -225,16 +223,17 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 			}
 		}
-		float scale = 1f;
+		float textScale = 1f;
 		if (!pressedLatLonSmall.isEmpty() || !pressedLatLonFull.isEmpty()) {
-			scale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
+			textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
 		}
 		for (LatLon latLon : pressedLatLonSmall.keySet()) {
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-			Bitmap pressedBitmapSmall = getBackground(pressedLatLonSmall.get(latLon), true);
+			BackgroundType background = pressedLatLonSmall.get(latLon);
+			Bitmap pressedBitmapSmall = background.getTouchBackground(activity, true);
 			Rect destRect = getIconDestinationRect(
-					x, y, pressedBitmapSmall.getWidth(), pressedBitmapSmall.getHeight(), scale);
+					x, y, pressedBitmapSmall.getWidth(), pressedBitmapSmall.getHeight(), textScale);
 			canvas.drawBitmap(pressedBitmapSmall, null, destRect, paint);
 		}
 		for (LatLon latLon : pressedLatLonFull.keySet()) {
@@ -242,10 +241,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 
 			BackgroundType background = pressedLatLonFull.get(latLon);
-			Bitmap pressedBitmap = getBackground(background, false);
-			int offsetY = BackgroundType.COMMENT.equals(background) ? pressedBitmap.getHeight() / 2 : 0;
+			Bitmap pressedBitmap = background.getTouchBackground(activity, false);
+			int offsetY = background.getOffsetY(activity, textScale);
 			Rect destRect = getIconDestinationRect(
-					x, y - offsetY, pressedBitmap.getWidth(), pressedBitmap.getHeight(), scale);
+					x, y - offsetY, pressedBitmap.getWidth(), pressedBitmap.getHeight(), textScale);
 			canvas.drawBitmap(pressedBitmap, null, destRect, paint);
 		}
 
@@ -269,15 +268,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight());
 			contextMarker.draw(canvas);
 		}
-	}
-
-	private Bitmap getBackground(BackgroundType backgroundType, boolean isSmall) {
-		Context ctx = view.getContext();
-		Resources res = view.getResources();
-		String iconName = res.getResourceEntryName(backgroundType.getIconId());
-		String suffix = isSmall ? "_small" : "";
-		return BitmapFactory.decodeResource(res, res.getIdentifier("ic_" + iconName + "_center" + suffix,
-				"drawable", ctx.getPackageName()));
 	}
 
 	public void setSelectOnMap(CallbackWithObject<LatLon> selectOnMap) {
@@ -927,9 +917,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 							backgroundType = BackgroundType.getByTypeName(
 									((GPXUtilities.WptPt) o).getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
 						}
-						if (lt.isPresentInFullObjects(latLon) && !pressedLatLonFull.keySet().contains(latLon)) {
+						if (lt.isPresentInFullObjects(latLon) && !pressedLatLonFull.containsKey(latLon)) {
 							pressedLatLonFull.put(latLon, backgroundType);
-						} else if (lt.isPresentInSmallObjects(latLon) && !pressedLatLonSmall.keySet().contains(latLon)) {
+						} else if (lt.isPresentInSmallObjects(latLon) && !pressedLatLonSmall.containsKey(latLon)) {
 							pressedLatLonSmall.put(latLon, backgroundType);
 						}
 					}

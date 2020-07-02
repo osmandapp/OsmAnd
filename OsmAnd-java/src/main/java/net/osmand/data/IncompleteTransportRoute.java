@@ -13,7 +13,11 @@ public class IncompleteTransportRoute {
 	}
 	
 	public void setNextLinkedRoute(IncompleteTransportRoute nextLinkedRoute) {
-		this.nextLinkedRoute = nextLinkedRoute;
+		if (this.nextLinkedRoute == null) {
+			this.nextLinkedRoute = nextLinkedRoute;
+		} else {
+			this.nextLinkedRoute.setNextLinkedRoute(nextLinkedRoute);
+		}
 	}
 	
 	public long getRouteId() {

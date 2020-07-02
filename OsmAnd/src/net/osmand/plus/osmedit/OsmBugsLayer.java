@@ -155,10 +155,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 						iconId = R.drawable.mx_special_symbol_check_mark;
 						backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 					}
+					BackgroundType backgroundType = BackgroundType.COMMENT;
 					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
 							ContextCompat.getColor(activity, backgroundColorRes), true, false, iconId,
-							BackgroundType.COMMENT);
-					int offsetY = pointImageDrawable.getIntrinsicHeight() / 2;
+							backgroundType);
+					int offsetY = backgroundType.getOffsetY(activity, textScale);
 					pointImageDrawable.drawPoint(canvas, x, y - offsetY, textScale, false);
 				}
 				this.fullObjectsLatLon = fullObjectsLatLon;

@@ -3789,4 +3789,6 @@
     <string name="routing_attr_length_name">Limite de longueur</string>
     <string name="speed_cameras_removed_descr">Cet appareil n\'a pas de radars.</string>
     <string name="app_mode_inline_skates">Patins à roulettes en ligne</string>
+    <string name="use_volume_buttons_as_zoom">Zoomer avec les boutons de volume</string>
+    <string name="use_volume_buttons_as_zoom_descr">Activer pour contrôler le niveau de zoom de la carte avec les boutons de réglage du volume sonore.</string>
 </resources>

@@ -1533,7 +1533,7 @@
     <string name="specified_directiory_not_writeable">Не вдалося створити мапи у вказаній теці</string>
     <string name="copying_osmand_file_failed">Не вдалося перемістити файли</string>
     <string name="storage_directory_external">Зовнішнє сховище</string>
-    <string name="storage_directory_multiuser">Толочне сховище</string>
+    <string name="storage_directory_multiuser">Багатокористувацьке сховище</string>
     <string name="storage_directory_internal_app">Внутрішня пам’ять застосунку</string>
     <string name="storage_directory_manual">Вказано вручну</string>
     <string name="storage_directory_default">Внутрішня пам’ять</string>
@@ -3802,4 +3802,6 @@
     <string name="routing_attr_length_name">Обмеження довжини</string>
     <string name="speed_cameras_removed_descr">На цьому пристрої немає камер контролю швидкості.</string>
     <string name="app_mode_inline_skates">Роликові ковзани</string>
+    <string name="use_volume_buttons_as_zoom_descr">Увімкнути для зміни масштабу мапи кнопками гучності пристрою.</string>
+    <string name="use_volume_buttons_as_zoom">Масштабування кнопками гучності</string>
 </resources>

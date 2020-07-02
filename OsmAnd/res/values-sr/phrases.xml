@@ -1538,7 +1538,7 @@
     <string name="poi_research">Истраживачка канцеларија</string>
     <string name="poi_newspaper">Новинарска канцеларија</string>
     <string name="poi_architect">Канцеларија архитекта</string>
-    <string name="poi_bookmaker">Штампарија</string>
+    <string name="poi_bookmaker">Кладионица</string>
     <string name="poi_office_religion">Канцеларија за религије</string>
     <string name="poi_association">Канцеларија удружења</string>
     <string name="poi_financial">Финансијска канцеларија</string>
@@ -2765,4 +2765,11 @@
     <string name="poi_ref">Реф.</string>
     <string name="poi_tunnel_ref">Реф. тунела</string>
     <string name="poi_bridge_ref">Реф. моста</string>
+    <string name="poi_books_academic">Академске</string>
+    <string name="poi_books_children">Дечије</string>
+    <string name="poi_books_religion">Религијске</string>
+    <string name="poi_books_antiquarian">Антикварница</string>
+    <string name="poi_books_comic">Стрип</string>
+    <string name="poi_checkpoint_type_notebook">Свеска</string>
+    <string name="poi_public_bookcase_type_shelf">Тип: полица</string>
 </resources>

@@ -516,6 +516,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	private void putCache(RouteDataObjectAttribute attr, RouteRegion reg, int[] types, Float val, boolean extra) {
+//		TIMER -= System.nanoTime();
 		Map<RouteRegion, Map<IntHolder, Float>> ch = evalCache[attr.ordinal()];
 		if (USE_CACHE) {
 			Map<IntHolder, Float> rM = ch.get(reg);
@@ -525,7 +526,7 @@ public class GeneralRouter implements VehicleRouter {
 			}
 			rM.put(new IntHolder(types, extra), val);
 		}
-		TIMER += System.nanoTime();
+//		TIMER += System.nanoTime();
 	}
 	
 	class IntHolder {

@@ -865,7 +865,6 @@ public class TransportRoutePlanner {
 							lst.add(segment);
 						}
 					} else {
-						// MapUtils.getDistance(s.getLocation(), route.getForwardStops().get(158).getLocation());
 						System.err.println(String.format("Routing error: missing stop '%s' in route '%s' id: %d",
 								s.toString(), route.getRef(), route.getId() / 2));
 					}
