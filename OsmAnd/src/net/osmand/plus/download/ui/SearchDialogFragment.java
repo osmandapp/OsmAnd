@@ -508,7 +508,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 								for (IndexItem item : g.getIndividualResources()) {
 									for (String fileTypeTag : downloadTypesToShow) {
 										DownloadActivityType type = DownloadActivityType.getIndexType(fileTypeTag);
-										if (type != null && type.equals(item.getType())) {
+										if (type != null && type == item.getType()) {
 											filter.add(item);
 										}
 									}

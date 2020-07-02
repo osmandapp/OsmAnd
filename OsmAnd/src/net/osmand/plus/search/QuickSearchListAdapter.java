@@ -30,6 +30,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
+import net.osmand.plus.search.listitems.QuickSearchFreeBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
@@ -207,12 +208,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		LinearLayout view;
 		if (type == QuickSearchListItemType.BANNER) {
 			final QuickSearchBannerListItem banner = (QuickSearchBannerListItem) listItem;
-			boolean newView;
 			if (convertView == null) {
-				newView = true;
 				view = (LinearLayout) inflater.inflate(R.layout.search_banner_list_item, null);
 			} else {
-				newView = false;
 				view = (LinearLayout) convertView;
 			}
 
@@ -232,7 +230,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 			((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
 
-			if (newView) {
+			ViewGroup buttonContainer = view.findViewById(R.id.buttons_container);
+			if (buttonContainer != null) {
+				buttonContainer.removeAllViews();
 				for (ButtonItem button : banner.getButtonItems()) {
 					View v = inflater.inflate(R.layout.search_banner_button_list_item, null);
 					TextView title = v.findViewById(R.id.title);
@@ -245,7 +245,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 						icon.setVisibility(View.GONE);
 					}
 					v.setOnClickListener(button.getListener());
-					view.addView(v);
+					buttonContainer.addView(v);
 				}
 			}
 		} else if (type == QuickSearchListItemType.FREE_VERSION_BANNER) {
