@@ -39,7 +39,9 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
@@ -78,7 +80,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		final TextView metric = mainView.findViewById(R.id.metric);
 		metric.setText(app.getString(preference.getAssets().getMetricRes()));
 		final RecyclerView recyclerView = mainView.findViewById(R.id.recycler_view);
-		final DecimalFormat df = new DecimalFormat("#.####");
+		final DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
 		text = mainView.findViewById(R.id.text_edit);
 		try {
 			currentValue = Float.parseFloat(preference.getValue());
@@ -86,7 +88,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 			currentValue = 0.0f;
 		}
 		selectedItem = preference.getEntryFromValue(preference.getValue());
-		String currentValueStr = currentValue == 0.0f ? "" : String.valueOf(df.format(currentValue + 0.01f));
+		String currentValueStr = currentValue == 0.0f ? "" : df.format(currentValue + 0.01f);
 		text.setText(currentValueStr);
 		text.clearFocus();
 		text.setOnTouchListener(new View.OnTouchListener() {
@@ -133,7 +135,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 				selectedItem = item;
 				currentValue = preference.getValueFromEntries(selectedItem);
 				String currentValueStr = currentValue == 0.0f
-						? "" : String.valueOf(df.format(currentValue + 0.01f));
+						? "" : df.format(currentValue + 0.01f);
 				text.setText(currentValueStr);
 				if (text.hasFocus()) {
 					text.setSelection(text.getText().length());
@@ -157,17 +159,18 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
-		final int buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
 		return new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
 				Rect visibleDisplayFrame = new Rect();
+				int buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
+				int shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
 				final ScrollView scrollView = getView().findViewById(R.id.scroll_view);
 				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
 				boolean showTopShadow;
 				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
 				if (contentHeightPrevious != contentHeight) {
-					if (scrollView.getHeight() > contentHeight) {
+					if (scrollView.getHeight() + shadowHeight > contentHeight) {
 						scrollView.getLayoutParams().height = contentHeight;
 						showTopShadow = false;
 					} else {

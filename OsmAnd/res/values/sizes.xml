@@ -275,6 +275,7 @@
 	<dimen name="bottom_sheet_text_spacing_multiplier" format="float">1.25</dimen>
 	<dimen name="bottom_sheet_info_spacing_multiplier" format="float">1.5</dimen>
 	<dimen name="bottom_sheet_big_item_height">128dp</dimen>
+	<dimen name="bottom_sheet_top_shadow_height">8dp</dimen>
 
 	<dimen name="action_bar_image_width_land">236dp</dimen>
 	<dimen name="action_bar_image_top_margin_land">68dp</dimen>
@@ -285,7 +286,6 @@
 	<dimen name="map_markers_recycler_view_padding_bottom">52dp</dimen>
 	<dimen name="map_markers_recycler_view_padding_top">10dp</dimen>
 
-	<dimen name="shadow_height">5dp</dimen>
 	<dimen name="map_marker_title_height">28dp</dimen>
 
 	<dimen name="fab_recycler_view_padding_bottom">88dp</dimen>
