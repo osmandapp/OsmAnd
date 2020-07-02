@@ -11,9 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="quick_action_remove_next_destination_descr">The current destination point on the route will be deleted. If it will be the Destination, navigation will stop.</string>
     <string name="please_provide_point_name_error">Please provide a name for the point</string>
     <string name="use_volume_buttons_as_zoom">Volume buttons as zoom</string>
     <string name="use_volume_buttons_as_zoom_descr">Enable to control the map zoom level with device volume buttons.</string>
+    <string name="quick_action_remove_next_destination">Delete next destination point</string>
     <string name="app_mode_inline_skates">Inline skates</string>
     <string name="speed_cameras_removed_descr">This device doesn\'t have speed cameras.</string>
     <string name="shared_string_uninstall_and_restart">Uninstall and Restart</string>
