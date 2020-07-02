@@ -201,16 +201,11 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				if (s.toString().trim().isEmpty()) {
-					nameCaption.setError(app.getString(R.string.please_provide_point_name_error));
-					saveButton.setEnabled(false);
-				} else {
-					nameCaption.setError(null);
-					saveButton.setEnabled(true);
-				}
+				checkEmptyName(s, nameCaption, saveButton);
 			}
 		});
 
+		checkEmptyName(nameEdit.getText(), nameCaption, saveButton);
 		nameIcon = (ImageView) view.findViewById(R.id.name_icon);
 		TextView categoryEdit = view.findViewById(R.id.groupName);
 		if (categoryEdit != null) {
@@ -310,6 +305,16 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		}
 		return view;
+	}
+
+	private void checkEmptyName(Editable name, TextInputLayout nameCaption, View saveButton) {
+		if (name.toString().trim().isEmpty()) {
+			nameCaption.setError(app.getString(R.string.please_provide_point_name_error));
+			saveButton.setEnabled(false);
+		} else {
+			nameCaption.setError(null);
+			saveButton.setEnabled(true);
+		}
 	}
 
 	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
