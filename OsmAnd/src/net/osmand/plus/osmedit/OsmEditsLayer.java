@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -25,6 +26,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		ContextMenuLayer.IMoveObjectProvider {
@@ -79,16 +82,20 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		}
 	}
 
-	private void drawPoint(Canvas canvas, OsmPoint o, float x, float y) {
+	private void drawPoint(Canvas canvas, OsmPoint osmPoint, float x, float y) {
 		float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
-		int iconId = getIconId(o);
+		int iconId = getIconId(osmPoint);
+		BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
+		if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+			backgroundType = BackgroundType.COMMENT;
+		}
 		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
-				ContextCompat.getColor(activity, R.color.created_poi_icon_color), true,
-				iconId);
+				ContextCompat.getColor(activity, R.color.created_poi_icon_color), true, false,
+				iconId, backgroundType);
 		pointImageDrawable.setAlpha(0.8f);
-		pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
+		int offsetY = backgroundType.getOffsetY(activity, textScale);
+		pointImageDrawable.drawPoint(canvas, x, y - offsetY, textScale, false);
 	}
-
 
 	public int getIconId(OsmPoint osmPoint) {
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
@@ -115,7 +122,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 			}
 			return iconResId;
 		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
-			return R.drawable.ic_action_bug_dark;
+			return R.drawable.mm_special_symbol_plus;
 		} else {
 			return 0;
 		}

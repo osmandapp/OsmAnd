@@ -58,7 +58,7 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		BaseBottomSheetItem osmNotesItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(String.valueOf(osmNotesCount))
-				.setIcon(getContentIcon(R.drawable.ic_action_bug_dark))
+				.setIcon(getContentIcon(R.drawable.ic_action_osm_note))
 				.setTitle(getString(R.string.osm_notes))
 				.setLayoutId(R.layout.bottom_sheet_item_with_right_descr)
 				.setDisabled(!(osmNotesCount > 0))
