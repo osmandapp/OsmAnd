@@ -3,6 +3,7 @@ package net.osmand.plus.search;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 
 import net.osmand.AndroidUtils;
@@ -26,6 +29,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
@@ -402,19 +406,17 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					&& ((Amenity) listItem.getSearchResult().object).getOpeningHours() != null) {
 				Amenity amenity = (Amenity) listItem.getSearchResult().object;
 				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
-				if (rs != null) {
-					Calendar inst = Calendar.getInstance();
-					inst.setTimeInMillis(System.currentTimeMillis());
-					boolean worksNow = !amenity.isClosed() && rs.isOpenedForTime(inst);
-					inst.setTimeInMillis(System.currentTimeMillis() + 30 * 60 * 1000); // 30 minutes later
-					boolean worksLater = rs.isOpenedForTime(inst);
-					int colorId = worksNow ? worksLater ? R.color.color_ok : R.color.color_intermediate : R.color.color_warning;
-
+				if (rs != null && rs.getInfo() != null) {
+					int colorOpen = R.color.ctx_menu_amenity_opened_text_color;
+					int colorClosed = R.color.ctx_menu_amenity_closed_text_color;
+					SpannableString openHours = MenuController.getSpannableOpeningHours(
+							rs.getInfo(),
+							ContextCompat.getColor(app, colorOpen),
+							ContextCompat.getColor(app, colorClosed));
+					int colorId = rs.isOpenedForTime(Calendar.getInstance()) ? colorOpen : colorClosed;
 					timeLayout.setVisibility(View.VISIBLE);
 					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_time_16, colorId));
-					timeText.setTextColor(app.getResources().getColor(colorId));
-					String rt = amenity.isClosed() ? app.getResources().getString(R.string.poi_operational_status_closed) : rs.getCurrentRuleTime(inst);
-					timeText.setText(rt == null ? "" : rt);
+					timeText.setText(openHours);
 				} else {
 					timeLayout.setVisibility(View.GONE);
 				}
