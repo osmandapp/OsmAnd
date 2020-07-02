@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="quick_action_remove_next_destination_descr">The current destination point on the route will be deleted. If it will be the Destination, navigation will stop.</string>
     <string name="use_volume_buttons_as_zoom">Volume buttons as zoom</string>
     <string name="use_volume_buttons_as_zoom_descr">Enable to control the map zoom level with device volume buttons.</string>
     <string name="quick_action_remove_next_destination">Delete next destination point</string>
