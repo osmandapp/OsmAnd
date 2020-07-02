@@ -90,7 +90,7 @@ public class SizePreference extends DialogPreference {
 		if (!persistedString.equals(defaultValue)) {
 			try {
 				final DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
-				persistedString = String.valueOf(df.format(Float.parseFloat(persistedString) + 0.01f));
+				persistedString = df.format(Float.parseFloat(persistedString) + 0.01f);
 				summary = String.format(getContext().getString(R.string.ltr_or_rtl_combine_via_space),
 						persistedString, getContext().getString(assets.getMetricShortRes()));
 			} catch (NumberFormatException e) {

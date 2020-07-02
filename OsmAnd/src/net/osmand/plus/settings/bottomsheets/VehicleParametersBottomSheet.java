@@ -88,7 +88,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 			currentValue = 0.0f;
 		}
 		selectedItem = preference.getEntryFromValue(preference.getValue());
-		String currentValueStr = currentValue == 0.0f ? "" : String.valueOf(df.format(currentValue + 0.01f));
+		String currentValueStr = currentValue == 0.0f ? "" : df.format(currentValue + 0.01f);
 		text.setText(currentValueStr);
 		text.clearFocus();
 		text.setOnTouchListener(new View.OnTouchListener() {
