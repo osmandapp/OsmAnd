@@ -157,11 +157,8 @@ public class AmenityMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getNameStr() {
-		String preferredLang = getPreferredMapLang();
-		if (amenity.getType().isWiki()) {
-			preferredLang = OsmandPlugin.onGetMapObjectsLocale(
-					amenity.getSupportedContentLocales(), getPreferredMapAppLang());
-		}
+		String preferredLang = OsmandPlugin.onGetMapObjectPreferredLang(amenity,
+				getPreferredMapAppLang(), getPreferredMapLang());
 		String name = amenity.getName(preferredLang, isTransliterateNames());
 		Map<String, String> additionalInfo = amenity.getAdditionalInfo();
 		if (additionalInfo != null) {

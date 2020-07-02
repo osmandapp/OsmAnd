@@ -331,20 +331,19 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Amenity) {
-			Amenity a = (Amenity) o;
+			Amenity amenity = (Amenity) o;
 			String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 			boolean transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
-			if (a.getType().isWiki()) {
+			if (amenity.getType().isWiki()) {
 				if (Algorithms.isEmpty(preferredLang)) {
 					preferredLang = app.getLanguage();
 				}
-				preferredLang = OsmandPlugin.onGetMapObjectsLocale(
-						a.getSupportedContentLocales(), preferredLang);
+				preferredLang = OsmandPlugin.onGetMapObjectsLocale(amenity, preferredLang);
 			}
 
 			return new PointDescription(PointDescription.POINT_TYPE_POI,
-					a.getName(preferredLang, transliterateNames));
+					amenity.getName(preferredLang, transliterateNames));
 		}
 		return null;
 	}

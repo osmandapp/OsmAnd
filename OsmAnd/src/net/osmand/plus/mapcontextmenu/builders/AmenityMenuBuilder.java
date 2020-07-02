@@ -407,8 +407,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			if (amenity.getType().isWiki()) {
 				if (!hasWiki) {
-					String articleLang = OsmandPlugin.onGetMapObjectsLocale(
-							amenity.getSupportedContentLocales(), preferredLang);
+					String articleLang = OsmandPlugin.onGetMapObjectsLocale(amenity, preferredLang);
 					String lng = amenity.getContentLanguage("content", articleLang, "en");
 					if (Algorithms.isEmpty(lng)) {
 						lng = "en";

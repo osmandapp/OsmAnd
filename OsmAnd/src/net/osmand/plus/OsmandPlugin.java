@@ -21,6 +21,8 @@ import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
+import net.osmand.data.Amenity;
+import net.osmand.data.MapObject;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
@@ -262,15 +264,10 @@ public abstract class OsmandPlugin {
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 
 		allPlugins.clear();
-		allPlugins.add(new MapillaryPlugin(app));
 
-		if (!enabledPlugins.contains(MapillaryPlugin.ID)
-				&& !app.getSettings().getPlugins().contains("-" + MapillaryPlugin.ID)) {
-			enabledPlugins.add(MapillaryPlugin.ID);
-			app.getSettings().enablePlugin(MapillaryPlugin.ID, true);
-		}
+		enableHiddenPlugin(app, enabledPlugins, new MapillaryPlugin(app));
+		enableHiddenPlugin(app, enabledPlugins, new WikipediaPlugin(app));
 
-		checkPaidPlugin(app, enabledPlugins, new WikipediaPlugin(app));
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new SRTMPlugin(app));
@@ -374,14 +371,11 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	private static void checkPaidPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
+	private static void enableHiddenPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
 		allPlugins.add(plugin);
-		boolean active = Version.isPaidVersion(app);
-		plugin.setActive(active);
-		if (active) {
+		if (!enabledPlugins.contains(plugin.getId()) && !app.getSettings().getPlugins().contains("-" + plugin.getId())) {
 			enabledPlugins.add(plugin.getId());
-		} else {
-			enabledPlugins.remove(plugin.getId());
+			app.getSettings().enablePlugin(plugin.getId(), true);
 		}
 	}
 
@@ -559,8 +553,11 @@ public abstract class OsmandPlugin {
 	protected void prepareExtraTopPoiFilters(PoiUIFilter ... filters) {
 	}
 
-	protected String getMapObjectsLocale(Set<String> supportedLocales,
-	                                     String preferredLocale) {
+	protected String getMapObjectsLocale(Amenity amenity, String preferredLocale) {
+		return null;
+	}
+
+	protected String getMapObjectPreferredLang(MapObject object, String defaultLanguage) {
 		return null;
 	}
 
@@ -841,10 +838,19 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static String onGetMapObjectsLocale(Set<String> supportedLocales,
-	                                           String preferredLocale) {
+	public static String onGetMapObjectPreferredLang(MapObject object, String preferredMapLang, String preferredMapAppLang) {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
-			String locale = plugin.getMapObjectsLocale(supportedLocales, preferredLocale);
+			String locale = plugin.getMapObjectPreferredLang(object, preferredMapLang);
+			if (locale != null) {
+				return locale;
+			}
+		}
+		return preferredMapAppLang;
+	}
+
+	public static String onGetMapObjectsLocale(Amenity amenity, String preferredLocale) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			String locale = plugin.getMapObjectsLocale(amenity, preferredLocale);
 			if (locale != null) {
 				return locale;
 			}

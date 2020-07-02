@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.data.Amenity;
+import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -244,12 +246,22 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected String getMapObjectsLocale(Set<String> supportedLocales, String preferredLocale) {
-		return getWikiArticleLanguage(supportedLocales, preferredLocale);
+	protected String getMapObjectsLocale(Amenity amenity, String preferredLocale) {
+		return getWikiArticleLanguage(amenity.getSupportedContentLocales(), preferredLocale);
 	}
 
-	public String getWikiArticleLanguage(@NonNull Set<String> availableArticleLangs,
-	                                     String preferredLanguage) {
+	@Override
+	protected String getMapObjectPreferredLang(MapObject object, String defaultLanguage) {
+		if (object instanceof Amenity) {
+			Amenity amenity = (Amenity) object;
+			if (amenity.getType().isWiki()) {
+				return getWikiArticleLanguage(amenity.getSupportedContentLocales(), defaultLanguage);
+			}
+		}
+		return null;
+	}
+
+	public String getWikiArticleLanguage(@NonNull Set<String> availableArticleLangs, String preferredLanguage) {
 		if (!hasCustomSettings()) {
 			// Wikipedia with default settings
 			return preferredLanguage;
@@ -347,7 +359,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void prepareExtraTopPoiFilters(PoiUIFilter ... filters) {
+	protected void prepareExtraTopPoiFilters(PoiUIFilter... filters) {
 		for (PoiUIFilter filter : filters) {
 			if (filter.isTopWikiFilter()) {
 				boolean prepareByDefault = true;
