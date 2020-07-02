@@ -3778,7 +3778,7 @@
     <string name="width_limit_description">נא לציין את רוחב כלי הרכב שלך, יתכן שחלות מגבלות מעבר על כלי רכב רחבים.</string>
     <string name="height_limit_description">נא לציין את גובה כלי הרכב שלך, יתכן שחלות מגבלות מעבר על כלי רכב גבוהים.</string>
     <string name="weight_limit_description">נא לציין את משקל כלי הרכב שלך, יתכן שחלות מגבלות מעבר על כלי רכב כבדים.</string>
-    <string name="shared_string_tones">גוונים</string>
+    <string name="shared_string_tones">טונות</string>
     <string name="shared_string_meters">מטרים</string>
     <string name="details_dialog_decr">הצגה או הסתרה של פירוט נוסף על המפה</string>
     <string name="shared_string_night_map">מפת לילה</string>

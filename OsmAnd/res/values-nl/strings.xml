@@ -498,7 +498,7 @@
     <string name="follow">Start route begeleiding</string>
     <string name="recalculate_route_to_your_location">Soort vervoer:</string>
     <string name="mark_final_location_first">Kies eerst een bestemming</string>
-    <string name="get_directions">Routebeschrijving</string>
+    <string name="get_directions">Route</string>
     <string name="opening_hours">Openingstijden</string>
     <string name="opening_changeset">Wijzigingsset openen…</string>
     <string name="closing_changeset">Wijzigingsset sluiten…</string>
@@ -556,7 +556,7 @@
     <string name="map_view_3d">Kaartbeeld 3D</string>
     <string name="show_poi_over_map_description">Toon laatst gebruikte POI-kaartlaag.</string>
     <string name="show_poi_over_map">Toon POI-kaartlaag</string>
-    <string name="map_tile_source_descr">Kies bron van online of opgeslagen kaartsegmenten</string>
+    <string name="map_tile_source_descr">Kies bron van online of gecachte kaartsegmenten.</string>
     <string name="map_tile_source">Kaartsegment bron</string>
     <string name="map_source">Kaartbron</string>
     <string name="use_internet">Gebruik internet</string>
@@ -707,7 +707,7 @@
     <string name="global_app_allocated_memory_descr">Beschikbaar werkgeheugen %1$s MB (Android limiet %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Beschikbaar werkgeheugen</string>
     <string name="native_app_allocated_memory_descr">Werkgeheugen, gereserveerd door app %1$s MB (Dalvik %2$s MB, overig %3$s MB).
-Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</string>
+\n Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Totaal werkgeheugen</string>
     <string name="select_animate_speedup">Snelheid van de routesimulatie:</string>
     <string name="osmand_parking_hours">Uur</string>
@@ -754,7 +754,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met online en offline kaarten</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
-\n OsmAnd is een open-source navigatie-app die toegang geeft tot een grote variëteit aan wereldwijde OSM-gegevens. Alle kaartgegevens (vector- of rasterkaarten) kunnen in het telefoongeheugen worden opgeslagen voor offline gebruik. OsmAnd biedt ook zowel offline als online route-aanwijzingen, met stembegeleiding.
+\n OsmAnd is een open-source navigatie-app die toegang geeft tot een grote variëteit aan wereldwijde OSM-gegevens. Alle kaartgegevens (vector- of rasterkaarten) kunnen in het telefoongeheugen worden opgeslagen voor offline gebruik. OsmAnd biedt ook zowel offline als online routeaanwijzingen, met stembegeleiding.
 \n
 \n Enkele van de belangrijkste mogelijkheden:
 \n - Volledig offline gebruik (gedownloade vector- of rasterkaarten worden opgeslagen op het apparaat)
@@ -995,8 +995,8 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="clear_intermediate_points">Wis Tussenpunten</string>
     <string name="keep_intermediate_points">Bewaar Tussenpunten</string>
     <string name="new_directions_point_dialog">Er zijn al Tussenpunten gemaakt.</string>
-    <string name="context_menu_item_directions_to">Routebeschrijving naar</string>
-    <string name="context_menu_item_directions_from">Routebeschrijving vanaf</string>
+    <string name="context_menu_item_directions_to">Route naar</string>
+    <string name="context_menu_item_directions_from">Route vanaf</string>
     <string name="route_descr_map_location">Kaart: </string>
     <string name="route_to">Naar:</string>
     <string name="route_via">Via:</string>
@@ -1365,8 +1365,8 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="edit_group">Bewerk groep</string>
     <string name="plugin_install_needs_network">Om deze plugin te installeren is een internetverbinding nodig.</string>
     <string name="plugin_nautical_name">Nautische kaartweergave</string>
-    <string name="world_ski_missing">Om skikaarten te kunnen gebruiken, moet u de speciale offline skikaart downloaden</string>
-    <string name="nautical_maps_missing">Om nautische kaarten te kunnen gebruiken, moet u de speciale offline nautische kaart downloaden</string>
+    <string name="world_ski_missing">Download de speciale offline kaart om skifaciliteiten weer te geven.</string>
+    <string name="nautical_maps_missing">Download de speciale offline kaart om nautische details weer te geven.</string>
     <string name="get_plugin">Installeren</string>
     <string name="watch">Bekijk</string>
     <string name="rendering_attr_pisteRoutes_name">Ski-pistes</string>
@@ -1718,7 +1718,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="update_all">Alles updaten (%1$s MB)</string>
     <string name="free_downloads_used">Gebruikte gratis downloads</string>
     <string name="free_downloads_used_description">Bekijk hoeveel gratis downloads er al gebruikt zijn.</string>
-    <string name="application_dir_description">"Kies waar kaarten en andere gegevens  opgeslagen worden."</string>
+    <string name="application_dir_description">Kies waar kaarten en andere gegevens opgeslagen worden.</string>
     <string name="show_on_start_description">\'Uit\' toont direct de kaart.</string>
     <string name="enter_country_name">Kies het land</string>
     <string name="new_version">Nieuwe versie</string>
@@ -1961,7 +1961,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="follow_us">Volg ons</string>
     <string name="access_direction_audio_feedback">Richting aangeven met geluid</string>
     <string name="access_direction_audio_feedback_descr">Geef de richting van de bestemming aan met geluid.</string>
-    <string name="access_direction_haptic_feedback">Richting aangeven met trilling</string>
+    <string name="access_direction_haptic_feedback">Richting aangeven met trillen</string>
     <string name="access_direction_haptic_feedback_descr">Geef de richting van de bestemming aan met trillingen.</string>
     <string name="move_marker_bottom_sheet_title">Verplaats de kaart om de positie van de markering te wijzigen</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
@@ -2104,62 +2104,62 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="navigate_point_olc_info_area">Geldige volledige OLC
 \nBeslaat gebied: %1$s x %2$s</string>
     <string name="configure_screen_quick_action">Sneltoets</string>
-    <string name="quick_action_item_action">Actie %d</string>
+    <string name="quick_action_item_action">Sneltoets %d</string>
     <string name="quick_action_item_screen">Scherm %d</string>
     <string name="quick_action_add_marker">Markeervlaggetje toevoegen</string>
     <string name="quick_action_add_poi">POI toevoegen</string>
-    <string name="quick_action_map_style">Kaartstijl wisselen</string>
+    <string name="quick_action_map_style">Kaartstijl wijzigen</string>
     <string name="quick_action_map_style_switch">De kaartstijl is gewijzigd naar \"%s\".</string>
-    <string name="quick_action_take_audio_note">Audio-notitie maken</string>
-    <string name="quick_action_take_video_note">Video-notitie maken</string>
-    <string name="quick_action_take_photo_note">Maak foto</string>
-    <string name="quick_action_add_osm_bug">Voeg OSM-notitie toe</string>
-    <string name="quick_action_navigation_voice">Stembegeleiding Aan/Uit</string>
-    <string name="quick_action_navigation_voice_off">Stembegeleiding staat uit</string>
-    <string name="quick_action_navigation_voice_on">Stembegeleiding staat aan</string>
-    <string name="quick_action_add_gpx">GPX-routepunt maken</string>
-    <string name="quick_action_add_parking">Parkeerpositie instellen</string>
-    <string name="quick_action_new_action">Actie toevoegen</string>
-    <string name="quick_action_edit_action">Actie bewerken</string>
+    <string name="quick_action_take_audio_note">Audionotitie maken</string>
+    <string name="quick_action_take_video_note">Videonotitie maken</string>
+    <string name="quick_action_take_photo_note">Fotonotitie maken</string>
+    <string name="quick_action_add_osm_bug">OSM-notitie toevoegen</string>
+    <string name="quick_action_navigation_voice">Stembegeleiding aan/uit</string>
+    <string name="quick_action_navigation_voice_off">Stembegeleiding aan</string>
+    <string name="quick_action_navigation_voice_on">Stembegeleiding uit</string>
+    <string name="quick_action_add_gpx">GPX-routepunt toevoegen</string>
+    <string name="quick_action_add_parking">Parkeerlocatie instellen</string>
+    <string name="quick_action_new_action">Sneltoets toevoegen</string>
+    <string name="quick_action_edit_action">Sneltoets bewerken</string>
     <string name="quick_action_add_favorite">Favoriet toevoegen</string>
     <string name="dialog_add_action_title">Actie toevoegen</string>
-    <string name="quick_actions_delete">Actie verwijderden</string>
-    <string name="quick_actions_delete_text">"Actie \"%s\"  inderdaad verwijderen?"</string>
-    <string name="quick_favorites_show_favorites_dialog">Toon favorietenscherm</string>
+    <string name="quick_actions_delete">Sneltoets verwijderen</string>
+    <string name="quick_actions_delete_text">Weet je zeker dat je sneltoets \"%s\" wilt verwijderen\?</string>
+    <string name="quick_favorites_show_favorites_dialog">Toon Favorieten-scherm</string>
     <string name="quick_favorites_name_preset">Naam voorstellen</string>
     <string name="quick_action_add_marker_descr">Een toets om een Markeervlaggetje toe te voegen in het midden van het scherm.</string>
     <string name="quick_action_add_gpx_descr">Een knop om een GPX-routepunt toe te voegen in het midden van het scherm.</string>
-    <string name="quick_action_take_audio_note_descr">Een knop om een Audio-notitie toe te voegen in het midden van het scherm.</string>
-    <string name="quick_action_take_video_note_descr">Een knop om een Video-notitie toe te voegen in het midden van het scherm.</string>
-    <string name="quick_action_take_photo_note_descr">Een knop om een Foto-notitie toe te voegen in het midden van het scherm.</string>
+    <string name="quick_action_take_audio_note_descr">Een knop om een audio-notitie toe te voegen in het midden van het scherm.</string>
+    <string name="quick_action_take_video_note_descr">Een knop om een video-notitie toe te voegen in het midden van het scherm.</string>
+    <string name="quick_action_take_photo_note_descr">Een knop om een foto-notitie toe te voegen in het midden van het scherm.</string>
     <string name="quick_action_add_osm_bug_descr">Een knop om een OSM-notitie toe te voegen in het midden van het scherm.</string>
     <string name="quick_action_add_poi_descr">Een knop om een POI toe te voegen in het midden van het scherm.</string>
     <string name="quick_action_navigation_voice_descr">Een schakelknop om de stembegeleiding aan of uit te zetten tijdens navigatie.</string>
-    <string name="quick_action_add_parking_descr">Een knop om de parkeerpositie toe te voegen in het midden van het scherm.</string>
+    <string name="quick_action_add_parking_descr">Een knop om een parkeerlocatie toe te voegen in het midden van het scherm.</string>
     <string name="quick_action_interim_dialog">Bewerkingsdialoog tonen</string>
     <string name="favorite_autofill_toast_text">" opgeslagen als "</string>
     <string name="favorite_empty_place_name">Plaats</string>
     <string name="quick_action_duplicates">Sneltoetsnaam gewijzigd in %1$s om duplicaat te voorkomen.</string>
     <string name="quick_action_duplicate">Sneltoets-duplicaat</string>
-    <string name="quick_action_showhide_favorites_descr">Een schakelknop toont of verbergt de Favoriete punten op de kaart.</string>
-    <string name="quick_action_showhide_poi_descr">Een schakelknop om POI’s op de kaart te tonen of te verbergen.</string>
+    <string name="quick_action_showhide_favorites_descr">Een schakelknop om Favorieten al dan niet te tonen op de kaart.</string>
+    <string name="quick_action_showhide_poi_descr">Een schakelknop om POI’s al dan niet op de kaart te tonen.</string>
     <string name="quick_action_showhide_favorites_title">Favorieten tonen /verbergen</string>
-    <string name="quick_action_favorites_show">Toon favorieten</string>
-    <string name="quick_action_favorites_hide">Verberg favorieten</string>
-    <string name="quick_action_showhide_poi_title">POI tonen/verbergen</string>
-    <string name="quick_action_poi_show">Toon %1$s</string>
-    <string name="quick_action_poi_hide">Verberg %1$s</string>
+    <string name="quick_action_favorites_show">Favorieten tonen</string>
+    <string name="quick_action_favorites_hide">Favorieten verbergen</string>
+    <string name="quick_action_showhide_poi_title">POI’s tonen/verbergen</string>
+    <string name="quick_action_poi_show">%1$s tonen</string>
+    <string name="quick_action_poi_hide">%1$s verbergen</string>
     <string name="quick_action_add_category">Categorie toevoegen</string>
     <string name="quick_action_add_create_items">Items aanmaken</string>
-    <string name="quick_action_add_configure_map">Kaart-instellingen</string>
+    <string name="quick_action_add_configure_map">Kaartinstellingen</string>
     <string name="quick_action_add_navigation">Navigatie</string>
-    <string name="quick_action_fav_name_descr">Leeg laten om automatisch adres of plaatsnaam te gebruiken.</string>
-    <string name="quick_action_bug_descr">Dit bericht wordt automatisch aangevuld in het commentaarveld.</string>
+    <string name="quick_action_fav_name_descr">Leeg laten om adres of plaatsnaam te gebruiken.</string>
+    <string name="quick_action_bug_descr">Dit bericht wordt automatisch ingevuld in het commentaarveld.</string>
     <string name="quick_action_bug_message">Bericht</string>
     <string name="quick_action_category_descr">Categorie om de Favoriet in op te slaan:</string>
-    <string name="quick_action_gpx_category_descr">Kies een categorie (optie).</string>
+    <string name="quick_action_gpx_category_descr">Kies een optionele categorie.</string>
     <string name="quick_action_poi_list">POI-lijst</string>
-    <string name="quick_action_sh_poi_descr">Je kunt één of meerdere POI-categorieën kiezen om weer te geven.</string>
+    <string name="quick_action_sh_poi_descr">Je kunt één of meerdere POI-categorieën kiezen om te tonen op de kaart.</string>
     <string name="quick_action_page_list_descr">Een knop om door de onderstaande lijst te bladeren.</string>
     <string name="quick_action_map_style_action">Kaartstijl toevoegen</string>
     <string name="quick_action_empty_param_error">Alle parameters invullen</string>
@@ -2219,14 +2219,14 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="select_city">Plaats kiezen</string>
     <string name="select_postcode">Postcode zoeken</string>
     <string name="quick_action_auto_zoom">Autozoom kaart aan/uit</string>
-    <string name="quick_action_auto_zoom_desc">Knop om de automatische kaartzoom volgens de snelheid aan of uit te zetten.</string>
+    <string name="quick_action_auto_zoom_desc">Knop om de snelheidsgebaseerde automatische zoom aan of uit te zetten.</string>
     <string name="quick_action_auto_zoom_on">Autozoom aan</string>
     <string name="quick_action_auto_zoom_off">Autozoom uit</string>
     <string name="quick_action_add_destination">Bestemming instellen</string>
     <string name="quick_action_replace_destination">Bestemming vervangen</string>
-    <string name="quick_action_add_first_intermediate">Eerste Tussenpunt toevoegen</string>
-    <string name="quick_action_add_destination_desc">Een druk op de sneltoets voegt het midden van het scherm toe als bestemming. De vorige bestemming wordt het laatste tussenpunt.</string>
-    <string name="quick_action_replace_destination_desc">Een knop om de bestemming in het schermmidden te plaatsen waardoor de (eventuele) hiervoor geselecteerde bestemming wordt vervangen.</string>
+    <string name="quick_action_add_first_intermediate">Eerste tussenpunt toevoegen</string>
+    <string name="quick_action_add_destination_desc">Een knop om het midden van het scherm in te stellen als bestemming, de vorige bestemming wordt het laatste tussenpunt.</string>
+    <string name="quick_action_replace_destination_desc">Een knop om het midden van het scherm in te stellen als bestemming, waardoor de (eventueel) eerder ingestelde bestemming wordt vervangen.</string>
     <string name="quick_action_add_first_intermediate_desc">Een knop om het midden van het scherm als eerste tussenpunt toe te voegen.</string>
     <string name="no_overlay">Geen extra laag</string>
     <string name="no_underlay">Geen achtergrondlaag</string>
@@ -2279,9 +2279,9 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="routing_attr_allow_private_description">Ga ook over privé-terreinen.</string>
     <string name="display_zoom_level">Zoomniveau weergave: %1$s</string>
     <string name="route_is_too_long_v2">Voor grote afstanden: voeg tussenpunten toe als binnen de 10 minuten geen route berekend is.</string>
-    <string name="osmand_extended_description_part1">"OsmAnd (OSM, Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratis, wereldwijde en gedetailleerde OpenStreetMap (OSM) data gebruikt. 
-\n  
-\nGebruikt visuele en gesproken navigatie, toont POI\'s (point of interest), maakt en volgt GPX-tracks, toont hoogtelijnen en hoogte informatie (via plug-in), kiest tussen auto, fiets, wandelen of andere, je kan de OSM-kaart bewerken en nog veel meer."</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) is een kaart- en navigatie-app die gebruik maakt van de gratis, wereldwijde en hoogwaardige OSM-gegevens.
+\n
+\n Gebruik visuele en gesproken navigatie, toon POI\'s (point of interest), maak en volg GPX-tracks, toon hoogtelijnen en hoogte-informatie (via plug-in), kies tussen autorijden, fietsen of wandelen, bewerk de OSM-kaart en nog veel meer.</string>
     <string name="osmand_extended_description_part2">GPS-navigatie
 \n • Offline (geen datakosten) of online (snellere) routeberekening
 \n • Stap-voor-stap navigatie met opgenomen stem of gesproken straatnamen
@@ -2311,7 +2311,12 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
 \n• Bekijk uw snelheid en hoogte
 \n• De GPX opname optie stelt u in staat uw route op te slaan en deze te delen
 \n• Via een extra plugin kunt u hoogteverschillen weergeven als hoogtelijnen of reliëfschaduw</string>
-    <string name="osmand_extended_description_part6">Wandelen • De kaart toont voetpaden, bergpaden, routes door parken • Wikipedia vertelt u meer over uw omgeving • OV-haltes (tram, bus, trein, metro), inclusief lijnnummers, helpen u te navigeren • Navigatie gebruikt voetpaden • Neem uw weg op als GPX-route of volg een gedownloade route
+    <string name="osmand_extended_description_part6">Lopen, wandelen, stadswandeling
+\n • De kaart toont voetpaden en wandelpaden
+\n • Wikipedia kan je veel vertellen tijdens een stadswandeling, in je eigen taal
+\n • OV-haltes (tram, bus, trein, metro), inclusief lijnnummers, helpen je bij het reizen in een onbekende stad
+\n • GPS-navigatie in voetgangermodus gebruikt voor het berekenen van de route voet- en wandelpaden
+\n • Upload en volg een GPX-route of neem er zelf één op en deel deze.
 \n</string>
     <string name="osmand_extended_description_part7">Draag bij aan OpenStreetMap (OSM)
 \n • Meld fouten
@@ -2332,7 +2337,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
 \n • Afrika: ** 
 \n • Antarctica: * 
 \n Voor bijna elk land ter wereld kunt u een kaart downloaden.</string>
-    <string name="osmand_plus_extended_description_part8">Indicatie van compleetheid en kwaliteit van de kaart: 
+    <string name="osmand_plus_extended_description_part8">Indicatie van de volledigheid en kwaliteit van het kaartmateriaal:
 \n • West-Europa: **** 
 \n • Oost-Europa: *** 
 \n • Rusland: *** 
@@ -2342,14 +2347,15 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
 \n • Japan &amp; Korea: *** 
 \n • Midden-Oosten: ** 
 \n • Afrika: ** 
-\n • Antarctica: * Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, Australië tot de VS, Nederland, Duitsland, Spanje, Japan, …
+\n • Antarctica: *
+\n Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, Australië tot de VS, Nederland, Duitsland, Spanje, Japan, …
 \n</string>
     <string name="save_poi_too_many_uppercase">Naam bevat erg veel hoofdletters, toch doorgaan?</string>
     <string name="search_favorites">Zoek in Favorieten</string>
-    <string name="quick_action_showhide_osmbugs_title">Toon of verberg OSM notities</string>
-    <string name="quick_action_osmbugs_show">Toon OSM notities</string>
-    <string name="quick_action_osmbugs_hide">Verberg OSM notities</string>
-    <string name="quick_action_showhide_osmbugs_descr">Knop om OSM notities te tonen of verbergen.</string>
+    <string name="quick_action_showhide_osmbugs_title">OSM-notities tonen of verbergen</string>
+    <string name="quick_action_osmbugs_show">OSM-notities tonen</string>
+    <string name="quick_action_osmbugs_hide">OSM-notities verbergen</string>
+    <string name="quick_action_showhide_osmbugs_descr">Knop om OSM-notities al dan niet te tonen.</string>
     <string name="sorted_by_distance">Gesorteerd op afstand</string>
     <string name="private_access_routing_req">Uw bestemming ligt in een gebied dat particulier eigendom is. Wilt u gebruik van particuliere wegen voor deze route toestaan\?</string>
     <string name="restart_search">Opnieuw zoeken</string>
@@ -2373,13 +2379,19 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="shared_string_permissions">Rechten</string>
     <string name="import_gpx_failed_descr">Kan bestand niet importeren. Controleer of OsmAnd rechten heeft om het bestand te lezen.</string>
     <string name="distance_moving">Gecorrigeerde afstand</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratis, wereldwijde en uitgebreide OpenStreetMap (OSM) gegevens gebruikt. 
-\nMet akoestische en visuele navigatie, toont POI (points of interest), maakt en beheert GPX-sporen, gebruikt hoogtelijnen en hoogtegegevens, kiest tussen auto, fiets en wandelen, je kan OSM bewerken en veel meer. 
-\n
-\nOsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteunt u het project, het maken van nieuwe functies, en krijgt u de nieuwste functies. 
-\n
-\nEen paar belangrijke functies:</string>
-    <string name="osmand_plus_extended_description_part2">" Navigatie • werkt online (snel) of offline (zonder roaming-kosten in het buitenalnd) • gesproken stap-voor-stap navigatie (met opgenomen of synthetische stem) • optioneel met rijstrookaanduiding, straatnamen und geschatte aankomsttijd • tussenstops op de route • automatische herberekening bij het verlaten van de route • zoek op adres, soort (bijv.: restaurant, hotel, benzinepomp, museum) of geografische coördinaten "</string>
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatie-app die de gratis, wereldwijde en hoogwaardige OSM-gegevens gebruikt. 
+\n Gebruik gesproken en visuele navigatie, toon POI‘S (points of interest), maak en beheer GPX-tracks, toon hoogtelijnen en hoogtegegevens, kies tussen autorijden, fietsen en wandelen, bewerk OSM en nog veel meer. 
+\n 
+\n OsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteun je het project, het ontwikkelen van nieuwe functies, en ontvang je de laatste updates. 
+\n 
+\n Een paar van de belangrijkste functies:</string>
+    <string name="osmand_plus_extended_description_part2">" Navigatie
+\n • Online (snel) of offline (zonder roamingkosten in het buitenland)
+\n • Stap-voor-stap stembegeleiding (met opgenomen of TTS-stemmen)
+\n • Optioneel met rijstrookindicatie, weergave van straatnamen en geschatte aankomsttijd
+\n • Ondersteuning voor tussenstops op de route
+\n • Automatische herberekening bij het afwijken van de route
+\n • Zoek op adres, soort (bijv.: restaurant, hotel, benzinepomp, museum) of geografische coördinaten "</string>
     <string name="osmand_plus_extended_description_part3">Kaartweergave
 \n • Positie en richting tonen
 \n • Kaart draaien in kompas- of bewegingsrichting
@@ -2449,7 +2461,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="enter_gpx_name">GPX bestandsnaam:</string>
     <string name="show_on_map_after_saving">Toon op kaart na opslaan</string>
     <string name="measurement_tool">Afstand meten</string>
-    <string name="quick_action_start_stop_navigation">Start/stop navigatie</string>
+    <string name="quick_action_start_stop_navigation">Navigatie starten/stoppen</string>
     <string name="average">Gemiddeld</string>
     <string name="of">%1$d van de %2$d</string>
     <string name="retry">Probeer opnieuw</string>
@@ -2555,7 +2567,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="empty_state_markers_active">Maak markeringen aan op de kaart!</string>
     <string name="shared_string_two">Twee</string>
     <string name="shared_string_one">Een</string>
-    <string name="active_markers_descr">Kies hoeveel markeervlaggetjes getoond worden:</string>
+    <string name="active_markers_descr">Kies hoeveel markeervlaggetjes getoond worden.</string>
     <string name="digits_quantity">Aantal decimalen</string>
     <string name="shared_string_right">Rechts</string>
     <string name="shared_string_left">Links</string>
@@ -2736,7 +2748,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="wiki_article_search_text">Zoeken naar het bijbehorende wiki-artikel</string>
     <string name="wiki_article_not_found">Artikel niet gevonden</string>
     <string name="how_to_open_wiki_title">Hoe Wikipedia-artikelen te openen?</string>
-    <string name="quick_action_edit_actions">Wijzig acties</string>
+    <string name="quick_action_edit_actions">Wijzig sneltoetsen</string>
     <string name="shared_string_bookmark">Bladwijzer</string>
     <string name="point_deleted">Punt %1$s verwijderd</string>
     <string name="coord_input_edit_point">Punt bewerken</string>
@@ -2780,7 +2792,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
 \n
 \n • Ondersteuning voor het wijzigen van polygon-(non-faciliteits)voorwerpen
 \n</string>
-    <string name="test_voice_desrc">Druk op een knop en luister naar de bijhorende gesproken melding om ontbrekende of foutieve meldingen te identificeren.</string>
+    <string name="test_voice_desrc">Tik op een knop en luister naar de bijbehorende gesproken prompt om te horen of deze ontbreekt of incorrect is</string>
     <string name="osm_live_subscriptions">Abonnementen</string>
     <string name="powered_by_osmand">Mogelijk gemaakt door OsmAnd</string>
     <string name="osm_live_plan_pricing">Tariefoverzicht</string>
@@ -2825,7 +2837,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="shared_string_milliradians">Milliradialen</string>
     <string name="angular_measeurement_descr">Wijzig azimut eenheid.</string>
     <string name="avoid_pt_types_descr">Selecteer de te vermijden openbaar vervoer opties:</string>
-    <string name="quick_action_day_night_mode">%s modus</string>
+    <string name="quick_action_day_night_mode">%smodus</string>
     <string name="avoid_pt_types">Vermijd transport types…</string>
     <string name="shared_string_walk">Loop</string>
     <string name="save_poi_value_exceed_length">Verkort de lengte van \"%s\" tot minder dan 255 karakters.</string>
@@ -2884,10 +2896,10 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="shared_string_swap">Wissel</string>
     <string name="show_more">Toon meer</string>
     <string name="tracks_on_map">Getoonde tracks</string>
-    <string name="quick_action_show_hide_gpx_tracks">Toon/Verberg GPX-tracks</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Een knop om bepaalde GPX-tracks te tonen of verbergen op de kaart.</string>
-    <string name="quick_action_gpx_tracks_hide">Verberg GPX-tracks</string>
-    <string name="quick_action_gpx_tracks_show">Toon GPX-tracks</string>
+    <string name="quick_action_show_hide_gpx_tracks">GPX-tracks tonen/verbergen</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Een knop om geselecteerde GPX-tracks al dan niet te tonen op de kaart.</string>
+    <string name="quick_action_gpx_tracks_hide">GPX-tracks verbergen</string>
+    <string name="quick_action_gpx_tracks_show">GPX-tracks tonen</string>
     <string name="add_destination_query">Voeg a.u.b. eerst de Bestemming in</string>
     <string name="previous_route">Vorige route</string>
     <string name="add_home">Thuisadres toevoegen</string>
@@ -2914,10 +2926,10 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="intermediate_destinations">Tussenbestemmingen</string>
     <string name="arrive_at_time">Aankomst om %1$s</string>
     <string name="shared_string_launch">Open</string>
-    <string name="quick_action_switch_day_night_descr">Tik deze knop om te wisselen tussen de OsmAnd dag en nacht modus.</string>
-    <string name="quick_action_switch_day_mode">Dag modus</string>
-    <string name="quick_action_switch_night_mode">Nacht modus</string>
-    <string name="quick_action_day_night_switch_mode">Wissel tussen dag/nacht modus</string>
+    <string name="quick_action_switch_day_night_descr">Een schakelknop om OsmAnd om te schakelen tussen dag- en nachtmodus.</string>
+    <string name="quick_action_switch_day_mode">Dagmodus</string>
+    <string name="quick_action_switch_night_mode">Nachtmodus</string>
+    <string name="quick_action_day_night_switch_mode">Wissel tussen dag-/nachtmodus</string>
     <string name="routeInfo_surface_name">Oppervlakte</string>
     <string name="routeInfo_smoothness_name">Kwaliteit wegdek</string>
     <string name="routeInfo_steepness_name">Steilte</string>
@@ -3181,13 +3193,13 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="app_mode_utv">Naast elkaar</string>
     <string name="shared_string_maps">Kaarten</string>
     <string name="quick_action_contour_lines_descr">Knop om hoogtelijnen al dan niet te tonen op de kaart.</string>
-    <string name="quick_action_contour_lines_show">Toon de hoogtelijnen</string>
-    <string name="quick_action_contour_lines_hide">Verberg de hoogtelijnen</string>
-    <string name="quick_action_show_hide_contour_lines">Toon/verberg de hoogtelijnen</string>
+    <string name="quick_action_contour_lines_show">Hoogtelijnen tonen</string>
+    <string name="quick_action_contour_lines_hide">Hoogtelijnen verbergen</string>
+    <string name="quick_action_show_hide_contour_lines">Hoogtelijnen tonen/verbergen</string>
     <string name="quick_action_hillshade_descr">Knop om de reliëfschaduw al dan niet te tonen op de kaart.</string>
-    <string name="quick_action_hillshade_show">Toon reliëfschaduw</string>
-    <string name="quick_action_hillshade_hide">Verberg reliëfschaduw</string>
-    <string name="quick_action_show_hide_hillshade">Toon/verberg reliëfschaduw</string>
+    <string name="quick_action_hillshade_show">Reliëfschaduw tonen</string>
+    <string name="quick_action_hillshade_hide">Reliëfschaduw verbergen</string>
+    <string name="quick_action_show_hide_hillshade">Reliëfschaduw tonen/verbergen</string>
     <string name="track_saved">Track opgeslagen</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Toon knooppunt van de fietsroutes</string>
     <string name="contour_lines_and_hillshade">Hoogtelijnen en reliëfschaduw</string>
@@ -3293,7 +3305,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="store_tracks_in_daily_directories">Sla tracks op in dagelijkse folders</string>
     <string name="store_tracks_in_daily_directories_descrp">Sla tracks op in sub-folders per opname dag (zoals 2018-01-01).</string>
     <string name="simulate_your_location_gpx_descr">Simuleer uw positie door een opgenomen GPX track te gebruiken.</string>
-    <string name="quick_action_directions_from_desc">Een knop om het scherm te centreren op het vertrekpunt. Zal dan de bestemming vragen of de routeberekening starten.</string>
+    <string name="quick_action_directions_from_desc">Een knop om het midden van het scherm in te stellen als vertrekpunt. Hierna wordt de bestemming gevraagd of de routeberekening gestart.</string>
     <string name="download_map_dialog">Dialoogvenster kaart downloads</string>
     <string name="dialogs_and_notifications_title">Dialogen en meldingen</string>
     <string name="dialogs_and_notifications_descr">Bepaal popups, dialogen en meldingen.</string>
@@ -3462,10 +3474,10 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="profile_backup_failed">Kan profiel niet back-uppen.</string>
     <string name="n_items_of_z">%1$s of %2$s</string>
     <string name="download_slope_maps">Hellingen</string>
-    <string name="quick_action_show_hide_terrain">Toon/Verberg de omgeving</string>
-    <string name="quick_action_terrain_hide">Verberg de omgeving</string>
-    <string name="quick_action_terrain_show">Toon de omgeving</string>
-    <string name="quick_action_terrain_descr">Een knop om een laag op de kaart weer te geven of te verbergen.</string>
+    <string name="quick_action_show_hide_terrain">Terrein tonen / verbergen</string>
+    <string name="quick_action_terrain_hide">Terrein verbergen</string>
+    <string name="quick_action_terrain_show">Terrein tonen</string>
+    <string name="quick_action_terrain_descr">Een knop om de terreinlaag al dan niet te tonen op de kaart.</string>
     <string name="delete_description">Verwijder een beschrijving</string>
     <string name="add_description">Voeg een beschrijving toe</string>
     <string name="select_group">Selecteer groep</string>
@@ -3492,7 +3504,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="vessel_height_limit_description">Stel de hoogte van het vaartuig in om lage bruggen te vermijden. Let op, als de brug beweegbaar is, gebruiken we de hoogte in geopende toestand.</string>
     <string name="screen_timeout_descr">Als \"%1$s\" is geactiveerd, is de actieve tijd hiervan afhankelijk.</string>
     <string name="default_screen_timeout">Standaard schermtimeout</string>
-    <string name="shared_string_tones">tonen</string>
+    <string name="shared_string_tones">ton</string>
     <string name="shared_string_meters">meter</string>
     <string name="details_dialog_decr">Toon/verberg extra kaartdetails</string>
     <string name="shared_string_night_map">Nachtkaart</string>
@@ -3500,10 +3512,10 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="clear_tiles_warning">Het toepassen van deze wijzigingen wist de cache van deze tile-bron</string>
     <string name="vessel_height_warning_link">Stel de hoogte van het vaartuig in</string>
     <string name="vessel_height_warning">Stel de hoogte van het vaartuig in om lage bruggen te vermijden. Let op, als de brug beweegbaar is, gebruiken we de hoogte in geopende toestand.</string>
-    <string name="quick_action_showhide_mapillary_title">Toon/verberg Mapillary</string>
-    <string name="quick_action_mapillary_hide">Verberg Mapillary</string>
-    <string name="quick_action_mapillary_show">Toon Mapillary</string>
-    <string name="quick_action_showhide_mapillary_descr">Toon/verberg de Mapillary-laag op de kaart.</string>
+    <string name="quick_action_showhide_mapillary_title">Mapillary tonen/verbergen</string>
+    <string name="quick_action_mapillary_hide">Mapillary verbergen</string>
+    <string name="quick_action_mapillary_show">Mapillary tonen</string>
+    <string name="quick_action_showhide_mapillary_descr">Een schakelknop om de Mapillary-laag al dan niet te tonen op de kaart.</string>
     <string name="routing_attr_length_description">Geef de toegestane voertuiglengte op voor routes.</string>
     <string name="routing_attr_length_name">Maximale lengte</string>
     <string name="shared_string_bearing">Richting</string>
@@ -3619,7 +3631,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="quick_action_transport_hide">OV-informatie verbergen</string>
     <string name="quick_action_transport_show">OV-informatie tonen</string>
     <string name="quick_action_show_hide_transport">OV-informatie tonen/verbergen</string>
-    <string name="quick_action_transport_descr">Knop om OV-informatie op de kaart te tonen of verbergen.</string>
+    <string name="quick_action_transport_descr">Knop om OV-informatie al dan niet te tonen op de kaart.</string>
     <string name="add_edit_favorite">Favoriet toevoegen / bewerken</string>
     <string name="create_edit_poi">POI toevoegen / bewerken</string>
     <string name="parking_positions">Parkeerlocaties</string>
@@ -3632,7 +3644,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="unsupported_type_error">Niet ondersteund type</string>
     <string name="width_limit_description">Geef de voertuigbreedte op, er zijn mogelijk routebeperkingen voor brede voertuigen.</string>
     <string name="height_limit_description">Geef de voertuighoogte op, er zijn mogelijk routebeperkingen voor hoge voertuigen.</string>
-    <string name="weight_limit_description">Geef het voertuiggewicht op, er zijn mogelijk routbeperkingen voor zwaar verkeer.</string>
+    <string name="weight_limit_description">Geef het voertuiggewicht op, er zijn mogelijk routebeperkingen voor zwaar verkeer.</string>
     <string name="gpx_parse_error">OsmAnd GPX is corrupt, neem contact op met het support team voor verder onderzoek.</string>
     <string name="shared_string_always">Altijd</string>
     <string name="screen_control">Scherminstellingen</string>

@@ -202,8 +202,11 @@ public class IndexItem implements Comparable<IndexItem> {
 	public void setLocalTimestamp(long localTimestamp) {
 		this.localTimestamp = localTimestamp;
 	}
-	
-	
+
+	public long getLocalTimestamp() {
+		return localTimestamp;
+	}
+
 	public boolean isDownloaded() {
 		return downloaded;
 	}

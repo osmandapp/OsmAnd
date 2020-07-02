@@ -1648,8 +1648,8 @@
     <string name="poi_payment_electronic_purses_yes">Elektronische Geldbörsen</string>
     <string name="poi_payment_uta_yes">UTA</string>
     <string name="poi_payment_uta_no">UTA-Karten nicht akzeptiert</string>
-    <string name="poi_payment_efectivo_yes">Bargeld</string>
-    <string name="poi_payment_efectivo_no">Bargeld nicht akzeptiert</string>
+    <string name="poi_payment_efectivo_yes">Efectivo</string>
+    <string name="poi_payment_efectivo_no">Efectivo nicht akzeptiert</string>
     <string name="poi_payment_girocard_yes">Girokarte</string>
     <string name="poi_payment_girocard_no">Girokarte nicht akzeptiert</string>
     <string name="poi_payment_discover_card_yes">Discover-Karte</string>
