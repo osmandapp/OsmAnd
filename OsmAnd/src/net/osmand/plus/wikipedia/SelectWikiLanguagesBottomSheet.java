@@ -13,10 +13,8 @@ import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -26,6 +24,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +39,6 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 
 	private OsmandApplication app;
 	private ApplicationMode appMode;
-	private OsmandSettings settings;
 	private WikipediaPlugin wikiPlugin;
 
 	private List<BottomSheetItemWithCompoundButton> languageItems;
@@ -52,8 +50,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
-		settings = app.getSettings();
-		appMode = settings.getApplicationMode();
+		appMode = app.getSettings().getApplicationMode();
 		wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
 		initLanguagesData();
 	}
@@ -185,7 +182,6 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		super.onRightBottomButtonClick();
 		List<String> localesForSaving = new ArrayList<>();
 		for (WikiLanguageItem language : languages) {
 			if (language.isChecked()) {

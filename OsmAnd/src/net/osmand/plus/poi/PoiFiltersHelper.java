@@ -111,10 +111,6 @@ public class PoiFiltersHelper {
 		return customPOIFilter;
 	}
 
-	public void prepareExtraTopPoiFilters(PoiUIFilter ... filters) {
-		OsmandPlugin.onPrepareExtraTopPoiFilters(filters);
-	}
-
 	public PoiUIFilter getTopWikiPoiFilter() {
 		if (topWikiPoiFilter == null) {
 			String wikiFilterId = PoiUIFilter.STD_PREFIX + "osmwiki";
@@ -244,6 +240,7 @@ public class PoiFiltersHelper {
 				PoiUIFilter f = new PoiUIFilter(t, application, "");
 				top.add(f);
 			}
+			OsmandPlugin.registerCustomPoiFilters(top);
 			this.cacheTopStandardFilters = top;
 		}
 		List<PoiUIFilter> result = new ArrayList<>();
@@ -459,11 +456,9 @@ public class PoiFiltersHelper {
 	}
 
 	public void addSelectedPoiFilter(PoiUIFilter filter) {
-		if (filter.isTopWikiFilter()) {
-			prepareExtraTopPoiFilters(filter);
-		}
 		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
 		selectedPoiFilters.add(filter);
+		OsmandPlugin.onPrepareExtraTopPoiFilters(selectedPoiFilters);
 		saveSelectedPoiFilters(selectedPoiFilters);
 		this.selectedPoiFilters = selectedPoiFilters;
 	}
@@ -553,12 +548,10 @@ public class PoiFiltersHelper {
 		for (String f : application.getSettings().getSelectedPoiFilters()) {
 			PoiUIFilter filter = getFilterById(f);
 			if (filter != null) {
-				if (filter.isTopWikiFilter()) {
-					prepareExtraTopPoiFilters(filter);
-				}
 				selectedPoiFilters.add(filter);
 			}
 		}
+		OsmandPlugin.onPrepareExtraTopPoiFilters(selectedPoiFilters);
 		this.selectedPoiFilters = selectedPoiFilters;
 	}
 

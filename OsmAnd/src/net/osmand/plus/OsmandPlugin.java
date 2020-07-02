@@ -207,6 +207,10 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
+	protected List<PoiUIFilter> getCustomPoiFilters() {
+		return Collections.emptyList();
+	}
+
 	/**
 	 * Plugin was installed
 	 */
@@ -550,7 +554,7 @@ public abstract class OsmandPlugin {
 	protected void newDownloadIndexes(Fragment fragment) {
 	}
 
-	protected void prepareExtraTopPoiFilters(PoiUIFilter ... filters) {
+	protected void prepareExtraTopPoiFilters(Set<PoiUIFilter> poiUIFilter) {
 	}
 
 	protected String getMapObjectsLocale(Amenity amenity, String preferredLocale) {
@@ -820,26 +824,26 @@ public abstract class OsmandPlugin {
 
 	public static boolean onSearchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
 		boolean processed = false;
-		for (OsmandPlugin plugin : getAvailablePlugins()) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			processed = plugin.searchFinished(searchFragment, phrase, isResultEmpty) || processed;
 		}
 		return processed;
 	}
 
 	public static void onNewDownloadIndexes(Fragment fragment) {
-		for (OsmandPlugin plugin : getAvailablePlugins()) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.newDownloadIndexes(fragment);
 		}
 	}
 
-	public static void onPrepareExtraTopPoiFilters(PoiUIFilter ... filters) {
-		for (OsmandPlugin plugin : getAvailablePlugins()) {
-			plugin.prepareExtraTopPoiFilters(filters);
+	public static void onPrepareExtraTopPoiFilters(Set<PoiUIFilter> poiUIFilters) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.prepareExtraTopPoiFilters(poiUIFilters);
 		}
 	}
 
 	public static String onGetMapObjectPreferredLang(MapObject object, String preferredMapLang, String preferredMapAppLang) {
-		for (OsmandPlugin plugin : getAvailablePlugins()) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			String locale = plugin.getMapObjectPreferredLang(object, preferredMapLang);
 			if (locale != null) {
 				return locale;
@@ -849,13 +853,19 @@ public abstract class OsmandPlugin {
 	}
 
 	public static String onGetMapObjectsLocale(Amenity amenity, String preferredLocale) {
-		for (OsmandPlugin plugin : getAvailablePlugins()) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			String locale = plugin.getMapObjectsLocale(amenity, preferredLocale);
 			if (locale != null) {
 				return locale;
 			}
 		}
 		return preferredLocale;
+	}
+
+	public static void registerCustomPoiFilters(List<PoiUIFilter> poiUIFilters) {
+		for (OsmandPlugin p : getEnabledPlugins()) {
+			poiUIFilters.addAll(p.getCustomPoiFilters());
+		}
 	}
 
 	public static Collection<DashFragmentData> getPluginsCardsList() {
@@ -878,8 +888,6 @@ public abstract class OsmandPlugin {
 		}
 		return installed;
 	}
-
-
 
 	public static boolean onMapActivityKeyUp(MapActivity mapActivity, int keyCode) {
 		for (OsmandPlugin p : getEnabledPlugins()) {

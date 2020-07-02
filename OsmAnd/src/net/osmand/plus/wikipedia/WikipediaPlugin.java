@@ -48,10 +48,12 @@ import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 
 public class WikipediaPlugin extends OsmandPlugin {
 
+	public static final String ID = "osmand.wikipedia";
+
 	private MapActivity mapActivity;
 	private OsmandSettings settings;
 
-	public static final String ID = "osmand.wikipedia";
+	private PoiUIFilter topWikiPoiFilter;
 
 	public WikipediaPlugin(OsmandApplication app) {
 		super(app);
@@ -142,6 +144,18 @@ public class WikipediaPlugin extends OsmandPlugin {
 				.setIcon(R.drawable.ic_plugin_wikipedia)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener).createItem());
+	}
+
+	@Override
+	protected List<PoiUIFilter> getCustomPoiFilters() {
+		List<PoiUIFilter> poiFilters = new ArrayList<>();
+		if (topWikiPoiFilter == null) {
+			AbstractPoiType poiType = app.getPoiTypes().getOsmwiki();
+			topWikiPoiFilter = new PoiUIFilter(poiType, app, "");
+		}
+		poiFilters.add(topWikiPoiFilter);
+
+		return poiFilters;
 	}
 
 	public void updateWikipediaState() {
@@ -359,8 +373,8 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void prepareExtraTopPoiFilters(PoiUIFilter... filters) {
-		for (PoiUIFilter filter : filters) {
+	protected void prepareExtraTopPoiFilters(Set<PoiUIFilter> poiUIFilters) {
+		for (PoiUIFilter filter : poiUIFilters) {
 			if (filter.isTopWikiFilter()) {
 				boolean prepareByDefault = true;
 				if (hasCustomSettings()) {
@@ -388,17 +402,12 @@ public class WikipediaPlugin extends OsmandPlugin {
 			Object obj = phrase.getLastSelectedWord().getResult().object;
 			if (obj instanceof PoiUIFilter) {
 				PoiUIFilter pf = (PoiUIFilter) obj;
-				if (pf.isWikiFilter()) {
-					return true;
-				}
+				return pf.isWikiFilter();
 			} else if (obj instanceof AbstractPoiType) {
 				AbstractPoiType pt = (AbstractPoiType) obj;
-				if (pt.getKeyName().startsWith(WIKI_LANG)) {
-					return true;
-				}
+				return pt.getKeyName().startsWith(WIKI_LANG);
 			}
 		}
 		return false;
 	}
-
 }
