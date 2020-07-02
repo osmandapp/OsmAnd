@@ -145,9 +145,9 @@ public class TrackDetailsMenu {
 				if (point != null) {
 					int index = segment.points.indexOf(point);
 					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(segment.points.get(index - 1), point, tb.getLatLonFromPixel(mx, my));
-					float nextHighlightPos = (float) (gpxItem.locationOnMap.distance / ((OrderedLineDataSet) ds.get(0)).getDivX());
-					float nextVisibleX = chart.getLowestVisibleX() + (nextHighlightPos - gpxItem.chartHighlightPos);
-					gpxItem.chartHighlightPos = nextHighlightPos;
+					float pos = (float) (gpxItem.locationOnMap.distance / ((OrderedLineDataSet) ds.get(0)).getDivX());
+					float nextVisibleX = chart.getLowestVisibleX() + (pos - gpxItem.chartHighlightPos);
+					gpxItem.chartHighlightPos = pos;
 
 					chart.moveViewToX(nextVisibleX);
 					chart.highlightValue(gpxItem.chartHighlightPos, 0);
@@ -613,7 +613,7 @@ public class TrackDetailsMenu {
 							lastPerformedGesture == ChartGesture.ROTATE) {
 
 						gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
-						refreshChart(chart, true);
+						refreshChart(chart, false);
 					}
 				}
 			}
