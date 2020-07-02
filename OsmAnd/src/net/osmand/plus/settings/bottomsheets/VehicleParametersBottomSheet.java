@@ -135,7 +135,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 				selectedItem = item;
 				currentValue = preference.getValueFromEntries(selectedItem);
 				String currentValueStr = currentValue == 0.0f
-						? "" : String.valueOf(df.format(currentValue + 0.01f));
+						? "" : df.format(currentValue + 0.01f);
 				text.setText(currentValueStr);
 				if (text.hasFocus()) {
 					text.setSelection(text.getText().length());
