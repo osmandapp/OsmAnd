@@ -871,7 +871,7 @@
     <string name="recording_is_recorded">Audio/video wordt opgenomen. Om te stoppen, tik op het AV-widget.</string>
     <string name="recording_playing">Een geluidsfragment van de gekozen opname wordt afgespeeld.\n%1$s</string>
     <string name="recording_open_external_player">Externe speler openen</string>
-    <string name="recording_delete_confirm">Wil je deze opname wissen?</string>
+    <string name="recording_delete_confirm">Wil je dit object verwijderen\?</string>
     <string name="recording_unavailable">niet beschikbaar</string>
     <string name="recording_context_menu_arecord">Audionotitie opnemen</string>
     <string name="recording_context_menu_vrecord">Videonotitie opnemen</string>
