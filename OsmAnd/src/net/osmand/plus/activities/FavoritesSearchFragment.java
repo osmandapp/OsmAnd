@@ -352,19 +352,15 @@ public class FavoritesSearchFragment extends DialogFragment {
 			Collections.sort(points, new Comparator<FavouritePoint>() {
 				@Override
 				public int compare(FavouritePoint p1, FavouritePoint p2) {
-					int d1 = (int) (MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(),
-							location.getLatitude(), location.getLongitude()));
-					int d2 = (int) (MapUtils.getDistance(p2.getLatitude(), p2.getLongitude(),
-							location.getLatitude(), location.getLongitude()));
-					return d1 < d2 ? -1 : (d1 == d2 ? 0 : 1);
-				}
-			});
-			Collections.sort(points, new Comparator<FavouritePoint>() {
-				@Override
-				public int compare(FavouritePoint p1, FavouritePoint p2) {
-					int v1 = p1.isVisible() ? 1 : 0;
-					int v2 = p2.isVisible() ? 1 : 0;
-					return v1 < v2 ? 1 : (v1 == v2 ? 0 : -1);
+					if (p1.isVisible() && p2.isVisible() || !p1.isVisible() && !p2.isVisible()) {
+						int d1 = (int) (MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(),
+								location.getLatitude(), location.getLongitude()));
+						int d2 = (int) (MapUtils.getDistance(p2.getLatitude(), p2.getLongitude(),
+								location.getLatitude(), location.getLongitude()));
+						return d1 < d2 ? -1 : (d1 == d2 ? 0 : 1);
+					} else {
+						return (p1.isVisible() == p2.isVisible()) ? 0 : (p1.isVisible() ? -1 : 1);
+					}
 				}
 			});
 			notifyDataSetChanged();
