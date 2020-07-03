@@ -25,9 +25,10 @@
 	<dimen name="map_alarm_size">116dp</dimen>
 	<dimen name="map_alarm_bottom_text_margin">12dp</dimen>
 	<dimen name="map_alarm_text_size">35sp</dimen>
+	<dimen name="map_alarm_text_top_padding">30dp</dimen>
 	<dimen name="map_alarm_bottom_text_size">22sp</dimen>
-
-	<dimen name="map_alarm_bottom_margin">140dp</dimen>
+	<dimen name="map_alarm_bottom_si_text_size">12sp</dimen>
+	<dimen name="map_alarm_bottom_margin">131dp</dimen>
 	<dimen name="map_alarm_bottom_margin_land">81dp</dimen>
 
 	<dimen name="map_widget_icon">36dp</dimen>

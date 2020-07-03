@@ -141,15 +141,14 @@
 	<dimen name="map_route_planning_land_width_minus_shadow">306dp</dimen>
 	<dimen name="map_route_planning_max_height">330dp</dimen>
 	<dimen name="map_minwidth_widget">100dp</dimen>
-
-
-
 	<dimen name="map_widget_text_size">23sp</dimen>
 	<dimen name="map_top_widget_text_size">22sp</dimen>
 	<dimen name="map_widget_text_size_small">15sp</dimen>
 	<dimen name="map_button_text_size">18sp</dimen>
 	<dimen name="map_alarm_text_size">25sp</dimen>
+	<dimen name="map_alarm_text_top_padding">20dp</dimen>
 	<dimen name="map_alarm_bottom_text_size">16sp</dimen>
+	<dimen name="map_alarm_bottom_si_text_size">8sp</dimen>
 	<dimen name="map_widget_text_bottom_margin">1sp</dimen>
 	<dimen name="map_widget_text_small_bottom_margin">3sp</dimen>
 	<dimen name="map_widget_icon_margin">2dp</dimen>
