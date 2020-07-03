@@ -1250,8 +1250,8 @@ public class RouteInfoWidgetsFactory {
 		private OsmAndLocationProvider locationProvider;
 		private WaypointHelper wh;
 		private int imgId;
-		private String textOld;
-		private String bottomTextOld;
+		private String cachedText;
+		private String cachedBottomText;
 
 		public AlarmWidget(final OsmandApplication app, MapActivity ma) {
 			layout = ma.findViewById(R.id.map_alarm_warning);
@@ -1294,8 +1294,9 @@ public class RouteInfoWidgetsFactory {
 					String bottomText = "";
 					OsmandSettings.DrivingRegion region = settings.DRIVING_REGION.get();
 					boolean americanType = region.isAmericanTypeSigns();
-					if(alarm.getType() == AlarmInfoType.SPEED_LIMIT) {
-						if (region.isCanada()) {
+					boolean isCanadianRegion = region == OsmandSettings.DrivingRegion.CANADA;
+					if (alarm.getType() == AlarmInfoType.SPEED_LIMIT) {
+						if (isCanadianRegion) {
 							locimgId = R.drawable.warnings_speed_limit_ca;
 							bottomText = settings.SPEED_SYSTEM.get().toShortString(settings.getContext());
 						} else if (americanType) {
@@ -1303,7 +1304,7 @@ public class RouteInfoWidgetsFactory {
 							//else case is done by drawing red ring
 						}
 						text = alarm.getIntValue() + "";
-					} else if(alarm.getType() == AlarmInfoType.SPEED_CAMERA) {
+					} else if (alarm.getType() == AlarmInfoType.SPEED_CAMERA) {
 						locimgId = R.drawable.warnings_speed_camera;
 					} else if(alarm.getType() == AlarmInfoType.BORDER_CONTROL) {
 						locimgId = R.drawable.warnings_border_control;
@@ -1365,23 +1366,26 @@ public class RouteInfoWidgetsFactory {
 							icon.setImageResource(locimgId);
 						}
 						Resources res = layout.getContext().getResources();
-						if (!Algorithms.objectEquals(text, textOld)) {
-							textOld = text;
-							widgetText.setText(textOld);
-							if (alarm.getType() == AlarmInfoType.SPEED_LIMIT && americanType && !region.isCanada()) {
+						if (!Algorithms.objectEquals(text, cachedText)) {
+							cachedText = text;
+							widgetText.setText(cachedText);
+							if (alarm.getType() == AlarmInfoType.SPEED_LIMIT && americanType && !isCanadianRegion) {
 								int topPadding = res.getDimensionPixelSize(R.dimen.map_alarm_text_top_padding);
 								widgetText.setPadding(0, topPadding, 0, 0);
 							} else {
 								widgetText.setPadding(0, 0, 0, 0);
 							}
 						}
-						if (!Algorithms.objectEquals(bottomText, bottomTextOld)) {
-							bottomTextOld = bottomText;
-							widgetBottomText.setText(bottomTextOld);
-							if (alarm.getType() == AlarmInfoType.SPEED_LIMIT && region.isCanada()) {
+						if (!Algorithms.objectEquals(bottomText, cachedBottomText)) {
+							cachedBottomText = bottomText;
+							widgetBottomText.setText(cachedBottomText);
+							if (alarm.getType() == AlarmInfoType.SPEED_LIMIT && isCanadianRegion) {
 								int bottomPadding = res.getDimensionPixelSize(R.dimen.map_button_margin);
 								widgetBottomText.setPadding(0, 0, 0, bottomPadding);
 								widgetBottomText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_bottom_si_text_size));
+							} else {
+								widgetBottomText.setPadding(0, 0, 0, 0);
+								widgetBottomText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_bottom_text_size));
 							}
 							widgetBottomText.setTextColor(ContextCompat.getColor(layout.getContext(),
 									americanType ? R.color.color_black : R.color.color_white));
