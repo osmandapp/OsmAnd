@@ -15,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.quickaction.actions.NavRemoveNextDestination;
 import net.osmand.plus.quickaction.actions.ShowHideMapillaryAction;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -236,6 +237,7 @@ public class QuickActionRegistry {
 		quickActionTypes.add(NavStartStopAction.TYPE);
 		quickActionTypes.add(NavResumePauseAction.TYPE);
 		quickActionTypes.add(SwitchProfileAction.TYPE);
+		quickActionTypes.add(NavRemoveNextDestination.TYPE);
 		OsmandPlugin.registerQuickActionTypesPlugins(quickActionTypes);
 
 		Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();

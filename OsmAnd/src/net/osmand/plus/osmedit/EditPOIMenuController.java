@@ -182,7 +182,7 @@ public class EditPOIMenuController extends MenuController {
 			}
 			return iconResId;
 		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
-			return R.drawable.ic_action_bug_dark;
+			return R.drawable.ic_action_osm_note_add;
 		} else {
 			return 0;
 		}

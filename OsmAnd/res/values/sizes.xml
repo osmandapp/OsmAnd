@@ -141,15 +141,14 @@
 	<dimen name="map_route_planning_land_width_minus_shadow">306dp</dimen>
 	<dimen name="map_route_planning_max_height">330dp</dimen>
 	<dimen name="map_minwidth_widget">100dp</dimen>
-
-
-
 	<dimen name="map_widget_text_size">23sp</dimen>
 	<dimen name="map_top_widget_text_size">22sp</dimen>
 	<dimen name="map_widget_text_size_small">15sp</dimen>
 	<dimen name="map_button_text_size">18sp</dimen>
 	<dimen name="map_alarm_text_size">25sp</dimen>
+	<dimen name="map_alarm_text_top_padding">20dp</dimen>
 	<dimen name="map_alarm_bottom_text_size">16sp</dimen>
+	<dimen name="map_alarm_bottom_si_text_size">8sp</dimen>
 	<dimen name="map_widget_text_bottom_margin">1sp</dimen>
 	<dimen name="map_widget_text_small_bottom_margin">3sp</dimen>
 	<dimen name="map_widget_icon_margin">2dp</dimen>
@@ -275,6 +274,7 @@
 	<dimen name="bottom_sheet_text_spacing_multiplier" format="float">1.25</dimen>
 	<dimen name="bottom_sheet_info_spacing_multiplier" format="float">1.5</dimen>
 	<dimen name="bottom_sheet_big_item_height">128dp</dimen>
+	<dimen name="bottom_sheet_top_shadow_height">8dp</dimen>
 
 	<dimen name="action_bar_image_width_land">236dp</dimen>
 	<dimen name="action_bar_image_top_margin_land">68dp</dimen>
@@ -285,7 +285,6 @@
 	<dimen name="map_markers_recycler_view_padding_bottom">52dp</dimen>
 	<dimen name="map_markers_recycler_view_padding_top">10dp</dimen>
 
-	<dimen name="shadow_height">5dp</dimen>
 	<dimen name="map_marker_title_height">28dp</dimen>
 
 	<dimen name="fab_recycler_view_padding_bottom">88dp</dimen>
