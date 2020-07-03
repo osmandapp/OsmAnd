@@ -88,6 +88,7 @@
     <string name="screen_control">Screen control</string>
     <string name="shared_string_always">Always</string>
     <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact the support team to investigate further.</string>
+    <string name="lenght_limit_description">Provide your vehicle length, some routes restrictions may be applied for long vehicles.</string>
     <string name="weight_limit_description">Provide your vehicle weight, some route restrictions may apply for heavy vehicles.</string>
     <string name="height_limit_description">Provide your vehicle height, some route restrictions may apply for high vehicles.</string>
     <string name="width_limit_description">Provide your vehicle width some route restrictions may apply for wide vehicles.</string>
