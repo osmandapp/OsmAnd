@@ -41,13 +41,14 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String VEHICLE_HEIGHT = "height";
 	public static final String VEHICLE_WEIGHT = "weight";
 	public static final String VEHICLE_WIDTH = "width";
-	
+	public static final String VEHICLE_LENGTH = "length";
+
 	private static boolean USE_CACHE = true;
 	public static long TIMER = 0;
 
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;
-	private final Map<String, RoutingParameter> parameters; 
+	private final Map<String, RoutingParameter> parameters;
 	private final Map<String, Integer> universalRules;
 	private final List<String> universalRulesById;
 	private final Map<String, BitSet> tagRuleMask;

@@ -180,7 +180,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 					} else if ((!param.equals(GeneralRouter.USE_SHORTEST_WAY) || am.isDerivedRoutingFrom(ApplicationMode.CAR))
 							&& !param.equals(GeneralRouter.VEHICLE_HEIGHT)
 							&& !param.equals(GeneralRouter.VEHICLE_WEIGHT)
-							&& !param.equals(GeneralRouter.VEHICLE_WIDTH)) {
+							&& !param.equals(GeneralRouter.VEHICLE_WIDTH)
+							&& !param.equals(GeneralRouter.VEHICLE_LENGTH)) {
 						otherRoutingParameters.add(routingParameter);
 					}
 				}
@@ -253,7 +254,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			straightAngle.setPersistent(false);
 			straightAngle.setKey(settings.ROUTE_STRAIGHT_ANGLE.getId());
 			straightAngle.setTitle(getString(R.string.recalc_angle_dialog_title));
-			straightAngle.setSummary(String.format(getString(R.string.shared_string_angle_param), (int) am.getStrAngle()));
+			straightAngle.setSummary(String.format(getString(R.string.shared_string_angle_param),
+					(int) am.getStrAngle() + ""));
 			straightAngle.setLayoutResource(R.layout.preference_with_descr);
 			straightAngle.setIcon(getRoutingPrefIcon("routing_recalc_distance")); //TODO change for appropriate icon when available
 			getPreferenceScreen().addPreference(straightAngle);
