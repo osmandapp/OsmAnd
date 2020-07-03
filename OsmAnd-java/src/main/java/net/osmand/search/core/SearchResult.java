@@ -49,13 +49,14 @@ public class SearchResult {
 
 	// maximum corresponds to the top entry
 	public double getUnknownPhraseMatchWeight() {
-		// if result is a complete match in the search we prioritize it highers
+		// if result is a complete match in the search we prioritize it higher
 		return getSumPhraseMatchWeight() / Math.pow(MAX_TYPE_WEIGHT, getDepth() - 1);
 	}
 	
 	public double getSumPhraseMatchWeight() {
-		// if result is a complete match in the search we prioritize it highers
-		double res = ObjectType.getTypeWeight(objectType);
+		// if result is a complete match in the search we prioritize it higher
+		boolean match = requiredSearchPhrase.countWords(localeName) <= getSelfWordCount();
+		double res = match ? ObjectType.getTypeWeight(objectType) : 0;
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
@@ -70,15 +71,20 @@ public class SearchResult {
 	}
 
 	public int getFoundWordCount() {
+		int inc = getSelfWordCount();
+		if (parentSearchResult != null) {
+			inc += parentSearchResult.getFoundWordCount();
+		}
+		return inc;
+	}
+
+	private int getSelfWordCount() {
 		int inc = 0;
 		if (firstUnknownWordMatches) {
 			inc = 1;
 		}
 		if (otherWordsMatch != null) {
 			inc += otherWordsMatch.size();
-		}
-		if (parentSearchResult != null) {
-			inc += parentSearchResult.getFoundWordCount();
 		}
 		return inc;
 	}

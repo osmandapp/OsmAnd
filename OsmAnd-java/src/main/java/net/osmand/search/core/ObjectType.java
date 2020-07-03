@@ -55,11 +55,11 @@ public enum ObjectType {
 				return 4;
 			case STREET:
 				return 3;
-			case POI:
-				return 2;
 			case CITY:
 			case VILLAGE:
 			case POSTCODE:
+				return 2;
+			case POI:
 				return 1;
 			default:
 				return 1;
