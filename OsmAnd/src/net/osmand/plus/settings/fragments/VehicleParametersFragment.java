@@ -4,11 +4,11 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.routing.RouteProvider.RouteService;
@@ -46,12 +46,13 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		if (routeService == RouteService.OSMAND) {
 			GeneralRouter router = app.getRouter(mode);
 			if (router != null) {
+				GeneralRouterProfile routerProfile = router.getProfile();
 				Map<String, RoutingParameter> parameters = router.getParameters();
-				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_HEIGHT));
-				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_WEIGHT));
-				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_WIDTH));
-				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_LENGTH));
-				if (router.getProfile() != GeneralRouterProfile.PUBLIC_TRANSPORT) {
+				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_HEIGHT), routerProfile);
+				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_WEIGHT), routerProfile);
+				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_WIDTH), routerProfile);
+				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_LENGTH), routerProfile);
+				if (routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT) {
 					setupDefaultSpeedPref();
 				}
 			}
@@ -60,8 +61,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		}
 	}
 
-	private void setupCustomRoutingPropertyPref(RoutingParameter parameter) {
-		GeneralRouterProfile routerProfile = app.getRouter(getSelectedAppMode()).getProfile();
+	private void setupCustomRoutingPropertyPref(@Nullable RoutingParameter parameter,
+	                                            GeneralRouterProfile routerProfile) {
 		if (parameter == null) {
 			return;
 		}
