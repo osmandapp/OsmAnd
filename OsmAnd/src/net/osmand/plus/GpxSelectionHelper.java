@@ -53,6 +53,8 @@ public class GpxSelectionHelper {
 	private static final String COLOR = "color";
 	private static final String WIDTH = "width";
 	private static final String SELECTED_BY_USER = "selected_by_user";
+	private static final String SHOW_ARROWS = "showArrows";
+	private static final String SHOW_START_FINISH = "showStartFinish";
 
 	private OsmandApplication app;
 	@NonNull
@@ -516,6 +518,14 @@ public class GpxSelectionHelper {
 							int clr = Algorithms.parseColor(obj.getString(COLOR));
 							gpx.setColor(clr);
 						}
+						if (obj.has(SHOW_ARROWS)) {
+							boolean showArrows = obj.optBoolean(SHOW_ARROWS, false);
+							gpx.setShowArrows(showArrows);
+						}
+						if (obj.has(SHOW_START_FINISH)) {
+							boolean showStartFinish = obj.optBoolean(SHOW_START_FINISH, false);
+							gpx.setShowStartFinish(showStartFinish);
+						}
 						if (obj.has(WIDTH)) {
 							gpx.setWidth(obj.getString(WIDTH));
 						}
@@ -561,6 +571,8 @@ public class GpxSelectionHelper {
 						if (s.gpxFile.getWidth(null) != null) {
 							obj.put(WIDTH, s.gpxFile.getWidth(null));
 						}
+						obj.put(SHOW_ARROWS, s.gpxFile.isShowArrows());
+						obj.put(SHOW_START_FINISH, s.gpxFile.isShowStartFinish());
 					}
 					obj.put(SELECTED_BY_USER, s.selectedByUser);
 				} catch (JSONException e) {
@@ -616,6 +628,8 @@ public class GpxSelectionHelper {
 					if (dataItem.getWidth() != null) {
 						gpx.setWidth(dataItem.getWidth());
 					}
+					gpx.setShowArrows(dataItem.isShowArrows());
+					gpx.setShowStartFinish(dataItem.isShowStartFinish());
 					sf.setJoinSegments(dataItem.isJoinSegments());
 				}
 				sf.setGpxFile(gpx, app);

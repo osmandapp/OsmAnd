@@ -160,6 +160,30 @@ public class GPXUtilities {
 			getExtensionsToWrite().put("width", width);
 		}
 
+		public boolean isShowArrows() {
+			String showArrows = null;
+			if (extensions != null) {
+				showArrows = extensions.get("showArrows");
+			}
+			return Boolean.parseBoolean(showArrows);
+		}
+
+		public void setShowArrows(boolean showArrows) {
+			getExtensionsToWrite().put("showArrows", String.valueOf(showArrows));
+		}
+
+		public boolean isShowStartFinish() {
+			String showStartFinish = null;
+			if (extensions != null) {
+				showStartFinish = extensions.get("showStartFinish");
+			}
+			return Boolean.parseBoolean(showStartFinish);
+		}
+
+		public void setShowStartFinish(boolean showStartFinish) {
+			getExtensionsToWrite().put("showStartFinish", String.valueOf(showStartFinish));
+		}
+
 		public Map<String, String> getExtensionsToWrite() {
 			if (extensions == null) {
 				extensions = new LinkedHashMap<>();

@@ -77,14 +77,26 @@ public class GpxDbHelper {
 		return res;
 	}
 
-	public boolean updateWidth(GpxDataItem item, String width) {
-		boolean res = db.updateWidth(item, width);
+	public boolean updateShowAsMarkers(GpxDataItem item, boolean showAsMarkers) {
+		boolean res = db.updateShowAsMarkers(item, showAsMarkers);
 		putToCache(item);
 		return res;
 	}
 
-	public boolean updateShowAsMarkers(GpxDataItem item, boolean showAsMarkers) {
-		boolean res = db.updateShowAsMarkers(item, showAsMarkers);
+	public boolean updateShowArrows(GpxDataItem item, boolean showArrows) {
+		boolean res = db.updateShowArrows(item, showArrows);
+		putToCache(item);
+		return res;
+	}
+
+	public boolean updateShowStartFinish(GpxDataItem item, boolean showStartFinish) {
+		boolean res = db.updateShowStartFinish(item, showStartFinish);
+		putToCache(item);
+		return res;
+	}
+
+	public boolean updateWidth(GpxDataItem item, String width) {
+		boolean res = db.updateWidth(item, width);
 		putToCache(item);
 		return res;
 	}
