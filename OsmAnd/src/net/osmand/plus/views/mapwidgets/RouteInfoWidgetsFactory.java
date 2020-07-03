@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -24,7 +25,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -61,6 +61,8 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static android.util.TypedValue.COMPLEX_UNIT_PX;
 
 public class RouteInfoWidgetsFactory {
 
@@ -1230,32 +1232,32 @@ public class RouteInfoWidgetsFactory {
 			AndroidUiHelper.updateVisibility(layout, visible);
 			return true;
 		}
-		
+
 		public void setVisibility(boolean visibility) {
 			layout.setVisibility(visibility ? View.VISIBLE : View.GONE);
 		}
 	}
-	
-	public static class AlarmWidget  {
-		
+
+	public static class AlarmWidget {
+
 		private View layout;
 		private ImageView icon;
-		private TextView text;
-		private TextView bottomText;
+		private TextView widgetText;
+		private TextView widgetBottomText;
 		private OsmandSettings settings;
 		private RoutingHelper rh;
 		private MapViewTrackingUtilities trackingUtilities;
 		private OsmAndLocationProvider locationProvider;
 		private WaypointHelper wh;
 		private int imgId;
-		private String textString;
-		private String bottomTextString;
+		private String textOld;
+		private String bottomTextOld;
 
 		public AlarmWidget(final OsmandApplication app, MapActivity ma) {
 			layout = ma.findViewById(R.id.map_alarm_warning);
 			icon = (ImageView) ma.findViewById(R.id.map_alarm_warning_icon);
-			text = (TextView) ma.findViewById(R.id.map_alarm_warning_text);
-			bottomText = (TextView) ma.findViewById(R.id.map_alarm_warning_text_bottom);
+			widgetText = (TextView) ma.findViewById(R.id.map_alarm_warning_text);
+			widgetBottomText = (TextView) ma.findViewById(R.id.map_alarm_warning_text_bottom);
 			settings = app.getSettings();
 			rh = ma.getRoutingHelper();
 			trackingUtilities = ma.getMapViewTrackingUtilities();
@@ -1293,13 +1295,14 @@ public class RouteInfoWidgetsFactory {
 					OsmandSettings.DrivingRegion region = settings.DRIVING_REGION.get();
 					boolean americanType = region.isAmericanTypeSigns();
 					if(alarm.getType() == AlarmInfoType.SPEED_LIMIT) {
-						if(region == OsmandSettings.DrivingRegion.CANADA) {
+						if (region.isCanada()) {
 							locimgId = R.drawable.warnings_speed_limit_ca;
-						} else if(americanType){
+							bottomText = settings.SPEED_SYSTEM.get().toShortString(settings.getContext());
+						} else if (americanType) {
 							locimgId = R.drawable.warnings_speed_limit_us;
-						//else case is done by drawing red ring
+							//else case is done by drawing red ring
 						}
-						text = alarm.getIntValue() +"";
+						text = alarm.getIntValue() + "";
 					} else if(alarm.getType() == AlarmInfoType.SPEED_CAMERA) {
 						locimgId = R.drawable.warnings_speed_camera;
 					} else if(alarm.getType() == AlarmInfoType.BORDER_CONTROL) {
@@ -1357,23 +1360,30 @@ public class RouteInfoWidgetsFactory {
 						}
 					}
 					if(visible) {
-						if(locimgId != imgId) {
+						if (locimgId != imgId) {
 							imgId = locimgId;
 							icon.setImageResource(locimgId);
 						}
-						if (!Algorithms.objectEquals(text, this.textString)) {
-							textString = text;
-							this.text.setText(this.textString);
-							if (alarm.getType() == AlarmInfoType.SPEED_LIMIT && americanType) {
-								this.text.setPadding(0, AndroidUtils.dpToPx(layout.getContext(), 20f), 0, 0);
+						Resources res = layout.getContext().getResources();
+						if (!Algorithms.objectEquals(text, textOld)) {
+							textOld = text;
+							widgetText.setText(textOld);
+							if (alarm.getType() == AlarmInfoType.SPEED_LIMIT && americanType && !region.isCanada()) {
+								int topPadding = res.getDimensionPixelSize(R.dimen.map_alarm_text_top_padding);
+								widgetText.setPadding(0, topPadding, 0, 0);
 							} else {
-								this.text.setPadding(0, 0, 0, 0);
+								widgetText.setPadding(0, 0, 0, 0);
 							}
 						}
-						if (!Algorithms.objectEquals(bottomText, this.bottomTextString)) {
-							bottomTextString = bottomText;
-							this.bottomText.setText(this.bottomTextString);
-							this.bottomText.setTextColor(ContextCompat.getColor(layout.getContext(),
+						if (!Algorithms.objectEquals(bottomText, bottomTextOld)) {
+							bottomTextOld = bottomText;
+							widgetBottomText.setText(bottomTextOld);
+							if (alarm.getType() == AlarmInfoType.SPEED_LIMIT && region.isCanada()) {
+								int bottomPadding = res.getDimensionPixelSize(R.dimen.map_button_margin);
+								widgetBottomText.setPadding(0, 0, 0, bottomPadding);
+								widgetBottomText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_bottom_si_text_size));
+							}
+							widgetBottomText.setTextColor(ContextCompat.getColor(layout.getContext(),
 									americanType ? R.color.color_black : R.color.color_white));
 						}
 					}

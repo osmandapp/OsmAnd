@@ -4172,6 +4172,10 @@ public class OsmandSettings {
 					this == OsmandSettings.DrivingRegion.CANADA;
 		}
 
+		public boolean isCanada() {
+			return this == OsmandSettings.DrivingRegion.CANADA;
+		}
+
 		public String getDescription(Context ctx) {
 			return ctx.getString(leftHandDriving ? R.string.left_side_navigation : R.string.right_side_navigation) +
 					", " +
