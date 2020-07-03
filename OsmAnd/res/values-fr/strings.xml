@@ -3791,4 +3791,8 @@
     <string name="app_mode_inline_skates">Patins à roulettes en ligne</string>
     <string name="use_volume_buttons_as_zoom">Zoomer avec les boutons de volume</string>
     <string name="use_volume_buttons_as_zoom_descr">Activer pour contrôler le niveau de zoom de la carte avec les boutons de réglage du volume sonore.</string>
+    <string name="quick_action_remove_next_destination_descr">Le prochain point sur la route va être supprimé. S\'il s\'agit de la destination finale, la navigation s\'arrêtera.</string>
+    <string name="lenght_limit_description">Indiquez la longueur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules longs.</string>
+    <string name="quick_action_remove_next_destination">Supprimer le prochain point</string>
+    <string name="please_provide_point_name_error">Merci de renseigner un nom pour le point</string>
 </resources>
