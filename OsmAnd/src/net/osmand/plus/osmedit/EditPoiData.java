@@ -7,7 +7,6 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -91,7 +90,7 @@ public class EditPoiData {
 	}
 	
 	private void tryAddTag(String key, String value) {
-		if (!Algorithms.isEmpty(value)) {
+		if (value != null) {
 			tagValues.put(key, value);
 		}
 	}
@@ -118,7 +117,6 @@ public class EditPoiData {
 		return Collections.unmodifiableMap(tagValues);
 	}
 
-
 	public void putTag(String tag, String value) {
 		checkNotInEdit();
 		try {
@@ -135,7 +133,6 @@ public class EditPoiData {
 			isInEdit = false;
 		}
 	}
-
 
 	private void checkNotInEdit() {
 		if(isInEdit) {
@@ -253,5 +250,14 @@ public class EditPoiData {
 			tagValues.remove(currentPoiType.getOsmTag2());
 			changedTags.removeAll(Arrays.asList(currentPoiType.getEditOsmTag(), currentPoiType.getOsmTag2()));
 		}
+	}
+
+	public boolean hasEmptyValue() {
+		for (String value : tagValues.values()) {
+			if (value.isEmpty()) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
