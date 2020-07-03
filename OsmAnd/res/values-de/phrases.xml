@@ -3833,4 +3833,6 @@
     <string name="poi_traffic_signals_arrow">Pfeil</string>
     <string name="poi_traffic_signals_vibration">Vibrieren</string>
     <string name="poi_give_box">Give box</string>
+    <string name="poi_city_block">Stadtteil</string>
+    <string name="poi_borough">Bezirk</string>
 </resources>
