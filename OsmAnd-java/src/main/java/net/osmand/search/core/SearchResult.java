@@ -56,7 +56,7 @@ public class SearchResult {
 	public double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
 		boolean match = requiredSearchPhrase.countWords(localeName) <= getSelfWordCount();
-		double res = match ? ObjectType.getTypeWeight(objectType) : 0;
+		double res = ObjectType.getTypeWeight(match ? objectType : null);
 		if (parentSearchResult != null) {
 			res = res + parentSearchResult.getSumPhraseMatchWeight() / MAX_TYPE_WEIGHT;
 		}
