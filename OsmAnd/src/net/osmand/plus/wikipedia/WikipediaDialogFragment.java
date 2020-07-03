@@ -282,8 +282,9 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 			WikipediaDialogFragment wikipediaDialogFragment = new WikipediaDialogFragment();
 			wikipediaDialogFragment.setAmenity(amenity);
-			lang = lang != null ? lang : WikipediaPoiMenu.getWikiArticleLanguage(app,
-					amenity.getSupportedContentLocales(), app.getSettings().MAP_PREFERRED_LOCALE.get());
+			WikipediaPlugin wikipediaPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
+			lang = lang != null ? lang : wikipediaPlugin.getMapObjectsLocale(amenity,
+					app.getSettings().MAP_PREFERRED_LOCALE.get());
 			wikipediaDialogFragment.setLanguage(lang);
 			wikipediaDialogFragment.setRetainInstance(true);
 			wikipediaDialogFragment.show(activity.getSupportFragmentManager(), TAG);

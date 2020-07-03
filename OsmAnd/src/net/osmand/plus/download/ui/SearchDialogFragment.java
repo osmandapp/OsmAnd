@@ -70,8 +70,11 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 	public static final String TAG = "SearchDialogFragment";
 	private static final String SEARCH_TEXT_DLG_KEY = "search_text_dlg_key";
+	public static final String SHOW_GROUP_KEY = "show_group_key";
+	public static final String DOWNLOAD_TYPES_TO_SHOW_KEY = "download_types_to_show";
 	public static final String SHOW_WIKI_KEY = "show_wiki_key";
-	private boolean showWiki;
+	private boolean showGroup;
+	private ArrayList<String> downloadTypesToShow = new ArrayList<>();
 	private ListView listView;
 	private SearchListAdapter listAdapter;
 	private BannerAndDownloadFreeVersion banner;
@@ -96,18 +99,22 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		if (savedInstanceState != null) {
 			searchText = savedInstanceState.getString(SEARCH_TEXT_DLG_KEY);
-			showWiki = savedInstanceState.getBoolean(SHOW_WIKI_KEY);
+			showGroup = savedInstanceState.getBoolean(SHOW_GROUP_KEY);
+			downloadTypesToShow = savedInstanceState.getStringArrayList(DOWNLOAD_TYPES_TO_SHOW_KEY);
 		}
 		if (searchText == null) {
 			Bundle arguments = getArguments();
 			if (arguments != null) {
 				searchText = arguments.getString(SEARCH_TEXT_DLG_KEY);
-				showWiki = arguments.getBoolean(SHOW_WIKI_KEY);
+				showGroup = arguments.getBoolean(SHOW_GROUP_KEY);
+				downloadTypesToShow = arguments.getStringArrayList(DOWNLOAD_TYPES_TO_SHOW_KEY);
 			}
 		}
 		if (searchText == null) {
 			searchText = "";
-			showWiki = false;
+			showGroup = true;
+			downloadTypesToShow = new ArrayList<>();
+			downloadTypesToShow.add(DownloadActivityType.NORMAL_FILE.getTag());
 		}
 
 		boolean isLightContent = getMyApplication().getSettings().isLightContent();
@@ -227,7 +234,8 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString(SEARCH_TEXT_DLG_KEY, searchText);
-		outState.putBoolean(SHOW_WIKI_KEY, showWiki);
+		outState.putBoolean(SHOW_GROUP_KEY, showGroup);
+		outState.putStringArrayList(DOWNLOAD_TYPES_TO_SHOW_KEY, downloadTypesToShow);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -254,17 +262,23 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		return (DownloadActivity) getActivity();
 	}
 
-	public static SearchDialogFragment createInstance(String searchText, boolean showWiki) {
+	public static SearchDialogFragment createInstance(String searchText, boolean showGroup,
+	                                                  DownloadActivityType ... fileTypes) {
+		ArrayList<String> typesList = new ArrayList<>();
+		for (DownloadActivityType type : fileTypes) {
+			typesList.add(type.getTag());
+		}
 		Bundle bundle = new Bundle();
 		bundle.putString(SEARCH_TEXT_DLG_KEY, searchText);
-		bundle.putBoolean(SHOW_WIKI_KEY, showWiki);
+		bundle.putBoolean(SHOW_GROUP_KEY, showGroup);
+		bundle.putStringArrayList(DOWNLOAD_TYPES_TO_SHOW_KEY, typesList);
 		SearchDialogFragment fragment = new SearchDialogFragment();
 		fragment.setArguments(bundle);
 		return fragment;
 	}
 
 	public static SearchDialogFragment createInstance(String searchText) {
-		return createInstance(searchText, false);
+		return createInstance(searchText, true, DownloadActivityType.NORMAL_FILE);
 	}
 
 	@Override
@@ -484,16 +498,19 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 						&& group.getParentGroup().getParentGroup().getType() != DownloadResourceGroupType.WORLD
 						&& isMatch(conds, false, name)) {
 
-					filter.add(group);
+					if (showGroup) {
+						filter.add(group);
+					}
 
 					for (DownloadResourceGroup g : group.getGroups()) {
 						if (g.getType() == DownloadResourceGroupType.REGION_MAPS) {
 							if (g.getIndividualResources() != null) {
 								for (IndexItem item : g.getIndividualResources()) {
-									if (item.getType() == DownloadActivityType.NORMAL_FILE
-											|| (item.getType() == DownloadActivityType.WIKIPEDIA_FILE
-											&& showWiki)) {
-										filter.add(item);
+									for (String fileTypeTag : downloadTypesToShow) {
+										DownloadActivityType type = DownloadActivityType.getIndexType(fileTypeTag);
+										if (type != null && type == item.getType()) {
+											filter.add(item);
+										}
 									}
 								}
 							}

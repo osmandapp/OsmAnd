@@ -1,7 +1,5 @@
 package net.osmand.plus.poi;
 
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
@@ -11,13 +9,13 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -36,9 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
-import static net.osmand.plus.wikipedia.WikipediaPoiMenu.ENABLED_WIKI_POI_LANGUAGES_KEY;
-import static net.osmand.plus.wikipedia.WikipediaPoiMenu.GLOBAL_WIKI_POI_ENABLED_KEY;
 
 public class PoiFiltersHelper {
 
@@ -114,31 +109,6 @@ public class PoiFiltersHelper {
 			customPOIFilter = filter;
 		}
 		return customPOIFilter;
-	}
-
-	public void prepareTopWikiFilter(@NonNull PoiUIFilter wiki) {
-		boolean prepareByDefault = true;
-		Bundle wikiSettings = WikipediaPoiMenu.getWikiPoiSettings(application);
-		if (wikiSettings != null) {
-			boolean allLanguages = wikiSettings.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
-			List<String> languages = wikiSettings
-					.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
-			if (!allLanguages && languages != null) {
-				prepareByDefault = false;
-				String wikiLang = "wiki:lang:";
-				StringBuilder sb = new StringBuilder();
-				for (String lang : languages) {
-					if (sb.length() > 1) {
-						sb.append(" ");
-					}
-					sb.append(wikiLang).append(lang);
-				}
-				wiki.setFilterByName(sb.toString());
-			}
-		}
-		if (prepareByDefault) {
-			wiki.setFilterByName(null);
-		}
 	}
 
 	public PoiUIFilter getTopWikiPoiFilter() {
@@ -270,6 +240,7 @@ public class PoiFiltersHelper {
 				PoiUIFilter f = new PoiUIFilter(t, application, "");
 				top.add(f);
 			}
+			OsmandPlugin.registerCustomPoiFilters(top);
 			this.cacheTopStandardFilters = top;
 		}
 		List<PoiUIFilter> result = new ArrayList<>();
@@ -485,11 +456,9 @@ public class PoiFiltersHelper {
 	}
 
 	public void addSelectedPoiFilter(PoiUIFilter filter) {
-		if (filter.isTopWikiFilter()) {
-			prepareTopWikiFilter(filter);
-		}
 		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
 		selectedPoiFilters.add(filter);
+		OsmandPlugin.onPrepareExtraTopPoiFilters(selectedPoiFilters);
 		saveSelectedPoiFilters(selectedPoiFilters);
 		this.selectedPoiFilters = selectedPoiFilters;
 	}
@@ -579,12 +548,10 @@ public class PoiFiltersHelper {
 		for (String f : application.getSettings().getSelectedPoiFilters()) {
 			PoiUIFilter filter = getFilterById(f);
 			if (filter != null) {
-				if (filter.isTopWikiFilter()) {
-					prepareTopWikiFilter(filter);
-				}
 				selectedPoiFilters.add(filter);
 			}
 		}
+		OsmandPlugin.onPrepareExtraTopPoiFilters(selectedPoiFilters);
 		this.selectedPoiFilters = selectedPoiFilters;
 	}
 
