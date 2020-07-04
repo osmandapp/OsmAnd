@@ -3811,4 +3811,6 @@
     <string name="quick_action_remove_next_destination">Vymazať ďalší cieľový bod</string>
     <string name="please_provide_point_name_error">Prosím zadajte názov pre bod</string>
     <string name="quick_action_remove_next_destination_descr">Aktuálny cieľový bod na trase bude vymazaný. Ak je to posledný cieľ, navigácia sa zastaví.</string>
+    <string name="search_download_wikipedia_maps">Stiahnuť mapy Wikipédia</string>
+    <string name="plugin_wikipedia_description">Získajte informácie o bodoch záujmu z Wikipédie. Je to váš vreckový sprievodca - zapnite modul Wikipédia a užívajte si články o objektoch okolo vás.</string>
 </resources>
