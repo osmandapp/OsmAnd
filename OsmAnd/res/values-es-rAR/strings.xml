@@ -3814,4 +3814,10 @@
     <string name="app_mode_inline_skates">Patines en línea</string>
     <string name="use_volume_buttons_as_zoom_descr">Permite controlar el nivel de zoom del mapa con los botones de volumen del dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botones de volumen como zoom</string>
+    <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
+    <string name="quick_action_remove_next_destination">Borrar el siguiente punto de destino</string>
+    <string name="please_provide_point_name_error">Proporciona un nombre para el punto</string>
+    <string name="quick_action_remove_next_destination_descr">El punto de destino actual de la ruta será borrado. Si será el destino, la navegación se detendrá.</string>
+    <string name="search_download_wikipedia_maps">Descargar datos de Wikipedia</string>
+    <string name="plugin_wikipedia_description">Obtén información sobre los puntos de interés de Wikipedia. Es tu guía de bolsillo sin conexión - sólo activa el complemento de Wikipedia y disfruta los artículos sobre los objetos de alrededor.</string>
 </resources>
