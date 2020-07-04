@@ -3820,4 +3820,6 @@
     <string name="quick_action_remove_next_destination">Nächsten Zielpunkt löschen</string>
     <string name="please_provide_point_name_error">Bitte geben Sie einen Namen für das Profil an</string>
     <string name="quick_action_remove_next_destination_descr">Der aktuelle Punkt auf der Route wird gelöscht. Wenn es das Ziel ist, wird die Navigation gestoppt.</string>
+    <string name="search_download_wikipedia_maps">Wikipedia-Karten herunterladen</string>
+    <string name="plugin_wikipedia_description">Informationen über Sehenswürdigkeiten erhalten Sie bei Wikipedia. Es ist Ihr Offline-Wegweiser für die Hosentasche - aktivieren Sie einfach das Wikipedia-Modul und genießen Sie Artikel über Objekte in Ihrer Umgebung.</string>
 </resources>
