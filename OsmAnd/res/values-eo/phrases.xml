@@ -901,7 +901,7 @@
     <string name="poi_money_lender">Pruntedonantejo</string>
     <string name="poi_pawnbroker">Lombardejo</string>
     <string name="poi_accountant">Oficejo de kontisto</string>
-    <string name="poi_bitcoin_yes">Bitmono akceptata</string>
+    <string name="poi_bitcoin_yes">Bitmono (₿) akceptata</string>
     <string name="poi_cave_entrance">Enirejo al kaverno</string>
     <string name="poi_peak">Monto (pinto)</string>
     <string name="poi_saddle">Sela punkto (intermonto)</string>
@@ -1335,8 +1335,8 @@
     <string name="poi_payment_cash_no">Kontanta mono malakceptata</string>
     <string name="poi_payment_debit_cards_yes">debetkartoj</string>
     <string name="poi_payment_debit_cards_no">Debetkartoj malakceptataj</string>
-    <string name="poi_payment_bitcoin_yes">Bitmono (Bitcoin)</string>
-    <string name="poi_payment_bitcoin_no">Bitmono (Bitcoin) malakceptata</string>
+    <string name="poi_payment_bitcoin_yes">Bitmono (₿)</string>
+    <string name="poi_payment_bitcoin_no">Bitmono (₿) malakceptata</string>
     <string name="poi_payment_visa_yes">Visa</string>
     <string name="poi_payment_visa_no">Visa kartoj malakceptataj</string>
     <string name="poi_payment_mastercard_yes">MasterCard</string>
