@@ -3804,4 +3804,8 @@
     <string name="app_mode_inline_skates">直排輪鞋</string>
     <string name="use_volume_buttons_as_zoom_descr">啟用裝置音量按鈕控制地圖縮放等級。</string>
     <string name="use_volume_buttons_as_zoom">音量按鈕以縮放</string>
+    <string name="lenght_limit_description">提供您的車輛長度，某些路徑限制可能適用於較長的車輛。</string>
+    <string name="quick_action_remove_next_destination">刪除下一個目的地點</string>
+    <string name="please_provide_point_name_error">請提供點的名稱</string>
+    <string name="quick_action_remove_next_destination_descr">目前路徑上的目的地點將會被刪除。如果其將為目的地，導航就會停止。</string>
 </resources>
