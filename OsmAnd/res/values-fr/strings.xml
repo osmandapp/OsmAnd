@@ -3795,4 +3795,6 @@
     <string name="lenght_limit_description">Indiquez la longueur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules longs.</string>
     <string name="quick_action_remove_next_destination">Supprimer le prochain point</string>
     <string name="please_provide_point_name_error">Merci de renseigner un nom pour le point</string>
+    <string name="plugin_wikipedia_description">Utilisez un guide de poche hors ligne grâce à Wikipédia. Activez le plugin Wikipédia : des points d\'intérêt seront affichés, ils vous permettrons d\'obtenir des informations sur les lieux qui vous entourent.</string>
+    <string name="search_download_wikipedia_maps">Télécharger les cartes Wikipédia</string>
 </resources>
