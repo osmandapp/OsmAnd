@@ -3762,4 +3762,10 @@
     <string name="app_mode_inline_skates">Paten</string>
     <string name="routing_attr_length_description">Rotalarda izin verilecek araç uzunluğunu belirtin.</string>
     <string name="routing_attr_length_name">Uzunluk sınırı</string>
+    <string name="quick_action_remove_next_destination_descr">Güzergahdaki geçerli hedef noktası silinecektir. Eğer bu varış noktası olacaksa, navigasyon duracaktır.</string>
+    <string name="please_provide_point_name_error">Lütfen nokta için bir ad belirtin</string>
+    <string name="lenght_limit_description">Aracınızın uzunluğunu belirtin, uzun araçlar için bazı güzergah kısıtlamaları geçerli olabilir.</string>
+    <string name="quick_action_remove_next_destination">Sonraki varış noktasını sil</string>
+    <string name="use_volume_buttons_as_zoom_descr">Harita yakınlaştırma seviyesini cihaz ses seviyesi düğmeleriyle denetlemeyi etkinleştirin.</string>
+    <string name="use_volume_buttons_as_zoom">Yakınlaştırma için ses seviyesi düğmeleri</string>
 </resources>

@@ -1169,7 +1169,7 @@
     <string name="snap_to_road_descr">Привязываться к дорогам во время навигации.</string>
     <string name="snap_to_road">Привязка к дороге</string>
     <string name="intermediate_point_too_far">Промежуточный пункт %1$s слишком далеко от ближайшей дороги.</string>
-    <string name="arrived_at_intermediate_point">Достигнут промежуточный пункт назначения</string>
+    <string name="arrived_at_intermediate_point">Достигнут промежуточный пункт</string>
     <string name="context_menu_item_intermediate_point">Добавить промежуточный пункт</string>
     <string name="map_widget_intermediate_distance">Промежуточный пункт</string>
     <string name="ending_point_too_far">Конец маршрута слишком далеко от ближайшей дороги.</string>
@@ -1182,10 +1182,10 @@
     <string name="poi_filter_accomodation">Жильё</string>
     <string name="poi_filter_restaurants">Рестораны</string>
     <string name="poi_filter_sightseeing">Достопримечательности</string>
-    <string name="context_menu_item_last_intermediate_point">Добавить как последний промежуточный пункт назначения</string>
+    <string name="context_menu_item_last_intermediate_point">Добавить как последний промежуточный пункт</string>
     <string name="context_menu_item_first_intermediate_point">Добавить как первый промежуточный пункт</string>
     <string name="add_as_last_destination_point">Добавить промежуточный пункт в конец</string>
-    <string name="add_as_first_destination_point">Добавить как первый промежуточный пункт назначения</string>
+    <string name="add_as_first_destination_point">Добавить как первый промежуточный пункт</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
     <string name="new_destination_point_dialog">Пункт назначения уже установлен:</string>
     <string name="target_point">Пункт %1$s</string>
@@ -2079,7 +2079,7 @@
     <string name="rec_split">Разбиение на клипы</string>
     <string name="rec_split_title">Использовать разбиение на клипы</string>
     <string name="rec_split_desc">Циклическая перезапись клипов при превышении заданного объёма хранилища.</string>
-    <string name="switch_start_finish">Обратить пункты старта и назначения</string>
+    <string name="switch_start_finish">Обратить пункты отправления и назначения</string>
     <string name="shared_string_remove">Удалить</string>
     <string name="rendering_attr_hideUnderground_name">Подземные объекты</string>
     <string name="data_is_not_available">Данные недоступны</string>
@@ -2401,7 +2401,7 @@
     <string name="shared_string_markers">Маркеры</string>
     <string name="osn_modify_dialog_title">Изменить заметку</string>
     <string name="context_menu_item_modify_note">Изменить заметку OSM</string>
-    <string name="make_round_trip_descr">Добавить копию точки отправления в качестве пункта назначения.</string>
+    <string name="make_round_trip_descr">Добавить копию пункта отправления в качестве пункта назначения.</string>
     <string name="make_round_trip">Сделать маршрут круговым</string>
     <string name="use_location">Использовать местоположение</string>
     <string name="date_added">Добавлено</string>
@@ -3011,7 +3011,7 @@
     <string name="public_transport_warning_descr_blog">Узнайте больше о маршрутизации OsmAnd в нашем блоге.</string>
     <string name="public_transport_warning_title">Навигация на общественном транспорте в настоящее время проходит бета-тестирование, возможны ошибки и неточности.</string>
     <string name="add_intermediate">Добавить промежуточную точку</string>
-    <string name="add_start_and_end_points">Добавить точку отправления и назначения</string>
+    <string name="add_start_and_end_points">Добавить пункты отправления и назначения</string>
     <string name="route_add_start_point">Добавить точку отправления</string>
     <string name="route_descr_select_start_point">Выберите точку отправления</string>
     <string name="rendering_attr_surface_grass_paver_name">Газонная решётка</string>
@@ -3808,4 +3808,8 @@
     <string name="app_mode_inline_skates">Роликовые коньки</string>
     <string name="use_volume_buttons_as_zoom_descr">Управление уровнем масштабирования карты с помощью кнопок регулировки громкости устройства.</string>
     <string name="use_volume_buttons_as_zoom">Масштабирование кнопками громкости</string>
+    <string name="lenght_limit_description">Укажите длину автомобиля, для длинных транспортных средств могут применяться ограничения на маршруте.</string>
+    <string name="quick_action_remove_next_destination">Удалить следующий пункт</string>
+    <string name="please_provide_point_name_error">Пожалуйста, укажите название точки</string>
+    <string name="quick_action_remove_next_destination_descr">Текущий пункт назначения на маршруте будет удалён. Если это пункт назначения, навигация остановится.</string>
 </resources>

@@ -3816,4 +3816,8 @@
     <string name="app_mode_inline_skates">Inline-Skates</string>
     <string name="use_volume_buttons_as_zoom_descr">Aktivieren Sie die Steuerung der Zoomstufe der Karte mit den Lautstärketasten des Geräts.</string>
     <string name="use_volume_buttons_as_zoom">Lautstärketasten als Zoom</string>
+    <string name="lenght_limit_description">Bitte geben Sie Ihre Fahrzeuglänge an. Für lange Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
+    <string name="quick_action_remove_next_destination">Nächsten Zielpunkt löschen</string>
+    <string name="please_provide_point_name_error">Bitte geben Sie einen Namen für das Profil an</string>
+    <string name="quick_action_remove_next_destination_descr">Der aktuelle Punkt auf der Route wird gelöscht. Wenn es das Ziel ist, wird die Navigation gestoppt.</string>
 </resources>

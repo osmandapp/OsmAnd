@@ -3807,4 +3807,8 @@
     <string name="app_mode_inline_skates">Kolieskové korčule</string>
     <string name="use_volume_buttons_as_zoom_descr">Umožní ovládať priblíženie mapy tlačidlami hlasitosti zariadenia.</string>
     <string name="use_volume_buttons_as_zoom">Tlačidlá hlasitosti na približovanie</string>
+    <string name="lenght_limit_description">Zadajte dĺžku vášho vozidla, pretože na trase môžu byť obmedzenia pre dlhé vozidlá.</string>
+    <string name="quick_action_remove_next_destination">Vymazať ďalší cieľový bod</string>
+    <string name="please_provide_point_name_error">Prosím zadajte názov pre bod</string>
+    <string name="quick_action_remove_next_destination_descr">Aktuálny cieľový bod na trase bude vymazaný. Ak je to posledný cieľ, navigácia sa zastaví.</string>
 </resources>
