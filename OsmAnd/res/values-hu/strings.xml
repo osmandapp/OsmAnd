@@ -3756,4 +3756,8 @@ Hosszúság: %2$s</string>
     <string name="use_volume_buttons_as_zoom_descr">Engedélyezésével a térkép nagyítási szintje az eszköz hangerőgombjaival állítható.</string>
     <string name="use_volume_buttons_as_zoom">Hangerőgombok használata nagyításhoz</string>
     <string name="app_mode_inline_skates">Görkorcsolya</string>
+    <string name="please_provide_point_name_error">Kérem, adjon nevet a pontnak</string>
+    <string name="lenght_limit_description">Adja meg a járműve hosszát, a hosszú járművekre útvonalkorlátozások lehetnek érvényben.</string>
+    <string name="quick_action_remove_next_destination">Következő célpont törlése</string>
+    <string name="search_download_wikipedia_maps">Wikipédia térképek letöltése</string>
 </resources>
