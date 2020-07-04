@@ -3809,4 +3809,10 @@
     <string name="app_mode_inline_skates">Rulglitiloj</string>
     <string name="use_volume_buttons_as_zoom">Skali per sonfortecaj butonoj</string>
     <string name="use_volume_buttons_as_zoom_descr">Uzi la butonojn de sonforteco por pli-/mal-grandigi la mapon.</string>
+    <string name="lenght_limit_description">Enigu longon de via veturilo, iuj vojaj limigoj aplikas al longaj veturiloj.</string>
+    <string name="quick_action_remove_next_destination">Forigi sekvan celon</string>
+    <string name="please_provide_point_name_error">Enigu nomon por la punkto</string>
+    <string name="quick_action_remove_next_destination_descr">La markita celo de la kurso estos forigita. Se tio ĉi estos la fina celo, la navigado ĉesos.</string>
+    <string name="search_download_wikipedia_maps">Elŝuti vikipediajn mapojn</string>
+    <string name="plugin_wikipedia_description">Akiru informojn pri interesaj punktoj el Vikipedio. Gvidilo en via poŝo – aktivigu la kromprogramon Vikipedio por ricevi artikolojn pri proksimaj objektoj.</string>
 </resources>
