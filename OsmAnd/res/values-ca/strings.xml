@@ -3699,4 +3699,17 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="app_mode_inline_skates">Patins en línia</string>
     <string name="use_volume_buttons_as_zoom_descr">Activeu per controlar el nivell d\'ampliació del mapa amb els botons del volum del dispositiu.</string>
     <string name="use_volume_buttons_as_zoom">Botons de volum pel zoom</string>
+    <string name="delete_all_actions_message_q">Esteu segur que voleu suprimir definitivament %d dreceres\?</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Podeu exportar o importar les dreceres amb els perfils de les aplicacions.</string>
+    <string name="shared_string_delete_all_q">Ho esborrem tot\?</string>
+    <string name="screen_timeout">Retard de pantalla</string>
+    <string name="keep_active">Continua actiu</string>
+    <string name="screen_timeout_descr">Si està activat \"%1$s\" el temps d\'activitat quedarà afectat.</string>
+    <string name="shared_string_tones">tones</string>
+    <string name="shared_string_meters">metres</string>
+    <string name="quick_action_remove_next_destination">Suprimeix la propera fita</string>
+    <string name="please_provide_point_name_error">Proporcioneu un nom per al punt</string>
+    <string name="quick_action_remove_next_destination_descr">La propera fita de la ruta s\'esborrarà. Si es tractés de la Destinació final, la navegació s\'aturaria.</string>
+    <string name="search_download_wikipedia_maps">Baixa mapes de la Viquipèdia</string>
+    <string name="plugin_wikipedia_description">Obteniu informació de punts d\'interès des la Viquipèdia. Serà la vostra guia de butxaca en desconnexió - només cal que activeu el connector Viquipèdia i fruireu dels articles que tracten de les coses que us rodegen.</string>
 </resources>
