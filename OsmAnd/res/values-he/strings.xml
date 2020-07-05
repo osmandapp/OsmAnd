@@ -3817,4 +3817,10 @@
     <string name="speed_cameras_removed_descr">למכשיר הזה אין מצלמות מהירות.</string>
     <string name="use_volume_buttons_as_zoom_descr">מאפשר לשלוח ברמת התקריב של המפה עם כפתורי עצמת השמע של המכשיר.</string>
     <string name="use_volume_buttons_as_zoom">כפתורי עצמת שמע כתקריב</string>
+    <string name="lenght_limit_description">נא לספק את אורך כלי הרכב שלך, מגבלות מסלול מסוימות עשויות לחול על כלי רכב ארוכים.</string>
+    <string name="quick_action_remove_next_destination">מחיקת נקודת היעד הבאה</string>
+    <string name="please_provide_point_name_error">נא לספק שם לנקודה</string>
+    <string name="quick_action_remove_next_destination_descr">נקודת היעד הנוכחית במסלול תימחק. אם זה יהיה היעד, הניווט ייעצר.</string>
+    <string name="search_download_wikipedia_maps">הורדת מפות ויקיפדיה</string>
+    <string name="plugin_wikipedia_description">קבלת מידע על נקודות עניין מוויקיפדיה. מדריך הכיס הפרטי שלך - עליך פשוט להפעיל את התוסף של ויקיפדיה וליהנות מערכים על מה שסביבך.</string>
 </resources>
