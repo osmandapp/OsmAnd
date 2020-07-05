@@ -3796,4 +3796,10 @@ Pôr do Sol: %2$s</string>
     <string name="app_mode_inline_skates">Patins em linha</string>
     <string name="use_volume_buttons_as_zoom_descr">Ativar para controlar o nível de zoom do mapa com os botões de volume do dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botões de volume como zoom</string>
+    <string name="lenght_limit_description">Forneça o comprimento do seu veículo. Algumas restrições de rotas podem ser aplicadas a veículos longos.</string>
+    <string name="quick_action_remove_next_destination">Excluir próximo ponto de destino</string>
+    <string name="please_provide_point_name_error">Forneça um nome para o ponto</string>
+    <string name="quick_action_remove_next_destination_descr">O ponto de destino atual na rota será excluído. Se for o destino, a navegação será interrompida.</string>
+    <string name="search_download_wikipedia_maps">Baixar mapas da Wikipédia</string>
+    <string name="plugin_wikipedia_description">Obter informações sobre pontos de interesse da Wikipédia. É o seu guia de bolso off-line - só ativar o complemento Wikipédia e desfrutar de artigos sobre os elementos ao seu redor.</string>
 </resources>
