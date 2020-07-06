@@ -368,9 +368,9 @@
     <string name="map_online_plugin_is_not_installed">Активируйте плагин онлайн карт, чтобы выбирать различные источники карт</string>
     <string name="map_online_data">Онлайн карты</string>
     <string name="map_online_data_descr">Использовать онлайн карты (загрузка и кеширование на SD-карте).</string>
-    <string name="shared_string_online_maps">Онлайн карты</string>
+    <string name="shared_string_online_maps">Онлайн-карты</string>
     <string name="online_map_settings_descr">Выберите источник онлайн или кешированных растровых карт.</string>
-    <string name="osmand_rastermaps_plugin_description">Получение доступа ко множеству видов онлайн-карт (тайловых или растровых): от предопределённых тайловых OSM (как Mapnik), до спутниковых снимков и слоёв специального назначения, таких как карты погоды, климатические карты, геологических карты, слои затемнения высот и т. д. 
+    <string name="osmand_rastermaps_plugin_description">Получение доступа ко множеству видов онлайн-карт (тайловых или растровых): от предопределённых тайловых OSM (как Mapnik), до спутниковых снимков и слоёв специального назначения, таких как карты погоды, климатические карты, геологические карты, слои затемнения высот и т. д. 
 \n 
 \n Любая из этих карт может быть использована в качестве основной (базовой) карты для отображения или в виде наложения или подложки к другой базовой карте (например стандартной локальной карте OsmAnd). Некоторые элементы векторной карты OsmAnd могут быть по желанию скрыты через меню «Настройки карты». 
 \n 
@@ -1525,8 +1525,8 @@
     <string name="forward">Вперёд</string>
     <string name="home">Панель управления</string>
     <string name="local_map_names">Местные названия</string>
-    <string name="gpx_monitoring_start">Продолжить запись GPX</string>
-    <string name="gpx_monitoring_stop">Приостановить запись GPX</string>
+    <string name="gpx_monitoring_start">Возобновить запись GPX</string>
+    <string name="gpx_monitoring_stop">Остановить запись GPX</string>
     <string name="gpx_start_new_segment">Начать новый сегмент</string>
     <string name="enable_sleep_mode">Включить фоновый режим GPS</string>
     <string name="gps_wake_up_timer">Интервал пробуждения GPS</string>
@@ -1534,9 +1534,9 @@
     <string name="stop_navigation_service">Выключить</string>
     <string name="keep_navigation_service">Оставить</string>
     <string name="live_monitoring_m_descr">Отправлять данные отслеживания на указанный веб-сервис, если включена запись GPX.</string>
-    <string name="live_monitoring_m">Онлайн слежение (требуется GPX)</string>
-    <string name="live_monitoring_start">Начать онлайн слежение</string>
-    <string name="live_monitoring_stop">Остановить онлайн слежение</string>
+    <string name="live_monitoring_m">Онлайн-слежение (требуется GPX)</string>
+    <string name="live_monitoring_start">Начать онлайн-слежение</string>
+    <string name="live_monitoring_stop">Остановить онлайн-слежение</string>
     <string name="no_index_file_to_download">Загрузок не найдено, проверьте подключение к интернету.</string>
     <string name="lang_al">Албанский</string>
     <string name="lang_ar">Арабский</string>
@@ -1638,7 +1638,7 @@
     <string name="download_tab_local">Локальные</string>
     <string name="navigate_point_zone">Зона</string>
     <string name="rendering_attr_transportStops_name">Остановки транспорта</string>
-    <string name="shared_string_dismiss">Отклонить</string>
+    <string name="shared_string_dismiss">Отменить</string>
     <string name="dash_download_msg_none">Загрузить локальные карты\?</string>
     <string name="dash_download_msg">Загружено карт: %1$s</string>
     <string name="dash_download_new_one">Загрузить новую карту</string>
@@ -1692,7 +1692,7 @@
     <string name="device_memory">Память устройства</string>
     <string name="free">Свободно %1$s</string>
     <string name="roads_only">Только дороги</string>
-    <string name="online_map">Онлайн карта</string>
+    <string name="online_map">Онлайн-карта</string>
     <string name="rename_failed">Не удалось переименовать.</string>
     <string name="back_to_map">Вернуться на карту</string>
     <string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>
@@ -2303,12 +2303,12 @@
     <string name="sea_depth_thanks">Благодарим вас за покупку контуров морских глубин</string>
     <string name="shared_string_add_photos">Добавить фотографии</string>
     <string name="shared_string_permissions">Разрешения</string>
-    <string name="online_photos">Онлайн фотографии</string>
+    <string name="online_photos">Онлайн-фото</string>
     <string name="no_photos_descr">Здесь нет фотографий.</string>
     <string name="mapillary_action_descr">Поделитесь вашим просмотром улиц через Mapillary.</string>
     <string name="mapillary_widget">Виджет Mapillary</string>
     <string name="mapillary_widget_descr">Позволяет быстро внести свой вклад в Mapillary.</string>
-    <string name="mapillary_descr">Уличные онлайн фотографии для всех. Открывайте для себя места, сотрудничайте, снимайте мир.</string>
+    <string name="mapillary_descr">Фото с улиц онлайн для каждого. Открывайте для себя места, сотрудничайте, снимайте мир.</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Уличные фотографии для всех. Открывайте для себя места, сотрудничайте, снимайте мир.</string>
     <string name="save_poi_too_many_uppercase">Название содержит слишком много заглавных букв. Вы хотите продолжить?</string>
