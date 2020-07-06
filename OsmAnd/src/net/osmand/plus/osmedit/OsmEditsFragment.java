@@ -123,7 +123,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		if (child.getGroup() == Group.POI) {
 			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_info_dark, R.color.color_distance));
 		} else if (child.getGroup() == Group.BUG) {
-			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_osm_note, R.color.color_distance));
+			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_osm_note_add, R.color.color_distance));
 		}
 
 		TextView descr = (TextView) v.findViewById(R.id.description);
