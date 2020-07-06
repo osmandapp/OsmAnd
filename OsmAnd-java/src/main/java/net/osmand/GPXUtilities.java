@@ -1542,6 +1542,24 @@ public class GPXUtilities {
 			return parseColor(clrValue, defColor);
 		}
 
+		public void setGradientScaleType(GradientScaleType gradientScaleType) {
+			getExtensionsToWrite().put("gradientScaleType", gradientScaleType != null ? gradientScaleType.name() : null);
+		}
+
+		public GradientScaleType getGradientScaleType() {
+			if (extensions != null) {
+				String gradientScaleTypeName = extensions.get("gradientScaleType");
+				if (!Algorithms.isEmpty(gradientScaleTypeName)) {
+					try {
+						return GradientScaleType.valueOf(gradientScaleTypeName);
+					} catch (IllegalArgumentException e) {
+						log.error("Error reading gradientScaleType", e);
+					}
+				}
+			}
+			return null;
+		}
+
 		public String getWidth(String defWidth) {
 			String widthValue = null;
 			if (extensions != null) {

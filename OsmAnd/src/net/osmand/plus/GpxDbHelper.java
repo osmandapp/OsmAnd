@@ -84,6 +84,12 @@ public class GpxDbHelper {
 		return res;
 	}
 
+	public boolean updateGradientScaleType(@NonNull GpxDataItem item, @Nullable GradientScaleType gradientScaleType) {
+		boolean res = db.updateGradientScaleType(item, gradientScaleType);
+		putToCache(item);
+		return res;
+	}
+
 	public boolean updateShowAsMarkers(GpxDataItem item, boolean showAsMarkers) {
 		boolean res = db.updateShowAsMarkers(item, showAsMarkers);
 		putToCache(item);

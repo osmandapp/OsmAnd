@@ -55,6 +55,7 @@ public class GpxSelectionHelper {
 	private static final String WIDTH = "width";
 	private static final String SELECTED_BY_USER = "selected_by_user";
 	private static final String SHOW_ARROWS = "showArrows";
+	private static final String GRADIENT_SCALE_TYPE = "gradientScaleType";
 	private static final String SHOW_START_FINISH = "showStartFinish";
 
 	private OsmandApplication app;
@@ -519,10 +520,21 @@ public class GpxSelectionHelper {
 							int clr = Algorithms.parseColor(obj.getString(COLOR));
 							gpx.setColor(clr);
 						}
-						loadGpxScaleTypes(obj, gpx);
+						for (GradientScaleType scaleType : GradientScaleType.values()) {
+							if (obj.has(scaleType.getTypeName())) {
+								int clr = Algorithms.parseColor(obj.getString(scaleType.getTypeName()));
+								gpx.setGradientScaleColor(scaleType, clr);
+							}
+						}
 						if (obj.has(SHOW_ARROWS)) {
 							boolean showArrows = obj.optBoolean(SHOW_ARROWS, false);
 							gpx.setShowArrows(showArrows);
+						}
+						if (obj.has(GRADIENT_SCALE_TYPE)) {
+							String gradientScaleTypeName = obj.optString(GRADIENT_SCALE_TYPE);
+							if (!Algorithms.isEmpty(gradientScaleTypeName)) {
+								gpx.setGradientScaleType(GradientScaleType.valueOf(gradientScaleTypeName));
+							}
 						}
 						if (obj.has(SHOW_START_FINISH)) {
 							boolean showStartFinish = obj.optBoolean(SHOW_START_FINISH, false);
@@ -557,15 +569,6 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	private void loadGpxScaleTypes(JSONObject obj, GPXFile gpx) throws JSONException {
-		for (GradientScaleType scaleType : GradientScaleType.values()) {
-			if (obj.has(scaleType.getTypeName())) {
-				int clr = Algorithms.parseColor(obj.getString(scaleType.getTypeName()));
-				gpx.setGradientScaleColor(scaleType, clr);
-			}
-		}
-	}
-
 	private void saveCurrentSelections() {
 		JSONArray ar = new JSONArray();
 		for (SelectedGpxFile s : selectedGPXFiles) {
@@ -582,8 +585,17 @@ public class GpxSelectionHelper {
 						if (s.gpxFile.getWidth(null) != null) {
 							obj.put(WIDTH, s.gpxFile.getWidth(null));
 						}
+						if (s.gpxFile.getGradientScaleType() != null) {
+							obj.put(GRADIENT_SCALE_TYPE, s.gpxFile.getGradientScaleType());
+						}
 						obj.put(SHOW_ARROWS, s.gpxFile.isShowArrows());
 						obj.put(SHOW_START_FINISH, s.gpxFile.isShowStartFinish());
+						for (GradientScaleType scaleType : GradientScaleType.values()) {
+							int gradientScaleColor = s.gpxFile.getGradientScaleColor(scaleType, 0);
+							if (gradientScaleColor != 0) {
+								obj.put(scaleType.getTypeName(), Algorithms.colorToString(gradientScaleColor));
+							}
+						}
 					}
 					obj.put(SELECTED_BY_USER, s.selectedByUser);
 				} catch (JSONException e) {
@@ -1059,13 +1071,13 @@ public class GpxSelectionHelper {
 
 		@Override
 		protected void onProgressUpdate(Void... values) {
-				gpxTaskListener.gpxSelectionInProgress();
+			gpxTaskListener.gpxSelectionInProgress();
 		}
 
 		@Override
 		protected void onPreExecute() {
 			collectSelectedItems();
-				gpxTaskListener.gpxSelectionStarted();
+			gpxTaskListener.gpxSelectionStarted();
 		}
 
 		private void collectSelectedItems() {
