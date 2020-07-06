@@ -253,8 +253,8 @@ public class EditPoiData {
 	}
 
 	public boolean hasEmptyValue() {
-		for (String value : tagValues.values()) {
-			if (value.isEmpty()) {
+		for (Map.Entry<String, String> tag : tagValues.entrySet()) {
+			if (tag.getValue().isEmpty() && !POI_TYPE_TAG.equals(tag.getKey())) {
 				return true;
 			}
 		}
