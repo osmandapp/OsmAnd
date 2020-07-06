@@ -287,7 +287,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			}
 			return app.getUIUtilities().getIcon(iconResId, colorResId);
 		} else if (point.getGroup() == OsmPoint.Group.BUG) {
-			return app.getUIUtilities().getIcon(R.drawable.ic_action_osm_note, R.color.color_distance);
+			return app.getUIUtilities().getIcon(R.drawable.ic_action_osm_note_add, R.color.color_distance);
 		}
 		return null;
 	}
