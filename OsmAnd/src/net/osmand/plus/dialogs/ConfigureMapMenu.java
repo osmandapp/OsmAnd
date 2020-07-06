@@ -47,7 +47,6 @@ import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
@@ -173,7 +172,6 @@ public class ConfigureMapMenu {
 		final OsmandApplication app = activity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final int selectedProfileColorRes = settings.getApplicationMode().getIconColorInfo().getColor(nightMode);
-		final int selectedProfileColor = ContextCompat.getColor(app, selectedProfileColorRes);
 		MapLayerMenuListener l = new MapLayerMenuListener(activity, adapter);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(SHOW_CATEGORY_ID)

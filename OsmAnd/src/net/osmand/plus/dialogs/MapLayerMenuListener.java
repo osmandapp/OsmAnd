@@ -8,7 +8,6 @@ import android.widget.CompoundButton;
 
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.ContextMenuAdapter;
@@ -22,13 +21,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportLinesMenu;
-import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -76,10 +73,6 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			return false;
 		} else if (itemId == R.string.layer_gpx_layer && menuAdapter.getItem(pos).getSelected()) {
 			showGpxSelectionDialog(adapter, adapter.getItem(pos));
-			return false;
-		} else if (itemId == R.string.shared_string_wikipedia) {
-			mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.WIKIPEDIA,
-					AndroidUtils.getCenterViewCoordinates(view));
 			return false;
 		} else if (itemId == R.string.rendering_category_transport) {
 			final ContextMenuItem item = adapter.getItem(pos);
@@ -144,18 +137,6 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			} else {
 				showGpxSelectionDialog(adapter, adapter.getItem(pos));
 			}
-		} else if (itemId == R.string.shared_string_wikipedia) {
-			WikipediaPoiMenu.toggleWikipediaPoi(mapActivity, isChecked, new CallbackWithObject<Boolean>() {
-				@Override
-				public boolean processResult(Boolean selected) {
-					item.setSelected(selected);
-					item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-					item.setDescription(selected ?
-							WikipediaPoiMenu.getLanguagesSummary(mapActivity.getMyApplication()) : null);
-					adapter.notifyDataSetChanged();
-					return true;
-				}
-			});
 		} else if (itemId == R.string.rendering_category_transport) {
 			boolean selected = TransportLinesMenu.isShowLines(mapActivity.getMyApplication());
 			TransportLinesMenu.toggleTransportLines(mapActivity, !selected, new CallbackWithObject<Boolean>() {
