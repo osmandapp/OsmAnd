@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXFile.GradientScaleType;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Route;
 import net.osmand.GPXUtilities.Track;
@@ -518,6 +519,7 @@ public class GpxSelectionHelper {
 							int clr = Algorithms.parseColor(obj.getString(COLOR));
 							gpx.setColor(clr);
 						}
+						loadGpxScaleTypes(obj, gpx);
 						if (obj.has(SHOW_ARROWS)) {
 							boolean showArrows = obj.optBoolean(SHOW_ARROWS, false);
 							gpx.setShowArrows(showArrows);
@@ -551,6 +553,15 @@ public class GpxSelectionHelper {
 			} catch (Exception e) {
 				app.getSettings().SELECTED_GPX.set("");
 				e.printStackTrace();
+			}
+		}
+	}
+
+	private void loadGpxScaleTypes(JSONObject obj, GPXFile gpx) throws JSONException {
+		for (GradientScaleType scaleType : GradientScaleType.values()) {
+			if (obj.has(scaleType.getTypeName())) {
+				int clr = Algorithms.parseColor(obj.getString(scaleType.getTypeName()));
+				gpx.setGradientScaleColor(scaleType, clr);
 			}
 		}
 	}

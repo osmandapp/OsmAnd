@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXFile.GradientScaleType;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -77,6 +78,12 @@ public class GpxDbHelper {
 		return res;
 	}
 
+	public boolean updateGradientScaleColor(@NonNull GpxDataItem item, @NonNull GradientScaleType gradientScaleType, int color) {
+		boolean res = db.updateGradientScaleColor(item, gradientScaleType, color);
+		putToCache(item);
+		return res;
+	}
+
 	public boolean updateShowAsMarkers(GpxDataItem item, boolean showAsMarkers) {
 		boolean res = db.updateShowAsMarkers(item, showAsMarkers);
 		putToCache(item);
@@ -107,7 +114,7 @@ public class GpxDbHelper {
 		return res;
 	}
 
-	public boolean updateJoinSegments(@NonNull GpxDataItem item,  boolean joinSegments) {
+	public boolean updateJoinSegments(@NonNull GpxDataItem item, boolean joinSegments) {
 		boolean res = db.updateJoinSegments(item, joinSegments);
 		putToCache(item);
 		return res;

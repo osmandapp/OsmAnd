@@ -42,7 +42,9 @@ import java.util.Stack;
 import java.util.TimeZone;
 
 public class GPXUtilities {
+
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
+
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String DEFAULT_ICON_NAME = "special_star";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
@@ -115,6 +117,13 @@ public class GPXUtilities {
 			return extensions;
 		}
 
+		public Map<String, String> getExtensionsToWrite() {
+			if (extensions == null) {
+				extensions = new LinkedHashMap<>();
+			}
+			return extensions;
+		}
+
 		public GPXExtensionsWriter getExtensionsWriter() {
 			return extensionsWriter;
 		}
@@ -148,50 +157,7 @@ public class GPXUtilities {
 			getExtensionsToWrite().remove("color");
 		}
 
-		public String getWidth(String defWidth) {
-			String widthValue = null;
-			if (extensions != null) {
-				widthValue = extensions.get("width");
-			}
-			return widthValue != null ? widthValue : defWidth;
-		}
-
-		public void setWidth(String width) {
-			getExtensionsToWrite().put("width", width);
-		}
-
-		public boolean isShowArrows() {
-			String showArrows = null;
-			if (extensions != null) {
-				showArrows = extensions.get("showArrows");
-			}
-			return Boolean.parseBoolean(showArrows);
-		}
-
-		public void setShowArrows(boolean showArrows) {
-			getExtensionsToWrite().put("showArrows", String.valueOf(showArrows));
-		}
-
-		public boolean isShowStartFinish() {
-			String showStartFinish = null;
-			if (extensions != null) {
-				showStartFinish = extensions.get("showStartFinish");
-			}
-			return Boolean.parseBoolean(showStartFinish);
-		}
-
-		public void setShowStartFinish(boolean showStartFinish) {
-			getExtensionsToWrite().put("showStartFinish", String.valueOf(showStartFinish));
-		}
-
-		public Map<String, String> getExtensionsToWrite() {
-			if (extensions == null) {
-				extensions = new LinkedHashMap<>();
-			}
-			return extensions;
-		}
-
-		private int parseColor(String colorString, int defColor) {
+		protected int parseColor(String colorString, int defColor) {
 			if (!Algorithms.isEmpty(colorString)) {
 				if (colorString.charAt(0) == '#') {
 					long color = Long.parseLong(colorString.substring(1), 16);
@@ -1546,6 +1512,70 @@ public class GPXUtilities {
 				}
 			}
 			return new QuadRect(left, top, right, bottom);
+		}
+
+		public enum GradientScaleType {
+			SPEED("gradientSpeedColor"),
+			ALTITUDE("gradientAltitudeColor"),
+			SLOPE("gradientSlopeColor");
+
+			private String typeName;
+
+			GradientScaleType(String typeName) {
+				this.typeName = typeName;
+			}
+
+			public String getTypeName() {
+				return typeName;
+			}
+		}
+
+		public void setGradientScaleColor(GradientScaleType gradientScaleType, int gradientScaleSpeedColor) {
+			getExtensionsToWrite().put(gradientScaleType.getTypeName(), Algorithms.colorToString(gradientScaleSpeedColor));
+		}
+
+		public int getGradientScaleColor(GradientScaleType gradientScaleType, int defColor) {
+			String clrValue = null;
+			if (extensions != null) {
+				clrValue = extensions.get(gradientScaleType.getTypeName());
+			}
+			return parseColor(clrValue, defColor);
+		}
+
+		public String getWidth(String defWidth) {
+			String widthValue = null;
+			if (extensions != null) {
+				widthValue = extensions.get("width");
+			}
+			return widthValue != null ? widthValue : defWidth;
+		}
+
+		public void setWidth(String width) {
+			getExtensionsToWrite().put("width", width);
+		}
+
+		public boolean isShowArrows() {
+			String showArrows = null;
+			if (extensions != null) {
+				showArrows = extensions.get("showArrows");
+			}
+			return Boolean.parseBoolean(showArrows);
+		}
+
+		public void setShowArrows(boolean showArrows) {
+			getExtensionsToWrite().put("showArrows", String.valueOf(showArrows));
+		}
+
+		public boolean isShowStartFinish() {
+			String showStartFinish = null;
+			if (extensions != null) {
+				showStartFinish = extensions.get("showStartFinish");
+			}
+			return Boolean.parseBoolean(showStartFinish);
+		}
+
+		public void setShowStartFinish(boolean showStartFinish) {
+			getExtensionsToWrite().put("showStartFinish", String.valueOf(showStartFinish));
 		}
 	}
 

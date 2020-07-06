@@ -3,6 +3,7 @@ package net.osmand.plus;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities.GPXFile.GradientScaleType;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -63,6 +64,12 @@ public class GPXDatabase {
 
 	private static final String GPX_COL_WIDTH = "width";
 
+	private static final String GPX_COL_GRADIENT_SPEED_COLOR = "gradientSpeedColor";
+
+	private static final String GPX_COL_GRADIENT_ALTITUDE_COLOR = "gradientAltitudeColor";
+
+	private static final String GPX_COL_GRADIENT_SLOPE_COLOR = "gradientSlopeColor";
+
 	public static final int GPX_SPLIT_TYPE_NO_SPLIT = -1;
 	public static final int GPX_SPLIT_TYPE_DISTANCE = 1;
 	public static final int GPX_SPLIT_TYPE_TIME = 2;
@@ -99,7 +106,10 @@ public class GPXDatabase {
 			GPX_COL_JOIN_SEGMENTS + " int, " + // 1 = true, 0 = false
 			GPX_COL_SHOW_ARROWS + " int, " + // 1 = true, 0 = false
 			GPX_COL_SHOW_START_FINISH + " int, " + // 1 = true, 0 = false
-			GPX_COL_WIDTH + " TEXT);";
+			GPX_COL_WIDTH + " TEXT, " +
+			GPX_COL_GRADIENT_SPEED_COLOR + " TEXT, " +
+			GPX_COL_GRADIENT_ALTITUDE_COLOR + " TEXT, " +
+			GPX_COL_GRADIENT_SLOPE_COLOR + " TEXT);";
 
 	private static final String GPX_TABLE_SELECT = "SELECT " +
 			GPX_COL_NAME + ", " +
@@ -129,8 +139,10 @@ public class GPXDatabase {
 			GPX_COL_SHOW_AS_MARKERS + ", " +
 			GPX_COL_JOIN_SEGMENTS + ", " +
 			GPX_COL_SHOW_ARROWS + ", " +
-			GPX_COL_SHOW_START_FINISH + ", " +
-			GPX_COL_WIDTH +
+			GPX_COL_WIDTH + ", " +
+			GPX_COL_GRADIENT_SPEED_COLOR + ", " +
+			GPX_COL_GRADIENT_ALTITUDE_COLOR + ", " +
+			GPX_COL_GRADIENT_SLOPE_COLOR +
 			" FROM " +	GPX_TABLE_NAME;
 
 	private static final String GPX_TABLE_UPDATE_ANALYSIS = "UPDATE " +
@@ -162,6 +174,9 @@ public class GPXDatabase {
 		private GPXTrackAnalysis analysis;
 		private String width;
 		private int color;
+		private int gradientSpeedColor;
+		private int gradientAltitudeColor;
+		private int gradientSlopeColor;
 		private int splitType;
 		private double splitInterval;
 		private long fileLastModifiedTime;
@@ -192,6 +207,30 @@ public class GPXDatabase {
 
 		public int getColor() {
 			return color;
+		}
+
+		public int getGradientSpeedColor() {
+			return gradientSpeedColor;
+		}
+
+		public void setGradientSpeedColor(int gradientSpeedColor) {
+			this.gradientSpeedColor = gradientSpeedColor;
+		}
+
+		public int getGradientAltitudeColor() {
+			return gradientAltitudeColor;
+		}
+
+		public void setGradientAltitudeColor(int gradientAltitudeColor) {
+			this.gradientAltitudeColor = gradientAltitudeColor;
+		}
+
+		public int getGradientSlopeColor() {
+			return gradientSlopeColor;
+		}
+
+		public void setGradientSlopeColor(int gradientSlopeColor) {
+			this.gradientSlopeColor = gradientSlopeColor;
 		}
 
 		public String getWidth() {
@@ -314,7 +353,7 @@ public class GPXDatabase {
 		if (oldVersion < 3) {
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_FILE_LAST_MODIFIED_TIME + " long");
 		}
-		
+
 		if (oldVersion < 4) {
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SPLIT_TYPE + " int");
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SPLIT_INTERVAL + " double");
@@ -386,6 +425,9 @@ public class GPXDatabase {
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SHOW_ARROWS + " int");
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SHOW_START_FINISH + " int");
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_WIDTH + " TEXT");
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_GRADIENT_SPEED_COLOR + " TEXT");
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_GRADIENT_ALTITUDE_COLOR + " TEXT");
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_GRADIENT_SLOPE_COLOR + " TEXT");
 
 			db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " + GPX_COL_SHOW_ARROWS + " = ? " +
 					"WHERE " + GPX_COL_SHOW_ARROWS + " IS NULL", new Object[]{0});
@@ -446,6 +488,34 @@ public class GPXDatabase {
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
 						new Object[] { (color == 0 ? "" : Algorithms.colorToString(color)), fileName, fileDir });
 				item.color = color;
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public boolean updateGradientScaleColor(@NonNull GpxDataItem item, @NonNull GradientScaleType gradientScaleType, int gradientScaleColor) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				String fileName = getFileName(item.file);
+				String fileDir = getFileDir(item.file);
+				String columnName = null;
+				if (GradientScaleType.SPEED == gradientScaleType) {
+					columnName = GPX_COL_GRADIENT_SPEED_COLOR;
+					item.gradientSpeedColor = gradientScaleColor;
+				} else if (GradientScaleType.ALTITUDE == gradientScaleType) {
+					columnName = GPX_COL_GRADIENT_ALTITUDE_COLOR;
+					item.gradientAltitudeColor = gradientScaleColor;
+				} else if (GradientScaleType.SLOPE == gradientScaleType) {
+					columnName = GPX_COL_GRADIENT_SLOPE_COLOR;
+					item.gradientSlopeColor = gradientScaleColor;
+				}
+				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " + columnName + " = ? " +
+								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] {(gradientScaleColor == 0 ? "" : Algorithms.colorToString(gradientScaleColor)), fileName, fileDir});
 			} finally {
 				db.close();
 			}
@@ -642,7 +712,10 @@ public class GPXDatabase {
 							GPX_COL_JOIN_SEGMENTS + ", " +
 							GPX_COL_SHOW_ARROWS + ", " +
 							GPX_COL_SHOW_START_FINISH + ", " +
-							GPX_COL_WIDTH +
+							GPX_COL_WIDTH + ", " +
+							GPX_COL_GRADIENT_SPEED_COLOR + ", " +
+							GPX_COL_GRADIENT_ALTITUDE_COLOR + ", " +
+							GPX_COL_GRADIENT_SLOPE_COLOR +
 							") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 					new Object[] {fileName, fileDir, color, 0, item.splitType, item.splitInterval,
 							item.apiImported ? 1 : 0, item.showAsMarkers ? 1 : 0, item.joinSegments ? 1 : 0,
