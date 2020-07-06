@@ -648,6 +648,18 @@ public class GpxSelectionHelper {
 					if (dataItem.getColor() != 0) {
 						gpx.setColor(dataItem.getColor());
 					}
+					if (dataItem.getGradientSpeedColor() != 0) {
+						gpx.setGradientScaleColor(GradientScaleType.SPEED, dataItem.getGradientSpeedColor());
+					}
+					if (dataItem.getGradientAltitudeColor() != 0) {
+						gpx.setGradientScaleColor(GradientScaleType.ALTITUDE, dataItem.getGradientAltitudeColor());
+					}
+					if (dataItem.getGradientSlopeColor() != 0) {
+						gpx.setGradientScaleColor(GradientScaleType.SLOPE, dataItem.getGradientSlopeColor());
+					}
+					if (dataItem.getGradientScaleType() != null) {
+						gpx.setGradientScaleType(dataItem.getGradientScaleType());
+					}
 					if (dataItem.getWidth() != null) {
 						gpx.setWidth(dataItem.getWidth());
 					}

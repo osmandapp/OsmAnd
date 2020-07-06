@@ -142,6 +142,7 @@ public class GPXDatabase {
 			GPX_COL_SHOW_AS_MARKERS + ", " +
 			GPX_COL_JOIN_SEGMENTS + ", " +
 			GPX_COL_SHOW_ARROWS + ", " +
+			GPX_COL_SHOW_START_FINISH + ", " +
 			GPX_COL_WIDTH + ", " +
 			GPX_COL_GRADIENT_SPEED_COLOR + ", " +
 			GPX_COL_GRADIENT_ALTITUDE_COLOR + ", " +
