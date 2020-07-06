@@ -10,6 +10,7 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.util.Pair;
@@ -41,6 +42,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
@@ -82,10 +84,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private Paint paintIcon;
 	private int cachedHash;
 	private int cachedColor;
+	private int currentTrackColor;
 	private float defaultTrackWidth;
 	private Map<String, Float> cachedTrackWidth = new HashMap<>();
-	private int currentTrackColor;
 
+	private Drawable startPointIcon;
+	private Drawable finishPointIcon;
 	private LayerDrawable selectedPoint;
 	private TrackChartPoints trackChartPoints;
 
@@ -167,6 +171,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		paintIcon = new Paint();
 		selectedPoint = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), R.drawable.map_location_default);
 
+		UiUtilities iconsCache = view.getApplication().getUIUtilities();
+		startPointIcon = iconsCache.getIcon(R.drawable.map_track_point_start);
+		finishPointIcon = iconsCache.getIcon(R.drawable.map_track_point_finish);
+
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 
 		visitedColor = ContextCompat.getColor(view.getApplication(), R.color.color_ok);
@@ -201,6 +209,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 			drawSelectedFilesSplits(canvas, tileBox, selectedGPXFiles, settings);
 			drawSelectedFilesPoints(canvas, tileBox, selectedGPXFiles);
+			drawSelectedFilesStartEndPoints(canvas, tileBox, selectedGPXFiles);
 		}
 		if (textLayer != null && isTextVisible()) {
 			textLayer.putData(this, cache);
@@ -381,6 +390,34 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 			}
 		}
+	}
+
+	private void drawSelectedFilesStartEndPoints(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
+		if (tileBox.getZoom() >= START_ZOOM) {
+			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
+				if (selectedGpxFile.getGpxFile().isShowStartFinish()) {
+					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
+					TrkSegment endSegment = segments.get(segments.size() - 1);
+
+					WptPt start = segments.get(0).points.get(0);
+					WptPt end = endSegment.points.get(endSegment.points.size() - 1);
+
+					drawPoint(canvas, tileBox, start, startPointIcon);
+					drawPoint(canvas, tileBox, end, finishPointIcon);
+				}
+			}
+		}
+	}
+
+	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, WptPt wptPt, Drawable icon) {
+		int pointX = (int) tileBox.getPixXFromLatLon(wptPt.lat, wptPt.lon);
+		int pointY = (int) tileBox.getPixYFromLatLon(wptPt.lat, wptPt.lon);
+
+		icon.setBounds(pointX - icon.getIntrinsicWidth() / 2,
+				pointY - icon.getIntrinsicHeight() / 2,
+				pointX + icon.getIntrinsicWidth() / 2,
+				pointY + icon.getIntrinsicHeight() / 2);
+		icon.draw(canvas);
 	}
 
 	private void drawSelectedFilesPoints(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
