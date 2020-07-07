@@ -51,7 +51,7 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 		if (savedInstanceState != null) {
 			expireValue = savedInstanceState.getInt(EXPIRE_VALUE_KEY, EXPIRE_TIME_NEVER);
 		}
-		LayoutInflater inflater = UiUtilities.getMaterialInflater(getContext(), nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.expire_time));
 		items.add(titleItem);
 		final View inputValueLayout = inflater.inflate(R.layout.edit_text_with_descr, null);

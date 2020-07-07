@@ -82,7 +82,6 @@
 
 	<com.google.android.material.slider.Slider
 		android:id="@+id/speed_slider"
-		style="@style/Widget.Styled.Slider"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="@dimen/content_padding_small"

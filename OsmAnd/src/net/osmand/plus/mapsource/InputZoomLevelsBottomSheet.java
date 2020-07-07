@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -81,7 +80,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			sliderDescrRes = savedInstanceState.getInt(SLIDER_DESCR_RES_KEY);
 			newMapSource = savedInstanceState.getBoolean(NEW_MAP_SOURCE);
 		}
-		LayoutInflater inflater = UiUtilities.getMaterialInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.shared_string_zoom_levels));
 		items.add(titleItem);
 		final View sliderView = inflater.inflate(R.layout.zoom_levels_with_descr, null);
