@@ -1476,31 +1476,38 @@ public class RouteResultPreparation {
 
 	protected TurnType createSimpleKeepLeftRightTurn(boolean leftSide, RouteSegmentResult prevSegm,
 			RouteSegmentResult currentSegm, RoadSplitStructure rs) {
+		double devation = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin()));
+		boolean makeSlightTurn = devation > 5 && (!isMotorway(prevSegm) || !isMotorway(currentSegm));
+		TurnType t = null;
+		int laneType = TurnType.C;
+		if (rs.keepLeft && rs.keepRight) {
+			t = TurnType.valueOf(TurnType.C, leftSide);
+		} else if (rs.keepLeft) {
+			t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLL : TurnType.KL, leftSide);
+			if (makeSlightTurn) {
+				laneType = TurnType.TSLL;
+			}
+		} else if (rs.keepRight) {
+			t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLR : TurnType.KR, leftSide);
+			if (makeSlightTurn) {
+				laneType = TurnType.TSLR;
+			}
+		} else {
+			return null;
+		}
 		int current = countLanesMinOne(currentSegm);
 		int ls = current + rs.leftLanes + rs.rightLanes;
 		int[] lanes = new int[ls];
 		for (int it = 0; it < ls; it++) {
 			if (it < rs.leftLanes || it >= rs.leftLanes + current) {
-				lanes[it] = 0;
+				lanes[it] = TurnType.C << 1;
 			} else {
-				lanes[it] = 1;
+				lanes[it] = (laneType << 1) + 1;
 			}
 		}
 		// sometimes links are
 		if ((current <= rs.leftLanes + rs.rightLanes) && (rs.leftLanes > 1 || rs.rightLanes > 1)) {
 			rs.speak = true;
-		}
-		double devation = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin()));
-		boolean makeSlightTurn = devation > 5 && (!isMotorway(prevSegm) || !isMotorway(currentSegm));
-		TurnType t = null;
-		if (rs.keepLeft && rs.keepRight) {
-			t = TurnType.valueOf(TurnType.C, leftSide);
-		} else if (rs.keepLeft) {
-			t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLL : TurnType.KL, leftSide);
-		} else if (rs.keepRight) {
-			t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLR : TurnType.KR, leftSide);
-		} else {
-			return t;
 		}
 		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(lanes);
