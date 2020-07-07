@@ -1514,26 +1514,6 @@ public class GPXUtilities {
 			return new QuadRect(left, top, right, bottom);
 		}
 
-		public enum GradientScaleType {
-			SPEED("gradient_speed_color"),
-			ALTITUDE("gradient_altitude_color"),
-			SLOPE("gradient_slope_color");
-
-			private String typeName;
-
-			GradientScaleType(String typeName) {
-				this.typeName = typeName;
-			}
-
-			public String getTypeName() {
-				return typeName;
-			}
-		}
-
-		public void setGradientScaleColor(GradientScaleType gradientScaleType, int gradientScaleSpeedColor) {
-			getExtensionsToWrite().put(gradientScaleType.getTypeName(), Algorithms.colorToString(gradientScaleSpeedColor));
-		}
-
 		public int getGradientScaleColor(GradientScaleType gradientScaleType, int defColor) {
 			String clrValue = null;
 			if (extensions != null) {
@@ -1542,8 +1522,8 @@ public class GPXUtilities {
 			return parseColor(clrValue, defColor);
 		}
 
-		public void setGradientScaleType(GradientScaleType gradientScaleType) {
-			getExtensionsToWrite().put("gradient_scale_type", gradientScaleType != null ? gradientScaleType.name() : null);
+		public void setGradientScaleColor(GradientScaleType gradientScaleType, int gradientScaleColor) {
+			getExtensionsToWrite().put(gradientScaleType.getTypeName(), Algorithms.colorToString(gradientScaleColor));
 		}
 
 		public GradientScaleType getGradientScaleType() {
@@ -1558,6 +1538,46 @@ public class GPXUtilities {
 				}
 			}
 			return null;
+		}
+
+		public void setGradientScaleType(GradientScaleType gradientScaleType) {
+			getExtensionsToWrite().put("gradient_scale_type", gradientScaleType != null ? gradientScaleType.name() : null);
+		}
+
+		public GpxSplitType getSplitType() {
+			if (extensions != null) {
+				String gradientScaleTypeName = extensions.get("split_type");
+				if (!Algorithms.isEmpty(gradientScaleTypeName)) {
+					try {
+						return GpxSplitType.valueOf(gradientScaleTypeName);
+					} catch (IllegalArgumentException e) {
+						log.error("Error reading GpxSplitType", e);
+					}
+				}
+			}
+			return null;
+		}
+
+		public void setSplitType(GpxSplitType gpxSplitType) {
+			getExtensionsToWrite().put("split_type", gpxSplitType != null ? gpxSplitType.name() : null);
+		}
+
+		public double getSplitInterval() {
+			if (extensions != null) {
+				String splitIntervalStr = extensions.get("split_interval");
+				if (!Algorithms.isEmpty(splitIntervalStr)) {
+					try {
+						return Double.parseDouble(splitIntervalStr);
+					} catch (NumberFormatException e) {
+						log.error("Error reading split_interval", e);
+					}
+				}
+			}
+			return 0;
+		}
+
+		public void setSplitInterval(double splitInterval) {
+			getExtensionsToWrite().put("split_interval", String.valueOf(splitInterval));
 		}
 
 		public String getWidth(String defWidth) {
@@ -1594,6 +1614,38 @@ public class GPXUtilities {
 
 		public void setShowStartFinish(boolean showStartFinish) {
 			getExtensionsToWrite().put("show_start_finish", String.valueOf(showStartFinish));
+		}
+
+		public enum GradientScaleType {
+			SPEED("gradient_speed_color"),
+			ALTITUDE("gradient_altitude_color"),
+			SLOPE("gradient_slope_color");
+
+			private String typeName;
+
+			GradientScaleType(String typeName) {
+				this.typeName = typeName;
+			}
+
+			public String getTypeName() {
+				return typeName;
+			}
+		}
+
+		public enum GpxSplitType {
+			NO_SPLIT(-1),
+			DISTANCE(1),
+			TIME(2);
+
+			private int type;
+
+			GpxSplitType(int type) {
+				this.type = type;
+			}
+
+			public int getType() {
+				return type;
+			}
 		}
 	}
 

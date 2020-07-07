@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXFile.GpxSplitType;
 import net.osmand.GPXUtilities.GPXFile.GradientScaleType;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
@@ -114,8 +115,8 @@ public class GpxDbHelper {
 		return res;
 	}
 
-	public boolean updateSplit(@NonNull GpxDataItem item, int splitType, double splitInterval) {
-		boolean res = db.updateSplit(item, splitType, splitInterval);
+	public boolean updateSplit(@NonNull GpxDataItem item, @NonNull GpxSplitType splitType, double splitInterval) {
+		boolean res = db.updateSplit(item, splitType.getType(), splitInterval);
 		putToCache(item);
 		return res;
 	}

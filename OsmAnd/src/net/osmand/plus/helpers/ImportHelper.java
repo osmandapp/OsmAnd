@@ -1027,6 +1027,10 @@ public class ImportHelper {
 						item.setGradientSlopeColor(gpxFile.getGradientScaleColor(GradientScaleType.SLOPE, 0));
 						item.setGradientAltitudeColor(gpxFile.getGradientScaleColor(GradientScaleType.ALTITUDE, 0));
 						app.getGpxDbHelper().add(item);
+
+						if (gpxFile.getSplitType() != null && gpxFile.getSplitInterval() != 0) {
+							app.getGpxDbHelper().updateSplit(item, gpxFile.getSplitType(), gpxFile.getSplitInterval());
+						}
 					} else {
 						GPXDatabase.GpxDataItem item = app.getGpxDbHelper().getItem(file);
 						if (item != null) {

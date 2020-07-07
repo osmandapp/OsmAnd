@@ -39,12 +39,12 @@ import com.squareup.picasso.RequestCreator;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXFile.GpxSplitType;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PicassoUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
@@ -764,9 +764,9 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		double splitInterval = getGpxDataItem().getSplitInterval();
 		int position = 0;
 
-		if (splitType == GPXDatabase.GPX_SPLIT_TYPE_DISTANCE) {
+		if (splitType == GpxSplitType.DISTANCE.getType()) {
 			position = distanceSplit.indexOf(splitInterval);
-		} else if (splitType == GPXDatabase.GPX_SPLIT_TYPE_TIME) {
+		} else if (splitType == GpxSplitType.TIME.getType()) {
 			position = timeSplit.indexOf((int) splitInterval);
 		}
 
@@ -877,20 +877,20 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	private void updateSplitInDatabase() {
-		int splitType = 0;
 		double splitInterval = 0;
+		GpxSplitType splitType = null;
 		if (selectedSplitInterval == 0) {
-			splitType = GPXDatabase.GPX_SPLIT_TYPE_NO_SPLIT;
+			splitType = GpxSplitType.NO_SPLIT;
 			splitInterval = 0;
 		} else if (distanceSplit.get(selectedSplitInterval) > 0) {
-			splitType = GPXDatabase.GPX_SPLIT_TYPE_DISTANCE;
+			splitType = GpxSplitType.DISTANCE;
 			splitInterval = distanceSplit.get(selectedSplitInterval);
 		} else if (timeSplit.get(selectedSplitInterval) > 0) {
-			splitType = GPXDatabase.GPX_SPLIT_TYPE_TIME;
+			splitType = GpxSplitType.TIME;
 			splitInterval = timeSplit.get(selectedSplitInterval);
 		}
 		GpxDataItem item = getGpxDataItem();
-		if (item != null) {
+		if (item != null && splitType != null) {
 			app.getGpxDbHelper().updateSplit(item, splitType, splitInterval);
 		}
 	}

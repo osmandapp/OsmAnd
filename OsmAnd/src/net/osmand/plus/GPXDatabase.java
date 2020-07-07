@@ -72,10 +72,6 @@ public class GPXDatabase {
 
 	private static final String GPX_COL_GRADIENT_SCALE_TYPE = "gradientScaleType";
 
-	public static final int GPX_SPLIT_TYPE_NO_SPLIT = -1;
-	public static final int GPX_SPLIT_TYPE_DISTANCE = 1;
-	public static final int GPX_SPLIT_TYPE_TIME = 2;
-
 	private static final String GPX_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + GPX_TABLE_NAME + " (" +
 			GPX_COL_NAME + " TEXT, " +
 			GPX_COL_DIR + " TEXT, " +

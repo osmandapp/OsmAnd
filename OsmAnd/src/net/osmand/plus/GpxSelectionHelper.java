@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXFile.GpxSplitType;
 import net.osmand.GPXUtilities.GPXFile.GradientScaleType;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Route;
@@ -172,17 +173,17 @@ public class GpxSelectionHelper {
 			if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
 				List<GpxDisplayGroup> groups = app.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
-				if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_NO_SPLIT) {
+				if (dataItem.getSplitType() == GpxSplitType.NO_SPLIT.getType()) {
 					for (GpxDisplayGroup model : groups) {
 						model.noSplit(app);
 					}
 					selectedGpxFile.setDisplayGroups(groups, app);
-				} else if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_DISTANCE) {
+				} else if (dataItem.getSplitType() == GpxSplitType.DISTANCE.getType()) {
 					for (GpxDisplayGroup model : groups) {
 						model.splitByDistance(app, dataItem.getSplitInterval(), dataItem.isJoinSegments());
 					}
 					selectedGpxFile.setDisplayGroups(groups, app);
-				} else if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_TIME) {
+				} else if (dataItem.getSplitType() == GpxSplitType.TIME.getType()) {
 					for (GpxDisplayGroup model : groups) {
 						model.splitByTime(app, (int) dataItem.getSplitInterval(), dataItem.isJoinSegments());
 					}
