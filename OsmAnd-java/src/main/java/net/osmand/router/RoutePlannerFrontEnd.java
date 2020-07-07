@@ -31,7 +31,7 @@ public class RoutePlannerFrontEnd {
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public boolean useSmartRouteRecalculation = true;
-	
+
 	
 	public RoutePlannerFrontEnd() {
 	}
@@ -50,7 +50,7 @@ public class RoutePlannerFrontEnd {
 		// don't search subsegments shorter than specified distance (also used to step back for car turns)
 		public double MINIMUM_STEP_APPROXIMATION = 100;
 		// Parameter to smoother the track itself (could be 0 if it's not recorded track)
-		public double SMOOTHEN_POINTS_NO_ROUTE = 2;
+		public double SMOOTHEN_POINTS_NO_ROUTE = 5;
 		
 		public final RoutingContext ctx;
 		public int routeCalculations = 0;
@@ -92,6 +92,7 @@ public class RoutePlannerFrontEnd {
 		public double cumDist;
 		public RouteSegmentPoint pnt;
 		public List<RouteSegmentResult> routeToTarget;
+		public List<RouteSegmentResult> stepBackRoute;
 		public int targetInd = -1;
 	}
 
@@ -203,11 +204,7 @@ public class RoutePlannerFrontEnd {
 	}
 
 
-	// TODO last segment not correct (cut) before end point and point of straight line
-	
-	// TODO add missing turns for straight lines (compare code)
 	// TODO native matches less roads
-	
 	// TODO fix progress - next iteration
 	// TODO fix timings and remove logging every iteration
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<LatLon> points) throws IOException, InterruptedException {
@@ -217,7 +214,7 @@ public class RoutePlannerFrontEnd {
 		}
 		List<GpxPoint> gpxPoints = generageGpxPoints(points, gctx);
 		GpxPoint start = gpxPoints.size() > 0 ? gpxPoints.get(0) : null;
-		boolean prevRouteFound = false;
+		GpxPoint prev = null;
 		while (start != null) {
 			double routeDist = gctx.MAXIMUM_STEP_APPROXIMATION;
 			GpxPoint next = findNextGpxPointWithin(gctx, gpxPoints, start, routeDist);
@@ -227,13 +224,13 @@ public class RoutePlannerFrontEnd {
 				while (routeDist >= gctx.MINIMUM_STEP_APPROXIMATION && !routeFound) {
 					routeFound = initRoutingPoint(next, gctx, gctx.MINIMUM_POINT_APPROXIMATION);
 					if (routeFound) {
-						routeFound = findGpxRouteSegment(gctx, gpxPoints, start, next, prevRouteFound);
+						routeFound = findGpxRouteSegment(gctx, gpxPoints, start, next, prev != null);
 						if (routeFound) {
 							// route is found - cut the end of the route and move to next iteration
 							boolean stepBack = stepBackAndFindPrevPointInRoute(gctx, gpxPoints, start, next);
 							if (!stepBack) {
 								// not supported case (workaround increase MAXIMUM_STEP_APPROXIMATION)
-								log.info("Consider to increase MAXIMUM_STEP_APPROXIMATION to: " + routeDist*2);
+								log.info("Consider to increase MAXIMUM_STEP_APPROXIMATION to: " + routeDist * 2);
 								start.routeToTarget = null;
 								routeFound = false;
 								break;
@@ -257,16 +254,17 @@ public class RoutePlannerFrontEnd {
 			if (!routeFound) {
 				// route is not found, move start point by 
 				next = findNextGpxPointWithin(gctx, gpxPoints, start, gctx.MINIMUM_STEP_APPROXIMATION);
-				if (prevRouteFound) {
-					if (next == null) {
-						// TODO finish
-						// makeSegmentPointPrecise(prev.routeToTarget.get(prev.routeToTarget.size() - 1), start.loc, false);				
-					} else {
+				if (prev != null) {
+					prev.routeToTarget.addAll(prev.stepBackRoute);
+					makeSegmentPointPrecise(prev.routeToTarget.get(prev.routeToTarget.size() - 1), start.loc, false);
+					if (next != null) {
 						log.warn("NOT found route from: " + start.pnt.getRoad() + " at " + start.pnt.getSegmentStart());
 					}
 				}
+				prev = null;
+			} else {
+				prev = start;
 			}
-			prevRouteFound = routeFound;
 			start = next;
 		}
 		
@@ -289,6 +287,7 @@ public class RoutePlannerFrontEnd {
 		double d = 0;
 		int segmendInd = start.routeToTarget.size() - 1;
 		boolean search = true;
+		start.stepBackRoute = new ArrayList<RouteSegmentResult>();
 		mainLoop: for (; segmendInd >= 0 && search; segmendInd--) {
 			RouteSegmentResult rr = start.routeToTarget.get(segmendInd);
 			boolean minus = rr.getStartPointIndex() < rr.getEndPointIndex();
@@ -300,6 +299,7 @@ public class RoutePlannerFrontEnd {
 					if (nextInd == rr.getStartPointIndex()) {
 						segmendInd--;
 					} else {
+						start.stepBackRoute.add(new RouteSegmentResult(rr.getObject(), nextInd, rr.getEndPointIndex()));
 						rr.setEndPointIndex(nextInd);
 					}
 					search = false;
@@ -311,8 +311,10 @@ public class RoutePlannerFrontEnd {
 			// here all route segments - 1 is longer than needed distance to step back 
 			return false;
 		}
+		
 		while (start.routeToTarget.size() > segmendInd + 1) {
-			start.routeToTarget.remove(segmendInd + 1);
+			RouteSegmentResult removed = start.routeToTarget.remove(segmendInd + 1);
+			start.stepBackRoute.add(removed);
 		}
 		RouteSegmentResult res = start.routeToTarget.get(segmendInd);
 		next.pnt = new RouteSegmentPoint(res.getObject(), res.getEndPointIndex(), 0);
@@ -321,7 +323,7 @@ public class RoutePlannerFrontEnd {
 
 	private void calculateGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) {
 		RouteRegion reg = new RouteRegion();
-		reg.initRouteEncodingRule(0, "highway", "unmatched");
+		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 		List<LatLon> lastStraightLine = null;
 		for (int i = 0; i < gpxPoints.size(); ) {
 			GpxPoint pnt = gpxPoints.get(i);
@@ -424,8 +426,17 @@ public class RoutePlannerFrontEnd {
 		rdo.pointsY = y.toArray();
 		rdo.types = new int[] { 0 } ;
 		rdo.id = -1;
-		// comment to see road without straight connections
-		res.add(new RouteSegmentResult(rdo, 0, rdo.getPointsLength() - 1));
+		List<RouteSegmentResult> rts = new ArrayList<>();
+		rts.add(new RouteSegmentResult(rdo, 0, rdo.getPointsLength() - 1));
+		RouteResultPreparation preparation = new RouteResultPreparation();
+		try {
+			preparation.prepareResult(gctx.ctx, rts, false);
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+		
+		// VIEW: comment to see road without straight connections
+		res.addAll(rts);
 	}
 	
 	

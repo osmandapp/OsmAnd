@@ -493,9 +493,9 @@ public class RouteCalculationResult {
 			Location current = locations.get(i);
 			float bearing = current.bearingTo(next);
 			// try to get close to current location if possible
-			while(prevBearingLocation < i - 1){
-				if(locations.get(prevBearingLocation + 1).distanceTo(current) > 70){
-					prevBearingLocation ++;
+			while (prevBearingLocation < i - 1) {
+				if (locations.get(prevBearingLocation + 1).distanceTo(current) > 70) {
+					prevBearingLocation++;
 				} else {
 					break;
 				}

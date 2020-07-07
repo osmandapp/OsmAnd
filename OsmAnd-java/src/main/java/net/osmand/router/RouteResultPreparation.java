@@ -44,8 +44,11 @@ public class RouteResultPreparation {
 	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
 	public static String PRINT_TO_GPX_FILE = null;
 	private static final float TURN_DEGREE_MIN = 45;
+	private static final float UNMATCHED_TURN_DEGREE_MINIMUM = 45;
+	private static final float SPLIT_TURN_DEGREE_NOT_STRAIGHT = 100;
 	public static final int SHIFT_ID = 6;
 	private Log log = PlatformUtil.getLog(RouteResultPreparation.class);
+	public static final String UNMATCHED_HIGHWAY_TYPE = "unmatched";
 	/**
 	 * Helper method to prepare final result 
 	 */
@@ -222,7 +225,7 @@ public class RouteResultPreparation {
 
 	private void justifyUTurns(boolean leftSide, List<RouteSegmentResult> result) {
 		int next;
-		for (int i = 0; i < result.size() - 1; i = next) {
+		for (int i = 1; i < result.size() - 1; i = next) {
 			next = i + 1;
 			TurnType t = result.get(i).getTurnType();
 			// justify turn
@@ -313,6 +316,7 @@ public class RouteResultPreparation {
 			RouteSegmentResult rr = result.get(i);
 			boolean plus = rr.getStartPointIndex() < rr.getEndPointIndex();
 			int next;
+			boolean unmatched = UNMATCHED_HIGHWAY_TYPE.equals(rr.getObject().getHighway());
 			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
 				next = plus ? j + 1 : j - 1;
 				if (j == rr.getStartPointIndex()) {
@@ -323,27 +327,33 @@ public class RouteResultPreparation {
 				}
 				List<RouteSegmentResult> attachedRoutes = rr.getAttachedRoutes(next);
 				boolean tryToSplit = next != rr.getEndPointIndex() && !rr.getObject().roundabout() && attachedRoutes != null;
-				if(rr.getDistance(next, plus ) == 0) {
+				if (rr.getDistance(next, plus) == 0) {
 					// same point will be processed next step
 					tryToSplit = false;
 				}
 				if (tryToSplit) {
+					float distBearing = unmatched ? RouteSegmentResult.DIST_BEARING_DETECT_UNMATCHED : RouteSegmentResult.DIST_BEARING_DETECT;
 					// avoid small zigzags
-					float before = rr.getBearing(next, !plus);
-					float after = rr.getBearing(next, plus);
-					if(rr.getDistance(next, plus ) < 5) {
-						after = before + 180;
-					} else if(rr.getDistance(next, !plus ) < 5) {
-						before = after - 180;
+					float before = rr.getBearingEnd(next, distBearing);
+					float after = rr.getBearingBegin(next, distBearing);
+					if (rr.getDistance(next, plus) < distBearing) {
+						after = before;
+					} else if (rr.getDistance(next, !plus) < distBearing) {
+						before = after;
 					}
-					boolean straight = Math.abs(MapUtils.degreesDiff(before + 180, after)) < TURN_DEGREE_MIN;
+					double contAngle = Math.abs(MapUtils.degreesDiff(before, after));
+					boolean straight = contAngle < TURN_DEGREE_MIN;
 					boolean isSplit = false;
+					
+					if (unmatched && Math.abs(contAngle) >= UNMATCHED_TURN_DEGREE_MINIMUM) {
+						isSplit = true;
+					}
 					// split if needed
 					for (RouteSegmentResult rs : attachedRoutes) {
-						double diff = MapUtils.degreesDiff(before + 180, rs.getBearingBegin());
+						double diff = MapUtils.degreesDiff(before, rs.getBearingBegin());
 						if (Math.abs(diff) <= TURN_DEGREE_MIN) {
 							isSplit = true;
-						} else if (!straight && Math.abs(diff) < 100) {
+						} else if (!straight && Math.abs(diff) < SPLIT_TURN_DEGREE_NOT_STRAIGHT) {
 							isSplit = true;
 						}
 					}
@@ -1061,18 +1071,17 @@ public class RouteResultPreparation {
 		}
 		TurnType t = null;
 		if (prev != null) {
-			boolean noAttachedRoads = rr.getAttachedRoutes(rr.getStartPointIndex()).size() == 0;
 			// add description about turn
-			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(), rr.getBearingBegin());
-			if(noAttachedRoads){
-				// VICTOR : look at the comment inside direction route
-				// ? avoid small zigzags is covered at (search for "zigzags") 
-//				double begin = rr.getObject().directionRoute(rr.getStartPointIndex(), rr.getStartPointIndex() < 
-//						rr.getEndPointIndex(), 25);
-//				mpi = MapUtils.degreesDiff(prev.getBearingEnd(), begin);
+			// avoid small zigzags is covered at (search for "zigzags")
+			float bearingDist = RouteSegmentResult.DIST_BEARING_DETECT;
+			// could be || noAttachedRoads, boolean noAttachedRoads = rr.getAttachedRoutes(rr.getStartPointIndex()).size() == 0;
+			if (UNMATCHED_HIGHWAY_TYPE.equals(rr.getObject().getHighway())) {
+				bearingDist = RouteSegmentResult.DIST_BEARING_DETECT_UNMATCHED;
 			}
+			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(prev.getEndPointIndex(), bearingDist), 
+					rr.getBearingBegin(rr.getStartPointIndex(), bearingDist));
 			if (mpi >= TURN_DEGREE_MIN) {
-				if (mpi < 45) {
+				if (mpi < TURN_DEGREE_MIN) {
 					// Slight turn detection here causes many false positives where drivers would expect a "normal" TL. Best use limit-angle=TURN_DEGREE_MIN, this reduces TSL to the turn-lanes cases.
 					t = TurnType.valueOf(TurnType.TSLL, leftSide);
 				} else if (mpi < 120) {
@@ -1085,7 +1094,7 @@ public class RouteResultPreparation {
 				int[] lanes = getTurnLanesInfo(prev, t.getValue());
 				t.setLanes(lanes);
 			} else if (mpi < -TURN_DEGREE_MIN) {
-				if (mpi > -45) {
+				if (mpi > -TURN_DEGREE_MIN) {
 					t = TurnType.valueOf(TurnType.TSLR, leftSide);
 				} else if (mpi > -120) {
 					t = TurnType.valueOf(TurnType.TR, leftSide);
