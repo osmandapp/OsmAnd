@@ -65,13 +65,11 @@ public class BinaryRoutePlanner {
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
 	 * return list of segments
 	 */
-	@SuppressWarnings("unused")
 	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
 			RouteSegment recalculationEnd ) throws InterruptedException, IOException {
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.memoryOverhead = 1000;
-		ctx.visitedSegments = 0;
 
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new NonHeuristicSegmentsComparator();
@@ -166,8 +164,12 @@ public class BinaryRoutePlanner {
 				throw new InterruptedException("Route calculation interrupted");
 			}
 		}
-		ctx.visitedSegments = visitedDirectSegments.size() + visitedOppositeSegments.size();
-		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
+		ctx.visitedSegments += visitedDirectSegments.size() + visitedOppositeSegments.size();
+		ctx.visitedDirectSegments += visitedDirectSegments.size();
+		ctx.visitedOppositeSegments += visitedOppositeSegments.size();
+		ctx.directQueueSize = graphDirectSegments.size(); // Math.max(ctx.directQueueSize, graphDirectSegments.size());
+		ctx.oppositeQueueSize = graphReverseSegments.size(); 
+		ctx.visitedOppositeSegments += visitedOppositeSegments.size();
 		return finalSegment;
 	}
 
@@ -368,8 +370,7 @@ public class BinaryRoutePlanner {
 		log.warn(logMsg);
 	}
 	
-	public void printDebugMemoryInformation(RoutingContext ctx, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
-			TLongObjectHashMap<RouteSegment> visitedDirectSegments,TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
+	public static void printDebugMemoryInformation(RoutingContext ctx) {
 		printInfo(String.format("Time. Total: %.2f, to load: %.2f, to load headers: %.2f, to calc dev: %.2f ", 
 				(System.nanoTime() - ctx.timeToCalculate) / 1e6, ctx.timeToLoad / 1e6, 
 				ctx.timeToLoadHeaders / 1e6, ctx.timeNanoToCalcDeviation / 1e6));
@@ -380,12 +381,8 @@ public class BinaryRoutePlanner {
 				", loaded more than once same tiles "
 				+ ctx.loadedPrevUnloadedTiles);
 		printInfo("Visited segments " + ctx.visitedSegments + ", relaxed roads " + ctx.relaxedSegments);
-		if (graphDirectSegments != null && graphReverseSegments != null) {
-			printInfo("Priority queues sizes : " + graphDirectSegments.size() + "/" + graphReverseSegments.size());
-		}
-		if (visitedDirectSegments != null && visitedOppositeSegments != null) {
-			printInfo("Visited interval sizes: " + visitedDirectSegments.size() + "/" + visitedOppositeSegments.size());
-		}
+		printInfo("Priority queues sizes : " + ctx.directQueueSize + "/" + ctx.oppositeQueueSize);
+		printInfo("Visited interval sizes: " + ctx.visitedDirectSegments + "/" + ctx.visitedOppositeSegments);
 
 	}
 

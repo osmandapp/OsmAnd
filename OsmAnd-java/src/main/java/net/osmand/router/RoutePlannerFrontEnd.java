@@ -203,23 +203,24 @@ public class RoutePlannerFrontEnd {
 		useSmartRouteRecalculation = use;
 	}
 
-
 	// TODO native matches less roads
-	// TODO fix progress - next iteration
-	// TODO fix timings and remove logging every iteration
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<LatLon> points) throws IOException, InterruptedException {
 		gctx.ctx.timeToCalculate = System.nanoTime();
 		if (gctx.ctx.calculationProgress == null) {
 			gctx.ctx.calculationProgress = new RouteCalculationProgress();
 		}
 		List<GpxPoint> gpxPoints = generageGpxPoints(points, gctx);
-		GpxPoint start = gpxPoints.size() > 0 ? gpxPoints.get(0) : null;
+		GpxPoint start = null;
 		GpxPoint prev = null;
+		if(gpxPoints.size() > 0) {
+			gctx.ctx.calculationProgress.totalIterations = (int) (gpxPoints.get(gpxPoints.size() - 1).cumDist / gctx.MAXIMUM_STEP_APPROXIMATION + 1); 
+			start = gpxPoints.get(0); 
+		}
 		while (start != null) {
 			double routeDist = gctx.MAXIMUM_STEP_APPROXIMATION;
 			GpxPoint next = findNextGpxPointWithin(gctx, gpxPoints, start, routeDist);
 			boolean routeFound = false;
-			
+			gctx.ctx.calculationProgress.nextIteration();
 			if (next != null && initRoutingPoint(start, gctx, gctx.MINIMUM_POINT_APPROXIMATION)) {
 				while (routeDist >= gctx.MINIMUM_STEP_APPROXIMATION && !routeFound) {
 					routeFound = initRoutingPoint(next, gctx, gctx.MINIMUM_POINT_APPROXIMATION);
@@ -267,9 +268,8 @@ public class RoutePlannerFrontEnd {
 			}
 			start = next;
 		}
-		
+		BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
 		calculateGpxRoute(gctx, gpxPoints);
-
 		if (!gctx.res.isEmpty()) {
 			new RouteResultPreparation().printResults(gctx.ctx, points.get(0), points.get(points.size() - 1), gctx.res);
 			System.out.println(gctx);
@@ -504,6 +504,7 @@ public class RoutePlannerFrontEnd {
 			gctx.routeDistCalculations += (target.cumDist - start.cumDist);
 			gctx.routeCalculations++;
 			res = searchRouteInternalPrepare(gctx.ctx, start.pnt, target.pnt, null);
+			//BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
 			routeIsCorrect = res != null && !res.isEmpty();
 			for (int k = start.ind + 1; routeIsCorrect && k < target.ind; k++) {
 				GpxPoint ipoint = gpxPoints.get(k);
@@ -859,6 +860,7 @@ public class RoutePlannerFrontEnd {
 			}
 			pringGC(ctx, true);
 			List<RouteSegmentResult> res = searchRouteInternalPrepare(ctx, points.get(0), points.get(1), routeDirection);
+			BinaryRoutePlanner.printDebugMemoryInformation(ctx);
 			pringGC(ctx, false);
 			makeStartEndPointsPrecise(res, points.get(0).getPreciseLatLon(), points.get(1).getPreciseLatLon(), null);
 			return res;
