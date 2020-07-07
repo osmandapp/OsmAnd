@@ -3037,4 +3037,13 @@
     <string name="change_application_profile">Փոխել hավելվածի պրոֆիլը</string>
     <string name="profiles_for_action_not_found">Համապատասխան պրոֆիլներ չեն գտնվել:</string>
     <string name="index_item_world_basemap_detailed">Համաշխարհային ակնարկային քարտեզ (մանրամասն)</string>
+    <string name="lenght_limit_description">Նշեք մեքենայի երկարությունը, երկար տրանսպորտային միջոցների համար կարող են կիրառվել երթուղու սահմանափակումներ։</string>
+    <string name="routing_attr_length_description">Նշեք թույլատրելի տրանսպորտային միջոցի երկարությունը երթուղով երթևեկության համար։</string>
+    <string name="routing_attr_length_name">Երկարության սահմանապակումը</string>
+    <string name="speed_cameras_removed_descr">Այս սարքը չունի արագության վերահսկման տեսախցիկներ:</string>
+    <string name="app_mode_inline_skates">Անվաչմուշկներ</string>
+    <string name="quick_action_remove_next_destination">Ջնջել հաջորդ նպատակակետը</string>
+    <string name="please_provide_point_name_error">Խնդրում ենք մուտքագրել կետի անունը</string>
+    <string name="quick_action_remove_next_destination_descr">Երթուղու ընթացիկ նպատակակետը կջնջվի: Եթե դա նպատակակետն է, նավարկումը կդադարի։</string>
+    <string name="search_download_wikipedia_maps">Ներբեռնել Վիքիպեդիայի քարտեզները</string>
 </resources>

@@ -3823,4 +3823,6 @@
     <string name="poi_traffic_signals_arrow">Frecha</string>
     <string name="poi_traffic_signals_vibration">Vibración</string>
     <string name="poi_give_box">Caixa de distribución</string>
+    <string name="poi_city_block">Predio</string>
+    <string name="poi_borough">Concello</string>
 </resources>

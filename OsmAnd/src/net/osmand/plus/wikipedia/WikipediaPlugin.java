@@ -315,7 +315,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 			}
 			int mapsToDownloadCount = DownloadResources.findIndexItemsAt(
 					app, mapActivity.getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE,
-					false, 1).size();
+					false, 1, false).size();
 			return mapsToDownloadCount > 0;
 		} catch (IOException e) {
 			return false;

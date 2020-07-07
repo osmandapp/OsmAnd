@@ -3836,4 +3836,10 @@ Lon %2$s</string>
     <string name="app_mode_inline_skates">Patíns en liña</string>
     <string name="use_volume_buttons_as_zoom_descr">Activar para controlar o nivel de achegamento (zoom) do mapa cos botóns de volume do dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Os botóns de volume mudan o achegamento</string>
+    <string name="lenght_limit_description">Fornece a lonxitude do teu vehículo. Algunhas restricións de ruta poden ser aplicadas a vehículos longos.</string>
+    <string name="quick_action_remove_next_destination">Eliminar seguinte punto de destino</string>
+    <string name="please_provide_point_name_error">Fornece un nome para o punto</string>
+    <string name="quick_action_remove_next_destination_descr">O punto de destino actual na ruta será eliminado. Se fora o destino, a navegación sería interrompida.</string>
+    <string name="search_download_wikipedia_maps">Baixar mapas da Wikipedia</string>
+    <string name="plugin_wikipedia_description">Obter información sobre os puntos de interesse da Wikipédia. É o teu guía de peto sen conexión - só activar o complemento da Wikipédia e desfrutar dos artigos sobre os elementos ó teu redor.</string>
 </resources>

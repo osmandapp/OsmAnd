@@ -1646,8 +1646,8 @@
     <string name="live_monitoring_m">Праћење на мрежи (потребан GPX)</string>
     <string name="live_monitoring_start">Започни праћење на мрежи</string>
     <string name="live_monitoring_stop">Заустави праћење на мрежи</string>
-    <string name="gpx_monitoring_start">Надтави GPX бележење</string>
-    <string name="gpx_monitoring_stop">Паузирај GPX бележење</string>
+    <string name="gpx_monitoring_start">Настави GPX бележење</string>
+    <string name="gpx_monitoring_stop">Заустави GPX бележење</string>
     <string name="none_selected_gpx">Одаберите GPX фајл дугим притискањем.</string>
     <string name="lang_zh">Кинески</string>
     <string name="lang_pt_br">Португалски (бразилски)</string>
@@ -3489,7 +3489,7 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Сунце залази у %1$s</string>
     <string name="sunrise_at">Сунце излази у %1$s</string>
-    <string name="accessibility_mode_disabled">Режим приступачности је искључен на вашем Андроид систему.</string>
+    <string name="accessibility_mode_disabled">Режим приступачности је искључен на Вашем Андроид систему.</string>
     <string name="use_system_screen_timeout">Користи системско време одлагања гашења екрана</string>
     <string name="use_system_screen_timeout_promo">Подразумевано је искључено: Док OsmAnd ради у предњем плану, екран неће да се гаси. 
 \n 

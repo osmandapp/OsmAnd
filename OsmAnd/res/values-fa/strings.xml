@@ -3840,4 +3840,8 @@
     <string name="routing_attr_length_name">طول مجاز</string>
     <string name="routing_attr_length_description">طول مجاز خودرو در مسیرها را مشخص کنید.</string>
     <string name="speed_cameras_removed_descr">این دستگاه دوربین‌های سرعت را ندارد.</string>
+    <string name="keep_active">فعال بماند</string>
+    <string name="quick_action_remove_next_destination">حذف مقصد بعدی</string>
+    <string name="please_provide_point_name_error">لطفاً نام نقطه را بنویسید</string>
+    <string name="search_download_wikipedia_maps">دانلود نقشه‌های ویکی‌پدیا</string>
 </resources>

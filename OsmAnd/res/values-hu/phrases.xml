@@ -3789,4 +3789,7 @@
     <string name="poi_video_yes">igen</string>
     <string name="poi_video_no">nem</string>
     <string name="poi_traffic_signals_sound_locate">Csak amikor át szabad menni</string>
+    <string name="poi_traffic_signals_arrow">Nyíl</string>
+    <string name="poi_traffic_signals_vibration">Rezgés</string>
+    <string name="poi_fire_hydrant_pressure_filter">Nyomás</string>
 </resources>

@@ -3811,4 +3811,9 @@
     <string name="app_mode_inline_skates">Patines en línea</string>
     <string name="use_volume_buttons_as_zoom_descr">Permite controlar el nivel de zoom del mapa con los botones de volumen del dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botones de volumen como zoom</string>
+    <string name="lenght_limit_description">Proporcione la longitud de su vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
+    <string name="quick_action_remove_next_destination">Eliminar el siguiente punto de destino</string>
+    <string name="please_provide_point_name_error">Por favor, proporcione un nombre para el punto</string>
+    <string name="quick_action_remove_next_destination_descr">El punto de destino actual de la ruta será borrado. Si se trata del destino, la navegación se detendrá.</string>
+    <string name="search_download_wikipedia_maps">Descargar mapas de Wikipedia</string>
 </resources>
