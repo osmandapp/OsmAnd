@@ -752,7 +752,7 @@ public class GPXDatabase {
 							GPX_COL_GRADIENT_ALTITUDE_COLOR + ", " +
 							GPX_COL_GRADIENT_SLOPE_COLOR + ", " +
 							GPX_COL_GRADIENT_SCALE_TYPE +
-							") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+							") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 					new Object[] {fileName, fileDir, color, 0, item.splitType, item.splitInterval,
 							item.apiImported ? 1 : 0, item.showAsMarkers ? 1 : 0, item.joinSegments ? 1 : 0,
 							item.showArrows ? 1 : 0, item.showStartFinish ? 1 : 0, item.width,
