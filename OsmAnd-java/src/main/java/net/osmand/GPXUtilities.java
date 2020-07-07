@@ -1515,9 +1515,9 @@ public class GPXUtilities {
 		}
 
 		public enum GradientScaleType {
-			SPEED("gradientSpeedColor"),
-			ALTITUDE("gradientAltitudeColor"),
-			SLOPE("gradientSlopeColor");
+			SPEED("gradient_speed_color"),
+			ALTITUDE("gradient_altitude_color"),
+			SLOPE("gradient_slope_color");
 
 			private String typeName;
 
@@ -1543,12 +1543,12 @@ public class GPXUtilities {
 		}
 
 		public void setGradientScaleType(GradientScaleType gradientScaleType) {
-			getExtensionsToWrite().put("gradientScaleType", gradientScaleType != null ? gradientScaleType.name() : null);
+			getExtensionsToWrite().put("gradient_scale_type", gradientScaleType != null ? gradientScaleType.name() : null);
 		}
 
 		public GradientScaleType getGradientScaleType() {
 			if (extensions != null) {
-				String gradientScaleTypeName = extensions.get("gradientScaleType");
+				String gradientScaleTypeName = extensions.get("gradient_scale_type");
 				if (!Algorithms.isEmpty(gradientScaleTypeName)) {
 					try {
 						return GradientScaleType.valueOf(gradientScaleTypeName);
@@ -1575,25 +1575,25 @@ public class GPXUtilities {
 		public boolean isShowArrows() {
 			String showArrows = null;
 			if (extensions != null) {
-				showArrows = extensions.get("showArrows");
+				showArrows = extensions.get("show_arrows");
 			}
 			return Boolean.parseBoolean(showArrows);
 		}
 
 		public void setShowArrows(boolean showArrows) {
-			getExtensionsToWrite().put("showArrows", String.valueOf(showArrows));
+			getExtensionsToWrite().put("show_arrows", String.valueOf(showArrows));
 		}
 
 		public boolean isShowStartFinish() {
 			String showStartFinish = null;
 			if (extensions != null) {
-				showStartFinish = extensions.get("showStartFinish");
+				showStartFinish = extensions.get("show_start_finish");
 			}
 			return Boolean.parseBoolean(showStartFinish);
 		}
 
 		public void setShowStartFinish(boolean showStartFinish) {
-			getExtensionsToWrite().put("showStartFinish", String.valueOf(showStartFinish));
+			getExtensionsToWrite().put("show_start_finish", String.valueOf(showStartFinish));
 		}
 	}
 

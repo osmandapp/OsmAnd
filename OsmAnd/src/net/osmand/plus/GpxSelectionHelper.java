@@ -54,9 +54,9 @@ public class GpxSelectionHelper {
 	private static final String COLOR = "color";
 	private static final String WIDTH = "width";
 	private static final String SELECTED_BY_USER = "selected_by_user";
-	private static final String SHOW_ARROWS = "showArrows";
-	private static final String GRADIENT_SCALE_TYPE = "gradientScaleType";
-	private static final String SHOW_START_FINISH = "showStartFinish";
+	private static final String SHOW_ARROWS = "show_arrows";
+	private static final String GRADIENT_SCALE_TYPE = "gradient_scale_type";
+	private static final String SHOW_START_FINISH = "show_start_finish";
 
 	private OsmandApplication app;
 	@NonNull
