@@ -72,6 +72,8 @@ public class GeneralRouter implements VehicleRouter {
 	private float defaultSpeed = 1f;
 	// speed in m/s
 	private float maxSpeed = 10f;
+	// speed in m/s (used for shortest route)
+	private float maxVehicleSpeed;
 
 	private TLongHashSet impassableRoads;
 	private GeneralRouterProfile profile;
@@ -149,6 +151,7 @@ public class GeneralRouter implements VehicleRouter {
 		if (params.containsKey(MAX_SPEED)) {
 			maxSpeed = parseSilentFloat(params.get(MAX_SPEED), maxSpeed);
 		}
+		maxVehicleSpeed = maxSpeed;
 		if (shortestRoute) {
 			maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
 		}
@@ -489,10 +492,15 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
+		// don't use cache cause max/min is different for routing speed
+		if (maxVehicleSpeed != maxSpeed) {
+			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
+			return Math.max(Math.min(spd, maxVehicleSpeed), minSpeed);
+		}
 		Float sp = getCache(RouteDataObjectAttribute.ROAD_SPEED, road);
 		if (sp == null) {
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
-			sp = Math.max(Math.min(spd, maxSpeed), minSpeed);
+			sp = Math.max(Math.min(spd, maxVehicleSpeed), minSpeed);
 			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, sp);
 		}
 		return sp;
