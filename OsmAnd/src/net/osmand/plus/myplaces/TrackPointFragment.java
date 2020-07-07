@@ -973,7 +973,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					categoryName = getString(R.string.shared_string_waypoints);
 				}
 				SpannableStringBuilder text = new SpannableStringBuilder(categoryName).append(" (").append(String.valueOf(getChildrenCount(groupPosition))).append(")");
-				text.setSpan(new ForegroundColorSpan(AndroidUtils.getColorFromAttr(app, R.attr.wikivoyage_primary_text_color)),
+				text.setSpan(new ForegroundColorSpan(AndroidUtils.getColorFromAttr(mainView.getContext(), R.attr.wikivoyage_primary_text_color)),
 						0, categoryName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				text.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, R.color.wikivoyage_secondary_text)),
 						categoryName.length() + 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
