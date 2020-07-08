@@ -443,7 +443,7 @@ public class GPXDatabase {
 			db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " + GPX_COL_SHOW_ARROWS + " = ? " +
 					"WHERE " + GPX_COL_SHOW_ARROWS + " IS NULL", new Object[]{0});
 			db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " + GPX_COL_SHOW_START_FINISH + " = ? " +
-					"WHERE " + GPX_COL_SHOW_START_FINISH + " IS NULL", new Object[]{0});
+					"WHERE " + GPX_COL_SHOW_START_FINISH + " IS NULL", new Object[]{1});
 		}
 		db.execSQL("CREATE INDEX IF NOT EXISTS " + GPX_INDEX_NAME_DIR + " ON " + GPX_TABLE_NAME + " (" + GPX_COL_NAME + ", " + GPX_COL_DIR + ");");
 	}

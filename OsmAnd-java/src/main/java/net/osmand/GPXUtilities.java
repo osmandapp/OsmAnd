@@ -1605,11 +1605,10 @@ public class GPXUtilities {
 		}
 
 		public boolean isShowStartFinish() {
-			String showStartFinish = null;
-			if (extensions != null) {
-				showStartFinish = extensions.get("show_start_finish");
+			if (extensions != null && extensions.containsKey("show_start_finish")) {
+				return Boolean.parseBoolean(extensions.get("show_start_finish"));
 			}
-			return Boolean.parseBoolean(showStartFinish);
+			return true;
 		}
 
 		public void setShowStartFinish(boolean showStartFinish) {
