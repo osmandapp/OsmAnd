@@ -17,6 +17,8 @@ public enum ProfileIcons {
 	BUS(R.drawable.ic_action_bus_dark, R.string.app_mode_bus, "ic_action_bus_dark"),
 	SUBWAY(R.drawable.ic_action_subway, R.string.app_mode_subway, "ic_action_subway"),
 	MOTORCYCLE(R.drawable.ic_action_motorcycle_dark, R.string.app_mode_motorcycle, "ic_action_motorcycle_dark"),
+	ENDURO_MOTORCYCLE(R.drawable.ic_action_enduro_motorcycle, R.string.app_mode_enduro_motorcycle, "ic_action_enduro_motorcycle"),
+	MOTOR_SCOOTER(R.drawable.ic_action_motor_scooter, R.string.app_mode_motor_scooter, "ic_action_motor_scooter"),
 	BICYCLE(R.drawable.ic_action_bicycle_dark, R.string.app_mode_bicycle, "ic_action_bicycle_dark"),
 	HORSE(R.drawable.ic_action_horse, R.string.app_mode_horse, "ic_action_horse"),
 	PEDESTRIAN(R.drawable.ic_action_pedestrian_dark, R.string.app_mode_pedestrian, "ic_action_pedestrian_dark"),
