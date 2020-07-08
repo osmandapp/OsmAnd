@@ -3807,7 +3807,7 @@
     <string name="lenght_limit_description">Вкажіть довжину вашого автомобіля, для довгих транспортних засобів можуть застосовуватися деякі обмеження на маршрутах.</string>
     <string name="quick_action_remove_next_destination">Видалити наступну точку призначення</string>
     <string name="please_provide_point_name_error">Укажіть назву пункту</string>
-    <string name="quick_action_remove_next_destination_descr">Поточна точка призначення на маршруті буде видалена. Якщо це буде Місце призначення, навігація припиниться.</string>
+    <string name="quick_action_remove_next_destination_descr">Поточну точку призначення на маршруті буде видалено. Якщо це буде місце призначення, навігація припиниться.</string>
     <string name="search_download_wikipedia_maps">Завантажити мапи Вікіпедії</string>
     <string name="plugin_wikipedia_description">Отримайте відомості про визначні місця у Вікіпедії. Це ваш кишеньковий посібник без мережі - просто ввімкніть втулок \"Вікіпедія\" і насолоджуйтесь статтями про об\'єкти навколо вас.</string>
 </resources>
