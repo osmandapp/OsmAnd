@@ -548,7 +548,7 @@
     <string name="level_to_switch_vector_raster">Минимальный масштаб векторных карт</string>
     <string name="error_doing_search">Не удалось выполнить локальный поиск.</string>
     <string name="search_osm_offline">Поиск по географическому положению</string>
-    <string name="system_locale">Системная</string>
+    <string name="system_locale">Системный</string>
     <string name="preferred_locale_descr">Язык интерфейса приложения (будет использован после перезапуска OsmAnd).</string>
     <string name="preferred_locale">Язык интерфейса</string>
     <string name="shared_string_next">Далее</string>
@@ -1200,7 +1200,7 @@
     <string name="rendering_attr_roadColors_description">Выберите цветовую схему дорог:</string>
     <string name="rendering_attr_roadColors_name">Цветовая схема дорог</string>
     <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
-    <string name="incomplete_locale">незавершённое</string>
+    <string name="incomplete_locale">неполный</string>
     <string name="map_widget_max_speed">Ограничение скорости</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="download_select_map_types">Прочие карты</string>
@@ -1386,7 +1386,7 @@
 \n Примечание 2: в новом хранилище совместное использование файлов OsmAnd и OsmAnd+ невозможно.</string>
     <string name="copying_osmand_one_file_descr">Копирование файла (%s) на новое место…</string>
     <string name="copying_osmand_files_descr">Копирование файлов данных OsmAnd на новое место (%s)…</string>
-    <string name="disable_complex_routing_descr">Выключение 2-фазной маршрутизации для автомобильной навигации.</string>
+    <string name="disable_complex_routing_descr">Выключение двухфазной маршрутизации для автомобильной навигации.</string>
     <string name="complex_route_calculation_failed">Быстрое построение маршрута не удалось (%s), отмените для возврата к медленному построению.</string>
     <string name="map_magnifier">Масштаб</string>
     <string name="select_gpx">Выберите GPX…</string>
@@ -1624,7 +1624,7 @@
     <string name="impassable_road">Нежелательные участки</string>
     <string name="lock_screen_request_explanation">%1$s необходимо это разрешение, чтобы выключить экран для экономии энергии.</string>
     <string name="wake_on_voice">Автовключение экрана перед поворотом</string>
-    <string name="wake_on_voice_descr">Включать экран устройства (если он выключен) при приближении к повороту.</string>
+    <string name="wake_on_voice_descr">Включать экран перед поворотом (если выключен).</string>
     <string name="map_update">Карты доступные для обновления: %1$s</string>
     <string name="coordinates">Координаты</string>
     <string name="home_button">Дом</string>
@@ -1833,7 +1833,7 @@
     <string name="use_fast_recalculation">Умный перерасчёт маршрута</string>
     <string name="use_fast_recalculation_desc">Перерасчёт только начальной части маршрута для длительных поездок.</string>
     <string name="osm_edit_context_menu_delete">Удалить правки OSM</string>
-    <string name="rendering_value_disabled_name">Выключен</string>
+    <string name="rendering_value_disabled_name">Выключено</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Раскраска по сетевой принадлежности</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Раскраска туристических меток по OSMC</string>
     <string name="shared_string_logoff">Выход</string>
@@ -1998,7 +1998,7 @@
     <string name="share_menu_location">Поделиться местоположением</string>
     <string name="shared_string_send">Отправить</string>
     <string name="application_dir_description">Выберите, где вы хотите хранить файлы карт и другие данные.</string>
-    <string name="show_on_start_description">«Выключено» запускает карту непосредственно.</string>
+    <string name="show_on_start_description">При выключении сразу открывается карта.</string>
     <string name="map_downloaded">Карта загружена</string>
     <string name="shared_string_qr_code">QR код</string>
     <string name="go_to_map">Показать карту</string>
@@ -3245,14 +3245,14 @@
     <string name="appearance">Внешний вид</string>
     <string name="configure_navigation">Настроить навигацию</string>
     <string name="screen_alerts_descr">Предупреждения отображаются в левом нижнем углу во время навигации.</string>
-    <string name="osmand_settings_descr">Влияет для всего приложения</string>
+    <string name="osmand_settings_descr">Общие настройки приложения</string>
     <string name="osmand_settings">Настройки OsmAnd</string>
     <string name="copy_from_other_profile">Копировать из другого профиля</string>
     <string name="turn_screen_on">Включить экран</string>
     <string name="map_during_navigation_info">Карта во время навигации</string>
     <string name="map_during_navigation">Карта во время навигации</string>
     <string name="vehicle_parameters_descr">Вес, высота, длина, скорость</string>
-    <string name="vehicle_parameters">Параметры транспортного средства</string>
+    <string name="vehicle_parameters">Параметры автомобиля</string>
     <string name="voice_announces_info">Голосовые оповещения происходят только во время навигации.</string>
     <string name="voice_announces_descr">Навигационные инструкции и объявления</string>
     <string name="voice_announces">Голосовые подсказки</string>
@@ -3369,7 +3369,7 @@
     <string name="select_color">Выберите цвет</string>
     <string name="edit_profiles_descr">Вы не можете удалить стандартные профили OsmAnd, но вы можете отключить их на предыдущем экране или переместить вниз.</string>
     <string name="edit_profiles">Редактировать профили</string>
-    <string name="select_nav_profile_dialog_message">Тип навигации влияет на правила расчёта маршрута.</string>
+    <string name="select_nav_profile_dialog_message">«Тип навигации» определяет способ расчета маршрутов.</string>
     <string name="profile_appearance">Внешний вид профиля</string>
     <string name="choose_icon_color_name">Значок, цвет и имя</string>
     <string name="reorder_profiles">Редактировать список профилей</string>

@@ -2556,7 +2556,7 @@
     <string name="shared_string_road">Weg</string>
     <string name="tap_on_map_to_hide_interface_descr">Een tik op de kaart verbergt/toont de bedieningsknoppen en widgets.</string>
     <string name="tap_on_map_to_hide_interface">Volledig scherm</string>
-    <string name="mark_passed">Markering overslaan</string>
+    <string name="mark_passed">Markering gepasseerd</string>
     <string name="import_gpx_file_description">kan worden geïmporteerd als Favorieten of als GPX-bestand.</string>
     <string name="import_as_gpx">importeer als GPX-bestand</string>
     <string name="import_as_favorites">Importeren als Favorieten</string>
@@ -3702,4 +3702,10 @@
     <string name="screen_timeout">Time-out van het scherm</string>
     <string name="use_volume_buttons_as_zoom_descr">Inschakelen om het zoomniveau van de kaart in te stellen met de volumeknoppen.</string>
     <string name="use_volume_buttons_as_zoom">Gebruik volumeknoppen om in en uit te zoomen</string>
+    <string name="plugin_wikipedia_description">Verkrijg informatie over POIs uit Wikipedia. Het is je offline reisgidsje - schakel de Wikipedia-plug-in in en geniet van artikelen over de bezienswaardigheden in je omgeving.</string>
+    <string name="lenght_limit_description">Geef de voertuiglengte op, er zijn mogelijk routebeperkingen voor lange voertuigen.</string>
+    <string name="quick_action_remove_next_destination_descr">Het volgende routepunt wordt verwijderd. Als dit de eindbestemming was, stopt de navigatie.</string>
+    <string name="quick_action_remove_next_destination">Verwijder het volgende routepunt</string>
+    <string name="please_provide_point_name_error">Kies een naam voor het punt</string>
+    <string name="search_download_wikipedia_maps">Wikipedia-kaarten downloaden</string>
 </resources>

@@ -975,7 +975,7 @@
     <string name="copying_osmand_one_file_descr">(%s) dosyası yeni hedefine kopyalanıyor…</string>
     <string name="copying_osmand_files_descr">OsmAnd veri dosyaları yeni hedef (%s) \'e kopyalanıyor…</string>
     <string name="guidance_preferences_descr">Navigasyon tercihleri</string>
-    <string name="routing_preferences_descr">Güzergah seçenekleri</string>
+    <string name="routing_preferences_descr">Yönlendirme tercihleri</string>
     <string name="speech_rate_descr">Metinden konuşmaya konuşma hızını belirtin.</string>
     <string name="speech_rate">Hoparlör yerleşimi</string>
     <string name="complex_route_calculation_failed">Hızlı rota hesaplama ( $1%s) başarısız oldu , hesaplama yavaş çare .</string>
@@ -3371,7 +3371,7 @@
     <string name="select_color">Renk seç</string>
     <string name="edit_profiles_descr">OsmAnd öntanımlı profilleri silinemez, ancak (önceki ekranda) devre dışı bırakılabilir veya en altta sıralanabilir.</string>
     <string name="edit_profiles">Profilleri düzenle</string>
-    <string name="select_nav_profile_dialog_message">\'Navigasyon türü\' rotaların nasıl hesaplandığını yönetir.</string>
+    <string name="select_nav_profile_dialog_message">\'Navigasyon türü\' güzergahın nasıl hesaplandığını yönetir.</string>
     <string name="profile_appearance">Profil görünümü</string>
     <string name="choose_icon_color_name">Simge, renk ve isim</string>
     <string name="reorder_profiles">Profil listesini düzenle</string>
