@@ -471,7 +471,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 				textPrefix = app.getString(R.string.poi_cuisine);
 				vl = sb.toString();
-			} else if (key.contains(Amenity.ROUTE)) {
+			} else if (key.contains(Amenity.ROUTE) || key.contains(Amenity.WIKIDATA))  {
 				continue;
 			} else {
 				if (key.contains(Amenity.DESCRIPTION)) {
@@ -784,11 +784,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		Map<String, String> additionalInfo = amenity.getAdditionalInfo();
 		String imageValue = additionalInfo.get("image");
 		String mapillaryValue = additionalInfo.get("mapillary");
+		String wikidataValue = additionalInfo.get("wikidata");
 		if (!Algorithms.isEmpty(imageValue)) {
 			params.put("osm_image", imageValue);
 		}
 		if (!Algorithms.isEmpty(mapillaryValue)) {
 			params.put("osm_mapillary_key", mapillaryValue);
+		}
+		if (!Algorithms.isEmpty(wikidataValue)) {
+			params.put("wikidata_id", wikidataValue);
 		}
 		return params;
 	}
