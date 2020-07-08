@@ -5,14 +5,12 @@ public class WikiImage {
 	private String imageName;
 	private String imageStubUrl;
 	private String imageHiResUrl;
-	private String datatype;
 
 	public WikiImage(String imageName, String imageStubUrl,
-	                 String imageHiResUrl, String datatype) {
+	                 String imageHiResUrl) {
 		this.imageName = imageName;
 		this.imageStubUrl = imageStubUrl;
 		this.imageHiResUrl = imageHiResUrl;
-		this.datatype = datatype;
 	}
 
 	public String getImageName() {
@@ -27,7 +25,4 @@ public class WikiImage {
 		return imageHiResUrl;
 	}
 
-	public String getDatatype() {
-		return datatype;
-	}
 }

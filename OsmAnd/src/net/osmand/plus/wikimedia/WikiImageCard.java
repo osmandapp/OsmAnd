@@ -7,19 +7,18 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.util.Algorithms;
 
-import org.json.JSONObject;
-
 public class WikiImageCard extends ImageCard {
 
-	public WikiImageCard(final MapActivity mapActivity, final JSONObject imageObject,
+	public WikiImageCard(final MapActivity mapActivity,
 	                     final WikiImage wikiImage) {
-		super(mapActivity, imageObject);
+		super(mapActivity, null);
 
 		if (topIconId == 0) {
 			topIconId = R.drawable.ic_logo_wikimedia;
 		}
 
 		this.imageUrl = wikiImage.getImageStubUrl();
+		this.title = wikiImage.getImageName();
 		this.url = this.imageUrl;
 
 		View.OnClickListener onClickListener = new View.OnClickListener() {

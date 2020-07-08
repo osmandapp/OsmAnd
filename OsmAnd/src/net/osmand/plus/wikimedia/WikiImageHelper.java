@@ -41,7 +41,7 @@ public class WikiImageHelper {
 					Gson gson = new Gson();
 					WikipediaResponse response = gson.fromJson(rawResponse.toString(), WikipediaResponse.class);
 					for (WikiImage img : getImageData(response)) {
-						images.add(new WikiImageCard(mapActivity, null, img));
+						images.add(new WikiImageCard(mapActivity, img));
 					}
 					return;
 				} catch (JsonSyntaxException e) {
@@ -54,7 +54,7 @@ public class WikiImageHelper {
 		}
 	}
 
-	public static List<WikiImage> getImageData(WikipediaResponse response) {
+	private static List<WikiImage> getImageData(WikipediaResponse response) {
 		List<WikiImage> images = new ArrayList<>();
 		for (P18 p18 : response.claims.p18) {
 			String imageFileName = p18.mainsnak.datavalue.value;
@@ -72,8 +72,7 @@ public class WikiImageHelper {
 							urlHashParts[0] + "/" + urlHashParts[1] + "/" +
 							imageFileName + "/" + THUMB_SIZE + "px-" +
 							imageFileName;
-					images.add(new WikiImage(imageName, imageStubUrl,
-							imageHiResUrl, p18.mainsnak.datatype));
+					images.add(new WikiImage(imageName, imageStubUrl, imageHiResUrl));
 
 				} catch (UnsupportedEncodingException e) {
 					LOG.error(e.getLocalizedMessage());
@@ -84,18 +83,18 @@ public class WikiImageHelper {
 	}
 
 	@NonNull
-	public static String[] getHash(@NonNull String s) {
+	private static String[] getHash(@NonNull String s) {
 		String md5 = new String(Hex.encodeHex(DigestUtils.md5(s)));
 		return new String[]{md5.substring(0, 1), md5.substring(0, 2)};
 	}
 
-	private class Claims {
+	private static class Claims {
 		@SerializedName("P18")
 		@Expose
 		private List<P18> p18 = null;
 	}
 
-	public class Datavalue {
+	private static class Datavalue {
 		@SerializedName("value")
 		@Expose
 		private String value;
@@ -104,16 +103,7 @@ public class WikiImageHelper {
 		private String type;
 	}
 
-	public class Mainsnak {
-		@SerializedName("snaktype")
-		@Expose
-		private String snaktype;
-		@SerializedName("property")
-		@Expose
-		private String property;
-		@SerializedName("hash")
-		@Expose
-		private String hash;
+	private static class Mainsnak {
 		@SerializedName("datavalue")
 		@Expose
 		private Datavalue datavalue;
@@ -122,22 +112,13 @@ public class WikiImageHelper {
 		private String datatype;
 	}
 
-	public class P18 {
+	private static class P18 {
 		@SerializedName("mainsnak")
 		@Expose
 		private Mainsnak mainsnak;
-		@SerializedName("type")
-		@Expose
-		private String type;
-		@SerializedName("id")
-		@Expose
-		private String id;
-		@SerializedName("rank")
-		@Expose
-		private String rank;
 	}
 
-	public class WikipediaResponse {
+	private static class WikipediaResponse {
 		@SerializedName("claims")
 		@Expose
 		private Claims claims;
