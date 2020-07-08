@@ -1120,7 +1120,7 @@
     <string name="map_widget_renderer">Стиль карты</string>
     <string name="email">Эл. почта</string>
     <string name="day_night_info">Восход/закат</string>
-    <string name="osmand_short_description_80_chars">Мобильный просмотр и навигация по онлайн и локальным картам OSM всего мира</string>
+    <string name="osmand_short_description_80_chars">Мобильные карты и навигация по всему миру для локальных и онлайн-карт OSM</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (Open Street Maps Automated Navigation Directions) 
 \n 
 \n OsmAnd — это навигационное приложение с открытым исходным кодом и доступом к картам и данным на основе OSM. Все данные карт (векторные или растровые) могут быть сохранены на карту памяти устройства для использования без подключения к интернету. OsmAnd также предоставляет локальные и онлайн-средства построения маршрута, включая голосовые инструкции по маршруту. 
@@ -2414,7 +2414,7 @@
     <string name="marker_moved_to_active">Маркер перемещён в действующие</string>
     <string name="show_direction">Указатель расстояния</string>
     <string name="show_map">Показать карту</string>
-    <string name="plan_route_no_markers_toast">Для использования этой функции вы должны добавить хотя бы один маркер.</string>
+    <string name="plan_route_no_markers_toast">Для использования этой функции нужно добавить хотя бы один маркер.</string>
     <string name="osn_modify_dialog_error">Не удалось изменить заметку.</string>
     <string name="shared_string_road">Дорога</string>
     <string name="show_guide_line">Показывать направляющие линии</string>
