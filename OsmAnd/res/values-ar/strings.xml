@@ -3799,4 +3799,10 @@
     <string name="app_mode_inline_skates">أحذية تزلج</string>
     <string name="use_volume_buttons_as_zoom_descr">تمكين التحكم في مستوى التكبير/التصغير بالخريطة باستخدام أزرار مستوى صوت الجهاز.</string>
     <string name="use_volume_buttons_as_zoom">أزرار مستوى الصوت</string>
+    <string name="lenght_limit_description">إعطاء معلومات وزن مركبتك ،قد يتم تطبيق بعض القيود على المركبات الثقيلة.</string>
+    <string name="quick_action_remove_next_destination">حذف نقطة الوجهة التالية</string>
+    <string name="please_provide_point_name_error">يرجى إعطاء اسم للنقطة</string>
+    <string name="quick_action_remove_next_destination_descr">سيتم حذف نقطة الوجهة الحالية على المسار. إذا كانت هي الوجهة، سوف تتوقف الملاحة.</string>
+    <string name="search_download_wikipedia_maps">تنزيل بيانات ويكيبيديا</string>
+    <string name="plugin_wikipedia_description">الحصول على معلومات حول النقاط المثيرة للاهتمام من ويكيبيديا. إنه دليلك غير المتصل بجيبك - ما عليك سوى تمكين المكون الإضافي ويكبيديا والاستمتاع بمقالات حول الكائنات من حولك.</string>
 </resources>

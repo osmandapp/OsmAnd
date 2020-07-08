@@ -98,11 +98,17 @@ public class RoutingContext {
 	public int loadedTiles = 0;
 	public int visitedSegments = 0;
 	public int relaxedSegments = 0;
+	public int visitedDirectSegments = 0;
+	public int visitedOppositeSegments = 0;
+	public int directQueueSize = 0;
+	public int oppositeQueueSize = 0;
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 
 	// old planner
 	public FinalRouteSegment finalRouteSegment;
+
+
 	
 	RoutingContext(RoutingContext cp) {
 		this.config = cp.config;
@@ -252,18 +258,6 @@ public class RoutingContext {
 		return ind;
 	}
 	
-	public void newRoutingPoints() {
-		int middleX = startX / 2 + targetX / 2;
-		int middleY = startY / 2 + targetY;
-		List<RouteDataObject> dataObjects = new ArrayList<RouteDataObject>();
-		loadTileData(middleX, middleY, 17, dataObjects);
-		
-		
-		System.out.println("Size of data objects " + dataObjects.size());
-	}
-	
-	
-
 	
 	public RouteSegment loadRouteSegment(int x31, int y31, long memoryLimit) {
 		long tileId = getRoutingTile(x31, y31, memoryLimit);
