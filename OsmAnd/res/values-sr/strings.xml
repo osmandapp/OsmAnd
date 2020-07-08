@@ -3812,4 +3812,6 @@
     <string name="quick_action_remove_next_destination_descr">Тренутна одредишна тачка биће уклоњена. Ако је она одредишна, стопираће се навигација.</string>
     <string name="search_download_wikipedia_maps">Преузмите мапе Википедије</string>
     <string name="plugin_wikipedia_description">Информације о тачкама од интереса потражите од Википедије. То је ваш џепни ванмрежни водич - само омогућите додатак Википедиа и уживајте у чланцима о објектима око вас.</string>
+    <string name="app_mode_enduro_motorcycle">Ендуро скутер</string>
+    <string name="app_mode_motor_scooter">Скутер</string>
 </resources>
