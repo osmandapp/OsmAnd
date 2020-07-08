@@ -438,11 +438,12 @@ public abstract class ImageCard extends AbstractCard {
 					pms.put("lang", preferredLang);
 				}
 				if (this.params != null) {
-					pms.putAll(this.params);
 					String wikidataId = this.params.get("wikidata_id");
 					if (wikidataId != null) {
+						this.params.remove("wikidata_id");
 						WikiImageHelper.fillWikiMediaCards(mapActivity, wikidataId, result);
 					}
+					pms.putAll(this.params);
 				}
 				String response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place", pms,
 						"Requesting location images...", false, false);

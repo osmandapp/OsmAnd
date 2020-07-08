@@ -471,7 +471,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 				textPrefix = app.getString(R.string.poi_cuisine);
 				vl = sb.toString();
-			} else if (key.contains(Amenity.ROUTE) || key.contains(Amenity.WIKIDATA))  {
+			} else if (key.contains(Amenity.ROUTE) || key.equals(Amenity.WIKIDATA))  {
 				continue;
 			} else {
 				if (key.contains(Amenity.DESCRIPTION)) {

@@ -4,13 +4,13 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.wikimedia.pojo.P18;
-import net.osmand.plus.wikimedia.pojo.WikipediaResponse;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -47,8 +47,8 @@ public class WikiImageHelper {
 				} catch (JsonSyntaxException e) {
 					error = e.getLocalizedMessage();
 				}
-				LOG.error(error);
 			}
+			LOG.error(error);
 		} else {
 			LOG.error("Wrong WikiMedia ID");
 		}
@@ -56,10 +56,10 @@ public class WikiImageHelper {
 
 	public static List<WikiImage> getImageData(WikipediaResponse response) {
 		List<WikiImage> images = new ArrayList<>();
-		try {
-			for (P18 p18 : response.getClaims().getP18()) {
-				String imageFileName = p18.getMainsnak().getDatavalue().getValue();
-				if (imageFileName != null) {
+		for (P18 p18 : response.claims.p18) {
+			String imageFileName = p18.mainsnak.datavalue.value;
+			if (imageFileName != null) {
+				try {
 					String imageName = URLDecoder.decode(imageFileName, "UTF-8");
 					imageFileName = imageName.replace(" ", "_");
 					imageName = imageName.substring(0, imageName.lastIndexOf("."));
@@ -73,11 +73,12 @@ public class WikiImageHelper {
 							imageFileName + "/" + THUMB_SIZE + "px-" +
 							imageFileName;
 					images.add(new WikiImage(imageName, imageStubUrl,
-							imageHiResUrl, p18.getMainsnak().getDatatype()));
+							imageHiResUrl, p18.mainsnak.datatype));
+
+				} catch (UnsupportedEncodingException e) {
+					LOG.error(e.getLocalizedMessage());
 				}
 			}
-		} catch (UnsupportedEncodingException e) {
-			LOG.error(e.getLocalizedMessage());
 		}
 		return images;
 	}
@@ -86,5 +87,59 @@ public class WikiImageHelper {
 	public static String[] getHash(@NonNull String s) {
 		String md5 = new String(Hex.encodeHex(DigestUtils.md5(s)));
 		return new String[]{md5.substring(0, 1), md5.substring(0, 2)};
+	}
+
+	private class Claims {
+		@SerializedName("P18")
+		@Expose
+		private List<P18> p18 = null;
+	}
+
+	public class Datavalue {
+		@SerializedName("value")
+		@Expose
+		private String value;
+		@SerializedName("type")
+		@Expose
+		private String type;
+	}
+
+	public class Mainsnak {
+		@SerializedName("snaktype")
+		@Expose
+		private String snaktype;
+		@SerializedName("property")
+		@Expose
+		private String property;
+		@SerializedName("hash")
+		@Expose
+		private String hash;
+		@SerializedName("datavalue")
+		@Expose
+		private Datavalue datavalue;
+		@SerializedName("datatype")
+		@Expose
+		private String datatype;
+	}
+
+	public class P18 {
+		@SerializedName("mainsnak")
+		@Expose
+		private Mainsnak mainsnak;
+		@SerializedName("type")
+		@Expose
+		private String type;
+		@SerializedName("id")
+		@Expose
+		private String id;
+		@SerializedName("rank")
+		@Expose
+		private String rank;
+	}
+
+	public class WikipediaResponse {
+		@SerializedName("claims")
+		@Expose
+		private Claims claims;
 	}
 }
