@@ -3797,4 +3797,6 @@
     <string name="please_provide_point_name_error">Merci de renseigner un nom pour le point</string>
     <string name="plugin_wikipedia_description">Utilisez un guide de poche hors ligne grâce à Wikipédia. Activez le plugin Wikipédia : des points d\'intérêt seront affichés, ils vous permettrons d\'obtenir des informations sur les lieux qui vous entourent.</string>
     <string name="search_download_wikipedia_maps">Télécharger les cartes Wikipédia</string>
+    <string name="app_mode_motor_scooter">Scooter</string>
+    <string name="app_mode_enduro_motorcycle">Moto enduro</string>
 </resources>
