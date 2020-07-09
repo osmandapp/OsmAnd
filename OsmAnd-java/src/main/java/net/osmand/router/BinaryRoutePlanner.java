@@ -852,6 +852,8 @@ public class BinaryRoutePlanner {
 		public RouteSegmentPoint(RouteDataObject road, int segmentStart, double distSquare) {
 			super(road, segmentStart);
 			this.distSquare = distSquare;
+			this.preciseX = road.getPoint31XTile(segmentStart);
+			this.preciseY = road.getPoint31YTile(segmentStart);
 		}
 		
 		public RouteSegmentPoint(RouteSegmentPoint pnt) {
