@@ -117,15 +117,20 @@ public class RoutePlannerFrontEnd {
 	}
 
 	public RouteSegmentPoint findRouteSegment(double lat, double lon, RoutingContext ctx, List<RouteSegmentPoint> list, boolean transportStop) throws IOException {
+		return findRouteSegment(lat, lon, ctx, list, false, false);
+	}
+	
+	public RouteSegmentPoint findRouteSegment(double lat, double lon, RoutingContext ctx, List<RouteSegmentPoint> list, boolean transportStop, 
+			boolean allowDuplications) throws IOException {
 		int px = MapUtils.get31TileNumberX(lon);
 		int py = MapUtils.get31TileNumberY(lat);
 		ArrayList<RouteDataObject> dataObjects = new ArrayList<RouteDataObject>();
-		ctx.loadTileData(px, py, 17, dataObjects);
+		ctx.loadTileData(px, py, 17, dataObjects, allowDuplications);
 		if (dataObjects.isEmpty()) {
-			ctx.loadTileData(px, py, 15, dataObjects);
+			ctx.loadTileData(px, py, 15, dataObjects, allowDuplications);
 		}
 		if (dataObjects.isEmpty()) {
-			ctx.loadTileData(px, py, 14, dataObjects);
+			ctx.loadTileData(px, py, 14, dataObjects, allowDuplications);
 		}
 		if (list == null) {
 			list = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();

@@ -412,6 +412,10 @@ public class RoutingContext {
 	}
 
 	public void loadTileData(int x31, int y31, int zoomAround, final List<RouteDataObject> toFillIn) {
+		loadTileData(x31, y31, zoomAround, toFillIn, false);
+	}
+	
+	public void loadTileData(int x31, int y31, int zoomAround, final List<RouteDataObject> toFillIn, boolean allowDuplications) {
 		int t =  config.ZOOM_TO_LOAD_TILES - zoomAround;
 		int coordinatesShift = (1 << (31 - config.ZOOM_TO_LOAD_TILES));
 		if(t <= 0) {
@@ -432,6 +436,9 @@ public class RoutingContext {
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 		while (it.hasNext()) {
 			getAllObjects(it.next(), toFillIn, excludeDuplications);
+			if (allowDuplications) {
+				excludeDuplications.clear();
+			}
 		}
 		timeToFindInitialSegments += (System.nanoTime() - now);
 	}
