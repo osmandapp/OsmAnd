@@ -1766,7 +1766,6 @@
     <string name="context_menu_item_open_note">Apri una nota di OSM</string>
     <string name="osm_edit_reopened_note">Nota di OSM riaperta</string>
     <string name="osm_edit_commented_note">Nota di OSM commentata</string>
-    <string name="osm_edit_removed_note">Nota di OSM eliminata</string>
     <string name="osm_edit_created_note">Nota di OSM creata</string>
     <string name="osn_bug_name">Nota di OSM</string>
     <string name="osn_add_dialog_title">Crea nota</string>

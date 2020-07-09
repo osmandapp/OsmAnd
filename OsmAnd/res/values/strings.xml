@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="osm_edit_closed_note">Closed OSM Note</string>
     <string name="app_mode_go_cart">Go-cart</string>
     <string name="app_mode_wheelchair_forward">Wheelchair forward</string>
     <string name="app_mode_wheelchair">Wheelchair</string>
@@ -1687,7 +1688,6 @@
     <string name="context_menu_item_open_note">Open OSM Note</string>
     <string name="osm_edit_reopened_note">Reopened OSM Note</string>
     <string name="osm_edit_commented_note">Commented OSM Note</string>
-    <string name="osm_edit_removed_note">Deleted OSM Note</string>
     <string name="osm_edit_created_note">Created OSM Note</string>
     <string name="osn_bug_name">OSM Note</string>
     <string name="osn_add_dialog_title">Create note</string>

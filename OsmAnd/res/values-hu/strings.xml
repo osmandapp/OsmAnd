@@ -1762,7 +1762,6 @@
     <string name="context_menu_item_open_note">OSM Jegyzet megnyitása</string>
     <string name="osm_edit_reopened_note">Újranyitott OSM Jegyzet</string>
     <string name="osm_edit_commented_note">Kommentált OSM Jegyzet</string>
-    <string name="osm_edit_removed_note">Törölt OSM Jegyzet</string>
     <string name="osm_edit_created_note">Létrehozott OSM Jegyzet</string>
     <string name="osn_bug_name">OSM Jegyzet</string>
     <string name="osn_add_dialog_title">Jegyzet létrehozása</string>

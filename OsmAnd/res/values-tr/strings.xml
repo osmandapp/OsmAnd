@@ -1273,7 +1273,6 @@
     <string name="context_menu_item_open_note">OSM Not\'u aç</string>
     <string name="osm_edit_reopened_note">Yeniden açılmış OSM Notu</string>
     <string name="osm_edit_commented_note">Yorum yazılmış OSM Notu</string>
-    <string name="osm_edit_removed_note">Silinmiş OSM Notu</string>
     <string name="osm_edit_created_note">Oluşturulmuş OSM Notu</string>
     <string name="osn_bug_name">OSM Notu</string>
     <string name="osn_add_dialog_title">Not oluştur</string>

@@ -2254,7 +2254,6 @@
     <string name="context_menu_item_open_note">Ava OSM märge</string>
     <string name="osm_edit_reopened_note">Uuesti avatud OSM märge</string>
     <string name="osm_edit_commented_note">Kommenteeritud OSM märge</string>
-    <string name="osm_edit_removed_note">Kustutatud OSM märge</string>
     <string name="osm_edit_created_note">Loodud OSM märge</string>
     <string name="osn_bug_name">OSM märge</string>
     <string name="osn_add_dialog_title">Loo märge</string>

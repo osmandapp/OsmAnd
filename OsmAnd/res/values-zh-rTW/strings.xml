@@ -1764,7 +1764,6 @@
     <string name="context_menu_item_open_note">開啟 OSM 註解</string>
     <string name="osm_edit_reopened_note">重新開啟 OSM 註解</string>
     <string name="osm_edit_commented_note">已評論 OSM 註解</string>
-    <string name="osm_edit_removed_note">已刪除 OSM 註解</string>
     <string name="osm_edit_created_note">建立 OSM 的註解</string>
     <string name="osn_bug_name">OSM 註解</string>
     <string name="osn_add_dialog_title">建立註解</string>

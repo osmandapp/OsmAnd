@@ -357,7 +357,6 @@
     <string name="context_menu_item_open_note">Отвори белешку ОСМ-а</string>
     <string name="osm_edit_reopened_note">Поново отворена белешка ОСМ-а</string>
     <string name="osm_edit_commented_note">Искоментарисана белешка ОСМ-а</string>
-    <string name="osm_edit_removed_note">Избрисана белешка ОСМ-а</string>
     <string name="osn_bug_name">Белешка ОСМ-а</string>
     <string name="osn_add_dialog_title">Направи белешку</string>
     <string name="osn_comment_dialog_title">Додај коментар</string>

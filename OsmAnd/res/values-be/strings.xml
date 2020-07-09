@@ -1808,7 +1808,6 @@
     <string name="context_menu_item_open_note">Дадаць нататку OSM</string>
     <string name="osm_edit_reopened_note">Нататка OSM адкрытая зноў</string>
     <string name="osm_edit_commented_note">Да нататкі OSM дададзены каментар</string>
-    <string name="osm_edit_removed_note">Нататка OSM выдаленая</string>
     <string name="osm_edit_created_note">Нататка OSM створаная</string>
     <string name="osn_bug_name">Нататка OSM</string>
     <string name="osn_add_dialog_title">Стварыць нататку</string>

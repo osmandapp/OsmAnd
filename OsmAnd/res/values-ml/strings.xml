@@ -2058,7 +2058,6 @@
     <string name="osm_edit_deleted_poi">OSM POI ഇല്ലാതാക്കി</string>
     <string name="osm_edit_reopened_note">OSM കുറിപ്പ് വീണ്ടും തുറന്നു</string>
     <string name="osm_edit_commented_note">OSM കുറിപ്പിൽ അഭിപ്രായമിട്ടു</string>
-    <string name="osm_edit_removed_note">OSM കുറിപ്പ് ഇല്ലാതാക്കി</string>
     <string name="osm_edit_created_note">OSM കുറിപ്പു് സൃഷ്ടിച്ചു</string>
     <string name="osn_add_dialog_title">കുറിപ്പ് സൃഷ്ടിക്കുക</string>
     <string name="osm_edit_created_poi">OSM POI സൃഷ്ടിച്ചു</string>

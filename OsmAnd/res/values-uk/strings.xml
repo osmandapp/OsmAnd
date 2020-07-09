@@ -1639,7 +1639,6 @@
     <string name="context_menu_item_open_note">Відкрити OSM-нотатку</string>
     <string name="osm_edit_reopened_note">Відкрити заново OSM-нотатку</string>
     <string name="osm_edit_commented_note">До OSM-нотатки додано коментар</string>
-    <string name="osm_edit_removed_note">Вилучено OSM-нотатку</string>
     <string name="osm_edit_created_note">Створено OSM-нотатку</string>
     <string name="osn_bug_name">OSM-нотатка</string>
     <string name="osn_add_dialog_title">Створити нотатку</string>
