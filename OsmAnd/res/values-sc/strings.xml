@@ -3817,4 +3817,6 @@
     <string name="quick_action_remove_next_destination_descr">Su puntu de destinatzione atuale in s\'àndala at a èssere iscantzelladu. Si at a èssere sa destinatzione, sa navigatzione s\'at a firmare.</string>
     <string name="search_download_wikipedia_maps">Iscàrriga sas mapas de Wikipedia</string>
     <string name="plugin_wikipedia_description">Otene informatziones a pitzu de puntos de interesse dae Wikipedia. Est sa ghia non in lìnia tua de mantènnere in butzaca - abìlita s\'estensione Wikipedia e ispassia·ti cun sos artìculos a pitzu de sos ogetos a fùrriu de tie.</string>
+    <string name="app_mode_enduro_motorcycle">Moto enduro</string>
+    <string name="app_mode_motor_scooter">Motorinu</string>
 </resources>
