@@ -3823,4 +3823,6 @@
     <string name="quick_action_remove_next_destination_descr">נקודת היעד הנוכחית במסלול תימחק. אם זה יהיה היעד, הניווט ייעצר.</string>
     <string name="search_download_wikipedia_maps">הורדת מפות ויקיפדיה</string>
     <string name="plugin_wikipedia_description">קבלת מידע על נקודות עניין מוויקיפדיה. מדריך הכיס הפרטי שלך - עליך פשוט להפעיל את התוסף של ויקיפדיה וליהנות מערכים על מה שסביבך.</string>
+    <string name="app_mode_enduro_motorcycle">אופנוע שטח</string>
+    <string name="app_mode_motor_scooter">טוסטוס</string>
 </resources>
