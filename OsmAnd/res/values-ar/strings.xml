@@ -3398,7 +3398,7 @@
     <string name="select_map_icon">حدد أيقونه الخريطة</string>
     <string name="delete_profiles_descr">بعد النقر فوق \"تطبيق\" ، سيتم فقد الأوضاع المحذوفة بالكامل.</string>
     <string name="master_profile">الوضع الرئيسي</string>
-    <string name="select_color"></string>
+    <string name="select_color">اختر اللون</string>
     <string name="edit_profiles_descr">لا يمكنك حذف أوضاع أوسماند الافتراضية ، ولكن يمكنك تعطيلها في الشاشة السابقة ، أو نقلها إلى الأسفل.</string>
     <string name="edit_profiles">تحرير الأوضاع</string>
     <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على قواعد حسابات المسار.</string>
