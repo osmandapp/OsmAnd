@@ -3803,7 +3803,7 @@
     <string name="quick_action_showhide_mapillary_descr">Un botón que alterna la capa de Mapillary en el mapa.</string>
     <string name="shared_string_bearing">Rumbo</string>
     <string name="item_deleted">%1$s borrado</string>
-    <string name="speed_cameras_restart_descr">Debes reiniciar para borrar completamente los datos de los radares de velocidad.</string>
+    <string name="speed_cameras_restart_descr">Se debe reiniciar para borrar completamente los datos de los radares de velocidad.</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar y reiniciar</string>
     <string name="routing_attr_length_description">Indica la longitud permitida del vehículo en rutas.</string>
     <string name="routing_attr_length_name">Límite de longitud</string>
@@ -3811,4 +3811,12 @@
     <string name="app_mode_inline_skates">Patines en línea</string>
     <string name="use_volume_buttons_as_zoom_descr">Permite controlar el nivel de zoom del mapa con los botones de volumen del dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botones de volumen como zoom</string>
+    <string name="search_download_wikipedia_maps">Descargar datos de Wikipedia</string>
+    <string name="quick_action_remove_next_destination_descr">El punto de destino actual de la ruta será borrado. Si será el destino, la navegación se detendrá.</string>
+    <string name="quick_action_remove_next_destination">Borrar el siguiente punto de destino</string>
+    <string name="plugin_wikipedia_description">Obtén información sobre los puntos de interés de Wikipedia. Es tu guía de bolsillo sin conexión - sólo activa el complemento de Wikipedia y disfruta los artículos sobre los objetos de alrededor.</string>
+    <string name="please_provide_point_name_error">Proporciona un nombre para el punto</string>
+    <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
+    <string name="app_mode_motor_scooter">Motoneta (motor)</string>
+    <string name="app_mode_enduro_motorcycle">Motocicleta de enduro</string>
 </resources>
