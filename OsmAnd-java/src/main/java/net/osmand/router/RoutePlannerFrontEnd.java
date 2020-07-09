@@ -228,6 +228,8 @@ public class RoutePlannerFrontEnd {
 						routeFound = findGpxRouteSegment(gctx, gpxPoints, start, next, prev != null);
 						if (routeFound) {
 							// route is found - cut the end of the route and move to next iteration
+//							start.stepBackRoute = new ArrayList<RouteSegmentResult>();
+//							boolean stepBack = true; 
 							boolean stepBack = stepBackAndFindPrevPointInRoute(gctx, gpxPoints, start, next);
 							if (!stepBack) {
 								// not supported case (workaround increase MAXIMUM_STEP_APPROXIMATION)
@@ -518,9 +520,12 @@ public class RoutePlannerFrontEnd {
 					// make first position precise
 					makeSegmentPointPrecise(res.get(0), start.loc, true);
 				} else {
-					assert res.get(0).getObject().getId() == start.pnt.getRoad().getId();
-					// start point could shift to +-1 due to direction
-					res.get(0).setStartPointIndex(start.pnt.getSegmentStart());
+					if(res.get(0).getObject().getId() == start.pnt.getRoad().getId()) {
+						// start point could shift to +-1 due to direction
+						res.get(0).setStartPointIndex(start.pnt.getSegmentStart());
+					} else {
+						//throw new IllegalStateException("TODO");
+					}
 				}
 				start.routeToTarget = res;
 				start.targetInd = target.ind;
