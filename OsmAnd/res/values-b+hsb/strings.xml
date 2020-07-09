@@ -73,7 +73,6 @@
     <string name="osm_edit_modified_poi">Změnjene OSM POI-dypki</string>
     <string name="osm_edit_deleted_poi">Wotstronjene OSM POI-dypki</string>
     <string name="osm_edit_commented_note">Komentowana OSM-notica</string>
-    <string name="osm_edit_removed_note">Wotstronjena OSM-notica</string>
     <string name="osn_bug_name">OSM-notica</string>
     <string name="osn_comment_dialog_title">Komentar přidać</string>
     <string name="osn_close_dialog_title">Noticu začinić</string>

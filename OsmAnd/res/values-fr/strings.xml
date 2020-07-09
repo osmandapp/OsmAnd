@@ -1760,7 +1760,6 @@
     <string name="context_menu_item_edit_waypoint">Modifier l\'étape GPX</string>
     <string name="context_menu_item_open_note">Signaler une anomalie OSM</string>
     <string name="osm_edit_reopened_note">Note OSM réouverte</string>
-    <string name="osm_edit_removed_note">Note OSM supprimée</string>
     <string name="osm_edit_created_note">Note OSM créée</string>
     <string name="osn_bug_name">Note OSM</string>
     <string name="osn_add_dialog_title">Créer une note</string>

@@ -2390,7 +2390,6 @@
 \n</string>
     <string name="arrival_distance_descr">כמה לפני המועד ברצונך להיוודע על הגעה ליעד?</string>
     <string name="live_monitoring_max_interval_to_send">חוצץ זמן למעקב מקוון</string>
-    <string name="osm_edit_removed_note">הערת OSM נמחקה</string>
     <string name="osm_edit_created_note">נוצרה הערת OSM</string>
     <string name="osn_bug_name">הערת OSM</string>
     <string name="osn_add_dialog_title">יצירת הערה</string>

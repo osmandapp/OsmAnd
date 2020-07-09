@@ -274,7 +274,6 @@
     <string name="poi_context_menu_modify_osm_change">Редактировать POI</string>
     <string name="osm_edit_reopened_note">Заметка OSM открыта снова</string>
     <string name="osm_edit_commented_note">К заметке OSM добавлен комментарий</string>
-    <string name="osm_edit_removed_note">Заметка OSM удалена</string>
     <string name="osm_edit_created_note">Заметка OSM создана</string>
     <string name="osn_bug_name">Заметка OSM</string>
     <string name="osn_add_dialog_title">Создать заметку</string>

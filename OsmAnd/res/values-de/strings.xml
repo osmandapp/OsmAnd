@@ -1765,7 +1765,6 @@
     <string name="context_menu_item_open_note">OSM-Notiz erstellen</string>
     <string name="osm_edit_reopened_note">Wiedereröffnete OSM-Notiz</string>
     <string name="osm_edit_commented_note">Kommentierte OSM-Notiz</string>
-    <string name="osm_edit_removed_note">Gelöschte OSM-Notiz</string>
     <string name="osm_edit_created_note">Erstellte OSM-Notiz</string>
     <string name="osn_bug_name">OSM-Notiz</string>
     <string name="osn_add_dialog_title">Notiz erstellen</string>

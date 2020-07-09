@@ -123,7 +123,6 @@
     <string name="context_menu_item_open_note">Krei OSM-rimarkon</string>
     <string name="osm_edit_reopened_note">Remalfermis OSM-rimarkon</string>
     <string name="osm_edit_commented_note">Komentis OSM-rimarkon</string>
-    <string name="osm_edit_removed_note">Forigis OSM-rimarkon</string>
     <string name="osm_edit_created_note">Kreita OSM-rimarko</string>
     <string name="osn_bug_name">OSM-rimarko</string>
     <string name="osn_add_dialog_title">Krei rimarkon</string>

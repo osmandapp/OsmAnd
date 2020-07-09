@@ -1787,7 +1787,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="context_menu_item_open_note">Obre una nota d\'OSM</string>
     <string name="osm_edit_reopened_note">S\'ha reobert nota d\'OSM</string>
     <string name="osm_edit_commented_note">S\'ha comentat nota d\'OSM</string>
-    <string name="osm_edit_removed_note">S\'ha eliminat nota d\'OSM</string>
     <string name="osm_edit_created_note">S\'ha creat nota d\'OSM</string>
     <string name="osn_bug_name">Nota d\'OSM</string>
     <string name="osn_add_dialog_title">Crea nota</string>

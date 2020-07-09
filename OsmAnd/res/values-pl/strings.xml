@@ -1781,7 +1781,6 @@
     <string name="osm_edit_deleted_poi">Usunięto użyteczne miejce OSM</string>
     <string name="osm_edit_reopened_note">Otwarto ponownie notatkę OSM</string>
     <string name="osm_edit_commented_note">Skomentowano uwagę OSM</string>
-    <string name="osm_edit_removed_note">Usunięto uwagę OSM</string>
     <string name="osm_edit_created_note">Utworzono uwagę OSM</string>
     <string name="osn_add_dialog_title">Utwórz uwagę</string>
     <string name="osn_add_dialog_error">Nie utworzono uwagi.</string>

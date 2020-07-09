@@ -1711,7 +1711,6 @@ Long %2$s</string>
     <string name="osm_edit_deleted_poi">Raderat OSM POI</string>
     <string name="context_menu_item_open_note">Öppna OSM-anteckning</string>
     <string name="osm_edit_commented_note">Kommenterat OSM-anteckning</string>
-    <string name="osm_edit_removed_note">Tagit bort OSM-anteckning</string>
     <string name="osm_edit_created_note">Skapat OSM-anteckning</string>
     <string name="osn_bug_name">OSM-anteckning</string>
     <string name="osn_add_dialog_title">Skapa anteckning</string>

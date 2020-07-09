@@ -1767,7 +1767,6 @@
     <string name="context_menu_item_open_note">Otvoriť OSM poznámku</string>
     <string name="osm_edit_reopened_note">Znovuotvorená OSM poznámka</string>
     <string name="osm_edit_commented_note">Pridaný komentár k OSM poznámke</string>
-    <string name="osm_edit_removed_note">Odstránená OSM poznámka</string>
     <string name="osm_edit_created_note">Vytvorená OSM poznámka</string>
     <string name="osn_bug_name">OSM poznámka</string>
     <string name="osn_add_dialog_title">Vytvoriť poznámku</string>
