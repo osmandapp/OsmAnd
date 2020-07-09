@@ -3170,7 +3170,7 @@
     <string name="map_during_navigation">خريطة أثناء التنقل</string>
     <string name="shared_string_other">أخرى</string>
     <string name="vehicle_parameters_descr">الوزن ، الارتفاع ، السرعة</string>
-    <string name="vehicle_parameters">معلمات السيارة</string>
+    <string name="vehicle_parameters">معلمات المركبات</string>
     <string name="voice_announces_info">الإعلامات الصوتية تحدث فقط أثناء التنقل.</string>
     <string name="voice_announces_descr">إرشادات التنقل والإعلامات</string>
     <string name="voice_announces">المطالبات الصوتية</string>
@@ -3212,7 +3212,7 @@
     <string name="default_speed_setting_title">السرعة الافتراضية</string>
     <string name="default_speed_setting_descr">تغيير إعدادات السرعة الافتراضية</string>
     <string name="minmax_speed_dialog_title">تعيين حد السرعة الأدنى/الأعلى</string>
-    <string name="new_profile">وضع جديد</string>
+    <string name="new_profile">ملف تعريف جديد</string>
     <string name="shared_string_crash">خروج مفاجئ</string>
     <string name="last_launch_crashed">فشل العملية الأخيرة لأوسماند. الرجاء مساعدتنا في التحسين من خلال مشاركة رسالة الخطأ.</string>
     <string name="release_3_4">• أوضاع التطبيق: قم بإنشاء وضع مخصص لاحتياجاتك الخاصة ، باستخدام رمز ولون مخصصين 
@@ -3398,7 +3398,7 @@
     <string name="select_map_icon">حدد أيقونه الخريطة</string>
     <string name="delete_profiles_descr">بعد النقر فوق \"تطبيق\" ، سيتم فقد الأوضاع المحذوفة بالكامل.</string>
     <string name="master_profile">الوضع الرئيسي</string>
-    <string name="select_color">اختر اللون</string>
+    <string name="select_color"></string>
     <string name="edit_profiles_descr">لا يمكنك حذف أوضاع أوسماند الافتراضية ، ولكن يمكنك تعطيلها في الشاشة السابقة ، أو نقلها إلى الأسفل.</string>
     <string name="edit_profiles">تحرير الأوضاع</string>
     <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على قواعد حسابات المسار.</string>
@@ -3805,4 +3805,6 @@
     <string name="quick_action_remove_next_destination_descr">سيتم حذف نقطة الوجهة الحالية على المسار. إذا كانت هي الوجهة، سوف تتوقف الملاحة.</string>
     <string name="search_download_wikipedia_maps">تنزيل بيانات ويكيبيديا</string>
     <string name="plugin_wikipedia_description">الحصول على معلومات حول النقاط المثيرة للاهتمام من ويكيبيديا. إنه دليلك غير المتصل بجيبك - ما عليك سوى تمكين المكون الإضافي ويكبيديا والاستمتاع بمقالات حول الكائنات من حولك.</string>
+    <string name="app_mode_enduro_motorcycle">دراجة نارية</string>
+    <string name="app_mode_motor_scooter">سكوتر موتور</string>
 </resources>
