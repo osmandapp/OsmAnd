@@ -2582,7 +2582,7 @@
     <string name="new_profile">Yeni profil</string>
     <string name="shared_string_crash">Çökme</string>
     <string name="app_mode_personal_transporter">Kişisel taşıyıcı</string>
-    <string name="app_mode_scooter">Scooter</string>
+    <string name="app_mode_scooter">Mobilet</string>
     <string name="day">Gün</string>
     <string name="days_2_4">Günler</string>
     <string name="days_5">Günler</string>
@@ -3770,4 +3770,6 @@
     <string name="use_volume_buttons_as_zoom">Yakınlaştırma için ses seviyesi düğmeleri</string>
     <string name="search_download_wikipedia_maps">Wikipedia haritalarını indir</string>
     <string name="plugin_wikipedia_description">Wikipedia\'dan ilgi çekici yerler hakkında bilgi alın. Bu sizin çevrim dışı cep rehberinizdir - sadece Wikipedia eklentisini etkinleştirin ve etrafınızdaki nesneler hakkında makalelerin tadını çıkarın.</string>
+    <string name="app_mode_enduro_motorcycle">Enduro motosiklet</string>
+    <string name="app_mode_motor_scooter">Küçük motosiklet</string>
 </resources>
