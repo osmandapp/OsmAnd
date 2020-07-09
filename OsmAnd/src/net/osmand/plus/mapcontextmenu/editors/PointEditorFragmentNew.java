@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -675,6 +676,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 	public void setCategory(String name, int color) {
 		setSelectedItemWithScroll(name);
+		updateColorSelector(color, groupRecyclerView.getRootView());
 	}
 
 	private void setSelectedItemWithScroll(String name) {
@@ -732,6 +734,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 	public abstract String getToolbarTitle();
 
+	@ColorInt
 	public abstract int getCategoryColor(String category);
 
 	public abstract int getCategoryPointsCount(String category);
@@ -761,6 +764,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	public abstract int getIconId();
 
 	public abstract Set<String> getCategories();
+
+	protected boolean isCategoryVisible(String name) {
+		return true;
+	}
+
+	;
 
 	String getNameTextValue() {
 		EditText nameEdit = view.findViewById(R.id.name_edit);
@@ -885,16 +894,13 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					public void onClick(View view) {
 						int previousSelectedPosition = getItemPosition(selectedItemName);
 						selectedItemName = items.get(holder.getAdapterPosition());
+						updateColorSelector(getCategoryColor(selectedItemName), groupRecyclerView.getRootView());
 						notifyItemChanged(holder.getAdapterPosition());
 						notifyItemChanged(previousSelectedPosition);
 					}
 				});
 				final String group = items.get(position);
 				holder.groupName.setText(group);
-				int categoryColor = getCategoryColor(group);
-				int color = categoryColor == 0 ? getDefaultColor() : categoryColor;
-				holder.groupIcon.setImageDrawable(UiUtilities.tintDrawable(
-						AppCompatResources.getDrawable(app, R.drawable.ic_action_folder), color));
 				holder.pointsCounter.setText(String.valueOf(getCategoryPointsCount(group)));
 				int strokeColor;
 				int strokeWidth;
@@ -913,6 +919,20 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, strokeWidth), strokeColor);
 					holder.groupButton.setImageDrawable(rectContourDrawable);
 				}
+				int color;
+				int iconID;
+				if (!isCategoryVisible(group)) {
+					color = ContextCompat.getColor(app, R.color.text_color_secondary_light);
+					iconID = R.drawable.ic_action_hide;
+					holder.groupName.setTypeface(null, Typeface.ITALIC);
+				} else {
+					int categoryColor = getCategoryColor(group);
+					color = categoryColor == 0 ? getDefaultColor() : categoryColor;
+					iconID = R.drawable.ic_action_folder;
+					holder.groupName.setTypeface(null, Typeface.NORMAL);
+				}
+				holder.groupIcon.setImageDrawable(UiUtilities.tintDrawable(
+						AppCompatResources.getDrawable(app, iconID), color));
 			}
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 				AndroidUtils.setBackground(app, holder.groupButton, nightMode, R.drawable.ripple_solid_light_6dp,
