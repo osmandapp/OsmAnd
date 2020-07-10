@@ -376,9 +376,9 @@ public class BinaryRoutePlanner {
 	public static void printDebugMemoryInformation(RoutingContext ctx) {
 		if (ctx.calculationProgress != null) {
 			RouteCalculationProgress p = ctx.calculationProgress;
-			printInfo(String.format("Time. Total: %.2f, to load: %.2f, to load headers: %.2f, to calc dev: %.2f ",
+			printInfo(String.format("Time. Total: %.2f, to load: %.2f, to load headers: %.2f, to find start/end: %.2f, extra: %.2f ",
 					p.timeToCalculate / 1e6, p.timeToLoad / 1e6, p.timeToLoadHeaders / 1e6,
-					p.timeNanoToCalcDeviation / 1e6));
+					p.timeToFindInitialSegments / 1e6, p.timeNanoToCalcDeviation / 1e6));
 			// GeneralRouter.TIMER = 0;
 			int maxLoadedTiles = Math.max(p.maxLoadedTiles, ctx.getCurrentlyLoadedTiles());
 			printInfo("Current loaded tiles : " + ctx.getCurrentlyLoadedTiles() + ", maximum loaded tiles "

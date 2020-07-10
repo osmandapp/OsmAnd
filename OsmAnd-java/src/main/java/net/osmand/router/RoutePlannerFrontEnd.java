@@ -122,6 +122,7 @@ public class RoutePlannerFrontEnd {
 	
 	public RouteSegmentPoint findRouteSegment(double lat, double lon, RoutingContext ctx, List<RouteSegmentPoint> list, boolean transportStop, 
 			boolean allowDuplications) throws IOException {
+		long now = System.nanoTime();
 		int px = MapUtils.get31TileNumberX(lon);
 		int py = MapUtils.get31TileNumberY(lat);
 		ArrayList<RouteDataObject> dataObjects = new ArrayList<RouteDataObject>();
@@ -172,6 +173,9 @@ public class RoutePlannerFrontEnd {
 				return Double.compare(o1.distSquare, o2.distSquare);
 			}
 		});
+		if (ctx.calculationProgress != null) {
+			ctx.calculationProgress.timeToFindInitialSegments += (System.nanoTime() - now);
+		}
 		if (list.size() > 0) {
 			RouteSegmentPoint ps = null;
 			if (ctx.publicTransport) {
@@ -275,7 +279,6 @@ public class RoutePlannerFrontEnd {
 			start = next;
 		}
 		if(gctx.ctx.calculationProgress != null) {
-			// TODO
 			 gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 		}
 		BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
@@ -664,8 +667,7 @@ public class RoutePlannerFrontEnd {
 			res = searchRouteImpl(ctx, points, routeDirection);
 		}
 		if (ctx.calculationProgress != null) {
-			// TODO
-			 ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
+			  ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 		}
 		BinaryRoutePlanner.printDebugMemoryInformation(ctx);
 		if (res != null) {

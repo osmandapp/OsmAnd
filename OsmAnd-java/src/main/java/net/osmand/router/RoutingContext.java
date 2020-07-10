@@ -420,7 +420,6 @@ public class RoutingContext {
 		}
 		
 		TLongHashSet ts = new TLongHashSet(); 
-		long now = System.nanoTime();
 		for(int i = -t; i <= t; i++) {
 			for(int j = -t; j <= t; j++) {
 				ts.add(getRoutingTile(x31 +i*coordinatesShift, y31 + j*coordinatesShift, 0));		
@@ -433,9 +432,6 @@ public class RoutingContext {
 			if (allowDuplications) {
 				excludeDuplications.clear();
 			}
-		}
-		if (calculationProgress != null) {
-			calculationProgress.timeToFindInitialSegments += (System.nanoTime() - now);
 		}
 	}
 	
