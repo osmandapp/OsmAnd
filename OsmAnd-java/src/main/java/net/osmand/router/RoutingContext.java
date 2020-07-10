@@ -40,8 +40,6 @@ public class RoutingContext {
 	 
 	
 	private final static Log log = PlatformUtil.getLog(RoutingContext.class);
-
-
 	
 	// Final context variables
 	public final RoutingConfiguration config;
@@ -82,26 +80,8 @@ public class RoutingContext {
 	public TileStatistics global = new TileStatistics();
 	// updated by route planner in bytes
 	public int memoryOverhead = 0;
-	
-	
-	long timeNanoToCalcDeviation = 0;
-	long timeToLoad = 0;
-	long timeToLoadHeaders = 0;
-	long timeToFindInitialSegments = 0;
-	public long timeToCalculate = 0;
-	
-	int distinctLoadedTiles = 0;
-	int maxLoadedTiles = 0;
-	int loadedPrevUnloadedTiles = 0;
-	int unloadedTiles = 0;
 	public float routingTime = 0;
-	public int loadedTiles = 0;
-	public int visitedSegments = 0;
-	public int relaxedSegments = 0;
-	public int visitedDirectSegments = 0;
-	public int visitedOppositeSegments = 0;
-	public int directQueueSize = 0;
-	public int oppositeQueueSize = 0;
+
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 
@@ -224,7 +204,9 @@ public class RoutingContext {
 			if (tl.isLoaded()) {
 				if(except == null || except.searchSubregionTile(tl.subregion) < 0){
 					tl.unload();
-					unloadedTiles ++;
+					if(calculationProgress != null) {
+						calculationProgress.unloadedTiles ++;
+					}
 					global.size -= tl.tileStatistics.size;
 				}
 			}
@@ -308,27 +290,37 @@ public class RoutingContext {
 			} catch (IOException e) {
 				throw new RuntimeException("Loading data exception", e);
 			}
-
-			timeToLoad += (System.nanoTime() - now);
+			if (calculationProgress != null) {
+				calculationProgress.timeToLoad += (System.nanoTime() - now);
+			}
 			
 		} else {
 			long now = System.nanoTime();
 			NativeRouteSearchResult ns = nativeLib.loadRouteRegion(ts.subregion, loadObjectsInMemory);
 //			System.out.println(ts.subregion.shiftToData + " " + Arrays.toString(ns.objects));
 			ts.setLoadedNative(ns, this);
-			timeToLoad += (System.nanoTime() - now);
+			if (calculationProgress != null) {
+				calculationProgress.timeToLoad += (System.nanoTime() - now);
+			}
 		}
-		loadedTiles++;
+		if (calculationProgress != null) {
+			calculationProgress.loadedTiles++;
+		}
+		
 		if (wasUnloaded) {
 			if(ucount == 1) {
-				loadedPrevUnloadedTiles++;
+				if(calculationProgress != null) {
+					calculationProgress.loadedPrevUnloadedTiles++;
+				}
 			}
 		} else {
 			if(global != null) {
 				global.allRoutes += ts.tileStatistics.allRoutes;
 				global.coordinates += ts.tileStatistics.coordinates;
 			}
-			distinctLoadedTiles++;
+			if(calculationProgress != null) {
+				calculationProgress.distinctLoadedTiles++;
+			}
 		}
 		global.size += ts.tileStatistics.size;
 	}
@@ -402,7 +394,9 @@ public class RoutingContext {
 						}
 						collection.add(found);
 					}
-					timeToLoadHeaders += (System.nanoTime() - now);
+					if (calculationProgress != null) {
+						calculationProgress.timeToLoadHeaders += (System.nanoTime() - now);
+					}
 				}
 			} catch (IOException e) {
 				throw new RuntimeException("Loading data exception", e);
@@ -440,7 +434,9 @@ public class RoutingContext {
 				excludeDuplications.clear();
 			}
 		}
-		timeToFindInitialSegments += (System.nanoTime() - now);
+		if (calculationProgress != null) {
+			calculationProgress.timeToFindInitialSegments += (System.nanoTime() - now);
+		}
 	}
 	
 	@SuppressWarnings("unused")
@@ -523,7 +519,9 @@ public class RoutingContext {
 				loaded++;
 			}
 		}
-		maxLoadedTiles = Math.max(maxLoadedTiles, getCurrentlyLoadedTiles());
+		if(calculationProgress != null) {
+			calculationProgress.maxLoadedTiles = Math.max(calculationProgress.maxLoadedTiles, getCurrentlyLoadedTiles());
+		}
 		Collections.sort(list, new Comparator<RoutingSubregionTile>() {
 			private int pow(int base, int pw) {
 				int r = 1;
@@ -545,7 +543,9 @@ public class RoutingContext {
 			i++;
 //			System.out.println("Unload " + unload);
 			unload.unload();
-			unloadedTiles ++;
+			if(calculationProgress != null) {
+				calculationProgress.unloadedTiles ++;
+			}
 			global.size -= unload.tileStatistics.size;
 			// tile could be cleaned from routing tiles and deleted from whole list
 			
@@ -794,6 +794,20 @@ public class RoutingContext {
 	
 	public BinaryMapIndexReader[] getMaps() {
 		return map.keySet().toArray(new BinaryMapIndexReader[map.size()]);
+	}
+
+	public int getVisitedSegments() {
+		if(calculationProgress != null) {
+			return calculationProgress.visitedSegments; 
+		}
+		return 0;
+	}
+
+	public int getLoadedTiles() {
+		if (calculationProgress != null) {
+			return calculationProgress.loadedTiles;
+		}
+		return 0;
 	}
 
 	
