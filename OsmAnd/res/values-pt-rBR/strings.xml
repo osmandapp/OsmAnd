@@ -3801,4 +3801,6 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_remove_next_destination_descr">O ponto de destino atual na rota será excluído. Se for o destino, a navegação será interrompida.</string>
     <string name="search_download_wikipedia_maps">Baixar mapas da Wikipédia</string>
     <string name="plugin_wikipedia_description">Obter informações sobre pontos de interesse da Wikipédia. É o seu guia de bolso off-line - só ativar o complemento Wikipédia e desfrutar de artigos sobre os elementos ao seu redor.</string>
+    <string name="app_mode_enduro_motorcycle">Motocicleta enduro</string>
+    <string name="app_mode_motor_scooter">Motoneta</string>
 </resources>

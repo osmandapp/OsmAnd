@@ -3813,4 +3813,6 @@
     <string name="quick_action_remove_next_destination_descr">Текущий пункт назначения на маршруте будет удалён. Если это пункт назначения, навигация остановится.</string>
     <string name="plugin_wikipedia_description">Информация о достопримечательностях из Википедии. Это ваш карманный автономный гид — просто включите плагин Википедии и наслаждайтесь статьями об объектах вокруг вас.</string>
     <string name="search_download_wikipedia_maps">Скачать карты Википедии</string>
+    <string name="app_mode_enduro_motorcycle">Эндуро мотоцикл</string>
+    <string name="app_mode_motor_scooter">Мотороллер</string>
 </resources>

@@ -3431,7 +3431,7 @@
     <string name="routing_profile_direct_to">Recht-naar-punt</string>
     <string name="please_provide_profile_name_message">Kies een naam voor het profiel</string>
     <string name="open_settings">Open instellingen</string>
-    <string name="plugin_disabled">Plugin uitgeschakeld</string>
+    <string name="plugin_disabled">Plug-in uit</string>
     <string name="plugin_disabled_descr">Deze plug-in is een afzonderlijke app, die afzonderlijk verwijderd moet worden als je deze niet meer nodig denkt te hebben.
 \n
 \nDe plug-in blijft op het apparaat aanwezig na het verwijderen van OsmAnd.</string>
@@ -3442,7 +3442,7 @@
     <string name="import_profile_dialog_description">Het geïmporteerde profiel bevat bijkomende gegevens. Klik \'importeer\' om enkel de profielgegevens te importeren of kies bijkomende gegevens om te importeren.</string>
     <string name="export_profile_dialog_description">Je kan bijkomende gegevens om mee met het profiel te exporteren.</string>
     <string name="shared_string_app_default_w_val">App Standaardwaarde (%s)</string>
-    <string name="no_recalculation_setting">Herberekening uitschakelen</string>
+    <string name="no_recalculation_setting">Niet herberekenen</string>
     <string name="route_recalculation_dist_title">Minimale afstand om route te herbereken</string>
     <string name="route_recalculation_dist_descr">De route wordt herberekend wanneer de afstand tot die route groter is dan de opgegeven parameter</string>
     <string name="profile_type_custom_string">Eigen profiel</string>
@@ -3471,17 +3471,17 @@
     <string name="restore_all_profile_settings">Alle profielinstellingen herstellen\?</string>
     <string name="saving_new_profile">Slaat nieuw profiel op</string>
     <string name="profile_backup_failed">Kan profiel niet back-uppen.</string>
-    <string name="n_items_of_z">%1$s of %2$s</string>
+    <string name="n_items_of_z">%1$s van %2$s</string>
     <string name="download_slope_maps">Hellingen</string>
     <string name="quick_action_show_hide_terrain">Terrein tonen / verbergen</string>
     <string name="quick_action_terrain_hide">Terrein verbergen</string>
     <string name="quick_action_terrain_show">Terrein tonen</string>
     <string name="quick_action_terrain_descr">Een knop om de terreinlaag al dan niet te tonen op de kaart.</string>
-    <string name="delete_description">Verwijder een beschrijving</string>
-    <string name="add_description">Voeg een beschrijving toe</string>
-    <string name="select_group">Selecteer groep</string>
-    <string name="select_shape">Selecteer vorm</string>
-    <string name="shared_string_circle">cirkel</string>
+    <string name="delete_description">Beschrijving verwijderen</string>
+    <string name="add_description">Beschrijving toevoegen</string>
+    <string name="select_group">Groep kiezen</string>
+    <string name="select_shape">Vorm kiezen</string>
+    <string name="shared_string_circle">Cirkel</string>
     <string name="shared_string_rhomb">Ruit</string>
     <string name="shared_string_min">Min</string>
     <string name="search_poi_types_descr">Combineer POI-types uit verschillende categorieën. Tik op \"Schakelen\" om alles te selecteren, tik op de linkerkant voor de categoriekeuze.</string>
@@ -3707,4 +3707,6 @@
     <string name="quick_action_remove_next_destination">Verwijder het volgende routepunt</string>
     <string name="please_provide_point_name_error">Kies een naam voor het punt</string>
     <string name="search_download_wikipedia_maps">Wikipedia-kaarten downloaden</string>
+    <string name="app_mode_motor_scooter">Motorscooter</string>
+    <string name="app_mode_enduro_motorcycle">Enduromotor</string>
 </resources>
