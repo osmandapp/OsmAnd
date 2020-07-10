@@ -168,9 +168,9 @@ public class BinaryRoutePlanner {
 		if (ctx.calculationProgress != null) {
 			ctx.calculationProgress.visitedDirectSegments += visitedDirectSegments.size();
 			ctx.calculationProgress.visitedOppositeSegments += visitedOppositeSegments.size();
-			ctx.calculationProgress.directQueueSize = graphDirectSegments.size(); // Math.max(ctx.directQueueSize,
+			ctx.calculationProgress.directQueueSize += graphDirectSegments.size(); // Math.max(ctx.directQueueSize,
 																					// graphDirectSegments.size());
-			ctx.calculationProgress.oppositeQueueSize = graphReverseSegments.size();
+			ctx.calculationProgress.oppositeQueueSize += graphReverseSegments.size();
 			ctx.calculationProgress.visitedOppositeSegments += visitedOppositeSegments.size();
 		}
 		return finalSegment;

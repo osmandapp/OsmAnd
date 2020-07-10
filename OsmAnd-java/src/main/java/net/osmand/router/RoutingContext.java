@@ -318,7 +318,7 @@ public class RoutingContext {
 				global.allRoutes += ts.tileStatistics.allRoutes;
 				global.coordinates += ts.tileStatistics.coordinates;
 			}
-			if(calculationProgress != null) {
+			if (calculationProgress != null) {
 				calculationProgress.distinctLoadedTiles++;
 			}
 		}
