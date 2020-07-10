@@ -1640,7 +1640,7 @@
     <string name="poi_drive_in_yes">Ja</string>
     <string name="poi_drive_in_no">Drive-in: nej</string>
     <string name="poi_drive_through_yes">Ja</string>
-    <string name="poi_drive_through_no">Drive-through: ja</string>
+    <string name="poi_drive_through_no">Drive-through: nej</string>
     <string name="poi_brewery_additional">Bryggerinamn</string>
     <string name="poi_microbrewery_yes">Ja</string>
     <string name="poi_microbrewery_no">Inget mikrobryggeri</string>
