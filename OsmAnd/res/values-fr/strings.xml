@@ -3798,4 +3798,8 @@
     <string name="search_download_wikipedia_maps">Télécharger les cartes Wikipédia</string>
     <string name="app_mode_motor_scooter">Scooter</string>
     <string name="app_mode_enduro_motorcycle">Moto enduro</string>
+    <string name="app_mode_go_cart">Kart</string>
+    <string name="osm_edit_closed_note">Note OSM fermée</string>
+    <string name="app_mode_wheelchair">Fauteuil roulant</string>
+    <string name="app_mode_wheelchair_forward">Fauteuil roulant vers l\'avant</string>
 </resources>
