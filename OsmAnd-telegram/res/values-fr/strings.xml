@@ -248,4 +248,6 @@
     <string name="start_location_sharing">Partager la position</string>
     <string name="show_on_map">Afficher sur la carte</string>
     <string name="already_registered_in_telegram">Vous avez besoin d\'un compte Telegram enregistré et d\'un numéro de téléphone</string>
+    <string name="app_name">OsmAnd Online GPS Tracker</string>
+    <string name="location_service_no_gps_available">Sélectionnez l’un des services de localisation pour partager votre position.</string>
 </resources>
