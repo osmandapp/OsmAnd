@@ -250,4 +250,18 @@
     <string name="already_registered_in_telegram">Vous avez besoin d\'un compte Telegram enregistré et d\'un numéro de téléphone</string>
     <string name="app_name">OsmAnd Online GPS Tracker</string>
     <string name="location_service_no_gps_available">Sélectionnez l’un des services de localisation pour partager votre position.</string>
+    <string name="welcome_descr"><b>OsmAnd Tracker</b> vous permet de partager votre position et voir celle des autres dans OsmAnd.<br/><br/>Cette application utilise l\'API de Telegram, et donc vous avez besoin d\'un compte Telegram.</string>
+    <string name="install_osmand_dialog_message">Vous avez besoin d\'installer la version gratuite ou payante d\'OsmAnd d\'abord</string>
+    <string name="osmand_service_descr">OsmAnd Tracker s\'exécute en arrière-plan, écran éteint.</string>
+    <string name="gps_not_available">Merci d\'activer la géolocalisation dans les paramètres du système</string>
+    <string name="phone_number_descr">Numéro de téléphone au format international</string>
+    <string name="phone_number_title">Numéro de téléphone</string>
+    <string name="my_location_search_hint">Recherche : groupe ou contact</string>
+    <string name="location_sharing_description">Sélectionner les contacts et les groupes avec lesquels vous souhaitez partager votre position.</string>
+    <string name="set_time">Définir l\'heure</string>
+    <string name="visible_time_for_all">Heure visible par tous</string>
+    <string name="set_visible_time_for_all">Rendre l\'heure visible par tous</string>
+    <string name="send_my_location_desc">Définir l\'intervalle minimum pour partager sa position.</string>
+    <string name="stale_location_desc">La dernière fois qu\'un contact s\'est déplacé.</string>
+    <string name="location_history_desc">Cacher les contacts qui ne se sont pas déplacés depuis un temps donné.</string>
 </resources>
