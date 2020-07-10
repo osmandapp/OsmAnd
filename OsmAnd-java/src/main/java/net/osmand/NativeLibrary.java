@@ -26,10 +26,9 @@ import net.osmand.data.QuadRect;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.NativeTransportRoutingResult;
-import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
-import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.util.Algorithms;
 
@@ -135,12 +134,10 @@ public class NativeLibrary {
 		return nativeTransportRouting(new int[] { sx31, sy31, ex31, ey31 }, cfg, progress);
 	}
 
-	public RouteSegmentResult[] runNativeRouting(int sx31, int sy31, int ex31, int ey31, RoutingConfiguration config,
-			RouteRegion[] regions, RouteCalculationProgress progress, PrecalculatedRouteDirection precalculatedRouteDirection, 
-			boolean basemap, boolean publicTransport, boolean startTransportStop, boolean targetTransportStop) {
+	public RouteSegmentResult[] runNativeRouting(RoutingContext c, RouteRegion[] regions, boolean basemap) {
 //		config.router.printRules(System.out);
-		return nativeRouting(new int[] { sx31, sy31, ex31, ey31 }, config, config.initialDirection == null ? -360 : config.initialDirection.floatValue(),
-				regions, progress, precalculatedRouteDirection, basemap, publicTransport, startTransportStop, targetTransportStop);
+		return nativeRouting(c, c.config.initialDirection == null ? -360 : c.config.initialDirection.floatValue(),
+				regions, basemap);
 	}
 
 
@@ -162,10 +159,7 @@ public class NativeLibrary {
 
 	protected static native RouteDataObject[] getRouteDataObjects(RouteRegion reg, long rs, int x31, int y31);
 
-	protected static native RouteSegmentResult[] nativeRouting(int[] coordinates, RoutingConfiguration r,
-															   float initDirection, RouteRegion[] regions, RouteCalculationProgress progress,
-															   PrecalculatedRouteDirection precalculatedRouteDirection, boolean basemap,
-															   boolean publicTransport, boolean startTransportStop, boolean targetTransportStop);
+	protected static native RouteSegmentResult[] nativeRouting(RoutingContext c,  float initDirection, RouteRegion[] regions, boolean basemap);
 
 	protected static native NativeTransportRoutingResult[] nativeTransportRouting(int[] coordinates, TransportRoutingConfiguration cfg,
 																				  RouteCalculationProgress progress);

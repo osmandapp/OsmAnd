@@ -349,8 +349,8 @@ public class RoutePlannerFrontEnd {
 				}
 				if (gctx.distFromLastPoint(startPoint) > 1) {
 					gctx.routeGapDistance += gctx.distFromLastPoint(startPoint);
-					System.out.println(String.format("????? gap of route point = %f, gap of actual gpxPoint = %f ",
-							gctx.distFromLastPoint(startPoint), gctx.distFromLastPoint(pnt.loc)));
+					System.out.println(String.format("????? gap of route point = %f, gap of actual gpxPoint = %f, %s ",
+							gctx.distFromLastPoint(startPoint), gctx.distFromLastPoint(pnt.loc), pnt.loc));
 				}
 				gctx.res.addAll(pnt.routeToTarget);
 				i = pnt.targetInd;
@@ -784,8 +784,12 @@ public class RoutePlannerFrontEnd {
 		if (ctx.nativeLib != null) {
 			ctx.startX = start.preciseX;
 			ctx.startY = start.preciseY;
+			ctx.startRoadId = start.road.id;
+			ctx.startSegmentInd  = start.segStart;
 			ctx.targetX = end.preciseX;
 			ctx.targetY = end.preciseY;
+			ctx.targetRoadId = end.road.id;
+			ctx.targetSegmentInd  = end.segStart;
 			return runNativeRouting(ctx, recalculationEnd);
 		} else {
 			refreshProgressDistance(ctx);
@@ -850,9 +854,7 @@ public class RoutePlannerFrontEnd {
 		ctx.checkOldRoutingFiles(ctx.targetX, ctx.targetY);
 
 		// long time = System.currentTimeMillis();
-		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY,
-				ctx.config, regions, ctx.calculationProgress, ctx.precalculatedRouteDirection, ctx.calculationMode == RouteCalculationMode.BASE,
-				ctx.publicTransport, ctx.startTransportStop, ctx.targetTransportStop);
+		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx, regions, ctx.calculationMode == RouteCalculationMode.BASE);
 		//	log.info("Native routing took " + (System.currentTimeMillis() - time) / 1000f + " seconds");
 		ArrayList<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>(Arrays.asList(res));
 		if (recalculationEnd != null) {
@@ -924,13 +926,7 @@ public class RoutePlannerFrontEnd {
 			List<RouteSegmentResult> res = searchRouteInternalPrepare(local, points.get(i), points.get(i + 1), routeDirection);
 			makeStartEndPointsPrecise(res, points.get(i).getPreciseLatLon(), points.get(i + 1).getPreciseLatLon(), null);
 			results.addAll(res);
-			if(ctx.calculationProgress != null) { 
-				ctx.calculationProgress.distinctLoadedTiles += local.calculationProgress.distinctLoadedTiles;
-				ctx.calculationProgress.loadedTiles += local.calculationProgress.loadedTiles;
-				ctx.calculationProgress.loadedPrevUnloadedTiles += local.calculationProgress.loadedPrevUnloadedTiles;
-			}
 			ctx.routingTime += local.routingTime;
-
 //			local.unloadAllData(ctx);
 			if (restPartRecalculatedRoute != null) {
 				results.addAll(restPartRecalculatedRoute);

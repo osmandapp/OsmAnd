@@ -51,14 +51,16 @@ public class RoutingContext {
 	// 1. Initial variables
 	public int startX;
 	public int startY;
+	public long startRoadId;
+	public int startSegmentInd;
 	public boolean startTransportStop;
 	public int targetX;
 	public int targetY;
+	public long targetRoadId;
+	public int targetSegmentInd;
 	public boolean targetTransportStop;
+	
 	public boolean publicTransport;
-	// deprecated
-	public long firstRoadId;
-	public int firstRoadDirection;
 	
 	public RouteCalculationProgress calculationProgress;
 	public boolean leftSideNavigation;
@@ -187,12 +189,16 @@ public class RoutingContext {
 	public void initStartAndTargetPoints(RouteSegment start, RouteSegment end) {
 		initTargetPoint(end);
 		startX = start.road.getPoint31XTile(start.getSegmentStart());
-		startY = start.road.getPoint31YTile(start.getSegmentStart());		
+		startY = start.road.getPoint31YTile(start.getSegmentStart());
+		startRoadId = start.road.getId();
+		startSegmentInd = start.getSegmentStart();
 	}
 
 	public void initTargetPoint(RouteSegment end) {
 		targetX = end.road.getPoint31XTile(end.getSegmentStart());
 		targetY = end.road.getPoint31YTile(end.getSegmentStart());
+		targetRoadId = end.road.getId();
+		targetSegmentInd = end.getSegmentStart();
 	}
 	
 	public void unloadAllData() {
