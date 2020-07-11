@@ -3821,4 +3821,7 @@
     <string name="plugin_wikipedia_description">Obtén información sobre los puntos de interés de Wikipedia. Es tu guía de bolsillo sin conexión - sólo activa el complemento de Wikipedia y disfruta los artículos sobre los objetos de alrededor.</string>
     <string name="app_mode_enduro_motorcycle">Motocicleta de enduro</string>
     <string name="app_mode_motor_scooter">Motoneta (motor)</string>
+    <string name="app_mode_wheelchair">Silla de ruedas</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="osm_edit_closed_note">Nota de OSM cerrada</string>
 </resources>
