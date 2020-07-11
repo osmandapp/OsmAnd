@@ -3816,4 +3816,5 @@
     <string name="app_mode_enduro_motorcycle">Эндуро мотоцикл</string>
     <string name="app_mode_motor_scooter">Мотороллер</string>
     <string name="osm_edit_closed_note">Закрытая заметка OSM</string>
+    <string name="app_mode_wheelchair">Инвалидная коляска</string>
 </resources>
