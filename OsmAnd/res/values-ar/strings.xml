@@ -3806,4 +3806,8 @@
     <string name="plugin_wikipedia_description">الحصول على معلومات حول النقاط المثيرة للاهتمام من ويكيبيديا. إنه دليلك غير المتصل بجيبك - ما عليك سوى تمكين المكون الإضافي ويكبيديا والاستمتاع بمقالات حول الكائنات من حولك.</string>
     <string name="app_mode_enduro_motorcycle">دراجة نارية</string>
     <string name="app_mode_motor_scooter">سكوتر موتور</string>
+    <string name="app_mode_wheelchair_forward">منحدرات للأمام</string>
+    <string name="app_mode_wheelchair">منحدرات</string>
+    <string name="app_mode_go_cart">عربة التسوق</string>
+    <string name="osm_edit_closed_note">أغلق ملاحظة OSM</string>
 </resources>

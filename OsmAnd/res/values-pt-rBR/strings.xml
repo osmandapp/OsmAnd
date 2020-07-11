@@ -3803,4 +3803,8 @@ Pôr do Sol: %2$s</string>
     <string name="plugin_wikipedia_description">Obter informações sobre pontos de interesse da Wikipédia. É o seu guia de bolso off-line - só ativar o complemento Wikipédia e desfrutar de artigos sobre os elementos ao seu redor.</string>
     <string name="app_mode_enduro_motorcycle">Motocicleta enduro</string>
     <string name="app_mode_motor_scooter">Motoneta</string>
+    <string name="app_mode_wheelchair">Cadeira de rodas</string>
+    <string name="app_mode_wheelchair_forward">Cadeira de rodas para a frente</string>
+    <string name="app_mode_go_cart">Carrinho de compras</string>
+    <string name="osm_edit_closed_note">Nota OSM fechada</string>
 </resources>

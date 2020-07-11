@@ -3709,4 +3709,8 @@
     <string name="search_download_wikipedia_maps">Wikipedia-kaarten downloaden</string>
     <string name="app_mode_motor_scooter">Motorscooter</string>
     <string name="app_mode_enduro_motorcycle">Enduromotor</string>
+    <string name="app_mode_wheelchair">Rolstoel</string>
+    <string name="app_mode_wheelchair_forward">Rolstoel vooraanzicht</string>
+    <string name="osm_edit_closed_note">Opgeloste OSM-notitie</string>
+    <string name="app_mode_go_cart">Kart</string>
 </resources>

@@ -3771,4 +3771,8 @@
     <string name="plugin_wikipedia_description">Wikipedia\'dan ilgi çekici yerler hakkında bilgi alın. Bu sizin çevrim dışı cep rehberinizdir - sadece Wikipedia eklentisini etkinleştirin ve etrafınızdaki nesneler hakkında makalelerin tadını çıkarın.</string>
     <string name="app_mode_enduro_motorcycle">Enduro motosiklet</string>
     <string name="app_mode_motor_scooter">Küçük motosiklet</string>
+    <string name="app_mode_wheelchair">Tekerlekli sandalye</string>
+    <string name="app_mode_wheelchair_forward">İleri tekerlekli sandalye</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="osm_edit_closed_note">Kapatılmış OSM Notu</string>
 </resources>

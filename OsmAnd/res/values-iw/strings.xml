@@ -3824,4 +3824,8 @@
     <string name="plugin_wikipedia_description">קבלת מידע על נקודות עניין מוויקיפדיה. מדריך הכיס הפרטי שלך - עליך פשוט להפעיל את התוסף של ויקיפדיה וליהנות מערכים על מה שסביבך.</string>
     <string name="app_mode_enduro_motorcycle">אופנוע שטח</string>
     <string name="app_mode_motor_scooter">טוסטוס</string>
+    <string name="app_mode_wheelchair">כסא גלגלים</string>
+    <string name="app_mode_wheelchair_forward">כסא גלגלים ספורטיבי</string>
+    <string name="app_mode_go_cart">קארטינג</string>
+    <string name="osm_edit_closed_note">הערת OSM סגורה</string>
 </resources>
