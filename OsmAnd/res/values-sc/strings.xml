@@ -3818,4 +3818,8 @@
     <string name="plugin_wikipedia_description">Otene informatziones a pitzu de puntos de interesse dae Wikipedia. Est sa ghia non in lìnia tua de mantènnere in butzaca - abìlita s\'estensione Wikipedia e ispassia·ti cun sos artìculos a pitzu de sos ogetos a fùrriu de tie.</string>
     <string name="app_mode_enduro_motorcycle">Moto enduro</string>
     <string name="app_mode_motor_scooter">Motorinu</string>
+    <string name="app_mode_wheelchair_forward">Cadira a rodas cara a in antis</string>
+    <string name="app_mode_wheelchair">Cadira a rodas</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="osm_edit_closed_note">Nota de OSM serrada</string>
 </resources>
