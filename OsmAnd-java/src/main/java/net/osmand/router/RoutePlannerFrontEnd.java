@@ -671,7 +671,7 @@ public class RoutePlannerFrontEnd {
 			res = searchRouteImpl(ctx, points, routeDirection);
 		}
 		if (ctx.calculationProgress != null) {
-			  ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
+			ctx.calculationProgress.timeToCalculate += (System.nanoTime() - timeToCalculate);
 		}
 		BinaryRoutePlanner.printDebugMemoryInformation(ctx);
 		if (res != null) {
@@ -870,7 +870,7 @@ public class RoutePlannerFrontEnd {
 				current = pr;
 			}
 		}
-		ctx.routingTime = ctx.calculationProgress.routingCalculatedTime;
+		ctx.routingTime += ctx.calculationProgress.routingCalculatedTime;
 		return new RouteResultPreparation().prepareResult(ctx, result, recalculationEnd != null);
 	}
 
