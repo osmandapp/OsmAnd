@@ -48,6 +48,10 @@ public class RoutingContext {
 	public final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
 	
+	// 0. Reference to native routingcontext for multiple routes
+	public long nativeRoutingContext;
+	public boolean keepNativeRoutingContext;
+	
 	// 1. Initial variables
 	public int startX;
 	public int startY;
@@ -62,10 +66,12 @@ public class RoutingContext {
 	
 	public boolean publicTransport;
 	
+	
 	public RouteCalculationProgress calculationProgress;
 	public boolean leftSideNavigation;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
 	public PrecalculatedRouteDirection precalculatedRouteDirection;
+	
 	
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();
@@ -812,7 +818,17 @@ public class RoutingContext {
 		return 0;
 	}
 
+	public synchronized void deleteNativeRoutingContext() {
+		if (nativeRoutingContext != 0) {
+			NativeLibrary.deleteNativeRoutingContext(nativeRoutingContext);
+		}
+		nativeRoutingContext = 0;
+	}
 	
-
+	@Override
+	protected void finalize() throws Throwable {
+		deleteNativeRoutingContext();
+		super.finalize();
+	}
 
 }

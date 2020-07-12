@@ -217,6 +217,7 @@ public class RoutePlannerFrontEnd {
 		if (gctx.ctx.calculationProgress == null) {
 			gctx.ctx.calculationProgress = new RouteCalculationProgress();
 		}
+		gctx.ctx.keepNativeRoutingContext = true;
 		List<GpxPoint> gpxPoints = generageGpxPoints(points, gctx);
 		GpxPoint start = null;
 		GpxPoint prev = null;
@@ -281,6 +282,7 @@ public class RoutePlannerFrontEnd {
 		if(gctx.ctx.calculationProgress != null) {
 			 gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 		}
+		gctx.ctx.deleteNativeRoutingContext();
 		BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
 		calculateGpxRoute(gctx, gpxPoints);
 		if (!gctx.res.isEmpty()) {
@@ -538,6 +540,8 @@ public class RoutePlannerFrontEnd {
 						// for native routing this is possible when point lies on intersection of 2 lines
 						// solution here could be to pass to native routing id of the route
 						// though it should not create any issue
+						System.out.println("??? not found " + start.pnt.getRoad().getId() + " instead "
+								+ res.get(0).getObject().getId());
 					}
 				}
 				start.routeToTarget = res;

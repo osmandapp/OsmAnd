@@ -395,7 +395,7 @@ public class RouteResultPreparation {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		if (finalSegment != null) {
 			ctx.routingTime += finalSegment.distanceFromStart;
-			println("Routing calculated time distance " + finalSegment.distanceFromStart);
+			// println("Routing calculated time distance " + finalSegment.distanceFromStart);
 			// Get results from opposite direction roads
 			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment : 
 				finalSegment.opposite.getParentRoute();
