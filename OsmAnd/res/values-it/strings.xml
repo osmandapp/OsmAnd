@@ -3787,4 +3787,38 @@
     <string name="quick_action_mapillary_hide">Nascondi Mapilly</string>
     <string name="quick_action_mapillary_show">Mostra Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Un pulsante per visualizzare nella mappa o nascondere il livello Mapillary .</string>
+    <string name="lenght_limit_description">Fornisci la lunghezza del tuo veicolo, alcune restrizioni di percorso potrebbero essere applicate per veicoli.</string>
+    <string name="uninstall_speed_cameras">Disinstalla autovelox</string>
+    <string name="shared_string_legal">Legale</string>
+    <string name="speed_camera_pois">PDI autovelox</string>
+    <string name="speed_cameras_legal_descr">In alcuni paesi o regioni, gli avvisi di presenza di autovelox sono proibiti dalla legge. 
+\n
+\nDevi scegliere in base alle leggi del tuo paese. 
+\n
+\nScegliendo %1$s e riceverai gli avvisi della presenza di autovelox. 
+\n
+\nScegliendo %2$s. Tutti i dati relativi agli autovelox: avvisi, notifiche, PDI saranno cancellati fino a che OsmAnd non sarà completamente reinstallato.</string>
+    <string name="keep_active">Mantieni attivo</string>
+    <string name="shared_string_uninstall">Disinstalla</string>
+    <string name="speed_cameras_alert">Gli avvisi sulla presenza di autovelox in alcuni paesi è proibita dalla legge.</string>
+    <string name="routing_attr_length_description">Specifica la lunghezza del veicolo permessa nei percorsi.</string>
+    <string name="routing_attr_length_name">Lunghezza massima</string>
+    <string name="shared_string_bearing">Bussola</string>
+    <string name="item_deleted">%1$s cancellato</string>
+    <string name="speed_cameras_restart_descr">Il riavvio è necessario per cancellare completamente i dati degli autovelox.</string>
+    <string name="shared_string_uninstall_and_restart">Disinstalla e Riavvia</string>
+    <string name="speed_cameras_removed_descr">Questo dispositivo non ha autovelox.</string>
+    <string name="app_mode_inline_skates">Pattini in linea</string>
+    <string name="quick_action_remove_next_destination">Cancella il prossimo punto di destinazione</string>
+    <string name="use_volume_buttons_as_zoom_descr">Abilita il controllo del zoom della mappa con i pulsanti del volume del dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom">Pulsanti del volume come zoom</string>
+    <string name="please_provide_point_name_error">Per favore indica un nome per il punto</string>
+    <string name="quick_action_remove_next_destination_descr">Il punto di destinazione nel percorso attuale verrà cancellato. Se sarà la Destinazione la navigazione si arresterà.</string>
+    <string name="search_download_wikipedia_maps">Scarica mappe Wikimedia</string>
+    <string name="plugin_wikipedia_description">Ottieni informazioni sui punti di interesse da Wikipedia. È la tua guida tascabile offline - semplicemente abilita il componente aggiuntivo Wikipedia e goditi gli articoli sui punti d\'interesse vicino a te.</string>
+    <string name="app_mode_enduro_motorcycle">Moto enduro</string>
+    <string name="app_mode_motor_scooter">Moto scooter</string>
+    <string name="app_mode_wheelchair">Sedia a rotelle</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="osm_edit_closed_note">Chiudi la nota OSM</string>
 </resources>
