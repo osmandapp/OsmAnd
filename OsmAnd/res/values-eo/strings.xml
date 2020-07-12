@@ -3814,4 +3814,10 @@
     <string name="quick_action_remove_next_destination_descr">La markita celo de la kurso estos forigita. Se tio ĉi estos la fina celo, la navigado ĉesos.</string>
     <string name="search_download_wikipedia_maps">Elŝuti vikipediajn mapojn</string>
     <string name="plugin_wikipedia_description">Akiru informojn pri interesaj punktoj el Vikipedio. Gvidilo en via poŝo – aktivigu la kromprogramon Vikipedio por ricevi artikolojn pri proksimaj objektoj.</string>
+    <string name="app_mode_enduro_motorcycle">Motorciklo (enduro)</string>
+    <string name="app_mode_motor_scooter">Motorciklo (skotero)</string>
+    <string name="app_mode_wheelchair">Rulseĝo</string>
+    <string name="app_mode_wheelchair_forward">Rulseĝo (klinita)</string>
+    <string name="app_mode_go_cart">Gokarto</string>
+    <string name="osm_edit_closed_note">Fermita OSM‑rimarko</string>
 </resources>

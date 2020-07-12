@@ -3826,4 +3826,5 @@
     <string name="app_mode_wheelchair">Rollstuhl</string>
     <string name="app_mode_go_cart">Go-Kart</string>
     <string name="osm_edit_closed_note">Geschlossene OSM-Notiz</string>
+    <string name="app_mode_wheelchair_forward">Rollstuhl vorwärts</string>
 </resources>

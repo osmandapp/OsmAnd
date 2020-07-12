@@ -3811,4 +3811,8 @@
     <string name="plugin_wikipedia_description">從維基百科取得關於興趣點的資訊。這是您的離線口袋指南 ── 只要啟用維基百科外掛程式並享受有關於您周圍景點的文章。</string>
     <string name="app_mode_enduro_motorcycle">耐力賽摩托車</string>
     <string name="app_mode_motor_scooter">小型摩托車</string>
+    <string name="app_mode_wheelchair">輪椅</string>
+    <string name="app_mode_wheelchair_forward">輪椅向前</string>
+    <string name="app_mode_go_cart">卡丁車</string>
+    <string name="osm_edit_closed_note">已關閉的 OSM 註記</string>
 </resources>
