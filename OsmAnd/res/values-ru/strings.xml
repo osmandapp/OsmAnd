@@ -3817,4 +3817,6 @@
     <string name="app_mode_motor_scooter">Мотороллер</string>
     <string name="osm_edit_closed_note">Закрытая заметка OSM</string>
     <string name="app_mode_wheelchair">Инвалидная коляска</string>
+    <string name="gpx_split_interval_none_descr">Выберите нужный вариант разбиения: по времени или по расстоянию.</string>
+    <string name="gpx_split_interval_descr">Выберите интервал с которым будут отображаться метки с расстоянием или временем на треке.</string>
 </resources>

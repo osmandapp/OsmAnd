@@ -18,9 +18,13 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.AppearanceListItem> {
+
+	public static final String TRACK_WIDTH_BOLD = "bold";
+	public static final String TRACK_WIDTH_MEDIUM = "medium";
 
 	private OsmandApplication app;
 	private GpxAppearanceAdapterType adapterType;
@@ -61,14 +65,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 			TextView textView = (TextView) v.findViewById(R.id.text1);
 			textView.setText(item.localizedValue);
 			if (ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR.equals(item.attrName)) {
-				int iconId;
-				if ("bold".equals(item.value)) {
-					iconId = R.drawable.ic_action_gpx_width_bold;
-				} else if ("medium".equals(item.value)) {
-					iconId = R.drawable.ic_action_gpx_width_medium;
-				} else {
-					iconId = R.drawable.ic_action_gpx_width_thin;
-				}
+				int iconId = getWidthIconId(item.value);
 				textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
 						app.getUIUtilities().getPaintedIcon(iconId, currentColor), null);
 			} else {
@@ -87,7 +84,22 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 		return v;
 	}
 
+	public static int getWidthIconId(String widthAttr) {
+		if (TRACK_WIDTH_BOLD.equals(widthAttr)) {
+			return R.drawable.ic_action_gpx_width_bold;
+		} else if (TRACK_WIDTH_MEDIUM.equals(widthAttr)) {
+			return R.drawable.ic_action_gpx_width_medium;
+		} else {
+			return R.drawable.ic_action_gpx_width_thin;
+		}
+	}
+
 	public void init() {
+		addAll(getAppearanceItems(app, adapterType));
+	}
+
+	public static List<AppearanceListItem> getAppearanceItems(OsmandApplication app, GpxAppearanceAdapterType adapterType) {
+		List<AppearanceListItem> items = new ArrayList<>();
 		RenderingRuleProperty trackWidthProp = null;
 		RenderingRuleProperty trackColorProp = null;
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
@@ -102,30 +114,31 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 
 		if (trackWidthProp != null) {
 			AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR, "",
-					SettingsActivity.getStringPropertyValue(getContext(), trackWidthProp.getDefaultValueDescription()));
-			add(item);
+					SettingsActivity.getStringPropertyValue(app, trackWidthProp.getDefaultValueDescription()));
+			items.add(item);
 			for (int j = 0; j < trackWidthProp.getPossibleValues().length; j++) {
 				item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR,
 						trackWidthProp.getPossibleValues()[j],
-						SettingsActivity.getStringPropertyValue(getContext(), trackWidthProp.getPossibleValues()[j]));
-				add(item);
+						SettingsActivity.getStringPropertyValue(app, trackWidthProp.getPossibleValues()[j]));
+				items.add(item);
 			}
 			item.setLastItem(true);
 		}
 		if (trackColorProp != null) {
 			AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR, "",
-					SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getDefaultValueDescription()),
+					SettingsActivity.getStringPropertyValue(app, trackColorProp.getDefaultValueDescription()),
 					parseTrackColor(renderer, ""));
-			add(item);
+			items.add(item);
 			for (int j = 0; j < trackColorProp.getPossibleValues().length; j++) {
 				item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR,
 						trackColorProp.getPossibleValues()[j],
-						SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getPossibleValues()[j]),
+						SettingsActivity.getStringPropertyValue(app, trackColorProp.getPossibleValues()[j]),
 						parseTrackColor(renderer, trackColorProp.getPossibleValues()[j]));
-				add(item);
+				items.add(item);
 			}
 			item.setLastItem(true);
 		}
+		return items;
 	}
 
 	public static int parseTrackColor(RenderingRulesStorage renderer, String colorName) {
@@ -193,6 +206,10 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 
 		public String getValue() {
 			return value;
+		}
+
+		public void setValue(String value) {
+			this.value = value;
 		}
 
 		public String getLocalizedValue() {

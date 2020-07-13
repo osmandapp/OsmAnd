@@ -11,6 +11,12 @@
 	Thx - Hardy
 
 -->
+    <string name="gpx_direction_arrows">Direction arrows</string>
+    <string name="shared_string_custom">Custom</string>
+    <string name="gpx_split_interval_none_descr">Select the desired splitting option: by time or by distance.</string>
+    <string name="gpx_split_interval_descr">Select the interval at which marks with distance or time on the track will be displayed.</string>
+    <string name="select_track_width">Select width</string>
+    <string name="track_show_start_finish_icons">Show start finish icons</string>
     <string name="osm_edit_closed_note">Closed OSM Note</string>
     <string name="app_mode_go_cart">Go-cart</string>
     <string name="app_mode_wheelchair_forward">Wheelchair forward</string>

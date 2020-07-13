@@ -37,15 +37,17 @@
 			tools:text="255" />
 	</LinearLayout>
 
-	<TextView
+	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/groupName"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:paddingLeft="@dimen/content_padding_half"
 		android:paddingStart="@dimen/content_padding_half"
-		android:paddingRight="@dimen/content_padding_half"
+		android:paddingLeft="@dimen/content_padding_half"
+		android:paddingTop="@dimen/list_content_padding_large"
 		android:paddingEnd="@dimen/content_padding_half"
-        android:paddingTop="@dimen/list_content_padding_large"
+		android:paddingRight="@dimen/content_padding_half"
+		android:textColor="?attr/active_color_basic"
+		app:typeface="@string/font_roboto_medium"
 		tools:text="@string/favorite" />
 
 </FrameLayout>

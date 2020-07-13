@@ -96,7 +96,8 @@
 	<dimen name="gpx_small_icon_margin">3dp</dimen>
 	<dimen name="gpx_small_text_margin">14dp</dimen>
 	<dimen name="gpx_text_top_margin">6dp</dimen>
-
+	<dimen name="gpx_group_button_height">60dp</dimen>
+	<dimen name="gpx_group_button_width">96dp</dimen>
 
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
