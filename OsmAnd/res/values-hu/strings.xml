@@ -3772,4 +3772,5 @@
     <string name="app_mode_wheelchair">Kerekesszék</string>
     <string name="app_mode_go_cart">Gokart</string>
     <string name="osm_edit_closed_note">Lezárt OSM-jegyzet</string>
+    <string name="app_mode_wheelchair_forward">Előre döntött kerekesszék</string>
 </resources>
