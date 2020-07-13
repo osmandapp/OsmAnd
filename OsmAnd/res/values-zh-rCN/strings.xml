@@ -911,7 +911,6 @@
     <string name="context_menu_item_open_note">打开 OSM 注解</string>
     <string name="osm_edit_reopened_note">重新打开 OSM 注解</string>
     <string name="osm_edit_commented_note">已评论 OSM 注解</string>
-    <string name="osm_edit_removed_note">已删除 OSM 注解</string>
     <string name="osm_edit_created_note">已创建 OSM 注解</string>
     <string name="osn_bug_name">OSM 注解</string>
     <string name="osn_add_dialog_title">创建注解</string>

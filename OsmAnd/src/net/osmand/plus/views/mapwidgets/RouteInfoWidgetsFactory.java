@@ -1252,6 +1252,7 @@ public class RouteInfoWidgetsFactory {
 		private int imgId;
 		private String cachedText;
 		private String cachedBottomText;
+		private OsmandSettings.DrivingRegion cachedRegion;
 
 		public AlarmWidget(final OsmandApplication app, MapActivity ma) {
 			layout = ma.findViewById(R.id.map_alarm_warning);
@@ -1366,7 +1367,7 @@ public class RouteInfoWidgetsFactory {
 							icon.setImageResource(locimgId);
 						}
 						Resources res = layout.getContext().getResources();
-						if (!Algorithms.objectEquals(text, cachedText)) {
+						if (!Algorithms.objectEquals(text, cachedText) || cachedRegion != region) {
 							cachedText = text;
 							widgetText.setText(cachedText);
 							if (alarm.getType() == AlarmInfoType.SPEED_LIMIT && americanType && !isCanadianRegion) {
@@ -1376,9 +1377,10 @@ public class RouteInfoWidgetsFactory {
 								widgetText.setPadding(0, 0, 0, 0);
 							}
 						}
-						if (!Algorithms.objectEquals(bottomText, cachedBottomText)) {
+						if (!Algorithms.objectEquals(bottomText, cachedBottomText) || cachedRegion != region) {
 							cachedBottomText = bottomText;
 							widgetBottomText.setText(cachedBottomText);
+							cachedRegion = region;
 							if (alarm.getType() == AlarmInfoType.SPEED_LIMIT && isCanadianRegion) {
 								int bottomPadding = res.getDimensionPixelSize(R.dimen.map_button_margin);
 								widgetBottomText.setPadding(0, 0, 0, bottomPadding);

@@ -1127,7 +1127,7 @@
     <string name="shared_string_waypoint">Маршрутна точка</string>
     <string name="selected_gpx_info_show">"
 \n
-\nДовго утримуйте, щоб побачити на мапі"</string>
+\nУтримуйте, щоб побачити на мапі"</string>
     <string name="delay_navigation_start">Запускати навігацію автоматично</string>
     <string name="shared_string_selected_lowercase">виділені</string>
     <string name="gpx_info_subtracks">Під-треки: %1$s</string>
@@ -1639,7 +1639,6 @@
     <string name="context_menu_item_open_note">Відкрити OSM-нотатку</string>
     <string name="osm_edit_reopened_note">Відкрити заново OSM-нотатку</string>
     <string name="osm_edit_commented_note">До OSM-нотатки додано коментар</string>
-    <string name="osm_edit_removed_note">Вилучено OSM-нотатку</string>
     <string name="osm_edit_created_note">Створено OSM-нотатку</string>
     <string name="osn_bug_name">OSM-нотатка</string>
     <string name="osn_add_dialog_title">Створити нотатку</string>
@@ -3125,7 +3124,7 @@
     <string name="base_profile_descr_pedestrian">Прогулянки, походи, біг</string>
     <string name="base_profile_descr_public_transport">Види громадського транспорту</string>
     <string name="base_profile_descr_boat">Корабель, веслування, вітрильний спорт</string>
-    <string name="base_profile_descr_aircraft">Літак, аероглайдинг</string>
+    <string name="base_profile_descr_aircraft">Літак, планер</string>
     <string name="routing_profile_geocoding">Геокодування</string>
     <string name="routing_profile_straightline">Пряма лінія</string>
     <string name="routing_profile_broutrer">BRouter (автономний)</string>
@@ -3408,10 +3407,10 @@
     <string name="select_map_icon">Позиція значка в спокої</string>
     <string name="delete_profiles_descr">Натиснення \"Застосувати\" видалить профілі назавжди.</string>
     <string name="master_profile">Основний профіль</string>
-    <string name="select_color">Оберіть колір</string>
+    <string name="select_color">Виберіть колір</string>
     <string name="edit_profiles_descr">Усталені профілі OsmAnd не видалено, проте вимкнуто (на попередньому екрані) чи відпорядковано донизу.</string>
     <string name="edit_profiles">Редагувати профілі</string>
-    <string name="select_nav_profile_dialog_message">\"Вид навігації\" визначає спосіб обчислення маршрутів.</string>
+    <string name="select_nav_profile_dialog_message">\'Тип навігації\' визначає спосіб обчислення маршрутів.</string>
     <string name="profile_appearance">Зовнішній вигляд профілю</string>
     <string name="choose_icon_color_name">Значок, колір та назва</string>
     <string name="reorder_profiles">Редагувати список профілів</string>
@@ -3804,4 +3803,11 @@
     <string name="app_mode_inline_skates">Роликові ковзани</string>
     <string name="use_volume_buttons_as_zoom_descr">Увімкнути для зміни масштабу мапи кнопками гучності пристрою.</string>
     <string name="use_volume_buttons_as_zoom">Масштабування кнопками гучності</string>
+    <string name="lenght_limit_description">Вкажіть довжину вашого автомобіля, для довгих транспортних засобів можуть застосовуватися деякі обмеження на маршрутах.</string>
+    <string name="quick_action_remove_next_destination">Видалити наступну точку призначення</string>
+    <string name="please_provide_point_name_error">Вкажіть назву пункту</string>
+    <string name="quick_action_remove_next_destination_descr">Поточну точку призначення на маршруті буде видалено. Якщо це буде місце призначення, навігація припиниться.</string>
+    <string name="search_download_wikipedia_maps">Завантажити мапи Вікіпедії</string>
+    <string name="plugin_wikipedia_description">Отримайте відомості про визначні місця у Вікіпедії. Це ваш кишеньковий посібник без мережі - просто ввімкніть втулок \"Вікіпедія\" і насолоджуйтесь статтями про об\'єкти навколо вас.</string>
+    <string name="app_mode_motor_scooter">Моторолер</string>
 </resources>

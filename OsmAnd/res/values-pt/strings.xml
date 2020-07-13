@@ -1506,7 +1506,6 @@
     <string name="context_menu_item_open_note">Abrir anotação OSM</string>
     <string name="osm_edit_reopened_note">Re-abrir anotação OSM</string>
     <string name="osm_edit_commented_note">Anotação OSM comentada</string>
-    <string name="osm_edit_removed_note">Nota OSM eliminada</string>
     <string name="osm_edit_created_note">Anotação OSM adicionada</string>
     <string name="osn_bug_name">Anotação OSM</string>
     <string name="osn_add_dialog_title">Adicionar anotação OSM</string>

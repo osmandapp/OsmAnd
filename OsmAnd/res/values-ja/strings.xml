@@ -1742,7 +1742,6 @@ POIの更新は利用できません</string>
     <string name="context_menu_item_open_note">OSMでの注釈を開く</string>
     <string name="osm_edit_reopened_note">OSMでの注釈を開き直す</string>
     <string name="osm_edit_commented_note">OSMの注釈にコメントを付加しました</string>
-    <string name="osm_edit_removed_note">OSMの注釈を削除しました</string>
     <string name="osm_edit_created_note">OSMに注釈を作成しました</string>
     <string name="osn_bug_name">OSMでの注釈</string>
     <string name="osn_add_dialog_title">注釈の作成</string>

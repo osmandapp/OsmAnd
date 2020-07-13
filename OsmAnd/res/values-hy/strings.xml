@@ -642,7 +642,6 @@
     <string name="context_menu_item_open_note">Ավելացնել OSM նշումը</string>
     <string name="osm_edit_reopened_note">OSM նշումը կրկին բացված է</string>
     <string name="osm_edit_commented_note">OSM նշումին ավելացվել է մեկնաբանություն</string>
-    <string name="osm_edit_removed_note">OSM նշումը հեռացվեց</string>
     <string name="osm_edit_created_note">OSM նշում ստեղծվել է</string>
     <string name="osn_bug_name">OSM նշում</string>
     <string name="osn_add_dialog_title">Ստեղծել նշում</string>

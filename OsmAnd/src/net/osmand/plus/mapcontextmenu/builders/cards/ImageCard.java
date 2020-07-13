@@ -25,6 +25,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapillary.MapillaryContributeCard;
 import net.osmand.plus.mapillary.MapillaryImageCard;
+import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -437,6 +438,11 @@ public abstract class ImageCard extends AbstractCard {
 					pms.put("lang", preferredLang);
 				}
 				if (this.params != null) {
+					String wikidataId = this.params.get("wikidata_id");
+					if (wikidataId != null) {
+						this.params.remove("wikidata_id");
+						WikiImageHelper.fillWikiMediaCards(mapActivity, wikidataId, result);
+					}
 					pms.putAll(this.params);
 				}
 				String response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place", pms,

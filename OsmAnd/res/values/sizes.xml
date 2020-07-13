@@ -114,7 +114,7 @@
 
 	<dimen name="map_ruler_width">120dp</dimen>
 	<dimen name="map_ruler_bottom_margin">9dp</dimen>
-	<dimen name="map_alarm_size">78dp</dimen>
+	<dimen name="map_alarm_size">92dp</dimen>
 	<dimen name="map_alarm_bottom_text_margin">8dp</dimen>
 
 
@@ -148,7 +148,7 @@
 	<dimen name="map_alarm_text_size">25sp</dimen>
 	<dimen name="map_alarm_text_top_padding">20dp</dimen>
 	<dimen name="map_alarm_bottom_text_size">16sp</dimen>
-	<dimen name="map_alarm_bottom_si_text_size">8sp</dimen>
+	<dimen name="map_alarm_bottom_si_text_size">12sp</dimen>
 	<dimen name="map_widget_text_bottom_margin">1sp</dimen>
 	<dimen name="map_widget_text_small_bottom_margin">3sp</dimen>
 	<dimen name="map_widget_icon_margin">2dp</dimen>

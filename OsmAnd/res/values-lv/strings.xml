@@ -1615,7 +1615,6 @@
     <string name="context_menu_item_open_note">Atvērt OSM piezīmi</string>
     <string name="osm_edit_reopened_note">Atkārtoti atvērta OSM piezīme</string>
     <string name="osm_edit_commented_note">OSM Note pievienots komentārs</string>
-    <string name="osm_edit_removed_note">OSM piezīme ir izdzēsta</string>
     <string name="osm_edit_created_note">Izveidota OSM piezīme</string>
     <string name="osn_bug_name">OSM piezīme</string>
     <string name="osn_add_dialog_title">Izveidot piezīmi</string>

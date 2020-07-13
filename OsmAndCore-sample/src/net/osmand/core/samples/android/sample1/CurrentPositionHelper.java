@@ -191,6 +191,7 @@ public class CurrentPositionHelper {
 	private void justifyResult(List<GeocodingResult> res, final ResultMatcher<GeocodingResult> result) {
 		List<GeocodingResult> complete = new ArrayList<>();
 		double minBuildingDistance = 0;
+		GeocodingUtilities gu = new GeocodingUtilities();
 		if (res != null) {
 			for (GeocodingResult r : res) {
 				BinaryMapIndexReader foundRepo = null;
@@ -208,7 +209,7 @@ public class CurrentPositionHelper {
 				} else if (foundRepo != null) {
 					List<GeocodingResult> justified = null;
 					try {
-						justified = new GeocodingUtilities().justifyReverseGeocodingSearch(r, foundRepo,
+						justified = gu.justifyReverseGeocodingSearch(r, foundRepo,
 								minBuildingDistance, result);
 					} catch (IOException e) {
 						log.error("Exception happened during reverse geocoding", e);
@@ -227,6 +228,7 @@ public class CurrentPositionHelper {
 					complete.add(r);
 				}
 			}
+			gu.filterDuplicateRegionResults(complete);
 		}
 
 		if (result.isCancelled()) {
@@ -237,7 +239,7 @@ public class CurrentPositionHelper {
 			});
 			return;
 		}
-		Collections.sort(complete, GeocodingUtilities.DISTANCE_COMPARATOR);
+		// Collections.sort(complete, GeocodingUtilities.DISTANCE_COMPARATOR);
 //		for(GeocodingResult rt : complete) {
 //			System.out.println(rt.toString());
 //		}

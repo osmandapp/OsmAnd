@@ -209,7 +209,6 @@
     <string name="available_maps">ಲಭ್ಯವಿರುವ ನಕ್ಷೆಗಳು</string>
     <string name="route_distance">ದೂರ:</string>
     <string name="context_menu_item_open_note">ಒಎಸ್ಎಂ ಟಿಪ್ಪಣಿಯನ್ನು ತೆರೆಯಿರಿ</string>
-    <string name="osm_edit_removed_note">ಅಳಿಸಲಾದ ಒಎಸ್ಎಂ ಟಿಪ್ಪಣಿ</string>
     <string name="osm_edit_created_note">ಸೃಷ್ಟಿಸಲಾದ ಒಎಸ್ಎಂ ಟಿಪ್ಪಣಿ</string>
     <string name="osn_bug_name">ಒಎಸ್ಎಂ ಟಿಪ್ಪಣಿ</string>
     <string name="osn_add_dialog_title">ಟಿಪ್ಪಣಿಯನ್ನು ಹಾಕಿರಿ</string>

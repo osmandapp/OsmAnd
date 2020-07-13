@@ -1842,7 +1842,6 @@
     <string name="show_on_start_description">عند الإيقاف ستبدأ واجهة الخريطة مباشرة.</string>
     <string name="osm_edit_modified_poi">OSM POI معدل</string>
     <string name="osm_edit_commented_note">ملاحظة OSM معلق عليها</string>
-    <string name="osm_edit_removed_note">ملاحظة OSM محذوفة</string>
     <string name="rendering_attr_pisteGrooming_name">مسار زلق</string>
     <string name="world_ski_missing">لإظهار خرائط التزلج، يجب تحميل خريطة خاصة محلية.</string>
     <string name="rendering_attr_publicTransportMode_name">حافلة، ترامواي وغيرها</string>
@@ -3170,7 +3169,7 @@
     <string name="map_during_navigation">خريطة أثناء التنقل</string>
     <string name="shared_string_other">أخرى</string>
     <string name="vehicle_parameters_descr">الوزن ، الارتفاع ، السرعة</string>
-    <string name="vehicle_parameters">معلمات السيارة</string>
+    <string name="vehicle_parameters">معلمات المركبات</string>
     <string name="voice_announces_info">الإعلامات الصوتية تحدث فقط أثناء التنقل.</string>
     <string name="voice_announces_descr">إرشادات التنقل والإعلامات</string>
     <string name="voice_announces">المطالبات الصوتية</string>
@@ -3212,7 +3211,7 @@
     <string name="default_speed_setting_title">السرعة الافتراضية</string>
     <string name="default_speed_setting_descr">تغيير إعدادات السرعة الافتراضية</string>
     <string name="minmax_speed_dialog_title">تعيين حد السرعة الأدنى/الأعلى</string>
-    <string name="new_profile">وضع جديد</string>
+    <string name="new_profile">ملف تعريف جديد</string>
     <string name="shared_string_crash">خروج مفاجئ</string>
     <string name="last_launch_crashed">فشل العملية الأخيرة لأوسماند. الرجاء مساعدتنا في التحسين من خلال مشاركة رسالة الخطأ.</string>
     <string name="release_3_4">• أوضاع التطبيق: قم بإنشاء وضع مخصص لاحتياجاتك الخاصة ، باستخدام رمز ولون مخصصين 
@@ -3805,4 +3804,10 @@
     <string name="quick_action_remove_next_destination_descr">سيتم حذف نقطة الوجهة الحالية على المسار. إذا كانت هي الوجهة، سوف تتوقف الملاحة.</string>
     <string name="search_download_wikipedia_maps">تنزيل بيانات ويكيبيديا</string>
     <string name="plugin_wikipedia_description">الحصول على معلومات حول النقاط المثيرة للاهتمام من ويكيبيديا. إنه دليلك غير المتصل بجيبك - ما عليك سوى تمكين المكون الإضافي ويكبيديا والاستمتاع بمقالات حول الكائنات من حولك.</string>
+    <string name="app_mode_enduro_motorcycle">دراجة نارية</string>
+    <string name="app_mode_motor_scooter">سكوتر موتور</string>
+    <string name="app_mode_wheelchair_forward">منحدرات للأمام</string>
+    <string name="app_mode_wheelchair">منحدرات</string>
+    <string name="app_mode_go_cart">عربة التسوق</string>
+    <string name="osm_edit_closed_note">أغلق ملاحظة OSM</string>
 </resources>

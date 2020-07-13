@@ -1770,7 +1770,6 @@
     <string name="context_menu_item_open_note">Aberi una nota de OSM</string>
     <string name="osm_edit_reopened_note">Nota OSM torrada a abèrrere</string>
     <string name="osm_edit_commented_note">Nota OSM cummentada</string>
-    <string name="osm_edit_removed_note">Nota OSM iscantzellada</string>
     <string name="osm_edit_created_note">Nota OSM creada</string>
     <string name="osn_bug_name">Nota OSM</string>
     <string name="osn_add_dialog_title">Crea nota</string>
@@ -3817,4 +3816,10 @@
     <string name="quick_action_remove_next_destination_descr">Su puntu de destinatzione atuale in s\'àndala at a èssere iscantzelladu. Si at a èssere sa destinatzione, sa navigatzione s\'at a firmare.</string>
     <string name="search_download_wikipedia_maps">Iscàrriga sas mapas de Wikipedia</string>
     <string name="plugin_wikipedia_description">Otene informatziones a pitzu de puntos de interesse dae Wikipedia. Est sa ghia non in lìnia tua de mantènnere in butzaca - abìlita s\'estensione Wikipedia e ispassia·ti cun sos artìculos a pitzu de sos ogetos a fùrriu de tie.</string>
+    <string name="app_mode_enduro_motorcycle">Moto enduro</string>
+    <string name="app_mode_motor_scooter">Motorinu</string>
+    <string name="app_mode_wheelchair_forward">Cadira a rodas cara a in antis</string>
+    <string name="app_mode_wheelchair">Cadira a rodas</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="osm_edit_closed_note">Nota de OSM serrada</string>
 </resources>

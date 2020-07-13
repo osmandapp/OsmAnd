@@ -3817,4 +3817,7 @@
     <string name="poi_traffic_signals_vibration_no">Вибрация: нет</string>
     <string name="poi_traffic_signals_arrow">Стрелка</string>
     <string name="poi_traffic_signals_vibration">Вибрация</string>
+    <string name="poi_city_block">Городской квартал</string>
+    <string name="poi_borough">Муниципалитет</string>
+    <string name="poi_give_box">Подарочная коробка</string>
 </resources>

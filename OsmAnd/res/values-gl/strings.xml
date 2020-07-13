@@ -1763,7 +1763,6 @@ Lon %2$s</string>
     <string name="context_menu_item_open_note">Abrir nota do OSM</string>
     <string name="osm_edit_reopened_note">Reabriuse a nota de OSM</string>
     <string name="osm_edit_commented_note">Nota de OSM comentada</string>
-    <string name="osm_edit_removed_note">Nota de OSM eliminada</string>
     <string name="osm_edit_created_note">Nota de OSM creada</string>
     <string name="osn_bug_name">Nota de OSM</string>
     <string name="osn_add_dialog_title">Crear unha nota</string>
@@ -3842,4 +3841,10 @@ Lon %2$s</string>
     <string name="quick_action_remove_next_destination_descr">O punto de destino actual na ruta será eliminado. Se fora o destino, a navegación sería interrompida.</string>
     <string name="search_download_wikipedia_maps">Baixar mapas da Wikipedia</string>
     <string name="plugin_wikipedia_description">Obter información sobre os puntos de interesse da Wikipédia. É o teu guía de peto sen conexión - só activar o complemento da Wikipédia e desfrutar dos artigos sobre os elementos ó teu redor.</string>
+    <string name="app_mode_enduro_motorcycle">Enduro</string>
+    <string name="app_mode_motor_scooter">Scooter</string>
+    <string name="app_mode_wheelchair">Cadeira de rodas</string>
+    <string name="app_mode_wheelchair_forward">Cadeira de rodas só cara adiante</string>
+    <string name="app_mode_go_cart">Kart</string>
+    <string name="osm_edit_closed_note">Nota do OSM pechada</string>
 </resources>

@@ -473,7 +473,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 							ContextCompat.getColor(app, colorClosed));
 					int colorId = rs.isOpenedForTime(Calendar.getInstance()) ? colorOpen : colorClosed;
 					timeLayout.setVisibility(View.VISIBLE);
-					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_time_16, colorId));
+					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_opening_hour_16, colorId));
 					timeText.setText(openHours);
 				} else {
 					timeLayout.setVisibility(View.GONE);

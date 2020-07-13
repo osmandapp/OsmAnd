@@ -1760,7 +1760,6 @@
     <string name="context_menu_item_edit_waypoint">Modifier l\'étape GPX</string>
     <string name="context_menu_item_open_note">Signaler une anomalie OSM</string>
     <string name="osm_edit_reopened_note">Note OSM réouverte</string>
-    <string name="osm_edit_removed_note">Note OSM supprimée</string>
     <string name="osm_edit_created_note">Note OSM créée</string>
     <string name="osn_bug_name">Note OSM</string>
     <string name="osn_add_dialog_title">Créer une note</string>
@@ -3797,4 +3796,10 @@
     <string name="please_provide_point_name_error">Merci de renseigner un nom pour le point</string>
     <string name="plugin_wikipedia_description">Utilisez un guide de poche hors ligne grâce à Wikipédia. Activez le plugin Wikipédia : des points d\'intérêt seront affichés, ils vous permettrons d\'obtenir des informations sur les lieux qui vous entourent.</string>
     <string name="search_download_wikipedia_maps">Télécharger les cartes Wikipédia</string>
+    <string name="app_mode_motor_scooter">Scooter</string>
+    <string name="app_mode_enduro_motorcycle">Moto enduro</string>
+    <string name="app_mode_go_cart">Kart</string>
+    <string name="osm_edit_closed_note">Note OSM fermée</string>
+    <string name="app_mode_wheelchair">Fauteuil roulant</string>
+    <string name="app_mode_wheelchair_forward">Fauteuil roulant vers l\'avant</string>
 </resources>

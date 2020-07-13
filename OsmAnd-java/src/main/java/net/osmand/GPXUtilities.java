@@ -936,7 +936,6 @@ public class GPXUtilities {
 
 					sp = new SplitSegment(segment, k - 1, cf);
 					currentMetricEnd += metricLimit;
-					prev = sp.get(0);
 				}
 				total += currentSegment;
 			}

@@ -1963,7 +1963,6 @@
     <string name="show_on_start">هنگام شروع نشانش بده</string>
     <string name="copied_to_clipboard">کپی شد</string>
     <string name="osm_edit_deleted_poi">حذف POI</string>
-    <string name="osm_edit_removed_note">بستن یادداشت OSM</string>
     <string name="osn_bug_name">یادداشت OSM‏</string>
     <string name="osn_add_dialog_title">نوشتن یادداشت</string>
     <string name="osn_comment_dialog_title">افزودن توضیح</string>

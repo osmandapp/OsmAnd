@@ -1078,7 +1078,6 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="context_menu_item_open_note">Avaa OSM Huomautus</string>
     <string name="osm_edit_reopened_note">Uudelleen avattu OSM Huomautus</string>
     <string name="osm_edit_commented_note">Kommentoitu OSM Huomautus</string>
-    <string name="osm_edit_removed_note">Poistettu OSM Huomautus</string>
     <string name="osm_edit_created_note">OSM Huomautus luotu</string>
     <string name="osn_bug_name">OSM Huomautus</string>
     <string name="osn_add_dialog_title">Luo huomautus</string>

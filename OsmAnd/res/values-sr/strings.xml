@@ -357,7 +357,6 @@
     <string name="context_menu_item_open_note">Отвори белешку ОСМ-а</string>
     <string name="osm_edit_reopened_note">Поново отворена белешка ОСМ-а</string>
     <string name="osm_edit_commented_note">Искоментарисана белешка ОСМ-а</string>
-    <string name="osm_edit_removed_note">Избрисана белешка ОСМ-а</string>
     <string name="osn_bug_name">Белешка ОСМ-а</string>
     <string name="osn_add_dialog_title">Направи белешку</string>
     <string name="osn_comment_dialog_title">Додај коментар</string>
@@ -3812,4 +3811,10 @@
     <string name="quick_action_remove_next_destination_descr">Тренутна одредишна тачка биће уклоњена. Ако је она одредишна, стопираће се навигација.</string>
     <string name="search_download_wikipedia_maps">Преузмите мапе Википедије</string>
     <string name="plugin_wikipedia_description">Информације о тачкама од интереса потражите од Википедије. То је ваш џепни ванмрежни водич - само омогућите додатак Википедиа и уживајте у чланцима о објектима око вас.</string>
+    <string name="app_mode_enduro_motorcycle">Ендуро скутер</string>
+    <string name="app_mode_motor_scooter">Скутер</string>
+    <string name="app_mode_wheelchair">Инвалидска колица</string>
+    <string name="app_mode_wheelchair_forward">Инвалидска колица напред</string>
+    <string name="app_mode_go_cart">Корпа</string>
+    <string name="osm_edit_closed_note">Затворена ОСМ белешка</string>
 </resources>

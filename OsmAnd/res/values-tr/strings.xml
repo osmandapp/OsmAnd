@@ -975,7 +975,7 @@
     <string name="copying_osmand_one_file_descr">(%s) dosyası yeni hedefine kopyalanıyor…</string>
     <string name="copying_osmand_files_descr">OsmAnd veri dosyaları yeni hedef (%s) \'e kopyalanıyor…</string>
     <string name="guidance_preferences_descr">Navigasyon tercihleri</string>
-    <string name="routing_preferences_descr">Güzergah seçenekleri</string>
+    <string name="routing_preferences_descr">Yönlendirme tercihleri</string>
     <string name="speech_rate_descr">Metinden konuşmaya konuşma hızını belirtin.</string>
     <string name="speech_rate">Hoparlör yerleşimi</string>
     <string name="complex_route_calculation_failed">Hızlı rota hesaplama ( $1%s) başarısız oldu , hesaplama yavaş çare .</string>
@@ -1273,7 +1273,6 @@
     <string name="context_menu_item_open_note">OSM Not\'u aç</string>
     <string name="osm_edit_reopened_note">Yeniden açılmış OSM Notu</string>
     <string name="osm_edit_commented_note">Yorum yazılmış OSM Notu</string>
-    <string name="osm_edit_removed_note">Silinmiş OSM Notu</string>
     <string name="osm_edit_created_note">Oluşturulmuş OSM Notu</string>
     <string name="osn_bug_name">OSM Notu</string>
     <string name="osn_add_dialog_title">Not oluştur</string>
@@ -2501,7 +2500,7 @@
     <string name="coord_input_add_point">Nokta ekle</string>
     <string name="hide_full_description">Açıklamayı gizle</string>
     <string name="show_full_description">Açıklamayı göster</string>
-    <string name="move_maps">Haritaları taşı</string>
+    <string name="move_maps">Haritaları hareket ettir</string>
     <string name="public_transport_try_ped">Yürüme navigasyonunu dene.</string>
     <string name="public_transport_try_change_settings">Ayarları değiştirmeyi deneyin.</string>
     <string name="shared_string_restore">Restore et</string>
@@ -2582,7 +2581,7 @@
     <string name="new_profile">Yeni profil</string>
     <string name="shared_string_crash">Çökme</string>
     <string name="app_mode_personal_transporter">Kişisel taşıyıcı</string>
-    <string name="app_mode_scooter">Scooter</string>
+    <string name="app_mode_scooter">Mobilet</string>
     <string name="day">Gün</string>
     <string name="days_2_4">Günler</string>
     <string name="days_5">Günler</string>
@@ -3371,7 +3370,7 @@
     <string name="select_color">Renk seç</string>
     <string name="edit_profiles_descr">OsmAnd öntanımlı profilleri silinemez, ancak (önceki ekranda) devre dışı bırakılabilir veya en altta sıralanabilir.</string>
     <string name="edit_profiles">Profilleri düzenle</string>
-    <string name="select_nav_profile_dialog_message">\'Navigasyon türü\' rotaların nasıl hesaplandığını yönetir.</string>
+    <string name="select_nav_profile_dialog_message">\'Navigasyon türü\' güzergahın nasıl hesaplandığını yönetir.</string>
     <string name="profile_appearance">Profil görünümü</string>
     <string name="choose_icon_color_name">Simge, renk ve isim</string>
     <string name="reorder_profiles">Profil listesini düzenle</string>
@@ -3770,4 +3769,10 @@
     <string name="use_volume_buttons_as_zoom">Yakınlaştırma için ses seviyesi düğmeleri</string>
     <string name="search_download_wikipedia_maps">Wikipedia haritalarını indir</string>
     <string name="plugin_wikipedia_description">Wikipedia\'dan ilgi çekici yerler hakkında bilgi alın. Bu sizin çevrim dışı cep rehberinizdir - sadece Wikipedia eklentisini etkinleştirin ve etrafınızdaki nesneler hakkında makalelerin tadını çıkarın.</string>
+    <string name="app_mode_enduro_motorcycle">Enduro motosiklet</string>
+    <string name="app_mode_motor_scooter">Küçük motosiklet</string>
+    <string name="app_mode_wheelchair">Tekerlekli sandalye</string>
+    <string name="app_mode_wheelchair_forward">İleri tekerlekli sandalye</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="osm_edit_closed_note">Kapatılmış OSM Notu</string>
 </resources>

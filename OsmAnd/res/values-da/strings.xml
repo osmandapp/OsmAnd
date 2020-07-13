@@ -1778,7 +1778,6 @@
     <string name="context_menu_item_open_note">Åbn OSM-note</string>
     <string name="osm_edit_reopened_note">Genåbnet OSM-note</string>
     <string name="osm_edit_commented_note">Kommenteret OSM-note</string>
-    <string name="osm_edit_removed_note">Slettet OSM-note</string>
     <string name="osm_edit_created_note">Oprettet OSM-note</string>
     <string name="osn_bug_name">OSM-note</string>
     <string name="osn_add_dialog_title">Opret note</string>

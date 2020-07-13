@@ -1768,7 +1768,6 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="osm_edit_deleted_poi">Izbrisana točka POI</string>
     <string name="context_menu_item_open_note">Odpri opombe OSM</string>
     <string name="osm_edit_reopened_note">Ponovno odprte opombe OSM</string>
-    <string name="osm_edit_removed_note">Izbrisana opomba OSM</string>
     <string name="osm_edit_created_note">Ustvarjena opomba OSM</string>
     <string name="osn_bug_name">Opomba OSM</string>
     <string name="osn_add_dialog_title">Ustvari opombo</string>

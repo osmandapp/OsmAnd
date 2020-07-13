@@ -1682,7 +1682,6 @@ Pôr do Sol: %2$s</string>
     <string name="context_menu_item_open_note">Abrir nota no OSM</string>
     <string name="osm_edit_reopened_note">Nota no OSM reaberta</string>
     <string name="osm_edit_commented_note">Nota no OSM comentada</string>
-    <string name="osm_edit_removed_note">Nota no OSM excluído</string>
     <string name="osm_edit_created_note">Nota no OSM criada</string>
     <string name="osn_bug_name">Nota no OSM</string>
     <string name="osn_add_dialog_title">Criar nota</string>
@@ -3802,4 +3801,10 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_remove_next_destination_descr">O ponto de destino atual na rota será excluído. Se for o destino, a navegação será interrompida.</string>
     <string name="search_download_wikipedia_maps">Baixar mapas da Wikipédia</string>
     <string name="plugin_wikipedia_description">Obter informações sobre pontos de interesse da Wikipédia. É o seu guia de bolso off-line - só ativar o complemento Wikipédia e desfrutar de artigos sobre os elementos ao seu redor.</string>
+    <string name="app_mode_enduro_motorcycle">Motocicleta enduro</string>
+    <string name="app_mode_motor_scooter">Motoneta</string>
+    <string name="app_mode_wheelchair">Cadeira de rodas</string>
+    <string name="app_mode_wheelchair_forward">Cadeira de rodas para a frente</string>
+    <string name="app_mode_go_cart">Carrinho de compras</string>
+    <string name="osm_edit_closed_note">Nota OSM fechada</string>
 </resources>
