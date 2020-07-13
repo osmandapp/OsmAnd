@@ -43,6 +43,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -60,7 +61,6 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -1146,7 +1146,7 @@ public class OsmandAidlApi {
 
 	@SuppressLint("StaticFieldLeak")
 	private void finishGpxImport(boolean destinationExists, File destination, String color, boolean show) {
-		final int col = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColor(
+		final int col = GpxAppearanceAdapter.parseTrackColor(
 				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
 			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
@@ -1390,7 +1390,7 @@ public class OsmandAidlApi {
 				int color = dataItem.getColor();
 				String colorName = "";
 				if (color != 0) {
-					colorName = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
+					colorName = GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 				}
 				net.osmand.aidlapi.gpx.AGpxFileDetails details = null;
 				GPXTrackAnalysis analysis = dataItem.getAnalysis();
@@ -1431,7 +1431,7 @@ public class OsmandAidlApi {
 				if (file.getName().equals(gpxFileName)) {
 					int color = dataItem.getColor();
 					if (color != 0) {
-						return ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
+						return GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 					}
 				}
 			}
