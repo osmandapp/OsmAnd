@@ -23,7 +23,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXFile.GradientScaleType;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -33,7 +32,7 @@ import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.CustomOsmandPlugin;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GPXDatabase;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -1018,21 +1017,10 @@ public class ImportHelper {
 					gpxFile.path = toWrite.getAbsolutePath();
 					File file = new File(gpxFile.path);
 					if (!destinationExists) {
-						GPXDatabase.GpxDataItem item = new GPXDatabase.GpxDataItem(file, gpxFile.getColor(0));
-						item.setWidth(gpxFile.getWidth(null));
-						item.setShowArrows(gpxFile.isShowArrows());
-						item.setShowStartFinish(gpxFile.isShowStartFinish());
-						item.setGradientScaleType(gpxFile.getGradientScaleType());
-						item.setGradientSpeedColor(gpxFile.getGradientScaleColor(GradientScaleType.SPEED, 0));
-						item.setGradientSlopeColor(gpxFile.getGradientScaleColor(GradientScaleType.SLOPE, 0));
-						item.setGradientAltitudeColor(gpxFile.getGradientScaleColor(GradientScaleType.ALTITUDE, 0));
+						GpxDataItem item = new GpxDataItem(file, gpxFile);
 						app.getGpxDbHelper().add(item);
-
-						if (gpxFile.getSplitType() != null && gpxFile.getSplitInterval() != 0) {
-							app.getGpxDbHelper().updateSplit(item, gpxFile.getSplitType(), gpxFile.getSplitInterval());
-						}
 					} else {
-						GPXDatabase.GpxDataItem item = app.getGpxDbHelper().getItem(file);
+						GpxDataItem item = app.getGpxDbHelper().getItem(file);
 						if (item != null) {
 							app.getGpxDbHelper().clearAnalysis(item);
 						}

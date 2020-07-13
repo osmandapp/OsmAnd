@@ -3,6 +3,7 @@ package net.osmand.plus;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile.GradientScaleType;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
@@ -198,6 +199,22 @@ public class GPXDatabase {
 			this.color = color;
 		}
 
+		public GpxDataItem(File file, @NonNull GPXUtilities.GPXFile gpxFile) {
+			this.file = file;
+			color = gpxFile.getColor(0);
+			width = gpxFile.getWidth(null);
+			showArrows = gpxFile.isShowArrows();
+			showStartFinish = gpxFile.isShowStartFinish();
+			gradientScaleType = gpxFile.getGradientScaleType();
+			gradientSpeedColor = gpxFile.getGradientScaleColor(GradientScaleType.SPEED, 0);
+			gradientSlopeColor = gpxFile.getGradientScaleColor(GradientScaleType.SLOPE, 0);
+			gradientAltitudeColor = gpxFile.getGradientScaleColor(GradientScaleType.ALTITUDE, 0);
+			if (gpxFile.getSplitType() != null && gpxFile.getSplitInterval() != 0) {
+				splitType = gpxFile.getSplitType().getType();
+				splitInterval = gpxFile.getSplitInterval();
+			}
+		}
+
 		public File getFile() {
 			return file;
 		}
@@ -215,41 +232,22 @@ public class GPXDatabase {
 			return gradientScaleType;
 		}
 
-		public void setGradientScaleType(GradientScaleType gradientScaleType) {
-			this.gradientScaleType = gradientScaleType;
-		}
-
 		public int getGradientSpeedColor() {
 			return gradientSpeedColor;
-		}
-
-		public void setGradientSpeedColor(int gradientSpeedColor) {
-			this.gradientSpeedColor = gradientSpeedColor;
 		}
 
 		public int getGradientAltitudeColor() {
 			return gradientAltitudeColor;
 		}
 
-		public void setGradientAltitudeColor(int gradientAltitudeColor) {
-			this.gradientAltitudeColor = gradientAltitudeColor;
-		}
-
 		public int getGradientSlopeColor() {
 			return gradientSlopeColor;
-		}
-
-		public void setGradientSlopeColor(int gradientSlopeColor) {
-			this.gradientSlopeColor = gradientSlopeColor;
 		}
 
 		public String getWidth() {
 			return width;
 		}
 
-		public void setWidth(String width) {
-			this.width = width;
-		}
 
 		public long getFileLastModifiedTime() {
 			return fileLastModifiedTime;
@@ -283,24 +281,12 @@ public class GPXDatabase {
 			return joinSegments;
 		}
 
-		public void setJoinSegments(boolean joinSegments) {
-			this.joinSegments = joinSegments;
-		}
-
 		public boolean isShowArrows() {
 			return showArrows;
 		}
 
-		public void setShowArrows(boolean showArrows) {
-			this.showArrows = showArrows;
-		}
-
 		public boolean isShowStartFinish() {
 			return showStartFinish;
-		}
-
-		public void setShowStartFinish(boolean showStartFinish) {
-			this.showStartFinish = showStartFinish;
 		}
 
 		@Override
@@ -562,7 +548,7 @@ public class GPXDatabase {
 				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " + GPX_COL_SHOW_ARROWS + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
 						new Object[] {showArrows ? 1 : 0, fileName, fileDir});
-				item.setShowArrows(showArrows);
+				item.showArrows = showArrows;
 			} finally {
 				db.close();
 			}
@@ -580,7 +566,7 @@ public class GPXDatabase {
 				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " + GPX_COL_SHOW_START_FINISH + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
 						new Object[] {showStartFinish ? 1 : 0, fileName, fileDir});
-				item.setShowStartFinish(showStartFinish);
+				item.showStartFinish = showStartFinish;
 			} finally {
 				db.close();
 			}
@@ -636,7 +622,7 @@ public class GPXDatabase {
 								GPX_COL_JOIN_SEGMENTS + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
 						new Object[]{joinSegments ? 1 : 0, fileName, fileDir});
-				item.setJoinSegments(joinSegments);
+				item.joinSegments = joinSegments;
 			} finally {
 				db.close();
 			}

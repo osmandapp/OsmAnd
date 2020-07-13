@@ -266,7 +266,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						shadowPaint.setStrokeWidth(paint.getStrokeWidth() + 2 * shadowRadius);
 					}
 					for (String key : cachedTrackWidth.keySet()) {
-						searchTrackWidth(key, rrs, req, rc);
+						acquireTrackWidth(key, rrs, req, rc);
 					}
 				} else {
 					log.error("Rendering attribute gpx is not found !");
@@ -284,7 +284,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return cachedColor;
 	}
 
-	private void searchTrackWidth(String widthKey, RenderingRulesStorage rrs, RenderingRuleSearchRequest req, RenderingContext rc) {
+	private void acquireTrackWidth(String widthKey, RenderingRulesStorage rrs, RenderingRuleSearchRequest req, RenderingContext rc) {
 		if (!Algorithms.isEmpty(widthKey) && Algorithms.isInt(widthKey)) {
 			try {
 				int widthDp = Integer.parseInt(widthKey);

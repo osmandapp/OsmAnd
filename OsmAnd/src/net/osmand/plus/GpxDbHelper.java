@@ -189,7 +189,7 @@ public class GpxDbHelper {
 	}
 
 	private void readGpxItem(@NonNull File gpxFile, @Nullable GpxDataItem item, @Nullable GpxDataItemCallback callback) {
-		readingItemsMap.put(gpxFile, item != null ? item : new GpxDataItem(null, null));
+		readingItemsMap.put(gpxFile, item != null ? item : new GpxDataItem(null, (GPXTrackAnalysis) null));
 		if (callback != null) {
 			readingItemsCallbacks.put(gpxFile, callback);
 		}
