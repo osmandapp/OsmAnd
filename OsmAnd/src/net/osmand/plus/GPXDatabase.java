@@ -3,7 +3,7 @@ package net.osmand.plus;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXFile.GradientScaleType;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
@@ -199,7 +199,7 @@ public class GPXDatabase {
 			this.color = color;
 		}
 
-		public GpxDataItem(File file, @NonNull GPXUtilities.GPXFile gpxFile) {
+		public GpxDataItem(File file, @NonNull GPXFile gpxFile) {
 			this.file = file;
 			color = gpxFile.getColor(0);
 			width = gpxFile.getWidth(null);

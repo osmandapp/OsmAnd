@@ -75,6 +75,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
 
 	private static final double TOUCH_RADIUS_MULTIPLIER = 1.5;
+	private static final int DEFAULT_WIDTH_MULTIPLIER = 7;
 	private static final int START_ZOOM = 7;
 
 	private OsmandMapTileView view;
@@ -225,7 +226,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (hash != cachedHash) {
 			cachedHash = hash;
 			cachedColor = ContextCompat.getColor(view.getApplication(), R.color.gpx_track);
-			defaultTrackWidth = 7 * view.getDensity();
+			defaultTrackWidth = DEFAULT_WIDTH_MULTIPLIER * view.getDensity();
 			if (rrs != null) {
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
