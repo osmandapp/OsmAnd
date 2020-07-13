@@ -1,7 +1,6 @@
 
 package net.osmand;
 
-import com.sun.istack.internal.NotNull;
 
 import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
@@ -1541,7 +1540,7 @@ public class GPXUtilities {
 			return null;
 		}
 
-		public void setGradientScaleType(@NotNull GradientScaleType gradientScaleType) {
+		public void setGradientScaleType(GradientScaleType gradientScaleType) {
 			getExtensionsToWrite().put("gradient_scale_type", gradientScaleType.name());
 		}
 
@@ -1559,7 +1558,7 @@ public class GPXUtilities {
 			return null;
 		}
 
-		public void setSplitType(@NotNull GpxSplitType gpxSplitType) {
+		public void setSplitType(GpxSplitType gpxSplitType) {
 			getExtensionsToWrite().put("split_type", gpxSplitType.name());
 		}
 
