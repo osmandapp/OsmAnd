@@ -10,6 +10,7 @@ import net.osmand.plus.R;
 
 public enum GradientScaleType {
 
+	SOLID("gradient_solid_color", R.string.track_coloring_solid, R.drawable.ic_action_circle),
 	SPEED("gradient_speed_color", R.string.map_widget_speed, R.drawable.ic_action_speed),
 	ALTITUDE("gradient_altitude_color", R.string.altitude, R.drawable.ic_action_altitude_average),
 	SLOPE("gradient_slope_color", R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent);

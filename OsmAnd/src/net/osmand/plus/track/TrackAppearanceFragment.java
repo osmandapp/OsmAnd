@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces;
+package net.osmand.plus.track;
 
 import android.os.Bundle;
 import android.view.Gravity;
@@ -19,6 +19,7 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.DirectionArrowsCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
 
@@ -123,6 +124,9 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 
 			BaseCard arrowsCard = new DirectionArrowsCard(mapActivity, selectedGpxFile);
 			cardsContainer.addView(arrowsCard.build(mapActivity));
+
+			TrackColoringCard trackColoringCard = new TrackColoringCard(mapActivity, selectedGpxFile);
+			cardsContainer.addView(trackColoringCard.build(mapActivity));
 
 			BaseCard width = new TrackWidthCard(mapActivity, selectedGpxFile);
 			cardsContainer.addView(width.build(mapActivity));

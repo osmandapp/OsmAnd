@@ -659,7 +659,7 @@ public class GpxSelectionHelper {
 						gpx.setGradientScaleColor(GradientScaleType.SLOPE.getTypeName(), dataItem.getGradientSlopeColor());
 					}
 					if (dataItem.getGradientScaleType() != null) {
-						gpx.setGradientScaleType(dataItem.getGradientScaleType().getTypeName());
+						gpx.setGradientScaleType(dataItem.getGradientScaleType().name());
 					}
 					if (dataItem.getWidth() != null) {
 						gpx.setWidth(dataItem.getWidth());

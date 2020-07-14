@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces;
+package net.osmand.plus.track;
 
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;

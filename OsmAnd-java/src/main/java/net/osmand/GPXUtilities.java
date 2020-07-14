@@ -1600,7 +1600,6 @@ public class GPXUtilities {
 		public void setShowStartFinish(boolean showStartFinish) {
 			getExtensionsToWrite().put("show_start_finish", String.valueOf(showStartFinish));
 		}
-
 	}
 
 	public static String asString(GPXFile file) {
