@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="set_working_days_to_continue">You need to set working days to continue</string>
     <string name="osm_edit_closed_note">Closed OSM Note</string>
     <string name="app_mode_go_cart">Go-cart</string>
     <string name="app_mode_wheelchair_forward">Wheelchair forward</string>
