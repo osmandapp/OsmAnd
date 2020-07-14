@@ -55,6 +55,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.measurementtool.NewGpxData;
+import net.osmand.plus.myplaces.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSplitType;
@@ -64,7 +65,6 @@ import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -639,7 +639,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		List<GpxDisplayGroup> groups = new ArrayList<>();
 		TrackActivity activity = getTrackActivity();
 		if (activity != null) {
-			List<GpxDisplayGroup> result = activity.getGpxFile(useDisplayGroups);
+			List<GpxDisplayGroup> result = activity.getGpxDisplayGroups(useDisplayGroups);
 			for (GpxDisplayGroup group : result) {
 				boolean add = hasFilterType(group.getType());
 				if (add) {
@@ -738,12 +738,53 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		addOptionSplit(3600, false, groups);
 	}
 
-	private void updateSplit(@NonNull List<GpxDisplayGroup> groups, @Nullable SelectedGpxFile sf) {
+	private void updateSplit(@NonNull List<GpxDisplayGroup> groups, @Nullable final SelectedGpxFile selectedGpx) {
 		TrackActivity activity = getTrackActivity();
 		if (activity != null) {
-			new SplitTrackAsyncTask(activity, this, sf, groups)
-					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+			GpxSplitType gpxSplitType = getGpxSplitType();
+			if (gpxSplitType != null) {
+				int timeSplit = this.timeSplit.get(selectedSplitInterval);
+				double distanceSplit = this.distanceSplit.get(selectedSplitInterval);
+
+				SplitTrackListener splitTrackListener = new SplitTrackListener() {
+
+					@Override
+					public void trackSplittingStarted() {
+						TrackActivity activity = getTrackActivity();
+						if (activity != null) {
+							activity.setSupportProgressBarIndeterminateVisibility(true);
+						}
+					}
+
+					@Override
+					public void trackSplittingFinished() {
+						TrackActivity activity = getTrackActivity();
+						if (activity != null) {
+							if (AndroidUtils.isActivityNotDestroyed(activity)) {
+								activity.setSupportProgressBarIndeterminateVisibility(false);
+							}
+							if (selectedGpx != null) {
+								List<GpxDisplayGroup> groups = getDisplayGroups();
+								selectedGpx.setDisplayGroups(groups, app);
+							}
+						}
+					}
+				};
+				new SplitTrackAsyncTask(app, gpxSplitType, groups, splitTrackListener, activity.isJoinSegments(),
+						timeSplit, distanceSplit).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			}
 		}
+	}
+
+	private GpxSplitType getGpxSplitType() {
+		if (selectedSplitInterval == 0) {
+			return GpxSplitType.NO_SPLIT;
+		} else if (distanceSplit.get(selectedSplitInterval) > 0) {
+			return GpxSplitType.DISTANCE;
+		} else if (timeSplit.get(selectedSplitInterval) > 0) {
+			return GpxSplitType.TIME;
+		}
+		return null;
 	}
 
 	private void addOptionSplit(int value, boolean distance, @NonNull List<GpxDisplayGroup> model) {
@@ -904,71 +945,5 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	@Override
 	public void drawTrackBitmap(Bitmap bitmap) {
 		imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bitmap));
-	}
-
-	private static class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
-		private final SelectedGpxFile selectedGpx;
-		private OsmandApplication app;
-		private final WeakReference<TrackActivity> activityRef;
-		private final WeakReference<TrackActivityFragmentAdapter> fragmentAdapterRef;
-		private final List<GpxDisplayGroup> groups;
-
-		private List<Double> distanceSplit;
-		private TIntArrayList timeSplit;
-		private int selectedSplitInterval;
-		private boolean joinSegments;
-
-		SplitTrackAsyncTask(@NonNull TrackActivity activity,
-							@NonNull TrackActivityFragmentAdapter fragmentAdapter,
-							@Nullable SelectedGpxFile selectedGpx,
-							@NonNull List<GpxDisplayGroup> groups) {
-			activityRef = new WeakReference<>(activity);
-			fragmentAdapterRef = new WeakReference<>(fragmentAdapter);
-			app = activity.getMyApplication();
-			this.selectedGpx = selectedGpx;
-			this.groups = groups;
-
-			selectedSplitInterval = fragmentAdapter.selectedSplitInterval;
-			distanceSplit = fragmentAdapter.distanceSplit;
-			timeSplit = fragmentAdapter.timeSplit;
-			joinSegments = activity.isJoinSegments();
-		}
-
-		@Override
-		protected void onPreExecute() {
-			TrackActivity activity = activityRef.get();
-			if (activity != null) {
-				activity.setSupportProgressBarIndeterminateVisibility(true);
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			TrackActivity activity = activityRef.get();
-			TrackActivityFragmentAdapter fragment = fragmentAdapterRef.get();
-			if (activity != null && fragment != null) {
-				if (!activity.isFinishing()) {
-					activity.setSupportProgressBarIndeterminateVisibility(false);
-				}
-				if (selectedGpx != null) {
-					List<GpxDisplayGroup> groups = fragment.getDisplayGroups();
-					selectedGpx.setDisplayGroups(groups, app);
-				}
-			}
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			for (GpxDisplayGroup model : groups) {
-				if (selectedSplitInterval == 0) {
-					model.noSplit(app);
-				} else if (distanceSplit.get(selectedSplitInterval) > 0) {
-					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval), joinSegments);
-				} else if (timeSplit.get(selectedSplitInterval) > 0) {
-					model.splitByTime(app, timeSplit.get(selectedSplitInterval), joinSegments);
-				}
-			}
-			return null;
-		}
 	}
 }

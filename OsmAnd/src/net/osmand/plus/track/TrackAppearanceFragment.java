@@ -27,13 +27,12 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 
 	public static final String SELECTED_TRACK_FILE_PATH = "selected_track_file_path";
 
-	private OsmandApplication app;
 	private SelectedGpxFile selectedGpxFile;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
+		OsmandApplication app = requireMyApplication();
 
 		String gpxFilePath = null;
 		Bundle arguments = getArguments();
@@ -121,6 +120,9 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 		if (mapActivity != null) {
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
+
+			BaseCard splitIntervalCard = new SplitIntervalCard(mapActivity, selectedGpxFile);
+			cardsContainer.addView(splitIntervalCard.build(mapActivity));
 
 			BaseCard arrowsCard = new DirectionArrowsCard(mapActivity, selectedGpxFile);
 			cardsContainer.addView(arrowsCard.build(mapActivity));

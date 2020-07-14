@@ -380,7 +380,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	private List<GpxDisplayGroup> filterGroups(boolean useDisplayGroups) {
 		List<GpxDisplayGroup> groups = new ArrayList<>();
 		if (getTrackActivity() != null) {
-			List<GpxDisplayGroup> result = getTrackActivity().getGpxFile(useDisplayGroups);
+			List<GpxDisplayGroup> result = getTrackActivity().getGpxDisplayGroups(useDisplayGroups);
 			for (GpxDisplayGroup group : result) {
 				boolean add = hasFilterType(group.getType());
 				if (add) {
@@ -397,7 +397,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		TrackActivity trackActivity = getTrackActivity();
 		List<GpxDisplayItem> splitSegments = new ArrayList<>();
 		if (trackActivity != null) {
-			List<GpxDisplayGroup> result = trackActivity.getGpxFile(true);
+			List<GpxDisplayGroup> result = trackActivity.getGpxDisplayGroups(true);
 			if (result != null && result.size() > 0 && trkSegment.points.size() > 0) {
 				for (GpxDisplayGroup group : result) {
 					splitSegments.addAll(collectDisplayItemsFromGroup(group));

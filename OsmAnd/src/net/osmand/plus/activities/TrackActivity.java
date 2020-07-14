@@ -178,7 +178,7 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
-	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {
+	public List<GpxDisplayGroup> getGpxDisplayGroups(boolean useDisplayGroups) {
 		if (gpxFile == null) {
 			return new ArrayList<>();
 		}
