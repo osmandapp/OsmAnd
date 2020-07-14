@@ -11,8 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXFile.GpxSplitType;
-import net.osmand.GPXUtilities.GPXFile.GradientScaleType;
+import net.osmand.plus.track.GpxSplitType;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Route;
 import net.osmand.GPXUtilities.Track;
@@ -29,6 +28,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -524,7 +524,7 @@ public class GpxSelectionHelper {
 						for (GradientScaleType scaleType : GradientScaleType.values()) {
 							if (obj.has(scaleType.getTypeName())) {
 								int clr = Algorithms.parseColor(obj.getString(scaleType.getTypeName()));
-								gpx.setGradientScaleColor(scaleType, clr);
+								gpx.setGradientScaleColor(scaleType.getTypeName(), clr);
 							}
 						}
 						if (obj.has(SHOW_ARROWS)) {
@@ -534,7 +534,7 @@ public class GpxSelectionHelper {
 						if (obj.has(GRADIENT_SCALE_TYPE)) {
 							String gradientScaleTypeName = obj.optString(GRADIENT_SCALE_TYPE);
 							if (!Algorithms.isEmpty(gradientScaleTypeName)) {
-								gpx.setGradientScaleType(GradientScaleType.valueOf(gradientScaleTypeName));
+								gpx.setGradientScaleType(GradientScaleType.valueOf(gradientScaleTypeName).getTypeName());
 							}
 						}
 						if (obj.has(SHOW_START_FINISH)) {
@@ -592,7 +592,7 @@ public class GpxSelectionHelper {
 						obj.put(SHOW_ARROWS, s.gpxFile.isShowArrows());
 						obj.put(SHOW_START_FINISH, s.gpxFile.isShowStartFinish());
 						for (GradientScaleType scaleType : GradientScaleType.values()) {
-							int gradientScaleColor = s.gpxFile.getGradientScaleColor(scaleType, 0);
+							int gradientScaleColor = s.gpxFile.getGradientScaleColor(scaleType.getTypeName(), 0);
 							if (gradientScaleColor != 0) {
 								obj.put(scaleType.getTypeName(), Algorithms.colorToString(gradientScaleColor));
 							}
@@ -650,16 +650,16 @@ public class GpxSelectionHelper {
 						gpx.setColor(dataItem.getColor());
 					}
 					if (dataItem.getGradientSpeedColor() != 0) {
-						gpx.setGradientScaleColor(GradientScaleType.SPEED, dataItem.getGradientSpeedColor());
+						gpx.setGradientScaleColor(GradientScaleType.SPEED.getTypeName(), dataItem.getGradientSpeedColor());
 					}
 					if (dataItem.getGradientAltitudeColor() != 0) {
-						gpx.setGradientScaleColor(GradientScaleType.ALTITUDE, dataItem.getGradientAltitudeColor());
+						gpx.setGradientScaleColor(GradientScaleType.ALTITUDE.getTypeName(), dataItem.getGradientAltitudeColor());
 					}
 					if (dataItem.getGradientSlopeColor() != 0) {
-						gpx.setGradientScaleColor(GradientScaleType.SLOPE, dataItem.getGradientSlopeColor());
+						gpx.setGradientScaleColor(GradientScaleType.SLOPE.getTypeName(), dataItem.getGradientSlopeColor());
 					}
 					if (dataItem.getGradientScaleType() != null) {
-						gpx.setGradientScaleType(dataItem.getGradientScaleType());
+						gpx.setGradientScaleType(dataItem.getGradientScaleType().getTypeName());
 					}
 					if (dataItem.getWidth() != null) {
 						gpx.setWidth(dataItem.getWidth());

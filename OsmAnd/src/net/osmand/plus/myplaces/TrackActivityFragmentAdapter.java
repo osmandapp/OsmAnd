@@ -39,7 +39,7 @@ import com.squareup.picasso.RequestCreator;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXFile.GpxSplitType;
+import net.osmand.plus.track.GpxSplitType;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PicassoUtils;
 import net.osmand.data.LatLon;

@@ -1514,52 +1514,38 @@ public class GPXUtilities {
 			return new QuadRect(left, top, right, bottom);
 		}
 
-		public int getGradientScaleColor(GradientScaleType gradientScaleType, int defColor) {
+		public int getGradientScaleColor(String gradientScaleType, int defColor) {
 			String clrValue = null;
 			if (extensions != null) {
-				clrValue = extensions.get(gradientScaleType.getTypeName());
+				clrValue = extensions.get(gradientScaleType);
 			}
 			return parseColor(clrValue, defColor);
 		}
 
-		public void setGradientScaleColor(GradientScaleType gradientScaleType, int gradientScaleColor) {
-			getExtensionsToWrite().put(gradientScaleType.getTypeName(), Algorithms.colorToString(gradientScaleColor));
+		public void setGradientScaleColor(String gradientScaleType, int gradientScaleColor) {
+			getExtensionsToWrite().put(gradientScaleType, Algorithms.colorToString(gradientScaleColor));
 		}
 
-		public GradientScaleType getGradientScaleType() {
+		public String getGradientScaleType() {
 			if (extensions != null) {
-				String gradientScaleTypeName = extensions.get("gradient_scale_type");
-				if (!Algorithms.isEmpty(gradientScaleTypeName)) {
-					try {
-						return GradientScaleType.valueOf(gradientScaleTypeName);
-					} catch (IllegalArgumentException e) {
-						log.error("Error reading gradientScaleType", e);
-					}
-				}
+				return extensions.get("gradient_scale_type");
 			}
 			return null;
 		}
 
-		public void setGradientScaleType(GradientScaleType gradientScaleType) {
-			getExtensionsToWrite().put("gradient_scale_type", gradientScaleType.name());
+		public void setGradientScaleType(String gradientScaleType) {
+			getExtensionsToWrite().put("gradient_scale_type", gradientScaleType);
 		}
 
-		public GpxSplitType getSplitType() {
+		public String getSplitType() {
 			if (extensions != null) {
-				String gradientScaleTypeName = extensions.get("split_type");
-				if (!Algorithms.isEmpty(gradientScaleTypeName)) {
-					try {
-						return GpxSplitType.valueOf(gradientScaleTypeName);
-					} catch (IllegalArgumentException e) {
-						log.error("Error reading GpxSplitType", e);
-					}
-				}
+				return extensions.get("split_type");
 			}
 			return null;
 		}
 
-		public void setSplitType(GpxSplitType gpxSplitType) {
-			getExtensionsToWrite().put("split_type", gpxSplitType.name());
+		public void setSplitType(String gpxSplitType) {
+			getExtensionsToWrite().put("split_type", gpxSplitType);
 		}
 
 		public double getSplitInterval() {
@@ -1615,37 +1601,6 @@ public class GPXUtilities {
 			getExtensionsToWrite().put("show_start_finish", String.valueOf(showStartFinish));
 		}
 
-		public enum GradientScaleType {
-			SPEED("gradient_speed_color"),
-			ALTITUDE("gradient_altitude_color"),
-			SLOPE("gradient_slope_color");
-
-			private String typeName;
-
-			GradientScaleType(String typeName) {
-				this.typeName = typeName;
-			}
-
-			public String getTypeName() {
-				return typeName;
-			}
-		}
-
-		public enum GpxSplitType {
-			NO_SPLIT(-1),
-			DISTANCE(1),
-			TIME(2);
-
-			private int type;
-
-			GpxSplitType(int type) {
-				this.type = type;
-			}
-
-			public int getType() {
-				return type;
-			}
-		}
 	}
 
 	public static String asString(GPXFile file) {

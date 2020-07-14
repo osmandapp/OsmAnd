@@ -8,11 +8,11 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXFile.GpxSplitType;
-import net.osmand.GPXUtilities.GPXFile.GradientScaleType;
+import net.osmand.plus.track.GpxSplitType;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.track.GradientScaleType;
 
 import java.io.File;
 import java.util.List;

@@ -4,11 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXFile.GradientScaleType;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -201,17 +202,34 @@ public class GPXDatabase {
 
 		public GpxDataItem(File file, @NonNull GPXFile gpxFile) {
 			this.file = file;
+			readGpxParams(gpxFile);
+		}
+
+		private void readGpxParams(GPXFile gpxFile) {
 			color = gpxFile.getColor(0);
 			width = gpxFile.getWidth(null);
 			showArrows = gpxFile.isShowArrows();
 			showStartFinish = gpxFile.isShowStartFinish();
-			gradientScaleType = gpxFile.getGradientScaleType();
-			gradientSpeedColor = gpxFile.getGradientScaleColor(GradientScaleType.SPEED, 0);
-			gradientSlopeColor = gpxFile.getGradientScaleColor(GradientScaleType.SLOPE, 0);
-			gradientAltitudeColor = gpxFile.getGradientScaleColor(GradientScaleType.ALTITUDE, 0);
-			if (gpxFile.getSplitType() != null && gpxFile.getSplitInterval() != 0) {
-				splitType = gpxFile.getSplitType().getType();
-				splitInterval = gpxFile.getSplitInterval();
+			gradientSpeedColor = gpxFile.getGradientScaleColor(GradientScaleType.SPEED.getTypeName(), 0);
+			gradientSlopeColor = gpxFile.getGradientScaleColor(GradientScaleType.SLOPE.getTypeName(), 0);
+			gradientAltitudeColor = gpxFile.getGradientScaleColor(GradientScaleType.ALTITUDE.getTypeName(), 0);
+
+			if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() != 0) {
+				for (GpxSplitType gpxSplitType : GpxSplitType.values()) {
+					if (gpxSplitType.name().equalsIgnoreCase(gpxFile.getSplitType())) {
+						splitType = gpxSplitType.getType();
+						splitInterval = gpxFile.getSplitInterval();
+						break;
+					}
+				}
+			}
+			if (!Algorithms.isEmpty(gpxFile.getGradientScaleType())) {
+				for (GradientScaleType scaleType : GradientScaleType.values()) {
+					if (scaleType.name().equalsIgnoreCase(gpxFile.getGradientScaleType())) {
+						gradientScaleType = scaleType;
+						break;
+					}
+				}
 			}
 		}
 
