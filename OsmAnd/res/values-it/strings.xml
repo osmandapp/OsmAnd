@@ -3821,4 +3821,5 @@
     <string name="app_mode_wheelchair">Sedia a rotelle</string>
     <string name="app_mode_go_cart">Go-kart</string>
     <string name="osm_edit_closed_note">Chiudi la nota OSM</string>
+    <string name="app_mode_wheelchair_forward">Sedia a rotelle</string>
 </resources>
