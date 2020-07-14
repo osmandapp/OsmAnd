@@ -46,7 +46,6 @@ public class TrackWidthCard extends BaseCard {
 
 	public TrackWidthCard(MapActivity mapActivity, SelectedGpxFile selectedGpxFile) {
 		super(mapActivity);
-		this.mapActivity = mapActivity;
 		this.selectedGpxFile = selectedGpxFile;
 		appearanceItems = getWidthAppearanceItems();
 	}

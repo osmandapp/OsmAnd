@@ -48,7 +48,6 @@ public class TrackColoringCard extends BaseCard {
 
 	public TrackColoringCard(MapActivity mapActivity, GpxSelectionHelper.SelectedGpxFile selectedGpxFile) {
 		super(mapActivity);
-		this.mapActivity = mapActivity;
 		this.selectedGpxFile = selectedGpxFile;
 	}
 

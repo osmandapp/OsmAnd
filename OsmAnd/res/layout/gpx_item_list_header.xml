@@ -158,40 +158,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/color_view"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minHeight="48dp"
-                android:paddingRight="@dimen/content_padding"
-                android:paddingTop="@dimen/content_padding_half"
-                android:paddingBottom="@dimen/content_padding_half"
-                android:background="?attr/selectableItemBackground"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-	            android:paddingEnd="@dimen/content_padding">
-
-                <TextView
-                    android:id="@+id/colorText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:textColor="?android:textColorPrimary"
-                    android:textSize="@dimen/default_list_text_size"
-                    android:text="@string/shared_string_color"/>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/colorImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/content_padding"
-                    osmand:srcCompat="@drawable/ic_action_circle"
-	                android:paddingStart="@dimen/content_padding" />
-
-            </LinearLayout>
-
         </LinearLayout>
 
     </LinearLayout>
