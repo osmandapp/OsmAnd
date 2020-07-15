@@ -1,5 +1,6 @@
 package net.osmand.plus.track;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -20,19 +23,27 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.DirectionArrowsCard;
+import net.osmand.plus.myplaces.SaveGpxAsyncTask;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
+import java.io.File;
 
 public class TrackAppearanceFragment extends ContextMenuFragment {
 
 	public static final String SELECTED_TRACK_FILE_PATH = "selected_track_file_path";
 
+	private OsmandApplication app;
+
+	private GpxDataItem gpxDataItem;
+	private TrackDrawInfo trackDrawInfo;
 	private SelectedGpxFile selectedGpxFile;
+
+	private int menuTitleHeight;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		OsmandApplication app = requireMyApplication();
+		app = requireMyApplication();
 
 		String gpxFilePath = null;
 		Bundle arguments = getArguments();
@@ -43,6 +54,10 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 			gpxFilePath = arguments.getString(SELECTED_TRACK_FILE_PATH);
 		}
 		selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
+
+		File file = new File(selectedGpxFile.getGpxFile().path);
+		gpxDataItem = app.getGpxDbHelper().getItem(file);
+		trackDrawInfo = new TrackDrawInfo(gpxDataItem);
 	}
 
 	@Override
@@ -96,7 +111,8 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				saveTrackInfo();
+				dismiss();
 			}
 		});
 
@@ -113,6 +129,36 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 
 		AndroidUiHelper.updateVisibility(saveButton, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
+	}
+
+	private void saveTrackInfo() {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+
+		gpxFile.setWidth(trackDrawInfo.getWidth());
+		gpxFile.setGradientScaleType(trackDrawInfo.getGradientScaleType().name());
+		gpxFile.setColor(trackDrawInfo.getColor());
+		gpxFile.setGradientScaleColor(GradientScaleType.SPEED.getTypeName(), trackDrawInfo.getGradientSpeedColor());
+		gpxFile.setGradientScaleColor(GradientScaleType.ALTITUDE.getTypeName(), trackDrawInfo.getGradientAltitudeColor());
+		gpxFile.setGradientScaleColor(GradientScaleType.SLOPE.getTypeName(), trackDrawInfo.getGradientSlopeColor());
+
+		for (GpxSplitType gpxSplitType : GpxSplitType.values()) {
+			if (gpxSplitType.getType() == trackDrawInfo.getSplitType()) {
+				gpxFile.setSplitType(gpxSplitType.name());
+				break;
+			}
+		}
+
+		gpxFile.setSplitInterval(trackDrawInfo.getSplitInterval());
+		gpxFile.setShowArrows(trackDrawInfo.isShowArrows());
+		gpxFile.setShowStartFinish(trackDrawInfo.isShowStartFinish());
+
+		app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
+
+		saveGpx(gpxFile);
+	}
+
+	private void saveGpx(GPXFile gpxFile) {
+		new SaveGpxAsyncTask(gpxFile, null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void updateCards() {
@@ -142,7 +188,15 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 
 	@Override
 	public int getHeaderViewHeight() {
-		return 0;
+		return menuTitleHeight;
+	}
+
+	@Override
+	protected void calculateLayout(View view, boolean initLayout) {
+		menuTitleHeight = view.findViewById(R.id.route_menu_top_shadow_all).getHeight()
+				+ view.findViewById(R.id.control_buttons).getHeight()
+				- view.findViewById(R.id.buttons_shadow).getHeight();
+		super.calculateLayout(view, initLayout);
 	}
 
 	@Override
@@ -153,6 +207,10 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 	@Override
 	public int getToolbarHeight() {
 		return 0;
+	}
+
+	public float getMiddleStateKoef() {
+		return 0.5f;
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity, TrackAppearanceFragment fragment) {

@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.track.GpxSplitType;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Route;
 import net.osmand.GPXUtilities.Track;
@@ -28,6 +27,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
+import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.util.Algorithms;
 
@@ -533,9 +533,7 @@ public class GpxSelectionHelper {
 						}
 						if (obj.has(GRADIENT_SCALE_TYPE)) {
 							String gradientScaleTypeName = obj.optString(GRADIENT_SCALE_TYPE);
-							if (!Algorithms.isEmpty(gradientScaleTypeName)) {
-								gpx.setGradientScaleType(GradientScaleType.valueOf(gradientScaleTypeName).getTypeName());
-							}
+							gpx.setGradientScaleType(gradientScaleTypeName);
 						}
 						if (obj.has(SHOW_START_FINISH)) {
 							boolean showStartFinish = obj.optBoolean(SHOW_START_FINISH, false);
