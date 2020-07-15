@@ -1374,7 +1374,6 @@ Lorratza %2$s</string>
     <string name="context_menu_item_open_note">Ireki OSM oharra</string>
     <string name="osm_edit_reopened_note">OSM oharra berrireki da</string>
     <string name="osm_edit_commented_note">OSM oharrean iruzkina egin da</string>
-    <string name="osm_edit_removed_note">OSM oharra ezabatu da</string>
     <string name="osm_edit_created_note">OSM oharra sortu da</string>
     <string name="osn_bug_name">OSM oharra</string>
     <string name="osn_add_dialog_title">Sortu oharra</string>
@@ -3784,4 +3783,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_meters">metro</string>
     <string name="details_dialog_decr">Kontrolatu mapan agertzen diren xehetasun gehigarrien ikusgaitasuna</string>
     <string name="shared_string_night_map">Gauerako mapa</string>
+    <string name="quick_action_showhide_mapillary_title">Erakutsi/ezkutatu Mapillary</string>
+    <string name="quick_action_mapillary_hide">Ezkutatu Mapillary</string>
+    <string name="quick_action_mapillary_show">Erakutsi Mapillary</string>
 </resources>

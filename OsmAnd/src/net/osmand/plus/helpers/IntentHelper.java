@@ -11,6 +11,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
+import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
@@ -52,6 +54,9 @@ public class IntentHelper {
 		}
 		if (!applied) {
 			applied = parseOpenGpxIntent();
+		}
+		if (!applied) {
+			applied = parseSendIntent();
 		}
 		return applied;
 	}
@@ -109,8 +114,8 @@ public class IntentHelper {
 				if (!attrs.isEmpty()) {
 					try {
 						TileSourceManager.TileSourceTemplate r = TileSourceManager.createTileSourceTemplate(attrs);
-						if (r != null && settings.installTileSource(r)) {
-							app.showShortToastMessage(app.getString(R.string.edit_tilesource_successfully, r.getName()));
+						if (r != null) {
+							EditMapSourceDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), r);
 						}
 					} catch (Exception e) {
 						LOG.error("parseAddTileSourceIntent error", e);
@@ -250,5 +255,34 @@ public class IntentHelper {
 	private void clearIntent(Intent intent) {
 		intent.setAction(null);
 		intent.setData(null);
+	}
+
+	private boolean parseSendIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null) {
+			String action = intent.getAction();
+			String type = intent.getType();
+			if (Intent.ACTION_SEND.equals(action) && type != null) {
+				if ("text/plain".equals(type)) {
+					return handleSendText(intent);
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean handleSendText(Intent intent) {
+		String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+		if (!Algorithms.isEmpty(sharedText)) {
+			return QuickSearchDialogFragment.showInstance(
+					mapActivity,
+					sharedText,
+					null,
+					QuickSearchDialogFragment.QuickSearchType.REGULAR,
+					QuickSearchDialogFragment.QuickSearchTab.CATEGORIES,
+					null
+			);
+		}
+		return false;
 	}
 }

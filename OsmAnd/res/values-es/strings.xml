@@ -1771,7 +1771,6 @@
     <string name="context_menu_item_open_note">Abrir nota de OSM</string>
     <string name="osm_edit_reopened_note">Nota de OSM reabierta</string>
     <string name="osm_edit_commented_note">Nota de OSM comentada</string>
-    <string name="osm_edit_removed_note">Nota de OSM resuelta</string>
     <string name="osm_edit_created_note">Nota de OSM creada</string>
     <string name="osn_bug_name">Nota de OSM</string>
     <string name="osn_add_dialog_title">Crear nota</string>
@@ -3748,4 +3747,72 @@
     <string name="shared_string_meters">metros</string>
     <string name="details_dialog_decr">Controla la visibilidad de los detalles adicionales mostrados en el mapa</string>
     <string name="shared_string_night_map">Mapa nocturno</string>
+    <string name="search_offline_geo_error">No pude analizar la geointención \"%s\".</string>
+    <string name="multimedia_rec_split_title">División de grabación</string>
+    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Recomendación: Un ajuste de 5 metros puede funcionar bien para ti si no necesitas capturar detalles más finos que eso, y no quieres capturar explícitamente los datos mientras estás en reposo.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Efectos secundarios: Los períodos de descanso no se registran en absoluto o sólo en un punto. Los pequeños movimientos (en el mundo real) (por ejemplo, de lado, para marcar un posible desvío en su viaje) pueden ser filtrados. Su archivo contiene menos información para el post-procesado, y tiene peores estadísticas al filtrar puntos obviamente redundantes en el tiempo de registro, mientras que potencialmente mantiene los artefactos causados por la mala recepción o los efectos del chipset del GPS.</string>
+    <string name="monitoring_min_distance_descr">Este filtro evita que se registren puntos duplicados cuando ha habido muy poco movimiento real, y da un aspecto espacial más agradable a las pistas sin post-procesado posterior.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Observación: Si el GPS hubiera estado apagado inmediatamente antes de una medida, el primer punto medido podría tener una precisión disminuida, por lo que en nuestro código podríamos querer esperar un segundo más o menos antes de grabar un punto (o grabar el mejor de 3 puntos consecutivos, etc.), pero esto aún no se ha implementado.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Recomendación: Es difícil predecir lo que se registrará y lo que no, puede ser mejor apagar este filtro.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Efecto secundario: Como resultado del filtrado por precisión, pueden faltar puntos, por ejemplo, debajo de puentes, bajo árboles, entre edificios altos o con ciertas condiciones climáticas.</string>
+    <string name="import_complete_description">Todos los datos de los %1$s son importados, puedes usar los botones de abajo para abrir la parte necesaria de la aplicación para gestionarla.</string>
+    <string name="ui_customization">Personalización de la interfaz de usuario</string>
+    <string name="divider_descr">Elementos debajo de este punto separados por un divisor.</string>
+    <string name="lang_zhminnan">Min del sur</string>
+    <string name="lang_yo">Yoruba</string>
+    <string name="lang_war">Waray</string>
+    <string name="lang_uz">Uzbeko</string>
+    <string name="lang_ur">Urdu</string>
+    <string name="lang_tg">Tayiko</string>
+    <string name="lang_bar">Bávaro</string>
+    <string name="tracker_item">Rastreador OsmAnd</string>
+    <string name="legend_item_description">La guía para la simbología del mapa.</string>
+    <string name="parking_positions">Posiciones de estacionamiento</string>
+    <string name="turn_screen_on_power_button_disabled">Deshabilitado. Requiere \'Mantener la pantalla encendida\' dentro de \'Tiempo de espera después de la activación\'.</string>
+    <string name="map_source_zoom_levels_descr">Afecta a la pantalla cuando se usa como mapa o superposición / subyacente.
+\n
+\n%1$s: el mapa está limitado al rango de nivel de zoom seleccionado.
+\n
+\n%2$s son los niveles en los que las teselas originales serán visibles, fuera de estos valores se realizará un escalado.</string>
+    <string name="uninstall_speed_cameras">Desinstalar las cámaras de velocidad</string>
+    <string name="shared_string_legal">Legal</string>
+    <string name="speed_camera_pois">PDIs de cámaras de velocidad</string>
+    <string name="speed_cameras_legal_descr">En algunos países o regiones, el uso de aplicaciones de advertencia de cámaras de velocidad está prohibido por la ley.
+\n
+\nTienes que hacer una elección dependiendo de la ley de tu país.
+\n
+\nSelecciona %1$s y recibirás alertas y advertencias sobre las cámaras de velocidad.
+\n
+\nSelecciona %2$s. Todos los datos relacionados con las cámaras de velocidad: alertas, notificaciones, PDIs, se eliminarán hasta que OsmAnd se reinstale completamente.</string>
+    <string name="keep_active">Mantener activo</string>
+    <string name="shared_string_uninstall">Desinstalar</string>
+    <string name="speed_cameras_alert">Las alertas de cámaras de velocidad están prohibidas por la ley en algunos países.</string>
+    <string name="default_screen_timeout">Tiempo de espera de pantalla predeterminado</string>
+    <string name="shared_string_tones">tonos</string>
+    <string name="add_online_source">Añadir fuente en línea</string>
+    <string name="clear_tiles_warning">Aplicando estos cambios se borrarán los datos almacenados para esta fuente de teselas</string>
+    <string name="vessel_height_warning_link">Fijar la altura del navío</string>
+    <string name="vessel_height_warning">Puedes establecer la altura del navío para evitar los puentes bajos. Ten en cuenta que si el puente es móvil, usaremos su altura en estado abierto.</string>
+    <string name="vessel_height_limit_description">Fija la altura del navío para evitar los puentes bajos. Ten en cuenta que si el puente es móvil, usaremos su altura en estado abierto.</string>
+    <string name="vessel_width_limit_description">Fija el ancho del navío para evitar puentes estrechos</string>
+    <string name="quick_action_showhide_mapillary_title">Mostrar/ocultar Mapillary</string>
+    <string name="quick_action_mapillary_hide">Ocultar Mapillary</string>
+    <string name="quick_action_mapillary_show">Mostrar Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Un conmutador para mostrar u ocultar la capa de Mapillary en el mapa.</string>
+    <string name="routing_attr_length_description">Especifica la longitud del vehículo que se permitirá en las rutas.</string>
+    <string name="routing_attr_length_name">Límite de longitud</string>
+    <string name="shared_string_bearing">Rumbo</string>
+    <string name="item_deleted">%1$s eliminado</string>
+    <string name="speed_cameras_restart_descr">Es necesario reiniciar para eliminar completamente los datos de las cámaras de velocidad.</string>
+    <string name="shared_string_uninstall_and_restart">Desinstalar y reiniciar</string>
+    <string name="speed_cameras_removed_descr">Este dispositivo no tiene cámaras de velocidad.</string>
+    <string name="app_mode_inline_skates">Patines en línea</string>
+    <string name="use_volume_buttons_as_zoom_descr">Permite controlar el nivel de zoom del mapa con los botones de volumen del dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom">Botones de volumen como zoom</string>
+    <string name="lenght_limit_description">Proporcione la longitud de su vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
+    <string name="quick_action_remove_next_destination">Eliminar el siguiente punto de destino</string>
+    <string name="please_provide_point_name_error">Por favor, proporcione un nombre para el punto</string>
+    <string name="quick_action_remove_next_destination_descr">El punto de destino actual de la ruta será borrado. Si se trata del destino, la navegación se detendrá.</string>
+    <string name="search_download_wikipedia_maps">Descargar mapas de Wikipedia</string>
 </resources>

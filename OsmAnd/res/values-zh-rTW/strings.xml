@@ -1017,12 +1017,12 @@
     <string name="driving_region_japan">日本</string>
     <string name="driving_region_us">美國</string>
     <string name="driving_region_canada">加拿大</string>
-    <string name="driving_region_europe_asia">歐洲、亞洲、拉丁美洲和同類的</string>
-    <string name="driving_region_uk">英國、印度和同類的</string>
+    <string name="driving_region_europe_asia">歐洲、亞洲、拉丁美洲與類似地區</string>
+    <string name="driving_region_uk">英國、印度與類似地區</string>
     <string name="driving_region">駕駛區域</string>
     <string name="map_widget_fps_info">FPS 除錯資訊</string>
-    <string name="local_index_tile_data_zooms">縮放已下載：%1$s</string>
-    <string name="local_index_tile_data_expire">有效時間(分鐘)：%1$s</string>
+    <string name="local_index_tile_data_zooms">縮放等級已下載：%1$s</string>
+    <string name="local_index_tile_data_expire">有效時間（分鐘）：%1$s</string>
     <string name="local_index_tile_data_downloadable">可下載：%1$s</string>
     <string name="local_index_tile_data_maxzoom">最大縮放比：%1$s</string>
     <string name="local_index_tile_data_minzoom">最小縮放比：%1$s</string>
@@ -1031,7 +1031,7 @@
     <string name="edit_tilesource_elliptic_tile">橢圓麥卡托投影</string>
     <string name="edit_tilesource_maxzoom">最大縮放比</string>
     <string name="edit_tilesource_minzoom">最小縮放比</string>
-    <string name="edit_tilesource_expiration_time">有效時間(分鐘)</string>
+    <string name="edit_tilesource_expiration_time">有效時間（分鐘）</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">選取既有的……</string>
     <string name="maps_define_edit">定義/編輯…</string>
@@ -1764,7 +1764,6 @@
     <string name="context_menu_item_open_note">開啟 OSM 註解</string>
     <string name="osm_edit_reopened_note">重新開啟 OSM 註解</string>
     <string name="osm_edit_commented_note">已評論 OSM 註解</string>
-    <string name="osm_edit_removed_note">已刪除 OSM 註解</string>
     <string name="osm_edit_created_note">建立 OSM 的註解</string>
     <string name="osn_bug_name">OSM 註解</string>
     <string name="osn_add_dialog_title">建立註解</string>
@@ -2255,18 +2254,18 @@
     <string name="right_side_navigation">靠右行駛</string>
     <string name="driving_region_automatic">自動</string>
     <string name="shared_string_paused">暫停</string>
-    <string name="osmand_plus_extended_description_part8">大概的地圖覆蓋區域和品質：
-\n• 西歐： ****
-\n• 東歐： ***
-\n• 俄羅斯： ***
-\n• 北美洲： ***
-\n• 南美洲： **
-\n• 亞洲：**
-\n• 日本和韓國： ***
-\n• 中東： **
-\n• 非洲： **
-\n• 南極洲： *
-\n全球大多數國家都可以下載
+    <string name="osmand_plus_extended_description_part8">大概的地圖覆蓋區域和品質： 
+\n• 西歐： **** 
+\n• 東歐： *** 
+\n• 俄羅斯： *** 
+\n• 北美洲： *** 
+\n• 南美洲： ** 
+\n• 亞洲：** 
+\n• 日本與韓國： *** 
+\n• 中東： ** 
+\n• 非洲： ** 
+\n• 南極洲： * 
+\n全球大多數國家都可以下載 
 \n從阿富汗到辛巴威，從澳洲到美國、阿根廷、巴西、加拿大、法國、德國、墨西哥、英國、 西班牙 …
 \n</string>
     <string name="osmand_plus_extended_description_part5">安全功能
@@ -2345,7 +2344,7 @@
 \n• 看到您的速度和海拔高度 
 \n• GPX 錄製選項使您能去記錄您的旅程並且分享 
 \n• 通過附加的外掛元件，您可以啟用等高線和地形陰影</string>
-    <string name="osmand_extended_description_part8">OsmAnd 正在積極的開發的開放原始碼軟體。每個人都可以透過回報錯誤、改進翻譯或編寫新功能，為應用程式做出貢獻。此外，該專案依靠提供資金捐款資助編寫程式碼和測試新的功能。
+    <string name="osmand_extended_description_part8">OsmAnd 正在積極的開發的開放原始碼軟體。每個人都可以透過回報錯誤、改進翻譯或編寫新功能，為應用程式做出貢獻。此外，該專案依靠提供資金捐款資助編寫程式碼和測試新的功能。 
 \n大概的地圖覆蓋區域和品質： 
 \n• 西歐： **** 
 \n• 東歐： *** 
@@ -2353,7 +2352,7 @@
 \n• 北美洲： *** 
 \n• 南美洲： ** 
 \n• 亞洲： ** 
-\n• 日本和韓國： *** 
+\n• 日本與韓國： *** 
 \n• 中東： ** 
 \n• 非洲： ** 
 \n• 南極洲： * 
@@ -3263,7 +3262,7 @@
     <string name="map_during_navigation_info">導航時的地圖</string>
     <string name="map_during_navigation">導航時的地圖</string>
     <string name="shared_string_other">其他</string>
-    <string name="vehicle_parameters_descr">重量、高度、速度</string>
+    <string name="vehicle_parameters_descr">重量、高度、長度、速度</string>
     <string name="vehicle_parameters">車輛參數</string>
     <string name="voice_announces_info">僅在導航時播放語音通知。</string>
     <string name="voice_announces_descr">導航指示與通知</string>
@@ -3604,7 +3603,7 @@
     <string name="app_mode_ski_touring">滑雪旅遊</string>
     <string name="app_mode_ski_snowmobile">雪地摩托車</string>
     <string name="custom_osmand_plugin">自訂 OsmAnd 外掛程式</string>
-    <string name="replace_point_descr">以此取代另一點</string>
+    <string name="replace_point_descr">以此取代另一點。</string>
     <string name="changes_applied_to_profile">變更已套用至「%1$s」設定檔。</string>
     <string name="settings_item_read_error">無法從「%1$s」讀取。</string>
     <string name="settings_item_write_error">無法寫入至「%1$s」。</string>
@@ -3632,7 +3631,7 @@
     <string name="move_inside_category">您只能在此分類中移動項目。</string>
     <string name="developer_plugin">開發者外掛程式</string>
     <string name="shared_string_items">項目</string>
-    <string name="select_wikipedia_article_langs">選取維基百科的文章在地圖上顯示時的語言。您可以在閱讀文章時在所有可用的語言間切換。</string>
+    <string name="select_wikipedia_article_langs">選取維基百科文章在地圖上顯示的語言。在閱讀文章時可切換至任何可用的語言。</string>
     <string name="some_articles_may_not_available_in_lang">某些維基百科的文章可能無法以您的語言提供。</string>
     <string name="lang_zhyue">粵語</string>
     <string name="lang_zhminnan">閩南語</string>
@@ -3723,7 +3722,7 @@
     <string name="gpx_parse_error">OsmAnd GPX 格式不正確，請聯絡支援團隊以進一步調查。</string>
     <string name="shared_string_always">總是</string>
     <string name="screen_control">螢幕控制</string>
-    <string name="system_screen_timeout_descr">在系統螢幕逾時後關閉螢幕。</string>
+    <string name="system_screen_timeout_descr">根據系統的螢幕逾時關閉螢幕。</string>
     <string name="system_screen_timeout">使用系統螢幕逾時</string>
     <string name="turn_screen_on_options_descr">螢幕喚醒選項：</string>
     <string name="turn_screen_on_descr">選取螢幕喚醒選項（確保裝置鎖定時，OsmAnd 在前景）：</string>
@@ -3735,7 +3734,7 @@
     <string name="turn_screen_on_wake_time_descr">選取喚醒後的螢幕逾時。（「%1$s」不適用逾時。）</string>
     <string name="keep_screen_on">保持螢幕開啟</string>
     <string name="keep_screen_off">保持螢幕關閉</string>
-    <string name="screen_timeout_descr">如果「%1$s」選項已啟用，則活動時間將取決於它。</string>
+    <string name="screen_timeout_descr">若「%1$s」開啟，則活動時間將取決於它。</string>
     <string name="pseudo_mercator_projection">偽麥卡托投影</string>
     <string name="mercator_projection">麥卡托投影</string>
     <string name="one_image_per_tile">每個圖磚一個圖片檔案</string>
@@ -3746,15 +3745,15 @@
     <string name="expire_time">過期時間</string>
     <string name="storage_format">儲存格式</string>
     <string name="map_source_zoom_levels">設定線上地圖顯示或載入的最小與最大縮放等級。</string>
-    <string name="map_source_zoom_levels_descr">當用於地圖或覆蓋層／底圖時，這些參數將會影響其顯示。
-\n
-\n%1$s：地圖將會受限於選定的區域。
-\n
-\n%2$s：可見的原始圖磚縮放等級。在這些值以外的將會升降縮放等級。</string>
-    <string name="expire_time_descr">到期時間（以分鐘為單位）。快取圖磚將會在指定的時間後重新載入。將此欄留空就不會從此來源重新整理圖磚。
-\n
-\n一天是1440分鐘。
-\n一週是10080分鐘。
+    <string name="map_source_zoom_levels_descr">會在用於地圖或覆蓋層／底圖時生效。 
+\n 
+\n%1$s：地圖會受限於選定的縮放等級。 
+\n 
+\n%2$s 是可見的原始圖磚縮放等級。在這些值以外的將會升降縮放等級。</string>
+    <string name="expire_time_descr">在指定的分鐘數後重新下載快取圖磚。將此欄留空就不會從此來源重新整理圖磚。 
+\n 
+\n一天是1440分鐘。 
+\n一週是10080分鐘。 
 \n一個月是43829分鐘。</string>
     <string name="tiles_storage_descr">選擇要如何儲存下載的圖磚。</string>
     <string name="default_screen_timeout">預設螢幕逾時</string>
@@ -3767,8 +3766,53 @@
     <string name="weight_limit_description">提供您的車輛重量，某些路線的限制可能適用於重型車輛。</string>
     <string name="shared_string_tones">色調</string>
     <string name="shared_string_meters">公尺</string>
-    <string name="details_dialog_decr">控制地圖上顯示的額外詳細資訊可見程度</string>
+    <string name="details_dialog_decr">顯示或隱藏額外的地圖詳細資訊</string>
     <string name="shared_string_night_map">夜晚地圖</string>
     <string name="shared_string_all_time">全部時間</string>
     <string name="turn_screen_on_power_button_disabled">已停用。需要「喚醒後逾時」的「保持螢幕開啟」。</string>
+    <string name="add_online_source">新增線上來源</string>
+    <string name="clear_tiles_warning">套用這些變更將會清除這個圖磚來源的快取資料</string>
+    <string name="vessel_height_warning_link">設定船艦高度</string>
+    <string name="vessel_height_warning">您可以設定船艦高度以避免矮橋。請記住，如果橋是可動式的，我們將會使用其在開啟狀態的高度。</string>
+    <string name="vessel_height_limit_description">設定船艦高度以避免矮橋。請記住，如果橋是可動式的，我們將會使用其開啟狀態的高度。</string>
+    <string name="vessel_width_limit_description">設定船艦寬度以避免窄橋</string>
+    <string name="quick_action_showhide_mapillary_title">顯示／隱藏 Mapillary</string>
+    <string name="quick_action_mapillary_hide">隱藏 Mapillary</string>
+    <string name="quick_action_mapillary_show">顯示 Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">在地圖上顯示或隱藏 Mapillary 圖層的開關。</string>
+    <string name="uninstall_speed_cameras">解除安裝測速照相</string>
+    <string name="shared_string_legal">法律</string>
+    <string name="speed_camera_pois">測速照相 POI 的</string>
+    <string name="speed_cameras_legal_descr">在某些國家或地區，法律禁止使用測速照相的警報應用程式。
+\n
+\n您必須根據您所在國家的法律做出選擇。
+\n
+\n選取 %1$s，您將會收到關於測速照相的警報與警告。
+\n
+\n選取 %2$s。所有關於測速照相的：警報、通知與 POI 都將會被刪除，直到您完全重新安裝 OsmAnd 為止。</string>
+    <string name="keep_active">保持啟用</string>
+    <string name="shared_string_uninstall">解除安裝</string>
+    <string name="speed_cameras_alert">某些國家禁止使用測速照相的警報裝置。</string>
+    <string name="shared_string_bearing">方向</string>
+    <string name="item_deleted">%1$s 已刪除</string>
+    <string name="speed_cameras_restart_descr">必須重新啟動才能完全刪除測速照相的資料。</string>
+    <string name="shared_string_uninstall_and_restart">解除安裝並重新啟動</string>
+    <string name="routing_attr_length_description">指定路線上允許的車輛長度。</string>
+    <string name="routing_attr_length_name">長度限制</string>
+    <string name="speed_cameras_removed_descr">此裝置沒有測速照相機。</string>
+    <string name="app_mode_inline_skates">直排輪鞋</string>
+    <string name="use_volume_buttons_as_zoom_descr">啟用裝置音量按鈕控制地圖縮放等級。</string>
+    <string name="use_volume_buttons_as_zoom">音量按鈕以縮放</string>
+    <string name="lenght_limit_description">提供您的車輛長度，某些路徑限制可能適用於較長的車輛。</string>
+    <string name="quick_action_remove_next_destination">刪除下一個目的地點</string>
+    <string name="please_provide_point_name_error">請提供點的名稱</string>
+    <string name="quick_action_remove_next_destination_descr">目前路徑上的目的地點將會被刪除。如果其將為目的地，導航就會停止。</string>
+    <string name="search_download_wikipedia_maps">下載維基百科地圖</string>
+    <string name="plugin_wikipedia_description">從維基百科取得關於興趣點的資訊。這是您的離線口袋指南 ── 只要啟用維基百科外掛程式並享受有關於您周圍景點的文章。</string>
+    <string name="app_mode_enduro_motorcycle">耐力賽摩托車</string>
+    <string name="app_mode_motor_scooter">小型摩托車</string>
+    <string name="app_mode_wheelchair">輪椅</string>
+    <string name="app_mode_wheelchair_forward">輪椅向前</string>
+    <string name="app_mode_go_cart">卡丁車</string>
+    <string name="osm_edit_closed_note">已關閉的 OSM 註記</string>
 </resources>

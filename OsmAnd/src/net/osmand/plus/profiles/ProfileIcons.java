@@ -17,6 +17,8 @@ public enum ProfileIcons {
 	BUS(R.drawable.ic_action_bus_dark, R.string.app_mode_bus, "ic_action_bus_dark"),
 	SUBWAY(R.drawable.ic_action_subway, R.string.app_mode_subway, "ic_action_subway"),
 	MOTORCYCLE(R.drawable.ic_action_motorcycle_dark, R.string.app_mode_motorcycle, "ic_action_motorcycle_dark"),
+	ENDURO_MOTORCYCLE(R.drawable.ic_action_enduro_motorcycle, R.string.app_mode_enduro_motorcycle, "ic_action_enduro_motorcycle"),
+	MOTOR_SCOOTER(R.drawable.ic_action_motor_scooter, R.string.app_mode_motor_scooter, "ic_action_motor_scooter"),
 	BICYCLE(R.drawable.ic_action_bicycle_dark, R.string.app_mode_bicycle, "ic_action_bicycle_dark"),
 	HORSE(R.drawable.ic_action_horse, R.string.app_mode_horse, "ic_action_horse"),
 	PEDESTRIAN(R.drawable.ic_action_pedestrian_dark, R.string.app_mode_pedestrian, "ic_action_pedestrian_dark"),
@@ -28,6 +30,9 @@ public enum ProfileIcons {
 	TRANSPORTER(R.drawable.ic_action_personal_transporter, R.string.app_mode_personal_transporter, "ic_action_personal_transporter"),
 	MONOWHEEL(R.drawable.ic_action_monowheel, R.string.app_mode_monowheel, "ic_action_monowheel"),
 	SCOOTER(R.drawable.ic_action_scooter, R.string.app_mode_scooter, "ic_action_scooter"),
+	INLINE_SKATES(R.drawable.ic_action_inline_skates, R.string.app_mode_inline_skates, "ic_action_inline_skates"),
+	WHEELCHAIR(R.drawable.ic_action_wheelchair, R.string.app_mode_wheelchair, "ic_action_wheelchair"),
+	WHEELCHAIR_FORWARD(R.drawable.ic_action_wheelchair_forward, R.string.app_mode_wheelchair_forward, "ic_action_wheelchair_forward"),
 	UFO(R.drawable.ic_action_ufo, R.string.app_mode_ufo, "ic_action_ufo"),
 	OFFROAD(R.drawable.ic_action_offroad, R.string.app_mode_offroad, "ic_action_offroad"),
 	CAMPERVAN(R.drawable.ic_action_campervan, R.string.app_mode_campervan, "ic_action_campervan"),
@@ -37,6 +42,7 @@ public enum ProfileIcons {
 	UTV(R.drawable.ic_action_ski_touring, R.string.app_mode_utv, "ic_action_ski_touring"),
 	SKI_TOURING(R.drawable.ic_action_utv, R.string.app_mode_ski_touring, "ic_action_utv"),
 	SNOWMOBILE(R.drawable.ic_action_snowmobile, R.string.app_mode_ski_snowmobile, "ic_action_snowmobile"),
+	GO_CART(R.drawable.ic_action_go_cart, R.string.app_mode_go_cart, "ic_action_go_cart"),
 	OSM(R.drawable.ic_action_openstreetmap_logo, R.string.app_mode_osm, "ic_action_openstreetmap_logo");
 
 	@DrawableRes

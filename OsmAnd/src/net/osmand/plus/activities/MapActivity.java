@@ -17,8 +17,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -173,9 +171,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.settings.backend.OsmandSettings.GENERIC_EXTERNAL_DEVICE;
-import static net.osmand.plus.settings.backend.OsmandSettings.PARROT_EXTERNAL_DEVICE;
-import static net.osmand.plus.settings.backend.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -187,8 +182,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public static final String INTENT_PARAMS = "intent_prarams";
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
-	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
-	private static final int LONG_KEYPRESS_DELAY = 500;
 	private static final int ZOOM_LABEL_DISPLAY = 16;
 	private static final int MIN_ZOOM_LABEL_DISPLAY = 12;
 	private static final int SECOND_SPLASH_TIME_OUT = 8000;
@@ -217,8 +210,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private MapActivityActions mapActions;
 	private MapActivityLayers mapLayers;
 
-	// handler to show/hide trackball position and to link map with delay
-	private Handler uiHandler = new Handler();
 	// App variables
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -265,6 +256,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			changeKeyguardFlags();
 		}
 	};
+	private MapActivityKeyListener mapActivityKeyListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -387,7 +379,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getAidlApi().onCreateMapActivity(this);
 
 		lockHelper.setLockUIAdapter(this);
-
+		mapActivityKeyListener = new MapActivityKeyListener(this);
 		mIsDestroyed = false;
 	}
 
@@ -650,6 +642,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onNewIntent(final Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
+		intentHelper.parseLaunchIntents();
 	}
 
 	@Override
@@ -673,6 +666,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		if (trackDetailsMenu.isVisible()) {
 			trackDetailsMenu.hide(true);
+			if (mapContextMenu.isActive() && mapContextMenu.getPointDescription() != null
+					&& mapContextMenu.getPointDescription().isGpxPoint()) {
+				mapContextMenu.show();
+				return;
+			}
 			if (prevActivityIntent == null) {
 				return;
 			}
@@ -1526,78 +1524,26 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	}
 
+	public ScrollHelper getMapScrollHelper() {
+		return mapScrollHelper;
+	}
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER && app.accessibilityEnabled()) {
-			if (!uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
-				Message msg = Message.obtain(uiHandler, new Runnable() {
-					@Override
-					public void run() {
-						app.getLocationProvider().emitNavigationHint();
-					}
-				});
-				msg.what = LONG_KEYPRESS_MSG_ID;
-				uiHandler.sendMessageDelayed(msg, LONG_KEYPRESS_DELAY);
+		if (mapActivityKeyListener != null) {
+			if (mapActivityKeyListener.onKeyDown(keyCode, event)) {
+				return true;
 			}
-			return true;
-		} else if (mapScrollHelper.isScrollingDirectionKeyCode(keyCode)) {
-			return mapScrollHelper.onKeyDown(keyCode, event);
 		}
 		return super.onKeyDown(keyCode, event);
 	}
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-			if (!app.accessibilityEnabled()) {
-				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-			} else if (uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
-				uiHandler.removeMessages(LONG_KEYPRESS_MSG_ID);
-				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-			}
-			return true;
-		} else if (keyCode == KeyEvent.KEYCODE_MENU /*&& event.getRepeatCount() == 0*/) {
-			// repeat count 0 doesn't work for samsung, 1 doesn't work for lg
-			toggleDrawer();
-			return true;
-		} else if (keyCode == KeyEvent.KEYCODE_C) {
-			mapViewTrackingUtilities.backToLocationImpl();
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == PARROT_EXTERNAL_DEVICE) {
-			// Parrot device has only dpad left and right
-			if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-				changeZoom(-1);
-				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-				changeZoom(1);
+		if (mapActivityKeyListener != null) {
+			if (mapActivityKeyListener.onKeyUp(keyCode, event)) {
 				return true;
 			}
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == WUNDERLINQ_EXTERNAL_DEVICE) {
-			// WunderLINQ device, motorcycle smart phone control
-			if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-				changeZoom(-1);
-				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-				changeZoom(1);
-				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_ESCAPE) {
-				String callingApp = "wunderlinq://datagrid";
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setData(Uri.parse(callingApp));
-				startActivity(intent);
-				return true;
-			}
-		} else if (mapScrollHelper.isScrollingDirectionKeyCode(keyCode)) {
-			return mapScrollHelper.onKeyUp(keyCode, event);
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == GENERIC_EXTERNAL_DEVICE) {
-			if (keyCode == KeyEvent.KEYCODE_MINUS) {
-				changeZoom(-1);
-				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_PLUS) {
-				changeZoom(1);
-				return true;
-			}
-		} else if (OsmandPlugin.onMapActivityKeyUp(this, keyCode)) {
-			return true;
 		}
 		return super.onKeyUp(keyCode, event);
 	}

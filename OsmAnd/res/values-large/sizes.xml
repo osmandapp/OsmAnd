@@ -22,12 +22,13 @@
 	<dimen name="map_button_shadow_height">120dp</dimen>
 	<dimen name="map_button_shadow_margin">6dp</dimen>
 	<dimen name="map_button_shadow_width">84dp</dimen>
-	<dimen name="map_alarm_size">116dp</dimen>
+	<dimen name="map_alarm_size">138dp</dimen>
 	<dimen name="map_alarm_bottom_text_margin">12dp</dimen>
 	<dimen name="map_alarm_text_size">35sp</dimen>
+	<dimen name="map_alarm_text_top_padding">30dp</dimen>
 	<dimen name="map_alarm_bottom_text_size">22sp</dimen>
-
-	<dimen name="map_alarm_bottom_margin">140dp</dimen>
+	<dimen name="map_alarm_bottom_si_text_size">18sp</dimen>
+	<dimen name="map_alarm_bottom_margin">131dp</dimen>
 	<dimen name="map_alarm_bottom_margin_land">81dp</dimen>
 
 	<dimen name="map_widget_icon">36dp</dimen>
@@ -44,6 +45,11 @@
 	<dimen name="map_button_rect_rad">3dp</dimen>
 
 	<dimen name="map_widget_icon_margin">3dp</dimen>
+
+	<dimen name="widget_turn_lane_size">54dp</dimen>
+	<dimen name="widget_turn_lane_border">9dp</dimen>
+	<dimen name="widget_turn_lane_margin">3dp</dimen>
+	<dimen name="widget_turn_lane_min_delta">27dp</dimen>
 
 	<!-- ContextMenu -->
 	<dimen name="context_menu_top_shadow_h">30dp</dimen>
@@ -65,7 +71,6 @@
 	<dimen name="context_menu_transport_stop_item_height">24dp</dimen>
 	<dimen name="context_menu_main_actions_padding_top">11dp</dimen>
 	<dimen name="context_menu_main_actions_padding_bottom">9dp</dimen>
-	<dimen name="context_menu_main_actions_icon_margin">5dp</dimen>
 
 	<!-- General -->
 
@@ -84,8 +89,6 @@
 	<dimen name="measurement_tool_button_margin">12dp</dimen>
 	<dimen name="measurement_tool_button_padding">12dp</dimen>
 	<dimen name="measurement_tool_button_height">54dp</dimen>
-
-	<dimen name="shadow_height">8dp</dimen>
 
 	<!--Route info-->
 	<dimen name="route_info_buttons_padding_left_right">33dp</dimen>

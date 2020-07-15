@@ -1748,7 +1748,6 @@
     <string name="context_menu_item_open_note">Åpne OSM-notat</string>
     <string name="osm_edit_reopened_note">Gjenåpnet OSM-notat</string>
     <string name="osm_edit_commented_note">Kommentert OSM-notat</string>
-    <string name="osm_edit_removed_note">Slettet OSM-notat</string>
     <string name="osm_edit_created_note">Opprettet OSM-notat</string>
     <string name="osn_bug_name">OSM-notat</string>
     <string name="osn_add_dialog_title">Opprett notat</string>
@@ -3040,7 +3039,7 @@
     <string name="rate_dialog_descr">Del din tilbakemelding og legg til en vurdering på Google Play.</string>
     <string name="shared_string_privacy_policy">Personvernspraksis</string>
     <string name="help_us_make_osmand_better">Hjelp oss å forbedre OsmAnd</string>
-    <string name="make_osmand_better_descr">Tillat OsmAnd å samle inn og behandle anonym programbruksdata. Ingen data om din plassering, eller om plasseringer ser på på kartet blir samlet inn. 
+    <string name="make_osmand_better_descr">Tillat OsmAnd å samle inn og behandle anonym programbruksdata. Ingen data om din plassering, eller om plasseringer du ser på kartet blir samlet inn. 
 \n 
 \nDu kan alltid endre ditt valg i \"Innstillinger\" → \"Personvern og sikkerhet\".</string>
     <string name="choose_data_to_share">Velg hvilken data du ønsker å dele:</string>
@@ -3394,7 +3393,7 @@
     <string name="save_heading">Inkluder retning</string>
     <string name="save_heading_descr">Lagre retning til hvert sporpunkt under opptak.</string>
     <string name="shared_string_revert">Tilbakestill</string>
-    <string name="quick_action_directions_from_desc">En knapp for å gjøre midten av skjermen til avreisepunktet. Vil deretter be om å angi reisemål eller utløse ruteberegningen.</string>
+    <string name="quick_action_directions_from_desc">En knapp for å gjøre midten av skjermen til startpunktet. Vil deretter be om å angi reisemål eller utløse ruteberegningen.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Vis nettverksnoder for sykkelruter</string>
     <string name="clear_confirmation_msg">Tøm %1$s\?</string>
     <string name="download_map_dialog">Kartnedlastingsdialog</string>
@@ -3659,4 +3658,28 @@
     <string name="tiles_storage_descr">Velg hvordan nedlastede fliskart lagres.</string>
     <string name="details_dialog_decr">Kontroller synlighet for ytterligere detaljer vist på kartet</string>
     <string name="shared_string_night_map">Nattkart</string>
+    <string name="turn_screen_on_power_button">Av/på-knapp</string>
+    <string name="turn_screen_on_proximity_sensor">Nærhetssensor</string>
+    <string name="shared_string_delete_all_q">Slett alle\?</string>
+    <string name="shared_string_legal">Juridisk</string>
+    <string name="add_online_source">Legg til nettbasert kilde</string>
+    <string name="shared_string_meters">meter</string>
+    <string name="vessel_height_warning_link">Sett skipshøyde</string>
+    <string name="vessel_height_limit_description">Sett skipshøyde for å unngå lave broer. Husk at hvis broen åpner seg, brukes høyden fra åpen tilstand.</string>
+    <string name="vessel_width_limit_description">Sett skipsbredde for å unngå smale broer</string>
+    <string name="width_limit_description">Angi kjøretøybredde, noen rutebegrensninger for brede kjøretøy kan tilkomme.</string>
+    <string name="height_limit_description">Angi kjøretøyhøyde, noen rutebegrensninger for høye kjøretøy kan tilkomme.</string>
+    <string name="weight_limit_description">Angi kjøretøyvekt, noen rutebegrensninger for tunge kjøretøy kan tilkomme.</string>
+    <string name="uninstall_speed_cameras">Avinstaller fotobokser</string>
+    <string name="speed_camera_pois">Fotoboks-interessepunkter</string>
+    <string name="shared_string_uninstall">Avinstaller</string>
+    <string name="vessel_height_warning">Du kan sette fartøyhøyde for å unngå lave broer. Hvis broen endrer høyde, brukes høyden i åpen tilstand.</string>
+    <string name="quick_action_remove_next_destination">Slett neste målpunkt</string>
+    <string name="please_provide_point_name_error">Navngi punktet</string>
+    <string name="quick_action_showhide_mapillary_title">Vis/skjul Mapillary</string>
+    <string name="quick_action_mapillary_hide">Skjul Mapillary</string>
+    <string name="quick_action_mapillary_show">Vis Mapillary</string>
+    <string name="shared_string_bearing">Peiling</string>
+    <string name="item_deleted">%1$s slettet</string>
+    <string name="use_volume_buttons_as_zoom">Lydstyrkeknapper til forstørring</string>
 </resources>

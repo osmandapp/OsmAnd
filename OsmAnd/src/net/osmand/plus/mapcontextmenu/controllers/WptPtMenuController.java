@@ -15,7 +15,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.wikivoyage.menu.WikivoyageWptPtMenuBuilder;
@@ -83,7 +83,7 @@ public class WptPtMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(),
+			return PointImageDrawable.getFromWpt(mapActivity.getMyApplication(),
 					wpt.getColor(ContextCompat.getColor(mapActivity, R.color.gpx_color_point)), false, wpt);
 		} else {
 			return null;

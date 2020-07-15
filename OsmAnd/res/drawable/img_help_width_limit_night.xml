@@ -44,12 +44,12 @@
       android:fillColor="#EE5622"
       android:fillType="evenOdd"/>
   <path
-      android:pathData="M260.002,54L268.002,42L260.002,30V54Z"
-      android:fillColor="#000000"/>
+      android:pathData="M260,54L268,42L260,30V54Z"
+      android:fillColor="#212121"/>
   <path
-      android:pathData="M276.002,42.004L274.002,34H270.002L274.002,50H278.003L280.002,42.004L282.002,50H286.002L290.002,34H286.002L284.002,42L282.002,34.004L282.003,34H278.002L278.002,34.004L276.002,42.004Z"
-      android:fillColor="#000000"/>
+      android:pathData="M300,54L292,42L300,30V54Z"
+      android:fillColor="#212121"/>
   <path
-      android:pathData="M292.003,42L300.003,54V30L292.003,42Z"
-      android:fillColor="#000000"/>
+      android:pathData="M274,32L276,42L278,32H282L284,42L286,32H290L286,52H282L280,42L278,52H274L270,32H274Z"
+      android:fillColor="#212121"/>
 </vector>

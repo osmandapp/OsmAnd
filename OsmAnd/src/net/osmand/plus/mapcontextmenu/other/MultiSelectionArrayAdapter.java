@@ -55,7 +55,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			final View iconLayout = convertView.findViewById(R.id.context_menu_icon_layout);
 			final ImageView iconView = (ImageView) convertView.findViewById(R.id.context_menu_icon_view);
 			if (item.getPointDescription().isFavorite() || item.getPointDescription().isWpt()) {
-				int iconSize = getContext().getResources().getDimensionPixelSize(R.dimen.dialog_button_height);
+				int iconSize = getContext().getResources().getDimensionPixelSize(R.dimen.favorites_my_places_icon_size);
 				iconView.getLayoutParams().height = iconSize;
 				iconView.getLayoutParams().width = iconSize;
 				iconView.requestLayout();

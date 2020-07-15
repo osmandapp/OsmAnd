@@ -424,14 +424,14 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				TerrainMode mode = srtmPlugin.getTerrainMode();
 				IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
 				int currentDownloadingProgress = downloadThread.getCurrentDownloadingItemProgress();
-				List<IndexItem> hillshadeItems = DownloadResources.findIndexItemsAt(
-						app, ((MapActivity) mapActivity).getMapLocation(),
-						mode == HILLSHADE ? HILLSHADE_FILE : SLOPE_FILE);
-				if (hillshadeItems.size() > 0) {
+				List<IndexItem> terrainItems = DownloadResources.findIndexItemsAt(
+						app, mapActivity.getMapLocation(),
+						mode == HILLSHADE ? HILLSHADE_FILE : SLOPE_FILE, false, -1, true);
+				if (terrainItems.size() > 0) {
 					downloadContainer.setVisibility(View.VISIBLE);
 					downloadTopDivider.setVisibility(View.VISIBLE);
 					downloadBottomDivider.setVisibility(View.VISIBLE);
-					for (final IndexItem indexItem : hillshadeItems) {
+					for (final IndexItem indexItem : terrainItems) {
 						ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
 								.setLayout(R.layout.list_item_icon_and_download)
 								.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))

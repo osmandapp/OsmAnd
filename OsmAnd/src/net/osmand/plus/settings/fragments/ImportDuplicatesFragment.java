@@ -257,8 +257,7 @@ public class ImportDuplicatesFragment extends BaseOsmAndFragment implements View
 		toolbarLayout.setTitle(getString(R.string.shared_string_importing));
 		description.setText(UiUtilities.createSpannableString(
 				String.format(getString(R.string.importing_from), file.getName()),
-				file.getName(),
-				new StyleSpan(Typeface.BOLD)
+				new StyleSpan(Typeface.BOLD), file.getName()
 		));
 		progressBar.setVisibility(View.VISIBLE);
 		list.setVisibility(View.GONE);

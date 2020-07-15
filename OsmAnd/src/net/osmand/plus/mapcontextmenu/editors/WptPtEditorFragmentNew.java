@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -27,7 +28,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.util.Algorithms;
@@ -411,7 +412,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			point.setBackgroundType(backgroundTypeName);
 			point.setIconName(iconName);
 		}
-		return FavoriteImageDrawable.getOrCreate(getMapActivity(), getPointColor(), false, point);
+		return PointImageDrawable.getFromWpt(getMapActivity(), getPointColor(), false, point);
 	}
 
 	@Override
@@ -454,6 +455,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
+	@ColorInt
 	public int getCategoryColor(String category) {
 		if (categoriesMap != null) {
 			Integer color = categoriesMap.get(category);

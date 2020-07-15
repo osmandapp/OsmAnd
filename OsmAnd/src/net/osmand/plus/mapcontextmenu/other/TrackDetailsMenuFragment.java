@@ -14,23 +14,30 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.util.MapUtils;
 
-public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
+public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmAndLocationListener {
+
 	public static final String TAG = "TrackDetailsMenuFragment";
 
 	private TrackDetailsMenu menu;
 	private View mainView;
-	private boolean paused = true;
 	private boolean nightMode;
+
+	private boolean locationUpdateStarted;
 
 	@Nullable
 	private MapActivity getMapActivity() {
@@ -48,9 +55,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 		MapActivity mapActivity = requireMapActivity();
 		menu = mapActivity.getTrackDetailsMenu();
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		ContextThemeWrapper context =
-				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
-		View view = LayoutInflater.from(context).inflate(R.layout.track_details, container, false);
+		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.track_details, container, false);
 		if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		}
@@ -91,14 +96,20 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 			});
 		}
 
-		updateInfo();
+		MapContextMenu contextMenu = mapActivity.getContextMenu();
+		final boolean forceFitTrackOnMap;
+		if (contextMenu.isActive()) {
+			forceFitTrackOnMap = !(contextMenu.getPointDescription() != null && contextMenu.getPointDescription().isGpxPoint());
+		} else {
+			forceFitTrackOnMap = true;
+		}
+		updateInfo(forceFitTrackOnMap);
 
 		ViewTreeObserver vto = mainView.getViewTreeObserver();
 		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
 			@Override
 			public void onGlobalLayout() {
-
 				ViewTreeObserver obs = mainView.getViewTreeObserver();
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 					obs.removeOnGlobalLayoutListener(this);
@@ -106,7 +117,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 					obs.removeGlobalOnLayoutListener(this);
 				}
 				if (getMapActivity() != null) {
-					updateInfo();
+					updateInfo(forceFitTrackOnMap);
 				}
 			}
 		});
@@ -122,13 +133,44 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 		} else {
 			menu.onShow();
 		}
-		paused = false;
+		startLocationUpdate();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		paused = true;
+		stopLocationUpdate();
+	}
+
+	private void startLocationUpdate() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && !locationUpdateStarted) {
+			locationUpdateStarted = true;
+			app.getLocationProvider().addLocationListener(this);
+		}
+	}
+
+	private void stopLocationUpdate() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && locationUpdateStarted) {
+			locationUpdateStarted = false;
+			app.getLocationProvider().removeLocationListener(this);
+		}
+	}
+
+	@Override
+	public void updateLocation(final Location location) {
+		if (location != null && !MapUtils.areLatLonEqual(menu.getMyLocation(), location)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null && mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+				mapActivity.getMyApplication().runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						menu.updateMyLocation(mainView, location);
+					}
+				});
+			}
+		}
 	}
 
 	@Override
@@ -142,10 +184,6 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		return R.color.status_bar_transparent_gradient;
-	}
-
-	public boolean isPaused() {
-		return paused;
 	}
 
 	public int getHeight() {
@@ -165,7 +203,11 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public void updateInfo() {
-		menu.updateInfo(mainView);
+		updateInfo(true);
+	}
+
+	public void updateInfo(boolean forceFitTrackOnMap) {
+		menu.updateInfo(mainView, forceFitTrackOnMap);
 		applyDayNightMode();
 	}
 

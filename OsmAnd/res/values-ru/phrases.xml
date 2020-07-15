@@ -1044,7 +1044,7 @@
     <string name="poi_tactile_paving_no">Без тактильного покрытия</string>
     <string name="poi_traffic_signals_sound">Звуковой сигнал</string>
     <string name="poi_traffic_signals_sound_yes">Есть</string>
-    <string name="poi_traffic_signals_sound_no">Нет</string>
+    <string name="poi_traffic_signals_sound_no">Звук: нет</string>
     <string name="poi_traffic_signals_sound_walk">Только когда переход разрешён</string>
     <string name="poi_rescue_station">Спасательная станция</string>
     <string name="poi_services">Зона услуг, прилегающая к шоссе</string>
@@ -3812,4 +3812,12 @@
     <string name="poi_seamark_water_level_floods">Уровень воды: наводнение</string>
     <string name="poi_coach_no">Доступ к автобусу: нет</string>
     <string name="poi_coach_yes">Доступ к автобусу: да</string>
+    <string name="poi_traffic_signals_arrow_yes">Да</string>
+    <string name="poi_traffic_signals_vibration_yes">Да</string>
+    <string name="poi_traffic_signals_vibration_no">Вибрация: нет</string>
+    <string name="poi_traffic_signals_arrow">Стрелка</string>
+    <string name="poi_traffic_signals_vibration">Вибрация</string>
+    <string name="poi_city_block">Городской квартал</string>
+    <string name="poi_borough">Муниципалитет</string>
+    <string name="poi_give_box">Подарочная коробка</string>
 </resources>

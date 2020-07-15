@@ -234,7 +234,7 @@
     <string name="poi_musical_instrument">Magasin d\'instruments de musique</string>
     <string name="poi_nature_reserve">Réserve naturelle</string>
     <string name="poi_military_naval_base">Base navale militaire</string>
-    <string name="poi_neighbourhood">Quartier de voisinage</string>
+    <string name="poi_neighbourhood">Voisinage</string>
     <string name="poi_newsagent">Marchand de journaux</string>
     <string name="poi_newspaper">Entreprise de presse</string>
     <string name="poi_ngo">ONG</string>
@@ -317,7 +317,7 @@
     <string name="poi_stream">Ruisseau</string>
     <string name="poi_stripclub">Strip club</string>
     <string name="poi_studio">Studio d\'enregistrement</string>
-    <string name="poi_suburb">Quartier</string>
+    <string name="poi_suburb">Zone urbaine</string>
     <string name="poi_subway_entrance">Bouche de métro</string>
     <string name="poi_supermarket">Supermarché</string>
     <string name="poi_survey_point">Point géodésique</string>
@@ -667,7 +667,7 @@
     <string name="poi_training">Centre de formation</string>
     <string name="poi_field_hockey">Hockey sur gazon</string>
     <string name="poi_smoking_area">Zone fumeur</string>
-    <string name="poi_quarter">Grand quartier</string>
+    <string name="poi_quarter">Quartier</string>
     <string name="poi_rest_area">Aire de repos</string>
     <string name="poi_reservoir">Réservoir hydrique</string>
     <string name="poi_piste_ice_skate">Itinéraire de patinage sur glace</string>
@@ -1772,7 +1772,7 @@
     <string name="poi_smoking_separated">Dans une pièce séparée</string>
     <string name="poi_smoking_isolated">Dans une pièce isolée</string>
     <string name="poi_traffic_signals_sound_yes">Oui</string>
-    <string name="poi_traffic_signals_sound_no">Non</string>
+    <string name="poi_traffic_signals_sound_no">Son : non</string>
     <string name="poi_grassland">Prairie</string>
     <string name="poi_farmland">Zone agricole</string>
     <string name="poi_payment_cryptocurrencies_no">Cryptomonnaies non acceptées</string>
@@ -2755,7 +2755,7 @@
     <string name="poi_animal_shelter_mammal">Mammifères</string>
     <string name="poi_animal_shelter_fish">Poissons</string>
     <string name="poi_information_trail_blaze">Balise de chemin</string>
-    <string name="poi_traffic_signals_sound_walk">Autorisé uniquement à pied</string>
+    <string name="poi_traffic_signals_sound_walk">Seulement quand la traversée est autorisée</string>
     <string name="poi_piste_grooming_backcountry">Arrière-pays</string>
     <string name="poi_aerialway_occupancy">Cabine/Siège/capacité de voiture</string>
     <string name="poi_payment_account_cards_yes">Cartes de comptes</string>
@@ -3600,7 +3600,7 @@
     <string name="poi_changing_table_count">Nombre de tables à langer</string>
     <string name="poi_changing_table_fee_yes">Table à langer payante</string>
     <string name="poi_changing_table_fee_no">Table à langer gratuite</string>
-    <string name="poi_charcoal_pile">Pile de charbon</string>
+    <string name="poi_charcoal_pile">Meule</string>
     <string name="poi_hookah_lounge">Bar à chicha</string>
     <string name="poi_valley_balka">Balkanique</string>
     <string name="poi_glacier_type_outlet">Point de vente</string>
@@ -3818,6 +3818,16 @@
     <string name="poi_drinking_water_refill_no">Remplissage d\'eau potable : non</string>
     <string name="poi_drinking_water_refill_network">Réseau de remplissage d\'eau potable</string>
     <string name="poi_traffic_signals_sound_locate">Uniquement si la marche est autorisée</string>
-    <string name="poi_internet_access_fee_customers">Signal pour trouver le pôle</string>
+    <string name="poi_internet_access_fee_customers">Signal pour trouver le poteau</string>
     <string name="poi_fire_hydrant_pressure_filter">Pression</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">Aspiration</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pressurisé</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Eaux souterraines</string>
+    <string name="poi_fire_hydrant_type_pipe">Tuyau</string>
+    <string name="poi_traffic_signals_arrow_yes">Oui</string>
+    <string name="poi_traffic_signals_vibration_yes">Oui</string>
+    <string name="poi_traffic_signals_vibration_no">Vibration : non</string>
+    <string name="poi_traffic_signals_arrow">Flèche</string>
+    <string name="poi_traffic_signals_vibration">Vibration</string>
+    <string name="poi_give_box">Boîte à dons</string>
 </resources>

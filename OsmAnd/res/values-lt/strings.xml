@@ -1749,7 +1749,6 @@ Ilguma %2$s</string>
     <string name="context_menu_item_open_note">Pridėti OSM pastabą</string>
     <string name="osm_edit_reopened_note">OSM pastaba iš naujo atidaryta</string>
     <string name="osm_edit_commented_note">OSM pastaba papildyta komentaru</string>
-    <string name="osm_edit_removed_note">OSM pastaba ištrinta</string>
     <string name="osm_edit_created_note">OSM pastaba sukurta</string>
     <string name="osn_bug_name">OSM pastaba</string>
     <string name="osn_reopen_dialog_title">Iš naujo atidaryti pastabą</string>

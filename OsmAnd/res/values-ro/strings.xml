@@ -1359,7 +1359,6 @@
     <string name="show_on_start_description">\"Oprit\" lansează direct ecranul hărții.</string>
     <string name="copied_to_clipboard">Copiat în clipboard</string>
     <string name="osm_edit_commented_note">Nota OSM comentată</string>
-    <string name="osm_edit_removed_note">Nota OSM ștearsă</string>
     <string name="osm_edit_created_note">Nota OSM creată</string>
     <string name="osn_bug_name">Notă OSM</string>
     <string name="osn_add_dialog_title">Crează notă</string>

@@ -281,6 +281,11 @@ public class SearchPhrase {
 			for (String s : searchWords) {
 				if (s.length() > 0 && !Character.isDigit(s.charAt(0)) && !LocationParser.isValidOLC(s)) {
 					mainUnknownWordToSearch = s.trim();
+					if (mainUnknownWordToSearch.endsWith(".")) {
+						mainUnknownWordToSearch = mainUnknownWordToSearch.substring(0,
+								mainUnknownWordToSearch.length() - 1);
+						mainUnknownSearchWordComplete = false;
+					}
 					int unknownInd = unknownSearchWords.indexOf(s);
 					if (!lastUnknownSearchWordComplete && unknownSearchWords.size() - 1 == unknownInd) {
 						mainUnknownSearchWordComplete = false;
@@ -526,7 +531,7 @@ public class SearchPhrase {
 	
 	public NameStringMatcher getFirstUnknownNameStringMatcher() {
 		if (firstUnknownNameStringMatcher == null) {
-			firstUnknownNameStringMatcher = getNameStringMatcher(firstUnknownSearchWord, lastUnknownSearchWordComplete);
+			firstUnknownNameStringMatcher = getNameStringMatcher(firstUnknownSearchWord, isFirstUnknownSearchWordComplete());
 		}
 		return firstUnknownNameStringMatcher;
 	}
@@ -792,6 +797,13 @@ public class SearchPhrase {
 		}
 		return r;
 	}
+	
+	public String getLastUnknownSearchWord() {
+		if(otherUnknownWords.size() > 0) {
+			return otherUnknownWords.get(otherUnknownWords.size() - 1);
+		}
+		return firstUnknownSearchWord;
+	}
 
 	
 	public int getRadiusSearch(int meters, int radiusLevel) {
@@ -873,6 +885,8 @@ public class SearchPhrase {
 		}
 		return lastUnknownSearchWordComplete;
 	}
+
+	
 
 	
 

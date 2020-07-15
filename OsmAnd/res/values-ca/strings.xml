@@ -1787,7 +1787,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="context_menu_item_open_note">Obre una nota d\'OSM</string>
     <string name="osm_edit_reopened_note">S\'ha reobert nota d\'OSM</string>
     <string name="osm_edit_commented_note">S\'ha comentat nota d\'OSM</string>
-    <string name="osm_edit_removed_note">S\'ha eliminat nota d\'OSM</string>
     <string name="osm_edit_created_note">S\'ha creat nota d\'OSM</string>
     <string name="osn_bug_name">Nota d\'OSM</string>
     <string name="osn_add_dialog_title">Crea nota</string>
@@ -3665,4 +3664,51 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="lang_jv">Javanès</string>
     <string name="lang_gu">Gujarati</string>
     <string name="tiles_storage_descr">Trieu com desar les tessel·les baixades.</string>
+    <string name="uninstall_speed_cameras">Desinstal·la les càmeres de radar</string>
+    <string name="shared_string_legal">Informació legal</string>
+    <string name="speed_camera_pois">PDIs de càmeres de radar</string>
+    <string name="speed_cameras_legal_descr">En alguns països o regions, l\'ús d\'aplicacions que avisen de la proximitat de càmeres de radar està prohibit. 
+\n
+\nCal que ho configureu segons la llei del vostre país. 
+\n
+\nSeleccioneu %1$s i rebreu alertes i advertiments de les càmeres de radar. 
+\n
+\nSeleccioneu %2$s. Totes les dades relatives a les càmeres de radar (alertes, notificacions, PDIs) desapareixeran fins que es reinstal·li completament OsmAnd .</string>
+    <string name="shared_string_uninstall">Desinstal·la</string>
+    <string name="speed_cameras_alert">Les alertes de proximitat a càmeres de radar estan prohibides en alguns països.</string>
+    <string name="details_dialog_decr">Mostra o amaga detalls addicionals del mapa</string>
+    <string name="shared_string_night_map">Mapa nocturn</string>
+    <string name="add_online_source">Afegeix orígen en connexió</string>
+    <string name="clear_tiles_warning">L\'aplicació d\'aquests canvis esborrarà les dades de la memòria cau per a aquesta font de tessel·les</string>
+    <string name="vessel_height_warning_link">Indiqueu l\'alçada del vaixell</string>
+    <string name="vessel_height_warning">Podeu indicar l\'alçada del vaixell per evitar ponts baixos. Penseu que si el pont és mòbil, li aplicarem l\'alçada de quan estigui obert.</string>
+    <string name="vessel_height_limit_description">Indiqueu l\'alçada del vaixell per evitar ponts baixos. Penseu que si el pont és mòbil, li aplicarem l\'alçada de quan estigui obert.</string>
+    <string name="vessel_width_limit_description">Indiqueu l\'amplada del vaixell per evitar ponts ajustats</string>
+    <string name="quick_action_showhide_mapillary_title">Mostra/amaga Mapil·lary</string>
+    <string name="quick_action_mapillary_hide">Amaga Mapillary</string>
+    <string name="quick_action_mapillary_show">Mostra Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Un commutador per mostrar o amagar la capa de Mapillary al mapa.</string>
+    <string name="routing_attr_length_description">Especifiqueu la llargada del vehicle que han de permetre les vies.</string>
+    <string name="routing_attr_length_name">Llargada màxima</string>
+    <string name="shared_string_bearing">Trajectòria</string>
+    <string name="item_deleted">S\'ha esborrat %1$s</string>
+    <string name="speed_cameras_restart_descr">Cal reiniciar per esborrar totalment les dades de les càmeres de radar.</string>
+    <string name="shared_string_uninstall_and_restart">Desinstal·la i Reinicia</string>
+    <string name="speed_cameras_removed_descr">Aquest dispositiu no inclou les càmeres de radar.</string>
+    <string name="app_mode_inline_skates">Patins en línia</string>
+    <string name="use_volume_buttons_as_zoom_descr">Activeu per controlar el nivell d\'ampliació del mapa amb els botons del volum del dispositiu.</string>
+    <string name="use_volume_buttons_as_zoom">Botons de volum pel zoom</string>
+    <string name="delete_all_actions_message_q">Esteu segur que voleu suprimir definitivament %d dreceres\?</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Podeu exportar o importar les dreceres amb els perfils de les aplicacions.</string>
+    <string name="shared_string_delete_all_q">Ho esborrem tot\?</string>
+    <string name="screen_timeout">Retard de pantalla</string>
+    <string name="keep_active">Continua actiu</string>
+    <string name="screen_timeout_descr">Si està activat \"%1$s\" el temps d\'activitat quedarà afectat.</string>
+    <string name="shared_string_tones">tones</string>
+    <string name="shared_string_meters">metres</string>
+    <string name="quick_action_remove_next_destination">Suprimeix la propera fita</string>
+    <string name="please_provide_point_name_error">Proporcioneu un nom per al punt</string>
+    <string name="quick_action_remove_next_destination_descr">La propera fita de la ruta s\'esborrarà. Si es tractés de la Destinació final, la navegació s\'aturaria.</string>
+    <string name="search_download_wikipedia_maps">Baixa mapes de la Viquipèdia</string>
+    <string name="plugin_wikipedia_description">Obteniu informació de punts d\'interès des la Viquipèdia. Serà la vostra guia de butxaca en desconnexió - només cal que activeu el connector Viquipèdia i fruireu dels articles que tracten de les coses que us rodegen.</string>
 </resources>

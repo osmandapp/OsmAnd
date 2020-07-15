@@ -5,6 +5,7 @@ import android.graphics.Paint;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -61,10 +62,10 @@ public class Renderable {
         protected AsynchronousResampler culler = null;                        // The currently active resampler
         protected Paint paint = null;                               // MUST be set by 'updateLocalPaint' before use
 
-        public RenderableSegment(List <WptPt> points, double segmentSize) {
+        public RenderableSegment(List<WptPt> points, double segmentSize) {
             this.points = points;
-            calculateBounds(points);
             this.segmentSize = segmentSize;
+            trackBounds = GPXUtilities.calculateBounds(points);
         }
 
         protected void updateLocalPaint(Paint p) {
@@ -87,23 +88,6 @@ public class Renderable {
             if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) { // is visible?
                 startCuller(zoom);
                 drawSingleSegment(zoom, p, canvas, tileBox);
-            }
-        }
-
-        private void calculateBounds(List<WptPt> pts) {
-            trackBounds = new QuadRect(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY,
-                    Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-            updateBounds(pts, 0);
-        }
-
-        protected void updateBounds(List<WptPt> pts, int startIndex) {
-            pointSize = pts.size();
-            for (int i = startIndex; i < pointSize; i++) {
-                WptPt pt = pts.get(i);
-                trackBounds.right = Math.max(trackBounds.right, pt.lon);
-                trackBounds.left = Math.min(trackBounds.left, pt.lon);
-                trackBounds.top = Math.max(trackBounds.top, pt.lat);
-                trackBounds.bottom = Math.min(trackBounds.bottom, pt.lat);
             }
         }
 
@@ -198,7 +182,9 @@ public class Renderable {
 
         @Override public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (points.size() != pointSize) {
-                updateBounds(points, pointSize);
+                int prevSize = pointSize;
+                pointSize = points.size();
+                GPXUtilities.updateBounds(trackBounds, points, prevSize);
             }
             drawSingleSegment(zoom, p, canvas, tileBox);
         }

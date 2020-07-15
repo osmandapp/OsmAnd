@@ -74,7 +74,7 @@
         android:visibility="gone"/>
 
     <LinearLayout
-        android:id="@+id/increase_radius_row"
+        android:id="@+id/primary_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
@@ -100,7 +100,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/online_search_row"
+        android:id="@+id/secondary_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
@@ -121,7 +121,7 @@
             android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/online_search_icon"
+                android:id="@+id/secondary_button_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -130,6 +130,7 @@
                 android:tint="?attr/color_dialog_buttons"/>
 
             <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/secondary_button_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/search_online_address"

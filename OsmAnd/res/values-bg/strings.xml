@@ -1568,7 +1568,6 @@
     <string name="show_on_start_description">\"Изкл.\" стартира директно картата.</string>
     <string name="osm_edit_reopened_note">Отворена отново бележка на OSM</string>
     <string name="osm_edit_commented_note">Бележка на OSM с коментар</string>
-    <string name="osm_edit_removed_note">Изтрита бележка на OSM</string>
     <string name="osm_edit_created_note">Създадена бележка на OSM</string>
     <string name="osn_bug_name">Бележка на OSM</string>
     <string name="osn_add_dialog_title">Създайте Бележка</string>

@@ -187,10 +187,11 @@ public class DownloadResources extends DownloadResourceGroup {
 					outdated = true;
 				}
 			} else {
-
 				long itemSize = item.getContentSize();
 				long oldItemSize = 0;
-				if (item.getType() == DownloadActivityType.VOICE_FILE) {
+				if (parsed && item.getTimestamp() > item.getLocalTimestamp()) {
+					outdated = true;
+				} else if (item.getType() == DownloadActivityType.VOICE_FILE) {
 					if (item instanceof AssetIndexItem) {
 						File file = new File(((AssetIndexItem) item).getDestFile());
 						oldItemSize = file.length();
@@ -213,7 +214,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				} else {
 					oldItemSize = app.getAppPath(item.getTargetFileName()).length();
 				}
-				if (itemSize != oldItemSize) {
+				if (!parsed && itemSize != oldItemSize) {
 					outdated = true;
 				}
 			}
@@ -512,16 +513,20 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, LatLon latLon, DownloadActivityType type, boolean includeDownloaded) throws IOException {
-		return findIndexItemsAt(app, latLon, type, includeDownloaded, -1);
+		return findIndexItemsAt(app, latLon, type, includeDownloaded, -1, false);
 	}
 
-	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, LatLon latLon, DownloadActivityType type, boolean includeDownloaded, int limit) throws IOException {
+	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, LatLon latLon, DownloadActivityType type, boolean includeDownloaded, int limit, boolean skipIfOneDownloaded) throws IOException {
 		List<IndexItem> res = new ArrayList<>();
 		OsmandRegions regions = app.getRegions();
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
 		List<WorldRegion> downloadRegions = regions.getWorldRegionsAt(latLon);
 		for (WorldRegion downloadRegion : downloadRegions) {
-			if (includeDownloaded || !isIndexItemDownloaded(downloadThread, type, downloadRegion, res)) {
+			boolean itemDownloaded = isIndexItemDownloaded(downloadThread, type, downloadRegion, res);
+			if (skipIfOneDownloaded && itemDownloaded) {
+				return new ArrayList<>();
+			}
+			if (includeDownloaded || !itemDownloaded) {
 				addIndexItem(downloadThread, type, downloadRegion, res);
 			}
 			if (limit != -1 && res.size() == limit) {

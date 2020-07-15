@@ -1229,7 +1229,7 @@
     <string name="poi_tactile_paving_yes">Eja</string>
     <string name="poi_tactile_paving_no">Chene pamentu tàtile</string>
     <string name="poi_traffic_signals_sound_yes">Eja</string>
-    <string name="poi_traffic_signals_sound_no">Nono</string>
+    <string name="poi_traffic_signals_sound_no">Sonu: nono</string>
     <string name="poi_traffic_signals_sound_walk">Petzi cando est possìbile colare</string>
     <string name="poi_services">Àrea de servìtziu</string>
     <string name="poi_historic_period_nuragic">Època istòrica: nuràgica</string>
@@ -3820,4 +3820,12 @@
     <string name="poi_fire_hydrant_type_pipe">Pompa</string>
     <string name="poi_fire_hydrant_pressure_filter">Pressione</string>
     <string name="poi_pump_status_missing_beam">Istadu de sa pompa: mancat sa trave</string>
+    <string name="poi_traffic_signals_arrow_yes">Eja</string>
+    <string name="poi_traffic_signals_vibration_yes">Eja</string>
+    <string name="poi_traffic_signals_vibration_no">Vibratzione: nono</string>
+    <string name="poi_traffic_signals_arrow">Fritza</string>
+    <string name="poi_traffic_signals_vibration">Vibratzione</string>
+    <string name="poi_give_box">Iscàtula pro donos (give box)</string>
+    <string name="poi_city_block">Isuladu</string>
+    <string name="poi_borough">Unidade amministrativa (Borough)</string>
 </resources>

@@ -1,7 +1,5 @@
 package net.osmand.plus.poi;
 
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
@@ -10,16 +8,14 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.wikipedia.WikipediaPoiMenu;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -38,10 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
-import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
-import static net.osmand.plus.wikipedia.WikipediaPoiMenu.ENABLED_WIKI_POI_LANGUAGES_KEY;
-import static net.osmand.plus.wikipedia.WikipediaPoiMenu.GLOBAL_WIKI_POI_ENABLED_KEY;
 
 public class PoiFiltersHelper {
 
@@ -119,31 +111,6 @@ public class PoiFiltersHelper {
 		return customPOIFilter;
 	}
 
-	public void prepareTopWikiFilter(@NonNull PoiUIFilter wiki) {
-		boolean prepareByDefault = true;
-		Bundle wikiSettings = WikipediaPoiMenu.getWikiPoiSettings(application);
-		if (wikiSettings != null) {
-			boolean allLanguages = wikiSettings.getBoolean(GLOBAL_WIKI_POI_ENABLED_KEY);
-			List<String> languages = wikiSettings
-					.getStringArrayList(ENABLED_WIKI_POI_LANGUAGES_KEY);
-			if (!allLanguages && languages != null) {
-				prepareByDefault = false;
-				String wikiLang = "wiki:lang:";
-				StringBuilder sb = new StringBuilder();
-				for (String lang : languages) {
-					if (sb.length() > 1) {
-						sb.append(" ");
-					}
-					sb.append(wikiLang).append(lang);
-				}
-				wiki.setFilterByName(sb.toString());
-			}
-		}
-		if (prepareByDefault) {
-			wiki.setFilterByName(null);
-		}
-	}
-
 	public PoiUIFilter getTopWikiPoiFilter() {
 		if (topWikiPoiFilter == null) {
 			String wikiFilterId = PoiUIFilter.STD_PREFIX + "osmwiki";
@@ -177,7 +144,6 @@ public class PoiFiltersHelper {
 		helper.clearHistory();
 		helper.close();
 	}
-
 
 	private PoiUIFilter getFilterById(String filterId, PoiUIFilter... filters) {
 		for (PoiUIFilter pf : filters) {
@@ -274,6 +240,7 @@ public class PoiFiltersHelper {
 				PoiUIFilter f = new PoiUIFilter(t, application, "");
 				top.add(f);
 			}
+			OsmandPlugin.registerCustomPoiFilters(top);
 			this.cacheTopStandardFilters = top;
 		}
 		List<PoiUIFilter> result = new ArrayList<>();
@@ -489,11 +456,9 @@ public class PoiFiltersHelper {
 	}
 
 	public void addSelectedPoiFilter(PoiUIFilter filter) {
-		if (filter.isTopWikiFilter()) {
-			prepareTopWikiFilter(filter);
-		}
 		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
 		selectedPoiFilters.add(filter);
+		OsmandPlugin.onPrepareExtraTopPoiFilters(selectedPoiFilters);
 		saveSelectedPoiFilters(selectedPoiFilters);
 		this.selectedPoiFilters = selectedPoiFilters;
 	}
@@ -583,12 +548,10 @@ public class PoiFiltersHelper {
 		for (String f : application.getSettings().getSelectedPoiFilters()) {
 			PoiUIFilter filter = getFilterById(f);
 			if (filter != null) {
-				if (filter.isTopWikiFilter()) {
-					prepareTopWikiFilter(filter);
-				}
 				selectedPoiFilters.add(filter);
 			}
 		}
+		OsmandPlugin.onPrepareExtraTopPoiFilters(selectedPoiFilters);
 		this.selectedPoiFilters = selectedPoiFilters;
 	}
 
@@ -826,7 +789,7 @@ public class PoiFiltersHelper {
 						String subCategory = query.getString(2);
 						if (subCategory == null) {
 							m.put(a, null);
-						} else {
+						} else if (!mapPoiTypes.isTypeForbidden(subCategory)) {
 							if (m.get(a) == null) {
 								m.put(a, new LinkedHashSet<String>());
 							}
@@ -853,7 +816,9 @@ public class PoiFiltersHelper {
 									map.get(filterId), application);
 							filter.setSavedFilterByName(query.getString(2));
 							filter.setDeleted(deleted);
-							list.add(filter);
+							if (filter.getAcceptedTypesCount() > 0) {
+								list.add(filter);
+							}
 						}
 					} while (query.moveToNext());
 				}

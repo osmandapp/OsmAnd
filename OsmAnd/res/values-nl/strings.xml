@@ -75,19 +75,19 @@
     <string name="accessibility_preferences_descr">Toegankelijkheidsgerelateerde instellingen.</string>
     <string name="shared_string_accessibility">Toegankelijkheid</string>
     <string name="rendering_out_of_memory">Niet genoeg werkgeheugen voor weergave van het geselecteerde gebied</string>
-    <string name="use_fluorescent_overlays">Fluorescerende overlays</string>
-    <string name="use_fluorescent_overlays_descr">Gebruik fluorescerende kleuren voor de weergave van tracks and routes.</string>
+    <string name="use_fluorescent_overlays">Fluorescerende extra lagen</string>
+    <string name="use_fluorescent_overlays_descr">Gebruik fluorescerende kleuren voor de weergave van tracks en routes.</string>
     <string name="offline_edition">Offline bewerking</string>
     <string name="offline_edition_descr">Gebruik altijd offline bewerking.</string>
-    <string name="update_poi_does_not_change_indexes">Wijzigingen aan interessepunten hebben geen invloed op de gedownloade kaartbestanden, maar worden opgeslagen in een lokaal bestand.</string>
+    <string name="update_poi_does_not_change_indexes">Wijzigingen aan POI’s binnen de app hebben geen invloed op de gedownloade kaartbestanden, maar worden opgeslagen in een bestand op het apparaat.</string>
     <string name="local_openstreetmap_uploading">Uploaden…</string>
-    <string name="local_openstreetmap_were_uploaded">"{0} Interessepunten/Opmerkingen  zijn ge-upload"</string>
+    <string name="local_openstreetmap_were_uploaded">{0} POI’s/opmerkingen zijn geüpload</string>
     <string name="local_openstreetmap_uploadall">Upload alle</string>
     <string name="local_openstreetmap_upload">Upload bewerking naar OSM</string>
     <string name="local_openstreetmap_delete">Wis de bewerking</string>
     <string name="local_openstreetmap_descr_title">OpenStreetMap asynchroon wijzigen:</string>
-    <string name="local_openstreetmap_settings">Lokaal opgeslagen OSM-Interessepunten/Opmerkingen</string>
-    <string name="local_openstreetmap_settings_descr">Toon en beheer OSM-Interessepunten/Opmerkingen die lokaal zijn bewaard.</string>
+    <string name="local_openstreetmap_settings">Op het apparaat opgeslagen OSM-POI’s/opmerkingen</string>
+    <string name="local_openstreetmap_settings_descr">Toon en beheer OSM-POI’s/opmerkingen die op het apparaat zijn opgeslagen.</string>
     <string name="live_monitoring_interval_descr">Specificeer interval voor online tracking.</string>
     <string name="live_monitoring_interval">Interval voor online tracking</string>
     <string name="live_monitoring_url_descr">Specificeer het webadres met parameters: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -96,7 +96,7 @@
     <string name="show_current_gpx_title">Toon huidige GPX-track</string>
     <string name="free_version_message">Deze gratis versie van OsmAnd is beperkt tot %1$s downloads en ondersteunt geen offline Wikipedia artikelen.</string>
     <string name="free_version_title">Gratis versie</string>
-    <string name="poi_context_menu_showdescription">Toon interessepunt-beschrijvingen.</string>
+    <string name="poi_context_menu_showdescription">Toon POI-beschrijving.</string>
     <string name="index_name_north_america">Noord-Amerika</string>
     <string name="index_name_us">Noord Amerika - Verenigde Staten</string>
     <string name="index_name_central_america">Centraal Amerika</string>
@@ -143,7 +143,7 @@
     <string name="auto_follow_route_navigation_descr">Alleen automatisch volgen tijdens navigatie.</string>
     <string name="auto_follow_location_enabled">Gebruikte kaartweergave centreren.</string>
     <string name="pref_vector_rendering">Opties voor vectorkaarten</string>
-    <string name="pref_overlay">Bovenlaag / onderlaag</string>
+    <string name="pref_overlay">Extra kaartlaag / achtergrondlaag</string>
     <string name="pref_raster_map">Kaartbron-instellingen</string>
     <string name="pref_vector_map">Vectorkaart-instellingen</string>
     <string name="delete_confirmation_msg">%1$s verwijderen?</string>
@@ -157,11 +157,11 @@
     <string name="file_can_not_be_renamed">Kan bestandsnaam niet wijzigen.</string>
     <string name="file_with_name_already_exists">Er bestaat al een bestand met die naam.</string>
     <string name="shared_string_gpx_route">Navigatie langs GPX-track</string>
-    <string name="poi_query_by_name_matches_categories">Meerdere gelijkaardige interessepunt-categorieën gevonden.</string>
-    <string name="data_to_search_poi_not_available">Download offline gegevens om naar interessepunten te zoeken.</string>
+    <string name="poi_query_by_name_matches_categories">Meerdere gerelateerde POI-categorieën gevonden.</string>
+    <string name="data_to_search_poi_not_available">Download offline gegevens om naar POI’s te zoeken.</string>
     <string name="poi_filter_by_name">Zoek op naam</string>
-    <string name="old_poi_file_should_be_deleted">Het interessepuntenbestand \'%1$s\' is overbodig en kan worden verwijderd.</string>
-    <string name="update_poi_file_not_found">Lokaal bestand voor het bijhouden van wijzigingen van interessepunten niet gevonden en kan ook niet worden aangemaakt.</string>
+    <string name="old_poi_file_should_be_deleted">Het POI-bestand \'%1$s\' is overbodig en kan worden verwijderd.</string>
+    <string name="update_poi_file_not_found">Lokaal bestand voor het bijhouden van wijzigingen van POI’s niet gevonden en kon ook niet worden aangemaakt.</string>
     <string name="button_upgrade_osmandplus">Upgraden naar OsmAnd+</string>
     <string name="map_version_changed_info">Op de server staan kaartbestanden die niet compatibel zijn met de huidige programmaversie. Je moet eerst OsmAnd updaten voordat je kaarten kan downloaden en gebruiken.</string>
     <string name="poi_filter_nominatim">Online (Nominatim)</string>
@@ -198,7 +198,7 @@
     <string name="local_index_descr_title">Kaarten installeren en beheren.</string>
     <string name="local_index_mi_restore">Activeer</string>
     <string name="local_index_mi_backup">Deactiveer</string>
-    <string name="local_index_poi_data">Interessepunt-gegevens</string>
+    <string name="local_index_poi_data">POI-gegevens</string>
     <string name="local_index_address_data">Adresgegevens</string>
     <string name="local_index_transport_data">OV-gegevens</string>
     <string name="local_index_map_data">Kaartgegevens</string>
@@ -207,7 +207,7 @@
     <string name="local_indexes_cat_voice">Gesproken aanwijzingen (opgenomen)</string>
     <string name="local_indexes_cat_tile">Online en opgeslagen tegelkaarten</string>
     <string name="local_indexes_cat_map">Normale kaarten (vector)</string>
-    <string name="local_indexes_cat_poi">Interessepunt-gegevens</string>
+    <string name="local_indexes_cat_poi">POI-gegevens</string>
     <string name="ttsvoice">Stemmen van spraaksynthese</string>
     <string name="search_offline_clear_search">Nieuwe zoekactie</string>
     <string name="map_text_size_descr">Tekstgrootte voor namen op de kaart:</string>
@@ -225,23 +225,23 @@
     <string name="gpx_option_from_start_point">Volg de gehele track</string>
     <string name="switch_to_vector_map_to_see">Offline vectorkaart aanwezig voor deze locatie.
 \n\t\n\tOm deze te gebruiken, kies \'Menu\' → \'Kaart instellen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'.</string>
-    <string name="choose_audio_stream">Audiokanaal stembegeleiding</string>
+    <string name="choose_audio_stream">Audiokanaal voor stembegeleiding</string>
     <string name="choose_audio_stream_descr">Audiokanaal voor de stembegeleiding kiezen.</string>
     <string name="voice_stream_voice_call">Telefoonoproep-kanaal (onderbreekt Bluetooth autoradio)</string>
     <string name="voice_stream_notification">als melding</string>
     <string name="voice_stream_music">Media/navigatie audiokanaal</string>
     <string name="warning_tile_layer_not_downloadable">Kaartlaag %1$s kan niet worden gedownload. Probeer deze opnieuw te installeren.</string>
-    <string name="overlay_transparency_descr">Regel overlay-transparantie.</string>
-    <string name="overlay_transparency">Overlay-transparantie</string>
+    <string name="overlay_transparency_descr">Regel de transparantie van extra kaartlagen.</string>
+    <string name="overlay_transparency">Transparantie van extra kaartlaag</string>
     <string name="map_transparency_descr">Regel basiskaart-transparantie.</string>
     <string name="map_transparency">Basiskaart-transparantie</string>
     <string name="modify_transparency">Wijzig transparantie (0 = transparant, 255 = volledig bedekt)</string>
-    <string name="layer_underlay">Underlay-kaart…</string>
-    <string name="map_underlay">Underlay kaart</string>
-    <string name="map_underlay_descr">Kies underlay-kaart</string>
-    <string name="layer_overlay">Overlay kaart…</string>
-    <string name="map_overlay">Overlay kaart</string>
-    <string name="map_overlay_descr">Kies overlay-kaart</string>
+    <string name="layer_underlay">Achtergrondkaart…</string>
+    <string name="map_underlay">Achtergrondkaart</string>
+    <string name="map_underlay_descr">Kies achtergrondkaart</string>
+    <string name="layer_overlay">Extra kaartlaag…</string>
+    <string name="map_overlay">Extra kaartlaag</string>
+    <string name="map_overlay_descr">Kies de extra kaartlaag</string>
     <string name="tile_source_already_installed">Kaart is al geïnstalleerd, instellingen worden geactualiseerd.</string>
     <string name="select_tile_source_to_install">Kies (raster)kaarten om te installeren of te updaten.</string>
     <string name="internet_not_available">De benodigde internetverbinding voor deze actie is niet beschikbaar.</string>
@@ -294,15 +294,15 @@
     <string name="amenity_type_transportation">Openbaar Vervoer</string>
     <string name="indexing_address">Adres wordt geïndexeerd…</string>
     <string name="indexing_map">Kaart wordt geïndexeerd…</string>
-    <string name="indexing_poi">Interessepunten worden geïndexeerd…</string>
+    <string name="indexing_poi">POI’s worden geïndexeerd…</string>
     <string name="indexing_transport">OV wordt geïndexeerd…</string>
     <string name="km">km</string>
     <string name="km_h">km/u</string>
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">Verouderd kaartformaat \'\'{0}\'\' wordt niet ondersteund</string>
     <string name="poi_filter_car_aid">Auto hulp</string>
-    <string name="poi_filter_closest_poi">Interessepunten in de buurt</string>
-    <string name="poi_filter_custom_filter">Eigen filter</string>
+    <string name="poi_filter_closest_poi">POI’s in de buurt</string>
+    <string name="poi_filter_custom_filter">Aangepast filter</string>
     <string name="poi_filter_food_shop">Eten en drinken (winkel)</string>
     <string name="poi_filter_for_tourists">Voor toeristen</string>
     <string name="poi_filter_fuel">Brandstof</string>
@@ -333,7 +333,7 @@
     <string name="download_files_question">Download {0} bestand(en) ({1} MB)?</string>
     <string name="items_were_selected">{0} item(s) geselecteerd</string>
     <string name="filter_existing_indexes">Toon gedownloade</string>
-    <string name="fast_route_mode">Snelle route</string>
+    <string name="fast_route_mode">Snelste route</string>
     <string name="fast_route_mode_descr">Activeer voor de snelste route of deactiveer voor een zuinige route.</string>
     <string name="tiles_to_download_estimated_size">Op zoom {0} omvat de download {1} kaartsegmenten ({2} MB)</string>
     <string name="shared_string_download_map">Download kaart</string>
@@ -366,8 +366,8 @@
     <string name="error_reading_gpx">Fout bij het lezen van GPX-gegevens.</string>
     <string name="vector_data">OsmAnd Offline vectorkaart</string>
     <string name="transport_context_menu">Zoek Openbaar Vervoer bij halte</string>
-    <string name="poi_context_menu_modify">Wijzig Interessepunt</string>
-    <string name="poi_context_menu_delete">Verwijder Interessepunt</string>
+    <string name="poi_context_menu_modify">Wijzig POI</string>
+    <string name="poi_context_menu_delete">Verwijder POI</string>
     <string name="rotate_map_compass_opt">Volgens kompas</string>
     <string name="rotate_map_bearing_opt">In beweegrichting</string>
     <string name="rotate_map_none_opt">Niet roteren (noorden boven)</string>
@@ -381,16 +381,16 @@
     <string name="error_occurred_loading_gpx">Fout tijdens laden van GPX.</string>
     <string name="send_report">Stuur rapport</string>
     <string name="none_region_found">Geen offline-gegevens voor regio gevonden op de SD kaart. Download regio\'s van het internet.</string>
-    <string name="poi_namefinder_query_empty">Type een zoekwoord om een interessepunt te vinden</string>
+    <string name="poi_namefinder_query_empty">Typ een zoekterm om een POI te vinden</string>
     <string name="any_poi">Alle</string>
     <string name="thanks_yandex_traffic">Met dank aan Yandex voor de verkeersinformatie.</string>
     <string name="layer_yandex_traffic">Yandex Traffic</string>
     <string name="layer_route">Route</string>
     <string name="layer_osm_bugs">OSM-Opmerkingen (online)</string>
-    <string name="layer_poi">Interessepunt…</string>
+    <string name="layer_poi">Kaartlaag met POI’s…</string>
     <string name="layer_map">Basiskaart…</string>
     <string name="menu_layers">Kaartlagen</string>
-    <string name="context_menu_item_search_poi">Zoek Interessepunt</string>
+    <string name="context_menu_item_search_poi">Zoek naar POI</string>
     <string name="use_trackball_descr">Gebruik trackball om de kaart te verschuiven.</string>
     <string name="use_trackball">Gebruik trackball</string>
     <string name="background_service_wait_int_descr">Maximum wachttijd voor elke achtergrond positiebepaling.</string>
@@ -424,10 +424,10 @@
     <string name="unzipping_file">Bestand wordt uitgepakt…</string>
     <string name="route_tr">Sla rechtsaf en volg</string>
     <string name="route_tshr">Sla scherp rechtsaf en volg</string>
-    <string name="route_tslr">Sla licht rechtsaf en volg</string>
+    <string name="route_tslr">Buig af naar rechts en volg</string>
     <string name="route_tl">Sla linksaf en volg</string>
     <string name="route_tshl">Sla scherp linksaf en volg</string>
-    <string name="route_tsll">Sla licht linksaf en volg</string>
+    <string name="route_tsll">Buig linksaf en volg</string>
     <string name="route_tu">Keer om en volg</string>
     <string name="route_head">Volg</string>
     <string name="first_time_continue">Ga door</string>
@@ -458,12 +458,12 @@
     <string name="show_transport_over_map_description">Toon Haltes Openbaar Vervoer op kaart.</string>
     <string name="show_transport_over_map">Toon Haltes Openbaar Vervoer</string>
     <string name="hello">Navigatieprogamma OsmAnd</string>
-    <string name="update_poi_success">Interessepunt-gegevens succesvol vernieuwd ({0} geladen)</string>
-    <string name="update_poi_error_local">Fout bij het vernieuwen van de interessepunten.</string>
+    <string name="update_poi_success">POI-gegevens zijn vernieuwd ({0} geladen)</string>
+    <string name="update_poi_error_local">Fout bij het vernieuwen van lokaal opgeslagen POI-gegevens.</string>
     <string name="update_poi_error_loading">Fout bij het laden van gegevens van server.</string>
-    <string name="update_poi_no_offline_poi_index">Geen offline interessepunten beschikbaar voor dit gebied</string>
-    <string name="update_poi_is_not_available_for_zoom">Het vernieuwen van interessepunten is niet beschikbaar bij lage zoomniveaus</string>
-    <string name="context_menu_item_update_poi">Interessepunt bijwerken</string>
+    <string name="update_poi_no_offline_poi_index">Geen POI-gegevens beschikbaar voor dit gebied</string>
+    <string name="update_poi_is_not_available_for_zoom">Zoom in on POI’s te kunnen bijwerken</string>
+    <string name="context_menu_item_update_poi">POI bijwerken</string>
     <string name="context_menu_item_update_map_confirm">Lokale gegevens via internet bijwerken?</string>
     <string name="search_history_city">Plaats: {0}</string>
     <string name="search_history_street">Straat: {0}, {1}</string>
@@ -498,12 +498,12 @@
     <string name="follow">Start route begeleiding</string>
     <string name="recalculate_route_to_your_location">Soort vervoer:</string>
     <string name="mark_final_location_first">Kies eerst een bestemming</string>
-    <string name="get_directions">Routebeschrijving</string>
+    <string name="get_directions">Route</string>
     <string name="opening_hours">Openingstijden</string>
     <string name="opening_changeset">Wijzigingsset openen…</string>
     <string name="closing_changeset">Wijzigingsset sluiten…</string>
     <string name="commiting_node">Punt wordt vastgelegd…</string>
-    <string name="loading_poi_obj">Interessepunt wordt geladen…</string>
+    <string name="loading_poi_obj">POI wordt geladen…</string>
     <string name="auth_failed">Authorisatie mislukt</string>
     <string name="failed_op">mislukt</string>
     <string name="converting_names">Converteer plaatselijke/Engelse namen…</string>
@@ -511,7 +511,7 @@
     <string name="loading_postcodes">Postcodes worden geladen…</string>
     <string name="loading_streets">Straten worden geladen…</string>
     <string name="loading_cities">Steden worden geladen…</string>
-    <string name="poi">Interessepunt</string>
+    <string name="poi">POI</string>
     <string name="error_occurred_saving_gpx">Fout bij het opslaan van GPX-bestand.</string>
     <string name="error_calculating_route">Fout bij routeberekening.</string>
     <string name="error_calculating_route_occured">Fout bij routeberekening.</string>
@@ -554,9 +554,9 @@
     <string name="show_view_angle">Toon kijkrichting</string>
     <string name="map_view_3d_descr">Activeer 3D kaartbeeld.</string>
     <string name="map_view_3d">Kaartbeeld 3D</string>
-    <string name="show_poi_over_map_description">Toon laatst gebruikte interessepunten overlay.</string>
-    <string name="show_poi_over_map">Toon Interessepunten</string>
-    <string name="map_tile_source_descr">Kies bron van online of opgeslagen kaartsegmenten</string>
+    <string name="show_poi_over_map_description">Toon laatst gebruikte POI-kaartlaag.</string>
+    <string name="show_poi_over_map">Toon POI-kaartlaag</string>
+    <string name="map_tile_source_descr">Kies bron van online of gecachte kaartsegmenten.</string>
     <string name="map_tile_source">Kaartsegment bron</string>
     <string name="map_source">Kaartbron</string>
     <string name="use_internet">Gebruik internet</string>
@@ -566,7 +566,7 @@
     <string name="app_description">Navigatieprogramma</string>
     <string name="search_button">Zoeken</string>
     <string name="search_activity">Zoeken</string>
-    <string name="searchpoi_activity">Kies Interessepunt</string>
+    <string name="searchpoi_activity">Kies POI</string>
     <string name="search_POI_level_btn">Zoek meer</string>
     <string name="incremental_search_city">Zoek plaats</string>
     <string name="incremental_search_street">Zoek naar straatnaam</string>
@@ -594,7 +594,7 @@
     <string name="search_address_building_option">Gebouw</string>
     <string name="search_address_street_option">Zijstraat</string>
     <string name="context_menu_item_update_map">Kaart bijwerken</string>
-    <string name="context_menu_item_create_poi">OSM-Interessepunt aanmaken</string>
+    <string name="context_menu_item_create_poi">POI aanmaken</string>
     <string name="add_favorite_dialog_top_text">Geef de favoriet een naam</string>
     <string name="add_favorite_dialog_default_favourite_name">Favoriet</string>
     <string name="add_favorite_dialog_favourite_added_template">Favoriet \'\'{0}\'\' is toegevoegd.</string>
@@ -606,11 +606,11 @@
     <string name="osb_comment_dialog_author">Naam auteur</string>
     <string name="osb_comment_dialog_success">Commentaar is toegevoegd</string>
     <string name="osb_comment_dialog_error">Kon geen commentaar toevoegen.</string>
-    <string name="poi_edit_title">Bewerk Interessepunt</string>
-    <string name="poi_create_title">OSM-Interessepunt aanmaken</string>
+    <string name="poi_edit_title">POI wijzigen</string>
+    <string name="poi_create_title">POI aanmaken</string>
     <string name="poi_error_poi_not_found">Punt niet gevonden of voorziening bestaat uit meerdere punten, wat nog niet ondersteund wordt.</string>
     <string name="poi_remove_confirm_template">Verwijderen {0} (geef commentaar)?</string>
-    <string name="poi_remove_title">Verwijder Interessepunt</string>
+    <string name="poi_remove_title">POI verwijderen</string>
     <string name="poi_remove_success">Verwijderd</string>
     <string name="poi_action_add">voeg toe</string>
     <string name="poi_action_change">wijzigen</string>
@@ -620,7 +620,7 @@
     <string name="poi_error_info_not_loaded">Info over punt niet geladen</string>
     <string name="poi_dialog_opening_hours">Openingstijden</string>
     <string name="poi_dialog_comment">Commentaar</string>
-    <string name="poi_dialog_comment_default">Interessepunt aangepast</string>
+    <string name="poi_dialog_comment_default">POI gewijzigd</string>
     <string name="poi_dialog_other_tags_message">Alle andere tags blijven bewaard</string>
     <string name="default_buttons_commit">Bevestigen</string>
     <string name="filter_current_poiButton">Filter</string>
@@ -639,18 +639,18 @@
     <string name="map_online_data_descr">Gebruik online kaarten (download en bewaar deze op SD-kaart).</string>
     <string name="shared_string_online_maps">Online kaarten</string>
     <string name="online_map_settings_descr">Configureer online of bewaarde kaarttegels.</string>
-    <string name="osmand_rastermaps_plugin_description">Geeft toegang tot vele soorten online (zogenaamde tegel of raster) kaarten, van vooraf gedefinieerde OpenStreetMap tegels (zoals Mapnik) tot satellietbeelden en lagen voor speciale doeleinden zoals weerkaarten, klimaatkaarten, geologische kaarten, reliëflagen, enz. 
+    <string name="osmand_rastermaps_plugin_description">Geeft toegang tot vele soorten online (zogenaamde tile of raster) kaarten, van vooraf gedefinieerde OSM tiles (zoals Mapnik) tot satellietbeelden en lagen voor speciale doeleinden zoals weerkaarten, klimaatkaarten, geologische kaarten, reliëfschaduwlagen, enz. 
 \n 
-\nAl deze kaarten kunnen worden gebruikt als de hoofd(basis)kaart, of als een extra laag of een achtergrondlaag bij een andere basiskaart (zoals de normale offline kaarten van OsmAnd). Om een achtergrondlaag beter te kunnen zien, kunt u elementen van de OsmAnd kaarten eenvoudig verbergen via het menu \'Kaart instellen\'. 
+\nAl deze kaarten kunnen worden gebruikt als de hoofd(basis)kaart, of als een extra laag of een achtergrondlaag bij een andere basiskaart (zoals de normale offline kaarten van OsmAnd). Om een achtergrondlaag beter te kunnen zien, kunt u elementen van de OsmAnd vectorkaarten eenvoudig verbergen via het menu \'Kaart instellen\'. 
 \n 
-\nTegelkaarten zijn direct via online bronnen verkrijgbaar of kunnen voor offline gebruik gereedgemaakt worden (en handmatig gekopieerd naar de OsmAnd gegevensmap) als SQLite database door diverse hulpprogramma\'s van derden.</string>
+\nRasterkaarten zijn direct via online bronnen verkrijgbaar of kunnen voor offline gebruik gereedgemaakt worden (en handmatig gekopieerd naar de OsmAnd gegevensmap) als SQLite database door diverse hulpprogramma\'s van derden.</string>
     <string name="osmand_background_plugin_description">Instellingen om tracking en navigatie te kunnen gebruiken met het scherm uit (schakelt de GPS periodiek in).</string>
     <string name="osmand_accessibility_description">Deze plug-in maakt de toegankelijkheids-opties van uw toestel beschikbaar in OsmAnd. Het vergemakkelijkt o.a. het aanpassen van de spreeksnelheid van tekst-naar-spraak stemmen, het configureren van D-pad scherm navigatie door gebruik van een trackbal voor zoomregeling of het gebruiken van tekst-naar-spraak opties voor het automatisch aankondigen van uw positie.</string>
     <string name="osmand_development_plugin_description">Deze plug-in toont de instellingen voor ontwikkel- en debug-opties, zoals routetest en -simulatie, schermweergave-prestaties, en spraaksturing. Deze instellingen zijn bedoeld voor programmeurs die OsmAnd willen verbeteren en zijn niet nodig voor normaal gebruik.</string>
     <string name="plugins_screen">Plugins beheren</string>
     <string name="prefs_plugins_descr">Schakel plugins in voor speciale functies en extra instellingen.</string>
     <string name="prefs_plugins">Plugin-manager</string>
-    <string name="osm_editing_plugin_description">Gebruik deze plugin om bij te dragen aan OpenStreetMap (OSM), bijvoorbeeld door het aanmaken of wijzigen van OSM-interessepunten, aanmaken of becommentariëren van OSM-opmerkingen, en door GPX-tracks te uploaden. OSM is een wereldwijd community-driven project om een wereldwijde kaart te maken. Voor details zie https://openstreetmap.org. Actieve deelnemers zijn welkom, en bijdragen kunnen direct vanuit OsmAnd worden gemaakt, zodra uw OSM-aanmeldgegevens zijn ingevuld in de app.</string>
+    <string name="osm_editing_plugin_description">Draag actief bij aan OSM, bijvoorbeeld door het aanmaken of wijzigen van OSM-POI-objecten, aanmaken of becommentariëren van OSM-opmerkingen, en door GPX-tracks te uploaden die met OsmAnd zijn opgenomen door uw gebruikersnaam en wachtwoord in te voeren. OpenStreetMap.org is een gemeenschappelijk public domain project om de wereld in kaart te brengen.</string>
     <string name="north_north_west">noord-noordwest</string>
     <string name="search_position_current_location_search">Positie zoeken…</string>
     <string name="search_position_current_location_found">Huidige Positie (gevonden)</string>
@@ -659,7 +659,7 @@
     <string name="search_position_undefined">Ongedefinieerd</string>
     <string name="local_index_routing_data">Navigatiedata</string>
     <string name="navigate_point_format">Formaat</string>
-    <string name="poi_search_desc">Zoek Interessepunt (POI)</string>
+    <string name="poi_search_desc">Zoek POI (interessepunt)</string>
     <string name="address_search_desc">Adres zoeken</string>
     <string name="navpoint_search_desc">Coördinaten</string>
     <string name="transport_search_desc">Openbaar Vervoer zoeken</string>
@@ -707,7 +707,7 @@
     <string name="global_app_allocated_memory_descr">Beschikbaar werkgeheugen %1$s MB (Android limiet %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Beschikbaar werkgeheugen</string>
     <string name="native_app_allocated_memory_descr">Werkgeheugen, gereserveerd door app %1$s MB (Dalvik %2$s MB, overig %3$s MB).
-Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</string>
+\n Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Totaal werkgeheugen</string>
     <string name="select_animate_speedup">Snelheid van de routesimulatie:</string>
     <string name="osmand_parking_hours">Uur</string>
@@ -744,7 +744,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="bg_service_sleep_mode_off">Start\nachtergrondmodus</string>
     <string name="bg_service_sleep_mode_on">Stop\nachtergrondmodus</string>
     <string name="email">email</string>
-    <string name="filterpoi_activity">Creëer interessepuntfilter</string>
+    <string name="filterpoi_activity">Creëer POI-filter</string>
     <string name="select_navigation_mode">Kies vervoerwijze:</string>
     <string name="day_night_info_description">Zonsopgang: %1$s \nZonsondergang: %2$s</string>
     <string name="day_night_info">Dag/nacht info</string>
@@ -752,44 +752,51 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="map_widget_renderer">Kaartstijl</string>
     <string name="osmand_short_description_80_chars">Wereldwijde kaartweergave en navigatie voor offline en online OSM-kaarten</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met online en offline kaarten</string>
-    <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions)
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
-\nOsmAnd is een open-source navigatie-applicatie die toegang geeft tot een uitgebreide variëteit aan wereldwijde OpenStreetMap (OSM) gegevens. Alle kaartgegevens (vector- of rasterkaarten) kunnen in het telefoongeheugen worden opgeslagen voor offline gebruik. OsmAnd biedt zowel offline als online route-aanwijzingen met stembegeleiding. 
+\n OsmAnd is een open-source navigatie-app die toegang geeft tot een grote variëteit aan wereldwijde OSM-gegevens. Alle kaartgegevens (vector- of rasterkaarten) kunnen in het telefoongeheugen worden opgeslagen voor offline gebruik. OsmAnd biedt ook zowel offline als online routeaanwijzingen, met stembegeleiding.
 \n
-\n Enkele van de mogelijkheden:
-\n - Volledig offline gebruik (met gedownloade vector- of rasterkaarten)
+\n Enkele van de belangrijkste mogelijkheden:
+\n - Volledig offline gebruik (gedownloade vector- of rasterkaarten worden opgeslagen op het apparaat)
 \n - Compacte offline vectorkaarten van de hele wereld zijn beschikbaar
-\n - Kaarten van landen of regio\'s direct downloadbaar via de app
-\n - Meerdere kaartlagen mogelijk, zoals GPX- of navigatietracks, interessepunten (points of interest), favorieten, hoogtelijnen, haltes openbaar vervoer, aanvullende kaarten met instelbare transparantie
-\n - Offline zoeken naar adressen en plaatsen
-\n - Offline route-aanwijzingen voor auto, fiets, en voetganger, keuze uit:
-\n     - optioneel automatische dag/nacht-weergave
-\n     - optioneel snelheidsafhankelijk inzoomen
-\n     - optionele kaartoriëntatie volgens kompas of bewegingsrichting
-\n     - optionele rijstrookinformatie, snelheidslimiet, opgenomen- en TTS-stemmen.
+\n - Kaarten van landen of regio\'s zijn direct via de app te downloaden
+\n - Meerdere extra kaartlagen mogelijk, zoals GPX- of navigatietracks, POI’s (points of interest), Favorieten, hoogtelijnen, OV-haltes, aanvullende kaarten met instelbare transparantie
+\n - Offline zoeken naar adressen en plaatsen (POI’s)
+\n - Offline routeberekening voor middellange afstanden
+\n - Modus voor auto, fiets, en voetganger, met optioneel:
+\n - Automatisch schakelen tussen dag- en nachtweergave
+\n - Snelheidsafhankelijk in- en uitzoomen van de kaart
+\n - Kaartoriëntatie volgens kompas of bewegingsrichting
+\n - Rijstrookinformatie, snelheidslimiet, stembegeleiding met opgenomen- en TTS-stemmen
 \n
-\n Beperkingen van de gratis versie van OsmAnd:
+\n Beperkingen van deze gratis versie van OsmAnd:
 \n - Beperkt aantal kaartdownloads
-\n - Geen toegang tot Wikipedia offline POI\'s.
+\n - Geen toegang tot offline Wikipedia POI\'s. 
 \n
-\n OsmAnd wordt actief ontwikkeld en de verdere vooruitgang van het project is afhankelijk van financiële bijdragen om de ontwikkeling en toetsing van nieuwe functionaliteit te kunnen bekostigen. Wij verzoeken je om OsmAnd+ te kopen, of om een donatie over te maken via osmand.net. "</string>
-    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions)
+\n OsmAnd wordt actief ontwikkeld en ons project en de verdere vooruitgang ervan is afhankelijk van
+\nfinanciële bijdragen om de ontwikkeling en testen van nieuwe functionaliteit te kunnen bekostigen.
+\nWij verzoeken je om OsmAnd+ te kopen, of om een donatie over te maken via https://osmand.net.</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
+\n 
+\nOsmAnd+ is een open-source app voor navigatie die gebruikmaakt van de wereldwijde verzameling van OSM-gegevens. Alle kaartmateriaal (vector- en rasterkaarten) kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. De app biedt ook offline- en online-navigatie, met stembegeleiding. 
+\n 
+\n OsmAnd+ is de betaalde versie, door deze te kopen ondersteun je het project, betaal je mee aan nieuwe ontwikkelingen, en ontvang je de laatste updates. 
+\n 
+\n Een aantal van de belangrijkste eigenschappen: 
+\n - Complete functionaliteit zonder internetverbinding (vector- en rasterkaarten kunnen op het apparaat opgeslagen worden)
+\n - Compacte offline vectorkaarten beschikbaar voor de hele wereld
+\n - Onbeperkt downloaden van kaarten van landen of regio’s, rechtstreeks vanuit de app
+\n - Offline Wikipedia functie (download Wikipedia-POI’s), geweldig voor sightseeing
+\n - Meerdere extra kaartlagen beschikbaar, zoals GPX-tracks of routes, POI’s (interessepunten), Favorieten, hoogtelijnen en OV-haltes, met instelbare transparantie
 \n
-\nOsmAnd is een open-source navigatie- en kaartsysteem dat gebruikmaakt van de grote verzameling OpenStreetMap-gegevens. Alle kaartgegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt zowel offline als online navigatie met stembegeleiding.
-\n
-\n OsmAnd+ is de betaalde versie. Door deze te kopen ondersteun je het project, betaal je mee aan nieuwe ontwikkelingen, en ontvang je de laatste updates.
-\n
-\n Belangrijke eigenschappen:
-\n - Complete functionaliteit zonder internetverbinding
-\n - Onbeperkt downloaden van offline-kaarten
-\n - Compacte vectorkaarten voor de gehele wereld
-\n - Download Wikipedia-interessepunten voor toerisme
-\n - Offline zoeken naar adressen en plaatsen (POI)
-\n - Offline routeberekening voor tot ca. 250 km 
-\n - Navigatie voor auto / fiets / voetganger
-\n - Stembegeleiding, rijstrookindicatie en snelheidswaarschuwingen
-\n - Meerdere kaartlagen voor POI, afgelegde weg, favorieten, hoogtelijnen, OV-haltes en extra kaarten
-\n - Automatisch draaien en zoomen van de kaart "</string>
+\n - Offline zoeken naar adressen en plaatsen (POI’s) 
+\n - Offline routeberekening voor middellange afstanden
+\n - Navigatie voor auto, fiets en voetganger met optioneel:
+\n - Automatisch schakelen tussen dag- en nachtmodus
+\n - Snelheidsafhankelijk in- en uitzoomen van de kaart
+\n - Kaartoriëntatie op basis van kompas- of bewegingsrichting
+\n - Rijstrookindicatie, snelheidswaarschuwingen en stembegeleiding met opgenomen- en TTS-stemmen
+\n</string>
     <string name="avoid_motorway">Geen snelwegen</string>
     <string name="snap_to_road_descr">Positie op de weg uitlijnen tijdens navigatie.</string>
     <string name="snap_to_road">Positie op de weg uitlijnen</string>
@@ -818,7 +825,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="map_widget_monitoring_services">Registratiediensten</string>
     <string name="no_route">Geen route</string>
     <string name="delete_target_point">Bestemming wissen</string>
-    <string name="intermediate_point">"Tussenpunt  %1$s"</string>
+    <string name="intermediate_point">Tussenpunt %1$s</string>
     <string name="gps_not_available">Schakel GPS in via de instellingen</string>
     <string name="map_widget_show_destination_arrow">Richting van de bestemming tonen</string>
     <string name="enable_plugin_monitoring_services">Activeer de GPX-Track opnemen- Plugin om de afgelegde weg vast te leggen (GPX-track, online tracking)</string>
@@ -846,25 +853,25 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9).</string>
     <string name="index_srtm_parts">gedeelten</string>
     <string name="index_srtm_ele">Hoogtelijnen</string>
-    <string name="srtm_plugin_description">Deze plug-in toont de hoogtelijnen en reliëflaag bovenop de normale kaart. Uitermate praktisch voor sporters, wandelaars, verre tochten, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap. (Een bijkomende download is noodzakelijk om deze te activeren.)
+    <string name="srtm_plugin_description">Deze plug-in toont hoogtelijnen en een reliëfschaduwlaag bovenop de normale OsmAnd-kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap. 
 \n 
-\nDe wereldwijde gegevens (van 70 graden noorderbreedte tot 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems).</string>
+\nDe wereldwijde gegevens (van 70° noorderbreedte tot 70° zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de Terra-satelliet, het vlaggenschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
     <string name="srtm_plugin_name">Hoogtelijnen</string>
     <string name="download_select_map_types">Andere kaarten</string>
     <string name="download_srtm_maps">Hoogtelijnen</string>
     <string name="audionotes_plugin_description">Maak audio-, foto-, video-notities tijdens een reis door gebruik te maken van een knop op de kaart of de locatie context menu.</string>
     <string name="audionotes_plugin_name">Audio-/videonotities</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin voor offline hoogtelijnen</string>
-    <string name="osmand_srtm_long_description_1000_chars">Deze plug-in toont de hoogtelijnen en reliëflaag bovenop de normale kaart. Uitermate praktisch voor sporters, wandelaars, verre tochten, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap. 
+    <string name="osmand_srtm_long_description_1000_chars">Deze plug-in toont hoogtelijnen en een reliëfschaduwlaag bovenop de normale OsmAnd-kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap. 
 \n 
-\nDe wereldwijde gegevens (van 70 graden noorderbreedte tot 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems).</string>
+\n De wereldwijde gegevens (van 70° noorderbreedte tot 70° zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de Terra-satelliet, het vlaggenschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Afstandsmeting</string>
     <string name="audionotes_location_not_defined">Schakel \'locatie\' in om een notitie aan de locatie toe te voegen.</string>
     <string name="map_widget_audionotes">Audionotities</string>
     <string name="recording_is_recorded">Audio/video wordt opgenomen. Om te stoppen, tik op het AV-widget.</string>
     <string name="recording_playing">Een geluidsfragment van de gekozen opname wordt afgespeeld.\n%1$s</string>
     <string name="recording_open_external_player">Externe speler openen</string>
-    <string name="recording_delete_confirm">Wil je deze opname wissen?</string>
+    <string name="recording_delete_confirm">Wil je dit object verwijderen\?</string>
     <string name="recording_unavailable">niet beschikbaar</string>
     <string name="recording_context_menu_arecord">Audionotitie opnemen</string>
     <string name="recording_context_menu_vrecord">Videonotitie opnemen</string>
@@ -902,7 +909,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="precise_routing_mode">Nauwkeurige routeberekening (alpha)</string>
     <string name="local_indexes_cat_av">Audio/video-gegevens</string>
     <string name="support_new_features_descr">Doe een donatie om OsmAnd uit te laten breiden met nieuwe functies.</string>
-    <string name="download_hillshade_maps">Reliëfschaduwkaarten</string>
+    <string name="download_hillshade_maps">Reliëfschaduwen</string>
     <string name="av_use_external_camera_descr">Gebruik de systeemapplicatie voor foto\'s.</string>
     <string name="av_use_external_camera">Gebruik de camera-applicatie</string>
     <string name="index_name_openmaps">OpenMaps.eu</string>
@@ -915,7 +922,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="item_unchecked">niet aangevinkt</string>
     <string name="access_arrival_time">Aankomsttijd</string>
     <string name="map_widget_gps_info">GPS info</string>
-    <string name="layer_hillshade">Reliëfweergavelaag</string>
+    <string name="layer_hillshade">Reliëfschaduwlaag</string>
     <string name="osmand_play_title_30_chars">OsmAnd Kaarten &amp; Navigatie</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Kaarten &amp; Navigatie</string>
     <string name="hno">Huisnummer</string>
@@ -988,8 +995,8 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="clear_intermediate_points">Wis Tussenpunten</string>
     <string name="keep_intermediate_points">Bewaar Tussenpunten</string>
     <string name="new_directions_point_dialog">Er zijn al Tussenpunten gemaakt.</string>
-    <string name="context_menu_item_directions_to">Routebeschrijving naar</string>
-    <string name="context_menu_item_directions_from">Routebeschrijving vanaf</string>
+    <string name="context_menu_item_directions_to">Route naar</string>
+    <string name="context_menu_item_directions_from">Route vanaf</string>
     <string name="route_descr_map_location">Kaart: </string>
     <string name="route_to">Naar:</string>
     <string name="route_via">Via:</string>
@@ -1029,7 +1036,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="auto_zoom_far">Zoom naar gemiddelde afstand</string>
     <string name="auto_zoom_farthest">Zoom naar grote afstand</string>
     <string name="animate_routing_route_not_calculated">Gelieve eerst de route te berekenen</string>
-    <string name="animate_routing_route">"Routesimulatie met de berekende route "</string>
+    <string name="animate_routing_route">Routesimulatie met de berekende route</string>
     <string name="animate_routing_gpx">Routesimulatie met een GPX-track</string>
     <string name="local_osm_changes_delete_all_confirm">Bent u zeker om %1$d OSM-wijzigingen te verwijderen\?</string>
     <string name="app_mode_hiking">Wandelsport</string>
@@ -1133,10 +1140,10 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="share_route_as_gpx">Deel route als GPX-bestand</string>
     <string name="share_route_subject">Route gedeeld via OsmAnd</string>
     <string name="navigation_intent_invalid">Ongeldig formaat: %s</string>
-    <string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
+    <string name="keep_informing_never">Alleen handmatig (tik op de pijl)</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig.</string>
-    <string name="keep_informing">Herhaal de aanwijzingen</string>
-    <string name="arrival_distance">Aankondigen van de bestemming</string>
+    <string name="keep_informing">Herhaal de routeaanwijzingen</string>
+    <string name="arrival_distance">Aankondiging van de bestemming</string>
     <string name="arrival_distance_descr">Wanneer melden dat de bestemming bereikt is?</string>
     <string name="share_fav_subject">Via OsmAnd gedeelde favorieten</string>
     <string name="use_points_as_intermediates">Bereken route tussen punten</string>
@@ -1168,7 +1175,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="loading_smth">Laad %1$s…</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
     <string name="select_destination_and_intermediate_points">Instellen bestemmingen</string>
-    <string name="layer_amenity_label">Namen van interessepunten</string>
+    <string name="layer_amenity_label">Extra laag met namen van POI’s</string>
     <string name="shared_string_waypoint">Routepunt</string>
     <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
     <string name="delay_navigation_start">Start navigatie automatisch</string>
@@ -1225,7 +1232,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="pause_navigation">navigatie pauzeren</string>
     <string name="rendering_attr_alpineHiking_name">Alpinewandelschaal (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Paden volgens SAC-schaal kleuren.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Wandelroutes Kleuren</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Extra laag met symbolen van wandelroutes</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Paden speciaal kleuren.</string>
     <string name="rendering_attr_coloredBuildings_name">Gebouwen kleuren per soort</string>
     <string name="arrival_distance_factor_early">Vroegtijdig</string>
@@ -1242,7 +1249,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="shared_string_waypoints">Routepunt(en)</string>
     <string name="way_alarms">Waarschuwingen</string>
     <string name="speak_favorites">Favorieten in de buurt</string>
-    <string name="speak_poi">Interessepunt in de buurt</string>
+    <string name="speak_poi">Dichtbij POI</string>
     <string name="shared_string_all">Alles</string>
     <string name="index_tours">Reizen</string>
     <string name="record_plugin_name">GPX-track opnemen</string>
@@ -1358,8 +1365,8 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="edit_group">Bewerk groep</string>
     <string name="plugin_install_needs_network">Om deze plugin te installeren is een internetverbinding nodig.</string>
     <string name="plugin_nautical_name">Nautische kaartweergave</string>
-    <string name="world_ski_missing">Om skikaarten te kunnen gebruiken, moet u de speciale offline skikaart downloaden</string>
-    <string name="nautical_maps_missing">Om nautische kaarten te kunnen gebruiken, moet u de speciale offline nautische kaart downloaden</string>
+    <string name="world_ski_missing">Download de speciale offline kaart om skifaciliteiten weer te geven.</string>
+    <string name="nautical_maps_missing">Download de speciale offline kaart om nautische details weer te geven.</string>
     <string name="get_plugin">Installeren</string>
     <string name="watch">Bekijk</string>
     <string name="rendering_attr_pisteRoutes_name">Ski-pistes</string>
@@ -1480,7 +1487,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="simulate_your_location">Routesimulatie</string>
     <string name="drawer">Eenvoudige lijst</string>
     <string name="short_location_on_map">Breedtegraad:\t%1$s
-Lengtegraad:\t\t%2$s</string>
+\nLengtegraad: %2$s</string>
     <string name="tips_and_tricks_descr">Veelgestelde vragen, recente wijzigingen en meer.</string>
     <string name="routing_settings_2">Navigatie-instellingen</string>
     <string name="general_settings_2">Algemene instellingen</string>
@@ -1623,7 +1630,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="regions">Regio\'s</string>
     <string name="region_maps">Kaarten van regio\'s</string>
     <string name="world_maps">Wereldkaarten</string>
-    <string name="hillshade_layer_disabled">Reliëfschaduw uitgeschakeld</string>
+    <string name="hillshade_layer_disabled">Reliëfschaduwlaag uitgeschakeld</string>
     <string name="srtm_plugin_disabled">Hoogtelijnen uitgeschakeld</string>
     <string name="favorite_category_add_new">Categorie toevoegen</string>
     <string name="favorite_category_select">Kies categorie</string>
@@ -1663,7 +1670,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="world_map_download_descr">De basis-wereldkaart ontbreekt of is verouderd. Download hem voor wereldwijd overzicht om lage zoomlevels.</string>
     <string name="shared_string_update">Update</string>
     <string name="shared_string_upload">Upload</string>
-    <string name="osm_edit_created_poi">Interessepunt in OSM aangemaakt</string>
+    <string name="osm_edit_created_poi">OSM-POI aangemaakt</string>
     <string name="simulate_initial_startup_descr">Laat de app de volgende keer starten alsof deze net is geïnstalleerd. De instellingen blijven wel behouden.</string>
     <string name="simulate_initial_startup">Simuleer eerste start van de app</string>
     <string name="shared_string_others">Overige</string>
@@ -1711,7 +1718,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="update_all">Alles updaten (%1$s MB)</string>
     <string name="free_downloads_used">Gebruikte gratis downloads</string>
     <string name="free_downloads_used_description">Bekijk hoeveel gratis downloads er al gebruikt zijn.</string>
-    <string name="application_dir_description">"Kies waar kaarten en andere gegevens  opgeslagen worden."</string>
+    <string name="application_dir_description">Kies waar kaarten en andere gegevens opgeslagen worden.</string>
     <string name="show_on_start_description">\'Uit\' toont direct de kaart.</string>
     <string name="enter_country_name">Kies het land</string>
     <string name="new_version">Nieuwe versie</string>
@@ -1748,7 +1755,6 @@ Lengtegraad:\t\t%2$s</string>
     <string name="context_menu_item_open_note">OSM-notitie aanmaken</string>
     <string name="osm_edit_reopened_note">Heropen OSM-notitie</string>
     <string name="osm_edit_commented_note">Becommentarieerde OSM-notitie</string>
-    <string name="osm_edit_removed_note">Verwijderde OSM-notitie</string>
     <string name="osm_edit_created_note">Aangemaakte OSM-notitie</string>
     <string name="osn_bug_name">OSM-notitie</string>
     <string name="osn_add_dialog_title">Maak OSM-notitie aan</string>
@@ -1871,7 +1877,8 @@ Lengtegraad:\t\t%2$s</string>
     <string name="osm_live_not_active">Niet actief</string>
     <string name="osm_live_enter_email">Voer een geldig emailadres in</string>
     <string name="osm_live_enter_user_name">Voer een Openbare Naam in</string>
-    <string name="osm_live_thanks">Bedankt voor je OSM Live Abonnement! Een herstart van OsmAnd is nodig.</string>
+    <string name="osm_live_thanks">Bedankt voor het steunen van OsmAnd!
+\nOm toegang te krijgen tot alle nieuwe functies moet OsmAnd opnieuw gestart worden.</string>
     <string name="osm_live_region_desc">Een gedeelte van je betaling gaat naar OSM-bijdragers in deze regio.</string>
     <string name="osm_live_subscription_settings">Abonnementsgegevens</string>
     <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een abonnement op OsmAnd Live</string>
@@ -1953,7 +1960,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="follow_us">Volg ons</string>
     <string name="access_direction_audio_feedback">Richting aangeven met geluid</string>
     <string name="access_direction_audio_feedback_descr">Geef de richting van de bestemming aan met geluid.</string>
-    <string name="access_direction_haptic_feedback">Richting aangeven met trilling</string>
+    <string name="access_direction_haptic_feedback">Richting aangeven met trillen</string>
     <string name="access_direction_haptic_feedback_descr">Geef de richting van de bestemming aan met trillingen.</string>
     <string name="move_marker_bottom_sheet_title">Verplaats de kaart om de positie van de markering te wijzigen</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
@@ -2005,7 +2012,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="storage_free_space">Vrije geheugenruimte</string>
     <string name="give_permission">Geef toestemming</string>
     <string name="allow_access_location">Toegang tot locatie toestaan</string>
-    <string name="first_usage_greeting">"Krijg routebeschrijvingen en ontdek nieuwe plaatsen,  zonder Internetverbinding"</string>
+    <string name="first_usage_greeting">Krijg routeaanwijzingen en ontdek nieuwe plaatsen, zonder Internetverbinding</string>
     <string name="search_my_location">Vind mijn positie</string>
     <string name="no_update_info">Geen updates tonen</string>
     <string name="clear_tile_data">Alle opgeslagen kaarttegels wissen</string>
@@ -2091,78 +2098,79 @@ Lengtegraad:\t\t%2$s</string>
     <string name="navigate_point_olc">Open Location Code (OLC)</string>
     <string name="navigate_point_olc_info_invalid">Ongeldige OLC
 </string>
-    <string name="navigate_point_olc_info_short">Ongeldige OLC</string>
+    <string name="navigate_point_olc_info_short">OLC te kort
+\nGeef een volledige code</string>
     <string name="navigate_point_olc_info_area">Geldige volledige OLC
-voor Gebied: %1$s x %2$s</string>
+\nBeslaat gebied: %1$s x %2$s</string>
     <string name="configure_screen_quick_action">Sneltoets</string>
-    <string name="quick_action_item_action">Actie %d</string>
+    <string name="quick_action_item_action">Sneltoets %d</string>
     <string name="quick_action_item_screen">Scherm %d</string>
     <string name="quick_action_add_marker">Markeervlaggetje toevoegen</string>
     <string name="quick_action_add_poi">POI toevoegen</string>
-    <string name="quick_action_map_style">Kaartstijl wisselen</string>
+    <string name="quick_action_map_style">Kaartstijl wijzigen</string>
     <string name="quick_action_map_style_switch">De kaartstijl is gewijzigd naar \"%s\".</string>
-    <string name="quick_action_take_audio_note">Audio-notitie maken</string>
-    <string name="quick_action_take_video_note">Video-notitie maken</string>
-    <string name="quick_action_take_photo_note">Maak foto</string>
-    <string name="quick_action_add_osm_bug">Voeg OSM-notitie toe</string>
-    <string name="quick_action_navigation_voice">Stembegeleiding Aan/Uit</string>
-    <string name="quick_action_navigation_voice_off">Stembegeleiding staat uit</string>
-    <string name="quick_action_navigation_voice_on">Stembegeleiding staat aan</string>
-    <string name="quick_action_add_gpx">GPX-routepunt maken</string>
-    <string name="quick_action_add_parking">Parkeerpositie instellen</string>
-    <string name="quick_action_new_action">Actie toevoegen</string>
-    <string name="quick_action_edit_action">Actie bewerken</string>
+    <string name="quick_action_take_audio_note">Audionotitie maken</string>
+    <string name="quick_action_take_video_note">Videonotitie maken</string>
+    <string name="quick_action_take_photo_note">Fotonotitie maken</string>
+    <string name="quick_action_add_osm_bug">OSM-notitie toevoegen</string>
+    <string name="quick_action_navigation_voice">Stembegeleiding aan/uit</string>
+    <string name="quick_action_navigation_voice_off">Stembegeleiding aan</string>
+    <string name="quick_action_navigation_voice_on">Stembegeleiding uit</string>
+    <string name="quick_action_add_gpx">GPX-routepunt toevoegen</string>
+    <string name="quick_action_add_parking">Parkeerlocatie instellen</string>
+    <string name="quick_action_new_action">Sneltoets toevoegen</string>
+    <string name="quick_action_edit_action">Sneltoets bewerken</string>
     <string name="quick_action_add_favorite">Favoriet toevoegen</string>
     <string name="dialog_add_action_title">Actie toevoegen</string>
-    <string name="quick_actions_delete">Actie verwijderden</string>
-    <string name="quick_actions_delete_text">"Actie \"%s\"  inderdaad verwijderen?"</string>
-    <string name="quick_favorites_show_favorites_dialog">Toon favorietenscherm</string>
+    <string name="quick_actions_delete">Sneltoets verwijderen</string>
+    <string name="quick_actions_delete_text">Weet je zeker dat je sneltoets \"%s\" wilt verwijderen\?</string>
+    <string name="quick_favorites_show_favorites_dialog">Toon Favorieten-scherm</string>
     <string name="quick_favorites_name_preset">Naam voorstellen</string>
     <string name="quick_action_add_marker_descr">Een toets om een Markeervlaggetje toe te voegen in het midden van het scherm.</string>
     <string name="quick_action_add_gpx_descr">Een knop om een GPX-routepunt toe te voegen in het midden van het scherm.</string>
-    <string name="quick_action_take_audio_note_descr">Een knop om een Audio-notitie toe te voegen in het midden van het scherm.</string>
-    <string name="quick_action_take_video_note_descr">Een knop om een Video-notitie toe te voegen in het midden van het scherm.</string>
-    <string name="quick_action_take_photo_note_descr">Een knop om een Foto-notitie toe te voegen in het midden van het scherm.</string>
+    <string name="quick_action_take_audio_note_descr">Een knop om een audio-notitie toe te voegen in het midden van het scherm.</string>
+    <string name="quick_action_take_video_note_descr">Een knop om een video-notitie toe te voegen in het midden van het scherm.</string>
+    <string name="quick_action_take_photo_note_descr">Een knop om een foto-notitie toe te voegen in het midden van het scherm.</string>
     <string name="quick_action_add_osm_bug_descr">Een knop om een OSM-notitie toe te voegen in het midden van het scherm.</string>
-    <string name="quick_action_add_poi_descr">Een knop om een interessepunt toe te voegen in het midden van het scherm.</string>
+    <string name="quick_action_add_poi_descr">Een knop om een POI toe te voegen in het midden van het scherm.</string>
     <string name="quick_action_navigation_voice_descr">Een schakelknop om de stembegeleiding aan of uit te zetten tijdens navigatie.</string>
-    <string name="quick_action_add_parking_descr">Een knop om de parkeerpositie toe te voegen in het midden van het scherm.</string>
+    <string name="quick_action_add_parking_descr">Een knop om een parkeerlocatie toe te voegen in het midden van het scherm.</string>
     <string name="quick_action_interim_dialog">Bewerkingsdialoog tonen</string>
     <string name="favorite_autofill_toast_text">" opgeslagen als "</string>
     <string name="favorite_empty_place_name">Plaats</string>
     <string name="quick_action_duplicates">Sneltoetsnaam gewijzigd in %1$s om duplicaat te voorkomen.</string>
     <string name="quick_action_duplicate">Sneltoets-duplicaat</string>
-    <string name="quick_action_showhide_favorites_descr">Een schakelknop toont of verbergt de Favoriete punten op de kaart.</string>
-    <string name="quick_action_showhide_poi_descr">Een schakelknop toont of verbergt de interessepunten op de kaart.</string>
+    <string name="quick_action_showhide_favorites_descr">Een schakelknop om Favorieten al dan niet te tonen op de kaart.</string>
+    <string name="quick_action_showhide_poi_descr">Een schakelknop om POI’s al dan niet op de kaart te tonen.</string>
     <string name="quick_action_showhide_favorites_title">Favorieten tonen /verbergen</string>
-    <string name="quick_action_favorites_show">Toon favorieten</string>
-    <string name="quick_action_favorites_hide">Verberg favorieten</string>
-    <string name="quick_action_showhide_poi_title">POI tonen/verbergen</string>
-    <string name="quick_action_poi_show">Toon %1$s</string>
-    <string name="quick_action_poi_hide">Verberg %1$s</string>
+    <string name="quick_action_favorites_show">Favorieten tonen</string>
+    <string name="quick_action_favorites_hide">Favorieten verbergen</string>
+    <string name="quick_action_showhide_poi_title">POI’s tonen/verbergen</string>
+    <string name="quick_action_poi_show">%1$s tonen</string>
+    <string name="quick_action_poi_hide">%1$s verbergen</string>
     <string name="quick_action_add_category">Categorie toevoegen</string>
     <string name="quick_action_add_create_items">Items aanmaken</string>
-    <string name="quick_action_add_configure_map">Kaart-instellingen</string>
+    <string name="quick_action_add_configure_map">Kaartinstellingen</string>
     <string name="quick_action_add_navigation">Navigatie</string>
-    <string name="quick_action_fav_name_descr">Leeg laten om automatisch adres of plaatsnaam te gebruiken.</string>
-    <string name="quick_action_bug_descr">Dit bericht wordt automatisch aangevuld in het commentaarveld.</string>
+    <string name="quick_action_fav_name_descr">Leeg laten om adres of plaatsnaam te gebruiken.</string>
+    <string name="quick_action_bug_descr">Dit bericht wordt automatisch ingevuld in het commentaarveld.</string>
     <string name="quick_action_bug_message">Bericht</string>
     <string name="quick_action_category_descr">Categorie om de Favoriet in op te slaan:</string>
-    <string name="quick_action_gpx_category_descr">Kies een categorie (optie).</string>
+    <string name="quick_action_gpx_category_descr">Kies een optionele categorie.</string>
     <string name="quick_action_poi_list">POI-lijst</string>
-    <string name="quick_action_sh_poi_descr">Je kunt één of meerdere POI-categorieën kiezen om weer te geven.</string>
+    <string name="quick_action_sh_poi_descr">Je kunt één of meerdere POI-categorieën kiezen om te tonen op de kaart.</string>
     <string name="quick_action_page_list_descr">Een knop om door de onderstaande lijst te bladeren.</string>
     <string name="quick_action_map_style_action">Kaartstijl toevoegen</string>
     <string name="quick_action_empty_param_error">Alle parameters invullen</string>
     <string name="quick_action_map_styles">Kaartstijlen</string>
-    <string name="quick_action_map_overlay">Overlay-kaart wijzigen</string>
-    <string name="quick_action_map_overlay_title">Overlay-kaarten</string>
-    <string name="quick_action_map_overlay_action">Overlay-kaart toevoegen</string>
-    <string name="quick_action_map_overlay_switch">Overlay-kaart is gewijzigd naar \"%s\".</string>
-    <string name="quick_action_map_underlay_switch">Underlay-kaart is gewijzigd naar \"%s\".</string>
-    <string name="quick_action_map_underlay">Underlay-kaart wijzigen</string>
-    <string name="quick_action_map_underlay_title">Underlay-kaarten</string>
-    <string name="quick_action_map_underlay_action">Underlay-kaart toevoegen</string>
+    <string name="quick_action_map_overlay">Extra kaartlaag wijzigen</string>
+    <string name="quick_action_map_overlay_title">Extra kaartlagen</string>
+    <string name="quick_action_map_overlay_action">Extra kaartlaag toevoegen</string>
+    <string name="quick_action_map_overlay_switch">Extra kaartlaag gewijzigd naar \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">Achtergrondkaart is gewijzigd naar \"%s\".</string>
+    <string name="quick_action_map_underlay">Achtergrondkaart wijzigen</string>
+    <string name="quick_action_map_underlay_title">Achtergrondkaarten</string>
+    <string name="quick_action_map_underlay_action">Achtergrondkaart toevoegen</string>
     <string name="quick_action_map_source">Kaartbron wijzigen</string>
     <string name="quick_action_map_source_title">Kaartbronnen</string>
     <string name="quick_action_map_source_action">Kaartbron toevoegen</string>
@@ -2210,17 +2218,17 @@ voor Gebied: %1$s x %2$s</string>
     <string name="select_city">Plaats kiezen</string>
     <string name="select_postcode">Postcode zoeken</string>
     <string name="quick_action_auto_zoom">Autozoom kaart aan/uit</string>
-    <string name="quick_action_auto_zoom_desc">Knop om de automatische kaartzoom volgens de snelheid aan of uit te zetten.</string>
+    <string name="quick_action_auto_zoom_desc">Knop om de snelheidsgebaseerde automatische zoom aan of uit te zetten.</string>
     <string name="quick_action_auto_zoom_on">Autozoom aan</string>
     <string name="quick_action_auto_zoom_off">Autozoom uit</string>
     <string name="quick_action_add_destination">Bestemming instellen</string>
     <string name="quick_action_replace_destination">Bestemming vervangen</string>
-    <string name="quick_action_add_first_intermediate">Eerste Tussenpunt toevoegen</string>
-    <string name="quick_action_add_destination_desc">Een druk op de sneltoets voegt het midden van het scherm toe als bestemming. De vorige bestemming wordt het laatste tussenpunt.</string>
-    <string name="quick_action_replace_destination_desc">Een knop om de bestemming in het schermmidden te plaatsen waardoor de (eventuele) hiervoor geselecteerde bestemming wordt vervangen.</string>
+    <string name="quick_action_add_first_intermediate">Eerste tussenpunt toevoegen</string>
+    <string name="quick_action_add_destination_desc">Een knop om het midden van het scherm in te stellen als bestemming, de vorige bestemming wordt het laatste tussenpunt.</string>
+    <string name="quick_action_replace_destination_desc">Een knop om het midden van het scherm in te stellen als bestemming, waardoor de (eventueel) eerder ingestelde bestemming wordt vervangen.</string>
     <string name="quick_action_add_first_intermediate_desc">Een knop om het midden van het scherm als eerste tussenpunt toe te voegen.</string>
-    <string name="no_overlay">Geen overlay</string>
-    <string name="no_underlay">Geen underlay</string>
+    <string name="no_overlay">Geen extra laag</string>
+    <string name="no_underlay">Geen achtergrondlaag</string>
     <string name="subscribe_email_error">Foutmelding</string>
     <string name="subscribe_email_desc">Abonneer op de mailinglijst voor aanbiedingen en ontvang 3 extra kaart-downloads!</string>
     <string name="depth_contour_descr">Zeedieptecontouren en zeemerkpunten.</string>
@@ -2254,12 +2262,12 @@ voor Gebied: %1$s x %2$s</string>
     <string name="points_delete_multiple_succesful">Punt(en) verwijderd.</string>
     <string name="points_delete_multiple">Wil u echt %1$d punt(en) verwijderen\?</string>
     <string name="route_points_category_name">Afslagen op de route</string>
-    <string name="track_points_category_name">Waypoints, interessepunten, benoemde belangrijke punten</string>
+    <string name="track_points_category_name">Waypoints, POI’s, bekende plaatsen</string>
     <string name="routing_attr_relief_smoothness_factor_name">Selecteer hoogte-schommelingen</string>
     <string name="shared_string_paused">In pauze</string>
     <string name="lang_ber">Berbers</string>
-    <string name="hillshade_menu_download_descr">Download de Reliëfschaduw Overlaykaart om verticale schaduw te tonen.</string>
-    <string name="hillshade_purchase_header">Installeer de Hoogtelijnen-plugin om gegradueerde verticale gebieden te tonen.</string>
+    <string name="hillshade_menu_download_descr">Download ‘Reliëfschaduwkaarten’ om verticale schaduwen te tonen.</string>
+    <string name="hillshade_purchase_header">Installeer de ‘Hoogtelijnen’-plug-in om hoogteverschillen in het terrein te visualiseren.</string>
     <string name="hide_from_zoom_level">Verberg starten vanaf zoom-niveau</string>
     <string name="srtm_menu_download_descr">Download de Hoogtelijnenkaart voor deze regio.</string>
     <string name="shared_string_plugin">Plugin</string>
@@ -2270,23 +2278,30 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_attr_allow_private_description">Ga ook over privé-terreinen.</string>
     <string name="display_zoom_level">Zoomniveau weergave: %1$s</string>
     <string name="route_is_too_long_v2">Voor grote afstanden: voeg tussenpunten toe als binnen de 10 minuten geen route berekend is.</string>
-    <string name="osmand_extended_description_part1">"OsmAnd (OSM, Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratis, wereldwijde en gedetailleerde OpenStreetMap (OSM) data gebruikt. 
-\n  
-\nGebruikt visuele en gesproken navigatie, toont POI\'s (point of interest), maakt en volgt GPX-tracks, toont hoogtelijnen en hoogte informatie (via plug-in), kiest tussen auto, fiets, wandelen of andere, je kan de OSM-kaart bewerken en nog veel meer."</string>
-    <string name="osmand_extended_description_part2">"
- GPS-navigatie
-• Offline (geen datakosten) of online (snellere) routeberekening
-• Stap-voor-stap navigatie met opgenomen stem of gesproken straatnamen
-• Route wordt herberekend wanneer u ervan afwijkt
-• Rijstrookbegeleiding, straatnamen en verwachte aankomsttijd helpen u tijdens de reis
-• Voor de veiligheid: automatische keuze van dag- of nachtweergave
-• Toon maximum snelheid en waarschuw bij overschrijding
-• Kaartgrootte past zich aan bij de snelheid
-• Zoek bestemming op adres, soort (parkeerplaats, restaurant, brandstof, museum) of coördinaten
-• Maak tussenpunten op een reis
-• Neem uw reis op als GPX-spoor of volg een GPX-spoor
- "</string>
-    <string name="osmand_extended_description_part3">Kaart • Toon POI (Points Of Interest) • Draai in de bewegingsrichting (of kompasrichting) • Toont uw positie en waar u naar kijkt • Deel uw lokatie met vrienden • Bewaar belangrijke plaatsen in Favorieten • Toon namen in Engelse, lokale, of fonetische schrijfwijze • Toon extra informatie, zoals satellietfoto (van Bing), GPX-sporen, andere kaartstijlen en extra informatielagen</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) is een kaart- en navigatie-app die gebruik maakt van de gratis, wereldwijde en hoogwaardige OSM-gegevens.
+\n
+\n Gebruik visuele en gesproken navigatie, toon POI\'s (point of interest), maak en volg GPX-tracks, toon hoogtelijnen en hoogte-informatie (via plug-in), kies tussen autorijden, fietsen of wandelen, bewerk de OSM-kaart en nog veel meer.</string>
+    <string name="osmand_extended_description_part2">GPS-navigatie
+\n • Offline (geen datakosten) of online (snellere) routeberekening
+\n • Stap-voor-stap navigatie met opgenomen stem of gesproken straatnamen
+\n • Route wordt herberekend wanneer u ervan afwijkt
+\n • Rijstrookbegeleiding, straatnamen en verwachte aankomsttijd helpen u tijdens de reis
+\n • Voor de veiligheid: automatische keuze van dag- of nachtweergave
+\n • Toon maximumsnelheid en waarschuw bij overschrijding
+\n • Kaartgrootte past zich aan bij de snelheid
+\n • Zoek bestemming op adres, soort (parkeerplaats, restaurant, brandstof, museum) of coördinaten
+\n • Maak tussenpunten op een reis
+\n • Neem uw reis op als GPX-track of volg een GPX-track
+\n</string>
+    <string name="osmand_extended_description_part3">Kaart
+\n • Toon POIs (Points Of Interest) in uw omgeving
+\n • Draai de kaart in uw bewegingsrichting (of kompasrichting)
+\n • Toon uw positie en waar u naar kijkt
+\n • Deel uw lokatie met vrienden
+\n • Bewaar belangrijke plaatsen in ‘Favorieten’
+\n • Toon namen in het Engels, de lokale taal, of fonetisch
+\n • Toon extra online tiles, zoals een satellietfoto (van Bing), verschillende extra lagen zoals GPX-tracks voor navigatie e.d. met instelbare transparantie
+\n</string>
     <string name="osmand_extended_description_part4">Skiën
 \nMet de OsmAnd Ski plug-in ziet u pistes met hun moeilijkheidsgraad, en extra informatie zoals liften en andere faciliteiten.</string>
     <string name="osmand_extended_description_part5">Fietsen
@@ -2295,9 +2310,18 @@ voor Gebied: %1$s x %2$s</string>
 \n• Bekijk uw snelheid en hoogte
 \n• De GPX opname optie stelt u in staat uw route op te slaan en deze te delen
 \n• Via een extra plugin kunt u hoogteverschillen weergeven als hoogtelijnen of reliëfschaduw</string>
-    <string name="osmand_extended_description_part6">Wandelen • De kaart toont voetpaden, bergpaden, routes door parken • Wikipedia vertelt u meer over uw omgeving • OV-haltes (tram, bus, trein, metro), inclusief lijnnummers, helpen u te navigeren • Navigatie gebruikt voetpaden • Neem uw weg op als GPX-route of volg een gedownloade route
+    <string name="osmand_extended_description_part6">Lopen, wandelen, stadswandeling
+\n • De kaart toont voetpaden en wandelpaden
+\n • Wikipedia kan je veel vertellen tijdens een stadswandeling, in je eigen taal
+\n • OV-haltes (tram, bus, trein, metro), inclusief lijnnummers, helpen je bij het reizen in een onbekende stad
+\n • GPS-navigatie in voetgangermodus gebruikt voor het berekenen van de route voet- en wandelpaden
+\n • Upload en volg een GPX-route of neem er zelf één op en deel deze.
 \n</string>
-    <string name="osmand_extended_description_part7">Werk mee aan OpenStreetMap (OSM) • Meld fouten • Upload sporen naar OSM, direct vanuit de app • Voeg POI toe aan de kaart en upload deze</string>
+    <string name="osmand_extended_description_part7">Draag bij aan OpenStreetMap (OSM)
+\n • Meld fouten
+\n • Upload GPX-tracks naar OSM, rechtstreeks vanuit de app
+\n • Voeg POIs toe en upload deze direct naar OSM (of later in offline-modus)
+\n</string>
     <string name="osmand_extended_description_part8">OsmAnd is open-source en wordt steeds verder ontwikkeld. Iedereen kan helpen door bugs te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Door deze interactie wordt het steeds beter. De ontwikkeling is mede afhankelijk van giften om programmeurs en testers, voor nieuwe functies, te betalen. 
 \n 
 \nIndicatie van compleetheid en kwaliteit van de kaart: 
@@ -2312,7 +2336,7 @@ voor Gebied: %1$s x %2$s</string>
 \n • Afrika: ** 
 \n • Antarctica: * 
 \n Voor bijna elk land ter wereld kunt u een kaart downloaden.</string>
-    <string name="osmand_plus_extended_description_part8">Indicatie van compleetheid en kwaliteit van de kaart: 
+    <string name="osmand_plus_extended_description_part8">Indicatie van de volledigheid en kwaliteit van het kaartmateriaal:
 \n • West-Europa: **** 
 \n • Oost-Europa: *** 
 \n • Rusland: *** 
@@ -2322,14 +2346,15 @@ voor Gebied: %1$s x %2$s</string>
 \n • Japan &amp; Korea: *** 
 \n • Midden-Oosten: ** 
 \n • Afrika: ** 
-\n • Antarctica: * Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, Australië tot de VS, Nederland, Duitsland, Spanje, Japan, …
+\n • Antarctica: *
+\n Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, Australië tot de VS, Nederland, Duitsland, Spanje, Japan, …
 \n</string>
     <string name="save_poi_too_many_uppercase">Naam bevat erg veel hoofdletters, toch doorgaan?</string>
     <string name="search_favorites">Zoek in Favorieten</string>
-    <string name="quick_action_showhide_osmbugs_title">Toon of verberg OSM notities</string>
-    <string name="quick_action_osmbugs_show">Toon OSM notities</string>
-    <string name="quick_action_osmbugs_hide">Verberg OSM notities</string>
-    <string name="quick_action_showhide_osmbugs_descr">Knop om OSM notities te tonen of verbergen.</string>
+    <string name="quick_action_showhide_osmbugs_title">OSM-notities tonen of verbergen</string>
+    <string name="quick_action_osmbugs_show">OSM-notities tonen</string>
+    <string name="quick_action_osmbugs_hide">OSM-notities verbergen</string>
+    <string name="quick_action_showhide_osmbugs_descr">Knop om OSM-notities al dan niet te tonen.</string>
     <string name="sorted_by_distance">Gesorteerd op afstand</string>
     <string name="private_access_routing_req">Uw bestemming ligt in een gebied dat particulier eigendom is. Wilt u gebruik van particuliere wegen voor deze route toestaan\?</string>
     <string name="restart_search">Opnieuw zoeken</string>
@@ -2353,19 +2378,55 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_permissions">Rechten</string>
     <string name="import_gpx_failed_descr">Kan bestand niet importeren. Controleer of OsmAnd rechten heeft om het bestand te lezen.</string>
     <string name="distance_moving">Gecorrigeerde afstand</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratis, wereldwijde en uitgebreide OpenStreetMap (OSM) gegevens gebruikt. 
-\nMet akoestische en visuele navigatie, toont POI (points of interest), maakt en beheert GPX-sporen, gebruikt hoogtelijnen en hoogtegegevens, kiest tussen auto, fiets en wandelen, je kan OSM bewerken en veel meer. 
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatie-app die de gratis, wereldwijde en hoogwaardige OSM-gegevens gebruikt. 
+\n Gebruik gesproken en visuele navigatie, toon POI‘S (points of interest), maak en beheer GPX-tracks, toon hoogtelijnen en hoogtegegevens, kies tussen autorijden, fietsen en wandelen, bewerk OSM en nog veel meer. 
+\n 
+\n OsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteun je het project, het ontwikkelen van nieuwe functies, en ontvang je de laatste updates. 
+\n 
+\n Een paar van de belangrijkste functies:</string>
+    <string name="osmand_plus_extended_description_part2">" Navigatie
+\n • Online (snel) of offline (zonder roamingkosten in het buitenland)
+\n • Stap-voor-stap stembegeleiding (met opgenomen of TTS-stemmen)
+\n • Optioneel met rijstrookindicatie, weergave van straatnamen en geschatte aankomsttijd
+\n • Ondersteuning voor tussenstops op de route
+\n • Automatische herberekening bij het afwijken van de route
+\n • Zoek op adres, soort (bijv.: restaurant, hotel, benzinepomp, museum) of geografische coördinaten "</string>
+    <string name="osmand_plus_extended_description_part3">Kaartweergave
+\n • Positie en richting tonen
+\n • Kaart draaien in kompas- of bewegingsrichting
+\n • Bewaar belangrijke plaatsen in ‘Favorieten’.
+\n • Toon POI’s (points of interest) in de buurt
+\n • Toon specifieke online tiles, satellietbeelden (van Bing), en extra lagen zoals GPX-tracks met rit-/routeinformatie e.d., met instelbare transparantie
+\n • Toon plaatsnamen in het Engels, de lokale taal of fonetisch weergegeven
+\n</string>
+    <string name="osmand_plus_extended_description_part4">Gebruik OSM- en Wikipedia-gegevens
+\n • De beste gegevens van de beste wereldwijde samenwerkingsprojecten
+\n • OSM-gegevens beschikbaar per land of regio
+\n • Wikipedia-POIs, geweldig voor sightseeing
+\n • Onbeperkte gratis downloads, rechtstreeks vanuit de app
+\n • Compacte offline vectorkaarten die tenminste eens per maand worden bijgewerkt
 \n
-\nOsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteunt u het project, het maken van nieuwe functies, en krijgt u de nieuwste functies. 
-\n
-\nEen paar belangrijke functies:</string>
-    <string name="osmand_plus_extended_description_part2">" Navigatie • werkt online (snel) of offline (zonder roaming-kosten in het buitenalnd) • gesproken stap-voor-stap navigatie (met opgenomen of synthetische stem) • optioneel met rijstrookaanduiding, straatnamen und geschatte aankomsttijd • tussenstops op de route • automatische herberekening bij het verlaten van de route • zoek op adres, soort (bijv.: restaurant, hotel, benzinepomp, museum) of geografische coördinaten "</string>
-    <string name="osmand_plus_extended_description_part3">" kaart bekijken • positie en richting tonen • kaart richten volgens kompas of volgens beweging • bewaar plaatsen als favoriet • toon POIs (point of interest) in de buurt • toon specifieke online-kaarten, satellietbeelden (van Bing), overlays zoals GPX-sporen met rit-/routeinformatie und extra kaartlagen met instelbare transparantie • toon plaatsnamen in Engels, de taal van het land of phonetisch weergegeven "</string>
-    <string name="osmand_plus_extended_description_part4">" gebruik OSM- en Wikipedia-gegevens • de beste gegevens van de beste wereldwijde projecten • OSM-gegevens per land of regio • Wikipedia-POIs voor sightseeing • onbeperkte gratis downloads vanuit de app • compacte vectorkaarten, tenminste eens per maand bijgewerkt • keuze tussen volledige kaarten of alleen het stratennet (bijv: Japan compleet is 700 MB, de straten maar 200 MB) "</string>
-    <string name="osmand_plus_extended_description_part5">" veiligheidsfucties • kan automatisch tussen dag- en nachtweergave schakelen • kan maximum snelheid weergeven en waarschuwen bij overschrijding • kan kaartwegave aanpassen aan de snelheid • locatie doorgeven aan uw vrienden, zodat ze u kunnen vinden "</string>
-    <string name="osmand_plus_extended_description_part6">" functies voor fietsers en voetgangers • weergave van voetpaden, wandelroutes en fietspaden voor buitenactiviteiten • aangepaste weergave en routeberekening voor voetgangers en fietsers • weergave van OV-haltes (bus, tram, trein), inclusief zijnnummers • leg de afgelegde weg vast in een GPX-bestand op het apparaat of online • snelheids- en hoogteweergave • hoogtelijnen en reliëfschaduw weergeven (extra module) "</string>
-    <string name="osmand_plus_extended_description_part7">" bewerk OSM • meld verkeerde kaartgegevens • upload GPX-sporen naar OSM • voeg POIs toe en upload ze naar OSM • neem een GPX-spoor op met het apparaat in slaapstand
-\n OsmAnd is open-source wordt actief ontwikkeld. iedereen kan bijdragen door bugs te melsen, de vertaling te verbeteren of nieuwe functies te programmeren. Het project wordt druk verbeterd door al deze vormen van interactie met gebruikers. Het project is tevens afhankelijk van financiële bijdragen om programmeer- en testwerk te kunnen bekostigen. "</string>
+\n • Keuze tussen volledige kaarten van een regio of alleen het wegennet (Voorbeeld: De volledige kaart van Japan is 700 MB, het wegennet 200 MB)</string>
+    <string name="osmand_plus_extended_description_part5">Veiligheidsfuncties
+\n • Kan automatisch tussen dag- en nachtweergave omschakelen
+\n • Kan de maximumsnelheid weergeven en waarschuwen bij overschrijding
+\n • Kan het zoomniveau aanpassen op basis van de snelheid
+\n • Locatie delen met vrienden, zodat ze u kunnen vinden
+\n</string>
+    <string name="osmand_plus_extended_description_part6">Functies voor fietsers en voetgangers
+\n • Weergave van voetpaden, wandelroutes en fietspaden, geweldig voor buitenactiviteiten
+\n • Aangepaste weergave en routeberekening voor voetgangers en fietsers
+\n • Optionele weergave van OV-haltes (bus, tram, trein), inclusief lijnnummers
+\n • Optioneel vastleggen van de afgelegde weg in een GPX-bestand op het apparaat of online-dienst
+\n • Optionele weergave van snelheid en hoogte
+\n • Weergave van hoogtelijnen en reliëfschaduwen (via extra plugin)</string>
+    <string name="osmand_plus_extended_description_part7">Rechtstreeks bijdragen aan OSM
+\n • Meld foutieve gegevens
+\n • Upload GPX-tracks naar OSM, rechtstreeks vanuit de app
+\n • Voeg POIs toe en upload ze direct naar OSM (of later in offline-modus)
+\n • Kan een GPX-track opnemen op de achtergrond (als het apparaat in slaapstand staat)
+\n OsmAnd is open-source en wordt actief ontwikkeld. Iedereen kan bijdragen door bugs te melden, de vertaling te verbeteren of nieuwe functies te ontwikkelen. Het project is ook afhankelijk van financiële bijdragen om ontwikkeling en tests van nieuwe functies te bekostigen.
+\n</string>
     <string name="shared_string_reset">Reset</string>
     <string name="shared_string_reload">Opnieuw laden</string>
     <string name="wrong_user_name">Verkeerde gebruikersnaam</string>
@@ -2399,7 +2460,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="enter_gpx_name">GPX bestandsnaam:</string>
     <string name="show_on_map_after_saving">Toon op kaart na opslaan</string>
     <string name="measurement_tool">Afstand meten</string>
-    <string name="quick_action_start_stop_navigation">Start/stop navigatie</string>
+    <string name="quick_action_start_stop_navigation">Navigatie starten/stoppen</string>
     <string name="average">Gemiddeld</string>
     <string name="of">%1$d van de %2$d</string>
     <string name="retry">Probeer opnieuw</string>
@@ -2480,7 +2541,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="import_track_desc">Bestand %1$s bevat geen waypoints. Importeren als een track?</string>
     <string name="move_point">Verplaats punt</string>
     <string name="add_segment_to_the_track">Voeg toe aan GPX-track</string>
-    <string name="mapillary_menu_filter_description">"Filter afbeeldingen op gebruikersnaam,  datum of type. Alleen actief wanneer ingezoomd."</string>
+    <string name="mapillary_menu_filter_description">Filter afbeeldingen op gebruikersnaam, datum of type. Alleen actief wanneer ingezoomd.</string>
     <string name="show_map">Kaart weergeven</string>
     <string name="route_is_calculated">Route berekend</string>
     <string name="round_trip">Lus</string>
@@ -2494,7 +2555,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_road">Weg</string>
     <string name="tap_on_map_to_hide_interface_descr">Een tik op de kaart verbergt/toont de bedieningsknoppen en widgets.</string>
     <string name="tap_on_map_to_hide_interface">Volledig scherm</string>
-    <string name="mark_passed">Markering overslaan</string>
+    <string name="mark_passed">Markering gepasseerd</string>
     <string name="import_gpx_file_description">kan worden geïmporteerd als Favorieten of als GPX-bestand.</string>
     <string name="import_as_gpx">importeer als GPX-bestand</string>
     <string name="import_as_favorites">Importeren als Favorieten</string>
@@ -2505,7 +2566,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="empty_state_markers_active">Maak markeringen aan op de kaart!</string>
     <string name="shared_string_two">Twee</string>
     <string name="shared_string_one">Een</string>
-    <string name="active_markers_descr">Kies hoeveel markeervlaggetjes getoond worden:</string>
+    <string name="active_markers_descr">Kies hoeveel markeervlaggetjes getoond worden.</string>
     <string name="digits_quantity">Aantal decimalen</string>
     <string name="shared_string_right">Rechts</string>
     <string name="shared_string_left">Links</string>
@@ -2538,24 +2599,24 @@ voor Gebied: %1$s x %2$s</string>
     <string name="by_type">Op type</string>
     <string name="shared_string_more_without_dots">Meer</string>
     <string name="show_number_pad">Toon cijfertoetsenbord</string>
-    <string name="shared_string_restart">"App herstarten "</string>
+    <string name="shared_string_restart">App herstarten</string>
     <string name="show_images">Afbeeldingen tonen</string>
-    <string name="purchase_cancelled_dialog_title">"U hebt het abonnement op OsmAnd Live opgezegd "</string>
+    <string name="purchase_cancelled_dialog_title">U hebt uw abonnement op OsmAnd Live opgezegd</string>
     <string name="purchase_cancelled_dialog_descr">Vernieuw het abonnement om alle mogelijkheden te blijven gebruiken:</string>
     <string name="maps_you_need_descr">Op basis van je bladwijzers, raden we je aan de volgende kaarten te downloaden:</string>
     <string name="maps_you_need">Kaarten die je nodig hebt</string>
     <string name="osmand_team">OsmAnd-team</string>
-    <string name="popular_destinations">"Populaire bestemmingen "</string>
+    <string name="popular_destinations">Populaire bestemmingen</string>
     <string name="paid_app">Betaalde app</string>
     <string name="paid_plugin">Betaalde plug-in</string>
     <string name="travel_card_update_descr">Nieuwe Wikivoyage-bestanden beschikbaar, updaten om deze te gebruiken.</string>
     <string name="travel_card_download_descr">Download Wikivoyage-reisgidsen om artikelen te lezen over plaatsen wereldwijd, zonder internetverbinding.</string>
-    <string name="update_is_available">"Update beschikbaar "</string>
-    <string name="download_file">"Bestand downloaden "</string>
+    <string name="update_is_available">Update beschikbaar</string>
+    <string name="download_file">Bestand downloaden</string>
     <string name="start_editing_card_image_text">De gratis wereldwijde reisgids die iedereen kan bewerken.</string>
     <string name="welcome_to_open_beta_description">Reisgidsen zijn gebaseerd op Wikivoyage. Test gratis alle mogelijkheden tijdens de open beta-testfase. Hierna zijn de reisgidsen beschikbaar voor abonnees van OsmAnd Unlimited en OsmAnd+.</string>
     <string name="start_editing_card_description">Je kunt artikelen bewerken op Wikivoyage. Deel jouw kennis, ervaringen, talent en interesses.</string>
-    <string name="start_editing">"Begin met bewerken "</string>
+    <string name="start_editing">Begin met bewerken</string>
     <string name="get_unlimited_access">Krijg onbeperkte toegang</string>
     <string name="welcome_to_open_beta">Welkom bij de open beta</string>
     <string name="wikivoyage_travel_guide">Reisgids</string>
@@ -2578,34 +2639,35 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_do">Doen</string>
     <string name="shared_string_only_with_wifi">Alleen met Wifi</string>
     <string name="wikivoyage_download_pics">Afbeeldingen downloaden</string>
-    <string name="wikivoyage_download_pics_descr">Afbeeldingen bij de artikelen kunnen gedownload worden voor offline gebruik. Je kan deze instelling altijd wijzigen via Opties.</string>
+    <string name="wikivoyage_download_pics_descr">Afbeeldingen bij de artikelen kunnen gedownload worden voor offline gebruik.
+\nAltijd beschikbaar in het menu ‘Verkennen’ → ‘Opties’.</string>
     <string name="shared_string_wifi_only">Alleen met Wifi</string>
     <string name="select_travel_book">Kies een reisgids</string>
-    <string name="shared_string_travel_book">"Reisgids "</string>
+    <string name="shared_string_travel_book">Reisgids</string>
     <string name="online_webpage_warning">Pagina is alleen online beschikbaar. Openen in webbrowser?</string>
     <string name="images_cache">Afbeeldingen-cache</string>
-    <string name="delete_search_history">"Zoekgeschiedenis wissen "</string>
-    <string name="download_images">"Afbeeldingen downloaden "</string>
+    <string name="delete_search_history">Zoekgeschiedenis wissen</string>
+    <string name="download_images">Afbeeldingen downloaden</string>
     <string name="download_maps_travel">Reisgidsen</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artikel verwijderd</string>
     <string name="wikivoyage_search_hint">Zoek: Land, Provincie, Stad</string>
-    <string name="shared_string_read">"Lezen "</string>
+    <string name="shared_string_read">Lezen</string>
     <string name="saved_articles">Artikelen met bladwijzer</string>
-    <string name="shared_string_explore">"Doorzoeken "</string>
-    <string name="shared_string_contents">"Inhoud "</string>
-    <string name="shared_string_result">"Resultaat "</string>
-    <string name="use_two_digits_longitude">"Twee cijfers gebruiken voor lengtegraad (i.p.v. drie) "</string>
-    <string name="shared_string_travel_guides">"Reisgids "</string>
+    <string name="shared_string_explore">Verkennen</string>
+    <string name="shared_string_contents">Inhoud</string>
+    <string name="shared_string_result">Resultaat</string>
+    <string name="use_two_digits_longitude">Twee cijfers gebruiken voor lengtegraad</string>
+    <string name="shared_string_travel_guides">Reisgidsen</string>
     <string name="nothing_found_in_radius">Niets gevonden:</string>
     <string name="clear_all_intermediates">Wis alle tussenpunten</string>
-    <string name="group_deleted">"Groep verwijderd "</string>
+    <string name="group_deleted">Groep verwijderd</string>
     <string name="rendering_attr_whiteWaterSports_name">Wildwatersporten</string>
     <string name="distance_farthest">Het verste eerst</string>
     <string name="distance_nearest">Het dichtstbijzijnde eerst</string>
     <string name="enter_lon">Lengtegraad invoeren</string>
-    <string name="enter_lat">"Breedtegraad invoeren "</string>
-    <string name="enter_lat_and_lon">"Lengte- en breedtegraad invoeren "</string>
+    <string name="enter_lat">Breedtegraad invoeren</string>
+    <string name="enter_lat_and_lon">Lengte- en breedtegraad invoeren</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="dd_dddddd_format">GG.GGGGGG°</string>
     <string name="dd_ddddd_format">GG.GGGGG°</string>
@@ -2615,12 +2677,12 @@ voor Gebied: %1$s x %2$s</string>
     <string name="west_abbreviation">W</string>
     <string name="south_abbreviation">Z</string>
     <string name="north_abbreviation">N</string>
-    <string name="optional_point_name">"Naam (niet verplicht) "</string>
+    <string name="optional_point_name">Naam (niet verplicht)</string>
     <string name="transport_nearby_routes_within">Nabije routes binnen</string>
     <string name="transport_nearby_routes">Binnen</string>
     <string name="enter_the_file_name">Bestandsnaam invoeren.</string>
-    <string name="map_import_error">"Fout bij kaartimport "</string>
-    <string name="map_imported_successfully">"Kaart geïmporteerd "</string>
+    <string name="map_import_error">Fout bij kaartimport</string>
+    <string name="map_imported_successfully">Kaart geïmporteerd</string>
     <string name="make_as_start_point">Instellen als startpunt</string>
     <string name="shared_string_current">Huidige</string>
     <string name="last_intermediate_dest_description">Voeg een tussenstop toe</string>
@@ -2630,13 +2692,13 @@ voor Gebied: %1$s x %2$s</string>
     <string name="switch_osm_notes_visibility_desc">OSM-opmerkingen op de kaart tonen/verbergen.</string>
     <string name="gpx_file_desc">GPX - geschikt voor export naar JOSM en andere OSM-editors.</string>
     <string name="osc_file_desc">OSC - geschikt voor export naar OSM.</string>
-    <string name="shared_string_gpx_file">"GPX-bestand "</string>
+    <string name="shared_string_gpx_file">GPX-bestand</string>
     <string name="osc_file">OSC-bestand</string>
     <string name="choose_file_type">Kies bestandstype</string>
     <string name="osm_edits_export_desc">Exporteer als OSM-aantekeningen, POI of beide.</string>
-    <string name="all_data">"Alle gegevens "</string>
+    <string name="all_data">Alle gegevens</string>
     <string name="osm_notes">OSM-aantekeningen</string>
-    <string name="will_open_tomorrow_at">"Gaat morgen open om "</string>
+    <string name="will_open_tomorrow_at">Gaat morgen open om</string>
     <string name="rendering_attr_hidePOILabels_name">POI-namen</string>
     <string name="shared_string_without_name">Zonder naam</string>
     <string name="what_is_here">Wat is dit hier:</string>
@@ -2647,14 +2709,13 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_total">Totaal</string>
     <string name="hide_full_description">Volledige beschrijving verbergen</string>
     <string name="show_full_description">Volledige beschrijving tonen</string>
-    <string name="off_road_render_descr">Geschikt voor off-road gebruik in \'Topo\' stijl en voor gebruik met groene satellietbeelden als onderliggende kaart. Verminderde dikte van hoofdwegen, vergrootte dikte van landwegen, paden, fiets- en andere routes.</string>
+    <string name="off_road_render_descr">Geschikt voor off-road gebruik in \'Topo\'-stijl en voor gebruik met groene satellietbeelden als achtergrondlaag. Verminderde dikte van hoofdwegen, vergrootte dikte van veld- en boswegen, paden, fiets- en andere routes.</string>
     <string name="nautical_render_descr">Zeekaartstijl. Toont boeien, vuurtorens, rivieren, vaargeulen en -markeringen, havens, bakens, dieptelijnen.</string>
     <string name="ski_map_render_descr">Skistijl. Toont pistes, skiliften en andere ski-gerelateerde elementen. Overige kaartelementen worden verduisterd.</string>
     <string name="light_rs_render_descr">Eenvoudige stijl voor autonavigatie. Zachte nachtmodus, hoogtelijnen, contrasterende wegen in oranje stijl, verduistert overige kaartelementen.</string>
     <string name="topo_render_descr">Voor wandelaars, trektochten en fietsenrs in de natuur. Buiten goed leesbaar. Contrasterende wegen en natuurlijke objecten, verschillende routetypen, geavanceerde hoogtelijn opties, extra details. Aanpassing van de oppervlakte-integriteit onderscheidt de kwaliteit van de weg. Geen nachtmodus.</string>
     <string name="mapnik_render_descr">Oude \'Mapnik\'-standaardstijl. Kleuren vergelijkbaar met \'Mapnik\'.</string>
-    <string name="touring_view_render_descr">Hoog contrast en maximaal detail, bevat alle opties van de standaardstijl van OsmAnd. Duidelijk onderscheid tussen wegtypes.
-\nGeschikt voor dag, nacht en outdoor gebruik.</string>
+    <string name="touring_view_render_descr">Stijl met hoog contrast en maximaal detail. Deze bevat alle opties van de standaardstijl van OsmAnd, met zoveel mogelijk details, specifiek wegen, paden en andere reismogelijkheden. Geen verschil tussen “wegenkaart”-wegtypes. Geschikt voor dag, nacht en outdoor gebruik.</string>
     <string name="default_render_descr">Universele stijl. Vereenvoudigde weergave dichtbevolkte steden. Hoogtelijnen, routes, oppervlakkwaliteit, toegangsrestricties, wegnummers, weergave van paden volgens de SAC-schaal, wildwatersportelementen.</string>
     <string name="open_wikipedia_link_online">WIkipedia-link online openen</string>
     <string name="open_wikipedia_link_online_description">De link wordt in een webbrowser geopend.</string>
@@ -2686,16 +2747,17 @@ voor Gebied: %1$s x %2$s</string>
     <string name="wiki_article_search_text">Zoeken naar het bijbehorende wiki-artikel</string>
     <string name="wiki_article_not_found">Artikel niet gevonden</string>
     <string name="how_to_open_wiki_title">Hoe Wikipedia-artikelen te openen?</string>
-    <string name="quick_action_edit_actions">Wijzig acties</string>
+    <string name="quick_action_edit_actions">Wijzig sneltoetsen</string>
     <string name="shared_string_bookmark">Bladwijzer</string>
-    <string name="point_deleted">"Punt %1$s  verwijderd"</string>
+    <string name="point_deleted">Punt %1$s verwijderd</string>
     <string name="coord_input_edit_point">Punt bewerken</string>
     <string name="coord_input_add_point">Punt toevoegen</string>
     <string name="coord_input_save_as_track_descr">Je hebt %1$s punten toegevoegd. Geef een bestandsnaam en tik op \"Opslaan\".</string>
     <string name="error_notification_desc">Stuur alsjeblieft een screenshot van deze melding naar support@osmand.net</string>
-    <string name="thank_you_for_feedback">"Dank  voor feedback "</string>
+    <string name="thank_you_for_feedback">Dank voor uw feedback</string>
     <string name="poi_cannot_be_found">Knoop of weg kan niet worden gevonden.</string>
-    <string name="search_no_results_feedback">Geef uw feedback</string>
+    <string name="search_no_results_feedback">Geen zoekresultaten\?
+\nGeef feedback</string>
     <string name="increase_search_radius_to">Vergroot het zoekgebied tot %1$s</string>
     <string name="send_search_query_description">Uw zoekterm wordt verstuurd naar: \"%1$s\", samen met uw locatie.
 \n 
@@ -2729,7 +2791,7 @@ voor Gebied: %1$s x %2$s</string>
 \n
 \n • Ondersteuning voor het wijzigen van polygon-(non-faciliteits)voorwerpen
 \n</string>
-    <string name="test_voice_desrc">Druk op een knop en luister naar de bijhorende gesproken melding om ontbrekende of foutieve meldingen te identificeren.</string>
+    <string name="test_voice_desrc">Tik op een knop en luister naar de bijbehorende gesproken prompt om te horen of deze ontbreekt of incorrect is</string>
     <string name="osm_live_subscriptions">Abonnementen</string>
     <string name="powered_by_osmand">Mogelijk gemaakt door OsmAnd</string>
     <string name="osm_live_plan_pricing">Tariefoverzicht</string>
@@ -2739,26 +2801,26 @@ voor Gebied: %1$s x %2$s</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / maand</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / maand</string>
     <string name="osm_live_payment_discount_descr">Bespaar %1$s</string>
-    <string name="osm_live_payment_current_subscription">"Uw huidige abonnement "</string>
+    <string name="osm_live_payment_current_subscription">Uw huidige abonnement</string>
     <string name="osm_live_payment_renews_monthly">Wordt maandelijks verlengd</string>
-    <string name="osm_live_payment_renews_quarterly">"Wordt per kwartaal verlengd "</string>
-    <string name="osm_live_payment_renews_annually">"Wordt per jaar verlengd "</string>
+    <string name="osm_live_payment_renews_quarterly">Wordt per kwartaal verlengd</string>
+    <string name="osm_live_payment_renews_annually">Wordt per jaar verlengd</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Betaal-interval:</string>
     <string name="osm_live_payment_contribute_descr">Giften helpen OSM cartografie te financieren.</string>
     <string name="markers_remove_dialog_msg">Markeervlaggetje \'%s\' verwijderen\?</string>
-    <string name="edit_map_marker">"Markeervlaggetje bewerken "</string>
+    <string name="edit_map_marker">Markeervlaggetje bewerken</string>
     <string name="third_party_application">App van derde partij</string>
     <string name="search_street">Straatnaam zoeken</string>
     <string name="start_search_from_city">Geef eerst stad/gemeente/localiteit op</string>
-    <string name="shared_string_restore">"Herstellen "</string>
+    <string name="shared_string_restore">Herstellen</string>
     <string name="keep_passed_markers">Vorige vlaggetjes op de kaart behouden</string>
     <string name="more_transport_on_stop_hint">Meerdere verbindingen beschikbaar vanaf deze halte.</string>
     <string name="ask_for_location_permission">Geef OsmAnd toegang tot uw locatie om door te gaan.</string>
     <string name="keep_passed_markers_descr">Markeervlaggetjes die als Favorieten of als GPX-track toegevoegd zijn, en afgehandeld zijn, blijven zichtbaar op de kaart. Als die groep niet meer actief is, zullen ze verdwijnen.</string>
     <string name="mapillary_menu_title_pano">Alleen 360°-foto\'s tonen</string>
     <string name="rendering_value_black_name">Zwart</string>
-    <string name="copy_location_name">Kopieer locatie/interessepunt naam</string>
+    <string name="copy_location_name">Kopieer locatie/POI-naam</string>
     <string name="routing_attr_avoid_tram_description">Vermijd trams</string>
     <string name="routing_attr_avoid_bus_name">Geen bussen</string>
     <string name="routing_attr_avoid_bus_description">Vermijd bussen en trolleybussen</string>
@@ -2774,13 +2836,13 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_milliradians">Milliradialen</string>
     <string name="angular_measeurement_descr">Wijzig azimut eenheid.</string>
     <string name="avoid_pt_types_descr">Selecteer de te vermijden openbaar vervoer opties:</string>
-    <string name="quick_action_day_night_mode">%s modus</string>
+    <string name="quick_action_day_night_mode">%smodus</string>
     <string name="avoid_pt_types">Vermijd transport types…</string>
     <string name="shared_string_walk">Loop</string>
     <string name="save_poi_value_exceed_length">Verkort de lengte van \"%s\" tot minder dan 255 karakters.</string>
     <string name="save_poi_value_exceed_length_title">Lengte van waarde \"%s\"</string>
     <string name="public_transport_warning_descr_blog">Lees meer op onze blog over hoe OsmAnd routes berekent.</string>
-    <string name="public_transport_warning_title">Navigatie binnen openbaar vervoer is op dit moment in de beta testfase. Houd rekening met fouten en onnauwkeurigheden.</string>
+    <string name="public_transport_warning_title">OV-navigatie is op dit moment in bèta-test, houd rekening met fouten en onnauwkeurigheden.</string>
     <string name="add_intermediate">Voeg tussenpunt toe</string>
     <string name="add_start_and_end_points">Voeg vertrekpunt en bestemming toe</string>
     <string name="route_add_start_point">Voeg vertrekpunt toe</string>
@@ -2818,7 +2880,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_street_name">Straat</string>
     <string name="rendering_attr_highway_class_service_name">Dienstweg</string>
     <string name="rendering_attr_highway_class_footway_name">Voetpad</string>
-    <string name="rendering_attr_highway_class_track_name">Track</string>
+    <string name="rendering_attr_highway_class_track_name">Veld- of bosweg</string>
     <string name="rendering_attr_highway_class_bridleway_name">Ruiterpad</string>
     <string name="rendering_attr_highway_class_steps_name">Treden</string>
     <string name="rendering_attr_highway_class_path_name">Pad</string>
@@ -2829,14 +2891,14 @@ voor Gebied: %1$s x %2$s</string>
     <string name="time_of_day">Huidige tijd</string>
     <string name="step_by_step">Stap voor stap</string>
     <string name="routeInfo_road_types_name">Weg types</string>
-    <string name="exit_at">Uitstappen op</string>
+    <string name="exit_at">Uitstappen bij</string>
     <string name="shared_string_swap">Wissel</string>
     <string name="show_more">Toon meer</string>
     <string name="tracks_on_map">Getoonde tracks</string>
-    <string name="quick_action_show_hide_gpx_tracks">Toon/Verberg GPX-tracks</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Een knop om bepaalde GPX-tracks te tonen of verbergen op de kaart.</string>
-    <string name="quick_action_gpx_tracks_hide">Verberg GPX-tracks</string>
-    <string name="quick_action_gpx_tracks_show">Toon GPX-tracks</string>
+    <string name="quick_action_show_hide_gpx_tracks">GPX-tracks tonen/verbergen</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Een knop om geselecteerde GPX-tracks al dan niet te tonen op de kaart.</string>
+    <string name="quick_action_gpx_tracks_hide">GPX-tracks verbergen</string>
+    <string name="quick_action_gpx_tracks_show">GPX-tracks tonen</string>
     <string name="add_destination_query">Voeg a.u.b. eerst de Bestemming in</string>
     <string name="previous_route">Vorige route</string>
     <string name="add_home">Thuisadres toevoegen</string>
@@ -2852,7 +2914,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="add_start_point">Stel het vertrekpunt in</string>
     <string name="intermediate_waypoint">Tussenpunt</string>
     <string name="on_foot">Te voet</string>
-    <string name="points_of_interests">Interessepunten (POI)</string>
+    <string name="points_of_interests">POI’s (interessepunten)</string>
     <string name="waiting_for_route_calculation">Route berekenen…</string>
     <string name="app_mode_public_transport">Openbaar vervoer</string>
     <string name="avoid_roads_descr">Selecteer de weg die u wilt vermijden gedurende navigatie, of op de kaart of van de onderstaande lijst:</string>
@@ -2863,10 +2925,10 @@ voor Gebied: %1$s x %2$s</string>
     <string name="intermediate_destinations">Tussenbestemmingen</string>
     <string name="arrive_at_time">Aankomst om %1$s</string>
     <string name="shared_string_launch">Open</string>
-    <string name="quick_action_switch_day_night_descr">Tik deze knop om te wisselen tussen de OsmAnd dag en nacht modus.</string>
-    <string name="quick_action_switch_day_mode">Dag modus</string>
-    <string name="quick_action_switch_night_mode">Nacht modus</string>
-    <string name="quick_action_day_night_switch_mode">Wissel tussen dag/nacht modus</string>
+    <string name="quick_action_switch_day_night_descr">Een schakelknop om OsmAnd om te schakelen tussen dag- en nachtmodus.</string>
+    <string name="quick_action_switch_day_mode">Dagmodus</string>
+    <string name="quick_action_switch_night_mode">Nachtmodus</string>
+    <string name="quick_action_day_night_switch_mode">Wissel tussen dag-/nachtmodus</string>
     <string name="routeInfo_surface_name">Oppervlakte</string>
     <string name="routeInfo_smoothness_name">Kwaliteit wegdek</string>
     <string name="routeInfo_steepness_name">Steilte</string>
@@ -2967,9 +3029,9 @@ voor Gebied: %1$s x %2$s</string>
     <string name="profile_alert_need_profile_name_msg">Geef eerst een profielnaam op.</string>
     <string name="profile_alert_duplicate_name_title">Dubbele naam</string>
     <string name="profile_alert_duplicate_name_msg">Er bestaat al een profiel met die naam</string>
-    <string name="profile_alert_cant_delete_base">Basisprofielen van OsmAnd kun je niet verwijderen</string>
+    <string name="profile_alert_cant_delete_base">Basisprofielen van OsmAnd kunnen niet verwijderd worden</string>
     <string name="profile_alert_need_save_title">Wijzigingen opslaan</string>
-    <string name="profile_alert_need_save_msg">Sla wijzigingen aan het profiel eerst op</string>
+    <string name="profile_alert_need_save_msg">Sla wijzigingen van het profiel eerst op</string>
     <string name="profile_alert_delete_title">Profiel verwijderen</string>
     <string name="profile_alert_delete_msg">Weet je zeker dat je profiel \"%s\" wilt verwijderen</string>
     <string name="select_base_profile_dialog_title">Selecteer een profiel om mee te starten</string>
@@ -2985,7 +3047,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icoon</string>
     <string name="press_again_to_change_the_map_orientation">Tik nogmaals om de kaartoriëntatie te wijzigen</string>
-    <string name="default_speed_setting_title">Standaard snelheid</string>
+    <string name="default_speed_setting_title">Standaardsnelheid</string>
     <string name="default_speed_setting_descr">Standaard snelheidsinstellingen aanpassen</string>
     <string name="minmax_speed_dialog_title">Min/max snelheid instellen</string>
     <string name="shared_string_crash">Crash</string>
@@ -2996,8 +3058,8 @@ voor Gebied: %1$s x %2$s</string>
     <string name="edit_profile_screen_options_subtitle">Selecteer scherminstellingen voor het profiel</string>
     <string name="edit_profile_nav_settings_subtitle">Selecteer navigatieinstellingen voor het profiel</string>
     <string name="routing_attr_max_num_changes_description">Maximaal aantal keer overstappen</string>
-    <string name="routing_attr_max_num_changes_name">Aantal aanpassingen</string>
-    <string name="turn_screen_on_router">Scherm aanzetten bij een bocht</string>
+    <string name="routing_attr_max_num_changes_name">Aantal overstappen</string>
+    <string name="turn_screen_on_router">Scherm aanzetten bij een afslag</string>
     <string name="turn_screen_on_sensor">Gebruik nabijheidssensor</string>
     <string name="turn_on_profile_desc">Schakel minste één applicatieprofiel in om deze instelling te kunnen gebruiken.</string>
     <string name="rendering_attr_winter_road_name">Winterweg</string>
@@ -3013,7 +3075,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_track_is_saved">Track %s is opgeslagen</string>
     <string name="app_mode_camper">Caravan</string>
     <string name="rendering_attr_showLez_description">Toon lage emissiezones op de kaart. Heeft geen invloed op de navigatie.</string>
-    <string name="rendering_attr_showLez_name">Toon lage emissie zones</string>
+    <string name="rendering_attr_showLez_name">Toon milieuzones</string>
     <string name="temporary_conditional_routing">Houd rekening met tijdelijke beperkingen</string>
     <string name="shared_string_default">Standaard</string>
     <string name="day">Dag</string>
@@ -3096,7 +3158,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="units_and_formats">Eenheden &amp; formaten</string>
     <string name="map_look_descr">Kaartweergave</string>
     <string name="general_settings_profile_descr">App thema, eenheden, regio</string>
-    <string name="screen_alerts_descr">Meldingen linksonder weergeven tijdens het navigeren.</string>
+    <string name="screen_alerts_descr">Waarschuwingen linksonder weergeven tijdens het navigeren.</string>
     <string name="language_and_output">Taal en output</string>
     <string name="manage_profiles">App profielen beheren…</string>
     <string name="osmand_settings_descr">Effectief voor de gehele app</string>
@@ -3106,7 +3168,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="voice_announces_info">Gesproken meldingen enkel tijdens het navigeren.</string>
     <string name="voice_announces_descr">Navigatie-instructies en aankondigingen</string>
     <string name="voice_announces">Gesproken instructies</string>
-    <string name="screen_alerts">Meldingen</string>
+    <string name="screen_alerts">Visuele waarschuwingen</string>
     <string name="route_parameters_descr">Configureer routeparameters</string>
     <string name="route_parameters">Routeparameters</string>
     <string name="application_profile_changed">Profiel gewijzigd naar \"%s\"</string>
@@ -3115,7 +3177,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_revert">Herstel</string>
     <string name="clear_confirmation_msg">Wis %1$s\?</string>
     <string name="routing_attr_freeride_policy_name">Buiten de piste</string>
-    <string name="default_speed_dialog_msg">Schat de aankomsttijd in voor onbekende wegtypes en beperkt maximum snelheid voor alle wegen (kan de route beïnvloeden)</string>
+    <string name="default_speed_dialog_msg">Schat de aankomsttijd in voor onbekende wegtypes en beperkt de maximumsnelheid voor alle wegen (kan de route beïnvloeden)</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Toestand 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Toestand 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Toestand 3</string>
@@ -3127,19 +3189,19 @@ voor Gebied: %1$s x %2$s</string>
     <string name="sett_parrot_ext_input">Papegaai</string>
     <string name="app_mode_campervan">Mobilhome</string>
     <string name="shared_string_by_default">Standaard</string>
-    <string name="app_mode_utv">naast elkaar</string>
+    <string name="app_mode_utv">Naast elkaar</string>
     <string name="shared_string_maps">Kaarten</string>
     <string name="quick_action_contour_lines_descr">Knop om hoogtelijnen al dan niet te tonen op de kaart.</string>
-    <string name="quick_action_contour_lines_show">Toon de hoogtelijnen</string>
-    <string name="quick_action_contour_lines_hide">Verberg de hoogtelijnen</string>
-    <string name="quick_action_show_hide_contour_lines">Toon/verberg de hoogtelijnen</string>
-    <string name="quick_action_hillshade_descr">Knop om de reliëflaag al dan niet te tonen op de kaart.</string>
-    <string name="quick_action_hillshade_show">Toon de reliëflaag</string>
-    <string name="quick_action_hillshade_hide">Verberg de reliëflaag</string>
-    <string name="quick_action_show_hide_hillshade">Toon/verberg de reliëflaag</string>
+    <string name="quick_action_contour_lines_show">Hoogtelijnen tonen</string>
+    <string name="quick_action_contour_lines_hide">Hoogtelijnen verbergen</string>
+    <string name="quick_action_show_hide_contour_lines">Hoogtelijnen tonen/verbergen</string>
+    <string name="quick_action_hillshade_descr">Knop om de reliëfschaduw al dan niet te tonen op de kaart.</string>
+    <string name="quick_action_hillshade_show">Reliëfschaduw tonen</string>
+    <string name="quick_action_hillshade_hide">Reliëfschaduw verbergen</string>
+    <string name="quick_action_show_hide_hillshade">Reliëfschaduw tonen/verbergen</string>
     <string name="track_saved">Track opgeslagen</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Toon knooppunt van de fietsroutes</string>
-    <string name="contour_lines_and_hillshade">Hoogtelijnen en reliëflaag</string>
+    <string name="contour_lines_and_hillshade">Hoogtelijnen en reliëfschaduw</string>
     <string name="send_log">Verzend log</string>
     <string name="move_maps">Kaarten verplaatsen</string>
     <string name="rate_dialog_descr">Deel alstublieft uw terugkoppeling en waardeer ons werk op Google Play.</string>
@@ -3166,10 +3228,10 @@ voor Gebied: %1$s x %2$s</string>
     <string name="custom_routing">Aangepast route profiel</string>
     <string name="special_routing_type">Speciale routering</string>
     <string name="third_party_routing_type">Third-party routering</string>
-    <string name="quick_action_need_to_add_item_to_list">Voeg tenminste één item toe aan de lijst in de \'Snelle acties\' instellingen</string>
+    <string name="quick_action_need_to_add_item_to_list">Voeg tenminste één item toe aan de lijst via de instelling \'Sneltoetsen\'</string>
     <string name="routing_attr_piste_type_downhill_name">Alpine/afdaling ski</string>
     <string name="routing_attr_piste_type_downhill_description">Hellingen voor alpine en bergafwaarts skiën en toegang tot skiliften.</string>
-    <string name="routing_attr_piste_type_nordic_name">Cross country/nordic ski</string>
+    <string name="routing_attr_piste_type_nordic_name">Cross country/langlaufen</string>
     <string name="routing_attr_piste_type_nordic_description">Sporen voor nordic of cross-country skiën.</string>
     <string name="routing_attr_piste_type_skitour_name">Ski tours</string>
     <string name="routing_attr_piste_type_skitour_description">Routes voor ski tours.</string>
@@ -3190,22 +3252,22 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_attr_freeride_policy_description">Freeride en off-piste zijn officieuze routes en passages. Officieel meestal niet geprepareerd en onderhouden, en niet \'s avonds gecheckt. Op eigen risico betreden.</string>
     <string name="collected_data">Verzamelde data</string>
     <string name="last_launch_crashed">Laatste OsmAnd uitvoering gecrasht. Help ons alstublieft OsmAnd te verbeteren door de foutmelding te delen.</string>
-    <string name="app_mode_personal_transporter">Persoonlijk vervoer</string>
+    <string name="app_mode_personal_transporter">Personal transporter</string>
     <string name="app_mode_offroad">Offroad</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="routeInfo_roadClass_name">Wegtype</string>
     <string name="shared_string_open_track">Track openen</string>
-    <string name="gpx_join_gaps">Verbind de gaten</string>
+    <string name="gpx_join_gaps">Verbind onderbrekingen</string>
     <string name="new_route_calculated_dist_dbg">Route: afstand %s, reistijd %s
 \nBerekening: %.1f sec, %d wegen, %d tegels)</string>
     <string name="lang_oc">Occitaans</string>
     <string name="app_mode_wagon">Stationwagon</string>
     <string name="app_mode_pickup_truck">Pick-up truck</string>
-    <string name="get_discount_title">Verkrijg %1$d %2$s met %3$s korting.</string>
+    <string name="get_discount_title">Nu %1$d %2$s met %3$s korting.</string>
     <string name="get_discount_first_part">%1$s voor de eerste %2$s</string>
     <string name="get_discount_first_few_part">%1$s voor de eerste %2$s</string>
     <string name="get_discount_second_part">daarna %1$s</string>
-    <string name="cancel_subscription">Annuleer inschrijving</string>
+    <string name="cancel_subscription">Abonnement beëindigen</string>
     <string name="price_and_discount">%1$s • Bespaar %2$s</string>
     <string name="analytics_pref_title">Analyse</string>
     <string name="wake_time">Scherm aan gedurende</string>
@@ -3221,7 +3283,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="rendering_attr_piste_type_connection_name">Verbinding</string>
     <string name="rendering_attr_piste_type_skitour_name">Skitocht</string>
     <string name="rendering_attr_piste_type_downhill_name">Bergafwaarts</string>
-    <string name="rendering_attr_piste_type_nordic_name">Nordic</string>
+    <string name="rendering_attr_piste_type_nordic_name">Langlaufen</string>
     <string name="routeInfo_piste_type_name">Type piste</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Beginner</string>
     <string name="rendering_attr_piste_difficulty_easy_name">Makkelijk</string>
@@ -3242,7 +3304,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="store_tracks_in_daily_directories">Sla tracks op in dagelijkse folders</string>
     <string name="store_tracks_in_daily_directories_descrp">Sla tracks op in sub-folders per opname dag (zoals 2018-01-01).</string>
     <string name="simulate_your_location_gpx_descr">Simuleer uw positie door een opgenomen GPX track te gebruiken.</string>
-    <string name="quick_action_directions_from_desc">Een knop om het scherm te centreren op het vertrekpunt. Zal dan de bestemming vragen of de routeberekening starten.</string>
+    <string name="quick_action_directions_from_desc">Een knop om het midden van het scherm in te stellen als vertrekpunt. Hierna wordt de bestemming gevraagd of de routeberekening gestart.</string>
     <string name="download_map_dialog">Dialoogvenster kaart downloads</string>
     <string name="dialogs_and_notifications_title">Dialogen en meldingen</string>
     <string name="dialogs_and_notifications_descr">Bepaal popups, dialogen en meldingen.</string>
@@ -3369,10 +3431,10 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_profile_direct_to">Recht-naar-punt</string>
     <string name="please_provide_profile_name_message">Kies een naam voor het profiel</string>
     <string name="open_settings">Open instellingen</string>
-    <string name="plugin_disabled">Plugin uitgeschakeld</string>
-    <string name="plugin_disabled_descr">"Deze plug-in is een afzonderlijke App,  je zal die afzonderlijk dienen te verwijderen als je die niet meer nodig denkt te hebben. 
-\n 
-\nDe plug-in blijft op je toestel bij het verwijderen van OsmAnd."</string>
+    <string name="plugin_disabled">Plug-in uit</string>
+    <string name="plugin_disabled_descr">Deze plug-in is een afzonderlijke app, die afzonderlijk verwijderd moet worden als je deze niet meer nodig denkt te hebben.
+\n
+\nDe plug-in blijft op het apparaat aanwezig na het verwijderen van OsmAnd.</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Routering</string>
@@ -3380,7 +3442,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="import_profile_dialog_description">Het geïmporteerde profiel bevat bijkomende gegevens. Klik \'importeer\' om enkel de profielgegevens te importeren of kies bijkomende gegevens om te importeren.</string>
     <string name="export_profile_dialog_description">Je kan bijkomende gegevens om mee met het profiel te exporteren.</string>
     <string name="shared_string_app_default_w_val">App Standaardwaarde (%s)</string>
-    <string name="no_recalculation_setting">Herberekening uitschakelen</string>
+    <string name="no_recalculation_setting">Niet herberekenen</string>
     <string name="route_recalculation_dist_title">Minimale afstand om route te herbereken</string>
     <string name="route_recalculation_dist_descr">De route wordt herberekend wanneer de afstand tot die route groter is dan de opgegeven parameter</string>
     <string name="profile_type_custom_string">Eigen profiel</string>
@@ -3389,9 +3451,9 @@ voor Gebied: %1$s x %2$s</string>
     <string name="recalc_angle_dialog_descr">Een extra recht segment tussen mijn locatie en de berekende route zal getoond worden tot de route herberekend is</string>
     <string name="recalc_angle_dialog_title">Minimale hoek tussen mijn locatie en de route</string>
     <string name="shared_string_preparing">Voorbereiding</string>
-    <string name="shared_string_poi_types">POI types</string>
+    <string name="shared_string_poi_types">POI-types</string>
     <string name="shared_string_nothing_selected">Niets geselecteerd</string>
-    <string name="shared_string_quick_actions">Snelle acties</string>
+    <string name="shared_string_quick_actions">Sneltoetsen</string>
     <string name="shared_string_profiles">Profielen</string>
     <string name="listed_exist">De getoonde %1$s zijn in OsmAnd reeds beschikbaar.</string>
     <string name="replace_all_desc">Huidige elementen worden vervangen door elementen uit het bestand</string>
@@ -3409,32 +3471,246 @@ voor Gebied: %1$s x %2$s</string>
     <string name="restore_all_profile_settings">Alle profielinstellingen herstellen\?</string>
     <string name="saving_new_profile">Slaat nieuw profiel op</string>
     <string name="profile_backup_failed">Kan profiel niet back-uppen.</string>
-    <string name="n_items_of_z">%1$s of %2$s</string>
+    <string name="n_items_of_z">%1$s van %2$s</string>
     <string name="download_slope_maps">Hellingen</string>
-    <string name="quick_action_show_hide_terrain">Toon/Verberg de omgeving</string>
-    <string name="quick_action_terrain_hide">Verberg de omgeving</string>
-    <string name="quick_action_terrain_show">Toon de omgeving</string>
-    <string name="quick_action_terrain_descr">Een knop om een laag op de kaart weer te geven of te verbergen.</string>
-    <string name="delete_description">Verwijder een beschrijving</string>
-    <string name="add_description">Voeg een beschrijving toe</string>
-    <string name="select_group">Selecteer groep</string>
-    <string name="select_shape">Selecteer vorm</string>
-    <string name="shared_string_circle">cirkel</string>
+    <string name="quick_action_show_hide_terrain">Terrein tonen / verbergen</string>
+    <string name="quick_action_terrain_hide">Terrein verbergen</string>
+    <string name="quick_action_terrain_show">Terrein tonen</string>
+    <string name="quick_action_terrain_descr">Een knop om de terreinlaag al dan niet te tonen op de kaart.</string>
+    <string name="delete_description">Beschrijving verwijderen</string>
+    <string name="add_description">Beschrijving toevoegen</string>
+    <string name="select_group">Groep kiezen</string>
+    <string name="select_shape">Vorm kiezen</string>
+    <string name="shared_string_circle">Cirkel</string>
     <string name="shared_string_rhomb">Ruit</string>
     <string name="shared_string_min">Min</string>
     <string name="search_poi_types_descr">Combineer POI-types uit verschillende categorieën. Tik op \"Schakelen\" om alles te selecteren, tik op de linkerkant voor de categoriekeuze.</string>
     <string name="extra_maps_menu_group">Extra kaarten</string>
     <string name="download_unsupported_action">Niet ondersteunde actie %1$s</string>
-    <string name="tracker_item">OsmAnd zoeker</string>
-    <string name="mapillary_item">OsmAnd &amp; Mapillary</string>
-    <string name="quick_action_item">Snelle actie</string>
+    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Sneltoets</string>
     <string name="radius_ruler_item">Radius liniaal</string>
     <string name="measure_distance_item">Afstand meten</string>
     <string name="travel_item">Reizen (Wikivoyage en Wikipedia)</string>
     <string name="map_markers_item">Markeervlaggetjes</string>
     <string name="favorites_item">Favorieten</string>
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
-    <string name="osmand_purchases_item">OsmAnd aankopen</string>
-    <string name="legend_item_description">De gids voor de kaartsymbolen</string>
+    <string name="osmand_purchases_item">OsmAnd-aankopen</string>
+    <string name="legend_item_description">Betekenis van de kaartsymbolen.</string>
     <string name="navigation_profiles_item">Navigatieprofielen</string>
+    <string name="vessel_width_limit_description">Stel de breedte van het vaartuig in om smalle bruggen te vermijden</string>
+    <string name="vessel_height_limit_description">Stel de hoogte van het vaartuig in om lage bruggen te vermijden. Let op, als de brug beweegbaar is, gebruiken we de hoogte in geopende toestand.</string>
+    <string name="screen_timeout_descr">Als \"%1$s\" is geactiveerd, is de actieve tijd hiervan afhankelijk.</string>
+    <string name="default_screen_timeout">Standaard schermtimeout</string>
+    <string name="shared_string_tones">ton</string>
+    <string name="shared_string_meters">meter</string>
+    <string name="details_dialog_decr">Toon/verberg extra kaartdetails</string>
+    <string name="shared_string_night_map">Nachtkaart</string>
+    <string name="add_online_source">Voeg online bron toe</string>
+    <string name="clear_tiles_warning">Het toepassen van deze wijzigingen wist de cache van deze tile-bron</string>
+    <string name="vessel_height_warning_link">Stel de hoogte van het vaartuig in</string>
+    <string name="vessel_height_warning">Stel de hoogte van het vaartuig in om lage bruggen te vermijden. Let op, als de brug beweegbaar is, gebruiken we de hoogte in geopende toestand.</string>
+    <string name="quick_action_showhide_mapillary_title">Mapillary tonen/verbergen</string>
+    <string name="quick_action_mapillary_hide">Mapillary verbergen</string>
+    <string name="quick_action_mapillary_show">Mapillary tonen</string>
+    <string name="quick_action_showhide_mapillary_descr">Een schakelknop om de Mapillary-laag al dan niet te tonen op de kaart.</string>
+    <string name="routing_attr_length_description">Geef de toegestane voertuiglengte op voor routes.</string>
+    <string name="routing_attr_length_name">Maximale lengte</string>
+    <string name="shared_string_bearing">Richting</string>
+    <string name="item_deleted">%1$s verwijderd</string>
+    <string name="speed_cameras_restart_descr">Een herstart is noodzakelijk om de gegevens van snelheidscamera’s volledig te verwijderen.</string>
+    <string name="shared_string_uninstall_and_restart">Verwijderen en Herstarten</string>
+    <string name="speed_cameras_removed_descr">Dit apparaat bevat geen informatie over snelheidscamera’s.</string>
+    <string name="app_mode_inline_skates">Inline skates</string>
+    <string name="keep_active">Actief houden</string>
+    <string name="shared_string_uninstall">Verwijder</string>
+    <string name="speed_cameras_alert">Het waarschuwen voor snelheidscamera’s is in sommige landen in strijd met de wet.</string>
+    <string name="context_menu_actions">Acties in het contextmenu</string>
+    <string name="main_actions">Belangrijkste acties</string>
+    <string name="additional_actions_descr">U kunt toegang krijgen tot deze acties door op de \"%1$s\" knop te tikken.</string>
+    <string name="osm_live_payment_subscription_management">De betaling wordt na bevestiging van de aankoop in rekening gebracht op je Google Play-account.
+\n
+\n Het abonnement wordt automatisch verlengd, tenzij het wordt opgezegd vóór de verlengingsdatum. De betaling wordt alleen op de verlengingsdatum op uw account in rekening gebracht voor de verlengingsperiode (maand / drie maanden / jaar).
+\n
+\n Je kunt je abonnementen beheren en opzeggen via de Google Play-instellingen.</string>
+    <string name="search_offline_geo_error">Kon de geo-intent \'%s\' niet verwerken.</string>
+    <string name="index_name_antarctica">Antarctica</string>
+    <string name="sort_by_category">Sorteer op categorie</string>
+    <string name="shared_string_resume">Hervatten</string>
+    <string name="monitoring_min_distance_descr_side_effect">Neveneffecten: Perioden zonder beweging worden helemaal niet geregistreerd of met slechts één punt per keer. Kleine bewegingen (in de echte wereld) (bijvoorbeeld zijwaarts, om een mogelijke afslag tijdens uw reis te markeren) kunnen worden uitgefilterd. Het bestand bevat minder informatie voor nabewerking, en heeft slechtere statistieken door het filteren van duidelijk overbodige punten tijdens de opname, terwijl artefacten die worden veroorzaakt door slechte ontvangst of GPS-chipseteffecten wel worden bewaard.</string>
+    <string name="monitoring_min_distance_descr">Dit filter voorkomt dat dubbele punten worden opgenomen als er te weinig daadwerkelijke beweging kan hebben plaatsgevonden, dit zorgt voor een mooiere weergave van tracks die later niet nabewerkt worden.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Opmerking: als GPS was uitgeschakeld vlak voor het begin van een opname, kan het eerste gemeten punt een verminderde nauwkeurigheid hebben, dus in onze software willen we misschien een seconde wachten voordat we een punt opnemen (of het beste van 3 opeenvolgende punten opnemen, enz.), maar dit is nog niet geïmplementeerd.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Aanbeveling: Het is moeilijk te voorspellen wat er wordt opgenomen en wat niet, het is misschien beter om dit filter uit te schakelen.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Neveneffect: Als gevolg van filteren op nauwkeurigheid, kunnen punten volledig ontbreken, b.v. onder bruggen, onder bomen, tussen hoge gebouwen of bij bepaalde weersomstandigheden.</string>
+    <string name="monitoring_min_speed_descr_remark">Opmerking: snelheid &gt; 0 controle: De meeste GPS-chipsets melden alleen een snelheid als het algoritme bepaalt dat u in beweging bent, en geen als u dat niet bent. Vandaar dat het gebruik van de ‘&gt; 0’-instelling in dit filter in zekere zin gebruikmaakt van de bewegingsdetectie van de GPS-chipset. Maar zelfs als niet hier gefilterd wordt tijdens de opname, maken we nog steeds gebruik van deze functie in onze GPX-analyse om de afgelegde afstand te bepalen, dat wil zeggen dat de waarde die wordt weergegeven in dat veld, de afstand is die is opgenomen tijdens beweging.</string>
+    <string name="shared_string_terrain">Terrein</string>
+    <string name="slope_description">Helling gebruikt kleuren om de steilheid van het terrein te visualiseren.</string>
+    <string name="terrain_slider_description">Stel de minimale en maximale zoomniveaus in waarbij de laag wordt weergegeven.</string>
+    <string name="slope_download_description">Om Hellingen te tonen zijn extra kaarten nodig.</string>
+    <string name="slope_read_more">Meer over Hellingen in %1$s.</string>
+    <string name="shared_string_transparency">Transparantie</string>
+    <string name="shared_string_zoom_levels">Zoomniveaus</string>
+    <string name="shared_string_legend">Legenda</string>
+    <string name="import_complete_description">Alle gegevens uit de %1$s zijn geïmporteerd, open met de onderstaande knoppen het benodigde deel van de app om deze te beheren.</string>
+    <string name="shared_string_import_complete">Import voltooid</string>
+    <string name="items_added">Items toegevoegd</string>
+    <string name="checking_for_duplicate_description">OsmAnd controleert %1$s op duplicaten met bestaande items in de app.
+\n
+\nDit kan even duren.</string>
+    <string name="shared_string_importing">Bezig met importeren</string>
+    <string name="importing_from">Gegevens importeren uit %1$s</string>
+    <string name="clear_recorded_data_warning">Weet je zeker dat je de opgenomen gegevens wil wissen\?</string>
+    <string name="recalculate_route_in_deviation">Route herberekenen in geval van afwijking</string>
+    <string name="select_distance_route_will_recalc">Selecteer de afstand waarbij de route wordt herberekend.</string>
+    <string name="recalculate_route_distance_promo">De route wordt herberekend als de afstand van de route tot de huidige locatie groter is dan de geselecteerde waarde.</string>
+    <string name="shared_string_octagon">Achthoek</string>
+    <string name="shared_string_square">Vierkant</string>
+    <string name="ui_customization_description">Pas het aantal items aan in \'Map, \'Kaart configureren\' en \'Contextmenu\'.
+\n
+\nSchakel ongebruikte plug-ins uit om al hun besturingselementen te verbergen. %1$s.</string>
+    <string name="ui_customization_short_descr">Mappen, contextmenu</string>
+    <string name="ui_customization">Aanpassing van de gebruikersinterface</string>
+    <string name="shared_string_drawer">Map</string>
+    <string name="reorder_or_hide_from">Herschik of verberg items uit de %1$s.</string>
+    <string name="shared_string_divider">Scheidingslijn</string>
+    <string name="divider_descr">Elementen na dit punt zijn gescheiden door een scheidingslijn.</string>
+    <string name="shared_string_hidden">Verborgen</string>
+    <string name="hidden_items_descr">Deze items worden niet getoond in het menu, maar de bijbehorende opties of plug-ins blijven werken.</string>
+    <string name="reset_items_descr">Door instellingen te verbergen worden deze in hun oorspronkelijke staat hersteld.</string>
+    <string name="main_actions_descr">Heeft maar vier knoppen.</string>
+    <string name="move_inside_category">U kunt items alleen binnen deze categorie verplaatsen.</string>
+    <string name="developer_plugin">Plug-in voor ontwikkelaars</string>
+    <string name="replace_point_descr">Vervang een ander punt door dit punt.</string>
+    <string name="app_mode_ski_touring">Toerskiën</string>
+    <string name="app_mode_ski_snowmobile">Sneeuwscooter</string>
+    <string name="custom_osmand_plugin">Aangepaste OsmAnd-plug-in</string>
+    <string name="shared_string_items">Items</string>
+    <string name="changes_applied_to_profile">Wijzigingen toegepast op het \'%1$s\'-profiel.</string>
+    <string name="settings_item_read_error">Kon niet lezen van \'%1$s\'.</string>
+    <string name="settings_item_write_error">Kon niet schrijven naar \'%1$s\'.</string>
+    <string name="settings_item_import_error">Kon niet importeren uit \'%1$s\'.</string>
+    <string name="select_track_file">Selecteer track-bestand</string>
+    <string name="shared_string_languages">Talen</string>
+    <string name="shared_string_language">Taal</string>
+    <string name="shared_string_all_languages">Alle talen</string>
+    <string name="wiki_menu_download_descr">Om Wikipedia-POI’s op de kaart te tonen zijn extra kaarten nodig.</string>
+    <string name="select_wikipedia_article_langs">Selecteer de talen voor Wikipedia-artikelen op de kaart. Tijdens het lezen van het artikel kan omgeschakeld worden naar een andere beschikbare taal.</string>
+    <string name="some_articles_may_not_available_in_lang">Sommige Wikipedia-artikelen zijn mogelijk niet beschikbaar in de eigen taal.</string>
+    <string name="lang_zhyue">Kantonees</string>
+    <string name="lang_zhminnan">Minnanyu</string>
+    <string name="lang_yo">Yoruba</string>
+    <string name="lang_war">Waray-Waray</string>
+    <string name="lang_uz">Oezbeeks</string>
+    <string name="lang_ur">Urdu</string>
+    <string name="lang_tt">Tataars</string>
+    <string name="lang_tg">Tadzjieks</string>
+    <string name="lang_sco">Schots</string>
+    <string name="lang_scn">Siciliaans</string>
+    <string name="lang_pnb">Punjabi</string>
+    <string name="lang_ne">Nepalees</string>
+    <string name="lang_nap">Napolitaans</string>
+    <string name="lang_my">Birmaans</string>
+    <string name="lang_mn">Mongools</string>
+    <string name="lang_min">Minangkabaus</string>
+    <string name="lang_mg">Malagasi</string>
+    <string name="lang_ky">Kirgizisch</string>
+    <string name="lang_kk">Kazachs</string>
+    <string name="lang_jv">Javaans</string>
+    <string name="lang_gu">Gujarati</string>
+    <string name="lang_cv">Tsjoevasjisch</string>
+    <string name="lang_ce">Tsjetsjeens</string>
+    <string name="lang_bar">Beiers</string>
+    <string name="lang_ba">Bashkir</string>
+    <string name="lang_an">Aragonees</string>
+    <string name="lang_lmo">Lombardisch</string>
+    <string name="custom_color">Aangepaste kleur</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="search_poi_types">POI-types zoeken</string>
+    <string name="quick_action_transport_hide">OV-informatie verbergen</string>
+    <string name="quick_action_transport_show">OV-informatie tonen</string>
+    <string name="quick_action_show_hide_transport">OV-informatie tonen/verbergen</string>
+    <string name="quick_action_transport_descr">Knop om OV-informatie al dan niet te tonen op de kaart.</string>
+    <string name="add_edit_favorite">Favoriet toevoegen / bewerken</string>
+    <string name="create_edit_poi">POI toevoegen / bewerken</string>
+    <string name="parking_positions">Parkeerlocaties</string>
+    <string name="reset_deafult_order">Standaardvolgorde van de items herstellen</string>
+    <string name="back_to_editing">Terugkeren naar wijzigen</string>
+    <string name="quick_action_switch_profile_descr">De sneltoets wisselt tussen de geselecteerde profielen.</string>
+    <string name="shared_string_add_profile">Voeg profiel toe</string>
+    <string name="change_application_profile">Wijzig app-profiel</string>
+    <string name="index_item_world_basemap_detailed">Wereldoverzichtskaart (gedetailleerd)</string>
+    <string name="unsupported_type_error">Niet ondersteund type</string>
+    <string name="width_limit_description">Geef de voertuigbreedte op, er zijn mogelijk routebeperkingen voor brede voertuigen.</string>
+    <string name="height_limit_description">Geef de voertuighoogte op, er zijn mogelijk routebeperkingen voor hoge voertuigen.</string>
+    <string name="weight_limit_description">Geef het voertuiggewicht op, er zijn mogelijk routebeperkingen voor zwaar verkeer.</string>
+    <string name="gpx_parse_error">OsmAnd GPX is corrupt, neem contact op met het support team voor verder onderzoek.</string>
+    <string name="shared_string_always">Altijd</string>
+    <string name="screen_control">Scherminstellingen</string>
+    <string name="system_screen_timeout_descr">Zet het scherm uit volgens de systeeminstelling van de schermtimeout.</string>
+    <string name="system_screen_timeout">Gebruik de schermtimeout van het systeem</string>
+    <string name="turn_screen_on_descr">Kies wanneer het scherm aangezet moet worden (OsmAnd moet in de voorgrond actief zijn als het apparaat vergrendeld wordt):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Scherm aanzetten bij elke routeaanwijzing.</string>
+    <string name="turn_screen_on_navigation_instructions">Routeaanwijzingen</string>
+    <string name="turn_screen_on_power_button_disabled">Uitgeschakeld. De instelling ‘Timeout na wakker worden’ moet ingesteld zijn op ‘Scherm aanlaten’.</string>
+    <string name="turn_screen_on_power_button_descr">Door op de aan/uit-knop te drukken gaat het scherm aan met OsmAnd op de voorgrond van het vergrendelscherm.</string>
+    <string name="turn_screen_on_power_button">Aan/uit-knop</string>
+    <string name="turn_screen_on_proximity_sensor">Nabijheidssensor</string>
+    <string name="turn_screen_on_wake_time_descr">Selecteer de schermtimeout na wakker worden. (Kies “%1$s” om geen timeout te gebruiken.)</string>
+    <string name="keep_screen_off">Scherm uitlaten</string>
+    <string name="keep_screen_on">Scherm aanlaten</string>
+    <string name="pseudo_mercator_projection">Pseudo-Mercatorprojectie</string>
+    <string name="one_image_per_tile">Eén beeldbestand per tile</string>
+    <string name="sqlite_db_file">SQLiteDB-bestand</string>
+    <string name="online_map_name_helper_text">Geef een naam voor de online kaartbron.</string>
+    <string name="online_map_url_helper_text">De URL van de onlinebron invoeren of plakken.</string>
+    <string name="edit_online_source">Bewerk onlinebron</string>
+    <string name="expire_time">Vervaldatum</string>
+    <string name="mercator_projection">Mercatorprojectie</string>
+    <string name="storage_format">Opslagformaat</string>
+    <string name="map_source_zoom_levels">Stel een minimum en maximum zoomniveau in om de online kaart te tonen of te laden.</string>
+    <string name="shared_string_delete_all_q">Alles wissen\?</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Sneltoetsen kunnen geëxporteerd of geïmporteerd worden met app-profielen.</string>
+    <string name="delete_all_actions_message_q">Weet je zeker dat je %d sneltoetsen onherroepelijk wil verwijderen\?</string>
+    <string name="speed_cameras_legal_descr">In sommige landen of regio’s is het gebruik van toepassingen om te waarschuwen voor snelheidscamera’s in strijd met de wet.
+\n
+\nMaak een keuze op basis van de geldende wet.
+\n
+\nKies %1$s om meldingen en waarschuwingen te ontvangen over snelheidscamera’s.
+\n
+\nKies %2$s om alle gegevens over snelheidscamera’s te verwijderen: waarschuwingen, meldingen en POI’s worden verwijderd tot OsmAnd volledig opnieuw geïnstalleerd wordt.</string>
+    <string name="uninstall_speed_cameras">Verwijder snelheidscamera’s</string>
+    <string name="shared_string_legal">Legaal</string>
+    <string name="speed_camera_pois">Snelheidscamera’s als POI’s</string>
+    <string name="hillshade_description">De reliëfschaduwkaart maakt gebruik van donkere schaduwen om hellingen, bergtoppen en valleien te visualiseren.</string>
+    <string name="hillshade_download_description">Om Reliëfschaduw te tonen zijn extra kaarten nodig.</string>
+    <string name="shared_string_hillshade">Reliëfschaduw</string>
+    <string name="terrain_empty_state_text">Selecteer deze optie om een reliëfschaduw- of hellingskaart te tonen. Op onze site staat meer informatie over deze kaarttypes.</string>
+    <string name="map_source_zoom_levels_descr">Heeft invloed op de weergave bij gebruik als kaart of als extra kaartlaag/achtergrondlaag.
+\n
+\n%1$s: De kaart wordt alleen getoond binnen het geselecteerde zoombereik.
+\n
+\n%2$s zijn de niveau’s waarop de originele tiles zichtbaar zijn, buiten dit bereik wordt gebruik gemaakt van upscaling of downscaling.</string>
+    <string name="expire_time_descr">Gecachte tiles worden na het opgegeven aantal minuten opnieuw gedownload. Laat dit veld leeg om tiles van deze bron nooit te vernieuwen.
+\n
+\nEen dag is 1440 minuten.
+\nEen week is 10 080 minuten.
+\nEen maand is 43 829 minuten.</string>
+    <string name="tiles_storage_descr">Kies hoe gedownloade tiles worden opgeslagen.</string>
+    <string name="profiles_for_action_not_found">Geen overeenkomende profielen gevonden.</string>
+    <string name="screen_timeout">Time-out van het scherm</string>
+    <string name="use_volume_buttons_as_zoom_descr">Inschakelen om het zoomniveau van de kaart in te stellen met de volumeknoppen.</string>
+    <string name="use_volume_buttons_as_zoom">Gebruik volumeknoppen om in en uit te zoomen</string>
+    <string name="plugin_wikipedia_description">Verkrijg informatie over POIs uit Wikipedia. Het is je offline reisgidsje - schakel de Wikipedia-plug-in in en geniet van artikelen over de bezienswaardigheden in je omgeving.</string>
+    <string name="lenght_limit_description">Geef de voertuiglengte op, er zijn mogelijk routebeperkingen voor lange voertuigen.</string>
+    <string name="quick_action_remove_next_destination_descr">Het volgende routepunt wordt verwijderd. Als dit de eindbestemming was, stopt de navigatie.</string>
+    <string name="quick_action_remove_next_destination">Verwijder het volgende routepunt</string>
+    <string name="please_provide_point_name_error">Kies een naam voor het punt</string>
+    <string name="search_download_wikipedia_maps">Wikipedia-kaarten downloaden</string>
+    <string name="app_mode_motor_scooter">Motorscooter</string>
+    <string name="app_mode_enduro_motorcycle">Enduromotor</string>
+    <string name="app_mode_wheelchair">Rolstoel</string>
+    <string name="app_mode_wheelchair_forward">Rolstoel vooraanzicht</string>
+    <string name="osm_edit_closed_note">Opgeloste OSM-notitie</string>
+    <string name="app_mode_go_cart">Kart</string>
 </resources>

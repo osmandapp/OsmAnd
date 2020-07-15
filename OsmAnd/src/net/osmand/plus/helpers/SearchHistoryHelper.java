@@ -428,6 +428,9 @@ public class SearchHistoryHelper {
 						do {
 							String name = query.getString(0);
 							PointDescription p = PointDescription.deserializeFromString(name, new LatLon(query.getDouble(1), query.getDouble(2)));
+							if (context.getPoiTypes().isTypeForbidden(p.getName())){
+								query.moveToNext();
+							}
 							HistoryEntry e = new HistoryEntry(query.getDouble(1), query.getDouble(2),
 									p);
 							long time = query.getLong(3);

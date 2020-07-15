@@ -530,16 +530,16 @@
     <string name="about_version">Versión:</string>
     <string name="shared_string_about">Información</string>
     <string name="about_settings_descr">Información de la versión, licencias, miembros del proyecto</string>
-    <string name="local_index_tile_data_zooms">Zooms descargados: %1$s</string>
-    <string name="local_index_tile_data_expire">Expira (minutos): %1$s</string>
+    <string name="local_index_tile_data_zooms">Niveles de zoom descargados: %1$s</string>
+    <string name="local_index_tile_data_expire">Tiempo de expiración (minutos): %1$s</string>
     <string name="local_index_tile_data_downloadable">Descargable: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom máximo: %1$s</string>
     <string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
     <string name="local_index_tile_data_name">Datos de teselas: %1$s</string>
     <string name="edit_tilesource_successfully">Repositorio de teselas «%1$s» guardada</string>
-    <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
+    <string name="edit_tilesource_elliptic_tile">Proyección elíptica de Mercator</string>
     <string name="edit_tilesource_maxzoom">Zoom máximo</string>
-    <string name="edit_tilesource_expiration_time">Expira (minutos)</string>
+    <string name="edit_tilesource_expiration_time">Tiempo de expiración (minutos)</string>
     <string name="edit_tilesource_minzoom">Zoom mínimo</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Elegir existente…</string>
@@ -562,8 +562,8 @@
     <string name="clear_intermediate_points">Limpiar destinos intermedios</string>
     <string name="keep_intermediate_points">Mantener destinos intermedios</string>
     <string name="new_directions_point_dialog">Ya se definieron destinos intermedios.</string>
-    <string name="context_menu_item_directions_to">Llegar hasta aquí</string>
-    <string name="context_menu_item_directions_from">Ir desde aquí</string>
+    <string name="context_menu_item_directions_to">Ir hasta</string>
+    <string name="context_menu_item_directions_from">Ir desde</string>
     <string name="route_descr_map_location">Mapa:</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
     <string name="route_descr_destination">Destino</string>
@@ -1772,7 +1772,6 @@
     <string name="context_menu_item_open_note">Abrir nota de OSM</string>
     <string name="osm_edit_reopened_note">Nota de OSM reabierta</string>
     <string name="osm_edit_commented_note">Nota de OSM comentada</string>
-    <string name="osm_edit_removed_note">Nota de OSM resuelta</string>
     <string name="osm_edit_created_note">Nota de OSM creada</string>
     <string name="osn_bug_name">Nota de OSM</string>
     <string name="osn_add_dialog_title">Crear nota</string>
@@ -2342,18 +2341,17 @@
 \n • (Opcional) Grabación del viaje en modo reposo (mientras el dispositivo está bloqueado)
 \n OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades.
 \n</string>
-    <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa: 
-\n • Europa Occidental: **** 
-\n • Europa Oriental: *** 
-\n • Rusia: *** 
-\n • Norteamérica: *** 
-\n • Sudamérica: ** 
-\n • Asia: ** 
-\n • Japón y Corea: *** 
-\n • Medio Oriente: ** 
-\n • África: ** 
-\n • Antártida: * 
-\n
+    <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa:
+\n • Europa Occidental: ****
+\n • Europa Oriental: ***
+\n • Rusia: ***
+\n • Norteamérica: ***
+\n • Sudamérica: **
+\n • Asia: **
+\n • Japón y Corea: ***
+\n • Medio Oriente: **
+\n • África: **
+\n • Antártida: *
 \n ¡Más países alrededor del globo están disponibles para descargar! Desde Afganistán a Zimbabue, desde Australia a Estados Unidos. Argentina, Brasil, Canadá, Francia, Alemania, México, Reino Unido, España, …
 \n</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad. 
@@ -3249,7 +3247,7 @@
     <string name="analytics_pref_title">Análisis</string>
     <string name="turn_screen_on_info">Mostrar el mapa en la pantalla de bloqueo durante la navegación.</string>
     <string name="route_parameters_info">Ajustes para la navegación del perfil elegido «%1$s».</string>
-    <string name="wake_time">Tiempo de espera después del encendido</string>
+    <string name="wake_time">Tiempo de espera al encender</string>
     <string name="units_and_formats">Unidades y formatos</string>
     <string name="appearance">Aspecto</string>
     <string name="map_look_descr">Apariencia del mapa</string>
@@ -3271,7 +3269,7 @@
     <string name="map_during_navigation_info">Mapa durante la navegación</string>
     <string name="map_during_navigation">Mapa durante la navegación</string>
     <string name="shared_string_other">Otros</string>
-    <string name="vehicle_parameters_descr">Peso, altura, velocidad</string>
+    <string name="vehicle_parameters_descr">Peso, altura, longitud, velocidad</string>
     <string name="vehicle_parameters">Parámetros del vehículo</string>
     <string name="voice_announces_info">Los anuncios de voz solo se realizan durante la navegación.</string>
     <string name="voice_announces_descr">Instrucciones de navegación y anuncios</string>
@@ -3613,7 +3611,7 @@
     <string name="app_mode_ski_touring">Esquí de travesía</string>
     <string name="app_mode_ski_snowmobile">Motonieve</string>
     <string name="custom_osmand_plugin">Complemento personalizado de OsmAnd</string>
-    <string name="replace_point_descr">Reemplaza otro punto con esto</string>
+    <string name="replace_point_descr">Reemplaza otro punto con esto.</string>
     <string name="settings_item_read_error">No se pudo leer desde «%1$s».</string>
     <string name="settings_item_write_error">No se pudo escribir en «%1$s».</string>
     <string name="settings_item_import_error">No se pudo importar desde «%1$s».</string>
@@ -3643,7 +3641,7 @@
     <string name="wikipedia_poi_languages_promo">Algunos artículos de Wikipedia pueden no estar disponibles en tu idioma, elige los idiomas en los que los artículos de Wikipedia aparecerán en el mapa.
 \nPodrás cambiar entre todos los idiomas disponibles mientras lees el artículo.</string>
     <string name="wiki_menu_download_descr">Se necesitan mapas adicionales para ver los puntos de interés de Wikipedia en el mapa.</string>
-    <string name="select_wikipedia_article_langs">Marca los idiomas en los que los artículos de Wikipedia aparecerán en el mapa. Puedes cambiar entre todos los idiomas disponibles mientras lees el artículo.</string>
+    <string name="select_wikipedia_article_langs">Marca los idiomas de los artículos de Wikipedia en el mapa. Cambia a cualquier idioma disponible mientras lees el artículo.</string>
     <string name="some_articles_may_not_available_in_lang">Es posible que algunos artículos de Wikipedia no estén disponibles en tu idioma.</string>
     <string name="lang_zhyue">Cantonés</string>
     <string name="lang_zhminnan">Min del Sur</string>
@@ -3734,7 +3732,7 @@
     <string name="gpx_parse_error">El GPX de OsmAnd no está bien formado, por favor, contacta con el equipo de soporte para investigar más a fondo.</string>
     <string name="shared_string_always">Siempre</string>
     <string name="screen_control">Control de pantalla</string>
-    <string name="system_screen_timeout_descr">Apaga la pantalla después del tiempo de espera del sistema.</string>
+    <string name="system_screen_timeout_descr">Apaga la pantalla según el tiempo de espera del sistema.</string>
     <string name="system_screen_timeout">Usar el tiempo de espera de la pantalla del sistema</string>
     <string name="turn_screen_on_options_descr">Opciones de activación de la pantalla:</string>
     <string name="turn_screen_on_descr">Elige las opciones de activación de la pantalla (asegúrate de que OsmAnd esté en primer plano al bloquear el dispositivo):</string>
@@ -3746,7 +3744,7 @@
     <string name="turn_screen_on_wake_time_descr">Elige el tiempo de espera de la pantalla luego del encendido. («%1$s» no aplica ningún tiempo de espera.)</string>
     <string name="keep_screen_on">Mantener la pantalla encendida</string>
     <string name="keep_screen_off">Mantener la pantalla apagada</string>
-    <string name="screen_timeout_descr">Si la opción «%1$s» está activada, el tiempo de actividad dependerá de ello.</string>
+    <string name="screen_timeout_descr">Si «%1$s» está activado, el tiempo de actividad dependerá de ello.</string>
     <string name="pseudo_mercator_projection">Proyección de pseudo-Mercator</string>
     <string name="one_image_per_tile">Un archivo de imagen por tesela</string>
     <string name="sqlite_db_file">Archivo SQLiteDB</string>
@@ -3756,29 +3754,75 @@
     <string name="expire_time">Tiempo de expiración</string>
     <string name="mercator_projection">Proyección de Mercator</string>
     <string name="storage_format">Formato de almacenamiento</string>
-    <string name="map_source_zoom_levels">Define el nivel de zoom mínimo y máximo en el que se muestra o carga el mapa en línea.</string>
-    <string name="map_source_zoom_levels_descr">Estos parámetros afectan a la visualización al usarlos como mapa, superposición o subyacencia.
-\n
-\n%1$s: El mapa se limita a los zoom elegidos.
-\n
-\n%2$s: Niveles de zoom en los que las teselas originales son visibles. El aumento o reducción de escala ocurrirá fuera de estos valores.</string>
-    <string name="expire_time_descr">Tiempo de expiración en minutos. Las teselas almacenadas serán recargadas después del tiempo indicado. Deja este campo vacío para que nunca se refresquen las teselas de este repositorio.
-\n
-\nUn día son 1440 minutos.
-\nUna semana son 10 080 minutos.
+    <string name="map_source_zoom_levels">Define un nivel de zoom mínimo y máximo para mostrar o cargar el mapa en línea.</string>
+    <string name="map_source_zoom_levels_descr">Afectan a la pantalla al usarlos como mapa, superposición o subyacencia. 
+\n 
+\n%1$s: El mapa está limitado al rango de zoom elegidos. 
+\n 
+\n%2$s son los niveles en los que las teselas originales son visibles, el aumento o reducción de escala ocurrirá fuera de estos valores.</string>
+    <string name="expire_time_descr">Las teselas almacenadas serán renovadas después del número especificado en minutos. Dejar este campo vacío para que nunca se renueven las teselas de este repositorio. 
+\n 
+\nUn día son 1440 minutos. 
+\nUna semana son 10 080 minutos. 
 \nUn mes son 43 829 minutos.</string>
-    <string name="tiles_storage_descr">Elige cómo se almacenarán las teselas descargadas.</string>
+    <string name="tiles_storage_descr">Elige cómo almacenar las teselas descargadas.</string>
     <string name="default_screen_timeout">Tiempo predefinido de la espera de la pantalla</string>
     <string name="export_import_quick_actions_with_profiles_promo">Puedes exportar o importar acciones rápidas con perfiles de aplicación.</string>
     <string name="shared_string_delete_all_q">¿Borrar todo\?</string>
     <string name="delete_all_actions_message_q">¿Borrar irrevocablemente %d acciones rápidas\?</string>
-    <string name="width_limit_description">Proporciona el ancho del vehículo. Se pueden aplicar algunas restricciones de ruta para vehículos anchos.</string>
-    <string name="height_limit_description">Proporciona la altura del vehículo, se pueden aplicar algunas restricciones de ruta para vehículos altos.</string>
-    <string name="weight_limit_description">Proporciona el peso del vehículo, se pueden aplicar algunas restricciones de ruta para vehículos pesados.</string>
+    <string name="width_limit_description">Proporciona el ancho del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos anchos.</string>
+    <string name="height_limit_description">Proporciona la altura del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos altos.</string>
+    <string name="weight_limit_description">Proporciona el peso del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos pesados.</string>
     <string name="screen_timeout">Tiempo de espera de la pantalla</string>
     <string name="shared_string_tones">tonos</string>
     <string name="shared_string_meters">metros</string>
-    <string name="details_dialog_decr">Controla la visibilidad de los detalles adicionales que se muestran en el mapa</string>
+    <string name="details_dialog_decr">Muestra u oculta los detalles adicionales del mapa</string>
     <string name="shared_string_night_map">Mapa nocturno</string>
     <string name="shared_string_all_time">Todo el tiempo</string>
+    <string name="turn_screen_on_power_button_disabled">Desactivado. Es necesario activar «Mantener la pantalla encendida» en «Tiempo de espera al encender».</string>
+    <string name="add_online_source">Añadir repositorio en línea</string>
+    <string name="clear_tiles_warning">Al aplicar estos cambios, los datos almacenados serán borrados para este repositorio de teselas</string>
+    <string name="vessel_height_warning_link">Definir altura de la embarcación</string>
+    <string name="vessel_height_limit_description">Define la altura de la embarcación para evitar puentes bajos. Tener en cuenta que si el puente es móvil, usaremos su altura en estado abierto.</string>
+    <string name="vessel_height_warning">Puedes definir la altura de la embarcación para evitar puentes bajos. Tener en cuenta que si el puente es móvil, usaremos su altura en estado abierto.</string>
+    <string name="vessel_width_limit_description">Define el ancho de la embarcación para evitar puentes estrechos</string>
+    <string name="speed_cameras_alert">Las alertas de los radares de velocidad se encuentran prohibidas por ley en algunos países.</string>
+    <string name="speed_cameras_legal_descr">En algunos países o regiones, las alertas de los radares de velocidad se encuentran prohibidas por ley.
+\n
+\nDebes elegir dependiendo de las leyes del país.
+\n
+\nPulsa en «%1$s», para recibir alertas y advertencias sobre los radares de velocidad.
+\n
+\nPulsa en «%2$s», para borrar todos los datos relacionados con los radares de velocidad (alertas, notificaciones y PDI) hasta reinstalar OsmAnd completamente.</string>
+    <string name="uninstall_speed_cameras">Desinstalar radares de velocidad</string>
+    <string name="speed_camera_pois">PDI de los radares de velocidad</string>
+    <string name="speed_cameras_restart_descr">Se debe reiniciar para borrar completamente los datos de los radares de velocidad.</string>
+    <string name="shared_string_legal">Legal</string>
+    <string name="keep_active">Mantener</string>
+    <string name="shared_string_uninstall">Desinstalar</string>
+    <string name="quick_action_showhide_mapillary_title">Mostrar/ocultar Mapillary</string>
+    <string name="quick_action_mapillary_hide">Ocultar Mapillary</string>
+    <string name="quick_action_mapillary_show">Mostrar Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Un botón que alterna la capa de Mapillary en el mapa.</string>
+    <string name="shared_string_bearing">Rumbo</string>
+    <string name="item_deleted">%1$s borrado</string>
+    <string name="shared_string_uninstall_and_restart">Desinstalar y reiniciar</string>
+    <string name="routing_attr_length_description">Indica la longitud permitida del vehículo en rutas.</string>
+    <string name="routing_attr_length_name">Límite de longitud</string>
+    <string name="speed_cameras_removed_descr">Este dispositivo no tiene radares de velocidad.</string>
+    <string name="app_mode_inline_skates">Patines en línea</string>
+    <string name="use_volume_buttons_as_zoom_descr">Permite controlar el nivel de zoom del mapa con los botones de volumen del dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom">Botones de volumen como zoom</string>
+    <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
+    <string name="quick_action_remove_next_destination">Borrar el siguiente punto de destino</string>
+    <string name="please_provide_point_name_error">Proporciona un nombre para el punto</string>
+    <string name="quick_action_remove_next_destination_descr">El punto de destino actual de la ruta será borrado. Si será el destino, la navegación se detendrá.</string>
+    <string name="search_download_wikipedia_maps">Descargar datos de Wikipedia</string>
+    <string name="plugin_wikipedia_description">Obtén información sobre los puntos de interés de Wikipedia. Es tu guía de bolsillo sin conexión - sólo activa el complemento de Wikipedia y disfruta los artículos sobre los objetos de alrededor.</string>
+    <string name="app_mode_enduro_motorcycle">Motocicleta de enduro</string>
+    <string name="app_mode_motor_scooter">Motoneta (motor)</string>
+    <string name="app_mode_wheelchair">Silla de ruedas</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="osm_edit_closed_note">Nota de OSM cerrada</string>
+    <string name="app_mode_wheelchair_forward">Silla de ruedas (hacia adelante)</string>
 </resources>

@@ -396,7 +396,7 @@
     <string name="poi_quarry">Steinbruch</string>
     <string name="poi_raceway">Rennstrecke</string>
     <string name="poi_racquet">Racquetball</string>
-    <string name="poi_radiotechnics">Radiotechnikladen</string>
+    <string name="poi_radiotechnics">Funktechnik/Elektronikladen</string>
     <string name="poi_halt">Eisenbahnhaltestelle</string>
     <string name="poi_railway_platform">Bahnsteig</string>
     <string name="poi_railway_station">Bahnhof</string>
@@ -475,7 +475,7 @@
     <string name="poi_second_hand">Gebrauchtwarenladen</string>
     <string name="poi_service_tyres">Reifenhändler</string>
     <string name="poi_ses_station">SES-Station</string>
-    <string name="poi_sewing">Schneiderei</string>
+    <string name="poi_sewing">Nähbedarf</string>
     <string name="poi_shelter">Unterstand</string>
     <string name="poi_ship_chandler">Schiffsausrüster</string>
     <string name="poi_historic_ship">Historisches Schiff</string>
@@ -499,7 +499,7 @@
     <string name="poi_spring">Quelle</string>
     <string name="poi_stadium">Stadion</string>
     <string name="poi_craft_stand_builder">Messebauer</string>
-    <string name="poi_standpipe">Wasserhahn</string>
+    <string name="poi_standpipe">Standrohr</string>
     <string name="poi_stationery">Bürobedarf</string>
     <string name="poi_stone">Auffallender Stein</string>
     <string name="poi_craft_stonemason">Steinmetz</string>
@@ -616,7 +616,7 @@
     <string name="poi_shop_food">Lebensmittelgeschäft und Supermarkt</string>
     <string name="poi_emergency">Notfall</string>
     <string name="poi_road_obstacle">Straßenhindernis</string>
-    <string name="poi_filling_station">Tankstelle (alle Fzg.)</string>
+    <string name="poi_filling_station">Tankstelle (alle Typen)</string>
     <string name="poi_public_transport">ÖPNV</string>
     <string name="poi_man_made">von Menschenhand</string>
     <string name="poi_water_supply">Wasserversorgung</string>
@@ -713,7 +713,7 @@
     <string name="poi_forest">Forstwald</string>
     <string name="poi_reservoir">Reservoir</string>
     <string name="poi_general_tourist_attraction_yes">Allgemeine Sehenswürdigkeit</string>
-    <string name="poi_fuel_svo">Biokraftstoff</string>
+    <string name="poi_fuel_svo">Pflanzenölkraftstoff</string>
     <string name="poi_training">Übungsgelände</string>
     <string name="poi_quarter">Quartier</string>
     <string name="poi_hunting_lodge">Jagdhütte</string>
@@ -808,7 +808,7 @@
     <string name="poi_garden_furniture">Gartenmöbelladen</string>
     <string name="poi_leather">Ledergeschäft</string>
     <string name="poi_music">Musikgeschäft</string>
-    <string name="poi_scuba_diving_shop">Gerätetaucherbedarf</string>
+    <string name="poi_scuba_diving_shop">Tauchgerätebedarf</string>
     <string name="poi_tyres">Reifengeschäft</string>
     <string name="poi_watches">Uhrengeschäft</string>
     <string name="poi_swimming_pool_shop">Poolzubehörgeschäft</string>
@@ -915,7 +915,7 @@
     <string name="poi_recycling_tyres">Reifen</string>
     <string name="poi_recycling_tv_monitor">TV und Monitore</string>
     <string name="poi_recycling_bottles">Flaschen</string>
-    <string name="poi_recycling_cork">Korken</string>
+    <string name="poi_recycling_cork">Kork</string>
     <string name="poi_recycling_printer_cartridges">Druckerpatronen</string>
     <string name="poi_recycling_paint">Farben</string>
     <string name="poi_recycling_styrofoam">Styropor</string>
@@ -948,7 +948,7 @@
     <string name="poi_recycling_centre">Recyclingzentrum</string>
     <string name="poi_recycling_aluminium">Aluminium</string>
     <string name="poi_recycling_white_goods">Weiße Ware</string>
-    <string name="poi_recycling_cooking_oil">Speiseöl</string>
+    <string name="poi_recycling_cooking_oil">Frittieröl</string>
     <string name="poi_recycling_engine_oil">Motoröl</string>
     <string name="poi_recycling_hazardous_waste">Giftmüll</string>
     <string name="poi_recycling_hydrargyrum">Quecksilber</string>
@@ -1333,7 +1333,7 @@
     <string name="poi_smoking_yes">Erlaubt</string>
     <string name="poi_smoking_separated">In einem separaten Raum</string>
     <string name="poi_traffic_signals_sound_yes">ja</string>
-    <string name="poi_traffic_signals_sound_no">nein</string>
+    <string name="poi_traffic_signals_sound_no">kein Signalton</string>
     <string name="poi_rescue_station">Rettungsstation</string>
     <string name="poi_mini_roundabout">Mini-Kreisverkehr</string>
     <string name="poi_railway_crossing">Bahnübergang</string>
@@ -1644,12 +1644,12 @@
     <string name="poi_garden_style_kitchen">Gartenstil: Küchengarten</string>
     <string name="poi_garden_style_rosarium">Gartenstil: Rosengarten</string>
     <string name="poi_garden_style_french">Gartenstil: französisch</string>
-    <string name="poi_love_hotel">Liebeshotel</string>
+    <string name="poi_love_hotel">Stundenhotel</string>
     <string name="poi_payment_electronic_purses_yes">Elektronische Geldbörsen</string>
     <string name="poi_payment_uta_yes">UTA</string>
     <string name="poi_payment_uta_no">UTA-Karten nicht akzeptiert</string>
-    <string name="poi_payment_efectivo_yes">Bargeld</string>
-    <string name="poi_payment_efectivo_no">Bargeld nicht akzeptiert</string>
+    <string name="poi_payment_efectivo_yes">Efectivo</string>
+    <string name="poi_payment_efectivo_no">Efectivo nicht akzeptiert</string>
     <string name="poi_payment_girocard_yes">Girokarte</string>
     <string name="poi_payment_girocard_no">Girokarte nicht akzeptiert</string>
     <string name="poi_payment_discover_card_yes">Discover-Karte</string>
@@ -1914,7 +1914,7 @@
     <string name="poi_artwork_type_statue">Kunstart: Statue</string>
     <string name="poi_artwork_type_mural">Kunstart: Wandgemälde</string>
     <string name="poi_artwork_type_architecture">Kunstart: Architektur</string>
-    <string name="poi_artwork_type_painting">Kunstart: Bild</string>
+    <string name="poi_artwork_type_painting">Kunstart: Gemälde</string>
     <string name="poi_artwork_type_stone">Kunstart: Stein</string>
     <string name="poi_artwork_type_bust">Kunstart: Büste</string>
     <string name="poi_artwork_type_installation">Kunstart: Installation</string>
@@ -2126,7 +2126,7 @@
     <string name="poi_refugee_yes">Flüchtlingsunterkunft</string>
     <string name="poi_social_facility_group_home">Wohngruppe</string>
     <string name="poi_social_facility_assisted_living">Betreutes Wohnen</string>
-    <string name="poi_social_facility_outreach">Freier Treff</string>
+    <string name="poi_social_facility_outreach">Beratungsstelle</string>
     <string name="poi_social_facility_food_bank">Verpflegung</string>
     <string name="poi_social_facility_shelter">Obdach</string>
     <string name="poi_social_facility_ambulatory_care">Ambulante Pflege</string>
@@ -2162,7 +2162,7 @@
     <string name="poi_step_condition_rough">Treppenzustand: schlecht</string>
     <string name="poi_cairn">Steinhügel</string>
     <string name="poi_memorial_fassade_decoration">Fassadendekoration</string>
-    <string name="poi_tomb_war_grave">Art: Kriegsgräber</string>
+    <string name="poi_tomb_war_grave">Art: Kriegsgräberstätte</string>
     <string name="poi_tomb_tumulus">Art: Hügelgrab</string>
     <string name="poi_tomb_rock_cut">Art: Felsgrab</string>
     <string name="poi_tomb_hypogeum">Art: Hypogäum</string>
@@ -2766,7 +2766,7 @@
     <string name="poi_toilets_disposal_pitlatrine">Toilettenspülung: Plumpsklo</string>
     <string name="poi_wiki_link">Wikipedia</string>
     <string name="poi_spices">Gewürzgeschäft</string>
-    <string name="poi_fuel_type">Kraftstoffart</string>
+    <string name="poi_fuel_type">Kraftstoffsorte</string>
     <string name="poi_payment_type">Zahlungsart</string>
     <string name="poi_additional_type">Zusätzlich</string>
     <string name="poi_service_bicycle_charging_yes">Ladestation: ja</string>
@@ -2800,7 +2800,7 @@
     <string name="poi_traffic_signals_sound">Signalton</string>
     <string name="poi_subway_station_filter">U-Bahnstation</string>
     <string name="poi_healthcare_alternative_types">Spezialisierung</string>
-    <string name="poi_free_flying_characteristics">Charakteristisch</string>
+    <string name="poi_free_flying_characteristics">Flugmerkmale</string>
     <string name="poi_religion_type">Religion</string>
     <string name="poi_information_contents">Informationsinhalt</string>
     <string name="poi_clock_option">Zusätzlich</string>
@@ -3603,7 +3603,7 @@
     <string name="poi_changing_table_count">Anzahl der Wickeltische</string>
     <string name="poi_changing_table_fee_yes">Wickeltischgebühr: ja</string>
     <string name="poi_changing_table_fee_no">Wickeltischgebühr: nein</string>
-    <string name="poi_charcoal_pile">Holzkohlestoß</string>
+    <string name="poi_charcoal_pile">Kohlenmeiler</string>
     <string name="poi_historic_tank">Historischer Panzer</string>
     <string name="poi_hookah_lounge">Wasserpfeifen-Lounge</string>
     <string name="poi_source_biomass">Energiequelle: Biomasse</string>
@@ -3621,7 +3621,7 @@
     <string name="poi_vehicle_yes">Zufahrt Fahrzeuge: ja</string>
     <string name="poi_vehicle_private">Zufahrt Fahrzeuge: privat</string>
     <string name="poi_vehicle_no">Zufahrt Fahrzeuge: nein</string>
-    <string name="poi_vehicle_destination">Zufahrt Fahrzeuge: für Anlieger</string>
+    <string name="poi_vehicle_destination">Zufahrt: Anlieger frei</string>
     <string name="poi_vehicle_permissive">Zufahrt Fahrzeuge: gestattet</string>
     <string name="poi_vehicle_customers">Zufahrt Fahrzeuge: Kunden</string>
     <string name="poi_vehicle_military">Zufahrt Fahrzeuge: militärisch</string>
@@ -3827,4 +3827,12 @@
     <string name="poi_fire_hydrant_type_pipe">Rohr</string>
     <string name="poi_fire_hydrant_pressure_filter">Druck</string>
     <string name="poi_pump_status_missing_beam">Pumpenzustand: fehlender Arm</string>
+    <string name="poi_traffic_signals_arrow_yes">Ja</string>
+    <string name="poi_traffic_signals_vibration_yes">ja</string>
+    <string name="poi_traffic_signals_vibration_no">kein Vibrieren</string>
+    <string name="poi_traffic_signals_arrow">Pfeil</string>
+    <string name="poi_traffic_signals_vibration">Vibrieren</string>
+    <string name="poi_give_box">Give box</string>
+    <string name="poi_city_block">Stadtteil</string>
+    <string name="poi_borough">Bezirk</string>
 </resources>

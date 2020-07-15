@@ -24,7 +24,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.util.Algorithms;
@@ -365,7 +365,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public Drawable getNameIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity(), getPointColor(), false, wpt);
+		return PointImageDrawable.getFromWpt(getMapActivity(), getPointColor(), false, wpt);
 	}
 
 	@Override

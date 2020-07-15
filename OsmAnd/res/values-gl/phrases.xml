@@ -249,7 +249,7 @@
     <string name="poi_shelter">Abeiro</string>
     <string name="poi_funicular">Funicular</string>
     <string name="poi_club_astronomy">Club de astronomía</string>
-    <string name="poi_club_computer">Club de informática</string>
+    <string name="poi_club_computer">Clube de informática</string>
     <string name="poi_club_board_games">Club de xogos de mesa</string>
     <string name="poi_club_motorcycle">Club de motos</string>
     <string name="poi_club_sport">Club deportivo</string>
@@ -907,7 +907,7 @@
     <string name="poi_toll_yes">Portaxe</string>
     <string name="poi_toll_no">Sen portaxe</string>
     <string name="poi_traffic_signals_sound_yes">Si</string>
-    <string name="poi_traffic_signals_sound_no">Non</string>
+    <string name="poi_traffic_signals_sound_no">Son: non</string>
     <string name="poi_services">Área de servizo</string>
     <string name="poi_bird_hide">Lugar para observar paxaros</string>
     <string name="poi_farmland">Agras</string>
@@ -1736,7 +1736,7 @@
     <string name="poi_additional_atm_yes">Caixeiro automático: si</string>
     <string name="poi_atm_no">Caixeiro automático: non</string>
     <string name="poi_brushless">Sen vasoira</string>
-    <string name="poi_pharmacy_dispensing">Dispensa recetas médicas</string>
+    <string name="poi_pharmacy_dispensing">Dispensa receitas médicas</string>
     <string name="poi_scout_camp">Campamento de exploradores</string>
     <string name="poi_backcountry">Acampada libre</string>
     <string name="poi_drive_in">Conducir por dentro</string>
@@ -2480,7 +2480,7 @@
     <string name="poi_social_facility_food_bank">Banco de alimentos</string>
     <string name="poi_social_facility_shelter">Abeiro</string>
     <string name="poi_social_facility_ambulatory_care">Asistencia sanitaria</string>
-    <string name="poi_social_facility_workshop">Taller</string>
+    <string name="poi_social_facility_workshop">Traballo social</string>
     <string name="poi_social_facility_day_care">Asistencia de día</string>
     <string name="poi_social_facility_for_child">Crianzas</string>
     <string name="poi_social_facility_for_orphan">Orfos</string>
@@ -2814,7 +2814,7 @@
     <string name="poi_service_vehicle_electrical_yes">Eléctrico</string>
     <string name="poi_service_vehicle_wheels_yes">Rodas</string>
     <string name="poi_service_vehicle_glass_yes">Vidro</string>
-    <string name="poi_service_vehicle_truck_repair_yes">Taller mecánico para camións</string>
+    <string name="poi_service_vehicle_truck_repair_yes">Taller de camións</string>
     <string name="poi_service_vehicle_muffler_yes">Silenciador</string>
     <string name="poi_service_vehicle_alignment_yes">Aliñamento</string>
     <string name="poi_service_vehicle_transmission_repair_yes">Arranxo da transmisión</string>
@@ -3817,4 +3817,12 @@
     <string name="poi_fire_hydrant_type_pipe">Tubaxe</string>
     <string name="poi_fire_hydrant_pressure_filter">Presión</string>
     <string name="poi_pump_status_missing_beam">Estado da bomba: sen chave</string>
+    <string name="poi_traffic_signals_arrow_yes">Si</string>
+    <string name="poi_traffic_signals_vibration_yes">Si</string>
+    <string name="poi_traffic_signals_vibration_no">Vibración: non</string>
+    <string name="poi_traffic_signals_arrow">Frecha</string>
+    <string name="poi_traffic_signals_vibration">Vibración</string>
+    <string name="poi_give_box">Caixa de distribución</string>
+    <string name="poi_city_block">Predio</string>
+    <string name="poi_borough">Concello</string>
 </resources>

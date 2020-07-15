@@ -22,8 +22,8 @@ task printc {
 }
 
 android {
-	compileSdkVersion 28
-	buildToolsVersion "28.0.3"
+	compileSdkVersion 29
+	buildToolsVersion "29.0.3"
 	// compileNdkVersion "android-ndk-r17b"
 
 	signingConfigs {

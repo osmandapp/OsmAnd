@@ -1426,7 +1426,7 @@
     <string name="poi_tactile_paving_yes">Sim</string>
     <string name="poi_tactile_paving_no">Sem piso tátil</string>
     <string name="poi_traffic_signals_sound_yes">Sim</string>
-    <string name="poi_traffic_signals_sound_no">Não</string>
+    <string name="poi_traffic_signals_sound_no">Som: não</string>
     <string name="poi_traffic_signals_sound_walk">Só quando permitido atravessar</string>
     <string name="poi_rescue_station">Estação de resgate</string>
     <string name="poi_services">Área de serviço</string>
@@ -3809,4 +3809,9 @@
     <string name="poi_fire_hydrant_type_pipe">Tubo</string>
     <string name="poi_fire_hydrant_pressure_filter">Pressão</string>
     <string name="poi_pump_status_missing_beam">Estado da bomba: falta de feixe</string>
+    <string name="poi_traffic_signals_arrow_yes">Sim</string>
+    <string name="poi_traffic_signals_vibration_yes">Sim</string>
+    <string name="poi_traffic_signals_vibration_no">Vibração: não</string>
+    <string name="poi_traffic_signals_arrow">Seta</string>
+    <string name="poi_traffic_signals_vibration">Vibração</string>
 </resources>

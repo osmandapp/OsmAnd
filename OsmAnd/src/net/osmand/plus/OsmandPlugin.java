@@ -21,6 +21,8 @@ import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
+import net.osmand.data.Amenity;
+import net.osmand.data.MapObject;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
@@ -39,14 +41,18 @@ import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -201,6 +207,10 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
+	protected List<PoiUIFilter> getCustomPoiFilters() {
+		return Collections.emptyList();
+	}
+
 	/**
 	 * Plugin was installed
 	 */
@@ -258,12 +268,9 @@ public abstract class OsmandPlugin {
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 
 		allPlugins.clear();
-		allPlugins.add(new MapillaryPlugin(app));
 
-		if (!enabledPlugins.contains(MapillaryPlugin.ID) && !app.getSettings().getPlugins().contains("-" + MapillaryPlugin.ID)) {
-			enabledPlugins.add(MapillaryPlugin.ID);
-			app.getSettings().enablePlugin(MapillaryPlugin.ID, true);
-		}
+		enableHiddenPlugin(app, enabledPlugins, new MapillaryPlugin(app));
+		enableHiddenPlugin(app, enabledPlugins, new WikipediaPlugin(app));
 
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
@@ -365,6 +372,14 @@ public abstract class OsmandPlugin {
 			}
 		} catch (Exception e) {
 			LOG.error("Plugin initialization failed " + plugin.getId(), e);
+		}
+	}
+
+	private static void enableHiddenPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
+		allPlugins.add(plugin);
+		if (!enabledPlugins.contains(plugin.getId()) && !app.getSettings().getPlugins().contains("-" + plugin.getId())) {
+			enabledPlugins.add(plugin.getId());
+			app.getSettings().enablePlugin(plugin.getId(), true);
 		}
 	}
 
@@ -530,6 +545,24 @@ public abstract class OsmandPlugin {
 	}
 
 	protected void optionsMenuFragment(Activity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
+	}
+
+	protected boolean searchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
+		return false;
+	}
+
+	protected void newDownloadIndexes(Fragment fragment) {
+	}
+
+	protected void prepareExtraTopPoiFilters(Set<PoiUIFilter> poiUIFilter) {
+	}
+
+	protected String getMapObjectsLocale(Amenity amenity, String preferredLocale) {
+		return null;
+	}
+
+	protected String getMapObjectPreferredLang(MapObject object, String defaultLanguage) {
+		return null;
 	}
 
 	public List<String> indexingFiles(IProgress progress) {
@@ -789,6 +822,52 @@ public abstract class OsmandPlugin {
 		}
 	}
 
+	public static boolean onSearchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
+		boolean processed = false;
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			processed = plugin.searchFinished(searchFragment, phrase, isResultEmpty) || processed;
+		}
+		return processed;
+	}
+
+	public static void onNewDownloadIndexes(Fragment fragment) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.newDownloadIndexes(fragment);
+		}
+	}
+
+	public static void onPrepareExtraTopPoiFilters(Set<PoiUIFilter> poiUIFilters) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.prepareExtraTopPoiFilters(poiUIFilters);
+		}
+	}
+
+	public static String onGetMapObjectPreferredLang(MapObject object, String preferredMapLang, String preferredMapAppLang) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			String locale = plugin.getMapObjectPreferredLang(object, preferredMapLang);
+			if (locale != null) {
+				return locale;
+			}
+		}
+		return preferredMapAppLang;
+	}
+
+	public static String onGetMapObjectsLocale(Amenity amenity, String preferredLocale) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			String locale = plugin.getMapObjectsLocale(amenity, preferredLocale);
+			if (locale != null) {
+				return locale;
+			}
+		}
+		return preferredLocale;
+	}
+
+	public static void registerCustomPoiFilters(List<PoiUIFilter> poiUIFilters) {
+		for (OsmandPlugin p : getEnabledPlugins()) {
+			poiUIFilters.addAll(p.getCustomPoiFilters());
+		}
+	}
+
 	public static Collection<DashFragmentData> getPluginsCardsList() {
 		HashSet<DashFragmentData> collection = new HashSet<>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
@@ -809,8 +888,6 @@ public abstract class OsmandPlugin {
 		}
 		return installed;
 	}
-
-
 
 	public static boolean onMapActivityKeyUp(MapActivity mapActivity, int keyCode) {
 		for (OsmandPlugin p : getEnabledPlugins()) {
