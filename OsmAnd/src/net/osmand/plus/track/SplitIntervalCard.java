@@ -5,7 +5,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -13,11 +12,11 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
 public class SplitIntervalCard extends BaseCard {
 
-	private SelectedGpxFile selectedGpxFile;
+	private TrackDrawInfo trackDrawInfo;
 
-	public SplitIntervalCard(@NonNull MapActivity mapActivity, SelectedGpxFile selectedGpxFile) {
+	public SplitIntervalCard(@NonNull MapActivity mapActivity, TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
-		this.selectedGpxFile = selectedGpxFile;
+		this.trackDrawInfo = trackDrawInfo;
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public class SplitIntervalCard extends BaseCard {
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SplitIntervalBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), selectedGpxFile);
+				SplitIntervalBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), trackDrawInfo);
 			}
 		});
 	}

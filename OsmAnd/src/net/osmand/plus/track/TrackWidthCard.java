@@ -17,9 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -30,7 +27,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.List;
 
 public class TrackWidthCard extends BaseCard {
@@ -39,14 +35,14 @@ public class TrackWidthCard extends BaseCard {
 	private final static int CUSTOM_WIDTH_MIN = 1;
 	private final static int CUSTOM_WIDTH_MAX = 24;
 
-	private SelectedGpxFile selectedGpxFile;
+	private TrackDrawInfo trackDrawInfo;
 
 	private AppearanceListItem selectedItem;
 	private List<AppearanceListItem> appearanceItems;
 
-	public TrackWidthCard(MapActivity mapActivity, SelectedGpxFile selectedGpxFile) {
+	public TrackWidthCard(MapActivity mapActivity, TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
-		this.selectedGpxFile = selectedGpxFile;
+		this.trackDrawInfo = trackDrawInfo;
 		appearanceItems = getWidthAppearanceItems();
 	}
 
@@ -67,7 +63,7 @@ public class TrackWidthCard extends BaseCard {
 
 	private AppearanceListItem getSelectedItem() {
 		if (selectedItem == null) {
-			String selectedWidth = selectedGpxFile.getGpxFile().getWidth(null);
+			String selectedWidth = trackDrawInfo.getWidth();
 			for (AppearanceListItem item : appearanceItems) {
 				if (Algorithms.objectEquals(item.getValue(), selectedWidth)
 						|| ((Algorithms.isEmpty(selectedWidth) || Algorithms.isInt(selectedWidth))
@@ -83,7 +79,7 @@ public class TrackWidthCard extends BaseCard {
 	private List<AppearanceListItem> getWidthAppearanceItems() {
 		List<AppearanceListItem> items = GpxAppearanceAdapter.getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_WIDTH);
 
-		String selectedWidth = selectedGpxFile.getGpxFile().getWidth(null);
+		String selectedWidth = trackDrawInfo.getWidth();
 		String customWidth = !Algorithms.isEmpty(selectedWidth) && Algorithms.isInt(selectedWidth) ? selectedWidth : String.valueOf(CUSTOM_WIDTH_MIN);
 
 		items.add(new AppearanceListItem(CUSTOM_WIDTH, customWidth, app.getString(R.string.shared_string_custom)));
@@ -141,15 +137,8 @@ public class TrackWidthCard extends BaseCard {
 	}
 
 	private void setGpxWidth(String width) {
-		if (selectedGpxFile.getGpxFile() != null) {
-			GPXFile gpxFile = selectedGpxFile.getGpxFile();
-			gpxFile.setWidth(width);
-			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(new File(gpxFile.path));
-			if (gpxDataItem != null) {
-				app.getGpxDbHelper().updateWidth(gpxDataItem, width);
-			}
-			mapActivity.refreshMap();
-		}
+		trackDrawInfo.setWidth(width);
+		mapActivity.refreshMap();
 	}
 
 	private class GpxWidthAdapter extends RecyclerView.Adapter<GpxWidthViewHolder> {
@@ -201,12 +190,7 @@ public class TrackWidthCard extends BaseCard {
 		}
 
 		private void updateWidthIcon(GpxWidthViewHolder holder, AppearanceListItem item) {
-			int color;
-			if (selectedGpxFile.isShowCurrentTrack()) {
-				color = app.getSettings().CURRENT_TRACK_COLOR.get();
-			} else {
-				color = selectedGpxFile.getGpxFile().getColor(0);
-			}
+			int color = trackDrawInfo.getColor();
 
 			int iconId;
 			if (CUSTOM_WIDTH.equals(item.getAttrName())) {

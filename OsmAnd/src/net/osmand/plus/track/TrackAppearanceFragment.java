@@ -81,6 +81,24 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getGpxLayer().setTrackDrawInfo(trackDrawInfo);
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getGpxLayer().setTrackDrawInfo(null);
+		}
+	}
+
+	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString(SELECTED_TRACK_FILE_PATH, selectedGpxFile.getGpxFile().path);
 		super.onSaveInstanceState(outState);
@@ -167,16 +185,16 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
 
-			BaseCard splitIntervalCard = new SplitIntervalCard(mapActivity, selectedGpxFile);
+			BaseCard splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
 			cardsContainer.addView(splitIntervalCard.build(mapActivity));
 
-			BaseCard arrowsCard = new DirectionArrowsCard(mapActivity, selectedGpxFile);
+			BaseCard arrowsCard = new DirectionArrowsCard(mapActivity, trackDrawInfo);
 			cardsContainer.addView(arrowsCard.build(mapActivity));
 
-			TrackColoringCard trackColoringCard = new TrackColoringCard(mapActivity, selectedGpxFile);
+			TrackColoringCard trackColoringCard = new TrackColoringCard(mapActivity, selectedGpxFile, trackDrawInfo);
 			cardsContainer.addView(trackColoringCard.build(mapActivity));
 
-			BaseCard width = new TrackWidthCard(mapActivity, selectedGpxFile);
+			BaseCard width = new TrackWidthCard(mapActivity, trackDrawInfo);
 			cardsContainer.addView(width.build(mapActivity));
 		}
 	}

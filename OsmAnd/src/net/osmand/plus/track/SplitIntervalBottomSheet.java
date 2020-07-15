@@ -346,11 +346,11 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		return groups;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, SelectedGpxFile selectedGpxFile) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, TrackDrawInfo trackDrawInfo) {
 		try {
 			if (fragmentManager.findFragmentByTag(SplitIntervalBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
-				args.putString(SELECTED_TRACK_FILE_PATH, selectedGpxFile.getGpxFile().path);
+				args.putString(SELECTED_TRACK_FILE_PATH, trackDrawInfo.getFilePath());
 
 				SplitIntervalBottomSheet splitIntervalBottomSheet = new SplitIntervalBottomSheet();
 				splitIntervalBottomSheet.setArguments(args);

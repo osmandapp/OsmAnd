@@ -49,6 +49,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.ContextMenuLayer.IMoveObjectProvider;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
@@ -92,6 +93,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private Drawable startPointIcon;
 	private Drawable finishPointIcon;
 	private LayerDrawable selectedPoint;
+	private TrackDrawInfo trackDrawInfo;
 	private TrackChartPoints trackChartPoints;
 
 	private GpxSelectionHelper selectedGpxHelper;
@@ -134,6 +136,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
 		this.trackChartPoints = trackChartPoints;
+	}
+
+	public void setTrackDrawInfo(TrackDrawInfo trackDrawInfo) {
+		this.trackDrawInfo = trackDrawInfo;
 	}
 
 	private void initUI() {
@@ -396,7 +402,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private void drawSelectedFilesStartEndPoints(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
-				if (selectedGpxFile.getGpxFile().isShowStartFinish()) {
+				boolean showStartFinish = selectedGpxFile.getGpxFile().isShowStartFinish();
+				if (hasTrackDrawInfoForSelectedGpx(selectedGpxFile)) {
+					showStartFinish = trackDrawInfo.isShowStartFinish();
+				}
+				if (showStartFinish) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 					TrkSegment endSegment = segments.get(segments.size() - 1);
 
@@ -408,6 +418,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 			}
 		}
+	}
+
+	private boolean hasTrackDrawInfoForSelectedGpx(SelectedGpxFile selectedGpxFile) {
+		return trackDrawInfo != null && trackDrawInfo.getFilePath().equals(selectedGpxFile.getGpxFile().path);
 	}
 
 	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, WptPt wptPt, Drawable icon) {
@@ -573,6 +587,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	                                       List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 			String width = selectedGpxFile.getGpxFile().getWidth(currentTrackWidthPref.get());
+			if (hasTrackDrawInfoForSelectedGpx(selectedGpxFile)) {
+				width = trackDrawInfo.getWidth();
+			}
 			if (!cachedTrackWidth.containsKey(width)) {
 				cachedTrackWidth.put(width, null);
 			}
@@ -601,6 +618,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 			if (color == 0) {
 				color = ts.getColor(cachedColor);
+			}
+			if (hasTrackDrawInfoForSelectedGpx(selectedGpxFile)) {
+				color = trackDrawInfo.getColor();
+				width = trackDrawInfo.getWidth();
 			}
 			if (ts.renderer == null && !ts.points.isEmpty()) {
 				if (currentTrack) {

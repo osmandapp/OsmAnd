@@ -17,9 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -30,7 +27,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.widgets.FlowLayout;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +35,7 @@ import static net.osmand.plus.dialogs.GpxAppearanceAdapter.getAppearanceItems;
 
 public class TrackColoringCard extends BaseCard {
 
+	private TrackDrawInfo trackDrawInfo;
 	private SelectedGpxFile selectedGpxFile;
 
 	private GradientScaleType selectedScaleType;
@@ -46,8 +43,9 @@ public class TrackColoringCard extends BaseCard {
 	@ColorInt
 	private int selectedColor;
 
-	public TrackColoringCard(MapActivity mapActivity, GpxSelectionHelper.SelectedGpxFile selectedGpxFile) {
+	public TrackColoringCard(MapActivity mapActivity, SelectedGpxFile selectedGpxFile, TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
+		this.trackDrawInfo = trackDrawInfo;
 		this.selectedGpxFile = selectedGpxFile;
 	}
 
@@ -120,35 +118,13 @@ public class TrackColoringCard extends BaseCard {
 			newColor.findViewById(R.id.outline).setVisibility(View.VISIBLE);
 		}
 		selectedColor = color;
-		setGpxColor(color);
-	}
-
-	private void setGpxColor(int color) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		if (gpxFile != null) {
-			if (color != 0) {
-				selectedGpxFile.getGpxFile().setColor(color);
-				GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(new File(gpxFile.path));
-				if (gpxDataItem != null) {
-					app.getGpxDbHelper().updateColor(gpxDataItem, color);
-				}
-			}
-			if (gpxFile.showCurrentTrack) {
-				app.getSettings().CURRENT_TRACK_COLOR.set(color);
-			}
-			mapActivity.refreshMap();
-		}
+		trackDrawInfo.setColor(color);
+		mapActivity.refreshMap();
 	}
 
 	private GradientScaleType getSelectedScaleType() {
 		if (selectedScaleType == null) {
-			String gradientScaleType = selectedGpxFile.getGpxFile().getGradientScaleType();
-			for (GradientScaleType item : GradientScaleType.values()) {
-				if (item.name().equalsIgnoreCase(gradientScaleType)) {
-					selectedScaleType = item;
-					break;
-				}
-			}
+			selectedScaleType = trackDrawInfo.getGradientScaleType();
 			if (selectedScaleType == null) {
 				selectedScaleType = GradientScaleType.SOLID;
 			}
@@ -169,18 +145,6 @@ public class TrackColoringCard extends BaseCard {
 	private void updateCustomWidthSlider() {
 		boolean visible = GradientScaleType.SOLID == getSelectedScaleType();
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.select_color), visible);
-	}
-
-	private void setGradientScaleType(GradientScaleType gradientScaleType) {
-		if (selectedGpxFile.getGpxFile() != null) {
-			GPXFile gpxFile = selectedGpxFile.getGpxFile();
-			gpxFile.setGradientScaleType(gradientScaleType.getTypeName());
-			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(new File(gpxFile.path));
-			if (gpxDataItem != null) {
-				app.getGpxDbHelper().updateGradientScaleType(gpxDataItem, gradientScaleType);
-			}
-			mapActivity.refreshMap();
-		}
 	}
 
 	private class GpxWidthAdapter extends RecyclerView.Adapter<GpxWidthViewHolder> {
@@ -237,7 +201,8 @@ public class TrackColoringCard extends BaseCard {
 					notifyItemChanged(holder.getAdapterPosition());
 					notifyItemChanged(prevSelectedPosition);
 
-					setGradientScaleType(selectedScaleType);
+					trackDrawInfo.setGradientScaleType(selectedScaleType);
+					mapActivity.refreshMap();
 
 					updateHeader();
 					updateCustomWidthSlider();
