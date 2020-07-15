@@ -28,9 +28,9 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
 import java.io.File;
 
-public class TrackAppearanceFragment extends ContextMenuFragment {
+import static net.osmand.plus.track.TrackDrawInfo.TRACK_FILE_PATH;
 
-	public static final String SELECTED_TRACK_FILE_PATH = "selected_track_file_path";
+public class TrackAppearanceFragment extends ContextMenuFragment {
 
 	private OsmandApplication app;
 
@@ -44,19 +44,18 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 
-		String gpxFilePath = null;
 		Bundle arguments = getArguments();
-		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_TRACK_FILE_PATH)) {
-			gpxFilePath = savedInstanceState.getString(SELECTED_TRACK_FILE_PATH);
+		if (savedInstanceState != null) {
+			trackDrawInfo = new TrackDrawInfo();
+			trackDrawInfo.readBundle(savedInstanceState);
+			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(trackDrawInfo.getFilePath());
+		} else if (arguments != null) {
+			String gpxFilePath = arguments.getString(TRACK_FILE_PATH);
+			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
+			File file = new File(selectedGpxFile.getGpxFile().path);
+			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file);
+			trackDrawInfo = new TrackDrawInfo(gpxDataItem);
 		}
-		if (arguments != null && arguments.containsKey(SELECTED_TRACK_FILE_PATH)) {
-			gpxFilePath = arguments.getString(SELECTED_TRACK_FILE_PATH);
-		}
-		selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
-
-		File file = new File(selectedGpxFile.getGpxFile().path);
-		GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file);
-		trackDrawInfo = new TrackDrawInfo(gpxDataItem);
 	}
 
 	@Override
@@ -98,9 +97,9 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		outState.putString(SELECTED_TRACK_FILE_PATH, selectedGpxFile.getGpxFile().path);
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
+		trackDrawInfo.saveToBundle(outState);
 	}
 
 	private void updateCardsLayout() {

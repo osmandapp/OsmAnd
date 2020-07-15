@@ -1,8 +1,25 @@
 package net.osmand.plus.track;
 
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 
 public class TrackDrawInfo {
+
+	public static final String TRACK_FILE_PATH = "track_file_path";
+	private static final String TRACK_WIDTH = "track_width";
+	private static final String TRACK_GRADIENT_SCALE_TYPE = "track_gradient_scale_type";
+	private static final String TRACK_COLOR = "track_color";
+	private static final String TRACK_GRADIENT_SPEED_COLOR = "track_gradient_speed_color";
+	private static final String TRACK_GRADIENT_ALTITUDE_COLOR = "track_gradient_altitude_color";
+	private static final String TRACK_GRADIENT_SLOPE_COLOR = "track_gradient_slope_color";
+	private static final String TRACK_SPLIT_TYPE = "track_split_type";
+	private static final String TRACK_SPLIT_INTERVAL = "track_split_interval";
+	private static final String TRACK_JOIN_SEGMENTS = "track_join_segments";
+	private static final String TRACK_SHOW_ARROWS = "track_show_arrows";
+	private static final String TRACK_SHOW_START_FINISH = "track_show_start_finish";
 
 	private String filePath;
 	private String width;
@@ -13,12 +30,13 @@ public class TrackDrawInfo {
 	private int gradientSlopeColor;
 	private int splitType;
 	private double splitInterval;
-	private long fileLastModifiedTime;
-	private boolean apiImported;
-	private boolean showAsMarkers;
 	private boolean joinSegments;
 	private boolean showArrows;
 	private boolean showStartFinish;
+
+	public TrackDrawInfo() {
+
+	}
 
 	public TrackDrawInfo(GpxDataItem gpxDataItem) {
 		filePath = gpxDataItem.getFile().getPath();
@@ -30,9 +48,6 @@ public class TrackDrawInfo {
 		gradientSlopeColor = gpxDataItem.getGradientSlopeColor();
 		splitType = gpxDataItem.getSplitType();
 		splitInterval = gpxDataItem.getSplitInterval();
-		fileLastModifiedTime = gpxDataItem.getFileLastModifiedTime();
-		apiImported = gpxDataItem.isApiImported();
-		showAsMarkers = gpxDataItem.isShowAsMarkers();
 		joinSegments = gpxDataItem.isJoinSegments();
 		showArrows = gpxDataItem.isShowArrows();
 		showStartFinish = gpxDataItem.isShowStartFinish();
@@ -110,30 +125,6 @@ public class TrackDrawInfo {
 		this.splitInterval = splitInterval;
 	}
 
-	public long getFileLastModifiedTime() {
-		return fileLastModifiedTime;
-	}
-
-	public void setFileLastModifiedTime(long fileLastModifiedTime) {
-		this.fileLastModifiedTime = fileLastModifiedTime;
-	}
-
-	public boolean isApiImported() {
-		return apiImported;
-	}
-
-	public void setApiImported(boolean apiImported) {
-		this.apiImported = apiImported;
-	}
-
-	public boolean isShowAsMarkers() {
-		return showAsMarkers;
-	}
-
-	public void setShowAsMarkers(boolean showAsMarkers) {
-		this.showAsMarkers = showAsMarkers;
-	}
-
 	public boolean isJoinSegments() {
 		return joinSegments;
 	}
@@ -156,5 +147,35 @@ public class TrackDrawInfo {
 
 	public void setShowStartFinish(boolean showStartFinish) {
 		this.showStartFinish = showStartFinish;
+	}
+
+	protected void readBundle(@NonNull Bundle bundle) {
+		filePath = bundle.getString(TRACK_FILE_PATH);
+		width = bundle.getString(TRACK_WIDTH);
+		gradientScaleType = GradientScaleType.valueOf(bundle.getString(TRACK_GRADIENT_SCALE_TYPE));
+		color = bundle.getInt(TRACK_COLOR);
+		gradientSpeedColor = bundle.getInt(TRACK_GRADIENT_SPEED_COLOR);
+		gradientAltitudeColor = bundle.getInt(TRACK_GRADIENT_ALTITUDE_COLOR);
+		gradientSlopeColor = bundle.getInt(TRACK_GRADIENT_SLOPE_COLOR);
+		splitType = bundle.getInt(TRACK_SPLIT_TYPE);
+		splitInterval = bundle.getDouble(TRACK_SPLIT_INTERVAL);
+		joinSegments = bundle.getBoolean(TRACK_JOIN_SEGMENTS);
+		showArrows = bundle.getBoolean(TRACK_SHOW_ARROWS);
+		showStartFinish = bundle.getBoolean(TRACK_SHOW_START_FINISH);
+	}
+
+	protected void saveToBundle(@NonNull Bundle bundle) {
+		bundle.putString(TRACK_FILE_PATH, filePath);
+		bundle.putString(TRACK_WIDTH, width);
+		bundle.putString(TRACK_GRADIENT_SCALE_TYPE, gradientScaleType.name());
+		bundle.putInt(TRACK_COLOR, color);
+		bundle.putInt(TRACK_GRADIENT_SPEED_COLOR, gradientSpeedColor);
+		bundle.putInt(TRACK_GRADIENT_ALTITUDE_COLOR, gradientAltitudeColor);
+		bundle.putInt(TRACK_GRADIENT_SLOPE_COLOR, gradientSlopeColor);
+		bundle.putInt(TRACK_SPLIT_TYPE, splitType);
+		bundle.putDouble(TRACK_SPLIT_INTERVAL, splitInterval);
+		bundle.putBoolean(TRACK_JOIN_SEGMENTS, joinSegments);
+		bundle.putBoolean(TRACK_SHOW_ARROWS, showArrows);
+		bundle.putBoolean(TRACK_SHOW_START_FINISH, showStartFinish);
 	}
 }
