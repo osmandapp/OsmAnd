@@ -3810,15 +3810,16 @@
     <string name="speed_cameras_removed_descr">Questo dispositivo non ha autovelox.</string>
     <string name="app_mode_inline_skates">Pattini in linea</string>
     <string name="quick_action_remove_next_destination">Cancella il prossimo punto di destinazione</string>
-    <string name="use_volume_buttons_as_zoom_descr">Abilita il controllo del zoom della mappa con i pulsanti del volume del dispositivo.</string>
-    <string name="use_volume_buttons_as_zoom">Pulsanti del volume come zoom</string>
+    <string name="use_volume_buttons_as_zoom_descr">Abilita per controllare il livello di zoom della mappa con i pulsanti del volume del dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom">Pulsanti volume come zoom</string>
     <string name="please_provide_point_name_error">Per favore indica un nome per il punto</string>
-    <string name="quick_action_remove_next_destination_descr">Il punto di destinazione nel percorso attuale verrà cancellato. Se sarà la Destinazione la navigazione si arresterà.</string>
-    <string name="search_download_wikipedia_maps">Scarica mappe Wikimedia</string>
-    <string name="plugin_wikipedia_description">Ottieni informazioni sui punti di interesse da Wikipedia. È la tua guida tascabile offline - semplicemente abilita il componente aggiuntivo Wikipedia e goditi gli articoli sui punti d\'interesse vicino a te.</string>
-    <string name="app_mode_enduro_motorcycle">Moto enduro</string>
+    <string name="quick_action_remove_next_destination_descr">Il punto di destinazione corrente sul percorso verrà eliminato. Se sarà la Destinazione, la navigazione verrà interrotta.</string>
+    <string name="search_download_wikipedia_maps">Scarica mappe Wikipedia</string>
+    <string name="plugin_wikipedia_description">Ottieni informazioni sui punti di interesse da Wikipedia. È la tua guida tascabile offline - basta abilitare il plugin Wikipedia e goderti gli articoli sugli oggetti intorno a te.</string>
+    <string name="app_mode_enduro_motorcycle">Moto da enduro</string>
     <string name="app_mode_motor_scooter">Moto scooter</string>
     <string name="app_mode_wheelchair">Sedia a rotelle</string>
     <string name="app_mode_go_cart">Go-kart</string>
     <string name="osm_edit_closed_note">Chiudi la nota OSM</string>
+    <string name="app_mode_wheelchair_forward">Sedia a rotelle</string>
 </resources>
