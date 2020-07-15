@@ -34,7 +34,6 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 
 	private OsmandApplication app;
 
-	private GpxDataItem gpxDataItem;
 	private TrackDrawInfo trackDrawInfo;
 	private SelectedGpxFile selectedGpxFile;
 
@@ -56,7 +55,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 		selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 
 		File file = new File(selectedGpxFile.getGpxFile().path);
-		gpxDataItem = app.getGpxDbHelper().getItem(file);
+		GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file);
 		trackDrawInfo = new TrackDrawInfo(gpxDataItem);
 	}
 
@@ -155,9 +154,6 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 		gpxFile.setWidth(trackDrawInfo.getWidth());
 		gpxFile.setGradientScaleType(trackDrawInfo.getGradientScaleType().name());
 		gpxFile.setColor(trackDrawInfo.getColor());
-		gpxFile.setGradientScaleColor(GradientScaleType.SPEED.getTypeName(), trackDrawInfo.getGradientSpeedColor());
-		gpxFile.setGradientScaleColor(GradientScaleType.ALTITUDE.getTypeName(), trackDrawInfo.getGradientAltitudeColor());
-		gpxFile.setGradientScaleColor(GradientScaleType.SLOPE.getTypeName(), trackDrawInfo.getGradientSlopeColor());
 
 		for (GpxSplitType gpxSplitType : GpxSplitType.values()) {
 			if (gpxSplitType.getType() == trackDrawInfo.getSplitType()) {
@@ -172,6 +168,8 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 
 		app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
 
+		GpxDataItem item = new GpxDataItem(new File(gpxFile.path), gpxFile);
+		app.getGpxDbHelper().add(item);
 		saveGpx(gpxFile);
 	}
 
