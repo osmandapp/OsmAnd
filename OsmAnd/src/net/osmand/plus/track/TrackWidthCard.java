@@ -70,7 +70,8 @@ public class TrackWidthCard extends BaseCard {
 			String selectedWidth = selectedGpxFile.getGpxFile().getWidth(null);
 			for (AppearanceListItem item : appearanceItems) {
 				if (Algorithms.objectEquals(item.getValue(), selectedWidth)
-						|| Algorithms.isInt(selectedWidth) && CUSTOM_WIDTH.equals(item.getAttrName())) {
+						|| ((Algorithms.isEmpty(selectedWidth) || Algorithms.isInt(selectedWidth))
+						&& CUSTOM_WIDTH.equals(item.getAttrName()))) {
 					selectedItem = item;
 					break;
 				}
@@ -83,7 +84,7 @@ public class TrackWidthCard extends BaseCard {
 		List<AppearanceListItem> items = GpxAppearanceAdapter.getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_WIDTH);
 
 		String selectedWidth = selectedGpxFile.getGpxFile().getWidth(null);
-		String customWidth = Algorithms.isInt(selectedWidth) ? selectedWidth : String.valueOf(CUSTOM_WIDTH_MIN);
+		String customWidth = !Algorithms.isEmpty(selectedWidth) && Algorithms.isInt(selectedWidth) ? selectedWidth : String.valueOf(CUSTOM_WIDTH_MIN);
 
 		items.add(new AppearanceListItem(CUSTOM_WIDTH, customWidth, app.getString(R.string.shared_string_custom)));
 		return items;

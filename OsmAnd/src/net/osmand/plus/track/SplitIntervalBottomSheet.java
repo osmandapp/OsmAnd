@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,6 +66,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	private TextView splitValueMin;
 	private TextView splitValueMax;
 	private TextView selectedSplitValue;
+	private TextView splitIntervalNoneDescr;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -102,27 +104,28 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		splitValueMin = (TextView) view.findViewById(R.id.split_value_min);
 		splitValueMax = (TextView) view.findViewById(R.id.split_value_max);
 		selectedSplitValue = (TextView) view.findViewById(R.id.split_value_tv);
+		splitIntervalNoneDescr = (TextView) view.findViewById(R.id.split_interval_none_descr);
 
 		UiUtilities.setupSlider(slider, nightMode, null);
 
-		view.findViewById(R.id.left_btn_container).setOnClickListener(new View.OnClickListener() {
+		RadioGroup splitTypeGroup = view.findViewById(R.id.split_type);
+		if (selectedSplitType == GpxSplitType.NO_SPLIT) {
+			splitTypeGroup.check(R.id.no_split);
+		} else if (selectedSplitType == GpxSplitType.TIME) {
+			splitTypeGroup.check(R.id.time_split);
+		} else if (selectedSplitType == GpxSplitType.DISTANCE) {
+			splitTypeGroup.check(R.id.distance_split);
+		}
+		splitTypeGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			@Override
-			public void onClick(View v) {
-				selectedSplitType = GpxSplitType.NO_SPLIT;
-				updateSlider();
-			}
-		});
-		view.findViewById(R.id.center_btn_container).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				selectedSplitType = GpxSplitType.TIME;
-				updateSlider();
-			}
-		});
-		view.findViewById(R.id.right_btn_container).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				selectedSplitType = GpxSplitType.DISTANCE;
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				if (checkedId == R.id.no_split) {
+					selectedSplitType = GpxSplitType.NO_SPLIT;
+				} else if (checkedId == R.id.time_split) {
+					selectedSplitType = GpxSplitType.TIME;
+				} else if (checkedId == R.id.distance_split) {
+					selectedSplitType = GpxSplitType.DISTANCE;
+				}
 				updateSlider();
 			}
 		});
@@ -226,8 +229,10 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 				updateSliderDistanceInterval();
 			}
 			AndroidUiHelper.updateVisibility(sliderContainer, true);
+			AndroidUiHelper.updateVisibility(splitIntervalNoneDescr, false);
 		} else {
 			AndroidUiHelper.updateVisibility(sliderContainer, false);
+			AndroidUiHelper.updateVisibility(splitIntervalNoneDescr, true);
 		}
 		setupHeightAndBackground(getView());
 	}
