@@ -812,7 +812,13 @@ public class PoiFiltersHelper {
 						String filterId = query.getString(0);
 						boolean deleted = query.getInt(3) == TRUE_INT;
 						if (map.containsKey(filterId) && (includeDeleted || !deleted)) {
-							PoiUIFilter filter = new PoiUIFilter(query.getString(1), filterId,
+							String filterName = query.getString(1);
+							String translation = application.getPoiTypes().getPoiTranslation(filterName);
+							if(translation != null)
+							{
+								filterName = translation;
+							}
+							PoiUIFilter filter = new PoiUIFilter(filterName, filterId,
 									map.get(filterId), application);
 							filter.setSavedFilterByName(query.getString(2));
 							filter.setDeleted(deleted);
