@@ -46,6 +46,8 @@ public class GPXUtilities {
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String DEFAULT_ICON_NAME = "special_star";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
+	private static final String PROFILE_TYPE_EXTENSION = "profile";
+	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 
 	private final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
 	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
@@ -300,6 +302,26 @@ public class GPXUtilities {
 
 		public void setBackgroundType(String backType) {
 			getExtensionsToWrite().put(BACKGROUND_TYPE_EXTENSION, backType);
+		}
+
+		public String getProfileType() {
+			return getExtensionsToRead().get(PROFILE_TYPE_EXTENSION);
+		}
+
+		public void setProfileType(String profileType) {
+			getExtensionsToWrite().put(PROFILE_TYPE_EXTENSION, profileType);
+		}
+
+		public int getTrkPtIndex() {
+			try {
+				return Integer.parseInt(getExtensionsToRead().get(TRKPT_INDEX_EXTENSION));
+			}catch(NumberFormatException e){
+				return -1;
+			}
+		}
+
+		public void setTrkPtIndex(int index) {
+			getExtensionsToWrite().put(TRKPT_INDEX_EXTENSION, String.valueOf(index));
 		}
 
 		@Override

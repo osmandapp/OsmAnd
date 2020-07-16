@@ -74,6 +74,7 @@ import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -220,7 +221,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 		mainIcon = (ImageView) mainView.findViewById(R.id.main_icon);
 		final NewGpxData newGpxData = editingCtx.getNewGpxData();
-		if (editingCtx.getNewGpxData() != null) {
+		if (newGpxData != null) {
+			List<WptPt> points = newGpxData.getGpxFile().getRoutePoints();
+			if (!points.isEmpty()) {
+				ApplicationMode snapToRoadAppMode = ApplicationMode
+						.valueOfStringKey(points.get(points.size() - 1).getProfileType(), null);
+				if (snapToRoadAppMode != null) {
+					enableSnapToRoadMode(snapToRoadAppMode);
+				}
+			}
 			ActionType actionType = newGpxData.getActionType();
 			if (actionType == ActionType.ADD_SEGMENT || actionType == ActionType.EDIT_SEGMENT) {
 				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_polygom_dark));
@@ -467,9 +476,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 		enterMeasurementMode();
 
-		if (editingCtx.isInSnapToRoadMode()) {
-			showSnapToRoadControls();
-		}
+		showSnapToRoadControls();
 
 		if (newGpxData != null && !gpxPointsAdded) {
 			ActionType actionType = newGpxData.getActionType();
@@ -560,7 +567,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			if (rememberPreviousTitle) {
 				previousToolBarTitle = toolBarController.getTitle();
 			}
-			toolBarController.setTitle(getString(R.string.snap_to_road));
+			toolBarController.setTitle(getString(R.string.route_between_points));
 			mapActivity.refreshMap();
 			SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
 			fragment.setListener(createSnapToRoadFragmentListener());
@@ -587,6 +594,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			public void addToGpxOnClick() {
 				if (mapActivity != null && measurementLayer != null) {
 					if (editingCtx.getPointsCount() > 0) {
+						if (editingCtx.isInSnapToRoadMode()) {
+							editingCtx.getPoints().clear();
+							editingCtx.getPoints().addAll(editingCtx.getBeforePoints());
+							editingCtx.getBeforePoints().clear();
+							editingCtx.getBeforePoints().addAll(editingCtx.getBeforeTrkSegmentLine().points);
+						}
 						addToGpx(mapActivity);
 					} else {
 						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
@@ -803,14 +816,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	private void showSnapToRoadControls() {
 		final MapActivity mapActivity = getMapActivity();
 		final ApplicationMode appMode = editingCtx.getSnapToRoadAppMode();
-		if (mapActivity != null && appMode != null) {
-			toolBarController.setTopBarSwitchVisible(true);
-			toolBarController.setTopBarSwitchChecked(true);
-			mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_snap_to_road));
-
+		if (mapActivity != null) {
+			Drawable icon;
+			if (appMode == null) {
+				icon = getActiveIcon(R.drawable.ic_action_split_interval);
+			} else {
+				icon = getIcon(appMode.getIconRes(), appMode.getIconColorInfo().getColor(nightMode));
+			}
 			ImageButton snapToRoadBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
 			snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
-			snapToRoadBtn.setImageDrawable(getIcon(appMode.getIconRes(), appMode.getIconColorInfo().getColor(nightMode)));
+			snapToRoadBtn.setImageDrawable(icon);
 			snapToRoadBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -829,11 +844,18 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
 		editingCtx.setInSnapToRoadMode(false);
 		editingCtx.cancelSnapToRoad();
+		hideSnapToRoadIcon();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
+			mapActivity.refreshMap();
+		}
+	}
+
+	private void hideSnapToRoadIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
-			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
-			mapActivity.refreshMap();
 		}
 	}
 
@@ -851,11 +873,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 	private void displaySegmentPoints() {
 		final MeasurementToolLayer measurementLayer = getMeasurementLayer();
-
-		TrkSegment segment = editingCtx.getNewGpxData().getTrkSegment();
-		List<WptPt> points = segment.points;
 		if (measurementLayer != null) {
-			editingCtx.addPoints(points);
+			editingCtx.addPoints();
 			adapter.notifyDataSetChanged();
 			updateText();
 		}
@@ -898,6 +917,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			WptPt newPoint = measurementLayer.getMovedPointToApply();
+			String profileType = editingCtx.getSnapToRoadAppMode().getStringKey();
+			if (!Algorithms.isEmpty(profileType)) {
+				newPoint.setProfileType(profileType);
+			}
 			WptPt oldPoint = editingCtx.getOriginalPointToMove();
 			int position = editingCtx.getSelectedPointPosition();
 			editingCtx.getCommandManager().execute(new MovePointCommand(measurementLayer, oldPoint, newPoint, position));
@@ -1309,6 +1332,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 								editingCtx.exportRouteAsGpx(trackName, new MeasurementEditingContext.ExportAsGpxListener() {
 									@Override
 									public void onExportAsGpxFinished(GPXFile gpx) {
+										gpx.addRoutePoints(editingCtx.getPoints());
 										final Exception res = GPXUtilities.writeGpxFile(toSave, gpx);
 										gpx.path = toSave.getAbsolutePath();
 										OsmandApplication app = getMyApplication();
@@ -1594,6 +1618,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 			if (editingCtx.isInSnapToRoadMode()) {
 				disableSnapToRoadMode();
+			} else {
+				hideSnapToRoadIcon();
 			}
 			if (editingCtx.getNewGpxData() != null) {
 				GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();

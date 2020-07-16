@@ -6,7 +6,7 @@ import android.view.View;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
@@ -32,14 +32,11 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 
-		BaseBottomSheetItem snapToRoadItem = new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(snapToRoadEnabled)
-				.setDescription(getString(snapToRoadEnabled ? R.string.shared_string_on : R.string.shared_string_off))
-				.setIcon(snapToRoadEnabled
-						? getActiveIcon(R.drawable.ic_action_snap_to_road)
-						: getContentIcon(R.drawable.ic_action_snap_to_road))
-				.setTitle(getString(R.string.snap_to_road))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
+		BaseBottomSheetItem snapToRoadItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(R.string.routing_profile_straightline))
+				.setIcon(getContentIcon(R.drawable.ic_action_split_interval))
+				.setTitle(getString(R.string.route_between_points))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -72,21 +69,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 			items.add(saveAsNewSegmentItem);
 		} else if (addLineMode) {
 
-			BaseBottomSheetItem saveAsNewTrackItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
-					.setTitle(getString(R.string.shared_string_save_as_gpx))
-					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								listener.saveAsNewTrackOnClick();
-							}
-							dismiss();
-						}
-					})
-					.create();
-			items.add(saveAsNewTrackItem);
+			items.add(getSaveAsNewTrackItem());
 
 			BaseBottomSheetItem saveAsNewSegmentItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
@@ -104,25 +87,11 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					.create();
 			items.add(saveAsNewSegmentItem);
 		} else {
-			BaseBottomSheetItem saveAsNewTrackItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
-					.setTitle(getString(R.string.shared_string_save_as_gpx))
-					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (listener != null) {
-								listener.saveAsNewTrackOnClick();
-							}
-							dismiss();
-						}
-					})
-					.create();
-			items.add(saveAsNewTrackItem);
+			items.add(getSaveAsNewTrackItem());
 
 			BaseBottomSheetItem addToTrackItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_split_interval))
-					.setTitle(getString(R.string.add_segment_to_the_track))
+					.setTitle(getString(R.string.add_to_a_track))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {
 						@Override
@@ -154,6 +123,23 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				})
 				.create();
 		items.add(clearAllItem);
+	}
+
+	private BaseBottomSheetItem getSaveAsNewTrackItem() {
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_save_to_file))
+				.setTitle(getString(R.string.edit_filter_save_as_menu_item))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.saveAsNewTrackOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package net.osmand.plus.activities;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
@@ -425,7 +423,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 
 		adapter.addItem(itemBuilder
-				.setTitleId(R.string.measurement_tool, mapActivity)
+				.setTitleId(R.string.plan_a_route, mapActivity)
 				.setId(MAP_CONTEXT_MENU_MEASURE_DISTANCE)
 				.setIcon(R.drawable.ic_action_ruler)
 				.setOrder(MEASURE_DISTANCE_ITEM_ORDER)
@@ -473,7 +471,7 @@ public class MapActivityActions implements DialogProvider {
 					//			new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
 					//			REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION);
 					//}
-				} else if (standardId == R.string.measurement_tool) {
+				} else if (standardId == R.string.plan_a_route) {
 					mapActivity.getContextMenu().close();
 					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), new LatLon(latitude, longitude));
 				} else if (standardId == R.string.avoid_road) {
@@ -932,7 +930,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.measurement_tool, mapActivity)
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.plan_a_route, mapActivity)
 				.setId(DRAWER_MEASURE_DISTANCE_ID)
 				.setIcon(R.drawable.ic_action_ruler)
 				.setListener(new ItemClickListener() {

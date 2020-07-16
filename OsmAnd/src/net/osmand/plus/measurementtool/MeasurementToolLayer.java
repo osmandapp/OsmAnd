@@ -10,7 +10,6 @@ import android.graphics.PointF;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -20,6 +19,7 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -322,6 +322,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		pt.lon = l.getLongitude();
 		boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 		if (allowed) {
+			String profileType = editingCtx.getSnapToRoadAppMode().getStringKey();
+			if (!Algorithms.isEmpty(profileType)) {
+				pt.setProfileType(profileType);
+			}
 			editingCtx.addPoint(pt);
 			return pt;
 		}
@@ -338,6 +342,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			pressedPointLatLon = null;
 			boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 			if (allowed) {
+				String profileType = editingCtx.getSnapToRoadAppMode().getStringKey();
+				if (!Algorithms.isEmpty(profileType)) {
+					pt.setProfileType(profileType);
+				}
 				editingCtx.addPoint(pt);
 				moveMapToLatLon(lat, lon);
 				return pt;

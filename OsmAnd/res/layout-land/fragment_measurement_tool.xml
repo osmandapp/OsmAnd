@@ -163,30 +163,25 @@
                         android:paddingStart="@dimen/measurement_tool_text_button_padding"
                         android:text="@string/shared_string_options"
                         android:textColor="?attr/color_dialog_buttons"
-                        osmand:textAllCapsCompat="true"
                         osmand:typeface="@string/font_roboto_medium"/>
                 </FrameLayout>
 
                 <ImageButton
                     android:id="@+id/undo_point_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
-                    android:paddingEnd="@dimen/measurement_tool_undo_redo_padding_small"
-                    android:paddingLeft="@dimen/measurement_tool_undo_redo_padding"
-                    android:paddingRight="@dimen/measurement_tool_undo_redo_padding_small"
-                    android:paddingStart="@dimen/measurement_tool_undo_redo_padding_small"
+                    android:padding="@dimen/measurement_tool_undo_redo_padding_small"
                     tools:src="@drawable/ic_action_undo_dark"/>
 
                 <ImageButton
                     android:id="@+id/redo_point_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/measurement_tool_button_padding"
+                    android:layout_marginStart="@dimen/measurement_tool_button_padding"
                     android:background="?attr/selectableItemBackground"
-                    android:paddingEnd="@dimen/measurement_tool_undo_redo_padding"
-                    android:paddingLeft="@dimen/measurement_tool_undo_redo_padding_small"
-                    android:paddingRight="@dimen/measurement_tool_undo_redo_padding"
-                    android:paddingStart="@dimen/measurement_tool_undo_redo_padding_small"
+                    android:padding="@dimen/measurement_tool_undo_redo_padding_small"
                     tools:src="@drawable/ic_action_redo_dark"/>
 
                 <FrameLayout
@@ -204,14 +199,13 @@
                         android:layout_marginRight="@dimen/measurement_tool_button_margin"
                         android:layout_marginTop="@dimen/measurement_tool_button_margin"
                         android:background="?attr/btn_round"
-						osmand:drawableLeftCompat="@drawable/ic_action_plus"
-						osmand:drawableStartCompat="@drawable/ic_action_plus"
 						android:maxLines="1"
                         android:minHeight="@dimen/measurement_tool_button_height"
                         android:paddingLeft="@dimen/measurement_tool_button_padding"
                         android:paddingRight="@dimen/measurement_tool_button_padding"
                         android:text="@string/shared_string_add"
                         android:textColor="@color/color_white"
+                        android:textAllCaps="false"
 	                    android:paddingEnd="@dimen/measurement_tool_button_padding"
 	                    android:paddingStart="@dimen/measurement_tool_button_padding" />
                 </FrameLayout>
@@ -242,6 +236,7 @@
                     android:paddingRight="@dimen/measurement_tool_button_padding"
                     android:text="@string/shared_string_apply"
                     android:textColor="@color/color_white"
+                    android:textAllCaps="false"
 	                android:paddingEnd="@dimen/measurement_tool_button_padding"
 	                android:paddingStart="@dimen/measurement_tool_button_padding" />
 
@@ -304,6 +299,7 @@
                     android:paddingRight="@dimen/measurement_tool_button_padding"
                     android:text="@string/shared_string_apply"
                     android:textColor="?attr/color_dialog_buttons"
+                    android:textAllCaps="false"
 	                android:paddingEnd="@dimen/measurement_tool_button_padding"
 	                android:paddingStart="@dimen/measurement_tool_button_padding" />
 
@@ -316,13 +312,12 @@
                     android:layout_marginRight="@dimen/measurement_tool_button_margin"
                     android:layout_marginTop="@dimen/measurement_tool_button_margin"
                     android:background="?attr/btn_round"
-					osmand:drawableLeftCompat="@drawable/ic_action_plus"
-					osmand:drawableStartCompat="@drawable/ic_action_plus"
                     android:minHeight="@dimen/measurement_tool_button_height"
                     android:paddingLeft="@dimen/measurement_tool_button_padding"
                     android:paddingRight="@dimen/measurement_tool_button_padding"
                     android:text="@string/shared_string_add"
                     android:textColor="@color/color_white"
+                    android:textAllCaps="false"
 	                android:paddingStart="@dimen/measurement_tool_button_padding"
 	                android:paddingEnd="@dimen/measurement_tool_button_padding" />
             </LinearLayout>
