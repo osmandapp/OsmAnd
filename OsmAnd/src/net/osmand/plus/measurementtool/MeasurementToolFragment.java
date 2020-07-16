@@ -571,6 +571,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			mapActivity.refreshMap();
 			SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
 			fragment.setListener(createSnapToRoadFragmentListener());
+			fragment.setShowStraightLine(true);
 			fragment.show(mapActivity.getSupportFragmentManager(), SnapToRoadBottomSheetDialogFragment.TAG);
 		}
 	}
