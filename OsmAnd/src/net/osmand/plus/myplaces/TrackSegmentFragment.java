@@ -1263,7 +1263,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			}
 
 			@Override
-			public void gpxSavingFinished() {
+			public void gpxSavingFinished(Exception errorMessage) {
 				TrackActivity activity = getTrackActivity();
 				if (activity != null) {
 					if (selectedGpxFile != null) {

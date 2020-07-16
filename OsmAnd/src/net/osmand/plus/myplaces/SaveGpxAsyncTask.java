@@ -10,7 +10,7 @@ import net.osmand.GPXUtilities.GPXFile;
 
 import java.io.File;
 
-public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
+public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
 
 	private final GPXFile gpx;
 	private final SaveGpxListener saveGpxListener;
@@ -29,15 +29,14 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	@Override
-	protected Void doInBackground(Void... params) {
-		GPXUtilities.writeGpxFile(new File(gpx.path), gpx);
-		return null;
+	protected Exception doInBackground(Void... params) {
+		return GPXUtilities.writeGpxFile(new File(gpx.path), gpx);
 	}
 
 	@Override
-	protected void onPostExecute(Void aVoid) {
+	protected void onPostExecute(Exception errorMessage) {
 		if (saveGpxListener != null) {
-			saveGpxListener.gpxSavingFinished();
+			saveGpxListener.gpxSavingFinished(errorMessage);
 		}
 	}
 
@@ -45,6 +44,6 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		void gpxSavingStarted();
 
-		void gpxSavingFinished();
+		void gpxSavingFinished(Exception errorMessage);
 	}
 }

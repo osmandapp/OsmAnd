@@ -62,6 +62,8 @@ public class TrackWidthCard extends BaseCard {
 		RecyclerView groupRecyclerView = view.findViewById(R.id.recycler_view);
 		groupRecyclerView.setAdapter(widthAdapter);
 		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
+
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), isShowDivider());
 	}
 
 	public void updateItems() {

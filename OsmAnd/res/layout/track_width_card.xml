@@ -5,6 +5,13 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
+	<View
+		android:id="@+id/top_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/divider_color_basic"
+		android:focusable="false" />
+
 	<include
 		android:id="@+id/header_view"
 		layout="@layout/bottom_sheet_item_with_right_descr" />

@@ -319,8 +319,10 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 			}
 
 			@Override
-			public void gpxSavingFinished() {
-				app.showShortToastMessage(R.string.shared_string_track_is_saved, Algorithms.getFileWithoutDirs(gpxFile.path));
+			public void gpxSavingFinished(Exception errorMessage) {
+				if (errorMessage == null) {
+					app.showShortToastMessage(R.string.shared_string_track_is_saved, Algorithms.getFileWithoutDirs(gpxFile.path));
+				}
 			}
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}

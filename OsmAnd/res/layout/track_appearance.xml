@@ -80,7 +80,7 @@
 					android:layout_height="wrap_content"
 					android:background="?attr/route_info_bg"
 					android:orientation="vertical"
-					android:paddingBottom="30dp">
+					android:paddingBottom="@dimen/dialog_button_ex_height">
 
 				</LinearLayout>
 

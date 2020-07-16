@@ -63,6 +63,8 @@ public class TrackColoringCard extends BaseCard {
 		RecyclerView groupRecyclerView = view.findViewById(R.id.recycler_view);
 		groupRecyclerView.setAdapter(new GpxWidthAdapter(Arrays.asList(GradientScaleType.values())));
 		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
+
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), isShowDivider());
 	}
 
 	private void createColorSelector() {

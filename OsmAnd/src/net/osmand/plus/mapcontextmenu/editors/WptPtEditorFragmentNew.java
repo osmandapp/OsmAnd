@@ -486,8 +486,8 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			}
 
 			@Override
-			public void gpxSavingFinished() {
-				if (!gpxSelected) {
+			public void gpxSavingFinished(Exception errorMessage) {
+				if (errorMessage == null && !gpxSelected) {
 					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
 				}
 			}
