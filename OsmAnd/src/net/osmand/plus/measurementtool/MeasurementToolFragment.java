@@ -378,7 +378,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			public void onMeasure(float distance, float bearing) {
 				String distStr = OsmAndFormatter.getFormattedDistance(distance, mapActivity.getMyApplication());
 				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, getMyApplication());
-				distanceToCenterTv.setText(String.format(" – %1$s • %2$s", distStr, azimuthStr));
+				distanceToCenterTv.setText(String.format("%1$s • %2$s", distStr, azimuthStr));
 				TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
 						distanceToCenterTv, 12, 18, 2, TypedValue.COMPLEX_UNIT_SP
 				);

@@ -15,6 +15,7 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -322,9 +323,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		pt.lon = l.getLongitude();
 		boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 		if (allowed) {
-			String profileType = editingCtx.getSnapToRoadAppMode().getStringKey();
-			if (!Algorithms.isEmpty(profileType)) {
-				pt.setProfileType(profileType);
+
+			ApplicationMode applicationMode = editingCtx.getSnapToRoadAppMode();
+			if(applicationMode!=null) {
+				String profileType = applicationMode.getStringKey();
+				if (!Algorithms.isEmpty(profileType)) {
+					pt.setProfileType(profileType);
+				}
 			}
 			editingCtx.addPoint(pt);
 			return pt;
@@ -342,9 +347,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			pressedPointLatLon = null;
 			boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 			if (allowed) {
-				String profileType = editingCtx.getSnapToRoadAppMode().getStringKey();
-				if (!Algorithms.isEmpty(profileType)) {
-					pt.setProfileType(profileType);
+				ApplicationMode applicationMode = editingCtx.getSnapToRoadAppMode();
+				if(applicationMode!=null) {
+					String profileType = applicationMode.getStringKey();
+					if (!Algorithms.isEmpty(profileType)) {
+						pt.setProfileType(profileType);
+					}
 				}
 				editingCtx.addPoint(pt);
 				moveMapToLatLon(lat, lon);
