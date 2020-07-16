@@ -34,6 +34,8 @@ public class TrackDrawInfo {
 	private boolean showArrows;
 	private boolean showStartFinish;
 
+	private OnTrackAppearanceChangedListener trackAppearanceListener;
+
 	public TrackDrawInfo() {
 
 	}
@@ -53,12 +55,12 @@ public class TrackDrawInfo {
 		showStartFinish = gpxDataItem.isShowStartFinish();
 	}
 
-	public String getFilePath() {
-		return filePath;
+	public void setTrackAppearanceListener(OnTrackAppearanceChangedListener trackAppearanceListener) {
+		this.trackAppearanceListener = trackAppearanceListener;
 	}
 
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
+	public String getFilePath() {
+		return filePath;
 	}
 
 	public String getWidth() {
@@ -67,6 +69,9 @@ public class TrackDrawInfo {
 
 	public void setWidth(String width) {
 		this.width = width;
+		if (trackAppearanceListener != null) {
+			trackAppearanceListener.onTrackWidthChanged();
+		}
 	}
 
 	public GradientScaleType getGradientScaleType() {
@@ -83,30 +88,9 @@ public class TrackDrawInfo {
 
 	public void setColor(int color) {
 		this.color = color;
-	}
-
-	public int getGradientSpeedColor() {
-		return gradientSpeedColor;
-	}
-
-	public void setGradientSpeedColor(int gradientSpeedColor) {
-		this.gradientSpeedColor = gradientSpeedColor;
-	}
-
-	public int getGradientAltitudeColor() {
-		return gradientAltitudeColor;
-	}
-
-	public void setGradientAltitudeColor(int gradientAltitudeColor) {
-		this.gradientAltitudeColor = gradientAltitudeColor;
-	}
-
-	public int getGradientSlopeColor() {
-		return gradientSlopeColor;
-	}
-
-	public void setGradientSlopeColor(int gradientSlopeColor) {
-		this.gradientSlopeColor = gradientSlopeColor;
+		if (trackAppearanceListener != null) {
+			trackAppearanceListener.onTrackColorChanged();
+		}
 	}
 
 	public int getSplitType() {
@@ -129,10 +113,6 @@ public class TrackDrawInfo {
 		return joinSegments;
 	}
 
-	public void setJoinSegments(boolean joinSegments) {
-		this.joinSegments = joinSegments;
-	}
-
 	public boolean isShowArrows() {
 		return showArrows;
 	}
@@ -143,10 +123,6 @@ public class TrackDrawInfo {
 
 	public boolean isShowStartFinish() {
 		return showStartFinish;
-	}
-
-	public void setShowStartFinish(boolean showStartFinish) {
-		this.showStartFinish = showStartFinish;
 	}
 
 	protected void readBundle(@NonNull Bundle bundle) {
@@ -177,5 +153,12 @@ public class TrackDrawInfo {
 		bundle.putBoolean(TRACK_JOIN_SEGMENTS, joinSegments);
 		bundle.putBoolean(TRACK_SHOW_ARROWS, showArrows);
 		bundle.putBoolean(TRACK_SHOW_START_FINISH, showStartFinish);
+	}
+
+	public interface OnTrackAppearanceChangedListener {
+
+		void onTrackColorChanged();
+
+		void onTrackWidthChanged();
 	}
 }

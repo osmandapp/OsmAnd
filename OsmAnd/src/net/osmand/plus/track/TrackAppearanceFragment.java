@@ -1,12 +1,15 @@
 package net.osmand.plus.track;
 
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -28,7 +31,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.DirectionArrowsCard;
 import net.osmand.plus.myplaces.SaveGpxAsyncTask;
 import net.osmand.plus.myplaces.SplitTrackAsyncTask;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.track.TrackDrawInfo.OnTrackAppearanceChangedListener;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -52,8 +55,20 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 	private SelectedGpxFile selectedGpxFile;
 	private List<GpxDisplayGroup> displayGroups;
 
+	private ImageView appearanceIcon;
+
 	private int menuTitleHeight;
 	private long modifiedTime = -1;
+
+	private OnTrackAppearanceChangedListener trackAppearanceListener;
+
+	private TrackWidthCard trackWidthCard;
+	private SplitIntervalCard splitIntervalCard;
+
+	private void updateAppearanceIcon() {
+		Drawable icon = getPaintedContentIcon(R.drawable.ic_action_gpx_width_bold, trackDrawInfo.getColor());
+		appearanceIcon.setImageDrawable(icon);
+	}
 
 	@Override
 	public int getMainLayoutId() {
@@ -101,12 +116,15 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 			gpxDataItem = app.getGpxDbHelper().getItem(file);
 			trackDrawInfo = new TrackDrawInfo(gpxDataItem);
 		}
+		trackDrawInfo.setTrackAppearanceListener(getTrackAppearanceListener());
 	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
+			appearanceIcon = view.findViewById(R.id.appearance_icon);
+
 			if (isPortrait()) {
 				updateCardsLayout();
 			}
@@ -132,6 +150,18 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 	}
 
 	@Override
+	protected void setViewY(int y, boolean animated, boolean adjustMapPos) {
+		super.setViewY(y, animated, adjustMapPos);
+		updateStatusBarColor();
+	}
+
+	@Override
+	protected void updateMainViewLayout(int posY) {
+		super.updateMainViewLayout(posY);
+		updateStatusBarColor();
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
@@ -153,6 +183,27 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		trackDrawInfo.saveToBundle(outState);
+	}
+
+	private OnTrackAppearanceChangedListener getTrackAppearanceListener() {
+		if (trackAppearanceListener == null) {
+			trackAppearanceListener = new OnTrackAppearanceChangedListener() {
+
+				@Override
+				public void onTrackColorChanged() {
+					updateAppearanceIcon();
+					if (trackWidthCard != null) {
+						trackWidthCard.updateItems();
+					}
+				}
+
+				@Override
+				public void onTrackWidthChanged() {
+
+				}
+			};
+		}
+		return trackAppearanceListener;
 	}
 
 	private void updateCardsLayout() {
@@ -280,17 +331,17 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
 
-			BaseCard splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo, this);
+			splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo, this);
 			cardsContainer.addView(splitIntervalCard.build(mapActivity));
 
-			BaseCard arrowsCard = new DirectionArrowsCard(mapActivity, trackDrawInfo);
-			cardsContainer.addView(arrowsCard.build(mapActivity));
+			DirectionArrowsCard directionArrowsCard = new DirectionArrowsCard(mapActivity, trackDrawInfo);
+			cardsContainer.addView(directionArrowsCard.build(mapActivity));
 
 			TrackColoringCard trackColoringCard = new TrackColoringCard(mapActivity, selectedGpxFile, trackDrawInfo);
 			cardsContainer.addView(trackColoringCard.build(mapActivity));
 
-			BaseCard width = new TrackWidthCard(mapActivity, trackDrawInfo);
-			cardsContainer.addView(width.build(mapActivity));
+			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo);
+			cardsContainer.addView(trackWidthCard.build(mapActivity));
 		}
 	}
 
@@ -307,6 +358,32 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 			}
 		}
 		return displayGroups;
+	}
+
+	private void updateStatusBarColor() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.updateStatusBarColor();
+		}
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		View view = getView();
+		if (view != null) {
+			boolean nightMode = isNightMode();
+			if (getViewY() <= getFullScreenTopPosY() || !isPortrait()) {
+				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
+					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+				}
+				return nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
+			} else {
+				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
+					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+				}
+			}
+		}
+		return -1;
 	}
 
 	public void dismissImmediate() {

@@ -30,7 +30,7 @@
 				android:layout_gravity="center"
 				android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
 				android:layout_marginBottom="@dimen/list_item_button_padding"
-				android:background="?attr/secondary_icon_color" />
+				android:background="?attr/bg_dash_line" />
 
 			<LinearLayout
 				android:layout_width="match_parent"

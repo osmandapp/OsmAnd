@@ -296,6 +296,7 @@
         <item name="actionBarSize">@dimen/action_bar_height</item>
         <item name="android:toolbarStyle">@style/ToolbarStyle</item>
         <item name="toolbarStyle">@style/ToolbarStyle</item>
+        <item name="bg_dash_line">@drawable/bg_dash_line_light</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -576,6 +577,7 @@
         <item name="actionBarSize">@dimen/action_bar_height</item>
         <item name="android:toolbarStyle">@style/ToolbarStyle</item>
         <item name="toolbarStyle">@style/ToolbarStyle</item>
+        <item name="bg_dash_line">@drawable/bg_dash_line_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

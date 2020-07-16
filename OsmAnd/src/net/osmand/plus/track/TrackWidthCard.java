@@ -40,6 +40,8 @@ public class TrackWidthCard extends BaseCard {
 	private AppearanceListItem selectedItem;
 	private List<AppearanceListItem> appearanceItems;
 
+	private GpxWidthAdapter widthAdapter;
+
 	public TrackWidthCard(MapActivity mapActivity, TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
@@ -56,9 +58,16 @@ public class TrackWidthCard extends BaseCard {
 		updateHeader();
 		updateCustomWidthSlider();
 
+		widthAdapter = new GpxWidthAdapter(appearanceItems);
 		RecyclerView groupRecyclerView = view.findViewById(R.id.recycler_view);
-		groupRecyclerView.setAdapter(new GpxWidthAdapter(appearanceItems));
+		groupRecyclerView.setAdapter(widthAdapter);
 		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
+	}
+
+	public void updateItems() {
+		if (widthAdapter != null) {
+			widthAdapter.notifyDataSetChanged();
+		}
 	}
 
 	private AppearanceListItem getSelectedItem() {
