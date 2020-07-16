@@ -10,12 +10,12 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.util.MapUtils;
 
@@ -119,7 +119,7 @@ public class MeasurementEditingContext {
 	}
 
 	void setSnapToRoadAppMode(ApplicationMode snapToRoadAppMode) {
-		if (this.snapToRoadAppMode != null
+		if (this.snapToRoadAppMode != null && snapToRoadAppMode != null
 				&& !this.snapToRoadAppMode.getStringKey().equals(snapToRoadAppMode.getStringKey())) {
 			snappedToRoadPoints.clear();
 			updateCacheForSnapIfNeeded(true);

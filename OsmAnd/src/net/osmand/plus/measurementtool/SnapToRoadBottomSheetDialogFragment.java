@@ -16,11 +16,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,7 @@ import java.util.List;
 public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = "SnapToRoadBottomSheetDialogFragment";
+	public static final int STRAIGHT_LINE_TAG = -1;
 
 	private SnapToRoadFragmentListener listener;
 	private boolean nightMode;
@@ -79,15 +80,28 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 			public void onClick(View view) {
 				snapToRoadEnabled = true;
 				if (listener != null) {
-					listener.onApplicationModeItemClick(modes.get((int) view.getTag()));
+					ApplicationMode mode=null;
+					if((int)view.getTag()!= STRAIGHT_LINE_TAG) {
+						mode = modes.get((int) view.getTag());
+						snapToRoadEnabled = true;
+					}
+					listener.onApplicationModeItemClick(mode);
 				}
 				dismiss();
 			}
 		};
 
+		View row = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.list_item_icon_and_title, null);
+		((ImageView) row.findViewById(R.id.icon)).setImageDrawable(
+				app.getUIUtilities().getIcon(R.drawable.ic_action_split_interval, nightMode));
+		((TextView) row.findViewById(R.id.title)).setText(app.getText(R.string.routing_profile_straightline));
+		row.setOnClickListener(onClickListener);
+		row.setTag(STRAIGHT_LINE_TAG);
+		container.addView(row);
+
 		for (int i = 0; i < modes.size(); i++) {
 			ApplicationMode mode = modes.get(i);
-			View row = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.list_item_icon_and_title, null);
+			row = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.list_item_icon_and_title, null);
 			((ImageView) row.findViewById(R.id.icon)).setImageDrawable(
 				app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode)));
 			((TextView) row.findViewById(R.id.title)).setText(mode.toHumanString());

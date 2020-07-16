@@ -46,11 +46,9 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -71,6 +69,8 @@ import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -726,7 +726,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 			@Override
 			public void onApplicationModeItemClick(ApplicationMode mode) {
-				enableSnapToRoadMode(mode);
+				if (mode == null) {
+					disableSnapToRoadMode();
+					editingCtx.setSnapToRoadAppMode(null);
+					showSnapToRoadControls();
+				} else {
+					enableSnapToRoadMode(mode);
+				}
 			}
 		};
 	}
@@ -833,7 +839,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				}
 			});
 			snapToRoadBtn.setVisibility(View.VISIBLE);
-
 			mapActivity.refreshMap();
 		}
 	}
@@ -844,7 +849,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
 		editingCtx.setInSnapToRoadMode(false);
 		editingCtx.cancelSnapToRoad();
-		hideSnapToRoadIcon();
+		visibleSnapToRoadIcon(false);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
@@ -852,10 +857,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void hideSnapToRoadIcon() {
+	private void visibleSnapToRoadIcon(boolean show) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
+			if (show) {
+				mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.VISIBLE);
+			} else {
+				mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
+			}
 		}
 	}
 
@@ -1619,7 +1628,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			if (editingCtx.isInSnapToRoadMode()) {
 				disableSnapToRoadMode();
 			} else {
-				hideSnapToRoadIcon();
+				visibleSnapToRoadIcon(false);
 			}
 			if (editingCtx.getNewGpxData() != null) {
 				GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();
