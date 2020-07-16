@@ -2337,7 +2337,7 @@
     <string name="index_name_italy">Europe - Italy</string>
     <string name="index_name_gb">Europe - Great Britain</string>
     <string name="calculate_osmand_route_without_internet">Offline calculation of OsmAnd route segment</string>
-    <string name="gpx_option_calculate_first_last_segment">Calculate OsmAnd route for first and last route segment</string>
+    <string name="gpx_option_calculate_first_last_segment">Route can extend before and after the track</string>
     <string name="use_displayed_track_for_navigation">Use shown track for navigation?</string>
     <string name="keep_and_add_destination_point">Add as subsequent destination</string>
     <string name="select_gpx">Select GPX…</string>
@@ -3172,9 +3172,9 @@
     <string name="tts_language_not_supported">The selected language is not supported by the Android TTS (text-to-speech) engine installed, its preset TTS language will be used instead. Look for another TTS engine in the market?</string>
     <string name="tts_missing_language_data_title">Missing data</string>
     <string name="tts_missing_language_data">Go to the market to download selected language?</string>
-    <string name="gpx_option_reverse_route">Reverse GPX direction</string>
+    <string name="gpx_option_reverse_route">Reverse the track direction</string>
     <string name="gpx_option_destination_point">Use current destination</string>
-    <string name="gpx_option_from_start_point">Pass along entire track</string>
+    <string name="gpx_option_from_start_point">Route must cover the entire track</string>
     <!-- Use ← for RTL languages -->
     <string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' → \'Configure map\' → \'Map Source…\' → \'Offline vector maps\'.</string>
     <string name="choose_audio_stream">Voice guidance output</string>
