@@ -26,6 +26,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -40,7 +41,12 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.SettingsHelper;
+import net.osmand.plus.settings.backend.SettingsHelper.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.FileSettingsItem;
+import net.osmand.plus.settings.backend.SettingsHelper.MapSourcesSettingsItem;
+import net.osmand.plus.settings.backend.SettingsHelper.PoiUiFiltersSettingsItem;
+import net.osmand.plus.settings.backend.SettingsHelper.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.SettingsHelper.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.settings.fragments.ExportImportSettingsAdapter.Type;
@@ -274,7 +280,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	private List<SettingsItem> prepareSettingsItemsForExport() {
 		List<SettingsItem> settingsItems = new ArrayList<>();
-		settingsItems.add(new SettingsHelper.ProfileSettingsItem(app, profile));
+		settingsItems.add(new ProfileSettingsItem(app, profile));
 		if (includeAdditionalData) {
 			settingsItems.addAll(prepareAdditionalSettingsItems());
 		}
@@ -287,13 +293,12 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
-		for (Object object : adapter.getDataToOperate()) {
+		for (Object object : adapter.getData()) {
 			if (object instanceof QuickAction) {
 				quickActions.add((QuickAction) object);
 			} else if (object instanceof PoiUIFilter) {
 				poiUIFilters.add((PoiUIFilter) object);
-			} else if (object instanceof TileSourceManager.TileSourceTemplate
-					|| object instanceof SQLiteTileSource) {
+			} else if (object instanceof TileSourceTemplate || object instanceof SQLiteTileSource) {
 				tileSourceTemplates.add((ITileSource) object);
 			} else if (object instanceof File) {
 				try {
@@ -306,16 +311,16 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 			}
 		}
 		if (!quickActions.isEmpty()) {
-			settingsItems.add(new SettingsHelper.QuickActionsSettingsItem(app, quickActions));
+			settingsItems.add(new QuickActionsSettingsItem(app, quickActions));
 		}
 		if (!poiUIFilters.isEmpty()) {
-			settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app, poiUIFilters));
+			settingsItems.add(new PoiUiFiltersSettingsItem(app, poiUIFilters));
 		}
 		if (!tileSourceTemplates.isEmpty()) {
-			settingsItems.add(new SettingsHelper.MapSourcesSettingsItem(app, tileSourceTemplates));
+			settingsItems.add(new MapSourcesSettingsItem(app, tileSourceTemplates));
 		}
 		if (!avoidRoads.isEmpty()) {
-			settingsItems.add(new SettingsHelper.AvoidRoadsSettingsItem(app, avoidRoads));
+			settingsItems.add(new AvoidRoadsSettingsItem(app, avoidRoads));
 		}
 		return settingsItems;
 	}

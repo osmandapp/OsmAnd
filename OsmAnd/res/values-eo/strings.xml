@@ -3611,7 +3611,7 @@
     <string name="replace_point_descr">Anstataŭigi alian punkton per tiu ĉi.</string>
     <string name="changes_applied_to_profile">Aplikis ŝanĝojn al la profilo “%1$s”.</string>
     <string name="settings_item_read_error">Ne povas legi el “%1$s”.</string>
-    <string name="settings_item_write_error">Ne povas skribi al “%1%s”.</string>
+    <string name="settings_item_write_error">Ne povas skribi al “%1$s”.</string>
     <string name="settings_item_import_error">Ne povas enporti el “%1$s”.</string>
     <string name="select_track_file">Elekti dosieron de spuro</string>
     <string name="shared_string_languages">Lingvoj</string>

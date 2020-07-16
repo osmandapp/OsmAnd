@@ -3824,4 +3824,5 @@
     <string name="app_mode_wheelchair">Silla de ruedas</string>
     <string name="app_mode_go_cart">Go-kart</string>
     <string name="osm_edit_closed_note">Nota de OSM cerrada</string>
+    <string name="app_mode_wheelchair_forward">Silla de ruedas (hacia adelante)</string>
 </resources>

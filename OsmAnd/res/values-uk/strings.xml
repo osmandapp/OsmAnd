@@ -3810,4 +3810,9 @@
     <string name="search_download_wikipedia_maps">Завантажити мапи Вікіпедії</string>
     <string name="plugin_wikipedia_description">Отримайте відомості про визначні місця у Вікіпедії. Це ваш кишеньковий посібник без мережі - просто ввімкніть втулок \"Вікіпедія\" і насолоджуйтесь статтями про об\'єкти навколо вас.</string>
     <string name="app_mode_motor_scooter">Моторолер</string>
+    <string name="app_mode_enduro_motorcycle">легкий мотоцикл</string>
+    <string name="app_mode_wheelchair">Інвалідне крісло</string>
+    <string name="app_mode_wheelchair_forward">Інвалідне крісло попереду</string>
+    <string name="app_mode_go_cart">у мапу</string>
+    <string name="osm_edit_closed_note">Закрита нотатка OSM</string>
 </resources>

@@ -49,7 +49,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ExportImportSettingsAdapter.class.getName());
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
-	private List<? super Object> dataToOperate;
+	private List<? super Object> data;
 	private Map<Type, List<?>> itemsMap;
 	private List<Type> itemsTypes;
 	private boolean nightMode;
@@ -63,8 +63,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		this.importState = importState;
 		this.itemsMap = new HashMap<>();
 		this.itemsTypes = new ArrayList<>();
-		this.dataToOperate = new ArrayList<>();
-		dataToOperate = new ArrayList<>();
+		this.data = new ArrayList<>();
 		uiUtilities = app.getUIUtilities();
 		activeColorRes = nightMode
 				? R.color.icon_color_active_dark
@@ -102,12 +101,12 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		final List<?> listItems = itemsMap.get(type);
 		subTextTv.setText(getSelectedItemsAmount(listItems));
 
-		if (dataToOperate.containsAll(listItems)) {
+		if (data.containsAll(listItems)) {
 			checkBox.setState(CHECKED);
 		} else {
 			boolean contains = false;
 			for (Object object : listItems) {
-				if (dataToOperate.contains(object)) {
+				if (data.contains(object)) {
 					contains = true;
 					break;
 				}
@@ -122,12 +121,12 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				checkBox.performClick();
 				if (checkBox.getState() == CHECKED) {
 					for (Object object : listItems) {
-						if (!dataToOperate.contains(object)) {
-							dataToOperate.add(object);
+						if (!data.contains(object)) {
+							data.add(object);
 						}
 					}
 				} else {
-					dataToOperate.removeAll(listItems);
+					data.removeAll(listItems);
 				}
 				notifyDataSetChanged();
 			}
@@ -146,7 +145,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		final Object currentItem = itemsMap.get(itemsTypes.get(groupPosition)).get(childPosition);
 
 		boolean isLastGroup = groupPosition == getGroupCount() - 1;
-		boolean itemSelected = dataToOperate.contains(currentItem);
+		boolean itemSelected = data.contains(currentItem);
 		final Type type = itemsTypes.get(groupPosition);
 
 		TextView title = child.findViewById(R.id.title_tv);
@@ -166,10 +165,10 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		child.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (dataToOperate.contains(currentItem)) {
-					dataToOperate.remove(currentItem);
+				if (data.contains(currentItem)) {
+					data.remove(currentItem);
 				} else {
-					dataToOperate.add(currentItem);
+					data.add(currentItem);
 				}
 				notifyDataSetChanged();
 			}
@@ -293,7 +292,7 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private String getSelectedItemsAmount(List<?> listItems) {
 		int amount = 0;
 		for (Object item : listItems) {
-			if (dataToOperate.contains(item)) {
+			if (data.contains(item)) {
 				amount++;
 			}
 		}
@@ -343,17 +342,17 @@ class ExportImportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	}
 
 	public void selectAll(boolean selectAll) {
-		dataToOperate.clear();
+		data.clear();
 		if (selectAll) {
 			for (List<?> values : itemsMap.values()) {
-				dataToOperate.addAll(values);
+				data.addAll(values);
 			}
 		}
 		notifyDataSetChanged();
 	}
 
-	List<? super Object> getDataToOperate() {
-		return this.dataToOperate;
+	List<? super Object> getData() {
+		return this.data;
 	}
 
 	public enum Type {

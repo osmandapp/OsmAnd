@@ -1116,7 +1116,7 @@
     <string name="poi_tactile_paving_yes">van</string>
     <string name="poi_tactile_paving_no">Vakvezető burkolat nincs</string>
     <string name="poi_traffic_signals_sound_yes">van</string>
-    <string name="poi_traffic_signals_sound_no">nincs</string>
+    <string name="poi_traffic_signals_sound_no">Hang nincs</string>
     <string name="poi_traffic_signals_sound_walk">Csak amikor zöld</string>
     <string name="poi_services">Pihenőhely</string>
     <string name="poi_mini_roundabout">Mini körforgalom</string>
@@ -1198,13 +1198,13 @@
     <string name="poi_service_electrical">Elektromosautó-szerelés</string>
     <string name="poi_motorcycle_repair">Motorkerékpár-szerelés</string>
     <string name="poi_self_service_yes">igen</string>
-    <string name="poi_self_service_no">Nem önkiszolgáló</string>
+    <string name="poi_self_service_no">Nem</string>
     <string name="poi_automated_yes">igen</string>
     <string name="poi_automated_no">Nem automatizált</string>
     <string name="poi_full_service_yes">Teljes kiszolgálás</string>
     <string name="poi_brushless_yes">igen</string>
     <string name="poi_brushless_no">Kefés</string>
-    <string name="poi_car_wash_no">Autómosó nincs</string>
+    <string name="poi_car_wash_no">Nincs</string>
     <string name="poi_aeroway_fuel">Repülőgépüzemanyag-töltő állomás</string>
     <string name="poi_public_bath">Közfürdő</string>
     <string name="poi_male_yes">Férfi</string>
@@ -3792,4 +3792,15 @@
     <string name="poi_traffic_signals_arrow">Nyíl</string>
     <string name="poi_traffic_signals_vibration">Rezgés</string>
     <string name="poi_fire_hydrant_pressure_filter">Nyomás</string>
+    <string name="poi_seamark_obstruction">Akadály</string>
+    <string name="poi_piste_ref">Pálya azonosítószám</string>
+    <string name="poi_bowling_alley">Bowling központ</string>
+    <string name="poi_shop_security">Biztonsági szaküzlet</string>
+    <string name="poi_mountain_rescue">Hegyimentő</string>
+    <string name="poi_traffic_signals_arrow_yes">Igen</string>
+    <string name="poi_traffic_signals_vibration_yes">Igen</string>
+    <string name="poi_traffic_signals_vibration_no">Rezgés nincs</string>
+    <string name="poi_give_box">Adomány doboz</string>
+    <string name="poi_borough">Kerület</string>
+    <string name="poi_city_block">Háztömb</string>
 </resources>

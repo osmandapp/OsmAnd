@@ -9,14 +9,14 @@
     <string name="about_version">Версія:</string>
     <string name="shared_string_about">Пра праграму</string>
     <string name="about_settings_descr">Версія, ліцэнзіі, удзельнікі праекта</string>
-    <string name="local_index_tile_data_zooms">Спампаваныя маштабы: %1$s</string>
+    <string name="local_index_tile_data_zooms">Спампаваныя ўзроўні маштабавання: %1$s</string>
     <string name="local_index_tile_data_expire">Тэрмін дзеяння (у хвілінах): %1$s</string>
     <string name="local_index_tile_data_downloadable">Можна спампаваць: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Максімальнае павелічэнне: %1$s</string>
     <string name="local_index_tile_data_minzoom">Мінімальнае павелічэнне: %1$s</string>
     <string name="local_index_tile_data_name">Даныя фрагменту: %1$s</string>
     <string name="edit_tilesource_successfully">Крыніца фрагментаў мапы «%1$s» захаваная</string>
-    <string name="edit_tilesource_elliptic_tile">Эліптычны меркатар</string>
+    <string name="edit_tilesource_elliptic_tile">Эліптычная праекцыя меркатара</string>
     <string name="edit_tilesource_maxzoom">Максімальнае павелічэнне</string>
     <string name="edit_tilesource_expiration_time">Тэрмін дзеяння (у хвілінах)</string>
     <string name="edit_tilesource_minzoom">Мінімальнае павелічэнне</string>
@@ -2071,7 +2071,7 @@
     <string name="osm_live_banner_desc">Атрымайце неабмежаваную колькасць спампоўванняў мапаў у дадатак да штотыднёвых, штодзённых і нават штогадзінных абнаўленняў.</string>
     <string name="osmand_plus_banner_desc">Неабмежаваная колькасць спамоўванняў мапаў, абнаўленняў і ўбудова Wikipedia.</string>
     <string name="si_mi_meters">Мілі/метры</string>
-    <string name="osm_live_payment_desc">Плата за падпіску спаганяецца штомесяц. Скасаваць яе на Google Play можна у любы момант.</string>
+    <string name="osm_live_payment_desc">Плата за падпіску спаганяецца за абраны перыяд. Скасаваць яе на Google Play можна у любы момант.</string>
     <string name="donation_to_osm">Ахвяраванне супольнасці OpenStreetMap</string>
     <string name="donation_to_osm_desc">Частка вашага ахвяравання накіроўваецца ўдзельнікам праекта OpenStreetMap. Кошт падпіскі застаецца тым жа самым.</string>
     <string name="osm_live_subscription_desc">Падпіска дазваляе атрымліваць штогадзіныя, штодзённыя, штотыднёвыя абнаўленні і неабмежаваную колькасць спампоўванняў для ўсіх мапаў па ўсім свеце.</string>
@@ -2481,7 +2481,7 @@
 \n</string>
     <string name="shared_string_install">Усталяваць</string>
     <string name="improve_coverage_mapillary">Палепшыць фотапакрыццё Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Усталяваць Mapillary, каб дадаць адзін альбо некалькі фотаздымкаў да гэтага месца на мапе.</string>
+    <string name="improve_coverage_install_mapillary_desc">Усталюйце Mapillary, каб дадаць фотаздымкі гэтага месца.</string>
     <string name="open_mapillary">Адкрыць Mapillary</string>
     <string name="mapillary_image">Выява Mapillary</string>
     <string name="distance_moving">Дыстанцыя выпраўленая</string>
@@ -3093,7 +3093,7 @@
     <string name="edit_profile_setup_subtitle">У кожнага профілю свае налады</string>
     <string name="turn_screen_on_time_descr">Вызначце час, цягам якога экран не будзе выключацца.</string>
     <string name="turn_screen_on_sensor">Выкарыстоўваць датчык адлегласці</string>
-    <string name="turn_screen_on_sensor_descr">Правядзіце рукой па верхняй частцы экрана, каб уключыць яго падчас навігацыі.</string>
+    <string name="turn_screen_on_sensor_descr">Уключаць экран правёўшы па яму рукой.</string>
     <string name="rendering_attr_winter_road_name">Зімовая дарога</string>
     <string name="rendering_attr_ice_road_name">Ледзяная дарога</string>
     <string name="routeInfo_winter_ice_road_name">Зімовыя і ледзяныя дарогі</string>
@@ -3307,7 +3307,7 @@
     <string name="app_mode_pickup_truck">Пікап</string>
     <string name="turn_screen_on_info">Паказваць мапу падчас навігацыі на заблакаваным экране.</string>
     <string name="route_parameters_info">Налады пабудовы маршруту абранага профілю \"%1$s\".</string>
-    <string name="wake_time">Час абуджэння</string>
+    <string name="wake_time">Час працы пасля абуджэння</string>
     <string name="units_and_formats">Адзінкі вымярэння і фарматы</string>
     <string name="appearance">Выгляд</string>
     <string name="map_look_descr">Выгляд мапы</string>
@@ -3327,7 +3327,7 @@
     <string name="map_during_navigation_info">Мапа падчас навігацыі</string>
     <string name="map_during_navigation">Мапа падчас навігацыі</string>
     <string name="shared_string_other">Іншае</string>
-    <string name="vehicle_parameters_descr">Вага, вышыня, хуткасць</string>
+    <string name="vehicle_parameters_descr">Вага, вышыня, даўжыня, хуткасць</string>
     <string name="vehicle_parameters">Параметры аўтамабіля</string>
     <string name="voice_announces_info">Галасавыя апавяшчэнні прайграюцца толькі падчас навігацыі.</string>
     <string name="voice_announces_descr">Навігацыйныя інструкцыі і апавяшчэнні</string>
@@ -3535,7 +3535,7 @@
     <string name="reset_deafult_order">Аднавіць прадвызначаны парадак элементаў</string>
     <string name="back_to_editing">Вярнуцца да рэдагавання</string>
     <string name="quick_action_transport_show">Паказаць грамадскі транспарт</string>
-    <string name="quick_action_transport_descr">Кнопка, каб паказаць ці схаваць грамадскі транспарт на мапе.</string>
+    <string name="quick_action_transport_descr">Кнопка для паказу ці хавання грамадскага транспарту на мапе.</string>
     <string name="shared_string_add_profile">Дадаць профіль</string>
     <string name="n_items_of_z">%1$s з %2$s</string>
     <string name="download_slope_maps">Схілы</string>
@@ -3564,7 +3564,7 @@
     <string name="shared_string_divider">Падзяляльнік</string>
     <string name="shared_string_hidden">Схавана</string>
     <string name="reset_items_descr">Калі схаваць налады, то яны скінуцца да зыходнага стану.</string>
-    <string name="main_actions_descr">\"Асноўныя дзеянні\" змяшчаюць толькі 4 кнопкі.</string>
+    <string name="main_actions_descr">Толькі 4 кнопкі.</string>
     <string name="main_actions">Асноўныя дзеянні</string>
     <string name="developer_plugin">Убудова для распрацоўшчыкаў</string>
     <string name="replace_point_descr">Замяніць іншы пункт на гэты.</string>
@@ -3596,8 +3596,8 @@
     <string name="lang_an">Арагонская</string>
     <string name="custom_color">Адвольны колер</string>
     <string name="search_poi_types">Пошук тыпаў POI</string>
-    <string name="quick_action_switch_profile_descr">Абраныя профілі пераключаюцца націскам на кнопку \"Дзеянне\".</string>
-    <string name="profiles_for_action_not_found">Профіляў, абраных для гэтага дзеяння, не знойдзена.</string>
+    <string name="quick_action_switch_profile_descr">Пры націсканні на кнопку \"Дзеянні\" пераключаюцца абраныя профілі.</string>
+    <string name="profiles_for_action_not_found">Адпаведных профіляў не знойдзена.</string>
     <string name="lang_zhyue">Кантонская</string>
     <string name="lang_yo">Ёруба</string>
     <string name="lang_uz">Узбекская</string>
@@ -3620,4 +3620,28 @@
     <string name="quick_action_show_hide_transport">Паказаць/схаваць грамадскі транспарт</string>
     <string name="recalculate_route_in_deviation">Пералічыць маршрут у выпадку адхілення</string>
     <string name="shared_string_uninstall">Выдаліць</string>
+    <string name="vessel_width_limit_description">Вызначце шырыню судна, каб пазбягаць вузкіх мастоў</string>
+    <string name="quick_action_showhide_mapillary_title">Паказаць/схаваць Mapillary</string>
+    <string name="quick_action_mapillary_hide">Схаваць Mapillary</string>
+    <string name="quick_action_mapillary_show">Паказаць Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Пераключальнік для паказу альбо хавання пласта Mapillary.</string>
+    <string name="routing_attr_length_description">Пазначце даўжыню транспартнага сродку, дазволеную для руху па маршрутах.</string>
+    <string name="routing_attr_length_name">Ліміт даўжыні</string>
+    <string name="shared_string_bearing">Арыентацыя</string>
+    <string name="item_deleted">Выдалена: %1$s</string>
+    <string name="speed_cameras_restart_descr">Перазапуск патрабуецца для поўнага выдалення даных камер кантролю хуткасці.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Кіраванне ўзроўнем маштабавання мапы пры дапамозе кнопак рэгулявання гучнасці.</string>
+    <string name="plugin_wikipedia_description">Інфармацыя пра славутасці з Вікіпедыі. Гэта ваш кішэнны даведнік - уключыце ўбудову вікіпедыі і чытайце артыкулы пра аб’екты вакол вас.</string>
+    <string name="app_mode_enduro_motorcycle">Матацыкл Эндура</string>
+    <string name="app_mode_motor_scooter">Мотаролер</string>
+    <string name="shared_string_uninstall_and_restart">Выдаліць і перазапусціць</string>
+    <string name="speed_cameras_removed_descr">На гэтай прыладзе няма камер кантролю хуткасці.</string>
+    <string name="app_mode_inline_skates">Ролікі</string>
+    <string name="quick_action_remove_next_destination">Выдаліць наступны пункт прызначэння</string>
+    <string name="use_volume_buttons_as_zoom">Маштабаванне кнопкамі гучнасці</string>
+    <string name="please_provide_point_name_error">Калі ласка, дайце пункту назву</string>
+    <string name="quick_action_remove_next_destination_descr">Бягучы пункт прызначэння маршруту будзе выдалены. Калі гэта канцавы пункт прызначэння, то навігацыя спыніцца.</string>
+    <string name="search_download_wikipedia_maps">Спампаваць мапы Вікіпедыі</string>
+    <string name="app_mode_wheelchair">Інвалідны вазок</string>
+    <string name="osm_edit_closed_note">Закрытая нататка OSM</string>
 </resources>
