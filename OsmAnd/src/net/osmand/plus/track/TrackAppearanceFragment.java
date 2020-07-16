@@ -10,9 +10,11 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -29,6 +31,8 @@ import net.osmand.plus.myplaces.SplitTrackAsyncTask;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,13 +41,19 @@ import static net.osmand.plus.track.TrackDrawInfo.TRACK_FILE_PATH;
 
 public class TrackAppearanceFragment extends ContextMenuFragment {
 
+	public static final String TAG = TrackAppearanceFragment.class.getName();
+
+	private static final Log log = PlatformUtil.getLog(TrackAppearanceFragment.class);
+
 	private OsmandApplication app;
 
 	private GpxDataItem gpxDataItem;
 	private TrackDrawInfo trackDrawInfo;
 	private SelectedGpxFile selectedGpxFile;
+	private List<GpxDisplayGroup> displayGroups;
 
 	private int menuTitleHeight;
+	private long modifiedTime = -1;
 
 	@Override
 	public int getMainLayoutId() {
@@ -284,9 +294,6 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 		}
 	}
 
-	private long modifiedTime = -1;
-	private List<GpxDisplayGroup> displayGroups;
-
 	public List<GpxDisplayGroup> getGpxDisplayGroups() {
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
 		if (gpxFile == null) {
@@ -300,6 +307,17 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 			}
 		}
 		return displayGroups;
+	}
+
+	public void dismissImmediate() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			try {
+				mapActivity.getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			} catch (Exception e) {
+				log.error(e);
+			}
+		}
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity, TrackAppearanceFragment fragment) {

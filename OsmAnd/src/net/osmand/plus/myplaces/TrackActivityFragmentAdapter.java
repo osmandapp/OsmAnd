@@ -64,6 +64,7 @@ import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -298,6 +299,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			}
 		});
 		final View splitColorView = headerView.findViewById(R.id.split_color_view);
+		final View appearanceView = headerView.findViewById(R.id.appearance_view);
 		final View divider = headerView.findViewById(R.id.divider);
 		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 		vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
@@ -343,6 +345,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		if (showMapOnly) {
 			splitIntervalView.setVisibility(View.GONE);
 			splitColorView.setVisibility(View.GONE);
+			appearanceView.setVisibility(View.GONE);
 			divider.setVisibility(View.GONE);
 			bottomDivider.setVisibility(View.VISIBLE);
 		} else {
@@ -378,9 +381,29 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				} else {
 					splitIntervalView.setVisibility(View.GONE);
 				}
+				appearanceView.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						TrackActivity activity = getTrackActivity();
+						GPXFile gpx = getGpx();
+						if (gpx != null && activity != null) {
+							WptPt point = gpx.tracks.get(0).segments.get(0).points.get(0);
+							LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+
+							OsmandSettings settings = app.getSettings();
+							settings.setMapLocationToShow(latLon.getLatitude(), latLon.getLongitude(),
+									settings.getLastKnownMapZoom(),
+									new PointDescription(PointDescription.POINT_TYPE_GPX, Algorithms.getFileWithoutDirs(gpx.path)),
+									false, gpx);
+
+							MapActivity.launchMapActivityMoveToTop(activity);
+						}
+					}
+				});
 				splitColorView.setVisibility(View.VISIBLE);
 				divider.setVisibility(View.VISIBLE);
 			} else {
+				appearanceView.setVisibility(View.GONE);
 				splitColorView.setVisibility(View.GONE);
 				divider.setVisibility(View.GONE);
 			}

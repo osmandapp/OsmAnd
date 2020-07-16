@@ -138,6 +138,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		this.trackChartPoints = trackChartPoints;
 	}
 
+	public boolean isInTrackAppearanceMode() {
+		return trackDrawInfo != null;
+	}
+
 	public void setTrackDrawInfo(TrackDrawInfo trackDrawInfo) {
 		this.trackDrawInfo = trackDrawInfo;
 	}

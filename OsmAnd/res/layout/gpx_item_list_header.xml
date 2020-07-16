@@ -160,6 +160,36 @@
 
         </LinearLayout>
 
+	    <LinearLayout
+		    android:id="@+id/appearance_view"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:background="?attr/selectableItemBackground"
+		    android:gravity="center_vertical"
+		    android:minHeight="48dp"
+		    android:orientation="horizontal"
+		    android:paddingLeft="@dimen/content_padding"
+		    android:paddingTop="@dimen/content_padding_half"
+		    android:paddingRight="@dimen/content_padding"
+		    android:paddingBottom="@dimen/content_padding_half">
+
+		    <TextView
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="1"
+			    android:text="@string/shared_string_appearance"
+			    android:textColor="?android:textColorPrimary"
+			    android:textSize="@dimen/default_list_text_size" />
+
+		    <androidx.appcompat.widget.AppCompatImageView
+			    android:id="@+id/appearanceImage"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:tint="?attr/default_icon_color"
+			    osmand:srcCompat="@drawable/ic_action_appearance" />
+
+	    </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
