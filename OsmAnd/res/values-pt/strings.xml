@@ -3751,4 +3751,71 @@
     <string name="details_dialog_decr">Controla a visibilidade de detalhes adicionais mostrados no mapa</string>
     <string name="shared_string_night_map">Mapa noturno</string>
     <string name="shared_string_all_time">O tempo todo</string>
+    <string name="app_mode_wheelchair">Cadeira de rodas</string>
+    <string name="app_mode_go_cart">Go-cart</string>
+    <string name="speed_cameras_alert">Os alertas de radares de velocidade em alguns países são proibidos por lei.</string>
+    <string name="keep_active">Manter ativo</string>
+    <string name="quick_action_mapillary_hide">Ocultar Mapillary</string>
+    <string name="please_provide_point_name_error">Forneça um nome para o ponto</string>
+    <string name="clear_tiles_warning">A aplicação dessas alterações limpará os dados em cache dessa origem de bloco</string>
+    <string name="speed_cameras_removed_descr">Este aparelho não possui câmeras de velocidade.</string>
+    <string name="speed_cameras_legal_descr">Em alguns países ou regiões, o uso de aplicações de aviso de radares é proibido por lei. 
+\n 
+\nPrecisa fazer uma escolha, dependendo da lei do seu país. 
+\n 
+\nSelecione %1$s e receberá alertas e avisos sobre radares de velocidade. 
+\n 
+\nSelecione %2$s. Todos os dados relacionados a radares de velocidade: alertas, notificações, POIs serão apagados até que o OsmAnd seja completamente reinstalado.</string>
+    <string name="plugin_wikipedia_description">Obter informações sobre pontos de interesse da Wikipédia. É o seu guia de bolso off-line - falta só ativar o complemento Wikipédia e desfrutar de artigos sobre os elementos ao seu redor.</string>
+    <string name="app_mode_motor_scooter">Motoneta</string>
+    <string name="quick_action_remove_next_destination">Apagar próximo ponto de destino</string>
+    <string name="search_download_wikipedia_maps">Descarregar mapas da Wikipédia</string>
+    <string name="additional_actions_descr">Pode acessar essas ações tocando no botão “%1$s”.</string>
+    <string name="shared_string_uninstall">Desinstalar</string>
+    <string name="lenght_limit_description">Forneça o comprimento do seu veículo. Algumas restrições de rotas podem ser aplicadas a veículos longos.</string>
+    <string name="use_volume_buttons_as_zoom">Botões de volume como zoom</string>
+    <string name="speed_cameras_restart_descr">É necessário reiniciar para excluir completamente os dados da câmera de velocidade.</string>
+    <string name="item_deleted">%1$s apagado</string>
+    <string name="quick_action_showhide_mapillary_descr">Uma alternância para mostrar ou ocultar a camada Mapillary no mapa.</string>
+    <string name="vessel_height_warning_link">Definir altura da embarcação</string>
+    <string name="quick_action_mapillary_show">Mostrar Mapillary</string>
+    <string name="app_mode_enduro_motorcycle">Motocicleta enduro</string>
+    <string name="app_mode_inline_skates">Patins em linha</string>
+    <string name="turn_screen_on_power_button_disabled">Desativado. Requer \'manter o ecrã ligadp\' em \'tempo limite após a ativação\'.</string>
+    <string name="release_3_7">• Novos mapas de inclinação offline 
+\n 
+\n  • Personalização completa de Favoritos e Waypoints GPX - cores, ícones e formas personalizados 
+\n 
+\n  • Personalize a ordem dos itens no menu de contexto, configurar mapa, gaveta 
+\n 
+\n  • Wikipédia como uma camada separada no mapa Configurar, selecione apenas os idiomas necessários 
+\n 
+\n  • Crie seu próprio filtro / mapa de POI com total flexibilidade 
+\n 
+\n  • Adicionadas opções para restaurar configurações de perfis personalizados 
+\n 
+\n  • Rotas GPX completas das faixas de tráfego da Navigation Support e instruções completas de curva 
+\n 
+\n  • Corrigir tamanhos de interface do utilizador em tablets 
+\n 
+\n  • Corrija bugs com RTL 
+\n 
+\n</string>
+    <string name="quick_action_remove_next_destination_descr">O ponto de destino atual na rota será apagado. Se for o destino, a navegação será interrompida.</string>
+    <string name="vessel_height_limit_description">Defina a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
+    <string name="add_online_source">Adicionar fonte online</string>
+    <string name="vessel_width_limit_description">Defina a largura da embarcação para evitar pontes estreitas</string>
+    <string name="shared_string_legal">Legal</string>
+    <string name="vessel_height_warning">Pode definir a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
+    <string name="app_mode_wheelchair_forward">Cadeira de rodas para a frente</string>
+    <string name="use_volume_buttons_as_zoom_descr">Ativar para controlar o nível de zoom do mapa com os botões de volume do aparelho.</string>
+    <string name="quick_action_showhide_mapillary_title">Mostrar/ocultar Mapillary</string>
+    <string name="uninstall_speed_cameras">Desinstalar radares de velocidade</string>
+    <string name="osm_edit_closed_note">Nota OSM fechada</string>
+    <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>
+    <string name="routing_attr_length_description">Especifique o comprimento do veículo a ser permitido nas rotas.</string>
+    <string name="routing_attr_length_name">Limite de comprimento</string>
+    <string name="speed_camera_pois">POIs de radares de velocidade</string>
+    <string name="shared_string_resume">Retomar</string>
+    <string name="shared_string_bearing">Rolamento</string>
 </resources>
