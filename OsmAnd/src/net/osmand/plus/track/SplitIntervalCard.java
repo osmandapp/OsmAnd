@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -13,10 +14,12 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 public class SplitIntervalCard extends BaseCard {
 
 	private TrackDrawInfo trackDrawInfo;
+	private Fragment targetFragment;
 
-	public SplitIntervalCard(@NonNull MapActivity mapActivity, TrackDrawInfo trackDrawInfo) {
+	public SplitIntervalCard(@NonNull MapActivity mapActivity, TrackDrawInfo trackDrawInfo, Fragment targetFragment) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
+		this.targetFragment = targetFragment;
 	}
 
 	@Override
@@ -36,7 +39,7 @@ public class SplitIntervalCard extends BaseCard {
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SplitIntervalBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), trackDrawInfo);
+				SplitIntervalBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), trackDrawInfo, targetFragment);
 			}
 		});
 	}

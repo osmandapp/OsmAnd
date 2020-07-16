@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -24,9 +25,13 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.DirectionArrowsCard;
 import net.osmand.plus.myplaces.SaveGpxAsyncTask;
+import net.osmand.plus.myplaces.SplitTrackAsyncTask;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.osmand.plus.track.TrackDrawInfo.TRACK_FILE_PATH;
 
@@ -34,10 +39,39 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 
 	private OsmandApplication app;
 
+	private GpxDataItem gpxDataItem;
 	private TrackDrawInfo trackDrawInfo;
 	private SelectedGpxFile selectedGpxFile;
 
 	private int menuTitleHeight;
+
+	@Override
+	public int getMainLayoutId() {
+		return R.layout.track_appearance;
+	}
+
+	@Override
+	public int getHeaderViewHeight() {
+		return menuTitleHeight;
+	}
+
+	@Override
+	public boolean isHeaderViewDetached() {
+		return false;
+	}
+
+	@Override
+	public int getToolbarHeight() {
+		return 0;
+	}
+
+	public float getMiddleStateKoef() {
+		return 0.5f;
+	}
+
+	public TrackDrawInfo getTrackDrawInfo() {
+		return trackDrawInfo;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,12 +82,13 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 		if (savedInstanceState != null) {
 			trackDrawInfo = new TrackDrawInfo();
 			trackDrawInfo.readBundle(savedInstanceState);
+			gpxDataItem = app.getGpxDbHelper().getItem(new File(trackDrawInfo.getFilePath()));
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(trackDrawInfo.getFilePath());
 		} else if (arguments != null) {
 			String gpxFilePath = arguments.getString(TRACK_FILE_PATH);
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 			File file = new File(selectedGpxFile.getGpxFile().path);
-			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file);
+			gpxDataItem = app.getGpxDbHelper().getItem(file);
 			trackDrawInfo = new TrackDrawInfo(gpxDataItem);
 		}
 	}
@@ -76,6 +111,14 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 			runLayoutListener();
 		}
 		return view;
+	}
+
+	@Override
+	protected void calculateLayout(View view, boolean initLayout) {
+		menuTitleHeight = view.findViewById(R.id.route_menu_top_shadow_all).getHeight()
+				+ view.findViewById(R.id.control_buttons).getHeight()
+				- view.findViewById(R.id.buttons_shadow).getHeight();
+		super.calculateLayout(view, initLayout);
 	}
 
 	@Override
@@ -136,6 +179,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				discardChanges();
 				dismiss();
 			}
 		});
@@ -167,13 +211,57 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 
 		app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
 
-		GpxDataItem item = new GpxDataItem(new File(gpxFile.path), gpxFile);
-		app.getGpxDbHelper().add(item);
+		gpxDataItem = new GpxDataItem(new File(gpxFile.path), gpxFile);
+		app.getGpxDbHelper().add(gpxDataItem);
 		saveGpx(gpxFile);
 	}
 
-	private void saveGpx(GPXFile gpxFile) {
-		new SaveGpxAsyncTask(gpxFile, null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	private void discardChanges() {
+		if (gpxDataItem.getSplitType() != trackDrawInfo.getSplitType() || gpxDataItem.getSplitInterval() != trackDrawInfo.getSplitInterval()) {
+			int timeSplit = (int) gpxDataItem.getSplitInterval();
+			double distanceSplit = gpxDataItem.getSplitInterval();
+
+			GpxSplitType splitType = null;
+			if (gpxDataItem.getSplitType() == GpxSplitType.DISTANCE.getType()) {
+				splitType = GpxSplitType.DISTANCE;
+			} else if (gpxDataItem.getSplitType() == GpxSplitType.TIME.getType()) {
+				splitType = GpxSplitType.TIME;
+			}
+			if (splitType != null) {
+				SplitTrackAsyncTask.SplitTrackListener splitTrackListener = new SplitTrackAsyncTask.SplitTrackListener() {
+
+					@Override
+					public void trackSplittingStarted() {
+
+					}
+
+					@Override
+					public void trackSplittingFinished() {
+						if (selectedGpxFile != null) {
+							List<GpxDisplayGroup> groups = getGpxDisplayGroups();
+							selectedGpxFile.setDisplayGroups(groups, app);
+						}
+					}
+				};
+				List<GpxDisplayGroup> groups = getGpxDisplayGroups();
+				new SplitTrackAsyncTask(app, splitType, groups, splitTrackListener, trackDrawInfo.isJoinSegments(),
+						timeSplit, distanceSplit).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			}
+		}
+	}
+
+	private void saveGpx(final GPXFile gpxFile) {
+		new SaveGpxAsyncTask(gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
+			@Override
+			public void gpxSavingStarted() {
+
+			}
+
+			@Override
+			public void gpxSavingFinished() {
+				app.showShortToastMessage(R.string.shared_string_track_is_saved, Algorithms.getFileWithoutDirs(gpxFile.path));
+			}
+		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void updateCards() {
@@ -182,7 +270,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
 
-			BaseCard splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
+			BaseCard splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo, this);
 			cardsContainer.addView(splitIntervalCard.build(mapActivity));
 
 			BaseCard arrowsCard = new DirectionArrowsCard(mapActivity, trackDrawInfo);
@@ -196,36 +284,22 @@ public class TrackAppearanceFragment extends ContextMenuFragment {
 		}
 	}
 
-	@Override
-	public int getMainLayoutId() {
-		return R.layout.track_appearance;
-	}
+	private long modifiedTime = -1;
+	private List<GpxDisplayGroup> displayGroups;
 
-	@Override
-	public int getHeaderViewHeight() {
-		return menuTitleHeight;
-	}
-
-	@Override
-	protected void calculateLayout(View view, boolean initLayout) {
-		menuTitleHeight = view.findViewById(R.id.route_menu_top_shadow_all).getHeight()
-				+ view.findViewById(R.id.control_buttons).getHeight()
-				- view.findViewById(R.id.buttons_shadow).getHeight();
-		super.calculateLayout(view, initLayout);
-	}
-
-	@Override
-	public boolean isHeaderViewDetached() {
-		return false;
-	}
-
-	@Override
-	public int getToolbarHeight() {
-		return 0;
-	}
-
-	public float getMiddleStateKoef() {
-		return 0.5f;
+	public List<GpxDisplayGroup> getGpxDisplayGroups() {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		if (gpxFile == null) {
+			return new ArrayList<>();
+		}
+		if (gpxFile.modifiedTime != modifiedTime) {
+			modifiedTime = gpxFile.modifiedTime;
+			displayGroups = app.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
+			if (selectedGpxFile.getDisplayGroups(app) != null) {
+				displayGroups = selectedGpxFile.getDisplayGroups(app);
+			}
+		}
+		return displayGroups;
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity, TrackAppearanceFragment fragment) {
