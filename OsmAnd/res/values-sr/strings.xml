@@ -3813,4 +3813,8 @@
     <string name="plugin_wikipedia_description">Информације о тачкама од интереса потражите од Википедије. То је ваш џепни ванмрежни водич - само омогућите додатак Википедиа и уживајте у чланцима о објектима око вас.</string>
     <string name="app_mode_enduro_motorcycle">Ендуро скутер</string>
     <string name="app_mode_motor_scooter">Скутер</string>
+    <string name="app_mode_wheelchair">Инвалидска колица</string>
+    <string name="app_mode_wheelchair_forward">Инвалидска колица напред</string>
+    <string name="app_mode_go_cart">Корпа</string>
+    <string name="osm_edit_closed_note">Затворена ОСМ белешка</string>
 </resources>

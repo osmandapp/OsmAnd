@@ -1049,7 +1049,7 @@
     <string name="poi_lighting_tower">Асвятляльная вежа</string>
     <string name="poi_rescue_station">Выратавальная станцыя</string>
     <string name="poi_traffic_signals_sound_walk">Толькі калі пераход дазволены</string>
-    <string name="poi_traffic_signals_sound_no">Не</string>
+    <string name="poi_traffic_signals_sound_no">Гук: не</string>
     <string name="poi_traffic_signals_sound_yes">Так</string>
     <string name="poi_tactile_paving_no">Без тактыльнага пакрыцця</string>
     <string name="poi_tactile_paving_yes">Так</string>
@@ -3638,4 +3638,12 @@
     <string name="poi_bath_open_air">На адкрытым паветры</string>
     <string name="poi_volcano_type">Тып</string>
     <string name="poi_volcano_status">Статус</string>
+    <string name="poi_motor_vehicle_yes">Даступна для механічнага транспартнага сродку: так</string>
+    <string name="poi_motor_vehicle_no">Даступна для механічнага транспартнага сродку: не</string>
+    <string name="poi_motor_vehicle_private">Даступна для механічнага транспартнага сродку: прыватны доступ</string>
+    <string name="poi_traffic_signals_arrow">Стрэлка</string>
+    <string name="poi_traffic_signals_vibration">Вібрацыя</string>
+    <string name="poi_fire_hydrant_pressure_filter">Ціск</string>
+    <string name="poi_video_telephone">Відэа</string>
+    <string name="poi_sms">SMS</string>
 </resources>

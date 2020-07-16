@@ -2500,7 +2500,7 @@
     <string name="coord_input_add_point">Nokta ekle</string>
     <string name="hide_full_description">Açıklamayı gizle</string>
     <string name="show_full_description">Açıklamayı göster</string>
-    <string name="move_maps">Haritaları taşı</string>
+    <string name="move_maps">Haritaları hareket ettir</string>
     <string name="public_transport_try_ped">Yürüme navigasyonunu dene.</string>
     <string name="public_transport_try_change_settings">Ayarları değiştirmeyi deneyin.</string>
     <string name="shared_string_restore">Restore et</string>
@@ -3771,4 +3771,8 @@
     <string name="plugin_wikipedia_description">Wikipedia\'dan ilgi çekici yerler hakkında bilgi alın. Bu sizin çevrim dışı cep rehberinizdir - sadece Wikipedia eklentisini etkinleştirin ve etrafınızdaki nesneler hakkında makalelerin tadını çıkarın.</string>
     <string name="app_mode_enduro_motorcycle">Enduro motosiklet</string>
     <string name="app_mode_motor_scooter">Küçük motosiklet</string>
+    <string name="app_mode_wheelchair">Tekerlekli sandalye</string>
+    <string name="app_mode_wheelchair_forward">İleri tekerlekli sandalye</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="osm_edit_closed_note">Kapatılmış OSM Notu</string>
 </resources>

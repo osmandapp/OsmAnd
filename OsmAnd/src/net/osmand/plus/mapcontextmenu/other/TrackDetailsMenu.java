@@ -46,6 +46,7 @@ import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -312,18 +313,15 @@ public class TrackDetailsMenu {
 				}
 			} else {
 				float distance = pos * dataSet.getDivX();
-				double previousSplitDistance = 0;
+				double totalDistance = 0;
 				WptPt previousPoint = null;
 				for (int i = 0; i < segment.points.size(); i++) {
 					WptPt currentPoint = segment.points.get(i);
 					if (previousPoint != null) {
-						if (currentPoint.distance < previousPoint.distance) {
-							previousSplitDistance += previousPoint.distance;
-						}
+						totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
 					}
-					double totalDistance = previousSplitDistance + currentPoint.distance;
-					if (totalDistance >= distance) {
-						if (previousPoint != null) {
+					if (currentPoint.distance >= distance || Math.abs(totalDistance - distance) < 0.1) {
+						if (previousPoint != null && currentPoint.distance >= distance) {
 							double percent = 1 - (totalDistance - distance) / (currentPoint.distance - previousPoint.distance);
 							double dLat = (currentPoint.lat - previousPoint.lat) * percent;
 							double dLon = (currentPoint.lon - previousPoint.lon) * percent;
@@ -499,6 +497,9 @@ public class TrackDetailsMenu {
 			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
 		} else {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
+		}
+		if (location != null) {
+			mapActivity.refreshMap();
 		}
 		fitTrackOnMap(chart, location, forceFit);
 	}

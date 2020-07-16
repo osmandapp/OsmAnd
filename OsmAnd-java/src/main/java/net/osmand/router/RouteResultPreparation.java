@@ -394,8 +394,8 @@ public class RouteResultPreparation {
 	private List<RouteSegmentResult> convertFinalSegmentToResults(RoutingContext ctx, FinalRouteSegment finalSegment) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		if (finalSegment != null) {
-			ctx.routingTime = finalSegment.distanceFromStart;
-			println("Routing calculated time distance " + finalSegment.distanceFromStart);
+			ctx.routingTime += finalSegment.distanceFromStart;
+			// println("Routing calculated time distance " + finalSegment.distanceFromStart);
 			// Get results from opposite direction roads
 			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment : 
 				finalSegment.opposite.getParentRoute();
@@ -496,8 +496,9 @@ public class RouteResultPreparation {
 		String msg = String.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"%s\" \n"
 				+ "  start_lat=\"%.5f\" start_lon=\"%.5f\" target_lat=\"%.5f\" target_lon=\"%.5f\" "
 				+ " routing_time=\"%.2f\" loadedTiles=\"%d\" visitedSegments=\"%d\" complete_distance=\"%.2f\" complete_time=\"%.2f\" >",
-				ctx.config.routerName, startLat, startLon, endLat, endLon, ctx.routingTime, ctx.loadedTiles, 
-				ctx.visitedSegments, completeDistance, completeTime);
+				ctx.config.routerName, startLat, startLon, endLat, endLon, ctx.routingTime, 
+				ctx.getLoadedTiles(), 
+				ctx.getVisitedSegments(), completeDistance, completeTime);
 //		String msg = MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{4}\" \n"
 //				+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" {5} >", 
 //				startLat + "", startLon + "", endLat + "", endLon + "", ctx.config.routerName, 

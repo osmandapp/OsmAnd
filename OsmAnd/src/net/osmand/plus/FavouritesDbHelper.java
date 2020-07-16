@@ -679,6 +679,16 @@ public class FavouritesDbHelper {
 		return favoriteGroups;
 	}
 
+	public boolean isGroupVisible(String name) {
+		String nameLowercase = name.toLowerCase();
+		for (String groupName : flatGroups.keySet()) {
+			if (groupName.toLowerCase().equals(nameLowercase) || FavoriteGroup.getDisplayName(context, groupName).equals(name)) {
+				return flatGroups.get(groupName).isVisible();
+			}
+		}
+		return false;
+	}
+
 	public boolean groupExists(String name) {
 		String nameLowercase = name.toLowerCase();
 		for (String groupName : flatGroups.keySet()) {
@@ -800,10 +810,12 @@ public class FavouritesDbHelper {
 	public void editFavouriteGroup(FavoriteGroup group, String newName, int color, boolean visible) {
 		if (color != 0 && group.color != color) {
 			FavoriteGroup gr = flatGroups.get(group.name);
-			group.color = color;
 			for (FavouritePoint p : gr.points) {
-				p.setColor(color);
+				if (p.getColor() == group.color) {
+					p.setColor(color);
+				}
 			}
+			group.color = color;
 			runSyncWithMarkers(gr);
 		}
 		if (group.visible != visible) {

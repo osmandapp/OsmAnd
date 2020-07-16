@@ -3767,4 +3767,10 @@
 \nAz előfizetéseit a Google Play beállításainál tudja kezelni és lemondani.</string>
     <string name="quick_action_remove_next_destination_descr">Törli az útvonal soron következő célpontját. Amennyiben ez a végző célpont, a navigáció megáll.</string>
     <string name="plugin_wikipedia_description">Szerezzen információt az érdekes helyekkel kapcsolatban a Wikipédiáról. Ez az ön offline zseb útikönyve - egyszerűen engedélyezze a Wikipédia bővítményt és élvezze az ön körül lévő objektumokról szóló cikkeket.</string>
+    <string name="app_mode_enduro_motorcycle">Salakmotor</string>
+    <string name="app_mode_motor_scooter">Robogó</string>
+    <string name="app_mode_wheelchair">Kerekesszék</string>
+    <string name="app_mode_go_cart">Gokart</string>
+    <string name="osm_edit_closed_note">Lezárt OSM-jegyzet</string>
+    <string name="app_mode_wheelchair_forward">Előre döntött kerekesszék</string>
 </resources>

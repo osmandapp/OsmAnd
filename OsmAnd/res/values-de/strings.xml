@@ -3823,4 +3823,8 @@
     <string name="plugin_wikipedia_description">Informationen über Sehenswürdigkeiten erhalten Sie bei Wikipedia. Es ist Ihr Offline-Wegweiser für die Hosentasche - aktivieren Sie einfach das Wikipedia-Modul und genießen Sie Artikel über Objekte in Ihrer Umgebung.</string>
     <string name="app_mode_enduro_motorcycle">Enduro</string>
     <string name="app_mode_motor_scooter">Motorroller</string>
+    <string name="app_mode_wheelchair">Rollstuhl</string>
+    <string name="app_mode_go_cart">Go-Kart</string>
+    <string name="osm_edit_closed_note">Geschlossene OSM-Notiz</string>
+    <string name="app_mode_wheelchair_forward">Rollstuhl vorwärts</string>
 </resources>

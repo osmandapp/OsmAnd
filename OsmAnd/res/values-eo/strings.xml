@@ -3611,7 +3611,7 @@
     <string name="replace_point_descr">Anstataŭigi alian punkton per tiu ĉi.</string>
     <string name="changes_applied_to_profile">Aplikis ŝanĝojn al la profilo “%1$s”.</string>
     <string name="settings_item_read_error">Ne povas legi el “%1$s”.</string>
-    <string name="settings_item_write_error">Ne povas skribi al “%1%s”.</string>
+    <string name="settings_item_write_error">Ne povas skribi al “%1$s”.</string>
     <string name="settings_item_import_error">Ne povas enporti el “%1$s”.</string>
     <string name="select_track_file">Elekti dosieron de spuro</string>
     <string name="shared_string_languages">Lingvoj</string>
@@ -3814,4 +3814,10 @@
     <string name="quick_action_remove_next_destination_descr">La markita celo de la kurso estos forigita. Se tio ĉi estos la fina celo, la navigado ĉesos.</string>
     <string name="search_download_wikipedia_maps">Elŝuti vikipediajn mapojn</string>
     <string name="plugin_wikipedia_description">Akiru informojn pri interesaj punktoj el Vikipedio. Gvidilo en via poŝo – aktivigu la kromprogramon Vikipedio por ricevi artikolojn pri proksimaj objektoj.</string>
+    <string name="app_mode_enduro_motorcycle">Motorciklo (enduro)</string>
+    <string name="app_mode_motor_scooter">Motorciklo (skotero)</string>
+    <string name="app_mode_wheelchair">Rulseĝo</string>
+    <string name="app_mode_wheelchair_forward">Rulseĝo (klinita)</string>
+    <string name="app_mode_go_cart">Gokarto</string>
+    <string name="osm_edit_closed_note">Fermita OSM‑rimarko</string>
 </resources>

@@ -236,13 +236,13 @@ public class TestRouting {
 			throw new IllegalArgumentException(MessageFormat.format("Complete routing time (expected) {0} != {1} (original) : {2}", routing_time, calcRoutingTime, testDescription));
 		}
 
-		if (visitedSegments > 0 && !isInOrLess(visitedSegments, ctx.visitedSegments, percent)) {
+		if (visitedSegments > 0 && !isInOrLess(visitedSegments, ctx.getVisitedSegments(), percent)) {
 			throw new IllegalArgumentException(MessageFormat.format("Visited segments (expected) {0} != {1} (original) : {2}", visitedSegments,
-					ctx.visitedSegments, testDescription));
+					ctx.getVisitedSegments(), testDescription));
 		}
-		if (loadedTiles > 0 && !isInOrLess(loadedTiles, ctx.loadedTiles, percent)) {
+		if (loadedTiles > 0 && !isInOrLess(loadedTiles, ctx.getLoadedTiles(), percent)) {
 			throw new IllegalArgumentException(MessageFormat.format("Loaded tiles (expected) {0} != {1} (original) : {2}", loadedTiles,
-					ctx.loadedTiles, testDescription));
+					ctx.getLoadedTiles(), testDescription));
 		}
 		
 		if(TEST_BOTH_DIRECTION){
