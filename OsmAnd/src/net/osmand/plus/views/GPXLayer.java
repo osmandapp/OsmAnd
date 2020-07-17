@@ -402,7 +402,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void drawDirectionArrows(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
-		if (!tileBox.isZoomAnimated()) {
+		if (tileBox.getZoom() >= START_ZOOM && !tileBox.isZoomAnimated()) {
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				boolean showArrows = selectedGpxFile.getGpxFile().isShowArrows();
 				if (hasTrackDrawInfoForSelectedGpx(selectedGpxFile)) {
@@ -548,13 +548,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 				if (showStartFinish) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
-					TrkSegment endSegment = segments.get(segments.size() - 1);
+					for (TrkSegment segment : segments) {
+						if (segment.points.size() >= 2) {
+							WptPt start = segment.points.get(0);
+							WptPt end = segment.points.get(segment.points.size() - 1);
 
-					WptPt start = segments.get(0).points.get(0);
-					WptPt end = endSegment.points.get(endSegment.points.size() - 1);
-
-					drawPoint(canvas, tileBox, start, startPointIcon);
-					drawPoint(canvas, tileBox, end, finishPointIcon);
+							drawPoint(canvas, tileBox, start, startPointIcon);
+							drawPoint(canvas, tileBox, end, finishPointIcon);
+						}
+					}
 				}
 			}
 		}
