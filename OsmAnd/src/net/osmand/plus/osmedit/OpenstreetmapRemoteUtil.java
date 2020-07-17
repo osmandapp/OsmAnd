@@ -45,7 +45,6 @@ import java.net.MalformedURLException;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -525,8 +524,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				entity.removeTag(poiType.getEditOsmTag());
 				entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
 			} else {
-				List<PoiType> poiTypes = type.getPoiTypes();
-				for (PoiType pt : poiTypes) {
+				for (PoiType pt : type.getPoiTypes()) {
 					if (pt.getEditOsmValue().equals(entity.getTag(pt.getEditOsmTag()))) {
 						entity.removeTag(pt.getEditOsmTag());
 						entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, pt.getTranslation());
