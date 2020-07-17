@@ -124,7 +124,8 @@ public class WikipediaPoiMenu {
 				IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
 				int currentDownloadingProgress = downloadThread.getCurrentDownloadingItemProgress();
 				List<IndexItem> wikiIndexes = DownloadResources.findIndexItemsAt(
-						app, mapActivity.getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE);
+						app, mapActivity.getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE,
+						false, -1, true);
 				if (wikiIndexes.size() > 0) {
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
 							.setTitleId(R.string.shared_string_download_map, mapActivity)
