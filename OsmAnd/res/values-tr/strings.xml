@@ -2258,7 +2258,7 @@
     <string name="routing_attr_allow_motorway_name">Otoyolları kullan</string>
     <string name="routing_attr_allow_motorway_description">Otoyollara izin verir.</string>
     <string name="upload_poi">POI yükleyin</string>
-    <string name="trip_rec_notification_settings_desc">Gezi kaydına izin veren bir sistem bildirimi görüntüle.</string>
+    <string name="trip_rec_notification_settings_desc">Gezi kaydını başlatmaya izin veren bir sistem bildirimi görüntüle.</string>
     <string name="shared_string_trip">Seyahat</string>
     <string name="shared_string_recorded">Kaydedildi</string>
     <string name="create_custom_poi">Özel süzgeç oluştur</string>
