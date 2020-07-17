@@ -225,10 +225,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (trackChartPoints != null) {
 				drawXAxisPoints(canvas, tileBox);
 			}
+			drawDirectionArrows(canvas, tileBox, selectedGPXFiles);
+			drawSelectedFilesStartEndPoints(canvas, tileBox, selectedGPXFiles);
 			drawSelectedFilesSplits(canvas, tileBox, selectedGPXFiles, settings);
 			drawSelectedFilesPoints(canvas, tileBox, selectedGPXFiles);
-			drawSelectedFilesStartEndPoints(canvas, tileBox, selectedGPXFiles);
-			drawDirectionArrows(canvas, tileBox, selectedGPXFiles);
 		}
 		if (textLayer != null && isTextVisible()) {
 			textLayer.putData(this, cache);

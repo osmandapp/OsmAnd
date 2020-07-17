@@ -64,7 +64,6 @@ import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -385,16 +384,34 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 					@Override
 					public void onClick(View v) {
 						TrackActivity activity = getTrackActivity();
+						GpxDataItem gpxDataItem = getGpxDataItem();
 						GPXFile gpx = getGpx();
-						if (gpx != null && activity != null) {
-							WptPt point = gpx.tracks.get(0).segments.get(0).points.get(0);
-							LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+						WptPt pointToShow = gpx != null ? gpx.findPointToShow() : null;
+						if (activity != null && pointToShow != null) {
+							boolean gpxFileSelected = isGpxFileSelected(gpx);
+							if (!gpxFileSelected) {
+								Intent intent = activity.getIntent();
+								if (intent != null) {
+									intent.putExtra(TrackActivity.SHOW_TEMPORARILY, true);
+								}
+							}
+							setTrackVisibilityOnMap(true);
 
-							OsmandSettings settings = app.getSettings();
-							settings.setMapLocationToShow(latLon.getLatitude(), latLon.getLongitude(),
+							final OsmandSettings settings = app.getSettings();
+							String trackName;
+							if (gpx.showCurrentTrack) {
+								trackName = app.getString(R.string.shared_string_currently_recording_track);
+							} else if (gpxDataItem != null) {
+								trackName = gpxDataItem.getFile().getName();
+							} else {
+								trackName = gpx.path;
+							}
+							settings.setMapLocationToShow(pointToShow.getLatitude(), pointToShow.getLongitude(),
 									settings.getLastKnownMapZoom(),
-									new PointDescription(PointDescription.POINT_TYPE_GPX, Algorithms.getFileWithoutDirs(gpx.path)),
-									false, gpx);
+									new PointDescription(PointDescription.POINT_TYPE_WPT, trackName),
+									false,
+									gpx
+							);
 
 							MapActivity.launchMapActivityMoveToTop(activity);
 						}
