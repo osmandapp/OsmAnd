@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="add_to_a_track">Add to a Track</string>
+    <string name="plan_a_route">Plan a route</string>
+    <string name="route_between_points">Route between points</string>
     <string name="set_working_days_to_continue">You need to set working days to continue</string>
     <string name="osm_edit_closed_note">Closed OSM Note</string>
     <string name="app_mode_go_cart">Go-cart</string>
