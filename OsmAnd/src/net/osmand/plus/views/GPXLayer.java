@@ -1,5 +1,7 @@
 package net.osmand.plus.views;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -108,6 +110,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private Paint paintTextIcon;
 
+	private Bitmap arrowBitmap;
+	private GeometryWayContext wayContext;
+
 	private OsmandRenderer osmandRenderer;
 
 	private ContextMenuLayer contextMenuLayer;
@@ -181,6 +186,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		visitedColor = ContextCompat.getColor(view.getApplication(), R.color.color_ok);
 		defPointColor = ContextCompat.getColor(view.getApplication(), R.color.gpx_color_point);
 		grayColor = ContextCompat.getColor(view.getApplication(), R.color.color_favorite_gray);
+
+		wayContext = new GeometryWayContext(view.getContext(), view.getDensity());
+		arrowBitmap = BitmapFactory.decodeResource(view.getApplication().getResources(), R.drawable.map_route_direction_arrow, null);
 	}
 
 	@Override
@@ -208,6 +216,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (trackChartPoints != null) {
 				drawXAxisPoints(canvas, tileBox);
 			}
+			drawDirectionArrows(canvas, tileBox, selectedGPXFiles);
 			drawSelectedFilesSplits(canvas, tileBox, selectedGPXFiles, settings);
 			drawSelectedFilesPoints(canvas, tileBox, selectedGPXFiles);
 			drawSelectedFilesStartEndPoints(canvas, tileBox, selectedGPXFiles);
@@ -390,6 +399,127 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					canvas.drawText(nm, x, y + nmHeight / 2, paintTextIcon);
 				}
 			}
+		}
+	}
+
+	private void drawDirectionArrows(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
+		if (!tileBox.isZoomAnimated()) {
+			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
+				boolean showArrows = selectedGpxFile.getGpxFile().isShowArrows();
+				if (showArrows) {
+					QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
+					int color = selectedGpxFile.getGpxFile().getColor(cachedColor);
+					if (selectedGpxFile.isShowCurrentTrack()) {
+						color = currentTrackColor;
+					}
+					int contrastColor = UiUtilities.getContrastColor(view.getApplication(), color, false);
+					GeometryWayStyle arrowsWayStyle = new GeometryArrowsWayStyle(wayContext, contrastColor);
+					for (TrkSegment segment : selectedGpxFile.getPointsToDisplay()) {
+						List<Float> tx = new ArrayList<>();
+						List<Float> ty = new ArrayList<>();
+						List<Double> distances = new ArrayList<>();
+						List<Double> angles = new ArrayList<>();
+						List<GeometryWayStyle> styles = new ArrayList<>();
+						boolean previousVisible = false;
+
+						List<WptPt> points = segment.points;
+						if (points.size() > 1) {
+							for (int i = 0; i < points.size(); i++) {
+								WptPt pt = points.get(i);
+								if (correctedQuadRect.left <= pt.getLongitude()
+										&& pt.getLongitude() <= correctedQuadRect.right
+										&& correctedQuadRect.bottom <= pt.getLatitude()
+										&& pt.getLatitude() <= correctedQuadRect.top) {
+									addLocation(tileBox, pt.getLatitude(), pt.getLongitude(), null, tx, ty, angles, distances, 0, styles);
+									previousVisible = true;
+								} else if (previousVisible) {
+									addLocation(tileBox, pt.getLatitude(), pt.getLongitude(), null, tx, ty, angles, distances, 0, styles);
+									previousVisible = false;
+								}
+							}
+							drawArrowsOverPath(tx, ty, angles, distances, canvas, tileBox, arrowsWayStyle);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void drawArrowsOverPath(List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances,
+	                                Canvas canvas, RotatedTileBox tb, GeometryWayStyle wayStyle) {
+		int pixHeight = tb.getPixHeight();
+		int pixWidth = tb.getPixWidth();
+		int left = -pixWidth / 4;
+		int right = pixWidth + pixWidth / 4;
+		int top = -pixHeight / 4;
+		int bottom = pixHeight + pixHeight / 4;
+
+		double zoomCoef = tb.getZoomAnimation() > 0 ? (Math.pow(2, tb.getZoomAnimation() + tb.getZoomFloatPart())) : 1f;
+		double pxStep = arrowBitmap.getHeight() * 4f * zoomCoef;
+		double dist = 0;
+
+		List<PathPoint> arrows = new ArrayList<>();
+		for (int i = tx.size() - 2; i >= 0; i--) {
+			float px = tx.get(i);
+			float py = ty.get(i);
+			float x = tx.get(i + 1);
+			float y = ty.get(i + 1);
+			double angle = angles.get(i + 1);
+			double distSegment = distances.get(i + 1);
+			if (distSegment == 0) {
+				continue;
+			}
+			if (dist >= pxStep) {
+				dist = 0;
+			}
+			double percent = 1 - (pxStep - dist) / distSegment;
+			dist += distSegment;
+			while (dist >= pxStep) {
+				double pdx = (x - px) * percent;
+				double pdy = (y - py) * percent;
+				float iconx = (float) (px + pdx);
+				float icony = (float) (py + pdy);
+				if (isIn(iconx, icony, left, top, right, bottom)) {
+					arrows.add(new PathPoint(iconx, icony, angle, wayStyle));
+				}
+				dist -= pxStep;
+				percent -= pxStep / distSegment;
+			}
+		}
+		for (int i = arrows.size() - 1; i >= 0; i--) {
+			PathPoint a = arrows.get(i);
+			a.draw(canvas, wayContext);
+		}
+	}
+
+	private static class GeometryArrowsWayStyle extends GeometryWayStyle {
+
+		protected Integer pointColor;
+
+		GeometryArrowsWayStyle(GeometryWayContext context, int pointColor) {
+			super(context);
+			this.pointColor = pointColor;
+		}
+
+		@Override
+		public boolean equals(Object other) {
+			if (this == other) {
+				return true;
+			}
+			if (!super.equals(other)) {
+				return false;
+			}
+			return other instanceof GeometryArrowsWayStyle;
+		}
+
+		@Override
+		public Bitmap getPointBitmap() {
+			return getContext().getArrowBitmap();
+		}
+
+		@Override
+		public Integer getPointColor() {
+			return pointColor;
 		}
 	}
 
