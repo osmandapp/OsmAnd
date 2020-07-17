@@ -70,9 +70,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/text_margin_small"
+                    android:layout_marginEnd="@dimen/measurement_tool_text_margin"
                     android:layout_marginLeft="@dimen/measurement_tool_text_margin"
-                    android:layout_marginRight="@dimen/text_margin_small"
+                    android:layout_marginRight="@dimen/measurement_tool_text_margin"
                     android:layout_marginStart="@dimen/measurement_tool_text_margin"
                     android:layout_toEndOf="@id/main_icon"
                     android:layout_toRightOf="@id/main_icon"
@@ -99,6 +99,10 @@
                     android:layout_toLeftOf="@id/up_down_button"
                     android:layout_toRightOf="@id/measurement_points_text_view"
                     android:layout_toStartOf="@id/up_down_button"
+                    android:layout_marginEnd="@dimen/measurement_tool_text_margin"
+                    android:layout_marginLeft="@dimen/measurement_tool_text_margin"
+                    android:layout_marginRight="@dimen/measurement_tool_text_margin"
+                    android:layout_marginStart="@dimen/measurement_tool_text_margin"
                     android:textColor="@color/color_distance"
                     android:textSize="@dimen/default_list_text_size"
                     tools:text=" – 700 m"/>
@@ -154,13 +158,15 @@
                         android:id="@+id/options_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/measurement_tool_button_padding"
+                        android:layout_marginBottom="@dimen/measurement_tool_button_padding"
                         android:background="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
                         android:maxLines="1"
                         android:paddingEnd="@dimen/measurement_tool_text_button_padding_small"
-                        android:paddingLeft="@dimen/measurement_tool_text_button_padding"
                         android:paddingRight="@dimen/measurement_tool_text_button_padding_small"
                         android:paddingStart="@dimen/measurement_tool_text_button_padding"
+                        android:paddingLeft="@dimen/measurement_tool_text_button_padding"
                         android:text="@string/shared_string_options"
                         android:textColor="?attr/color_dialog_buttons"
                         osmand:typeface="@string/font_roboto_medium"/>
@@ -170,6 +176,7 @@
                     android:id="@+id/undo_point_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:background="?attr/selectableItemBackground"
                     android:padding="@dimen/measurement_tool_undo_redo_padding_small"
                     tools:src="@drawable/ic_action_undo_dark"/>
@@ -178,6 +185,7 @@
                     android:id="@+id/redo_point_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/measurement_tool_button_padding"
                     android:layout_marginStart="@dimen/measurement_tool_button_padding"
                     android:background="?attr/selectableItemBackground"
@@ -199,15 +207,15 @@
                         android:layout_marginRight="@dimen/measurement_tool_button_margin"
                         android:layout_marginTop="@dimen/measurement_tool_button_margin"
                         android:background="?attr/btn_round"
-						android:maxLines="1"
+                        android:maxLines="1"
                         android:minHeight="@dimen/measurement_tool_button_height"
                         android:paddingLeft="@dimen/measurement_tool_button_padding"
                         android:paddingRight="@dimen/measurement_tool_button_padding"
                         android:text="@string/shared_string_add"
                         android:textColor="@color/color_white"
                         android:textAllCaps="false"
-	                    android:paddingEnd="@dimen/measurement_tool_button_padding"
-	                    android:paddingStart="@dimen/measurement_tool_button_padding" />
+                        android:paddingEnd="@dimen/measurement_tool_button_padding"
+                        android:paddingStart="@dimen/measurement_tool_button_padding" />
                 </FrameLayout>
 
             </LinearLayout>
@@ -237,8 +245,8 @@
                     android:text="@string/shared_string_apply"
                     android:textColor="@color/color_white"
                     android:textAllCaps="false"
-	                android:paddingEnd="@dimen/measurement_tool_button_padding"
-	                android:paddingStart="@dimen/measurement_tool_button_padding" />
+                    android:paddingEnd="@dimen/measurement_tool_button_padding"
+                    android:paddingStart="@dimen/measurement_tool_button_padding" />
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:id="@+id/cancel_move_point_button"
@@ -300,8 +308,8 @@
                     android:text="@string/shared_string_apply"
                     android:textColor="?attr/color_dialog_buttons"
                     android:textAllCaps="false"
-	                android:paddingEnd="@dimen/measurement_tool_button_padding"
-	                android:paddingStart="@dimen/measurement_tool_button_padding" />
+                    android:paddingEnd="@dimen/measurement_tool_button_padding"
+                    android:paddingStart="@dimen/measurement_tool_button_padding" />
 
                 <Button
                     android:id="@+id/add_point_before_after_button"
@@ -318,8 +326,8 @@
                     android:text="@string/shared_string_add"
                     android:textColor="@color/color_white"
                     android:textAllCaps="false"
-	                android:paddingStart="@dimen/measurement_tool_button_padding"
-	                android:paddingEnd="@dimen/measurement_tool_button_padding" />
+                    android:paddingStart="@dimen/measurement_tool_button_padding"
+                    android:paddingEnd="@dimen/measurement_tool_button_padding" />
             </LinearLayout>
 
         </LinearLayout>

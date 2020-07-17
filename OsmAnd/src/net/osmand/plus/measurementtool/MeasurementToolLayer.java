@@ -7,12 +7,12 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -20,7 +20,6 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -208,9 +207,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 						WptPt lastPoint = editingCtx.getPoints().get(editingCtx.getPointsCount() - 1);
 						LatLon centerLatLon = tb.getCenterLatLon();
 						distance = (float) MapUtils.getDistance(
-							lastPoint.lat, lastPoint.lon, centerLatLon.getLatitude(), centerLatLon.getLongitude());
+								lastPoint.lat, lastPoint.lon, centerLatLon.getLatitude(), centerLatLon.getLongitude());
 						bearing = getLocationFromLL(lastPoint.lat, lastPoint.lon)
-							.bearingTo(getLocationFromLL(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
+								.bearingTo(getLocationFromLL(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
 					}
 					measureDistanceToCenterListener.onMeasure(distance, bearing);
 				}
@@ -232,13 +231,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
 					tx.add(locX);
 					ty.add(locY);
-					tx.add((float)tb.getCenterPixelX());
-					ty.add((float)tb.getCenterPixelY());
+					tx.add((float) tb.getCenterPixelX());
+					ty.add((float) tb.getCenterPixelY());
 				}
 				if (after.points.size() > 0) {
 					if (before.points.size() == 0) {
-						tx.add((float)tb.getCenterPixelX());
-						ty.add((float)tb.getCenterPixelY());
+						tx.add((float) tb.getCenterPixelX());
+						ty.add((float) tb.getCenterPixelY());
 					}
 					WptPt pt = after.points.get(0);
 					float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
@@ -325,11 +324,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		if (allowed) {
 
 			ApplicationMode applicationMode = editingCtx.getSnapToRoadAppMode();
-			if(applicationMode!=null) {
-				String profileType = applicationMode.getStringKey();
-				if (!Algorithms.isEmpty(profileType)) {
-					pt.setProfileType(profileType);
-				}
+			if (applicationMode != null) {
+				pt.setProfileType(applicationMode.getStringKey());
 			}
 			editingCtx.addPoint(pt);
 			return pt;
@@ -348,11 +344,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 			if (allowed) {
 				ApplicationMode applicationMode = editingCtx.getSnapToRoadAppMode();
-				if(applicationMode!=null) {
-					String profileType = applicationMode.getStringKey();
-					if (!Algorithms.isEmpty(profileType)) {
-						pt.setProfileType(profileType);
-					}
+				if (applicationMode != null) {
+					pt.setProfileType(applicationMode.getStringKey());
 				}
 				editingCtx.addPoint(pt);
 				moveMapToLatLon(lat, lon);

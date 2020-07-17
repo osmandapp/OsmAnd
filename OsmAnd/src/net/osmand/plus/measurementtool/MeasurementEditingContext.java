@@ -46,7 +46,7 @@ public class MeasurementEditingContext {
 	private boolean inSnapToRoadMode;
 	private boolean needUpdateCacheForSnap;
 	private int calculatedPairs;
-	private int trkptIndex;
+
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode snapToRoadAppMode;
 	private RouteCalculationProgress calculationProgress;
@@ -392,7 +392,7 @@ public class MeasurementEditingContext {
 				}
 				calculatedPairs++;
 				snappedToRoadPoints.put(currentPair, pts);
-				trkptIndex = currentPair.first.getTrkPtIndex();
+				int trkptIndex = currentPair.first.getTrkPtIndex();
 				trkptIndex += pts.size() - 1;
 				currentPair.second.setTrkPtIndex(trkptIndex);
 				updateCacheForSnapIfNeeded(true);

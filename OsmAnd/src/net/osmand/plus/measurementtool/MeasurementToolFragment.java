@@ -78,7 +78,6 @@ import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -941,9 +940,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			WptPt newPoint = measurementLayer.getMovedPointToApply();
-			String profileType = editingCtx.getSnapToRoadAppMode().getStringKey();
-			if (!Algorithms.isEmpty(profileType)) {
-				newPoint.setProfileType(profileType);
+			ApplicationMode applicationMode = editingCtx.getSnapToRoadAppMode();
+			if (applicationMode != null) {
+				newPoint.setProfileType(applicationMode.getStringKey());
 			}
 			WptPt oldPoint = editingCtx.getOriginalPointToMove();
 			int position = editingCtx.getSelectedPointPosition();
