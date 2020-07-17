@@ -437,8 +437,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 									previousVisible = false;
 								}
 							}
+							drawArrowsOverPath(tx, ty, angles, distances, canvas, tileBox, arrowsWayStyle);
 						}
-						drawArrowsOverPath(tx, ty, angles, distances, canvas, tileBox, arrowsWayStyle);
 					}
 				}
 			}
