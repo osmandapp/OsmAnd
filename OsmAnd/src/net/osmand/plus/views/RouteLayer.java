@@ -372,7 +372,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
         }
     }
 
-    private static class PathPoint {
+    static class PathPoint {
 		float x;
 		float y;
 		double angle;
