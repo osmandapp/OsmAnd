@@ -27,8 +27,12 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
-		boolean snapToRoadEnabled = args.getBoolean(SNAP_TO_ROAD_ENABLED_KEY);
-		boolean addLineMode = args.getBoolean(ADD_LINE_MODE_KEY);
+		boolean snapToRoadEnabled = false;
+		boolean addLineMode = false;
+		if (args != null) {
+			snapToRoadEnabled = args.getBoolean(SNAP_TO_ROAD_ENABLED_KEY);
+			addLineMode = args.getBoolean(ADD_LINE_MODE_KEY);
+		}
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 
@@ -48,6 +52,24 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				})
 				.create();
 		items.add(snapToRoadItem);
+
+		items.add(new DividerHalfItem(getContext()));
+
+		BaseBottomSheetItem directions = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark))
+				.setTitle(getString(R.string.get_directions))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.directions();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(directions);
 
 		items.add(new DividerHalfItem(getContext()));
 
@@ -150,6 +172,8 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	interface OptionsFragmentListener {
 
 		void snapToRoadOnCLick();
+
+		void directions();
 
 		void addToGpxOnClick();
 

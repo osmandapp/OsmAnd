@@ -36,8 +36,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Route;
@@ -71,6 +74,7 @@ import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -108,6 +112,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	private ImageView undoBtn;
 	private ImageView redoBtn;
 	private ImageView mainIcon;
+	private Snackbar snackbar;
 
 	private boolean wasCollapseButtonVisible;
 	private boolean progressBarVisible;
@@ -592,6 +597,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 
 			@Override
+			public void directions() {
+				MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+				if (mapControlsLayer != null) {
+					mapControlsLayer.doRoute(false);
+				}
+			}
+
+			@Override
 			public void addToGpxOnClick() {
 				if (mapActivity != null && measurementLayer != null) {
 					if (editingCtx.getPointsCount() > 0) {
@@ -741,6 +754,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	private void removePoint(MeasurementToolLayer layer, int position) {
 		editingCtx.getCommandManager().execute(new RemovePointCommand(layer, position));
 		adapter.notifyDataSetChanged();
+		enable(undoBtn);
 		disable(redoBtn);
 		updateText();
 		saved = false;
@@ -1438,9 +1452,17 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 						if (openTrackActivity) {
 							dismiss(activity);
 						} else {
-							Toast.makeText(activity,
-									MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
-									Toast.LENGTH_LONG).show();
+							snackbar = Snackbar.make(activity.getLayout(),
+									MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getName()),
+									Snackbar.LENGTH_LONG)
+									.setAction(R.string.shared_string_rename, new View.OnClickListener() {
+										@Override
+										public void onClick(View view) {
+											FileUtils.renameFile(getActivity(), toSave, null);
+										}
+									});
+							UiUtilities.setupSnackbar(snackbar, nightMode);
+							snackbar.show();
 							if (close) {
 								dismiss(activity);
 							}
