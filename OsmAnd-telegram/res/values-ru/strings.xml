@@ -246,7 +246,7 @@
     <string name="min_logging_speed">Минимальная скорость регистрации</string>
     <string name="min_logging_speed_descr">Фильтр: не регистрировать, пока не достигнута необходимая скорость</string>
     <string name="shared_string_end">Конец</string>
-    <string name="shared_string_start">Начало</string>
+    <string name="shared_string_start">Старт</string>
     <string name="set_time_timeline_descr">Выберите время для отображения</string>
     <string name="saved_messages">Сохраненные сообщения</string>
     <string name="time_zone_descr">Выберите часовой пояс, чтобы показывать время вашего местоположения в сообщениях.</string>
