@@ -3843,4 +3843,7 @@
     <string name="quick_action_remove_next_destination">حذف مقصد بعدی</string>
     <string name="please_provide_point_name_error">لطفاً نام نقطه را بنویسید</string>
     <string name="search_download_wikipedia_maps">دانلود نقشه‌های ویکی‌پدیا</string>
+    <string name="plugin_wikipedia_description">از ویکی‌پدیا دربارهٔ نقاط توجه اطلاعات کسب کنید. یک راهنمای آفلاین جیبی. کافی است افزونهٔ ویکی‌پدیا را فعال کنید و از مقاله‌ها دربارهٔ چیزهای دوروبرتان لذت ببرید.</string>
+    <string name="app_mode_wheelchair">صندلی چرخ‌دار</string>
+    <string name="osm_edit_closed_note">یادداشت اُاِس‌اِمی بسته</string>
 </resources>

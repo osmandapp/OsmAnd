@@ -275,7 +275,7 @@
     <string name="poi_it">IT-Dienst</string>
     <string name="poi_craft_jeweller">Juwelier</string>
     <string name="poi_jewelry">Juwelier</string>
-    <string name="poi_craft_key_cutter">Schlüsseldienst</string>
+    <string name="poi_craft_key_cutter">Schlüsselmacher</string>
     <string name="poi_kindergarten">Kindergarten</string>
     <string name="poi_kiosk">Kiosk</string>
     <string name="poi_kitchen">Küchengeräte</string>
@@ -289,7 +289,7 @@
     <string name="poi_lighthouse">Leuchtturm</string>
     <string name="poi_locality">Örtlichkeit</string>
     <string name="poi_lock_gate">Schleusentor</string>
-    <string name="poi_craft_locksmith">Schlosser</string>
+    <string name="poi_craft_locksmith">Schlüsseldienst</string>
     <string name="poi_mall">Einkaufszentrum</string>
     <string name="poi_marina">Yachthafen</string>
     <string name="poi_marketplace">Marktplatz</string>
