@@ -738,4 +738,24 @@
     <string name="poi_goods_yes">Da</string>
     <string name="poi_disabled_yes">Da</string>
     <string name="poi_backcountry">Divje kampiranje</string>
+    <string name="poi_traffic_signals">Semafor</string>
+    <string name="poi_car_repair">Avtomehanik</string>
+    <string name="poi_vehicle_inspection">Tehnični pregledi</string>
+    <string name="poi_traffic_calming_bump">Ležeči policaj</string>
+    <string name="poi_border_control">Mejna kontrola</string>
+    <string name="poi_traffic_calming_island">Prometni otok</string>
+    <string name="poi_fuel_methanol">Metanol</string>
+    <string name="poi_fuel_ethanol">Etanol</string>
+    <string name="poi_fuel_electricity">Elektrika</string>
+    <string name="poi_fuel_lh2">Tekoči vodik</string>
+    <string name="poi_fuel_octane_100">100 oktanski</string>
+    <string name="poi_fuel_octane_98">98 oktanski</string>
+    <string name="poi_fuel_octane_95">95 oktanski</string>
+    <string name="poi_fuel_octane_92">92 oktanski</string>
+    <string name="poi_fuel_octane_91">91 oktanski</string>
+    <string name="poi_fuel_octane_80">80 oktanski</string>
+    <string name="poi_service_tyres">Vulkanizer</string>
+    <string name="poi_lift_gate">Dvižna vrata</string>
+    <string name="poi_gate">Vrata</string>
+    <string name="poi_opening_hours">Odpiralni časi</string>
 </resources>
