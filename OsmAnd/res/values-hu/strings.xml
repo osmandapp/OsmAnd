@@ -2057,7 +2057,7 @@
     <string name="gpx_add_track">Továbbiak hozzáadása…</string>
     <string name="shared_string_appearance">Megjelenés</string>
     <string name="trip_rec_notification_settings">Gyors rögzítés bekapcsolása</string>
-    <string name="trip_rec_notification_settings_desc">Az útvonalrögzítést lehetővé tevő rendszerértesítés megjelenítése.</string>
+    <string name="trip_rec_notification_settings_desc">Egy útvonalrögzítés megkezdését lehetővé tevő rendszerértesítés megjelenítése.</string>
     <string name="shared_string_notifications">Értesítések</string>
     <string name="shared_string_pause">Szünet</string>
     <string name="shared_string_trip">Túra</string>
