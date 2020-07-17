@@ -40,6 +40,8 @@ public class TrackColoringCard extends BaseCard {
 
 	private GradientScaleType selectedScaleType;
 
+	private TrackColoringAdapter coloringAdapter;
+
 	@ColorInt
 	private int selectedColor;
 
@@ -57,11 +59,12 @@ public class TrackColoringCard extends BaseCard {
 	@Override
 	protected void updateContent() {
 		updateHeader();
-		updateCustomWidthSlider();
 		createColorSelector();
+		updateColorSelector();
 
+		coloringAdapter = new TrackColoringAdapter(Arrays.asList(GradientScaleType.values()));
 		RecyclerView groupRecyclerView = view.findViewById(R.id.recycler_view);
-		groupRecyclerView.setAdapter(new GpxWidthAdapter(Arrays.asList(GradientScaleType.values())));
+		groupRecyclerView.setAdapter(coloringAdapter);
 		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), isShowDivider());
@@ -102,6 +105,7 @@ public class TrackColoringCard extends BaseCard {
 			@Override
 			public void onClick(View v) {
 				updateColorSelector(color, rootView);
+				coloringAdapter.notifyDataSetChanged();
 			}
 		});
 		colorItemView.setTag(color);
@@ -144,56 +148,52 @@ public class TrackColoringCard extends BaseCard {
 		descriptionView.setText(getSelectedScaleType().getHumanString(view.getContext()));
 	}
 
-	private void updateCustomWidthSlider() {
+	private void updateColorSelector() {
 		boolean visible = GradientScaleType.SOLID == getSelectedScaleType();
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.select_color), visible);
 	}
 
-	private class GpxWidthAdapter extends RecyclerView.Adapter<GpxWidthViewHolder> {
+	private class TrackColoringAdapter extends RecyclerView.Adapter<TrackColoringViewHolder> {
 
 		private List<GradientScaleType> items;
 
-		private GpxWidthAdapter(List<GradientScaleType> items) {
+		private TrackColoringAdapter(List<GradientScaleType> items) {
 			this.items = items;
 		}
 
 		@NonNull
 		@Override
-		public GpxWidthViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		public TrackColoringViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			LayoutInflater themedInflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
 			view.getLayoutParams().width = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_width);
 			view.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_height);
 
-			GpxWidthViewHolder holder = new GpxWidthViewHolder(view);
+			TrackColoringViewHolder holder = new TrackColoringViewHolder(view);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				AndroidUtils.setBackground(app, holder.widthButton, nightMode, R.drawable.ripple_solid_light_6dp,
+				AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,
 						R.drawable.ripple_solid_dark_6dp);
 			}
 			return holder;
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final GpxWidthViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull final TrackColoringViewHolder holder, int position) {
 			GradientScaleType item = items.get(position);
-			holder.widthAttrName.setText(item.getHumanString(holder.itemView.getContext()));
+			holder.colorKey.setText(item.getHumanString(holder.itemView.getContext()));
 
 			updateButtonBg(holder, item);
 
 			int colorId;
 			if (item == GradientScaleType.SOLID) {
-				if (selectedGpxFile.isShowCurrentTrack()) {
-					colorId = app.getSettings().CURRENT_TRACK_COLOR.get();
-				} else {
-					colorId = selectedGpxFile.getGpxFile().getColor(0);
-				}
+				colorId = trackDrawInfo.getColor();
 			} else if (item.equals(getSelectedScaleType())) {
 				colorId = ContextCompat.getColor(app, nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light);
 			} else {
 				colorId = AndroidUtils.getColorFromAttr(holder.itemView.getContext(), R.attr.default_icon_color);
 			}
 
-			holder.widthIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.getIconId(), colorId));
+			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.getIconId(), colorId));
 
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -207,12 +207,12 @@ public class TrackColoringCard extends BaseCard {
 					mapActivity.refreshMap();
 
 					updateHeader();
-					updateCustomWidthSlider();
+					updateColorSelector();
 				}
 			});
 		}
 
-		private void updateButtonBg(GpxWidthViewHolder holder, GradientScaleType item) {
+		private void updateButtonBg(TrackColoringViewHolder holder, GradientScaleType item) {
 			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
 			if (rectContourDrawable != null) {
 				if (getSelectedScaleType() != null && getSelectedScaleType().equals(item)) {
@@ -223,7 +223,7 @@ public class TrackColoringCard extends BaseCard {
 							: R.color.stroked_buttons_and_links_outline_light);
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 1), strokeColor);
 				}
-				holder.widthButton.setImageDrawable(rectContourDrawable);
+				holder.button.setImageDrawable(rectContourDrawable);
 			}
 		}
 
@@ -237,17 +237,17 @@ public class TrackColoringCard extends BaseCard {
 		}
 	}
 
-	private static class GpxWidthViewHolder extends RecyclerView.ViewHolder {
+	private static class TrackColoringViewHolder extends RecyclerView.ViewHolder {
 
-		final TextView widthAttrName;
-		final ImageView widthIcon;
-		final ImageView widthButton;
+		final TextView colorKey;
+		final ImageView icon;
+		final ImageView button;
 
-		GpxWidthViewHolder(View itemView) {
+		TrackColoringViewHolder(View itemView) {
 			super(itemView);
-			widthAttrName = itemView.findViewById(R.id.groupName);
-			widthIcon = itemView.findViewById(R.id.groupIcon);
-			widthButton = itemView.findViewById(R.id.outlineRect);
+			colorKey = itemView.findViewById(R.id.groupName);
+			icon = itemView.findViewById(R.id.groupIcon);
+			button = itemView.findViewById(R.id.outlineRect);
 		}
 	}
 }
