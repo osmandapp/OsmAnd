@@ -407,6 +407,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				boolean showArrows = selectedGpxFile.getGpxFile().isShowArrows();
 				if (showArrows) {
+					QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 					int color = selectedGpxFile.getGpxFile().getColor(cachedColor);
 					if (selectedGpxFile.isShowCurrentTrack()) {
 						color = currentTrackColor;
@@ -418,12 +419,23 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						List<Float> ty = new ArrayList<>();
 						List<Double> distances = new ArrayList<>();
 						List<Double> angles = new ArrayList<>();
+						List<GeometryWayStyle> styles = new ArrayList<>();
+						boolean previousVisible = false;
 
 						List<WptPt> points = segment.points;
 						if (points.size() > 1) {
 							for (int i = 0; i < points.size(); i++) {
 								WptPt pt = points.get(i);
-								addLocation(tileBox, pt, tx, ty, angles, distances);
+								if (correctedQuadRect.left <= pt.getLongitude()
+										&& pt.getLongitude() <= correctedQuadRect.right
+										&& correctedQuadRect.bottom <= pt.getLatitude()
+										&& pt.getLatitude() <= correctedQuadRect.top) {
+									addLocation(tileBox, pt.getLatitude(), pt.getLongitude(), null, tx, ty, angles, distances, 0, styles);
+									previousVisible = true;
+								} else if (previousVisible) {
+									addLocation(tileBox, pt.getLatitude(), pt.getLongitude(), null, tx, ty, angles, distances, 0, styles);
+									previousVisible = false;
+								}
 							}
 						}
 						drawArrowsOverPath(tx, ty, angles, distances, canvas, tileBox, arrowsWayStyle);
@@ -431,29 +443,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 			}
 		}
-	}
-
-	private void addLocation(RotatedTileBox tb, WptPt pt, List<Float> tx, List<Float> ty,
-	                         List<Double> angles, List<Double> distances) {
-		float x = tb.getPixXFromLatLon(pt.getLatitude(), pt.getLongitude());
-		float y = tb.getPixYFromLatLon(pt.getLatitude(), pt.getLongitude());
-		float px = x;
-		float py = y;
-		int previous = tx.size() - 1;
-		if (previous >= 0) {
-			px = tx.get(previous);
-			py = ty.get(previous);
-		}
-		double angle = 0;
-		if (px != x || py != y) {
-			double angleRad = Math.atan2(y - py, x - px);
-			angle = (angleRad * 180 / Math.PI) + 90f;
-		}
-		double distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
-		tx.add(x);
-		ty.add(y);
-		angles.add(angle);
-		distances.add(distSegment);
 	}
 
 	private void drawArrowsOverPath(List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances,
@@ -469,7 +458,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		double pxStep = arrowBitmap.getHeight() * 4f * zoomCoef;
 		double dist = 0;
 
-		List<RouteLayer.PathPoint> arrows = new ArrayList<>();
+		List<PathPoint> arrows = new ArrayList<>();
 		for (int i = tx.size() - 2; i >= 0; i--) {
 			float px = tx.get(i);
 			float py = ty.get(i);
@@ -491,14 +480,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				float iconx = (float) (px + pdx);
 				float icony = (float) (py + pdy);
 				if (isIn(iconx, icony, left, top, right, bottom)) {
-					arrows.add(new RouteLayer.PathPoint(iconx, icony, angle, wayStyle));
+					arrows.add(new PathPoint(iconx, icony, angle, wayStyle));
 				}
 				dist -= pxStep;
 				percent -= pxStep / distSegment;
 			}
 		}
 		for (int i = arrows.size() - 1; i >= 0; i--) {
-			RouteLayer.PathPoint a = arrows.get(i);
+			PathPoint a = arrows.get(i);
 			a.draw(canvas, wayContext);
 		}
 	}
