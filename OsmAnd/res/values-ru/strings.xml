@@ -195,7 +195,7 @@
     <string name="gpx_no_tracks_title">У вас пока нет файлов GPX</string>
     <string name="gpx_no_tracks_title_folder">Вы также можете добавить файлы GPX в папку</string>
     <string name="gpx_add_track">Добавь ещё…</string>
-    <string name="shared_string_appearance">Вид</string>
+    <string name="shared_string_appearance">Внешний вид</string>
     <string name="trip_rec_notification_settings">Включить быструю запись</string>
     <string name="trip_rec_notification_settings_desc">Отображение системного уведомления, позволяющего производить запись поездки.</string>
     <string name="shared_string_notifications">Уведомления</string>
@@ -2366,7 +2366,7 @@
     <string name="edit_line">Редактировать линию</string>
     <string name="add_point_before">Добавить точку перед</string>
     <string name="add_point_after">Добавить точку после</string>
-    <string name="shared_string_options">Функции</string>
+    <string name="shared_string_options">Опции</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd соединит точки с маршрутом для выбранного профиля.</string>
     <string name="measurement_tool_save_as_new_track_descr">Сохранить точки, как точки маршрута или как линию.</string>
     <string name="choose_navigation_type">Выберите профиль навигации</string>
