@@ -839,13 +839,6 @@ interface IOsmAndAidlInterface {
     boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams params);
 
     /**
-     * Method to get position of various objects
-     *
-     * @params positionType (int) - type of position to get
-     */
-    boolean getPosition(in int positionType, out APosition position);
-
-    /**
     * Method to get color name for gpx.
     *
     * @param fileName (String) - name of gpx file.
@@ -864,4 +857,23 @@ interface IOsmAndAidlInterface {
     boolean executeQuickAction(in QuickActionParams params);
 
     boolean getQuickActionsInfo(out List<QuickActionInfoParams> quickActions);
+
+    /**
+     * Method to get position of various objects
+     *
+     * @params positionType (int) - type of position to get
+     */
+    boolean getPosition(in int positionType, out APosition position);
+
+    /**
+     * Method to get index of current route segment
+     *
+     */
+    int getCurrentRouteSegmentIndex();
+
+    /**
+     * Method to get creation time current route
+     *
+     */
+    long getRouteCreationTime();
 }

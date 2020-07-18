@@ -88,6 +88,7 @@ import net.osmand.aidlapi.search.SearchParams;
 import net.osmand.aidlapi.search.SearchResult;
 import net.osmand.aidlapi.tiles.ASqliteDbFile;
 import net.osmand.data.LatLon;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
@@ -1245,6 +1246,32 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				handleException(e);
 			}
 			return false;
+		}
+
+		@Override
+		public int getCurrentRouteSegmentIndex() {
+			try {
+				OsmandAidlApi api = getApi("getCurrentRouteSegmentIndex");
+				if (api != null) {
+					return api.getCurrentRouteSegmentIndex();
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return -1;
+		}
+
+		@Override
+		public long getRouteCreationTime() {
+			try {
+				OsmandAidlApi api = getApi("getRouteCreationTime");
+				if (api != null) {
+					return api.getRouteCreationTime();
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return -1;
 		}
 
 		@Override

@@ -1022,6 +1022,16 @@ public class OsmandAidlApi {
 		return null;
 	}
 
+	public int getCurrentRouteSegmentIndex() {
+		RoutingHelper rh = app.getRoutingHelper();
+		return rh.getRoute().getCurrentRoute();
+	}
+
+	public long getRouteCreationTime(){
+		RoutingHelper rh = app.getRoutingHelper();
+		return rh.getRoute().getCreationTime();
+	}
+
 	boolean updateMapMarker(String prevName, LatLon prevLatLon, String newName, LatLon newLatLon, boolean ignoreCoordinates) {
 		LatLon latLon = new LatLon(prevLatLon.getLatitude(), prevLatLon.getLongitude());
 		LatLon latLonNew = new LatLon(newLatLon.getLatitude(), newLatLon.getLongitude());

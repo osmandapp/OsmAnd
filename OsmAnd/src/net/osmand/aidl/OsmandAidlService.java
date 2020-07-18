@@ -1299,6 +1299,32 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		}
 
 		@Override
+		public int getCurrentRouteSegmentIndex() {
+			try {
+				OsmandAidlApi api = getApi("getCurrentRouteSegmentIndex");
+				if (api != null) {
+					return api.getCurrentRouteSegmentIndex();
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return -1;
+		}
+
+		@Override
+		public long getRouteCreationTime() {
+			try {
+				OsmandAidlApi api = getApi("getRouteCreationTime");
+				if (api != null) {
+					return api.getRouteCreationTime();
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return -1;
+		}
+
+		@Override
 		public boolean getGpxColor(GpxColorParams params) {
 			try {
 				OsmandAidlApi api = getApi("getGpxColor");

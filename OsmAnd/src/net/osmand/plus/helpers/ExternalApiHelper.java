@@ -161,6 +161,7 @@ public class ExternalApiHelper {
 	public static final String PARAM_ROUTE_POINTS = "route_points";
 	private static final String PARAM_DIRECTION_POINTS = "direction_points";
 	private static final String PARAM_ROUTE_TIME = "route_time";
+	private static final String PARAM_CREATION_TIME = "route_id";
 	private static final String PARAM_MODE = "mode";
 
 	public static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
@@ -508,7 +509,7 @@ public class ExternalApiHelper {
 				if (has_route) {
 					RouteCalculationResult route = routingHelper.getRoute();
 					// export waypoints of the route
-					List<Location> locations = route.getRouteLocations();
+					List<Location> locations = route.getImmutableAllLocations();
 					ArrayList<LatLonParcelable> route_points = new ArrayList<>(locations.size());
 					for (Location location : locations) {
 						route_points.add(new LatLonParcelable(location.getLatitude(), location.getLongitude()));
@@ -524,6 +525,8 @@ public class ExternalApiHelper {
 					// export miscellaneous info of the route
 					result.putExtra(PARAM_ROUTE_TIME, route.getRoutingTime());
 					result.putExtra(PARAM_MODE, routingHelper.getAppMode().getStringKey());
+					long routeCreationTime = route.getCreationTime();
+					result.putExtra(PARAM_CREATION_TIME, routeCreationTime);
 				}
 				result.putExtra(PARAM_HAS_ROUTE, has_route);
 

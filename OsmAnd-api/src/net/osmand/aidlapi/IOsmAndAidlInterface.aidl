@@ -837,6 +837,12 @@ interface IOsmAndAidlInterface {
      */
     boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams params);
 
+    boolean importProfile(in ProfileSettingsParams params);
+
+    boolean executeQuickAction(in QuickActionParams params);
+
+    boolean getQuickActionsInfo(out List<QuickActionInfoParams> quickActions);
+
     /**
      * Method to get position of various objects
      *
@@ -844,9 +850,14 @@ interface IOsmAndAidlInterface {
      */
     boolean getPosition(in int positionType, out APosition position);
 
-    boolean importProfile(in ProfileSettingsParams params);
+    /**
+     * Method to get index of the current route segment
+     */
+    int getCurrentRouteSegmentIndex();
 
-    boolean executeQuickAction(in QuickActionParams params);
-
-    boolean getQuickActionsInfo(out List<QuickActionInfoParams> quickActions);
+    /**
+     * Method to get creation time of current route
+     *
+     */
+    long getRouteCreationTime();
 }
