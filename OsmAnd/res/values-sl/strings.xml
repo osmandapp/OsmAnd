@@ -1083,11 +1083,11 @@
     <string name="app_mode_motorcycle">Motorno kolo</string>
     <string name="app_mode_boat">Navigacija za plovbo</string>
     <string name="app_mode_aircraft">Letalska navigacija</string>
-    <string name="local_osm_changes_delete_all_confirm">Izbrisanih bo %1$d sprememb. Ali ste prepričani, da želite nadaljevati?</string>
+    <string name="local_osm_changes_delete_all_confirm">Ste prepričani, da želite izbrisati %1$d OSM sprememb\?</string>
     <string name="shared_string_delete_all">Izbriši vse</string>
     <string name="map_widget_map_rendering">Izrisovanje zemljevida</string>
     <string name="amenity_type_seamark">Pomorska oznaka</string>
-    <string name="app_modes_choose_descr">Izbor profilov, prikazanih v programu.</string>
+    <string name="app_modes_choose_descr">Izbor prikazanih profilov.</string>
     <string name="app_modes_choose">Profili programa</string>
     <string name="guidance_preferences_descr">Nastavitve navigacije</string>
     <string name="disable_complex_routing_descr">Onemogoči dvofazno usmerjanje za avtomobilsko navigacijo.</string>
@@ -1140,14 +1140,14 @@
     <string name="index_name_italy">Evropa – Italija</string>
     <string name="index_name_gb">Evropa – Velika Britanija</string>
     <string name="routing_attr_prefer_motorway_name">Prednostno vodi po avtocestah</string>
-    <string name="routing_attr_prefer_motorway_description">Prednostno bodo izbrane hitre ceste in avtoceste.</string>
-    <string name="routing_attr_avoid_toll_name">Izogni se cestninam</string>
+    <string name="routing_attr_prefer_motorway_description">Prednostno bodo izbrane hitre ceste in avtoceste</string>
+    <string name="routing_attr_avoid_toll_name">Brez cestnin</string>
     <string name="routing_attr_avoid_toll_description">Izogne se cestam s plačljivo cestnino</string>
-    <string name="routing_attr_avoid_unpaved_name">Izogni se neasfaltiranim cestam</string>
+    <string name="routing_attr_avoid_unpaved_name">Brez neasfaltiranih cest</string>
     <string name="routing_attr_avoid_unpaved_description">Izogne se netlakovanim cestam</string>
-    <string name="routing_attr_avoid_ferries_name">Izogni se trajektom</string>
+    <string name="routing_attr_avoid_ferries_name">Brez trajektov</string>
     <string name="routing_attr_avoid_ferries_description">Izogne se trajektom</string>
-    <string name="routing_attr_avoid_motorway_name">Izogni se avtocestam</string>
+    <string name="routing_attr_avoid_motorway_name">Brez avtocest</string>
     <string name="routing_attr_avoid_motorway_description">Izogne se avtocestam</string>
     <string name="routing_attr_weight_name">Omejitev teže vozila</string>
     <string name="routing_attr_weight_description">Vodenje po poteh z omejitvijo dovoljene teže vozila.</string>
@@ -1166,8 +1166,8 @@
     <string name="route_descr_select_destination">Izbor cilja</string>
     <string name="shared_string_select_on_map">Izberi na zemljevidu</string>
     <string name="shared_string_favorite">Priljubljene</string>
-    <string name="android_19_location_disabled">Z različico androida KitKat posodabljanje zemljevidov na staro mesto shranjevanja (%s) ni več mogoče. Ali želite kopirati vse datoteke na novo mesto? 
-\n Opomba 1: vse stare datoteke bodo ostale nespremenjene (vendar jih lahko ročno izbrišete). 
+    <string name="android_19_location_disabled">Z različico androida 4.4 (KitKat) je staro mesta shranjevanja (%s) nezaželeno. Ali želite kopirati vse datoteke na novo mesto\?
+\n Opomba 1: vse stare datoteke bodo ostale nespremenjene (vendar jih lahko ročno izbrišete).
 \n Opomba 2: souporaba datotek med OsmAnd in OsmAnd+ ni mogoča.</string>
     <string name="copying_osmand_one_file_descr">Kopiranje datoteke (%s) na novo mesto hrambe …</string>
     <string name="copying_osmand_files_descr">Kopiranje datotek s podatki za OsmAnd na novo mesto hrambe (%s) …</string>
@@ -1790,9 +1790,9 @@
     <string name="dashboard_or_drawer_title">Upravljanje prek nadzorne plošče ali menija</string>
     <string name="dashboard_or_drawer_description">Ob meniju je na voljo možnost upravljanja programa prek prilagodljive nadzorne plošče. Možnost je mogoče izbrati med nastavitvami.</string>
     <string name="osm_edit_commented_note">Opomba OSM z dodatnimi zapisi</string>
-    <string name="routing_attr_avoid_stairs_name">Izogni se stopnicam</string>
+    <string name="routing_attr_avoid_stairs_name">Brez stopnic</string>
     <string name="routing_attr_avoid_stairs_description">Izogne se stopnicam</string>
-    <string name="routing_attr_avoid_borders_name">Izogni se mejnim prehodom</string>
+    <string name="routing_attr_avoid_borders_name">Brez mejnih prehodov</string>
     <string name="shared_string_near">V bližini</string>
     <string name="shared_string_hide">Skrij</string>
     <string name="av_video_quality_low">Najnižja kakovost</string>
