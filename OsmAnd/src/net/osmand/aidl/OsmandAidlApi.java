@@ -138,6 +138,8 @@ public class OsmandAidlApi {
 	private static final String AIDL_LATITUDE = "aidl_latitude";
 	private static final String AIDL_LONGITUDE = "aidl_longitude";
 	private static final String AIDL_ZOOM = "aidl_zoom";
+	private static final String AIDL_ROTATION = "aidl_rotation";
+
 	private static final String AIDL_ANIMATED = "aidl_animated";
 
 	private static final String AIDL_START_NAME = "aidl_start_name";
@@ -292,6 +294,8 @@ public class OsmandAidlApi {
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
 					int zoom = intent.getIntExtra(AIDL_ZOOM, 0);
 					boolean animated = intent.getBooleanExtra(AIDL_ANIMATED, false);
+					float rotation = intent.getFloatExtra(AIDL_ROTATION, Float.NaN);
+
 					if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
 						OsmandMapTileView mapView = mapActivity.getMapView();
 						if (zoom == 0) {
@@ -299,6 +303,9 @@ public class OsmandAidlApi {
 						} else {
 							zoom = zoom > mapView.getMaxZoom() ? mapView.getMaxZoom() : zoom;
 							zoom = zoom < mapView.getMinZoom() ? mapView.getMinZoom() : zoom;
+						}
+						if(rotation != Float.NaN) {
+							mapView.setRotate(rotation,false);
 						}
 						if (animated) {
 							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, true);
@@ -1548,12 +1555,13 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean setMapLocation(double latitude, double longitude, int zoom, boolean animated) {
+	boolean setMapLocation(double latitude, double longitude, int zoom, float rotation, boolean animated) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_SET_MAP_LOCATION);
 		intent.putExtra(AIDL_LATITUDE, latitude);
 		intent.putExtra(AIDL_LONGITUDE, longitude);
 		intent.putExtra(AIDL_ZOOM, zoom);
+		intent.putExtra(AIDL_ROTATION, rotation);
 		intent.putExtra(AIDL_ANIMATED, animated);
 		app.sendBroadcast(intent);
 		return true;

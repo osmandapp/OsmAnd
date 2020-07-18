@@ -597,7 +597,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				if (params != null) {
 					OsmandAidlApi api = getApi("setMapLocation");
 					return api != null && api.setMapLocation(params.getLatitude(), params.getLongitude(),
-							params.getZoom(), params.isAnimated());
+							params.getZoom(), params.getRotation(), params.isAnimated());
 				}
 				return false;
 			} catch (Exception e) {

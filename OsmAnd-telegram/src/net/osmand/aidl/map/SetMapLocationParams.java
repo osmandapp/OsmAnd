@@ -8,12 +8,19 @@ public class SetMapLocationParams implements Parcelable {
 	private double latitude;
 	private double longitude;
 	private int zoom;
-	private boolean animated;
+	private float rotation;
 
+	private boolean animated;
+	
 	public SetMapLocationParams(double latitude, double longitude, int zoom, boolean animated) {
+		this(latitude, longitude, zoom, Float.NaN, animated);
+	}
+	
+	public SetMapLocationParams(double latitude, double longitude, int zoom, float rotation, boolean animated) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.zoom = zoom;
+		this.rotation = rotation;
 		this.animated = animated;
 	}
 
@@ -44,6 +51,10 @@ public class SetMapLocationParams implements Parcelable {
 		return zoom;
 	}
 
+	public float getRotation() {
+		return rotation;
+	}
+	
 	public boolean isAnimated() {
 		return animated;
 	}
@@ -52,6 +63,7 @@ public class SetMapLocationParams implements Parcelable {
 		out.writeDouble(latitude);
 		out.writeDouble(longitude);
 		out.writeInt(zoom);
+		out.writeFloat(rotation);
 		out.writeByte((byte) (animated ? 1 : 0));
 	}
 
@@ -59,6 +71,7 @@ public class SetMapLocationParams implements Parcelable {
 		latitude = in.readDouble();
 		longitude = in.readDouble();
 		zoom = in.readInt();
+		rotation = in.readFloat();
 		animated = in.readByte() != 0;
 	}
 
