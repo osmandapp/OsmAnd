@@ -1514,7 +1514,7 @@
     <string name="osn_reopen_dialog_title">Re-abrir anotação</string>
     <string name="osn_close_dialog_title">Fechar anotação</string>
     <string name="osn_add_dialog_success">Anotação adicionada com sucesso</string>
-    <string name="osn_add_dialog_error">Erro: anotação não foi adicionada.</string>
+    <string name="osn_add_dialog_error">Não foi possível criar a anotação.</string>
     <string name="osn_close_dialog_success">Anotação fechada com sucesso</string>
     <string name="osn_close_dialog_error">Não foi possível fechar a anotação.</string>
     <string name="shared_string_commit">Enviar</string>
