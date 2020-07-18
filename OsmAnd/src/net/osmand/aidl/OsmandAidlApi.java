@@ -294,7 +294,6 @@ public class OsmandAidlApi {
 					int zoom = intent.getIntExtra(AIDL_ZOOM, 0);
 					boolean animated = intent.getBooleanExtra(AIDL_ANIMATED, false);
 					float rotation = intent.getFloatExtra(AIDL_ROTATION, Float.NaN);
-
 					if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
 						OsmandMapTileView mapView = mapActivity.getMapView();
 						if (zoom == 0) {
@@ -304,7 +303,7 @@ public class OsmandAidlApi {
 							zoom = zoom < mapView.getMinZoom() ? mapView.getMinZoom() : zoom;
 						}
 						if(rotation != Float.NaN) {
-							mapView.setRotate(rotation,false);
+							mapView.setRotate(rotation, false);
 						}
 						if (animated) {
 							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, true);

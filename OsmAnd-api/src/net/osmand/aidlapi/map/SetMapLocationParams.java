@@ -66,7 +66,7 @@ public class SetMapLocationParams extends AidlParams {
 		bundle.putDouble("latitude", latitude);
 		bundle.putDouble("longitude", longitude);
 		bundle.putInt("zoom", zoom);
-		bundle.putFloat("rotation",rotation);
+		bundle.putFloat("rotation", rotation);
 		bundle.putBoolean("animated", animated);
 	}
 
