@@ -197,7 +197,7 @@
     <string name="gpx_add_track">Добавь ещё…</string>
     <string name="shared_string_appearance">Вид</string>
     <string name="trip_rec_notification_settings">Включить быструю запись</string>
-    <string name="trip_rec_notification_settings_desc">Отображение системного уведомления, позволяющего производить запись поездки.</string>
+    <string name="trip_rec_notification_settings_desc">Отображение системного уведомления, позволяющего начать запись поездки.</string>
     <string name="shared_string_notifications">Уведомления</string>
     <string name="shared_string_continue">Продолжить</string>
     <string name="shared_string_pause">Пауза</string>
