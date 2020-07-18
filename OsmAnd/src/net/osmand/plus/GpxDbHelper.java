@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXFile.GpxSplitType;
+import net.osmand.GPXUtilities.GPXFile.GradientScaleType;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -77,19 +79,49 @@ public class GpxDbHelper {
 		return res;
 	}
 
+	public boolean updateGradientScaleColor(@NonNull GpxDataItem item, @NonNull GradientScaleType gradientScaleType, int color) {
+		boolean res = db.updateGradientScaleColor(item, gradientScaleType, color);
+		putToCache(item);
+		return res;
+	}
+
+	public boolean updateGradientScaleType(@NonNull GpxDataItem item, @Nullable GradientScaleType gradientScaleType) {
+		boolean res = db.updateGradientScaleType(item, gradientScaleType);
+		putToCache(item);
+		return res;
+	}
+
 	public boolean updateShowAsMarkers(GpxDataItem item, boolean showAsMarkers) {
 		boolean res = db.updateShowAsMarkers(item, showAsMarkers);
 		putToCache(item);
 		return res;
 	}
 
-	public boolean updateSplit(@NonNull GpxDataItem item, int splitType, double splitInterval) {
-		boolean res = db.updateSplit(item, splitType, splitInterval);
+	public boolean updateShowArrows(GpxDataItem item, boolean showArrows) {
+		boolean res = db.updateShowArrows(item, showArrows);
 		putToCache(item);
 		return res;
 	}
 
-	public boolean updateJoinSegments(@NonNull GpxDataItem item,  boolean joinSegments) {
+	public boolean updateShowStartFinish(GpxDataItem item, boolean showStartFinish) {
+		boolean res = db.updateShowStartFinish(item, showStartFinish);
+		putToCache(item);
+		return res;
+	}
+
+	public boolean updateWidth(GpxDataItem item, String width) {
+		boolean res = db.updateWidth(item, width);
+		putToCache(item);
+		return res;
+	}
+
+	public boolean updateSplit(@NonNull GpxDataItem item, @NonNull GpxSplitType splitType, double splitInterval) {
+		boolean res = db.updateSplit(item, splitType.getType(), splitInterval);
+		putToCache(item);
+		return res;
+	}
+
+	public boolean updateJoinSegments(@NonNull GpxDataItem item, boolean joinSegments) {
 		boolean res = db.updateJoinSegments(item, joinSegments);
 		putToCache(item);
 		return res;
@@ -157,7 +189,7 @@ public class GpxDbHelper {
 	}
 
 	private void readGpxItem(@NonNull File gpxFile, @Nullable GpxDataItem item, @Nullable GpxDataItemCallback callback) {
-		readingItemsMap.put(gpxFile, item != null ? item : new GpxDataItem(null, null));
+		readingItemsMap.put(gpxFile, item != null ? item : new GpxDataItem(null, (GPXTrackAnalysis) null));
 		if (callback != null) {
 			readingItemsCallbacks.put(gpxFile, callback);
 		}

@@ -100,7 +100,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 			String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
 			String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
-			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude_range_16), null, app.getString(R.string.altitude_range),
+			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude_range), null, app.getString(R.string.altitude_range),
 					min + " - " + max, 0, null,
 					false, null, false, 0, false, false, false, null, false);
 

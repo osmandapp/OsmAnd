@@ -54,6 +54,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		setupAngularUnitsPref();
 		setupSpeedSystemPref();
 
+		setupVolumeButtonsAsZoom();
 		setupKalmanFilterPref();
 		setupMagneticFieldSensorPref();
 		setupMapEmptyStateAllowedPref();
@@ -222,6 +223,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		speedSystem.setEntryValues(entryValues);
 		speedSystem.setDescription(R.string.default_speed_system_descr);
 		speedSystem.setIcon(getActiveIcon(R.drawable.ic_action_speed));
+	}
+
+	private void setupVolumeButtonsAsZoom() {
+		SwitchPreferenceEx volumeButtonsPref = (SwitchPreferenceEx) findPreference(settings.USE_VOLUME_BUTTONS_AS_ZOOM.getId());
+		volumeButtonsPref.setTitle(getString(R.string.use_volume_buttons_as_zoom));
+		volumeButtonsPref.setDescription(getString(R.string.use_volume_buttons_as_zoom_descr));
+		Drawable icon = getPersistentPrefIcon(R.drawable.ic_action_zoom_volume_buttons);
+		volumeButtonsPref.setIcon(icon);
 	}
 
 	private void setupKalmanFilterPref() {

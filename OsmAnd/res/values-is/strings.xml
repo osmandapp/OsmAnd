@@ -765,7 +765,6 @@
     <string name="select_voice_provider">Veldu raddleiðsögn</string>
     <string name="context_menu_item_open_note">Opna OSM-minnispunkt</string>
     <string name="osm_edit_reopened_note">Enduropnaði OSM-minnispunkt</string>
-    <string name="osm_edit_removed_note">Eyddi OSM-minnispunkti</string>
     <string name="osm_edit_created_note">Bjó til OSM-minnispunkt</string>
     <string name="osn_bug_name">OSM-minnispunktur</string>
     <string name="osn_add_dialog_title">Búa til minnispunkt</string>

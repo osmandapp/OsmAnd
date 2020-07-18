@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,8 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -36,12 +39,12 @@ import com.squareup.picasso.RequestCreator;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXFile.GpxSplitType;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PicassoUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
@@ -49,13 +52,16 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
@@ -71,6 +77,7 @@ import java.util.Map;
 import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 
@@ -356,50 +363,27 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				@Override
 				public void onClick(View v) {
 					TrackActivity activity = getTrackActivity();
-					if (activity != null) {
-						colorListPopupWindow = new ListPopupWindow(activity);
-						colorListPopupWindow.setAnchorView(colorView);
-						colorListPopupWindow.setContentWidth(AndroidUtils.dpToPx(app, 200f));
-						colorListPopupWindow.setModal(true);
-						colorListPopupWindow.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
-						colorListPopupWindow.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
-						colorListPopupWindow.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
-						GPXFile gpxFile = getGpx();
-						final ConfigureMapMenu.GpxAppearanceAdapter gpxApprAdapter = new ConfigureMapMenu.GpxAppearanceAdapter(activity,
-								gpxFile.getColor(0), ConfigureMapMenu.GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_COLOR);
-						colorListPopupWindow.setAdapter(gpxApprAdapter);
-						colorListPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					final GPXFile gpxFile = getGpx();
+					if (activity != null && gpxFile != null) {
+						final GpxAppearanceAdapter appearanceAdapter = new GpxAppearanceAdapter(activity,
+								gpxFile.getColor(0), GpxAppearanceAdapterType.TRACK_WIDTH_COLOR);
+						OnItemClickListener itemClickListener = new OnItemClickListener() {
 
 							@Override
 							public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-								ConfigureMapMenu.AppearanceListItem item = gpxApprAdapter.getItem(position);
+								AppearanceListItem item = appearanceAdapter.getItem(position);
 								if (item != null) {
 									if (CURRENT_TRACK_COLOR_ATTR.equals(item.getAttrName())) {
-										GPXFile gpx = getGpx();
-										int clr = item.getColor();
-										if (vis.isChecked()) {
-											if (gpx != null) {
-												SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, vis.isChecked(), false);
-												if (clr != 0 && sf.getModifiableGpxFile() != null) {
-													sf.getModifiableGpxFile().setColor(clr);
-													if (getGpxDataItem() != null) {
-														app.getGpxDbHelper().updateColor(getGpxDataItem(), clr);
-													}
-												}
-											}
-										} else if (getGpxDataItem() != null) {
-											app.getGpxDbHelper().updateColor(getGpxDataItem(), clr);
-										}
-										if (gpx != null && gpx.showCurrentTrack) {
-											app.getSettings().CURRENT_TRACK_COLOR.set(clr);
-										}
-										refreshTrackBitmap();
+										setGpxColor(item, gpxFile);
+									} else if (CURRENT_TRACK_WIDTH_ATTR.equals(item.getAttrName())) {
+										setGpxWidth(item, gpxFile);
 									}
 								}
 								colorListPopupWindow.dismiss();
 								updateColorView(colorView);
 							}
-						});
+						};
+						colorListPopupWindow = createPopupWindow(activity, splitIntervalView, appearanceAdapter, itemClickListener);
 						colorListPopupWindow.show();
 					}
 				}
@@ -415,16 +399,8 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 						public void onClick(View v) {
 							TrackActivity activity = getTrackActivity();
 							if (activity != null) {
-								splitListPopupWindow = new ListPopupWindow(activity);
-								splitListPopupWindow.setAnchorView(splitIntervalView);
-								splitListPopupWindow.setContentWidth(AndroidUtils.dpToPx(app, 200f));
-								splitListPopupWindow.setModal(true);
-								splitListPopupWindow.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
-								splitListPopupWindow.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
-								splitListPopupWindow.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
-								splitListPopupWindow.setAdapter(new ArrayAdapter<>(activity,
-										R.layout.popup_list_text_item, options));
-								splitListPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+								ListAdapter adapter = new ArrayAdapter<>(activity, R.layout.popup_list_text_item, options);
+								OnItemClickListener itemClickListener = new OnItemClickListener() {
 
 									@Override
 									public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -433,7 +409,8 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 										splitListPopupWindow.dismiss();
 										updateSplitIntervalView(splitIntervalView);
 									}
-								});
+								};
+								splitListPopupWindow = createPopupWindow(activity, splitIntervalView, adapter, itemClickListener);
 								splitListPopupWindow.show();
 							}
 						}
@@ -449,6 +426,55 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				divider.setVisibility(View.GONE);
 			}
 		}
+	}
+
+	private void setGpxColor(AppearanceListItem item, GPXFile gpxFile) {
+		int color = item.getColor();
+		if (vis.isChecked()) {
+			SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpxFile, vis.isChecked(), false);
+			if (color != 0 && sf.getModifiableGpxFile() != null) {
+				sf.getModifiableGpxFile().setColor(color);
+				if (getGpxDataItem() != null) {
+					app.getGpxDbHelper().updateColor(getGpxDataItem(), color);
+				}
+			}
+		} else if (getGpxDataItem() != null) {
+			app.getGpxDbHelper().updateColor(getGpxDataItem(), color);
+		}
+		if (gpxFile.showCurrentTrack) {
+			app.getSettings().CURRENT_TRACK_COLOR.set(color);
+		}
+		refreshTrackBitmap();
+	}
+
+	private void setGpxWidth(AppearanceListItem item, GPXFile gpxFile) {
+		String width = item.getValue();
+		if (vis.isChecked()) {
+			SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpxFile, vis.isChecked(), false);
+			if (width != null && sf.getModifiableGpxFile() != null) {
+				sf.getModifiableGpxFile().setWidth(width);
+				if (getGpxDataItem() != null) {
+					app.getGpxDbHelper().updateWidth(getGpxDataItem(), width);
+				}
+			}
+		} else if (getGpxDataItem() != null) {
+			app.getGpxDbHelper().updateWidth(getGpxDataItem(), width);
+		}
+		refreshTrackBitmap();
+	}
+
+	private ListPopupWindow createPopupWindow(Activity activity, View anchorView, ListAdapter adapter, OnItemClickListener itemClickListener) {
+		ListPopupWindow popupWindow = new ListPopupWindow(activity);
+		popupWindow.setAnchorView(anchorView);
+		popupWindow.setContentWidth(AndroidUtils.dpToPx(app, 200f));
+		popupWindow.setModal(true);
+		popupWindow.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
+		popupWindow.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
+		popupWindow.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
+		popupWindow.setAdapter(adapter);
+		popupWindow.setOnItemClickListener(itemClickListener);
+
+		return popupWindow;
 	}
 
 	@Nullable
@@ -729,7 +755,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			text.setText(options.get(selectedSplitInterval));
 		}
 	}
-	
+
 	private int getSelectedSplitInterval() {
 		if (getGpxDataItem() == null) {
 			return 0;
@@ -737,14 +763,14 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		int splitType = getGpxDataItem().getSplitType();
 		double splitInterval = getGpxDataItem().getSplitInterval();
 		int position = 0;
-		
-		if (splitType == GPXDatabase.GPX_SPLIT_TYPE_DISTANCE) {
+
+		if (splitType == GpxSplitType.DISTANCE.getType()) {
 			position = distanceSplit.indexOf(splitInterval);
-		} else if (splitType == GPXDatabase.GPX_SPLIT_TYPE_TIME) {
+		} else if (splitType == GpxSplitType.TIME.getType()) {
 			position = timeSplit.indexOf((int) splitInterval);
 		}
-		
-		return position > 0 ? position : 0;
+
+		return Math.max(position, 0);
 	}
 
 	private void updateColorView(View colorView) {
@@ -759,10 +785,9 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			}
 		}
 		if (color == 0) {
-			final RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-			final OsmandSettings.CommonPreference<String> prefColor
-					= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
-			color = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColor(renderer, prefColor.get());
+			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+			CommonPreference<String> prefColor = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
+			color = GpxAppearanceAdapter.parseTrackColor(renderer, prefColor.get());
 		}
 		if (color == 0) {
 			colorImageView.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle));
@@ -852,20 +877,20 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	private void updateSplitInDatabase() {
-		int splitType = 0;
 		double splitInterval = 0;
+		GpxSplitType splitType = null;
 		if (selectedSplitInterval == 0) {
-			splitType = GPXDatabase.GPX_SPLIT_TYPE_NO_SPLIT;
+			splitType = GpxSplitType.NO_SPLIT;
 			splitInterval = 0;
 		} else if (distanceSplit.get(selectedSplitInterval) > 0) {
-			splitType = GPXDatabase.GPX_SPLIT_TYPE_DISTANCE;
+			splitType = GpxSplitType.DISTANCE;
 			splitInterval = distanceSplit.get(selectedSplitInterval);
 		} else if (timeSplit.get(selectedSplitInterval) > 0) {
-			splitType = GPXDatabase.GPX_SPLIT_TYPE_TIME;
+			splitType = GpxSplitType.TIME;
 			splitInterval = timeSplit.get(selectedSplitInterval);
 		}
 		GpxDataItem item = getGpxDataItem();
-		if (item != null) {
+		if (item != null && splitType != null) {
 			app.getGpxDbHelper().updateSplit(item, splitType, splitInterval);
 		}
 	}

@@ -11,6 +11,19 @@
 	Thx - Hardy
 
 -->
+    <string name="osm_edit_closed_note">Closed OSM Note</string>
+    <string name="app_mode_go_cart">Go-cart</string>
+    <string name="app_mode_wheelchair_forward">Wheelchair forward</string>
+    <string name="app_mode_wheelchair">Wheelchair</string>
+    <string name="app_mode_motor_scooter">Motor scooter</string>
+    <string name="app_mode_enduro_motorcycle">Enduro motorcycle</string>
+    <string name="plugin_wikipedia_description">Get information about points of interest from Wikipedia. It is your pocket offline guide - just enable Wikipedia plugin and enjoy articles about objects around you.</string>
+    <string name="search_download_wikipedia_maps">Download Wikipedia maps</string>
+    <string name="quick_action_remove_next_destination_descr">The current destination point on the route will be deleted. If it will be the Destination, navigation will stop.</string>
+    <string name="please_provide_point_name_error">Please provide a name for the point</string>
+    <string name="use_volume_buttons_as_zoom">Volume buttons as zoom</string>
+    <string name="use_volume_buttons_as_zoom_descr">Enable to control the map zoom level with device volume buttons.</string>
+    <string name="quick_action_remove_next_destination">Delete next destination point</string>
     <string name="app_mode_inline_skates">Inline skates</string>
     <string name="speed_cameras_removed_descr">This device doesn\'t have speed cameras.</string>
     <string name="shared_string_uninstall_and_restart">Uninstall and Restart</string>
@@ -83,6 +96,7 @@
     <string name="screen_control">Screen control</string>
     <string name="shared_string_always">Always</string>
     <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact the support team to investigate further.</string>
+    <string name="lenght_limit_description">Provide your vehicle length, some routes restrictions may be applied for long vehicles.</string>
     <string name="weight_limit_description">Provide your vehicle weight, some route restrictions may apply for heavy vehicles.</string>
     <string name="height_limit_description">Provide your vehicle height, some route restrictions may apply for high vehicles.</string>
     <string name="width_limit_description">Provide your vehicle width some route restrictions may apply for wide vehicles.</string>
@@ -1674,7 +1688,6 @@
     <string name="context_menu_item_open_note">Open OSM Note</string>
     <string name="osm_edit_reopened_note">Reopened OSM Note</string>
     <string name="osm_edit_commented_note">Commented OSM Note</string>
-    <string name="osm_edit_removed_note">Deleted OSM Note</string>
     <string name="osm_edit_created_note">Created OSM Note</string>
     <string name="osn_bug_name">OSM Note</string>
     <string name="osn_add_dialog_title">Create note</string>

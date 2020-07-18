@@ -2655,18 +2655,20 @@ public class BinaryMapIndexReader {
 		}
 	}
 
+	
 	public TLongObjectHashMap<IncompleteTransportRoute> getIncompleteTransportRoutes() throws InvalidProtocolBufferException, IOException {
 		if (incompleteTransportRoutes == null) {
 			incompleteTransportRoutes = new TLongObjectHashMap<>();
 			for (TransportIndex ti : transportIndexes) {
 				if (ti.incompleteRoutesLength > 0) {
-					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.incompleteRoutesLength,
-							ti.incompleteRoutesOffset);
+					codedIS.seek(ti.incompleteRoutesOffset);
+					int oldLimit = codedIS.pushLimit(ti.incompleteRoutesLength);
+					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.filePointer);
+					codedIS.popLimit(oldLimit);
 				}
 			}
 		}
 		return incompleteTransportRoutes;
 	}
-
 
 }

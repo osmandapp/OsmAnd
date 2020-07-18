@@ -3829,4 +3829,7 @@
     <string name="poi_traffic_signals_vibration_no">Vibração: Não</string>
     <string name="poi_traffic_signals_arrow">Seta</string>
     <string name="poi_traffic_signals_vibration">Vibração</string>
+    <string name="poi_give_box">Caixa de distribuição</string>
+    <string name="poi_city_block">Quarteirão</string>
+    <string name="poi_borough">Burgo</string>
 </resources>

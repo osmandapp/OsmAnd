@@ -2190,7 +2190,6 @@
     <string name="context_menu_item_open_note">Άνοιγμα σημείωσης OSM</string>
     <string name="osm_edit_reopened_note">Ξανανοιγμένη σημείωση OSM</string>
     <string name="osm_edit_commented_note">Σχολιασμένη Σημείωση OSM</string>
-    <string name="osm_edit_removed_note">Διαγράφηκε σημείωση OSM</string>
     <string name="osm_edit_created_note">Δημιουργήθηκε σημείωση OSM</string>
     <string name="osn_bug_name">Σημείωση OSM</string>
     <string name="osn_add_dialog_title">Δημιουργία σημείωσης</string>

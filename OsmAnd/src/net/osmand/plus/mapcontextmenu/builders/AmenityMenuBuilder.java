@@ -44,7 +44,6 @@ import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaArticleWikiLinkFragment;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -408,7 +407,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			if (amenity.getType().isWiki()) {
 				if (!hasWiki) {
-					String articleLang = WikipediaPoiMenu.getWikiArticleLanguage(app, amenity.getSupportedContentLocales(), preferredLang);
+					String articleLang = OsmandPlugin.onGetMapObjectsLocale(amenity, preferredLang);
 					String lng = amenity.getContentLanguage("content", articleLang, "en");
 					if (Algorithms.isEmpty(lng)) {
 						lng = "en";
@@ -472,7 +471,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 				textPrefix = app.getString(R.string.poi_cuisine);
 				vl = sb.toString();
-			} else if (key.contains(Amenity.ROUTE)) {
+			} else if (key.contains(Amenity.ROUTE) || key.equals(Amenity.WIKIDATA))  {
 				continue;
 			} else {
 				if (key.contains(Amenity.DESCRIPTION)) {
@@ -785,11 +784,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		Map<String, String> additionalInfo = amenity.getAdditionalInfo();
 		String imageValue = additionalInfo.get("image");
 		String mapillaryValue = additionalInfo.get("mapillary");
+		String wikidataValue = additionalInfo.get("wikidata");
 		if (!Algorithms.isEmpty(imageValue)) {
 			params.put("osm_image", imageValue);
 		}
 		if (!Algorithms.isEmpty(mapillaryValue)) {
 			params.put("osm_mapillary_key", mapillaryValue);
+		}
+		if (!Algorithms.isEmpty(wikidataValue)) {
+			params.put("wikidata_id", wikidataValue);
 		}
 		return params;
 	}

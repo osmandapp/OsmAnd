@@ -50,6 +50,48 @@
 	<asset source="voice/zh-hk/zh-hk_tts.js" destination="voice/zh-hk-tts/zh-hk_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/zh-tw/zh-tw_tts.js" destination="voice/zh-tw-tts/zh-tw_tts.js" mode="overwriteOnlyIfExists" />
 
+	<asset source="voice/ar/ar_tts.js" destination="voice/ar/ar_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/be/be_tts.js" destination="voice/be/be_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/cs/cs_tts.js" destination="voice/cs/cs_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/da/da_tts.js" destination="voice/da/da_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/de/de_tts.js" destination="voice/de/de_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/el/el_tts.js" destination="voice/el/el_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/en/en_tts.js" destination="voice/en/en_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/en-gb/en-gb_tts.js" destination="voice/en-gb/en-gb_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/es/es_tts.js" destination="voice/es/es_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/es-ar/es-ar_tts.js" destination="voice/es-ar/es-ar_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/et/et_tts.js" destination="voice/et/et_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/fa/fa_tts.js" destination="voice/fa/fa_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/fi/fi_tts.js" destination="voice/fi/fi_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/fr/fr_tts.js" destination="voice/fr/fr_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/gn-py/gn-py_tts.js" destination="voice/gn-py/gn-py_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/nb/nb_tts.js" destination="voice/nb/nb_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/hi/hi_tts.js" destination="voice/hi/hi_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/hr/hr_tts.js" destination="voice/hr/hr_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/hu/hu_tts.js" destination="voice/hu/hu_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/hu-formal/hu-formal_tts.js" destination="voice/hu-formal/hu-formal_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/it/it_tts.js" destination="voice/it/it_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/ja/ja_tts.js" destination="voice/ja/ja_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/ko/ko_tts.js" destination="voice/ko/ko_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/lv/lv_tts.js" destination="voice/lv/lv_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/nl/nl_tts.js" destination="voice/nl/nl_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/pl/pl_tts.js" destination="voice/pl/pl_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/pt/pt_tts.js" destination="voice/pt/pt_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/pt-br/pt-br_tts.js" destination="voice/pt-br/pt-br_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/ro/ro_tts.js" destination="voice/ro/ro_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/ru/ru_tts.js" destination="voice/ru/ru_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/sc/sc_tts.js" destination="voice/sc/sc_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/sk/sk_tts.js" destination="voice/sk/sk_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/sl/sl_tts.js" destination="voice/sl/sl_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/sr/sr_tts.js" destination="voice/sr/sr_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/sv/sv_tts.js" destination="voice/sv/sv_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/sw/sw_tts.js" destination="voice/sw/sw_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/tr/tr_tts.js" destination="voice/tr/tr_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/uk/uk_tts.js" destination="voice/uk/uk_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/zh/zh_tts.js" destination="voice/zh/zh_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/zh-hk/zh-hk_tts.js" destination="voice/zh-hk/zh-hk_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/zh-tw/zh-tw_tts.js" destination="voice/zh-tw/zh-tw_tts.js" mode="overwriteOnlyIfExists" />
+
 	<asset source="fonts/05_NotoSans-Regular.ttf" destination="fonts/05_NotoSans-Regular.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/10_NotoSans-Bold.ttf" destination="fonts/10_NotoSans-Bold.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/15_NotoSans-Italic.ttf" destination="fonts/15_NotoSans-Italic.ttf" mode="alwaysOverwriteOrCopy" />

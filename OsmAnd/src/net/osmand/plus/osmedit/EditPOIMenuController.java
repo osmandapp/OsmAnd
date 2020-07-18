@@ -94,7 +94,7 @@ public class EditPOIMenuController extends MenuController {
 			}
 		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
 			if (osmPoint.getAction() == Action.DELETE) {
-				actionStr = mapActivity.getString(R.string.osm_edit_removed_note);
+				actionStr = mapActivity.getString(R.string.osm_edit_closed_note);
 			} else if (osmPoint.getAction() == Action.MODIFY) {
 				actionStr = mapActivity.getString(R.string.osm_edit_commented_note);
 			} else if (osmPoint.getAction() == Action.REOPEN) {
@@ -182,7 +182,7 @@ public class EditPOIMenuController extends MenuController {
 			}
 			return iconResId;
 		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
-			return R.drawable.ic_action_bug_dark;
+			return R.drawable.ic_action_osm_note_add;
 		} else {
 			return 0;
 		}

@@ -236,7 +236,7 @@
     <string name="vector_data_missing">Завантажити (\'офлайн\') дані для автономного використання мап.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nДовго утримуйте для виклику налаштувань"</string>
+\nУтримуйте для виклику налаштувань"</string>
     <string name="local_index_installed">Локальна версія</string>
     <string name="local_index_items_backuped">%1$d з %2$d об’єктів знедіяно.</string>
     <string name="local_index_items_deleted">%1$d з %2$d об’єктів вилучено.</string>
@@ -1127,7 +1127,7 @@
     <string name="shared_string_waypoint">Маршрутна точка</string>
     <string name="selected_gpx_info_show">"
 \n
-\nДовго утримуйте, щоб побачити на мапі"</string>
+\nУтримуйте, щоб побачити на мапі"</string>
     <string name="delay_navigation_start">Запускати навігацію автоматично</string>
     <string name="shared_string_selected_lowercase">виділені</string>
     <string name="gpx_info_subtracks">Під-треки: %1$s</string>
@@ -1533,7 +1533,7 @@
     <string name="specified_directiory_not_writeable">Не вдалося створити мапи у вказаній теці</string>
     <string name="copying_osmand_file_failed">Не вдалося перемістити файли</string>
     <string name="storage_directory_external">Зовнішнє сховище</string>
-    <string name="storage_directory_multiuser">Толочне сховище</string>
+    <string name="storage_directory_multiuser">Багатокористувацьке сховище</string>
     <string name="storage_directory_internal_app">Внутрішня пам’ять застосунку</string>
     <string name="storage_directory_manual">Вказано вручну</string>
     <string name="storage_directory_default">Внутрішня пам’ять</string>
@@ -1639,7 +1639,6 @@
     <string name="context_menu_item_open_note">Відкрити OSM-нотатку</string>
     <string name="osm_edit_reopened_note">Відкрити заново OSM-нотатку</string>
     <string name="osm_edit_commented_note">До OSM-нотатки додано коментар</string>
-    <string name="osm_edit_removed_note">Вилучено OSM-нотатку</string>
     <string name="osm_edit_created_note">Створено OSM-нотатку</string>
     <string name="osn_bug_name">OSM-нотатка</string>
     <string name="osn_add_dialog_title">Створити нотатку</string>
@@ -3125,7 +3124,7 @@
     <string name="base_profile_descr_pedestrian">Прогулянки, походи, біг</string>
     <string name="base_profile_descr_public_transport">Види громадського транспорту</string>
     <string name="base_profile_descr_boat">Корабель, веслування, вітрильний спорт</string>
-    <string name="base_profile_descr_aircraft">Літак, аероглайдинг</string>
+    <string name="base_profile_descr_aircraft">Літак, планер</string>
     <string name="routing_profile_geocoding">Геокодування</string>
     <string name="routing_profile_straightline">Пряма лінія</string>
     <string name="routing_profile_broutrer">BRouter (автономний)</string>
@@ -3255,7 +3254,7 @@
     <string name="map_during_navigation_info">Мапа під час навігації</string>
     <string name="map_during_navigation">Мапа під час навігації</string>
     <string name="shared_string_other">Інше</string>
-    <string name="vehicle_parameters_descr">Вага, висота, швидкість</string>
+    <string name="vehicle_parameters_descr">Вага, висота, довжина, швидкість</string>
     <string name="vehicle_parameters">Параметри транспортного засобу</string>
     <string name="voice_announces_info">Голосові повідомлення відтворюються лише під час навігації.</string>
     <string name="voice_announces">Навігаційні оголошення</string>
@@ -3408,10 +3407,10 @@
     <string name="select_map_icon">Позиція значка в спокої</string>
     <string name="delete_profiles_descr">Натиснення \"Застосувати\" видалить профілі назавжди.</string>
     <string name="master_profile">Основний профіль</string>
-    <string name="select_color">Оберіть колір</string>
+    <string name="select_color">Виберіть колір</string>
     <string name="edit_profiles_descr">Усталені профілі OsmAnd не видалено, проте вимкнуто (на попередньому екрані) чи відпорядковано донизу.</string>
     <string name="edit_profiles">Редагувати профілі</string>
-    <string name="select_nav_profile_dialog_message">\"Вид навігації\" визначає спосіб обчислення маршрутів.</string>
+    <string name="select_nav_profile_dialog_message">\'Тип навігації\' визначає спосіб обчислення маршрутів.</string>
     <string name="profile_appearance">Зовнішній вигляд профілю</string>
     <string name="choose_icon_color_name">Значок, колір та назва</string>
     <string name="reorder_profiles">Редагувати список профілів</string>
@@ -3798,4 +3797,22 @@
     <string name="item_deleted">%1$s видалено</string>
     <string name="speed_cameras_restart_descr">Потрібен перезапуск для повного видалення даних камер контролю швидкості.</string>
     <string name="shared_string_uninstall_and_restart">Видалити та перезапустити</string>
+    <string name="routing_attr_length_description">Вкажіть довжину транспортного засобу для розрахунку маршрутів.</string>
+    <string name="routing_attr_length_name">Обмеження довжини</string>
+    <string name="speed_cameras_removed_descr">На цьому пристрої немає камер контролю швидкості.</string>
+    <string name="app_mode_inline_skates">Роликові ковзани</string>
+    <string name="use_volume_buttons_as_zoom_descr">Увімкнути для зміни масштабу мапи кнопками гучності пристрою.</string>
+    <string name="use_volume_buttons_as_zoom">Масштабування кнопками гучності</string>
+    <string name="lenght_limit_description">Вкажіть довжину вашого автомобіля, для довгих транспортних засобів можуть застосовуватися деякі обмеження на маршрутах.</string>
+    <string name="quick_action_remove_next_destination">Видалити наступну точку призначення</string>
+    <string name="please_provide_point_name_error">Вкажіть назву пункту</string>
+    <string name="quick_action_remove_next_destination_descr">Поточну точку призначення на маршруті буде видалено. Якщо це буде місце призначення, навігація припиниться.</string>
+    <string name="search_download_wikipedia_maps">Завантажити мапи Вікіпедії</string>
+    <string name="plugin_wikipedia_description">Отримайте відомості про визначні місця у Вікіпедії. Це ваш кишеньковий посібник без мережі - просто ввімкніть втулок \"Вікіпедія\" і насолоджуйтесь статтями про об\'єкти навколо вас.</string>
+    <string name="app_mode_motor_scooter">Моторолер</string>
+    <string name="app_mode_enduro_motorcycle">легкий мотоцикл</string>
+    <string name="app_mode_wheelchair">Інвалідне крісло</string>
+    <string name="app_mode_wheelchair_forward">Інвалідне крісло попереду</string>
+    <string name="app_mode_go_cart">у мапу</string>
+    <string name="osm_edit_closed_note">Закрита нотатка OSM</string>
 </resources>

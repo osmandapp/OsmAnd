@@ -10,14 +10,15 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 	private String name;
 	private SearchMoreItemOnClickListener onClickListener;
 	private boolean emptySearch;
-	private boolean onlineSearch;
 	private boolean searchMoreAvailable;
 	private boolean interruptedSearch;
 	private String findMore;
 	private String restartSearch;
 	private String increaseRadius;
+	private boolean secondaryButtonVisibility;
 
-	public QuickSearchMoreListItem(OsmandApplication app, String name, @Nullable SearchMoreItemOnClickListener onClickListener) {
+	public QuickSearchMoreListItem(OsmandApplication app, String name,
+	                               @Nullable SearchMoreItemOnClickListener onClickListener) {
 		super(app, null);
 		this.name = name;
 		this.onClickListener = onClickListener;
@@ -61,14 +62,6 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 		this.emptySearch = emptySearch;
 	}
 
-	public boolean isOnlineSearch() {
-		return onlineSearch;
-	}
-
-	public void setOnlineSearch(boolean onlineSearch) {
-		this.onlineSearch = onlineSearch;
-	}
-
 	public boolean isSearchMoreAvailable() {
 		return searchMoreAvailable;
 	}
@@ -77,22 +70,31 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 		this.searchMoreAvailable = searchMoreAvailable;
 	}
 
-	public void increaseRadiusOnClick() {
+	public void onPrimaryButtonClick() {
 		if (onClickListener != null) {
-			onClickListener.increaseRadiusOnClick();
+			onClickListener.onPrimaryButtonClick();
 		}
 	}
 
-	public void onlineSearchOnClick() {
+	public void onSecondaryButtonClick() {
 		if (onClickListener != null) {
-			onClickListener.onlineSearchOnClick();
+			onClickListener.onSecondaryButtonClick();
 		}
+	}
+
+	public void setSecondaryButtonVisible(boolean secondaryButtonVisibility) {
+		this.secondaryButtonVisibility = secondaryButtonVisibility;
+	}
+
+	public boolean isSecondaryButtonVisible() {
+		return secondaryButtonVisibility;
 	}
 
 	public interface SearchMoreItemOnClickListener {
 
-		void increaseRadiusOnClick();
+		void onPrimaryButtonClick();
 
-		void onlineSearchOnClick();
+		void onSecondaryButtonClick();
+
 	}
 }

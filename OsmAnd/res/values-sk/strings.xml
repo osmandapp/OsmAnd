@@ -1767,7 +1767,6 @@
     <string name="context_menu_item_open_note">Otvoriť OSM poznámku</string>
     <string name="osm_edit_reopened_note">Znovuotvorená OSM poznámka</string>
     <string name="osm_edit_commented_note">Pridaný komentár k OSM poznámke</string>
-    <string name="osm_edit_removed_note">Odstránená OSM poznámka</string>
     <string name="osm_edit_created_note">Vytvorená OSM poznámka</string>
     <string name="osn_bug_name">OSM poznámka</string>
     <string name="osn_add_dialog_title">Vytvoriť poznámku</string>
@@ -3263,7 +3262,7 @@
     <string name="map_during_navigation_info">Mapa počas navigácie</string>
     <string name="map_during_navigation">Mapa počas navigácie</string>
     <string name="shared_string_other">Iné</string>
-    <string name="vehicle_parameters_descr">Hmotnosť, výška, rýchlosť</string>
+    <string name="vehicle_parameters_descr">Hmotnosť, výška, dĺžka, rýchlosť</string>
     <string name="vehicle_parameters">Parametre vozidla</string>
     <string name="voice_announces_info">Hlasové oznámenia sú prehrávané počas navigácie.</string>
     <string name="voice_announces_descr">Navigačné pokyny a oznámenia</string>
@@ -3801,4 +3800,22 @@
     <string name="speed_cameras_restart_descr">Pre úplné odstránenie údajov o rýchlostných radaroch je potrebný reštart.</string>
     <string name="shared_string_uninstall_and_restart">Odinštalovať a reštartovať</string>
     <string name="shared_string_uninstall">Odinštalovať</string>
+    <string name="routing_attr_length_description">Zadajte aká dĺžka vozidla musí byť povolená na trase.</string>
+    <string name="routing_attr_length_name">Limit dĺžky</string>
+    <string name="speed_cameras_removed_descr">Toto zariadenie neobsahuje rýchlostné radary.</string>
+    <string name="app_mode_inline_skates">Kolieskové korčule</string>
+    <string name="use_volume_buttons_as_zoom_descr">Umožní ovládať priblíženie mapy tlačidlami hlasitosti zariadenia.</string>
+    <string name="use_volume_buttons_as_zoom">Tlačidlá hlasitosti na približovanie</string>
+    <string name="lenght_limit_description">Zadajte dĺžku vášho vozidla, pretože na trase môžu byť obmedzenia pre dlhé vozidlá.</string>
+    <string name="quick_action_remove_next_destination">Vymazať ďalší cieľový bod</string>
+    <string name="please_provide_point_name_error">Prosím zadajte názov pre bod</string>
+    <string name="quick_action_remove_next_destination_descr">Aktuálny cieľový bod na trase bude vymazaný. Ak je to posledný cieľ, navigácia sa zastaví.</string>
+    <string name="search_download_wikipedia_maps">Stiahnuť mapy Wikipédia</string>
+    <string name="plugin_wikipedia_description">Získajte informácie o bodoch záujmu z Wikipédie. Je to váš vreckový sprievodca - zapnite modul Wikipédia a užívajte si články o objektoch okolo vás.</string>
+    <string name="app_mode_enduro_motorcycle">Enduro motorka</string>
+    <string name="app_mode_motor_scooter">Skúter</string>
+    <string name="app_mode_wheelchair">Invalidný vozík</string>
+    <string name="app_mode_wheelchair_forward">Invalidný vozík dopredu</string>
+    <string name="app_mode_go_cart">Motokára</string>
+    <string name="osm_edit_closed_note">Zatvorená OSM poznámka</string>
 </resources>

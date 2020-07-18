@@ -57,7 +57,6 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -70,12 +69,14 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
 import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -525,16 +526,14 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 					}
 				} else {
 					float distance = pos * dataSet.getDivX();
-					double previousSplitDistance = 0;
+					double totalDistance = 0;
 					for (int i = 0; i < segment.points.size(); i++) {
 						WptPt currentPoint = segment.points.get(i);
 						if (i != 0) {
 							WptPt previousPoint = segment.points.get(i - 1);
-							if (currentPoint.distance < previousPoint.distance) {
-								previousSplitDistance += previousPoint.distance;
-							}
+							totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
 						}
-						if (previousSplitDistance + currentPoint.distance >= distance) {
+						if (currentPoint.distance >= distance || Math.abs(totalDistance - distance) < 0.1) {
 							wpt = currentPoint;
 							break;
 						}

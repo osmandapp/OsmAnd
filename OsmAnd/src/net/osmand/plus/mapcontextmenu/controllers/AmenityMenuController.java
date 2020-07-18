@@ -13,7 +13,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -22,7 +22,6 @@ import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-import net.osmand.plus.wikipedia.WikipediaPoiMenu;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -158,15 +157,8 @@ public class AmenityMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getNameStr() {
-		String preferredLang = getPreferredMapLang();
-		if (amenity.getType().isWiki()) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				OsmandApplication app = mapActivity.getMyApplication();
-				preferredLang = WikipediaPoiMenu.getWikiArticleLanguage(app,
-						amenity.getSupportedContentLocales(), getPreferredMapAppLang());
-			}
-		}
+		String preferredLang = OsmandPlugin.onGetMapObjectPreferredLang(amenity,
+				getPreferredMapAppLang(), getPreferredMapLang());
 		String name = amenity.getName(preferredLang, isTransliterateNames());
 		Map<String, String> additionalInfo = amenity.getAdditionalInfo();
 		if (additionalInfo != null) {

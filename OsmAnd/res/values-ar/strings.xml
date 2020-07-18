@@ -1842,7 +1842,6 @@
     <string name="show_on_start_description">عند الإيقاف ستبدأ واجهة الخريطة مباشرة.</string>
     <string name="osm_edit_modified_poi">OSM POI معدل</string>
     <string name="osm_edit_commented_note">ملاحظة OSM معلق عليها</string>
-    <string name="osm_edit_removed_note">ملاحظة OSM محذوفة</string>
     <string name="rendering_attr_pisteGrooming_name">مسار زلق</string>
     <string name="world_ski_missing">لإظهار خرائط التزلج، يجب تحميل خريطة خاصة محلية.</string>
     <string name="rendering_attr_publicTransportMode_name">حافلة، ترامواي وغيرها</string>
@@ -1898,7 +1897,7 @@
     <string name="disable_complex_routing_descr">تعطيل 2-مرحلة التوجيه للملاحة بالسيارة.</string>
     <string name="rendering_attr_alpineHiking_name">مقياس التنزه في جبال الألب (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">تقديم المسارات وفقاً لمقياس SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">طبقة رمز التسلق</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">كيفية اظهار رموز طبقة التسلق (الهايكنق)</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">تقديم المسارات وفقاً لآثار OSMC.</string>
     <string name="local_index_description">انقر فوق أي عنصر لمعرفة المزيد من التفاصيل، اضغط وواصل الضغط للتعطيل أو الحذف. البيانات الحالية على الجهاز (%1$s متاح):</string>
     <string name="keep_informing_descr">إعادة إعلان تعليمات الملاحة في فترات منتظمة.</string>
@@ -3170,7 +3169,7 @@
     <string name="map_during_navigation">خريطة أثناء التنقل</string>
     <string name="shared_string_other">أخرى</string>
     <string name="vehicle_parameters_descr">الوزن ، الارتفاع ، السرعة</string>
-    <string name="vehicle_parameters">معلمات السيارة</string>
+    <string name="vehicle_parameters">معلمات المركبات</string>
     <string name="voice_announces_info">الإعلامات الصوتية تحدث فقط أثناء التنقل.</string>
     <string name="voice_announces_descr">إرشادات التنقل والإعلامات</string>
     <string name="voice_announces">المطالبات الصوتية</string>
@@ -3212,7 +3211,7 @@
     <string name="default_speed_setting_title">السرعة الافتراضية</string>
     <string name="default_speed_setting_descr">تغيير إعدادات السرعة الافتراضية</string>
     <string name="minmax_speed_dialog_title">تعيين حد السرعة الأدنى/الأعلى</string>
-    <string name="new_profile">وضع جديد</string>
+    <string name="new_profile">ملف تعريف جديد</string>
     <string name="shared_string_crash">خروج مفاجئ</string>
     <string name="last_launch_crashed">فشل العملية الأخيرة لأوسماند. الرجاء مساعدتنا في التحسين من خلال مشاركة رسالة الخطأ.</string>
     <string name="release_3_4">• أوضاع التطبيق: قم بإنشاء وضع مخصص لاحتياجاتك الخاصة ، باستخدام رمز ولون مخصصين 
@@ -3793,4 +3792,22 @@
 \nحدد %1$s وستتلقى تنبيهات وتحذيرات حول كاميرات السرعة. 
 \n
 \nحدد %2$s. جميع البيانات المتعلقة كاميرات السرعة: التنبيهات، والإخطارات، سيتم حذف نقاط الاهتمام حتى يتم إعادة تثبيت أوسماند تماما.</string>
+    <string name="routing_attr_length_description">تحديد الارتفاع الأعلى المسموح به على الطرق.</string>
+    <string name="routing_attr_length_name">طول الحد</string>
+    <string name="speed_cameras_removed_descr">هذا الجهاز لا يملك كاميرات السرعة.</string>
+    <string name="app_mode_inline_skates">أحذية تزلج</string>
+    <string name="use_volume_buttons_as_zoom_descr">تمكين التحكم في مستوى التكبير/التصغير بالخريطة باستخدام أزرار مستوى صوت الجهاز.</string>
+    <string name="use_volume_buttons_as_zoom">أزرار مستوى الصوت</string>
+    <string name="lenght_limit_description">إعطاء معلومات وزن مركبتك ،قد يتم تطبيق بعض القيود على المركبات الثقيلة.</string>
+    <string name="quick_action_remove_next_destination">حذف نقطة الوجهة التالية</string>
+    <string name="please_provide_point_name_error">يرجى إعطاء اسم للنقطة</string>
+    <string name="quick_action_remove_next_destination_descr">سيتم حذف نقطة الوجهة الحالية على المسار. إذا كانت هي الوجهة، سوف تتوقف الملاحة.</string>
+    <string name="search_download_wikipedia_maps">تنزيل بيانات ويكيبيديا</string>
+    <string name="plugin_wikipedia_description">الحصول على معلومات حول النقاط المثيرة للاهتمام من ويكيبيديا. إنه دليلك غير المتصل بجيبك - ما عليك سوى تمكين المكون الإضافي ويكبيديا والاستمتاع بمقالات حول الكائنات من حولك.</string>
+    <string name="app_mode_enduro_motorcycle">دراجة نارية</string>
+    <string name="app_mode_motor_scooter">سكوتر موتور</string>
+    <string name="app_mode_wheelchair_forward">منحدرات للأمام</string>
+    <string name="app_mode_wheelchair">منحدرات</string>
+    <string name="app_mode_go_cart">عربة التسوق</string>
+    <string name="osm_edit_closed_note">أغلق ملاحظة OSM</string>
 </resources>

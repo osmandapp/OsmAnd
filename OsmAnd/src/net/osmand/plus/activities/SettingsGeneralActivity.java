@@ -280,7 +280,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"fi",
 				"fr",
 				"gl",
-				"he",
+				"iw",
 				"hr",
 				"hsb",
 				"hu",

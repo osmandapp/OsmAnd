@@ -1764,7 +1764,6 @@
     <string name="context_menu_item_open_note">開啟 OSM 註解</string>
     <string name="osm_edit_reopened_note">重新開啟 OSM 註解</string>
     <string name="osm_edit_commented_note">已評論 OSM 註解</string>
-    <string name="osm_edit_removed_note">已刪除 OSM 註解</string>
     <string name="osm_edit_created_note">建立 OSM 的註解</string>
     <string name="osn_bug_name">OSM 註解</string>
     <string name="osn_add_dialog_title">建立註解</string>
@@ -3263,7 +3262,7 @@
     <string name="map_during_navigation_info">導航時的地圖</string>
     <string name="map_during_navigation">導航時的地圖</string>
     <string name="shared_string_other">其他</string>
-    <string name="vehicle_parameters_descr">重量、高度、速度</string>
+    <string name="vehicle_parameters_descr">重量、高度、長度、速度</string>
     <string name="vehicle_parameters">車輛參數</string>
     <string name="voice_announces_info">僅在導航時播放語音通知。</string>
     <string name="voice_announces_descr">導航指示與通知</string>
@@ -3798,4 +3797,22 @@
     <string name="item_deleted">%1$s 已刪除</string>
     <string name="speed_cameras_restart_descr">必須重新啟動才能完全刪除測速照相的資料。</string>
     <string name="shared_string_uninstall_and_restart">解除安裝並重新啟動</string>
+    <string name="routing_attr_length_description">指定路線上允許的車輛長度。</string>
+    <string name="routing_attr_length_name">長度限制</string>
+    <string name="speed_cameras_removed_descr">此裝置沒有測速照相機。</string>
+    <string name="app_mode_inline_skates">直排輪鞋</string>
+    <string name="use_volume_buttons_as_zoom_descr">啟用裝置音量按鈕控制地圖縮放等級。</string>
+    <string name="use_volume_buttons_as_zoom">音量按鈕以縮放</string>
+    <string name="lenght_limit_description">提供您的車輛長度，某些路徑限制可能適用於較長的車輛。</string>
+    <string name="quick_action_remove_next_destination">刪除下一個目的地點</string>
+    <string name="please_provide_point_name_error">請提供點的名稱</string>
+    <string name="quick_action_remove_next_destination_descr">目前路徑上的目的地點將會被刪除。如果其將為目的地，導航就會停止。</string>
+    <string name="search_download_wikipedia_maps">下載維基百科地圖</string>
+    <string name="plugin_wikipedia_description">從維基百科取得關於興趣點的資訊。這是您的離線口袋指南 ── 只要啟用維基百科外掛程式並享受有關於您周圍景點的文章。</string>
+    <string name="app_mode_enduro_motorcycle">耐力賽摩托車</string>
+    <string name="app_mode_motor_scooter">小型摩托車</string>
+    <string name="app_mode_wheelchair">輪椅</string>
+    <string name="app_mode_wheelchair_forward">輪椅向前</string>
+    <string name="app_mode_go_cart">卡丁車</string>
+    <string name="osm_edit_closed_note">已關閉的 OSM 註記</string>
 </resources>

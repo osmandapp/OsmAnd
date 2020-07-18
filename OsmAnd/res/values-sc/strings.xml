@@ -533,7 +533,7 @@
     <string name="loading_poi_obj">Carrigamentu PDI…</string>
     <string name="poi">PDI</string>
     <string name="local_openstreetmap_settings">PDI/notas de OSM sarvados/as in su dispositivu</string>
-    <string name="index_name_wiki">PDI Wikipedia mondiale</string>
+    <string name="index_name_wiki">PDI Wikipedia mundiale</string>
     <string name="update_poi_is_not_available_for_zoom">Ismanniende podes agiornare sos PDI</string>
     <string name="map_widget_vector_attributes">Caraterìsticas de su disinnu</string>
     <string name="screen_is_locked">Incarca s’icona de su luchete pro isblocare</string>
@@ -956,7 +956,7 @@
     <string name="amenity_type_sport">Isport</string>
     <string name="amenity_type_sustenance">Alimentares</string>
     <string name="amenity_type_tourism">Turismu</string>
-    <string name="amenity_type_transportation">Trasportu</string>
+    <string name="amenity_type_transportation">Trasportos pùblicos</string>
     <string name="indexing_address">Inditzizatzione indiritzos…</string>
     <string name="indexing_map">Inditzizatzione mapa…</string>
     <string name="indexing_poi">Inditzizatzione PDI…</string>
@@ -1119,7 +1119,7 @@
     <string name="transport_to_go_before">distàntzia imbeniente</string>
     <string name="transport_stops_to_pass">firmadas da colare</string>
     <string name="transport_route_distance">Distàntzia àndala</string>
-    <string name="transport">Trasportu pùblicu</string>
+    <string name="transport">Trasportos pùblicos</string>
     <string name="shared_string_ok">AB</string>
     <string name="show_transport_over_map_description">Ammustra sas firmadas de su trasportu pùblicu in sa mapa.</string>
     <string name="show_transport_over_map">Ammustra sas firmadas de su trasportu pùblicu</string>
@@ -1353,7 +1353,7 @@
     <string name="map_widget_right">Pannellu de destra</string>
     <string name="map_widget_left">Pannellu de manca</string>
     <string name="rendering_category_routes">Àndalas</string>
-    <string name="rendering_category_transport">Trasportu pùblicu</string>
+    <string name="rendering_category_transport">Trasportos pùblicos</string>
     <string name="rendering_category_others">Àteros atributos de sa mapa</string>
     <string name="map_widget_appearance_rem">Elementos chi abarrant</string>
     <string name="map_widget_top">Barra de istadu</string>
@@ -1770,7 +1770,6 @@
     <string name="context_menu_item_open_note">Aberi una nota de OSM</string>
     <string name="osm_edit_reopened_note">Nota OSM torrada a abèrrere</string>
     <string name="osm_edit_commented_note">Nota OSM cummentada</string>
-    <string name="osm_edit_removed_note">Nota OSM iscantzellada</string>
     <string name="osm_edit_created_note">Nota OSM creada</string>
     <string name="osn_bug_name">Nota OSM</string>
     <string name="osn_add_dialog_title">Crea nota</string>
@@ -2728,7 +2727,7 @@
     <string name="shared_string_read">Leghe</string>
     <string name="shared_string_contents">Cuntenutu</string>
     <string name="use_two_digits_longitude">Imprea una longitùdine a duas tzìfras</string>
-    <string name="index_item_world_wikivoyage">Artìculos mondiales de Wikivoyage</string>
+    <string name="index_item_world_wikivoyage">Artìculos mundiales de Wikivoyage</string>
     <string name="monthly_map_updates">Agiornamentos de sas mapas: cada mese</string>
     <string name="daily_map_updates">Agiornamentos de sas mapas: cada ora</string>
     <string name="in_app_purchase">Còmporas in intro de s\'aplicatzione</string>
@@ -3271,7 +3270,7 @@
     <string name="copy_from_other_profile">Còpia dae un\'àteru profilu</string>
     <string name="map_during_navigation_info">Mapa durante sa navigatzione</string>
     <string name="map_during_navigation">Mapa durante sa navigatzione</string>
-    <string name="vehicle_parameters_descr">Pesu, artària, lestresa</string>
+    <string name="vehicle_parameters_descr">Pesu, artària, longària, lestresa</string>
     <string name="vehicle_parameters">Paràmetros de su veìculu</string>
     <string name="voice_announces_info">Sos annùntzios vocales benint riproduidos petzi durante sa navigatzione.</string>
     <string name="voice_announces_descr">Istrutziones e annùntzios de navigatzione</string>
@@ -3713,9 +3712,9 @@
 \n</string>
     <string name="shared_string_resume">Sighi</string>
     <string name="additional_actions_descr">Podes atzèdere a custas atziones incarchende su butone \"%1$s\".</string>
-    <string name="quick_action_transport_hide">Cua su trasportu pùblicu</string>
-    <string name="quick_action_transport_show">Ammustra su trasportu pùblicu</string>
-    <string name="quick_action_show_hide_transport">Ammustra/cua su trasportu pùblicu</string>
+    <string name="quick_action_transport_hide">Cua sos trasportos pùblicos</string>
+    <string name="quick_action_transport_show">Ammustra sos trasportos pùblicos</string>
+    <string name="quick_action_show_hide_transport">Ammustra/cua sos trasportos pùblicos</string>
     <string name="quick_action_transport_descr">Butone pro ammustrare o cuare su trasportu pùblicu in sa mapa.</string>
     <string name="create_edit_poi">Crea / Modìfica unu PDI</string>
     <string name="parking_positions">Logos de parchègiu</string>
@@ -3805,4 +3804,22 @@
     <string name="item_deleted">%1$s iscantzelladu</string>
     <string name="speed_cameras_restart_descr">Depes torrare a allùghere pro iscantzellare de su totu sos datos de sos autovelox.</string>
     <string name="shared_string_uninstall_and_restart">Disinstalla e torra a allùghere</string>
+    <string name="routing_attr_length_description">Dillinda sa longària de su veìculu permìtida in sas àndalas.</string>
+    <string name="routing_attr_length_name">Lìmite de longària</string>
+    <string name="speed_cameras_removed_descr">Custu dispositivu non tenet autovelox.</string>
+    <string name="app_mode_inline_skates">Pàtinos in lìnia</string>
+    <string name="use_volume_buttons_as_zoom_descr">Abìlita pro controllare su livellu de ismanniamentu cun sos butones de su volume de su dispositivu.</string>
+    <string name="use_volume_buttons_as_zoom">Butones de su volume pro s\'ismanniamentu</string>
+    <string name="lenght_limit_description">Inserta sa longària de su veìculu tuo. Bi diant pòdere èssere unas cantas restritziones de sas àndalas pro sos veìculos longos.</string>
+    <string name="quick_action_remove_next_destination">Iscantzella su puntu de destinatzione imbeniente</string>
+    <string name="please_provide_point_name_error">Fruni unu nùmene pro su puntu</string>
+    <string name="quick_action_remove_next_destination_descr">Su puntu de destinatzione atuale in s\'àndala at a èssere iscantzelladu. Si at a èssere sa destinatzione, sa navigatzione s\'at a firmare.</string>
+    <string name="search_download_wikipedia_maps">Iscàrriga sas mapas de Wikipedia</string>
+    <string name="plugin_wikipedia_description">Otene informatziones a pitzu de puntos de interesse dae Wikipedia. Est sa ghia non in lìnia tua de mantènnere in butzaca - abìlita s\'estensione Wikipedia e ispassia·ti cun sos artìculos a pitzu de sos ogetos a fùrriu de tie.</string>
+    <string name="app_mode_enduro_motorcycle">Moto enduro</string>
+    <string name="app_mode_motor_scooter">Motorinu</string>
+    <string name="app_mode_wheelchair_forward">Cadira a rodas cara a in antis</string>
+    <string name="app_mode_wheelchair">Cadira a rodas</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="osm_edit_closed_note">Nota de OSM serrada</string>
 </resources>

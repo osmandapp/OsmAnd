@@ -143,9 +143,13 @@ public class RouteCalculationResult {
 								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode) {
 		if (rctx != null) {
 			this.routingTime = rctx.routingTime;
-			this.visitedSegments = rctx.visitedSegments;
-			this.loadedTiles = rctx.loadedTiles;
-			this.calculateTime = (float) (((System.nanoTime() - rctx.timeToCalculate) / 1e6) / 1000f);
+			this.visitedSegments = rctx.getVisitedSegments();
+			this.loadedTiles = rctx.getLoadedTiles();
+			if (rctx.calculationProgress != null) {
+				this.calculateTime = (float) (rctx.calculationProgress.timeToCalculate / 1.0e9);
+			} else {
+				this.calculateTime = 0;
+			}
 		} else {
 			this.routingTime = 0;
 			this.visitedSegments = 0;
@@ -497,9 +501,9 @@ public class RouteCalculationResult {
 			Location current = locations.get(i);
 			float bearing = current.bearingTo(next);
 			// try to get close to current location if possible
-			while(prevBearingLocation < i - 1){
-				if(locations.get(prevBearingLocation + 1).distanceTo(current) > 70){
-					prevBearingLocation ++;
+			while (prevBearingLocation < i - 1) {
+				if (locations.get(prevBearingLocation + 1).distanceTo(current) > 70) {
+					prevBearingLocation++;
 				} else {
 					break;
 				}

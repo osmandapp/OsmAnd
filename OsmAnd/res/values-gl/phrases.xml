@@ -2480,7 +2480,7 @@
     <string name="poi_social_facility_food_bank">Banco de alimentos</string>
     <string name="poi_social_facility_shelter">Abeiro</string>
     <string name="poi_social_facility_ambulatory_care">Asistencia sanitaria</string>
-    <string name="poi_social_facility_workshop">Taller</string>
+    <string name="poi_social_facility_workshop">Traballo social</string>
     <string name="poi_social_facility_day_care">Asistencia de día</string>
     <string name="poi_social_facility_for_child">Crianzas</string>
     <string name="poi_social_facility_for_orphan">Orfos</string>
@@ -2814,7 +2814,7 @@
     <string name="poi_service_vehicle_electrical_yes">Eléctrico</string>
     <string name="poi_service_vehicle_wheels_yes">Rodas</string>
     <string name="poi_service_vehicle_glass_yes">Vidro</string>
-    <string name="poi_service_vehicle_truck_repair_yes">Taller mecánico para camións</string>
+    <string name="poi_service_vehicle_truck_repair_yes">Taller de camións</string>
     <string name="poi_service_vehicle_muffler_yes">Silenciador</string>
     <string name="poi_service_vehicle_alignment_yes">Aliñamento</string>
     <string name="poi_service_vehicle_transmission_repair_yes">Arranxo da transmisión</string>
@@ -3822,4 +3822,7 @@
     <string name="poi_traffic_signals_vibration_no">Vibración: non</string>
     <string name="poi_traffic_signals_arrow">Frecha</string>
     <string name="poi_traffic_signals_vibration">Vibración</string>
+    <string name="poi_give_box">Caixa de distribución</string>
+    <string name="poi_city_block">Predio</string>
+    <string name="poi_borough">Concello</string>
 </resources>

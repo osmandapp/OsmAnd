@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -154,9 +155,12 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 						iconId = R.drawable.mx_special_symbol_check_mark;
 						backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 					}
+					BackgroundType backgroundType = BackgroundType.COMMENT;
 					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
-							ContextCompat.getColor(activity, backgroundColorRes), true, iconId);
-					pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
+							ContextCompat.getColor(activity, backgroundColorRes), true, false, iconId,
+							backgroundType);
+					int offsetY = backgroundType.getOffsetY(activity, textScale);
+					pointImageDrawable.drawPoint(canvas, x, y - offsetY, textScale, false);
 				}
 				this.fullObjectsLatLon = fullObjectsLatLon;
 				this.smallObjectsLatLon = smallObjectsLatLon;
@@ -199,7 +203,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			final int rad = getScaledTouchRadius(activity.getMyApplication(), getRadiusBug(tb));
-			int radius = rad * 3 / 2;
+			int radius = rad * 3;
 			int small = rad * 3 / 4;
 			boolean showClosed = activity.getMyApplication().getSettings().SHOW_CLOSED_OSM_BUGS.get();
 			try {

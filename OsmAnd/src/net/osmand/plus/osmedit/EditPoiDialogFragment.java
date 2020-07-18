@@ -97,7 +97,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private static final String TAGS_LIST = "tags_list";
 	private static final String IS_ADDING_POI = "is_adding_poi";
 
-	public static final HashSet<String> BASIC_TAGS = new HashSet<String>() ;
+	public static final HashSet<String> BASIC_TAGS = new HashSet<String>();
+	public static final int ADVANCED_TAB = 1;
+
 	static {
 		BASIC_TAGS.add(OSMSettings.OSMTagKey.NAME.getValue());
 		BASIC_TAGS.add(OSMSettings.OSMTagKey.ADDR_STREET.getValue());
@@ -379,6 +381,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		});
 		setAdapterForPoiTypeEditText();
 		setCancelable(false);
+		if (editPoiData.hasEmptyValue()) {
+			viewPager.setCurrentItem(ADVANCED_TAB);
+		}
 		return view;
 	}
 

@@ -1374,7 +1374,6 @@ Lorratza %2$s</string>
     <string name="context_menu_item_open_note">Ireki OSM oharra</string>
     <string name="osm_edit_reopened_note">OSM oharra berrireki da</string>
     <string name="osm_edit_commented_note">OSM oharrean iruzkina egin da</string>
-    <string name="osm_edit_removed_note">OSM oharra ezabatu da</string>
     <string name="osm_edit_created_note">OSM oharra sortu da</string>
     <string name="osn_bug_name">OSM oharra</string>
     <string name="osn_add_dialog_title">Sortu oharra</string>

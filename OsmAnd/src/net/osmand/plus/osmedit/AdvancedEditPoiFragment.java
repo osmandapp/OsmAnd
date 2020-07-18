@@ -196,6 +196,9 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 					continue;
 				addTagView(tag.getKey(), tag.getValue());
 			}
+			if (editPoiData.hasEmptyValue()) {
+				linearLayout.findViewById(R.id.valueEditText).requestFocus();
+			}
 			editPoiData.setIsInEdit(false);
 		}
 

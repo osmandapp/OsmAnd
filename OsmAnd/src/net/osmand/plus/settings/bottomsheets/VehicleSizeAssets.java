@@ -19,7 +19,10 @@ public enum VehicleSizeAssets {
 			R.string.height_limit_description, R.string.shared_string_meters, R.string.m),
 	WEIGHT(VEHICLE_WEIGHT, GeneralRouterProfile.CAR, R.drawable.img_help_weight_limit_day,
 			R.drawable.img_help_weight_limit_night,
-			R.string.weight_limit_description, R.string.shared_string_tones, R.string.metric_ton);
+			R.string.weight_limit_description, R.string.shared_string_tones, R.string.metric_ton),
+	LENGTH(VEHICLE_LENGTH, GeneralRouterProfile.CAR, R.drawable.img_help_length_limit_day,
+			R.drawable.img_help_length_limit_night,
+			R.string.lenght_limit_description, R.string.shared_string_meters, R.string.m);
 
 	String routerParameterName;
 	GeneralRouterProfile routerProfile;

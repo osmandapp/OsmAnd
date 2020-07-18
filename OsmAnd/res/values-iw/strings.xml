@@ -2390,7 +2390,6 @@
 \n</string>
     <string name="arrival_distance_descr">כמה לפני המועד ברצונך להיוודע על הגעה ליעד?</string>
     <string name="live_monitoring_max_interval_to_send">חוצץ זמן למעקב מקוון</string>
-    <string name="osm_edit_removed_note">הערת OSM נמחקה</string>
     <string name="osm_edit_created_note">נוצרה הערת OSM</string>
     <string name="osn_bug_name">הערת OSM</string>
     <string name="osn_add_dialog_title">יצירת הערה</string>
@@ -3243,7 +3242,7 @@
     <string name="map_during_navigation_info">מפה במהלך ניווט</string>
     <string name="map_during_navigation">מפה במהלך ניווט</string>
     <string name="shared_string_other">אחר</string>
-    <string name="vehicle_parameters_descr">רוחב, גובה, מהירות</string>
+    <string name="vehicle_parameters_descr">רוחב, גובה, אורך, מהירות</string>
     <string name="vehicle_parameters">מאפייני כלי הרכב</string>
     <string name="voice_announces_info">הכרזות קוליות מושמעות רק במהלך הניווט.</string>
     <string name="voice_announces_descr">הנחיות והכרזות ניווט</string>
@@ -3778,7 +3777,7 @@
     <string name="width_limit_description">נא לציין את רוחב כלי הרכב שלך, יתכן שחלות מגבלות מעבר על כלי רכב רחבים.</string>
     <string name="height_limit_description">נא לציין את גובה כלי הרכב שלך, יתכן שחלות מגבלות מעבר על כלי רכב גבוהים.</string>
     <string name="weight_limit_description">נא לציין את משקל כלי הרכב שלך, יתכן שחלות מגבלות מעבר על כלי רכב כבדים.</string>
-    <string name="shared_string_tones">גוונים</string>
+    <string name="shared_string_tones">טונות</string>
     <string name="shared_string_meters">מטרים</string>
     <string name="details_dialog_decr">הצגה או הסתרה של פירוט נוסף על המפה</string>
     <string name="shared_string_night_map">מפת לילה</string>
@@ -3811,4 +3810,22 @@
 \nבחירה באפשרות %1$s תוביל לכך שתישלחנה אליך התרעות על מצלמות מהירות.
 \n
 \nבחירה באפשרות %2$s תוביל לכך שנתונים שקשורים במצלמות מהירות: אזהרות, התרעות ונקודות עניין תימחקנה עד להתקנה מחדש של OsmAnd.</string>
+    <string name="app_mode_inline_skates">רולרבליידס</string>
+    <string name="routing_attr_length_description">נא לציין את אורך כלי הרכב כדי לבדוק מסלולים מורשים.</string>
+    <string name="routing_attr_length_name">מגבלת אורך</string>
+    <string name="speed_cameras_removed_descr">למכשיר הזה אין מצלמות מהירות.</string>
+    <string name="use_volume_buttons_as_zoom_descr">מאפשר לשלוח ברמת התקריב של המפה עם כפתורי עצמת השמע של המכשיר.</string>
+    <string name="use_volume_buttons_as_zoom">כפתורי עצמת שמע כתקריב</string>
+    <string name="lenght_limit_description">נא לספק את אורך כלי הרכב שלך, מגבלות מסלול מסוימות עשויות לחול על כלי רכב ארוכים.</string>
+    <string name="quick_action_remove_next_destination">מחיקת נקודת היעד הבאה</string>
+    <string name="please_provide_point_name_error">נא לספק שם לנקודה</string>
+    <string name="quick_action_remove_next_destination_descr">נקודת היעד הנוכחית במסלול תימחק. אם זה יהיה היעד, הניווט ייעצר.</string>
+    <string name="search_download_wikipedia_maps">הורדת מפות ויקיפדיה</string>
+    <string name="plugin_wikipedia_description">קבלת מידע על נקודות עניין מוויקיפדיה. מדריך הכיס הפרטי שלך - עליך פשוט להפעיל את התוסף של ויקיפדיה וליהנות מערכים על מה שסביבך.</string>
+    <string name="app_mode_enduro_motorcycle">אופנוע שטח</string>
+    <string name="app_mode_motor_scooter">טוסטוס</string>
+    <string name="app_mode_wheelchair">כסא גלגלים</string>
+    <string name="app_mode_wheelchair_forward">כסא גלגלים ספורטיבי</string>
+    <string name="app_mode_go_cart">קארטינג</string>
+    <string name="osm_edit_closed_note">הערת OSM סגורה</string>
 </resources>

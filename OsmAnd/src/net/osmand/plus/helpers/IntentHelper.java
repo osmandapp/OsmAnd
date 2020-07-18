@@ -56,7 +56,7 @@ public class IntentHelper {
 			applied = parseOpenGpxIntent();
 		}
 		if (!applied) {
-			applied = parseExtraTextIntent();
+			applied = parseSendIntent();
 		}
 		return applied;
 	}
@@ -257,20 +257,31 @@ public class IntentHelper {
 		intent.setData(null);
 	}
 
-	private boolean parseExtraTextIntent() {
+	private boolean parseSendIntent() {
 		Intent intent = mapActivity.getIntent();
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M && intent != null) {
-			CharSequence text = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
-			if (!Algorithms.isEmpty(text)) {
-				return QuickSearchDialogFragment.showInstance(
-						mapActivity,
-						text.toString(),
-						null,
-						QuickSearchDialogFragment.QuickSearchType.REGULAR,
-						QuickSearchDialogFragment.QuickSearchTab.CATEGORIES,
-						null
-				);
+		if (intent != null) {
+			String action = intent.getAction();
+			String type = intent.getType();
+			if (Intent.ACTION_SEND.equals(action) && type != null) {
+				if ("text/plain".equals(type)) {
+					return handleSendText(intent);
+				}
 			}
+		}
+		return false;
+	}
+
+	private boolean handleSendText(Intent intent) {
+		String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+		if (!Algorithms.isEmpty(sharedText)) {
+			return QuickSearchDialogFragment.showInstance(
+					mapActivity,
+					sharedText,
+					null,
+					QuickSearchDialogFragment.QuickSearchType.REGULAR,
+					QuickSearchDialogFragment.QuickSearchTab.CATEGORIES,
+					null
+			);
 		}
 		return false;
 	}

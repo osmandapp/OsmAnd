@@ -1648,8 +1648,8 @@
     <string name="poi_payment_electronic_purses_yes">Elektronische Geldbörsen</string>
     <string name="poi_payment_uta_yes">UTA</string>
     <string name="poi_payment_uta_no">UTA-Karten nicht akzeptiert</string>
-    <string name="poi_payment_efectivo_yes">Bargeld</string>
-    <string name="poi_payment_efectivo_no">Bargeld nicht akzeptiert</string>
+    <string name="poi_payment_efectivo_yes">Efectivo</string>
+    <string name="poi_payment_efectivo_no">Efectivo nicht akzeptiert</string>
     <string name="poi_payment_girocard_yes">Girokarte</string>
     <string name="poi_payment_girocard_no">Girokarte nicht akzeptiert</string>
     <string name="poi_payment_discover_card_yes">Discover-Karte</string>
@@ -2126,7 +2126,7 @@
     <string name="poi_refugee_yes">Flüchtlingsunterkunft</string>
     <string name="poi_social_facility_group_home">Wohngruppe</string>
     <string name="poi_social_facility_assisted_living">Betreutes Wohnen</string>
-    <string name="poi_social_facility_outreach">Freier Treff</string>
+    <string name="poi_social_facility_outreach">Beratungsstelle</string>
     <string name="poi_social_facility_food_bank">Verpflegung</string>
     <string name="poi_social_facility_shelter">Obdach</string>
     <string name="poi_social_facility_ambulatory_care">Ambulante Pflege</string>
@@ -2162,7 +2162,7 @@
     <string name="poi_step_condition_rough">Treppenzustand: schlecht</string>
     <string name="poi_cairn">Steinhügel</string>
     <string name="poi_memorial_fassade_decoration">Fassadendekoration</string>
-    <string name="poi_tomb_war_grave">Art: Kriegsgrab</string>
+    <string name="poi_tomb_war_grave">Art: Kriegsgräberstätte</string>
     <string name="poi_tomb_tumulus">Art: Hügelgrab</string>
     <string name="poi_tomb_rock_cut">Art: Felsgrab</string>
     <string name="poi_tomb_hypogeum">Art: Hypogäum</string>
@@ -2766,7 +2766,7 @@
     <string name="poi_toilets_disposal_pitlatrine">Toilettenspülung: Plumpsklo</string>
     <string name="poi_wiki_link">Wikipedia</string>
     <string name="poi_spices">Gewürzgeschäft</string>
-    <string name="poi_fuel_type">Kraftstoffart</string>
+    <string name="poi_fuel_type">Kraftstoffsorte</string>
     <string name="poi_payment_type">Zahlungsart</string>
     <string name="poi_additional_type">Zusätzlich</string>
     <string name="poi_service_bicycle_charging_yes">Ladestation: ja</string>
@@ -3603,7 +3603,7 @@
     <string name="poi_changing_table_count">Anzahl der Wickeltische</string>
     <string name="poi_changing_table_fee_yes">Wickeltischgebühr: ja</string>
     <string name="poi_changing_table_fee_no">Wickeltischgebühr: nein</string>
-    <string name="poi_charcoal_pile">Holzkohlestoß</string>
+    <string name="poi_charcoal_pile">Kohlenmeiler</string>
     <string name="poi_historic_tank">Historischer Panzer</string>
     <string name="poi_hookah_lounge">Wasserpfeifen-Lounge</string>
     <string name="poi_source_biomass">Energiequelle: Biomasse</string>
@@ -3832,4 +3832,7 @@
     <string name="poi_traffic_signals_vibration_no">kein Vibrieren</string>
     <string name="poi_traffic_signals_arrow">Pfeil</string>
     <string name="poi_traffic_signals_vibration">Vibrieren</string>
+    <string name="poi_give_box">Give box</string>
+    <string name="poi_city_block">Stadtteil</string>
+    <string name="poi_borough">Bezirk</string>
 </resources>

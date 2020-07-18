@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
@@ -15,6 +16,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.IncompleteTransportRoute;
 import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
@@ -43,7 +45,6 @@ public class TransportStopsRouteReader {
 			List<TransportStop> stops = r.searchTransportIndex(sr);
 			TIntObjectHashMap<TransportRoute> routesToLoad = mergeTransportStops(r, loadedTransportStops, stops);
 			loadRoutes(r, routesToLoad);
-				
 			for (TransportStop stop : stops) {
 				// skip missing stops
 				if (stop.isMissingStop()) {
@@ -405,11 +406,4 @@ public class TransportStopsRouteReader {
 		}
 		return allRoutes;
 	}
-
-	
-
-	
-
-
-	
 }

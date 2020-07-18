@@ -109,7 +109,7 @@ public class OsmNotesMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(osmNotesStringId, mapActivity)
 				.setDescription(mapActivity.getString(R.string.switch_osm_notes_visibility_desc))
-				.setIcon(R.drawable.ic_action_bug_dark)
+				.setIcon(R.drawable.ic_action_osm_note)
 				.setColor(toggleIconColorId)
 				.setListener(l)
 				.setSelected(showOsmBugs)

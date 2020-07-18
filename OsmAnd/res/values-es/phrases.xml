@@ -3819,4 +3819,16 @@
     <string name="poi_memorial_ghost_bike">Bicicleta blanca</string>
     <string name="poi_fire_hydrant_pressure_filter">Presión</string>
     <string name="poi_sms">SMS</string>
+    <string name="poi_give_box">Caja de regalo</string>
+    <string name="poi_traffic_signals_arrow_yes">Sí</string>
+    <string name="poi_traffic_signals_vibration_yes">Sí</string>
+    <string name="poi_traffic_signals_vibration_no">Vibración: no</string>
+    <string name="poi_pump_status_missing_beam">Estado de la bomba: falta la barra</string>
+    <string name="poi_seamark_water_level_floating">Nivel del agua: flotante</string>
+    <string name="poi_seamark_water_level_floods">Nivel del agua: inundaciones</string>
+    <string name="poi_seamark_water_level_covers">Nivel de agua: cubre</string>
+    <string name="poi_tactile_paving_primitive">Primitivo</string>
+    <string name="poi_tactile_paving_contrasted">Contrastado</string>
+    <string name="poi_traffic_signals_arrow">Flecha</string>
+    <string name="poi_traffic_signals_vibration">Vibración</string>
 </resources>

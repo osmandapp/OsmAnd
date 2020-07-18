@@ -92,9 +92,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	private void drawPoint(Canvas canvas, float x, float y, boolean active) {
 		float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
-		float left = x - roadWorkIcon.getWidth() / 2f * textScale;
-		float top = y - roadWorkIcon.getHeight() * textScale;
-		Rect destRect = getIconDestinationRect(left, top, roadWorkIcon.getWidth(), roadWorkIcon.getHeight(), textScale);
+		y -= roadWorkIcon.getHeight() / 2f * textScale;
+		Rect destRect = getIconDestinationRect(x, y, roadWorkIcon.getWidth(), roadWorkIcon.getHeight(), textScale);
 		canvas.drawBitmap(roadWorkIcon, null, destRect, active ? activePaint : paint);
 	}
 

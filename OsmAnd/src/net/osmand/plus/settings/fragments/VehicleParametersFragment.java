@@ -4,11 +4,11 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.routing.RouteProvider.RouteService;
@@ -26,6 +26,7 @@ import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import java.util.Map;
 
 import static net.osmand.plus.activities.SettingsNavigationActivity.showSeekbarSettingsDialog;
+import static net.osmand.router.GeneralRouter.*;
 
 public class VehicleParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
@@ -36,12 +37,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 
 	@Override
 	protected void setupPreferences() {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
 		ApplicationMode mode = getSelectedAppMode();
-
 		Preference vehicleParametersInfo = findPreference("vehicle_parameters_info");
 		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, mode.toHumanString()));
@@ -51,21 +47,12 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 			GeneralRouter router = app.getRouter(mode);
 			if (router != null) {
 				GeneralRouterProfile routerProfile = router.getProfile();
-				Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
-
-				GeneralRouter.RoutingParameter vehicleHeight = parameters.get(GeneralRouter.VEHICLE_HEIGHT);
-				if (vehicleHeight != null) {
-					setupCustomRoutingPropertyPref(vehicleHeight, routerProfile);
-				}
-				GeneralRouter.RoutingParameter vehicleWeight = parameters.get(GeneralRouter.VEHICLE_WEIGHT);
-				if (vehicleWeight != null) {
-					setupCustomRoutingPropertyPref(vehicleWeight, routerProfile);
-				}
-				GeneralRouter.RoutingParameter vehicleWidth = parameters.get(GeneralRouter.VEHICLE_WIDTH);
-				if (vehicleWidth != null) {
-					setupCustomRoutingPropertyPref(vehicleWidth, routerProfile);
-				}
-				if (router.getProfile() != GeneralRouterProfile.PUBLIC_TRANSPORT) {
+				Map<String, RoutingParameter> parameters = router.getParameters();
+				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_HEIGHT), routerProfile);
+				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_WEIGHT), routerProfile);
+				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_WIDTH), routerProfile);
+				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_LENGTH), routerProfile);
+				if (routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT) {
 					setupDefaultSpeedPref();
 				}
 			}
@@ -74,20 +61,20 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		}
 	}
 
-	private void setupCustomRoutingPropertyPref(GeneralRouter.RoutingParameter parameter,
+	private void setupCustomRoutingPropertyPref(@Nullable RoutingParameter parameter,
 	                                            GeneralRouterProfile routerProfile) {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
+		if (parameter == null) {
 			return;
 		}
 		String parameterId = parameter.getId();
 		String title = SettingsBaseActivity.getRoutingStringPropertyName(app, parameterId, parameter.getName());
-		String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, parameterId, parameter.getDescription());
-
-		String defValue = parameter.getType() == GeneralRouter.RoutingParameterType.NUMERIC
+		String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, parameterId,
+				parameter.getDescription());
+		String defValue = parameter.getType() == RoutingParameterType.NUMERIC
 				? ROUTING_PARAMETER_NUMERIC_DEFAULT : ROUTING_PARAMETER_SYMBOLIC_DEFAULT;
 		OsmandSettings.StringPreference pref = (OsmandSettings.StringPreference) app.getSettings()
 				.getCustomRoutingProperty(parameterId, defValue);
+		VehicleSizeAssets assets = VehicleSizeAssets.getAssets(parameterId, routerProfile);
 		Object[] values = parameter.getPossibleValues();
 		String[] valuesStr = new String[values.length];
 		for (int i = 0; i < values.length; i++) {
@@ -98,7 +85,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		for (int i = 1; i < entriesStr.length; i++) {
 			int firstCharIndex = Algorithms.findFirstNumberEndIndex(entriesStr[i]);
 			entriesStr[i] = String.format(app.getString(R.string.ltr_or_rtl_combine_via_space),
-					entriesStr[i].substring(0, firstCharIndex), entriesStr[i].substring(firstCharIndex));
+					entriesStr[i].substring(0, firstCharIndex), getString(assets.getMetricShortRes()));
 		}
 
 		Context ctx = getContext();
@@ -107,7 +94,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		}
 		SizePreference vehicleSizePref = new SizePreference(ctx);
 		vehicleSizePref.setKey(pref.getId());
-		vehicleSizePref.setAssets(VehicleSizeAssets.getAssets(parameterId, routerProfile));
+		vehicleSizePref.setAssets(assets);
 		vehicleSizePref.setDefaultValue(defValue);
 		vehicleSizePref.setTitle(title);
 		vehicleSizePref.setEntries(entriesStr);
@@ -124,10 +111,10 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 			return;
 		}
 		Preference defaultSpeedPref = new Preference(ctx);
-		defaultSpeedPref.setKey(GeneralRouter.DEFAULT_SPEED);
+		defaultSpeedPref.setKey(DEFAULT_SPEED);
 		defaultSpeedPref.setTitle(R.string.default_speed_setting_title);
 		defaultSpeedPref.setSummary(R.string.default_speed_setting_descr);
-		defaultSpeedPref.setIcon(getPreferenceIcon(GeneralRouter.DEFAULT_SPEED));
+		defaultSpeedPref.setIcon(getPreferenceIcon(DEFAULT_SPEED));
 		defaultSpeedPref.setLayoutResource(R.layout.preference_with_descr);
 		getPreferenceScreen().addPreference(defaultSpeedPref);
 	}
@@ -135,7 +122,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
-		if (!GeneralRouter.DEFAULT_SPEED.equals(preference.getKey()) && preference instanceof ListPreferenceEx) {
+		if (!DEFAULT_SPEED.equals(preference.getKey()) && preference instanceof ListPreferenceEx) {
 			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
 			if (imageView != null) {
 				Object currentValue = ((ListPreferenceEx) preference).getValue();
@@ -156,7 +143,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference.getKey().equals(GeneralRouter.DEFAULT_SPEED)) {
+		if (preference.getKey().equals(DEFAULT_SPEED)) {
 			RouteService routeService = getSelectedAppMode().getRouteService();
 			boolean defaultSpeedOnly = routeService == RouteService.STRAIGHT || routeService == RouteService.DIRECT_TO;
 			showSeekbarSettingsDialog(getActivity(), defaultSpeedOnly, getSelectedAppMode());
@@ -193,14 +180,16 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 
 	private Drawable getPreferenceIcon(String prefId) {
 		switch (prefId) {
-			case GeneralRouter.DEFAULT_SPEED:
+			case DEFAULT_SPEED:
 				return getPersistentPrefIcon(R.drawable.ic_action_speed);
-			case GeneralRouter.VEHICLE_HEIGHT:
+			case VEHICLE_HEIGHT:
 				return getPersistentPrefIcon(R.drawable.ic_action_height_limit);
-			case GeneralRouter.VEHICLE_WEIGHT:
+			case VEHICLE_WEIGHT:
 				return getPersistentPrefIcon(R.drawable.ic_action_weight_limit);
-			case GeneralRouter.VEHICLE_WIDTH:
+			case VEHICLE_WIDTH:
 				return getPersistentPrefIcon(R.drawable.ic_action_width_limit);
+			case VEHICLE_LENGTH:
+				return getPersistentPrefIcon(R.drawable.ic_action_length_limit);
 			default:
 				return null;
 		}
