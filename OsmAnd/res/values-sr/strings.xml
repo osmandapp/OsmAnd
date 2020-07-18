@@ -975,7 +975,7 @@
     <string name="gpx_add_track">Додај још…</string>
     <string name="shared_string_appearance">Изглед</string>
     <string name="trip_rec_notification_settings">Укључи брзо снимање</string>
-    <string name="trip_rec_notification_settings_desc">Приказуј обавештење које омогућава снимање путовања.</string>
+    <string name="trip_rec_notification_settings_desc">Приказуј обавештење које омогућава покретање снимања путовања.</string>
     <string name="shared_string_notifications">Обавештења</string>
     <string name="shared_string_continue">Настави</string>
     <string name="shared_string_pause">Паузирај</string>
@@ -3817,4 +3817,8 @@
     <string name="app_mode_wheelchair_forward">Инвалидска колица напред</string>
     <string name="app_mode_go_cart">Корпа</string>
     <string name="osm_edit_closed_note">Затворена ОСМ белешка</string>
+    <string name="set_working_days_to_continue">За наставак морате да одредите радне дане</string>
+    <string name="route_between_points">Рута између тачака</string>
+    <string name="plan_a_route">Планирај руту</string>
+    <string name="add_to_a_track">Додајте стази</string>
 </resources>
