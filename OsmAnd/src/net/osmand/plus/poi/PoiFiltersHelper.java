@@ -814,8 +814,7 @@ public class PoiFiltersHelper {
 						if (map.containsKey(filterId) && (includeDeleted || !deleted)) {
 							String filterName = query.getString(1);
 							String translation = application.getPoiTypes().getPoiTranslation(filterName);
-							if(translation != null)
-							{
+							if(translation != null){
 								filterName = translation;
 							}
 							PoiUIFilter filter = new PoiUIFilter(filterName, filterId,
