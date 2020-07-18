@@ -2075,7 +2075,7 @@
     <string name="rendering_attr_contourColorScheme_name">Ischema de colores pro sas curvas de livellu</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade superfitziale de su caminu</string>
     <string name="trip_rec_notification_settings">Allughe sa registratzione de biàgios lestra</string>
-    <string name="trip_rec_notification_settings_desc">Ammustra una notìfica chi permitit de registrare su biàgiu.</string>
+    <string name="trip_rec_notification_settings_desc">Ammustra una notìfica chi permitit de incumentzare a registrare su biàgiu.</string>
     <string name="shared_string_notifications">Notìficas</string>
     <string name="gpx_no_tracks_title">Non tenes galu documentos GPX</string>
     <string name="gpx_no_tracks_title_folder">Podes fintzas annànghere documentos GPX a sa cartella</string>
