@@ -3817,4 +3817,6 @@
     <string name="app_mode_motor_scooter">Мотороллер</string>
     <string name="osm_edit_closed_note">Закрытая заметка OSM</string>
     <string name="app_mode_wheelchair">Инвалидная коляска</string>
+    <string name="app_mode_go_cart">В карту</string>
+    <string name="app_mode_wheelchair_forward">Инвалидное кресло впереди</string>
 </resources>
