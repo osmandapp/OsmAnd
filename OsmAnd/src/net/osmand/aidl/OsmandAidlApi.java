@@ -139,7 +139,6 @@ public class OsmandAidlApi {
 	private static final String AIDL_LONGITUDE = "aidl_longitude";
 	private static final String AIDL_ZOOM = "aidl_zoom";
 	private static final String AIDL_ROTATION = "aidl_rotation";
-
 	private static final String AIDL_ANIMATED = "aidl_animated";
 
 	private static final String AIDL_START_NAME = "aidl_start_name";
