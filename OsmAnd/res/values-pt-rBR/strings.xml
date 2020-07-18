@@ -2286,7 +2286,7 @@ Pôr do Sol: %2$s</string>
     <string name="auto_split_recording_title">Autodividir gravações após um intervalo</string>
     <string name="auto_split_recording_descr">Iniciar novo segmento após intervalo de 6 min, uma nova trilha após intervalo de 2 h, ou um novo arquivo depois de um longo intervalo se a data foi alterada.</string>
     <string name="upload_osm_note_description">Envie sua Nota OSM anonimamente ou através do seu perfil do OpenStreetMap.org.</string>
-    <string name="trip_rec_notification_settings_desc">Exibir uma notificação do sistema permitindo a gravação de viagem.</string>
+    <string name="trip_rec_notification_settings_desc">Exibir uma notificação do sistema que permite iniciar a gravação da viagem.</string>
     <string name="christmas_desc">Antecipando os feriados de Natal e ano novo, você pode optar por exibir POIs relacionados ao Natal, como árvores de Natal, mercados, etc.</string>
     <string name="osm_live_payment_desc">Assinatura cobrada por período selecionado. Cancele-o no Google Play a qualquer momento.</string>
     <string name="donation_to_osm_desc">Parte da sua doação é enviada aos colaboradores do OSM. O custo da assinatura permanece o mesmo.</string>

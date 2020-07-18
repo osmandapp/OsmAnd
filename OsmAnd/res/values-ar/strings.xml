@@ -2087,7 +2087,7 @@
     <string name="rendering_value_fine_name">اللون والسمك</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="search_map_hint">المدينة أو المنطقة</string>
-    <string name="wiki_around">مقالات ويكيبيديا مجاورة</string>
+    <string name="wiki_around">مقالات ويكيبيديا قريبة</string>
     <string name="routing_attr_allow_motorway_name">استخدام الطرق السريعة</string>
     <string name="routing_attr_allow_motorway_description">السماح للطرق السريعة.</string>
     <string name="lang_sr_latn">الصربية (اللاتينية)</string>
@@ -2531,7 +2531,7 @@
     <string name="add_location_as_first_point_descr">أضف موقعك كنقطة أولى لتخطيط طريق مثالي.</string>
     <string name="my_location">موقعي</string>
     <string name="shared_string_finish">إنهاء</string>
-    <string name="plan_route">تخطيط الطريق</string>
+    <string name="plan_route">قياس المسافة</string>
     <string name="shared_string_sort">فرز</string>
     <string name="coordinate_input">إدخال إحداثية</string>
     <string name="marker_save_as_track_descr">تصدير علاماتك إلى ملف يمكنك تحديده هنا:</string>

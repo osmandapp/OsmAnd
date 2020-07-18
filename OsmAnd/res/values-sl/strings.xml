@@ -3320,4 +3320,21 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Povezovalna</string>
     <string name="rendering_attr_piste_difficulty_easy_name">Enostavna</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Začetniška</string>
+    <string name="app_mode_inline_skates">rolerji</string>
+    <string name="speed_cameras_removed_descr">Naprava nima kamer z merilci hitrosti.</string>
+    <string name="please_provide_point_name_error">Prosim, vnesite ime za točko</string>
+    <string name="quick_action_remove_next_destination">Zbriši naslednjo ciljno točko</string>
+    <string name="quick_action_remove_next_destination_descr">Trenutna ciljna točka na poti bo izbrisana. Če je to cilj, se bo navigacija ustavila.</string>
+    <string name="plugin_wikipedia_description">Prejmi informacije o zanimivih točkah iz Wikipedije. To je vaš žepni vodič brez povezave - samo omogočite Wikipedijin vtičnik in uživajte v člankih o predmetih okoli vas.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Omogoči za nadzor približevanja zemljevida z gumbi za glasnost.</string>
+    <string name="quick_action_mapillary_hide">Skrij Mapillary</string>
+    <string name="quick_action_mapillary_show">Prikaži mapillary</string>
+    <string name="add_online_source">Dodaj spletni vir</string>
+    <string name="quick_action_showhide_mapillary_title">Prikaži/skrij Mapillary</string>
+    <string name="shared_string_uninstall_and_restart">Odstrani in ponovno zaženi</string>
+    <string name="use_volume_buttons_as_zoom">Uporabi gumbe za glasnost za približevanje</string>
+    <string name="search_download_wikipedia_maps">Prejmi Wikipedija zemljevide</string>
+    <string name="app_mode_wheelchair">Invalidski voziček</string>
+    <string name="app_mode_go_cart">Gokart</string>
+    <string name="osm_edit_closed_note">Zaprta opomba OSM</string>
 </resources>

@@ -197,7 +197,7 @@
     <string name="gpx_add_track">Добавь ещё…</string>
     <string name="shared_string_appearance">Внешний вид</string>
     <string name="trip_rec_notification_settings">Включить быструю запись</string>
-    <string name="trip_rec_notification_settings_desc">Отображение системного уведомления, позволяющего производить запись поездки.</string>
+    <string name="trip_rec_notification_settings_desc">Отображение системного уведомления, позволяющего начать запись поездки.</string>
     <string name="shared_string_notifications">Уведомления</string>
     <string name="shared_string_continue">Продолжить</string>
     <string name="shared_string_pause">Пауза</string>
@@ -3817,4 +3817,6 @@
     <string name="app_mode_motor_scooter">Мотороллер</string>
     <string name="osm_edit_closed_note">Закрытая заметка OSM</string>
     <string name="app_mode_wheelchair">Инвалидная коляска</string>
+    <string name="app_mode_go_cart">В карту</string>
+    <string name="app_mode_wheelchair_forward">Инвалидное кресло впереди</string>
 </resources>

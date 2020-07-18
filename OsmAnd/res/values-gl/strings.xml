@@ -1896,7 +1896,7 @@ Lon %2$s</string>
     <string name="gpx_add_track">Engadir máis…</string>
     <string name="shared_string_appearance">Aparencia</string>
     <string name="trip_rec_notification_settings">Activar a gravación rápida</string>
-    <string name="trip_rec_notification_settings_desc">Amosa unha notificación do sistema que permite a gravación da viaxe.</string>
+    <string name="trip_rec_notification_settings_desc">Amosar unha notificación do sistema que permite comezar a gravación da viaxe.</string>
     <string name="shared_string_notifications">Notificacións</string>
     <string name="shared_string_continue">Continuar</string>
     <string name="shared_string_pause">Deter</string>

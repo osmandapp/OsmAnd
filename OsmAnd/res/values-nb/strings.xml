@@ -3682,4 +3682,5 @@
     <string name="shared_string_bearing">Peiling</string>
     <string name="item_deleted">%1$s slettet</string>
     <string name="use_volume_buttons_as_zoom">Lydstyrkeknapper til forstørring</string>
+    <string name="search_download_wikipedia_maps">Last ned Wikipedia-kart</string>
 </resources>
