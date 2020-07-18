@@ -2078,7 +2078,7 @@
     <string name="shared_string_record">Grabar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
     <string name="trip_rec_notification_settings">Activar la grabación rápida</string>
-    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite la grabación del viaje.</string>
+    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación del viaje.</string>
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="gpx_no_tracks_title">Sin archivos GPX aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos GPX a la carpeta</string>
@@ -3825,4 +3825,8 @@
     <string name="app_mode_go_cart">Go-kart</string>
     <string name="osm_edit_closed_note">Nota de OSM cerrada</string>
     <string name="app_mode_wheelchair_forward">Silla de ruedas (hacia adelante)</string>
+    <string name="set_working_days_to_continue">Debes definir los días laborales para continuar</string>
+    <string name="route_between_points">Ruta entre puntos</string>
+    <string name="plan_a_route">Crear una ruta</string>
+    <string name="add_to_a_track">Añadir a una traza</string>
 </resources>
