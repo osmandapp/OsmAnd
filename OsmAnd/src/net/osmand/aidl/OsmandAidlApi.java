@@ -302,7 +302,7 @@ public class OsmandAidlApi {
 							zoom = zoom > mapView.getMaxZoom() ? mapView.getMaxZoom() : zoom;
 							zoom = zoom < mapView.getMinZoom() ? mapView.getMinZoom() : zoom;
 						}
-						if(rotation != Float.NaN) {
+						if(!Float.isNaN(rotation)) {
 							mapView.setRotate(rotation, false);
 						}
 						if (animated) {
