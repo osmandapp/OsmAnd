@@ -41,11 +41,11 @@ public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
 
-	public static boolean isEmpty(Collection c) {
+	public static boolean isEmpty(Collection<?> c) {
 		return c == null || c.size() == 0;
 	}
 
-	public static boolean isEmpty(Map map) {
+	public static boolean isEmpty(Map<?, ?> map) {
 		return map == null || map.size() == 0;
 	}
 
@@ -498,6 +498,7 @@ public class Algorithms {
 				}
 				responseBody.append(s);
 			}
+			i.close();
 		}
 		return responseBody;
 	}
