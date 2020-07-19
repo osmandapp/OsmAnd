@@ -2068,7 +2068,7 @@
     <string name="shared_string_record">Záznam</string>
     <string name="gpx_logging_no_data">Žiadne údaje</string>
     <string name="trip_rec_notification_settings">Zapnúť rýchly záznam</string>
-    <string name="trip_rec_notification_settings_desc">Zobraziť systémové oznámenie, ktoré umožňuje nahrávanie.</string>
+    <string name="trip_rec_notification_settings_desc">Zobraziť systémové oznámenie, ktoré umožňuje spustiť nahrávanie.</string>
     <string name="shared_string_notifications">Oznámenia</string>
     <string name="shared_string_resume">Pokračovať</string>
     <string name="gpx_no_tracks_title">Nemáte zatiaľ žiadne súbory GPX</string>
@@ -3818,4 +3818,8 @@
     <string name="app_mode_wheelchair_forward">Invalidný vozík dopredu</string>
     <string name="app_mode_go_cart">Motokára</string>
     <string name="osm_edit_closed_note">Zatvorená OSM poznámka</string>
+    <string name="set_working_days_to_continue">Pre pokračovanie musíte zadať pracovné dni</string>
+    <string name="route_between_points">Trasa medzi bodmi</string>
+    <string name="plan_a_route">Naplánovať trasu</string>
+    <string name="add_to_a_track">Pridať do stopy</string>
 </resources>
