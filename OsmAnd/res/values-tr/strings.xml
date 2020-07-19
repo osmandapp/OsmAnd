@@ -1927,7 +1927,7 @@
     <string name="storage_directory_readonly_desc">Seçilen veri saklama klasörü yazma korumalı olduğu için dahili hafızaya geçildi. Lütfen yazılabilir bir depolama dizini seçin.</string>
     <string name="storage_directory_shared">Paylaşılan bellek</string>
     <string name="shared_string_topbar">Üst menü</string>
-    <string name="recalculate_route">Rota yeniden hesapla</string>
+    <string name="recalculate_route">Güzergahı yeniden hesapla</string>
     <string name="report">Rapor</string>
     <string name="access_no_destination">Hedef ayarlanmadı</string>
     <string name="access_disable_offroute_recalc">Rota terkedildiğinde yeniden hesaplanmasın</string>
@@ -1980,7 +1980,7 @@
     <string name="points_delete_multiple_succesful">Nokta(lar) silindi.</string>
     <string name="shared_string_gpx_track">Takip et</string>
     <string name="track_points_category_name">Waypointler, ilgi çekici noktalar, adlandırılmış özellikler</string>
-    <string name="max_speed">Azami hız</string>
+    <string name="max_speed">En yüksek hız</string>
     <string name="average_speed">Ortalama hız</string>
     <string name="shared_string_max">Azami</string>
     <string name="shared_string_start_time">Başlangıç zamanı</string>
@@ -3543,7 +3543,7 @@
     <string name="restore_all_profile_settings">Tüm profil ayarları geri yüklensin mi\?</string>
     <string name="restore_all_profile_settings_descr">Bu profili oluşturduktan/ içe aktardıktan sonra tüm profil ayarları orijinal değerlerine geri yüklenecektir.</string>
     <string name="clear_recorded_data_warning">Kayıtlı verileri silmek istediğinize emin misiniz\?</string>
-    <string name="recalculate_route_in_deviation">Sapma durumunda rotayı yeniden hesapla</string>
+    <string name="recalculate_route_in_deviation">Sapma durumunda güzergahı yeniden hesapla</string>
     <string name="select_distance_route_will_recalc">Rotanın yeniden hesaplanacağı mesafeyi seçin.</string>
     <string name="recalculate_route_distance_promo">Rotadan geçerli konuma olan mesafe seçilen değerden fazla ise rota yeniden hesaplanacaktır.</string>
     <string name="n_items_of_z">%1$s / %2$s</string>
@@ -3775,4 +3775,8 @@
     <string name="app_mode_wheelchair_forward">İleri tekerlekli sandalye</string>
     <string name="app_mode_go_cart">Go-kart</string>
     <string name="osm_edit_closed_note">Kapatılmış OSM Notu</string>
+    <string name="add_to_a_track">İzlemeye ekle</string>
+    <string name="set_working_days_to_continue">Devam etmek için çalışma günlerini ayarlamalısınız</string>
+    <string name="route_between_points">Noktalar arasındaki güzergah</string>
+    <string name="plan_a_route">Güzergah planla</string>
 </resources>
