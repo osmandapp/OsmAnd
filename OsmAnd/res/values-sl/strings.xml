@@ -117,7 +117,7 @@
     <string name="offline_navigation_not_available">Navigacija OsmAnd brez povezave trenutno ni na voljo.</string>
     <string name="left_side_navigation">Promet po levi strani</string>
     <string name="left_side_navigation_descr">Možnost izberite za države, kjer se vozi po levi strani ceste.</string>
-    <string name="unknown_from_location">Izhodiščna točka še ni določena</string>
+    <string name="unknown_from_location">Izhodiščna točka še ni določena.</string>
     <string name="unknown_location">Trenutno mesto še ni določeno.</string>
     <string name="modify_transparency">Spremeni prosojnost (0 – prosojno, 255 – neprosojno)</string>
     <string name="confirm_interrupt_download">Ali želite prekiniti prejemanje datoteke?</string>
@@ -191,7 +191,7 @@
     <string name="direction_style_sidewise">Bočno (8 sektorjev)</string>
     <string name="direction_style_clockwise">Urno (12 sektorjev)</string>
     <string name="settings_direction_style">Slog prikazovanja smeri</string>
-    <string name="settings_direction_style_descr">Izbor sloga za prikaz smeri med premikanjem.</string>
+    <string name="settings_direction_style_descr">Izbor sloga za prikaz smeri med premikanjem</string>
     <string name="i_am_here">Tukaj sem</string>
     <string name="send_files_to_osm">Ali želite poslati datoteko GPX na OSM?</string>
     <string name="validate_gpx_upload_name_pwd">Določite uporabniško ime in geslo OSM za nalaganje datotek GPX.</string>
@@ -628,20 +628,20 @@
     <string name="map_transparency">Prozornost osnovnega zemljevida</string>
     <string name="layer_underlay">Podloga zemljevida …</string>
     <string name="map_underlay">Podloga zemljevida</string>
-    <string name="map_underlay_descr">Izbor podloge uporabljenega zemljevida.</string>
+    <string name="map_underlay_descr">Izbor podloge uporabljenega zemljevida</string>
     <string name="layer_overlay">Prekrivni zemljevid …</string>
     <string name="shared_string_none">Brez</string>
     <string name="map_overlay">Prekrivni zemljevid</string>
     <string name="map_overlay_descr">Izbor prekrivnega zemljevida</string>
     <string name="tile_source_already_installed">Zemljevid je že nameščen. Nastavitve bodo posodobljene.</string>
-    <string name="select_tile_source_to_install">Izbor zemljevidov za namestitev ali posodobitev</string>
+    <string name="select_tile_source_to_install">Izbor zemljevidov za namestitev ali posodobitev.</string>
     <string name="internet_not_available">Opravila ni mogoče izvesti brez vzpostavljene povezave z internetom.</string>
     <string name="install_more">Namesti več …</string>
     <string name="create_poi_link_to_osm_doc">Določitev <u>spletnega OSM</u> s slikami.</string>
     <string name="error_doing_search">Iskanja v načinu brez povezave ni mogoče izvesti.</string>
     <string name="search_osm_offline">Poišči mesto na zemljevidu</string>
     <string name="send_location_email_pattern">Za ogled mesta sledite povezavi spletnega brskalnika %1$s ali povezavi Android %2$s</string>
-    <string name="add_waypoint_dialog_added">Vmesna točka GPX »{0}« je dodana.</string>
+    <string name="add_waypoint_dialog_added">Vmesna točka GPX »{0}« je dodana</string>
     <string name="add_waypoint_dialog_title">Dodaj vmesno točko na shranjeno sled GPX</string>
     <string name="context_menu_item_add_waypoint">Dodaj vmesno točko na sled GPX</string>
     <string name="transport">Prevoz</string>
@@ -685,11 +685,11 @@
     <string name="maps_could_not_be_downloaded">Tega zemljevida ni mogoče prejeti</string>
     <string name="continuous_rendering">Stalno izrisovanje</string>
     <string name="continuous_rendering_descr">Izvaja stalno izrisovanje namesto slike-po-sliko.</string>
-    <string name="rendering_exception">Ni mogoče izrisati izbranega področja</string>
+    <string name="rendering_exception">Ni mogoče izrisati izbranega področja.</string>
     <string name="renderer_load_sucess">Izrisovalnik je naložen</string>
-    <string name="renderer_load_exception">Izrisovalnika ni mogoče naložiti</string>
+    <string name="renderer_load_exception">Izrisovalnika ni mogoče naložiti.</string>
     <string name="renderers">Vektorski izrisovalnik</string>
-    <string name="renderers_descr">Izberite videz izrisovalnika.</string>
+    <string name="renderers_descr">Izberite videz izrisovalnika</string>
     <string name="poi_context_menu_website">Pokaži spletišče POI</string>
     <string name="poi_context_menu_call">Pokaži telefon točke POI</string>
     <string name="download_type_to_filter">Poišči …</string>
@@ -702,7 +702,7 @@
     <string name="no_vector_map_loaded">Vektorski zemljevidi niso naloženi</string>
     <string name="gpx_files_not_found">V mapi sledi ni najti mogoče nobene datoteke GPX.</string>
     <string name="layer_gpx_layer">Datoteke GPX …</string>
-    <string name="error_reading_gpx">Napaka med branjem podatkov GPX</string>
+    <string name="error_reading_gpx">Napaka med branjem podatkov GPX.</string>
     <string name="vector_data">Vektorski zemljevidi za delo brez povezave</string>
     <string name="transport_context_menu">Iskanje prevoza na postaji</string>
     <string name="rotate_map_to_bearing_descr">Poravnava zemljevida:</string>
@@ -737,6 +737,7 @@
 \n
 \n OsmAnd+ je plačljiva različica programa. Z nakupom podprete projekt, razvoj programske kode, nove zmožnosti programa in pridobite dostop do vseh najnovejših posodobitev.
 \n 
+\n
 \n Pomembnejše lastnosti:
 \n • Popolnoma delujoč tudi brez povezave (shrani podatke vektorskih zemljevidov v mapo po izbiri)
 \n • Na voljo so stisnjeni vektorski podatki zemljevida za cel svet
@@ -751,7 +752,7 @@
 \n  - z nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja
 \n  - z nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS).
 \n"</string>
-    <string name="error_occurred_loading_gpx">Ni mogoče naložiti datoteke GPX</string>
+    <string name="error_occurred_loading_gpx">Ni mogoče naložiti datoteke GPX.</string>
     <string name="send_report">Pošlji poročilo</string>
     <string name="none_region_found">Na kartici SD ni podatkov območij za uporabo brez povezave.</string>
     <string name="poi_namefinder_query_empty">Vpišite niz za iskanje točk POI</string>
@@ -770,7 +771,7 @@
     <string name="background_service_wait_int_descr">Nastavitev najdaljšega časa čakanja za prilagajanje trenutne točke.</string>
     <string name="background_service_wait_int">Najdaljši časa čakanja prilagajanja</string>
     <string name="network_provider">Omrežje</string>
-    <string name="background_service_int_descr">Interval prebujanja uporabljenih servisev v ozadju.</string>
+    <string name="background_service_int_descr">Interval prebujanja uporabljenih servisev v ozadju:</string>
     <string name="background_service_int">Interval prebujanja sprejemnika GPS</string>
     <string name="background_service_provider_descr">Način določevanja mesta med izvajanjem v ozadju:</string>
     <string name="background_service_provider">Ponudnik mesta</string>
@@ -796,7 +797,7 @@
     <string name="search_poi_location">Poteka čakanje na signal …</string>
     <string name="search_near_map">Poišči v bližini trenutne sredine zemljevida</string>
     <string name="fav_saved_sucessfully">Priljubljene točke so shranjene v {0}</string>
-    <string name="opening_hours_not_supported">Oblike zapisa delovnega časa ni mogoče spremeniti</string>
+    <string name="opening_hours_not_supported">Oblike zapisa delovnega časa ni mogoče spremeniti.</string>
     <string name="add_new_rule">Dodajanje novega pravila</string>
     <string name="transport_Routes">Poti</string>
     <string name="transport_Stop">Postaja</string>
@@ -812,8 +813,8 @@
     <string name="show_transport_over_map_description">Pokaži postaje javnega prevoza na zemljevidu.</string>
     <string name="show_transport_over_map">Pokaži postaje prevoza</string>
     <string name="update_poi_success">Podatki POI podatki so posodobljeni (naloženo {0})</string>
-    <string name="update_poi_error_local">Seznama točk POI ni mogoče posodobiti</string>
-    <string name="update_poi_error_loading">S strežnika ni mogoče naložiti podatkov</string>
+    <string name="update_poi_error_local">Seznama točk POI ni mogoče posodobiti.</string>
+    <string name="update_poi_error_loading">S strežnika ni mogoče naložiti podatkov.</string>
     <string name="update_poi_no_offline_poi_index">Ni krajevnih podatkov POI za to območje</string>
     <string name="update_poi_is_not_available_for_zoom">Približanje pogleda omogoči posodabljanje točk POI</string>
     <string name="context_menu_item_update_poi">Posodobi točko POI</string>
@@ -855,12 +856,12 @@
     <string name="loading_streets">Nalaganje ulic …</string>
     <string name="loading_cities">Nalaganje mest …</string>
     <string name="poi">Točke POI</string>
-    <string name="error_occurred_saving_gpx">Datoteke GPX ni mogoče shraniti</string>
-    <string name="error_calculating_route">Poti ni mogoče določiti</string>
-    <string name="error_calculating_route_occured">Poti ni mogoče določiti</string>
-    <string name="empty_route_calculated">Določena pot je brez podatkov</string>
+    <string name="error_occurred_saving_gpx">Datoteke GPX ni mogoče shraniti.</string>
+    <string name="error_calculating_route">Poti ni mogoče določiti.</string>
+    <string name="error_calculating_route_occured">Poti ni mogoče določiti.</string>
+    <string name="empty_route_calculated">Določena pot je brez podatkov.</string>
     <string name="new_route_calculated_dist">Izračunana nova pot, razdalja</string>
-    <string name="arrived_at_destination">Prispeli ste na cilj</string>
+    <string name="arrived_at_destination">Prispeli ste.</string>
     <string name="invalid_locations">Koordinate niso veljavne!</string>
     <string name="go_back_to_osmand">Pojdi nazaj na zemljevid OsmAnd</string>
     <string name="loading_data">Nalaganje podatkov …</string>
@@ -907,7 +908,7 @@
     <string name="recording_unavailable">ni na voljo</string>
     <string name="recording_context_menu_arecord">Posnemi zvočni zaznamek</string>
     <string name="recording_context_menu_vrecord">Posnemi video zaznamek</string>
-    <string name="recording_can_not_be_played">Posnetka ni mogoče predvajati</string>
+    <string name="recording_can_not_be_played">Posnetka ni mogoče predvajati.</string>
     <string name="recording_context_menu_delete">Izbriši posnetek</string>
     <string name="recording_is_recorded">Zvok oziroma video se snema. Za ustavitev pritisnite gumb gradnika AV.</string>
     <string name="layer_recordings">Sloj posnetka</string>
@@ -1092,7 +1093,7 @@
     <string name="guidance_preferences_descr">Nastavitve navigacije</string>
     <string name="disable_complex_routing_descr">Onemogoči dvofazno usmerjanje za avtomobilsko navigacijo.</string>
     <string name="routing_preferences_descr">Nastavitve usmerjanja</string>
-    <string name="speech_rate_descr">Določitev hitrosti govora za TTS.</string>
+    <string name="speech_rate_descr">Določite hitrost govora za besedilo-v-govor (TTS).</string>
     <string name="speech_rate">Hitrost govora</string>
     <string name="complex_route_calculation_failed">Hitri izračun poti je spodletel (%s), zato bo uporabljen počasnejši način izračuna.</string>
     <string name="disable_complex_routing">Onemogoči zapleteno usmerjanje</string>
@@ -1149,7 +1150,7 @@
     <string name="routing_attr_avoid_ferries_description">Izogne se trajektom</string>
     <string name="routing_attr_avoid_motorway_name">Brez avtocest</string>
     <string name="routing_attr_avoid_motorway_description">Izogne se avtocestam</string>
-    <string name="routing_attr_weight_name">Omejitev teže vozila</string>
+    <string name="routing_attr_weight_name">Omejitev teže</string>
     <string name="routing_attr_weight_description">Vodenje po poteh z omejitvijo dovoljene teže vozila.</string>
     <string name="app_mode_truck">Tovorno vozilo</string>
     <string name="index_item_world_bitcoin_payments">Svetovna plačila Bitcoin</string>
@@ -1289,7 +1290,7 @@
     <string name="arrival_distance_factor_at_last">Zadnji metri pred ciljem</string>
     <string name="rendering_attr_coloredBuildings_name">Z barvo označi vrsto stavbe</string>
     <string name="av_camera_pic_size">Velikost fotografije</string>
-    <string name="av_camera_pic_size_descr">Izberite velikost posnetkov vgrajenega fotoaparata.</string>
+    <string name="av_camera_pic_size_descr">Nastavite velikost posnetkov fotoaparata</string>
     <string name="download_additional_maps">Prejem manjkajočih zemljevidov %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Več …</string>
     <string name="rendering_value_car_name">Vožnja z avtomobilom</string>
@@ -2854,7 +2855,7 @@
     <string name="shared_string_dont">Ne objavi</string>
     <string name="shared_string_do">Objavi</string>
     <string name="download_wikipedia_description">Prejmite prispevke z Wikipedija o %1$s za pregled brez povezave.</string>
-    <string name="test_voice_desrc">Pritisnite na gumb in poslušajte glasovni odziv za ugotavljanje manjkajočih oziroma napačnih navodil.</string>
+    <string name="test_voice_desrc">Pritisnite na gumb in poslušajte glasovni odziv, da bi slišali, če je manjkajoč oziroma napačen</string>
     <string name="osm_live_subscriptions">Naročnine</string>
     <string name="add_destination_point">Dodaj cilj</string>
     <string name="add_intermediate_point">Dodaj vmesni cilj</string>
@@ -3337,4 +3338,9 @@
     <string name="app_mode_wheelchair">Invalidski voziček</string>
     <string name="app_mode_go_cart">Gokart</string>
     <string name="osm_edit_closed_note">Zaprta opomba OSM</string>
+    <string name="set_working_days_to_continue">Za nadaljevanje morate izpolniti izbor delovnih dni</string>
+    <string name="route_between_points">Pot med točkama/-i</string>
+    <string name="plan_a_route">Načrtujte pot</string>
+    <string name="add_to_a_track">Dodaj na sled</string>
+    <string name="routing_attr_width_name">Omejitev širine</string>
 </resources>
