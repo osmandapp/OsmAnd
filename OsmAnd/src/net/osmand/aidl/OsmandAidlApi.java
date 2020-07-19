@@ -44,6 +44,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -177,6 +178,7 @@ public class OsmandAidlApi {
 
 	private static final String AIDL_EXECUTE_QUICK_ACTION = "aidl_execute_quick_action";
 	private static final String AIDL_QUICK_ACTION_NUMBER = "aidl_quick_action_number";
+	private static final String AIDL_LOCK_STATE = "lock_state";
 
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
@@ -228,6 +230,7 @@ public class OsmandAidlApi {
 		registerShowSqliteDbFileReceiver(mapActivity);
 		registerHideSqliteDbFileReceiver(mapActivity);
 		registerExecuteQuickActionReceiver(mapActivity);
+		registerLockStateReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		aMapPointUpdateListener = mapActivity;
@@ -853,7 +856,24 @@ public class OsmandAidlApi {
 		};
 		registerReceiver(executeQuickActionReceiver, mapActivity, AIDL_EXECUTE_QUICK_ACTION);
 	}
-
+	
+	private void registerLockStateReceiver(MapActivity mapActivity) {
+		BroadcastReceiver lockStateReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				boolean lock = intent.getBooleanExtra(AIDL_LOCK_STATE,false);
+				LockHelper lh = app.getLockHelper();
+				if(lock) {
+					lh.lock();
+				}
+				else{
+					lh.unlock();
+				}
+			}
+		};
+		registerReceiver(lockStateReceiver, mapActivity, AIDL_LOCK_STATE);
+	}
+	
 	public void registerMapLayers(@NonNull MapActivity mapActivity) {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
 			connectedApp.registerMapLayers(mapActivity);
@@ -1691,7 +1711,13 @@ public class OsmandAidlApi {
 		app.sendBroadcast(intent);
 		return true;
 	}
-
+	boolean setLockState(boolean lock) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_LOCK_STATE);
+		intent.putExtra(AIDL_LOCK_STATE, lock);
+		app.sendBroadcast(intent);
+		return true;
+	}
 	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,
 	               final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
 		if (Algorithms.isEmpty(searchQuery) || latitude == 0 || longitude == 0 || callback == null) {
