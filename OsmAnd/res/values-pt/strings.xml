@@ -494,7 +494,7 @@
     <string name="local_openstreetmap_upload">Enviar a modificação OSM</string>
     <string name="local_openstreetmap_delete">Eliminar alteração</string>
     <string name="local_openstreetmap_descr_title">Edição assíncrona de OSM:</string>
-    <string name="local_openstreetmap_settings">POIs / anotações guardados no dispositivo</string>
+    <string name="local_openstreetmap_settings">POIs / anotações guardados no aparelho</string>
     <string name="local_openstreetmap_settings_descr">Mostrar e gerir POIs/anotações OSM guardados localmente.</string>
     <string name="live_monitoring_interval_descr">Especificar intervalo de monitoramento on-line.</string>
     <string name="live_monitoring_interval">Intervalo de rastreamento on-line</string>
@@ -719,8 +719,8 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Local de estacionamento</string>
-    <string name="osmand_parking_plugin_description">Este suplemento grava onde o seu carro foi estacionado e quanto tempo de estacionamento resta (se houver um limite de tempo). 
-\nA localização e o tempo ficam visíveis no painel de controlo do OsmAnd e em um widget no ecrã do mapa. Pode ser adicionado um alarme ao calendário Android como lembrete.</string>
+    <string name="osmand_parking_plugin_description">Permite gravar onde o seu carro foi estacionado e quanto tempo de estacionamento resta (se houver um limite de tempo). 
+\nA localização e o tempo ficam visíveis no painel de controlo do OsmAnd e num widget no ecrã do mapa. Um alarme pode ser adicionado ao calendário Android como lembrete.</string>
     <string name="osmand_parking_plugin_name">Local de estacionamento</string>
     <string name="context_menu_item_add_parking_point">Marcar como local de estacionamento</string>
     <string name="context_menu_item_delete_parking_point">Eliminar um marcador de estacionamento</string>
@@ -1636,7 +1636,7 @@
     <string name="search_radius_proximity">Dentro</string>
     <string name="anonymous_user_hint">Utilizadores anónimos não podem: 
 \n- Criar grupos; 
-\n- Sincronizar grupos e dispositivos com o servidor; 
+\n- Sincronizar grupos e aparelhos com o servidor; 
 \n- Gerir grupos e aparelhos num painel de controlo pessoal no site web.</string>
     <string name="anonymous_user">Utilizador anónimo</string>
     <string name="logged_as">Ligado como %1$s</string>
@@ -3341,20 +3341,20 @@
     <string name="routing_attr_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
     <string name="update_all_maps">Atualizar todos os mapas</string>
     <string name="update_all_maps_q">Tem certeza de que deseja atualizar todos os mapas (%1$d)\?</string>
-    <string name="release_3_5">- Configurações atualizadas do aplicativo e do perfil: as definições estão agora organizadas por tipo. Cada perfil pode ser personalizado separadamente.
-\n
-\n - Novo diálogo para descarregar mapas sugerindo um mapa para descarregar enquanto navega
-\n
-\n - Correções de temas escuros
-\n
-\n - Vários problemas de roteamento resolvidos ao redor do mundo
-\n
-\n - Basemap atualizado com uma rede rodoviária mais detalhada
-\n
-\n - Áreas fixas inundadas em todo o mundo
-\n
-\n - Roteamento do esqui: perfil de elevação e complexidade da rota adicionado aos detalhes da rota
-\n
+    <string name="release_3_5">- Configurações atualizadas da app e do perfil: as definições estão agora organizadas por tipo. Cada perfil pode ser personalizado separadamente. 
+\n 
+\n - Novo diálogo para descarregar mapas sugerindo um mapa para descarregar enquanto navega 
+\n 
+\n - Correções de temas escuros 
+\n 
+\n - Vários problemas de roteamento resolvidos ao redor do mundo 
+\n 
+\n - Basemap atualizado com uma rede rodoviária mais detalhada 
+\n 
+\n - Áreas fixas inundadas em todo o mundo 
+\n 
+\n - Roteamento do esqui: perfil de elevação e complexidade da rota adicionada aos detalhes da rota 
+\n 
 \n - Outras correções de erros
 \n
 \n</string>
