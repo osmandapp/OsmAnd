@@ -13,10 +13,6 @@ public class SetMapLocationParams extends AidlParams {
 	private float rotation;
 	private boolean animated;
 
-	public SetMapLocationParams(double latitude, double longitude, int zoom, boolean animated) {
-		this(latitude, longitude, zoom, Float.NaN, animated);
-	}
-	
 	public SetMapLocationParams(double latitude, double longitude, int zoom, float rotation, boolean animated) {
 		this.latitude = latitude;
 		this.longitude = longitude;
