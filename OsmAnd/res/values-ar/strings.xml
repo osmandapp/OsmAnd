@@ -3793,7 +3793,7 @@
 \n
 \nحدد %2$s. جميع البيانات المتعلقة كاميرات السرعة: التنبيهات، والإخطارات، سيتم حذف نقاط الاهتمام حتى يتم إعادة تثبيت أوسماند تماما.</string>
     <string name="routing_attr_length_description">تحديد الارتفاع الأعلى المسموح به على الطرق.</string>
-    <string name="routing_attr_length_name">طول الحد</string>
+    <string name="routing_attr_length_name">حد الطول</string>
     <string name="speed_cameras_removed_descr">هذا الجهاز لا يملك كاميرات السرعة.</string>
     <string name="app_mode_inline_skates">أحذية تزلج</string>
     <string name="use_volume_buttons_as_zoom_descr">تمكين التحكم في مستوى التكبير/التصغير بالخريطة باستخدام أزرار مستوى صوت الجهاز.</string>
@@ -3810,4 +3810,8 @@
     <string name="app_mode_wheelchair">منحدرات</string>
     <string name="app_mode_go_cart">عربة التسوق</string>
     <string name="osm_edit_closed_note">أغلق ملاحظة OSM</string>
+    <string name="set_working_days_to_continue">تحتاج إلى تعيين أيام العمل للمتابعة</string>
+    <string name="route_between_points">المسار بين النقاط</string>
+    <string name="plan_a_route">قياس المسافة</string>
+    <string name="add_to_a_track">إضافة إلى مسار</string>
 </resources>
