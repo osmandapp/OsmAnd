@@ -62,10 +62,8 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 			}
 		} else if (mapScrollHelper.isScrollingDirectionKeyCode(keyCode)) {
 			return mapScrollHelper.onKeyDown(keyCode, event);
-		} else if(app.getAidlApi().onKeyEvent(event)) {
-			return true;
 		}
-		return false;
+		return app.getAidlApi().onKeyEvent(event);
 	}
 
 	@Override
@@ -125,12 +123,10 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 				mapActivity.changeZoom(1);
 				return true;
 			}
-		} else if (app.getAidlApi().onKeyEvent(event)){
+		} else if (OsmandPlugin.onMapActivityKeyUp(mapActivity, keyCode)) {
 			return true;
-		} else{
-			return OsmandPlugin.onMapActivityKeyUp(mapActivity, keyCode);
 		}
-		return false;
+		return app.getAidlApi().onKeyEvent(event);
 	}
 
 	@Override

@@ -2358,7 +2358,6 @@ public class OsmandAidlApi {
 				a.points, a.wptPoints, a.wptCategoryNames);
 	}
 
-
 	private Map<Long, Set<Integer>> keyEventCallbacks = new ConcurrentHashMap<>();
 
 	public boolean onKeyEvent(KeyEvent event) {
