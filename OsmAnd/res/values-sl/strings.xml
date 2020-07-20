@@ -731,7 +731,7 @@
 \n• brez povezave ni dostopa do vsebin z Wikipedije.
 \n
 \nOsmAnd je program v razvoju. Napredek projekta je odvisen od finančnih prispevkov, s katerimi se financira razvoj in testiranje novih funkcionalnosti. Razmislite o nakupu aplikacije OsmAnd+, ali financiranju posamezne funkcionalnosti oziroma nenamensko donacijo na spletni strani https://osmand.net.</string>
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions)
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
 \n
 \n OsmAnd+ je odprtokodna programska oprema za navigacijo, ki za prikaz uporablja širok nabor zemljevidov OpenStreetMap (OSM). Vse podatke zemljevidov je mogoče shraniti v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja.
 \n
@@ -747,11 +747,11 @@
 \n • Iskanje naslovov, krajev in zanimivih točk (POI) brez povezave
 \n • Vodenje poti v načinu brez povezave za srednje dolge poti
 \n • Način za avtomobiliste, kolesarje in pešce:
-\n  - z nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom
-\n  - z nastavljivo povečavo zemljevida glede na hitrost gibanja
-\n  - z nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja
-\n  - z nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS).
-\n"</string>
+\n - z nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom
+\n - z nastavljivo povečavo zemljevida glede na hitrost gibanja
+\n - z nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja
+\n - z nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS).
+\n</string>
     <string name="error_occurred_loading_gpx">Ni mogoče naložiti datoteke GPX.</string>
     <string name="send_report">Pošlji poročilo</string>
     <string name="none_region_found">Na kartici SD ni podatkov območij za uporabo brez povezave.</string>
@@ -3306,7 +3306,7 @@
     <string name="choose_icon_color_name">Izbor ikone, barve in imena</string>
     <string name="reorder_profiles">Uredi seznam profilov</string>
     <string name="selected_profile">Izbrani profil</string>
-    <string name="reset_all_profile_settings_descr">Vse nastavitve profila bodo počiščene na stanje takoj po namestitvi.</string>
+    <string name="reset_all_profile_settings_descr">Počisti vse nastavitve profila na stanje takoj po namestitvi.</string>
     <string name="reset_all_profile_settings">Ali želite vse nastavitve profila povrniti na privzete vrednosti\?</string>
     <string name="shared_string_app_default_w_val">Programsko privzeto (%s)</string>
     <string name="profile_type_custom_string">Profil po meri</string>
