@@ -11,7 +11,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -28,12 +27,11 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
@@ -64,7 +62,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import static net.osmand.data.FavouritePoint.*;
+import static net.osmand.data.FavouritePoint.BackgroundType;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
@@ -75,6 +75,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private View view;
 	private EditText nameEdit;
 	private TextView addDelDescription;
+	private TextView addToHiddenGroupInfo;
 	private boolean cancelled;
 	private boolean nightMode;
 	@DrawableRes
@@ -155,6 +156,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		deleteIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
 		ImageView groupListIcon = (ImageView) view.findViewById(R.id.group_list_button_icon);
 		groupListIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_group_select_all, activeColorResId));
+		addToHiddenGroupInfo = view.findViewById(R.id.add_hidden_group_info);
 		View groupList = view.findViewById(R.id.group_list_button);
 		groupList.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -889,17 +891,18 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					}
 				});
 			} else {
+				final String group = items.get(position);
 				holder.groupButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						int previousSelectedPosition = getItemPosition(selectedItemName);
 						selectedItemName = items.get(holder.getAdapterPosition());
 						updateColorSelector(getCategoryColor(selectedItemName), groupRecyclerView.getRootView());
+						addToHiddenGroupInfo.setVisibility(isCategoryVisible(group) ? View.GONE : View.VISIBLE);
 						notifyItemChanged(holder.getAdapterPosition());
 						notifyItemChanged(previousSelectedPosition);
 					}
 				});
-				final String group = items.get(position);
 				holder.groupName.setText(group);
 				holder.pointsCounter.setText(String.valueOf(getCategoryPointsCount(group)));
 				int strokeColor;
@@ -921,15 +924,15 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				}
 				int color;
 				int iconID;
-				if (!isCategoryVisible(group)) {
-					color = ContextCompat.getColor(app, R.color.text_color_secondary_light);
-					iconID = R.drawable.ic_action_hide;
-					holder.groupName.setTypeface(null, Typeface.ITALIC);
-				} else {
+				if (isCategoryVisible(group)) {
 					int categoryColor = getCategoryColor(group);
 					color = categoryColor == 0 ? getDefaultColor() : categoryColor;
 					iconID = R.drawable.ic_action_folder;
 					holder.groupName.setTypeface(null, Typeface.NORMAL);
+				} else {
+					color = ContextCompat.getColor(app, R.color.text_color_secondary_light);
+					iconID = R.drawable.ic_action_hide;
+					holder.groupName.setTypeface(null, Typeface.ITALIC);
 				}
 				holder.groupIcon.setImageDrawable(UiUtilities.tintDrawable(
 						AppCompatResources.getDrawable(app, iconID), color));
