@@ -133,8 +133,8 @@ public class OsmandAidlApi {
 	public static final int KEY_ON_UPDATE = 1;
 	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
 	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
-	public static final int KEY_ON_VOICE_MESSAGE = 5;
-	public static final int KEY_ON_KEY_EVENT = 6;
+	public static final int KEY_ON_VOICE_MESSAGE = 8;
+	public static final int KEY_ON_KEY_EVENT = 16;
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 
