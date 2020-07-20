@@ -186,17 +186,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 
 			final QuadRect latlonRect = cp.getLatLonBounds();
-			double topLatitude = latlonRect.top;
-			double leftLongitude = latlonRect.left;
-			double bottomLatitude = latlonRect.bottom;
-			double rightLongitude = latlonRect.right;
-			// double lat = 0; 
-			// double lon = 0; 
-			// this is buggy lat/lon should be 0 but in that case 
-			// it needs to be fixed in case there is no route points in the view bbox
-			double lat = topLatitude - bottomLatitude + 0.1;  
-			double lon = rightLongitude - leftLongitude + 0.1;
-			drawLocations(tileBox, canvas, topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon);
+			final QuadRect correctedQuadRect = getCorrectedQuadRect(latlonRect);
+			drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left, correctedQuadRect.bottom, correctedQuadRect.right);
 
 			if (trackChartPoints != null) {
 				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -371,52 +362,6 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
             survivor.set(end, (byte) 1);
         }
     }
-
-    static class PathPoint {
-		float x;
-		float y;
-		double angle;
-		GeometryWayStyle style;
-
-		private Matrix matrix = new Matrix();
-
-		PathPoint(float x, float y, double angle, GeometryWayStyle style) {
-			this.x = x;
-			this.y = y;
-			this.angle = angle;
-			this.style = style;
-		}
-
-		protected Matrix getMatrix() {
-			return matrix;
-		}
-
-		void draw(Canvas canvas, GeometryWayContext context) {
-			if (style != null && style.getPointBitmap() != null) {
-				Bitmap bitmap = style.getPointBitmap();
-				Integer pointColor = style.getPointColor();
-				float paintH2 = bitmap.getHeight() / 2f;
-				float paintW2 = bitmap.getWidth() / 2f;
-
-				matrix.reset();
-				matrix.postRotate((float) angle, paintW2, paintH2);
-				matrix.postTranslate(x - paintW2, y - paintH2);
-				if (pointColor != null) {
-					Paint paint = context.getPaintIconCustom();
-					paint.setColorFilter(new PorterDuffColorFilter(pointColor, Mode.SRC_IN));
-					canvas.drawBitmap(bitmap, matrix, paint);
-				} else {
-					if (style.hasPaintedPointBitmap()) {
-						Paint paint = context.getPaintIconCustom();
-						paint.setColorFilter(null);
-						canvas.drawBitmap(bitmap, matrix, paint);
-					} else {
-						canvas.drawBitmap(bitmap, matrix, context.getPaintIcon());
-					}
-				}
-			}
-		}
-	}
 
 	private static class PathAnchor extends PathPoint {
 		PathAnchor(float x, float y, GeometryAnchorWayStyle style) {
@@ -1003,14 +948,14 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 						} else if (lastProjection != null) {
 							lt = lastProjection;
 						}
-						if(lt != null) {
-							addLocation(tb, lt, style, tx, ty, angles, distances, 0, styles); // first point
+						if (lt != null) {
+							addLocation(tb, lt.getLatitude(), lt.getLongitude(), style, tx, ty, angles, distances, 0, styles); // first point
 						}
 					}
-					addLocation(tb, ls, style, tx, ty, angles, distances, dist, styles);
+					addLocation(tb, ls.getLatitude(), ls.getLongitude(), style, tx, ty, angles, distances, dist, styles);
 					previousVisible = true;
 				} else if (previousVisible) {
-					addLocation(tb, ls, style, tx, ty, angles, distances, previous == -1 ? 0 : odistances.get(i), styles);
+					addLocation(tb, ls.getLatitude(), ls.getLongitude(), style, tx, ty, angles, distances, previous == -1 ? 0 : odistances.get(i), styles);
 					double distToFinish = 0;
 					for(int ki = i + 1; ki < odistances.size(); ki++) {
 						distToFinish += odistances.get(ki);
@@ -1027,7 +972,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		private boolean addPoint(RotatedTileBox tb, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, GeometryWayStyle style, boolean previousVisible, Location lastPoint) {
 			if (leftLongitude <= lastPoint .getLongitude() && lastPoint .getLongitude() <= rightLongitude
 					&& bottomLatitude <= lastPoint .getLatitude() && lastPoint .getLatitude() <= topLatitude) {
-				addLocation(tb, lastPoint, style, tx, ty, angles, distances, 0, styles);
+				addLocation(tb, lastPoint.getLatitude(), lastPoint.getLongitude(), style, tx, ty, angles, distances, 0, styles);
 				previousVisible = true;
 			}
 			return previousVisible;
@@ -1039,33 +984,6 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			distances.clear();
 			angles.clear();
 			styles.clear();
-		}
-
-		private void addLocation(RotatedTileBox tb, Location ls, GeometryWayStyle style, List<Float> tx, List<Float> ty,
-				List<Double> angles, List<Double> distances, double dist, List<GeometryWayStyle> styles) {
-			float x = tb.getPixXFromLatLon(ls.getLatitude(), ls.getLongitude());
-			float y = tb.getPixYFromLatLon(ls.getLatitude(), ls.getLongitude());
-			float px = x;
-			float py = y;
-			int previous = tx.size() - 1;
-			if (previous >= 0 && previous < tx.size()) {
-				px = tx.get(previous);
-				py = ty.get(previous);
-			}
-			double angle = 0;
-			if (px != x || py != y) {
-				double angleRad = Math.atan2(y - py, x - px);
-				angle = (angleRad * 180 / Math.PI) + 90f;
-			}
-			double distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
-			if(dist != 0) {
-				distSegment = dist;
-			}
-			tx.add(x);
-			ty.add(y);
-			angles.add(angle);
-			distances.add(distSegment);
-			styles.add(style);
 		}
 	}
 	

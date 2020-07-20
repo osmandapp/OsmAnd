@@ -1022,7 +1022,7 @@ public class MapInfoWidgetsFactory {
 			}
 			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowTopControls() || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
 				updateVisibility(false);
-			} else if (!showClosestWaypointFirstInAddress && updateWaypoint()) {
+			} else if (showClosestWaypointFirstInAddress && updateWaypoint()) {
 				updateVisibility(true);
 				AndroidUiHelper.updateVisibility(addressText, false);
 				AndroidUiHelper.updateVisibility(addressTextShadow, false);

@@ -11,13 +11,10 @@
 	Thx - Hardy
 
 -->
-    <string name="track_coloring_solid">Solid</string>
-    <string name="gpx_direction_arrows">Direction arrows</string>
-    <string name="shared_string_custom">Custom</string>
-    <string name="gpx_split_interval_none_descr">Select the desired splitting option: by time or by distance.</string>
-    <string name="gpx_split_interval_descr">Select the interval at which marks with distance or time on the track will be displayed.</string>
-    <string name="select_track_width">Select width</string>
-    <string name="track_show_start_finish_icons">Show start finish icons</string>
+    <string name="add_to_a_track">Add to a Track</string>
+    <string name="plan_a_route">Plan a route</string>
+    <string name="route_between_points">Route between points</string>
+    <string name="set_working_days_to_continue">You need to set working days to continue</string>
     <string name="osm_edit_closed_note">Closed OSM Note</string>
     <string name="app_mode_go_cart">Go-cart</string>
     <string name="app_mode_wheelchair_forward">Wheelchair forward</string>
@@ -1394,7 +1391,7 @@
     <string name="gpx_add_track">Add more…</string>
     <string name="shared_string_appearance">Appearance</string>
     <string name="trip_rec_notification_settings">Turn on quick recording</string>
-    <string name="trip_rec_notification_settings_desc">Display a system notification allowing trip recording.</string>
+    <string name="trip_rec_notification_settings_desc">Display a system notification allowing to start trip recording.</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="shared_string_resume">Resume</string>
     <string name="shared_string_continue">Continue</string>

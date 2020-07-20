@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
@@ -470,6 +471,80 @@ public abstract class OsmandMapLayer {
 		}
 	}
 
+	public static class PathPoint {
+		float x;
+		float y;
+		double angle;
+		GeometryWayStyle style;
+
+		private Matrix matrix = new Matrix();
+
+		PathPoint(float x, float y, double angle, GeometryWayStyle style) {
+			this.x = x;
+			this.y = y;
+			this.angle = angle;
+			this.style = style;
+		}
+
+		protected Matrix getMatrix() {
+			return matrix;
+		}
+
+		void draw(Canvas canvas, GeometryWayContext context) {
+			if (style != null && style.getPointBitmap() != null) {
+				Bitmap bitmap = style.getPointBitmap();
+				Integer pointColor = style.getPointColor();
+				float paintH2 = bitmap.getHeight() / 2f;
+				float paintW2 = bitmap.getWidth() / 2f;
+
+				matrix.reset();
+				matrix.postRotate((float) angle, paintW2, paintH2);
+				matrix.postTranslate(x - paintW2, y - paintH2);
+				if (pointColor != null) {
+					Paint paint = context.getPaintIconCustom();
+					paint.setColorFilter(new PorterDuffColorFilter(pointColor, Mode.SRC_IN));
+					canvas.drawBitmap(bitmap, matrix, paint);
+				} else {
+					if (style.hasPaintedPointBitmap()) {
+						Paint paint = context.getPaintIconCustom();
+						paint.setColorFilter(null);
+						canvas.drawBitmap(bitmap, matrix, paint);
+					} else {
+						canvas.drawBitmap(bitmap, matrix, context.getPaintIcon());
+					}
+				}
+			}
+		}
+	}
+
+	protected void addLocation(RotatedTileBox tb, double latitude, double longitude, GeometryWayStyle style,
+	                           List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances,
+	                           double dist, List<GeometryWayStyle> styles) {
+		float x = tb.getPixXFromLatLon(latitude, longitude);
+		float y = tb.getPixYFromLatLon(latitude, longitude);
+		float px = x;
+		float py = y;
+		int previous = tx.size() - 1;
+		if (previous >= 0) {
+			px = tx.get(previous);
+			py = ty.get(previous);
+		}
+		double angle = 0;
+		if (px != x || py != y) {
+			double angleRad = Math.atan2(y - py, x - px);
+			angle = (angleRad * 180 / Math.PI) + 90f;
+		}
+		double distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
+		if (dist != 0) {
+			distSegment = dist;
+		}
+		tx.add(x);
+		ty.add(y);
+		angles.add(angle);
+		distances.add(distSegment);
+		styles.add(style);
+	}
+
 	public int calculatePath(RotatedTileBox tb, List<Float> xs, List<Float> ys, List<GeometryWayStyle> styles, List<Pair<Path, GeometryWayStyle>> paths) {
 		boolean segmentStarted = false;
 		float prevX = xs.get(0);
@@ -559,6 +634,20 @@ public abstract class OsmandMapLayer {
 		boundIntersections.insert(visibleRect,
 				new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom));
 		return false;
+	}
+
+	public QuadRect getCorrectedQuadRect(QuadRect latlonRect) {
+		double topLatitude = latlonRect.top;
+		double leftLongitude = latlonRect.left;
+		double bottomLatitude = latlonRect.bottom;
+		double rightLongitude = latlonRect.right;
+		// double lat = 0;
+		// double lon = 0;
+		// this is buggy lat/lon should be 0 but in that case
+		// it needs to be fixed in case there is no route points in the view bbox
+		double lat = topLatitude - bottomLatitude + 0.1;
+		double lon = rightLongitude - leftLongitude + 0.1;
+		return new QuadRect(leftLongitude - lon, topLatitude + lat, rightLongitude + lon, bottomLatitude - lat);
 	}
 
 	public QuadRect calculateRect(float x, float y, float width, float height) {

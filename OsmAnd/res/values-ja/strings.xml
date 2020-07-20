@@ -2593,7 +2593,7 @@ POIの更新は利用できません</string>
 \n</string>
     <string name="rendering_attr_hidePOILabels_name">POIのラベル</string>
     <string name="context_menu_read_article">記事を読む</string>
-    <string name="context_menu_points_of_group">グループのすべてのポイント</string>
+    <string name="context_menu_points_of_group">同じグループのお気に入り地点</string>
     <string name="additional_actions">追加のアクション</string>
     <string name="av_locations_selected_desc">選択された注釈と座標が付属しているGPXファイル。</string>
     <string name="av_locations_all_desc">全ての注釈と座標が付属していGPXファイル。</string>

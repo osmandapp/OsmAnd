@@ -3815,4 +3815,15 @@
     <string name="plugin_wikipedia_description">Uzyskaj informacje o interesujących miejscach z Wikipedii. Jest to kieszonkowy przewodnik offline - wystarczy włączyć wtyczkę Wikipedii i cieszyć się artykułami o obiektach wokół ciebie.</string>
     <string name="app_mode_enduro_motorcycle">Motocykl Enduro</string>
     <string name="app_mode_motor_scooter">Skuter</string>
+    <string name="routing_attr_length_description">Określ długość pojazdu dozwoloną na trasach.</string>
+    <string name="routing_attr_length_name">Limit długości</string>
+    <string name="app_mode_inline_skates">Rolki</string>
+    <string name="use_volume_buttons_as_zoom">Przyciski głośności jako powiększenie</string>
+    <string name="app_mode_wheelchair">Wózek inwalidzki</string>
+    <string name="app_mode_go_cart">Gokart</string>
+    <string name="osm_edit_closed_note">Zamknięte Uwagi OSM</string>
+    <string name="set_working_days_to_continue">Aby kontynuować, musisz ustawić dni robocze</string>
+    <string name="route_between_points">Droga pomiędzy punktami</string>
+    <string name="plan_a_route">Zaplanuj trasę</string>
+    <string name="add_to_a_track">Dodaj do śladów</string>
 </resources>

@@ -2067,7 +2067,7 @@
     <string name="gpx_logging_no_data">Aucune donnée</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
-    <string name="trip_rec_notification_settings_desc">Afficher une notification système permettant d’enregistrer l\'itinéraire.</string>
+    <string name="trip_rec_notification_settings_desc">Afficher une notification système permettant de démarrer l\'enregistrement de l\'itinéraire.</string>
     <string name="gpx_no_tracks_title">Vous n\'avez pas encore de fichier GPX</string>
     <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers GPX dans le dossier</string>
     <string name="gpx_add_track">Autre trace GPX …</string>
@@ -3802,4 +3802,8 @@
     <string name="osm_edit_closed_note">Note OSM fermée</string>
     <string name="app_mode_wheelchair">Fauteuil roulant</string>
     <string name="app_mode_wheelchair_forward">Fauteuil roulant vers l\'avant</string>
+    <string name="set_working_days_to_continue">Vous devez définir les jours travaillés avant de poursuivre</string>
+    <string name="route_between_points">Itinéraire entre points</string>
+    <string name="plan_a_route">Planifier un itinéraire</string>
+    <string name="add_to_a_track">Ajouter à une trace</string>
 </resources>

@@ -1303,4 +1303,14 @@
     <string name="subscription_osmandlive_item">Ajerred - OsmAnd Srid</string>
     <string name="osmand_purchases_item">Tiɣin deg OsmAnd</string>
     <string name="navigation_profiles_item">Imuɣna n tunigin</string>
+    <string name="routing_attr_piste_type_skitour_name">Uccuḍ deg udfel</string>
+    <string name="map_markers_item">Ticṛaḍ</string>
+    <string name="shared_string_capacity">Akettur</string>
+    <string name="shared_string_always">Yalas</string>
+    <string name="shared_string_resume">kemmel</string>
+    <string name="shared_string_uninstall">Désinstaller</string>
+    <string name="shared_string_legal">Asaḍuf</string>
+    <string name="lang_sh">Tasiṛbu-karwaṣit</string>
+    <string name="rendering_attr_hideBuildings_name">Ixxamen</string>
+    <string name="item_deleted">%1$s yettwasfeḍ</string>
 </resources>

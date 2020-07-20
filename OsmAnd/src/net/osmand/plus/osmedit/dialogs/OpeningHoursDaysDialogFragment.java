@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -57,21 +58,26 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 			}
 
 		});
-		builder.setPositiveButton(createNew ? R.string.next_proceed
-						: R.string.shared_string_save,
+		builder.setPositiveButton(createNew ? R.string.next_proceed : R.string.shared_string_save,
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						boolean[] days = item.getDays();
+						boolean activeDaysAvailable = false;
 						for (int i = 0; i < 7; i++) {
 							days[(first + 5 + i) % 7] = dayToShow[i];
+							activeDaysAvailable = activeDaysAvailable || dayToShow[i];
 						}
-						if (createNew) {
-							OpeningHoursHoursDialogFragment.createInstance(item, positionToAdd, true, 0)
-									.show(getFragmentManager(), "TimePickerDialogFragment");
+						if (activeDaysAvailable) {
+							if (createNew) {
+								OpeningHoursHoursDialogFragment.createInstance(item, positionToAdd, true, 0)
+										.show(getFragmentManager(), "TimePickerDialogFragment");
+							} else {
+								((BasicEditPoiFragment) getParentFragment())
+										.setBasicOpeningHoursRule(item, positionToAdd);
+							}
 						} else {
-							((BasicEditPoiFragment) getParentFragment())
-									.setBasicOpeningHoursRule(item, positionToAdd);
+							Toast.makeText(getContext(), getString(R.string.set_working_days_to_continue), Toast.LENGTH_SHORT).show();
 						}
 					}
 
