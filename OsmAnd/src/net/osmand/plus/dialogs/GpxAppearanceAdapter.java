@@ -94,7 +94,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 		}
 	}
 
-	public void init() {
+	private void init() {
 		addAll(getAppearanceItems(app, adapterType));
 	}
 

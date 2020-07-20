@@ -22,37 +22,37 @@
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"
-			android:background="@drawable/radio_button_left"
+			android:background="?attr/btn_radio_button_left"
 			android:button="@android:color/transparent"
 			android:checked="true"
 			android:foreground="?attr/selectableItemBackground"
 			android:gravity="center"
 			android:text="@string/shared_string_none"
-			android:textColor="@drawable/radio_flat_text_selector" />
+			android:textColor="@drawable/radio_flat_text_selector_light" />
 
 		<RadioButton
 			android:id="@+id/time_split"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"
-			android:background="@drawable/radio_button_center"
+			android:background="?attr/btn_radio_button_center"
 			android:button="@android:color/transparent"
 			android:foreground="?attr/selectableItemBackground"
 			android:gravity="center"
 			android:text="@string/shared_string_time"
-			android:textColor="@drawable/radio_flat_text_selector" />
+			android:textColor="@drawable/radio_flat_text_selector_light" />
 
 		<RadioButton
 			android:id="@+id/distance_split"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"
-			android:background="@drawable/radio_button_right"
+			android:background="?attr/btn_radio_button_right"
 			android:button="@android:color/transparent"
 			android:foreground="?attr/selectableItemBackground"
 			android:gravity="center"
 			android:text="@string/distance"
-			android:textColor="@drawable/radio_flat_text_selector"
+			android:textColor="@drawable/radio_flat_text_selector_light"
 			android:textSize="@dimen/default_desc_text_size" />
 
 	</RadioGroup>

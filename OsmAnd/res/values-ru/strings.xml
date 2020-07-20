@@ -3823,4 +3823,6 @@
     <string name="set_working_days_to_continue">Необходимо указать рабочие дни для продолжения</string>
     <string name="route_between_points">Маршрут между пунктами</string>
     <string name="plan_a_route">План маршрута</string>
+    <string name="gpx_split_interval_none_descr">Выберите нужный вариант разбиения: по времени или по расстоянию.</string>
+    <string name="gpx_split_interval_descr">Выберите интервал с которым будут отображаться метки с расстоянием или временем на треке.</string>
 </resources>

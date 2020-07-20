@@ -27,8 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.SplitTrackAsyncTask;
-import net.osmand.plus.myplaces.SplitTrackAsyncTask.SplitTrackListener;
+import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 
 import org.apache.commons.logging.Log;
 

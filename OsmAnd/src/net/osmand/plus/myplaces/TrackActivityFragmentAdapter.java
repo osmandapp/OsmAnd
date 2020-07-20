@@ -54,7 +54,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.measurementtool.NewGpxData;
-import net.osmand.plus.myplaces.SplitTrackAsyncTask.SplitTrackListener;
+import net.osmand.plus.track.SplitTrackAsyncTask;
+import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSplitType;
@@ -352,6 +353,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 						showTemporaryObjectOnMap(getGpx());
 					}
 				});
+				appearanceView.setVisibility(View.VISIBLE);
 				splitColorView.setVisibility(View.VISIBLE);
 				divider.setVisibility(View.VISIBLE);
 			} else {
@@ -368,7 +370,8 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		GPXFile gpx = getGpx();
 		WptPt pointToShow = gpx != null ? gpx.findPointToShow() : null;
 		if (activity != null && pointToShow != null) {
-			if (!isGpxFileSelected(gpx)) {
+			boolean gpxFileSelected = isGpxFileSelected(gpx);
+			if (!gpxFileSelected) {
 				Intent intent = activity.getIntent();
 				if (intent != null) {
 					intent.putExtra(TrackActivity.SHOW_TEMPORARILY, true);
@@ -376,6 +379,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			}
 			setTrackVisibilityOnMap(true);
 
+			final OsmandSettings settings = app.getSettings();
 			String trackName;
 			if (gpx.showCurrentTrack) {
 				trackName = app.getString(R.string.shared_string_currently_recording_track);
@@ -384,7 +388,6 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			} else {
 				trackName = gpx.path;
 			}
-			OsmandSettings settings = app.getSettings();
 			settings.setMapLocationToShow(pointToShow.getLatitude(), pointToShow.getLongitude(),
 					settings.getLastKnownMapZoom(),
 					new PointDescription(PointDescription.POINT_TYPE_WPT, trackName),
@@ -394,6 +397,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			MapActivity.launchMapActivityMoveToTop(activity);
 		}
 	}
+
 	private ListPopupWindow createPopupWindow(Activity activity, View anchorView, ListAdapter adapter, OnItemClickListener itemClickListener) {
 		ListPopupWindow popupWindow = new ListPopupWindow(activity);
 		popupWindow.setAnchorView(anchorView);
@@ -646,7 +650,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		List<GpxDisplayGroup> groups = new ArrayList<>();
 		TrackActivity activity = getTrackActivity();
 		if (activity != null) {
-			List<GpxDisplayGroup> result = activity.getGpxDisplayGroups(useDisplayGroups);
+			List<GpxDisplayGroup> result = activity.getGpxFile(useDisplayGroups);
 			for (GpxDisplayGroup group : result) {
 				boolean add = hasFilterType(group.getType());
 				if (add) {
@@ -746,9 +750,9 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	private void updateSplit(@NonNull List<GpxDisplayGroup> groups, @Nullable final SelectedGpxFile selectedGpx) {
+		GPXFile gpxFile = getGpx();
 		TrackActivity activity = getTrackActivity();
 		GpxSplitType gpxSplitType = getGpxSplitType();
-		GPXFile gpxFile = getGpx();
 		if (activity != null && gpxSplitType != null && gpxFile != null) {
 			int timeSplit = 0;
 			double distanceSplit = 0;

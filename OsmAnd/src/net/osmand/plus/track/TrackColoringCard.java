@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
@@ -17,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -28,27 +28,24 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.widgets.FlowLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.getAppearanceItems;
 
 public class TrackColoringCard extends BaseCard {
 
-	private TrackDrawInfo trackDrawInfo;
-	private SelectedGpxFile selectedGpxFile;
+	private final static String SOLID_COLOR = "solid_color";
 
-	private GradientScaleType selectedScaleType;
+	private TrackDrawInfo trackDrawInfo;
 
 	private TrackColoringAdapter coloringAdapter;
+	private TrackAppearanceItem selectedAppearanceItem;
+	private List<TrackAppearanceItem> appearanceItems;
 
-	@ColorInt
-	private int selectedColor;
-
-	public TrackColoringCard(MapActivity mapActivity, SelectedGpxFile selectedGpxFile, TrackDrawInfo trackDrawInfo) {
+	public TrackColoringCard(MapActivity mapActivity, TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
-		this.selectedGpxFile = selectedGpxFile;
+		appearanceItems = getGradientAppearanceItems();
 	}
 
 	@Override
@@ -62,12 +59,23 @@ public class TrackColoringCard extends BaseCard {
 		createColorSelector();
 		updateColorSelector();
 
-		coloringAdapter = new TrackColoringAdapter(Arrays.asList(GradientScaleType.values()));
+		coloringAdapter = new TrackColoringAdapter(appearanceItems);
 		RecyclerView groupRecyclerView = view.findViewById(R.id.recycler_view);
 		groupRecyclerView.setAdapter(coloringAdapter);
 		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), isShowDivider());
+	}
+
+	private List<TrackAppearanceItem> getGradientAppearanceItems() {
+		List<TrackAppearanceItem> items = new ArrayList<>();
+		items.add(new TrackAppearanceItem(SOLID_COLOR, app.getString(R.string.track_coloring_solid), R.drawable.ic_action_circle));
+
+//		for (GradientScaleType scaleType : GradientScaleType.values()) {
+//			items.add(new TrackAppearanceItem(scaleType.name(), scaleType.getHumanString(app), scaleType.getIconId()));
+//		}
+
+		return items;
 	}
 
 	private void createColorSelector() {
@@ -81,13 +89,7 @@ public class TrackColoringCard extends BaseCard {
 		for (int color : colors) {
 			selectColor.addView(createColorItemView(color, selectColor), new FlowLayout.LayoutParams(0, 0));
 		}
-
-		if (selectedGpxFile.isShowCurrentTrack()) {
-			selectedColor = app.getSettings().CURRENT_TRACK_COLOR.get();
-		} else {
-			selectedColor = selectedGpxFile.getGpxFile().getColor(0);
-		}
-		updateColorSelector(selectedColor, selectColor);
+		updateColorSelector(trackDrawInfo.getColor(), selectColor);
 	}
 
 	private View createColorItemView(@ColorInt final int color, final FlowLayout rootView) {
@@ -106,6 +108,12 @@ public class TrackColoringCard extends BaseCard {
 			public void onClick(View v) {
 				updateColorSelector(color, rootView);
 				coloringAdapter.notifyDataSetChanged();
+				trackDrawInfo.setColor(color);
+
+				CardListener listener = getListener();
+				if (listener != null) {
+					listener.onCardPressed(TrackColoringCard.this);
+				}
 			}
 		});
 		colorItemView.setTag(color);
@@ -113,7 +121,7 @@ public class TrackColoringCard extends BaseCard {
 	}
 
 	private void updateColorSelector(int color, View rootView) {
-		View oldColor = rootView.findViewWithTag(selectedColor);
+		View oldColor = rootView.findViewWithTag(trackDrawInfo.getColor());
 		if (oldColor != null) {
 			oldColor.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
 			ImageView icon = oldColor.findViewById(R.id.icon);
@@ -123,19 +131,21 @@ public class TrackColoringCard extends BaseCard {
 		if (newColor != null) {
 			newColor.findViewById(R.id.outline).setVisibility(View.VISIBLE);
 		}
-		selectedColor = color;
-		trackDrawInfo.setColor(color);
 		mapActivity.refreshMap();
 	}
 
-	private GradientScaleType getSelectedScaleType() {
-		if (selectedScaleType == null) {
-			selectedScaleType = trackDrawInfo.getGradientScaleType();
-			if (selectedScaleType == null) {
-				selectedScaleType = GradientScaleType.SOLID;
+	private TrackAppearanceItem getSelectedAppearanceItem() {
+		if (selectedAppearanceItem == null) {
+			GradientScaleType scaleType = trackDrawInfo.getGradientScaleType();
+			for (TrackAppearanceItem item : appearanceItems) {
+				if (scaleType == null && item.getAttrName().equals(SOLID_COLOR)
+						|| scaleType != null && scaleType.name().equals(item.getAttrName())) {
+					selectedAppearanceItem = item;
+					break;
+				}
 			}
 		}
-		return selectedScaleType;
+		return selectedAppearanceItem;
 	}
 
 	private void updateHeader() {
@@ -145,31 +155,43 @@ public class TrackColoringCard extends BaseCard {
 		titleView.setText(R.string.select_color);
 
 		TextView descriptionView = view.findViewById(R.id.description);
-		descriptionView.setText(getSelectedScaleType().getHumanString(view.getContext()));
+		descriptionView.setText(getSelectedAppearanceItem().getLocalizedValue());
 	}
 
 	private void updateColorSelector() {
-		boolean visible = GradientScaleType.SOLID == getSelectedScaleType();
+		boolean visible = getSelectedAppearanceItem().getAttrName().equals(SOLID_COLOR);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.select_color), visible);
 	}
 
-	private class TrackColoringAdapter extends RecyclerView.Adapter<TrackColoringViewHolder> {
+	public void setGradientScaleType(TrackAppearanceItem item) {
+		if (item.getAttrName().equals(SOLID_COLOR)) {
+			trackDrawInfo.setGradientScaleType(null);
+		} else {
+			trackDrawInfo.setGradientScaleType(GradientScaleType.valueOf(item.getAttrName()));
+		}
+		mapActivity.refreshMap();
 
-		private List<GradientScaleType> items;
+		updateHeader();
+		updateColorSelector();
+	}
 
-		private TrackColoringAdapter(List<GradientScaleType> items) {
+	private class TrackColoringAdapter extends RecyclerView.Adapter<TrackAppearanceViewHolder> {
+
+		private List<TrackAppearanceItem> items;
+
+		private TrackColoringAdapter(List<TrackAppearanceItem> items) {
 			this.items = items;
 		}
 
 		@NonNull
 		@Override
-		public TrackColoringViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		public TrackAppearanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			LayoutInflater themedInflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
 			view.getLayoutParams().width = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_width);
 			view.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_height);
 
-			TrackColoringViewHolder holder = new TrackColoringViewHolder(view);
+			TrackAppearanceViewHolder holder = new TrackAppearanceViewHolder(view);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 				AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,
 						R.drawable.ripple_solid_dark_6dp);
@@ -178,16 +200,16 @@ public class TrackColoringCard extends BaseCard {
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final TrackColoringViewHolder holder, int position) {
-			GradientScaleType item = items.get(position);
-			holder.colorKey.setText(item.getHumanString(holder.itemView.getContext()));
+		public void onBindViewHolder(@NonNull final TrackAppearanceViewHolder holder, int position) {
+			TrackAppearanceItem item = items.get(position);
+			holder.title.setText(item.getLocalizedValue());
 
 			updateButtonBg(holder, item);
 
 			int colorId;
-			if (item == GradientScaleType.SOLID) {
+			if (item.getAttrName().equals(SOLID_COLOR)) {
 				colorId = trackDrawInfo.getColor();
-			} else if (item.equals(getSelectedScaleType())) {
+			} else if (item.getAttrName().equals(getSelectedAppearanceItem().getAttrName())) {
 				colorId = ContextCompat.getColor(app, nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light);
 			} else {
 				colorId = AndroidUtils.getColorFromAttr(holder.itemView.getContext(), R.attr.default_icon_color);
@@ -198,24 +220,20 @@ public class TrackColoringCard extends BaseCard {
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					int prevSelectedPosition = getItemPosition(getSelectedScaleType());
-					selectedScaleType = items.get(holder.getAdapterPosition());
+					int prevSelectedPosition = getItemPosition(getSelectedAppearanceItem());
+					selectedAppearanceItem = items.get(holder.getAdapterPosition());
 					notifyItemChanged(holder.getAdapterPosition());
 					notifyItemChanged(prevSelectedPosition);
 
-					trackDrawInfo.setGradientScaleType(selectedScaleType);
-					mapActivity.refreshMap();
-
-					updateHeader();
-					updateColorSelector();
+					setGradientScaleType(selectedAppearanceItem);
 				}
 			});
 		}
 
-		private void updateButtonBg(TrackColoringViewHolder holder, GradientScaleType item) {
+		private void updateButtonBg(TrackAppearanceViewHolder holder, TrackAppearanceItem item) {
 			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
 			if (rectContourDrawable != null) {
-				if (getSelectedScaleType() != null && getSelectedScaleType().equals(item)) {
+				if (getSelectedAppearanceItem() != null && getSelectedAppearanceItem().equals(item)) {
 					int strokeColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), strokeColor);
 				} else {
@@ -232,22 +250,35 @@ public class TrackColoringCard extends BaseCard {
 			return items.size();
 		}
 
-		int getItemPosition(GradientScaleType name) {
+		int getItemPosition(TrackAppearanceItem name) {
 			return items.indexOf(name);
 		}
 	}
 
-	private static class TrackColoringViewHolder extends RecyclerView.ViewHolder {
+	public static class TrackAppearanceItem {
 
-		final TextView colorKey;
-		final ImageView icon;
-		final ImageView button;
+		private String attrName;
+		private String localizedValue;
 
-		TrackColoringViewHolder(View itemView) {
-			super(itemView);
-			colorKey = itemView.findViewById(R.id.groupName);
-			icon = itemView.findViewById(R.id.groupIcon);
-			button = itemView.findViewById(R.id.outlineRect);
+		@DrawableRes
+		private int iconId;
+
+		public TrackAppearanceItem(String attrName, String localizedValue, int iconId) {
+			this.attrName = attrName;
+			this.localizedValue = localizedValue;
+			this.iconId = iconId;
+		}
+
+		public String getAttrName() {
+			return attrName;
+		}
+
+		public String getLocalizedValue() {
+			return localizedValue;
+		}
+
+		public int getIconId() {
+			return iconId;
 		}
 	}
 }

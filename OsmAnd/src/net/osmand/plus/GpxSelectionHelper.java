@@ -528,16 +528,13 @@ public class GpxSelectionHelper {
 							}
 						}
 						if (obj.has(SHOW_ARROWS)) {
-							boolean showArrows = obj.optBoolean(SHOW_ARROWS, false);
-							gpx.setShowArrows(showArrows);
+							gpx.setShowArrows(obj.optBoolean(SHOW_ARROWS, false));
 						}
 						if (obj.has(GRADIENT_SCALE_TYPE)) {
-							String gradientScaleTypeName = obj.optString(GRADIENT_SCALE_TYPE);
-							gpx.setGradientScaleType(gradientScaleTypeName);
+							gpx.setGradientScaleType(obj.optString(GRADIENT_SCALE_TYPE));
 						}
 						if (obj.has(SHOW_START_FINISH)) {
-							boolean showStartFinish = obj.optBoolean(SHOW_START_FINISH, false);
-							gpx.setShowStartFinish(showStartFinish);
+							gpx.setShowStartFinish(obj.optBoolean(SHOW_START_FINISH, false));
 						}
 						if (obj.has(WIDTH)) {
 							gpx.setWidth(obj.getString(WIDTH));

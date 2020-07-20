@@ -5,7 +5,6 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -77,8 +76,8 @@ public class TrackWidthCard extends BaseCard {
 			String selectedWidth = trackDrawInfo.getWidth();
 			for (AppearanceListItem item : appearanceItems) {
 				if (Algorithms.objectEquals(item.getValue(), selectedWidth)
-						|| ((Algorithms.isEmpty(selectedWidth) || Algorithms.isInt(selectedWidth))
-						&& CUSTOM_WIDTH.equals(item.getAttrName()))) {
+						|| Algorithms.isEmpty(selectedWidth) && Algorithms.isEmpty(item.getValue())
+						|| Algorithms.isInt(selectedWidth) && CUSTOM_WIDTH.equals(item.getAttrName())) {
 					selectedItem = item;
 					break;
 				}
@@ -152,7 +151,7 @@ public class TrackWidthCard extends BaseCard {
 		mapActivity.refreshMap();
 	}
 
-	private class GpxWidthAdapter extends RecyclerView.Adapter<GpxWidthViewHolder> {
+	private class GpxWidthAdapter extends RecyclerView.Adapter<TrackAppearanceViewHolder> {
 
 		private List<AppearanceListItem> items;
 
@@ -162,24 +161,24 @@ public class TrackWidthCard extends BaseCard {
 
 		@NonNull
 		@Override
-		public GpxWidthViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		public TrackAppearanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			LayoutInflater themedInflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
 			view.getLayoutParams().width = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_width);
 			view.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_height);
 
-			GpxWidthViewHolder holder = new GpxWidthViewHolder(view);
+			TrackAppearanceViewHolder holder = new TrackAppearanceViewHolder(view);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				AndroidUtils.setBackground(app, holder.widthButton, nightMode, R.drawable.ripple_solid_light_6dp,
+				AndroidUtils.setBackground(app, holder.button, nightMode, R.drawable.ripple_solid_light_6dp,
 						R.drawable.ripple_solid_dark_6dp);
 			}
 			return holder;
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final GpxWidthViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull final TrackAppearanceViewHolder holder, int position) {
 			AppearanceListItem item = items.get(position);
-			holder.widthAttrName.setText(item.getLocalizedValue());
+			holder.title.setText(item.getLocalizedValue());
 
 			updateButtonBg(holder, item);
 			updateWidthIcon(holder, item);
@@ -200,7 +199,7 @@ public class TrackWidthCard extends BaseCard {
 			});
 		}
 
-		private void updateWidthIcon(GpxWidthViewHolder holder, AppearanceListItem item) {
+		private void updateWidthIcon(TrackAppearanceViewHolder holder, AppearanceListItem item) {
 			int color = trackDrawInfo.getColor();
 
 			int iconId;
@@ -210,10 +209,10 @@ public class TrackWidthCard extends BaseCard {
 			} else {
 				iconId = GpxAppearanceAdapter.getWidthIconId(item.getValue());
 			}
-			holder.widthIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconId, color));
+			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconId, color));
 		}
 
-		private void updateButtonBg(GpxWidthViewHolder holder, AppearanceListItem item) {
+		private void updateButtonBg(TrackAppearanceViewHolder holder, AppearanceListItem item) {
 			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
 			if (rectContourDrawable != null) {
 				if (getSelectedItem() != null && getSelectedItem().equals(item)) {
@@ -224,7 +223,7 @@ public class TrackWidthCard extends BaseCard {
 							: R.color.stroked_buttons_and_links_outline_light);
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 1), strokeColor);
 				}
-				holder.widthButton.setImageDrawable(rectContourDrawable);
+				holder.button.setImageDrawable(rectContourDrawable);
 			}
 		}
 
@@ -235,20 +234,6 @@ public class TrackWidthCard extends BaseCard {
 
 		int getItemPosition(AppearanceListItem name) {
 			return items.indexOf(name);
-		}
-	}
-
-	private static class GpxWidthViewHolder extends RecyclerView.ViewHolder {
-
-		final TextView widthAttrName;
-		final ImageView widthIcon;
-		final ImageView widthButton;
-
-		GpxWidthViewHolder(View itemView) {
-			super(itemView);
-			widthAttrName = itemView.findViewById(R.id.groupName);
-			widthIcon = itemView.findViewById(R.id.groupIcon);
-			widthButton = itemView.findViewById(R.id.outlineRect);
 		}
 	}
 }

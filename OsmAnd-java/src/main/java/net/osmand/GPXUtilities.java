@@ -1559,6 +1559,10 @@ public class GPXUtilities {
 			getExtensionsToWrite().put("gradient_scale_type", gradientScaleType);
 		}
 
+		public void removeGradientScaleType() {
+			getExtensionsToWrite().remove("gradient_scale_type");
+		}
+
 		public String getSplitType() {
 			if (extensions != null) {
 				return extensions.get("split_type");

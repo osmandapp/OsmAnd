@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.util.Algorithms;
 
 public class TrackDrawInfo {
 
@@ -12,9 +13,6 @@ public class TrackDrawInfo {
 	private static final String TRACK_WIDTH = "track_width";
 	private static final String TRACK_GRADIENT_SCALE_TYPE = "track_gradient_scale_type";
 	private static final String TRACK_COLOR = "track_color";
-	private static final String TRACK_GRADIENT_SPEED_COLOR = "track_gradient_speed_color";
-	private static final String TRACK_GRADIENT_ALTITUDE_COLOR = "track_gradient_altitude_color";
-	private static final String TRACK_GRADIENT_SLOPE_COLOR = "track_gradient_slope_color";
 	private static final String TRACK_SPLIT_TYPE = "track_split_type";
 	private static final String TRACK_SPLIT_INTERVAL = "track_split_interval";
 	private static final String TRACK_JOIN_SEGMENTS = "track_join_segments";
@@ -25,16 +23,11 @@ public class TrackDrawInfo {
 	private String width;
 	private GradientScaleType gradientScaleType;
 	private int color;
-	private int gradientSpeedColor;
-	private int gradientAltitudeColor;
-	private int gradientSlopeColor;
 	private int splitType;
 	private double splitInterval;
 	private boolean joinSegments;
 	private boolean showArrows;
 	private boolean showStartFinish;
-
-	private OnTrackAppearanceChangedListener trackAppearanceListener;
 
 	public TrackDrawInfo() {
 
@@ -45,18 +38,11 @@ public class TrackDrawInfo {
 		width = gpxDataItem.getWidth();
 		gradientScaleType = gpxDataItem.getGradientScaleType();
 		color = gpxDataItem.getColor();
-		gradientSpeedColor = gpxDataItem.getGradientSpeedColor();
-		gradientAltitudeColor = gpxDataItem.getGradientAltitudeColor();
-		gradientSlopeColor = gpxDataItem.getGradientSlopeColor();
 		splitType = gpxDataItem.getSplitType();
 		splitInterval = gpxDataItem.getSplitInterval();
 		joinSegments = gpxDataItem.isJoinSegments();
 		showArrows = gpxDataItem.isShowArrows();
 		showStartFinish = gpxDataItem.isShowStartFinish();
-	}
-
-	public void setTrackAppearanceListener(OnTrackAppearanceChangedListener trackAppearanceListener) {
-		this.trackAppearanceListener = trackAppearanceListener;
 	}
 
 	public String getFilePath() {
@@ -69,9 +55,6 @@ public class TrackDrawInfo {
 
 	public void setWidth(String width) {
 		this.width = width;
-		if (trackAppearanceListener != null) {
-			trackAppearanceListener.onTrackWidthChanged();
-		}
 	}
 
 	public GradientScaleType getGradientScaleType() {
@@ -88,9 +71,6 @@ public class TrackDrawInfo {
 
 	public void setColor(int color) {
 		this.color = color;
-		if (trackAppearanceListener != null) {
-			trackAppearanceListener.onTrackColorChanged();
-		}
 	}
 
 	public int getSplitType() {
@@ -128,11 +108,11 @@ public class TrackDrawInfo {
 	protected void readBundle(@NonNull Bundle bundle) {
 		filePath = bundle.getString(TRACK_FILE_PATH);
 		width = bundle.getString(TRACK_WIDTH);
-		gradientScaleType = GradientScaleType.valueOf(bundle.getString(TRACK_GRADIENT_SCALE_TYPE));
+		String gradientScaleTypeName = bundle.getString(TRACK_GRADIENT_SCALE_TYPE);
+		if (!Algorithms.isEmpty(gradientScaleTypeName)) {
+			gradientScaleType = GradientScaleType.valueOf(gradientScaleTypeName);
+		}
 		color = bundle.getInt(TRACK_COLOR);
-		gradientSpeedColor = bundle.getInt(TRACK_GRADIENT_SPEED_COLOR);
-		gradientAltitudeColor = bundle.getInt(TRACK_GRADIENT_ALTITUDE_COLOR);
-		gradientSlopeColor = bundle.getInt(TRACK_GRADIENT_SLOPE_COLOR);
 		splitType = bundle.getInt(TRACK_SPLIT_TYPE);
 		splitInterval = bundle.getDouble(TRACK_SPLIT_INTERVAL);
 		joinSegments = bundle.getBoolean(TRACK_JOIN_SEGMENTS);
@@ -143,22 +123,12 @@ public class TrackDrawInfo {
 	protected void saveToBundle(@NonNull Bundle bundle) {
 		bundle.putString(TRACK_FILE_PATH, filePath);
 		bundle.putString(TRACK_WIDTH, width);
-		bundle.putString(TRACK_GRADIENT_SCALE_TYPE, gradientScaleType.name());
+		bundle.putString(TRACK_GRADIENT_SCALE_TYPE, gradientScaleType != null ? gradientScaleType.name() : "");
 		bundle.putInt(TRACK_COLOR, color);
-		bundle.putInt(TRACK_GRADIENT_SPEED_COLOR, gradientSpeedColor);
-		bundle.putInt(TRACK_GRADIENT_ALTITUDE_COLOR, gradientAltitudeColor);
-		bundle.putInt(TRACK_GRADIENT_SLOPE_COLOR, gradientSlopeColor);
 		bundle.putInt(TRACK_SPLIT_TYPE, splitType);
 		bundle.putDouble(TRACK_SPLIT_INTERVAL, splitInterval);
 		bundle.putBoolean(TRACK_JOIN_SEGMENTS, joinSegments);
 		bundle.putBoolean(TRACK_SHOW_ARROWS, showArrows);
 		bundle.putBoolean(TRACK_SHOW_START_FINISH, showStartFinish);
-	}
-
-	public interface OnTrackAppearanceChangedListener {
-
-		void onTrackColorChanged();
-
-		void onTrackWidthChanged();
 	}
 }

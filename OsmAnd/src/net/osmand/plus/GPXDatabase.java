@@ -539,7 +539,7 @@ public class GPXDatabase {
 		return false;
 	}
 
-	public boolean updateGradientScaleType(@NonNull GpxDataItem item, @NonNull GradientScaleType gradientScaleType) {
+	public boolean updateGradientScaleType(@NonNull GpxDataItem item, @Nullable GradientScaleType gradientScaleType) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -547,7 +547,7 @@ public class GPXDatabase {
 				String fileDir = getFileDir(item.file);
 				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " + GPX_COL_GRADIENT_SCALE_TYPE + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-						new Object[] {gradientScaleType.name(), fileName, fileDir});
+						new Object[] {(gradientScaleType == null ? "" : gradientScaleType.name()), fileName, fileDir});
 				item.gradientScaleType = gradientScaleType;
 			} finally {
 				db.close();
@@ -723,7 +723,7 @@ public class GPXDatabase {
 		} else {
 			color = Algorithms.colorToString(item.color);
 		}
-		String gradientScaleType = item.gradientScaleType != null ? item.gradientScaleType.name() : GradientScaleType.SOLID.name();
+		String gradientScaleType = item.gradientScaleType != null ? item.gradientScaleType.name() : null;
 		if (a != null) {
 			db.execSQL(
 					"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -891,7 +891,7 @@ public class GPXDatabase {
 		try {
 			item.gradientScaleType = Algorithms.isEmpty(gradientScaleType) ? null : GradientScaleType.valueOf(gradientScaleType);
 		} catch (IllegalArgumentException e) {
-			item.gradientScaleType = GradientScaleType.SOLID;
+			item.gradientScaleType = null;
 		}
 
 		return item;
