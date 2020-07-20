@@ -95,6 +95,7 @@ import net.osmand.aidlapi.mapmarker.RemoveMapMarkersParams;
 
 import net.osmand.aidlapi.quickaction.QuickActionParams;
 import net.osmand.aidlapi.quickaction.QuickActionInfoParams;
+import net.osmand.aidlapi.lock.SetLockStateParams;
 
 // NOTE: Add new methods at the end of file!!!
 
@@ -841,4 +842,9 @@ interface IOsmAndAidlInterface {
     boolean executeQuickAction(in QuickActionParams params);
 
     boolean getQuickActionsInfo(out List<QuickActionInfoParams> quickActions);
+    /**
+     * Toggle Lock/Unlock screen.
+     */
+
+     boolean setLockState(in SetLockStateParams params);
 }

@@ -43,8 +43,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
@@ -53,16 +51,15 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -74,6 +71,10 @@ import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -178,6 +179,7 @@ public class OsmandAidlApi {
 
 	private static final String AIDL_EXECUTE_QUICK_ACTION = "aidl_execute_quick_action";
 	private static final String AIDL_QUICK_ACTION_NUMBER = "aidl_quick_action_number";
+	private static final String AIDL_LOCK_STATE = "lock_state";
 
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
@@ -229,6 +231,7 @@ public class OsmandAidlApi {
 		registerShowSqliteDbFileReceiver(mapActivity);
 		registerHideSqliteDbFileReceiver(mapActivity);
 		registerExecuteQuickActionReceiver(mapActivity);
+		registerLockStateReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		aMapPointUpdateListener = mapActivity;
@@ -857,6 +860,22 @@ public class OsmandAidlApi {
 			}
 		};
 		registerReceiver(executeQuickActionReceiver, mapActivity, AIDL_EXECUTE_QUICK_ACTION);
+	}
+
+	private void registerLockStateReceiver(MapActivity mapActivity) {
+		BroadcastReceiver lockStateReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				LockHelper lockHelper = app.getLockHelper();
+				boolean lock = intent.getBooleanExtra(AIDL_LOCK_STATE, false);
+				if (lock) {
+					lockHelper.lock();
+				} else {
+					lockHelper.unlock();
+				}
+			}
+		};
+		registerReceiver(lockStateReceiver, mapActivity, AIDL_LOCK_STATE);
 	}
 
 	public void registerMapLayers(@NonNull MapActivity mapActivity) {
@@ -1694,6 +1713,14 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_DATA, data);
 		intent.putExtra(AIDL_URI, uri);
 		intent.putExtra(AIDL_FORCE, force);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean setLockState(boolean lock) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_LOCK_STATE);
+		intent.putExtra(AIDL_LOCK_STATE, lock);
 		app.sendBroadcast(intent);
 		return true;
 	}
