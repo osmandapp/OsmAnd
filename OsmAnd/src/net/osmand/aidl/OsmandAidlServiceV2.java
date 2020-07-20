@@ -102,6 +102,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_KEY_EVENT;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
@@ -1127,7 +1128,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 						removeAidlCallback(params.getCallbackId());
 						return -1;
 					} else {
-						long id = addAidlCallback(callback, KEY_ON_NAV_DATA_UPDATE);
+						long id = addAidlCallback(callback, KEY_ON_KEY_EVENT);
 						api.registerForKeyEvents(id, params.getKeyEventList());
 						return id;
 					}
