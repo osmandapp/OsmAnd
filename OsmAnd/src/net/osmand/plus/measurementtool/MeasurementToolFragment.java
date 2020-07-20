@@ -80,6 +80,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1300,8 +1301,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		return displayedName;
 	}
 
-	private void saveNewGpx(File dir, String fileName, boolean checked, SaveType saveType, boolean close) {
-		saveGpx(dir, fileName, checked, null, false, null, saveType, close);
+	private void saveNewGpx(File dir, String fileName, boolean showOnMap, SaveType saveType, boolean close) {
+		saveGpx(dir, fileName, showOnMap, null, false, null, saveType, close);
 	}
 
 	private void saveExistingGpx(GPXFile gpx, boolean showOnMap, ActionType actionType, boolean openTrackActivity) {
@@ -1317,6 +1318,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	                     final ActionType actionType,
 	                     final SaveType saveType,
 	                     final boolean close) {
+		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(getMapActivity());
 
 		new AsyncTask<Void, Void, Exception>() {
 
@@ -1451,39 +1453,40 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 
 			private void onGpxSaved(Exception warning) {
-				final MapActivity activity = getMapActivity();
+				final MapActivity mapActivity = mapActivityRef.get();
+				if (mapActivity == null || mapActivity.isFinishing()) {
+					return;
+				}
 				if (progressDialog != null && progressDialog.isShowing()) {
 					progressDialog.dismiss();
 				}
-				if (activity != null) {
-					activity.refreshMap();
-					if (warning == null) {
-						saved = true;
-						if (openTrackActivity) {
-							dismiss(activity);
-						} else {
-							if (close) {
-								snackbar = Snackbar.make(activity.getLayout(),
-										MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getName()),
-										Snackbar.LENGTH_LONG)
-										.setAction(R.string.shared_string_rename, new View.OnClickListener() {
-											@Override
-											public void onClick(View view) {
-												FileUtils.renameFile(activity, toSave, null);
-											}
-										});
-								UiUtilities.setupSnackbar(snackbar, nightMode);
-								snackbar.show();
-								dismiss(activity);
-							} else {
-								Toast.makeText(activity,
-										MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
-										Toast.LENGTH_LONG).show();
-							}
-						}
+				mapActivity.refreshMap();
+				if (warning == null) {
+					saved = true;
+					if (openTrackActivity) {
+						dismiss(mapActivity);
 					} else {
-						Toast.makeText(activity, warning.getMessage(), Toast.LENGTH_LONG).show();
+						if (close) {
+							snackbar = Snackbar.make(mapActivity.getLayout(),
+									MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getName()),
+									Snackbar.LENGTH_LONG)
+									.setAction(R.string.shared_string_rename, new View.OnClickListener() {
+										@Override
+										public void onClick(View view) {
+											FileUtils.renameFile(mapActivity, toSave, null);
+										}
+									});
+							UiUtilities.setupSnackbar(snackbar, nightMode);
+							snackbar.show();
+							dismiss(mapActivity);
+						} else {
+							Toast.makeText(mapActivity,
+									MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
+									Toast.LENGTH_LONG).show();
+						}
 					}
+				} else {
+					Toast.makeText(mapActivity, warning.getMessage(), Toast.LENGTH_LONG).show();
 				}
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
