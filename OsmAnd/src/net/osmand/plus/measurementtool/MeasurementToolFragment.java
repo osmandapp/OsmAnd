@@ -550,7 +550,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	private MapActivity getMapActivity() {
 		Activity activity = getActivity();
 		if (activity instanceof MapActivity && !activity.isFinishing()) {
-			return (MapActivity) getActivity();
+			return (MapActivity) activity;
 		}
 		return null;
 	}
