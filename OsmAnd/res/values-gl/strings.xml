@@ -3849,6 +3849,6 @@ Lon %2$s</string>
     <string name="osm_edit_closed_note">Nota do OSM pechada</string>
     <string name="set_working_days_to_continue">Tes que definir os días laborais para continuar</string>
     <string name="route_between_points">Ruta entre puntos</string>
-    <string name="plan_a_route">Planear unha ruta</string>
+    <string name="plan_a_route">Planificar unha ruta</string>
     <string name="add_to_a_track">Engadir a unha pista</string>
 </resources>
