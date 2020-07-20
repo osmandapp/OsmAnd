@@ -95,6 +95,7 @@ import net.osmand.aidlapi.mapmarker.RemoveMapMarkersParams;
 
 import net.osmand.aidlapi.quickaction.QuickActionParams;
 import net.osmand.aidlapi.quickaction.QuickActionInfoParams;
+import net.osmand.aidlapi.events.AKeyEventsParams;
 
 // NOTE: Add new methods at the end of file!!!
 
@@ -841,4 +842,13 @@ interface IOsmAndAidlInterface {
     boolean executeQuickAction(in QuickActionParams params);
 
     boolean getQuickActionsInfo(out List<QuickActionInfoParams> quickActions);
+    /**
+     * Method to register for  key events.
+     *
+     * @params subscribeToUpdates (boolean) - boolean flag to subscribe or unsubscribe from key events
+     * @params callbackId (long) - id of callback, needed to unsubscribe key events
+     * @params callback (IOsmAndAidlCallback) - callback to notify user on key event
+     * @params keyEventList (List<Integer>) - list of requested key events
+     */
+    long registerForKeyEvents(in AKeyEventsParams params, IOsmAndAidlCallback callback);
 }

@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -101,8 +102,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -130,6 +133,7 @@ public class OsmandAidlApi {
 	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
 	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
 	public static final int KEY_ON_VOICE_MESSAGE = 5;
+	public static final int KEY_ON_KEY_EVENT = 6;
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 
@@ -2325,6 +2329,38 @@ public class OsmandAidlApi {
 				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
 				a.avgElevation, a.minElevation, a.maxElevation, a.minSpeed, a.maxSpeed, a.avgSpeed,
 				a.points, a.wptPoints, a.wptCategoryNames);
+	}
+
+
+	private Map<Long, Set<Integer>> keyEventCallbacks = new ConcurrentHashMap<>();
+
+	public boolean onKeyEvent(KeyEvent event) {
+		if (aidlCallbackListenerV2 != null) {
+			for (Map.Entry<Long, OsmandAidlServiceV2.AidlCallbackParams> entry : aidlCallbackListenerV2.getAidlCallbacks().entrySet()) {
+				OsmandAidlServiceV2.AidlCallbackParams cb = entry.getValue();
+				if ((cb.getKey() & KEY_ON_KEY_EVENT) > 0) {
+					Set<Integer> keyEventsList = keyEventCallbacks.get(entry.getKey());
+					//An empty list means all key are requested
+					if (keyEventsList != null && (keyEventsList.isEmpty() || keyEventsList.contains(event.getKeyCode()))) {
+						try {
+							cb.getCallback().onKeyEvent(event);
+							return true;
+						} catch (Exception e) {
+							LOG.error(e.getMessage(), e);
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	void registerForKeyEvents(long id, ArrayList<Integer> keyEventLst) {
+		keyEventCallbacks.put(id, new HashSet<>(keyEventLst));
+	}
+
+	public void unregisterFromKeyEvents(long id) {
+		keyEventCallbacks.remove(id);
 	}
 
 	public interface SearchCompleteCallback {

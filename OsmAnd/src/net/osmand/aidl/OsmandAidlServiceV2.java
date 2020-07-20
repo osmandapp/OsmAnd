@@ -1115,6 +1115,28 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				return UNKNOWN_API_ERROR;
 			}
 		}
+		@Override
+		public long registerForKeyEvents(AKeyEventsParams params, final IOsmAndAidlCallback callback) {
+			try {
+				OsmandAidlApi api = getApi("registerForKeyEvents");
+				if (api != null) {
+					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
+						api.unregisterFromKeyEvents(params.getCallbackId());
+						removeAidlCallback(params.getCallbackId());
+						return -1;
+					} else {
+						long id = addAidlCallback(callback, KEY_ON_NAV_DATA_UPDATE);
+						api.registerForKeyEvents(id, params.getKeyEventList());
+						return id;
+					}
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
+			}
+		}
 
 		@Override
 		public long addContextMenuButtons(ContextMenuButtonsParams params, final IOsmAndAidlCallback callback) {
