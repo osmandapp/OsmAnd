@@ -3807,4 +3807,8 @@ Pôr do Sol: %2$s</string>
     <string name="app_mode_wheelchair_forward">Cadeira de rodas para a frente</string>
     <string name="app_mode_go_cart">Carrinho de compras</string>
     <string name="osm_edit_closed_note">Nota OSM fechada</string>
+    <string name="add_to_a_track">Adicionar a uma trilha</string>
+    <string name="set_working_days_to_continue">Você precisa definir dias úteis para continuar</string>
+    <string name="route_between_points">Rota entre pontos</string>
+    <string name="plan_a_route">Planejar uma rota</string>
 </resources>
