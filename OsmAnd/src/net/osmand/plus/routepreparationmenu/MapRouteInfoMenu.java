@@ -1994,9 +1994,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		directionInfo = -1;
 		routeSelected = false;
 		updateMenu();
-		if (isVisible()) {
-			showToast.value = false;
-		}
 	}
 
 	public String generateViaDescription() {
