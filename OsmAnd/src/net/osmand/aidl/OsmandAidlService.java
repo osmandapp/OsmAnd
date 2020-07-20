@@ -85,7 +85,7 @@ import net.osmand.aidl.quickaction.QuickActionParams;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
-import net.osmand.aidlapi.lock.SetLockStateParams;
+import net.osmand.aidl.lock.SetLockStateParams;
 import net.osmand.data.LatLon;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;

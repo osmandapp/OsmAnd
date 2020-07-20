@@ -96,7 +96,7 @@ import net.osmand.aidl.mapmarker.RemoveMapMarkersParams;
 
 import net.osmand.aidl.quickaction.QuickActionParams;
 import net.osmand.aidl.quickaction.QuickActionInfoParams;
-import net.osmand.aidlapi.lock.SetLockStateParams;
+import net.osmand.aidl.lock.SetLockStateParams;
 
 // NOTE: Add new methods at the end of file!!!
 

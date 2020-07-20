@@ -1,11 +1,9 @@
-package net.osmand.aidlapi.lock;
+package net.osmand.aidl.lock;
 
-import android.os.Bundle;
 import android.os.Parcel;
+import android.os.Parcelable;
 
-import net.osmand.aidlapi.AidlParams;
-
-public class SetLockStateParams extends AidlParams {
+public class SetLockStateParams implements Parcelable {
 
 	private boolean lock;
 
@@ -33,13 +31,15 @@ public class SetLockStateParams extends AidlParams {
 		return lock;
 	}
 
-	@Override
-	public void writeToBundle(Bundle bundle) {
-		bundle.putBoolean("lock", this.lock);
+	public void writeToParcel(Parcel out, int flags) {
+		out.writeByte((byte) (lock ? 1 : 0));
 	}
 
-	@Override
-	protected void readFromBundle(Bundle bundle) {
-		lock = bundle.getBoolean("lock");
+	private void readFromParcel(Parcel in) {
+		lock = in.readByte() == 1;
+	}
+
+	public int describeContents() {
+		return 0;
 	}
 }
