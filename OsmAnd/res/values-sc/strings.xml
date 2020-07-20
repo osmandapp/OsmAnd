@@ -3381,7 +3381,7 @@
     <string name="profile_import_descr">Annanghe unu profilu aberende su documentu suo cun OsmAnd.</string>
     <string name="file_import_error">Errore de importatzione de %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importadu.</string>
-    <string name="default_speed_dialog_msg">Istimat s\'ora de arribu pro castas disconnotas de caminu, e limitat sa lestresa pro totu sos caminos (diat pòdere mudare s\'àndala)</string>
+    <string name="default_speed_dialog_msg">Faghet unu càrculu de s\'ora de arribu pro castas disconnotas de caminu, e limitat sa lestresa pro totu sos caminos (diat pòdere mudare s\'àndala)</string>
     <string name="rendering_value_white_name">Biancu</string>
     <string name="swap_two_places">Cuncàmbia %1$s e %2$s</string>
     <string name="route_start_point">Puntu de incumintzu</string>
@@ -3822,4 +3822,8 @@
     <string name="app_mode_wheelchair">Cadira a rodas</string>
     <string name="app_mode_go_cart">Go-kart</string>
     <string name="osm_edit_closed_note">Nota de OSM serrada</string>
+    <string name="set_working_days_to_continue">Depes impostare sas dies de traballu pro sighire</string>
+    <string name="route_between_points">Àndala intre puntos</string>
+    <string name="plan_a_route">Pranìfica un\'àndala</string>
+    <string name="add_to_a_track">Annanghe a una rasta</string>
 </resources>

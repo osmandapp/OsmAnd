@@ -1539,7 +1539,7 @@ Lon %2$s</string>
     <string name="world_ski_missing">Baixar o mapa especial sen conexión para amosar as instalacións de esquí.</string>
     <string name="remove_the_tag">ELIMINAR ETIQUETA</string>
     <string name="gps_status">Estado do GPS</string>
-    <string name="rendering_attr_streetLighting_name">Alumeado da rúa</string>
+    <string name="rendering_attr_streetLighting_name">Alumeamento público</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Especifica un servidor proxy.</string>
     <string name="settings_privacy">Privacidade</string>
@@ -3847,4 +3847,8 @@ Lon %2$s</string>
     <string name="app_mode_wheelchair_forward">Cadeira de rodas só cara adiante</string>
     <string name="app_mode_go_cart">Kart</string>
     <string name="osm_edit_closed_note">Nota do OSM pechada</string>
+    <string name="set_working_days_to_continue">Tes que definir os días laborais para continuar</string>
+    <string name="route_between_points">Ruta entre puntos</string>
+    <string name="plan_a_route">Planificar unha ruta</string>
+    <string name="add_to_a_track">Engadir a unha pista</string>
 </resources>

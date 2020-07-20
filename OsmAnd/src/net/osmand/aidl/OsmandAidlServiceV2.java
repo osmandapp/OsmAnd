@@ -15,6 +15,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
 import net.osmand.aidl.OsmandAidlApi.SearchCompleteCallback;
+import net.osmand.aidlapi.lock.SetLockStateParams;
 import net.osmand.aidlapi.IOsmAndAidlCallback;
 import net.osmand.aidlapi.IOsmAndAidlInterface;
 import net.osmand.aidlapi.calculateroute.CalculateRouteParams;
@@ -1276,6 +1277,17 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				OsmandAidlApi api = getApi("getQuickActionsInfo");
 				return api != null && api.getQuickActionsInfoV2(quickActions);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean setLockState(SetLockStateParams params) {
+			try {
+				OsmandAidlApi api = getApi("setLockState");
+				return api != null && api.setLockState(params.getLockState());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
