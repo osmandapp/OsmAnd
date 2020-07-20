@@ -2241,7 +2241,7 @@
     <string name="quick_action_add_destination">Célpont megadása</string>
     <string name="quick_action_replace_destination">Célpont lecserélése</string>
     <string name="quick_action_add_first_intermediate">Hozzáadás első köztes célpontként</string>
-    <string name="quick_action_add_destination_desc">"Gomb, amely beállítja a képernyő középpontját úti célnak, a  korábban beállított célpont utolsó köztes célpont lesz."</string>
+    <string name="quick_action_add_destination_desc">Gomb, amely beállítja a képernyő középpontját úti célnak, a korábban beállított célpont utolsó köztes célpont lesz.</string>
     <string name="quick_action_replace_destination_desc">Váltógomb, amely a képernyő középpontját beállítja új úti célként, lecserélve korábban kiválasztott célpontot (ha volt).</string>
     <string name="quick_action_add_first_intermediate_desc">Gomb, amely beállítja a képernyő közepét első köztes célpontnak.</string>
     <string name="no_overlay">Nincs rátétréteg</string>
@@ -3773,4 +3773,8 @@
     <string name="app_mode_go_cart">Gokart</string>
     <string name="osm_edit_closed_note">Lezárt OSM-jegyzet</string>
     <string name="app_mode_wheelchair_forward">Előre döntött kerekesszék</string>
+    <string name="set_working_days_to_continue">A folytatáshoz adja meg a munkanapokat</string>
+    <string name="route_between_points">Útvonal pontok között</string>
+    <string name="plan_a_route">Útvonaltervezés</string>
+    <string name="add_to_a_track">Hozzáadás nyomvonalhoz</string>
 </resources>
