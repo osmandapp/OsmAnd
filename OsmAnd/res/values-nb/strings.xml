@@ -157,7 +157,7 @@
     <string name="direction_style_sidewise">Sideveis (8 sektorer)</string>
     <string name="direction_style_clockwise">Med klokken (12 sektorer)</string>
     <string name="settings_direction_style">Retningsstil</string>
-    <string name="settings_direction_style_descr">Velg stil til å uttrykke relative retninger under bevegelse.</string>
+    <string name="settings_direction_style_descr">Velg stil til å uttrykke relative retninger under bevegelse</string>
     <string name="auto_announce_on">Start auto-annonsering</string>
     <string name="auto_announce_off">Stopp auto-annonsering</string>
     <string name="i_am_here">Jeg er her</string>
@@ -1018,7 +1018,8 @@
     <string name="anonymous_user">Anonym bruker</string>
     <string name="open_street_map_login_descr">Trengs for bidrag til openstreetmap.org.</string>
     <string name="download_files_not_enough_space">Det er ikke nok ledig plass til å laste ned %1$s MB (ledig: %2$s).</string>
-    <string name="download_files_question_space">Laste ned {0} fil(er)\? {1} MB av ({2} MB) vil bli brukt.</string>
+    <string name="download_files_question_space">Laste ned {0} fil(er)\?
+\n {1} MB (av {2} MB) vil bli brukt.</string>
     <string name="auto_follow_route_navigation">Auto-sentrer bare navigering</string>
     <string name="auto_follow_route_navigation_descr">Auto-sentrer kartvisning bare under navigering.</string>
     <string name="auto_follow_location_enabled">Auto-sentrer kartvisning i bruk.</string>
@@ -2364,8 +2365,11 @@
     <string name="subscribe_email_desc">Abonner på vår e-postliste om programrabatter og få tre kartnedlastinger til!</string>
     <string name="index_item_depth_points_southern_hemisphere">Havdybdepunkter for sørlige halvkule</string>
     <string name="index_item_depth_points_northern_hemisphere">Havdybdepunkter for nordlige halvkule</string>
-    <string name="download_files_error_not_enough_space">Ikke nok plass! {3} MB trengs midlertidig, {1} MB permanent. (Kun {2} MB tilgjengelig.)</string>
-    <string name="download_files_question_space_with_temp">Laste ned {0} fil(er)\? {3} MB trengs midlertidig, {1} MB permanent. (Av {2} MB.)</string>
+    <string name="download_files_error_not_enough_space">Ikke nok plass!
+\n {3} MB trengs midlertidig, {1} MB permanent.
+\n (Kun {2} MB tilgjengelig.)</string>
+    <string name="download_files_question_space_with_temp">Laste ned {0} fil(er)\?
+\n {3} MB brukes midlertidig, {1} MB permanent. (Av {2} MB.)</string>
     <string name="simulate_initial_startup_descr">Setter flagget som indikerer første programoppstart, alle andre innstillinger forblir uendret.</string>
     <string name="local_osm_changes_backup_successful">OSM-endringsfil opprettet %1$s</string>
     <string name="dropbox_plugin_description">Dropbox-tillegget lar deg synkronisere spor og lyd/video-notater med din Dropbox-konto.</string>
@@ -2404,7 +2408,9 @@
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samler inn info om hvilke deler av programmet du åpner. Plasseringen din blir aldri sendt, ei heller noe du måtte skrive inn i programmet eller detaljer om områder som vises, søkes etter, eller lastes ned.</string>
     <string name="do_not_show_startup_messages_desc">Ikke vis programrabatter og spesielle lokale hendelsesmeldinger.</string>
     <string name="routing_attr_driving_style_safety_name">Foretrekk sideveier</string>
-    <string name="osm_live_header">Dette abonnementet gir oppdateringer hver time av alle kart over hele verden. Deler av inntekten går tilbake til OSM-fellesskapet og utbetales for hvert OSM-bidrag. Hvis du liker OsmAnd og OSM og vil støtte og bli hjulpet av dem, er dette den perfekte måten å gjøre det på.</string>
+    <string name="osm_live_header">Dette abonnementet gir oppdateringer hver time av alle kart over hele verden.
+\n Deler av inntekten går tilbake til OSM-fellesskapet og utbetales for hvert OSM-bidrag.
+\n Hvis du liker OsmAnd og OSM og vil støtte og bli hjulpet av dem, er dette den perfekte måten å gjøre det på.</string>
     <string name="m_s">m/s</string>
     <string name="lang_ber">Berbisk</string>
     <string name="additional_actions">Flere handlinger</string>
@@ -2549,7 +2555,8 @@
 \n Merknad 1: Dine gamle filer forblir urørt (men kan slettes manuelt). 
 \n Merknad 2: På det nye lagringsstedet er det ikke mulig å dele filer mellom OsmAnd og OsmAnd+.</string>
     <string name="osmand_background_plugin_description">Viser innstillinger for å slå på bakgrunnssporing og navigering ved å periodisk vekke opp GPS-enheten (med skjermen av).</string>
-    <string name="native_app_allocated_memory_descr">Totalt innebygd minne som brukes av programmet %1$s MB (Dalvik %2$s MB, andre %3$s MB). Proposjonalt minne %4$s MB (Android-grense %5$s MB, Dalvik %6$s MB).</string>
+    <string name="native_app_allocated_memory_descr">Totalt innebygd minne som reserveres av programmet %1$s MB (Dalvik %2$s MB, andre %3$s MB).
+\n Proporsjonalt minne %4$s MB (Android-grense %5$s MB, Dalvik %6$s MB).</string>
     <string name="send_location_email_pattern">For å se plassering, bruk nettadressen %1$s eller Android-hensiktslenken %2$s</string>
     <string name="poi_filter_namefinder">Nettbasert navnesøk</string>
     <string name="version_index_is_big_for_memory">Indeksen \"{0}\" fikk ikke plass i minnet</string>
@@ -3516,7 +3523,7 @@
     <string name="main_actions">Hovedhandlinger</string>
     <string name="move_inside_category">Du kan kun flytte elementer innenfor denne kategorien.</string>
     <string name="developer_plugin">Utvikler-tillegg</string>
-    <string name="replace_point_descr">Erstatt et annet punkt med dette</string>
+    <string name="replace_point_descr">Erstatt et annet punkt med dette.</string>
     <string name="app_mode_ski_snowmobile">Snøscooter</string>
     <string name="custom_osmand_plugin">Egendefinert OsmAnd-tillegg</string>
     <string name="shared_string_items">Elementer</string>
@@ -3641,7 +3648,7 @@
     <string name="select_wikipedia_article_langs">Velg språkene Wikipedia-artikler skal vises på i kartet. Du kan bytte mellom alle tilgjengelige språk mens du leser artikkelen.</string>
     <string name="legend_item_description">Veiledning til kartets merking.</string>
     <string name="shared_string_routing">Ruteplanlegging</string>
-    <string name="route_recalculation_dist_title">Minste avvik for anvisning av ny rute.</string>
+    <string name="route_recalculation_dist_title">Minsteavstand for å beregne rute på nytt</string>
     <string name="import_duplicates_description">OsmAnd har allerede elementer med samme navn som de i importen.
 \n
 \nVelg en handling.</string>
