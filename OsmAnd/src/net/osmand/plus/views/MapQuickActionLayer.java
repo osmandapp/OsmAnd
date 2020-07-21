@@ -57,6 +57,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     private final ContextMenuLayer contextMenuLayer;
     private final MeasurementToolLayer measurementToolLayer;
     private final MapMarkersLayer mapMarkersLayer;
+    private final GPXLayer gpxLayer;
     private ImageView contextMarker;
     private final MapActivity mapActivity;
     private final OsmandApplication app;
@@ -84,8 +85,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         quickActionRegistry = app.getQuickActionRegistry();
 		measurementToolLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
         mapMarkersLayer = mapActivity.getMapLayers().getMapMarkersLayer();
+        gpxLayer = mapActivity.getMapLayers().getGpxLayer();
     }
-
 
     @Override
     public void initLayer(OsmandMapTileView view) {
@@ -410,6 +411,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 				contextMenuLayer.isInGpxDetailsMode() ||
 				measurementToolLayer.isInMeasurementMode() ||
                 mapMarkersLayer.isInPlanRouteMode() ||
+                gpxLayer.isInTrackAppearanceMode() ||
                 mapRouteInfoMenu.isVisible() ||
                 MapRouteInfoMenu.chooseRoutesVisible ||
                 MapRouteInfoMenu.waypointsVisible ||

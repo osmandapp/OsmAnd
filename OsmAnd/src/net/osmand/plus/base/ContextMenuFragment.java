@@ -148,6 +148,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return getLandscapeWidth() - getResources().getDimensionPixelSize(R.dimen.dashboard_land_shadow_width);
 	}
 
+	public float getMiddleStateKoef() {
+		return MIDDLE_STATE_KOEF;
+	}
+
 	public abstract int getToolbarHeight();
 
 	public boolean isSingleFragment() {
@@ -605,7 +609,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	}
 
 	private int getMinHalfY(MapActivity mapActivity) {
-		return viewHeight - (int) Math.min(viewHeight * MIDDLE_STATE_KOEF,
+		return viewHeight - (int) Math.min(viewHeight * getMiddleStateKoef(),
 				MIDDLE_STATE_MIN_HEIGHT_DP * mapActivity.getMapView().getDensity() );
 	}
 

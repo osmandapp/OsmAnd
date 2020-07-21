@@ -45,6 +45,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -79,6 +80,7 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.chooseplan.OsmLiveCancelledDialog;
@@ -105,6 +107,7 @@ import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
@@ -141,6 +144,7 @@ import net.osmand.plus.settings.fragments.DataStorageFragment;
 import net.osmand.plus.settings.fragments.ImportCompleteFragment;
 import net.osmand.plus.settings.fragments.ImportSettingsFragment;
 import net.osmand.plus.settings.fragments.ProfileAppearanceFragment;
+import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -171,6 +175,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.track.TrackDrawInfo.TRACK_FILE_PATH;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -705,6 +710,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 
+		TrackAppearanceFragment trackAppearanceFragment = getTrackAppearanceFragment();
+		if (trackAppearanceFragment != null) {
+			trackAppearanceFragment.dismissImmediate();
+			if (prevActivityIntent == null) {
+				return;
+			}
+		}
+
 		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
 			if (mapContextMenu.getCurrentMenuState() != MenuState.HEADER_ONLY && !isLandscapeLayout()) {
 				mapContextMenu.openMenuHeaderOnly();
@@ -1230,6 +1243,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					mapContextMenu.showMinimized(latLonToShow, mapLabelToShow, toShow);
 					mapRouteInfoMenu.updateMenu();
 					MapRouteInfoMenu.showLocationOnMap(this, latLonToShow.getLatitude(), latLonToShow.getLongitude());
+				} else if (toShow instanceof GPXFile) {
+					Bundle args = new Bundle();
+					args.putString(TRACK_FILE_PATH, ((GPXFile) toShow).path);
+					args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuController.MenuState.HALF_SCREEN);
+
+					TrackAppearanceFragment fragment = new TrackAppearanceFragment();
+					fragment.setArguments(args);
+					TrackAppearanceFragment.showInstance(this, fragment);
 				} else if (toShow instanceof QuadRect) {
 					QuadRect qr = (QuadRect) toShow;
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
@@ -2255,6 +2276,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public ConfigureMenuItemsFragment getConfigureMenuItemsFragment(){
 		return getFragment(ConfigureMenuItemsFragment.TAG);
+	}
+
+	public TrackAppearanceFragment getTrackAppearanceFragment(){
+		return getFragment(TrackAppearanceFragment.TAG);
 	}
 
 	public PointEditorFragmentNew getPointEditorFragmentNew() {
