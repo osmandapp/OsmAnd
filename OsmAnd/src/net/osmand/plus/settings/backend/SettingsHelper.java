@@ -2493,7 +2493,7 @@ public class SettingsHelper {
 					if (fileName.equals("items.json")) {
 						String itemsJson = null;
 						try {
-							itemsJson = Algorithms.readFromInputStream(ois).toString();
+							itemsJson = Algorithms.readFromInputStream(ois, false).toString();
 						} catch (IOException e) {
 							LOG.error("Error reading items.json: " + itemsJson, e);
 							throw new IllegalArgumentException("No items");
