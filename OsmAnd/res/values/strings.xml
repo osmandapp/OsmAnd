@@ -21,6 +21,7 @@
     <string name="app_mode_wheelchair">Wheelchair</string>
     <string name="app_mode_motor_scooter">Motor scooter</string>
     <string name="app_mode_enduro_motorcycle">Enduro motorcycle</string>
+    <string name="add_hidden_group_info">The added point will not be visible on the map, since the selected group is hidden, you can find it in \"%s\".</string>
     <string name="plugin_wikipedia_description">Get information about points of interest from Wikipedia. It is your pocket offline guide - just enable Wikipedia plugin and enjoy articles about objects around you.</string>
     <string name="search_download_wikipedia_maps">Download Wikipedia maps</string>
     <string name="quick_action_remove_next_destination_descr">The current destination point on the route will be deleted. If it will be the Destination, navigation will stop.</string>
