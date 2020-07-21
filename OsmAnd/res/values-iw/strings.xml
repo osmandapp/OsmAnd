@@ -3832,4 +3832,5 @@
     <string name="route_between_points">מסלול בין נקודות</string>
     <string name="plan_a_route">תכנון מסלול</string>
     <string name="add_to_a_track">הוספה למסלול</string>
+    <string name="add_hidden_group_info">הנקודה שנוספה לא תופיע על המפה מאחר שהקבוצה הנבחרת מוסתרת, ניתן למצוא אותה תחת „%s”.</string>
 </resources>

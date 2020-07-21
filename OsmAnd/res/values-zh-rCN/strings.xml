@@ -2893,4 +2893,7 @@
     <string name="show_closed_notes">显示关闭的注记</string>
     <string name="osm_edit_closed_note">关闭的OSM注记</string>
     <string name="add_online_source">添加在线资源</string>
+    <string name="rendering_attr_highway_class_bridleway_name"></string>
+    <string name="rendering_attr_surface_gravel_name"></string>
+    <string name="rendering_attr_surface_sett_name"></string>
 </resources>
