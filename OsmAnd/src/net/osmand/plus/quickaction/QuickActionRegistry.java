@@ -15,9 +15,6 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.quickaction.actions.NavRemoveNextDestination;
-import net.osmand.plus.quickaction.actions.ShowHideMapillaryAction;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.actions.DayNightModeAction;
 import net.osmand.plus.quickaction.actions.FavoriteAction;
@@ -28,15 +25,18 @@ import net.osmand.plus.quickaction.actions.NavAddDestinationAction;
 import net.osmand.plus.quickaction.actions.NavAddFirstIntermediateAction;
 import net.osmand.plus.quickaction.actions.NavAutoZoomMapAction;
 import net.osmand.plus.quickaction.actions.NavDirectionsFromAction;
+import net.osmand.plus.quickaction.actions.NavRemoveNextDestination;
 import net.osmand.plus.quickaction.actions.NavReplaceDestinationAction;
 import net.osmand.plus.quickaction.actions.NavResumePauseAction;
 import net.osmand.plus.quickaction.actions.NavStartStopAction;
 import net.osmand.plus.quickaction.actions.NavVoiceAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
+import net.osmand.plus.quickaction.actions.ShowHideMapillaryAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
 import net.osmand.plus.quickaction.actions.ShowHideTransportLinesAction;
 import net.osmand.plus.quickaction.actions.SwitchProfileAction;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -70,7 +70,6 @@ public class QuickActionRegistry {
 	private final OsmandSettings settings;
 
 	private List<QuickAction> quickActions;
-	private final Map<String, Boolean> fabStateMap;
 	private final Gson gson;
 	private List<QuickActionType> quickActionTypes = new ArrayList<>();
 	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
@@ -81,7 +80,6 @@ public class QuickActionRegistry {
 	public QuickActionRegistry(OsmandSettings settings) {
 		this.settings = settings;
 		gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, new QuickActionSerializer()).create();
-		fabStateMap = getQuickActionFabStateMapFromJson(settings.QUICK_ACTION.get());
 		updateActionTypes();
 	}
 
@@ -175,23 +173,12 @@ public class QuickActionRegistry {
 	}
 
 	public boolean isQuickActionOn() {
-		Boolean result = fabStateMap.get(settings.APPLICATION_MODE.get().getStringKey());
-		return result != null && result;
+		return settings.QUICK_ACTION.get();
 	}
 
 	public void setQuickActionFabState(boolean isOn) {
-		fabStateMap.put(settings.APPLICATION_MODE.get().getStringKey(), isOn);
-		settings.QUICK_ACTION.set(gson.toJson(fabStateMap));
+		settings.QUICK_ACTION.set(isOn);
 	}
-
-	private Map<String, Boolean> getQuickActionFabStateMapFromJson(String json) {
-		Type type = new TypeToken<HashMap<String, Boolean>>() {
-		}.getType();
-		HashMap<String, Boolean> quickActions = gson.fromJson(json, type);
-
-		return quickActions != null ? quickActions : new HashMap<String, Boolean>();
-	}
-
 
 	private List<QuickAction> parseActiveActionsList(String json) {
 		List<QuickAction> resQuickActions;
