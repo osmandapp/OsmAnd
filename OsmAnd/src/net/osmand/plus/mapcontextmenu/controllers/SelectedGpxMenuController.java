@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.Location;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -196,12 +195,12 @@ public class SelectedGpxMenuController extends MenuController {
 
 		private final WptPt selectedPoint;
 		private final SelectedGpxFile selectedGpxFile;
-		private final Location pointLocation;
+		private final float bearing;
 
-		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, Location pointLocation) {
+		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, float bearing) {
 			this.selectedPoint = selectedPoint;
 			this.selectedGpxFile = selectedGpxFile;
-			this.pointLocation = pointLocation;
+			this.bearing = bearing;
 		}
 
 		public WptPt getSelectedPoint() {
@@ -212,8 +211,8 @@ public class SelectedGpxMenuController extends MenuController {
 			return selectedGpxFile;
 		}
 
-		public Location getPointLocation() {
-			return pointLocation;
+		public float getBearing() {
+			return bearing;
 		}
 	}
 }

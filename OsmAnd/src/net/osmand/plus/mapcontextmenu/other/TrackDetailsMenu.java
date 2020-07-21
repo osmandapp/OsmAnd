@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -142,10 +143,10 @@ public class TrackDetailsMenu {
 				int mx = (int) tb.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
 				int my = (int) tb.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
 				int r = (int) (MAX_DISTANCE_LOCATION_PROJECTION * tb.getPixDensity());
-				WptPt point = GPXLayer.findPointNearSegment(tb, segment.points, r, mx, my);
-				if (point != null) {
-					int index = segment.points.indexOf(point);
-					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(segment.points.get(index - 1), point, tb.getLatLonFromPixel(mx, my));
+				Pair<WptPt, WptPt> points = GPXLayer.findPointsNearSegment(tb, segment.points, r, mx, my);
+				if (points != null) {
+					LatLon latLon = tb.getLatLonFromPixel(mx, my);
+					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
 					float pos = (float) (gpxItem.locationOnMap.distance / ((OrderedLineDataSet) ds.get(0)).getDivX());
 					float nextVisibleX = chart.getLowestVisibleX() + (pos - gpxItem.chartHighlightPos);
 					gpxItem.chartHighlightPos = pos;
