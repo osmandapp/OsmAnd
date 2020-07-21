@@ -484,6 +484,10 @@ public class Algorithms {
 	}
 
 	public static StringBuilder readFromInputStream(InputStream i) throws IOException {
+		return readFromInputStream(i, true);
+	}
+	
+	public static StringBuilder readFromInputStream(InputStream i, boolean autoclose) throws IOException {
 		StringBuilder responseBody = new StringBuilder();
 		responseBody.setLength(0);
 		if (i != null) {
@@ -498,7 +502,9 @@ public class Algorithms {
 				}
 				responseBody.append(s);
 			}
-			i.close();
+			if (autoclose) {
+				i.close();
+			}
 		}
 		return responseBody;
 	}
