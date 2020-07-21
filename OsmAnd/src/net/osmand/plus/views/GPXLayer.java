@@ -48,10 +48,10 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
-import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.ContextMenuLayer.IMoveObjectProvider;
@@ -816,11 +816,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (TrkSegment segment : segments) {
 				QuadRect trackBounds = GPXUtilities.calculateBounds(segment.points);
 				if (QuadRect.trivialOverlap(tb.getLatLonBounds(), trackBounds)) {
-					WptPt nextPoint = findPointNearSegment(tb, segment.points, r, mx, my);
-					if (nextPoint != null) {
-						int index = segment.points.indexOf(nextPoint);
-						WptPt prevPoint = segment.points.get(index - 1);
-						SelectedGpxPoint selectedGpxPoint = createSelectedGpxPoint(selectedGpxFile, prevPoint, nextPoint, tb.getLatLonFromPixel(mx, my));
+					Pair<WptPt, WptPt> points = findPointsNearSegment(tb, segment.points, r, mx, my);
+					if (points != null) {
+						LatLon latLon = tb.getLatLonFromPixel(mx, my);
+						SelectedGpxPoint selectedGpxPoint = createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon);
 						res.add(selectedGpxPoint);
 						break;
 					}
@@ -829,10 +828,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	public static WptPt findPointNearSegment(RotatedTileBox tb, List<WptPt> points, int r, int mx, int my) {
-		WptPt firstPoint = points.get(0);
-		int ppx = (int) tb.getPixXFromLatLon(firstPoint.lat, firstPoint.lon);
-		int ppy = (int) tb.getPixYFromLatLon(firstPoint.lat, firstPoint.lon);
+	public static Pair<WptPt, WptPt> findPointsNearSegment(RotatedTileBox tb, List<WptPt> points, int r, int mx, int my) {
+		WptPt prevPoint = points.get(0);
+		int ppx = (int) tb.getPixXFromLatLon(prevPoint.lat, prevPoint.lon);
+		int ppy = (int) tb.getPixYFromLatLon(prevPoint.lat, prevPoint.lon);
 		int pcross = placeInBbox(ppx, ppy, mx, my, r, r);
 
 		for (int i = 1; i < points.size(); i++) {
@@ -841,7 +840,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			int py = (int) tb.getPixYFromLatLon(point.lat, point.lon);
 			int cross = placeInBbox(px, py, mx, my, r, r);
 			if (cross == 0) {
-				return point;
+				return new Pair<>(prevPoint, point);
 			}
 			if ((pcross & cross) == 0) {
 				int mpx = px;
@@ -852,7 +851,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					int mpynew = mpy / 2 + ppy / 2;
 					int mcrossnew = placeInBbox(mpxnew, mpynew, mx, my, r, r);
 					if (mcrossnew == 0) {
-						return point;
+						return new Pair<>(prevPoint, point);
 					}
 					if ((mcrossnew & mcross) != 0) {
 						mpx = mpxnew;
@@ -871,6 +870,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			pcross = cross;
 			ppx = px;
 			ppy = py;
+			prevPoint = point;
 		}
 		return null;
 	}
@@ -886,9 +886,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		nextPointLocation.setLatitude(nextPoint.lat);
 		nextPointLocation.setLongitude(nextPoint.lon);
 
-		prevPointLocation.setBearing(prevPointLocation.bearingTo(nextPointLocation));
+		float bearing = prevPointLocation.bearingTo(nextPointLocation);
 
-		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, prevPointLocation);
+		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, bearing);
 	}
 
 	public static WptPt createProjectionPoint(WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
