@@ -172,10 +172,9 @@
 \n
 \nPara retornar a um estilo convencional de mapa do OsmAnd, simplesmente desative este complemento ou altere o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado.</string>
     <string name="plugin_ski_name">Mapa de esqui</string>
-    <string name="plugin_ski_descr">Este plugin para o OsmAnd coloca ao seu alcance detalhes de pistas de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. Rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas em um estilo especial de mapa \'Inverno\' que assimila uma paisagem de inverno cor de neve. 
+    <string name="plugin_ski_descr">Este plugin para o OsmAnd coloca ao seu alcance detalhes de pistas de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. Rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas em um estilo especial de mapa \'Inverno\' que assimila uma paisagem de inverno cor de neve.
 \n
-\n 
-\nAtivando esta visão muda o estilo de mapa de \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado.</string>
+\nAtivando esta visão muda o estilo de mapa para \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado.</string>
     <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
     <string name="audionotes_plugin_description">Faça anotações de áudio/foto/vídeo durante uma viagem, usando um botão de mapa ou o menu de contexto da localização.</string>
     <string name="osmand_parking_plugin_name">Estacionamento</string>
@@ -2765,13 +2764,14 @@ Pôr do Sol: %2$s</string>
 \n• Grave ou carregue uma trilha GPX e siga-a
 \n</string>
     <string name="osmand_extended_description_part3">Mapa
-\n• Exibe POIs (ponto de interesse) em torno de você
-\n• Ajusta o mapa na sua direção de movimento (ou bússola)
-\n• Mostra a sua posição e direção para onde está olhando
-\n• Compartilhe sua posição para que seus amigos possam encontrá-lo
-\n• Mantém seus lugares mais importantes em \'Favoritos\'
-\n• Permite-lhe escolher como exibir nomes no mapa: em inglês, local ou escrita fonética
-\n• Exibe mapas on-line especializados, vista de satélite (do Bing), camadas diferentes como trilhas GPX de navegação/turismo e camadas adicionais com transparência personalizável</string>
+\n • Exibe PDIs (ponto de interesse) em torno de você
+\n • Ajusta o mapa na sua direção de movimento (ou bússola)
+\n • Mostra a sua posição e direção para onde está olhando
+\n • Compartilhe sua posição para que seus amigos possam encontrá-lo
+\n • Mantém seus lugares mais importantes em \'Favoritos\'
+\n • Permite-lhe escolher como exibir nomes no mapa: em inglês, local ou escrita fonética
+\n • Exibe mapas on-line especializados, vista de satélite (do Bing), camadas diferentes como trilhas GPX de navegação/turismo e camadas adicionais com transparência personalizável
+\n</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (Direções de Navegação Automatizada do OSM) é um aplicativo de mapa e navegação com acesso a dados livres de todo o mundo em alta qualidade do OSM. 
 \nPoderá usar a navegação visual ou por voz, ver POIs (pontos de interesse), criar e gerenciar trilhas GPX, usar informação de altitude e curvas de nível, escolher entre modos dirigir, andar de bicicleta e pedestres, editar o OSM e muito mais. 
 \n 

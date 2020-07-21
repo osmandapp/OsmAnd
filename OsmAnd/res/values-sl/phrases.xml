@@ -131,7 +131,7 @@
     <string name="poi_bicycle_track">Kolesarska proga</string>
     <string name="poi_horse_track">Jahalna proga</string>
     <string name="poi_bmx">Steza BMX</string>
-    <string name="poi_parking">Parkirišča</string>
+    <string name="poi_parking">Parkirišče</string>
     <string name="poi_library">Knjižnica</string>
     <string name="poi_cinema">Kinodvorana</string>
     <string name="poi_casino">Casino igralnica</string>
@@ -811,4 +811,8 @@
     <string name="poi_bureau_de_change">Menjalnica</string>
     <string name="poi_money_lender">Posojilodajalec</string>
     <string name="poi_pawnbroker">Zastavljalnica</string>
+    <string name="poi_compressed_air">Stisnjen zrak</string>
+    <string name="poi_fuel_coal">Gorivo: premog</string>
+    <string name="poi_fuel_wood">Gorivo: les</string>
+    <string name="poi_aerodrome">Letališče</string>
 </resources>

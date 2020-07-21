@@ -3755,7 +3755,7 @@ Lon %2$s</string>
     <string name="turn_screen_on_descr">Escolle as opcións de acender a pantalla (asegúrate de que o OsmAnd está no primeiro plano cando o dispositivo está a ser bloqueado):</string>
     <string name="turn_screen_on_navigation_instructions">Instrucións de navegación</string>
     <string name="turn_screen_on_power_button">Botón de acendido</string>
-    <string name="turn_screen_on_wake_time_descr">Escolle o tempo de espera da pantalla após acender. (\"%1$s\" non aplica tempo de espera).</string>
+    <string name="turn_screen_on_wake_time_descr">Escolle o tempo de espera da pantalla após acender. (\"%1$s\" non aplica tempo de espera.)</string>
     <string name="keep_screen_off">Manter a pantalla apagada</string>
     <string name="pseudo_mercator_projection">Proxección pseudo-Mercator</string>
     <string name="sqlite_db_file">Ficheiro SQLiteDB</string>

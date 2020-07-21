@@ -157,7 +157,7 @@
     <string name="poi_drinking_water">Drikkevann</string>
     <string name="poi_sightseeing">Sightseeing</string>
     <string name="poi_seafood">Sjømatforretning</string>
-    <string name="poi_confectionery">Konditori</string>
+    <string name="poi_confectionery">Godteributikk</string>
     <string name="poi_fast_food">Hurtigmat</string>
     <string name="poi_food_court">Mathall</string>
     <string name="poi_air_transport">Lufttransport</string>
@@ -293,8 +293,8 @@
     <string name="poi_toll_booth">Bomstasjon</string>
     <string name="poi_border_control">Grensekontroll</string>
     <string name="poi_fee_no">Nei</string>
-    <string name="poi_internet_access_fee_yes">Internettilgang - gebyr</string>
-    <string name="poi_internet_access_fee_no">Internettilgang - ingen gebyr</string>
+    <string name="poi_internet_access_fee_yes">Internettilgang: gebyr</string>
+    <string name="poi_internet_access_fee_no">Internettilgang: ingen gebyr</string>
     <string name="poi_diet_vegetarian_only">Bare vegetarisk</string>
     <string name="poi_diet_vegetarian_yes">Vegetarisk</string>
     <string name="poi_diet_vegetarian_no">Vegetarisk: nei</string>
@@ -449,7 +449,7 @@
     <string name="poi_smoking_dedicated">Dedikert til røykere</string>
     <string name="poi_tactile_paving_yes">Ja</string>
     <string name="poi_traffic_signals_sound_yes">Ja</string>
-    <string name="poi_traffic_signals_sound_no">Nei</string>
+    <string name="poi_traffic_signals_sound_no">Lyd: nei</string>
     <string name="poi_piste_grooming_no">Nei</string>
     <string name="poi_capacity_disabled_yes">Ja</string>
     <string name="poi_aerialway_heating_yes">Ja</string>
@@ -1337,7 +1337,7 @@
     <string name="poi_reservoir">Reservoar</string>
     <string name="poi_college">Høyskole</string>
     <string name="poi_bailiff">Fogd</string>
-    <string name="poi_tax_inspection">Skattekontor</string>
+    <string name="poi_tax_inspection">Skattekontroll</string>
     <string name="poi_climbing_crag">Ja</string>
     <string name="poi_traffic_calming_cushion">Fartshump</string>
     <string name="poi_traffic_calming_table">Bred fartshump</string>
@@ -1569,4 +1569,6 @@
     <string name="poi_seamark_water_level_part_submerged">Vann-nivå: Delvis nedsenket</string>
     <string name="poi_tactile_paving_incorrect">Uriktig</string>
     <string name="poi_fire_hydrant_pressure_filter">Trykk</string>
+    <string name="poi_drive_through_no">Drive-through: nei</string>
+    <string name="poi_drive_in_no">Drive-in: Nei</string>
 </resources>
