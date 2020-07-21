@@ -321,7 +321,7 @@
     <string name="poi_route_hiking_lwn_poi">Lokal vandrerute</string>
     <string name="poi_crossing_traffic_signals">Med trafikklys</string>
     <string name="poi_building">Bygning</string>
-    <string name="poi_car_wash_no">Bilvask: nei</string>
+    <string name="poi_car_wash_no">Nei</string>
     <string name="poi_highway_steps">Trapp</string>
     <string name="poi_square">Torg</string>
     <string name="poi_building_type_pyramid">Bygningstype: pyramide</string>
@@ -1596,4 +1596,5 @@
     <string name="poi_takeaway_no">Ingen avhenting</string>
     <string name="poi_microbrewery_no">Inget mikrobryggeri</string>
     <string name="poi_brewery_additional">Bryggerinavn</string>
+    <string name="poi_nutrition_supplements">Kosttilskudd</string>
 </resources>
