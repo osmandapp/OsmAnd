@@ -3690,13 +3690,13 @@
     <string name="item_deleted">%1$s slettet</string>
     <string name="use_volume_buttons_as_zoom">Lydstyrkeknapper til forstørring</string>
     <string name="search_download_wikipedia_maps">Last ned Wikipedia-kart</string>
-    <string name="accessibility_mode_disabled"></string>
-    <string name="listed_exist"></string>
-    <string name="turn_screen_on_navigation_instructions"></string>
-    <string name="speed_cameras_restart_descr"></string>
-    <string name="shared_string_uninstall_and_restart"></string>
-    <string name="quick_action_remove_next_destination_descr"></string>
-    <string name="app_mode_wheelchair"></string>
-    <string name="app_mode_go_cart"></string>
-    <string name="plan_a_route"></string>
+    <string name="accessibility_mode_disabled"/>
+    <string name="listed_exist"/>
+    <string name="turn_screen_on_navigation_instructions"/>
+    <string name="speed_cameras_restart_descr"/>
+    <string name="shared_string_uninstall_and_restart"/>
+    <string name="quick_action_remove_next_destination_descr"/>
+    <string name="app_mode_wheelchair"/>
+    <string name="app_mode_go_cart"/>
+    <string name="plan_a_route">Planlegg en rute</string>
 </resources>
