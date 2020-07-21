@@ -1570,5 +1570,5 @@
     <string name="poi_tactile_paving_incorrect">Uriktig</string>
     <string name="poi_fire_hydrant_pressure_filter">Trykk</string>
     <string name="poi_drive_through_no">Drive-through: nei</string>
-    <string name="poi_drive_in_no">Drive-in: nei</string>
+    <string name="poi_drive_in_no">Drive-in: Nei</string>
 </resources>
