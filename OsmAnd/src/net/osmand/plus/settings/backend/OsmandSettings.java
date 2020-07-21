@@ -328,11 +328,13 @@ public class OsmandSettings {
 			HashMap<String, Boolean> quickActions = gson.fromJson(quickActionsJson, type);
 			if (!Algorithms.isEmpty(quickActions)) {
 				for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-					Boolean actionState = quickActions.get(mode.getStringKey());
-					if (actionState == null) {
-						actionState = QUICK_ACTION.getDefaultValue();
+					if (!QUICK_ACTION.isSetForMode(mode)) {
+						Boolean actionState = quickActions.get(mode.getStringKey());
+						if (actionState == null) {
+							actionState = QUICK_ACTION.getDefaultValue();
+						}
+						setPreference(QUICK_ACTION.getId(), actionState, mode);
 					}
-					setPreference(QUICK_ACTION.getId(), actionState, mode);
 				}
 			}
 		}
