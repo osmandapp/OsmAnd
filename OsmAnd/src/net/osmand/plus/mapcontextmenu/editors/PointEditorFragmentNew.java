@@ -157,6 +157,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		ImageView groupListIcon = (ImageView) view.findViewById(R.id.group_list_button_icon);
 		groupListIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_group_select_all, activeColorResId));
 		addToHiddenGroupInfo = view.findViewById(R.id.add_hidden_group_info);
+		addToHiddenGroupInfo.setText(getString(R.string.add_hidden_group_info, getString(R.string.shared_string_my_places)));
 		View groupList = view.findViewById(R.id.group_list_button);
 		groupList.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -891,18 +892,18 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					}
 				});
 			} else {
-				final String group = items.get(position);
 				holder.groupButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						int previousSelectedPosition = getItemPosition(selectedItemName);
 						selectedItemName = items.get(holder.getAdapterPosition());
 						updateColorSelector(getCategoryColor(selectedItemName), groupRecyclerView.getRootView());
-						addToHiddenGroupInfo.setVisibility(isCategoryVisible(group) ? View.GONE : View.VISIBLE);
+						addToHiddenGroupInfo.setVisibility(isCategoryVisible(selectedItemName) ? View.GONE : View.VISIBLE);
 						notifyItemChanged(holder.getAdapterPosition());
 						notifyItemChanged(previousSelectedPosition);
 					}
 				});
+				final String group = items.get(position);
 				holder.groupName.setText(group);
 				holder.pointsCounter.setText(String.valueOf(getCategoryPointsCount(group)));
 				int strokeColor;
