@@ -9,15 +9,17 @@ import net.osmand.plus.R;
 
 public enum GpxSplitType {
 
-	NO_SPLIT(-1, R.string.shared_string_none),
-	DISTANCE(1, R.string.distance),
-	TIME(2, R.string.shared_string_time);
+	NO_SPLIT("no_split", -1, R.string.shared_string_none),
+	DISTANCE("distance", 1, R.string.distance),
+	TIME("time", 2, R.string.shared_string_time);
 
+	private String typeName;
 	private int type;
 	@StringRes
 	private int resId;
 
-	GpxSplitType(int type, @StringRes int resId) {
+	GpxSplitType(@NonNull String typeName, int type, @StringRes int resId) {
+		this.typeName = typeName;
 		this.type = type;
 		this.resId = resId;
 	}
@@ -26,7 +28,29 @@ public enum GpxSplitType {
 		return type;
 	}
 
+	public String getTypeName() {
+		return typeName;
+	}
+
 	public String getHumanString(@NonNull Context ctx) {
 		return ctx.getString(resId);
+	}
+
+	public static GpxSplitType getSplitTypeByName(@NonNull String name) {
+		for (GpxSplitType splitType : GpxSplitType.values()) {
+			if (splitType.name().equalsIgnoreCase(name)) {
+				return splitType;
+			}
+		}
+		return null;
+	}
+
+	public static GpxSplitType getSplitTypeByTypeId(int typeId) {
+		for (GpxSplitType splitType : GpxSplitType.values()) {
+			if (splitType.getType() == typeId) {
+				return splitType;
+			}
+		}
+		return null;
 	}
 }

@@ -210,26 +210,19 @@ public class GPXDatabase {
 			width = gpxFile.getWidth(null);
 			showArrows = gpxFile.isShowArrows();
 			showStartFinish = gpxFile.isShowStartFinish();
-			gradientSpeedColor = gpxFile.getGradientScaleColor(GradientScaleType.SPEED.getTypeName(), 0);
-			gradientSlopeColor = gpxFile.getGradientScaleColor(GradientScaleType.SLOPE.getTypeName(), 0);
-			gradientAltitudeColor = gpxFile.getGradientScaleColor(GradientScaleType.ALTITUDE.getTypeName(), 0);
+			gradientSpeedColor = gpxFile.getGradientScaleColor(GradientScaleType.SPEED.getColorTypeName(), 0);
+			gradientSlopeColor = gpxFile.getGradientScaleColor(GradientScaleType.SLOPE.getColorTypeName(), 0);
+			gradientAltitudeColor = gpxFile.getGradientScaleColor(GradientScaleType.ALTITUDE.getColorTypeName(), 0);
 
-			if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() != 0) {
-				for (GpxSplitType gpxSplitType : GpxSplitType.values()) {
-					if (gpxSplitType.name().equalsIgnoreCase(gpxFile.getSplitType())) {
-						splitType = gpxSplitType.getType();
-						splitInterval = gpxFile.getSplitInterval();
-						break;
-					}
+			if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {
+				GpxSplitType gpxSplitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType());
+				if (gpxSplitType != null) {
+					splitType = gpxSplitType.getType();
+					splitInterval = gpxFile.getSplitInterval();
 				}
 			}
 			if (!Algorithms.isEmpty(gpxFile.getGradientScaleType())) {
-				for (GradientScaleType scaleType : GradientScaleType.values()) {
-					if (scaleType.name().equalsIgnoreCase(gpxFile.getGradientScaleType())) {
-						gradientScaleType = scaleType;
-						break;
-					}
-				}
+				gradientScaleType = GradientScaleType.getGradientTypeByName(gpxFile.getGradientScaleType());
 			}
 		}
 
@@ -547,7 +540,7 @@ public class GPXDatabase {
 				String fileDir = getFileDir(item.file);
 				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " + GPX_COL_GRADIENT_SCALE_TYPE + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-						new Object[] {(gradientScaleType == null ? "" : gradientScaleType.name()), fileName, fileDir});
+						new Object[] {(gradientScaleType == null ? "" : gradientScaleType.getTypeName()), fileName, fileDir});
 				item.gradientScaleType = gradientScaleType;
 			} finally {
 				db.close();
@@ -723,7 +716,7 @@ public class GPXDatabase {
 		} else {
 			color = Algorithms.colorToString(item.color);
 		}
-		String gradientScaleType = item.gradientScaleType != null ? item.gradientScaleType.name() : null;
+		String gradientScaleType = item.gradientScaleType != null ? item.gradientScaleType.getTypeName() : null;
 		if (a != null) {
 			db.execSQL(
 					"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",

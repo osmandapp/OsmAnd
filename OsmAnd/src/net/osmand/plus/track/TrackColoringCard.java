@@ -72,7 +72,7 @@ public class TrackColoringCard extends BaseCard {
 		items.add(new TrackAppearanceItem(SOLID_COLOR, app.getString(R.string.track_coloring_solid), R.drawable.ic_action_circle));
 
 //		for (GradientScaleType scaleType : GradientScaleType.values()) {
-//			items.add(new TrackAppearanceItem(scaleType.name(), scaleType.getHumanString(app), scaleType.getIconId()));
+//			items.add(new TrackAppearanceItem(scaleType.getTypeName(), scaleType.getHumanString(app), scaleType.getIconId()));
 //		}
 
 		return items;
@@ -139,7 +139,7 @@ public class TrackColoringCard extends BaseCard {
 			GradientScaleType scaleType = trackDrawInfo.getGradientScaleType();
 			for (TrackAppearanceItem item : appearanceItems) {
 				if (scaleType == null && item.getAttrName().equals(SOLID_COLOR)
-						|| scaleType != null && scaleType.name().equals(item.getAttrName())) {
+						|| scaleType != null && scaleType.getTypeName().equals(item.getAttrName())) {
 					selectedAppearanceItem = item;
 					break;
 				}

@@ -173,19 +173,21 @@ public class GpxSelectionHelper {
 			if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
 				List<GpxDisplayGroup> groups = app.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
-				if (dataItem.getSplitType() == GpxSplitType.NO_SPLIT.getType()) {
-					for (GpxDisplayGroup model : groups) {
-						model.noSplit(app);
-					}
-					selectedGpxFile.setDisplayGroups(groups, app);
-				} else if (dataItem.getSplitType() == GpxSplitType.DISTANCE.getType()) {
-					for (GpxDisplayGroup model : groups) {
-						model.splitByDistance(app, dataItem.getSplitInterval(), dataItem.isJoinSegments());
-					}
-					selectedGpxFile.setDisplayGroups(groups, app);
-				} else if (dataItem.getSplitType() == GpxSplitType.TIME.getType()) {
-					for (GpxDisplayGroup model : groups) {
-						model.splitByTime(app, (int) dataItem.getSplitInterval(), dataItem.isJoinSegments());
+
+				GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(dataItem.getSplitType());
+				if (splitType != null) {
+					if (splitType == GpxSplitType.NO_SPLIT) {
+						for (GpxDisplayGroup model : groups) {
+							model.noSplit(app);
+						}
+					} else if (splitType == GpxSplitType.DISTANCE) {
+						for (GpxDisplayGroup model : groups) {
+							model.splitByDistance(app, dataItem.getSplitInterval(), dataItem.isJoinSegments());
+						}
+					} else if (splitType == GpxSplitType.TIME) {
+						for (GpxDisplayGroup model : groups) {
+							model.splitByTime(app, (int) dataItem.getSplitInterval(), dataItem.isJoinSegments());
+						}
 					}
 					selectedGpxFile.setDisplayGroups(groups, app);
 				}
@@ -522,9 +524,9 @@ public class GpxSelectionHelper {
 							gpx.setColor(clr);
 						}
 						for (GradientScaleType scaleType : GradientScaleType.values()) {
-							if (obj.has(scaleType.getTypeName())) {
-								int clr = Algorithms.parseColor(obj.getString(scaleType.getTypeName()));
-								gpx.setGradientScaleColor(scaleType.getTypeName(), clr);
+							if (obj.has(scaleType.getColorTypeName())) {
+								int clr = Algorithms.parseColor(obj.getString(scaleType.getColorTypeName()));
+								gpx.setGradientScaleColor(scaleType.getColorTypeName(), clr);
 							}
 						}
 						if (obj.has(SHOW_ARROWS)) {
@@ -587,9 +589,9 @@ public class GpxSelectionHelper {
 						obj.put(SHOW_ARROWS, s.gpxFile.isShowArrows());
 						obj.put(SHOW_START_FINISH, s.gpxFile.isShowStartFinish());
 						for (GradientScaleType scaleType : GradientScaleType.values()) {
-							int gradientScaleColor = s.gpxFile.getGradientScaleColor(scaleType.getTypeName(), 0);
+							int gradientScaleColor = s.gpxFile.getGradientScaleColor(scaleType.getColorTypeName(), 0);
 							if (gradientScaleColor != 0) {
-								obj.put(scaleType.getTypeName(), Algorithms.colorToString(gradientScaleColor));
+								obj.put(scaleType.getColorTypeName(), Algorithms.colorToString(gradientScaleColor));
 							}
 						}
 					}
@@ -645,16 +647,16 @@ public class GpxSelectionHelper {
 						gpx.setColor(dataItem.getColor());
 					}
 					if (dataItem.getGradientSpeedColor() != 0) {
-						gpx.setGradientScaleColor(GradientScaleType.SPEED.getTypeName(), dataItem.getGradientSpeedColor());
+						gpx.setGradientScaleColor(GradientScaleType.SPEED.getColorTypeName(), dataItem.getGradientSpeedColor());
 					}
 					if (dataItem.getGradientAltitudeColor() != 0) {
-						gpx.setGradientScaleColor(GradientScaleType.ALTITUDE.getTypeName(), dataItem.getGradientAltitudeColor());
+						gpx.setGradientScaleColor(GradientScaleType.ALTITUDE.getColorTypeName(), dataItem.getGradientAltitudeColor());
 					}
 					if (dataItem.getGradientSlopeColor() != 0) {
-						gpx.setGradientScaleColor(GradientScaleType.SLOPE.getTypeName(), dataItem.getGradientSlopeColor());
+						gpx.setGradientScaleColor(GradientScaleType.SLOPE.getColorTypeName(), dataItem.getGradientSlopeColor());
 					}
 					if (dataItem.getGradientScaleType() != null) {
-						gpx.setGradientScaleType(dataItem.getGradientScaleType().name());
+						gpx.setGradientScaleType(dataItem.getGradientScaleType().getTypeName());
 					}
 					if (dataItem.getWidth() != null) {
 						gpx.setWidth(dataItem.getWidth());

@@ -123,7 +123,7 @@ public class TrackDrawInfo {
 	protected void saveToBundle(@NonNull Bundle bundle) {
 		bundle.putString(TRACK_FILE_PATH, filePath);
 		bundle.putString(TRACK_WIDTH, width);
-		bundle.putString(TRACK_GRADIENT_SCALE_TYPE, gradientScaleType != null ? gradientScaleType.name() : "");
+		bundle.putString(TRACK_GRADIENT_SCALE_TYPE, gradientScaleType != null ? gradientScaleType.getTypeName() : "");
 		bundle.putInt(TRACK_COLOR, color);
 		bundle.putInt(TRACK_SPLIT_TYPE, splitType);
 		bundle.putDouble(TRACK_SPLIT_INTERVAL, splitInterval);

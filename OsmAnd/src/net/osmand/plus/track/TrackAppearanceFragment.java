@@ -311,11 +311,9 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		}
 		gpxFile.setColor(trackDrawInfo.getColor());
 
-		for (GpxSplitType gpxSplitType : GpxSplitType.values()) {
-			if (gpxSplitType.getType() == trackDrawInfo.getSplitType()) {
-				gpxFile.setSplitType(gpxSplitType.name());
-				break;
-			}
+		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType());
+		if (splitType != null) {
+			gpxFile.setSplitType(splitType.getTypeName());
 		}
 
 		gpxFile.setSplitInterval(trackDrawInfo.getSplitInterval());
@@ -334,12 +332,8 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 			int timeSplit = (int) gpxDataItem.getSplitInterval();
 			double distanceSplit = gpxDataItem.getSplitInterval();
 
-			GpxSplitType splitType;
-			if (gpxDataItem.getSplitType() == GpxSplitType.DISTANCE.getType()) {
-				splitType = GpxSplitType.DISTANCE;
-			} else if (gpxDataItem.getSplitType() == GpxSplitType.TIME.getType()) {
-				splitType = GpxSplitType.TIME;
-			} else {
+			GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(gpxDataItem.getSplitType());
+			if (splitType == null) {
 				splitType = GpxSplitType.NO_SPLIT;
 			}
 			SplitTrackAsyncTask.SplitTrackListener splitTrackListener = new SplitTrackAsyncTask.SplitTrackListener() {
