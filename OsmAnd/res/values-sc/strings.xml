@@ -3826,4 +3826,6 @@
     <string name="route_between_points">Àndala intre puntos</string>
     <string name="plan_a_route">Pranìfica un\'àndala</string>
     <string name="add_to_a_track">Annanghe a una rasta</string>
+    <string name="shared_string_custom">Personalizadu</string>
+    <string name="gpx_direction_arrows">Fritzas de diretzione</string>
 </resources>

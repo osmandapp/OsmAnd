@@ -3811,4 +3811,12 @@ Pôr do Sol: %2$s</string>
     <string name="set_working_days_to_continue">Você precisa definir dias úteis para continuar</string>
     <string name="route_between_points">Rota entre pontos</string>
     <string name="plan_a_route">Planejar uma rota</string>
+    <string name="add_hidden_group_info">O ponto adicionado não será visível no mapa, já que o grupo selecionado está oculto, você pode encontrá-lo em \"%s\".</string>
+    <string name="track_show_start_finish_icons">Mostrar ícones de início e término</string>
+    <string name="select_track_width">Selecionar largura</string>
+    <string name="gpx_split_interval_descr">Selecione o intervalo no qual as marcas com distância ou tempo na pista serão exibidas.</string>
+    <string name="gpx_split_interval_none_descr">Selecione a opção de divisão desejada: por tempo ou por distância.</string>
+    <string name="shared_string_custom">Personalizados</string>
+    <string name="gpx_direction_arrows">Setas de direção</string>
+    <string name="track_coloring_solid">Sólido</string>
 </resources>

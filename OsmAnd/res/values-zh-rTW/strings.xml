@@ -3819,4 +3819,12 @@
     <string name="route_between_points">點與點之間的路線</string>
     <string name="plan_a_route">規劃路線</string>
     <string name="add_to_a_track">新增到軌跡</string>
+    <string name="add_hidden_group_info">因為選取的群組是隱藏的，所以加入的點在地圖上不可見，您可以在「%s」尋找它。</string>
+    <string name="track_show_start_finish_icons">顯示開始與結束圖示</string>
+    <string name="select_track_width">選取寬度</string>
+    <string name="gpx_split_interval_descr">選擇在軌跡上要顯示帶有距離或時間標記的間隔。</string>
+    <string name="gpx_split_interval_none_descr">選取所需的分割選項：按時間或按距離。</string>
+    <string name="shared_string_custom">自訂</string>
+    <string name="gpx_direction_arrows">方向箭頭</string>
+    <string name="track_coloring_solid">密實</string>
 </resources>

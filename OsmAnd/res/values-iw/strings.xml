@@ -3833,4 +3833,11 @@
     <string name="plan_a_route">תכנון מסלול</string>
     <string name="add_to_a_track">הוספה למסלול</string>
     <string name="add_hidden_group_info">הנקודה שנוספה לא תופיע על המפה מאחר שהקבוצה הנבחרת מוסתרת, ניתן למצוא אותה תחת „%s”.</string>
+    <string name="gpx_split_interval_descr">נא לבחור את משך הזמן בו סמנים עם מרחק או זמן יופיעו על גבי המסלול.</string>
+    <string name="track_show_start_finish_icons">הצגת סמני התחלה וסוף</string>
+    <string name="select_track_width">בחירת רוחב</string>
+    <string name="gpx_split_interval_none_descr">נא לבחור את אפשרות הפיצול הרצויה: לפי זמן או מרחק.</string>
+    <string name="shared_string_custom">התאמה אישית</string>
+    <string name="gpx_direction_arrows">חצי כיוון</string>
+    <string name="track_coloring_solid">אחיד</string>
 </resources>

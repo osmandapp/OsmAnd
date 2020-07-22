@@ -3831,4 +3831,12 @@
     <string name="route_between_points">Route zwischen Punkten</string>
     <string name="plan_a_route">Eine Route planen</string>
     <string name="add_to_a_track">Zu einem Track hinzufügen</string>
+    <string name="add_hidden_group_info">Der hinzugefügte Punkt wird auf der Karte nicht sichtbar sein, da die ausgewählte Gruppe ausgeblendet ist, Sie können ihn in \"%s\" finden.</string>
+    <string name="track_show_start_finish_icons">Start-Ziel-Symbole anzeigen</string>
+    <string name="select_track_width">Breite auswählen</string>
+    <string name="gpx_split_interval_descr">Wählen Sie das Intervall, in dem Markierungen mit Abstand oder Zeit auf dem Track angezeigt werden.</string>
+    <string name="gpx_split_interval_none_descr">Wählen Sie die gewünschte Aufteilungsoption: nach Zeit oder nach Entfernung.</string>
+    <string name="shared_string_custom">Benutzerdefiniert</string>
+    <string name="gpx_direction_arrows">Richtungspfeile</string>
+    <string name="track_coloring_solid">Ausgefüllt</string>
 </resources>
