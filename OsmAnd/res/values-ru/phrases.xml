@@ -992,7 +992,7 @@
     <string name="poi_pump_yes">Есть</string>
     <string name="poi_water_characteristic">Характеристика воды</string>
     <string name="poi_water_characteristic_mineral">Характеристика воды: минеральная</string>
-    <string name="poi_water_characteristic_mud">Характеристика воды: грязь</string>
+    <string name="poi_water_characteristic_mud">Грязь</string>
     <string name="poi_water_characteristic_sulfuric">Серная</string>
     <string name="poi_water_point">Пункт водоснабжения</string>
     <string name="poi_monitoring_station">Станция наблюдения</string>
@@ -1361,7 +1361,7 @@
     <string name="poi_diet_lactose_free_yes">Безлактозное питание</string>
     <string name="poi_diet_lactose_free_no">Безлактозные продукты не предлагаются</string>
     <string name="poi_diet_pescetarian_yes">Пескетарианское питание</string>
-    <string name="poi_drive_in">Обслуживание клиентов сидящих в автомобиле</string>
+    <string name="poi_drive_in">Обслуживание клиентов, сидящих в автомобиле</string>
     <string name="poi_drive_in_yes">Да</string>
     <string name="poi_drive_in_no">Приобрести продукты не покидая авто на парковке (drive-in): нет</string>
     <string name="poi_drive_through">Обслуживание клиентов, сидящих в автомобиле</string>
