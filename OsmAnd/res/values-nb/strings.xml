@@ -3307,7 +3307,7 @@
     <string name="apply_preference_to_all_profiles">Du kan bruke denne endringen på alle eller bare på den valgte profilen.</string>
     <string name="quick_action_contour_lines_descr">En bryter for å vise eller skjule koter på kartet.</string>
     <string name="export_profile">Eksporter profil</string>
-    <string name="overwrite_profile_q">\'%1$s\' finnes allerede. Overskrive\?</string>
+    <string name="overwrite_profile_q">\"%1$s\" finnes allerede. Overskriv\?</string>
     <string name="export_profile_failed">Kunne ikke eksportere profil.</string>
     <string name="profile_import_descr">Legg til en profil ved å åpne profilfilen med OsmAnd.</string>
     <string name="file_import_error">%1$s feil under import: %2$s</string>
