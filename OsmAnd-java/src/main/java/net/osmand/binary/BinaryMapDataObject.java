@@ -47,6 +47,26 @@ public class BinaryMapDataObject {
 		this.labelY = labelY;
 	}
 	
+	
+	
+	public BinaryMapDataObject(BinaryMapDataObject copy) {
+		super();
+		this.coordinates = copy.coordinates;
+		this.polygonInnerCoordinates = copy.polygonInnerCoordinates;
+		this.area = copy.area;
+		this.types = copy.types;
+		this.additionalTypes = copy.additionalTypes;
+		this.objectType = copy.objectType;
+		this.labelX = copy.labelX;
+		this.labelY = copy.labelY;
+		this.objectNames = copy.objectNames;
+		this.namesOrder = copy.namesOrder;
+		this.id = copy.id;
+		this.mapIndex = copy.mapIndex;
+	}
+
+
+
 	protected void setCoordinates(int[] coordinates) {
 		this.coordinates = coordinates;
 	}
@@ -154,11 +174,24 @@ public class BinaryMapDataObject {
 		this.id = id;
 	}
 	
-	protected void setTypes(int[] types) {
+	public void setTypes(int[] types) {
 		this.types = types;
 	}
 	
-	
+	public void setAdditionalTypes(int[] additionalTypes) {
+		this.additionalTypes = additionalTypes;
+	}
+
+	public void setObjectNames(TIntObjectHashMap<String> objectNames) {
+		this.objectNames = objectNames;
+	}
+
+	public void setNamesOrder(TIntArrayList namesOrder) {
+		this.namesOrder = namesOrder;
+	}
+
+
+
 	public int getSimpleLayer(){
 		if(mapIndex != null) {
 			if (additionalTypes != null) {
