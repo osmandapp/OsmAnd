@@ -524,7 +524,12 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				entity.removeTag(poiType.getEditOsmTag());
 				entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
 			} else {
-				// later we could try to determine tags
+				for (PoiType pt : type.getPoiTypes()) {
+					if (pt.getEditOsmValue().equals(entity.getTag(pt.getEditOsmTag()))) {
+						entity.removeTag(pt.getEditOsmTag());
+						entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, pt.getTranslation());
+					}
+				}
 			}
 		}
 		return entity;

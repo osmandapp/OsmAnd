@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,16 +57,15 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -77,6 +77,10 @@ import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -104,8 +108,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -132,7 +138,8 @@ public class OsmandAidlApi {
 	public static final int KEY_ON_UPDATE = 1;
 	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
 	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
-	public static final int KEY_ON_VOICE_MESSAGE = 5;
+	public static final int KEY_ON_VOICE_MESSAGE = 8;
+	public static final int KEY_ON_KEY_EVENT = 16;
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 
@@ -141,6 +148,7 @@ public class OsmandAidlApi {
 	private static final String AIDL_LATITUDE = "aidl_latitude";
 	private static final String AIDL_LONGITUDE = "aidl_longitude";
 	private static final String AIDL_ZOOM = "aidl_zoom";
+	private static final String AIDL_ROTATION = "aidl_rotation";
 	private static final String AIDL_ANIMATED = "aidl_animated";
 
 	private static final String AIDL_START_NAME = "aidl_start_name";
@@ -180,6 +188,7 @@ public class OsmandAidlApi {
 
 	private static final String AIDL_EXECUTE_QUICK_ACTION = "aidl_execute_quick_action";
 	private static final String AIDL_QUICK_ACTION_NUMBER = "aidl_quick_action_number";
+	private static final String AIDL_LOCK_STATE = "lock_state";
 
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
@@ -231,6 +240,7 @@ public class OsmandAidlApi {
 		registerShowSqliteDbFileReceiver(mapActivity);
 		registerHideSqliteDbFileReceiver(mapActivity);
 		registerExecuteQuickActionReceiver(mapActivity);
+		registerLockStateReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		aMapPointUpdateListener = mapActivity;
@@ -295,6 +305,7 @@ public class OsmandAidlApi {
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
 					int zoom = intent.getIntExtra(AIDL_ZOOM, 0);
 					boolean animated = intent.getBooleanExtra(AIDL_ANIMATED, false);
+					float rotation = intent.getFloatExtra(AIDL_ROTATION, Float.NaN);
 					if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
 						OsmandMapTileView mapView = mapActivity.getMapView();
 						if (zoom == 0) {
@@ -302,6 +313,9 @@ public class OsmandAidlApi {
 						} else {
 							zoom = zoom > mapView.getMaxZoom() ? mapView.getMaxZoom() : zoom;
 							zoom = zoom < mapView.getMinZoom() ? mapView.getMinZoom() : zoom;
+						}
+						if(!Float.isNaN(rotation)) {
+							mapView.setRotate(rotation, false);
 						}
 						if (animated) {
 							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, true);
@@ -855,6 +869,22 @@ public class OsmandAidlApi {
 			}
 		};
 		registerReceiver(executeQuickActionReceiver, mapActivity, AIDL_EXECUTE_QUICK_ACTION);
+	}
+
+	private void registerLockStateReceiver(MapActivity mapActivity) {
+		BroadcastReceiver lockStateReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				LockHelper lockHelper = app.getLockHelper();
+				boolean lock = intent.getBooleanExtra(AIDL_LOCK_STATE, false);
+				if (lock) {
+					lockHelper.lock();
+				} else {
+					lockHelper.unlock();
+				}
+			}
+		};
+		registerReceiver(lockStateReceiver, mapActivity, AIDL_LOCK_STATE);
 	}
 
 	public void registerMapLayers(@NonNull MapActivity mapActivity) {
@@ -1585,12 +1615,13 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean setMapLocation(double latitude, double longitude, int zoom, boolean animated) {
+	boolean setMapLocation(double latitude, double longitude, int zoom, float rotation, boolean animated) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_SET_MAP_LOCATION);
 		intent.putExtra(AIDL_LATITUDE, latitude);
 		intent.putExtra(AIDL_LONGITUDE, longitude);
 		intent.putExtra(AIDL_ZOOM, zoom);
+		intent.putExtra(AIDL_ROTATION, rotation);
 		intent.putExtra(AIDL_ANIMATED, animated);
 		app.sendBroadcast(intent);
 		return true;
@@ -1725,6 +1756,14 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_DATA, data);
 		intent.putExtra(AIDL_URI, uri);
 		intent.putExtra(AIDL_FORCE, force);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean setLockState(boolean lock) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_LOCK_STATE);
+		intent.putExtra(AIDL_LOCK_STATE, lock);
 		app.sendBroadcast(intent);
 		return true;
 	}
@@ -2356,6 +2395,37 @@ public class OsmandAidlApi {
 				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
 				a.avgElevation, a.minElevation, a.maxElevation, a.minSpeed, a.maxSpeed, a.avgSpeed,
 				a.points, a.wptPoints, a.wptCategoryNames);
+	}
+
+	private Map<Long, Set<Integer>> keyEventCallbacks = new ConcurrentHashMap<>();
+
+	public boolean onKeyEvent(KeyEvent event) {
+		if (aidlCallbackListenerV2 != null) {
+			for (Map.Entry<Long, OsmandAidlServiceV2.AidlCallbackParams> entry : aidlCallbackListenerV2.getAidlCallbacks().entrySet()) {
+				OsmandAidlServiceV2.AidlCallbackParams cb = entry.getValue();
+				if ((cb.getKey() & KEY_ON_KEY_EVENT) > 0) {
+					Set<Integer> keyEventsList = keyEventCallbacks.get(entry.getKey());
+					//An empty list means all key are requested
+					if (keyEventsList != null && (keyEventsList.isEmpty() || keyEventsList.contains(event.getKeyCode()))) {
+						try {
+							cb.getCallback().onKeyEvent(event);
+							return true;
+						} catch (Exception e) {
+							LOG.error(e.getMessage(), e);
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	void registerForKeyEvents(long id, ArrayList<Integer> keyEventLst) {
+		keyEventCallbacks.put(id, new HashSet<>(keyEventLst));
+	}
+
+	public void unregisterFromKeyEvents(long id) {
+		keyEventCallbacks.remove(id);
 	}
 
 	public interface SearchCompleteCallback {

@@ -2072,7 +2072,7 @@
     <string name="gpx_add_track">增加更多…</string>
     <string name="shared_string_appearance">外觀</string>
     <string name="trip_rec_notification_settings">啟用快速錄製</string>
-    <string name="trip_rec_notification_settings_desc">顯示允許行程錄製的系統通知。</string>
+    <string name="trip_rec_notification_settings_desc">顯示允許開始行程錄製的系統通知。</string>
     <string name="rendering_value_fine_name">精細</string>
     <string name="route_calculation">路線估算</string>
     <string name="upload_poi">上傳 POI</string>
@@ -3815,4 +3815,8 @@
     <string name="app_mode_wheelchair_forward">輪椅向前</string>
     <string name="app_mode_go_cart">卡丁車</string>
     <string name="osm_edit_closed_note">已關閉的 OSM 註記</string>
+    <string name="set_working_days_to_continue">您必須設定工作天以繼續</string>
+    <string name="route_between_points">點與點之間的路線</string>
+    <string name="plan_a_route">規劃路線</string>
+    <string name="add_to_a_track">新增到軌跡</string>
 </resources>

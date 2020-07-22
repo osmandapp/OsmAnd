@@ -1927,7 +1927,7 @@
     <string name="storage_directory_readonly_desc">Seçilen veri saklama klasörü yazma korumalı olduğu için dahili hafızaya geçildi. Lütfen yazılabilir bir depolama dizini seçin.</string>
     <string name="storage_directory_shared">Paylaşılan bellek</string>
     <string name="shared_string_topbar">Üst menü</string>
-    <string name="recalculate_route">Rota yeniden hesapla</string>
+    <string name="recalculate_route">Güzergahı yeniden hesapla</string>
     <string name="report">Rapor</string>
     <string name="access_no_destination">Hedef ayarlanmadı</string>
     <string name="access_disable_offroute_recalc">Rota terkedildiğinde yeniden hesaplanmasın</string>
@@ -1980,7 +1980,7 @@
     <string name="points_delete_multiple_succesful">Nokta(lar) silindi.</string>
     <string name="shared_string_gpx_track">Takip et</string>
     <string name="track_points_category_name">Waypointler, ilgi çekici noktalar, adlandırılmış özellikler</string>
-    <string name="max_speed">Azami hız</string>
+    <string name="max_speed">En yüksek hız</string>
     <string name="average_speed">Ortalama hız</string>
     <string name="shared_string_max">Azami</string>
     <string name="shared_string_start_time">Başlangıç zamanı</string>
@@ -2258,7 +2258,7 @@
     <string name="routing_attr_allow_motorway_name">Otoyolları kullan</string>
     <string name="routing_attr_allow_motorway_description">Otoyollara izin verir.</string>
     <string name="upload_poi">POI yükleyin</string>
-    <string name="trip_rec_notification_settings_desc">Gezi kaydına izin veren bir sistem bildirimi görüntüle.</string>
+    <string name="trip_rec_notification_settings_desc">Gezi kaydını başlatmaya izin veren bir sistem bildirimi görüntüle.</string>
     <string name="shared_string_trip">Seyahat</string>
     <string name="shared_string_recorded">Kaydedildi</string>
     <string name="create_custom_poi">Özel süzgeç oluştur</string>
@@ -3265,7 +3265,7 @@
     <string name="routeInfo_piste_difficulty_name">Pist zorluğu</string>
     <string name="routing_attr_width_name">Genişlik sınırı</string>
     <string name="routing_attr_width_description">Rotalarda izin verilen araç genişlik sınırını belirtin.</string>
-    <string name="avoid_in_routing_descr_">Belirli rotalardan ve yol türlerinden kaçının</string>
+    <string name="avoid_in_routing_descr_">Belirli güzergahlardan ve yol türlerinden kaçının</string>
     <string name="app_mode_utv">Yan yana</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Hava yolu</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Bağlantı</string>
@@ -3396,7 +3396,7 @@
     <string name="video_notes">Video notları</string>
     <string name="photo_notes">Fotoğraf notları</string>
     <string name="route_recalculation">Rotanın yeniden hesaplanması</string>
-    <string name="accessibility_announce">Anons</string>
+    <string name="accessibility_announce">Duyuru</string>
     <string name="login_and_pass">Kullanıcı adı ve parola</string>
     <string name="plugin_global_prefs_info">Bu ayarlar tüm profiller için geçerlidir.</string>
     <string name="osm_editing">OSM düzenleme</string>
@@ -3543,9 +3543,9 @@
     <string name="restore_all_profile_settings">Tüm profil ayarları geri yüklensin mi\?</string>
     <string name="restore_all_profile_settings_descr">Bu profili oluşturduktan/ içe aktardıktan sonra tüm profil ayarları orijinal değerlerine geri yüklenecektir.</string>
     <string name="clear_recorded_data_warning">Kayıtlı verileri silmek istediğinize emin misiniz\?</string>
-    <string name="recalculate_route_in_deviation">Sapma durumunda rotayı yeniden hesapla</string>
-    <string name="select_distance_route_will_recalc">Rotanın yeniden hesaplanacağı mesafeyi seçin.</string>
-    <string name="recalculate_route_distance_promo">Rotadan geçerli konuma olan mesafe seçilen değerden fazla ise rota yeniden hesaplanacaktır.</string>
+    <string name="recalculate_route_in_deviation">Sapma durumunda güzergahı yeniden hesapla</string>
+    <string name="select_distance_route_will_recalc">Güzergahın yeniden hesaplanacağı mesafeyi seçin.</string>
+    <string name="recalculate_route_distance_promo">Güzergahtan geçerli konuma olan mesafe seçilen değerden fazla ise güzergah yeniden hesaplanacaktır.</string>
     <string name="n_items_of_z">%1$s / %2$s</string>
     <string name="download_slope_maps">Yamaçlar</string>
     <string name="quick_action_show_hide_terrain">Araziyi göster / gizle</string>
@@ -3775,4 +3775,8 @@
     <string name="app_mode_wheelchair_forward">İleri tekerlekli sandalye</string>
     <string name="app_mode_go_cart">Go-kart</string>
     <string name="osm_edit_closed_note">Kapatılmış OSM Notu</string>
+    <string name="add_to_a_track">İzlemeye ekle</string>
+    <string name="set_working_days_to_continue">Devam etmek için çalışma günlerini ayarlamalısınız</string>
+    <string name="route_between_points">Noktalar arasındaki güzergah</string>
+    <string name="plan_a_route">Güzergah planla</string>
 </resources>

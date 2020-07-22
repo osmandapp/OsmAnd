@@ -41,11 +41,11 @@ public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
 
-	public static boolean isEmpty(Collection c) {
+	public static boolean isEmpty(Collection<?> c) {
 		return c == null || c.size() == 0;
 	}
 
-	public static boolean isEmpty(Map map) {
+	public static boolean isEmpty(Map<?, ?> map) {
 		return map == null || map.size() == 0;
 	}
 
@@ -484,6 +484,10 @@ public class Algorithms {
 	}
 
 	public static StringBuilder readFromInputStream(InputStream i) throws IOException {
+		return readFromInputStream(i, true);
+	}
+	
+	public static StringBuilder readFromInputStream(InputStream i, boolean autoclose) throws IOException {
 		StringBuilder responseBody = new StringBuilder();
 		responseBody.setLength(0);
 		if (i != null) {
@@ -497,6 +501,9 @@ public class Algorithms {
 					f = false;
 				}
 				responseBody.append(s);
+			}
+			if (autoclose) {
+				i.close();
 			}
 		}
 		return responseBody;

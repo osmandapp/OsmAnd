@@ -39,10 +39,8 @@ import com.squareup.picasso.RequestCreator;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXFile.GpxSplitType;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PicassoUtils;
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
@@ -55,29 +53,23 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.measurementtool.NewGpxData;
+import net.osmand.plus.track.SplitTrackAsyncTask;
+import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
-import net.osmand.render.RenderingRulesStorage;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
-
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 
@@ -269,46 +261,13 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		imageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				TrackActivity activity = getTrackActivity();
-				GpxDataItem gpxDataItem = getGpxDataItem();
-				GPXFile gpx = getGpx();
-				WptPt pointToShow = gpx != null ? gpx.findPointToShow() : null;
-				if (activity != null && pointToShow != null) {
-					boolean gpxFileSelected = isGpxFileSelected(gpx);
-					if (!gpxFileSelected) {
-						Intent intent = activity.getIntent();
-						if (intent != null) {
-							intent.putExtra(TrackActivity.SHOW_TEMPORARILY, true);
-						}
-					}
-					setTrackVisibilityOnMap(true);
-
-					LatLon location = new LatLon(pointToShow.getLatitude(),
-							pointToShow.getLongitude());
-					final OsmandSettings settings = app.getSettings();
-					String trackName;
-					if (gpx.showCurrentTrack) {
-						trackName = app.getString(R.string.shared_string_currently_recording_track);
-					} else if (gpxDataItem != null) {
-						trackName = gpxDataItem.getFile().getName();
-					} else {
-						trackName = gpx.path;
-					}
-					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-							settings.getLastKnownMapZoom(),
-							new PointDescription(PointDescription.POINT_TYPE_WPT, trackName),
-							false,
-							getRect()
-					);
-
-					MapActivity.launchMapActivityMoveToTop(activity);
-				}
+				showTemporaryObjectOnMap(getRect());
 			}
 		});
 		final View splitColorView = headerView.findViewById(R.id.split_color_view);
+		final View appearanceView = headerView.findViewById(R.id.appearance_view);
 		final View divider = headerView.findViewById(R.id.divider);
 		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
-		final View colorView = headerView.findViewById(R.id.color_view);
 		vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
 		final View bottomDivider = headerView.findViewById(R.id.bottom_divider);
 		GPXFile gpxFile = getGpx();
@@ -340,7 +299,6 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				setTrackVisibilityOnMap(vis.isChecked());
 				if (!showMapOnly) {
 					updateSplitIntervalView(splitIntervalView);
-					updateColorView(colorView);
 				}
 				TrackActivity trackActivity = getTrackActivity();
 				if (trackActivity != null) {
@@ -353,41 +311,11 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		if (showMapOnly) {
 			splitIntervalView.setVisibility(View.GONE);
 			splitColorView.setVisibility(View.GONE);
+			appearanceView.setVisibility(View.GONE);
 			divider.setVisibility(View.GONE);
 			bottomDivider.setVisibility(View.VISIBLE);
 		} else {
 			bottomDivider.setVisibility(View.GONE);
-
-			updateColorView(colorView);
-			colorView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					TrackActivity activity = getTrackActivity();
-					final GPXFile gpxFile = getGpx();
-					if (activity != null && gpxFile != null) {
-						final GpxAppearanceAdapter appearanceAdapter = new GpxAppearanceAdapter(activity,
-								gpxFile.getColor(0), GpxAppearanceAdapterType.TRACK_WIDTH_COLOR);
-						OnItemClickListener itemClickListener = new OnItemClickListener() {
-
-							@Override
-							public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-								AppearanceListItem item = appearanceAdapter.getItem(position);
-								if (item != null) {
-									if (CURRENT_TRACK_COLOR_ATTR.equals(item.getAttrName())) {
-										setGpxColor(item, gpxFile);
-									} else if (CURRENT_TRACK_WIDTH_ATTR.equals(item.getAttrName())) {
-										setGpxWidth(item, gpxFile);
-									}
-								}
-								colorListPopupWindow.dismiss();
-								updateColorView(colorView);
-							}
-						};
-						colorListPopupWindow = createPopupWindow(activity, splitIntervalView, appearanceAdapter, itemClickListener);
-						colorListPopupWindow.show();
-					}
-				}
-			});
 
 			if (hasPath) {
 				if (!gpxFile.showCurrentTrack && listItemsCount > 0) {
@@ -419,48 +347,55 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				} else {
 					splitIntervalView.setVisibility(View.GONE);
 				}
+				appearanceView.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						showTemporaryObjectOnMap(getGpx());
+					}
+				});
+				appearanceView.setVisibility(View.VISIBLE);
 				splitColorView.setVisibility(View.VISIBLE);
 				divider.setVisibility(View.VISIBLE);
 			} else {
+				appearanceView.setVisibility(View.GONE);
 				splitColorView.setVisibility(View.GONE);
 				divider.setVisibility(View.GONE);
 			}
 		}
 	}
 
-	private void setGpxColor(AppearanceListItem item, GPXFile gpxFile) {
-		int color = item.getColor();
-		if (vis.isChecked()) {
-			SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpxFile, vis.isChecked(), false);
-			if (color != 0 && sf.getModifiableGpxFile() != null) {
-				sf.getModifiableGpxFile().setColor(color);
-				if (getGpxDataItem() != null) {
-					app.getGpxDbHelper().updateColor(getGpxDataItem(), color);
+	private void showTemporaryObjectOnMap(Object toShow){
+		TrackActivity activity = getTrackActivity();
+		GpxDataItem gpxDataItem = getGpxDataItem();
+		GPXFile gpx = getGpx();
+		WptPt pointToShow = gpx != null ? gpx.findPointToShow() : null;
+		if (activity != null && pointToShow != null) {
+			boolean gpxFileSelected = isGpxFileSelected(gpx);
+			if (!gpxFileSelected) {
+				Intent intent = activity.getIntent();
+				if (intent != null) {
+					intent.putExtra(TrackActivity.SHOW_TEMPORARILY, true);
 				}
 			}
-		} else if (getGpxDataItem() != null) {
-			app.getGpxDbHelper().updateColor(getGpxDataItem(), color);
-		}
-		if (gpxFile.showCurrentTrack) {
-			app.getSettings().CURRENT_TRACK_COLOR.set(color);
-		}
-		refreshTrackBitmap();
-	}
+			setTrackVisibilityOnMap(true);
 
-	private void setGpxWidth(AppearanceListItem item, GPXFile gpxFile) {
-		String width = item.getValue();
-		if (vis.isChecked()) {
-			SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpxFile, vis.isChecked(), false);
-			if (width != null && sf.getModifiableGpxFile() != null) {
-				sf.getModifiableGpxFile().setWidth(width);
-				if (getGpxDataItem() != null) {
-					app.getGpxDbHelper().updateWidth(getGpxDataItem(), width);
-				}
+			final OsmandSettings settings = app.getSettings();
+			String trackName;
+			if (gpx.showCurrentTrack) {
+				trackName = app.getString(R.string.shared_string_currently_recording_track);
+			} else if (gpxDataItem != null) {
+				trackName = gpxDataItem.getFile().getName();
+			} else {
+				trackName = gpx.path;
 			}
-		} else if (getGpxDataItem() != null) {
-			app.getGpxDbHelper().updateWidth(getGpxDataItem(), width);
+			settings.setMapLocationToShow(pointToShow.getLatitude(), pointToShow.getLongitude(),
+					settings.getLastKnownMapZoom(),
+					new PointDescription(PointDescription.POINT_TYPE_WPT, trackName),
+					false,
+					toShow
+			);
+			MapActivity.launchMapActivityMoveToTop(activity);
 		}
-		refreshTrackBitmap();
 	}
 
 	private ListPopupWindow createPopupWindow(Activity activity, View anchorView, ListAdapter adapter, OnItemClickListener itemClickListener) {
@@ -773,33 +708,6 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		return Math.max(position, 0);
 	}
 
-	private void updateColorView(View colorView) {
-		final ImageView colorImageView = (ImageView) colorView.findViewById(R.id.colorImage);
-		int color = getGpxDataItem() != null ? getGpxDataItem().getColor() : 0;
-		GPXFile gpxFile = getGpx();
-		if (color == 0 && gpxFile != null) {
-			if (gpxFile.showCurrentTrack) {
-				color = app.getSettings().CURRENT_TRACK_COLOR.get();
-			} else {
-				color = gpxFile.getColor(0);
-			}
-		}
-		if (color == 0) {
-			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-			CommonPreference<String> prefColor = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
-			color = GpxAppearanceAdapter.parseTrackColor(renderer, prefColor.get());
-		}
-		if (color == 0) {
-			colorImageView.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle));
-		} else {
-			colorImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, color));
-		}
-		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
-		if (trackDrawer != null) {
-			trackDrawer.setTrackColor(color);
-		}
-	}
-
 	public List<GpxSelectionHelper.GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
 		ArrayList<GpxSelectionHelper.GpxDisplayItem> list = new ArrayList<>();
 		for (GpxDisplayGroup g : groups) {
@@ -841,12 +749,55 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		addOptionSplit(3600, false, groups);
 	}
 
-	private void updateSplit(@NonNull List<GpxDisplayGroup> groups, @Nullable SelectedGpxFile sf) {
+	private void updateSplit(@NonNull List<GpxDisplayGroup> groups, @Nullable final SelectedGpxFile selectedGpx) {
+		GPXFile gpxFile = getGpx();
 		TrackActivity activity = getTrackActivity();
-		if (activity != null) {
-			new SplitTrackAsyncTask(activity, this, sf, groups)
-					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		GpxSplitType gpxSplitType = getGpxSplitType();
+		if (activity != null && gpxSplitType != null && gpxFile != null) {
+			int timeSplit = 0;
+			double distanceSplit = 0;
+			if (!gpxFile.showCurrentTrack) {
+				timeSplit = this.timeSplit.get(selectedSplitInterval);
+				distanceSplit = this.distanceSplit.get(selectedSplitInterval);
+			}
+			SplitTrackListener splitTrackListener = new SplitTrackListener() {
+
+				@Override
+				public void trackSplittingStarted() {
+					TrackActivity activity = getTrackActivity();
+					if (activity != null) {
+						activity.setSupportProgressBarIndeterminateVisibility(true);
+					}
+				}
+
+				@Override
+				public void trackSplittingFinished() {
+					TrackActivity activity = getTrackActivity();
+					if (activity != null) {
+						if (AndroidUtils.isActivityNotDestroyed(activity)) {
+							activity.setSupportProgressBarIndeterminateVisibility(false);
+						}
+						if (selectedGpx != null) {
+							List<GpxDisplayGroup> groups = getDisplayGroups();
+							selectedGpx.setDisplayGroups(groups, app);
+						}
+					}
+				}
+			};
+			new SplitTrackAsyncTask(app, gpxSplitType, groups, splitTrackListener, activity.isJoinSegments(),
+					timeSplit, distanceSplit).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
+	}
+
+	private GpxSplitType getGpxSplitType() {
+		if (selectedSplitInterval == 0) {
+			return GpxSplitType.NO_SPLIT;
+		} else if (distanceSplit.get(selectedSplitInterval) > 0) {
+			return GpxSplitType.DISTANCE;
+		} else if (timeSplit.get(selectedSplitInterval) > 0) {
+			return GpxSplitType.TIME;
+		}
+		return null;
 	}
 
 	private void addOptionSplit(int value, boolean distance, @NonNull List<GpxDisplayGroup> model) {
@@ -1007,76 +958,5 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	@Override
 	public void drawTrackBitmap(Bitmap bitmap) {
 		imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bitmap));
-	}
-
-	private static class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
-		private final SelectedGpxFile selectedGpx;
-		private OsmandApplication app;
-		private final WeakReference<TrackActivity> activityRef;
-		private final WeakReference<TrackActivityFragmentAdapter> fragmentAdapterRef;
-		private final List<GpxDisplayGroup> groups;
-
-		private List<Double> distanceSplit;
-		private TIntArrayList timeSplit;
-		private int selectedSplitInterval;
-		private boolean joinSegments;
-
-		SplitTrackAsyncTask(@NonNull TrackActivity activity,
-							@NonNull TrackActivityFragmentAdapter fragmentAdapter,
-							@Nullable SelectedGpxFile selectedGpx,
-							@NonNull List<GpxDisplayGroup> groups) {
-			activityRef = new WeakReference<>(activity);
-			fragmentAdapterRef = new WeakReference<>(fragmentAdapter);
-			app = activity.getMyApplication();
-			this.selectedGpx = selectedGpx;
-			this.groups = groups;
-
-			selectedSplitInterval = fragmentAdapter.selectedSplitInterval;
-			distanceSplit = fragmentAdapter.distanceSplit;
-			timeSplit = fragmentAdapter.timeSplit;
-			joinSegments = activity.isJoinSegments();
-		}
-
-		@Override
-		protected void onPreExecute() {
-			TrackActivity activity = activityRef.get();
-			if (activity != null) {
-				activity.setSupportProgressBarIndeterminateVisibility(true);
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			TrackActivity activity = activityRef.get();
-			TrackActivityFragmentAdapter fragment = fragmentAdapterRef.get();
-			if (activity != null && fragment != null) {
-				if (!activity.isFinishing()) {
-					activity.setSupportProgressBarIndeterminateVisibility(false);
-				}
-				if (selectedGpx != null) {
-					List<GpxDisplayGroup> groups = fragment.getDisplayGroups();
-					selectedGpx.setDisplayGroups(groups, app);
-				}
-				/*
-				if (fragment.isVisible()) {
-					fragment.updateContent();
-				}
-				*/
-			}
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			for (GpxDisplayGroup model : groups) {
-				if (selectedSplitInterval == 0) {
-					model.noSplit(app);
-				} else if (distanceSplit.get(selectedSplitInterval) > 0) {
-					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval), joinSegments);
-				} else if (timeSplit.get(selectedSplitInterval) > 0) {
-					model.splitByTime(app, timeSplit.get(selectedSplitInterval), joinSegments);
-				}
-			}
-			return null;
-		}
 	}
 }

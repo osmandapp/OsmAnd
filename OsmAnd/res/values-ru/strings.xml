@@ -195,9 +195,9 @@
     <string name="gpx_no_tracks_title">У вас пока нет файлов GPX</string>
     <string name="gpx_no_tracks_title_folder">Вы также можете добавить файлы GPX в папку</string>
     <string name="gpx_add_track">Добавь ещё…</string>
-    <string name="shared_string_appearance">Вид</string>
+    <string name="shared_string_appearance">Внешний вид</string>
     <string name="trip_rec_notification_settings">Включить быструю запись</string>
-    <string name="trip_rec_notification_settings_desc">Отображение системного уведомления, позволяющего производить запись поездки.</string>
+    <string name="trip_rec_notification_settings_desc">Отображение системного уведомления, позволяющего начать запись поездки.</string>
     <string name="shared_string_notifications">Уведомления</string>
     <string name="shared_string_continue">Продолжить</string>
     <string name="shared_string_pause">Пауза</string>
@@ -1620,7 +1620,7 @@
     <string name="rendering_attr_busRoutes_name">Маршруты автобусов</string>
     <string name="rendering_attr_tramTrainRoutes_name">Маршруты трамваев и поездов</string>
     <string name="rendering_category_hide">Скрыть</string>
-    <string name="impassable_road">Нежелательные участки</string>
+    <string name="impassable_road">Избегать дороги</string>
     <string name="lock_screen_request_explanation">%1$s необходимо это разрешение, чтобы выключить экран для экономии энергии.</string>
     <string name="wake_on_voice">Автовключение экрана перед поворотом</string>
     <string name="wake_on_voice_descr">Включать экран перед поворотом (если выключен).</string>
@@ -2366,7 +2366,7 @@
     <string name="edit_line">Редактировать линию</string>
     <string name="add_point_before">Добавить точку перед</string>
     <string name="add_point_after">Добавить точку после</string>
-    <string name="shared_string_options">Функции</string>
+    <string name="shared_string_options">Опции</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd соединит точки с маршрутом для выбранного профиля.</string>
     <string name="measurement_tool_save_as_new_track_descr">Сохранить точки, как точки маршрута или как линию.</string>
     <string name="choose_navigation_type">Выберите профиль навигации</string>
@@ -3817,4 +3817,12 @@
     <string name="app_mode_motor_scooter">Мотороллер</string>
     <string name="osm_edit_closed_note">Закрытая заметка OSM</string>
     <string name="app_mode_wheelchair">Инвалидная коляска</string>
+    <string name="app_mode_go_cart">В карту</string>
+    <string name="app_mode_wheelchair_forward">Инвалидное кресло впереди</string>
+    <string name="add_to_a_track">Добавить к треку</string>
+    <string name="set_working_days_to_continue">Необходимо указать рабочие дни для продолжения</string>
+    <string name="route_between_points">Маршрут между пунктами</string>
+    <string name="plan_a_route">План маршрута</string>
+    <string name="gpx_split_interval_none_descr">Выберите нужный вариант разбиения: по времени или по расстоянию.</string>
+    <string name="gpx_split_interval_descr">Выберите интервал с которым будут отображаться метки с расстоянием или временем на треке.</string>
 </resources>

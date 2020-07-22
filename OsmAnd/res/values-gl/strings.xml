@@ -1539,7 +1539,7 @@ Lon %2$s</string>
     <string name="world_ski_missing">Baixar o mapa especial sen conexión para amosar as instalacións de esquí.</string>
     <string name="remove_the_tag">ELIMINAR ETIQUETA</string>
     <string name="gps_status">Estado do GPS</string>
-    <string name="rendering_attr_streetLighting_name">Alumeado da rúa</string>
+    <string name="rendering_attr_streetLighting_name">Alumeamento público</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Especifica un servidor proxy.</string>
     <string name="settings_privacy">Privacidade</string>
@@ -1896,7 +1896,7 @@ Lon %2$s</string>
     <string name="gpx_add_track">Engadir máis…</string>
     <string name="shared_string_appearance">Aparencia</string>
     <string name="trip_rec_notification_settings">Activar a gravación rápida</string>
-    <string name="trip_rec_notification_settings_desc">Amosa unha notificación do sistema que permite a gravación da viaxe.</string>
+    <string name="trip_rec_notification_settings_desc">Amosar unha notificación do sistema que permite comezar a gravación da viaxe.</string>
     <string name="shared_string_notifications">Notificacións</string>
     <string name="shared_string_continue">Continuar</string>
     <string name="shared_string_pause">Deter</string>
@@ -3755,7 +3755,7 @@ Lon %2$s</string>
     <string name="turn_screen_on_descr">Escolle as opcións de acender a pantalla (asegúrate de que o OsmAnd está no primeiro plano cando o dispositivo está a ser bloqueado):</string>
     <string name="turn_screen_on_navigation_instructions">Instrucións de navegación</string>
     <string name="turn_screen_on_power_button">Botón de acendido</string>
-    <string name="turn_screen_on_wake_time_descr">Escolle o tempo de espera da pantalla após acender. (\"%1$s\" non aplica tempo de espera).</string>
+    <string name="turn_screen_on_wake_time_descr">Escolle o tempo de espera da pantalla após acender. (\"%1$s\" non aplica tempo de espera.)</string>
     <string name="keep_screen_off">Manter a pantalla apagada</string>
     <string name="pseudo_mercator_projection">Proxección pseudo-Mercator</string>
     <string name="sqlite_db_file">Ficheiro SQLiteDB</string>
@@ -3847,4 +3847,8 @@ Lon %2$s</string>
     <string name="app_mode_wheelchair_forward">Cadeira de rodas só cara adiante</string>
     <string name="app_mode_go_cart">Kart</string>
     <string name="osm_edit_closed_note">Nota do OSM pechada</string>
+    <string name="set_working_days_to_continue">Tes que definir os días laborais para continuar</string>
+    <string name="route_between_points">Ruta entre puntos</string>
+    <string name="plan_a_route">Planificar unha ruta</string>
+    <string name="add_to_a_track">Engadir a unha pista</string>
 </resources>

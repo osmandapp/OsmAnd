@@ -2082,7 +2082,7 @@
     <string name="shared_string_trip">Strecke</string>
     <string name="shared_string_record">Aufzeichnen</string>
     <string name="trip_rec_notification_settings">Schnellaufzeichnung einschalten</string>
-    <string name="trip_rec_notification_settings_desc">Anzeige einer Systembenachrichtigung zum Starten der Streckenaufzeichnung.</string>
+    <string name="trip_rec_notification_settings_desc">Eine Systembenachrichtigung anzeigen um die Aufzeichnung starten zu können.</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
     <string name="shared_string_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
@@ -3776,7 +3776,7 @@
     <string name="export_import_quick_actions_with_profiles_promo">Sie können Schnellaktionen mit Anwendungsprofilen exportieren oder importieren.</string>
     <string name="shared_string_delete_all_q">Alles löschen\?</string>
     <string name="delete_all_actions_message_q">Möchten Sie %d Schnellaktionen wirklich unwiderruflich löschen\?</string>
-    <string name="shared_string_tones">Töne</string>
+    <string name="shared_string_tones">Tonnen</string>
     <string name="shared_string_meters">Meter</string>
     <string name="screen_timeout">Bildschirm-Zeitlimit</string>
     <string name="details_dialog_decr">Zusätzliche Kartendetails anzeigen oder ausblenden</string>
@@ -3811,7 +3811,7 @@
 \n%2$s wählen, worauf alle Daten zu Blitzern (Warnungen, Hinweise und POIs) bis zu einer vollständigen Neuinstallation von OsmAnd gelöscht werden.</string>
     <string name="routing_attr_length_description">Geben Sie die Fahrzeuglänge an, die auf Routen erlaubt sein soll.</string>
     <string name="routing_attr_length_name">Längenbegrenzung</string>
-    <string name="speed_cameras_removed_descr">Dieses Gerät hat keine Blitzer.</string>
+    <string name="speed_cameras_removed_descr">Diese App hat keine Informationen zu Blitzern.</string>
     <string name="app_mode_inline_skates">Inline-Skates</string>
     <string name="use_volume_buttons_as_zoom_descr">Aktivieren Sie die Steuerung der Zoomstufe der Karte mit den Lautstärketasten des Geräts.</string>
     <string name="use_volume_buttons_as_zoom">Lautstärketasten als Zoom</string>
@@ -3827,4 +3827,8 @@
     <string name="app_mode_go_cart">Go-Kart</string>
     <string name="osm_edit_closed_note">Geschlossene OSM-Notiz</string>
     <string name="app_mode_wheelchair_forward">Rollstuhl vorwärts</string>
+    <string name="set_working_days_to_continue">Zum Fortfahren müssen die Arbeitstage gesetzt sein</string>
+    <string name="route_between_points">Route zwischen Punkten</string>
+    <string name="plan_a_route">Eine Route planen</string>
+    <string name="add_to_a_track">Zu einem Track hinzufügen</string>
 </resources>

@@ -49,6 +49,8 @@ public class GPXUtilities {
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String DEFAULT_ICON_NAME = "special_star";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
+	private static final String PROFILE_TYPE_EXTENSION = "profile";
+	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 
 	private final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
 	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
@@ -303,6 +305,26 @@ public class GPXUtilities {
 
 		public void setBackgroundType(String backType) {
 			getExtensionsToWrite().put(BACKGROUND_TYPE_EXTENSION, backType);
+		}
+
+		public String getProfileType() {
+			return getExtensionsToRead().get(PROFILE_TYPE_EXTENSION);
+		}
+
+		public void setProfileType(String profileType) {
+			getExtensionsToWrite().put(PROFILE_TYPE_EXTENSION, profileType);
+		}
+
+		public int getTrkPtIndex() {
+			try {
+				return Integer.parseInt(getExtensionsToRead().get(TRKPT_INDEX_EXTENSION));
+			}catch(NumberFormatException e){
+				return -1;
+			}
+		}
+
+		public void setTrkPtIndex(int index) {
+			getExtensionsToWrite().put(TRKPT_INDEX_EXTENSION, String.valueOf(index));
 		}
 
 		@Override
@@ -1514,52 +1536,42 @@ public class GPXUtilities {
 			return new QuadRect(left, top, right, bottom);
 		}
 
-		public int getGradientScaleColor(GradientScaleType gradientScaleType, int defColor) {
+		public int getGradientScaleColor(String gradientScaleType, int defColor) {
 			String clrValue = null;
 			if (extensions != null) {
-				clrValue = extensions.get(gradientScaleType.getTypeName());
+				clrValue = extensions.get(gradientScaleType);
 			}
 			return parseColor(clrValue, defColor);
 		}
 
-		public void setGradientScaleColor(GradientScaleType gradientScaleType, int gradientScaleColor) {
-			getExtensionsToWrite().put(gradientScaleType.getTypeName(), Algorithms.colorToString(gradientScaleColor));
+		public void setGradientScaleColor(String gradientScaleType, int gradientScaleColor) {
+			getExtensionsToWrite().put(gradientScaleType, Algorithms.colorToString(gradientScaleColor));
 		}
 
-		public GradientScaleType getGradientScaleType() {
+		public String getGradientScaleType() {
 			if (extensions != null) {
-				String gradientScaleTypeName = extensions.get("gradient_scale_type");
-				if (!Algorithms.isEmpty(gradientScaleTypeName)) {
-					try {
-						return GradientScaleType.valueOf(gradientScaleTypeName);
-					} catch (IllegalArgumentException e) {
-						log.error("Error reading gradientScaleType", e);
-					}
-				}
+				return extensions.get("gradient_scale_type");
 			}
 			return null;
 		}
 
-		public void setGradientScaleType(GradientScaleType gradientScaleType) {
-			getExtensionsToWrite().put("gradient_scale_type", gradientScaleType.name());
+		public void setGradientScaleType(String gradientScaleType) {
+			getExtensionsToWrite().put("gradient_scale_type", gradientScaleType);
 		}
 
-		public GpxSplitType getSplitType() {
+		public void removeGradientScaleType() {
+			getExtensionsToWrite().remove("gradient_scale_type");
+		}
+
+		public String getSplitType() {
 			if (extensions != null) {
-				String gradientScaleTypeName = extensions.get("split_type");
-				if (!Algorithms.isEmpty(gradientScaleTypeName)) {
-					try {
-						return GpxSplitType.valueOf(gradientScaleTypeName);
-					} catch (IllegalArgumentException e) {
-						log.error("Error reading GpxSplitType", e);
-					}
-				}
+				return extensions.get("split_type");
 			}
 			return null;
 		}
 
-		public void setSplitType(GpxSplitType gpxSplitType) {
-			getExtensionsToWrite().put("split_type", gpxSplitType.name());
+		public void setSplitType(String gpxSplitType) {
+			getExtensionsToWrite().put("split_type", gpxSplitType);
 		}
 
 		public double getSplitInterval() {
@@ -1613,38 +1625,6 @@ public class GPXUtilities {
 
 		public void setShowStartFinish(boolean showStartFinish) {
 			getExtensionsToWrite().put("show_start_finish", String.valueOf(showStartFinish));
-		}
-
-		public enum GradientScaleType {
-			SPEED("gradient_speed_color"),
-			ALTITUDE("gradient_altitude_color"),
-			SLOPE("gradient_slope_color");
-
-			private String typeName;
-
-			GradientScaleType(String typeName) {
-				this.typeName = typeName;
-			}
-
-			public String getTypeName() {
-				return typeName;
-			}
-		}
-
-		public enum GpxSplitType {
-			NO_SPLIT(-1),
-			DISTANCE(1),
-			TIME(2);
-
-			private int type;
-
-			GpxSplitType(int type) {
-				this.type = type;
-			}
-
-			public int getType() {
-				return type;
-			}
 		}
 	}
 
