@@ -3814,4 +3814,12 @@
     <string name="route_between_points">المسار بين النقاط</string>
     <string name="plan_a_route">قياس المسافة</string>
     <string name="add_to_a_track">إضافة إلى مسار</string>
+    <string name="add_hidden_group_info">لن تكون النقطة المضافة مرئية على الخريطة، نظرًا لأن المجموعة المحددة مخفية، يمكنك العثور عليها في \"%s\".</string>
+    <string name="track_show_start_finish_icons">إظهار رموز البدء والانتهاء</string>
+    <string name="select_track_width">حدد العرض</string>
+    <string name="gpx_split_interval_descr">حدد الفاصل الزمني الذي سيتم عرض العلامات مع المسافة أو الوقت على المسار.</string>
+    <string name="gpx_split_interval_none_descr">حدد خيار التقسيم المطلوب: حسب الوقت أو بالمسافة.</string>
+    <string name="shared_string_custom">تخصيص</string>
+    <string name="gpx_direction_arrows">اتجاه الأسهم</string>
+    <string name="track_coloring_solid">صلب</string>
 </resources>
