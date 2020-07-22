@@ -11,6 +11,7 @@ import android.os.RemoteException;
 
 import androidx.annotation.Nullable;
 
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
@@ -1272,6 +1273,24 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				handleException(e);
 			}
 			return -1;
+		}
+
+		@Override
+		public boolean getRoutePoints(List<ALatLon> route) {
+			try {
+				OsmandAidlApi api = getApi("getRoutePoints");
+				if (api != null) {
+					route.clear();
+					List<Location> locations = api.getRoute().getImmutableAllLocations();
+					for (Location location : locations) {
+						route.add(new ALatLon(location.getLatitude(), location.getLongitude()));
+					}
+					return true;
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return false;
 		}
 
 		@Override

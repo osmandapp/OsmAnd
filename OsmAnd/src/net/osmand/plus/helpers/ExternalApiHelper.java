@@ -22,10 +22,10 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.AidlSearchResultWrapper;
 import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.aidl.map.ALatLon;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.data.LatLonParcelable;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -510,9 +510,9 @@ public class ExternalApiHelper {
 					RouteCalculationResult route = routingHelper.getRoute();
 					// export waypoints of the route
 					List<Location> locations = route.getImmutableAllLocations();
-					ArrayList<LatLonParcelable> route_points = new ArrayList<>(locations.size());
+					ArrayList<ALatLon> route_points = new ArrayList<>(locations.size());
 					for (Location location : locations) {
-						route_points.add(new LatLonParcelable(location.getLatitude(), location.getLongitude()));
+						route_points.add(new ALatLon(location));
 					}
 					result.putParcelableArrayListExtra(PARAM_ROUTE_POINTS, route_points);
 					// export indexes of waypoints of the route which have routing directions

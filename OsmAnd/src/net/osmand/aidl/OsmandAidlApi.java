@@ -46,6 +46,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -1030,6 +1031,14 @@ public class OsmandAidlApi {
 	public long getRouteCreationTime(){
 		RoutingHelper rh = app.getRoutingHelper();
 		return rh.getRoute().getCreationTime();
+	}
+
+	public RouteCalculationResult getRoute() {
+		RoutingHelper rh = app.getRoutingHelper();
+		if(rh.isRouteCalculated()) {
+			return rh.getRoute();
+		}
+		return null;
 	}
 
 	boolean updateMapMarker(String prevName, LatLon prevLatLon, String newName, LatLon newLatLon, boolean ignoreCoordinates) {

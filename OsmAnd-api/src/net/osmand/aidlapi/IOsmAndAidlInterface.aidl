@@ -860,4 +860,10 @@ interface IOsmAndAidlInterface {
      *
      */
     long getRouteCreationTime();
+
+    /**
+     * Method to get current route points
+     *
+     */
+    boolean getRoutePoints(out List<ALatLon> route);
 }

@@ -3,6 +3,8 @@ package net.osmand.aidl.map;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import net.osmand.Location;
+
 public class ALatLon implements Parcelable {
 
 	private double longitude;
@@ -11,6 +13,10 @@ public class ALatLon implements Parcelable {
 	public ALatLon(double latitude, double longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
+	}
+
+	public ALatLon(Location location) {
+		this(location.getLatitude(), location.getLongitude());
 	}
 
 	public ALatLon(Parcel in) {
