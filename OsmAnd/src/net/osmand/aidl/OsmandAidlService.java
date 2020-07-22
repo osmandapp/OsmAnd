@@ -1345,6 +1345,19 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		}
 
 		@Override
+		public String getApplicationMode() {
+			try {
+				OsmandAidlApi api = getApi("getApplicationMode");
+				if (api != null) {
+					return api.getApplicationMode().getStringKey();
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return null;
+		}
+
+		@Override
 		public boolean getGpxColor(GpxColorParams params) {
 			try {
 				OsmandAidlApi api = getApi("getGpxColor");
@@ -1392,6 +1405,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				return false;
 			}
 		}
+
 		@Override
 		public boolean setLockState(SetLockStateParams params) {
 			try {

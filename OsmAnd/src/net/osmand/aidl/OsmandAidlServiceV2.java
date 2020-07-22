@@ -1319,6 +1319,19 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		}
 
 		@Override
+		public String getApplicationMode() {
+			try {
+				OsmandAidlApi api = getApi("getApplicationMode");
+				if (api != null) {
+					return api.getApplicationMode().getStringKey();
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return null;
+		}
+
+		@Override
 		public boolean importProfile(ProfileSettingsParams params) {
 			try {
 				OsmandAidlApi api = getApi("importProfile");

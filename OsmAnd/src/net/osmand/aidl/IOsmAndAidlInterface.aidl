@@ -887,4 +887,10 @@ interface IOsmAndAidlInterface {
      *
      */
     boolean getRoutePoints(out List<ALatLon> route);
+
+    /**
+     * Method to get application mode
+     *
+     */
+    String getApplicationMode();
 }

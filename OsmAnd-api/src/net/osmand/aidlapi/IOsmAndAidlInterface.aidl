@@ -861,7 +861,6 @@ interface IOsmAndAidlInterface {
      * @params keyEventList (List<Integer>) - list of requested key events
      */
     long registerForKeyEvents(in AKeyEventsParams params, IOsmAndAidlCallback callback);
-}
 
     /**
      * Method to get position of various objects
@@ -886,4 +885,10 @@ interface IOsmAndAidlInterface {
      *
      */
     boolean getRoutePoints(out List<ALatLon> route);
+
+    /**
+     * Method to get application mode
+     *
+     */
+    String getApplicationMode();
 }

@@ -2,6 +2,7 @@ package net.osmand.aidl;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -1054,21 +1055,23 @@ public class OsmandAidlApi {
 	}
 
 	public int getCurrentRouteSegmentIndex() {
-		RoutingHelper rh = app.getRoutingHelper();
-		return rh.getRoute().getCurrentRoute();
+		RouteCalculationResult route = getRoute();
+		return route != null ? route.getCurrentRoute() : -1;
 	}
 
-	public long getRouteCreationTime(){
-		RoutingHelper rh = app.getRoutingHelper();
-		return rh.getRoute().getCreationTime();
+	public long getRouteCreationTime() {
+		RouteCalculationResult route = getRoute();
+		return route != null ? route.getCreationTime() : -1;
 	}
 
 	public RouteCalculationResult getRoute() {
 		RoutingHelper rh = app.getRoutingHelper();
-		if(rh.isRouteCalculated()) {
-			return rh.getRoute();
-		}
-		return null;
+		return rh.getRoute();
+	}
+
+	public ApplicationMode getApplicationMode() {
+		RoutingHelper rh = app.getRoutingHelper();
+		return rh.getAppMode();
 	}
 
 	boolean updateMapMarker(String prevName, LatLon prevLatLon, String newName, LatLon newLatLon, boolean ignoreCoordinates) {
