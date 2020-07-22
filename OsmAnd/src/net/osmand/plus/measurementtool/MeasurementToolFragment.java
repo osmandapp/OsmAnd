@@ -451,7 +451,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 					} else {
 						if (newGpxData == null) {
 							final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-							String fileName = getSuggestedName(dir);
+							String fileName = getSuggestedName(dir) + GPX_FILE_EXT;
 							saveNewGpx(dir, fileName, true, SaveType.ROUTE_POINT, true);
 						} else {
 							addToGpx(mapActivity);
