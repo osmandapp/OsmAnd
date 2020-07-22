@@ -3518,7 +3518,7 @@
 \nWtyczka pozostanie na urządzeniu po usunięciu OsmAnd.</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_include_data">Uwzględnij dodatkowe dane</string>
-    <string name="import_profile_dialog_description">Zaimportowany profil zawiera dodatkowe dane. Kliknij przycisk Importuj, aby zaimportować tylko dane profilu lub wybierz dodatkowe dane do zaimportowania.</string>
+    <string name="import_profile_dialog_description">Zaimportowany profil zawiera dodatkowe dane. Kliknij \"Importuj\", aby zaimportować tylko dane profilu, lub wybierz dodatkowe dane.</string>
     <string name="export_profile_dialog_description">Można wybrać dodatkowe dane do wyeksportowania wraz z profilem.</string>
     <string name="routing_profile_direct_to">Bezpośrednio do punktu</string>
     <string name="navigation_notification_desc">Pokaż powiadomienia systemowe podczas nawigacji z instrukcjami nawigacji.</string>
@@ -3528,9 +3528,9 @@
     <string name="route_recalculation_dist_title">Minimalna odległość do ponownego wyznaczenia trasy</string>
     <string name="route_recalculation_dist_descr">Wyznacza ponownie trasę, jeśli odległość do trasy jest dłuższa niż określony parametr</string>
     <string name="tracks_view_descr">Twoje nagrane ślady są w %1$s lub w folderze OsmAnd.</string>
-    <string name="use_system_screen_timeout_promo">Domyślnie wyłączone, jeśli OsmAnd jest włączony na pierwszym planie, ekran nie będzie się wygaszał.
+    <string name="use_system_screen_timeout_promo">Domyślnie wyłączone: gdy OsmAnd działa na pierwszym planie, ekran nie wyłączy się.
 \n
-\nJeśli włączone, OsmAnd będzie używał systemowych ustawień wygaszania.</string>
+\nJeśli włączone, OsmAnd użyje ustawienia limitu czasu systemu.</string>
     <string name="sort_by_category">Sortuj wg kategorii</string>
     <string name="shared_string_menu">Menu</string>
     <string name="shared_string_routing">Wyznaczanie trasy</string>
@@ -3675,9 +3675,9 @@
     <string name="lang_an">Aragoński</string>
     <string name="lang_gu">Gudźarati</string>
     <string name="lang_yo">Joruba</string>
-    <string name="ui_customization_description">Dostosuj liczbę elementów w menu bocznym, konfiguracji mapy i menu kontekstowym. 
-\n 
-\nMożesz wyłączyć nieużywane wtyczki, aby ukryć ich elementy w aplikacji. %1$s.</string>
+    <string name="ui_customization_description">Dostosuj ilość pozycji w „Szufladzie”, „Konfiguracja mapy” i „Menu kontekstowe”.
+\n
+\nWyłącz nieużywane wtyczki, aby ukryć wszystkie ich elementy sterujące. %1$s.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types">Szukaj typów użytecznych miejsc</string>
     <string name="search_poi_types_descr">Łącz typy użytecznych zmian z różnych kategorii. Stuknij przełącznik, aby zaznaczyć wszystko, stuknij lewą stronę, aby wybrać kategorię.</string>
@@ -3826,4 +3826,10 @@
     <string name="route_between_points">Droga pomiędzy punktami</string>
     <string name="plan_a_route">Zaplanuj trasę</string>
     <string name="add_to_a_track">Dodaj do śladów</string>
+    <string name="turn_screen_on_power_button_descr">Naciśnięcie przycisku zasilania urządzenia włączy ekran z OsmAnd u góry ekranu blokady.</string>
+    <string name="quick_action_showhide_mapillary_descr">Przełącznik służący do pokazywania lub ukrywania warstwy Mapillary na mapie.</string>
+    <string name="add_hidden_group_info">Dodany punkt nie będzie widoczny na mapie, ponieważ wybrana grupa jest ukryta, możesz ją znaleźć w „% s”.</string>
+    <string name="select_track_width">Wybierz szerokość</string>
+    <string name="gpx_split_interval_none_descr">Wybierz żądaną opcję podziału: według czasu lub odległości.</string>
+    <string name="track_coloring_solid">Stałe</string>
 </resources>
