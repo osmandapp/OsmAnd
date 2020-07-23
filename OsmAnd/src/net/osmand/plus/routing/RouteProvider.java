@@ -79,6 +79,7 @@ public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
+	private static final int ADDITIONAL_DISTANCE_FOR_START_POINT = 300;
 	private static final int MIN_STRAIGHT_DIST = 50000;
 
 	public enum RouteService {
@@ -366,22 +367,51 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult calculateGpxRoute(RouteCalculationParams routeParams) throws IOException {
-
-		List<RouteSegmentResult> route = routeParams.gpxRoute.route;
-		if (!Algorithms.isEmpty(route)) {
-			return new RouteCalculationResult(route, routeParams.start, routeParams.end,
-					routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, null, routeParams.mode);
-		}
-
 		// get the closest point to start and to end
 		GPXRouteParams gpxParams = routeParams.gpxRoute;
+		List<RouteSegmentResult> gpxRouteResult = routeParams.gpxRoute.route;
+		if (!Algorithms.isEmpty(gpxRouteResult)) {
+			boolean calculateOsmAndRouteParts = gpxParams.calculateOsmAndRouteParts;
+			if (routeParams.gpxRoute.passWholeRoute && !calculateOsmAndRouteParts) {
+				return new RouteCalculationResult(gpxRouteResult, routeParams.start, routeParams.end,
+						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, null, routeParams.mode, true);
+			}
+			RouteCalculationResult result = new RouteCalculationResult(gpxRouteResult, routeParams.start, routeParams.end,
+					routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, null, routeParams.mode, false);
+			List<Location> gpxRouteLocations = result.getImmutableAllLocations();
+			int gpxNextIndex = routeParams.gpxRoute.passWholeRoute ? 0 : findStartIndexFromRoute(gpxRouteLocations, routeParams.start, calculateOsmAndRouteParts);
+			Location gpxNextLocation;
+			List<RouteSegmentResult> firstSegmentRoute = null;
+			List<RouteSegmentResult> gpxRoute;
+			if (gpxNextIndex > 0) {
+				gpxNextLocation = gpxRouteLocations.get(gpxNextIndex);
+				gpxRoute = result.getRoute(gpxNextIndex);
+			} else {
+				gpxNextLocation = gpxRouteLocations.get(0);
+				gpxRoute = result.getOriginalRoute();
+			}
+			if (calculateOsmAndRouteParts
+					&& routeParams.start != null && gpxNextLocation != null
+					&& gpxNextLocation.distanceTo(routeParams.start) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
+				RouteCalculationResult firstSegmentResult = findOfflineRouteSegment(routeParams, routeParams.start, new LatLon(gpxNextLocation.getLatitude(), gpxNextLocation.getLongitude()));
+				firstSegmentRoute = firstSegmentResult.getOriginalRoute();
+			}
+			List<RouteSegmentResult> newGpxRoute = new ArrayList<>();
+			if (firstSegmentRoute != null && !firstSegmentRoute.isEmpty()) {
+				newGpxRoute.addAll(firstSegmentRoute);
+			}
+			newGpxRoute.addAll(gpxRoute);
+			return new RouteCalculationResult(newGpxRoute, routeParams.start, routeParams.end,
+					routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, null, routeParams.mode, true);
+		}
+
 		if(routeParams.gpxRoute.useIntermediatePointsRTE){
 			return calculateOsmAndRouteWithIntermediatePoints(routeParams, gpxParams.points);
 		}
 		List<Location> gpxRoute ;
 		int[] startI = new int[]{0};
 		int[] endI = new int[]{gpxParams.points.size()}; 
-		if(routeParams.gpxRoute.passWholeRoute) {
+		if (routeParams.gpxRoute.passWholeRoute) {
 			gpxRoute = gpxParams.points;
 			if (routeParams.previousToRecalculate != null && routeParams.onlyStartPointChanged) {
 				List<Location> routeLocations = routeParams.previousToRecalculate.getRouteLocations();
@@ -389,7 +419,7 @@ public class RouteProvider {
 					gpxRoute = new ArrayList<>();
 					Location trackStart = routeLocations.get(0);
 					Location realStart = routeParams.start;
-					//insert route segment from current location to next route location if user deviated from route
+					//insert gpxRouteResult segment from current location to next gpxRouteResult location if user deviated from gpxRouteResult
 					if (realStart != null && trackStart != null
 							&& realStart.distanceTo(trackStart) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT
 							&& !gpxParams.calculateOsmAndRouteParts) {
@@ -625,6 +655,30 @@ public class RouteProvider {
 		return sublist;
 	}
 
+	private int findStartIndexFromRoute(List<Location> route, Location startLoc, boolean calculateOsmAndRouteParts) {
+		float minDist = Integer.MAX_VALUE;
+		int start = 0;
+		if (startLoc != null) {
+			for (int i = 0; i < route.size(); i++) {
+				float d = route.get(i).distanceTo(startLoc);
+				if (d < minDist) {
+					start = i;
+					minDist = d;
+				}
+			}
+		}
+		if (start > 0 && calculateOsmAndRouteParts) {
+			Location newStartLoc = route.get(start);
+			for (int i = start + 1; i < route.size(); i++) {
+				Location loc = route.get(i);
+				if (loc.distanceTo(newStartLoc) >= ADDITIONAL_DISTANCE_FOR_START_POINT) {
+					return i;
+				}
+			}
+		}
+		return start;
+	}
+
 	protected String getString(Context ctx, int resId){
 		if(ctx == null){
 			return ""; //$NON-NLS-1$
@@ -812,7 +866,7 @@ public class RouteProvider {
 			} else {
 				RouteCalculationResult res = new RouteCalculationResult(result, params.start, params.end,
 						params.intermediates, params.ctx, params.leftSide, ctx, params.gpxRoute  == null? null: params.gpxRoute.wpt,
-								params.mode);
+								params.mode, true);
 				return res;
 			}
 		} catch (RuntimeException e) {

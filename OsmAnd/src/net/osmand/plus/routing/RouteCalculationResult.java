@@ -137,7 +137,7 @@ public class RouteCalculationResult {
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,
-								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode) {
+								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode, boolean calculateFirstAndLastPoint) {
 		if (rctx != null) {
 			this.routingTime = rctx.routingTime;
 			this.visitedSegments = rctx.getVisitedSegments();
@@ -162,7 +162,9 @@ public class RouteCalculationResult {
 		List<Location> locations = new ArrayList<Location>();
 		ArrayList<AlarmInfo> alarms = new ArrayList<AlarmInfo>();
 		List<RouteSegmentResult> segments = convertVectorResult(computeDirections, locations, list, alarms, ctx);
-		introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
+		if (calculateFirstAndLastPoint) {
+			introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
+		}
 		
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
@@ -295,6 +297,37 @@ public class RouteCalculationResult {
 		for (int i = startIndex; i < segments.size(); i++) {
 			if (segments.get(i - 1) != segments.get(i)) {
 				list.add(segments.get(i));
+			}
+		}
+		return list;
+	}
+
+	public List<RouteSegmentResult> getRoute(int startIndex) {
+		if (segments.size() == 0) {
+			return null;
+		}
+		List<RouteSegmentResult> list = new ArrayList<RouteSegmentResult>();
+		int skippedPoints = 0;
+		for (int i = 1; i <= startIndex; i++) {
+			RouteSegmentResult seg = segments.get(i - 1);
+			if (seg != segments.get(i)) {
+				skippedPoints += Math.abs(seg.getEndPointIndex() - seg.getStartPointIndex());
+			}
+		}
+		list.add(segments.get(startIndex++));
+		for (int i = startIndex; i < segments.size(); i++) {
+			if (segments.get(i - 1) != segments.get(i)) {
+				list.add(segments.get(i));
+			}
+		}
+		if (!list.isEmpty()) {
+			RouteSegmentResult seg = list.get(0);
+			if (seg.isForwardDirection()) {
+				int index = seg.getStartPointIndex() + startIndex - skippedPoints;
+				seg.setStartPointIndex(index);
+			} else {
+				int index = seg.getEndPointIndex() + startIndex - skippedPoints;
+				seg.setEndPointIndex(index);
 			}
 		}
 		return list;
