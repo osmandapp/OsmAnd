@@ -29,6 +29,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
@@ -665,7 +667,15 @@ public class ExternalApiHelper {
 			public void gpxSavingFinished(Exception errorMessage) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (errorMessage == null && mapActivity != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-					final RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+					OsmandApplication app = mapActivity.getMyApplication();
+					GpxSelectionHelper helper = app.getSelectedGpxHelper();
+					SelectedGpxFile selectedGpx = helper.getSelectedFileByPath(gpxFile.path);
+					if (selectedGpx != null) {
+						selectedGpx.setGpxFile(gpxFile, app);
+					} else {
+						helper.selectGpxFile(gpxFile, true, false);
+					}
+					final RoutingHelper routingHelper = app.getRoutingHelper();
 					if (routingHelper.isFollowingMode() && !force) {
 						AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
 						dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
