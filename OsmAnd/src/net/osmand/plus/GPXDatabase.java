@@ -188,7 +188,7 @@ public class GPXDatabase {
 		private boolean showAsMarkers;
 		private boolean joinSegments;
 		private boolean showArrows;
-		private boolean showStartFinish;
+		private boolean showStartFinish = true;
 
 		public GpxDataItem(File file, GPXTrackAnalysis analysis) {
 			this.file = file;
