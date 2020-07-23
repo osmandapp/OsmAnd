@@ -3828,7 +3828,7 @@
     <string name="add_to_a_track">Dodaj do śladów</string>
     <string name="turn_screen_on_power_button_descr">Naciśnięcie przycisku zasilania urządzenia włączy ekran z OsmAnd u góry ekranu blokady.</string>
     <string name="quick_action_showhide_mapillary_descr">Przełącznik służący do pokazywania lub ukrywania warstwy Mapillary na mapie.</string>
-    <string name="add_hidden_group_info">Dodany punkt nie będzie widoczny na mapie, ponieważ wybrana grupa jest ukryta, możesz ją znaleźć w „% s”.</string>
+    <string name="add_hidden_group_info">Dodany punkt nie będzie widoczny na mapie, ponieważ wybrana grupa jest ukryta, możesz ją znaleźć w „%s”.</string>
     <string name="select_track_width">Wybierz szerokość</string>
     <string name="gpx_split_interval_none_descr">Wybierz żądaną opcję podziału: według czasu lub odległości.</string>
     <string name="track_coloring_solid">Stałe</string>
