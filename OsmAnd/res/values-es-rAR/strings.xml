@@ -3829,4 +3829,12 @@
     <string name="route_between_points">Ruta entre puntos</string>
     <string name="plan_a_route">Crear una ruta</string>
     <string name="add_to_a_track">Añadir a una traza</string>
+    <string name="add_hidden_group_info">El punto añadido no será visible en el mapa, ya que el grupo elegido está oculto, se puede encontrar en «%s».</string>
+    <string name="track_show_start_finish_icons">Mostrar los iconos de inicio y fin</string>
+    <string name="select_track_width">Elegir la anchura</string>
+    <string name="gpx_split_interval_descr">Marca el intervalo en el que se mostrarán las marcas con distancia o tiempo en la traza.</string>
+    <string name="gpx_split_interval_none_descr">Marca la opción de división deseada: por tiempo o por distancia.</string>
+    <string name="shared_string_custom">Personalizado</string>
+    <string name="gpx_direction_arrows">Flechas de dirección</string>
+    <string name="track_coloring_solid">Sólido</string>
 </resources>
