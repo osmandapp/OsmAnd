@@ -453,7 +453,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 
 			Object object = menu.getObject();
-			if (object instanceof SelectedGpxPoint) {
+			if (object instanceof SelectedGpxPoint && !((SelectedGpxPoint) object).getSelectedGpxFile().isShowCurrentTrack()) {
 				GPXFile gpxFile = ((SelectedGpxPoint) object).getSelectedGpxFile().getGpxFile();
 				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpxFile, null, null, true, true, MenuState.HEADER_ONLY);
 				routingHelper.recalculateRouteDueToSettingsChange();
