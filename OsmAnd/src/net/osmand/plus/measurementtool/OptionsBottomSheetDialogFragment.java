@@ -95,7 +95,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 			BaseBottomSheetItem saveAsNewSegmentItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
-					.setTitle("Overwrite GPX")
+					.setTitle(getString(R.string.overwrite_gpx))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {
 						@Override
