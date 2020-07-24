@@ -757,8 +757,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		final int min;
 		final int max;
 		if (defaultSpeedOnly) {
-			minValue[0] = Math.round(1 * ratio[0]);
-			maxValue[0] = Math.round(300 * ratio[0]);
+			minValue[0] = Math.round(Math.min(1, settingsDefaultSpeed) * ratio[0]);
+			maxValue[0] = Math.round(Math.max(300, settingsDefaultSpeed) * ratio[0]);
 			min = minValue[0];
 			max = maxValue[0];
 		} else {
