@@ -11,7 +11,7 @@
 	Thx - Hardy
 
 -->
-    <string name="overwrite_gpx">Overwrite GPX</string>
+    <string name="overwrite_track">Overwrite track</string>
     <string name="track_coloring_solid">Solid</string>
     <string name="gpx_direction_arrows">Direction arrows</string>
     <string name="shared_string_custom">Custom</string>
