@@ -170,7 +170,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 				view.findViewById(R.id.control_buttons).setLayoutParams(params);
 			}
 			buildZoomButtons(view);
-			enterMeasurementMode();
+			enterTrackAppearanceMode();
 			runLayoutListener();
 		}
 		return view;
@@ -238,10 +238,10 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		exitMeasurementMode();
+		exitTrackAppearanceMode();
 	}
 
-	private void enterMeasurementMode() {
+	private void enterTrackAppearanceMode() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
@@ -252,7 +252,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		}
 	}
 
-	private void exitMeasurementMode() {
+	private void exitTrackAppearanceMode() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			AndroidUiHelper.mark(mapActivity, View.VISIBLE,

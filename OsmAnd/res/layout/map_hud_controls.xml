@@ -3,11 +3,7 @@
 	android:id="@+id/map_hud_controls"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
-	android:layout_gravity="end|bottom"
-	android:layout_marginStart="@dimen/fab_margin_right"
-	android:layout_marginLeft="@dimen/fab_margin_right"
-	android:layout_marginEnd="@dimen/fab_margin_right"
-	android:layout_marginRight="@dimen/fab_margin_right">
+	android:layout_gravity="end|bottom">
 
 	<ImageButton
 		android:id="@+id/map_my_location_button"
@@ -21,6 +17,7 @@
 	<LinearLayout
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
 		android:layout_marginStart="@dimen/map_button_spacing"
 		android:layout_marginLeft="@dimen/map_button_spacing"
 		android:orientation="vertical">
