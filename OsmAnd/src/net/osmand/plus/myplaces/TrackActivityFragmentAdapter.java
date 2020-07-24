@@ -308,9 +308,9 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			}
 		});
 
+		splitColorView.setVisibility(View.GONE);
 		if (showMapOnly) {
 			splitIntervalView.setVisibility(View.GONE);
-			splitColorView.setVisibility(View.GONE);
 			appearanceView.setVisibility(View.GONE);
 			divider.setVisibility(View.GONE);
 			bottomDivider.setVisibility(View.VISIBLE);
@@ -354,11 +354,9 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 					}
 				});
 				appearanceView.setVisibility(View.VISIBLE);
-				splitColorView.setVisibility(View.VISIBLE);
 				divider.setVisibility(View.VISIBLE);
 			} else {
 				appearanceView.setVisibility(View.GONE);
-				splitColorView.setVisibility(View.GONE);
 				divider.setVisibility(View.GONE);
 			}
 		}

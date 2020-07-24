@@ -112,4 +112,8 @@
 
 	</LinearLayout>
 
+	<include
+		layout="@layout/map_hud_controls"
+		tools:visibility="invisible" />
+
 </FrameLayout>
