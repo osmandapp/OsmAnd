@@ -54,12 +54,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.measurementtool.NewGpxData;
-import net.osmand.plus.track.SplitIntervalCard;
-import net.osmand.plus.track.SplitTrackAsyncTask;
-import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.SplitIntervalCard;
+import net.osmand.plus.track.SplitTrackAsyncTask;
+import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
@@ -363,7 +363,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 	}
 
-	private void showTemporaryObjectOnMap(Object toShow){
+	private void showTemporaryObjectOnMap(Object toShow) {
 		TrackActivity activity = getTrackActivity();
 		GpxDataItem gpxDataItem = getGpxDataItem();
 		GPXFile gpx = getGpx();

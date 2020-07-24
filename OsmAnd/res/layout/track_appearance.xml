@@ -90,6 +90,10 @@
 
 	</net.osmand.plus.mapcontextmenu.InterceptorLinearLayout>
 
+	<include
+		layout="@layout/map_hud_controls"
+		tools:visibility="invisible" />
+
 	<LinearLayout
 		android:id="@+id/control_buttons"
 		android:layout_width="match_parent"
@@ -111,9 +115,5 @@
 			android:layout_gravity="bottom" />
 
 	</LinearLayout>
-
-	<include
-		layout="@layout/map_hud_controls"
-		tools:visibility="invisible" />
 
 </FrameLayout>

@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -25,6 +26,8 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -227,6 +230,12 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 	}
 
 	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		adjustMapPosition(getHeight());
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitMeasurementMode();
@@ -313,6 +322,15 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 	@Override
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
 
+	}
+
+	@Override
+	protected int applyPosY(int currentY, boolean needCloseMenu, boolean needMapAdjust, int previousMenuState, int newMenuState, int dZoom, boolean animated) {
+		int y = super.applyPosY(currentY, needCloseMenu, needMapAdjust, previousMenuState, newMenuState, dZoom, animated);
+		if (needMapAdjust) {
+			adjustMapPosition(y);
+		}
+		return y;
 	}
 
 	private void buildZoomButtons(@NonNull View view) {
@@ -442,6 +460,28 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 	private void updateAppearanceIcon() {
 		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), trackDrawInfo.getColor());
 		appearanceIcon.setImageDrawable(icon);
+	}
+
+	private void adjustMapPosition(int y) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && mapActivity.getMapView() != null) {
+			GPXFile gpxFile = selectedGpxFile.getGpxFile();
+			QuadRect r = gpxFile.getRect();
+
+			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			int tileBoxWidthPx = 0;
+			int tileBoxHeightPx = 0;
+
+			if (!isPortrait()) {
+				tileBoxWidthPx = tb.getPixWidth() - getWidth();
+			} else {
+				int fHeight = getViewHeight() - y - AndroidUtils.getStatusBarHeight(mapActivity);
+				tileBoxHeightPx = tb.getPixHeight() - fHeight;
+			}
+			if (r.left != 0 && r.right != 0) {
+				mapActivity.getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+			}
+		}
 	}
 
 	public Drawable getTrackIcon(OsmandApplication app, String widthAttr, boolean showArrows, @ColorInt int color) {
