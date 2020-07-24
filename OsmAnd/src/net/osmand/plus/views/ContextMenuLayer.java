@@ -57,6 +57,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
@@ -454,7 +455,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		mInGpxDetailsMode = true;
 		activity.disableDrawer();
-		mark(View.INVISIBLE, R.id.map_ruler_layout,
+		AndroidUiHelper.mark(activity, View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
 		View collapseButton = activity.findViewById(R.id.map_collapse_button);
@@ -469,7 +470,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public void exitGpxDetailsMode() {
 		mInGpxDetailsMode = false;
 		activity.enableDrawer();
-		mark(View.VISIBLE, R.id.map_ruler_layout,
+		AndroidUiHelper.mark(activity, View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
 		View collapseButton = activity.findViewById(R.id.map_collapse_button);
@@ -480,7 +481,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private void quitMovingMarker() {
 		mInChangeMarkerPositionMode = false;
-		mark(View.VISIBLE, R.id.map_ruler_layout,
+		AndroidUiHelper.mark(activity, View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
 		View collapseButton = activity.findViewById(R.id.map_collapse_button);
@@ -491,7 +492,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public void quitAddGpxPoint() {
 		mInAddGpxPointMode = false;
-		mark(View.VISIBLE, R.id.map_ruler_layout,
+		AndroidUiHelper.mark(activity, View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
 		View collapseButton = activity.findViewById(R.id.map_collapse_button);
@@ -508,7 +509,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		mInAddGpxPointMode = true;
 		mAddGpxPointBottomSheetHelper.show(newGpxPoint);
-		mark(View.INVISIBLE, R.id.map_ruler_layout,
+		AndroidUiHelper.mark(activity, View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
 		View collapseButton = activity.findViewById(R.id.map_collapse_button);
@@ -541,7 +542,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		mInChangeMarkerPositionMode = true;
 		mMoveMarkerBottomSheetHelper.show(menu.getRightIcon());
-		mark(View.INVISIBLE, R.id.map_ruler_layout,
+		AndroidUiHelper.mark(activity, View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
 		View collapseButton = activity.findViewById(R.id.map_collapse_button);
@@ -553,15 +554,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		view.refreshMap();
-	}
-
-	private void mark(int status, int... widgets) {
-		for (int widget : widgets) {
-			View v = activity.findViewById(widget);
-			if (v != null) {
-				v.setVisibility(status);
-			}
-		}
 	}
 
 	public void cancelMovingMarker() {

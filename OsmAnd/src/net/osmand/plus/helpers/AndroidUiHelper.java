@@ -92,6 +92,17 @@ public class AndroidUiHelper {
 		}
 		return false;
 	}
+
+	public static void mark(Activity activity, int status, int... widgets) {
+		if (activity != null) {
+			for (int widget : widgets) {
+				View view = activity.findViewById(widget);
+				if (view != null) {
+					view.setVisibility(status);
+				}
+			}
+		}
+	}
     
 	public static boolean isXLargeDevice(@NonNull Activity ctx) {
 		int lt = (ctx.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
