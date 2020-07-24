@@ -671,50 +671,35 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null) {
-					boolean force = intent.getBooleanExtra(AIDL_FORCE, false);
-					GPXFile gpx = null;
-					if (intent.getStringExtra(AIDL_DATA) != null) {
-						String gpxStr = intent.getStringExtra(AIDL_DATA);
-						if (!Algorithms.isEmpty(gpxStr)) {
-							gpx = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxStr.getBytes()));
-						}
-					} else if (intent.getParcelableExtra(AIDL_URI) != null) {
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-							Uri gpxUri = intent.getParcelableExtra(AIDL_URI);
-
-							ParcelFileDescriptor gpxParcelDescriptor = null;
-							try {
-								gpxParcelDescriptor = mapActivity.getContentResolver().openFileDescriptor(gpxUri, "r");
-							} catch (FileNotFoundException e) {
-								e.printStackTrace();
-							}
-							if (gpxParcelDescriptor != null) {
-								FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
-								gpx = GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
-							}
-						}
-					}
-
+					GPXFile gpx = loadGpxFileFromIntent(mapActivity, intent);
 					if (gpx != null) {
-						final RoutingHelper routingHelper = app.getRoutingHelper();
-						if (routingHelper.isFollowingMode() && !force) {
-							final GPXFile gpxFile = gpx;
-							AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
-							dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+						boolean force = intent.getBooleanExtra(AIDL_FORCE, false);
+						ExternalApiHelper.saveAndNavigateGpx(mapActivity, gpx, force);
+					}
+				}
+			}
 
-								@Override
-								public void onDismiss(DialogInterface dialog) {
-									MapActivity mapActivity = mapActivityRef.get();
-									if (mapActivity != null && !routingHelper.isFollowingMode()) {
-										ExternalApiHelper.startNavigation(mapActivity, gpxFile);
-									}
-								}
-							});
-						} else {
-							ExternalApiHelper.startNavigation(mapActivity, gpx);
+			private GPXFile loadGpxFileFromIntent(@NonNull MapActivity mapActivity, @NonNull Intent intent) {
+				GPXFile gpx = null;
+				String gpxStr = intent.getStringExtra(AIDL_DATA);
+				if (!Algorithms.isEmpty(gpxStr)) {
+					gpx = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxStr.getBytes()));
+				} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					Uri gpxUri = intent.getParcelableExtra(AIDL_URI);
+					if (gpxUri != null) {
+						ParcelFileDescriptor gpxParcelDescriptor = null;
+						try {
+							gpxParcelDescriptor = mapActivity.getContentResolver().openFileDescriptor(gpxUri, "r");
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+						if (gpxParcelDescriptor != null) {
+							FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
+							gpx = GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
 						}
 					}
 				}
+				return gpx;
 			}
 		};
 		registerReceiver(navigateGpxReceiver, mapActivity, AIDL_NAVIGATE_GPX);
