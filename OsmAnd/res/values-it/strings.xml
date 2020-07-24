@@ -3803,7 +3803,7 @@
     <string name="speed_cameras_alert">Gli avvisi sulla presenza di autovelox in alcuni paesi sono proibiti dalla legge.</string>
     <string name="routing_attr_length_description">Specifica la lunghezza del veicolo permessa nei percorsi.</string>
     <string name="routing_attr_length_name">Lunghezza massima</string>
-    <string name="shared_string_bearing">Bussola</string>
+    <string name="shared_string_bearing">Direzione</string>
     <string name="item_deleted">%1$s cancellato</string>
     <string name="speed_cameras_restart_descr">Il riavvio è necessario per cancellare completamente i dati degli autovelox.</string>
     <string name="shared_string_uninstall_and_restart">Disinstalla e Riavvia</string>
@@ -3821,5 +3821,10 @@
     <string name="app_mode_wheelchair">Sedia a rotelle</string>
     <string name="app_mode_go_cart">Go-kart</string>
     <string name="osm_edit_closed_note">Chiudi la nota OSM</string>
-    <string name="app_mode_wheelchair_forward">Sedia a rotelle</string>
+    <string name="app_mode_wheelchair_forward">Sedia a rotelle in avanti</string>
+    <string name="add_hidden_group_info">Il punto aggiunto non sarà visibile sulla mappa, dato che il gruppo selezionato è nascosto, puoi trovarlo in \"%s\".</string>
+    <string name="route_between_points">Percorso tra i punti</string>
+    <string name="track_show_start_finish_icons">Mostra le icone di inizio e fine</string>
+    <string name="shared_string_custom">Personalizzato</string>
+    <string name="track_coloring_solid">Solido</string>
 </resources>
