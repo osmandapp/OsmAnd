@@ -36,13 +36,17 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 	private OnItemClickListener onItemClickListener;
 	private UiUtilities iconsCache;
 
-	GpxTrackAdapter(Context ctx, List<GpxUiHelper.GPXInfo> gpxInfoList, boolean showCurrentGpx) {
+	public GpxTrackAdapter(Context ctx, List<GpxUiHelper.GPXInfo> gpxInfoList, boolean showCurrentGpx) {
 		this.showCurrentGpx = showCurrentGpx;
 		app = (OsmandApplication) ctx.getApplicationContext();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		themedInflater = UiUtilities.getInflater(ctx, nightMode);
 		this.gpxInfoList = gpxInfoList;
 		iconsCache = app.getUIUtilities();
+	}
+
+	public void setGpxInfoList(List<GpxUiHelper.GPXInfo> gpxInfoList) {
+		this.gpxInfoList = gpxInfoList;
 	}
 
 	@NonNull
@@ -74,7 +78,9 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				onItemClickListener.onItemClick(adapterPosition);
+				if (onItemClickListener != null) {
+					onItemClickListener.onItemClick(adapterPosition);
+				}
 			}
 		});
 	}
@@ -139,7 +145,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 				, gpxDataItemCallback);
 	}
 
-	void setAdapterListener(OnItemClickListener onItemClickListener) {
+	public void setAdapterListener(OnItemClickListener onItemClickListener) {
 		this.onItemClickListener = onItemClickListener;
 	}
 

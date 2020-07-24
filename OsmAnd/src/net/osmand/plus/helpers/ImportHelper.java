@@ -40,6 +40,7 @@ import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.settings.backend.SettingsHelper.CheckDuplicatesListener;
@@ -142,13 +143,17 @@ public class ImportHelper {
 	}
 
 	public boolean handleGpxImport(final Uri contentUri, final boolean useImportDir) {
+		return handleGpxImport(contentUri, useImportDir, true);
+	}
+
+	public boolean handleGpxImport(final Uri contentUri, final boolean useImportDir, boolean showInDetailsActivity) {
 		String name = getNameFromContentUri(app, contentUri);
 		boolean isOsmandSubdir = Algorithms.isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(contentUri.getPath()));
 		if (!isOsmandSubdir && name != null) {
 			String nameLC = name.toLowerCase();
 			if (nameLC.endsWith(GPX_FILE_EXT)) {
 				name = name.substring(0, name.length() - GPX_FILE_EXT.length()) + GPX_FILE_EXT;
-				handleGpxImport(contentUri, name, true, useImportDir);
+				handleGpxImport(contentUri, name, true, useImportDir, showInDetailsActivity);
 				return true;
 			} else if (nameLC.endsWith(KML_SUFFIX)) {
 				name = name.substring(0, name.length() - KML_SUFFIX.length()) + KML_SUFFIX;
@@ -229,7 +234,8 @@ public class ImportHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void handleGpxImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir) {
+	private void handleGpxImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir,
+	                             final boolean showInDetailsActivity) {
 		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
 
@@ -264,7 +270,7 @@ public class ImportHelper {
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
-				handleResult(result, fileName, save, useImportDir, false);
+				handleResult(result, fileName, save, useImportDir, false, showInDetailsActivity);
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -941,8 +947,13 @@ public class ImportHelper {
 		executeImportTask(renderingImportTask);
 	}
 
+	private void handleResult(GPXFile result, String name, boolean save,
+	                          boolean useImportDir, boolean forceImportFavourites) {
+		handleResult(result, name, save, useImportDir, forceImportFavourites, true);
+	}
+
 	private void handleResult(final GPXFile result, final String name, final boolean save,
-							  final boolean useImportDir, boolean forceImportFavourites) {
+	                          final boolean useImportDir, boolean forceImportFavourites, boolean showInDetailsActivity) {
 		if (result != null) {
 			if (result.error != null) {
 				Toast.makeText(activity, result.error.getMessage(), Toast.LENGTH_LONG).show();
@@ -951,8 +962,9 @@ public class ImportHelper {
 				}
 			} else {
 				if (save) {
-					new SaveAsyncTask(result, name, useImportDir).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				} else {
+					new SaveAsyncTask(result, name, useImportDir, showInDetailsActivity)
+							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				} else if (showInDetailsActivity) {
 					showGpxInDetailsActivity(result);
 				}
 				if (gpxImportCompleteListener != null) {
@@ -1057,11 +1069,13 @@ public class ImportHelper {
 		private final GPXFile result;
 		private final String name;
 		private final boolean useImportDir;
+		private boolean showInDetailsActivity;
 
-		private SaveAsyncTask(GPXFile result, final String name, boolean useImportDir) {
+		private SaveAsyncTask(GPXFile result, final String name, boolean useImportDir, boolean showInDetailsActivity) {
 			this.result = result;
 			this.name = name;
 			this.useImportDir = useImportDir;
+			this.showInDetailsActivity = showInDetailsActivity;
 		}
 
 		@Override
@@ -1071,10 +1085,22 @@ public class ImportHelper {
 
 		@Override
 		protected void onPostExecute(final String warning) {
-			if(Algorithms.isEmpty(warning)) {
-				showGpxInDetailsActivity(result);
+			if (Algorithms.isEmpty(warning)) {
+				if (showInDetailsActivity) {
+					showGpxInDetailsActivity(result);
+				} else {
+					showPlanRouteFragment();
+				}
 			} else {
 				Toast.makeText(activity, warning, Toast.LENGTH_LONG).show();
+			}
+		}
+
+		private void showPlanRouteFragment() {
+			MeasurementToolFragment fragment = (MeasurementToolFragment) activity.getSupportFragmentManager()
+					.findFragmentByTag(MeasurementToolFragment.TAG);
+			if (fragment != null && !fragment.isDetached() && !fragment.isRemoving()) {
+				fragment.addNewGpxData(result);
 			}
 		}
 	}

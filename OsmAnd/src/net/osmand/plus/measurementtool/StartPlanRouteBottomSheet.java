@@ -1,0 +1,231 @@
+package net.osmand.plus.measurementtool;
+
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.GpxTrackAdapter;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.ImportHelper;
+
+import org.apache.commons.logging.Log;
+
+import java.io.File;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
+
+public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
+
+	public static final String TAG = StartPlanRouteBottomSheet.class.getSimpleName();
+	private static final Log LOG = PlatformUtil.getLog(StartPlanRouteBottomSheet.class);
+	public static final int BOTTOM_SHEET_HEIGHT_DP = 427;
+	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1001;
+
+	protected View mainView;
+	protected GpxTrackAdapter adapter;
+	private StartPlanRouteListener listener;
+	private ImportHelper importHelper;
+
+	public void setListener(StartPlanRouteListener listener) {
+		this.listener = listener;
+	}
+
+	@Override
+	public void createMenuItems(Bundle savedInstanceState) {
+		importHelper = new ImportHelper((AppCompatActivity) getActivity(), getMyApplication(), null);
+		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
+				R.layout.bottom_sheet_plan_route_start, null);
+
+		items.add(new TitleItem(getString(R.string.plan_route)));
+
+		BaseBottomSheetItem createNewRouteItem = new BottomSheetItemWithDescription.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_notification_track))
+				.setTitle(getString(R.string.plan_route_create_new_route))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dismiss();
+					}
+				})
+				.create();
+		items.add(createNewRouteItem);
+
+		BaseBottomSheetItem openExistingTrackItem = new BottomSheetItemWithDescription.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_folder))
+				.setTitle(getString(R.string.plan_route_open_existing_track))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.openExistingTrackOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(openExistingTrackItem);
+
+		BaseBottomSheetItem importTrackItem = new BottomSheetItemWithDescription.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_phone))
+				.setTitle(getString(R.string.plan_route_import_track))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						importTrack();
+					}
+				})
+				.create();
+		items.add(importTrackItem);
+
+		items.add(new DividerHalfItem(getContext()));
+
+		final RecyclerView recyclerView = mainView.findViewById(R.id.gpx_track_list);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return;
+		}
+
+		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		List<GpxUiHelper.GPXInfo> list = getSortedGPXFilesInfo(dir, null, false);
+
+		Collections.sort(list, new Comparator<GpxUiHelper.GPXInfo>() {
+			@Override
+			public int compare(GpxUiHelper.GPXInfo lhs, GpxUiHelper.GPXInfo rhs) {
+				return lhs.getLastModified() > rhs.getLastModified()
+						? -1 : (lhs.getLastModified() == rhs.getLastModified() ? 0 : 1);
+			}
+		});
+		list = list.subList(0, Math.min(5, list.size()));
+		adapter = new GpxTrackAdapter(requireContext(), list, false);
+		final List<GpxUiHelper.GPXInfo> finalList = list;
+		adapter.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {
+			@Override
+			public void onItemClick(int position) {
+				StartPlanRouteBottomSheet.this.onItemClick(position, finalList);
+			}
+		});
+		recyclerView.setAdapter(adapter);
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
+	}
+
+	@Override
+	protected int getCustomHeight() {
+		return AndroidUtils.dpToPx(mainView.getContext(), BOTTOM_SHEET_HEIGHT_DP);
+	}
+
+	private void onItemClick(int position, List<GpxUiHelper.GPXInfo> gpxInfoList) {
+		if (position != RecyclerView.NO_POSITION && position < gpxInfoList.size()) {
+			OsmandApplication app = (OsmandApplication) requireActivity().getApplication();
+			String fileName = gpxInfoList.get(position).getFileName();
+			GPXFile gpxFile = GPXUtilities.loadGPXFile(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), fileName));
+			if (listener != null) {
+				listener.openLastEditTrackOnClick(gpxFile);
+			}
+		}
+		dismiss();
+	}
+
+	private void importTrack() {
+		Intent intent = new Intent();
+		String action;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			action = Intent.ACTION_OPEN_DOCUMENT;
+		} else {
+			action = Intent.ACTION_GET_CONTENT;
+		}
+		intent.setAction(action);
+		intent.setType("*/*");
+		try {
+			startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
+		} catch (ActivityNotFoundException e) {
+			LOG.error(e.getMessage(), e);
+		}
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == OPEN_GPX_DOCUMENT_REQUEST && resultCode == Activity.RESULT_OK) {
+			if (data != null) {
+				Uri uri = data.getData();
+				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
+					@Override
+					public void onComplete(boolean success) {
+						finishImport(success);
+						importHelper.setGpxImportCompleteListener(null);
+					}
+				});
+				importHelper.handleGpxImport(uri, false, false);
+			}
+		} else {
+			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
+
+	void finishImport(boolean success) {
+		if (success) {
+			dismiss();
+		}
+	}
+
+	public static void showInstance(FragmentManager fragmentManager, StartPlanRouteListener listener) {
+		if (!fragmentManager.isStateSaved()) {
+			StartPlanRouteBottomSheet fragment = new StartPlanRouteBottomSheet();
+			fragment.setUsedOnMap(true);
+			fragment.setRetainInstance(true);
+			fragment.setListener(listener);
+			fragment.show(fragmentManager, StartPlanRouteBottomSheet.TAG);
+		}
+	}
+
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_cancel;
+	}
+
+	@Override
+	protected void onDismissButtonClickAction() {
+		if (listener != null) {
+			listener.dismissButtonOnClick();
+		}
+	}
+
+	interface StartPlanRouteListener {
+
+		void openExistingTrackOnClick();
+
+		void openLastEditTrackOnClick(GPXFile gpxFile);
+
+		void dismissButtonOnClick();
+
+	}
+}
