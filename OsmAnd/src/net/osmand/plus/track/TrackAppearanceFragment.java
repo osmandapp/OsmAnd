@@ -41,6 +41,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -73,6 +74,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 	private long modifiedTime = -1;
 
 	private TrackWidthCard trackWidthCard;
+	private SplitIntervalCard splitIntervalCard;
 
 	private ImageView appearanceIcon;
 	private View zoomButtonsView;
@@ -544,25 +546,36 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 			if (splitType == null) {
 				splitType = GpxSplitType.NO_SPLIT;
 			}
-			SplitTrackAsyncTask.SplitTrackListener splitTrackListener = new SplitTrackAsyncTask.SplitTrackListener() {
-
-				@Override
-				public void trackSplittingStarted() {
-
-				}
-
-				@Override
-				public void trackSplittingFinished() {
-					if (selectedGpxFile != null) {
-						List<GpxDisplayGroup> groups = getGpxDisplayGroups();
-						selectedGpxFile.setDisplayGroups(groups, app);
-					}
-				}
-			};
-			List<GpxDisplayGroup> groups = getGpxDisplayGroups();
-			new SplitTrackAsyncTask(app, splitType, groups, splitTrackListener, trackDrawInfo.isJoinSegments(),
-					timeSplit, distanceSplit).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			applySplit(splitType, timeSplit, distanceSplit);
 		}
+	}
+
+	void applySplit(GpxSplitType splitType, int timeSplit, double distanceSplit) {
+		if (splitIntervalCard != null) {
+			splitIntervalCard.updateContent();
+		}
+		SplitTrackListener splitTrackListener = new SplitTrackListener() {
+
+			@Override
+			public void trackSplittingStarted() {
+
+			}
+
+			@Override
+			public void trackSplittingFinished() {
+				if (selectedGpxFile != null) {
+					List<GpxDisplayGroup> groups = getGpxDisplayGroups();
+					selectedGpxFile.setDisplayGroups(groups, app);
+				}
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+					mapActivity.refreshMap();
+				}
+			}
+		};
+		List<GpxDisplayGroup> groups = getGpxDisplayGroups();
+		new SplitTrackAsyncTask(app, splitType, groups, splitTrackListener, trackDrawInfo.isJoinSegments(),
+				timeSplit, distanceSplit).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void saveGpx(final GPXFile gpxFile) {
@@ -587,7 +600,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
 
-			SplitIntervalCard splitIntervalCard = new SplitIntervalCard(mapActivity);
+			splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
 			splitIntervalCard.setListener(this);
 			cardsContainer.addView(splitIntervalCard.build(mapActivity));
 

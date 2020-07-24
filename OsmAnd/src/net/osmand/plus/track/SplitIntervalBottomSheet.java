@@ -1,6 +1,5 @@
 package net.osmand.plus.track;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +26,6 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 
 import org.apache.commons.logging.Log;
 
@@ -190,7 +188,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	private void addDistanceOptionSplit(int value, @NonNull List<GpxDisplayGroup> displayGroups) {
 		if (displayGroups.size() > 0) {
 			double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
-			String formattedDist = OsmAndFormatter.getFormattedDistance((float) dvalue, app);
+			String formattedDist = SplitIntervalCard.getFormattedDistanceInterval(app, value);
 			distanceSplitOptions.put(formattedDist, dvalue);
 			if (Math.abs(displayGroups.get(0).getSplitDistance() - dvalue) < 1) {
 				selectedDistanceSplitInterval = distanceSplitOptions.size() - 1;
@@ -200,14 +198,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void addTimeOptionSplit(int value, @NonNull List<GpxDisplayGroup> model) {
 		if (model.size() > 0) {
-			String time;
-			if (value < 60) {
-				time = value + " " + getString(R.string.int_seconds);
-			} else if (value % 60 == 0) {
-				time = (value / 60) + " " + getString(R.string.int_min);
-			} else {
-				time = (value / 60f) + " " + getString(R.string.int_min);
-			}
+			String time = SplitIntervalCard.getFormattedTimeInterval(app, value);
 			timeSplitOptions.put(time, value);
 			if (model.get(0).getSplitTime() == value) {
 				selectedTimeSplitInterval = timeSplitOptions.size() - 1;
@@ -311,24 +302,10 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		int timeSplit = new ArrayList<>(timeSplitOptions.values()).get(selectedTimeSplitInterval);
 		double distanceSplit = new ArrayList<>(distanceSplitOptions.values()).get(selectedDistanceSplitInterval);
 
-		SplitTrackListener splitTrackListener = new SplitTrackListener() {
-
-			@Override
-			public void trackSplittingStarted() {
-
-			}
-
-			@Override
-			public void trackSplittingFinished() {
-				if (selectedGpxFile != null) {
-					List<GpxDisplayGroup> groups = getDisplayGroups();
-					selectedGpxFile.setDisplayGroups(groups, app);
-				}
-			}
-		};
-		List<GpxDisplayGroup> groups = getDisplayGroups();
-		new SplitTrackAsyncTask(app, selectedSplitType, groups, splitTrackListener, trackDrawInfo.isJoinSegments(),
-				timeSplit, distanceSplit).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		Fragment target = getTargetFragment();
+		if (target instanceof TrackAppearanceFragment) {
+			((TrackAppearanceFragment) target).applySplit(selectedSplitType, timeSplit, distanceSplit);
+		}
 	}
 
 	@NonNull
