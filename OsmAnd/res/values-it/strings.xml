@@ -3765,7 +3765,7 @@
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Colori personalizzati</string>
     <string name="search_poi_types">Cerca in base al PDI</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Puoi Esportare o importare le azioni veloci con i profili dell\'applicazione.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Puoi esportare o importare le azioni veloci con i profili dell\'applicazione.</string>
     <string name="shared_string_delete_all_q">Cancellare tutto\?</string>
     <string name="delete_all_actions_message_q">Sei sicuro di volere cancellare definitivamente %d le azioni rapide\?</string>
     <string name="screen_timeout">Tempo del blocco schermo</string>
@@ -3778,13 +3778,13 @@
     <string name="shared_string_night_map">Mappa notturna</string>
     <string name="shared_string_tones">toni</string>
     <string name="add_online_source">Aggiungi sorgente online</string>
-    <string name="clear_tiles_warning">Applicando questi cambiamenti i dati memorizzati nella cache verranno cancellati per questa sorgente di mattonelle</string>
+    <string name="clear_tiles_warning">Applicando questi cambiamenti, i dati memorizzati nella cache verranno cancellati per questa sorgente di mattonelle</string>
     <string name="vessel_height_warning_link">Imposta l\'altezza dell\'imbarcazione</string>
     <string name="vessel_height_warning">Puoi mpostare l\'altezza dell\'imbarcazione per evitare ponti bassi. Ricorda che, se il ponte è mobile, useremo la sua altezza da aperto.</string>
     <string name="vessel_height_limit_description">Imposta l\'altezza dell\'imbarcazione per evitare ponti bassi. Ricorda che, se il ponte è mobile, useremo la sua altezza da aperto.</string>
     <string name="vessel_width_limit_description">Imposta la larghezza della\"imbarcazione per evitare i ponti stretti</string>
     <string name="quick_action_showhide_mapillary_title">Mostra/nascondi Mapillary</string>
-    <string name="quick_action_mapillary_hide">Nascondi Mapilly</string>
+    <string name="quick_action_mapillary_hide">Nascondi Mapillary</string>
     <string name="quick_action_mapillary_show">Mostra Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Un pulsante per visualizzare nella mappa o nascondere il livello Mapillary .</string>
     <string name="lenght_limit_description">Fornisci la lunghezza del tuo veicolo, alcune restrizioni di percorso potrebbero essere applicate per veicoli.</string>
@@ -3800,7 +3800,7 @@
 \nScegliendo %2$s. Tutti i dati relativi agli autovelox: avvisi, notifiche, PDI saranno cancellati fino a che OsmAnd non sarà completamente reinstallato.</string>
     <string name="keep_active">Mantieni attivo</string>
     <string name="shared_string_uninstall">Disinstalla</string>
-    <string name="speed_cameras_alert">Gli avvisi sulla presenza di autovelox in alcuni paesi è proibita dalla legge.</string>
+    <string name="speed_cameras_alert">Gli avvisi sulla presenza di autovelox in alcuni paesi sono proibiti dalla legge.</string>
     <string name="routing_attr_length_description">Specifica la lunghezza del veicolo permessa nei percorsi.</string>
     <string name="routing_attr_length_name">Lunghezza massima</string>
     <string name="shared_string_bearing">Bussola</string>
