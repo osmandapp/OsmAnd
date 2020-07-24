@@ -3806,4 +3806,12 @@
     <string name="route_between_points">Itinéraire entre points</string>
     <string name="plan_a_route">Planifier un itinéraire</string>
     <string name="add_to_a_track">Ajouter à une trace</string>
+    <string name="shared_string_custom">Douane</string>
+    <string name="add_hidden_group_info">Le point ajouté ne sera pas visible sur la carte car le groupe sélectionné est masqué. Vous pouvez le trouver dans \"%s\".</string>
+    <string name="gpx_split_interval_descr">Sélectionnez l\'intervalle d\'affichage sur la trace des marques de distance ou de durée.</string>
+    <string name="gpx_split_interval_none_descr">Sélectionner l\'option de découpage : durée ou distance.</string>
+    <string name="track_coloring_solid">Continu</string>
+    <string name="track_show_start_finish_icons">Afficher les icônes de départ et d\'arrivée</string>
+    <string name="select_track_width">Sélectionner la largeur</string>
+    <string name="gpx_direction_arrows">Flèches de direction</string>
 </resources>

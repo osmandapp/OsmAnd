@@ -993,7 +993,7 @@
     <string name="shared_string_delete_all">Tümünü sil</string>
     <string name="animate_routing_route_not_calculated">Lütfen ilk olarak rotayı hesaplayın</string>
     <string name="animate_routing_route">Hesaplanan rotayı kullanarak simülasyon </string>
-    <string name="animate_routing_gpx">GPX Rota kullanarak simülasyonlar</string>
+    <string name="animate_routing_gpx">GPX yolu kullanarak simülasyon</string>
     <string name="shared_string_remember_my_choice">Seçimi anımsa</string>
     <string name="shared_string_and">ve</string>
     <string name="shared_string_or">veya</string>
@@ -2463,8 +2463,8 @@
     <string name="shared_string_swap">Takas</string>
     <string name="show_more">Daha fazla görüntüle</string>
     <string name="quick_action_show_hide_gpx_tracks">GPX yollarını göster/gizle</string>
-    <string name="quick_action_gpx_tracks_hide">Gps izlerini gizle</string>
-    <string name="quick_action_gpx_tracks_show">Gps izlerini göster</string>
+    <string name="quick_action_gpx_tracks_hide">GPX Yollarını Gizle</string>
+    <string name="quick_action_gpx_tracks_show">GPX Yollarını Göster</string>
     <string name="add_home">Ev ekle</string>
     <string name="add_work">Iş ekle</string>
     <string name="work_button">İş</string>
@@ -3779,4 +3779,12 @@
     <string name="set_working_days_to_continue">Devam etmek için çalışma günlerini ayarlamalısınız</string>
     <string name="route_between_points">Noktalar arasındaki güzergah</string>
     <string name="plan_a_route">Güzergah planla</string>
+    <string name="add_hidden_group_info">Seçilen grup gizli olduğu için eklenen nokta haritada görünmeyecek, \"%s\" içinde bulabilirsiniz.</string>
+    <string name="track_show_start_finish_icons">Başlangıç bitiş simgelerini göster</string>
+    <string name="select_track_width">Genişlik seç</string>
+    <string name="gpx_split_interval_descr">Yol üzerinde mesafe veya zaman işaretlerinin görüntüleneceği aralığı seçin.</string>
+    <string name="gpx_split_interval_none_descr">İstediğiniz bölme seçeneğini seçin: zamana veya mesafeye göre.</string>
+    <string name="shared_string_custom">Özel</string>
+    <string name="gpx_direction_arrows">Yön okları</string>
+    <string name="track_coloring_solid">Koyu</string>
 </resources>

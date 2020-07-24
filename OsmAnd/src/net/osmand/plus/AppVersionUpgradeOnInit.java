@@ -25,9 +25,10 @@ class AppVersionUpgradeOnInit {
 	// Each upgrade should have independent version!
 	// So, we could have multiple upgrades per 1 release i.e. 3701, 3702, 3703, ... - will be for 3.7
 	public static final int VERSION_3_7_01 = 3701;
+	// 3800 - 3.8-00
+	public static final int VERSION_3_8_00 = 3800;
 
-
-	public static final int LAST_APP_VERSION = VERSION_3_7_01;
+	public static final int LAST_APP_VERSION = VERSION_3_8_00;
 
 	static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -109,6 +110,10 @@ class AppVersionUpgradeOnInit {
 						}
 					});
 					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_7_01).commit();
+				}
+				if (prevAppVersion < VERSION_3_8_00) {
+					app.getSettings().migrateQuickActionStates();
+					startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_8_00).commit();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
