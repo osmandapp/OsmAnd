@@ -466,14 +466,16 @@ public class RoutingOptionsHelper {
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
 		RouteProvider.GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
 		boolean osmandRouter = am.getRouteService() == RouteProvider.RouteService.OSMAND;
-		if (rparams != null && !routingHelper.isCurrentGPXRouteV2() && osmandRouter) {
+		if (rparams != null && osmandRouter) {
 			GPXUtilities.GPXFile fl = rparams.getFile();
 			if (fl.hasRtePt()) {
 				list.add(new OtherLocalRoutingParameter(R.string.use_points_as_intermediates,
 						app.getString(R.string.use_points_as_intermediates), rparams.isUseIntermediatePointsRTE()));
 			}
-			list.add(new OtherLocalRoutingParameter(R.string.gpx_option_reverse_route,
-					app.getString(R.string.gpx_option_reverse_route), rparams.isReverse()));
+			if (!routingHelper.isCurrentGPXRouteV2()) {
+				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_reverse_route,
+						app.getString(R.string.gpx_option_reverse_route), rparams.isReverse()));
+			}
 			if (!rparams.isUseIntermediatePointsRTE()) {
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_from_start_point,
 						app.getString(R.string.gpx_option_from_start_point), rparams.isPassWholeRoute()));
