@@ -41,15 +41,15 @@
     <string name="reading_cached_tiles">Lendo cache de imagens…</string>
     <string name="version_index_is_big_for_memory">O índice \'\'{0}\'\' não coube na memória</string>
     <string name="version_index_is_not_supported">A versão do índice \'\'{0}\'\' não é suportada</string>
-    <string name="voice_is_not_available_msg">Não existe orientação vocal disponível, aceda a \"Definições\" → \"Definições de navegação\" → \"Orientação vocal\" e selecione ou descarregue um pacote de instruções vocais.</string>
-    <string name="voice_is_not_available_title">Nenhum dado de voz especificado</string>
+    <string name="voice_is_not_available_msg">"Não existe orientação vocal disponível, aceda a \"Definições\" → \"Definições de navegação\", selecione o perfil  → \"Orientação vocal\" e selecione ou descarregue um pacote de instruções vocais."</string>
+    <string name="voice_is_not_available_title">Selecione um pacote de avisos de voz</string>
     <string name="trace_rendering_descr">Mostrar o desempenho da renderização.</string>
     <string name="trace_rendering">Mostrar velocidade de renderização</string>
     <string name="daynight_mode_day">Dia</string>
     <string name="daynight_mode_night">Noite</string>
     <string name="daynight_mode_auto">Nascer/Pôr-do-Sol</string>
     <string name="daynight_mode_sensor">Sensor de luz</string>
-    <string name="daynight_descr">Selecione a lógica para alternar entre o modo nocturno e diurno.</string>
+    <string name="daynight_descr">Ajuste alternar entre o modo noturno e diurno.</string>
     <string name="daynight">Modo Dia/Noite</string>
     <string name="download_files_question">Gostaria de descarregar {0} ficheiros ({1} MB)\?</string>
     <string name="items_were_selected">{0} objetos estão selecionados</string>
@@ -66,17 +66,17 @@
     <string name="fast_route_mode_descr">Ativar para calcular a rota mais rápida ou desativar para a rota de poupança de combustível.</string>
     <string name="tiles_to_download_estimated_size">Ampliação {0}: descarregar {1} quadrículas ({2} MB)</string>
     <string name="shared_string_download_map">Descarregar mapa</string>
-    <string name="select_max_zoom_preload_area">Zoom máximo para decarregar</string>
+    <string name="select_max_zoom_preload_area">Ampliação máxima a pré-carregar</string>
     <string name="maps_could_not_be_downloaded">Não é possível descarregar este mapa</string>
     <string name="continuous_rendering">Processamento contínuo</string>
     <string name="continuous_rendering_descr">Mostrar processamento contínuo ao invés de imagem inteira de uma vez.</string>
-    <string name="rendering_exception">Não foi possível desenhar a área selecionada</string>
+    <string name="rendering_exception">Não foi possível desenhar a área selecionada.</string>
     <string name="rendering_out_of_memory">Não há memória suficiente para mostrar a área selecionada</string>
     <string name="show_point_options">Usar localização…</string>
     <string name="renderer_load_sucess">O motor de renderização foi carregado</string>
-    <string name="renderer_load_exception">Não foi possível carregar o renderizador</string>
+    <string name="renderer_load_exception">Não foi possível carregar o renderizador.</string>
     <string name="renderers">Renderizadores de vetor</string>
-    <string name="renderers_descr">Escolha a aparência dos mapas vetoriais.</string>
+    <string name="renderers_descr">Escolha a aparência de renderização</string>
     <string name="poi_context_menu_website">Veja o site do POI</string>
     <string name="poi_context_menu_call">Mostrar o número de telefone do POI</string>
     <string name="website">Site</string>
@@ -94,7 +94,7 @@
     <string name="gpx_option_reverse_route">Caminho reverso</string>
     <string name="gpx_files_not_found">Nenhum ficheiro GPX encontrado na pasta tracks</string>
     <string name="layer_gpx_layer">Ficheiros GPX…</string>
-    <string name="error_reading_gpx">Não foi possível ler dados GPX</string>
+    <string name="error_reading_gpx">Não foi possível ler os dados de GPX.</string>
     <string name="vector_data">Mapas vetoriais offline</string>
     <string name="transport_context_menu">Procurar transporte na paragem</string>
     <string name="poi_context_menu_modify">Modificar POI</string>
@@ -102,7 +102,7 @@
     <string name="rotate_map_compass_opt">Direção da bússola</string>
     <string name="rotate_map_bearing_opt">Direção de movimento</string>
     <string name="rotate_map_none_opt">Sem rotação (norte sempre para cima)</string>
-    <string name="rotate_map_to_bearing_descr">Selecione como o mapa deve ser girado.</string>
+    <string name="rotate_map_to_bearing_descr">Alinhamento do mapa:</string>
     <string name="rotate_map_to_bearing">Rotação do mapa</string>
     <string name="show_route">Mostrar rota</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
@@ -110,7 +110,7 @@
     <string name="fav_saved_sucessfully">Favoritos guardados em {0}</string>
     <string name="no_fav_to_save">Nenhum ponto favorito para guardar</string>
     <string name="shared_string_import">Importar</string>
-    <string name="error_occurred_loading_gpx">Erro ao carregar o ficheiro GPX</string>
+    <string name="error_occurred_loading_gpx">Não foi possível carregar o GPX.</string>
     <string name="send_report">Enviar o relatório</string>
     <string name="none_region_found">Não foi possível encontrar mapas descarregados no cartão de memória.</string>
     <string name="poi_namefinder_query_empty">Digite para encontrar um POI</string>
@@ -123,7 +123,7 @@
     <string name="layer_poi">Sobreposição de POI…</string>
     <string name="layer_map">Fonte dos mapas…</string>
     <string name="menu_layers">Camada de mapa</string>
-    <string name="context_menu_item_search_poi">Encontre um Ponto de Interesse</string>
+    <string name="context_menu_item_search_poi">Busca por POI</string>
     <string name="use_trackball_descr">Utilize um aparelho trackball para mover o mapa.</string>
     <string name="use_trackball">Use o cursor</string>
     <string name="background_service_wait_int_descr">Definir o tempo limite para determinar a localização.</string>
@@ -134,9 +134,9 @@
     <string name="gps_provider">GPS</string>
     <string name="int_seconds">segundos</string>
     <string name="int_min">min.</string>
-    <string name="background_service_int_descr">Escolha um intervalo de atualização da sua posição no serviço em segundo plano.</string>
+    <string name="background_service_int_descr">Intervalo de ativar usado pelo serviço de fundo:</string>
     <string name="background_service_int">Intervalo de posição GPS</string>
-    <string name="background_service_provider_descr">Escolha um provedor de localização para o serviço em segundo plano.</string>
+    <string name="background_service_provider_descr">Método de localização utilizado pelo serviço de fundo:</string>
     <string name="background_service_provider">Provedor de localização</string>
     <string name="background_router_service_descr">Rastreia a sua posição enquanto o ecrã está desligado.</string>
     <string name="background_router_service">Executar OsmAnd em segundo plano</string>
@@ -615,7 +615,7 @@
     <string name="installing_new_resources">Preparando novos dados…</string>
     <string name="internet_connection_required_for_online_route">A navegação online não funciona offline.</string>
     <string name="tts_language_not_supported_title">Idioma não suportado</string>
-    <string name="tts_language_not_supported">O idioma selecionado não é suportado pelo mecanismo Android TTS (texto para voz) instalado. Quer procurar outro mecanismo TTS na loja de aplicações\? Caso contrário, será usado o idioma predefinido do TTS.</string>
+    <string name="tts_language_not_supported">O idioma selecionado não é suportado pelo motor TTS (text-to-speech) do Android instalado, o TTS predefinido do seu idioma será utilizado no seu lugar. Procure por outro motor TTS no mercado\?</string>
     <string name="tts_missing_language_data_title">Faltam dados de voz TTS</string>
     <string name="tts_missing_language_data">Ir ao mercado para descarregar o idioma selecionado\?</string>
     <string name="gpx_option_destination_point">Usar destino atual</string>
@@ -623,22 +623,22 @@
     <string name="switch_to_vector_map_to_see">Mapa vetorial Offline disponível para esta localização.
 \n\t\n\t Para usar, ative \'Menu\' -&gt; \'Definir Vista\' -&gt; \'Origem de Mapa…\' -&gt; \'Mapas Vetoriais Offline\'.</string>
     <string name="choose_audio_stream">Saída para orientação por voz</string>
-    <string name="choose_audio_stream_descr">Selecione o narrador para reproduzir as instruções de voz.</string>
-    <string name="voice_stream_voice_call">Áudio de chamada telefônica (para interromper os aparelhos de som BT do carro)</string>
+    <string name="choose_audio_stream_descr">Selecione o altifalante para orientação por voz.</string>
+    <string name="voice_stream_voice_call">Áudio de chamada telefónica (para interromper os aparelhos de som Bluetooth do carro)</string>
     <string name="voice_stream_notification">Áudio de Notificação</string>
-    <string name="voice_stream_music">Áudio de Media/GPS</string>
+    <string name="voice_stream_music">Áudio de mídia/navegação</string>
     <string name="warning_tile_layer_not_downloadable">A aplicação não conseguiu descarregar a camada do mapa %1$s, se a tornar a instalar pode resolver o problema.</string>
-    <string name="overlay_transparency_descr">Modificar a transparência da sobreposição.</string>
+    <string name="overlay_transparency_descr">Ajustar a transparência da sobreposição.</string>
     <string name="overlay_transparency">Transparência da Sobreposição</string>
-    <string name="map_transparency_descr">Modificar a transparência do mapa base.</string>
+    <string name="map_transparency_descr">Ajustar a transparência do mapa base.</string>
     <string name="map_transparency">Transparência do mapa base</string>
     <string name="layer_underlay">Mapa de camada inferior…</string>
     <string name="map_underlay">Mapa de camada inferior</string>
-    <string name="map_underlay_descr">Escolha a mapa da camada inferior.</string>
+    <string name="map_underlay_descr">Escolha o mapa da sub-camada</string>
     <string name="layer_overlay">Mapa da camada superior…</string>
     <string name="shared_string_none">Nenhum</string>
     <string name="map_overlay">Mapa da camada superior</string>
-    <string name="map_overlay_descr">Escolha o mapa da camada superior.</string>
+    <string name="map_overlay_descr">Escolha o mapa da sobreposição</string>
     <string name="tile_source_already_installed">Mapa previamente instalado, as \"Configurações\" serão atualizadas.</string>
     <string name="select_tile_source_to_install">Selecione (telhas de) mapas para instalar ou atualizar.</string>
     <string name="internet_not_available">Não é possível executar a operação sem uma conexão com a Internet.</string>
@@ -649,7 +649,7 @@
     <string name="error_doing_search">Não foi possível executar a pesquisa offline.</string>
     <string name="search_osm_offline">Pesquisa por localização geográfica</string>
     <string name="system_locale">Sistema</string>
-    <string name="preferred_locale_descr">Selecione o idioma de visualização (surte efeito só de pois de reiniciar o OsmAnd).</string>
+    <string name="preferred_locale_descr">Idioma de exibição da aplicação (usado após OsmAnd ser reiniciado).</string>
     <string name="preferred_locale">Linguagem</string>
     <string name="shared_string_next">Próximo</string>
     <string name="shared_string_previous">Anterior</string>
@@ -673,7 +673,7 @@
     <string name="osmand_routing_experimental">Navegação OsmAnd off-line ainda é uma função experimental e não funciona em distâncias superiores a cerca de 20 km.
 \n
 \nO serviço de navegação está temporariamente mudado para CloudMade on-line.</string>
-    <string name="specified_dir_doesnt_exist">Não é possível encontrar a pasta especificada.</string>
+    <string name="specified_dir_doesnt_exist">Não foi possível encontrar a pasta especificada.</string>
     <string name="application_dir">Local de armazenamento</string>
     <string name="osmand_net_previously_installed">Todos os dados offline na aplicação instalada antiga serão suportados pela nova aplicação, mas os pontos Favoritos devem ser exportados da aplicação antiga e depois importados na nova aplicação.</string>
     <string name="build_installed">Build {0} foi instalado ({1}).</string>
@@ -681,7 +681,7 @@
     <string name="install_selected_build">Instalar OsmAnd - {0} de {1} {2} MB \?</string>
     <string name="loading_builds_failed">A busca da lista de OsmAnd builds falhou</string>
     <string name="loading_builds">Carregando OsmAnd builds…</string>
-    <string name="select_build_to_install">Selecione uma compilação OsmAnd para instalar</string>
+    <string name="select_build_to_install">Selecione a compilação OsmAnd para instalar</string>
     <string name="contribution_activity">Instalar versão</string>
     <string name="navigate_point_format_D">DDD.DD</string>
     <string name="navigate_point_format_DM">DDD MM.MM</string>
@@ -2700,7 +2700,7 @@
     <string name="index_name_netherlands">Europa - Países Baixos</string>
     <string name="shared_string_others">Outros</string>
     <string name="shared_string_release">Lançado</string>
-    <string name="voices">Instruções de voz</string>
+    <string name="voices">Avisos de voz</string>
     <string name="favourites_context_menu_add">Adicionar Favorito</string>
     <string name="poi_action_delete">eliminar</string>
     <string name="poi_dialog_reopen">Reabrir</string>
@@ -3832,4 +3832,12 @@
     <string name="route_between_points">Rota entre pontos</string>
     <string name="plan_a_route">Planejar uma rota</string>
     <string name="add_to_a_track">Adicionar ao trilho</string>
+    <string name="add_hidden_group_info">O ponto adicionado não será visível no mapa, já que o grupo selecionado está escondido, pode encontrá-lo em \"%s\".</string>
+    <string name="track_show_start_finish_icons">Mostrar ícones de início e fim</string>
+    <string name="select_track_width">Selecione a largura</string>
+    <string name="gpx_split_interval_descr">Selecione o intervalo em que as marcas com distância ou tempo no trilho serão exibidas.</string>
+    <string name="gpx_split_interval_none_descr">Selecione a opção de divisão desejada: por tempo ou por distância.</string>
+    <string name="shared_string_custom">Personalizado</string>
+    <string name="gpx_direction_arrows">Setas de direção</string>
+    <string name="track_coloring_solid">Sólido</string>
 </resources>
