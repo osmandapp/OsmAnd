@@ -42,6 +42,11 @@ public class DirectionArrowsCard extends BaseCard {
 				compoundButton.setChecked(checked);
 				trackDrawInfo.setShowArrows(checked);
 				mapActivity.refreshMap();
+
+				CardListener listener = getListener();
+				if (listener != null) {
+					listener.onCardPressed(DirectionArrowsCard.this);
+				}
 			}
 		});
 	}

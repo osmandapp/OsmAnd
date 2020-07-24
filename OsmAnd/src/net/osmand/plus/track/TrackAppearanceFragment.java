@@ -1,5 +1,6 @@
 package net.osmand.plus.track;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -12,7 +13,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -42,6 +45,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
+import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
 import static net.osmand.plus.track.TrackDrawInfo.TRACK_FILE_PATH;
 
 public class TrackAppearanceFragment extends ContextMenuFragment implements CardListener {
@@ -240,6 +245,10 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 				if (trackWidthCard != null) {
 					trackWidthCard.updateItems();
 				}
+			} else if (card instanceof TrackWidthCard) {
+				updateAppearanceIcon();
+			} else if (card instanceof DirectionArrowsCard) {
+				updateAppearanceIcon();
 			}
 		}
 	}
@@ -250,8 +259,25 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 	}
 
 	private void updateAppearanceIcon() {
-		Drawable icon = getPaintedContentIcon(R.drawable.ic_action_gpx_width_bold, trackDrawInfo.getColor());
+		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), trackDrawInfo.getColor());
 		appearanceIcon.setImageDrawable(icon);
+	}
+
+	public Drawable getTrackIcon(OsmandApplication app, String widthAttr, boolean showArrows, @ColorInt int color) {
+		int widthIconId = getWidthIconId(widthAttr);
+		Drawable widthIcon = app.getUIUtilities().getPaintedIcon(widthIconId, color);
+
+		int strokeIconId = getStrokeIconId(widthAttr);
+		int strokeColor = UiUtilities.getColorWithAlpha(Color.BLACK, 0.7f);
+		Drawable strokeIcon = app.getUIUtilities().getPaintedIcon(strokeIconId, strokeColor);
+
+		Drawable arrows = null;
+		if (showArrows) {
+			int arrowsIconId = getArrowsIconId(widthAttr);
+			int contrastColor = UiUtilities.getContrastColor(app, color, false);
+			arrows = app.getUIUtilities().getPaintedIcon(arrowsIconId, contrastColor);
+		}
+		return UiUtilities.getLayeredIcon(widthIcon, strokeIcon, arrows);
 	}
 
 	private void updateCardsLayout() {
@@ -289,7 +315,10 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 			@Override
 			public void onClick(View v) {
 				discardChanges();
-				dismiss();
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					activity.onBackPressed();
+				}
 			}
 		});
 
@@ -384,6 +413,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 			cardsContainer.addView(splitIntervalCard.build(mapActivity));
 
 			DirectionArrowsCard directionArrowsCard = new DirectionArrowsCard(mapActivity, trackDrawInfo);
+			directionArrowsCard.setListener(this);
 			cardsContainer.addView(directionArrowsCard.build(mapActivity));
 
 			TrackColoringCard trackColoringCard = new TrackColoringCard(mapActivity, trackDrawInfo);
@@ -391,6 +421,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 			cardsContainer.addView(trackColoringCard.build(mapActivity));
 
 			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo);
+			trackWidthCard.setListener(this);
 			cardsContainer.addView(trackWidthCard.build(mapActivity));
 		}
 	}
@@ -431,6 +462,36 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 			return true;
 		} catch (RuntimeException e) {
 			return false;
+		}
+	}
+
+	public static int getWidthIconId(String widthAttr) {
+		if (TRACK_WIDTH_BOLD.equals(widthAttr)) {
+			return R.drawable.ic_action_track_line_bold_color;
+		} else if (TRACK_WIDTH_MEDIUM.equals(widthAttr)) {
+			return R.drawable.ic_action_track_line_medium_color;
+		} else {
+			return R.drawable.ic_action_track_line_thin_color;
+		}
+	}
+
+	public static int getStrokeIconId(String widthAttr) {
+		if (TRACK_WIDTH_BOLD.equals(widthAttr)) {
+			return R.drawable.ic_action_track_line_bold_stroke;
+		} else if (TRACK_WIDTH_MEDIUM.equals(widthAttr)) {
+			return R.drawable.ic_action_track_line_medium_stroke;
+		} else {
+			return R.drawable.ic_action_track_line_thin_stroke;
+		}
+	}
+
+	public static int getArrowsIconId(String widthAttr) {
+		if (TRACK_WIDTH_BOLD.equals(widthAttr)) {
+			return R.drawable.ic_action_track_line_bold_direction;
+		} else if (TRACK_WIDTH_MEDIUM.equals(widthAttr)) {
+			return R.drawable.ic_action_track_line_medium_direction;
+		} else {
+			return R.drawable.ic_action_track_line_thin_direction;
 		}
 	}
 }
