@@ -2984,7 +2984,7 @@
 \n</string>
     <string name="use_osm_live_public_transport_description">Attiva le modifiche al trasporto pubblico in tempo reale con OsmAnd Live.</string>
     <string name="by_transport_type">In %1$s</string>
-    <string name="exit_at">Scendi a</string>
+    <string name="exit_at">Esci a</string>
     <string name="sit_on_the_stop">Sali alla fermata</string>
     <string name="shared_string_swap">Inverti</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Questo pulsante mostra o nasconde le tracce GPX selezionate sulla mappa</string>
@@ -3827,4 +3827,11 @@
     <string name="track_show_start_finish_icons">Mostra le icone di inizio e fine</string>
     <string name="shared_string_custom">Personalizzato</string>
     <string name="track_coloring_solid">Solido</string>
+    <string name="set_working_days_to_continue">Devi impostare i giorni lavorativi per continuare</string>
+    <string name="plan_a_route">Pianifica un percorso</string>
+    <string name="add_to_a_track">Aggiungi ad una Traccia</string>
+    <string name="gpx_split_interval_descr">Seleziona l\'intervallo a cui i segnaposti con distanza o orario sulla traccia verranno mostrati.</string>
+    <string name="gpx_split_interval_none_descr">Seleziona l\'opzione desiderata per la divisione: per tempo o per distanza.</string>
+    <string name="gpx_direction_arrows">Frecce delle direzioni</string>
+    <string name="select_track_width">Seleziona larghezza</string>
 </resources>
