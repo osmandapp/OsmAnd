@@ -3095,10 +3095,10 @@
     <string name="routing_profile_geocoding">Geocodificación</string>
     <string name="routing_profile_straightline">Línea recta</string>
     <string name="routing_profile_broutrer">BRouter (sin conexión)</string>
-    <string name="osmand_default_routing">Enrutamiento de OsmAnd</string>
-    <string name="custom_routing">Perfil de enrutamiento personalizado</string>
-    <string name="special_routing_type">Enrutamiento especial</string>
-    <string name="third_party_routing_type">Enrutamiento de terceros</string>
+    <string name="osmand_default_routing">Navegación de OsmAnd</string>
+    <string name="custom_routing">Perfil de navegación personalizado</string>
+    <string name="special_routing_type">Navegación especial</string>
+    <string name="third_party_routing_type">Navegación de terceros</string>
     <string name="application_profiles_descr">Perfiles que serán visibles en la aplicación.</string>
     <string name="application_profiles">Perfiles de la aplicación</string>
     <string name="zoom_by_wunderlinq_descr">Cambia el zoom del mapa desplazando la rueda hacia arriba y abajo. La tecla «Escape» retrocede a la aplicación WunderLINQ.</string>
@@ -3346,13 +3346,13 @@
 \n 
 \n • Arreglos en el modo nocturno 
 \n 
-\n • Se corrigieron algunos problemas de enrutamiento en todo el mundo 
+\n • Se corrigieron algunos problemas de navegación en todo el mundo 
 \n 
 \n • Se ha actualizado el mapa base con más detalles en la red de caminos. 
 \n 
 \n • Se corrigieron las zonas inundadas en todo el mundo 
 \n 
-\n • Enrutamiento de esquí: perfil de elevación y complejidad de la ruta añadidos a los detalles de la ruta 
+\n • Navegación de esquí: perfil de elevación y complejidad de la ruta añadidos a los detalles de la ruta 
 \n 
 \n • Otras correcciones de errores
 \n
@@ -3534,7 +3534,7 @@
 \nEl complemento permanecerá en el dispositivo después de desinstalar OsmAnd.</string>
     <string name="shared_string_menu">Menú</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s → %2$s → %3$s</string>
-    <string name="shared_string_routing">Enrutamiento</string>
+    <string name="shared_string_routing">Navegación</string>
     <string name="shared_string_include_data">Incluir datos adicionales</string>
     <string name="import_profile_dialog_description">El perfil importado contiene datos adicionales. Pulsa en «Importar» para importar sólo datos de perfil o marca datos adicionales.</string>
     <string name="export_profile_dialog_description">Puedes marcar datos adicionales para exportar junto con el perfil.</string>
