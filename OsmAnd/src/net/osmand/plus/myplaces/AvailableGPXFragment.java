@@ -965,9 +965,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				public int compare(File f1, File f2) {
 					// here we could guess date from file name '2017-08-30 ...' - first part date
 					if (f1.lastModified() == f2.lastModified()) {
-						return f1.getName().compareTo(f2.getName());
+						return -f1.getName().compareTo(f2.getName());
 					}
-					return Long.compare(f1.lastModified(), f2.lastModified());
+					return -Long.compare(f1.lastModified(), f2.lastModified());
 				}
 			});
 			return listFiles;
