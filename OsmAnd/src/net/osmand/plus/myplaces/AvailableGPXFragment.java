@@ -746,8 +746,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private void collectDirs(File dir, List<File> dirs, File exclDir) {
 		File[] listFiles = dir.listFiles();
 		if (listFiles != null) {
-			// sort directories
-			Arrays.sort(listFiles);
 			for (File f : listFiles) {
 				if (f.isDirectory()) {
 					if (!exclDir.equals(f)) {
@@ -960,6 +958,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			if (listFiles == null) {
 				return new File[0];
 			}
+			// This file could be sorted in different way for folders
+			// now folders are also sorted by last modified date
 			Arrays.sort(listFiles, new Comparator<File>() {
 				@Override
 				public int compare(File f1, File f2) {
