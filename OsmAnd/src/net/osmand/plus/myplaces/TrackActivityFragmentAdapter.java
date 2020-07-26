@@ -782,7 +782,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		if (activity != null && gpxSplitType != null && gpxFile != null) {
 			int timeSplit = 0;
 			double distanceSplit = 0;
-			if (!gpxFile.showCurrentTrack) {
+			if (gpxSplitType != GpxSplitType.NO_SPLIT && !gpxFile.showCurrentTrack) {
 				timeSplit = this.timeSplit.get(selectedSplitInterval);
 				distanceSplit = this.distanceSplit.get(selectedSplitInterval);
 			}
