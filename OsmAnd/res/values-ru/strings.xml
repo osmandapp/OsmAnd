@@ -227,7 +227,7 @@
     <string name="subcategories">Подкатегории</string>
     <string name="selected_categories">Выбранные категории</string>
     <string name="create_custom_poi">Создать настраиваемый фильтр</string>
-    <string name="custom_search">Настроить поиск</string>
+    <string name="custom_search">Кастомизированный поиск</string>
     <string name="shared_string_filters">Фильтры</string>
     <string name="apply_filters">Применить фильтры</string>
     <string name="save_filter">Сохранить фильтр</string>
