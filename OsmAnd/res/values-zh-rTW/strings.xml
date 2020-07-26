@@ -2891,7 +2891,7 @@
     <string name="quick_action_day_night_switch_mode">切換日間／夜間模式</string>
     <string name="routeInfo_roadClass_name">道路類型</string>
     <string name="routeInfo_surface_name">路面</string>
-    <string name="routeInfo_smoothness_name">光滑度</string>
+    <string name="routeInfo_smoothness_name">平順度</string>
     <string name="routeInfo_steepness_name">坡度</string>
     <string name="add_home">新增住家</string>
     <string name="add_work">新增工作地點</string>
