@@ -1,5 +1,6 @@
 package net.osmand.plus.measurementtool;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,14 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.GpxTrackAdapter;
-import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxTrackAdapter.OnItemClickListener;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
+import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,7 +41,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	protected View mainView;
 	protected GpxTrackAdapter adapter;
 	private SelectFileListener listener;
-	private Map<String, List<GpxUiHelper.GPXInfo>> gpxInfoMap;
+	private Map<String, List<GPXInfo>> gpxInfoMap;
 
 	public void setListener(SelectFileListener listener) {
 		this.listener = listener;
@@ -45,52 +50,42 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
+		Context context = requireContext();
+		OsmandApplication app = requiredMyApplication();
+		mainView = View.inflate(new ContextThemeWrapper(context, themeRes),
 				R.layout.bottom_sheet_plan_route_select_file, null);
-
 		final RecyclerView filesRecyclerView = mainView.findViewById(R.id.gpx_track_list);
-		filesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
+		filesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
 		List<File> dirs = new ArrayList<>();
-		collectDirs(app.getAppPath(IndexConstants.GPX_INDEX_DIR), dirs);
+		final File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		collectDirs(gpxDir, dirs);
 		List<String> dirItems = new ArrayList<>();
 		for (File dir : dirs) {
 			dirItems.add(dir.getName());
 		}
-		String allFilesFolder = app.getResources().getString(R.string.shared_string_all);
+		String allFilesFolder = context.getString(R.string.shared_string_all);
 		dirItems.add(0, allFilesFolder);
 
-		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		List<GpxUiHelper.GPXInfo> list = getSortedGPXFilesInfo(dir, null, false);
-		final List<GpxUiHelper.GPXInfo> gpxInfoList = new ArrayList<>();
+		final List<GPXInfo> allGpxList = getSortedGPXFilesInfo(gpxDir, null, false);
 		gpxInfoMap = new HashMap<>();
-		gpxInfoMap.put(allFilesFolder, new ArrayList<GpxUiHelper.GPXInfo>());
-		String folderName;
-		for (GpxUiHelper.GPXInfo gpxInfo : list) {
-			folderName = getFolderName(gpxInfo);
-			gpxInfoMap.get(allFilesFolder).add(gpxInfo);
-			if (!gpxInfoMap.containsKey(folderName)) {
-				gpxInfoMap.put(folderName, new ArrayList<GpxUiHelper.GPXInfo>());
+		gpxInfoMap.put(allFilesFolder, allGpxList);
+		for (GPXInfo gpxInfo : allGpxList) {
+			String folderName = getFolderName(gpxInfo);
+			List<GPXInfo> gpxList = gpxInfoMap.get(folderName);
+			if (gpxList == null) {
+				gpxList = new ArrayList<>();
+				gpxInfoMap.put(folderName, gpxList);
 			}
-			gpxInfoMap.get(folderName).add(gpxInfo);
+			gpxList.add(gpxInfo);
 		}
-		gpxInfoList.clear();
-		List<GpxUiHelper.GPXInfo> gpxList = gpxInfoMap.get(allFilesFolder);
-		if (gpxList != null) {
-			gpxInfoList.addAll(gpxList);
-		}
-		adapter = new GpxTrackAdapter(requireContext(), gpxInfoList, false);
-		adapter.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {
+		adapter = new GpxTrackAdapter(requireContext(), allGpxList, false);
+		adapter.setAdapterListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {
-				if (position != RecyclerView.NO_POSITION && position < gpxInfoList.size()) {
-					OsmandApplication app = (OsmandApplication) requireActivity().getApplication();
-					String fileName = gpxInfoList.get(position).getFileName();
-					GPXUtilities.GPXFile gpxFile = GPXUtilities.loadGPXFile(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), fileName));
+				if (position != RecyclerView.NO_POSITION && position < allGpxList.size()) {
+					String fileName = allGpxList.get(position).getFileName();
+					GPXFile gpxFile = GPXUtilities.loadGPXFile(new File(gpxDir, fileName));
 					if (listener != null) {
 						listener.selectFileOnCLick(gpxFile);
 					}
@@ -101,21 +96,17 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		filesRecyclerView.setAdapter(adapter);
 
 		final RecyclerView foldersRecyclerView = mainView.findViewById(R.id.folder_list);
-		foldersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
+		foldersRecyclerView.setLayoutManager(new LinearLayoutManager(context,
 				RecyclerView.HORIZONTAL, false));
 		final HorizontalSelectionAdapter folderAdapter = new HorizontalSelectionAdapter(app, nightMode);
 		folderAdapter.setItems(dirItems);
 		folderAdapter.setSelectedItem(allFilesFolder);
 		foldersRecyclerView.setAdapter(folderAdapter);
-		folderAdapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
+		folderAdapter.setListener(new HorizontalSelectionAdapterListener() {
 			@Override
 			public void onItemSelected(String item) {
-				List<GpxUiHelper.GPXInfo> gpxInfoList = gpxInfoMap.get(item);
-				if (gpxInfoList != null) {
-					adapter.setGpxInfoList(gpxInfoList);
-				} else {
-					adapter.setGpxInfoList(new ArrayList<GpxUiHelper.GPXInfo>());
-				}
+				List<GPXInfo> gpxInfoList = gpxInfoMap.get(item);
+				adapter.setGpxInfoList(gpxInfoList != null ? gpxInfoList : new ArrayList<GPXInfo>());
 				adapter.notifyDataSetChanged();
 				folderAdapter.notifyDataSetChanged();
 			}
@@ -123,17 +114,11 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
 	}
 
-	private String getFolderName(GpxUiHelper.GPXInfo gpxInfo) {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return "";
-		}
+	private String getFolderName(GPXInfo gpxInfo) {
 		int fileNameStartIndex = gpxInfo.getFileName().lastIndexOf(File.separator);
-		if (fileNameStartIndex != -1) {
-			return gpxInfo.getFileName().substring(0, gpxInfo.getFileName().lastIndexOf(File.separator));
-		} else {
-			return IndexConstants.GPX_INDEX_DIR.substring(0, IndexConstants.GPX_INDEX_DIR.length() - 1);
-		}
+		return fileNameStartIndex != -1
+				? gpxInfo.getFileName().substring(0, fileNameStartIndex)
+				: IndexConstants.GPX_INDEX_DIR.substring(0, IndexConstants.GPX_INDEX_DIR.length() - 1);
 	}
 
 	private void collectDirs(File dir, List<File> dirs) {
@@ -178,7 +163,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
 	interface SelectFileListener {
 
-		void selectFileOnCLick(GPXUtilities.GPXFile gpxFile);
+		void selectFileOnCLick(GPXFile gpxFile);
 
 		void dismissButtonOnClick();
 

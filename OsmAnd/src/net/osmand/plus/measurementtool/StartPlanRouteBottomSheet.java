@@ -27,7 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.GpxTrackAdapter;
-import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.ImportHelper;
 
 import org.apache.commons.logging.Log;
@@ -115,23 +115,21 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 			return;
 		}
 
-		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		List<GpxUiHelper.GPXInfo> list = getSortedGPXFilesInfo(dir, null, false);
-
-		Collections.sort(list, new Comparator<GpxUiHelper.GPXInfo>() {
+		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		List<GPXInfo> gpxList = getSortedGPXFilesInfo(gpxDir, null, false);
+		Collections.sort(gpxList, new Comparator<GPXInfo>() {
 			@Override
-			public int compare(GpxUiHelper.GPXInfo lhs, GpxUiHelper.GPXInfo rhs) {
+			public int compare(GPXInfo lhs, GPXInfo rhs) {
 				return lhs.getLastModified() > rhs.getLastModified()
 						? -1 : (lhs.getLastModified() == rhs.getLastModified() ? 0 : 1);
 			}
 		});
-		list = list.subList(0, Math.min(5, list.size()));
-		adapter = new GpxTrackAdapter(requireContext(), list, false);
-		final List<GpxUiHelper.GPXInfo> finalList = list;
+		final List<GPXInfo> gpxTopList = gpxList.subList(0, Math.min(5, gpxList.size()));
+		adapter = new GpxTrackAdapter(requireContext(), gpxList, false);
 		adapter.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {
-				StartPlanRouteBottomSheet.this.onItemClick(position, finalList);
+				StartPlanRouteBottomSheet.this.onItemClick(position, gpxTopList);
 			}
 		});
 		recyclerView.setAdapter(adapter);
@@ -143,9 +141,9 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 		return AndroidUtils.dpToPx(mainView.getContext(), BOTTOM_SHEET_HEIGHT_DP);
 	}
 
-	private void onItemClick(int position, List<GpxUiHelper.GPXInfo> gpxInfoList) {
+	private void onItemClick(int position, List<GPXInfo> gpxInfoList) {
 		if (position != RecyclerView.NO_POSITION && position < gpxInfoList.size()) {
-			OsmandApplication app = (OsmandApplication) requireActivity().getApplication();
+			OsmandApplication app = requiredMyApplication();
 			String fileName = gpxInfoList.get(position).getFileName();
 			GPXFile gpxFile = GPXUtilities.loadGPXFile(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), fileName));
 			if (listener != null) {

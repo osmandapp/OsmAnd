@@ -80,6 +80,8 @@ import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -325,13 +327,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View view) {
 				editingCtx.getCommandManager().undo();
-				enableUndoRedoButton(editingCtx.getCommandManager().canUndo(), undoBtn);
+				updateUndoRedoButton(editingCtx.getCommandManager().canUndo(), undoBtn);
 				hidePointsListIfNoPoints();
 				if (editingCtx.getPointsCount() > 0) {
 					enable(upDownBtn);
 				}
 				adapter.notifyDataSetChanged();
-				enableUndoRedoButton(true, redoBtn);
+				updateUndoRedoButton(true, redoBtn);
 				updateText();
 			}
 		});
@@ -342,13 +344,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View view) {
 				editingCtx.getCommandManager().redo();
-				enableUndoRedoButton(editingCtx.getCommandManager().canRedo(), redoBtn);
+				updateUndoRedoButton(editingCtx.getCommandManager().canRedo(), redoBtn);
 				hidePointsListIfNoPoints();
 				if (editingCtx.getPointsCount() > 0) {
 					enable(upDownBtn);
 				}
 				adapter.notifyDataSetChanged();
-				enableUndoRedoButton(true, undoBtn);
+				updateUndoRedoButton(true, undoBtn);
 				updateText();
 			}
 		});
@@ -400,10 +402,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		});
 
 		if (!editingCtx.getCommandManager().canUndo()) {
-			enableUndoRedoButton(false, undoBtn);
+			updateUndoRedoButton(false, undoBtn);
 		}
 		if (!editingCtx.getCommandManager().canRedo()) {
-			enableUndoRedoButton(false, redoBtn);
+			updateUndoRedoButton(false, redoBtn);
 		}
 		if (editingCtx.getPointsCount() < 1) {
 			disable(upDownBtn);
@@ -683,7 +685,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				if (pointsListOpened) {
 					hidePointsList();
 				}
-				enableUndoRedoButton(false, redoBtn);
+				updateUndoRedoButton(false, redoBtn);
 				disable(upDownBtn);
 				updateText();
 				saved = false;
@@ -815,10 +817,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		};
 	}
 
-	public void addNewGpxData(GPXUtilities.GPXFile gpxFile) {
+	public void addNewGpxData(GPXFile gpxFile) {
 		QuadRect rect = gpxFile.getRect();
-		GPXUtilities.TrkSegment segment = getTrkSegment(gpxFile);
-		NewGpxData newGpxData = new NewGpxData(gpxFile, rect, NewGpxData.ActionType.EDIT_SEGMENT, segment);
+		TrkSegment segment = getTrkSegment(gpxFile);
+		NewGpxData newGpxData = new NewGpxData(gpxFile, rect, ActionType.EDIT_SEGMENT, segment);
 		editingCtx.setNewGpxData(newGpxData);
 		initMeasurementMode(newGpxData);
 		QuadRect qr = newGpxData.getRect();
@@ -829,9 +831,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private GPXUtilities.TrkSegment getTrkSegment(GPXUtilities.GPXFile gpxFile) {
+	private TrkSegment getTrkSegment(GPXFile gpxFile) {
 		for (GPXUtilities.Track t : gpxFile.tracks) {
-			for (GPXUtilities.TrkSegment s : t.segments) {
+			for (TrkSegment s : t.segments) {
 				if (s.points.size() > 0) {
 					return s;
 				}
@@ -843,8 +845,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	private void removePoint(MeasurementToolLayer layer, int position) {
 		editingCtx.getCommandManager().execute(new RemovePointCommand(layer, position));
 		adapter.notifyDataSetChanged();
-		enableUndoRedoButton(true, undoBtn);
-		enableUndoRedoButton(false, redoBtn);
+		updateUndoRedoButton(true, undoBtn);
+		updateUndoRedoButton(false, redoBtn);
 		updateText();
 		saved = false;
 		hidePointsListIfNoPoints();
@@ -906,7 +908,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 					if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 						editingCtx.getCommandManager().execute(new ReorderPointCommand(measurementLayer, fromPosition, toPosition));
 						adapter.notifyDataSetChanged();
-						enableUndoRedoButton(false, redoBtn);
+						updateUndoRedoButton(false, redoBtn);
 						updateText();
 						mapActivity.refreshMap();
 						saved = false;
@@ -1190,8 +1192,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 	private void doAddOrMovePointCommonStuff() {
 		enable(upDownBtn);
-		enableUndoRedoButton(true, undoBtn);
-		enableUndoRedoButton(false, redoBtn);
+		updateUndoRedoButton(true, undoBtn);
+		updateUndoRedoButton(false, redoBtn);
 		updateText();
 		adapter.notifyDataSetChanged();
 		saved = false;
@@ -1580,7 +1582,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private void enableUndoRedoButton(boolean enable, View view) {
+	private void updateUndoRedoButton(boolean enable, View view) {
 		view.setEnabled(enable);
 		int color = enable
 				? nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light
@@ -1828,7 +1830,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	private class MeasurementToolBarController extends TopToolbarController {
 
 		MeasurementToolBarController() {
-			super(MapInfoWidgetsFactory.TopToolbarControllerType.MEASUREMENT_TOOL);
+			super(TopToolbarControllerType.MEASUREMENT_TOOL);
 			setBackBtnIconClrIds(0, 0);
 			setTitleTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
 			setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
@@ -1841,7 +1843,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		}
 
 		@Override
-		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
+		public void updateToolbar(TopToolbarView view) {
 			super.updateToolbar(view);
 			setupDoneButton(view);
 			View shadow = view.getShadowView();
@@ -1850,7 +1852,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 		}
 
-		private void setupDoneButton(MapInfoWidgetsFactory.TopToolbarView view) {
+		private void setupDoneButton(TopToolbarView view) {
 			TextView done = view.getSaveView();
 			Context ctx = done.getContext();
 			done.setAllCaps(false);

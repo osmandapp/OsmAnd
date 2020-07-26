@@ -15,11 +15,13 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.plus.GPXDatabase;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -29,24 +31,27 @@ import java.util.List;
 
 public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackViewHolder> {
 
-	private LayoutInflater themedInflater;
-	private List<GpxUiHelper.GPXInfo> gpxInfoList;
 	private OsmandApplication app;
+	private LayoutInflater themedInflater;
+	private UiUtilities iconsCache;
+	private List<GPXInfo> gpxInfoList;
 	private boolean showCurrentGpx;
 	private OnItemClickListener onItemClickListener;
-	private UiUtilities iconsCache;
 
-	public GpxTrackAdapter(Context ctx, List<GpxUiHelper.GPXInfo> gpxInfoList, boolean showCurrentGpx) {
-		this.showCurrentGpx = showCurrentGpx;
+	public GpxTrackAdapter(Context ctx, List<GPXInfo> gpxInfoList, boolean showCurrentGpx) {
 		app = (OsmandApplication) ctx.getApplicationContext();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		themedInflater = UiUtilities.getInflater(ctx, nightMode);
-		this.gpxInfoList = gpxInfoList;
+		themedInflater = UiUtilities.getInflater(ctx, app.getDaynightHelper().isNightModeForMapControls());
 		iconsCache = app.getUIUtilities();
+		this.gpxInfoList = gpxInfoList;
+		this.showCurrentGpx = showCurrentGpx;
 	}
 
-	public void setGpxInfoList(List<GpxUiHelper.GPXInfo> gpxInfoList) {
+	public void setGpxInfoList(List<GPXInfo> gpxInfoList) {
 		this.gpxInfoList = gpxInfoList;
+	}
+
+	public void setShowCurrentGpx(boolean showCurrentGpx) {
+		this.showCurrentGpx = showCurrentGpx;
 	}
 
 	@NonNull
@@ -71,8 +76,8 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 			holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
 		}
 		final int adapterPosition = holder.getAdapterPosition();
-		GpxUiHelper.GPXInfo info = gpxInfoList.get(adapterPosition);
-		GPXDatabase.GpxDataItem dataItem = getDataItem(info);
+		GPXInfo info = gpxInfoList.get(adapterPosition);
+		GpxDataItem dataItem = getDataItem(info);
 		String itemTitle = GpxUiHelper.getGpxTitle(info.getFileName());
 		updateGpxInfoView(holder, itemTitle, info, dataItem, currentlyRecordingTrack, app);
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +95,8 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 		return gpxInfoList.size();
 	}
 
-	private void updateGpxInfoView(TrackViewHolder holder, String itemTitle, GpxUiHelper.GPXInfo info,
-	                               GPXDatabase.GpxDataItem dataItem, boolean currentlyRecordingTrack,
+	private void updateGpxInfoView(TrackViewHolder holder, String itemTitle, GPXInfo info,
+	                               GpxDataItem dataItem, boolean currentlyRecordingTrack,
 	                               OsmandApplication app) {
 		holder.name.setText(itemTitle.replace("/", " • ").trim());
 		GPXUtilities.GPXTrackAnalysis analysis = null;
@@ -127,7 +132,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 		}
 	}
 
-	private GPXDatabase.GpxDataItem getDataItem(final GpxUiHelper.GPXInfo info) {
+	private GpxDataItem getDataItem(final GPXInfo info) {
 		GpxDbHelper.GpxDataItemCallback gpxDataItemCallback = new GpxDbHelper.GpxDataItemCallback() {
 			@Override
 			public boolean isCancelled() {
@@ -135,7 +140,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 			}
 
 			@Override
-			public void onGpxDataItemReady(GPXDatabase.GpxDataItem item) {
+			public void onGpxDataItemReady(GpxDataItem item) {
 				if (item != null && gpxInfoList != null && info != null) {
 					notifyItemChanged(gpxInfoList.indexOf(info));
 				}
