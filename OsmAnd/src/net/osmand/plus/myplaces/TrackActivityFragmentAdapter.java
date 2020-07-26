@@ -53,9 +53,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitIntervalCard;
 import net.osmand.plus.track.SplitTrackAsyncTask;
@@ -65,12 +67,15 @@ import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.render.RenderingRulesStorage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 
 public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 
@@ -361,6 +366,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				divider.setVisibility(View.GONE);
 			}
 		}
+		updateTrackColor();
 	}
 
 	private void showTemporaryObjectOnMap(Object toShow) {
@@ -705,6 +711,27 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 
 		return Math.max(position, 0);
+	}
+
+	private void updateTrackColor() {
+		int color = getGpxDataItem() != null ? getGpxDataItem().getColor() : 0;
+		GPXFile gpxFile = getGpx();
+		if (color == 0 && gpxFile != null) {
+			if (gpxFile.showCurrentTrack) {
+				color = app.getSettings().CURRENT_TRACK_COLOR.get();
+			} else {
+				color = gpxFile.getColor(0);
+			}
+		}
+		if (color == 0) {
+			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+			CommonPreference<String> prefColor = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
+			color = GpxAppearanceAdapter.parseTrackColor(renderer, prefColor.get());
+		}
+		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
+		if (trackDrawer != null) {
+			trackDrawer.setTrackColor(color);
+		}
 	}
 
 	public List<GpxSelectionHelper.GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
