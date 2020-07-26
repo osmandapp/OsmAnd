@@ -3831,4 +3831,10 @@
     <string name="select_track_width">Выберите ширину</string>
     <string name="gpx_direction_arrows">Стрелки направления</string>
     <string name="track_coloring_solid">Сплошной</string>
+    <string name="plan_route_last_edited">Последнее изменение</string>
+    <string name="plan_route_import_track">Импортировать трек</string>
+    <string name="plan_route_open_existing_track">Открыть существующий трек</string>
+    <string name="plan_route_create_new_route">Создать новый маршрут</string>
+    <string name="plan_route_select_track_file_for_open">Выберите файл трека для открытия.</string>
+    <string name="shared_string_done">Готово</string>
 </resources>
