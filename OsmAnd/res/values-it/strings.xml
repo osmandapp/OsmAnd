@@ -3834,4 +3834,10 @@
     <string name="gpx_split_interval_none_descr">Seleziona l\'opzione desiderata per la divisione: per tempo o per distanza.</string>
     <string name="gpx_direction_arrows">Frecce delle direzioni</string>
     <string name="select_track_width">Seleziona larghezza</string>
+    <string name="plan_route_last_edited">Ultima modificata</string>
+    <string name="plan_route_import_track">Importa una traccia</string>
+    <string name="plan_route_open_existing_track">Apri una traccia esistente</string>
+    <string name="plan_route_create_new_route">Crea un nuovo percorso</string>
+    <string name="plan_route_select_track_file_for_open">Scegli il file di una traccia da aprire.</string>
+    <string name="shared_string_done">Fatto</string>
 </resources>
