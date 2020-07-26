@@ -27,7 +27,7 @@
     <string name="poi_fee">Накнада</string>
     <string name="poi_smoking">Пушење</string>
     <string name="poi_delivery">Достава</string>
-    <string name="poi_drive_in">Драјв ин</string>
+    <string name="poi_drive_in">Драјв-ин</string>
     <string name="poi_takeaway">За понети</string>
     <string name="poi_cocktails">Коктели</string>
     <string name="poi_microbrewery">Микропивара</string>
@@ -1034,7 +1034,7 @@
     <string name="poi_pump_no">Без пумпе</string>
     <string name="poi_pump_yes">Да</string>
     <string name="poi_water_characteristic_mineral">Минерална</string>
-    <string name="poi_water_characteristic_mud">Карактеристика воде: муљ</string>
+    <string name="poi_water_characteristic_mud">Блато</string>
     <string name="poi_water_characteristic_sulfuric">Сумпорна</string>
     <string name="poi_information_map">Карта</string>
     <string name="poi_information_office">Канцеларија</string>
@@ -1337,7 +1337,7 @@
     <string name="poi_memorial_stele">Стела</string>
     <string name="poi_memorial_bust">Биста</string>
     <string name="poi_memorial_koshinto">Кошинто</string>
-    <string name="poi_memorial_cross">Крст</string>
+    <string name="poi_memorial_cross">Крстолик</string>
     <string name="poi_memorial_vehicle">Возило</string>
     <string name="poi_memorial_stolperstein">Камен спотицања</string>
     <string name="poi_memorial_obelisk">Обелиск</string>
@@ -2097,7 +2097,7 @@
     <string name="poi_fuel_100ll">100ЛЛ гориво</string>
     <string name="poi_fuel_autogas">Аутогас</string>
     <string name="poi_fuel_jeta1">Авионско А-1 гориво</string>
-    <string name="poi_fuel_adblue">Едблу гориво</string>
+    <string name="poi_fuel_adblue">Адитив дизел гасова</string>
     <string name="poi_fuel_wood">Гориво: дрво</string>
     <string name="poi_fuel_charcoal">Гориво: ћумур</string>
     <string name="poi_fuel_coal">Гориво: угаљ</string>
