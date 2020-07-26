@@ -3827,4 +3827,6 @@
     <string name="shared_string_custom">Прилагођен</string>
     <string name="gpx_direction_arrows">Стрелице смера</string>
     <string name="track_coloring_solid">Чврст</string>
+    <string name="add_hidden_group_info">Додата тачка неће бити видљива на мапи, пошто је одабрана група сакривена, можете је пронаћи у „%s“.</string>
+    <string name="track_show_start_finish_icons">Прикажи почетно крајне иконе</string>
 </resources>
