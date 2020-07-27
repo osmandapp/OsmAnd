@@ -188,7 +188,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	private void addDistanceOptionSplit(int value, @NonNull List<GpxDisplayGroup> displayGroups) {
 		if (displayGroups.size() > 0) {
 			double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
-			String formattedDist = SplitIntervalCard.getFormattedDistanceInterval(app, value);
+			String formattedDist = OsmAndFormatter.getFormattedDistanceInterval(app, value);
 			distanceSplitOptions.put(formattedDist, dvalue);
 			if (Math.abs(displayGroups.get(0).getSplitDistance() - dvalue) < 1) {
 				selectedDistanceSplitInterval = distanceSplitOptions.size() - 1;
@@ -198,7 +198,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void addTimeOptionSplit(int value, @NonNull List<GpxDisplayGroup> model) {
 		if (model.size() > 0) {
-			String time = SplitIntervalCard.getFormattedTimeInterval(app, value);
+			String time = OsmAndFormatter.getFormattedTimeInterval(app, value);
 			timeSplitOptions.put(time, value);
 			if (model.get(0).getSplitTime() == value) {
 				selectedTimeSplitInterval = timeSplitOptions.size() - 1;

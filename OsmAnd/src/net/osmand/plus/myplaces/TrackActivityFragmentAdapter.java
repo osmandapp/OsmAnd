@@ -59,7 +59,6 @@ import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.track.GpxSplitType;
-import net.osmand.plus.track.SplitIntervalCard;
 import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
@@ -830,14 +829,14 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		if (model.size() > 0) {
 			if (distance) {
 				double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
-				options.add(SplitIntervalCard.getFormattedDistanceInterval(app, value));
+				options.add(OsmAndFormatter.getFormattedDistanceInterval(app, value));
 				distanceSplit.add(dvalue);
 				timeSplit.add(-1);
 				if (Math.abs(model.get(0).getSplitDistance() - dvalue) < 1) {
 					selectedSplitInterval = distanceSplit.size() - 1;
 				}
 			} else {
-				options.add(SplitIntervalCard.getFormattedTimeInterval(app, value));
+				options.add(OsmAndFormatter.getFormattedTimeInterval(app, value));
 				distanceSplit.add(-1d);
 				timeSplit.add(value);
 				if (model.get(0).getSplitTime() == value) {
