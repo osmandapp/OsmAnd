@@ -3829,4 +3829,10 @@
     <string name="track_coloring_solid">Чврст</string>
     <string name="add_hidden_group_info">Додата тачка неће бити видљива на мапи, пошто је одабрана група сакривена, можете је пронаћи у „%s“.</string>
     <string name="track_show_start_finish_icons">Прикажи почетно крајне иконе</string>
+    <string name="plan_route_last_edited">Последње измењена</string>
+    <string name="plan_route_import_track">Увези путању</string>
+    <string name="plan_route_open_existing_track">Отвори постојећу путању</string>
+    <string name="plan_route_create_new_route">Креирај нову руту</string>
+    <string name="plan_route_select_track_file_for_open">Изаберите фајл путање за отварање.</string>
+    <string name="shared_string_done">Завршено</string>
 </resources>
