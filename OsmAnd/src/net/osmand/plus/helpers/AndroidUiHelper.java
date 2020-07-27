@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
@@ -93,7 +94,7 @@ public class AndroidUiHelper {
 		return false;
 	}
 
-	public static void setVisibility(@NonNull Activity activity, int visibility, int... widgets) {
+	public static void setVisibility(@NonNull Activity activity, int visibility, @IdRes int... widgets) {
 		for (int widget : widgets) {
 			View view = activity.findViewById(widget);
 			if (view != null && view.getVisibility() != visibility) {
