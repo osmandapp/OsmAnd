@@ -1,10 +1,10 @@
-package net.osmand.plus.views.mapwidgets;
+package net.osmand.plus.views.mapwidgets.widgetstates;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
-public class BearingWidgetState extends MapWidgetRegistry.WidgetState {
+public class BearingWidgetState extends WidgetState {
 
 	public static final int BEARING_WIDGET_STATE_RELATIVE_BEARING = R.id.bearing_widget_state_relative_bearing;
 	public static final int BEARING_WIDGET_STATE_MAGNETIC_BEARING = R.id.bearing_widget_state_magnetic_bearing;

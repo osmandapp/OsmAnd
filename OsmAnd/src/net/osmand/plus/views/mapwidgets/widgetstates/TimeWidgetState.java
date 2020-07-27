@@ -1,24 +1,24 @@
-package net.osmand.plus.views.mapwidgets;
+package net.osmand.plus.views.mapwidgets.widgetstates;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 
-public class TimeControlWidgetState extends MapWidgetRegistry.WidgetState {
+public class TimeWidgetState extends WidgetState {
 
 	public static final int TIME_CONTROL_WIDGET_STATE_ARRIVAL_TIME = R.id.time_control_widget_state_arrival_time;
 	public static final int TIME_CONTROL_WIDGET_STATE_TIME_TO_GO = R.id.time_control_widget_state_time_to_go;
 
-	private final OsmandSettings.OsmandPreference<Boolean> showArrival;
+	private final OsmandPreference<Boolean> showArrival;
 	private final boolean intermediate;
 
-	public TimeControlWidgetState(OsmandApplication ctx, boolean intermediate) {
-		super(ctx);
+	public TimeWidgetState(OsmandApplication app, boolean intermediate) {
+		super(app);
 		this.intermediate = intermediate;
 		if (intermediate) {
-			showArrival = ctx.getSettings().SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
+			showArrival = app.getSettings().SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
 		} else {
-			showArrival = ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
+			showArrival = app.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
 		}
 	}
 

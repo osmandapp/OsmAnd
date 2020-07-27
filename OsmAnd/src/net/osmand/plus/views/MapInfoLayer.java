@@ -19,7 +19,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.CompassRulerControlWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.CompassRulerWidgetState;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopCoordinatesView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -28,15 +28,15 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetState;
-import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
+import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.AlarmWidget;
-import net.osmand.plus.views.mapwidgets.BearingWidgetState;
+import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.BearingWidgetState;
 import net.osmand.plus.views.mapwidgets.LanesControl;
-import net.osmand.plus.views.mapwidgets.RulerWidget;
-import net.osmand.plus.views.mapwidgets.TimeControlWidgetState;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.TimeWidgetState;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
@@ -184,11 +184,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// register left stack
 		registerSideWidget(null, R.drawable.ic_action_compass, R.string.map_widget_compass, WIDGET_COMPASS, true, 4);
 
-		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(map, app, false);
+		NextTurnWidget bigInfoControl = ric.createNextInfoControl(map, app, false);
 		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn, WIDGET_NEXT_TURN, true, 5);
-		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(map, app, true);
+		NextTurnWidget smallInfoControl = ric.createNextInfoControl(map, app, true);
 		registerSideWidget(smallInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn_small, WIDGET_NEXT_TURN_SMALL, true, 6);
-		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(map, app, true);
+		NextTurnWidget nextNextInfoControl = ric.createNextNextInfoControl(map, app, true);
 		registerSideWidget(nextNextInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_next_turn, WIDGET_NEXT_NEXT_TURN,true, 7);
 
 		// register right stack
@@ -196,11 +196,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map);
 		registerSideWidget(intermediateDist, R.drawable.ic_action_intermediate, R.string.map_widget_intermediate_distance, WIDGET_INTERMEDIATE_DISTANCE, false, 13);
 		TextInfoWidget intermediateTime = ric.createTimeControl(map, true);
-		registerSideWidget(intermediateTime, new TimeControlWidgetState(app, true), WIDGET_INTERMEDIATE_TIME, false, 14);
+		registerSideWidget(intermediateTime, new TimeWidgetState(app, true), WIDGET_INTERMEDIATE_TIME, false, 14);
 		TextInfoWidget dist = ric.createDistanceControl(map);
 		registerSideWidget(dist, R.drawable.ic_action_target, R.string.map_widget_distance, WIDGET_DISTANCE, false, 15);
 		TextInfoWidget time = ric.createTimeControl(map, false);
-		registerSideWidget(time, new TimeControlWidgetState(app, false), WIDGET_TIME, false, 16);
+		registerSideWidget(time, new TimeWidgetState(app, false), WIDGET_TIME, false, 16);
 
 
 		TextInfoWidget marker = mwf.createMapMarkerControl(map, true);
@@ -224,7 +224,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget battery = ric.createBatteryControl(map);
 		registerSideWidget(battery, R.drawable.ic_action_battery, R.string.map_widget_battery, WIDGET_BATTERY, false, 42);
 		TextInfoWidget ruler = mic.createRulerControl(map);
-		registerSideWidget(ruler, new CompassRulerControlWidgetState(app), WIDGET_RULER, false, 43);
+		registerSideWidget(ruler, new CompassRulerWidgetState(app), WIDGET_RULER, false, 43);
 	}
 
 	public void recreateControls() {

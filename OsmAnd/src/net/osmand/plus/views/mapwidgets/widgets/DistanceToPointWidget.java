@@ -1,4 +1,4 @@
-package net.osmand.plus.views.mapwidgets;
+package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.view.View;
 
@@ -9,14 +9,15 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 
-public abstract class DistanceToPointInfoControl extends TextInfoWidget {
+public abstract class DistanceToPointWidget extends TextInfoWidget {
 
 	private final OsmandMapTileView view;
 	private float[] calculations = new float[1];
 	private int cachedMeters;
 
-	public DistanceToPointInfoControl(MapActivity ma, int res, int resNight) {
+	public DistanceToPointWidget(MapActivity ma, int res, int resNight) {
 		super(ma);
 		this.view = ma.getMapView();
 		if (res != 0 && resNight != 0) {
@@ -36,7 +37,7 @@ public abstract class DistanceToPointInfoControl extends TextInfoWidget {
 		AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
 		LatLon pointToNavigate = getPointToNavigate();
 		if (pointToNavigate != null) {
-			int fZoom = view.getZoom() < 15 ? 15 : view.getZoom();
+			int fZoom = Math.max(view.getZoom(), 15);
 			thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
 		}
 	}

@@ -27,17 +27,22 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget;
+import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
+import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.router.TurnType;
 
 import java.util.List;
 
 public class RouteInfoWidgetsFactory {
 
-	public NextTurnInfoWidget createNextInfoControl(final Activity activity,
-			final OsmandApplication app, boolean horisontalMini) {
+	public NextTurnWidget createNextInfoControl(final Activity activity,
+	                                            final OsmandApplication app, boolean horisontalMini) {
 		final OsmandSettings settings = app.getSettings();
 		final RoutingHelper routingHelper = app.getRoutingHelper();
-		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(activity, app, horisontalMini) {
+		final NextTurnWidget nextTurnInfo = new NextTurnWidget(activity, app, horisontalMini) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
 
 			@Override
@@ -99,10 +104,10 @@ public class RouteInfoWidgetsFactory {
 		return nextTurnInfo;
 	}
 	
-	public NextTurnInfoWidget createNextNextInfoControl(final Activity activity,
-			final OsmandApplication app, boolean horisontalMini) {
+	public NextTurnWidget createNextNextInfoControl(final Activity activity,
+	                                                final OsmandApplication app, boolean horisontalMini) {
 		final RoutingHelper routingHelper = app.getRoutingHelper();
-		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(activity, app, horisontalMini) {
+		final NextTurnWidget nextTurnInfo = new NextTurnWidget(activity, app, horisontalMini) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
@@ -395,7 +400,7 @@ public class RouteInfoWidgetsFactory {
 	}
 
 	public TextInfoWidget createDistanceControl(final MapActivity map) {
-		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, R.drawable.widget_target_day,
+		DistanceToPointWidget distanceControl = new DistanceToPointWidget(map, R.drawable.widget_target_day,
 				R.drawable.widget_target_night) {
 			@Override
 			public LatLon getPointToNavigate() {
@@ -416,7 +421,7 @@ public class RouteInfoWidgetsFactory {
 	
 	public TextInfoWidget createIntermediateDistanceControl(final MapActivity map) {
 		final TargetPointsHelper targets = map.getMyApplication().getTargetPointsHelper();
-		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, R.drawable.widget_intermediate_day,
+		DistanceToPointWidget distanceControl = new DistanceToPointWidget(map, R.drawable.widget_intermediate_day,
 				R.drawable.widget_intermediate_night) {
 
 			@Override
@@ -458,7 +463,7 @@ public class RouteInfoWidgetsFactory {
 			private float MIN_SPEED_FOR_HEADING = 1f;
 
 			private LatLon getNextTargetPoint() {
-				List<TargetPoint> points = getOsmandApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
+				List<TargetPoint> points = getApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
 				return points.isEmpty() ? null : points.get(0).point;
 			}
 
@@ -471,7 +476,7 @@ public class RouteInfoWidgetsFactory {
 				if (isUpdateNeeded() || degreesChanged(cachedDegrees, b) || modeChanged) {
 					cachedDegrees = b;
 					if (b != -1000) {
-						setText(OsmAndFormatter.getFormattedAzimuth(b, getOsmandApplication()) + (relative ? "" : " M"), null);
+						setText(OsmAndFormatter.getFormattedAzimuth(b, getApplication()) + (relative ? "" : " M"), null);
 					} else {
 						setText(null, null);
 					}
@@ -487,10 +492,10 @@ public class RouteInfoWidgetsFactory {
 
 			public int getBearing(boolean relative) {
 				int d = -1000;
-				Location myLocation = getOsmandApplication().getLocationProvider().getLastKnownLocation();
+				Location myLocation = getApplication().getLocationProvider().getLastKnownLocation();
 				LatLon l = getNextTargetPoint();
 				if (l == null) {
-					List<MapMarker> markers = getOsmandApplication().getMapMarkersHelper().getMapMarkers();
+					List<MapMarker> markers = getApplication().getMapMarkersHelper().getMapMarkers();
 					if (markers.size() > 0) {
 						l = markers.get(0).point;
 					}
@@ -505,7 +510,7 @@ public class RouteInfoWidgetsFactory {
 					float bearingToDest = dest.getBearing() - destGf.getDeclination();
 					if (relative) {
 						float b = -1000;
-						Float heading = getOsmandApplication().getLocationProvider().getHeading();
+						Float heading = getApplication().getLocationProvider().getHeading();
 						if ((myLocation.getSpeed() < MIN_SPEED_FOR_HEADING || !myLocation.hasBearing())
 								&& heading != null) {
 							b = heading;

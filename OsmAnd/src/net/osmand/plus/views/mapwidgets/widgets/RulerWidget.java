@@ -1,4 +1,4 @@
-package net.osmand.plus.views.mapwidgets;
+package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 
 public class RulerWidget {
@@ -21,7 +21,7 @@ public class RulerWidget {
 	private ImageView icon;
 	private TextView text;
 	private TextView textShadow;
-	private MapActivity ma;
+	private MapActivity mapActivity;
 	private String cacheRulerText;
 	private int maxWidth;
 	private float cacheMapDensity;
@@ -31,15 +31,15 @@ public class RulerWidget {
 	private double cacheRulerTileY;
 	private boolean orientationPortrait;
 
-	public RulerWidget(final OsmandApplication app, MapActivity ma) {
-		this.ma = ma;
-		layout = ma.findViewById(R.id.map_ruler_layout);
-		icon = (ImageView) ma.findViewById(R.id.map_ruler_image);
-		text = (TextView) ma.findViewById(R.id.map_ruler_text);
-		textShadow = (TextView) ma.findViewById(R.id.map_ruler_text_shadow);
-		maxWidth = ma.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
-		orientationPortrait = AndroidUiHelper.isOrientationPortrait(ma);
-		mapDensity = ma.getMyApplication().getSettings().MAP_DENSITY;
+	public RulerWidget(OsmandApplication app, MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+		layout = mapActivity.findViewById(R.id.map_ruler_layout);
+		icon = mapActivity.findViewById(R.id.map_ruler_image);
+		text = mapActivity.findViewById(R.id.map_ruler_text);
+		textShadow = mapActivity.findViewById(R.id.map_ruler_text_shadow);
+		maxWidth = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
+		orientationPortrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		mapDensity = mapActivity.getMyApplication().getSettings().MAP_DENSITY;
 		cacheMapDensity = mapDensity.get();
 	}
 
@@ -48,9 +48,9 @@ public class RulerWidget {
 		icon.setBackgroundResource(isNight ? R.drawable.ruler_night : R.drawable.ruler);
 	}
 
-	public boolean updateInfo(RotatedTileBox tb, OsmandMapLayer.DrawSettings nightMode) {
+	public boolean updateInfo(RotatedTileBox tb, DrawSettings nightMode) {
 		boolean visible = true;
-		OsmandMapTileView view = ma.getMapView();
+		OsmandMapTileView view = mapActivity.getMapView();
 		// update cache
 		if (view.isZooming()) {
 			visible = false;
@@ -79,6 +79,6 @@ public class RulerWidget {
 	}
 
 	public void setVisibility(boolean visibility) {
-		layout.setVisibility(visibility ? View.VISIBLE : View.GONE);
+		AndroidUiHelper.updateVisibility(layout, visibility);
 	}
 }

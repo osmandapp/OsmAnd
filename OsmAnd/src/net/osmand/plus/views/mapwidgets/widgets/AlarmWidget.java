@@ -1,4 +1,4 @@
-package net.osmand.plus.views.mapwidgets;
+package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.content.res.Resources;
 import android.view.View;
@@ -33,7 +33,7 @@ public class AlarmWidget {
 	private TextView widgetText;
 	private TextView widgetBottomText;
 	private OsmandSettings settings;
-	private RoutingHelper rh;
+	private RoutingHelper routingHelper;
 	private MapViewTrackingUtilities trackingUtilities;
 	private OsmAndLocationProvider locationProvider;
 	private WaypointHelper wh;
@@ -44,11 +44,11 @@ public class AlarmWidget {
 
 	public AlarmWidget(final OsmandApplication app, MapActivity ma) {
 		layout = ma.findViewById(R.id.map_alarm_warning);
-		icon = (ImageView) ma.findViewById(R.id.map_alarm_warning_icon);
-		widgetText = (TextView) ma.findViewById(R.id.map_alarm_warning_text);
-		widgetBottomText = (TextView) ma.findViewById(R.id.map_alarm_warning_text_bottom);
+		icon = ma.findViewById(R.id.map_alarm_warning_icon);
+		widgetText = ma.findViewById(R.id.map_alarm_warning_text);
+		widgetBottomText = ma.findViewById(R.id.map_alarm_warning_text_bottom);
 		settings = app.getSettings();
-		rh = ma.getRoutingHelper();
+		routingHelper = ma.getRoutingHelper();
 		trackingUtilities = ma.getMapViewTrackingUtilities();
 		locationProvider = app.getLocationProvider();
 		wh = app.getWaypointHelper();
@@ -62,10 +62,10 @@ public class AlarmWidget {
 		boolean tunnels = settings.SHOW_TUNNELS.get();
 		boolean browseMap = settings.APPLICATION_MODE.get() == ApplicationMode.DEFAULT;
 		boolean visible = false;
-		if ((rh.isFollowingMode() || trackingUtilities.isMapLinkedToLocation() && !browseMap)
+		if ((routingHelper.isFollowingMode() || trackingUtilities.isMapLinkedToLocation() && !browseMap)
 				&& showRoutingAlarms && (trafficWarnings || cams)) {
 			AlarmInfo alarm;
-			if (rh.isFollowingMode() && !rh.isDeviatedFromRoute() && (rh.getCurrentGPXRoute() == null || rh.isCurrentGPXRouteV2())) {
+			if (routingHelper.isFollowingMode() && !routingHelper.isDeviatedFromRoute() && (routingHelper.getCurrentGPXRoute() == null || routingHelper.isCurrentGPXRouteV2())) {
 				alarm = wh.getMostImportantAlarm(settings.SPEED_SYSTEM.get(), cams);
 			} else {
 				RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
@@ -188,6 +188,6 @@ public class AlarmWidget {
 	}
 
 	public void setVisibility(boolean visibility) {
-		layout.setVisibility(visibility ? View.VISIBLE : View.GONE);
+		AndroidUiHelper.updateVisibility(layout, visibility);
 	}
 }

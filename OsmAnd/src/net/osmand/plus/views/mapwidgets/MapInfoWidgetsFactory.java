@@ -68,8 +68,7 @@ import net.osmand.plus.settings.backend.OsmandSettings.RulerMode;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.RulerControlLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetState;
-import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -158,54 +157,6 @@ public class MapInfoWidgetsFactory {
 			}
 		});
 		return gpsInfoControl;
-	}
-
-	public static class CompassRulerControlWidgetState extends WidgetState {
-
-		public static final int COMPASS_CONTROL_WIDGET_STATE_SHOW = R.id.compass_ruler_control_widget_state_show;
-		public static final int COMPASS_CONTROL_WIDGET_STATE_HIDE = R.id.compass_ruler_control_widget_state_hide;
-
-		private final OsmandSettings.OsmandPreference<Boolean> showCompass;
-
-		public CompassRulerControlWidgetState(OsmandApplication ctx) {
-			super(ctx);
-			showCompass = ctx.getSettings().SHOW_COMPASS_CONTROL_RULER;
-		}
-
-		@Override
-		public int getMenuTitleId() {
-			return R.string.map_widget_ruler_control;
-		}
-
-		@Override
-		public int getMenuIconId() {
-			return R.drawable.ic_action_ruler_circle;
-		}
-
-		@Override
-		public int getMenuItemId() {
-			return showCompass.get() ? COMPASS_CONTROL_WIDGET_STATE_SHOW : COMPASS_CONTROL_WIDGET_STATE_HIDE;
-		}
-
-		@Override
-		public int[] getMenuTitleIds() {
-			return new int[]{R.string.show_compass_ruler, R.string.hide_compass_ruler};
-		}
-
-		@Override
-		public int[] getMenuIconIds() {
-			return new int[]{R.drawable.ic_action_compass_widget, R.drawable.ic_action_compass_widget_hide};
-		}
-
-		@Override
-		public int[] getMenuItemIds() {
-			return new int[]{COMPASS_CONTROL_WIDGET_STATE_SHOW, COMPASS_CONTROL_WIDGET_STATE_HIDE};
-		}
-
-		@Override
-		public void changeState(int stateId) {
-			showCompass.set(stateId == COMPASS_CONTROL_WIDGET_STATE_SHOW);
-		}
 	}
 
 	public TextInfoWidget createRulerControl(final MapActivity map) {
@@ -936,7 +887,7 @@ public class MapInfoWidgetsFactory {
 		private boolean showMarker;
 
 		public TopTextView(OsmandApplication app, MapActivity map) {
-			turnDrawable = new NextTurnInfoWidget.TurnDrawable(map, true);
+			turnDrawable = new TurnDrawable(map, true);
 			topBar = map.findViewById(R.id.map_top_bar);
 			addressText = (TextView) map.findViewById(R.id.map_address_text);
 			addressTextShadow = (TextView) map.findViewById(R.id.map_address_text_shadow);

@@ -1,4 +1,4 @@
-package net.osmand.plus.views.mapwidgets;
+package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.app.Activity;
 import android.graphics.Paint.Style;
@@ -19,7 +19,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 
-public class TextInfoWidget  {
+public class TextInfoWidget {
+
+	private OsmandApplication app;
 
 	private String contentTitle;
 	private View view;
@@ -31,7 +33,6 @@ public class TextInfoWidget  {
 	private ImageView topImageView;
 	protected TextView topTextView;
 	private boolean explicitlyVisible;
-	private OsmandApplication app;
 
 	private int dayIcon;
 	private int nightIcon;
@@ -44,35 +45,34 @@ public class TextInfoWidget  {
 	public TextInfoWidget(Activity activity) {
 		app = (OsmandApplication) activity.getApplication();
 		view = UiUtilities.getInflater(activity, isNight).inflate(R.layout.map_hud_widget, null);
-		bottomLayout = (ViewGroup) view.findViewById(R.id.widget_bottom_layout);
-		topImageView = (ImageView) view.findViewById(R.id.widget_top_icon);
-		topTextView = (TextView) view.findViewById(R.id.widget_top_icon_text);
-		imageView = (ImageView) view.findViewById(R.id.widget_icon);
-		textView = (TextView) view.findViewById(R.id.widget_text);
-		textViewShadow = (TextView) view.findViewById(R.id.widget_text_shadow);
-		smallTextViewShadow = (TextView) view.findViewById(R.id.widget_text_small_shadow);
-		smallTextView = (TextView) view.findViewById(R.id.widget_text_small);
+		bottomLayout = view.findViewById(R.id.widget_bottom_layout);
+		topImageView = view.findViewById(R.id.widget_top_icon);
+		topTextView = view.findViewById(R.id.widget_top_icon_text);
+		imageView = view.findViewById(R.id.widget_icon);
+		textView = view.findViewById(R.id.widget_text);
+		textViewShadow = view.findViewById(R.id.widget_text_shadow);
+		smallTextViewShadow = view.findViewById(R.id.widget_text_small_shadow);
+		smallTextView = view.findViewById(R.id.widget_text_small);
 	}
 
-	public OsmandApplication getOsmandApplication() {
+	public OsmandApplication getApplication() {
 		return app;
 	}
 
 	public View getView() {
 		return view;
 	}
-	
+
 	public void setImageDrawable(Drawable imageDrawable) {
 		setImageDrawable(imageDrawable, false);
 	}
-	
+
 	public void setImageDrawable(int res) {
 		setImageDrawable(app.getUIUtilities().getIcon(res, 0), false);
 	}
-	
-	
+
 	public void setImageDrawable(Drawable imageDrawable, boolean gone) {
-		if(imageDrawable != null) {
+		if (imageDrawable != null) {
 			imageView.setImageDrawable(imageDrawable);
 			Object anim = imageView.getDrawable();
 			if (anim instanceof AnimationDrawable) {
@@ -84,9 +84,9 @@ public class TextInfoWidget  {
 		}
 		imageView.invalidate();
 	}
-	
+
 	public void setTopImageDrawable(Drawable imageDrawable, String topText) {
-		if(imageDrawable != null) {
+		if (imageDrawable != null) {
 			topImageView.setImageDrawable(imageDrawable);
 			topImageView.setVisibility(View.VISIBLE);
 			LinearLayout.LayoutParams lp = (android.widget.LinearLayout.LayoutParams) bottomLayout.getLayoutParams();
@@ -96,17 +96,17 @@ public class TextInfoWidget  {
 			topTextView.setVisibility(View.VISIBLE);
 			topTextView.setText(topText == null ? "" : topText);
 		} else {
-			topImageView.setVisibility(View.GONE );
-			topTextView.setVisibility(View.GONE );
+			topImageView.setVisibility(View.GONE);
+			topTextView.setVisibility(View.GONE);
 			LinearLayout.LayoutParams lp = (android.widget.LinearLayout.LayoutParams) bottomLayout.getLayoutParams();
 			lp.gravity = Gravity.NO_GRAVITY;
 			bottomLayout.setLayoutParams(lp);
 		}
-		
+
 		topTextView.invalidate();
 		topImageView.invalidate();
 	}
-	
+
 	public boolean setIcons(int widgetDayIcon, int widgetNightIcon) {
 		if (dayIcon != widgetDayIcon || nightIcon != widgetNightIcon) {
 			dayIcon = widgetDayIcon;
@@ -134,7 +134,7 @@ public class TextInfoWidget  {
 	public void setContentDescription(CharSequence text) {
 		view.setContentDescription(combine(contentTitle, text));
 	}
-	
+
 	public void setContentTitle(int messageId) {
 		setContentTitle(view.getContext().getString(messageId));
 	}
@@ -143,7 +143,7 @@ public class TextInfoWidget  {
 		contentTitle = text;
 		setContentDescription(combine(textView.getText(), smallTextView.getText()));
 	}
-	
+
 	public void setText(String text, String subtext) {
 		setTextNoUpdateVisibility(text, subtext);
 		updateVisibility(text != null);
@@ -154,14 +154,14 @@ public class TextInfoWidget  {
 //		if(this.text != null && this.text.length() > 7) {
 //			this.text = this.text.substring(0, 6) +"..";
 //		}
-		if(text == null) {
+		if (text == null) {
 			textView.setText("");
 			textViewShadow.setText("");
 		} else {
 			textView.setText(text);
 			textViewShadow.setText(text);
 		}
-		if(subtext == null) {
+		if (subtext == null) {
 			smallTextView.setText("");
 			smallTextViewShadow.setText("");
 		} else {
@@ -169,7 +169,7 @@ public class TextInfoWidget  {
 			smallTextViewShadow.setText(subtext);
 		}
 	}
-	
+
 	protected boolean updateVisibility(boolean visible) {
 		if (visible != (view.getVisibility() == View.VISIBLE)) {
 			if (visible) {
@@ -184,7 +184,7 @@ public class TextInfoWidget  {
 		}
 		return false;
 	}
-	
+
 	public boolean isVisible() {
 		return view.getVisibility() == View.VISIBLE && view.getParent() != null;
 	}
@@ -223,15 +223,15 @@ public class TextInfoWidget  {
 	public void setExplicitlyVisible(boolean explicitlyVisible) {
 		this.explicitlyVisible = explicitlyVisible;
 	}
-	
+
 	public boolean isExplicitlyVisible() {
 		return explicitlyVisible;
 	}
-	
+
 	public void updateIconMode(boolean night) {
 		isNight = night;
-		if(dayIcon != 0) {
-			setImageDrawable(!night? dayIcon : nightIcon);
+		if (dayIcon != 0) {
+			setImageDrawable(!night ? dayIcon : nightIcon);
 		}
 	}
 
@@ -240,10 +240,10 @@ public class TextInfoWidget  {
 		updateTextColor(textView, textViewShadow, textColor, textShadowColor, bold, rad);
 		updateTextColor(topTextView, null, textColor, textShadowColor, bold, rad);
 	}
-	
+
 	public static void updateTextColor(TextView tv, TextView shadow, int textColor, int textShadowColor, boolean textBold, int rad) {
-		if(shadow != null) {
-			if(rad > 0) {
+		if (shadow != null) {
+			if (rad > 0) {
 				shadow.setVisibility(View.VISIBLE);
 				shadow.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
 				shadow.getPaint().setStrokeWidth(rad);

@@ -20,11 +20,13 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.router.RouteResultPreparation;
 
 import java.util.Arrays;
 
 public class LanesControl {
+
 	private MapViewTrackingUtilities trackingUtilities;
 	private OsmAndLocationProvider locationProvider;
 	private MapRouteInfoMenu mapRouteInfoMenu;
@@ -39,19 +41,19 @@ public class LanesControl {
 	private View centerInfo;
 	private int shadowRadius;
 
-	public LanesControl(final MapActivity map, final OsmandMapTileView view) {
-		lanesView = (ImageView) map.findViewById(R.id.map_lanes);
-		lanesText = (TextView) map.findViewById(R.id.map_lanes_dist_text);
-		lanesShadowText = (TextView) map.findViewById(R.id.map_lanes_dist_text_shadow);
-		centerInfo = (View) map.findViewById(R.id.map_center_info);
-		lanesDrawable = new LanesDrawable(map, map.getMapView().getScaleCoefficient());
+	public LanesControl(MapActivity mapActivity, OsmandMapTileView view) {
+		lanesView = mapActivity.findViewById(R.id.map_lanes);
+		lanesText = mapActivity.findViewById(R.id.map_lanes_dist_text);
+		lanesShadowText = mapActivity.findViewById(R.id.map_lanes_dist_text_shadow);
+		centerInfo = mapActivity.findViewById(R.id.map_center_info);
+		lanesDrawable = new LanesDrawable(mapActivity, mapActivity.getMapView().getScaleCoefficient());
 		lanesView.setImageDrawable(lanesDrawable);
-		trackingUtilities = map.getMapViewTrackingUtilities();
-		locationProvider = map.getMyApplication().getLocationProvider();
-		settings = map.getMyApplication().getSettings();
-		mapRouteInfoMenu = map.getMapRouteInfoMenu();
-		rh = map.getMyApplication().getRoutingHelper();
-		app = map.getMyApplication();
+		trackingUtilities = mapActivity.getMapViewTrackingUtilities();
+		locationProvider = mapActivity.getMyApplication().getLocationProvider();
+		settings = mapActivity.getMyApplication().getSettings();
+		mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
+		rh = mapActivity.getMyApplication().getRoutingHelper();
+		app = mapActivity.getMyApplication();
 	}
 
 	public void updateTextSize(boolean isNight, int textColor, int textShadowColor, boolean textBold, int shadowRadius) {
