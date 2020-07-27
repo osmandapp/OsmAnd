@@ -78,7 +78,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
@@ -788,8 +787,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 
 			@Override
-			public void openLastEditTrackOnClick(GPXFile gpxFile) {
-				addNewGpxData(gpxFile);
+			public void openLastEditTrackOnClick(String gpxFileName) {
+				getGpxFile(gpxFileName);
 			}
 
 			@Override
@@ -802,8 +801,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	private SelectFileListener createSelectFileListener() {
 		return new SelectFileListener() {
 			@Override
-			public void selectFileOnCLick(GPXFile gpxFile) {
-				addNewGpxData(gpxFile);
+			public void selectFileOnCLick(String gpxFileName) {
+				getGpxFile(gpxFileName);
 			}
 
 			@Override
@@ -815,6 +814,21 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				}
 			}
 		};
+	}
+
+	private void getGpxFile(String gpxFileName) {
+		OsmandApplication app = getMyApplication();
+		GPXFile gpxFile;
+		if (app != null) {
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(gpxFileName);
+			if (selectedGpxFile != null) {
+				gpxFile = selectedGpxFile.getGpxFile();
+			} else {
+				gpxFile = GPXUtilities.loadGPXFile(new File(
+						getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR), gpxFileName));
+			}
+			addNewGpxData(gpxFile);
+		}
 	}
 
 	public void addNewGpxData(GPXFile gpxFile) {
