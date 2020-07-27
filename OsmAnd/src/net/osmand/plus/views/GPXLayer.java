@@ -546,13 +546,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						if (segment.points.size() >= 2) {
 							WptPt start = segment.points.get(0);
 							WptPt end = segment.points.get(segment.points.size() - 1);
-
-							if (start.equals(end)) {
-								drawPoint(canvas, tileBox, start, startAndFinishIcon);
-							} else {
-								drawPoint(canvas, tileBox, start, startPointIcon);
-								drawPoint(canvas, tileBox, end, finishPointIcon);
-							}
+							drawStartEndPoints(canvas, tileBox, start, end);
 						}
 					}
 				}
@@ -564,14 +558,25 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return trackDrawInfo != null && trackDrawInfo.getFilePath().equals(selectedGpxFile.getGpxFile().path);
 	}
 
-	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, WptPt wptPt, Drawable icon) {
-		int pointX = (int) tileBox.getPixXFromLatLon(wptPt.lat, wptPt.lon);
-		int pointY = (int) tileBox.getPixYFromLatLon(wptPt.lat, wptPt.lon);
+	private void drawStartEndPoints(Canvas canvas, RotatedTileBox tileBox, WptPt start, WptPt end) {
+		int startX = (int) tileBox.getPixXFromLatLon(start.lat, start.lon);
+		int startY = (int) tileBox.getPixYFromLatLon(start.lat, start.lon);
+		int endX = (int) tileBox.getPixXFromLatLon(end.lat, end.lon);
+		int endY = (int) tileBox.getPixYFromLatLon(end.lat, end.lon);
 
-		icon.setBounds(pointX - icon.getIntrinsicWidth() / 2,
-				pointY - icon.getIntrinsicHeight() / 2,
-				pointX + icon.getIntrinsicWidth() / 2,
-				pointY + icon.getIntrinsicHeight() / 2);
+		QuadRect startRect = calculateRect(startX, startY, startPointIcon.getIntrinsicWidth(), startPointIcon.getIntrinsicHeight());
+		QuadRect endRect = calculateRect(endX, endY, finishPointIcon.getIntrinsicWidth(), finishPointIcon.getIntrinsicHeight());
+
+		if (QuadRect.intersects(startRect, endRect)) {
+			drawPoint(canvas, startRect, startAndFinishIcon);
+		} else {
+			drawPoint(canvas, startRect, startPointIcon);
+			drawPoint(canvas, endRect, finishPointIcon);
+		}
+	}
+
+	private void drawPoint(Canvas canvas, QuadRect rect, Drawable icon) {
+		icon.setBounds((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom);
 		icon.draw(canvas);
 	}
 
