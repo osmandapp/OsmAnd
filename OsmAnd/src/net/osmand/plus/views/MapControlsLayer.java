@@ -66,6 +66,7 @@ import net.osmand.plus.settings.backend.OsmandSettings.LayerTransparencySeekbarM
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -354,7 +355,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initControls() {
 		View backToLocation = mapActivity.findViewById(R.id.map_my_location_button);
-		backToLocationControl = createMyLocationButton(backToLocation);
+		backToLocationControl = setupMyLocationButton(backToLocation, BACK_TO_LOC_HUD_ID);
 
 		View backToMenuButton = mapActivity.findViewById(R.id.map_menu_button);
 
@@ -392,8 +393,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 	}
 
-	public MapHudButton createMyLocationButton(View backToLocation) {
-		MapHudButton backToLocationButton = createHudButton(backToLocation, R.drawable.ic_my_location, BACK_TO_LOC_HUD_ID)
+	public MapHudButton setupMyLocationButton(View backToLocation, String buttonId) {
+		MapHudButton backToLocationButton = createHudButton(backToLocation, R.drawable.ic_my_location, buttonId)
 				.setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark)
 				.setBg(R.drawable.btn_circle_blue);
 
@@ -600,12 +601,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		View zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
 		View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
 
-		mapZoomIn = createZoomInButton(zoomInButton, longClickListener);
-		mapZoomOut = createZoomOutButton(zoomOutButton, longClickListener);
+		mapZoomIn = setupZoomInButton(zoomInButton, longClickListener, ZOOM_IN_HUD_ID);
+		mapZoomOut = setupZoomOutButton(zoomOutButton, longClickListener, ZOOM_OUT_HUD_ID);
 	}
 
-	public MapHudButton createZoomOutButton(View zoomOutButton, View.OnLongClickListener longClickListener) {
-		MapHudButton mapZoomOutButton = createHudButton(zoomOutButton, R.drawable.ic_zoom_out, ZOOM_OUT_HUD_ID);
+	public MapHudButton setupZoomOutButton(View zoomOutButton, View.OnLongClickListener longClickListener, String buttonId) {
+		MapHudButton mapZoomOutButton = createHudButton(zoomOutButton, R.drawable.ic_zoom_out, buttonId);
 		mapZoomOutButton.setRoundTransparent();
 
 		zoomOutButton.setOnLongClickListener(longClickListener);
@@ -624,8 +625,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return mapZoomOutButton;
 	}
 
-	public MapHudButton createZoomInButton(View zoomInButton, View.OnLongClickListener longClickListener) {
-		MapHudButton mapZoomInButton = createHudButton(zoomInButton, R.drawable.ic_zoom_in, ZOOM_IN_HUD_ID);
+	public MapHudButton setupZoomInButton(View zoomInButton, View.OnLongClickListener longClickListener, String buttonId) {
+		MapHudButton mapZoomInButton = createHudButton(zoomInButton, R.drawable.ic_zoom_in, buttonId);
 		mapZoomInButton.setRoundTransparent();
 
 		zoomInButton.setOnLongClickListener(longClickListener);
@@ -648,8 +649,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return mapZoomInButton;
 	}
 
-	public void removeHudButton(MapHudButton hudButton) {
-		controls.remove(hudButton);
+	public void removeHudButtons(List<String> buttonIds) {
+		for (Iterator<MapHudButton> iterator = controls.iterator(); iterator.hasNext(); ) {
+			MapHudButton mapHudButton = iterator.next();
+			if (buttonIds.contains(mapHudButton.id)) {
+				iterator.remove();
+			}
+		}
 	}
 
 	public void showMapControlsIfHidden() {
@@ -874,7 +880,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 
 		for (MapHudButton mc : controls) {
-			if (BACK_TO_LOC_HUD_ID.equals(mc.id)) {
+			if (mc.id.startsWith(BACK_TO_LOC_HUD_ID)) {
 				updateMyLocation(mc);
 			}
 			mc.update(mapActivity.getMyApplication(), isNight);

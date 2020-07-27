@@ -57,7 +57,6 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapControlsLayer;
-import net.osmand.plus.views.MapControlsLayer.MapHudButton;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
 import net.osmand.util.Algorithms;
@@ -69,9 +68,14 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
 public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener,
 		RouteDetailsFragmentListener {
@@ -81,6 +85,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	public static final String ROUTE_INFO_STATE_KEY = "route_info_state_key";
 	public static final String INITIAL_MENU_STATE_KEY = "initial_menu_state_key";
 	public static final String ADJUST_MAP_KEY = "adjust_map_key";
+
+	private static final String ZOOM_IN_BUTTON_ID = ZOOM_IN_HUD_ID + TAG;
+	private static final String ZOOM_OUT_BUTTON_ID = ZOOM_OUT_HUD_ID + TAG;
+	private static final String BACK_TO_LOC_BUTTON_ID = BACK_TO_LOC_HUD_ID + TAG;
 
 	@Nullable
 	private LockableViewPager viewPager;
@@ -102,10 +110,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	private boolean publicTransportMode;
 	private boolean needAdjustMap;
-
-	private MapHudButton mapZoomIn;
-	private MapHudButton mapZoomOut;
-	private MapHudButton myLocationButton;
 
 	@Nullable
 	@Override
@@ -246,9 +250,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-			mapControlsLayer.removeHudButton(mapZoomIn);
-			mapControlsLayer.removeHudButton(mapZoomOut);
-			mapControlsLayer.removeHudButton(myLocationButton);
+			mapControlsLayer.removeHudButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
 		}
 	}
 
@@ -372,9 +374,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		View.OnLongClickListener longClickListener = MapControlsLayer.getOnClickMagnifierListener(mapTileView);
 		MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 
-		mapZoomIn = mapControlsLayer.createZoomInButton(zoomInButtonView, longClickListener);
-		mapZoomOut = mapControlsLayer.createZoomOutButton(zoomOutButtonView, longClickListener);
-		myLocationButton = mapControlsLayer.createMyLocationButton(myLocButtonView);
+		mapControlsLayer.setupZoomInButton(zoomInButtonView, longClickListener, ZOOM_IN_BUTTON_ID);
+		mapControlsLayer.setupZoomOutButton(zoomOutButtonView, longClickListener, ZOOM_OUT_BUTTON_ID);
+		mapControlsLayer.setupMyLocationButton(myLocButtonView, BACK_TO_LOC_BUTTON_ID);
 
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 	}

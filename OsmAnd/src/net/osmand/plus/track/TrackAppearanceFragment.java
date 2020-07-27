@@ -42,7 +42,6 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.views.MapControlsLayer;
-import net.osmand.plus.views.MapControlsLayer.MapHudButton;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -51,8 +50,12 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
@@ -60,9 +63,13 @@ import static net.osmand.plus.track.TrackDrawInfo.TRACK_FILE_PATH;
 
 public class TrackAppearanceFragment extends ContextMenuFragment implements CardListener, ContextMenuFragmentListener {
 
-	public static final String TAG = TrackAppearanceFragment.class.getName();
+	public static final String TAG = TrackAppearanceFragment.class.getSimpleName();
 
 	private static final Log log = PlatformUtil.getLog(TrackAppearanceFragment.class);
+
+	private static final String ZOOM_IN_BUTTON_ID = ZOOM_IN_HUD_ID + TAG;
+	private static final String ZOOM_OUT_BUTTON_ID = ZOOM_OUT_HUD_ID + TAG;
+	private static final String BACK_TO_LOC_BUTTON_ID = BACK_TO_LOC_HUD_ID + TAG;
 
 	private OsmandApplication app;
 
@@ -79,10 +86,6 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 
 	private ImageView appearanceIcon;
 	private View zoomButtonsView;
-
-	private MapHudButton mapZoomIn;
-	private MapHudButton mapZoomOut;
-	private MapHudButton myLocationButton;
 
 	@Override
 	public int getMainLayoutId() {
@@ -244,9 +247,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-			mapControlsLayer.removeHudButton(mapZoomIn);
-			mapControlsLayer.removeHudButton(mapZoomOut);
-			mapControlsLayer.removeHudButton(myLocationButton);
+			mapControlsLayer.removeHudButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
 		}
 	}
 
@@ -354,9 +355,9 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		View.OnLongClickListener longClickListener = MapControlsLayer.getOnClickMagnifierListener(mapTileView);
 		MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 
-		mapZoomIn = mapControlsLayer.createZoomInButton(zoomInButtonView, longClickListener);
-		mapZoomOut = mapControlsLayer.createZoomOutButton(zoomOutButtonView, longClickListener);
-		myLocationButton = mapControlsLayer.createMyLocationButton(myLocButtonView);
+		mapControlsLayer.setupZoomInButton(zoomInButtonView, longClickListener, ZOOM_IN_BUTTON_ID);
+		mapControlsLayer.setupZoomOutButton(zoomOutButtonView, longClickListener, ZOOM_OUT_BUTTON_ID);
+		mapControlsLayer.setupMyLocationButton(myLocButtonView, BACK_TO_LOC_BUTTON_ID);
 	}
 
 	public void updateZoomButtonsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
