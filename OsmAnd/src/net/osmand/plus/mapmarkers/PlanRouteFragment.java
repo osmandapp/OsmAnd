@@ -623,11 +623,11 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 			markersLayer.setInPlanRouteMode(true);
 			mapActivity.disableDrawer();
 
-			AndroidUiHelper.mark(mapActivity, portrait ? View.INVISIBLE : View.GONE,
+			AndroidUiHelper.setVisibility(mapActivity, portrait ? View.INVISIBLE : View.GONE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info);
-			AndroidUiHelper.mark(mapActivity, View.GONE,
+			AndroidUiHelper.setVisibility(mapActivity, View.GONE,
 					R.id.map_route_info_button,
 					R.id.map_menu_button,
 					R.id.map_compass_button,
@@ -694,7 +694,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 				mapActivity.hideTopToolbar(toolbarController);
 			}
 
-			AndroidUiHelper.mark(mapActivity, View.VISIBLE,
+			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info,

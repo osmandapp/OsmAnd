@@ -1047,7 +1047,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			mapActivity.showTopToolbar(toolBarController);
 		}
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
-		AndroidUiHelper.mark(mapActivity, enable ? View.VISIBLE : View.GONE,
+		AndroidUiHelper.setVisibility(mapActivity, enable ? View.VISIBLE : View.GONE,
 				R.id.move_point_text,
 				R.id.move_point_controls);
 		mainIcon.setImageDrawable(getActiveIcon(enable
@@ -1067,7 +1067,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			mapActivity.showTopToolbar(toolBarController);
 		}
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
-		AndroidUiHelper.mark(mapActivity,enable ? View.VISIBLE : View.GONE,
+		AndroidUiHelper.setVisibility(mapActivity,enable ? View.VISIBLE : View.GONE,
 				R.id.add_point_before_after_text,
 				R.id.add_point_before_after_controls);
 		if (!enable) {
@@ -1078,7 +1078,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	private void markGeneralComponents(int status) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			AndroidUiHelper.mark(mapActivity, status,
+			AndroidUiHelper.setVisibility(mapActivity, status,
 					R.id.measurement_distance_text_view,
 					R.id.measurement_points_text_view,
 					R.id.distance_to_center_text_view,
@@ -1554,11 +1554,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			mapActivity.refreshMap();
 			mapActivity.disableDrawer();
 
-			AndroidUiHelper.mark(mapActivity, portrait ? View.INVISIBLE : View.GONE,
+			AndroidUiHelper.setVisibility(mapActivity, portrait ? View.INVISIBLE : View.GONE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info);
-			AndroidUiHelper.mark(mapActivity, View.GONE,
+			AndroidUiHelper.setVisibility(mapActivity, View.GONE,
 					R.id.map_route_info_button,
 					R.id.map_menu_button,
 					R.id.map_compass_button,
@@ -1588,7 +1588,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			measurementLayer.setInMeasurementMode(false);
 			mapActivity.enableDrawer();
 
-			AndroidUiHelper.mark(mapActivity, View.VISIBLE,
+			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info,

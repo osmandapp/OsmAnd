@@ -455,7 +455,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		mInGpxDetailsMode = true;
 		activity.disableDrawer();
-		AndroidUiHelper.mark(activity, View.INVISIBLE, R.id.map_ruler_layout,
+		AndroidUiHelper.setVisibility(activity, View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
 		View collapseButton = activity.findViewById(R.id.map_collapse_button);
@@ -470,7 +470,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public void exitGpxDetailsMode() {
 		mInGpxDetailsMode = false;
 		activity.enableDrawer();
-		AndroidUiHelper.mark(activity, View.VISIBLE, R.id.map_ruler_layout,
+		AndroidUiHelper.setVisibility(activity, View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
 		View collapseButton = activity.findViewById(R.id.map_collapse_button);
@@ -481,7 +481,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private void quitMovingMarker() {
 		mInChangeMarkerPositionMode = false;
-		AndroidUiHelper.mark(activity, View.VISIBLE, R.id.map_ruler_layout,
+		AndroidUiHelper.setVisibility(activity, View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
 		View collapseButton = activity.findViewById(R.id.map_collapse_button);
@@ -492,7 +492,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public void quitAddGpxPoint() {
 		mInAddGpxPointMode = false;
-		AndroidUiHelper.mark(activity, View.VISIBLE, R.id.map_ruler_layout,
+		AndroidUiHelper.setVisibility(activity, View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
 		View collapseButton = activity.findViewById(R.id.map_collapse_button);
@@ -509,7 +509,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		mInAddGpxPointMode = true;
 		mAddGpxPointBottomSheetHelper.show(newGpxPoint);
-		AndroidUiHelper.mark(activity, View.INVISIBLE, R.id.map_ruler_layout,
+		AndroidUiHelper.setVisibility(activity, View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
 		View collapseButton = activity.findViewById(R.id.map_collapse_button);
@@ -542,7 +542,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		mInChangeMarkerPositionMode = true;
 		mMoveMarkerBottomSheetHelper.show(menu.getRightIcon());
-		AndroidUiHelper.mark(activity, View.INVISIBLE, R.id.map_ruler_layout,
+		AndroidUiHelper.setVisibility(activity, View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
 		View collapseButton = activity.findViewById(R.id.map_collapse_button);

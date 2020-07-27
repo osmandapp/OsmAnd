@@ -93,13 +93,11 @@ public class AndroidUiHelper {
 		return false;
 	}
 
-	public static void mark(Activity activity, int status, int... widgets) {
-		if (activity != null) {
-			for (int widget : widgets) {
-				View view = activity.findViewById(widget);
-				if (view != null) {
-					view.setVisibility(status);
-				}
+	public static void setVisibility(@NonNull Activity activity, int visibility, int... widgets) {
+		for (int widget : widgets) {
+			View view = activity.findViewById(widget);
+			if (view != null && view.getVisibility() != visibility) {
+				view.setVisibility(visibility);
 			}
 		}
 	}

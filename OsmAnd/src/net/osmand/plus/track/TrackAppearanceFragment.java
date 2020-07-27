@@ -245,7 +245,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			AndroidUiHelper.mark(mapActivity, portrait ? View.INVISIBLE : View.GONE,
+			AndroidUiHelper.setVisibility(mapActivity, portrait ? View.INVISIBLE : View.GONE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info);
@@ -255,7 +255,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 	private void exitTrackAppearanceMode() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			AndroidUiHelper.mark(mapActivity, View.VISIBLE,
+			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info,
