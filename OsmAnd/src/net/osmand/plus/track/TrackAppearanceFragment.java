@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -33,6 +32,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
@@ -42,7 +42,9 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.views.MapControlsLayer;
+import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
@@ -51,6 +53,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
@@ -85,7 +88,9 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 	private SplitIntervalCard splitIntervalCard;
 
 	private ImageView appearanceIcon;
-	private View zoomButtonsView;
+	private View mapControlsView;
+
+	private RulerWidget rulerWidget;
 
 	@Override
 	public int getMainLayoutId() {
@@ -173,7 +178,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 				params.gravity = Gravity.BOTTOM | Gravity.START;
 				view.findViewById(R.id.control_buttons).setLayoutParams(params);
 			}
-			buildZoomButtons(view);
+			setupControlButtons(view);
 			enterTrackAppearanceMode();
 			runLayoutListener();
 		}
@@ -202,12 +207,12 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 
 	@Override
 	public void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated) {
-		updateZoomButtonsPos(fragment, y, animated);
+		updateMapControlsPos(fragment, y, animated);
 	}
 
 	@Override
 	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState) {
-		updateZoomButtonsVisibility(menuState);
+		updateMapControlsVisibility(menuState);
 	}
 
 	@Override
@@ -246,8 +251,13 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+			MapActivityLayers mapLayers = mapActivity.getMapLayers();
+
+			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
 			mapControlsLayer.removeHudButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
+
+			MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
+			mapInfoLayer.removeRulerWidgets(Collections.singletonList(rulerWidget));
 		}
 	}
 
@@ -343,50 +353,56 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		return y;
 	}
 
-	private void buildZoomButtons(@NonNull View view) {
+	private void setupControlButtons(@NonNull View view) {
 		MapActivity mapActivity = requireMapActivity();
-		zoomButtonsView = view.findViewById(R.id.map_hud_controls);
+		mapControlsView = view.findViewById(R.id.map_controls_container);
 
-		ImageButton zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
-		ImageButton zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
-		ImageButton myLocButtonView = view.findViewById(R.id.map_my_location_button);
+		View zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
+		View zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
+		View myLocButtonView = view.findViewById(R.id.map_my_location_button);
+		View mapRulerView = view.findViewById(R.id.map_ruler_layout);
+
+		MapActivityLayers mapLayers = mapActivity.getMapLayers();
 
 		OsmandMapTileView mapTileView = mapActivity.getMapView();
 		View.OnLongClickListener longClickListener = MapControlsLayer.getOnClickMagnifierListener(mapTileView);
-		MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 
+		MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
 		mapControlsLayer.setupZoomInButton(zoomInButtonView, longClickListener, ZOOM_IN_BUTTON_ID);
 		mapControlsLayer.setupZoomOutButton(zoomOutButtonView, longClickListener, ZOOM_OUT_BUTTON_ID);
-		mapControlsLayer.setupMyLocationButton(myLocButtonView, BACK_TO_LOC_BUTTON_ID);
+		mapControlsLayer.setupBackToLocationButton(myLocButtonView, BACK_TO_LOC_BUTTON_ID);
+
+		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
+		rulerWidget = mapInfoLayer.setupRulerWidget(mapRulerView);
 	}
 
-	public void updateZoomButtonsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
-		View zoomButtonsView = this.zoomButtonsView;
-		if (zoomButtonsView != null) {
-			int zoomY = y - getZoomButtonsHeight();
+	public void updateMapControlsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
+		View mapControlsView = this.mapControlsView;
+		if (mapControlsView != null) {
+			int zoomY = y - getMapControlsHeight();
 			if (animated) {
-				fragment.animateView(zoomButtonsView, zoomY);
+				fragment.animateView(mapControlsView, zoomY);
 			} else {
-				zoomButtonsView.setY(zoomY);
+				mapControlsView.setY(zoomY);
 			}
 		}
 	}
 
-	private int getZoomButtonsHeight() {
-		View zoomButtonsView = this.zoomButtonsView;
-		return zoomButtonsView != null ? zoomButtonsView.getHeight() : 0;
+	private int getMapControlsHeight() {
+		View mapControlsContainer = this.mapControlsView;
+		return mapControlsContainer != null ? mapControlsContainer.getHeight() : 0;
 	}
 
-	private void updateZoomButtonsVisibility(int menuState) {
-		View zoomButtonsView = this.zoomButtonsView;
-		if (zoomButtonsView != null) {
+	private void updateMapControlsVisibility(int menuState) {
+		View mapControlsView = this.mapControlsView;
+		if (mapControlsView != null) {
 			if (menuState == MenuState.HEADER_ONLY) {
-				if (zoomButtonsView.getVisibility() != View.VISIBLE) {
-					zoomButtonsView.setVisibility(View.VISIBLE);
+				if (mapControlsView.getVisibility() != View.VISIBLE) {
+					mapControlsView.setVisibility(View.VISIBLE);
 				}
 			} else {
-				if (zoomButtonsView.getVisibility() == View.VISIBLE) {
-					zoomButtonsView.setVisibility(View.INVISIBLE);
+				if (mapControlsView.getVisibility() == View.VISIBLE) {
+					mapControlsView.setVisibility(View.INVISIBLE);
 				}
 			}
 		}

@@ -190,7 +190,7 @@ public class RouteInfoWidgetsFactory {
 								if (DateFormat.is24HourFormat(ctx)) {
 									setText(DateFormat.format("k:mm", toFindTime).toString(), null); //$NON-NLS-1$
 								} else {
-									setText(DateFormat.format("h:mm", toFindTime).toString(), 
+									setText(DateFormat.format("h:mm", toFindTime).toString(),
 											DateFormat.format("aa", toFindTime).toString()); //$NON-NLS-1$
 								}
 								return true;
@@ -551,10 +551,6 @@ public class RouteInfoWidgetsFactory {
 		return bearingControl;
 	}
 
-	public LanesControl createLanesControl(final MapActivity map, final OsmandMapTileView view) {
-		return new LanesControl(map, view);
-	}
-
 	public static boolean distChanged(int oldDist, int dist) {
 		return oldDist == 0 || Math.abs(oldDist - dist) >= 10;
 	}
@@ -563,11 +559,15 @@ public class RouteInfoWidgetsFactory {
 		return Math.abs(oldDegrees - degrees) >= 1;
 	}
 
-	public AlarmWidget createAlarmInfoControl(OsmandApplication app, MapActivity map) {
+	public static LanesControl createLanesControl(final MapActivity map, final OsmandMapTileView view) {
+		return new LanesControl(map, view);
+	}
+
+	public static AlarmWidget createAlarmInfoControl(OsmandApplication app, MapActivity map) {
 		return new AlarmWidget(app, map);
 	}
-	
-	public RulerWidget createRulerControl(OsmandApplication app, MapActivity map) {
-		return new RulerWidget(app, map);
+
+	public static RulerWidget createRulerControl(MapActivity map, View view) {
+		return new RulerWidget(map, view);
 	}
 }

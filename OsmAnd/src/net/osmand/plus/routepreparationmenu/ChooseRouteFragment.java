@@ -366,17 +366,17 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		View zoomButtonsView = view.findViewById(R.id.map_hud_controls);
 		this.zoomButtonsView = zoomButtonsView;
 
-		ImageButton zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
-		ImageButton zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
-		ImageButton myLocButtonView = view.findViewById(R.id.map_my_location_button);
+		ImageButton zoomInButton = view.findViewById(R.id.map_zoom_in_button);
+		ImageButton zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
+		ImageButton backToLocation = view.findViewById(R.id.map_my_location_button);
 
 		OsmandMapTileView mapTileView = mapActivity.getMapView();
 		View.OnLongClickListener longClickListener = MapControlsLayer.getOnClickMagnifierListener(mapTileView);
 		MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 
-		mapControlsLayer.setupZoomInButton(zoomInButtonView, longClickListener, ZOOM_IN_BUTTON_ID);
-		mapControlsLayer.setupZoomOutButton(zoomOutButtonView, longClickListener, ZOOM_OUT_BUTTON_ID);
-		mapControlsLayer.setupMyLocationButton(myLocButtonView, BACK_TO_LOC_BUTTON_ID);
+		mapControlsLayer.setupZoomInButton(zoomInButton, longClickListener, ZOOM_IN_BUTTON_ID);
+		mapControlsLayer.setupZoomOutButton(zoomOutButton, longClickListener, ZOOM_OUT_BUTTON_ID);
+		mapControlsLayer.setupBackToLocationButton(backToLocation, BACK_TO_LOC_BUTTON_ID);
 
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 	}

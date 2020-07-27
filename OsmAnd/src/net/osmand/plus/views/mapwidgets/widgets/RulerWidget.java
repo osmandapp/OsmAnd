@@ -7,38 +7,37 @@ import android.widget.TextView;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 
 public class RulerWidget {
 
+	private MapActivity mapActivity;
+	private OsmandPreference<Float> mapDensity;
+
 	private View layout;
 	private ImageView icon;
 	private TextView text;
 	private TextView textShadow;
-	private MapActivity mapActivity;
+
 	private String cacheRulerText;
 	private int maxWidth;
-	private float cacheMapDensity;
-	private OsmandSettings.OsmandPreference<Float> mapDensity;
 	private int cacheRulerZoom;
+	private float cacheMapDensity;
 	private double cacheRulerTileX;
 	private double cacheRulerTileY;
-	private boolean orientationPortrait;
 
-	public RulerWidget(OsmandApplication app, MapActivity mapActivity) {
+	public RulerWidget(MapActivity mapActivity, View view) {
 		this.mapActivity = mapActivity;
-		layout = mapActivity.findViewById(R.id.map_ruler_layout);
-		icon = mapActivity.findViewById(R.id.map_ruler_image);
-		text = mapActivity.findViewById(R.id.map_ruler_text);
-		textShadow = mapActivity.findViewById(R.id.map_ruler_text_shadow);
-		maxWidth = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
-		orientationPortrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		layout = view.findViewById(R.id.map_ruler_layout);
+		icon = view.findViewById(R.id.map_ruler_image);
+		text = view.findViewById(R.id.map_ruler_text);
+		textShadow = view.findViewById(R.id.map_ruler_text_shadow);
+		maxWidth = view.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 		mapDensity = mapActivity.getMyApplication().getSettings().MAP_DENSITY;
 		cacheMapDensity = mapDensity.get();
 	}

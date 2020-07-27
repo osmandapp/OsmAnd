@@ -13,13 +13,13 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.mapwidgets.LanesControl;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.widgetstates.CompassRulerWidgetState;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopCoordinatesView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -28,15 +28,18 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
-import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
-import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
-import net.osmand.plus.views.mapwidgets.widgetstates.BearingWidgetState;
-import net.osmand.plus.views.mapwidgets.LanesControl;
+import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
-import net.osmand.plus.views.mapwidgets.widgetstates.TimeWidgetState;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.BearingWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.CompassRulerWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.TimeWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
@@ -58,18 +61,20 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 
 public class MapInfoLayer extends OsmandMapLayer {
+
 	private final MapActivity map;
 	private final RouteLayer routeLayer;
 	private OsmandMapTileView view;
-	
+
 	// groups
 	private LinearLayout rightStack;
 	private LinearLayout leftStack;
-	private ImageButton  expand;
+	private ImageButton expand;
+	private View mapRulerLayout;
 	private static boolean expanded = false;
 	private LanesControl lanesControl;
 	private AlarmWidget alarmControl;
-	private RulerWidget rulerControl;
+	private List<RulerWidget> rulerWidgets;
 	private MapWidgetRegistry mapInfoControls;
 
 	private OsmandSettings settings;
@@ -96,9 +101,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;
 		mapInfoControls = map.getMapLayers().getMapWidgetRegistry() ;
-		leftStack = (LinearLayout) map.findViewById(R.id.map_left_widgets_panel);
-		rightStack = (LinearLayout) map.findViewById(R.id.map_right_widgets_panel);
-		expand = (ImageButton) map.findViewById(R.id.map_collapse_button);
+		leftStack = map.findViewById(R.id.map_left_widgets_panel);
+		rightStack = map.findViewById(R.id.map_right_widgets_panel);
+		expand = map.findViewById(R.id.map_collapse_button);
+		mapRulerLayout = map.findViewById(R.id.map_ruler_layout);
+
 		// update and create controls
 		registerAllControls();
 		map.getMyApplication().getAidlApi().registerWidgetControls(map);
@@ -159,11 +166,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void registerAllControls(){
+		rulerWidgets = new ArrayList<>();
 		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory();
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory();
 		MapMarkersWidgetsFactory mwf = map.getMapLayers().getMapMarkersLayer().getWidgetsFactory();
 		OsmandApplication app = view.getApplication();
-		lanesControl = ric.createLanesControl(map, view);
+		lanesControl = RouteInfoWidgetsFactory.createLanesControl(map, view);
 
 		TextState ts = calculateTextState();
 		streetNameView = new TopTextView(map.getMyApplication(), map);
@@ -175,12 +183,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		topToolbarView = new TopToolbarView(map);
 		updateTopToolbar(false);
 
-		alarmControl = ric.createAlarmInfoControl(app, map);
+		alarmControl = RouteInfoWidgetsFactory.createAlarmInfoControl(app, map);
 		alarmControl.setVisibility(false);
-		
-		rulerControl = ric.createRulerControl(app, map);
-		rulerControl.setVisibility(false);
-		
+
+		setupRulerWidget(mapRulerLayout);
+
 		// register left stack
 		registerSideWidget(null, R.drawable.ic_action_compass, R.string.map_widget_compass, WIDGET_COMPASS, true, 4);
 
@@ -236,7 +243,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.populateStackControl(rightStack, settings.getApplicationMode(), false, expanded);
 		rightStack.requestLayout();
 
-		expand.setVisibility(mapInfoControls.hasCollapsibles(settings.getApplicationMode())? 
+		expand.setVisibility(mapInfoControls.hasCollapsibles(settings.getApplicationMode())?
 				View.VISIBLE : View.GONE);
 		Drawable expandIcon = map.getMyApplication().getUIUtilities().getMapIcon(expanded ? R.drawable.ic_action_arrow_up :
 				R.drawable.ic_action_arrow_down, true);
@@ -252,15 +259,34 @@ public class MapInfoLayer extends OsmandMapLayer {
 		});
 	}
 
+	public RulerWidget setupRulerWidget(View mapRulerView) {
+		RulerWidget rulerWidget = RouteInfoWidgetsFactory.createRulerControl(map, mapRulerView);
+		rulerWidget.setVisibility(false);
+
+		TextState ts = calculateTextState();
+		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
+		rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
+
+		rulerWidgets.add(rulerWidget);
+
+		return rulerWidget;
+	}
+
+	public void removeRulerWidgets(List<RulerWidget> rulers) {
+		List<RulerWidget> widgetList = new ArrayList<>(rulerWidgets);
+		widgetList.removeAll(rulers);
+		rulerWidgets = widgetList;
+	}
+
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
 		routeLayer.setTrackChartPoints(trackChartPoints);
 	}
 
 	private static class TextState {
-		boolean textBold ;
+		boolean textBold;
 		boolean night;
-		int textColor ;
-		int textShadowColor ;
+		int textColor;
+		int textShadowColor;
 		int boxTop;
 		int rightRes;
 		int leftRes;
@@ -268,7 +294,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		int boxFree;
 		int textShadowRadius;
 	}
-
 
 	private int themeId = -1;
 	public void updateColorShadowsOfText() {
@@ -290,12 +315,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 			updateTopCoordinates(nightMode, ts);
 			updateTopToolbar(nightMode);
 			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius / 2);
-			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor,  (int) (2 * view.getDensity()));
 			int padding = expand.getPaddingLeft();
 			expand.setBackgroundResource(ts.expand);
 			expand.setPadding(padding, padding, padding, padding);
 			rightStack.invalidate();
 			leftStack.invalidate();
+
+			for (RulerWidget rulerWidget : rulerWidgets) {
+				rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
+			}
 		}
 	}
 
@@ -371,9 +399,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		topToolbarView.updateInfo();
 		topCoordinatesView.updateInfo();
 		alarmControl.updateInfo(drawSettings);
-		rulerControl.updateInfo(tileBox, drawSettings);
 		lanesControl.updateInfo(drawSettings);
-		
+
+		for (RulerWidget rulerWidget : rulerWidgets) {
+			rulerWidget.updateInfo(tileBox, drawSettings);
+		}
 	}
 	
 	@Override
