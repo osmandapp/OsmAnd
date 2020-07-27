@@ -82,6 +82,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 
 	private MapHudButton mapZoomIn;
 	private MapHudButton mapZoomOut;
+	private MapHudButton myLocationButton;
 
 	@Override
 	public int getMainLayoutId() {
@@ -245,6 +246,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 			mapControlsLayer.removeHudButton(mapZoomIn);
 			mapControlsLayer.removeHudButton(mapZoomOut);
+			mapControlsLayer.removeHudButton(myLocationButton);
 		}
 	}
 
@@ -346,6 +348,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 
 		ImageButton zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
 		ImageButton zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
+		ImageButton myLocButtonView = view.findViewById(R.id.map_my_location_button);
 
 		OsmandMapTileView mapTileView = mapActivity.getMapView();
 		View.OnLongClickListener longClickListener = MapControlsLayer.getOnClickMagnifierListener(mapTileView);
@@ -353,6 +356,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 
 		mapZoomIn = mapControlsLayer.createZoomInButton(zoomInButtonView, longClickListener);
 		mapZoomOut = mapControlsLayer.createZoomOutButton(zoomOutButtonView, longClickListener);
+		myLocationButton = mapControlsLayer.createMyLocationButton(myLocButtonView);
 	}
 
 	public void updateZoomButtonsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {

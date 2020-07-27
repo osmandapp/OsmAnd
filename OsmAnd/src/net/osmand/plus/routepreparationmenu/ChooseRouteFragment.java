@@ -1,6 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
@@ -28,7 +27,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -36,13 +34,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
-import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -92,11 +88,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	@Nullable
 	private View solidToolbarView;
-	private int solidToolbarHeight;
 	@Nullable
 	private View zoomButtonsView;
-	@Nullable
-	private ImageButton myLocButtonView;
 	@Nullable
 	private ViewGroup pagesView;
 
@@ -112,6 +105,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	private MapHudButton mapZoomIn;
 	private MapHudButton mapZoomOut;
+	private MapHudButton myLocationButton;
 
 	@Nullable
 	@Override
@@ -144,7 +138,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		View solidToolbarView = view.findViewById(R.id.toolbar_layout);
 		this.solidToolbarView = solidToolbarView;
-		solidToolbarHeight = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 		LockableViewPager viewPager = view.findViewById(R.id.pager);
 		this.viewPager = viewPager;
 		if (!portrait) {
@@ -255,6 +248,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 			mapControlsLayer.removeHudButton(mapZoomIn);
 			mapControlsLayer.removeHudButton(mapZoomOut);
+			mapControlsLayer.removeHudButton(myLocationButton);
 		}
 	}
 
@@ -372,6 +366,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 		ImageButton zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
 		ImageButton zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
+		ImageButton myLocButtonView = view.findViewById(R.id.map_my_location_button);
 
 		OsmandMapTileView mapTileView = mapActivity.getMapView();
 		View.OnLongClickListener longClickListener = MapControlsLayer.getOnClickMagnifierListener(mapTileView);
@@ -379,58 +374,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 		mapZoomIn = mapControlsLayer.createZoomInButton(zoomInButtonView, longClickListener);
 		mapZoomOut = mapControlsLayer.createZoomOutButton(zoomOutButtonView, longClickListener);
+		myLocationButton = mapControlsLayer.createMyLocationButton(myLocButtonView);
 
-		ImageButton myLocButtonView = view.findViewById(R.id.map_my_location_button);
-		this.myLocButtonView = myLocButtonView;
-
-		myLocButtonView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
-						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-					} else {
-						ActivityCompat.requestPermissions(mapActivity,
-								new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
-								OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
-					}
-				}
-			}
-		});
-		updateMyLocation();
-
-		zoomButtonsView.setVisibility(View.VISIBLE);
-	}
-
-	private void updateMyLocation() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
-		}
-		OsmandApplication app = mapActivity.getMyApplication();
-		Location lastKnownLocation = app.getLocationProvider().getLastKnownLocation();
-		boolean enabled = lastKnownLocation != null;
-		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
-
-		ImageButton myLocButtonView = this.myLocButtonView;
-		if (myLocButtonView != null) {
-			if (!enabled) {
-				myLocButtonView.setImageDrawable(getIcon(R.drawable.ic_my_location, R.color.icon_color_default_light));
-				AndroidUtils.setBackground(app, myLocButtonView, nightMode, R.drawable.btn_circle, R.drawable.btn_circle_night);
-				myLocButtonView.setContentDescription(mapActivity.getString(R.string.unknown_location));
-			} else if (tracked) {
-				myLocButtonView.setImageDrawable(getIcon(R.drawable.ic_my_location, R.color.color_myloc_distance));
-				AndroidUtils.setBackground(app, myLocButtonView, nightMode, R.drawable.btn_circle, R.drawable.btn_circle_night);
-			} else {
-				myLocButtonView.setImageResource(R.drawable.ic_my_location);
-				AndroidUtils.setBackground(app, myLocButtonView, nightMode, R.drawable.btn_circle_blue, R.drawable.btn_circle_blue);
-				myLocButtonView.setContentDescription(mapActivity.getString(R.string.map_widget_back_to_loc));
-			}
-			if (app.accessibilityEnabled()) {
-				myLocButtonView.setClickable(enabled && !tracked && app.getRoutingHelper().isFollowingMode());
-			}
-		}
+		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 	}
 
 	private void updateZoomButtonsVisibility(int menuState) {
