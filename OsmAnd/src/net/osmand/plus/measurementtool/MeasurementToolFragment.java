@@ -1138,7 +1138,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			mapActivity.showTopToolbar(toolBarController);
 		}
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
-		mark(enable ? View.VISIBLE : View.GONE,
+		AndroidUiHelper.setVisibility(mapActivity, enable ? View.VISIBLE : View.GONE,
 				R.id.move_point_text,
 				R.id.move_point_controls);
 		mainIcon.setImageDrawable(getActiveIcon(enable
@@ -1158,7 +1158,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			mapActivity.showTopToolbar(toolBarController);
 		}
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
-		mark(enable ? View.VISIBLE : View.GONE,
+		AndroidUiHelper.setVisibility(mapActivity,enable ? View.VISIBLE : View.GONE,
 				R.id.add_point_before_after_text,
 				R.id.add_point_before_after_controls);
 		if (!enable) {
@@ -1167,12 +1167,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	}
 
 	private void markGeneralComponents(int status) {
-		mark(status,
-				R.id.measurement_distance_text_view,
-				R.id.measurement_points_text_view,
-				R.id.distance_to_center_text_view,
-				R.id.up_down_button,
-				R.id.measure_mode_controls);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			AndroidUiHelper.setVisibility(mapActivity, status,
+					R.id.measurement_distance_text_view,
+					R.id.measurement_points_text_view,
+					R.id.distance_to_center_text_view,
+					R.id.up_down_button,
+					R.id.measure_mode_controls);
+		}
 	}
 
 	private void addInitialPoint() {
@@ -1649,11 +1652,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			mapActivity.refreshMap();
 			mapActivity.disableDrawer();
 
-			mark(portrait ? View.INVISIBLE : View.GONE,
+			AndroidUiHelper.setVisibility(mapActivity, portrait ? View.INVISIBLE : View.GONE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info);
-			mark(View.GONE,
+			AndroidUiHelper.setVisibility(mapActivity, View.GONE,
 					R.id.map_route_info_button,
 					R.id.map_menu_button,
 					R.id.map_compass_button,
@@ -1683,7 +1686,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			measurementLayer.setInMeasurementMode(false);
 			mapActivity.enableDrawer();
 
-			mark(View.VISIBLE,
+			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info,
@@ -1700,18 +1703,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 
 			mapActivity.refreshMap();
-		}
-	}
-
-	private void mark(int status, int... widgets) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			for (int widget : widgets) {
-				View v = mapActivity.findViewById(widget);
-				if (v != null) {
-					v.setVisibility(status);
-				}
-			}
 		}
 	}
 

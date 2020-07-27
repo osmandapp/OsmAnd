@@ -1244,6 +1244,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					mapRouteInfoMenu.updateMenu();
 					MapRouteInfoMenu.showLocationOnMap(this, latLonToShow.getLatitude(), latLonToShow.getLongitude());
 				} else if (toShow instanceof GPXFile) {
+					hideContextAndRouteInfoMenues();
+
 					Bundle args = new Bundle();
 					args.putString(TRACK_FILE_PATH, ((GPXFile) toShow).path);
 					args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuController.MenuState.HALF_SCREEN);

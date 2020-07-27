@@ -3822,4 +3822,12 @@
     <string name="route_between_points">Trasa medzi bodmi</string>
     <string name="plan_a_route">Naplánovať trasu</string>
     <string name="add_to_a_track">Pridať do stopy</string>
+    <string name="add_hidden_group_info">Pridaný bod nebude viditeľný na mape, pretože zvolená skupina je skrytá. Môžete ho nájsť v \"%s\".</string>
+    <string name="track_show_start_finish_icons">Zobraziť ikony štartu a cieľa</string>
+    <string name="select_track_width">Zvoľte šírku</string>
+    <string name="gpx_split_interval_descr">Zvoľte interval, po ktorom budú na stope zobrazené značky so vzdialenosťou alebo časom.</string>
+    <string name="gpx_split_interval_none_descr">Zvoľte spôsob rozdeľovania: podľa času alebo podľa vzdialenosti.</string>
+    <string name="shared_string_custom">Vlastné</string>
+    <string name="gpx_direction_arrows">Smerové šípky</string>
+    <string name="track_coloring_solid">Plné</string>
 </resources>

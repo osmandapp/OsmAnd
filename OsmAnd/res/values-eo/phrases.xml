@@ -1192,7 +1192,7 @@
     <string name="poi_pump_no">sen pumpilo</string>
     <string name="poi_pump_yes">jes</string>
     <string name="poi_water_characteristic_mineral">minerala</string>
-    <string name="poi_water_characteristic_mud">Akvospeco: sediment-riĉa</string>
+    <string name="poi_water_characteristic_mud">sediment-riĉa</string>
     <string name="poi_water_characteristic_sulfuric">sulfat(VI)-oza</string>
     <string name="poi_water_point">Akvoĉerpejo</string>
     <string name="poi_information_guidepost">Vojmontrilo</string>
@@ -1859,7 +1859,7 @@
     <string name="poi_fuel_100ll">benzino 100-oktannombra plumba</string>
     <string name="poi_fuel_autogas">naftogaso likva (LPG) por aviadiloj</string>
     <string name="poi_fuel_jeta1">Jet A-1 brulaĵo</string>
-    <string name="poi_fuel_adblue">AdBlue (akvosolvaĵo de ureo) aldonaĵo</string>
+    <string name="poi_fuel_adblue">AdBlue (akvosolvaĵo de ureo)</string>
     <string name="poi_fuel_wood">Brulaĵo: ligno</string>
     <string name="poi_fuel_charcoal">Brulaĵo: lignokarbo</string>
     <string name="poi_fuel_coal">Brulaĵo: karbo</string>
@@ -3029,7 +3029,7 @@
     <string name="poi_dish">Manĝaĵo</string>
     <string name="poi_waterway_fuel">Benzinejo por boatoj</string>
     <string name="poi_feeding_place">Bestonutrejo</string>
-    <string name="poi_party">Provizadoj por aranĝoj</string>
+    <string name="poi_party">Okazaĵaj-provizoj-vendejo</string>
     <string name="poi_electrical">Elektraĵ-vendejo</string>
     <string name="poi_locksmith">Seruristejo</string>
     <string name="poi_lighting">Prilumigad-aparata vendejo</string>
@@ -3780,7 +3780,7 @@
     <string name="poi_memorial_ghost_bike">Fantombiciklo</string>
     <string name="poi_paintball">Farbopafado</string>
     <string name="poi_mountain_rescue">Stacio de montara savservo</string>
-    <string name="poi_shop_security">Vendejo de sekuriloj</string>
+    <string name="poi_shop_security">Sekuril-vendejo</string>
     <string name="poi_bowling_alley">Kegloludejo</string>
     <string name="poi_piste_ref">Referenc‑numero de skivojo</string>
     <string name="poi_resort_hunting">bazo de ĉasistoj</string>

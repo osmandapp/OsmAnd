@@ -227,7 +227,7 @@
     <string name="subcategories">Подкатегории</string>
     <string name="selected_categories">Выбранные категории</string>
     <string name="create_custom_poi">Создать настраиваемый фильтр</string>
-    <string name="custom_search">Настроить поиск</string>
+    <string name="custom_search">Настраиваемый поиск</string>
     <string name="shared_string_filters">Фильтры</string>
     <string name="apply_filters">Применить фильтры</string>
     <string name="save_filter">Сохранить фильтр</string>
@@ -2366,7 +2366,7 @@
     <string name="edit_line">Редактировать линию</string>
     <string name="add_point_before">Добавить точку перед</string>
     <string name="add_point_after">Добавить точку после</string>
-    <string name="shared_string_options">Функции</string>
+    <string name="shared_string_options">Опции</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd соединит точки с маршрутом для выбранного профиля.</string>
     <string name="measurement_tool_save_as_new_track_descr">Сохранить точки, как точки маршрута или как линию.</string>
     <string name="choose_navigation_type">Выберите профиль навигации</string>
@@ -3831,4 +3831,10 @@
     <string name="select_track_width">Выберите ширину</string>
     <string name="gpx_direction_arrows">Стрелки направления</string>
     <string name="track_coloring_solid">Сплошной</string>
+    <string name="plan_route_last_edited">Последнее изменение</string>
+    <string name="plan_route_import_track">Импортировать трек</string>
+    <string name="plan_route_open_existing_track">Открыть существующий трек</string>
+    <string name="plan_route_create_new_route">Создать новый маршрут</string>
+    <string name="plan_route_select_track_file_for_open">Выберите файл трека для открытия.</string>
+    <string name="shared_string_done">Готово</string>
 </resources>

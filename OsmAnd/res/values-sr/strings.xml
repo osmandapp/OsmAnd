@@ -3821,4 +3821,12 @@
     <string name="route_between_points">Рута између тачака</string>
     <string name="plan_a_route">Планирај руту</string>
     <string name="add_to_a_track">Додајте стази</string>
+    <string name="select_track_width">Изаберите ширину</string>
+    <string name="gpx_split_interval_descr">Изаберите интервал на коме ће се приказивати ознаке са раздаљином или временом на стази.</string>
+    <string name="gpx_split_interval_none_descr">Изаберите жељену опцију поделе: по времену или по удаљености.</string>
+    <string name="shared_string_custom">Прилагођен</string>
+    <string name="gpx_direction_arrows">Стрелице смера</string>
+    <string name="track_coloring_solid">Чврст</string>
+    <string name="add_hidden_group_info">Додата тачка неће бити видљива на мапи, пошто је одабрана група сакривена, можете је пронаћи у „%s“.</string>
+    <string name="track_show_start_finish_icons">Прикажи почетно крајне иконе</string>
 </resources>
