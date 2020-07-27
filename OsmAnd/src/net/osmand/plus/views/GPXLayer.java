@@ -94,6 +94,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private Drawable startPointIcon;
 	private Drawable finishPointIcon;
+	private Drawable startAndFinishIcon;
 	private LayerDrawable selectedPoint;
 	private TrackDrawInfo trackDrawInfo;
 	private TrackChartPoints trackChartPoints;
@@ -190,6 +191,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		UiUtilities iconsCache = view.getApplication().getUIUtilities();
 		startPointIcon = iconsCache.getIcon(R.drawable.map_track_point_start);
 		finishPointIcon = iconsCache.getIcon(R.drawable.map_track_point_finish);
+		startAndFinishIcon = iconsCache.getIcon(R.drawable.map_track_point_start_finish);
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 
@@ -545,8 +547,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							WptPt start = segment.points.get(0);
 							WptPt end = segment.points.get(segment.points.size() - 1);
 
-							drawPoint(canvas, tileBox, start, startPointIcon);
-							drawPoint(canvas, tileBox, end, finishPointIcon);
+							if (start.equals(end)) {
+								drawPoint(canvas, tileBox, start, startAndFinishIcon);
+							} else {
+								drawPoint(canvas, tileBox, start, startPointIcon);
+								drawPoint(canvas, tileBox, end, finishPointIcon);
+							}
 						}
 					}
 				}

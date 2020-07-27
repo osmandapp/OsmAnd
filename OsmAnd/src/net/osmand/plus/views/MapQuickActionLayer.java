@@ -311,7 +311,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         view.setLatLon(lat, lon);
 
         inMovingMarkerMode = true;
-        mark(View.INVISIBLE, R.id.map_ruler_layout,
+        AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE, R.id.map_ruler_layout,
                 R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
         View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
@@ -349,7 +349,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         }
 
         inMovingMarkerMode = false;
-        mark(View.VISIBLE, R.id.map_ruler_layout,
+        AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_layout,
                 R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
         View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
@@ -357,15 +357,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
             collapseButton.setVisibility(View.VISIBLE);
         }
         view.refreshMap();
-    }
-
-    private void mark(int status, int... widgets) {
-        for (int widget : widgets) {
-            View v = mapActivity.findViewById(widget);
-            if (v != null) {
-                v.setVisibility(status);
-            }
-        }
     }
 
     @Override

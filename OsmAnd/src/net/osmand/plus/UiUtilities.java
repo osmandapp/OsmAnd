@@ -134,12 +134,13 @@ public class UiUtilities {
 
 	public Drawable getLayeredIcon(@DrawableRes int bgIconId, @DrawableRes int foregroundIconId,
 	                               @ColorRes int bgColorId, @ColorRes int foregroundColorId) {
-		Drawable b = getDrawable(bgIconId, bgColorId);
-		Drawable f = getDrawable(foregroundIconId, foregroundColorId);
-		Drawable[] layers = new Drawable[2];
-		layers[0] = b;
-		layers[1] = f;
-		return new LayerDrawable(layers);
+		Drawable background = getDrawable(bgIconId, bgColorId);
+		Drawable foreground = getDrawable(foregroundIconId, foregroundColorId);
+		return getLayeredIcon(background, foreground);
+	}
+
+	public static Drawable getLayeredIcon(Drawable... icons) {
+		return new LayerDrawable(icons);
 	}
 
 	public Drawable getThemedIcon(@DrawableRes int id) {
@@ -214,13 +215,11 @@ public class UiUtilities {
 
 	@ColorInt
 	public static int getColorWithAlpha(@ColorInt int color, float ratio) {
-		int newColor = 0;
 		int alpha = Math.round(Color.alpha(color) * ratio);
 		int r = Color.red(color);
 		int g = Color.green(color);
 		int b = Color.blue(color);
-		newColor = Color.argb(alpha, r, g, b);
-		return newColor;
+		return Color.argb(alpha, r, g, b);
 	}
 
 	@ColorInt
