@@ -50,6 +50,7 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -79,6 +80,8 @@ import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -89,6 +92,8 @@ import java.util.List;
 import java.util.Locale;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
+import static net.osmand.plus.measurementtool.StartPlanRouteBottomSheet.StartPlanRouteListener;
 
 
 public class MeasurementToolFragment extends BaseOsmAndFragment {
@@ -117,6 +122,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	private boolean wasCollapseButtonVisible;
 	private boolean progressBarVisible;
 	private boolean pointsListOpened;
+	private boolean planRouteMode = false;
 	private Boolean saved;
 	private boolean portrait;
 	private boolean nightMode;
@@ -138,6 +144,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 	private void setInitialPoint(LatLon initialPoint) {
 		this.initialPoint = initialPoint;
+	}
+
+	public void setPlanRouteMode(boolean planRouteMode) {
+		this.planRouteMode = planRouteMode;
 	}
 
 	@Nullable
@@ -198,7 +208,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			hidePointsListFragment();
 		}
 
-		editingCtx.getCommandManager().resetMeasurementLayer(measurementLayer);
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
@@ -318,17 +327,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View view) {
 				editingCtx.getCommandManager().undo();
-				if (editingCtx.getCommandManager().canUndo()) {
-					enable(undoBtn);
-				} else {
-					disable(undoBtn);
-				}
+				updateUndoRedoButton(editingCtx.getCommandManager().canUndo(), undoBtn);
 				hidePointsListIfNoPoints();
 				if (editingCtx.getPointsCount() > 0) {
 					enable(upDownBtn);
 				}
 				adapter.notifyDataSetChanged();
-				enable(redoBtn);
+				updateUndoRedoButton(true, redoBtn);
 				updateText();
 			}
 		});
@@ -339,17 +344,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View view) {
 				editingCtx.getCommandManager().redo();
-				if (editingCtx.getCommandManager().canRedo()) {
-					enable(redoBtn);
-				} else {
-					disable(redoBtn);
-				}
+				updateUndoRedoButton(editingCtx.getCommandManager().canRedo(), redoBtn);
 				hidePointsListIfNoPoints();
 				if (editingCtx.getPointsCount() > 0) {
 					enable(upDownBtn);
 				}
 				adapter.notifyDataSetChanged();
-				enable(undoBtn);
+				updateUndoRedoButton(true, undoBtn);
 				updateText();
 			}
 		});
@@ -385,8 +386,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, getMyApplication());
 				distanceToCenterTv.setText(String.format("%1$s • %2$s", distStr, azimuthStr));
 				TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
-						distanceToCenterTv, 12, 18, 2, TypedValue.COMPLEX_UNIT_SP
-				);
+						distanceToCenterTv, 14, 18, 2,
+						TypedValue.COMPLEX_UNIT_SP);
 			}
 		});
 
@@ -401,16 +402,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		});
 
 		if (!editingCtx.getCommandManager().canUndo()) {
-			disable(undoBtn);
+			updateUndoRedoButton(false, undoBtn);
 		}
 		if (!editingCtx.getCommandManager().canRedo()) {
-			disable(redoBtn);
+			updateUndoRedoButton(false, redoBtn);
 		}
 		if (editingCtx.getPointsCount() < 1) {
 			disable(upDownBtn);
 		}
 
-		toolBarController = new MeasurementToolBarController(newGpxData);
+		toolBarController = new MeasurementToolBarController();
 		if (editingCtx.getSelectedPointPosition() != -1) {
 			int navigationIconResId = AndroidUtils.getNavigationIconResId(mapActivity);
 			toolBarController.setBackBtnIconIds(navigationIconResId, navigationIconResId);
@@ -427,7 +428,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				toolBarController.setTitle(getString(R.string.edit_line));
 			}
 		} else {
-			toolBarController.setTitle(getString(R.string.measurement_tool_action_bar));
+			toolBarController.setTitle(getString(R.string.plan_route));
 		}
 		toolBarController.setOnBackButtonClickListener(new View.OnClickListener() {
 			@Override
@@ -451,7 +452,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 					} else {
 						if (newGpxData == null) {
 							final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-							String fileName = getSuggestedName(dir);
+							String fileName = getSuggestedName(dir) + GPX_FILE_EXT;
 							saveNewGpx(dir, fileName, true, SaveType.ROUTE_POINT, true);
 						} else {
 							addToGpx(mapActivity);
@@ -485,6 +486,17 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		pointsRv.setLayoutManager(new LinearLayoutManager(getContext()));
 		pointsRv.setAdapter(adapter);
 
+		initMeasurementMode(newGpxData);
+
+		if (planRouteMode) {
+			StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
+					createStartPlanRouteListener());
+		}
+		return view;
+	}
+
+	private void initMeasurementMode(NewGpxData newGpxData) {
+		editingCtx.getCommandManager().resetMeasurementLayer(getMapActivity().getMapLayers().getMeasurementToolLayer());
 		enterMeasurementMode();
 
 		showSnapToRoadControls();
@@ -503,8 +515,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		if (saved == null) {
 			saved = newGpxData != null && (newGpxData.getActionType() == ActionType.ADD_ROUTE_POINTS || newGpxData.getActionType() == ActionType.EDIT_SEGMENT);
 		}
-
-		return view;
 	}
 
 	@Override
@@ -675,7 +685,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				if (pointsListOpened) {
 					hidePointsList();
 				}
-				disable(redoBtn, upDownBtn);
+				updateUndoRedoButton(false, redoBtn);
+				disable(upDownBtn);
 				updateText();
 				saved = false;
 			}
@@ -765,11 +776,77 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		};
 	}
 
+	private StartPlanRouteListener createStartPlanRouteListener() {
+		return new StartPlanRouteListener() {
+			@Override
+			public void openExistingTrackOnClick() {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					SelectFileBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
+							createSelectFileListener());
+				}
+			}
+
+			@Override
+			public void openLastEditTrackOnClick(GPXFile gpxFile) {
+				addNewGpxData(gpxFile);
+			}
+
+			@Override
+			public void dismissButtonOnClick() {
+				quit(true);
+			}
+		};
+	}
+
+	private SelectFileListener createSelectFileListener() {
+		return new SelectFileListener() {
+			@Override
+			public void selectFileOnCLick(GPXFile gpxFile) {
+				addNewGpxData(gpxFile);
+			}
+
+			@Override
+			public void dismissButtonOnClick() {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
+							createStartPlanRouteListener());
+				}
+			}
+		};
+	}
+
+	public void addNewGpxData(GPXFile gpxFile) {
+		QuadRect rect = gpxFile.getRect();
+		TrkSegment segment = getTrkSegment(gpxFile);
+		NewGpxData newGpxData = new NewGpxData(gpxFile, rect, ActionType.EDIT_SEGMENT, segment);
+		editingCtx.setNewGpxData(newGpxData);
+		initMeasurementMode(newGpxData);
+		QuadRect qr = newGpxData.getRect();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapView().fitRectToMap(qr.left, qr.right, qr.top, qr.bottom,
+					(int) qr.width(), (int) qr.height(), 0);
+		}
+	}
+
+	private TrkSegment getTrkSegment(GPXFile gpxFile) {
+		for (GPXUtilities.Track t : gpxFile.tracks) {
+			for (TrkSegment s : t.segments) {
+				if (s.points.size() > 0) {
+					return s;
+				}
+			}
+		}
+		return null;
+	}
+
 	private void removePoint(MeasurementToolLayer layer, int position) {
 		editingCtx.getCommandManager().execute(new RemovePointCommand(layer, position));
 		adapter.notifyDataSetChanged();
-		enable(undoBtn);
-		disable(redoBtn);
+		updateUndoRedoButton(true, undoBtn);
+		updateUndoRedoButton(false, redoBtn);
 		updateText();
 		saved = false;
 		hidePointsListIfNoPoints();
@@ -831,7 +908,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 					if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 						editingCtx.getCommandManager().execute(new ReorderPointCommand(measurementLayer, fromPosition, toPosition));
 						adapter.notifyDataSetChanged();
-						disable(redoBtn);
+						updateUndoRedoButton(false, redoBtn);
 						updateText();
 						mapActivity.refreshMap();
 						saved = false;
@@ -1047,7 +1124,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			mapActivity.showTopToolbar(toolBarController);
 		}
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
-		mark(enable ? View.VISIBLE : View.GONE,
+		AndroidUiHelper.setVisibility(mapActivity, enable ? View.VISIBLE : View.GONE,
 				R.id.move_point_text,
 				R.id.move_point_controls);
 		mainIcon.setImageDrawable(getActiveIcon(enable
@@ -1067,7 +1144,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			mapActivity.showTopToolbar(toolBarController);
 		}
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
-		mark(enable ? View.VISIBLE : View.GONE,
+		AndroidUiHelper.setVisibility(mapActivity,enable ? View.VISIBLE : View.GONE,
 				R.id.add_point_before_after_text,
 				R.id.add_point_before_after_controls);
 		if (!enable) {
@@ -1076,12 +1153,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	}
 
 	private void markGeneralComponents(int status) {
-		mark(status,
-				R.id.measurement_distance_text_view,
-				R.id.measurement_points_text_view,
-				R.id.distance_to_center_text_view,
-				R.id.up_down_button,
-				R.id.measure_mode_controls);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			AndroidUiHelper.setVisibility(mapActivity, status,
+					R.id.measurement_distance_text_view,
+					R.id.measurement_points_text_view,
+					R.id.distance_to_center_text_view,
+					R.id.up_down_button,
+					R.id.measure_mode_controls);
+		}
 	}
 
 	private void addInitialPoint() {
@@ -1114,8 +1194,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	}
 
 	private void doAddOrMovePointCommonStuff() {
-		enable(undoBtn, upDownBtn);
-		disable(redoBtn);
+		enable(upDownBtn);
+		updateUndoRedoButton(true, undoBtn);
+		updateUndoRedoButton(false, redoBtn);
 		updateText();
 		adapter.notifyDataSetChanged();
 		saved = false;
@@ -1486,6 +1567,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 											}
 										}
 									});
+							snackbar.getView().<TextView>findViewById(com.google.android.material.R.id.snackbar_action)
+									.setAllCaps(false);
 							UiUtilities.setupSnackbar(snackbar, nightMode);
 							snackbar.show();
 							dismiss(mapActivity);
@@ -1502,18 +1585,24 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private void enable(View... views) {
-		for (View view : views) {
-			view.setEnabled(true);
-			view.setAlpha(1);
-		}
+	private void updateUndoRedoButton(boolean enable, View view) {
+		view.setEnabled(enable);
+		int color = enable
+				? nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light
+				: nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
+		ImageView imageView = ((ImageView) view);
+		imageView.setImageDrawable(UiUtilities.tintDrawable(imageView.getDrawable(),
+				ContextCompat.getColor(view.getContext(), color)));
 	}
 
-	private void disable(View... views) {
-		for (View view : views) {
-			view.setEnabled(false);
-			view.setAlpha(.5f);
-		}
+	private void enable(View view) {
+		view.setEnabled(true);
+		view.setAlpha(1);
+	}
+
+	private void disable(View view) {
+		view.setEnabled(false);
+		view.setAlpha(.5f);
 	}
 
 	private void updateText() {
@@ -1534,11 +1623,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
 			toolBarController.setTitle(getSuggestedName(dir));
 			toolBarController.setDescription(getString(R.string.plan_route));
-			toolBarController.setSaveViewVisible(true);
 		} else {
-			toolBarController.setTitle(getString(R.string.measurement_tool_action_bar));
+			toolBarController.setTitle(getString(R.string.plan_route));
 			toolBarController.setDescription(null);
-			toolBarController.setSaveViewVisible(false);
 		}
 		mapActivity.showTopToolbar(toolBarController);
 	}
@@ -1551,11 +1638,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			mapActivity.refreshMap();
 			mapActivity.disableDrawer();
 
-			mark(portrait ? View.INVISIBLE : View.GONE,
+			AndroidUiHelper.setVisibility(mapActivity, portrait ? View.INVISIBLE : View.GONE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info);
-			mark(View.GONE,
+			AndroidUiHelper.setVisibility(mapActivity, View.GONE,
 					R.id.map_route_info_button,
 					R.id.map_menu_button,
 					R.id.map_compass_button,
@@ -1585,7 +1672,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			measurementLayer.setInMeasurementMode(false);
 			mapActivity.enableDrawer();
 
-			mark(View.VISIBLE,
+			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info,
@@ -1602,18 +1689,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 
 			mapActivity.refreshMap();
-		}
-	}
-
-	private void mark(int status, int... widgets) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			for (int widget : widgets) {
-				View v = mapActivity.findViewById(widget);
-				if (v != null) {
-					v.setVisibility(status);
-				}
-			}
 		}
 	}
 
@@ -1699,7 +1774,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			} else {
 				visibleSnapToRoadIcon(false);
 			}
-			if (editingCtx.getNewGpxData() != null) {
+			if (editingCtx.getNewGpxData() != null && !planRouteMode) {
 				GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();
 				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
 				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpx.path);
@@ -1726,7 +1801,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
-		return showFragment(new MeasurementToolFragment(), fragmentManager);
+		MeasurementToolFragment fragment = new MeasurementToolFragment();
+		fragment.setPlanRouteMode(true);
+		return showFragment(fragment, fragmentManager);
 	}
 
 	private static boolean showFragment(MeasurementToolFragment fragment, FragmentManager fragmentManager) {
@@ -1743,27 +1820,42 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 	private class MeasurementToolBarController extends TopToolbarController {
 
-		MeasurementToolBarController(NewGpxData newGpxData) {
-			super(MapInfoWidgetsFactory.TopToolbarControllerType.MEASUREMENT_TOOL);
+		MeasurementToolBarController() {
+			super(TopToolbarControllerType.MEASUREMENT_TOOL);
 			setBackBtnIconClrIds(0, 0);
 			setTitleTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
 			setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
 			setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
 					R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
 			setCloseBtnVisible(false);
-			if (newGpxData != null) {
-				setSaveViewVisible(true);
-			}
+			setSaveViewVisible(true);
 			setSingleLineTitle(false);
+			setSaveViewTextId(R.string.shared_string_done);
 		}
 
 		@Override
-		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
+		public void updateToolbar(TopToolbarView view) {
 			super.updateToolbar(view);
+			setupDoneButton(view);
 			View shadow = view.getShadowView();
 			if (shadow != null) {
 				shadow.setVisibility(View.GONE);
 			}
+		}
+
+		private void setupDoneButton(TopToolbarView view) {
+			TextView done = view.getSaveView();
+			Context ctx = done.getContext();
+			done.setAllCaps(false);
+			ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) done.getLayoutParams();
+			layoutParams.height = ctx.getResources().getDimensionPixelSize(R.dimen.measurement_tool_button_height);
+			layoutParams.leftMargin = ctx.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_large);
+			layoutParams.rightMargin = ctx.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_large);
+			int paddingH = ctx.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_large);
+			int paddingV = ctx.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_small);
+			done.setPadding(paddingH, paddingV, paddingH, paddingV);
+			AndroidUtils.setBackground(ctx, done, nightMode, R.drawable.dlg_btn_stroked_light,
+					R.drawable.dlg_btn_stroked_dark);
 		}
 
 		@Override

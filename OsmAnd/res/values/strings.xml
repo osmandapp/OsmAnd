@@ -12,6 +12,12 @@
 
 -->
     <string name="overwrite_track">Overwrite track</string>
+    <string name="shared_string_done">Done</string>
+    <string name="plan_route_select_track_file_for_open">Select a track file for open.</string>
+    <string name="plan_route_create_new_route">Create new route</string>
+    <string name="plan_route_open_existing_track">Open existing track</string>
+    <string name="plan_route_import_track">Import track</string>
+    <string name="plan_route_last_edited">Last edited</string>
     <string name="track_coloring_solid">Solid</string>
     <string name="gpx_direction_arrows">Direction arrows</string>
     <string name="shared_string_custom">Custom</string>

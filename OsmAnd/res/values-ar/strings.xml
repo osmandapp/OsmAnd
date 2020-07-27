@@ -3822,4 +3822,10 @@
     <string name="shared_string_custom">تخصيص</string>
     <string name="gpx_direction_arrows">اتجاه الأسهم</string>
     <string name="track_coloring_solid">صلب</string>
+    <string name="plan_route_last_edited">التعديل الأخير</string>
+    <string name="plan_route_import_track">استيراد المسار</string>
+    <string name="plan_route_open_existing_track">فتح المسار الموجود</string>
+    <string name="plan_route_create_new_route">إنشاء مسار جديد</string>
+    <string name="plan_route_select_track_file_for_open">حدد ملف المسار للفتح.</string>
+    <string name="shared_string_done">تم</string>
 </resources>

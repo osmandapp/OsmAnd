@@ -3820,4 +3820,22 @@
     <string name="app_mode_wheelchair_forward">Rulseĝo (klinita)</string>
     <string name="app_mode_go_cart">Gokarto</string>
     <string name="osm_edit_closed_note">Fermita OSM‑rimarko</string>
+    <string name="add_hidden_group_info">La aldonita punkto ne estos videbla sur la mapo, ĉar la elektita grupo estas kaŝita, vi povas trovi ĝin en “%s”.</string>
+    <string name="set_working_days_to_continue">Necesas enigi tagojn de malfermo por pluigi</string>
+    <string name="route_between_points">Kurso inter punktoj</string>
+    <string name="plan_a_route">Plani kurson</string>
+    <string name="add_to_a_track">Aldoni al spuro</string>
+    <string name="track_show_start_finish_icons">Montri markojn de komenco/fino</string>
+    <string name="select_track_width">Elekti larĝon</string>
+    <string name="plan_route_last_edited">Antaŭaj</string>
+    <string name="gpx_split_interval_descr">Elektu tempon/distancon je kiu markoj sur la spuro estos montrataj.</string>
+    <string name="gpx_split_interval_none_descr">Elektu preferatan manieron de divido: laŭ tempo aŭ laŭ distanco.</string>
+    <string name="shared_string_custom">Propra</string>
+    <string name="gpx_direction_arrows">Sagetoj de direkto</string>
+    <string name="track_coloring_solid">Plena</string>
+    <string name="plan_route_import_track">Enporti spuron</string>
+    <string name="plan_route_open_existing_track">Malfermi ekzistan spuron</string>
+    <string name="plan_route_create_new_route">Krei novan kurson</string>
+    <string name="plan_route_select_track_file_for_open">Elekti dosieron de spuro por malfermi.</string>
+    <string name="shared_string_done">Farita</string>
 </resources>

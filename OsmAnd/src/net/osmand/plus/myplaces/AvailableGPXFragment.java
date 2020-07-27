@@ -474,7 +474,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 
-		// TODO Rewrite without ContextMenuAdapter
+		// To do Rewrite without ContextMenuAdapter
 		optionsMenuAdapter = new ContextMenuAdapter(app);
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
@@ -746,7 +746,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private void collectDirs(File dir, List<File> dirs, File exclDir) {
 		File[] listFiles = dir.listFiles();
 		if (listFiles != null) {
-			Arrays.sort(listFiles);
 			for (File f : listFiles) {
 				if (f.isDirectory()) {
 					if (!exclDir.equals(f)) {
@@ -922,7 +921,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			for (GpxInfo v : values) {
 				allGpxAdapter.addLocalIndexInfo(v);
 			}
-			allGpxAdapter.sort();
+			// disable sort
+			// allGpxAdapter.sort();
 			allGpxAdapter.notifyDataSetChanged();
 		}
 
@@ -933,7 +933,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				for (GpxInfo v : result) {
 					allGpxAdapter.addLocalIndexInfo(v);
 				}
-				allGpxAdapter.sort();
+				// disable sort
+				// allGpxAdapter.sort();
 				allGpxAdapter.refreshSelected();
 				allGpxAdapter.notifyDataSetChanged();
 				onPostExecute(result);
@@ -957,7 +958,18 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			if (listFiles == null) {
 				return new File[0];
 			}
-			Arrays.sort(listFiles);
+			// This file could be sorted in different way for folders
+			// now folders are also sorted by last modified date
+			Arrays.sort(listFiles, new Comparator<File>() {
+				@Override
+				public int compare(File f1, File f2) {
+					// here we could guess date from file name '2017-08-30 ...' - first part date
+					if (f1.lastModified() == f2.lastModified()) {
+						return -f1.getName().compareTo(f2.getName());
+					}
+					return -Long.compare(f1.lastModified(), f2.lastModified());
+				}
+			});
 			return listFiles;
 		}
 
@@ -1115,6 +1127,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			data.get(category.get(found)).add(info);
 		}
 
+		// disable sort
 		public void sort() {
 			Collections.sort(category, new Comparator<String>() {
 				@Override
@@ -1622,7 +1635,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					for (GpxInfo i : ((List<GpxInfo>) results.values)) {
 						allGpxAdapter.addLocalIndexInfo(i);
 					}
-					allGpxAdapter.sort();
+					// disable sort
+					// allGpxAdapter.sort();
 					allGpxAdapter.refreshSelected();
 				}
 				allGpxAdapter.notifyDataSetChanged();

@@ -1,7 +1,8 @@
 package net.osmand.plus.measurementtool;
 
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.data.QuadRect;
-import net.osmand.GPXUtilities;
 
 public class NewGpxData {
 
@@ -12,19 +13,19 @@ public class NewGpxData {
 		OVERWRITE_SEGMENT
 	}
 
-	private GPXUtilities.GPXFile gpxFile;
-	private GPXUtilities.TrkSegment trkSegment;
+	private GPXFile gpxFile;
+	private TrkSegment trkSegment;
 	private QuadRect rect;
 	private ActionType actionType;
 
-	public NewGpxData(GPXUtilities.GPXFile gpxFile, QuadRect rect, ActionType actionType, GPXUtilities.TrkSegment trkSegment) {
+	public NewGpxData(GPXFile gpxFile, QuadRect rect, ActionType actionType, TrkSegment trkSegment) {
 		this.gpxFile = gpxFile;
 		this.rect = rect;
 		this.actionType = actionType;
 		this.trkSegment = trkSegment;
 	}
 
-	public GPXUtilities.GPXFile getGpxFile() {
+	public GPXFile getGpxFile() {
 		return gpxFile;
 	}
 
@@ -36,7 +37,7 @@ public class NewGpxData {
 		return actionType;
 	}
 
-	public GPXUtilities.TrkSegment getTrkSegment() {
+	public TrkSegment getTrkSegment() {
 		return trkSegment;
 	}
 }

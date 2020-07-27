@@ -1275,6 +1275,7 @@ public class MapInfoWidgetsFactory {
 		public boolean updateInfo() {
 			boolean visible = settings.SHOW_COORDINATES_WIDGET.get() && map.getContextMenu().shouldShowTopControls()
 					&& map.getMapRouteInfoMenu().shouldShowTopControls() && !map.isTopToolbarActive()
+					&& !map.getMapLayers().getGpxLayer().isInTrackAppearanceMode()
 					&& !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible;
 
 			updateVisibility(visible);

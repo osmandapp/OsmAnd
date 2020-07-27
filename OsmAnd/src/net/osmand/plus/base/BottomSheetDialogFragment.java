@@ -48,7 +48,7 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 	public abstract View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
 	@Override
-	public void onAttach(Context context) {
+	public void onAttach(@NonNull Context context) {
 		super.onAttach(context);
 		if (context instanceof OnDialogFragmentResultListener) {
 			dialogFragmentResultListener = (OnDialogFragmentResultListener) context;
@@ -82,10 +82,10 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 	}
 
 	@Nullable
-	protected Drawable getIcon(@DrawableRes int drawableRes, @ColorRes int color) {
+	protected Drawable getIcon(@DrawableRes int drawableRes, @ColorRes int colorRes) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			return app.getUIUtilities().getIcon(drawableRes, color);
+			return app.getUIUtilities().getIcon(drawableRes, colorRes);
 		} else {
 			return null;
 		}
