@@ -31,11 +31,11 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetState;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.AlarmWidget;
-import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.BearingWidgetState;
-import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.LanesControl;
-import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.RulerWidget;
-import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.TimeControlWidgetState;
+import net.osmand.plus.views.mapwidgets.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.BearingWidgetState;
+import net.osmand.plus.views.mapwidgets.LanesControl;
+import net.osmand.plus.views.mapwidgets.RulerWidget;
+import net.osmand.plus.views.mapwidgets.TimeControlWidgetState;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
