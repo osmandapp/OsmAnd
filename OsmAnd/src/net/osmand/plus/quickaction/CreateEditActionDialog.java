@@ -31,6 +31,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.osmedit.AddPOIAction;
 
 import java.util.List;
 
@@ -232,6 +233,10 @@ public class CreateEditActionDialog extends DialogFragment
             @Override
             public void onClick(View view) {
 
+                if (action instanceof AddPOIAction) {
+                    saveFirstTagWithEmptyValue();
+                }
+
                 if (action.fillParams(((ViewGroup) root.findViewById(R.id.container)).getChildAt(0), (MapActivity) getActivity())) {
 
                     if (quickActionRegistry.isNameUnique(action, getContext())) {
@@ -271,6 +276,10 @@ public class CreateEditActionDialog extends DialogFragment
 
                     Toast.makeText(getContext(), R.string.quick_action_empty_param_error, Toast.LENGTH_SHORT).show();
                 }
+            }
+
+            private void saveFirstTagWithEmptyValue() {
+                ((ViewGroup) root.findViewById(R.id.container)).getChildAt(0).requestFocus();
             }
         });
     }

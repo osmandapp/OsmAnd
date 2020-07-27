@@ -66,7 +66,7 @@
     <string name="poi_bed">Loja de roupa de cama</string>
     <string name="poi_boutique">Butique</string>
     <string name="poi_carpet">Loja de tapetes</string>
-    <string name="poi_charity">Brechó beneficente</string>
+    <string name="poi_charity">Loja de caridade</string>
     <string name="poi_chemist">Drogaria</string>
     <string name="poi_clothes">Loja de roupas</string>
     <string name="poi_clothes_children">Vestuário infantil</string>
@@ -1171,7 +1171,7 @@
     <string name="poi_pump_powered">Elétrica</string>
     <string name="poi_pump_no">Sem bomba</string>
     <string name="poi_water_characteristic_mineral">Mineral</string>
-    <string name="poi_water_characteristic_mud">Característica d\'água: barrenta</string>
+    <string name="poi_water_characteristic_mud">Lama</string>
     <string name="poi_water_characteristic_sulfuric">Sulfurosa</string>
     <string name="poi_water_point">Ponto de água</string>
     <string name="poi_cooling_tower">Torre de resfriamento</string>
@@ -1881,7 +1881,7 @@
     <string name="poi_fuel_100ll">Combustível 100LL</string>
     <string name="poi_fuel_autogas">Autogás (GPL)</string>
     <string name="poi_fuel_jeta1">Combustível Jet A-1</string>
-    <string name="poi_fuel_adblue">Combustível AdBlue</string>
+    <string name="poi_fuel_adblue">Fluido de escape diesel</string>
     <string name="poi_crop_grass">Cultivo: grama</string>
     <string name="poi_crop_corn">Cultivo: milho</string>
     <string name="poi_crop_cereal">Cultivo: cereais</string>

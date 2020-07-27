@@ -626,7 +626,7 @@
     <string name="poi_nature_reserve">Заповедник</string>
     <string name="poi_strait">Пролив</string>
     <string name="poi_island">Остров</string>
-    <string name="poi_islet">Остров (небольшой)</string>
+    <string name="poi_islet">Островок</string>
     <string name="poi_anchorage">Якорная стоянка</string>
     <string name="poi_anchor_berth">Якорный причал</string>
     <string name="poi_beacon">Бакен</string>

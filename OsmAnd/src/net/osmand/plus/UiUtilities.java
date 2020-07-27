@@ -184,7 +184,7 @@ public class UiUtilities {
 		return tintDrawable(AppCompatResources.getDrawable(context, resId), color);
 	}
 
-	public static Drawable tintDrawable(Drawable drawable, int color) {
+	public static Drawable tintDrawable(Drawable drawable, @ColorInt int color) {
 		Drawable coloredDrawable = null;
 		if (drawable != null) {
 			coloredDrawable = DrawableCompat.wrap(drawable);
