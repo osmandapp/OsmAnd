@@ -44,7 +44,6 @@ import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
@@ -60,6 +59,9 @@ import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapControlsLayer;
+import net.osmand.plus.views.MapControlsLayer.MapHudButton;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
 import net.osmand.util.Algorithms;
@@ -107,6 +109,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	private boolean publicTransportMode;
 	private boolean needAdjustMap;
+
+	private MapHudButton mapZoomIn;
+	private MapHudButton mapZoomOut;
 
 	@Nullable
 	@Override
@@ -242,6 +247,18 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+			mapControlsLayer.removeHudButton(mapZoomIn);
+			mapControlsLayer.removeHudButton(mapZoomOut);
+		}
+	}
+
+	@Override
 	public int getStatusBarColorId() {
 		View view = getView();
 		View solidToolbarView = this.solidToolbarView;
@@ -345,30 +362,26 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	private void buildZoomButtons(@NonNull View view) {
-		OsmandApplication app = requireMyApplication();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
 		// Zoom buttons
 		View zoomButtonsView = view.findViewById(R.id.map_hud_controls);
 		this.zoomButtonsView = zoomButtonsView;
-		ImageButton zoomInButtonView = (ImageButton) view.findViewById(R.id.map_zoom_in_button);
-		ImageButton zoomOutButtonView = (ImageButton) view.findViewById(R.id.map_zoom_out_button);
-		ImageButton myLocButtonView = (ImageButton) view.findViewById(R.id.map_my_location_button);
+
+		ImageButton zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
+		ImageButton zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
+
+		OsmandMapTileView mapTileView = mapActivity.getMapView();
+		View.OnLongClickListener longClickListener = MapControlsLayer.getOnClickMagnifierListener(mapTileView);
+		MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+
+		mapZoomIn = mapControlsLayer.createZoomInButton(zoomInButtonView, longClickListener);
+		mapZoomOut = mapControlsLayer.createZoomOutButton(zoomOutButtonView, longClickListener);
+
+		ImageButton myLocButtonView = view.findViewById(R.id.map_my_location_button);
 		this.myLocButtonView = myLocButtonView;
-		AndroidUtils.updateImageButton(app, zoomInButtonView, R.drawable.ic_zoom_in, R.drawable.ic_zoom_in,
-				R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-		AndroidUtils.updateImageButton(app, zoomOutButtonView, R.drawable.ic_zoom_out, R.drawable.ic_zoom_out,
-				R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-		zoomInButtonView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				doZoomIn();
-			}
-		});
-		zoomOutButtonView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				doZoomOut();
-			}
-		});
 
 		myLocButtonView.setOnClickListener(new OnClickListener() {
 			@Override
@@ -379,7 +392,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 					} else {
 						ActivityCompat.requestPermissions(mapActivity,
-								new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+								new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 								OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
 					}
 				}
@@ -417,25 +430,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			if (app.accessibilityEnabled()) {
 				myLocButtonView.setClickable(enabled && !tracked && app.getRoutingHelper().isFollowingMode());
 			}
-		}
-	}
-
-	public void doZoomIn() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			OsmandMapTileView map = mapActivity.getMapView();
-			if (map.isZooming() && map.hasCustomMapRatio()) {
-				mapActivity.changeZoom(2, System.currentTimeMillis());
-			} else {
-				mapActivity.changeZoom(1, System.currentTimeMillis());
-			}
-		}
-	}
-
-	public void doZoomOut() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.changeZoom(-1, System.currentTimeMillis());
 		}
 	}
 

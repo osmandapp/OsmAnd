@@ -587,29 +587,21 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void initZooms() {
-		final OsmandMapTileView view = mapActivity.getMapView();
+		OsmandMapTileView view = mapActivity.getMapView();
+		View.OnLongClickListener longClickListener = MapControlsLayer.getOnClickMagnifierListener(view);
+
 		View zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
-		mapZoomIn = createHudButton(zoomInButton, R.drawable.ic_zoom_in, ZOOM_IN_HUD_ID).setRoundTransparent();
-		controls.add(mapZoomIn);
-		zoomInButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (mapActivity.getContextMenu().zoomInPressed()) {
-					return;
-				}
-				if (view.isZooming()) {
-					mapActivity.changeZoom(2, System.currentTimeMillis());
-				} else {
-					mapActivity.changeZoom(1, System.currentTimeMillis());
-				}
-				lastZoom = System.currentTimeMillis();
-			}
-		});
-		final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
-		zoomInButton.setOnLongClickListener(listener);
 		View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
-		mapZoomOut = createHudButton(zoomOutButton, R.drawable.ic_zoom_out, ZOOM_OUT_HUD_ID).setRoundTransparent();
-		controls.add(mapZoomOut);
+
+		mapZoomIn = createZoomInButton(zoomInButton, longClickListener);
+		mapZoomOut = createZoomOutButton(zoomOutButton, longClickListener);
+	}
+
+	public MapHudButton createZoomOutButton(View zoomOutButton, View.OnLongClickListener longClickListener) {
+		MapHudButton mapZoomOutButton = createHudButton(zoomOutButton, R.drawable.ic_zoom_out, ZOOM_OUT_HUD_ID);
+		mapZoomOutButton.setRoundTransparent();
+
+		zoomOutButton.setOnLongClickListener(longClickListener);
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -620,7 +612,37 @@ public class MapControlsLayer extends OsmandMapLayer {
 				lastZoom = System.currentTimeMillis();
 			}
 		});
-		zoomOutButton.setOnLongClickListener(listener);
+		controls.add(mapZoomOutButton);
+
+		return mapZoomOutButton;
+	}
+
+	public MapHudButton createZoomInButton(View zoomInButton, View.OnLongClickListener longClickListener) {
+		MapHudButton mapZoomInButton = createHudButton(zoomInButton, R.drawable.ic_zoom_in, ZOOM_IN_HUD_ID);
+		mapZoomInButton.setRoundTransparent();
+
+		zoomInButton.setOnLongClickListener(longClickListener);
+		zoomInButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mapActivity.getContextMenu().zoomInPressed()) {
+					return;
+				}
+				if (mapActivity.getMapView().isZooming()) {
+					mapActivity.changeZoom(2, System.currentTimeMillis());
+				} else {
+					mapActivity.changeZoom(1, System.currentTimeMillis());
+				}
+				lastZoom = System.currentTimeMillis();
+			}
+		});
+		controls.add(mapZoomInButton);
+
+		return mapZoomInButton;
+	}
+
+	public void removeHudButton(MapHudButton hudButton) {
+		controls.remove(hudButton);
 	}
 
 	public void showMapControlsIfHidden() {
@@ -984,30 +1006,30 @@ public class MapControlsLayer extends OsmandMapLayer {
 		transparencySetting = null;
 	}
 
-	private class MapHudButton {
-		View iv;
-		int bgDark;
-		int bgLight;
-		int resId;
-		int resLightId;
-		int resDarkId;
-		int resClrLight = R.color.map_button_icon_color_light;
-		int resClrDark = R.color.map_button_icon_color_dark;
-		String id;
-		boolean flipIconForRtl;
+	public class MapHudButton {
 
-		boolean nightMode = false;
-		boolean f = true;
-		boolean compass;
-		boolean compassOutside;
-		boolean forceHideCompass;
-		ViewPropertyAnimatorCompat hideAnimator;
+		private View iv;
+		private int bgDark;
+		private int bgLight;
+		private int resId;
+		private int resLightId;
+		private int resDarkId;
+		private int resClrLight = R.color.map_button_icon_color_light;
+		private int resClrDark = R.color.map_button_icon_color_dark;
+		private String id;
+		private boolean flipIconForRtl;
+
+		private boolean nightMode = false;
+		private boolean f = true;
+		private boolean compass;
+		private boolean compassOutside;
+		private boolean forceHideCompass;
+		private ViewPropertyAnimatorCompat hideAnimator;
 
 		public MapHudButton setRoundTransparent() {
 			setBg(R.drawable.btn_circle_trans, R.drawable.btn_circle_night);
 			return this;
 		}
-
 
 		public MapHudButton setBg(int dayBg, int nightBg) {
 			if (bgDark == nightBg && dayBg == bgLight) {
