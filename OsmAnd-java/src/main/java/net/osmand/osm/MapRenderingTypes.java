@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -162,6 +163,14 @@ public abstract class MapRenderingTypes {
 		return mt;
 	}
 	
+	protected MapRulType checkOrCreateAdditional(String tag, String value) {
+		MapRulType mt = types.get(constructRuleKey(tag, value));
+		if (mt == null) {
+			mt = registerRuleType(MapRulType.createAdditional(tag, value));
+		}
+		return mt;
+	}
+	
 	protected MapRulType getRuleType(String tag, String val, boolean poi, boolean map) {
 		Map<String, MapRulType> types = getEncodingRuleTypes();
 		tag = lc(tag);
@@ -281,6 +290,48 @@ public abstract class MapRenderingTypes {
 				mrt.map = rtype.map;
 				registerMapRule(parser, mrt);
 			}
+			
+			String groupSort = parser.getAttributeValue("", "relationGroupSort");
+			if (groupSort != null) {
+				rtype.relationSortTags = new LinkedHashMap<String, List<String>>();
+				String[] ls = groupSort.split(";");
+				for(String l : ls) {
+					int sp = l.indexOf('=');
+					String key = l;
+					String[] values = new String[0];
+					if(sp >= 0) {
+						key = l.substring(0, sp);
+						values = l.substring(sp +1).split(",");
+					}
+					rtype.relationSortTags.put(key, Arrays.asList(values));
+				}
+			}
+			
+			String additionalTags = parser.getAttributeValue("", "additionalTags");
+			String additionalPrefix = parser.getAttributeValue("", "additionalPrefix");
+			if (additionalTags != null) {
+				rtype.additionalTags = new LinkedHashMap<String, String>();
+				for(String tg : additionalTags.split(",")) {
+					String targetTag = tg;
+					if(!Algorithms.isEmpty(additionalPrefix)) {
+						targetTag = additionalPrefix + tg;
+					}
+					rtype.additionalTags.put(tg, targetTag);
+				}
+			}
+			String relationGroupAdditionalTags = parser.getAttributeValue("", "relationGroupAdditionalTags");
+			String relationAdditionalPrefix = parser.getAttributeValue("", "relationGroupAdditionalPrefix");
+			if (relationGroupAdditionalTags != null) {
+				rtype.relationGroupAdditionalTags = new LinkedHashMap<String, String>();
+				for(String tg : relationGroupAdditionalTags.split(",")) {
+					String targetTag = tg;
+					if(!Algorithms.isEmpty(relationAdditionalPrefix)) {
+						targetTag = relationAdditionalPrefix + tg;
+					}
+					rtype.relationGroupAdditionalTags.put(tg, targetTag);
+				}
+			}
+			
 			String nmts = parser.getAttributeValue("", "nameTags");
 			if(nmts != null) {
 				String namePrefix = parser.getAttributeValue("", "namePrefix"); //$NON-NLS-1$
@@ -463,8 +514,13 @@ public abstract class MapRenderingTypes {
 	}
 	
 	public static class MapRulType {
+		// relation part
 		protected Map<String, String> relationNames;
+		protected Map<String, String> additionalTags;
 		protected Map<String, String> relationGroupNameTags;
+		protected Map<String, String> relationGroupAdditionalTags;
+		protected Map<String, List<String>> relationSortTags;
+		
 		protected TagValuePattern tagValuePattern;
 		protected boolean additional;
 		protected boolean additionalText;
