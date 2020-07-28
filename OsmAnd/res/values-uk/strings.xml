@@ -270,7 +270,9 @@
     <string name="gpx_option_reverse_route">Зворотній напрямок GPX</string>
     <string name="gpx_option_destination_point">Використовувати поточний пункт призначення</string>
     <string name="gpx_option_from_start_point">Пройдіть по усьому треку</string>
-    <string name="switch_to_vector_map_to_see">Для цього регіону доступні оффлайн векторні мапи\n\t\n\tДля їх використання виберіть пункт меню \'Налаштування Мапи\' → \'Джерело мапи…\' → \'Локальні векторні мапи\'.</string>
+    <string name="switch_to_vector_map_to_see">Для цього регіону доступні автономні векторні мапи
+\n\t
+\n\tДля користування ними виберіть пункт меню \'Налаштування Мапи\' → \'Джерело мапи…\' → \'Локальні векторні мапи\'.</string>
     <string name="choose_audio_stream">Вивід голосових вказівок</string>
     <string name="choose_audio_stream_descr">Виберіть канал для голосових вказівок.</string>
     <string name="voice_stream_voice_call">Голосовий канал (перервати звук з динаміків автомобіля)</string>
@@ -1145,7 +1147,8 @@
     <string name="gpx_selection_segment_title">Відрізок</string>
     <string name="gpx_selection_number_of_points">%1$s точок</string>
     <string name="gpx_selection_point">Точка %1$s</string>
-    <string name="gpx_selection_route_points">%1$s ↵\nМаршрутних точок %2$s</string>
+    <string name="gpx_selection_route_points">%1$s↵
+\nМаршрутних точок %2$s</string>
     <string name="gpx_selection_points">%1$s
 \nТочок</string>
     <string name="gpx_selection_track">%1$s
@@ -3236,7 +3239,7 @@
     <string name="apply_to_all_profiles">Застосувати до всіх профілів</string>
     <string name="start_up_message_pref">Початкове повідомлення</string>
     <string name="analytics_pref_title">Аналітика</string>
-    <string name="units_and_formats">Одиниця вимірювання та формати</string>
+    <string name="units_and_formats">Одиниці виміру й формати</string>
     <string name="appearance">Зовнішній вигляд</string>
     <string name="map_look_descr">Вигляд мапи</string>
     <string name="map_look">Вигляд мапи</string>
@@ -3570,7 +3573,7 @@
 \nЦе може зайняти деякий час.</string>
     <string name="items_added">Елементи додано</string>
     <string name="shared_string_import_complete">Імпорт завершено</string>
-    <string name="import_complete_description">Усі дані з %1$s імпортовано, ви можете користуватися іншими кнопками, щоби відкрити потрібну частину програми для керування нею.</string>
+    <string name="import_complete_description">Усі дані з %1$s імпортовано, ви можете користуватися іншими кнопками, щоб відкрити потрібну частину програми для керування нею.</string>
     <string name="recalculate_route_distance_promo">Маршрут буде перераховано, якщо відстань від маршруту до поточного місця розташування перевищує вибране значення.</string>
     <string name="select_distance_route_will_recalc">Виберіть відстань, після якого маршрут буде перераховано.</string>
     <string name="recalculate_route_in_deviation">Перерахунок маршруту у випадку відхилення</string>
@@ -3614,9 +3617,9 @@
     <string name="shared_string_language">Мова</string>
     <string name="shared_string_all_languages">Усі мови</string>
     <string name="wiki_menu_download_descr">Для перегляду POI Вікіпедії на мапі потрібні додаткові мапи.</string>
-    <string name="ui_customization_description">Встановлення кількості елементів меню \"Скринька\", \"Налаштувати мапу\" та \"Контекстне меню\". 
-\n 
-\nВимкніть непотрібні втулки, щоби приховати всі їхні елементи керування %1$s.</string>
+    <string name="ui_customization_description">Встановлення кількості елементів меню \"Скринька\", \"Налаштувати мапу\" та \"Контекстне меню\".
+\n
+\nВимкніть непотрібні втулки, щоб приховати всі їхні елементи керування %1$s.</string>
     <string name="ui_customization_short_descr">Елементи скриньки, контекстне меню</string>
     <string name="ui_customization">Налаштування інтерфейсу</string>
     <string name="shared_string_drawer">Скринька</string>
@@ -3832,4 +3835,5 @@
     <string name="plan_route_open_existing_track">Переглянути наявний трек</string>
     <string name="plan_route_create_new_route">Створити новий маршрут</string>
     <string name="plan_route_select_track_file_for_open">Оберіть файл з треком для перегляду.</string>
+    <string name="shared_string_done">Готово</string>
 </resources>
