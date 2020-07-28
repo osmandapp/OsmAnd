@@ -2161,7 +2161,7 @@
     <string name="traffic_warning_border_control">Border control</string>
     <string name="traffic_warning_payment">Toll booth</string>
     <string name="traffic_warning_stop">Stop sign</string>
-    <string name="traffic_warning_calming">Traffic calming</string>
+    <string name="traffic_warning_calming">Speed bump</string>
     <string name="traffic_warning_speed_camera">Speed camera</string>
     <string name="traffic_warning">Traffic warning</string>
     <string name="speak_favorites">Favorites nearby</string>
