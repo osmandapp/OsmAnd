@@ -152,7 +152,7 @@ public class TrackDetailsMenu {
 					float highestVisibleX = chart.getHighestVisibleX();
 					float nextVisibleX = lowestVisibleX + (pos - gpxItem.chartHighlightPos);
 					float oneFourthDiff = (highestVisibleX - lowestVisibleX) / 4f;
-					if (pos - oneFourthDiff > 0) {
+					if (pos > oneFourthDiff) {
 						nextVisibleX = pos - oneFourthDiff;
 					}
 					gpxItem.chartHighlightPos = pos;
