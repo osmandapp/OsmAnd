@@ -299,7 +299,7 @@
     <string name="traffic_warning_border_control">Alfândega</string>
     <string name="traffic_warning_payment">Pedágio</string>
     <string name="traffic_warning_stop">Placa de pare</string>
-    <string name="traffic_warning_calming">Moderador de tráfego</string>
+    <string name="traffic_warning_calming">Lombada</string>
     <string name="traffic_warning">Aviso de tráfego</string>
     <string name="speak_poi">POIs próximos</string>
     <string name="way_alarms">Moderadores de tráfego</string>
