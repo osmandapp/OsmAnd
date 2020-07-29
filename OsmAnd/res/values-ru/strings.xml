@@ -2366,7 +2366,7 @@
     <string name="edit_line">Редактировать линию</string>
     <string name="add_point_before">Добавить точку перед</string>
     <string name="add_point_after">Добавить точку после</string>
-    <string name="shared_string_options">Опции</string>
+    <string name="shared_string_options">Функции</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd соединит точки с маршрутом для выбранного профиля.</string>
     <string name="measurement_tool_save_as_new_track_descr">Сохранить точки, как точки маршрута или как линию.</string>
     <string name="choose_navigation_type">Выберите профиль навигации</string>
