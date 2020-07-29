@@ -130,7 +130,11 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
 			trackDrawInfo = new TrackDrawInfo(savedInstanceState);
-			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(trackDrawInfo.getFilePath());
+			if (trackDrawInfo.isCurrentRecording()) {
+				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+			} else {
+				selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(trackDrawInfo.getFilePath());
+			}
 			if (!selectedGpxFile.isShowCurrentTrack()) {
 				gpxDataItem = app.getGpxDbHelper().getItem(new File(trackDrawInfo.getFilePath()));
 			}

@@ -29,7 +29,7 @@ public class TrackDrawInfo {
 	private double splitInterval;
 	private boolean joinSegments;
 	private boolean showArrows;
-	private boolean showStartFinish;
+	private boolean showStartFinish = true;
 	private boolean currentRecording;
 
 	public TrackDrawInfo(boolean currentRecording) {
