@@ -2781,7 +2781,7 @@
     <string name="shared_string_wifi_only">Лише через WiFi</string>
     <string name="select_travel_book">Вибрати щоденник подорожей</string>
     <string name="shared_string_travel_book">Щоденник подорожей</string>
-    <string name="online_webpage_warning">Сторінка доступна лише в мережі. Відкрити в браузері\?</string>
+    <string name="online_webpage_warning">Сторінка доступна лише в мережі. Відкрити у браузері\?</string>
     <string name="images_cache">Кеш зображень</string>
     <string name="delete_search_history">Вилучити історію пошуку</string>
     <string name="download_images">Завантаження зображень</string>
