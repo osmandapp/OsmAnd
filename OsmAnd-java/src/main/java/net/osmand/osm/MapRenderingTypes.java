@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.osmand.PlatformUtil;
-import net.osmand.osm.MapRenderingTypes.MapRulType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -159,6 +158,16 @@ public abstract class MapRenderingTypes {
 		MapRulType mt = types.get(constructRuleKey(targetTag, null));
 		if (mt == null) {
 			mt = registerRuleType(MapRulType.createText(targetTag));
+		}
+		return mt;
+	}
+	
+	protected MapRulType checkOrMainRule(String tag, String value, int minzoom) {
+		MapRulType mt = types.get(constructRuleKey(tag, value));
+		if (mt == null) {
+			mt = registerRuleType(MapRulType.createMainEntity(tag, value));
+			mt.minzoom = minzoom;
+			mt.maxzoom = 21;
 		}
 		return mt;
 	}
@@ -319,16 +328,12 @@ public abstract class MapRenderingTypes {
 					rtype.additionalTags.put(tg, targetTag);
 				}
 			}
+			rtype.relationGroupPrefix = parser.getAttributeValue("", "relationGroupPrefix"); //$NON-NLS-1$
 			String relationGroupAdditionalTags = parser.getAttributeValue("", "relationGroupAdditionalTags");
-			String relationAdditionalPrefix = parser.getAttributeValue("", "relationGroupAdditionalPrefix");
 			if (relationGroupAdditionalTags != null) {
 				rtype.relationGroupAdditionalTags = new LinkedHashMap<String, String>();
 				for(String tg : relationGroupAdditionalTags.split(",")) {
-					String targetTag = tg;
-					if(!Algorithms.isEmpty(relationAdditionalPrefix)) {
-						targetTag = relationAdditionalPrefix + tg;
-					}
-					rtype.relationGroupAdditionalTags.put(tg, targetTag);
+					rtype.relationGroupAdditionalTags.put(tg, tg);
 				}
 			}
 			
@@ -343,12 +348,8 @@ public abstract class MapRenderingTypes {
 			}
 			String rnmts = parser.getAttributeValue("", "relationGroupNameTags");
 			if (rnmts != null) {
-				String relationGroupNamePrefix = parser.getAttributeValue("", "relationGroupNamePrefix"); //$NON-NLS-1$
-				if (relationGroupNamePrefix == null) {
-					relationGroupNamePrefix = "";
-				}
 				rtype.relationGroupNameTags = new LinkedHashMap<String, String>();
-				putNameTags(rnmts, rtype.relationGroupNameTags, relationGroupNamePrefix);
+				putNameTags(rnmts, rtype.relationGroupNameTags, "");
 			}
 		}
 		return rtype;
@@ -517,9 +518,10 @@ public abstract class MapRenderingTypes {
 		// relation part
 		protected Map<String, String> relationNames;
 		protected Map<String, String> additionalTags;
+		protected Map<String, List<String>> relationSortTags;
+		protected String relationGroupPrefix;
 		protected Map<String, String> relationGroupNameTags;
 		protected Map<String, String> relationGroupAdditionalTags;
-		protected Map<String, List<String>> relationSortTags;
 		
 		protected TagValuePattern tagValuePattern;
 		protected boolean additional;
