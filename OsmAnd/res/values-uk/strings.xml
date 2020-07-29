@@ -1025,7 +1025,7 @@
     <string name="av_camera_focus_edof">Збільшення глибини різкості</string>
     <string name="av_camera_focus_infinity">Фокус встановлюється на нескінченність</string>
     <string name="av_photo_play_sound">Відтворювати звук затвору камери</string>
-    <string name="av_photo_play_sound_descr">Програвання звуку затвора камери.</string>
+    <string name="av_photo_play_sound_descr">Відтворення звуку затвора камери.</string>
     <string name="osmand_net_previously_installed">Всі локальні дані зі старого встановленого застосунку будуть підтримуватися новим, але Закладки потрібно експортувати зі старого застосунку та імпортувати в новий.</string>
     <string name="speak_speed_limit">Обмеження швидкості</string>
     <string name="speak_cameras">Камери детектування швидкості</string>
@@ -1273,7 +1273,7 @@
     <string name="auto_zoom_farthest">Дрібніше</string>
     <string name="route_descr_destination">Місце призначення</string>
     <string name="interrupt_music_descr">Голосові підказки призупиняють відтворення музики.</string>
-    <string name="interrupt_music">Призупинити музику</string>
+    <string name="interrupt_music">Призупиняти музику</string>
     <string name="share_route_as_gpx">Поділитись маршрутом за допомоги файлу GPX</string>
     <string name="share_route_subject">Маршрут наданий через OsmAnd</string>
     <string name="arrival_distance">Оголошення про прибуття</string>
@@ -1602,7 +1602,7 @@
     <string name="download_wikipedia_files">Завантажити додаткові дані з Вікіпедії (%1$s Мб)\?</string>
     <string name="gps_network_not_enabled">Служба визначення місцезнаходження вимкнена. Увімкнути?</string>
     <string name="disable_recording_once_app_killed">Запобігти самостійному логуваню</string>
-    <string name="disable_recording_once_app_killed_descrp">Логування GPX буде призупинено коли застосунок буде закрито (через недавні додатки). (Фоновий індикатор OsmAnd зникне з панелі сповіщень Android\'а)</string>
+    <string name="disable_recording_once_app_killed_descrp">Запис GPX буде зупинено після припинення роботи застосунку через меню з переліком нещодавно запущених застосунків. (Індикатор, який інформує про роботу OsmAnd в фоні зникне з панелі сповіщень в Android)</string>
     <string name="shared_string_import2osmand">Імпортувати до OsmAnd</string>
     <string name="read_full_article">Читати повну статтю (мережево)</string>
     <string name="local_indexes_cat_wiki">Вікіпедія</string>
@@ -2463,7 +2463,7 @@
     <string name="min_max">Мін/макс</string>
     <string name="rendering_value_translucent_pink_name">Напівпрозорий рожевий</string>
     <string name="quick_action_resume_pause_navigation">Призупинити/відновити навігацію</string>
-    <string name="quick_action_resume_pause_navigation_descr">Кнопка для призупинення чм відновлення навігації.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Кнопка для призупинення чи відновлення навігації.</string>
     <string name="quick_action_show_navigation_finish_dialog">Показати діалог завершення навігації</string>
     <string name="quick_action_start_stop_navigation">Почати/зупинити навігацію</string>
     <string name="quick_action_start_stop_navigation_descr">Натисніть цю кнопку, щоб почати або закінчити навігацію.</string>
@@ -3757,7 +3757,7 @@
 \nОдин тиждень - 10 080 хвилин. 
 \nОдин місяць - 43 829 хвилин.</string>
     <string name="tiles_storage_descr">Виберіть спосіб зберігання завантажених плиток.</string>
-    <string name="default_screen_timeout">Усталений час очікування екрану</string>
+    <string name="default_screen_timeout">Типовий час до вимкнення екрану</string>
     <string name="export_import_quick_actions_with_profiles_promo">Ви можете експортувати або імпортувати швидкі дії з профілями застосунку.</string>
     <string name="shared_string_delete_all_q">Видалити все\?</string>
     <string name="delete_all_actions_message_q">Ви дійсно бажаєте безповоротно видалити %d швидких дій\?</string>
@@ -3771,15 +3771,15 @@
     <string name="height_limit_description">Вкажіть висоту автомобіля, для великих транспортних засобів можуть застосовуватися обмеження на деяких маршрутах.</string>
     <string name="turn_screen_on_power_button_disabled">Вимкнено. Потребує \'Тримати екран увімкненим\' у розділі \'Час очікування після пробудження\'.</string>
     <string name="add_online_source">Додати мережеве джерело</string>
-    <string name="clear_tiles_warning">Застосування цих змін очистить кешовані дані для цього джерела плиток</string>
+    <string name="clear_tiles_warning">Застосування цих змін очистить дані, збережені з цього джерела тайлів</string>
     <string name="vessel_height_warning_link">Встановити висоту судна</string>
     <string name="vessel_height_warning">Ви можете встановити висоту судна, щоб уникнути низьких мостів. Майте на увазі, якщо міст рухомий, використовуватиметься його висота у відкритому стані.</string>
     <string name="vessel_height_limit_description">Встановіть висоту судна, щоб уникнути низьких мостів. Майте на увазі, якщо міст рухомий, використовуватиметься його висота у відкритому стані.</string>
     <string name="vessel_width_limit_description">Встановіть ширину судна, щоб уникнути вузьких мостів</string>
     <string name="quick_action_showhide_mapillary_title">Увімкнути/вимкнути Mapillary</string>
     <string name="quick_action_mapillary_hide">Вимкнути Mapillary</string>
-    <string name="quick_action_mapillary_show">Увімкнення шару Mapillary</string>
-    <string name="quick_action_showhide_mapillary_descr">Перемикач увімкнення або вимкнення шару Mapillary на мапі.</string>
+    <string name="quick_action_mapillary_show">Показати шар Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Перемикач показує/приховує шар Mapillary на мапі.</string>
     <string name="uninstall_speed_cameras">Видалити камери контролю швидкості</string>
     <string name="shared_string_legal">Законодавство</string>
     <string name="speed_camera_pois">POI камер контролю швидкості</string>
@@ -3795,7 +3795,7 @@
     <string name="speed_cameras_alert">Попередження про камери контролю швидкості в деяких країнах заборонено законом.</string>
     <string name="shared_string_bearing">Орієнтація</string>
     <string name="item_deleted">%1$s видалено</string>
-    <string name="speed_cameras_restart_descr">Потрібен перезапуск для повного видалення даних камер контролю швидкості.</string>
+    <string name="speed_cameras_restart_descr">Для вилучення даних про камери контролю швидкості потрібен перезапуск.</string>
     <string name="shared_string_uninstall_and_restart">Видалити та перезапустити</string>
     <string name="routing_attr_length_description">Вкажіть довжину транспортного засобу для розрахунку маршрутів.</string>
     <string name="routing_attr_length_name">Обмеження довжини</string>
@@ -3816,4 +3816,20 @@
     <string name="app_mode_go_cart">у мапу</string>
     <string name="osm_edit_closed_note">Закрита нотатка OSM</string>
     <string name="shared_string_custom">Своє</string>
+    <string name="add_hidden_group_info">Додана точка не буде показуватись на мапі, вся обрана група є прихованою, ви можете побачити її в \"%s\".</string>
+    <string name="set_working_days_to_continue">Зазначте робочі дні, щоб продовжити</string>
+    <string name="route_between_points">Маршрут між точками</string>
+    <string name="plan_a_route">Планування маршруту</string>
+    <string name="add_to_a_track">Додати до треку</string>
+    <string name="track_show_start_finish_icons">Показувати старт та фініш</string>
+    <string name="select_track_width">Встановити ширину</string>
+    <string name="gpx_split_interval_descr">Оберіть інтервал показу міток часу або відстані для показу поверх треку.</string>
+    <string name="gpx_split_interval_none_descr">Оберіть власний варіант поділу: за часом, чи відстанню.</string>
+    <string name="gpx_direction_arrows">Стрілки напрямку</string>
+    <string name="track_coloring_solid">Суцільний</string>
+    <string name="plan_route_last_edited">В останнє змінено</string>
+    <string name="plan_route_import_track">Імпортувати трек</string>
+    <string name="plan_route_open_existing_track">Переглянути наявний трек</string>
+    <string name="plan_route_create_new_route">Створити новий маршрут</string>
+    <string name="plan_route_select_track_file_for_open">Оберіть файл з треком для перегляду.</string>
 </resources>
