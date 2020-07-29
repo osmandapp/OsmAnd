@@ -917,13 +917,11 @@
     <string name="index_srtm_ele">Curvas de nível</string>
     <string name="recording_photo_description">Foto %1$s de %2$s</string>
     <string name="av_def_action_picture">Capture uma foto</string>
-    <string name="osmand_srtm_long_description_1000_chars">Este suplemento disponibiliza \'Curvas de Nível\' e \'Sombras de relevo\', que podem ser aplicadas nos mapas standard do OsmAnd. 
-\nEstas funcionalidades podem ser apreciadas por atletas, caminhantes, e qualquer pessoa interessada na informação de relevo de uma paisagem. 
-\n 
+    <string name="osmand_srtm_long_description_1000_chars">Este suplemento disponibiliza \'Curvas de Nível\' e \'Sombras de relevo\', que podem ser aplicadas nos mapas padrão do OsmAnd.
+\nEstas funcionalidades podem ser apreciadas por atletas, caminhantes e qualquer pessoa interessada na informação de relevo de uma paisagem.
 \n
-\nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no \'Terra\', o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
-    <string name="srtm_plugin_description">Este suplemento disponibiliza \'Curvas de Nível\' e \'Sombras de relevo\', que podem ser aplicadas nos mapas padrão do OsmAnd. 
-\nEstas funcionalidades podem ser apreciadas por atletas, caminhantes, e qualquer pessoa interessada na informação de relevo de uma paisagem. 
+\n Os dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no \'Terra\', o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
+    <string name="srtm_plugin_description">Este suplemento disponibiliza \'Curvas de Nível\' e \'Sombras de relevo\', que podem ser aplicadas nos mapas padrão do OsmAnd. Estas funcionalidades podem ser apreciadas por atletas, caminhantes, e qualquer pessoa interessada na informação de relevo de uma paisagem.
 \n
 \nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no \'Terra\', o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
     <string name="srtm_plugin_name">Curvas de nível</string>
@@ -2633,13 +2631,14 @@
 \nOsmAnd+ é a versão paga da aplicação. Ao comprá-lo, está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações. 
 \n 
 \nAlgumas das características principais:</string>
-    <string name="osmand_plus_extended_description_part2">Navegação 
+    <string name="osmand_plus_extended_description_part2">Navegação
 \n• Funciona on-line (rápido) ou off-line (sem custos de roaming quando estiver no estrangeiro)
 \n• Orientação por voz passo a passo (vozes gravadas e sintetizadas)
 \n• Orientação de trajetos opcionais, visualização do nome da rua e tempo estimado de chegada
 \n• Suporta pontos intermediários do seu itinerário
 \n• Correção automática da rota sempre que sair da rota
-\n• Procure lugares por endereço, pelo tipo (por exemplo: restaurante, hotel, posto de gasolina, museu...) ou por coordenadas geográficas</string>
+\n• Procure lugares por endereço, pelo tipo (por exemplo: restaurante, hotel, posto de gasolina, museu...) ou por coordenadas geográficas
+\n</string>
     <string name="osmand_plus_extended_description_part3">Visualização de mapa 
 \n • Veja a sua posição e orientação. 
 \n • Oriente opcionalmente o ecrã de acordo com a bússola ou a direção do seu movimento. 
@@ -3840,4 +3839,10 @@
     <string name="shared_string_custom">Personalizado</string>
     <string name="gpx_direction_arrows">Setas de direção</string>
     <string name="track_coloring_solid">Sólido</string>
+    <string name="plan_route_last_edited">Última edição</string>
+    <string name="plan_route_import_track">Importar trilho</string>
+    <string name="plan_route_open_existing_track">Abrir trilho existente</string>
+    <string name="plan_route_select_track_file_for_open">Selecione um ficheiro de trilho para abrir.</string>
+    <string name="plan_route_create_new_route">Criar rota</string>
+    <string name="shared_string_done">Pronto</string>
 </resources>

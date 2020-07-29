@@ -428,7 +428,8 @@
     <string name="gpx_timemoving">Tempo em movimento: %1$s</string>
     <string name="gpx_selection_number_of_points">%1$s pontos</string>
     <string name="gpx_selection_point">Ponto %1$s</string>
-    <string name="gpx_selection_route_points">%1$s ↵\nPontos de Rota %2$s</string>
+    <string name="gpx_selection_route_points">%1$s↵
+\nPontos de Rota %2$s</string>
     <string name="gpx_selection_points">%1$s↵\nPontos</string>
     <string name="gpx_selection_track">%1$s
 \nTrilha %2$s</string>
@@ -607,8 +608,8 @@
 \n - Sem acesso offline a POIs da Wikipedia 
 \n 
 \n OsmAnd está sendo desenvolvido ativamente e o nosso projeto e seu progresso contínuo depende de contribuições financeiras para o desenvolvimento e teste de novas funcionalidades. Por favor, considere adquirir OsmAnd+, ou financiar novas funcionalidades específicas ou fazer uma doação geral em https://osmand.net.</string>
-    <string name="day_night_info_description">Nascer do Sol: %1$s
-Pôr do Sol: %2$s</string>
+    <string name="day_night_info_description">Nascer do sol: %1$s
+\nPôr do sol: %2$s</string>
     <string name="avoid_unpaved">Sem estradas não pavimentadas</string>
     <string name="bg_service_sleep_mode_off">Ativar\n modo segundo plano</string>
     <string name="show_cameras">Radares</string>
@@ -3819,4 +3820,10 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_custom">Personalizados</string>
     <string name="gpx_direction_arrows">Setas de direção</string>
     <string name="track_coloring_solid">Sólido</string>
+    <string name="plan_route_last_edited">Última edição</string>
+    <string name="plan_route_import_track">Importar trilha</string>
+    <string name="plan_route_open_existing_track">Abrir trilha existente</string>
+    <string name="plan_route_create_new_route">Criar nova rota</string>
+    <string name="plan_route_select_track_file_for_open">Selecione um arquivo de faixa para abrir.</string>
+    <string name="shared_string_done">Concluído</string>
 </resources>

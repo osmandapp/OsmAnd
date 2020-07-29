@@ -3840,4 +3840,10 @@
     <string name="shared_string_custom">התאמה אישית</string>
     <string name="gpx_direction_arrows">חצי כיוון</string>
     <string name="track_coloring_solid">אחיד</string>
+    <string name="plan_route_last_edited">עריכה אחרונה</string>
+    <string name="plan_route_import_track">ייבוא מסלול</string>
+    <string name="plan_route_open_existing_track">פתיחת מסלול קיים</string>
+    <string name="plan_route_create_new_route">יצירת מסלול חדש</string>
+    <string name="plan_route_select_track_file_for_open">נא לבחור קובץ מסלול לפתיחה.</string>
+    <string name="shared_string_done">בוצע</string>
 </resources>
