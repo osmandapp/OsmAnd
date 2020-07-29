@@ -51,6 +51,8 @@ public class EditPoiData {
 			category = type;
 			tagValues.put(POI_TYPE_TAG, "");
 			changedTags.add(POI_TYPE_TAG);
+			removeCurrentTypeTag();
+			currentPoiType=null;
 		}
 	}
 	

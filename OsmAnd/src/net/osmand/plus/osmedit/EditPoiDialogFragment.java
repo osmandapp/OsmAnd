@@ -112,7 +112,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private EditPoiData editPoiData;
 	private EditPoiViewPager viewPager;
 	private AutoCompleteTextView poiTypeEditText;
-	private boolean poiCategoryChanged;
 
 	private OnSaveButtonClickListener onSaveButtonClickListener;
 	private OpenstreetmapUtil mOpenstreetmapUtil;
@@ -299,11 +298,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (!getEditPoiData().isInEdit()) {
-					if (!poiCategoryChanged) {
-						getEditPoiData().updateTypeTag(s.toString(), true);
-					} else {
-						poiCategoryChanged = false;
-					}
+					getEditPoiData().updateTypeTag(s.toString(), true);
 					if (!getMyApplication().isApplicationInitializing()) {
 						PoiCategory category = editPoiData.getPoiCategory();
 						if (category != null) {
@@ -648,7 +643,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	public void setPoiCategory(PoiCategory type) {
-		poiCategoryChanged = true;
 		editPoiData.updateType(type);
 		poiTypeEditText.setText(editPoiData.getPoiTypeString());
 		setAdapterForPoiTypeEditText();
