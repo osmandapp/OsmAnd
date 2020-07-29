@@ -154,10 +154,11 @@ public abstract class MapRenderingTypes {
 		return a;
 	}
 	
-	protected MapRulType checkOrCreateTextRule(String targetTag) {
+	protected MapRulType checkOrCreateTextRule(String targetTag, MapRulType ref) {
 		MapRulType mt = types.get(constructRuleKey(targetTag, null));
 		if (mt == null) {
-			mt = registerRuleType(MapRulType.createText(targetTag));
+			MapRulType ct = MapRulType.createText(targetTag, ref);
+			mt = registerRuleType(ct);
 		}
 		return mt;
 	}
@@ -172,10 +173,11 @@ public abstract class MapRenderingTypes {
 		return mt;
 	}
 	
-	protected MapRulType checkOrCreateAdditional(String tag, String value) {
+	protected MapRulType checkOrCreateAdditional(String tag, String value, MapRulType ref) {
 		MapRulType mt = types.get(constructRuleKey(tag, value));
 		if (mt == null) {
-			mt = registerRuleType(MapRulType.createAdditional(tag, value));
+			MapRulType ct = MapRulType.createAdditional(tag, value, ref);
+			mt = registerRuleType(ct);
 		}
 		return mt;
 	}
@@ -550,6 +552,16 @@ public abstract class MapRenderingTypes {
 		private MapRulType(){
 		}
 		
+		
+		private void copyMetadata(MapRulType ref) {
+			minzoom = ref.minzoom;
+			maxzoom = ref.maxzoom;
+			order = ref.order;
+			category = ref.category;
+			onlyPoint = ref.onlyPoint;
+		}
+
+		
 		public boolean isPOI(){
 			return poi;
 		}
@@ -569,24 +581,37 @@ public abstract class MapRenderingTypes {
 			return rt;
 		}
 		
-		public static MapRulType createText(String tag) {
+		public static MapRulType createText(String tag, MapRulType ref) {
 			MapRulType rt = new MapRulType();
-			rt.additionalText = true;
 			rt.minzoom = 2;
 			rt.maxzoom = 31;
-			rt.tagValuePattern = new TagValuePattern(tag, null); 
+			if (ref != null) {
+				rt.copyMetadata(ref);
+			}
+			rt.additionalText = true;
+			rt.tagValuePattern = new TagValuePattern(tag, null);
 			return rt;
 		}
 		
-		public static MapRulType createAdditional(String tag, String value) {
+		public static MapRulType createAdditional(String tag, String value, MapRulType ref) {
 			MapRulType rt = new MapRulType();
-			rt.additional = true;
 			rt.minzoom = 2;
 			rt.maxzoom = 31;
+			if (ref != null) {
+				rt.copyMetadata(ref);
+			}
+			rt.additional = true;
 			rt.tagValuePattern = new TagValuePattern(tag, value);
 			return rt;
 		}
 
+		public static MapRulType createText(String tag) {
+			return createText(tag, null);
+		}
+		
+		public static MapRulType createAdditional(String tag, String value) {
+			return createAdditional(tag, value, null);
+		}
 
 		public String getTag() {
 			return tagValuePattern.tag;
