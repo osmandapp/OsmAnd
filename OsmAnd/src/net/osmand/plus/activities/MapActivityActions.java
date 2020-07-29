@@ -517,15 +517,10 @@ public class MapActivityActions implements DialogProvider {
 			mapActivity.getRoutingHelper().setGpxParams(params);
 			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
 			if (!ps.isEmpty()) {
-				Location startLoc = ps.get(0);
-				Location finishLoc = ps.get(ps.size() - 1);
 				TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();
+				tg.clearStartPoint(false);
+				Location finishLoc = ps.get(ps.size() - 1);
 				tg.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1);
-				if (startLoc != finishLoc) {
-					tg.setStartPoint(new LatLon(startLoc.getLatitude(), startLoc.getLongitude()), false, null);
-				} else {
-					tg.clearStartPoint(false);
-				}
 			}
 		}
 	}

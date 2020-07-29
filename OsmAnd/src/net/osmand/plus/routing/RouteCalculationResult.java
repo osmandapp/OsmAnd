@@ -302,37 +302,6 @@ public class RouteCalculationResult {
 		return list;
 	}
 
-	public List<RouteSegmentResult> getRoute(int startIndex) {
-		if (segments.size() == 0) {
-			return null;
-		}
-		List<RouteSegmentResult> list = new ArrayList<RouteSegmentResult>();
-		int skippedPoints = 0;
-		for (int i = 1; i <= startIndex; i++) {
-			RouteSegmentResult seg = segments.get(i - 1);
-			if (seg != segments.get(i)) {
-				skippedPoints += Math.abs(seg.getEndPointIndex() - seg.getStartPointIndex());
-			}
-		}
-		list.add(segments.get(startIndex++));
-		for (int i = startIndex; i < segments.size(); i++) {
-			if (segments.get(i - 1) != segments.get(i)) {
-				list.add(segments.get(i));
-			}
-		}
-		if (!list.isEmpty()) {
-			RouteSegmentResult seg = list.get(0);
-			if (seg.isForwardDirection()) {
-				int index = seg.getStartPointIndex() + startIndex - skippedPoints;
-				seg.setStartPointIndex(index);
-			} else {
-				int index = seg.getEndPointIndex() + startIndex - skippedPoints;
-				seg.setEndPointIndex(index);
-			}
-		}
-		return list;
-	}
-
 	/**
 	 * PREPARATION 
 	 */
