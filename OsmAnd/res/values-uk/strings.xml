@@ -177,7 +177,7 @@
     <string name="use_transparent_map_theme">Прозора тема</string>
     <string name="native_library_not_supported">Вбудована бібліотека не підтримується на цьому пристрої.</string>
     <string name="init_native_library">Ініціалізація рідної бібліотеки…</string>
-    <string name="choose_auto_follow_route">Самоосереднення мапи</string>
+    <string name="choose_auto_follow_route">Автоцентрування мапи</string>
     <string name="choose_auto_follow_route_descr">Час, через який мапа повернеться до поточної позиції.</string>
     <string name="auto_follow_route_navigation">Автоцентрування мапи тільки під час навігації</string>
     <string name="auto_follow_route_navigation_descr">Повертати мапу в поточну позицію тільки при навігації за маршрутом.</string>
@@ -800,10 +800,10 @@
     <string name="av_use_external_recorder">Використовувати системний записувач</string>
     <string name="av_use_external_camera_descr">Використовувати системний застосунок для світлин.</string>
     <string name="recording_unavailable">недоступно</string>
-    <string name="shared_string_control_stop">Стоп</string>
+    <string name="shared_string_control_stop">Зупинити</string>
     <string name="shared_string_control_start">Почати</string>
     <string name="map_widget_av_notes">Звуко/відео-нотатки</string>
-    <string name="osmand_srtm_short_description_80_chars">Плагін OsmAnd для показу горизонталей в автономному режимі</string>
+    <string name="osmand_srtm_short_description_80_chars">Втулок OsmAnd для показу горизонталей в автономному режимі</string>
     <string name="av_use_external_camera">Використовувати програму Камера</string>
     <string name="av_settings_descr">Налаштування аудіо/відео запису.</string>
     <string name="av_settings">Налаштування аудіо/відео</string>
@@ -1372,7 +1372,7 @@
     <string name="traffic_warning_border_control">Прикордонний контроль</string>
     <string name="traffic_warning_payment">Збирання плати за проїзд</string>
     <string name="traffic_warning_stop">Знак СТОП</string>
-    <string name="traffic_warning_calming">Зниження швидкості</string>
+    <string name="traffic_warning_calming">Штучна дорожня нерівність</string>
     <string name="traffic_warning_speed_camera">Камера контролю швидкості</string>
     <string name="traffic_warning">Попередження на дорозі</string>
     <string name="local_index_description">Натисніть на будь-який наявний елемент для перегляду додаткових відомостей, довго утримуйте, щоб знедіяти або вилучити. Наявні дані на пристрої (%1$s вільно):</string>
@@ -1702,7 +1702,7 @@
     <string name="simulate_your_location_stop_descr">Зупинити симуляцію Вашої позиції.</string>
     <string name="looking_up_address">Пошук адреси</string>
     <string name="av_locations">Місця</string>
-    <string name="plugin_settings">Плагіни</string>
+    <string name="plugin_settings">Втулки</string>
     <string name="routing_attr_avoid_shuttle_train_name">Уник. приміських поїздів</string>
     <string name="routing_attr_avoid_shuttle_train_description">Уникати приміських поїздів</string>
     <string name="traffic_warning_hazard">Небезпека</string>
@@ -2244,7 +2244,7 @@
     <string name="sorted_by_distance">Відсортоване за відстанню</string>
     <string name="search_favorites">Пошук у закладках</string>
     <string name="hillshade_menu_download_descr">Для того, щоб відобразити затінення рельєфу, потрібно завантажити спеціальну мапу для цієї області.</string>
-    <string name="hillshade_purchase_header">Щоб побачити рельєф місцевості на мапі, вам потрібно придбати та встановити плагін \'Горизонталі\' (\'Contour Lines\').</string>
+    <string name="hillshade_purchase_header">Щоб побачити рельєф місцевості на мапі, вам потрібно придбати та встановити втулок \'Горизонталі\' (\'Contour Lines\').</string>
     <string name="hide_from_zoom_level">Приховати від рівня масштабування</string>
     <string name="srtm_menu_download_descr">Завантажте мапу \'Горизонталі\' (\'Contour Line\') для використання у цій області.</string>
     <string name="shared_string_plugin">Втулок</string>
@@ -3277,7 +3277,7 @@
     <string name="osmand_settings_descr">Впливає на весь застосунок</string>
     <string name="voice_announces_descr">Навігаційні вказівки та оголошення</string>
     <string name="logcat_buffer">Буфер logcat</string>
-    <string name="plugins_settings">Налаштування плагіна</string>
+    <string name="plugins_settings">Налаштування втулка</string>
     <string name="shared_string_by_default">Усталено</string>
     <string name="default_speed_dialog_msg">Розраховує час прибуття для невідомих типів доріг і обмежує швидкість для всіх доріг (може вплинути на маршрутизацію)</string>
     <string name="download_detailed_map">Завантажте докладну мапу %s, щоб переглянути цю область.</string>
@@ -3524,7 +3524,7 @@
     <string name="sort_by_category">Впорядкувати за категоріями</string>
     <string name="please_provide_profile_name_message">Укажіть назву профілю</string>
     <string name="open_settings">Відкрити налаштування</string>
-    <string name="plugin_disabled">Плагін вимкнено</string>
+    <string name="plugin_disabled">Втулок вимкнено</string>
     <string name="plugin_disabled_descr">Цей втулок є окремою програмою, якщо ви не плануєте користуватися ним надалі, його потрібно буде видалити окремо. 
 \n 
 \nВін залишиться на пристрої після видалення OsmAnd.</string>
@@ -3628,7 +3628,7 @@
     <string name="shared_string_divider">Дільник</string>
     <string name="divider_descr">Елементи нижче цієї точки розділені дільником.</string>
     <string name="shared_string_hidden">Приховано</string>
-    <string name="hidden_items_descr">Ці елементи приховані з меню, але встановлені параметри або плагіни продовжать роботу.</string>
+    <string name="hidden_items_descr">Ці елементи приховані з меню, але встановлені параметри або втулки продовжать роботу.</string>
     <string name="reset_items_descr">Приховування налаштувань призведе до скидання до їхнього початкового стану.</string>
     <string name="main_actions_descr">Має лише 4 кнопки.</string>
     <string name="main_actions">Основні дії</string>
@@ -3781,7 +3781,7 @@
     <string name="vessel_width_limit_description">Встановіть ширину судна, щоб уникнути вузьких мостів</string>
     <string name="quick_action_showhide_mapillary_title">Увімкнути/вимкнути Mapillary</string>
     <string name="quick_action_mapillary_hide">Вимкнути Mapillary</string>
-    <string name="quick_action_mapillary_show">Показати шар Mapillary</string>
+    <string name="quick_action_mapillary_show">Показати Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Перемикач показує/приховує шар Mapillary на мапі.</string>
     <string name="uninstall_speed_cameras">Видалити камери контролю швидкості</string>
     <string name="shared_string_legal">Законодавство</string>
@@ -3816,7 +3816,7 @@
     <string name="app_mode_enduro_motorcycle">легкий мотоцикл</string>
     <string name="app_mode_wheelchair">Інвалідне крісло</string>
     <string name="app_mode_wheelchair_forward">Інвалідне крісло попереду</string>
-    <string name="app_mode_go_cart">у мапу</string>
+    <string name="app_mode_go_cart">Картинг</string>
     <string name="osm_edit_closed_note">Закрита нотатка OSM</string>
     <string name="shared_string_custom">Своє</string>
     <string name="add_hidden_group_info">Додана точка не буде показуватись на мапі, вся обрана група є прихованою, ви можете побачити її в \"%s\".</string>

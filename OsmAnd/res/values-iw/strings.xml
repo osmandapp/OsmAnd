@@ -1515,7 +1515,7 @@
     <string name="traffic_warning_border_control">ביקורת גבולות</string>
     <string name="traffic_warning_payment">עמדת תשלום</string>
     <string name="traffic_warning_stop">סימן עצור</string>
-    <string name="traffic_warning_calming">מיתון תנועה</string>
+    <string name="traffic_warning_calming">פסי האטה</string>
     <string name="traffic_warning_speed_camera">מצלמת מהירות</string>
     <string name="traffic_warning">אזהרת תנועה</string>
     <string name="speak_favorites">מועדפים בסביבה</string>
