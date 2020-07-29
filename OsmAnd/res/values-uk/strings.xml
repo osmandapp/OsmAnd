@@ -30,7 +30,7 @@
     <string name="basemap_was_selected_to_download">Основна мапа, необхідна для забезпечення основних можливостей, знаходиться у черзі завантаження.</string>
     <string name="select_index_file_to_download">Нічого не знайдено. Якщо Ви не знайшли свій регіон, Ви можете створити його самостійно (див. https://osmand.net).</string>
     <string name="local_indexes_cat_tile">Мережеві та кешовані растрові мапи</string>
-    <string name="local_indexes_cat_map">Стандартні мапи (векторні)</string>
+    <string name="local_indexes_cat_map">Звичайні мапи (векторні)</string>
     <string name="index_settings_descr">Завантаження, перегляд подробиць та керування локальними мапами.</string>
     <string name="map_online_plugin_is_not_installed">Увімкніть втулок \'Мережеві мапи\', щоб вибирати різні джерела мап</string>
     <string name="map_online_data">Мережеві мапи (растрові)</string>
@@ -167,7 +167,7 @@
     <string name="general_settings_descr">Налаштуйте відображення та загальні параметри застосунку.</string>
     <string name="global_app_settings">Загальні налаштування</string>
     <string name="user_name">Ім\'я користувача OSM</string>
-    <string name="open_street_map_login_descr">Потрібно для подань на openstreetmap.org.</string>
+    <string name="open_street_map_login_descr">Потрібно для входу на openstreetmap.org.</string>
     <string name="user_password">Пароль</string>
     <string name="osmand_service">Фоновий режим</string>
     <string name="osmand_service_descr">OsmAnd працює у фоновому режимі з вимкненим екраном.</string>
@@ -917,7 +917,7 @@
     <string name="osmand_play_title_30_chars">OsmAnd Мапи і Навігація</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Мапи і Навігація</string>
     <string name="layer_hillshade">Шар рельєфа місцевості</string>
-    <string name="download_regular_maps">Стандартна мапа</string>
+    <string name="download_regular_maps">Звичайна мапа</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
 \n OsmAnd — навігаційне програмне забезпечення з відкритим кодом з доступом до різноманітних картографічних даних від OSM. Всі землеписні дані (векторні та растрові) можуть бути збережені на карті пам’яті телефону для подальшого автономного користування. Також пропонується функція маршрутизації в автономному режимі та в мережевому режимі, включно з покроковими голосовими підказками.
@@ -1818,7 +1818,7 @@
     <string name="impassable_road_desc">Виберіть дороги, які потрібно уникнути під час навігації.</string>
     <string name="shared_string_sound">Звук</string>
     <string name="poi_deleted_localy">POI буде вилучено після того, як Ви вивантажите Ваші зміни</string>
-    <string name="confirm_download_roadmaps">Мапа виключно доріг не потрібна, оскільки у вас є стандартна (повна) мапа. Все одно завантажити?</string>
+    <string name="confirm_download_roadmaps">Мапа виключно доріг не потрібна, оскільки у вас є звичайна (повна) мапа. Усе одно завантажити\?</string>
     <string name="missing_write_external_storage_permission">OsmAnd не має дозволу на використання карти пам\'яті</string>
     <string name="last_update">Останнє оновлення: %s</string>
     <string name="last_map_change">Остання зміна мапи: %s</string>
@@ -2189,13 +2189,13 @@
     <string name="navigate_point_olc">Відкритий код розташування (OLC)</string>
     <string name="quick_action_take_audio_note">Нова аудіонотатка</string>
     <string name="quick_action_take_video_note">Нова відеонотатка</string>
-    <string name="quick_action_take_photo_note">Нова світлино-нотатка</string>
+    <string name="quick_action_take_photo_note">Нова фотонотатка</string>
     <string name="quick_favorites_name_preset">Найменування</string>
     <string name="quick_action_add_marker_descr">Кнопка для додавання позначки мапи посередині екрану.</string>
     <string name="quick_action_add_gpx_descr">Натискання на цю кнопку додасть маршрутну точку GPX посередині екрану.</string>
     <string name="quick_action_take_audio_note_descr">Натискання цієї кнопки додає аудіонотатку посередині екрану.</string>
     <string name="quick_action_take_video_note_descr">Натискання цієї кнопки додає відеонотатку посередині екрану.</string>
-    <string name="quick_action_take_photo_note_descr">Натискання цієї кнопки додає світлинонотатку посередині екрану.</string>
+    <string name="quick_action_take_photo_note_descr">Натискання цієї кнопки додає фотонотатку посередині екрану.</string>
     <string name="quick_action_add_osm_bug_descr">Натискання цієї кнопки додає OSM-нотатку посередині екрану.</string>
     <string name="quick_action_add_poi_descr">Натискання цієї кнопки додає POI посередині екрану.</string>
     <string name="quick_action_navigation_voice_descr">Перемикач, щоб вимкнути або увімкнути голосові підказки під час навігації.</string>
@@ -2610,7 +2610,7 @@
     <string name="one_tap_active_descr">Натискання на позначку на мапі перемістить її на перше місце в списку задіяних позначок, не відкриваючи контекстне меню.</string>
     <string name="one_tap_active">Задіювання одним натисненням</string>
     <string name="empty_state_av_notes">Робіть нотатки!</string>
-    <string name="empty_state_av_notes_desc">Додайте аудіо, відео або світлино-нотатку в будь-яку точку на мапі, використовуючи віджет або контекстне меню.</string>
+    <string name="empty_state_av_notes_desc">Додайте аудіо, відео або фотонотатку в будь-яку точку на мапі, використовуючи віджет або контекстне меню.</string>
     <string name="notes_by_date">Примітки за датою</string>
     <string name="by_date">За датою</string>
     <string name="by_type">За типом</string>
@@ -2778,13 +2778,13 @@
     <string name="shared_string_wifi_only">Лише через WiFi</string>
     <string name="select_travel_book">Вибрати щоденник подорожей</string>
     <string name="shared_string_travel_book">Щоденник подорожей</string>
-    <string name="online_webpage_warning">Сторінка доступна лише в мережі. Відкрити у веббраузері\?</string>
+    <string name="online_webpage_warning">Сторінка доступна лише в мережі. Відкрити в браузері\?</string>
     <string name="images_cache">Кеш зображень</string>
     <string name="delete_search_history">Вилучити історію пошуку</string>
     <string name="download_images">Завантаження зображень</string>
     <string name="download_maps_travel">Туристичні путівники</string>
     <string name="shared_string_wikivoyage">Вікімандри</string>
-    <string name="article_removed">Стаття вилучена</string>
+    <string name="article_removed">Статтю видалено</string>
     <string name="wikivoyage_search_hint">Пошук: країна, місто, регіон</string>
     <string name="shared_string_read">Читати</string>
     <string name="saved_articles">Збережені статті</string>
@@ -3229,7 +3229,7 @@
     <string name="price_and_discount">%1$s • Заощадити %2$s</string>
     <string name="configure_profile_info">Налаштування для профілю:</string>
     <string name="shared_string_example">Приклад</string>
-    <string name="navigate_point_format_utm">UTM Стандарт</string>
+    <string name="navigate_point_format_utm">Стандарт UTM</string>
     <string name="change_default_settings">Змінити налаштування</string>
     <string name="discard_changes">Відхилити зміну</string>
     <string name="apply_to_current_profile">Застосувати тільки до: %1$s</string>
@@ -3436,7 +3436,7 @@
     <string name="tracks_view_descr">Ви можете знайти всі записи в %1$s або в теці OsmAnd за допомогою файлового провідника.</string>
     <string name="multimedia_notes_view_descr">Ваші нотатки OSM знаходяться в %1$s.</string>
     <string name="video_notes">Відеонотатки</string>
-    <string name="photo_notes">Світлинонотатки</string>
+    <string name="photo_notes">Фотонотатки</string>
     <string name="route_recalculation">Перерахунок маршруту</string>
     <string name="accessibility_announce">Оголошення</string>
     <string name="login_and_pass">Ім\'я користувача і пароль</string>
@@ -3815,4 +3815,5 @@
     <string name="app_mode_wheelchair_forward">Інвалідне крісло попереду</string>
     <string name="app_mode_go_cart">у мапу</string>
     <string name="osm_edit_closed_note">Закрита нотатка OSM</string>
+    <string name="shared_string_custom">Своє</string>
 </resources>
