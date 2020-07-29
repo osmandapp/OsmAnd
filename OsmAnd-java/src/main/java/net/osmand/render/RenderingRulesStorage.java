@@ -26,7 +26,7 @@ import org.xmlpull.v1.XmlPullParserException;
 public class RenderingRulesStorage {
 
 	private final static Log log = PlatformUtil.getLog(RenderingRulesStorage.class);
-	static boolean STORE_ATTTRIBUTES = false;
+	static boolean STORE_ATTRIBUTES = false;
 	
 	// keep sync !
 	// keep sync ! not change values
@@ -227,15 +227,20 @@ public class RenderingRulesStorage {
 		}
 		
 		public void startElement(String name) throws XmlPullParserException, IOException {
+			
 			boolean stateChanged = false;
 			final boolean isCase = isCase(name);
 			final boolean isSwitch = isSwitch(name);
+			if (parser.getLineNumber() == 4468 && isSwitch) {
+				
+				System.out.println(String.format("Line %d name: %s", parser.getLineNumber(), name));//, parser.getAttributeName(0), parser.getAttributeValue(0) ));
+			}
 			if(isCase || isSwitch){ //$NON-NLS-1$
 				attrsMap.clear();
 				boolean top = stack.size() == 0 || isTopCase();
 				parseAttributes(attrsMap);
 				RenderingRule renderingRule = new RenderingRule(attrsMap, isSwitch, RenderingRulesStorage.this);
-				if(top || STORE_ATTTRIBUTES){
+				if(top || STORE_ATTRIBUTES){
 					renderingRule.storeAttributes(attrsMap);
 				}
 				if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
@@ -247,7 +252,7 @@ public class RenderingRulesStorage {
 				attrsMap.clear();
 				parseAttributes(attrsMap);
 				RenderingRule renderingRule = new RenderingRule(attrsMap, false, RenderingRulesStorage.this);
-				if(STORE_ATTTRIBUTES) {
+				if(STORE_ATTRIBUTES) {
 					renderingRule.storeAttributes(attrsMap);
 				}
 				if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
@@ -337,6 +342,10 @@ public class RenderingRulesStorage {
 			return "group".equals(name) || "switch".equals(name);
 		}
 		
+		protected boolean isSequence(String name) {
+			return "seq".equals(name);
+		}
+		
 		private Map<String, String> parseAttributes(Map<String, String> m) {
 			for (int i = 0; i < parser.getAttributeCount(); i++) {
 				String name = parser.getAttributeName(i);
@@ -396,7 +405,7 @@ public class RenderingRulesStorage {
 				vl = ns.remove("value");
 				// reset rendering rule attributes
 				renderingRule.init(ns);
-				if(STORE_ATTTRIBUTES) {
+				if(STORE_ATTRIBUTES) {
 					renderingRule.storeAttributes(ns);
 				}
 				
@@ -469,7 +478,7 @@ public class RenderingRulesStorage {
 	
 	
 	public static void main(String[] args) throws XmlPullParserException, IOException {
-		STORE_ATTTRIBUTES = true;
+		STORE_ATTRIBUTES = true;
 //		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
 		final String loc = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/";
 		String defaultFile = loc + "UniRS.render.xml";
