@@ -34,7 +34,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.track.TrackDrawInfo.TRACK_FILE_PATH;
+import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
 
 public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -75,7 +75,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
-			String gpxFilePath = savedInstanceState.getString(TRACK_FILE_PATH);
+			String gpxFilePath = savedInstanceState.getString(TRACK_FILE_NAME);
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 			prepareSplitIntervalOptions();
 
@@ -83,7 +83,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 			selectedDistanceSplitInterval = savedInstanceState.getInt(SELECTED_DISTANCE_SPLIT_INTERVAL);
 			selectedSplitType = GpxSplitType.valueOf(savedInstanceState.getString(SELECTED_TRACK_SPLIT_TYPE));
 		} else if (arguments != null) {
-			String gpxFilePath = arguments.getString(TRACK_FILE_PATH);
+			String gpxFilePath = arguments.getString(TRACK_FILE_NAME);
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 			prepareSplitIntervalOptions();
 			updateSelectedSplitParams();
@@ -142,7 +142,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putInt(SELECTED_TIME_SPLIT_INTERVAL, selectedTimeSplitInterval);
 		outState.putInt(SELECTED_DISTANCE_SPLIT_INTERVAL, selectedDistanceSplitInterval);
 		outState.putString(SELECTED_TRACK_SPLIT_TYPE, selectedSplitType.name());
-		outState.putString(TRACK_FILE_PATH, selectedGpxFile.getGpxFile().path);
+		outState.putString(TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
 	}
 
 	private void updateSelectedSplitParams() {
@@ -327,7 +327,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		try {
 			if (fragmentManager.findFragmentByTag(SplitIntervalBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
-				args.putString(TRACK_FILE_PATH, trackDrawInfo.getFilePath());
+				args.putString(TRACK_FILE_NAME, trackDrawInfo.getFilePath());
 
 				SplitIntervalBottomSheet splitIntervalBottomSheet = new SplitIntervalBottomSheet();
 				splitIntervalBottomSheet.setArguments(args);

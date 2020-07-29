@@ -59,10 +59,11 @@ import java.util.List;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
+import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
-import static net.osmand.plus.track.TrackDrawInfo.TRACK_FILE_PATH;
 
 public class TrackAppearanceFragment extends ContextMenuFragment implements CardListener, ContextMenuFragmentListener {
 
@@ -76,6 +77,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 
 	private OsmandApplication app;
 
+	@Nullable
 	private GpxDataItem gpxDataItem;
 	private TrackDrawInfo trackDrawInfo;
 	private SelectedGpxFile selectedGpxFile;
@@ -127,16 +129,28 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
-			trackDrawInfo = new TrackDrawInfo();
-			trackDrawInfo.readBundle(savedInstanceState);
-			gpxDataItem = app.getGpxDbHelper().getItem(new File(trackDrawInfo.getFilePath()));
+			trackDrawInfo = new TrackDrawInfo(savedInstanceState);
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(trackDrawInfo.getFilePath());
+			if (!selectedGpxFile.isShowCurrentTrack()) {
+				gpxDataItem = app.getGpxDbHelper().getItem(new File(trackDrawInfo.getFilePath()));
+			}
 		} else if (arguments != null) {
-			String gpxFilePath = arguments.getString(TRACK_FILE_PATH);
-			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
-			File file = new File(selectedGpxFile.getGpxFile().path);
-			gpxDataItem = app.getGpxDbHelper().getItem(file);
-			trackDrawInfo = new TrackDrawInfo(gpxDataItem);
+			String gpxFilePath = arguments.getString(TRACK_FILE_NAME);
+			boolean currentRecording = arguments.getBoolean(CURRENT_RECORDING, false);
+
+			if (gpxFilePath == null && !currentRecording) {
+				log.error("Required extra '" + TRACK_FILE_NAME + "' is missing");
+				dismiss();
+				return;
+			}
+			if (currentRecording) {
+				trackDrawInfo = new TrackDrawInfo(true);
+				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+			} else {
+				gpxDataItem = app.getGpxDbHelper().getItem(new File(gpxFilePath));
+				trackDrawInfo = new TrackDrawInfo(gpxDataItem, false);
+				selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
+			}
 			updateTrackColor();
 		}
 	}
@@ -486,7 +500,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				discardChanges();
+				discardSplitChanges();
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					activity.onBackPressed();
@@ -521,15 +535,21 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		gpxFile.setShowArrows(trackDrawInfo.isShowArrows());
 		gpxFile.setShowStartFinish(trackDrawInfo.isShowStartFinish());
 
-		app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
-
-		gpxDataItem = new GpxDataItem(new File(gpxFile.path), gpxFile);
-		app.getGpxDbHelper().add(gpxDataItem);
-		saveGpx(gpxFile);
+		if (gpxFile.showCurrentTrack) {
+			app.getSettings().CURRENT_TRACK_COLOR.set(trackDrawInfo.getColor());
+		} else {
+			if (gpxDataItem != null) {
+				gpxDataItem = new GpxDataItem(new File(gpxFile.path), gpxFile);
+				app.getGpxDbHelper().add(gpxDataItem);
+			}
+			app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
+			saveGpx(gpxFile);
+		}
 	}
 
-	private void discardChanges() {
-		if (gpxDataItem.getSplitType() != trackDrawInfo.getSplitType() || gpxDataItem.getSplitInterval() != trackDrawInfo.getSplitInterval()) {
+	private void discardSplitChanges() {
+		if (gpxDataItem != null && (gpxDataItem.getSplitType() != trackDrawInfo.getSplitType()
+				|| gpxDataItem.getSplitInterval() != trackDrawInfo.getSplitInterval())) {
 			int timeSplit = (int) gpxDataItem.getSplitInterval();
 			double distanceSplit = gpxDataItem.getSplitInterval();
 
@@ -591,9 +611,11 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
 
-			splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
-			splitIntervalCard.setListener(this);
-			cardsContainer.addView(splitIntervalCard.build(mapActivity));
+			if (!selectedGpxFile.isShowCurrentTrack()) {
+				splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
+				splitIntervalCard.setListener(this);
+				cardsContainer.addView(splitIntervalCard.build(mapActivity));
+			}
 
 			DirectionArrowsCard directionArrowsCard = new DirectionArrowsCard(mapActivity, trackDrawInfo);
 			directionArrowsCard.setListener(this);

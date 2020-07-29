@@ -555,7 +555,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private boolean hasTrackDrawInfoForSelectedGpx(SelectedGpxFile selectedGpxFile) {
-		return trackDrawInfo != null && trackDrawInfo.getFilePath().equals(selectedGpxFile.getGpxFile().path);
+		return trackDrawInfo != null && (trackDrawInfo.isCurrentRecording() && selectedGpxFile.isShowCurrentTrack()
+				|| selectedGpxFile.getGpxFile().path.equals(trackDrawInfo.getFilePath()));
 	}
 
 	private void drawStartEndPoints(Canvas canvas, RotatedTileBox tileBox, WptPt start, WptPt end) {

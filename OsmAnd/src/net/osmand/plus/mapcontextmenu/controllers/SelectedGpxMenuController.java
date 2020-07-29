@@ -41,8 +41,13 @@ public class SelectedGpxMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
-				intent.putExtra(TrackActivity.TRACK_FILE_NAME, selectedGpxPoint.getSelectedGpxFile().getGpxFile().path);
-				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
+				if (selectedGpxFile.isShowCurrentTrack()) {
+					intent.putExtra(TrackActivity.CURRENT_RECORDING, true);
+				} else {
+					intent.putExtra(TrackActivity.TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
+				}
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				mapActivity.startActivity(intent);
 			}
 		};

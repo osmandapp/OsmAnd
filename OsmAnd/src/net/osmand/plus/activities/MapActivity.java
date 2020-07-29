@@ -175,7 +175,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.track.TrackDrawInfo.TRACK_FILE_PATH;
+import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
+import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -1247,7 +1248,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					hideContextAndRouteInfoMenues();
 
 					Bundle args = new Bundle();
-					args.putString(TRACK_FILE_PATH, ((GPXFile) toShow).path);
+					args.putString(TRACK_FILE_NAME, ((GPXFile) toShow).path);
+					args.putBoolean(CURRENT_RECORDING, ((GPXFile) toShow).showCurrentTrack);
 					args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuController.MenuState.HALF_SCREEN);
 
 					TrackAppearanceFragment fragment = new TrackAppearanceFragment();
