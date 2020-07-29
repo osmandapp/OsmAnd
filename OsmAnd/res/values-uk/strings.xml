@@ -177,7 +177,7 @@
     <string name="use_transparent_map_theme">Прозора тема</string>
     <string name="native_library_not_supported">Вбудована бібліотека не підтримується на цьому пристрої.</string>
     <string name="init_native_library">Ініціалізація рідної бібліотеки…</string>
-    <string name="choose_auto_follow_route">Самоосереднення мапи</string>
+    <string name="choose_auto_follow_route">Автоцентрування мапи</string>
     <string name="choose_auto_follow_route_descr">Час, через який мапа повернеться до поточної позиції.</string>
     <string name="auto_follow_route_navigation">Автоцентрування мапи тільки під час навігації</string>
     <string name="auto_follow_route_navigation_descr">Повертати мапу в поточну позицію тільки при навігації за маршрутом.</string>
@@ -3781,7 +3781,7 @@
     <string name="vessel_width_limit_description">Встановіть ширину судна, щоб уникнути вузьких мостів</string>
     <string name="quick_action_showhide_mapillary_title">Увімкнути/вимкнути Mapillary</string>
     <string name="quick_action_mapillary_hide">Вимкнути Mapillary</string>
-    <string name="quick_action_mapillary_show">Показати шар Mapillary</string>
+    <string name="quick_action_mapillary_show">Показати Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Перемикач показує/приховує шар Mapillary на мапі.</string>
     <string name="uninstall_speed_cameras">Видалити камери контролю швидкості</string>
     <string name="shared_string_legal">Законодавство</string>
