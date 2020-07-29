@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.osmand.PlatformUtil;
+import net.osmand.osm.MapRenderingTypes.MapRulType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -153,6 +155,22 @@ public abstract class MapRenderingTypes {
 		return a;
 	}
 	
+	protected MapRulType checkOrCreateTextRule(String targetTag) {
+		MapRulType mt = types.get(constructRuleKey(targetTag, null));
+		if (mt == null) {
+			mt = registerRuleType(MapRulType.createText(targetTag));
+		}
+		return mt;
+	}
+	
+	protected MapRulType checkOrCreateAdditional(String tag, String value) {
+		MapRulType mt = types.get(constructRuleKey(tag, value));
+		if (mt == null) {
+			mt = registerRuleType(MapRulType.createAdditional(tag, value));
+		}
+		return mt;
+	}
+	
 	protected MapRulType getRuleType(String tag, String val, boolean poi, boolean map) {
 		Map<String, MapRulType> types = getEncodingRuleTypes();
 		tag = lc(tag);
@@ -171,7 +189,6 @@ public abstract class MapRenderingTypes {
 			rType.map = parent.map;
 			rType.poi = parent.poi;
 			rType.onlyPoint = parent.onlyPoint;
-			rType.namePrefix = parent.namePrefix;
 			rType = registerRuleType(rType);
 		}
 		return rType;
@@ -264,36 +281,111 @@ public abstract class MapRenderingTypes {
 		rtype.category = parentCategory == null ? null : parentCategory.category;
 		rtype.onlyPoint = Boolean.parseBoolean(parser.getAttributeValue("", "point")); //$NON-NLS-1$
 		rtype.relation = Boolean.parseBoolean(parser.getAttributeValue("", "relation")); //$NON-NLS-1$
-		rtype.relationGroup = Boolean.parseBoolean(parser.getAttributeValue("", "relationGroup")); //$NON-NLS-1$
-		if (rtype.isMain()) {			
-			rtype.namePrefix = parser.getAttributeValue("", "namePrefix"); //$NON-NLS-1$
-			if (rtype.namePrefix == null) {
-				rtype.namePrefix = "";
+		if (rtype.isMain()) {
+			if (rtype.relation) {
+				MapRulType mrt = MapRulType.createMainEntity(tag + "_" + value, null);
+				mrt.order = rtype.order;
+				mrt.category = rtype.category;
+				mrt.poi = rtype.poi;
+				mrt.map = rtype.map;
+				registerMapRule(parser, mrt);
 			}
-
-			String v = parser.getAttributeValue("", "nameTags");
-			if (v != null) {
-				String[] names = v.split(",");
-				rtype.names = new MapRulType[names.length * (langs.length + 1)];
-				int j = 0;
-				for (int i = 0; i < names.length; i++) {
-					String tagName = names[i];
-					if (rtype.namePrefix.length() > 0) {
-						tagName = rtype.namePrefix + tagName;
+			
+			String groupSort = parser.getAttributeValue("", "relationGroupSort");
+			if (groupSort != null) {
+				rtype.relationSortTags = new LinkedHashMap<String, List<String>>();
+				String[] ls = groupSort.split(";");
+				for(String l : ls) {
+					int sp = l.indexOf('=');
+					String key = l;
+					String[] values = new String[0];
+					if(sp >= 0) {
+						key = l.substring(0, sp);
+						values = l.substring(sp +1).split(",");
 					}
-					MapRulType mt = MapRulType.createText(tagName);
-					mt = registerRuleType(mt);
-					rtype.names[j++] = mt;
-					for(String lng : langs) {
-						mt = MapRulType.createText(tagName + ":" + lng);
-						mt = registerRuleType(mt);
-						rtype.names[j++] = mt;	
-					}
+					rtype.relationSortTags.put(key, Arrays.asList(values));
 				}
+			}
+			
+			String additionalTags = parser.getAttributeValue("", "additionalTags");
+			String additionalPrefix = parser.getAttributeValue("", "additionalPrefix");
+			if (additionalTags != null) {
+				rtype.additionalTags = new LinkedHashMap<String, String>();
+				for(String tg : additionalTags.split(",")) {
+					String targetTag = tg;
+					if(!Algorithms.isEmpty(additionalPrefix)) {
+						targetTag = additionalPrefix + tg;
+					}
+					rtype.additionalTags.put(tg, targetTag);
+				}
+			}
+			String relationGroupAdditionalTags = parser.getAttributeValue("", "relationGroupAdditionalTags");
+			String relationAdditionalPrefix = parser.getAttributeValue("", "relationGroupAdditionalPrefix");
+			if (relationGroupAdditionalTags != null) {
+				rtype.relationGroupAdditionalTags = new LinkedHashMap<String, String>();
+				for(String tg : relationGroupAdditionalTags.split(",")) {
+					String targetTag = tg;
+					if(!Algorithms.isEmpty(relationAdditionalPrefix)) {
+						targetTag = relationAdditionalPrefix + tg;
+					}
+					rtype.relationGroupAdditionalTags.put(tg, targetTag);
+				}
+			}
+			
+			String nmts = parser.getAttributeValue("", "nameTags");
+			if(nmts != null) {
+				String namePrefix = parser.getAttributeValue("", "namePrefix"); //$NON-NLS-1$
+				if (namePrefix == null) {
+					namePrefix = "";
+				}
+				rtype.relationNames = new LinkedHashMap<String, String>();
+				putNameTags(nmts, rtype.relationNames, namePrefix);
+			}
+			String rnmts = parser.getAttributeValue("", "relationGroupNameTags");
+			if (rnmts != null) {
+				String relationGroupNamePrefix = parser.getAttributeValue("", "relationGroupNamePrefix"); //$NON-NLS-1$
+				if (relationGroupNamePrefix == null) {
+					relationGroupNamePrefix = "";
+				}
+				rtype.relationGroupNameTags = new LinkedHashMap<String, String>();
+				putNameTags(rnmts, rtype.relationGroupNameTags, relationGroupNamePrefix);
 			}
 		}
 		return rtype;
 		
+	}
+
+	private void putNameTags(String namesList, Map<String, String> names, String namePrefix) {
+		if (namesList != null) {
+			String[] nameSplit = namesList.split(",");
+			for (int i = 0; i < nameSplit.length; i++) {
+				String tagName = nameSplit[i];
+				String tagTargetName = tagName;
+				if (namePrefix.length() > 0) {
+					tagTargetName = namePrefix + tagName;
+				}
+				names.put(tagName, tagTargetName);
+				for (String lng : langs) {
+					names.put(tagName + ":" + lng, tagTargetName + ":" + lng);
+				}
+			}
+		}
+	}
+	
+	protected void registerMapRule(XmlPullParser parser, MapRulType rtype) {
+		String val = parser.getAttributeValue("", "minzoom"); //$NON-NLS-1$
+		if (rtype.isMain()) {
+			rtype.minzoom = 15;
+		}
+		if (val != null) {
+			rtype.minzoom = Integer.parseInt(val);
+		}
+		val = parser.getAttributeValue("", "maxzoom"); //$NON-NLS-1$
+		rtype.maxzoom = 31;
+		if (val != null) {
+			rtype.maxzoom = Integer.parseInt(val);
+		}
+		registerRuleType(rtype);
 	}
 
 	protected MapRulType registerRuleType(MapRulType rt) {
@@ -422,7 +514,13 @@ public abstract class MapRenderingTypes {
 	}
 	
 	public static class MapRulType {
-		protected MapRulType[] names;
+		// relation part
+		protected Map<String, String> relationNames;
+		protected Map<String, String> additionalTags;
+		protected Map<String, String> relationGroupNameTags;
+		protected Map<String, String> relationGroupAdditionalTags;
+		protected Map<String, List<String>> relationSortTags;
+		
 		protected TagValuePattern tagValuePattern;
 		protected boolean additional;
 		protected boolean additionalText;
@@ -431,7 +529,6 @@ public abstract class MapRenderingTypes {
 		
 		protected String category = null;
 		protected boolean relation;
-		protected boolean relationGroup;
 		// creation of only section
 		protected boolean map = true;
 		protected boolean poi = true;
@@ -440,7 +537,6 @@ public abstract class MapRenderingTypes {
 		protected int minzoom;
 		protected int maxzoom;
 		protected boolean onlyPoint;
-		protected String namePrefix ="";
 		
 		
 		// inner id
@@ -547,14 +643,6 @@ public abstract class MapRenderingTypes {
 		
 		public boolean isOnlyPoint() {
 			return onlyPoint;
-		}
-		
-		public boolean isRelation() {
-			return relation;
-		}
-		
-		public boolean isRelationGroup() {
-			return relationGroup;
 		}
 		
 		
