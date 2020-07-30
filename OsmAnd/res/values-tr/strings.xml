@@ -1632,9 +1632,12 @@
     <string name="gpx_selection_segment_title">Bölüm</string>
     <string name="gpx_selection_number_of_points">%1$s nokta</string>
     <string name="gpx_selection_point">Nokta%1$s</string>
-    <string name="gpx_selection_route_points">%1$s\nRota%2$s işaret</string>
-    <string name="gpx_selection_points">%1$s\nPoints</string>
-    <string name="gpx_selection_track">%1$s\nParça%2$s</string>
+    <string name="gpx_selection_route_points">%1$s
+\nGüzergah noktaları %2$s</string>
+    <string name="gpx_selection_points">%1$s
+\nNoktalar</string>
+    <string name="gpx_selection_track">%1$s
+\nYol %2$s</string>
     <string name="gpx_file_is_empty">Boş GPX dosyası</string>
     <string name="osmo_edit_color">Ekran rengi</string>
     <string name="int_days">Günler</string>
@@ -1761,7 +1764,7 @@
     <string name="fav_point_dublicate_message">Sık Kullanılan, yinelemeyi önlemek için %1$s olarak yeniden adlandırıldı.</string>
     <string name="traffic_warning_border_control">Sınır denetimi</string>
     <string name="traffic_warning_payment">Gişe</string>
-    <string name="traffic_warning_calming">Trafik-hızı-yavaşlatıcı-düzenek</string>
+    <string name="traffic_warning_calming">Hız tümseği</string>
     <string name="sleep_mode_stop_dialog">GPS arka plan modunu durdur?</string>
     <string name="stop_navigation_service">Dur</string>
     <string name="save_global_track_interval_descr">(Haritadaki GPX kayıt widget\'ı aracılığıyla etkinleştirilen) genel rota kaydı için kayıt aralığını belirtin.</string>
@@ -3787,4 +3790,10 @@
     <string name="shared_string_custom">Özel</string>
     <string name="gpx_direction_arrows">Yön okları</string>
     <string name="track_coloring_solid">Koyu</string>
+    <string name="plan_route_last_edited">Son düzenleme</string>
+    <string name="plan_route_import_track">Yolu içe aktar</string>
+    <string name="plan_route_open_existing_track">Mevcut yolu aç</string>
+    <string name="plan_route_create_new_route">Yeni güzergah oluştur</string>
+    <string name="plan_route_select_track_file_for_open">Açmak için bir yol dosyası seçin.</string>
+    <string name="shared_string_done">Bitti</string>
 </resources>

@@ -434,7 +434,9 @@
     <string name="gpx_option_reverse_route">反轉 GPX 方向</string>
     <string name="gpx_option_destination_point">使用目前的目的地</string>
     <string name="gpx_option_from_start_point">沿著整條軌跡往前</string>
-    <string name="switch_to_vector_map_to_see">指定以離線向量地圖顯示\n\t\n\t啟用方式\'選單\' -&gt; \'組態地圖\' -&gt; \'地圖來源…\' -&gt; \'離線向量圖\'。</string>
+    <string name="switch_to_vector_map_to_see">此位置目前有向量地圖可以使用。
+\n\t
+\n\t想要使用，請從「選單」→「設定地圖」→「地圖來源……」→「離線向量地圖」。</string>
     <string name="choose_audio_stream">語音導航輸出</string>
     <string name="choose_audio_stream_descr">選取要播放語音導航的揚聲器。</string>
     <string name="voice_stream_voice_call">通話音訊（會中斷汽車藍牙音效）</string>
@@ -1285,7 +1287,7 @@
     <string name="traffic_warning_border_control">邊境管制</string>
     <string name="traffic_warning_payment">收費站</string>
     <string name="traffic_warning_stop">停車標誌</string>
-    <string name="traffic_warning_calming">交通寧靜區</string>
+    <string name="traffic_warning_calming">減速丘</string>
     <string name="traffic_warning_speed_camera">測速照相</string>
     <string name="traffic_warning">交通流量警示</string>
     <string name="local_index_description">輕點任何現有的項目，查看更詳細的資訊，長按則停用或刪除。裝置上目前的資料有 (%1$s 可用)：</string>
@@ -3827,4 +3829,10 @@
     <string name="shared_string_custom">自訂</string>
     <string name="gpx_direction_arrows">方向箭頭</string>
     <string name="track_coloring_solid">密實</string>
+    <string name="plan_route_last_edited">最後編輯</string>
+    <string name="plan_route_import_track">匯入軌跡</string>
+    <string name="plan_route_open_existing_track">開啟既有的軌跡</string>
+    <string name="plan_route_create_new_route">建立新路線</string>
+    <string name="plan_route_select_track_file_for_open">選取要開啟的軌跡檔。</string>
+    <string name="shared_string_done">完成</string>
 </resources>

@@ -767,8 +767,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			minValue[0] = Math.round(Math.min(minSpeedValue, settingsDefaultSpeed) * ratio[0]);
 			maxValue[0] = Math.round(Math.max(maxSpeedValue, settingsDefaultSpeed) * ratio[0]);
 
-			min = Math.round(Math.min(router.getMinSpeed(), settingsDefaultSpeed) * ratio[0] / 2f);
-			max = Math.round(Math.max(router.getMaxSpeed(), settingsDefaultSpeed) * ratio[0] * 1.5f);
+			min = Math.round(Math.min(minValue[0], router.getMinSpeed() * ratio[0] / 2f));
+			max = Math.round(Math.max(maxValue[0], router.getMaxSpeed() * ratio[0] * 1.5f));
 		}
 
 		boolean nightMode = !app.getSettings().isLightContentForMode(mode);

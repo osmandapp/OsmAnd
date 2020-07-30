@@ -1185,7 +1185,7 @@
     <string name="speed_limit_exceed_message">حدد حد السرعة المسموح به لتلقي تنبيه صوتي إذا ما تجاوزته.</string>
     <string name="traffic_warning_border_control">مراقبة الحدود</string>
     <string name="traffic_warning_payment">كشك الرسوم</string>
-    <string name="traffic_warning_calming">تخفيف الازدحام</string>
+    <string name="traffic_warning_calming">مطب</string>
     <string name="traffic_warning_speed_camera">كاميرا مراقبة السرعة</string>
     <string name="traffic_warning">تنبيه مروري</string>
     <string name="speak_poi">نقاط الاهتمام المجاورة</string>

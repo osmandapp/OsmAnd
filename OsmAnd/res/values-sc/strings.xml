@@ -3828,4 +3828,16 @@
     <string name="add_to_a_track">Annanghe a una rasta</string>
     <string name="shared_string_custom">Personalizadu</string>
     <string name="gpx_direction_arrows">Fritzas de diretzione</string>
+    <string name="add_hidden_group_info">Su puntu annànghidu no at a èssere visìbile in sa mapa, ca su grupu ischertadu est cuadu. Lu podes agatare in \"%s\".</string>
+    <string name="track_show_start_finish_icons">Ammustra sas iconas de incumintzu e acabu</string>
+    <string name="select_track_width">Ischerta sa largària</string>
+    <string name="gpx_split_interval_descr">Ischerta s\'intervallu in ue sos sinnos cun distàntzia o oràriu in sa mapa ant a èssere ammustrados.</string>
+    <string name="gpx_split_interval_none_descr">Ischerta s\'optzione de partzidura chi cheres: pro tempus o pro distàntzia.</string>
+    <string name="track_coloring_solid">Sòlidu</string>
+    <string name="plan_route_last_edited">Ùrtima modìfica</string>
+    <string name="plan_route_open_existing_track">Aberi una rasta chi esistit giai</string>
+    <string name="plan_route_import_track">Importa una rasta</string>
+    <string name="plan_route_create_new_route">Crea un\'àndala noa</string>
+    <string name="plan_route_select_track_file_for_open">Ischerta unu documentu de rasta de abèrrere.</string>
+    <string name="shared_string_done">Fatu</string>
 </resources>

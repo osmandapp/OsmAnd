@@ -857,10 +857,9 @@ public class RoutingHelper {
 						l.newRouteIsCalculated(newRoute, showToast);
 					}
 				}
-				if (showToast.value && OsmandPlugin.isDevelopment()) {
+				if (showToast.value && newRoute && OsmandPlugin.isDevelopment()) {
 					String msg = app.getString(R.string.new_route_calculated_dist_dbg,
 							OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app),
-
 							((int)res.getRoutingTime()) + " sec",
 							res.getCalculateTime(), res.getVisitedSegments(), res.getLoadedTiles());
 					app.showToastMessage(msg);

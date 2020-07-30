@@ -292,6 +292,7 @@ public class BinaryMapRouteReaderAdapter {
 	public static class RouteRegion extends BinaryIndexPart {
 		public int regionsRead;
 		public List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
+		public int routeEncodingRulesBytes = 0;
 		public Map<String, Integer> decodingRules = null;
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
 		List<RouteSubregion> basesubregions = new ArrayList<RouteSubregion>();
@@ -614,6 +615,7 @@ public class BinaryMapRouteReaderAdapter {
 	
 	protected void readRouteIndex(RouteRegion region) throws IOException {
 		int routeEncodingRule = 1;
+		int routeEncodingRulesSize = 0;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -626,10 +628,13 @@ public class BinaryMapRouteReaderAdapter {
 				break;
 			case OsmandOdb.OsmAndRoutingIndex.RULES_FIELD_NUMBER: {
 				int len = codedIS.readInt32();
+				if(routeEncodingRulesSize == 0) {
+					routeEncodingRulesSize = codedIS.getTotalBytesRead();	
+				}
 				int oldLimit = codedIS.pushLimit(len);
 				readRouteEncodingRule(region, routeEncodingRule++);
-				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				codedIS.popLimit(oldLimit);
+				region.routeEncodingRulesBytes = codedIS.getTotalBytesRead() - routeEncodingRulesSize;
 			}  break;
 			case OsmandOdb.OsmAndRoutingIndex.ROOTBOXES_FIELD_NUMBER :
 			case OsmandOdb.OsmAndRoutingIndex.BASEMAPBOXES_FIELD_NUMBER :{

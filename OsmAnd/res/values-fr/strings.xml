@@ -3814,4 +3814,10 @@
     <string name="track_show_start_finish_icons">Afficher les icônes de départ et d\'arrivée</string>
     <string name="select_track_width">Sélectionner la largeur</string>
     <string name="gpx_direction_arrows">Flèches de direction</string>
+    <string name="plan_route_last_edited">Dernière modification</string>
+    <string name="plan_route_import_track">Importer une trace</string>
+    <string name="plan_route_open_existing_track">Ouvrir une trace existante</string>
+    <string name="plan_route_create_new_route">Créer un nouvel itinéraire</string>
+    <string name="plan_route_select_track_file_for_open">Sélectionnez un fichier de trace à ouvrir.</string>
+    <string name="shared_string_done">Terminé</string>
 </resources>
