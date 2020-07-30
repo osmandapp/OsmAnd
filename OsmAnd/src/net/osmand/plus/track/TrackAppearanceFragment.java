@@ -360,13 +360,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		int strokeColor = UiUtilities.getColorWithAlpha(Color.BLACK, 0.7f);
 		Drawable strokeIcon = app.getUIUtilities().getPaintedIcon(strokeIconId, strokeColor);
 
-		Drawable arrows = null;
 		if (showArrows) {
 			int arrowsIconId = getArrowsIconId(widthAttr);
 			int contrastColor = UiUtilities.getContrastColor(app, color, false);
-			arrows = app.getUIUtilities().getPaintedIcon(arrowsIconId, contrastColor);
+			Drawable arrows = app.getUIUtilities().getPaintedIcon(arrowsIconId, contrastColor);
+			return UiUtilities.getLayeredIcon(widthIcon, strokeIcon, arrows);
 		}
-		return UiUtilities.getLayeredIcon(widthIcon, strokeIcon, arrows);
+		return UiUtilities.getLayeredIcon(widthIcon, strokeIcon);
 	}
 
 	private void updateCardsLayout() {
