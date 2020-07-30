@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -31,12 +33,18 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 	private static final String ZOOM_OUT_BUTTON_ID = ZOOM_OUT_HUD_ID + TAG;
 	private static final String BACK_TO_LOC_BUTTON_ID = BACK_TO_LOC_HUD_ID + TAG;
 
-	private View mapControlsView;
+	@Nullable
+	private View mapBottomHudButtons;
 
+	@Nullable
 	private RulerWidget rulerWidget;
 
 	public float getMiddleStateKoef() {
 		return 0.5f;
+	}
+
+	public boolean isShowMapBottomHudButtons() {
+		return true;
 	}
 
 	@Override
@@ -50,7 +58,15 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		if (view != null) {
 			setListener(this);
 			getBottomScrollView().setScrollingEnabled(true);
-			setupControlButtons(view);
+
+			mapBottomHudButtons = view.findViewById(R.id.map_controls_container);
+			if (mapBottomHudButtons != null) {
+				if (isShowMapBottomHudButtons()) {
+					setupControlButtons(mapBottomHudButtons);
+				} else {
+					AndroidUiHelper.updateVisibility(mapBottomHudButtons, false);
+				}
+			}
 		}
 		return view;
 	}
@@ -88,12 +104,10 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 
 	private void setupControlButtons(@NonNull View view) {
 		MapActivity mapActivity = requireMapActivity();
-		mapControlsView = view.findViewById(R.id.map_controls_container);
-
-		View zoomInButtonView = mapControlsView.findViewById(R.id.map_zoom_in_button);
-		View zoomOutButtonView = mapControlsView.findViewById(R.id.map_zoom_out_button);
-		View myLocButtonView = mapControlsView.findViewById(R.id.map_my_location_button);
-		View mapRulerView = mapControlsView.findViewById(R.id.map_ruler_layout);
+		View zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
+		View zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
+		View myLocButtonView = view.findViewById(R.id.map_my_location_button);
+		View mapRulerView = view.findViewById(R.id.map_ruler_layout);
 
 		MapActivityLayers mapLayers = mapActivity.getMapLayers();
 
@@ -110,7 +124,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 	}
 
 	public void updateMapControlsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
-		View mapControlsView = this.mapControlsView;
+		View mapControlsView = this.mapBottomHudButtons;
 		if (mapControlsView != null) {
 			int zoomY = y - getMapControlsHeight();
 			if (animated) {
@@ -122,19 +136,19 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 	}
 
 	private int getMapControlsHeight() {
-		View mapControlsContainer = this.mapControlsView;
+		View mapControlsContainer = this.mapBottomHudButtons;
 		return mapControlsContainer != null ? mapControlsContainer.getHeight() : 0;
 	}
 
 	private void updateMapControlsVisibility(int menuState) {
-		if (mapControlsView != null) {
+		if (mapBottomHudButtons != null) {
 			if (menuState == MenuState.HEADER_ONLY) {
-				if (mapControlsView.getVisibility() != View.VISIBLE) {
-					mapControlsView.setVisibility(View.VISIBLE);
+				if (mapBottomHudButtons.getVisibility() != View.VISIBLE) {
+					mapBottomHudButtons.setVisibility(View.VISIBLE);
 				}
 			} else {
-				if (mapControlsView.getVisibility() == View.VISIBLE) {
-					mapControlsView.setVisibility(View.INVISIBLE);
+				if (mapBottomHudButtons.getVisibility() == View.VISIBLE) {
+					mapBottomHudButtons.setVisibility(View.INVISIBLE);
 				}
 			}
 		}
