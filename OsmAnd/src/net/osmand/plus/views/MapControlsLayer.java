@@ -32,6 +32,7 @@ import androidx.core.view.ViewPropertyAnimatorListener;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
@@ -52,6 +53,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
@@ -440,7 +442,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void navigateButton() {
 		if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 			ActivityCompat.requestPermissions(mapActivity,
-					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 					REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION);
 		} else {
 			final MapContextMenu menu = mapActivity.getContextMenu();
@@ -449,43 +451,48 @@ public class MapControlsLayer extends OsmandMapLayer {
 			menu.hide();
 			final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 			RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
-			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
-				DirectionsDialogs.addWaypointDialogAndLaunchMap(mapActivity, latLon.getLatitude(),
-						latLon.getLongitude(), pointDescription);
-			} else if (targets.getIntermediatePoints().isEmpty()) {
-				startRoutePlanningWithDestination(latLon, pointDescription, targets);
+
+			Object object = menu.getObject();
+			if (object instanceof SelectedGpxPoint && !((SelectedGpxPoint) object).getSelectedGpxFile().isShowCurrentTrack()) {
+				GPXFile gpxFile = ((SelectedGpxPoint) object).getSelectedGpxFile().getGpxFile();
+				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpxFile, null, null, true, true, MenuState.HEADER_ONLY);
+				routingHelper.recalculateRouteDueToSettingsChange();
 				menu.close();
 			} else {
-				AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
-				bld.setTitle(R.string.new_directions_point_dialog);
-				final int[] defaultVls = new int[]{0};
-				bld.setSingleChoiceItems(new String[]{
-						mapActivity.getString(R.string.clear_intermediate_points),
-						mapActivity.getString(R.string.keep_intermediate_points)
-				}, 0, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						defaultVls[0] = which;
-					}
-				});
-				bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+				if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+					DirectionsDialogs.addWaypointDialogAndLaunchMap(mapActivity, latLon.getLatitude(),
+							latLon.getLongitude(), pointDescription);
+				} else if (targets.getIntermediatePoints().isEmpty()) {
+					startRoutePlanningWithDestination(latLon, pointDescription, targets);
+					menu.close();
+				} else {
+					AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
+					bld.setTitle(R.string.new_directions_point_dialog);
+					final int[] defaultVls = new int[] {0};
+					bld.setSingleChoiceItems(new String[] {
+							mapActivity.getString(R.string.clear_intermediate_points),
+							mapActivity.getString(R.string.keep_intermediate_points)
+					}, 0, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							defaultVls[0] = which;
+						}
+					});
+					bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if (defaultVls[0] == 0) {
-							targets.removeAllWayPoints(false, true);
-							targets.navigateToPoint(latLon, true, -1, pointDescription);
-							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
-							menu.close();
-						} else {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if (defaultVls[0] == 0) {
+								targets.removeAllWayPoints(false, true);
+							}
 							targets.navigateToPoint(latLon, true, -1, pointDescription);
 							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 							menu.close();
 						}
-					}
-				});
-				bld.setNegativeButton(R.string.shared_string_cancel, null);
-				bld.show();
+					});
+					bld.setNegativeButton(R.string.shared_string_cancel, null);
+					bld.show();
+				}
 			}
 		}
 	}
