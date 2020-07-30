@@ -536,7 +536,7 @@ public class GpxSelectionHelper {
 							gpx.setGradientScaleType(obj.optString(GRADIENT_SCALE_TYPE));
 						}
 						if (obj.has(SHOW_START_FINISH)) {
-							gpx.setShowStartFinish(obj.optBoolean(SHOW_START_FINISH, false));
+							gpx.setShowStartFinish(obj.optBoolean(SHOW_START_FINISH, true));
 						}
 						if (obj.has(WIDTH)) {
 							gpx.setWidth(obj.getString(WIDTH));

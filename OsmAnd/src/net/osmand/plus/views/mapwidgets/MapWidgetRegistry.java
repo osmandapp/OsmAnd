@@ -27,6 +27,8 @@ import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapQuickActionLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.util.Collections;
@@ -362,7 +364,7 @@ public class MapWidgetRegistry {
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.coordinates_widget, map)
 				.setIcon(R.drawable.ic_action_coordinates_widget)
 				.setSelected(settings.SHOW_COORDINATES_WIDGET.get())
-				.setListener(new ApearanceItemClickListener(settings.SHOW_COORDINATES_WIDGET, map))
+				.setListener(new AppearanceItemClickListener(settings.SHOW_COORDINATES_WIDGET, map))
 				.setLayout(R.layout.list_item_icon_and_switch).createItem());
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)
 				.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
@@ -408,13 +410,12 @@ public class MapWidgetRegistry {
 							  @StringRes int stringId, OsmandPreference<Boolean> pref) {
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(stringId, map)
 				.setSelected(pref.get())
-				.setListener(new ApearanceItemClickListener(pref, map)).createItem());
+				.setListener(new AppearanceItemClickListener(pref, map)).createItem());
 	}
 
 	public static boolean distChanged(int oldDist, int dist) {
 		return !(oldDist != 0 && oldDist - dist < 100 && Math.abs(((float) dist - oldDist) / oldDist) < 0.01);
 	}
-
 
 	public void addControls(MapActivity map, ContextMenuAdapter cm, ApplicationMode mode) {
 		addQuickActionControl(map, cm, mode);
@@ -819,49 +820,23 @@ public class MapWidgetRegistry {
 		return cm;
 	}
 
-	class ApearanceItemClickListener implements ContextMenuAdapter.ItemClickListener {
-		private MapActivity map;
+	static class AppearanceItemClickListener implements ContextMenuAdapter.ItemClickListener {
+
+		private MapActivity mapActivity;
 		private OsmandPreference<Boolean> pref;
 
-		public ApearanceItemClickListener(OsmandPreference<Boolean> pref, MapActivity map) {
+		public AppearanceItemClickListener(OsmandPreference<Boolean> pref, MapActivity mapActivity) {
 			this.pref = pref;
-			this.map = map;
+			this.mapActivity = mapActivity;
 		}
 
 		@Override
 		public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a,
 										  int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 			pref.set(!pref.get());
-			map.updateApplicationModeSettings();
+			mapActivity.updateApplicationModeSettings();
 			a.notifyDataSetChanged();
 			return false;
 		}
-	}
-
-	public static abstract class WidgetState {
-
-		private OsmandApplication ctx;
-
-		public OsmandApplication getCtx() {
-			return ctx;
-		}
-
-		public WidgetState(OsmandApplication ctx) {
-			this.ctx = ctx;
-		}
-
-		public abstract int getMenuTitleId();
-
-		public abstract int getMenuIconId();
-
-		public abstract int getMenuItemId();
-
-		public abstract int[] getMenuTitleIds();
-
-		public abstract int[] getMenuIconIds();
-
-		public abstract int[] getMenuItemIds();
-
-		public abstract void changeState(int stateId);
 	}
 }

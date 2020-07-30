@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -68,25 +67,10 @@ public class SplitIntervalCard extends BaseCard {
 		if (splitInterval == 0) {
 			intervalStr = GpxSplitType.NO_SPLIT.getHumanString(app);
 		} else if (trackDrawInfo.getSplitType() == GpxSplitType.DISTANCE.getType()) {
-			intervalStr = getFormattedDistanceInterval(app, trackDrawInfo.getSplitInterval());
+			intervalStr = OsmAndFormatter.getFormattedDistanceInterval(app, trackDrawInfo.getSplitInterval());
 		} else if (trackDrawInfo.getSplitType() == GpxSplitType.TIME.getType()) {
-			intervalStr = getFormattedTimeInterval(app, splitInterval);
+			intervalStr = OsmAndFormatter.getFormattedTimeInterval(app, splitInterval);
 		}
 		return intervalStr;
-	}
-
-	public static String getFormattedTimeInterval(OsmandApplication app, double interval) {
-		if (interval < 60) {
-			return interval + " " + app.getString(R.string.int_seconds);
-		} else if (interval % 60 == 0) {
-			return (interval / 60) + " " + app.getString(R.string.int_min);
-		} else {
-			return (interval / 60f) + " " + app.getString(R.string.int_min);
-		}
-	}
-
-	public static String getFormattedDistanceInterval(OsmandApplication app, double interval) {
-		double roundedDist = OsmAndFormatter.calculateRoundedDist(interval, app);
-		return OsmAndFormatter.getFormattedDistance((float) roundedDist, app);
 	}
 }

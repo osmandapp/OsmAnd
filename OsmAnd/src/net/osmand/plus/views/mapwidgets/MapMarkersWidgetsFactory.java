@@ -20,6 +20,7 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

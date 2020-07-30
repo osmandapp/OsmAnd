@@ -1,6 +1,5 @@
 package net.osmand.plus.track;
 
-import android.Manifest;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -11,41 +10,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.ContextMenuFragment;
-import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
+import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
@@ -55,19 +48,21 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
+import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
-import static net.osmand.plus.track.TrackDrawInfo.TRACK_FILE_PATH;
 
-public class TrackAppearanceFragment extends ContextMenuFragment implements CardListener, ContextMenuFragmentListener {
+public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener {
 
-	public static final String TAG = TrackAppearanceFragment.class.getName();
+	public static final String TAG = TrackAppearanceFragment.class.getSimpleName();
 
 	private static final Log log = PlatformUtil.getLog(TrackAppearanceFragment.class);
 
 	private OsmandApplication app;
 
+	@Nullable
 	private GpxDataItem gpxDataItem;
 	private TrackDrawInfo trackDrawInfo;
 	private SelectedGpxFile selectedGpxFile;
@@ -80,8 +75,6 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 	private SplitIntervalCard splitIntervalCard;
 
 	private ImageView appearanceIcon;
-	private View zoomButtonsView;
-	private ImageButton myLocButtonView;
 
 	@Override
 	public int getMainLayoutId() {
@@ -118,16 +111,32 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
-			trackDrawInfo = new TrackDrawInfo();
-			trackDrawInfo.readBundle(savedInstanceState);
-			gpxDataItem = app.getGpxDbHelper().getItem(new File(trackDrawInfo.getFilePath()));
-			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(trackDrawInfo.getFilePath());
+			trackDrawInfo = new TrackDrawInfo(savedInstanceState);
+			if (trackDrawInfo.isCurrentRecording()) {
+				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+			} else {
+				selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(trackDrawInfo.getFilePath());
+			}
+			if (!selectedGpxFile.isShowCurrentTrack()) {
+				gpxDataItem = app.getGpxDbHelper().getItem(new File(trackDrawInfo.getFilePath()));
+			}
 		} else if (arguments != null) {
-			String gpxFilePath = arguments.getString(TRACK_FILE_PATH);
-			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
-			File file = new File(selectedGpxFile.getGpxFile().path);
-			gpxDataItem = app.getGpxDbHelper().getItem(file);
-			trackDrawInfo = new TrackDrawInfo(gpxDataItem);
+			String gpxFilePath = arguments.getString(TRACK_FILE_NAME);
+			boolean currentRecording = arguments.getBoolean(CURRENT_RECORDING, false);
+
+			if (gpxFilePath == null && !currentRecording) {
+				log.error("Required extra '" + TRACK_FILE_NAME + "' is missing");
+				dismiss();
+				return;
+			}
+			if (currentRecording) {
+				trackDrawInfo = new TrackDrawInfo(true);
+				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+			} else {
+				gpxDataItem = app.getGpxDbHelper().getItem(new File(gpxFilePath));
+				trackDrawInfo = new TrackDrawInfo(gpxDataItem, false);
+				selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
+			}
 			updateTrackColor();
 		}
 	}
@@ -155,7 +164,6 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			appearanceIcon = view.findViewById(R.id.appearance_icon);
-			setListener(this);
 
 			if (isPortrait()) {
 				updateCardsLayout();
@@ -169,7 +177,6 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 				params.gravity = Gravity.BOTTOM | Gravity.START;
 				view.findViewById(R.id.control_buttons).setLayoutParams(params);
 			}
-			buildZoomButtons(view);
 			enterTrackAppearanceMode();
 			runLayoutListener();
 		}
@@ -194,21 +201,6 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 	protected void updateMainViewLayout(int posY) {
 		super.updateMainViewLayout(posY);
 		updateStatusBarColor();
-	}
-
-	@Override
-	public void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated) {
-		updateZoomButtonsPos(fragment, y, animated);
-	}
-
-	@Override
-	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState) {
-		updateZoomButtonsVisibility(menuState);
-	}
-
-	@Override
-	public void onContextMenuDismiss(@NonNull ContextMenuFragment fragment) {
-
 	}
 
 	@Override
@@ -333,130 +325,6 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		return y;
 	}
 
-	private void buildZoomButtons(@NonNull View view) {
-		OsmandApplication app = requireMyApplication();
-		this.zoomButtonsView = view.findViewById(R.id.map_hud_controls);
-		ImageButton zoomInButtonView = (ImageButton) view.findViewById(R.id.map_zoom_in_button);
-		ImageButton zoomOutButtonView = (ImageButton) view.findViewById(R.id.map_zoom_out_button);
-		AndroidUtils.updateImageButton(app, zoomInButtonView, R.drawable.ic_zoom_in, R.drawable.ic_zoom_in,
-				R.drawable.btn_circle_trans, R.drawable.btn_circle_night, isNightMode());
-		AndroidUtils.updateImageButton(app, zoomOutButtonView, R.drawable.ic_zoom_out, R.drawable.ic_zoom_out,
-				R.drawable.btn_circle_trans, R.drawable.btn_circle_night, isNightMode());
-		zoomInButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				doZoomIn();
-			}
-		});
-		zoomOutButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				doZoomOut();
-			}
-		});
-
-		myLocButtonView = (ImageButton) view.findViewById(R.id.map_my_location_button);
-		myLocButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
-						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-					} else {
-						ActivityCompat.requestPermissions(mapActivity,
-								new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
-								OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
-					}
-				}
-			}
-		});
-		updateMyLocation();
-
-		zoomButtonsView.setVisibility(View.VISIBLE);
-	}
-
-	private void updateMyLocation() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
-		}
-		OsmandApplication app = mapActivity.getMyApplication();
-		Location lastKnownLocation = app.getLocationProvider().getLastKnownLocation();
-		boolean enabled = lastKnownLocation != null;
-		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
-
-		ImageButton myLocButtonView = this.myLocButtonView;
-		if (myLocButtonView != null) {
-			if (!enabled) {
-				myLocButtonView.setImageDrawable(getIcon(R.drawable.ic_my_location, R.color.icon_color_default_light));
-				AndroidUtils.setBackground(app, myLocButtonView, isNightMode(), R.drawable.btn_circle, R.drawable.btn_circle_night);
-				myLocButtonView.setContentDescription(mapActivity.getString(R.string.unknown_location));
-			} else if (tracked) {
-				myLocButtonView.setImageDrawable(getIcon(R.drawable.ic_my_location, R.color.color_myloc_distance));
-				AndroidUtils.setBackground(app, myLocButtonView, isNightMode(), R.drawable.btn_circle, R.drawable.btn_circle_night);
-			} else {
-				myLocButtonView.setImageResource(R.drawable.ic_my_location);
-				AndroidUtils.setBackground(app, myLocButtonView, isNightMode(), R.drawable.btn_circle_blue, R.drawable.btn_circle_blue);
-				myLocButtonView.setContentDescription(mapActivity.getString(R.string.map_widget_back_to_loc));
-			}
-			if (app.accessibilityEnabled()) {
-				myLocButtonView.setClickable(enabled && !tracked && app.getRoutingHelper().isFollowingMode());
-			}
-		}
-	}
-
-	public void updateZoomButtonsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
-		View zoomButtonsView = this.zoomButtonsView;
-		if (zoomButtonsView != null) {
-			int zoomY = y - getZoomButtonsHeight();
-			if (animated) {
-				fragment.animateView(zoomButtonsView, zoomY);
-			} else {
-				zoomButtonsView.setY(zoomY);
-			}
-		}
-	}
-
-	private int getZoomButtonsHeight() {
-		View zoomButtonsView = this.zoomButtonsView;
-		return zoomButtonsView != null ? zoomButtonsView.getHeight() : 0;
-	}
-
-	public void doZoomIn() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			OsmandMapTileView map = mapActivity.getMapView();
-			if (map.isZooming() && map.hasCustomMapRatio()) {
-				mapActivity.changeZoom(2, System.currentTimeMillis());
-			} else {
-				mapActivity.changeZoom(1, System.currentTimeMillis());
-			}
-		}
-	}
-
-	public void doZoomOut() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.changeZoom(-1, System.currentTimeMillis());
-		}
-	}
-
-	private void updateZoomButtonsVisibility(int menuState) {
-		View zoomButtonsView = this.zoomButtonsView;
-		if (zoomButtonsView != null) {
-			if (menuState == MenuState.HEADER_ONLY) {
-				if (zoomButtonsView.getVisibility() != View.VISIBLE) {
-					zoomButtonsView.setVisibility(View.VISIBLE);
-				}
-			} else {
-				if (zoomButtonsView.getVisibility() == View.VISIBLE) {
-					zoomButtonsView.setVisibility(View.INVISIBLE);
-				}
-			}
-		}
-	}
-
 	private void updateAppearanceIcon() {
 		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), trackDrawInfo.getColor());
 		appearanceIcon.setImageDrawable(icon);
@@ -535,7 +403,7 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				discardChanges();
+				discardSplitChanges();
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					activity.onBackPressed();
@@ -570,15 +438,21 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 		gpxFile.setShowArrows(trackDrawInfo.isShowArrows());
 		gpxFile.setShowStartFinish(trackDrawInfo.isShowStartFinish());
 
-		app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
-
-		gpxDataItem = new GpxDataItem(new File(gpxFile.path), gpxFile);
-		app.getGpxDbHelper().add(gpxDataItem);
-		saveGpx(gpxFile);
+		if (gpxFile.showCurrentTrack) {
+			app.getSettings().CURRENT_TRACK_COLOR.set(trackDrawInfo.getColor());
+		} else {
+			if (gpxDataItem != null) {
+				gpxDataItem = new GpxDataItem(new File(gpxFile.path), gpxFile);
+				app.getGpxDbHelper().add(gpxDataItem);
+			}
+			app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
+			saveGpx(gpxFile);
+		}
 	}
 
-	private void discardChanges() {
-		if (gpxDataItem.getSplitType() != trackDrawInfo.getSplitType() || gpxDataItem.getSplitInterval() != trackDrawInfo.getSplitInterval()) {
+	private void discardSplitChanges() {
+		if (gpxDataItem != null && (gpxDataItem.getSplitType() != trackDrawInfo.getSplitType()
+				|| gpxDataItem.getSplitInterval() != trackDrawInfo.getSplitInterval())) {
 			int timeSplit = (int) gpxDataItem.getSplitInterval();
 			double distanceSplit = gpxDataItem.getSplitInterval();
 
@@ -640,9 +514,11 @@ public class TrackAppearanceFragment extends ContextMenuFragment implements Card
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
 
-			splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
-			splitIntervalCard.setListener(this);
-			cardsContainer.addView(splitIntervalCard.build(mapActivity));
+			if (!selectedGpxFile.isShowCurrentTrack()) {
+				splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
+				splitIntervalCard.setListener(this);
+				cardsContainer.addView(splitIntervalCard.build(mapActivity));
+			}
 
 			DirectionArrowsCard directionArrowsCard = new DirectionArrowsCard(mapActivity, trackDrawInfo);
 			directionArrowsCard.setListener(this);

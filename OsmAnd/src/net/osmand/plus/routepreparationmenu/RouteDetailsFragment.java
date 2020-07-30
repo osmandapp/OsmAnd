@@ -56,7 +56,6 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -67,7 +66,6 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
-import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -83,6 +81,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -315,7 +314,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		statisticCard = new RouteStatisticCard(mapActivity, gpx, new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent ev) {
-				InterceptorLinearLayout mainView = getMainView();
+				LinearLayout mainView = getMainView();
 				if (mainView != null) {
 					mainView.requestDisallowInterceptTouchEvent(true);
 				}

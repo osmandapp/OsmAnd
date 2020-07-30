@@ -70,8 +70,8 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 import net.osmand.util.MapUtils;
@@ -2128,7 +2128,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return DashAudioVideoNotesFragment.FRAGMENT_DATA;
 	}
 
-	public class AudioVideoNotesWidgetState extends MapWidgetRegistry.WidgetState {
+	public class AudioVideoNotesWidgetState extends WidgetState {
 
 		private static final int AV_WIDGET_STATE_ASK = R.id.av_notes_widget_state_ask;
 		private static final int AV_WIDGET_STATE_AUDIO = R.id.av_notes_widget_state_audio;

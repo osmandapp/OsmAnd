@@ -34,7 +34,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.track.TrackDrawInfo.TRACK_FILE_PATH;
+import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
 
 public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -75,7 +75,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
-			String gpxFilePath = savedInstanceState.getString(TRACK_FILE_PATH);
+			String gpxFilePath = savedInstanceState.getString(TRACK_FILE_NAME);
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 			prepareSplitIntervalOptions();
 
@@ -83,7 +83,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 			selectedDistanceSplitInterval = savedInstanceState.getInt(SELECTED_DISTANCE_SPLIT_INTERVAL);
 			selectedSplitType = GpxSplitType.valueOf(savedInstanceState.getString(SELECTED_TRACK_SPLIT_TYPE));
 		} else if (arguments != null) {
-			String gpxFilePath = arguments.getString(TRACK_FILE_PATH);
+			String gpxFilePath = arguments.getString(TRACK_FILE_NAME);
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 			prepareSplitIntervalOptions();
 			updateSelectedSplitParams();
@@ -142,7 +142,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putInt(SELECTED_TIME_SPLIT_INTERVAL, selectedTimeSplitInterval);
 		outState.putInt(SELECTED_DISTANCE_SPLIT_INTERVAL, selectedDistanceSplitInterval);
 		outState.putString(SELECTED_TRACK_SPLIT_TYPE, selectedSplitType.name());
-		outState.putString(TRACK_FILE_PATH, selectedGpxFile.getGpxFile().path);
+		outState.putString(TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
 	}
 
 	private void updateSelectedSplitParams() {
@@ -188,7 +188,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	private void addDistanceOptionSplit(int value, @NonNull List<GpxDisplayGroup> displayGroups) {
 		if (displayGroups.size() > 0) {
 			double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
-			String formattedDist = SplitIntervalCard.getFormattedDistanceInterval(app, value);
+			String formattedDist = OsmAndFormatter.getFormattedDistanceInterval(app, value);
 			distanceSplitOptions.put(formattedDist, dvalue);
 			if (Math.abs(displayGroups.get(0).getSplitDistance() - dvalue) < 1) {
 				selectedDistanceSplitInterval = distanceSplitOptions.size() - 1;
@@ -198,7 +198,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void addTimeOptionSplit(int value, @NonNull List<GpxDisplayGroup> model) {
 		if (model.size() > 0) {
-			String time = SplitIntervalCard.getFormattedTimeInterval(app, value);
+			String time = OsmAndFormatter.getFormattedTimeInterval(app, value);
 			timeSplitOptions.put(time, value);
 			if (model.get(0).getSplitTime() == value) {
 				selectedTimeSplitInterval = timeSplitOptions.size() - 1;
@@ -327,7 +327,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		try {
 			if (fragmentManager.findFragmentByTag(SplitIntervalBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
-				args.putString(TRACK_FILE_PATH, trackDrawInfo.getFilePath());
+				args.putString(TRACK_FILE_NAME, trackDrawInfo.getFilePath());
 
 				SplitIntervalBottomSheet splitIntervalBottomSheet = new SplitIntervalBottomSheet();
 				splitIntervalBottomSheet.setArguments(args);

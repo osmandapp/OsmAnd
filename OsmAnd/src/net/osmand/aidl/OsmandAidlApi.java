@@ -80,7 +80,7 @@ import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
