@@ -29,7 +29,7 @@ public class RenderingRule {
 		this.storage = storage;
 		init(attributes);
 	}
-	
+
 	public void storeAttributes(Map<String, String> attributes){
 		this.attributes = new HashMap<String, String>(attributes);
 	}
