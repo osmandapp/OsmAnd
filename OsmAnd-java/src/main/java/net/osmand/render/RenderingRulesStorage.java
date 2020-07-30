@@ -40,11 +40,7 @@ public class RenderingRulesStorage {
 	public final static int LENGTH_RULES = 6;
 	
 	private final static int SHIFT_TAG_VAL = 16;
-	private final static String SEQ_KEY = "seq";
-	
-	
-	int seqStart = 0;
-	int seqEnd = 0;
+
 	
 	// C++
 	List<String> dictionary = new ArrayList<String>();
@@ -199,7 +195,13 @@ public class RenderingRulesStorage {
 		private final RenderingRulesStorageResolver resolver;
 		private RenderingRulesStorage dependsStorage;
 		
+		private final static String SEQ_KEY = "seq";
+		private final static String SEQ_ATTR_KEY = "#SEQ";
 		
+		boolean seqSwitch = false;
+		int seqStart = 0;
+		int seqEnd = 0;
+		List<String> sequenceKeys = new ArrayList<String>();
 		
 		public RenderingRulesHandler(XmlPullParser parser, RenderingRulesStorageResolver resolver){
 			this.parser = parser;
@@ -214,6 +216,7 @@ public class RenderingRulesStorage {
 					startElement(parser.getName());
 				} else if (tok == XmlPullParser.END_TAG) {
 					if (isSwitch(parser.getName()) && stack.peek().getAttributes().containsKey(SEQ_KEY)) {
+						seqSwitch = false;
 						seqStart = 0; 
 						seqEnd = 0;
 					}
@@ -238,6 +241,7 @@ public class RenderingRulesStorage {
 		
 		private void parseSequence(String seq) {
 			try {
+				seqSwitch = true;
 				seqStart = Integer.parseInt(seq.substring(0, seq.indexOf(':')));
 				seqEnd = Integer.parseInt(seq.substring(seq.indexOf(':') + 1, seq.length()));
 			} catch (NumberFormatException nfe) {
@@ -245,6 +249,8 @@ public class RenderingRulesStorage {
 				seqEnd = 0;
 			}
 		}
+		
+		boolean isSequencedRule = false;
 		
 		public void startElement(String name) throws XmlPullParserException, IOException {
 			
@@ -255,7 +261,6 @@ public class RenderingRulesStorage {
 			if(isCase || isSwitch){ //$NON-NLS-1$
 				attrsMap.clear();
 				boolean top = stack.size() == 0 || isTopCase();
-				boolean isSequencedRule = false;
 				parseAttributes(attrsMap);
 
 				RenderingRule renderingRule = new RenderingRule(attrsMap, isSwitch, RenderingRulesStorage.this);
@@ -265,10 +270,10 @@ public class RenderingRulesStorage {
 				
 				if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
 					RenderingRule parent = ((RenderingRule) stack.peek());
-					if (parent.getAttributes().containsKey(SEQ_KEY)) {
-						List<String> sequenceKeys = new ArrayList<String>();
+					if (seqSwitch) {
+						sequenceKeys.clear();;
 						for (Entry<String, String> attr : attrsMap.entrySet()) {
-							if (attr.getValue().contains("#SEQ")) {
+							if (attr.getValue().contains(SEQ_ATTR_KEY)) {
 								sequenceKeys.add(attr.getKey());
 							}
 						}
@@ -278,7 +283,7 @@ public class RenderingRulesStorage {
 							for (int i = seqStart; i <= seqEnd; i++) {
 								Map<String, String> seqAttrsMap = new HashMap<String, String>(attrsMap);
 								for (String key: sequenceKeys) {
-									String seqAttr = seqAttrsMap.get(key).replace("#SEQ", i+"");
+									String seqAttr = seqAttrsMap.get(key).replace(SEQ_ATTR_KEY, i + "");
 									seqAttrsMap.put(key, seqAttr);
 								}
 								seqRule = new RenderingRule(seqAttrsMap, isSwitch, RenderingRulesStorage.this);  
@@ -288,6 +293,8 @@ public class RenderingRulesStorage {
 									endElement(name);
 								}
 							}
+						} else {
+							parent.addIfElseChildren(renderingRule);
 						}
 					} else {						
 						parent.addIfElseChildren(renderingRule);
@@ -299,7 +306,7 @@ public class RenderingRulesStorage {
 				
 				if (isSwitch && attrsMap.containsKey(SEQ_KEY)) {
 					parseSequence(attrsMap.get(SEQ_KEY));
-				} //how to check if we exit this switch?
+				} 
 			} else if(isApply(name)){ //$NON-NLS-1$
 				attrsMap.clear();
 				parseAttributes(attrsMap);
