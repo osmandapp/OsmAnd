@@ -6,7 +6,7 @@
 	android:layout_height="match_parent"
 	android:background="@color/color_transparent">
 
-	<net.osmand.plus.mapcontextmenu.InterceptorLinearLayout
+	<LinearLayout
 		android:id="@+id/main_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
@@ -88,7 +88,7 @@
 
 		</FrameLayout>
 
-	</net.osmand.plus.mapcontextmenu.InterceptorLinearLayout>
+	</LinearLayout>
 
 	<FrameLayout
 		android:id="@+id/map_controls_container"
