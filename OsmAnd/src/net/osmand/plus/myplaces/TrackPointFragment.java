@@ -622,7 +622,8 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					FavouritesDbHelper fdb = app.getFavorites();
 					for (GpxDisplayItem i : getSelectedItems()) {
 						if (i.locationStart != null) {
-							FavouritePoint fp = FavouritePoint.fromWpt(i.locationStart, app);
+							FavouritePoint fp = FavouritePoint.fromWpt(
+									i.locationStart, app, editText.getText().toString());
 							if (!Algorithms.isEmpty(i.description)) {
 								fp.setDescription(i.description);
 							}
