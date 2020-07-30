@@ -1287,7 +1287,7 @@
     <string name="traffic_warning_border_control">邊境管制</string>
     <string name="traffic_warning_payment">收費站</string>
     <string name="traffic_warning_stop">停車標誌</string>
-    <string name="traffic_warning_calming">交通寧靜區</string>
+    <string name="traffic_warning_calming">減速丘</string>
     <string name="traffic_warning_speed_camera">測速照相</string>
     <string name="traffic_warning">交通流量警示</string>
     <string name="local_index_description">輕點任何現有的項目，查看更詳細的資訊，長按則停用或刪除。裝置上目前的資料有 (%1$s 可用)：</string>
