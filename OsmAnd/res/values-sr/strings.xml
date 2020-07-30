@@ -684,7 +684,7 @@
     <string name="shared_string_not_selected">Није означено</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">min</string>
-    <string name="traffic_warning_calming">Смиривање саобраћаја</string>
+    <string name="traffic_warning_calming">Лежећи полицајац</string>
     <string name="way_alarms">Упозорења о гужвама у саобраћају</string>
     <string name="background_service_is_enabled_question">Позадинске услуге OsmAnd-а су и даље покренуте. Прекинути и њих?</string>
     <string name="sleep_mode_stop_dialog">Прекинути позадински режим GPS-а?</string>

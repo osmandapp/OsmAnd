@@ -3815,4 +3815,7 @@
     <string name="please_provide_point_name_error">Por favor, proporcione un nombre para el punto</string>
     <string name="quick_action_remove_next_destination_descr">El punto de destino actual de la ruta será borrado. Si se trata del destino, la navegación se detendrá.</string>
     <string name="search_download_wikipedia_maps">Descargar mapas de Wikipedia</string>
+    <string name="plan_route_open_existing_track">Abrir la pista existente</string>
+    <string name="plan_route_create_new_route">Crea una nueva ruta</string>
+    <string name="plan_a_route">Planea una ruta</string>
 </resources>

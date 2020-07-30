@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.osmand.PlatformUtil;
-import net.osmand.osm.MapRenderingTypes.MapRulType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -155,18 +154,30 @@ public abstract class MapRenderingTypes {
 		return a;
 	}
 	
-	protected MapRulType checkOrCreateTextRule(String targetTag) {
+	protected MapRulType checkOrCreateTextRule(String targetTag, MapRulType ref) {
 		MapRulType mt = types.get(constructRuleKey(targetTag, null));
 		if (mt == null) {
-			mt = registerRuleType(MapRulType.createText(targetTag));
+			MapRulType ct = MapRulType.createText(targetTag, ref);
+			mt = registerRuleType(ct);
 		}
 		return mt;
 	}
 	
-	protected MapRulType checkOrCreateAdditional(String tag, String value) {
+	protected MapRulType checkOrMainRule(String tag, String value, int minzoom) {
 		MapRulType mt = types.get(constructRuleKey(tag, value));
 		if (mt == null) {
-			mt = registerRuleType(MapRulType.createAdditional(tag, value));
+			mt = registerRuleType(MapRulType.createMainEntity(tag, value));
+			mt.minzoom = minzoom;
+			mt.maxzoom = 21;
+		}
+		return mt;
+	}
+	
+	protected MapRulType checkOrCreateAdditional(String tag, String value, MapRulType ref) {
+		MapRulType mt = types.get(constructRuleKey(tag, value));
+		if (mt == null) {
+			MapRulType ct = MapRulType.createAdditional(tag, value, ref);
+			mt = registerRuleType(ct);
 		}
 		return mt;
 	}
@@ -319,16 +330,12 @@ public abstract class MapRenderingTypes {
 					rtype.additionalTags.put(tg, targetTag);
 				}
 			}
+			rtype.relationGroupPrefix = parser.getAttributeValue("", "relationGroupPrefix"); //$NON-NLS-1$
 			String relationGroupAdditionalTags = parser.getAttributeValue("", "relationGroupAdditionalTags");
-			String relationAdditionalPrefix = parser.getAttributeValue("", "relationGroupAdditionalPrefix");
 			if (relationGroupAdditionalTags != null) {
 				rtype.relationGroupAdditionalTags = new LinkedHashMap<String, String>();
 				for(String tg : relationGroupAdditionalTags.split(",")) {
-					String targetTag = tg;
-					if(!Algorithms.isEmpty(relationAdditionalPrefix)) {
-						targetTag = relationAdditionalPrefix + tg;
-					}
-					rtype.relationGroupAdditionalTags.put(tg, targetTag);
+					rtype.relationGroupAdditionalTags.put(tg, tg);
 				}
 			}
 			
@@ -343,12 +350,8 @@ public abstract class MapRenderingTypes {
 			}
 			String rnmts = parser.getAttributeValue("", "relationGroupNameTags");
 			if (rnmts != null) {
-				String relationGroupNamePrefix = parser.getAttributeValue("", "relationGroupNamePrefix"); //$NON-NLS-1$
-				if (relationGroupNamePrefix == null) {
-					relationGroupNamePrefix = "";
-				}
 				rtype.relationGroupNameTags = new LinkedHashMap<String, String>();
-				putNameTags(rnmts, rtype.relationGroupNameTags, relationGroupNamePrefix);
+				putNameTags(rnmts, rtype.relationGroupNameTags, "");
 			}
 		}
 		return rtype;
@@ -517,9 +520,10 @@ public abstract class MapRenderingTypes {
 		// relation part
 		protected Map<String, String> relationNames;
 		protected Map<String, String> additionalTags;
+		protected Map<String, List<String>> relationSortTags;
+		protected String relationGroupPrefix;
 		protected Map<String, String> relationGroupNameTags;
 		protected Map<String, String> relationGroupAdditionalTags;
-		protected Map<String, List<String>> relationSortTags;
 		
 		protected TagValuePattern tagValuePattern;
 		protected boolean additional;
@@ -548,6 +552,16 @@ public abstract class MapRenderingTypes {
 		private MapRulType(){
 		}
 		
+		
+		private void copyMetadata(MapRulType ref) {
+			minzoom = ref.minzoom;
+			maxzoom = ref.maxzoom;
+			order = ref.order;
+			category = ref.category;
+			onlyPoint = ref.onlyPoint;
+		}
+
+		
 		public boolean isPOI(){
 			return poi;
 		}
@@ -567,24 +581,37 @@ public abstract class MapRenderingTypes {
 			return rt;
 		}
 		
-		public static MapRulType createText(String tag) {
+		public static MapRulType createText(String tag, MapRulType ref) {
 			MapRulType rt = new MapRulType();
-			rt.additionalText = true;
 			rt.minzoom = 2;
 			rt.maxzoom = 31;
-			rt.tagValuePattern = new TagValuePattern(tag, null); 
+			if (ref != null) {
+				rt.copyMetadata(ref);
+			}
+			rt.additionalText = true;
+			rt.tagValuePattern = new TagValuePattern(tag, null);
 			return rt;
 		}
 		
-		public static MapRulType createAdditional(String tag, String value) {
+		public static MapRulType createAdditional(String tag, String value, MapRulType ref) {
 			MapRulType rt = new MapRulType();
-			rt.additional = true;
 			rt.minzoom = 2;
 			rt.maxzoom = 31;
+			if (ref != null) {
+				rt.copyMetadata(ref);
+			}
+			rt.additional = true;
 			rt.tagValuePattern = new TagValuePattern(tag, value);
 			return rt;
 		}
 
+		public static MapRulType createText(String tag) {
+			return createText(tag, null);
+		}
+		
+		public static MapRulType createAdditional(String tag, String value) {
+			return createAdditional(tag, value, null);
+		}
 
 		public String getTag() {
 			return tagValuePattern.tag;
