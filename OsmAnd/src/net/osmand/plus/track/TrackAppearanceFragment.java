@@ -28,6 +28,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -544,7 +545,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
 
-			if (!selectedGpxFile.isShowCurrentTrack()) {
+			if (!selectedGpxFile.isShowCurrentTrack() && !Algorithms.isEmpty(getDisplaySegmentGroups())) {
 				splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
 				splitIntervalCard.setListener(this);
 				cardsContainer.addView(splitIntervalCard.build(mapActivity));
@@ -577,6 +578,17 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 		}
 		return displayGroups;
+	}
+
+	@NonNull
+	public List<GpxDisplayGroup> getDisplaySegmentGroups() {
+		List<GpxDisplayGroup> groups = new ArrayList<>();
+		for (GpxDisplayGroup group : getGpxDisplayGroups()) {
+			if (GpxDisplayItemType.TRACK_SEGMENT == group.getType()) {
+				groups.add(group);
+			}
+		}
+		return groups;
 	}
 
 	public void dismissImmediate() {
