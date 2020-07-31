@@ -3,7 +3,9 @@ package net.osmand.plus.measurementtool;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
+import androidx.annotation.StringRes;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +24,6 @@ import net.osmand.plus.helpers.GpxTrackAdapter.OnItemClickListener;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,6 +36,27 @@ import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 
 public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
+	enum Mode {
+		OPEN_TRACK(R.string.plan_route_open_existing_track, R.string.plan_route_select_track_file_for_open),
+		ADD_TO_TRACK(R.string.add_to_a_track, R.string.rourte_between_points_add_track_desc);
+
+		int title;
+		int description;
+
+		Mode(@StringRes int title, @StringRes int description) {
+			this.title = title;
+			this.description = description;
+		}
+
+		public int getTitle() {
+			return title;
+		}
+
+		public int getDescription() {
+			return description;
+		}
+	}
+
 	public static final String TAG = SelectFileBottomSheet.class.getSimpleName();
 	public static final int BOTTOM_SHEET_HEIGHT_DP = 427;
 
@@ -42,6 +64,11 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	protected GpxTrackAdapter adapter;
 	private SelectFileListener listener;
 	private Map<String, List<GPXInfo>> gpxInfoMap;
+	private Mode fragmentMode;
+
+	public void setFragmentMode(Mode fragmentMode) {
+		this.fragmentMode = fragmentMode;
+	}
 
 	public void setListener(SelectFileListener listener) {
 		this.listener = listener;
@@ -54,6 +81,10 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		OsmandApplication app = requiredMyApplication();
 		mainView = View.inflate(new ContextThemeWrapper(context, themeRes),
 				R.layout.bottom_sheet_plan_route_select_file, null);
+		TextView titleView = mainView.findViewById(R.id.title);
+		titleView.setText(fragmentMode.title);
+		TextView descriptionView = mainView.findViewById(R.id.description);
+		descriptionView.setText(fragmentMode.description);
 		final RecyclerView filesRecyclerView = mainView.findViewById(R.id.gpx_track_list);
 		filesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -139,13 +170,14 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		return AndroidUtils.dpToPx(mainView.getContext(), BOTTOM_SHEET_HEIGHT_DP);
 	}
 
-	public static void showInstance(FragmentManager fragmentManager, SelectFileListener listener) {
+	public static void showInstance(FragmentManager fragmentManager, SelectFileListener listener, Mode mode) {
 		if (!fragmentManager.isStateSaved()) {
 			SelectFileBottomSheet fragment = new SelectFileBottomSheet();
 			fragment.setUsedOnMap(true);
 			fragment.setRetainInstance(true);
 			fragment.setListener(listener);
-			fragment.show(fragmentManager, SelectFileBottomSheet.TAG);
+			fragment.setFragmentMode(mode);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 

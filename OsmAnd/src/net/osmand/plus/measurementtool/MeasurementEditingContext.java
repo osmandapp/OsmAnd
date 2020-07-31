@@ -27,7 +27,14 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationType.*;
+
 public class MeasurementEditingContext {
+
+	public enum CalculationType {
+		NEXT_SEGMENT,
+		WHOLE_TRACK
+	}
 
 	private OsmandApplication application;
 	private final MeasurementCommandManager commandManager = new MeasurementCommandManager();
@@ -46,6 +53,7 @@ public class MeasurementEditingContext {
 	private boolean inSnapToRoadMode;
 	private boolean needUpdateCacheForSnap;
 	private int calculatedPairs;
+	private CalculationType calculationType = WHOLE_TRACK;
 
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode snapToRoadAppMode;
@@ -108,6 +116,14 @@ public class MeasurementEditingContext {
 
 	public void setNewGpxData(NewGpxData newGpxData) {
 		this.newGpxData = newGpxData;
+	}
+
+	public CalculationType getCalculationType() {
+		return calculationType;
+	}
+
+	public void setCalculationType(CalculationType calculationType) {
+		this.calculationType = calculationType;
 	}
 
 	void setProgressListener(SnapToRoadProgressListener progressListener) {
@@ -306,7 +322,7 @@ public class MeasurementEditingContext {
 	}
 
 	boolean isSnapToRoadTrack() {
-		return !getNewGpxData().getTrkSegment().points.isEmpty()
+		return getNewGpxData() != null && !getNewGpxData().getTrkSegment().points.isEmpty()
 				&& !getNewGpxData().getGpxFile().getRoutePoints().isEmpty();
 	}
 

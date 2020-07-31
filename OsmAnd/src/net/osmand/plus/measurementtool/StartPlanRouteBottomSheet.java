@@ -94,7 +94,7 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 		items.add(openExistingTrackItem);
 
 		BaseBottomSheetItem importTrackItem = new BottomSheetItemWithDescription.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_phone))
+				.setIcon(getContentIcon(R.drawable.ic_action_import_to))
 				.setTitle(getString(R.string.plan_route_import_track))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +201,7 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 			fragment.setUsedOnMap(true);
 			fragment.setRetainInstance(true);
 			fragment.setListener(listener);
-			fragment.show(fragmentManager, StartPlanRouteBottomSheet.TAG);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 
