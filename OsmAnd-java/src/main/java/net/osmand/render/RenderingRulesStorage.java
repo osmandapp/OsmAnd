@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,6 +17,7 @@ import java.util.Map.Entry;
 import java.util.Stack;
 
 import net.osmand.PlatformUtil;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -183,6 +183,23 @@ public class RenderingRulesStorage {
 		}
 	}
 	
+	private class XmlTreeSequence {
+		XmlTreeSequence parent;
+		String seqOrder;
+		Map<String, String> attrsMap = new LinkedHashMap<String, String>();
+		String name;
+		List<XmlTreeSequence> children = new ArrayList<RenderingRulesStorage.XmlTreeSequence>();
+		
+		private void process(RenderingRulesHandler handler, int el) throws XmlPullParserException, IOException {
+			// TODO create new attrsMap and replace #SEQ -> el
+			handler.startElement(attrsMap, name);
+			for(XmlTreeSequence s : children) {
+				s.process(handler, el);
+			}
+			handler.endElement(name);
+		}
+	}
+	
 	private class RenderingRulesHandler {
 		private final XmlPullParser parser;
 		private int state;
@@ -200,14 +217,40 @@ public class RenderingRulesStorage {
 			Map<String, String> attrsMap = new LinkedHashMap<String, String>();
 			parser.setInput(is, "UTF-8");
 			int tok;
+			XmlTreeSequence currentSeqElement = null;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
-//					String seq = parser.getAttributeValue("", "seq");
 					attrsMap.clear();
 					parseAttributes(parser, attrsMap);
-					startElement(attrsMap, parser.getName());
+					String name = parser.getName();
+					if (!Algorithms.isEmpty(parser.getAttributeValue("", "seq")) || currentSeqElement != null) {
+						XmlTreeSequence seq = new XmlTreeSequence();
+						seq.name = name;
+						seq.attrsMap = attrsMap;
+						seq.parent = currentSeqElement;
+						if (currentSeqElement == null) {
+							seq.seqOrder = parser.getAttributeValue("", "seq");
+						} else {
+							currentSeqElement.children.add(seq);
+							seq.seqOrder = currentSeqElement.seqOrder;
+						}
+						currentSeqElement = seq;
+					} else {
+						startElement(attrsMap, name);
+					}
 				} else if (tok == XmlPullParser.END_TAG) {
-					endElement(parser.getName());
+					if(currentSeqElement == null) {
+						endElement(parser.getName());
+					} else {
+						XmlTreeSequence process = currentSeqElement;
+						currentSeqElement = currentSeqElement.parent;
+						if (currentSeqElement == null) {
+							// Here we process sequence element
+							for(int i = 1; i < 5; i++) {
+								process.process(this, i);
+							}
+						}
+					}
 				}
 			}
 			
