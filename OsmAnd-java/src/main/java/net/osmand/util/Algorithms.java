@@ -44,6 +44,29 @@ public class Algorithms {
 	public static boolean isEmpty(Collection<?> c) {
 		return c == null || c.size() == 0;
 	}
+	
+	private static char[] CHARS_TO_NORMALIZE_KEY = new char['’'];
+	private static char[] CHARS_TO_NORMALIZE_VALUE = new char['\''];
+
+	public static String normalizeSearchText(String s) {
+		boolean norm = false;
+		for (int i = 0; i < s.length() && !norm; i++) {
+			char ch = s.charAt(i);
+			for (int j = 0; j < CHARS_TO_NORMALIZE_KEY.length; j++) {
+				if (ch == CHARS_TO_NORMALIZE_KEY[j]) {
+					norm = true;
+					break;
+				}
+			}
+		}
+		if (!norm) {
+			return s;
+		}
+		for (int k = 0; k < CHARS_TO_NORMALIZE_KEY.length; k++) {
+			s = s.replace(CHARS_TO_NORMALIZE_KEY[k], CHARS_TO_NORMALIZE_VALUE[k]);
+		}
+		return s;
+	}
 
 	public static boolean isEmpty(Map<?, ?> map) {
 		return map == null || map.size() == 0;
