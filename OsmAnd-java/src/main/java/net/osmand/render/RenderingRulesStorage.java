@@ -12,10 +12,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Stack;
+
+import javax.management.modelmbean.XMLParseException;
 
 import net.osmand.PlatformUtil;
 
@@ -185,6 +188,51 @@ public class RenderingRulesStorage {
 		}
 	}
 	
+	private class SequencedRule {
+		String name;
+		Map<String, String> attrs = new HashMap<String, String>();
+		
+		List<SequencedRule> ifElseChildren = new LinkedList<SequencedRule>();
+		List<SequencedRule> ifChildren = new LinkedList<SequencedRule>();
+		
+		public SequencedRule(String name, Map<String, String> attrs) {
+			this.name = name;
+			this.attrs = attrs;
+		}
+	
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public Map<String, String> getAttrs() {
+			return attrs;
+		}
+
+		public void setAttrs(Map<String, String> attrs) {
+			this.attrs = attrs;
+		}
+
+		public List<SequencedRule> getIfElseChildren() {
+			return ifElseChildren;
+		}
+
+		public void addIfElseChild(SequencedRule ifElseChild) {
+			ifElseChildren.add(ifElseChild);
+		}
+
+		public List<SequencedRule> getIfChildren() {
+			return ifChildren;
+		}
+
+		public void addIfChildren(SequencedRule ifChild) {
+			ifChildren.add(ifChild);
+		}
+	}
+	
 	private class RenderingRulesHandler {
 		private final XmlPullParser parser;
 		private int state;
@@ -195,12 +243,10 @@ public class RenderingRulesStorage {
 		private final RenderingRulesStorageResolver resolver;
 		private RenderingRulesStorage dependsStorage;
 		
-		private final static String SEQ_KEY = "seq";
-		private final static String SEQ_ATTR_KEY = "#SEQ";
-		
-		boolean seqSwitch = false;
-		int seqStart = 0;
-		int seqEnd = 0;
+		private final static String SEQ_ATTR_KEY = "seq";
+		private final static String SEQ_PARAM_PH = "#SEQ";
+
+		boolean isSequencedRule = false;
 		List<String> sequenceKeys = new ArrayList<String>();
 		
 		public RenderingRulesHandler(XmlPullParser parser, RenderingRulesStorageResolver resolver){
@@ -213,19 +259,22 @@ public class RenderingRulesStorage {
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
-					startElement(parser.getName());
+					if (isSwitch(parser.getName()) && parser.getAttributeCount() > 0) {
+						for (int i = 0; i < parser.getAttributeCount(); i++) {
+							if (parser.getAttributeName(i).equals(SEQ_ATTR_KEY)) {
+								processSequence(parser.getAttributeValue(i));
+							}
+						}
+					} else {
+						startElement(parser.getName());
+					}					
 				} else if (tok == XmlPullParser.END_TAG) {
-					if (isSwitch(parser.getName()) && stack.peek().getAttributes().containsKey(SEQ_KEY)) {
-						seqSwitch = false;
-						seqStart = 0; 
-						seqEnd = 0;
-					}
 					endElement(parser.getName());
 				}
 			}
 			
 		}
-
+		
 		public RenderingRulesStorage getDependsStorage() {
 			return dependsStorage;
 		}
@@ -239,78 +288,153 @@ public class RenderingRulesStorage {
 			return true;
 		}
 		
-		private void parseSequence(String seq) {
+		private void processSequence(String seq) throws XmlPullParserException, IOException {
+			int seqStart = 0;
+			int seqEnd = 0;
+			Stack<SequencedRule> seqStack = new Stack<RenderingRulesStorage.SequencedRule>();
+			List<SequencedRule> seqSwitches;
 			try {
-				seqSwitch = true;
 				seqStart = Integer.parseInt(seq.substring(0, seq.indexOf(':')));
 				seqEnd = Integer.parseInt(seq.substring(seq.indexOf(':') + 1, seq.length()));
 			} catch (NumberFormatException nfe) {
 				seqStart = 0;
 				seqEnd = 0;
+				throw new XmlPullParserException("Broken sequence tag, pass section");  
+			}
+			SequencedRule ssw = new SequencedRule("switch", parseAttributes(new HashMap<String, String>()));
+			seqStack.add(ssw);
+			int sTok;
+			String sName;
+			Map<String, String> seqAttrsMap = new HashMap<String, String>();
+			
+			//parse sequenced block from .style.xml:
+			while((sTok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+				if (sTok == XmlPullParser.START_TAG) {
+					sName = parser.getName();
+					if (isCase(sName) || isSwitch(sName)) {
+						seqAttrsMap.clear();
+						SequencedRule sRule = new SequencedRule(sName, parseAttributes(seqAttrsMap));
+						if (seqStack.size() > 0) {
+							seqStack.peek().addIfElseChild(sRule);
+						} 
+						seqStack.push(sRule);
+					} else if (isApply(sName)) {
+						seqAttrsMap.clear();
+						SequencedRule sRule = new SequencedRule(sName, parseAttributes(seqAttrsMap));
+						if (seqStack.size() > 0) {
+							seqStack.peek().addIfChildren(sRule);
+
+						} else {
+							throw new XmlPullParserException("Apply (groupFilter) without parent");							
+						}
+						seqStack.push(sRule);
+					} else {
+						throw new XmlPullParserException("Unsupported tag in sequence"); //TODO for now
+					}
+			
+				} else if (sTok == XmlPullParser.END_TAG) {
+					if (seqStack.size() == 1 && seqStack.peek().getAttrs().containsKey(SEQ_ATTR_KEY)) {
+						seqStack.pop();
+						break;
+					}
+					if (isSwitch(parser.getName()) || isCase(parser.getName()) || isApply(parser.getName())) {
+						seqStack.pop();
+					}
+				}
+			}
+			
+			//iterate sequence and write rules to storage:
+			if (ssw.getIfElseChildren().size() > 0) {				
+				for (int n = seqStart; n <= seqEnd; n++) {
+					writeSeqRules(ssw , n);
+				}
+			} else {
+				throw new XmlPullParserException("No cases in switch!");
 			}
 		}
 		
-		boolean isSequencedRule = false;
+		public void writeSeqRules(SequencedRule sRule, int seqPos) throws XmlPullParserException {
+			final boolean isSwitch = isSwitch(sRule.getName());
+			attrsMap = new HashMap<String, String> (sRule.attrs);
+			//iterate values in attributes
+			sequenceKeys.clear();
+			for (Entry<String, String> attr : attrsMap.entrySet()) {
+				if (attr.getValue().contains(SEQ_ATTR_KEY)) {
+					sequenceKeys.add(attr.getKey());
+				}
+			}
+			
+			if (!sequenceKeys.isEmpty()) {
+				for (String key : sequenceKeys) {
+					attrsMap.put(key, attrsMap.get(key).replace(SEQ_PARAM_PH, seqPos + ""));
+				}
+			}
+			
+			if (isSwitch || isCase(sRule.getName())) {
+				if (attrsMap.containsKey(SEQ_ATTR_KEY)) {					
+					attrsMap.remove(SEQ_ATTR_KEY);
+				}
+				boolean top = stack.size() == 0 || isTopCase();
+				RenderingRule renderingRule = new RenderingRule(attrsMap, isSwitch, RenderingRulesStorage.this);
+				if (top || STORE_ATTRIBUTES) {					
+					renderingRule.storeAttributes(attrsMap);
+				}
+				if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
+					RenderingRule parent = ((RenderingRule) stack.peek());
+					parent.addIfElseChildren(renderingRule);
+				}
+				stack.push(renderingRule);
+				
+				for (SequencedRule sr : sRule.ifElseChildren) {
+					writeSeqRules(sr, seqPos);
+				}
+				for (SequencedRule sr : sRule.ifChildren) {
+					writeSeqRules(sr, seqPos);
+				}
+				stack.pop();
+			} else if (isApply(sRule.getName())) {
+
+				RenderingRule renderingRule = new RenderingRule(attrsMap, false, RenderingRulesStorage.this);
+				if(STORE_ATTRIBUTES) {
+					renderingRule.storeAttributes(attrsMap);
+				}
+				if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
+					((RenderingRule) stack.peek()).addIfChildren(renderingRule);
+				} else {
+					throw new XmlPullParserException("Apply (groupFilter) without parent");
+				}
+				stack.push(renderingRule);
+				for (SequencedRule sr : sRule.ifElseChildren) {
+					writeSeqRules(sr, seqPos);
+				}
+				for (SequencedRule sr : sRule.ifChildren) {
+					writeSeqRules(sr, seqPos);
+				}
+				stack.pop();
+			}
+		}
 		
 		public void startElement(String name) throws XmlPullParserException, IOException {
-			
+
 			boolean stateChanged = false;
 			final boolean isCase = isCase(name);
 			final boolean isSwitch = isSwitch(name);
-			
 			if(isCase || isSwitch){ //$NON-NLS-1$
 				attrsMap.clear();
 				boolean top = stack.size() == 0 || isTopCase();
 				parseAttributes(attrsMap);
-
 				RenderingRule renderingRule = new RenderingRule(attrsMap, isSwitch, RenderingRulesStorage.this);
 				if(top || STORE_ATTRIBUTES){
 					renderingRule.storeAttributes(attrsMap);
 				}
-				
 				if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
 					RenderingRule parent = ((RenderingRule) stack.peek());
-					if (seqSwitch) {
-						sequenceKeys.clear();;
-						for (Entry<String, String> attr : attrsMap.entrySet()) {
-							if (attr.getValue().contains(SEQ_ATTR_KEY)) {
-								sequenceKeys.add(attr.getKey());
-							}
-						}
-						if (!sequenceKeys.isEmpty()) {
-							isSequencedRule = true;
-							RenderingRule seqRule;
-							for (int i = seqStart; i <= seqEnd; i++) {
-								Map<String, String> seqAttrsMap = new HashMap<String, String>(attrsMap);
-								for (String key: sequenceKeys) {
-									String seqAttr = seqAttrsMap.get(key).replace(SEQ_ATTR_KEY, i + "");
-									seqAttrsMap.put(key, seqAttr);
-								}
-								seqRule = new RenderingRule(seqAttrsMap, isSwitch, RenderingRulesStorage.this);  
-								parent.addIfElseChildren(seqRule);
-								stack.push(seqRule);
-								if (i < seqEnd) {									
-									endElement(name);
-								}
-							}
-						} else {
-							parent.addIfElseChildren(renderingRule);
-						}
-					} else {						
-						parent.addIfElseChildren(renderingRule);
-					}
+					parent.addIfElseChildren(renderingRule);
 				}
-				if (!isSequencedRule) {
-					stack.push(renderingRule);
-				}
-				
-				if (isSwitch && attrsMap.containsKey(SEQ_KEY)) {
-					parseSequence(attrsMap.get(SEQ_KEY));
-				} 
+				stack.push(renderingRule);
 			} else if(isApply(name)){ //$NON-NLS-1$
 				attrsMap.clear();
 				parseAttributes(attrsMap);
-				System.out.println();
 				RenderingRule renderingRule = new RenderingRule(attrsMap, false, RenderingRulesStorage.this);
 				if(STORE_ATTRIBUTES) {
 					renderingRule.storeAttributes(attrsMap);
