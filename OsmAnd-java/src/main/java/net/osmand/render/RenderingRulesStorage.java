@@ -26,7 +26,7 @@ import org.xmlpull.v1.XmlPullParserException;
 public class RenderingRulesStorage {
 
 	private final static Log log = PlatformUtil.getLog(RenderingRulesStorage.class);
-	static boolean STORE_ATTTRIBUTES = false;
+	static boolean STORE_ATTRIBUTES = false;
 	
 	// keep sync !
 	// keep sync ! not change values
@@ -186,14 +186,9 @@ public class RenderingRulesStorage {
 	private class RenderingRulesHandler {
 		private final XmlPullParser parser;
 		private int state;
-
 		Stack<RenderingRule> stack = new Stack<RenderingRule>();
-		
-		Map<String, String> attrsMap = new LinkedHashMap<String, String>();
 		private final RenderingRulesStorageResolver resolver;
 		private RenderingRulesStorage dependsStorage;
-		
-		
 		
 		public RenderingRulesHandler(XmlPullParser parser, RenderingRulesStorageResolver resolver){
 			this.parser = parser;
@@ -201,11 +196,16 @@ public class RenderingRulesStorage {
 		}
 		
 		public void parse(InputStream is) throws XmlPullParserException, IOException {
+			XmlPullParser parser = this.parser;
+			Map<String, String> attrsMap = new LinkedHashMap<String, String>();
 			parser.setInput(is, "UTF-8");
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
-					startElement(parser.getName());
+//					String seq = parser.getAttributeValue("", "seq");
+					attrsMap.clear();
+					parseAttributes(parser, attrsMap);
+					startElement(attrsMap, parser.getName());
 				} else if (tok == XmlPullParser.END_TAG) {
 					endElement(parser.getName());
 				}
@@ -226,16 +226,14 @@ public class RenderingRulesStorage {
 			return true;
 		}
 		
-		public void startElement(String name) throws XmlPullParserException, IOException {
+		public void startElement(Map<String, String> attrsMap, String name) throws XmlPullParserException, IOException {
 			boolean stateChanged = false;
 			final boolean isCase = isCase(name);
 			final boolean isSwitch = isSwitch(name);
 			if(isCase || isSwitch){ //$NON-NLS-1$
-				attrsMap.clear();
 				boolean top = stack.size() == 0 || isTopCase();
-				parseAttributes(attrsMap);
 				RenderingRule renderingRule = new RenderingRule(attrsMap, isSwitch, RenderingRulesStorage.this);
-				if(top || STORE_ATTTRIBUTES){
+				if(top || STORE_ATTRIBUTES){
 					renderingRule.storeAttributes(attrsMap);
 				}
 				if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
@@ -244,10 +242,8 @@ public class RenderingRulesStorage {
 				}
 				stack.push(renderingRule);
 			} else if(isApply(name)){ //$NON-NLS-1$
-				attrsMap.clear();
-				parseAttributes(attrsMap);
 				RenderingRule renderingRule = new RenderingRule(attrsMap, false, RenderingRulesStorage.this);
-				if(STORE_ATTTRIBUTES) {
+				if(STORE_ATTRIBUTES) {
 					renderingRule.storeAttributes(attrsMap);
 				}
 				if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
@@ -272,14 +268,14 @@ public class RenderingRulesStorage {
 				state = POLYGON_RULES;
 				stateChanged = true;
 			} else if("renderingAttribute".equals(name)){ //$NON-NLS-1$
-				String attr = parser.getAttributeValue("", "name");
+				String attr = attrsMap.get("name");
 				RenderingRule root = new RenderingRule(new HashMap<String, String>(), false, RenderingRulesStorage.this);
 				renderingAttributes.put(attr, root);
 				stack.push(root);
 			} else if("renderingProperty".equals(name)){ //$NON-NLS-1$
-				String attr = parser.getAttributeValue("", "attr");
+				String attr = attrsMap.get("attr");
 				RenderingRuleProperty prop;
-				String type = parser.getAttributeValue("", "type");
+				String type = attrsMap.get("type");
 				if("boolean".equalsIgnoreCase(type)){
 					prop = RenderingRuleProperty.createInputBooleanProperty(attr);
 				} else if("string".equalsIgnoreCase(type)){
@@ -287,20 +283,20 @@ public class RenderingRulesStorage {
 				} else {
 					prop = RenderingRuleProperty.createInputIntProperty(attr);
 				}
-				prop.setDescription(parser.getAttributeValue("", "description"));
-				prop.setDefaultValueDescription(parser.getAttributeValue("", "defaultValueDescription"));
-				prop.setCategory(parser.getAttributeValue("", "category"));
-				prop.setName(parser.getAttributeValue("", "name"));
-				if(parser.getAttributeValue("", "possibleValues") != null){
-					prop.setPossibleValues(parser.getAttributeValue("", "possibleValues").split(","));
+				prop.setDescription(attrsMap.get("description"));
+				prop.setDefaultValueDescription(attrsMap.get("defaultValueDescription"));
+				prop.setCategory(attrsMap.get("category"));
+				prop.setName(attrsMap.get("name"));
+				if (attrsMap.get("possibleValues") != null) {
+					prop.setPossibleValues(attrsMap.get("possibleValues").split(","));
 				}
 				PROPS.registerRule(prop);
 			} else if("renderingConstant".equals(name)){ //$NON-NLS-1$
-				if(!renderingConstants.containsKey(parser.getAttributeValue("", "name"))){
-					renderingConstants.put(parser.getAttributeValue("", "name"), parser.getAttributeValue("", "value"));
+				if(!renderingConstants.containsKey(attrsMap.get("name"))){
+					renderingConstants.put(attrsMap.get("name"), attrsMap.get("value"));
 				}
 			} else if("renderingStyle".equals(name)){ //$NON-NLS-1$
-				String depends = parser.getAttributeValue("", "depends");
+				String depends = attrsMap.get("depends");
 				if(depends != null && depends.length()> 0){
 					this.dependsStorage = resolver.resolve(depends, resolver);
 				}
@@ -311,7 +307,7 @@ public class RenderingRulesStorage {
 					PROPS = new RenderingRuleStorageProperties(dependsStorage.PROPS);
 					
 				}
-				internalRenderingName = parser.getAttributeValue("", "name");
+				internalRenderingName = attrsMap.get("name");
 				
 			} else if("renderer".equals(name)){ //$NON-NLS-1$
 				throw new XmlPullParserException("Rendering style is deprecated and no longer supported.");
@@ -337,7 +333,7 @@ public class RenderingRulesStorage {
 			return "group".equals(name) || "switch".equals(name);
 		}
 		
-		private Map<String, String> parseAttributes(Map<String, String> m) {
+		private Map<String, String> parseAttributes(XmlPullParser parser, Map<String, String> m) {
 			for (int i = 0; i < parser.getAttributeCount(); i++) {
 				String name = parser.getAttributeName(i);
 				String vl = parser.getAttributeValue(i);
@@ -396,7 +392,7 @@ public class RenderingRulesStorage {
 				vl = ns.remove("value");
 				// reset rendering rule attributes
 				renderingRule.init(ns);
-				if(STORE_ATTTRIBUTES) {
+				if(STORE_ATTRIBUTES) {
 					renderingRule.storeAttributes(ns);
 				}
 				
@@ -469,7 +465,7 @@ public class RenderingRulesStorage {
 	
 	
 	public static void main(String[] args) throws XmlPullParserException, IOException {
-		STORE_ATTTRIBUTES = true;
+		STORE_ATTRIBUTES = true;
 //		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
 		final String loc = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/";
 		String defaultFile = loc + "UniRS.render.xml";
