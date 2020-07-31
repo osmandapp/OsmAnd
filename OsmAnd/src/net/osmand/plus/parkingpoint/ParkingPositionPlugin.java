@@ -528,9 +528,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	String getFormattedTime(long timeInMillis) {
 		Time time = new Time();
 		time.set(timeInMillis);
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd.MM.yyyy", Locale.getDefault());
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm MMM dd, yyyy", Locale.getDefault());
 		if (!DateFormat.is24HourFormat(app)) {
-			sdf = new SimpleDateFormat("hh:mm a dd.MM.yyyy", Locale.getDefault());
+			sdf = new SimpleDateFormat("hh:mm a dd MMM, yyyy", Locale.getDefault());
 		}
 		return sdf.format(new Date(time.toMillis(false)));
 	}
