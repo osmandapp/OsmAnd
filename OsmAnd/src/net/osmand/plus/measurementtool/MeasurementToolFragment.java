@@ -798,8 +798,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 
 			@Override
-			public void openLastEditTrackOnClick(GPXFile gpxFile) {
-				addNewGpxData(gpxFile);
+			public void openLastEditTrackOnClick(String gpxFileName) {
+				getGpxFile(gpxFileName);
 			}
 
 			@Override
@@ -812,8 +812,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	private SelectFileListener createSelectFileListener() {
 		return new SelectFileListener() {
 			@Override
-			public void selectFileOnCLick(GPXFile gpxFile) {
-				addNewGpxData(gpxFile);
+			public void selectFileOnCLick(String gpxFileName) {
+				getGpxFile(gpxFileName);
 			}
 
 			@Override
@@ -825,6 +825,21 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				}
 			}
 		};
+	}
+
+	private void getGpxFile(String gpxFileName) {
+		OsmandApplication app = getMyApplication();
+		GPXFile gpxFile;
+		if (app != null) {
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(gpxFileName);
+			if (selectedGpxFile != null) {
+				gpxFile = selectedGpxFile.getGpxFile();
+			} else {
+				gpxFile = GPXUtilities.loadGPXFile(new File(
+						getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR), gpxFileName));
+			}
+			addNewGpxData(gpxFile);
+		}
 	}
 
 	private SelectFileListener createAddToTrackFileListener() {

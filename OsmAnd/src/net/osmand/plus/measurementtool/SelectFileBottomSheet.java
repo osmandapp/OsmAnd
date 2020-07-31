@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -116,9 +114,8 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 			public void onItemClick(int position) {
 				if (position != RecyclerView.NO_POSITION && position < allGpxList.size()) {
 					String fileName = allGpxList.get(position).getFileName();
-					GPXFile gpxFile = GPXUtilities.loadGPXFile(new File(gpxDir, fileName));
 					if (listener != null) {
-						listener.selectFileOnCLick(gpxFile);
+						listener.selectFileOnCLick(fileName);
 					}
 				}
 				dismiss();
@@ -195,7 +192,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
 	interface SelectFileListener {
 
-		void selectFileOnCLick(GPXFile gpxFile);
+		void selectFileOnCLick(String fileName);
 
 		void dismissButtonOnClick();
 
