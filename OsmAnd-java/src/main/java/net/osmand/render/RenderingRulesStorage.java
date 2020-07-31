@@ -18,11 +18,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Stack;
 
-import javax.management.modelmbean.XMLParseException;
-
 import net.osmand.PlatformUtil;
 
-import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -43,7 +40,6 @@ public class RenderingRulesStorage {
 	public final static int LENGTH_RULES = 6;
 	
 	private final static int SHIFT_TAG_VAL = 16;
-
 	
 	// C++
 	List<String> dictionary = new ArrayList<String>();
@@ -191,7 +187,6 @@ public class RenderingRulesStorage {
 	private class SequencedRule {
 		String name;
 		Map<String, String> attrs = new HashMap<String, String>();
-		
 		List<SequencedRule> ifElseChildren = new LinkedList<SequencedRule>();
 		List<SequencedRule> ifChildren = new LinkedList<SequencedRule>();
 		
@@ -204,28 +199,12 @@ public class RenderingRulesStorage {
 			return name;
 		}
 
-		public void setName(String name) {
-			this.name = name;
-		}
-
 		public Map<String, String> getAttrs() {
 			return attrs;
 		}
 
-		public void setAttrs(Map<String, String> attrs) {
-			this.attrs = attrs;
-		}
-
-		public List<SequencedRule> getIfElseChildren() {
-			return ifElseChildren;
-		}
-
 		public void addIfElseChild(SequencedRule ifElseChild) {
 			ifElseChildren.add(ifElseChild);
-		}
-
-		public List<SequencedRule> getIfChildren() {
-			return ifChildren;
 		}
 
 		public void addIfChildren(SequencedRule ifChild) {
@@ -246,7 +225,6 @@ public class RenderingRulesStorage {
 		private final static String SEQ_ATTR_KEY = "seq";
 		private final static String SEQ_PARAM_PH = "#SEQ";
 
-		boolean isSequencedRule = false;
 		List<String> sequenceKeys = new ArrayList<String>();
 		
 		public RenderingRulesHandler(XmlPullParser parser, RenderingRulesStorageResolver resolver){
@@ -259,15 +237,7 @@ public class RenderingRulesStorage {
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
-					if (isSwitch(parser.getName()) && parser.getAttributeCount() > 0) {
-						for (int i = 0; i < parser.getAttributeCount(); i++) {
-							if (parser.getAttributeName(i).equals(SEQ_ATTR_KEY)) {
-								processSequence(parser.getAttributeValue(i));
-							}
-						}
-					} else {
-						startElement(parser.getName());
-					}					
+					startElement(parser.getName());		
 				} else if (tok == XmlPullParser.END_TAG) {
 					endElement(parser.getName());
 				}
@@ -312,14 +282,14 @@ public class RenderingRulesStorage {
 				if (sTok == XmlPullParser.START_TAG) {
 					sName = parser.getName();
 					if (isCase(sName) || isSwitch(sName)) {
-						seqAttrsMap.clear();
+						seqAttrsMap = new HashMap<String, String>();
 						SequencedRule sRule = new SequencedRule(sName, parseAttributes(seqAttrsMap));
 						if (seqStack.size() > 0) {
 							seqStack.peek().addIfElseChild(sRule);
 						} 
 						seqStack.push(sRule);
 					} else if (isApply(sName)) {
-						seqAttrsMap.clear();
+						seqAttrsMap= new HashMap<String, String>();
 						SequencedRule sRule = new SequencedRule(sName, parseAttributes(seqAttrsMap));
 						if (seqStack.size() > 0) {
 							seqStack.peek().addIfChildren(sRule);
@@ -343,23 +313,23 @@ public class RenderingRulesStorage {
 				}
 			}
 			
-			//iterate sequence and write rules to storage:
-			if (ssw.getIfElseChildren().size() > 0) {				
+			if (ssw.ifElseChildren.size() > 0) {				
 				for (int n = seqStart; n <= seqEnd; n++) {
-					writeSeqRules(ssw , n);
+					writeSeqRules(ssw , n, true);
 				}
 			} else {
 				throw new XmlPullParserException("No cases in switch!");
 			}
 		}
 		
-		public void writeSeqRules(SequencedRule sRule, int seqPos) throws XmlPullParserException {
+		public void writeSeqRules(SequencedRule sRule, int seqPos, boolean isTopSwitch) throws XmlPullParserException {
+			RenderingRule rRule;
 			final boolean isSwitch = isSwitch(sRule.getName());
 			attrsMap = new HashMap<String, String> (sRule.attrs);
 			//iterate values in attributes
 			sequenceKeys.clear();
 			for (Entry<String, String> attr : attrsMap.entrySet()) {
-				if (attr.getValue().contains(SEQ_ATTR_KEY)) {
+				if (attr.getValue().contains(SEQ_PARAM_PH)) {
 					sequenceKeys.add(attr.getKey());
 				}
 			}
@@ -371,9 +341,10 @@ public class RenderingRulesStorage {
 			}
 			
 			if (isSwitch || isCase(sRule.getName())) {
-				if (attrsMap.containsKey(SEQ_ATTR_KEY)) {					
+				if (attrsMap.containsKey(SEQ_ATTR_KEY)) {
 					attrsMap.remove(SEQ_ATTR_KEY);
 				}
+
 				boolean top = stack.size() == 0 || isTopCase();
 				RenderingRule renderingRule = new RenderingRule(attrsMap, isSwitch, RenderingRulesStorage.this);
 				if (top || STORE_ATTRIBUTES) {					
@@ -386,12 +357,15 @@ public class RenderingRulesStorage {
 				stack.push(renderingRule);
 				
 				for (SequencedRule sr : sRule.ifElseChildren) {
-					writeSeqRules(sr, seqPos);
+					writeSeqRules(sr, seqPos, false);
 				}
 				for (SequencedRule sr : sRule.ifChildren) {
-					writeSeqRules(sr, seqPos);
+					writeSeqRules(sr, seqPos, false);
 				}
-				stack.pop();
+				rRule = (RenderingRule) stack.pop();
+				if(stack.size() == 0 && rRule != null) {
+					registerTopLevel(rRule, null, Collections.EMPTY_MAP);
+				}
 			} else if (isApply(sRule.getName())) {
 
 				RenderingRule renderingRule = new RenderingRule(attrsMap, false, RenderingRulesStorage.this);
@@ -405,33 +379,39 @@ public class RenderingRulesStorage {
 				}
 				stack.push(renderingRule);
 				for (SequencedRule sr : sRule.ifElseChildren) {
-					writeSeqRules(sr, seqPos);
+					writeSeqRules(sr, seqPos, false);
 				}
 				for (SequencedRule sr : sRule.ifChildren) {
-					writeSeqRules(sr, seqPos);
+					writeSeqRules(sr, seqPos, false);
 				}
 				stack.pop();
 			}
+
 		}
 		
 		public void startElement(String name) throws XmlPullParserException, IOException {
-
 			boolean stateChanged = false;
 			final boolean isCase = isCase(name);
 			final boolean isSwitch = isSwitch(name);
 			if(isCase || isSwitch){ //$NON-NLS-1$
 				attrsMap.clear();
-				boolean top = stack.size() == 0 || isTopCase();
 				parseAttributes(attrsMap);
-				RenderingRule renderingRule = new RenderingRule(attrsMap, isSwitch, RenderingRulesStorage.this);
-				if(top || STORE_ATTRIBUTES){
-					renderingRule.storeAttributes(attrsMap);
+				if (attrsMap.containsKey(SEQ_ATTR_KEY)) {
+					processSequence(attrsMap.get(SEQ_ATTR_KEY));
+					return;
+				} else {					
+					boolean top = stack.size() == 0 || isTopCase();
+					
+					RenderingRule renderingRule = new RenderingRule(attrsMap, isSwitch, RenderingRulesStorage.this);
+					if(top || STORE_ATTRIBUTES){
+						renderingRule.storeAttributes(attrsMap);
+					}
+					if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
+						RenderingRule parent = ((RenderingRule) stack.peek());
+						parent.addIfElseChildren(renderingRule);
+					}
+					stack.push(renderingRule);
 				}
-				if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
-					RenderingRule parent = ((RenderingRule) stack.peek());
-					parent.addIfElseChildren(renderingRule);
-				}
-				stack.push(renderingRule);
 			} else if(isApply(name)){ //$NON-NLS-1$
 				attrsMap.clear();
 				parseAttributes(attrsMap);
@@ -700,10 +680,10 @@ public class RenderingRulesStorage {
 		
 //		storage = new RenderingRulesStorage("", null);
 //		new DefaultRenderingRulesStorage().createStyle(storage);
-		for (RenderingRuleProperty p :  storage.PROPS.getCustomRules()) {
-			System.out.println(p.getCategory() + " " + p.getName() + " " + p.getAttrName());
-		}
-//		printAllRules(storage);
+//		for (RenderingRuleProperty p :  storage.PROPS.getCustomRules()) {
+//			System.out.println(p.getCategory() + " " + p.getName() + " " + p.getAttrName());
+//		}
+		printAllRules(storage);
 //		testSearch(storage);
 		
 	}
@@ -715,12 +695,12 @@ public class RenderingRulesStorage {
 		//		int count = 100000;
 		//		for (int i = 0; i < count; i++) {
 					RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-					searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
-					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "residential");
+					searchRequest.setStringFilter(storage.PROPS.R_TAG, "route_hiking");
+//					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "");
 //					searchRequest.setStringFilter(storage.PROPS.R_ADDITIONAL, "leaf_type=broadleaved");
 //					 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
-					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 13);
-					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 13);
+//					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 13);
+//					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 13);
 //						searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
 //					for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
 //						if (customProp.isBoolean()) {
