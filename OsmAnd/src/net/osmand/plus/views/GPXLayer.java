@@ -374,15 +374,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		int r = (int) (12 * tileBox.getDensity());
 		paintTextIcon.setTextSize(r);
 		int dr = r * 3 / 2;
-		int px = -1;
-		int py = -1;
+		float px = -1;
+		float py = -1;
 		for (int k = 0; k < items.size(); k++) {
 			GpxDisplayItem i = items.get(k);
-			WptPt o = i.locationEnd;
-			if (o != null && o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top && o.lon >= latLonBounds.left
-					&& o.lon <= latLonBounds.right) {
-				int x = (int) tileBox.getPixXFromLatLon(o.lat, o.lon);
-				int y = (int) tileBox.getPixYFromLatLon(o.lat, o.lon);
+			WptPt point = i.locationEnd;
+			if (point != null) {
+				float x = tileBox.getPixXFromLatLon(point.lat, point.lon);
+				float y = tileBox.getPixYFromLatLon(point.lat, point.lon);
 				if (px != -1 || py != -1) {
 					if (Math.abs(x - px) <= dr && Math.abs(y - py) <= dr) {
 						continue;
@@ -390,25 +389,29 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 				px = x;
 				py = y;
-				String nm = i.splitName;
-				if (nm != null) {
-					int ind = nm.indexOf(' ');
-					if (ind > 0) {
-						nm = nm.substring(0, ind);
+				if (point.lat >= latLonBounds.bottom && point.lat <= latLonBounds.top
+						&& point.lon >= latLonBounds.left && point.lon <= latLonBounds.right) {
+					String name = i.splitName;
+					if (name != null) {
+						int ind = name.indexOf(' ');
+						if (ind > 0) {
+							name = name.substring(0, ind);
+						}
+						Rect bounds = new Rect();
+						paintTextIcon.getTextBounds(name, 0, name.length(), bounds);
+
+						float nameHalfWidth = bounds.width() / 2f;
+						float nameHalfHeight = bounds.height() / 2f;
+						float density = (float) Math.ceil(tileBox.getDensity());
+						RectF rect = new RectF(x - nameHalfWidth - 2 * density,
+								y + nameHalfHeight + 3 * density,
+								x + nameHalfWidth + 3 * density,
+								y - nameHalfHeight - 2 * density);
+
+						canvas.drawRoundRect(rect, 0, 0, paintInnerRect);
+						canvas.drawRoundRect(rect, 0, 0, paintOuterRect);
+						canvas.drawText(name, x, y + nameHalfHeight, paintTextIcon);
 					}
-					Rect bounds = new Rect();
-					paintTextIcon.getTextBounds(nm, 0, nm.length(), bounds);
-					int nmWidth = bounds.width();
-					int nmHeight = bounds.height();
-					RectF rect = new RectF(x - nmWidth / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
-							y + nmHeight / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
-							x + nmWidth / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
-							y - nmHeight / 2 - 2 * (float) Math.ceil(tileBox.getDensity()));
-					canvas.drawRoundRect(rect, 0, 0, paintInnerRect);
-					canvas.drawRoundRect(rect, 0, 0, paintOuterRect);
-//					canvas.drawRect(rect, paintInnerRect);
-//					canvas.drawRect(rect, paintOuterRect);
-					canvas.drawText(nm, x, y + nmHeight / 2, paintTextIcon);
 				}
 			}
 		}
@@ -1110,8 +1113,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public void applyNewObjectPosition(@NonNull Object o,
-									   @NonNull LatLon position,
-									   @Nullable final ContextMenuLayer.ApplyMovedObjectCallback callback) {
+	                                   @NonNull LatLon position,
+	                                   @Nullable final ContextMenuLayer.ApplyMovedObjectCallback callback) {
 		if (o instanceof WptPt) {
 			final WptPt objectInMotion = (WptPt) o;
 			SelectedGpxFile selectedGpxFile = pointFileMap.get(objectInMotion);
