@@ -26,6 +26,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -103,7 +104,13 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (hexEditText.isFocused()) {
-					int color = parseColorString(s.toString());
+					int color = colorPicker.getColor();
+					try {
+						color = Algorithms.parseColor("#" + s.toString());
+					} catch (IllegalArgumentException e) {
+						hexEditText.setError(getString(R.string.wrong_input));
+						log.error(e);
+					}
 					if (color != colorPicker.getColor()) {
 						fromEditText = true;
 						colorPicker.setColor(color, true);
@@ -164,60 +171,6 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 		} catch (RuntimeException e) {
 			log.error(e);
 		}
-	}
-
-	private static int parseColorString(String colorString) throws NumberFormatException {
-		int a, r, g, b = 0;
-		if (colorString.startsWith("#")) {
-			colorString = colorString.substring(1);
-		}
-		if (colorString.length() == 0) {
-			r = 0;
-			a = 255;
-			g = 0;
-		} else if (colorString.length() <= 2) {
-			a = 255;
-			r = 0;
-			b = Integer.parseInt(colorString, 16);
-			g = 0;
-		} else if (colorString.length() == 3) {
-			a = 255;
-			r = Integer.parseInt(colorString.substring(0, 1), 16);
-			g = Integer.parseInt(colorString.substring(1, 2), 16);
-			b = Integer.parseInt(colorString.substring(2, 3), 16);
-		} else if (colorString.length() == 4) {
-			a = 255;
-			r = Integer.parseInt(colorString.substring(0, 2), 16);
-			g = r;
-			r = 0;
-			b = Integer.parseInt(colorString.substring(2, 4), 16);
-		} else if (colorString.length() == 5) {
-			a = 255;
-			r = Integer.parseInt(colorString.substring(0, 1), 16);
-			g = Integer.parseInt(colorString.substring(1, 3), 16);
-			b = Integer.parseInt(colorString.substring(3, 5), 16);
-		} else if (colorString.length() == 6) {
-			a = 255;
-			r = Integer.parseInt(colorString.substring(0, 2), 16);
-			g = Integer.parseInt(colorString.substring(2, 4), 16);
-			b = Integer.parseInt(colorString.substring(4, 6), 16);
-		} else if (colorString.length() == 7) {
-			a = Integer.parseInt(colorString.substring(0, 1), 16);
-			r = Integer.parseInt(colorString.substring(1, 3), 16);
-			g = Integer.parseInt(colorString.substring(3, 5), 16);
-			b = Integer.parseInt(colorString.substring(5, 7), 16);
-		} else if (colorString.length() == 8) {
-			a = Integer.parseInt(colorString.substring(0, 2), 16);
-			r = Integer.parseInt(colorString.substring(2, 4), 16);
-			g = Integer.parseInt(colorString.substring(4, 6), 16);
-			b = Integer.parseInt(colorString.substring(6, 8), 16);
-		} else {
-			b = -1;
-			g = -1;
-			r = -1;
-			a = -1;
-		}
-		return Color.argb(a, r, g, b);
 	}
 
 	public interface ColorPickerListener {

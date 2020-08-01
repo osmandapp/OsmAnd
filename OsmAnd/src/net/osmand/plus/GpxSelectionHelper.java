@@ -520,12 +520,12 @@ public class GpxSelectionHelper {
 						}
 						GPXFile gpx = GPXUtilities.loadGPXFile(fl);
 						if (obj.has(COLOR)) {
-							int clr = Algorithms.parseColor(obj.getString(COLOR));
+							int clr = parseColor(obj.getString(COLOR));
 							gpx.setColor(clr);
 						}
 						for (GradientScaleType scaleType : GradientScaleType.values()) {
 							if (obj.has(scaleType.getColorTypeName())) {
-								int clr = Algorithms.parseColor(obj.getString(scaleType.getColorTypeName()));
+								int clr = parseColor(obj.getString(scaleType.getColorTypeName()));
 								gpx.setGradientScaleColor(scaleType.getColorTypeName(), clr);
 							}
 						}
@@ -564,6 +564,14 @@ public class GpxSelectionHelper {
 				app.getSettings().SELECTED_GPX.set("");
 				e.printStackTrace();
 			}
+		}
+	}
+
+	private int parseColor(String color) {
+		try {
+			return Algorithms.isEmpty(color) ? 0 : Algorithms.parseColor(color);
+		} catch (IllegalArgumentException e) {
+			return 0;
 		}
 	}
 

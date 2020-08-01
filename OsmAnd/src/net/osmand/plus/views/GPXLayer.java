@@ -379,7 +379,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		for (int k = 0; k < items.size(); k++) {
 			GpxDisplayItem i = items.get(k);
 			WptPt point = i.locationEnd;
-			if (point != null) {
+			if (point != null && point.lat >= latLonBounds.bottom && point.lat <= latLonBounds.top
+					&& point.lon >= latLonBounds.left && point.lon <= latLonBounds.right) {
 				float x = tileBox.getPixXFromLatLon(point.lat, point.lon);
 				float y = tileBox.getPixYFromLatLon(point.lat, point.lon);
 				if (px != -1 || py != -1) {
@@ -389,29 +390,26 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 				px = x;
 				py = y;
-				if (point.lat >= latLonBounds.bottom && point.lat <= latLonBounds.top
-						&& point.lon >= latLonBounds.left && point.lon <= latLonBounds.right) {
-					String name = i.splitName;
-					if (name != null) {
-						int ind = name.indexOf(' ');
-						if (ind > 0) {
-							name = name.substring(0, ind);
-						}
-						Rect bounds = new Rect();
-						paintTextIcon.getTextBounds(name, 0, name.length(), bounds);
-
-						float nameHalfWidth = bounds.width() / 2f;
-						float nameHalfHeight = bounds.height() / 2f;
-						float density = (float) Math.ceil(tileBox.getDensity());
-						RectF rect = new RectF(x - nameHalfWidth - 2 * density,
-								y + nameHalfHeight + 3 * density,
-								x + nameHalfWidth + 3 * density,
-								y - nameHalfHeight - 2 * density);
-
-						canvas.drawRoundRect(rect, 0, 0, paintInnerRect);
-						canvas.drawRoundRect(rect, 0, 0, paintOuterRect);
-						canvas.drawText(name, x, y + nameHalfHeight, paintTextIcon);
+				String name = i.splitName;
+				if (name != null) {
+					int ind = name.indexOf(' ');
+					if (ind > 0) {
+						name = name.substring(0, ind);
 					}
+					Rect bounds = new Rect();
+					paintTextIcon.getTextBounds(name, 0, name.length(), bounds);
+
+					float nameHalfWidth = bounds.width() / 2f;
+					float nameHalfHeight = bounds.height() / 2f;
+					float density = (float) Math.ceil(tileBox.getDensity());
+					RectF rect = new RectF(x - nameHalfWidth - 2 * density,
+							y + nameHalfHeight + 3 * density,
+							x + nameHalfWidth + 3 * density,
+							y - nameHalfHeight - 2 * density);
+
+					canvas.drawRoundRect(rect, 0, 0, paintInnerRect);
+					canvas.drawRoundRect(rect, 0, 0, paintOuterRect);
+					canvas.drawText(name, x, y + nameHalfHeight, paintTextIcon);
 				}
 			}
 		}
