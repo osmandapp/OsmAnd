@@ -41,6 +41,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -57,9 +58,9 @@ import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
 
-public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener {
+public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ColorPickerListener {
 
-	public static final String TAG = TrackAppearanceFragment.class.getSimpleName();
+	public static final String TAG = TrackAppearanceFragment.class.getName();
 
 	private static final Log log = PlatformUtil.getLog(TrackAppearanceFragment.class);
 
@@ -76,6 +77,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private TrackWidthCard trackWidthCard;
 	private SplitIntervalCard splitIntervalCard;
+	private TrackColoringCard trackColoringCard;
 
 	private ImageView trackIcon;
 
@@ -325,6 +327,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
+	public void onColorSelected(int prevColor, int newColor) {
+		trackColoringCard.onColorSelected(prevColor, newColor);
+	}
+
+	@Override
 	protected int applyPosY(int currentY, boolean needCloseMenu, boolean needMapAdjust, int previousMenuState, int newMenuState, int dZoom, boolean animated) {
 		int y = super.applyPosY(currentY, needCloseMenu, needMapAdjust, previousMenuState, newMenuState, dZoom, animated);
 		if (needMapAdjust) {
@@ -555,7 +562,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			directionArrowsCard.setListener(this);
 			cardsContainer.addView(directionArrowsCard.build(mapActivity));
 
-			TrackColoringCard trackColoringCard = new TrackColoringCard(mapActivity, trackDrawInfo);
+			trackColoringCard = new TrackColoringCard(mapActivity, trackDrawInfo, this);
 			trackColoringCard.setListener(this);
 			cardsContainer.addView(trackColoringCard.build(mapActivity));
 

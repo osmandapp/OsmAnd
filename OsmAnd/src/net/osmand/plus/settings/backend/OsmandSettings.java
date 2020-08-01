@@ -2197,6 +2197,7 @@ public class OsmandSettings {
 	public final CommonPreference<String> CURRENT_TRACK_WIDTH = new StringPreference("current_track_width", "").makeGlobal().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_ARROWS = new BooleanPreference("current_track_show_arrows", false).makeGlobal().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_START_FINISH = new BooleanPreference("current_track_show_start_finish", true).makeGlobal().cache();
+	public final ListStringPreference CUSTOM_TRACK_COLORS = (ListStringPreference) new ListStringPreference("custom_track_colors", null, ",").makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5000).makeProfile();
