@@ -799,7 +799,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 			@Override
 			public void openLastEditTrackOnClick(String gpxFileName) {
-				getGpxFile(gpxFileName);
+				addNewGpxData(getGpxFile(gpxFileName));
 			}
 
 			@Override
@@ -813,7 +813,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		return new SelectFileListener() {
 			@Override
 			public void selectFileOnCLick(String gpxFileName) {
-				getGpxFile(gpxFileName);
+				addNewGpxData(getGpxFile(gpxFileName));
 			}
 
 			@Override
@@ -827,9 +827,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		};
 	}
 
-	private void getGpxFile(String gpxFileName) {
+	private GPXFile getGpxFile(String gpxFileName) {
 		OsmandApplication app = getMyApplication();
-		GPXFile gpxFile;
+		GPXFile gpxFile = null;
 		if (app != null) {
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(gpxFileName);
 			if (selectedGpxFile != null) {
@@ -838,17 +838,20 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				gpxFile = GPXUtilities.loadGPXFile(new File(
 						getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR), gpxFileName));
 			}
-			addNewGpxData(gpxFile);
+
 		}
+		return gpxFile;
 	}
 
 	private SelectFileListener createAddToTrackFileListener() {
 		final MapActivity mapActivity = getMapActivity();
 		return new SelectFileListener() {
 			@Override
-			public void selectFileOnCLick(GPXFile gpxFile) {
+			public void selectFileOnCLick(String gpxFileName) {
 				if (mapActivity != null) {
-					SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+					GPXFile gpxFile = getGpxFile(gpxFileName);
+					SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper()
+							.getSelectedFileByPath(gpxFile.path);
 					boolean showOnMap = selectedGpxFile != null;
 					saveExistingGpx(gpxFile, showOnMap, ActionType.ADD_SEGMENT, false);
 				}
