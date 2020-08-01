@@ -343,10 +343,8 @@ public class Algorithms {
 	 * exception. Supported formats are:
 	 * #RRGGBB
 	 * #AARRGGBB
-	 * 'red', 'blue', 'green', 'black', 'white', 'gray', 'cyan', 'magenta',
-	 * 'yellow', 'lightgray', 'darkgray'
 	 */
-	public static int parseColor(String colorString) {
+	public static int parseColor(String colorString) throws IllegalArgumentException {
 		if (colorString.charAt(0) == '#') {
 			// Use a long to avoid rollovers on #ffXXXXXX
 			if (colorString.length() == 4) {
