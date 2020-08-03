@@ -1058,46 +1058,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		fragment.show(mapActivity.getSupportFragmentManager(), SaveAsNewTrackBottomSheetDialogFragment.TAG);
 	}
 
-//	private AlertDialog showAddToTrackDialog(final MapActivity mapActivity) {
-//
-//		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
-//			@Override
-//			public boolean processResult(GPXFile[] result) {
-//				GPXFile gpxFile;
-//				if (result != null && result.length > 0) {
-//					gpxFile = result[0];
-//					SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
-//					boolean showOnMap = selectedGpxFile != null;
-//					saveExistingGpx(gpxFile, showOnMap, ActionType.ADD_SEGMENT, false);
-//				}
-//				return true;
-//			}
-//		};
-//
-//		return GpxUiHelper.selectGPXFile(mapActivity, false, false, callbackWithObject, nightMode);
-//	}
-
 	private void showAddToTrackDialog(final MapActivity mapActivity) {
 		if (mapActivity != null) {
 			SelectFileBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
 					createAddToTrackFileListener(),ADD_TO_TRACK);
 		}
-		/*
-		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
-			@Override
-			public boolean processResult(GPXFile[] result) {
-				GPXFile gpxFile;
-				if (result != null && result.length > 0) {
-					gpxFile = result[0];
-					SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
-					boolean showOnMap = selectedGpxFile != null;
-					saveExistingGpx(gpxFile, showOnMap, ActionType.ADD_SEGMENT, false);
-				}
-				return true;
-			}
-		};
-
-		return GpxUiHelper.selectGPXFile(mapActivity, false, false, callbackWithObject, nightMode);*/
 	}
 
 	private void applyMovePointMode() {
@@ -1444,13 +1409,19 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	}
 
 	private String getSuggestedName(File dir) {
-		final String suggestedName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
-		String displayedName = suggestedName;
-		File fout = new File(dir, suggestedName + GPX_FILE_EXT);
-		int ind = 1;
-		while (fout.exists()) {
-			displayedName = suggestedName + "_" + (++ind);
-			fout = new File(dir, displayedName + GPX_FILE_EXT);
+		NewGpxData newGpxData = editingCtx.getNewGpxData();
+		String displayedName;
+		if (newGpxData == null) {
+			final String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
+			displayedName = suggestedName;
+			File fout = new File(dir, suggestedName + GPX_FILE_EXT);
+			int ind = 0;
+			while (fout.exists()) {
+				displayedName = suggestedName + "_" + (++ind);
+				fout = new File(dir, displayedName + GPX_FILE_EXT);
+			}
+		} else {
+			displayedName = AndroidUtils.trimExtension(new File(newGpxData.getGpxFile().path).getName());
 		}
 		return displayedName;
 	}

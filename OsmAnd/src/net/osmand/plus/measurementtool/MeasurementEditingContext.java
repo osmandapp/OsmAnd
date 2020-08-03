@@ -137,8 +137,10 @@ public class MeasurementEditingContext {
 	void setSnapToRoadAppMode(ApplicationMode snapToRoadAppMode) {
 		if (this.snapToRoadAppMode != null && snapToRoadAppMode != null
 				&& !this.snapToRoadAppMode.getStringKey().equals(snapToRoadAppMode.getStringKey())) {
-			snappedToRoadPoints.clear();
-			updateCacheForSnapIfNeeded(true);
+			if (calculationType == WHOLE_TRACK) {
+				snappedToRoadPoints.clear();
+				updateCacheForSnapIfNeeded(true);
+			}
 		}
 		this.snapToRoadAppMode = snapToRoadAppMode;
 	}
