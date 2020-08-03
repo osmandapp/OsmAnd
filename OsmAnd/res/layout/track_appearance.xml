@@ -50,7 +50,7 @@
 					osmand:typeface="@string/font_roboto_medium" />
 
 				<androidx.appcompat.widget.AppCompatImageView
-					android:id="@+id/appearance_icon"
+					android:id="@+id/track_icon"
 					android:layout_width="@dimen/standard_icon_size"
 					android:layout_height="@dimen/standard_icon_size"
 					android:layout_gravity="center_vertical"
@@ -94,7 +94,8 @@
 		android:id="@+id/map_controls_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_gravity="bottom">
+		android:layout_gravity="bottom"
+		tools:visibility="invisible">
 
 		<include
 			layout="@layout/map_ruler"
@@ -104,8 +105,7 @@
 			android:layout_marginStart="@dimen/fab_margin_right"
 			android:layout_marginLeft="@dimen/fab_margin_right"
 			android:layout_marginEnd="@dimen/fab_margin_right"
-			android:layout_marginRight="@dimen/fab_margin_right"
-			tools:visibility="invisible" />
+			android:layout_marginRight="@dimen/fab_margin_right" />
 
 		<include
 			layout="@layout/map_hud_controls"
@@ -115,8 +115,7 @@
 			android:layout_marginStart="@dimen/fab_margin_right"
 			android:layout_marginLeft="@dimen/fab_margin_right"
 			android:layout_marginEnd="@dimen/fab_margin_right"
-			android:layout_marginRight="@dimen/fab_margin_right"
-			tools:visibility="invisible" />
+			android:layout_marginRight="@dimen/fab_margin_right" />
 
 	</FrameLayout>
 

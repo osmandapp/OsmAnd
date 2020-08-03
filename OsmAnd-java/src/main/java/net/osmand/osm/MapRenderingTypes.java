@@ -292,8 +292,9 @@ public abstract class MapRenderingTypes {
 		rtype.category = parentCategory == null ? null : parentCategory.category;
 		rtype.onlyPoint = Boolean.parseBoolean(parser.getAttributeValue("", "point")); //$NON-NLS-1$
 		rtype.relation = Boolean.parseBoolean(parser.getAttributeValue("", "relation")); //$NON-NLS-1$
+		rtype.relationGroup = Boolean.parseBoolean(parser.getAttributeValue("", "relationGroup")); //$NON-NLS-1$
 		if (rtype.isMain()) {
-			if (rtype.relation) {
+			if (rtype.relationGroup) {
 				MapRulType mrt = MapRulType.createMainEntity(tag + "_" + value, null);
 				mrt.order = rtype.order;
 				mrt.category = rtype.category;
@@ -533,6 +534,7 @@ public abstract class MapRenderingTypes {
 		
 		protected String category = null;
 		protected boolean relation;
+		protected boolean relationGroup;
 		// creation of only section
 		protected boolean map = true;
 		protected boolean poi = true;
