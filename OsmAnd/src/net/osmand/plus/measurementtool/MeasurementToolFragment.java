@@ -1603,7 +1603,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 
 			private void onGpxSaved(Exception warning) {
-				MapActivity mapActivity = getMapActivity();
+				final MapActivity mapActivity = getMapActivity();
 				if (mapActivity == null) {
 					return;
 				}
@@ -1623,8 +1623,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 									.setAction(R.string.shared_string_rename, new View.OnClickListener() {
 										@Override
 										public void onClick(View view) {
-											MapActivity mapActivity = getMapActivity();
-											if (mapActivity != null) {
+											if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 												FileUtils.renameFile(mapActivity, toSave, null);
 											}
 										}
