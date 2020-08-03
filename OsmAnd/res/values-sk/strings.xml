@@ -3838,4 +3838,5 @@
     <string name="plan_route_create_new_route">Vytvoriť novú trasu</string>
     <string name="plan_route_select_track_file_for_open">Zvoľte súbor so stopou na otvorenie.</string>
     <string name="shared_string_done">Hotovo</string>
+    <string name="overwrite_track">Prepísať stopu</string>
 </resources>
