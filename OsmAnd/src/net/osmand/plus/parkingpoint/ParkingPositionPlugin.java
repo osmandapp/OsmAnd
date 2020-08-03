@@ -526,13 +526,13 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	String getFormattedTime(long timeInMillis) {
-		Time time = new Time();
-		time.set(timeInMillis);
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm MMM dd, yyyy", Locale.getDefault());
-		if (!DateFormat.is24HourFormat(app)) {
-			sdf = new SimpleDateFormat("hh:mm a dd MMM, yyyy", Locale.getDefault());
+		CharSequence formattedTime;
+		if (DateFormat.is24HourFormat(app)) {
+			formattedTime = DateFormat.format("HH:mm MMM d, yyyy", timeInMillis);
+		} else{
+			formattedTime = DateFormat.format("hh:mm a MMM d, yyyy", timeInMillis);
 		}
-		return sdf.format(new Date(time.toMillis(false)));
+		return formattedTime.toString();
 	}
 
 	String getFormattedTimeInterval(long timeInMillis, Activity ctx) {
