@@ -3840,4 +3840,5 @@
     <string name="plan_route_create_new_route">Crea un\'àndala noa</string>
     <string name="plan_route_select_track_file_for_open">Ischerta unu documentu de rasta de abèrrere.</string>
     <string name="shared_string_done">Fatu</string>
+    <string name="overwrite_track">Subraiscrie sa rasta</string>
 </resources>

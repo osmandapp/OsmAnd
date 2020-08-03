@@ -3837,4 +3837,5 @@
     <string name="plan_route_create_new_route">Создать новый маршрут</string>
     <string name="plan_route_select_track_file_for_open">Выберите файл трека для открытия.</string>
     <string name="shared_string_done">Готово</string>
+    <string name="overwrite_track">Перезаписать трек</string>
 </resources>

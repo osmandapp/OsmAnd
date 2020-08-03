@@ -3837,4 +3837,11 @@
     <string name="shared_string_custom">Personalizado</string>
     <string name="gpx_direction_arrows">Flechas de dirección</string>
     <string name="track_coloring_solid">Sólido</string>
+    <string name="plan_route_last_edited">Última edición</string>
+    <string name="plan_route_import_track">Importar traza</string>
+    <string name="plan_route_open_existing_track">Abrir traza existente</string>
+    <string name="plan_route_create_new_route">Crear nueva ruta</string>
+    <string name="plan_route_select_track_file_for_open">Marca un archivo de traza para abrir.</string>
+    <string name="shared_string_done">Hecho</string>
+    <string name="overwrite_track">Sobrescribir traza</string>
 </resources>

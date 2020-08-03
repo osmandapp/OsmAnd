@@ -40,6 +40,10 @@ public class RenderingRulesStorage {
 	
 	private final static int SHIFT_TAG_VAL = 16;
 	
+
+	private final static String SEQ_ATTR_KEY = "seq";
+	private final static String SEQ_PLACEHOLDER = "#SEQ";
+	
 	// C++
 	List<String> dictionary = new ArrayList<String>();
 	Map<String, Integer> dictionaryMap = new LinkedHashMap<String, Integer>();
@@ -191,8 +195,19 @@ public class RenderingRulesStorage {
 		List<XmlTreeSequence> children = new ArrayList<RenderingRulesStorage.XmlTreeSequence>();
 		
 		private void process(RenderingRulesHandler handler, int el) throws XmlPullParserException, IOException {
-			// TODO create new attrsMap and replace #SEQ -> el
-			handler.startElement(attrsMap, name);
+			Map<String, String> seqAttrsMap = new HashMap<String, String>(attrsMap);
+			if (attrsMap.containsKey(SEQ_ATTR_KEY)) {
+				attrsMap.remove(SEQ_ATTR_KEY);
+			}
+			
+			for (Entry<String, String> attr: attrsMap.entrySet()) {
+				if (attr.getValue().contains(SEQ_PLACEHOLDER)) {
+					seqAttrsMap.put(attr.getKey(), attr.getValue().replace(SEQ_PLACEHOLDER, el+""));
+				} else {
+					seqAttrsMap.put(attr.getKey(), attr.getValue());
+				}
+			}
+			handler.startElement(seqAttrsMap, name);
 			for(XmlTreeSequence s : children) {
 				s.process(handler, el);
 			}
@@ -223,13 +238,13 @@ public class RenderingRulesStorage {
 					attrsMap.clear();
 					parseAttributes(parser, attrsMap);
 					String name = parser.getName();
-					if (!Algorithms.isEmpty(parser.getAttributeValue("", "seq")) || currentSeqElement != null) {
+					if (!Algorithms.isEmpty(parser.getAttributeValue("", SEQ_ATTR_KEY)) || currentSeqElement != null) {
 						XmlTreeSequence seq = new XmlTreeSequence();
 						seq.name = name;
-						seq.attrsMap = attrsMap;
+						seq.attrsMap = new HashMap<String, String>(attrsMap);
 						seq.parent = currentSeqElement;
 						if (currentSeqElement == null) {
-							seq.seqOrder = parser.getAttributeValue("", "seq");
+							seq.seqOrder = parser.getAttributeValue("", SEQ_ATTR_KEY);
 						} else {
 							currentSeqElement.children.add(seq);
 							seq.seqOrder = currentSeqElement.seqOrder;
@@ -246,7 +261,8 @@ public class RenderingRulesStorage {
 						currentSeqElement = currentSeqElement.parent;
 						if (currentSeqElement == null) {
 							// Here we process sequence element
-							for(int i = 1; i < 5; i++) {
+							int seqEnd = Integer.parseInt(process.seqOrder.substring(process.seqOrder.indexOf(':') + 1, process.seqOrder.length()));
+							for(int i = 1; i < seqEnd; i++) {
 								process.process(this, i);
 							}
 						}
