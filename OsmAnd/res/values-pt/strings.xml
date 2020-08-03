@@ -1250,7 +1250,7 @@
     <string name="traffic_warning_border_control">Posto alfandegário</string>
     <string name="traffic_warning_payment">Portagem</string>
     <string name="traffic_warning_stop">Sinal de stop</string>
-    <string name="traffic_warning_calming">Acalmia de tráfego</string>
+    <string name="traffic_warning_calming">Choque de velocidade</string>
     <string name="traffic_warning_speed_camera">Radar de velocidade</string>
     <string name="traffic_warning">Aviso de tráfego</string>
     <string name="speak_favorites">Favoritos pertos</string>

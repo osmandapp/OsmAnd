@@ -2792,4 +2792,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="plan_route_create_new_route">Sukurti naują maršrutą</string>
     <string name="plan_route_select_track_file_for_open">Pasirinkite trasos failą kurį norite atidaryti</string>
     <string name="shared_string_done">Padaryta</string>
+    <string name="add_hidden_group_info">Pridėtas taškas nebus matomas žemėlapyje, nes pasirinkta grupė yra paslėpta, ją galite rasti \"%s\".</string>
+    <string name="gpx_split_interval_descr">Pasirinkite intervalą nuo kurio taškas su atstumu ar laiku bus pavaizduojamas ekrane ant trasos.</string>
+    <string name="gpx_split_interval_none_descr">Pasirinkite norima dalinimo variantą: pagal laiką arba pagal atstumą.</string>
 </resources>

@@ -40,7 +40,7 @@
 
 	</LinearLayout>
 
-	<net.osmand.plus.widgets.FlowLayout
+	<com.google.android.material.internal.FlowLayout
 		android:id="@+id/select_color"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"

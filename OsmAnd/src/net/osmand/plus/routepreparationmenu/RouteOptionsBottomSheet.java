@@ -2,9 +2,12 @@ package net.osmand.plus.routepreparationmenu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +22,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.StateChangedListener;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -168,32 +172,62 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private BaseBottomSheetItem createMuteSoundItem(final LocalRoutingParameter optionsItem) {
 		boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
-		final BottomSheetItemWithCompoundButton[] muteSoundItem = new BottomSheetItemWithCompoundButton[1];
-		muteSoundItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setCompoundButtonColorId(selectedModeColorId)
-				.setChecked(active)
-				.setDescription(getString(R.string.voice_announcements))
-				.setIcon(getContentIcon(active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()))
-				.setTitle(getString(R.string.shared_string_sound))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-						boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
-						routingHelper.getVoiceRouter().setMuteForMode(applicationMode, active);
-						String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
-						if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-							OsmAndDialogs.showVoiceProviderDialog(mapActivity, applicationMode, false);
-						} else {
-							muteSoundItem[0].setChecked(!active);
-							muteSoundItem[0].setIcon(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
-						}
-						updateMenu();
-					}
-				})
+		int selectedModeColor = ContextCompat.getColor(app, selectedModeColorId);
+		final View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
+		final ImageView icon = itemView.findViewById(R.id.icon);
+		TextView tvTitle = itemView.findViewById(R.id.title);
+		TextView tvDescription = itemView.findViewById(R.id.description);
+		View basicItem = itemView.findViewById(R.id.basic_item_body);
+		final CompoundButton cb = itemView.findViewById(R.id.compound_button);
+		View voicePromptsBtn = itemView.findViewById(R.id.additional_button);
+		ImageView voicePromptsBtnImage = itemView.findViewById(R.id.additional_button_icon);
+
+		tvTitle.setText(getString(R.string.shared_string_sound));
+		tvDescription.setText(getString(R.string.voice_announcements));
+		icon.setImageDrawable(getContentIcon(active ?
+				optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
+		cb.setChecked(active);
+		cb.setFocusable(false);
+		UiUtilities.setupCompoundButton(nightMode, selectedModeColor, cb);
+
+		basicItem.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
+				boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
+				routingHelper.getVoiceRouter().setMuteForMode(applicationMode, active);
+				String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
+				if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+					OsmAndDialogs.showVoiceProviderDialog(mapActivity, applicationMode, false);
+				} else {
+					cb.setChecked(!active);
+					icon.setImageDrawable(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
+				}
+				updateMenu();
+			}
+		});
+
+		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings,
+				nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+		if (Build.VERSION.SDK_INT >= 21) {
+			Drawable activeDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings, selectedModeColorId);
+			drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
+		}
+		voicePromptsBtnImage.setImageDrawable(drawable);
+
+		voicePromptsBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				BaseSettingsFragment.showInstance(
+						mapActivity, BaseSettingsFragment.SettingsScreenType.VOICE_ANNOUNCES);
+				dismiss();
+			}
+		});
+
+		return new BaseBottomSheetItem.Builder()
+				.setCustomView(itemView)
 				.create();
-		return muteSoundItem[0];
 	}
 
 	private BaseBottomSheetItem createTimeConditionalRoutingItem(final LocalRoutingParameter optionsItem) {

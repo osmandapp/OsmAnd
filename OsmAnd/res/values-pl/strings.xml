@@ -1329,7 +1329,7 @@
     <string name="traffic_warning_border_control">Kontrola graniczna</string>
     <string name="traffic_warning_payment">Punkt poboru opłat</string>
     <string name="traffic_warning_stop">Znak Stop</string>
-    <string name="traffic_warning_calming">Uspokojenie ruchu</string>
+    <string name="traffic_warning_calming">Próg zwalniający</string>
     <string name="traffic_warning_speed_camera">Fotoradar</string>
     <string name="traffic_warning">Ostrzeżenia drogowe</string>
     <string name="local_index_description">Kliknij istniejący element, aby zobaczyć szczegóły, naciśnij i przytrzymaj, aby wyłączyć lub usunąć. Aktualne dane na urządzeniu (%1$s wolne):</string>
@@ -3833,7 +3833,7 @@
     <string name="gpx_split_interval_none_descr">Wybierz żądaną opcję podziału: według czasu lub odległości.</string>
     <string name="track_coloring_solid">Stałe</string>
     <string name="gpx_parse_error">OsmAnd GPX nie jest dobrze uformowany, prosimy o kontakt z zespołem wsparcia technicznego w celu dalszego zbadania sprawy.</string>
-    <string name="turn_screen_on_wake_time_descr">Wybierz limit czasu ekranu po przebudzeniu. (\"%1$s\" nie powoduje przekroczenia limitu czasu).</string>
+    <string name="turn_screen_on_wake_time_descr">Wybierz limit czasu ekranu po przebudzeniu. (\"%1$s\" nie powoduje przekroczenia limitu czasu)</string>
     <string name="track_show_start_finish_icons">Pokaż ikony rozpoczęcia i zakończenia</string>
     <string name="gpx_split_interval_descr">Wybierz przedział czasowy, w którym będą wyświetlane znaki z dystansem lub czasem na torze.</string>
     <string name="shared_string_custom">Niestandardowy</string>
@@ -3844,4 +3844,5 @@
     <string name="plan_route_create_new_route">Utwórz nową trasę</string>
     <string name="plan_route_select_track_file_for_open">Wybierz plik ścieżki do otwarcia.</string>
     <string name="shared_string_done">Wykonane</string>
+    <string name="turn_screen_on_power_button_disabled">Wyłączone. Wymaga \"Trzymaj ekran włączony\" w obszarze \"Limit czasu po przebudzeniu\".</string>
 </resources>

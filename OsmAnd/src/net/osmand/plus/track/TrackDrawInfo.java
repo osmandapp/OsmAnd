@@ -109,6 +109,10 @@ public class TrackDrawInfo {
 		this.showArrows = showArrows;
 	}
 
+	public void setShowStartFinish(boolean showStartFinish) {
+		this.showStartFinish = showStartFinish;
+	}
+
 	public boolean isShowStartFinish() {
 		return showStartFinish;
 	}
