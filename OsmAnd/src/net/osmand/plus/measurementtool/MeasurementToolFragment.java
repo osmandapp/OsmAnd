@@ -89,10 +89,13 @@ import java.util.List;
 import java.util.Locale;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.*;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.*;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationType;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.ExportAsGpxListener;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.SnapToRoadProgressListener;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
-import static net.osmand.plus.measurementtool.SnapTrackWarningBottomSheet.*;
+import static net.osmand.plus.measurementtool.SnapTrackWarningBottomSheet.SnapTrackWarningListener;
 import static net.osmand.plus.measurementtool.StartPlanRouteBottomSheet.StartPlanRouteListener;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment {
@@ -226,18 +229,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		distanceToCenterTv = (TextView) mainView.findViewById(R.id.distance_to_center_text_view);
 
 		mainIcon = (ImageView) mainView.findViewById(R.id.main_icon);
-		final NewGpxData newGpxData = editingCtx.getNewGpxData();
-		if (newGpxData != null) {
-			ActionType actionType = newGpxData.getActionType();
-			if (actionType == ActionType.ADD_SEGMENT || actionType == ActionType.EDIT_SEGMENT) {
-				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_polygom_dark));
-			} else {
-				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_markers_dark));
-			}
-		} else {
-			mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
-		}
-
 		upDownBtn = (ImageView) mainView.findViewById(R.id.up_down_button);
 		upDownBtn.setImageDrawable(upIcon);
 
@@ -397,6 +388,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 		}
+		final NewGpxData newGpxData = editingCtx.getNewGpxData();
 		if (newGpxData != null) {
 			ActionType actionType = newGpxData.getActionType();
 			if (actionType == ActionType.ADD_ROUTE_POINTS) {
@@ -576,6 +568,20 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		progressBar.setMinimumHeight(0);
 		progressBar.setProgress(0);
 		progressBarVisible = true;
+	}
+
+	private void updateMainIcon() {
+		NewGpxData newGpxData = editingCtx.getNewGpxData();
+		if (newGpxData != null) {
+			ActionType actionType = newGpxData.getActionType();
+			if (actionType == ActionType.ADD_SEGMENT || actionType == ActionType.EDIT_SEGMENT) {
+				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_polygom_dark));
+			} else {
+				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_markers_dark));
+			}
+		} else {
+			mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
+		}
 	}
 
 	private void showRouteBetweenPointsMenu(boolean rememberPreviousTitle) {
@@ -1692,6 +1698,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			} else {
 				wasCollapseButtonVisible = false;
 			}
+			updateMainIcon();
 			updateDistancePointsText();
 		}
 	}
