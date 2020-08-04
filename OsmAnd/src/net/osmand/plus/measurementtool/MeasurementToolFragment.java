@@ -1463,6 +1463,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			private ProgressDialog progressDialog;
 			private File toSave;
 
+			private boolean exportRouteAsGpx = false;
+
 			@Override
 			protected void onPreExecute() {
 				cancelModes();
@@ -1503,6 +1505,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 							gpx.tracks.add(track);
 						} else if (saveType == SaveType.ROUTE_POINT) {
 							if (editingCtx.isInSnapToRoadMode()) {
+								exportRouteAsGpx = true;
 								editingCtx.exportRouteAsGpx(trackName, new ExportAsGpxListener() {
 									@Override
 									public void onExportAsGpxFinished(GPXFile gpx) {
@@ -1587,7 +1590,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 			@Override
 			protected void onPostExecute(Exception warning) {
-				onGpxSaved(warning);
+				if (!exportRouteAsGpx) {
+					onGpxSaved(warning);
+				}
 			}
 
 			private void onGpxSaved(Exception warning) {
