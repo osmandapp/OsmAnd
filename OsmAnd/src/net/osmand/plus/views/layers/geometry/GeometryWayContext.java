@@ -17,7 +17,7 @@ import net.osmand.plus.views.OsmandMapLayer.RenderingLineAttributes;
 
 public abstract class GeometryWayContext {
 
-	public static final int DEFAULT_SIMPLIFICATION_ZOOM = 6;
+	public static final int DEFAULT_SIMPLIFICATION_ZOOM = 16;
 
 	private Context ctx;
 	private float density;
