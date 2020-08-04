@@ -586,7 +586,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 			toolBarController.setTitle(getString(R.string.route_between_points));
 			mapActivity.refreshMap();
-			if(editingCtx.isSnapToRoadTrack()) {
+			if(editingCtx.isSnapToRoadTrack() || editingCtx.getNewGpxData() == null) {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						createRouteBetweenPointsFragmentListener(), editingCtx.getCalculationType(),
 						editingCtx.getSnapToRoadAppMode());
@@ -634,7 +634,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				if (mapActivity != null) {
 					MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 					if (mapControlsLayer != null) {
-						mapControlsLayer.doRoute(false);
+						if (editingCtx.getPointsCount() > 0) {
+							mapControlsLayer.doRoute(false);
+						}else{
+							Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+						}
 					}
 				}
 			}
@@ -649,7 +653,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 							editingCtx.getBeforePoints().clear();
 							editingCtx.getBeforePoints().addAll(editingCtx.getBeforeTrkSegmentLine().points);
 						}
-						addToGpx(mapActivity);
+						if(editingCtx.getNewGpxData()!=null) {
+							addToGpx(mapActivity);
+						}else {
+							saveAsGpx(SaveType.ROUTE_POINT);
+						}
 					} else {
 						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 					}
