@@ -328,7 +328,8 @@ public class MeasurementEditingContext {
 	}
 
 	boolean isSnapToRoadTrack() {
-		return getNewGpxData() != null && !getNewGpxData().getTrkSegment().points.isEmpty()
+		return getNewGpxData() != null && getNewGpxData().getTrkSegment() != null
+				&& !getNewGpxData().getTrkSegment().points.isEmpty()
 				&& !getNewGpxData().getGpxFile().getRoutePoints().isEmpty();
 	}
 

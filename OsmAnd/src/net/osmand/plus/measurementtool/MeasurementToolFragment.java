@@ -594,16 +594,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 			toolBarController.setTitle(getString(R.string.route_between_points));
 			mapActivity.refreshMap();
-			if (editingCtx.isSnapToRoadTrack() || editingCtx.isNewData()) {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						createRouteBetweenPointsFragmentListener(), editingCtx.getCalculationType(),
 						editingCtx.getSnapToRoadAppMode());
-			} else {
-				toolBarController.setSaveViewVisible(false);
-				updateToolbar();
-				SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
-						createSnapTrackWarningListener());
-			}
 		}
 	}
 

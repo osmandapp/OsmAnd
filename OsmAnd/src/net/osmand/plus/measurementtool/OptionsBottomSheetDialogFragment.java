@@ -123,40 +123,6 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		items.add(new OptionsDividerItem(getContext()));
 
-		BaseBottomSheetItem directions = new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark))
-				.setTitle(getString(R.string.get_directions))
-				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.directionsOnClick();
-						}
-						dismiss();
-					}
-				})
-				.create();
-		items.add(directions);
-
-		BaseBottomSheetItem reverseRoute = new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_change_navigation_points))
-				.setTitle(getString(R.string.reverse_route))
-				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.reverseRouteOnClick();
-						}
-						dismiss();
-					}
-				})
-				.create();
-		items.add(reverseRoute);
-
-		items.add(new OptionsDividerItem(getContext()));
-
 		BaseBottomSheetItem clearAllItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getIcon(R.drawable.ic_action_reset_to_default_dark, (
 						nightMode ? R.color.color_osm_edit_delete : R.color.color_osm_edit_delete)))
