@@ -52,7 +52,10 @@ public class DownloadGroupViewHolder {
 				}
 			}
 			if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {
-				iconStart = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
+				iconStart = getIconForDownloadedItems(group, R.drawable.ic_world_globe_dark);
+				if (iconStart == null) {
+					iconStart = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
+				}
 			} else {
 				iconStart = getIconForDownloadedItems(group, R.drawable.ic_map);
 				if (iconStart == null) {
@@ -79,6 +82,28 @@ public class DownloadGroupViewHolder {
 			if (item != null) {
 				int color = item.isOutdated() ? R.color.color_distance : R.color.color_ok;
 				return ctx.getMyApplication().getUIUtilities().getIcon(iconId, color);
+			}
+		}
+		return getIconForOutdatedItems(group, iconId);
+	}
+
+	private Drawable getIconForOutdatedItems(DownloadResourceGroup group, @DrawableRes int iconId) {
+		if (group.getIndividualResources() != null) {
+			for (IndexItem ii : group.getIndividualResources()) {
+				if (ii.getType() == DownloadActivityType.NORMAL_FILE
+						|| ii.getType() == DownloadActivityType.ROADS_FILE) {
+					if (ii.isOutdated()) {
+						return ctx.getMyApplication().getUIUtilities().getIcon(iconId, R.color.color_distance);
+					}
+				}
+			}
+		}
+		if (group.getGroups() != null) {
+			for (DownloadResourceGroup g : group.getGroups()) {
+				Drawable d = getIconForOutdatedItems(g, iconId);
+				if (d != null) {
+					return d;
+				}
 			}
 		}
 		return null;
