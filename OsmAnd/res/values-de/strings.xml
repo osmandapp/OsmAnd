@@ -23,7 +23,7 @@
     <string name="traffic_warning_border_control">Grenzkontrolle</string>
     <string name="traffic_warning_payment">Mautstelle</string>
     <string name="traffic_warning_stop">Stoppzeichen</string>
-    <string name="traffic_warning_calming">Verkehrsberuhigung</string>
+    <string name="traffic_warning_calming">Bodenschwelle</string>
     <string name="traffic_warning_speed_camera">Blitzer</string>
     <string name="traffic_warning">Verkehrswarnung</string>
     <string name="speak_favorites">Favoriten in der Nähe</string>
@@ -3845,4 +3845,5 @@
     <string name="plan_route_create_new_route">Neue Route erstellen</string>
     <string name="plan_route_select_track_file_for_open">Wählen Sie eine Trackdatei zum Öffnen aus.</string>
     <string name="shared_string_done">Fertig</string>
+    <string name="overwrite_track">Track überschreiben</string>
 </resources>

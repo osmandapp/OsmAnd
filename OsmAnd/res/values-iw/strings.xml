@@ -3846,4 +3846,5 @@
     <string name="plan_route_create_new_route">יצירת מסלול חדש</string>
     <string name="plan_route_select_track_file_for_open">נא לבחור קובץ מסלול לפתיחה.</string>
     <string name="shared_string_done">בוצע</string>
+    <string name="overwrite_track">שכתוב מסלול</string>
 </resources>

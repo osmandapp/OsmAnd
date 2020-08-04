@@ -3796,4 +3796,5 @@
     <string name="plan_route_create_new_route">Yeni güzergah oluştur</string>
     <string name="plan_route_select_track_file_for_open">Açmak için bir yol dosyası seçin.</string>
     <string name="shared_string_done">Bitti</string>
+    <string name="overwrite_track">Yolun üzerine yaz</string>
 </resources>

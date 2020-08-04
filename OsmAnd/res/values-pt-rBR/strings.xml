@@ -3369,7 +3369,7 @@
     <string name="rendering_value_white_name">Branco</string>
     <string name="swap_two_places">Trocar %1$s e %2$s</string>
     <string name="route_start_point">Ponto de partida</string>
-    <string name="default_speed_dialog_msg">Estima a hora de chegada de tipos de estradas desconhecidos e limita a velocidade de todas as estradas (pode afetar o roteamento)</string>
+    <string name="default_speed_dialog_msg">Estima a hora de chegada de tipos de estradas desconhecidas e limita a velocidade de todas as estradas (pode afetar o roteamento)</string>
     <string name="track_saved">Trilha salva</string>
     <string name="empty_filename">O nome do arquivo está vazio</string>
     <string name="shared_string_revert">Reverter</string>
@@ -3767,7 +3767,7 @@
     <string name="clear_tiles_warning">A aplicação dessas alterações limpará os dados em cache dessa origem de bloco</string>
     <string name="vessel_height_warning_link">Definir altura da embarcação</string>
     <string name="vessel_height_warning">Você pode definir a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
-    <string name="vessel_height_limit_description">Defina a altura do vaso para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
+    <string name="vessel_height_limit_description">Defina a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
     <string name="vessel_width_limit_description">Defina a largura da embarcação para evitar pontes estreitas</string>
     <string name="quick_action_showhide_mapillary_title">Mostrar/ocultar Mapillary</string>
     <string name="quick_action_mapillary_hide">Ocultar Mapillary</string>
@@ -3826,4 +3826,5 @@
     <string name="plan_route_create_new_route">Criar nova rota</string>
     <string name="plan_route_select_track_file_for_open">Selecione um arquivo de faixa para abrir.</string>
     <string name="shared_string_done">Concluído</string>
+    <string name="overwrite_track">Substituir trilha</string>
 </resources>

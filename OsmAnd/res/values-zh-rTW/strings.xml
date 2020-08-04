@@ -3835,4 +3835,5 @@
     <string name="plan_route_create_new_route">建立新路線</string>
     <string name="plan_route_select_track_file_for_open">選取要開啟的軌跡檔。</string>
     <string name="shared_string_done">完成</string>
+    <string name="overwrite_track">覆寫軌跡</string>
 </resources>

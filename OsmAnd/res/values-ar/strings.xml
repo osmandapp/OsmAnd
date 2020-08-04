@@ -3095,7 +3095,7 @@
     <string name="quick_action_hillshade_hide">إخفاء التضاريس</string>
     <string name="quick_action_show_hide_hillshade">إظهار/إخفاء التضاريس</string>
     <string name="tts_initialization_error">لا يمكن بدء تشغيل أداة تحويل النص إلى كلام.</string>
-    <string name="export_profile">تصدير الوضع</string>
+    <string name="export_profile">تصدير الملف الشخصي</string>
     <string name="exported_osmand_profile">وضع أوسماند: %1$s</string>
     <string name="overwrite_profile_q">الوضع \'%1$s\' موجود بالفعل، هل تريد استبداله؟</string>
     <string name="export_profile_failed">لا يمكن تصدير الوضع.</string>
@@ -3828,4 +3828,5 @@
     <string name="plan_route_create_new_route">إنشاء مسار جديد</string>
     <string name="plan_route_select_track_file_for_open">حدد ملف المسار للفتح.</string>
     <string name="shared_string_done">تم</string>
+    <string name="overwrite_track">الكتابة فوق المسار</string>
 </resources>

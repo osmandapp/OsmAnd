@@ -3394,7 +3394,7 @@
     <string name="quick_action_show_hide_hillshade">Mostrar/ocultar sombras de relevo</string>
     <string name="tts_initialization_error">Não é possível iniciar o mecanismo de conversão de texto em fala.</string>
     <string name="simulate_your_location_gpx_descr">Simule a sua posição usando um caminho GPX gravado.</string>
-    <string name="export_profile">Perfil de exportação</string>
+    <string name="export_profile">Exportar o perfil</string>
     <string name="exported_osmand_profile">Perfil OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">O perfil \'%1$s\' já existe. Sobregravar\?</string>
     <string name="export_profile_failed">Não podia exportar o perfil.</string>
@@ -3845,4 +3845,5 @@
     <string name="plan_route_select_track_file_for_open">Selecione um ficheiro de trilho para abrir.</string>
     <string name="plan_route_create_new_route">Criar rota</string>
     <string name="shared_string_done">Pronto</string>
+    <string name="overwrite_track">Sobrescrever trilho</string>
 </resources>
