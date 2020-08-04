@@ -1987,7 +1987,7 @@
     <string name="search_position_current_location_found">Minu asukoht (leitud)</string>
     <string name="search_position_address">Aadress…</string>
     <string name="search_position_favorites">Lemmikud…</string>
-    <string name="search_position_undefined">Määramata</string>
+    <string name="shared_string_undefined">Määramata</string>
     <string name="search_position_map_view">Praegune kaardi keskkoht</string>
     <string name="select_search_position">Päritolu:</string>
     <string name="context_menu_item_search">Otsi lähedusest</string>

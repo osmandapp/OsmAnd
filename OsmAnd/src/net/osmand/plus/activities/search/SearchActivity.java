@@ -208,12 +208,12 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	private void setTopSpinner() {
 		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.spinner_item,
 				new ArrayList<String>(Arrays.asList(new String[]{
-						getString(R.string.search_position_undefined),
+						getString(R.string.shared_string_undefined),
 						getString(R.string.shared_string_my_location) + getString(R.string.shared_string_ellipsis),
 						getString(R.string.search_position_map_view),
 						getString(R.string.search_position_favorites),
 						getString(R.string.search_position_address)
-					}))
+				}))
 				) {
 					@Override
 					public View getDropDownView(int position, View convertView, ViewGroup parent) {

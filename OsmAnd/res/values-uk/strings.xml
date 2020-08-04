@@ -210,7 +210,7 @@
     <string name="search_position_current_location_found">Моя позиція (знайдена)</string>
     <string name="search_position_address">Адреса…</string>
     <string name="search_position_favorites">Закладки…</string>
-    <string name="search_position_undefined">Невизначено</string>
+    <string name="shared_string_undefined">Невизначено</string>
     <string name="search_position_map_view">Поточний центр мапи</string>
     <string name="select_search_position">Початок:</string>
     <string name="context_menu_item_search">Шукати поруч</string>

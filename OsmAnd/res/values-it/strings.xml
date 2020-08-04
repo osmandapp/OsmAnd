@@ -80,7 +80,7 @@
     <string name="search_position_current_location_found">La mia posizione (trovata)</string>
     <string name="search_position_address">Indirizzo…</string>
     <string name="search_position_favorites">Preferiti…</string>
-    <string name="search_position_undefined">Non definito</string>
+    <string name="shared_string_undefined">Non definito</string>
     <string name="search_position_map_view">Attuale centro della mappa</string>
     <string name="select_search_position">Origine:</string>
     <string name="context_menu_item_search">Cerca nelle vicinanze</string>

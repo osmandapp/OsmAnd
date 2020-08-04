@@ -186,7 +186,7 @@
     <string name="search_position_current_location_found">მდებარეობა (ნაპოვნია)</string>
     <string name="search_position_address">მისამართი…</string>
     <string name="search_position_favorites">რჩეულები…</string>
-    <string name="search_position_undefined">არააღწერილი</string>
+    <string name="shared_string_undefined">არააღწერილი</string>
     <string name="search_position_map_view">უკანასკნელად ნანახი რუკის ხედი</string>
     <string name="select_search_position">ძებნა ახლოს :</string>
     <string name="context_menu_item_search">ახლოს ძებნა</string>

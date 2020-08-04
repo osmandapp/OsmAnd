@@ -230,7 +230,7 @@
     <string name="search_position_current_location_found">Moja poloha (nájdená)</string>
     <string name="search_position_address">Adresa…</string>
     <string name="search_position_favorites">Obľúbené miesta…</string>
-    <string name="search_position_undefined">Neurčené</string>
+    <string name="shared_string_undefined">Neurčené</string>
     <string name="search_position_map_view">Stred mapy teraz</string>
     <string name="select_search_position">Východzí bod:</string>
     <string name="context_menu_item_search">Hľadať v okolí</string>

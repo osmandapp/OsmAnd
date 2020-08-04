@@ -342,7 +342,7 @@
     <string name="search_position_current_location_found">Poziție curentă (găsită)</string>
     <string name="search_position_address">Adresă…</string>
     <string name="search_position_favorites">Favorite…</string>
-    <string name="search_position_undefined">Necunoscută</string>
+    <string name="shared_string_undefined">Necunoscută</string>
     <string name="search_position_map_view">Ultima afișare a hărții</string>
     <string name="select_search_position">Origine:</string>
     <string name="context_menu_item_search">Căutare în împrejurimi</string>

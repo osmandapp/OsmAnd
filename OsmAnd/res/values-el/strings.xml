@@ -356,7 +356,7 @@
     <string name="search_position_current_location_found">Η θέση μου (βρέθηκε)</string>
     <string name="search_position_address">Διεύθυνση…</string>
     <string name="search_position_favorites">Αγαπημένα…</string>
-    <string name="search_position_undefined">Ακαθόριστο</string>
+    <string name="shared_string_undefined">Ακαθόριστο</string>
     <string name="search_position_map_view">Τρέχον κέντρο χάρτη</string>
     <string name="select_search_position">Πηγή:</string>
     <string name="context_menu_item_search">Αναζήτηση κοντινών αποστάσεων</string>

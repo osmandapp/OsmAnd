@@ -1376,7 +1376,7 @@
     <string name="search_position_current_location_found">Mia pozicio (determinita)</string>
     <string name="search_position_address">Adreso…</string>
     <string name="search_position_favorites">Ŝatataj…</string>
-    <string name="search_position_undefined">Nedifinita</string>
+    <string name="shared_string_undefined">Nedifinita</string>
     <string name="search_position_map_view">Nuna map-centro</string>
     <string name="select_search_position">El:</string>
     <string name="context_menu_item_search">Serĉi proksime</string>

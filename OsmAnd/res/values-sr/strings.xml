@@ -117,7 +117,7 @@
     <string name="shared_string_rename">Преименуј</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
     <string name="search_position_address">Адреса…</string>
-    <string name="search_position_undefined">Неодређено</string>
+    <string name="shared_string_undefined">Неодређено</string>
     <string name="layer_map_appearance">Конфигурација екрана</string>
     <string name="show_lanes">Траке</string>
     <string name="avoid_unpaved">Без неасфалтираних путева</string>

@@ -3147,7 +3147,7 @@
     <string name="search_position_current_location_found">My Position (found)</string>
     <string name="search_position_address">Address…</string>
     <string name="search_position_favorites">Favorites…</string>
-    <string name="search_position_undefined">Undefined</string>
+    <string name="shared_string_undefined">Undefined</string>
     <!-- string name="search_position_current_location">Current position…</string -->
     <string name="search_position_map_view">Current map center</string>
     <string name="select_search_position">Origin:</string>

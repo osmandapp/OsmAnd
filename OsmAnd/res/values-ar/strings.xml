@@ -666,7 +666,7 @@
     <string name="search_position_current_location_found">موقعي ( تم تحديده )</string>
     <string name="search_position_address">عنوان…</string>
     <string name="search_position_favorites">المفضلة…</string>
-    <string name="search_position_undefined">غير محدد</string>
+    <string name="shared_string_undefined">غير محدد</string>
     <string name="search_position_map_view">مركز الخريطة الحالي</string>
     <string name="select_search_position">المنطلق:</string>
     <string name="context_menu_item_search">بحث بالجوار</string>

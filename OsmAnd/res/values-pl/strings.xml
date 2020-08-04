@@ -36,7 +36,7 @@
     <string name="search_position_current_location_found">Aktualne położenie (ustalone)</string>
     <string name="search_position_address">Adres…</string>
     <string name="search_position_favorites">Ulubione…</string>
-    <string name="search_position_undefined">Niezdefiniowane</string>
+    <string name="shared_string_undefined">Niezdefiniowane</string>
     <string name="search_position_map_view">Aktualny środek mapy</string>
     <string name="select_search_position">Zasób:</string>
     <string name="context_menu_item_search">Szukaj w pobliżu</string>

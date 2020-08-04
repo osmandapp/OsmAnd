@@ -342,7 +342,7 @@
     <string name="search_position_current_location_found">موقعیت من (پیدا‌شده)</string>
     <string name="search_position_address">نشانی…</string>
     <string name="search_position_favorites">علاقه‌مندی‌ها…</string>
-    <string name="search_position_undefined">نامشخص</string>
+    <string name="shared_string_undefined">نامشخص</string>
     <string name="delete_confirmation_msg">‏%1$s حذف شود؟</string>
     <string name="city_type_suburb">حومه</string>
     <string name="city_type_hamlet">دهکده</string>

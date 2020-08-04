@@ -27,6 +27,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	private static final Log LOG = PlatformUtil.getLog(OptionsBottomSheetDialogFragment.class);
 
 	public static final String SNAP_TO_ROAD_ENABLED_KEY = "snap_to_road_enabled";
+	public static final String TRACK_SNAPPED_TO_ROAD_KEY = "track_snapped_to_road";
 
 	private OptionsFragmentListener listener;
 	private ApplicationMode routeAppMode;
@@ -43,20 +44,27 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		boolean snapToRoadEnabled = false;
+		boolean trackSnappedToRoad = false;
 		if (args != null) {
 			snapToRoadEnabled = args.getBoolean(SNAP_TO_ROAD_ENABLED_KEY);
+			trackSnappedToRoad = args.getBoolean(TRACK_SNAPPED_TO_ROAD_KEY);
 		}
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 
 		String description;
 		Drawable icon;
-		if (!snapToRoadEnabled || routeAppMode == null) {
-			description = getString(R.string.routing_profile_straightline);
-			icon = getContentIcon(R.drawable.ic_action_split_interval);
+		if (trackSnappedToRoad) {
+			if (!snapToRoadEnabled || routeAppMode == null) {
+				description = getString(R.string.routing_profile_straightline);
+				icon = getContentIcon(R.drawable.ic_action_split_interval);
+			} else {
+				description = routeAppMode.toHumanString();
+				icon = getIcon(routeAppMode.getIconRes(), routeAppMode.getIconColorInfo().getColor(nightMode));
+			}
 		} else {
-			description = routeAppMode.toHumanString();
-			icon = getIcon(routeAppMode.getIconRes(), routeAppMode.getIconColorInfo().getColor(nightMode));
+			description = getString(R.string.shared_string_undefined);
+			icon = getContentIcon(R.drawable.ic_action_help);
 		}
 
 		BaseBottomSheetItem snapToRoadItem = new BottomSheetItemWithDescription.Builder()
@@ -192,17 +200,16 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		params.rightMargin = view.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, boolean hasRoutePoint, boolean snapToRoad,
-	                                OptionsFragmentListener optionsFragmentListener,
-	                                ApplicationMode routeAppMode) {
+	public static void showInstance(@NonNull FragmentManager fm, boolean trackSnappedToRoad, boolean snapToRoad,
+	                                ApplicationMode routeAppMode, OptionsFragmentListener optionsFragmentListener) {
 		try {
 			if (!fm.isStateSaved()) {
 				Bundle args = new Bundle();
-				args.putBoolean(OptionsBottomSheetDialogFragment.SNAP_TO_ROAD_ENABLED_KEY, snapToRoad);
+				args.putBoolean(TRACK_SNAPPED_TO_ROAD_KEY, trackSnappedToRoad);
+				args.putBoolean(SNAP_TO_ROAD_ENABLED_KEY, snapToRoad);
 				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
 				fragment.setArguments(args);
 				fragment.setRouteAppMode(routeAppMode);
-				fragment.setUsedOnMap(hasRoutePoint);
 				fragment.setUsedOnMap(true);
 				fragment.setListener(optionsFragmentListener);
 				fragment.show(fm, TAG);

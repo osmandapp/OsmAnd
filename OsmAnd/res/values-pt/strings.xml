@@ -563,7 +563,7 @@
     <string name="search_position_current_location_found">Minha posição (encontrada)</string>
     <string name="search_position_address">Endereço…</string>
     <string name="search_position_favorites">Favoritos…</string>
-    <string name="search_position_undefined">Sem definir</string>
+    <string name="shared_string_undefined">Sem definir</string>
     <string name="search_position_map_view">Centro do mapa atual</string>
     <string name="select_search_position">Pesquisar próximo a:</string>
     <string name="context_menu_item_search">Pesquisar nas proximidades</string>

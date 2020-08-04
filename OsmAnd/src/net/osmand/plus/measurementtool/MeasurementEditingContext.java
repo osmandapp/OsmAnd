@@ -114,6 +114,10 @@ public class MeasurementEditingContext {
 		return newGpxData;
 	}
 
+	public boolean isNewData() {
+		return newGpxData == null;
+	}
+
 	public void setNewGpxData(NewGpxData newGpxData) {
 		this.newGpxData = newGpxData;
 	}

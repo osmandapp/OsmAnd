@@ -219,7 +219,7 @@
     <string name="search_position_current_location_search">S\'està cercant la posició…</string>
     <string name="search_position_current_location_found">La meva posició (trobada)</string>
     <string name="search_position_address">Adreça…</string>
-    <string name="search_position_undefined">Indefinida</string>
+    <string name="shared_string_undefined">Indefinida</string>
     <string name="context_menu_item_search">Cerca pel voltant</string>
     <string name="shared_string_save_as_gpx">Desa com un nou fitxer GPX</string>
     <string name="route_successfully_saved_at">La ruta s\'ha desat com a «%1$s».</string>

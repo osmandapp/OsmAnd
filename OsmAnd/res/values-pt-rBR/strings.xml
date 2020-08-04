@@ -1135,7 +1135,7 @@
     <string name="search_position_current_location_found">Minha Posição (encontrada)</string>
     <string name="search_position_address">Endereço…</string>
     <string name="search_position_favorites">Favoritos…</string>
-    <string name="search_position_undefined">Indefinido</string>
+    <string name="shared_string_undefined">Indefinido</string>
     <string name="search_position_map_view">Centro atual do mapa</string>
     <string name="select_search_position">Próximo a:</string>
     <string name="route_successfully_saved_at">Rota salva como \'%1$s\'.</string>

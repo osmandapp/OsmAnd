@@ -617,7 +617,7 @@
     <string name="map_version_changed_info">Yeni harita dosyalarını kullanabilmek için uygulamanın yeni sürümünü indirin.</string>
     <string name="search_position_current_location_search">Konum aranıyor…</string>
     <string name="search_position_current_location_found">Benim Konum (bulundu)</string>
-    <string name="search_position_undefined">Tanımlanmamış</string>
+    <string name="shared_string_undefined">Tanımlanmamış</string>
     <string name="search_position_map_view">Güncel harita merkezi</string>
     <string name="select_search_position">Menşei:</string>
     <string name="context_menu_item_search">Yakınlarda ara</string>
