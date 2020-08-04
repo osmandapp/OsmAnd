@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -20,7 +20,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 
 import java.util.List;
 

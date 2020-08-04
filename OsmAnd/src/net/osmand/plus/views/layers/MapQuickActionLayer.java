@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -41,12 +41,14 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.views.ContextMenuLayer.VIBRATE_SHORT;
+import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 /**
  * Created by okorsun on 23.12.16.

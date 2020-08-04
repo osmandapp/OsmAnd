@@ -90,7 +90,7 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.router.TransportRouteResult;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.Algorithms;
 

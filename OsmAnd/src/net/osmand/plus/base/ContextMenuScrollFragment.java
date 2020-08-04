@@ -13,8 +13,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.views.MapControlsLayer;
-import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 

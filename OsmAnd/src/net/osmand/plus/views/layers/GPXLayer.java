@@ -1,11 +1,9 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
@@ -50,13 +48,17 @@ import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.Sele
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackDrawInfo;
-import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
-import net.osmand.plus.views.ContextMenuLayer.IMoveObjectProvider;
-import net.osmand.plus.views.MapTextLayer.MapTextProvider;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.Renderable;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
+import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
+import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
+import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -79,8 +81,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
 
 	private static final double TOUCH_RADIUS_MULTIPLIER = 1.5;
-	private static final double DIRECTION_ARROW_DISTANCE_MULTIPLIER = 10.0;
-	private static final float DIRECTION_ARROW_CIRCLE_MULTIPLIER = 1.5f;
 	private static final int DEFAULT_WIDTH_MULTIPLIER = 7;
 	private static final int START_ZOOM = 7;
 
@@ -117,8 +117,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private Paint paintTextIcon;
 
-	private Bitmap arrowBitmap;
-	private GeometryWayContext wayContext;
+	private GpxGeometryWayContext wayContext;
+	private GpxGeometryWay wayGeometry;
 
 	private OsmandRenderer osmandRenderer;
 
@@ -214,12 +214,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		defPointColor = ContextCompat.getColor(view.getApplication(), R.color.gpx_color_point);
 		grayColor = ContextCompat.getColor(view.getApplication(), R.color.color_favorite_gray);
 
-		wayContext = new GeometryWayContext(view.getContext(), view.getDensity());
-
-		Paint paint = wayContext.getPaintIcon();
-		paint.setStrokeCap(Cap.ROUND);
-
-		arrowBitmap = RenderingIcons.getBitmapFromVectorDrawable(view.getContext(), R.drawable.mm_special_arrow_up);
+		wayContext = new GpxGeometryWayContext(view.getContext(), view.getDensity());
+		wayGeometry = new GpxGeometryWay(wayContext);
 	}
 
 	@Override
@@ -423,153 +419,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 					String width = getTrackWidthName(selectedGpxFile.getGpxFile(), "");
 					float trackWidth = getTrackWidth(width, defaultTrackWidth);
-					int color = getTrackColor(selectedGpxFile.getGpxFile(), cachedColor);
-					int contrastColor = UiUtilities.getContrastColor(view.getApplication(), color, false);
-					GeometryWayStyle arrowsWayStyle = new GeometryArrowsWayStyle(wayContext, arrowBitmap, contrastColor, color, trackWidth);
+					int trackColor = getTrackColor(selectedGpxFile.getGpxFile(), cachedColor);
+					int arrowColor = UiUtilities.getContrastColor(view.getApplication(), trackColor, false);
 					for (TrkSegment segment : selectedGpxFile.getPointsToDisplay()) {
-						List<Float> tx = new ArrayList<>();
-						List<Float> ty = new ArrayList<>();
-						List<Double> distances = new ArrayList<>();
-						List<Double> angles = new ArrayList<>();
-						List<GeometryWayStyle> styles = new ArrayList<>();
-						boolean previousVisible = false;
-
-						List<WptPt> points = segment.points;
-						if (points.size() > 1) {
-							for (int i = 0; i < points.size(); i++) {
-								WptPt pt = points.get(i);
-								if (correctedQuadRect.left <= pt.getLongitude()
-										&& pt.getLongitude() <= correctedQuadRect.right
-										&& correctedQuadRect.bottom <= pt.getLatitude()
-										&& pt.getLatitude() <= correctedQuadRect.top) {
-									addLocation(tileBox, pt.getLatitude(), pt.getLongitude(), null, tx, ty, angles, distances, 0, styles);
-									previousVisible = true;
-								} else if (previousVisible) {
-									addLocation(tileBox, pt.getLatitude(), pt.getLongitude(), null, tx, ty, angles, distances, 0, styles);
-									previousVisible = false;
-								}
-							}
-							drawArrowsOverPath(tx, ty, angles, distances, canvas, tileBox, arrowsWayStyle);
+						if (segment.renderer instanceof Renderable.RenderableSegment) {
+							((Renderable.RenderableSegment) segment.renderer)
+									.drawGeometry(canvas, tileBox, correctedQuadRect, arrowColor, trackColor, trackWidth);
 						}
 					}
 				}
 			}
-		}
-	}
-
-	private void drawArrowsOverPath(List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances,
-	                                Canvas canvas, RotatedTileBox tb, GeometryWayStyle wayStyle) {
-		int pixHeight = tb.getPixHeight();
-		int pixWidth = tb.getPixWidth();
-		int left = -pixWidth / 4;
-		int right = pixWidth + pixWidth / 4;
-		int top = -pixHeight / 4;
-		int bottom = pixHeight + pixHeight / 4;
-
-		double zoomCoef = tb.getZoomAnimation() > 0 ? (Math.pow(2, tb.getZoomAnimation() + tb.getZoomFloatPart())) : 1f;
-		double pxStep = arrowBitmap.getHeight() * DIRECTION_ARROW_DISTANCE_MULTIPLIER * zoomCoef;
-		double dist = 0;
-
-		List<ArrowPathPoint> arrows = new ArrayList<>();
-		for (int i = tx.size() - 2; i >= 0; i--) {
-			float px = tx.get(i);
-			float py = ty.get(i);
-			float x = tx.get(i + 1);
-			float y = ty.get(i + 1);
-			double angle = angles.get(i + 1);
-			double distSegment = distances.get(i + 1);
-			if (distSegment == 0) {
-				continue;
-			}
-			if (dist >= pxStep) {
-				dist = 0;
-			}
-			double percent = 1 - (pxStep - dist) / distSegment;
-			dist += distSegment;
-			while (dist >= pxStep) {
-				double pdx = (x - px) * percent;
-				double pdy = (y - py) * percent;
-				float iconx = (float) (px + pdx);
-				float icony = (float) (py + pdy);
-				if (isIn(iconx, icony, left, top, right, bottom)) {
-					arrows.add(new ArrowPathPoint(iconx, icony, angle, wayStyle));
-				}
-				dist -= pxStep;
-				percent -= pxStep / distSegment;
-			}
-		}
-		for (int i = arrows.size() - 1; i >= 0; i--) {
-			PathPoint a = arrows.get(i);
-			a.draw(canvas, wayContext);
-		}
-	}
-
-	private static class ArrowPathPoint extends PathPoint {
-
-		ArrowPathPoint(float x, float y, double angle, GeometryWayStyle style) {
-			super(x, y, angle, style);
-		}
-
-		@Override
-		void draw(Canvas canvas, GeometryWayContext context) {
-			if (style instanceof GeometryArrowsWayStyle) {
-				GeometryArrowsWayStyle arrowsWayStyle = (GeometryArrowsWayStyle) style;
-
-				float arrowWidth = style.getPointBitmap().getWidth();
-				if (arrowWidth > arrowsWayStyle.getTrackWidth()) {
-					Paint paint = context.getPaintIcon();
-					paint.setColor(arrowsWayStyle.getTrackColor());
-					paint.setStrokeWidth(arrowWidth * DIRECTION_ARROW_CIRCLE_MULTIPLIER);
-					canvas.drawPoint(x, y, paint);
-				}
-			}
-			super.draw(canvas, context);
-		}
-	}
-
-	private static class GeometryArrowsWayStyle extends GeometryWayStyle {
-
-		private Bitmap arrowBitmap;
-
-		protected int pointColor;
-		protected int trackColor;
-		protected float trackWidth;
-
-		GeometryArrowsWayStyle(GeometryWayContext context, Bitmap arrowBitmap, int arrowColor, int trackColor, float trackWidth) {
-			super(context);
-			this.arrowBitmap = arrowBitmap;
-			this.pointColor = arrowColor;
-			this.trackColor = trackColor;
-			this.trackWidth = trackWidth;
-		}
-
-		@Override
-		public boolean equals(Object other) {
-			if (this == other) {
-				return true;
-			}
-			if (!super.equals(other)) {
-				return false;
-			}
-			return other instanceof GeometryArrowsWayStyle;
-		}
-
-		@Override
-		public Bitmap getPointBitmap() {
-			return arrowBitmap;
-		}
-
-		@Override
-		public Integer getPointColor() {
-			return pointColor;
-		}
-
-		public int getTrackColor() {
-			return trackColor;
-		}
-
-		public float getTrackWidth() {
-			return trackWidth;
 		}
 	}
 
@@ -781,11 +640,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			String width = getTrackWidthName(selectedGpxFile.getGpxFile(), "");
 			int color = getTrackColor(selectedGpxFile.getGpxFile(), ts.getColor(cachedColor));
 			if (ts.renderer == null && !ts.points.isEmpty()) {
+				Renderable.RenderableSegment renderer;
 				if (currentTrack) {
-					ts.renderer = new Renderable.CurrentTrack(ts.points);
+					renderer = new Renderable.CurrentTrack(ts.points);
 				} else {
-					ts.renderer = new Renderable.StandardTrack(ts.points, 17.2);
+					renderer = new Renderable.StandardTrack(ts.points, 17.2);
 				}
+				ts.renderer = renderer;
+				renderer.setGeometryWay(new GpxGeometryWay(wayContext));
 			}
 			updatePaints(color, width, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox);
 			if (ts.renderer instanceof Renderable.RenderableSegment) {

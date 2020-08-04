@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers;
 
 import android.graphics.Canvas;
 import android.graphics.PointF;
@@ -22,8 +22,10 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.PointImageDrawable;
-import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
-import net.osmand.plus.views.MapTextLayer.MapTextProvider;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
+import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 
 import java.util.ArrayList;
 import java.util.List;

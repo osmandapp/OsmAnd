@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,7 +21,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
-import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 
 import java.util.List;
 import java.util.Map;

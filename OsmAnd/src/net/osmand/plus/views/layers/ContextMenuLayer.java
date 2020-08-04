@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers;
 
 import android.Manifest;
 import android.content.Context;
@@ -66,7 +66,11 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
+import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;

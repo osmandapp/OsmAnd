@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -27,6 +27,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.geometry.GeometryWay;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -197,7 +200,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 								tx.add(x);
 								ty.add(y);
 							}
-							calculatePath(tb, tx, ty, path);
+							GeometryWay.calculatePath(tb, tx, ty, path);
 						}
 					}
 					attrs.drawPath(canvas, path);

@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -41,9 +41,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
-import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
-import net.osmand.plus.views.ContextMenuLayer.IContextMenuProviderSelection;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.Renderable;
+import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
+import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.util.MapUtils;
 
@@ -295,7 +299,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				tx.add(markerX);
 				ty.add(markerY);
 
-				calculatePath(tileBox, tx, ty, linePath);
+				GeometryWay.calculatePath(tileBox, tx, ty, linePath);
 				PathMeasure pm = new PathMeasure(linePath, false);
 				float[] pos = new float[2];
 				pm.getPosTan(pm.getLength() / 2, pos, null);

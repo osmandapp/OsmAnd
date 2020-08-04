@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -19,6 +19,8 @@ import java.util.TreeMap;
 
 import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.plus.R;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 
 public class MapTextLayer extends OsmandMapLayer {
 

@@ -11,8 +11,8 @@ import net.osmand.plus.mapcontextmenu.BaseMenuController;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuTitleController;
-import net.osmand.plus.views.ContextMenuLayer;
-import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 
 import java.util.Collections;
 import java.util.Comparator;

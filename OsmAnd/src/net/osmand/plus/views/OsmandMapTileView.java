@@ -49,6 +49,7 @@ import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;

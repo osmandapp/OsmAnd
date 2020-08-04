@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -34,8 +34,11 @@ import net.osmand.plus.download.ui.DownloadMapToolbarController;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
-import net.osmand.plus.views.ContextMenuLayer.IContextMenuProviderSelection;
+import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
@@ -200,12 +203,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			return;
 		}
 		//make sure no maps are loaded for the location
-		checkMapToDownload(tileBox, data.results);
+		checkMapToDownload(tileBox, data.getResults());
 		// draw objects
 		if (osmandRegions.isInitialized() && zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION) {
 			final List<BinaryMapDataObject> currentObjects = new LinkedList<>();
-			if (data.results != null) {
-				currentObjects.addAll(data.results);
+			if (data.getResults() != null) {
+				currentObjects.addAll(data.getResults());
 			}
 			final List<BinaryMapDataObject> selectedObjects = new LinkedList<>(this.selectedObjects);
 
@@ -457,7 +460,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		StringBuilder filter = new StringBuilder();
 		int zoom = view.getZoom();
 		RotatedTileBox queriedBox = data.getQueriedBox();
-		final List<BinaryMapDataObject> currentObjects = data.results;
+		final List<BinaryMapDataObject> currentObjects = data.getResults();
 		if (osmandRegions.isInitialized() && queriedBox != null) {
 			if(zoom >= ZOOM_TO_SHOW_MAP_NAMES && Math.abs(queriedBox.getZoom() - zoom) <= ZOOM_THRESHOLD &&
 					currentObjects != null){
@@ -578,12 +581,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private void getWorldRegionFromPoint(RotatedTileBox tb, PointF point, List<? super DownloadMapObject> dataObjects) {
 		int zoom = tb.getZoom();
 		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION
-				&& data.results != null && osmandRegions.isInitialized()) {
+				&& data.getResults() != null && osmandRegions.isInitialized()) {
 			LatLon pointLatLon = tb.getLatLonFromPixel(point.x, point.y);
 			int point31x = MapUtils.get31TileNumberX(pointLatLon.getLongitude());
 			int point31y = MapUtils.get31TileNumberY(pointLatLon.getLatitude());
 
-			List<BinaryMapDataObject> result = new LinkedList<>(data.results);
+			List<BinaryMapDataObject> result = new LinkedList<>(data.getResults());
 			Iterator<BinaryMapDataObject> it = result.iterator();
 			while (it.hasNext()) {
 				BinaryMapDataObject o = it.next();

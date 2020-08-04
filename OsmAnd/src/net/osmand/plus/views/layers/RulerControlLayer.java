@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.layers;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,6 +34,9 @@ import net.osmand.plus.settings.backend.OsmandSettings.AngularConstants;
 import net.osmand.plus.settings.backend.OsmandSettings.RulerMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -428,7 +431,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 		tx.add(currX);
 		ty.add(currY);
 
-		calculatePath(tb, tx, ty, linePath);
+		GeometryWay.calculatePath(tb, tx, ty, linePath);
 
 		float dist = (float) MapUtils.getDistance(touchPointLatLon, currLoc.getLatitude(), currLoc.getLongitude());
 		String text = OsmAndFormatter.getFormattedDistance(dist, app);
