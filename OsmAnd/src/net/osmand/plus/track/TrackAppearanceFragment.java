@@ -174,6 +174,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (view != null) {
 			trackIcon = view.findViewById(R.id.track_icon);
 
+			view.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					openMenuHeaderOnly();
+				}
+			});
+
 			if (isPortrait()) {
 				updateCardsLayout();
 			}

@@ -977,6 +977,9 @@ public class MapInfoWidgetsFactory {
 				updateVisibility(true);
 				AndroidUiHelper.updateVisibility(addressText, false);
 				AndroidUiHelper.updateVisibility(addressTextShadow, false);
+				AndroidUiHelper.updateVisibility(turnIcon, false);
+				AndroidUiHelper.updateVisibility(shieldIcon, false);
+				AndroidUiHelper.updateVisibility(exitRefText, false);
 			} else if (streetName == null) {
 				updateVisibility(false);
 			} else {

@@ -174,25 +174,43 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     }
 
     private void setQuickActionButtonMargin() {
+        int defRightMargin = calculateTotalSizePx(R.dimen.map_button_size, R.dimen.map_button_spacing_land) * 2;
+        int defBottomMargin = calculateTotalSizePx(R.dimen.map_button_size, R.dimen.map_button_spacing) * 2;
         FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) quickActionButton.getLayoutParams();
         if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
             Pair<Integer, Integer> fabMargin = settings.getPortraitFabMargin();
-            if (fabMargin != null) {
-                param.rightMargin = fabMargin.first;
-                param.bottomMargin = fabMargin.second;
-            } else {
-                param.bottomMargin = calculateTotalSizePx(R.dimen.map_button_size, R.dimen.map_button_spacing) * 2;
-            }
+            setQuickActionButtonMargin(param, fabMargin, 0, defBottomMargin);
         } else {
             Pair<Integer, Integer> fabMargin = settings.getLandscapeFabMargin();
-            if (fabMargin != null) {
-                param.rightMargin = fabMargin.first;
-                param.bottomMargin = fabMargin.second;
-            } else {
-                param.rightMargin = calculateTotalSizePx(R.dimen.map_button_size, R.dimen.map_button_spacing_land) * 2;
-            }
+            setQuickActionButtonMargin(param, fabMargin, defRightMargin, 0);
         }
-        quickActionButton.setLayoutParams(param);
+    }
+
+    private void setQuickActionButtonMargin(FrameLayout.LayoutParams params,
+                                            Pair<Integer, Integer> fabMargin,
+                                            int defRightMargin, int defBottomMargin) {
+        int screenHeight = AndroidUtils.getScreenHeight(mapActivity);
+        int screenWidth = AndroidUtils.getScreenWidth(mapActivity);
+        int btnHeight = quickActionButton.getHeight();
+        int btnWidth = quickActionButton.getWidth();
+        int rightMargin;
+        int bottomMargin;
+        if (fabMargin != null) {
+            rightMargin = fabMargin.first;
+            bottomMargin = fabMargin.second;
+            if (rightMargin < 0 || rightMargin > screenWidth - btnWidth) {
+                rightMargin = defRightMargin;
+            }
+            if (bottomMargin < 0 || bottomMargin > screenHeight - btnHeight) {
+                bottomMargin = defBottomMargin;
+            }
+        } else {
+            rightMargin = defRightMargin;
+            bottomMargin = defBottomMargin;
+        }
+        params.rightMargin = rightMargin;
+        params.bottomMargin = bottomMargin;
+        quickActionButton.setLayoutParams(params);
     }
 
     private int calculateTotalSizePx(@DimenRes int... dimensId) {

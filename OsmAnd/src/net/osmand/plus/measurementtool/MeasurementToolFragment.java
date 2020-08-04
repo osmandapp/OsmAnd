@@ -235,14 +235,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		mainIcon = (ImageView) mainView.findViewById(R.id.main_icon);
 		final NewGpxData newGpxData = editingCtx.getNewGpxData();
 		if (newGpxData != null) {
-			List<WptPt> points = newGpxData.getGpxFile().getRoutePoints();
-			if (!points.isEmpty()) {
-				ApplicationMode snapToRoadAppMode = ApplicationMode
-						.valueOfStringKey(points.get(points.size() - 1).getProfileType(), null);
-				if (snapToRoadAppMode != null) {
-					enableSnapToRoadMode(snapToRoadAppMode);
-				}
-			}
 			ActionType actionType = newGpxData.getActionType();
 			if (actionType == ActionType.ADD_SEGMENT || actionType == ActionType.EDIT_SEGMENT) {
 				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_polygom_dark));
@@ -501,6 +493,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		showSnapToRoadControls();
 
 		if (newGpxData != null && !gpxPointsAdded) {
+			List<WptPt> points = newGpxData.getGpxFile().getRoutePoints();
+			if (!points.isEmpty()) {
+				ApplicationMode snapToRoadAppMode = ApplicationMode
+						.valueOfStringKey(points.get(points.size() - 1).getProfileType(), null);
+				if (snapToRoadAppMode != null) {
+					enableSnapToRoadMode(snapToRoadAppMode);
+				}
+			}
 			ActionType actionType = newGpxData.getActionType();
 			if (actionType == ActionType.ADD_ROUTE_POINTS) {
 				displayRoutePoints();
@@ -819,7 +819,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	public void addNewGpxData(GPXFile gpxFile) {
 		QuadRect rect = gpxFile.getRect();
 		TrkSegment segment = getTrkSegment(gpxFile);
-		NewGpxData newGpxData = new NewGpxData(gpxFile, rect, ActionType.EDIT_SEGMENT, segment);
+		NewGpxData newGpxData = new NewGpxData(gpxFile, rect, segment == null
+				? ActionType.ADD_ROUTE_POINTS
+				: ActionType.EDIT_SEGMENT,
+				segment);
 		editingCtx.setNewGpxData(newGpxData);
 		initMeasurementMode(newGpxData);
 		QuadRect qr = newGpxData.getRect();

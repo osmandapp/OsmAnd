@@ -3820,4 +3820,5 @@
     <string name="plan_route_create_new_route">Créer un nouvel itinéraire</string>
     <string name="plan_route_select_track_file_for_open">Sélectionnez un fichier de trace à ouvrir.</string>
     <string name="shared_string_done">Terminé</string>
+    <string name="overwrite_track">Remplacer la trace</string>
 </resources>

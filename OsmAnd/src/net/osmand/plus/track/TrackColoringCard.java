@@ -23,6 +23,9 @@ import com.google.android.material.internal.FlowLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.GPXDatabase;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -247,6 +250,9 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 	private void updateHeader() {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.icon), false);
 
+		View headerView = view.findViewById(R.id.header_view);
+		headerView.setBackgroundDrawable(null);
+
 		TextView titleView = view.findViewById(R.id.title);
 		titleView.setText(R.string.select_color);
 
@@ -282,7 +288,23 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 			}
 		}
 		saveCustomColors();
+		saveCustomColorsToTracks(prevColor, newColor);
 		updateContent();
+	}
+
+	private void saveCustomColorsToTracks(int prevColor, int newColor) {
+		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
+		for (GPXDatabase.GpxDataItem dataItem : gpxDataItems) {
+			if (prevColor == dataItem.getColor()) {
+				app.getGpxDbHelper().updateColor(dataItem, newColor);
+			}
+		}
+		List<SelectedGpxFile> files = app.getSelectedGpxHelper().getSelectedGPXFiles();
+		for (SelectedGpxFile selectedGpxFile : files) {
+			if (prevColor == selectedGpxFile.getGpxFile().getColor(0)) {
+				selectedGpxFile.getGpxFile().setColor(newColor);
+			}
+		}
 	}
 
 	private void saveCustomColors() {
