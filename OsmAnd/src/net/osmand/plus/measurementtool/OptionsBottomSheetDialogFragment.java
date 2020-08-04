@@ -106,7 +106,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		items.add(getSaveAsNewTrackItem());
 
 		BaseBottomSheetItem addToTrackItem = new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_split_interval))
+				.setIcon(getContentIcon(R.drawable.ic_action_add_to_track))
 				.setTitle(getString(R.string.add_to_a_track))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
