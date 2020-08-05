@@ -10,17 +10,20 @@ public class AppInfoParams extends AidlParams {
 
 	private ALatLon lastKnownLocation;
 	private ALatLon mapLocation;
-	private int time;
-	private long eta;
+
+	private Bundle turnInfo;
+	private int leftTime;
 	private int leftDistance;
+	private long arrivalTime;
 	private boolean mapVisible;
 
-	public AppInfoParams(ALatLon lastKnownLocation, ALatLon mapLocation, int time, long eta, int leftDistance, boolean mapVisible) {
+	public AppInfoParams(ALatLon lastKnownLocation, ALatLon mapLocation, Bundle turnInfo, int leftTime, int leftDistance, long arrivalTime, boolean mapVisible) {
 		this.lastKnownLocation = lastKnownLocation;
 		this.mapLocation = mapLocation;
-		this.time = time;
-		this.eta = eta;
+		this.leftTime = leftTime;
 		this.leftDistance = leftDistance;
+		this.arrivalTime = arrivalTime;
+		this.turnInfo = turnInfo;
 		this.mapVisible = mapVisible;
 	}
 
@@ -48,12 +51,12 @@ public class AppInfoParams extends AidlParams {
 		return mapLocation;
 	}
 
-	public int getTime() {
-		return time;
+	public int getLeftTime() {
+		return leftTime;
 	}
 
-	public long getEta() {
-		return eta;
+	public long getArrivalTime() {
+		return arrivalTime;
 	}
 
 	public int getLeftDistance() {
@@ -64,23 +67,29 @@ public class AppInfoParams extends AidlParams {
 		return mapVisible;
 	}
 
+	public Bundle getTurnInfo() {
+		return turnInfo;
+	}
+
 	@Override
 	public void writeToBundle(Bundle bundle) {
-		bundle.putParcelable("location", lastKnownLocation);
+		bundle.putParcelable("lastKnownLocation", lastKnownLocation);
 		bundle.putParcelable("mapLocation", mapLocation);
-		bundle.putInt("time", time);
-		bundle.putLong("eta", eta);
+		bundle.putInt("leftTime", leftTime);
+		bundle.putLong("arrivalTime", arrivalTime);
 		bundle.putInt("leftDistance", leftDistance);
+		bundle.putBundle("turnInfo", turnInfo);
 		bundle.putBoolean("mapVisible", mapVisible);
 	}
 
 	@Override
 	protected void readFromBundle(Bundle bundle) {
-		lastKnownLocation = bundle.getParcelable("location");
+		lastKnownLocation = bundle.getParcelable("lastKnownLocation");
 		mapLocation = bundle.getParcelable("mapLocation");
-		time = bundle.getInt("time");
-		eta = bundle.getLong("eta");
+		leftTime = bundle.getInt("leftTime");
+		arrivalTime = bundle.getLong("arrivalTime");
 		leftDistance = bundle.getInt("leftDistance");
+		turnInfo = bundle.getBundle("turnInfo");
 		mapVisible = bundle.getBoolean("mapVisible");
 	}
 }
