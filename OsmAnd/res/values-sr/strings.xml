@@ -3835,4 +3835,5 @@
     <string name="plan_route_create_new_route">Креирај нову руту</string>
     <string name="plan_route_select_track_file_for_open">Изаберите фајл путање за отварање.</string>
     <string name="shared_string_done">Завршено</string>
+    <string name="overwrite_track">Замени стазу</string>
 </resources>
