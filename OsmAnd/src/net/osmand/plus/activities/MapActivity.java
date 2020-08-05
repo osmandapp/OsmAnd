@@ -1120,7 +1120,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public boolean isMapVisible() {
-		return AndroidUtils.isActivityNotDestroyed(this) && settings.MAP_ACTIVITY_ENABLED.get();
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (fragment.isVisible()) {
+				return false;
+			}
+		}
+		return AndroidUtils.isActivityNotDestroyed(this) && settings.MAP_ACTIVITY_ENABLED.get()
+				&& !dashboardOnMap.isVisible();
 	}
 
 	private void restartApp() {
