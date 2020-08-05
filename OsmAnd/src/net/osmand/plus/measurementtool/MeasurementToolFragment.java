@@ -81,6 +81,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1591,7 +1592,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 
 			private void onGpxSaved(Exception warning) {
-				final MapActivity mapActivity = getMapActivity();
+				MapActivity mapActivity = getMapActivity();
 				if (mapActivity == null) {
 					return;
 				}
@@ -1605,13 +1606,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 						dismiss(mapActivity);
 					} else {
 						if (close) {
+							final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 							snackbar = Snackbar.make(mapActivity.getLayout(),
 									MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getName()),
 									Snackbar.LENGTH_LONG)
 									.setAction(R.string.shared_string_rename, new View.OnClickListener() {
 										@Override
 										public void onClick(View view) {
-											if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+											MapActivity mapActivity = mapActivityRef.get();
+											if (mapActivity != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 												FileUtils.renameFile(mapActivity, toSave, null);
 											}
 										}
