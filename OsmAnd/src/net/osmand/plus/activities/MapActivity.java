@@ -147,15 +147,15 @@ import net.osmand.plus.settings.fragments.ProfileAppearanceFragment;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.layers.MapControlsLayer;
-import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.OsmAndMapLayersView;
 import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.render.RenderingRulesStorage;
@@ -1117,6 +1117,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public boolean isActivityDestroyed() {
 		return mIsDestroyed;
+	}
+
+	public boolean isMapVisible() {
+		return AndroidUtils.isActivityNotDestroyed(this) && settings.MAP_ACTIVITY_ENABLED.get();
 	}
 
 	private void restartApp() {

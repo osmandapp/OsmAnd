@@ -30,6 +30,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
@@ -38,6 +39,8 @@ import net.osmand.aidl.navigation.ADirectionInfo;
 import net.osmand.aidl.navigation.OnVoiceNavigationParams;
 import net.osmand.aidl.quickaction.QuickActionInfoParams;
 import net.osmand.aidl.tiles.ASqliteDbFile;
+import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -76,10 +79,10 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.SettingsHelper;
-import net.osmand.plus.views.layers.AidlMapLayer;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.AidlMapLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -202,7 +205,7 @@ public class OsmandAidlApi {
 	private Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
 	private Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks = new ConcurrentHashMap<>();
 
-	private AMapPointUpdateListener aMapPointUpdateListener;
+	private MapActivity mapActivity;
 
 	private boolean mapActivityActive = false;
 
@@ -238,12 +241,12 @@ public class OsmandAidlApi {
 		registerLockStateReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
-		aMapPointUpdateListener = mapActivity;
+		this.mapActivity = mapActivity;
 	}
 
 	public void onDestroyMapActivity(MapActivity mapActivity) {
 		app.getAppCustomization().removeListener(mapActivity);
-		aMapPointUpdateListener = null;
+		this.mapActivity = null;
 		mapActivityActive = false;
 		for (BroadcastReceiver b : receivers.values()) {
 			if (b == null) {
@@ -263,7 +266,7 @@ public class OsmandAidlApi {
 	}
 
 	AMapPointUpdateListener getAMapPointUpdateListener() {
-		return aMapPointUpdateListener;
+		return mapActivity;
 	}
 
 	private void initOsmandTelegram() {
@@ -309,7 +312,7 @@ public class OsmandAidlApi {
 							zoom = zoom > mapView.getMaxZoom() ? mapView.getMaxZoom() : zoom;
 							zoom = zoom < mapView.getMinZoom() ? mapView.getMinZoom() : zoom;
 						}
-						if(!Float.isNaN(rotation)) {
+						if (!Float.isNaN(rotation)) {
 							mapView.setRotate(rotation, false);
 						}
 						if (animated) {
@@ -1712,6 +1715,36 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_LOCK_STATE, lock);
 		app.sendBroadcast(intent);
 		return true;
+	}
+
+	AppInfoParams getAppInfo() {
+		ALatLon lastKnownLocation = null;
+		Location location = app.getLocationProvider().getLastKnownLocation();
+		if (location != null) {
+			lastKnownLocation = new ALatLon(location.getLatitude(), location.getLongitude());
+		}
+
+		boolean mapVisible = false;
+		ALatLon mapLocation = null;
+		if (mapActivity != null) {
+			LatLon mapLoc = mapActivity.getMapLocation();
+			if (mapLoc != null) {
+				mapLocation = new ALatLon(mapLoc.getLatitude(), mapLoc.getLongitude());
+			}
+			mapVisible = mapActivity.isMapVisible();
+		}
+
+		int time = 0;
+		long eta = 0;
+		int leftDistance = 0;
+
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		if (routingHelper.isRouteCalculated()) {
+			time = routingHelper.getLeftTime();
+			eta = time + System.currentTimeMillis() / 1000;
+			leftDistance = routingHelper.getLeftDistance();
+		}
+		return new AppInfoParams(lastKnownLocation, mapLocation, time, eta, leftDistance, mapVisible);
 	}
 
 	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,
