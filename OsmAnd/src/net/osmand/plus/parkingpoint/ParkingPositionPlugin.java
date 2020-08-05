@@ -40,7 +40,7 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -529,6 +529,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		java.text.DateFormat dateFormat = DateFormat.getMediumDateFormat(app);
 		java.text.DateFormat timeFormat = DateFormat.getTimeFormat(app);
 		return timeFormat.format(timeInMillis) + " " + dateFormat.format(timeInMillis);
+	}
 	}
 
 	String getFormattedTimeInterval(long timeInMillis, Activity ctx) {
