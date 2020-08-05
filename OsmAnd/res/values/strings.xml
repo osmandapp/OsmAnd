@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="plan_route_exit_dialog_descr">Are you sure you want to close Plan route without saving? You will lost all changes.</string>
     <string name="overwrite_track">Overwrite track</string>
     <string name="shared_string_done">Done</string>
     <string name="plan_route_select_track_file_for_open">Select a track file for open.</string>

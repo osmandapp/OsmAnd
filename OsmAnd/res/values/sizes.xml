@@ -242,6 +242,7 @@
 
 	<dimen name="measurement_tool_select_radius">20dp</dimen>
 	<dimen name="bottom_sheet_content_margin">16dp</dimen>
+	<dimen name="bottom_sheet_exit_button_margin">18dp</dimen>
 	<dimen name="bottom_sheet_content_margin_small">8dp</dimen>
 	<dimen name="content_padding">16dp</dimen>
 	<dimen name="content_padding_small">12dp</dimen>
