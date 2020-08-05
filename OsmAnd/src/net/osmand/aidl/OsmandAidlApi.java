@@ -30,6 +30,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
@@ -38,6 +39,8 @@ import net.osmand.aidl.navigation.ADirectionInfo;
 import net.osmand.aidl.navigation.OnVoiceNavigationParams;
 import net.osmand.aidl.quickaction.QuickActionInfoParams;
 import net.osmand.aidl.tiles.ASqliteDbFile;
+import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -70,16 +73,17 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.SettingsHelper;
-import net.osmand.plus.views.layers.AidlMapLayer;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.AidlMapLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -100,6 +104,7 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -124,6 +129,11 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_LANES;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_NAME;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_TURN;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DISTANCE;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_IMMINENT;
 
 public class OsmandAidlApi {
 
@@ -202,7 +212,7 @@ public class OsmandAidlApi {
 	private Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
 	private Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks = new ConcurrentHashMap<>();
 
-	private AMapPointUpdateListener aMapPointUpdateListener;
+	private MapActivity mapActivity;
 
 	private boolean mapActivityActive = false;
 
@@ -238,12 +248,12 @@ public class OsmandAidlApi {
 		registerLockStateReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
-		aMapPointUpdateListener = mapActivity;
+		this.mapActivity = mapActivity;
 	}
 
 	public void onDestroyMapActivity(MapActivity mapActivity) {
 		app.getAppCustomization().removeListener(mapActivity);
-		aMapPointUpdateListener = null;
+		this.mapActivity = null;
 		mapActivityActive = false;
 		for (BroadcastReceiver b : receivers.values()) {
 			if (b == null) {
@@ -263,7 +273,7 @@ public class OsmandAidlApi {
 	}
 
 	AMapPointUpdateListener getAMapPointUpdateListener() {
-		return aMapPointUpdateListener;
+		return mapActivity;
 	}
 
 	private void initOsmandTelegram() {
@@ -309,7 +319,7 @@ public class OsmandAidlApi {
 							zoom = zoom > mapView.getMaxZoom() ? mapView.getMaxZoom() : zoom;
 							zoom = zoom < mapView.getMinZoom() ? mapView.getMinZoom() : zoom;
 						}
-						if(!Float.isNaN(rotation)) {
+						if (!Float.isNaN(rotation)) {
 							mapView.setRotate(rotation, false);
 						}
 						if (animated) {
@@ -1712,6 +1722,65 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_LOCK_STATE, lock);
 		app.sendBroadcast(intent);
 		return true;
+	}
+
+	AppInfoParams getAppInfo() {
+		ALatLon lastKnownLocation = null;
+		Location location = app.getLocationProvider().getLastKnownLocation();
+		if (location != null) {
+			lastKnownLocation = new ALatLon(location.getLatitude(), location.getLongitude());
+		}
+
+		boolean mapVisible = false;
+		ALatLon mapLocation = null;
+		if (mapActivity != null) {
+			LatLon mapLoc = mapActivity.getMapLocation();
+			if (mapLoc != null) {
+				mapLocation = new ALatLon(mapLoc.getLatitude(), mapLoc.getLongitude());
+			}
+			mapVisible = mapActivity.isMapVisible();
+		}
+
+		int leftTime = 0;
+		long arrivalTime = 0;
+		int leftDistance = 0;
+		Bundle turnInfo = null;
+
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		if (routingHelper.isRouteCalculated()) {
+			leftTime = routingHelper.getLeftTime();
+			arrivalTime = leftTime + System.currentTimeMillis() / 1000;
+			leftDistance = routingHelper.getLeftDistance();
+
+			NextDirectionInfo directionInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+			turnInfo = new Bundle();
+			if (directionInfo.distanceTo > 0) {
+				updateTurnInfo("next_", turnInfo, directionInfo);
+				directionInfo = routingHelper.getNextRouteDirectionInfoAfter(directionInfo, new NextDirectionInfo(), true);
+				if (directionInfo.distanceTo > 0) {
+					updateTurnInfo("after_next", turnInfo, directionInfo);
+				}
+			}
+			routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
+			if (directionInfo.distanceTo > 0) {
+				updateTurnInfo("no_speak_next_", turnInfo, directionInfo);
+			}
+		}
+		return new AppInfoParams(lastKnownLocation, mapLocation, turnInfo, leftTime, leftDistance, arrivalTime, mapVisible);
+	}
+
+	private void updateTurnInfo(String prefix, Bundle bundle, NextDirectionInfo ni) {
+		bundle.putInt(prefix + PARAM_NT_DISTANCE, ni.distanceTo);
+		bundle.putInt(prefix + PARAM_NT_IMMINENT, ni.imminent);
+		if (ni.directionInfo != null && ni.directionInfo.getTurnType() != null) {
+			TurnType tt = ni.directionInfo.getTurnType();
+			RouteDirectionInfo a = ni.directionInfo;
+			bundle.putString(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelper.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName(), ""));
+			bundle.putString(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
+			if (tt.getLanes() != null) {
+				bundle.putString(prefix + PARAM_NT_DIRECTION_LANES, Arrays.toString(tt.getLanes()));
+			}
+		}
 	}
 
 	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,

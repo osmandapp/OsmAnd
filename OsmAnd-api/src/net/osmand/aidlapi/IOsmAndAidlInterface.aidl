@@ -100,6 +100,8 @@ import net.osmand.aidlapi.lock.SetLockStateParams;
 
 import net.osmand.aidlapi.events.AKeyEventsParams;
 
+import net.osmand.aidlapi.info.AppInfoParams;
+
 // NOTE: Add new methods at the end of file!!!
 
 interface IOsmAndAidlInterface {
@@ -860,4 +862,6 @@ interface IOsmAndAidlInterface {
      * @params keyEventList (List<Integer>) - list of requested key events
      */
     long registerForKeyEvents(in AKeyEventsParams params, IOsmAndAidlCallback callback);
+
+    AppInfoParams getAppInfo();
 }
