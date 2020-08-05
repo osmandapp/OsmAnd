@@ -72,25 +72,31 @@ public class DownloadGroupViewHolder {
 	}
 
 	private int getIconColorForOutdatedItems(DownloadResourceGroup group) {
+		int clr = 0;
 		if (group.getIndividualResources() != null) {
 			for (IndexItem ii : group.getIndividualResources()) {
 				if (ii.getType() == DownloadActivityType.NORMAL_FILE
 						|| ii.getType() == DownloadActivityType.ROADS_FILE) {
 					if (ii.isOutdated()) {
 						return R.color.color_distance;
+					} else if(ii.isDownloaded()) {
+						clr = R.color.color_ok;
 					}
 				}
 			}
 		}
+
 		if (group.getGroups() != null) {
 			for (DownloadResourceGroup g : group.getGroups()) {
 				int d = getIconColorForOutdatedItems(g);
 				if (d == R.color.color_distance) {
 					return d;
+				} else if(d != 0) {
+					clr = d;
 				}
 			}
 		}
-		return R.color.color_ok;
+		return clr;
 	}
 
 	public void bindItem(DownloadResourceGroup group) {
