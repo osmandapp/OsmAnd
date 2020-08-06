@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -23,16 +22,16 @@ import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.helpers.ImportHelper;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import org.apache.commons.logging.Log;
@@ -98,7 +97,7 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 	public void addTrack() {
-		Intent intent = getImportGpxIntent();
+		Intent intent = ImportHelper.getImportTrackIntent();
 		try {
 			startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
 		} catch (ActivityNotFoundException e) {
@@ -107,25 +106,12 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 	public void importFavourites() {
-		Intent intent = getImportGpxIntent();
+		Intent intent = ImportHelper.getImportTrackIntent();
 		try {
 			startActivityForResult(intent, IMPORT_FAVOURITES_REQUEST);
 		} catch (ActivityNotFoundException e) {
 			LOG.error(e.getMessage(), e);
 		}
-	}
-
-	private Intent getImportGpxIntent() {
-		Intent intent = new Intent();
-		String action;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			action = Intent.ACTION_OPEN_DOCUMENT;
-		} else {
-			action = Intent.ACTION_GET_CONTENT;
-		}
-		intent.setAction(action);
-		intent.setType("*/*");
-		return intent;
 	}
 
 	@Override

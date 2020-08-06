@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="import_track_descr">Choose track file to follow or import it from device.</string>
+    <string name="follow_track_descr">Choose track file to follow</string>
+    <string name="follow_track">Follow track</string>
     <string name="in_case_of_reverse_direction">In case of reverse direction</string>
     <string name="plan_route_exit_dialog_descr">Are you sure you want to close Plan route without saving? You will lose all changes.</string>
     <string name="street_level_imagery">Street-level imagery</string>

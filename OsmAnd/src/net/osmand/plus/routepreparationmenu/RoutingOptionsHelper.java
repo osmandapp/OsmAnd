@@ -294,9 +294,7 @@ public class RoutingOptionsHelper {
 			if (item != null) {
 				updateRoutingParameterIcons(item);
 				list.add(item);
-				if (item instanceof GpxLocalRoutingParameter) {
-					list.addAll(getGpxRouterParameters(am));
-				} else if (item instanceof TimeConditionalRoutingItem) {
+				if (item instanceof TimeConditionalRoutingItem) {
 					list.addAll(getOsmandRouterParameters(am));
 				}
 			}
@@ -395,8 +393,8 @@ public class RoutingOptionsHelper {
 				return new AvoidPTTypesRoutingParameter();
 			case AvoidRoadsRoutingParameter.KEY:
 				return new AvoidRoadsRoutingParameter();
-			case GpxLocalRoutingParameter.KEY:
-				return new GpxLocalRoutingParameter();
+			case FollowTrackRoutingParameter.KEY:
+				return new FollowTrackRoutingParameter();
 			case TimeConditionalRoutingItem.KEY:
 				return new TimeConditionalRoutingItem();
 			case OtherSettingsRoutingParameter.KEY:
@@ -443,7 +441,7 @@ public class RoutingOptionsHelper {
 		list.add(2, new InterruptMusicRoutingParameter());
 		list.add(3, new AvoidRoadsRoutingParameter());
 		list.add(4, new TimeConditionalRoutingItem());
-		list.add(new GpxLocalRoutingParameter());
+		list.add(new FollowTrackRoutingParameter());
 		list.add(new OtherSettingsRoutingParameter());
 		return list;
 	}
@@ -900,9 +898,9 @@ public class RoutingOptionsHelper {
 	}
 
 
-	public static class GpxLocalRoutingParameter extends LocalRoutingParameter {
+	public static class FollowTrackRoutingParameter extends LocalRoutingParameter {
 
-		public static final String KEY = "GpxLocalRoutingParameter";
+		public static final String KEY = "FollowTrackRoutingParameter";
 
 		public String getKey() {
 			return KEY;
@@ -912,7 +910,7 @@ public class RoutingOptionsHelper {
 			return false;
 		}
 
-		public GpxLocalRoutingParameter() {
+		public FollowTrackRoutingParameter() {
 			super(null);
 		}
 

@@ -1024,7 +1024,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	protected static boolean showInstance(@NonNull MapActivity mapActivity, ContextMenuFragment fragment) {
+	public static boolean showInstance(@NonNull MapActivity mapActivity, ContextMenuFragment fragment) {
 		try {
 			mapActivity.getSupportFragmentManager()
 					.beginTransaction()

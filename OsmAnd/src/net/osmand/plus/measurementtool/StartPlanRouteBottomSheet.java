@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -150,15 +149,7 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void importTrack() {
-		Intent intent = new Intent();
-		String action;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			action = Intent.ACTION_OPEN_DOCUMENT;
-		} else {
-			action = Intent.ACTION_GET_CONTENT;
-		}
-		intent.setAction(action);
-		intent.setType("*/*");
+		Intent intent = ImportHelper.getImportTrackIntent();
 		try {
 			startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
 		} catch (ActivityNotFoundException e) {

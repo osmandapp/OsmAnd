@@ -627,15 +627,7 @@ public class ImportHelper {
 			return;
 		}
 		final OsmandApplication app = mapActivity.getMyApplication();
-		Intent intent = new Intent();
-		String action;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			action = Intent.ACTION_OPEN_DOCUMENT;
-		} else {
-			action = Intent.ACTION_GET_CONTENT;
-		}
-		intent.setAction(action);
-		intent.setType("*/*");
+		Intent intent = ImportHelper.getImportTrackIntent();
 
 		ActivityResultListener listener = new ActivityResultListener(IMPORT_FILE_REQUEST, new ActivityResultListener.OnActivityResultListener() {
 			@Override
@@ -673,6 +665,19 @@ public class ImportHelper {
 		
 		mapActivity.registerActivityResultListener(listener);
 		mapActivity.startActivityForResult(intent, IMPORT_FILE_REQUEST);
+	}
+
+	public static Intent getImportTrackIntent() {
+		Intent intent = new Intent();
+		String action;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			action = Intent.ACTION_OPEN_DOCUMENT;
+		} else {
+			action = Intent.ACTION_GET_CONTENT;
+		}
+		intent.setAction(action);
+		intent.setType("*/*");
+		return intent;
 	}
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, CallbackWithObject<List<SettingsItem>> callback) {
