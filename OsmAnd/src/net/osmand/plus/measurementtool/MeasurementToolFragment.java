@@ -94,7 +94,6 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
 import static net.osmand.plus.measurementtool.StartPlanRouteBottomSheet.StartPlanRouteListener;
 
-
 public class MeasurementToolFragment extends BaseOsmAndFragment
 		implements ExitBottomSheetDialogFragment.ExitFragmentListener {
 
@@ -123,7 +122,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 	private boolean progressBarVisible;
 	private boolean pointsListOpened;
 	private boolean planRouteMode = false;
-	private boolean firstShow = true;
 	private Boolean saved;
 	private boolean portrait;
 	private boolean nightMode;
@@ -153,7 +151,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+	                         @Nullable Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity == null) {
 			return null;
@@ -219,7 +218,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 		downIcon = getContentIcon(R.drawable.ic_action_arrow_down);
 		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();
 
-		View view = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.fragment_measurement_tool, null);
+		View view = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.fragment_measurement_tool,
+				container,false);
 
 		mainView = view.findViewById(R.id.main_view);
 		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
@@ -478,10 +478,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 
 		initMeasurementMode(newGpxData);
 
-		if (planRouteMode && firstShow) {
+		if (planRouteMode && savedInstanceState == null) {
 			StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
 					createStartPlanRouteListener());
-			firstShow = false;
 		}
 		return view;
 	}
