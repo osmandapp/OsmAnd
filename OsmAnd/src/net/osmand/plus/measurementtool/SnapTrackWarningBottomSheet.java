@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
@@ -26,11 +27,6 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 
 	protected View mainView;
 	protected GpxTrackAdapter adapter;
-	private SnapTrackWarningListener listener;
-
-	public void setListener(SnapTrackWarningListener listener) {
-		this.listener = listener;
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -49,22 +45,6 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 		items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.content_padding_half)));
 	}
 
-	public static void showInstance(FragmentManager fm, SnapTrackWarningListener listener) {
-		try {
-			if (!fm.isStateSaved()) {
-				SnapTrackWarningBottomSheet fragment = new SnapTrackWarningBottomSheet();
-				fragment.setUsedOnMap(true);
-				fragment.setRetainInstance(true);
-				fragment.setListener(listener);
-				fm.beginTransaction()
-						.add(R.id.bottomFragmentContainer, fragment, TAG)
-						.commitAllowingStateLoss();
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
-		}
-	}
-
 	@Override
 	protected int getRightBottomButtonTextId() {
 		return R.string.shared_string_continue;
@@ -72,8 +52,9 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		if (listener != null) {
-			listener.continueButtonOnClick();
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof SnapTrackWarningListener) {
+			((SnapTrackWarningListener) fragment).continueButtonOnClick();
 		}
 		dismiss();
 	}
@@ -83,7 +64,6 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 		return R.string.shared_string_cancel;
 	}
 
-
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
@@ -91,8 +71,23 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 		if (activity instanceof MapActivity) {
 			activity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.VISIBLE);
 		}
-		if (listener != null) {
-			listener.dismissButtonOnClick();
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof SnapTrackWarningListener) {
+			((SnapTrackWarningListener) fragment).dismissButtonOnClick();
+		}
+	}
+
+	public static void showInstance(FragmentManager fm, Fragment targetFragment) {
+		try {
+			if (!fm.isStateSaved()) {
+				SnapTrackWarningBottomSheet fragment = new SnapTrackWarningBottomSheet();
+				fragment.setTargetFragment(targetFragment, 0);
+				fm.beginTransaction()
+						.add(R.id.bottomFragmentContainer, fragment, TAG)
+						.commitAllowingStateLoss();
+			}
+		} catch (RuntimeException e) {
+			LOG.error("showInstance", e);
 		}
 	}
 

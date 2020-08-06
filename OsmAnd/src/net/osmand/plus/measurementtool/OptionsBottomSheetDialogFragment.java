@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
@@ -28,17 +29,9 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 	public static final String SNAP_TO_ROAD_ENABLED_KEY = "snap_to_road_enabled";
 	public static final String TRACK_SNAPPED_TO_ROAD_KEY = "track_snapped_to_road";
+	public static final String SNAP_TO_ROAD_APP_MODE_KEY = "snap_to_road_app_mode";
 
-	private OptionsFragmentListener listener;
 	private ApplicationMode routeAppMode;
-
-	public void setListener(OptionsFragmentListener listener) {
-		this.listener = listener;
-	}
-
-	private void setRouteAppMode(ApplicationMode routeAppMode) {
-		this.routeAppMode = routeAppMode;
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -48,6 +41,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		if (args != null) {
 			snapToRoadEnabled = args.getBoolean(SNAP_TO_ROAD_ENABLED_KEY);
 			trackSnappedToRoad = args.getBoolean(TRACK_SNAPPED_TO_ROAD_KEY);
+			routeAppMode = ApplicationMode.valueOfStringKey(args.getString(SNAP_TO_ROAD_APP_MODE_KEY), null);
 		}
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
@@ -75,8 +69,9 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (listener != null) {
-							listener.snapToRoadOnCLick();
+						Fragment fragment = getTargetFragment();
+						if (fragment instanceof OptionsFragmentListener) {
+							((OptionsFragmentListener) fragment).snapToRoadOnCLick();
 						}
 						dismiss();
 					}
@@ -94,8 +89,9 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (listener != null) {
-							listener.addToGpxOnClick();
+						Fragment fragment = getTargetFragment();
+						if (fragment instanceof OptionsFragmentListener) {
+							((OptionsFragmentListener) fragment).addToGpxOnClick();
 						}
 						dismiss();
 					}
@@ -112,8 +108,9 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (listener != null) {
-							listener.addToTheTrackOnClick();
+						Fragment fragment = getTargetFragment();
+						if (fragment instanceof OptionsFragmentListener) {
+							((OptionsFragmentListener) fragment).addToTheTrackOnClick();
 						}
 						dismiss();
 					}
@@ -131,8 +128,9 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (listener != null) {
-							listener.clearAllOnClick();
+						Fragment fragment = getTargetFragment();
+						if (fragment instanceof OptionsFragmentListener) {
+							((OptionsFragmentListener) fragment).clearAllOnClick();
 						}
 						dismiss();
 					}
@@ -149,8 +147,9 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (listener != null) {
-							listener.saveAsNewTrackOnClick();
+						Fragment fragment = getTargetFragment();
+						if (fragment instanceof OptionsFragmentListener) {
+							((OptionsFragmentListener) fragment).saveAsNewTrackOnClick();
 						}
 						dismiss();
 					}
@@ -166,18 +165,17 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		params.rightMargin = view.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, boolean trackSnappedToRoad, boolean snapToRoad,
-	                                ApplicationMode routeAppMode, OptionsFragmentListener optionsFragmentListener) {
+	public static void showInstance(@NonNull FragmentManager fm, Fragment targetFragment, boolean trackSnappedToRoad,
+	                                boolean snapToRoad, String routeAppModeStringKey) {
 		try {
 			if (!fm.isStateSaved()) {
+				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
 				Bundle args = new Bundle();
 				args.putBoolean(TRACK_SNAPPED_TO_ROAD_KEY, trackSnappedToRoad);
 				args.putBoolean(SNAP_TO_ROAD_ENABLED_KEY, snapToRoad);
-				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+				args.putString(SNAP_TO_ROAD_APP_MODE_KEY, routeAppModeStringKey);
 				fragment.setArguments(args);
-				fragment.setRouteAppMode(routeAppMode);
-				fragment.setUsedOnMap(true);
-				fragment.setListener(optionsFragmentListener);
+				fragment.setTargetFragment(targetFragment,0);
 				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {

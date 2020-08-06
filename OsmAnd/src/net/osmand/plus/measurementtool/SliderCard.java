@@ -16,6 +16,8 @@ public class SliderCard extends BaseCard {
 
 	public static final int DEFAULT_VALUE = 30;
 
+	private SliderCardListener listener;
+
 	public SliderCard(MapActivity mapActivity) {
 		super(mapActivity);
 	}
@@ -44,13 +46,26 @@ public class SliderCard extends BaseCard {
 				if (fromUser) {
 					String valueStr = getStringValueWithMetric((int) value);
 					thresholdDistanceValue.setText(valueStr);
+					if (listener != null) {
+						listener.onSliderChange((int) value);
+					}
 				}
 			}
 		});
 	}
 
+	public void setListener(SliderCardListener listener) {
+		this.listener = listener;
+	}
+
 	private String getStringValueWithMetric(int value) {
 		return String.format(view.getContext().getString(R.string.ltr_or_rtl_combine_via_space),
 				String.valueOf(value), view.getContext().getString(R.string.m));
+	}
+
+	interface SliderCardListener {
+
+		void onSliderChange(int sliderValue);
+
 	}
 }

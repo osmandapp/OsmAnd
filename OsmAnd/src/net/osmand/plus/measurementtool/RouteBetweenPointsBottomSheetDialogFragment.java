@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -45,8 +46,9 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	private static final Log LOG = PlatformUtil.getLog(RouteBetweenPointsBottomSheetDialogFragment.class);
 	public static final String TAG = RouteBetweenPointsBottomSheetDialogFragment.class.getSimpleName();
 	public static final int STRAIGHT_LINE_TAG = -1;
+	public static final String CALCULATION_TYPE_KEY = "calculation_type";
+	public static final String ROUTE_APP_MODE_KEY = "route_app_mode";
 
-	private RouteBetweenPointsFragmentListener listener;
 	private boolean nightMode;
 	private boolean portrait;
 	private boolean snapToRoadEnabled;
@@ -58,13 +60,14 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	private CalculationType calculationType = WHOLE_TRACK;
 	private ApplicationMode snapToRoadAppMode;
 
-	public void setListener(RouteBetweenPointsFragmentListener listener) {
-		this.listener = listener;
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		Bundle args = getArguments();
+		if (args != null) {
+			snapToRoadAppMode = ApplicationMode.valueOfStringKey(args.getString(ROUTE_APP_MODE_KEY), null);
+			calculationType = (CalculationType) args.get(CALCULATION_TYPE_KEY);
+		}
 		OsmandApplication app = requiredMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		FragmentActivity activity = requireActivity();
@@ -90,7 +93,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 		wholeTrackBtn = mainView.findViewById(R.id.whole_track_btn);
 		btnDescription = mainView.findViewById(R.id.button_description);
 
-		LinearLayout navigationType = (LinearLayout) mainView.findViewById(R.id.navigation_types_container);
+		LinearLayout navigationType = mainView.findViewById(R.id.navigation_types_container);
 		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
 		modes.remove(ApplicationMode.DEFAULT);
 
@@ -98,13 +101,13 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 			@Override
 			public void onClick(View view) {
 				snapToRoadEnabled = false;
-				if (listener != null) {
-					ApplicationMode mode = null;
-					if ((int) view.getTag() != STRAIGHT_LINE_TAG) {
-						mode = modes.get((int) view.getTag());
-						snapToRoadEnabled = true;
+				if ((int) view.getTag() != STRAIGHT_LINE_TAG) {
+					ApplicationMode mode = modes.get((int) view.getTag());
+					snapToRoadEnabled = true;
+					Fragment fragment = getTargetFragment();
+					if (fragment instanceof RouteBetweenPointsFragmentListener) {
+						((RouteBetweenPointsFragmentListener) fragment).onApplicationModeItemClick(mode);
 					}
-					listener.onApplicationModeItemClick(mode);
 				}
 				dismiss();
 			}
@@ -176,8 +179,9 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 			btnDescription.setText(R.string.rourte_between_points_whole_track_button_desc);
 		}
 		setCalculationType(calculationType);
-		if (listener != null) {
-			listener.onCalculationTypeChanges(calculationType);
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof RouteBetweenPointsFragmentListener) {
+			((RouteBetweenPointsFragmentListener) fragment).onCalculationTypeChanges(calculationType);
 		}
 	}
 
@@ -212,29 +216,27 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 
 	@Override
 	public void onDestroyView() {
-		if (listener != null) {
-			listener.onDestroyView(snapToRoadEnabled);
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof RouteBetweenPointsFragmentListener) {
+			((RouteBetweenPointsFragmentListener) fragment).onDestroyView(snapToRoadEnabled);
 		}
 		super.onDestroyView();
-	}
-
-
-	public void setRouteMode(ApplicationMode snapToRoadAppMode) {
-		this.snapToRoadAppMode = snapToRoadAppMode;
 	}
 
 	public void setCalculationType(CalculationType calculationType) {
 		this.calculationType = calculationType;
 	}
 
-	public static void showInstance(FragmentManager fm, RouteBetweenPointsFragmentListener listener,
-	                                CalculationType calculationType, ApplicationMode applicationMode) {
+	public static void showInstance(FragmentManager fm, Fragment targetFragment, CalculationType calculationType,
+	                                ApplicationMode applicationMode) {
 		try {
 			if (!fm.isStateSaved()) {
 				RouteBetweenPointsBottomSheetDialogFragment fragment = new RouteBetweenPointsBottomSheetDialogFragment();
-				fragment.setListener(listener);
-				fragment.setCalculationType(calculationType);
-				fragment.setRouteMode(applicationMode);
+				Bundle args = new Bundle();
+				args.putString(ROUTE_APP_MODE_KEY, applicationMode != null ? applicationMode.getStringKey() : null);
+				args.putSerializable(CALCULATION_TYPE_KEY, calculationType);
+				fragment.setArguments(args);
+				fragment.setTargetFragment(targetFragment, 0);
 				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {

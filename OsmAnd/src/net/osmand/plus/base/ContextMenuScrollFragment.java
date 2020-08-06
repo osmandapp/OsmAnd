@@ -140,13 +140,13 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		return mapControlsContainer != null ? mapControlsContainer.getHeight() : 0;
 	}
 
-	public int getMapControlsVisibleMenuState() {
-		return MenuState.HEADER_ONLY;
+	public boolean shouldShowMapControls(int menuState) {
+		return menuState == MenuState.HEADER_ONLY;
 	}
 
 	private void updateMapControlsVisibility(int menuState) {
 		if (mapBottomHudButtons != null) {
-			if ((menuState & getMapControlsVisibleMenuState()) != 0) {
+			if (shouldShowMapControls(menuState)) {
 				if (mapBottomHudButtons.getVisibility() != View.VISIBLE) {
 					mapBottomHudButtons.setVisibility(View.VISIBLE);
 				}

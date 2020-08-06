@@ -19,15 +19,11 @@ import java.util.List;
 
 public class ProfileCard extends BaseCard {
 
-	public static final int INIT_MODE = 0;
-	ApplicationMode selectedMode;
+	private ApplicationMode selectedMode;
+	private ProfileCardListener listener;
 
 	public ProfileCard(MapActivity mapActivity) {
 		super(mapActivity);
-	}
-
-	public ApplicationMode getSelectedMode() {
-		return selectedMode;
 	}
 
 	@Override
@@ -52,6 +48,9 @@ public class ProfileCard extends BaseCard {
 					selectedMode = modes.get((Integer) v.getTag());
 					clearChecked();
 					selectedProfile.setChecked(true);
+					if (listener != null) {
+						listener.onProfileSelect(selectedMode);
+					}
 				}
 
 				private void clearChecked() {
@@ -63,12 +62,12 @@ public class ProfileCard extends BaseCard {
 			};
 			addProfileView(container, onClickListener, i, icon, title);
 		}
-		initSelected(modes);
+		resetSelected(modes);
 	}
 
-	private void initSelected(List<ApplicationMode> modes) {
-		selectedMode = modes.get(INIT_MODE);
-		((RadioButton) view.findViewWithTag(INIT_MODE).findViewById(R.id.compound_button)).setChecked(true);
+	private void resetSelected(List<ApplicationMode> modes) {
+		selectedMode = modes.get(0);
+		((RadioButton) view.findViewWithTag(0).findViewById(R.id.compound_button)).setChecked(true);
 	}
 
 	private void addProfileView(LinearLayout container, View.OnClickListener onClickListener, Object tag,
@@ -83,5 +82,15 @@ public class ProfileCard extends BaseCard {
 		row.setOnClickListener(onClickListener);
 		row.setTag(tag);
 		container.addView(row);
+	}
+
+	public void setListener(ProfileCardListener listener) {
+		this.listener = listener;
+	}
+
+	interface ProfileCardListener {
+
+		void onProfileSelect(ApplicationMode applicationMode);
+
 	}
 }
