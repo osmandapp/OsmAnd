@@ -3765,7 +3765,7 @@
     <string name="shared_string_delete_all_q">Видалити все\?</string>
     <string name="delete_all_actions_message_q">Ви дійсно бажаєте безповоротно видалити %d швидких дій\?</string>
     <string name="screen_timeout">Час очікування екрана</string>
-    <string name="weight_limit_description">Вкажіть вагу транспортного засобу, для важких транспортних засобів можуть застосовуватися деякі маршрутні обмеження.</string>
+    <string name="weight_limit_description">Вкажіть вагу транспортного засобу тому, що для вантажівок можуть застосовуватися деякі маршрутні обмеження.</string>
     <string name="shared_string_tones">тонни</string>
     <string name="shared_string_meters">метри</string>
     <string name="details_dialog_decr">Показати або приховати додаткові деталі на мапі</string>
@@ -3836,4 +3836,5 @@
     <string name="plan_route_create_new_route">Створити новий маршрут</string>
     <string name="plan_route_select_track_file_for_open">Оберіть файл з треком для перегляду.</string>
     <string name="shared_string_done">Готово</string>
+    <string name="overwrite_track">Перезаписати трек</string>
 </resources>

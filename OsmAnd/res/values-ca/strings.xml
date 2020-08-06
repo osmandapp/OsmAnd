@@ -3721,4 +3721,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="plan_route_select_track_file_for_open">Seleccioneu un fitxer de traça per obrir-lo.</string>
     <string name="shared_string_done">Fet</string>
     <string name="overwrite_track">Substitueix la traça</string>
+    <string name="width_limit_description">Proporcioneu l\'amplada del vostre vehicle, pot haver-hi rutes restringides als vehicles amples.</string>
+    <string name="height_limit_description">Proporcioneu l\'alçada del vostre vehicle, pot haver-hi rutes restringides als vehicles alts.</string>
+    <string name="weight_limit_description">Proporcioneu el pes del vostre vehicle, pot haver-hi rutes restringides als vehicles pesants.</string>
 </resources>
