@@ -21,6 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
@@ -29,7 +30,6 @@ import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,10 +47,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
 		List<SelectedGpxFile> selectedGpxFiles = selectedGpxHelper.getSelectedGPXFiles();
 
-		List<String> files = new ArrayList<>();
-		for (SelectedGpxFile file : selectedGpxFiles) {
-			files.add(file.getGpxFile().path);
-		}
+		List<String> files = GpxUiHelper.getSelectedTrackNames(mapActivity.getMyApplication());
 		if (selectedGpxFiles.isEmpty()) {
 			Map<GPXFile, Long> fls = selectedGpxHelper.getSelectedGpxFilesBackUp();
 			for (Map.Entry<GPXFile, Long> f : fls.entrySet()) {

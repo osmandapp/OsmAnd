@@ -810,6 +810,14 @@ public class GpxUiHelper {
 		}
 	}
 
+	public static List<String> getSelectedTrackNames(OsmandApplication app) {
+		List<String> trackNames = new ArrayList<>();
+		for (SelectedGpxFile file : app.getSelectedGpxHelper().getSelectedGPXFiles()) {
+			trackNames.add(file.getGpxFile().path);
+		}
+		return trackNames;
+	}
+
 	public static List<GPXInfo> getSortedGPXFilesInfoByDate(File dir, boolean absolutePath) {
 		final List<GPXInfo> list = new ArrayList<>();
 		readGpxDirectory(dir, list, "", absolutePath);
@@ -913,8 +921,7 @@ public class GpxUiHelper {
 		}
 	}
 
-
-	static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,
+	public static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,
 	                                         final File dir, final GPXFile currentFile, final String... filename) {
 		final ProgressDialog dlg = ProgressDialog.show(activity, activity.getString(R.string.loading_smth, ""),
 				activity.getString(R.string.loading_data));
