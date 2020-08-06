@@ -1,16 +1,13 @@
 package net.osmand.plus.measurementtool;
 
 import android.app.Dialog;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -18,7 +15,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -38,6 +34,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.*;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationType.NEXT_SEGMENT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationType.WHOLE_TRACK;
 
@@ -52,13 +49,11 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	private boolean nightMode;
 	private boolean portrait;
 	private boolean snapToRoadEnabled;
-	private TextView segmentBtn;
-	private TextView wholeTrackBtn;
 	private TextView btnDescription;
-	private FrameLayout segmentBtnContainer;
-	private FrameLayout wholeTrackBtnContainer;
 	private CalculationType calculationType = WHOLE_TRACK;
 	private ApplicationMode snapToRoadAppMode;
+
+	private LinearLayout customRadioButton;
 
 	@Nullable
 	@Override
@@ -87,10 +82,12 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 				dismiss();
 			}
 		});
-		segmentBtnContainer = mainView.findViewById(R.id.next_segment_btn_container);
-		segmentBtn = mainView.findViewById(R.id.next_segment_btn);
-		wholeTrackBtnContainer = mainView.findViewById(R.id.whole_track_btn_container);
-		wholeTrackBtn = mainView.findViewById(R.id.whole_track_btn);
+
+		customRadioButton = mainView.findViewById(R.id.custom_radio_buttons);
+		TextView segmentBtn = mainView.findViewById(R.id.left_button);
+		segmentBtn.setText(R.string.next_segment);
+		TextView wholeTrackBtn = mainView.findViewById(R.id.right_button);
+		wholeTrackBtn.setText(R.string.whole_track);
 		btnDescription = mainView.findViewById(R.id.button_description);
 
 		LinearLayout navigationType = mainView.findViewById(R.id.navigation_types_container);
@@ -144,39 +141,18 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 		View row = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.divider, container, false);
 		View divider = row.findViewById(R.id.divider);
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) divider.getLayoutParams();
-		params.topMargin = container.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
-		params.bottomMargin = container.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
+		params.topMargin = row.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
+		params.bottomMargin = row.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
 		container.addView(row);
 	}
 
 	private void updateModeButtons(CalculationType calculationType) {
-		OsmandApplication app = requiredMyApplication();
-		int activeColor = ContextCompat.getColor(app, nightMode
-				? R.color.active_color_primary_dark
-				: R.color.active_color_primary_light);
-		int textColor = ContextCompat.getColor(app, nightMode
-				? R.color.text_color_primary_dark
-				: R.color.text_color_primary_light);
-		int radius = AndroidUtils.dpToPx(app, 4);
-
-		GradientDrawable background = new GradientDrawable();
-		background.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
-		background.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(activeColor, 0.5f));
-
 		if (calculationType == NEXT_SEGMENT) {
-			background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
-			wholeTrackBtnContainer.setBackgroundColor(Color.TRANSPARENT);
-			wholeTrackBtn.setTextColor(activeColor);
-			segmentBtnContainer.setBackgroundDrawable(background);
-			segmentBtn.setTextColor(textColor);
+			UiUtilities.updateCustomRadioButtons(getMyApplication(), customRadioButton, nightMode, LEFT);
 			btnDescription.setText(R.string.rourte_between_points_next_segment_button_desc);
 		} else {
-			background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
-			wholeTrackBtnContainer.setBackgroundDrawable(background);
-			wholeTrackBtn.setTextColor(textColor);
-			segmentBtnContainer.setBackgroundColor(Color.TRANSPARENT);
-			segmentBtn.setTextColor(activeColor);
 			btnDescription.setText(R.string.rourte_between_points_whole_track_button_desc);
+			UiUtilities.updateCustomRadioButtons(getMyApplication(), customRadioButton, nightMode, RIGHT);
 		}
 		setCalculationType(calculationType);
 		Fragment fragment = getTargetFragment();
