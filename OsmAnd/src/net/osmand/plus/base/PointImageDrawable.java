@@ -3,7 +3,6 @@ package net.osmand.plus.base;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
@@ -35,7 +34,6 @@ public class PointImageDrawable extends Drawable {
 
 	private final int dp_12_px;
 	private boolean withShadow;
-	private boolean synced;
 	private boolean history;
 	private Drawable mapIcon;
 	private Bitmap mapIconBitmap;
@@ -45,10 +43,6 @@ public class PointImageDrawable extends Drawable {
 	private Bitmap mapIconBackgroundTopSmall;
 	private Bitmap mapIconBackgroundCenterSmall;
 	private Bitmap mapIconBackgroundBottomSmall;
-	private Bitmap syncedStroke;
-	private Bitmap syncedColor;
-	private Bitmap syncedShadow;
-	private Bitmap syncedIcon;
 	private Drawable uiListIcon;
 	private Drawable uiBackgroundIcon;
 	private Paint paintIcon = new Paint();
@@ -63,17 +57,17 @@ public class PointImageDrawable extends Drawable {
 	public static final int ICON_SIZE_VECTOR_PX = 12;
 
 	private PointImageDrawable(PointInfo pointInfo) {
-		this.withShadow = pointInfo.withShadow;
-		this.synced = pointInfo.synced;
+		withShadow = pointInfo.withShadow;
 		Context ctx = pointInfo.ctx;
 		Resources res = ctx.getResources();
 		UiUtilities uiUtilities = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities();
 		int overlayIconId = pointInfo.overlayIconId;
-		int uiIconId;
-		mapIcon = uiUtilities.getIcon(getMapIconId(ctx, overlayIconId), R.color.color_white);
-		uiIconId = overlayIconId;
+		mapIcon = uiUtilities.getIcon(pointInfo.synced
+						? R.drawable.ic_action_flag
+						: getMapIconId(ctx, overlayIconId),
+				R.color.color_white);
 		int col = pointInfo.color == 0 ? res.getColor(R.color.color_favorite) : pointInfo.color;
-		uiListIcon = uiUtilities.getIcon(uiIconId, R.color.color_white);
+		uiListIcon = uiUtilities.getIcon(overlayIconId, R.color.color_white);
 		BackgroundType backgroundType = pointInfo.backgroundType;
 		int uiBackgroundIconId = backgroundType.getIconId();
 		uiBackgroundIcon = uiUtilities.getPaintedIcon(uiBackgroundIconId, col);
@@ -83,10 +77,6 @@ public class PointImageDrawable extends Drawable {
 		mapIconBackgroundTopSmall = backgroundType.getMapBackgroundIconId(ctx, "top", true);
 		mapIconBackgroundCenterSmall = backgroundType.getMapBackgroundIconId(ctx, "center", true);
 		mapIconBackgroundBottomSmall = backgroundType.getMapBackgroundIconId(ctx, "bottom", true);
-		syncedStroke = BitmapFactory.decodeResource(res, R.drawable.ic_shield_marker_point_stroke);
-		syncedColor = BitmapFactory.decodeResource(res, R.drawable.ic_shield_marker_point_color);
-		syncedShadow = BitmapFactory.decodeResource(res, R.drawable.ic_shield_marker_point_shadow);
-		syncedIcon = BitmapFactory.decodeResource(res, R.drawable.ic_marker_point_14dp);
 		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN);
 		grayFilter = new PorterDuffColorFilter(res.getColor(R.color.color_favorite_gray), PorterDuff.Mode.MULTIPLY);
 		dp_12_px = AndroidUtils.dpToPx(pointInfo.ctx, 12);
@@ -101,7 +91,7 @@ public class PointImageDrawable extends Drawable {
 	@Override
 	protected void onBoundsChange(Rect bounds) {
 		super.onBoundsChange(bounds);
-		if (!withShadow && !synced) {
+		if (!withShadow) {
 			uiBackgroundIcon.setBounds(0, 0,
 					uiBackgroundIcon.getIntrinsicWidth(), uiBackgroundIcon.getIntrinsicHeight());
 			int offsetX = bounds.centerX() - uiListIcon.getIntrinsicWidth() / 2;
@@ -113,9 +103,7 @@ public class PointImageDrawable extends Drawable {
 
 	@Override
 	public int getIntrinsicHeight() {
-		if (synced) {
-			return syncedShadow.getHeight();
-		} else if (withShadow) {
+		if (withShadow) {
 			return mapIconBackgroundCenter.getHeight();
 		}
 		return uiBackgroundIcon.getIntrinsicHeight();
@@ -123,9 +111,7 @@ public class PointImageDrawable extends Drawable {
 
 	@Override
 	public int getIntrinsicWidth() {
-		if (synced) {
-			return syncedShadow.getWidth();
-		} else if (withShadow) {
+		if (withShadow) {
 			return mapIconBackgroundCenter.getWidth();
 		}
 		return uiBackgroundIcon.getIntrinsicWidth();
@@ -135,12 +121,7 @@ public class PointImageDrawable extends Drawable {
 	public void draw(@NonNull Canvas canvas) {
 		paintBackground.setColorFilter(history ? grayFilter : colorFilter);
 		Rect bs = getBounds();
-		if (synced) {
-			drawBitmap(canvas, bs, syncedShadow, paintBackground);
-			drawBitmap(canvas, bs, syncedColor, paintBackground);
-			drawBitmap(canvas, bs, syncedStroke, paintBackground);
-			drawBitmap(canvas, bs, syncedIcon, paintIcon);
-		} else if (withShadow) {
+		if (withShadow) {
 			drawBitmap(canvas, bs, mapIconBackgroundBottom, null);
 			drawBitmap(canvas, bs, mapIconBackgroundCenter, paintBackground);
 			drawBitmap(canvas, bs, mapIconBackgroundTop, null);
@@ -243,11 +224,11 @@ public class PointImageDrawable extends Drawable {
 	}
 
 	public static PointImageDrawable getOrCreateSyncedIcon(Context ctx, @ColorInt int color, FavouritePoint point) {
-		return getFromFavorite(ctx, color, false, true, point);
+		return getFromFavorite(ctx, color, true, true, point);
 	}
 
 	public static PointImageDrawable getOrCreateSyncedIcon(Context ctx, @ColorInt int color, GPXUtilities.WptPt wpt) {
-		return getFromWpt(ctx, color, false, true, wpt);
+		return getFromWpt(ctx, color, true, true, wpt);
 	}
 
 	public static PointImageDrawable getFromWpt(Context ctx, @ColorInt int color, boolean withShadow,
