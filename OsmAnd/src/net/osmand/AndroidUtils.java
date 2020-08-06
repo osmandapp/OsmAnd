@@ -699,6 +699,13 @@ public class AndroidUtils {
 			layoutParams.setMarginEnd(end);
 		}
 	}
+
+	public static void setTextDirection(@NonNull TextView tv, boolean rtl) {
+		if (isSupportRTL()) {
+			int textDirection = rtl ? View.TEXT_DIRECTION_RTL : View.TEXT_DIRECTION_LTR;
+			tv.setTextDirection(textDirection);
+		}
+	}
 	
 	public static int getLayoutDirection(@NonNull Context ctx) {
 		Locale currentLocale = ctx.getResources().getConfiguration().locale;
