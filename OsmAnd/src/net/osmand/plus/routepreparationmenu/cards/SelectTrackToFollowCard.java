@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.R;
@@ -32,7 +31,6 @@ public class SelectTrackToFollowCard extends BaseCard {
 
 	private List<GPXInfo> gpxInfoList;
 	private String selectedCategory;
-	private CallbackWithObject<GPXInfo> gpxInfoCallback;
 
 	public SelectTrackToFollowCard(MapActivity mapActivity, List<GPXInfo> gpxInfoList) {
 		super(mapActivity);
@@ -40,8 +38,8 @@ public class SelectTrackToFollowCard extends BaseCard {
 		data = getGpxInfoCategories();
 	}
 
-	public void setGpxInfoCallback(CallbackWithObject<GPXInfo> gpxInfoCallback) {
-		this.gpxInfoCallback = gpxInfoCallback;
+	public List<GPXInfo> getGpxInfoList() {
+		return gpxInfoList;
 	}
 
 	@Override
@@ -84,8 +82,9 @@ public class SelectTrackToFollowCard extends BaseCard {
 				trackView.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (gpxInfoCallback != null) {
-							gpxInfoCallback.processResult(item);
+						CardListener listener = getListener();
+						if (listener != null) {
+							listener.onCardButtonPressed(SelectTrackToFollowCard.this, gpxInfoList.indexOf(item));
 						}
 					}
 				});
