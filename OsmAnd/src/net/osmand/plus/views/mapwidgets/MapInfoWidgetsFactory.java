@@ -1223,6 +1223,8 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			});
+			AndroidUtils.setTextDirection(latitudeText, false);
+			AndroidUtils.setTextDirection(longitudeText, false);
 		}
 
 		@SuppressLint("SetTextI18n")
