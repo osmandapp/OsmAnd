@@ -117,7 +117,7 @@
     <string name="shared_string_rename">Преименуј</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
     <string name="search_position_address">Адреса…</string>
-    <string name="search_position_undefined">Неодређено</string>
+    <string name="shared_string_undefined">Неодређено</string>
     <string name="layer_map_appearance">Конфигурација екрана</string>
     <string name="show_lanes">Траке</string>
     <string name="avoid_unpaved">Без неасфалтираних путева</string>
@@ -3761,7 +3761,7 @@
     <string name="terrain_slider_description">Поставите минимални и максимални ниво зума, при коме ће слој бити приказан.</string>
     <string name="hillshade_download_description">Додатне мапе су потребне да бисте видели сенке брда на мапи.</string>
     <string name="slope_download_description">Додатне мапе су потребне да бисте видели нагибе на мапи.</string>
-    <string name="slope_read_more">Можете прочитати више о нагибима у %1$е.</string>
+    <string name="slope_read_more">Можете прочитати више о нагибима у %1$s.</string>
     <string name="terrain_empty_state_text">Омогућите да би видели сенке брда или мапе нагиба. Можете прочитати више о овим врстама карта на нашем сајту.</string>
     <string name="import_complete_description">Сви подаци %1$S су увезени, можете да употребите дугмад испод да би сте отворили неопходни део апликације ради управљања њима.</string>
     <string name="checking_for_duplicate_description">Османд проверава %1$S постојање дупликата са постојећим елементима у апликацији.

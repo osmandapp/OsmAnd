@@ -668,7 +668,7 @@
     <string name="route_successfully_saved_at">Ruta je uspješno spremljena kao \'%1$s\'.</string>
     <string name="filename_input">Naziv datoteke: </string>
     <string name="context_menu_item_search">Traži u blizini ovog mjesta</string>
-    <string name="search_position_undefined">Nedefinirano</string>
+    <string name="shared_string_undefined">Nedefinirano</string>
     <string name="search_position_map_view">Posljednje gledano na karti</string>
     <string name="select_search_position">Traži u blizini:</string>
     <string name="search_position_current_location_search">Tražim poziciju-…</string>

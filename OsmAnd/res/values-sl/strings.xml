@@ -427,7 +427,7 @@
     <string name="choose_auto_follow_route_descr">Časovni zamik, preden se položaj samodejno postavi v središče zemljevida.</string>
     <string name="fast_route_mode">Najhitrejša pot</string>
     <string name="fast_route_mode_descr">Izbrana možnost določa izbor najhitrejše poti oziroma poti z najmanjšo porabo goriva.</string>
-    <string name="search_position_undefined">Nedoločeno</string>
+    <string name="shared_string_undefined">Nedoločeno</string>
     <string name="search_position_map_view">Trenutna sredina zemljevida</string>
     <string name="search_position_address">Naslov …</string>
     <string name="city_type_city">Mesto</string>

@@ -465,7 +465,7 @@
     <string name="search_position_current_location_found">Моё местоположение (найдено)</string>
     <string name="search_position_address">Адрес…</string>
     <string name="search_position_favorites">Избранные…</string>
-    <string name="search_position_undefined">Неопределённо</string>
+    <string name="shared_string_undefined">Неопределённо</string>
     <string name="search_position_map_view">Текущий центр карты</string>
     <string name="select_search_position">Начало:</string>
     <string name="context_menu_item_search">Искать рядом</string>

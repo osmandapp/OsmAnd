@@ -27,7 +27,14 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationType.*;
+
 public class MeasurementEditingContext {
+
+	public enum CalculationType {
+		NEXT_SEGMENT,
+		WHOLE_TRACK
+	}
 
 	private OsmandApplication application;
 	private final MeasurementCommandManager commandManager = new MeasurementCommandManager();
@@ -46,6 +53,7 @@ public class MeasurementEditingContext {
 	private boolean inSnapToRoadMode;
 	private boolean needUpdateCacheForSnap;
 	private int calculatedPairs;
+	private CalculationType calculationType = WHOLE_TRACK;
 
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode snapToRoadAppMode;
@@ -106,8 +114,20 @@ public class MeasurementEditingContext {
 		return newGpxData;
 	}
 
+	public boolean isNewData() {
+		return newGpxData == null;
+	}
+
 	public void setNewGpxData(NewGpxData newGpxData) {
 		this.newGpxData = newGpxData;
+	}
+
+	public CalculationType getCalculationType() {
+		return calculationType;
+	}
+
+	public void setCalculationType(CalculationType calculationType) {
+		this.calculationType = calculationType;
 	}
 
 	void setProgressListener(SnapToRoadProgressListener progressListener) {
@@ -121,8 +141,10 @@ public class MeasurementEditingContext {
 	void setSnapToRoadAppMode(ApplicationMode snapToRoadAppMode) {
 		if (this.snapToRoadAppMode != null && snapToRoadAppMode != null
 				&& !this.snapToRoadAppMode.getStringKey().equals(snapToRoadAppMode.getStringKey())) {
-			snappedToRoadPoints.clear();
-			updateCacheForSnapIfNeeded(true);
+			if (calculationType == WHOLE_TRACK) {
+				snappedToRoadPoints.clear();
+				updateCacheForSnapIfNeeded(true);
+			}
 		}
 		this.snapToRoadAppMode = snapToRoadAppMode;
 	}
@@ -306,7 +328,8 @@ public class MeasurementEditingContext {
 	}
 
 	boolean isSnapToRoadTrack() {
-		return !getNewGpxData().getTrkSegment().points.isEmpty()
+		return getNewGpxData() != null && getNewGpxData().getTrkSegment() != null
+				&& !getNewGpxData().getTrkSegment().points.isEmpty()
 				&& !getNewGpxData().getGpxFile().getRoutePoints().isEmpty();
 	}
 

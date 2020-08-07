@@ -377,7 +377,7 @@
     <string name="search_position_current_location_found">我的位置 (找到)</string>
     <string name="search_position_address">地址…</string>
     <string name="search_position_favorites">我的收藏…</string>
-    <string name="search_position_undefined">未定義</string>
+    <string name="shared_string_undefined">未定義</string>
     <string name="search_position_map_view">目前的地圖中心</string>
     <string name="select_search_position">起點：</string>
     <string name="context_menu_item_search">在附近查尋</string>

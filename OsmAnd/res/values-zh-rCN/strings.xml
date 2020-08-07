@@ -571,7 +571,7 @@
     <string name="search_position_current_location_found">我的位置（已找到）</string>
     <string name="search_position_address">地址…</string>
     <string name="search_position_favorites">收藏夹…</string>
-    <string name="search_position_undefined">未定义</string>
+    <string name="shared_string_undefined">未定义</string>
     <string name="search_position_map_view">上次地图显示位置</string>
     <string name="route_successfully_saved_at">路线已成功保存为 \'%1$s\'。</string>
     <string name="filename_input">文件名： </string>

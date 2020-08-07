@@ -346,7 +346,7 @@
     <string name="search_position_current_location_found">המיקום שלי (נמצא)</string>
     <string name="search_position_address">כתובת…</string>
     <string name="search_position_favorites">מועדפים…</string>
-    <string name="search_position_undefined">בלתי מוגדר</string>
+    <string name="shared_string_undefined">בלתי מוגדר</string>
     <string name="search_position_map_view">מרכז המפה הנוכחי</string>
     <string name="select_search_position">מקור:</string>
     <string name="context_menu_item_search">חיפוש בסביבת מקום</string>
