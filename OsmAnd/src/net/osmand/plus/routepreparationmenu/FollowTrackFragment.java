@@ -15,7 +15,6 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 
@@ -38,7 +37,7 @@ import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.ImportTrackCard;
-import net.osmand.plus.routepreparationmenu.cards.SelectTrackToFollowCard;
+import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 
 import org.apache.commons.logging.Log;
@@ -82,6 +81,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	public float getMiddleStateKoef() {
 		return 0.5f;
+	}
+
+	@Override
+	public int getInitialMenuState() {
+		return MenuState.HALF_SCREEN;
 	}
 
 	@Override
@@ -161,7 +165,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			List<String> selectedTrackNames = GpxUiHelper.getSelectedTrackNames(app);
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
 			if (list.size() > 0) {
-				SelectTrackToFollowCard tracksCard = new SelectTrackToFollowCard(mapActivity, list);
+				TracksToFollowCard tracksCard = new TracksToFollowCard(mapActivity, list);
 				tracksCard.setListener(this);
 				cardsContainer.addView(tracksCard.build(mapActivity));
 			}
@@ -261,15 +265,15 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (card instanceof SelectTrackToFollowCard) {
+			if (card instanceof TracksToFollowCard) {
 				if (buttonIndex >= 0) {
-					loadAndFollowTrack((SelectTrackToFollowCard) card, buttonIndex);
+					loadAndFollowTrack((TracksToFollowCard) card, buttonIndex);
 				}
 			}
 		}
 	}
 
-	private void loadAndFollowTrack(SelectTrackToFollowCard card, int index) {
+	private void loadAndFollowTrack(TracksToFollowCard card, int index) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && index < card.getGpxInfoList().size()) {
 			GPXInfo gpxInfo = card.getGpxInfoList().get(index);
@@ -365,7 +369,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		int shadowIconId = isNightMode() ? R.drawable.bg_contextmenu_shadow : R.drawable.bg_contextmenu_shadow;
 		final Drawable shadowIcon = app.getUIUtilities().getIcon(shadowIconId);
 
-		final ScrollView scrollView = getBottomScrollView();
+		final View scrollView = getBottomScrollView();
 		final FrameLayout bottomContainer = getBottomContainer();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
 

@@ -16,7 +16,7 @@
 		android:focusable="false" />
 
 	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/group_name_recycler_view"
+		android:id="@+id/track_categories"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:clipToPadding="false"
@@ -29,12 +29,11 @@
 		tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 		tools:listitem="@layout/point_editor_icon_category_item" />
 
-	<LinearLayout
-		android:id="@+id/items"
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/track_list"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/card_and_list_background_basic"
-		android:orientation="vertical"
-		android:paddingBottom="@dimen/route_info_button_go_margin" />
+		android:layout_height="match_parent"
+		tools:itemCount="5"
+		tools:listitem="@layout/gpx_track_select_item" />
 
 </LinearLayout>

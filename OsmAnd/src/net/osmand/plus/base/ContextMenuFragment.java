@@ -66,9 +66,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	private View view;
 	private OnLayoutChangeListener containerLayoutListener;
 	private View topShadow;
+	private View bottomScrollView;
 	private LinearLayout cardsContainer;
 	private FrameLayout bottomContainer;
-	private LockableScrollView bottomScrollView;
 
 	private boolean portrait;
 	private boolean nightMode;
@@ -241,7 +241,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return bottomContainer;
 	}
 
-	public LockableScrollView getBottomScrollView() {
+	public View getBottomScrollView() {
 		return bottomScrollView;
 	}
 
@@ -278,14 +278,17 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 		mainView = view.findViewById(getMainViewId());
 		topShadow = view.findViewById(getTopShadowViewId());
-		cardsContainer = (LinearLayout) view.findViewById(getCardsContainerViewId());
-		bottomContainer = (FrameLayout) view.findViewById(getBottomContainerViewId());
-		bottomScrollView = (LockableScrollView) view.findViewById(getBottomScrollViewId());
+		cardsContainer = view.findViewById(getCardsContainerViewId());
+		bottomContainer = view.findViewById(getBottomContainerViewId());
+		bottomScrollView = view.findViewById(getBottomScrollViewId());
+
+		if (bottomScrollView instanceof LockableScrollView) {
+			((LockableScrollView) bottomScrollView).setScrollingEnabled(false);
+		}
 
 		ViewConfiguration vc = ViewConfiguration.get(context);
 		final int touchSlop = vc.getScaledTouchSlop();
 
-		bottomScrollView.setScrollingEnabled(false);
 		if (getTopViewId() != 0) {
 			View topView = view.findViewById(getTopViewId());
 			AndroidUtils.setBackground(app, topView, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
