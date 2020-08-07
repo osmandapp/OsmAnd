@@ -192,8 +192,7 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 				AndroidUtils.removeLinkUnderline(pluginDescription);
 
 				OsmandApplication app = getMyApplication();
-				int color = ContextCompat.getColor(PluginsActivity.this,
-						light ? R.color.list_background_color_light : R.color.list_background_color_dark);
+				int color = AndroidUtils.getColorFromAttr(PluginsActivity.this, R.attr.list_background_color);
 				pluginLogo.setImageDrawable(UiUtilities.tintDrawable(plugin.getLogoResource(), color));
 				pluginLogo.setOnClickListener(new View.OnClickListener() {
 					@Override
