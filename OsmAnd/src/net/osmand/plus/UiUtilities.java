@@ -35,6 +35,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
@@ -508,6 +509,20 @@ public class UiUtilities {
 			((TintableCompoundButton) compoundButton).setSupportButtonTintList(csl);
 		}
 		compoundButton.setBackgroundColor(Color.TRANSPARENT);
+	}
+
+	public static void setupToolbarOverflowIcon(Toolbar toolbar, @DrawableRes int iconId, @ColorRes int colorId) {
+		Context ctx = toolbar.getContext();
+		if (ctx != null) {
+			return;
+		}
+		Drawable icon = ContextCompat.getDrawable(ctx, iconId);
+		toolbar.setOverflowIcon(icon);
+		if (icon != null) {
+			int color = ContextCompat.getColor(ctx, colorId);
+			DrawableCompat.setTint(icon.mutate(), color);
+			toolbar.setOverflowIcon(icon);
+		}
 	}
 
 	public static ViewGroup createSliderView(@NonNull Context ctx, boolean nightMode) {

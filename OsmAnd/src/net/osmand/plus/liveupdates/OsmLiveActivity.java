@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -45,7 +46,8 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		getMyApplication().applyTheme(this);
+		OsmandApplication app = getMyApplication();
+		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_livie_updates);
 
@@ -69,6 +71,13 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 			getLastUpdateDateTask = new GetLastUpdateDateTask(this);
 			getLastUpdateDateTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
+
+		boolean nightMode = !app.getSettings().isLightContent();
+		int normalTabColor = ContextCompat.getColor(app,
+				nightMode ? R.color.searchbar_tab_inactive_dark : R.color.searchbar_tab_inactive_light);
+		int selectedTabColor = ContextCompat.getColor(app,
+				nightMode ? R.color.text_color_tab_active_dark : R.color.text_color_tab_active_light);
+		tabLayout.setTabTextColors(normalTabColor, selectedTabColor);
 	}
 
 	@Override
