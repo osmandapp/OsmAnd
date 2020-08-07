@@ -69,6 +69,11 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		return MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
 
+	@Override
+	public int getInitialMenuState() {
+		return MenuState.HALF_SCREEN;
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
