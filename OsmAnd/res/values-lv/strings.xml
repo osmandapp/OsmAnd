@@ -167,7 +167,7 @@
     <string name="search_position_current_location_found">Mana vieta (atrasta)</string>
     <string name="search_position_address">Adrese…</string>
     <string name="search_position_favorites">Izlase…</string>
-    <string name="search_position_undefined">Nedefinēts</string>
+    <string name="shared_string_undefined">Nedefinēts</string>
     <string name="search_position_map_view">Kartes centrs</string>
     <string name="select_search_position">Reģions:</string>
     <string name="context_menu_item_search">Meklēt tuvumā</string>

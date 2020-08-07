@@ -358,7 +358,7 @@
     <string name="search_position_current_location_found">Mein Standort (gefunden)</string>
     <string name="search_position_address">Adresse …</string>
     <string name="search_position_favorites">Favoriten …</string>
-    <string name="search_position_undefined">Undefiniert</string>
+    <string name="shared_string_undefined">Undefiniert</string>
     <!-- string name="search_position_current_location">Aktueller Standort…</string -->
     <string name="search_position_map_view">Aktueller Kartenmittelpunkt</string>
     <string name="select_search_position">Ausgangspunkt:</string>

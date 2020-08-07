@@ -427,7 +427,7 @@
     <string name="search_position_current_location_found">Positionen (fundet)</string>
     <string name="search_position_address">Adresse…</string>
     <string name="search_position_favorites">Favoritter…</string>
-    <string name="search_position_undefined">Ikke defineret</string>
+    <string name="shared_string_undefined">Ikke defineret</string>
     <string name="search_position_map_view">Nuværende kortcenter</string>
     <string name="select_search_position">Udgangspunkt:</string>
     <string name="context_menu_item_search">Søg i nærheden</string>

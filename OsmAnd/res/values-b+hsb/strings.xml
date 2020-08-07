@@ -1090,7 +1090,7 @@
     <string name="animate_route">Simulaciju startować</string>
     <string name="file_can_not_be_renamed">Dataja njehodźi so přemjenować.</string>
     <string name="file_with_name_already_exists">Dataja z tutym mjenom hižo eksistuje.</string>
-    <string name="search_position_undefined">njedefinowane</string>
+    <string name="shared_string_undefined">njedefinowane</string>
     <string name="route_successfully_saved_at">Čara składowana jako \'%1$s\'.</string>
     <string name="local_index_descr_title">Kartowe dataje zrjadować.</string>
     <string name="local_indexes_cat_poi">POI-daty</string>

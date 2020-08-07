@@ -157,7 +157,7 @@
     <string name="search_position_current_location_found">Pozícióm (megtalálva)</string>
     <string name="search_position_address">Cím…</string>
     <string name="search_position_favorites">Kedvencek…</string>
-    <string name="search_position_undefined">Meghatározatlan</string>
+    <string name="shared_string_undefined">Meghatározatlan</string>
     <string name="search_position_map_view">Jelenlegi térképközéppont</string>
     <string name="select_search_position">Eredet:</string>
     <string name="context_menu_item_search">Keresés a közelben</string>

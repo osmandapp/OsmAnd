@@ -94,7 +94,7 @@
     <string name="search_position_current_location_found">Ma position</string>
     <string name="search_position_address">Adresse…</string>
     <string name="search_position_favorites">Favori…</string>
-    <string name="search_position_undefined">Non défini</string>
+    <string name="shared_string_undefined">Non défini</string>
     <string name="search_position_map_view">Centre de la carte</string>
     <string name="select_search_position">Autour de :</string>
     <string name="context_menu_item_search">Rechercher à proximité</string>

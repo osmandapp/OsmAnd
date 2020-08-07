@@ -107,7 +107,7 @@
     <string name="search_position_current_location_found">Mi ubicación (encontrada)</string>
     <string name="search_position_address">Dirección…</string>
     <string name="search_position_favorites">Favoritos…</string>
-    <string name="search_position_undefined">Indefinido</string>
+    <string name="shared_string_undefined">Indefinido</string>
     <string name="search_position_map_view">Vista actual del mapa</string>
     <string name="select_search_position">Origen:</string>
     <string name="context_menu_item_search">Buscar cerca</string>

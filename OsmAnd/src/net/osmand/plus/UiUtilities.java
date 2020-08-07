@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.hardware.Sensor;
@@ -87,6 +88,11 @@ public class UiUtilities {
 		GLOBAL,
 		PROFILE_DEPENDENT,
 		TOOLBAR
+	}
+
+	public enum CustomRadioButtonType {
+		LEFT,
+		RIGHT,
 	}
 
 	public UiUtilities(OsmandApplication app) {
@@ -437,11 +443,44 @@ public class UiUtilities {
 		image.setRotationY(rotation);
 	}
 
+
+	public static void updateCustomRadioButtons(Context app, View buttonsView, boolean nightMode,
+	                                            CustomRadioButtonType buttonType) {
+		int activeColor = ContextCompat.getColor(app, nightMode
+				? R.color.active_color_primary_dark
+				: R.color.active_color_primary_light);
+		int textColor = ContextCompat.getColor(app, nightMode
+				? R.color.text_color_primary_dark
+				: R.color.text_color_primary_light);
+		int radius = AndroidUtils.dpToPx(app, 4);
+
+		TextView leftButtonText = buttonsView.findViewById(R.id.left_button);
+		View leftButtonContainer = buttonsView.findViewById(R.id.left_button_container);
+		TextView rightButtonText = buttonsView.findViewById(R.id.right_button);
+		View rightButtonContainer = buttonsView.findViewById(R.id.right_button_container);
+		GradientDrawable background = new GradientDrawable();
+		background.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
+		background.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(activeColor, 0.5f));
+		if (buttonType == CustomRadioButtonType.LEFT) {
+			background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
+			rightButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			rightButtonText.setTextColor(activeColor);
+			leftButtonContainer.setBackgroundDrawable(background);
+			leftButtonText.setTextColor(textColor);
+		} else {
+			background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
+			rightButtonContainer.setBackgroundDrawable(background);
+			rightButtonText.setTextColor(textColor);
+			leftButtonContainer.setBackgroundColor(Color.TRANSPARENT);
+			leftButtonText.setTextColor(activeColor);
+		}
+	}
+
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
 		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
-		int[][] states = new int[][] {
-				new int[] {-android.R.attr.state_checked},
-				new int[] {android.R.attr.state_checked}
+		int[][] states = new int[][]{
+				new int[]{-android.R.attr.state_checked},
+				new int[]{android.R.attr.state_checked}
 		};
 		ColorStateList csl = new ColorStateList(states, new int[]{inactiveColor, activeColor});
 		DrawableCompat.setTintList(DrawableCompat.wrap(drawable), csl);
@@ -717,18 +756,23 @@ public class UiUtilities {
 		int contentPadding = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		int contentPaddingHalf = themedCtx.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
 		int defaultListTextSize = themedCtx.getResources().getDimensionPixelSize(R.dimen.default_list_text_size);
+		int standardIconSize = themedCtx.getResources().getDimensionPixelSize(R.dimen.standard_icon_size);
+		boolean hasIcon = false;
 
 		List<String> titles = new ArrayList<>();
 		for (SimplePopUpMenuItem item : items) {
 			titles.add(String.valueOf(item.getTitle()));
+			hasIcon = hasIcon || item.getIcon() != null;
 		}
 		float itemWidth = AndroidUtils.getTextMaxWidth(defaultListTextSize, titles) + contentPadding;
+		float iconPartWidth = hasIcon ? standardIconSize + contentPaddingHalf : 0;
+		int totalWidth = (int) (Math.max(itemWidth, minWidth) + iconPartWidth);
 
 		SimplePopUpMenuItemAdapter adapter =
 				new SimplePopUpMenuItemAdapter(themedCtx, R.layout.popup_menu_item, items);
 		final ListPopupWindow listPopupWindow = new ListPopupWindow(themedCtx);
 		listPopupWindow.setAnchorView(v);
-		listPopupWindow.setContentWidth((int) (Math.max(itemWidth, minWidth)));
+		listPopupWindow.setContentWidth((int) (totalWidth));
 		listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
 		listPopupWindow.setVerticalOffset(-v.getHeight() + contentPaddingHalf);
 		listPopupWindow.setModal(true);

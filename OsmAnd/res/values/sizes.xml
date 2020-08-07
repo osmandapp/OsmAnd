@@ -263,6 +263,7 @@
 	<dimen name="measurement_tool_button_padding">8dp</dimen>
 	<dimen name="measurement_tool_button_padding_top">10dp</dimen>
 	<dimen name="measurement_tool_button_height">36dp</dimen>
+	<dimen name="measurement_tool_options_divider_margin_start">72dp</dimen>
 	<dimen name="bottom_sheet_title_height">52dp</dimen>
 	<dimen name="bottom_sheet_descr_height">44dp</dimen>
 	<dimen name="bottom_sheet_list_item_height">48dp</dimen>

@@ -227,7 +227,7 @@
     <string name="search_position_current_location_found">Min posisjon (funnet)</string>
     <string name="search_position_address">Adresse…</string>
     <string name="search_position_favorites">Favoritter…</string>
-    <string name="search_position_undefined">Udefinert</string>
+    <string name="shared_string_undefined">Udefinert</string>
     <string name="search_position_map_view">Gjeldende kartsenter</string>
     <string name="select_search_position">Utgangspunkt:</string>
     <string name="context_menu_item_search">Søk i nærheten</string>

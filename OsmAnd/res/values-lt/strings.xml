@@ -239,7 +239,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="search_position_current_location_found">Mano vieta (rasta)</string>
     <string name="search_position_address">Adresas…</string>
     <string name="search_position_favorites">Įsimintos…</string>
-    <string name="search_position_undefined">Nenurodyta</string>
+    <string name="shared_string_undefined">Nenurodyta</string>
     <string name="search_position_map_view">Esamo žemėlapio centras</string>
     <string name="select_search_position">Pradžia:</string>
     <string name="context_menu_item_search">Ieškoti aplink</string>

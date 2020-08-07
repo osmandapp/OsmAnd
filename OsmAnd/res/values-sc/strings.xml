@@ -843,7 +843,7 @@
     <string name="update_poi_file_not_found">Su documentu pro registrare sas modìficas de sos PDI no est istadu ne agatadu nen creadu.</string>
     <string name="map_version_changed_info">Iscàrriga sa versione noa de s\'aplicatzione pro pòdere impreare sos documentos de sa mapa noos.</string>
     <string name="shared_string_rename">Càmbia su nùmene</string>
-    <string name="search_position_undefined">Non dessinidu</string>
+    <string name="shared_string_undefined">Non dessinidu</string>
     <string name="search_position_map_view">Tzentru atuale de sa mapa</string>
     <string name="local_index_mi_upload_gpx">Imbia ad OSM</string>
     <string name="favourites_delete_multiple_succesful">Puntos preferidos iscantzellados.</string>

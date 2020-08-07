@@ -132,7 +132,7 @@
 	
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_position_address">Adresa …</string>
-	<string name="search_position_undefined">Neodređeno</string>
+	<string name="shared_string_undefined">Neodređeno</string>
 	
 	<string name="layer_map_appearance">Konfiguracija ekrana</string>
 	<string name="show_lanes">Prikaži trake</string>
