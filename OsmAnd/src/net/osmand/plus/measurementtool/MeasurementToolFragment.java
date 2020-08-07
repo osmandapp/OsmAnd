@@ -74,8 +74,8 @@ import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
@@ -90,19 +90,17 @@ import java.util.List;
 import java.util.Locale;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.measurementtool.GpxApproximationFragment.*;
+import static net.osmand.plus.measurementtool.GpxApproximationFragment.GpxApproximationFragmentListener;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationType;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.ExportAsGpxListener;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.SnapToRoadProgressListener;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
-import static net.osmand.plus.measurementtool.SnapTrackWarningBottomSheet.SnapTrackWarningListener;
 import static net.osmand.plus.measurementtool.StartPlanRouteBottomSheet.StartPlanRouteListener;
 
-public class MeasurementToolFragment extends BaseOsmAndFragment
-		implements RouteBetweenPointsFragmentListener, GpxApproximationFragmentListener, OptionsFragmentListener,
-		SnapTrackWarningListener {
+public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
+		GpxApproximationFragmentListener, OptionsFragmentListener {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 
@@ -607,7 +605,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 		}
 	}
 
-	private void showRouteBetweenPointsMenu(boolean rememberPreviousTitle) {
+	private void startSnapToRoad(boolean rememberPreviousTitle) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (rememberPreviousTitle) {
@@ -615,31 +613,40 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 			}
 			toolBarController.setTitle(getString(R.string.route_between_points));
 			mapActivity.refreshMap();
+
+			if (editingCtx.hasRoutePoints()) {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						this, editingCtx.getCalculationType(),
 						editingCtx.getSnapToRoadAppMode());
+			} else {
+				SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
+			}
 		}
 	}
 
 	@Override
-	public void continueButtonOnClick() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-
-			GpxApproximationFragment.showInstance(mapActivity.getSupportFragmentManager(),
-					MeasurementToolFragment.this);
+	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == SnapTrackWarningBottomSheet.REQUEST_CODE) {
+			switch (resultCode) {
+				case SnapTrackWarningBottomSheet.CANCEL_REQUEST_CODE:
+					toolBarController.setSaveViewVisible(true);
+					updateToolbar();
+					break;
+				case SnapTrackWarningBottomSheet.CONTINUE_REQUEST_CODE:
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						GpxApproximationFragment.showInstance(mapActivity.getSupportFragmentManager(),
+								MeasurementToolFragment.this);
+					}
+					break;
+			}
 		}
-	}
-
-	@Override
-	public void dismissButtonOnClick() {
-		toolBarController.setSaveViewVisible(true);
-		updateToolbar();
 	}
 
 	@Override
 	public void snapToRoadOnCLick() {
-		showRouteBetweenPointsMenu(true);
+		startSnapToRoad(true);
 	}
 
 	@Override
@@ -780,7 +787,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onDestroyView(boolean snapToRoadEnabled) {
+	public void onCloseRouteDialog(boolean snapToRoadEnabled) {
 		if (!snapToRoadEnabled && !editingCtx.isInSnapToRoadMode()) {
 			toolBarController.setTitle(previousToolBarTitle);
 			MapActivity mapActivity = getMapActivity();
@@ -791,7 +798,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onApplicationModeItemClick(ApplicationMode mode) {
+	public void onChangeApplicationMode(ApplicationMode mode) {
 		if (mode == null) {
 			disableSnapToRoadMode();
 			editingCtx.setSnapToRoadAppMode(null);
@@ -802,7 +809,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onCalculationTypeChanges(CalculationType calculationType) {
+	public void onChangeCalculationType(CalculationType calculationType) {
 		editingCtx.setCalculationType(calculationType);
 	}
 
@@ -1010,7 +1017,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment
 			snapToRoadBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					showRouteBetweenPointsMenu(false);
+					startSnapToRoad(false);
 				}
 			});
 			snapToRoadBtn.setVisibility(View.VISIBLE);

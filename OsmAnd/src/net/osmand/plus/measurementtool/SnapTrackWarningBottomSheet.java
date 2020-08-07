@@ -22,6 +22,10 @@ import org.apache.commons.logging.Log;
 
 public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 
+	public static final int REQUEST_CODE = 1000;
+	public static final int CANCEL_REQUEST_CODE = 2;
+	public static final int CONTINUE_REQUEST_CODE = 3;
+
 	public static final String TAG = SnapTrackWarningBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SnapTrackWarningBottomSheet.class);
 
@@ -53,8 +57,8 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	protected void onRightBottomButtonClick() {
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof SnapTrackWarningListener) {
-			((SnapTrackWarningListener) fragment).continueButtonOnClick();
+		if (fragment != null) {
+			fragment.onActivityResult(REQUEST_CODE, CONTINUE_REQUEST_CODE, null);
 		}
 		dismiss();
 	}
@@ -72,8 +76,8 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 			activity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.VISIBLE);
 		}
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof SnapTrackWarningListener) {
-			((SnapTrackWarningListener) fragment).dismissButtonOnClick();
+		if (fragment != null) {
+			fragment.onActivityResult(REQUEST_CODE, CANCEL_REQUEST_CODE, null);
 		}
 	}
 
@@ -81,7 +85,7 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 		try {
 			if (!fm.isStateSaved()) {
 				SnapTrackWarningBottomSheet fragment = new SnapTrackWarningBottomSheet();
-				fragment.setTargetFragment(targetFragment, 0);
+				fragment.setTargetFragment(targetFragment, REQUEST_CODE);
 				fm.beginTransaction()
 						.add(R.id.bottomFragmentContainer, fragment, TAG)
 						.commitAllowingStateLoss();
@@ -89,13 +93,5 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
-	}
-
-	interface SnapTrackWarningListener {
-
-		void continueButtonOnClick();
-
-		void dismissButtonOnClick();
-
 	}
 }

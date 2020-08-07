@@ -106,7 +106,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 					snapToRoadEnabled = true;
 					Fragment fragment = getTargetFragment();
 					if (fragment instanceof RouteBetweenPointsFragmentListener) {
-						((RouteBetweenPointsFragmentListener) fragment).onApplicationModeItemClick(mode);
+						((RouteBetweenPointsFragmentListener) fragment).onChangeApplicationMode(mode);
 					}
 				}
 				dismiss();
@@ -160,7 +160,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 		setCalculationType(calculationType);
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof RouteBetweenPointsFragmentListener) {
-			((RouteBetweenPointsFragmentListener) fragment).onCalculationTypeChanges(calculationType);
+			((RouteBetweenPointsFragmentListener) fragment).onChangeCalculationType(calculationType);
 		}
 	}
 
@@ -203,7 +203,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	public void onDestroyView() {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof RouteBetweenPointsFragmentListener) {
-			((RouteBetweenPointsFragmentListener) fragment).onDestroyView(snapToRoadEnabled);
+			((RouteBetweenPointsFragmentListener) fragment).onCloseRouteDialog(snapToRoadEnabled);
 		}
 		super.onDestroyView();
 	}
@@ -231,10 +231,10 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 
 	public interface RouteBetweenPointsFragmentListener {
 
-		void onDestroyView(boolean snapToRoadEnabled);
+		void onCloseRouteDialog(boolean snapToRoadEnabled);
 
-		void onApplicationModeItemClick(ApplicationMode mode);
+		void onChangeApplicationMode(ApplicationMode mode);
 
-		void onCalculationTypeChanges(CalculationType calculationType);
+		void onChangeCalculationType(CalculationType calculationType);
 	}
 }

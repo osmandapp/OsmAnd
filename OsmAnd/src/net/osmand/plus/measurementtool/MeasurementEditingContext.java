@@ -122,6 +122,10 @@ public class MeasurementEditingContext {
 		this.newGpxData = newGpxData;
 	}
 
+	public boolean hasRoutePoints() {
+		return newGpxData != null && newGpxData.getGpxFile() != null && newGpxData.getGpxFile().hasRtePt();
+	}
+
 	public CalculationType getCalculationType() {
 		return calculationType;
 	}
