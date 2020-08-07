@@ -2379,7 +2379,7 @@
     <string name="yesterday">Вчера</string>
     <string name="last_seven_days">За последние 7 дней</string>
     <string name="this_year">В этом году</string>
-    <string name="plan_route">План маршрута</string>
+    <string name="plan_route">Планирование маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
     <string name="marker_save_as_track">Сохранить как файл GPX</string>
     <string name="move_to_history">Переместить в историю</string>
