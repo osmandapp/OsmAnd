@@ -7,8 +7,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -32,8 +32,21 @@ public class TrackEditCard extends BaseCard {
 		return R.layout.gpx_track_item;
 	}
 
-	private GpxDataItem getDataItem(GpxUiHelper.GPXInfo info) {
-		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()));
+	private GpxDataItem getDataItem(final GPXInfo info) {
+		GpxDataItemCallback itemCallback = new GpxDataItemCallback() {
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+
+			@Override
+			public void onGpxDataItemReady(GpxDataItem item) {
+				if (item != null) {
+					updateContent();
+				}
+			}
+		};
+		return app.getGpxDbHelper().getItem(new File(info.getFileName()), itemCallback);
 	}
 
 	@Override

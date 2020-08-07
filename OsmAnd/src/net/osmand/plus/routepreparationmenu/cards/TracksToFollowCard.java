@@ -33,6 +33,11 @@ public class TracksToFollowCard extends BaseCard {
 		gpxInfoCategories = getGpxInfoCategories();
 	}
 
+	public void setGpxInfoList(List<GPXInfo> gpxInfoList) {
+		this.gpxInfoList = gpxInfoList;
+		gpxInfoCategories = getGpxInfoCategories();
+	}
+
 	public List<GPXInfo> getGpxInfoList() {
 		return gpxInfoList;
 	}

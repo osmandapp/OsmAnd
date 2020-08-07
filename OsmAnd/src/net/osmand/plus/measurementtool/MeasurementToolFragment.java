@@ -460,7 +460,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		initMeasurementMode(newGpxData);
 
-		if (planRouteMode && savedInstanceState == null) {
+		if (editingCtx.isNewData() && planRouteMode && savedInstanceState == null) {
 			StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
 					createStartPlanRouteListener());
 		}
@@ -1790,6 +1790,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public static boolean showInstance(FragmentManager fragmentManager, LatLon initialPoint) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setInitialPoint(initialPoint);
+		return showFragment(fragment, fragmentManager);
+	}
+
+	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx, boolean planRoute) {
+		MeasurementToolFragment fragment = new MeasurementToolFragment();
+		fragment.setEditingCtx(editingCtx);
+		fragment.setPlanRouteMode(planRoute);
 		return showFragment(fragment, fragmentManager);
 	}
 

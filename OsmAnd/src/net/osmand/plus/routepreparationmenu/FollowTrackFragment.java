@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -179,15 +180,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				importTrackCard.setListener(this);
 				cardsContainer.addView(importTrackCard.build(mapActivity));
 
-				File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-				List<String> selectedTrackNames = GpxUiHelper.getSelectedTrackNames(app);
-				List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
-				if (list.size() > 0) {
-					String defaultCategory = app.getString(R.string.shared_string_all);
-					TracksToFollowCard tracksCard = new TracksToFollowCard(mapActivity, list, defaultCategory);
-					tracksCard.setListener(this);
-					cardsContainer.addView(tracksCard.build(mapActivity));
-				}
+				setupTracksCard();
 			} else {
 				File file = new File(gpxFile.path);
 				GPXInfo gpxInfo = new GPXInfo(gpxFile.path, file.lastModified(), file.length());
@@ -214,22 +207,43 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 						reverseTrackCard.setListener(this);
 						cardsContainer.addView(reverseTrackCard.build(mapActivity));
 					}
-
 					if (!rparams.isUseIntermediatePointsRTE()) {
-						int passRouteId = R.string.gpx_option_from_start_point;
-						LocalRoutingParameter passWholeRoute = new OtherLocalRoutingParameter(passRouteId,
-								app.getString(passRouteId), rparams.isPassWholeRoute());
-
-						int navigationTypeId = R.string.gpx_option_calculate_first_last_segment;
-						LocalRoutingParameter navigationType = new OtherLocalRoutingParameter(navigationTypeId,
-								app.getString(navigationTypeId), rparams.isCalculateOsmAndRouteParts());
-
-						NavigateTrackOptionsCard navigateTrackCard = new NavigateTrackOptionsCard(mapActivity, passWholeRoute, navigationType);
-						navigateTrackCard.setListener(this);
-						cardsContainer.addView(navigateTrackCard.build(mapActivity));
+						setupNavigateOptionsCard(rparams);
 					}
 				}
 			}
+		}
+	}
+
+	private void setupTracksCard() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+			List<String> selectedTrackNames = GpxUiHelper.getSelectedTrackNames(app);
+			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
+			if (list.size() > 0) {
+				String defaultCategory = app.getString(R.string.shared_string_all);
+				TracksToFollowCard tracksCard = new TracksToFollowCard(mapActivity, list, defaultCategory);
+				tracksCard.setListener(FollowTrackFragment.this);
+				getCardsContainer().addView(tracksCard.build(mapActivity));
+			}
+		}
+	}
+
+	private void setupNavigateOptionsCard(GPXRouteParamsBuilder rparams) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			int passRouteId = R.string.gpx_option_from_start_point;
+			LocalRoutingParameter passWholeRoute = new OtherLocalRoutingParameter(passRouteId,
+					app.getString(passRouteId), rparams.isPassWholeRoute());
+
+			int navigationTypeId = R.string.gpx_option_calculate_first_last_segment;
+			LocalRoutingParameter navigationType = new OtherLocalRoutingParameter(navigationTypeId,
+					app.getString(navigationTypeId), rparams.isCalculateOsmAndRouteParts());
+
+			NavigateTrackOptionsCard navigateTrackCard = new NavigateTrackOptionsCard(mapActivity, passWholeRoute, navigationType);
+			navigateTrackCard.setListener(this);
+			getCardsContainer().addView(navigateTrackCard.build(mapActivity));
 		}
 	}
 
@@ -326,7 +340,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				importTrack();
 			} else if (card instanceof TrackEditCard) {
 				editTrack();
-				dismiss();
+				close();
 			} else if (card instanceof SelectTrackCard) {
 				updateSelectionMode(true);
 			} else if (card instanceof ReverseTrackCard
@@ -411,12 +425,15 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
 					@Override
 					public void onComplete(boolean success) {
+						if (success) {
+//							setupTracksCard();
+						} else {
+							app.showShortToastMessage(app.getString(R.string.error_occurred_loading_gpx));
+						}
 						importHelper.setGpxImportCompleteListener(null);
 					}
 				});
-				if (!importHelper.handleGpxImport(uri, false, false)) {
-					log.debug("import completed!");
-				}
+				importHelper.handleGpxImport(uri, true, false);
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);
@@ -433,7 +450,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 			MeasurementEditingContext editingContext = new MeasurementEditingContext();
 			editingContext.setNewGpxData(newGpxData);
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext);
+			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true);
 		}
 	}
 
@@ -487,5 +504,17 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				}
 			}
 		});
+	}
+
+	private void close() {
+		try {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+				fragmentManager.beginTransaction().remove(this).commitAllowingStateLoss();
+			}
+		} catch (Exception e) {
+			log.error(e);
+		}
 	}
 }
