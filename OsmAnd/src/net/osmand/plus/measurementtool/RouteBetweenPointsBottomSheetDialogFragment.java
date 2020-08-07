@@ -101,13 +101,14 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 			@Override
 			public void onClick(View view) {
 				snapToRoadEnabled = false;
+				ApplicationMode mode = null;
 				if ((int) view.getTag() != STRAIGHT_LINE_TAG) {
-					ApplicationMode mode = modes.get((int) view.getTag());
+					mode = modes.get((int) view.getTag());
 					snapToRoadEnabled = true;
-					Fragment fragment = getTargetFragment();
-					if (fragment instanceof RouteBetweenPointsFragmentListener) {
-						((RouteBetweenPointsFragmentListener) fragment).onChangeApplicationMode(mode);
-					}
+				}
+				Fragment fragment = getTargetFragment();
+				if (fragment instanceof RouteBetweenPointsFragmentListener) {
+					((RouteBetweenPointsFragmentListener) fragment).onChangeApplicationMode(mode);
 				}
 				dismiss();
 			}
