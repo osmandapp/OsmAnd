@@ -28,14 +28,17 @@ import org.apache.commons.logging.Log;
 import static net.osmand.plus.measurementtool.ProfileCard.*;
 import static net.osmand.plus.measurementtool.SliderCard.*;
 
-public class GpxApproximationFragment extends ContextMenuScrollFragment implements SliderCardListener, ProfileCardListener {
+public class GpxApproximationFragment extends ContextMenuScrollFragment
+		implements SliderCardListener, ProfileCardListener {
 
 	private static final Log LOG = PlatformUtil.getLog(GpxApproximationFragment.class);
 	public static final String TAG = GpxApproximationFragment.class.getSimpleName();
+	public static final String DISTANCE_THRESHOLD_KEY = "distance_threshold";
+	public static final String SNAP_TO_ROAD_APP_MODE_STRING_KEY = "snap_to_road_app_mode";
 
 	private int menuTitleHeight;
-	private ApplicationMode snapToRoadAppMode;
-	private int distanceThreshold;
+	private ApplicationMode snapToRoadAppMode = ApplicationMode.CAR;
+	private int distanceThreshold = 30;
 
 	@Override
 	public int getMainLayoutId() {
@@ -73,6 +76,11 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment implemen
 		if (mainView == null) {
 			return null;
 		}
+		if (savedInstanceState != null) {
+			distanceThreshold = savedInstanceState.getInt(DISTANCE_THRESHOLD_KEY);
+			snapToRoadAppMode = ApplicationMode.valueOfStringKey(
+					savedInstanceState.getString(SNAP_TO_ROAD_APP_MODE_STRING_KEY), ApplicationMode.CAR);
+		}
 
 		if (isPortrait()) {
 			updateCardsLayout();
@@ -97,6 +105,13 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment implemen
 		menuTitleHeight = view.findViewById(R.id.control_buttons).getHeight()
 				- view.findViewById(R.id.buttons_shadow).getHeight();
 		super.calculateLayout(view, initLayout);
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(DISTANCE_THRESHOLD_KEY, distanceThreshold);
+		outState.putString(SNAP_TO_ROAD_APP_MODE_STRING_KEY, snapToRoadAppMode.getStringKey());
 	}
 
 	@Override
@@ -169,12 +184,11 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment implemen
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
 
-			SliderCard sliderCard = new SliderCard(mapActivity);
+			SliderCard sliderCard = new SliderCard(mapActivity, distanceThreshold);
 			sliderCard.setListener(this);
 			cardsContainer.addView(sliderCard.build(mapActivity));
 
-
-			ProfileCard profileCard = new ProfileCard(mapActivity);
+			ProfileCard profileCard = new ProfileCard(mapActivity, snapToRoadAppMode);
 			profileCard.setListener(this);
 			cardsContainer.addView(profileCard.build(mapActivity));
 		}

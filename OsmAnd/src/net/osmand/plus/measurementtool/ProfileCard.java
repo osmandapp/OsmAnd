@@ -22,8 +22,9 @@ public class ProfileCard extends BaseCard {
 	private ApplicationMode selectedMode;
 	private ProfileCardListener listener;
 
-	public ProfileCard(MapActivity mapActivity) {
+	public ProfileCard(MapActivity mapActivity, ApplicationMode selectedMode) {
 		super(mapActivity);
+		this.selectedMode = selectedMode;
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class ProfileCard extends BaseCard {
 				@Override
 				public void onClick(View v) {
 					RadioButton selectedProfile = v.findViewById(R.id.compound_button);
-					selectedMode = modes.get((Integer) v.getTag());
+					selectedMode = ApplicationMode.valueOfStringKey((String) v.getTag(), ApplicationMode.CAR);
 					clearChecked();
 					selectedProfile.setChecked(true);
 					if (listener != null) {
@@ -55,19 +56,19 @@ public class ProfileCard extends BaseCard {
 
 				private void clearChecked() {
 					for (int i = 0; i < modes.size(); i++) {
-						RadioButton profile = view.findViewWithTag(i).findViewById(R.id.compound_button);
+						RadioButton profile = view.findViewWithTag(modes.get(i).getStringKey())
+								.findViewById(R.id.compound_button);
 						profile.setChecked(false);
 					}
 				}
 			};
-			addProfileView(container, onClickListener, i, icon, title);
+			addProfileView(container, onClickListener, mode.getStringKey(), icon, title);
 		}
 		resetSelected(modes);
 	}
 
 	private void resetSelected(List<ApplicationMode> modes) {
-		selectedMode = modes.get(0);
-		((RadioButton) view.findViewWithTag(0).findViewById(R.id.compound_button)).setChecked(true);
+		((RadioButton) view.findViewWithTag(selectedMode.getStringKey()).findViewById(R.id.compound_button)).setChecked(true);
 	}
 
 	private void addProfileView(LinearLayout container, View.OnClickListener onClickListener, Object tag,

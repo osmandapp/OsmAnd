@@ -14,12 +14,12 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
 public class SliderCard extends BaseCard {
 
-	public static final int DEFAULT_VALUE = 30;
-
+	private int initValue;
 	private SliderCardListener listener;
 
-	public SliderCard(MapActivity mapActivity) {
+	public SliderCard(MapActivity mapActivity, int initValue) {
 		super(mapActivity);
+		this.initValue = initValue;
 	}
 
 	@Override
@@ -30,12 +30,12 @@ public class SliderCard extends BaseCard {
 	@Override
 	protected void updateContent() {
 		final TextView thresholdDistanceValue = view.findViewById(R.id.value);
-		thresholdDistanceValue.setText(getStringValueWithMetric(DEFAULT_VALUE));
+		thresholdDistanceValue.setText(getStringValueWithMetric(initValue));
 		TextView thresholdDistance = view.findViewById(R.id.title);
 		thresholdDistance.setText(R.string.threshold_distance);
 		Slider slider = view.findViewById(R.id.slider);
 		slider.setValueFrom(0);
-		slider.setValue(DEFAULT_VALUE);
+		slider.setValue(initValue);
 		slider.setValueTo(100);
 		slider.setStepSize(5);
 		UiUtilities.setupSlider(slider, nightMode, ContextCompat.getColor(view.getContext(),

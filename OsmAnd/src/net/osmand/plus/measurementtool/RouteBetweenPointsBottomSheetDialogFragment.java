@@ -63,6 +63,9 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 			snapToRoadAppMode = ApplicationMode.valueOfStringKey(args.getString(ROUTE_APP_MODE_KEY), null);
 			calculationType = (CalculationType) args.get(CALCULATION_TYPE_KEY);
 		}
+		if (savedInstanceState != null) {
+			calculationType = (CalculationType) savedInstanceState.get(CALCULATION_TYPE_KEY);
+		}
 		OsmandApplication app = requiredMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		FragmentActivity activity = requireActivity();
@@ -188,6 +191,12 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 				window.setAttributes(params);
 			}
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putSerializable(CALCULATION_TYPE_KEY, calculationType);
 	}
 
 	@Override
