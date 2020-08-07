@@ -543,17 +543,17 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onParametersChanged(ApplicationMode mode, int distanceThreshold) {
+	public void onChangeGpxApproxDistanceThreshold(ApplicationMode mode, int distanceThreshold) {
 
 	}
 
 	@Override
-	public void applyButtonOnClick(ApplicationMode mode, int distanceThreshold) {
+	public void onApplyGpxApproximation(ApplicationMode mode, int distanceThreshold) {
 
 	}
 
 	@Override
-	public void cancelButtonOnClick() {
+	public void onCancelGpxApproximation() {
 
 	}
 
@@ -614,7 +614,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			toolBarController.setTitle(getString(R.string.route_between_points));
 			mapActivity.refreshMap();
 
-			if (editingCtx.hasRoutePoints()) {
+			if (editingCtx.isNewData() || editingCtx.hasRoutePoints()) {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						this, editingCtx.getCalculationType(),
 						editingCtx.getSnapToRoadAppMode());
@@ -636,8 +636,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				case SnapTrackWarningBottomSheet.CONTINUE_REQUEST_CODE:
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
-						GpxApproximationFragment.showInstance(mapActivity.getSupportFragmentManager(),
-								MeasurementToolFragment.this);
+						GpxApproximationFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
 					}
 					break;
 			}
