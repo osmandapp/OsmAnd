@@ -3526,4 +3526,107 @@
 \nΕπιλέξτε μια ενέργεια.</string>
     <string name="import_duplicates_title">Μερικά αντικείμενα υπάρχουν ήδη</string>
     <string name="select_data_to_import">Επιλέξτε τα δεδομένα για εισαγωγή.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Κάθε οδηγία πλοήγησης θα ενεργοποιεί την οθόνη.</string>
+    <string name="turn_screen_on_navigation_instructions">Οδηγίες πλοήγησης</string>
+    <string name="turn_screen_on_power_button_disabled">Απενεργοποιημένο. Απαιτεί \'Διατήρηση αναμμένης οθόνης\' στο \'Λήξη χρόνου μετά την έναρξη\'.</string>
+    <string name="turn_screen_on_power_button_descr">Πατώντας το πλήκτρο ισχύος της συσκευής θα ενεργοποιήσει την οθόνη με το OsmAnd στην κορυφή της οθόνης κλειδώματος.</string>
+    <string name="turn_screen_on_power_button">Πλήκτρο ισχύος</string>
+    <string name="turn_screen_on_proximity_sensor">Ανιχνευτής εγγύτητας</string>
+    <string name="turn_screen_on_wake_time_descr">Επιλέξτε το χρονικό όριο της οθόνης μετά την έναρξη. (το \"%1$s\" δεν εφαρμόζει χρονικό όριο.)</string>
+    <string name="keep_screen_on">Διατήρηση αναμμένης οθόνης</string>
+    <string name="keep_screen_off">Διατήρηση σβηστής οθόνης</string>
+    <string name="pseudo_mercator_projection">Ψευδομερκατορική προβολή</string>
+    <string name="one_image_per_tile">Ένα αρχείο εικόνας ανά πλακίδιο</string>
+    <string name="sqlite_db_file">Αρχείο SQLiteDB</string>
+    <string name="online_map_name_helper_text">Ονομάστε τον διαδικτυακό πηγαίο χάρτη.</string>
+    <string name="online_map_url_helper_text">Εισάγετε ή επικολλήστε το URL για τη διαδικτυακή πηγή.</string>
+    <string name="edit_online_source">Επεξεργασία διαδικτυακής πηγής</string>
+    <string name="expire_time">Χρόνος λήξης</string>
+    <string name="mercator_projection">Μερκατορική προβολή</string>
+    <string name="storage_format">Μορφή αποθήκευσης</string>
+    <string name="map_source_zoom_levels">Ορίστε ελάχιστο και μέγιστο επίπεδο εστίασης για να εμφανίσετε ή να φορτώσετε τον διαδικτυακό χάρτη.</string>
+    <string name="map_source_zoom_levels_descr">Επηρεάζει την οθόνη όταν χρησιμοποιείται ως χάρτης ή επικάλυψη/υπόστρωμα.
+\n
+\n%1$s: Ο χάρτης περιορίζεται στην επιλεγμένη περιοχή επιπέδου εστίασης.
+\n
+\n%2$s είναι τα επίπεδα στα οποία τα αρχικά πλακίδια θα είναι ορατά, κλιμάκωση προς τα πάνω ή τα κάτω θα συμβεί εκτός αυτών των τιμών.</string>
+    <string name="expire_time_descr">Τα πλακίδια κρυφής μνήμης θα επαναφορτωθούν μετά τον καθορισμένο αριθμό λεπτών. Αφήστε αυτό το πεδίο κενό για να μην ανανεώνετε ποτέ πλακίδια από αυτήν την πηγή.
+\n
+\nΜία μέρα είναι 1440 λεπτά.
+\nΜία εβδομάδα είναι 10 080 λεπτά.
+\nΈνας μήνας είναι 43 829 λεπτά.</string>
+    <string name="tiles_storage_descr">Επιλέξτε πώς θα αποθηκεύσετε τα μεταφορτωνόμενα πλακίδια.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Μπορείτε να εξάγετε ή να εισάγετε γρήγορες ενέργειες με κατατομές (προφίλ) εφαρμογών.</string>
+    <string name="shared_string_delete_all_q">Να διαγραφούν όλα;</string>
+    <string name="delete_all_actions_message_q">Είσαστε σίγουροι ότι θέλετε να διαγράψετε οριστικά %d γρήγορες ενέργειες;</string>
+    <string name="screen_timeout">Χρόνος καθυστέρησης οθόνης</string>
+    <string name="uninstall_speed_cameras">Απεγκατάσταση καμερών ταχύτητας</string>
+    <string name="shared_string_legal">Νομικά</string>
+    <string name="speed_camera_pois">Κάμερα ταχύτητας Σ.Ε.</string>
+    <string name="speed_cameras_legal_descr">Σε κάποιες χώρες ή περιοχές, η χρήση εφαρμογών προειδοποίησης κάμερας ασφαλείας απαγορεύεται από τον νόμο.
+\n
+\nΧρειάζεται να κάνετε μια επιλογή ανάλογα με τον νόμο της χώρας σας.
+\n
+\nΕπιλέξτε %1$s και θα πάρετε προειδοποιήσεις για τις κάμερες ασφαλείας.
+\n
+\nΕπιλέξτε %2$s. Όλα τα δεδομένα που σχετίζονται με κάμερες ταχύτητας: προειδοποιήσεις, ανακοινώσεις, Σ.Ε. θα διαγραφούν μέχρι να επανεγκατασταθεί πλήρως το OsmAnd.</string>
+    <string name="keep_active">Διατήρηση ενεργότητας</string>
+    <string name="shared_string_uninstall">Απεγκατάσταση</string>
+    <string name="speed_cameras_alert">Οι προειδοποιήσεις καμερών ταχύτητας απαγορεύονται από τον νόμο σε κάποιες χώρες.</string>
+    <string name="screen_timeout_descr">Εάν το \"%1$s\" είναι ενεργό, ο χρόνος δραστηριότητας θα εξαρτάται από αυτό.</string>
+    <string name="default_screen_timeout">Προεπιλεγμένος χρόνος αναμονής οθόνης</string>
+    <string name="shared_string_tones">τόνοι</string>
+    <string name="shared_string_meters">Μέτρα</string>
+    <string name="details_dialog_decr">Εμφάνιση ή απόκρυψη πρόσθετων λεπτομερειών χάρτη</string>
+    <string name="shared_string_night_map">Χάρτης νύχτας</string>
+    <string name="add_online_source">Προσθήκη διαδικτυακής πηγής</string>
+    <string name="clear_tiles_warning">Η εφαρμογή αυτών των αλλαγών θα καθαρίσει τα κρυμμένα δεδομένα της πηγής πλακιδίου</string>
+    <string name="vessel_height_warning_link">Ορισμός ύψους σκάφους</string>
+    <string name="vessel_height_warning">Μπορείτε να ορίσετε ύψος σκάφους για να αποφύγετε χαμηλές γέφυρες. Σημειώστε ότι εάν η γέφυρα είναι κινητή, θα χρησιμοποιηθεί το ύψος της ανοικτής κατάστασης.</string>
+    <string name="vessel_height_limit_description">Ορίστε ύψος σκάφος για αποφυγή χαμηλών γεφυρών. Σημειώστε ότι εάν η γέφυρα είναι κινητή, θα χρησιμοποιηθεί το ύψος της στην ανοικτή κατάσταση.</string>
+    <string name="vessel_width_limit_description">Ορίστε πλάτος σκάφους για αποφυγή στενών γεφυρών</string>
+    <string name="quick_action_showhide_mapillary_title">Εμφάνιση/Απόκρυψη Mapillary</string>
+    <string name="quick_action_mapillary_hide">Απόκρυψη Mapillary</string>
+    <string name="quick_action_mapillary_show">Εμφάνιση Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Εναλλαγή εμφάνισης ή απόκρυψης της στρώσης Mapillary του χάρτη.</string>
+    <string name="routing_attr_length_description">Καθορίστε μήκος οχήματος που επιτρέπεται στους δρόμους.</string>
+    <string name="routing_attr_length_name">Όριο μήκους</string>
+    <string name="shared_string_bearing">Κατεύθυνση</string>
+    <string name="item_deleted">%1$s διαγράφτηκε</string>
+    <string name="speed_cameras_restart_descr">Απαιτείται επανεκκίνηση για την πλήρη διαγραφή δεδομένων της κάμερας ταχύτητας.</string>
+    <string name="shared_string_uninstall_and_restart">Απεγκατάσταση και επανεκκίνηση</string>
+    <string name="speed_cameras_removed_descr">Αυτή η συσκευή δεν έχει κάμερες ταχύτητας.</string>
+    <string name="app_mode_inline_skates">Πατίνια μονής γραμμής</string>
+    <string name="quick_action_remove_next_destination">Διαγραφή του επόμενου σημείου προορισμού</string>
+    <string name="use_volume_buttons_as_zoom_descr">Ενεργοποιήστε για να ελέγχετε το επίπεδο εστίασης του χάρτη με τα πλήκτρα έντασης της συσκευής.</string>
+    <string name="use_volume_buttons_as_zoom">Τα πλήκτρα έντασης ως εστίαση</string>
+    <string name="please_provide_point_name_error">Παρακαλούμε, ονομάστε το σημείο</string>
+    <string name="quick_action_remove_next_destination_descr">Το τρέχον σημείο προορισμού στη διαδρομή θα διαγραφεί. Εάν είναι ο προορισμός, θα σταματήσει η πλοήγηση.</string>
+    <string name="search_download_wikipedia_maps">Κατεβάστε τους χάρτες της βικιπαιδείας</string>
+    <string name="plugin_wikipedia_description">Πάρτε πληροφορίες για τα σημεία ενδιαφέροντος από τη βικιπαίδεια. Είναι ο οδηγός τσέπης χωρίς σύνδεση - ενεργοποιήστε απλά το πρόσθετο Wikipedia και απολαύστε άρθρα για τα αντικείμενα γύρω σας.</string>
+    <string name="add_hidden_group_info">Το σημείο που προστέθηκε δεν θα είναι ορατό στον κατάλογο, επειδή η επιλεγμένη ομάδα είναι κρυμμένη, μπορείτε να το βρείτε στο \"%s\".</string>
+    <string name="app_mode_enduro_motorcycle">Εντούρο</string>
+    <string name="app_mode_motor_scooter">Σκούτερ</string>
+    <string name="app_mode_wheelchair">Αμαξίδιο</string>
+    <string name="app_mode_wheelchair_forward">Αμαξίδιο προς τα μπροστά</string>
+    <string name="app_mode_go_cart">Καρτ</string>
+    <string name="osm_edit_closed_note">Κλεισμένη σημείωση OSM</string>
+    <string name="set_working_days_to_continue">Χρειάζεται να ορίσετε ημέρες εργασίας για να συνεχίσετε</string>
+    <string name="route_between_points">Διαδρομή μεταξύ σημείων</string>
+    <string name="plan_a_route">Σχεδιασμός διαδρομής</string>
+    <string name="add_to_a_track">Προσθήκη σε ίχνος</string>
+    <string name="track_show_start_finish_icons">Να εμφανίζονται εικονίδια αρχής τέλους</string>
+    <string name="select_track_width">Επιλέξτε πλάτος</string>
+    <string name="gpx_split_interval_descr">Επιλέξτε το διάστημα στο οποίο θα εμφανίζονται σημάδια με απόσταση ή χρόνο στο ίχνος.</string>
+    <string name="gpx_split_interval_none_descr">Επιλέξτε την επιθυμητή επιλογή διαίρεσης: κατά χρόνο ή απόσταση.</string>
+    <string name="shared_string_custom">Προσαρμοσμένο</string>
+    <string name="gpx_direction_arrows">Βέλη κατεύθυνσης</string>
+    <string name="track_coloring_solid">Συμπαγές</string>
+    <string name="plan_route_last_edited">Τελευταία επεξεργασμένο</string>
+    <string name="plan_route_import_track">Εισαγωγή ίχνους</string>
+    <string name="plan_route_open_existing_track">Ανοίξτε υφιστάμενο ίχνος</string>
+    <string name="plan_route_select_track_file_for_open">Επιλέξτε ένα αρχείο ίχνους για να ανοίξετε.</string>
+    <string name="plan_route_create_new_route">Δημιουργία νέας διαδρομής</string>
+    <string name="shared_string_done">Έτοιμο</string>
+    <string name="overwrite_track">Αντικατάσταση διαδρομής</string>
 </resources>
