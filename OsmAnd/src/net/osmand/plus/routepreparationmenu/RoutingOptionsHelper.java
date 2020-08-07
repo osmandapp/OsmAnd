@@ -21,12 +21,10 @@ import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
@@ -37,7 +35,11 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
 import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
@@ -462,8 +464,8 @@ public class RoutingOptionsHelper {
 	public List<LocalRoutingParameter> getGpxRouterParameters(ApplicationMode am) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
-		RouteProvider.GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
-		boolean osmandRouter = am.getRouteService() == RouteProvider.RouteService.OSMAND;
+		GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
+		boolean osmandRouter = am.getRouteService() == RouteService.OSMAND;
 		if (rparams != null && osmandRouter) {
 			GPXUtilities.GPXFile fl = rparams.getFile();
 			if (fl.hasRtePt()) {
@@ -483,6 +485,19 @@ public class RoutingOptionsHelper {
 			}
 		}
 		return list;
+	}
+
+	public LocalRoutingParameter getReverseTrackParameter(ApplicationMode mode) {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
+		boolean osmandRouter = mode.getRouteService() == RouteService.OSMAND;
+		if (rparams != null && osmandRouter) {
+			if (!routingHelper.isCurrentGPXRouteV2()) {
+				int textId = R.string.gpx_option_reverse_route;
+				return new OtherLocalRoutingParameter(textId, app.getString(textId), rparams.isReverse());
+			}
+		}
+		return null;
 	}
 
 	public List<LocalRoutingParameter> getRoutingParametersInner(ApplicationMode am) {

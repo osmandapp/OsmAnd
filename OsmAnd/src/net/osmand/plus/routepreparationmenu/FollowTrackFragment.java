@@ -40,13 +40,16 @@ import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.measurementtool.NewGpxData.ActionType;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.ImportTrackCard;
+import net.osmand.plus.routepreparationmenu.cards.ReverseTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.SelectTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 import org.apache.commons.logging.Log;
 
@@ -191,6 +194,14 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				SelectTrackCard selectTrackCard = new SelectTrackCard(mapActivity);
 				selectTrackCard.setListener(this);
 				cardsContainer.addView(selectTrackCard.build(mapActivity));
+
+				ApplicationMode mode = app.getRoutingHelper().getAppMode();
+				LocalRoutingParameter reverseParameter = app.getRoutingOptionsHelper().getReverseTrackParameter(mode);
+				if (reverseParameter != null) {
+					ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, reverseParameter);
+					reverseTrackCard.setListener(this);
+					cardsContainer.addView(reverseTrackCard.build(mapActivity));
+				}
 			}
 		}
 	}
@@ -291,6 +302,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				dismiss();
 			} else if (card instanceof SelectTrackCard) {
 				updateSelectionMode(true);
+			} else if (card instanceof ReverseTrackCard) {
+				updateMenu();
 			}
 		}
 	}
@@ -338,6 +351,13 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			mapActivity.getMapActions().setGPXRouteParams(gpxFile);
 			app.getTargetPointsHelper().updateRouteAndRefresh(true);
 			app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+		}
+	}
+
+	private void updateMenu() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapRouteInfoMenu().updateMenu();
 		}
 	}
 
