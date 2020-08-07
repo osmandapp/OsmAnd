@@ -63,6 +63,7 @@
 			android:id="@+id/bottom_container"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
+			android:background="?attr/route_info_bg"
 			android:foreground="@drawable/bg_contextmenu_shadow"
 			android:foregroundGravity="top|fill_horizontal">
 

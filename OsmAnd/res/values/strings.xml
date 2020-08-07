@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="select_another_track">Select another track</string>
     <string name="import_track_descr">Choose track file to follow or import it from device.</string>
     <string name="follow_track_descr">Choose track file to follow</string>
     <string name="follow_track">Follow track</string>

@@ -26,9 +26,10 @@ public class TracksToFollowCard extends BaseCard {
 
 	private GpxTrackAdapter tracksAdapter;
 
-	public TracksToFollowCard(MapActivity mapActivity, List<GPXInfo> gpxInfoList) {
+	public TracksToFollowCard(MapActivity mapActivity, List<GPXInfo> gpxInfoList, String selectedCategory) {
 		super(mapActivity);
 		this.gpxInfoList = gpxInfoList;
+		this.selectedCategory = selectedCategory;
 		gpxInfoCategories = getGpxInfoCategories();
 	}
 
