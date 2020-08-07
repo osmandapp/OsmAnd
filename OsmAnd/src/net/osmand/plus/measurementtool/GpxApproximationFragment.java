@@ -125,7 +125,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		exitGpxApproximationMode();
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof GpxApproximationFragmentListener) {
-			((GpxApproximationFragmentListener) fragment).cancelButtonOnClick();
+			((GpxApproximationFragmentListener) fragment).onCancelGpxApproximation();
 		}
 	}
 
@@ -159,7 +159,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			public void onClick(View v) {
 				Fragment fragment = getTargetFragment();
 				if (fragment instanceof GpxApproximationFragmentListener) {
-					((GpxApproximationFragmentListener) fragment).applyButtonOnClick(snapToRoadAppMode, distanceThreshold);
+					((GpxApproximationFragmentListener) fragment).onApplyGpxApproximation(snapToRoadAppMode, distanceThreshold);
 				}
 				dismiss();
 			}
@@ -256,7 +256,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	public void onSliderChange(int sliderValue) {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof GpxApproximationFragmentListener) {
-			((GpxApproximationFragmentListener) fragment).onParametersChanged(snapToRoadAppMode, sliderValue);
+			((GpxApproximationFragmentListener) fragment).onChangeGpxApproxDistanceThreshold(snapToRoadAppMode, sliderValue);
 			distanceThreshold = sliderValue;
 		}
 	}
@@ -265,17 +265,17 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	public void onProfileSelect(ApplicationMode applicationMode) {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof GpxApproximationFragmentListener) {
-			((GpxApproximationFragmentListener) fragment).onParametersChanged(applicationMode, distanceThreshold);
+			((GpxApproximationFragmentListener) fragment).onChangeGpxApproxDistanceThreshold(applicationMode, distanceThreshold);
 			snapToRoadAppMode = applicationMode;
 		}
 	}
 
 	public interface GpxApproximationFragmentListener {
 
-		void onParametersChanged(ApplicationMode mode, int distanceThreshold);
+		void onChangeGpxApproxDistanceThreshold(ApplicationMode mode, int distanceThreshold);
 
-		void applyButtonOnClick(ApplicationMode mode, int distanceThreshold);
+		void onApplyGpxApproximation(ApplicationMode mode, int distanceThreshold);
 
-		void cancelButtonOnClick();
+		void onCancelGpxApproximation();
 	}
 }
