@@ -487,19 +487,6 @@ public class RoutingOptionsHelper {
 		return list;
 	}
 
-	public LocalRoutingParameter getReverseTrackParameter(ApplicationMode mode) {
-		RoutingHelper routingHelper = app.getRoutingHelper();
-		GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
-		boolean osmandRouter = mode.getRouteService() == RouteService.OSMAND;
-		if (rparams != null && osmandRouter) {
-			if (!routingHelper.isCurrentGPXRouteV2()) {
-				int textId = R.string.gpx_option_reverse_route;
-				return new OtherLocalRoutingParameter(textId, app.getString(textId), rparams.isReverse());
-			}
-		}
-		return null;
-	}
-
 	public List<LocalRoutingParameter> getRoutingParametersInner(ApplicationMode am) {
 		boolean osmandRouter = am.getRouteService() == RouteProvider.RouteService.OSMAND;
 		if (!osmandRouter) {

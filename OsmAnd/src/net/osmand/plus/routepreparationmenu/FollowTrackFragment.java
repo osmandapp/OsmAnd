@@ -41,14 +41,18 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.ImportTrackCard;
+import net.osmand.plus.routepreparationmenu.cards.NavigateTrackOptionsCard;
 import net.osmand.plus.routepreparationmenu.cards.ReverseTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.SelectTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
+import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 import org.apache.commons.logging.Log;
@@ -196,11 +200,34 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				cardsContainer.addView(selectTrackCard.build(mapActivity));
 
 				ApplicationMode mode = app.getRoutingHelper().getAppMode();
-				LocalRoutingParameter reverseParameter = app.getRoutingOptionsHelper().getReverseTrackParameter(mode);
-				if (reverseParameter != null) {
-					ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, reverseParameter);
-					reverseTrackCard.setListener(this);
-					cardsContainer.addView(reverseTrackCard.build(mapActivity));
+
+				RoutingHelper routingHelper = app.getRoutingHelper();
+				GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
+				boolean osmandRouter = mode.getRouteService() == RouteProvider.RouteService.OSMAND;
+				if (rparams != null && osmandRouter) {
+					if (!routingHelper.isCurrentGPXRouteV2()) {
+						int textId = R.string.gpx_option_reverse_route;
+						String title = app.getString(textId);
+						LocalRoutingParameter parameter = new OtherLocalRoutingParameter(textId, title, rparams.isReverse());
+
+						ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, parameter);
+						reverseTrackCard.setListener(this);
+						cardsContainer.addView(reverseTrackCard.build(mapActivity));
+					}
+
+					if (!rparams.isUseIntermediatePointsRTE()) {
+						int passRouteId = R.string.gpx_option_from_start_point;
+						LocalRoutingParameter passWholeRoute = new OtherLocalRoutingParameter(passRouteId,
+								app.getString(passRouteId), rparams.isPassWholeRoute());
+
+						int navigationTypeId = R.string.gpx_option_calculate_first_last_segment;
+						LocalRoutingParameter navigationType = new OtherLocalRoutingParameter(navigationTypeId,
+								app.getString(navigationTypeId), rparams.isCalculateOsmAndRouteParts());
+
+						NavigateTrackOptionsCard navigateTrackCard = new NavigateTrackOptionsCard(mapActivity, passWholeRoute, navigationType);
+						navigateTrackCard.setListener(this);
+						cardsContainer.addView(navigateTrackCard.build(mapActivity));
+					}
 				}
 			}
 		}
@@ -302,7 +329,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				dismiss();
 			} else if (card instanceof SelectTrackCard) {
 				updateSelectionMode(true);
-			} else if (card instanceof ReverseTrackCard) {
+			} else if (card instanceof ReverseTrackCard
+					|| card instanceof NavigateTrackOptionsCard) {
 				updateMenu();
 			}
 		}

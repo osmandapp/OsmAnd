@@ -32,7 +32,7 @@ public class ReverseTrackCard extends BaseCard {
 		titleTv.setText(R.string.gpx_option_reverse_route);
 
 		ImageView icon = view.findViewById(R.id.icon);
-		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_change_navigation_points));
+		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_change_navigation_points));
 
 		final CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(parameter.isSelected(app.getSettings()));
