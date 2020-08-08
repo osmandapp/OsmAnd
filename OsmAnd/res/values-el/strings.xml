@@ -3629,4 +3629,102 @@
     <string name="plan_route_create_new_route">Δημιουργία νέας διαδρομής</string>
     <string name="shared_string_done">Έτοιμο</string>
     <string name="overwrite_track">Αντικατάσταση διαδρομής</string>
+    <string name="lang_sco">Σκωτσέζικα</string>
+    <string name="lang_scn">Σικελικά</string>
+    <string name="lang_pnb">Πουντζάμπι</string>
+    <string name="lang_ne">Νεπαλέζικα</string>
+    <string name="lang_nap">Ναπολιτάνικα</string>
+    <string name="lang_my">Βιρμανικά</string>
+    <string name="lang_mn">Μογγολικά</string>
+    <string name="lang_min">Μινανγκκαμπάου</string>
+    <string name="lang_mg">Μαλαγασικά</string>
+    <string name="lang_ky">Κυργικά</string>
+    <string name="lang_kk">Καζάκικα</string>
+    <string name="lang_jv">Ιαβανέζικα</string>
+    <string name="lang_gu">Γκουτζαρατικά</string>
+    <string name="lang_cv">Τσουβασικά</string>
+    <string name="lang_ce">Τσετσενικά</string>
+    <string name="lang_bar">Βαυαρικά</string>
+    <string name="lang_ba">Μπασκίρ</string>
+    <string name="lang_an">Αραγονέζικα</string>
+    <string name="lang_lmo">Λομβαρδικά</string>
+    <string name="custom_color">Προσαρμοσμένο χρώμα</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="osm_live_payment_subscription_management">Η πληρωμή θα χρεωθεί στον λογαριασμό σας Google Play με την επιβεβαίωση αγοράς.
+\n
+\n Η συνδρομή ανανεώνεται αυτόματα, εκτός και ακυρωθεί πριν την ημερομηνία ανανέωσης. Ο λογαριασμός σας θα χρεωθεί για την περίοδο ανανέωσης (μήνας/τρίμηνο/έτος) μόνο την ημερομηνία ανανέωσης.
+\n
+\n Μπορείτε να διαχειριστείτε και να ακυρώσετε τις συνδρομές σας πηγαίνοντας στις ρυθμίσεις σας στο Google Play.</string>
+    <string name="search_poi_types">Αναζήτηση τύπων ΣΕ</string>
+    <string name="search_poi_types_descr">Συνδυάστε τύπους ΣΕ από διαφορετικές κατηγορίες. Πατήστε τον διακόπτη για να τα επιλέξετε όλα, πατήστε στην αριστερή πλευρά για επιλογή κατηγορίας.</string>
+    <string name="extra_maps_menu_group">Πρόσθετοι χάρτες</string>
+    <string name="download_unsupported_action">Μη υποστηριζόμενη ενέργεια %1$s</string>
+    <string name="tracker_item">OsmAnd tracker (Ιχνηλάτης OsmAnd)</string>
+    <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="quick_action_item">Γρήγορη ενέργεια</string>
+    <string name="measure_distance_item">Μέτρηση απόστασης</string>
+    <string name="travel_item">Ταξίδια (Βικιταξίδια και βικιπαίδεια)</string>
+    <string name="map_markers_item">Δείκτες χάρτη</string>
+    <string name="favorites_item">Αγαπημένα</string>
+    <string name="subscription_osmandlive_item">Συνδρομή - OsmAnd Live</string>
+    <string name="osmand_purchases_item">Αγορές OsmAnd</string>
+    <string name="legend_item_description">Ο οδηγός στα σύμβολα χάρτη.</string>
+    <string name="navigation_profiles_item">Κατατομές (προφίλ) πλοήγησης</string>
+    <string name="release_3_7">• Νέοι χάρτες κλίσεων χωρίς σύνδεση
+\n
+\n • Πλήρης προσαρμογή των αγαπημένων και σημείων διαδρομής GPX – προσαρμοσμένα χρώματα, εικονίδια, σχήματα
+\n
+\n • Προσαρμογή σειράς στοιχείων στο \"μενού περιβάλλοντος\", στον \"χάρτη διαμόρφωσης\" και στον \"σχεδιαστή\"
+\n
+\n • Η βικιπαίδεια ως ξεχωριστή στρώση στον χάρτη διαμόρφωσης, επιλέξτε μόνο τις απαιτούμενες γλώσσες
+\n
+\n • Δημιουργία του δικού σας φίλτρου ΣΕ / χαρτών με πλήρη ευελιξία
+\n
+\n • Προστέθηκαν επιλογές επαναφοράς ρυθμίσεων προσαρμοσμένων κατατομών (προφίλ)
+\n
+\n • Πλήρεις διαδρομές GPX από γραμμές κυκλοφοριακής υποστήριξης πλοήγησης και πλήρεις οδηγίες στροφών
+\n
+\n • Διόρθωση μεγεθών UI σε ταμπλέτες
+\n
+\n • Διόρθωση σφαλμάτων με RTL
+\n
+\n</string>
+    <string name="quick_action_transport_hide">Απόκρυψη δημόσιων συγκοινωνιών</string>
+    <string name="quick_action_transport_show">Εμφάνιση δημόσιων συγκοινωνιών</string>
+    <string name="quick_action_show_hide_transport">Εμφάνιση/απόκρυψη δημόσιων συγκοινωνιών</string>
+    <string name="quick_action_transport_descr">Πλήκτρο εμφάνισης ή απόκρυψης δημόσιων συγκοινωνιών στον χάρτη.</string>
+    <string name="create_edit_poi">Δημιουργία / Επεξεργασία ΣΕ</string>
+    <string name="parking_positions">Θέσεις στάθμευσης</string>
+    <string name="add_edit_favorite">Προσθήκη / Επεξεργασία αγαπημένου</string>
+    <string name="reset_deafult_order">Επαναφορά της προεπιλεγμένης σειράς στοιχείων</string>
+    <string name="back_to_editing">Πίσω στην επεξεργασία</string>
+    <string name="quick_action_switch_profile_descr">Το πλήκτρο ενέργειας εναλλάσσει μεταξύ των επιλεγμένων κατατομών (προφίλ).</string>
+    <string name="shared_string_add_profile">Προσθήκη κατατομής (προφίλ)</string>
+    <string name="change_application_profile">Αλλαγή κατατομής (προφίλ) εφαρμογής</string>
+    <string name="profiles_for_action_not_found">Αδυναμία εύρεσης τέτοιων κατατομών (προφίλ).</string>
+    <string name="index_item_world_basemap_detailed">Παγκόσμιος χάρτης προεπισκόπησης (λεπτομερής)</string>
+    <string name="unsupported_type_error">Μη υποστηριζόμενος τύπος</string>
+    <string name="width_limit_description">Δώστε το πλάτος του οχήματός σας, κάποιοι περιορισμοί μπορεί να εφαρμόζονται για πλατιά οχήματα.</string>
+    <string name="height_limit_description">Δώστε το ύψος του οχήματός σας, κάποιοι περιορισμοί διαδρομής μπορεί να εφαρμόζονται για υψηλά οχήματα.</string>
+    <string name="weight_limit_description">Δώστε το βάρος του οχήματός σας, κάποιοι περιορισμοί διαδρομής μπορεί να εφαρμόζονται για βαριά οχήματα.</string>
+    <string name="lenght_limit_description">Δώστε το μήκος του οχήματός σας, κάποιοι περιορισμοί διαδρομών μπορεί να εφαρμόζονται για μεγάλα οχήματα.</string>
+    <string name="gpx_parse_error">Το GPX OsmAnd δεν είναι σωστά σχηματισμένο, επικοινωνήστε με την ομάδα υποστήριξης για παραπέρα διερεύνηση.</string>
+    <string name="shared_string_always">Πάντοτε</string>
+    <string name="screen_control">Στοιχείο ελέγχου συστήματος</string>
+    <string name="system_screen_timeout_descr">Απενεργοποιεί την οθόνη όπως ο χρόνος αναμονής οθόνης του συστήματος.</string>
+    <string name="system_screen_timeout">Χρήση του χρόνου αναμονής οθόνης του συστήματος</string>
+    <string name="turn_screen_on_descr">Σημειώστε τις επιλογές αφύπνισης της οθόνης (εξασφαλίστε ότι το OsmAnd είναι στο προσκήνιο όταν η συσκευή κλειδώνεται):</string>
+    <string name="save_as_new_track">Αποθήκευση ως νέου ίχνους</string>
+    <string name="reverse_route">Αντιστροφή διαδρομής</string>
+    <string name="rourte_between_points_whole_track_button_desc">Ολόκληρο το ίχνος θα επανυπολογιστεί χρησιμοποιώντας την επιλεγμένη κατατομή (προφίλ).</string>
+    <string name="rourte_between_points_next_segment_button_desc">Μόνο το επόμενο τμήμα θα επανυπολογιστεί χρησιμοποιώντας την επιλεγμένη κατατομή (προφίλ).</string>
+    <string name="rourte_between_points_desc">Επιλέξτε πώς να συνδέσετε τα σημεία, με ευθεία γραμμή, ή να υπολογίσετε μια διαδρομή μεταξύ τους με την επιλεγμένη κατατομή (προφίλ).</string>
+    <string name="rourte_between_points_warning_desc">Για να χρησιμοποιήσετε αυτήν την επιλογή το OsmAnd χρειάζεται να προσκολλήσει το ίχνος σας στους δρόμους του χάρτη.
+\n
+\nΣτο επόμενο βήμα θα χρειαστείτε να επιλέξετε κατατομή (προφίλ) πλοήγησης για να εντοπίσετε τους επιτρεπόμενους δρόμους και την απόσταση κατωφλίου για να προσεγγίσετε το ίχνος σας με τους δρόμους.</string>
+    <string name="whole_track">Ολόκληρο το ίχνος</string>
+    <string name="next_segment">Επόμενο τμήμα</string>
+    <string name="threshold_distance">Απόσταση κατωφλίου</string>
+    <string name="navigation_profile">Κατατομή (προφίλ) πλοήγησης</string>
+    <string name="rourte_between_points_add_track_desc">Επιλέξτε ένα αρχείο ίχνους στο οποίο θα προστεθεί νέο τμήμα.</string>
 </resources>
