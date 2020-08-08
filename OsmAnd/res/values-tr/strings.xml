@@ -1764,7 +1764,7 @@
     <string name="fav_point_dublicate_message">Sık Kullanılan, yinelemeyi önlemek için %1$s olarak yeniden adlandırıldı.</string>
     <string name="traffic_warning_border_control">Sınır denetimi</string>
     <string name="traffic_warning_payment">Gişe</string>
-    <string name="traffic_warning_calming">Hız tümseği</string>
+    <string name="traffic_warning_calming">Trafik sakinleştirme</string>
     <string name="sleep_mode_stop_dialog">GPS arka plan modunu durdur?</string>
     <string name="stop_navigation_service">Dur</string>
     <string name="save_global_track_interval_descr">(Haritadaki GPX kayıt widget\'ı aracılığıyla etkinleştirilen) genel rota kaydı için kayıt aralığını belirtin.</string>
@@ -3797,4 +3797,17 @@
     <string name="plan_route_select_track_file_for_open">Açmak için bir yol dosyası seçin.</string>
     <string name="shared_string_done">Bitti</string>
     <string name="overwrite_track">Yolun üzerine yaz</string>
+    <string name="rourte_between_points_warning_desc">Bu seçeneği kullanmak için OsmAnd\'ın izlediğiniz yolu harita yollarına eşleştirmesi gereklidir.
+\n
+\n Sonraki adımda, izin verilen yolları tespit etmek için navigasyon profilini ve izlediğiniz yolu yaklaşık olarak belirlemek için eşik mesafesini seçmeniz gerekecektir.</string>
+    <string name="save_as_new_track">Yeni bir Yol olarak kaydet</string>
+    <string name="reverse_route">Ters güzergah</string>
+    <string name="rourte_between_points_whole_track_button_desc">Tüm yol, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Sadece sonraki bölüm, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="rourte_between_points_desc">Düz bir çizgi ile noktaları nasıl birleştireceğinizi veya seçili profille aralarında nasıl güzergah hesaplayacağınızı seçin.</string>
+    <string name="whole_track">Tüm yol</string>
+    <string name="next_segment">Sonraki bölüm</string>
+    <string name="threshold_distance">Eşik mesafesi</string>
+    <string name="navigation_profile">Navigasyon profili</string>
+    <string name="rourte_between_points_add_track_desc">Kendisine yeni bir bölümün ekleneceği bir yol dosyası seçin.</string>
 </resources>
