@@ -48,6 +48,7 @@ import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
+import net.osmand.LocationsHolder;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -72,6 +73,7 @@ import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
+import net.osmand.plus.routing.GpxApproximator;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
@@ -79,8 +81,10 @@ import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
+import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -134,6 +138,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean gpxPointsAdded;
 
 	private MeasurementEditingContext editingCtx = new MeasurementEditingContext();
+	private GpxApproximator gpxApproximator;
 
 	private LatLon initialPoint;
 
@@ -287,7 +292,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			public void onClick(View view) {
 				OptionsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						MeasurementToolFragment.this,
-						editingCtx.isSnapToRoadTrack() || editingCtx.isNewData(),
+						editingCtx.isTrackSnappedToRoad() || editingCtx.isNewData(),
 						editingCtx.isInSnapToRoadMode(),
 						editingCtx.getSnapToRoadAppMode() != null
 								? editingCtx.getSnapToRoadAppMode().getStringKey()
@@ -542,9 +547,27 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return R.color.status_bar_transparent_gradient;
 	}
 
+	private void approximateGpx() {
+		if (gpxApproximator != null) {
+			try {
+				GpxRouteApproximation gpxApproximation = gpxApproximator.calculateGpxApproximation();
+				displayApproximatedPoints(gpxApproximation);
+			} catch (IOException e) {
+			} catch (InterruptedException e) {
+			}
+		}
+	}
+
 	@Override
 	public void onChangeGpxApproxDistanceThreshold(ApplicationMode mode, int distanceThreshold) {
-
+		if (gpxApproximator != null) {
+			try {
+				gpxApproximator.setMode(mode);
+				gpxApproximator.setPointApproximation(distanceThreshold);
+				approximateGpx();
+			} catch (IOException e) {
+			}
+		}
 	}
 
 	@Override
@@ -636,7 +659,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				case SnapTrackWarningBottomSheet.CONTINUE_REQUEST_CODE:
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
-						GpxApproximationFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+						try {
+							gpxApproximator = new GpxApproximator(requireMyApplication(), new LocationsHolder(editingCtx.getPoints()));
+							GpxApproximationFragment.showInstance(mapActivity.getSupportFragmentManager(),
+									this, gpxApproximator.getMode(), (int) gpxApproximator.getPointApproximation());
+						} catch (IOException e) {
+
+						}
 					}
 					break;
 			}
@@ -1050,8 +1079,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void displayRoutePoints() {
-		final MeasurementToolLayer measurementLayer = getMeasurementLayer();
-
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();
 		List<WptPt> points = gpx.getRoutePoints();
 		if (measurementLayer != null) {
@@ -1062,9 +1090,18 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void displaySegmentPoints() {
-		final MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			editingCtx.addPoints();
+			adapter.notifyDataSetChanged();
+			updateDistancePointsText();
+		}
+	}
+
+	private void displayApproximatedPoints(GpxRouteApproximation gpxApproximation) {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			editingCtx.setPoints(gpxApproximation);
 			adapter.notifyDataSetChanged();
 			updateDistancePointsText();
 		}

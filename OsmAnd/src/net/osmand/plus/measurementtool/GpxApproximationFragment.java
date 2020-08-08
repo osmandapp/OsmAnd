@@ -226,11 +226,13 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		return (menuState & (MenuState.HEADER_ONLY | MenuState.HALF_SCREEN)) != 0;
 	}
 
-	public static void showInstance(FragmentManager fm, Fragment targetFragment) {
+	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment, @NonNull ApplicationMode initialAppMode, int initialDistanceThreshold) {
 		try {
 			if (!fm.isStateSaved()) {
 				GpxApproximationFragment fragment = new GpxApproximationFragment();
 				fragment.setTargetFragment(targetFragment, 0);
+				fragment.snapToRoadAppMode = initialAppMode;
+				fragment.distanceThreshold = initialDistanceThreshold;
 				fm.beginTransaction()
 						.replace(R.id.fragmentContainer, fragment, TAG)
 						.addToBackStack(TAG)

@@ -16,9 +16,9 @@
 		<FrameLayout
 			android:id="@+id/bottom_container"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:foreground="@drawable/bg_contextmenu_shadow"
-			android:foregroundGravity="top|fill_horizontal">
+			android:layout_height="match_parent">
+
+			<include layout="@layout/plan_route_progress_bar"/>
 
 			<net.osmand.plus.LockableScrollView
 				android:id="@+id/route_menu_bottom_scroll"
