@@ -3727,4 +3727,5 @@
     <string name="threshold_distance">Απόσταση κατωφλίου</string>
     <string name="navigation_profile">Κατατομή (προφίλ) πλοήγησης</string>
     <string name="rourte_between_points_add_track_desc">Επιλέξτε ένα αρχείο ίχνους στο οποίο θα προστεθεί νέο τμήμα.</string>
+    <string name="lang_tg">Τατζίκικα</string>
 </resources>
