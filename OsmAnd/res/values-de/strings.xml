@@ -3846,4 +3846,5 @@
     <string name="plan_route_select_track_file_for_open">Wählen Sie eine Trackdatei zum Öffnen aus.</string>
     <string name="shared_string_done">Fertig</string>
     <string name="overwrite_track">Track überschreiben</string>
+    <string name="threshold_distance">Schwellenwert-Distanz</string>
 </resources>
