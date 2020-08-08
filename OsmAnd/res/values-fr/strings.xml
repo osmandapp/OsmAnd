@@ -3821,4 +3821,17 @@
     <string name="plan_route_select_track_file_for_open">Sélectionnez un fichier de trace à ouvrir.</string>
     <string name="shared_string_done">Terminé</string>
     <string name="overwrite_track">Remplacer la trace</string>
+    <string name="rourte_between_points_desc">Sélectionnez comment relier les points : par une ligne droite ou en calculant un itinéraire avec le profil sélectionné.</string>
+    <string name="rourte_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
+    <string name="rourte_between_points_warning_desc">Pour utiliser cette option, OsmAnd doit aligner votre trace sur les routes de la carte.
+\n
+\n À l\'étape suivante, vous devrez sélectionner le profil de navigation pour détecter les routes autorisées et le seuil de distance pour rapprocher votre trace des routes.</string>
+    <string name="rourte_between_points_add_track_desc">Sélectionnez un fichier de trace auquel ajouter un nouveau segment.</string>
+    <string name="save_as_new_track">Enregistrer comme nouvelle trace</string>
+    <string name="reverse_route">Inverser l\'itinéraire</string>
+    <string name="whole_track">Trace entière</string>
+    <string name="next_segment">Segment suivant</string>
+    <string name="threshold_distance">Seuil de distance</string>
+    <string name="navigation_profile">Profil de navigation</string>
 </resources>
