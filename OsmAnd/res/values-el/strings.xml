@@ -3728,4 +3728,12 @@
     <string name="navigation_profile">Κατατομή (προφίλ) πλοήγησης</string>
     <string name="rourte_between_points_add_track_desc">Επιλέξτε ένα αρχείο ίχνους στο οποίο θα προστεθεί νέο τμήμα.</string>
     <string name="lang_tg">Τατζίκικα</string>
+    <string name="some_articles_may_not_available_in_lang">Μερικά άρθρα της Wikipedia μπορεί να μην είναι διαθέσιμα στη γλώσσα σας.</string>
+    <string name="lang_zhyue">Καντονέζικα</string>
+    <string name="lang_zhminnan">Νότια μιν</string>
+    <string name="lang_yo">Γιορούμπα</string>
+    <string name="lang_war">Ουαράι</string>
+    <string name="lang_uz">Ουζμπέκικα</string>
+    <string name="lang_ur">Ουρντού</string>
+    <string name="lang_tt">Ταταρικά</string>
 </resources>
