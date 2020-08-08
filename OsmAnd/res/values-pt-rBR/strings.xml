@@ -299,7 +299,7 @@
     <string name="traffic_warning_border_control">Alfândega</string>
     <string name="traffic_warning_payment">Pedágio</string>
     <string name="traffic_warning_stop">Placa de pare</string>
-    <string name="traffic_warning_calming">Lombada</string>
+    <string name="traffic_warning_calming">Moderação de trafego</string>
     <string name="traffic_warning">Aviso de tráfego</string>
     <string name="speak_poi">POIs próximos</string>
     <string name="way_alarms">Moderadores de tráfego</string>
@@ -3827,4 +3827,17 @@
     <string name="plan_route_select_track_file_for_open">Selecione um arquivo de faixa para abrir.</string>
     <string name="shared_string_done">Concluído</string>
     <string name="overwrite_track">Substituir trilha</string>
+    <string name="save_as_new_track">Salvar como nova trilha</string>
+    <string name="reverse_route">Rota reversa</string>
+    <string name="rourte_between_points_whole_track_button_desc">A trilha inteira será recalculada usando o perfil selecionado.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Apenas o próximo segmento será recalculado usando o perfil selecionado.</string>
+    <string name="rourte_between_points_desc">Selecione como conectar pontos, com uma linha reta, ou calcular uma rota entre eles com o perfil selecionado.</string>
+    <string name="whole_track">Trilha inteira</string>
+    <string name="next_segment">Próximo segmento</string>
+    <string name="rourte_between_points_warning_desc">Para usar esta opção, OsmAnd precisa ajustar sua trilha para as estradas do mapa.
+\n
+\n Na próxima etapa, você precisará selecionar o perfil de navegação para detectar as estradas permitidas e a distância limite para aproximar o rastreamento das estradas.</string>
+    <string name="threshold_distance">Distância limite</string>
+    <string name="navigation_profile">Perfil de navegação</string>
+    <string name="rourte_between_points_add_track_desc">Selecione um arquivo de trilha para o qual um novo segmento será adicionado.</string>
 </resources>
