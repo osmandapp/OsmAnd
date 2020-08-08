@@ -3692,12 +3692,12 @@
     <string name="search_download_wikipedia_maps">Last ned Wikipedia-kart</string>
     <string name="accessibility_mode_disabled">Tilgjengelighetsmodus er slått av i Android-systemet.</string>
     <string name="listed_exist"/>
-    <string name="turn_screen_on_navigation_instructions"/>
+    <string name="turn_screen_on_navigation_instructions">Navigasjonsinstruks</string>
     <string name="speed_cameras_restart_descr"/>
     <string name="shared_string_uninstall_and_restart"/>
     <string name="quick_action_remove_next_destination_descr"/>
     <string name="app_mode_wheelchair">Rullestol</string>
-    <string name="app_mode_go_cart"/>
+    <string name="app_mode_go_cart">Gokart</string>
     <string name="plan_a_route">Planlegg en rute</string>
     <string name="additional_actions_descr">Du får tilgang til disse handlingene ved å trykke på knappen “%1$s”.</string>
     <string name="use_volume_buttons_as_zoom_descr">Slå på for å stille inn zoomnivået på kartet med enhetens volumknapper.</string>
@@ -3714,4 +3714,28 @@
     <string name="gpx_direction_arrows">Retningspiler</string>
     <string name="shared_string_tones">tonn</string>
     <string name="route_between_points">Rute mellom punkter</string>
+    <string name="app_mode_enduro_motorcycle">Enduro-motorsykkel</string>
+    <string name="screen_control">Skjermkontroll</string>
+    <string name="system_screen_timeout">Bruk systemets skjermtidsavbrudd</string>
+    <string name="keep_screen_on">Behold skjermen påslått</string>
+    <string name="plan_route_last_edited">Sist redigert</string>
+    <string name="plan_route_import_track">Importer spor</string>
+    <string name="plan_route_open_existing_track">Åpne eksisterende spor</string>
+    <string name="plan_route_select_track_file_for_open">Velg en sporfil for åpning.</string>
+    <string name="reverse_route">Snu rute</string>
+    <string name="overwrite_track">Overskriv spor</string>
+    <string name="rourte_between_points_whole_track_button_desc">Hele sporet vil bli omregnet ved bruk av valgt profil.</string>
+    <string name="rourte_between_points_desc">Velg hvordan punkter skal knyttes sammen, i rett linje, eller utregnet rute mellom dem med valgt profil.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Kun neste segment vil bli omregnet ved bruk av valgt profil.</string>
+    <string name="whole_track">Hele sporet</string>
+    <string name="next_segment">Neste segment</string>
+    <string name="rourte_between_points_warning_desc">For å bruke dette valget må OsmAnd rute sporet ditt til kartveiene.
+\n
+\n På neste steg vil du måtte velge navigasjonsprofil for oppdagelse av tillatte veier, og terskeldistanse for å anslå sporet ditt til veier.</string>
+    <string name="rourte_between_points_add_track_desc">Velg en sporfil å legge til det nye segmentet i.</string>
+    <string name="save_as_new_track">Lagre som nytt spor</string>
+    <string name="plan_route_create_new_route">Opprett ny rute</string>
+    <string name="shared_string_done">Ferdig</string>
+    <string name="threshold_distance">Terskeldistanse</string>
+    <string name="navigation_profile">Navigasjonsdistanse</string>
 </resources>
