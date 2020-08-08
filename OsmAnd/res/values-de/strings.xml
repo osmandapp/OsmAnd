@@ -23,7 +23,7 @@
     <string name="traffic_warning_border_control">Grenzkontrolle</string>
     <string name="traffic_warning_payment">Mautstelle</string>
     <string name="traffic_warning_stop">Stoppzeichen</string>
-    <string name="traffic_warning_calming">Bodenschwelle</string>
+    <string name="traffic_warning_calming">Verkehrsberuhigung</string>
     <string name="traffic_warning_speed_camera">Blitzer</string>
     <string name="traffic_warning">Verkehrswarnung</string>
     <string name="speak_favorites">Favoriten in der Nähe</string>
@@ -3847,4 +3847,13 @@
     <string name="shared_string_done">Fertig</string>
     <string name="overwrite_track">Track überschreiben</string>
     <string name="threshold_distance">Schwellenwert-Distanz</string>
+    <string name="save_as_new_track">Als neuen Track speichern</string>
+    <string name="reverse_route">Route umkehren</string>
+    <string name="rourte_between_points_whole_track_button_desc">Der gesamte Track wird mit dem ausgewählten Profil neu berechnet.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Nur das nächste Segment wird mit dem ausgewählten Profil neu berechnet.</string>
+    <string name="rourte_between_points_desc">Wählen Sie, wie Punkte mit einer geraden Linie verbunden werden sollen, oder berechnen Sie eine Route zwischen ihnen mit dem ausgewählten Profil.</string>
+    <string name="whole_track">Ganzer Track</string>
+    <string name="next_segment">Nächstes Segment</string>
+    <string name="navigation_profile">Navigationsprofil</string>
+    <string name="rourte_between_points_add_track_desc">Wählen Sie eine Trackdatei, für die ein neues Segment hinzugefügt werden soll.</string>
 </resources>
