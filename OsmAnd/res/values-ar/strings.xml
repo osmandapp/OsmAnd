@@ -3829,4 +3829,6 @@
     <string name="plan_route_select_track_file_for_open">حدد ملف المسار للفتح.</string>
     <string name="shared_string_done">تم</string>
     <string name="overwrite_track">الكتابة فوق المسار</string>
+    <string name="navigation_profile">ملف تعريف التنقل</string>
+    <string name="rourte_between_points_add_track_desc">حدد ملف المسار الذي سيتم إضافة مقطع جديد إليه.</string>
 </resources>

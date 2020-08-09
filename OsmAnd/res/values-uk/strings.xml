@@ -1372,7 +1372,7 @@
     <string name="traffic_warning_border_control">Прикордонний контроль</string>
     <string name="traffic_warning_payment">Збирання плати за проїзд</string>
     <string name="traffic_warning_stop">Знак СТОП</string>
-    <string name="traffic_warning_calming">Штучна дорожня нерівність</string>
+    <string name="traffic_warning_calming">Затори</string>
     <string name="traffic_warning_speed_camera">Камера контролю швидкості</string>
     <string name="traffic_warning">Попередження на дорозі</string>
     <string name="local_index_description">Натисніть на будь-який наявний елемент для перегляду додаткових відомостей, довго утримуйте, щоб знедіяти або вилучити. Наявні дані на пристрої (%1$s вільно):</string>
@@ -3813,7 +3813,7 @@
     <string name="search_download_wikipedia_maps">Завантажити мапи Вікіпедії</string>
     <string name="plugin_wikipedia_description">Отримайте відомості про визначні місця у Вікіпедії. Це ваш автономний кишеньковий посібник - просто ввімкніть втулок \"Вікіпедія\" і насолоджуйтеся статтями про об\'єкти навколо вас.</string>
     <string name="app_mode_motor_scooter">Моторолер</string>
-    <string name="app_mode_enduro_motorcycle">легкий мотоцикл</string>
+    <string name="app_mode_enduro_motorcycle">Спортивний мотоцикл</string>
     <string name="app_mode_wheelchair">Інвалідне крісло</string>
     <string name="app_mode_wheelchair_forward">Інвалідне крісло попереду</string>
     <string name="app_mode_go_cart">Картинг</string>
@@ -3837,4 +3837,14 @@
     <string name="plan_route_select_track_file_for_open">Оберіть файл з треком для перегляду.</string>
     <string name="shared_string_done">Готово</string>
     <string name="overwrite_track">Перезаписати трек</string>
+    <string name="rourte_between_points_warning_desc">Для користування цією функцією, OsmAnd необхідно прив\'язати цей трек до мапи доріг.
+\n
+\nДалі вам потрібно вибрати профіль навігації для виявлення дозволених доріг та обмеження відстані наближення вашого треку до доріг.</string>
+    <string name="reverse_route">Зворотний маршрут</string>
+    <string name="whole_track">Весь трек</string>
+    <string name="next_segment">Наступний сегмент</string>
+    <string name="threshold_distance">Обмеження відстані</string>
+    <string name="navigation_profile">Профіль навігації</string>
+    <string name="rourte_between_points_add_track_desc">Виберіть файл треку, до якого буде додано новий сегмент.</string>
+    <string name="save_as_new_track">Зберегти як новий трек</string>
 </resources>

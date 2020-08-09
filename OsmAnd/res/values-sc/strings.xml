@@ -1329,7 +1329,7 @@
     <string name="traffic_warning_payment">Casellu</string>
     <string name="traffic_warning_stop">Cartellu de Stop</string>
     <string name="traffic_warning_border_control">Puntu de controllu</string>
-    <string name="traffic_warning_calming">Minimadore de lestresa</string>
+    <string name="traffic_warning_calming">Minimadore de tràficu</string>
     <string name="traffic_warning_speed_camera">Autovelox</string>
     <string name="traffic_warning">Avisu de tràficu</string>
     <string name="local_index_description">Incarca un\'elementu esistente pro bìdere prus minujas, incarca e mantene incarcadu pro l\'istudare o iscantzellare. Datos como in su dispositivu (%1$s lìberos):</string>
@@ -3401,7 +3401,7 @@
     <string name="shared_string_turn_off">Istuda</string>
     <string name="new_plugin_added">Estensione noa annànghida</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Ammustra sas àndalas tziclàbiles de sas retzas de nodos</string>
-    <string name="join_segments">Auni segmentos</string>
+    <string name="join_segments">Auni sos segmentos</string>
     <string name="add_new_profile_q">Annanghere su profilu nou \'%1$s\'\?</string>
     <string name="save_heading">Inclue sa diretzione</string>
     <string name="save_heading_descr">Sarva sa diretzione pro cada puntu cando ses registrende.</string>
@@ -3841,4 +3841,17 @@
     <string name="plan_route_select_track_file_for_open">Ischerta unu documentu de rasta de abèrrere.</string>
     <string name="shared_string_done">Fatu</string>
     <string name="overwrite_track">Subraiscrie sa rasta</string>
+    <string name="save_as_new_track">Sarva comente una rasta noa</string>
+    <string name="reverse_route">Fùrria s\'àndala</string>
+    <string name="rourte_between_points_whole_track_button_desc">Sa rasta intrea at a èssere torrada a calculare impreende su profilu ischertadu.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Petzi su segmentu imbeniente at a èssere torradu a calculare impreende su profilu ischertadu.</string>
+    <string name="rourte_between_points_desc">Ischerta comente connètere sos puntos: cun una lìnia reta o calculende un\'àndala intre issos cun su profilu ischertadu.</string>
+    <string name="whole_track">Rasta intrea</string>
+    <string name="next_segment">Segmentu imbeniente</string>
+    <string name="rourte_between_points_warning_desc">Pro impreare custa optzione OsmAnd tenet bisòngiu de alliniare sa rasta tua a sos caminos de sa mapa.
+\n
+\n In su passu chi benit as a dèpere ischertare su profilu de navigatzione pro rilevare sos caminos permìtidos e su lìmite de distàntzia pro aprossimare sa rasta tua cun sos caminos.</string>
+    <string name="threshold_distance">Lìmite de distàntzia</string>
+    <string name="navigation_profile">Profilu de navigatzione</string>
+    <string name="rourte_between_points_add_track_desc">Ischerta unu documentu de rasta in ue annànghere su segmentu nou.</string>
 </resources>
