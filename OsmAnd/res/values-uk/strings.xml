@@ -3847,4 +3847,7 @@
     <string name="navigation_profile">Профіль навігації</string>
     <string name="rourte_between_points_add_track_desc">Виберіть файл треку, до якого буде додано новий сегмент.</string>
     <string name="save_as_new_track">Зберегти як новий трек</string>
+    <string name="rourte_between_points_whole_track_button_desc">Весь трек буде перераховано за допомогою вибраного профілю.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Лише наступний сегмент буде перераховано за допомогою обраного профілю.</string>
+    <string name="rourte_between_points_desc">Виберіть спосіб з\'єднання точок: прямою лінією чи розраховувати маршрут між ними за допомогою вибраного профілю.</string>
 </resources>
