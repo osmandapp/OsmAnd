@@ -3846,4 +3846,11 @@
     <string name="shared_string_done">Wykonane</string>
     <string name="turn_screen_on_power_button_disabled">Wyłączone. Wymagane \"Trzymaj ekran włączony\" w obszarze \"Limit czasu po przebudzeniu\".</string>
     <string name="overwrite_track">Zastępowanie ścieżki</string>
+    <string name="save_as_new_track">Zapisz jako nowa Ścieżka</string>
+    <string name="reverse_route">Odwróć trasę</string>
+    <string name="whole_track">Cała trasa</string>
+    <string name="next_segment">Nowy segment</string>
+    <string name="threshold_distance">Odległość graniczna</string>
+    <string name="navigation_profile">Profil nawigacji</string>
+    <string name="rourte_between_points_add_track_desc">Wybierz plik ścieżki do którego zostanie dodany nowy segment.</string>
 </resources>
