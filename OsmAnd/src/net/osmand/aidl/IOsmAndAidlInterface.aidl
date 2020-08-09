@@ -1,7 +1,8 @@
 package net.osmand.aidl;
 
 import net.osmand.aidl.map.ALatLon;
-import net.osmand.aidl.map.APosition;
+import net.osmand.aidl.map.ALocation;
+import net.osmand.aidl.map.ALocationType;
 import net.osmand.aidl.map.SetMapLocationParams;
 
 import net.osmand.aidl.favorite.group.AFavoriteGroup;
@@ -20,6 +21,7 @@ import net.osmand.aidl.mapmarker.RemoveMapMarkerParams;
 import net.osmand.aidl.mapmarker.UpdateMapMarkerParams;
 
 import net.osmand.aidl.calculateroute.CalculateRouteParams;
+import net.osmand.aidl.calculateroute.CalculatedRoute;
 
 import net.osmand.aidl.gpx.ImportGpxParams;
 import net.osmand.aidl.gpx.ShowGpxParams;
@@ -44,6 +46,7 @@ import net.osmand.aidl.maplayer.UpdateMapLayerParams;
 
 import net.osmand.aidl.navigation.NavigateParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
+import net.osmand.aidl.navigation.NavigationStatus;
 
 import net.osmand.aidl.note.TakePhotoNoteParams;
 import net.osmand.aidl.note.StartVideoRecordingParams;
@@ -866,31 +869,25 @@ interface IOsmAndAidlInterface {
     /**
      * Method to get position of various objects
      *
-     * @params positionType (int) - type of position to get
+     * @params locationType (ALocationType) - type of position to get (CURRENT - last fixed, PROJECTION - last projection, ROUTE_END end of the route)
      */
-    boolean getPosition(in int positionType, out APosition position);
-
-    /**
-     * Method to get index of current route segment
-     *
-     */
-    int getCurrentRouteSegmentIndex();
-
-    /**
-     * Method to get creation time current route
-     *
-     */
-    long getRouteCreationTime();
-
-    /**
-     * Method to get current route points
-     *
-     */
-    boolean getRoutePoints(out List<ALatLon> route);
+    boolean getLocation(in ALocationType locationType, out ALocation location);
 
     /**
      * Method to get application mode
      *
      */
     String getApplicationMode();
+
+    /**
+     * Method to get current navigation status
+     *
+     */
+    boolean getNavigationStatus(out NavigationStatus status);
+
+    /**
+     * Method to get calculated route
+     *
+     */
+    boolean getCalculatedRoute(out CalculatedRoute route);
 }

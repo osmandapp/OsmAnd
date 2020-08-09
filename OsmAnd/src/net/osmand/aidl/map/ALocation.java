@@ -3,7 +3,7 @@ package net.osmand.aidl.map;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class APosition implements Parcelable {
+public class ALocation implements Parcelable {
 
 	public double getLatitude() {
 		return latitude;
@@ -51,7 +51,7 @@ public class APosition implements Parcelable {
 	private double speed;
 	private double bearing;
 
-	public APosition(double latitude, double longitude, double altitude, double speed, double bearing) {
+	public ALocation(double latitude, double longitude, double altitude, double speed, double bearing) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.altitude = altitude;
@@ -59,22 +59,22 @@ public class APosition implements Parcelable {
 		this.bearing = bearing;
 	}
 
-	public APosition(Parcel in) {
+	public ALocation(Parcel in) {
 		readFromParcel(in);
 	}
 
-	public static final Creator<APosition> CREATOR = new
-			Creator<APosition>() {
-				public APosition createFromParcel(Parcel in) {
-					return new APosition(in);
+	public static final Creator<ALocation> CREATOR = new
+			Creator<ALocation>() {
+				public ALocation createFromParcel(Parcel in) {
+					return new ALocation(in);
 				}
 
-				public APosition[] newArray(int size) {
-					return new APosition[size];
+				public ALocation[] newArray(int size) {
+					return new ALocation[size];
 				}
 			};
 
-	public APosition() {
+	public ALocation() {
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class APosition implements Parcelable {
 		if (getClass() != obj.getClass())
 			return false;
 
-		APosition other = (APosition) obj;
+		ALocation other = (ALocation) obj;
 		return Math.abs(latitude - other.latitude) < 0.00001
 				&& Math.abs(longitude - other.longitude) < 0.00001
 				&& Math.abs(altitude - other.altitude) < 1

@@ -16,10 +16,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
 import net.osmand.aidl.OsmandAidlApi.SearchCompleteCallback;
-import net.osmand.aidlapi.map.APosition;
+import net.osmand.aidlapi.map.ALocation;
 import net.osmand.aidlapi.IOsmAndAidlCallback;
 import net.osmand.aidlapi.IOsmAndAidlInterface;
 import net.osmand.aidlapi.calculateroute.CalculateRouteParams;
+import net.osmand.aidlapi.calculateroute.CalculatedRoute;
 import net.osmand.aidlapi.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidlapi.contextmenu.RemoveContextMenuButtonsParams;
 import net.osmand.aidlapi.contextmenu.UpdateContextMenuButtonsParams;
@@ -50,6 +51,7 @@ import net.osmand.aidlapi.gpx.StartGpxRecordingParams;
 import net.osmand.aidlapi.gpx.StopGpxRecordingParams;
 import net.osmand.aidlapi.lock.SetLockStateParams;
 import net.osmand.aidlapi.map.ALatLon;
+import net.osmand.aidlapi.map.ALocationType;
 import net.osmand.aidlapi.map.SetMapLocationParams;
 import net.osmand.aidlapi.maplayer.AddMapLayerParams;
 import net.osmand.aidlapi.maplayer.RemoveMapLayerParams;
@@ -80,6 +82,7 @@ import net.osmand.aidlapi.navigation.PauseNavigationParams;
 import net.osmand.aidlapi.navigation.ResumeNavigationParams;
 import net.osmand.aidlapi.navigation.StopNavigationParams;
 import net.osmand.aidlapi.navigation.UnmuteNavigationParams;
+import net.osmand.aidlapi.navigation.NavigationStatus;
 import net.osmand.aidlapi.note.StartAudioRecordingParams;
 import net.osmand.aidlapi.note.StartVideoRecordingParams;
 import net.osmand.aidlapi.note.StopRecordingParams;
@@ -92,7 +95,6 @@ import net.osmand.aidlapi.search.SearchResult;
 import net.osmand.aidlapi.tiles.ASqliteDbFile;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.util.Algorithms;
 
@@ -1256,60 +1258,16 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		}
 
 		@Override
-		public boolean getPosition(int positionType, APosition position) {
+		public boolean getLocation(ALocationType locationType, ALocation location) {
 			try {
-				OsmandAidlApi api = getApi("getPosition");
+				OsmandAidlApi api = getApi("getLocation");
 				if (api != null) {
-					net.osmand.aidl.map.APosition p = api.getPosition(positionType);
-					position.setLatitude(p.getLatitude());
-					position.setLongitude(p.getLongitude());
-					position.setAltitude(p.getAltitude());
-					position.setSpeed(p.getSpeed());
-					position.setBearing(p.getBearing());
-					return true;
-				}
-			} catch (Exception e) {
-				handleException(e);
-			}
-			return false;
-		}
-
-		@Override
-		public int getCurrentRouteSegmentIndex() {
-			try {
-				OsmandAidlApi api = getApi("getCurrentRouteSegmentIndex");
-				if (api != null) {
-					return api.getCurrentRouteSegmentIndex();
-				}
-			} catch (Exception e) {
-				handleException(e);
-			}
-			return -1;
-		}
-
-		@Override
-		public long getRouteCreationTime() {
-			try {
-				OsmandAidlApi api = getApi("getRouteCreationTime");
-				if (api != null) {
-					return api.getRouteCreationTime();
-				}
-			} catch (Exception e) {
-				handleException(e);
-			}
-			return -1;
-		}
-
-		@Override
-		public boolean getRoutePoints(List<ALatLon> route) {
-			try {
-				OsmandAidlApi api = getApi("getRoutePoints");
-				if (api != null) {
-					route.clear();
-					List<Location> locations = api.getRoute().getImmutableAllLocations();
-					for (Location location : locations) {
-						route.add(new ALatLon(location.getLatitude(), location.getLongitude()));
-					}
+					net.osmand.aidl.map.ALocation p = api.getLocationV2(locationType);
+					location.setLatitude(p.getLatitude());
+					location.setLongitude(p.getLongitude());
+					location.setAltitude(p.getAltitude());
+					location.setSpeed(p.getSpeed());
+					location.setBearing(p.getBearing());
 					return true;
 				}
 			} catch (Exception e) {
@@ -1329,6 +1287,51 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 				handleException(e);
 			}
 			return null;
+		}
+
+		@Override
+		public boolean getNavigationStatus(NavigationStatus navigationStatus){
+			try {
+				OsmandAidlApi api = getApi("getNavigationStatus");
+				if (api != null) {
+					net.osmand.aidl.navigation.NavigationStatus status = api.getNavigationStatus();
+					navigationStatus.setCurrentRouteSegmentIndex(status.getCurrentRouteSegmentIndex());
+					navigationStatus.setCurrentMaxSpeed(status.getCurrentMaxSpeed());
+					navigationStatus.setLeftDistance(status.getLeftDistance());
+					navigationStatus.setLeftTime(status.getLeftTime());
+					navigationStatus.setLeftDistanceToNextIntermediate(status.getLeftDistanceToNextIntermediate());
+					navigationStatus.setLeftTimeToNextIntermediate(status.getLeftTimeToNextIntermediate());
+					navigationStatus.setRouteCalculated(status.isRouteCalculated());
+					navigationStatus.setRouteFinished(status.isRouteFinished());
+					navigationStatus.setPauseNavigation(status.isPauseNavigation());
+					navigationStatus.setDeviatedFromRoute(status.isDeviatedFromRoute());
+					return true;
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return false;
+		}
+
+		@Override
+		public boolean getCalculatedRoute(CalculatedRoute calculatedRoute){
+			try {
+				OsmandAidlApi api = getApi("getCalculatedRoute");
+				if (api != null) {
+					CalculatedRoute route = api.getCalculatedRouteV2();
+					calculatedRoute.setRouteCalculated(route.isRouteCalculated());
+					calculatedRoute.setAppMode(route.getAppMode());
+					calculatedRoute.setRoutePoints(route.getRoutePoints());
+					calculatedRoute.setRouteDistance(route.getRouteDistance());
+					calculatedRoute.setRoutingTime(route.getRoutingTime());
+					calculatedRoute.setCreationTime(route.getCreationTime());
+					calculatedRoute.setCalculationTime(route.getCalculationTime());
+					return true;
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return false;
 		}
 
 		@Override

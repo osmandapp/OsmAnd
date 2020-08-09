@@ -17,6 +17,7 @@ import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
 import net.osmand.aidl.OsmandAidlApi.SearchCompleteCallback;
 import net.osmand.aidl.calculateroute.CalculateRouteParams;
+import net.osmand.aidl.calculateroute.CalculatedRoute;
 import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidl.contextmenu.RemoveContextMenuButtonsParams;
 import net.osmand.aidl.contextmenu.UpdateContextMenuButtonsParams;
@@ -46,7 +47,8 @@ import net.osmand.aidl.gpx.ShowGpxParams;
 import net.osmand.aidl.gpx.StartGpxRecordingParams;
 import net.osmand.aidl.gpx.StopGpxRecordingParams;
 import net.osmand.aidl.map.ALatLon;
-import net.osmand.aidl.map.APosition;
+import net.osmand.aidl.map.ALocation;
+import net.osmand.aidl.map.ALocationType;
 import net.osmand.aidl.map.SetMapLocationParams;
 import net.osmand.aidl.maplayer.AddMapLayerParams;
 import net.osmand.aidl.maplayer.RemoveMapLayerParams;
@@ -73,6 +75,7 @@ import net.osmand.aidl.navigation.MuteNavigationParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
 import net.osmand.aidl.navigation.NavigateParams;
 import net.osmand.aidl.navigation.NavigateSearchParams;
+import net.osmand.aidl.navigation.NavigationStatus;
 import net.osmand.aidl.navigation.PauseNavigationParams;
 import net.osmand.aidl.navigation.ResumeNavigationParams;
 import net.osmand.aidl.navigation.StopNavigationParams;
@@ -1282,60 +1285,16 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		}
 
 		@Override
-		public boolean getPosition(int positionType, APosition position) {
+		public boolean getLocation(ALocationType locationType, ALocation location) {
 			try {
-				OsmandAidlApi api = getApi("getPosition");
+				OsmandAidlApi api = getApi("getLocation");
 				if (api != null) {
-					APosition p = api.getPosition(positionType);
-					position.setLatitude(p.getLatitude());
-					position.setLongitude(p.getLongitude());
-					position.setAltitude(p.getAltitude());
-					position.setSpeed(p.getSpeed());
-					position.setBearing(p.getBearing());
-					return true;
-				}
-			} catch (Exception e) {
-				handleException(e);
-			}
-			return false;
-		}
-
-		@Override
-		public int getCurrentRouteSegmentIndex() {
-			try {
-				OsmandAidlApi api = getApi("getCurrentRouteSegmentIndex");
-				if (api != null) {
-					return api.getCurrentRouteSegmentIndex();
-				}
-			} catch (Exception e) {
-				handleException(e);
-			}
-			return -1;
-		}
-
-		@Override
-		public long getRouteCreationTime() {
-			try {
-				OsmandAidlApi api = getApi("getRouteCreationTime");
-				if (api != null) {
-					return api.getRouteCreationTime();
-				}
-			} catch (Exception e) {
-				handleException(e);
-			}
-			return -1;
-		}
-
-		@Override
-		public boolean getRoutePoints(List<ALatLon> route) {
-			try {
-				OsmandAidlApi api = getApi("getRoutePoints");
-				if (api != null) {
-					route.clear();
-					List<Location> locations = api.getRoute().getImmutableAllLocations();
-					for (Location location : locations) {
-						route.add(new ALatLon(location));
-					}
+					ALocation p = api.getLocation(locationType);
+					location.setLatitude(p.getLatitude());
+					location.setLongitude(p.getLongitude());
+					location.setAltitude(p.getAltitude());
+					location.setSpeed(p.getSpeed());
+					location.setBearing(p.getBearing());
 					return true;
 				}
 			} catch (Exception e) {
@@ -1355,6 +1314,51 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				handleException(e);
 			}
 			return null;
+		}
+
+		@Override
+		public boolean getNavigationStatus(NavigationStatus navigationStatus){
+			try {
+				OsmandAidlApi api = getApi("getNavigationStatus");
+				if (api != null) {
+					NavigationStatus status = api.getNavigationStatus();
+					navigationStatus.setCurrentRouteSegmentIndex(status.getCurrentRouteSegmentIndex());
+					navigationStatus.setCurrentMaxSpeed(status.getCurrentMaxSpeed());
+					navigationStatus.setLeftDistance(status.getLeftDistance());
+					navigationStatus.setLeftTime(status.getLeftTime());
+					navigationStatus.setLeftDistanceToNextIntermediate(status.getLeftDistanceToNextIntermediate());
+					navigationStatus.setLeftTimeToNextIntermediate(status.getLeftTimeToNextIntermediate());
+					navigationStatus.setRouteCalculated(status.isRouteCalculated());
+					navigationStatus.setRouteFinished(status.isRouteFinished());
+					navigationStatus.setPauseNavigation(status.isPauseNavigation());
+					navigationStatus.setDeviatedFromRoute(status.isDeviatedFromRoute());
+					return true;
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return false;
+		}
+
+		@Override
+		public boolean getCalculatedRoute(CalculatedRoute calculatedRoute){
+			try {
+				OsmandAidlApi api = getApi("getCalculatedRoute");
+				if (api != null) {
+					CalculatedRoute route = api.getCalculatedRoute();
+					calculatedRoute.setRouteCalculated(route.isRouteCalculated());
+					calculatedRoute.setAppMode(route.getAppMode());
+					calculatedRoute.setRoutePoints(route.getRoutePoints());
+					calculatedRoute.setRouteDistance(route.getRouteDistance());
+					calculatedRoute.setRoutingTime(route.getRoutingTime());
+					calculatedRoute.setCreationTime(route.getCreationTime());
+					calculatedRoute.setCalculationTime(route.getCalculationTime());
+					return true;
+				}
+			} catch (Exception e) {
+				handleException(e);
+			}
+			return false;
 		}
 
 		@Override

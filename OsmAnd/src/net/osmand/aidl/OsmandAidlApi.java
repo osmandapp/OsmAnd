@@ -2,7 +2,6 @@ package net.osmand.aidl;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -33,14 +32,18 @@ import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.aidl.calculateroute.CalculatedRoute;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
-import net.osmand.aidl.map.APosition;
+import net.osmand.aidl.map.ALatLon;
+import net.osmand.aidl.map.ALocation;
 import net.osmand.aidl.navigation.ADirectionInfo;
+import net.osmand.aidl.navigation.NavigationStatus;
 import net.osmand.aidl.navigation.OnVoiceNavigationParams;
 import net.osmand.aidl.quickaction.QuickActionInfoParams;
 import net.osmand.aidl.tiles.ASqliteDbFile;
+import net.osmand.aidlapi.map.ALocationType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -63,7 +66,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.LockHelper;
@@ -78,7 +80,6 @@ import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.SettingsHelper;
@@ -1037,31 +1038,142 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	public APosition getPosition(int positionType) {
-		switch (positionType) {
-			case 0: {
-				RoutingHelper rh = app.getRoutingHelper();
+	public ALocation getLocation(net.osmand.aidl.map.ALocationType locationType) {
+		RoutingHelper rh = app.getRoutingHelper();
+		switch (locationType) {
+			case CURRENT:
 				Location location = rh.getLastFixedLocation();
-				return new APosition(
+				return new ALocation(
 						location.getLatitude(),
 						location.getLongitude(),
 						location.getAltitude(),
 						location.getSpeed(),
 						location.getBearing()
 				);
-			}
+			case PROJECTION:
+				Location projection = rh.getLastProjection();
+				return new ALocation(
+						projection.getLatitude(),
+						projection.getLongitude(),
+						projection.getAltitude(),
+						projection.getSpeed(),
+						projection.getBearing()
+				);
+			case ROUTE_END:
+				LatLon finalLocation = rh.getFinalLocation();
+				return new ALocation(
+						finalLocation.getLatitude(),
+						finalLocation.getLongitude(),
+						0,
+						0,
+						0
+				);
 		}
 		return null;
 	}
 
-	public int getCurrentRouteSegmentIndex() {
-		RouteCalculationResult route = getRoute();
-		return route != null ? route.getCurrentRoute() : -1;
+	public ALocation getLocationV2(ALocationType locationType) {
+		RoutingHelper rh = app.getRoutingHelper();
+		switch (locationType) {
+			case CURRENT:
+				Location location = rh.getLastFixedLocation();
+				return new ALocation(
+						location.getLatitude(),
+						location.getLongitude(),
+						location.getAltitude(),
+						location.getSpeed(),
+						location.getBearing()
+				);
+			case PROJECTION:
+				Location projection = rh.getLastProjection();
+				return new ALocation(
+						projection.getLatitude(),
+						projection.getLongitude(),
+						projection.getAltitude(),
+						projection.getSpeed(),
+						projection.getBearing()
+				);
+			case ROUTE_END:
+				LatLon finalLocation = rh.getFinalLocation();
+				return new ALocation(
+						finalLocation.getLatitude(),
+						finalLocation.getLongitude(),
+						0,
+						0,
+						0
+				);
+		}
+		return null;
 	}
 
-	public long getRouteCreationTime() {
-		RouteCalculationResult route = getRoute();
-		return route != null ? route.getCreationTime() : -1;
+	public NavigationStatus getNavigationStatus() {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		RouteCalculationResult route = routingHelper.getRoute();
+
+		return new NavigationStatus(
+				route.getCurrentRoute(),
+				route.getCurrentMaxSpeed(),
+				routingHelper.getLeftDistance(),
+				routingHelper.getLeftTime(),
+				routingHelper.getLeftDistanceNextIntermediate(),
+				routingHelper.getLeftTimeNextIntermediate(),
+				routingHelper.isRouteCalculated(),
+				routingHelper.isRouteWasFinished(),
+				routingHelper.isPauseNavigation(),
+				routingHelper.isDeviatedFromRoute()
+		);
+    }
+
+    public CalculatedRoute getCalculatedRoute() {
+        RoutingHelper routingHelper = app.getRoutingHelper();
+		boolean isRouteCalculated = routingHelper.isRouteCalculated();
+		CalculatedRoute calculatedRoute = new CalculatedRoute();
+
+		calculatedRoute.setRouteCalculated(isRouteCalculated);
+		calculatedRoute.setAppMode(routingHelper.getAppMode().getStringKey());
+
+		if (isRouteCalculated) {
+			RouteCalculationResult route = routingHelper.getRoute();
+
+			List<Location> locations = route.getImmutableAllLocations();
+			ArrayList<ALatLon> routePoints = new ArrayList<>(locations.size());
+			for (Location location : locations) {
+				routePoints.add(new ALatLon(location));
+			}
+
+			calculatedRoute.setRoutePoints(routePoints);
+			calculatedRoute.setRouteDistance(route.getWholeDistance());
+			calculatedRoute.setRoutingTime(route.getRoutingTime());
+			calculatedRoute.setCreationTime(route.getCreationTime());
+			calculatedRoute.setCalculationTime(route.getCalculateTime());
+		}
+		return calculatedRoute;
+    }
+
+	public net.osmand.aidlapi.calculateroute.CalculatedRoute getCalculatedRouteV2(){
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		boolean isRouteCalculated = routingHelper.isRouteCalculated();
+		net.osmand.aidlapi.calculateroute.CalculatedRoute calculatedRoute = new net.osmand.aidlapi.calculateroute.CalculatedRoute();
+
+		calculatedRoute.setRouteCalculated(isRouteCalculated);
+		calculatedRoute.setAppMode(routingHelper.getAppMode().getStringKey());
+
+		if (isRouteCalculated) {
+			RouteCalculationResult route = routingHelper.getRoute();
+
+			List<Location> locations = route.getImmutableAllLocations();
+			ArrayList<net.osmand.aidlapi.map.ALatLon> routePoints = new ArrayList<>(locations.size());
+			for (Location location : locations) {
+				routePoints.add(new net.osmand.aidlapi.map.ALatLon(location.getLatitude(), location.getLongitude()));
+			}
+
+			calculatedRoute.setRoutePoints(routePoints);
+			calculatedRoute.setRouteDistance(route.getWholeDistance());
+			calculatedRoute.setRoutingTime(route.getRoutingTime());
+			calculatedRoute.setCreationTime(route.getCreationTime());
+			calculatedRoute.setCalculationTime(route.getCalculateTime());
+		}
+		return calculatedRoute;
 	}
 
 	public RouteCalculationResult getRoute() {

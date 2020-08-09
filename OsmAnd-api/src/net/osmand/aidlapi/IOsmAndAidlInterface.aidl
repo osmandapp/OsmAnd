@@ -1,7 +1,8 @@
 package net.osmand.aidlapi;
 
 import net.osmand.aidlapi.map.ALatLon;
-import net.osmand.aidlapi.map.APosition;
+import net.osmand.aidlapi.map.ALocation;
+import net.osmand.aidlapi.map.ALocationType;
 import net.osmand.aidlapi.map.SetMapLocationParams;
 
 import net.osmand.aidlapi.favorite.group.AFavoriteGroup;
@@ -20,6 +21,7 @@ import net.osmand.aidlapi.mapmarker.RemoveMapMarkerParams;
 import net.osmand.aidlapi.mapmarker.UpdateMapMarkerParams;
 
 import net.osmand.aidlapi.calculateroute.CalculateRouteParams;
+import net.osmand.aidlapi.calculateroute.CalculatedRoute;
 
 import net.osmand.aidlapi.gpx.ImportGpxParams;
 import net.osmand.aidlapi.gpx.ShowGpxParams;
@@ -44,6 +46,7 @@ import net.osmand.aidlapi.maplayer.UpdateMapLayerParams;
 
 import net.osmand.aidlapi.navigation.NavigateParams;
 import net.osmand.aidlapi.navigation.NavigateGpxParams;
+import net.osmand.aidlapi.navigation.NavigationStatus;
 
 import net.osmand.aidlapi.note.TakePhotoNoteParams;
 import net.osmand.aidlapi.note.StartVideoRecordingParams;
@@ -865,30 +868,25 @@ interface IOsmAndAidlInterface {
     /**
      * Method to get position of various objects
      *
-     * @params positionType (int) - type of position to get
+     * @params locationType (ALocationType) - type of position to get (CURRENT - last fixed, PROJECTION - last projection, ROUTE_END end of the route)
      */
-    boolean getPosition(in int positionType, out APosition position);
-
-    /**
-     * Method to get index of the current route segment
-     */
-    int getCurrentRouteSegmentIndex();
-
-    /**
-     * Method to get creation time of current route
-     *
-     */
-    long getRouteCreationTime();
-
-    /**
-     * Method to get current route points
-     *
-     */
-    boolean getRoutePoints(out List<ALatLon> route);
+    boolean getLocation(in ALocationType locationType, out ALocation location);
 
     /**
      * Method to get application mode
      *
      */
     String getApplicationMode();
+
+    /**
+     * Method to get current navigation status
+     *
+     */
+    boolean getNavigationStatus(out NavigationStatus status);
+
+    /**
+     * Method to get calculated route
+     *
+     */
+    boolean getCalculatedRoute(out CalculatedRoute route);
 }

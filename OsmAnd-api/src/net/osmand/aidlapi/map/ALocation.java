@@ -1,9 +1,11 @@
 package net.osmand.aidlapi.map;
 
+import android.os.Bundle;
 import android.os.Parcel;
-import android.os.Parcelable;
 
-public class APosition implements Parcelable {
+import net.osmand.aidlapi.AidlParams;
+
+public class ALocation extends AidlParams {
 
 	public double getLatitude() {
 		return latitude;
@@ -51,7 +53,7 @@ public class APosition implements Parcelable {
 	private double speed;
 	private double bearing;
 
-	public APosition(double latitude, double longitude, double altitude, double speed, double bearing) {
+	public ALocation(double latitude, double longitude, double altitude, double speed, double bearing) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.altitude = altitude;
@@ -59,22 +61,22 @@ public class APosition implements Parcelable {
 		this.bearing = bearing;
 	}
 
-	public APosition(Parcel in) {
+	public ALocation(Parcel in) {
 		readFromParcel(in);
 	}
 
-	public static final Creator<APosition> CREATOR = new
-			Creator<APosition>() {
-				public APosition createFromParcel(Parcel in) {
-					return new APosition(in);
+	public static final Creator<ALocation> CREATOR = new
+			Creator<ALocation>() {
+				public ALocation createFromParcel(Parcel in) {
+					return new ALocation(in);
 				}
 
-				public APosition[] newArray(int size) {
-					return new APosition[size];
+				public ALocation[] newArray(int size) {
+					return new ALocation[size];
 				}
 			};
 
-	public APosition() {
+	public ALocation() {
 	}
 
 	@Override
@@ -104,7 +106,7 @@ public class APosition implements Parcelable {
 		if (getClass() != obj.getClass())
 			return false;
 
-		APosition other = (APosition) obj;
+		ALocation other = (ALocation) obj;
 		return Math.abs(latitude - other.latitude) < 0.00001
 				&& Math.abs(longitude - other.longitude) < 0.00001
 				&& Math.abs(altitude - other.altitude) < 1
@@ -116,23 +118,22 @@ public class APosition implements Parcelable {
 		return "Lat " + ((float)latitude) + " Lon " + ((float)longitude) + " Alt " + ((float)altitude);
 	}
 
-	public void writeToParcel(Parcel out, int flags) {
-		out.writeDouble(latitude);
-		out.writeDouble(longitude);
-		out.writeDouble(altitude);
-		out.writeDouble(speed);
-		out.writeDouble(bearing);
+
+	@Override
+	protected void readFromBundle(Bundle bundle) {
+		latitude = bundle.getDouble("latitude", latitude);
+		longitude = bundle.getDouble("longitude", longitude);
+		altitude = bundle.getDouble("altitude", altitude);
+		speed = bundle.getDouble("speed", speed);
+		bearing = bundle.getDouble("bearing", bearing);
 	}
 
-	public void readFromParcel(Parcel in) {
-		latitude = in.readDouble();
-		longitude = in.readDouble();
-		altitude = in.readDouble();
-		speed = in.readDouble();
-		bearing = in.readDouble();
-	}
-
-	public int describeContents() {
-		return 0;
+	@Override
+	protected void writeToBundle(Bundle bundle) {
+		bundle.putDouble("latitude", latitude);
+		bundle.putDouble("longitude", longitude);
+		bundle.putDouble("altitude", altitude);
+		bundle.putDouble("speed", speed);
+		bundle.putDouble("bearing", bearing);
 	}
 }
