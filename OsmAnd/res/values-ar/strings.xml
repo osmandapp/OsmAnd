@@ -3831,4 +3831,15 @@
     <string name="overwrite_track">الكتابة فوق المسار</string>
     <string name="navigation_profile">ملف تعريف التنقل</string>
     <string name="rourte_between_points_add_track_desc">حدد ملف المسار الذي سيتم إضافة مقطع جديد إليه.</string>
+    <string name="save_as_new_track">حفظ كمسار جديد</string>
+    <string name="reverse_route">عكس الطريق</string>
+    <string name="rourte_between_points_whole_track_button_desc">سيتم إعادة حساب المقطع التالي فقط باستخدام ملف التعريف المحدد.</string>
+    <string name="rourte_between_points_next_segment_button_desc">سيتم إعادة حساب المقطع التالي فقط باستخدام ملف التعريف المحدد.</string>
+    <string name="rourte_between_points_desc">حدد كيفية توصيل النقاط، بخط مستقيم، أو حساب مسار بينها مع ملف التعريف المحدد.</string>
+    <string name="whole_track">مسار كامل</string>
+    <string name="next_segment">المقطع التالي</string>
+    <string name="rourte_between_points_warning_desc">لاستخدام هذا الخيارتحتاج إلى محاذاة المسار الخاص بك إلى خريطة الطرق.
+\n
+\nفي الخطوة التالية ، ستحتاج إلى تحديد ملف تعريف الملاحة لاكتشاف الطرق المسموح بها وبداية المسافة لتقريب تتبعك بالطرق.</string>
+    <string name="threshold_distance">بداية المسافة</string>
 </resources>
