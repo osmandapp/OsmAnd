@@ -2488,7 +2488,7 @@
     <string name="shared_string_options">Agordoj</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd kunigos punktojn al vojojn ĉe la elektita profilo.</string>
     <string name="measurement_tool_save_as_new_track_descr">Konservi punktojn kiel kurspunktojn aŭ linion.</string>
-    <string name="choose_navigation_type">Elektu profilon de navigado</string>
+    <string name="choose_navigation_type">Elektu profilon de navigo</string>
     <string name="add_route_points">Aldoni kurspunktojn</string>
     <string name="add_line">Aldoni linion</string>
     <string name="empty_state_my_tracks">Aldoni GPX-dosierojn</string>
@@ -3081,7 +3081,7 @@
     <string name="profile_alert_delete_msg">Ĉu vi certe volas forigi la profilon “%s”\?</string>
     <string name="select_base_profile_dialog_title">Elektu komencan profilon</string>
     <string name="select_base_profile_dialog_message">Via propra profilo estos bazita sur iu implicita aplikaĵa profilo, kiu difinos bazajn agordojn kiel videblon de fenestraĵoj, unuojn de rapido kaj distanco. Jen implicitaj profiloj kaj ekzemplaj profiloj por krei:</string>
-    <string name="select_nav_profile_dialog_title">Elektu navigadan profilon</string>
+    <string name="select_nav_profile_dialog_title">Elektu profilon de navigo</string>
     <string name="base_profile_descr_car">Aŭto, kamiono, motorciklo</string>
     <string name="base_profile_descr_bicycle">Biciklo, motorbiciklo, ĉevalo</string>
     <string name="base_profile_descr_pedestrian">Promenado, marŝado, kurado</string>
@@ -3839,4 +3839,17 @@
     <string name="plan_route_select_track_file_for_open">Elekti dosieron de spuro por malfermi.</string>
     <string name="shared_string_done">Farita</string>
     <string name="overwrite_track">Superskribi kurson</string>
+    <string name="save_as_new_track">Konservi kiel novan spuron</string>
+    <string name="reverse_route">Inversigi kurson</string>
+    <string name="rourte_between_points_whole_track_button_desc">Tuta kurso estos rekalkulita uzante la elektitan profilon.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Nur sekva segmento estos rekalkulita uzante la elektitan profilon.</string>
+    <string name="rourte_between_points_desc">Elektu kiel konekti punktojn: ĉu per rekta linio, ĉu kalkuli kurson inter ilin uzante la elektitan profilon.</string>
+    <string name="whole_track">Tuta kurso</string>
+    <string name="next_segment">Sekva segmento</string>
+    <string name="rourte_between_points_warning_desc">Por uzi tiun ĉi agordon, OsmAnd postulas ĝustigi vian kurson al vojoj sur la mapo.
+\n
+\n Sekve vi devos elekti profilon de navigo (por trovi permesatajn vojojn) kaj sojlan distancon (por alproksimigi vian kurson al vojoj).</string>
+    <string name="threshold_distance">Sojla distanco</string>
+    <string name="navigation_profile">Profilo de navigo</string>
+    <string name="rourte_between_points_add_track_desc">Elektu dosieron de spuro al kiu nova segmento estos aldonita.</string>
 </resources>
