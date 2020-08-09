@@ -580,7 +580,7 @@
     <string name="traffic_warning_border_control">Landlima kontrolado</string>
     <string name="traffic_warning_payment">Vojpagejo</string>
     <string name="traffic_warning_stop">Stop\' signo</string>
-    <string name="traffic_warning_calming">Trafik-trankviligejo</string>
+    <string name="traffic_warning_calming">Trafik-trankviligilo</string>
     <string name="traffic_warning_speed_camera">Rapid-kontrolilo</string>
     <string name="traffic_warning">Trafika averto</string>
     <string name="speak_poi">Proksimaj interesejoj</string>
@@ -1376,7 +1376,7 @@
     <string name="search_position_current_location_found">Mia pozicio (determinita)</string>
     <string name="search_position_address">Adreso…</string>
     <string name="search_position_favorites">Ŝatataj…</string>
-    <string name="search_position_undefined">Nedifinita</string>
+    <string name="shared_string_undefined">Nedifinita</string>
     <string name="search_position_map_view">Nuna map-centro</string>
     <string name="select_search_position">El:</string>
     <string name="context_menu_item_search">Serĉi proksime</string>
@@ -3820,4 +3820,23 @@
     <string name="app_mode_wheelchair_forward">Rulseĝo (klinita)</string>
     <string name="app_mode_go_cart">Gokarto</string>
     <string name="osm_edit_closed_note">Fermita OSM‑rimarko</string>
+    <string name="add_hidden_group_info">La aldonita punkto ne estos videbla sur la mapo, ĉar la elektita grupo estas kaŝita, vi povas trovi ĝin en “%s”.</string>
+    <string name="set_working_days_to_continue">Necesas enigi tagojn de malfermo por pluigi</string>
+    <string name="route_between_points">Kurso inter punktoj</string>
+    <string name="plan_a_route">Plani kurson</string>
+    <string name="add_to_a_track">Aldoni al spuro</string>
+    <string name="track_show_start_finish_icons">Montri markojn de komenco/fino</string>
+    <string name="select_track_width">Elekti larĝon</string>
+    <string name="plan_route_last_edited">Antaŭaj</string>
+    <string name="gpx_split_interval_descr">Elektu tempon/distancon je kiu markoj sur la spuro estos montrataj.</string>
+    <string name="gpx_split_interval_none_descr">Elektu preferatan manieron de divido: laŭ tempo aŭ laŭ distanco.</string>
+    <string name="shared_string_custom">Propra</string>
+    <string name="gpx_direction_arrows">Sagetoj de direkto</string>
+    <string name="track_coloring_solid">Plena</string>
+    <string name="plan_route_import_track">Enporti spuron</string>
+    <string name="plan_route_open_existing_track">Malfermi ekzistan spuron</string>
+    <string name="plan_route_create_new_route">Krei novan kurson</string>
+    <string name="plan_route_select_track_file_for_open">Elekti dosieron de spuro por malfermi.</string>
+    <string name="shared_string_done">Farita</string>
+    <string name="overwrite_track">Superskribi kurson</string>
 </resources>

@@ -117,7 +117,7 @@
     <string name="shared_string_rename">Преименуј</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
     <string name="search_position_address">Адреса…</string>
-    <string name="search_position_undefined">Неодређено</string>
+    <string name="shared_string_undefined">Неодређено</string>
     <string name="layer_map_appearance">Конфигурација екрана</string>
     <string name="show_lanes">Траке</string>
     <string name="avoid_unpaved">Без неасфалтираних путева</string>
@@ -684,7 +684,7 @@
     <string name="shared_string_not_selected">Није означено</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">min</string>
-    <string name="traffic_warning_calming">Смиривање саобраћаја</string>
+    <string name="traffic_warning_calming">Лежећи полицајац</string>
     <string name="way_alarms">Упозорења о гужвама у саобраћају</string>
     <string name="background_service_is_enabled_question">Позадинске услуге OsmAnd-а су и даље покренуте. Прекинути и њих?</string>
     <string name="sleep_mode_stop_dialog">Прекинути позадински режим GPS-а?</string>
@@ -3761,7 +3761,7 @@
     <string name="terrain_slider_description">Поставите минимални и максимални ниво зума, при коме ће слој бити приказан.</string>
     <string name="hillshade_download_description">Додатне мапе су потребне да бисте видели сенке брда на мапи.</string>
     <string name="slope_download_description">Додатне мапе су потребне да бисте видели нагибе на мапи.</string>
-    <string name="slope_read_more">Можете прочитати више о нагибима у %1$е.</string>
+    <string name="slope_read_more">Можете прочитати више о нагибима у %1$s.</string>
     <string name="terrain_empty_state_text">Омогућите да би видели сенке брда или мапе нагиба. Можете прочитати више о овим врстама карта на нашем сајту.</string>
     <string name="import_complete_description">Сви подаци %1$S су увезени, можете да употребите дугмад испод да би сте отворили неопходни део апликације ради управљања њима.</string>
     <string name="checking_for_duplicate_description">Османд проверава %1$S постојање дупликата са постојећим елементима у апликацији.
@@ -3821,4 +3821,19 @@
     <string name="route_between_points">Рута између тачака</string>
     <string name="plan_a_route">Планирај руту</string>
     <string name="add_to_a_track">Додајте стази</string>
+    <string name="select_track_width">Изаберите ширину</string>
+    <string name="gpx_split_interval_descr">Изаберите интервал на коме ће се приказивати ознаке са раздаљином или временом на стази.</string>
+    <string name="gpx_split_interval_none_descr">Изаберите жељену опцију поделе: по времену или по удаљености.</string>
+    <string name="shared_string_custom">Прилагођен</string>
+    <string name="gpx_direction_arrows">Стрелице смера</string>
+    <string name="track_coloring_solid">Чврст</string>
+    <string name="add_hidden_group_info">Додата тачка неће бити видљива на мапи, пошто је одабрана група сакривена, можете је пронаћи у „%s“.</string>
+    <string name="track_show_start_finish_icons">Прикажи почетно крајне иконе</string>
+    <string name="plan_route_last_edited">Последње измењена</string>
+    <string name="plan_route_import_track">Увези путању</string>
+    <string name="plan_route_open_existing_track">Отвори постојећу путању</string>
+    <string name="plan_route_create_new_route">Креирај нову руту</string>
+    <string name="plan_route_select_track_file_for_open">Изаберите фајл путање за отварање.</string>
+    <string name="shared_string_done">Завршено</string>
+    <string name="overwrite_track">Замени стазу</string>
 </resources>

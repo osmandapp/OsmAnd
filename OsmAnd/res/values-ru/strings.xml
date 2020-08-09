@@ -227,7 +227,7 @@
     <string name="subcategories">Подкатегории</string>
     <string name="selected_categories">Выбранные категории</string>
     <string name="create_custom_poi">Создать настраиваемый фильтр</string>
-    <string name="custom_search">Настроить поиск</string>
+    <string name="custom_search">Настраиваемый поиск</string>
     <string name="shared_string_filters">Фильтры</string>
     <string name="apply_filters">Применить фильтры</string>
     <string name="save_filter">Сохранить фильтр</string>
@@ -465,7 +465,7 @@
     <string name="search_position_current_location_found">Моё местоположение (найдено)</string>
     <string name="search_position_address">Адрес…</string>
     <string name="search_position_favorites">Избранные…</string>
-    <string name="search_position_undefined">Неопределённо</string>
+    <string name="shared_string_undefined">Неопределённо</string>
     <string name="search_position_map_view">Текущий центр карты</string>
     <string name="select_search_position">Начало:</string>
     <string name="context_menu_item_search">Искать рядом</string>
@@ -1620,7 +1620,7 @@
     <string name="rendering_attr_busRoutes_name">Маршруты автобусов</string>
     <string name="rendering_attr_tramTrainRoutes_name">Маршруты трамваев и поездов</string>
     <string name="rendering_category_hide">Скрыть</string>
-    <string name="impassable_road">Избегать дороги</string>
+    <string name="impassable_road">Избегать дорог</string>
     <string name="lock_screen_request_explanation">%1$s необходимо это разрешение, чтобы выключить экран для экономии энергии.</string>
     <string name="wake_on_voice">Автовключение экрана перед поворотом</string>
     <string name="wake_on_voice_descr">Включать экран перед поворотом (если выключен).</string>
@@ -2379,7 +2379,7 @@
     <string name="yesterday">Вчера</string>
     <string name="last_seven_days">За последние 7 дней</string>
     <string name="this_year">В этом году</string>
-    <string name="plan_route">План маршрута</string>
+    <string name="plan_route">Планирование маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
     <string name="marker_save_as_track">Сохранить как файл GPX</string>
     <string name="move_to_history">Переместить в историю</string>
@@ -3825,4 +3825,17 @@
     <string name="plan_a_route">План маршрута</string>
     <string name="gpx_split_interval_none_descr">Выберите нужный вариант разбиения: по времени или по расстоянию.</string>
     <string name="gpx_split_interval_descr">Выберите интервал с которым будут отображаться метки с расстоянием или временем на треке.</string>
+    <string name="shared_string_custom">Своё</string>
+    <string name="add_hidden_group_info">Добавленная точка не будет видна на карте, так как выбранная группа скрыта, найти её можно в «%s».</string>
+    <string name="track_show_start_finish_icons">Показывать значки старта и финиша</string>
+    <string name="select_track_width">Выберите ширину</string>
+    <string name="gpx_direction_arrows">Стрелки направления</string>
+    <string name="track_coloring_solid">Сплошной</string>
+    <string name="plan_route_last_edited">Последнее изменение</string>
+    <string name="plan_route_import_track">Импортировать трек</string>
+    <string name="plan_route_open_existing_track">Открыть существующий трек</string>
+    <string name="plan_route_create_new_route">Создать новый маршрут</string>
+    <string name="plan_route_select_track_file_for_open">Выберите файл трека для открытия.</string>
+    <string name="shared_string_done">Готово</string>
+    <string name="overwrite_track">Перезаписать трек</string>
 </resources>

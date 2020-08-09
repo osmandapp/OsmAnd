@@ -120,7 +120,7 @@
     <string name="search_position_current_location_found">위치(발견)</string>
     <string name="search_position_address">주소…</string>
     <string name="search_position_favorites">즐겨찾기…</string>
-    <string name="search_position_undefined">정의되지 않음</string>
+    <string name="shared_string_undefined">정의되지 않음</string>
     <string name="search_position_map_view">현재 지도 센터링</string>
     <string name="select_search_position">원점 :</string>
     <string name="context_menu_item_search">가까운 주변 검색</string>

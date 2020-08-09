@@ -1916,7 +1916,7 @@
     <string name="search_position_current_location_found">Իմ դիրքը (որոշված է)</string>
     <string name="search_position_address">Հասցե…</string>
     <string name="search_position_favorites">«Սիրված»…</string>
-    <string name="search_position_undefined">Անորոշ է</string>
+    <string name="shared_string_undefined">Անորոշ է</string>
     <string name="search_position_map_view">Ընթացիկ քարտեզի կենտրոնը</string>
     <string name="select_search_position">Սկիզբ՝</string>
     <string name="context_menu_item_search">Որոնել մոտակայքում</string>

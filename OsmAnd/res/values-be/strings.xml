@@ -605,7 +605,7 @@
     <string name="search_position_current_location_found">Маё становішча (знойдзена)</string>
     <string name="search_position_address">Адрас…</string>
     <string name="search_position_favorites">Улюбёныя мясціны…</string>
-    <string name="search_position_undefined">Нявызначана</string>
+    <string name="shared_string_undefined">Нявызначана</string>
     <string name="search_position_map_view">Цяперашні цэнтр мапы</string>
     <string name="select_search_position">Пачатак:</string>
     <string name="context_menu_item_search">Шукаць навокал</string>

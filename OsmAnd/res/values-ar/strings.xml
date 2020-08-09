@@ -666,7 +666,7 @@
     <string name="search_position_current_location_found">موقعي ( تم تحديده )</string>
     <string name="search_position_address">عنوان…</string>
     <string name="search_position_favorites">المفضلة…</string>
-    <string name="search_position_undefined">غير محدد</string>
+    <string name="shared_string_undefined">غير محدد</string>
     <string name="search_position_map_view">مركز الخريطة الحالي</string>
     <string name="select_search_position">المنطلق:</string>
     <string name="context_menu_item_search">بحث بالجوار</string>
@@ -1185,7 +1185,7 @@
     <string name="speed_limit_exceed_message">حدد حد السرعة المسموح به لتلقي تنبيه صوتي إذا ما تجاوزته.</string>
     <string name="traffic_warning_border_control">مراقبة الحدود</string>
     <string name="traffic_warning_payment">كشك الرسوم</string>
-    <string name="traffic_warning_calming">تخفيف الازدحام</string>
+    <string name="traffic_warning_calming">مطب</string>
     <string name="traffic_warning_speed_camera">كاميرا مراقبة السرعة</string>
     <string name="traffic_warning">تنبيه مروري</string>
     <string name="speak_poi">نقاط الاهتمام المجاورة</string>
@@ -3095,7 +3095,7 @@
     <string name="quick_action_hillshade_hide">إخفاء التضاريس</string>
     <string name="quick_action_show_hide_hillshade">إظهار/إخفاء التضاريس</string>
     <string name="tts_initialization_error">لا يمكن بدء تشغيل أداة تحويل النص إلى كلام.</string>
-    <string name="export_profile">تصدير الوضع</string>
+    <string name="export_profile">تصدير الملف الشخصي</string>
     <string name="exported_osmand_profile">وضع أوسماند: %1$s</string>
     <string name="overwrite_profile_q">الوضع \'%1$s\' موجود بالفعل، هل تريد استبداله؟</string>
     <string name="export_profile_failed">لا يمكن تصدير الوضع.</string>
@@ -3154,7 +3154,7 @@
     <string name="list_of_installed_plugins">الإضافات المثبتة</string>
     <string name="configure_navigation">تكوين الملاحة</string>
     <string name="general_settings_profile_descr">ثيم التطبيق ، وحدات ، المنطقة</string>
-    <string name="configure_profile">إعداد الوضع</string>
+    <string name="configure_profile">تكوين ملف التعريف</string>
     <string name="screen_alerts_descr">تظهر التنبيهات في أسفل اليسار أثناء التنقل.</string>
     <string name="switch_profile">تبديل الوضع</string>
     <string name="language_and_output">اللغة والإخراج</string>
@@ -3401,10 +3401,10 @@
     <string name="edit_profiles_descr">لا يمكنك حذف أوضاع أوسماند الافتراضية ، ولكن يمكنك تعطيلها في الشاشة السابقة ، أو نقلها إلى الأسفل.</string>
     <string name="edit_profiles">تحرير الأوضاع</string>
     <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على قواعد حسابات المسار.</string>
-    <string name="profile_appearance">مظهر الوضع</string>
+    <string name="profile_appearance">مظهر الملف الشخصي</string>
     <string name="choose_icon_color_name">اختر الايقونة واللون والاسم</string>
     <string name="reorder_profiles">تحرير قائمة الأوضاع</string>
-    <string name="selected_profile">الوضع المحدد</string>
+    <string name="selected_profile">الملف الشخصي المحدد</string>
     <string name="reset_confirmation_descr">بالضغط على %1$s، ستفقد كل تغييراتك.</string>
     <string name="reset_all_profile_settings_descr">سيتم إعادة ضبط جميع إعدادات الوضع إلى الحالة الافتراضية بعد التثبيت.</string>
     <string name="reset_all_profile_settings">استعادة الضبط الافتراضي؟</string>
@@ -3814,4 +3814,21 @@
     <string name="route_between_points">المسار بين النقاط</string>
     <string name="plan_a_route">قياس المسافة</string>
     <string name="add_to_a_track">إضافة إلى مسار</string>
+    <string name="add_hidden_group_info">لن تكون النقطة المضافة مرئية على الخريطة، نظرًا لأن المجموعة المحددة مخفية، يمكنك العثور عليها في \"%s\".</string>
+    <string name="track_show_start_finish_icons">إظهار رموز البدء والانتهاء</string>
+    <string name="select_track_width">حدد العرض</string>
+    <string name="gpx_split_interval_descr">حدد الفاصل الزمني الذي سيتم عرض العلامات مع المسافة أو الوقت على المسار.</string>
+    <string name="gpx_split_interval_none_descr">حدد خيار التقسيم المطلوب: حسب الوقت أو بالمسافة.</string>
+    <string name="shared_string_custom">تخصيص</string>
+    <string name="gpx_direction_arrows">اتجاه الأسهم</string>
+    <string name="track_coloring_solid">صلب</string>
+    <string name="plan_route_last_edited">التعديل الأخير</string>
+    <string name="plan_route_import_track">استيراد المسار</string>
+    <string name="plan_route_open_existing_track">فتح المسار الموجود</string>
+    <string name="plan_route_create_new_route">إنشاء مسار جديد</string>
+    <string name="plan_route_select_track_file_for_open">حدد ملف المسار للفتح.</string>
+    <string name="shared_string_done">تم</string>
+    <string name="overwrite_track">الكتابة فوق المسار</string>
+    <string name="navigation_profile">ملف تعريف التنقل</string>
+    <string name="rourte_between_points_add_track_desc">حدد ملف المسار الذي سيتم إضافة مقطع جديد إليه.</string>
 </resources>

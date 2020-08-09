@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/navigation_profile"
+		android:layout_width="wrap_content"
+		android:layout_height="@dimen/measurement_tool_button_height"
+		android:gravity="start|center_vertical"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:layout_marginRight="@dimen/content_padding"
+		osmand:typeface="@string/font_roboto_medium"
+		android:textColor="@color/active_color_primary_light"
+		android:textSize="@dimen/default_list_text_size"
+		android:text="@string/navigation_profile" />
+
+	<LinearLayout
+		android:id="@+id/content_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal|bottom"
+		android:orientation="vertical" />
+</LinearLayout>

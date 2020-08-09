@@ -346,7 +346,7 @@
     <string name="search_position_current_location_found">המיקום שלי (נמצא)</string>
     <string name="search_position_address">כתובת…</string>
     <string name="search_position_favorites">מועדפים…</string>
-    <string name="search_position_undefined">בלתי מוגדר</string>
+    <string name="shared_string_undefined">בלתי מוגדר</string>
     <string name="search_position_map_view">מרכז המפה הנוכחי</string>
     <string name="select_search_position">מקור:</string>
     <string name="context_menu_item_search">חיפוש בסביבת מקום</string>
@@ -1515,7 +1515,7 @@
     <string name="traffic_warning_border_control">ביקורת גבולות</string>
     <string name="traffic_warning_payment">עמדת תשלום</string>
     <string name="traffic_warning_stop">סימן עצור</string>
-    <string name="traffic_warning_calming">מיתון תנועה</string>
+    <string name="traffic_warning_calming">פסי האטה</string>
     <string name="traffic_warning_speed_camera">מצלמת מהירות</string>
     <string name="traffic_warning">אזהרת תנועה</string>
     <string name="speak_favorites">מועדפים בסביבה</string>
@@ -3833,4 +3833,18 @@
     <string name="plan_a_route">תכנון מסלול</string>
     <string name="add_to_a_track">הוספה למסלול</string>
     <string name="add_hidden_group_info">הנקודה שנוספה לא תופיע על המפה מאחר שהקבוצה הנבחרת מוסתרת, ניתן למצוא אותה תחת „%s”.</string>
+    <string name="gpx_split_interval_descr">נא לבחור את משך הזמן בו סמנים עם מרחק או זמן יופיעו על גבי המסלול.</string>
+    <string name="track_show_start_finish_icons">הצגת סמני התחלה וסוף</string>
+    <string name="select_track_width">בחירת רוחב</string>
+    <string name="gpx_split_interval_none_descr">נא לבחור את אפשרות הפיצול הרצויה: לפי זמן או מרחק.</string>
+    <string name="shared_string_custom">התאמה אישית</string>
+    <string name="gpx_direction_arrows">חצי כיוון</string>
+    <string name="track_coloring_solid">אחיד</string>
+    <string name="plan_route_last_edited">עריכה אחרונה</string>
+    <string name="plan_route_import_track">ייבוא מסלול</string>
+    <string name="plan_route_open_existing_track">פתיחת מסלול קיים</string>
+    <string name="plan_route_create_new_route">יצירת מסלול חדש</string>
+    <string name="plan_route_select_track_file_for_open">נא לבחור קובץ מסלול לפתיחה.</string>
+    <string name="shared_string_done">בוצע</string>
+    <string name="overwrite_track">שכתוב מסלול</string>
 </resources>

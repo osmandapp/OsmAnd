@@ -44,7 +44,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
-import net.osmand.plus.views.GPXLayer;
+import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.util.MapUtils;
@@ -148,7 +148,13 @@ public class TrackDetailsMenu {
 					LatLon latLon = tb.getLatLonFromPixel(mx, my);
 					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
 					float pos = (float) (gpxItem.locationOnMap.distance / ((OrderedLineDataSet) ds.get(0)).getDivX());
-					float nextVisibleX = chart.getLowestVisibleX() + (pos - gpxItem.chartHighlightPos);
+					float lowestVisibleX = chart.getLowestVisibleX();
+					float highestVisibleX = chart.getHighestVisibleX();
+					float nextVisibleX = lowestVisibleX + (pos - gpxItem.chartHighlightPos);
+					float oneFourthDiff = (highestVisibleX - lowestVisibleX) / 4f;
+					if (pos > oneFourthDiff) {
+						nextVisibleX = pos - oneFourthDiff;
+					}
 					gpxItem.chartHighlightPos = pos;
 
 					chart.moveViewToX(nextVisibleX);

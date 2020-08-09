@@ -53,23 +53,28 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.measurementtool.NewGpxData;
-import net.osmand.plus.track.SplitTrackAsyncTask;
-import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.SplitTrackAsyncTask;
+import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.render.RenderingRulesStorage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 
 public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 
@@ -308,9 +313,9 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			}
 		});
 
+		splitColorView.setVisibility(View.GONE);
 		if (showMapOnly) {
 			splitIntervalView.setVisibility(View.GONE);
-			splitColorView.setVisibility(View.GONE);
 			appearanceView.setVisibility(View.GONE);
 			divider.setVisibility(View.GONE);
 			bottomDivider.setVisibility(View.VISIBLE);
@@ -354,17 +359,16 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 					}
 				});
 				appearanceView.setVisibility(View.VISIBLE);
-				splitColorView.setVisibility(View.VISIBLE);
 				divider.setVisibility(View.VISIBLE);
 			} else {
 				appearanceView.setVisibility(View.GONE);
-				splitColorView.setVisibility(View.GONE);
 				divider.setVisibility(View.GONE);
 			}
 		}
+		updateTrackColor();
 	}
 
-	private void showTemporaryObjectOnMap(Object toShow){
+	private void showTemporaryObjectOnMap(Object toShow) {
 		TrackActivity activity = getTrackActivity();
 		GpxDataItem gpxDataItem = getGpxDataItem();
 		GPXFile gpx = getGpx();
@@ -708,6 +712,27 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		return Math.max(position, 0);
 	}
 
+	private void updateTrackColor() {
+		int color = getGpxDataItem() != null ? getGpxDataItem().getColor() : 0;
+		GPXFile gpxFile = getGpx();
+		if (color == 0 && gpxFile != null) {
+			if (gpxFile.showCurrentTrack) {
+				color = app.getSettings().CURRENT_TRACK_COLOR.get();
+			} else {
+				color = gpxFile.getColor(0);
+			}
+		}
+		if (color == 0) {
+			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+			CommonPreference<String> prefColor = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
+			color = GpxAppearanceAdapter.parseTrackColor(renderer, prefColor.get());
+		}
+		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
+		if (trackDrawer != null) {
+			trackDrawer.setTrackColor(color);
+		}
+	}
+
 	public List<GpxSelectionHelper.GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
 		ArrayList<GpxSelectionHelper.GpxDisplayItem> list = new ArrayList<>();
 		for (GpxDisplayGroup g : groups) {
@@ -756,7 +781,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		if (activity != null && gpxSplitType != null && gpxFile != null) {
 			int timeSplit = 0;
 			double distanceSplit = 0;
-			if (!gpxFile.showCurrentTrack) {
+			if (gpxSplitType != GpxSplitType.NO_SPLIT && !gpxFile.showCurrentTrack) {
 				timeSplit = this.timeSplit.get(selectedSplitInterval);
 				distanceSplit = this.distanceSplit.get(selectedSplitInterval);
 			}
@@ -804,20 +829,14 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		if (model.size() > 0) {
 			if (distance) {
 				double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
-				options.add(OsmAndFormatter.getFormattedDistance((float) dvalue, app));
+				options.add(OsmAndFormatter.getFormattedDistanceInterval(app, value));
 				distanceSplit.add(dvalue);
 				timeSplit.add(-1);
 				if (Math.abs(model.get(0).getSplitDistance() - dvalue) < 1) {
 					selectedSplitInterval = distanceSplit.size() - 1;
 				}
 			} else {
-				if (value < 60) {
-					options.add(value + " " + app.getString(R.string.int_seconds));
-				} else if (value % 60 == 0) {
-					options.add((value / 60) + " " + app.getString(R.string.int_min));
-				} else {
-					options.add((value / 60f) + " " + app.getString(R.string.int_min));
-				}
+				options.add(OsmAndFormatter.getFormattedTimeInterval(app, value));
 				distanceSplit.add(-1d);
 				timeSplit.add(value);
 				if (model.get(0).getSplitTime() == value) {

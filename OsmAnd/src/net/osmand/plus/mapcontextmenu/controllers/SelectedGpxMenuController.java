@@ -1,15 +1,19 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -20,7 +24,10 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.SelectedGpxMenuBuilder;
+import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -41,8 +48,13 @@ public class SelectedGpxMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
-				intent.putExtra(TrackActivity.TRACK_FILE_NAME, selectedGpxPoint.getSelectedGpxFile().getGpxFile().path);
-				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
+				if (selectedGpxFile.isShowCurrentTrack()) {
+					intent.putExtra(TrackActivity.CURRENT_RECORDING, true);
+				} else {
+					intent.putExtra(TrackActivity.TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
+				}
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				mapActivity.startActivity(intent);
 			}
 		};
@@ -189,6 +201,48 @@ public class SelectedGpxMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		int color = isLight() ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 		return getIcon(R.drawable.ic_action_polygom_dark, color);
+	}
+
+	@Override
+	public void share(LatLon latLon, String title, String address) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && selectedGpxPoint != null) {
+			final GPXFile gpxFile = selectedGpxPoint.getSelectedGpxFile().getGpxFile();
+			if (gpxFile != null) {
+				if (Algorithms.isEmpty(gpxFile.path)) {
+					SaveGpxListener saveGpxListener = new SaveGpxListener() {
+						@Override
+						public void gpxSavingStarted() {
+
+						}
+
+						@Override
+						public void gpxSavingFinished(Exception errorMessage) {
+							MapActivity mapActivity = getMapActivity();
+							if (mapActivity != null) {
+								shareGpx(mapActivity, gpxFile.path);
+							}
+						}
+					};
+					new SaveCurrentTrackTask(mapActivity.getMyApplication(), gpxFile, saveGpxListener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				} else {
+					shareGpx(mapActivity, gpxFile.path);
+				}
+			}
+		} else {
+			super.share(latLon, title, "");
+		}
+	}
+
+	private void shareGpx(@NonNull Context context, @NonNull String path) {
+		final Uri fileUri = AndroidUtils.getUriForFile(context, new File(path));
+		final Intent sendIntent = new Intent(Intent.ACTION_SEND);
+		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+		sendIntent.setType("application/gpx+xml");
+		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		if (AndroidUtils.isIntentSafe(context, sendIntent)) {
+			context.startActivity(sendIntent);
+		}
 	}
 
 	public static class SelectedGpxPoint {

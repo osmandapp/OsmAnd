@@ -626,7 +626,7 @@
     <string name="poi_nature_reserve">Заповедник</string>
     <string name="poi_strait">Пролив</string>
     <string name="poi_island">Остров</string>
-    <string name="poi_islet">Остров (небольшой)</string>
+    <string name="poi_islet">Островок</string>
     <string name="poi_anchorage">Якорная стоянка</string>
     <string name="poi_anchor_berth">Якорный причал</string>
     <string name="poi_beacon">Бакен</string>
@@ -992,7 +992,7 @@
     <string name="poi_pump_yes">Есть</string>
     <string name="poi_water_characteristic">Характеристика воды</string>
     <string name="poi_water_characteristic_mineral">Характеристика воды: минеральная</string>
-    <string name="poi_water_characteristic_mud">Характеристика воды: грязь</string>
+    <string name="poi_water_characteristic_mud">Грязь</string>
     <string name="poi_water_characteristic_sulfuric">Серная</string>
     <string name="poi_water_point">Пункт водоснабжения</string>
     <string name="poi_monitoring_station">Станция наблюдения</string>
@@ -1361,7 +1361,7 @@
     <string name="poi_diet_lactose_free_yes">Безлактозное питание</string>
     <string name="poi_diet_lactose_free_no">Безлактозные продукты не предлагаются</string>
     <string name="poi_diet_pescetarian_yes">Пескетарианское питание</string>
-    <string name="poi_drive_in">Обслуживание клиентов сидящих в автомобиле</string>
+    <string name="poi_drive_in">Обслуживание клиентов, сидящих в автомобиле</string>
     <string name="poi_drive_in_yes">Да</string>
     <string name="poi_drive_in_no">Приобрести продукты не покидая авто на парковке (drive-in): нет</string>
     <string name="poi_drive_through">Обслуживание клиентов, сидящих в автомобиле</string>
@@ -1759,7 +1759,7 @@
     <string name="poi_fuel_91ul">Топливо 91UL</string>
     <string name="poi_fuel_100ll">Топливо 100LL</string>
     <string name="poi_fuel_jeta1">Топливо Jet A-1</string>
-    <string name="poi_fuel_adblue">Топливо AdBlue</string>
+    <string name="poi_fuel_adblue">Дизельная выхлопная жидкость</string>
     <string name="poi_fuel_wood">Топливо: дрова</string>
     <string name="poi_fuel_charcoal">Топливо: древесный уголь</string>
     <string name="poi_fuel_coal">Топливо: каменный уголь</string>

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
 
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
@@ -30,6 +32,8 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
@@ -47,6 +51,9 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.SaveGpxAsyncTask;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.router.TurnType;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
@@ -212,7 +219,6 @@ public class ExternalApiHelper {
 			if (API_CMD_SHOW_GPX.equals(cmd) || API_CMD_NAVIGATE_GPX.equals(cmd)) {
 				boolean navigate = API_CMD_NAVIGATE_GPX.equals(cmd);
 				String path = uri.getQueryParameter(PARAM_PATH);
-				boolean force = uri.getBooleanQueryParameter(PARAM_FORCE, false);
 
 				GPXFile gpx = null;
 				if (path != null) {
@@ -250,22 +256,8 @@ public class ExternalApiHelper {
 
 				if (gpx != null) {
 					if (navigate) {
-						final RoutingHelper routingHelper = app.getRoutingHelper();
-						if (routingHelper.isFollowingMode() && !force) {
-							final GPXFile gpxFile = gpx;
-							AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
-							dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
-
-								@Override
-								public void onDismiss(DialogInterface dialog) {
-									if (!routingHelper.isFollowingMode()) {
-										startNavigation(mapActivity, gpxFile);
-									}
-								}
-							});
-						} else {
-							startNavigation(mapActivity, gpx);
-						}
+						boolean force = uri.getBooleanQueryParameter(PARAM_FORCE, false);
+						saveAndNavigateGpx(mapActivity, gpx, force);
 					} else {
 						app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
 					}
@@ -687,6 +679,60 @@ public class ExternalApiHelper {
 		}
 
 		return result;
+	}
+
+	public static void saveAndNavigateGpx(MapActivity mapActivity, final GPXFile gpxFile, final boolean force) {
+		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+
+		if (Algorithms.isEmpty(gpxFile.path)) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			String destFileName = "route" + IndexConstants.GPX_FILE_EXT;
+			File destDir = app.getAppPath(IndexConstants.GPX_IMPORT_DIR);
+			File destFile = app.getAppPath(IndexConstants.GPX_IMPORT_DIR + destFileName);
+			while (destFile.exists()) {
+				destFileName = AndroidUtils.createNewFileName(destFileName);
+				destFile = new File(destDir, destFileName);
+			}
+			gpxFile.path = destFile.getAbsolutePath();
+		}
+
+		new SaveGpxAsyncTask(gpxFile, new SaveGpxListener() {
+			@Override
+			public void gpxSavingStarted() {
+
+			}
+
+			@Override
+			public void gpxSavingFinished(Exception errorMessage) {
+				MapActivity mapActivity = mapActivityRef.get();
+				if (errorMessage == null && mapActivity != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+					OsmandApplication app = mapActivity.getMyApplication();
+					GpxSelectionHelper helper = app.getSelectedGpxHelper();
+					SelectedGpxFile selectedGpx = helper.getSelectedFileByPath(gpxFile.path);
+					if (selectedGpx != null) {
+						selectedGpx.setGpxFile(gpxFile, app);
+					} else {
+						helper.selectGpxFile(gpxFile, true, false);
+					}
+					final RoutingHelper routingHelper = app.getRoutingHelper();
+					if (routingHelper.isFollowingMode() && !force) {
+						AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
+						dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+							@Override
+							public void onDismiss(DialogInterface dialog) {
+								MapActivity mapActivity = mapActivityRef.get();
+								if (mapActivity != null && !routingHelper.isFollowingMode()) {
+									ExternalApiHelper.startNavigation(mapActivity, gpxFile);
+								}
+							}
+						});
+					} else {
+						startNavigation(mapActivity, gpxFile);
+					}
+				}
+			}
+		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void updateTurnInfo(String prefix, Intent result, NextDirectionInfo ni) {

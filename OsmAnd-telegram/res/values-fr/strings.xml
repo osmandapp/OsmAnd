@@ -264,4 +264,5 @@
     <string name="send_my_location_desc">Définir l\'intervalle minimum pour partager sa position.</string>
     <string name="stale_location_desc">La dernière fois qu\'un contact s\'est déplacé.</string>
     <string name="location_history_desc">Cacher les contacts qui ne se sont pas déplacés depuis un temps donné.</string>
+    <string name="set_time_description">Définissez l\'heure à laquelle les contacts et groupes sélectionnés verront votre position en temps réel.</string>
 </resources>

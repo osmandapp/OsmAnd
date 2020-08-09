@@ -30,7 +30,7 @@ import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.router.TransportRouteResult;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.Algorithms;
 

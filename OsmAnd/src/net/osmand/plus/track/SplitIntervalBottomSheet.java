@@ -1,6 +1,5 @@
 package net.osmand.plus.track;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,6 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -27,16 +25,16 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.track.TrackDrawInfo.TRACK_FILE_PATH;
+import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
 
 public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -77,7 +75,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
-			String gpxFilePath = savedInstanceState.getString(TRACK_FILE_PATH);
+			String gpxFilePath = savedInstanceState.getString(TRACK_FILE_NAME);
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 			prepareSplitIntervalOptions();
 
@@ -85,7 +83,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 			selectedDistanceSplitInterval = savedInstanceState.getInt(SELECTED_DISTANCE_SPLIT_INTERVAL);
 			selectedSplitType = GpxSplitType.valueOf(savedInstanceState.getString(SELECTED_TRACK_SPLIT_TYPE));
 		} else if (arguments != null) {
-			String gpxFilePath = arguments.getString(TRACK_FILE_PATH);
+			String gpxFilePath = arguments.getString(TRACK_FILE_NAME);
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 			prepareSplitIntervalOptions();
 			updateSelectedSplitParams();
@@ -144,7 +142,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putInt(SELECTED_TIME_SPLIT_INTERVAL, selectedTimeSplitInterval);
 		outState.putInt(SELECTED_DISTANCE_SPLIT_INTERVAL, selectedDistanceSplitInterval);
 		outState.putString(SELECTED_TRACK_SPLIT_TYPE, selectedSplitType.name());
-		outState.putString(TRACK_FILE_PATH, selectedGpxFile.getGpxFile().path);
+		outState.putString(TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
 	}
 
 	private void updateSelectedSplitParams() {
@@ -190,7 +188,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	private void addDistanceOptionSplit(int value, @NonNull List<GpxDisplayGroup> displayGroups) {
 		if (displayGroups.size() > 0) {
 			double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
-			String formattedDist = OsmAndFormatter.getFormattedDistance((float) dvalue, app);
+			String formattedDist = OsmAndFormatter.getFormattedDistanceInterval(app, value);
 			distanceSplitOptions.put(formattedDist, dvalue);
 			if (Math.abs(displayGroups.get(0).getSplitDistance() - dvalue) < 1) {
 				selectedDistanceSplitInterval = distanceSplitOptions.size() - 1;
@@ -200,14 +198,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void addTimeOptionSplit(int value, @NonNull List<GpxDisplayGroup> model) {
 		if (model.size() > 0) {
-			String time;
-			if (value < 60) {
-				time = value + " " + getString(R.string.int_seconds);
-			} else if (value % 60 == 0) {
-				time = (value / 60) + " " + getString(R.string.int_min);
-			} else {
-				time = (value / 60f) + " " + getString(R.string.int_min);
-			}
+			String time = OsmAndFormatter.getFormattedTimeInterval(app, value);
 			timeSplitOptions.put(time, value);
 			if (model.get(0).getSplitTime() == value) {
 				selectedTimeSplitInterval = timeSplitOptions.size() - 1;
@@ -311,46 +302,26 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		int timeSplit = new ArrayList<>(timeSplitOptions.values()).get(selectedTimeSplitInterval);
 		double distanceSplit = new ArrayList<>(distanceSplitOptions.values()).get(selectedDistanceSplitInterval);
 
-		SplitTrackListener splitTrackListener = new SplitTrackListener() {
-
-			@Override
-			public void trackSplittingStarted() {
-
-			}
-
-			@Override
-			public void trackSplittingFinished() {
-				if (selectedGpxFile != null) {
-					List<GpxDisplayGroup> groups = getDisplayGroups();
-					selectedGpxFile.setDisplayGroups(groups, app);
-				}
-			}
-		};
-		List<GpxDisplayGroup> groups = getDisplayGroups();
-		new SplitTrackAsyncTask(app, selectedSplitType, groups, splitTrackListener, trackDrawInfo.isJoinSegments(),
-				timeSplit, distanceSplit).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		Fragment target = getTargetFragment();
+		if (target instanceof TrackAppearanceFragment) {
+			((TrackAppearanceFragment) target).applySplit(selectedSplitType, timeSplit, distanceSplit);
+		}
 	}
 
 	@NonNull
 	public List<GpxDisplayGroup> getDisplayGroups() {
-		List<GpxDisplayGroup> groups = new ArrayList<>();
 		Fragment target = getTargetFragment();
 		if (target instanceof TrackAppearanceFragment) {
-			List<GpxDisplayGroup> result = ((TrackAppearanceFragment) target).getGpxDisplayGroups();
-			for (GpxDisplayGroup group : result) {
-				if (GpxDisplayItemType.TRACK_SEGMENT == group.getType()) {
-					groups.add(group);
-				}
-			}
+			return ((TrackAppearanceFragment) target).getDisplaySegmentGroups();
 		}
-		return groups;
+		return Collections.emptyList();
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, TrackDrawInfo trackDrawInfo, Fragment target) {
 		try {
 			if (fragmentManager.findFragmentByTag(SplitIntervalBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
-				args.putString(TRACK_FILE_PATH, trackDrawInfo.getFilePath());
+				args.putString(TRACK_FILE_NAME, trackDrawInfo.getFilePath());
 
 				SplitIntervalBottomSheet splitIntervalBottomSheet = new SplitIntervalBottomSheet();
 				splitIntervalBottomSheet.setArguments(args);

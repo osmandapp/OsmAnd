@@ -342,7 +342,7 @@
     <string name="search_position_current_location_found">موقعیت من (پیدا‌شده)</string>
     <string name="search_position_address">نشانی…</string>
     <string name="search_position_favorites">علاقه‌مندی‌ها…</string>
-    <string name="search_position_undefined">نامشخص</string>
+    <string name="shared_string_undefined">نامشخص</string>
     <string name="delete_confirmation_msg">‏%1$s حذف شود؟</string>
     <string name="city_type_suburb">حومه</string>
     <string name="city_type_hamlet">دهکده</string>
@@ -2345,7 +2345,7 @@
     <string name="auto_split_recording_descr">بعد از ۶ دقیقه وقفه، بخش جدید شروع می‌شود. بعد از ۲ ساعت وقفه، رد جدید شروع می‌شود. بعد از وقفهٔ طولانی‌تر در صورتی که تاریخ تغییر کند فایل جدید ایجاد می‌شود.</string>
     <string name="upload_osm_note_description">یادداشت‌های OSM خود را به‌صورت ناشناس یا با نام کاربری‌تان در سایت OpenStreetMap.org، آپلود کنید.</string>
     <string name="route_roundabout_short">خروجی %1$d را بگیرید و بروید</string>
-    <string name="trip_rec_notification_settings_desc">در نوار اعلان دستگاه یک اعلان برای ضبط سفر نشان می‌دهد.</string>
+    <string name="trip_rec_notification_settings_desc">در نوار اعلان دستگاه یک اعلان برای شروع ضبط سفر نشان می‌دهد.</string>
     <string name="save_track_min_speed_descr">پالایه: هیچ نقطه‌ای ثبت نمی‌شود مگر به این سرعت برسد.</string>
     <string name="save_track_min_distance_descr">پالایه: کمترین مسافتی که یک نقطه باید از موقعیت قبلی داشته باشد تا ثبت شود.</string>
     <string name="save_track_precision_descr">پالایه: ضبط انجام نمی‌شود مگر با رسیدن به این میزان صحت.</string>
@@ -3846,4 +3846,21 @@
     <string name="plugin_wikipedia_description">از ویکی‌پدیا دربارهٔ نقاط توجه اطلاعات کسب کنید. یک راهنمای آفلاین جیبی. کافی است افزونهٔ ویکی‌پدیا را فعال کنید و از مقاله‌ها دربارهٔ چیزهای دوروبرتان لذت ببرید.</string>
     <string name="app_mode_wheelchair">صندلی چرخ‌دار</string>
     <string name="osm_edit_closed_note">یادداشت اُاِس‌اِمی بسته</string>
+    <string name="add_hidden_group_info">نقطهٔ اضافه‌شده روی نقشه دیده نمی‌شود، زیرا گروه انتخاب‌شده پنهان است. آن را در «%s» پیدا می‌کنید.</string>
+    <string name="set_working_days_to_continue">برای ادامه روزهای کاری را تنظیم کنید</string>
+    <string name="route_between_points">مسیر بین نقطه‌ها</string>
+    <string name="plan_a_route">طرح‌ریزی مسیر</string>
+    <string name="track_show_start_finish_icons">نمایش آیکون‌های شروع و پایان</string>
+    <string name="select_track_width">انتخاب عرض</string>
+    <string name="gpx_split_interval_descr">انتخاب کنید نشانه‌های روی رد بر اساس زمان یا مسافت با چه تناوبی نمایش یابند.</string>
+    <string name="gpx_split_interval_none_descr">گزینهٔ تقسیم‌بندی دلخواه را انتخاب کنید: بر اساس زمان یا مسافت.</string>
+    <string name="shared_string_custom">سفارشی</string>
+    <string name="gpx_direction_arrows">فلش‌های جهت‌نما</string>
+    <string name="plan_route_last_edited">آخرین ویرایش</string>
+    <string name="plan_route_import_track">درون‌برد رد</string>
+    <string name="plan_route_open_existing_track">بازکردن رد موجود</string>
+    <string name="plan_route_create_new_route">ساخت مسیر جدید</string>
+    <string name="plan_route_select_track_file_for_open">یک فایل رد انتخاب کنید تا باز شود.</string>
+    <string name="shared_string_done">تمام</string>
+    <string name="overwrite_track">بَرنویسی رد</string>
 </resources>

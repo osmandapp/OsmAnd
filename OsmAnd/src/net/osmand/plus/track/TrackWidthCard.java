@@ -99,6 +99,9 @@ public class TrackWidthCard extends BaseCard {
 	private void updateHeader() {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.icon), false);
 
+		View headerView = view.findViewById(R.id.header_view);
+		headerView.setBackgroundDrawable(null);
+
 		TextView titleView = view.findViewById(R.id.title);
 		titleView.setText(R.string.select_track_width);
 
@@ -195,6 +198,11 @@ public class TrackWidthCard extends BaseCard {
 
 					updateHeader();
 					updateCustomWidthSlider();
+
+					CardListener listener = getListener();
+					if (listener != null) {
+						listener.onCardPressed(TrackWidthCard.this);
+					}
 				}
 			});
 		}
@@ -207,7 +215,7 @@ public class TrackWidthCard extends BaseCard {
 				iconId = R.drawable.ic_action_settings;
 				color = AndroidUtils.getColorFromAttr(holder.itemView.getContext(), R.attr.active_color_basic);
 			} else {
-				iconId = GpxAppearanceAdapter.getWidthIconId(item.getValue());
+				iconId = TrackAppearanceFragment.getWidthIconId(item.getValue());
 			}
 			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconId, color));
 		}

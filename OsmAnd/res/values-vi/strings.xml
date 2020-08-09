@@ -40,7 +40,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="search_position_current_location_found">Vị trí (Đã tìm thấy)</string>
 	<string name="search_position_address">Địa chỉ…</string>
 	<string name="search_position_favorites">Ưa thích…</string>
-	<string name="search_position_undefined">Chưa rõ</string>
+	<string name="shared_string_undefined">Chưa rõ</string>
 	
 	
 	<string name="search_position_map_view">Lần hiển thị bản đồ trước</string>

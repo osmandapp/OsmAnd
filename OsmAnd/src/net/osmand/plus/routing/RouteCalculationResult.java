@@ -140,7 +140,7 @@ public class RouteCalculationResult {
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,
-								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode) {
+								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode, boolean calculateFirstAndLastPoint) {
 		if (rctx != null) {
 			this.routingTime = rctx.routingTime;
 			this.visitedSegments = rctx.getVisitedSegments();
@@ -165,7 +165,9 @@ public class RouteCalculationResult {
 		List<Location> locations = new ArrayList<Location>();
 		ArrayList<AlarmInfo> alarms = new ArrayList<AlarmInfo>();
 		List<RouteSegmentResult> segments = convertVectorResult(computeDirections, locations, list, alarms, ctx);
-		introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
+		if (calculateFirstAndLastPoint) {
+			introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
+		}
 		
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);

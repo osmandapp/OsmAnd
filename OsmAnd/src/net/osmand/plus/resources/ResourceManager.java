@@ -765,8 +765,14 @@ public class ResourceManager {
 						toAddPoiTypes.put(poiCategory, new TreeMap<String, PoiType>());
 					}
 					Map<String, PoiType> poiTypes = toAddPoiTypes.get(poiCategory);
-					for (String s : entry.getValue()) {
-						poiTypes.put(s, new PoiType(MapPoiTypes.getDefault(), poiCategory, null, s));
+					if (poiTypes != null) {
+						for (String s : entry.getValue()) {
+							PoiType pt = new PoiType(MapPoiTypes.getDefault(), poiCategory, null, s);
+							pt.setOsmTag("");
+							pt.setOsmValue("");
+							pt.setNotEditableOsm(true);
+							poiTypes.put(s, pt);
+						}
 					}
 				}
 			}

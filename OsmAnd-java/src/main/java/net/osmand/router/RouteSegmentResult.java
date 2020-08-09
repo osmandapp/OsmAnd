@@ -513,7 +513,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return endPointIndex - startPointIndex > 0;
 	}
 
-	
+
 	private LatLon convertPoint(RouteDataObject o, int ind){
 		return new LatLon(MapUtils.get31LatitudeY(o.getPoint31YTile(ind)), MapUtils.get31LongitudeX(o.getPoint31XTile(ind)));
 	}

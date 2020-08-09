@@ -7,9 +7,11 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.util.Algorithms;
 
+import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
+import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
+
 public class TrackDrawInfo {
 
-	public static final String TRACK_FILE_PATH = "track_file_path";
 	private static final String TRACK_WIDTH = "track_width";
 	private static final String TRACK_GRADIENT_SCALE_TYPE = "track_gradient_scale_type";
 	private static final String TRACK_COLOR = "track_color";
@@ -27,13 +29,18 @@ public class TrackDrawInfo {
 	private double splitInterval;
 	private boolean joinSegments;
 	private boolean showArrows;
-	private boolean showStartFinish;
+	private boolean showStartFinish = true;
+	private boolean currentRecording;
 
-	public TrackDrawInfo() {
-
+	public TrackDrawInfo(boolean currentRecording) {
+		this.currentRecording = currentRecording;
 	}
 
-	public TrackDrawInfo(GpxDataItem gpxDataItem) {
+	public TrackDrawInfo(Bundle bundle) {
+		readBundle(bundle);
+	}
+
+	public TrackDrawInfo(GpxDataItem gpxDataItem, boolean currentRecording) {
 		filePath = gpxDataItem.getFile().getPath();
 		width = gpxDataItem.getWidth();
 		gradientScaleType = gpxDataItem.getGradientScaleType();
@@ -43,6 +50,7 @@ public class TrackDrawInfo {
 		joinSegments = gpxDataItem.isJoinSegments();
 		showArrows = gpxDataItem.isShowArrows();
 		showStartFinish = gpxDataItem.isShowStartFinish();
+		this.currentRecording = currentRecording;
 	}
 
 	public String getFilePath() {
@@ -101,12 +109,20 @@ public class TrackDrawInfo {
 		this.showArrows = showArrows;
 	}
 
+	public void setShowStartFinish(boolean showStartFinish) {
+		this.showStartFinish = showStartFinish;
+	}
+
 	public boolean isShowStartFinish() {
 		return showStartFinish;
 	}
 
-	protected void readBundle(@NonNull Bundle bundle) {
-		filePath = bundle.getString(TRACK_FILE_PATH);
+	public boolean isCurrentRecording() {
+		return currentRecording;
+	}
+
+	private void readBundle(@NonNull Bundle bundle) {
+		filePath = bundle.getString(TRACK_FILE_NAME);
 		width = bundle.getString(TRACK_WIDTH);
 		String gradientScaleTypeName = bundle.getString(TRACK_GRADIENT_SCALE_TYPE);
 		if (!Algorithms.isEmpty(gradientScaleTypeName)) {
@@ -118,10 +134,11 @@ public class TrackDrawInfo {
 		joinSegments = bundle.getBoolean(TRACK_JOIN_SEGMENTS);
 		showArrows = bundle.getBoolean(TRACK_SHOW_ARROWS);
 		showStartFinish = bundle.getBoolean(TRACK_SHOW_START_FINISH);
+		currentRecording = bundle.getBoolean(CURRENT_RECORDING);
 	}
 
 	protected void saveToBundle(@NonNull Bundle bundle) {
-		bundle.putString(TRACK_FILE_PATH, filePath);
+		bundle.putString(TRACK_FILE_NAME, filePath);
 		bundle.putString(TRACK_WIDTH, width);
 		bundle.putString(TRACK_GRADIENT_SCALE_TYPE, gradientScaleType != null ? gradientScaleType.getTypeName() : "");
 		bundle.putInt(TRACK_COLOR, color);
@@ -130,5 +147,6 @@ public class TrackDrawInfo {
 		bundle.putBoolean(TRACK_JOIN_SEGMENTS, joinSegments);
 		bundle.putBoolean(TRACK_SHOW_ARROWS, showArrows);
 		bundle.putBoolean(TRACK_SHOW_START_FINISH, showStartFinish);
+		bundle.putBoolean(CURRENT_RECORDING, currentRecording);
 	}
 }

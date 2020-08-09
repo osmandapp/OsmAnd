@@ -283,7 +283,7 @@
   <string name="search_position_current_location_found">Ligging (gevind)</string>
   <string name="search_position_address">Adres…</string>
   <string name="search_position_favorites">Gunstelinge…</string>
-  <string name="search_position_undefined">ongedefinieerd</string>
+  <string name="shared_string_undefined">ongedefinieerd</string>
   
   
   <string name="search_position_map_view">Laaste kaart uitsig</string>

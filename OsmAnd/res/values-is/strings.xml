@@ -539,7 +539,7 @@
     <string name="city_type_city">Borg/Sveitarfélag</string>
     <string name="search_position_address">Heimilisfang…</string>
     <string name="search_position_favorites">Eftirlæti…</string>
-    <string name="search_position_undefined">Óskilgreint</string>
+    <string name="shared_string_undefined">Óskilgreint</string>
     <string name="search_position_map_view">Núverandi miðja korts</string>
     <string name="select_search_position">Upphaf:</string>
     <string name="context_menu_item_search">Leita í nágrenninu</string>

@@ -77,11 +77,11 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;

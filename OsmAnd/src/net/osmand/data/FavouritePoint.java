@@ -371,8 +371,13 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public static FavouritePoint fromWpt(@NonNull WptPt pt, @NonNull Context ctx) {
+		return fromWpt(pt, ctx, null);
+	}
+
+	public static FavouritePoint fromWpt(@NonNull WptPt pt, @NonNull Context ctx, String category) {
 		String name = pt.name;
-		String categoryName = pt.category != null ? pt.category : "";
+		String categoryName = category != null ? category :
+				(pt.category != null ? pt.category : "");
 		if (name == null) {
 			name = "";
 		}

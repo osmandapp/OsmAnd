@@ -1739,7 +1739,7 @@
     <string name="poi_pharmacy_dispensing">Dispensa receitas médicas</string>
     <string name="poi_scout_camp">Campamento de exploradores</string>
     <string name="poi_backcountry">Acampada libre</string>
-    <string name="poi_drive_in">Conducir por dentro</string>
+    <string name="poi_drive_in">Compra dende o coche</string>
     <string name="poi_drive_through">Servizo no automóbil</string>
     <string name="poi_microbrewery">Cervexaría artesanal</string>
     <string name="poi_seasonal">Estacional</string>
@@ -1996,7 +1996,7 @@
     <string name="poi_animal_shelter_fish">Peixes</string>
     <string name="poi_backrest_no">Respaldo: non</string>
     <string name="poi_deadlock">Sen saída</string>
-    <string name="poi_water_characteristic_mud">Trazos da auga: lama</string>
+    <string name="poi_water_characteristic_mud">Lama</string>
     <string name="poi_information_trail_blaze">Marcaxe do camiño</string>
     <string name="poi_information_route_marker">Marcaxe de ruta</string>
     <string name="poi_toll_hgv_yes">Portaxe ou peaxe para camións</string>
@@ -2382,7 +2382,7 @@
     <string name="poi_fuel_100ll">Combustíbel 100LL</string>
     <string name="poi_fuel_autogas">Autogas</string>
     <string name="poi_fuel_jeta1">Combustíbel Jet A-1</string>
-    <string name="poi_fuel_adblue">Combustíbel AdBlue</string>
+    <string name="poi_fuel_adblue">Aditivo para escapes de diesel</string>
     <string name="poi_fuel_wood">Combustíbel: madeira</string>
     <string name="poi_fuel_charcoal">Combustíbel: carbón vexetal</string>
     <string name="poi_fuel_coal">Combustíbel: carbón</string>

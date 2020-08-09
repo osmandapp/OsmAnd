@@ -427,7 +427,7 @@
     <string name="choose_auto_follow_route_descr">Časovni zamik, preden se položaj samodejno postavi v središče zemljevida.</string>
     <string name="fast_route_mode">Najhitrejša pot</string>
     <string name="fast_route_mode_descr">Izbrana možnost določa izbor najhitrejše poti oziroma poti z najmanjšo porabo goriva.</string>
-    <string name="search_position_undefined">Nedoločeno</string>
+    <string name="shared_string_undefined">Nedoločeno</string>
     <string name="search_position_map_view">Trenutna sredina zemljevida</string>
     <string name="search_position_address">Naslov …</string>
     <string name="city_type_city">Mesto</string>
@@ -3323,10 +3323,10 @@
     <string name="rendering_attr_piste_difficulty_novice_name">Začetniška</string>
     <string name="app_mode_inline_skates">rolerji</string>
     <string name="speed_cameras_removed_descr">Naprava nima kamer z merilci hitrosti.</string>
-    <string name="please_provide_point_name_error">Prosim, vnesite ime za točko</string>
+    <string name="please_provide_point_name_error">Vpišite ime točke</string>
     <string name="quick_action_remove_next_destination">Zbriši naslednjo ciljno točko</string>
-    <string name="quick_action_remove_next_destination_descr">Trenutna ciljna točka na poti bo izbrisana. Če je to cilj, se bo navigacija ustavila.</string>
-    <string name="plugin_wikipedia_description">Prejmi informacije o zanimivih točkah iz Wikipedije. To je vaš žepni vodič brez povezave - samo omogočite Wikipedijin vtičnik in uživajte v člankih o predmetih okoli vas.</string>
+    <string name="quick_action_remove_next_destination_descr">Trenutna ciljna točka na poti bo izbrisana. Če je ta vaš cilj, bo navigacija zaustavljena.</string>
+    <string name="plugin_wikipedia_description">Podrobnosti o zanimivih točkah so na voljo na Wikipediji. Lahko je vaš žepni vodič, ki deluje tudi brez povezave – omogočiti je treba le vstavek Wikipedije in podrobno spoznati svet okoli vas.</string>
     <string name="use_volume_buttons_as_zoom_descr">Omogoči za nadzor približevanja zemljevida z gumbi za glasnost.</string>
     <string name="quick_action_mapillary_hide">Skrij Mapillary</string>
     <string name="quick_action_mapillary_show">Prikaži mapillary</string>
@@ -3334,7 +3334,7 @@
     <string name="quick_action_showhide_mapillary_title">Prikaži/skrij Mapillary</string>
     <string name="shared_string_uninstall_and_restart">Odstrani in ponovno zaženi</string>
     <string name="use_volume_buttons_as_zoom">Uporabi gumbe za glasnost za približevanje</string>
-    <string name="search_download_wikipedia_maps">Prejmi Wikipedija zemljevide</string>
+    <string name="search_download_wikipedia_maps">Prejmi zemljevide Wikipedije</string>
     <string name="app_mode_wheelchair">Invalidski voziček</string>
     <string name="app_mode_go_cart">Gokart</string>
     <string name="osm_edit_closed_note">Zaprta opomba OSM</string>
@@ -3343,4 +3343,20 @@
     <string name="plan_a_route">Načrtujte pot</string>
     <string name="add_to_a_track">Dodaj na sled</string>
     <string name="routing_attr_width_name">Omejitev širine</string>
+    <string name="shared_string_bearing">Smer</string>
+    <string name="plan_route_select_track_file_for_open">Izbor datoteke sledi za odpiranje.</string>
+    <string name="add_hidden_group_info">Dodana točka na zemljevidu ne bo prikazana, ker je izbrana skupina skrita. Najdete jo v »%s«.</string>
+    <string name="app_mode_enduro_motorcycle">Motor Enduro</string>
+    <string name="app_mode_motor_scooter">Skuter</string>
+    <string name="track_show_start_finish_icons">Pokaži ikone začetka in konca</string>
+    <string name="select_track_width">Izbor širine</string>
+    <string name="gpx_split_interval_none_descr">Izbor načina razdeljevanja: po času ali po razdalji.</string>
+    <string name="shared_string_custom">Po meri</string>
+    <string name="gpx_direction_arrows">Smerne puščice</string>
+    <string name="plan_route_last_edited">Zadnje urejanje</string>
+    <string name="plan_route_import_track">Uvozi sled</string>
+    <string name="plan_route_open_existing_track">Odpri obstoječo sled</string>
+    <string name="plan_route_create_new_route">Ustvari novo pot</string>
+    <string name="shared_string_done">Končano</string>
+    <string name="overwrite_track">Prepiši sled</string>
 </resources>

@@ -852,7 +852,7 @@
     <string name="search_position_current_location_found">A miña posición (atopada)</string>
     <string name="search_position_address">Enderezo…</string>
     <string name="search_position_favorites">Favoritos…</string>
-    <string name="search_position_undefined">Sen definir</string>
+    <string name="shared_string_undefined">Sen definir</string>
     <string name="search_position_map_view">Centro do mapa actual</string>
     <string name="select_search_position">Orixe:</string>
     <string name="context_menu_item_search">Procurar preto daquí</string>
@@ -3851,4 +3851,12 @@ Lon %2$s</string>
     <string name="route_between_points">Ruta entre puntos</string>
     <string name="plan_a_route">Planificar unha ruta</string>
     <string name="add_to_a_track">Engadir a unha pista</string>
+    <string name="add_hidden_group_info">O punto engadido non será visíbel no mapa, xa que o grupo escollido está agochado, pódese atopar en \"%s\".</string>
+    <string name="track_show_start_finish_icons">Amosar iconas de comezo e final</string>
+    <string name="select_track_width">Seleccionar largura</string>
+    <string name="gpx_split_interval_descr">Selecciona o intre no cal as marcas con distancia ou tempo na pista serán amosadas.</string>
+    <string name="gpx_split_interval_none_descr">Selecciona a opción de división desexada: por tempo ou por distancia.</string>
+    <string name="shared_string_custom">Personalizado</string>
+    <string name="gpx_direction_arrows">Frechas de dirección</string>
+    <string name="track_coloring_solid">Sólido</string>
 </resources>
