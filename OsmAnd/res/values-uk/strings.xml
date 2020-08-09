@@ -2691,7 +2691,7 @@
     <string name="coord_input_add_point">Додати точку</string>
     <string name="coord_input_save_as_track">Зберегти як трек</string>
     <string name="quick_action_edit_actions">Редагувати дії</string>
-    <string name="get_osmand_live">Отримайте OsmAnd Live, аби розблокувати всі функції: щоденні оновлення мапи з необмеженими завантаженнями, всі платні та безплатні втулки, Вікіпедію, Вікімандри та багато іншого.</string>
+    <string name="get_osmand_live">Отримайте OsmAnd Live, щоб розблокувати всі функції: щоденні оновлення мап з необмеженими завантаженнями, всі платні та безплатні втулки, Вікіпедію, Вікімандри та багато іншого.</string>
     <string name="shared_string_bookmark">Закладка</string>
     <string name="hide_full_description">Приховати повний опис</string>
     <string name="show_full_description">Показати повний опис</string>
@@ -2860,7 +2860,7 @@
     <string name="osm_live_payment_renews_quarterly">Оновлюється щокварталу</string>
     <string name="osm_live_payment_renews_annually">Оновлюється щороку</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Оберіть зручну для вас проміжковість платежів:</string>
+    <string name="osm_live_payment_header">Виберіть зручну для вас періодичність платежів:</string>
     <string name="osm_live_payment_contribute_descr">Частина доходу йде до землеписців OSM.</string>
     <string name="powered_by_osmand">Від OsmAnd</string>
     <string name="use_osm_live_public_transport_description">Увімкнути громадський транспорт із врахуванням авто-оновлень OsmAnd Live.</string>
@@ -3146,7 +3146,7 @@
     <string name="edit_profile_setup_title">Налаштувати профіль</string>
     <string name="edit_profile_setup_subtitle">Профіль містить власні налаштування</string>
     <string name="edit_profile_setup_map_subtitle">Оберіть налаштування мапи для профілю</string>
-    <string name="edit_profile_screen_options_subtitle">Оберіть налаштування екрана для профілю</string>
+    <string name="edit_profile_screen_options_subtitle">Виберіть налаштування екрана для профілю</string>
     <string name="edit_profile_nav_settings_subtitle">Оберіть налаштування навігації для профілю</string>
     <string name="routing_attr_max_num_changes_description">Вкажіть верхню межу змін</string>
     <string name="routing_attr_max_num_changes_name">Кількість змін</string>
@@ -3245,7 +3245,7 @@
     <string name="map_look">Вигляд мапи</string>
     <string name="list_of_installed_plugins">Встановлені втулки</string>
     <string name="configure_navigation">Налаштування навігації</string>
-    <string name="general_settings_profile_descr">Тема застосунка, одиниці вимірювання, регіон</string>
+    <string name="general_settings_profile_descr">Тема застосунку, одиниці вимірювання, регіон</string>
     <string name="configure_profile">Налаштування профілю</string>
     <string name="switch_profile">Змінити профіль</string>
     <string name="reset_to_default">Скинути на усталені</string>
@@ -3679,9 +3679,9 @@
     <string name="subscription_osmandlive_item">Передплата - OsmAnd Live</string>
     <string name="osmand_purchases_item">OsmAnd покупки</string>
     <string name="legend_item_description">Довідник умовних позначень мапи.</string>
-    <string name="osm_live_payment_subscription_management">Оплата буде списана з рахунку, прив\'язаного до вашого облікового запису Google Play, при підтвердженні придбання. 
+    <string name="osm_live_payment_subscription_management">Оплату буде здійснено з рахунку, прив\'язаного до вашого облікового запису Google Play, під час підтвердженні придбання.
 \n
-\nПередплата продовжується автоматично, якщо ви не скасуєте її до дати продовження. З вашого рахунку буде стягуватися плата за період продовження (щомісяця/щотримісяці/щорік) разово в день продовження. 
+\nПередплата продовжується автоматично, якщо ви не скасуєте її до дати продовження. З вашого рахунку буде стягуватися плата за період продовження (щомісяця/щотримісяці/щорік) разово в день продовження.
 \n
 \nВи можете керувати передплатами та скасовувати їх у налаштуваннях Google Play.</string>
     <string name="search_poi_types">Пошук видів POI</string>
