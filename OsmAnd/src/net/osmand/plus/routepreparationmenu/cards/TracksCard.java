@@ -117,7 +117,6 @@ public class TracksCard extends BaseCard {
 				public void onClick(View v) {
 					mapActivity.getMapActions().setGPXRouteParams(item.file);
 					app.getTargetPointsHelper().updateRouteAndRefresh(true);
-					app.getRoutingHelper().recalculateRouteDueToSettingsChange();
 				}
 			});
 			tracks.addView(v);

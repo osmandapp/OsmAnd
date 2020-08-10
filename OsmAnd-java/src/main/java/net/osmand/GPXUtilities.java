@@ -1,6 +1,7 @@
 
 package net.osmand;
 
+
 import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
 
@@ -42,10 +43,14 @@ import java.util.Stack;
 import java.util.TimeZone;
 
 public class GPXUtilities {
+
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
+
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String DEFAULT_ICON_NAME = "special_star";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
+	private static final String PROFILE_TYPE_EXTENSION = "profile";
+	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 
 	private final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
 	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
@@ -115,6 +120,13 @@ public class GPXUtilities {
 			return extensions;
 		}
 
+		public Map<String, String> getExtensionsToWrite() {
+			if (extensions == null) {
+				extensions = new LinkedHashMap<>();
+			}
+			return extensions;
+		}
+
 		public GPXExtensionsWriter getExtensionsWriter() {
 			return extensionsWriter;
 		}
@@ -148,14 +160,7 @@ public class GPXUtilities {
 			getExtensionsToWrite().remove("color");
 		}
 
-		public Map<String, String> getExtensionsToWrite() {
-			if (extensions == null) {
-				extensions = new LinkedHashMap<>();
-			}
-			return extensions;
-		}
-
-		private int parseColor(String colorString, int defColor) {
+		protected int parseColor(String colorString, int defColor) {
 			if (!Algorithms.isEmpty(colorString)) {
 				if (colorString.charAt(0) == '#') {
 					long color = Long.parseLong(colorString.substring(1), 16);
@@ -300,6 +305,26 @@ public class GPXUtilities {
 
 		public void setBackgroundType(String backType) {
 			getExtensionsToWrite().put(BACKGROUND_TYPE_EXTENSION, backType);
+		}
+
+		public String getProfileType() {
+			return getExtensionsToRead().get(PROFILE_TYPE_EXTENSION);
+		}
+
+		public void setProfileType(String profileType) {
+			getExtensionsToWrite().put(PROFILE_TYPE_EXTENSION, profileType);
+		}
+
+		public int getTrkPtIndex() {
+			try {
+				return Integer.parseInt(getExtensionsToRead().get(TRKPT_INDEX_EXTENSION));
+			}catch(NumberFormatException e){
+				return -1;
+			}
+		}
+
+		public void setTrkPtIndex(int index) {
+			getExtensionsToWrite().put(TRKPT_INDEX_EXTENSION, String.valueOf(index));
 		}
 
 		@Override
@@ -932,7 +957,6 @@ public class GPXUtilities {
 
 					sp = new SplitSegment(segment, k - 1, cf);
 					currentMetricEnd += metricLimit;
-					prev = sp.get(0);
 				}
 				total += currentSegment;
 			}
@@ -1510,6 +1534,97 @@ public class GPXUtilities {
 				}
 			}
 			return new QuadRect(left, top, right, bottom);
+		}
+
+		public int getGradientScaleColor(String gradientScaleType, int defColor) {
+			String clrValue = null;
+			if (extensions != null) {
+				clrValue = extensions.get(gradientScaleType);
+			}
+			return parseColor(clrValue, defColor);
+		}
+
+		public void setGradientScaleColor(String gradientScaleType, int gradientScaleColor) {
+			getExtensionsToWrite().put(gradientScaleType, Algorithms.colorToString(gradientScaleColor));
+		}
+
+		public String getGradientScaleType() {
+			if (extensions != null) {
+				return extensions.get("gradient_scale_type");
+			}
+			return null;
+		}
+
+		public void setGradientScaleType(String gradientScaleType) {
+			getExtensionsToWrite().put("gradient_scale_type", gradientScaleType);
+		}
+
+		public void removeGradientScaleType() {
+			getExtensionsToWrite().remove("gradient_scale_type");
+		}
+
+		public String getSplitType() {
+			if (extensions != null) {
+				return extensions.get("split_type");
+			}
+			return null;
+		}
+
+		public void setSplitType(String gpxSplitType) {
+			getExtensionsToWrite().put("split_type", gpxSplitType);
+		}
+
+		public double getSplitInterval() {
+			if (extensions != null) {
+				String splitIntervalStr = extensions.get("split_interval");
+				if (!Algorithms.isEmpty(splitIntervalStr)) {
+					try {
+						return Double.parseDouble(splitIntervalStr);
+					} catch (NumberFormatException e) {
+						log.error("Error reading split_interval", e);
+					}
+				}
+			}
+			return 0;
+		}
+
+		public void setSplitInterval(double splitInterval) {
+			getExtensionsToWrite().put("split_interval", String.valueOf(splitInterval));
+		}
+
+		public String getWidth(String defWidth) {
+			String widthValue = null;
+			if (extensions != null) {
+				widthValue = extensions.get("width");
+			}
+			return widthValue != null ? widthValue : defWidth;
+		}
+
+		public void setWidth(String width) {
+			getExtensionsToWrite().put("width", width);
+		}
+
+		public boolean isShowArrows() {
+			String showArrows = null;
+			if (extensions != null) {
+				showArrows = extensions.get("show_arrows");
+			}
+			return Boolean.parseBoolean(showArrows);
+		}
+
+		public void setShowArrows(boolean showArrows) {
+			getExtensionsToWrite().put("show_arrows", String.valueOf(showArrows));
+		}
+
+		public boolean isShowStartFinish() {
+			if (extensions != null && extensions.containsKey("show_start_finish")) {
+				return Boolean.parseBoolean(extensions.get("show_start_finish"));
+			}
+			return true;
+		}
+
+		public void setShowStartFinish(boolean showStartFinish) {
+			getExtensionsToWrite().put("show_start_finish", String.valueOf(showStartFinish));
 		}
 	}
 

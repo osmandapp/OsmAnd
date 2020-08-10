@@ -137,12 +137,16 @@ public class RouteCalculationResult {
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,
-								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode) {
+								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode, boolean calculateFirstAndLastPoint) {
 		if (rctx != null) {
 			this.routingTime = rctx.routingTime;
-			this.visitedSegments = rctx.visitedSegments;
-			this.loadedTiles = rctx.loadedTiles;
-			this.calculateTime = (float) (((System.nanoTime() - rctx.timeToCalculate) / 1e6) / 1000f);
+			this.visitedSegments = rctx.getVisitedSegments();
+			this.loadedTiles = rctx.getLoadedTiles();
+			if (rctx.calculationProgress != null) {
+				this.calculateTime = (float) (rctx.calculationProgress.timeToCalculate / 1.0e9);
+			} else {
+				this.calculateTime = 0;
+			}
 		} else {
 			this.routingTime = 0;
 			this.visitedSegments = 0;
@@ -158,7 +162,9 @@ public class RouteCalculationResult {
 		List<Location> locations = new ArrayList<Location>();
 		ArrayList<AlarmInfo> alarms = new ArrayList<AlarmInfo>();
 		List<RouteSegmentResult> segments = convertVectorResult(computeDirections, locations, list, alarms, ctx);
-		introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
+		if (calculateFirstAndLastPoint) {
+			introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
+		}
 		
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
@@ -493,9 +499,9 @@ public class RouteCalculationResult {
 			Location current = locations.get(i);
 			float bearing = current.bearingTo(next);
 			// try to get close to current location if possible
-			while(prevBearingLocation < i - 1){
-				if(locations.get(prevBearingLocation + 1).distanceTo(current) > 70){
-					prevBearingLocation ++;
+			while (prevBearingLocation < i - 1) {
+				if (locations.get(prevBearingLocation + 1).distanceTo(current) > 70) {
+					prevBearingLocation++;
 				} else {
 					break;
 				}

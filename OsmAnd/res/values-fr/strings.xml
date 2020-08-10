@@ -94,7 +94,7 @@
     <string name="search_position_current_location_found">Ma position</string>
     <string name="search_position_address">Adresse…</string>
     <string name="search_position_favorites">Favori…</string>
-    <string name="search_position_undefined">Non défini</string>
+    <string name="shared_string_undefined">Non défini</string>
     <string name="search_position_map_view">Centre de la carte</string>
     <string name="select_search_position">Autour de :</string>
     <string name="context_menu_item_search">Rechercher à proximité</string>
@@ -1760,7 +1760,6 @@
     <string name="context_menu_item_edit_waypoint">Modifier l\'étape GPX</string>
     <string name="context_menu_item_open_note">Signaler une anomalie OSM</string>
     <string name="osm_edit_reopened_note">Note OSM réouverte</string>
-    <string name="osm_edit_removed_note">Note OSM supprimée</string>
     <string name="osm_edit_created_note">Note OSM créée</string>
     <string name="osn_bug_name">Note OSM</string>
     <string name="osn_add_dialog_title">Créer une note</string>
@@ -2068,7 +2067,7 @@
     <string name="gpx_logging_no_data">Aucune donnée</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
-    <string name="trip_rec_notification_settings_desc">Afficher une notification système permettant d’enregistrer l\'itinéraire.</string>
+    <string name="trip_rec_notification_settings_desc">Afficher une notification système permettant de démarrer l\'enregistrement de l\'itinéraire.</string>
     <string name="gpx_no_tracks_title">Vous n\'avez pas encore de fichier GPX</string>
     <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers GPX dans le dossier</string>
     <string name="gpx_add_track">Autre trace GPX …</string>
@@ -3797,4 +3796,42 @@
     <string name="please_provide_point_name_error">Merci de renseigner un nom pour le point</string>
     <string name="plugin_wikipedia_description">Utilisez un guide de poche hors ligne grâce à Wikipédia. Activez le plugin Wikipédia : des points d\'intérêt seront affichés, ils vous permettrons d\'obtenir des informations sur les lieux qui vous entourent.</string>
     <string name="search_download_wikipedia_maps">Télécharger les cartes Wikipédia</string>
+    <string name="app_mode_motor_scooter">Scooter</string>
+    <string name="app_mode_enduro_motorcycle">Moto enduro</string>
+    <string name="app_mode_go_cart">Kart</string>
+    <string name="osm_edit_closed_note">Note OSM fermée</string>
+    <string name="app_mode_wheelchair">Fauteuil roulant</string>
+    <string name="app_mode_wheelchair_forward">Fauteuil roulant vers l\'avant</string>
+    <string name="set_working_days_to_continue">Vous devez définir les jours travaillés avant de poursuivre</string>
+    <string name="route_between_points">Itinéraire entre points</string>
+    <string name="plan_a_route">Planifier un itinéraire</string>
+    <string name="add_to_a_track">Ajouter à une trace</string>
+    <string name="shared_string_custom">Douane</string>
+    <string name="add_hidden_group_info">Le point ajouté ne sera pas visible sur la carte car le groupe sélectionné est masqué. Vous pouvez le trouver dans \"%s\".</string>
+    <string name="gpx_split_interval_descr">Sélectionnez l\'intervalle d\'affichage sur la trace des marques de distance ou de durée.</string>
+    <string name="gpx_split_interval_none_descr">Sélectionner l\'option de découpage : durée ou distance.</string>
+    <string name="track_coloring_solid">Continu</string>
+    <string name="track_show_start_finish_icons">Afficher les icônes de départ et d\'arrivée</string>
+    <string name="select_track_width">Sélectionner la largeur</string>
+    <string name="gpx_direction_arrows">Flèches de direction</string>
+    <string name="plan_route_last_edited">Dernière modification</string>
+    <string name="plan_route_import_track">Importer une trace</string>
+    <string name="plan_route_open_existing_track">Ouvrir une trace existante</string>
+    <string name="plan_route_create_new_route">Créer un nouvel itinéraire</string>
+    <string name="plan_route_select_track_file_for_open">Sélectionnez un fichier de trace à ouvrir.</string>
+    <string name="shared_string_done">Terminé</string>
+    <string name="overwrite_track">Remplacer la trace</string>
+    <string name="rourte_between_points_desc">Sélectionnez comment relier les points : par une ligne droite ou en calculant un itinéraire avec le profil sélectionné.</string>
+    <string name="rourte_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
+    <string name="rourte_between_points_warning_desc">Pour utiliser cette option, OsmAnd doit aligner votre trace sur les routes de la carte.
+\n
+\n À l\'étape suivante, vous devrez sélectionner le profil de navigation pour détecter les routes autorisées et le seuil de distance pour rapprocher votre trace des routes.</string>
+    <string name="rourte_between_points_add_track_desc">Sélectionnez un fichier de trace auquel ajouter un nouveau segment.</string>
+    <string name="save_as_new_track">Enregistrer comme nouvelle trace</string>
+    <string name="reverse_route">Inverser l\'itinéraire</string>
+    <string name="whole_track">Trace entière</string>
+    <string name="next_segment">Segment suivant</string>
+    <string name="threshold_distance">Seuil de distance</string>
+    <string name="navigation_profile">Profil de navigation</string>
 </resources>

@@ -230,7 +230,7 @@
     <string name="search_position_current_location_found">Moja poloha (nájdená)</string>
     <string name="search_position_address">Adresa…</string>
     <string name="search_position_favorites">Obľúbené miesta…</string>
-    <string name="search_position_undefined">Neurčené</string>
+    <string name="shared_string_undefined">Neurčené</string>
     <string name="search_position_map_view">Stred mapy teraz</string>
     <string name="select_search_position">Východzí bod:</string>
     <string name="context_menu_item_search">Hľadať v okolí</string>
@@ -286,7 +286,9 @@
     <string name="gpx_option_reverse_route">Obrátiť GPX smerovanie</string>
     <string name="gpx_option_destination_point">Použiť aktuálny cieľový bod</string>
     <string name="gpx_option_from_start_point">Prejsť pozdĺž celej trasy</string>
-    <string name="switch_to_vector_map_to_see">Pre túto oblasť je dostupná offline vektorová mapa.\n\t\n\tNa jej použitie aktivujte Menu → Zobrazenie → Zdroj mapy… → Vektorové OSM mapy.</string>
+    <string name="switch_to_vector_map_to_see">Pre túto oblasť je dostupná offline vektorová mapa.
+\n\t
+\n\tNa jej použitie aktivujte \'Menu\' → \'Zobrazenie\' → \'Zdroj mapy…\' → \'Vektorové OSM mapy\'.</string>
     <string name="choose_audio_stream">Výstup hlasových pokynov</string>
     <string name="choose_audio_stream_descr">Vybrať reproduktor pre hlasové pokyny.</string>
     <string name="voice_stream_voice_call">Zvuk telefónneho hovoru (preruší Bluetooth stereo v aute)</string>
@@ -1767,7 +1769,6 @@
     <string name="context_menu_item_open_note">Otvoriť OSM poznámku</string>
     <string name="osm_edit_reopened_note">Znovuotvorená OSM poznámka</string>
     <string name="osm_edit_commented_note">Pridaný komentár k OSM poznámke</string>
-    <string name="osm_edit_removed_note">Odstránená OSM poznámka</string>
     <string name="osm_edit_created_note">Vytvorená OSM poznámka</string>
     <string name="osn_bug_name">OSM poznámka</string>
     <string name="osn_add_dialog_title">Vytvoriť poznámku</string>
@@ -2069,7 +2070,7 @@
     <string name="shared_string_record">Záznam</string>
     <string name="gpx_logging_no_data">Žiadne údaje</string>
     <string name="trip_rec_notification_settings">Zapnúť rýchly záznam</string>
-    <string name="trip_rec_notification_settings_desc">Zobraziť systémové oznámenie, ktoré umožňuje nahrávanie.</string>
+    <string name="trip_rec_notification_settings_desc">Zobraziť systémové oznámenie, ktoré umožňuje spustiť nahrávanie.</string>
     <string name="shared_string_notifications">Oznámenia</string>
     <string name="shared_string_resume">Pokračovať</string>
     <string name="gpx_no_tracks_title">Nemáte zatiaľ žiadne súbory GPX</string>
@@ -3813,4 +3814,42 @@
     <string name="quick_action_remove_next_destination_descr">Aktuálny cieľový bod na trase bude vymazaný. Ak je to posledný cieľ, navigácia sa zastaví.</string>
     <string name="search_download_wikipedia_maps">Stiahnuť mapy Wikipédia</string>
     <string name="plugin_wikipedia_description">Získajte informácie o bodoch záujmu z Wikipédie. Je to váš vreckový sprievodca - zapnite modul Wikipédia a užívajte si články o objektoch okolo vás.</string>
+    <string name="app_mode_enduro_motorcycle">Enduro motorka</string>
+    <string name="app_mode_motor_scooter">Skúter</string>
+    <string name="app_mode_wheelchair">Invalidný vozík</string>
+    <string name="app_mode_wheelchair_forward">Invalidný vozík dopredu</string>
+    <string name="app_mode_go_cart">Motokára</string>
+    <string name="osm_edit_closed_note">Zatvorená OSM poznámka</string>
+    <string name="set_working_days_to_continue">Pre pokračovanie musíte zadať pracovné dni</string>
+    <string name="route_between_points">Trasa medzi bodmi</string>
+    <string name="plan_a_route">Naplánovať trasu</string>
+    <string name="add_to_a_track">Pridať do stopy</string>
+    <string name="add_hidden_group_info">Pridaný bod nebude viditeľný na mape, pretože zvolená skupina je skrytá. Môžete ho nájsť v \"%s\".</string>
+    <string name="track_show_start_finish_icons">Zobraziť ikony štartu a cieľa</string>
+    <string name="select_track_width">Zvoľte šírku</string>
+    <string name="gpx_split_interval_descr">Zvoľte interval, po ktorom budú na stope zobrazené značky so vzdialenosťou alebo časom.</string>
+    <string name="gpx_split_interval_none_descr">Zvoľte spôsob rozdeľovania: podľa času alebo podľa vzdialenosti.</string>
+    <string name="shared_string_custom">Vlastné</string>
+    <string name="gpx_direction_arrows">Smerové šípky</string>
+    <string name="track_coloring_solid">Plné</string>
+    <string name="plan_route_last_edited">Naposledy upravené</string>
+    <string name="plan_route_import_track">Importovať stopu</string>
+    <string name="plan_route_open_existing_track">Otvoriť existujúcu stopu</string>
+    <string name="plan_route_create_new_route">Vytvoriť novú trasu</string>
+    <string name="plan_route_select_track_file_for_open">Zvoľte súbor so stopou na otvorenie.</string>
+    <string name="shared_string_done">Hotovo</string>
+    <string name="overwrite_track">Prepísať stopu</string>
+    <string name="save_as_new_track">Uložiť ako novú stopu</string>
+    <string name="reverse_route">Otočiť trasu</string>
+    <string name="rourte_between_points_whole_track_button_desc">Celá stopa bude prepočítaná pomocou zvoleného profilu.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Len nasledujúci úsek bude prepočítaný pomocou zvoleného profilu.</string>
+    <string name="rourte_between_points_desc">Zvoľte ako spojiť body, priamou čiarou alebo vypočítať trasu medzi nimi pomocou zvoleného profilu.</string>
+    <string name="whole_track">Celá stopa</string>
+    <string name="next_segment">Ďalší úsek</string>
+    <string name="rourte_between_points_warning_desc">Pre použitie tejto možnosti musí OsmAnd prichytiť vašu stopu na cesty v mape.
+\n
+\n V ďalšom kroku budete musieť zvoliť navigačný profil pre detekciu povolených ciest a hraničnú vzdialenosť pre aproximovanie vašej stopy cestami.</string>
+    <string name="threshold_distance">Hraničná vzdialenosť</string>
+    <string name="navigation_profile">Navigačný profil</string>
+    <string name="rourte_between_points_add_track_desc">Zvoľte súbor stopy, pre ktorú bude pridaný nový úsek.</string>
 </resources>

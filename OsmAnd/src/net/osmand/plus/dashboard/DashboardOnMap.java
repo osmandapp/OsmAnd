@@ -82,8 +82,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.srtmplugin.ContourLinesMenu;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.srtmplugin.TerrainFragment;
-import net.osmand.plus.views.DownloadedRegionsLayer;
-import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.layers.DownloadedRegionsLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.wikipedia.WikipediaPoiMenu;
@@ -1306,7 +1306,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-		showToast.value = false;
 	}
 
 	@Override

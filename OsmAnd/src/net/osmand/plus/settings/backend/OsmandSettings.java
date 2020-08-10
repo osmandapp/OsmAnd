@@ -75,6 +75,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -313,6 +314,27 @@ public class OsmandSettings {
 				for (ApplicationModeBean modeBean : customProfiles) {
 					ApplicationModeBuilder builder = ApplicationMode.fromModeBean(ctx, modeBean);
 					ApplicationMode.saveProfile(builder, ctx);
+				}
+			}
+		}
+	}
+
+	public void migrateQuickActionStates() {
+		String quickActionsJson = settingsAPI.getString(globalPreferences, "quick_action_new", "");
+		if (!Algorithms.isEmpty(quickActionsJson)) {
+			Gson gson = new GsonBuilder().create();
+			Type type = new TypeToken<HashMap<String, Boolean>>() {
+			}.getType();
+			HashMap<String, Boolean> quickActions = gson.fromJson(quickActionsJson, type);
+			if (!Algorithms.isEmpty(quickActions)) {
+				for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+					if (!QUICK_ACTION.isSetForMode(mode)) {
+						Boolean actionState = quickActions.get(mode.getStringKey());
+						if (actionState == null) {
+							actionState = QUICK_ACTION.getDefaultValue();
+						}
+						setPreference(QUICK_ACTION.getId(), actionState, mode);
+					}
 				}
 			}
 		}
@@ -2172,6 +2194,10 @@ public class OsmandSettings {
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference("last_updates_card_refresh", 0).makeGlobal();
 
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference("current_track_color", 0).makeGlobal().cache();
+	public final CommonPreference<String> CURRENT_TRACK_WIDTH = new StringPreference("current_track_width", "").makeGlobal().cache();
+	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_ARROWS = new BooleanPreference("current_track_show_arrows", false).makeGlobal().cache();
+	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_START_FINISH = new BooleanPreference("current_track_show_start_finish", true).makeGlobal().cache();
+	public final ListStringPreference CUSTOM_TRACK_COLORS = (ListStringPreference) new ListStringPreference("custom_track_colors", null, ",").makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5000).makeProfile();
@@ -3499,7 +3525,7 @@ public class OsmandSettings {
 	public static final String QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN = "quick_fab_margin_x_landscape_margin";
 	public static final String QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN = "quick_fab_margin_y_landscape_margin";
 
-	public final CommonPreference<String> QUICK_ACTION = new StringPreference("quick_action_new", "").makeGlobal();
+	public final CommonPreference<Boolean> QUICK_ACTION = new BooleanPreference("quick_action_state", false).makeProfile();
 
 	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference("quick_action_list", "").makeGlobal();
 

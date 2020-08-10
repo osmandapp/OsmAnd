@@ -80,7 +80,7 @@
     <string name="search_position_current_location_found">La mia posizione (trovata)</string>
     <string name="search_position_address">Indirizzo…</string>
     <string name="search_position_favorites">Preferiti…</string>
-    <string name="search_position_undefined">Non definito</string>
+    <string name="shared_string_undefined">Non definito</string>
     <string name="search_position_map_view">Attuale centro della mappa</string>
     <string name="select_search_position">Origine:</string>
     <string name="context_menu_item_search">Cerca nelle vicinanze</string>
@@ -1766,7 +1766,6 @@
     <string name="context_menu_item_open_note">Apri una nota di OSM</string>
     <string name="osm_edit_reopened_note">Nota di OSM riaperta</string>
     <string name="osm_edit_commented_note">Nota di OSM commentata</string>
-    <string name="osm_edit_removed_note">Nota di OSM eliminata</string>
     <string name="osm_edit_created_note">Nota di OSM creata</string>
     <string name="osn_bug_name">Nota di OSM</string>
     <string name="osn_add_dialog_title">Crea nota</string>
@@ -2985,7 +2984,7 @@
 \n</string>
     <string name="use_osm_live_public_transport_description">Attiva le modifiche al trasporto pubblico in tempo reale con OsmAnd Live.</string>
     <string name="by_transport_type">In %1$s</string>
-    <string name="exit_at">Scendi a</string>
+    <string name="exit_at">Esci a</string>
     <string name="sit_on_the_stop">Sali alla fermata</string>
     <string name="shared_string_swap">Inverti</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Questo pulsante mostra o nasconde le tracce GPX selezionate sulla mappa</string>
@@ -3766,7 +3765,7 @@
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Colori personalizzati</string>
     <string name="search_poi_types">Cerca in base al PDI</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Puoi Esportare o importare le azioni veloci con i profili dell\'applicazione.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Puoi esportare o importare le azioni veloci con i profili dell\'applicazione.</string>
     <string name="shared_string_delete_all_q">Cancellare tutto\?</string>
     <string name="delete_all_actions_message_q">Sei sicuro di volere cancellare definitivamente %d le azioni rapide\?</string>
     <string name="screen_timeout">Tempo del blocco schermo</string>
@@ -3779,13 +3778,67 @@
     <string name="shared_string_night_map">Mappa notturna</string>
     <string name="shared_string_tones">toni</string>
     <string name="add_online_source">Aggiungi sorgente online</string>
-    <string name="clear_tiles_warning">Applicando questi cambiamenti i dati memorizzati nella cache verranno cancellati per questa sorgente di mattonelle</string>
+    <string name="clear_tiles_warning">Applicando questi cambiamenti, i dati memorizzati nella cache verranno cancellati per questa sorgente di mattonelle</string>
     <string name="vessel_height_warning_link">Imposta l\'altezza dell\'imbarcazione</string>
     <string name="vessel_height_warning">Puoi mpostare l\'altezza dell\'imbarcazione per evitare ponti bassi. Ricorda che, se il ponte è mobile, useremo la sua altezza da aperto.</string>
     <string name="vessel_height_limit_description">Imposta l\'altezza dell\'imbarcazione per evitare ponti bassi. Ricorda che, se il ponte è mobile, useremo la sua altezza da aperto.</string>
     <string name="vessel_width_limit_description">Imposta la larghezza della\"imbarcazione per evitare i ponti stretti</string>
     <string name="quick_action_showhide_mapillary_title">Mostra/nascondi Mapillary</string>
-    <string name="quick_action_mapillary_hide">Nascondi Mapilly</string>
+    <string name="quick_action_mapillary_hide">Nascondi Mapillary</string>
     <string name="quick_action_mapillary_show">Mostra Mapillary</string>
     <string name="quick_action_showhide_mapillary_descr">Un pulsante per visualizzare nella mappa o nascondere il livello Mapillary .</string>
+    <string name="lenght_limit_description">Fornisci la lunghezza del tuo veicolo, alcune restrizioni di percorso potrebbero essere applicate per veicoli.</string>
+    <string name="uninstall_speed_cameras">Disinstalla autovelox</string>
+    <string name="shared_string_legal">Legale</string>
+    <string name="speed_camera_pois">PDI autovelox</string>
+    <string name="speed_cameras_legal_descr">In alcuni paesi o regioni, gli avvisi di presenza di autovelox sono proibiti dalla legge. 
+\n
+\nDevi scegliere in base alle leggi del tuo paese. 
+\n
+\nScegliendo %1$s e riceverai gli avvisi della presenza di autovelox. 
+\n
+\nScegliendo %2$s. Tutti i dati relativi agli autovelox: avvisi, notifiche, PDI saranno cancellati fino a che OsmAnd non sarà completamente reinstallato.</string>
+    <string name="keep_active">Mantieni attivo</string>
+    <string name="shared_string_uninstall">Disinstalla</string>
+    <string name="speed_cameras_alert">Gli avvisi sulla presenza di autovelox in alcuni paesi sono proibiti dalla legge.</string>
+    <string name="routing_attr_length_description">Specifica la lunghezza del veicolo permessa nei percorsi.</string>
+    <string name="routing_attr_length_name">Lunghezza massima</string>
+    <string name="shared_string_bearing">Direzione</string>
+    <string name="item_deleted">%1$s cancellato</string>
+    <string name="speed_cameras_restart_descr">Il riavvio è necessario per cancellare completamente i dati degli autovelox.</string>
+    <string name="shared_string_uninstall_and_restart">Disinstalla e Riavvia</string>
+    <string name="speed_cameras_removed_descr">Questo dispositivo non ha autovelox.</string>
+    <string name="app_mode_inline_skates">Pattini in linea</string>
+    <string name="quick_action_remove_next_destination">Cancella il prossimo punto di destinazione</string>
+    <string name="use_volume_buttons_as_zoom_descr">Abilita per controllare il livello di zoom della mappa con i pulsanti del volume del dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom">Pulsanti volume come zoom</string>
+    <string name="please_provide_point_name_error">Per favore indica un nome per il punto</string>
+    <string name="quick_action_remove_next_destination_descr">Il punto di destinazione corrente sul percorso verrà eliminato. Se sarà la Destinazione, la navigazione verrà interrotta.</string>
+    <string name="search_download_wikipedia_maps">Scarica mappe Wikipedia</string>
+    <string name="plugin_wikipedia_description">Ottieni informazioni sui punti di interesse da Wikipedia. È la tua guida tascabile offline - basta abilitare il plugin Wikipedia e goderti gli articoli sugli oggetti intorno a te.</string>
+    <string name="app_mode_enduro_motorcycle">Moto da enduro</string>
+    <string name="app_mode_motor_scooter">Moto scooter</string>
+    <string name="app_mode_wheelchair">Sedia a rotelle</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="osm_edit_closed_note">Chiudi la nota OSM</string>
+    <string name="app_mode_wheelchair_forward">Sedia a rotelle in avanti</string>
+    <string name="add_hidden_group_info">Il punto aggiunto non sarà visibile sulla mappa, dato che il gruppo selezionato è nascosto, puoi trovarlo in \"%s\".</string>
+    <string name="route_between_points">Percorso tra i punti</string>
+    <string name="track_show_start_finish_icons">Mostra le icone di inizio e fine</string>
+    <string name="shared_string_custom">Personalizzato</string>
+    <string name="track_coloring_solid">Solido</string>
+    <string name="set_working_days_to_continue">Devi impostare i giorni lavorativi per continuare</string>
+    <string name="plan_a_route">Pianifica un percorso</string>
+    <string name="add_to_a_track">Aggiungi ad una Traccia</string>
+    <string name="gpx_split_interval_descr">Seleziona l\'intervallo a cui i segnaposti con distanza o orario sulla traccia verranno mostrati.</string>
+    <string name="gpx_split_interval_none_descr">Seleziona l\'opzione desiderata per la divisione: per tempo o per distanza.</string>
+    <string name="gpx_direction_arrows">Frecce delle direzioni</string>
+    <string name="select_track_width">Seleziona larghezza</string>
+    <string name="plan_route_last_edited">Ultima modificata</string>
+    <string name="plan_route_import_track">Importa una traccia</string>
+    <string name="plan_route_open_existing_track">Apri una traccia esistente</string>
+    <string name="plan_route_create_new_route">Crea un nuovo percorso</string>
+    <string name="plan_route_select_track_file_for_open">Scegli il file di una traccia da aprire.</string>
+    <string name="shared_string_done">Fatto</string>
+    <string name="navigation_profile">Profili di navigazione</string>
 </resources>

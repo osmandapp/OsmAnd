@@ -696,6 +696,7 @@ public class BinaryMapIndexReader {
 	private void readMapIndex(MapIndex index, boolean onlyInitEncodingRules) throws IOException {
 		int defaultId = 1;
 		int oldLimit;
+		int encodingRulesSize = 0;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -712,10 +713,14 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER :
 				if (onlyInitEncodingRules) {
+					if(encodingRulesSize == 0) {
+						encodingRulesSize = codedIS.getTotalBytesRead();
+					}
 					int len = codedIS.readInt32();
 					oldLimit = codedIS.pushLimit(len);
 					readMapEncodingRule(index, defaultId++);
 					codedIS.popLimit(oldLimit);
+					index.encodingRulesSizeBytes = (codedIS.getTotalBytesRead() - encodingRulesSize);
 				} else {
 					skipUnknownField(t);
 				}
@@ -1829,9 +1834,12 @@ public class BinaryMapIndexReader {
 		public int onewayReverseAttribute = -1;
 		public TIntHashSet positiveLayers = new TIntHashSet(2);
 		public TIntHashSet negativeLayers = new TIntHashSet(2);
+		public int encodingRulesSizeBytes;
 
 		// to speed up comparision
 		private MapIndex referenceMapIndex;
+
+		
 
 		public Integer getRule(String t, String v) {
 			Map<String, Integer> m = encodingRules.get(t);

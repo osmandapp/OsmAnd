@@ -113,6 +113,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private EditPoiViewPager viewPager;
 	private AutoCompleteTextView poiTypeEditText;
 
+	private OnSaveButtonClickListener onSaveButtonClickListener;
 	private OpenstreetmapUtil mOpenstreetmapUtil;
 	private TextInputLayout poiTypeTextInputLayout;
 	private View view;
@@ -173,7 +174,13 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 			@Override
 			public void onPageSelected(int i) {
-				((OnFragmentActivatedListener) pagerAdapter.getItem(i)).onFragmentActivated();
+				Fragment pageFragment = pagerAdapter.getItem(i);
+				((OnFragmentActivatedListener) pageFragment).onFragmentActivated();
+				if (pageFragment instanceof OnSaveButtonClickListener) {
+					onSaveButtonClickListener = (OnSaveButtonClickListener) pageFragment;
+				} else {
+					onSaveButtonClickListener = null;
+				}
 			}
 
 			@Override
@@ -433,6 +440,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void trySave() {
+		if (onSaveButtonClickListener != null) {
+			onSaveButtonClickListener.onSaveButtonClick();
+		}
 		String tagWithExceedingValue = isTextLengthInRange();
 		if (!Algorithms.isEmpty(tagWithExceedingValue)){
 			ValueExceedLimitDialogFragment f = new ValueExceedLimitDialogFragment();
@@ -995,5 +1005,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	public interface OnFragmentActivatedListener {
 		void onFragmentActivated();
+	}
+
+	public interface OnSaveButtonClickListener {
+		void onSaveButtonClick();
 	}
 }

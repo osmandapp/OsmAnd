@@ -57,7 +57,6 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -69,16 +68,19 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.measurementtool.NewGpxData;
+import net.osmand.plus.track.SaveGpxAsyncTask;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
 import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -525,16 +527,14 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 					}
 				} else {
 					float distance = pos * dataSet.getDivX();
-					double previousSplitDistance = 0;
+					double totalDistance = 0;
 					for (int i = 0; i < segment.points.size(); i++) {
 						WptPt currentPoint = segment.points.get(i);
 						if (i != 0) {
 							WptPt previousPoint = segment.points.get(i - 1);
-							if (currentPoint.distance < previousPoint.distance) {
-								previousSplitDistance += previousPoint.distance;
-							}
+							totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
 						}
-						if (previousSplitDistance + currentPoint.distance >= distance) {
+						if (currentPoint.distance >= distance || Math.abs(totalDistance - distance) < 0.1) {
 							wpt = currentPoint;
 							break;
 						}
@@ -789,10 +789,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 											public boolean onMenuItemClick(MenuItem item) {
 												int i = item.getItemId();
 												if (i == R.id.action_edit) {
-													TrkSegment segment = getTrkSegment();
-													if (segment != null && fragmentAdapter != null) {
-														fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
-													}
+													editSegment();
 													return true;
 												} else if (i == R.id.action_delete) {
 													TrackActivity activity = getTrackActivity();
@@ -802,16 +799,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 														builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 															@Override
 															public void onClick(DialogInterface dialog, int which) {
-																TrackActivity trackActivity = getTrackActivity();
-																if (trackActivity != null && deleteSegment()) {
-																	GPXFile gpx = getGpx();
-																	if (gpx != null && fragmentAdapter != null) {
-																		boolean showOnMap = fragmentAdapter.isShowOnMap();
-																		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
-																		new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
-																				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-																	}
-																}
+																deleteAndSaveSegment();
 															}
 														});
 														builder.setNegativeButton(R.string.shared_string_cancel, null);
@@ -915,22 +903,10 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 											public boolean onMenuItemClick(MenuItem item) {
 												int i = item.getItemId();
 												if (i == R.id.action_edit) {
-													TrkSegment segment = getTrkSegment();
-													if (segment != null && fragmentAdapter != null) {
-														fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
-													}
+													editSegment();
 													return true;
 												} else if (i == R.id.action_delete) {
-													TrackActivity trackActivity = getTrackActivity();
-													if (trackActivity != null && deleteSegment()) {
-														GPXFile gpx = getGpx();
-														if (gpx != null && fragmentAdapter != null) {
-															boolean showOnMap = fragmentAdapter.isShowOnMap();
-															SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
-															new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
-																	.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-														}
-													}
+													deleteAndSaveSegment();
 													return true;
 												}
 												return false;
@@ -1024,22 +1000,10 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 											public boolean onMenuItemClick(MenuItem item) {
 												int i = item.getItemId();
 												if (i == R.id.action_edit) {
-													TrkSegment segment = getTrkSegment();
-													if (segment != null && fragmentAdapter != null) {
-														fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
-													}
+													editSegment();
 													return true;
 												} else if (i == R.id.action_delete) {
-													TrackActivity trackActivity = getTrackActivity();
-													if (trackActivity != null && deleteSegment()) {
-														GPXFile gpx = getGpx();
-														if (gpx != null && fragmentAdapter != null) {
-															boolean showOnMap = fragmentAdapter.isShowOnMap();
-															SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
-															new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
-																	.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-														}
-													}
+													deleteAndSaveSegment();
 													return true;
 												}
 												return false;
@@ -1059,6 +1023,25 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			container.addView(view, 0);
 			views.put(position, view);
 			return view;
+		}
+
+		private void editSegment() {
+			TrkSegment segment = getTrkSegment();
+			if (segment != null && fragmentAdapter != null) {
+				fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
+			}
+		}
+
+		private void deleteAndSaveSegment() {
+			TrackActivity trackActivity = getTrackActivity();
+			if (trackActivity != null && deleteSegment()) {
+				GPXFile gpx = getGpx();
+				if (gpx != null && fragmentAdapter != null) {
+					boolean showOnMap = fragmentAdapter.isShowOnMap();
+					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
+					saveGpx(showOnMap ? selectedGpxFile : null, gpx);
+				}
+			}
 		}
 
 		private boolean deleteSegment() {
@@ -1270,55 +1253,33 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 		}
 	}
 
-	private static class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
-		private final GPXFile gpx;
-		private final SelectedGpxFile selectedGpx;
-		private OsmandApplication app;
-		private final WeakReference<TrackActivity> activityRef;
-		private final WeakReference<TrackSegmentFragment> fragmentRef;
-
-		SaveGpxAsyncTask(@NonNull TrackActivity activity,
-						 @NonNull TrackSegmentFragment fragment,
-						 @NonNull GPXFile gpx,
-						 @Nullable SelectedGpxFile selectedGpx) {
-			this.gpx = gpx;
-			activityRef = new WeakReference<>(activity);
-			fragmentRef = new WeakReference<>(fragment);
-			app = activity.getMyApplication();
-			this.selectedGpx = selectedGpx;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			TrackActivity activity = activityRef.get();
-			if (activity != null) {
-				activity.setSupportProgressBarIndeterminateVisibility(true);
+	private void saveGpx(final SelectedGpxFile selectedGpxFile, GPXFile gpxFile) {
+		new SaveGpxAsyncTask(gpxFile, new SaveGpxListener() {
+			@Override
+			public void gpxSavingStarted() {
+				TrackActivity activity = getTrackActivity();
+				if (activity != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+					activity.setSupportProgressBarIndeterminateVisibility(true);
+				}
 			}
-		}
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			GPXUtilities.writeGpxFile(new File(gpx.path), gpx);
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			TrackActivity activity = activityRef.get();
-			TrackSegmentFragment fragment = fragmentRef.get();
-			if (activity != null && fragment != null) {
-				if (selectedGpx != null) {
-					List<GpxDisplayGroup> groups = fragment.getDisplayGroups();
-					if (groups != null) {
-						selectedGpx.setDisplayGroups(groups, app);
-						selectedGpx.processPoints(app);
+			@Override
+			public void gpxSavingFinished(Exception errorMessage) {
+				TrackActivity activity = getTrackActivity();
+				if (activity != null) {
+					if (selectedGpxFile != null) {
+						List<GpxDisplayGroup> groups = getDisplayGroups();
+						if (groups != null) {
+							selectedGpxFile.setDisplayGroups(groups, app);
+							selectedGpxFile.processPoints(app);
+						}
+					}
+					updateContent();
+					if (AndroidUtils.isActivityNotDestroyed(activity)) {
+						activity.setSupportProgressBarIndeterminateVisibility(false);
 					}
 				}
-				fragment.updateContent();
-				if (!activity.isFinishing()) {
-					activity.setSupportProgressBarIndeterminateVisibility(false);
-				}
 			}
-		}
+		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 }

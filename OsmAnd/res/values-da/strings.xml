@@ -427,7 +427,7 @@
     <string name="search_position_current_location_found">Positionen (fundet)</string>
     <string name="search_position_address">Adresse…</string>
     <string name="search_position_favorites">Favoritter…</string>
-    <string name="search_position_undefined">Ikke defineret</string>
+    <string name="shared_string_undefined">Ikke defineret</string>
     <string name="search_position_map_view">Nuværende kortcenter</string>
     <string name="select_search_position">Udgangspunkt:</string>
     <string name="context_menu_item_search">Søg i nærheden</string>
@@ -1778,7 +1778,6 @@
     <string name="context_menu_item_open_note">Åbn OSM-note</string>
     <string name="osm_edit_reopened_note">Genåbnet OSM-note</string>
     <string name="osm_edit_commented_note">Kommenteret OSM-note</string>
-    <string name="osm_edit_removed_note">Slettet OSM-note</string>
     <string name="osm_edit_created_note">Oprettet OSM-note</string>
     <string name="osn_bug_name">OSM-note</string>
     <string name="osn_add_dialog_title">Opret note</string>
@@ -3710,4 +3709,13 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_showhide_mapillary_title">Vis/skjul Mapillary</string>
     <string name="quick_action_mapillary_hide">Skjul Mapillary</string>
     <string name="quick_action_mapillary_show">Vis Mapillary</string>
+    <string name="quick_action_remove_next_destination">Slet næste destinationspunkt</string>
+    <string name="use_volume_buttons_as_zoom">Lydstyrkeknapper som zoom</string>
+    <string name="please_provide_point_name_error">Angiv et navn til punktet</string>
+    <string name="search_download_wikipedia_maps">Hent Wikipedia-kort</string>
+    <string name="app_mode_enduro_motorcycle">Enduro motorcykel</string>
+    <string name="app_mode_motor_scooter">Scooter</string>
+    <string name="app_mode_wheelchair">Kørestol</string>
+    <string name="app_mode_go_cart">Go cart</string>
+    <string name="osm_edit_closed_note">Lukket OSM-note</string>
 </resources>

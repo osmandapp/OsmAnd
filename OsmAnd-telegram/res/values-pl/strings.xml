@@ -142,9 +142,7 @@
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">sek</string>
-    <string name="welcome_descr">
-        <b>Nadajnik OsmAnd</b> pozwala Ci udostępniać swoją lokalizację i widzieć ją w OsmAnd.<br/>
-        <br/>Aplikacja używa API Telegram, a więc potrzebujesz konta Telegram.</string>
+    <string name="welcome_descr"><b>Nadajnik OsmAnd</b> pozwala Ci udostępniać swoją lokalizację i widzieć ją w OsmAnd.<br/> <br/>Aplikacja używa API Telegram, a więc potrzebujesz konta Telegram.</string>
     <string name="my_location">Moja lokalizacja</string>
     <string name="live_now">Na żywo</string>
     <string name="enter_another_device_name">Wybierz nazwę, której jeszcze nie używasz</string>

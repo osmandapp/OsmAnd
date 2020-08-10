@@ -358,7 +358,7 @@
     <string name="search_position_current_location_found">Mein Standort (gefunden)</string>
     <string name="search_position_address">Adresse …</string>
     <string name="search_position_favorites">Favoriten …</string>
-    <string name="search_position_undefined">Undefiniert</string>
+    <string name="shared_string_undefined">Undefiniert</string>
     <!-- string name="search_position_current_location">Aktueller Standort…</string -->
     <string name="search_position_map_view">Aktueller Kartenmittelpunkt</string>
     <string name="select_search_position">Ausgangspunkt:</string>
@@ -1765,7 +1765,6 @@
     <string name="context_menu_item_open_note">OSM-Notiz erstellen</string>
     <string name="osm_edit_reopened_note">Wiedereröffnete OSM-Notiz</string>
     <string name="osm_edit_commented_note">Kommentierte OSM-Notiz</string>
-    <string name="osm_edit_removed_note">Gelöschte OSM-Notiz</string>
     <string name="osm_edit_created_note">Erstellte OSM-Notiz</string>
     <string name="osn_bug_name">OSM-Notiz</string>
     <string name="osn_add_dialog_title">Notiz erstellen</string>
@@ -2083,7 +2082,7 @@
     <string name="shared_string_trip">Strecke</string>
     <string name="shared_string_record">Aufzeichnen</string>
     <string name="trip_rec_notification_settings">Schnellaufzeichnung einschalten</string>
-    <string name="trip_rec_notification_settings_desc">Anzeige einer Systembenachrichtigung zum Starten der Streckenaufzeichnung.</string>
+    <string name="trip_rec_notification_settings_desc">Eine Systembenachrichtigung anzeigen um die Aufzeichnung starten zu können.</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
     <string name="shared_string_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
@@ -3777,7 +3776,7 @@
     <string name="export_import_quick_actions_with_profiles_promo">Sie können Schnellaktionen mit Anwendungsprofilen exportieren oder importieren.</string>
     <string name="shared_string_delete_all_q">Alles löschen\?</string>
     <string name="delete_all_actions_message_q">Möchten Sie %d Schnellaktionen wirklich unwiderruflich löschen\?</string>
-    <string name="shared_string_tones">Töne</string>
+    <string name="shared_string_tones">Tonnen</string>
     <string name="shared_string_meters">Meter</string>
     <string name="screen_timeout">Bildschirm-Zeitlimit</string>
     <string name="details_dialog_decr">Zusätzliche Kartendetails anzeigen oder ausblenden</string>
@@ -3787,7 +3786,7 @@
     <string name="clear_tiles_warning">Durch die Anwendung dieser Änderungen werden die zwischengespeicherten Daten für diese Kachelquelle gelöscht</string>
     <string name="vessel_height_warning_link">Schiffshöhe einstellen</string>
     <string name="vessel_height_warning">Sie können die Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Denken Sie daran, wenn die Brücke beweglich ist, werden wir ihre Höhe im offenen Zustand verwenden.</string>
-    <string name="vessel_height_limit_description">Stellen Sie die Schiffshöhe ein, um niedrige Brücken zu vermeiden.Denken Sie daran, wenn die Brücke beweglich ist, werden wir ihre Höhe im offenen Zustand verwenden.</string>
+    <string name="vessel_height_limit_description">Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Beachten Sie: Wenn die Brücke beweglich ist, verwendet die Berechnung ihre Höhe im geöffneten Zustand.</string>
     <string name="vessel_width_limit_description">Stellen Sie die Schiffsbreite ein, um schmale Brücken zu vermeiden</string>
     <string name="quick_action_showhide_mapillary_title">Mapillary ein-/ausblenden</string>
     <string name="quick_action_mapillary_hide">Mapillary ausblenden</string>
@@ -3812,7 +3811,7 @@
 \n%2$s wählen, worauf alle Daten zu Blitzern (Warnungen, Hinweise und POIs) bis zu einer vollständigen Neuinstallation von OsmAnd gelöscht werden.</string>
     <string name="routing_attr_length_description">Geben Sie die Fahrzeuglänge an, die auf Routen erlaubt sein soll.</string>
     <string name="routing_attr_length_name">Längenbegrenzung</string>
-    <string name="speed_cameras_removed_descr">Dieses Gerät hat keine Blitzer.</string>
+    <string name="speed_cameras_removed_descr">Diese App hat keine Informationen zu Blitzern.</string>
     <string name="app_mode_inline_skates">Inline-Skates</string>
     <string name="use_volume_buttons_as_zoom_descr">Aktivieren Sie die Steuerung der Zoomstufe der Karte mit den Lautstärketasten des Geräts.</string>
     <string name="use_volume_buttons_as_zoom">Lautstärketasten als Zoom</string>
@@ -3822,4 +3821,39 @@
     <string name="quick_action_remove_next_destination_descr">Der aktuelle Punkt auf der Route wird gelöscht. Wenn es das Ziel ist, wird die Navigation gestoppt.</string>
     <string name="search_download_wikipedia_maps">Wikipedia-Karten herunterladen</string>
     <string name="plugin_wikipedia_description">Informationen über Sehenswürdigkeiten erhalten Sie bei Wikipedia. Es ist Ihr Offline-Wegweiser für die Hosentasche - aktivieren Sie einfach das Wikipedia-Modul und genießen Sie Artikel über Objekte in Ihrer Umgebung.</string>
+    <string name="app_mode_enduro_motorcycle">Enduro</string>
+    <string name="app_mode_motor_scooter">Motorroller</string>
+    <string name="app_mode_wheelchair">Rollstuhl</string>
+    <string name="app_mode_go_cart">Go-Kart</string>
+    <string name="osm_edit_closed_note">Geschlossene OSM-Notiz</string>
+    <string name="app_mode_wheelchair_forward">Rollstuhl vorwärts</string>
+    <string name="set_working_days_to_continue">Zum Fortfahren müssen die Arbeitstage gesetzt sein</string>
+    <string name="route_between_points">Route zwischen Punkten</string>
+    <string name="plan_a_route">Eine Route planen</string>
+    <string name="add_to_a_track">Zu einem Track hinzufügen</string>
+    <string name="add_hidden_group_info">Der hinzugefügte Punkt wird auf der Karte nicht sichtbar sein, da die ausgewählte Gruppe ausgeblendet ist, Sie können ihn in \"%s\" finden.</string>
+    <string name="track_show_start_finish_icons">Start-Ziel-Symbole anzeigen</string>
+    <string name="select_track_width">Breite auswählen</string>
+    <string name="gpx_split_interval_descr">Wählen Sie das Intervall, in dem Markierungen mit Abstand oder Zeit auf dem Track angezeigt werden.</string>
+    <string name="gpx_split_interval_none_descr">Wählen Sie die gewünschte Aufteilungsoption: nach Zeit oder nach Entfernung.</string>
+    <string name="shared_string_custom">Benutzerdefiniert</string>
+    <string name="gpx_direction_arrows">Richtungspfeile</string>
+    <string name="track_coloring_solid">Ausgefüllt</string>
+    <string name="plan_route_last_edited">Zuletzt bearbeitet</string>
+    <string name="plan_route_import_track">Track importieren</string>
+    <string name="plan_route_open_existing_track">Vorhandenen Track öffnen</string>
+    <string name="plan_route_create_new_route">Neue Route erstellen</string>
+    <string name="plan_route_select_track_file_for_open">Wählen Sie eine Trackdatei zum Öffnen aus.</string>
+    <string name="shared_string_done">Fertig</string>
+    <string name="overwrite_track">Track überschreiben</string>
+    <string name="threshold_distance">Schwellenwert-Distanz</string>
+    <string name="save_as_new_track">Als neuen Track speichern</string>
+    <string name="reverse_route">Route umkehren</string>
+    <string name="rourte_between_points_whole_track_button_desc">Der gesamte Track wird mit dem ausgewählten Profil neu berechnet.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Nur das nächste Segment wird mit dem ausgewählten Profil neu berechnet.</string>
+    <string name="rourte_between_points_desc">Wählen Sie, wie Punkte mit einer geraden Linie verbunden werden sollen, oder berechnen Sie eine Route zwischen ihnen mit dem ausgewählten Profil.</string>
+    <string name="whole_track">Ganzer Track</string>
+    <string name="next_segment">Nächstes Segment</string>
+    <string name="navigation_profile">Navigationsprofil</string>
+    <string name="rourte_between_points_add_track_desc">Wählen Sie eine Trackdatei, für die ein neues Segment hinzugefügt werden soll.</string>
 </resources>

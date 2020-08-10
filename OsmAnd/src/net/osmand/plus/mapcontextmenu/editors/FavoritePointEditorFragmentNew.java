@@ -97,7 +97,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 				}
 			});
 			if (editor != null && editor.isNew()) {
-				ImageView toolbarAction = (ImageView) view.findViewById(R.id.toolbar_action);
+				ImageView toolbarAction = view.findViewById(R.id.toolbar_action);
 				toolbarAction.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -460,28 +460,34 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	@Override
 	public Set<String> getCategories() {
 		Set<String> categories = new LinkedHashSet<>();
+		Set<String> categoriesHidden = new LinkedHashSet<>();
 		FavouritesDbHelper helper = getHelper();
 		if (helper != null && editor != null) {
 			OsmandApplication app = getMyApplication();
-			if (editor.isNew()) {
-				FavoriteGroup lastUsedGroup = helper.getGroup(getLastUsedGroup());
-				if (lastUsedGroup != null && lastUsedGroup.isVisible()) {
-					categories.add(lastUsedGroup.getDisplayName(app));
-				}
-				for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
-					if (!fg.equals(lastUsedGroup) && fg.isVisible()) {
-						categories.add(fg.getDisplayName(app));
-					}
-				}
-			} else {
-				for (FavoriteGroup fg : helper.getFavoriteGroups()) {
+			FavoriteGroup lastUsedGroup = helper.getGroup(getLastUsedGroup());
+			if (lastUsedGroup != null) {
+				categories.add(lastUsedGroup.getDisplayName(app));
+			}
+			for (FavouritesDbHelper.FavoriteGroup fg : helper.getFavoriteGroups()) {
+				if (!fg.equals(lastUsedGroup)) {
 					if (fg.isVisible()) {
 						categories.add(fg.getDisplayName(app));
+					} else {
+						categoriesHidden.add(fg.getDisplayName(app));
 					}
 				}
 			}
+			categories.addAll(categoriesHidden);
 		}
 		return categories;
+	}
+
+	@Override
+	public boolean isCategoryVisible(String name) {
+		if (getHelper() != null) {
+			return getHelper().isGroupVisible(name);
+		}
+		return true;
 	}
 
 	@Override
@@ -498,6 +504,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
+	@ColorInt
 	public int getCategoryColor(String category) {
 		FavouritesDbHelper helper = getHelper();
 		if (helper != null) {

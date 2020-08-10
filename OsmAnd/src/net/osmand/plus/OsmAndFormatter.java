@@ -118,7 +118,22 @@ public class OsmAndFormatter {
 	public static String getFormattedDate(Context context, long milliseconds) {
 		return DateUtils.formatDateTime(context, milliseconds, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
 	}
-	
+
+	public static String getFormattedTimeInterval(OsmandApplication app, double interval) {
+		if (interval < 60) {
+			return interval + " " + app.getString(R.string.int_seconds);
+		} else if (interval % 60 == 0) {
+			return (interval / 60) + " " + app.getString(R.string.int_min);
+		} else {
+			return (interval / 60f) + " " + app.getString(R.string.int_min);
+		}
+	}
+
+	public static String getFormattedDistanceInterval(OsmandApplication app, double interval) {
+		double roundedDist = OsmAndFormatter.calculateRoundedDist(interval, app);
+		return OsmAndFormatter.getFormattedDistance((float) roundedDist, app);
+	}
+
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();

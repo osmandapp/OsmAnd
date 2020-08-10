@@ -115,16 +115,13 @@ public class WikipediaPoiMenu {
 					.hideDivider(true)
 					.setLoading(true)
 					.setListener(l).createItem());
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
-					.setLayout(R.layout.card_bottom_divider)
-					.setMinHeight(spaceHeight)
-					.createItem());
 		} else {
 			try {
 				IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
 				int currentDownloadingProgress = downloadThread.getCurrentDownloadingItemProgress();
 				List<IndexItem> wikiIndexes = DownloadResources.findIndexItemsAt(
-						app, mapActivity.getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE);
+						app, mapActivity.getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE,
+						false, -1, true);
 				if (wikiIndexes.size() > 0) {
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
 							.setTitleId(R.string.shared_string_download_map, mapActivity)
@@ -195,15 +192,15 @@ public class WikipediaPoiMenu {
 						}
 						adapter.addItem(itemBuilder.createItem());
 					}
-					adapter.addItem(new ContextMenuItem.ItemBuilder()
-							.setLayout(R.layout.card_bottom_divider)
-							.setMinHeight(spaceHeight)
-							.createItem());
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setLayout(R.layout.card_bottom_divider)
+				.setMinHeight(spaceHeight)
+				.createItem());
 		return adapter;
 	}
 

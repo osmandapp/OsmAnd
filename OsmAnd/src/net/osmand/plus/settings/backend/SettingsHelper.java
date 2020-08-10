@@ -126,7 +126,7 @@ public class SettingsHelper {
 		void onSettingsExportFinished(@NonNull File file, boolean succeed);
 	}
 
-	public SettingsHelper(OsmandApplication app) {
+	public SettingsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 
@@ -149,15 +149,24 @@ public class SettingsHelper {
 
 		protected OsmandApplication app;
 
-		private String pluginId;
-		private String fileName;
+		protected String pluginId;
+		protected String fileName;
 
 		boolean shouldReplace = false;
 
 		protected List<String> warnings;
 
-		SettingsItem(OsmandApplication app) {
+		SettingsItem(@NonNull OsmandApplication app) {
 			this.app = app;
+			init();
+		}
+
+		SettingsItem(@NonNull OsmandApplication app, @Nullable SettingsItem baseItem) {
+			this.app = app;
+			if (baseItem != null) {
+				this.pluginId = baseItem.pluginId;
+				this.fileName = baseItem.fileName;
+			}
 			init();
 		}
 
@@ -201,10 +210,6 @@ public class SettingsHelper {
 		@Nullable
 		public String getFileName() {
 			return fileName;
-		}
-
-		public void setFileName(String fileName) {
-			this.fileName = fileName;
 		}
 
 		public boolean applyFileName(@NonNull String fileName) {
@@ -281,13 +286,13 @@ public class SettingsHelper {
 		}
 
 		@Nullable
-		abstract SettingsItemReader getReader();
+		abstract SettingsItemReader<? extends SettingsItem> getReader();
 
 		@Nullable
-		abstract SettingsItemWriter getWriter();
+		abstract SettingsItemWriter<? extends SettingsItem> getWriter();
 
 		@NonNull
-		SettingsItemReader getJsonReader() {
+		SettingsItemReader<? extends SettingsItem> getJsonReader() {
 			return new SettingsItemReader<SettingsItem>(this) {
 				@Override
 				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
@@ -315,7 +320,7 @@ public class SettingsHelper {
 		}
 
 		@NonNull
-		SettingsItemWriter getJsonWriter() {
+		SettingsItemWriter<? extends SettingsItem> getJsonWriter() {
 			return new SettingsItemWriter<SettingsItem>(this) {
 				@Override
 				public boolean writeToStream(@NonNull OutputStream outputStream) throws IOException {
@@ -445,13 +450,13 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemReader getReader() {
+		SettingsItemReader<? extends SettingsItem> getReader() {
 			return null;
 		}
 
 		@Nullable
 		@Override
-		SettingsItemWriter getWriter() {
+		SettingsItemWriter<? extends SettingsItem> getWriter() {
 			return null;
 		}
 	}
@@ -555,13 +560,13 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemReader getReader() {
+		SettingsItemReader<? extends SettingsItem> getReader() {
 			return null;
 		}
 
 		@Nullable
 		@Override
-		SettingsItemWriter getWriter() {
+		SettingsItemWriter<? extends SettingsItem> getWriter() {
 			return null;
 		}
 	}
@@ -638,13 +643,13 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemReader getReader() {
+		SettingsItemReader<? extends SettingsItem> getReader() {
 			return null;
 		}
 
 		@Nullable
 		@Override
-		SettingsItemWriter getWriter() {
+		SettingsItemWriter<? extends SettingsItem> getWriter() {
 			return null;
 		}
 	}
@@ -664,12 +669,12 @@ public class SettingsHelper {
 			duplicateItems = new ArrayList<>();
 		}
 
-		CollectionSettingsItem(OsmandApplication app, @NonNull List<T> items) {
-			super(app);
+		CollectionSettingsItem(@NonNull OsmandApplication app, @Nullable CollectionSettingsItem<T> baseItem, @NonNull List<T> items) {
+			super(app, baseItem);
 			this.items = items;
 		}
 
-		CollectionSettingsItem(OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+		CollectionSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(app, json);
 		}
 
@@ -744,6 +749,11 @@ public class SettingsHelper {
 
 		protected OsmandSettingsItem(@NonNull OsmandSettings settings) {
 			super(settings.getContext());
+			this.settings = settings;
+		}
+
+		protected OsmandSettingsItem(@NonNull OsmandSettings settings, @Nullable OsmandSettingsItem baseItem) {
+			super(settings.getContext(), baseItem);
 			this.settings = settings;
 		}
 
@@ -885,7 +895,7 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemReader getReader() {
+		SettingsItemReader<? extends SettingsItem> getReader() {
 			return new OsmandSettingsItemReader(this, getSettings()) {
 				@Override
 				protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
@@ -896,7 +906,7 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemWriter getWriter() {
+		SettingsItemWriter<? extends SettingsItem> getWriter() {
 			return new OsmandSettingsItemWriter(this, getSettings()) {
 				@Override
 				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
@@ -920,8 +930,8 @@ public class SettingsHelper {
 			this.appMode = appMode;
 		}
 
-		public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull ApplicationModeBean modeBean) {
-			super(app.getSettings());
+		public ProfileSettingsItem(@NonNull OsmandApplication app, @Nullable ProfileSettingsItem baseItem, @NonNull ApplicationModeBean modeBean) {
+			super(app.getSettings(), baseItem);
 			this.modeBean = modeBean;
 			builder = ApplicationMode.fromModeBean(app, modeBean);
 			appMode = builder.getApplicationMode();
@@ -1059,7 +1069,7 @@ public class SettingsHelper {
 			if (additionalPrefsJson != null) {
 				updatePluginResPrefs();
 
-				SettingsItemReader reader = getReader();
+				SettingsItemReader<? extends SettingsItem> reader = getReader();
 				if (reader instanceof OsmandSettingsItemReader) {
 					((OsmandSettingsItemReader) reader).readPreferencesFromJson(additionalPrefsJson);
 				}
@@ -1116,7 +1126,7 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemReader getReader() {
+		SettingsItemReader<? extends SettingsItem> getReader() {
 			return new OsmandSettingsItemReader(this, getSettings()) {
 				@Override
 				protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
@@ -1129,7 +1139,7 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemWriter getWriter() {
+		SettingsItemWriter<? extends SettingsItem> getWriter() {
 			return new OsmandSettingsItemWriter(this, getSettings()) {
 				@Override
 				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
@@ -1182,7 +1192,7 @@ public class SettingsHelper {
 		public StreamSettingsItem(@NonNull OsmandApplication app, @NonNull String name) {
 			super(app);
 			this.name = name;
-			setFileName(name);
+			this.fileName = name;
 		}
 
 		StreamSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
@@ -1193,7 +1203,7 @@ public class SettingsHelper {
 			super(app);
 			this.inputStream = inputStream;
 			this.name = name;
-			setFileName(name);
+			this.fileName = name;
 		}
 
 		@Nullable
@@ -1231,7 +1241,7 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		public SettingsItemWriter getWriter() {
+		public SettingsItemWriter<? extends SettingsItem> getWriter() {
 			return new StreamSettingsItemWriter(this);
 		}
 	}
@@ -1282,7 +1292,7 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemReader getReader() {
+		SettingsItemReader<? extends SettingsItem> getReader() {
 			return new StreamSettingsItemReader(this) {
 				@Override
 				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
@@ -1301,7 +1311,7 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		public SettingsItemWriter getWriter() {
+		public SettingsItemWriter<? extends SettingsItem> getWriter() {
 			setInputStream(new ByteArrayInputStream(data));
 			return super.getWriter();
 		}
@@ -1370,6 +1380,7 @@ public class SettingsHelper {
 				return UNKNOWN;
 			}
 
+			@NonNull
 			@Override
 			public String toString() {
 				return subtypeName;
@@ -1480,7 +1491,7 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemReader getReader() {
+		SettingsItemReader<? extends SettingsItem> getReader() {
 			return new StreamSettingsItemReader(this) {
 				@Override
 				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
@@ -1509,7 +1520,7 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		public SettingsItemWriter getWriter() {
+		public SettingsItemWriter<? extends SettingsItem> getWriter() {
 			try {
 				setInputStream(new FileInputStream(file));
 			} catch (FileNotFoundException e) {
@@ -1527,7 +1538,7 @@ public class SettingsHelper {
 			shouldReplace = true;
 			String fileName = getFileName();
 			if (!Algorithms.isEmpty(fileName) && !fileName.endsWith(File.separator)) {
-				setFileName(fileName + File.separator);
+				this.fileName = fileName + File.separator;
 			}
 		}
 
@@ -1575,7 +1586,7 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		public SettingsItemWriter getWriter() {
+		public SettingsItemWriter<? extends SettingsItem> getWriter() {
 			return null;
 		}
 	}
@@ -1585,7 +1596,11 @@ public class SettingsHelper {
 		private QuickActionRegistry actionRegistry;
 
 		public QuickActionsSettingsItem(@NonNull OsmandApplication app, @NonNull List<QuickAction> items) {
-			super(app, items);
+			super(app, null, items);
+		}
+
+		public QuickActionsSettingsItem(@NonNull OsmandApplication app, @Nullable QuickActionsSettingsItem baseItem, @NonNull List<QuickAction> items) {
+			super(app, baseItem, items);
 		}
 
 		QuickActionsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
@@ -1725,24 +1740,28 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemReader getReader() {
+		SettingsItemReader<? extends SettingsItem> getReader() {
 			return getJsonReader();
 		}
 
 		@Nullable
 		@Override
-		SettingsItemWriter getWriter() {
+		SettingsItemWriter<? extends SettingsItem> getWriter() {
 			return null;
 		}
 	}
 
-	public static class PoiUiFilterSettingsItem extends CollectionSettingsItem<PoiUIFilter> {
+	public static class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter> {
 
-		public PoiUiFilterSettingsItem(@NonNull OsmandApplication app, @NonNull List<PoiUIFilter> items) {
-			super(app, items);
+		public PoiUiFiltersSettingsItem(@NonNull OsmandApplication app, @NonNull List<PoiUIFilter> items) {
+			super(app, null, items);
 		}
 
-		PoiUiFilterSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+		public PoiUiFiltersSettingsItem(@NonNull OsmandApplication app, @Nullable PoiUiFiltersSettingsItem baseItem, @NonNull List<PoiUIFilter> items) {
+			super(app, baseItem, items);
+		}
+
+		PoiUiFiltersSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			super(app, json);
 		}
 
@@ -1873,13 +1892,13 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemReader getReader() {
+		SettingsItemReader<? extends SettingsItem> getReader() {
 			return getJsonReader();
 		}
 
 		@Nullable
 		@Override
-		SettingsItemWriter getWriter() {
+		SettingsItemWriter<? extends SettingsItem> getWriter() {
 			return null;
 		}
 	}
@@ -1889,7 +1908,11 @@ public class SettingsHelper {
 		private List<String> existingItemsNames;
 
 		public MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull List<ITileSource> items) {
-			super(app, items);
+			super(app, null, items);
+		}
+
+		public MapSourcesSettingsItem(@NonNull OsmandApplication app, @Nullable MapSourcesSettingsItem baseItem, @NonNull List<ITileSource> items) {
+			super(app, baseItem, items);
 		}
 
 		MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
@@ -2085,13 +2108,13 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemReader getReader() {
+		SettingsItemReader<? extends SettingsItem> getReader() {
 			return getJsonReader();
 		}
 
 		@Nullable
 		@Override
-		SettingsItemWriter getWriter() {
+		SettingsItemWriter<? extends SettingsItem> getWriter() {
 			return null;
 		}
 	}
@@ -2102,7 +2125,11 @@ public class SettingsHelper {
 		private AvoidSpecificRoads specificRoads;
 
 		public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull List<AvoidRoadInfo> items) {
-			super(app, items);
+			super(app, null, items);
+		}
+
+		public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @Nullable AvoidRoadsSettingsItem baseItem, @NonNull List<AvoidRoadInfo> items) {
+			super(app, baseItem, items);
 		}
 
 		AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
@@ -2240,13 +2267,13 @@ public class SettingsHelper {
 
 		@Nullable
 		@Override
-		SettingsItemReader getReader() {
+		SettingsItemReader<? extends SettingsItem> getReader() {
 			return getJsonReader();
 		}
 
 		@Nullable
 		@Override
-		SettingsItemWriter getWriter() {
+		SettingsItemWriter<? extends SettingsItem> getWriter() {
 			return null;
 		}
 	}
@@ -2256,7 +2283,7 @@ public class SettingsHelper {
 		private OsmandApplication app;
 		private List<SettingsItem> items = new ArrayList<>();
 
-		SettingsItemsFactory(OsmandApplication app, String jsonStr) throws IllegalArgumentException, JSONException {
+		SettingsItemsFactory(@NonNull OsmandApplication app, String jsonStr) throws IllegalArgumentException, JSONException {
 			this.app = app;
 			collectItems(new JSONObject(jsonStr));
 		}
@@ -2346,7 +2373,7 @@ public class SettingsHelper {
 					item = new QuickActionsSettingsItem(app, json);
 					break;
 				case POI_UI_FILTERS:
-					item = new PoiUiFilterSettingsItem(app, json);
+					item = new PoiUiFiltersSettingsItem(app, json);
 					break;
 				case MAP_SOURCES:
 					item = new MapSourcesSettingsItem(app, json);
@@ -2410,7 +2437,7 @@ public class SettingsHelper {
 
 		private void writeItemFiles(ZipOutputStream zos) throws IOException {
 			for (SettingsItem item : items.values()) {
-				SettingsItemWriter writer = item.getWriter();
+				SettingsItemWriter<? extends SettingsItem> writer = item.getWriter();
 				if (writer != null) {
 					String fileName = item.getFileName();
 					if (Algorithms.isEmpty(fileName)) {
@@ -2466,7 +2493,7 @@ public class SettingsHelper {
 					if (fileName.equals("items.json")) {
 						String itemsJson = null;
 						try {
-							itemsJson = Algorithms.readFromInputStream(ois).toString();
+							itemsJson = Algorithms.readFromInputStream(ois, false).toString();
 						} catch (IOException e) {
 							LOG.error("Error reading items.json: " + itemsJson, e);
 							throw new IllegalArgumentException("No items");
@@ -2520,7 +2547,7 @@ public class SettingsHelper {
 					if (item != null && collecting && item.shouldReadOnCollecting()
 							|| item != null && !collecting && !item.shouldReadOnCollecting()) {
 						try {
-							SettingsItemReader reader = item.getReader();
+							SettingsItemReader<? extends SettingsItem> reader = item.getReader();
 							if (reader != null) {
 								reader.readFromStream(ois);
 							}
@@ -2699,8 +2726,8 @@ public class SettingsHelper {
 					if (item.exists()) {
 						duplicateItems.add(((ProfileSettingsItem) item).getModeBean());
 					}
-				} else if (item instanceof CollectionSettingsItem) {
-					List duplicates = ((CollectionSettingsItem) item).processDuplicateItems();
+				} else if (item instanceof CollectionSettingsItem<?>) {
+					List<?> duplicates = ((CollectionSettingsItem<?>) item).processDuplicateItems();
 					if (!duplicates.isEmpty()) {
 						duplicateItems.addAll(duplicates);
 					}

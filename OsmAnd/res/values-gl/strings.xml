@@ -852,7 +852,7 @@
     <string name="search_position_current_location_found">A miña posición (atopada)</string>
     <string name="search_position_address">Enderezo…</string>
     <string name="search_position_favorites">Favoritos…</string>
-    <string name="search_position_undefined">Sen definir</string>
+    <string name="shared_string_undefined">Sen definir</string>
     <string name="search_position_map_view">Centro do mapa actual</string>
     <string name="select_search_position">Orixe:</string>
     <string name="context_menu_item_search">Procurar preto daquí</string>
@@ -1539,7 +1539,7 @@ Lon %2$s</string>
     <string name="world_ski_missing">Baixar o mapa especial sen conexión para amosar as instalacións de esquí.</string>
     <string name="remove_the_tag">ELIMINAR ETIQUETA</string>
     <string name="gps_status">Estado do GPS</string>
-    <string name="rendering_attr_streetLighting_name">Alumeado da rúa</string>
+    <string name="rendering_attr_streetLighting_name">Alumeamento público</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Especifica un servidor proxy.</string>
     <string name="settings_privacy">Privacidade</string>
@@ -1763,7 +1763,6 @@ Lon %2$s</string>
     <string name="context_menu_item_open_note">Abrir nota do OSM</string>
     <string name="osm_edit_reopened_note">Reabriuse a nota de OSM</string>
     <string name="osm_edit_commented_note">Nota de OSM comentada</string>
-    <string name="osm_edit_removed_note">Nota de OSM eliminada</string>
     <string name="osm_edit_created_note">Nota de OSM creada</string>
     <string name="osn_bug_name">Nota de OSM</string>
     <string name="osn_add_dialog_title">Crear unha nota</string>
@@ -1897,7 +1896,7 @@ Lon %2$s</string>
     <string name="gpx_add_track">Engadir máis…</string>
     <string name="shared_string_appearance">Aparencia</string>
     <string name="trip_rec_notification_settings">Activar a gravación rápida</string>
-    <string name="trip_rec_notification_settings_desc">Amosa unha notificación do sistema que permite a gravación da viaxe.</string>
+    <string name="trip_rec_notification_settings_desc">Amosar unha notificación do sistema que permite comezar a gravación da viaxe.</string>
     <string name="shared_string_notifications">Notificacións</string>
     <string name="shared_string_continue">Continuar</string>
     <string name="shared_string_pause">Deter</string>
@@ -3756,7 +3755,7 @@ Lon %2$s</string>
     <string name="turn_screen_on_descr">Escolle as opcións de acender a pantalla (asegúrate de que o OsmAnd está no primeiro plano cando o dispositivo está a ser bloqueado):</string>
     <string name="turn_screen_on_navigation_instructions">Instrucións de navegación</string>
     <string name="turn_screen_on_power_button">Botón de acendido</string>
-    <string name="turn_screen_on_wake_time_descr">Escolle o tempo de espera da pantalla após acender. (\"%1$s\" non aplica tempo de espera).</string>
+    <string name="turn_screen_on_wake_time_descr">Escolle o tempo de espera da pantalla após acender. (\"%1$s\" non aplica tempo de espera.)</string>
     <string name="keep_screen_off">Manter a pantalla apagada</string>
     <string name="pseudo_mercator_projection">Proxección pseudo-Mercator</string>
     <string name="sqlite_db_file">Ficheiro SQLiteDB</string>
@@ -3842,4 +3841,22 @@ Lon %2$s</string>
     <string name="quick_action_remove_next_destination_descr">O punto de destino actual na ruta será eliminado. Se fora o destino, a navegación sería interrompida.</string>
     <string name="search_download_wikipedia_maps">Baixar mapas da Wikipedia</string>
     <string name="plugin_wikipedia_description">Obter información sobre os puntos de interesse da Wikipédia. É o teu guía de peto sen conexión - só activar o complemento da Wikipédia e desfrutar dos artigos sobre os elementos ó teu redor.</string>
+    <string name="app_mode_enduro_motorcycle">Enduro</string>
+    <string name="app_mode_motor_scooter">Scooter</string>
+    <string name="app_mode_wheelchair">Cadeira de rodas</string>
+    <string name="app_mode_wheelchair_forward">Cadeira de rodas só cara adiante</string>
+    <string name="app_mode_go_cart">Kart</string>
+    <string name="osm_edit_closed_note">Nota do OSM pechada</string>
+    <string name="set_working_days_to_continue">Tes que definir os días laborais para continuar</string>
+    <string name="route_between_points">Ruta entre puntos</string>
+    <string name="plan_a_route">Planificar unha ruta</string>
+    <string name="add_to_a_track">Engadir a unha pista</string>
+    <string name="add_hidden_group_info">O punto engadido non será visíbel no mapa, xa que o grupo escollido está agochado, pódese atopar en \"%s\".</string>
+    <string name="track_show_start_finish_icons">Amosar iconas de comezo e final</string>
+    <string name="select_track_width">Seleccionar largura</string>
+    <string name="gpx_split_interval_descr">Selecciona o intre no cal as marcas con distancia ou tempo na pista serán amosadas.</string>
+    <string name="gpx_split_interval_none_descr">Selecciona a opción de división desexada: por tempo ou por distancia.</string>
+    <string name="shared_string_custom">Personalizado</string>
+    <string name="gpx_direction_arrows">Frechas de dirección</string>
+    <string name="track_coloring_solid">Sólido</string>
 </resources>

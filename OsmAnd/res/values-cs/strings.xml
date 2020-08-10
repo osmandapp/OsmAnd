@@ -156,7 +156,7 @@
     <string name="search_position_current_location_found">Moje poloha [nalezeno]</string>
     <string name="search_position_address">Adresy…</string>
     <string name="search_position_favorites">Oblíbených…</string>
-    <string name="search_position_undefined">Nedefinováno</string>
+    <string name="shared_string_undefined">Nedefinováno</string>
     <string name="search_position_map_view">Současný střed mapy</string>
     <string name="select_search_position">Počáteční bod:</string>
     <string name="context_menu_item_search">Hledat v okolí</string>
@@ -1755,7 +1755,6 @@ Délka %2$s</string>
     <string name="context_menu_item_open_note">Otevřít OSM poznámku</string>
     <string name="osm_edit_reopened_note">Znovuotevřená OSM poznámka</string>
     <string name="osm_edit_commented_note">Komentovaná OSM poznámka</string>
-    <string name="osm_edit_removed_note">Smazaná OSM poznámka</string>
     <string name="osm_edit_created_note">Vytvořená OSM poznámka</string>
     <string name="osn_bug_name">OSM poznámka</string>
     <string name="osn_add_dialog_title">Vytvořit poznámku</string>

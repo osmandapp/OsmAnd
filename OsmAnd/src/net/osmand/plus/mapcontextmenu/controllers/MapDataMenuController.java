@@ -32,8 +32,8 @@ import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.MapDataMenuBuilder;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
-import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.util.Algorithms;
 
 import java.io.File;

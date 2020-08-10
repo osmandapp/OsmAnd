@@ -69,7 +69,7 @@
     <string name="poi_bed">Colchonería;Muebles de dormitorio</string>
     <string name="poi_boutique">Boutique de moda</string>
     <string name="poi_carpet">Alfombras</string>
-    <string name="poi_charity">Negocio benéfico</string>
+    <string name="poi_charity">Tienda de caridad</string>
     <string name="poi_chemist">Higiene personal y del hogar</string>
     <string name="poi_clothes">Tienda de ropa</string>
     <string name="poi_clothes_children">Infantil</string>
@@ -1175,7 +1175,7 @@
     <string name="poi_pump_powered">Automática</string>
     <string name="poi_pump_no">Sin bomba</string>
     <string name="poi_water_characteristic_mineral">Mineralizada</string>
-    <string name="poi_water_characteristic_mud">Característica del agua: lodosa</string>
+    <string name="poi_water_characteristic_mud">Lodazal</string>
     <string name="poi_water_characteristic_sulfuric">Sulfúrica</string>
     <string name="poi_water_point">Toma de agua</string>
     <string name="poi_species">Especie</string>
@@ -1852,7 +1852,7 @@
     <string name="poi_technical_monument">Monumento técnico</string>
     <string name="poi_memorial_prasat">Templo piramidal</string>
     <string name="poi_office_camping">Oficina del campamento</string>
-    <string name="poi_model_aerodrome">Aeródromo a escala</string>
+    <string name="poi_model_aerodrome">Pista de aeromodelismo</string>
     <string name="poi_guide">Oficina del guía</string>
     <string name="poi_quango">ONG casi autónoma</string>
     <string name="poi_consulting">Oficina de consultoría</string>
@@ -1868,7 +1868,7 @@
     <string name="poi_fuel_100ll">100LL (con plomo, para aviones)</string>
     <string name="poi_fuel_autogas">Autogas (Etanol libre de plomo)</string>
     <string name="poi_fuel_jeta1">Jet A-1 (diésel)</string>
-    <string name="poi_fuel_adblue">AdBlue</string>
+    <string name="poi_fuel_adblue">Aditivo para escapes de Diesel (AdBlue)</string>
     <string name="poi_fuel_wood">Combustible: madera</string>
     <string name="poi_fuel_charcoal">Combustible: carbón vegetal</string>
     <string name="poi_fuel_coal">Combustible: carbón</string>
@@ -3837,4 +3837,6 @@
     <string name="poi_traffic_signals_arrow">Flecha</string>
     <string name="poi_traffic_signals_vibration">Vibración</string>
     <string name="poi_give_box">Caja de regalo</string>
+    <string name="poi_city_block">Manzana (cuadra)</string>
+    <string name="poi_borough">Municipio</string>
 </resources>

@@ -65,13 +65,10 @@ public class BinaryRoutePlanner {
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
 	 * return list of segments
 	 */
-	@SuppressWarnings("unused")
 	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
 			RouteSegment recalculationEnd ) throws InterruptedException, IOException {
 		// measure time
-		ctx.timeToLoad = 0;
 		ctx.memoryOverhead = 1000;
-		ctx.visitedSegments = 0;
 
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new NonHeuristicSegmentsComparator();
@@ -122,7 +119,9 @@ public class BinaryRoutePlanner {
 			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.95) {
 				throw new IllegalStateException("There is not enough memory " + ctx.config.memoryLimitation / (1 << 20) + " Mb");
 			}
-			ctx.visitedSegments ++;
+			if (ctx.calculationProgress != null) {
+				ctx.calculationProgress.visitedSegments++;
+			}
 			if (forwardSearch) {
 				boolean doNotAddIntersections = onlyBackward;
 				processRouteSegment(ctx, false, graphDirectSegments, visitedDirectSegments,
@@ -166,8 +165,14 @@ public class BinaryRoutePlanner {
 				throw new InterruptedException("Route calculation interrupted");
 			}
 		}
-		ctx.visitedSegments = visitedDirectSegments.size() + visitedOppositeSegments.size();
-		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
+		if (ctx.calculationProgress != null) {
+			ctx.calculationProgress.visitedDirectSegments += visitedDirectSegments.size();
+			ctx.calculationProgress.visitedOppositeSegments += visitedOppositeSegments.size();
+			ctx.calculationProgress.directQueueSize += graphDirectSegments.size(); // Math.max(ctx.directQueueSize,
+																					// graphDirectSegments.size());
+			ctx.calculationProgress.oppositeQueueSize += graphReverseSegments.size();
+			ctx.calculationProgress.visitedOppositeSegments += visitedOppositeSegments.size();
+		}
 		return finalSegment;
 	}
 
@@ -368,23 +373,21 @@ public class BinaryRoutePlanner {
 		log.warn(logMsg);
 	}
 	
-	public void printDebugMemoryInformation(RoutingContext ctx, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
-			TLongObjectHashMap<RouteSegment> visitedDirectSegments,TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
-		printInfo(String.format("Time. Total: %.2f, to load: %.2f, to load headers: %.2f, to calc dev: %.2f ", 
-				(System.nanoTime() - ctx.timeToCalculate) / 1e6, ctx.timeToLoad / 1e6, 
-				ctx.timeToLoadHeaders / 1e6, ctx.timeNanoToCalcDeviation / 1e6));
-//		GeneralRouter.TIMER = 0;
-		int maxLoadedTiles = Math.max(ctx.maxLoadedTiles, ctx.getCurrentlyLoadedTiles());
-		printInfo("Current loaded tiles : " + ctx.getCurrentlyLoadedTiles() + ", maximum loaded tiles " + maxLoadedTiles);
-		printInfo("Loaded tiles " + ctx.loadedTiles + " (distinct " + ctx.distinctLoadedTiles + "), unloaded tiles " + ctx.unloadedTiles +
-				", loaded more than once same tiles "
-				+ ctx.loadedPrevUnloadedTiles);
-		printInfo("Visited segments " + ctx.visitedSegments + ", relaxed roads " + ctx.relaxedSegments);
-		if (graphDirectSegments != null && graphReverseSegments != null) {
-			printInfo("Priority queues sizes : " + graphDirectSegments.size() + "/" + graphReverseSegments.size());
-		}
-		if (visitedDirectSegments != null && visitedOppositeSegments != null) {
-			printInfo("Visited interval sizes: " + visitedDirectSegments.size() + "/" + visitedOppositeSegments.size());
+	public static void printDebugMemoryInformation(RoutingContext ctx) {
+		if (ctx.calculationProgress != null) {
+			RouteCalculationProgress p = ctx.calculationProgress;
+			printInfo(String.format("Time. Total: %.2f, to load: %.2f, to load headers: %.2f, to find start/end: %.2f, extra: %.2f ",
+					p.timeToCalculate / 1e6, p.timeToLoad / 1e6, p.timeToLoadHeaders / 1e6,
+					p.timeToFindInitialSegments / 1e6, p.timeNanoToCalcDeviation / 1e6));
+			// GeneralRouter.TIMER = 0;
+			int maxLoadedTiles = Math.max(p.maxLoadedTiles, ctx.getCurrentlyLoadedTiles());
+			printInfo("Current loaded tiles : " + ctx.getCurrentlyLoadedTiles() + ", maximum loaded tiles "
+					+ maxLoadedTiles);
+			printInfo("Loaded tiles " + p.loadedTiles + " (distinct " + p.distinctLoadedTiles + "), unloaded tiles "
+					+ p.unloadedTiles + ", loaded more than once same tiles " + p.loadedPrevUnloadedTiles);
+			printInfo("Visited segments: " + ctx.getVisitedSegments() + ", relaxed roads " + p.relaxedSegments);
+			printInfo("Priority queues sizes : " + p.directQueueSize + "/" + p.oppositeQueueSize);
+			printInfo("Visited interval sizes: " + p.visitedDirectSegments + "/" + p.visitedOppositeSegments);
 		}
 
 	}
@@ -852,9 +855,12 @@ public class BinaryRoutePlanner {
 	}
 	
 	public static class RouteSegmentPoint extends RouteSegment {
+		
 		public RouteSegmentPoint(RouteDataObject road, int segmentStart, double distSquare) {
 			super(road, segmentStart);
 			this.distSquare = distSquare;
+			this.preciseX = road.getPoint31XTile(segmentStart);
+			this.preciseY = road.getPoint31YTile(segmentStart);
 		}
 		
 		public RouteSegmentPoint(RouteSegmentPoint pnt) {
@@ -872,6 +878,11 @@ public class BinaryRoutePlanner {
 		public LatLon getPreciseLatLon() {
 			return new LatLon(MapUtils.get31LatitudeY(preciseY), MapUtils.get31LongitudeX(preciseX));
 			
+		}
+		
+		@Override
+		public String toString() {
+			return String.format("%d (%s): %s", segStart, getPreciseLatLon(), road);
 		}
 		
 	}

@@ -107,7 +107,7 @@
     <string name="search_position_current_location_found">Mi ubicación (encontrada)</string>
     <string name="search_position_address">Dirección…</string>
     <string name="search_position_favorites">Favoritos…</string>
-    <string name="search_position_undefined">Indefinido</string>
+    <string name="shared_string_undefined">Indefinido</string>
     <string name="search_position_map_view">Vista actual del mapa</string>
     <string name="select_search_position">Origen:</string>
     <string name="context_menu_item_search">Buscar cerca</string>
@@ -1771,7 +1771,6 @@
     <string name="context_menu_item_open_note">Abrir nota de OSM</string>
     <string name="osm_edit_reopened_note">Nota de OSM reabierta</string>
     <string name="osm_edit_commented_note">Nota de OSM comentada</string>
-    <string name="osm_edit_removed_note">Nota de OSM resuelta</string>
     <string name="osm_edit_created_note">Nota de OSM creada</string>
     <string name="osn_bug_name">Nota de OSM</string>
     <string name="osn_add_dialog_title">Crear nota</string>
@@ -1983,7 +1982,7 @@
     <string name="search_categories">Categorías</string>
     <string name="postcode">Código postal</string>
     <string name="shared_string_from">desde</string>
-    <string name="city_type_district">Distrito</string>
+    <string name="city_type_district">Manzana urbana</string>
     <string name="city_type_neighbourhood">Barrio</string>
     <string name="map_widget_search">Buscar</string>
     <string name="shared_string_is_open_24_7">Abierto 24/7</string>
@@ -3816,4 +3815,7 @@
     <string name="please_provide_point_name_error">Por favor, proporcione un nombre para el punto</string>
     <string name="quick_action_remove_next_destination_descr">El punto de destino actual de la ruta será borrado. Si se trata del destino, la navegación se detendrá.</string>
     <string name="search_download_wikipedia_maps">Descargar mapas de Wikipedia</string>
+    <string name="plan_route_open_existing_track">Abrir la pista existente</string>
+    <string name="plan_route_create_new_route">Crea una nueva ruta</string>
+    <string name="plan_a_route">Planea una ruta</string>
 </resources>

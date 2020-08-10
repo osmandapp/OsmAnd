@@ -96,6 +96,12 @@ import net.osmand.aidlapi.mapmarker.RemoveMapMarkersParams;
 import net.osmand.aidlapi.quickaction.QuickActionParams;
 import net.osmand.aidlapi.quickaction.QuickActionInfoParams;
 
+import net.osmand.aidlapi.lock.SetLockStateParams;
+
+import net.osmand.aidlapi.events.AKeyEventsParams;
+
+import net.osmand.aidlapi.info.AppInfoParams;
+
 // NOTE: Add new methods at the end of file!!!
 
 interface IOsmAndAidlInterface {
@@ -841,4 +847,21 @@ interface IOsmAndAidlInterface {
     boolean executeQuickAction(in QuickActionParams params);
 
     boolean getQuickActionsInfo(out List<QuickActionInfoParams> quickActions);
+
+    /**
+     * Toggle Lock/Unlock screen.
+     */
+     boolean setLockState(in SetLockStateParams params);
+
+    /**
+     * Method to register for  key events.
+     *
+     * @params subscribeToUpdates (boolean) - boolean flag to subscribe or unsubscribe from key events
+     * @params callbackId (long) - id of callback, needed to unsubscribe key events
+     * @params callback (IOsmAndAidlCallback) - callback to notify user on key event
+     * @params keyEventList (List<Integer>) - list of requested key events
+     */
+    long registerForKeyEvents(in AKeyEventsParams params, IOsmAndAidlCallback callback);
+
+    AppInfoParams getAppInfo();
 }

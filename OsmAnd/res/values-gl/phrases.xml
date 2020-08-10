@@ -1111,7 +1111,7 @@
     <string name="poi_ford_stepping_stones">Pedras de pasaxe en río</string>
     <string name="poi_lift_gate">Barreira levadiza</string>
     <string name="poi_traffic_calming_island">Illa de tránsito</string>
-    <string name="poi_lighting_tower">Torre de alumeado</string>
+    <string name="poi_lighting_tower">Torre de alumeamento</string>
     <string name="poi_recycling_plastic_packaging">Embalaxes de plástico</string>
     <string name="poi_recycling_paper_packaging">Embalaxes de papel</string>
     <string name="poi_recycling_white_goods">Liña branca</string>
@@ -1616,7 +1616,7 @@
     <string name="poi_street_cabinet_postal_service">Tipo de cabina: servizo postal</string>
     <string name="poi_street_cabinet_waste">Tipo de cabina: lixo</string>
     <string name="poi_street_cabinet_water_management">Tipo de cabina: xestión da auga</string>
-    <string name="poi_street_cabinet_street_lighting">Tipo de cabina: alumeado público</string>
+    <string name="poi_street_cabinet_street_lighting">Tipo de cabina: alumeamento público</string>
     <string name="poi_pump_type_beam_pump">Tipo de bomba: bomba de vareta</string>
     <string name="poi_pump_type_india_mk_2_3">Tipo de bomba: India Mark II ou III</string>
     <string name="poi_pump_type_gravity">Tipo de bomba: de gravidade</string>
@@ -1739,7 +1739,7 @@
     <string name="poi_pharmacy_dispensing">Dispensa receitas médicas</string>
     <string name="poi_scout_camp">Campamento de exploradores</string>
     <string name="poi_backcountry">Acampada libre</string>
-    <string name="poi_drive_in">Conducir por dentro</string>
+    <string name="poi_drive_in">Compra dende o coche</string>
     <string name="poi_drive_through">Servizo no automóbil</string>
     <string name="poi_microbrewery">Cervexaría artesanal</string>
     <string name="poi_seasonal">Estacional</string>
@@ -1996,7 +1996,7 @@
     <string name="poi_animal_shelter_fish">Peixes</string>
     <string name="poi_backrest_no">Respaldo: non</string>
     <string name="poi_deadlock">Sen saída</string>
-    <string name="poi_water_characteristic_mud">Trazos da auga: lama</string>
+    <string name="poi_water_characteristic_mud">Lama</string>
     <string name="poi_information_trail_blaze">Marcaxe do camiño</string>
     <string name="poi_information_route_marker">Marcaxe de ruta</string>
     <string name="poi_toll_hgv_yes">Portaxe ou peaxe para camións</string>
@@ -2382,7 +2382,7 @@
     <string name="poi_fuel_100ll">Combustíbel 100LL</string>
     <string name="poi_fuel_autogas">Autogas</string>
     <string name="poi_fuel_jeta1">Combustíbel Jet A-1</string>
-    <string name="poi_fuel_adblue">Combustíbel AdBlue</string>
+    <string name="poi_fuel_adblue">Aditivo para escapes de diesel</string>
     <string name="poi_fuel_wood">Combustíbel: madeira</string>
     <string name="poi_fuel_charcoal">Combustíbel: carbón vexetal</string>
     <string name="poi_fuel_coal">Combustíbel: carbón</string>

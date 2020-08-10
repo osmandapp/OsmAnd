@@ -29,7 +29,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.widgets.TextViewExProgress;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.router.TransportRouteResult;
 import net.osmand.util.MapUtils;
 
 import java.util.List;

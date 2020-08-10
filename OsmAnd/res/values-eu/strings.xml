@@ -574,7 +574,7 @@
     <string name="search_position_current_location_found">Nire kokapena (aurkitua)</string>
     <string name="search_position_address">Helbidea…</string>
     <string name="search_position_favorites">Gogokoak…</string>
-    <string name="search_position_undefined">Indefinitua</string>
+    <string name="shared_string_undefined">Indefinitua</string>
     <string name="search_position_map_view">Uneko maparen zentroa</string>
     <string name="select_search_position">Jatorria:</string>
     <string name="context_menu_item_search">Bilatu inguruan</string>
@@ -1374,7 +1374,6 @@ Lorratza %2$s</string>
     <string name="context_menu_item_open_note">Ireki OSM oharra</string>
     <string name="osm_edit_reopened_note">OSM oharra berrireki da</string>
     <string name="osm_edit_commented_note">OSM oharrean iruzkina egin da</string>
-    <string name="osm_edit_removed_note">OSM oharra ezabatu da</string>
     <string name="osm_edit_created_note">OSM oharra sortu da</string>
     <string name="osn_bug_name">OSM oharra</string>
     <string name="osn_add_dialog_title">Sortu oharra</string>
@@ -3787,4 +3786,5 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_showhide_mapillary_title">Erakutsi/ezkutatu Mapillary</string>
     <string name="quick_action_mapillary_hide">Ezkutatu Mapillary</string>
     <string name="quick_action_mapillary_show">Erakutsi Mapillary</string>
+    <string name="shared_string_done">Egina</string>
 </resources>

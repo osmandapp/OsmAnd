@@ -1,0 +1,83 @@
+package net.osmand.plus.views.layers.geometry;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+
+public abstract class GeometryWayStyle<T extends GeometryWayContext> {
+
+	private T context;
+	protected Integer color;
+
+	public GeometryWayStyle(T context) {
+		this.context = context;
+	}
+
+	public GeometryWayStyle(T context, Integer color) {
+		this.context = context;
+		this.color = color;
+	}
+
+	public T getContext() {
+		return context;
+	}
+
+	public Context getCtx() {
+		return context.getCtx();
+	}
+
+	public Integer getColor() {
+		return color;
+	}
+
+	public Integer getStrokeColor() {
+		return context.getStrokeColor(color);
+	}
+
+	public Integer getPointColor() {
+		return null;
+	}
+
+	public boolean isNightMode() {
+		return context.isNightMode();
+	}
+
+	public boolean hasPathLine() {
+		return true;
+	}
+
+	public boolean isVisibleWhileZooming() {
+		return false;
+	}
+
+	public double getPointStepPx(double zoomCoef) {
+		Bitmap arrow = context.getArrowBitmap();
+		int arrowHeight = arrow.getHeight();
+		return arrowHeight * 4f * zoomCoef;
+	}
+
+	public abstract Bitmap getPointBitmap();
+
+	public boolean hasPaintedPointBitmap() {
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return (color != null ? color.hashCode() : 0) + (context.isNightMode() ? 1231 : 1237);
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (!(other instanceof GeometryWayStyle)) {
+			return false;
+		}
+		GeometryWayStyle<?> o = (GeometryWayStyle<?>) other;
+		if (color != null && o.color != null) {
+			return color.equals(o.color);
+		}
+		return color == null && o.color == null;
+	}
+}

@@ -18,10 +18,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.AidlMapLayer;
-import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.layers.AidlMapLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.Map;

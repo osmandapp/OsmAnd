@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,9 +44,10 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
-import net.osmand.plus.views.GPXLayer;
+import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -141,12 +143,18 @@ public class TrackDetailsMenu {
 				int mx = (int) tb.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
 				int my = (int) tb.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
 				int r = (int) (MAX_DISTANCE_LOCATION_PROJECTION * tb.getPixDensity());
-				WptPt point = GPXLayer.findPointNearSegment(tb, segment.points, r, mx, my);
-				if (point != null) {
-					int index = segment.points.indexOf(point);
-					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(segment.points.get(index - 1), point, tb.getLatLonFromPixel(mx, my));
+				Pair<WptPt, WptPt> points = GPXLayer.findPointsNearSegment(tb, segment.points, r, mx, my);
+				if (points != null) {
+					LatLon latLon = tb.getLatLonFromPixel(mx, my);
+					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
 					float pos = (float) (gpxItem.locationOnMap.distance / ((OrderedLineDataSet) ds.get(0)).getDivX());
-					float nextVisibleX = chart.getLowestVisibleX() + (pos - gpxItem.chartHighlightPos);
+					float lowestVisibleX = chart.getLowestVisibleX();
+					float highestVisibleX = chart.getHighestVisibleX();
+					float nextVisibleX = lowestVisibleX + (pos - gpxItem.chartHighlightPos);
+					float oneFourthDiff = (highestVisibleX - lowestVisibleX) / 4f;
+					if (pos > oneFourthDiff) {
+						nextVisibleX = pos - oneFourthDiff;
+					}
 					gpxItem.chartHighlightPos = pos;
 
 					chart.moveViewToX(nextVisibleX);
@@ -312,18 +320,15 @@ public class TrackDetailsMenu {
 				}
 			} else {
 				float distance = pos * dataSet.getDivX();
-				double previousSplitDistance = 0;
+				double totalDistance = 0;
 				WptPt previousPoint = null;
 				for (int i = 0; i < segment.points.size(); i++) {
 					WptPt currentPoint = segment.points.get(i);
 					if (previousPoint != null) {
-						if (currentPoint.distance < previousPoint.distance) {
-							previousSplitDistance += previousPoint.distance;
-						}
+						totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
 					}
-					double totalDistance = previousSplitDistance + currentPoint.distance;
-					if (totalDistance >= distance) {
-						if (previousPoint != null) {
+					if (currentPoint.distance >= distance || Math.abs(totalDistance - distance) < 0.1) {
+						if (previousPoint != null && currentPoint.distance >= distance) {
 							double percent = 1 - (totalDistance - distance) / (currentPoint.distance - previousPoint.distance);
 							double dLat = (currentPoint.lat - previousPoint.lat) * percent;
 							double dLon = (currentPoint.lon - previousPoint.lon) * percent;
@@ -499,6 +504,9 @@ public class TrackDetailsMenu {
 			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
 		} else {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
+		}
+		if (location != null) {
+			mapActivity.refreshMap();
 		}
 		fitTrackOnMap(chart, location, forceFit);
 	}

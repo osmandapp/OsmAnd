@@ -78,7 +78,7 @@
     <string name="poi_boutique">Moda butik</string>
     <string name="poi_camera">Kameralar ve lensler</string>
     <string name="poi_carpet">Halı mağazası</string>
-    <string name="poi_charity">Hayır evi</string>
+    <string name="poi_charity">Yardım dükkanı</string>
     <string name="poi_chemist">İlaç mağazası</string>
     <string name="poi_clothes">Giyim mağazası</string>
     <string name="poi_clothes_children">Çocuk giyim</string>
@@ -520,7 +520,7 @@
     <string name="poi_horse_racing">At yarışı</string>
     <string name="poi_ice_skating">Buz pateni</string>
     <string name="poi_ice_stock">Buz stoku</string>
-    <string name="poi_korfbal">Korfbal</string>
+    <string name="poi_korfbal">Korfbol</string>
     <string name="poi_sport_motor">Motor sporları</string>
     <string name="poi_orienteering">Oryantiring</string>
     <string name="poi_paddle_tennis">Raket Tenisi</string>
@@ -1159,7 +1159,7 @@
     <string name="poi_honey">Bal dükkanı</string>
     <string name="poi_fuel_91ul">91UL yakıt</string>
     <string name="poi_fuel_100ll">100LL yakıt</string>
-    <string name="poi_fuel_adblue">AdBlue yakıt</string>
+    <string name="poi_fuel_adblue">Dizel egzoz sıvısı</string>
     <string name="poi_fuel_wood">Yakıt: odun</string>
     <string name="poi_fuel_charcoal">Yakıt: odun kömürü</string>
     <string name="poi_fuel_coal">Yakıt: kömür</string>
@@ -1404,7 +1404,7 @@
     <string name="poi_pump_powered">Enerjili</string>
     <string name="poi_pump_no">Pompa yok</string>
     <string name="poi_water_characteristic_mineral">Mineral</string>
-    <string name="poi_water_characteristic_mud">Su karakteristiği: çamur</string>
+    <string name="poi_water_characteristic_mud">Çamur</string>
     <string name="poi_water_characteristic_sulfuric">Sülfürik</string>
     <string name="poi_water_point">Su noktası</string>
     <string name="poi_species">Türler</string>
@@ -1476,7 +1476,7 @@
     <string name="poi_piste_difficulty_freeride">Serbest sürüş</string>
     <string name="poi_piste_grooming_classic">Klasik</string>
     <string name="poi_piste_grooming_classic_skating">Klasik+paten</string>
-    <string name="poi_piste_grooming_scooter">Scooter</string>
+    <string name="poi_piste_grooming_scooter">Mobilet</string>
     <string name="poi_piste_grooming_skating">Paten</string>
     <string name="poi_piste_grooming_no">Hayır</string>
     <string name="poi_piste_grooming_mogul">Tümsek</string>
@@ -1815,7 +1815,7 @@
     <string name="poi_memorial_koshinto">Koshinto</string>
     <string name="poi_memorial_blue_plaque">Mavi levha</string>
     <string name="poi_memorial_jizo">Jizo</string>
-    <string name="poi_memorial_cross">Haç şeklinde</string>
+    <string name="poi_memorial_cross">Haç şekli</string>
     <string name="poi_memorial_vehicle">Araç</string>
     <string name="poi_memorial_obelisk">Dikilitaş</string>
     <string name="poi_inscription">Yazıt</string>
@@ -2394,4 +2394,8 @@
     <string name="poi_url">URL</string>
     <string name="poi_traffic_signals_arrow">Ok</string>
     <string name="poi_traffic_signals_vibration">Titreşim</string>
+    <string name="poi_scooter_no">Mobilet: hayır</string>
+    <string name="poi_scooter_yes">Mobilet: evet</string>
+    <string name="poi_motorcycle_type_scooter">Mobilet</string>
+    <string name="poi_site_type_city">Şehir</string>
 </resources>

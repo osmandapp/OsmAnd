@@ -920,7 +920,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="search_position_current_location_found">Majo stanovіšča (znojdziena)</string>
     <string name="search_position_address">Adras…</string>
     <string name="search_position_favorites">Ulubionyja…</string>
-    <string name="search_position_undefined">Niavyznačana</string>
+    <string name="shared_string_undefined">Niavyznačana</string>
     <string name="search_position_map_view">Ciapierašni centr mapy</string>
     <string name="select_search_position">Pačatak:</string>
     <string name="context_menu_item_search">Šukać navokal</string>
@@ -1571,7 +1571,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="context_menu_item_open_note">Dadać natatku OSM</string>
     <string name="osm_edit_reopened_note">Natatka OSM adkryta znoŭ</string>
     <string name="osm_edit_commented_note">Da natatkі OSM dadadzieny kamentar</string>
-    <string name="osm_edit_removed_note">Natatka OSM vydalenaja</string>
     <string name="osm_edit_created_note">Natatka OSM stvorana</string>
     <string name="osn_bug_name">Natatka OSM</string>
     <string name="osn_add_dialog_title">Stvaryć natatku</string>

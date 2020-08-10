@@ -22,7 +22,10 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
 	// this should be bigger (50-80m) but tests need to be fixed first
-	private static final float DIST_BEARING_DETECT = 5;
+	public static final float DIST_BEARING_DETECT = 5;
+	
+	public static final float DIST_BEARING_DETECT_UNMATCHED = 50;
+	
 	private RouteDataObject object;
 	private int startPointIndex;
 	private int endPointIndex;
@@ -446,19 +449,32 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 	
 	public float getBearingBegin() {
-		return (float) (object.directionRoute(startPointIndex, startPointIndex < endPointIndex, DIST_BEARING_DETECT) / Math.PI * 180);
+		return getBearingBegin(startPointIndex, DIST_BEARING_DETECT);
 	}
 	
-	public float getBearing(int point, boolean plus) {
-		return (float) (object.directionRoute(point, plus, DIST_BEARING_DETECT) / Math.PI * 180);
-	}
-	
-	public float getDistance(int point, boolean plus) {
-		return (float) (plus? object.distance(point, endPointIndex): object.distance(startPointIndex, point));
+	public float getBearingBegin(int point, float dist) {
+		return getBearing(point, true, dist);
 	}
 	
 	public float getBearingEnd() {
-		return (float) (MapUtils.alignAngleDifference(object.directionRoute(endPointIndex, startPointIndex > endPointIndex, DIST_BEARING_DETECT) - Math.PI) / Math.PI * 180);
+		return getBearingEnd(endPointIndex, DIST_BEARING_DETECT);
+	}
+	
+	public float getBearingEnd(int point, float dist) {
+		return getBearing(point, false, dist);
+	}
+	
+	public float getBearing(int point, boolean begin, float dist) {
+		if (begin) {
+			return (float) (object.directionRoute(point, startPointIndex < endPointIndex, dist) / Math.PI * 180);
+		} else {
+			double dr = object.directionRoute(point, startPointIndex > endPointIndex, dist);
+			return (float) (MapUtils.alignAngleDifference(dr - Math.PI) / Math.PI * 180);
+		}
+	}
+	
+	public float getDistance(int point, boolean plus) {
+		return (float) (plus ? object.distance(point, endPointIndex) : object.distance(startPointIndex, point));
 	}
 	
 	public void setSegmentTime(float segmentTime) {
@@ -497,7 +513,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return endPointIndex - startPointIndex > 0;
 	}
 
-	
+
 	private LatLon convertPoint(RouteDataObject o, int ind){
 		return new LatLon(MapUtils.get31LatitudeY(o.getPoint31YTile(ind)), MapUtils.get31LongitudeX(o.getPoint31XTile(ind)));
 	}

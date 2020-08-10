@@ -2,8 +2,6 @@ package net.osmand.plus.srtmplugin;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -16,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,6 +52,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.*;
 import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
 import static net.osmand.plus.settings.backend.OsmandSettings.TerrainMode.HILLSHADE;
@@ -84,13 +82,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private TextView downloadDescriptionTv;
 	private TextView transparencyValueTv;
 	private TextView descriptionTv;
-	private TextView hillshadeBtn;
+	private LinearLayout customRadioButton;
 	private TextView minZoomTv;
 	private TextView maxZoomTv;
-	private TextView slopeBtn;
 	private TextView stateTv;
-	private FrameLayout hillshadeBtnContainer;
-	private FrameLayout slopeBtnContainer;
 	private SwitchCompat switchCompat;
 	private ImageView iconIv;
 	private LinearLayout emptyState;
@@ -176,14 +171,13 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		emptyState = root.findViewById(R.id.empty_state);
 		stateTv = root.findViewById(R.id.state_tv);
 		iconIv = root.findViewById(R.id.icon_iv);
-		slopeBtn = root.findViewById(R.id.slope_btn);
 		zoomSlider = root.findViewById(R.id.zoom_slider);
 		minZoomTv = root.findViewById(R.id.zoom_value_min);
 		maxZoomTv = root.findViewById(R.id.zoom_value_max);
-		hillshadeBtn = root.findViewById(R.id.hillshade_btn);
-		slopeBtnContainer = root.findViewById(R.id.slope_btn_container);
+		customRadioButton = root.findViewById(R.id.custom_radio_buttons);
+		TextView hillshadeBtn = root.findViewById(R.id.left_button);
+		TextView slopeBtn = root.findViewById(R.id.right_button);
 		downloadContainer = root.findViewById(R.id.download_container);
-		hillshadeBtnContainer = root.findViewById(R.id.hillshade_btn_container);
 		downloadTopDivider = root.findViewById(R.id.download_container_top_divider);
 		downloadBottomDivider = root.findViewById(R.id.download_container_bottom_divider);
 		observableListView = (ObservableListView) root.findViewById(R.id.list_view);
@@ -205,8 +199,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 		switchCompat.setChecked(terrainEnabled);
 		hillshadeBtn.setOnClickListener(this);
+		hillshadeBtn.setText(R.string.shared_string_hillshade);
 		switchCompat.setOnClickListener(this);
 		slopeBtn.setOnClickListener(this);
+		slopeBtn.setText(R.string.shared_string_slope);
 
 		UiUtilities.setupSlider(transparencySlider, nightMode, colorProfile);
 		UiUtilities.setupSlider(zoomSlider, nightMode, colorProfile, true);
@@ -230,10 +226,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			case R.id.switch_compat:
 				onSwitchClick();
 				break;
-			case R.id.hillshade_btn:
+			case R.id.left_button:
 				setupTerrainMode(HILLSHADE);
 				break;
-			case R.id.slope_btn:
+			case R.id.right_button:
 				setupTerrainMode(SLOPE);
 				break;
 			default:
@@ -294,30 +290,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void adjustModeButtons(TerrainMode mode) {
-		int activeColor = ContextCompat.getColor(app, nightMode
-				? R.color.active_color_primary_dark
-				: R.color.active_color_primary_light);
-		int textColor = ContextCompat.getColor(app, nightMode
-				? R.color.text_color_primary_dark
-				: R.color.text_color_primary_light);
-		int radius = AndroidUtils.dpToPx(app, 4);
-
-		GradientDrawable background = new GradientDrawable();
-		background.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
-		background.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(activeColor, 0.5f));
-
 		if (mode == SLOPE) {
-			background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
-			slopeBtnContainer.setBackgroundDrawable(background);
-			slopeBtn.setTextColor(textColor);
-			hillshadeBtnContainer.setBackgroundColor(Color.TRANSPARENT);
-			hillshadeBtn.setTextColor(activeColor);
+			UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, RIGHT);
 		} else {
-			background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
-			slopeBtnContainer.setBackgroundColor(Color.TRANSPARENT);
-			slopeBtn.setTextColor(activeColor);
-			hillshadeBtnContainer.setBackgroundDrawable(background);
-			hillshadeBtn.setTextColor(textColor);
+			UiUtilities.updateCustomRadioButtons(app, customRadioButton, nightMode, LEFT);
 		}
 	}
 

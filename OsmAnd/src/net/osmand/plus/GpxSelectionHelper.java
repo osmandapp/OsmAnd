@@ -27,6 +27,8 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
+import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -51,7 +53,11 @@ public class GpxSelectionHelper {
 	private static final String BACKUP = "backup";
 	private static final String BACKUPMODIFIEDTIME = "backupTime";
 	private static final String COLOR = "color";
+	private static final String WIDTH = "width";
 	private static final String SELECTED_BY_USER = "selected_by_user";
+	private static final String SHOW_ARROWS = "show_arrows";
+	private static final String GRADIENT_SCALE_TYPE = "gradient_scale_type";
+	private static final String SHOW_START_FINISH = "show_start_finish";
 
 	private OsmandApplication app;
 	@NonNull
@@ -167,19 +173,21 @@ public class GpxSelectionHelper {
 			if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
 				List<GpxDisplayGroup> groups = app.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
-				if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_NO_SPLIT) {
-					for (GpxDisplayGroup model : groups) {
-						model.noSplit(app);
-					}
-					selectedGpxFile.setDisplayGroups(groups, app);
-				} else if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_DISTANCE) {
-					for (GpxDisplayGroup model : groups) {
-						model.splitByDistance(app, dataItem.getSplitInterval(), dataItem.isJoinSegments());
-					}
-					selectedGpxFile.setDisplayGroups(groups, app);
-				} else if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_TIME) {
-					for (GpxDisplayGroup model : groups) {
-						model.splitByTime(app, (int) dataItem.getSplitInterval(), dataItem.isJoinSegments());
+
+				GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(dataItem.getSplitType());
+				if (splitType != null) {
+					if (splitType == GpxSplitType.NO_SPLIT) {
+						for (GpxDisplayGroup model : groups) {
+							model.noSplit(app);
+						}
+					} else if (splitType == GpxSplitType.DISTANCE) {
+						for (GpxDisplayGroup model : groups) {
+							model.splitByDistance(app, dataItem.getSplitInterval(), dataItem.isJoinSegments());
+						}
+					} else if (splitType == GpxSplitType.TIME) {
+						for (GpxDisplayGroup model : groups) {
+							model.splitByTime(app, (int) dataItem.getSplitInterval(), dataItem.isJoinSegments());
+						}
 					}
 					selectedGpxFile.setDisplayGroups(groups, app);
 				}
@@ -512,8 +520,26 @@ public class GpxSelectionHelper {
 						}
 						GPXFile gpx = GPXUtilities.loadGPXFile(fl);
 						if (obj.has(COLOR)) {
-							int clr = Algorithms.parseColor(obj.getString(COLOR));
+							int clr = parseColor(obj.getString(COLOR));
 							gpx.setColor(clr);
+						}
+						for (GradientScaleType scaleType : GradientScaleType.values()) {
+							if (obj.has(scaleType.getColorTypeName())) {
+								int clr = parseColor(obj.getString(scaleType.getColorTypeName()));
+								gpx.setGradientScaleColor(scaleType.getColorTypeName(), clr);
+							}
+						}
+						if (obj.has(SHOW_ARROWS)) {
+							gpx.setShowArrows(obj.optBoolean(SHOW_ARROWS, false));
+						}
+						if (obj.has(GRADIENT_SCALE_TYPE)) {
+							gpx.setGradientScaleType(obj.optString(GRADIENT_SCALE_TYPE));
+						}
+						if (obj.has(SHOW_START_FINISH)) {
+							gpx.setShowStartFinish(obj.optBoolean(SHOW_START_FINISH, true));
+						}
+						if (obj.has(WIDTH)) {
+							gpx.setWidth(obj.getString(WIDTH));
 						}
 						if (gpx.error != null) {
 							save = true;
@@ -541,6 +567,14 @@ public class GpxSelectionHelper {
 		}
 	}
 
+	private int parseColor(String color) {
+		try {
+			return Algorithms.isEmpty(color) ? 0 : Algorithms.parseColor(color);
+		} catch (IllegalArgumentException e) {
+			return 0;
+		}
+	}
+
 	private void saveCurrentSelections() {
 		JSONArray ar = new JSONArray();
 		for (SelectedGpxFile s : selectedGPXFiles) {
@@ -553,6 +587,20 @@ public class GpxSelectionHelper {
 						obj.put(FILE, s.gpxFile.path);
 						if (s.gpxFile.getColor(0) != 0) {
 							obj.put(COLOR, Algorithms.colorToString(s.gpxFile.getColor(0)));
+						}
+						if (s.gpxFile.getWidth(null) != null) {
+							obj.put(WIDTH, s.gpxFile.getWidth(null));
+						}
+						if (s.gpxFile.getGradientScaleType() != null) {
+							obj.put(GRADIENT_SCALE_TYPE, s.gpxFile.getGradientScaleType());
+						}
+						obj.put(SHOW_ARROWS, s.gpxFile.isShowArrows());
+						obj.put(SHOW_START_FINISH, s.gpxFile.isShowStartFinish());
+						for (GradientScaleType scaleType : GradientScaleType.values()) {
+							int gradientScaleColor = s.gpxFile.getGradientScaleColor(scaleType.getColorTypeName(), 0);
+							if (gradientScaleColor != 0) {
+								obj.put(scaleType.getColorTypeName(), Algorithms.colorToString(gradientScaleColor));
+							}
 						}
 					}
 					obj.put(SELECTED_BY_USER, s.selectedByUser);
@@ -606,6 +654,23 @@ public class GpxSelectionHelper {
 					if (dataItem.getColor() != 0) {
 						gpx.setColor(dataItem.getColor());
 					}
+					if (dataItem.getGradientSpeedColor() != 0) {
+						gpx.setGradientScaleColor(GradientScaleType.SPEED.getColorTypeName(), dataItem.getGradientSpeedColor());
+					}
+					if (dataItem.getGradientAltitudeColor() != 0) {
+						gpx.setGradientScaleColor(GradientScaleType.ALTITUDE.getColorTypeName(), dataItem.getGradientAltitudeColor());
+					}
+					if (dataItem.getGradientSlopeColor() != 0) {
+						gpx.setGradientScaleColor(GradientScaleType.SLOPE.getColorTypeName(), dataItem.getGradientSlopeColor());
+					}
+					if (dataItem.getGradientScaleType() != null) {
+						gpx.setGradientScaleType(dataItem.getGradientScaleType().getTypeName());
+					}
+					if (dataItem.getWidth() != null) {
+						gpx.setWidth(dataItem.getWidth());
+					}
+					gpx.setShowArrows(dataItem.isShowArrows());
+					gpx.setShowStartFinish(dataItem.isShowStartFinish());
 					sf.setJoinSegments(dataItem.isJoinSegments());
 				}
 				sf.setGpxFile(gpx, app);
@@ -1024,13 +1089,13 @@ public class GpxSelectionHelper {
 
 		@Override
 		protected void onProgressUpdate(Void... values) {
-				gpxTaskListener.gpxSelectionInProgress();
+			gpxTaskListener.gpxSelectionInProgress();
 		}
 
 		@Override
 		protected void onPreExecute() {
 			collectSelectedItems();
-				gpxTaskListener.gpxSelectionStarted();
+			gpxTaskListener.gpxSelectionStarted();
 		}
 
 		private void collectSelectedItems() {
