@@ -457,7 +457,7 @@
                     android:id="@+id/context_menu_directions_button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:background="?attr/selectableItemBackground"
                     android:gravity="end|center_vertical"
                     android:paddingLeft="@dimen/context_menu_padding_margin_default"
