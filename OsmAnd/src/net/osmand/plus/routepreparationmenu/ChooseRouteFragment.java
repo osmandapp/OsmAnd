@@ -376,7 +376,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 		mapControlsLayer.setupZoomInButton(zoomInButton, longClickListener, ZOOM_IN_BUTTON_ID);
 		mapControlsLayer.setupZoomOutButton(zoomOutButton, longClickListener, ZOOM_OUT_BUTTON_ID);
-		mapControlsLayer.setupBackToLocationButton(backToLocation, BACK_TO_LOC_BUTTON_ID);
+		mapControlsLayer.setupBackToLocationButton(backToLocation, false, BACK_TO_LOC_BUTTON_ID);
 
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 	}
