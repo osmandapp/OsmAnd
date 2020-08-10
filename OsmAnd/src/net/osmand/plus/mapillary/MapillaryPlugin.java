@@ -181,7 +181,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(MAPILLARY)
-				.setTitleId(R.string.mapillary, mapActivity)
+				.setTitleId(R.string.street_level_imagery, mapActivity)
+				.setDescription("Mapillary")
 				.setSelected(settings.SHOW_MAPILLARY.get())
 				.setColor(settings.SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_mapillary)
