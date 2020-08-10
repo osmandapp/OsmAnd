@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <!--
-        README:
-        - The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
-        - If you edit a strings.xml file directly, please make sure:
-           1. To not produce duplicate strings (check by name if a string already exists)
-           2. Every apostrophe (quote) is preceded by a backslash.
-           3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
-        - For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
-        Thx - Hardy
-
+<!--
+	README:
+	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
+	- If you edit a strings.xml file directly, please make sure:
+	   1. To not produce duplicate strings (check by name if a string already exists)
+	   2. Every apostrophe (quote) is preceded by a backslash.
+	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
+	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
+	Thx - Hardy
 
 -->
     <string name="street_level_imagery">Street-level imagery</string>
