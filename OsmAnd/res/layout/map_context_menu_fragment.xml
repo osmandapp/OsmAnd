@@ -467,6 +467,8 @@
                     android:text="@string/get_directions"
                     android:textAllCaps="true"
                     android:textSize="@dimen/default_desc_text_size"
+                    android:maxLines="1"
+                    android:autoSizeTextType="uniform"
                     osmand:typeface="@string/font_roboto_medium"
                     tools:textColor="?attr/contextMenuButtonColor" />
 
