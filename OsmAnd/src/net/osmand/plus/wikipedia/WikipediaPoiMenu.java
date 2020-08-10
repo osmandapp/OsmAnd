@@ -115,10 +115,6 @@ public class WikipediaPoiMenu {
 					.hideDivider(true)
 					.setLoading(true)
 					.setListener(l).createItem());
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
-					.setLayout(R.layout.card_bottom_divider)
-					.setMinHeight(spaceHeight)
-					.createItem());
 		} else {
 			try {
 				IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
@@ -196,15 +192,15 @@ public class WikipediaPoiMenu {
 						}
 						adapter.addItem(itemBuilder.createItem());
 					}
-					adapter.addItem(new ContextMenuItem.ItemBuilder()
-							.setLayout(R.layout.card_bottom_divider)
-							.setMinHeight(spaceHeight)
-							.createItem());
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setLayout(R.layout.card_bottom_divider)
+				.setMinHeight(spaceHeight)
+				.createItem());
 		return adapter;
 	}
 

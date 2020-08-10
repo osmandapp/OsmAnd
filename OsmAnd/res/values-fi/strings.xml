@@ -191,7 +191,7 @@
     <string name="search_position_current_location_found">Sijaintini (löydetty)</string>
     <string name="search_position_address">Osoite…</string>
     <string name="search_position_favorites">Suosikit…</string>
-    <string name="search_position_undefined">Määrittelemätön</string>
+    <string name="shared_string_undefined">Määrittelemätön</string>
     <string name="select_search_position">Alkuperä:</string>
     <string name="shared_string_save">Tallenna</string>
     <string name="local_index_upload_gpx_description">Lähetä GPX tiedostot OSM yhteisölle. Niitä käytetään karttojen parantamiseen.</string>

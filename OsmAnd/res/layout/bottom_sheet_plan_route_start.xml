@@ -22,9 +22,10 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/plan_route_last_edited"
+			android:letterSpacing="@dimen/description_letter_spacing"
 			android:textColor="?attr/active_color_basic"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_regular" />
+			osmand:typeface="@string/font_roboto_medium" />
 
 	</LinearLayout>
 

@@ -9,9 +9,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -26,6 +28,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -38,6 +41,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -54,9 +58,9 @@ import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
 
-public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener {
+public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ColorPickerListener {
 
-	public static final String TAG = TrackAppearanceFragment.class.getSimpleName();
+	public static final String TAG = TrackAppearanceFragment.class.getName();
 
 	private static final Log log = PlatformUtil.getLog(TrackAppearanceFragment.class);
 
@@ -73,8 +77,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private TrackWidthCard trackWidthCard;
 	private SplitIntervalCard splitIntervalCard;
+	private TrackColoringCard trackColoringCard;
 
-	private ImageView appearanceIcon;
+	private ImageView trackIcon;
 
 	@Override
 	public int getMainLayoutId() {
@@ -131,6 +136,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 			if (currentRecording) {
 				trackDrawInfo = new TrackDrawInfo(true);
+				trackDrawInfo.setColor(app.getSettings().CURRENT_TRACK_COLOR.get());
+				trackDrawInfo.setWidth(app.getSettings().CURRENT_TRACK_WIDTH.get());
+				trackDrawInfo.setShowArrows(app.getSettings().CURRENT_TRACK_SHOW_ARROWS.get());
+				trackDrawInfo.setShowStartFinish(app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.get());
 				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 			} else {
 				gpxDataItem = app.getGpxDbHelper().getItem(new File(gpxFilePath));
@@ -163,13 +172,21 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
-			appearanceIcon = view.findViewById(R.id.appearance_icon);
+			trackIcon = view.findViewById(R.id.track_icon);
+
+			view.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					openMenuHeaderOnly();
+				}
+			});
 
 			if (isPortrait()) {
 				updateCardsLayout();
 			}
-			updateCards();
-			updateButtons(view);
+			setupCards();
+			setupButtons(view);
+			setupScrollShadow();
 			updateAppearanceIcon();
 			if (!isPortrait()) {
 				int widthNoShadow = getLandscapeNoShadowWidth();
@@ -317,6 +334,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
+	public void onColorSelected(int prevColor, int newColor) {
+		trackColoringCard.onColorSelected(prevColor, newColor);
+	}
+
+	@Override
 	protected int applyPosY(int currentY, boolean needCloseMenu, boolean needMapAdjust, int previousMenuState, int newMenuState, int dZoom, boolean animated) {
 		int y = super.applyPosY(currentY, needCloseMenu, needMapAdjust, previousMenuState, newMenuState, dZoom, animated);
 		if (needMapAdjust) {
@@ -327,7 +349,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void updateAppearanceIcon() {
 		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), trackDrawInfo.getColor());
-		appearanceIcon.setImageDrawable(icon);
+		trackIcon.setImageDrawable(icon);
 	}
 
 	private void adjustMapPosition(int y) {
@@ -387,7 +409,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		}
 	}
 
-	private void updateButtons(View view) {
+	private void setupButtons(View view) {
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.route_info_bg));
 		View saveButton = view.findViewById(R.id.right_bottom_button);
@@ -418,6 +440,26 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
 	}
 
+	private void setupScrollShadow() {
+		int shadowIconId = isNightMode() ? R.drawable.bg_contextmenu_shadow : R.drawable.bg_contextmenu_shadow;
+		final Drawable shadowIcon = app.getUIUtilities().getIcon(shadowIconId);
+
+		final ScrollView scrollView = getBottomScrollView();
+		final FrameLayout bottomContainer = getBottomContainer();
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+
+			@Override
+			public void onScrollChanged() {
+				int scrollY = scrollView.getScrollY();
+				if (scrollY <= 0 && bottomContainer.getForeground() != null) {
+					bottomContainer.setForeground(null);
+				} else if (scrollY > 0 && bottomContainer.getForeground() == null) {
+					bottomContainer.setForeground(shadowIcon);
+				}
+			}
+		});
+	}
+
 	private void saveTrackInfo() {
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
 
@@ -440,6 +482,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 		if (gpxFile.showCurrentTrack) {
 			app.getSettings().CURRENT_TRACK_COLOR.set(trackDrawInfo.getColor());
+			app.getSettings().CURRENT_TRACK_WIDTH.set(trackDrawInfo.getWidth());
+			app.getSettings().CURRENT_TRACK_SHOW_ARROWS.set(trackDrawInfo.isShowArrows());
+			app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.set(trackDrawInfo.isShowStartFinish());
 		} else {
 			if (gpxDataItem != null) {
 				gpxDataItem = new GpxDataItem(new File(gpxFile.path), gpxFile);
@@ -508,13 +553,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private void updateCards() {
+	private void setupCards() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
 
-			if (!selectedGpxFile.isShowCurrentTrack()) {
+			if (!selectedGpxFile.isShowCurrentTrack() && !Algorithms.isEmpty(getDisplaySegmentGroups())) {
 				splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
 				splitIntervalCard.setListener(this);
 				cardsContainer.addView(splitIntervalCard.build(mapActivity));
@@ -524,7 +569,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			directionArrowsCard.setListener(this);
 			cardsContainer.addView(directionArrowsCard.build(mapActivity));
 
-			TrackColoringCard trackColoringCard = new TrackColoringCard(mapActivity, trackDrawInfo);
+			trackColoringCard = new TrackColoringCard(mapActivity, trackDrawInfo, this);
 			trackColoringCard.setListener(this);
 			cardsContainer.addView(trackColoringCard.build(mapActivity));
 
@@ -547,6 +592,17 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 		}
 		return displayGroups;
+	}
+
+	@NonNull
+	public List<GpxDisplayGroup> getDisplaySegmentGroups() {
+		List<GpxDisplayGroup> groups = new ArrayList<>();
+		for (GpxDisplayGroup group : getGpxDisplayGroups()) {
+			if (GpxDisplayItemType.TRACK_SEGMENT == group.getType()) {
+				groups.add(group);
+			}
+		}
+		return groups;
 	}
 
 	public void dismissImmediate() {

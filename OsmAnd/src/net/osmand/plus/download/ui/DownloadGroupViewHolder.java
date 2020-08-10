@@ -64,24 +64,39 @@ public class DownloadGroupViewHolder {
 	}
 
 	private Drawable getIconForDownloadedItems(DownloadResourceGroup group, @DrawableRes int iconId) {
-		DownloadResourceGroup ggr = group.getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
-		if (ggr != null && ggr.getIndividualResources() != null) {
-			IndexItem item = null;
-			for (IndexItem ii : ggr.getIndividualResources()) {
+		int ic = getIconColorForOutdatedItems(group);
+		if (ic != 0) {
+			return ctx.getMyApplication().getUIUtilities().getIcon(iconId, ic);
+		}
+		return null;
+	}
+
+	private int getIconColorForOutdatedItems(DownloadResourceGroup group) {
+		int clr = 0;
+		if (group.getIndividualResources() != null) {
+			for (IndexItem ii : group.getIndividualResources()) {
 				if (ii.getType() == DownloadActivityType.NORMAL_FILE
 						|| ii.getType() == DownloadActivityType.ROADS_FILE) {
-					if (ii.isDownloaded() || ii.isOutdated()) {
-						item = ii;
-						break;
+					if (ii.isOutdated()) {
+						return R.color.color_distance;
+					} else if(ii.isDownloaded()) {
+						clr = R.color.color_ok;
 					}
 				}
 			}
-			if (item != null) {
-				int color = item.isOutdated() ? R.color.color_distance : R.color.color_ok;
-				return ctx.getMyApplication().getUIUtilities().getIcon(iconId, color);
+		}
+
+		if (group.getGroups() != null) {
+			for (DownloadResourceGroup g : group.getGroups()) {
+				int d = getIconColorForOutdatedItems(g);
+				if (d == R.color.color_distance) {
+					return d;
+				} else if(d != 0) {
+					clr = d;
+				}
 			}
 		}
-		return null;
+		return clr;
 	}
 
 	public void bindItem(DownloadResourceGroup group) {

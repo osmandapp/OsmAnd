@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -24,7 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
@@ -94,7 +92,7 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 		items.add(openExistingTrackItem);
 
 		BaseBottomSheetItem importTrackItem = new BottomSheetItemWithDescription.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_phone))
+				.setIcon(getContentIcon(R.drawable.ic_action_import_to))
 				.setTitle(getString(R.string.plan_route_import_track))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +104,7 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 				.create();
 		items.add(importTrackItem);
 
-		items.add(new DividerHalfItem(getContext()));
+		items.add(new DividerItem(getContext()));
 
 		final RecyclerView recyclerView = mainView.findViewById(R.id.gpx_track_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -125,7 +123,7 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 		});
 		final List<GPXInfo> gpxTopList = gpxList.subList(0, Math.min(5, gpxList.size()));
-		adapter = new GpxTrackAdapter(requireContext(), gpxList, false);
+		adapter = new GpxTrackAdapter(requireContext(), gpxTopList, false);
 		adapter.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {
@@ -143,11 +141,9 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void onItemClick(int position, List<GPXInfo> gpxInfoList) {
 		if (position != RecyclerView.NO_POSITION && position < gpxInfoList.size()) {
-			OsmandApplication app = requiredMyApplication();
 			String fileName = gpxInfoList.get(position).getFileName();
-			GPXFile gpxFile = GPXUtilities.loadGPXFile(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), fileName));
 			if (listener != null) {
-				listener.openLastEditTrackOnClick(gpxFile);
+				listener.openLastEditTrackOnClick(fileName);
 			}
 		}
 		dismiss();
@@ -201,7 +197,7 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 			fragment.setUsedOnMap(true);
 			fragment.setRetainInstance(true);
 			fragment.setListener(listener);
-			fragment.show(fragmentManager, StartPlanRouteBottomSheet.TAG);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 
@@ -221,7 +217,7 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 
 		void openExistingTrackOnClick();
 
-		void openLastEditTrackOnClick(GPXFile gpxFile);
+		void openLastEditTrackOnClick(String fileName);
 
 		void dismissButtonOnClick();
 

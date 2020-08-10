@@ -1,14 +1,7 @@
 package net.osmand.router;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-
+import net.osmand.LocationsHolder;
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -22,6 +15,14 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -214,13 +215,12 @@ public class RoutePlannerFrontEnd {
 		useSmartRouteRecalculation = use;
 	}
 
-	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<LatLon> points) throws IOException, InterruptedException {
+	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
 		if (gctx.ctx.calculationProgress == null) {
 			gctx.ctx.calculationProgress = new RouteCalculationProgress();
 		}
 		gctx.ctx.keepNativeRoutingContext = true;
-		List<GpxPoint> gpxPoints = generageGpxPoints(points, gctx);
 		GpxPoint start = null;
 		GpxPoint prev = null;
 		if(gpxPoints.size() > 0) {
@@ -288,7 +288,7 @@ public class RoutePlannerFrontEnd {
 		BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
 		calculateGpxRoute(gctx, gpxPoints);
 		if (!gctx.result.isEmpty()) {
-			new RouteResultPreparation().printResults(gctx.ctx, points.get(0), points.get(points.size() - 1), gctx.result);
+			new RouteResultPreparation().printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
 			System.out.println(gctx);
 		}
 		return gctx;
@@ -382,13 +382,13 @@ public class RoutePlannerFrontEnd {
 		cleanupResultAndAddTurns(gctx);
 	}
 
-	private List<GpxPoint> generageGpxPoints(List<LatLon> points, GpxRouteApproximation gctx) {
-		List<GpxPoint> gpxPoints = new ArrayList<>(points.size());
+	public List<GpxPoint> generateGpxPoints(GpxRouteApproximation gctx, LocationsHolder locationsHolder) {
+		List<GpxPoint> gpxPoints = new ArrayList<>(locationsHolder.getSize());
 		GpxPoint prev = null;
-		for(int i = 0; i < points.size(); i++) {
+		for(int i = 0; i < locationsHolder.getSize(); i++) {
 			GpxPoint p = new GpxPoint();
 			p.ind = i;
-			p.loc = points.get(i);
+			p.loc = locationsHolder.getLatLon(i);
 			if (prev != null) {
 				p.cumDist = MapUtils.getDistance(p.loc, prev.loc) + prev.cumDist;
 			}

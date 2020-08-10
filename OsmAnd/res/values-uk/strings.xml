@@ -210,7 +210,7 @@
     <string name="search_position_current_location_found">Моя позиція (знайдена)</string>
     <string name="search_position_address">Адреса…</string>
     <string name="search_position_favorites">Закладки…</string>
-    <string name="search_position_undefined">Невизначено</string>
+    <string name="shared_string_undefined">Невизначено</string>
     <string name="search_position_map_view">Поточний центр мапи</string>
     <string name="select_search_position">Початок:</string>
     <string name="context_menu_item_search">Шукати поруч</string>
@@ -1372,7 +1372,7 @@
     <string name="traffic_warning_border_control">Прикордонний контроль</string>
     <string name="traffic_warning_payment">Збирання плати за проїзд</string>
     <string name="traffic_warning_stop">Знак СТОП</string>
-    <string name="traffic_warning_calming">Штучна дорожня нерівність</string>
+    <string name="traffic_warning_calming">Затори</string>
     <string name="traffic_warning_speed_camera">Камера контролю швидкості</string>
     <string name="traffic_warning">Попередження на дорозі</string>
     <string name="local_index_description">Натисніть на будь-який наявний елемент для перегляду додаткових відомостей, довго утримуйте, щоб знедіяти або вилучити. Наявні дані на пристрої (%1$s вільно):</string>
@@ -2691,7 +2691,7 @@
     <string name="coord_input_add_point">Додати точку</string>
     <string name="coord_input_save_as_track">Зберегти як трек</string>
     <string name="quick_action_edit_actions">Редагувати дії</string>
-    <string name="get_osmand_live">Отримайте OsmAnd Live, аби розблокувати всі функції: щоденні оновлення мапи з необмеженими завантаженнями, всі платні та безплатні втулки, Вікіпедію, Вікімандри та багато іншого.</string>
+    <string name="get_osmand_live">Отримайте OsmAnd Live, щоб розблокувати всі функції: щоденні оновлення мап з необмеженими завантаженнями, всі платні та безплатні втулки, Вікіпедію, Вікімандри та багато іншого.</string>
     <string name="shared_string_bookmark">Закладка</string>
     <string name="hide_full_description">Приховати повний опис</string>
     <string name="show_full_description">Показати повний опис</string>
@@ -2860,7 +2860,7 @@
     <string name="osm_live_payment_renews_quarterly">Оновлюється щокварталу</string>
     <string name="osm_live_payment_renews_annually">Оновлюється щороку</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Оберіть зручну для вас проміжковість платежів:</string>
+    <string name="osm_live_payment_header">Виберіть зручну для вас періодичність платежів:</string>
     <string name="osm_live_payment_contribute_descr">Частина доходу йде до землеписців OSM.</string>
     <string name="powered_by_osmand">Від OsmAnd</string>
     <string name="use_osm_live_public_transport_description">Увімкнути громадський транспорт із врахуванням авто-оновлень OsmAnd Live.</string>
@@ -3146,7 +3146,7 @@
     <string name="edit_profile_setup_title">Налаштувати профіль</string>
     <string name="edit_profile_setup_subtitle">Профіль містить власні налаштування</string>
     <string name="edit_profile_setup_map_subtitle">Оберіть налаштування мапи для профілю</string>
-    <string name="edit_profile_screen_options_subtitle">Оберіть налаштування екрана для профілю</string>
+    <string name="edit_profile_screen_options_subtitle">Виберіть налаштування екрана для профілю</string>
     <string name="edit_profile_nav_settings_subtitle">Оберіть налаштування навігації для профілю</string>
     <string name="routing_attr_max_num_changes_description">Вкажіть верхню межу змін</string>
     <string name="routing_attr_max_num_changes_name">Кількість змін</string>
@@ -3245,7 +3245,7 @@
     <string name="map_look">Вигляд мапи</string>
     <string name="list_of_installed_plugins">Встановлені втулки</string>
     <string name="configure_navigation">Налаштування навігації</string>
-    <string name="general_settings_profile_descr">Тема застосунка, одиниці вимірювання, регіон</string>
+    <string name="general_settings_profile_descr">Тема застосунку, одиниці вимірювання, регіон</string>
     <string name="configure_profile">Налаштування профілю</string>
     <string name="switch_profile">Змінити профіль</string>
     <string name="reset_to_default">Скинути на усталені</string>
@@ -3679,9 +3679,9 @@
     <string name="subscription_osmandlive_item">Передплата - OsmAnd Live</string>
     <string name="osmand_purchases_item">OsmAnd покупки</string>
     <string name="legend_item_description">Довідник умовних позначень мапи.</string>
-    <string name="osm_live_payment_subscription_management">Оплата буде списана з рахунку, прив\'язаного до вашого облікового запису Google Play, при підтвердженні придбання. 
+    <string name="osm_live_payment_subscription_management">Оплату буде здійснено з рахунку, прив\'язаного до вашого облікового запису Google Play, під час підтвердженні придбання.
 \n
-\nПередплата продовжується автоматично, якщо ви не скасуєте її до дати продовження. З вашого рахунку буде стягуватися плата за період продовження (щомісяця/щотримісяці/щорік) разово в день продовження. 
+\nПередплата продовжується автоматично, якщо ви не скасуєте її до дати продовження. З вашого рахунку буде стягуватися плата за період продовження (щомісяця/щотримісяці/щорік) разово в день продовження.
 \n
 \nВи можете керувати передплатами та скасовувати їх у налаштуваннях Google Play.</string>
     <string name="search_poi_types">Пошук видів POI</string>
@@ -3765,7 +3765,7 @@
     <string name="shared_string_delete_all_q">Видалити все\?</string>
     <string name="delete_all_actions_message_q">Ви дійсно бажаєте безповоротно видалити %d швидких дій\?</string>
     <string name="screen_timeout">Час очікування екрана</string>
-    <string name="weight_limit_description">Вкажіть вагу транспортного засобу, для важких транспортних засобів можуть застосовуватися деякі маршрутні обмеження.</string>
+    <string name="weight_limit_description">Вкажіть вагу транспортного засобу тому, що для вантажівок можуть застосовуватися деякі маршрутні обмеження.</string>
     <string name="shared_string_tones">тонни</string>
     <string name="shared_string_meters">метри</string>
     <string name="details_dialog_decr">Показати або приховати додаткові деталі на мапі</string>
@@ -3813,7 +3813,7 @@
     <string name="search_download_wikipedia_maps">Завантажити мапи Вікіпедії</string>
     <string name="plugin_wikipedia_description">Отримайте відомості про визначні місця у Вікіпедії. Це ваш автономний кишеньковий посібник - просто ввімкніть втулок \"Вікіпедія\" і насолоджуйтеся статтями про об\'єкти навколо вас.</string>
     <string name="app_mode_motor_scooter">Моторолер</string>
-    <string name="app_mode_enduro_motorcycle">легкий мотоцикл</string>
+    <string name="app_mode_enduro_motorcycle">Спортивний мотоцикл</string>
     <string name="app_mode_wheelchair">Інвалідне крісло</string>
     <string name="app_mode_wheelchair_forward">Інвалідне крісло попереду</string>
     <string name="app_mode_go_cart">Картинг</string>
@@ -3836,4 +3836,18 @@
     <string name="plan_route_create_new_route">Створити новий маршрут</string>
     <string name="plan_route_select_track_file_for_open">Оберіть файл з треком для перегляду.</string>
     <string name="shared_string_done">Готово</string>
+    <string name="overwrite_track">Перезаписати трек</string>
+    <string name="rourte_between_points_warning_desc">Для користування цією функцією, OsmAnd необхідно прив\'язати цей трек до мапи доріг.
+\n
+\nДалі вам потрібно вибрати профіль навігації для виявлення дозволених доріг та обмеження відстані наближення вашого треку до доріг.</string>
+    <string name="reverse_route">Зворотний маршрут</string>
+    <string name="whole_track">Весь трек</string>
+    <string name="next_segment">Наступний сегмент</string>
+    <string name="threshold_distance">Обмеження відстані</string>
+    <string name="navigation_profile">Профіль навігації</string>
+    <string name="rourte_between_points_add_track_desc">Виберіть файл треку, до якого буде додано новий сегмент.</string>
+    <string name="save_as_new_track">Зберегти як новий трек</string>
+    <string name="rourte_between_points_whole_track_button_desc">Весь трек буде перераховано за допомогою вибраного профілю.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Лише наступний сегмент буде перераховано за допомогою обраного профілю.</string>
+    <string name="rourte_between_points_desc">Виберіть спосіб з\'єднання точок: прямою лінією чи розраховувати маршрут між ними за допомогою вибраного профілю.</string>
 </resources>

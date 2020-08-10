@@ -336,7 +336,7 @@ Nyttjat utrymme är {1} MB.
     <string name="search_position_current_location_found">Min position (hittad)</string>
     <string name="search_position_address">Adresser …</string>
     <string name="search_position_favorites">Favoriter …</string>
-    <string name="search_position_undefined">Odefinierad</string>
+    <string name="shared_string_undefined">Odefinierad</string>
     <string name="search_position_map_view">Aktuell kartmitt</string>
     <string name="select_search_position">Ursprung:</string>
     <string name="context_menu_item_search">Sök i närheten</string>

@@ -563,7 +563,7 @@
     <string name="search_position_current_location_found">Minha posição (encontrada)</string>
     <string name="search_position_address">Endereço…</string>
     <string name="search_position_favorites">Favoritos…</string>
-    <string name="search_position_undefined">Sem definir</string>
+    <string name="shared_string_undefined">Sem definir</string>
     <string name="search_position_map_view">Centro do mapa atual</string>
     <string name="select_search_position">Pesquisar próximo a:</string>
     <string name="context_menu_item_search">Pesquisar nas proximidades</string>
@@ -1250,7 +1250,7 @@
     <string name="traffic_warning_border_control">Posto alfandegário</string>
     <string name="traffic_warning_payment">Portagem</string>
     <string name="traffic_warning_stop">Sinal de stop</string>
-    <string name="traffic_warning_calming">Acalmia de tráfego</string>
+    <string name="traffic_warning_calming">Choque de velocidade</string>
     <string name="traffic_warning_speed_camera">Radar de velocidade</string>
     <string name="traffic_warning">Aviso de tráfego</string>
     <string name="speak_favorites">Favoritos pertos</string>
@@ -3394,7 +3394,7 @@
     <string name="quick_action_show_hide_hillshade">Mostrar/ocultar sombras de relevo</string>
     <string name="tts_initialization_error">Não é possível iniciar o mecanismo de conversão de texto em fala.</string>
     <string name="simulate_your_location_gpx_descr">Simule a sua posição usando um caminho GPX gravado.</string>
-    <string name="export_profile">Perfil de exportação</string>
+    <string name="export_profile">Exportar o perfil</string>
     <string name="exported_osmand_profile">Perfil OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">O perfil \'%1$s\' já existe. Sobregravar\?</string>
     <string name="export_profile_failed">Não podia exportar o perfil.</string>
@@ -3845,4 +3845,5 @@
     <string name="plan_route_select_track_file_for_open">Selecione um ficheiro de trilho para abrir.</string>
     <string name="plan_route_create_new_route">Criar rota</string>
     <string name="shared_string_done">Pronto</string>
+    <string name="overwrite_track">Sobrescrever trilho</string>
 </resources>

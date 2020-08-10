@@ -56,9 +56,9 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.MapControlsLayer;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
 import java.io.File;

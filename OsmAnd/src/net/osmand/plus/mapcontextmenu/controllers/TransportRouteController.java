@@ -17,7 +17,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.views.layers.TransportStopsLayer;
 
 import java.util.List;
 

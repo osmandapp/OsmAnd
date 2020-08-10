@@ -563,6 +563,7 @@ dependencies {
 	implementation ("com.github.HITGIF:TextFieldBoxes:1.4.5"){
 		exclude group: 'com.android.support'
 	}
+	implementation 'com.jaredrummler:colorpicker:1.1.0'
 
 	huaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')
 	freehuaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')

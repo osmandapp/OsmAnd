@@ -15,7 +15,6 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -30,6 +29,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -310,17 +310,11 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@NonNull
 	public List<GpxDisplayGroup> getDisplayGroups() {
-		List<GpxDisplayGroup> groups = new ArrayList<>();
 		Fragment target = getTargetFragment();
 		if (target instanceof TrackAppearanceFragment) {
-			List<GpxDisplayGroup> result = ((TrackAppearanceFragment) target).getGpxDisplayGroups();
-			for (GpxDisplayGroup group : result) {
-				if (GpxDisplayItemType.TRACK_SEGMENT == group.getType()) {
-					groups.add(group);
-				}
-			}
+			return ((TrackAppearanceFragment) target).getDisplaySegmentGroups();
 		}
-		return groups;
+		return Collections.emptyList();
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, TrackDrawInfo trackDrawInfo, Fragment target) {
