@@ -426,7 +426,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 			if (longClick) {
 				showContextMenuForMyLocation();
-			} else {
+			} else if (!mapActivity.getContextMenu().isVisible()) {
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 			}
 		} else {
