@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-<!--
-	README:
-	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
-	- If you edit a strings.xml file directly, please make sure:
-	   1. To not produce duplicate strings (check by name if a string already exists)
-	   2. Every apostrophe (quote) is preceded by a backslash.
-	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
-	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
-	Thx - Hardy
+    <string name="street_level_imagery">Street-level imagery</string>
+    <!--
+        README:
+        - The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
+        - If you edit a strings.xml file directly, please make sure:
+           1. To not produce duplicate strings (check by name if a string already exists)
+           2. Every apostrophe (quote) is preceded by a backslash.
+           3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
+        - For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
+        Thx - Hardy
 
--->
+    -->
     <string name="overwrite_track">Overwrite track</string>
     <string name="shared_string_done">Done</string>
     <string name="plan_route_select_track_file_for_open">Select a track file for open.</string>
@@ -1233,7 +1234,7 @@
     <string name="mapillary_widget">Mapillary widget</string>
     <string name="mapillary_widget_descr">Allows quick contributions to Mapillary.</string>
     <string name="mapillary_descr">Online street-level photos for everyone. Discover places, collaborate, capture the world.</string>
-    <string name="mapillary">Street-level imagery</string>
+    <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Street-level photos for everyone. Discover places, collaborate, capture the world.</string>
     <string name="private_access_routing_req">Your destination is located in an area with private access. Allow using private roads for this trip?</string>
     <string name="restart_search">Restart search</string>
