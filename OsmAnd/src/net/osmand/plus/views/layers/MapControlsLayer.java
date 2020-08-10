@@ -359,7 +359,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initControls() {
 		View backToLocation = mapActivity.findViewById(R.id.map_my_location_button);
-		backToLocationControl = setupBackToLocationButton(backToLocation, BACK_TO_LOC_HUD_ID);
+		backToLocationControl = setupBackToLocationButton(backToLocation, true, BACK_TO_LOC_HUD_ID);
 
 		View backToMenuButton = mapActivity.findViewById(R.id.map_menu_button);
 
@@ -397,7 +397,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 	}
 
-	public MapHudButton setupBackToLocationButton(View backToLocation, String buttonId) {
+	public MapHudButton setupBackToLocationButton(View backToLocation, boolean showContextMenu, String buttonId) {
 		MapHudButton backToLocationButton = createHudButton(backToLocation, R.drawable.ic_my_location, buttonId)
 				.setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark)
 				.setBg(R.drawable.btn_circle_blue);
@@ -409,13 +409,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		});
 
-		backToLocation.setOnLongClickListener(new View.OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				onBackToLocationClick(true);
-				return false;
-			}
-		});
+		if (showContextMenu) {
+			backToLocation.setOnLongClickListener(new View.OnLongClickListener() {
+				@Override
+				public boolean onLongClick(View v) {
+					onBackToLocationClick(true);
+					return false;
+				}
+			});
+		}
 
 		controls.add(backToLocationButton);
 

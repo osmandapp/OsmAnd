@@ -117,7 +117,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
 		mapControlsLayer.setupZoomInButton(zoomInButtonView, longClickListener, ZOOM_IN_BUTTON_ID);
 		mapControlsLayer.setupZoomOutButton(zoomOutButtonView, longClickListener, ZOOM_OUT_BUTTON_ID);
-		mapControlsLayer.setupBackToLocationButton(myLocButtonView, BACK_TO_LOC_BUTTON_ID);
+		mapControlsLayer.setupBackToLocationButton(myLocButtonView, false, BACK_TO_LOC_BUTTON_ID);
 
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
 		rulerWidget = mapInfoLayer.setupRulerWidget(mapRulerView);
