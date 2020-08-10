@@ -78,7 +78,7 @@ public class PointImageDrawable extends Drawable {
 		mapIconBackgroundCenterSmall = backgroundType.getMapBackgroundIconId(ctx, "center", true);
 		mapIconBackgroundBottomSmall = backgroundType.getMapBackgroundIconId(ctx, "bottom", true);
 		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN);
-		grayFilter = new PorterDuffColorFilter(res.getColor(R.color.color_favorite_gray), PorterDuff.Mode.MULTIPLY);
+		grayFilter = new PorterDuffColorFilter(res.getColor(R.color.color_favorite_gray), PorterDuff.Mode.SRC_IN);
 		dp_12_px = AndroidUtils.dpToPx(pointInfo.ctx, 12);
 	}
 

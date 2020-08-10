@@ -189,7 +189,7 @@
 	<color name="gpx_time_span_color">#0080FF</color>
 
 	<color name="color_favorite">#eecc22</color>
-	<color name="color_favorite_gray">#b3b3b3</color>
+	<color name="color_favorite_gray">#727272</color>
 	<color name="parking_icon_background">#244DBD</color>
 	<color name="transport_stop_icon_background">#5870FE</color>
 
