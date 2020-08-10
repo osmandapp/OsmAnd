@@ -341,13 +341,20 @@ public abstract class MapRenderingTypes {
 			}
 			
 			String nmts = parser.getAttributeValue("", "nameTags");
-			if(nmts != null) {
-				String namePrefix = parser.getAttributeValue("", "namePrefix"); //$NON-NLS-1$
-				if (namePrefix == null) {
-					namePrefix = "";
+			if (nmts != null) {
+				if (rtype.relation || rtype.relationGroup) {
+					String namePrefix = parser.getAttributeValue("", "namePrefix"); //$NON-NLS-1$
+					if (namePrefix == null) {
+						namePrefix = "";
+					}
+					rtype.relationNames = new LinkedHashMap<String, String>();
+					putNameTags(nmts, rtype.relationNames, namePrefix);
+				} else {
+					String[] nameSplit = nmts.split(",");
+					for (String nameTag : nameSplit) {
+						checkOrCreateTextRule(nameTag, null);
+					}
 				}
-				rtype.relationNames = new LinkedHashMap<String, String>();
-				putNameTags(nmts, rtype.relationNames, namePrefix);
 			}
 			String rnmts = parser.getAttributeValue("", "relationGroupNameTags");
 			if (rnmts != null) {
