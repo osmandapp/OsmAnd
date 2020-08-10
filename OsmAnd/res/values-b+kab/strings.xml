@@ -41,7 +41,7 @@
     <string name="shared_string_ok">Γas</string>
     <string name="shared_string_yes">Ih</string>
     <string name="shared_string_no">Ala</string>
-    <string name="shared_string_never">Warǧin</string>
+    <string name="shared_string_never">Werǧin</string>
     <string name="shared_string_none">Ulac</string>
     <string name="shared_string_and">d</string>
     <string name="shared_string_or">naɣ</string>
@@ -260,7 +260,7 @@
     <string name="mapillary_menu_title_username">Isem n useqdac</string>
     <string name="nearest_cities">Timdinin ig qarben</string>
     <string name="shared_string_add_to_map_markers">Rnu ar ticṛaḍ</string>
-    <string name="map_markers">Ticṛaḍ</string>
+    <string name="map_markers">Ticraḍ n tkarḍa</string>
     <string name="lang_kab">Taqbaylit</string>
     <string name="lang_ber">Tifinaɣ</string>
     <string name="shared_string_cancel">Sefsex</string>
@@ -273,7 +273,7 @@
     <string name="rendering_category_details">Talqayt</string>
     <string name="rendering_category_transport">Amesni</string>
     <string name="text_size">Tiddi n waḍris</string>
-    <string name="speak_street_names">Ismawen n iberdan (TTS)</string>
+    <string name="speak_street_names">Ismawen n yiberdan (TTS)</string>
     <string name="context_menu_item_directions_to">Iwellihen ɣer</string>
     <string name="context_menu_item_directions_from">Tinilwin seg</string>
     <string name="street_name">Isem n webrid</string>
@@ -468,7 +468,7 @@
     <string name="home">Tafelwit n usenqed</string>
     <string name="rendering_attr_moreDetailed_name">Ugar n telqayt</string>
     <string name="sort_by_name">Smizzwer s yisem</string>
-    <string name="map_widget_plain_time">Tasaɛet imir-a</string>
+    <string name="map_widget_plain_time">Akud amiran</string>
     <string name="selected_gpx_info_show">"
 \n
 \nAsiti ɣezzifen akken ad d-sekneḍ ɣef tkarḍa"</string>
@@ -505,7 +505,7 @@
     <string name="distance_measurement_start_editing">Bdu taẓrigt</string>
     <string name="other_location">Nniḍen</string>
     <string name="website">Asmel n web</string>
-    <string name="prefer_in_routing_title">Smenyifi …</string>
+    <string name="prefer_in_routing_title">Smenyif…</string>
     <string name="recording_unavailable">ulac</string>
     <string name="recording_context_menu_play">Urar</string>
     <string name="poi_filter_parking">Aneɣsar</string>
@@ -1143,8 +1143,8 @@
     <string name="local_openstreetmap_delete">Kkes</string>
     <string name="local_openstreetmap_uploadall">Ali</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/Tizmilin ulin</string>
-    <string name="arrival_distance_factor_late">Aneḍru yettwaheggan iɛedda fell-as lḥal</string>
-    <string name="arrival_distance_factor_early">Détection SKIP précoce sur images P</string>
+    <string name="arrival_distance_factor_late">Iɛedda lḥal</string>
+    <string name="arrival_distance_factor_early">Zik</string>
     <string name="no_info">talɣut</string>
     <string name="front_left">ɣer zdat</string>
     <string name="zoomIs">Seggem aswir n usemɣer/asemẓi</string>
@@ -1153,8 +1153,8 @@
     <string name="map_widget_next_turn">ar zdat</string>
     <string name="map_widget_monitoring">Aɣmis</string>
     <string name="int_continuosly">A_maɣlal</string>
-    <string name="avoid_in_routing_title">Zgel tulsa n wawalen d yisekkilen.</string>
-    <string name="show_warnings_title">Ilɣa</string>
+    <string name="avoid_in_routing_title">Zgel…</string>
+    <string name="show_warnings_title">Sken ilɣa…</string>
     <string name="poi_filter_food_shop">Tuččit</string>
     <string name="poi_filter_emergency">Annar n trusi n utrab</string>
     <string name="btn_advanced_mode">Talqayt…</string>
@@ -1197,7 +1197,7 @@
     <string name="traffic_warning_stop">Seḥbes</string>
     <string name="search_radius_proximity">Deg</string>
     <string name="configure_map">Swel…</string>
-    <string name="map_widget_left">Tafelwit n yiri, tattayt, ukessar, ufella, ɣumm, tiddi, amrussu</string>
+    <string name="map_widget_left">Agalis azelmaḍ</string>
     <string name="download_tab_downloads">Sken akkw isidar</string>
     <string name="rendering_attr_roadStyle_description">Aɣanib:</string>
     <string name="rendering_attr_roadStyle_name">Aɣanib:</string>
@@ -1329,4 +1329,13 @@
     <string name="select_track_width">Fren tehri</string>
     <string name="gpx_direction_arrows">Ineccaben n tnila</string>
     <string name="plan_route_create_new_route">Rnu abrid amaynut</string>
+    <string name="default_speed_system">Tayunt n urured</string>
+    <string name="screen_alerts">Ilɣa n ugdil</string>
+    <string name="fast_route_mode">Abrid arurad akk</string>
+    <string name="arrival_distance_factor_at_last">Deg lmitrat tineggura</string>
+    <string name="speak_speed_limit">Talast n urured</string>
+    <string name="show_lanes">Izirigen</string>
+    <string name="layer_map_appearance">Swel agdil</string>
+    <string name="map_widget_right">Agalis ayeffus</string>
+    <string name="map_widget_appearance_rem">Iferdisen i d-iqqimen</string>
 </resources>
