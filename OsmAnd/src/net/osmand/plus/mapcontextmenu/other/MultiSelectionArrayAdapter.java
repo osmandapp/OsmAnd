@@ -16,11 +16,14 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 
 import java.util.List;
+
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.convertDisplayNameToGroupIdName;
 
 public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMenu.MenuObject> {
 
@@ -92,25 +95,15 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
 			line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(menu.getMapActivity(), 5f));
 
-			//set color for 2
-			/*
-			FavouritesDbHelper.FavoriteGroup currentFavoriteGroup = null;
-			OsmandApplication app = item.getMyApplication();
-			if (app != null && app.getFavorites().getGroup(item.getTypeStr().toLowerCase()) != null){
-				currentFavoriteGroup = app.getFavorites().getGroup(item.getTypeStr().toLowerCase());
-			}
-			if (item.getPointDescription().isFavorite() && currentFavoriteGroup != null){
-				FavouritesDbHelper.FavoriteGroup favoriteGroup =
-						app.getFavorites().getGroup(item.getTypeStr().toLowerCase());
-				if (favoriteGroup != null) {
-					int color = favoriteGroup.getColor() == 0 ?
-							convertView.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
-					ColorFilter colorFilter =
-							new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-					if (icon != null) icon.setColorFilter(colorFilter);
+			String groupName = convertDisplayNameToGroupIdName(getContext(),
+					item.getTypeStr());
+			if (item.getMyApplication() != null){
+				FavouritesDbHelper helper = item.getMyApplication().getFavorites();
+				if (helper != null){
+					Drawable line2icon = helper.setColoredIconForGroup(groupName);
+					line2.setCompoundDrawablesWithIntrinsicBounds(line2icon, null, null, null);
 				}
-			}*/
-
+			}
 			// Divider
 			View divider = convertView.findViewById(R.id.divider);
 			divider.setBackgroundColor(ContextCompat.getColor(getContext(), menu.isLight() ? R.color.multi_selection_menu_divider_light : R.color.multi_selection_menu_divider_dark));

@@ -94,6 +94,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.convertDisplayNameToGroupIdName;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
 
@@ -1825,7 +1826,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					Drawable icon = menu.getTypeIcon();
 					AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
 							line2, icon, null, null, null);
-					setColoredIconForGroup(line2,menu.getTypeStr());
+					String groupName = convertDisplayNameToGroupIdName(requireContext(),
+							menu.getTypeStr());
+					if (menu.getMyApplication() != null){
+						FavouritesDbHelper helper = menu.getMyApplication().getFavorites();
+						if (helper != null){
+							Drawable line2icon = helper.setColoredIconForGroup(groupName);
+							line2.setCompoundDrawablesWithIntrinsicBounds(line2icon, null, null, null);
+						}
+					}
 					line2.setCompoundDrawablePadding(dpToPx(5f));
 				}
 				if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {
@@ -1884,26 +1893,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		updateCompassVisibility();
 		updateAdditionalInfoVisibility();
-	}
-
-	private void setColoredIconForGroup(TextView line2, String groupName) {
-		OsmandApplication app = getMyApplication();
-		if (app != null){
-			FavouritesDbHelper helper = app.getFavorites();
-			if (helper != null){
-				FavouritesDbHelper.FavoriteGroup favoriteGroup = app.getFavorites()
-						.getGroup(
-								FavouritesDbHelper.FavoriteGroup.
-										convertDisplayNameToGroupIdName(
-												requireContext(),groupName));
-				if (favoriteGroup != null) {
-					int color = favoriteGroup.getColor() == 0 ? view.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
-					line2.setCompoundDrawablesWithIntrinsicBounds(
-							app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color),
-							null,null,null);
-				}
-			}
-		}
 	}
 
 	private void updateCompassVisibility() {

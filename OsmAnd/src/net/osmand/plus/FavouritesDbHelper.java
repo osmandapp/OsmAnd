@@ -2,6 +2,8 @@ package net.osmand.plus;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -126,6 +128,19 @@ public class FavouritesDbHelper {
 			}
 			return name;
 		}
+	}
+
+	public Drawable setColoredIconForGroup(String groupName) {
+		FavouritesDbHelper.FavoriteGroup favoriteGroup = this.getGroup(
+				FavouritesDbHelper.FavoriteGroup.
+						convertDisplayNameToGroupIdName(
+								this.context, groupName));
+		if (favoriteGroup != null) {
+			int color = favoriteGroup.getColor() == 0 ?
+					this.context.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
+			return this.context.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color);
+		}
+		return null;
 	}
 
 	public int getColorWithCategory(FavouritePoint point, int defaultColor) {
@@ -884,7 +899,7 @@ public class FavouritesDbHelper {
 	private static final String FAVOURITE_COL_LAT = "latitude"; //$NON-NLS-1$
 	private static final String FAVOURITE_COL_LON = "longitude"; //$NON-NLS-1$
 	private static final String FAVOURITE_TABLE_CREATE = "CREATE TABLE " + FAVOURITE_TABLE_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
-			FAVOURITE_COL_NAME + " TEXT, " + FAVOURITE_COL_CATEGORY + " TEXT, " + //$NON-NLS-1$ //$NON-NLS-2$ 
+			FAVOURITE_COL_NAME + " TEXT, " + FAVOURITE_COL_CATEGORY + " TEXT, " + //$NON-NLS-1$ //$NON-NLS-2$
 			FAVOURITE_COL_LAT + " double, " + FAVOURITE_COL_LON + " double);"; //$NON-NLS-1$ //$NON-NLS-2$
 	private SQLiteConnection conn;
 
@@ -925,7 +940,7 @@ public class FavouritesDbHelper {
 				try {
 					SQLiteCursor query = db
 							.rawQuery(
-									"SELECT " + FAVOURITE_COL_NAME + ", " + FAVOURITE_COL_CATEGORY + ", " + FAVOURITE_COL_LAT + "," + FAVOURITE_COL_LON + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
+									"SELECT " + FAVOURITE_COL_NAME + ", " + FAVOURITE_COL_CATEGORY + ", " + FAVOURITE_COL_LAT + "," + FAVOURITE_COL_LON + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 											FAVOURITE_TABLE_NAME, null);
 					cachedFavoritePoints.clear();
 					if (query != null && query.moveToFirst()) {
