@@ -44,7 +44,7 @@
 
     <dimen name="subHeaderPadding">2dp</dimen>
     <dimen name="subHeaderMarginLeft">15dp</dimen>
-		<dimen name = "subHeaderMarginRight">15dp</dimen>
+	<dimen name="subHeaderMarginRight">15dp</dimen>
     <dimen name="showAllButtonMarginRight">14dp</dimen>
     <dimen name="showAllButtonHeight">36dp</dimen>
     <dimen name="dashFavIconSize">28dp</dimen>
@@ -396,4 +396,7 @@
 	<dimen name="info_description_line_spacing_multiplier" format="float">1.4</dimen>
 
 	<dimen name="screen_alert_big_warning_icon_size">92dp</dimen>
+
+	<dimen name="radioButtonSize">32dp</dimen>
+	<dimen name="checkBoxSize">24dp</dimen>
 </resources>
