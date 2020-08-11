@@ -514,14 +514,13 @@ public class UiUtilities {
 	public static void setupToolbarOverflowIcon(Toolbar toolbar, @DrawableRes int iconId, @ColorRes int colorId) {
 		Context ctx = toolbar.getContext();
 		if (ctx != null) {
-			return;
-		}
-		Drawable icon = ContextCompat.getDrawable(ctx, iconId);
-		toolbar.setOverflowIcon(icon);
-		if (icon != null) {
-			int color = ContextCompat.getColor(ctx, colorId);
-			DrawableCompat.setTint(icon.mutate(), color);
+			Drawable icon = ContextCompat.getDrawable(ctx, iconId);
 			toolbar.setOverflowIcon(icon);
+			if (icon != null) {
+				int color = ContextCompat.getColor(ctx, colorId);
+				DrawableCompat.setTint(icon.mutate(), color);
+				toolbar.setOverflowIcon(icon);
+			}
 		}
 	}
 
