@@ -36,6 +36,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
@@ -547,6 +548,19 @@ public class UiUtilities {
 		compoundButton.setBackgroundColor(Color.TRANSPARENT);
 	}
 
+	public static void setupToolbarOverflowIcon(Toolbar toolbar, @DrawableRes int iconId, @ColorRes int colorId) {
+		Context ctx = toolbar.getContext();
+		if (ctx != null) {
+			Drawable icon = ContextCompat.getDrawable(ctx, iconId);
+			toolbar.setOverflowIcon(icon);
+			if (icon != null) {
+				int color = ContextCompat.getColor(ctx, colorId);
+				DrawableCompat.setTint(icon.mutate(), color);
+				toolbar.setOverflowIcon(icon);
+			}
+		}
+	}
+
 	public static ViewGroup createSliderView(@NonNull Context ctx, boolean nightMode) {
 		return (ViewGroup) getInflater(ctx, nightMode).inflate(R.layout.slider, null, false);
 	}
@@ -690,14 +704,6 @@ public class UiUtilities {
 				buttonTextView.setCompoundDrawablePadding(AndroidUtils.dpToPx(ctx, ctx.getResources().getDimension(R.dimen.content_padding_half)));
 			}
 		}
-	}
-
-	public static LayoutInflater getMaterialInflater(Context ctx, boolean nightMode) {
-		return LayoutInflater.from(getThemedMaterialContext(ctx, nightMode));
-	}
-
-	private static Context getThemedMaterialContext(Context context, boolean nightMode) {
-		return getThemedContext(context, nightMode, R.style.OsmandMaterialLightTheme, R.style.OsmandMaterialDarkTheme);
 	}
 
 	public static LayoutInflater getInflater(Context ctx, boolean nightMode) {

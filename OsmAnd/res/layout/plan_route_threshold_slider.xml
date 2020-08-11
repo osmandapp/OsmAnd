@@ -37,7 +37,6 @@
 
 	<com.google.android.material.slider.Slider
 		android:id="@+id/slider"
-		style="@style/Widget.Styled.Slider"
 		android:layout_marginLeft="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"
 		android:layout_width="match_parent"

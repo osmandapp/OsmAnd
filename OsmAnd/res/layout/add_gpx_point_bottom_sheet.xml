@@ -33,8 +33,8 @@
             android:layout_marginRight="@dimen/content_padding"
             android:layout_marginTop="@dimen/content_padding"
             tools:text="@string/waypoint_one"
-	        android:layout_marginEnd="@dimen/content_padding"
-	        android:layout_marginStart="@dimen/content_padding" />
+            android:layout_marginEnd="@dimen/content_padding"
+            android:layout_marginStart="@dimen/content_padding" />
 
         <TextView
             android:id="@+id/description"
@@ -46,8 +46,8 @@
             android:layout_marginRight="@dimen/content_padding"
             android:layout_marginTop="@dimen/content_padding_half"
             tools:text="Lat: 50.45375\nLon: 30.48693"
-	        android:layout_marginEnd="@dimen/content_padding"
-	        android:layout_marginStart="@dimen/content_padding" />
+            android:layout_marginEnd="@dimen/content_padding"
+            android:layout_marginStart="@dimen/content_padding" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -55,20 +55,26 @@
             android:layout_marginBottom="@dimen/content_padding"
             android:layout_marginLeft="@dimen/content_padding_small"
             android:layout_marginRight="@dimen/content_padding_small"
-	        android:layout_marginStart="@dimen/content_padding_small"
-	        android:layout_marginEnd="@dimen/content_padding_small">
+            android:layout_marginStart="@dimen/content_padding_small"
+            android:layout_marginEnd="@dimen/content_padding_small">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/create_button"
-                style="@style/DialogActionButton"
-                android:layout_marginRight="@dimen/content_padding_half"
-                android:text="@string/shared_string_add"
-	            android:layout_marginEnd="@dimen/content_padding_half" />
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/shared_string_add" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/cancel_button"
-                style="@style/DialogCancelButton"
-                android:text="@string/shared_string_cancel"/>
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:layout_marginRight="@dimen/content_padding"
+                android:text="@string/shared_string_cancel" />
         </LinearLayout>
 
 

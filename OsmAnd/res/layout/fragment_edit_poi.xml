@@ -90,10 +90,13 @@
                     android:layout_weight="1"
                     android:layout_marginStart="24dp">
 
-                    <AutoCompleteTextView
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/poiTypeEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:minHeight="@dimen/wpt_list_item_height"
+                        android:gravity="bottom|start"
+                        android:paddingBottom="@dimen/text_margin_small"
                         android:completionThreshold="1"
                         app:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
                         app:drawableEndCompat="@drawable/ic_action_arrow_drop_down"

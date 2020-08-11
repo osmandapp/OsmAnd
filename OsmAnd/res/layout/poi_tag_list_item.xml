@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,14 +13,17 @@
         android:layout_marginLeft="@dimen/content_padding_small"
         android:layout_marginRight="@dimen/content_padding"
         android:layout_weight="1"
-	    android:layout_marginStart="@dimen/content_padding_small"
-	    android:layout_marginEnd="@dimen/content_padding">
+        android:layout_marginStart="@dimen/content_padding_small"
+        android:layout_marginEnd="@dimen/content_padding">
 
-        <AutoCompleteTextView
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/tagEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="@dimen/wpt_list_item_height"
             android:hint="@string/hint_tag"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/text_margin_small"
             tools:text="Tag text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -31,11 +33,15 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
-        <AutoCompleteTextView
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/valueEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_value"/>
+            android:minHeight="@dimen/wpt_list_item_height"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/text_margin_small"
+            android:hint="@string/hint_value"
+            tools:text="Value text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
