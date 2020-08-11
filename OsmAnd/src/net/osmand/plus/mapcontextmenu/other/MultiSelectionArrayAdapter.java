@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 
@@ -86,6 +91,25 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			Drawable slIcon = item.getTypeIcon();
 			line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
 			line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(menu.getMapActivity(), 5f));
+
+			//set color for 2
+			/*
+			FavouritesDbHelper.FavoriteGroup currentFavoriteGroup = null;
+			OsmandApplication app = item.getMyApplication();
+			if (app != null && app.getFavorites().getGroup(item.getTypeStr().toLowerCase()) != null){
+				currentFavoriteGroup = app.getFavorites().getGroup(item.getTypeStr().toLowerCase());
+			}
+			if (item.getPointDescription().isFavorite() && currentFavoriteGroup != null){
+				FavouritesDbHelper.FavoriteGroup favoriteGroup =
+						app.getFavorites().getGroup(item.getTypeStr().toLowerCase());
+				if (favoriteGroup != null) {
+					int color = favoriteGroup.getColor() == 0 ?
+							convertView.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
+					ColorFilter colorFilter =
+							new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+					if (icon != null) icon.setColorFilter(colorFilter);
+				}
+			}*/
 
 			// Divider
 			View divider = convertView.findViewById(R.id.divider);

@@ -45,10 +45,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -57,6 +59,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -169,7 +172,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private int screenOrientation;
 	private boolean created;
-	
+
 	private boolean transportBadgesCreated;
 
 	private UpdateLocationViewCache updateLocationViewCache;
@@ -783,7 +786,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		return false;
 	}
-	
+
 	private float getToolbarAlpha(int y) {
 		float a = 0;
 		if (menu != null && !menu.isLandscapeLayout()) {
@@ -1149,7 +1152,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					Typeface typeface = FontCache.getRobotoRegular(context);
 					title.setSpan(new CustomTypefaceSpan(typeface), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 					title.setSpan(new ForegroundColorSpan(
-							ContextCompat.getColor(context, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light)),
+									ContextCompat.getColor(context, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light)),
 							startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				}
 				setupButton(leftTitleButtonView, leftTitleButtonController.enabled, title);
@@ -1623,7 +1626,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			return dpToPx(32);
 		}
 	}
-	
+
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	private void runLayoutListener() {
 		if (view != null) {
@@ -1806,7 +1809,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
 			line1.setText(menu.getTitleStr());
 			toolbarTextView.setText(menu.getTitleStr());
-
 			// Text line 2
 			LinearLayout line2layout = (LinearLayout) view.findViewById(R.id.context_menu_line2_layout);
 			TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
@@ -1819,14 +1821,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				StringBuilder line2Str = new StringBuilder();
 				if (!Algorithms.isEmpty(typeStr)) {
 					line2Str.append(typeStr);
+
 					Drawable icon = menu.getTypeIcon();
-					ColorFilter colorFilter = new PorterDuffColorFilter(
-							ContextCompat.getColor(requireContext(), menu.getAdditionalInfoColor()),
-							PorterDuff.Mode.SRC_ATOP);
-					icon.setColorFilter(colorFilter);
 					AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
 							line2, icon, null, null, null);
-					line2.setCompoundDrawablePadding(dpToPx(5f)); // TODO here 2
+					setColoredIconForGroup(line2,menu.getTypeStr());
+					line2.setCompoundDrawablePadding(dpToPx(5f));
 				}
 				if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {
 					if (line2Str.length() > 0) {
@@ -1884,6 +1884,26 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		updateCompassVisibility();
 		updateAdditionalInfoVisibility();
+	}
+
+	private void setColoredIconForGroup(TextView line2, String groupName) {
+		OsmandApplication app = getMyApplication();
+		if (app != null){
+			FavouritesDbHelper helper = app.getFavorites();
+			if (helper != null){
+				FavouritesDbHelper.FavoriteGroup favoriteGroup = app.getFavorites()
+						.getGroup(
+								FavouritesDbHelper.FavoriteGroup.
+										convertDisplayNameToGroupIdName(
+												requireContext(),groupName));
+				if (favoriteGroup != null) {
+					int color = favoriteGroup.getColor() == 0 ? view.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
+					line2.setCompoundDrawablesWithIntrinsicBounds(
+							app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color),
+							null,null,null);
+				}
+			}
+		}
 	}
 
 	private void updateCompassVisibility() {
