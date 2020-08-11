@@ -5,6 +5,9 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -1817,9 +1820,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				if (!Algorithms.isEmpty(typeStr)) {
 					line2Str.append(typeStr);
 					Drawable icon = menu.getTypeIcon();
+					ColorFilter colorFilter = new PorterDuffColorFilter(
+							ContextCompat.getColor(requireContext(), menu.getAdditionalInfoColor()),
+							PorterDuff.Mode.SRC_ATOP);
+					icon.setColorFilter(colorFilter);
 					AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
 							line2, icon, null, null, null);
-					line2.setCompoundDrawablePadding(dpToPx(5f));
+					line2.setCompoundDrawablePadding(dpToPx(5f)); // TODO here 2
 				}
 				if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {
 					if (line2Str.length() > 0) {
