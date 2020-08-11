@@ -68,7 +68,7 @@ import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.BaseMapLayer;
-import net.osmand.plus.views.MapControlsLayer;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;

@@ -37,7 +37,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -526,13 +526,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	String getFormattedTime(long timeInMillis) {
-		Time time = new Time();
-		time.set(timeInMillis);
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd.MM.yyyy", Locale.getDefault());
-		if (!DateFormat.is24HourFormat(app)) {
-			sdf = new SimpleDateFormat("hh:mm a dd.MM.yyyy", Locale.getDefault());
-		}
-		return sdf.format(new Date(time.toMillis(false)));
+		java.text.DateFormat dateFormat = DateFormat.getMediumDateFormat(app);
+		java.text.DateFormat timeFormat = DateFormat.getTimeFormat(app);
+		return timeFormat.format(timeInMillis) + " " + dateFormat.format(timeInMillis);
 	}
 
 	String getFormattedTimeInterval(long timeInMillis, Activity ctx) {

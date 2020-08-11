@@ -933,7 +933,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void setupPrefRoundedBg(PreferenceViewHolder holder) {
 		View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
 		if (selectableView != null) {
-			int color = AndroidUtils.getColorFromAttr(app, R.attr.activity_background_color);
+			int color = AndroidUtils.getColorFromAttr(holder.itemView.getContext(), R.attr.activity_background_color);
 			int selectedColor = UiUtilities.getColorWithAlpha(getActiveProfileColor(), 0.3f);
 
 			Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);

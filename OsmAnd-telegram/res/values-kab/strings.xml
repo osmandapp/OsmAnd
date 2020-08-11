@@ -70,7 +70,7 @@
     <string name="saved_messages">Iznan yettwaskelsen</string>
     <string name="unit_of_speed_system">Tayunt n urured</string>
     <string name="unit_of_speed_system_descr">Ad isbadu tayunt n urured.</string>
-    <string name="unit_of_length">Tayunin n umeccaq</string>
+    <string name="unit_of_length">Tayunin n teɣzef</string>
     <string name="unit_of_length_descr">Beddel tayunt n uktili n umeccaq.</string>
     <string name="units_and_formats">Tayunin d yimasalen</string>
     <string name="time_zone_descr">Fren izḍi usrig ara d-tsekneḍ deg yiznan-ik n usideg.</string>
@@ -137,7 +137,7 @@
     <string name="shared_string_group">Agraw</string>
     <string name="last_response">Dernier temps de réponse</string>
     <string name="time_ago">aya</string>
-    <string name="shared_string_exit">Tufɣa</string>
+    <string name="shared_string_exit">Tuffɣa</string>
     <string name="shared_string_sort">Smizzwer</string>
     <string name="by_name">S yisem</string>
     <string name="share_location_as">Bḍu adɣar</string>

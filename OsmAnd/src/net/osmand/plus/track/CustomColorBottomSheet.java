@@ -79,7 +79,7 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 	}
 
 	private View createPickerView() {
-		LayoutInflater themedInflater = UiUtilities.getMaterialInflater(getActivity(), nightMode);
+		LayoutInflater themedInflater = UiUtilities.getInflater(getActivity(), nightMode);
 		View colorView = themedInflater.inflate(R.layout.custom_color_picker, null);
 		colorPicker = colorView.findViewById(R.id.color_picker_view);
 		newColorPanel = colorView.findViewById(R.id.color_panel_new);

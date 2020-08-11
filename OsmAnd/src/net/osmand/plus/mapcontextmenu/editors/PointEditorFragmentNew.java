@@ -101,7 +101,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 		app = requireMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		view = UiUtilities.getMaterialInflater(getContext(), nightMode)
+		view = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.point_editor_fragment_new, container, false);
 		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 

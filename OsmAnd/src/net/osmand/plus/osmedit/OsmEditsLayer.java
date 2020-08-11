@@ -19,7 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 

@@ -230,7 +230,7 @@
     <string name="search_position_current_location_found">Moja poloha (nájdená)</string>
     <string name="search_position_address">Adresa…</string>
     <string name="search_position_favorites">Obľúbené miesta…</string>
-    <string name="search_position_undefined">Neurčené</string>
+    <string name="shared_string_undefined">Neurčené</string>
     <string name="search_position_map_view">Stred mapy teraz</string>
     <string name="select_search_position">Východzí bod:</string>
     <string name="context_menu_item_search">Hľadať v okolí</string>
@@ -3839,4 +3839,17 @@
     <string name="plan_route_select_track_file_for_open">Zvoľte súbor so stopou na otvorenie.</string>
     <string name="shared_string_done">Hotovo</string>
     <string name="overwrite_track">Prepísať stopu</string>
+    <string name="save_as_new_track">Uložiť ako novú stopu</string>
+    <string name="reverse_route">Otočiť trasu</string>
+    <string name="rourte_between_points_whole_track_button_desc">Celá stopa bude prepočítaná pomocou zvoleného profilu.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Len nasledujúci úsek bude prepočítaný pomocou zvoleného profilu.</string>
+    <string name="rourte_between_points_desc">Zvoľte ako spojiť body, priamou čiarou alebo vypočítať trasu medzi nimi pomocou zvoleného profilu.</string>
+    <string name="whole_track">Celá stopa</string>
+    <string name="next_segment">Ďalší úsek</string>
+    <string name="rourte_between_points_warning_desc">Pre použitie tejto možnosti musí OsmAnd prichytiť vašu stopu na cesty v mape.
+\n
+\n V ďalšom kroku budete musieť zvoliť navigačný profil pre detekciu povolených ciest a hraničnú vzdialenosť pre aproximovanie vašej stopy cestami.</string>
+    <string name="threshold_distance">Hraničná vzdialenosť</string>
+    <string name="navigation_profile">Navigačný profil</string>
+    <string name="rourte_between_points_add_track_desc">Zvoľte súbor stopy, pre ktorú bude pridaný nový úsek.</string>
 </resources>

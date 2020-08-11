@@ -142,7 +142,8 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			sqliteDB = savedInstanceState.getBoolean(SQLITE_DB_KEY);
 			fromTemplate = savedInstanceState.getBoolean(FROM_TEMPLATE_KEY);
 		}
-		View root = UiUtilities.getMaterialInflater(requireContext(), nightMode).inflate(R.layout.fragment_edit_map_source, container, false);
+		View root = UiUtilities.getInflater(requireContext(), nightMode)
+				.inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
 		toolbar.setTitleTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light));
@@ -491,7 +492,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void addConfigurationItems(ConfigurationItem... items) {
-		LayoutInflater inflater = UiUtilities.getMaterialInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		for (ConfigurationItem item : items) {
 			View view = inflater.inflate(R.layout.list_item_ui_customization, null);
 			((ImageView) view.findViewById(R.id.icon)).setImageDrawable(app.getUIUtilities().getIcon(item.iconRes, nightMode));

@@ -64,7 +64,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	@SuppressLint("ClickableViewAccessibility")
 	private BaseBottomSheetItem createBottomSheetItem(OsmandApplication app) {
 		final SizePreference preference = (SizePreference) getPreference();
-		View mainView = UiUtilities.getMaterialInflater(getContext(), nightMode)
+		View mainView = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_edit_with_recyclerview, null);
 		TextView title = mainView.findViewById(R.id.title);
 		title.setText(preference.getTitle().toString());

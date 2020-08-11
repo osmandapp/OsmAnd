@@ -31,7 +31,7 @@ import net.osmand.plus.search.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchFreeBannerListItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.layers.DownloadedRegionsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;

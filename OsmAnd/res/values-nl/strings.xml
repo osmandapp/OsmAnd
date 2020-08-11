@@ -656,7 +656,7 @@
     <string name="search_position_current_location_found">Huidige Positie (gevonden)</string>
     <string name="search_position_address">Adres…</string>
     <string name="search_position_favorites">Favorieten…</string>
-    <string name="search_position_undefined">Ongedefinieerd</string>
+    <string name="shared_string_undefined">Ongedefinieerd</string>
     <string name="local_index_routing_data">Navigatiedata</string>
     <string name="navigate_point_format">Formaat</string>
     <string name="poi_search_desc">Zoek POI (interessepunt)</string>

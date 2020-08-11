@@ -31,7 +31,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
@@ -181,7 +181,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(MAPILLARY)
-				.setTitleId(R.string.mapillary, mapActivity)
+				.setTitleId(R.string.street_level_imagery, mapActivity)
+				.setDescription("Mapillary")
 				.setSelected(settings.SHOW_MAPILLARY.get())
 				.setColor(settings.SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_mapillary)

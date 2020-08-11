@@ -130,7 +130,6 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 	}
 
 	protected class PluginsListAdapter extends ArrayAdapter<Object> {
-
 		PluginsListAdapter() {
 			super(PluginsActivity.this, R.layout.plugins_list_item, new ArrayList<>());
 			addAll(getMyApplication().getAidlApi().getConnectedApps());
@@ -193,7 +192,7 @@ public class PluginsActivity extends OsmandListActivity implements DownloadIndex
 				AndroidUtils.removeLinkUnderline(pluginDescription);
 
 				OsmandApplication app = getMyApplication();
-				int color = AndroidUtils.getColorFromAttr(app, R.attr.list_background_color);
+				int color = AndroidUtils.getColorFromAttr(PluginsActivity.this, R.attr.list_background_color);
 				pluginLogo.setImageDrawable(UiUtilities.tintDrawable(plugin.getLogoResource(), color));
 				pluginLogo.setOnClickListener(new View.OnClickListener() {
 					@Override

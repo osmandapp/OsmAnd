@@ -574,7 +574,7 @@
     <string name="search_position_current_location_found">Nire kokapena (aurkitua)</string>
     <string name="search_position_address">Helbidea…</string>
     <string name="search_position_favorites">Gogokoak…</string>
-    <string name="search_position_undefined">Indefinitua</string>
+    <string name="shared_string_undefined">Indefinitua</string>
     <string name="search_position_map_view">Uneko maparen zentroa</string>
     <string name="select_search_position">Jatorria:</string>
     <string name="context_menu_item_search">Bilatu inguruan</string>

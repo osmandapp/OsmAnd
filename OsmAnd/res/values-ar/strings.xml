@@ -666,7 +666,7 @@
     <string name="search_position_current_location_found">موقعي ( تم تحديده )</string>
     <string name="search_position_address">عنوان…</string>
     <string name="search_position_favorites">المفضلة…</string>
-    <string name="search_position_undefined">غير محدد</string>
+    <string name="shared_string_undefined">غير محدد</string>
     <string name="search_position_map_view">مركز الخريطة الحالي</string>
     <string name="select_search_position">المنطلق:</string>
     <string name="context_menu_item_search">بحث بالجوار</string>
@@ -3154,7 +3154,7 @@
     <string name="list_of_installed_plugins">الإضافات المثبتة</string>
     <string name="configure_navigation">تكوين الملاحة</string>
     <string name="general_settings_profile_descr">ثيم التطبيق ، وحدات ، المنطقة</string>
-    <string name="configure_profile">إعداد الوضع</string>
+    <string name="configure_profile">تكوين ملف التعريف</string>
     <string name="screen_alerts_descr">تظهر التنبيهات في أسفل اليسار أثناء التنقل.</string>
     <string name="switch_profile">تبديل الوضع</string>
     <string name="language_and_output">اللغة والإخراج</string>
@@ -3401,10 +3401,10 @@
     <string name="edit_profiles_descr">لا يمكنك حذف أوضاع أوسماند الافتراضية ، ولكن يمكنك تعطيلها في الشاشة السابقة ، أو نقلها إلى الأسفل.</string>
     <string name="edit_profiles">تحرير الأوضاع</string>
     <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على قواعد حسابات المسار.</string>
-    <string name="profile_appearance">مظهر الوضع</string>
+    <string name="profile_appearance">مظهر الملف الشخصي</string>
     <string name="choose_icon_color_name">اختر الايقونة واللون والاسم</string>
     <string name="reorder_profiles">تحرير قائمة الأوضاع</string>
-    <string name="selected_profile">الوضع المحدد</string>
+    <string name="selected_profile">الملف الشخصي المحدد</string>
     <string name="reset_confirmation_descr">بالضغط على %1$s، ستفقد كل تغييراتك.</string>
     <string name="reset_all_profile_settings_descr">سيتم إعادة ضبط جميع إعدادات الوضع إلى الحالة الافتراضية بعد التثبيت.</string>
     <string name="reset_all_profile_settings">استعادة الضبط الافتراضي؟</string>
@@ -3829,4 +3829,17 @@
     <string name="plan_route_select_track_file_for_open">حدد ملف المسار للفتح.</string>
     <string name="shared_string_done">تم</string>
     <string name="overwrite_track">الكتابة فوق المسار</string>
+    <string name="navigation_profile">ملف تعريف التنقل</string>
+    <string name="rourte_between_points_add_track_desc">حدد ملف المسار الذي سيتم إضافة مقطع جديد إليه.</string>
+    <string name="save_as_new_track">حفظ كمسار جديد</string>
+    <string name="reverse_route">عكس الطريق</string>
+    <string name="rourte_between_points_whole_track_button_desc">سيتم إعادة حساب المقطع التالي فقط باستخدام ملف التعريف المحدد.</string>
+    <string name="rourte_between_points_next_segment_button_desc">سيتم إعادة حساب المقطع التالي فقط باستخدام ملف التعريف المحدد.</string>
+    <string name="rourte_between_points_desc">حدد كيفية توصيل النقاط، بخط مستقيم، أو حساب مسار بينها مع ملف التعريف المحدد.</string>
+    <string name="whole_track">مسار كامل</string>
+    <string name="next_segment">المقطع التالي</string>
+    <string name="rourte_between_points_warning_desc">لاستخدام هذا الخيارتحتاج إلى محاذاة المسار الخاص بك إلى خريطة الطرق.
+\n
+\nفي الخطوة التالية ، ستحتاج إلى تحديد ملف تعريف الملاحة لاكتشاف الطرق المسموح بها وبداية المسافة لتقريب تتبعك بالطرق.</string>
+    <string name="threshold_distance">بداية المسافة</string>
 </resources>

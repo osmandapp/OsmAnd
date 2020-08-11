@@ -346,7 +346,7 @@
     <string name="search_position_current_location_found">המיקום שלי (נמצא)</string>
     <string name="search_position_address">כתובת…</string>
     <string name="search_position_favorites">מועדפים…</string>
-    <string name="search_position_undefined">בלתי מוגדר</string>
+    <string name="shared_string_undefined">בלתי מוגדר</string>
     <string name="search_position_map_view">מרכז המפה הנוכחי</string>
     <string name="select_search_position">מקור:</string>
     <string name="context_menu_item_search">חיפוש בסביבת מקום</string>
@@ -1515,7 +1515,7 @@
     <string name="traffic_warning_border_control">ביקורת גבולות</string>
     <string name="traffic_warning_payment">עמדת תשלום</string>
     <string name="traffic_warning_stop">סימן עצור</string>
-    <string name="traffic_warning_calming">פסי האטה</string>
+    <string name="traffic_warning_calming">צינון תנועה</string>
     <string name="traffic_warning_speed_camera">מצלמת מהירות</string>
     <string name="traffic_warning">אזהרת תנועה</string>
     <string name="speak_favorites">מועדפים בסביבה</string>
@@ -3847,4 +3847,11 @@
     <string name="plan_route_select_track_file_for_open">נא לבחור קובץ מסלול לפתיחה.</string>
     <string name="shared_string_done">בוצע</string>
     <string name="overwrite_track">שכתוב מסלול</string>
+    <string name="save_as_new_track">שמירה כמסלול חדש</string>
+    <string name="reverse_route">היפוך המסלול</string>
+    <string name="whole_track">מסלול שלם</string>
+    <string name="next_segment">המקטע הבא</string>
+    <string name="threshold_distance">סף מרחק</string>
+    <string name="navigation_profile">פרופיל ניווט</string>
+    <string name="rourte_between_points_add_track_desc">נא לבחור קובץ מסלול שבו יתווסף המקטע החדש.</string>
 </resources>

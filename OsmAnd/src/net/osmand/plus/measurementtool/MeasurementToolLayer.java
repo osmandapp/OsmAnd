@@ -16,10 +16,11 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
+import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -246,7 +247,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					ty.add(locY);
 				}
 
-				calculatePath(tb, tx, ty, path);
+				GeometryWay.calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
 			}
 

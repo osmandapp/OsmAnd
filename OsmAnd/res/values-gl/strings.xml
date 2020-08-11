@@ -852,7 +852,7 @@
     <string name="search_position_current_location_found">A miña posición (atopada)</string>
     <string name="search_position_address">Enderezo…</string>
     <string name="search_position_favorites">Favoritos…</string>
-    <string name="search_position_undefined">Sen definir</string>
+    <string name="shared_string_undefined">Sen definir</string>
     <string name="search_position_map_view">Centro do mapa actual</string>
     <string name="select_search_position">Orixe:</string>
     <string name="context_menu_item_search">Procurar preto daquí</string>

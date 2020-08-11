@@ -377,7 +377,7 @@
     <string name="search_position_current_location_found">我的位置 (找到)</string>
     <string name="search_position_address">地址…</string>
     <string name="search_position_favorites">我的收藏…</string>
-    <string name="search_position_undefined">未定義</string>
+    <string name="shared_string_undefined">未定義</string>
     <string name="search_position_map_view">目前的地圖中心</string>
     <string name="select_search_position">起點：</string>
     <string name="context_menu_item_search">在附近查尋</string>
@@ -1287,7 +1287,7 @@
     <string name="traffic_warning_border_control">邊境管制</string>
     <string name="traffic_warning_payment">收費站</string>
     <string name="traffic_warning_stop">停車標誌</string>
-    <string name="traffic_warning_calming">減速丘</string>
+    <string name="traffic_warning_calming">交通寧靜區</string>
     <string name="traffic_warning_speed_camera">測速照相</string>
     <string name="traffic_warning">交通流量警示</string>
     <string name="local_index_description">輕點任何現有的項目，查看更詳細的資訊，長按則停用或刪除。裝置上目前的資料有 (%1$s 可用)：</string>
@@ -3412,7 +3412,7 @@
     <string name="edit_profiles_descr">OsmAnd 預設的設定檔無法被刪除，但可以被停用（在前一個畫面），或被排到底部。</string>
     <string name="edit_profiles">編輯設定檔</string>
     <string name="select_nav_profile_dialog_message">「導航類型」會控制路徑的計算方式。</string>
-    <string name="profile_appearance">設定外觀</string>
+    <string name="profile_appearance">設定檔外觀</string>
     <string name="choose_icon_color_name">圖示、顏色與名稱</string>
     <string name="reorder_profiles">編輯設定檔清單</string>
     <string name="selected_profile">選定的設定檔</string>
@@ -3836,4 +3836,17 @@
     <string name="plan_route_select_track_file_for_open">選取要開啟的軌跡檔。</string>
     <string name="shared_string_done">完成</string>
     <string name="overwrite_track">覆寫軌跡</string>
+    <string name="save_as_new_track">儲存為新軌跡</string>
+    <string name="reverse_route">反向路線</string>
+    <string name="rourte_between_points_whole_track_button_desc">整個軌跡都會使用選定的設定檔重新計算。</string>
+    <string name="rourte_between_points_next_segment_button_desc">僅下一個片段會使用選定的設定檔重新計算。</string>
+    <string name="rourte_between_points_desc">選取如何連接點，用直線或以選定的設定檔計算其間的路徑。</string>
+    <string name="whole_track">整個軌道</string>
+    <string name="next_segment">下一段</string>
+    <string name="rourte_between_points_warning_desc">要使用此選項，OsmAnd 必須將您的軌跡捕捉到地圖道路上。
+\n
+\n在下一步，您只需要選取設定檔以偵測允許的道路與距離門檻以追蹤道路。</string>
+    <string name="threshold_distance">門檻距離</string>
+    <string name="navigation_profile">導航設定檔</string>
+    <string name="rourte_between_points_add_track_desc">選取要加入新片段的軌道檔案。</string>
 </resources>

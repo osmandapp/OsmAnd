@@ -13,6 +13,7 @@ import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
+import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
@@ -35,6 +36,8 @@ import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteImporter;
 import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
@@ -117,6 +120,36 @@ public class RouteProvider {
 				}
 			}
 			return list.toArray(new RouteService[list.size()]);
+		}
+	}
+
+	public static class RoutingEnvironment {
+		private RoutePlannerFrontEnd router;
+		private RoutingContext ctx;
+		private RoutingContext complexCtx;
+		private PrecalculatedRouteDirection precalculated;
+
+		public RoutingEnvironment(RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, PrecalculatedRouteDirection precalculated) {
+			this.router = router;
+			this.ctx = ctx;
+			this.complexCtx = complexCtx;
+			this.precalculated = precalculated;
+		}
+
+		public RoutePlannerFrontEnd getRouter() {
+			return router;
+		}
+
+		public RoutingContext getCtx() {
+			return ctx;
+		}
+
+		public RoutingContext getComplexCtx() {
+			return complexCtx;
+		}
+
+		public PrecalculatedRouteDirection getPrecalculated() {
+			return precalculated;
 		}
 	}
 
@@ -670,7 +703,29 @@ public class RouteProvider {
 		return ctx.getString(resId);
 	}
 
-	protected RouteCalculationResult findVectorMapsRoute(final RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
+	public RoutingEnvironment getRoutingEnvironment(OsmandApplication ctx, ApplicationMode mode, LatLon start, LatLon end) throws IOException {
+		RouteCalculationParams params = new RouteCalculationParams();
+		params.ctx = ctx;
+		params.mode = mode;
+		params.start = new Location("", start.getLatitude(), start.getLongitude());
+		params.end = end;
+		return calculateRoutingEnvironment(params, false, true);
+	}
+
+	public List<GpxPoint> generateGpxPoints(RoutingEnvironment env, GpxRouteApproximation gctx, LocationsHolder locationsHolder) {
+		return env.router.generateGpxPoints(gctx, locationsHolder);
+	}
+
+	public GpxRouteApproximation calculateGpxPointsApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points) throws IOException, InterruptedException {
+		if (points != null && points.size() > 1) {
+			if (!Algorithms.isEmpty(points)) {
+				return env.router.searchGpxRoute(gctx, points);
+			}
+		}
+		return null;
+	}
+
+	protected RoutingEnvironment calculateRoutingEnvironment(RouteCalculationParams params, boolean calcGPXRoute, boolean skipComplex) throws IOException {
 		BinaryMapIndexReader[] files = params.ctx.getResourceManager().getRoutingMapFiles();
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
 		OsmandSettings settings = params.ctx.getSettings();
@@ -679,18 +734,18 @@ public class RouteProvider {
 		RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
 		GeneralRouter generalRouter = params.ctx.getRouter(config, params.mode);
 		if (generalRouter == null) {
-			return applicationModeNotSupported(params);
+			return null;
 		}
 		RoutingConfiguration cf = initOsmAndRoutingConfig(config, params, settings, generalRouter);
-		if(cf == null){
-			return applicationModeNotSupported(params);
+		if (cf == null) {
+			return null;
 		}
 		PrecalculatedRouteDirection precalculated = null;
-		if(calcGPXRoute) {
+		if (calcGPXRoute) {
 			ArrayList<Location> sublist = findStartAndEndLocationsFromRoute(params.gpxRoute.points,
 					params.start, params.end, null, null);
 			LatLon[] latLon = new LatLon[sublist.size()];
-			for(int k = 0; k < latLon.length; k ++) {
+			for (int k = 0; k < latLon.length; k++) {
 				latLon[k] = new LatLon(sublist.get(k).getLatitude(), sublist.get(k).getLongitude());
 			}
 			precalculated = PrecalculatedRouteDirection.build(latLon, generalRouter.getMaxSpeed());
@@ -717,46 +772,50 @@ public class RouteProvider {
 		rightX = Math.max(MapUtils.get31TileNumberX(l.getLongitude()), rightX);
 		bottomY = Math.max(MapUtils.get31TileNumberY(l.getLatitude()), bottomY);
 		topY = Math.min(MapUtils.get31TileNumberY(l.getLatitude()), topY);
-		
+
 		params.ctx.getResourceManager().getRenderer().checkInitialized(15, lib, leftX, rightX, bottomY, topY);
-		
-		RoutingContext ctx = router.buildRoutingContext(cf,
-				lib, files, 
-				RouteCalculationMode.NORMAL);
-		
+
+		RoutingContext ctx = router.buildRoutingContext(cf, lib, files, RouteCalculationMode.NORMAL);
+
 		RoutingContext complexCtx = null;
-		boolean complex = params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) && !settings.DISABLE_COMPLEX_ROUTING.get()
+		boolean complex = !skipComplex && params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) && !settings.DISABLE_COMPLEX_ROUTING.get()
 				&& precalculated == null;
 		ctx.leftSideNavigation = params.leftSide;
 		ctx.calculationProgress = params.calculationProgress;
 		ctx.publicTransport = params.inPublicTransportMode;
 		ctx.startTransportStop = params.startTransportStop;
 		ctx.targetTransportStop = params.targetTransportStop;
-		if(params.previousToRecalculate != null && params.onlyStartPointChanged) {
+		if (params.previousToRecalculate != null && params.onlyStartPointChanged) {
 			int currentRoute = params.previousToRecalculate.getCurrentRoute();
 			List<RouteSegmentResult> originalRoute = params.previousToRecalculate.getOriginalRoute();
-			if(originalRoute != null && currentRoute < originalRoute.size()) {
+			if (originalRoute != null && currentRoute < originalRoute.size()) {
 				ctx.previouslyCalculatedRoute = originalRoute.subList(currentRoute, originalRoute.size());
 			}
 		}
-		if(complex && router.getRecalculationEnd(ctx) != null) {
+		if (complex && router.getRecalculationEnd(ctx) != null) {
 			complex = false;
 		}
-		if(complex) {
-			complexCtx = router.buildRoutingContext(cf, lib,files,
-				RouteCalculationMode.COMPLEX);
+		if (complex) {
+			complexCtx = router.buildRoutingContext(cf, lib, files, RouteCalculationMode.COMPLEX);
 			complexCtx.calculationProgress = params.calculationProgress;
 			complexCtx.leftSideNavigation = params.leftSide;
 			complexCtx.previouslyCalculatedRoute = ctx.previouslyCalculatedRoute;
 		}
+		return new RoutingEnvironment(router, ctx, complexCtx, precalculated);
+	}
 
+	protected RouteCalculationResult findVectorMapsRoute(final RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
+		RoutingEnvironment env = calculateRoutingEnvironment(params, calcGPXRoute, false);
+		if (env == null) {
+			return applicationModeNotSupported(params);
+		}
 		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
 		LatLon en = new LatLon(params.end.getLatitude(), params.end.getLongitude());
-		List<LatLon> inters  = new ArrayList<LatLon>();
+		List<LatLon> inters = new ArrayList<LatLon>();
 		if (params.intermediates != null) {
-			inters  = new ArrayList<LatLon>(params.intermediates);
+			inters = new ArrayList<LatLon>(params.intermediates);
 		}
-		return calcOfflineRouteImpl(params, router, ctx, complexCtx, st, en, inters, precalculated);
+		return calcOfflineRouteImpl(params, env.router, env.ctx, env.complexCtx, st, en, inters, env.precalculated);
 	}
 
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, final RouteCalculationParams params, OsmandSettings settings,

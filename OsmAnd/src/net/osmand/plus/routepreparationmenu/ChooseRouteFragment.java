@@ -56,9 +56,9 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.MapControlsLayer;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -376,7 +376,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 		mapControlsLayer.setupZoomInButton(zoomInButton, longClickListener, ZOOM_IN_BUTTON_ID);
 		mapControlsLayer.setupZoomOutButton(zoomOutButton, longClickListener, ZOOM_OUT_BUTTON_ID);
-		mapControlsLayer.setupBackToLocationButton(backToLocation, BACK_TO_LOC_BUTTON_ID);
+		mapControlsLayer.setupBackToLocationButton(backToLocation, false, BACK_TO_LOC_BUTTON_ID);
 
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 	}
