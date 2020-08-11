@@ -3,6 +3,8 @@ package net.osmand.plus.measurementtool;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -15,6 +17,10 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+
+	public static final int REQUEST_CODE = 1001;
+	public static final int SAVE_RESULT_CODE = 2;
+	public static final int EXIT_RESULT_CODE = 3;
 
 	public static final String TAG = ExitBottomSheetDialogFragment.class.getSimpleName();
 
@@ -39,9 +45,9 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Fragment target = getTargetFragment();
-						if (target instanceof ExitFragmentListener) {
-							((ExitFragmentListener) target).exitOnClick();
+						Fragment targetFragment = getTargetFragment();
+						if (targetFragment != null) {
+							targetFragment.onActivityResult(REQUEST_CODE, EXIT_RESULT_CODE, null);
 						}
 						dismiss();
 					}
@@ -57,9 +63,9 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Fragment target = getTargetFragment();
-						if (target instanceof ExitFragmentListener) {
-							((ExitFragmentListener) target).saveOnClick();
+						Fragment targetFragment = getTargetFragment();
+						if (targetFragment != null) {
+							targetFragment.onActivityResult(REQUEST_CODE, SAVE_RESULT_CODE, null);
 						}
 						dismiss();
 					}
@@ -72,19 +78,11 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 		return R.string.shared_string_close;
 	}
 
-	public static void showInstance(FragmentManager fragmentManager, Fragment target) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment) {
 		if (!fragmentManager.isStateSaved()) {
 			ExitBottomSheetDialogFragment fragment = new ExitBottomSheetDialogFragment();
-			fragment.setUsedOnMap(true);
-			fragment.setTargetFragment(target, 0);
+			fragment.setTargetFragment(targetFragment, REQUEST_CODE);
 			fragment.show(fragmentManager, TAG);
 		}
-	}
-
-	interface ExitFragmentListener {
-
-		void exitOnClick();
-
-		void saveOnClick();
 	}
 }

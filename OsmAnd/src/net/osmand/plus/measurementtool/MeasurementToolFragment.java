@@ -103,8 +103,6 @@ import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TR
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
 import static net.osmand.plus.measurementtool.StartPlanRouteBottomSheet.StartPlanRouteListener;
 
-public class MeasurementToolFragment extends BaseOsmAndFragment
-		implements ExitBottomSheetDialogFragment.ExitFragmentListener {
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		GpxApproximationFragmentListener, OptionsFragmentListener {
 
@@ -222,14 +220,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		downIcon = getContentIcon(R.drawable.ic_action_arrow_down);
 		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();
 
-		View view = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.fragment_measurement_tool,
-				container,false);
+		View view = UiUtilities.getInflater(getContext(), nightMode)
+				.inflate(R.layout.fragment_measurement_tool, container, false);
 
 		mainView = view.findViewById(R.id.main_view);
 		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		pointsListContainer = view.findViewById(R.id.points_list_container);
 		if (portrait && pointsListContainer != null) {
-			final int backgroundColor = ContextCompat.getColor(mapActivity, nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
+			final int backgroundColor = ContextCompat.getColor(mapActivity, nightMode
+					? R.color.activity_background_color_dark
+					: R.color.activity_background_color_light);
 			pointsListContainer.setBackgroundColor(backgroundColor);
 		}
 
@@ -605,16 +605,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
 	}
 
-	@Override
-	public void exitOnClick() {
-		dismiss(getMapActivity());
-	}
-
-	@Override
-	public void saveOnClick() {
-		openSaveAsNewTrackMenu(getMapActivity());
-	}
-
 	private void showProgressBar() {
 		ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
 		progressBar.setVisibility(View.VISIBLE);
@@ -659,25 +649,38 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == SnapTrackWarningBottomSheet.REQUEST_CODE) {
-			switch (resultCode) {
-				case SnapTrackWarningBottomSheet.CANCEL_REQUEST_CODE:
-					toolBarController.setSaveViewVisible(true);
-					updateToolbar();
-					break;
-				case SnapTrackWarningBottomSheet.CONTINUE_REQUEST_CODE:
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						try {
-							gpxApproximator = new GpxApproximator(requireMyApplication(), new LocationsHolder(editingCtx.getPoints()));
-							GpxApproximationFragment.showInstance(mapActivity.getSupportFragmentManager(),
-									this, gpxApproximator.getMode(), (int) gpxApproximator.getPointApproximation());
-						} catch (IOException e) {
+		switch (requestCode) {
+			case SnapTrackWarningBottomSheet.REQUEST_CODE:
+				switch (resultCode) {
+					case SnapTrackWarningBottomSheet.CANCEL_RESULT_CODE:
+						toolBarController.setSaveViewVisible(true);
+						updateToolbar();
+						break;
+					case SnapTrackWarningBottomSheet.CONTINUE_RESULT_CODE:
+						MapActivity mapActivity = getMapActivity();
+						if (mapActivity != null) {
+							try {
+								gpxApproximator = new GpxApproximator(requireMyApplication(),
+										new LocationsHolder(editingCtx.getPoints()));
+								GpxApproximationFragment.showInstance(mapActivity.getSupportFragmentManager(),
+										this, gpxApproximator.getMode(),
+										(int) gpxApproximator.getPointApproximation());
+							} catch (IOException e) {
 
+							}
 						}
-					}
-					break;
-			}
+						break;
+				}
+				break;
+			case ExitBottomSheetDialogFragment.REQUEST_CODE:
+				switch (resultCode) {
+					case ExitBottomSheetDialogFragment.EXIT_RESULT_CODE:
+						dismiss(getMapActivity());
+						break;
+					case ExitBottomSheetDialogFragment.SAVE_RESULT_CODE:
+						openSaveAsNewTrackMenu(getMapActivity());
+						break;
+				}
 		}
 	}
 
@@ -725,7 +728,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 			@Override
 			public void saveAsNewTrackOnClick() {
-						openSaveAsNewTrackMenu(mapActivity);
+				openSaveAsNewTrackMenu(getMapActivity());
 			}
 
 	@Override
@@ -857,6 +860,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			@Override
 			public void openLastEditTrackOnClick(String gpxFileName) {
 				addNewGpxData(getGpxFile(gpxFileName));
+				saved = true;
 			}
 
 			@Override
@@ -871,6 +875,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			@Override
 			public void selectFileOnCLick(String gpxFileName) {
 				addNewGpxData(getGpxFile(gpxFileName));
+				saved = true;
 			}
 
 			@Override
