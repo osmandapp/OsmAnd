@@ -405,7 +405,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		backToLocation.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				onBackToLocationClick(false);
+				onBackToLocation(false);
 			}
 		});
 
@@ -413,7 +413,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			backToLocation.setOnLongClickListener(new View.OnLongClickListener() {
 				@Override
 				public boolean onLongClick(View v) {
-					onBackToLocationClick(true);
+					onBackToLocation(true);
 					return false;
 				}
 			});
@@ -424,9 +424,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return backToLocationButton;
 	}
 
-	private void onBackToLocationClick(boolean longClick) {
+	private void onBackToLocation(boolean showLocationMenu) {
 		if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
-			if (longClick) {
+			if (showLocationMenu) {
 				showContextMenuForMyLocation();
 			} else if (!mapActivity.getContextMenu().isVisible()) {
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
@@ -440,9 +440,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void showContextMenuForMyLocation() {
 		OsmAndLocationProvider lp = app.getLocationProvider();
-		net.osmand.Location lastKnownLocation = lp.getLastKnownLocation();
-		net.osmand.Location lastStaleKnownLocation = lp.getLastStaleKnownLocation();
-		net.osmand.Location location = lastKnownLocation != null ? lastKnownLocation : lastStaleKnownLocation;
+		Location lastKnownLocation = lp.getLastKnownLocation();
+		Location lastStaleKnownLocation = lp.getLastStaleKnownLocation();
+		Location location = lastKnownLocation != null ? lastKnownLocation : lastStaleKnownLocation;
 		if (location != null) {
 			ContextMenuLayer cml = mapActivity.getMapView().getLayerByClass(ContextMenuLayer.class);
 			if (cml != null) {
