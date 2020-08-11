@@ -15,6 +15,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -716,13 +717,8 @@ public class RouteProvider {
 		return env.router.generateGpxPoints(gctx, locationsHolder);
 	}
 
-	public GpxRouteApproximation calculateGpxPointsApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points) throws IOException, InterruptedException {
-		if (points != null && points.size() > 1) {
-			if (!Algorithms.isEmpty(points)) {
-				return env.router.searchGpxRoute(gctx, points);
-			}
-		}
-		return null;
+	public GpxRouteApproximation calculateGpxPointsApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
+		return env.router.searchGpxRoute(gctx, points, resultMatcher);
 	}
 
 	protected RoutingEnvironment calculateRoutingEnvironment(RouteCalculationParams params, boolean calcGPXRoute, boolean skipComplex) throws IOException {

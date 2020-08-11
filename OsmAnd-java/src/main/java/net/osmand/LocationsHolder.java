@@ -25,15 +25,15 @@ public class LocationsHolder {
 		this.locationType = resolveLocationType(locations);
 		switch (locationType) {
 			case LOCATION_TYPE_LATLON:
-				latLonList = (List<LatLon>) locations;
+				latLonList = new ArrayList<>((List<LatLon>) locations);
 				size = locations.size();
 				break;
 			case LOCATION_TYPE_LOCATION:
-				locationList = (List<Location>) locations;
+				locationList = new ArrayList<>((List<Location>) locations);
 				size = locations.size();
 				break;
 			case LOCATION_TYPE_WPTPT:
-				wptPtList = (List<WptPt>) locations;
+				wptPtList = new ArrayList<>((List<WptPt>) locations);
 				size = locations.size();
 				break;
 		}

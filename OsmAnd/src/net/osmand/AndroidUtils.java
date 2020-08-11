@@ -54,6 +54,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -169,11 +170,11 @@ public class AndroidUtils {
 		return intent.resolveActivity(context.getPackageManager()) != null;
 	}
 
-	public static boolean isActivityNotDestroyed(Activity activity) {
+	public static boolean isActivityNotDestroyed(@Nullable Activity activity) {
 		if (Build.VERSION.SDK_INT >= 17) {
-			return !activity.isFinishing() && !activity.isDestroyed();
+			return activity != null && !activity.isFinishing() && !activity.isDestroyed();
 		}
-		return !activity.isFinishing();
+		return activity != null && !activity.isFinishing();
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
