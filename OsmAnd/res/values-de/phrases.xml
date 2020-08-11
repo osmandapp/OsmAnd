@@ -275,7 +275,7 @@
     <string name="poi_it">IT-Dienst</string>
     <string name="poi_craft_jeweller">Juwelier</string>
     <string name="poi_jewelry">Juwelier</string>
-    <string name="poi_craft_key_cutter">Schlüsseldienst</string>
+    <string name="poi_craft_key_cutter">Schlüsselmacher</string>
     <string name="poi_kindergarten">Kindergarten</string>
     <string name="poi_kiosk">Kiosk</string>
     <string name="poi_kitchen">Küchengeräte</string>
@@ -289,7 +289,7 @@
     <string name="poi_lighthouse">Leuchtturm</string>
     <string name="poi_locality">Örtlichkeit</string>
     <string name="poi_lock_gate">Schleusentor</string>
-    <string name="poi_craft_locksmith">Schlosser</string>
+    <string name="poi_craft_locksmith">Schlüsseldienst</string>
     <string name="poi_mall">Einkaufszentrum</string>
     <string name="poi_marina">Yachthafen</string>
     <string name="poi_marketplace">Marktplatz</string>
@@ -1574,7 +1574,7 @@
     <string name="poi_urban">Städtisch</string>
     <string name="poi_pump_powered">Angetrieben</string>
     <string name="poi_water_characteristic_mineral">Mineral</string>
-    <string name="poi_water_characteristic_mud">Wassercharakteristik: schlammig</string>
+    <string name="poi_water_characteristic_mud">Schlamm</string>
     <string name="poi_water_characteristic_sulfuric">Schweflig</string>
     <string name="poi_water_point">Wasseranschluss</string>
     <string name="poi_payment_electronic_purses_no">Elektronische Zahlungsmittel nicht akzeptiert</string>
@@ -1852,7 +1852,7 @@
     <string name="poi_memorial_koshinto">Koshinto</string>
     <string name="poi_memorial_blue_plaque">Blaue Plakette</string>
     <string name="poi_memorial_jizo">Jizo</string>
-    <string name="poi_memorial_cross">Kreuzförmig</string>
+    <string name="poi_memorial_cross">Kreuzform</string>
     <string name="poi_memorial_vehicle">Fahrzeug</string>
     <string name="poi_memorial_stolperstein">Stolperstein</string>
     <string name="poi_memorial_obelisk">Obelisk</string>
@@ -2766,7 +2766,7 @@
     <string name="poi_toilets_disposal_pitlatrine">Toilettenspülung: Plumpsklo</string>
     <string name="poi_wiki_link">Wikipedia</string>
     <string name="poi_spices">Gewürzgeschäft</string>
-    <string name="poi_fuel_type">Kraftstoffart</string>
+    <string name="poi_fuel_type">Kraftstoffsorte</string>
     <string name="poi_payment_type">Zahlungsart</string>
     <string name="poi_additional_type">Zusätzlich</string>
     <string name="poi_service_bicycle_charging_yes">Ladestation: ja</string>
@@ -3603,7 +3603,7 @@
     <string name="poi_changing_table_count">Anzahl der Wickeltische</string>
     <string name="poi_changing_table_fee_yes">Wickeltischgebühr: ja</string>
     <string name="poi_changing_table_fee_no">Wickeltischgebühr: nein</string>
-    <string name="poi_charcoal_pile">Holzkohlestoß</string>
+    <string name="poi_charcoal_pile">Kohlenmeiler</string>
     <string name="poi_historic_tank">Historischer Panzer</string>
     <string name="poi_hookah_lounge">Wasserpfeifen-Lounge</string>
     <string name="poi_source_biomass">Energiequelle: Biomasse</string>

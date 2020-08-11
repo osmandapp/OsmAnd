@@ -28,7 +28,7 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
+import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 

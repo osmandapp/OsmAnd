@@ -58,7 +58,7 @@
     <string name="disable_monitoring">Desativar monitoramento</string>
     <string name="location_recording_enabled">Gravação de localização ativada</string>
     <string name="timeline_description">Ative o monitoramento para salvar todos os locais no histórico.</string>
-    <string name="privacy_policy_use_telegram">Telegrama (o aplicativo de mensagens) é usado para conectar e se comunicar com as pessoas.</string>
+    <string name="privacy_policy_use_telegram">Telegrama (a app de mensagens) é usado para conectar e se comunicar com as pessoas.</string>
     <string name="privacy_policy_telegram_client">OsmAnd tracker é um dos clientes que usam a Plataforma aberta do Telegram . Seus contatos podem usar qualquer outro cliente Telegram.</string>
     <string name="privacy_policy_agree">Ao clicar em \"Continuar\" você concorda com as condições da política de privacidade do Telegram e OsmAnd.</string>
     <string name="shared_string_accept">Aceitar</string>
@@ -144,7 +144,7 @@
     <string name="in_time">no %1$s</string>
     <string name="osmand_connect_desc">Escolha a versão OsmAnd que OsmAnd Tracker usa para exibir posições.</string>
     <string name="osmand_connect">Conectar OsmAnd</string>
-    <string name="location_history_desc">Ocultar contatos que não foram movidos em um determinado momento.</string>
+    <string name="location_history_desc">Ocultar contactos que não foram movidos num determinado momento.</string>
     <string name="location_history">Histórico de localização</string>
     <string name="stale_location_desc">A última vez que um contato foi movido.</string>
     <string name="stale_location">Parado</string>
@@ -161,7 +161,7 @@
     <string name="get_telegram_title">Registro no Telegram</string>
     <string name="get_telegram_account_first">Você precisa de uma conta do Telegram para usar o compartilhamento de local.</string>
     <string name="get_telegram_description_continue">Por favor, instale o Telegram e configure uma conta.</string>
-    <string name="get_telegram_after_creating_account">Então você pode usar este aplicativo.</string>
+    <string name="get_telegram_after_creating_account">Então pode usar esta app.</string>
     <string name="shared_string_all">Todos</string>
     <string name="shared_string_off">Desligado</string>
     <string name="already_registered_in_telegram">Você precisa de uma conta e número de telefone registrados no Telegram</string>
@@ -190,7 +190,7 @@
     <string name="authentication_code">Código de Autenticação</string>
     <string name="authentication_code_descr">Uma faixa GPX é salva automaticamente durante a navegação.</string>
     <string name="enter_password">Digite a palavra-passe</string>
-    <string name="password_descr">Senha do telegrama</string>
+    <string name="password_descr">Palavra-passe do Telegram</string>
     <string name="shared_string_login">Entrar</string>
     <string name="shared_string_logout">Sair</string>
     <string name="initialization">Iniciando</string>
@@ -201,7 +201,7 @@
     <string name="shared_string_continue">Continuar</string>
     <string name="shared_string_cancel">Cancelar</string>
     <string name="shared_string_settings">Configurações</string>
-    <string name="no_location_permission">O aplicativo não tem permissão para acessar os dados de localização.</string>
+    <string name="no_location_permission">A app não tem permissão para acessar os dados de localização.</string>
     <string name="gps_not_available">Por favor, ligue \"Localização\" nas configurações do sistema</string>
     <string name="location_service_no_gps_available">Selecione um dos provedores de localização para compartilhar sua localização.</string>
     <string name="osmand_service">Modo de fundo</string>

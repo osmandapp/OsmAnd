@@ -988,7 +988,7 @@ POIの更新は利用できません</string>
     <string name="search_position_current_location_found">現在地(確定)</string>
     <string name="search_position_address">住所…</string>
     <string name="search_position_favorites">お気に入り…</string>
-    <string name="search_position_undefined">未定義</string>
+    <string name="shared_string_undefined">未定義</string>
     <string name="search_position_map_view">マップ画面中心</string>
     <string name="select_search_position">検索基点:</string>
     <string name="context_menu_item_search">近隣を検索</string>
@@ -1742,7 +1742,6 @@ POIの更新は利用できません</string>
     <string name="context_menu_item_open_note">OSMでの注釈を開く</string>
     <string name="osm_edit_reopened_note">OSMでの注釈を開き直す</string>
     <string name="osm_edit_commented_note">OSMの注釈にコメントを付加しました</string>
-    <string name="osm_edit_removed_note">OSMの注釈を削除しました</string>
     <string name="osm_edit_created_note">OSMに注釈を作成しました</string>
     <string name="osn_bug_name">OSMでの注釈</string>
     <string name="osn_add_dialog_title">注釈の作成</string>
@@ -2594,7 +2593,7 @@ POIの更新は利用できません</string>
 \n</string>
     <string name="rendering_attr_hidePOILabels_name">POIのラベル</string>
     <string name="context_menu_read_article">記事を読む</string>
-    <string name="context_menu_points_of_group">グループのすべてのポイント</string>
+    <string name="context_menu_points_of_group">同じグループのお気に入り地点</string>
     <string name="additional_actions">追加のアクション</string>
     <string name="av_locations_selected_desc">選択された注釈と座標が付属しているGPXファイル。</string>
     <string name="av_locations_all_desc">全ての注釈と座標が付属していGPXファイル。</string>

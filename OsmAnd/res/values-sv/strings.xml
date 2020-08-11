@@ -336,7 +336,7 @@ Nyttjat utrymme är {1} MB.
     <string name="search_position_current_location_found">Min position (hittad)</string>
     <string name="search_position_address">Adresser …</string>
     <string name="search_position_favorites">Favoriter …</string>
-    <string name="search_position_undefined">Odefinierad</string>
+    <string name="shared_string_undefined">Odefinierad</string>
     <string name="search_position_map_view">Aktuell kartmitt</string>
     <string name="select_search_position">Ursprung:</string>
     <string name="context_menu_item_search">Sök i närheten</string>
@@ -1711,7 +1711,6 @@ Long %2$s</string>
     <string name="osm_edit_deleted_poi">Raderat OSM POI</string>
     <string name="context_menu_item_open_note">Öppna OSM-anteckning</string>
     <string name="osm_edit_commented_note">Kommenterat OSM-anteckning</string>
-    <string name="osm_edit_removed_note">Tagit bort OSM-anteckning</string>
     <string name="osm_edit_created_note">Skapat OSM-anteckning</string>
     <string name="osn_bug_name">OSM-anteckning</string>
     <string name="osn_add_dialog_title">Skapa anteckning</string>

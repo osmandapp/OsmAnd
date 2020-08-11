@@ -153,11 +153,9 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 					OsmAndFormatter.getFormattedSpeed((float) selectedPoint.speed, app), 0, null,
 					false, null, false, 0, false, false, false, null, false);
 		}
-		if (selectedGpxPoint.getPointLocation().hasBearing()) {
-			buildRow(view, getThemedIcon(R.drawable.ic_action_relative_bearing), null, app.getString(R.string.shared_string_bearing),
-					OsmAndFormatter.getFormattedAzimuth(selectedGpxPoint.getPointLocation().getBearing(), app), 0, null,
-					false, null, false, 0, false, false, false, null, false);
-		}
+		buildRow(view, getThemedIcon(R.drawable.ic_action_relative_bearing), null, app.getString(R.string.shared_string_bearing),
+				OsmAndFormatter.getFormattedAzimuth(selectedGpxPoint.getBearing(), app), 0, null,
+				false, null, false, 0, false, false, false, null, false);
 	}
 
 	private void buildCategoryView(View view, String name) {

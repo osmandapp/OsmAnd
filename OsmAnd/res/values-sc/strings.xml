@@ -843,7 +843,7 @@
     <string name="update_poi_file_not_found">Su documentu pro registrare sas modìficas de sos PDI no est istadu ne agatadu nen creadu.</string>
     <string name="map_version_changed_info">Iscàrriga sa versione noa de s\'aplicatzione pro pòdere impreare sos documentos de sa mapa noos.</string>
     <string name="shared_string_rename">Càmbia su nùmene</string>
-    <string name="search_position_undefined">Non dessinidu</string>
+    <string name="shared_string_undefined">Non dessinidu</string>
     <string name="search_position_map_view">Tzentru atuale de sa mapa</string>
     <string name="local_index_mi_upload_gpx">Imbia ad OSM</string>
     <string name="favourites_delete_multiple_succesful">Puntos preferidos iscantzellados.</string>
@@ -1329,7 +1329,7 @@
     <string name="traffic_warning_payment">Casellu</string>
     <string name="traffic_warning_stop">Cartellu de Stop</string>
     <string name="traffic_warning_border_control">Puntu de controllu</string>
-    <string name="traffic_warning_calming">Minimadore de lestresa</string>
+    <string name="traffic_warning_calming">Minimadore de tràficu</string>
     <string name="traffic_warning_speed_camera">Autovelox</string>
     <string name="traffic_warning">Avisu de tràficu</string>
     <string name="local_index_description">Incarca un\'elementu esistente pro bìdere prus minujas, incarca e mantene incarcadu pro l\'istudare o iscantzellare. Datos como in su dispositivu (%1$s lìberos):</string>
@@ -1770,7 +1770,6 @@
     <string name="context_menu_item_open_note">Aberi una nota de OSM</string>
     <string name="osm_edit_reopened_note">Nota OSM torrada a abèrrere</string>
     <string name="osm_edit_commented_note">Nota OSM cummentada</string>
-    <string name="osm_edit_removed_note">Nota OSM iscantzellada</string>
     <string name="osm_edit_created_note">Nota OSM creada</string>
     <string name="osn_bug_name">Nota OSM</string>
     <string name="osn_add_dialog_title">Crea nota</string>
@@ -2076,7 +2075,7 @@
     <string name="rendering_attr_contourColorScheme_name">Ischema de colores pro sas curvas de livellu</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade superfitziale de su caminu</string>
     <string name="trip_rec_notification_settings">Allughe sa registratzione de biàgios lestra</string>
-    <string name="trip_rec_notification_settings_desc">Ammustra una notìfica chi permitit de registrare su biàgiu.</string>
+    <string name="trip_rec_notification_settings_desc">Ammustra una notìfica chi permitit de incumentzare a registrare su biàgiu.</string>
     <string name="shared_string_notifications">Notìficas</string>
     <string name="gpx_no_tracks_title">Non tenes galu documentos GPX</string>
     <string name="gpx_no_tracks_title_folder">Podes fintzas annànghere documentos GPX a sa cartella</string>
@@ -3382,7 +3381,7 @@
     <string name="profile_import_descr">Annanghe unu profilu aberende su documentu suo cun OsmAnd.</string>
     <string name="file_import_error">Errore de importatzione de %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importadu.</string>
-    <string name="default_speed_dialog_msg">Istimat s\'ora de arribu pro castas disconnotas de caminu, e limitat sa lestresa pro totu sos caminos (diat pòdere mudare s\'àndala)</string>
+    <string name="default_speed_dialog_msg">Faghet unu càrculu de s\'ora de arribu pro castas disconnotas de caminu, e limitat sa lestresa pro totu sos caminos (diat pòdere mudare s\'àndala)</string>
     <string name="rendering_value_white_name">Biancu</string>
     <string name="swap_two_places">Cuncàmbia %1$s e %2$s</string>
     <string name="route_start_point">Puntu de incumintzu</string>
@@ -3402,7 +3401,7 @@
     <string name="shared_string_turn_off">Istuda</string>
     <string name="new_plugin_added">Estensione noa annànghida</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Ammustra sas àndalas tziclàbiles de sas retzas de nodos</string>
-    <string name="join_segments">Auni segmentos</string>
+    <string name="join_segments">Auni sos segmentos</string>
     <string name="add_new_profile_q">Annanghere su profilu nou \'%1$s\'\?</string>
     <string name="save_heading">Inclue sa diretzione</string>
     <string name="save_heading_descr">Sarva sa diretzione pro cada puntu cando ses registrende.</string>
@@ -3716,7 +3715,7 @@
     <string name="quick_action_transport_hide">Cua sos trasportos pùblicos</string>
     <string name="quick_action_transport_show">Ammustra sos trasportos pùblicos</string>
     <string name="quick_action_show_hide_transport">Ammustra/cua sos trasportos pùblicos</string>
-    <string name="quick_action_transport_descr">Butone pro ammustrare o cuare su trasportu pùblicu in sa mapa.</string>
+    <string name="quick_action_transport_descr">Butone pro ammustrare o cuare sos trasportos pùblicos in sa mapa.</string>
     <string name="create_edit_poi">Crea / Modìfica unu PDI</string>
     <string name="parking_positions">Logos de parchègiu</string>
     <string name="add_edit_favorite">Annanghe / Modìfica unu preferidu</string>
@@ -3817,4 +3816,42 @@
     <string name="quick_action_remove_next_destination_descr">Su puntu de destinatzione atuale in s\'àndala at a èssere iscantzelladu. Si at a èssere sa destinatzione, sa navigatzione s\'at a firmare.</string>
     <string name="search_download_wikipedia_maps">Iscàrriga sas mapas de Wikipedia</string>
     <string name="plugin_wikipedia_description">Otene informatziones a pitzu de puntos de interesse dae Wikipedia. Est sa ghia non in lìnia tua de mantènnere in butzaca - abìlita s\'estensione Wikipedia e ispassia·ti cun sos artìculos a pitzu de sos ogetos a fùrriu de tie.</string>
+    <string name="app_mode_enduro_motorcycle">Moto enduro</string>
+    <string name="app_mode_motor_scooter">Motorinu</string>
+    <string name="app_mode_wheelchair_forward">Cadira a rodas cara a in antis</string>
+    <string name="app_mode_wheelchair">Cadira a rodas</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="osm_edit_closed_note">Nota de OSM serrada</string>
+    <string name="set_working_days_to_continue">Depes impostare sas dies de traballu pro sighire</string>
+    <string name="route_between_points">Àndala intre puntos</string>
+    <string name="plan_a_route">Pranìfica un\'àndala</string>
+    <string name="add_to_a_track">Annanghe a una rasta</string>
+    <string name="shared_string_custom">Personalizadu</string>
+    <string name="gpx_direction_arrows">Fritzas de diretzione</string>
+    <string name="add_hidden_group_info">Su puntu annànghidu no at a èssere visìbile in sa mapa, ca su grupu ischertadu est cuadu. Lu podes agatare in \"%s\".</string>
+    <string name="track_show_start_finish_icons">Ammustra sas iconas de incumintzu e acabu</string>
+    <string name="select_track_width">Ischerta sa largària</string>
+    <string name="gpx_split_interval_descr">Ischerta s\'intervallu in ue sos sinnos cun distàntzia o oràriu in sa mapa ant a èssere ammustrados.</string>
+    <string name="gpx_split_interval_none_descr">Ischerta s\'optzione de partzidura chi cheres: pro tempus o pro distàntzia.</string>
+    <string name="track_coloring_solid">Sòlidu</string>
+    <string name="plan_route_last_edited">Ùrtima modìfica</string>
+    <string name="plan_route_open_existing_track">Aberi una rasta chi esistit giai</string>
+    <string name="plan_route_import_track">Importa una rasta</string>
+    <string name="plan_route_create_new_route">Crea un\'àndala noa</string>
+    <string name="plan_route_select_track_file_for_open">Ischerta unu documentu de rasta de abèrrere.</string>
+    <string name="shared_string_done">Fatu</string>
+    <string name="overwrite_track">Subraiscrie sa rasta</string>
+    <string name="save_as_new_track">Sarva comente una rasta noa</string>
+    <string name="reverse_route">Fùrria s\'àndala</string>
+    <string name="rourte_between_points_whole_track_button_desc">Sa rasta intrea at a èssere torrada a calculare impreende su profilu ischertadu.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Petzi su segmentu imbeniente at a èssere torradu a calculare impreende su profilu ischertadu.</string>
+    <string name="rourte_between_points_desc">Ischerta comente connètere sos puntos: cun una lìnia reta o calculende un\'àndala intre issos cun su profilu ischertadu.</string>
+    <string name="whole_track">Rasta intrea</string>
+    <string name="next_segment">Segmentu imbeniente</string>
+    <string name="rourte_between_points_warning_desc">Pro impreare custa optzione OsmAnd tenet bisòngiu de alliniare sa rasta tua a sos caminos de sa mapa.
+\n
+\n In su passu chi benit as a dèpere ischertare su profilu de navigatzione pro rilevare sos caminos permìtidos e su lìmite de distàntzia pro aprossimare sa rasta tua cun sos caminos.</string>
+    <string name="threshold_distance">Lìmite de distàntzia</string>
+    <string name="navigation_profile">Profilu de navigatzione</string>
+    <string name="rourte_between_points_add_track_desc">Ischerta unu documentu de rasta in ue annànghere su segmentu nou.</string>
 </resources>

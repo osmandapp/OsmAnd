@@ -21,30 +21,33 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 
@@ -523,18 +526,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	String getFormattedTime(long timeInMillis) {
-		StringBuilder timeStringBuilder = new StringBuilder();
-		Time time = new Time();
-		time.set(timeInMillis);
-		timeStringBuilder.append(time.hour);
-		timeStringBuilder.append(":");
-		int minute = time.minute;
-		timeStringBuilder.append(minute < 10 ? "0" + minute : minute);
-		if (!DateFormat.is24HourFormat(app)) {
-			timeStringBuilder.append(time.hour >= 12 ? app.getString(R.string.osmand_parking_pm) : app
-					.getString(R.string.osmand_parking_am));
-		}
-		return timeStringBuilder.toString();
+		java.text.DateFormat dateFormat = DateFormat.getMediumDateFormat(app);
+		java.text.DateFormat timeFormat = DateFormat.getTimeFormat(app);
+		return timeFormat.format(timeInMillis) + " " + dateFormat.format(timeInMillis);
 	}
 
 	String getFormattedTimeInterval(long timeInMillis, Activity ctx) {

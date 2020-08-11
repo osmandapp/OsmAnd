@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
@@ -37,13 +39,14 @@ import net.osmand.aidl.navigation.ADirectionInfo;
 import net.osmand.aidl.navigation.OnVoiceNavigationParams;
 import net.osmand.aidl.quickaction.QuickActionInfoParams;
 import net.osmand.aidl.tiles.ASqliteDbFile;
+import net.osmand.aidlapi.info.AppInfoParams;
+import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
@@ -52,17 +55,15 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -72,13 +73,18 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
-import net.osmand.plus.views.AidlMapLayer;
-import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.SettingsHelper;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.layers.AidlMapLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
@@ -98,11 +104,14 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -120,6 +129,11 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_LANES;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_NAME;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_TURN;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DISTANCE;
+import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_IMMINENT;
 
 public class OsmandAidlApi {
 
@@ -129,7 +143,8 @@ public class OsmandAidlApi {
 	public static final int KEY_ON_UPDATE = 1;
 	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
 	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
-	public static final int KEY_ON_VOICE_MESSAGE = 5;
+	public static final int KEY_ON_VOICE_MESSAGE = 8;
+	public static final int KEY_ON_KEY_EVENT = 16;
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 
@@ -138,6 +153,7 @@ public class OsmandAidlApi {
 	private static final String AIDL_LATITUDE = "aidl_latitude";
 	private static final String AIDL_LONGITUDE = "aidl_longitude";
 	private static final String AIDL_ZOOM = "aidl_zoom";
+	private static final String AIDL_ROTATION = "aidl_rotation";
 	private static final String AIDL_ANIMATED = "aidl_animated";
 
 	private static final String AIDL_START_NAME = "aidl_start_name";
@@ -177,6 +193,7 @@ public class OsmandAidlApi {
 
 	private static final String AIDL_EXECUTE_QUICK_ACTION = "aidl_execute_quick_action";
 	private static final String AIDL_QUICK_ACTION_NUMBER = "aidl_quick_action_number";
+	private static final String AIDL_LOCK_STATE = "lock_state";
 
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
@@ -195,7 +212,7 @@ public class OsmandAidlApi {
 	private Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
 	private Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks = new ConcurrentHashMap<>();
 
-	private AMapPointUpdateListener aMapPointUpdateListener;
+	private MapActivity mapActivity;
 
 	private boolean mapActivityActive = false;
 
@@ -228,14 +245,15 @@ public class OsmandAidlApi {
 		registerShowSqliteDbFileReceiver(mapActivity);
 		registerHideSqliteDbFileReceiver(mapActivity);
 		registerExecuteQuickActionReceiver(mapActivity);
+		registerLockStateReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
-		aMapPointUpdateListener = mapActivity;
+		this.mapActivity = mapActivity;
 	}
 
 	public void onDestroyMapActivity(MapActivity mapActivity) {
 		app.getAppCustomization().removeListener(mapActivity);
-		aMapPointUpdateListener = null;
+		this.mapActivity = null;
 		mapActivityActive = false;
 		for (BroadcastReceiver b : receivers.values()) {
 			if (b == null) {
@@ -255,7 +273,7 @@ public class OsmandAidlApi {
 	}
 
 	AMapPointUpdateListener getAMapPointUpdateListener() {
-		return aMapPointUpdateListener;
+		return mapActivity;
 	}
 
 	private void initOsmandTelegram() {
@@ -292,6 +310,7 @@ public class OsmandAidlApi {
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
 					int zoom = intent.getIntExtra(AIDL_ZOOM, 0);
 					boolean animated = intent.getBooleanExtra(AIDL_ANIMATED, false);
+					float rotation = intent.getFloatExtra(AIDL_ROTATION, Float.NaN);
 					if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
 						OsmandMapTileView mapView = mapActivity.getMapView();
 						if (zoom == 0) {
@@ -299,6 +318,9 @@ public class OsmandAidlApi {
 						} else {
 							zoom = zoom > mapView.getMaxZoom() ? mapView.getMaxZoom() : zoom;
 							zoom = zoom < mapView.getMinZoom() ? mapView.getMinZoom() : zoom;
+						}
+						if (!Float.isNaN(rotation)) {
+							mapView.setRotate(rotation, false);
 						}
 						if (animated) {
 							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, true);
@@ -659,50 +681,35 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null) {
-					boolean force = intent.getBooleanExtra(AIDL_FORCE, false);
-					GPXFile gpx = null;
-					if (intent.getStringExtra(AIDL_DATA) != null) {
-						String gpxStr = intent.getStringExtra(AIDL_DATA);
-						if (!Algorithms.isEmpty(gpxStr)) {
-							gpx = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxStr.getBytes()));
-						}
-					} else if (intent.getParcelableExtra(AIDL_URI) != null) {
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-							Uri gpxUri = intent.getParcelableExtra(AIDL_URI);
-
-							ParcelFileDescriptor gpxParcelDescriptor = null;
-							try {
-								gpxParcelDescriptor = mapActivity.getContentResolver().openFileDescriptor(gpxUri, "r");
-							} catch (FileNotFoundException e) {
-								e.printStackTrace();
-							}
-							if (gpxParcelDescriptor != null) {
-								FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
-								gpx = GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
-							}
-						}
-					}
-
+					GPXFile gpx = loadGpxFileFromIntent(mapActivity, intent);
 					if (gpx != null) {
-						final RoutingHelper routingHelper = app.getRoutingHelper();
-						if (routingHelper.isFollowingMode() && !force) {
-							final GPXFile gpxFile = gpx;
-							AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
-							dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+						boolean force = intent.getBooleanExtra(AIDL_FORCE, false);
+						ExternalApiHelper.saveAndNavigateGpx(mapActivity, gpx, force);
+					}
+				}
+			}
 
-								@Override
-								public void onDismiss(DialogInterface dialog) {
-									MapActivity mapActivity = mapActivityRef.get();
-									if (mapActivity != null && !routingHelper.isFollowingMode()) {
-										ExternalApiHelper.startNavigation(mapActivity, gpxFile);
-									}
-								}
-							});
-						} else {
-							ExternalApiHelper.startNavigation(mapActivity, gpx);
+			private GPXFile loadGpxFileFromIntent(@NonNull MapActivity mapActivity, @NonNull Intent intent) {
+				GPXFile gpx = null;
+				String gpxStr = intent.getStringExtra(AIDL_DATA);
+				if (!Algorithms.isEmpty(gpxStr)) {
+					gpx = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxStr.getBytes()));
+				} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					Uri gpxUri = intent.getParcelableExtra(AIDL_URI);
+					if (gpxUri != null) {
+						ParcelFileDescriptor gpxParcelDescriptor = null;
+						try {
+							gpxParcelDescriptor = mapActivity.getContentResolver().openFileDescriptor(gpxUri, "r");
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+						if (gpxParcelDescriptor != null) {
+							FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
+							gpx = GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
 						}
 					}
 				}
+				return gpx;
 			}
 		};
 		registerReceiver(navigateGpxReceiver, mapActivity, AIDL_NAVIGATE_GPX);
@@ -852,6 +859,22 @@ public class OsmandAidlApi {
 			}
 		};
 		registerReceiver(executeQuickActionReceiver, mapActivity, AIDL_EXECUTE_QUICK_ACTION);
+	}
+
+	private void registerLockStateReceiver(MapActivity mapActivity) {
+		BroadcastReceiver lockStateReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				LockHelper lockHelper = app.getLockHelper();
+				boolean lock = intent.getBooleanExtra(AIDL_LOCK_STATE, false);
+				if (lock) {
+					lockHelper.lock();
+				} else {
+					lockHelper.unlock();
+				}
+			}
+		};
+		registerReceiver(lockStateReceiver, mapActivity, AIDL_LOCK_STATE);
 	}
 
 	public void registerMapLayers(@NonNull MapActivity mapActivity) {
@@ -1146,7 +1169,7 @@ public class OsmandAidlApi {
 
 	@SuppressLint("StaticFieldLeak")
 	private void finishGpxImport(boolean destinationExists, File destination, String color, boolean show) {
-		final int col = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColor(
+		final int col = GpxAppearanceAdapter.parseTrackColor(
 				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
 			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
@@ -1390,7 +1413,7 @@ public class OsmandAidlApi {
 				int color = dataItem.getColor();
 				String colorName = "";
 				if (color != 0) {
-					colorName = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
+					colorName = GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 				}
 				net.osmand.aidlapi.gpx.AGpxFileDetails details = null;
 				GPXTrackAnalysis analysis = dataItem.getAnalysis();
@@ -1431,7 +1454,7 @@ public class OsmandAidlApi {
 				if (file.getName().equals(gpxFileName)) {
 					int color = dataItem.getColor();
 					if (color != 0) {
-						return ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
+						return GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 					}
 				}
 			}
@@ -1548,12 +1571,13 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean setMapLocation(double latitude, double longitude, int zoom, boolean animated) {
+	boolean setMapLocation(double latitude, double longitude, int zoom, float rotation, boolean animated) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_SET_MAP_LOCATION);
 		intent.putExtra(AIDL_LATITUDE, latitude);
 		intent.putExtra(AIDL_LONGITUDE, longitude);
 		intent.putExtra(AIDL_ZOOM, zoom);
+		intent.putExtra(AIDL_ROTATION, rotation);
 		intent.putExtra(AIDL_ANIMATED, animated);
 		app.sendBroadcast(intent);
 		return true;
@@ -1690,6 +1714,73 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_FORCE, force);
 		app.sendBroadcast(intent);
 		return true;
+	}
+
+	boolean setLockState(boolean lock) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_LOCK_STATE);
+		intent.putExtra(AIDL_LOCK_STATE, lock);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	AppInfoParams getAppInfo() {
+		ALatLon lastKnownLocation = null;
+		Location location = app.getLocationProvider().getLastKnownLocation();
+		if (location != null) {
+			lastKnownLocation = new ALatLon(location.getLatitude(), location.getLongitude());
+		}
+
+		boolean mapVisible = false;
+		ALatLon mapLocation = null;
+		if (mapActivity != null) {
+			LatLon mapLoc = mapActivity.getMapLocation();
+			if (mapLoc != null) {
+				mapLocation = new ALatLon(mapLoc.getLatitude(), mapLoc.getLongitude());
+			}
+			mapVisible = mapActivity.isMapVisible();
+		}
+
+		int leftTime = 0;
+		long arrivalTime = 0;
+		int leftDistance = 0;
+		Bundle turnInfo = null;
+
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		if (routingHelper.isRouteCalculated()) {
+			leftTime = routingHelper.getLeftTime();
+			arrivalTime = leftTime + System.currentTimeMillis() / 1000;
+			leftDistance = routingHelper.getLeftDistance();
+
+			NextDirectionInfo directionInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+			turnInfo = new Bundle();
+			if (directionInfo.distanceTo > 0) {
+				updateTurnInfo("next_", turnInfo, directionInfo);
+				directionInfo = routingHelper.getNextRouteDirectionInfoAfter(directionInfo, new NextDirectionInfo(), true);
+				if (directionInfo.distanceTo > 0) {
+					updateTurnInfo("after_next", turnInfo, directionInfo);
+				}
+			}
+			routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
+			if (directionInfo.distanceTo > 0) {
+				updateTurnInfo("no_speak_next_", turnInfo, directionInfo);
+			}
+		}
+		return new AppInfoParams(lastKnownLocation, mapLocation, turnInfo, leftTime, leftDistance, arrivalTime, mapVisible);
+	}
+
+	private void updateTurnInfo(String prefix, Bundle bundle, NextDirectionInfo ni) {
+		bundle.putInt(prefix + PARAM_NT_DISTANCE, ni.distanceTo);
+		bundle.putInt(prefix + PARAM_NT_IMMINENT, ni.imminent);
+		if (ni.directionInfo != null && ni.directionInfo.getTurnType() != null) {
+			TurnType tt = ni.directionInfo.getTurnType();
+			RouteDirectionInfo a = ni.directionInfo;
+			bundle.putString(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelper.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName(), ""));
+			bundle.putString(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
+			if (tt.getLanes() != null) {
+				bundle.putString(prefix + PARAM_NT_DIRECTION_LANES, Arrays.toString(tt.getLanes()));
+			}
+		}
 	}
 
 	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,
@@ -2319,6 +2410,37 @@ public class OsmandAidlApi {
 				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
 				a.avgElevation, a.minElevation, a.maxElevation, a.minSpeed, a.maxSpeed, a.avgSpeed,
 				a.points, a.wptPoints, a.wptCategoryNames);
+	}
+
+	private Map<Long, Set<Integer>> keyEventCallbacks = new ConcurrentHashMap<>();
+
+	public boolean onKeyEvent(KeyEvent event) {
+		if (aidlCallbackListenerV2 != null) {
+			for (Map.Entry<Long, OsmandAidlServiceV2.AidlCallbackParams> entry : aidlCallbackListenerV2.getAidlCallbacks().entrySet()) {
+				OsmandAidlServiceV2.AidlCallbackParams cb = entry.getValue();
+				if ((cb.getKey() & KEY_ON_KEY_EVENT) > 0) {
+					Set<Integer> keyEventsList = keyEventCallbacks.get(entry.getKey());
+					//An empty list means all key are requested
+					if (keyEventsList != null && (keyEventsList.isEmpty() || keyEventsList.contains(event.getKeyCode()))) {
+						try {
+							cb.getCallback().onKeyEvent(event);
+							return true;
+						} catch (Exception e) {
+							LOG.error(e.getMessage(), e);
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	void registerForKeyEvents(long id, ArrayList<Integer> keyEventLst) {
+		keyEventCallbacks.put(id, new HashSet<>(keyEventLst));
+	}
+
+	public void unregisterFromKeyEvents(long id) {
+		keyEventCallbacks.remove(id);
 	}
 
 	public interface SearchCompleteCallback {

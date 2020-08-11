@@ -85,7 +85,7 @@
     <string name="get_telegram_title">Рэгістрацыя ў Telegram</string>
     <string name="get_telegram_account_first">Для абмену вам неабходны акаўнт Тэлеграм.</string>
     <string name="get_telegram_description_continue">Калі ласка, ўсталюйце Тэлеграм і наладзьце акаўнт.</string>
-    <string name="get_telegram_after_creating_account">Пасля гэтага вы зможаце выкарыстоўваць дадатак.</string>
+    <string name="get_telegram_after_creating_account">Пасля гэтага вы зможаце выкарыстоўваць праграму.</string>
     <string name="shared_string_all">Усе</string>
     <string name="shared_string_off">Выкл</string>
     <string name="already_registered_in_telegram">Вам неабходна мець акаўнт Тэлеграм і нумар тэлефона</string>
@@ -125,7 +125,7 @@
     <string name="shared_string_continue">Працягнуць</string>
     <string name="shared_string_cancel">Скасаваць</string>
     <string name="shared_string_settings">Налады</string>
-    <string name="no_location_permission">Дадатак не мае дазволу на доступ да даных аб месцазнаходжанні.</string>
+    <string name="no_location_permission">Праграма не мае дазволу на доступ да даных аб месцазнаходжанні.</string>
     <string name="gps_not_available">Калі ласка, ўключыце \"Месцазнаходжанне\" ў сістэмных наладах</string>
     <string name="location_service_no_gps_available">Абярыце аднаго пастаўшчыка месцазнаходжання, каб падзяліцца сваім месцазнаходжаннем.</string>
     <string name="osmand_service">Фонавы рэжым</string>
@@ -168,7 +168,7 @@
     <string name="shared_string_hour_short">г</string>
     <string name="shared_string_minute_short">хвіл</string>
     <string name="shared_string_second_short">сек</string>
-    <string name="welcome_descr"><b>Назіральнік OsmAnd</b> Дае магчымасць дзяліцца сваім месцазнаходжаннем і бачыць месцазнаходжанне іншых у OsmAnd.<br/> <br/> Дадатак выкарыстоўвае Telegram API, таму вам неабходны акаўнт Тэлеграм.</string>
+    <string name="welcome_descr"><b>Назіральнік OsmAnd</b> Дае магчымасць дзяліцца сваім месцазнаходжаннем і бачыць месцазнаходжанне іншых у OsmAnd.<br/> <br/> Праграма выкарыстоўвае Telegram API, таму вам неабходны акаўнт Тэлеграм.</string>
     <string name="my_location">Маё месцазнаходжанне</string>
     <string name="live_now">Зараз дзейнічае</string>
     <string name="send_location_as">Адправіць месцазнаходжанне як</string>
@@ -200,7 +200,7 @@
     <string name="timeline_description">Уключыць маніторынг, каб захоўваць пункты месцазнаходжання ў гісторыі.</string>
     <string name="app_name_short">Назіральнік OsmAnd</string>
     <string name="shared_string_telegram">Telegram</string>
-    <string name="privacy_policy_use_telegram">Telegram (дадатак для ліставання) выкарыстоўваецца для зносін паміж людзьмі.</string>
+    <string name="privacy_policy_use_telegram">Telegram (праграма для ліставання) выкарыстоўваецца для зносін паміж людзьмі.</string>
     <string name="privacy_policy_telegram_client">Назіральнік OsmAnd - адзін з кліентаў для адкрытай платформы Telegram. Вашыя кантакты могуць выкарыстоўваць іншы кліент.</string>
     <string name="privacy_policy_agree">Націскаючы \"Працягнуць\" вы пагаджаецеся з палітыкай прыватнасці Telegram і OsmAnd.</string>
     <string name="shared_string_accept">Ухваліць</string>

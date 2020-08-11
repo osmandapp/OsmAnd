@@ -104,7 +104,7 @@ public class LockHelper implements SensorEventListener {
 	}
 
 	@SuppressLint("WakelockTimeout")
-	private void unlock() {
+	public void unlock() {
 		if (lockUIAdapter != null) {
 			lockUIAdapter.unlock();
 		}
@@ -116,7 +116,7 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	private void lock() {
+	public void lock() {
 		releaseWakeLocks();
 		if (lockUIAdapter != null) {
 			boolean useSystemTimeout = useSystemScreenTimeout.get();

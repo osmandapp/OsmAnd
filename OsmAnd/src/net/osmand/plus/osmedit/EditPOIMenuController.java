@@ -94,7 +94,7 @@ public class EditPOIMenuController extends MenuController {
 			}
 		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
 			if (osmPoint.getAction() == Action.DELETE) {
-				actionStr = mapActivity.getString(R.string.osm_edit_removed_note);
+				actionStr = mapActivity.getString(R.string.osm_edit_closed_note);
 			} else if (osmPoint.getAction() == Action.MODIFY) {
 				actionStr = mapActivity.getString(R.string.osm_edit_commented_note);
 			} else if (osmPoint.getAction() == Action.REOPEN) {

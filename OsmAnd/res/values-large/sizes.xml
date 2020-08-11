@@ -22,12 +22,12 @@
 	<dimen name="map_button_shadow_height">120dp</dimen>
 	<dimen name="map_button_shadow_margin">6dp</dimen>
 	<dimen name="map_button_shadow_width">84dp</dimen>
-	<dimen name="map_alarm_size">116dp</dimen>
+	<dimen name="map_alarm_size">138dp</dimen>
 	<dimen name="map_alarm_bottom_text_margin">12dp</dimen>
 	<dimen name="map_alarm_text_size">35sp</dimen>
 	<dimen name="map_alarm_text_top_padding">30dp</dimen>
 	<dimen name="map_alarm_bottom_text_size">22sp</dimen>
-	<dimen name="map_alarm_bottom_si_text_size">12sp</dimen>
+	<dimen name="map_alarm_bottom_si_text_size">18sp</dimen>
 	<dimen name="map_alarm_bottom_margin">131dp</dimen>
 	<dimen name="map_alarm_bottom_margin_land">81dp</dimen>
 
@@ -80,7 +80,7 @@
 	<dimen name="measurement_tool_text_margin">12dp</dimen>
 	<dimen name="measurement_tool_points_list_container_height">330dp</dimen>
 	<dimen name="measurement_tool_up_down_row_height">48dp</dimen>
-	<dimen name="measurement_tool_controls_height">78dp</dimen>
+	<dimen name="measurement_tool_controls_height">84dp</dimen>
 	<dimen name="measurement_tool_text_button_padding_small">18dp</dimen>
 	<dimen name="measurement_tool_text_button_padding">24dp</dimen>
 	<dimen name="measurement_tool_undo_redo_padding_small">18dp</dimen>
@@ -88,6 +88,7 @@
 	<dimen name="measurement_tool_undo_redo_padding">24dp</dimen>
 	<dimen name="measurement_tool_button_margin">12dp</dimen>
 	<dimen name="measurement_tool_button_padding">12dp</dimen>
+	<dimen name="measurement_tool_button_padding_top">15dp</dimen>
 	<dimen name="measurement_tool_button_height">54dp</dimen>
 
 	<!--Route info-->

@@ -505,7 +505,7 @@
     <string name="search_position_current_location_found">Моето място (намерено)</string>
     <string name="search_position_address">Адрес…</string>
     <string name="search_position_favorites">Предпочитани…</string>
-    <string name="search_position_undefined">Неопределена</string>
+    <string name="shared_string_undefined">Неопределена</string>
     <string name="search_position_map_view">Текущ център на картата</string>
     <string name="select_search_position">Начална точка:</string>
     <string name="context_menu_item_search">Търси близо до това място</string>
@@ -1568,7 +1568,6 @@
     <string name="show_on_start_description">\"Изкл.\" стартира директно картата.</string>
     <string name="osm_edit_reopened_note">Отворена отново бележка на OSM</string>
     <string name="osm_edit_commented_note">Бележка на OSM с коментар</string>
-    <string name="osm_edit_removed_note">Изтрита бележка на OSM</string>
     <string name="osm_edit_created_note">Създадена бележка на OSM</string>
     <string name="osn_bug_name">Бележка на OSM</string>
     <string name="osn_add_dialog_title">Създайте Бележка</string>

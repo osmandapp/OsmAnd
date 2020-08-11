@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
- xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:minHeight="@dimen/settings_divider_margin_start"
+	android:minHeight="@dimen/favorites_list_item_height"
 	android:background="?attr/selectableItemBackground"
 	android:orientation="horizontal">
 
@@ -29,9 +29,8 @@
 		android:layout_marginEnd="@dimen/list_content_padding"
 		android:layout_marginRight="@dimen/list_content_padding"
 		android:layout_weight="1"
-		android:orientation="vertical"
-		android:paddingTop="@dimen/content_padding_small"
-		android:paddingBottom="@dimen/content_padding_small">
+		android:layout_gravity="center_vertical"
+		android:orientation="vertical">
 
 		<TextView
 			android:id="@+id/name"

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<RadioGroup
+		android:id="@+id/split_type"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dialog_button_height"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/text_margin_small"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding_small"
+		android:background="?attr/btn_bg_border_inactive"
+		android:baselineAligned="false"
+		android:orientation="horizontal">
+
+		<RadioButton
+			android:id="@+id/no_split"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="?attr/btn_radio_button_left"
+			android:button="@android:color/transparent"
+			android:checked="true"
+			android:foreground="?attr/selectableItemBackground"
+			android:gravity="center"
+			android:text="@string/shared_string_none"
+			android:textColor="@drawable/radio_flat_text_selector_light" />
+
+		<RadioButton
+			android:id="@+id/time_split"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="?attr/btn_radio_button_center"
+			android:button="@android:color/transparent"
+			android:foreground="?attr/selectableItemBackground"
+			android:gravity="center"
+			android:text="@string/shared_string_time"
+			android:textColor="@drawable/radio_flat_text_selector_light" />
+
+		<RadioButton
+			android:id="@+id/distance_split"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="?attr/btn_radio_button_right"
+			android:button="@android:color/transparent"
+			android:foreground="?attr/selectableItemBackground"
+			android:gravity="center"
+			android:text="@string/distance"
+			android:textColor="@drawable/radio_flat_text_selector_light"
+			android:textSize="@dimen/default_desc_text_size" />
+
+	</RadioGroup>
+
+	<LinearLayout
+		android:id="@+id/slider_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="start"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:text="@string/gpx_split_interval"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/split_value_tv"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="end"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="@string/shared_string_max" />
+
+		</LinearLayout>
+
+		<com.google.android.material.slider.Slider
+			android:id="@+id/split_slider"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:stepSize="1" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/split_value_min"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="start"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="3" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/split_value_max"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="end"
+				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="19" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/split_interval_none_descr"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding"
+		android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+		android:text="@string/gpx_split_interval_none_descr"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size" />
+
+</LinearLayout>

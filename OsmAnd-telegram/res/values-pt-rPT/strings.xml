@@ -25,11 +25,11 @@
     <string name="active_chats">Bate-papos ativos</string>
     <string name="si_min_km">Minutos por quilômetro</string>
     <string name="background_work">Funcionamento em segundo plano</string>
-    <string name="location_history_desc">Ocultar contatos que não foram movidos em um determinado momento.</string>
+    <string name="location_history_desc">Ocultar contactos que não foram movidos num determinado momento.</string>
     <string name="gpx_settings">Configurações de GPX</string>
     <string name="type_contact_or_group_name">Digite o nome do contato ou do grupo</string>
     <string name="min_mile">min/m</string>
-    <string name="password_descr">Senha do telegrama</string>
+    <string name="password_descr">Palavra-passe do telegrama</string>
     <string name="last_updated_location">Última localização atualizada:</string>
     <string name="stale_location">Parado</string>
     <string name="show_gps_points_descr">Mostrar quantidade de pontos de GPS coletados e enviados.</string>
@@ -71,7 +71,7 @@
     <string name="osmand_connect">Conectar OsmAnd</string>
     <string name="get_telegram_description_continue">Por favor, instale o Telegram e configure uma conta.</string>
     <string name="si_kmh">Quilômetros por hora</string>
-    <string name="shared_string_password">Senha</string>
+    <string name="shared_string_password">Palavra-passe</string>
     <string name="min_logging_distance">Distância mínima de registro</string>
     <string name="shared_string_save">Gravar</string>
     <string name="shared_string_start">Iniciar</string>
@@ -92,7 +92,7 @@
     <string name="shared_string_later">Mais tarde</string>
     <string name="my_location">Minha localização</string>
     <string name="install_osmand">Instalar OsmAnd</string>
-    <string name="privacy_policy_use_telegram">Telegrama (o aplicativo de mensagens) é usado para conectar e se comunicar com as pessoas.</string>
+    <string name="privacy_policy_use_telegram">Telegrama (a app de mensagens) é usado para conectar e se comunicar com as pessoas.</string>
     <string name="not_possible_to_send_to_telegram_chats">Não é possível enviar para bate-papo do Telegram:</string>
     <string name="not_sent_yet">Ainda não enviado</string>
     <string name="points_size">%1$d pontos</string>
@@ -108,7 +108,7 @@
     <string name="expire_at">Expira</string>
     <string name="send_location_as">Enviar localização como</string>
     <string name="shared_string_exit">Sair</string>
-    <string name="no_location_permission">O aplicativo não tem permissão para acessar os dados de localização.</string>
+    <string name="no_location_permission">A app não tem permissão para acessar os dados de localização.</string>
     <string name="si_mph">Milhas por hora</string>
     <string name="share_location_as_description_second_line">Pode criar e visualizar o ID do aparelho no cliente de telegrama usando o bot de bate-papo %1$s. %2$s</string>
     <string name="shared_string_back">Voltar</string>
@@ -208,7 +208,7 @@
     <string name="average_speed">Velocidade média</string>
     <string name="shared_string_status">Situação</string>
     <string name="km_h">km/h</string>
-    <string name="get_telegram_after_creating_account">Então você pode usar este aplicativo.</string>
+    <string name="get_telegram_after_creating_account">Então pode usar esta app.</string>
     <string name="shared_string_settings">Configurações</string>
     <string name="go_to_settings">Vá para as configurações</string>
     <string name="authentication_code_descr">Uma faixa GPX é salva automaticamente durante a navegação.</string>

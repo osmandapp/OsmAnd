@@ -28,9 +28,6 @@ public class IndexConstants {
 	public static final String EXTRA_EXT = ".extra";
 	public static final String EXTRA_ZIP_EXT = ".extra.zip";
 	
-	public static final String TOUR_INDEX_EXT = ".tour"; //$NON-NLS-1$
-	public static final String TOUR_INDEX_EXT_ZIP = ".tour.zip"; //$NON-NLS-1$
-	
 	public static final String GEN_LOG_EXT = ".gen.log"; //$NON-NLS-1$
 	
 	public static final String VOICE_INDEX_EXT_ZIP = ".voice.zip"; //$NON-NLS-1$

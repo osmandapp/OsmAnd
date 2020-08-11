@@ -35,7 +35,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteSegmentSearchResult;
-import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;

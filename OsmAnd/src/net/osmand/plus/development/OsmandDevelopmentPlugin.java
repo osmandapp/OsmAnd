@@ -15,10 +15,10 @@ import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 

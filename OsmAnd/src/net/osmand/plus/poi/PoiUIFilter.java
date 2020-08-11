@@ -682,7 +682,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 					if (subtype != null) {
 						PoiCategory c = subtype.getCategory();
 						String typeName = subtype.getKeyName();
-						if (!getAcceptedSubtypes(c).contains(typeName)) {
+						Set<String> acceptedSubtypes = getAcceptedSubtypes(c);
+						if (acceptedSubtypes != null && !acceptedSubtypes.contains(typeName)) {
 							LinkedHashSet<String> typeNames = acceptedTypesOrigin.get(c);
 							if (typeNames == null) {
 								typeNames = new LinkedHashSet<>();

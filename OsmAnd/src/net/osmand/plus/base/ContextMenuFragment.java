@@ -62,7 +62,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	public static final int MIDDLE_STATE_MIN_HEIGHT_DP = 520;
 	public static final String MENU_STATE_KEY = "menu_state_key";
 
-	private InterceptorLinearLayout mainView;
+	private LinearLayout mainView;
 	private View view;
 	private OnLayoutChangeListener containerLayoutListener;
 	private View topShadow;
@@ -148,6 +148,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return getLandscapeWidth() - getResources().getDimensionPixelSize(R.dimen.dashboard_land_shadow_width);
 	}
 
+	public float getMiddleStateKoef() {
+		return MIDDLE_STATE_KOEF;
+	}
+
 	public abstract int getToolbarHeight();
 
 	public boolean isSingleFragment() {
@@ -159,7 +163,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	}
 
 	@Nullable
-	public InterceptorLinearLayout getMainView() {
+	public LinearLayout getMainView() {
 		return mainView;
 	}
 
@@ -278,6 +282,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		bottomContainer = (FrameLayout) view.findViewById(getBottomContainerViewId());
 		bottomScrollView = (LockableScrollView) view.findViewById(getBottomScrollViewId());
 
+		ViewConfiguration vc = ViewConfiguration.get(context);
+		final int touchSlop = vc.getScaledTouchSlop();
+
 		bottomScrollView.setScrollingEnabled(false);
 		if (getTopViewId() != 0) {
 			View topView = view.findViewById(getTopViewId());
@@ -345,7 +352,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 						break;
 
 					case MotionEvent.ACTION_MOVE:
-						if (Math.abs(event.getRawY() - mDownY) > mainView.getTouchSlop()) {
+						if (Math.abs(event.getRawY() - mDownY) > touchSlop) {
 							moving = true;
 						}
 						if (moving) {
@@ -431,7 +438,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 			}
 		};
 
-		((InterceptorLinearLayout) mainView).setListener(slideTouchListener);
+		if (mainView instanceof InterceptorLinearLayout) {
+			((InterceptorLinearLayout) mainView).setListener(slideTouchListener);
+		}
 		mainView.setOnTouchListener(slideTouchListener);
 
 		containerLayoutListener = new OnLayoutChangeListener() {
@@ -605,7 +614,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	}
 
 	private int getMinHalfY(MapActivity mapActivity) {
-		return viewHeight - (int) Math.min(viewHeight * MIDDLE_STATE_KOEF,
+		return viewHeight - (int) Math.min(viewHeight * getMiddleStateKoef(),
 				MIDDLE_STATE_MIN_HEIGHT_DP * mapActivity.getMapView().getDensity() );
 	}
 
@@ -614,7 +623,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public int getWidth() {
-		InterceptorLinearLayout mainView = getMainView();
+		LinearLayout mainView = getMainView();
 		if (mainView != null) {
 			return mainView.getWidth();
 		} else {

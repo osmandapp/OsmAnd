@@ -160,7 +160,7 @@ public class SearchPhrase {
 	
 	
 	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {
-		String textToSearch = text;
+		String textToSearch = Algorithms.normalizeSearchText(text);
 		List<SearchWord> leftWords = this.words;
 		String thisTxt = getText(true);
 		List<SearchWord> foundWords = new ArrayList<>();
@@ -183,6 +183,7 @@ public class SearchPhrase {
 	}
 
 	
+
 	public static SearchPhrase emptyPhrase() {
 		return emptyPhrase(null);
 	}

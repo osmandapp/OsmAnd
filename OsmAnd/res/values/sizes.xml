@@ -96,7 +96,8 @@
 	<dimen name="gpx_small_icon_margin">3dp</dimen>
 	<dimen name="gpx_small_text_margin">14dp</dimen>
 	<dimen name="gpx_text_top_margin">6dp</dimen>
-
+	<dimen name="gpx_group_button_height">60dp</dimen>
+	<dimen name="gpx_group_button_width">96dp</dimen>
 
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
@@ -114,7 +115,7 @@
 
 	<dimen name="map_ruler_width">120dp</dimen>
 	<dimen name="map_ruler_bottom_margin">9dp</dimen>
-	<dimen name="map_alarm_size">78dp</dimen>
+	<dimen name="map_alarm_size">92dp</dimen>
 	<dimen name="map_alarm_bottom_text_margin">8dp</dimen>
 
 
@@ -148,7 +149,7 @@
 	<dimen name="map_alarm_text_size">25sp</dimen>
 	<dimen name="map_alarm_text_top_padding">20dp</dimen>
 	<dimen name="map_alarm_bottom_text_size">16sp</dimen>
-	<dimen name="map_alarm_bottom_si_text_size">8sp</dimen>
+	<dimen name="map_alarm_bottom_si_text_size">12sp</dimen>
 	<dimen name="map_widget_text_bottom_margin">1sp</dimen>
 	<dimen name="map_widget_text_small_bottom_margin">3sp</dimen>
 	<dimen name="map_widget_icon_margin">2dp</dimen>
@@ -251,21 +252,26 @@
 	<dimen name="text_margin_small">4dp</dimen>
 	<dimen name="measurement_tool_text_margin">8dp</dimen>
 	<dimen name="measurement_tool_points_list_container_height">220dp</dimen>
-	<dimen name="measurement_tool_up_down_row_height">48dp</dimen>
-	<dimen name="measurement_tool_controls_height">52dp</dimen>
-	<dimen name="measurement_tool_text_button_padding_small">12dp</dimen>
+	<dimen name="measurement_tool_up_down_row_height">60dp</dimen>
+	<dimen name="measurement_tool_controls_height">56dp</dimen>
+	<dimen name="measurement_tool_text_button_padding_small">8dp</dimen>
 	<dimen name="measurement_tool_text_button_padding">16dp</dimen>
-	<dimen name="measurement_tool_undo_redo_padding_small">12dp</dimen>
+	<dimen name="measurement_tool_undo_redo_padding_small">6dp</dimen>
 	<dimen name="measurement_tool_undo_redo_padding_medium">14dp</dimen>
 	<dimen name="measurement_tool_undo_redo_padding">16dp</dimen>
 	<dimen name="measurement_tool_button_margin">8dp</dimen>
 	<dimen name="measurement_tool_button_padding">8dp</dimen>
+	<dimen name="measurement_tool_button_padding_top">10dp</dimen>
 	<dimen name="measurement_tool_button_height">36dp</dimen>
+	<dimen name="measurement_tool_options_divider_margin_start">72dp</dimen>
 	<dimen name="bottom_sheet_title_height">52dp</dimen>
 	<dimen name="bottom_sheet_descr_height">44dp</dimen>
 	<dimen name="bottom_sheet_list_item_height">48dp</dimen>
 	<dimen name="bottom_sheet_large_list_item_height">64dp</dimen>
 	<dimen name="bottom_sheet_icon_margin">24dp</dimen>
+	<dimen name="bottom_sheet_title_padding_top">10dp</dimen>
+	<dimen name="bottom_sheet_title_padding_bottom">6dp</dimen>
+	<dimen name="bottom_sheet_icon_margin_large">32dp</dimen>
 	<dimen name="bottom_sheet_divider_margin_top">7dp</dimen>
 	<dimen name="bottom_sheet_divider_margin_bottom">8dp</dimen>
 	<dimen name="bottom_sheet_divider_margin_start">64dp</dimen>
@@ -340,6 +346,7 @@
 	<dimen name="toolbar_height">56dp</dimen>
 	<dimen name="toolbar_height_expanded">96dp</dimen>
 	<dimen name="toolbar_inset_start_with_navigation">72dp</dimen>
+	<dimen name="toolbar_inset_start">54dp</dimen>
 
 	<dimen name="wikivoyage_search_list_header_height">36dp</dimen>
 	<dimen name="wikivoyage_article_card_icon_size">80dp</dimen>

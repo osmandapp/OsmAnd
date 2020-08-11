@@ -567,7 +567,7 @@
     <string name="poi_estate_agent">Fastighetsmäklare</string>
     <string name="poi_lawyer">Advokat</string>
     <string name="poi_office_telecommunication">Telekommunikationer</string>
-    <string name="poi_ngo">Icke-vinstdrivande organisatio</string>
+    <string name="poi_ngo">Icke-statlig organisation</string>
     <string name="poi_townhall">Stadshus</string>
     <string name="poi_employment_agency">Arbetsförmedling</string>
     <string name="poi_research">Forskningskontor</string>
@@ -1640,7 +1640,7 @@
     <string name="poi_drive_in_yes">Ja</string>
     <string name="poi_drive_in_no">Drive-in: nej</string>
     <string name="poi_drive_through_yes">Ja</string>
-    <string name="poi_drive_through_no">Drive-through: ja</string>
+    <string name="poi_drive_through_no">Drive-through: nej</string>
     <string name="poi_brewery_additional">Bryggerinamn</string>
     <string name="poi_microbrewery_yes">Ja</string>
     <string name="poi_microbrewery_no">Inget mikrobryggeri</string>

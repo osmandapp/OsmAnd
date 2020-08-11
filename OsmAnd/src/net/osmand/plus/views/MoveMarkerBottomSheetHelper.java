@@ -12,6 +12,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.layers.ContextMenuLayer;
 
 public class MoveMarkerBottomSheetHelper {
 	private final View mView;

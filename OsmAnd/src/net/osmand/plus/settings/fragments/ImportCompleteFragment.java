@@ -36,7 +36,6 @@ import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.settings.fragments.ImportSettingsFragment.IMPORT_SETTINGS_TAG;
-import static net.osmand.plus.settings.fragments.ImportSettingsFragment.getSettingsToOperate;
 
 public class ImportCompleteFragment extends BaseOsmAndFragment {
 	public static final String TAG = ImportCompleteFragment.class.getSimpleName();
@@ -111,7 +110,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (settingsItems != null) {
 			ImportedSettingsItemsAdapter adapter = new ImportedSettingsItemsAdapter(
 					app,
-					getSettingsToOperate(settingsItems, true),
+					ImportSettingsFragment.getSettingsToOperate(settingsItems, true),
 					nightMode,
 					new ImportedSettingsItemsAdapter.OnItemClickListener() {
 						@Override

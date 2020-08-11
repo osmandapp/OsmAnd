@@ -1,13 +1,17 @@
 package net.osmand.plus.routing;
 
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
+import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
+import net.osmand.plus.routing.RouteProvider.RoutingEnvironment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
@@ -24,11 +28,15 @@ import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
+import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -857,10 +865,9 @@ public class RoutingHelper {
 						l.newRouteIsCalculated(newRoute, showToast);
 					}
 				}
-				if (showToast.value && OsmandPlugin.isDevelopment()) {
+				if (showToast.value && newRoute && OsmandPlugin.isDevelopment()) {
 					String msg = app.getString(R.string.new_route_calculated_dist_dbg,
 							OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app),
-
 							((int)res.getRoutingTime()) + " sec",
 							res.getCalculateTime(), res.getVisitedSegments(), res.getLoadedTiles());
 					app.showToastMessage(msg);
@@ -1345,12 +1352,24 @@ public class RoutingHelper {
 		return generateGPXFileWithRoute(route, name);
 	}
 
-	public GPXFile generateGPXFileWithRoute(RouteCalculationResult route, String name){
+	public GPXFile generateGPXFileWithRoute(RouteCalculationResult route, String name) {
 		return provider.createOsmandRouterGPX(route, app, name);
 	}
 
+	public RoutingEnvironment getRoutingEnvironment(OsmandApplication ctx, ApplicationMode mode, LatLon start, LatLon end) throws IOException {
+		return provider.getRoutingEnvironment(ctx, mode, start, end);
+	}
+
+	public List<GpxPoint> generateGpxPoints(RoutingEnvironment env, GpxRouteApproximation gctx, LocationsHolder locationsHolder) {
+		return provider.generateGpxPoints(env, gctx, locationsHolder);
+	}
+
+	public GpxRouteApproximation calculateGpxApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points) throws IOException, InterruptedException {
+		return provider.calculateGpxPointsApproximation(env, gctx, points);
+	}
+
 	public void notifyIfRouteIsCalculated() {
-		if(route.isCalculated()) {
+		if (route.isCalculated()) {
 			voiceRouter.newRouteIsCalculated(true)	;
 		}
 	}

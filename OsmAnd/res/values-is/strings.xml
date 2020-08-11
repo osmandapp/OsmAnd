@@ -539,7 +539,7 @@
     <string name="city_type_city">Borg/Sveitarfélag</string>
     <string name="search_position_address">Heimilisfang…</string>
     <string name="search_position_favorites">Eftirlæti…</string>
-    <string name="search_position_undefined">Óskilgreint</string>
+    <string name="shared_string_undefined">Óskilgreint</string>
     <string name="search_position_map_view">Núverandi miðja korts</string>
     <string name="select_search_position">Upphaf:</string>
     <string name="context_menu_item_search">Leita í nágrenninu</string>
@@ -765,7 +765,6 @@
     <string name="select_voice_provider">Veldu raddleiðsögn</string>
     <string name="context_menu_item_open_note">Opna OSM-minnispunkt</string>
     <string name="osm_edit_reopened_note">Enduropnaði OSM-minnispunkt</string>
-    <string name="osm_edit_removed_note">Eyddi OSM-minnispunkti</string>
     <string name="osm_edit_created_note">Bjó til OSM-minnispunkt</string>
     <string name="osn_bug_name">OSM-minnispunktur</string>
     <string name="osn_add_dialog_title">Búa til minnispunkt</string>

@@ -1085,7 +1085,7 @@
     <string name="search_position_current_location_found">Mi ubicación (encontrada)</string>
     <string name="search_position_address">Dirección…</string>
     <string name="search_position_favorites">Favoritos…</string>
-    <string name="search_position_undefined">Indefinido</string>
+    <string name="shared_string_undefined">Indefinido</string>
     <string name="search_position_map_view">Vista actual del mapa</string>
     <string name="select_search_position">Origen:</string>
     <string name="context_menu_item_search">Buscar cerca</string>
@@ -1772,7 +1772,6 @@
     <string name="context_menu_item_open_note">Abrir nota de OSM</string>
     <string name="osm_edit_reopened_note">Nota de OSM reabierta</string>
     <string name="osm_edit_commented_note">Nota de OSM comentada</string>
-    <string name="osm_edit_removed_note">Nota de OSM resuelta</string>
     <string name="osm_edit_created_note">Nota de OSM creada</string>
     <string name="osn_bug_name">Nota de OSM</string>
     <string name="osn_add_dialog_title">Crear nota</string>
@@ -2079,7 +2078,7 @@
     <string name="shared_string_record">Grabar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
     <string name="trip_rec_notification_settings">Activar la grabación rápida</string>
-    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite la grabación del viaje.</string>
+    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación del viaje.</string>
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="gpx_no_tracks_title">Sin archivos GPX aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos GPX a la carpeta</string>
@@ -3096,10 +3095,10 @@
     <string name="routing_profile_geocoding">Geocodificación</string>
     <string name="routing_profile_straightline">Línea recta</string>
     <string name="routing_profile_broutrer">BRouter (sin conexión)</string>
-    <string name="osmand_default_routing">Enrutamiento de OsmAnd</string>
-    <string name="custom_routing">Perfil de enrutamiento personalizado</string>
-    <string name="special_routing_type">Enrutamiento especial</string>
-    <string name="third_party_routing_type">Enrutamiento de terceros</string>
+    <string name="osmand_default_routing">Navegación de OsmAnd</string>
+    <string name="custom_routing">Perfil de navegación personalizado</string>
+    <string name="special_routing_type">Navegación especial</string>
+    <string name="third_party_routing_type">Navegación de terceros</string>
     <string name="application_profiles_descr">Perfiles que serán visibles en la aplicación.</string>
     <string name="application_profiles">Perfiles de la aplicación</string>
     <string name="zoom_by_wunderlinq_descr">Cambia el zoom del mapa desplazando la rueda hacia arriba y abajo. La tecla «Escape» retrocede a la aplicación WunderLINQ.</string>
@@ -3347,13 +3346,13 @@
 \n 
 \n • Arreglos en el modo nocturno 
 \n 
-\n • Se corrigieron algunos problemas de enrutamiento en todo el mundo 
+\n • Se corrigieron algunos problemas de navegación en todo el mundo 
 \n 
 \n • Se ha actualizado el mapa base con más detalles en la red de caminos. 
 \n 
 \n • Se corrigieron las zonas inundadas en todo el mundo 
 \n 
-\n • Enrutamiento de esquí: perfil de elevación y complejidad de la ruta añadidos a los detalles de la ruta 
+\n • Navegación de esquí: perfil de elevación y complejidad de la ruta añadidos a los detalles de la ruta 
 \n 
 \n • Otras correcciones de errores
 \n
@@ -3535,7 +3534,7 @@
 \nEl complemento permanecerá en el dispositivo después de desinstalar OsmAnd.</string>
     <string name="shared_string_menu">Menú</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s → %2$s → %3$s</string>
-    <string name="shared_string_routing">Enrutamiento</string>
+    <string name="shared_string_routing">Navegación</string>
     <string name="shared_string_include_data">Incluir datos adicionales</string>
     <string name="import_profile_dialog_description">El perfil importado contiene datos adicionales. Pulsa en «Importar» para importar sólo datos de perfil o marca datos adicionales.</string>
     <string name="export_profile_dialog_description">Puedes marcar datos adicionales para exportar junto con el perfil.</string>
@@ -3820,4 +3819,42 @@
     <string name="quick_action_remove_next_destination_descr">El punto de destino actual de la ruta será borrado. Si será el destino, la navegación se detendrá.</string>
     <string name="search_download_wikipedia_maps">Descargar datos de Wikipedia</string>
     <string name="plugin_wikipedia_description">Obtén información sobre los puntos de interés de Wikipedia. Es tu guía de bolsillo sin conexión - sólo activa el complemento de Wikipedia y disfruta los artículos sobre los objetos de alrededor.</string>
+    <string name="app_mode_enduro_motorcycle">Motocicleta de enduro</string>
+    <string name="app_mode_motor_scooter">Motoneta (motor)</string>
+    <string name="app_mode_wheelchair">Silla de ruedas</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="osm_edit_closed_note">Nota de OSM cerrada</string>
+    <string name="app_mode_wheelchair_forward">Silla de ruedas (hacia adelante)</string>
+    <string name="set_working_days_to_continue">Debes definir los días laborales para continuar</string>
+    <string name="route_between_points">Ruta entre puntos</string>
+    <string name="plan_a_route">Crear una ruta</string>
+    <string name="add_to_a_track">Añadir a una traza</string>
+    <string name="add_hidden_group_info">El punto añadido no será visible en el mapa, ya que el grupo elegido está oculto, se puede encontrar en «%s».</string>
+    <string name="track_show_start_finish_icons">Mostrar los iconos de inicio y fin</string>
+    <string name="select_track_width">Elegir la anchura</string>
+    <string name="gpx_split_interval_descr">Marca el intervalo en el que se mostrarán las marcas con distancia o tiempo en la traza.</string>
+    <string name="gpx_split_interval_none_descr">Marca la opción de división deseada: por tiempo o por distancia.</string>
+    <string name="shared_string_custom">Personalizado</string>
+    <string name="gpx_direction_arrows">Flechas de dirección</string>
+    <string name="track_coloring_solid">Sólido</string>
+    <string name="plan_route_last_edited">Última edición</string>
+    <string name="plan_route_import_track">Importar traza</string>
+    <string name="plan_route_open_existing_track">Abrir traza existente</string>
+    <string name="plan_route_create_new_route">Crear nueva ruta</string>
+    <string name="plan_route_select_track_file_for_open">Marca un archivo de traza para abrir.</string>
+    <string name="shared_string_done">Hecho</string>
+    <string name="overwrite_track">Sobrescribir traza</string>
+    <string name="save_as_new_track">Guardar como nueva traza</string>
+    <string name="reverse_route">Ruta inversa</string>
+    <string name="rourte_between_points_next_segment_button_desc">Recalcular sólo el siguiente segmento usando el perfil elegido.</string>
+    <string name="rourte_between_points_whole_track_button_desc">Recalcular toda la traza usando el perfil elegido.</string>
+    <string name="rourte_between_points_desc">Marca cómo conectar los puntos, con una línea recta o calcular una ruta entre ellos con el perfil elegido.</string>
+    <string name="whole_track">Traza completa</string>
+    <string name="next_segment">Siguiente segmento</string>
+    <string name="rourte_between_points_warning_desc">Para utilizar esta opción, OsmAnd debe ajustar su traza a los caminos del mapa.
+\n
+\n En el siguiente paso se debe elegir el perfil de navegación para detectar los caminos permitidos y el umbral de distancia para aproximar la traza a los caminos.</string>
+    <string name="threshold_distance">Distancia de umbral</string>
+    <string name="navigation_profile">Perfil de navegación</string>
+    <string name="rourte_between_points_add_track_desc">Elige un archivo de traza al que se añadirá un nuevo segmento.</string>
 </resources>

@@ -1,6 +1,7 @@
 package net.osmand.plus.base;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -119,7 +120,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		super.onStart();
 		FragmentActivity activity = requireActivity();
 		if (!AndroidUiHelper.isOrientationPortrait(activity)) {
-			final Window window = getDialog().getWindow();
+			Dialog dialog = getDialog();
+			Window window = dialog != null ? dialog.getWindow() : null;
 			if (window != null) {
 				WindowManager.LayoutParams params = window.getAttributes();
 				params.width = activity.getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);

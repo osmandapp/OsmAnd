@@ -939,7 +939,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		if (mIOsmAndAidlInterface != null) {
 			try {
 				return mIOsmAndAidlInterface!!.setMapLocation(
-						SetMapLocationParams(latitude, longitude, zoom, animated))
+					SetMapLocationParams(latitude, longitude, zoom, Float.NaN, animated))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}

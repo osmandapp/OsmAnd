@@ -1291,7 +1291,7 @@
     <string name="search_position_current_location_found">എന്റെ സ്ഥാനം (കണ്ടെത്തിയത്)</string>
     <string name="search_position_address">വിലാസം…</string>
     <string name="search_position_favorites">ഇഷ്ടമുളളവ…</string>
-    <string name="search_position_undefined">നിഷ്കര്‍ഷിക്കപെടാത്തത്</string>
+    <string name="shared_string_undefined">നിഷ്കര്‍ഷിക്കപെടാത്തത്</string>
     <string name="select_search_position">മൂലസ്ഥാനം:</string>
     <string name="local_index_upload_gpx_description">ഓഎസ്എം കംമ്മ്യൂണിറ്റിക്ക് ജിപിഎക്സ് ഫയലുകള്‍ കയറ്റി അയക്കുക (അപ്ലോഡ്). അവര്‍ക്ക് ഇത് ഭൂപടങ്ങള്‍ മെച്ച്പ്പെടുത്താന്‍ ഉപകരിക്കും.</string>
     <string name="local_index_items_uploaded">%2$d യില്‍ %1$d ഇനങ്ങള്‍ വിജയകരമായ് കയറ്റിയിരിക്കുന്നു(അപ്ലോഡ്).</string>
@@ -2058,7 +2058,6 @@
     <string name="osm_edit_deleted_poi">OSM POI ഇല്ലാതാക്കി</string>
     <string name="osm_edit_reopened_note">OSM കുറിപ്പ് വീണ്ടും തുറന്നു</string>
     <string name="osm_edit_commented_note">OSM കുറിപ്പിൽ അഭിപ്രായമിട്ടു</string>
-    <string name="osm_edit_removed_note">OSM കുറിപ്പ് ഇല്ലാതാക്കി</string>
     <string name="osm_edit_created_note">OSM കുറിപ്പു് സൃഷ്ടിച്ചു</string>
     <string name="osn_add_dialog_title">കുറിപ്പ് സൃഷ്ടിക്കുക</string>
     <string name="osm_edit_created_poi">OSM POI സൃഷ്ടിച്ചു</string>

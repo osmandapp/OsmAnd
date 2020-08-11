@@ -51,6 +51,8 @@ public class EditPoiData {
 			category = type;
 			tagValues.put(POI_TYPE_TAG, "");
 			changedTags.add(POI_TYPE_TAG);
+			removeCurrentTypeTag();
+			currentPoiType=null;
 		}
 	}
 	
@@ -212,13 +214,14 @@ public class EditPoiData {
 			}
 			retrieveType();
 			PoiType pt = getPoiTypeDefined();
-			if (pt != null) {
-				removeTypeTagWithPrefix(!tagValues.containsKey(REMOVE_TAG_PREFIX + pt.getEditOsmTag()));
+			String editOsmTag = pt != null ? pt.getEditOsmTag() : null;
+			if (editOsmTag != null) {
+				removeTypeTagWithPrefix(!tagValues.containsKey(REMOVE_TAG_PREFIX + editOsmTag));
 				currentPoiType = pt;
 				String tagVal = pt.getEditOsmValue() != null ? pt.getEditOsmValue() : "";
-				tagValues.put(pt.getEditOsmTag(), tagVal);
+				tagValues.put(editOsmTag, tagVal);
 				if (userChanges) {
-					changedTags.add(pt.getEditOsmTag());
+					changedTags.add(editOsmTag);
 				}
 				category = pt.getCategory();
 			} else if (currentPoiType != null) {
