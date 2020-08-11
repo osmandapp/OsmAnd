@@ -22,8 +22,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.textfield.MaterialAutoCompleteTextView;
-
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -215,7 +213,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 		public void addTagView(String tg, String vl) {
 			View convertView = LayoutInflater.from(linearLayout.getContext())
 					.inflate(R.layout.poi_tag_list_item, null, false);
-			final MaterialAutoCompleteTextView tagEditText = convertView.findViewById(R.id.tagEditText);
+			final AutoCompleteTextView tagEditText = convertView.findViewById(R.id.tagEditText);
 			ImageButton deleteItemImageButton =
 					(ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
 			deleteItemImageButton.setImageDrawable(deleteDrawable);
@@ -227,7 +225,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 					editPoiData.removeTag(tagEditText.getText().toString());
 				}
 			});
-			final MaterialAutoCompleteTextView valueEditText = convertView.findViewById(R.id.valueEditText);
+			final AutoCompleteTextView valueEditText = convertView.findViewById(R.id.valueEditText);
 			valueEditText.setFilters(new InputFilter[]{
 					new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)
 			});
