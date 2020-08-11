@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.GPXUtilities.WptPt;
@@ -183,7 +182,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View view, MotionEvent event) {
-					if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+					if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 						inDragAndDrop = true;
 						if (showRoundTripItem) {
 							int roundTripItemPos = finishPos;

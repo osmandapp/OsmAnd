@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.view.ViewCompat;
-
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.plus.OsmandApplication;
@@ -98,8 +96,8 @@ public class DashErrorFragment extends DashBaseFragment {
 		@Override
 		public void onDismiss() {
 			dashboardOnMap.hideFragmentByTag(fragmentTag);
-			ViewCompat.setTranslationX(fragmentView, 0);
-			ViewCompat.setAlpha(fragmentView, 1);
+			fragmentView.setTranslationX(0);
+			fragmentView.setAlpha(1);
 			Snackbar.make(parentView, dashboardOnMap.getMyApplication().getResources()
 					.getString(R.string.shared_string_card_was_hidden), Snackbar.LENGTH_LONG)
 					.setAction(R.string.shared_string_undo, new View.OnClickListener() {
@@ -113,8 +111,8 @@ public class DashErrorFragment extends DashBaseFragment {
 
 		public void onUndo() {
 			dashboardOnMap.unhideFragmentByTag(fragmentTag);
-			ViewCompat.setTranslationX(fragmentView, 0);
-			ViewCompat.setAlpha(fragmentView, 1);
+			fragmentView.setTranslationX(0);
+			fragmentView.setAlpha(1);
 		}
 	}
 }

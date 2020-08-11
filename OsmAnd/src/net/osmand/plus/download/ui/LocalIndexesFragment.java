@@ -695,8 +695,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					Drawable icon = getMyApplication().getUIUtilities().getIcon(actionIconId, colorResId);
 					it.setIcon(icon);
 				}
-				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
-						MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+				it.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
+						MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 				return true;
 			}
 

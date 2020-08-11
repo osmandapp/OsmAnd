@@ -215,12 +215,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 				@Override
 				public void onGlobalLayout() {
-
-					ViewTreeObserver obs = view.getViewTreeObserver();
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						obs.removeGlobalOnLayoutListener(this);
-					}
-
 					if (getActivity() != null) {
 						tabLayout.setupWithViewPager(viewPager);
 					}
@@ -781,7 +775,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		private final String[] titles;
 
 		PoiInfoPagerAdapter(FragmentManager fm, String basicTitle, String extendedTitle) {
-			super(fm);
+			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 			titles = new String[]{basicTitle, extendedTitle};
 		}
 
