@@ -16,7 +16,7 @@
         android:contentDescription="@string/quick_action_new_action"
         app:srcCompat="@drawable/ic_action_plus"
         app:backgroundTint="?attr/active_color_basic"
-        app:tint="@color/active_buttons_and_links_text_light"
+        app:tint="?attr/app_bar_primary_item_color"
         app:fabSize="normal"
         app:useCompatPadding="true"/>
 
@@ -34,7 +34,7 @@
         app:srcCompat="@drawable/ic_action_marker_dark"
         android:visibility="gone"
         app:backgroundTint="@color/fab_green"
-        app:tint="@color/active_buttons_and_links_text_light"
+        app:tint="?attr/app_bar_primary_item_color"
         app:fabSize="mini"
         app:useCompatPadding="true"
         tools:visibility="visible"/>
@@ -80,7 +80,7 @@
         app:srcCompat="@drawable/ic_action_markers_dark"
         android:visibility="gone"
         app:backgroundTint="@color/fab_green"
-        app:tint="@color/active_buttons_and_links_text_light"
+        app:tint="?attr/app_bar_primary_item_color"
         app:fabSize="mini"
         app:useCompatPadding="true"
         tools:visibility="visible"/>
@@ -126,7 +126,7 @@
         app:srcCompat="@drawable/ic_action_polygom_dark"
         android:visibility="gone"
         app:backgroundTint="@color/fab_green"
-        app:tint="@color/active_buttons_and_links_text_light"
+        app:tint="?attr/app_bar_primary_item_color"
         app:fabSize="mini"
         app:useCompatPadding="true"
         tools:visibility="visible"/>
