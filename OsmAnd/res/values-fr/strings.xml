@@ -1373,7 +1373,7 @@
     <string name="use_opengl_render">Utiliser le rendu OpenGL</string>
     <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (peut consommer plus de batterie et ne pas fonctionner sur les anciens appareils).</string>
     <string name="everything_up_to_date">Tous les fichiers sont à jour</string>
-    <string name="shared_string_dismiss">Ignorer</string>
+    <string name="shared_string_dismiss">Arrêter</string>
     <string name="no_internet_connection">Téléchargement impossible, veuillez vérifier votre connexion Internet.</string>
     <string name="download_tab_downloads">Tous les téléchargements</string>
     <string name="download_tab_updates">Mises à jour</string>
