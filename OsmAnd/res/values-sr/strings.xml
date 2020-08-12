@@ -684,7 +684,7 @@
     <string name="shared_string_not_selected">Није означено</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">min</string>
-    <string name="traffic_warning_calming">Лежећи полицајац</string>
+    <string name="traffic_warning_calming">Смиривање саобраћаја</string>
     <string name="way_alarms">Упозорења о гужвама у саобраћају</string>
     <string name="background_service_is_enabled_question">Позадинске услуге OsmAnd-а су и даље покренуте. Прекинути и њих?</string>
     <string name="sleep_mode_stop_dialog">Прекинути позадински режим GPS-а?</string>
@@ -1251,7 +1251,7 @@
     <string name="mapillary_widget_descr">Омогућава брзи допринос Мапилару.</string>
     <string name="open_mapillary">Отвори Мапилар</string>
     <string name="mapillary_descr">Мрежне слике улица за све. Откријте места, сарађујте, освојите свет.</string>
-    <string name="mapillary">Мапилар</string>
+    <string name="mapillary">Слике на нивоу улице</string>
     <string name="plugin_mapillary_descr">Мрежне слике улица за све. Откријте места, сарађујте, освојите свет.</string>
     <string name="private_access_routing_req">Ваше одредиште се налази на приватном поседу. Дозволити коришћење приватних путева на овом путовању\?</string>
     <string name="restart_search">Препокрени претрагу</string>
@@ -3836,4 +3836,17 @@
     <string name="plan_route_select_track_file_for_open">Изаберите фајл путање за отварање.</string>
     <string name="shared_string_done">Завршено</string>
     <string name="overwrite_track">Замени стазу</string>
+    <string name="save_as_new_track">Сачувај као нову стазу</string>
+    <string name="reverse_route">Обрнута рута</string>
+    <string name="rourte_between_points_whole_track_button_desc">Читава стаза ће се прерачунати користећи одабрани профил.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Само ће се следећи сегмент прерачунати користећи одабрани профил.</string>
+    <string name="rourte_between_points_desc">Изаберите како повезати тачке, са правом линијом, или израчунајте руту између њих са одабраним профилом.</string>
+    <string name="whole_track">Цела стаза</string>
+    <string name="next_segment">Следећи сегмент</string>
+    <string name="rourte_between_points_warning_desc">Да бисте користили ову опцију, ОсмАнд мора да прилагоди вашу стазу путевима на мапи.
+\n
+\n На следећем кораку мора ћете одабрати навигацијски профил како бисте открили дозвољене путеве и праг удаљености и тиме приближили вашу стазу путевима.</string>
+    <string name="threshold_distance">Праг удаљености</string>
+    <string name="navigation_profile">Навигацијски профил</string>
+    <string name="rourte_between_points_add_track_desc">Изаберите датотеку записа којој ће се додати нови сегмент.</string>
 </resources>
