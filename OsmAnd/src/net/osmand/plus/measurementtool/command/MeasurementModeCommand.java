@@ -18,6 +18,7 @@ public abstract class MeasurementModeCommand implements Command {
 		MOVE_POINT,
 		REMOVE_POINT,
 		REORDER_POINT,
-		SNAP_TO_ROAD
+		SNAP_TO_ROAD,
+		CHANGE_ROUTE_MODE
 	}
 }

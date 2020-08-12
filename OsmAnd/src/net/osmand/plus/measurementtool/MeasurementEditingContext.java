@@ -17,7 +17,6 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteCalculationProgress;
-import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
@@ -32,11 +31,11 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationType.*;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.*;
 
 public class MeasurementEditingContext {
 
-	public enum CalculationType {
+	public enum CalculationMode {
 		NEXT_SEGMENT,
 		WHOLE_TRACK
 	}
@@ -58,8 +57,7 @@ public class MeasurementEditingContext {
 	private boolean inSnapToRoadMode;
 	private boolean needUpdateCacheForSnap;
 	private int calculatedPairs;
-	private CalculationType calculationType = WHOLE_TRACK;
-
+	private CalculationMode calculationMode = WHOLE_TRACK;
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode snapToRoadAppMode;
 	private RouteCalculationProgress calculationProgress;
@@ -91,7 +89,7 @@ public class MeasurementEditingContext {
 		updateCacheForSnapIfNeeded(true);
 	}
 
-	int getSelectedPointPosition() {
+	public int getSelectedPointPosition() {
 		return selectedPointPosition;
 	}
 
@@ -111,7 +109,7 @@ public class MeasurementEditingContext {
 		this.inAddPointMode = inAddPointMode;
 	}
 
-	void setInSnapToRoadMode(boolean inSnapToRoadMode) {
+	public void setInSnapToRoadMode(boolean inSnapToRoadMode) {
 		this.inSnapToRoadMode = inSnapToRoadMode;
 	}
 
@@ -131,12 +129,12 @@ public class MeasurementEditingContext {
 		return newGpxData != null && newGpxData.getGpxFile() != null && newGpxData.getGpxFile().hasRtePt();
 	}
 
-	public CalculationType getCalculationType() {
-		return calculationType;
+	public CalculationMode getCalculationMode() {
+		return calculationMode;
 	}
 
-	public void setCalculationType(CalculationType calculationType) {
-		this.calculationType = calculationType;
+	public void setCalculationMode(CalculationMode calculationMode) {
+		this.calculationMode = calculationMode;
 	}
 
 	void setProgressListener(SnapToRoadProgressListener progressListener) {
@@ -147,16 +145,14 @@ public class MeasurementEditingContext {
 		return snapToRoadAppMode;
 	}
 
-	void setSnapToRoadAppMode(ApplicationMode snapToRoadAppMode) {
-		if (this.snapToRoadAppMode != null && snapToRoadAppMode != null
-				&& !this.snapToRoadAppMode.getStringKey().equals(snapToRoadAppMode.getStringKey())) {
-			if (calculationType == WHOLE_TRACK) {
-				snappedToRoadPoints.clear();
-				updateCacheForSnapIfNeeded(true);
-			}
-		}
+	public void setSnapToRoadAppMode(ApplicationMode snapToRoadAppMode) {
 		this.snapToRoadAppMode = snapToRoadAppMode;
 	}
+
+	public void clearSnappedToRoadPoints() {
+		snappedToRoadPoints.clear();
+	}
+
 
 	TrkSegment getBeforeTrkSegmentLine() {
 		if (beforeCacheForSnap != null) {
@@ -241,7 +237,7 @@ public class MeasurementEditingContext {
 		}
 	}
 
-	void scheduleRouteCalculateIfNotEmpty() {
+	public void scheduleRouteCalculateIfNotEmpty() {
 		needUpdateCacheForSnap = true;
 		if (application == null || (before.points.size() == 0 && after.points.size() == 0)) {
 			return;
@@ -411,9 +407,23 @@ public class MeasurementEditingContext {
 		final RouteCalculationParams params = new RouteCalculationParams();
 		params.inSnapToRoadMode = true;
 		params.start = start;
+
+		ApplicationMode currentPointSnapToRoadMode;
+		if (calculationMode == NEXT_SEGMENT) {
+			currentPointSnapToRoadMode = ApplicationMode.valueOfStringKey(currentPair.first.getProfileType(),
+					null);
+		} else {
+			currentPointSnapToRoadMode = snapToRoadAppMode;
+		}
 		params.end = end;
-		RoutingHelper.applyApplicationSettings(params, application.getSettings(), snapToRoadAppMode);
-		params.mode = snapToRoadAppMode;
+		if (currentPointSnapToRoadMode == null) {
+			ApplicationMode straightLine = ApplicationMode.AIRCRAFT;
+			RoutingHelper.applyApplicationSettings(params, application.getSettings(), straightLine);
+			params.mode = straightLine;
+		} else {
+			RoutingHelper.applyApplicationSettings(params, application.getSettings(), currentPointSnapToRoadMode);
+			params.mode = currentPointSnapToRoadMode;
+		}
 		params.ctx = application;
 		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
 		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
@@ -539,8 +549,14 @@ public class MeasurementEditingContext {
 		params.start = start;
 		params.end = end;
 		params.intermediates = intermediates;
-		RoutingHelper.applyApplicationSettings(params, application.getSettings(), snapToRoadAppMode);
-		params.mode = snapToRoadAppMode;
+		if (snapToRoadAppMode == null) {
+			ApplicationMode straightLine = ApplicationMode.AIRCRAFT;
+			RoutingHelper.applyApplicationSettings(params, application.getSettings(), straightLine);
+			params.mode = straightLine;
+		} else {
+			RoutingHelper.applyApplicationSettings(params, application.getSettings(), snapToRoadAppMode);
+			params.mode = snapToRoadAppMode;
+		}
 		params.ctx = application;
 		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
 		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {

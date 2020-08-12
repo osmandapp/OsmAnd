@@ -315,10 +315,14 @@ public class GPXUtilities {
 			getExtensionsToWrite().put(PROFILE_TYPE_EXTENSION, profileType);
 		}
 
+		public void removeProfileType() {
+			getExtensionsToWrite().remove(PROFILE_TYPE_EXTENSION);
+		}
+
 		public int getTrkPtIndex() {
 			try {
 				return Integer.parseInt(getExtensionsToRead().get(TRKPT_INDEX_EXTENSION));
-			}catch(NumberFormatException e){
+			} catch (NumberFormatException e) {
 				return -1;
 			}
 		}
