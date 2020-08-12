@@ -120,7 +120,6 @@
 
             <com.google.android.material.slider.Slider
                 android:id="@+id/angle_slider"
-                style="@style/Widget.Styled.Slider"
                 android:valueTo="90"
                 android:stepSize="5"
                 android:layout_width="match_parent"

@@ -60,6 +60,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.measurementtool.GpxApproximationFragment.GpxApproximationFragmentListener;
 import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
 import net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsFragmentListener;
@@ -73,7 +74,6 @@ import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
-import net.osmand.plus.routing.GpxApproximator;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
@@ -84,7 +84,6 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -94,7 +93,6 @@ import java.util.List;
 import java.util.Locale;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.measurementtool.GpxApproximationFragment.GpxApproximationFragmentListener;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.ExportAsGpxListener;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.SnapToRoadProgressListener;
@@ -104,7 +102,7 @@ import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileLi
 import static net.osmand.plus.measurementtool.StartPlanRouteBottomSheet.StartPlanRouteListener;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
-		GpxApproximationFragmentListener, OptionsFragmentListener {
+		OptionsFragmentListener, GpxApproximationFragmentListener {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 
@@ -138,7 +136,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean gpxPointsAdded;
 
 	private MeasurementEditingContext editingCtx = new MeasurementEditingContext();
-	private GpxApproximator gpxApproximator;
 
 	private LatLon initialPoint;
 
@@ -550,39 +547,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return R.color.status_bar_transparent_gradient;
 	}
 
-	private void approximateGpx() {
-		if (gpxApproximator != null) {
-			try {
-				GpxRouteApproximation gpxApproximation = gpxApproximator.calculateGpxApproximation();
-				displayApproximatedPoints(gpxApproximation);
-			} catch (IOException e) {
-			} catch (InterruptedException e) {
-			}
-		}
-	}
-
-	@Override
-	public void onChangeGpxApproxDistanceThreshold(ApplicationMode mode, int distanceThreshold) {
-		if (gpxApproximator != null) {
-			try {
-				gpxApproximator.setMode(mode);
-				gpxApproximator.setPointApproximation(distanceThreshold);
-				approximateGpx();
-			} catch (IOException e) {
-			}
-		}
-	}
-
-	@Override
-	public void onApplyGpxApproximation(ApplicationMode mode, int distanceThreshold) {
-
-	}
-
-	@Override
-	public void onCancelGpxApproximation() {
-
-	}
-
 	@Nullable
 	private MapActivity getMapActivity() {
 		Activity activity = getActivity();
@@ -662,13 +626,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				case SnapTrackWarningBottomSheet.CONTINUE_REQUEST_CODE:
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
-						try {
-							gpxApproximator = new GpxApproximator(requireMyApplication(), new LocationsHolder(editingCtx.getPoints()));
-							GpxApproximationFragment.showInstance(mapActivity.getSupportFragmentManager(),
-									this, gpxApproximator.getMode(), (int) gpxApproximator.getPointApproximation());
-						} catch (IOException e) {
-
-						}
+						GpxApproximationFragment.showInstance(mapActivity.getSupportFragmentManager(),
+								this, new LocationsHolder(editingCtx.getPoints()));
 					}
 					break;
 			}
@@ -1087,7 +1046,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	private void displayApproximatedPoints(GpxRouteApproximation gpxApproximation) {
+	public void displayApproximatedPoints(GpxRouteApproximation gpxApproximation) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			editingCtx.setPoints(gpxApproximation);
@@ -1956,5 +1915,20 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		public int getStatusBarColor(Context context, boolean night) {
 			return NO_COLOR;
 		}
+	}
+
+	@Override
+	public void onGpxApproximationDone(GpxRouteApproximation gpxApproximation) {
+		displayApproximatedPoints(gpxApproximation);
+	}
+
+	@Override
+	public void onApplyGpxApproximation() {
+
+	}
+
+	@Override
+	public void onCancelGpxApproximation() {
+
 	}
 }

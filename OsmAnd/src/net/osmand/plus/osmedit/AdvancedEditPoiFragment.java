@@ -7,7 +7,6 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
@@ -23,7 +22,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -215,9 +213,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 		public void addTagView(String tg, String vl) {
 			View convertView = LayoutInflater.from(linearLayout.getContext())
 					.inflate(R.layout.poi_tag_list_item, null, false);
-			final AutoCompleteTextView tagEditText =
-					(AutoCompleteTextView) convertView.findViewById(R.id.tagEditText);
-			AndroidUtils.setTextHorizontalGravity(tagEditText, Gravity.START);
+			final AutoCompleteTextView tagEditText = convertView.findViewById(R.id.tagEditText);
 			ImageButton deleteItemImageButton =
 					(ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
 			deleteItemImageButton.setImageDrawable(deleteDrawable);
@@ -229,17 +225,15 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 					editPoiData.removeTag(tagEditText.getText().toString());
 				}
 			});
-			final AutoCompleteTextView valueEditText =
-					(AutoCompleteTextView) convertView.findViewById(R.id.valueEditText);
-			AndroidUtils.setTextHorizontalGravity(valueEditText, Gravity.START);
-			valueEditText.setFilters(new InputFilter[] {
-				new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)
+			final AutoCompleteTextView valueEditText = convertView.findViewById(R.id.valueEditText);
+			valueEditText.setFilters(new InputFilter[]{
+					new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)
 			});
 			tagEditText.setText(tg);
 			tagEditText.setAdapter(tagAdapter);
 			tagEditText.setThreshold(1);
 			tagEditText.setOnFocusChangeListener(new OnFocusChangeListener() {
-			    @Override
+				@Override
 				public void onFocusChange(View v, boolean hasFocus) {
 					if (!hasFocus) {
 						if (!editPoiData.isInEdit()) {
