@@ -1782,7 +1782,7 @@
     <string name="mapillary_widget">Γραφικό στοιχείο Mapillary</string>
     <string name="mapillary_widget_descr">Επιτρέπει γρήγορες συνεισφορές στο Mapillary.</string>
     <string name="mapillary_descr">Διαδικτυακές φωτογραφίες δρόμου για όλους. Ανακαλύψτε θέσεις, συνεργαστείτε, αποτυπώστε τον κόσμο.</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Εικόνες επιπέδου οδού</string>
     <string name="plugin_mapillary_descr">Φωτογραφίες δρόμου για όλους. Ανακαλύψτε θέσεις, συνεργαστείτε, αποτυπώστε τον κόσμο.</string>
     <string name="private_access_routing_req">Ο προορισμός σας βρίσκεται σε ιδιωτική περιοχή. Να επιτραπεί η πρόσβαση σε ιδιωτικούς δρόμους για αυτό το ταξίδι;</string>
     <string name="restart_search">Επανεκκίνηση αναζήτησης</string>
