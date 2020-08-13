@@ -102,7 +102,7 @@ import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileLi
 import static net.osmand.plus.measurementtool.StartPlanRouteBottomSheet.StartPlanRouteListener;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
-		OptionsFragmentListener, GpxApproximationFragmentListener {
+		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 
@@ -191,12 +191,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		measurementLayer.setEditingCtx(editingCtx);
 
 		// Handling screen rotation
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		Fragment selectedPointFragment = fragmentManager.findFragmentByTag(SelectedPointBottomSheetDialogFragment.TAG);
-		if (selectedPointFragment != null) {
-			SelectedPointBottomSheetDialogFragment fragment = (SelectedPointBottomSheetDialogFragment) selectedPointFragment;
-			fragment.setListener(createSelectedPointFragmentListener());
-		}
 		Fragment saveAsNewTrackFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(SaveAsNewTrackBottomSheetDialogFragment.TAG);
 		if (saveAsNewTrackFragment != null) {
 			((SaveAsNewTrackBottomSheetDialogFragment) saveAsNewTrackFragment).setListener(createSaveAsNewTrackFragmentListener());
@@ -716,61 +710,78 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	}
 
-	private SelectedPointFragmentListener createSelectedPointFragmentListener() {
-		return new SelectedPointFragmentListener() {
+	@Override
+	public void onMovePoint() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			measurementLayer.enterMovingPointMode();
+		}
+		switchMovePointMode(true);
+	}
 
-			final MeasurementToolLayer measurementLayer = getMeasurementLayer();
+	@Override
+	public void onDeletePoint() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			removePoint(measurementLayer, editingCtx.getSelectedPointPosition());
+		}
+		editingCtx.setSelectedPointPosition(-1);
+	}
 
-			@Override
-			public void moveOnClick() {
-				if (measurementLayer != null) {
-					measurementLayer.enterMovingPointMode();
-				}
-				switchMovePointMode(true);
-			}
+	@Override
+	public void onAddPointAfter() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
+			editingCtx.setInAddPointMode(true);
+			editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
+		}
+		((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
+		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_above));
+		switchAddPointBeforeAfterMode(true);
+	}
 
-			@Override
-			public void deleteOnClick() {
-				if (measurementLayer != null) {
-					removePoint(measurementLayer, editingCtx.getSelectedPointPosition());
-				}
-				editingCtx.setSelectedPointPosition(-1);
-			}
+	@Override
+	public void onAddPointBefore() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
+			editingCtx.setInAddPointMode(true);
+			editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
+		}
+		((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
+		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_below));
+		switchAddPointBeforeAfterMode(true);
+	}
 
-			@Override
-			public void addPointAfterOnClick() {
-				if (measurementLayer != null) {
-					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
-					editingCtx.setInAddPointMode(true);
-					editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
-				}
-				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
-				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_above));
-				switchAddPointBeforeAfterMode(true);
-			}
+	@Override
+	public void onTrimRouteBefore() {
 
-			@Override
-			public void addPointBeforeOnClick() {
-				if (measurementLayer != null) {
-					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
-					editingCtx.setInAddPointMode(true);
-					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
-				}
-				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
-				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_below));
-				switchAddPointBeforeAfterMode(true);
-			}
+	}
 
-			@Override
-			public void onCloseMenu() {
-				setDefaultMapPosition();
-			}
+	@Override
+	public void onTrimRouteAfter() {
 
-			@Override
-			public void onClearSelection() {
-				editingCtx.setSelectedPointPosition(-1);
-			}
-		};
+	}
+
+	@Override
+	public void onChangeRouteTypeBefore() {
+
+	}
+
+	@Override
+	public void onChangeRouteTypeAfter() {
+
+	}
+
+	@Override
+	public void onCloseMenu() {
+		setDefaultMapPosition();
+	}
+
+	@Override
+	public void onClearSelection() {
+		editingCtx.setSelectedPointPosition(-1);
 	}
 
 	@Override
@@ -1067,10 +1078,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void openSelectedPointMenu(MapActivity mapActivity) {
-		SelectedPointBottomSheetDialogFragment fragment = new SelectedPointBottomSheetDialogFragment();
-		fragment.setUsedOnMap(true);
-		fragment.setListener(createSelectedPointFragmentListener());
-		fragment.show(mapActivity.getSupportFragmentManager(), SelectedPointBottomSheetDialogFragment.TAG);
+		if (mapActivity != null) {
+			SelectedPointBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+		}
 	}
 
 	private void openSaveAsNewTrackMenu(MapActivity mapActivity) {
@@ -1083,7 +1093,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void showAddToTrackDialog(final MapActivity mapActivity) {
 		if (mapActivity != null) {
 			SelectFileBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
-					createAddToTrackFileListener(),ADD_TO_TRACK);
+					createAddToTrackFileListener(), ADD_TO_TRACK);
 		}
 	}
 
@@ -1182,14 +1192,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 			}
 			mapActivity.showTopToolbar(toolBarController);
+			markGeneralComponents(enable ? View.GONE : View.VISIBLE);
+			AndroidUiHelper.setVisibility(mapActivity, enable ? View.VISIBLE : View.GONE,
+					R.id.move_point_text,
+					R.id.move_point_controls);
+			mainIcon.setImageDrawable(getActiveIcon(enable
+					? R.drawable.ic_action_move_point
+					: R.drawable.ic_action_ruler));
 		}
-		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
-		AndroidUiHelper.setVisibility(mapActivity, enable ? View.VISIBLE : View.GONE,
-				R.id.move_point_text,
-				R.id.move_point_controls);
-		mainIcon.setImageDrawable(getActiveIcon(enable
-				? R.drawable.ic_action_move_point
-				: R.drawable.ic_action_ruler));
 	}
 
 	private void switchAddPointBeforeAfterMode(boolean enable) {
@@ -1202,13 +1212,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 			}
 			mapActivity.showTopToolbar(toolBarController);
-		}
-		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
-		AndroidUiHelper.setVisibility(mapActivity,enable ? View.VISIBLE : View.GONE,
-				R.id.add_point_before_after_text,
-				R.id.add_point_before_after_controls);
-		if (!enable) {
-			mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
+			markGeneralComponents(enable ? View.GONE : View.VISIBLE);
+			AndroidUiHelper.setVisibility(mapActivity, enable ? View.VISIBLE : View.GONE,
+					R.id.add_point_before_after_text,
+					R.id.add_point_before_after_controls);
+			if (!enable) {
+				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
+			}
 		}
 	}
 
