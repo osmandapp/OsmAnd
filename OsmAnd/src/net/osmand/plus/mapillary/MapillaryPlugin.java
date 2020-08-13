@@ -150,7 +150,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-				if (itemId == R.string.mapillary) {
+				if (itemId == R.string.street_level_imagery) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
 					return false;
 				}
@@ -160,7 +160,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
 				final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-				if (itemId == R.string.mapillary) {
+				if (itemId == R.string.street_level_imagery) {
 					OsmandMapTileView mapView = mapActivity.getMapView();
 					MapActivityLayers mapLayers = mapActivity.getMapLayers();
 					settings.SHOW_MAPILLARY.set(!settings.SHOW_MAPILLARY.get());
