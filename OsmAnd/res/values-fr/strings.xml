@@ -87,7 +87,7 @@
     <string name="old_poi_file_should_be_deleted">Le fichier de points d\'intérêt \'%1$s\' est obsolète et peut être supprimé.</string>
     <string name="update_poi_file_not_found">Fichier local de gestion des modifications de points d\'intérêt introuvable, et ne peut être créé.</string>
     <string name="button_upgrade_osmandplus">Mettre à jour OsmAnd+</string>
-    <string name="map_version_changed_info">Téléchargez la nouvelle version de l\'application pour utiliser les nouvelle cartes.</string>
+    <string name="map_version_changed_info">Téléchargez la nouvelle version de l\'application pour utiliser les nouvelles cartes.</string>
     <string name="shared_string_rename">Renommer</string>
     <string name="poi_filter_nominatim">Recherche OSM en ligne</string>
     <string name="search_position_current_location_search">Recherche de la position…</string>
@@ -1340,7 +1340,7 @@
 \n- Synchroniser les groupes et les appareils avec le serveur ;
 \n- Gérer les groupes et les appareils depuis un espace privé sur le site Web.</string>
     <string name="anonymous_user">Utilisateur anonyme</string>
-    <string name="logged_as">Connecté entant que %1$s</string>
+    <string name="logged_as">Connecté en tant que %1$s</string>
     <string name="rendering_category_details">Détails</string>
     <string name="rendering_category_transport">Transports en commun</string>
     <string name="rendering_category_others">Autres caractéristiques de la carte</string>
@@ -3446,7 +3446,7 @@
     <string name="multimedia_photo_play_sound">Son de la prise de vue</string>
     <string name="osm_authorization_success">L\'autorisation a été accordée</string>
     <string name="search_offline_geo_error">Impossible d\'analyser le geo intent \'%s\'.</string>
-    <string name="monitoring_min_speed_descr">Filtre interrompant l\'enregistrement en dessous d\'une certaines vitesse. Rend les traces enregistrées plus régulières lorsqu\'elles sont affichées sur la carte.</string>
+    <string name="monitoring_min_speed_descr">Filtre interrompant l\'enregistrement en dessous d\'une certaine vitesse. Rend les traces enregistrées plus régulières lorsqu\'elles sont affichées sur la carte.</string>
     <string name="live_monitoring_time_buffer">Durée de la mémoire tampon</string>
     <string name="live_monitoring_adress_descr">Indiquez l\'adresse web avec la syntaxe suivante pour les paramètres : lat = {0}, lon = {1}, horodatage = {2}, hdop = {3}, altitude = {4}, vitesse = {5}, direction = {6}.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recommandation : il est difficile de prédire ce qui sera enregistré et ce qui ne le sera pas, il peut être préférable de désactiver ce filtre.</string>
