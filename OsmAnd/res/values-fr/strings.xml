@@ -1121,7 +1121,7 @@
     <string name="shared_string_favorite">Favori</string>
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
-    <string name="keep_and_add_destination_point">Ajouter comme destination suivante</string>
+    <string name="keep_and_add_destination_point">Ajouter comme destination</string>
     <string name="use_displayed_track_for_navigation">Souhaitez-vous suivre la trace affichée à l\'écran ?</string>
     <string name="gpx_option_calculate_first_last_segment">Calculer un itinéraire OsmAnd pour le début et la fin de l\'itinéraire</string>
     <string name="calculate_osmand_route_without_internet">Calcul de l\'itinéraire hors-ligne</string>
@@ -2660,9 +2660,9 @@
     <string name="tunnel_warning">En approche d\'un tunnel</string>
     <string name="show_tunnels">Tunnels</string>
     <string name="shared_string_current">Actuelle</string>
-    <string name="last_intermediate_dest_description">Ajoute une étape</string>
-    <string name="first_intermediate_dest_description">Ajoute comme première étape</string>
-    <string name="subsequent_dest_description">Monter et définir comme Arrivée</string>
+    <string name="last_intermediate_dest_description">Ajouter comme dernière étape</string>
+    <string name="first_intermediate_dest_description">Ajouter comme première étape</string>
+    <string name="subsequent_dest_description">Ajouter comme arrivée (l\'arrivée précédente devient la dernière étape)</string>
     <string name="make_as_start_point">Utiliser ce point comme départ</string>
     <string name="map_import_error">Erreur d\'import de la carte</string>
     <string name="map_imported_successfully">Carte importée</string>
@@ -2911,7 +2911,7 @@
     <string name="sit_on_the_stop">Panneau d\'affichage à l\'arrêt</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Bouton affichant ou masquant les traces GPX sélectionnées sur la carte.</string>
     <string name="transfers_size">%1$d transferts</string>
-    <string name="add_start_and_end_points">Ajouter un point de départ et d\'arrivée</string>
+    <string name="add_start_and_end_points">Ajoutez un point de départ et d\'arrivée</string>
     <string name="route_add_start_point">Ajouter un point de départ</string>
     <string name="route_descr_select_start_point">Sélectionnez un point de départ</string>
     <string name="rendering_attr_surface_unpaved_name">Non revêtu</string>
