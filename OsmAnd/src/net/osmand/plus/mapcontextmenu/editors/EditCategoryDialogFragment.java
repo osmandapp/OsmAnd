@@ -78,7 +78,7 @@ public class EditCategoryDialogFragment extends DialogFragment {
 		nameEdit = (EditText)v.findViewById(R.id.edit_name);
 		nameEdit.setText(name);
 		nameEdit.requestFocus();
-		AndroidUtils.softKeyboardDelayed(nameEdit);
+		AndroidUtils.softKeyboardDelayed(getActivity(), nameEdit);
 		colorSpinner = (Spinner)v.findViewById(R.id.edit_color);
 		final TIntArrayList colors = new TIntArrayList();
 		final int intColor = color;

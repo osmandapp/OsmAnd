@@ -281,7 +281,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		});
 		poiNameEditText.setText(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()));
 		poiNameEditText.requestFocus();
-		AndroidUtils.showSoftKeyboard(poiNameEditText);
+		AndroidUtils.showSoftKeyboard(getActivity(), poiNameEditText);
 		poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
 		poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
 		AndroidUtils.setTextHorizontalGravity(poiTypeEditText, Gravity.START);

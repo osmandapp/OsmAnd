@@ -207,7 +207,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		if (editor != null && editor.isNew()) {
 			nameEdit.selectAll();
 			nameEdit.requestFocus();
-			AndroidUtils.softKeyboardDelayed(nameEdit);
+			AndroidUtils.softKeyboardDelayed(getActivity(), nameEdit);
 		}
 	}
 

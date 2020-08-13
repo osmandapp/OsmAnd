@@ -1928,7 +1928,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void openKeyboard() {
 		searchEditText.requestFocus();
-		AndroidUtils.softKeyboardDelayed(searchEditText);
+		AndroidUtils.softKeyboardDelayed(getActivity(), searchEditText);
 	}
 
 	public void replaceQueryWithText(String txt) {
