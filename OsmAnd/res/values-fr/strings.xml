@@ -2372,7 +2372,7 @@
     <string name="online_photos">Photos en ligne</string>
     <string name="no_photos_descr">Aucune photo pour ce lieu.</string>
     <string name="shared_string_install">Installer</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Photos des rues</string>
     <string name="open_mapillary">Ouvrir Mapillary</string>
     <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter des photos à cet emplacement de la carte.</string>
@@ -2527,7 +2527,7 @@
     <string name="add_location_as_first_point_descr">Ajoutez votre position comme point de départ pour calculer l\'itinéraire.</string>
     <string name="my_location">Ma position</string>
     <string name="shared_string_finish">Terminer</string>
-    <string name="plan_route">Itinéraire planifié</string>
+    <string name="plan_route">Planifier un itinéraire</string>
     <string name="shared_string_sort">Trier</string>
     <string name="coordinate_input">Saisie des coordonnées</string>
     <string name="marker_save_as_track_descr">Exporter vos marques dans le fichier GPX suivant :</string>
@@ -3102,7 +3102,7 @@
     <string name="rendering_attr_tracktype_grade4_name">Principalement non-compact</string>
     <string name="rendering_attr_tracktype_grade5_name">Non-compact</string>
     <string name="routeInfo_tracktype_name">Dureté de la surface</string>
-    <string name="shared_string_file_is_saved">Gain de %s</string>
+    <string name="shared_string_file_is_saved">%s enregistré</string>
     <string name="shared_string_open_track">Ouvrir la trace</string>
     <string name="shared_string_track_is_saved">Trace %s enregistrée</string>
     <string name="shared_string_crash">Oups</string>

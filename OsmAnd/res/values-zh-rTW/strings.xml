@@ -2416,7 +2416,7 @@
     <string name="increase_search_radius">增加搜尋半徑</string>
     <string name="nothing_found">没有找到</string>
     <string name="nothing_found_descr">變更搜尋或增加搜尋半徑。</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">街道級照片</string>
     <string name="mapillary_widget">Mapillary 小工具</string>
     <string name="mapillary_widget_descr">允許快速的提供給 Mapillary。</string>
     <string name="mapillary_descr">把線上街道平面照片給每個人。發覺地點、協作、抓取世界。</string>
