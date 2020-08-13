@@ -3,11 +3,8 @@ package net.osmand.plus.measurementtool;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -15,7 +12,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescriptionDifHeight;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -61,11 +58,12 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 			icon = getContentIcon(R.drawable.ic_action_help);
 		}
 
-		BaseBottomSheetItem snapToRoadItem = new BottomSheetItemWithDescription.Builder()
+		BaseBottomSheetItem snapToRoadItem = new BottomSheetItemWithDescriptionDifHeight.Builder()
+				.setMinHeight(getResources().getDimensionPixelSize(R.dimen.card_row_min_height))
 				.setDescription(description)
 				.setIcon(icon)
 				.setTitle(getString(R.string.route_between_points))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -141,7 +139,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 	private BaseBottomSheetItem getSaveAsNewTrackItem() {
 		return new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_save_to_file))
+				.setIcon(getContentIcon(R.drawable.ic_action_save_as_new_file))
 				.setTitle(getString(R.string.save_as_new_track))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
@@ -155,14 +153,6 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					}
 				})
 				.create();
-	}
-
-	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		ImageView icon = view.findViewById(R.id.icon);
-		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) icon.getLayoutParams();
-		params.rightMargin = view.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment targetFragment, boolean trackSnappedToRoad,

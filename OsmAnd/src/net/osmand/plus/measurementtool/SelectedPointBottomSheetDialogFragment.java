@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,12 +17,14 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescriptionDifHeight;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.MapUtils;
@@ -37,12 +40,17 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescriptionDifHeight.Builder()
-				.setMinHeight(getResources().getDimensionPixelSize(R.dimen.measurement_tool_up_down_row_height))
+
+		View titleView = UiUtilities.getInflater(getContext(), nightMode)
+				.inflate(R.layout.bottom_sheet_item_with_descr_pad_32dp, null, false);
+		TextView title = titleView.findViewById(R.id.title);
+		title.setTypeface(FontCache.getRobotoMedium(getActivity()));
+
+		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getDescription(true))
 				.setIcon(getActiveIcon(R.drawable.ic_action_measure_point))
 				.setTitle(getTitle())
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setCustomView(titleView)
 				.create();
 		items.add(titleItem);
 
@@ -103,12 +111,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		items.add(new OptionsDividerItem(getContext()));
 
-		BaseBottomSheetItem trimRouteBefore = new BottomSheetItemWithDescriptionDifHeight.Builder()
-				.setMinHeight(getResources().getDimensionPixelSize(R.dimen.measurement_tool_up_down_row_height))
+		BaseBottomSheetItem trimRouteBefore = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getDescription(true))
 				.setIcon(getContentIcon(R.drawable.ic_action_trim_left))
 				.setTitle(getString(R.string.plan_route_trim_before))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -122,12 +129,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.create();
 		items.add(trimRouteBefore);
 
-		BaseBottomSheetItem trimRouteAfter = new BottomSheetItemWithDescriptionDifHeight.Builder()
-				.setMinHeight(getResources().getDimensionPixelSize(R.dimen.measurement_tool_up_down_row_height))
+		BaseBottomSheetItem trimRouteAfter = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getDescription(false))
 				.setIcon(getContentIcon(R.drawable.ic_action_trim_right))
 				.setTitle(getString(R.string.plan_route_trim_after))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -143,12 +149,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		items.add(new OptionsDividerItem(getContext()));
 
-		BaseBottomSheetItem changeRouteTypeBefore = new BottomSheetItemWithDescriptionDifHeight.Builder()
-				.setMinHeight(getResources().getDimensionPixelSize(R.dimen.measurement_tool_up_down_row_height))
+		BaseBottomSheetItem changeRouteTypeBefore = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getDescription(true))
 				.setIcon(getRouteTypeIcon(true))
 				.setTitle(getString(R.string.plan_route_change_route_type_before))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -162,12 +167,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.create();
 		items.add(changeRouteTypeBefore);
 
-		BaseBottomSheetItem changeRouteTypeAfter = new BottomSheetItemWithDescriptionDifHeight.Builder()
-				.setMinHeight(getResources().getDimensionPixelSize(R.dimen.measurement_tool_up_down_row_height))
+		BaseBottomSheetItem changeRouteTypeAfter = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getDescription(false))
 				.setIcon(getRouteTypeIcon(false))
 				.setTitle(getString(R.string.plan_route_change_route_type_after))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
