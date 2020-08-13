@@ -6,25 +6,38 @@
 	android:orientation="vertical"
 	tools:background="?attr/bg_color">
 
-	<ScrollView
-		android:id="@+id/scroll_view"
+	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
+		<ScrollView
+			android:id="@+id/scroll_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:id="@+id/scrollable_items_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical" />
+
+		</ScrollView>
+
 		<LinearLayout
-			android:id="@+id/scrollable_items_container"
+			android:id="@+id/non_scrollable_items_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="vertical" />
+			android:orientation="vertical"
+			android:visibility="gone" />
 
-	</ScrollView>
-
-	<LinearLayout
-		android:id="@+id/non_scrollable_items_container"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		android:visibility="gone" />
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/buttons_shadow"
+			android:layout_width="match_parent"
+			android:layout_height="10dp"
+			android:layout_gravity="bottom"
+			android:visibility="gone"
+			android:background="@drawable/bg_contextmenu_shadow_top_light" />
+	</FrameLayout>
 
 	<include layout="@layout/bottom_buttons" />
 
