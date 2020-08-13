@@ -1892,8 +1892,8 @@ public class OsmandSettings {
 		new BooleanAccessibilityPreference("disable_offroute_recalc", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
-//	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
-//		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeProfile();
+	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
+		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DIRECTION_AUDIO_FEEDBACK =

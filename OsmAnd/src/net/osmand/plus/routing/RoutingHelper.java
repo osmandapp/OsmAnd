@@ -477,8 +477,8 @@ public class RoutingHelper {
 				boolean isStraight =
 						route.getRouteService() == RouteService.DIRECT_TO || route.getRouteService() == RouteService.STRAIGHT;
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				if (allowableDeviation > 0 && wrongMovementDirection && !isStraight
-						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) {
+				if ((allowableDeviation > 0 && wrongMovementDirection && !isStraight
+						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) && !settings.DISABLE_WRONG_DIRECTION_RECALC.get()) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					isDeviatedFromRoute = true;
 					calculateRoute = true;
