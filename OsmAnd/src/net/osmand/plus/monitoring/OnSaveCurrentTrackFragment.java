@@ -27,6 +27,7 @@ import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -39,6 +40,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +52,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = "OnSaveCurrentTrackBottomSheetFragment";
 	public static final String SAVED_TRACKS_KEY = "saved_track_filename";
+	private static final Log LOG = PlatformUtil.getLog(MapActivity.class);
 
 	private boolean openTrack = false;
 	private File file;
@@ -225,9 +229,8 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		f.setArguments(b);
 		try {
 			f.show(fragmentManager, TAG);
-		} catch (IllegalStateException e) {
-			//java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
-			e.printStackTrace();
+		} catch (IllegalStateException ex) {
+			LOG.error("Can not perform this action after onSaveInstanceState");
 		}
 	}
 }
