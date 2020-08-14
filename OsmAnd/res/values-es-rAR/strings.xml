@@ -2424,7 +2424,7 @@
     <string name="nothing_found">Nada encontrado</string>
     <string name="nothing_found_descr">Cambiar la búsqueda o aumentar su radio.</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Permitir el uso de caminos privados para este viaje\?</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Imágenes a nivel de calle</string>
     <string name="mapillary_widget">Widget de Mapillary</string>
     <string name="mapillary_widget_descr">Permite realizar contribuciones rápidas a Mapillary.</string>
     <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre sitios, colabora, captura el mundo.</string>
