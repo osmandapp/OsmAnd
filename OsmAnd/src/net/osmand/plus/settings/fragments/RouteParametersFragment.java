@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
@@ -61,6 +63,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private static final String RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
 	private static final String ROUTING_SHORT_WAY = "prouting_short_way";
 	private static final String ROUTING_RECALC_DISTANCE= "routing_recalc_distance";
+	private static final String ROUTING_RECALC_WRONG_DIRECTION= "disable_wrong_direction_recalc";
 
 	public static final float DISABLE_MODE = -1.0f;
 	public static final float DEFAULT_MODE = 0.0f;
@@ -155,8 +158,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		fastRoute.setDescription(getString(R.string.fast_route_mode_descr));
 		fastRoute.setSummaryOn(R.string.shared_string_on);
 		fastRoute.setSummaryOff(R.string.shared_string_off);
-
-		setupSelectRouteRecalcDistance(screen);
 
 		if (am.getRouteService() == RouteProvider.RouteService.OSMAND){
 			GeneralRouter router = app.getRouter(am);
@@ -260,6 +261,36 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			straightAngle.setIcon(getRoutingPrefIcon("routing_recalc_distance")); //TODO change for appropriate icon when available
 			getPreferenceScreen().addPreference(straightAngle);
 		}
+
+		addDivider(screen);
+		addRouteRecalcHeader(screen);
+		setupSelectRouteRecalcDistance(screen);
+		setupReverseDirectionRecalculation(screen);
+	}
+
+	private void addDivider(PreferenceScreen screen) {
+		Preference divider = new Preference(requireContext());
+		divider.setLayoutResource(R.layout.simple_divider_item);
+		screen.addPreference(divider);
+	}
+
+	private void setupReverseDirectionRecalculation(PreferenceScreen screen) {
+		SwitchPreferenceEx recalcRouteReverseDirectionPreference =
+				createSwitchPreferenceEx(app.getSettings().DISABLE_WRONG_DIRECTION_RECALC.getId(),
+						R.string.in_case_of_reverse_direction,
+						R.layout.preference_with_descr_dialog_and_switch);
+		recalcRouteReverseDirectionPreference.setIcon(
+				getRoutingPrefIcon(app.getSettings().DISABLE_WRONG_DIRECTION_RECALC.getId()));
+		recalcRouteReverseDirectionPreference.setSummaryOn(R.string.shared_string_on);
+		recalcRouteReverseDirectionPreference.setSummaryOff(R.string.shared_string_off);
+		screen.addPreference(recalcRouteReverseDirectionPreference);
+	}
+
+	private void addRouteRecalcHeader(PreferenceScreen screen) {
+		PreferenceCategory routingCategory = new PreferenceCategory(requireContext());
+		routingCategory.setLayoutResource(R.layout.preference_category_with_descr);
+		routingCategory.setTitle(R.string.recalculate_route);
+		screen.addPreference(routingCategory);
 	}
 
 	@Override
@@ -544,7 +575,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				return getPersistentPrefIcon(R.drawable.ic_action_road_works_dark);
 			case ROUTING_RECALC_DISTANCE:
 				return getPersistentPrefIcon(R.drawable.ic_action_minimal_distance);
-
+			case ROUTING_RECALC_WRONG_DIRECTION:
+				return getPersistentPrefIcon(R.drawable.ic_action_reverse_direction);
 			default:
 				return null;
 		}
