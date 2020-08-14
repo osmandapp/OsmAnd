@@ -227,9 +227,9 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
 
 				if (mSwiping) {
 					mTranslationX = deltaX;
-					ViewCompat.setTranslationX(mView, deltaX - mSwipingSlop);
+					mView.setTranslationX(deltaX - mSwipingSlop);
 					// TODO: use an ease-out interpolator or such
-					ViewCompat.setAlpha(mView, Math.max(0f, Math.min(1f,
+					mView.setAlpha(Math.max(0f, Math.min(1f,
 							1f - 2f * Math.abs(deltaX) / mViewWidth)));
 					return true;
 				}

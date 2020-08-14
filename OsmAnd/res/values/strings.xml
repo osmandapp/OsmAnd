@@ -11,7 +11,9 @@
 	Thx - Hardy
 
 -->
-
+    <string name="in_case_of_reverse_direction">In case of reverse direction</string>
+    <string name="plan_route_exit_dialog_descr">Are you sure you want to close Plan route without saving? You will lost all changes.</string>
+    <string name="street_level_imagery">Street-level imagery</string>
     <string name="rourte_between_points_add_track_desc">Select a track file for which a new segment will be added.</string>
     <string name="navigation_profile">Navigation profile</string>
     <string name="threshold_distance">Threshold distance</string>

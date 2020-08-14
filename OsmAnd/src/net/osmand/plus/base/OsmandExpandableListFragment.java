@@ -13,7 +13,6 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.MenuItemCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -106,7 +105,7 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 				return onOptionsItemSelected(item);
 			}
 		});
-		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
+		menuItem.setShowAsAction(menuItemType);
 		return menuItem;
 	}
 

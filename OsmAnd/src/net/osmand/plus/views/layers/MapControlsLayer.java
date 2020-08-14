@@ -1114,14 +1114,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 					@Override
 					public void onAnimationEnd(View view) {
 						iv.setVisibility(View.GONE);
-						ViewCompat.setAlpha(iv, 1f);
+						iv.setAlpha(1f);
 						hideAnimator = null;
 					}
 
 					@Override
 					public void onAnimationCancel(View view) {
 						iv.setVisibility(View.GONE);
-						ViewCompat.setAlpha(iv, 1f);
+						iv.setAlpha(1f);
 						hideAnimator = null;
 					}
 				});

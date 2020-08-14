@@ -19,7 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.view.MenuItemCompat;
 
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -102,7 +101,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		createMenuItem(menu, FILTER, R.string.filter_current_poiButton, 
 				R.drawable.ic_action_done, 
 				//R.drawable.a_1_navigation_accept_light, R.drawable.a_1_navigation_accept_dark,
-				MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT | MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+				MenuItem.SHOW_AS_ACTION_WITH_TEXT | MenuItem.SHOW_AS_ACTION_ALWAYS);
 		return super.onCreateOptionsMenu(menu);
 	}	
 	

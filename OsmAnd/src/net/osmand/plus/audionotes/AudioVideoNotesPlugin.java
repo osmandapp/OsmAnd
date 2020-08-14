@@ -1036,11 +1036,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			try {
 				Method m = mr.getClass().getDeclaredMethod("setOrientationHint", Integer.TYPE);
 				Display display = ((WindowManager) mapActivity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-				if (display.getOrientation() == Surface.ROTATION_0) {
+				if (display.getRotation() == Surface.ROTATION_0) {
 					m.invoke(mr, 90);
-				} else if (display.getOrientation() == Surface.ROTATION_270) {
+				} else if (display.getRotation() == Surface.ROTATION_270) {
 					m.invoke(mr, 180);
-				} else if (display.getOrientation() == Surface.ROTATION_180) {
+				} else if (display.getRotation() == Surface.ROTATION_180) {
 					m.invoke(mr, 270);
 				}
 			} catch (Exception e) {

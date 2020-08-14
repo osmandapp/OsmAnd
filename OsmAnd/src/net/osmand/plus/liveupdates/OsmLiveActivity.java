@@ -194,7 +194,7 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 		private final boolean showSettingsOnly;
 
 		LiveUpdatesFragmentPagerAdapter(FragmentManager fm, Resources res, boolean showSettingsOnly) {
-			super(fm);
+			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 			this.showSettingsOnly = showSettingsOnly;
 			titles = new String[titleIds.length];
 			for (int i = 0; i < titleIds.length; i++) {

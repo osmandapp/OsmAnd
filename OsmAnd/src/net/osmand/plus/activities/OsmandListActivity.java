@@ -10,8 +10,6 @@ import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import androidx.core.view.MenuItemCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -68,7 +66,7 @@ public abstract class OsmandListActivity extends
 				return onOptionsItemSelected(item);
 			}
 		});
-		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
+		menuItem.setShowAsAction(menuItemType);
 		return menuItem;
 	}
 

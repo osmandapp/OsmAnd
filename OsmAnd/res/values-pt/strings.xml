@@ -917,8 +917,7 @@
     <string name="index_srtm_ele">Curvas de nível</string>
     <string name="recording_photo_description">Foto %1$s de %2$s</string>
     <string name="av_def_action_picture">Capture uma foto</string>
-    <string name="osmand_srtm_long_description_1000_chars">Este suplemento disponibiliza \'Curvas de Nível\' e \'Sombras de relevo\', que podem ser aplicadas nos mapas padrão do OsmAnd.
-\nEstas funcionalidades podem ser apreciadas por atletas, caminhantes e qualquer pessoa interessada na informação de relevo de uma paisagem.
+    <string name="osmand_srtm_long_description_1000_chars">Este suplemento disponibiliza \'Curvas de Nível\' e \'Sombras de relevo\', que podem ser aplicadas nos mapas padrão do OsmAnd. Estas funcionalidades podem ser apreciadas por atletas, caminhantes e qualquer pessoa interessada na informação de relevo de uma paisagem.
 \n
 \n Os dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no \'Terra\', o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
     <string name="srtm_plugin_description">Este suplemento disponibiliza \'Curvas de Nível\' e \'Sombras de relevo\', que podem ser aplicadas nos mapas padrão do OsmAnd. Estas funcionalidades podem ser apreciadas por atletas, caminhantes, e qualquer pessoa interessada na informação de relevo de uma paisagem.
@@ -1052,26 +1051,25 @@
     <string name="map_widget_fps_info">Depuração FPS</string>
     <string name="map_magnifier">Lupa do mapa</string>
     <string name="base_world_map">Mapa mundial</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Direções de Navegação Automatizada do OSM) 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Direções de Navegação Automatizada do OSM)
 \n
-\n OsmAnd+ é uma aplicação de navegação livre, com acesso a uma ampla variedade de dados globais do OSM. Todos os dados dos mapas (mapas vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar desligado da Internet. O OsmAnd também permite roteamento, tanto ligado como desligado da Internet, incluindo a funcionalidade de roteamento curva a curva com orientação por voz. 
+\n OsmAnd+ é uma aplicação de navegação livre, com acesso a uma ampla variedade de dados globais do OSM. Todos os dados dos mapas (mapas vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar desligado da Internet. O OsmAnd também permite roteamento, tanto ligado como desligado da Internet, incluindo a funcionalidade de roteamento curva a curva com orientação por voz.
 \n
-\n OsmAnd+ é a versão paga da aplicação, ao comprá-lo está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações. 
+\n OsmAnd+ é a versão paga da aplicação, ao comprá-lo está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações.
 \n
-\n Algumas das características principais: 
-\n - Funcionalidade totalmente desligado da Internet (guarda os mapas obtidos, sejam eles vetoriais ou imagens, numa pasta selecionável). 
-\n - Mapas vetoriais compactados do mundo inteiro disponíveis. 
-\n - Descarregamento de mapas de países ou regiões diretamente na aplicação. 
-\n - Recurso Wikipédia desligado da Internet (descarregamento de POIs da Wikipédia), ótimo para passeios turísticos. 
-\n - Possibilidade de sobreposição de várias camadas de mapas, como trilhos GPX ou navegação, pontos de Interesse, favoritos, curvas de nível, paragens de transporte público, mapas adicionais com transparência personalizável. 
-\n 
+\n Algumas das características principais:
+\n - Funcionalidade totalmente desligado da Internet (guarda os mapas obtidos, sejam eles vetoriais ou imagens, numa pasta selecionável).
+\n - Mapas vetoriais compactados do mundo inteiro disponíveis.
+\n - Descarregamento de mapas de países ou regiões diretamente na aplicação.
+\n - Recurso Wikipédia desligado da Internet (descarregamento de POIs da Wikipédia), ótimo para passeios turísticos.
+\n - Possibilidade de sobreposição de várias camadas de mapas, como trilhos GPX ou navegação, pontos de Interesse, favoritos, curvas de nível, paragens de transporte público, mapas adicionais com transparência personalizável.
 \n
-\n - Pesquisa desligado da Internet para endereços e locais (POIs). 
-\n - Encaminhamento desligado da Internet para distâncias médias. 
-\n - Modos de carro, bicicleta e pedestre com os opcionais: 
-\n - Mudança automática de visualização dia/noite 
-\n - Ampliação do mapa conforme a velocidade 
-\n - Orientação do mapa de acordo com a bússola ou a direção do movimento. 
+\n - Pesquisa desligado da Internet para endereços e locais (POIs).
+\n - Encaminhamento desligado da Internet para distâncias médias.
+\n - Modos de carro, bicicleta e pedestre com os opcionais:
+\n - Mudança automática de visualização dia/noite
+\n - Ampliação do mapa conforme a velocidade
+\n - Orientação do mapa de acordo com a bússola ou a direção do movimento.
 \n - Orientação por faixas de rodagem, indicação do limite de velocidade, vozes gravadas e vozes de conversão de texto em voz.
 \n</string>
     <string name="auto_zoom_none">Sem ampliação automático</string>
@@ -1250,7 +1248,7 @@
     <string name="traffic_warning_border_control">Posto alfandegário</string>
     <string name="traffic_warning_payment">Portagem</string>
     <string name="traffic_warning_stop">Sinal de stop</string>
-    <string name="traffic_warning_calming">Choque de velocidade</string>
+    <string name="traffic_warning_calming">Moderação de trafego</string>
     <string name="traffic_warning_speed_camera">Radar de velocidade</string>
     <string name="traffic_warning">Aviso de tráfego</string>
     <string name="speak_favorites">Favoritos pertos</string>
@@ -1921,7 +1919,7 @@
     <string name="mapillary_widget">Widget Mapillary</string>
     <string name="mapillary_widget_descr">Permite contribuir rapidamente para Mapillary.</string>
     <string name="mapillary_descr">Fotos on-line ao nível da rua para todos. Descubra locais, colabore, capture o mundo.</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Imagens de nível de rua</string>
     <string name="plugin_mapillary_descr">Fotos ao nível da rua para todos. Descubra locais, colabore, capture o mundo.</string>
     <string name="private_access_routing_req">O seu destino está localizado numa área de acesso privado. Permitir uso de estradas privadas para esta viagem\?</string>
     <string name="restart_search">Reiniciar pesquisa</string>
@@ -3382,7 +3380,7 @@
     <string name="edit_profiles_descr">Perfis padrão do OsmAnd não podem ser apagados, mas desativados (na tela anterior) ou classificados na parte inferior.</string>
     <string name="edit_profiles">Editar perfis</string>
     <string name="select_nav_profile_dialog_message">O \'Tipo de navegação\' controla como as rotas são calculadas.</string>
-    <string name="profile_appearance">Aspecto do perfil</string>
+    <string name="profile_appearance">Aspeto do perfil</string>
     <string name="layer_osm_edits">Edições OSM</string>
     <string name="quick_action_contour_lines_descr">Botão que mostra ou oculta curvas de nível no mapa.</string>
     <string name="quick_action_contour_lines_show">Mostrar curvas de nível</string>
@@ -3846,4 +3844,17 @@
     <string name="plan_route_create_new_route">Criar rota</string>
     <string name="shared_string_done">Pronto</string>
     <string name="overwrite_track">Sobrescrever trilho</string>
+    <string name="save_as_new_track">Gravar como novo trilho</string>
+    <string name="reverse_route">Rota inversa</string>
+    <string name="rourte_between_points_whole_track_button_desc">O trilho inteiro será recalculado a usar o perfil selecionado.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Somente o próximo segmento será recalculado a usar o perfil selecionado.</string>
+    <string name="rourte_between_points_desc">Selecione como ligar pontos, com uma linha reta ou calcule uma rota entre eles com o perfil selecionado.</string>
+    <string name="whole_track">Trilho inteiro</string>
+    <string name="next_segment">Próximo segmento</string>
+    <string name="rourte_between_points_warning_desc">Para usar esta opção o OsmAnd precisa de encaixar o seu trilho nas estradas do mapa.
+\n
+\n No passo seguinte, terá de selecionar o perfil de navegação para detetar estradas permitidas e a distância limiar para se aproximar do seu trilho com as estradas.</string>
+    <string name="threshold_distance">Distância limiar</string>
+    <string name="navigation_profile">Perfil de navegação</string>
+    <string name="rourte_between_points_add_track_desc">Selecione um ficheiro de faixa para o qual um novo segmento será adicionado.</string>
 </resources>
