@@ -216,10 +216,18 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, List<String> filenames) {
+		if (fragmentManager.isStateSaved()) {
+			return;
+		}
 		OnSaveCurrentTrackFragment f = new OnSaveCurrentTrackFragment();
 		Bundle b = new Bundle();
 		b.putStringArrayList(SAVED_TRACKS_KEY, new ArrayList<>(filenames));
 		f.setArguments(b);
-		f.show(fragmentManager, TAG);
+		try {
+			f.show(fragmentManager, TAG);
+		} catch (IllegalStateException e) {
+			//java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
+			e.printStackTrace();
+		}
 	}
 }
