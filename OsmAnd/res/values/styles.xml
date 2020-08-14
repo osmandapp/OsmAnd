@@ -240,6 +240,8 @@
         <item name="btn_radio_button_left">@drawable/radio_button_left_light</item>
         <item name="btn_radio_button_right">@drawable/radio_button_right_light</item>
         <item name="btn_radio_button_center">@drawable/radio_button_center_light</item>
+        <item name="checkboxStyle">@style/CheckboxStyle</item>
+        <item name="radioButtonStyle">@style/RadioButtonStyle</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -284,9 +286,10 @@
     </style>
 
     <style name="OsmandLightTheme.SearchTabbar" parent="Widget.MaterialComponents.TabLayout">
-        <item name="android:textColorPrimary">@color/osmand_orange</item>
-        <item name="tabTextColor">@color/osmand_orange</item>
+        <item name="tabIndicatorColor">@color/app_bar_main_light</item>
+        <item name="tabTextColor">@color/text_color_secondary_light</item>
         <item name="colorAccent">@color/osmand_orange</item>
+        <item name="tabSelectedTextColor">@color/osmand_orange</item>
         <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
         <item name="android:textColorHint">@color/text_color_secondary_light</item>
     </style>
@@ -313,10 +316,10 @@
     </style>
 
     <style name="OsmandDarkTheme.SearchTabbar"  parent="Widget.MaterialComponents.TabLayout">
-        <item name="android:textColorPrimary">@color/osmand_orange</item>
-        <item name="tabIndicatorColor">@color/osmand_orange</item>
-        <item name="tabTextColor">@color/osmand_orange</item>
+        <item name="tabIndicatorColor">@color/app_bar_main_light</item>
+        <item name="tabTextColor">@color/text_color_secondary_dark</item>
         <item name="colorAccent">@color/osmand_orange</item>
+        <item name="tabSelectedTextColor">@color/osmand_orange</item>
         <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
         <item name="android:textColorHint">@color/text_color_secondary_dark</item>
     </style>
@@ -530,6 +533,8 @@
         <item name="btn_radio_button_left">@drawable/radio_button_left_dark</item>
         <item name="btn_radio_button_right">@drawable/radio_button_right_dark</item>
         <item name="btn_radio_button_center">@drawable/radio_button_center_dark</item>
+        <item name="checkboxStyle">@style/CheckboxStyle</item>
+        <item name="radioButtonStyle">@style/RadioButtonStyle</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
@@ -578,6 +583,16 @@
         <item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarSubtitle</item>
         <item name="android:actionBarWidgetTheme">@style/Theme.AppCompat</item>
         <item name="elevation">0dp</item>
+    </style>
+
+    <style name="CheckboxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:height">@dimen/checkBoxSize</item>
+        <item name="android:width">@dimen/checkBoxSize</item>
+    </style>
+
+    <style name="RadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:height">@dimen/radioButtonSize</item>
+        <item name="android:width">@dimen/radioButtonSize</item>
     </style>
 
     <style name="Widget.Styled.LightActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">

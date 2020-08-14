@@ -18,8 +18,6 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent">
 
-			<include layout="@layout/plan_route_progress_bar"/>
-
 			<net.osmand.plus.LockableScrollView
 				android:id="@+id/route_menu_bottom_scroll"
 				android:layout_width="match_parent"
@@ -37,6 +35,9 @@
 				</LinearLayout>
 
 			</net.osmand.plus.LockableScrollView>
+
+			<include layout="@layout/plan_route_progress_bar"/>
+
 		</FrameLayout>
 
 	</LinearLayout>

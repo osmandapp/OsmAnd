@@ -7,6 +7,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -476,8 +477,8 @@ public class RoutingHelper {
 				boolean isStraight =
 						route.getRouteService() == RouteService.DIRECT_TO || route.getRouteService() == RouteService.STRAIGHT;
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				if (allowableDeviation > 0 && wrongMovementDirection && !isStraight
-						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) {
+				if ((allowableDeviation > 0 && wrongMovementDirection && !isStraight
+						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) && !settings.DISABLE_WRONG_DIRECTION_RECALC.get()) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					isDeviatedFromRoute = true;
 					calculateRoute = true;
@@ -1364,8 +1365,8 @@ public class RoutingHelper {
 		return provider.generateGpxPoints(env, gctx, locationsHolder);
 	}
 
-	public GpxRouteApproximation calculateGpxApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points) throws IOException, InterruptedException {
-		return provider.calculateGpxPointsApproximation(env, gctx, points);
+	public GpxRouteApproximation calculateGpxApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
+		return provider.calculateGpxPointsApproximation(env, gctx, points, resultMatcher);
 	}
 
 	public void notifyIfRouteIsCalculated() {

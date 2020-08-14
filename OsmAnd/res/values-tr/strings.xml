@@ -2255,7 +2255,7 @@
     <string name="mapillary_widget">Mapillary widget\'ı</string>
     <string name="mapillary_widget_descr">Mapillary\'ye hızlıca katkıda bulunmanıza imkan verir.</string>
     <string name="mapillary_descr">Herkes için sokak seviyesinde fotoğraflar. Yerler keşfedin, katkıda bulunun, dünyayı yakalatın.</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Sokak seviyesi görüntüleri</string>
     <string name="plugin_mapillary_descr">Herkes için sokak seviyesinde fotoğraflar. Yerler keşfedin, katkıda bulunun, dünyayı yakalayın.</string>
     <string name="parking_options">Park etme seçenekleri</string>
     <string name="routing_attr_allow_motorway_name">Otoyolları kullan</string>
