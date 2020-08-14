@@ -21,7 +21,7 @@ public class BaseBottomSheetItem {
 	protected int layoutId = INVALID_ID;
 	private Object tag;
 	private boolean disabled;
-	private View.OnClickListener onClickListener;
+	protected View.OnClickListener onClickListener;
 	protected int position = INVALID_POSITION;
 
 	public View getView() {
