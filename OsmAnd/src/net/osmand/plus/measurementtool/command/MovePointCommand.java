@@ -10,7 +10,7 @@ public class MovePointCommand extends MeasurementModeCommand {
 	private final int position;
 
 	public MovePointCommand(MeasurementToolLayer measurementLayer, WptPt oldPoint, WptPt newPoint, int position) {
-		this.measurementLayer = measurementLayer;
+		super(measurementLayer);
 		this.oldPoint = oldPoint;
 		this.newPoint = newPoint;
 		this.position = position;
@@ -23,16 +23,16 @@ public class MovePointCommand extends MeasurementModeCommand {
 
 	@Override
 	public void undo() {
-		measurementLayer.getEditingCtx().removePoint(position, false);
-		measurementLayer.getEditingCtx().addPoint(position, oldPoint);
-		measurementLayer.refreshMap();
+		getEditingCtx().removePoint(position, false);
+		getEditingCtx().addPoint(position, oldPoint);
+		refreshMap();
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.getEditingCtx().removePoint(position, false);
-		measurementLayer.getEditingCtx().addPoint(position, newPoint);
-		measurementLayer.refreshMap();
+		getEditingCtx().removePoint(position, false);
+		getEditingCtx().addPoint(position, newPoint);
+		refreshMap();
 	}
 
 	@Override

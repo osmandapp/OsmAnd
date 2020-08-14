@@ -31,8 +31,6 @@ import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
 import org.apache.commons.logging.Log;
 
-import java.io.IOException;
-
 import static net.osmand.plus.measurementtool.ProfileCard.ProfileCardListener;
 import static net.osmand.plus.measurementtool.SliderCard.SliderCardListener;
 
@@ -40,7 +38,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		implements SliderCardListener, ProfileCardListener {
 
 	private static final Log LOG = PlatformUtil.getLog(GpxApproximationFragment.class);
-	public static final String TAG = GpxApproximationFragment.class.getSimpleName();
+	public static final String TAG = GpxApproximationFragment.class.getName();
 	public static final String DISTANCE_THRESHOLD_KEY = "distance_threshold";
 	public static final String SNAP_TO_ROAD_APP_MODE_STRING_KEY = "snap_to_road_app_mode";
 
@@ -49,11 +47,14 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	private int menuTitleHeight;
 	private ApplicationMode snapToRoadAppMode = ApplicationMode.CAR;
 	private int distanceThreshold = 50;
+	private boolean applyApproximation;
 
 	private LocationsHolder locationsHolder;
 	@Nullable
 	private GpxApproximator gpxApproximator;
 	private ProgressBar progressBar;
+	private View cancelButton;
+	private View applyButton;
 
 	@Override
 	public int getMainLayoutId() {
@@ -139,6 +140,8 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			});
 		}
 
+		applyButton = mainView.findViewById(R.id.right_bottom_button);
+		cancelButton = mainView.findViewById(R.id.dismiss_button);
 		if (isPortrait()) {
 			updateCardsLayout();
 		}
@@ -182,10 +185,15 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		if (gpxApproximator != null) {
+			gpxApproximator.cancelApproximation();
+		}
 		exitGpxApproximationMode();
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof GpxApproximationFragmentListener) {
-			((GpxApproximationFragmentListener) fragment).onCancelGpxApproximation();
+		if (!applyApproximation) {
+			Fragment fragment = getTargetFragment();
+			if (fragment instanceof GpxApproximationFragmentListener) {
+				((GpxApproximationFragmentListener) fragment).onCancelGpxApproximation();
+			}
 		}
 	}
 
@@ -213,7 +221,6 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	private void updateButtons(View view) {
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.route_info_bg));
-		View applyButton = view.findViewById(R.id.right_bottom_button);
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -221,11 +228,10 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 				if (fragment instanceof GpxApproximationFragmentListener) {
 					((GpxApproximationFragmentListener) fragment).onApplyGpxApproximation();
 				}
+				applyApproximation = true;
 				dismiss();
 			}
 		});
-
-		View cancelButton = view.findViewById(R.id.dismiss_button);
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -235,12 +241,16 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 				}
 			}
 		});
-
 		UiUtilities.setupDialogButton(isNightMode(), cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
 		UiUtilities.setupDialogButton(isNightMode(), applyButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
-
 		AndroidUiHelper.updateVisibility(applyButton, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
+	}
+
+	private void setApplyButtonEnabled(boolean enabled) {
+		if (applyButton != null) {
+			applyButton.setEnabled(enabled);
+		}
 	}
 
 	private void updateCards() {
@@ -328,14 +338,18 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 
 	@Override
 	public void onSliderChange(int sliderValue) {
-		distanceThreshold = sliderValue;
-		calculateGpxApproximation();
+		if (distanceThreshold != sliderValue) {
+			distanceThreshold = sliderValue;
+			calculateGpxApproximation();
+		}
 	}
 
 	@Override
 	public void onProfileSelect(ApplicationMode applicationMode) {
-		snapToRoadAppMode = applicationMode;
-		calculateGpxApproximation();
+		if (snapToRoadAppMode != applicationMode) {
+			snapToRoadAppMode = applicationMode;
+			calculateGpxApproximation();
+		}
 	}
 
 	public LocationsHolder getLocationsHolder() {
@@ -370,6 +384,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 
 	private void approximateGpx() {
 		if (gpxApproximator != null) {
+			setApplyButtonEnabled(false);
 			gpxApproximator.calculateGpxApproximation(new ResultMatcher<GpxRouteApproximation>() {
 				@Override
 				public boolean publish(final GpxRouteApproximation gpxApproximation) {
@@ -380,8 +395,9 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 							public void run() {
 								Fragment fragment = getTargetFragment();
 								if (fragment instanceof GpxApproximationFragmentListener) {
-									((GpxApproximationFragmentListener) fragment).onGpxApproximationDone(gpxApproximation);
+									((GpxApproximationFragmentListener) fragment).onGpxApproximationDone(gpxApproximation, gpxApproximator.getMode());
 								}
+								setApplyButtonEnabled(gpxApproximation != null);
 							}
 						});
 						return true;
@@ -399,7 +415,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 
 	public interface GpxApproximationFragmentListener {
 
-		void onGpxApproximationDone(GpxRouteApproximation gpxApproximation);
+		void onGpxApproximationDone(GpxRouteApproximation gpxApproximation, ApplicationMode mode);
 
 		void onApplyGpxApproximation();
 

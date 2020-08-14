@@ -112,9 +112,8 @@ public class GpxApproximator {
 	}
 
 	public void setMode(ApplicationMode mode) throws IOException {
-		boolean changed = this.mode != mode;
-		this.mode = mode;
-		if (changed) {
+		if (this.mode != mode) {
+			this.mode = mode;
 			prepareEnvironment(ctx, mode);
 		}
 	}
@@ -137,6 +136,12 @@ public class GpxApproximator {
 
 	public void setApproximationProgress(GpxApproximationProgressCallback approximationProgress) {
 		this.approximationProgress = approximationProgress;
+	}
+
+	public void cancelApproximation() {
+		if (gctx != null) {
+			gctx.calculationCancelled = true;
+		}
 	}
 
 	public void calculateGpxApproximation(@NonNull final ResultMatcher<GpxRouteApproximation> resultMatcher) {

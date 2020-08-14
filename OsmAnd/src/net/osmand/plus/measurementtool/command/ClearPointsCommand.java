@@ -3,6 +3,7 @@ package net.osmand.plus.measurementtool.command;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,33 +13,33 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 	private boolean needUpdateCache;
 
 	public ClearPointsCommand(MeasurementToolLayer measurementLayer) {
-		this.measurementLayer = measurementLayer;
+		super(measurementLayer);
 	}
 
 	@Override
 	public boolean execute() {
-		List<WptPt> pts = measurementLayer.getEditingCtx().getPoints();
-		needUpdateCache = measurementLayer.getEditingCtx().isNeedUpdateCacheForSnap();
-		points = new LinkedList<>(pts);
+		List<WptPt> pts = getEditingCtx().getPoints();
+		needUpdateCache = getEditingCtx().isNeedUpdateCacheForSnap();
+		points = new ArrayList<>(pts);
 		pts.clear();
-		measurementLayer.getEditingCtx().clearSegments();
-		measurementLayer.refreshMap();
+		getEditingCtx().clearSegments();
+		refreshMap();
 		return true;
 	}
 
 	@Override
 	public void undo() {
-		measurementLayer.getEditingCtx().addPoints(points);
+		getEditingCtx().addPoints(points);
 		if (needUpdateCache) {
-			measurementLayer.getEditingCtx().setNeedUpdateCacheForSnap(true);
+			getEditingCtx().setNeedUpdateCacheForSnap(true);
 		}
-		measurementLayer.refreshMap();
+		refreshMap();
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.getEditingCtx().clearSegments();
-		measurementLayer.refreshMap();
+		getEditingCtx().clearSegments();
+		refreshMap();
 	}
 
 	@Override

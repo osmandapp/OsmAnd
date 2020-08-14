@@ -70,6 +70,7 @@ import net.osmand.plus.measurementtool.SelectedPointBottomSheetDialogFragment.Se
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter.MeasurementAdapterListener;
 import net.osmand.plus.measurementtool.command.AddPointCommand;
+import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
 import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
@@ -477,31 +478,34 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void initMeasurementMode(NewGpxData newGpxData) {
-		editingCtx.getCommandManager().resetMeasurementLayer(getMapActivity().getMapLayers().getMeasurementToolLayer());
-		enterMeasurementMode();
-		showSnapToRoadControls();
-		if (newGpxData != null && !gpxPointsAdded) {
-			List<WptPt> points = newGpxData.getGpxFile().getRoutePoints();
-			if (!points.isEmpty()) {
-				ApplicationMode snapToRoadAppMode = ApplicationMode
-						.valueOfStringKey(points.get(points.size() - 1).getProfileType(), null);
-				if (snapToRoadAppMode != null) {
-					enableSnapToRoadMode(snapToRoadAppMode);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			editingCtx.getCommandManager().setMeasurementLayer(mapActivity.getMapLayers().getMeasurementToolLayer());
+			enterMeasurementMode();
+			showSnapToRoadControls();
+			if (newGpxData != null && !gpxPointsAdded) {
+				List<WptPt> points = newGpxData.getGpxFile().getRoutePoints();
+				if (!points.isEmpty()) {
+					ApplicationMode snapToRoadAppMode = ApplicationMode
+							.valueOfStringKey(points.get(points.size() - 1).getProfileType(), null);
+					if (snapToRoadAppMode != null) {
+						enableSnapToRoadMode(snapToRoadAppMode);
+					}
+				}
+				ActionType actionType = newGpxData.getActionType();
+				if (actionType == ActionType.ADD_ROUTE_POINTS) {
+					displayRoutePoints();
+					gpxPointsAdded = true;
+				} else if (actionType == ActionType.EDIT_SEGMENT) {
+					displaySegmentPoints();
+					gpxPointsAdded = true;
 				}
 			}
-			ActionType actionType = newGpxData.getActionType();
-			if (actionType == ActionType.ADD_ROUTE_POINTS) {
-				displayRoutePoints();
-				gpxPointsAdded = true;
-			} else if (actionType == ActionType.EDIT_SEGMENT) {
-				displaySegmentPoints();
-				gpxPointsAdded = true;
+			if (saved == null) {
+				saved = newGpxData != null
+						&& (newGpxData.getActionType() == ActionType.ADD_ROUTE_POINTS
+						|| newGpxData.getActionType() == ActionType.EDIT_SEGMENT);
 			}
-		}
-		if (saved == null) {
-			saved = newGpxData != null
-					&& (newGpxData.getActionType() == ActionType.ADD_ROUTE_POINTS
-					|| newGpxData.getActionType() == ActionType.EDIT_SEGMENT);
 		}
 	}
 
@@ -547,7 +551,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Nullable
 	private MapActivity getMapActivity() {
 		Activity activity = getActivity();
-		if (activity instanceof MapActivity && !activity.isFinishing()) {
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			return (MapActivity) activity;
 		}
 		return null;
@@ -601,7 +605,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			toolBarController.setTitle(getString(R.string.route_between_points));
 			mapActivity.refreshMap();
 
-			if (editingCtx.isNewData() || editingCtx.hasRoutePoints()) {
+			if (editingCtx.isNewData() || editingCtx.hasRoutePoints() || editingCtx.isInSnapToRoadMode()) {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						this, editingCtx.getCalculationType(),
 						editingCtx.getSnapToRoadAppMode());
@@ -1052,15 +1056,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			editingCtx.addPoints();
-			adapter.notifyDataSetChanged();
-			updateDistancePointsText();
-		}
-	}
-
-	public void displayApproximatedPoints(GpxRouteApproximation gpxApproximation) {
-		MeasurementToolLayer measurementLayer = getMeasurementLayer();
-		if (measurementLayer != null) {
-			editingCtx.setPoints(gpxApproximation);
 			adapter.notifyDataSetChanged();
 			updateDistancePointsText();
 		}
@@ -1929,17 +1924,28 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onGpxApproximationDone(GpxRouteApproximation gpxApproximation) {
-		displayApproximatedPoints(gpxApproximation);
+	public void onGpxApproximationDone(GpxRouteApproximation gpxApproximation, ApplicationMode mode) {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			ApplyGpxApproximationCommand command = new ApplyGpxApproximationCommand(measurementLayer, gpxApproximation, mode);
+			if (!editingCtx.getCommandManager().update(command)) {
+				editingCtx.getCommandManager().execute(command);
+			}
+			if (pointsListOpened) {
+				hidePointsList();
+			}
+			showSnapToRoadControls();
+		}
 	}
 
 	@Override
 	public void onApplyGpxApproximation() {
-
+		doAddOrMovePointCommonStuff();
 	}
 
 	@Override
 	public void onCancelGpxApproximation() {
-
+		editingCtx.getCommandManager().undo();
+		showSnapToRoadControls();
 	}
 }
