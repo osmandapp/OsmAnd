@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -82,21 +81,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 
 		//Scale web view font size with system font size
 		float scale = getActivity().getResources().getConfiguration().fontScale;
-		if (android.os.Build.VERSION.SDK_INT >= 14) {
-			webView.getSettings().setTextZoom((int) (scale * 100f));
-		} else {
-			if (scale <= 0.7f) {
-				webView.getSettings().setTextSize(WebSettings.TextSize.SMALLEST);
-			} else if (scale <= 0.85f) {
-				webView.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-			} else if (scale <= 1.0f) {
-				webView.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
-			} else if (scale <= 1.15f) {
-				webView.getSettings().setTextSize(WebSettings.TextSize.LARGER);
-			} else {
-				webView.getSettings().setTextSize(WebSettings.TextSize.LARGEST);
-			}
-		}
+		webView.getSettings().setTextZoom((int) (scale * 100f));
 
 		if (assetName != null) {
 			String fileContents = getAssetAsString(assetName, getActivity());

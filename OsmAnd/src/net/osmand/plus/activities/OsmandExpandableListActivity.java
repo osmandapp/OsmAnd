@@ -10,8 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 
-import androidx.core.view.MenuItemCompat;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
@@ -64,7 +62,7 @@ public abstract class OsmandExpandableListActivity extends
 				return onOptionsItemSelected(item);
 			}
 		});
-		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
+		menuItem.setShowAsAction(menuItemType);
 		return menuItem;
 	}
 

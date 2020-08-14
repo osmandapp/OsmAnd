@@ -12,7 +12,6 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
@@ -129,7 +128,7 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 		stopProgress();
 
 		progressBar.setProgress(0);
-		ViewCompat.setAlpha(progressBar, 1f);
+		progressBar.setAlpha(1f);
 		progressBar.setVisibility(View.VISIBLE);
 
 		animatorCompat = ValueAnimator.ofInt(0);

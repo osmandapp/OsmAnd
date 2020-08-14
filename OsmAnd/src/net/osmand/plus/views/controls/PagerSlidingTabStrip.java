@@ -45,7 +45,6 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
-import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
@@ -345,11 +344,11 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 				switch (tabSelectionType) {
 					case ALPHA:
 						float alpha = pager.getCurrentItem() == i ? tabTextSelectedAlpha : tabTextAlpha;
-						ViewCompat.setAlpha(tab_title, alpha);
+						tab_title.setAlpha(alpha);
 						tab_title.setTextColor(tabTextColor);
 						break;
 					case SOLID_COLOR:
-						ViewCompat.setAlpha(tab_title, OPAQUE);
+						tab_title.setAlpha(OPAQUE);
 						tab_title.setTextColor(pager.getCurrentItem() == i ? tabTextColor : tabInactiveTextColor);
 						break;
 				}
@@ -564,7 +563,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 				title.setTypeface(tabTypeface, tabTypefaceStyle);
 				switch (tabSelectionType) {
 					case ALPHA:
-						ViewCompat.setAlpha(title, tabTextAlpha);
+						title.setAlpha(tabTextAlpha);
 						break;
 					case SOLID_COLOR:
 						title.setTextColor(tabInactiveTextColor);
@@ -584,7 +583,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 				title.setTypeface(tabTypeface, tabTypefaceSelectedStyle);
 				switch (tabSelectionType) {
 					case ALPHA:
-						ViewCompat.setAlpha(title, tabTextSelectedAlpha);
+						title.setAlpha(tabTextSelectedAlpha);
 						break;
 					case SOLID_COLOR:
 						title.setTextColor(tabTextColor);
