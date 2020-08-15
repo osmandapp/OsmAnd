@@ -3842,4 +3842,7 @@
 \n
 \nفي الخطوة التالية ، ستحتاج إلى تحديد ملف تعريف الملاحة لاكتشاف الطرق المسموح بها وبداية المسافة لتقريب تتبعك بالطرق.</string>
     <string name="threshold_distance">بداية المسافة</string>
+    <string name="street_level_imagery">صور للشارع</string>
+    <string name="plan_route_exit_dialog_descr">هل أنت متأكد أنك تريد إغلاق مسار الخطة دون حفظ؟ سوف تفقد كل التغييرات.</string>
+    <string name="in_case_of_reverse_direction">في حالة الاتجاه المعاكس</string>
 </resources>
