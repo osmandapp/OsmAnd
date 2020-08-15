@@ -391,7 +391,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 				final View focusedView = getDialog().getCurrentFocus();
 				if (focusedView != null) {
-					AndroidUtils.softKeyboardDelayed(focusedView);
+					AndroidUtils.softKeyboardDelayed(getActivity(), focusedView);
 				}
 			}
 		});
@@ -707,7 +707,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		final View focusedView = getDialog().getCurrentFocus();
 		if (focusedView != null) {
 			if (!isOsmandKeyboardOn()) {
-				AndroidUtils.softKeyboardDelayed(focusedView);
+				AndroidUtils.softKeyboardDelayed(getActivity(), focusedView);
 			}
 		}
 	}
@@ -1039,7 +1039,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				new Handler().postDelayed(new Runnable() {
 					@Override
 					public void run() {
-						AndroidUtils.showSoftKeyboard(focusedView);
+						AndroidUtils.showSoftKeyboard(getActivity(), focusedView);
 					}
 				}, 200);
 			}
@@ -1271,7 +1271,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				changeOsmandKeyboardVisibility(true);
 			}
 		} else if (!softKeyboardShown && focusedView != null) {
-			AndroidUtils.softKeyboardDelayed(focusedView);
+			AndroidUtils.softKeyboardDelayed(getActivity(), focusedView);
 		}
 	}
 

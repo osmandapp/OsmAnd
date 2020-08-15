@@ -368,7 +368,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				public void onFocusChange(View v, boolean hasFocus) {
 					if(hasFocus){
 						profileName.setSelection(profileName.getText().length());
-						AndroidUtils.showSoftKeyboard(profileName);
+						AndroidUtils.showSoftKeyboard(getMyActivity(), profileName);
 					}
 				}
 			});

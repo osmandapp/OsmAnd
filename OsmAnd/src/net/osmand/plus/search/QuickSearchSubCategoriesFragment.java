@@ -210,7 +210,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 			@Override
 			public void onClick(View view) {
 				searchEditText.requestFocus();
-				AndroidUtils.showSoftKeyboard(searchEditText);
+				AndroidUtils.showSoftKeyboard(getActivity(), searchEditText);
 			}
 		});
 		ImageView searchCloseIcon = root.findViewById(R.id.search_close);

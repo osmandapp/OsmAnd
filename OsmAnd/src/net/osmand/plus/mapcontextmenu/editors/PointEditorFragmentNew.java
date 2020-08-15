@@ -235,7 +235,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					addDelDescription.setText(view.getResources().getString(R.string.delete_description));
 					View descriptionEdit = view.findViewById(R.id.description_edit);
 					descriptionEdit.requestFocus();
-					AndroidUtils.softKeyboardDelayed(descriptionEdit);
+					AndroidUtils.softKeyboardDelayed(getActivity(), descriptionEdit);
 				} else {
 					descriptionCaption.setVisibility(View.GONE);
 					addDelDescription.setText(view.getResources().getString(R.string.add_description));
@@ -267,7 +267,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			deleteIcon.setVisibility(View.GONE);
 			nameEdit.selectAll();
 			nameEdit.requestFocus();
-			AndroidUtils.softKeyboardDelayed(nameEdit);
+			AndroidUtils.softKeyboardDelayed(getActivity(), nameEdit);
 		} else {
 			toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
 			deleteButton.setVisibility(View.VISIBLE);
