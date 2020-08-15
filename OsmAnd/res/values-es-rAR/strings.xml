@@ -3857,4 +3857,7 @@
     <string name="threshold_distance">Distancia de umbral</string>
     <string name="navigation_profile">Perfil de navegación</string>
     <string name="rourte_between_points_add_track_desc">Elige un archivo de traza al que se añadirá un nuevo segmento.</string>
+    <string name="street_level_imagery">Imágenes a nivel de calle</string>
+    <string name="plan_route_exit_dialog_descr">¿Cerrar el plan de ruta sin guardar\? Se perderán todos los cambios.</string>
+    <string name="in_case_of_reverse_direction">En caso de dirección inversa</string>
 </resources>
