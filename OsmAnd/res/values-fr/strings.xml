@@ -3834,4 +3834,7 @@
     <string name="next_segment">Segment suivant</string>
     <string name="threshold_distance">Seuil de distance</string>
     <string name="navigation_profile">Profil de navigation</string>
+    <string name="street_level_imagery">Photos des rues</string>
+    <string name="plan_route_exit_dialog_descr">Voulez-vous vraiment fermer l\'itinéraire planifié sans enregistrer \? Vous perdrez toutes les modifications.</string>
+    <string name="in_case_of_reverse_direction">Si inversion du sens</string>
 </resources>
