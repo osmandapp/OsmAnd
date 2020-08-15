@@ -3852,4 +3852,7 @@
     <string name="threshold_distance">Sojla distanco</string>
     <string name="navigation_profile">Profilo de navigo</string>
     <string name="rourte_between_points_add_track_desc">Elektu dosieron de spuro al kiu nova segmento estos aldonita.</string>
+    <string name="street_level_imagery">Strat-nivela fotaro</string>
+    <string name="plan_route_exit_dialog_descr">Ĉu vi certe volas fermi planadon de kurso sen konservi\? Ĉiuj viaj ŝanĝoj perdiĝos.</string>
+    <string name="in_case_of_reverse_direction">Kiam en inversa direkto</string>
 </resources>
