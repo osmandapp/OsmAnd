@@ -1355,7 +1355,7 @@ POIの更新は利用できません</string>
     <string name="fav_point_dublicate_message">そのお気に入りは、重複を避けるために%1$sという名前に変更されました。</string>
     <string name="text_size_descr">マップ上の文字サイズを設定します。</string>
     <string name="text_size">文字サイズ</string>
-    <string name="rendering_attr_tramTrainRoutes_name">路面電車と鉄道の路線</string>
+    <string name="rendering_attr_tramTrainRoutes_name">路面電車＆鉄道路線</string>
     <string name="lock_screen_request_explanation">省電力機能で画面をオフにするには%1$s の権限が必要です。</string>
     <string name="wake_on_voice">画面の電源オン設定</string>
     <string name="wake_on_voice_descr">方向転換地点に近づいたらデバイスの画面を(オフの場合指定時間)オンにします</string>
@@ -3683,7 +3683,7 @@ POIの更新は利用できません</string>
     <string name="hillshade_download_description">マップ上で起伏の陰影表示をするには、追加マップが必要です。</string>
     <string name="shared_string_drawer">ドロワーメニュー</string>
     <string name="shared_string_octagon">八角形</string>
-    <string name="context_menu_actions">コンテキストメニューアクション</string>
+    <string name="context_menu_actions">コンテキストメニュー</string>
     <string name="reorder_or_hide_from">項目の並べ替えや非表示するものを指定できます。</string>
     <string name="shared_string_divider">分割</string>
     <string name="divider_descr">分割線で区切られた部分より下にある項目が適用されます。</string>
@@ -3724,4 +3724,17 @@ POIの更新は利用できません</string>
     <string name="lang_gu">グジャラート語</string>
     <string name="lang_cv">チュヴァシ語</string>
     <string name="gpx_parse_error">OsmAnd GPXの形式が正しくありません。サポートチームに連絡しての調査をおすすめします</string>
+    <string name="screen_timeout">画面のタイムアウト</string>
+    <string name="turn_screen_on_descr">画面復帰オプションを選択します(端末設定でロックされる場合は、OsmAndがバックグラウンド動作でないことを確認してください):</string>
+    <string name="system_screen_timeout_descr">端末側の画面オフ(省電力)設定に従って画面を消灯します。</string>
+    <string name="system_screen_timeout">端末側の画面オフ設定を使用</string>
+    <string name="turn_screen_on_wake_time_descr">画面がオンになった後からオフまでの時間を指定します。(\"%1$s\"有効時は適用されません)</string>
+    <string name="keep_screen_on">画面を常に表示</string>
+    <string name="turn_screen_on_proximity_sensor">近接センサー</string>
+    <string name="turn_screen_on_navigation_instructions_descr">ナビゲーション指示がある時だけ画面がオンになります。</string>
+    <string name="turn_screen_on_navigation_instructions">ナビゲーション指示</string>
+    <string name="turn_screen_on_power_button_descr">端末の電源ボタンを押すと、画面がオンになり、ロック画面上にOsmAndが表示されます。</string>
+    <string name="turn_screen_on_power_button">電源ボタン</string>
+    <string name="use_volume_buttons_as_zoom_descr">端末の音量ボタンでマップのズームレベルを変更できるようにします。</string>
+    <string name="use_volume_buttons_as_zoom">音量ボタンでズーム</string>
 </resources>
