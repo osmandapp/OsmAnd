@@ -32,7 +32,7 @@ public class SearchResult {
 	public double priorityDistance;
 
 	public LatLon location;
-	public int preferredZoom = 15;
+	public double preferredZoom = 15;
 
 	public String localeName;
 	public String alternateName;
