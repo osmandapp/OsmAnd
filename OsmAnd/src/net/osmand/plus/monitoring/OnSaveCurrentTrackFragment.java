@@ -52,7 +52,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = "OnSaveCurrentTrackBottomSheetFragment";
 	public static final String SAVED_TRACKS_KEY = "saved_track_filename";
-	private static final Log LOG = PlatformUtil.getLog(MapActivity.class);
+	private static final Log LOG = PlatformUtil.getLog(OnSaveCurrentTrackFragment.class);
 
 	private boolean openTrack = false;
 	private File file;
