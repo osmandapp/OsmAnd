@@ -3789,4 +3789,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \nUn dia equival a 1.440 minuts.
 \nUna setmana té 10.080 minuts.
 \nUn mes dura 43.829 minuts.</string>
+    <string name="in_case_of_reverse_direction">Cas de sentit invers</string>
 </resources>

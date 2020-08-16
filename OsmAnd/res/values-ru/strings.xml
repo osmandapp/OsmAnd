@@ -3838,7 +3838,7 @@
     <string name="plan_route_select_track_file_for_open">Выберите файл трека для открытия.</string>
     <string name="shared_string_done">Готово</string>
     <string name="overwrite_track">Перезаписать трек</string>
-    <string name="rourte_between_points_add_track_desc">Выбрать трек к которому будет добавлен новый сегмент.</string>
+    <string name="rourte_between_points_add_track_desc">Выбрать трек, к которому будет добавлен новый сегмент.</string>
     <string name="navigation_profile">Профиль</string>
     <string name="threshold_distance">Предельная дистанция</string>
     <string name="save_as_new_track">Сохранить как новый трек</string>
@@ -3851,4 +3851,6 @@
 \n
 \nДалее вам следует выбрать профиль для построения маршрута с учётом ограничений этого профиля.</string>
     <string name="rourte_between_points_desc">Выберите как соединять точки: по прямой линии или построением маршрута.</string>
+    <string name="in_case_of_reverse_direction">В случае обратного направления</string>
+    <string name="plan_route_exit_dialog_descr">Закрыть план маршрута без сохранения\? Все изменения будут потеряны.</string>
 </resources>

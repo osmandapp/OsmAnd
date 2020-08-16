@@ -3849,4 +3849,7 @@
     <string name="threshold_distance">Праг удаљености</string>
     <string name="navigation_profile">Навигацијски профил</string>
     <string name="rourte_between_points_add_track_desc">Изаберите датотеку записа којој ће се додати нови сегмент.</string>
+    <string name="street_level_imagery">Слике на нивоу улице</string>
+    <string name="plan_route_exit_dialog_descr">Јесте ли сигурни да желите затворити План руте без чувања\? Изгуби ћете све промене.</string>
+    <string name="in_case_of_reverse_direction">У случају обрнутог правца</string>
 </resources>

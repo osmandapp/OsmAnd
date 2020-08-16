@@ -3860,4 +3860,7 @@
     <string name="rourte_between_points_warning_desc">כדי להשתמש באפשרות זו על OsmAnd להצמיד את המסלול שלך לדרכים שעל המפה.
 \n
 \n בשלב הבא יהיה עליך לבחור בפרופיל ניווט כדי לזהות את הדרכים המורשות ואת סף המרחק כדי להעריך את המסלול שלך ביחס לדרכים.</string>
+    <string name="street_level_imagery">תמונות ברמת רחוב</string>
+    <string name="plan_route_exit_dialog_descr">לסגור את תכנון המסלול בלי לשמור\? כל השינויים שלך יאבדו.</string>
+    <string name="in_case_of_reverse_direction">במקרה של כיוון הפוך</string>
 </resources>

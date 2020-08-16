@@ -3883,4 +3883,7 @@
     <string name="threshold_distance">Distância limite</string>
     <string name="navigation_profile">Perfil de navegação</string>
     <string name="rourte_between_points_add_track_desc">Selecione um arquivo de trilha para o qual um novo segmento será adicionado.</string>
+    <string name="street_level_imagery">Imagens de rua</string>
+    <string name="plan_route_exit_dialog_descr">Tem certeza de que deseja fechar plano de rota sem salvar\? Você perderá todas as alterações.</string>
+    <string name="in_case_of_reverse_direction">Em caso de direção reversa</string>
 </resources>
