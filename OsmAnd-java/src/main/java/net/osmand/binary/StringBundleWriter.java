@@ -16,10 +16,10 @@ public abstract class StringBundleWriter {
 		return bundle;
 	}
 
-	protected abstract void writeItem(String name, Item item);
+	protected abstract void writeItem(String name, Item<?> item);
 
 	public void writeBundle() {
-		for (Entry<String, Item> entry : bundle.getMap().entrySet()) {
+		for (Entry<String, Item<?>> entry : bundle.getMap().entrySet()) {
 			writeItem(entry.getKey(), entry.getValue());
 		}
 	}
