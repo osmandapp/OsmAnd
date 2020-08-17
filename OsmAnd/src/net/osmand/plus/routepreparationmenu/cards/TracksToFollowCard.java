@@ -105,6 +105,10 @@ public class TracksToFollowCard extends BaseCard {
 		String all = app.getString(R.string.shared_string_all);
 		String visible = app.getString(R.string.shared_string_visible);
 		Map<String, List<GPXInfo>> gpxInfoCategories = new LinkedHashMap<>();
+
+		gpxInfoCategories.put(visible, new ArrayList<GPXInfo>());
+		gpxInfoCategories.put(all, new ArrayList<GPXInfo>());
+
 		for (GPXInfo info : gpxInfoList) {
 			if (info.isSelected()) {
 				addGpxInfoCategory(gpxInfoCategories, info, visible);

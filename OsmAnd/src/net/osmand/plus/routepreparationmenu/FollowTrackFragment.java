@@ -37,6 +37,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.ImportHelper;
+import net.osmand.plus.helpers.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
@@ -431,11 +432,17 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		if (requestCode == ImportHelper.IMPORT_FILE_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null) {
 				Uri uri = data.getData();
-				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
+				importHelper.setGpxImportCompleteListener(new OnGpxImportCompleteListener() {
 					@Override
-					public void onComplete(boolean success) {
+					public void onImportComplete(boolean success) {
+
+					}
+
+					@Override
+					public void onSavingComplete(boolean success, GPXFile result) {
 						if (success) {
-//							setupTracksCard();
+							selectTrackToFollow(result);
+							updateSelectionMode(false);
 						} else {
 							app.showShortToastMessage(app.getString(R.string.error_occurred_loading_gpx));
 						}

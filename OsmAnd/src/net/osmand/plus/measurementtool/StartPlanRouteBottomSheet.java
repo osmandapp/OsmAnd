@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -26,6 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.ImportHelper;
+import net.osmand.plus.helpers.ImportHelper.OnGpxImportCompleteListener;
 
 import org.apache.commons.logging.Log;
 
@@ -162,11 +164,16 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 		if (requestCode == OPEN_GPX_DOCUMENT_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null) {
 				Uri uri = data.getData();
-				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
+				importHelper.setGpxImportCompleteListener(new OnGpxImportCompleteListener() {
 					@Override
-					public void onComplete(boolean success) {
+					public void onImportComplete(boolean success) {
 						finishImport(success);
 						importHelper.setGpxImportCompleteListener(null);
+					}
+
+					@Override
+					public void onSavingComplete(boolean success, GPXUtilities.GPXFile result) {
+
 					}
 				});
 				importHelper.handleGpxImport(uri, false, false);

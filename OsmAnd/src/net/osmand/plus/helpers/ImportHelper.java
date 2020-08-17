@@ -116,7 +116,8 @@ public class ImportHelper {
 	}
 
 	public interface OnGpxImportCompleteListener {
-		void onComplete(boolean success);
+		void onImportComplete(boolean success);
+		void onSavingComplete(boolean success, GPXFile result);
 	}
 
 	public ImportHelper(final AppCompatActivity activity, final OsmandApplication app, final OsmandMapTileView mapView) {
@@ -963,7 +964,7 @@ public class ImportHelper {
 			if (result.error != null) {
 				Toast.makeText(activity, result.error.getMessage(), Toast.LENGTH_LONG).show();
 				if (gpxImportCompleteListener != null) {
-					gpxImportCompleteListener.onComplete(false);
+					gpxImportCompleteListener.onImportComplete(false);
 				}
 			} else {
 				if (save) {
@@ -973,7 +974,7 @@ public class ImportHelper {
 					showGpxInDetailsActivity(result);
 				}
 				if (gpxImportCompleteListener != null) {
-					gpxImportCompleteListener.onComplete(true);
+					gpxImportCompleteListener.onImportComplete(true);
 				}
 			}
 		} else {
@@ -989,7 +990,7 @@ public class ImportHelper {
 							intent.setData(uri);
 							app.startActivity(intent);
 							if (gpxImportCompleteListener != null) {
-								gpxImportCompleteListener.onComplete(false);
+								gpxImportCompleteListener.onImportComplete(false);
 							}
 						}
 					})
@@ -997,7 +998,7 @@ public class ImportHelper {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							if (gpxImportCompleteListener != null) {
-								gpxImportCompleteListener.onComplete(false);
+								gpxImportCompleteListener.onImportComplete(false);
 							}
 						}
 					})
@@ -1090,7 +1091,12 @@ public class ImportHelper {
 
 		@Override
 		protected void onPostExecute(final String warning) {
-			if (Algorithms.isEmpty(warning)) {
+			boolean success = Algorithms.isEmpty(warning);
+
+			if (gpxImportCompleteListener != null) {
+				gpxImportCompleteListener.onSavingComplete(success, result);
+			}
+			if (success) {
 				if (showInDetailsActivity) {
 					showGpxInDetailsActivity(result);
 				} else {

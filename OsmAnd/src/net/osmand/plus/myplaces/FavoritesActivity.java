@@ -20,6 +20,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -30,6 +31,7 @@ import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.helpers.ImportHelper;
+import net.osmand.plus.helpers.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -59,7 +61,7 @@ public class FavoritesActivity extends TabActivity {
 	private ImportHelper importHelper;
 
 	private Bundle intentParams = null;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		OsmandApplication app = (OsmandApplication) getApplication();
@@ -123,14 +125,19 @@ public class FavoritesActivity extends TabActivity {
 				if (gpxFragment!= null) {
 					gpxFragment.startImport();
 				}
-				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
+				importHelper.setGpxImportCompleteListener(new OnGpxImportCompleteListener() {
 					@Override
-					public void onComplete(boolean success) {
+					public void onImportComplete(boolean success) {
 						AvailableGPXFragment gpxFragment = getGpxFragment();
 						if (gpxFragment!= null) {
 							gpxFragment.finishImport(success);
 						}
 						importHelper.setGpxImportCompleteListener(null);
+					}
+
+					@Override
+					public void onSavingComplete(boolean success, GPXUtilities.GPXFile result) {
+
 					}
 				});
 				if (!importHelper.handleGpxImport(uri, false)) {
