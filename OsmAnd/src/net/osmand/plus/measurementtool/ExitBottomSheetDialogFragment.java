@@ -28,7 +28,6 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 
 		items.add(new ShortDescriptionItem.Builder()
 				.setDescription(getString(R.string.plan_route_exit_dialog_descr))
-				.setDescriptionColorId(nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light)
 				.setTitle(getString(R.string.exit_without_saving))
 				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
 				.create());

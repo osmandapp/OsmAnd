@@ -44,7 +44,6 @@
 				android:textColor="?android:textColorPrimary"
 				android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
 				osmand:typeface="@string/font_roboto_regular"
-				android:letterSpacing="@dimen/description_letter_spacing"
 				android:textSize="@dimen/default_desc_text_size" />
 
 			<include layout="@layout/custom_radio_buttons" />
@@ -63,7 +62,6 @@
 				android:textColor="?android:textColorPrimary"
 				android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
 				osmand:typeface="@string/font_roboto_regular"
-				android:letterSpacing="@dimen/description_letter_spacing"
 				android:textSize="@dimen/default_desc_text_size" />
 		</LinearLayout>
 
