@@ -1804,12 +1804,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void setAddressLocation() {
 		if (view != null) {
 			// Text line 1
-			TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
+			TextView line1 = view.findViewById(R.id.context_menu_line1);
 			line1.setText(menu.getTitleStr());
 			toolbarTextView.setText(menu.getTitleStr());
 			// Text line 2
-			LinearLayout line2layout = (LinearLayout) view.findViewById(R.id.context_menu_line2_layout);
-			TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
+			LinearLayout line2layout = view.findViewById(R.id.context_menu_line2_layout);
+			TextView line2 = view.findViewById(R.id.context_menu_line2);
 			if (menu.hasCustomAddressLine()) {
 				line2layout.removeAllViews();
 				menu.buildCustomAddressLine(line2layout);
@@ -1819,7 +1819,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				StringBuilder line2Str = new StringBuilder();
 				if (!Algorithms.isEmpty(typeStr)) {
 					line2Str.append(typeStr);
-
 					Drawable icon = menu.getTypeIcon();
 					if (icon != null){
 						GravityDrawable gravityIcon = new GravityDrawable(icon);
@@ -1839,10 +1838,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						}
 					}
 					line2.setCompoundDrawablePadding(dpToPx(5f));
-				}
-				if (menu.getPointDescription().isFavorite() &&
-						menu.getObject() instanceof FavouritePoint){
-					streetStr = ((FavouritePoint)menu.getObject()).getAddress();
 				}
 				if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {
 					if (line2Str.length() > 0) {

@@ -89,11 +89,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			TextView line2 = (TextView) convertView.findViewById(R.id.context_menu_line2);
 			((TextView) line2).setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_subtitle_color));
 			StringBuilder line2Str = new StringBuilder(item.getTypeStr());
-			String streetStr = "";
-			if (item.getPointDescription().isFavorite() &&
-					item.getObject() instanceof FavouritePoint){
-				streetStr = ((FavouritePoint)item.getObject()).getAddress();
-			}
+			String streetStr = item.getStreetStr();
 			if (!Algorithms.isEmpty(streetStr) && !item.displayStreetNameInTitle()) {
 				if (line2Str.length() > 0) {
 					line2Str.append(", ");
