@@ -726,35 +726,40 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		switchMovePointMode(true);
 	}
 
-			@Override
-			public void deleteOnClick() {
-				removePoint(measurementLayer, editingCtx.getSelectedPointPosition());
-				editingCtx.setSelectedPointPosition(-1);
-			}
+	@Override
+	public void onDeletePoint() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			removePoint(measurementLayer, editingCtx.getSelectedPointPosition());
+		}
+		editingCtx.setSelectedPointPosition(-1);
+	}
 
-			@Override
-			public void addPointAfterOnClick() {
-				if (measurementLayer != null) {
-					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
-					editingCtx.setInAddPointMode(true);
-					editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
-				}
-				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
-				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_above));
-				switchAddPointBeforeAfterMode(true);
-			}
+	@Override
+	public void onAddPointAfter() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
+			editingCtx.setInAddPointMode(true);
+			editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
+		}
+		((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
+		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_above));
+		switchAddPointBeforeAfterMode(true);
+	}
 
-			@Override
-			public void addPointBeforeOnClick() {
-				if (measurementLayer != null) {
-					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
-					editingCtx.setInAddPointMode(true);
-					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
-				}
-				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
-				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_below));
-				switchAddPointBeforeAfterMode(true);
-			}
+	@Override
+	public void onAddPointBefore() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
+			editingCtx.setInAddPointMode(true);
+			editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
+		}
+		((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
+		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_below));
+		switchAddPointBeforeAfterMode(true);
+	}
 
 	@Override
 	public void onTrimRouteBefore() {
