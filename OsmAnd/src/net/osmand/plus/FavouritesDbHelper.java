@@ -130,15 +130,15 @@ public class FavouritesDbHelper {
 		}
 	}
 
-	public Drawable setColoredIconForGroup(String groupName) {
-		FavouritesDbHelper.FavoriteGroup favoriteGroup = this.getGroup(
+	public Drawable getColoredIconForGroup(String groupName) {
+		FavouritesDbHelper.FavoriteGroup favoriteGroup = getGroup(
 				FavouritesDbHelper.FavoriteGroup.
 						convertDisplayNameToGroupIdName(
-								this.context, groupName));
+								context, groupName));
 		if (favoriteGroup != null) {
 			int color = favoriteGroup.getColor() == 0 ?
-					this.context.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
-			return this.context.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color);
+					context.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
+			return context.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color);
 		}
 		return null;
 	}

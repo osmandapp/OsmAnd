@@ -5,12 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -47,7 +42,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -1837,7 +1831,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					if (menu.getMyApplication() != null){
 						FavouritesDbHelper helper = menu.getMyApplication().getFavorites();
 						if (helper != null && helper.getGroup(groupName) != null){
-							Drawable line2icon = helper.setColoredIconForGroup(groupName);
+							Drawable line2icon = helper.getColoredIconForGroup(groupName);
 							GravityDrawable line2GravityDrawable =
 									new GravityDrawable(line2icon);
 							line2.setCompoundDrawablesWithIntrinsicBounds(

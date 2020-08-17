@@ -1,8 +1,5 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +14,6 @@ import androidx.core.content.ContextCompat;
 import net.osmand.AndroidUtils;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.util.Algorithms;
@@ -118,7 +113,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			if (item.getMyApplication() != null){
 				FavouritesDbHelper helper = item.getMyApplication().getFavorites();
 				if (helper != null && helper.getGroup(groupName) != null){
-					Drawable line2icon = helper.setColoredIconForGroup(groupName);
+					Drawable line2icon = helper.getColoredIconForGroup(groupName);
 					GravityDrawable line2GravityIcon = new GravityDrawable(line2icon);
 					line2GravityIcon.setBoundsFrom(line2icon);
 					line2.setCompoundDrawablesWithIntrinsicBounds(line2GravityIcon, null, null, null);
