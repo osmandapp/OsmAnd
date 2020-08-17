@@ -22,7 +22,7 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 
 	public ChangeRouteModeCommand(MeasurementToolLayer measurementLayer, ApplicationMode newMode,
 	                              CalculationMode newCalculationMode) {
-		this.measurementLayer = measurementLayer;
+		super(measurementLayer);
 		this.newMode = newMode;
 		this.newCalculationMode = newCalculationMode;
 		MeasurementEditingContext editingCtx = measurementLayer.getEditingCtx();
