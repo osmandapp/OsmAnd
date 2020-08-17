@@ -17,6 +17,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteCalculationProgress;
+import net.osmand.router.RouteImporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
@@ -25,20 +26,20 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.*;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.NEXT_SEGMENT;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 
 public class MeasurementEditingContext {
 
-	public enum CalculationMode {
-		NEXT_SEGMENT,
-		WHOLE_TRACK
-	}
+	public final static ApplicationMode DEFAULT_APP_MODE = ApplicationMode.DEFAULT;
 
 	private OsmandApplication application;
 	private final MeasurementCommandManager commandManager = new MeasurementCommandManager();
@@ -54,15 +55,55 @@ public class MeasurementEditingContext {
 	private WptPt originalPointToMove;
 
 	private boolean inAddPointMode;
-	private boolean inSnapToRoadMode;
 	private boolean needUpdateCacheForSnap;
 	private int calculatedPairs;
 	private CalculationMode calculationMode = WHOLE_TRACK;
 	private SnapToRoadProgressListener progressListener;
-	private ApplicationMode snapToRoadAppMode;
+	private ApplicationMode appMode = DEFAULT_APP_MODE;
 	private RouteCalculationProgress calculationProgress;
 	private final Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new ConcurrentLinkedQueue<>();
-	private final Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
+	private final Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = new ConcurrentHashMap<>();
+
+	public enum CalculationMode {
+		NEXT_SEGMENT,
+		WHOLE_TRACK
+	}
+
+	public static class RoadSegmentData {
+		private ApplicationMode appMode;
+		private WptPt start;
+		private WptPt end;
+		private List<WptPt> snappedToRoadPoints = new ArrayList<>();
+		private List<RouteSegmentResult> snappedToRoadSegments = new ArrayList<>();
+
+		public RoadSegmentData(ApplicationMode appMode, WptPt start, WptPt end, List<WptPt> snappedToRoadPoints, List<RouteSegmentResult> snappedToRoadSegments) {
+			this.appMode = appMode;
+			this.start = start;
+			this.end = end;
+			this.snappedToRoadPoints = snappedToRoadPoints;
+			this.snappedToRoadSegments = snappedToRoadSegments;
+		}
+
+		public ApplicationMode getAppMode() {
+			return appMode;
+		}
+
+		public WptPt getStart() {
+			return start;
+		}
+
+		public WptPt getEnd() {
+			return end;
+		}
+
+		public List<WptPt> getSnappedToRoadPoints() {
+			return Collections.unmodifiableList(snappedToRoadPoints);
+		}
+
+		public List<RouteSegmentResult> getSnappedToRoadSegments() {
+			return Collections.unmodifiableList(snappedToRoadSegments);
+		}
+	}
 
 	public void setApplication(OsmandApplication application) {
 		this.application = application;
@@ -74,10 +115,6 @@ public class MeasurementEditingContext {
 
 	boolean isInAddPointMode() {
 		return inAddPointMode;
-	}
-
-	boolean isInSnapToRoadMode() {
-		return inSnapToRoadMode;
 	}
 
 	public boolean isNeedUpdateCacheForSnap() {
@@ -109,8 +146,8 @@ public class MeasurementEditingContext {
 		this.inAddPointMode = inAddPointMode;
 	}
 
-	public void setInSnapToRoadMode(boolean inSnapToRoadMode) {
-		this.inSnapToRoadMode = inSnapToRoadMode;
+	boolean isInSnapToRoadMode() {
+		return appMode != DEFAULT_APP_MODE;
 	}
 
 	NewGpxData getNewGpxData() {
@@ -141,18 +178,22 @@ public class MeasurementEditingContext {
 		this.progressListener = progressListener;
 	}
 
-	public ApplicationMode getSnapToRoadAppMode() {
-		return snapToRoadAppMode;
+	@NonNull
+	public ApplicationMode getAppMode() {
+		return appMode;
 	}
 
-	public void setSnapToRoadAppMode(ApplicationMode snapToRoadAppMode) {
-		this.snapToRoadAppMode = snapToRoadAppMode;
+	public void setAppMode(@NonNull ApplicationMode appMode) {
+		this.appMode = appMode;
+	}
+
+	public void resetAppMode() {
+		this.appMode = DEFAULT_APP_MODE;
 	}
 
 	public void clearSnappedToRoadPoints() {
-		snappedToRoadPoints.clear();
+		roadSegmentData.clear();
 	}
-
 
 	TrkSegment getBeforeTrkSegmentLine() {
 		if (beforeCacheForSnap != null) {
@@ -224,7 +265,7 @@ public class MeasurementEditingContext {
 	public void clearSegments() {
 		before.points.clear();
 		after.points.clear();
-		if (inSnapToRoadMode) {
+		if (isInSnapToRoadMode()) {
 			if (beforeCacheForSnap != null && afterCacheForSnap != null) {
 				beforeCacheForSnap.points.clear();
 				afterCacheForSnap.points.clear();
@@ -263,7 +304,7 @@ public class MeasurementEditingContext {
 		for (List<WptPt> points : pointsList) {
 			for (int i = 0; i < points.size() - 1; i++) {
 				Pair<WptPt, WptPt> pair = new Pair<>(points.get(i), points.get(i + 1));
-				if (snappedToRoadPoints.get(pair) == null) {
+				if (roadSegmentData.get(pair) == null) {
 					snapToRoadPairsToCalculate.add(pair);
 				}
 			}
@@ -274,11 +315,12 @@ public class MeasurementEditingContext {
 		if (original.points.size() > 1) {
 			for (int i = 0; i < original.points.size() - 1; i++) {
 				Pair<WptPt, WptPt> pair = new Pair<>(original.points.get(i), original.points.get(i + 1));
-				List<WptPt> pts = snappedToRoadPoints.get(pair);
+				RoadSegmentData data = this.roadSegmentData.get(pair);
+				List<WptPt> pts = data != null ? data.getSnappedToRoadPoints() : null;
 				if (pts != null) {
 					cache.points.addAll(pts);
 				} else {
-					if (inSnapToRoadMode) {
+					if (isInSnapToRoadMode()) {
 						scheduleRouteCalculateIfNotEmpty();
 					}
 					cache.points.addAll(Arrays.asList(pair.first, pair.second));
@@ -296,6 +338,8 @@ public class MeasurementEditingContext {
 		}
 		List<WptPt> points = newGpxData.getTrkSegment().points;
 		if (isTrackSnappedToRoad()) {
+			RouteImporter routeImporter = new RouteImporter(newGpxData.getGpxFile());
+			List<RouteSegmentResult> segments = routeImporter.importRoute();
 			List<WptPt> routePoints = newGpxData.getGpxFile().getRoutePoints();
 			int prevPointIndex = 0;
 			for (int i = 0; i < routePoints.size() - 1; i++) {
@@ -309,12 +353,20 @@ public class MeasurementEditingContext {
 					endIndex = findPointIndex(pair.second, points, startIndex);
 				}
 				if (startIndex >= 0 && endIndex >= 0) {
-					List<WptPt> cacheSegment = new ArrayList<>();
+					List<WptPt> segmentPoints = new ArrayList<>();
 					for (int j = startIndex; j < endIndex && j < points.size(); j++) {
-						cacheSegment.add(points.get(j));
+						segmentPoints.add(points.get(j));
 						prevPointIndex = j;
 					}
-					snappedToRoadPoints.put(pair, cacheSegment);
+					Iterator<RouteSegmentResult> it = segments.iterator();
+					int k = endIndex - startIndex;
+					while (it.hasNext() && k >= 0) {
+						RouteSegmentResult s = it.next();
+						it.remove();
+						k -= Math.abs(s.getEndPointIndex() - s.getStartPointIndex());
+					}
+					ApplicationMode appMode = ApplicationMode.valueOfStringKey(pair.first.getProfileType(), DEFAULT_APP_MODE);
+					roadSegmentData.put(pair, new RoadSegmentData(appMode, pair.first, pair.second, segmentPoints, segments));
 				}
 			}
 			addPoints(routePoints);
@@ -327,7 +379,7 @@ public class MeasurementEditingContext {
 		if (gpxApproximation == null || Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(gpxApproximation.result)) {
 			return;
 		}
-		snappedToRoadPoints.clear();
+		roadSegmentData.clear();
 		List<WptPt> routePoints = new ArrayList<>();
 		List<GpxPoint> gpxPoints = gpxApproximation.finalPoints;
 		for (int i = 0; i < gpxPoints.size() - 1; i++) {
@@ -344,15 +396,17 @@ public class MeasurementEditingContext {
 			p2.lon = rp2.loc.getLongitude();
 			routePoints.add(p2);
 			Pair<WptPt, WptPt> pair = new Pair<>(p1, p2);
-			List<WptPt> cacheSegment = new ArrayList<>();
+			List<WptPt> points = new ArrayList<>();
+			List<RouteSegmentResult> segments = new ArrayList<>();
 			for (RouteSegmentResult seg : rp1.routeToTarget) {
+				segments.add(seg);
 				if (seg.isForwardDirection()) {
 					for (int ik = seg.getStartPointIndex(); ik <= seg.getEndPointIndex(); ik++) {
 						LatLon l = seg.getPoint(ik);
 						WptPt pt = new WptPt();
 						pt.lat = l.getLatitude();
 						pt.lon = l.getLongitude();
-						cacheSegment.add(pt);
+						points.add(pt);
 					}
 				} else {
 					for (int ik = seg.getEndPointIndex(); ik >= seg.getStartPointIndex(); ik--) {
@@ -360,11 +414,11 @@ public class MeasurementEditingContext {
 						WptPt pt = new WptPt();
 						pt.lat = l.getLatitude();
 						pt.lon = l.getLongitude();
-						cacheSegment.add(pt);
+						points.add(pt);
 					}
 				}
 			}
-			snappedToRoadPoints.put(pair, cacheSegment);
+			roadSegmentData.put(pair, new RoadSegmentData(appMode, pair.first, pair.second, points, segments));
 		}
 		addPoints(routePoints);
 	}
@@ -386,7 +440,7 @@ public class MeasurementEditingContext {
 		NewGpxData newGpxData = getNewGpxData();
 		return newGpxData != null && newGpxData.getTrkSegment() != null
 				&& !newGpxData.getTrkSegment().points.isEmpty()
-				&& !newGpxData.getGpxFile().getRoutePoints().isEmpty();
+				&& newGpxData.getGpxFile().hasRoute();
 	}
 
 	private void updateCacheForSnapIfNeeded(boolean both) {
@@ -427,7 +481,7 @@ public class MeasurementEditingContext {
 			currentPointSnapToRoadMode = ApplicationMode.valueOfStringKey(currentPair.first.getProfileType(),
 					null);
 		} else {
-			currentPointSnapToRoadMode = snapToRoadAppMode;
+			currentPointSnapToRoadMode = appMode;
 		}
 		params.end = end;
 		if (currentPointSnapToRoadMode == null) {
@@ -484,7 +538,7 @@ public class MeasurementEditingContext {
 					pts.add(pt);
 				}
 				calculatedPairs++;
-				snappedToRoadPoints.put(currentPair, pts);
+				roadSegmentData.put(currentPair, new RoadSegmentData(route.getAppMode(), currentPair.first, currentPair.second, pts, route.getOriginalRoute()));
 				int trkptIndex = currentPair.first.getTrkPtIndex();
 				trkptIndex += pts.size() - 1;
 				currentPair.second.setTrkPtIndex(trkptIndex);
@@ -563,13 +617,13 @@ public class MeasurementEditingContext {
 		params.start = start;
 		params.end = end;
 		params.intermediates = intermediates;
-		if (snapToRoadAppMode == null) {
+		if (appMode == null) {
 			ApplicationMode straightLine = ApplicationMode.AIRCRAFT;
 			RoutingHelper.applyApplicationSettings(params, application.getSettings(), straightLine);
 			params.mode = straightLine;
 		} else {
-			RoutingHelper.applyApplicationSettings(params, application.getSettings(), snapToRoadAppMode);
-			params.mode = snapToRoadAppMode;
+			RoutingHelper.applyApplicationSettings(params, application.getSettings(), appMode);
+			params.mode = appMode;
 		}
 		params.ctx = application;
 		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
