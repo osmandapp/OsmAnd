@@ -15,7 +15,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
@@ -190,7 +189,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			h.moveButton.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View view, MotionEvent event) {
-					if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+					if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 						listener.onDragStarted(holder);
 					}
 					return false;

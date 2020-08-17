@@ -1127,7 +1127,7 @@
     <string name="mapillary_widget">וידג׳ט Mapillary</string>
     <string name="mapillary_widget_descr">מאפשר תרומה במהירות ל־Mapillary.</string>
     <string name="mapillary_descr">תמונות מקוונות ברמת רחוב לכולם. היכרות עם מקומות חדשים, שיתוף פעולה וצילום העולם.</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">תמונות ברמת רחוב</string>
     <string name="plugin_mapillary_descr">תמונות ברמת הרחוב לכולם. להכיר מקומות, לשתף פעולה ולצלם את העולם.</string>
     <string name="private_access_routing_req">היעד שלך ממוקם באיזור עם גישה פרטית. לאשר שימוש בכבישים פרטיים לצורך טיול זה\?</string>
     <string name="restart_search">חיפוש מחדש</string>
@@ -3854,4 +3854,13 @@
     <string name="threshold_distance">סף מרחק</string>
     <string name="navigation_profile">פרופיל ניווט</string>
     <string name="rourte_between_points_add_track_desc">נא לבחור קובץ מסלול שבו יתווסף המקטע החדש.</string>
+    <string name="rourte_between_points_whole_track_button_desc">כל המסלול יחושב מחדש באמצעות הפרופיל הנבחר.</string>
+    <string name="rourte_between_points_next_segment_button_desc">רק המקטע הבא יחושב מחודש באמצעות הפרופיל הנבחר.</string>
+    <string name="rourte_between_points_desc">נא לבחור כיצד לחבר נקודות, בקו ישר, או לחבר מסלול ביניהן עם הפרופיל הנבחר.</string>
+    <string name="rourte_between_points_warning_desc">כדי להשתמש באפשרות זו על OsmAnd להצמיד את המסלול שלך לדרכים שעל המפה.
+\n
+\n בשלב הבא יהיה עליך לבחור בפרופיל ניווט כדי לזהות את הדרכים המורשות ואת סף המרחק כדי להעריך את המסלול שלך ביחס לדרכים.</string>
+    <string name="street_level_imagery">תמונות ברמת רחוב</string>
+    <string name="plan_route_exit_dialog_descr">לסגור את תכנון המסלול בלי לשמור\? כל השינויים שלך יאבדו.</string>
+    <string name="in_case_of_reverse_direction">במקרה של כיוון הפוך</string>
 </resources>

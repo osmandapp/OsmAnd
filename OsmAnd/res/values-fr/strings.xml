@@ -87,7 +87,7 @@
     <string name="old_poi_file_should_be_deleted">Le fichier de points d\'intérêt \'%1$s\' est obsolète et peut être supprimé.</string>
     <string name="update_poi_file_not_found">Fichier local de gestion des modifications de points d\'intérêt introuvable, et ne peut être créé.</string>
     <string name="button_upgrade_osmandplus">Mettre à jour OsmAnd+</string>
-    <string name="map_version_changed_info">Téléchargez la nouvelle version de l\'application pour utiliser les nouvelle cartes.</string>
+    <string name="map_version_changed_info">Téléchargez la nouvelle version de l\'application pour utiliser les nouvelles cartes.</string>
     <string name="shared_string_rename">Renommer</string>
     <string name="poi_filter_nominatim">Recherche OSM en ligne</string>
     <string name="search_position_current_location_search">Recherche de la position…</string>
@@ -1121,7 +1121,7 @@
     <string name="shared_string_favorite">Favori</string>
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
-    <string name="keep_and_add_destination_point">Ajouter comme destination suivante</string>
+    <string name="keep_and_add_destination_point">Ajouter comme destination</string>
     <string name="use_displayed_track_for_navigation">Souhaitez-vous suivre la trace affichée à l\'écran ?</string>
     <string name="gpx_option_calculate_first_last_segment">Calculer un itinéraire OsmAnd pour le début et la fin de l\'itinéraire</string>
     <string name="calculate_osmand_route_without_internet">Calcul de l\'itinéraire hors-ligne</string>
@@ -1340,7 +1340,7 @@
 \n- Synchroniser les groupes et les appareils avec le serveur ;
 \n- Gérer les groupes et les appareils depuis un espace privé sur le site Web.</string>
     <string name="anonymous_user">Utilisateur anonyme</string>
-    <string name="logged_as">Connecté entant que %1$s</string>
+    <string name="logged_as">Connecté en tant que %1$s</string>
     <string name="rendering_category_details">Détails</string>
     <string name="rendering_category_transport">Transports en commun</string>
     <string name="rendering_category_others">Autres caractéristiques de la carte</string>
@@ -2372,7 +2372,7 @@
     <string name="online_photos">Photos en ligne</string>
     <string name="no_photos_descr">Aucune photo pour ce lieu.</string>
     <string name="shared_string_install">Installer</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Photos des rues</string>
     <string name="open_mapillary">Ouvrir Mapillary</string>
     <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter des photos à cet emplacement de la carte.</string>
@@ -2527,7 +2527,7 @@
     <string name="add_location_as_first_point_descr">Ajoutez votre position comme point de départ pour calculer l\'itinéraire.</string>
     <string name="my_location">Ma position</string>
     <string name="shared_string_finish">Terminer</string>
-    <string name="plan_route">Itinéraire planifié</string>
+    <string name="plan_route">Planifier un itinéraire</string>
     <string name="shared_string_sort">Trier</string>
     <string name="coordinate_input">Saisie des coordonnées</string>
     <string name="marker_save_as_track_descr">Exporter vos marques dans le fichier GPX suivant :</string>
@@ -2660,9 +2660,9 @@
     <string name="tunnel_warning">En approche d\'un tunnel</string>
     <string name="show_tunnels">Tunnels</string>
     <string name="shared_string_current">Actuelle</string>
-    <string name="last_intermediate_dest_description">Ajoute une étape</string>
-    <string name="first_intermediate_dest_description">Ajoute comme première étape</string>
-    <string name="subsequent_dest_description">Monter et définir comme Arrivée</string>
+    <string name="last_intermediate_dest_description">Ajouter comme dernière étape</string>
+    <string name="first_intermediate_dest_description">Ajouter comme première étape</string>
+    <string name="subsequent_dest_description">Ajouter comme arrivée (l\'arrivée précédente devient la dernière étape)</string>
     <string name="make_as_start_point">Utiliser ce point comme départ</string>
     <string name="map_import_error">Erreur d\'import de la carte</string>
     <string name="map_imported_successfully">Carte importée</string>
@@ -2911,7 +2911,7 @@
     <string name="sit_on_the_stop">Panneau d\'affichage à l\'arrêt</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Bouton affichant ou masquant les traces GPX sélectionnées sur la carte.</string>
     <string name="transfers_size">%1$d transferts</string>
-    <string name="add_start_and_end_points">Ajouter un point de départ et d\'arrivée</string>
+    <string name="add_start_and_end_points">Ajoutez un point de départ et d\'arrivée</string>
     <string name="route_add_start_point">Ajouter un point de départ</string>
     <string name="route_descr_select_start_point">Sélectionnez un point de départ</string>
     <string name="rendering_attr_surface_unpaved_name">Non revêtu</string>
@@ -3102,7 +3102,7 @@
     <string name="rendering_attr_tracktype_grade4_name">Principalement non-compact</string>
     <string name="rendering_attr_tracktype_grade5_name">Non-compact</string>
     <string name="routeInfo_tracktype_name">Dureté de la surface</string>
-    <string name="shared_string_file_is_saved">Gain de %s</string>
+    <string name="shared_string_file_is_saved">%s enregistré</string>
     <string name="shared_string_open_track">Ouvrir la trace</string>
     <string name="shared_string_track_is_saved">Trace %s enregistrée</string>
     <string name="shared_string_crash">Oups</string>
@@ -3446,7 +3446,7 @@
     <string name="multimedia_photo_play_sound">Son de la prise de vue</string>
     <string name="osm_authorization_success">L\'autorisation a été accordée</string>
     <string name="search_offline_geo_error">Impossible d\'analyser le geo intent \'%s\'.</string>
-    <string name="monitoring_min_speed_descr">Filtre interrompant l\'enregistrement en dessous d\'une certaines vitesse. Rend les traces enregistrées plus régulières lorsqu\'elles sont affichées sur la carte.</string>
+    <string name="monitoring_min_speed_descr">Filtre interrompant l\'enregistrement en dessous d\'une certaine vitesse. Rend les traces enregistrées plus régulières lorsqu\'elles sont affichées sur la carte.</string>
     <string name="live_monitoring_time_buffer">Durée de la mémoire tampon</string>
     <string name="live_monitoring_adress_descr">Indiquez l\'adresse web avec la syntaxe suivante pour les paramètres : lat = {0}, lon = {1}, horodatage = {2}, hdop = {3}, altitude = {4}, vitesse = {5}, direction = {6}.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recommandation : il est difficile de prédire ce qui sera enregistré et ce qui ne le sera pas, il peut être préférable de désactiver ce filtre.</string>
@@ -3834,4 +3834,7 @@
     <string name="next_segment">Segment suivant</string>
     <string name="threshold_distance">Seuil de distance</string>
     <string name="navigation_profile">Profil de navigation</string>
+    <string name="street_level_imagery">Photos des rues</string>
+    <string name="plan_route_exit_dialog_descr">Voulez-vous vraiment fermer l\'itinéraire planifié sans enregistrer \? Vous perdrez toutes les modifications.</string>
+    <string name="in_case_of_reverse_direction">Si inversion du sens</string>
 </resources>

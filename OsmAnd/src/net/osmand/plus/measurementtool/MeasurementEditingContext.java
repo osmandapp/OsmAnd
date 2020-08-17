@@ -323,36 +323,50 @@ public class MeasurementEditingContext {
 		}
 	}
 
-	void setPoints(GpxRouteApproximation gpxApproximation) {
+	public void setPoints(GpxRouteApproximation gpxApproximation) {
 		if (gpxApproximation == null || Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(gpxApproximation.result)) {
 			return;
 		}
-		clearSegments();
-		List<GpxPoint> routePoints = gpxApproximation.finalPoints;
-		for (int i = 0; i < routePoints.size() - 1; i++) {
-			GpxPoint rp1 = routePoints.get(i);
-			GpxPoint rp2 = routePoints.get(i + 1);
+		snappedToRoadPoints.clear();
+		List<WptPt> routePoints = new ArrayList<>();
+		List<GpxPoint> gpxPoints = gpxApproximation.finalPoints;
+		for (int i = 0; i < gpxPoints.size() - 1; i++) {
+			GpxPoint rp1 = gpxPoints.get(i);
+			GpxPoint rp2 = gpxPoints.get(i + 1);
 			WptPt p1 = new WptPt();
 			p1.lat = rp1.loc.getLatitude();
 			p1.lon = rp1.loc.getLongitude();
+			if (i == 0) {
+				routePoints.add(p1);
+			}
 			WptPt p2 = new WptPt();
 			p2.lat = rp2.loc.getLatitude();
 			p2.lon = rp2.loc.getLongitude();
+			routePoints.add(p2);
 			Pair<WptPt, WptPt> pair = new Pair<>(p1, p2);
 			List<WptPt> cacheSegment = new ArrayList<>();
 			for (RouteSegmentResult seg : rp1.routeToTarget) {
-				int start = seg.isForwardDirection() ? seg.getStartPointIndex() : seg.getEndPointIndex();
-				int end = seg.isForwardDirection() ? seg.getEndPointIndex() : seg.getStartPointIndex();
-				for (int ik = start; ik <= end; ik++) {
-					LatLon l = seg.getPoint(ik);
-					WptPt pt = new WptPt();
-					pt.lat = l.getLatitude();
-					pt.lon = l.getLongitude();
-					cacheSegment.add(pt);
+				if (seg.isForwardDirection()) {
+					for (int ik = seg.getStartPointIndex(); ik <= seg.getEndPointIndex(); ik++) {
+						LatLon l = seg.getPoint(ik);
+						WptPt pt = new WptPt();
+						pt.lat = l.getLatitude();
+						pt.lon = l.getLongitude();
+						cacheSegment.add(pt);
+					}
+				} else {
+					for (int ik = seg.getEndPointIndex(); ik >= seg.getStartPointIndex(); ik--) {
+						LatLon l = seg.getPoint(ik);
+						WptPt pt = new WptPt();
+						pt.lat = l.getLatitude();
+						pt.lon = l.getLongitude();
+						cacheSegment.add(pt);
+					}
 				}
 			}
 			snappedToRoadPoints.put(pair, cacheSegment);
 		}
+		addPoints(routePoints);
 	}
 
 	private int findPointIndex(WptPt point, List<WptPt> points, int firstIndex) {

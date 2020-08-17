@@ -2,6 +2,7 @@ package net.osmand.plus.activities.actions;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.ClipboardManager;
 import android.text.Html;
 import android.widget.Toast;
 

@@ -65,12 +65,12 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		tv.setPadding(0, 5, 0, 7);
 		
 		ScrollView sv = new ScrollView(this);
-		gl.addView(sv, new LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT, 
-				android.view.ViewGroup.LayoutParams.FILL_PARENT));
+		gl.addView(sv, new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+				android.view.ViewGroup.LayoutParams.MATCH_PARENT));
 		final LinearLayout ll = new LinearLayout(this);
 		ll.setOrientation(LinearLayout.VERTICAL);
-		sv.addView(ll, new LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT, 
-				android.view.ViewGroup.LayoutParams.FILL_PARENT));
+		sv.addView(ll, new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+				android.view.ViewGroup.LayoutParams.MATCH_PARENT));
 		
 		// add buttons
 		setContentView(gl);
@@ -271,7 +271,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		button.setGravity(Gravity.LEFT);
 		button.setTransformationMethod(null); //or else button text is all upper case
 		button.setText(description);
-		button.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+		button.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		if (!description.startsWith("\u25BA (")) {
 			// Section headline buttons
 			button.setPadding(10, 20, 10, 5);

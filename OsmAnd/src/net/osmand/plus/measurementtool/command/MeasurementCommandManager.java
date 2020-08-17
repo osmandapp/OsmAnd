@@ -30,6 +30,11 @@ public class MeasurementCommandManager {
 		return false;
 	}
 
+	public boolean update(MeasurementModeCommand command) {
+		MeasurementModeCommand prevCommand = undoCommands.peek();
+		return prevCommand != null && prevCommand.update(command);
+	}
+
 	@Nullable
 	public MeasurementCommandType undo() {
 		if (canUndo()) {
@@ -52,7 +57,7 @@ public class MeasurementCommandManager {
 		return null;
 	}
 
-	public void resetMeasurementLayer(MeasurementToolLayer layer) {
+	public void setMeasurementLayer(MeasurementToolLayer layer) {
 		for (MeasurementModeCommand command : undoCommands) {
 			command.setMeasurementLayer(layer);
 		}

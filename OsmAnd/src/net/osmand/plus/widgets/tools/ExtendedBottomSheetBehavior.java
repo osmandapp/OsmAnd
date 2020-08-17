@@ -228,7 +228,7 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 	@Override
 	public boolean onLayoutChild(CoordinatorLayout parent, V child, int layoutDirection) {
 		if (ViewCompat.getFitsSystemWindows(parent) && !ViewCompat.getFitsSystemWindows(child)) {
-			ViewCompat.setFitsSystemWindows(child, true);
+			child.setFitsSystemWindows(true);
 		}
 		int savedTop = child.getTop();
 		// First let the parent lay it out
@@ -348,7 +348,7 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 
 	@Override
 	public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, V child,
-									   View directTargetChild, View target, int nestedScrollAxes) {
+									   View directTargetChild, View target, int nestedScrollAxes, int type) {
 		mLastNestedScrollDy = 0;
 		mNestedScrolled = false;
 		return (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
@@ -356,7 +356,7 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 
 	@Override
 	public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, V child, View target, int dx,
-								  int dy, int[] consumed) {
+								  int dy, int[] consumed, int type) {
 		View scrollingChild = mNestedScrollingChildRef.get();
 		if (target != scrollingChild) {
 			return;
@@ -392,7 +392,7 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 	}
 
 	@Override
-	public void onStopNestedScroll(CoordinatorLayout coordinatorLayout, V child, View target) {
+	public void onStopNestedScroll(CoordinatorLayout coordinatorLayout, V child, View target, int type) {
 		if (child.getTop() == mMinOffset) {
 			setStateInternal(STATE_EXPANDED);
 			return;

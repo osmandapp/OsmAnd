@@ -23,7 +23,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.MotionEventCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -513,7 +512,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                     h.moveButton.setOnTouchListener(new View.OnTouchListener() {
                         @Override
                         public boolean onTouch(View v, MotionEvent event) {
-                            if (MotionEventCompat.getActionMasked(event) ==
+                            if (event.getActionMasked() ==
                                     MotionEvent.ACTION_DOWN) {
                                 onStartDragListener.onStartDrag(h);
                             }

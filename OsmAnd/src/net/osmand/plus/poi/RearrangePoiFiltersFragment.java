@@ -20,7 +20,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.MotionEventCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
@@ -642,7 +641,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 					h.moveIcon.setOnTouchListener(new View.OnTouchListener() {
 						@Override
 						public boolean onTouch(View view, MotionEvent event) {
-							if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+							if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 								listener.onDragStarted(holder);
 							}
 							return false;

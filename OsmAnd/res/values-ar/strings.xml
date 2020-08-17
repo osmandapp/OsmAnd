@@ -764,7 +764,7 @@
     <string name="incomplete_locale">ناقص</string>
     <string name="shared_string_next">التالي</string>
     <string name="shared_string_previous">السابق</string>
-    <string name="unit_of_length_descr">اختيار الوحدات: كم، ميل، ميل بحري.. إلخ.</string>
+    <string name="unit_of_length_descr">اختيار الوحدات: كم، ميل، ميلٌ بحري.. إلخ.</string>
     <string name="unit_of_length">وحدات الطول</string>
     <string name="si_mi_feet">ميل ، قدم</string>
     <string name="si_mi_yard">ميل ، ياردة</string>
@@ -1964,8 +1964,8 @@
     <string name="show_poi_over_map_description">عرض POI على الخريطة (استخدم آخر تصفية مستخدمة).</string>
     <string name="navigate_point_top_text">أدخل خط العرض وخط الطول في النمط المحدد (د - درجات، د - دقائق، ث - ثواني)</string>
     <string name="navigate_point_format_D">DDD.DD</string>
-    <string name="navigate_point_format_DM">DDD MM.MM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+    <string name="navigate_point_format_DM">DDD MM.MMM</string>
+    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
     <string name="plugin_touringview_descr">تفعيل هذه الرؤية يغير نمط خريطة أوسماند إلى \'نمط التجوال\'، هذا النمط يوفر رؤية غنية بالتفاصيل للمسافرين والسائقين المحترفين. 
 \n 
 \nتوفر هذه الرؤية في أي تكبير معين للخريطة أكبر قدر ممكن من تفاصيل السفر المتاحة في بيانات الخريطة (خاصة الطرق، المسارات، المعابر وعلامات التوجيه). 
@@ -2288,7 +2288,7 @@
     <string name="mapillary_widget">ويدجت مابيلاري</string>
     <string name="mapillary_widget_descr">يسمح لك بالمساهمة بسرعة لمابيلاري.</string>
     <string name="mapillary_descr">صور شوارع متاحة على الإنترنت للجميع. اكتشف أماكن، تعاون، والتقط صورا للعالم.</string>
-    <string name="mapillary">Mapillary مابيلاري</string>
+    <string name="mapillary">صور للشارع</string>
     <string name="plugin_mapillary_descr">صور شوارع متاحة للجميع. اكتشف أماكن، تعاون، والتقط صورا للعالم.</string>
     <string name="private_access_routing_req">الوجهة الخاص بك تقع في منطقة ذات ولوج خاص. هل تسمح بالدخول إلى الطرق الخاصة لهذه الرحلة؟</string>
     <string name="quick_action_showhide_osmbugs_descr">زر يظهر أو يخفي ملاحظات OSM على الخريطة.</string>
@@ -3842,4 +3842,7 @@
 \n
 \nفي الخطوة التالية ، ستحتاج إلى تحديد ملف تعريف الملاحة لاكتشاف الطرق المسموح بها وبداية المسافة لتقريب تتبعك بالطرق.</string>
     <string name="threshold_distance">بداية المسافة</string>
+    <string name="street_level_imagery">صور للشارع</string>
+    <string name="plan_route_exit_dialog_descr">هل أنت متأكد أنك تريد إغلاق مسار الخطة دون حفظ؟ سوف تفقد كل التغييرات.</string>
+    <string name="in_case_of_reverse_direction">في حالة الاتجاه المعاكس</string>
 </resources>
