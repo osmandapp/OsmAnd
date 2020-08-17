@@ -265,9 +265,6 @@ public class RoutingOptionsHelper {
 				settings.GPX_ROUTE_CALC_OSMAND_PARTS.set(selected);
 			} else if (gpxParam.id == R.string.gpx_option_from_start_point) {
 				rp.setPassWholeRoute(selected);
-			} else if (gpxParam.id == R.string.use_points_as_intermediates) {
-				settings.GPX_CALCULATE_RTEPT.set(selected);
-				rp.setUseIntermediatePointsRTE(selected);
 			} else if (gpxParam.id == R.string.calculate_osmand_route_gpx) {
 				settings.GPX_ROUTE_CALC.set(selected);
 				rp.setCalculateOsmAndRoute(selected);
@@ -467,11 +464,6 @@ public class RoutingOptionsHelper {
 		GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
 		boolean osmandRouter = am.getRouteService() == RouteService.OSMAND;
 		if (rparams != null && osmandRouter) {
-			GPXUtilities.GPXFile fl = rparams.getFile();
-			if (fl.hasRtePt()) {
-				list.add(new OtherLocalRoutingParameter(R.string.use_points_as_intermediates,
-						app.getString(R.string.use_points_as_intermediates), rparams.isUseIntermediatePointsRTE()));
-			}
 			if (!routingHelper.isCurrentGPXRouteV2()) {
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_reverse_route,
 						app.getString(R.string.gpx_option_reverse_route), rparams.isReverse()));
