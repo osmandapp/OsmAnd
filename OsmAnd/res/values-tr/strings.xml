@@ -2151,7 +2151,7 @@
     <string name="modify_the_search_query">Arama sorgunuzu değiştirin.</string>
     <string name="add_favourites_group_to_markers_descr">İşaretleyicilere eklemek için bir Sık Kullanılanlar kategorisi seçin.</string>
     <string name="import_as_gpx">GPX dosyası olarak içe aktar</string>
-    <string name="plan_route">Rotayı planla</string>
+    <string name="plan_route">Güzergah planla</string>
     <string name="shared_string_list">Liste</string>
     <string name="shared_string_groups">Gruplar</string>
     <string name="passed">Son kullanılan: %1$s</string>
@@ -2255,7 +2255,7 @@
     <string name="mapillary_widget">Mapillary widget\'ı</string>
     <string name="mapillary_widget_descr">Mapillary\'ye hızlıca katkıda bulunmanıza imkan verir.</string>
     <string name="mapillary_descr">Herkes için sokak seviyesinde fotoğraflar. Yerler keşfedin, katkıda bulunun, dünyayı yakalatın.</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Sokak seviyesi görüntüleri</string>
     <string name="plugin_mapillary_descr">Herkes için sokak seviyesinde fotoğraflar. Yerler keşfedin, katkıda bulunun, dünyayı yakalayın.</string>
     <string name="parking_options">Park etme seçenekleri</string>
     <string name="routing_attr_allow_motorway_name">Otoyolları kullan</string>
@@ -3810,4 +3810,7 @@
     <string name="threshold_distance">Eşik mesafesi</string>
     <string name="navigation_profile">Navigasyon profili</string>
     <string name="rourte_between_points_add_track_desc">Kendisine yeni bir bölümün ekleneceği bir yol dosyası seçin.</string>
+    <string name="street_level_imagery">Sokak seviyesi görüntüleri</string>
+    <string name="plan_route_exit_dialog_descr">Kaydetmeden güzergah planlamayı kapatmak istediğinize emin misiniz\? Tüm değişiklikleri kaybedeceksiniz.</string>
+    <string name="in_case_of_reverse_direction">Ters yön durumunda</string>
 </resources>

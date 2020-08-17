@@ -23,8 +23,8 @@ import org.apache.commons.logging.Log;
 public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final int REQUEST_CODE = 1000;
-	public static final int CANCEL_REQUEST_CODE = 2;
-	public static final int CONTINUE_REQUEST_CODE = 3;
+	public static final int CANCEL_RESULT_CODE = 2;
+	public static final int CONTINUE_RESULT_CODE = 3;
 
 	public static final String TAG = SnapTrackWarningBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SnapTrackWarningBottomSheet.class);
@@ -58,7 +58,7 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 	protected void onRightBottomButtonClick() {
 		Fragment fragment = getTargetFragment();
 		if (fragment != null) {
-			fragment.onActivityResult(REQUEST_CODE, CONTINUE_REQUEST_CODE, null);
+			fragment.onActivityResult(REQUEST_CODE, CONTINUE_RESULT_CODE, null);
 		}
 		dismiss();
 	}
@@ -77,7 +77,7 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		Fragment fragment = getTargetFragment();
 		if (fragment != null) {
-			fragment.onActivityResult(REQUEST_CODE, CANCEL_REQUEST_CODE, null);
+			fragment.onActivityResult(REQUEST_CODE, CANCEL_RESULT_CODE, null);
 		}
 	}
 

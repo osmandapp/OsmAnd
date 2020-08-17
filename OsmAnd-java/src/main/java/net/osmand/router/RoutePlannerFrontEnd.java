@@ -310,7 +310,7 @@ public class RoutePlannerFrontEnd {
 			System.out.println(gctx);
 		}
 		if (resultMatcher != null) {
-			resultMatcher.publish(gctx);
+			resultMatcher.publish(gctx.calculationCancelled ? null : gctx);
 		}
 		gctx.calculationDone = true;
 		return gctx;

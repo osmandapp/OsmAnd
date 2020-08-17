@@ -1845,6 +1845,7 @@ public class OsmandSettings {
 	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<>("route_service", RouteService.OSMAND, RouteService.values()).makeProfile().cache();
 
 	{
+		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.DEFAULT, RouteService.STRAIGHT);
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.AIRCRAFT, RouteService.STRAIGHT);
 	}
 
@@ -1886,14 +1887,14 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<Integer> ACCESSIBILITY_AUTOANNOUNCE_PERIOD = new IntPreference("accessibility_autoannounce_period", 10000).makeProfile().cache();
-	
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DISABLE_OFFROUTE_RECALC =
-		new BooleanAccessibilityPreference("disable_offroute_recalc", false).makeProfile();
-	
+		new BooleanPreference("disable_offroute_recalc", false).makeProfile();
+
 	// this value string is synchronized with settings_pref.xml preference name
-//	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
-//		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeProfile();
+	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
+		new BooleanPreference("disable_wrong_direction_recalc", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DIRECTION_AUDIO_FEEDBACK =

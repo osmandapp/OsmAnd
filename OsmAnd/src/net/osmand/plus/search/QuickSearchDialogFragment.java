@@ -1928,7 +1928,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void openKeyboard() {
 		searchEditText.requestFocus();
-		AndroidUtils.softKeyboardDelayed(searchEditText);
+		AndroidUtils.softKeyboardDelayed(getActivity(), searchEditText);
 	}
 
 	public void replaceQueryWithText(String txt) {
@@ -2369,7 +2369,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		private final String[] titles;
 
 		public SearchFragmentPagerAdapter(FragmentManager fm, Resources res) {
-			super(fm);
+			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 			titles = new String[titleIds.length];
 			for (int i = 0; i < titleIds.length; i++) {
 				titles[i] = res.getString(titleIds[i]);

@@ -551,7 +551,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 		private final List<Fragment> fragments;
 
 		MapMarkersViewPagerAdapter(FragmentManager fm) {
-			super(fm);
+			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 			fragments = Arrays.asList(activeFragment, groupsFragment, historyFragment);
 		}
 

@@ -67,7 +67,7 @@
     <string name="shared_string_apply">تطبيق</string>
     <string name="shared_string_enabled">مفعل</string>
     <string name="units_and_formats">الوحدات والأشكال</string>
-    <string name="unit_of_length_descr">اختيار الوحدات: كم، ميل، ميل بحري.. إلخ.</string>
+    <string name="unit_of_length_descr">اختيار الوحدات: كم، ميل، ميلٌ بحري.. إلخ.</string>
     <string name="unit_of_length">وحدات الطول</string>
     <string name="last_update_from_telegram_date">آخر تحديث من تيليجرام: %1$s</string>
     <string name="last_response_date">الرد الأخير:٪ 1 $ s</string>

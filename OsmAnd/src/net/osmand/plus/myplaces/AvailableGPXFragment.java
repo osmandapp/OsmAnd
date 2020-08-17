@@ -43,7 +43,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.MenuItemCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
@@ -430,11 +429,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
-		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS
-						| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark, MenuItem.SHOW_AS_ACTION_ALWAYS
+						| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 		SearchView searchView = new SearchView(getActivity());
 		FavoritesActivity.updateSearchView(getActivity(), searchView);
-		MenuItemCompat.setActionView(mi, searchView);
+		mi.setActionView(searchView);
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
 			@Override
@@ -449,7 +448,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		});
-		MenuItemCompat.setOnActionExpandListener(mi, new MenuItemCompat.OnActionExpandListener() {
+		mi.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
 			@Override
 			public boolean onMenuItemActionExpand(MenuItem item) {
 				return true;
@@ -518,7 +517,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			final MenuItem item;
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(j);
 			item = menu.add(0, contextMenuItem.getTitleId(), j + 1, contextMenuItem.getTitle());
-			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
@@ -617,8 +616,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				updateSelectionMode(mode);
 				MenuItem it = menu.add(R.string.shared_string_show_on_map);
 				it.setIcon(R.drawable.ic_action_done);
-				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM
-						| MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+				it.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
+						| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 				updateCurrentTrack();
 				return true;
 			}
@@ -686,8 +685,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				if (actionIconId != 0) {
 					it.setIcon(actionIconId);
 				}
-				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM
-						| MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+				it.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
+						| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 				return true;
 			}
 

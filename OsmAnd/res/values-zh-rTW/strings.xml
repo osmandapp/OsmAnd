@@ -2416,7 +2416,7 @@
     <string name="increase_search_radius">增加搜尋半徑</string>
     <string name="nothing_found">没有找到</string>
     <string name="nothing_found_descr">變更搜尋或增加搜尋半徑。</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">街道級照片</string>
     <string name="mapillary_widget">Mapillary 小工具</string>
     <string name="mapillary_widget_descr">允許快速的提供給 Mapillary。</string>
     <string name="mapillary_descr">把線上街道平面照片給每個人。發覺地點、協作、抓取世界。</string>
@@ -3849,4 +3849,7 @@
     <string name="threshold_distance">門檻距離</string>
     <string name="navigation_profile">導航設定檔</string>
     <string name="rourte_between_points_add_track_desc">選取要加入新片段的軌道檔案。</string>
+    <string name="street_level_imagery">街道級照片</string>
+    <string name="plan_route_exit_dialog_descr">您確定要不儲存就關閉計劃錄線嗎？您將會失去所有變更。</string>
+    <string name="in_case_of_reverse_direction">反向時</string>
 </resources>

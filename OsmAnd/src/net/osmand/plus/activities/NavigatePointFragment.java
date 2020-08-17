@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 
 import com.jwetherell.openmap.common.LatLonPoint;
@@ -106,7 +105,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 			light = false;
 		}
 		MenuItem menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
-		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		menuItem = menuItem.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_marker_dark, light));
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
