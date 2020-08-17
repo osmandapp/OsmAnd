@@ -20,6 +20,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.slider.Slider;
 
@@ -93,6 +94,15 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				recalculateRoute();
 			}
 		};
+	}
+
+	@Override
+	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		final RecyclerView view = super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+		//To prevent icons from flashing when the user turns switch on/off
+		view.setItemAnimator(null);
+		view.setLayoutAnimation(null);
+		return view;
 	}
 
 	@Override
@@ -263,7 +273,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 
 		addDivider(screen);
-		addRouteRecalcHeader(screen);
+		setupRouteRecalcHeader(screen);
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
 	}
@@ -276,17 +286,17 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 
 	private void setupReverseDirectionRecalculation(PreferenceScreen screen) {
 		SwitchPreferenceEx recalcRouteReverseDirectionPreference =
-				createSwitchPreferenceEx(app.getSettings().DISABLE_WRONG_DIRECTION_RECALC.getId(),
+				createSwitchPreferenceEx(settings.DISABLE_WRONG_DIRECTION_RECALC.getId(),
 						R.string.in_case_of_reverse_direction,
 						R.layout.preference_with_descr_dialog_and_switch);
 		recalcRouteReverseDirectionPreference.setIcon(
-				getRoutingPrefIcon(app.getSettings().DISABLE_WRONG_DIRECTION_RECALC.getId()));
-		recalcRouteReverseDirectionPreference.setSummaryOn(R.string.shared_string_on);
-		recalcRouteReverseDirectionPreference.setSummaryOff(R.string.shared_string_off);
+				getRoutingPrefIcon(settings.DISABLE_WRONG_DIRECTION_RECALC.getId()));
+		recalcRouteReverseDirectionPreference.setSummaryOn(R.string.shared_string_enabled);
+		recalcRouteReverseDirectionPreference.setSummaryOff(R.string.shared_string_disabled);
 		screen.addPreference(recalcRouteReverseDirectionPreference);
 	}
 
-	private void addRouteRecalcHeader(PreferenceScreen screen) {
+	private void setupRouteRecalcHeader(PreferenceScreen screen) {
 		PreferenceCategory routingCategory = new PreferenceCategory(requireContext());
 		routingCategory.setLayoutResource(R.layout.preference_category_with_descr);
 		routingCategory.setTitle(R.string.recalculate_route);
@@ -464,6 +474,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			applyPreference(ROUTING_RECALC_DISTANCE, applyToAllProfiles, valueToSave);
 			applyPreference(settings.DISABLE_OFFROUTE_RECALC.getId(), applyToAllProfiles, !enabled);
 			updateRouteRecalcDistancePref();
+		} else if (settings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(prefId)){
+			applyPreference(settings.DISABLE_WRONG_DIRECTION_RECALC.getId(), applyToAllProfiles, newValue);
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}
