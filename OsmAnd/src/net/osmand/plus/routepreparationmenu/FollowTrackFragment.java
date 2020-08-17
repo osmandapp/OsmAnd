@@ -200,7 +200,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
 				boolean osmandRouter = mode.getRouteService() == RouteProvider.RouteService.OSMAND;
 				if (rparams != null && osmandRouter) {
-					if (!routingHelper.isCurrentGPXRouteV2()) {
+//					if (!routingHelper.isCurrentGPXRouteV2()) {
 						int textId = R.string.gpx_option_reverse_route;
 						String title = app.getString(textId);
 						LocalRoutingParameter parameter = new OtherLocalRoutingParameter(textId, title, rparams.isReverse());
@@ -208,7 +208,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 						ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, parameter);
 						reverseTrackCard.setListener(this);
 						cardsContainer.addView(reverseTrackCard.build(mapActivity));
-					}
+//					}
 					if (!gpxFile.hasRtePt()) {
 						AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
 						attachTrackCard.setListener(this);
