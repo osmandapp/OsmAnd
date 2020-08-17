@@ -17,7 +17,6 @@ import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -392,8 +391,8 @@ public class RoutingOptionsHelper {
 				return new AvoidPTTypesRoutingParameter();
 			case AvoidRoadsRoutingParameter.KEY:
 				return new AvoidRoadsRoutingParameter();
-			case FollowTrackRoutingParameter.KEY:
-				return new FollowTrackRoutingParameter();
+			case GpxLocalRoutingParameter.KEY:
+				return new GpxLocalRoutingParameter();
 			case TimeConditionalRoutingItem.KEY:
 				return new TimeConditionalRoutingItem();
 			case OtherSettingsRoutingParameter.KEY:
@@ -440,7 +439,7 @@ public class RoutingOptionsHelper {
 		list.add(2, new InterruptMusicRoutingParameter());
 		list.add(3, new AvoidRoadsRoutingParameter());
 		list.add(4, new TimeConditionalRoutingItem());
-		list.add(new FollowTrackRoutingParameter());
+		list.add(new GpxLocalRoutingParameter());
 		list.add(new OtherSettingsRoutingParameter());
 		return list;
 	}
@@ -891,8 +890,7 @@ public class RoutingOptionsHelper {
 		}
 	}
 
-
-	public static class FollowTrackRoutingParameter extends LocalRoutingParameter {
+	public static class GpxLocalRoutingParameter extends LocalRoutingParameter {
 
 		public static final String KEY = "FollowTrackRoutingParameter";
 
@@ -904,7 +902,7 @@ public class RoutingOptionsHelper {
 			return false;
 		}
 
-		public FollowTrackRoutingParameter() {
+		public GpxLocalRoutingParameter() {
 			super(null);
 		}
 

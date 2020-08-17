@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="attach_to_the_roads">Attach to the roads</string>
     <string name="nearest_point">Nearest point</string>
     <string name="start_of_the_track">Start of the track</string>
     <string name="pass_whole_track_descr">Point of the track to navigate</string>

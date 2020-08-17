@@ -418,7 +418,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				if (editingCtx.getPointsCount() > 0) {
 					if (newGpxData != null && newGpxData.getActionType() == ActionType.EDIT_SEGMENT
 							&& editingCtx.isInSnapToRoadMode()) {
-								openSaveAsNewTrackMenu(mapActivity);
+						openSaveAsNewTrackMenu(mapActivity);
 					} else {
 						if (newGpxData == null) {
 							final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
@@ -687,10 +687,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-			@Override
-			public void saveAsNewTrackOnClick() {
-				openSaveAsNewTrackMenu(getMapActivity());
-			}
+	@Override
+	public void saveAsNewTrackOnClick() {
+		openSaveAsNewTrackMenu(getMapActivity());
+	}
 
 	@Override
 	public void addToTheTrackOnClick() {

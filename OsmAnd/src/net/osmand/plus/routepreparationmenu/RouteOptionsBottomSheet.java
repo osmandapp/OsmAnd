@@ -39,7 +39,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DividerItem;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.FollowTrackRoutingParameter;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.GpxLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameterGroup;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.MuteSoundRoutingParameter;
@@ -122,7 +122,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				items.add(createAvoidPTTypesItem(optionsItem));
 			} else if (optionsItem instanceof AvoidRoadsRoutingParameter) {
 				items.add(createAvoidRoadsItem(optionsItem));
-			} else if (optionsItem instanceof FollowTrackRoutingParameter) {
+			} else if (optionsItem instanceof GpxLocalRoutingParameter) {
 				items.add(createGpxRoutingItem(optionsItem));
 			} else if (optionsItem instanceof TimeConditionalRoutingItem) {
 				items.add(createTimeConditionalRoutingItem(optionsItem));
@@ -576,11 +576,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				DividerItem.KEY,
+				GpxLocalRoutingParameter.KEY,
+				DividerItem.KEY,
 				GeneralRouter.ALLOW_PRIVATE,
 				GeneralRouter.USE_SHORTEST_WAY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
-				FollowTrackRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
@@ -591,9 +593,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				GeneralRouter.ALLOW_MOTORWAYS,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				GpxLocalRoutingParameter.KEY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
-				FollowTrackRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
@@ -602,9 +604,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				GpxLocalRoutingParameter.KEY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
-				FollowTrackRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
@@ -620,9 +622,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				GpxLocalRoutingParameter.KEY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
-				FollowTrackRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
@@ -630,7 +632,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				ShowAlongTheRouteItem.KEY,
 				DividerItem.KEY,
-				FollowTrackRoutingParameter.KEY,
+				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
@@ -638,7 +640,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				ShowAlongTheRouteItem.KEY,
 				DividerItem.KEY,
-				FollowTrackRoutingParameter.KEY,
+				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY);
 

@@ -43,6 +43,7 @@ import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
+import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.ImportTrackCard;
@@ -206,6 +207,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 						ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, parameter);
 						reverseTrackCard.setListener(this);
 						cardsContainer.addView(reverseTrackCard.build(mapActivity));
+					}
+					if (!gpxFile.hasRtePt()) {
+						AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
+						attachTrackCard.setListener(this);
+						cardsContainer.addView(attachTrackCard.build(mapActivity));
 					}
 					if (!rparams.isUseIntermediatePointsRTE()) {
 						setupNavigateOptionsCard(rparams);

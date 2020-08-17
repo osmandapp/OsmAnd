@@ -3,7 +3,6 @@ package net.osmand.plus.routepreparationmenu.cards;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
@@ -51,17 +50,10 @@ public class TrackEditCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		int minCardHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_large_height);
-		int listContentPadding = app.getResources().getDimensionPixelSize(R.dimen.list_content_padding);
-
 		String fileName = Algorithms.getFileWithoutDirs(gpxInfo.getFileName());
 		String title = GpxUiHelper.getGpxTitle(fileName);
 		GpxDataItem dataItem = getDataItem(gpxInfo);
 		GpxUiHelper.updateGpxInfoView(view, title, gpxInfo, dataItem, false, app);
-
-		ImageView trackIcon = view.findViewById(R.id.icon);
-		trackIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_polygom_dark));
-		trackIcon.setVisibility(View.VISIBLE);
 
 		ImageButton editButton = view.findViewById(R.id.show_on_map);
 		editButton.setVisibility(View.VISIBLE);
@@ -75,6 +67,9 @@ public class TrackEditCard extends BaseCard {
 				}
 			}
 		});
+
+		int minCardHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_large_height);
+		int listContentPadding = app.getResources().getDimensionPixelSize(R.dimen.list_content_padding);
 
 		LinearLayout container = view.findViewById(R.id.container);
 		container.setMinimumHeight(minCardHeight);

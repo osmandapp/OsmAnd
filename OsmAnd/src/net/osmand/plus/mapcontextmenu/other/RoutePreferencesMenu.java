@@ -34,7 +34,7 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.FollowTrackRoutingParameter;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.GpxLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.InterruptMusicRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameterGroup;
@@ -163,7 +163,7 @@ public class RoutePreferencesMenu {
 					btn.performClick();
 				} else if (obj instanceof AvoidRoadsRoutingParameter) {
 					routingOptionsHelper.selectRestrictedRoads(mapActivity);
-				} else if (obj instanceof FollowTrackRoutingParameter) {
+				} else if (obj instanceof GpxLocalRoutingParameter) {
 					showOptionsMenu((TextView) view.findViewById(R.id.description));
 				} else {
 					CheckBox ch = (CheckBox) view.findViewById(R.id.toggle_item);
@@ -287,7 +287,7 @@ public class RoutePreferencesMenu {
 
 					return v;
 				}
-				if (parameter instanceof FollowTrackRoutingParameter) {
+				if (parameter instanceof GpxLocalRoutingParameter) {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_gpx, null);
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 					AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) v.findViewById(R.id.title), nightMode);

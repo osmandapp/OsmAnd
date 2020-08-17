@@ -38,8 +38,6 @@ public class ReverseTrackCard extends BaseCard {
 		compoundButton.setChecked(parameter.isSelected(app.getSettings()));
 		UiUtilities.setupCompoundButton(nightMode, getActiveColor(), compoundButton);
 
-		int minHeight = app.getResources().getDimensionPixelSize(R.dimen.route_info_list_text_padding);
-		view.setMinimumHeight(minHeight);
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

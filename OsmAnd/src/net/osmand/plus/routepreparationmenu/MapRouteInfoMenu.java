@@ -2119,8 +2119,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 			GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 			if (routeParamsBuilder != null) {
-				String description = new File(routeParamsBuilder.getFile().path).getName();
-				toText.setText(description);
+				String fileName = new File(routeParamsBuilder.getFile().path).getName();
+				toText.setText(GpxUiHelper.getGpxTitle(fileName));
 				toTitle.setText(R.string.follow_track);
 			} else {
 				TargetPointsHelper targets = app.getTargetPointsHelper();
