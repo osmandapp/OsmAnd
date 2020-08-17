@@ -28,7 +28,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
-import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -369,7 +368,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 					@Override
 					public void onClick(View view) {
 						FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
-						ContextMenuFragment.showInstance(mapActivity, trackOptionsFragment);
+						FollowTrackFragment.showInstance(mapActivity, trackOptionsFragment);
 						dismiss();
 					}
 				})
