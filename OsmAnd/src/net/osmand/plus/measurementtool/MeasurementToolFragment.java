@@ -131,6 +131,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean progressBarVisible;
 	private boolean pointsListOpened;
 	private boolean planRouteMode = false;
+	private boolean attachToRoads;
 	private Boolean saved;
 	private boolean portrait;
 	private boolean nightMode;
@@ -156,6 +157,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public void setPlanRouteMode(boolean planRouteMode) {
 		this.planRouteMode = planRouteMode;
+	}
+
+	public void setAttachToRoads(boolean attachToRoads) {
+		this.attachToRoads = attachToRoads;
 	}
 
 	@Nullable
@@ -460,10 +465,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		initMeasurementMode(newGpxData);
 
-		if (editingCtx.isNewData() && planRouteMode && savedInstanceState == null) {
-			StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
-					createStartPlanRouteListener());
+		if (savedInstanceState == null) {
+			if (editingCtx.isNewData() && planRouteMode) {
+				StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
+						createStartPlanRouteListener());
+			} else if (attachToRoads && !(editingCtx.isNewData() || editingCtx.hasRoutePoints() || editingCtx.isInSnapToRoadMode())) {
+				SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
+			}
 		}
+
 		return view;
 	}
 
@@ -1793,10 +1803,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return showFragment(fragment, fragmentManager);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx, boolean planRoute) {
+	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx,
+	                                   boolean planRoute, boolean attachToRoads) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setEditingCtx(editingCtx);
 		fragment.setPlanRouteMode(planRoute);
+		fragment.setAttachToRoads(attachToRoads);
 		return showFragment(fragment, fragmentManager);
 	}
 

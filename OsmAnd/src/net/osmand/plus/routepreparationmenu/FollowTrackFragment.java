@@ -345,10 +345,13 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (card instanceof ImportTrackCard) {
 				importTrack();
 			} else if (card instanceof TrackEditCard) {
-				editTrack();
+				openPlanRoute(false);
 				close();
 			} else if (card instanceof SelectTrackCard) {
 				updateSelectionMode(true);
+			} else if (card instanceof AttachTrackToRoadsCard) {
+				openPlanRoute(true);
+				close();
 			} else if (card instanceof ReverseTrackCard
 					|| card instanceof NavigateTrackOptionsCard) {
 				updateMenu();
@@ -446,7 +449,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 	}
 
-	public void editTrack() {
+	public void openPlanRoute(boolean attachToRoads) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && gpxFile != null) {
 			QuadRect rect = gpxFile.getRect();
@@ -456,7 +459,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 			MeasurementEditingContext editingContext = new MeasurementEditingContext();
 			editingContext.setNewGpxData(newGpxData);
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true);
+			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true, attachToRoads);
 		}
 	}
 
