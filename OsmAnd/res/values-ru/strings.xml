@@ -2308,7 +2308,7 @@
     <string name="mapillary_widget">Виджет Mapillary</string>
     <string name="mapillary_widget_descr">Позволяет быстро внести свой вклад в Mapillary.</string>
     <string name="mapillary_descr">Фото с улиц онлайн для каждого. Открывайте для себя места, сотрудничайте, снимайте мир.</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Изображения на уровне улиц</string>
     <string name="plugin_mapillary_descr">Уличные фотографии для всех. Открывайте для себя места, сотрудничайте, снимайте мир.</string>
     <string name="save_poi_too_many_uppercase">Название содержит слишком много заглавных букв. Вы хотите продолжить?</string>
     <string name="quick_action_resume_pause_navigation_descr">Переключатель, чтобы приостановить или возобновить навигацию.</string>
@@ -3853,4 +3853,5 @@
     <string name="rourte_between_points_desc">Выберите как соединять точки: по прямой линии или построением маршрута.</string>
     <string name="in_case_of_reverse_direction">В случае обратного направления</string>
     <string name="plan_route_exit_dialog_descr">Закрыть план маршрута без сохранения\? Все изменения будут потеряны.</string>
+    <string name="street_level_imagery">Изображения на уровне улиц</string>
 </resources>
