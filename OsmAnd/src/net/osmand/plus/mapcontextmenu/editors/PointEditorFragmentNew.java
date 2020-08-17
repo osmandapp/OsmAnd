@@ -75,6 +75,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private View view;
 	private EditText nameEdit;
 	private TextView addDelDescription;
+	private TextView addAddressBtn;
 	private TextView addToHiddenGroupInfo;
 	private boolean cancelled;
 	private boolean nightMode;
@@ -91,7 +92,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private LinkedHashMap<String, JSONArray> iconCategories;
 	private OsmandApplication app;
 	private View descriptionCaption;
+	private View addressCaption;
 	private EditText descriptionEdit;
+	private EditText addressEdit;
 	private int layoutHeightPrevious = 0;
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -142,11 +145,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					hideKeyboard();
 					descriptionEdit.clearFocus();
 					nameEdit.clearFocus();
+					addressEdit.clearFocus();
 				}
 			}
 		});
 
-		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		final int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		ImageView toolbarAction = (ImageView) view.findViewById(R.id.toolbar_action);
 		view.findViewById(R.id.background_layout).setBackgroundResource(nightMode
 				? R.color.app_bar_color_dark : R.color.list_background_color_light);
@@ -218,29 +222,65 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		}
 
 		descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
+		addressEdit = (EditText) view.findViewById(R.id.address_edit);
 		AndroidUtils.setTextPrimaryColor(view.getContext(), descriptionEdit, nightMode);
+		AndroidUtils.setTextPrimaryColor(view.getContext(), addressEdit, nightMode);
 		AndroidUtils.setHintTextSecondaryColor(view.getContext(), descriptionEdit, nightMode);
+		AndroidUtils.setHintTextSecondaryColor(view.getContext(), addressEdit, nightMode);
 		if (getDescriptionInitValue() != null) {
 			descriptionEdit.setText(getDescriptionInitValue());
 		}
+		if (getAddressInitValue() != null){
+			addressEdit.setText(getAddressInitValue());
+		}
 
 		descriptionCaption = view.findViewById(R.id.description);
+		addressCaption = view.findViewById(R.id.address);
 		addDelDescription = (TextView) view.findViewById(R.id.description_button);
+		addAddressBtn = view.findViewById(R.id.address_button);
 		addDelDescription.setTextColor(getResources().getColor(activeColorResId));
+		addAddressBtn.setTextColor(getResources().getColor(activeColorResId));
+		addAddressBtn.setCompoundDrawablesWithIntrinsicBounds(
+				app.getUIUtilities().getIcon(R.drawable.ic_action_location_off, activeColorResId),null,null,null);
+		addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
+				app.getUIUtilities().getIcon(R.drawable.ic_action_description, activeColorResId),null,null,null);
 		addDelDescription.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (descriptionCaption.getVisibility() != View.VISIBLE) {
 					descriptionCaption.setVisibility(View.VISIBLE);
 					addDelDescription.setText(view.getResources().getString(R.string.delete_description));
+					addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
+							app.getUIUtilities().getIcon(R.drawable.ic_action_delete_item,
+									activeColorResId),null,null,null);
 					View descriptionEdit = view.findViewById(R.id.description_edit);
 					descriptionEdit.requestFocus();
 					AndroidUtils.softKeyboardDelayed(descriptionEdit);
 				} else {
 					descriptionCaption.setVisibility(View.GONE);
 					addDelDescription.setText(view.getResources().getString(R.string.add_description));
+					addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
+							app.getUIUtilities().getIcon(R.drawable.ic_action_location_off,
+									activeColorResId),null,null,null);
 					AndroidUtils.hideSoftKeyboard(requireActivity(), descriptionEdit);
 					descriptionEdit.clearFocus();
+				}
+			}
+		});
+		addAddressBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (addressCaption.getVisibility() != View.VISIBLE) {
+					addressCaption.setVisibility(View.VISIBLE);
+					addAddressBtn.setText(view.getResources().getString(R.string.delete_address));
+					View addressEdit = view.findViewById(R.id.address_edit);
+					addressEdit.requestFocus();
+					AndroidUtils.softKeyboardDelayed(addressEdit);
+				} else {
+					addressCaption.setVisibility(View.GONE);
+					addAddressBtn.setText(view.getResources().getString(R.string.add_address));
+					AndroidUtils.hideSoftKeyboard(requireActivity(), addressEdit);
+					addressEdit.clearFocus();
 				}
 			}
 		});
@@ -249,7 +289,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		if (app.accessibilityEnabled()) {
 			nameCaption.setFocusable(true);
 			nameEdit.setHint(R.string.access_hint_enter_name);
-			descriptionEdit.setHint(R.string.access_hint_enter_description);
 		}
 
 		View deleteButton = view.findViewById(R.id.button_delete_container);
@@ -347,6 +386,13 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		} else {
 			descriptionCaption.setVisibility(View.GONE);
 			addDelDescription.setText(app.getString(R.string.add_description));
+		}
+		if (!addressEdit.getText().toString().isEmpty() || addressEdit.hasFocus()) {
+			addressCaption.setVisibility(View.VISIBLE);
+			addAddressBtn.setText(app.getString(R.string.delete_address));
+		} else {
+			addressCaption.setVisibility(View.GONE);
+			addAddressBtn.setText(app.getString(R.string.add_address));
 		}
 	}
 
@@ -753,6 +799,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	public abstract String getCategoryInitValue();
 
 	public abstract String getDescriptionInitValue();
+
+	public abstract String getAddressInitValue();
 
 	public abstract Drawable getNameIcon();
 

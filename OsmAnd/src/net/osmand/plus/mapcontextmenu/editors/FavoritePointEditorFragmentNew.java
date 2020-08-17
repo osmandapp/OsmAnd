@@ -406,6 +406,12 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
+	public String getAddressInitValue() {
+		FavouritePoint favourite = getFavorite();
+		return favorite != null ? favorite.getAddress() : "";
+	}
+
+	@Override
 	public Drawable getNameIcon() {
 		FavouritePoint favorite = getFavorite();
 		FavouritePoint point = null;

@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="access_hint_enter_address">Enter address</string>
+    <string name="add_address">Add address</string>
+    <string name="delete_address">Delete address</string>
     <string name="street_level_imagery">Street-level imagery</string>
     <string name="rourte_between_points_add_track_desc">Select a track file for which a new segment will be added.</string>
     <string name="navigation_profile">Navigation profile</string>
