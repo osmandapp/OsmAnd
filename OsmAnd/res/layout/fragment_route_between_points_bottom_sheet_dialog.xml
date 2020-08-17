@@ -20,8 +20,10 @@
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/choose_navigation_title"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/bottom_sheet_title_height"
+				android:layout_height="wrap_content"
 				android:gravity="center_vertical"
+				android:paddingTop="@dimen/measurement_tool_menu_title_padding_top"
+				android:paddingBottom="@dimen/measurement_tool_menu_title_padding_bottom"
 				android:paddingEnd="@dimen/content_padding"
 				android:paddingLeft="@dimen/content_padding"
 				android:paddingRight="@dimen/content_padding"
