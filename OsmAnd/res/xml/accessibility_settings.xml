@@ -47,29 +47,6 @@
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
-	<PreferenceCategory
-		android:key="route_recalculation"
-		android:layout="@layout/preference_category_with_descr"
-		android:title="@string/route_recalculation" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="disable_offroute_recalc"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/access_disable_offroute_recalc" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="disable_wrong_direction_recalc"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/access_disable_wrong_direction_recalc" />
-
-	<Preference
-		android:layout="@layout/simple_divider_item"
-		android:selectable="false" />
-
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="direction_style"
 		android:layout="@layout/preference_with_descr"

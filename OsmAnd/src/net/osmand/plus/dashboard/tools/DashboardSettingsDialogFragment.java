@@ -1,6 +1,5 @@
 package net.osmand.plus.dashboard.tools;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -51,9 +50,9 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 	private static final int DEFAULT_NUMBER_OF_ROWS = 5;
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		mapActivity = (MapActivity) activity;
+	public void onAttach(@NonNull Context context) {
+		super.onAttach(context);
+		mapActivity = (MapActivity) context;
 		mFragmentsData = new ArrayList<>();
 		for (DashFragmentData fragmentData : mapActivity.getDashboard().getFragmentsData()) {
 			if (fragmentData.canBeDisabled()) mFragmentsData.add(fragmentData);

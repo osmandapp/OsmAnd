@@ -14,6 +14,8 @@
     <string name="access_hint_enter_address">Enter address</string>
     <string name="add_address">Add address</string>
     <string name="delete_address">Delete address</string>
+    <string name="in_case_of_reverse_direction">In case of reverse direction</string>
+    <string name="plan_route_exit_dialog_descr">Are you sure you want to close Plan route without saving? You will lose all changes.</string>
     <string name="street_level_imagery">Street-level imagery</string>
     <string name="rourte_between_points_add_track_desc">Select a track file for which a new segment will be added.</string>
     <string name="navigation_profile">Navigation profile</string>
@@ -1248,7 +1250,7 @@
     <string name="mapillary_widget">Mapillary widget</string>
     <string name="mapillary_widget_descr">Allows quick contributions to Mapillary.</string>
     <string name="mapillary_descr">Online street-level photos for everyone. Discover places, collaborate, capture the world.</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Street-level imagery</string>
     <string name="plugin_mapillary_descr">Street-level photos for everyone. Discover places, collaborate, capture the world.</string>
     <string name="private_access_routing_req">Your destination is located in an area with private access. Allow using private roads for this trip?</string>
     <string name="restart_search">Restart search</string>

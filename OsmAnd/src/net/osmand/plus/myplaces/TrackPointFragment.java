@@ -35,7 +35,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -449,7 +448,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				setSelectionMode(true);
 				createMenuItem(menu, DELETE_ACTION_ID, R.string.shared_string_delete,
 						R.drawable.ic_action_delete_dark,
-						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+						MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				selectedItems.clear();
 				selectedGroups.clear();
 				adapter.notifyDataSetInvalidated();
@@ -988,7 +987,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					categoryName = getString(R.string.shared_string_waypoints);
 				}
 				SpannableStringBuilder text = new SpannableStringBuilder(categoryName).append(" (").append(String.valueOf(getChildrenCount(groupPosition))).append(")");
-				text.setSpan(new ForegroundColorSpan(AndroidUtils.getColorFromAttr(app, R.attr.wikivoyage_primary_text_color)),
+				text.setSpan(new ForegroundColorSpan(AndroidUtils.getColorFromAttr(mainView.getContext(), R.attr.wikivoyage_primary_text_color)),
 						0, categoryName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				text.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, R.color.wikivoyage_secondary_text)),
 						categoryName.length() + 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

@@ -249,7 +249,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 
 	private void openKeyboard() {
 		searchEditText.requestFocus();
-		AndroidUtils.softKeyboardDelayed(searchEditText);
+		AndroidUtils.softKeyboardDelayed(getActivity(), searchEditText);
 	}
 
 	public void hideKeyboard() {

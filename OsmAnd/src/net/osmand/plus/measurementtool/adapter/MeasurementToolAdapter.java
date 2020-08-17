@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.GPXUtilities.WptPt;
@@ -67,7 +66,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View view, MotionEvent event) {
-				if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 					listener.onDragStarted(holder);
 				}
 				return false;

@@ -26,7 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationType;
+import net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 import org.apache.commons.logging.Log;
@@ -35,22 +35,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.UiUtilities.CustomRadioButtonType.*;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationType.NEXT_SEGMENT;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationType.WHOLE_TRACK;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.NEXT_SEGMENT;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 
 public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	private static final Log LOG = PlatformUtil.getLog(RouteBetweenPointsBottomSheetDialogFragment.class);
 	public static final String TAG = RouteBetweenPointsBottomSheetDialogFragment.class.getSimpleName();
 	public static final int STRAIGHT_LINE_TAG = -1;
-	public static final String CALCULATION_TYPE_KEY = "calculation_type";
+	public static final String CALCULATION_MODE_KEY = "calculation_type";
 	public static final String ROUTE_APP_MODE_KEY = "route_app_mode";
 
 	private boolean nightMode;
 	private boolean portrait;
-	private boolean snapToRoadEnabled;
+	private boolean snapToRoadEnabled = true;
 	private TextView btnDescription;
-	private CalculationType calculationType = WHOLE_TRACK;
+	private CalculationMode calculationMode = WHOLE_TRACK;
 	private ApplicationMode snapToRoadAppMode;
 
 	private LinearLayout customRadioButton;
@@ -61,10 +61,10 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 		Bundle args = getArguments();
 		if (args != null) {
 			snapToRoadAppMode = ApplicationMode.valueOfStringKey(args.getString(ROUTE_APP_MODE_KEY), null);
-			calculationType = (CalculationType) args.get(CALCULATION_TYPE_KEY);
+			calculationMode = (CalculationMode) args.get(CALCULATION_MODE_KEY);
 		}
 		if (savedInstanceState != null) {
-			calculationType = (CalculationType) savedInstanceState.get(CALCULATION_TYPE_KEY);
+			calculationMode = (CalculationMode) savedInstanceState.get(CALCULATION_MODE_KEY);
 		}
 		OsmandApplication app = requiredMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
@@ -108,7 +108,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 				}
 				Fragment fragment = getTargetFragment();
 				if (fragment instanceof RouteBetweenPointsFragmentListener) {
-					((RouteBetweenPointsFragmentListener) fragment).onChangeApplicationMode(mode);
+					((RouteBetweenPointsFragmentListener) fragment).onChangeApplicationMode(mode, calculationMode);
 				}
 				dismiss();
 			}
@@ -137,7 +137,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 				updateModeButtons(WHOLE_TRACK);
 			}
 		});
-		updateModeButtons(calculationType);
+		updateModeButtons(calculationMode);
 		return mainView;
 	}
 
@@ -150,19 +150,15 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 		container.addView(row);
 	}
 
-	private void updateModeButtons(CalculationType calculationType) {
-		if (calculationType == NEXT_SEGMENT) {
+	private void updateModeButtons(CalculationMode calculationMode) {
+		if (calculationMode == NEXT_SEGMENT) {
 			UiUtilities.updateCustomRadioButtons(getMyApplication(), customRadioButton, nightMode, LEFT);
 			btnDescription.setText(R.string.rourte_between_points_next_segment_button_desc);
 		} else {
 			btnDescription.setText(R.string.rourte_between_points_whole_track_button_desc);
 			UiUtilities.updateCustomRadioButtons(getMyApplication(), customRadioButton, nightMode, RIGHT);
 		}
-		setCalculationType(calculationType);
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof RouteBetweenPointsFragmentListener) {
-			((RouteBetweenPointsFragmentListener) fragment).onChangeCalculationType(calculationType);
-		}
+		setCalculationMode(calculationMode);
 	}
 
 	private void addProfileView(LinearLayout container, View.OnClickListener onClickListener, Object tag,
@@ -197,7 +193,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putSerializable(CALCULATION_TYPE_KEY, calculationType);
+		outState.putSerializable(CALCULATION_MODE_KEY, calculationMode);
 	}
 
 	@Override
@@ -209,18 +205,18 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 		super.onDestroyView();
 	}
 
-	public void setCalculationType(CalculationType calculationType) {
-		this.calculationType = calculationType;
+	public void setCalculationMode(CalculationMode calculationMode) {
+		this.calculationMode = calculationMode;
 	}
 
-	public static void showInstance(FragmentManager fm, Fragment targetFragment, CalculationType calculationType,
+	public static void showInstance(FragmentManager fm, Fragment targetFragment, CalculationMode calculationMode,
 	                                ApplicationMode applicationMode) {
 		try {
 			if (!fm.isStateSaved()) {
 				RouteBetweenPointsBottomSheetDialogFragment fragment = new RouteBetweenPointsBottomSheetDialogFragment();
 				Bundle args = new Bundle();
 				args.putString(ROUTE_APP_MODE_KEY, applicationMode != null ? applicationMode.getStringKey() : null);
-				args.putSerializable(CALCULATION_TYPE_KEY, calculationType);
+				args.putSerializable(CALCULATION_MODE_KEY, calculationMode);
 				fragment.setArguments(args);
 				fragment.setTargetFragment(targetFragment, 0);
 				fragment.show(fm, TAG);
@@ -234,8 +230,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 
 		void onCloseRouteDialog(boolean snapToRoadEnabled);
 
-		void onChangeApplicationMode(ApplicationMode mode);
+		void onChangeApplicationMode(ApplicationMode mode, CalculationMode calculationMode);
 
-		void onChangeCalculationType(CalculationType calculationType);
 	}
 }

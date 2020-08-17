@@ -54,6 +54,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -96,20 +97,24 @@ public class AndroidUtils {
 		return context.getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS;
 	}
 
-	public static void softKeyboardDelayed(final View view) {
+	public static void softKeyboardDelayed(final Activity activity, final View view) {
 		view.post(new Runnable() {
 			@Override
 			public void run() {
 				if (!isHardwareKeyboardAvailable(view.getContext())) {
-					showSoftKeyboard(view);
+					showSoftKeyboard(activity,view);
 				}
 			}
 		});
 	}
 
-	public static void showSoftKeyboard(final View view) {
+	public static void showSoftKeyboard(final Activity activity, final View view) {
 		InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 		if (imm != null) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+				KeyguardManager keyguardManager = (KeyguardManager) view.getContext().getSystemService(Context.KEYGUARD_SERVICE);
+				keyguardManager.requestDismissKeyguard(activity,null);
+			}
 			imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
 		}
 	}
@@ -169,11 +174,11 @@ public class AndroidUtils {
 		return intent.resolveActivity(context.getPackageManager()) != null;
 	}
 
-	public static boolean isActivityNotDestroyed(Activity activity) {
+	public static boolean isActivityNotDestroyed(@Nullable Activity activity) {
 		if (Build.VERSION.SDK_INT >= 17) {
-			return !activity.isFinishing() && !activity.isDestroyed();
+			return activity != null && !activity.isFinishing() && !activity.isDestroyed();
 		}
-		return !activity.isFinishing();
+		return activity != null && !activity.isFinishing();
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {

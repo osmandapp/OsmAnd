@@ -2418,7 +2418,7 @@
     <string name="increase_search_radius">Zväčšiť okruh hľadania</string>
     <string name="nothing_found">Nič sa nenašlo</string>
     <string name="nothing_found_descr">Zmeňte vyhľadávacie kritérium alebo zväčšite polomer hľadania.</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Snímky z úrovne ulice</string>
     <string name="open_mapillary">Otvoriť Mapillary</string>
     <string name="shared_string_install">Inštalovať</string>
     <string name="improve_coverage_mapillary">Zlepšiť pokrytie fotografií s Mapillary</string>
@@ -3852,4 +3852,7 @@
     <string name="threshold_distance">Hraničná vzdialenosť</string>
     <string name="navigation_profile">Navigačný profil</string>
     <string name="rourte_between_points_add_track_desc">Zvoľte súbor stopy, pre ktorú bude pridaný nový úsek.</string>
+    <string name="street_level_imagery">Snímky z úrovne ulice</string>
+    <string name="plan_route_exit_dialog_descr">Naozaj chcete zatvoriť plánovanie trasy bez uloženia\? Všetky zmeny sa stratia.</string>
+    <string name="in_case_of_reverse_direction">V prípade opačného smeru</string>
 </resources>

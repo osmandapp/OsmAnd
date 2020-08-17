@@ -223,7 +223,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 			@Override
 			public void onClick(View view) {
 				searchEditText.requestFocus();
-				AndroidUtils.showSoftKeyboard(searchEditText);
+				AndroidUtils.showSoftKeyboard(getActivity(), searchEditText);
 			}
 		});
 		searchCloseIcon = view.findViewById(R.id.search_close);

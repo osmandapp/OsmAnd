@@ -600,8 +600,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(j);
 			if (j + 1 >= max && optionsMenuAdapter.length() > max) {
 				if (split == null) {
+					Drawable icOverflowMenu = getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white);
 					split = menu.addSubMenu(0, 1, j + 1, R.string.shared_string_more_actions);
-					split.setIcon(R.drawable.ic_overflow_menu_white);
+					split.setIcon(icOverflowMenu);
 					split.getItem();
 					MenuItemCompat.setShowAsAction(split.getItem(), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
@@ -694,8 +695,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					Drawable icon = getMyApplication().getUIUtilities().getIcon(actionIconId, colorResId);
 					it.setIcon(icon);
 				}
-				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
-						MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+				it.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
+						MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 				return true;
 			}
 

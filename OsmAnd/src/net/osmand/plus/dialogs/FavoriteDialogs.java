@@ -113,7 +113,7 @@ public class FavoriteDialogs {
 		editText.requestFocus();
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) dialog.findViewById(R.id.Category);
 		cat.setText(point.getCategory());
-		AndroidUtils.softKeyboardDelayed(editText);
+		AndroidUtils.softKeyboardDelayed(activity, editText);
 	}
 	
 	public  static Dialog createAddFavouriteDialog(final Activity activity, final Bundle args) {

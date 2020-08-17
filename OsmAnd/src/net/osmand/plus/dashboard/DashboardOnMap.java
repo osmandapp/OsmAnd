@@ -1217,7 +1217,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	private void setTranslationY(View v, int y) {
-		ViewCompat.setTranslationY(v, y);
+		v.setTranslationY(y);
 	}
 
 	@SuppressLint("NewApi")

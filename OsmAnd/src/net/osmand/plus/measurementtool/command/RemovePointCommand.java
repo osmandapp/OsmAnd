@@ -9,28 +9,28 @@ public class RemovePointCommand extends MeasurementModeCommand {
 	private WptPt point;
 
 	public RemovePointCommand(MeasurementToolLayer measurementLayer, int position) {
-		this.measurementLayer = measurementLayer;
+		super(measurementLayer);
 		this.position = position;
 	}
 
 	@Override
 	public boolean execute() {
-		point = measurementLayer.getEditingCtx().removePoint(position, true);
-		measurementLayer.refreshMap();
+		point = getEditingCtx().removePoint(position, true);
+		refreshMap();
 		return true;
 	}
 
 	@Override
 	public void undo() {
-		measurementLayer.getEditingCtx().addPoint(position, point);
-		measurementLayer.refreshMap();
+		getEditingCtx().addPoint(position, point);
+		refreshMap();
 		measurementLayer.moveMapToPoint(position);
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.getEditingCtx().removePoint(position, true);
-		measurementLayer.refreshMap();
+		getEditingCtx().removePoint(position, true);
+		refreshMap();
 	}
 
 	@Override

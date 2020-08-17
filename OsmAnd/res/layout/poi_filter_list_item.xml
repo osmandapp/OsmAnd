@@ -6,17 +6,17 @@
     android:layout_height="wrap_content"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     android:background="?attr/bg_color"
-    android:minHeight="48dp"
+    android:minHeight="@dimen/card_row_min_height"
     android:clickable="false"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/card_row_min_height"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingRight="@dimen/content_padding"
-	    android:paddingEnd="@dimen/content_padding">
+        android:paddingEnd="@dimen/content_padding">
 
         <LinearLayout
             android:layout_width="54dp"
@@ -25,8 +25,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/standard_icon_size"
+                android:layout_height="@dimen/standard_icon_size"
                 osmand:srcCompat="@drawable/ic_action_search_dark"/>
 
         </LinearLayout>
@@ -107,6 +107,6 @@
         android:layout_height="1dp"
         android:layout_marginLeft="54dp"
         android:background="?attr/dashboard_divider"
-	    android:layout_marginStart="54dp" />
+        android:layout_marginStart="54dp" />
 
 </LinearLayout>

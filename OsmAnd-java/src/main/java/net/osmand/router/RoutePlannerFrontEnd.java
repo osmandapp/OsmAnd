@@ -4,6 +4,7 @@ package net.osmand.router;
 import net.osmand.LocationsHolder;
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -62,15 +63,27 @@ public class RoutePlannerFrontEnd {
 		public int routeDistance;
 		public int routeGapDistance;
 		public int routeDistanceUnmatched;
-		
+
+		public boolean calculationCancelled;
+		private boolean calculationDone;
+
 		public GpxRouteApproximation(RoutingContext ctx) {
 			this.ctx = ctx;
 		}
 		
+		public GpxRouteApproximation(GpxRouteApproximation gctx) {
+			this.ctx = gctx.ctx;
+			this.routeDistance = gctx.routeDistance;
+		}
+
 		@Override
 		public String toString() {
 			return String.format(">> GPX approximation (%d of %d m route calcs, %d route points searched) for %d m: %d m umatched",
 					routeCalculations, routeDistCalculations, routePointsSearched, routeDistance, routeDistanceUnmatched);
+		}
+
+		public boolean isCalculationDone() {
+			return calculationDone;
 		}
 
 		public double distFromLastPoint(LatLon startPoint) {
@@ -87,7 +100,7 @@ public class RoutePlannerFrontEnd {
 			return null;
 		}
 	}
-	
+
 	public static class GpxPoint {
 		public int ind;
 		public LatLon loc;
@@ -97,6 +110,15 @@ public class RoutePlannerFrontEnd {
 		public List<RouteSegmentResult> stepBackRoute;
 		public int targetInd = -1;
 		public boolean straightLine = false;
+
+		public GpxPoint() {
+		}
+
+		public GpxPoint(GpxPoint point) {
+			this.ind = point.ind;
+			this.loc = point.loc;
+			this.cumDist = point.cumDist;
+		}
 	}
 
 	public RoutingContext buildRoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, RouteCalculationMode rm) {
@@ -206,7 +228,6 @@ public class RoutePlannerFrontEnd {
 		return null;
 	}
 
-
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates) throws IOException, InterruptedException {
 		return searchRoute(ctx, start, end, intermediates, null);
 	}
@@ -215,19 +236,16 @@ public class RoutePlannerFrontEnd {
 		useSmartRouteRecalculation = use;
 	}
 
-	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) throws IOException, InterruptedException {
+	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
-		if (gctx.ctx.calculationProgress == null) {
-			gctx.ctx.calculationProgress = new RouteCalculationProgress();
-		}
 		gctx.ctx.keepNativeRoutingContext = true;
 		GpxPoint start = null;
 		GpxPoint prev = null;
-		if(gpxPoints.size() > 0) {
+		if (gpxPoints.size() > 0) {
 			gctx.ctx.calculationProgress.totalIterations = (int) (gpxPoints.get(gpxPoints.size() - 1).cumDist / gctx.MAXIMUM_STEP_APPROXIMATION + 1); 
 			start = gpxPoints.get(0); 
 		}
-		while (start != null) {
+		while (start != null && !gctx.calculationCancelled) {
 			double routeDist = gctx.MAXIMUM_STEP_APPROXIMATION;
 			GpxPoint next = findNextGpxPointWithin(gctx, gpxPoints, start, routeDist);
 			boolean routeFound = false;
@@ -287,10 +305,14 @@ public class RoutePlannerFrontEnd {
 		gctx.ctx.deleteNativeRoutingContext();
 		BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
 		calculateGpxRoute(gctx, gpxPoints);
-		if (!gctx.result.isEmpty()) {
+		if (!gctx.result.isEmpty() && !gctx.calculationCancelled) {
 			new RouteResultPreparation().printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
 			System.out.println(gctx);
 		}
+		if (resultMatcher != null) {
+			resultMatcher.publish(gctx.calculationCancelled ? null : gctx);
+		}
+		gctx.calculationDone = true;
 		return gctx;
 	}
 
@@ -343,7 +365,7 @@ public class RoutePlannerFrontEnd {
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 		List<LatLon> lastStraightLine = null;
 		GpxPoint straightPointStart = null;
-		for (int i = 0; i < gpxPoints.size(); ) {
+		for (int i = 0; i < gpxPoints.size() && !gctx.calculationCancelled; ) {
 			GpxPoint pnt = gpxPoints.get(i);
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
 				LatLon startPoint = pnt.routeToTarget.get(0).getStartPoint();
@@ -402,7 +424,7 @@ public class RoutePlannerFrontEnd {
 	private void cleanupResultAndAddTurns(GpxRouteApproximation gctx) {
 		// cleanup double joints
 		int LOOK_AHEAD = 4;
-		for(int i = 0; i < gctx.result.size(); i++) {
+		for(int i = 0; i < gctx.result.size() && !gctx.calculationCancelled; i++) {
 			RouteSegmentResult s = gctx.result.get(i);
 			for(int j = i + 2; j <= i + LOOK_AHEAD && j < gctx.result.size(); j++) {
 				RouteSegmentResult e = gctx.result.get(j);
@@ -419,7 +441,9 @@ public class RoutePlannerFrontEnd {
 			r.setTurnType(null);
 			r.setDescription("");
 		}
-		preparation.prepareTurnResults(gctx.ctx, gctx.result);
+		if (!gctx.calculationCancelled) {
+			preparation.prepareTurnResults(gctx.ctx, gctx.result);
+		}
 	}
 
 	private void addStraightLine(GpxRouteApproximation gctx, List<LatLon> lastStraightLine, GpxPoint strPnt, RouteRegion reg) {

@@ -18,6 +18,7 @@
         android:gravity="start|center_vertical"
         android:textSize="@dimen/default_list_text_size"
         android:textAllCaps="false"
+	    android:textColor="?attr/textColorAlertDialogListItem"
 	    android:paddingStart="10dp"
 	    android:paddingEnd="10dp" />
 

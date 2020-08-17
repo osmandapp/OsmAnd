@@ -105,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/activity_background_color"
-                    android:theme="?attr/search_tabbar_layout_theme"
+                    style="?attr/search_tabbar_layout_theme"
                     app:tabGravity="fill"
                     app:tabMaxWidth="0dp"
                     app:tabMode="fixed"/>

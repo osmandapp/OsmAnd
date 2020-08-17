@@ -27,6 +27,7 @@ import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -39,6 +40,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +52,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = "OnSaveCurrentTrackBottomSheetFragment";
 	public static final String SAVED_TRACKS_KEY = "saved_track_filename";
+	private static final Log LOG = PlatformUtil.getLog(OnSaveCurrentTrackFragment.class);
 
 	private boolean openTrack = false;
 	private File file;
@@ -216,10 +220,17 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, List<String> filenames) {
+		if (fragmentManager.isStateSaved()) {
+			return;
+		}
 		OnSaveCurrentTrackFragment f = new OnSaveCurrentTrackFragment();
 		Bundle b = new Bundle();
 		b.putStringArrayList(SAVED_TRACKS_KEY, new ArrayList<>(filenames));
 		f.setArguments(b);
-		f.show(fragmentManager, TAG);
+		try {
+			f.show(fragmentManager, TAG);
+		} catch (IllegalStateException ex) {
+			LOG.error("Can not perform this action after onSaveInstanceState");
+		}
 	}
 }

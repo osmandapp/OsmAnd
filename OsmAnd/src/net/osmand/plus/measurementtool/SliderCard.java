@@ -46,9 +46,19 @@ public class SliderCard extends BaseCard {
 				if (fromUser) {
 					String valueStr = getStringValueWithMetric((int) value);
 					thresholdDistanceValue.setText(valueStr);
-					if (listener != null) {
-						listener.onSliderChange((int) value);
-					}
+				}
+			}
+		});
+		slider.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+			@Override
+			public void onStartTrackingTouch(@NonNull Slider slider) {
+
+			}
+
+			@Override
+			public void onStopTrackingTouch(@NonNull Slider slider) {
+				if (listener != null) {
+					listener.onSliderChange((int) slider.getValue());
 				}
 			}
 		});

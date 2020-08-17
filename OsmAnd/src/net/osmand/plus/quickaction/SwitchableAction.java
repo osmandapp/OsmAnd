@@ -16,7 +16,6 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.view.MotionEventCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -171,7 +170,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			holder.handleView.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
-					if (MotionEventCompat.getActionMasked(event) ==
+					if (event.getActionMasked() ==
 							MotionEvent.ACTION_DOWN) {
 						onStartDragListener.onStartDrag(holder);
 					}

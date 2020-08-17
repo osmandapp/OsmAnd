@@ -104,7 +104,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 		app = requireMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		view = UiUtilities.getMaterialInflater(getContext(), nightMode)
+		view = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.point_editor_fragment_new, container, false);
 		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 
@@ -255,7 +255,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 									activeColorResId),null,null,null);
 					View descriptionEdit = view.findViewById(R.id.description_edit);
 					descriptionEdit.requestFocus();
-					AndroidUtils.softKeyboardDelayed(descriptionEdit);
+					AndroidUtils.softKeyboardDelayed(getActivity(), descriptionEdit);
 				} else {
 					descriptionCaption.setVisibility(View.GONE);
 					addDelDescription.setText(view.getResources().getString(R.string.add_description));
@@ -306,7 +306,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			deleteIcon.setVisibility(View.GONE);
 			nameEdit.selectAll();
 			nameEdit.requestFocus();
-			AndroidUtils.softKeyboardDelayed(nameEdit);
+			AndroidUtils.softKeyboardDelayed(getActivity(), nameEdit);
 		} else {
 			toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
 			deleteButton.setVisibility(View.VISIBLE);
