@@ -70,8 +70,8 @@ import net.osmand.plus.measurementtool.SelectedPointBottomSheetDialogFragment.Se
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter.MeasurementAdapterListener;
 import net.osmand.plus.measurementtool.command.AddPointCommand;
-import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand;
 import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
+import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand;
 import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
