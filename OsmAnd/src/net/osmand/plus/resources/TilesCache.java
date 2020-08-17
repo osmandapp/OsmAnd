@@ -144,7 +144,7 @@ public abstract class TilesCache<T> {
 				}
 			}
 			TileLoadDownloadRequest req = new TileLoadDownloadRequest(dirWithTiles, url, toSave,
-					tileId, map, x, y, zoom, map.getReferer());
+					tileId, map, x, y, zoom, map.getReferer(), map.getUserAgent());
 			if (sync) {
 				return getRequestedTile(req);
 			} else {

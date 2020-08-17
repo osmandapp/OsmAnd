@@ -39,6 +39,7 @@ public class SQLiteTileSource implements ITileSource {
 	private static final String ELLIPSOID = "ellipsoid";
 	private static final String INVERTED_Y = "inverted_y";
 	private static final String REFERER = "referer";
+	private static final String USER_AGENT = "useragent";
 	private static final String TIME_COLUMN = "timecolumn";
 	private static final String EXPIRE_MINUTES = "expireminutes";
 	private static final String RULE = "rule";
@@ -62,6 +63,7 @@ public class SQLiteTileSource implements ITileSource {
 	private String[] randomsArray;
 	private String rule = null;
 	private String referer = null;
+	private String userAgent = null;
 	
 	int tileSize = 256;
 	boolean tileSizeSpecified = false;
@@ -93,7 +95,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public SQLiteTileSource(OsmandApplication ctx, String name, int minZoom, int maxZoom, String urlTemplate,
-							String randoms, boolean isEllipsoid, boolean invertedY, String referer,
+							String randoms, boolean isEllipsoid, boolean invertedY, String referer, String userAgent,
 							boolean timeSupported, long expirationTimeMillis, boolean inversiveZoom, String rule) {
 		this.ctx = ctx;
 		this.name = name;
@@ -104,6 +106,7 @@ public class SQLiteTileSource implements ITileSource {
 		this.expirationTimeMillis = expirationTimeMillis;
 		this.randoms = randoms;
 		this.referer = referer;
+		this.userAgent = userAgent;
 		this.rule = rule;
 		this.invertedY = invertedY;
 		this.timeSupported = timeSupported;
@@ -120,6 +123,7 @@ public class SQLiteTileSource implements ITileSource {
 		this.expirationTimeMillis = tileSource.getExpirationTimeMillis();
 		this.randoms = tileSource.getRandoms();
 		this.referer = tileSource.getReferer();
+		this.userAgent = tileSource.getUserAgent();
 		this.invertedY = tileSource.isInvertedYTile();
 		this.timeSupported = tileSource.isTimeSupported();
 		this.inversiveZoom = tileSource.getInversiveZoom();
@@ -139,6 +143,7 @@ public class SQLiteTileSource implements ITileSource {
 		addInfoColumn(db, ELLIPSOID, isEllipsoid ? "1" : "0");
 		addInfoColumn(db, INVERTED_Y, invertedY ? "1" : "0");
 		addInfoColumn(db, REFERER, referer);
+		addInfoColumn(db, USER_AGENT, userAgent);
 		addInfoColumn(db, TIME_COLUMN, timeSupported ? "yes" : "no");
 		addInfoColumn(db, EXPIRE_MINUTES, String.valueOf(getExpirationTimeMinutes()));
 
@@ -263,6 +268,10 @@ public class SQLiteTileSource implements ITileSource {
 					int refererId = list.indexOf(REFERER);
 					if(refererId != -1) {
 						referer = cursor.getString(refererId);
+					}
+					int userAgentId = list.indexOf(USER_AGENT);
+					if(userAgentId != -1) {
+						userAgent = cursor.getString(userAgentId);
 					}
 					int tnumbering = list.indexOf(TILENUMBERING);
 					if(tnumbering != -1) {
@@ -671,6 +680,10 @@ public class SQLiteTileSource implements ITileSource {
 	
 	public String getReferer() {
 		return referer;
+	}
+
+	public String getUserAgent() {
+		return userAgent;
 	}
 
 }
