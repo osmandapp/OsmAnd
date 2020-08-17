@@ -476,7 +476,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			updateRouteRecalcDistancePref();
 		} else if (settings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(prefId)){
 			applyPreference(settings.DISABLE_WRONG_DIRECTION_RECALC.getId(), applyToAllProfiles, newValue);
-			//updateRouteRecalcWrongDirectionPref();
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}
