@@ -147,7 +147,28 @@ public class TrackDetailsMenu {
 				if (points != null) {
 					LatLon latLon = tb.getLatLonFromPixel(mx, my);
 					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
-					float pos = (float) (gpxItem.locationOnMap.distance / ((OrderedLineDataSet) ds.get(0)).getDivX());
+
+					float pos;
+					if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
+							gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
+						pos = gpxItem.locationOnMap.time / 1000f;
+					} else {
+						double totalDistance = 0;
+						int index = segment.points.indexOf(points.first);
+						if (index != -1) {
+							WptPt previousPoint = null;
+							for (int i = 0; i < index; i++) {
+								WptPt currentPoint = segment.points.get(i);
+								if (previousPoint != null) {
+									totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
+								}
+								previousPoint = currentPoint;
+							}
+							totalDistance += MapUtils.getDistance(gpxItem.locationOnMap.lat, gpxItem.locationOnMap.lon, points.first.lat, points.first.lon);
+						}
+						pos = (float) (totalDistance / ((OrderedLineDataSet) ds.get(0)).getDivX());
+					}
+
 					float lowestVisibleX = chart.getLowestVisibleX();
 					float highestVisibleX = chart.getHighestVisibleX();
 					float nextVisibleX = lowestVisibleX + (pos - gpxItem.chartHighlightPos);
