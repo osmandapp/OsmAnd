@@ -248,6 +248,8 @@
 	<dimen name="content_padding_small">12dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="bottom_sheet_content_padding_small">8dp</dimen>
+	<dimen name="measurement_tool_menu_title_padding_top">13dp</dimen>
+	<dimen name="measurement_tool_menu_title_padding_bottom">5dp</dimen>
 	<dimen name="measurement_tool_divider_margin">8dp</dimen>
 	<dimen name="measurement_tool_content_padding_medium">12dp</dimen>
 	<dimen name="text_margin_small">4dp</dimen>
