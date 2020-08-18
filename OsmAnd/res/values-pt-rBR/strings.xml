@@ -62,8 +62,8 @@
     <string name="waypoint_visit_before">Passar antes</string>
     <string name="simulate_your_location">Simular rota</string>
     <string name="drawer">Lista simples</string>
-    <string name="short_location_on_map">Lat %1$s
-\nLon %2$s</string>
+    <string name="short_location_on_map">Latitude %1$s
+\nLongitude %2$s</string>
     <string name="tips_and_tricks_descr">Respostas às perguntas frequentes, mudanças recentes e outras.</string>
     <string name="routing_settings_2">Configurações de navegação</string>
     <string name="general_settings_2">Configurações gerais</string>
@@ -779,7 +779,7 @@
     <string name="osmand_parking_minutes">Minutos</string>
     <string name="osmand_parking_position_description_add_time">O carro foi estacionado em</string>
     <string name="index_settings">Gerenciar mapas</string>
-    <string name="context_menu_item_search">Pesquise nas proximidades</string>
+    <string name="context_menu_item_search">Pesquise por perto</string>
     <string name="local_index_descr_title">Gerenciar mapas.</string>
     <string name="show_point_options">Usar posição…</string>
     <string name="only_show">Exibir rota</string>
@@ -1363,7 +1363,7 @@
     <string name="route_tsll">Vire levemente à esquerda e siga</string>
     <string name="search_poi_location">Aguardando sinal…</string>
     <string name="search_near_map">Pesquisar próximo ao centro do mapa</string>
-    <string name="search_nearby">Pesquise nas proximidades</string>
+    <string name="search_nearby">Pesquise por perto</string>
     <string name="map_orientation_default">Mesma do aparelho</string>
     <string name="map_orientation_portrait">Vertical</string>
     <string name="map_orientation_landscape">Horizontal</string>
@@ -1811,7 +1811,7 @@
     <string name="update">Atualizar</string>
     <string name="only_download_over_wifi">Somente baixar via Wi-Fi</string>
     <string name="live_update">Atualização ao vivo</string>
-    <string name="update_now">Atualizar agora</string>
+    <string name="update_now">Atualizar</string>
     <string name="route_distance">Distância:</string>
     <string name="route_duration">Tempo:</string>
     <string name="missing_write_external_storage_permission">OsmAnd não tem permissão para usar o cartão de memória</string>
@@ -1834,7 +1834,7 @@
     <string name="rec_split_clip_length_desc">Limite de tempo máximo para clipes gravados.</string>
     <string name="rec_split_storage_size">Limite de armazenamento</string>
     <string name="rec_split_storage_size_desc">Quantidade de espaço que pode ser ocupado por todos os clipes gravados.</string>
-    <string name="last_map_change">Última alteração no mapa: %s</string>
+    <string name="last_map_change">Última alteração: %s</string>
     <string name="hourly">A cada hora</string>
     <string name="daily">Diariamente</string>
     <string name="weekly">Semanalmente</string>
@@ -2086,7 +2086,7 @@
     <string name="routing_attr_avoid_ice_roads_fords_name">Sem estradas de gelo ou vaus</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas de gelo e vaus.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Limite para orientação do mapa</string>
-    <string name="quick_action_show_navigation_finish_dialog">Exibir notificação \'Navegação finalizada\'</string>
+    <string name="quick_action_show_navigation_finish_dialog">Exibir notif. \'Navegação finalizada\'</string>
     <string name="mapillary_menu_title_tile_cache">Cache de quadrícula</string>
     <string name="map_widget_ruler_control">Régua de raio</string>
     <string name="show_from_zoom_level">Exibir a partir do nível de zoom</string>
@@ -2632,7 +2632,8 @@
 \n • Orientação de faixas opcional, exibição do nome da rua e tempo estimado de chegada
 \n • Suporta pontos intermediários do seu itinerário
 \n • Correção de rota automático sempre que você sair da rota
-\n • Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas</string>
+\n • Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas
+\n</string>
     <string name="osmand_plus_extended_description_part3">Visualização de mapa 
 \n• Exiba sua posição e orientação 
 \n• Opcionalmente alinhe a tela de acordo com a bússola ou a direção de seu movimento 
@@ -2785,16 +2786,11 @@
 \n 
 \nAlgumas das principais características:</string>
     <string name="osmand_plus_extended_description_part7">Contribua diretamente para o OSM
-\n
-\n• Avisar erros de dados
-\n
-\n• Fazer upload de trilhas GPX para o OSM diretamente do app
-\n
-\n• Adicionar POIs e fazer o upload diretamente para OSM (ou mais tarde se offline)
-\n
-\n• Gravação de viagem opcional também em modo background (enquanto o dispositivo está no modo sleep)
-\n
-\nOsmAnd é um software de código aberto desenvolvido ativamente. Todos podem contribuir para o app, reportando bugs, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com as contribuições financeiras para financiar o desenvolvimento e testes de novas funcionalidades.
+\n • Avisar erros de dados
+\n • Fazer upload de trilhas GPX para o OSM diretamente do app
+\n • Adicionar POIs e fazer o upload diretamente para OSM (ou mais tarde se offline)
+\n • Gravação de viagem opcional também em modo background (enquanto o dispositivo está no modo sleep)
+\n OsmAnd é um software de código aberto desenvolvido ativamente. Todos podem contribuir para o app, reportando bugs, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com as contribuições financeiras para financiar o desenvolvimento e testes de novas funcionalidades.
 \n</string>
     <string name="point_deleted">Ponto %1$s foi excluído</string>
     <string name="shared_string_world">Mundo</string>
