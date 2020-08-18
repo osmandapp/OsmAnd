@@ -39,7 +39,7 @@ public class FavoritePointEditor extends PointEditor {
 		}
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory);
 		favorite.setDescription("");
-		favorite.setAddress(address);
+		favorite.setAddress(address.isEmpty() ? title : address);
 		favorite.setOriginObjectName(originObjectName);
 		FavoritePointEditorFragmentNew.showInstance(mapActivity);
 	}
