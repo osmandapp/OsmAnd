@@ -262,20 +262,53 @@ public class MeasurementEditingContext {
 		return pt;
 	}
 
+	public void trimBefore(int selectedPointPosition) {
+		splitSegments(selectedPointPosition);
+		clearBeforeSegments();
+	}
+
+	public void trimAfter(int selectedPointPosition) {
+		splitSegments(selectedPointPosition + 1);
+		clearAfterSegments();
+	}
+
 	public void clearSegments() {
+		clearBeforeSegments();
+		clearAfterSegments();
+	}
+
+	public void clearBeforeSegments() {
 		before.points.clear();
-		after.points.clear();
 		if (isInSnapToRoadMode()) {
-			if (beforeCacheForSnap != null && afterCacheForSnap != null) {
+			if (beforeCacheForSnap != null) {
 				beforeCacheForSnap.points.clear();
-				afterCacheForSnap.points.clear();
 			}
 			needUpdateCacheForSnap = true;
 		} else {
 			beforeCacheForSnap = null;
+			needUpdateCacheForSnap = false;
+		}
+	}
+
+	public void clearAfterSegments() {
+		after.points.clear();
+		if (isInSnapToRoadMode()) {
+			if (afterCacheForSnap != null) {
+				afterCacheForSnap.points.clear();
+			}
+			needUpdateCacheForSnap = true;
+		} else {
 			afterCacheForSnap = null;
 			needUpdateCacheForSnap = false;
 		}
+	}
+
+	public boolean isFirstPointSelected() {
+		return selectedPointPosition == 0;
+	}
+
+	public boolean isLastPointSelected() {
+		return selectedPointPosition == getPoints().size() - 1;
 	}
 
 	public void scheduleRouteCalculateIfNotEmpty() {

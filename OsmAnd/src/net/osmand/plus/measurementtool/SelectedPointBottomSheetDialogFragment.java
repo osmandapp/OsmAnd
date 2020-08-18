@@ -37,9 +37,15 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	public static final String TAG = SelectedPointBottomSheetDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SelectedPointBottomSheetDialogFragment.class);
+	private MeasurementEditingContext editingCtx;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+		editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
 
 		View titleView = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_with_descr_pad_32dp, null, false);
@@ -126,6 +132,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						dismiss();
 					}
 				})
+				.setDisabled(editingCtx.isFirstPointSelected())
 				.create();
 		items.add(trimRouteBefore);
 
@@ -144,6 +151,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						dismiss();
 					}
 				})
+				.setDisabled(editingCtx.isLastPointSelected())
 				.create();
 		items.add(trimRouteAfter);
 
@@ -164,6 +172,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						dismiss();
 					}
 				})
+				.setDisabled(editingCtx.isFirstPointSelected())
 				.create();
 		items.add(changeRouteTypeBefore);
 
@@ -182,6 +191,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						dismiss();
 					}
 				})
+				.setDisabled(editingCtx.isLastPointSelected())
 				.create();
 		items.add(changeRouteTypeAfter);
 
@@ -249,24 +259,15 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@NonNull
 	private String getTitle() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return "";
-		}
-
-		MeasurementEditingContext editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
 		int pos = editingCtx.getSelectedPointPosition();
-
 		String pointName = editingCtx.getPoints().get(pos).name;
 		if (!TextUtils.isEmpty(pointName)) {
 			return pointName;
 		}
-
 		NewGpxData newGpxData = editingCtx.getNewGpxData();
 		if (newGpxData != null && newGpxData.getActionType() == ActionType.ADD_ROUTE_POINTS) {
 			return getString(R.string.route_point) + " - " + (pos + 1);
 		}
-
 		return getString(R.string.plugin_distance_point) + " - " + (pos + 1);
 	}
 
@@ -276,18 +277,15 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (mapActivity == null) {
 			return "";
 		}
-
 		StringBuilder description = new StringBuilder();
-
 		MeasurementEditingContext editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
 		int pos = editingCtx.getSelectedPointPosition();
 		List<WptPt> points = editingCtx.getPoints();
 		WptPt pt = points.get(pos);
-
 		String pointDesc = pt.desc;
 		if (!TextUtils.isEmpty(pointDesc)) {
 			description.append(pointDesc);
-		} else if (pos < 1) {
+		} else if (pos < 1 && before) {
 			description.append(getString(R.string.shared_string_control_start));
 		} else {
 			float dist = 0;
@@ -307,7 +305,6 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 			}
 			description.append(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
 		}
-
 		NewGpxData newGpxData = editingCtx.getNewGpxData();
 		if (newGpxData != null && newGpxData.getActionType() == ActionType.EDIT_SEGMENT) {
 			double elevation = pt.ele;
@@ -321,22 +318,14 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 				description.append(OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication()));
 			}
 		}
-
 		return description.toString();
 	}
 
 	@Nullable
 	private Drawable getRouteTypeIcon(boolean before) {
 		Drawable icon = getContentIcon(R.drawable.ic_action_split_interval);
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return icon;
-		}
-
-		MeasurementEditingContext editingCtx = mapActivity.getMapLayers().getMeasurementToolLayer().getEditingCtx();
 		int pos = editingCtx.getSelectedPointPosition();
 		pos = before ? pos : Math.max(pos - 1, 0);
-
 		String profileType = editingCtx.getPoints().get(pos).getProfileType();
 		ApplicationMode routeAppMode = ApplicationMode.valueOfStringKey(profileType, null);
 		if (routeAppMode != null) {

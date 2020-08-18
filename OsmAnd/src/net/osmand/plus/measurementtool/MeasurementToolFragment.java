@@ -102,6 +102,8 @@ import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
 import static net.osmand.plus.measurementtool.StartPlanRouteBottomSheet.StartPlanRouteListener;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.*;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.*;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener {
@@ -701,7 +703,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void clearAllOnClick() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
-		editingCtx.getCommandManager().execute(new ClearPointsCommand(measurementLayer));
+		editingCtx.getCommandManager().execute(new ClearPointsCommand(measurementLayer, ALL));
 		editingCtx.cancelSnapToRoad();
 		if (pointsListOpened) {
 			hidePointsList();
@@ -763,12 +765,25 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onTrimRouteBefore() {
-
+		trimRoute(BEFORE);
 	}
 
 	@Override
 	public void onTrimRouteAfter() {
+		trimRoute(AFTER);
+	}
 
+	private void trimRoute(ClearCommandMode before) {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		editingCtx.getCommandManager().execute(new ClearPointsCommand(measurementLayer, before));
+		if (pointsListOpened) {
+			hidePointsList();
+		}
+		editingCtx.setSelectedPointPosition(-1);
+		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
+		updateUndoRedoButton(false, redoBtn);
+		updateDistancePointsText();
+		saved = false;
 	}
 
 	@Override
@@ -1009,7 +1024,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
 		editingCtx.resetAppMode();
 		editingCtx.cancelSnapToRoad();
-		visibleSnapToRoadIcon(false);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
@@ -1033,14 +1047,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	private void visibleSnapToRoadIcon(boolean show) {
+	private void hideSnapToRoadIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (show) {
-				mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.VISIBLE);
-			} else {
-				mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
-			}
+			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
 		}
 	}
 
@@ -1794,9 +1804,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 			if (editingCtx.isInSnapToRoadMode()) {
 				resetSnapToRoadMode();
-			} else {
-				visibleSnapToRoadIcon(false);
 			}
+			hideSnapToRoadIcon();
 			if (!editingCtx.isNewData() && !planRouteMode) {
 				GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();
 				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
