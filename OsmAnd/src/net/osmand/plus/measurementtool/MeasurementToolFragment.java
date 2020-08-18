@@ -96,8 +96,15 @@ import java.util.Locale;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.ExportAsGpxListener;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.SnapToRoadProgressListener;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.ALL_ROUTE_DIALOG_REQUEST_CODE;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.CALCULATION_MODE_KEY;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.ROUTE_AFTER_DIALOG_REQUEST_CODE;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.ROUTE_APP_MODE_KEY;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.ROUTE_BEFORE_DIALOG_REQUEST_CODE;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.SNAP_TO_ROAD_ENABLE_KEY;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
@@ -603,7 +610,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (editingCtx.isNewData() || editingCtx.hasRoutePoints() || editingCtx.isInSnapToRoadMode()) {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						this, editingCtx.getCalculationMode(),
-						editingCtx.getAppMode());
+						editingCtx.getAppMode(), ALL_ROUTE_DIALOG_REQUEST_CODE);
 			} else {
 				SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
 			}
@@ -613,6 +620,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		boolean snapToRoadEnable = false;
+		ApplicationMode applicationMode = DEFAULT_APP_MODE;
+		CalculationMode calculationMode = CalculationMode.WHOLE_TRACK;
+		if (data != null) {
+			snapToRoadEnable = data.getBooleanExtra(SNAP_TO_ROAD_ENABLE_KEY, false);
+			applicationMode = ApplicationMode.valueOfStringKey(data.getStringExtra(ROUTE_APP_MODE_KEY), DEFAULT_APP_MODE);
+			calculationMode = (CalculationMode) data.getSerializableExtra(CALCULATION_MODE_KEY);
+		}
 		switch (requestCode) {
 			case SnapTrackWarningBottomSheet.REQUEST_CODE:
 				switch (resultCode) {
@@ -638,7 +653,44 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 						openSaveAsNewTrackMenu(getMapActivity());
 						break;
 				}
+				break;
+			case RouteBetweenPointsBottomSheetDialogFragment.ALL_ROUTE_DIALOG_REQUEST_CODE:
+				switch (resultCode) {
+					case RouteBetweenPointsBottomSheetDialogFragment.CLOSE_ROUTE_DIALOG_RESULT_CODE:
+						onCloseRouteDialog(snapToRoadEnable);
+						break;
+					case RouteBetweenPointsBottomSheetDialogFragment.CHANGE_APP_MODE_RESULT_CODE:
+						onChangeApplicationMode(applicationMode, calculationMode);
+						break;
+				}
+				break;
+			case RouteBetweenPointsBottomSheetDialogFragment.ROUTE_BEFORE_DIALOG_REQUEST_CODE:
+				switch (resultCode) {
+					case RouteBetweenPointsBottomSheetDialogFragment.CLOSE_ROUTE_DIALOG_RESULT_CODE:
+						onCloseRouteDialog(snapToRoadEnable);
+						break;
+					case RouteBetweenPointsBottomSheetDialogFragment.CHANGE_APP_MODE_RESULT_CODE:
+						onRouteBeforeChangeApplicationMode(applicationMode, calculationMode);
+						break;
+				}
+				break;
+			case RouteBetweenPointsBottomSheetDialogFragment.ROUTE_AFTER_DIALOG_REQUEST_CODE:
+				switch (resultCode) {
+					case RouteBetweenPointsBottomSheetDialogFragment.CLOSE_ROUTE_DIALOG_RESULT_CODE:
+						onCloseRouteDialog(snapToRoadEnable);
+						break;
+					case RouteBetweenPointsBottomSheetDialogFragment.CHANGE_APP_MODE_RESULT_CODE:
+						onRouteAfterChangeApplicationMode(applicationMode, calculationMode);
+						break;
+				}
+				break;
 		}
+	}
+
+	private void onRouteAfterChangeApplicationMode(ApplicationMode applicationMode, CalculationMode calculationMode) {
+	}
+
+	private void onRouteBeforeChangeApplicationMode(ApplicationMode applicationMode, CalculationMode calculationMode) {
 	}
 
 	@Override
@@ -788,12 +840,22 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onChangeRouteTypeBefore() {
-
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+					this, editingCtx.getCalculationMode(),
+					editingCtx.getAppMode(), ROUTE_BEFORE_DIALOG_REQUEST_CODE);
+		}
 	}
 
 	@Override
 	public void onChangeRouteTypeAfter() {
-
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+					this, editingCtx.getCalculationMode(),
+					editingCtx.getAppMode(), ROUTE_AFTER_DIALOG_REQUEST_CODE);
+		}
 	}
 
 	@Override

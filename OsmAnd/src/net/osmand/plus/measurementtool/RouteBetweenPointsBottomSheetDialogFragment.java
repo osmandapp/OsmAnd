@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -35,8 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.UiUtilities.CustomRadioButtonType.*;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.NEXT_SEGMENT;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.*;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
 
 public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDialogFragment {
@@ -46,6 +46,12 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	public static final int STRAIGHT_LINE_TAG = -1;
 	public static final String CALCULATION_MODE_KEY = "calculation_type";
 	public static final String ROUTE_APP_MODE_KEY = "route_app_mode";
+	public static final String SNAP_TO_ROAD_ENABLE_KEY = "snap_to_road_enable";
+	public static final int ALL_ROUTE_DIALOG_REQUEST_CODE = 1002;
+	public static final int ROUTE_BEFORE_DIALOG_REQUEST_CODE = 1003;
+	public static final int ROUTE_AFTER_DIALOG_REQUEST_CODE = 1004;
+	public static final int CLOSE_ROUTE_DIALOG_RESULT_CODE = 1;
+	public static final int CHANGE_APP_MODE_RESULT_CODE = 2;
 
 	private boolean nightMode;
 	private boolean portrait;
@@ -53,13 +59,49 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	private TextView btnDescription;
 	private CalculationMode calculationMode = WHOLE_TRACK;
 	private ApplicationMode snapToRoadAppMode;
-
 	private LinearLayout customRadioButton;
+	private RouteBetweenPointDialogMode dialogMode;
+
+	public enum RouteBetweenPointDialogMode {
+		NEW_SEGMENT(ALL_ROUTE_DIALOG_REQUEST_CODE,
+				R.string.next_segment, R.string.rourte_between_points_next_segment_button_desc,
+				R.string.whole_track, R.string.rourte_between_points_whole_track_button_desc),
+		ROUTE_BEFORE(ROUTE_BEFORE_DIALOG_REQUEST_CODE,
+				R.string.previous_segment, R.string.only_selected_segment_recalc,
+				R.string.all_previous_segments, R.string.all_previous_segments_will_be_recalc),
+		ROUTE_AFTER(ROUTE_AFTER_DIALOG_REQUEST_CODE,
+				R.string.next_segment, R.string.only_selected_segment_recalc,
+				R.string.all_next_segments, R.string.all_next_segments_will_be_recalc);
+		int requestCode;
+		int leftButtonTitle;
+		int rightButtonTitle;
+		int leftButtonDescription;
+		int rightButtonDescription;
+
+		RouteBetweenPointDialogMode(int requestCode, @StringRes int leftButtonTitle, @StringRes int leftButtonDescription,
+		                            @StringRes int rightButtonTitle, @StringRes int rightButtonDescription) {
+			this.requestCode = requestCode;
+			this.leftButtonTitle = leftButtonTitle;
+			this.rightButtonTitle = rightButtonTitle;
+			this.leftButtonDescription = leftButtonDescription;
+			this.rightButtonDescription = rightButtonDescription;
+		}
+
+		public static RouteBetweenPointDialogMode getFromTargetCode(int targetRequestCode) {
+			for (RouteBetweenPointDialogMode mode : values()) {
+				if (mode.requestCode == targetRequestCode) {
+					return mode;
+				}
+			}
+			return NEW_SEGMENT;
+		}
+	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		Bundle args = getArguments();
+		dialogMode = RouteBetweenPointDialogMode.getFromTargetCode(getTargetRequestCode());
 		if (args != null) {
 			snapToRoadAppMode = ApplicationMode.valueOfStringKey(args.getString(ROUTE_APP_MODE_KEY), null);
 			calculationMode = (CalculationMode) args.get(CALCULATION_MODE_KEY);
@@ -89,10 +131,10 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 		});
 
 		customRadioButton = mainView.findViewById(R.id.custom_radio_buttons);
-		TextView segmentBtn = mainView.findViewById(R.id.left_button);
-		segmentBtn.setText(R.string.next_segment);
-		TextView wholeTrackBtn = mainView.findViewById(R.id.right_button);
-		wholeTrackBtn.setText(R.string.whole_track);
+		TextView leftBtn = mainView.findViewById(R.id.left_button);
+		leftBtn.setText(dialogMode.leftButtonTitle);
+		TextView rightBtn = mainView.findViewById(R.id.right_button);
+		rightBtn.setText(dialogMode.rightButtonTitle);
 		btnDescription = mainView.findViewById(R.id.button_description);
 
 		LinearLayout navigationType = mainView.findViewById(R.id.navigation_types_container);
@@ -127,13 +169,13 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 			addProfileView(navigationType, onClickListener, i, icon, mode.toHumanString(), mode.equals(snapToRoadAppMode));
 		}
 
-		segmentBtn.setOnClickListener(new View.OnClickListener() {
+		leftBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				updateModeButtons(NEXT_SEGMENT);
 			}
 		});
-		wholeTrackBtn.setOnClickListener(new View.OnClickListener() {
+		rightBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				updateModeButtons(WHOLE_TRACK);
@@ -155,9 +197,9 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	private void updateModeButtons(CalculationMode calculationMode) {
 		if (calculationMode == NEXT_SEGMENT) {
 			UiUtilities.updateCustomRadioButtons(getMyApplication(), customRadioButton, nightMode, LEFT);
-			btnDescription.setText(R.string.rourte_between_points_next_segment_button_desc);
+			btnDescription.setText(dialogMode.leftButtonDescription);
 		} else {
-			btnDescription.setText(R.string.rourte_between_points_whole_track_button_desc);
+			btnDescription.setText(dialogMode.rightButtonDescription);
 			UiUtilities.updateCustomRadioButtons(getMyApplication(), customRadioButton, nightMode, RIGHT);
 		}
 		setCalculationMode(calculationMode);
@@ -212,7 +254,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	}
 
 	public static void showInstance(FragmentManager fm, Fragment targetFragment, CalculationMode calculationMode,
-	                                ApplicationMode applicationMode) {
+	                                ApplicationMode applicationMode, int requestCode) {
 		try {
 			if (!fm.isStateSaved()) {
 				RouteBetweenPointsBottomSheetDialogFragment fragment = new RouteBetweenPointsBottomSheetDialogFragment();
@@ -220,7 +262,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 				args.putString(ROUTE_APP_MODE_KEY, applicationMode != null ? applicationMode.getStringKey() : null);
 				args.putSerializable(CALCULATION_MODE_KEY, calculationMode);
 				fragment.setArguments(args);
-				fragment.setTargetFragment(targetFragment, 0);
+				fragment.setTargetFragment(targetFragment, requestCode);
 				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
