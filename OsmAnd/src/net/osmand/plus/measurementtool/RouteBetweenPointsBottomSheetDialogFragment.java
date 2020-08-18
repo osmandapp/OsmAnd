@@ -37,6 +37,7 @@ import java.util.List;
 import static net.osmand.plus.UiUtilities.CustomRadioButtonType.*;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.NEXT_SEGMENT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
 
 public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -102,7 +103,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 			@Override
 			public void onClick(View view) {
 				snapToRoadEnabled = false;
-				ApplicationMode mode = null;
+				ApplicationMode mode = DEFAULT_APP_MODE;
 				if ((int) view.getTag() != STRAIGHT_LINE_TAG) {
 					mode = modes.get((int) view.getTag());
 					snapToRoadEnabled = true;
@@ -117,7 +118,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 
 		Drawable icon = app.getUIUtilities().getIcon(R.drawable.ic_action_split_interval, nightMode);
 		addProfileView(navigationType, onClickListener, STRAIGHT_LINE_TAG, icon,
-				app.getText(R.string.routing_profile_straightline), snapToRoadAppMode == null);
+				app.getText(R.string.routing_profile_straightline), snapToRoadAppMode == DEFAULT_APP_MODE);
 		addDelimiterView(navigationType);
 
 		for (int i = 0; i < modes.size(); i++) {
