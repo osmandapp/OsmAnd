@@ -1117,7 +1117,7 @@
     <string name="routing_attr_weight_description">Indiquez le poids du véhicule à respecter sur les routes.</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Définissez l\'arrivée</string>
-    <string name="shared_string_select_on_map">Sélectionner sur la carte</string>
+    <string name="shared_string_select_on_map">Sélectionnez sur la carte</string>
     <string name="shared_string_favorite">Favori</string>
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
