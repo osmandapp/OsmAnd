@@ -348,7 +348,7 @@ public class TrackDetailsMenu {
 					if (previousPoint != null) {
 						totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
 					}
-					if (currentPoint.distance >= distance || Math.abs(totalDistance - distance) < 0.1) {
+					if (currentPoint.distance >= distance || totalDistance >= distance) {
 						if (previousPoint != null && currentPoint.distance >= distance) {
 							double percent = 1 - (totalDistance - distance) / (currentPoint.distance - previousPoint.distance);
 							double dLat = (currentPoint.lat - previousPoint.lat) * percent;
@@ -627,6 +627,11 @@ public class TrackDetailsMenu {
 					highlightDrawX = chart.getHighlighted()[0].getDrawX();
 				} else {
 					highlightDrawX = -1;
+				}
+				MapActivity mapActivity = getMapActivity();
+				if (lastPerformedGesture != ChartGesture.NONE && mapActivity != null
+						&& mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+					mapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 				}
 			}
 
