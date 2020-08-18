@@ -70,8 +70,9 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		FragmentActivity activity = requireActivity();
 		portrait = AndroidUiHelper.isOrientationPortrait(activity);
-		final View mainView = inflater.inflate(R.layout.fragment_route_between_points_bottom_sheet_dialog,
-				container, false);
+		final View mainView = UiUtilities.getInflater(getContext(), nightMode)
+				.inflate(R.layout.fragment_route_between_points_bottom_sheet_dialog,
+						container, false);
 		AndroidUtils.setBackground(activity, mainView, nightMode,
 				portrait ? R.drawable.bg_bottom_menu_light : R.drawable.bg_bottom_sheet_topsides_landscape_light,
 				portrait ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_sheet_topsides_landscape_dark);
