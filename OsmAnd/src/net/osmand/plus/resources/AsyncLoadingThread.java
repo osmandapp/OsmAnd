@@ -105,12 +105,13 @@ public class AsyncLoadingThread extends Thread {
 		}
 		
 		public TileLoadDownloadRequest(File dirWithTiles, String url, File fileToSave, String tileId, ITileSource source, int tileX,
-				int tileY, int zoom, String referer) {
+				int tileY, int zoom, String referer, String userAgent) {
 			super(url, fileToSave, tileX, tileY, zoom);
 			this.dirWithTiles = dirWithTiles;
 			this.tileSource = source;
 			this.tileId = tileId;
 			this.referer = referer;
+			this.userAgent = userAgent;
 		}
 		
 		public void saveTile(InputStream inputStream) throws IOException {

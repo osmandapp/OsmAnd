@@ -304,7 +304,7 @@
                 android:paddingLeft="@dimen/measurement_tool_button_padding"
                 android:paddingRight="@dimen/measurement_tool_button_padding"
                 android:text="@string/shared_string_apply"
-                android:textColor="?attr/color_dialog_buttons"
+                android:textColor="@color/color_white"
                 android:textAllCaps="false"
                 android:paddingEnd="@dimen/measurement_tool_button_padding"
                 android:paddingStart="@dimen/measurement_tool_button_padding" />
