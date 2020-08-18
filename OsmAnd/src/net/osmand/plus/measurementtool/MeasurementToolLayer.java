@@ -324,8 +324,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 		if (allowed) {
 
-			ApplicationMode applicationMode = editingCtx.getSnapToRoadAppMode();
-			if (applicationMode != null) {
+			ApplicationMode applicationMode = editingCtx.getAppMode();
+			if (applicationMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
 				pt.setProfileType(applicationMode.getStringKey());
 			}
 			editingCtx.addPoint(pt);
@@ -344,8 +344,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			pressedPointLatLon = null;
 			boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 			if (allowed) {
-				ApplicationMode applicationMode = editingCtx.getSnapToRoadAppMode();
-				if (applicationMode != null) {
+				ApplicationMode applicationMode = editingCtx.getAppMode();
+				if (applicationMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
 					pt.setProfileType(applicationMode.getStringKey());
 				}
 				editingCtx.addPoint(pt);

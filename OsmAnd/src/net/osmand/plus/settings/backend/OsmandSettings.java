@@ -1845,6 +1845,7 @@ public class OsmandSettings {
 	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<>("route_service", RouteService.OSMAND, RouteService.values()).makeProfile().cache();
 
 	{
+		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.DEFAULT, RouteService.STRAIGHT);
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.AIRCRAFT, RouteService.STRAIGHT);
 	}
 

@@ -25,7 +25,7 @@ public class AddPointCommand extends MeasurementModeCommand {
 			point = new WptPt();
 			point.lat = latLon.getLatitude();
 			point.lon = latLon.getLongitude();
-			point.setProfileType(measurementLayer.getEditingCtx().getSnapToRoadAppMode().getStringKey());
+			point.setProfileType(measurementLayer.getEditingCtx().getAppMode().getStringKey());
 		}
 		this.center = center;
 		position = measurementLayer.getEditingCtx().getPointsCount();

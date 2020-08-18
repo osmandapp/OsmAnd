@@ -25,7 +25,7 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 		this.newMode = newMode;
 		this.newCalculationMode = newCalculationMode;
 		MeasurementEditingContext editingCtx = getEditingCtx();
-		oldMode = editingCtx.getSnapToRoadAppMode();
+		oldMode = editingCtx.getAppMode();
 		oldCalculationMode = editingCtx.getCalculationMode();
 	}
 
@@ -43,12 +43,11 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 		MeasurementEditingContext editingCtx = getEditingCtx();
 		editingCtx.getPoints().clear();
 		editingCtx.addPoints(points);
-		editingCtx.setSnapToRoadAppMode(oldMode);
+		editingCtx.setAppMode(oldMode);
 		if (newCalculationMode == CalculationMode.WHOLE_TRACK) {
 			editingCtx.clearSnappedToRoadPoints();
 		}
 		editingCtx.setCalculationMode(oldCalculationMode);
-		editingCtx.setInSnapToRoadMode(true);
 		editingCtx.setNeedUpdateCacheForSnap(true);
 	}
 
@@ -71,9 +70,8 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 				points.get(pointIdx).removeProfileType();
 			}
 		}
-		editingCtx.setInSnapToRoadMode(true);
 		editingCtx.setCalculationMode(newCalculationMode);
-		editingCtx.setSnapToRoadAppMode(newMode);
+		editingCtx.setAppMode(newMode);
 		if (newCalculationMode == CalculationMode.WHOLE_TRACK) {
 			editingCtx.clearSnappedToRoadPoints();
 		}

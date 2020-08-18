@@ -52,9 +52,8 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 
 	@Override
 	public void undo() {
-		getEditingCtx().setInSnapToRoadMode(false);
+		getEditingCtx().resetAppMode();
 		getEditingCtx().clearSegments();
-		getEditingCtx().setSnapToRoadAppMode(null);
 		getEditingCtx().addPoints(points);
 		if (needUpdateCache) {
 			getEditingCtx().setNeedUpdateCacheForSnap(true);
@@ -69,9 +68,8 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 	}
 
 	public void applyApproximation() {
-		getEditingCtx().setInSnapToRoadMode(true);
+		getEditingCtx().setAppMode(mode);
 		getEditingCtx().clearSegments();
-		getEditingCtx().setSnapToRoadAppMode(mode);
 		getEditingCtx().setPoints(approximation);
 	}
 }
