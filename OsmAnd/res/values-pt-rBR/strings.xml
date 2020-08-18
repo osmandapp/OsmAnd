@@ -63,7 +63,6 @@
     <string name="simulate_your_location">Simular rota</string>
     <string name="drawer">Lista simples</string>
     <string name="short_location_on_map">Lat %1$s
-\n
 \nLon %2$s</string>
     <string name="tips_and_tricks_descr">Respostas às perguntas frequentes, mudanças recentes e outras.</string>
     <string name="routing_settings_2">Configurações de navegação</string>
@@ -2463,34 +2462,22 @@
 \n • Opção de gravação GPX permite-lhe gravar a sua viagem e compartilhá-la
 \n • Através de plugin adicionais, você pode ativar curvas de nível e sombreamento de relevo</string>
     <string name="osmand_extended_description_part6">Passeio, caminhada, turismo pela cidade
-\n
-\n• O mapa mostra caminhos para passeios e caminhadas
-\n
-\n• A Wikipédia no seu idioma preferido pode dizer muito durante um turismo pela cidade
-\n
-\n• Paradas de transportes públicos (ônibus, troleibus, trem) incluindo nomes de linha, ajuda a navegar em uma nova cidade
-\n
-\n• Navegação GPS em modo pedestre constrói a sua rota usando caminhos para pedestres
-\n
-\n• Fazer upload e seguir uma rota GPX ou gravar e compartilhar a sua própria rota
+\n • O mapa mostra caminhos para passeios e caminhadas
+\n • A Wikipédia no seu idioma preferido pode dizer muito durante um turismo pela cidade
+\n • Paradas de transportes públicos (ônibus, troleibus, trem) incluindo nomes de linha, ajuda a navegar em uma nova cidade
+\n • Navegação GPS em modo pedestre constrói a sua rota usando caminhos para pedestres
+\n • Fazer upload e seguir uma rota GPX ou gravar e compartilhar a sua própria rota
 \n</string>
     <string name="osmand_extended_description_part7">Contribua para o OSM
-\n
-\n• Comunique falha de dados
-\n
-\n• Carregue trilhas GPX diretamente do app
-\n
-\n• Adicione POIs e carregue-os diretamente ao OSM (ou mais tarde se off-line)
+\n • Comunique falha de dados
+\n • Carregue trilhas GPX diretamente do app
+\n • Adicione POIs e carregue-os diretamente ao OSM (ou mais tarde se off-line)
 \n</string>
     <string name="osmand_plus_extended_description_part5">Recursos de segurança
-\n
-\n• Alternância de exibição dia/noite automatizada opcional
-\n
-\n• Exibição de limite de velocidade opcional, com lembrete se você ultrapassá-lo
-\n
-\n• Zoom dependente da velocidade opcional
-\n
-\n• Compartilhe sua localização para que seus amigos possam encontrar você
+\n • Alternância de exibição dia/noite automatizada opcional
+\n • Exibição de limite de velocidade opcional, com lembrete se você ultrapassá-lo
+\n • Zoom dependente da velocidade opcional
+\n • Compartilhe sua localização para que seus amigos possam encontrar você
 \n</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especificar um buffer de tempo para manter locais para enviar sem conexão</string>
     <string name="quick_action_take_audio_note_descr">Um botão para adicionar uma nota de áudio no meio da tela.</string>
@@ -2559,18 +2546,12 @@
     <string name="move_point">Mover Ponto</string>
     <string name="osm_recipients_label">Destinatários OSM</string>
     <string name="osmand_plus_extended_description_part6">Recursos de Ciclismo e Pedestre
-\n
-\n• Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre
-\n
-\n• Roteamento e modos de exibição especiais para bicicleta e pedestres
-\n
-\n• Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas
-\n
-\n• Gravação opcional de viagem para arquivo GPX local ou serviço on-line 
-\n
-\n• Exibição opcional de velocidade e altitudes
-\n
-\n• Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
+\n • Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre
+\n • Roteamento e modos de exibição especiais para bicicleta e pedestres
+\n • Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas
+\n • Gravação opcional de viagem para arquivo GPX local ou serviço on-line
+\n • Exibição opcional de velocidade e altitudes
+\n • Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
     <string name="shared_string_without_name">Sem nome</string>
     <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada: 
 \n• Europa Ocidental: **** 
@@ -2646,19 +2627,12 @@
     <string name="waypoints_removed_from_map_markers">Pontos de passagem removidos dos marcadores de mapa</string>
     <string name="shared_string_result">Resultado</string>
     <string name="osmand_plus_extended_description_part2">Navegação
-\n
-\n• Funciona on-line (rápido) ou offline (sem custo de roaming quando estiver no exterior)
-\n
-\n• Orientação por voz passo-a-passo (vozes gravadas e sintetizadas)
-\n
-\n• Orientação de faixas opcional, exibição do nome da rua e tempo estimado de chegada
-\n
-\n• Suporta pontos intermediários do seu itinerário
-\n
-\n• Correção de rota automático sempre que você sair da rota
-\n
-\n• Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas
-\n</string>
+\n • Funciona on-line (rápido) ou offline (sem custo de roaming quando estiver no exterior)
+\n • Orientação por voz passo-a-passo (vozes gravadas e sintetizadas)
+\n • Orientação de faixas opcional, exibição do nome da rua e tempo estimado de chegada
+\n • Suporta pontos intermediários do seu itinerário
+\n • Correção de rota automático sempre que você sair da rota
+\n • Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas</string>
     <string name="osmand_plus_extended_description_part3">Visualização de mapa 
 \n• Exiba sua posição e orientação 
 \n• Opcionalmente alinhe a tela de acordo com a bússola ou a direção de seu movimento 
@@ -2668,19 +2642,13 @@
 \n• Opcionalmente exiba nomes de lugares em inglês, língua local ou fonético
 \n</string>
     <string name="osmand_plus_extended_description_part4">Use dados OSM e da Wikipédia
+\n • Informações de alta qualidade dos melhores projetos colaborativos do mundo
+\n • Dados OSM disponíveis por país ou região
+\n • POIs da Wikipédia, ótimo para visitas turísticas
+\n • Downloads grátis ilimitados, diretamente do aplicativo
+\n • Mapas vetoriais offline compactos e atualizados mensalmente
 \n
-\n• Informações de alta qualidade dos melhores projetos colaborativos do mundo
-\n
-\n• Dados OSM disponíveis por país ou região
-\n
-\n• POIs da Wikipédia, ótimo para visitas turísticas
-\n
-\n• Downloads grátis ilimitados, diretamente do aplicativo
-\n
-\n• Mapas vetoriais offline compactos e atualizados mensalmente
-\n
-\n
-\n• Escolha entre região completa ou apenas rede rodoviária (Exemplo: Japão inteiro tem 700 MB ou apenas 200 MB para rede rodoviária)</string>
+\n • Escolha entre região completa ou apenas rede rodoviária (Exemplo: Japão inteiro tem 700 MB ou apenas 200 MB para rede rodoviária)</string>
     <string name="online_webpage_warning">Página disponível só online. Abrir num navegador web?</string>
     <string name="images_cache">Cache de imagens</string>
     <string name="delete_search_history">Apagar histórico de pesquisa</string>
