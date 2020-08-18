@@ -241,9 +241,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		addDelDescription.setTextColor(getResources().getColor(activeColorResId));
 		addAddressBtn.setTextColor(getResources().getColor(activeColorResId));
 		addAddressBtn.setCompoundDrawablesWithIntrinsicBounds(
-				app.getUIUtilities().getIcon(R.drawable.ic_action_location_off, activeColorResId),null,null,null);
+				app.getUIUtilities().getIcon(R.drawable.ic_action_location_16, activeColorResId),null,null,null);
 		addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
-				app.getUIUtilities().getIcon(R.drawable.ic_action_description, activeColorResId),null,null,null);
+				app.getUIUtilities().getIcon(R.drawable.ic_action_description_16, activeColorResId),null,null,null);
 		addDelDescription.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -251,7 +251,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					descriptionCaption.setVisibility(View.VISIBLE);
 					addDelDescription.setText(view.getResources().getString(R.string.delete_description));
 					addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
-							app.getUIUtilities().getIcon(R.drawable.ic_action_delete_item,
+							app.getUIUtilities().getIcon(R.drawable.ic_action_trash_basket_16,
 									activeColorResId),null,null,null);
 					View descriptionEdit = view.findViewById(R.id.description_edit);
 					descriptionEdit.requestFocus();
@@ -260,7 +260,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					descriptionCaption.setVisibility(View.GONE);
 					addDelDescription.setText(view.getResources().getString(R.string.add_description));
 					addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
-							app.getUIUtilities().getIcon(R.drawable.ic_action_location_off,
+							app.getUIUtilities().getIcon(R.drawable.ic_action_description_16,
 									activeColorResId),null,null,null);
 					AndroidUtils.hideSoftKeyboard(requireActivity(), descriptionEdit);
 					descriptionEdit.clearFocus();
@@ -275,7 +275,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					addAddressBtn.setText(view.getResources().getString(R.string.delete_address));
 					View addressEdit = view.findViewById(R.id.address_edit);
 					addressEdit.requestFocus();
-					AndroidUtils.softKeyboardDelayed(addressEdit);
+					AndroidUtils.softKeyboardDelayed(requireActivity(),addressEdit);
 				} else {
 					addressCaption.setVisibility(View.GONE);
 					addAddressBtn.setText(view.getResources().getString(R.string.add_address));
@@ -845,6 +845,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	String getDescriptionTextValue() {
 		EditText descriptionEdit = view.findViewById(R.id.description_edit);
 		String res = descriptionEdit.getText().toString().trim();
+		return Algorithms.isEmpty(res) ? null : res;
+	}
+
+	String getAddressTextValue() {
+		EditText addressEdit = view.findViewById(R.id.address_edit);
+		String res = addressEdit.getText().toString().trim();
 		return Algorithms.isEmpty(res) ? null : res;
 	}
 

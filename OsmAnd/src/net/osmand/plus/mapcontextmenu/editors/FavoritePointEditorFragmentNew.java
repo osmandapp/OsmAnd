@@ -244,6 +244,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 			final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
 					getNameTextValue(), getCategoryTextValue());
 			point.setDescription(getDescriptionTextValue());
+			point.setAddress(getAddressTextValue());
 			point.setColor(color);
 			point.setBackgroundType(backgroundType);
 			point.setIconId(iconId);
@@ -259,6 +260,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 			final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
 					getNameTextValue(), getCategoryTextValue());
 			point.setDescription(getDescriptionTextValue());
+			point.setAddress(getAddressTextValue());
 			point.setColor(color);
 			point.setBackgroundType(backgroundType);
 			point.setIconId(iconId);
@@ -276,13 +278,13 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						doSave(favorite, point.getName(), point.getCategory(), point.getDescription(),
+						doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(),
 								point.getColor(), point.getBackgroundType(), point.getIconId(), needDismiss);
 					}
 				});
 				builder.create().show();
 			} else {
-				doSave(favorite, point.getName(), point.getCategory(), point.getDescription(),
+				doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(),
 						point.getColor(), point.getBackgroundType(), point.getIconId(), needDismiss);
 			}
 			saved = true;
@@ -295,10 +297,11 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 				favorite.getName().equals(point.getName()) &&
 				favorite.getCategory().equals(point.getCategory()) &&
 				favorite.getBackgroundType().equals(point.getBackgroundType()) &&
-				Algorithms.stringsEqual(favorite.getDescription(), point.getDescription());
+				Algorithms.stringsEqual(favorite.getDescription(), point.getDescription()) &&
+				Algorithms.stringsEqual(favorite.getAddress(), point.getAddress());
 	}
 
-	private void doSave(FavouritePoint favorite, String name, String category, String description,
+	private void doSave(FavouritePoint favorite, String name, String category, String description, String address,
 	                    @ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId, boolean needDismiss) {
 		FavouritesDbHelper helper = getHelper();
 		FavoritePointEditor editor = getFavoritePointEditor();
@@ -306,7 +309,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 			if (editor.isNew()) {
 				doAddFavorite(name, category, description, color, backgroundType, iconId);
 			} else {
-				doEditFavorite(favorite, name, category, description, color, backgroundType, iconId, helper);
+				doEditFavorite(favorite, name, category, description, address, color, backgroundType, iconId, helper);
 			}
 		}
 		MapActivity mapActivity = getMapActivity();
@@ -325,7 +328,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		}
 	}
 
-	private void doEditFavorite(FavouritePoint favorite, String name, String category, String description,
+	private void doEditFavorite(FavouritePoint favorite, String name, String category, String description, String address,
 	                            @ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId,
 	                            FavouritesDbHelper helper) {
 		OsmandApplication app = getMyApplication();
@@ -334,7 +337,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 			favorite.setColor(color);
 			favorite.setBackgroundType(backgroundType);
 			favorite.setIconId(iconId);
-			helper.editFavouriteName(favorite, name, category, description);
+			helper.editFavouriteName(favorite, name, category, description, address);
 		}
 	}
 
@@ -408,7 +411,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 	@Override
 	public String getAddressInitValue() {
 		FavouritePoint favourite = getFavorite();
-		return favorite != null ? favorite.getAddress() : "";
+		return favourite != null ? favourite.getAddress() : "";
 	}
 
 	@Override

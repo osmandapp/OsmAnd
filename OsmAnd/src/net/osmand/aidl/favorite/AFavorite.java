@@ -9,16 +9,18 @@ public class AFavorite implements Parcelable {
     private double lon;
     private String name;
     private String description;
+    private String address;
     private String category;
     private String color;
     private boolean visible;
 
-    public AFavorite(double lat, double lon, String name, String description,
+    public AFavorite(double lat, double lon, String name, String description, String address,
                      String category, String color, boolean visible) {
         this.lat = lat;
         this.lon = lon;
         this.name = name;
         this.description = description;
+        this.address = address;
         this.category = category;
         this.color = color;
         this.visible = visible;
@@ -56,6 +58,8 @@ public class AFavorite implements Parcelable {
         return description;
     }
 
+    public String getAddress() { return address; }
+
     public String getCategory() {
         return category;
     }
@@ -74,6 +78,7 @@ public class AFavorite implements Parcelable {
         out.writeDouble(lon);
         out.writeString(name);
         out.writeString(description);
+        out.writeString(address);
         out.writeString(category);
         out.writeString(color);
         out.writeByte((byte) (visible ? 1 : 0));
@@ -84,6 +89,7 @@ public class AFavorite implements Parcelable {
         lon = in.readDouble();
         name = in.readString();
         description = in.readString();
+        address = in.readString();
         category = in.readString();
         color = in.readString();
         visible = in.readByte() != 0;

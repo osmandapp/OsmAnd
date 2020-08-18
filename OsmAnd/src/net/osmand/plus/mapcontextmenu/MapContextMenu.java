@@ -1042,7 +1042,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					}
 					FavoritePointEditor favoritePointEditor = getFavoritePointEditor();
 					if (favoritePointEditor != null) {
-						favoritePointEditor.add(getLatLon(), title, originObjectName);
+						favoritePointEditor.add(getLatLon(), title, getStreetStr(), originObjectName);
 					}
 				}
 			});

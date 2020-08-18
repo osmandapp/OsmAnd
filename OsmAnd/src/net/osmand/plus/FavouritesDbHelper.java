@@ -487,11 +487,12 @@ public class FavouritesDbHelper {
 		return builder.toString();
 	}
 
-	public boolean editFavouriteName(FavouritePoint p, String newName, String category, String descr) {
+	public boolean editFavouriteName(FavouritePoint p, String newName, String category, String descr, String address) {
 		String oldCategory = p.getCategory();
 		p.setName(newName);
 		p.setCategory(category);
 		p.setDescription(descr);
+		p.setAddress(address);
 		if (!oldCategory.equals(category)) {
 			FavoriteGroup old = flatGroups.get(oldCategory);
 			if (old != null) {
