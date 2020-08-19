@@ -265,14 +265,14 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		if (isEditable) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify, mapActivity)
-					.setId(MAP_CONTEXT_MENU_MODIFY_POI)
+			        .setId(MAP_CONTEXT_MENU_CREATE_POI)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(MODIFY_POI_ITEM_ORDER)
 					.setListener(listener)
 					.createItem());
 		} else if (selectedObj instanceof OpenstreetmapPoint && ((OpenstreetmapPoint) selectedObj).getAction() != Action.DELETE) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify_osm_change, mapActivity)
-					.setId(MAP_CONTEXT_MENU_MODIFY_OSM_CHANGE)
+			        .setId(MAP_CONTEXT_MENU_CREATE_POI)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(MODIFY_OSM_CHANGE_ITEM_ORDER)
 					.setListener(listener)
@@ -287,7 +287,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		if (selectedObj instanceof OsmNotesPoint) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_modify_note, mapActivity)
-					.setId(MAP_CONTEXT_MENU_MODIFY_OSM_NOTE)
+			        .setId(MAP_CONTEXT_MENU_OPEN_OSM_NOTE)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(MODIFY_OSM_NOTE_ITEM_ORDER)
 					.setListener(listener)

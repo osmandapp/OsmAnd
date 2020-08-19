@@ -1750,7 +1750,7 @@
     <string name="rendering_attr_hideProposed_name">Proposed objects</string>
     <string name="shared_string_update">Update</string>
     <string name="shared_string_upload">Upload</string>
-    <string name="osm_edit_created_poi">Created OSM POI</string>
+    <string name="osm_edit_created_poi">Created POI</string>
     <string name="world_map_download_descr">World basemap (covering the whole world at low zoom level) missing or outdated. Please consider downloading it for a global overview.</string>
     <string name="shared_string_qr_code">QR code</string>
     <string name="map_downloaded">Map downloaded</string>
@@ -3689,7 +3689,7 @@
     <string name="map_legend">Map legend</string>
     <string name="save_poi_too_many_uppercase">The name contains too many capital letters. Continue?</string>
     <string name="save_poi_without_poi_type_message">Do you really want to save POI without type?</string>
-    <string name="poi_context_menu_modify_osm_change">Modify OSM change</string>
+    <string name="poi_context_menu_modify_osm_change">Edit POI</string>
     <string name="use_dashboard_btn">Use dashboard</string>
     <string name="use_drawer_btn">Use menu</string>
     <string name="dashboard_or_drawer_title">Dashboard or menu control</string>
