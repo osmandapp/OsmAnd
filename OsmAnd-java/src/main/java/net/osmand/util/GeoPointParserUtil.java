@@ -142,7 +142,7 @@ public class GeoPointParserUtil {
 					} else { // data in the query and/or feature strings
 						double lat = 0;
 						double lon = 0;
-						double zoom = GeoParsedPoint.NO_ZOOM;
+						float zoom = GeoParsedPoint.NO_ZOOM;
 						Map<String, String> queryMap = getQueryParameters(uri);
 						if (fragment != null) {
 							if (fragment.startsWith("map=")) {
@@ -187,7 +187,7 @@ public class GeoPointParserUtil {
 					if (vls != null && vls.length >= 2) {
 						double lat = parseSilentInt(vls[0]) / 100000.;
 						double lon = parseSilentInt(vls[1]) / 100000.;
-						double zoom = parseZoom(zm);
+						float zoom = parseZoom(zm);
 						return new GeoParsedPoint(lat, lon, zoom);
 					}
 				} else if (simpleDomains.contains(host)) {
@@ -198,11 +198,11 @@ public class GeoPointParserUtil {
 					if (params.containsKey("lat") && params.containsKey("lon")) {
 						final double lat = parseSilentDouble(params.get("lat"));
 						final double lon = parseSilentDouble(params.get("lon"));
-						double zoom = GeoParsedPoint.NO_ZOOM;
+						float zoom = GeoParsedPoint.NO_ZOOM;
 						if (params.containsKey("z")) {
-							zoom = parseZoom(params.get("z"));
+							zoom = (float) parseZoom(params.get("z"));
 						} else if (params.containsKey("zoom")) {
-							zoom = parseZoom(params.get("zoom"));
+							zoom = (float) parseZoom(params.get("zoom"));
 						}
 						return new GeoParsedPoint(lat, lon, zoom);
 					}
@@ -459,7 +459,7 @@ public class GeoPointParserUtil {
 				lon = Double.valueOf(positionMatcher.group(2));
 			}
 
-			double zoom = GeoParsedPoint.NO_ZOOM;
+			float zoom = GeoParsedPoint.NO_ZOOM;
 			String searchRequest = null;
 			for (String param : queryPart.split("&")) {
 				String paramName;
@@ -475,7 +475,7 @@ public class GeoPointParserUtil {
 
 				if ("z".equals(paramName) && paramValue != null) {
 //					zoom = Double.valueOf(paramValue).intValue();
-					zoom = Double.valueOf(paramValue);
+					zoom = Float.valueOf(paramValue);
 				} else if ("q".equals(paramName) && paramValue != null) {
 					searchRequest = URLDecoder.decode(paramValue);
 				}
@@ -541,7 +541,7 @@ public class GeoPointParserUtil {
 		if (vls.length >= 2) {
 			double lat = parseSilentDouble(vls[0], Double.NaN);
 			double lon = parseSilentDouble(vls[1], Double.NaN);
-			double zoom = GeoParsedPoint.NO_ZOOM;
+			float zoom = GeoParsedPoint.NO_ZOOM;
 			if (vls.length >= 3 || zmPart.length() > 0) {
 				if (zmPart.length() == 0) {
 					zmPart = vls[2];
@@ -567,10 +567,10 @@ public class GeoPointParserUtil {
 		return vl.split(split);
 	}
 
-	private static double parseZoom(String zoom) {
+	private static float parseZoom(String zoom) {
 		try {
 			if (zoom != null) {
-				return Double.valueOf(zoom);
+				return Float.valueOf(zoom);
 			}
 		} catch (NumberFormatException e) {
 		}
@@ -584,7 +584,7 @@ public class GeoPointParserUtil {
 	private static double parseSilentDouble(String zoom, double vl) {
 		try {
 			if (zoom != null) {
-				return Double.valueOf(zoom);
+				return Float.valueOf(zoom);
 			}
 		} catch (NumberFormatException e) {
 		}
@@ -602,11 +602,11 @@ public class GeoPointParserUtil {
 	}
 
 	public static class GeoParsedPoint {
-		public static final double NO_ZOOM = -1;
+		public static final float NO_ZOOM = -1;
 
 		private double lat = 0;
 		private double lon = 0;
-		private double zoom = NO_ZOOM;
+		private float zoom = NO_ZOOM;
 		private String label;
 		private String query;
 		private boolean geoPoint;
@@ -625,12 +625,12 @@ public class GeoPointParserUtil {
 				this.label = label.replaceAll("\\+", " ");
 		}
 
-		public GeoParsedPoint(double lat, double lon, double zoom) {
+		public GeoParsedPoint(double lat, double lon, float zoom) {
 			this(lat, lon);
 			this.zoom = zoom;
 		}
 
-		public GeoParsedPoint(double lat, double lon, double zoom, String label) {
+		public GeoParsedPoint(double lat, double lon, float zoom, String label) {
 			this(lat, lon, label);
 			this.zoom = zoom;
 		}

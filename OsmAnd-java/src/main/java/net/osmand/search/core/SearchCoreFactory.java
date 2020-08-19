@@ -1527,7 +1527,7 @@ public class SearchCoreFactory {
 				sp.location = new LatLon(pnt.getLatitude(), pnt.getLongitude());
 				sp.localeName = ((float)pnt.getLatitude()) +", " + ((float) pnt.getLongitude());
 				if (pnt.getZoom() > 0) {
-					sp.preferredZoom = pnt.getZoom();
+					sp.preferredZoom = (int) pnt.getZoom();
 				}
 				sp.objectType = ObjectType.LOCATION;
 				resultMatcher.publish(sp);

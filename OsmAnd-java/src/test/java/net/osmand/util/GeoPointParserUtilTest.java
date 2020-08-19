@@ -39,7 +39,7 @@ public class GeoPointParserUtilTest {
 		final double dlat = 34.99393, dlon = -106.61568;
 		final double longLat = 34.993933029174805, longLon = -106.615680694580078;
 		final String name = "Treasure Island";
-		double z = GeoParsedPoint.NO_ZOOM;
+		float z = GeoParsedPoint.NO_ZOOM;
 		String url;
 
 		String noQueryParameters[] = {

@@ -32,7 +32,8 @@ public class SearchResult {
 	public double priorityDistance;
 
 	public LatLon location;
-	public double preferredZoom = 15;
+	public float pZ = 15;
+	public int preferredZoom = Math.round(pZ);
 
 	public String localeName;
 	public String alternateName;
