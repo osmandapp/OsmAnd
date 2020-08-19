@@ -36,6 +36,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
+import androidhttpweb.ServerActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
@@ -1010,6 +1011,20 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 		*/
+
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.web_server, mapActivity)
+				.setId("SERVER_ID")
+				.setIcon(R.drawable.mm_shop_computer)
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+						app.logEvent("drawer_help_open");
+						Intent intent = new Intent(mapActivity, ServerActivity.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						mapActivity.startActivity(intent);
+						return true;
+					}
+				}).createItem());
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_help, mapActivity)
 				.setId(DRAWER_HELP_ID)
