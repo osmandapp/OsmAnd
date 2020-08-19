@@ -329,7 +329,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 				? editingCtx.getBeforeSelectedPointAppMode()
 				: editingCtx.getSelectedPointAppMode();
 		Drawable icon;
-		if (routeAppMode == DEFAULT_APP_MODE) {
+		if (DEFAULT_APP_MODE.equals(routeAppMode)) {
 			icon = getContentIcon(R.drawable.ic_action_split_interval);
 		} else {
 			icon = getIcon(routeAppMode.getIconRes(), routeAppMode.getIconColorInfo().getColor(nightMode));

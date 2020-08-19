@@ -66,7 +66,10 @@ public class MeasurementEditingContext {
 
 	public enum CalculationMode {
 		NEXT_SEGMENT,
-		WHOLE_TRACK
+		WHOLE_TRACK,
+		PREVIOUS_SEGMENT,
+		ALL_PREVIOUS_SEGMENTS,
+		ALL_NEXT_SEGMENTS
 	}
 
 	public static class RoadSegmentData {
@@ -532,7 +535,7 @@ public class MeasurementEditingContext {
 		}
 		params.end = end;
 		if (currentPointSnapToRoadMode == null) {
-			ApplicationMode straightLine = ApplicationMode.AIRCRAFT;
+			ApplicationMode straightLine = DEFAULT_APP_MODE;
 			RoutingHelper.applyApplicationSettings(params, application.getSettings(), straightLine);
 			params.mode = straightLine;
 		} else {
@@ -589,6 +592,11 @@ public class MeasurementEditingContext {
 				int trkptIndex = currentPair.first.getTrkPtIndex();
 				trkptIndex += pts.size() - 1;
 				currentPair.second.setTrkPtIndex(trkptIndex);
+				if (route.getAppMode().equals(DEFAULT_APP_MODE)) {
+					currentPair.second.removeProfileType();
+				} else {
+					currentPair.second.setProfileType(route.getAppMode().getStringKey());
+				}
 				updateCacheForSnapIfNeeded(true);
 				application.runInUIThread(new Runnable() {
 					@Override

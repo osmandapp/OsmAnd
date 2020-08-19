@@ -64,7 +64,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.GpxApproximationFragment.GpxApproximationFragmentListener;
 import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
-import net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsFragmentListener;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SelectedPointBottomSheetDialogFragment.SelectedPointFragmentListener;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
@@ -99,7 +98,7 @@ import static net.osmand.plus.measurementtool.MeasurementEditingContext.Calculat
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.ExportAsGpxListener;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.SnapToRoadProgressListener;
-import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.ALL_ROUTE_DIALOG_REQUEST_CODE;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.ADD_ROUTE_SEGMENT_DIALOG_REQUEST_CODE;
 import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.CALCULATION_MODE_KEY;
 import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.ROUTE_AFTER_DIALOG_REQUEST_CODE;
 import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.ROUTE_APP_MODE_KEY;
@@ -112,8 +111,8 @@ import static net.osmand.plus.measurementtool.StartPlanRouteBottomSheet.StartPla
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.*;
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.*;
 
-public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
-		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener {
+public class MeasurementToolFragment extends BaseOsmAndFragment implements OptionsFragmentListener,
+		GpxApproximationFragmentListener, SelectedPointFragmentListener {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 
@@ -361,7 +360,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			@Override
 			public void onMeasure(float distance, float bearing) {
 				String distStr = OsmAndFormatter.getFormattedDistance(distance, mapActivity.getMyApplication());
-				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, getMyApplication());
+				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, mapActivity.getMyApplication());
 				distanceToCenterTv.setText(String.format("%1$s • %2$s", distStr, azimuthStr));
 				TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
 						distanceToCenterTv, 14, 18, 2,
@@ -610,7 +609,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (editingCtx.isNewData() || editingCtx.hasRoutePoints() || editingCtx.isInSnapToRoadMode()) {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						this, editingCtx.getCalculationMode(),
-						editingCtx.getAppMode(), ALL_ROUTE_DIALOG_REQUEST_CODE);
+						editingCtx.getAppMode(), ADD_ROUTE_SEGMENT_DIALOG_REQUEST_CODE);
 			} else {
 				SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
 			}
@@ -654,7 +653,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 						break;
 				}
 				break;
-			case RouteBetweenPointsBottomSheetDialogFragment.ALL_ROUTE_DIALOG_REQUEST_CODE:
+			case RouteBetweenPointsBottomSheetDialogFragment.ADD_ROUTE_SEGMENT_DIALOG_REQUEST_CODE:
 				switch (resultCode) {
 					case RouteBetweenPointsBottomSheetDialogFragment.CLOSE_ROUTE_DIALOG_RESULT_CODE:
 						onCloseRouteDialog(snapToRoadEnable);
@@ -868,7 +867,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		editingCtx.setSelectedPointPosition(-1);
 	}
 
-	@Override
 	public void onCloseRouteDialog(boolean snapToRoadEnabled) {
 		if (!snapToRoadEnabled && !editingCtx.isInSnapToRoadMode()) {
 			toolBarController.setTitle(previousToolBarTitle);
@@ -879,7 +877,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	@Override
 	public void onChangeApplicationMode(ApplicationMode mode, CalculationMode calculationMode) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
