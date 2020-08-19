@@ -33,6 +33,8 @@ import org.apache.commons.logging.Log;
 
 import java.util.List;
 
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
+
 public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SelectedPointBottomSheetDialogFragment.class.getSimpleName();
@@ -323,12 +325,13 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Nullable
 	private Drawable getRouteTypeIcon(boolean before) {
-		Drawable icon = getContentIcon(R.drawable.ic_action_split_interval);
-		int pos = editingCtx.getSelectedPointPosition();
-		pos = before ? pos : Math.max(pos - 1, 0);
-		String profileType = editingCtx.getPoints().get(pos).getProfileType();
-		ApplicationMode routeAppMode = ApplicationMode.valueOfStringKey(profileType, null);
-		if (routeAppMode != null) {
+		ApplicationMode routeAppMode = before
+				? editingCtx.getBeforeSelectedPointAppMode()
+				: editingCtx.getSelectedPointAppMode();
+		Drawable icon;
+		if (routeAppMode == DEFAULT_APP_MODE) {
+			icon = getContentIcon(R.drawable.ic_action_split_interval);
+		} else {
 			icon = getIcon(routeAppMode.getIconRes(), routeAppMode.getIconColorInfo().getColor(nightMode));
 		}
 		return icon;
