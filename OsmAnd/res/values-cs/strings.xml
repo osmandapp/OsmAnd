@@ -3480,4 +3480,22 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="tiles_storage_descr">Zvolte způsob uložení stažených dlaždic.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Rychlé akce můžete importovat nebo exportovat prostřednictvím profilů.</string>
     <string name="shared_string_delete_all_q">Odstranit vše\?</string>
+    <string name="app_mode_go_cart">Motokára</string>
+    <string name="osm_edit_closed_note">Uzavřená OSM poznámka</string>
+    <string name="set_working_days_to_continue">Pro pokračování je potřeba nastavit pracovní dny</string>
+    <string name="route_between_points">Trasa mezi body</string>
+    <string name="plan_a_route">Naplánovat trasu</string>
+    <string name="add_to_a_track">Přidat k trase</string>
+    <string name="track_show_start_finish_icons">Zobrazit ikony startu a cíle</string>
+    <string name="select_track_width">Zvolte šířku</string>
+    <string name="gpx_split_interval_descr">Vyberte interval pro zobrazování značek na trase se vzdáleností nebo časem.</string>
+    <string name="gpx_split_interval_none_descr">Vyberte požadované dělení: podle času nebo podle vzdálenosti.</string>
+    <string name="shared_string_custom">Vlastní</string>
+    <string name="gpx_direction_arrows">Směrové šipky</string>
+    <string name="plan_route_last_edited">Naposledy upraveno</string>
+    <string name="plan_route_import_track">Importovat trasu</string>
+    <string name="plan_route_open_existing_track">Otevřít existující trasu</string>
+    <string name="plan_route_create_new_route">Vytvořit novou trasu</string>
+    <string name="plan_route_select_track_file_for_open">Vyberte trasu k otevření.</string>
+    <string name="shared_string_done">Hotovo</string>
 </resources>
