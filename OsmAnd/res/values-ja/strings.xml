@@ -88,9 +88,9 @@
     <string name="indexing_poi">POIを索引中…</string>
     <string name="indexing_transport">交通機関を索引化…</string>
     <string name="shared_string_io_error">I/Oエラーです</string>
-    <string name="km">キロメートル</string>
+    <string name="km">km</string>
     <string name="km_h">km/h</string>
-    <string name="m">メートル</string>
+    <string name="m">m</string>
     <string name="old_map_index_is_not_supported">重複したマップ
 データ形式 \'\'{0}\'\' はサポートされていません</string>
     <string name="poi_filter_car_aid">自動車用施設</string>
@@ -3765,4 +3765,13 @@ POIの更新は利用できません</string>
     <string name="rourte_between_points_add_track_desc">新しいセグメントを追加するための経路ファイルを選択します。</string>
     <string name="street_level_imagery">ストリート画像</string>
     <string name="plan_route_exit_dialog_descr">保存せずにルート計画を終了した場合すべての変更が失われます。よろしいですか？</string>
+    <string name="app_mode_enduro_motorcycle">エンデューロバイク</string>
+    <string name="app_mode_motor_scooter">電動スクーター</string>
+    <string name="app_mode_wheelchair">車椅子</string>
+    <string name="app_mode_go_cart">ゴーカート</string>
+    <string name="osm_edit_closed_note">OSMのメモを閉じました</string>
+    <string name="set_working_days_to_continue">続けるには営業日を設定する必要があります</string>
+    <string name="route_between_points">地点間のルート</string>
+    <string name="plan_a_route">ルートを計画</string>
+    <string name="add_to_a_track">経路に追加</string>
 </resources>
