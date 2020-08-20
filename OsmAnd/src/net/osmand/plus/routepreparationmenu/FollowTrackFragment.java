@@ -11,7 +11,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
+import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -193,6 +195,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				SelectTrackCard selectTrackCard = new SelectTrackCard(mapActivity);
 				selectTrackCard.setListener(this);
 				cardsContainer.addView(selectTrackCard.build(mapActivity));
+				cardsContainer.addView(buildDividerView(cardsContainer,false));
 
 				ApplicationMode mode = app.getRoutingHelper().getAppMode();
 
@@ -210,6 +213,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 					cardsContainer.addView(reverseTrackCard.build(mapActivity));
 //					}
 					if (!gpxFile.hasRtePt()) {
+						cardsContainer.addView(buildDividerView(cardsContainer,true));
+
 						AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
 						attachTrackCard.setListener(this);
 						cardsContainer.addView(attachTrackCard.build(mapActivity));
@@ -252,6 +257,19 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			navigateTrackCard.setListener(this);
 			getCardsContainer().addView(navigateTrackCard.build(mapActivity));
 		}
+	}
+
+	public View buildDividerView(@NonNull ViewGroup view, boolean needMargin) {
+		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), isNightMode());
+		View divider = themedInflater.inflate(R.layout.simple_divider_item, view, false);
+
+		LayoutParams params = divider.getLayoutParams();
+		if (needMargin && params instanceof MarginLayoutParams) {
+			AndroidUtils.setMargins((MarginLayoutParams) params, dpToPx(64), 0, 0, 0);
+			divider.setLayoutParams(params);
+		}
+
+		return divider;
 	}
 
 	@Override
@@ -511,7 +529,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 		final View scrollView = getBottomScrollView();
 		final FrameLayout bottomContainer = getBottomContainer();
-		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(new OnScrollChangedListener() {
 
 			@Override
 			public void onScrollChanged() {
