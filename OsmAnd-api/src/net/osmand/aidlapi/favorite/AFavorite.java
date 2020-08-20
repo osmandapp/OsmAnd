@@ -16,12 +16,13 @@ public class AFavorite extends AidlParams {
 	private String color;
 	private boolean visible;
 
-	public AFavorite(double lat, double lon, String name, String description,
+	public AFavorite(double lat, double lon, String name, String description, String address,
 	                 String category, String color, boolean visible) {
 		this.lat = lat;
 		this.lon = lon;
 		this.name = name;
 		this.description = description;
+		this.address = address;
 		this.category = category;
 		this.color = color;
 		this.visible = visible;
@@ -59,7 +60,7 @@ public class AFavorite extends AidlParams {
 		return description;
 	}
 
-	public String getAddress() { return description; }
+	public String getAddress() { return address; }
 
 	public String getCategory() {
 		return category;

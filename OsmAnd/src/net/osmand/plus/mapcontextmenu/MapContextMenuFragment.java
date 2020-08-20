@@ -1828,14 +1828,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					String groupName = convertDisplayNameToGroupIdName(requireContext(),
 							menu.getTypeStr());
 					if (menu.getMyApplication() != null){
-						FavouritesDbHelper helper = menu.getMyApplication().getFavorites();
-						if (helper != null && helper.getGroup(groupName) != null){
-							Drawable line2icon = helper.getColoredIconForGroup(groupName);
-							GravityDrawable line2GravityDrawable =
-									new GravityDrawable(line2icon);
-							line2.setCompoundDrawablesWithIntrinsicBounds(
-									line2GravityDrawable, null, null, null);
-						}
+
 					}
 					line2.setCompoundDrawablePadding(dpToPx(5f));
 				}

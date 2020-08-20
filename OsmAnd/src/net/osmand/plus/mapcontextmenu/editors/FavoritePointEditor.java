@@ -62,7 +62,7 @@ public class FavoritePointEditor extends PointEditor {
 
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, categoryName);
 		favorite.setDescription("");
-		favorite.setAddress(title);
+		favorite.setAddress("");
 		favorite.setOriginObjectName(originObjectName);
 
 		FavoritePointEditorFragmentNew.showAutoFillInstance(mapActivity, autoFill);

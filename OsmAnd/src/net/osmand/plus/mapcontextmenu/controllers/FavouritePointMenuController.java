@@ -11,6 +11,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
@@ -23,6 +24,7 @@ import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragmentNew;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.util.OpeningHoursParser;
+import net.osmand.view.GravityDrawable;
 
 import java.util.List;
 
@@ -158,6 +160,14 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public Drawable getSecondLineTypeIcon() {
+
+		FavouritesDbHelper helper = menu.getMyApplication().getFavorites();
+		if (helper != null && helper.getGroup(groupName) != null) {
+			Drawable line2icon = helper.getColoredIconForGroup(groupName);
+			GravityDrawable line2GravityDrawable =
+					new GravityDrawable(line2icon);
+		}
+
 		return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color_default_light : R.color.ctx_menu_bottom_view_icon_dark);
 	}
 

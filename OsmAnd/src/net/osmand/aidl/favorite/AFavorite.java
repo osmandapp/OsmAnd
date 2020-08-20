@@ -78,10 +78,10 @@ public class AFavorite implements Parcelable {
         out.writeDouble(lon);
         out.writeString(name);
         out.writeString(description);
-        out.writeString(address);
         out.writeString(category);
         out.writeString(color);
         out.writeByte((byte) (visible ? 1 : 0));
+        out.writeString(address);
     }
 
     private void readFromParcel(Parcel in) {
@@ -89,10 +89,10 @@ public class AFavorite implements Parcelable {
         lon = in.readDouble();
         name = in.readString();
         description = in.readString();
-        address = in.readString();
         category = in.readString();
         color = in.readString();
         visible = in.readByte() != 0;
+        address = in.readString();
     }
 
     @Override
