@@ -26,7 +26,7 @@ public class WikiImageHelper {
 	private static final String WIKIMEDIA_API_ENDPOINT = "https://commons.wikimedia.org/w/api.php";
 	private static final String WIKIDATA_ACTION = "?action=wbgetclaims&property=P18&entity=";
 	private static final String WIKIMEDIA_ACTION = "?action=query&list=categorymembers&cmtitle=";
-	private static final String CM_LIMIT = "&cmlimit=500";
+	private static final String CM_LIMIT = "&cmlimit=5000";
 	private static final String FORMAT_JSON = "&format=json";
 	private static final String IMAGE_BASE_URL = "https://upload.wikimedia.org/wikipedia/commons/";
 
@@ -41,8 +41,7 @@ public class WikiImageHelper {
 	                                         @NonNull List<ImageCard> imageCards) {
 		if (wikidataId.startsWith(WIKIDATA_PREFIX)) {
 			String url = WIKIDATA_API_ENDPOINT + WIKIDATA_ACTION + wikidataId + FORMAT_JSON;
-			WikidataResponse response =
-					(WikidataResponse) sendWikipediaApiRequest(url, WikidataResponse.class);
+			WikidataResponse response = sendWikipediaApiRequest(url, WikidataResponse.class);
 			if (response != null) {
 				for (P18 p18 : response.claims.p18) {
 					String imageFileName = p18.mainsnak.datavalue.value;
@@ -63,8 +62,7 @@ public class WikiImageHelper {
 			addImageCard(mapActivity, imageCards, fileName);
 		} else if (wikiMediaTagContent.startsWith(WIKIMEDIA_CATEGORY)) {
 			String url = WIKIMEDIA_API_ENDPOINT + WIKIMEDIA_ACTION + wikiMediaTagContent + CM_LIMIT + FORMAT_JSON;
-			WikimediaResponse response =
-					(WikimediaResponse) sendWikipediaApiRequest(url, WikimediaResponse.class);
+			WikimediaResponse response = sendWikipediaApiRequest(url, WikimediaResponse.class);
 			if (response != null) {
 				List<String> subCategories = new ArrayList<>();
 				for (Categorymember cm : response.query.categorymembers) {
@@ -86,7 +84,7 @@ public class WikiImageHelper {
 		}
 	}
 
-	private static Object sendWikipediaApiRequest(@NonNull String url, @NonNull Class responseClass) {
+	private static <T> T sendWikipediaApiRequest(@NonNull String url, @NonNull Class<T> responseClass) {
 		StringBuilder rawResponse = new StringBuilder();
 		String errorMessage = NetworkUtils.sendGetRequest(url, null, rawResponse);
 		if (errorMessage == null) {
@@ -176,19 +174,19 @@ public class WikiImageHelper {
 	}
 
 	// Wikimedia response classes
-	public class WikimediaResponse {
+	private static class WikimediaResponse {
 		@SerializedName("query")
 		@Expose
 		private Query query;
 	}
 
-	public class Query {
+	private static class Query {
 		@SerializedName("categorymembers")
 		@Expose
 		private List<Categorymember> categorymembers;
 	}
 
-	public class Categorymember {
+	private static class Categorymember {
 		@SerializedName("title")
 		@Expose
 		private String title;
