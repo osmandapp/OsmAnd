@@ -452,7 +452,6 @@
     <string name="auto_follow_route_navigation">Автовозврат карты только при следовании по маршруту</string>
     <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту.</string>
     <string name="auto_follow_location_enabled">Центрировать карту при использовании.</string>
-    <string name="shared_string_gpx_route">Маршрут GPX</string>
     <string name="poi_query_by_name_matches_categories">Найдено несколько связанных категорий POI.</string>
     <string name="data_to_search_poi_not_available">Загрузите данные для локального поиска POI.</string>
     <string name="poi_filter_by_name">Поиск по имени</string>
@@ -568,7 +567,6 @@
     <string name="context_menu_item_share_location">Поделиться местоположением</string>
     <string name="add_waypoint_dialog_added">Путевая точка GPX «{0}» добавлена</string>
     <string name="add_waypoint_dialog_title">Добавить путевую точку к записанному треку GPX</string>
-    <string name="context_menu_item_add_waypoint">Добавить путевую точку GPX</string>
     <string name="amenity_type_administrative">Административное</string>
     <string name="amenity_type_barrier">Препятствие</string>
     <string name="amenity_type_education">Образование</string>
@@ -668,7 +666,6 @@
     <string name="voice">Голосовые данные (запись)</string>
     <string name="no_vector_map_loaded">Векторные карты не загружены в приложение</string>
     <string name="gpx_files_not_found">Файлы GPX не найдены в папке с треками</string>
-    <string name="layer_gpx_layer">Файлы GPX…</string>
     <string name="error_reading_gpx">Не удалось прочитать данные GPX.</string>
     <string name="vector_data">Локальные векторные карты</string>
     <string name="poi_context_menu_modify">Редактировать POI</string>
@@ -1083,7 +1080,6 @@
     <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Сбросить настройки</string>
     <string name="map_widget_parking">Парковка</string>
-    <string name="map_widget_monitoring">Запись GPX</string>
     <string name="map_widget_speed">Скорость</string>
     <string name="map_widget_distance">Пункт назначения</string>
     <string name="map_widget_altitude">Высота</string>
@@ -1201,7 +1197,6 @@
     <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
     <string name="incomplete_locale">неполный</string>
     <string name="map_widget_max_speed">Ограничение скорости</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="download_select_map_types">Прочие карты</string>
     <string name="download_srtm_maps">Карты SRTM</string>
     <string name="av_settings">Настройки аудио и видео </string>
@@ -1574,7 +1569,6 @@
     <string name="record_plugin_name">Запись поездки</string>
     <string name="int_hour">час</string>
     <string name="duration">Продолжительность</string>
-    <string name="save_track_to_gpx_globally">Запись трека в файл GPX</string>
     <string name="save_track_interval_globally">Интервал записи</string>
     <string name="save_track_to_gpx_globally_descr">Ведение записи местоположений в файл GPX можно включить или выключить с помощью виджета записи GPX на карте.</string>
     <string name="record_plugin_description">Активирует функции для записи и сохранения ваших треков вручную нажатием на виджет записи GPX на карте, или также автоматически записывает все ваши маршруты навигации в файл GPX.
@@ -1708,7 +1702,6 @@
     <string name="shared_string_select_all">Выбрать все</string>
     <string name="shared_string_clear">Очистить</string>
     <string name="shared_string_save">Сохранить</string>
-    <string name="shared_string_save_as_gpx">Сохранить как новый файл GPX</string>
     <string name="shared_string_rename">Переименовать</string>
     <string name="shared_string_delete">Удалить</string>
     <string name="shared_string_delete_all">Удалить все</string>
@@ -1940,7 +1933,6 @@
     <string name="favourites">Избранные</string>
     <string name="saved_at_time">Успешно сохранён в: %1$s</string>
     <string name="poi_deleted_localy">POI будут удалены после того как вы отправите ваши изменения</string>
-    <string name="show_gpx">Показать данные GPX</string>
     <string name="poi_action_delete">удалить</string>
     <string name="recent_places">Недавние места</string>
     <string name="count_of_lines">Количество строк</string>
@@ -2274,7 +2266,6 @@
     <string name="quick_action_add_poi">Добавить POI</string>
     <string name="quick_action_map_style">Изменить стиль карты</string>
     <string name="quick_action_map_style_switch">Стиль карты изменён на «%s».</string>
-    <string name="quick_action_add_gpx">Добавить путевую точку GPX</string>
     <string name="quick_action_add_parking">Добавить место парковки</string>
     <string name="quick_action_new_action">Добавить действие</string>
     <string name="quick_action_edit_action">Редактировать действие</string>
@@ -2381,7 +2372,6 @@
     <string name="this_year">В этом году</string>
     <string name="plan_route">Планирование маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
-    <string name="marker_save_as_track">Сохранить как файл GPX</string>
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет выключена при следующем запуске приложения.</string>
     <string name="show_arrows_on_the_map">Показывать стрелки на карте</string>
@@ -2598,14 +2588,11 @@
     <string name="save_route_point">Сохранить точку маршрута</string>
     <string name="waypoint_one">Путевая точка 1</string>
     <string name="route_point_one">Точка маршрута 1</string>
-    <string name="empty_state_my_tracks">Добавить файлы GPX</string>
-    <string name="empty_state_my_tracks_desc">Импорт файлов GPX или запись треков.</string>
     <string name="empty_state_favourites">Добавить избранные</string>
     <string name="empty_state_favourites_desc">Избранное можно импортировать или создать, отмечая точки на карте.</string>
     <string name="import_track">Импортировать файл GPX</string>
     <string name="move_point">Переместить точку</string>
-    <string name="add_segment_to_the_track">Добавить в файл GPX</string>
-    <string name="osmand_plus_extended_description_part4">Используйте данные OSM и Википедии 
+    <string name="osmand_plus_extended_description_part4">Используйте данные OSM и Википедии
 \n• Высококачественная информация из лучших совместных проектов мира 
 \n• Данные OSM доступны по каждой стране или региону 
 \n• Интересные места (POI) из Википедии прекрасно подходят для осмотра достопримечательностей 
@@ -2818,7 +2805,6 @@
     <string name="shared_string_bookmark">Сохранить</string>
     <string name="off_road_render_descr">Для езды по бездорожью, основано на топографическом стиле (англ. «Topo»), можно использовать с зелёными спутниковыми снимками в качестве подложки. Уменьшенная толщина основных дорог, увеличенная толщина путей, дорожек, велосипедных и других маршрутов.</string>
     <string name="unirs_render_descr">Модификация стиля по умолчанию для увеличения контраста пешеходных и велосипедных дорог. Использует старые цвета Mapnik.</string>
-    <string name="shared_string_gpx_files">Файлы GPX</string>
     <string name="get_osmand_live">Получите OsmAnd Live, чтобы разблокировать все функции: ежедневные обновления карт с неограниченной загрузкой, все платные и бесплатные плагины, Википедия, Викигид и многое другое.</string>
     <string name="access_intermediate_arrival_time">Промежуточное время прибытия</string>
     <string name="map_widget_intermediate_time">Промежуточное время</string>

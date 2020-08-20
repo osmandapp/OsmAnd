@@ -93,7 +93,6 @@
     <string name="no_vector_map_loaded">Nenhum mapa vetorial foi carregado</string>
     <string name="gpx_option_reverse_route">Caminho reverso</string>
     <string name="gpx_files_not_found">Nenhum ficheiro GPX encontrado na pasta tracks</string>
-    <string name="layer_gpx_layer">Ficheiros GPX…</string>
     <string name="error_reading_gpx">Não foi possível ler os dados de GPX.</string>
     <string name="vector_data">Mapas vetoriais offline</string>
     <string name="transport_context_menu">Procurar transporte na paragem</string>
@@ -550,7 +549,6 @@
     <string name="animate_route">Iniciar animação</string>
     <string name="file_can_not_be_renamed">Não foi possível renomear o ficheiro.</string>
     <string name="file_with_name_already_exists">Já existe um ficheiro com esse nome.</string>
-    <string name="shared_string_gpx_route">Rota GPX</string>
     <string name="poi_query_by_name_matches_categories">Várias categorias de POI relacionadas encontradas.</string>
     <string name="data_to_search_poi_not_available">Descarregar dados offline para procurar POIs.</string>
     <string name="old_poi_file_should_be_deleted">O ficheiro POI \'%1$s\' é redundante e pode ser eliminado.</string>
@@ -567,7 +565,6 @@
     <string name="search_position_map_view">Centro do mapa atual</string>
     <string name="select_search_position">Pesquisar próximo a:</string>
     <string name="context_menu_item_search">Pesquisar nas proximidades</string>
-    <string name="shared_string_save_as_gpx">Guardar como novo ficheiro GPX</string>
     <string name="route_successfully_saved_at">Rota guardada como \'%1$s\'.</string>
     <string name="filename_input">Nome de ficheiro:</string>
     <string name="file_with_name_already_exist">Já existe um ficheiro com o mesmo nome.</string>
@@ -669,7 +666,6 @@
     <string name="context_menu_item_share_location">Partilhar localização</string>
     <string name="add_waypoint_dialog_added">Ponto de passagem GPX \'\'{0}\'\' foi adicionado</string>
     <string name="add_waypoint_dialog_title">Acrescentar ponto à trilha GPX gravada</string>
-    <string name="context_menu_item_add_waypoint">Acrescentar ponto GPX</string>
     <string name="osmand_routing_experimental">Navegação OsmAnd off-line ainda é uma função experimental e não funciona em distâncias superiores a cerca de 20 km.
 \n
 \nO serviço de navegação está temporariamente mudado para CloudMade on-line.</string>
@@ -749,7 +745,6 @@
     <string name="map_widget_compass">Bússola</string>
     <string name="map_widget_reset">Resetar para original</string>
     <string name="map_widget_parking">Estacionamento</string>
-    <string name="map_widget_monitoring">GPX registo</string>
     <string name="map_widget_speed">Velocidade</string>
     <string name="map_widget_distance">Destino</string>
     <string name="map_widget_altitude">Altitude</string>
@@ -1015,7 +1010,6 @@
     <string name="use_magnetic_sensor">Use sensor magnético</string>
     <string name="other_location">Outro</string>
     <string name="local_indexes_cat_srtm">Curvas de nível</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="osmand_play_title_30_chars">Mapas OsmAnd &amp; Navegação</string>
     <string name="osmand_plus_play_title_30_chars">Mapas OsmAnd+ &amp; Navegação</string>
     <string name="shared_string_downloading">A descarregar…</string>
@@ -1260,7 +1254,6 @@
     <string name="save_global_track_interval_descr">Escolher o intervalo de registo para a gravação do trajeto geral (ativado através do widget de gravação GPX no mapa).</string>
     <string name="save_global_track_interval">Intervalo de log geral</string>
     <string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
-    <string name="save_track_to_gpx_globally">Guardar trilho para um ficheiro GPX</string>
     <string name="save_track_to_gpx_globally_descr">O registo da posição geral para um ficheiro GPX pode ser ativado ou desativado usando o widget de gravação GPX no ecrã do mapa.</string>
     <string name="save_track_interval_globally">Intervalo de log</string>
     <string name="rendering_attr_publicTransportMode_name">Rotas de autocarros e tróleibus</string>
@@ -1834,7 +1827,6 @@
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Introdução de coordenada</string>
     <string name="marker_save_as_track_descr">Exporte os seus marcadores para um ficheiro que pode especificar aqui:</string>
-    <string name="marker_save_as_track">Guardar como ficheiro GPX</string>
     <string name="move_to_history">Mover para histórico</string>
     <string name="group_will_be_removed_after_restart">O grupo terá desaparecido na próxima vez que iniciar a aplicação.</string>
     <string name="show_guide_line">Mostrar linhas direcionais</string>
@@ -2470,8 +2462,7 @@
     <string name="lang_kab">Cabila</string>
     <string name="lang_ber">Berberes</string>
     <string name="disable_recording_once_app_killed">Impedir o registo autónomo</string>
-    <string name="shared_string_gpx_files">Ficheiros GPX</string>
-    <string name="plugin_nautical_descr">Este suplemento enriquece o mapa do OsmAnd para também produzir mapas náuticos para passeios de barco, vela e outros tipos de desportos aquáticos. 
+    <string name="plugin_nautical_descr">Este suplemento enriquece o mapa do OsmAnd para também produzir mapas náuticos para passeios de barco, vela e outros tipos de desportos aquáticos.
 \n 
 \nUm suplemento de mapa especial para OsmAnd fornecerá todas as marcas de navegação náutica e símbolos cartográficos, para o interior assim como para navegação próxima à costa. A descrição de cada marca de navegação fornece os detalhes necessários para identificá-las e o seu significado (categoria, forma, cor, sequência, referência, etc.). 
 \n 
@@ -2740,7 +2731,6 @@
     <string name="favourites">Favoritos</string>
     <string name="saved_at_time">Guardado em: %1$s</string>
     <string name="poi_deleted_localy">O POI será eliminado quando enviar as suas alterações</string>
-    <string name="show_gpx">Mostrar dados do GPX</string>
     <string name="count_of_lines">Contagem de linhas</string>
     <string name="are_you_sure">Tem a certeza\?</string>
     <string name="unsaved_changes_will_be_lost">Quaisquer alterações por guardar serão perdidas. Continuar\?</string>
@@ -2765,7 +2755,6 @@
     <string name="quick_action_navigation_voice">Ligar/desligar voz</string>
     <string name="quick_action_navigation_voice_off">Voz Desmuda</string>
     <string name="quick_action_navigation_voice_on">Voz muda</string>
-    <string name="quick_action_add_gpx">Adicionar ponto de rota GPX</string>
     <string name="quick_action_add_parking">Marcar estacionamento</string>
     <string name="quick_action_new_action">Adicionar ação</string>
     <string name="quick_action_edit_action">Editar ação</string>
@@ -2836,14 +2825,11 @@
     <string name="save_route_point">Gravar ponto de rota</string>
     <string name="waypoint_one">Ponto de Passagem 1</string>
     <string name="route_point_one">Ponto de Rota 1</string>
-    <string name="empty_state_my_tracks">Adicione ficheiros GPX</string>
-    <string name="empty_state_my_tracks_desc">Importe ficheiros GPX ou grave trilhas.</string>
     <string name="empty_state_favourites">Adicione Favoritos</string>
     <string name="empty_state_favourites_desc">Importe Favoritos ou adicione-os marcando pontos do mapa.</string>
     <string name="import_track">Importar ficheiro GPX</string>
     <string name="import_track_desc">Ficheiro %1$s não possui pontos de rota, importe-o como uma trilha\?</string>
     <string name="move_point">Mover Ponto</string>
-    <string name="add_segment_to_the_track">Adicionar a um ficheiro GPX</string>
     <string name="osm_recipients_label">Destinatários OSM</string>
     <string name="total_donations">Total de doações</string>
     <string name="day_off_label">desligado</string>

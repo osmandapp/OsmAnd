@@ -215,7 +215,6 @@
     <string name="shared_string_clear">Hreinsa</string>
     <string name="shared_string_clear_all">Hreinsa allt</string>
     <string name="shared_string_save">Vista</string>
-    <string name="shared_string_save_as_gpx">Vista sem nýjan GPX-feril</string>
     <string name="shared_string_rename">Endurnefna</string>
     <string name="shared_string_delete">Eyða</string>
     <string name="shared_string_delete_all">Eyða öllum</string>
@@ -565,7 +564,6 @@
     <string name="mile">mi</string>
     <string name="add_waypoint_dialog_added">GPX-ferilpunkti \'\'{0}\'\' var bætt við</string>
     <string name="add_waypoint_dialog_title">Bæta ferilpunkti við GPX-feril</string>
-    <string name="context_menu_item_add_waypoint">Bæta við GPX-ferilpunkti</string>
     <string name="amenity_type_administrative">Stjórnsýsla</string>
     <string name="amenity_type_education">Menntun</string>
     <string name="amenity_type_emergency">Neyðartilfelli</string>
@@ -853,7 +851,6 @@
     <string name="print_route">Prenta leið</string>
     <string name="traffic_warning_payment">Tollverðir</string>
     <string name="traffic_warning_speed_camera">Hraðamyndavél</string>
-    <string name="save_track_to_gpx_globally">Skrifa feril í GPX-skrá</string>
     <string name="save_current_track">Vista núverandi feril</string>
     <string name="gpx_info_subtracks">Undirferlar: %1$s</string>
     <string name="gpx_selection_track">%1$s
@@ -894,7 +891,6 @@
     <string name="user_password">OSM-lykilorðið þitt</string>
     <string name="use_transparent_map_theme">Gegnsætt þema</string>
     <string name="pref_overlay">Yfirlag / Undirlag</string>
-    <string name="shared_string_gpx_route">GPX-leið</string>
     <string name="file_with_name_already_exist">Skrá með sama heiti er þegar til.</string>
     <string name="local_index_mi_upload_gpx">Senda til OSM</string>
     <string name="basemap_missing">Sæktu grunnkort af heiminum til að fá hnattræna yfirsýn á alla jörðina í minni aðdrætti.</string>
@@ -943,7 +939,6 @@
     <string name="context_menu_item_search_transport">Leita að almenningssamgöngum</string>
     <string name="voices">Talskilaboð</string>
     <string name="gpx_files_not_found">Engar GPX-skrár fundust í ferlamöppunni</string>
-    <string name="layer_gpx_layer">GPX-skrár…</string>
     <string name="rotate_map_compass_opt">Eftir áttavita</string>
     <string name="rotate_map_bearing_opt">Eftir átt hreyfingar</string>
     <string name="rotate_map_none_opt">Enginn snúningur (norður er alltaf upp)</string>
@@ -1022,7 +1017,6 @@
     <string name="contact_info">Upplýsingar um tengilið</string>
     <string name="recent_places">Nýlegir staðir</string>
     <string name="saved_at_time">Núna vistað í: %1$s</string>
-    <string name="show_gpx">Birta GPX-gögn</string>
     <string name="unsaved_changes_will_be_lost">Allar óvistaðar breytingar munu tapast. Halda áfram?</string>
     <string name="downloading_number_of_files">Sæki - %1$d skrá</string>
     <string name="get_full_version">Full útgáfa</string>
@@ -1114,7 +1108,6 @@
     <string name="download_srtm_maps">Hæðarlínur</string>
     <string name="download_regular_maps">Staðlað kort</string>
     <string name="download_roads_only_maps">Kort einungis með vegum</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Engar byggingar fundust.</string>
     <string name="rendering_attr_showRoadMaps_name">Kort einungis með vegum</string>
     <string name="safe_mode">Öryggishamur</string>
@@ -1147,7 +1140,6 @@
     <string name="map_widget_top_text">Götuheiti</string>
     <string name="map_widget_config">Stilla skjá</string>
     <string name="map_widget_back_to_loc">Hvar er ég</string>
-    <string name="map_widget_monitoring">GPX-skráning</string>
     <string name="map_widget_time">Tími til stefnu</string>
     <string name="map_widget_next_turn">Næsta beygja</string>
     <string name="map_widget_next_turn_small">Næsta beygja (lítil)</string>
@@ -1808,7 +1800,6 @@
     <string name="quick_action_navigation_voice">Tal af/á</string>
     <string name="quick_action_navigation_voice_off">Kveikja á tali</string>
     <string name="quick_action_navigation_voice_on">Þagga niður í tali</string>
-    <string name="quick_action_add_gpx">Bæta við GPX-ferilpunkti</string>
     <string name="quick_action_add_parking">Bæta við bílastæði</string>
     <string name="quick_action_new_action">Bæta við aðgerð</string>
     <string name="quick_action_edit_action">Breyta aðgerð</string>
@@ -1957,7 +1948,6 @@
     <string name="navigate_point_olc_info_area">Gildur fullur OLC
 \nStendur fyrir svæði: %1$s x %2$s</string>
     <string name="map_widget_appearance_rem">Atriði eftir</string>
-    <string name="save_track_to_gpx">Skrifa feril sjálfkrafa í GPX-skrá á meðan leiðsögn stendur</string>
     <string name="save_track_to_gpx_descrp">GPX-ferlar verða sjálfvirkt vistaðir í ferlamöppu á meðan leiðsögn stendur.</string>
     <string name="save_track_interval">Millibil skráninga á meðan leiðsögn stendur</string>
     <string name="voice_provider_descr">Veldu raddleiðsögn fyrir leiðsögukerfið.</string>
@@ -2243,7 +2233,6 @@
     <string name="plan_route">Skipuleggja leið</string>
     <string name="coordinate_input">Innsett hnit</string>
     <string name="marker_save_as_track_descr">Flyttu kortamerkin þín út í eftirfarandi GPX-skrá:</string>
-    <string name="marker_save_as_track">Vista sem GPX-skrá</string>
     <string name="move_to_history">Flytja í aðgerðaferil</string>
     <string name="group_will_be_removed_after_restart">Hópurinn verður horfinn eftir að forritið hefur verið endurræst.</string>
     <string name="show_guide_line">Birta stefnulínur</string>
@@ -2299,9 +2288,7 @@
     <string name="save_route_point">Vista leiðarpunkt</string>
     <string name="waypoint_one">Ferilpunktur 1</string>
     <string name="route_point_one">Leiðarpunktur 1</string>
-    <string name="empty_state_my_tracks">Bæta við GPX-skrám</string>
     <string name="import_track">Flytja inn GPX-feril</string>
-    <string name="add_segment_to_the_track">Bæta við GPX-feril</string>
     <string name="add_favourites_group_to_markers_descr">Veldu flokk eftirlæta sem bæta skal kortamerkjum í.</string>
     <string name="mark_passed">Merkja sem liðinn</string>
     <string name="make_round_trip_descr">Bæta við afriti af upphafspunkti til að nota sem áfangastað.</string>
@@ -2326,7 +2313,6 @@
     <string name="quick_action_fav_name_descr">Skildu þetta eftir autt til að nota heimilisfangið eða staðarheiti.</string>
     <string name="quick_action_sh_poi_descr">Þú getur bætt við einum eða fleiri flokkum merkisstaða til að birta á kortinu.</string>
     <string name="quick_action_page_list_descr">Hnappur til að fletta í gegnum listann hér fyrir neðan.</string>
-    <string name="empty_state_my_tracks_desc">Flytja inn GPX-skrár eða skrá ferla.</string>
     <string name="download_using_mobile_internet">Í augnablikinu er þráðlaust Wi-Fi net ekki tengt. Viltu nota núverandi internettengingu undir niðurhal?</string>
     <string name="srtm_paid_version_msg">Íhugaðu að kaupa viðbótina fyrir hæðarlínur á markaðnum til að styðja við áframhaldandi þróun forritsins.</string>
     <string name="recording_is_recorded">Verið er að taka upp hjóð/myndskeið. Til að stöðva það, ýttu á hljóð/mynd-viðmótshlutann.</string>
@@ -2796,7 +2782,6 @@
     <string name="access_intermediate_arrival_time">Milli-komutími</string>
     <string name="map_widget_intermediate_time">Millitími</string>
     <string name="unirs_render_descr">Aðlögun á sjálfgefna stílnum til að auka birtuskil leiða fyrir fótgangandi og hjólreiðafólk. Notar eldri liti úr Mapnik.</string>
-    <string name="shared_string_gpx_files">GPX-skrár</string>
     <string name="get_osmand_live">Náðu í OsmAnd Live til að aflæsa öllum eiginleikum: Fáðu ótakmörkuð niðurhöl korta og daglegar kortauppfærslur, allar greiddar og ókeypis viðbætur, Wikipedia, Wikivoyage og margt fleira.</string>
     <string name="error_notification_desc">Sendu skjámynd af þessari tilkynningu til support@osmand.net</string>
     <string name="quick_action_edit_actions">Breyta aðgerðum</string>

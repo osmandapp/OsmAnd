@@ -24,11 +24,9 @@
     <string name="save_global_track_interval">Intre de rexistro xeral</string>
     <string name="background_service_int">Intre de activación do GPS</string>
     <string name="enable_sleep_mode">Activar o modo de segundo plano do GPS</string>
-    <string name="save_track_to_gpx_globally">Rexistrar a pista nun ficheiro GPX</string>
     <string name="save_track_to_gpx_globally_descr">Rexistra a posición nun ficheiro GPX, e podes activalo ou desactivalo empregando o trebello de gravación GPX no mapa.</string>
     <string name="save_current_track_descr">Garda a pista actual coma ficheiro GPX agora.</string>
     <string name="save_current_track">Gardar a pista actual</string>
-    <string name="save_track_to_gpx">Rexistrar a pista de xeito automático durante a navegación</string>
     <string name="save_track_to_gpx_descrp">Unha pista do GPX gárdarase de xeito automático no cartafol das pistas durante a navegación.</string>
     <string name="save_track_interval_globally">Intre de rexistro</string>
     <string name="save_track_interval">Intre de rexistro durante a navegación</string>
@@ -446,7 +444,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Fronteiras</string>
     <string name="rendering_attr_noAdminboundaries_description">Agochar fronteiras rexionais (niveis administrativos do 5 ó 9).</string>
     <string name="map_widget_max_speed">Límite da velocidade</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Non se atopou ningún edificio.</string>
     <string name="incremental_search_city">Procurar cidades a incrementos</string>
     <string name="search_villages_and_postcodes">Procurar máis vilas/códigos postais</string>
@@ -578,7 +575,6 @@
     <string name="map_widget_compass">Compás</string>
     <string name="map_widget_reset">Restaurar valores predeterminado</string>
     <string name="map_widget_parking">Aparcamento</string>
-    <string name="map_widget_monitoring">Rexistro de GPX</string>
     <string name="map_widget_speed">Velocidade</string>
     <string name="map_widget_distance">Destino</string>
     <string name="map_widget_altitude">Altitude</string>
@@ -838,7 +834,6 @@
     <string name="animate_route">Iniciar a simulación</string>
     <string name="file_can_not_be_renamed">Non foi posíbel renomear o ficheiro.</string>
     <string name="file_with_name_already_exists">Xa existe un ficheiro con ese nome.</string>
-    <string name="shared_string_gpx_route">Itinerario de GPX</string>
     <string name="poi_query_by_name_matches_categories">Atopadas varias categorías de PDI relacionadas.</string>
     <string name="data_to_search_poi_not_available">Baixar datos sen conexión para procurar PDI.</string>
     <string name="poi_filter_by_name">Procurar polo nome</string>
@@ -856,7 +851,6 @@
     <string name="search_position_map_view">Centro do mapa actual</string>
     <string name="select_search_position">Orixe:</string>
     <string name="context_menu_item_search">Procurar preto daquí</string>
-    <string name="shared_string_save_as_gpx">Gardar coma novo ficheiro GPX</string>
     <string name="route_successfully_saved_at">A rota foi gardada coma \"%1$s\".</string>
     <string name="filename_input">Nome do ficheiro:</string>
     <string name="file_with_name_already_exist">Xa existe un ficheiro co mesmo nome.</string>
@@ -962,7 +956,6 @@
     <string name="context_menu_item_share_location">Compartir a localización</string>
     <string name="add_waypoint_dialog_added">Punto de pasaxe GPX \"{0}\" engadido</string>
     <string name="add_waypoint_dialog_title">Engadir punto de pasaxe á pista GPX gravada</string>
-    <string name="context_menu_item_add_waypoint">Engadir punto de pasaxe do GPX</string>
     <string name="amenity_type_administrative">Administración</string>
     <string name="amenity_type_barrier">Barreira</string>
     <string name="amenity_type_education">Educación</string>
@@ -1051,7 +1044,6 @@
     <string name="voice">Voz gravada</string>
     <string name="no_vector_map_loaded">Os mapas vectoriais non están cargados</string>
     <string name="gpx_files_not_found">Non foi posíbel atopar ficheiros GPX no cartafol de pistas</string>
-    <string name="layer_gpx_layer">Ficheiros GPX…</string>
     <string name="error_reading_gpx">Non foi posíbel ler os datos do GPX.</string>
     <string name="vector_data">Mapas vectoriais sen conexión</string>
     <string name="transport_context_menu">Procurar transporte na paraxe</string>
@@ -1681,7 +1673,6 @@ Lon %2$s</string>
     <string name="commit_poi">Enviar o PDI</string>
     <string name="saved_at_time">Gardado agora coma: %1$s</string>
     <string name="poi_deleted_localy">O punto de interese (PDI) será eliminado unha vez enviadas as modificacións</string>
-    <string name="show_gpx">Amosar datos GPX</string>
     <string name="count_of_lines">Número de liñas</string>
     <string name="are_you_sure">Tes a certeza de querer facelo\?</string>
     <string name="unsaved_changes_will_be_lost">Vanse perder as modificacións non gardadas. Proseguer\?</string>
@@ -2469,7 +2460,6 @@ Lon %2$s</string>
     <string name="add_group_descr">Importar grupos dende os Favoritos ou puntos de pasaxe do GPX.</string>
     <string name="empty_state_markers_groups_desc">Importar grupos dos Favoritos ou puntos de pasaxe, coma marcaxes.</string>
     <string name="import_gpx_file_description">poden importarse coma Favoritos ou coma un ficheiro GPX.</string>
-    <string name="marker_save_as_track">Gardar coma ficheiro GPX</string>
     <string name="passed">Derradeiro uso: %1$s</string>
     <string name="measurement_tool_action_bar">Procurar no mapa e engadir puntos</string>
     <string name="display_zoom_level">Nivel do achegamento da pantalla: %1$s</string>
@@ -2479,7 +2469,6 @@ Lon %2$s</string>
     <string name="access_intermediate_arrival_time">Hora da chegada intermedia</string>
     <string name="map_widget_intermediate_time">Tempo intermedio</string>
     <string name="add_waypoint">Engadir punto de pasaxe</string>
-    <string name="empty_state_my_tracks_desc">Importa ficheiros do GPX ou grava pistas.</string>
     <string name="empty_state_favourites_desc">Importar Favoritos ou engadir mediante puntos de marcaxe no mapa.</string>
     <string name="import_track">Importar ficheiro GPX</string>
     <string name="import_track_desc">O ficheiro %1$s non contén puntos de pasaxe, queres importalo coma unha pista\?</string>
@@ -2654,8 +2643,7 @@ Lon %2$s</string>
     <string name="rendering_value_black_name">Negro</string>
     <string name="lang_lo">Laosiano</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Cor por símbolo do sendeirismo OSMC</string>
-    <string name="shared_string_gpx_files">Ficheiros GPX</string>
-    <string name="plugin_ski_descr">Este plugin para o OsmAnd pon ó teu acade detalles sobre pistas do esquí de baixada, de travesía, roteiros do esquí alpino, teleféricos e refachos a nivel mundial. As rotas e pistas amósanse polo código de cor en función da súa dificuldade e representados cun estilo do mapa especial \"Inverno\" que o asemella a unha paisaxe invernal nevada. 
+    <string name="plugin_ski_descr">Este plugin para o OsmAnd pon ó teu acade detalles sobre pistas do esquí de baixada, de travesía, roteiros do esquí alpino, teleféricos e refachos a nivel mundial. As rotas e pistas amósanse polo código de cor en función da súa dificuldade e representados cun estilo do mapa especial \"Inverno\" que o asemella a unha paisaxe invernal nevada.
 \n 
 \nActivando esta vista, muda o estilo do mapa a «Inverno e esquí», amosando as características do terreo en condicións invernais. Esta vista pódese revertir desactivando de novo eiquí ou mudando o \"Estilo do mapa\" en \"Configurar mapa\" cando o desexes.</string>
     <string name="navigate_point_olc">Código de Localización Aberto (OLC)</string>
@@ -2696,7 +2684,6 @@ Lon %2$s</string>
     <string name="quick_action_navigation_voice">Activar ou desactivar voz</string>
     <string name="quick_action_navigation_voice_off">Activar a voz</string>
     <string name="quick_action_navigation_voice_on">Desactivar a voz</string>
-    <string name="quick_action_add_gpx">Engadir punto de pasaxe GPX</string>
     <string name="quick_favorites_name_preset">Nome predefinido</string>
     <string name="quick_action_add_gpx_descr">Un botón que engade un punto de pasaxe GPX no centro da pantalla.</string>
     <string name="quick_action_interim_dialog">Amosar un diálogo temporal</string>
@@ -2716,10 +2703,8 @@ Lon %2$s</string>
     <string name="save_route_point">Gardar punto de ruta</string>
     <string name="waypoint_one">Punto de pasaxe 1</string>
     <string name="route_point_one">Punto da rota 1</string>
-    <string name="empty_state_my_tracks">Engadir ficheiros GPX</string>
     <string name="empty_state_favourites">Engadir ós Favoritos</string>
     <string name="move_point">Desprazar punto</string>
-    <string name="add_segment_to_the_track">Engadir cara un ficheiro GPX</string>
     <string name="osm_recipients_label">Destinatarios do OSM</string>
     <string name="total_donations">Total das doazóns</string>
     <string name="day_off_label">pechado</string>
