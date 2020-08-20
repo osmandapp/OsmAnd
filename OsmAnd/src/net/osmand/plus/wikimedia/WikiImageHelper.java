@@ -26,7 +26,7 @@ public class WikiImageHelper {
 	private static final String WIKIMEDIA_API_ENDPOINT = "https://commons.wikimedia.org/w/api.php";
 	private static final String WIKIDATA_ACTION = "?action=wbgetclaims&property=P18&entity=";
 	private static final String WIKIMEDIA_ACTION = "?action=query&list=categorymembers&cmtitle=";
-	private static final String CM_LIMIT = "&cmlimit=5000";
+	private static final String CM_LIMIT = "&cmlimit=500";
 	private static final String FORMAT_JSON = "&format=json";
 	private static final String IMAGE_BASE_URL = "https://upload.wikimedia.org/wikipedia/commons/";
 
