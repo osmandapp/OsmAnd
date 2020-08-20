@@ -15,7 +15,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.util.Algorithms;
-import net.osmand.view.GravityDrawable;
 
 import java.util.List;
 
@@ -94,16 +93,8 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			}
 			line2.setText(line2Str);
 			Drawable slIcon = item.getTypeIcon();
-			if (slIcon != null) {
-				if (item.getTypeIcon() instanceof GravityDrawable) {
-					GravityDrawable line2Icon = (GravityDrawable) item.getTypeIcon();
-					line2Icon.setBoundsFrom(slIcon);
-					line2.setCompoundDrawablesWithIntrinsicBounds(line2Icon, null, null, null);
-				} else {
-					line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
-				}
-				line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(menu.getMapActivity(), 5f));
-			}
+			line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
+			line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(menu.getMapActivity(), 5f));
 			// Divider
 			View divider = convertView.findViewById(R.id.divider);
 			divider.setBackgroundColor(ContextCompat.getColor(getContext(), menu.isLight() ? R.color.multi_selection_menu_divider_light : R.color.multi_selection_menu_divider_dark));

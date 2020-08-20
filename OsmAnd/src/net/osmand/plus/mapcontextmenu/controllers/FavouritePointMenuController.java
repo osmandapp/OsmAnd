@@ -161,20 +161,22 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public Drawable getSecondLineTypeIcon() {
-		if (this.getMapActivity() != null) {
-			OsmandApplication app = this.getMapActivity().getMyApplication();
-			if (app != null) {
-				FavouritesDbHelper helper = app.getFavorites();
-				String group = fav.getCategory();
-				if (helper != null && helper.getGroup(group) != null) {
-					Drawable line2icon = helper.getColoredIconForGroup(group);
-					GravityDrawable gravityIcon = new GravityDrawable(line2icon);
-					gravityIcon.setBoundsFrom(line2icon);
-					return gravityIcon;
-				}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			FavouritesDbHelper helper = app.getFavorites();
+			String group = fav.getCategory();
+			if (helper.getGroup(group) != null) {
+				Drawable line2icon = helper.getColoredIconForGroup(group);
+				GravityDrawable gravityIcon = new GravityDrawable(line2icon);
+				gravityIcon.setBoundsFrom(line2icon);
+				return gravityIcon;
+			} else {
+				int colorId = isLight() ? R.color.icon_color_default_light : R.color.ctx_menu_bottom_view_icon_dark;
+				return getIcon(R.drawable.ic_action_group_name_16, colorId);
 			}
 		}
-		return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color_default_light : R.color.ctx_menu_bottom_view_icon_dark);
+		return null;
 	}
 
 	@Override

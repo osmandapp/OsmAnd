@@ -2,59 +2,80 @@ package net.osmand.view;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
-import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 
 public class GravityDrawable extends Drawable {
 
-    // inner Drawable
-    private final Drawable mDrawable;
+	// inner Drawable
+	private final Drawable original;
 
-    public GravityDrawable(Drawable drawable) {
-        mDrawable = drawable;
-    }
+	public GravityDrawable(@NonNull Drawable drawable) {
+		this.original = drawable;
+	}
 
-    @Override
-    public int getIntrinsicWidth() {
-        if (mDrawable != null)  return mDrawable.getIntrinsicWidth(); else return 0;
-    }
+	@Override
+	public int getMinimumHeight() {
+		return original.getMinimumHeight();
+	}
 
-    @Override
-    public int getIntrinsicHeight() {
-        if (mDrawable != null) return mDrawable.getIntrinsicHeight(); else return 0;
-    }
+	@Override
+	public int getMinimumWidth() {
+		return original.getMinimumWidth();
+	}
 
-    @Override
-    public void draw(Canvas canvas) {
-        int halfCanvas= canvas.getHeight() / 2;
-        int halfDrawable = mDrawable.getIntrinsicHeight() / 2;
+	@Override
+	public int getIntrinsicHeight() {
+		return original.getIntrinsicHeight();
+	}
 
-        // align to top
-        canvas.save();
-        canvas.translate(0, -halfCanvas + halfDrawable);
-        mDrawable.draw(canvas);
-        canvas.restore();
-    }
+	@Override
+	public int getIntrinsicWidth() {
+		return original.getIntrinsicWidth();
+	}
 
-    @Override
-    public void setAlpha(int i) {
-        if (mDrawable != null) mDrawable.setAlpha(i);
-    }
+	@Override
+	public void setChangingConfigurations(int configs) {
+		super.setChangingConfigurations(configs);
+		original.setChangingConfigurations(configs);
+	}
 
-    @Override
-    public void setColorFilter(@Nullable ColorFilter colorFilter) {
-        if (mDrawable != null) mDrawable.setColorFilter(colorFilter);
-    }
+	@Override
+	public void setBounds(int left, int top, int right, int bottom) {
+		super.setBounds(left, top, right, bottom);
+		original.setBounds(left, top, right, bottom);
+	}
 
-    @Override
-    public int getOpacity() {
-        if (mDrawable != null) return mDrawable.getOpacity(); else return PixelFormat.UNKNOWN;
-    }
+	@Override
+	public void setAlpha(int alpha) {
+		original.setAlpha(alpha);
+	}
 
-    public void setBoundsFrom(Drawable line2Icon) {
-        line2Icon.setBounds(0, 0, line2Icon.getIntrinsicWidth(), line2Icon.getIntrinsicHeight());
-        this.setBounds(0, 0, line2Icon.getIntrinsicWidth(), line2Icon.getIntrinsicHeight());
-    }
+	@Override
+	public void setColorFilter(ColorFilter cf) {
+		original.setColorFilter(cf);
+	}
+
+	@Override
+	public int getOpacity() {
+		return original.getOpacity();
+	}
+
+	@Override
+	public void draw(Canvas canvas) {
+		int halfCanvas = canvas.getHeight() / 2;
+		int halfDrawable = original.getIntrinsicHeight() / 2;
+
+		// align to top
+		canvas.save();
+		canvas.translate(0, -halfCanvas + halfDrawable);
+		original.draw(canvas);
+		canvas.restore();
+	}
+
+	public void setBoundsFrom(Drawable line2Icon) {
+		line2Icon.setBounds(0, 0, line2Icon.getIntrinsicWidth(), line2Icon.getIntrinsicHeight());
+		this.setBounds(0, 0, line2Icon.getIntrinsicWidth(), line2Icon.getIntrinsicHeight());
+	}
 }

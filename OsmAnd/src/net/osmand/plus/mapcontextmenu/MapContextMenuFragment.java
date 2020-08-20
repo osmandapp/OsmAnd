@@ -83,7 +83,6 @@ import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
-import net.osmand.view.GravityDrawable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -1817,16 +1816,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				if (!Algorithms.isEmpty(typeStr)) {
 					line2Str.append(typeStr);
 					Drawable icon = menu.getTypeIcon();
-					if (icon != null) {
-						if (menu.getTypeIcon() instanceof GravityDrawable) {
-							GravityDrawable line2Icon = (GravityDrawable) menu.getTypeIcon();
-							line2Icon.setBoundsFrom(icon);
-							line2.setCompoundDrawablesWithIntrinsicBounds(line2Icon, null, null, null);
-						} else {
-							line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-						}
-						line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(requireContext(), 5f));
-					}
+					AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
+							line2, icon, null, null, null);
 					line2.setCompoundDrawablePadding(dpToPx(5f));
 				}
 				if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {

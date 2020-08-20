@@ -130,10 +130,8 @@ public class FavouritesDbHelper {
 	}
 
 	public Drawable getColoredIconForGroup(String groupName) {
-		FavouritesDbHelper.FavoriteGroup favoriteGroup = getGroup(
-				FavouritesDbHelper.FavoriteGroup.
-						convertDisplayNameToGroupIdName(
-								context, groupName));
+		String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(context, groupName);
+		FavoriteGroup favoriteGroup = getGroup(groupIdName);
 		if (favoriteGroup != null) {
 			int color = favoriteGroup.getColor() == 0 ?
 					context.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
