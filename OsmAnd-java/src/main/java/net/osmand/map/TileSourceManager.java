@@ -68,6 +68,7 @@ public class TileSourceManager {
 		private String[] randomsArray;
 		private String rule;
 		private String referer;
+		private String userAgent;
 		private boolean hidden; // if hidden in configure map settings, for example mapillary sources
 
 		private boolean isRuleAcceptable = true;
@@ -259,6 +260,14 @@ public class TileSourceManager {
 
 		public void setReferer(String referer) {
 			this.referer = referer;
+		}
+
+		public String getUserAgent() {
+			return userAgent;
+		}
+
+		public void setUserAgent(String userAgent) {
+			this.userAgent = userAgent;
 		}
 
 		@Override
@@ -484,6 +493,9 @@ public class TileSourceManager {
 		if (!Algorithms.isEmpty(tm.getReferer())) {
 			properties.put("referer", tm.getReferer());
 		}
+		if (!Algorithms.isEmpty(tm.getUserAgent())) {
+			properties.put("user_agent", tm.getUserAgent());
+		}
 
 		properties.put("ext", tm.getTileFormat());
 		properties.put("min_zoom", tm.getMinimumZoomSupported() + "");
@@ -708,6 +720,12 @@ public class TileSourceManager {
 		}
 		String randoms = attributes.get("randoms");
 		TileSourceTemplate templ = new TileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
+		if (attributes.get("referer") != null) {
+			templ.setReferer(attributes.get("referer"));
+		}
+		if (attributes.get("user_agent") != null) {
+			templ.setUserAgent(attributes.get("user_agent"));
+		}
 		if(expirationTime >= 0) {
 			templ.setExpirationTimeMinutes(expirationTime);
 		}

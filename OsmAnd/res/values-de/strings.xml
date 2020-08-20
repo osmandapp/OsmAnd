@@ -39,12 +39,10 @@
     <string name="background_router_service">OsmAnd im Hintergrund ausführen</string>
     <string name="background_service_int_descr">GPS Aufwach-Intervall für den Hintergrunddienst:</string>
     <string name="background_service_int">GPS-Aufwachintervall</string>
-    <string name="save_track_to_gpx_globally">Aufzeichnung in GPX-Datei</string>
     <string name="save_track_to_gpx_globally_headline">GPX-Aufzeichnung bei Bedarf</string>
     <string name="save_track_to_gpx_globally_descr">Generelle Positionserfassung kann mit der Schaltfläche \'GPX\' direkt auf dem Kartenbildschirm aktiviert oder deaktiviert werden.</string>
     <string name="save_current_track">Aktuellen Track speichern</string>
     <string name="save_current_track_descr">Aktuellen Track jetzt als GPX-Datei speichern.</string>
-    <string name="save_track_to_gpx">Während der Navigation automatisch Track aufzeichnen</string>
     <string name="save_track_to_gpx_descrp">Während der Navigation wird automatisch ein GPX-Track im Track-Ordner gespeichert.</string>
     <string name="save_track_interval_globally">Aufzeichnungsintervall</string>
     <string name="save_track_interval">Erfassungsintervall während der Navigation</string>
@@ -363,7 +361,6 @@
     <string name="search_position_map_view">Aktueller Kartenmittelpunkt</string>
     <string name="select_search_position">Ausgangspunkt:</string>
     <string name="context_menu_item_search">In der Nähe suchen</string>
-    <string name="shared_string_save_as_gpx">Als neue GPX-Datei speichern</string>
     <string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
     <string name="filename_input">Dateiname:</string>
     <string name="file_with_name_already_exist">Datei mit gleichem Namen besteht bereits.</string>
@@ -471,7 +468,6 @@
     <string name="context_menu_item_share_location">Standort mitteilen</string>
     <string name="add_waypoint_dialog_added">GPX-Wegpunkt \'\'{0}\'\' hinzugefügt</string>
     <string name="add_waypoint_dialog_title">Wegpunkt zum aufgezeichneten GPX-Track hinzufügen</string>
-    <string name="context_menu_item_add_waypoint">GPX-Wegpunkt hinzufügen</string>
     <string name="amenity_type_administrative">Verwaltung</string>
     <string name="amenity_type_barrier">Barriere</string>
     <string name="amenity_type_education">Bildung</string>
@@ -568,7 +564,6 @@
     <string name="voices">Sprachansagen</string>
     <string name="voice">Sprachansage</string>
     <string name="no_vector_map_loaded">Vektorkarten wurden nicht geladen</string>
-    <string name="layer_gpx_layer">GPX-Dateien …</string>
     <string name="error_reading_gpx">GPX-Daten konnten nicht gelesen werden</string>
     <string name="vector_data">Offline-Vektorkarten</string>
     <string name="transport_context_menu">Suche nach Verbindung an Haltestelle</string>
@@ -905,7 +900,6 @@
     <string name="map_widget_compass">Kompass</string>
     <string name="map_widget_reset">Auf Voreinstellung zurücksetzen</string>
     <string name="map_widget_parking">Parken</string>
-    <string name="map_widget_monitoring">GPX-Aufzeichnung</string>
     <string name="map_widget_speed">Geschwindigkeit</string>
     <string name="map_widget_distance">Ziel</string>
     <string name="map_widget_altitude">Höhe</string>
@@ -1335,7 +1329,6 @@
     <string name="gpx_tags_txt">Tags</string>
     <string name="shared_string_description">Beschreibung</string>
     <string name="gpx_monitoring_disabled_warn">Aufzeichnung mit der Schaltfläche \'GPX\' oder unter \'Erweiterungen → Streckenaufzeichnung → Einstellungen\'.</string>
-    <string name="shared_string_gpx_route">GPX-Route</string>
     <string name="gpx_option_reverse_route">GPX-Route umkehren</string>
     <string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
     <string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
@@ -1689,7 +1682,6 @@
     <string name="working_days">Werktage</string>
     <string name="favourites">Favoriten</string>
     <string name="poi_deleted_localy">Der POI wird hier gelöscht, sobald Sie Ihre Änderungen hochladen</string>
-    <string name="show_gpx">GPX-Daten anzeigen</string>
     <string name="are_you_sure">Sicher?</string>
     <string name="unsaved_changes_will_be_lost">Alle ungesicherten Änderungen gehen verloren. Fortfahren?</string>
     <string name="roads">Straßen</string>
@@ -2121,7 +2113,6 @@
     <string name="quick_action_navigation_voice">Sprachausgabe ein/aus</string>
     <string name="quick_action_navigation_voice_off">Sprachausgabe aktivieren</string>
     <string name="quick_action_navigation_voice_on">Sprachausgabe stummschalten</string>
-    <string name="quick_action_add_gpx">GPX-Wegpunkt einfügen</string>
     <string name="quick_action_add_parking">Parkposition festlegen</string>
     <string name="quick_action_new_action">Aktion hinzufügen</string>
     <string name="quick_action_edit_action">Aktion bearbeiten</string>
@@ -2503,14 +2494,11 @@
     <string name="choose_navigation_type">Navigationsprofil wählen</string>
     <string name="add_route_points">Routenpunkte hinzufügen</string>
     <string name="add_line">Strecke hinzufügen</string>
-    <string name="empty_state_my_tracks">GPX-Dateien hinzufügen</string>
-    <string name="empty_state_my_tracks_desc">GPX-Dateien importieren oder Tracks aufzeichnen.</string>
     <string name="empty_state_favourites">Favoriten hinzufügen</string>
     <string name="empty_state_favourites_desc">Favoriten importieren oder durch Markieren von Punkten auf der Karte erstellen.</string>
     <string name="import_track">GPX-Datei importieren</string>
     <string name="import_track_desc">Die Datei %1$s enthält keine Wegpunkte. Soll sie als Track importiert werden\?</string>
     <string name="move_point">Punkt verschieben</string>
-    <string name="add_segment_to_the_track">Zu einer GPX-Datei hinzufügen</string>
     <string name="do_not_use_animations">Keine Animationen</string>
     <string name="do_not_use_animations_descr">Schaltet Kartenanimationen aus.</string>
     <string name="keep_showing_on_map">Weiterhin auf der Karte anzeigen</string>
@@ -2546,7 +2534,6 @@
     <string name="shared_string_sort">Sortieren</string>
     <string name="coordinate_input">Koordinateneingabe</string>
     <string name="marker_save_as_track_descr">Markierungen in die hier festgelegte GPX-Datei exportieren:</string>
-    <string name="marker_save_as_track">Als GPX-Datei speichern</string>
     <string name="move_to_history">In den Verlauf verschieben</string>
     <string name="group_will_be_removed_after_restart">Die Gruppe wird beim nächsten Start der App entfernt.</string>
     <string name="show_passed">Passierte anzeigen</string>
@@ -2796,7 +2783,6 @@
     <string name="access_intermediate_arrival_time">Ankunftszeit Zwischenziel</string>
     <string name="map_widget_intermediate_time">Zwischenankunftszeit</string>
     <string name="unirs_render_descr">Änderung des Standardstils, um den Kontrast von Fußgänger- und Fahrradwegen zu erhöhen. Verwendet alte Mapnik-Farben.</string>
-    <string name="shared_string_gpx_files">GPX-Dateien</string>
     <string name="get_osmand_live">Holen Sie sich OsmAnd Live, um alle Funktionen freizuschalten: Tägliche Karten-Updates mit unbegrenzten Downloads, alle kostenpflichtigen und kostenlosen Plugins, Wikipedia, Wikivoyage und vieles mehr.</string>
     <string name="quick_action_edit_actions">Aktionen bearbeiten</string>
     <string name="error_notification_desc">Bitte senden Sie einen Screenshot dieser Meldung an support@osmand.net</string>

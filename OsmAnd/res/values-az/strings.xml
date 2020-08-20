@@ -425,7 +425,6 @@
     <string name="download_select_map_types">Digər xəritələr</string>
     <string name="download_regular_maps">Standart xəritə</string>
     <string name="map_widget_max_speed">Sürət limiti</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="safe_mode">Təhlükəsiz rejim</string>
     <string name="native_library_not_running">Proqram təhlükəsiz rejimdə işləyir (“Parametrlər”dən söndürün).</string>
     <string name="gps_not_available">Parametrlərdən GPS-i aktivləşdirin</string>
@@ -708,7 +707,6 @@
     <string name="recent_places">Ən son yerlər</string>
     <string name="favourites">Favoritlər</string>
     <string name="saved_at_time">Yadda saxlandı: %1$s</string>
-    <string name="show_gpx">GPX məlumatlarını göstər</string>
     <string name="are_you_sure">Əminsiniz?</string>
     <string name="downloading_number_of_files">%1$d fayl endirilir</string>
     <string name="buy">Al</string>
@@ -1308,17 +1306,14 @@
     <string name="gpx_no_tracks_title_folder">Qovluğa GPX fayllar da əlavə edə bilərsiniz</string>
     <string name="gpx_add_track">Daha çox əlavə et…</string>
     <string name="storage_place_description">OsmAnd-ın məlumat saxlama yeri (xəritələr, GPX faylları və s.): %1$s.</string>
-    <string name="shared_string_save_as_gpx">Yeni GPX faylı olaraq saxla</string>
     <string name="shared_string_tracks">İzlər</string>
     <string name="shared_string_currently_recording_track">Hazırkı qeyd edilən iz</string>
     <string name="track_segments">İz seqmentləri</string>
     <string name="track_points">İz nöqtələri</string>
     <string name="navigation_over_track">İz boyu naviqasiya başladılsın?</string>
-    <string name="save_track_to_gpx_globally">İzi GPX faylına qeyd et</string>
     <string name="save_track_to_gpx_globally_headline">Tələbə görə iz qeydiyyatı</string>
     <string name="save_current_track_descr">Hazırkı izi indi GPX faylı olaraq saxla.</string>
     <string name="save_current_track">Hazırkı izi saxla</string>
-    <string name="save_track_to_gpx">Naviqasiya zamanı izi avtomatik qeyd et</string>
     <string name="save_track_to_gpx_descrp">Naviqasiya zamanı iz GPX formatında izlər qovluğunda avtomatik saxlanacaq.</string>
     <string name="none_selected_gpx">GPX faylı seçilməyib. Toxunub saxlayaraq birini seçin.</string>
     <string name="gpx_info_subtracks">Alt izlər: %1$s</string>
@@ -1338,7 +1333,6 @@
     <string name="show_current_gpx_title">Hazırkı izi göstər</string>
     <string name="add_waypoint_dialog_title">Qeyd edilən GPX izinə yol nöqtəsi əlavə et</string>
     <string name="gpx_files_not_found">İzlər qovluğunda GPX faylları tapılmadı</string>
-    <string name="layer_gpx_layer">GPX faylları…</string>
     <string name="background_router_service_descr">Ekran sönülü olarkən mövqeyinizi izləyir.</string>
     <string name="saving_gpx_tracks">GPX faylı saxlanır…</string>
     <string name="use_points_as_intermediates">Nöqtələr arasındakı marşrutu hesabla</string>
@@ -1477,9 +1471,7 @@
     <string name="context_menu_item_edit_waypoint">GPX nöqtəsinə düzəliş et</string>
     <string name="shared_string_waypoints">Yol nöqtələri</string>
     <string name="add_waypoint_dialog_added">GPX yol nöqtəsi “{0}” əlavə edildi</string>
-    <string name="context_menu_item_add_waypoint">GPX yol nöqtəsi əlavə et</string>
     <string name="import_file_favourites">Məlumatlar GPX faylı olaraq saxlansın yoxsa yol nöqtələri “Favoritlər”ə idxal edilsin?</string>
-    <string name="quick_action_add_gpx">GPX yol nöqtəsi əlavə et</string>
     <string name="rotate_map_compass_opt">Kompas istiqaməti</string>
     <string name="rotate_map_bearing_opt">Hərəkət istiqaməti</string>
     <string name="poi_context_menu_modify">POI-yə düzəliş et</string>
@@ -1623,7 +1615,6 @@
     <string name="osmand_parking_no_lim_text">Vaxt-limitsiz</string>
     <string name="pref_vector_map">Vektor xəritə parametrləri</string>
     <string name="file_with_name_already_exists">Bu adda fayl artıq mövcuddur.</string>
-    <string name="shared_string_gpx_route">GPX marşrut</string>
     <string name="measurement_tool">Məsafəni ölç</string>
     <string name="shared_string_options">Seçimlər</string>
     <string name="enter_gpx_name">GPX fayl adı:</string>
@@ -1657,7 +1648,6 @@
     <string name="route_is_calculated">Marşrut hesablandı</string>
     <string name="my_location">Mövqeyim</string>
     <string name="shared_string_sort">Sırala</string>
-    <string name="marker_save_as_track">GPX faylı kimi saxla</string>
     <string name="shared_string_groups">Qruplar</string>
     <string name="import_track">GPX faylı idxal et</string>
     <string name="context_menu_read_full_article">Tam məqaləni oxu</string>
@@ -1727,7 +1717,6 @@
     <string name="none_point_error">Ən azı bir nöqtə əlavə edin.</string>
     <string name="import_track_desc">%1$s faylı yol nöqtəsi ehtiva etmir, iz olaraq idxal edilsin?</string>
     <string name="move_point">Nöqtəni daşı</string>
-    <string name="add_segment_to_the_track">GPX faylına əlavə et</string>
     <string name="osm_recipients_label">OSM qəbul edənlər</string>
     <string name="total_donations">Ümumi ianələr</string>
     <string name="winter_and_ski_renderer">Qış və xizək</string>
@@ -1886,8 +1875,6 @@
     <string name="new_directions_point_dialog">Artıq müəyyənləşdirilmiş ara təyinat nöqtələriniz var.</string>
     <string name="map_import_error">Xəritə idxalı səhvi</string>
     <string name="map_imported_successfully">Xəritə idxal edildi</string>
-    <string name="empty_state_my_tracks">GPX faylları əlavə et</string>
-    <string name="empty_state_my_tracks_desc">GPX faylları idxal edin və ya izlər qeyd edin.</string>
     <string name="enter_the_file_name">Fayl adını yazın.</string>
     <string name="distance_indication_descr">Aktiv işarələrə qədər məsafənin necə göstəriləcəyini seçin.</string>
     <string name="tunnel_warning">İrəlidə tunel</string>
@@ -1929,7 +1916,6 @@
     <string name="recalculate_route_to_your_location">Nəqliyyat rejimi:</string>
     <string name="select_navigation_mode">Nəqliyyat rejimi seçin</string>
     <string name="avoid_ferries">Bərələrdən yayın</string>
-    <string name="map_widget_monitoring">GPX qeydiyyatı</string>
     <string name="map_widget_next_turn">Növbəti döngə</string>
     <string name="map_widget_next_turn_small">Növbəti döngə (kiçik)</string>
     <string name="map_widget_next_next_turn">İkinci növbəti döngə</string>
@@ -2086,5 +2072,4 @@
     <string name="shared_string_wikivoyage">Vikisəyahət</string>
     <string name="shared_string_topbar">Üst panel</string>
     <string name="osm_recipient_stat">%1$s düzəliş, cəmi %2$s mBTC</string>
-    <string name="shared_string_gpx_files">GPX faylları</string>
 </resources>

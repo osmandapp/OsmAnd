@@ -122,7 +122,7 @@
     <string name="osmand_connect_desc">Выберите версию OsmAnd которую OsmAnd Tracker использует для отображения положений на карте.</string>
     <string name="osmand_connect">OsmAnd подключение</string>
     <string name="connected_account">Связанная учетная запись</string>
-    <string name="shared_string_account">Учетная запись</string>
+    <string name="shared_string_account">Учётная запись</string>
     <string name="start_location_sharing">Начать отправку локации</string>
     <string name="install_osmand_dialog_message">Вам необходимо сначала установить бесплатную или платную версию OsmAnd</string>
     <string name="disconnect_from_telegram">Как отключить OsmAnd Tracker от Telegram</string>

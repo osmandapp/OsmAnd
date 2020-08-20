@@ -22,7 +22,6 @@
     <string name="animate_route">Rozpocznij symulację</string>
     <string name="file_can_not_be_renamed">Nie można zmienić nazwy pliku.</string>
     <string name="file_with_name_already_exists">Plik o takiej nazwie już istnieje.</string>
-    <string name="shared_string_gpx_route">Trasa GPX</string>
     <string name="data_to_search_poi_not_available">Pobierz dane offline, aby wyszukać użyteczne miejsca.</string>
     <string name="poi_filter_by_name">Szukaj wg nazwy</string>
     <string name="old_poi_file_should_be_deleted">Plik „%1$s” z danymi użytecznych miejsc jest zbędny i można go usunąć.</string>
@@ -40,7 +39,6 @@
     <string name="search_position_map_view">Aktualny środek mapy</string>
     <string name="select_search_position">Zasób:</string>
     <string name="context_menu_item_search">Szukaj w pobliżu</string>
-    <string name="shared_string_save_as_gpx">Zapisz jako nowy plik GPX</string>
     <string name="route_successfully_saved_at">Zapisano trasę jako „%1$s”.</string>
     <string name="filename_input">Nazwa pliku: </string>
     <string name="file_with_name_already_exist">Plik o takiej nazwie już istnieje.</string>
@@ -148,7 +146,6 @@
     <string name="context_menu_item_share_location">Udostępnij położenie</string>
     <string name="add_waypoint_dialog_added">Dodano punkt GPX „{0}”</string>
     <string name="add_waypoint_dialog_title">Dodaj punkt pośredni do śladu GPX</string>
-    <string name="context_menu_item_add_waypoint">Dodaj punkt do GPX</string>
     <string name="amenity_type_administrative">Administracyjne</string>
     <string name="amenity_type_barrier">Przeszkody</string>
     <string name="amenity_type_education">Edukacja</string>
@@ -250,7 +247,6 @@
     <string name="voice">Nagrany głos</string>
     <string name="no_vector_map_loaded">Nie wczytano map wektorowych</string>
     <string name="gpx_files_not_found">Nie odnaleziono plików GPX w katalogu śladów</string>
-    <string name="layer_gpx_layer">Pliki GPX…</string>
     <string name="error_reading_gpx">Nie można odczytać danych GPX.</string>
     <string name="vector_data">Wektorowe mapy offline</string>
     <string name="transport_context_menu">Wyszukaj komunikację na przystanku</string>
@@ -751,7 +747,6 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Przywróć domyślne</string>
     <string name="map_widget_parking">Miejsce parkowania</string>
-    <string name="map_widget_monitoring">Rejestrowanie GPX</string>
     <string name="map_widget_speed">Prędkość</string>
     <string name="map_widget_distance">Cel</string>
     <string name="map_widget_altitude">Wysokość</string>
@@ -886,7 +881,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Granice</string>
     <string name="rendering_attr_noAdminboundaries_description">Pomiń wyświetlenie granic regionalnych (poziomy administratora 5-9).</string>
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
-    <string name="monitoring_control_start">Ślad</string>
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
@@ -1316,7 +1310,6 @@
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
     <string name="speak_favorites">Najbliższe ulubione miejsca</string>
     <string name="speak_poi">Pobliskie użyteczne miejsca</string>
-    <string name="save_track_to_gpx_globally">Rejestrowanie śladu GPX</string>
     <string name="save_track_to_gpx_globally_descr">Ogólne rejestrowanie pozycji do pliku GPX można włączyć lub wyłączyć za pomocą widgetu rejestrowania GPX na mapie.</string>
     <string name="save_track_interval_globally">Częstość rejestrowania</string>
     <string name="record_plugin_description">Aktywuje funkcje rejestrowania i zapisywania śladów za pomocą widżetu rejestrowania śladów GPX na mapie lub automatyczne rejestruje przebiegi wszystkich tras do plików GPX.
@@ -1665,7 +1658,6 @@
     <string name="favourites">Ulubione</string>
     <string name="saved_at_time">Zapisano o: %1$s</string>
     <string name="poi_deleted_localy">Użyteczne miejsce zostanie usunięte po wysłaniu zmian</string>
-    <string name="show_gpx">Wyświetlanie danych GPX</string>
     <string name="show_on_start">Wyświetlanie podczas uruchamiania</string>
     <string name="count_of_lines">Liczba linii</string>
     <string name="unsaved_changes_will_be_lost">Wszelkie niezapisane zmiany zostaną utracone. Kontynuować?</string>
@@ -2142,7 +2134,6 @@
     <string name="quick_action_map_underlay_action">Dodaj podkład</string>
     <string name="quick_action_map_underlay_title">Podkłady map</string>
     <string name="quick_action_map_source_title">Zasoby map</string>
-    <string name="quick_action_add_gpx">Dodaj punkt pośredni GPX</string>
     <string name="quick_favorites_name_preset">Nazwa</string>
     <string name="quick_action_add_marker_descr">Przycisk dodawania znacznika mapy na środku ekranu.</string>
     <string name="quick_action_add_gpx_descr">Przycisk dodawania punktu pośredniego GPX na środku ekranu.</string>
@@ -2408,14 +2399,11 @@
     <string name="measurement_tool_snap_to_road_descr">Punkty zostaną połączone trasą wyznaczoną na podstawie wybranego profilu.</string>
     <string name="add_route_points">Dodaj punkty trasy</string>
     <string name="add_line">Dodaj linię</string>
-    <string name="empty_state_my_tracks">Dodaj pliki GPX</string>
-    <string name="empty_state_my_tracks_desc">Importowanie plików GPX lub nagranych tras.</string>
     <string name="empty_state_favourites">Dodaj do ulubionych</string>
     <string name="empty_state_favourites_desc">Zaimportuj Ulubione lub dodaj je poprzez zaznaczenie punktów na mapie.</string>
     <string name="import_track">Importuj plik GPX</string>
     <string name="import_track_desc">Plik %1$s nie zawiera punktów trasy, czy zaimportować go jako ślad?</string>
     <string name="move_point">Przesuń punkt</string>
-    <string name="add_segment_to_the_track">Dodaj do pliku GPX</string>
     <string name="keep_showing_on_map">Wyświetlanie na mapie</string>
     <string name="exit_without_saving">Zakończyć bez zapisywania?</string>
     <string name="do_not_use_animations">Wyłączenie animacji</string>
@@ -2458,7 +2446,6 @@
     <string name="plan_route">Planowanie trasy</string>
     <string name="shared_string_sort">Sortuj</string>
     <string name="marker_save_as_track_descr">Znaczniki zostaną wyeksportowane do poniższego pliku GPX:</string>
-    <string name="marker_save_as_track">Zapisz jako plik GPX</string>
     <string name="move_to_history">Przenieś do historii</string>
     <string name="group_will_be_removed_after_restart">Grupa zostanie usunięta po ponownym uruchomieniu.</string>
     <string name="use_system_keyboard">Użycie klawiatury systemowej</string>
@@ -2741,7 +2728,6 @@
     <string name="open_wikipedia_link_online">Otwórz odnośnik do Wikipedii online</string>
     <string name="read_wikipedia_offline_description">Zasubskrybuj OsmAnd Live, by czytać artykuły Wikipedii i Wikipodróży offline.</string>
     <string name="read_wikipedia_offline">Czytaj Wikipedię offline</string>
-    <string name="shared_string_gpx_files">Pliki GPX</string>
     <string name="quick_action_edit_actions">Edycja działań</string>
     <string name="error_notification_desc">Wyślij zrzut ekranu z tego powiadomienia na adres support@osmand.net</string>
     <string name="coord_input_edit_point">Edytuj punkt</string>

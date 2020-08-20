@@ -392,7 +392,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 					SQLiteTileSource sqLiteTileSource =
 							new SQLiteTileSource(app, newName, minZoom,
 									maxZoom, urlToLoad, "",
-									elliptic, false, "", expireTimeMinutes > 0,
+									elliptic, false, "", "", expireTimeMinutes > 0,
 									expireTimeMinutes * 60 * 1000L, false, ""
 							);
 					sqLiteTileSource.createDataBase();

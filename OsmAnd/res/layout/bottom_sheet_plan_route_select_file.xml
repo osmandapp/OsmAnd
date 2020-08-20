@@ -14,8 +14,8 @@
 		android:paddingLeft="@dimen/content_padding"
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
-		android:paddingTop="@dimen/multi_selection_menu_padding_top"
-		android:paddingBottom="@dimen/bottom_sheet_title_padding_bottom"
+		android:paddingTop="@dimen/measurement_tool_menu_title_padding_top"
+		android:paddingBottom="@dimen/measurement_tool_menu_title_padding_bottom"
 		android:text="@string/plan_route_open_existing_track"
 		android:textAppearance="@style/TextAppearance.ListItemTitle"
 		osmand:typeface="@string/font_roboto_medium" />

@@ -23,6 +23,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -42,6 +43,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private OsmandMapTileView mapView;
 	private DashboardOnMap dashboard;
 	private MapContextMenu contextMenu;
+	private TrackDetailsMenu detailsMenu;
 	private OsmandSettings settings;
 	private OsmandApplication app;
 	private boolean isMapLinkedToLocation = true;
@@ -151,6 +153,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public void setContextMenu(MapContextMenu contextMenu) {
 		this.contextMenu = contextMenu;
+	}
+
+	public void setDetailsMenu(TrackDetailsMenu detailsMenu) {
+		this.detailsMenu = detailsMenu;
 	}
 
 	public boolean isMovingToMyLocation() {
@@ -270,9 +276,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				mapView.setRotate(0, true);
 			}
 			if (isMapLinkedToLocation) {
-				mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING
-						&& !settings.CENTER_POSITION_ON_MAP.get() ?
-						OsmandSettings.BOTTOM_CONSTANT : OsmandSettings.CENTER_CONSTANT);
+				boolean trackDetailsVisible = detailsMenu != null && detailsMenu.isVisible();
+				int positionType;
+				if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING
+						&& !settings.CENTER_POSITION_ON_MAP.get() && !trackDetailsVisible) {
+					positionType = OsmandSettings.BOTTOM_CONSTANT;
+				} else {
+					positionType = OsmandSettings.CENTER_CONSTANT;
+				}
+				mapView.setMapPosition(positionType);
 			}
 		}
 		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation(), false);
@@ -344,9 +356,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void backToLocationImpl(int zoom, boolean forceZoom) {
 		if (mapView != null) {
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
-			net.osmand.Location lastKnownLocation = locationProvider.getLastKnownLocation();
-			net.osmand.Location lastStaleKnownLocation = locationProvider.getLastStaleKnownLocation();
-			net.osmand.Location location = lastKnownLocation != null ? lastKnownLocation : lastStaleKnownLocation;
+			Location lastKnownLocation = locationProvider.getLastKnownLocation();
+			Location lastStaleKnownLocation = locationProvider.getLastStaleKnownLocation();
+			Location location = lastKnownLocation != null ? lastKnownLocation : lastStaleKnownLocation;
 			if (!isMapLinkedToLocation()) {
 				setMapLinkedToLocation(true);
 				if (location != null) {

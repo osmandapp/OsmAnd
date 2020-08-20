@@ -14,7 +14,6 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -27,12 +26,10 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 
-		items.add(new TitleItem(getString(R.string.exit_without_saving)));
-
 		items.add(new ShortDescriptionItem.Builder()
 				.setDescription(getString(R.string.plan_route_exit_dialog_descr))
-				.setDescriptionColorId(nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light)
-				.setLayoutId(R.layout.bottom_sheet_item_description_long)
+				.setTitle(getString(R.string.exit_without_saving))
+				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
 				.create());
 
 		items.add(new DividerSpaceItem(getContext(),
@@ -75,7 +72,7 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 
 	@Override
 	protected int getDismissButtonTextId() {
-		return R.string.shared_string_close;
+		return R.string.shared_string_cancel;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment) {

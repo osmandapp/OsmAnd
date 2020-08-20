@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
-import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmAndFormatter;
@@ -44,6 +43,10 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 		iconsCache = app.getUIUtilities();
 		this.gpxInfoList = gpxInfoList;
 		this.showCurrentGpx = showCurrentGpx;
+	}
+
+	public List<GPXInfo> getGpxInfoList() {
+		return gpxInfoList;
 	}
 
 	public void setGpxInfoList(List<GPXInfo> gpxInfoList) {

@@ -1,11 +1,11 @@
 
     OsmAnd – OSM Automated Navigation Directions – navigation software based on OpenStreetMap.
-    Copyright © 2010–2018 OsmAnd BV (Amstelveen, Netherlands - KvK 62066714, BTW 854627704B01).
+    Copyright © 2010–2020 OsmAnd BV (Amstelveen, Netherlands - KvK 62066714, BTW 854627704B01).
 
-    The code in this repository is covered by *GPLv3* (for code) and the artwork is covered by [ CC-BY-NC-ND 4.0 ](https://creativecommons.org/licenses/by-nc-nd/4.0/) (for artwork), except some 3rd party libs and resources.
-    ATTENTION: please be aware that some artwork has proprietary license.
+    The code in this repository is covered by *GPLv3* (for code) and the artwork is covered by [CC-BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) (for artwork), except for some third-party libraries and resources.
+    ATTENTION: Please be aware that some artwork uses a proprietary license.
     
-    Main AUTHORS (more detailed list in AUTHORS):
+    Main AUTHORS (more detailed list in AUTHORS.md):
         Victor Shcherb – all parts of the project, originator
         Alexey Pelykh – rendering and core parts
         Hardy Mueller – main parts of the project, mostly rendering, UI interaction design
@@ -30,33 +30,33 @@
     * Source code in main repositories is covered by GPLv3 (license exceptions below):
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java
-        - https://github.com/osmandapp/Osmand-core/tree/legacy_core
-        - https://github.com/osmandapp/Osmand-core/
+        - https://github.com/osmandapp/OsmAnd-core/tree/legacy_core
+        - https://github.com/osmandapp/OsmAnd-core
         - https://github.com/osmandapp/OsmAnd-misc
         - https://github.com/osmandapp/OsmAnd-tools
         - https://github.com/osmandapp/OsmAnd-resources
 
-    * UI Design and UX work, such as layout, icons is covered by CC-BY-NC-ND
+    * UI Design and UX work, such as layout and icons, are covered by [CC-BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd/res and others
     Restriction to UI/UX CC-BY-NC-ND:
-    * Publishing applications using the OsmAnd UI/UX code to Google Play, Amazon Market or Apple Store must be done with written permission*
+    * Publishing applications using the OsmAnd UI/UX code to Google Play, Amazon Market, or Apple Store must be done with written permission.*
 
 
     * Map icons are taken from sjjb and some are drawn and distributed under Public Domain (except icons8)
         - https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg
 	- some icons are from http://osm-icons.org/wiki/Icons (CC-0 by Markus59, CC BY-SA 2.0)
 
-    * Integration with Qt library in (https://github.com/osmandapp/Osmand-core/) - dynamic linking
-        - LGPL (http://www.qt.io/qt-licensing-terms/)
+    * Integration with Qt library in (https://github.com/osmandapp/OsmAnd-core) - dynamic linking
+        - LGPL (https://www.qt.io/terms-conditions/)
 
-    * Map icons and their derived primitives are covered by proprietary license:
+    * Map icons and their derived primitives are covered by a proprietary license:
         - © icons8.com (https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg/icons8)
 
-    * Generated voice files from TTS files are covered by proprietary license:
+    * Generated voice files from TTS files are covered by a proprietary license:
         - Voice files (https://github.com/osmandapp/OsmAnd-resources/tree/master/voice)
 
     * Fonts (https://github.com/osmandapp/OsmAnd-resources/tree/master/rendering_styles/fonts)
-        - Google Fonts (Apache License 2)
+        - Google Fonts (Apache License 2.0)
 
     * Map icons (Mapnik):
         - Open-SVG-Map-Icons - Public Domain
@@ -65,49 +65,27 @@
         - SherlockBar - Apache License - https://github.com/osmandapp/Osmand/tree/master/SherlockBar (https://github.com/JakeWharton/ActionBarSherlock/blob/master/LICENSE.txt)
 
     * Patched libraries:
-        - Protobuf - New BSD License (patches - https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java/protobuf-src, https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/protobuf)
-        - Expat - (https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/expat)
-        - Freetype - (https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/freetype)
-        - Giflib - (https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/giflib)
+        - Protobuf - New BSD License (patches - https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java/src/main/java/com/google/protobuf, https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/protobuf)
         - Jpeg - (https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/jpeg)
-        - Libpng - (https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/libpng)
         - Skia - (https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/skia)
-        - ZLib - (https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/zlib)
+        - android-openmap-framework - (https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java/src/main/java/com/jwetherell/openmap/common)
+        - mapbox-vector-tile - (https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java/src/main/java/com/wdtinc/mapbox_vector_tile)
 
     * 3rd party libraries present in the libs folder (https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java/libs):
-        - bzip2-20090327.jar Bzip2 - Apache License
-        - commons-logging-1.1.1.jar - Apache License
         - gnu-trove-osmand.jar GNU trove - LGPL
-        - icu4j-49_1.jar - ICU license (http://source.icu-project.org/repos/icu/icu/trunk/license.html)
-        - json-20090211.jar - BSD alike (http://www.json.org/license.html)
-        - junidecode-0.1.jar - BSD-4-Clause-UC (http://sourceforge.net/projects/junidecode/)
-        - kxml2-2.3.0.jar - BSD license (http://www.kxml.org/)
-        - tuprolog.jar - LGPL (http://apice.unibo.it/xwiki/bin/view/Tuprolog/)
-        - OpenMap framework - Apache License (https://code.google.com/p/android-openmap-framework/)
+        - icu4j-49_1_patched.jar - ICU license (https://home.unicode.org/basic-info/projects/#/icu/icu/trunk/license.html)
 
     * Pull-requests and translations:
-        - All pull requests are accepted under MIT License (most honorable contributors are mentioned in AUTHORS list)
-
-    * Libraries not used in final product (https://github.com/osmandapp/OsmAnd-tools/tree/master/OsmAndMapCreator/libi)
-        - Ant libraries - (tools) https://github.com/osmandapp/Osmand/tree/master/OsmAnd/ant-lib
-        - jleveldb-v01.jar
-        - jsch-20120101.jar
-        - junit-4.10.jar
-        - mysql-connector-java-5.1.18-bin.jar
-        - sqlite-jdbc-3.7.6.3-20110609.081603-3.jar
-        - h2-latest.jar
+        - All pull requests are accepted under MIT License (most honorable contributors are mentioned in AUTHORS list).
 
     * Special tools for new rendering (GPLv3)
-        - https://github.com/osmandapp/OsmAnd-tools/tree/master/obf-inspector
-        - https://github.com/osmandapp/OsmAnd-tools/tree/master/obf-verifier
-        - https://github.com/osmandapp/OsmAnd-tools/tree/master/route-tester
+        - https://github.com/osmandapp/OsmAnd-tools
 
-    * OSM data 2014
-        - Extracts - https://github.com/osmandapp/OsmAnd-misc/blob/master/osm-planet/osm-data/
+    * OSM data
+        - Extracts - https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/osm-data
 
     * Data files
-        - Country boundaries - https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/geo-polygons © by Geofabrik - data free to use
-        - Country boundaries - https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/gislab-polygons © by http://be.gis-lab.info - data free to use
+        - Country boundaries - https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/polygons © by Geofabrik - data free to use
 
     * Subway icons
 	- Moscow: Art Lebedev Studio (http://www.artlebedev.ru/everything/metro/logo/) [Public domain], undefined
@@ -119,7 +97,7 @@
 	- Kazan: «Kazan-metro-Logo» (Россиянин) - own work. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:Kazan-metro-Logo.svg#/media/File:Kazan-metro-Logo.svg
 	- Tbilisi: «Metro Tbilisi logo» (Carnby) - own work. Under CC BY-SA 3.0 license from site - https://commons.wikimedia.org/wiki/File:Metro_Tbilisi_logo.svg#/media/File:Metro_Tbilisi_logo.svg
 	- Minsk: «Minsk metro logo» (Skip405) - own work. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:Minsk_metro_logo.svg#/media/File:Minsk_metro_logo.svg
-	- Nizhny Novgorod: «NNMetro» (AlexTref871) - own work. This vector image includes elements borrowed from another image:  Coat of arms of Nizhny Novgorod Region.svg.. Under Public domain Commons licensefrom the site - https://commons.wikimedia.org/wiki/File:NNMetro.svg#/media/File:NNMetro.svg
+	- Nizhny Novgorod: «NNMetro» (AlexTref871) - own work. This vector image includes elements borrowed from another image:  Coat of arms of Nizhny Novgorod Region.svg.. Under Public domain Commons licensefrom the site - https://commons.wikimedia.org/wiki/File:NNMetro.svg#/media/File:NNMetro.svg
 	- Novosibirsk: «Logo-Nsk-Metro» (AlexTref871) - own work. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:Logo-Nsk-Metro.svg#/media/File:Logo-Nsk-Metro.svg
 	- Yekaterinburg: «Ekt-metro-logo-01» (AlexTref871) - own work. Under CC BY-SA 4.0 license from site - https://commons.wikimedia.org/wiki/File:Ekt-metro-logo-01.svg#/media/File:Ekt-metro-logo-01.svg
 	- New York: «MTA New York City Subway logo» (Metropolitan Transportation Authority) - http://mta.info/. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:MTA_New_York_City_Subway_logo.svg#/media/File:MTA_New_York_City_Subway_logo.svg
@@ -152,7 +130,7 @@
 	- Los Angeles: "Lametro" by Los Angeles County Metropolitan Transportation Authority. Original uploader was Cheeselouise at en.wikipedia - Metro materials at http://www.metro.net/riding_metro/pocket_guide_cambodian_printers.pdf. Licensed under Public Domain via Commons - https://commons.wikimedia.org/wiki/File:Lametro.svg#/media/File:Lametro.svg
 
     * Depth maps
-	- The GEBCO_2014 Grid, version 20150318, www.gebco.net
+	- The GEBCO_2020 Grid, www.gebco.net
 	- U.S. Bureau of Ocean Energy Management (24 may 2017,12m per pixel)
 	- South_Padre_Island_DEM_4133: Grothe, P.G., L.A. Taylor, B.W. Eakins, K.S. Carignan, D.Z. Friday, and M. Love, 2012. Digital Elevation Models of South Padre Island, Texas: Procedures, Data Sources and Analysis, NOAA National Geophysical Data Center technical report, Boulder, CO, 15 pp. 
 	- Corpus_Christi_DEM_1035: Taylor, L.A., B.W. Eakins, K.S. Carignan, R.R. Warnken, T. Sazonova, and D.C. Schoolcraft, 2008. Digital Elevation Model of Corpus Christi, Texas: Procedures, Data Sources and Analysis, NOAA Technical Memorandum NESDIS NGDC-11, National Geophysical Data Center, Boulder, CO, 19 pp. 
