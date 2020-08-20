@@ -3841,4 +3841,20 @@
     <string name="plan_route_select_track_file_for_open">Scegli il file di una traccia da aprire.</string>
     <string name="shared_string_done">Fatto</string>
     <string name="navigation_profile">Profili di navigazione</string>
+    <string name="rourte_between_points_warning_desc">Per utilizzare questa opzione OsmAnd ha bisogno di bloccare la traccia alle strade della mappa.
+\n
+\n Nel prossimo passaggio avrai bisogno di selezionare il profilo di navigazione per determinare le strade permesse e la soglia della distanza per approssimare la strada alle strade.</string>
+    <string name="rourte_between_points_desc">Scegli come collegare i punti, con una linea retta, o calcolando un percorso che li colleghi utilizzando il profilo scelto.</string>
+    <string name="overwrite_track">Sovrascrivi traccia</string>
+    <string name="save_as_new_track">Salva come nuova Traccia</string>
+    <string name="reverse_route">Inverti il percorso</string>
+    <string name="rourte_between_points_next_segment_button_desc">Solo il nuovo segmento sarà ricalcolato utilizzando il profilo scelto.</string>
+    <string name="rourte_between_points_whole_track_button_desc">Tutta la traccia sarà ricalcolata utilizzando il profilo scelto.</string>
+    <string name="whole_track">Tutta la traccia</string>
+    <string name="next_segment">Nuovo segmento</string>
+    <string name="threshold_distance">Soglia distanza</string>
+    <string name="rourte_between_points_add_track_desc">Seleziona un file traccia a cui verrà aggiunto un nuovo segmento.</string>
+    <string name="street_level_imagery">Livello immagini stradali</string>
+    <string name="plan_route_exit_dialog_descr">Sei sicuro di voler chiudere la Pianificazione del percorso senza salvare\? Perderai tutti i cambiamenti.</string>
+    <string name="in_case_of_reverse_direction">In caso di direzione inversa</string>
 </resources>
