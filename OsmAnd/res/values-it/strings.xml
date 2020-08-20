@@ -67,7 +67,6 @@
     <string name="animate_route">Avvia animazione</string>
     <string name="file_can_not_be_renamed">Il file non può essere rinominato.</string>
     <string name="file_with_name_already_exists">Esiste già un file con lo stesso nome.</string>
-    <string name="shared_string_gpx_route">Percorso GPX</string>
     <string name="poi_query_by_name_matches_categories">Trovate parecchie categorie PDI correlate.</string>
     <string name="data_to_search_poi_not_available">Download dati offline per la ricerca dei PDI.</string>
     <string name="poi_filter_by_name">Ricerca per nome</string>
@@ -182,7 +181,6 @@
     <string name="context_menu_item_share_location">Condividi posizione</string>
     <string name="add_waypoint_dialog_added">Punto intermedio GPX\'\'{0}\'\' aggiunto</string>
     <string name="add_waypoint_dialog_title">Aggiungi un punto intermedio al percorso GPX registrato</string>
-    <string name="context_menu_item_add_waypoint">Aggiungi un punto intermedio GPX</string>
     <string name="amenity_type_administrative">Amministrativo</string>
     <string name="amenity_type_barrier">Barriera</string>
     <string name="amenity_type_education">Istruzione</string>
@@ -277,7 +275,6 @@
     <string name="voice">Voci registrate</string>
     <string name="no_vector_map_loaded">Mappe vettoriali non sono state caricate</string>
     <string name="gpx_files_not_found">File GPX non trovati nella cartella tracce</string>
-    <string name="layer_gpx_layer">GPX files…</string>
     <string name="error_reading_gpx">Non posso leggere i dati GPX.</string>
     <string name="vector_data">Mappe vettoriali offline</string>
     <string name="transport_context_menu">Cerca un trasporto pubblico alla fermata</string>
@@ -456,7 +453,6 @@
     <string name="save_track_interval_descr">Specifica l\'intervallo di registrazione per la traccia durante la navigazione</string>
     <string name="save_track_interval">Intervallo di registrazione durante la navigazione</string>
     <string name="save_track_to_gpx_descrp">Durante la navigazione, la traccia GPX, sarà salvata automaticamente nella cartella tracce.</string>
-    <string name="save_track_to_gpx">Registrazione automatica della traccia durante la navigazione</string>
     <string name="update_tile">Aggiorna mappa</string>
     <string name="reload_tile">Ricarica tasselli</string>
     <string name="mark_point">Obiettivo</string>
@@ -717,7 +713,6 @@
     <string name="map_widget_compass">Bussola</string>
     <string name="map_widget_reset">Reimposta i valori predefiniti</string>
     <string name="map_widget_parking">Parcheggio</string>
-    <string name="map_widget_monitoring">Registrazione GPX</string>
     <string name="map_widget_speed">Velocità</string>
     <string name="map_widget_distance">Destinazione</string>
     <string name="map_widget_altitude">Altitudine</string>
@@ -849,7 +844,6 @@
     <string name="download_roads_only_maps">Mappa solo strade</string>
     <string name="incomplete_locale">incompleto</string>
     <string name="map_widget_max_speed">Limite di velocità</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Confini</string>
     <string name="rendering_attr_noAdminboundaries_description">Non visualizzare i confini regionali (livelli amministrativi 5-9).</string>
     <string name="index_srtm_parts">parti</string>
@@ -1262,7 +1256,6 @@
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>
     <string name="distance">Distanza</string>
-    <string name="save_track_to_gpx_globally">Registra la traccia in un file GPX</string>
     <string name="save_track_to_gpx_globally_descr">La registrazione della posizione in un file GPX può essere avviata o fermata dal widget registrazione GPX nella mappa.</string>
     <string name="save_track_interval_globally">Intervallo registrazione</string>
     <string name="rendering_attr_publicTransportMode_name">Percorsi bus, filobus, servizi navetta</string>
@@ -1437,7 +1430,6 @@
     <string name="shared_string_deselect_all">Deseleziona tutto</string>
     <string name="shared_string_clear">Pulisci</string>
     <string name="shared_string_save">Salva</string>
-    <string name="shared_string_save_as_gpx">Salva come nuovo file gpx</string>
     <string name="shared_string_rename">Rinomina</string>
     <string name="shared_string_delete">Elimina</string>
     <string name="shared_string_delete_all">Elimina tutto</string>
@@ -1657,7 +1649,6 @@
     <string name="favourites">Preferiti</string>
     <string name="saved_at_time">Salvato adesso in: %1$s</string>
     <string name="poi_deleted_localy">I PDI verranno cancellati una volta caricate le modiche</string>
-    <string name="show_gpx">Visualizza dati GPX</string>
     <string name="show_on_start">Mostra all\'avvio</string>
     <string name="count_of_lines">Conteggio delle linee</string>
     <string name="are_you_sure">Sei sicuro?</string>
@@ -2110,7 +2101,6 @@
     <string name="quick_action_navigation_voice">Voce accesa/spenta</string>
     <string name="quick_action_navigation_voice_off">Attiva la voce</string>
     <string name="quick_action_navigation_voice_on">Disattiva la voce</string>
-    <string name="quick_action_add_gpx">Aggiungi un punto intermedio GPX</string>
     <string name="quick_action_add_parking">Aggiungi la posizione di parcheggio</string>
     <string name="quick_action_new_action">Aggiungi azione</string>
     <string name="quick_action_edit_action">Modifica azione</string>
@@ -2412,7 +2402,6 @@
     <string name="add_line">Aggiungi una linea</string>
     <string name="save_route_point">Salva il Punto Percorso</string>
     <string name="route_point_one">Punto Percorso 1</string>
-    <string name="empty_state_my_tracks">Aggiungi file GPX</string>
     <string name="move_all_to_history">Sposta tutto nella cronologia</string>
     <string name="show_direction">Indicazione della direzione</string>
     <string name="sort_by">Ordina per</string>
@@ -2449,7 +2438,6 @@
     <string name="shared_string_sort">Ordina</string>
     <string name="coordinate_input">Inserimento coordinate</string>
     <string name="marker_save_as_track_descr">Esporta i tuoi marcatori nel seguente file GPX:</string>
-    <string name="marker_save_as_track">Salva come file GPX</string>
     <string name="move_to_history">Sposta nella cronologia</string>
     <string name="group_will_be_removed_after_restart">Il gruppo verrà rimosso al prossimo riavvio dell\'app.</string>
     <string name="show_guide_line">Mostra le linee di direzione</string>
@@ -2496,13 +2484,11 @@
 \n • Vedi al tua velocità e altitudine
 \n • L\'opzione registrazione GPX ti permette di registrare il tuo percorso e di condividerlo
 \n • Con un componente aggiuntivo puoi abilitare la visualizzazione delle isoipse e dell\'ombreggiatura dei rilievi</string>
-    <string name="empty_state_my_tracks_desc">Importa i file GPX o registra delle tracce.</string>
     <string name="empty_state_favourites">Aggiungi Preferiti</string>
     <string name="empty_state_favourites_desc">Importa i Preferiti o aggiungili come marcatori sulla mappa.</string>
     <string name="import_track">Importa il file GPX</string>
     <string name="import_track_desc">Il file %1$s non contiene punti intermedi, importarlo come traccia?</string>
     <string name="move_point">Sposta il Punto</string>
-    <string name="add_segment_to_the_track">Aggiungi a un file GPX</string>
     <string name="osn_modify_dialog_error">Impossibile modificare la nota.</string>
     <string name="shared_string_road">Strada</string>
     <string name="show_map">Mostra la mappa</string>
@@ -2772,7 +2758,6 @@
     <string name="access_intermediate_arrival_time">Orario di arrivo intermedio</string>
     <string name="map_widget_intermediate_time">Orario intermedio</string>
     <string name="get_osmand_live">Acquista OsmAnd Live per sbloccare tutte le funzionalità: aggiornamenti quotidiani delle mappe con download illimitati, tutti i componenti aggiuntivi gratuiti e a pagamento, Wikipedia, Wikivoyage e molto altro.</string>
-    <string name="shared_string_gpx_files">File GPX</string>
     <string name="release_3_0">"• Nuovo: Supporto per guide di viaggio offline globali. Le posizioni di riferimento sono collegate alla mappa. Dati iniziali da Wikivoyage.
 \n
 \n• Wikipedia: Nuovo look, link attivi, immagini ora supportate

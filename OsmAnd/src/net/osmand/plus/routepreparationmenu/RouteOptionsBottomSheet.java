@@ -22,17 +22,16 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.StateChangedListener;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerStartItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
@@ -50,6 +49,8 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRou
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.TimeConditionalRoutingItem;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.router.GeneralRouter;
 
@@ -346,30 +347,32 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private BaseBottomSheetItem createGpxRoutingItem(final LocalRoutingParameter optionsItem) {
-		View view = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_gpx, null);
-		AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) view.findViewById(R.id.title), nightMode);
-		final TextView gpxDescription = (TextView) view.findViewById(R.id.description);
-
-		((ImageView) view.findViewById(R.id.icon)).setImageDrawable(getContentIcon(optionsItem.getActiveIconId()));
-		((ImageView) view.findViewById(R.id.dropDownIcon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
-
-		RouteProvider.GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
-		String gpxName;
-		if (rp == null) {
-			AndroidUtils.setTextSecondaryColor(mapActivity, gpxDescription, nightMode);
-			gpxName = mapActivity.getString(R.string.choose_track_file_to_follow);
+		RouteProvider.GPXRouteParamsBuilder routeParamsBuilder = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		String description;
+		int descriptionColorId;
+		if (routeParamsBuilder == null) {
+			descriptionColorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+			description = mapActivity.getString(R.string.follow_track_descr);
 		} else {
-			gpxDescription.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
-			gpxName = new File(rp.getFile().path).getName();
+			descriptionColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			description = new File(routeParamsBuilder.getFile().path).getName();
 		}
-		gpxDescription.setText(gpxName);
 
-		return new BaseBottomSheetItem.Builder().setCustomView(view).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				showOptionsMenu(gpxDescription);
-			}
-		}).create();
+		return new BottomSheetItemWithDescription.Builder()
+				.setDescription(description)
+				.setDescriptionColorId(descriptionColorId)
+				.setIcon(getContentIcon(optionsItem.getActiveIconId()))
+				.setTitle(getString(R.string.follow_track))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
+						FollowTrackFragment.showInstance(mapActivity, trackOptionsFragment);
+						dismiss();
+					}
+				})
+				.create();
 	}
 
 	private BaseBottomSheetItem createOtherSettingsRoutingItem(final LocalRoutingParameter optionsItem) {
@@ -573,11 +576,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				DividerItem.KEY,
+				GpxLocalRoutingParameter.KEY,
+				DividerItem.KEY,
 				GeneralRouter.ALLOW_PRIVATE,
 				GeneralRouter.USE_SHORTEST_WAY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
-				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
@@ -588,9 +593,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				GeneralRouter.ALLOW_MOTORWAYS,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				GpxLocalRoutingParameter.KEY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
-				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
@@ -599,9 +604,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				GpxLocalRoutingParameter.KEY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
-				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
@@ -617,9 +622,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				GpxLocalRoutingParameter.KEY,
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
-				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 

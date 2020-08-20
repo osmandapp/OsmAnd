@@ -44,8 +44,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.routepreparationmenu.cards.NauticalBridgeHeightWarningCard;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.GeocodingLookupService;
@@ -54,9 +52,6 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -88,6 +83,7 @@ import net.osmand.plus.routepreparationmenu.cards.HistoryCard;
 import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
 import net.osmand.plus.routepreparationmenu.cards.LongDistanceWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.MapMarkersCard;
+import net.osmand.plus.routepreparationmenu.cards.NauticalBridgeHeightWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.PedestrianRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportBetaWarningCard;
@@ -97,9 +93,14 @@ import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarning
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -110,6 +111,7 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -1619,7 +1621,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.TARGET);
+					GPXRouteParamsBuilder routeParamsBuilder = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+					if (routeParamsBuilder != null) {
+						FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
+						FollowTrackFragment.showInstance(mapActivity, trackOptionsFragment);
+					} else {
+						AddPointBottomSheetDialog.showInstance(mapActivity, PointType.TARGET);
+					}
 				}
 			}
 		});
@@ -1653,7 +1661,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				public void onClick(View view) {
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
-						AddPointBottomSheetDialog.showInstance(mapActivity, mapActivity.getMyApplication().getTargetPointsHelper().getPointToNavigate() == null ? PointType.TARGET : PointType.INTERMEDIATE);
+						PointType pointType;
+						if (mapActivity.getPointToNavigate() == null
+								|| mapActivity.getRoutingHelper().getCurrentGPXRoute() != null) {
+							pointType = PointType.TARGET;
+						} else {
+							pointType = PointType.INTERMEDIATE;
+						}
+						AddPointBottomSheetDialog.showInstance(mapActivity, pointType);
 					}
 				}
 			});
@@ -1677,8 +1692,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void updateToIcon(View parentView) {
-		ImageView toIcon = (ImageView) parentView.findViewById(R.id.toIcon);
-		toIcon.setImageDrawable(getIconOrig(R.drawable.list_destination));
+		ImageView toIcon = parentView.findViewById(R.id.toIcon);
+
+		OsmandApplication app = (OsmandApplication) parentView.getContext().getApplicationContext();
+		GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+		if (routeParamsBuilder != null) {
+			toIcon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
+		} else {
+			toIcon.setImageDrawable(getIconOrig(R.drawable.list_destination));
+		}
 	}
 
 	private void updateStartPointView() {
@@ -2092,30 +2114,37 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
-			final TextView toText = ((TextView) view.findViewById(R.id.toText));
-			final TargetPointsHelper targets = app.getTargetPointsHelper();
-			TargetPoint finish = targets.getPointToNavigate();
-			if (finish != null) {
-				toText.setText(getRoutePointDescription(targets.getPointToNavigate().point,
-						targets.getPointToNavigate().getOnlyName()));
+			TextView toText = view.findViewById(R.id.toText);
+			TextView toTitle = view.findViewById(R.id.toTitle);
 
-				final LatLon latLon = finish.point;
-				final PointDescription pointDescription = finish.getOriginalPointDescription();
-				boolean needAddress = pointDescription != null && pointDescription.isSearchingAddress(mapActivity);
-				cancelTargetPointAddressRequest();
-				if (needAddress) {
-					targetPointRequest = new AddressLookupRequest(latLon, new GeocodingLookupService.OnAddressLookupResult() {
-						@Override
-						public void geocodingDone(String address) {
-							targetPointRequest = null;
-							updateMenu();
-						}
-					}, null);
-					app.getGeocodingLookupService().lookupAddress(targetPointRequest);
-				}
-
+			GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+			if (routeParamsBuilder != null) {
+				String fileName = new File(routeParamsBuilder.getFile().path).getName();
+				toText.setText(GpxUiHelper.getGpxTitle(fileName));
+				toTitle.setText(R.string.follow_track);
 			} else {
-				toText.setText(R.string.route_descr_select_destination);
+				TargetPointsHelper targets = app.getTargetPointsHelper();
+				TargetPoint finish = targets.getPointToNavigate();
+				if (finish != null) {
+					toText.setText(getRoutePointDescription(finish.point, finish.getOnlyName()));
+
+					PointDescription pointDescription = finish.getOriginalPointDescription();
+					boolean needAddress = pointDescription != null && pointDescription.isSearchingAddress(mapActivity);
+					cancelTargetPointAddressRequest();
+					if (needAddress) {
+						targetPointRequest = new AddressLookupRequest(finish.point, new GeocodingLookupService.OnAddressLookupResult() {
+							@Override
+							public void geocodingDone(String address) {
+								targetPointRequest = null;
+								updateMenu();
+							}
+						}, null);
+						app.getGeocodingLookupService().lookupAddress(targetPointRequest);
+					}
+				} else {
+					toText.setText(R.string.route_descr_select_destination);
+				}
+				toTitle.setText(R.string.route_to);
 			}
 		}
 	}

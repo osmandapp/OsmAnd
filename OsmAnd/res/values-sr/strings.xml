@@ -94,7 +94,6 @@
     <string name="download_srtm_maps">Изохипсе</string>
     <string name="rendering_attr_noAdminboundaries_name">Границе</string>
     <string name="map_widget_max_speed">Ограничење брзине</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Нема пронађених објеката.</string>
     <string name="incremental_search_city">Тражи град инкрементално</string>
     <string name="search_villages_and_postcodes">Претрага за још села/поштанских кодова</string>
@@ -109,7 +108,6 @@
     <string name="animate_route">Започни симулацију</string>
     <string name="file_can_not_be_renamed">Не могу да преименујем фајл.</string>
     <string name="file_with_name_already_exists">Фајл са тим именом већ постоји.</string>
-    <string name="shared_string_gpx_route">GPX рута</string>
     <string name="poi_filter_by_name">Претрага по имену</string>
     <string name="update_poi_file_not_found">Локални фајл који одржава промене тачака од интереса није пронађен и не може да се направи.</string>
     <string name="button_upgrade_osmandplus">Надоградите OsmAnd+</string>
@@ -551,7 +549,6 @@
     <string name="shared_string_deselect_all">Означи све</string>
     <string name="shared_string_clear">Очисти</string>
     <string name="shared_string_clear_all">Очисти све</string>
-    <string name="shared_string_save_as_gpx">Сачувај као нови GPX фајл</string>
     <string name="shared_string_delete">Избриши</string>
     <string name="shared_string_share">Дели</string>
     <string name="shared_string_apply">Примени</string>
@@ -694,7 +691,6 @@
     <string name="save_global_track_interval">Међувреме опште пријаве</string>
     <string name="background_service_int">Међувреме буђења GPS-а</string>
     <string name="enable_sleep_mode">Укључи да GPS ради у позадини</string>
-    <string name="save_track_to_gpx_globally">Уписуј путању у GPX фајл</string>
     <string name="save_track_to_gpx_globally_headline">Праћење путање по захтеву</string>
     <string name="item_removed">Ставка уклоњена</string>
     <string name="n_items_removed">избрисане ставке</string>
@@ -1448,7 +1444,6 @@
     <string name="shared_string_sort">Сортирај</string>
     <string name="coordinate_input">Унос координата</string>
     <string name="marker_save_as_track_descr">Извезите ознаке у следећи GPX фајл:</string>
-    <string name="marker_save_as_track">Сачувај као GPX фајл</string>
     <string name="move_to_history">Премести у историју</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
@@ -1582,7 +1577,6 @@
     <string name="rendering_attr_trolleybusRoutes_name">Путеви тролејбуса</string>
     <string name="rendering_attr_busRoutes_name">Аутобуски путеви</string>
     <string name="rendering_category_routes">Путеви</string>
-    <string name="quick_action_add_gpx">Додај GPX пролазну тачку</string>
     <string name="quick_action_edit_action">Уреди акцију</string>
     <string name="make_as_start_point">Означи ово као тачку поласка</string>
     <string name="shared_string_current">Тренутна</string>
@@ -1696,7 +1690,6 @@
     <string name="poi_filter_for_tourists">За туристе</string>
     <string name="select_navigation_mode">Тип превоза:</string>
     <string name="map_widget_parking">Паркинг</string>
-    <string name="map_widget_monitoring">GPX бележење</string>
     <string name="map_widget_mini_route">Мини карта пута</string>
     <string name="show_cameras">Радари</string>
     <string name="show_traffic_warnings">Упозорења о саобраћају</string>
@@ -1855,7 +1848,6 @@
     <string name="send_location">Пошаљи положај</string>
     <string name="context_menu_item_share_location">Подели положај</string>
     <string name="add_waypoint_dialog_title">Додај пролазну тачку на снимљену GPX путању</string>
-    <string name="context_menu_item_add_waypoint">Додај GPX пролазну тачку</string>
     <string name="amenity_type_administrative">Администрација</string>
     <string name="amenity_type_barrier">Препрека</string>
     <string name="amenity_type_education">Образовање</string>
@@ -1896,8 +1888,6 @@
     <string name="shared_string_action_name">Име радње</string>
     <string name="mappilary_no_internet_desc">Слике са Мапилара је могуће видети само ако сте повезани на интернет.</string>
     <string name="retry">Покушај поново</string>
-    <string name="empty_state_my_tracks">Додај GPX фајлове</string>
-    <string name="empty_state_my_tracks_desc">Увези GPX фајлове или сними путање.</string>
     <string name="empty_state_favourites">Додај омиљене</string>
     <string name="empty_state_favourites_desc">Увезите Омиљене тачке или их додајте означавајући их као ознаке на карти.</string>
     <string name="import_track">Увези GPX фајл</string>
@@ -1934,7 +1924,6 @@
     <string name="rendering_attr_contourLines_name">Прикажи изохипсе</string>
     <string name="offline_navigation_not_available">OsmAnd навигација ван мреже је привремено недоступна.</string>
     <string name="maps_could_not_be_downloaded">Ова карта не може да се преузме</string>
-    <string name="layer_gpx_layer">GPX фајлови…</string>
     <string name="vector_data">Векторске карте ван мреже</string>
     <string name="rotate_map_compass_opt">Правац компаса</string>
     <string name="rotate_map_bearing_opt">У смеру кретања</string>
@@ -2200,7 +2189,6 @@
     <string name="working_days">Радни дани</string>
     <string name="recent_places">Скорашња места</string>
     <string name="favourites">Омиљене</string>
-    <string name="show_gpx">Прикажи GPX податке</string>
     <string name="count_of_lines">Број линија</string>
     <string name="buy">Купи</string>
     <string name="get_full_version">Пуна верзија</string>
@@ -2284,7 +2272,6 @@
     <string name="waypoint_one">Пролазна тачка 1</string>
     <string name="route_point_one">Тачка пута 1</string>
     <string name="move_point">Помери тачку</string>
-    <string name="add_segment_to_the_track">Додај у GPX фајл</string>
     <string name="osm_recipients_label">ОСМ примаоци</string>
     <string name="total_donations">Укупно донација</string>
     <string name="osmand_development_plugin_description">Подешавања за развој и отклањање гррешака као што су симулација навођења, перформансе исцртавања или гласовни упити. Намењено програмерима, непотребно приликом нормалног коришћења.</string>
@@ -2750,7 +2737,6 @@
 \n - Навођењем у праву траку, приказ ограничења брзине, снимљени и синтетизовани гласови за навођење
 \n</string>
     <string name="get_osmand_live">Набавите OsmAnd Live да откључате ове могућности: дневна ажурирања карти са неограниченим бројем скидања, сви и плаћени и бесплатни додаци, Википедија, Wikivoyage и још много тога.</string>
-    <string name="shared_string_gpx_files">GPX фајлови</string>
     <string name="osmand_extended_description_part3">Карта
 \n • Приказ тачака од интереса око Вас
 \n • Подешавање карте према правцу кретања (или компасу)

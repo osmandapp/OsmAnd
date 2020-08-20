@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -21,18 +20,20 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.helpers.ImportHelper;
+import net.osmand.plus.helpers.ImportHelper.OnGpxImportCompleteListener;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import org.apache.commons.logging.Log;
@@ -60,7 +61,7 @@ public class FavoritesActivity extends TabActivity {
 	private ImportHelper importHelper;
 
 	private Bundle intentParams = null;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		OsmandApplication app = (OsmandApplication) getApplication();
@@ -98,7 +99,7 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 	public void addTrack() {
-		Intent intent = getImportGpxIntent();
+		Intent intent = ImportHelper.getImportTrackIntent();
 		try {
 			startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
 		} catch (ActivityNotFoundException e) {
@@ -107,25 +108,12 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 	public void importFavourites() {
-		Intent intent = getImportGpxIntent();
+		Intent intent = ImportHelper.getImportTrackIntent();
 		try {
 			startActivityForResult(intent, IMPORT_FAVOURITES_REQUEST);
 		} catch (ActivityNotFoundException e) {
 			LOG.error(e.getMessage(), e);
 		}
-	}
-
-	private Intent getImportGpxIntent() {
-		Intent intent = new Intent();
-		String action;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			action = Intent.ACTION_OPEN_DOCUMENT;
-		} else {
-			action = Intent.ACTION_GET_CONTENT;
-		}
-		intent.setAction(action);
-		intent.setType("*/*");
-		return intent;
 	}
 
 	@Override
@@ -137,14 +125,19 @@ public class FavoritesActivity extends TabActivity {
 				if (gpxFragment!= null) {
 					gpxFragment.startImport();
 				}
-				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
+				importHelper.setGpxImportCompleteListener(new OnGpxImportCompleteListener() {
 					@Override
-					public void onComplete(boolean success) {
+					public void onImportComplete(boolean success) {
 						AvailableGPXFragment gpxFragment = getGpxFragment();
 						if (gpxFragment!= null) {
 							gpxFragment.finishImport(success);
 						}
 						importHelper.setGpxImportCompleteListener(null);
+					}
+
+					@Override
+					public void onSaveComplete(boolean success, GPXUtilities.GPXFile result) {
+
 					}
 				});
 				if (!importHelper.handleGpxImport(uri, false)) {

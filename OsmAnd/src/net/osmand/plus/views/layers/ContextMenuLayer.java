@@ -574,11 +574,21 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		applyingMarkerLatLon = null;
 	}
 
+	public boolean showContextMenuForMyLocation() {
+		PointLocationLayer provider = view.getLayerByClass(PointLocationLayer.class);
+		if (provider != null) {
+			LatLon ll = provider.getObjectLocation(null);
+			if (ll != null) {
+				PointDescription pointDescription = provider.getObjectName(null);
+				return showContextMenu(ll, pointDescription, ll, provider);
+			}
+		}
+		return false;
+	}
+
 	public boolean showContextMenu(double latitude, double longitude, boolean showUnknownLocation) {
-		RotatedTileBox cp = activity.getMapView().getCurrentRotatedTileBox();
-		float x = cp.getPixXFromLatLon(latitude, longitude);
-		float y = cp.getPixYFromLatLon(latitude, longitude);
-		return showContextMenu(new PointF(x, y), activity.getMapView().getCurrentRotatedTileBox(), showUnknownLocation);
+		return showContextMenu(getPointFromLatLon(latitude, longitude),
+				activity.getMapView().getCurrentRotatedTileBox(), showUnknownLocation);
 	}
 
 	public boolean showContextMenu(@NonNull LatLon latLon,
@@ -801,6 +811,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		return false;
+	}
+
+	private PointF getPointFromLatLon(double latitude, double longitude) {
+		RotatedTileBox cp = activity.getMapView().getCurrentRotatedTileBox();
+		float x = cp.getPixXFromLatLon(latitude, longitude);
+		float y = cp.getPixYFromLatLon(latitude, longitude);
+		return new PointF(x, y);
 	}
 
 	private List<String> getValues(@Nullable QStringStringHash set) {
