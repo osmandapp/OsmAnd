@@ -1338,4 +1338,12 @@
     <string name="layer_map_appearance">Swel agdil</string>
     <string name="map_widget_right">Agalis ayeffus</string>
     <string name="map_widget_appearance_rem">Iferdisen i d-iqqimen</string>
+    <string name="gpx_split_interval_none_descr">Fren iɣewwaṛen n unegzum i tebɣiḍ: s wakud neɣ s umeccaq.</string>
+    <string name="track_coloring_solid">Iqqur</string>
+    <string name="plan_route_last_edited">Taẓrigt taneggarut</string>
+    <string name="reverse_route">Abrid yettin</string>
+    <string name="next_segment">Aḥric i d-itteddun</string>
+    <string name="navigation_profile">Amaɣnu n tunigin</string>
+    <string name="rourte_between_points_add_track_desc">Fren afaylu n uḍfar iɣer ara yernu uḥric amaynut.</string>
+    <string name="plan_route_exit_dialog_descr">Tebɣiḍ s tidet ad tmedleḍ abrid n uɣawas war asekles\? Ad tesruḥeḍ akk ibeddilen.</string>
 </resources>
