@@ -252,7 +252,6 @@ public class GeoPointParserUtil {
 						}
 						final String postf = "\\s\\((\\p{L}|\\p{M}|\\p{Z}|\\p{S}|\\p{N}|\\p{P}|\\p{C})*\\)$";
 						opath = opath.replaceAll(postf, "");
-						System.out.println("opath=" + opath);
 						return parseGoogleMapsPath(opath, params);
 					}
 					if (fragment != null) {
@@ -262,13 +261,32 @@ public class GeoPointParserUtil {
 							return new GeoParsedPoint(m.group(1));
 						}
 					}
-
+					String DATA_PREFIX = "/data=";
 					String[] pathPrefixes = new String[]{"/@", "/ll=",
-							"loc:", "/"};
+							"loc:", DATA_PREFIX, "/"};
 					for (String pref : pathPrefixes) {
 						if (path.contains(pref)) {
 							path = path.substring(path.lastIndexOf(pref) + pref.length());
-							return parseGoogleMapsPath(path, params);
+							if (path.contains("/")) {
+								path = path.substring(0, path.indexOf('/'));
+							}
+							if (pref.equals(DATA_PREFIX)) {
+								String[] vls = path.split("!");
+								String lat = null;
+								String lon = null;
+								for (String v : vls) {
+									if (v.startsWith("3d")) {
+										lat = v.substring(2);
+									} else if (v.startsWith("4d")) {
+										lon = v.substring(2);
+									}
+								}
+								if (lat != null && lon != null) {
+									return new GeoParsedPoint(Double.valueOf(lat), Double.valueOf(lon));
+								}
+							} else {
+								return parseGoogleMapsPath(path, params);
+							}
 						}
 					}
 				} else if (host.endsWith(".amap.com")) {
