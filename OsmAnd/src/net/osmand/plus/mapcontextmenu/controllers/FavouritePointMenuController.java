@@ -14,6 +14,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
@@ -160,14 +161,19 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public Drawable getSecondLineTypeIcon() {
-
-		FavouritesDbHelper helper = menu.getMyApplication().getFavorites();
-		if (helper != null && helper.getGroup(groupName) != null) {
-			Drawable line2icon = helper.getColoredIconForGroup(groupName);
-			GravityDrawable line2GravityDrawable =
-					new GravityDrawable(line2icon);
+		if (this.getMapActivity() != null) {
+			OsmandApplication app = this.getMapActivity().getMyApplication();
+			if (app != null) {
+				FavouritesDbHelper helper = app.getFavorites();
+				String group = fav.getCategory();
+				if (helper != null && helper.getGroup(group) != null) {
+					Drawable line2icon = helper.getColoredIconForGroup(group);
+					GravityDrawable gravityIcon = new GravityDrawable(line2icon);
+					gravityIcon.setBoundsFrom(line2icon);
+					return gravityIcon;
+				}
+			}
 		}
-
 		return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color_default_light : R.color.ctx_menu_bottom_view_icon_dark);
 	}
 
@@ -209,6 +215,6 @@ public class FavouritePointMenuController extends MenuController {
 			if (originObject instanceof Amenity) {
 				AmenityMenuController.addTypeMenuItem((Amenity) originObject, builder);
 			}
-		} 
+		}
 	}
 }

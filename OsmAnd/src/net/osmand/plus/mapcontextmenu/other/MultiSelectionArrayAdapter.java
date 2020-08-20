@@ -12,16 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.data.FavouritePoint;
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.view.GravityDrawable;
 
 import java.util.List;
-
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.convertDisplayNameToGroupIdName;
 
 public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMenu.MenuObject> {
 
@@ -98,22 +94,15 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			}
 			line2.setText(line2Str);
 			Drawable slIcon = item.getTypeIcon();
-			GravityDrawable line2Icon = new GravityDrawable(slIcon);
-			if (slIcon != null){
-				line2Icon.setBoundsFrom(slIcon);
-				line2.setCompoundDrawablesWithIntrinsicBounds(line2Icon, null, null, null);
-				line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(menu.getMapActivity(), 5f));
-			}
-			String groupName = convertDisplayNameToGroupIdName(getContext(),
-					item.getTypeStr());
-			if (item.getMyApplication() != null){
-				FavouritesDbHelper helper = item.getMyApplication().getFavorites();
-				if (helper != null && helper.getGroup(groupName) != null){
-					Drawable line2icon = helper.getColoredIconForGroup(groupName);
-					GravityDrawable line2GravityIcon = new GravityDrawable(line2icon);
-					line2GravityIcon.setBoundsFrom(line2icon);
-					line2.setCompoundDrawablesWithIntrinsicBounds(line2GravityIcon, null, null, null);
+			if (slIcon != null) {
+				if (item.getTypeIcon() instanceof GravityDrawable) {
+					GravityDrawable line2Icon = (GravityDrawable) item.getTypeIcon();
+					line2Icon.setBoundsFrom(slIcon);
+					line2.setCompoundDrawablesWithIntrinsicBounds(line2Icon, null, null, null);
+				} else {
+					line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
 				}
+				line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(menu.getMapActivity(), 5f));
 			}
 			// Divider
 			View divider = convertView.findViewById(R.id.divider);

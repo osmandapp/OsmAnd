@@ -3,7 +3,6 @@ package net.osmand.plus;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -104,7 +103,7 @@ public class FavouritesDbHelper {
 		}
 
 		public int getColor() {
-				return color;
+			return color;
 		}
 
 		public boolean isVisible() {
@@ -138,7 +137,7 @@ public class FavouritesDbHelper {
 		if (favoriteGroup != null) {
 			int color = favoriteGroup.getColor() == 0 ?
 					context.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
-			return context.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color);
+			return context.getUIUtilities().getPaintedIcon(R.drawable.ic_action_group_name_16, color);
 		}
 		return null;
 	}
@@ -198,10 +197,10 @@ public class FavouritesDbHelper {
 			if (fp.getColor() == 0xFF000000 || fp.getColor() == ContextCompat.getColor(context, R.color.color_favorite)) {
 				fp.setColor(0);
 			}
-			if (fp.getBackgroundType() == FavouritePoint.DEFAULT_BACKGROUND_TYPE){
+			if (fp.getBackgroundType() == FavouritePoint.DEFAULT_BACKGROUND_TYPE) {
 				fp.setBackgroundType(null);
 			}
-			if(fp.getIconId()== FavouritePoint.DEFAULT_UI_ICON_ID){
+			if (fp.getIconId() == FavouritePoint.DEFAULT_UI_ICON_ID) {
 				fp.setIconId(0);
 			}
 			FavoriteGroup group = getOrCreateGroup(fp, 0);

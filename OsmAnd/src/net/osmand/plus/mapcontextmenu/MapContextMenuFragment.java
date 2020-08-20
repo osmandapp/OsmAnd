@@ -46,7 +46,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -55,11 +54,9 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
@@ -69,19 +66,20 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
+import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
@@ -91,7 +89,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.convertDisplayNameToGroupIdName;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
 
@@ -177,7 +174,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+	                         Bundle savedInstanceState) {
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
@@ -609,7 +606,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		containerLayoutListener = new OnLayoutChangeListener() {
 			@Override
 			public void onLayoutChange(View view, int left, int top, int right, int bottom,
-									   int oldLeft, int oldTop, int oldRight, int oldBottom) {
+			                           int oldLeft, int oldTop, int oldRight, int oldBottom) {
 				if (!transportBadgesCreated) {
 					createTransportBadges();
 				}
@@ -678,11 +675,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private View getActionView(ContextMenuItem contextMenuItem,
-							   final int position,
-							   final ContextMenuAdapter mainAdapter,
-							   final ContextMenuAdapter additionalAdapter,
-							   final ContextMenuItemClickListener mainListener,
-							   final ContextMenuItemClickListener additionalListener) {
+	                           final int position,
+	                           final ContextMenuAdapter mainAdapter,
+	                           final ContextMenuAdapter additionalAdapter,
+	                           final ContextMenuItemClickListener mainListener,
+	                           final ContextMenuItemClickListener additionalListener) {
 		UiUtilities uiUtilities = requireMyApplication().getUIUtilities();
 		LayoutInflater inflater = UiUtilities.getInflater(getMyApplication(), nightMode);
 		View view = inflater.inflate(R.layout.context_menu_action_item, null);
@@ -831,7 +828,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		v.setAlpha(alpha);
 		if (visible && v.getVisibility() != View.VISIBLE) {
 			v.setVisibility(View.VISIBLE);
-		} else  if (!visible && v.getVisibility() == View.VISIBLE) {
+		} else if (!visible && v.getVisibility() == View.VISIBLE) {
 			v.setVisibility(View.INVISIBLE);
 		}
 	}
@@ -839,7 +836,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void updateVisibility(View v, boolean visible) {
 		if (visible && v.getVisibility() != View.VISIBLE) {
 			v.setVisibility(View.VISIBLE);
-		} else  if (!visible && v.getVisibility() == View.VISIBLE) {
+		} else if (!visible && v.getVisibility() == View.VISIBLE) {
 			v.setVisibility(View.INVISIBLE);
 		}
 	}
@@ -1025,7 +1022,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
-						   final int previousMenuState, final int newMenuState, int dZoom) {
+	                       final int previousMenuState, final int newMenuState, int dZoom) {
 		final int posY = getPosY(currentY, needCloseMenu, previousMenuState);
 		if (getViewY() != posY || dZoom != 0) {
 			if (posY < getViewY()) {
@@ -1713,7 +1710,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 										- (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
 							} else {
 								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight
-										- titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - additionalButtonsHeight - titleProgressHeight-line3Height;
+										- titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - additionalButtonsHeight - titleProgressHeight - line3Height;
 								menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
 										+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
 								menuButtonsHeight = view.findViewById(R.id.context_menu_bottom_buttons).getHeight()
@@ -1820,15 +1817,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				if (!Algorithms.isEmpty(typeStr)) {
 					line2Str.append(typeStr);
 					Drawable icon = menu.getTypeIcon();
-					if (icon != null){
-						GravityDrawable gravityIcon = new GravityDrawable(icon);
-						AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
-								line2, gravityIcon, null, null, null);
-					}
-					String groupName = convertDisplayNameToGroupIdName(requireContext(),
-							menu.getTypeStr());
-					if (menu.getMyApplication() != null){
-
+					if (icon != null) {
+						if (menu.getTypeIcon() instanceof GravityDrawable) {
+							GravityDrawable line2Icon = (GravityDrawable) menu.getTypeIcon();
+							line2Icon.setBoundsFrom(icon);
+							line2.setCompoundDrawablesWithIntrinsicBounds(line2Icon, null, null, null);
+						} else {
+							line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+						}
+						line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(requireContext(), 5f));
 					}
 					line2.setCompoundDrawablePadding(dpToPx(5f));
 				}
@@ -2211,7 +2208,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	public static boolean showInstance(final MapContextMenu menu, final MapActivity mapActivity,
-									   final boolean centered) {
+	                                   final boolean centered) {
 		try {
 
 			if (menu.getLatLon() == null || mapActivity == null || mapActivity.isActivityDestroyed()) {
