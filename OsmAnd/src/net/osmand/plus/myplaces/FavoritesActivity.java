@@ -136,7 +136,7 @@ public class FavoritesActivity extends TabActivity {
 					}
 
 					@Override
-					public void onSavingComplete(boolean success, GPXUtilities.GPXFile result) {
+					public void onSaveComplete(boolean success, GPXUtilities.GPXFile result) {
 
 					}
 				});

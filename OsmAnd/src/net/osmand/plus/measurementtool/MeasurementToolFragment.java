@@ -131,7 +131,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean progressBarVisible;
 	private boolean pointsListOpened;
 	private boolean planRouteMode = false;
-	private boolean attachToRoads;
 	private Boolean saved;
 	private boolean portrait;
 	private boolean nightMode;
@@ -157,10 +156,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public void setPlanRouteMode(boolean planRouteMode) {
 		this.planRouteMode = planRouteMode;
-	}
-
-	public void setAttachToRoads(boolean attachToRoads) {
-		this.attachToRoads = attachToRoads;
 	}
 
 	@Nullable
@@ -469,7 +464,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (editingCtx.isNewData() && planRouteMode) {
 				StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
 						createStartPlanRouteListener());
-			} else if (attachToRoads && !(editingCtx.isNewData() || editingCtx.hasRoutePoints() || editingCtx.isInSnapToRoadMode())) {
+			} else if (!(editingCtx.isNewData() || editingCtx.hasRoutePoints() || editingCtx.isInSnapToRoadMode())) {
 				SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
 			}
 		}
@@ -892,7 +887,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public void addNewGpxData(GPXFile gpxFile) {
 		QuadRect rect = gpxFile.getRect();
-		TrkSegment segment = gpxFile.getTrkSegment();
+		TrkSegment segment = gpxFile.getNonEmptyTrkSegment();
 		ActionType actionType = segment == null ? ActionType.ADD_ROUTE_POINTS : ActionType.EDIT_SEGMENT;
 		NewGpxData newGpxData = new NewGpxData(gpxFile, rect, actionType, segment);
 
@@ -1803,12 +1798,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return showFragment(fragment, fragmentManager);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx,
-	                                   boolean planRoute, boolean attachToRoads) {
+	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx, boolean planRoute) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setEditingCtx(editingCtx);
 		fragment.setPlanRouteMode(planRoute);
-		fragment.setAttachToRoads(attachToRoads);
 		return showFragment(fragment, fragmentManager);
 	}
 

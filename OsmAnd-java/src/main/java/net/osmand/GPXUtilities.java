@@ -1290,7 +1290,7 @@ public class GPXUtilities {
 			return pt;
 		}
 
-		public TrkSegment getTrkSegment() {
+		public TrkSegment getNonEmptyTrkSegment() {
 			for (GPXUtilities.Track t : tracks) {
 				for (TrkSegment s : t.segments) {
 					if (s.points.size() > 0) {

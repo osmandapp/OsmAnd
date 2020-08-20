@@ -117,7 +117,7 @@ public class ImportHelper {
 
 	public interface OnGpxImportCompleteListener {
 		void onImportComplete(boolean success);
-		void onSavingComplete(boolean success, GPXFile result);
+		void onSaveComplete(boolean success, GPXFile result);
 	}
 
 	public ImportHelper(final AppCompatActivity activity, final OsmandApplication app, final OsmandMapTileView mapView) {
@@ -1094,7 +1094,7 @@ public class ImportHelper {
 			boolean success = Algorithms.isEmpty(warning);
 
 			if (gpxImportCompleteListener != null) {
-				gpxImportCompleteListener.onSavingComplete(success, result);
+				gpxImportCompleteListener.onSaveComplete(success, result);
 			}
 			if (success) {
 				if (showInDetailsActivity) {

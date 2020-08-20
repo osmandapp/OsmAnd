@@ -21,8 +21,8 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
@@ -201,13 +201,13 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				boolean osmandRouter = mode.getRouteService() == RouteProvider.RouteService.OSMAND;
 				if (rparams != null && osmandRouter) {
 //					if (!routingHelper.isCurrentGPXRouteV2()) {
-						int textId = R.string.gpx_option_reverse_route;
-						String title = app.getString(textId);
-						LocalRoutingParameter parameter = new OtherLocalRoutingParameter(textId, title, rparams.isReverse());
+					int textId = R.string.gpx_option_reverse_route;
+					String title = app.getString(textId);
+					LocalRoutingParameter parameter = new OtherLocalRoutingParameter(textId, title, rparams.isReverse());
 
-						ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, parameter);
-						reverseTrackCard.setListener(this);
-						cardsContainer.addView(reverseTrackCard.build(mapActivity));
+					ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, parameter);
+					reverseTrackCard.setListener(this);
+					cardsContainer.addView(reverseTrackCard.build(mapActivity));
 //					}
 					if (!gpxFile.hasRtePt()) {
 						AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
@@ -226,7 +226,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-			List<String> selectedTrackNames = GpxUiHelper.getSelectedTrackNames(app);
+			List<String> selectedTrackNames = GpxUiHelper.getSelectedTrackPaths(app);
 			List<GPXInfo> list = GpxUiHelper.getSortedGPXFilesInfo(dir, selectedTrackNames, false);
 			if (list.size() > 0) {
 				String defaultCategory = app.getString(R.string.shared_string_all);
@@ -346,12 +346,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (card instanceof ImportTrackCard) {
 				importTrack();
 			} else if (card instanceof TrackEditCard) {
-				openPlanRoute(false);
+				openPlanRoute(true);
 				close();
 			} else if (card instanceof SelectTrackCard) {
 				updateSelectionMode(true);
 			} else if (card instanceof AttachTrackToRoadsCard) {
-				openPlanRoute(true);
+				openPlanRoute(false);
 				close();
 			} else if (card instanceof ReverseTrackCard
 					|| card instanceof NavigateTrackOptionsCard) {
@@ -439,7 +439,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 					}
 
 					@Override
-					public void onSavingComplete(boolean success, GPXFile result) {
+					public void onSaveComplete(boolean success, GPXFile result) {
 						if (success) {
 							selectTrackToFollow(result);
 							updateSelectionMode(false);
@@ -456,17 +456,20 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 	}
 
-	public void openPlanRoute(boolean attachToRoads) {
+	public void openPlanRoute(boolean useAppMode) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && gpxFile != null) {
 			QuadRect rect = gpxFile.getRect();
-			GPXUtilities.TrkSegment segment = gpxFile.getTrkSegment();
+			TrkSegment segment = gpxFile.getNonEmptyTrkSegment();
 			ActionType actionType = segment == null ? ActionType.ADD_ROUTE_POINTS : ActionType.EDIT_SEGMENT;
 			NewGpxData newGpxData = new NewGpxData(gpxFile, rect, actionType, segment);
 
 			MeasurementEditingContext editingContext = new MeasurementEditingContext();
 			editingContext.setNewGpxData(newGpxData);
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true, attachToRoads);
+			if (useAppMode) {
+				editingContext.setAppMode(app.getRoutingHelper().getAppMode());
+			}
+			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true);
 		}
 	}
 

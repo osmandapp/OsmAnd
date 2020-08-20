@@ -47,7 +47,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
 		List<SelectedGpxFile> selectedGpxFiles = selectedGpxHelper.getSelectedGPXFiles();
 
-		List<String> files = GpxUiHelper.getSelectedTrackNames(mapActivity.getMyApplication());
+		List<String> files = GpxUiHelper.getSelectedTrackPaths(mapActivity.getMyApplication());
 		if (selectedGpxFiles.isEmpty()) {
 			Map<GPXFile, Long> fls = selectedGpxHelper.getSelectedGpxFilesBackUp();
 			for (Map.Entry<GPXFile, Long> f : fls.entrySet()) {
