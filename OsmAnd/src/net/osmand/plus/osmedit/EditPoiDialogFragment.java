@@ -19,7 +19,6 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -27,7 +26,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -40,6 +38,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
@@ -50,7 +49,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -75,6 +73,7 @@ import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -88,6 +87,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = EditPoiDialogFragment.class.getSimpleName();
@@ -111,11 +112,11 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	private EditPoiData editPoiData;
 	private EditPoiViewPager viewPager;
-	private AutoCompleteTextView poiTypeEditText;
+	private ExtendedEditText poiTypeEditText;
 
 	private OnSaveButtonClickListener onSaveButtonClickListener;
 	private OpenstreetmapUtil mOpenstreetmapUtil;
-	private TextInputLayout poiTypeTextInputLayout;
+	private OsmandTextFieldBoxes poiTypeTextInputLayout;
 	private View view;
 
 	public static final int AMENITY_TEXT_LENGTH= 255;
@@ -250,7 +251,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		EditText poiNameEditText = (EditText) view.findViewById(R.id.poiNameEditText);
+		ExtendedEditText poiNameEditText = (ExtendedEditText) view.findViewById(R.id.poiNameEditText);
 		AndroidUtils.setTextHorizontalGravity(poiNameEditText, Gravity.START);
 		poiNameEditText.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -276,8 +277,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		poiNameEditText.setText(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()));
 		poiNameEditText.requestFocus();
 		AndroidUtils.showSoftKeyboard(getActivity(), poiNameEditText);
-		poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
-		poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
+		poiTypeTextInputLayout = (OsmandTextFieldBoxes) view.findViewById(R.id.poiTypeTextInputLayout);
+		poiTypeEditText = (ExtendedEditText) view.findViewById(R.id.poiTypeEditText);
 		AndroidUtils.setTextHorizontalGravity(poiTypeEditText, Gravity.START);
 		poiTypeEditText.setText(editPoiData.getPoiTypeString());
 		poiTypeEditText.addTextChangedListener(new TextWatcher() {
@@ -296,7 +297,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					if (!getMyApplication().isApplicationInitializing()) {
 						PoiCategory category = editPoiData.getPoiCategory();
 						if (category != null) {
-							poiTypeTextInputLayout.setHint(category.getTranslation());
+							poiTypeTextInputLayout.setLabelText(category.getTranslation());
 						}
 					}
 				}
@@ -304,45 +305,24 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		});
 		poiNameEditText.setOnEditorActionListener(mOnEditorActionListener);
 		poiTypeEditText.setOnEditorActionListener(mOnEditorActionListener);
-		poiTypeEditText.setOnTouchListener(new View.OnTouchListener() {
+
+		AppCompatImageButton expandButton = poiTypeTextInputLayout.getEndIconImageButton();
+		expandButton.setColorFilter(R.color.gpx_chart_red);
+		expandButton.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public boolean onTouch(final View v, MotionEvent event) {
-				Context ctx = getContext();
-				if (ctx == null) {
-					return false;
-				}
-				boolean isLayoutRtl = AndroidUtils.isLayoutRtl(getContext());
-				final EditText editText = (EditText) v;
-				if (event.getAction() == MotionEvent.ACTION_UP) {
-					final int DRAWABLE_END = 2;
-					int expandBtnWidth = AndroidUtils.getCompoundDrawables(editText)[DRAWABLE_END].getBounds().width();
-
-					boolean expandButtonPressed = false;
-					if (isLayoutRtl) {
-						expandButtonPressed = event.getX() <= (editText.getLeft() + expandBtnWidth
-								+ editText.getPaddingLeft());
-					} else {
-						expandButtonPressed = event.getX() >= (editText.getRight() - expandBtnWidth
-								- editText.getPaddingRight());
-					}
-
-					if (expandButtonPressed) {
-						PoiCategory category = editPoiData.getPoiCategory();
-						if (category != null) {
-							PoiSubTypeDialogFragment dialogFragment =
-									PoiSubTypeDialogFragment.createInstance(category);
-							dialogFragment.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
-								@Override
-								public void select(String category) {
-									setSubCategory(category);
-								}
-							});
-							dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
+			public void onClick(View v) {
+				PoiCategory category = editPoiData.getPoiCategory();
+				if (category != null) {
+					PoiSubTypeDialogFragment dialogFragment =
+							PoiSubTypeDialogFragment.createInstance(category);
+					dialogFragment.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
+						@Override
+						public void select(String category) {
+							setSubCategory(category);
 						}
-						return true;
-					}
+					});
+					dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
 				}
-				return false;
 			}
 		});
 
