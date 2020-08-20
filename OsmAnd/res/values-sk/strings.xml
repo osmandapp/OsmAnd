@@ -56,7 +56,6 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Znovunastaviť štandardné</string>
     <string name="map_widget_parking">Parkovanie</string>
-    <string name="map_widget_monitoring">Záznam GPX</string>
     <string name="map_widget_speed">Rýchlosť</string>
     <string name="map_widget_distance">Cieľ</string>
     <string name="map_widget_altitude">Nadm. výška</string>
@@ -217,7 +216,6 @@
     <string name="animate_route">Začať simuláciu</string>
     <string name="file_can_not_be_renamed">Nepodarilo sa premenovať súbor.</string>
     <string name="file_with_name_already_exists">Súbor s týmto názvom už existuje.</string>
-    <string name="shared_string_gpx_route">GPX trasa</string>
     <string name="poi_query_by_name_matches_categories">Boli nájdené viaceré súvisiace kategórie POI.</string>
     <string name="data_to_search_poi_not_available">Stiahnite offline údaje pre hľadanie POI.</string>
     <string name="poi_filter_by_name">Hľadať podľa názvu</string>
@@ -334,7 +332,6 @@
     <string name="context_menu_item_share_location">Zdieľať umiestnenie</string>
     <string name="add_waypoint_dialog_added">GPX bod (waypoint) \"{0}\" pridaný</string>
     <string name="add_waypoint_dialog_title">Pridať waypoint do nahranej GPX stopy</string>
-    <string name="context_menu_item_add_waypoint">Pridať GPX waypoint</string>
     <string name="amenity_type_administrative">Administratíva</string>
     <string name="amenity_type_barrier">Prekážky</string>
     <string name="amenity_type_education">Školstvo</string>
@@ -430,7 +427,6 @@
     <string name="voice">Nahrávka hlasu</string>
     <string name="no_vector_map_loaded">Vektorové mapy neboli načítané</string>
     <string name="gpx_files_not_found">Žiadne GPX súbory neboli nájdené v priečinku stôp</string>
-    <string name="layer_gpx_layer">Súbory GPX…</string>
     <string name="error_reading_gpx">Nepodarilo sa načítať GPX údaje.</string>
     <string name="vector_data">Vektorové OSM mapy</string>
     <string name="transport_context_menu">Hľadať prepravu na zastávke</string>
@@ -855,7 +851,6 @@
     <string name="search_villages_and_postcodes">Hľadať viac obcí/PSČ</string>
     <string name="route_descr_lat_lon">Šírka %1$.3f dĺžka %2$.3f</string>
     <string name="map_widget_max_speed">Obmedzenie rýchlosti</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie hraníc regiónov (administratívne úrovne 5 až 9).</string>
     <string name="index_srtm_parts">časti</string>
@@ -1267,7 +1262,6 @@
     <string name="confirm_every_run">Vždy sa pýtať</string>
     <string name="save_global_track_interval_descr">Zadajte interval pre všeobecné zaznamenávanie trasy (prístupné cez tlačidlo záznamu GPX na mape).</string>
     <string name="save_global_track_interval">Interval všeobecného zaznamenávania</string>
-    <string name="save_track_to_gpx_globally">Zaznamenať stopu do GPX súboru</string>
     <string name="save_track_to_gpx_globally_descr">Zaznamenávanie polohy do GPX súboru môže byť zapnuté a vypnuté cez tlačidlo záznamu GPX na mape.</string>
     <string name="save_track_interval_globally">Interval zaznamenávania</string>
     <string name="rendering_attr_publicTransportMode_name">Linky autobusov a trolejbusov</string>
@@ -1438,7 +1432,6 @@
     <string name="shared_string_deselect_all">Zrušiť výber všetkých</string>
     <string name="shared_string_clear">Vymazať</string>
     <string name="shared_string_save">Uložiť</string>
-    <string name="shared_string_save_as_gpx">Uložiť ako nový súbor GPX</string>
     <string name="shared_string_rename">Premenovať</string>
     <string name="shared_string_delete">Odstrániť</string>
     <string name="shared_string_delete_all">Odstrániť všetko</string>
@@ -1659,7 +1652,6 @@
     <string name="favourites">Obľúbené</string>
     <string name="saved_at_time">Uložené o: %1$s</string>
     <string name="poi_deleted_localy">Bod POI bude vymazaný keď zmeny odošlete</string>
-    <string name="show_gpx">Zobraziť údaje GPX</string>
     <string name="count_of_lines">Počet riadkov</string>
     <string name="show_on_start">Zobraziť po štarte</string>
     <string name="are_you_sure">Ste si istí?</string>
@@ -2103,7 +2095,6 @@
     <string name="quick_action_navigation_voice">Hlas zapnúť/vypnúť</string>
     <string name="quick_action_navigation_voice_off">Zapnúť hlas</string>
     <string name="quick_action_navigation_voice_on">Stlmiť hlas</string>
-    <string name="quick_action_add_gpx">Pridať medzicieľ GPX</string>
     <string name="quick_action_add_parking">Pridať miesto zaparkovania</string>
     <string name="quick_action_new_action">Pridať akciu</string>
     <string name="quick_action_edit_action">Upraviť akciu</string>
@@ -2490,14 +2481,11 @@
     <string name="choose_navigation_type">Zvoľte profil navigácie</string>
     <string name="add_route_points">Pridať body trasy</string>
     <string name="add_line">Pridať čiaru</string>
-    <string name="empty_state_my_tracks">Pridať súbory GPX</string>
-    <string name="empty_state_my_tracks_desc">Importovať súbory GPX alebo zaznamenať stopy.</string>
     <string name="empty_state_favourites">Pridať obľúbené</string>
     <string name="empty_state_favourites_desc">Importovať Obľúbené body alebo pridať ich označením bodov na mape.</string>
     <string name="import_track">Importovať súbor GPX</string>
     <string name="import_track_desc">Súbor %1$s neobsahuje body trasy, naimportovať ako stopu?</string>
     <string name="move_point">Presunúť bod</string>
-    <string name="add_segment_to_the_track">Pridať do súboru GPX</string>
     <string name="do_not_use_animations">Žiadne animácie</string>
     <string name="do_not_use_animations_descr">Vypne animácie mapy.</string>
     <string name="keep_showing_on_map">Zobrazovať ďalej na mape</string>
@@ -2533,7 +2521,6 @@
     <string name="shared_string_sort">Zotriediť</string>
     <string name="coordinate_input">Zadanie súradníc</string>
     <string name="marker_save_as_track_descr">Exportovať vaše značky do nasledovného súboru GPX:</string>
-    <string name="marker_save_as_track">Uložiť ako súbor GPX</string>
     <string name="move_to_history">Presunúť do histórie</string>
     <string name="group_will_be_removed_after_restart">Skupina bude odstránená pri nasledujúcom štarte aplikácie.</string>
     <string name="show_guide_line">Zobraziť smerové čiary</string>
@@ -2784,7 +2771,6 @@
     <string name="unirs_render_descr">Modifikácia štandardného štýlu pre väčší kontrast ciest pre chodcov a cyklistov. Používa staršie farby z Mapniku.</string>
     <string name="access_intermediate_arrival_time">Čas príchodu k prechodnému bodu</string>
     <string name="map_widget_intermediate_time">Prechodný čas</string>
-    <string name="shared_string_gpx_files">Súbory GPX</string>
     <string name="get_osmand_live">Získajte OsmAnd Live pre odomknutie všetkých funkcií: Denné aktualizácie máp s neobmedzeným počtom stiahnutí, všetky platené moduly, Wikipedia, Wikivoyage a mnoho ďalšieho.</string>
     <string name="quick_action_edit_actions">Upraviť akcie</string>
     <string name="error_notification_desc">Prosím pošlite snímku obrazovky s týmto oznamom na support@osmand.net</string>

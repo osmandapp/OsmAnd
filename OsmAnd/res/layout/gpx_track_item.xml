@@ -165,33 +165,33 @@
 
         </LinearLayout>
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/show_on_map"
+            style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
-            android:layout_marginLeft="@dimen/favorites_icon_right_margin"
             android:layout_marginStart="@dimen/favorites_icon_right_margin"
-            android:background="?attr/dashboard_button"
-            osmand:srcCompat="@drawable/ic_action_gsave_dark"
-            android:visibility="gone" />
+            android:layout_marginLeft="@dimen/favorites_icon_right_margin"
+            android:visibility="gone"
+            osmand:srcCompat="@drawable/ic_action_gsave_dark" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/stop"
+            style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
-            android:background="?attr/dashboard_button"
-            osmand:srcCompat="@drawable/ic_action_rec_stop"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            osmand:srcCompat="@drawable/ic_action_rec_stop" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/options"
-            android:contentDescription="@string/shared_string_more_actions"
+            style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
-            android:background="?attr/dashboard_button"
+            android:contentDescription="@string/shared_string_more_actions"
             android:focusable="false"
-            osmand:srcCompat="@drawable/ic_overflow_menu_white"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            osmand:srcCompat="@drawable/ic_overflow_menu_white" />
 
         <LinearLayout
             android:id="@+id/check_item"

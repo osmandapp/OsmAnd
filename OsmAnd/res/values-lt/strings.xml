@@ -225,7 +225,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="animate_route">Paleisti animaciją</string>
     <string name="file_can_not_be_renamed">Failo pavadinimo pakeisti negalima.</string>
     <string name="file_with_name_already_exists">Failas tokiu pavadinimu jau yra.</string>
-    <string name="shared_string_gpx_route">GPX maršrutas</string>
     <string name="poi_query_by_name_matches_categories">Rastos kelios LV kategorijos, kurios atitinka jūsų užklausą :</string>
     <string name="data_to_search_poi_not_available">Nėra LV paieškai reikalingų vietinių duomenų.</string>
     <string name="poi_filter_by_name">Ieškoti pagal pavadinimą</string>
@@ -243,7 +242,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="search_position_map_view">Esamo žemėlapio centras</string>
     <string name="select_search_position">Pradžia:</string>
     <string name="context_menu_item_search">Ieškoti aplink</string>
-    <string name="shared_string_save_as_gpx">Išsaugoti maršrutą į naują GPX failą</string>
     <string name="route_successfully_saved_at">Maršrutas išsaugotas faile \'%1$s\'.</string>
     <string name="filename_input">Failo pavadinimas : </string>
     <string name="file_with_name_already_exist">Failas tokiu pavadinimu jau egzistuoja.</string>
@@ -348,7 +346,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="context_menu_item_share_location">Bendrinti vietą</string>
     <string name="add_waypoint_dialog_added">GPX taškas \'\'{0}\'\' pridėtas</string>
     <string name="add_waypoint_dialog_title">Įtraukti tašką į GPX faile išsaugotą kelią</string>
-    <string name="context_menu_item_add_waypoint">Pridėti GPX tašką</string>
     <string name="amenity_type_administrative">Administracinis</string>
     <string name="amenity_type_barrier">Barjeras</string>
     <string name="amenity_type_education">Mokslas/Švietimas</string>
@@ -442,7 +439,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="voice">Įrašytas balsas</string>
     <string name="no_vector_map_loaded">Vektoriniai žemėlapiai neįkelti</string>
     <string name="gpx_files_not_found">Tracks segtuve nerasta jokių GPX failų</string>
-    <string name="layer_gpx_layer">GPX maršrutas…</string>
     <string name="error_reading_gpx">Įvyko klaida skaitant GPX duomenis</string>
     <string name="vector_data">Parsiųsti vektoriniai žemėlapiai</string>
     <string name="transport_context_menu">Ieškoti transporto stotelėje</string>
@@ -747,7 +743,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="map_widget_compass">Kompasas</string>
     <string name="map_widget_reset">Į pradinius nustatymus</string>
     <string name="map_widget_parking">Automobilio statymas</string>
-    <string name="map_widget_monitoring">GPX įrašymas</string>
     <string name="map_widget_speed">Greitis</string>
     <string name="map_widget_distance">Tikslas</string>
     <string name="map_widget_altitude">Aukštis</string>
@@ -841,7 +836,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="map_widget_max_speed">Leidžiamas greitis</string>
     <string name="rendering_attr_noAdminboundaries_name">Ribos</string>
     <string name="rendering_attr_noAdminboundaries_description">Neberodyti regionų ribų (administratoriaus 5-9 lygiai).</string>
-    <string name="monitoring_control_start">pradėti</string>
     <string name="index_srtm_parts">dalys</string>
     <string name="index_srtm_ele">Aukščio kontūrų linijos</string>
     <string name="srtm_plugin_description">Šis įskiepis įgalina tiek aukščio kontūrų linijų tiek ir (reljefo) kalnų šešėlių sluoksnių atvaizdavimą and OsmAnd žemėlapių. Ši funkcija gali būti naudinga atletams, keliautojams ir visiems, kas aktuali reljefo struktūra. (Atkreipkite dėmesį į tai kad kontūrų linijos ir/arba reljefo duomenys yra atskiri, papildomi parsiuntimai prieinami aktyvavus įskiepį)
@@ -1271,7 +1265,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="duration">Trukmė</string>
     <string name="distance">Atstumas</string>
     <string name="rendering_attr_publicTransportMode_name">Visuomeninio transporto maršrutai</string>
-    <string name="save_track_to_gpx_globally">Įrašyti maršrutą į GPX failą</string>
     <string name="save_track_interval_globally">Įrašymo intervalas</string>
     <string name="save_track_to_gpx_globally_descr">Bendras vietos išsaugojimas į GPX failą gali būti įjungtas ar išjungtas panaudojant GPX įrankį žemėlapio ekrane.</string>
     <string name="record_plugin_description">Išsaugo kelionės istoriją vieno mygtuko ekrane paspaudimu bei pateikia nustatymus, leidžiančius kelionės istoriją išsaugoti GPX faile.
@@ -1605,7 +1598,6 @@ Ilguma %2$s</string>
     <string name="working_days">Darbo dienos</string>
     <string name="saved_at_time">Sėkmingai išsaugota: %1$s</string>
     <string name="poi_deleted_localy">LV bus ištrinti, kai jūs įkelsite pakeitimus</string>
-    <string name="show_gpx">Rodyti GPX</string>
     <string name="recent_places">Vėliausios vietos</string>
     <string name="routing_attr_avoid_shuttle_train_name">Vengti priemiestinių traukinių</string>
     <string name="routing_attr_avoid_shuttle_train_description">Vengti priemiestinių traukinių</string>
@@ -2132,7 +2124,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="quick_action_take_video_note">Įrašyti vaizdo pastabą</string>
     <string name="quick_action_take_photo_note">Fotografuoti</string>
     <string name="quick_action_add_osm_bug">Pridėti OSM Pastabą</string>
-    <string name="quick_action_add_gpx">Pridėti GPX tašką</string>
     <string name="quick_action_add_favorite">Įtraukti į parankinius</string>
     <string name="quick_actions_delete_text">Ar tikrai norite ištrinti veiksmą \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Rodyti parankinių dialogą</string>
@@ -2519,10 +2510,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="choose_file_type">Pasirinkite failo tipą</string>
     <string name="all_data">Visi duomenys</string>
     <string name="osm_notes">OSM pastabos</string>
-    <string name="marker_save_as_track">Išsaugoti kaip GPX failą</string>
-    <string name="shared_string_gpx_files">GPX failai</string>
     <string name="import_track">Importuoti GPX failą</string>
-    <string name="add_segment_to_the_track">Įtraukti į GPX failą</string>
     <string name="day_off_label">išj.</string>
     <string name="toast_empty_name_error">Neįvardinta vieta</string>
     <string name="tunnel_warning">Priekyje tunelis</string>
@@ -2546,7 +2534,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="start_editing_card_image_text">Atviras pasaulinis kelionių vadovas, kurie kiekvienas gali redaguoti.</string>
     <string name="access_intermediate_arrival_time">Tarpinis atvykimo laikas</string>
     <string name="map_widget_intermediate_time">Tarpinis laikas</string>
-    <string name="empty_state_my_tracks">Pridėti GPX failus</string>
     <string name="download_wikipedia_label">Atsisiųsti Vikipedijos duomenys</string>
     <string name="osm_live_plan_pricing">Planas ir kainos</string>
     <string name="osm_live_payment_monthly_title">Kas mėnesį</string>

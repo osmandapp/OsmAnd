@@ -371,7 +371,6 @@
     <string name="plan_route">Planificar l\'itinerari</string>
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Intrada dei coordonadas</string>
-    <string name="marker_save_as_track">Sauvagardar per fichier GPX</string>
     <string name="move_to_history">Moure a la cronologia</string>
     <string name="show_guide_line">Mostrar lei linhas de direccion</string>
     <string name="show_arrows_on_the_map">Mostrar lei sagetas sus la mapa</string>

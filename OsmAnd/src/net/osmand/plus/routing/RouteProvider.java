@@ -165,7 +165,6 @@ public class RouteProvider {
 		private boolean leftSide;
 		private boolean passWholeRoute;
 		private boolean calculateOsmAndRouteParts;
-		private boolean useIntermediatePointsRTE;
 
 		public GPXRouteParamsBuilder(GPXFile file, OsmandSettings settings) {
 			leftSide = settings.DRIVING_REGION.get().leftHandDriving;
@@ -184,12 +183,8 @@ public class RouteProvider {
 			this.calculateOsmAndRouteParts = calculateOsmAndRouteParts;
 		}
 
-		public void setUseIntermediatePointsRTE(boolean useIntermediatePointsRTE) {
-			this.useIntermediatePointsRTE = useIntermediatePointsRTE;
-		}
-
 		public boolean isUseIntermediatePointsRTE() {
-			return useIntermediatePointsRTE;
+			return file.hasRtePt() && !file.hasTrkPt();
 		}
 
 		public boolean isCalculateOsmAndRoute() {
@@ -277,7 +272,7 @@ public class RouteProvider {
 			boolean reverse = builder.reverse; 
 			passWholeRoute = builder.passWholeRoute;
 			calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
-			useIntermediatePointsRTE = builder.useIntermediatePointsRTE;
+			useIntermediatePointsRTE = builder.isUseIntermediatePointsRTE();
 			builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
 			if (!file.isPointsEmpty()) {
 				wpt = new ArrayList<LocationPoint>(file.getPoints().size());

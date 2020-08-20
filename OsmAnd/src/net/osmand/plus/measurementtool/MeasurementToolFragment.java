@@ -456,10 +456,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		initMeasurementMode(newGpxData);
 
-		if (planRouteMode && savedInstanceState == null) {
-			StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
-					createStartPlanRouteListener());
+		if (savedInstanceState == null) {
+			if (editingCtx.isNewData() && planRouteMode) {
+				StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
+						createStartPlanRouteListener());
+			} else if (!editingCtx.isNewData() && !editingCtx.hasRoutePoints() && !editingCtx.hasRoute()) {
+				SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
+			}
 		}
+
 		return view;
 	}
 
@@ -681,10 +686,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-			@Override
-			public void saveAsNewTrackOnClick() {
-				openSaveAsNewTrackMenu(getMapActivity());
-			}
+	@Override
+	public void saveAsNewTrackOnClick() {
+		openSaveAsNewTrackMenu(getMapActivity());
+	}
 
 	@Override
 	public void addToTheTrackOnClick() {
@@ -874,11 +879,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public void addNewGpxData(GPXFile gpxFile) {
 		QuadRect rect = gpxFile.getRect();
-		TrkSegment segment = getTrkSegment(gpxFile);
-		NewGpxData newGpxData = new NewGpxData(gpxFile, rect, segment == null
-				? ActionType.ADD_ROUTE_POINTS
-				: ActionType.EDIT_SEGMENT,
-				segment);
+		TrkSegment segment = gpxFile.getNonEmptyTrkSegment();
+		ActionType actionType = segment == null ? ActionType.ADD_ROUTE_POINTS : ActionType.EDIT_SEGMENT;
+		NewGpxData newGpxData = new NewGpxData(gpxFile, rect, actionType, segment);
+
 		editingCtx.setNewGpxData(newGpxData);
 		initMeasurementMode(newGpxData);
 		QuadRect qr = newGpxData.getRect();
@@ -887,17 +891,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			mapActivity.getMapView().fitRectToMap(qr.left, qr.right, qr.top, qr.bottom,
 					(int) qr.width(), (int) qr.height(), 0);
 		}
-	}
-
-	private TrkSegment getTrkSegment(GPXFile gpxFile) {
-		for (GPXUtilities.Track t : gpxFile.tracks) {
-			for (TrkSegment s : t.segments) {
-				if (s.points.size() > 0) {
-					return s;
-				}
-			}
-		}
-		return null;
 	}
 
 	private void removePoint(MeasurementToolLayer measurementLayer, int position) {
@@ -1763,6 +1756,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public static boolean showInstance(FragmentManager fragmentManager, LatLon initialPoint) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setInitialPoint(initialPoint);
+		return showFragment(fragment, fragmentManager);
+	}
+
+	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx, boolean planRoute) {
+		MeasurementToolFragment fragment = new MeasurementToolFragment();
+		fragment.setEditingCtx(editingCtx);
+		fragment.setPlanRouteMode(planRoute);
 		return showFragment(fragment, fragmentManager);
 	}
 
