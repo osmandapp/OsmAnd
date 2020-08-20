@@ -2,7 +2,7 @@
 <resources>
     <string name="searching_for_gps">Posicionando…</string>
     <string name="si_nm_h">Milhas náuticas por hora (nó)</string>
-    <string name="install_osmand_dialog_message">Você precisa instalar a versão gratuita ou paga do OsmAnd primeiro</string>
+    <string name="install_osmand_dialog_message">Precisa instalar a versão gratuita ou paga do OsmAnd primeiro</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="shared_string_login">Entrar</string>
     <string name="start_end_date">Data de início - fim</string>
@@ -10,7 +10,7 @@
     <string name="gps_not_available">Por favor, ligue \"Localização\" nas configurações do sistema</string>
     <string name="timeline_no_data">Sem dados</string>
     <string name="sending_location_messages">enviando localização</string>
-    <string name="location_sharing_description">Selecione os contatos e grupos com os quais você deseja compartilhar sua localização.</string>
+    <string name="location_sharing_description">Selecione os contactos e grupos com os quais deseja compartilhar sua localização.</string>
     <string name="waiting_for_response_from_telegram">Aguardando resposta do Telegram</string>
     <string name="connected_account">Conta conectada</string>
     <string name="osmand_privacy_policy">Política de privacidade do OsmAnd</string>
@@ -33,7 +33,7 @@
     <string name="last_updated_location">Última localização atualizada:</string>
     <string name="stale_location">Parado</string>
     <string name="show_gps_points_descr">Mostrar quantidade de pontos de GPS coletados e enviados.</string>
-    <string name="already_registered_in_telegram">Você precisa de uma conta e número de telefone registrados no Telegram</string>
+    <string name="already_registered_in_telegram">Precisa de uma conta e número de telefone registados no Telegram</string>
     <string name="min_logging_speed_descr">Filtro: sem registro abaixo da velocidade selecionada</string>
     <string name="shared_string_sort_by">Ordenar por</string>
     <string name="shared_string_sent">Enviado</string>
@@ -42,7 +42,7 @@
     <string name="successfully_sent_and_updated">Enviado e atualizado com sucesso</string>
     <string name="send_location_as_descr">Escolha como as mensagens com sua localização serão exibidas.</string>
     <string name="shared_string_connection">Conexão</string>
-    <string name="share_location_as_description">Se você deseja conectar vários aparelhos a uma conta de telegrama, é necessário usar um aparelho diferente para compartilhar sua localização.</string>
+    <string name="share_location_as_description">Se deseja conectar vários aparelhos a uma conta de telegrama, é necessário usar um aparelho diferente para compartilhar a sua localização.</string>
     <string name="proxy_password">Palavra-passe</string>
     <string name="shared_string_authorization">Autorização</string>
     <string name="shared_string_select">Selecionar</string>
@@ -51,7 +51,7 @@
     <string name="shared_string_bot">Robô</string>
     <string name="average_altitude">Altitude média</string>
     <string name="start_date">Data de início</string>
-    <string name="live_now_description">Contatos e grupos compartilhando o local para você.</string>
+    <string name="live_now_description">Contatos e grupos compartilhando o local consigo.</string>
     <string name="shared_string_all">Todos</string>
     <string name="received_gps_points">Pontos GPX recebidos: %1$s</string>
     <string name="shared_string_appearance">Aparência</string>
@@ -59,7 +59,7 @@
     <string name="by_distance">Pela distância</string>
     <string name="turn_off_location_sharing">Desativar o compartilhamento de local</string>
     <string name="shared_string_collected">Coletado</string>
-    <string name="enter_another_device_name">Escolha um nome que você ainda não usou</string>
+    <string name="enter_another_device_name">Escolha um nome que ainda não usou</string>
     <string name="shared_string_add">Adicionar</string>
     <string name="show_users_on_map">Mostrar utilitadoes no mapa</string>
     <string name="enter_authentication_code">Digite o código de autenticação</string>
@@ -81,8 +81,8 @@
     <string name="proxy_connected">Conectado</string>
     <string name="m">m</string>
     <string name="stop_sharing_all">O compartilhamento está ativado (desativado)</string>
-    <string name="do_not_have_telegram">Eu não tenho conta Telegram</string>
-    <string name="get_telegram_account_first">Você precisa de uma conta do Telegram para usar o compartilhamento de local.</string>
+    <string name="do_not_have_telegram">Não tenho uma conta do Telegram</string>
+    <string name="get_telegram_account_first">Precisa de uma conta do Telegram para usar o compartilhamento de local.</string>
     <string name="disable_all_sharing">Desativar todo o compartilhamento</string>
     <string name="sharing_status">Status de compartilhamento</string>
     <string name="shared_string_end">Fim</string>
@@ -92,11 +92,11 @@
     <string name="shared_string_later">Mais tarde</string>
     <string name="my_location">Minha localização</string>
     <string name="install_osmand">Instalar OsmAnd</string>
-    <string name="privacy_policy_use_telegram">Telegrama (a app de mensagens) é usado para conectar e se comunicar com as pessoas.</string>
+    <string name="privacy_policy_use_telegram">Telegram (a app de mensagens) é usado para conectar e comunicar com as pessoas.</string>
     <string name="not_possible_to_send_to_telegram_chats">Não é possível enviar para bate-papo do Telegram:</string>
     <string name="not_sent_yet">Ainda não enviado</string>
     <string name="points_size">%1$d pontos</string>
-    <string name="welcome_descr"><b>OsmAnd Tracker</b> permite que partilhe a sua localização e veja a dos outros no OsmAnd.<br/> <br/>O app usa a API Telegram e você precisa de uma conta do Telegram.</string>
+    <string name="welcome_descr"><b>OsmAnd Tracker</b> permite que partilhe a sua localização e veja a dos outros no OsmAnd.<br/> <br/>O app usa a API Telegram e precisa de uma conta do Telegram.</string>
     <string name="min_logging_distance_descr">Filtro: distância mínima para registrar um novo ponto</string>
     <string name="device_name_cannot_be_empty">O nome do aparelho não pode estar vazio</string>
     <string name="yard">yd</string>
@@ -152,7 +152,7 @@
     <string name="hours_and_minutes_format">%1$d h %2$d m</string>
     <string name="device_name_is_too_long">Nome do aparelho muito longo</string>
     <string name="gps_points">Pontos de GPS</string>
-    <string name="timeline_description">Ative o monitoramento para salvar todos os locais no histórico.</string>
+    <string name="timeline_description">Ative o monitoramento para gravar todos os locais no histórico.</string>
     <string name="show_on_map">Mostrar no mapa</string>
     <string name="send_my_location">Enviar minha localização</string>
     <string name="share_location_as">Compartilhar localização como</string>
@@ -160,7 +160,7 @@
     <string name="mile_per_hour">mph</string>
     <string name="si_min_m">Minutos por milha</string>
     <string name="last_update_from_telegram">Última atualização do Telegram</string>
-    <string name="logout_from_osmand_telegram_descr">Tem certeza de que deseja sair do OsmAnd Tracker para que você não possa compartilhar o local ou ver a localização de outras pessoas\?</string>
+    <string name="logout_from_osmand_telegram_descr">Tem certeza de que deseja sair do OsmAnd Tracker para que não possa compartilhar o local ou ver a localização de outras pessoas\?</string>
     <string name="proxy_server">Servidor</string>
     <string name="si_m_s">Metros por segundo</string>
     <string name="location_sharing_status">Compartilhamento: %1$s</string>
@@ -199,7 +199,7 @@
     <string name="shared_string_authorization_descr">Por favor, insira o número de telefone do seu Telegram em formato internacional</string>
     <string name="set_visible_time_for_all">Definir tempo visível para todos</string>
     <string name="phone_number_title">Número de telefone</string>
-    <string name="privacy_policy_agree">Ao clicar em \"Continuar\" você concorda com as condições da política de privacidade do Telegram e OsmAnd.</string>
+    <string name="privacy_policy_agree">Ao clicar em \"Continuar\" concorda com as condições da política de privacidade do Telegram e OsmAnd.</string>
     <string name="si_mi_feet">Milhas/pés</string>
     <string name="monitoring_is_enabled">Monitoramento está ativado</string>
     <string name="osmand_connect_desc">Escolha a versão OsmAnd que OsmAnd Tracker usa para exibir posições.</string>

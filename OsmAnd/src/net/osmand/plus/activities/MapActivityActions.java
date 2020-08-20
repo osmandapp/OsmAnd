@@ -343,7 +343,7 @@ public class MapActivityActions implements DialogProvider {
 	                                final double longitude,
 	                                final ContextMenuAdapter adapter,
 	                                Object selectedObj,
-	                                boolean all) {
+	                                boolean configureMenu) {
 		ItemBuilder itemBuilder = new ItemBuilder();
 
 		adapter.addItem(itemBuilder
@@ -400,7 +400,7 @@ public class MapActivityActions implements DialogProvider {
 
 		ContextMenuItem editGpxItem = new ItemBuilder()
 				.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
-				.setId(MAP_CONTEXT_MENU_EDIT_GPX_WP)
+				.setId(MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT)
 				.setIcon(R.drawable.ic_action_edit_dark)
 				.setOrder(EDIT_GPX_WAYPOINT_ITEM_ORDER)
 				.setListener(listener).createItem();
@@ -411,8 +411,7 @@ public class MapActivityActions implements DialogProvider {
 				.setOrder(ADD_GPX_WAYPOINT_ITEM_ORDER)
 				.setListener(listener).createItem();
 
-		if (all) {
-			adapter.addItem(editGpxItem);
+		if (configureMenu) {
 			adapter.addItem(addGpxItem);
 		} else if (selectedObj instanceof WptPt
 				&& getMyApplication().getSelectedGpxHelper().getSelectedGPXFile((WptPt) selectedObj) != null) {

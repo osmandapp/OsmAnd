@@ -326,7 +326,7 @@
     <string name="poi_pharmacy">Аптека</string>
     <string name="poi_hospital">Больница</string>
     <string name="poi_doctors">Врач;Доктор</string>
-    <string name="poi_clinic">Поликлиника, клиника</string>
+    <string name="poi_clinic">Поликлиника;Клиника</string>
     <string name="poi_first_aid">Первая помощь</string>
     <string name="poi_dentist">Стоматология;Лечение зубов;Зубной врач</string>
     <string name="poi_nursing_home">Дом престарелых</string>
@@ -1937,7 +1937,7 @@
     <string name="poi_clothes_leather">Кожаная</string>
     <string name="poi_clothes_costumes">Карнавальные костюмы</string>
     <string name="poi_clothes_traditional">Традиционная</string>
-    <string name="poi_clothes_suits">Костюмы, смокинги</string>
+    <string name="poi_clothes_suits">Костюмы;Смокинги</string>
     <string name="poi_clothes_maternity">Для беременных</string>
     <string name="poi_clothes_vintage">Старинная</string>
     <string name="poi_clothes_oversize">Для больших людей</string>
@@ -3308,8 +3308,8 @@
     <string name="poi_climbing_rock_quartzite">Тип камня: кварцит</string>
     <string name="poi_climbing_rock_gneiss">Тип камня: гнейс</string>
     <string name="poi_climbing_rock_porphyry">Тип камня: порфир</string>
-    <string name="poi_climbing_quality_solid">Надежность камней: прочно</string>
-    <string name="poi_climbing_quality_fragile">Надежность камней: ненадёжно</string>
+    <string name="poi_climbing_quality_solid">Надёжность камней: надёжно</string>
+    <string name="poi_climbing_quality_fragile">Надёжность камней: ненадёжно</string>
     <string name="poi_climbing_bolted_yes">Фиксированные зацепы: есть</string>
     <string name="poi_climbing_bolted_no">Фиксированные зацепы: нет</string>
     <string name="poi_climbing_orientation_n">Ориентация стены: С</string>

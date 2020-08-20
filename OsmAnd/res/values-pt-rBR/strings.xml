@@ -62,9 +62,8 @@
     <string name="waypoint_visit_before">Passar antes</string>
     <string name="simulate_your_location">Simular rota</string>
     <string name="drawer">Lista simples</string>
-    <string name="short_location_on_map">Lat %1$s
-\n
-\nLon %2$s</string>
+    <string name="short_location_on_map">Latitude %1$s
+\nLongitude %2$s</string>
     <string name="tips_and_tricks_descr">Respostas às perguntas frequentes, mudanças recentes e outras.</string>
     <string name="routing_settings_2">Configurações de navegação</string>
     <string name="general_settings_2">Configurações gerais</string>
@@ -780,7 +779,7 @@
     <string name="osmand_parking_minutes">Minutos</string>
     <string name="osmand_parking_position_description_add_time">O carro foi estacionado em</string>
     <string name="index_settings">Gerenciar mapas</string>
-    <string name="context_menu_item_search">Pesquise nas proximidades</string>
+    <string name="context_menu_item_search">Pesquise por perto</string>
     <string name="local_index_descr_title">Gerenciar mapas.</string>
     <string name="show_point_options">Usar posição…</string>
     <string name="only_show">Exibir rota</string>
@@ -1364,7 +1363,7 @@
     <string name="route_tsll">Vire levemente à esquerda e siga</string>
     <string name="search_poi_location">Aguardando sinal…</string>
     <string name="search_near_map">Pesquisar próximo ao centro do mapa</string>
-    <string name="search_nearby">Pesquise nas proximidades</string>
+    <string name="search_nearby">Pesquise por perto</string>
     <string name="map_orientation_default">Mesma do aparelho</string>
     <string name="map_orientation_portrait">Vertical</string>
     <string name="map_orientation_landscape">Horizontal</string>
@@ -1812,7 +1811,7 @@
     <string name="update">Atualizar</string>
     <string name="only_download_over_wifi">Somente baixar via Wi-Fi</string>
     <string name="live_update">Atualização ao vivo</string>
-    <string name="update_now">Atualizar agora</string>
+    <string name="update_now">Atualizar</string>
     <string name="route_distance">Distância:</string>
     <string name="route_duration">Tempo:</string>
     <string name="missing_write_external_storage_permission">OsmAnd não tem permissão para usar o cartão de memória</string>
@@ -1835,7 +1834,7 @@
     <string name="rec_split_clip_length_desc">Limite de tempo máximo para clipes gravados.</string>
     <string name="rec_split_storage_size">Limite de armazenamento</string>
     <string name="rec_split_storage_size_desc">Quantidade de espaço que pode ser ocupado por todos os clipes gravados.</string>
-    <string name="last_map_change">Última alteração no mapa: %s</string>
+    <string name="last_map_change">Última alteração: %s</string>
     <string name="hourly">A cada hora</string>
     <string name="daily">Diariamente</string>
     <string name="weekly">Semanalmente</string>
@@ -2087,7 +2086,7 @@
     <string name="routing_attr_avoid_ice_roads_fords_name">Sem estradas de gelo ou vaus</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas de gelo e vaus.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Limite para orientação do mapa</string>
-    <string name="quick_action_show_navigation_finish_dialog">Exibir notificação \'Navegação finalizada\'</string>
+    <string name="quick_action_show_navigation_finish_dialog">Exibir notif. \'Navegação finalizada\'</string>
     <string name="mapillary_menu_title_tile_cache">Cache de quadrícula</string>
     <string name="map_widget_ruler_control">Régua de raio</string>
     <string name="show_from_zoom_level">Exibir a partir do nível de zoom</string>
@@ -2463,34 +2462,22 @@
 \n • Opção de gravação GPX permite-lhe gravar a sua viagem e compartilhá-la
 \n • Através de plugin adicionais, você pode ativar curvas de nível e sombreamento de relevo</string>
     <string name="osmand_extended_description_part6">Passeio, caminhada, turismo pela cidade
-\n
-\n• O mapa mostra caminhos para passeios e caminhadas
-\n
-\n• A Wikipédia no seu idioma preferido pode dizer muito durante um turismo pela cidade
-\n
-\n• Paradas de transportes públicos (ônibus, troleibus, trem) incluindo nomes de linha, ajuda a navegar em uma nova cidade
-\n
-\n• Navegação GPS em modo pedestre constrói a sua rota usando caminhos para pedestres
-\n
-\n• Fazer upload e seguir uma rota GPX ou gravar e compartilhar a sua própria rota
+\n • O mapa mostra caminhos para passeios e caminhadas
+\n • A Wikipédia no seu idioma preferido pode dizer muito durante um turismo pela cidade
+\n • Paradas de transportes públicos (ônibus, troleibus, trem) incluindo nomes de linha, ajuda a navegar em uma nova cidade
+\n • Navegação GPS em modo pedestre constrói a sua rota usando caminhos para pedestres
+\n • Fazer upload e seguir uma rota GPX ou gravar e compartilhar a sua própria rota
 \n</string>
     <string name="osmand_extended_description_part7">Contribua para o OSM
-\n
-\n• Comunique falha de dados
-\n
-\n• Carregue trilhas GPX diretamente do app
-\n
-\n• Adicione POIs e carregue-os diretamente ao OSM (ou mais tarde se off-line)
+\n • Comunique falha de dados
+\n • Carregue trilhas GPX diretamente do app
+\n • Adicione POIs e carregue-os diretamente ao OSM (ou mais tarde se off-line)
 \n</string>
     <string name="osmand_plus_extended_description_part5">Recursos de segurança
-\n
-\n• Alternância de exibição dia/noite automatizada opcional
-\n
-\n• Exibição de limite de velocidade opcional, com lembrete se você ultrapassá-lo
-\n
-\n• Zoom dependente da velocidade opcional
-\n
-\n• Compartilhe sua localização para que seus amigos possam encontrar você
+\n • Alternância de exibição dia/noite automatizada opcional
+\n • Exibição de limite de velocidade opcional, com lembrete se você ultrapassá-lo
+\n • Zoom dependente da velocidade opcional
+\n • Compartilhe sua localização para que seus amigos possam encontrar você
 \n</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especificar um buffer de tempo para manter locais para enviar sem conexão</string>
     <string name="quick_action_take_audio_note_descr">Um botão para adicionar uma nota de áudio no meio da tela.</string>
@@ -2559,18 +2546,12 @@
     <string name="move_point">Mover Ponto</string>
     <string name="osm_recipients_label">Destinatários OSM</string>
     <string name="osmand_plus_extended_description_part6">Recursos de Ciclismo e Pedestre
-\n
-\n• Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre
-\n
-\n• Roteamento e modos de exibição especiais para bicicleta e pedestres
-\n
-\n• Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas
-\n
-\n• Gravação opcional de viagem para arquivo GPX local ou serviço on-line 
-\n
-\n• Exibição opcional de velocidade e altitudes
-\n
-\n• Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
+\n • Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre
+\n • Roteamento e modos de exibição especiais para bicicleta e pedestres
+\n • Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas
+\n • Gravação opcional de viagem para arquivo GPX local ou serviço on-line
+\n • Exibição opcional de velocidade e altitudes
+\n • Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
     <string name="shared_string_without_name">Sem nome</string>
     <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada: 
 \n• Europa Ocidental: **** 
@@ -2646,18 +2627,12 @@
     <string name="waypoints_removed_from_map_markers">Pontos de passagem removidos dos marcadores de mapa</string>
     <string name="shared_string_result">Resultado</string>
     <string name="osmand_plus_extended_description_part2">Navegação
-\n
-\n• Funciona on-line (rápido) ou offline (sem custo de roaming quando estiver no exterior)
-\n
-\n• Orientação por voz passo-a-passo (vozes gravadas e sintetizadas)
-\n
-\n• Orientação de faixas opcional, exibição do nome da rua e tempo estimado de chegada
-\n
-\n• Suporta pontos intermediários do seu itinerário
-\n
-\n• Correção de rota automático sempre que você sair da rota
-\n
-\n• Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas
+\n • Funciona on-line (rápido) ou offline (sem custo de roaming quando estiver no exterior)
+\n • Orientação por voz passo-a-passo (vozes gravadas e sintetizadas)
+\n • Orientação de faixas opcional, exibição do nome da rua e tempo estimado de chegada
+\n • Suporta pontos intermediários do seu itinerário
+\n • Correção de rota automático sempre que você sair da rota
+\n • Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas
 \n</string>
     <string name="osmand_plus_extended_description_part3">Visualização de mapa 
 \n• Exiba sua posição e orientação 
@@ -2668,19 +2643,13 @@
 \n• Opcionalmente exiba nomes de lugares em inglês, língua local ou fonético
 \n</string>
     <string name="osmand_plus_extended_description_part4">Use dados OSM e da Wikipédia
+\n • Informações de alta qualidade dos melhores projetos colaborativos do mundo
+\n • Dados OSM disponíveis por país ou região
+\n • POIs da Wikipédia, ótimo para visitas turísticas
+\n • Downloads grátis ilimitados, diretamente do aplicativo
+\n • Mapas vetoriais offline compactos e atualizados mensalmente
 \n
-\n• Informações de alta qualidade dos melhores projetos colaborativos do mundo
-\n
-\n• Dados OSM disponíveis por país ou região
-\n
-\n• POIs da Wikipédia, ótimo para visitas turísticas
-\n
-\n• Downloads grátis ilimitados, diretamente do aplicativo
-\n
-\n• Mapas vetoriais offline compactos e atualizados mensalmente
-\n
-\n
-\n• Escolha entre região completa ou apenas rede rodoviária (Exemplo: Japão inteiro tem 700 MB ou apenas 200 MB para rede rodoviária)</string>
+\n • Escolha entre região completa ou apenas rede rodoviária (Exemplo: Japão inteiro tem 700 MB ou apenas 200 MB para rede rodoviária)</string>
     <string name="online_webpage_warning">Página disponível só online. Abrir num navegador web?</string>
     <string name="images_cache">Cache de imagens</string>
     <string name="delete_search_history">Apagar histórico de pesquisa</string>
@@ -2817,16 +2786,11 @@
 \n 
 \nAlgumas das principais características:</string>
     <string name="osmand_plus_extended_description_part7">Contribua diretamente para o OSM
-\n
-\n• Avisar erros de dados
-\n
-\n• Fazer upload de trilhas GPX para o OSM diretamente do app
-\n
-\n• Adicionar POIs e fazer o upload diretamente para OSM (ou mais tarde se offline)
-\n
-\n• Gravação de viagem opcional também em modo background (enquanto o dispositivo está no modo sleep)
-\n
-\nOsmAnd é um software de código aberto desenvolvido ativamente. Todos podem contribuir para o app, reportando bugs, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com as contribuições financeiras para financiar o desenvolvimento e testes de novas funcionalidades.
+\n • Avisar erros de dados
+\n • Fazer upload de trilhas GPX para o OSM diretamente do app
+\n • Adicionar POIs e fazer o upload diretamente para OSM (ou mais tarde se offline)
+\n • Gravação de viagem opcional também em modo background (enquanto o dispositivo está no modo sleep)
+\n OsmAnd é um software de código aberto desenvolvido ativamente. Todos podem contribuir para o app, reportando bugs, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com as contribuições financeiras para financiar o desenvolvimento e testes de novas funcionalidades.
 \n</string>
     <string name="point_deleted">Ponto %1$s foi excluído</string>
     <string name="shared_string_world">Mundo</string>

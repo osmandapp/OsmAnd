@@ -2035,6 +2035,7 @@ public class SettingsHelper {
 					boolean ellipsoid = object.optBoolean("ellipsoid", false);
 					boolean invertedY = object.optBoolean("inverted_y", false);
 					String referer = object.optString("referer");
+					String userAgent = object.optString("userAgent");
 					boolean timeSupported = object.optBoolean("timesupported", false);
 					long expire = object.optLong("expire", -1);
 					boolean inversiveZoom = object.optBoolean("inversiveZoom", false);
@@ -2054,13 +2055,14 @@ public class SettingsHelper {
 						tileSourceTemplate.setRule(rule);
 						tileSourceTemplate.setRandoms(randoms);
 						tileSourceTemplate.setReferer(referer);
+						tileSourceTemplate.setUserAgent(userAgent);
 						tileSourceTemplate.setEllipticYTile(ellipsoid);
 						tileSourceTemplate.setInvertedYTile(invertedY);
 						tileSourceTemplate.setExpirationTimeMillis(timeSupported ? expire : -1);
 
 						template = tileSourceTemplate;
 					} else {
-						template = new SQLiteTileSource(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY, referer, timeSupported, expire, inversiveZoom, rule);
+						template = new SQLiteTileSource(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY, referer, userAgent, timeSupported, expire, inversiveZoom, rule);
 					}
 					items.add(template);
 				}
@@ -2087,6 +2089,7 @@ public class SettingsHelper {
 						jsonObject.put("ellipsoid", template.isEllipticYTile());
 						jsonObject.put("inverted_y", template.isInvertedYTile());
 						jsonObject.put("referer", template.getReferer());
+						jsonObject.put("userAgent", template.getUserAgent());
 						jsonObject.put("timesupported", template.isTimeSupported());
 						jsonObject.put("expire", template.getExpirationTimeMinutes());
 						jsonObject.put("inversiveZoom", template.getInversiveZoom());

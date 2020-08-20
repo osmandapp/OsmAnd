@@ -8,14 +8,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.GpxTrackAdapter;
 
 import org.apache.commons.logging.Log;
@@ -38,15 +36,13 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 		if (activity instanceof MapActivity) {
 			activity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
 		}
-		OsmandApplication app = requiredMyApplication();
-		items.add(new TitleItem(getString(R.string.route_between_points)));
 		BaseBottomSheetItem description = new BottomSheetItemWithDescription.Builder()
-				.setDescription(app.getString(R.string.rourte_between_points_warning_desc))
-				.setDescriptionColorId(R.color.text_color_primary_light)
-				.setLayoutId(R.layout.bottom_sheet_item_description_long)
+				.setDescription(getString(R.string.rourte_between_points_warning_desc))
+				.setTitle(getString(R.string.route_between_points))
+				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
 				.create();
 		items.add(description);
-		items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.content_padding_half)));
+		items.add(new DividerSpaceItem(getContext(), getResources().getDimensionPixelSize(R.dimen.content_padding_half)));
 	}
 
 	@Override
