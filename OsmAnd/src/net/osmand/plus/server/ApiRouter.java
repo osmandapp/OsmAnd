@@ -3,6 +3,9 @@ package net.osmand.plus.server;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import com.google.gson.Gson;
+
+import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 
 import java.io.BufferedReader;
@@ -10,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.List;
 
 import fi.iki.elonen.NanoHTTPD;
 
@@ -22,20 +26,47 @@ public class ApiRouter {
 		return androidContext;
 	}
 
+	private final String FOLDER_NAME = "server";
+	private Gson gson = new Gson();
+
 	public void setAndroidContext(OsmandApplication androidContext) {
 		this.androidContext = androidContext;
 	}
 
 	public NanoHTTPD.Response route(NanoHTTPD.IHTTPSession session) {
 		Log.d("SERVER", "URI: " + session.getUri());
+		if (session.getUri().equals("/")) return getStatic("/go.html");
 		if (session.getUri().contains("/scripts/") ||
 				session.getUri().contains("/images/") ||
 				session.getUri().contains("/css/") ||
+				session.getUri().contains("/fonts/") ||
 				session.getUri().contains("/favicon.ico")
-		) {
-			return getStatic(session.getUri());
+		) return getStatic(session.getUri());
+		if (isApiUrl(session.getUri())){
+			return routeApi(session);
+		}
+		else {
+			return routeContent(session);
+		}
+	}
+
+	private NanoHTTPD.Response routeApi(NanoHTTPD.IHTTPSession session) {
+		return newFixedLengthResponse("");
+	}
+
+	private boolean isApiUrl(String uri) {
+		return uri.endsWith("/favorites");
+	}
+
+	private NanoHTTPD.Response routeContent(NanoHTTPD.IHTTPSession session) {
+		String url = session.getUri();
+		//add index page
+		String responseText = getHtmlPage(url);
+		if (responseText != null) {
+			responseText = addFavoritesToResponse(responseText);
+			return newFixedLengthResponse(responseText);
 		} else {
-			return getGoHtml();
+			return ErrorResponses.response404;
 		}
 	}
 
@@ -44,8 +75,8 @@ public class ApiRouter {
 		String mimeType = parseMimeType(uri);
 		if (androidContext != null) {
 			try {
-				is = androidContext.getAssets().open("server" + uri);
-				if (is.available() == 0){
+				is = androidContext.getAssets().open(FOLDER_NAME + uri);
+				if (is.available() == 0) {
 					return ErrorResponses.response404;
 				}
 				return newFixedLengthResponse(
@@ -54,7 +85,7 @@ public class ApiRouter {
 						is,
 						is.available());
 			} catch (IOException e) {
-				return ErrorResponses.response500;
+				return ErrorResponses.response404;
 			}
 		}
 		return ErrorResponses.response500;
@@ -70,25 +101,48 @@ public class ApiRouter {
 		return type;
 	}
 
-	public NanoHTTPD.Response getGoHtml() {
+	private String readHTMLFromFile(String filename) {
+		StringBuilder sb = new StringBuilder();
+		try {
+			InputStream is = androidContext.getAssets().open(FOLDER_NAME + filename);
+			BufferedReader br = new BufferedReader(new InputStreamReader(is,
+					Charset.forName("UTF-8")));
+			String str;
+			while ((str = br.readLine()) != null) {
+				sb.append(str);
+			}
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return sb.toString();
+	}
+
+	public String getHtmlPage(String name) {
 		String responseText = "";
 		if (androidContext != null) {
-			try {
-				InputStream is = androidContext.getAssets().open("server/go.html");
-				StringBuilder sb = new StringBuilder();
-				BufferedReader br = new BufferedReader(new InputStreamReader(is,
-						Charset.forName("UTF-8")));
-				String str;
-				while ((str = br.readLine()) != null) {
-					sb.append(str);
-				}
-				br.close();
-				responseText = sb.toString();
-			} catch (IOException e) {
-				return ErrorResponses.response500;
-			}
+			responseText = readHTMLFromFile(name);
 		}
-		return newFixedLengthResponse(responseText);
+		if (responseText == null) {
+			return null;
+		}
+		return responseText;
+	}
+
+	private String addFavoritesToResponse(String responseText) {
+		List<FavouritePoint> points = androidContext.getFavorites().getFavouritePoints();
+		StringBuilder text = new StringBuilder();
+		for (FavouritePoint p : points) {
+			String json = jsonFromFavorite(p);
+			text.append(json);
+			text.append(",");
+		}
+		return responseText + "<script>var osmand = {}; window.osmand.favoritePoints = [" + text.toString() + "];setupMarkers();</script>";
+	}
+
+	private String jsonFromFavorite(FavouritePoint favouritePoint) {
+		return gson.toJson(favouritePoint);
 	}
 
 	static class ErrorResponses {

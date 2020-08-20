@@ -73,7 +73,7 @@ public class ServerActivity extends AppCompatActivity {
 		OsmAndHttpServer.HOSTNAME = getDeviceAddress();
 		try {
 			server = new OsmAndHttpServer();
-			server.setAndroidContext((OsmandApplication)this.getApplication());
+			server.setAndroidApplication((OsmandApplication)this.getApplication());
 			initialized = true;
 			updateTextView("Server started at: http://" + getDeviceAddress() + ":" + OsmAndHttpServer.PORT);
 		} catch (IOException e) {

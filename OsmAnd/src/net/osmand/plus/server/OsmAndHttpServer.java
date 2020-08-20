@@ -3,7 +3,6 @@ package net.osmand.plus.server;
 import net.osmand.plus.OsmandApplication;
 
 import java.io.IOException;
-import java.util.Map;
 
 import fi.iki.elonen.NanoHTTPD;
 
@@ -12,15 +11,15 @@ public class OsmAndHttpServer extends NanoHTTPD {
 	public static String HOSTNAME = "0.0.0.0";
 
 	private ServerSessionHandler sessionHandler = new ServerSessionHandler();
-	private OsmandApplication androidContext;
+	private OsmandApplication androidApplication;
 
-	public OsmandApplication getAndroidContext() {
-		return androidContext;
+	public OsmandApplication getAndroidApplication() {
+		return androidApplication;
 	}
 
-	public void setAndroidContext(OsmandApplication androidContext) {
-		this.androidContext = androidContext;
-		sessionHandler.setAndroidContext(androidContext);
+	public void setAndroidApplication(OsmandApplication androidApplication) {
+		this.androidApplication = androidApplication;
+		sessionHandler.setAndroidApplication(androidApplication);
 	}
 
 	public OsmAndHttpServer() throws IOException {

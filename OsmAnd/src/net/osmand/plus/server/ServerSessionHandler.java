@@ -5,17 +5,17 @@ import net.osmand.plus.OsmandApplication;
 import fi.iki.elonen.NanoHTTPD;
 
 public class ServerSessionHandler {
-	private OsmandApplication androidContext;
+	private OsmandApplication androidApplication;
 
 	private ApiRouter router = new ApiRouter();
 
-	public OsmandApplication getAndroidContext() {
-		return androidContext;
+	public OsmandApplication getAndroidApplication() {
+		return androidApplication;
 	}
 
-	public void setAndroidContext(OsmandApplication androidContext) {
-		this.androidContext = androidContext;
-		router.setAndroidContext(androidContext);
+	public void setAndroidApplication(OsmandApplication androidApplication) {
+		this.androidApplication = androidApplication;
+		router.setAndroidContext(androidApplication);
 	}
 
 	public NanoHTTPD.Response handle(NanoHTTPD.IHTTPSession session) {
