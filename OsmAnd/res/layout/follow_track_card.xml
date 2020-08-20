@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/prev_route_card"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<View
+		android:id="@+id/top_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginLeft="@dimen/content_padding"
+		android:background="?attr/divider_color_basic"
+		android:focusable="false" />
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/track_categories"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:clipToPadding="false"
+		android:orientation="horizontal"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_half"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_half"
+		tools:itemCount="3"
+		tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		tools:listitem="@layout/point_editor_icon_category_item" />
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/track_list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:itemCount="5"
+		tools:listitem="@layout/gpx_track_select_item" />
+
+</LinearLayout>

@@ -131,9 +131,6 @@ public class FailSafeFuntions {
 								if (settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
 									gpxRoute.setCalculateOsmAndRouteParts(true);
 								}
-								if (settings.GPX_CALCULATE_RTEPT.get()) {
-									gpxRoute.setUseIntermediatePointsRTE(true);
-								}
 								if(settings.GPX_ROUTE_CALC.get()) {
 									gpxRoute.setCalculateOsmAndRoute(true);
 								}

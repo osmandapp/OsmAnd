@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -27,6 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.ImportHelper;
+import net.osmand.plus.helpers.ImportHelper.OnGpxImportCompleteListener;
 
 import org.apache.commons.logging.Log;
 
@@ -150,15 +151,7 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void importTrack() {
-		Intent intent = new Intent();
-		String action;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			action = Intent.ACTION_OPEN_DOCUMENT;
-		} else {
-			action = Intent.ACTION_GET_CONTENT;
-		}
-		intent.setAction(action);
-		intent.setType("*/*");
+		Intent intent = ImportHelper.getImportTrackIntent();
 		try {
 			startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
 		} catch (ActivityNotFoundException e) {
@@ -171,11 +164,16 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 		if (requestCode == OPEN_GPX_DOCUMENT_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null) {
 				Uri uri = data.getData();
-				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
+				importHelper.setGpxImportCompleteListener(new OnGpxImportCompleteListener() {
 					@Override
-					public void onComplete(boolean success) {
+					public void onImportComplete(boolean success) {
 						finishImport(success);
 						importHelper.setGpxImportCompleteListener(null);
+					}
+
+					@Override
+					public void onSaveComplete(boolean success, GPXUtilities.GPXFile result) {
+
 					}
 				});
 				importHelper.handleGpxImport(uri, false, false);

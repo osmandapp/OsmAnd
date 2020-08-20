@@ -11,7 +11,15 @@
 	Thx - Hardy
 
 -->
-
+    <string name="attach_to_the_roads">Attach to the roads</string>
+    <string name="nearest_point">Nearest point</string>
+    <string name="start_of_the_track">Start of the track</string>
+    <string name="pass_whole_track_descr">Point of the track to navigate</string>
+    <string name="navigate_to_track_descr">Navigate from my location to the track</string>
+    <string name="select_another_track">Select another track</string>
+    <string name="import_track_descr">Choose track file to follow or import it from device.</string>
+    <string name="follow_track_descr">Choose track file to follow</string>
+    <string name="follow_track">Follow track</string>
     <string name="marker_save_as_track">Save as track file</string>
     <string name="map_widget_monitoring">Trip recoridng</string>
     <string name="quick_action_add_gpx">Add track waypoint</string>

@@ -1290,6 +1290,17 @@ public class GPXUtilities {
 			return pt;
 		}
 
+		public TrkSegment getNonEmptyTrkSegment() {
+			for (GPXUtilities.Track t : tracks) {
+				for (TrkSegment s : t.segments) {
+					if (s.points.size() > 0) {
+						return s;
+					}
+				}
+			}
+			return null;
+		}
+
 		public void addTrkSegment(List<WptPt> points) {
 			removeGeneralTrackIfExists();
 

@@ -116,7 +116,8 @@ public class ImportHelper {
 	}
 
 	public interface OnGpxImportCompleteListener {
-		void onComplete(boolean success);
+		void onImportComplete(boolean success);
+		void onSaveComplete(boolean success, GPXFile result);
 	}
 
 	public ImportHelper(final AppCompatActivity activity, final OsmandApplication app, final OsmandMapTileView mapView) {
@@ -627,15 +628,7 @@ public class ImportHelper {
 			return;
 		}
 		final OsmandApplication app = mapActivity.getMyApplication();
-		Intent intent = new Intent();
-		String action;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			action = Intent.ACTION_OPEN_DOCUMENT;
-		} else {
-			action = Intent.ACTION_GET_CONTENT;
-		}
-		intent.setAction(action);
-		intent.setType("*/*");
+		Intent intent = ImportHelper.getImportTrackIntent();
 
 		ActivityResultListener listener = new ActivityResultListener(IMPORT_FILE_REQUEST, new ActivityResultListener.OnActivityResultListener() {
 			@Override
@@ -673,6 +666,19 @@ public class ImportHelper {
 		
 		mapActivity.registerActivityResultListener(listener);
 		mapActivity.startActivityForResult(intent, IMPORT_FILE_REQUEST);
+	}
+
+	public static Intent getImportTrackIntent() {
+		Intent intent = new Intent();
+		String action;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			action = Intent.ACTION_OPEN_DOCUMENT;
+		} else {
+			action = Intent.ACTION_GET_CONTENT;
+		}
+		intent.setAction(action);
+		intent.setType("*/*");
+		return intent;
 	}
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, CallbackWithObject<List<SettingsItem>> callback) {
@@ -958,7 +964,7 @@ public class ImportHelper {
 			if (result.error != null) {
 				Toast.makeText(activity, result.error.getMessage(), Toast.LENGTH_LONG).show();
 				if (gpxImportCompleteListener != null) {
-					gpxImportCompleteListener.onComplete(false);
+					gpxImportCompleteListener.onImportComplete(false);
 				}
 			} else {
 				if (save) {
@@ -968,7 +974,7 @@ public class ImportHelper {
 					showGpxInDetailsActivity(result);
 				}
 				if (gpxImportCompleteListener != null) {
-					gpxImportCompleteListener.onComplete(true);
+					gpxImportCompleteListener.onImportComplete(true);
 				}
 			}
 		} else {
@@ -984,7 +990,7 @@ public class ImportHelper {
 							intent.setData(uri);
 							app.startActivity(intent);
 							if (gpxImportCompleteListener != null) {
-								gpxImportCompleteListener.onComplete(false);
+								gpxImportCompleteListener.onImportComplete(false);
 							}
 						}
 					})
@@ -992,7 +998,7 @@ public class ImportHelper {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							if (gpxImportCompleteListener != null) {
-								gpxImportCompleteListener.onComplete(false);
+								gpxImportCompleteListener.onImportComplete(false);
 							}
 						}
 					})
@@ -1085,7 +1091,12 @@ public class ImportHelper {
 
 		@Override
 		protected void onPostExecute(final String warning) {
-			if (Algorithms.isEmpty(warning)) {
+			boolean success = Algorithms.isEmpty(warning);
+
+			if (gpxImportCompleteListener != null) {
+				gpxImportCompleteListener.onSaveComplete(success, result);
+			}
+			if (success) {
 				if (showInDetailsActivity) {
 					showGpxInDetailsActivity(result);
 				} else {
