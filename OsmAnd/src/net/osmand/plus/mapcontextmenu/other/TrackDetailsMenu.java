@@ -147,7 +147,28 @@ public class TrackDetailsMenu {
 				if (points != null) {
 					LatLon latLon = tb.getLatLonFromPixel(mx, my);
 					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
-					float pos = (float) (gpxItem.locationOnMap.distance / ((OrderedLineDataSet) ds.get(0)).getDivX());
+
+					float pos;
+					if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
+							gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
+						pos = gpxItem.locationOnMap.time / 1000f;
+					} else {
+						double totalDistance = 0;
+						int index = segment.points.indexOf(points.first);
+						if (index != -1) {
+							WptPt previousPoint = null;
+							for (int i = 0; i < index; i++) {
+								WptPt currentPoint = segment.points.get(i);
+								if (previousPoint != null) {
+									totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
+								}
+								previousPoint = currentPoint;
+							}
+							totalDistance += MapUtils.getDistance(gpxItem.locationOnMap.lat, gpxItem.locationOnMap.lon, points.first.lat, points.first.lon);
+						}
+						pos = (float) (totalDistance / ((OrderedLineDataSet) ds.get(0)).getDivX());
+					}
+
 					float lowestVisibleX = chart.getLowestVisibleX();
 					float highestVisibleX = chart.getHighestVisibleX();
 					float nextVisibleX = lowestVisibleX + (pos - gpxItem.chartHighlightPos);
@@ -327,7 +348,7 @@ public class TrackDetailsMenu {
 					if (previousPoint != null) {
 						totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
 					}
-					if (currentPoint.distance >= distance || Math.abs(totalDistance - distance) < 0.1) {
+					if (currentPoint.distance >= distance || totalDistance >= distance) {
 						if (previousPoint != null && currentPoint.distance >= distance) {
 							double percent = 1 - (totalDistance - distance) / (currentPoint.distance - previousPoint.distance);
 							double dLat = (currentPoint.lat - previousPoint.lat) * percent;
@@ -606,6 +627,11 @@ public class TrackDetailsMenu {
 					highlightDrawX = chart.getHighlighted()[0].getDrawX();
 				} else {
 					highlightDrawX = -1;
+				}
+				MapActivity mapActivity = getMapActivity();
+				if (lastPerformedGesture != ChartGesture.NONE && mapActivity != null
+						&& mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+					mapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 				}
 			}
 
