@@ -48,7 +48,7 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 			editingCtx.clearSnappedToRoadPoints();
 		}
 		editingCtx.setCalculationMode(oldCalculationMode);
-		editingCtx.setNeedUpdateCacheForSnap(true);
+		editingCtx.updateCacheForSnap();
 	}
 
 	@Override
@@ -75,6 +75,6 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 		if (newCalculationMode == CalculationMode.WHOLE_TRACK) {
 			editingCtx.clearSnappedToRoadPoints();
 		}
-		editingCtx.setNeedUpdateCacheForSnap(true);
+		editingCtx.updateCacheForSnap();
 	}
 }

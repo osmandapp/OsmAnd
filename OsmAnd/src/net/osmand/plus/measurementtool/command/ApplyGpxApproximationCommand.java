@@ -15,7 +15,6 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 	private ApplicationMode mode;
 	private GpxRouteApproximation approximation;
 	private List<WptPt> points;
-	private boolean needUpdateCache;
 
 	public ApplyGpxApproximationCommand(MeasurementToolLayer measurementLayer, GpxRouteApproximation approximation, ApplicationMode mode) {
 		super(measurementLayer);
@@ -31,7 +30,6 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 	@Override
 	public boolean execute() {
 		List<WptPt> pts = getEditingCtx().getPoints();
-		needUpdateCache = getEditingCtx().isNeedUpdateCacheForSnap();
 		points = new ArrayList<>(pts);
 		applyApproximation();
 		refreshMap();
@@ -55,9 +53,7 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 		getEditingCtx().resetAppMode();
 		getEditingCtx().clearSegments();
 		getEditingCtx().addPoints(points);
-		if (needUpdateCache) {
-			getEditingCtx().setNeedUpdateCacheForSnap(true);
-		}
+		getEditingCtx().updateCacheForSnap();
 		refreshMap();
 	}
 

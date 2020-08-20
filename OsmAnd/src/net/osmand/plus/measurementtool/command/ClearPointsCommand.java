@@ -4,13 +4,11 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ClearPointsCommand extends MeasurementModeCommand {
 
 	private List<WptPt> points;
-	private boolean needUpdateCache;
 
 	public ClearPointsCommand(MeasurementToolLayer measurementLayer) {
 		super(measurementLayer);
@@ -19,7 +17,6 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 	@Override
 	public boolean execute() {
 		List<WptPt> pts = getEditingCtx().getPoints();
-		needUpdateCache = getEditingCtx().isNeedUpdateCacheForSnap();
 		points = new ArrayList<>(pts);
 		pts.clear();
 		getEditingCtx().clearSegments();
@@ -30,9 +27,7 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 	@Override
 	public void undo() {
 		getEditingCtx().addPoints(points);
-		if (needUpdateCache) {
-			getEditingCtx().setNeedUpdateCacheForSnap(true);
-		}
+		getEditingCtx().updateCacheForSnap();
 		refreshMap();
 	}
 
