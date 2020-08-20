@@ -67,7 +67,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 		NEW_SEGMENT(ADD_ROUTE_SEGMENT_DIALOG_REQUEST_CODE,
 				R.string.next_segment, R.string.rourte_between_points_next_segment_button_desc,
 				R.string.whole_track, R.string.rourte_between_points_whole_track_button_desc,
-				NEXT_SEGMENT, WHOLE_TRACK),
+				ADD_NEXT_SEGMENT, WHOLE_TRACK),
 		ROUTE_BEFORE(ROUTE_BEFORE_DIALOG_REQUEST_CODE,
 				R.string.previous_segment, R.string.only_selected_segment_recalc,
 				R.string.all_previous_segments, R.string.all_previous_segments_will_be_recalc,

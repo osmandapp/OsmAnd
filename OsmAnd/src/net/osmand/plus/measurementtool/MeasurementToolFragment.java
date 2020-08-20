@@ -608,7 +608,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Optio
 
 			if (editingCtx.isNewData() || editingCtx.hasRoutePoints() || editingCtx.isInSnapToRoadMode()) {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-						this, editingCtx.getCalculationMode(),
+						this, editingCtx.getCalculationModeAll(),
 						editingCtx.getAppMode(), ADD_ROUTE_SEGMENT_DIALOG_REQUEST_CODE);
 			} else {
 				SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
@@ -664,32 +664,35 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Optio
 				}
 				break;
 			case RouteBetweenPointsBottomSheetDialogFragment.ROUTE_BEFORE_DIALOG_REQUEST_CODE:
-				switch (resultCode) {
-					case RouteBetweenPointsBottomSheetDialogFragment.CLOSE_ROUTE_DIALOG_RESULT_CODE:
-						onCloseRouteDialog(snapToRoadEnable);
-						break;
-					case RouteBetweenPointsBottomSheetDialogFragment.CHANGE_APP_MODE_RESULT_CODE:
-						onRouteBeforeChangeApplicationMode(applicationMode, calculationMode);
-						break;
-				}
-				break;
 			case RouteBetweenPointsBottomSheetDialogFragment.ROUTE_AFTER_DIALOG_REQUEST_CODE:
 				switch (resultCode) {
 					case RouteBetweenPointsBottomSheetDialogFragment.CLOSE_ROUTE_DIALOG_RESULT_CODE:
 						onCloseRouteDialog(snapToRoadEnable);
 						break;
 					case RouteBetweenPointsBottomSheetDialogFragment.CHANGE_APP_MODE_RESULT_CODE:
-						onRouteAfterChangeApplicationMode(applicationMode, calculationMode);
+						routeChangeAppMode(applicationMode, calculationMode);
 						break;
 				}
 				break;
 		}
 	}
 
-	private void onRouteAfterChangeApplicationMode(ApplicationMode applicationMode, CalculationMode calculationMode) {
-	}
-
-	private void onRouteBeforeChangeApplicationMode(ApplicationMode applicationMode, CalculationMode calculationMode) {
+	private void routeChangeAppMode(ApplicationMode applicationMode, CalculationMode newCalculationMode) {
+		CalculationMode oldCalculationMode = newCalculationMode.isAfter()
+				? editingCtx.getCalculationModeAfter()
+				: editingCtx.getCalculationModeBefore();
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			editingCtx.getCommandManager()
+					.execute(new ChangeRouteModeCommand(measurementLayer, applicationMode,
+							newCalculationMode, oldCalculationMode));
+			updateUndoRedoButton(true, undoBtn);
+			updateUndoRedoButton(false, redoBtn);
+			disable(upDownBtn);
+			editingCtx.setSelectedPointPosition(-1);
+			measurementLayer.refreshMap();
+			updateDistancePointsText();
+		}
 	}
 
 	@Override
@@ -842,8 +845,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Optio
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-					this, editingCtx.getCalculationMode(),
-					editingCtx.getAppMode(), ROUTE_BEFORE_DIALOG_REQUEST_CODE);
+					this, editingCtx.getCalculationModeBefore(),
+					editingCtx.getBeforeSelectedPointAppMode(), ROUTE_BEFORE_DIALOG_REQUEST_CODE);
 		}
 	}
 
@@ -852,8 +855,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Optio
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-					this, editingCtx.getCalculationMode(),
-					editingCtx.getAppMode(), ROUTE_AFTER_DIALOG_REQUEST_CODE);
+					this, editingCtx.getCalculationModeAfter(),
+					editingCtx.getSelectedPointAppMode(), ROUTE_AFTER_DIALOG_REQUEST_CODE);
 		}
 	}
 
@@ -868,6 +871,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Optio
 	}
 
 	public void onCloseRouteDialog(boolean snapToRoadEnabled) {
+		editingCtx.setSelectedPointPosition(-1);
 		if (!snapToRoadEnabled && !editingCtx.isInSnapToRoadMode()) {
 			toolBarController.setTitle(previousToolBarTitle);
 			MapActivity mapActivity = getMapActivity();
@@ -880,7 +884,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Optio
 	public void onChangeApplicationMode(ApplicationMode mode, CalculationMode calculationMode) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			editingCtx.getCommandManager().execute(new ChangeRouteModeCommand(measurementLayer, mode, calculationMode));
+			editingCtx.getCommandManager().execute(new ChangeRouteModeCommand(measurementLayer, mode,
+					calculationMode, editingCtx.getCalculationModeAll()));
+			updateUndoRedoButton(true, undoBtn);
 			updateUndoRedoButton(false, redoBtn);
 			disable(upDownBtn);
 			updateSnapToRoadControls();

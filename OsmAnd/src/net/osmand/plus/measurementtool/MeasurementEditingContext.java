@@ -35,6 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.NEXT_SEGMENT;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.PREVIOUS_SEGMENT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 
 public class MeasurementEditingContext {
@@ -57,19 +58,38 @@ public class MeasurementEditingContext {
 	private boolean inAddPointMode;
 	private boolean needUpdateCacheForSnap;
 	private int calculatedPairs;
-	private CalculationMode calculationMode = WHOLE_TRACK;
+	private CalculationMode calculationModeAll = WHOLE_TRACK;
+	private CalculationMode calculationModeBefore = PREVIOUS_SEGMENT;
+	private CalculationMode calculationModeAfter = NEXT_SEGMENT;
+	private CalculationMode currentCalculationMode = calculationModeAll;
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode appMode = DEFAULT_APP_MODE;
 	private RouteCalculationProgress calculationProgress;
 	private final Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new ConcurrentLinkedQueue<>();
-	private final Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = new ConcurrentHashMap<>();
+	private Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = new ConcurrentHashMap<>();
 
 	public enum CalculationMode {
-		NEXT_SEGMENT,
+		ADD_NEXT_SEGMENT,
 		WHOLE_TRACK,
 		PREVIOUS_SEGMENT,
 		ALL_PREVIOUS_SEGMENTS,
-		ALL_NEXT_SEGMENTS
+		NEXT_SEGMENT,
+		ALL_NEXT_SEGMENTS;
+
+		CalculationMode() {
+		}
+
+		public boolean isAll(){
+			return this == ADD_NEXT_SEGMENT || this == WHOLE_TRACK;
+		}
+
+		boolean isBefore(){
+			return this == PREVIOUS_SEGMENT || this == ALL_PREVIOUS_SEGMENTS;
+		}
+
+		boolean isAfter(){
+			return this == NEXT_SEGMENT || this == ALL_NEXT_SEGMENTS;
+		}
 	}
 
 	public static class RoadSegmentData {
@@ -106,6 +126,14 @@ public class MeasurementEditingContext {
 		public List<RouteSegmentResult> getSnappedToRoadSegments() {
 			return Collections.unmodifiableList(snappedToRoadSegments);
 		}
+	}
+
+	public Map<Pair<WptPt, WptPt>, RoadSegmentData> getRoadSegmentData() {
+		return roadSegmentData;
+	}
+
+	public void setRoadSegmentData(Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData) {
+		this.roadSegmentData = roadSegmentData;
 	}
 
 	public void setApplication(OsmandApplication application) {
@@ -145,7 +173,7 @@ public class MeasurementEditingContext {
 		return getPointAppMode(Math.max(selectedPointPosition - 1, 0));
 	}
 
-	public ApplicationMode getPointAppMode(int pointPosition) {
+	private ApplicationMode getPointAppMode(int pointPosition) {
 		String profileType = getPoints().get(pointPosition).getProfileType();
 		return ApplicationMode.valueOfStringKey(profileType, DEFAULT_APP_MODE);
 	}
@@ -183,12 +211,27 @@ public class MeasurementEditingContext {
 		return newGpxData != null && newGpxData.getGpxFile() != null && newGpxData.getGpxFile().hasRtePt();
 	}
 
-	public CalculationMode getCalculationMode() {
-		return calculationMode;
+	public CalculationMode getCalculationModeAll() {
+		return calculationModeAll;
+	}
+
+	public CalculationMode getCalculationModeBefore() {
+		return calculationModeBefore;
+	}
+
+	public CalculationMode getCalculationModeAfter() {
+		return calculationModeAfter;
 	}
 
 	public void setCalculationMode(CalculationMode calculationMode) {
-		this.calculationMode = calculationMode;
+		currentCalculationMode = calculationMode;
+		if(calculationMode.isBefore()) {
+			calculationModeBefore = calculationMode;
+		}else if(calculationMode.isAfter()){
+			calculationModeAfter = calculationMode;
+		}else{
+			calculationModeAll = calculationMode;
+		}
 	}
 
 	void setProgressListener(SnapToRoadProgressListener progressListener) {
@@ -370,7 +413,7 @@ public class MeasurementEditingContext {
 				if (pts != null) {
 					cache.points.addAll(pts);
 				} else {
-					if (isInSnapToRoadMode()) {
+					if (isInSnapToRoadMode() || !currentCalculationMode.isAll()) {
 						scheduleRouteCalculateIfNotEmpty();
 					}
 					cache.points.addAll(Arrays.asList(pair.first, pair.second));
@@ -525,23 +568,17 @@ public class MeasurementEditingContext {
 		final RouteCalculationParams params = new RouteCalculationParams();
 		params.inSnapToRoadMode = true;
 		params.start = start;
+		params.end = end;
 
 		ApplicationMode currentPointSnapToRoadMode;
-		if (calculationMode == NEXT_SEGMENT) {
-			currentPointSnapToRoadMode = ApplicationMode.valueOfStringKey(currentPair.first.getProfileType(),
-					null);
-		} else {
+		if (currentCalculationMode == WHOLE_TRACK) {
 			currentPointSnapToRoadMode = appMode;
-		}
-		params.end = end;
-		if (currentPointSnapToRoadMode == null) {
-			ApplicationMode straightLine = DEFAULT_APP_MODE;
-			RoutingHelper.applyApplicationSettings(params, application.getSettings(), straightLine);
-			params.mode = straightLine;
 		} else {
-			RoutingHelper.applyApplicationSettings(params, application.getSettings(), currentPointSnapToRoadMode);
-			params.mode = currentPointSnapToRoadMode;
+			currentPointSnapToRoadMode = ApplicationMode.valueOfStringKey(currentPair.first.getProfileType(),
+					DEFAULT_APP_MODE);
 		}
+		RoutingHelper.applyApplicationSettings(params, application.getSettings(), currentPointSnapToRoadMode);
+		params.mode = currentPointSnapToRoadMode;
 		params.ctx = application;
 		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
 		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
@@ -592,11 +629,6 @@ public class MeasurementEditingContext {
 				int trkptIndex = currentPair.first.getTrkPtIndex();
 				trkptIndex += pts.size() - 1;
 				currentPair.second.setTrkPtIndex(trkptIndex);
-				if (route.getAppMode().equals(DEFAULT_APP_MODE)) {
-					currentPair.second.removeProfileType();
-				} else {
-					currentPair.second.setProfileType(route.getAppMode().getStringKey());
-				}
 				updateCacheForSnapIfNeeded(true);
 				application.runInUIThread(new Runnable() {
 					@Override
