@@ -1,6 +1,7 @@
 package net.osmand.plus.server;
 
 import android.util.Log;
+import android.webkit.MimeTypeMap;
 
 import net.osmand.plus.OsmandApplication;
 
@@ -40,6 +41,7 @@ public class ApiRouter {
 
 	public NanoHTTPD.Response getStatic(String uri) {
 		InputStream is = null;
+		String mimeType = parseMimeType(uri);
 		if (androidContext != null) {
 			try {
 				is = androidContext.getAssets().open("server" + uri);
@@ -48,7 +50,7 @@ public class ApiRouter {
 				}
 				return newFixedLengthResponse(
 						NanoHTTPD.Response.Status.OK,
-						"text/plain",
+						mimeType,
 						is,
 						is.available());
 			} catch (IOException e) {
@@ -56,6 +58,16 @@ public class ApiRouter {
 			}
 		}
 		return ErrorResponses.response500;
+	}
+
+	private String parseMimeType(String url) {
+		String type = null;
+		if (url.endsWith(".js")) return "text/javascript";
+		String extension = MimeTypeMap.getFileExtensionFromUrl(url);
+		if (extension != null) {
+			type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+		}
+		return type;
 	}
 
 	public NanoHTTPD.Response getGoHtml() {
