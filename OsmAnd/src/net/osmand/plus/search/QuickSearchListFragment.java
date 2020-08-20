@@ -260,7 +260,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 			showOnMap(getMapActivity(), dialogFragment,
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-					(int) searchResult.preferredZoom, pointDescription, object);
+					searchResult.preferredZoom, pointDescription, object);
 		}
 	}
 

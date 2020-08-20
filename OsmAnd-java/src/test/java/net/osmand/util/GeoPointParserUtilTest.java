@@ -39,7 +39,7 @@ public class GeoPointParserUtilTest {
 		final double dlat = 34.99393, dlon = -106.61568;
 		final double longLat = 34.993933029174805, longLon = -106.615680694580078;
 		final String name = "Treasure Island";
-		float z = GeoParsedPoint.NO_ZOOM;
+		int z = GeoParsedPoint.NO_ZOOM;
 		String url;
 
 		String noQueryParameters[] = {
@@ -63,7 +63,7 @@ public class GeoPointParserUtilTest {
 				"geo:0,0?m",
 				"geo:0,0?m=",
 				"geo:0,0?m=foo",
-				"geo:0,0?q=%F0%9D%F0",
+				"geo:0,0?q=%D0%9D%D0",
 				"http://download.osmand.net/go?lat",
 				"http://download.osmand.net/go?lat=",
 				"http://download.osmand.net/go?lat=34.99393",
@@ -789,7 +789,7 @@ public class GeoPointParserUtilTest {
 						actual.getQuery() + "' != '" + expected.getQuery());
 		} else {
 			double aLat = actual.getLatitude(), eLat = expected.getLatitude(), aLon = actual.getLongitude(), eLon = expected.getLongitude();
-			double aZoom = actual.getZoom(), eZoom = expected.getZoom();
+			int aZoom = actual.getZoom(), eZoom = expected.getZoom();
 			String aLabel = actual.getLabel(), eLabel = expected.getLabel();
 			if (eLabel != null) {
 				if (!aLabel.equals(eLabel)) {
@@ -816,7 +816,7 @@ public class GeoPointParserUtilTest {
 				throw new RuntimeException("Query param not equal");
 		} else {
 			double aLat = actual.getLatitude(), eLat = expected.getLatitude(), aLon = actual.getLongitude(), eLon = expected.getLongitude();
-			double aZoom = actual.getZoom(), eZoom = expected.getZoom();
+			int aZoom = actual.getZoom(), eZoom = expected.getZoom();
 			String aLabel = actual.getLabel(), eLabel = expected.getLabel();
 			if (eLabel != null) {
 				if (!aLabel.equals(eLabel)) {

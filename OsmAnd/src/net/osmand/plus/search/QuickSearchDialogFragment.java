@@ -414,7 +414,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 									PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
 									app.getSettings().setMapLocationToShow(
 											searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-											(int) searchResult.preferredZoom, pointDescription, true, searchResult.object);
+											searchResult.preferredZoom, pointDescription, true, searchResult.object);
 
 									hideToolbar();
 									MapActivity.launchMapActivityMoveToTop(getActivity());
@@ -444,7 +444,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 										hide();
 									} else if (group.getPoints().size() == 1) {
 										FavouritePoint p = group.getPoints().get(0);
-										app.getSettings().setMapLocationToShow(p.getLatitude(), p.getLongitude(), (int) word.getResult().preferredZoom);
+										app.getSettings().setMapLocationToShow(p.getLatitude(), p.getLongitude(), word.getResult().preferredZoom);
 										hideToolbar();
 										MapActivity.launchMapActivityMoveToTop(getActivity());
 										hide();
