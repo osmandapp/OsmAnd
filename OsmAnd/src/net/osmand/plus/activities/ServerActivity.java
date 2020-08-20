@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.server.OsmAndHttpServer;
 
@@ -70,6 +71,7 @@ public class ServerActivity extends AppCompatActivity {
 		TrafficStats.setThreadStatsTag(THREAD_ID);
 		try {
 			server = new OsmAndHttpServer();
+			server.setAndroidContext((OsmandApplication)this.getApplication());
 			initialized = true;
 			updateTextView("Server started at: http://" + OsmAndHttpServer.HOSTNAME
                     + ":" + OsmAndHttpServer.PORT);
