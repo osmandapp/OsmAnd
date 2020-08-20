@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="access_hint_enter_address">Enter address</string>
+    <string name="add_address">Add address</string>
+    <string name="delete_address">Delete address</string>
     <string name="attach_to_the_roads">Attach to the roads</string>
     <string name="nearest_point">Nearest point</string>
     <string name="start_of_the_track">Start of the track</string>

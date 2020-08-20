@@ -11,16 +11,18 @@ public class AFavorite extends AidlParams {
 	private double lon;
 	private String name;
 	private String description;
+	private String address;
 	private String category;
 	private String color;
 	private boolean visible;
 
-	public AFavorite(double lat, double lon, String name, String description,
+	public AFavorite(double lat, double lon, String name, String description, String address,
 	                 String category, String color, boolean visible) {
 		this.lat = lat;
 		this.lon = lon;
 		this.name = name;
 		this.description = description;
+		this.address = address;
 		this.category = category;
 		this.color = color;
 		this.visible = visible;
@@ -58,6 +60,8 @@ public class AFavorite extends AidlParams {
 		return description;
 	}
 
+	public String getAddress() { return address; }
+
 	public String getCategory() {
 		return category;
 	}
@@ -76,6 +80,7 @@ public class AFavorite extends AidlParams {
 		bundle.putDouble("lon", lon);
 		bundle.putString("name", name);
 		bundle.putString("description", description);
+		bundle.putString("address", address);
 		bundle.putString("category", category);
 		bundle.putString("color", color);
 		bundle.putBoolean("visible", visible);
@@ -87,6 +92,7 @@ public class AFavorite extends AidlParams {
 		lon = bundle.getDouble("lon");
 		name = bundle.getString("name");
 		description = bundle.getString("description");
+		address = bundle.getString("address");
 		category = bundle.getString("category");
 		color = bundle.getString("color");
 		visible = bundle.getBoolean("visible");

@@ -967,7 +967,7 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean updateFavorite(String prevName, String prevCategory, double prevLat, double prevLon, String newName, String newCategory, String newDescription, double newLat, double newLon) {
+	boolean updateFavorite(String prevName, String prevCategory, double prevLat, double prevLon, String newName, String newCategory, String newDescription, String newAddress, double newLat, double newLon) {
 		FavouritesDbHelper favoritesHelper = app.getFavorites();
 		List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
 		for (FavouritePoint f : favorites) {
@@ -977,8 +977,8 @@ public class OsmandAidlApi {
 					favoritesHelper.editFavourite(f, newLat, newLon);
 				}
 				if (!newName.equals(f.getName()) || !newDescription.equals(f.getDescription()) ||
-						!newCategory.equals(f.getCategory())) {
-					favoritesHelper.editFavouriteName(f, newName, newCategory, newDescription);
+						!newCategory.equals(f.getCategory()) || !newAddress.equals(f.getAddress())) {
+					favoritesHelper.editFavouriteName(f, newName, newCategory, newDescription,newAddress);
 				}
 				refreshMap();
 				return true;
