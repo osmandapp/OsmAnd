@@ -36,7 +36,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
-import androidhttpweb.ServerActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
