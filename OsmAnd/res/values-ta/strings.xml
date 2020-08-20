@@ -254,7 +254,6 @@
     <string name="shared_string_my_places">என் இடங்கள்</string>
     <string name="shared_string_my_favorites">பிடித்தவைகள்</string>
     <string name="shared_string_tracks">தடங்கள்</string>
-    <string name="shared_string_gpx_files">ஜிபிஎக்ஸ் கோப்புகள்</string>
     <string name="shared_string_currently_recording_track">தற்பொழுது பதிவாகும் தடம்</string>
     <string name="shared_string_audio">ஒழி</string>
     <string name="shared_string_video">காணோளி</string>
@@ -585,7 +584,6 @@
     <string name="shared_string_clear">தெளிவான</string>
     <string name="shared_string_clear_all">அனைத்தையும் அழி</string>
     <string name="shared_string_save">சேமி</string>
-    <string name="shared_string_save_as_gpx">புதிய GPX கோப்பாக சேமிக்கவும்</string>
     <string name="shared_string_rename">மறுபெயரிடு</string>
     <string name="shared_string_delete">அழி</string>
     <string name="shared_string_delete_all">அனைத்தையும் நீக்கு</string>
@@ -1134,7 +1132,6 @@
     <string name="context_menu_item_share_location">இருப்பிடத்தை பகிரவும்</string>
     <string name="add_waypoint_dialog_added">ஜி.பி.எக்ஸ் வேப்பிங் \'\'{0}\'\' சேர்க்கப்பட்டது</string>
     <string name="add_waypoint_dialog_title">பதிவுசெய்யப்பட்ட ஜி.பி.எக்ஸ் டிராக்கு வழிப்பாதையைச் சேர்க்கவும்</string>
-    <string name="context_menu_item_add_waypoint">GPX வழிப்பாதையைச் சேர்</string>
     <string name="amenity_type_administrative">நிர்வாக</string>
     <string name="amenity_type_barrier">தடை</string>
     <string name="amenity_type_education">கல்வி</string>
@@ -1311,7 +1308,6 @@
     <string name="add_line">வரி சேர்க்க</string>
     <string name="empty_state_favourites">பிடித்தவை சேர்க்க</string>
     <string name="move_point">நகரும் புள்ளி</string>
-    <string name="add_segment_to_the_track">GPX கோப்பில் சேர்க்கவும்</string>
     <string name="osm_recipients_label">OSM பெறுபவர்கள்</string>
     <string name="total_donations">மொத்த நன்கொடைகள்</string>
     <string name="day_off_label">தொலைவில் உள்ள</string>

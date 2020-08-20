@@ -196,7 +196,6 @@
     <string name="animate_route">Почати моделювання</string>
     <string name="file_can_not_be_renamed">Файл не можна перейменувати.</string>
     <string name="file_with_name_already_exists">Файл з таким ім’ям вже існує.</string>
-    <string name="shared_string_gpx_route">Маршрут GPX</string>
     <string name="poi_query_by_name_matches_categories">Знайдено кілька споріднених категорій POI.</string>
     <string name="data_to_search_poi_not_available">Завантажте дані офлайн для пошуку POI.</string>
     <string name="poi_filter_by_name">Пошук за назвою</string>
@@ -214,7 +213,6 @@
     <string name="search_position_map_view">Поточний центр мапи</string>
     <string name="select_search_position">Початок:</string>
     <string name="context_menu_item_search">Шукати поруч</string>
-    <string name="shared_string_save_as_gpx">Зберегти як новий GPX-файл</string>
     <string name="route_successfully_saved_at">Маршрут збережено як \'%1$s\'.</string>
     <string name="filename_input">Ім’я файлу: </string>
     <string name="file_with_name_already_exist">Файл з таким ім’ям вже існує.</string>
@@ -319,7 +317,6 @@
     <string name="context_menu_item_share_location">Поділитись місцезнаходженням</string>
     <string name="add_waypoint_dialog_added">Маршрутну точку GPX \"{0}\" додано</string>
     <string name="add_waypoint_dialog_title">Додати точку до записаного треку</string>
-    <string name="context_menu_item_add_waypoint">Додати точку до треку</string>
     <string name="amenity_type_administrative">Адміністративні</string>
     <string name="amenity_type_barrier">Перешкода</string>
     <string name="amenity_type_education">Освіта</string>
@@ -414,7 +411,6 @@
     <string name="voice">Голосові дані (запис)</string>
     <string name="no_vector_map_loaded">Векторні мапи не завантажено</string>
     <string name="gpx_files_not_found">Файли GPX не знайдені в теці з треками</string>
-    <string name="layer_gpx_layer">GPX-файли…</string>
     <string name="error_reading_gpx">Не вдалося прочитати GPX-дані.</string>
     <string name="vector_data">Оффлайн векторні мапи</string>
     <string name="transport_context_menu">Шукати транспорт на зупинці</string>
@@ -749,7 +745,6 @@
     <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Скидання налаштувань</string>
     <string name="map_widget_parking">Стоянка</string>
-    <string name="map_widget_monitoring">GPX логування</string>
     <string name="map_widget_speed">Швидкість</string>
     <string name="map_widget_distance">Пункт призначення</string>
     <string name="map_widget_altitude">Висота</string>
@@ -1312,7 +1307,6 @@
     <string name="record_plugin_description">Цей втулок додає функцію запису та збереження ваших пересувань вручну, торканням віджету записування GPX на екрані мапи, або автоматично записувати всі ваші подорожі у файл GPX. 
 \n 
 \nЗаписаними маршрутами можна поділитись з вашими друзями або іншими учасниками спільноти OSM. Атлети можуть користуватися записаними маршрутами для відстеження власних тренувань. Основні деталі маршрутів наявний безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість тощо, звісно, записані маршрути, також можна проаналізувати за допомогою сторонніх інструментів.</string>
-    <string name="save_track_to_gpx_globally">Писати трек у файл GPX</string>
     <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна ввімкнути або вимкнути кнопкою запис GPX на екрані з мапою.</string>
     <string name="save_track_interval_globally">Інтервал записування</string>
     <string name="rendering_attr_publicTransportMode_name">Маршрути автобусів, тролейбусів та шатлів</string>
@@ -1749,7 +1743,6 @@
     <string name="working_days">Робочі дні</string>
     <string name="favourites">Закладки</string>
     <string name="saved_at_time">Збережено о: %1$s</string>
-    <string name="show_gpx">Показати GPX-дані</string>
     <string name="count_of_lines">Кількість ліній</string>
     <string name="are_you_sure">Ви впевнені?</string>
     <string name="unsaved_changes_will_be_lost">Всі незбережені зміни буде втрачено. Продовжити?</string>
@@ -2111,7 +2104,6 @@
     <string name="quick_action_add_poi">Додати POI</string>
     <string name="quick_action_map_style">Змінити стиль мапи</string>
     <string name="quick_action_map_style_switch">Стиль мапи був змінений на „%s“.</string>
-    <string name="quick_action_add_gpx">Додати точку до треку</string>
     <string name="quick_action_add_parking">Додати місце для паркування</string>
     <string name="quick_action_new_action">Додати дію</string>
     <string name="quick_action_edit_action">Редагувати дію</string>
@@ -2497,14 +2489,11 @@
     <string name="choose_navigation_type">Виберіть профіль навігації</string>
     <string name="add_route_points">Додати точки маршруту</string>
     <string name="add_line">Додати лінію</string>
-    <string name="empty_state_my_tracks">Додати GPX-файли</string>
-    <string name="empty_state_my_tracks_desc">Імпортувати GPX-файли або записати треки.</string>
     <string name="empty_state_favourites">Додати у закладки</string>
     <string name="empty_state_favourites_desc">Імпортувати Закладки або додати їх шляхом позначення точок на мапі.</string>
     <string name="import_track">Імпортувати GPX-файл</string>
     <string name="import_track_desc">Файл %1$s не містить шляхових точок, імпортувати його в якості треку?</string>
     <string name="move_point">Перемістити точку</string>
-    <string name="add_segment_to_the_track">Додати до GPX-файлу</string>
     <string name="keep_showing_on_map">Продовжувати показувати на мапі</string>
     <string name="exit_without_saving">Вийти без збереження?</string>
     <string name="move_all_to_history">Перемістити усе до історії</string>
@@ -2806,7 +2795,6 @@
 \n• Маркери мапи: імпорт обраних груп з GPX-файлів, введення координат, новий вигляд
 \n• Підписка OsmAnd Live тепер підтримує усі функції OsmAnd</string>
     <string name="index_item_world_wikivoyage">Статті путівника Вікімандрів</string>
-    <string name="shared_string_gpx_files">Файли GPX</string>
     <string name="access_intermediate_arrival_time">Проміжний час прибуття</string>
     <string name="map_widget_intermediate_time">Проміжний час</string>
     <string name="download_wikipedia_description">Завантажити статті Вікіпедії для %1$s, щоб читати їх в автономному режимі.</string>

@@ -93,11 +93,9 @@
     <string name="save_global_track_interval">Ahulny іntervał zapіsu</string>
     <string name="background_service_int">Іntervał abudžeńnia GPS</string>
     <string name="enable_sleep_mode">Uklučyć fonavy režym GPS</string>
-    <string name="save_track_to_gpx_globally">Pіsać śled u GPX-fajł</string>
     <string name="save_track_to_gpx_globally_descr">Ahuĺny zapis miescaznachodžannia ŭ GPX-fajl moža być ukliučany abo vykliučany z dapamohaj knopki zapisu GPX na ekranie z mapaj.</string>
     <string name="save_current_track_descr">Zachavać dziejny slied zaraz ža jak GPX-fajl.</string>
     <string name="save_current_track">Zachavać dziejny slied</string>
-    <string name="save_track_to_gpx">Aŭta-zapis treka padčas navihacyi</string>
     <string name="save_track_to_gpx_descrp">GPX-trek aŭtamatyčna zachavany ŭ kataloh track padčas navihacyi.</string>
     <string name="save_track_interval_globally">Іntervał zapіsu</string>
     <string name="save_track_interval">Іntervał zachoŭvańnia padčas navіhacyі</string>
@@ -646,7 +644,6 @@ Zachod: %2$s</string>
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Viarnucca da standartnych</string>
     <string name="map_widget_parking">Parkoŭka</string>
-    <string name="map_widget_monitoring">Zapіs GPX</string>
     <string name="map_widget_speed">Chutkaść</string>
     <string name="map_widget_distance">Miesca pryznačeńnia</string>
     <string name="map_widget_altitude">Vyšynia</string>
@@ -906,7 +903,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="animate_route">Pačać madelavańnie</string>
     <string name="file_can_not_be_renamed">Fajł nia moža być pieranazvany.</string>
     <string name="file_with_name_already_exists">Fajł z takoj nazvaj užo іsnuje.</string>
-    <string name="shared_string_gpx_route">GPX maršrut</string>
     <string name="poi_query_by_name_matches_categories">Niekalkі katehoryj POI znojdzieny, što adpaviadajuć zapytu:</string>
     <string name="data_to_search_poi_not_available">Lakalnych źviestak dla pošuku POI niama.</string>
     <string name="poi_filter_by_name">Pošuk pa naźvie</string>
@@ -924,7 +920,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="search_position_map_view">Ciapierašni centr mapy</string>
     <string name="select_search_position">Pačatak:</string>
     <string name="context_menu_item_search">Šukać navokal</string>
-    <string name="shared_string_save_as_gpx">Zachavać jak novy GPX-fajl</string>
     <string name="route_successfully_saved_at">Maršrut zachavany jak %1$s.</string>
     <string name="filename_input">Nazva fajla:</string>
     <string name="file_with_name_already_exist">Fajł z takoj nazvaj užo іsnuje.</string>
@@ -1027,7 +1022,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="context_menu_item_share_location">Dasłać kaardynaty</string>
     <string name="add_waypoint_dialog_added">GPX-kropka «{0}» dadadzienaja</string>
     <string name="add_waypoint_dialog_title">Dadać kropku da zapіsanaha GPX-śledu</string>
-    <string name="context_menu_item_add_waypoint">Dadać GPX kropku</string>
     <string name="amenity_type_administrative">Admіnіstracyjny</string>
     <string name="amenity_type_barrier">Pieraškoda</string>
     <string name="amenity_type_education">Adukacyja</string>
@@ -1117,7 +1111,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="voices">Hałasavyja padkazkі</string>
     <string name="no_vector_map_loaded">Viektarnyja mapy nie byli zahružany</string>
     <string name="gpx_files_not_found">GPX fajły nie znojdzieny ŭ katałohu tracks</string>
-    <string name="layer_gpx_layer">GPX-fajly…</string>
     <string name="error_reading_gpx">Nie atrymalasia pračytać GPX-danyja</string>
     <string name="vector_data">Łakalnyja viektarnyja mapy</string>
     <string name="transport_context_menu">Šukać transpart na prypynku</string>
@@ -1905,7 +1898,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="favourites">Ulubionyja</string>
     <string name="saved_at_time">Ciapier zachavany a %1$s</string>
     <string name="poi_deleted_localy">POI buduć vydalenyja, jak tolkі vy zahruzіcie vašy źmieny</string>
-    <string name="show_gpx">Pakazać GPX-danyja</string>
     <string name="count_of_lines">Kolkaść radkoŭ</string>
     <string name="are_you_sure">Vy ŭpeŭnienyja?</string>
     <string name="unsaved_changes_will_be_lost">Usie niezachavanyja źmieny buduć stračany. Praciahvać?</string>
@@ -2168,7 +2160,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="mapillary">Мapillary</string>
     <string name="quick_action_map_underlay_action">Dadać padkladku</string>
     <string name="quick_action_navigation_voice_on">Pryhlušyć Holas</string>
-    <string name="quick_action_add_gpx">Dadać kropku GPX</string>
     <string name="quick_action_add_parking">Dadać miesca parkoŭki</string>
     <string name="quick_action_edit_action">Redahavać dziejańnie</string>
     <string name="quick_action_add_favorite">Dadać upadabanaje</string>
@@ -2483,14 +2474,11 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="choose_navigation_type">Abrać profil navihacyi</string>
     <string name="add_route_points">Dadać kropki maršrutu</string>
     <string name="add_line">Dadać liniju</string>
-    <string name="empty_state_my_tracks">Dadać GPX-fajly</string>
-    <string name="empty_state_my_tracks_desc">Zapisać GPX-fajly ci zapisanyja sliady.</string>
     <string name="empty_state_favourites">Dadać va Ŭlubionyja</string>
     <string name="empty_state_favourites_desc">Impartavać upadabanyja ci dadać z dapamohaj markiroŭki punktaŭ na mapie.</string>
     <string name="import_track">Impartavać GPX-fajl</string>
     <string name="import_track_desc">Fajł %1$s nie źmiaščaje kropki šlachu, impartavać jak śled?</string>
     <string name="move_point">Pieramiascić kropku</string>
-    <string name="add_segment_to_the_track">Dadać u GPX-fajl</string>
     <string name="keep_showing_on_map">Praciahvać pakazvać na mapie</string>
     <string name="exit_without_saving">Vyjści biez zachavańnia?</string>
     <string name="do_not_use_animations">Biez animacyi</string>
@@ -2771,7 +2759,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 \n • Padpiska OsmAnd Live ciapier padtrymlivaje ŭsie funkcyi OsmAnd 
 \n 
 \n</string>
-    <string name="shared_string_gpx_files">GPX-fajly</string>
     <string name="access_intermediate_arrival_time">Pramiežkavy čas prybyccia</string>
     <string name="map_widget_intermediate_time">Pramiežkavy čas</string>
     <string name="download_wikipedia_description">Spampavać artykuly Vikipedyi dlia %1$s dlia aŭtanomnaha čytannia.</string>

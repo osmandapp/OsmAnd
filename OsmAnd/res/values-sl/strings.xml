@@ -124,7 +124,6 @@
     <string name="basemap_was_selected_to_download">Za pravilno delovanje programa mora biti nameščen osnovni zemljevid sveta.</string>
     <string name="map_widget_reset">Povrni na privzeto</string>
     <string name="map_widget_parking">Parkiranje</string>
-    <string name="map_widget_monitoring">Sledenje GPX</string>
     <string name="map_widget_speed">Hitrost</string>
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_lock_screen">Zakleni zaslon</string>
@@ -582,7 +581,6 @@
     <string name="city_type_suburb">Predmestje</string>
     <string name="file_can_not_be_renamed">Datoteke ni mogoče preimenovati.</string>
     <string name="file_with_name_already_exists">Datoteka s tem imenom že obstaja.</string>
-    <string name="shared_string_gpx_route">Pot GPX</string>
     <string name="poi_query_by_name_matches_categories">Najdenih je več sorodnih kategorij POI.</string>
     <string name="data_to_search_poi_not_available">Ni krajevnih podatkov za iskanje točk POI.</string>
     <string name="old_poi_file_should_be_deleted">Podatkovna datoteka POI \'%1$s\' je zastarela in jo je priporočljivo izbrisati.</string>
@@ -593,7 +591,6 @@
     <string name="poi_filter_nominatim">Spletni Nominatim</string>
     <string name="search_position_current_location_search">Iskanje trenutnega mesta …</string>
     <string name="search_position_current_location_found">Trenutno mesto (določeno)</string>
-    <string name="shared_string_save_as_gpx">Shrani kot novo datoteko GPX</string>
     <string name="route_successfully_saved_at">Pot je bila shranjena kot »%1$s«.</string>
     <string name="filename_input">Ime datoteke: </string>
     <string name="file_with_name_already_exist">Datoteka z istim imenom že obstaja.</string>
@@ -643,7 +640,6 @@
     <string name="send_location_email_pattern">Za ogled mesta sledite povezavi spletnega brskalnika %1$s ali povezavi Android %2$s</string>
     <string name="add_waypoint_dialog_added">Vmesna točka GPX »{0}« je dodana</string>
     <string name="add_waypoint_dialog_title">Dodaj vmesno točko na shranjeno sled GPX</string>
-    <string name="context_menu_item_add_waypoint">Dodaj vmesno točko na sled GPX</string>
     <string name="transport">Prevoz</string>
     <string name="additional_settings">Dodatne nastavitve</string>
     <string name="shared_string_settings">Nastavitve</string>
@@ -701,7 +697,6 @@
     <string name="transport_search_again">Ponastavi iskanje prevoza</string>
     <string name="no_vector_map_loaded">Vektorski zemljevidi niso naloženi</string>
     <string name="gpx_files_not_found">V mapi sledi ni najti mogoče nobene datoteke GPX.</string>
-    <string name="layer_gpx_layer">Datoteke GPX …</string>
     <string name="error_reading_gpx">Napaka med branjem podatkov GPX.</string>
     <string name="vector_data">Vektorski zemljevidi za delo brez povezave</string>
     <string name="transport_context_menu">Iskanje prevoza na postaji</string>
@@ -1304,7 +1299,6 @@
     <string name="shared_string_all">Vse</string>
     <string name="confirm_every_run">Vedno vprašaj</string>
     <string name="save_global_track_interval">Interval beleženja</string>
-    <string name="save_track_to_gpx_globally">Beleženje sledi v datoteko GPX</string>
     <string name="save_track_interval_globally">Interval beleženja</string>
     <string name="rendering_attr_publicTransportMode_name">Avtobusne, trolejbusne in druge proge</string>
     <string name="record_plugin_name">Dnevnik potovanj</string>
@@ -1660,7 +1654,6 @@
     <string name="recent_places">Nedavna mesta</string>
     <string name="saved_at_time">Shranjeno ob: %1$s</string>
     <string name="poi_deleted_localy">Točka POI bo izbrisana po pošiljanju sprememb</string>
-    <string name="show_gpx">Pokaži podatke GPX</string>
     <string name="simulate_your_location_stop_descr">Zaustavi simuliranje položaja.</string>
     <string name="simulate_your_location_descr">Simuliraj trenutno točko z izračunano potjo oziroma s shranjeno potjo GPX.</string>
     <string name="show_on_start">Pokaži ob zagonu</string>
@@ -2109,7 +2102,6 @@
     <string name="quick_action_take_video_note">Novo video sporočilo</string>
     <string name="quick_action_take_photo_note">Novo slikovno sporočilo</string>
     <string name="quick_action_add_osm_bug">Vpiši opombo OSM</string>
-    <string name="quick_action_add_gpx">Dodaj vmesno točko GPX</string>
     <string name="quick_action_add_parking">Dodaj parkirno mesto</string>
     <string name="quick_action_new_action">Dodaj dejanje</string>
     <string name="quick_action_edit_action">Uredi dejanje</string>
@@ -2455,11 +2447,8 @@
     <string name="save_route_point">Shrani točko poti</string>
     <string name="waypoint_one">Vmesna točka 1</string>
     <string name="route_point_one">Točka poti 1</string>
-    <string name="empty_state_my_tracks">Dodaj datoteke GPX</string>
-    <string name="empty_state_my_tracks_desc">Uvozi datoteke GPX oziroma sledi beleženja.</string>
     <string name="import_track_desc">Datoteka %1$s ne vključuje nobene vmesne točke. Ali želite pot uvoziti kot sled?</string>
     <string name="move_point">Premakni točko</string>
-    <string name="add_segment_to_the_track">Dodaj v datoteko GPX</string>
     <string name="empty_state_favourites_desc">Uvoz priljubljenih točk oziroma dodajanje prek označb na zemljevid.</string>
     <string name="move_all_to_history">Premakni vse v zgodovino</string>
     <string name="show_direction">Kazalec smeri</string>
@@ -2825,7 +2814,6 @@
     <string name="wikivoyage_search_hint">Iskanje: država, mesto, okraj</string>
     <string name="index_item_world_wikivoyage">Svetovni prispevki Wikivoyage</string>
     <string name="rendering_value_black_name">Črna</string>
-    <string name="shared_string_gpx_files">Datoteke GPX</string>
     <string name="access_intermediate_arrival_time">Vmesni čas prihoda</string>
     <string name="map_widget_intermediate_time">Vmesni čas</string>
     <string name="ask_for_location_permission">Program zahteva dostop do storitev geolociranja.</string>

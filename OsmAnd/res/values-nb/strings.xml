@@ -66,7 +66,6 @@
     <string name="map_widget_compass">Kompass</string>
     <string name="map_widget_reset">Tilbakestill til standard</string>
     <string name="map_widget_parking">Parkering</string>
-    <string name="map_widget_monitoring">GPX-logging</string>
     <string name="map_widget_speed">Hastighet</string>
     <string name="map_widget_distance">Mål</string>
     <string name="map_widget_altitude">Høyde</string>
@@ -215,7 +214,6 @@
     <string name="animate_route">Start simulering</string>
     <string name="file_can_not_be_renamed">Kunne ikke endre filnavn.</string>
     <string name="file_with_name_already_exists">En fil med dette navnet finnes allerede.</string>
-    <string name="shared_string_gpx_route">GPX-rute</string>
     <string name="poi_query_by_name_matches_categories">Fant flere relaterte interessepunktkategorier.</string>
     <string name="data_to_search_poi_not_available">Last ned frakoblet data for å søke etter interessepunkter.</string>
     <string name="poi_filter_by_name">Søk på navn</string>
@@ -776,7 +774,6 @@
     <string name="level_to_switch_vector_raster_descr">Bruk rasterkart for alt utover dette nivået.</string>
     <string name="level_to_switch_vector_raster">Minste vektorielle forstørrelsesnivå</string>
     <string name="incomplete_locale">ufullstendig</string>
-    <string name="context_menu_item_add_waypoint">Legg til GPX-rutepunkt</string>
     <string name="voice_is_not_available_title">Velg en taleveiledningspakke</string>
     <string name="select_max_zoom_preload_area">Maksimal forstørrelse å forhåndslaste</string>
     <string name="voice_data_initializing">Initialiserer taledata…</string>
@@ -900,7 +897,6 @@
     <string name="confirm_every_run">Spør alltid</string>
     <string name="background_service_int">GPS-vekkingsintervall</string>
     <string name="enable_sleep_mode">Aktiver GPS-bakgrunnsmodus</string>
-    <string name="save_track_to_gpx_globally">Logg spor til GPX-fil</string>
     <string name="monitoring_settings">Turopptak</string>
     <string name="monitoring_settings_descr">Sett opp hvordan du gjør opptak av turer.</string>
     <string name="record_plugin_name">Turopptak</string>
@@ -1031,8 +1027,7 @@
     <string name="reading_cached_tiles">Leser hurtigbufrede fliser…</string>
     <string name="maps_could_not_be_downloaded">Dette kartet kan ikke lastes ned</string>
     <string name="use_high_res_maps">Høyoppløselig visning</string>
-    <string name="layer_gpx_layer">GPX-filer…</string>
-    <string name="sd_unmounted">Minnekort er ikke tilgjengelig. 
+    <string name="sd_unmounted">Minnekort er ikke tilgjengelig.
 \nDu vil ikke kunne se kart eller finne ting.</string>
     <string name="sd_mounted_ro">Minnekort er skrivebeskyttet. 
 \nDet er nå bare mulig å se det forhåndslastede kartet, ikke laste ned nye områder.</string>
@@ -1054,7 +1049,6 @@
     <string name="shared_string_history">Historikk</string>
     <string name="shared_string_select_on_map">Velg på kart</string>
     <string name="shared_string_save">Lagre</string>
-    <string name="shared_string_save_as_gpx">Lagre som ny GPX-fil</string>
     <string name="shared_string_rename">Endre navn</string>
     <string name="shared_string_delete">Slett</string>
     <string name="shared_string_share">Del</string>
@@ -1258,7 +1252,6 @@
     <string name="please_specify_poi_type">Spesifiser interessepunkttype.</string>
     <string name="working_days">Arbeidsdager</string>
     <string name="favourites">Favoritter</string>
-    <string name="show_gpx">Vis GPX-data</string>
     <string name="roads">Veier</string>
     <string name="favourites_context_menu_add">Legg til favoritt</string>
     <string name="favorite_category_dublicate_message">Bruk et kategorinavn som ikke finnes allerede.</string>
@@ -2082,14 +2075,11 @@
     <string name="measurement_tool_snap_to_road_descr">OsmAnd vil forbinde punktene med ruter for den valgte profilen.</string>
     <string name="measurement_tool_save_as_new_track_descr">Lagre punktene enten som rutepunkter eller som linje.</string>
     <string name="choose_navigation_type">Velg navigeringsprofil</string>
-    <string name="empty_state_my_tracks">Legg til GPX-filer</string>
-    <string name="empty_state_my_tracks_desc">Importer GPX-filer eller ta opp spor.</string>
     <string name="empty_state_favourites">Legg til favoritter</string>
     <string name="empty_state_favourites_desc">Importer favoritter eller legg dem til ved markering av punkter på kartet.</string>
     <string name="import_track">Importer GPX-fil</string>
     <string name="import_track_desc">Filen %1$s inneholder ingen rutepunkter, importere den som et spor\?</string>
     <string name="move_point">Flytt punkt</string>
-    <string name="add_segment_to_the_track">Legg til i GPX-fil</string>
     <string name="add_route_points">Legg til rutepunkter</string>
     <string name="add_line">Legg til linje</string>
     <string name="do_not_use_animations">Ingen animasjoner</string>
@@ -2269,7 +2259,6 @@
     <string name="quick_action_take_video_note">Nytt videonotat</string>
     <string name="quick_action_take_photo_note">Nytt bildenotat</string>
     <string name="quick_action_add_osm_bug">Legg til OSM-notat</string>
-    <string name="quick_action_add_gpx">Legg til GPX-rutepunkt</string>
     <string name="quick_action_add_parking">Legg til parkeringsplass</string>
     <string name="quick_action_edit_action">Rediger handling</string>
     <string name="quick_actions_delete">Slett handling</string>
@@ -2785,7 +2774,6 @@
     <string name="access_intermediate_arrival_time">Mellomliggende ankomsttid</string>
     <string name="map_widget_intermediate_time">Mellomliggende tid</string>
     <string name="unirs_render_descr">Endrer den forvalgte stilen for å øke kontrasten på gangveier og sykkelstier. Bruker de opprinnelige Mapnik-fargene.</string>
-    <string name="shared_string_gpx_files">GPX-filer</string>
     <string name="get_osmand_live">Skaff deg OsmAnd Live for å låse opp alle funksjoner: Daglige kartoppdateringer med ubegrensede nedlastinger, alle programtilleggene, Wikipedia, Wikivoyage og mye mer.</string>
     <string name="quick_action_edit_actions">Rediger handlinger</string>
     <string name="error_notification_desc">Send en skjermavbildning av denne merknaden til support@osmand.net</string>

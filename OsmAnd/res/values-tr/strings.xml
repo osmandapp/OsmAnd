@@ -58,7 +58,6 @@
     <string name="map_widget_lock_screen">Kilitle</string>
     <string name="map_widget_compass">Pusula</string>
     <string name="map_widget_reset">Öntanımlılara sıfırla</string>
-    <string name="map_widget_monitoring">GPX günlüğü</string>
     <string name="map_widget_speed">Hız</string>
     <string name="map_widget_distance">Varış Noktası</string>
     <string name="bg_service_screen_lock">Kilitle</string>
@@ -608,7 +607,6 @@
     <string name="av_def_action_choose">İstek üzerine\?</string>
     <string name="osmand_play_title_30_chars">OsmAnd Haritalar &amp; Navigasyon</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Haritalar &amp; Yolbul</string>
-    <string name="shared_string_gpx_route">GPX Rotası</string>
     <string name="poi_query_by_name_matches_categories">Birkaç ilgili POI kategorisi bulundu.</string>
     <string name="data_to_search_poi_not_available">POI\'leri aramak için çevrim dışı verileri indirin.</string>
     <string name="old_poi_file_should_be_deleted">POI veri dosyası \'%1$s\' gereksiz ve silinebilir.</string>
@@ -621,7 +619,6 @@
     <string name="search_position_map_view">Güncel harita merkezi</string>
     <string name="select_search_position">Menşei:</string>
     <string name="context_menu_item_search">Yakınlarda ara</string>
-    <string name="shared_string_save_as_gpx">Yeni GPX dosyası olarak kaydet</string>
     <string name="route_successfully_saved_at">Rota \'%1$s\' olarak kaydedildi.</string>
     <string name="filename_input">Dosya adı:</string>
     <string name="local_index_upload_gpx_description">GPX dosyalarını OSM topluluğuna yükleyin ve haritaları iyileştirin.</string>
@@ -1356,7 +1353,6 @@
     <string name="show_free_version_banner">Ücretsiz sürümü banner göster</string>
     <string name="show_free_version_banner_description">Ücretli sürümde bile ücretsiz sürümün afişini göster.</string>
     <string name="poi_deleted_localy">Yaptığınız değişiklikleri karşıya kez POI silinecektir</string>
-    <string name="show_gpx">GPX verilerini göster</string>
     <string name="count_of_lines">Hatlarının Sayısı</string>
     <string name="are_you_sure">Emin misiniz?</string>
     <string name="unsaved_changes_will_be_lost">Kaydedilmemiş değişiklikler kaybolacak. Devam edilsin mi\?</string>
@@ -1468,7 +1464,6 @@
     <string name="map_screen_orientation">Ekran yönlendirme</string>
     <string name="no_address_found">Hiçbir adres belirlenmedi</string>
     <string name="voices">Sesli uyarılar</string>
-    <string name="layer_gpx_layer">GPX dosyaları…</string>
     <string name="transport_context_menu">Durakta ulaşım aracı ara</string>
     <string name="rotate_map_to_bearing">Harita yönlendirme</string>
     <string name="version_index_is_not_supported">\'\'{0}\'\' indeks sürümü desteklenmemektedir</string>
@@ -1497,7 +1492,6 @@
     <string name="send_location_email_pattern">Konumu görmek için %1$s web linkini ya da %2$s Android niyet linkini takip edin</string>
     <string name="add_waypoint_dialog_added">GPX ara-noktası \'\'{0}\'\' eklendi</string>
     <string name="add_waypoint_dialog_title">Kaydedilen GPX parçaya yol noktasını ekle</string>
-    <string name="context_menu_item_add_waypoint">GPX yol noktası ekle</string>
     <string name="amenity_type_geocache">Geocache</string>
     <string name="amenity_type_leisure">Boş</string>
     <string name="gpx_option_from_start_point">Tüm izlenen yol boyunca geç</string>
@@ -1771,7 +1765,6 @@
     <string name="save_global_track_interval">Genel kayıt tutma aralığı</string>
     <string name="background_service_int">GPS Uyandırma aralık</string>
     <string name="enable_sleep_mode">GPS arka plan modunu etkinleştirin</string>
-    <string name="save_track_to_gpx_globally">GPX dosyası parça Log</string>
     <string name="save_track_to_gpx_globally_headline">İsteğe bağlı olarak günlük takip</string>
     <string name="save_track_to_gpx_globally_descr">GPX dosyasına genel pozisyon kaydı, harita üzerindeki GPX kayıt widget\'ı kullanılarak açılabilir veya kapatılabilir.</string>
     <string name="save_current_track_descr">Geçerli rotayı şimdi GPX dosyası olarak kaydedin.</string>
@@ -2396,7 +2389,6 @@
     <string name="make_as_start_point">Bunu kalkış noktası yap</string>
     <string name="shared_string_current">Geçerli</string>
     <string name="last_intermediate_dest_description">Ara durak ekler</string>
-    <string name="shared_string_gpx_files">GPX dosyaları</string>
     <string name="files_moved">%1$d dosya taşındı (%2$s).</string>
     <string name="files_copied">%1$d dosya kopyalandı (%2$s).</string>
     <string name="files_failed">%1$d dosya kopyalanamadı (%2$s).</string>
@@ -3006,7 +2998,6 @@
     <string name="quick_action_map_style_switch">Harita tarzı \"%s\" olarak değiştirildi.</string>
     <string name="quick_action_navigation_voice_off">Sesi Aç</string>
     <string name="quick_action_navigation_voice_on">Sesi Kapat</string>
-    <string name="quick_action_add_gpx">GPX ara noktası ekle</string>
     <string name="quick_action_edit_action">Eylemi düzenle</string>
     <string name="quick_actions_delete">Eylemi sil</string>
     <string name="quick_actions_delete_text">\"%s\" eylemini silmek istediğinizden emin misiniz\?</string>
@@ -3168,14 +3159,11 @@
     <string name="route_point_one">1. rota noktası</string>
     <string name="add_route_points">Rota Noktaları Ekle</string>
     <string name="add_line">Hat Ekle</string>
-    <string name="empty_state_my_tracks">GPX dosyaları ekle</string>
-    <string name="empty_state_my_tracks_desc">GPX dosyalarını içe aktarın veya izlenen yolları kaydedin.</string>
     <string name="empty_state_favourites">Sık Kullanılanlara ekle</string>
     <string name="empty_state_favourites_desc">Sık Kullanılanları içe aktarın veya haritadaki noktaları işaretleyerek ekleyin.</string>
     <string name="import_track">GPX dosyasını içe aktar</string>
     <string name="import_track_desc">%1$s dosyası ara noktalar içermiyor, izlenen yol olarak içe aktar\?</string>
     <string name="move_point">Hareket Noktası</string>
-    <string name="add_segment_to_the_track">GPX dosyasına ekle</string>
     <string name="osm_recipients_label">OSM alıcıları</string>
     <string name="total_donations">Toplam bağış</string>
     <string name="day_off_label">kapalı</string>

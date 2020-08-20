@@ -93,7 +93,6 @@
     <string name="animate_route">Iniciar simulación</string>
     <string name="file_can_not_be_renamed">El archivo no se pudo renombrar.</string>
     <string name="file_with_name_already_exists">Ya existe un archivo con ese nombre.</string>
-    <string name="shared_string_gpx_route">Ruta GPX</string>
     <string name="poi_query_by_name_matches_categories">Encontradas varias categorías de PDI relacionadas.</string>
     <string name="data_to_search_poi_not_available">Descargar datos sin conexión para buscar PDI.</string>
     <string name="poi_filter_by_name">Buscar por nombre</string>
@@ -111,7 +110,6 @@
     <string name="search_position_map_view">Vista actual del mapa</string>
     <string name="select_search_position">Origen:</string>
     <string name="context_menu_item_search">Buscar cerca</string>
-    <string name="shared_string_save_as_gpx">Guardar como nuevo archivo GPX</string>
     <string name="route_successfully_saved_at">Ruta guardada como «%1$s».</string>
     <string name="filename_input">Nombre del archivo:</string>
     <string name="file_with_name_already_exist">Ya existe un archivo con el mismo nombre.</string>
@@ -219,7 +217,6 @@
     <string name="context_menu_item_share_location">Compartir ubicación</string>
     <string name="add_waypoint_dialog_added">Punto GPX «{0}» añadido</string>
     <string name="add_waypoint_dialog_title">Añadir punto a la traza GPX grabada</string>
-    <string name="context_menu_item_add_waypoint">Añadir punto GPX</string>
     <string name="amenity_type_administrative">Administrativo</string>
     <string name="amenity_type_barrier">Barrera</string>
     <string name="amenity_type_education">Educación</string>
@@ -320,7 +317,6 @@
     <string name="voice">Voz grabada</string>
     <string name="no_vector_map_loaded">Los mapas vectoriales no están cargados</string>
     <string name="gpx_files_not_found">Sin archivos GPX en la carpeta de trazas</string>
-    <string name="layer_gpx_layer">Archivos GPX…</string>
     <string name="error_reading_gpx">No se pudieron leer los datos GPX.</string>
     <string name="vector_data">Mapas vectoriales sin conexión</string>
     <string name="transport_context_menu">Buscar transporte en parada</string>
@@ -507,7 +503,6 @@
     <string name="save_track_interval">Intervalo de registro durante la navegación</string>
     <string name="save_track_interval_descr">Intervalo de registro de trazas durante la navegación</string>
     <string name="save_track_to_gpx_descrp">Una traza GPX se guardará automáticamente en la carpeta de trazas durante la navegación.</string>
-    <string name="save_track_to_gpx">Guardar la traza automáticamente durante la navegación</string>
     <string name="update_tile">Actualizar mapa</string>
     <string name="reload_tile">Recargar tesela</string>
     <string name="mark_point">Objetivo</string>
@@ -764,7 +759,6 @@
     <string name="map_widget_compass">Brújula</string>
     <string name="map_widget_reset">Restaurar a valores predefinidos</string>
     <string name="map_widget_parking">Aparcamiento</string>
-    <string name="map_widget_monitoring">Grabación GPX</string>
     <string name="map_widget_speed">Velocidad</string>
     <string name="map_widget_distance">Destino</string>
     <string name="map_widget_altitude">Altitud</string>
@@ -1320,7 +1314,6 @@
 \n 
 \nLas trazas grabadas pueden ser compartidas con sus amigos o ser usadas para contribuir a OSM. Los atletas pueden usar las trazas grabadas para seguir sus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente en OsmAnd, como tiempos por vuelta, velocidad media, etc., y por supuesto las trazas pueden analizarse posteriormente con herramientas de análisis de terceros.</string>
     <string name="rendering_attr_publicTransportMode_name">Rutas de autobús, trolebús y lanzadera</string>
-    <string name="save_track_to_gpx_globally">Guardar traza en archivo GPX</string>
     <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="save_track_to_gpx_globally_descr">Registra la ubicación en un archivo GPX, pudiendo des/activarlo usando el widget de grabación GPX en el mapa.</string>
     <string name="confirm_every_run">Preguntar siempre</string>
@@ -1666,7 +1659,6 @@
     <string name="poi_action_delete">borrar</string>
     <string name="saved_at_time">Ahora, guardado como: %1$s</string>
     <string name="poi_deleted_localy">El PDI se borrará una vez subido los cambios</string>
-    <string name="show_gpx">Mostrar datos GPX</string>
     <string name="count_of_lines">Número de líneas</string>
     <string name="show_on_start">Mostrar al inicio</string>
     <string name="are_you_sure">¿Está seguro?</string>
@@ -2119,7 +2111,6 @@
     <string name="quick_action_navigation_voice">Alternar activación de voz</string>
     <string name="quick_action_navigation_voice_off">Activar voz</string>
     <string name="quick_action_navigation_voice_on">Desactivar voz</string>
-    <string name="quick_action_add_gpx">Añadir punto GPX</string>
     <string name="quick_action_add_parking">Añadir lugar de estacionamiento</string>
     <string name="quick_action_new_action">Añadir acción</string>
     <string name="quick_action_edit_action">Editar acción</string>
@@ -2505,14 +2496,11 @@
     <string name="choose_navigation_type">Elegir perfil de navegación</string>
     <string name="add_route_points">Añadir puntos de ruta</string>
     <string name="add_line">Añadir línea</string>
-    <string name="empty_state_my_tracks">Añadir archivos GPX</string>
-    <string name="empty_state_my_tracks_desc">Importa archivos GPX o graba trazas.</string>
     <string name="empty_state_favourites">Añadir favoritos</string>
     <string name="empty_state_favourites_desc">Importar Favoritos o añadir mediante puntos de marcación en el mapa.</string>
     <string name="import_track">Importar archivo GPX</string>
     <string name="import_track_desc">El archivo «%1$s» no contiene puntos de referencia, ¿Quieres importarlo como una traza?</string>
     <string name="move_point">Mover punto</string>
-    <string name="add_segment_to_the_track">Añadir a un archivo GPX</string>
     <string name="move_all_to_history">Mover todo al historial</string>
     <string name="show_direction">Indicación de distancia</string>
     <string name="sort_by">Ordenar por</string>
@@ -2795,7 +2783,6 @@
     <string name="access_intermediate_arrival_time">Hora de llegada intermedia</string>
     <string name="map_widget_intermediate_time">Tiempo intermedio</string>
     <string name="unirs_render_descr">Modificación del estilo predefinido para un mayor contraste en los caminos peatonales y para bicicletas. Usa los colores clásicos de Mapnik.</string>
-    <string name="shared_string_gpx_files">Archivos GPX</string>
     <string name="get_osmand_live">Obtén «OsmAnd Live» para desbloquear todas las características: Actualizaciones diarias de mapas con descargas ilimitadas, todos los complementos gratuitos y de pago, artículos de Wikipedia, Wikiviajes y mucho más.</string>
     <string name="coord_input_edit_point">Editar punto</string>
     <string name="coord_input_add_point">Añadir punto</string>

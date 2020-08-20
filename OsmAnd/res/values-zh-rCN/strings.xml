@@ -75,7 +75,6 @@
     <string name="map_widget_compass">指南针</string>
     <string name="map_widget_reset">重置为默认</string>
     <string name="map_widget_parking">停车</string>
-    <string name="map_widget_monitoring">GPX记录</string>
     <string name="map_widget_speed">速度</string>
     <string name="map_widget_distance">目的地</string>
     <string name="map_widget_altitude">海拔</string>
@@ -186,10 +185,8 @@
     <string name="city_type_village">村</string>
     <string name="city_type_town">镇</string>
     <string name="city_type_city">城市</string>
-    <string name="shared_string_gpx_route">GPX路径</string>
     <string name="button_upgrade_osmandplus">升级OsmAnd+</string>
     <string name="shared_string_rename">重命名</string>
-    <string name="shared_string_save_as_gpx">另存为 GPX 轨迹</string>
     <string name="local_index_upload_gpx_description">上传GPX文件OSM社区。它们将被用于改善地图。</string>
     <string name="local_index_mi_upload_gpx">发送到OSM</string>
     <string name="favorite_home_category">家</string>
@@ -215,7 +212,6 @@
     <string name="send_location">发送位置</string>
     <string name="context_menu_item_share_location">分享位置</string>
     <string name="add_waypoint_dialog_title">新增航点记录GPX轨迹</string>
-    <string name="context_menu_item_add_waypoint">添加GPX航点</string>
     <string name="amenity_type_administrative">行政</string>
     <string name="amenity_type_barrier">屏障</string>
     <string name="amenity_type_education">教育</string>
@@ -251,7 +247,6 @@
     <string name="phone">电话</string>
     <string name="voice">声音</string>
     <string name="gpx_files_not_found">GPX文件中找不到/曲目目录</string>
-    <string name="layer_gpx_layer">GPX轨迹…</string>
     <string name="error_reading_gpx">GPX数据读取错误</string>
     <string name="error_occurred_loading_gpx">时发生错误加载GPX</string>
     <string name="shared_string_import">导入</string>
@@ -1704,7 +1699,6 @@
     <string name="save_global_track_interval">通用记录间隔</string>
     <string name="background_service_int">GPS 唤醒时间间隔</string>
     <string name="enable_sleep_mode">启用 GPS 背景模式</string>
-    <string name="save_track_to_gpx_globally">记录轨迹成 GPX 文件</string>
     <string name="save_track_to_gpx_globally_headline">需求轨迹日志记录</string>
     <string name="save_track_to_gpx_globally_descr">通常位置记录到一个 GPX 文件，在地图画面上使用 GPX 记录小工具，可以开启或关闭。</string>
     <string name="save_track_to_gpx_descrp">导航过程中，GPX 轨迹自动保存到轨道文件夹。</string>
@@ -2209,7 +2203,6 @@
     <string name="favourites">收藏夹</string>
     <string name="saved_at_time">已成功保存在: %1$s</string>
     <string name="poi_deleted_localy">一旦您上传您的更改将删除 POI</string>
-    <string name="show_gpx">显示 GPX</string>
     <string name="count_of_lines">计算行数</string>
     <string name="are_you_sure">你确定吗？</string>
     <string name="unsaved_changes_will_be_lost">任何未保存的更改将会丢失。要继续吗？</string>
@@ -2265,7 +2258,6 @@
     <string name="quick_action_add_osm_bug">添加 OSM 注记</string>
     <string name="quick_action_navigation_voice">打开关闭声音</string>
     <string name="quick_action_navigation_voice_off">语音开启</string>
-    <string name="quick_action_add_gpx">添加 GPX 地标</string>
     <string name="quick_action_add_parking">添加停车场</string>
     <string name="quick_action_new_action">添加动作</string>
     <string name="quick_action_edit_action">编辑动作</string>
@@ -2455,7 +2447,6 @@
     <string name="sort_by">排序方式</string>
     <string name="do_not_use_animations">无动画效果</string>
     <string name="do_not_use_animations_descr">关闭地图动画效果。</string>
-    <string name="empty_state_my_tracks">添加并记录轨迹</string>
     <string name="empty_state_favourites">添加收藏</string>
     <string name="empty_state_favourites_desc">在地图上添加收藏地点或从文件导入。</string>
     <string name="enter_lon">输入经度</string>
@@ -2561,8 +2552,6 @@
     <string name="avoid_pt_types">避免特定交通类型……</string>
     <string name="rendering_attr_undefined_name">未定义</string>
     <string name="use_osm_live_public_transport">OsmAnd Live 公共交通</string>
-    <string name="empty_state_my_tracks_desc">导入 GPX 文件，或者录制轨迹。</string>
-    <string name="add_segment_to_the_track">添加至 GPX 文件</string>
     <string name="total_donations">捐赠总计</string>
     <string name="winter_and_ski_renderer">冬季与滑雪</string>
     <string name="toast_empty_name_error">未命名位置</string>
@@ -2950,7 +2939,6 @@
     <string name="download_maps_travel">旅行指南</string>
     <string name="shared_string_travel_guides">旅游指南</string>
     <string name="wikivoyage_travel_guide">旅行指南</string>
-    <string name="shared_string_gpx_files">GPX 文件</string>
     <string name="map_widget_intermediate_time">中转时间</string>
     <string name="update_is_available">有更新可用</string>
     <string name="purchase_dialog_title">选择规划</string>

@@ -311,7 +311,6 @@
     <string name="map_widget_compass">Iparrorratza</string>
     <string name="map_widget_reset">Lehenetsitakora berezarri</string>
     <string name="map_widget_parking">Aparkalekua</string>
-    <string name="map_widget_monitoring">GPX grabaketa</string>
     <string name="map_widget_speed">Abiadura</string>
     <string name="map_widget_distance">Helmuga</string>
     <string name="map_widget_altitude">Altuera</string>
@@ -560,7 +559,6 @@
     <string name="animate_route">Simulazioa hasiarazi</string>
     <string name="file_can_not_be_renamed">Ezin da fitxategia izenez aldatu.</string>
     <string name="file_with_name_already_exists">Badago izen berdineko beste fitxategi bat.</string>
-    <string name="shared_string_gpx_route">GPX ibilbidea</string>
     <string name="poi_query_by_name_matches_categories">Lotutako hainbat POI kategoria aurkitu dira.</string>
     <string name="data_to_search_poi_not_available">Deskargatu lineaz kanpoko datuak interesezko puntuak bilatzeko.</string>
     <string name="poi_filter_by_name">Izenez bilatu</string>
@@ -578,7 +576,6 @@
     <string name="search_position_map_view">Uneko maparen zentroa</string>
     <string name="select_search_position">Jatorria:</string>
     <string name="context_menu_item_search">Bilatu inguruan</string>
-    <string name="shared_string_save_as_gpx">Gorde GPX fitxategi berri gisa</string>
     <string name="route_successfully_saved_at">Ibilbidea \'%1$s\' bezala gorde da.</string>
     <string name="filename_input">Fitxategi-izena:</string>
     <string name="file_with_name_already_exist">Izen berdineko beste fitxategi bat dago dagoeneko.</string>
@@ -684,7 +681,6 @@
     <string name="context_menu_item_share_location">Kokapena partekatu</string>
     <string name="add_waypoint_dialog_added">GPX \"{0}\" bide-puntua gehituta</string>
     <string name="add_waypoint_dialog_title">Gehitu bide-puntua grabatutako GPX lorratzari</string>
-    <string name="context_menu_item_add_waypoint">GPX bide-puntua gehitu</string>
     <string name="amenity_type_administrative">Administrazioa</string>
     <string name="amenity_type_barrier">Hesiak</string>
     <string name="amenity_type_education">Hezkuntza</string>
@@ -773,7 +769,6 @@
     <string name="voice">Grabatutako ahotsa</string>
     <string name="no_vector_map_loaded">Bektore mapak ez dira kargatuak izan</string>
     <string name="gpx_files_not_found">Ez da GPX fitxategirik aurkitu lorratzen direktorioan</string>
-    <string name="layer_gpx_layer">GPX fitxategiak…</string>
     <string name="error_reading_gpx">Ezin izan dira GPX datuak irakurri.</string>
     <string name="vector_data">Lineaz kanpoko bektore mapak</string>
     <string name="transport_context_menu">Bilatu garraioa geltokian</string>
@@ -956,7 +951,6 @@
     <string name="save_track_interval">Erregistroen tartea nabigazioan</string>
     <string name="save_track_interval_descr">Zehaztu erregistratze maiztasuna nabigazio bitarteko lorratz grabaketarako</string>
     <string name="save_track_to_gpx_descrp">GPX lorratza automatikoki gordeko da lorratzen direktorioan nabigazioan zehar.</string>
-    <string name="save_track_to_gpx">Erregistratu lorratza automatikoki nabigazioan zehar</string>
     <string name="update_tile">Mapa eguneratu</string>
     <string name="reload_tile">Tesela birkargatu</string>
     <string name="mark_point">Helmuga</string>
@@ -1528,7 +1522,6 @@ Lorratza %2$s</string>
     <string name="track_points">Lorratzaren puntuak</string>
     <string name="navigation_over_track">Hasi nabigazioa lorratzari jarraituz?</string>
     <string name="save_global_track_interval_descr">Zehaztu lorratzen grabatze orokorrerako erregistratze maiztasun bat (Mapan GPX erregistratze trepetaren bidez gaitzen da).</string>
-    <string name="save_track_to_gpx_globally">Erregistratu lorratza GPX fitxategian</string>
     <string name="save_track_to_gpx_globally_headline">Eskaerapeko lorratz erregistroa</string>
     <string name="none_selected_gpx">Aurretik zehaztu GPX fitxategia luze sakatuz.</string>
     <string name="gpx_info_subtracks">Azpi-lorratzak: %1$s</string>
@@ -1958,7 +1951,6 @@ mapak eta nabigazioa</string>
     <string name="favourites">Gogokoak</string>
     <string name="saved_at_time">Orain hemen gordeta: %1$s</string>
     <string name="poi_deleted_localy">Aldaketak igotzen dituzunean POI-a ezabatuko da</string>
-    <string name="show_gpx">Erakutsi GPX datuak</string>
     <string name="count_of_lines">Lerro kopurua</string>
     <string name="are_you_sure">Ziur zaude?</string>
     <string name="unsaved_changes_will_be_lost">Gorde gabeko aldaketak galduko dira, Jarraitu?</string>
@@ -2129,7 +2121,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_navigation_voice">Ahotsa bai/ez</string>
     <string name="quick_action_navigation_voice_off">Desmututu ahotsa</string>
     <string name="quick_action_navigation_voice_on">Mututu ahotsa</string>
-    <string name="quick_action_add_gpx">Gehitu GPX bide-puntua</string>
     <string name="quick_action_add_parking">Gehitu aparkalekua</string>
     <string name="quick_action_new_action">Gehitu ekintza</string>
     <string name="quick_action_edit_action">Editatu ekintza</string>
@@ -2501,14 +2492,11 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="choose_navigation_type">Hautatu nabigazio profila</string>
     <string name="add_route_points">Gehitu ibilbide-puntuak</string>
     <string name="add_line">Gehitu lerroa</string>
-    <string name="empty_state_my_tracks">Gehitu GPX fitxategiak</string>
-    <string name="empty_state_my_tracks_desc">Inportatu GPX fitxategiak edo grabatu lorratzak.</string>
     <string name="empty_state_favourites">Gehitu gogokoak</string>
     <string name="empty_state_favourites_desc">Inportatu gogokoak, edo gehitu mapan puntuak markatuz.</string>
     <string name="import_track">Inportatu GPX fitxategia</string>
     <string name="import_track_desc">%1$s fitxategiak ez du bide-punturik, inportatu lorratz gisa?</string>
     <string name="move_point">Mugitu puntua</string>
-    <string name="add_segment_to_the_track">Gehitu GPX fitxategira</string>
     <string name="map_orientation_change_in_accordance_with_speed">Maparen orientazioaren atalasea</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">"Hautatu maparen orientazioa  \'barne ipar-orratza\' eta ez \'mugimenduaren norabidea\'-ren arabera erabakitzeko abiadura."</string>
     <string name="all_markers_moved_to_history">Markatzaile guztiak historialera mugituta</string>
@@ -2789,7 +2777,6 @@ Area honi dagokio: %1$s x %2$s</string>
 \n • OsmAnd Live harpidetzak orain OsmAnd ezaugarri guztiak onartzen ditu
 \n
 \n</string>
-    <string name="shared_string_gpx_files">GPX fitxategiak</string>
     <string name="access_intermediate_arrival_time">Tarteko iritsiera ordua</string>
     <string name="map_widget_intermediate_time">Tarteko denbora</string>
     <string name="quick_action_edit_actions">Editatu ekintzak</string>

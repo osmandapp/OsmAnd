@@ -153,7 +153,6 @@
     <string name="animate_route">Ieslēgt animāciju</string>
     <string name="file_can_not_be_renamed">Failu nevar pārsaukt.</string>
     <string name="file_with_name_already_exists">Fails ar šādu nosaukumu jau eksistē.</string>
-    <string name="shared_string_gpx_route">GPX maršruts</string>
     <string name="poi_query_by_name_matches_categories">Pēc atslēgvārda atrastās POI kategorijas:</string>
     <string name="data_to_search_poi_not_available">Lokālie dati POI vārdu meklēšanai nav pieejami.</string>
     <string name="poi_filter_by_name">Meklēt pēc vārda</string>
@@ -171,7 +170,6 @@
     <string name="search_position_map_view">Kartes centrs</string>
     <string name="select_search_position">Reģions:</string>
     <string name="context_menu_item_search">Meklēt tuvumā</string>
-    <string name="shared_string_save_as_gpx">Saglabāt maršrutu GPX trasē</string>
     <string name="route_successfully_saved_at">Maršruts veiksmīgi saglabāts kā \'%1$s\'.</string>
     <string name="filename_input">Faila nosaukums : </string>
     <string name="file_with_name_already_exist">Fails ar šādu nosaukumu jau eksistē.</string>
@@ -277,7 +275,6 @@
     <string name="context_menu_item_share_location">Koplietot atrašanās vietu</string>
     <string name="add_waypoint_dialog_added">GPX ceļapunkts \'\'{0}\'\' tika veiksmīgi pievienots</string>
     <string name="add_waypoint_dialog_title">Pievienot ceļapunktu GPX trasei</string>
-    <string name="context_menu_item_add_waypoint">Pievienot GPX ceļapunktu</string>
     <string name="amenity_type_administrative">Administratīvie</string>
     <string name="amenity_type_barrier">Barjera</string>
     <string name="amenity_type_education">Izglītība</string>
@@ -372,7 +369,6 @@
     <string name="voice">Ierakstīta balss</string>
     <string name="no_vector_map_loaded">Vektoru karte nav ielādēta</string>
     <string name="gpx_files_not_found">Treku mapē nav atrasts neviens GPX fails</string>
-    <string name="layer_gpx_layer">GPX trases…</string>
     <string name="error_reading_gpx">Kļūda, nolasot GPX datus</string>
     <string name="vector_data">Bezsaistes vektoru kartes</string>
     <string name="transport_context_menu">Meklēt transportu apstāšanās vietā</string>
@@ -744,7 +740,6 @@
     <string name="map_widget_compass">Kompass</string>
     <string name="map_widget_reset">Iestatīt uz noklusēto</string>
     <string name="map_widget_parking">Autostāvvietas</string>
-    <string name="map_widget_monitoring">GPX ieraksts</string>
     <string name="map_widget_speed">Ātrums</string>
     <string name="map_widget_distance">Mērķis</string>
     <string name="map_widget_altitude">Augstums</string>
@@ -1424,7 +1419,6 @@
     <string name="save_global_track_interval_descr">Izvēlieties intervālu treka ierakstam (ieslēgt caur GPX ieraksta logrīku kartē)</string>
     <string name="save_global_track_interval">Ierakstīšanas intervāls</string>
     <string name="enable_sleep_mode">Atļaut gps darboties fonā</string>
-    <string name="save_track_to_gpx_globally">Rakstīt treku GPX failā</string>
     <string name="save_track_to_gpx_globally_headline">Treka ieraksta logošana pēc pieprasījuma</string>
     <string name="save_track_to_gpx_globally_descr">Atrašanās vietas vispārīgā ierakstīšana GPX failā var tikt ieslēgta vai izslēgta ar GPX ieraksta logrīka palīdzību uz kartes</string>
     <string name="save_track_interval_globally">Logošanas intervāls</string>
@@ -1778,7 +1772,6 @@
     <string name="favourites">Izlase</string>
     <string name="saved_at_time">Sekmīgi saglabāts: %1$s</string>
     <string name="poi_deleted_localy">POI tiks izdzēsts pēc labojumu augšupielādes</string>
-    <string name="show_gpx">Rādīt GPX</string>
     <string name="count_of_lines">Līniju skaits</string>
     <string name="are_you_sure">Vai esiet pārliecināts?</string>
     <string name="unsaved_changes_will_be_lost">Izmaiņas netiks saglabātas. Vai turpināt?</string>
@@ -2072,7 +2065,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="quick_action_navigation_voice">Balss ieslēgt/izslēgt</string>
     <string name="quick_action_navigation_voice_off">Balss ir izslēgta</string>
     <string name="quick_action_navigation_voice_on">Balss ir ieslēgta</string>
-    <string name="quick_action_add_gpx">Pievienot GPX ceļapunktu</string>
     <string name="quick_action_add_parking">Pievienot stāvvietu</string>
     <string name="quick_action_new_action">Pievienot darbību</string>
     <string name="quick_action_edit_action">Labot darbību</string>
@@ -2551,14 +2543,11 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="save_route_point">Saglabāt maršruta punktu</string>
     <string name="waypoint_one">Ceļapunkts 1</string>
     <string name="route_point_one">Maršruta punkts 1</string>
-    <string name="empty_state_my_tracks">Ierakstīt un pievienot trekus</string>
-    <string name="empty_state_my_tracks_desc">Ierakstiet vai importējiet trekus pārlūkošanai.</string>
     <string name="empty_state_favourites">Pievienot izlasei</string>
     <string name="empty_state_favourites_desc">Pievienojiet izlases vietas no kartes vai importējiet tās no faila.</string>
     <string name="import_track">Importēt treku</string>
     <string name="import_track_desc">Fails %1$s nesatur ceļapunktus, importēt kā treku?</string>
     <string name="move_point">Pārvietot punktu</string>
-    <string name="add_segment_to_the_track">Pievienot GPX trekam</string>
     <string name="modify_the_search_query">Mainīt meklējamo vārdu.</string>
     <string name="empty_state_osm_edits">Izveidot vai labot OSM objektus</string>
     <string name="empty_state_osm_edits_descr">Izveidot vai labot OSM POI, atvērt vai komentēt OSM piezīmes, nosūtīt ierakstītos GPX failus.</string>
@@ -3074,7 +3063,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="unirs_render_descr">Uzlabots kontrasts kājāmgājēju un velosipēdu celiņiem. Izmanto vecākas Mapnik krāsas.</string>
     <string name="shared_string_gpx_file">GPX fails</string>
     <string name="shared_string_gpx_waypoints">Treku ceļapunkti</string>
-    <string name="shared_string_gpx_files">GPX faili</string>
     <string name="wikivoyage_travel_guide_descr">Interesantāko vietu gidi uz planētas, OsmAnd lietotnē, bez pieslēguma internetam.</string>
     <string name="increase_search_radius_to">Palielināt meklēšanas rādiusu līdz %1$s</string>
     <string name="test_voice_desrc">Spiediet uz pogas un klausieties atbilstošo balss uzvedni, lai noteiktu trūkstošās vai kļūdainās uzvednes.</string>

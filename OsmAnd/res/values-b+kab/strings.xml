@@ -145,7 +145,6 @@
     <string name="general_settings">Amatu</string>
     <string name="city_type_village">Taddart</string>
     <string name="city_type_town">Tiɣremt</string>
-    <string name="shared_string_gpx_route">Abrid n GPX</string>
     <string name="button_upgrade_osmandplus">Leqqem OsmAnd+</string>
     <string name="search_position_address">Tansa …</string>
     <string name="filename_input">Isem n ufaylu:</string>
@@ -189,7 +188,6 @@
     <string name="poi_dialog_opening_hours">Ldi</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="building_number">Uṭṭun n Uzadaɣ</string>
-    <string name="show_gpx">Sken isefka GPX</string>
     <string name="roads">Iberdan</string>
     <string name="buy">AΓ</string>
     <string name="value_downloaded_of_max">%1$.1f ɣef %2$.1f MAṬ</string>
@@ -999,7 +997,6 @@
     <string name="coord_input_add_point">Taneqqiḍt</string>
     <string name="coord_input_edit_point">Taneqqiḍt</string>
     <string name="quick_action_edit_actions">Tigawin</string>
-    <string name="shared_string_gpx_files">Ifuyla</string>
     <string name="shared_string_gpx_file">Ittemcabi ar ufayli-ik GPX</string>
     <string name="shared_string_restart">Ales tanekra</string>
     <string name="paid_plugin">Azegrir</string>
@@ -1118,7 +1115,6 @@
     <string name="rotate_map_to_bearing_descr">Areyyec</string>
     <string name="poi_context_menu_delete">Kkes</string>
     <string name="poi_context_menu_modify">Beddel</string>
-    <string name="layer_gpx_layer">Ifuyla</string>
     <string name="show_point_options">Adig</string>
     <string name="shared_string_download_map">Sider</string>
     <string name="amenity_type_emergency">Annar n trusi n utrab</string>
@@ -1151,7 +1147,6 @@
     <string name="confirm_interrupt_download">Sefsex asider</string>
     <string name="osmand_parking_no_lim_text">War talast</string>
     <string name="map_widget_next_turn">ar zdat</string>
-    <string name="map_widget_monitoring">Aɣmis</string>
     <string name="int_continuosly">A_maɣlal</string>
     <string name="avoid_in_routing_title">Zgel…</string>
     <string name="show_warnings_title">Sken ilɣa…</string>

@@ -212,7 +212,6 @@
     <string name="animate_route_off">Atura l\'animació</string>
     <string name="animate_route">Inicia l\'animació</string>
     <string name="file_with_name_already_exists">Ja existeix un fitxer amb aquest nom.</string>
-    <string name="shared_string_gpx_route">Ruta GPX</string>
     <string name="data_to_search_poi_not_available">Baixeu dades locals per cercar els PDI.</string>
     <string name="poi_filter_by_name">Cerca pel nom</string>
     <string name="poi_filter_nominatim">Nominatim en línia</string>
@@ -221,7 +220,6 @@
     <string name="search_position_address">Adreça…</string>
     <string name="shared_string_undefined">Indefinida</string>
     <string name="context_menu_item_search">Cerca pel voltant</string>
-    <string name="shared_string_save_as_gpx">Desa com un nou fitxer GPX</string>
     <string name="route_successfully_saved_at">La ruta s\'ha desat com a «%1$s».</string>
     <string name="filename_input">Nom del fitxer: </string>
     <string name="shared_string_save">Desa</string>
@@ -545,10 +543,8 @@
     <string name="map_transparency">Opacitat del mapa base</string>
     <string name="trace_rendering">Informació de depuració de dibuixat</string>
     <string name="update_poi_file_not_found">El fitxer local per mantenir el canvis en els PDI no s\'ha trobat i podria no haver-se creat.</string>
-    <string name="map_widget_monitoring">Enregistrament GPX</string>
     <string name="use_fluorescent_overlays">Capes superposades fluorescents</string>
     <string name="shared_string_refresh">Refresca</string>
-    <string name="layer_gpx_layer">Fitxers GPX…</string>
     <string name="vector_data">Mapes de vectors fora de línia</string>
     <string name="poi_context_menu_modify">Modifica el PDI</string>
     <string name="poi_context_menu_delete">Elimina el PDI</string>
@@ -650,7 +646,6 @@
     <string name="osmand_background_plugin_description">Mostra paràmetres per activar el seguiment i la navegació en procés de fons mitjançant l\'activació periòdica del dispositiu GPS (amb la pantalla apagada).</string>
     <string name="accessibility_preferences_descr">Preferències relatives a l\'accessibilitat.</string>
     <string name="trace_rendering_descr">Mostra el rendiment de la renderització.</string>
-    <string name="context_menu_item_add_waypoint">Afegeix una fita GPX</string>
     <string name="poi_filter_namefinder">Cercador de noms en línia</string>
     <string name="continuous_rendering_descr">Mostra una renderització contínua en comptes d\'una imatge de cop.</string>
     <string name="uploading_data">Penjant les dades…</string>
@@ -910,7 +905,6 @@
     <string name="shared_string_io_error">Error d\'E/S</string>
     <string name="poi_namefinder_query_empty">Teclegeu per trobar el PDI</string>
     <string name="show_transport_over_map">Mostra les parades del transport</string>
-    <string name="save_track_to_gpx">Enregistrament automàtic del trajecte durant la navegació</string>
     <string name="use_english_names_descr">Escolliu entre els noms nadius i els anglesos.</string>
     <string name="srtm_plugin_description">Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. (Fixeu-vos que les corbes de nivell i/o els efectes de relleu són baixades independents i complementàries, disponibles un cop s\'hagi activat el connector). 
 \n 
@@ -1335,7 +1329,6 @@
     <string name="duration">Durada</string>
     <string name="distance">Distància</string>
     <string name="rendering_attr_publicTransportMode_name">Rutes de bus, troleibús i tramvia</string>
-    <string name="save_track_to_gpx_globally">Desa la traça en un fitxer GPX</string>
     <string name="save_track_to_gpx_globally_descr">L\'enregistrament de la posició en un fitxer GPX es pot activar o desactivar amb el giny d\'enregistrament GPX al mapa.</string>
     <string name="save_track_interval_globally">Interval d\'enregistrament</string>
     <string name="confirm_every_run">Es demana confirmació</string>
@@ -1678,7 +1671,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="favourites">Preferits</string>
     <string name="saved_at_time">Ara desat a: %1$s</string>
     <string name="poi_deleted_localy">El PDI s\'eliminara un cop pugeu els vostres canvis</string>
-    <string name="show_gpx">Mostra les dades GPX</string>
     <string name="favourites_edit_dialog_title">Detalls del preferit</string>
     <string name="simulate_your_location_stop_descr">Atura la simulació de la vostra posició.</string>
     <string name="simulate_your_location_descr">Simula la vostra posició utilitzant una ruta calculada o una traça GPX enregistrada.</string>
@@ -2132,7 +2124,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="quick_action_navigation_voice">Veu activada/desactivada</string>
     <string name="quick_action_navigation_voice_off">Torna a activar la veu</string>
     <string name="quick_action_navigation_voice_on">Desactiva la veu</string>
-    <string name="quick_action_add_gpx">Afegeix fita GPX</string>
     <string name="quick_action_add_parking">Afegeix lloc d\'aparcament</string>
     <string name="quick_action_new_action">Afegeix acció</string>
     <string name="quick_action_edit_action">Edita acció</string>
@@ -2502,14 +2493,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="choose_navigation_type">Escolliu el perfil de navegació</string>
     <string name="add_route_points">Afegeix punts de la ruta</string>
     <string name="add_line">Afegeix una línia</string>
-    <string name="empty_state_my_tracks">Afegiu fitxers GPX</string>
-    <string name="empty_state_my_tracks_desc">Importeu fitxers GPX o enregistreu traces.</string>
     <string name="empty_state_favourites">Afegiu als preferits</string>
     <string name="empty_state_favourites_desc">Importeu Preferits o afegiu-los al mapa marcant-los.</string>
     <string name="import_track">Importa fitxer GPX</string>
     <string name="import_track_desc">El fitxer %1$s no conté fites, voleu importar-lo com una traça?</string>
     <string name="move_point">Mou punt</string>
-    <string name="add_segment_to_the_track">Afegeix a un fitxer GPX</string>
     <string name="keep_showing_on_map">Continua mostrant al mapa</string>
     <string name="exit_without_saving">Voleu sortir sense desar?</string>
     <string name="do_not_use_animations">Sense animacions</string>
@@ -2797,7 +2785,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="map_widget_intermediate_time">Temps de pas</string>
     <string name="read_wikipedia_offline_description">Aconseguiu una subscripció OsmAnd Live per llegir articles de Viquipèdia i ViquiViatges sense connexió.</string>
     <string name="unirs_render_descr">Modificació de l\'estil predefinit per incrementar el contrast a les vies per vianants i bicicletes. Utilitza els colors del llegat Mapnik.</string>
-    <string name="shared_string_gpx_files">Fitxers GPX</string>
     <string name="get_osmand_live">Obteniu OsmAnd Live per disposar de totes les funcionalitats:Actualitzacions diàries de mapes sense límit de baixades, tots els connectors tant els de pagament, Viquipèdia, ViquiViatges i molt més.</string>
     <string name="quick_action_edit_actions">Edita les accions</string>
     <string name="error_notification_desc">Us agrairem que envieu una captura de pantalla d\'aquesta notificació a support@osmand.net</string>

@@ -268,7 +268,6 @@
   
   <string name="file_can_not_be_renamed">Lêer kan nie herbenoem word nie.</string>
   <string name="file_with_name_already_exists">Lêer met daardie naam bestaan reeds.</string>
-  <string name="shared_string_gpx_route">GPX roete</string>
   <string name="poi_query_by_name_matches_categories">Verskeie interessante plek kategorieë gevind vir die soektog:</string>
   <string name="data_to_search_poi_not_available">Plaaslike inligting om interessante plek te soek is nie teenwoordig nie.</string>
   <string name="poi_filter_by_name">Soek met die naam</string>
@@ -290,7 +289,6 @@
   <string name="select_search_position">Soek naby:</string>
   <string name="context_menu_item_search">Soek hier naby</string>
   
-  <string name="shared_string_save_as_gpx">Berg roete as GPX spoor</string>
   <string name="route_successfully_saved_at">Roete suksesvol geberg as \'%1$s\'.</string>
   <string name="filename_input">"Dokument naam:
 " </string>
@@ -413,7 +411,6 @@
   <string name="context_menu_item_share_location">Deel ligging</string>
   <string name="add_waypoint_dialog_added">GPX Roetebaken \'\'{0}\'\' was suksesvol bygevoeg</string>
   <string name="add_waypoint_dialog_title">Voeg roetebaken by tot opgeneemde GPX spoor</string>
-  <string name="context_menu_item_add_waypoint">Voeg GPX roetebaken by</string>
   <string name="amenity_type_administrative">Administratief</string>
   <string name="amenity_type_barrier">versperring</string>
   <string name="amenity_type_education">Opvoeding</string>
@@ -515,7 +512,6 @@
   <string name="no_vector_map_loaded">Vektor kaarte was nie gelaai nie</string>
   
   <string name="gpx_files_not_found">GPX lêers nie gevind in /tracks adres nie</string>
-  <string name="layer_gpx_layer">GPX spoor…</string>
   <string name="error_reading_gpx">Fout met lees van GPX inligting</string>
   <string name="vector_data">Aflyn vektor kaarte</string>
   <string name="transport_context_menu">Soek vervoer by stop</string>
@@ -717,7 +713,6 @@
   <string name="save_track_interval">Log tussenpose</string>
   <string name="save_track_interval_descr">Kies posisioneringstussenpose vir spore</string>
   <string name="save_track_to_gpx_descrp">Spore sal geberg word in die spoor bergadres in daaglikse groepe</string>
-  <string name="save_track_to_gpx">Skryf die spoor in `n GPX dokument</string>
   <string name="update_tile">Opgradeer kaart</string>
   <string name="reload_tile">Laai teël weer af</string>
   <string name="mark_point">Teiken</string>
@@ -864,7 +859,6 @@
 
 
 <string name="map_widget_parking">Parkering</string>
-<string name="map_widget_monitoring">GPX opname</string>
 <string name="map_widget_speed">Spoed</string>
 <string name="map_widget_distance">Teiken</string>
 <string name="map_widget_altitude">Hoogte</string>

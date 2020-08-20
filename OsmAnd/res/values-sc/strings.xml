@@ -544,7 +544,6 @@
     <string name="map_widget_compass">Bùssola</string>
     <string name="map_widget_reset">Reimposta sos valores predefinidos</string>
     <string name="map_widget_parking">Parchègiu</string>
-    <string name="map_widget_monitoring">Registratzione GPX</string>
     <string name="map_widget_speed">Lestresa</string>
     <string name="map_widget_distance">Destinatzione</string>
     <string name="map_widget_altitude">Artària</string>
@@ -711,7 +710,6 @@
     <string name="animate_route_off">Firma animatzione</string>
     <string name="animate_route">Avia animatzione</string>
     <string name="file_with_name_already_exists">Esistit giai unu documentu cun su matessi nùmene.</string>
-    <string name="shared_string_gpx_route">Àndala GPX</string>
     <string name="poi_filter_by_name">Chirca pro nùmene</string>
     <string name="button_upgrade_osmandplus">Agiorna OsmAnd+</string>
     <string name="poi_filter_nominatim">Nominatim in lìnia</string>
@@ -721,7 +719,6 @@
     <string name="search_position_favorites">Preferidos…</string>
     <string name="select_search_position">Chirca a curtzu de:</string>
     <string name="context_menu_item_search">Chirca a curtzu</string>
-    <string name="shared_string_save_as_gpx">Sarva s’àndala comente unu documentu GPX nou</string>
     <string name="route_successfully_saved_at">Àndala sarvada comente \'%1$s\'.</string>
     <string name="filename_input">Nùmene documentu:</string>
     <string name="file_with_name_already_exist">Esistit giai unu documentu cun su matessi numene.</string>
@@ -935,7 +932,6 @@
     <string name="context_menu_item_share_location">Cumpartzi positzione</string>
     <string name="add_waypoint_dialog_added">Puntu de coladòrgiu GPX \'\'{0}\'\' annànghidu</string>
     <string name="add_waypoint_dialog_title">Annanghe unu puntu de coladòrgiu a sa rasta GPX registrada</string>
-    <string name="context_menu_item_add_waypoint">Annanghe unu puntu de coladòrgiu GPX</string>
     <string name="amenity_type_administrative">Amministrativu</string>
     <string name="amenity_type_barrier">Barriera</string>
     <string name="amenity_type_education">Istrutzione</string>
@@ -1007,7 +1003,6 @@
     <string name="voice">Boghe registrada</string>
     <string name="no_vector_map_loaded">Sas mapas vetoriales non sunt istadas carrigadas</string>
     <string name="gpx_files_not_found">Perunu documentu GPX agatadu in sa cartella /tracks</string>
-    <string name="layer_gpx_layer">Documentos GPX…</string>
     <string name="error_reading_gpx">Impossìbile lèghere sos datos GPX.</string>
     <string name="transport_context_menu">Chirca unu trasportu pùblicu in sa firmada</string>
     <string name="poi_context_menu_delete">Iscantzella PDI</string>
@@ -1319,7 +1314,6 @@
     <string name="duration">Durada</string>
     <string name="distance">Distantzia</string>
     <string name="rendering_attr_publicTransportMode_name">Modalidade bus, filobus, tram e navetas</string>
-    <string name="save_track_to_gpx_globally">Carriga sa rasta in unu documentu GPX</string>
     <string name="save_track_interval_globally">Intervallu de registratzione</string>
     <string name="save_track_to_gpx_globally_descr">Sa registratzione de sa positzione in unu documentu GPX podet èssere alluta o morta impreende su widged de registratzione GPX in sa mapa.</string>
     <string name="confirm_every_run">Pregunta semper</string>
@@ -1663,7 +1657,6 @@
     <string name="recent_places">Logos reghentes</string>
     <string name="favourites">Preferidos</string>
     <string name="poi_deleted_localy">Su PDI at a èssere iscantzelladu a pustis de su carrigamentu de sas modìficas tuas</string>
-    <string name="show_gpx">Ammustra sos datos GPX</string>
     <string name="saved_at_time">Sarvadu in: %1$s</string>
     <string name="show_on_start">Ammustra in su cumintzu</string>
     <string name="count_of_lines">Contu de sas lìnias</string>
@@ -2117,7 +2110,6 @@
     <string name="quick_action_navigation_voice">Boghe alluta/istudada</string>
     <string name="quick_action_navigation_voice_off">Torra a allùghere sa boghe</string>
     <string name="quick_action_navigation_voice_on">Istuda sa boghe</string>
-    <string name="quick_action_add_gpx">Annanghe unu puntu de coladòrgiu GPX</string>
     <string name="quick_action_add_parking">Annanghe unu parchègiu</string>
     <string name="quick_action_new_action">Annanghe un\'atzione</string>
     <string name="quick_action_edit_action">Modìfica s\'atzione</string>
@@ -2494,14 +2486,11 @@
     <string name="choose_navigation_type">Issèbera su profilu de navigatzione</string>
     <string name="add_route_points">Annanghe puntos a s\'àndala</string>
     <string name="add_line">Annanghe una lìnia</string>
-    <string name="empty_state_my_tracks">Annanghe documentos GPX</string>
-    <string name="empty_state_my_tracks_desc">Importa documentos GPX o registra rastas.</string>
     <string name="empty_state_favourites">Annanghe preferidos</string>
     <string name="empty_state_favourites_desc">Importa preferidos o annanghe·los pro mèdiu de marcadores in sa mapa.</string>
     <string name="import_track">Importa unu documentu GPX</string>
     <string name="import_track_desc">Su documentu %1$s non cuntenit puntos de coladòrgiu, importare comente rasta?</string>
     <string name="move_point">Move puntu</string>
-    <string name="add_segment_to_the_track">Annanghe a unu documentu GPX</string>
     <string name="keep_showing_on_map">Sighi a l\'ammustrare in sa mapa</string>
     <string name="exit_without_saving">Essire chene sarvare?</string>
     <string name="do_not_use_animations">Peruna animatzione</string>
@@ -2789,7 +2778,6 @@
     <string name="unirs_render_descr">Modìfica de s\'istile predefinidu pro ismanniare su cuntrastu pro sos caminos pedonales e sas pistas tziclàbiles. Impreat sos colores de sa versione betza de Mapnik.</string>
     <string name="access_intermediate_arrival_time">Ora de arrivu a sa tapa</string>
     <string name="map_widget_intermediate_time">Tempus de arrivu a sa tapa</string>
-    <string name="shared_string_gpx_files">Documentos GPX</string>
     <string name="get_osmand_live">Abbona·ti a OsmAnd Live pro isblocare totu sas funtzionalidades: agiornamentos die pro die de sas mapas cun iscarrigamentos illimitados, totu sas estensiones de badas e a pagamentu, Wikipedia, Wikivoyage e meda àteru.</string>
     <string name="quick_action_edit_actions">Acontza sas atziones</string>
     <string name="error_notification_desc">Pro praghere imbia un\'ischermada de custa notìfica a support@osmand.net</string>

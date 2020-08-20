@@ -99,7 +99,6 @@
     <string name="city_type_city">शहर</string>
     <string name="file_can_not_be_renamed">फाइलचे नाव बदलू शकत नाही.</string>
     <string name="file_with_name_already_exists">ह्या नावाची फाइल आधीच अस्तित्वात आहे.</string>
-    <string name="shared_string_gpx_route">जिपिएक्स राऊट</string>
     <string name="poi_filter_by_name">नावाने शोधा</string>
     <string name="shared_string_rename">नाव बदला</string>
     <string name="search_position_current_location_search">स्थान शोधत आहे …</string>

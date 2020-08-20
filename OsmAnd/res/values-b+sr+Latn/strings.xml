@@ -123,7 +123,6 @@
 	<string name="animate_route">Započni simulaciju</string>
 	<string name="file_can_not_be_renamed">Fajl ne može biti preimenovan .</string>
 	<string name="file_with_name_already_exists">Fajl sa tim imenom već postoji.</string>
-	<string name="shared_string_gpx_route">GPX ruta</string>
 	<string name="poi_filter_by_name">Pretraga po imenu</string>
 	<string name="update_poi_file_not_found">Mesna datoteka za održavanje promene POI-a nije pronađena i ne može da se napravi .</string>
 	<string name="button_upgrade_osmandplus">Nadogradite Osmand+</string>
