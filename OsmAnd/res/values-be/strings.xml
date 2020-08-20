@@ -178,7 +178,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Межы</string>
     <string name="rendering_attr_noAdminboundaries_description">Не адлюстроўваць рэгіянальныя межы (адміністатыўныя ўзроўні 5–9).</string>
     <string name="map_widget_max_speed">Абмежаванне хуткасці</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Будынкаў не знойдзена.</string>
     <string name="incremental_search_city">Абярыце горад</string>
     <string name="search_villages_and_postcodes">Пошук па вёсках/паштовых індэксах</string>
@@ -2576,7 +2575,6 @@
     <string name="shared_string_sort">Упарадкаваць</string>
     <string name="coordinate_input">Увод каардынат</string>
     <string name="marker_save_as_track_descr">Экспартаваць вашыя адзнакі ў наступны GPX-файл:</string>
-    <string name="marker_save_as_track">Захаваць як GPX-файл</string>
     <string name="move_to_history">Перамясціць у гісторыю</string>
     <string name="group_will_be_removed_after_restart">Групы ўжо не будзе пасля наступнага перазапуску праграмы.</string>
     <string name="shared_string_markers">Адзнакі</string>

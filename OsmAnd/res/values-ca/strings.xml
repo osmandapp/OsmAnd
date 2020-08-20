@@ -2535,7 +2535,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_sort">Ordena</string>
     <string name="coordinate_input">Entrada de coordenades</string>
     <string name="marker_save_as_track_descr">Exporteu els vostres marcadors al fitxer GPX següent:</string>
-    <string name="marker_save_as_track">Desa com un fitxer GPX</string>
     <string name="move_to_history">Mou a l\'historial</string>
     <string name="plan_route">Planifica la ruta</string>
     <string name="group_will_be_removed_after_restart">S\'esborrarà el grup el proper cop que inicieu l\'aplicació.</string>

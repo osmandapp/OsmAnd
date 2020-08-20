@@ -20,6 +20,7 @@
     <string name="empty_state_my_tracks">Add track files</string>
     <string name="shared_string_gpx_route">Track route</string>
     <string name="save_track_to_gpx_globally">Log track to GPX file</string>
+    <string name="monitoring_control_start">GPX</string>
     <string name="show_gpx">Tracks</string>
     <string name="layer_gpx_layer">Tracks</string>
     <string name="shared_string_gpx_files">Tracks</string>
@@ -1260,7 +1261,7 @@
     <string name="mapillary_widget">Mapillary widget</string>
     <string name="mapillary_widget_descr">Allows quick contributions to Mapillary.</string>
     <string name="mapillary_descr">Online street-level photos for everyone. Discover places, collaborate, capture the world.</string>
-    <string name="mapillary">Street-level imagery2</string>
+    <string name="mapillary">Street-level imagery</string>
     <string name="plugin_mapillary_descr">Street-level photos for everyone. Discover places, collaborate, capture the world.</string>
     <string name="private_access_routing_req">Your destination is located in an area with private access. Allow using private roads for this trip?</string>
     <string name="restart_search">Restart search</string>
@@ -2619,7 +2620,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Boundaries</string>
     <string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5–9).</string>
     <string name="map_widget_max_speed">Speed limit</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">No buildings found.</string>
     <string name="incremental_search_city">Search city incrementally</string>
     <string name="search_villages_and_postcodes">Search for more villages/postcodes</string>

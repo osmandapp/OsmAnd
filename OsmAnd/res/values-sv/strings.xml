@@ -697,7 +697,6 @@ Nyttjat utrymme är {1} MB.
     <string name="rendering_attr_noAdminboundaries_name">Gränser</string>
     <string name="rendering_attr_noAdminboundaries_description">Undertryck visning av regionala gränser (adminnivåer 5-9).</string>
     <string name="map_widget_max_speed">Hastighetsbegränsning</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Inga byggnader hittades.</string>
     <string name="incremental_search_city">Sök stad stegvis</string>
     <string name="search_villages_and_postcodes">Sök efter fler byar/postnummer</string>
@@ -2183,7 +2182,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Undvik isvägar och vadställen.</string>
     <string name="my_location">Min plats</string>
     <string name="shared_string_sort">Sortera</string>
-    <string name="marker_save_as_track">Spara som GPX-fil</string>
     <string name="move_to_history">Flytta till historiken</string>
     <string name="show_arrows_on_the_map">Visa pilar på kartan</string>
     <string name="show_passed">Visa passerade</string>

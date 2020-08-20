@@ -844,7 +844,6 @@
     <string name="download_roads_only_maps">Mappa solo strade</string>
     <string name="incomplete_locale">incompleto</string>
     <string name="map_widget_max_speed">Limite di velocità</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Confini</string>
     <string name="rendering_attr_noAdminboundaries_description">Non visualizzare i confini regionali (livelli amministrativi 5-9).</string>
     <string name="index_srtm_parts">parti</string>
@@ -2439,7 +2438,6 @@
     <string name="shared_string_sort">Ordina</string>
     <string name="coordinate_input">Inserimento coordinate</string>
     <string name="marker_save_as_track_descr">Esporta i tuoi marcatori nel seguente file GPX:</string>
-    <string name="marker_save_as_track">Salva come file GPX</string>
     <string name="move_to_history">Sposta nella cronologia</string>
     <string name="group_will_be_removed_after_restart">Il gruppo verrà rimosso al prossimo riavvio dell\'app.</string>
     <string name="show_guide_line">Mostra le linee di direzione</string>

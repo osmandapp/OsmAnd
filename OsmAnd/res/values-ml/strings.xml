@@ -1095,7 +1095,6 @@
     <string name="max_speed_none">"ഇല്ല "</string>
     <string name="map_widget_distancemeasurement">ദൂരം അളക്കുക</string>
     <string name="map_widget_audionotes">ഓഡിയോ കുറിപ്പുകള്‍</string>
-    <string name="monitoring_control_start">ജിപിഎക്സ്</string>
     <string name="no_buildings_found">"കെട്ടിടം  കണ്ടുപിടിക്കാനായില്ല."</string>
     <string name="gps_not_available">ഉപകരണ സജ്ജീകരണത്തില്‍ നിന്നും ജിപിഎസ് സജീവമാക്കുക</string>
     <string name="no_route">"വഴി കണ്ടെത്തിയില്ല "</string>
@@ -2551,7 +2550,6 @@
     <string name="shared_string_finish">പൂർത്തിയാക്കുക</string>
     <string name="plan_route">റൂട്ട് പ്ലാന്‍ ചെയ്യുക</string>
     <string name="marker_save_as_track_descr">ഇനിപ്പറയുന്ന GPX ഫയലിലേക്ക് നിങ്ങളുടെ മാർക്കറുകൾ എക്സ്പോര്‍ട്ട് ചെയ്യുക:</string>
-    <string name="marker_save_as_track">GPX ഫയൽ ആയി സംരക്ഷിക്കുക</string>
     <string name="move_to_history">ചരിത്രത്തിലേക്ക് നീക്കുക</string>
     <string name="group_will_be_removed_after_restart">നിങ്ങൾ അടുത്ത തവണ ആപ്പ് ആരംഭിക്കുമ്പോൾ ഈ ഗ്രൂപ്പ് നഷ്ടമാകും.</string>
     <string name="use_system_keyboard">സിസ്റ്റം കീബോർഡ് ഉപയോഗിക്കുക</string>

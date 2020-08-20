@@ -654,7 +654,6 @@ POIの更新は利用できません</string>
     <string name="download_roads_only_maps">道路のみのマップ</string>
     <string name="rendering_attr_noAdminboundaries_name">境界</string>
     <string name="map_widget_max_speed">制限速度</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">該当する建物は見つかりませんでした。</string>
     <string name="search_villages_and_postcodes">さらに市町村検索/郵便番号</string>
     <string name="rendering_attr_showRoadMaps_description">道路のみのマップを表示するときに選択します:</string>
@@ -2476,7 +2475,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_sort">並び替え</string>
     <string name="coordinate_input">座標入力</string>
     <string name="marker_save_as_track_descr">マーカーは以下に指定したファイル名でエクスポートされます:</string>
-    <string name="marker_save_as_track">経路を保存</string>
     <string name="move_to_history">履歴に移動</string>
     <string name="group_will_be_removed_after_restart">グループは再起動後に削除されます。</string>
     <string name="show_guide_line">案内線を表示</string>

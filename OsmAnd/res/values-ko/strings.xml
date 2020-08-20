@@ -1085,7 +1085,6 @@
     <string name="maps_define_edit">정의/편집…</string>
     <string name="max_speed_none">무제한</string>
     <string name="index_name_openmaps">EU 지도 열기</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="osb_author_dialog_password">OSM 패스워드(선택)</string>
     <string name="email">이메일</string>
     <string name="av_camera_focus">카메라 포커스 유형</string>

@@ -836,7 +836,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="map_widget_max_speed">Leidžiamas greitis</string>
     <string name="rendering_attr_noAdminboundaries_name">Ribos</string>
     <string name="rendering_attr_noAdminboundaries_description">Neberodyti regionų ribų (administratoriaus 5-9 lygiai).</string>
-    <string name="monitoring_control_start">pradėti</string>
     <string name="index_srtm_parts">dalys</string>
     <string name="index_srtm_ele">Aukščio kontūrų linijos</string>
     <string name="srtm_plugin_description">Šis įskiepis įgalina tiek aukščio kontūrų linijų tiek ir (reljefo) kalnų šešėlių sluoksnių atvaizdavimą and OsmAnd žemėlapių. Ši funkcija gali būti naudinga atletams, keliautojams ir visiems, kas aktuali reljefo struktūra. (Atkreipkite dėmesį į tai kad kontūrų linijos ir/arba reljefo duomenys yra atskiri, papildomi parsiuntimai prieinami aktyvavus įskiepį)
@@ -2511,7 +2510,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="choose_file_type">Pasirinkite failo tipą</string>
     <string name="all_data">Visi duomenys</string>
     <string name="osm_notes">OSM pastabos</string>
-    <string name="marker_save_as_track">Išsaugoti kaip GPX failą</string>
     <string name="import_track">Importuoti GPX failą</string>
     <string name="day_off_label">išj.</string>
     <string name="toast_empty_name_error">Neįvardinta vieta</string>

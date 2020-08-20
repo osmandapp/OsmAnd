@@ -2607,7 +2607,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_sort">Ordenatu</string>
     <string name="coordinate_input">Koordenatuen sarrera</string>
     <string name="marker_save_as_track_descr">Esportatu zure markatzaileak honako GPX fitxategi honetara:</string>
-    <string name="marker_save_as_track">Gorde GPX fitxategi gisa</string>
     <string name="move_to_history">Eraman historialera</string>
     <string name="group_will_be_removed_after_restart">Taldea ez da egongo da aplikazioa berrabiarazten denean.</string>
     <string name="show_guide_line">Erakutsi norabide lerroak</string>

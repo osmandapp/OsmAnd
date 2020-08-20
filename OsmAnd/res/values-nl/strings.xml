@@ -844,7 +844,6 @@
     <string name="search_villages_and_postcodes">Zoek naar meer dorpen/postcodes</string>
     <string name="route_descr_lat_lon">Lat %1$.3f Lon %2$.3f</string>
     <string name="map_widget_max_speed">Snelheidslimiet</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Grenzen</string>
     <string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9).</string>
     <string name="index_srtm_parts">gedeelten</string>
@@ -2481,7 +2480,6 @@
     <string name="shared_string_sort">Sorteer</string>
     <string name="coordinate_input">Invoer van coördinaten</string>
     <string name="marker_save_as_track_descr">Exporteer uw Markeervlaggetjes naar het volgende GPX-bestand:</string>
-    <string name="marker_save_as_track">Opslaan als GPX-bestand</string>
     <string name="move_to_history">Verplaats naar geschiedenis</string>
     <string name="group_will_be_removed_after_restart">De groep wordt verwijderd na een herstart van de app.</string>
     <string name="show_guide_line">Richtingslijnen tonen</string>

@@ -2534,7 +2534,6 @@
     <string name="shared_string_sort">Sortieren</string>
     <string name="coordinate_input">Koordinateneingabe</string>
     <string name="marker_save_as_track_descr">Markierungen in die hier festgelegte GPX-Datei exportieren:</string>
-    <string name="marker_save_as_track">Als GPX-Datei speichern</string>
     <string name="move_to_history">In den Verlauf verschieben</string>
     <string name="group_will_be_removed_after_restart">Die Gruppe wird beim nächsten Start der App entfernt.</string>
     <string name="show_passed">Passierte anzeigen</string>

@@ -874,7 +874,6 @@
     <string name="search_villages_and_postcodes">További falvak/irányítószámok keresése</string>
     <string name="route_descr_lat_lon">%1$.3f szélesség, %2$.3f hosszúság</string>
     <string name="map_widget_max_speed">Sebességkorlátozás</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Határvonalak</string>
     <string name="rendering_attr_noAdminboundaries_description">Regionális határok megjelenítésének kikapcsolása (5–9 közigazgatási szint).</string>
     <string name="download_srtm_maps">Szintvonalak</string>
@@ -2366,7 +2365,6 @@
     <string name="shared_string_sort">Sorba rendezés</string>
     <string name="coordinate_input">Koordináta bevitele</string>
     <string name="marker_save_as_track_descr">Jelölők exportálása az alábbi GPX fájlba:</string>
-    <string name="marker_save_as_track">Mentés GPX fájlként</string>
     <string name="move_to_history">Áthelyezés az előzményekbe</string>
     <string name="group_will_be_removed_after_restart">A csoport el fog tűnni, amikor legközelebb elindítod az alkalmazást.</string>
     <string name="show_guide_line">Irányjelző vonalak megjelenítése</string>

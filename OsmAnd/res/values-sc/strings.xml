@@ -299,7 +299,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Làcanas</string>
     <string name="rendering_attr_noAdminboundaries_description">Cua sas làcanas regionales (livellos amministrativos 5–9).</string>
     <string name="map_widget_max_speed">Lìmite de lestresa</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Perunu edifìtziu agatau.</string>
     <string name="incremental_search_city">Chirca incrementale de sa tzitade</string>
     <string name="search_villages_and_postcodes">Chirca àteras biddas/còdighes postales</string>
@@ -2536,7 +2535,6 @@
     <string name="shared_string_sort">Òrdina</string>
     <string name="coordinate_input">Insertada de sas coordinadas</string>
     <string name="marker_save_as_track_descr">Esporta sos marcadores tuos in custu documentu GPX:</string>
-    <string name="marker_save_as_track">Sarva comente documentu GPX</string>
     <string name="move_to_history">Pone in sa cronologia</string>
     <string name="group_will_be_removed_after_restart">Su grupu at a èssere iscantzelladu a pustis de s\'allughìngiu imbeniente de s\'aplicatzione.</string>
     <string name="osn_modify_dialog_error">Impossìbile modificare sa nota.</string>

@@ -381,7 +381,6 @@
     <string name="plan_route">Planeeri teekond</string>
     <string name="shared_string_sort">Sorteeri</string>
     <string name="coordinate_input">Koordinaatide sisestamine</string>
-    <string name="marker_save_as_track">Salvesta GPX failina</string>
     <string name="move_to_history">Teisalda ajalukku</string>
     <string name="shared_string_markers">Markerid</string>
     <string name="coordinates_format">Koordinaatide formaat</string>

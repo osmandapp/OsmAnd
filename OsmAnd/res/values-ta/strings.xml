@@ -95,7 +95,6 @@
     <string name="shared_string_sort">வகைபடுத்து.</string>
     <string name="coordinate_input">ஒருங்கிணைப்பு உள்ளீடு</string>
     <string name="marker_save_as_track_descr">பின்வரும் ஜிபிஎக்ஸ் கோப்புக்கு குறிப்பாங்களை ஏற்றுமதி செய்:</string>
-    <string name="marker_save_as_track">ஜிபிஎக்ஸ் கோப்பாக சேமி</string>
     <string name="move_to_history">வறலாற்றுக்கு நகர்த்து</string>
     <string name="group_will_be_removed_after_restart">அடுத்த முறை இந்த செயலியை இயக்கும் பொழுது இந்த குழு அழிந்திருக்கும்.</string>
     <string name="show_guide_line">வழிகாட்டி குறிப்புகளை காட்டு</string>
@@ -1062,7 +1061,6 @@
     <string name="rendering_attr_noAdminboundaries_description">பிராந்திய எல்லைகளை காட்சிப்படுத்த (நிர்வாகம் அளவு 5-9).
 \n</string>
     <string name="map_widget_max_speed">வேக வரம்பு</string>
-    <string name="monitoring_control_start">ஜிபிஎக்ஸ்</string>
     <string name="no_buildings_found">கட்டிடங்கள் இல்லை.</string>
     <string name="incremental_search_city">"நகரத்தை தேடுங்கள் படிப்படியாக "</string>
     <string name="search_villages_and_postcodes">மேலும் கிராமங்கள் / அஞ்சல் குறியீட்டைத் தேடுக</string>

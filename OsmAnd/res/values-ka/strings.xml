@@ -872,7 +872,6 @@
     <string name="shared_string_control_stop">შეწყვეტა</string>
     <string name="shared_string_control_start">დაწყება</string>
     <string name="map_widget_max_speed">სიჩქარის ლიმიტი</string>
-    <string name="monitoring_control_start">GPX დევნა</string>
     <string name="route_descr_lat_lon">გან %1$.3f, გრძ %2$.3f</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd წარმოადგენს აპლიკაციას ღია კოდით გათიშული და მიმდინარე რუკებით ნავიგაციისათვის</string>
     <string name="select_navigation_mode">აირჩიეთ ტრანსპორტის ტიპი</string>

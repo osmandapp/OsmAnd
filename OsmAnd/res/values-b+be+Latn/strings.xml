@@ -512,7 +512,6 @@ Punktaŭ maršrutu %2$s</string>
     <string name="rendering_attr_noAdminboundaries_name">Miežy</string>
     <string name="rendering_attr_noAdminboundaries_description">Nie adliustroŭvać rehijanaĺnyja miežy (administatyŭnyja ŭzroŭni 5–9).</string>
     <string name="map_widget_max_speed">Abmiežavańnie chutkaścі</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Budynkaŭ nia znojdziena.</string>
     <string name="incremental_search_city">Vybierycie horad</string>
     <string name="search_villages_and_postcodes">Dadatkovy pošuk viosak і paštovaha іndeksa</string>
@@ -2517,7 +2516,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_sort">Sartavać</string>
     <string name="coordinate_input">Uvod kaardynat</string>
     <string name="marker_save_as_track_descr">Ekspartavać vašy paznaki ŭ nastupny GPX-fajl:</string>
-    <string name="marker_save_as_track">Zachavać jak GPX-fajl</string>
     <string name="move_to_history">Pieramiaścić u historyju</string>
     <string name="group_will_be_removed_after_restart">Hrupy ŭžo nie budzie paslia nastupnaha pierazapusku prahramy.</string>
     <string name="shared_string_markers">Paznaki</string>

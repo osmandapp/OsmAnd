@@ -94,7 +94,6 @@
     <string name="download_srtm_maps">Изохипсе</string>
     <string name="rendering_attr_noAdminboundaries_name">Границе</string>
     <string name="map_widget_max_speed">Ограничење брзине</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Нема пронађених објеката.</string>
     <string name="incremental_search_city">Тражи град инкрементално</string>
     <string name="search_villages_and_postcodes">Претрага за још села/поштанских кодова</string>
@@ -1445,7 +1444,6 @@
     <string name="shared_string_sort">Сортирај</string>
     <string name="coordinate_input">Унос координата</string>
     <string name="marker_save_as_track_descr">Извезите ознаке у следећи GPX фајл:</string>
-    <string name="marker_save_as_track">Сачувај као GPX фајл</string>
     <string name="move_to_history">Премести у историју</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>

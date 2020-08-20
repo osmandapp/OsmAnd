@@ -851,7 +851,6 @@
     <string name="search_villages_and_postcodes">Hľadať viac obcí/PSČ</string>
     <string name="route_descr_lat_lon">Šírka %1$.3f dĺžka %2$.3f</string>
     <string name="map_widget_max_speed">Obmedzenie rýchlosti</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie hraníc regiónov (administratívne úrovne 5 až 9).</string>
     <string name="index_srtm_parts">časti</string>
@@ -2522,7 +2521,6 @@
     <string name="shared_string_sort">Zotriediť</string>
     <string name="coordinate_input">Zadanie súradníc</string>
     <string name="marker_save_as_track_descr">Exportovať vaše značky do nasledovného súboru GPX:</string>
-    <string name="marker_save_as_track">Uložiť ako súbor GPX</string>
     <string name="move_to_history">Presunúť do histórie</string>
     <string name="group_will_be_removed_after_restart">Skupina bude odstránená pri nasledujúcom štarte aplikácie.</string>
     <string name="show_guide_line">Zobraziť smerové čiary</string>

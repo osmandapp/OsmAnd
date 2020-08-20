@@ -515,7 +515,6 @@
     <string name="no_buildings_found">Rakennuksia ei löytynyt.</string>
     <string name="search_villages_and_postcodes">Etsi lisää paikkakuntia/postinumeroita</string>
     <string name="map_widget_max_speed">Nopeusrajoitus</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="osmand_parking_position_name">Pysäköintipaikka</string>
     <string name="osmand_parking_plugin_description"/>
     <string name="context_menu_item_add_parking_point">Merkitse pysäköintipaikaksi</string>
@@ -1955,7 +1954,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="shared_string_sort">Lajittele</string>
     <string name="coordinate_input">Koordinaattien syöttö</string>
     <string name="marker_save_as_track_descr">Vie markkerisi seuraavaan GPX-tiedostoon:</string>
-    <string name="marker_save_as_track">Tallenna GPX-tiedostona</string>
     <string name="move_to_history">Siirrä historiaan</string>
     <string name="group_will_be_removed_after_restart">Ryhmä poistetaan sovelluksen uudelleenkäynnistyksen jälkeen.</string>
     <string name="show_arrows_on_the_map">Näytä nuolet kartalla</string>

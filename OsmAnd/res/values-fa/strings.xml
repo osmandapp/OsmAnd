@@ -2372,7 +2372,6 @@
     <string name="osn_modify_dialog_error">ویرایش یادداشت ناموفق بود.</string>
     <string name="osn_modify_dialog_title">اصلاح یادداشت</string>
     <string name="context_menu_item_modify_note">اصلاح یادداشت OSM</string>
-    <string name="marker_save_as_track">ذخیره در قالب فایل GPX</string>
     <string name="show_arrows_on_the_map">فلش‌ها را روی نقشه نشان بده</string>
     <string name="show_passed">ردشده‌ها را نشان بده</string>
     <string name="hide_passed">ردشده‌ها را مخفی کن</string>

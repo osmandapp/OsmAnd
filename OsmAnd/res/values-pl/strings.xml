@@ -881,7 +881,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Granice</string>
     <string name="rendering_attr_noAdminboundaries_description">Pomiń wyświetlenie granic regionalnych (poziomy administratora 5-9).</string>
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
-    <string name="monitoring_control_start">Ślad</string>
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
@@ -2447,7 +2446,6 @@
     <string name="plan_route">Planowanie trasy</string>
     <string name="shared_string_sort">Sortuj</string>
     <string name="marker_save_as_track_descr">Znaczniki zostaną wyeksportowane do poniższego pliku GPX:</string>
-    <string name="marker_save_as_track">Zapisz jako plik GPX</string>
     <string name="move_to_history">Przenieś do historii</string>
     <string name="group_will_be_removed_after_restart">Grupa zostanie usunięta po ponownym uruchomieniu.</string>
     <string name="use_system_keyboard">Użycie klawiatury systemowej</string>

@@ -103,7 +103,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Sakrij granice</string>
 	
 	<string name="map_widget_max_speed">Ograničenje brzine</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nema pronađenih objekata.</string>
     <string name="incremental_search_city">Traži grad inkrementalno</string>
     <string name="search_villages_and_postcodes">Pretraga sela/Poštanski kod</string>

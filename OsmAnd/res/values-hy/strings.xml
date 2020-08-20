@@ -156,7 +156,6 @@
     <string name="shared_string_sort">Դասակարգել</string>
     <string name="coordinate_input">Կոորդինատների մուտքագրում</string>
     <string name="marker_save_as_track_descr">Արտահանեք ձեր մարկերները հետևյալ GPX ֆայլի մեջ:</string>
-    <string name="marker_save_as_track">Պահպանել որպես GPX ֆայլ</string>
     <string name="move_to_history">Տեղափոխեք պատմություն</string>
     <string name="group_will_be_removed_after_restart">Ծրագրի հերթական վերագործարկվելուց հետո խումբը կհեռացվի։</string>
     <string name="show_guide_line">Ցույց տալ ուղեցույցներ</string>
@@ -1394,7 +1393,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Սահմանները</string>
     <string name="rendering_attr_noAdminboundaries_description">Թաքցնել տարածաշրջանային սահմանները (admin levels 5–9)։</string>
     <string name="map_widget_max_speed">Արագության սահմանափակումը</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Շենքեր չեն գտնվել:</string>
     <string name="incremental_search_city">Ընտրեք քաղաք</string>
     <string name="search_villages_and_postcodes">Որոնել ըստ գյուղի/ փոստային բաժանմունքի(ինդեքսի)</string>

@@ -1108,7 +1108,6 @@
     <string name="download_srtm_maps">Hæðarlínur</string>
     <string name="download_regular_maps">Staðlað kort</string>
     <string name="download_roads_only_maps">Kort einungis með vegum</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Engar byggingar fundust.</string>
     <string name="rendering_attr_showRoadMaps_name">Kort einungis með vegum</string>
     <string name="safe_mode">Öryggishamur</string>
@@ -2234,7 +2233,6 @@
     <string name="plan_route">Skipuleggja leið</string>
     <string name="coordinate_input">Innsett hnit</string>
     <string name="marker_save_as_track_descr">Flyttu kortamerkin þín út í eftirfarandi GPX-skrá:</string>
-    <string name="marker_save_as_track">Vista sem GPX-skrá</string>
     <string name="move_to_history">Flytja í aðgerðaferil</string>
     <string name="group_will_be_removed_after_restart">Hópurinn verður horfinn eftir að forritið hefur verið endurræst.</string>
     <string name="show_guide_line">Birta stefnulínur</string>

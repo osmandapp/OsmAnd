@@ -308,7 +308,6 @@
     <string name="audionotes_plugin_name">ملاحظات صوتية/مصورة</string>
     <string name="download_roads_only_maps">خرائط الطرقات فقط</string>
     <string name="rendering_attr_noAdminboundaries_description">منع عرض الحدود الإقليمية (المستويات الإدارية من 5-9).</string>
-    <string name="monitoring_control_start">سجل</string>
     <string name="rendering_attr_showRoadMaps_description">تحديد وقت عرض خرائط الطرقات فقط :</string>
     <string name="rendering_attr_showRoadMaps_name">خرائط الطرقات فقط</string>
     <string name="safe_mode_description">تشغيل التطبيق في الوضع الآمن (باستخدام تعليمات أندرويد البطيئة بدلا من التعليمات البرمجية الأصلية) .</string>
@@ -2523,7 +2522,6 @@
     <string name="shared_string_sort">فرز</string>
     <string name="coordinate_input">إدخال إحداثية</string>
     <string name="marker_save_as_track_descr">تصدير علاماتك إلى ملف يمكنك تحديده هنا:</string>
-    <string name="marker_save_as_track">حفظ كمسار</string>
     <string name="move_to_history">نقل إلى السجل</string>
     <string name="group_will_be_removed_after_restart">سيتم إزالة المجموعة بعد إعادة تشغيل التطبيق.</string>
     <string name="shared_string_markers">العلامات</string>

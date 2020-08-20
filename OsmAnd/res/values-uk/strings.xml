@@ -846,7 +846,6 @@
     <string name="safe_mode">Безпечний режим</string>
     <string name="native_library_not_running">Програму запущено в безпечному режимі (вимкніть його в \'Налаштуваннях\').</string>
     <string name="audionotes_location_not_defined">Оберіть \"Використати місцезнаходження...\" для прив\'язки нотатки до даного місцезнаходження.</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="background_service_is_enabled_question">Фоновий режим OsmAnd досі запущений. Зупинити його роботу також?</string>
     <string name="close_changeset">Закрити набір змін</string>
     <string name="zxing_barcode_scanner_not_found">Програма \'ZXing Barcode Scanner\' не встановлена. Шукати в Google Play?</string>
@@ -2528,7 +2527,6 @@
     <string name="shared_string_sort">Впорядкувати</string>
     <string name="coordinate_input">Введення координат</string>
     <string name="marker_save_as_track_descr">Експортувати Ваші позначки у наступний GPX-файл:</string>
-    <string name="marker_save_as_track">Зберегти як GPX-файл</string>
     <string name="move_to_history">Перемістити до історії</string>
     <string name="group_will_be_removed_after_restart">Група буде вилучена після перезапуску застосунку.</string>
     <string name="show_guide_line">Показувати напрямні лінії</string>

@@ -152,7 +152,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Скриване на границите</string>
     <string name="rendering_attr_noAdminboundaries_description">Не показвай административни граници (admin нива 5–9)</string>
     <string name="map_widget_max_speed">Ограничение на скоростта</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Ширина %1$.3f, дължина %2$.3f</string>
     <string name="no_buildings_found">Няма намерени номера.</string>
     <string name="incremental_search_city">Търсене на град възходящо</string>

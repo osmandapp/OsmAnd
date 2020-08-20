@@ -444,7 +444,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Fronteiras</string>
     <string name="rendering_attr_noAdminboundaries_description">Agochar fronteiras rexionais (niveis administrativos do 5 ó 9).</string>
     <string name="map_widget_max_speed">Límite da velocidade</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Non se atopou ningún edificio.</string>
     <string name="incremental_search_city">Procurar cidades a incrementos</string>
     <string name="search_villages_and_postcodes">Procurar máis vilas/códigos postais</string>
@@ -2461,7 +2460,6 @@ Lon %2$s</string>
     <string name="add_group_descr">Importar grupos dende os Favoritos ou puntos de pasaxe do GPX.</string>
     <string name="empty_state_markers_groups_desc">Importar grupos dos Favoritos ou puntos de pasaxe, coma marcaxes.</string>
     <string name="import_gpx_file_description">poden importarse coma Favoritos ou coma un ficheiro GPX.</string>
-    <string name="marker_save_as_track">Gardar coma ficheiro GPX</string>
     <string name="passed">Derradeiro uso: %1$s</string>
     <string name="measurement_tool_action_bar">Procurar no mapa e engadir puntos</string>
     <string name="display_zoom_level">Nivel do achegamento da pantalla: %1$s</string>

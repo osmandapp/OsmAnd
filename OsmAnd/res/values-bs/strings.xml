@@ -101,7 +101,6 @@
     <string name="download_roads_only_item">Samo ceste</string>
     <string name="rendering_attr_noAdminboundaries_name">Sakrij granice</string>
 	<string name="map_widget_max_speed">Ograničenje brzine</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="map_widget_show_destination_arrow">Prikaži smjer odredišta</string>
     <string name="no_route">Nema rute</string>
 	<string name="replace_destination_point">Promjeni odredište</string>

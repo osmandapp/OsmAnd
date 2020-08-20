@@ -1059,7 +1059,6 @@
     <string name="map_widget_gps_info">GPS inligting</string>
     
     <string name="index_name_openmaps">\\\'OpenMaps EU\\\'</string>
-    <string name="monitoring_control_start">\\\'GPX\\\'</string>
     <string name="osmand_play_title_30_chars">OsmAnd Kaarte &amp; Navigasie</string>
 	
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Kaarte &amp; Navigasie</string>

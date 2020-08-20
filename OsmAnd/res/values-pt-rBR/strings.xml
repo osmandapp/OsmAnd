@@ -805,7 +805,6 @@
     <string name="live_monitoring_interval_descr">Especificar intervalo de monitoramento on-line.</string>
     <string name="daynight_mode_auto">Nascer/Pôr do Sol</string>
     <string name="map_widget_max_speed">Limite de velocidade</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nenhum edifício encontrado.</string>
     <string name="incremental_search_city">Pesquisar cidade incrementalmente</string>
     <string name="search_villages_and_postcodes">Pesquisar mais povoados/código postal</string>
@@ -1977,7 +1976,6 @@
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Inserção de coordenada</string>
     <string name="marker_save_as_track_descr">Exporte seus marcadores para o seguinte arquivo GPX:</string>
-    <string name="marker_save_as_track">Salvar como arquivo GPX</string>
     <string name="move_to_history">Mover para o histórico</string>
     <string name="group_will_be_removed_after_restart">O grupo será excluído na próxima vez em que reiniciar o aplicativo.</string>
     <string name="show_arrows_on_the_map">Mostrar setas no mapa</string>

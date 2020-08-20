@@ -15,7 +15,6 @@
     <string name="index_srtm_parts">部分</string>
     <string name="download_select_map_types">其它地图</string>
     <string name="map_widget_max_speed">速度限制</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="safe_mode">“安全模式”</string>
     <string name="no_route">沒有路由</string>
     <string name="delete_target_point">删除目的地</string>
@@ -2358,7 +2357,6 @@
     <string name="use_location">使用位置</string>
     <string name="shared_string_sort">排序</string>
     <string name="coordinate_input">坐标输入</string>
-    <string name="marker_save_as_track">保存为GPX轨迹文件</string>
     <string name="today">今天</string>
     <string name="yesterday">昨天</string>
     <string name="context_menu_read_full_article">阅读完整文章</string>

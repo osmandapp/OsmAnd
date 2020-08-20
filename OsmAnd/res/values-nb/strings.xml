@@ -934,7 +934,6 @@
     <string name="recording_context_menu_precord">Ta bilde</string>
     <string name="dropbox_plugin_name">Dropbox-programtillegg</string>
     <string name="recording_unavailable">utilgjengelig</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="filterpoi_activity">Opprett interessepunkt-filter</string>
     <string name="bg_service_sleep_mode_off">Kjør
 \n i bakgrunnen</string>
@@ -2136,7 +2135,6 @@
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatinntasting</string>
     <string name="marker_save_as_track_descr">Eksporter dine markører til følgende GPX-fil:</string>
-    <string name="marker_save_as_track">Lagre som GPX-fil</string>
     <string name="all_markers_moved_to_history">Alle kartmarkører flyttet til historikk</string>
     <string name="marker_moved_to_history">Kartmarkør flyttet til historikk</string>
     <string name="marker_moved_to_active">Kartmarkør flyttet til aktive</string>

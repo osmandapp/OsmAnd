@@ -1197,7 +1197,6 @@
     <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
     <string name="incomplete_locale">неполный</string>
     <string name="map_widget_max_speed">Ограничение скорости</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="download_select_map_types">Прочие карты</string>
     <string name="download_srtm_maps">Карты SRTM</string>
     <string name="av_settings">Настройки аудио и видео </string>
@@ -2373,7 +2372,6 @@
     <string name="this_year">В этом году</string>
     <string name="plan_route">Планирование маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
-    <string name="marker_save_as_track">Сохранить как файл GPX</string>
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет выключена при следующем запуске приложения.</string>
     <string name="show_arrows_on_the_map">Показывать стрелки на карте</string>

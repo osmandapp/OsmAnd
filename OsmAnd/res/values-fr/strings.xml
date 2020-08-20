@@ -873,7 +873,6 @@
     <string name="search_villages_and_postcodes">Rechercher plus de villes / codes postaux</string>
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="map_widget_max_speed">Limite de vitesse</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Frontières</string>
     <string name="rendering_attr_noAdminboundaries_description">Masquer les limites administratives régionales (niveaux 5 à 9).</string>
     <string name="index_srtm_ele">Courbes de niveau</string>
@@ -2519,7 +2518,6 @@
     <string name="shared_string_sort">Trier</string>
     <string name="coordinate_input">Saisie des coordonnées</string>
     <string name="marker_save_as_track_descr">Exporter vos marques dans le fichier GPX suivant :</string>
-    <string name="marker_save_as_track">Enregistrer comme fichier GPX</string>
     <string name="move_to_history">Déplacer vers l\'historique</string>
     <string name="group_will_be_removed_after_restart">Le groupe sera supprimé au prochain démarrage de l\'application.</string>
     <string name="shared_string_markers">Marques</string>

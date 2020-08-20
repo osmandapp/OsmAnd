@@ -997,7 +997,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Robežas</string>
     <string name="rendering_attr_noAdminboundaries_description">Noņemt reģionālo robežu attēlošanu (admin līmeņi 5-9)</string>
     <string name="map_widget_max_speed">Ātruma limiti</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nav atrastas ēkas.</string>
     <string name="search_villages_and_postcodes">Meklēt apdzīvotās vietas/pasta indeksus</string>
     <string name="rendering_attr_showRoadMaps_description">Izvēlieties, kad rādīt tikai ceļu tīkla kartes:</string>
@@ -2457,7 +2456,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="shared_string_sort">Kārtot</string>
     <string name="coordinate_input">Koordināšu ievade</string>
     <string name="marker_save_as_track_descr">Eksportēt marķierus sekojošajā GPX failā:</string>
-    <string name="marker_save_as_track">Saglabāt kā GPX failu</string>
     <string name="move_to_history">Pārvietot uz vēsturi</string>
     <string name="group_will_be_removed_after_restart">Pēc lietotnes restarta šī grupa vairs neeksistēs.</string>
     <string name="show_guide_line">Rādīt vadošās līnijas</string>

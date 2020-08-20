@@ -425,7 +425,6 @@
     <string name="download_select_map_types">Digər xəritələr</string>
     <string name="download_regular_maps">Standart xəritə</string>
     <string name="map_widget_max_speed">Sürət limiti</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="safe_mode">Təhlükəsiz rejim</string>
     <string name="native_library_not_running">Proqram təhlükəsiz rejimdə işləyir (“Parametrlər”dən söndürün).</string>
     <string name="gps_not_available">Parametrlərdən GPS-i aktivləşdirin</string>
@@ -1649,7 +1648,6 @@
     <string name="route_is_calculated">Marşrut hesablandı</string>
     <string name="my_location">Mövqeyim</string>
     <string name="shared_string_sort">Sırala</string>
-    <string name="marker_save_as_track">GPX faylı kimi saxla</string>
     <string name="shared_string_groups">Qruplar</string>
     <string name="import_track">GPX faylı idxal et</string>
     <string name="context_menu_read_full_article">Tam məqaləni oxu</string>

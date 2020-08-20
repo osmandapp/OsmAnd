@@ -1706,7 +1706,6 @@
     <string name="shared_string_sort">Ταξινόμηση</string>
     <string name="coordinate_input">Η εισαγωγή συντεταγμένης</string>
     <string name="marker_save_as_track_descr">Εξαγωγή των δεικτών σας στο παρακάτω αρχείο GPX:</string>
-    <string name="marker_save_as_track">Αποθήκευση ως αρχείο GPX</string>
     <string name="move_to_history">Μετακίνηση στο ιστορικό</string>
     <string name="group_will_be_removed_after_restart">Η ομάδα θα εξαφανιστεί την επόμενη φορά που θα ξεκινήσετε την εφαρμογή.</string>
     <string name="show_guide_line">Εμφάνιση κατευθυντήριων γραμμών</string>

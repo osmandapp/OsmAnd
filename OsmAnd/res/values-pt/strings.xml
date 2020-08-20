@@ -1010,7 +1010,6 @@
     <string name="use_magnetic_sensor">Use sensor magnético</string>
     <string name="other_location">Outro</string>
     <string name="local_indexes_cat_srtm">Curvas de nível</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="osmand_play_title_30_chars">Mapas OsmAnd &amp; Navegação</string>
     <string name="osmand_plus_play_title_30_chars">Mapas OsmAnd+ &amp; Navegação</string>
     <string name="shared_string_downloading">A descarregar…</string>
@@ -1828,7 +1827,6 @@
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Introdução de coordenada</string>
     <string name="marker_save_as_track_descr">Exporte os seus marcadores para um ficheiro que pode especificar aqui:</string>
-    <string name="marker_save_as_track">Guardar como ficheiro GPX</string>
     <string name="move_to_history">Mover para histórico</string>
     <string name="group_will_be_removed_after_restart">O grupo terá desaparecido na próxima vez que iniciar a aplicação.</string>
     <string name="show_guide_line">Mostrar linhas direcionais</string>

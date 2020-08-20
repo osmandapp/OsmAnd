@@ -348,7 +348,6 @@
     <string name="download_roads_only_maps">फक्त रस्त्याचा नकाशा</string>
     <string name="rendering_attr_noAdminboundaries_name">सीमा</string>
     <string name="map_widget_max_speed">वेग मर्यादा</string>
-    <string name="monitoring_control_start">जिपिएक्स</string>
     <string name="route_descr_lat_lon">अक्षांश %1$.3f, रेखांश %2$.3f</string>
     <string name="no_buildings_found">इमारत सापडली नाही.</string>
     <string name="map_widget_show_destination_arrow">इच्छित स्थळाची दिशा दाखवा</string>

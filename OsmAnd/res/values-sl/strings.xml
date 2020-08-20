@@ -876,7 +876,6 @@
     <string name="map_tile_source">Vir ploščic zemljevida</string>
     <string name="map_source">Vir zemljevida</string>
     <string name="map_widget_max_speed">Omejitve hitrosti</string>
-    <string name="monitoring_control_start">Beleženje GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Ne izriši upravnih mej</string>
     <string name="rendering_attr_noAdminboundaries_description">Izbira onemogoči izris upravnih mej (na ravneh približanja od 5 do 9).</string>
     <string name="index_srtm_ele">Izris izohips</string>
@@ -2522,7 +2521,6 @@
     <string name="plan_route">Načrtovanje poti</string>
     <string name="shared_string_sort">Razvrsti</string>
     <string name="coordinate_input">Vpis koordinat</string>
-    <string name="marker_save_as_track">Shrani kot datoteko GPX</string>
     <string name="move_to_history">Premakni v zgodovino</string>
     <string name="group_will_be_removed_after_restart">Skupina bo odstranjena ob ponovnem zagonu programa.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Prag usmerjenosti zemljevida</string>

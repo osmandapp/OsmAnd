@@ -2530,7 +2530,6 @@
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Ingresar coordenadas</string>
     <string name="marker_save_as_track_descr">Exporta los marcadores al siguiente archivo GPX:</string>
-    <string name="marker_save_as_track">Guardar como archivo GPX</string>
     <string name="move_to_history">Mover al historial</string>
     <string name="group_will_be_removed_after_restart">El grupo desaparecerá la próxima vez que inicies la aplicación.</string>
     <string name="shared_string_markers">Marcadores</string>

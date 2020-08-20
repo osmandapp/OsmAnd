@@ -879,7 +879,6 @@
     <string name="no_buildings_found">לא נמצאו בניינים.</string>
     <string name="route_descr_lat_lon">רוחב %1$.3f אורך %2$.3f</string>
     <string name="map_widget_max_speed">מהירות מותרת</string>
-    <string name="monitoring_control_start">התחלה</string>
     <string name="rendering_attr_noAdminboundaries_name">גבולות</string>
     <string name="rendering_attr_noAdminboundaries_description">הסתרת גבולות אזוריים (דרגות ניהול 5‏-9).</string>
     <string name="index_srtm_parts">קטעים</string>
@@ -1282,7 +1281,6 @@
     <string name="shared_string_finish">סיום</string>
     <string name="plan_route">תכנון נתיב</string>
     <string name="shared_string_sort">מיון</string>
-    <string name="marker_save_as_track">שמירה כקובץ GPX</string>
     <string name="move_to_history">העברה להיסטוריה</string>
     <string name="disable_complex_routing_descr">השבתת ניתוב דו־שלבי לניווט הרכב.</string>
     <string name="tap_on_map_to_hide_interface">מצב מסך מלא</string>

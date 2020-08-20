@@ -828,7 +828,6 @@
     <string name="no_buildings_found">Număr negăsit.</string>
     <string name="route_descr_lat_lon">Lat %1$.3f Long %2$.3f</string>
     <string name="map_widget_max_speed">Limita de viteză</string>
-    <string name="monitoring_control_start">Start</string>
     <string name="rendering_attr_noAdminboundaries_name">Ascunde limitele administrative</string>
     <string name="rendering_attr_noAdminboundaries_description">Dezactivează afișarea limitelor administrative 5-9</string>
     <string name="index_srtm_ele">Curbe de nivel</string>
@@ -1730,7 +1729,6 @@
     <string name="plan_route">Planul rutei</string>
     <string name="coordinate_input">Introduceți coordonatele</string>
     <string name="marker_save_as_track_descr">Exportați marcajele dvs. în următorul fișier GPX:</string>
-    <string name="marker_save_as_track">Salvați ca fișier GPX</string>
     <string name="group_will_be_removed_after_restart">Grupul va dispărea data viitoare când porniți aplicația.</string>
     <string name="show_guide_line">Afișați liniile direcționale</string>
     <string name="show_arrows_on_the_map">Arată săgețile pe hartă</string>
