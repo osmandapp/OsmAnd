@@ -156,7 +156,6 @@
     <string name="animate_route">Start simulatie</string>
     <string name="file_can_not_be_renamed">Kan bestandsnaam niet wijzigen.</string>
     <string name="file_with_name_already_exists">Er bestaat al een bestand met die naam.</string>
-    <string name="shared_string_gpx_route">Navigatie langs GPX-track</string>
     <string name="poi_query_by_name_matches_categories">Meerdere gerelateerde POI-categorieën gevonden.</string>
     <string name="data_to_search_poi_not_available">Download offline gegevens om naar POI’s te zoeken.</string>
     <string name="poi_filter_by_name">Zoek op naam</string>
@@ -270,7 +269,6 @@
     <string name="context_menu_item_share_location">Deel Locatie</string>
     <string name="add_waypoint_dialog_added">GPX-routepunt \'\'{0}\'\' succesvol toegevoegd</string>
     <string name="add_waypoint_dialog_title">Routepunt aan de opgenomen GPX-track toevoegen</string>
-    <string name="context_menu_item_add_waypoint">Opslaan als routepunt in GPX-track</string>
     <string name="amenity_type_administrative">Overheid</string>
     <string name="amenity_type_barrier">Blokkade</string>
     <string name="amenity_type_education">Onderwijs</string>
@@ -362,7 +360,6 @@
     <string name="voice">Opgenomen stem</string>
     <string name="no_vector_map_loaded">Geen vectorkaarten geladen</string>
     <string name="gpx_files_not_found">Geen GPX-bestanden gevonden in de tracks-map</string>
-    <string name="layer_gpx_layer">GPX-track…</string>
     <string name="error_reading_gpx">Fout bij het lezen van GPX-gegevens.</string>
     <string name="vector_data">OsmAnd Offline vectorkaart</string>
     <string name="transport_context_menu">Zoek Openbaar Vervoer bij halte</string>
@@ -727,7 +724,6 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Herstel standaard</string>
     <string name="map_widget_parking">Parkeren</string>
-    <string name="map_widget_monitoring">GPX-Track opnemen</string>
     <string name="map_widget_speed">Snelheid</string>
     <string name="map_widget_distance">Bestemming</string>
     <string name="map_widget_altitude">Hoogte</string>
@@ -848,7 +844,6 @@
     <string name="search_villages_and_postcodes">Zoek naar meer dorpen/postcodes</string>
     <string name="route_descr_lat_lon">Lat %1$.3f Lon %2$.3f</string>
     <string name="map_widget_max_speed">Snelheidslimiet</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Grenzen</string>
     <string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9).</string>
     <string name="index_srtm_parts">gedeelten</string>
@@ -1261,7 +1256,6 @@
     <string name="record_plugin_description">Registreer uw afgelegde weg als track in een GPX-bestand. Gebruik de opnameknop op het kaartscherm, of laat alle reizen automatisch opslaan. 
 \n 
 \nOpgenomen tracks kunnen worden gedeeld met vrienden of worden gebruikt als OSM-bijdragen. Atleten kunnen opgenomen tracks gebruiken om hun trainingen te volgen. OsmAnd kan tracks analyseren (ronde tijden, gemiddelde snelheid enz.) en tracks kunnen natuurlijk ook met andere programma\'s worden geanalyseerd.</string>
-    <string name="save_track_to_gpx_globally">Track maken in GPX-bestand</string>
     <string name="save_track_to_gpx_globally_descr">Het registreren van de afgelegde weg in een GPX-bestand kan worden aan- en uitgeschakeld met de GPX opname widget op het kaartscherm.</string>
     <string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus- en pendeltaxilijnen</string>
@@ -1437,7 +1431,6 @@
     <string name="shared_string_deselect_all">Deselecteer alles</string>
     <string name="shared_string_clear">Wis</string>
     <string name="shared_string_save">Opslaan</string>
-    <string name="shared_string_save_as_gpx">Opslaan als nieuwe GPX-track</string>
     <string name="shared_string_rename">Hernoem</string>
     <string name="shared_string_delete">Verwijder</string>
     <string name="shared_string_delete_all">Verwijder alles</string>
@@ -1702,7 +1695,6 @@
     <string name="favourites">Favorieten</string>
     <string name="saved_at_time">Bewaard op: %1$s</string>
     <string name="poi_deleted_localy">De POI wordt hier gewist zodra u de wijzigingen uploadt</string>
-    <string name="show_gpx">GPX-track op de kaart tonen</string>
     <string name="count_of_lines">Aantal regels</string>
     <string name="are_you_sure">Weet u het zeker?</string>
     <string name="unsaved_changes_will_be_lost">Niet-bewaarde wijzigingen gaan verloren. Doorgaan?</string>
@@ -2118,7 +2110,6 @@
     <string name="quick_action_navigation_voice">Stembegeleiding aan/uit</string>
     <string name="quick_action_navigation_voice_off">Stembegeleiding aan</string>
     <string name="quick_action_navigation_voice_on">Stembegeleiding uit</string>
-    <string name="quick_action_add_gpx">GPX-routepunt toevoegen</string>
     <string name="quick_action_add_parking">Parkeerlocatie instellen</string>
     <string name="quick_action_new_action">Sneltoets toevoegen</string>
     <string name="quick_action_edit_action">Sneltoets bewerken</string>
@@ -2489,7 +2480,6 @@
     <string name="shared_string_sort">Sorteer</string>
     <string name="coordinate_input">Invoer van coördinaten</string>
     <string name="marker_save_as_track_descr">Exporteer uw Markeervlaggetjes naar het volgende GPX-bestand:</string>
-    <string name="marker_save_as_track">Opslaan als GPX-bestand</string>
     <string name="move_to_history">Verplaats naar geschiedenis</string>
     <string name="group_will_be_removed_after_restart">De groep wordt verwijderd na een herstart van de app.</string>
     <string name="show_guide_line">Richtingslijnen tonen</string>
@@ -2531,18 +2521,15 @@
     <string name="save_route_point">Bewaar routepunt</string>
     <string name="waypoint_one">Tussenpunt 1</string>
     <string name="route_point_one">Punt 1 van de route</string>
-    <string name="empty_state_my_tracks">Sporen toevoegen en vastleggen</string>
     <string name="map_widget_ruler_control">Cirkel</string>
     <string name="live_monitoring_max_interval_to_send">Tijdbuffer voor verzenden van live track</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Geef een tijd op gedurende welke posties bewaard worden als er geen internetverbinding is</string>
     <string name="mappilary_no_internet_desc">Mapillary-foto\'s zijn enkel online beschikbaar.</string>
-    <string name="empty_state_my_tracks_desc">GPX-bestanden importeren of tracks opnemen.</string>
     <string name="empty_state_favourites">Favorieten toevoegen</string>
     <string name="empty_state_favourites_desc">Favorieten importeren of toevoegen door punten te markeren op de kaart.</string>
     <string name="import_track">GPX-bestand importeren</string>
     <string name="import_track_desc">Bestand %1$s bevat geen waypoints. Importeren als een track?</string>
     <string name="move_point">Verplaats punt</string>
-    <string name="add_segment_to_the_track">Voeg toe aan GPX-track</string>
     <string name="mapillary_menu_filter_description">Filter afbeeldingen op gebruikersnaam, datum of type. Alleen actief wanneer ingezoomd.</string>
     <string name="show_map">Kaart weergeven</string>
     <string name="route_is_calculated">Route berekend</string>
@@ -2766,7 +2753,6 @@
 \nWe verzamelen geen persoonlijke informatie, enkel zoekgegevens om het zoeken te verbeteren.</string>
     <string name="send_search_query">Zoekterm versturen\?</string>
     <string name="shared_string_world">Wereld</string>
-    <string name="shared_string_gpx_files">GPX bestanden</string>
     <string name="commiting_way">"Weg vastleggen.. ik "</string>
     <string name="coord_input_save_as_track">Als GPX-track opslaan</string>
     <string name="get_osmand_live">Neem OsmAnd Live en krijg alle mogelijkheden: Dagelijkse kaartupdates en onbeperkte downloads, alle betaalde en gratis plugins, Wikipedia, Wikivoyage en veel meer.</string>

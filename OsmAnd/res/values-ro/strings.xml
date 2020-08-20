@@ -83,7 +83,6 @@
     <string name="map_widget_compass">Busolă</string>
     <string name="map_widget_reset">Resetează la implicit</string>
     <string name="map_widget_parking">Parcare</string>
-    <string name="map_widget_monitoring">Înregistrare GPX</string>
     <string name="map_widget_speed">Viteză</string>
     <string name="map_widget_distance">Distanța până la destinație</string>
     <string name="map_widget_altitude">Altitudine</string>
@@ -328,7 +327,6 @@
     <string name="animate_route">Porniți simularea</string>
     <string name="file_can_not_be_renamed">Fișierul nu poate fi redenumit.</string>
     <string name="file_with_name_already_exists">Există un fișier cu același nume.</string>
-    <string name="shared_string_gpx_route">Rută GPX</string>
     <string name="poi_query_by_name_matches_categories">Au fost găsite câteva categorii asemănătoare de POI.</string>
     <string name="data_to_search_poi_not_available">Nu există date offline salvate pentru efectuarea căutării.</string>
     <string name="poi_filter_by_name">Căutare după nume</string>
@@ -346,7 +344,6 @@
     <string name="search_position_map_view">Ultima afișare a hărții</string>
     <string name="select_search_position">Origine:</string>
     <string name="context_menu_item_search">Căutare în împrejurimi</string>
-    <string name="shared_string_save_as_gpx">Salvați ca fișier GPX nou</string>
     <string name="route_successfully_saved_at">Rută salvată cu succes ca \'%1$s\'.</string>
     <string name="filename_input">Numele fișierului: </string>
     <string name="file_with_name_already_exist">Există un fișier cu același nume.</string>
@@ -450,7 +447,6 @@
     <string name="context_menu_item_share_location">Distribuiți locația</string>
     <string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' adăugat cu succes</string>
     <string name="add_waypoint_dialog_title">Adaugă un waypoint la un traseu GPX înregistrat</string>
-    <string name="context_menu_item_add_waypoint">Adaugă waypoint GPX</string>
     <string name="amenity_type_administrative">Localități</string>
     <string name="amenity_type_barrier">Bariere</string>
     <string name="amenity_type_education">Educație</string>
@@ -540,7 +536,6 @@
     <string name="voice">Voce înregistrată</string>
     <string name="no_vector_map_loaded">Hărțile vectoriale nu au fost încărcate</string>
     <string name="gpx_files_not_found">Nu au fost găsite fișiere GPX în directorul tracks</string>
-    <string name="layer_gpx_layer">Trasee GPX…</string>
     <string name="error_reading_gpx">Eroare la citirea datelor GPX</string>
     <string name="vector_data">Hărți vectoriale offline</string>
     <string name="transport_context_menu">Căutare transport la destinație</string>
@@ -833,7 +828,6 @@
     <string name="no_buildings_found">Număr negăsit.</string>
     <string name="route_descr_lat_lon">Lat %1$.3f Long %2$.3f</string>
     <string name="map_widget_max_speed">Limita de viteză</string>
-    <string name="monitoring_control_start">Start</string>
     <string name="rendering_attr_noAdminboundaries_name">Ascunde limitele administrative</string>
     <string name="rendering_attr_noAdminboundaries_description">Dezactivează afișarea limitelor administrative 5-9</string>
     <string name="index_srtm_ele">Curbe de nivel</string>
@@ -1032,7 +1026,6 @@
     <string name="save_global_track_interval_descr">Alege intervalul de logare pentru înregistrarea generală a traseelor (activat prin intermediul widget-ului de înregistrare GPX).</string>
     <string name="save_global_track_interval">Interval general de logare</string>
     <string name="enable_sleep_mode">Activați modul de fundal GPS</string>
-    <string name="save_track_to_gpx_globally">Salveaza track-ul intr-un fișier GPX</string>
     <string name="save_track_to_gpx_globally_descr">Salvarea pozitiei generale într-un fișier GPX poate fi activată prin intermediul widget-ului de inregistrare GPX de pe fereastra hărții.</string>
     <string name="save_track_interval_globally">Interval de salvare</string>
     <string name="rendering_attr_publicTransportMode_name">Autobuz, troleibuz, rute de transfer</string>
@@ -1736,7 +1729,6 @@
     <string name="plan_route">Planul rutei</string>
     <string name="coordinate_input">Introduceți coordonatele</string>
     <string name="marker_save_as_track_descr">Exportați marcajele dvs. în următorul fișier GPX:</string>
-    <string name="marker_save_as_track">Salvați ca fișier GPX</string>
     <string name="group_will_be_removed_after_restart">Grupul va dispărea data viitoare când porniți aplicația.</string>
     <string name="show_guide_line">Afișați liniile direcționale</string>
     <string name="show_arrows_on_the_map">Arată săgețile pe hartă</string>
@@ -1993,7 +1985,6 @@
     <string name="rendering_value_darkyellow_name">Galben închis</string>
     <string name="rendering_value_translucent_pink_name">Roz translucent</string>
     <string name="lang_es_us">Spaniolă (America)</string>
-    <string name="shared_string_gpx_files">Fișiere GPX</string>
     <string name="rename_failed">Redenumirea a eșuat.</string>
     <string name="days_behind">zile în urmă</string>
     <string name="back_to_map">Înapoi la hartă</string>
@@ -2289,8 +2280,6 @@
     <string name="planning_trip_item">Planificarea unei călătorii</string>
     <string name="search_on_the_map_item">Căutarea pe hartă</string>
     <string name="configure_screen_quick_action">Acțiune rapidă</string>
-    <string name="empty_state_my_tracks">Adăugați fișiere GPX</string>
-    <string name="empty_state_my_tracks_desc">Importați fișiere GPX sau înregistrați trasee.</string>
     <string name="empty_state_favourites">Adăugați favorite</string>
     <string name="empty_state_favourites_desc">Importați Favorite sau adăugați prin marcarea punctelor pe hartă.</string>
     <string name="poi_cannot_be_found">Nodul sau calea nu pot fi găsite.</string>

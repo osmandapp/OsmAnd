@@ -142,7 +142,6 @@
     <string name="animate_route">Zapnout animaci</string>
     <string name="file_can_not_be_renamed">Nelze přejmenovat soubor.</string>
     <string name="file_with_name_already_exists">Soubor tohoto jména již existuje.</string>
-    <string name="shared_string_gpx_route">GPX trasa</string>
     <string name="poi_query_by_name_matches_categories">Vašemu dotazu odpovídá několik kategorií POI:</string>
     <string name="data_to_search_poi_not_available">Lokální data pro vyhledávání POI není dostupný.</string>
     <string name="poi_filter_by_name">Hledat podle jména</string>
@@ -160,7 +159,6 @@
     <string name="search_position_map_view">Současný střed mapy</string>
     <string name="select_search_position">Počáteční bod:</string>
     <string name="context_menu_item_search">Hledat v okolí</string>
-    <string name="shared_string_save_as_gpx">Uložit jako nový soubor GPX</string>
     <string name="route_successfully_saved_at">Trasa uložena jako „%1$s“.</string>
     <string name="filename_input">Jméno souboru:</string>
     <string name="file_with_name_already_exist">Soubor s tímto jménem už existuje.</string>
@@ -312,7 +310,6 @@
     <string name="context_menu_item_share_location">Sdílet polohu</string>
     <string name="add_waypoint_dialog_added">GPX bod na trase \'\'{0}\'\' byl přidán</string>
     <string name="add_waypoint_dialog_title">Přidat bod na zaznamenávanou GPX trasu</string>
-    <string name="context_menu_item_add_waypoint">Přidat bod na GPX trasu</string>
     <string name="osmand_routing_experimental">Off-line navigace je experimentální a funguje jen pro větší vzdálenosti než 20 km. Navigace je dočasně přepnuta na on-line CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
     <string name="application_dir">Adresář pro data</string>
@@ -362,7 +359,6 @@
     <string name="voice">Nahrávka hlasu</string>
     <string name="no_vector_map_loaded">Vektorové mapy nebyly načteny</string>
     <string name="gpx_files_not_found">Žádné GPX soubory nebyly nalezeny v adresáři tracks</string>
-    <string name="layer_gpx_layer">GPX soubory…</string>
     <string name="error_reading_gpx">Nelze načíst GPX data</string>
     <string name="vector_data">Vektorové off-line mapy</string>
     <string name="transport_context_menu">Hledat dopravu ze zastávky</string>
@@ -549,7 +545,6 @@
     <string name="save_track_interval_descr">Vyberte interval pro ukládání trasy během navigace.</string>
     <string name="save_track_interval">Interval ukládání trasy během navigace</string>
     <string name="save_track_to_gpx_descrp">Během navigace budou GPX trasy automaticky ukládány do adresáře s trasami.</string>
-    <string name="save_track_to_gpx">Automaticky zaznamenat trasu během navigace</string>
     <string name="update_tile">Aktualizovat mapu</string>
     <string name="reload_tile">Načíst znovu dlaždici</string>
     <string name="mark_point">Cíl</string>
@@ -749,7 +744,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Obnovit výchozí hodnoty</string>
     <string name="map_widget_parking">Parkování</string>
-    <string name="map_widget_monitoring">Záznam trasy</string>
     <string name="map_widget_speed">Aktuální rychlost</string>
     <string name="map_widget_distance">Cíl</string>
     <string name="map_widget_altitude">Nadmořská výška</string>
@@ -1297,7 +1291,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="distance">Vzdálenost</string>
     <string name="index_tours">Cesty</string>
     <string name="shared_string_all">Všechny</string>
-    <string name="save_track_to_gpx_globally">"Ukládat trasu do GPX  souboru"</string>
     <string name="shared_string_waypoints">Body na trase</string>
     <string name="way_alarms">Dopravní varování</string>
     <string name="speak_favorites">Blízké Oblíbené body</string>
@@ -1617,7 +1610,6 @@ Délka %2$s</string>
     <string name="number_of_rows_in_dash">Počet řádků v bloku %1$s</string>
     <string name="saved_at_time">Uloženo na: %1$s</string>
     <string name="poi_deleted_localy">POI bude smazán, jakmile své změny odešlete</string>
-    <string name="show_gpx">Zobrazit GPX data</string>
     <string name="lang_bn">Bengálština</string>
     <string name="lang_tl">Tagalština</string>
     <string name="lang_sh">Srbochorvatština</string>
@@ -2099,7 +2091,6 @@ Délka %2$s</string>
     <string name="quick_action_navigation_voice">Hlas zapnout/vypnout</string>
     <string name="quick_action_navigation_voice_off">Zrušit ztlumení hlasu</string>
     <string name="quick_action_navigation_voice_on">Ztlumit hlas</string>
-    <string name="quick_action_add_gpx">Přidat GPX mezicíl</string>
     <string name="quick_action_add_parking">Přidat parkovací místo</string>
     <string name="quick_action_new_action">Přidat akci</string>
     <string name="quick_action_edit_action">Upravit akci</string>
@@ -2354,14 +2345,11 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="choose_navigation_type">Vyberte profil navigace</string>
     <string name="add_route_points">Přidat body trasy</string>
     <string name="add_line">Přidat čáru</string>
-    <string name="empty_state_my_tracks">Přidejte soubory GPX</string>
-    <string name="empty_state_my_tracks_desc">Přidejte soubory GPX obsahující trasy nebo vytvořte nové zaznamenáním pohybu.</string>
     <string name="empty_state_favourites">Přidejte Oblíbené</string>
     <string name="empty_state_favourites_desc">Importujte Oblíbené nebo je přidejte označením bodů na mapě.</string>
     <string name="import_track">Import souboru GPX</string>
     <string name="import_track_desc">Soubor %1$s neobsahuje body GPX trasy, chcete jej přesto importovat jako trasu?</string>
     <string name="move_point">Přesunout bod</string>
-    <string name="add_segment_to_the_track">Přidat do GPX souboru</string>
     <string name="move_all_to_history">Přesunout vše do historie</string>
     <string name="show_direction">Indikace vzdálenosti</string>
     <string name="sort_by">Seřadit podle</string>
@@ -2390,7 +2378,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_sort">Seřadit</string>
     <string name="coordinate_input">Zadání souřadnic</string>
     <string name="marker_save_as_track_descr">Vyexportovat vaše značky do tohoto GPX souboru:</string>
-    <string name="marker_save_as_track">Uložit jako soubor GPX</string>
     <string name="move_to_history">Přesunout do historie</string>
     <string name="group_will_be_removed_after_restart">Skupina bude odstraněna po příštím restartu aplikace.</string>
     <string name="show_guide_line">Zobrazit vodicí čáry</string>
@@ -2780,7 +2767,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="travel_card_update_descr">Jsou dostupná nová data Wikivoyage, aktualizujte je na nejnovější verzi.</string>
     <string name="wikivoyage_travel_guide">Turistický průvodce Wikivoyage</string>
     <string name="wikivoyage_travel_guide_descr">Průvodce Wikivoyage Vám ukáže nejzajímavější místa planety, přímo v aplikaci OsmAnd a bez nutnosti připojení k internetu.</string>
-    <string name="shared_string_gpx_files">Soubory GPX</string>
     <string name="access_intermediate_arrival_time">Čas příjezdu do mezicíle</string>
     <string name="map_widget_intermediate_time">Do průjezdního bodu</string>
     <string name="test_voice_desrc">Klepněte na tlačítko pro vyslechnutí odpovídajícího hlasového pokynu, aby jste zjistili chybné nebo chybějící pokyny.</string>

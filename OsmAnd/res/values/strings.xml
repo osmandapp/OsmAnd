@@ -11,6 +11,21 @@
 	Thx - Hardy
 
 -->
+
+    <string name="marker_save_as_track">Save as track file</string>
+    <string name="map_widget_monitoring">Trip recoridng</string>
+    <string name="quick_action_add_gpx">Add track waypoint</string>
+    <string name="context_menu_item_add_waypoint">Add track waypoint</string>
+    <string name="empty_state_my_tracks_desc">Import or record track files</string>
+    <string name="empty_state_my_tracks">Add track files</string>
+    <string name="shared_string_gpx_route">Track route</string>
+    <string name="save_track_to_gpx_globally">Log track to GPX file</string>
+    <string name="monitoring_control_start">GPX</string>
+    <string name="show_gpx">Tracks</string>
+    <string name="layer_gpx_layer">Tracks</string>
+    <string name="shared_string_gpx_files">Tracks</string>
+    <string name="add_segment_to_the_track">Add to a track file</string>
+    <string name="shared_string_save_as_gpx">Save as new track file</string>
     <string name="in_case_of_reverse_direction">In case of reverse direction</string>
     <string name="plan_route_exit_dialog_descr">Are you sure you want to close Plan route without saving? You will lose all changes.</string>
     <string name="street_level_imagery">Street-level imagery</string>
@@ -1159,7 +1174,6 @@
     <string name="shared_string_sort">Sort</string>
     <string name="coordinate_input">Coordinate input</string>
     <string name="marker_save_as_track_descr">Export your markers to the following GPX file:</string>
-    <string name="marker_save_as_track">Save as GPX file</string>
     <string name="move_to_history">Move to history</string>
     <string name="group_will_be_removed_after_restart">The group will be gone the next time you start the app.</string>
     <string name="show_guide_line">Show directional lines</string>
@@ -1975,7 +1989,6 @@
     <string name="shared_string_clear">Clear</string>
     <string name="shared_string_clear_all">Clear all</string>
     <string name="shared_string_save">Save</string>
-    <string name="shared_string_save_as_gpx">Save as new GPX file</string>
     <string name="shared_string_rename">Rename</string>
     <string name="shared_string_delete">Delete</string>
     <string name="shared_string_delete_all">Delete all</string>
@@ -2012,7 +2025,6 @@
     <string name="shared_string_my_places">My Places</string>
     <string name="shared_string_my_favorites">Favorites</string>
     <string name="shared_string_tracks">Tracks</string>
-    <string name="shared_string_gpx_files">GPX files</string>
     <string name="shared_string_currently_recording_track">Currently recording track</string>
     <string name="shared_string_audio">Audio</string>
     <string name="shared_string_video">Video</string>
@@ -2190,7 +2202,6 @@
     <string name="save_global_track_interval">General logging interval</string>
     <string name="background_service_int">GPS Wake-up interval</string>
     <string name="enable_sleep_mode">Enable GPS background mode</string>
-    <string name="save_track_to_gpx_globally">Log track to GPX file</string>
     <string name="save_track_to_gpx_globally_headline">On demand track logging</string>
     <string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX logging widget on the map.</string>
     <string name="save_current_track_descr">Save current track as GPX file now.</string>
@@ -2609,7 +2620,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Boundaries</string>
     <string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5–9).</string>
     <string name="map_widget_max_speed">Speed limit</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">No buildings found.</string>
     <string name="incremental_search_city">Search city incrementally</string>
     <string name="search_villages_and_postcodes">Search for more villages/postcodes</string>
@@ -2888,7 +2898,6 @@
     <string name="map_widget_compass">Compass</string>
     <string name="map_widget_reset">Reset to default</string>
     <string name="map_widget_parking">Parking</string>
-    <string name="map_widget_monitoring">GPX logging</string>
     <string name="map_widget_speed">Speed</string>
     <string name="map_widget_distance">Destination</string>
     <string name="map_widget_altitude">Altitude</string>
@@ -3137,7 +3146,6 @@
     <string name="animate_route">Start simulation</string>
     <string name="file_can_not_be_renamed">Could not rename file.</string>
     <string name="file_with_name_already_exists">A file with that name already exists.</string>
-    <string name="shared_string_gpx_route">GPX route</string>
     <string name="poi_query_by_name_matches_categories">Found several related POI categories.</string>
     <string name="data_to_search_poi_not_available">Download offline data to search for POIs.</string>
     <string name="poi_filter_by_name">Search by name</string>
@@ -3256,7 +3264,6 @@
     <string name="context_menu_item_share_location">Share location</string>
     <string name="add_waypoint_dialog_added">GPX waypoint \'\'{0}\'\' added</string>
     <string name="add_waypoint_dialog_title">Add waypoint to recorded GPX track</string>
-    <string name="context_menu_item_add_waypoint">Add GPX waypoint</string>
     <string name="amenity_type_administrative">Administrative</string>
     <string name="amenity_type_barrier">Barrier</string>
     <string name="amenity_type_education">Education</string>
@@ -3342,7 +3349,6 @@
     <string name="no_vector_map_loaded">Vector maps were not loaded</string>
     <!-- string name="map_route_by_gpx">Navigate using GPX</string-->
     <string name="gpx_files_not_found">No GPX files found in the tracks folder</string>
-    <string name="layer_gpx_layer">GPX files…</string>
     <string name="error_reading_gpx">Could not read GPX data.</string>
     <string name="vector_data">Offline vector maps</string>
     <string name="transport_context_menu">Search for transport at stop</string>
@@ -3644,7 +3650,6 @@
     <string name="favourites">Favorites</string>
     <string name="saved_at_time">Now saved at: %1$s</string>
     <string name="poi_deleted_localy">POI will be deleted once you upload your changes</string>
-    <string name="show_gpx">Show GPX data</string>
     <string name="count_of_lines">Count of lines</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="unsaved_changes_will_be_lost">Any unsaved changes will be lost. Continue?</string>
@@ -3726,7 +3731,6 @@
     <string name="quick_action_navigation_voice">Voice on/off</string>
     <string name="quick_action_navigation_voice_off">Unmute Voice</string>
     <string name="quick_action_navigation_voice_on">Mute Voice</string>
-    <string name="quick_action_add_gpx">Add GPX waypoint</string>
     <string name="quick_action_add_parking">Add parking place</string>
     <string name="quick_action_new_action">Add action</string>
     <string name="quick_action_edit_action">Edit action</string>
@@ -3801,14 +3805,11 @@
     <string name="save_route_point">Save route point</string>
     <string name="waypoint_one">Waypoint 1</string>
     <string name="route_point_one">Route Point 1</string>
-    <string name="empty_state_my_tracks">Add GPX files</string>
-    <string name="empty_state_my_tracks_desc">Import GPX files or record tracks.</string>
     <string name="empty_state_favourites">Add Favorites</string>
     <string name="empty_state_favourites_desc">Import Favorites or add them by marking points on the map.</string>
     <string name="import_track">Import GPX file</string>
     <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
     <string name="move_point">Move Point</string>
-    <string name="add_segment_to_the_track">Add to a GPX file</string>
     <string name="osm_recipients_label">OSM recipients</string>
     <string name="total_donations">Total donations</string>
     <string name="day_off_label">off</string>
