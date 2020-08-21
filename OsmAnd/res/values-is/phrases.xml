@@ -873,7 +873,7 @@
     <string name="poi_pump_no">Engin dæla</string>
     <string name="poi_pump_yes">Já</string>
     <string name="poi_water_characteristic_mineral">Steinefnaríkt</string>
-    <string name="poi_water_characteristic_mud">Eiginleikar vatns: leðja</string>
+    <string name="poi_water_characteristic_mud">Leðja</string>
     <string name="poi_water_characteristic_sulfuric">Brennisteinsmengað</string>
     <string name="poi_information_board">Tafla</string>
     <string name="poi_information_route_marker">Leitarmerki</string>
@@ -1168,7 +1168,7 @@
     <string name="poi_fuel_91ul">Eldsneyti 91UL</string>
     <string name="poi_fuel_100ll">Eldsneyti 100LL</string>
     <string name="poi_fuel_jeta1">Eldsneyti Jet A-1</string>
-    <string name="poi_fuel_adblue">Eldsneyti AdBlue</string>
+    <string name="poi_fuel_adblue">Vökvi fyrir díselútblástur</string>
     <string name="poi_fuel_wood">Eldsneyti: viður</string>
     <string name="poi_fuel_charcoal">Eldsneyti: viðarkol</string>
     <string name="poi_fuel_coal">Eldsneyti:; kol</string>
@@ -2057,7 +2057,7 @@
     <string name="poi_bowls">Keiluspil</string>
     <string name="poi_canadian_football">Kanadískur fótbolti</string>
     <string name="poi_ice_stock">Bæversk krulla</string>
-    <string name="poi_korfbal">Korfbal</string>
+    <string name="poi_korfbal">Korfbolti</string>
     <string name="poi_sport_multi">Fjöl-íþrótta</string>
     <string name="poi_paddle_tennis">Spaðatennis (paddle)</string>
     <string name="poi_pelota">Pelota</string>
@@ -2252,7 +2252,7 @@
     <string name="poi_vending_animal_food">Dýrafóður</string>
     <string name="poi_vending_public_transport_plans">Kort yfir almenningssamgöngur</string>
     <string name="poi_vending_drinks_sweets">Drykkir og sælgæti</string>
-    <string name="poi_memorial_cross">Krosslaga</string>
+    <string name="poi_memorial_cross">Krosslögun</string>
     <string name="poi_branch">Útibú</string>
     <string name="poi_memorial_stele">Staur</string>
     <string name="poi_memorial_koshinto">Koshinto</string>
@@ -3814,4 +3814,7 @@
     <string name="poi_traffic_signals_vibration_no">Titringur: nei</string>
     <string name="poi_traffic_signals_arrow">Ör</string>
     <string name="poi_traffic_signals_vibration">Titringur</string>
+    <string name="poi_give_box">Gjafakassi</string>
+    <string name="poi_city_block">Götureitur</string>
+    <string name="poi_borough">Kaupstaður</string>
 </resources>
