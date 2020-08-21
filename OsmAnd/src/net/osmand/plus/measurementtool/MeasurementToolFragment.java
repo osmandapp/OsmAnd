@@ -1033,13 +1033,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	private void hideSnapToRoadIcon() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
-		}
-	}
-
 	private void displayRoutePoints() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();
@@ -1762,10 +1755,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				hidePointsList();
 			}
 			resetAppMode();
-			if (editingCtx.isInSnapToRoadMode()) {
-				resetSnapToRoadMode();
-			}
-			hideSnapToRoadIcon();
 			if (!editingCtx.isNewData() && !planRouteMode) {
 				GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();
 				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
