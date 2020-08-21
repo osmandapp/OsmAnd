@@ -782,6 +782,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		editingCtx.setSelectedPointPosition(-1);
 		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 		updateUndoRedoButton(false, redoBtn);
+		updateUndoRedoButton(true, undoBtn);
 		updateDistancePointsText();
 		saved = false;
 	}

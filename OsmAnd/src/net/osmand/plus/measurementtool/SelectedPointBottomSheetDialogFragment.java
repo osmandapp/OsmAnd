@@ -157,46 +157,6 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		items.add(new OptionsDividerItem(getContext()));
 
-		BaseBottomSheetItem changeRouteTypeBefore = new BottomSheetItemWithDescription.Builder()
-				.setDescription(getDescription(true))
-				.setIcon(getRouteTypeIcon(true))
-				.setTitle(getString(R.string.plan_route_change_route_type_before))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment instanceof SelectedPointFragmentListener) {
-							((SelectedPointFragmentListener) targetFragment).onChangeRouteTypeBefore();
-						}
-						dismiss();
-					}
-				})
-				.setDisabled(editingCtx.isFirstPointSelected())
-				.create();
-		items.add(changeRouteTypeBefore);
-
-		BaseBottomSheetItem changeRouteTypeAfter = new BottomSheetItemWithDescription.Builder()
-				.setDescription(getDescription(false))
-				.setIcon(getRouteTypeIcon(false))
-				.setTitle(getString(R.string.plan_route_change_route_type_after))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment instanceof SelectedPointFragmentListener) {
-							((SelectedPointFragmentListener) targetFragment).onChangeRouteTypeAfter();
-						}
-						dismiss();
-					}
-				})
-				.setDisabled(editingCtx.isLastPointSelected())
-				.create();
-		items.add(changeRouteTypeAfter);
-
-		items.add(new OptionsDividerItem(getContext()));
-
 		BaseBottomSheetItem deleteItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getIcon(R.drawable.ic_action_delete_dark,
 						nightMode ? R.color.color_osm_edit_delete : R.color.color_osm_edit_delete))
