@@ -716,7 +716,7 @@ public class GeoPointParserUtilTest {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-        /* URLs straight from various services, instead of generated here */
+		/* URLs straight from various services, instead of generated here */
 
 		String urls[] = {
 				"https://openstreetmap.org/go/0LQ127-?m",
