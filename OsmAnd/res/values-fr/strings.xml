@@ -80,7 +80,6 @@
     <string name="animate_route">Démarrer l\'animation</string>
     <string name="file_can_not_be_renamed">Impossible de renommer le fichier.</string>
     <string name="file_with_name_already_exists">Un fichier avec ce nom existe déjà.</string>
-    <string name="shared_string_gpx_route">Itinéraire GPX</string>
     <string name="poi_query_by_name_matches_categories">Plusieurs catégories de points d\'intérêt ont été trouvées.</string>
     <string name="data_to_search_poi_not_available">Téléchargez des données hors-ligne pour rechercher des points d\'intérêt.</string>
     <string name="poi_filter_by_name">Rechercher par nom</string>
@@ -98,7 +97,6 @@
     <string name="search_position_map_view">Centre de la carte</string>
     <string name="select_search_position">Autour de :</string>
     <string name="context_menu_item_search">Rechercher à proximité</string>
-    <string name="shared_string_save_as_gpx">Enregistrer comme nouveau fichier GPX</string>
     <string name="route_successfully_saved_at">Itinéraire enregistré sous « %1$s ».</string>
     <string name="filename_input">Nom du fichier : </string>
     <string name="file_with_name_already_exist">Le même nom existe déjà.</string>
@@ -203,7 +201,6 @@
     <string name="context_menu_item_share_location">Partager ce point</string>
     <string name="add_waypoint_dialog_added">Point GPX \'\'{0}\'\' ajouté</string>
     <string name="add_waypoint_dialog_title">Ajouter une étape à la trace GPX enregistrée</string>
-    <string name="context_menu_item_add_waypoint">Ajouter un point GPX</string>
     <string name="amenity_type_administrative">Territoire</string>
     <string name="amenity_type_barrier">Obstacle</string>
     <string name="amenity_type_education">Éducation</string>
@@ -301,7 +298,6 @@
     <string name="voice">Voix enregistrée</string>
     <string name="no_vector_map_loaded">Aucune carte vectorielle n\'a été chargée</string>
     <string name="gpx_files_not_found">Aucun fichier GPX n\'a été trouvé dans le dossier de traces</string>
-    <string name="layer_gpx_layer">Fichiers GPX…</string>
     <string name="error_reading_gpx">Impossible de lire les données GPX.</string>
     <string name="vector_data">Cartes vectorielles OSM</string>
     <string name="transport_context_menu">Recherche de transport pour cet arrêt</string>
@@ -488,7 +484,6 @@
     <string name="save_track_interval_descr">Indiquez l\'intervalle d\'enregistrement de la trace pendant la navigation</string>
     <string name="save_track_interval">Intervalle d\'enregistrement pendant la navigation</string>
     <string name="save_track_to_gpx_descrp">Une trace GPX est enregistrée automatiquement dans le dossier des traces pendant l\'itinéraire</string>
-    <string name="save_track_to_gpx">Enregistrer automatiquement la trace en cours de navigation</string>
     <string name="update_tile">Mettre à jour la carte</string>
     <string name="reload_tile">Recharger carreau</string>
     <string name="mark_point">Cible</string>
@@ -750,7 +745,6 @@
     <string name="map_widget_compass">Boussole</string>
     <string name="map_widget_reset">Rétablir les paramètres par défaut</string>
     <string name="map_widget_parking">Parking</string>
-    <string name="map_widget_monitoring">Enregistrement GPX</string>
     <string name="map_widget_speed">Vitesse</string>
     <string name="map_widget_distance">Arrivée</string>
     <string name="map_widget_altitude">Altitude</string>
@@ -879,7 +873,6 @@
     <string name="search_villages_and_postcodes">Rechercher plus de villes / codes postaux</string>
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="map_widget_max_speed">Limite de vitesse</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Frontières</string>
     <string name="rendering_attr_noAdminboundaries_description">Masquer les limites administratives régionales (niveaux 5 à 9).</string>
     <string name="index_srtm_ele">Courbes de niveau</string>
@@ -1117,7 +1110,7 @@
     <string name="routing_attr_weight_description">Indiquez le poids du véhicule à respecter sur les routes.</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Définissez l\'arrivée</string>
-    <string name="shared_string_select_on_map">Sélectionner sur la carte</string>
+    <string name="shared_string_select_on_map">Sélectionnez sur la carte</string>
     <string name="shared_string_favorite">Favori</string>
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
@@ -1313,7 +1306,6 @@
     <string name="duration">Durée</string>
     <string name="distance">Distance</string>
     <string name="rendering_attr_publicTransportMode_name">Lignes de bus, trolleybus et navettes</string>
-    <string name="save_track_to_gpx_globally">Enregistrer l\'itinéraire dans un fichier GPX</string>
     <string name="save_track_to_gpx_globally_descr">L\'enregistrement des positions dans un fichier GPX peut être activé ou désactivé depuis le gadget sur la carte.</string>
     <string name="save_track_interval_globally">Intervalle d\'enregistrement</string>
     <string name="confirm_every_run">Toujours demander</string>
@@ -1651,7 +1643,6 @@
     <string name="recent_places">Lieux récents</string>
     <string name="favourites">Favoris</string>
     <string name="show_on_start">Afficher au démarrage</string>
-    <string name="show_gpx">Afficher les données GPX</string>
     <string name="count_of_lines">Nombre de lignes</string>
     <string name="number_of_rows_in_dash">Nombre de lignes %1$s</string>
     <string name="saved_at_time">Enregistré avec succès à : %1$s</string>
@@ -2109,7 +2100,6 @@
     <string name="quick_action_navigation_voice">Voix Active / Inactive</string>
     <string name="quick_action_navigation_voice_off">Activer la voix</string>
     <string name="quick_action_navigation_voice_on">Couper la voix</string>
-    <string name="quick_action_add_gpx">Ajouter un point GPX</string>
     <string name="quick_action_add_parking">Ajouter un emplacement de stationnement</string>
     <string name="quick_action_new_action">Ajouter une action</string>
     <string name="quick_action_edit_action">Modifier l\'action</string>
@@ -2440,14 +2430,11 @@
     <string name="choose_navigation_type">Sélectionnez le type de navigation</string>
     <string name="add_route_points">Ajouter des points à la route</string>
     <string name="add_line">Ajouter une ligne</string>
-    <string name="empty_state_my_tracks">Ajouter des fichiers GPX</string>
-    <string name="empty_state_my_tracks_desc">Importer des fichiers GPX ou enregistrer des traces.</string>
     <string name="empty_state_favourites">Ajouter des favoris</string>
     <string name="empty_state_favourites_desc">Importez des favoris ou créez des favoris sur la carte.</string>
     <string name="import_track">Importer le fichier GPX</string>
     <string name="import_track_desc">Le fichier %1$s ne contient aucune étape, l\'importer comme trace ?</string>
     <string name="move_point">Déplacer le point</string>
-    <string name="add_segment_to_the_track">Ajouter à un fichier GPX</string>
     <string name="keep_showing_on_map">Toujours afficher sur la carte</string>
     <string name="exit_without_saving">Quitter sans enregistrer ?</string>
     <string name="do_not_use_animations">Aucune animation</string>
@@ -2531,7 +2518,6 @@
     <string name="shared_string_sort">Trier</string>
     <string name="coordinate_input">Saisie des coordonnées</string>
     <string name="marker_save_as_track_descr">Exporter vos marques dans le fichier GPX suivant :</string>
-    <string name="marker_save_as_track">Enregistrer comme fichier GPX</string>
     <string name="move_to_history">Déplacer vers l\'historique</string>
     <string name="group_will_be_removed_after_restart">Le groupe sera supprimé au prochain démarrage de l\'application.</string>
     <string name="shared_string_markers">Marques</string>
@@ -2780,7 +2766,6 @@
     <string name="access_intermediate_arrival_time">Heure d\'arrivée à l\'étape</string>
     <string name="map_widget_intermediate_time">Heure d\'arrivée à l\'étape</string>
     <string name="unirs_render_descr">Modification du style par défaut pour augmenter le contraste des voies piétonnes et cyclables. Utilise les couleurs héritées de Mapnik.</string>
-    <string name="shared_string_gpx_files">Fichiers GPX</string>
     <string name="get_osmand_live">Souscrivez à OsmAnd Live et vous pourrez utiliser toutes les fonctionnalités : Mise à jour quotidienne des cartes (avec un nombre illimité de téléchargements), Greffons, Wikipédia, Guides de voyage et bien plus encore ...</string>
     <string name="quick_action_edit_actions">Modifier les actions</string>
     <string name="error_notification_desc">Merci d\'envoyer une capture écran de cette notification à support@osmand.net</string>

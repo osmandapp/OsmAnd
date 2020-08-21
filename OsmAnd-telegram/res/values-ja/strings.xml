@@ -221,8 +221,8 @@
     <string name="yard">ヤード</string>
     <string name="foot">フィート</string>
     <string name="mile">マイル</string>
-    <string name="km">キロメートル</string>
-    <string name="m">メートル</string>
+    <string name="km">km</string>
+    <string name="m">m</string>
     <string name="nm">海里</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>

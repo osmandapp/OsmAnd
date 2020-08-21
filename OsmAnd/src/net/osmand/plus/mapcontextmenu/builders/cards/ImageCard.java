@@ -17,6 +17,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -438,10 +439,15 @@ public abstract class ImageCard extends AbstractCard {
 					pms.put("lang", preferredLang);
 				}
 				if (this.params != null) {
-					String wikidataId = this.params.get("wikidata_id");
+					String wikidataId = this.params.get(Amenity.WIKIDATA);
 					if (wikidataId != null) {
-						this.params.remove("wikidata_id");
-						WikiImageHelper.fillWikiMediaCards(mapActivity, wikidataId, result);
+						this.params.remove(Amenity.WIKIDATA);
+						WikiImageHelper.addWikidataImageCards(mapActivity, wikidataId, result);
+					}
+					String wikimediaContent = this.params.get(Amenity.WIKIMEDIA_COMMONS);
+					if (wikimediaContent != null) {
+						this.params.remove(Amenity.WIKIMEDIA_COMMONS);
+						WikiImageHelper.addWikimediaImageCards(mapActivity, wikimediaContent, result);
 					}
 					pms.putAll(this.params);
 				}

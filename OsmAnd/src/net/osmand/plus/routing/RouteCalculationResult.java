@@ -1,6 +1,7 @@
 package net.osmand.plus.routing;
 
 import android.content.Context;
+
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
@@ -11,10 +12,11 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
+import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
@@ -61,7 +63,7 @@ public class RouteCalculationResult {
 
 	// params
 	protected final ApplicationMode appMode;
-	protected final RouteProvider.RouteService routeService;
+	protected final RouteService routeService;
 	protected final double routeRecalcDistance;
 	protected final double routeVisibleAngle;
 
@@ -128,7 +130,7 @@ public class RouteCalculationResult {
 		this.routeService = params.mode.getRouteService();
 		if(params.ctx != null) {
 			this.routeRecalcDistance = params.ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(params.mode);
-			this.routeVisibleAngle = routeService == RouteProvider.RouteService.STRAIGHT ?
+			this.routeVisibleAngle = routeService == RouteService.STRAIGHT ?
 					params.ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(params.mode) : 0;
 		} else {
 			this.routeRecalcDistance = 0;
@@ -178,7 +180,7 @@ public class RouteCalculationResult {
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.alarmInfo = Collections.unmodifiableList(alarms);
 		this.routeRecalcDistance = ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(mode);
-		this.routeVisibleAngle = routeService == RouteProvider.RouteService.STRAIGHT ?
+		this.routeVisibleAngle = routeService == RouteService.STRAIGHT ?
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
 	}
 
@@ -276,7 +278,7 @@ public class RouteCalculationResult {
 		return routeRecalcDistance;
 	}
 
-	public RouteProvider.RouteService getRouteService() {
+	public RouteService getRouteService() {
 		return routeService;
 	}
 

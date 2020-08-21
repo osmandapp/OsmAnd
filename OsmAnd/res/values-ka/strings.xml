@@ -172,7 +172,6 @@
     <string name="animate_route">ანიმაციის დაწყება</string>
     <string name="file_can_not_be_renamed">ფაილისათვის სახელის გადარქმევა შეუძლებელია.</string>
     <string name="file_with_name_already_exists">ფაილი მოცემული სახელით უკვე არსებობს.</string>
-    <string name="shared_string_gpx_route">GPX გზა</string>
     <string name="poi_query_by_name_matches_categories">ძებნის შედეგები შეიცავს რამოდენიმე POI კატეგორიას :</string>
     <string name="data_to_search_poi_not_available">ადგილობრივი მონაცემები POI-ს ძებნისათვის არ არსებობს.</string>
     <string name="poi_filter_by_name">სახელით ძებნა</string>
@@ -190,7 +189,6 @@
     <string name="search_position_map_view">უკანასკნელად ნანახი რუკის ხედი</string>
     <string name="select_search_position">ძებნა ახლოს :</string>
     <string name="context_menu_item_search">ახლოს ძებნა</string>
-    <string name="shared_string_save_as_gpx">გზის GPX ბილიკად შენახვა</string>
     <string name="route_successfully_saved_at">გზა შეინახა წარმატებით. სახელი \'%1$s\'.</string>
     <string name="filename_input">"ფაილის სახელი: "</string>
     <string name="file_with_name_already_exist">ფაილი მოცემული სახელით უკვე არსებობს.</string>
@@ -292,7 +290,6 @@
     <string name="context_menu_item_share_location">მდებარეობის გაზიარება</string>
     <string name="add_waypoint_dialog_added">გზის წერტილი \'\'{0}\'\' წარმატებით დაემატა</string>
     <string name="add_waypoint_dialog_title">ჩაწერილი GPX ბილიკისათვის სანავიგაციო წერტილის დამატება</string>
-    <string name="context_menu_item_add_waypoint">GPX-სანავიგაციო წერტილის დამატება</string>
     <string name="amenity_type_administrative">ადმინისტრაციული</string>
     <string name="amenity_type_barrier">ბარიერი</string>
     <string name="amenity_type_education">სასწავლო</string>
@@ -386,7 +383,6 @@
     <string name="voice">ხმა</string>
     <string name="no_vector_map_loaded">ვექტორული რუკები ჩატვირთული არ იქნა</string>
     <string name="gpx_files_not_found">GPX ფაილები /tracks დასტაში ნაპოვნი არ იქნა</string>
-    <string name="layer_gpx_layer">GPX მიყოლა…</string>
     <string name="error_reading_gpx">GPX მონაცემების კითხვის შეცდომა</string>
     <string name="vector_data">გათიშული ვექტორული რუკები</string>
     <string name="transport_context_menu">გაჩერებაზე ტრანსპორტის ძებნა</string>
@@ -736,7 +732,6 @@
     <string name="map_widget_compass">კომპასი</string>
     <string name="map_widget_reset">ნაგულისხმევზე დაბრუნება</string>
     <string name="map_widget_parking">პარკინგი</string>
-    <string name="map_widget_monitoring">დევნა</string>
     <string name="map_widget_speed">სიჩქარე</string>
     <string name="map_widget_distance">მიზანი</string>
     <string name="map_widget_altitude">სიმაღლე</string>
@@ -877,7 +872,6 @@
     <string name="shared_string_control_stop">შეწყვეტა</string>
     <string name="shared_string_control_start">დაწყება</string>
     <string name="map_widget_max_speed">სიჩქარის ლიმიტი</string>
-    <string name="monitoring_control_start">GPX დევნა</string>
     <string name="route_descr_lat_lon">გან %1$.3f, გრძ %2$.3f</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd წარმოადგენს აპლიკაციას ღია კოდით გათიშული და მიმდინარე რუკებით ნავიგაციისათვის</string>
     <string name="select_navigation_mode">აირჩიეთ ტრანსპორტის ტიპი</string>

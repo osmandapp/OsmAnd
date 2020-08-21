@@ -143,7 +143,6 @@
     <string name="animate_route">Szimuláció indítása</string>
     <string name="file_can_not_be_renamed">Nem sikerült átnevezni a fájlt.</string>
     <string name="file_with_name_already_exists">Már létezik ilyen nevű fájl.</string>
-    <string name="shared_string_gpx_route">GPX útvonal</string>
     <string name="poi_query_by_name_matches_categories">Számos kapcsolódó érdekespont-kategóriát sikerült találni.</string>
     <string name="data_to_search_poi_not_available">Offline adatok letöltése érdekes pontok kereséséhez.</string>
     <string name="poi_filter_by_name">Név szerinti keresés</string>
@@ -161,7 +160,6 @@
     <string name="search_position_map_view">Jelenlegi térképközéppont</string>
     <string name="select_search_position">Eredet:</string>
     <string name="context_menu_item_search">Keresés a közelben</string>
-    <string name="shared_string_save_as_gpx">Mentés új GPX fájlként</string>
     <string name="route_successfully_saved_at">Az útvonal mentve mint \'%1$s\'.</string>
     <string name="filename_input">Fájlnév:</string>
     <string name="file_with_name_already_exist">Már létezik fájl ilyen névvel.</string>
@@ -269,7 +267,6 @@
     <string name="context_menu_item_share_location">Hely megosztása</string>
     <string name="add_waypoint_dialog_added">\'\'{0}\'\' GPX-útpont hozzáadva</string>
     <string name="add_waypoint_dialog_title">Útpont hozzáadása a rögzített GPX-útvonalhoz</string>
-    <string name="context_menu_item_add_waypoint">GPX-útpont hozzáadása</string>
     <string name="amenity_type_administrative">Közigazgatás</string>
     <string name="amenity_type_barrier">Akadály</string>
     <string name="amenity_type_education">Oktatás</string>
@@ -366,7 +363,6 @@
     <string name="voice">Felvett hang</string>
     <string name="no_vector_map_loaded">Nincs betöltött vektoros térkép</string>
     <string name="gpx_files_not_found">Nem található GPX fálj a tracks könyvtárban</string>
-    <string name="layer_gpx_layer">GPX fájlok…</string>
     <string name="error_reading_gpx">Nem sikerült beolvasni a GPX-adatokat.</string>
     <string name="vector_data">Vektoros OSM térkép</string>
     <string name="transport_context_menu">Közlekedés keresése megállónál</string>
@@ -553,8 +549,6 @@
     <string name="save_track_interval_descr">Adja meg a naplózási időközt a navigáció alatti útvonalrögzítéshez</string>
     <string name="save_track_interval">Rögzítési sűrűség navigáció közben</string>
     <string name="save_track_to_gpx_descrp">Navigáció közben a GPX útvonal automatikusan mentésre kerül az OsmAnd „tracks” könyvtárába.</string>
-    <string name="save_track_to_gpx">Nyomvonal automatikus felvétele navigáció közben</string>
-    <string name="update_tile">Térkép frissítése</string>
     <string name="reload_tile">Térképcsempe újratöltése</string>
     <string name="mark_point">Célpont</string>
     <string name="shared_string_add_to_favorites">Hozzáadás a „Kedvencek”-hez</string>
@@ -750,7 +744,6 @@
     <string name="map_widget_compass">Iránytű</string>
     <string name="map_widget_reset">Alapértékek visszaállítása</string>
     <string name="map_widget_parking">Parkolás</string>
-    <string name="map_widget_monitoring">GPX naplózás</string>
     <string name="map_widget_speed">Sebesség</string>
     <string name="map_widget_distance">Célpont</string>
     <string name="map_widget_altitude">Magasság</string>
@@ -881,7 +874,6 @@
     <string name="search_villages_and_postcodes">További falvak/irányítószámok keresése</string>
     <string name="route_descr_lat_lon">%1$.3f szélesség, %2$.3f hosszúság</string>
     <string name="map_widget_max_speed">Sebességkorlátozás</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Határvonalak</string>
     <string name="rendering_attr_noAdminboundaries_description">Regionális határok megjelenítésének kikapcsolása (5–9 közigazgatási szint).</string>
     <string name="download_srtm_maps">Szintvonalak</string>
@@ -1315,7 +1307,6 @@
     <string name="confirm_every_run">Mindig kérdezzen rá</string>
     <string name="save_global_track_interval_descr">Adja meg az általános nyomvonalrögzítéshez használandó naplózási időközt (a térképen lévő GPX-naplózó widgettel engedélyezve).</string>
     <string name="save_global_track_interval">Általános naplózási időköz</string>
-    <string name="save_track_to_gpx_globally">Nyomvonal naplózása GPX fájlba</string>
     <string name="save_track_to_gpx_globally_descr">A GPX-fájlba történő általános pozíciónaplózás be- és kikapcsolható a térképen lévő GPX-naplózó widgettel.</string>
     <string name="save_track_interval_globally">Rögzítési időköz</string>
     <string name="rendering_attr_publicTransportMode_name">Busz-, trolibusz-, ingajárat-útvonalak</string>
@@ -1687,7 +1678,6 @@
     <string name="favourites_context_menu_add">Kedvenc hozzáadása</string>
     <string name="show_on_start">Megjelenítés indításkor</string>
     <string name="poi_deleted_localy">A POI törölve lesz, amint feltöltöd a változtatásokat</string>
-    <string name="show_gpx">GPX adat megjelenítése</string>
     <string name="count_of_lines">Sorok száma</string>
     <string name="are_you_sure">Biztos benne\?</string>
     <string name="unsaved_changes_will_be_lost">A nem mentett változtatások el fognak veszni. Folytatod?</string>
@@ -2112,7 +2102,6 @@
     <string name="quick_action_navigation_voice">Hang be/ki</string>
     <string name="quick_action_navigation_voice_off">Hang visszakapcsolása</string>
     <string name="quick_action_navigation_voice_on">Hang némítása</string>
-    <string name="quick_action_add_gpx">GPX-útpont hozzáadása</string>
     <string name="quick_action_add_parking">Parkolóhely hozzáadása</string>
     <string name="quick_action_new_action">Művelet hozzáadása</string>
     <string name="quick_action_edit_action">Művelet szerkesztése</string>
@@ -2376,7 +2365,6 @@
     <string name="shared_string_sort">Sorba rendezés</string>
     <string name="coordinate_input">Koordináta bevitele</string>
     <string name="marker_save_as_track_descr">Jelölők exportálása az alábbi GPX fájlba:</string>
-    <string name="marker_save_as_track">Mentés GPX fájlként</string>
     <string name="move_to_history">Áthelyezés az előzményekbe</string>
     <string name="group_will_be_removed_after_restart">A csoport el fog tűnni, amikor legközelebb elindítod az alkalmazást.</string>
     <string name="show_guide_line">Irányjelző vonalak megjelenítése</string>
@@ -2444,14 +2432,11 @@
     <string name="save_route_point">Útvonalpont mentése</string>
     <string name="waypoint_one">Útpont 1</string>
     <string name="route_point_one">Útvonalpont 1</string>
-    <string name="empty_state_my_tracks">GPX-fájlok hozzáadása</string>
-    <string name="empty_state_my_tracks_desc">GPX fájlok importálása vagy nyomvonalak rögzítése.</string>
     <string name="empty_state_favourites">Kedvencek hozzáadása</string>
     <string name="empty_state_favourites_desc">Kedvencek importálása vagy hozzáadása a térképen pontok megjelölésével.</string>
     <string name="import_track">GPX fájl importálása</string>
     <string name="import_track_desc">%1$s fájl nem tartalmaz útpontot. Importálod nyomvonalként?</string>
     <string name="move_point">Pont mozgatása</string>
-    <string name="add_segment_to_the_track">Hozzáadás egy GPX-fájlhoz</string>
     <string name="import_as_gpx">Importálás GPX-fájlként</string>
     <string name="import_as_favorites">Importálás Kedvencként</string>
     <string name="import_file">Fájl importálása</string>
@@ -2678,7 +2663,6 @@
     <string name="mapnik_render_descr">Régi alapértelmezett „Mapnik”-stílus. A színek hasonlóak a Mapnikhez.</string>
     <string name="touring_view_render_descr">Turisztikai stílus erős kontraszttal és a legtöbb részlettel. Tartalmazza az OsmAnd alapértelmezett stílus össze beállítását, miközben megjeleníti a lehető legtöbb részletet, különösen utakat, ösvényeket és más utazási útvonalakat. A „Turistaatlasz-szerű” stílus világos különbséget tesz az úttípusok között. Alkalmas nappali, éjszakai és szabad téri használatra is.</string>
     <string name="default_render_descr">Általános felhasználású stílus. A sűrű városok világosan jelennek meg. Jellemzői a szintvonalak, az útvonalak, a felszínminőség, a használati korlátozások, útszámozások, vadvízisport-létesítmények. Az ösvények az SAC-skála szerint jelennek meg.</string>
-    <string name="shared_string_gpx_files">GPX fájlok</string>
     <string name="quick_action_edit_actions">Műveletek szerkesztése</string>
     <string name="shared_string_dont">Nem</string>
     <string name="shared_string_do">Igen</string>

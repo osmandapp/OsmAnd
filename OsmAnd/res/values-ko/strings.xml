@@ -107,7 +107,6 @@
     <string name="animate_route">모의주행 시작</string>
     <string name="file_can_not_be_renamed">파일 이름을 바꿀 수 없습니다.</string>
     <string name="file_with_name_already_exists">같은 이름을 가진 파일이 이미 존재합니다.</string>
-    <string name="shared_string_gpx_route">GPX 경로</string>
     <string name="poi_query_by_name_matches_categories">이름으로 검색한 POI에 해당하는 몇몇 카테고리를 찾았습니다 :</string>
     <string name="data_to_search_poi_not_available">검색한 POI에 대한 로컬 데이터가 존재하지 않습니다.</string>
     <string name="poi_filter_by_name">이름으로 검색</string>
@@ -223,7 +222,6 @@
     <string name="context_menu_item_share_location">위치 공유</string>
     <string name="add_waypoint_dialog_added">GPX 경유지 \'\'{0}\'\' 가 성공적으로 추가되었습니다</string>
     <string name="add_waypoint_dialog_title">기록된 GPX 경로에 경유지 추가</string>
-    <string name="context_menu_item_add_waypoint">GPX 경유지 추가</string>
     <string name="amenity_type_administrative">관리</string>
     <string name="amenity_type_barrier">배리어(Barrier)</string>
     <string name="amenity_type_education">교육기관</string>
@@ -315,7 +313,6 @@
     <string name="voice">녹음된 음성</string>
     <string name="no_vector_map_loaded">벡터 맵을 적재하지 않았습니다</string>
     <string name="gpx_files_not_found">GPX 파일을 /osmand/tracks 폴더에서 찾을 수 없습니다</string>
-    <string name="layer_gpx_layer">GPX 경로…</string>
     <string name="error_reading_gpx">GPX 데이터를 읽는 도중 오류</string>
     <string name="vector_data">오프라인 벡터 맵</string>
     <string name="transport_context_menu">대중교통 정류소 검색</string>
@@ -959,7 +956,6 @@
     <string name="map_widget_compass">나침반</string>
     <string name="map_widget_reset">기본값으로 재설정</string>
     <string name="map_widget_parking">주차</string>
-    <string name="map_widget_monitoring">GPX 로깅</string>
     <string name="map_widget_speed">속도</string>
     <string name="map_widget_distance">도착지</string>
     <string name="map_widget_altitude">고도</string>
@@ -1089,7 +1085,6 @@
     <string name="maps_define_edit">정의/편집…</string>
     <string name="max_speed_none">무제한</string>
     <string name="index_name_openmaps">EU 지도 열기</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="osb_author_dialog_password">OSM 패스워드(선택)</string>
     <string name="email">이메일</string>
     <string name="av_camera_focus">카메라 포커스 유형</string>
@@ -1243,7 +1238,6 @@
     <string name="speak_favorites">주변의 즐겨찾기</string>
     <string name="speak_poi">주변의 POI</string>
     <string name="rendering_attr_publicTransportMode_name">버스, 무궤도전차, 셔틀 노선</string>
-    <string name="save_track_to_gpx_globally">현재 트랙을 GPX파일로 저장</string>
     <string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 로깅 위젯을 사용하여 켜거나 끌 수 있습니다</string>
     <string name="save_track_interval_globally">로깅 간격</string>
     <string name="confirm_every_run">항상 요청</string>
@@ -1409,7 +1403,6 @@
     <string name="shared_string_deselect_all">모두 선택 취소</string>
     <string name="shared_string_clear">지우기</string>
     <string name="shared_string_save">저장</string>
-    <string name="shared_string_save_as_gpx">현재 트랙을 GPX 파일로 저장</string>
     <string name="shared_string_rename">이름 바꾸기</string>
     <string name="shared_string_delete">삭제</string>
     <string name="shared_string_delete_all">모두 삭제</string>
@@ -1628,7 +1621,6 @@
     <string name="favourites">즐겨찾기</string>
     <string name="saved_at_time">%1$s에 성공적으로 저장 되었습니다</string>
     <string name="poi_deleted_localy">변경 내용을 업로드 하는 동안 POI는 삭제 됩니다</string>
-    <string name="show_gpx">GPX 보여주기</string>
     <string name="count_of_lines">라인의 수</string>
     <string name="favorite_category_dublicate_message">지정한 범주 이름이 이미 존재합니다. 다른 이름을 지정해 주세요.</string>
     <string name="favorite_category_name">범주 이름</string>

@@ -11,8 +11,10 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
@@ -23,6 +25,7 @@ import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragmentNew;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.util.OpeningHoursParser;
+import net.osmand.view.GravityDrawable;
 
 import java.util.List;
 
@@ -150,9 +153,30 @@ public class FavouritePointMenuController extends MenuController {
 		}
 	}
 
+	@NonNull
+	@Override
+	public String getSubtypeStr() {
+		return fav.getAddress();
+	}
+
 	@Override
 	public Drawable getSecondLineTypeIcon() {
-		return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color_default_light : R.color.ctx_menu_bottom_view_icon_dark);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			FavouritesDbHelper helper = app.getFavorites();
+			String group = fav.getCategory();
+			if (helper.getGroup(group) != null) {
+				Drawable line2icon = helper.getColoredIconForGroup(group);
+				GravityDrawable gravityIcon = new GravityDrawable(line2icon);
+				gravityIcon.setBoundsFrom(line2icon);
+				return gravityIcon;
+			} else {
+				int colorId = isLight() ? R.color.icon_color_default_light : R.color.ctx_menu_bottom_view_icon_dark;
+				return getIcon(R.drawable.ic_action_group_name_16, colorId);
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -193,6 +217,6 @@ public class FavouritePointMenuController extends MenuController {
 			if (originObject instanceof Amenity) {
 				AmenityMenuController.addTypeMenuItem((Amenity) originObject, builder);
 			}
-		} 
+		}
 	}
 }

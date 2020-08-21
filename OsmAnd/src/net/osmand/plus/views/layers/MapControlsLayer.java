@@ -439,15 +439,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void showContextMenuForMyLocation() {
-		OsmAndLocationProvider lp = app.getLocationProvider();
-		Location lastKnownLocation = lp.getLastKnownLocation();
-		Location lastStaleKnownLocation = lp.getLastStaleKnownLocation();
-		Location location = lastKnownLocation != null ? lastKnownLocation : lastStaleKnownLocation;
-		if (location != null) {
-			ContextMenuLayer cml = mapActivity.getMapView().getLayerByClass(ContextMenuLayer.class);
-			if (cml != null) {
-				cml.showContextMenu(location.getLatitude(), location.getLongitude(), true);
-			}
+		ContextMenuLayer cml = mapActivity.getMapView().getLayerByClass(ContextMenuLayer.class);
+		if (cml != null) {
+			cml.showContextMenuForMyLocation();
 		}
 	}
 

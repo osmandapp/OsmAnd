@@ -311,7 +311,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 					AFavorite newFav = params.getFavoriteNew();
 					if (prevFav != null && newFav != null) {
 						return api.updateFavorite(prevFav.getName(), prevFav.getCategory(), prevFav.getLat(), prevFav.getLon(),
-								newFav.getName(), newFav.getCategory(), newFav.getDescription(), newFav.getLat(), newFav.getLon());
+								newFav.getName(), newFav.getCategory(), newFav.getDescription(), newFav.getAddress(), newFav.getLat(), newFav.getLon());
 					}
 				}
 				return false;

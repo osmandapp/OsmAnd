@@ -27,7 +27,7 @@ public class FavoritePointEditor extends PointEditor {
 		return favorite;
 	}
 
-	public void add(LatLon latLon, String title, String originObjectName) {
+	public void add(LatLon latLon, String title, String address, String originObjectName) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -39,6 +39,7 @@ public class FavoritePointEditor extends PointEditor {
 		}
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory);
 		favorite.setDescription("");
+		favorite.setAddress(address.isEmpty() ? title : address);
 		favorite.setOriginObjectName(originObjectName);
 		FavoritePointEditorFragmentNew.showInstance(mapActivity);
 	}
@@ -61,6 +62,7 @@ public class FavoritePointEditor extends PointEditor {
 
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, categoryName);
 		favorite.setDescription("");
+		favorite.setAddress("");
 		favorite.setOriginObjectName(originObjectName);
 
 		FavoritePointEditorFragmentNew.showAutoFillInstance(mapActivity, autoFill);

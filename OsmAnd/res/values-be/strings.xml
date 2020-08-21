@@ -178,7 +178,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Межы</string>
     <string name="rendering_attr_noAdminboundaries_description">Не адлюстроўваць рэгіянальныя межы (адміністатыўныя ўзроўні 5–9).</string>
     <string name="map_widget_max_speed">Абмежаванне хуткасці</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Будынкаў не знойдзена.</string>
     <string name="incremental_search_city">Абярыце горад</string>
     <string name="search_villages_and_postcodes">Пошук па вёсках/паштовых індэксах</string>
@@ -346,7 +345,6 @@
     <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Скінуць да прадвызначаных</string>
     <string name="map_widget_parking">Паркоўка</string>
-    <string name="map_widget_monitoring">Запіс GPX</string>
     <string name="map_widget_speed">Хуткасць</string>
     <string name="map_widget_distance">Пункт прызначэння</string>
     <string name="map_widget_altitude">Вышыня</string>
@@ -592,7 +590,6 @@
     <string name="animate_route">Пачаць мадэляванне</string>
     <string name="file_can_not_be_renamed">Не атрымалася змяніць назву файла.</string>
     <string name="file_with_name_already_exists">Файл з такой назвай ужо існуе.</string>
-    <string name="shared_string_gpx_route">GPX-маршрут</string>
     <string name="poi_query_by_name_matches_categories">Знойдзена некалькі звязаных катэгорый POI.</string>
     <string name="data_to_search_poi_not_available">Спампаваць аўтаномныя даныя для пошуку POI.</string>
     <string name="poi_filter_by_name">Пошук па назве</string>
@@ -711,7 +708,6 @@
     <string name="context_menu_item_share_location">Даслаць каардынаты</string>
     <string name="add_waypoint_dialog_added">GPX-пункт \"{0}\" дададзены</string>
     <string name="add_waypoint_dialog_title">Дадаць пункт да запісанага GPX-следу</string>
-    <string name="context_menu_item_add_waypoint">Дадаць пункт GPX</string>
     <string name="amenity_type_administrative">Адміністрацыйны</string>
     <string name="amenity_type_barrier">Перашкода</string>
     <string name="amenity_type_education">Адукацыя</string>
@@ -797,7 +793,6 @@
     <string name="voice">Запісаны голас</string>
     <string name="no_vector_map_loaded">Вектарныя мапы не былі загружаныя</string>
     <string name="gpx_files_not_found">GPX-файлаў не знойдзена ў каталогзе слядоў</string>
-    <string name="layer_gpx_layer">GPX-файлы…</string>
     <string name="error_reading_gpx">Не атрымалася прачытаць GPX-даныя.</string>
     <string name="vector_data">Пазасеціўныя вектарныя мапы</string>
     <string name="transport_context_menu">Шукаць транспарт на прыпынку</string>
@@ -971,7 +966,6 @@
     <string name="save_track_interval">Інтэрвал захавання падчас навігацыі</string>
     <string name="save_track_interval_descr">Вызгачце інтэрвал захоўвання пунктаў следу падчас навігацыі</string>
     <string name="save_track_to_gpx_descrp">GPX-след аўтаматычна захаваны ў каталог слядоў падчас навігацыі.</string>
-    <string name="save_track_to_gpx">Аўтаматычна запісваць след падчас навігацыі</string>
     <string name="update_tile">Абнавіць мапу</string>
     <string name="reload_tile">Абнавіць фрагмент мапы</string>
     <string name="mark_point">Мэта</string>
@@ -1308,7 +1302,6 @@
     <string name="duration">Працягласць</string>
     <string name="distance">Адлегласць</string>
     <string name="rendering_attr_publicTransportMode_name">Маршруты аўтобусаў, тралейбусаў і таксі</string>
-    <string name="save_track_to_gpx_globally">Пісаць след у GPX-файл</string>
     <string name="save_track_interval_globally">Інтэрвал запісу</string>
     <string name="save_track_to_gpx_globally_descr">Запіс месцазнаходжання ў GPX-файл можа быць уключаны або выключаны з дапамогай кнопкі запісу GPX мапе.</string>
     <string name="confirm_every_run">Пытацца заўсёды</string>
@@ -1464,7 +1457,6 @@
     <string name="shared_string_deselect_all">Адкінуць выбар усяго</string>
     <string name="shared_string_clear">Ачысціць</string>
     <string name="shared_string_save">Захаваць</string>
-    <string name="shared_string_save_as_gpx">Захаваць як новы GPX-файл</string>
     <string name="shared_string_rename">Змяніць назву</string>
     <string name="shared_string_delete">Выдаліць</string>
     <string name="shared_string_delete_all">Выдаліць усё</string>
@@ -1700,7 +1692,6 @@
     <string name="recent_places">Нядаўнія месцы</string>
     <string name="favourites">Улюбёныя</string>
     <string name="saved_at_time">Цяпер захаваны а %1$s</string>
-    <string name="show_gpx">Паказаць GPX-даныя</string>
     <string name="poi_deleted_localy">POI будуць выдаленыя, як толькі вы запампуеце вашыя змены</string>
     <string name="show_on_start">Паказваць падчас запуску</string>
     <string name="count_of_lines">Колькасць радкоў</string>
@@ -2154,7 +2145,6 @@
 \nАпісвае вобласць: %1$s x %2$s</string>
     <string name="configure_screen_quick_action">Хуткае дзеянне</string>
     <string name="quick_action_item_action">Дзеянне %d</string>
-    <string name="quick_action_add_gpx">Дадаць пункт да следу</string>
     <string name="quick_action_new_action">Дадаць дзеянне</string>
     <string name="quick_action_edit_action">Рэдагаваць дзеянне</string>
     <string name="quick_action_add_favorite">Дадаць ва ўлюбёныя</string>
@@ -2542,14 +2532,11 @@
     <string name="choose_navigation_type">Абраць профіль навігацыі</string>
     <string name="add_route_points">Дадаць пункты маршруту</string>
     <string name="add_line">Дадаць лінію</string>
-    <string name="empty_state_my_tracks">Дадаць GPX-файлы</string>
-    <string name="empty_state_my_tracks_desc">Імпартаваць GPX-файлы ці запісаныя сляды.</string>
     <string name="empty_state_favourites">Дадаць улюбёныя мясціны</string>
     <string name="empty_state_favourites_desc">Імпартаваць улюбёныя ці дадаць з адзнак на мапе.</string>
     <string name="import_track">Імпартаваць GPX-файл</string>
     <string name="import_track_desc">Файл %1$s не змяшчае пункты шляху, імпартаваць як след\?</string>
     <string name="move_point">Перамясціць пункт</string>
-    <string name="add_segment_to_the_track">Дадаць у GPX-файл</string>
     <string name="keep_showing_on_map">Працягваць паказваць на мапе</string>
     <string name="exit_without_saving">Выйсці без захавання\?</string>
     <string name="do_not_use_animations">Без анімацыі</string>
@@ -2588,7 +2575,6 @@
     <string name="shared_string_sort">Упарадкаваць</string>
     <string name="coordinate_input">Увод каардынат</string>
     <string name="marker_save_as_track_descr">Экспартаваць вашыя адзнакі ў наступны GPX-файл:</string>
-    <string name="marker_save_as_track">Захаваць як GPX-файл</string>
     <string name="move_to_history">Перамясціць у гісторыю</string>
     <string name="group_will_be_removed_after_restart">Групы ўжо не будзе пасля наступнага перазапуску праграмы.</string>
     <string name="shared_string_markers">Адзнакі</string>
@@ -2827,7 +2813,6 @@
     <string name="map_widget_intermediate_time">Прамежкавы час</string>
     <string name="unirs_render_descr">Мадыфікацыя прадвызначанага стылю для павялічэння кантрастнасці пешаходных і роварных дарог. Выкарыстоўвае старыя Mapnik-колеры.</string>
     <string name="get_osmand_live">Атрымайце OsmAnd Live, каб разблакаваць усе функцыі: штодзённыя абнаўленні мап з неабмежаванымі спампоўваннямі, усе платныя і бясплатныя ўбудовы, Вікіпедыю, Вікігід і шмат іншага.</string>
-    <string name="shared_string_gpx_files">GPX-файлы</string>
     <string name="quick_action_edit_actions">Рэдагаваць дзеянні</string>
     <string name="release_3_0">• Новае: падтрымка аўтаномных турыстычных даведнікаў. Мясціны звязаныя з мапай. Зыходныя даныя ад Wikivoyage. 
 \n 

@@ -373,6 +373,12 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		return Algorithms.isEmpty(res) ? null : res;
 	}
 
+	public String getAddressTextValue() {
+		EditText addressEdit = (EditText) view.findViewById(R.id.address_edit);
+		String res = addressEdit.getText().toString().trim();
+		return Algorithms.isEmpty(res) ? null : res;
+	}
+
 	protected Drawable getPaintedIcon(int iconId, int color) {
 		return getPaintedContentIcon(iconId, color);
 	}

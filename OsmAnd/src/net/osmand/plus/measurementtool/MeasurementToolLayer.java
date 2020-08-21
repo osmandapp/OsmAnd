@@ -13,13 +13,12 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
+import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.util.MapUtils;
 
@@ -98,18 +97,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	void setInMeasurementMode(boolean inMeasurementMode) {
 		this.inMeasurementMode = inMeasurementMode;
-	}
-
-	String getDistanceSt() {
-		float dist = 0;
-		List<WptPt> points = editingCtx.getBeforeTrkSegmentLine().points;
-		if (points.size() > 0) {
-			for (int i = 1; i < points.size(); i++) {
-				dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon,
-						points.get(i).lat, points.get(i).lon);
-			}
-		}
-		return OsmAndFormatter.getFormattedDistance(dist, view.getApplication());
 	}
 
 	@Override
@@ -305,13 +292,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, boolean nightMode) {
 		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-		if (nightMode) {
-			canvas.drawBitmap(centerIconNight, tb.getCenterPixelX() - centerIconNight.getWidth() / 2f,
-					tb.getCenterPixelY() - centerIconNight.getHeight() / 2f, bitmapPaint);
-		} else {
-			canvas.drawBitmap(centerIconDay, tb.getCenterPixelX() - centerIconDay.getWidth() / 2f,
-					tb.getCenterPixelY() - centerIconDay.getHeight() / 2f, bitmapPaint);
-		}
+		Bitmap centerBmp = nightMode ? centerIconNight : centerIconDay;
+		canvas.drawBitmap(centerBmp, tb.getCenterPixelX() - centerBmp.getWidth() / 2f,
+				tb.getCenterPixelY() - centerBmp.getHeight() / 2f, bitmapPaint);
 		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 

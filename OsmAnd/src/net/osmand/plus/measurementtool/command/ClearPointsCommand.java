@@ -33,7 +33,6 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 
 	private void executeCommand() {
 		List<WptPt> pts = getEditingCtx().getPoints();
-		needUpdateCache = getEditingCtx().isNeedUpdateCacheForSnap();
 		points = new ArrayList<>(pts);
 		switch (clearMode) {
 			case ALL:
@@ -53,9 +52,7 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 	public void undo() {
 		getEditingCtx().clearSegments();
 		getEditingCtx().addPoints(points);
-		if (needUpdateCache) {
-			getEditingCtx().setNeedUpdateCacheForSnap(true);
-		}
+		getEditingCtx().updateCacheForSnap();
 		refreshMap();
 	}
 
