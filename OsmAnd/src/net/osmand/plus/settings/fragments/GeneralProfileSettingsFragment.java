@@ -119,7 +119,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 	private Drawable getOsmandThemeIcon() {
 		int iconId;
-		if (settings.isSystemDefaultThemeUsed()) {
+		ApplicationMode mode = getSelectedAppMode();
+		if (settings.isSystemDefaultThemeUsedForMode(mode)) {
 			iconId = R.drawable.ic_action_android;
 		} else {
 			iconId = settings.isLightContent() ? R.drawable.ic_action_sun : R.drawable.ic_action_moon;

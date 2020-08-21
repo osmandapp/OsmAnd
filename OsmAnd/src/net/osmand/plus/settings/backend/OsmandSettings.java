@@ -3909,7 +3909,16 @@ public class OsmandSettings {
 			new IntPreference("FAVORITES_TAB", 0).makeGlobal().cache();
 
 	public final CommonPreference<Integer> OSMAND_THEME =
-			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeProfile().cache();
+			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME) {
+				@Override
+				public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+					Integer theme = parseString(json.getString(getId()));
+					if (theme == SYSTEM_DEFAULT_THEME && !isSupportSystemDefaultTheme()) {
+						theme = OSMAND_LIGHT_THEME;
+					}
+					setModeValue(appMode, theme);
+				}
+			}.makeProfile().cache();
 
 	public final OsmandPreference<Boolean> OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED =
 			new BooleanPreference("open_only_header_route_calculated", false).makeProfile();
