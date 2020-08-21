@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="system_default_theme">System Default</string>
     <string name="access_hint_enter_address">Enter address</string>
     <string name="add_address">Add address</string>
     <string name="delete_address">Delete address</string>

@@ -3895,6 +3895,7 @@ public class OsmandSettings {
 
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;
+	public static final int SYSTEM_DEFAULT_THEME = 2;
 
 	public static final int NO_EXTERNAL_DEVICE = 0;
 	public static final int GENERIC_EXTERNAL_DEVICE = 1;
@@ -3923,7 +3924,31 @@ public class OsmandSettings {
 	}
 
 	public boolean isLightContentForMode(ApplicationMode mode) {
+		if (isSupportSystemDefaultTheme() && OSMAND_THEME.getModeValue(mode) == SYSTEM_DEFAULT_THEME) {
+			return isLightSystemDefaultTheme();
+		}
 		return OSMAND_THEME.getModeValue(mode) != OSMAND_DARK_THEME;
+	}
+
+	private boolean isLightSystemDefaultTheme() {
+		Configuration config = ctx.getResources().getConfiguration();
+		int systemNightModeState = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+		if (systemNightModeState == Configuration.UI_MODE_NIGHT_YES) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean isSystemDefaultThemeUsed() {
+		return isSystemDefaultThemeUsedForMode(APPLICATION_MODE.get());
+	}
+
+	public boolean isSystemDefaultThemeUsedForMode(ApplicationMode mode) {
+		return isSupportSystemDefaultTheme() && OSMAND_THEME.getModeValue(mode) == SYSTEM_DEFAULT_THEME;
+	}
+
+	public boolean isSupportSystemDefaultTheme() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
 	}
 
 	public final CommonPreference<Boolean> FLUORESCENT_OVERLAYS =

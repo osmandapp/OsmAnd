@@ -16,7 +16,6 @@ import androidx.fragment.app.DialogFragment;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 
 import org.apache.commons.logging.Log;
@@ -44,8 +43,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean isLightTheme = (getOsmandApplication())
-				.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		boolean isLightTheme = (getOsmandApplication()).getSettings().isLightContent();
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
