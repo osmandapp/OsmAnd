@@ -293,13 +293,41 @@ public class MeasurementEditingContext {
 		return pt;
 	}
 
+	public void trimBefore(int selectedPointPosition) {
+		splitSegments(selectedPointPosition);
+		clearBeforeSegments();
+	}
+
+	public void trimAfter(int selectedPointPosition) {
+		splitSegments(selectedPointPosition + 1);
+		clearAfterSegments();
+	}
+
 	public void clearSegments() {
+		clearBeforeSegments();
+		clearAfterSegments();
+	}
+
+	public void clearBeforeSegments() {
 		before.points.clear();
+			if (beforeCacheForSnap != null) {
+				beforeCacheForSnap.points.clear();
+			}
+	}
+
+	public void clearAfterSegments() {
 		after.points.clear();
-		if (beforeCacheForSnap != null && afterCacheForSnap != null) {
-			beforeCacheForSnap.points.clear();
-			afterCacheForSnap.points.clear();
-		}
+			if (afterCacheForSnap != null) {
+				afterCacheForSnap.points.clear();
+			}
+	}
+
+	public boolean isFirstPointSelected() {
+		return selectedPointPosition == 0;
+	}
+
+	public boolean isLastPointSelected() {
+		return selectedPointPosition == getPoints().size() - 1;
 	}
 
 	public void scheduleRouteCalculateIfNotEmpty() {

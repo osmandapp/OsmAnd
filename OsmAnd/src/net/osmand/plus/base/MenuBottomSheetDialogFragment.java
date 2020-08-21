@@ -197,6 +197,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				if (contentView.getHeight() > contentHeight) {
 					if (useScrollableItemsContainer() || useExpandableList()) {
 						contentView.getLayoutParams().height = contentHeight;
+						mainView.findViewById(R.id.buttons_shadow).setVisibility(View.VISIBLE);
 					} else {
 						contentView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
 					}

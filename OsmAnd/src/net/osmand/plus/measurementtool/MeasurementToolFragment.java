@@ -100,9 +100,11 @@ import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
 import static net.osmand.plus.measurementtool.StartPlanRouteBottomSheet.StartPlanRouteListener;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.*;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.*;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
-		OptionsFragmentListener, GpxApproximationFragmentListener {
+		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 
@@ -194,12 +196,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		measurementLayer.setEditingCtx(editingCtx);
 
 		// Handling screen rotation
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		Fragment selectedPointFragment = fragmentManager.findFragmentByTag(SelectedPointBottomSheetDialogFragment.TAG);
-		if (selectedPointFragment != null) {
-			SelectedPointBottomSheetDialogFragment fragment = (SelectedPointBottomSheetDialogFragment) selectedPointFragment;
-			fragment.setListener(createSelectedPointFragmentListener());
-		}
 		Fragment saveAsNewTrackFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(SaveAsNewTrackBottomSheetDialogFragment.TAG);
 		if (saveAsNewTrackFragment != null) {
 			((SaveAsNewTrackBottomSheetDialogFragment) saveAsNewTrackFragment).setListener(createSaveAsNewTrackFragmentListener());
@@ -706,7 +702,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void clearAllOnClick() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
-		editingCtx.getCommandManager().execute(new ClearPointsCommand(measurementLayer));
+		editingCtx.getCommandManager().execute(new ClearPointsCommand(measurementLayer, ALL));
 		editingCtx.cancelSnapToRoad();
 		if (pointsListOpened) {
 			hidePointsList();
@@ -722,59 +718,92 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	}
 
-	private SelectedPointFragmentListener createSelectedPointFragmentListener() {
-		return new SelectedPointFragmentListener() {
+	@Override
+	public void onMovePoint() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			measurementLayer.enterMovingPointMode();
+		}
+		switchMovePointMode(true);
+	}
 
-			final MeasurementToolLayer measurementLayer = getMeasurementLayer();
+	@Override
+	public void onDeletePoint() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			removePoint(measurementLayer, editingCtx.getSelectedPointPosition());
+		}
+		editingCtx.setSelectedPointPosition(-1);
+	}
 
-			@Override
-			public void moveOnClick() {
-				if (measurementLayer != null) {
-					measurementLayer.enterMovingPointMode();
-				}
-				switchMovePointMode(true);
-			}
+	@Override
+	public void onAddPointAfter() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
+			editingCtx.setInAddPointMode(true);
+			editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
+		}
+		((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
+		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_above));
+		switchAddPointBeforeAfterMode(true);
+	}
 
-			@Override
-			public void deleteOnClick() {
-				removePoint(measurementLayer, editingCtx.getSelectedPointPosition());
-				editingCtx.setSelectedPointPosition(-1);
-			}
+	@Override
+	public void onAddPointBefore() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
+			editingCtx.setInAddPointMode(true);
+			editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
+		}
+		((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
+		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_below));
+		switchAddPointBeforeAfterMode(true);
+	}
 
-			@Override
-			public void addPointAfterOnClick() {
-				if (measurementLayer != null) {
-					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
-					editingCtx.setInAddPointMode(true);
-					editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
-				}
-				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
-				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_above));
-				switchAddPointBeforeAfterMode(true);
-			}
+	@Override
+	public void onTrimRouteBefore() {
+		trimRoute(BEFORE);
+	}
 
-			@Override
-			public void addPointBeforeOnClick() {
-				if (measurementLayer != null) {
-					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
-					editingCtx.setInAddPointMode(true);
-					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
-				}
-				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
-				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_below));
-				switchAddPointBeforeAfterMode(true);
-			}
+	@Override
+	public void onTrimRouteAfter() {
+		trimRoute(AFTER);
+	}
 
-			@Override
-			public void onCloseMenu() {
-				setDefaultMapPosition();
-			}
+	private void trimRoute(ClearCommandMode before) {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		editingCtx.getCommandManager().execute(new ClearPointsCommand(measurementLayer, before));
+		if (pointsListOpened) {
+			hidePointsList();
+		}
+		editingCtx.setSelectedPointPosition(-1);
+		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
+		updateUndoRedoButton(false, redoBtn);
+		updateUndoRedoButton(true, undoBtn);
+		updateDistancePointsText();
+		saved = false;
+	}
 
-			@Override
-			public void onClearSelection() {
-				editingCtx.setSelectedPointPosition(-1);
-			}
-		};
+	@Override
+	public void onChangeRouteTypeBefore() {
+
+	}
+
+	@Override
+	public void onChangeRouteTypeAfter() {
+
+	}
+
+	@Override
+	public void onCloseMenu() {
+		setDefaultMapPosition();
+	}
+
+	@Override
+	public void onClearSelection() {
+		editingCtx.setSelectedPointPosition(-1);
 	}
 
 	@Override
@@ -981,7 +1010,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
 		editingCtx.resetAppMode();
 		editingCtx.cancelSnapToRoad();
-		visibleSnapToRoadIcon(false);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
@@ -1002,17 +1030,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			ImageButton snapToRoadBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
 			snapToRoadBtn.setImageDrawable(icon);
 			mapActivity.refreshMap();
-		}
-	}
-
-	private void visibleSnapToRoadIcon(boolean show) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			if (show) {
-				mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.VISIBLE);
-			} else {
-				mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
-			}
 		}
 	}
 
@@ -1037,10 +1054,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void openSelectedPointMenu(MapActivity mapActivity) {
-		SelectedPointBottomSheetDialogFragment fragment = new SelectedPointBottomSheetDialogFragment();
-		fragment.setUsedOnMap(true);
-		fragment.setListener(createSelectedPointFragmentListener());
-		fragment.show(mapActivity.getSupportFragmentManager(), SelectedPointBottomSheetDialogFragment.TAG);
+		if (mapActivity != null) {
+			SelectedPointBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+		}
 	}
 
 	private void openSaveAsNewTrackMenu(MapActivity mapActivity) {

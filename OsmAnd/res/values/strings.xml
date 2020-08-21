@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="plan_route_change_route_type_after">Change route type after</string>
+    <string name="plan_route_change_route_type_before">Change route type before</string>
+    <string name="plan_route_trim_after">Trim after</string>
+    <string name="plan_route_trim_before">Trim before</string>
     <string name="access_hint_enter_address">Enter address</string>
     <string name="add_address">Add address</string>
     <string name="delete_address">Delete address</string>
