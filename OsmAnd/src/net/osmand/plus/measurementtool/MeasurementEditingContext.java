@@ -310,16 +310,16 @@ public class MeasurementEditingContext {
 
 	public void clearBeforeSegments() {
 		before.points.clear();
-			if (beforeCacheForSnap != null) {
-				beforeCacheForSnap.points.clear();
-			}
+		if (beforeCacheForSnap != null) {
+			beforeCacheForSnap.points.clear();
+		}
 	}
 
 	public void clearAfterSegments() {
 		after.points.clear();
-			if (afterCacheForSnap != null) {
-				afterCacheForSnap.points.clear();
-			}
+		if (afterCacheForSnap != null) {
+			afterCacheForSnap.points.clear();
+		}
 	}
 
 	public boolean isFirstPointSelected() {
