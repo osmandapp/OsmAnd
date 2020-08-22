@@ -210,8 +210,17 @@ public class MeasurementEditingContext {
 
 	public double getRouteDistance() {
 		double distance = 0;
-		for (RoadSegmentData data : roadSegmentData.values()) {
-			distance += data.getDistance();
+		for (List<WptPt> points : Arrays.asList(before.points, after.points)) {
+			for (int i = 0; i < points.size() - 1; i++) {
+				Pair<WptPt, WptPt> pair = new Pair<>(points.get(i), points.get(i + 1));
+				RoadSegmentData data = this.roadSegmentData.get(pair);
+				if (data == null) {
+					distance += MapUtils.getDistance(pair.first.getLatitude(), pair.first.getLongitude(),
+							pair.second.getLatitude(), pair.second.getLongitude());
+				} else {
+					distance += data.getDistance();
+				}
+			}
 		}
 		return distance;
 	}
