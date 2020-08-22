@@ -233,7 +233,7 @@
     <string name="shared_string_downloading">Sæki…</string>
     <string name="shared_string_action_template">Aðgerð {0}</string>
     <string name="shared_string_close">Loka</string>
-    <string name="shared_string_exit">Útgangur</string>
+    <string name="shared_string_exit">Hætta</string>
     <string name="shared_string_show">Sýna</string>
     <string name="shared_string_show_all">Sýna allt</string>
     <string name="shared_string_collapse">Fella saman</string>
@@ -1445,7 +1445,7 @@
     <string name="agps_data_last_downloaded">A-GPS-gögn voru sótt: %1$s</string>
     <string name="welmode_download_maps">Sækja kort</string>
     <string name="mark_to_delete">Merki sem á að eyða</string>
-    <string name="confirmation_to_clear_history">Viltu í hreinsa breytingaskrána?</string>
+    <string name="confirmation_to_clear_history">Hreinsa breytingaskrána\?</string>
     <string name="osm_edits">OSM-breytingar</string>
     <string name="parking_place_limited">Tímatakmörkun bílastæðis er</string>
     <string name="your_edits">Breytingarnar þínar</string>
@@ -1532,7 +1532,7 @@
     <string name="map_widget_vector_attributes">Eigindi myndgerðar</string>
     <string name="speed_limit_exceed">Þolvik hraðatakmarka</string>
     <string name="text_size_descr">Stilla stærð texta á korti.</string>
-    <string name="traffic_warning_calming">Hæging á umferð</string>
+    <string name="traffic_warning_calming">Hraðahindrun</string>
     <string name="traffic_warning">Aðvörun vegna umferðar</string>
     <string name="speak_favorites">Eftirlæti í næsta nágrenni</string>
     <string name="way_alarms">Aðvaranir vegna umferðar</string>
@@ -2119,7 +2119,7 @@
     <string name="import_gpx_failed_descr">Gat ekki flutt skrána inn. Vinsamlegast athugið hvort OsmAnd hafi réttindi til að lesa skrána þar sem hún er.</string>
     <string name="open_mapillary">Opna Mapillary</string>
     <string name="mapillary_widget">Mapillary græja</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Götumyndir</string>
     <string name="mapillary_image">Mapillary-mynd</string>
     <string name="map_widget_ruler_control">Mælistika út frá miðju hrings</string>
     <string name="shared_string_permissions">Heimildir</string>
@@ -3263,7 +3263,7 @@
     <string name="map_during_navigation_info">Skrá á meðan leiðsögn stendur</string>
     <string name="map_during_navigation">Skrá á meðan leiðsögn stendur</string>
     <string name="shared_string_other">Annað</string>
-    <string name="vehicle_parameters_descr">Þyngd, hæð, hraði</string>
+    <string name="vehicle_parameters_descr">Þyngd, hæð, lengd, hraði</string>
     <string name="vehicle_parameters">Breytur varðandi farartæki</string>
     <string name="voice_announces_info">Talskilaboð eru einungis spiluð á meðan leiðsögn stendur.</string>
     <string name="voice_announces_descr">Leiðbeiningar og tilkynningar við leiðsögn</string>
@@ -3781,4 +3781,47 @@
 \nVeldu %1$s og þú munt fá aðvaranir og ábendingar um hraðamyndavélar. 
 \n
 \nVeldu %2$s: öllum gögnum sem tengjast hraðamyndavélum; t.d. aðvaranir, tilkynningar, staðsetningar o.fl. verður eytt þar til OsmAnd er sett inn aftur frá grunni.</string>
+    <string name="rourte_between_points_add_track_desc">Veldu ferilskrá þar sem nýjum bút verður bætt inn.</string>
+    <string name="rourte_between_points_desc">Veldu hvernig eigi að tengja punkta; með beinni línu eða reikna leið milli þeirra með þessu sniði.</string>
+    <string name="rourte_between_points_whole_track_button_desc">Allur ferillinn verður endurreiknaður með völdu sniði.</string>
+    <string name="osm_edit_closed_note">Lokaður OSM-minnispunktur</string>
+    <string name="whole_track">Allur ferillinn</string>
+    <string name="track_show_start_finish_icons">Sýna tákn fyrir upphaf/enda</string>
+    <string name="speed_cameras_removed_descr">Þetta tæki er ekki með hraðamyndavélar.</string>
+    <string name="app_mode_go_cart">Gókart</string>
+    <string name="set_working_days_to_continue">Þú verður að skilgreina virka daga til að halda áfram</string>
+    <string name="quick_action_remove_next_destination">Eyða næsta markpunkti</string>
+    <string name="navigation_profile">Leiðsagnarsnið</string>
+    <string name="app_mode_wheelchair_forward">Hjólastóll áfram</string>
+    <string name="plugin_wikipedia_description">Náðu í upplýsingar um merka staði frá Wikipedia. Þetta er þá orðið að vasaleiðsögn án nettengingar - bara virkjaðu Wikipedia-viðbótina og njóttu þess að geta lesið um hlutina í kringum þig.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Virkja þetta til að hægt sé að stýra aðdráttarstigi korts með hljóðstyrkshnöppum.</string>
+    <string name="routing_attr_length_description">Tilgreindu lengd farartækis sem leyfð er á leiðum.</string>
+    <string name="in_case_of_reverse_direction">Ef stefna er öfug</string>
+    <string name="rourte_between_points_next_segment_button_desc">Aðeins næsti bútur verður endurreiknaður með völdu sniði.</string>
+    <string name="app_mode_enduro_motorcycle">Enduro-mótorhjól</string>
+    <string name="route_between_points">Leið milli punkta</string>
+    <string name="next_segment">Næsti bútur</string>
+    <string name="search_download_wikipedia_maps">Sækja Wikipedia-kort</string>
+    <string name="street_level_imagery">Götumyndir</string>
+    <string name="routing_attr_length_name">Takmörk á lengd</string>
+    <string name="plan_a_route">Skipuleggja leið</string>
+    <string name="save_as_new_track">Vista sem nýjan feril</string>
+    <string name="track_coloring_solid">Gegnheilt</string>
+    <string name="app_mode_motor_scooter">Skellinöðrur</string>
+    <string name="reverse_route">Snúa við leið</string>
+    <string name="plan_route_last_edited">Síðast breytt</string>
+    <string name="please_provide_point_name_error">Gefðu þessum punkti eitthvað heiti</string>
+    <string name="plan_route_open_existing_track">Opna tiltækan feril</string>
+    <string name="shared_string_done">Lokið</string>
+    <string name="use_volume_buttons_as_zoom">Hljóðstyrkshnappar stýra aðdrætti</string>
+    <string name="select_track_width">Veldu breidd</string>
+    <string name="overwrite_track">Yfirskrifa feril</string>
+    <string name="app_mode_wheelchair">Hjólastóll</string>
+    <string name="plan_route_import_track">Flytja inn feril</string>
+    <string name="plan_route_create_new_route">Búa til nýja leið</string>
+    <string name="shared_string_custom">Sérsniðið</string>
+    <string name="add_to_a_track">Bæta við feril</string>
+    <string name="gpx_direction_arrows">Stefnuörvar</string>
+    <string name="plan_route_select_track_file_for_open">Veldu ferilskrá til að opna.</string>
+    <string name="lenght_limit_description">Settu inn lengd farartækisins, takmarkanir geta verið á sumum leiðum varðandi lengd farartækja.</string>
 </resources>

@@ -3296,7 +3296,7 @@
     <string name="settings_derived_routing_mode_string">وضع المستخدم ، مشتق من:%s</string>
     <string name="routing_profile_ski">تزلج</string>
     <string name="profile_type_descr_string">النوع:%s</string>
-    <string name="profile_type_base_string">وضع أساسي</string>
+    <string name="profile_type_base_string">ملف التعريف الأساسي</string>
     <string name="profile_alert_need_routing_type_title">حدد نوع الملاحة</string>
     <string name="profile_alert_need_routing_type_msg">يرجى تحديد نوع الملاحة للوضع الجديد</string>
     <string name="profile_alert_need_profile_name_title">أدخل اسم الوضع</string>
@@ -3511,7 +3511,7 @@
     <string name="no_recalculation_setting">تعطيل إعادة الحساب</string>
     <string name="route_recalculation_dist_title">الحد الأدنى من المسافة لإعادة حساب المسار</string>
     <string name="route_recalculation_dist_descr">سيتم إعادة حساب المسار إذا كانت المسافة إلى المسار أطول من المعلمة المحددة</string>
-    <string name="profile_type_custom_string">ملف شخصي مخصص</string>
+    <string name="profile_type_custom_string">ملف تعريف مخصص</string>
     <string name="shared_string_angle_param">الزاوية: %s°</string>
     <string name="shared_string_angle">زاوية</string>
     <string name="recalc_angle_dialog_descr">سيتم عرض جزء مستقيم إضافي بين موقعي والمسار المحسوب حتى يتم إعادة حساب المسار</string>

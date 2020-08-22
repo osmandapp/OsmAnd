@@ -2413,7 +2413,7 @@
     <string name="nothing_found">Nudda de agatadu</string>
     <string name="nothing_found_descr">Muda sa chirca o ismànnia su raju suo.</string>
     <string name="private_access_routing_req">Sa destinatzione tua est positzionada in un\'àrea cun atzessu privadu. Cheres abilitare s\'impreu de sos caminos privados pro custu biàgiu\?</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Fotografias a livellu de sas carreras</string>
     <string name="mapillary_widget">Widget pro Mapillary</string>
     <string name="mapillary_widget_descr">Permitit de contribuire in manera lestra e fàtzile a Mapillary.</string>
     <string name="mapillary_descr">Fotografias a livellu de sos caminos in lìnia pro totus. Iscoberi logos, agiuda, catura su mundu.</string>
@@ -3840,4 +3840,7 @@
     <string name="threshold_distance">Lìmite de distàntzia</string>
     <string name="navigation_profile">Profilu de navigatzione</string>
     <string name="rourte_between_points_add_track_desc">Ischerta unu documentu de rasta in ue annànghere su segmentu nou.</string>
+    <string name="street_level_imagery">Fotografias a livellu de sas carreras</string>
+    <string name="plan_route_exit_dialog_descr">Ses seguru de chèrrere serrare sa pianificatzione de s\'àndala chene sarvare\? As a pèrdere totu sas modìficas.</string>
+    <string name="in_case_of_reverse_direction">In casu de diretzione furriada</string>
 </resources>

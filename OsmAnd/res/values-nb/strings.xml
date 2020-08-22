@@ -3723,5 +3723,5 @@
     <string name="plan_route_create_new_route">Opprett ny rute</string>
     <string name="shared_string_done">Ferdig</string>
     <string name="threshold_distance">Terskeldistanse</string>
-    <string name="navigation_profile">Navigasjonsdistanse</string>
+    <string name="navigation_profile">Navigeringsprofil</string>
 </resources>
