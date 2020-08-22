@@ -3832,4 +3832,5 @@
     <string name="poi_borough">Gmina</string>
     <string name="poi_give_box">Daj pudełko</string>
     <string name="poi_pump_status_missing_beam">Stan pompy: brak wiązki</string>
+    <string name="poi_traffic_signals_arrow_no">Strzałka: nie</string>
 </resources>
