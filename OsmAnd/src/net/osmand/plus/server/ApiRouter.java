@@ -13,7 +13,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
 
 import fi.iki.elonen.NanoHTTPD;
 
@@ -28,6 +32,23 @@ public class ApiRouter {
 
 	private final String FOLDER_NAME = "server";
 	private Gson gson = new Gson();
+	private Map<String, ApiEndpoint> endpoints = new HashMap<>();
+
+	public ApiRouter(){
+		initFavorites();
+	}
+
+	private void initFavorites() {
+		ApiEndpoint favorites = new ApiEndpoint();
+		favorites.uri = "/favorites";
+		favorites.apiCall = new ApiEndpoint.ApiCall(){
+			@Override
+			public NanoHTTPD.Response call(NanoHTTPD.IHTTPSession session) {
+				return newFixedLengthResponse(getFavoritesJson());
+			}
+		};
+		endpoints.put(favorites.uri,favorites);
+	}
 
 	public void setAndroidContext(OsmandApplication androidContext) {
 		this.androidContext = androidContext;
@@ -35,14 +56,15 @@ public class ApiRouter {
 
 	public NanoHTTPD.Response route(NanoHTTPD.IHTTPSession session) {
 		Log.d("SERVER", "URI: " + session.getUri());
-		if (session.getUri().equals("/")) return getStatic("/go.html");
-		if (session.getUri().contains("/scripts/") ||
-				session.getUri().contains("/images/") ||
-				session.getUri().contains("/css/") ||
-				session.getUri().contains("/fonts/") ||
-				session.getUri().contains("/favicon.ico")
-		) return getStatic(session.getUri());
-		if (isApiUrl(session.getUri())){
+		String uri = session.getUri();
+		if (uri.equals("/")) return getStatic("/go.html");
+		if (uri.contains("/scripts/") ||
+				uri.contains("/images/") ||
+				uri.contains("/css/") ||
+				uri.contains("/fonts/") ||
+				uri.contains("/favicon.ico")
+		) return getStatic(uri);
+		if (isApiUrl(uri)){
 			return routeApi(session);
 		}
 		else {
@@ -51,11 +73,19 @@ public class ApiRouter {
 	}
 
 	private NanoHTTPD.Response routeApi(NanoHTTPD.IHTTPSession session) {
-		return newFixedLengthResponse("");
+		String uri = session.getUri();
+		ApiEndpoint endpoint = endpoints.get(uri);
+		if (endpoint != null){
+			return endpoint.apiCall.call(session);
+		}
+		return ErrorResponses.response404;
 	}
 
 	private boolean isApiUrl(String uri) {
-		return uri.endsWith("/favorites");
+		for (String endpoint : endpoints.keySet()){
+			if (endpoint.equals(uri)) return true;
+		}
+		return false;
 	}
 
 	private NanoHTTPD.Response routeContent(NanoHTTPD.IHTTPSession session) {
@@ -63,7 +93,6 @@ public class ApiRouter {
 		//add index page
 		String responseText = getHtmlPage(url);
 		if (responseText != null) {
-			responseText = addFavoritesToResponse(responseText);
 			return newFixedLengthResponse(responseText);
 		} else {
 			return ErrorResponses.response404;
@@ -130,7 +159,7 @@ public class ApiRouter {
 		return responseText;
 	}
 
-	private String addFavoritesToResponse(String responseText) {
+	private String getFavoritesJson() {
 		List<FavouritePoint> points = androidContext.getFavorites().getFavouritePoints();
 		StringBuilder text = new StringBuilder();
 		for (FavouritePoint p : points) {
@@ -138,7 +167,7 @@ public class ApiRouter {
 			text.append(json);
 			text.append(",");
 		}
-		return responseText + "<script>var osmand = {}; window.osmand.favoritePoints = [" + text.toString() + "];setupMarkers();</script>";
+		return "[" + text.substring(0,text.length()-1) + "]";
 	}
 
 	private String jsonFromFavorite(FavouritePoint favouritePoint) {

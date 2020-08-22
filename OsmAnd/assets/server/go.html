@@ -19,6 +19,8 @@
     -->
 
     <script type="text/javascript" src="/scripts/js.cookie.js"></script>
+    <script type="text/javascript" src="/scripts/go.js?v=5"></script>
+
     <script>
         function getMarkerContent(feature) {
 		var p = feature.properties;
@@ -43,16 +45,29 @@
 	    }
 
         function setupMarkers(){
-            var points = window.osmand.favoritePoints;
-            points.forEach(e => {
-                var point = {};
-		    	point.lat = e.latitude;
-		    	point.lon = e.longitude;
-		    	window.goMap.map.addMarker(point);
-            })
+            $.ajax({
+                type: 'GET',
+                url: "/favorites",
+                async: false,
+                contentType: "application/json",
+                dataType: 'json',
+            complete: function(r) {
+                var points = JSON.parse(r.responseText);
+                points.forEach(e => {
+                    var point = {};
+		    	    point.lat = e.latitude;
+		    	    point.lon = e.longitude;
+		    	    window.goMap.map.addMarker(point);
+                });
+            },
+            error: function(e) {
+                alert("Error happened while getting favourite points "+e.message);
+            }
+            });
         }
+        //TODO add document ready or map ready event
+        setTimeout(function(){ setupMarkers(); }, 4000);
     </script>
-    <script type="text/javascript" src="/scripts/go.js?v=5"></script>
 </head>
 <body>
 <div class="gocontainer" id="gocontainer">
@@ -65,27 +80,6 @@
         <div class="clear:both;"></div>
     </div>
     <div id="map"></div>
-    <div class="gofooter">
-        <div class="gobadges">
-            <div class="badgecontainer google">
-                <a href="https://play.google.com/store/apps/details?id=net.osmand.plus">
-                    <img alt="Get it on Google Play"
-                         src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png">
-                </a>
-            </div>
-            <div class="badgecontainer apple">
-                <a href="https://itunes.apple.com/us/app/id934850257"><img
-                        src="images/app-store-badge.png"></a>
-            </div>
-            <div class="badgecontainer amazon">
-                <a href="http://www.amazon.com/gp/product/B00D0SEGMC/ref=mas_pm_OsmAnd-Maps-Navigation">
-                    <img alt="Get it on Amazon" src="images/amazon-apps-store.png">
-                </a>
-            </div>
-            <div class="clear">
-            </div>
-        </div>
-    </div>
     <div class="overlay" style="display:none;"></div>
     <div class="popup" style="display:none;">
         <div class="logo"></div>
