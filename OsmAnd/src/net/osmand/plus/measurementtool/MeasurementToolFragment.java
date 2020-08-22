@@ -1090,12 +1090,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		switchMovePointMode(false);
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			WptPt newPoint = measurementLayer.getMovedPointToApply();
-			ApplicationMode applicationMode = editingCtx.getAppMode();
-			if (applicationMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
-				newPoint.setProfileType(applicationMode.getStringKey());
-			}
 			WptPt oldPoint = editingCtx.getOriginalPointToMove();
+			WptPt newPoint = measurementLayer.getMovedPointToApply();
 			int position = editingCtx.getSelectedPointPosition();
 			editingCtx.getCommandManager().execute(new MovePointCommand(measurementLayer, oldPoint, newPoint, position));
 			editingCtx.addPoint(newPoint);
@@ -1114,8 +1110,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	void exitMovePointMode(boolean saveOriginalPoint) {
-		if (saveOriginalPoint) {
+	void exitMovePointMode(boolean cancelled) {
+		if (cancelled) {
 			WptPt pt = editingCtx.getOriginalPointToMove();
 			editingCtx.addPoint(pt);
 		}

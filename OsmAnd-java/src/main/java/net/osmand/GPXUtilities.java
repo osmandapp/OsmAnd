@@ -129,6 +129,13 @@ public class GPXUtilities {
 			return extensions;
 		}
 
+		public void copyExtensions(GPXExtensions e) {
+			Map<String, String> extensionsToRead = e.getExtensionsToRead();
+			if (!extensionsToRead.isEmpty()) {
+				getExtensionsToWrite().putAll(extensionsToRead);
+			}
+		}
+
 		public GPXExtensionsWriter getExtensionsWriter() {
 			return extensionsWriter;
 		}

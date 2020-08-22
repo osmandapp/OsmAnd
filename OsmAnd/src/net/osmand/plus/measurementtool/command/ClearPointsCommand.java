@@ -9,8 +9,7 @@ import java.util.List;
 public class ClearPointsCommand extends MeasurementModeCommand {
 
 	private List<WptPt> points;
-	private boolean needUpdateCache;
-	ClearCommandMode clearMode;
+	private ClearCommandMode clearMode;
 	private int pointPosition;
 
 	public enum ClearCommandMode {

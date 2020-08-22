@@ -2,7 +2,9 @@ package net.osmand.plus.measurementtool.command;
 
 import net.osmand.data.LatLon;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 public class AddPointCommand extends MeasurementModeCommand {
 
@@ -25,7 +27,10 @@ public class AddPointCommand extends MeasurementModeCommand {
 			point = new WptPt();
 			point.lat = latLon.getLatitude();
 			point.lon = latLon.getLongitude();
-			point.setProfileType(measurementLayer.getEditingCtx().getAppMode().getStringKey());
+			ApplicationMode appMode = measurementLayer.getEditingCtx().getAppMode();
+			if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE) {
+				point.setProfileType(appMode.getStringKey());
+			}
 		}
 		this.center = center;
 		position = measurementLayer.getEditingCtx().getPointsCount();
