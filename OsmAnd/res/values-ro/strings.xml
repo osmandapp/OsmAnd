@@ -1023,7 +1023,6 @@
     <string name="sleep_mode_stop_dialog">Opriți modul de fundal GPS\?</string>
     <string name="stop_navigation_service">Oprire</string>
     <string name="confirm_every_run">Intreabă intotdeauna</string>
-    <string name="save_global_track_interval_descr">Alege intervalul de logare pentru înregistrarea generală a traseelor (activat prin intermediul widget-ului de înregistrare GPX).</string>
     <string name="save_global_track_interval">Interval general de logare</string>
     <string name="enable_sleep_mode">Activați modul de fundal GPS</string>
     <string name="save_track_to_gpx_globally_descr">Salvarea pozitiei generale într-un fișier GPX poate fi activată prin intermediul widget-ului de inregistrare GPX de pe fereastra hărții.</string>
@@ -1059,8 +1058,6 @@
     <string name="live_monitoring_m">Monitorizare online (GPS necesar)</string>
     <string name="live_monitoring_start">Porniți monitorizarea online</string>
     <string name="live_monitoring_stop">Opriți monitorizarea online</string>
-    <string name="gpx_monitoring_start">Porniți înregistrarea GPX</string>
-    <string name="gpx_monitoring_stop">Opriți înregistrarea GPX</string>
     <string name="gpx_start_new_segment">Începeți un segment nou</string>
     <string name="rendering_attr_hideBuildings_name">Clădiri</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">drumurile care nu sunt pentru vehicule</string>
@@ -1448,7 +1445,6 @@
     <string name="lang_et">Estoniană</string>
     <string name="lang_ceb">Limba Cebuano</string>
     <string name="disable_recording_once_app_killed">Previne logarea automată</string>
-    <string name="disable_recording_once_app_killed_descrp">Logarea punctelor GPX este oprita când aplicația este oprită (folosind lista aplicațiilor recente). (Indicatorul ce indică funcționarea în fundal a OsmAnd dispare din bara de notificări a Android-ului)</string>
     <string name="shared_string_import2osmand">Importă în OsmAnd</string>
     <string name="read_full_article">Citește tot articolul (online)</string>
     <string name="shared_string_wikipedia">Wikipedia (wiki)</string>

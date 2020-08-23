@@ -1250,8 +1250,6 @@
     <string name="live_monitoring_m">Suivi en ligne (GPX requis)</string>
     <string name="live_monitoring_start">Démarrer le suivi en ligne</string>
     <string name="live_monitoring_stop">Arrêter le suivi en ligne</string>
-    <string name="gpx_monitoring_start">Continuer l\'enregistrement GPX</string>
-    <string name="gpx_monitoring_stop">Interrompre l\'enregistrement GPX</string>
     <string name="gpx_start_new_segment">Débuter un nouveau segment</string>
     <string name="rendering_attr_hideBuildings_name">Bâtiments</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Voies non adaptées aux véhicules</string>
@@ -1309,7 +1307,6 @@
     <string name="save_track_to_gpx_globally_descr">L\'enregistrement des positions dans un fichier GPX peut être activé ou désactivé depuis le gadget sur la carte.</string>
     <string name="save_track_interval_globally">Intervalle d\'enregistrement</string>
     <string name="confirm_every_run">Toujours demander</string>
-    <string name="save_global_track_interval_descr">Indiquez l\'intervalle d\'enregistrement des traces (activé via le gadget d\'enregistrement GPX sur la carte).</string>
     <string name="save_global_track_interval">Intervalle d\'enregistrement par défaut</string>
     <string name="traffic_warning_speed_limit">Limite de vitesse</string>
     <string name="traffic_warning_border_control">Poste frontière</string>
@@ -1549,7 +1546,6 @@
     <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Êtes-vous certain(e) de vouloir supprimer %1$d notes \?</string>
     <string name="gps_network_not_enabled">Le service de localisation est arrêté. Souhaitez-vous l’activer ?</string>
-    <string name="disable_recording_once_app_killed_descrp">Met en pause l\'enregistrement de la trace GPX lors de l\'arrêt d\'OsmAnd (via les applications récentes) et supprime l\'icône OsmAnd de la barre de notification Android.</string>
     <string name="disable_recording_once_app_killed">Interdire la journalisation autonome</string>
     <string name="download_wikipedia_files">Télécharger des données Wikipédia supplémentaires (%1$s Mo) ?</string>
     <string name="lang_ms">Malaisien</string>
@@ -1921,7 +1917,6 @@
     <string name="rendering_value_thin_name">Fin</string>
     <string name="rendering_value_medium_name">Moyen</string>
     <string name="rendering_value_bold_name">Épais</string>
-    <string name="number_of_gpx_files_selected_pattern">%s fichiers GPX sélectionnés</string>
     <string name="map_mode">Mode Carte</string>
     <string name="access_default_color">Couleur par défaut</string>
     <string name="access_category_choice">Sélectionnez une catégorie</string>

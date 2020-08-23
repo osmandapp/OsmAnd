@@ -443,7 +443,6 @@
     <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
     <string name="background_service_is_enabled_question">El servicio de OsmAnd, aún está funcionando en modo reposo. ¿Quieres pararlo también?</string>
     <string name="sleep_mode_stop_dialog">¿Parar modo reposo del GPS?</string>
-    <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activar mediante el widget de grabación GPX sobre el mapa).</string>
     <string name="save_global_track_interval">Intervalo de registro general</string>
     <string name="background_service_int">Intervalo de activación del GPS</string>
     <string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
@@ -469,8 +468,6 @@
     <string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
     <string name="live_monitoring_stop">Parar seguimiento en línea</string>
-    <string name="gpx_monitoring_start">Reanudar grabación GPX</string>
-    <string name="gpx_monitoring_stop">Pausar grabación GPX</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Vías no aptas para vehículos</string>
     <string name="rendering_attr_hideWoodScrubs_name">Bosques y matorrales</string>
     <string name="no_index_file_to_download">No se encontraron descargas, comprueba tu conexión a Internet.</string>
@@ -692,7 +689,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Fronteras</string>
     <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5–9).</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">No se encontraron edificios.</string>
     <string name="incremental_search_city">Buscar ciudades incrementalmente</string>
     <string name="search_villages_and_postcodes">Buscar más pueblos o códigos postales</string>
@@ -1559,7 +1555,6 @@
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">¿Borrar %1$d nota(s)?</string>
     <string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
-    <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará al cerrar la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
     <string name="gps_network_not_enabled">Servicio de ubicación desactivado. ¿Quieres activarlo?</string>
     <string name="archive_wikipedia_data">Tienes datos de Wikipedia viejos e incompatibles. ¿Archivarlos?</string>
     <string name="download_wikipedia_files">¿Descargar datos adicionales de Wikipedia (%1$s MB)?</string>
@@ -1933,7 +1928,6 @@
     <string name="rendering_value_medium_name">Mediano</string>
     <string name="rendering_value_bold_name">Grueso</string>
     <string name="map_mode">Modo del mapa</string>
-    <string name="number_of_gpx_files_selected_pattern">%s archivos GPX elegidos</string>
     <string name="access_default_color">Color predefinido</string>
     <string name="access_category_choice">Elegir categoría</string>
     <string name="access_hint_enter_name">Ingresar nombre</string>

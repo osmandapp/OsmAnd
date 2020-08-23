@@ -126,7 +126,6 @@
     <string name="av_def_action_choose">På anmodning\?</string>
     <string name="av_use_external_camera_descr">Brug systemprogram til foto.</string>
     <string name="av_use_external_camera">Brug kamera</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
     <string name="intermediate_point">Mellemliggende destination %1$s</string>
     <string name="snap_to_road_descr">Hold position på vejen under navigation.</string>
@@ -1221,8 +1220,6 @@
     <string name="live_monitoring_m">Online sporing (GPX nødvendig)</string>
     <string name="live_monitoring_start">Start online sporing</string>
     <string name="live_monitoring_stop">Stop online sporing</string>
-    <string name="gpx_monitoring_start">Start GPX-logning</string>
-    <string name="gpx_monitoring_stop">Stop GPX-logning</string>
     <string name="gpx_start_new_segment">Start nyt segment</string>
     <string name="lang_fa">Persisk</string>
     <string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis ikke tilgængelig bruges engelske eller lokale navne).</string>
@@ -1274,7 +1271,6 @@
     <string name="save_track_interval_globally">Logningsinterval</string>
     <string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til eller fra med GPX-logning udvidelsen på kortet.</string>
     <string name="confirm_every_run">Spørg altid</string>
-    <string name="save_global_track_interval_descr">Angiv logningsinterval for den almindelige optagelse af spor (aktiveres via \'GPX-logning\' på hovedskærmen).</string>
     <string name="save_global_track_interval">Generelt logningsinterval</string>
     <string name="traffic_warning_speed_limit">Hastighedsgrænse</string>
     <string name="traffic_warning_border_control">Grænsekontrol</string>
@@ -1565,7 +1561,6 @@
     <string name="shared_string_import2osmand">Importer til OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Slet %1$d noter. Bekræft?</string>
     <string name="disable_recording_once_app_killed">Forhindre uafhængig logning</string>
-    <string name="disable_recording_once_app_killed_descrp">Hvis markeret vil GPX-logning blive stoppet, når programmet afsluttes (via seneste programmer). OsmAnd-baggrundsmeddelse forsvinder fra meddelelseslinjen.</string>
     <string name="gps_network_not_enabled">Placeringtjenesten er slukket. Slå det til\?</string>
     <string name="archive_wikipedia_data">Der er gamle inkompatible Wikipedia data. Skal de arkiveres?</string>
     <string name="download_wikipedia_files">Hent yderligere data fra Wikipedia (%1$s MB)?</string>
@@ -1938,7 +1933,6 @@
     <string name="rendering_value_thin_name">Tynd</string>
     <string name="rendering_value_medium_name">Mellem</string>
     <string name="rendering_value_bold_name">Fed</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX-filer valgt</string>
     <string name="map_mode">Korttilstand</string>
     <string name="access_default_color">Standardfarve</string>
     <string name="access_category_choice">Vælg kategori</string>

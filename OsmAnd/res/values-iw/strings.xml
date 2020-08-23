@@ -1552,8 +1552,6 @@
     <string name="live_monitoring_m">מעקב מקוון (נדרש GPX)</string>
     <string name="live_monitoring_start">הפעלת מעקב מקוון</string>
     <string name="live_monitoring_stop">עצירת מעקב מקוון</string>
-    <string name="gpx_monitoring_start">חידוש רישום GPX</string>
-    <string name="gpx_monitoring_stop">השהיית רישום GPX</string>
     <string name="gpx_start_new_segment">התחלת מקטע חדש</string>
     <string name="rendering_attr_hideBuildings_name">בניינים</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">דרכים מהירות שלא מיועדות למכוניות</string>
@@ -2073,7 +2071,6 @@
     <string name="access_shared_string_navigate_up">ניווט למעלה</string>
     <string name="access_sort">מיון</string>
     <string name="map_mode">מצב מפה</string>
-    <string name="number_of_gpx_files_selected_pattern">נבחרו %s קובצי GPX</string>
     <string name="no_map_markers_found">נא להוסיף סמני מפה דרך המפה</string>
     <string name="no_waypoints_found">לא נמצאו נקודות דרך</string>
     <string name="osmand_parking_minute">דק׳</string>
@@ -2635,9 +2632,7 @@
 \n 
 \nניתן לשתף נתיבים מוקלטים עם חבריך או להשתמש בהם כתרומה ל־OSM. אתלטים יכולים להשתמש במסלולים מוקלטים כדי לעקוב אחר האימונים שלהם. ניתן לבצע ניתוח מסלול בסיסי ישירות ב־OsmAnd, כמו זמני הקפה, מהירות ממוצעת וכו׳, כמו כן, ניתן לנתח את המסלולים בשלב מאוחר יותר על ידי כלי ניתוח מיוחדים מגורמי צד־שלישי.</string>
     <string name="watch">צפייה</string>
-    <string name="save_global_track_interval_descr">נא לציין מרווח בין הקלטות כלליות של מסלול (מופעל דרך וידג׳ט ה־GPX על המפה).</string>
     <string name="transport_nearby_routes_within">נתיבים קרובים בטווח של עד</string>
-    <string name="disable_recording_once_app_killed_descrp">רישום ה־GPX יושהה כאשר היישומון ייסגר (דרך היישומונים האחרונים). (התראות הרקע של OsmAnd תיעלמנה מסרגל ההודעות של Android.)</string>
     <string name="action_create">פעולת יצירה</string>
     <string name="action_modify">פעולת שינוי</string>
     <string name="action_delete">פעולת מחיקה</string>

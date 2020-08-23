@@ -1479,8 +1479,6 @@
     <string name="route_info">Informacije wo čarje</string>
     <string name="routing_attr_prefer_motorway_name">Awtodróhi preferować</string>
     <string name="routing_attr_prefer_motorway_description">Awtodróhi preferować</string>
-    <string name="gpx_monitoring_start">GPX-nahrawanje započeć</string>
-    <string name="gpx_monitoring_stop">GPX-nahrawanje zastajić</string>
     <string name="distance_farthest">Najdalši jako prěni</string>
     <string name="distance_nearest">Najbliši jako prěni</string>
     <string name="enter_lat_and_lon">Šěrinu a dołhotu zapodać</string>

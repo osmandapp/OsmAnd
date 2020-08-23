@@ -70,7 +70,6 @@
     <string name="access_shared_string_not_installed">Quraşdırılmayıb</string>
     <string name="access_sort">Sırala</string>
     <string name="map_mode">Xəritə rejimi</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX faylı seçildi</string>
     <string name="rendering_value_medium_name">Orta</string>
     <string name="rendering_value_bold_name">Qalın</string>
     <string name="shared_string_move_up">Yuxarı daşı</string>
@@ -834,8 +833,6 @@
     <string name="access_hint_enter_description">Açıqlama daxil et.</string>
     <string name="access_widget_expand">Genişlət</string>
     <string name="access_shared_string_navigate_up">Yuxarı get</string>
-    <string name="gpx_monitoring_start">GPX qeydiyyatını başlat</string>
-    <string name="gpx_monitoring_stop">GPX qeydiyyatını dayandır</string>
     <string name="gpx_start_new_segment">Yeni seqment başlat</string>
     <string name="rendering_attr_hideBuildings_name">Binalar</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Qeyri-nəqliyyat magistrallar</string>

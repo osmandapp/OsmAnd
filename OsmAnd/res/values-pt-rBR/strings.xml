@@ -306,7 +306,6 @@
     <string name="sleep_mode_stop_dialog">Parar o modo em segundo plano do GPS?</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Sempre perguntar</string>
-    <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral da pista (ativado via widget de registo GPX no mapa).</string>
     <string name="save_global_track_interval">Intervalo de registro geral</string>
     <string name="background_service_int">Intervalo de ativação do GPS</string>
     <string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
@@ -376,8 +375,6 @@
     <string name="live_monitoring_m">Rastreamento on-line (requer GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreamento on-line</string>
     <string name="live_monitoring_stop">Parar rastreamento on-line</string>
-    <string name="gpx_monitoring_start">Retomar o registro GPX</string>
-    <string name="gpx_monitoring_stop">Pausar o registro GPX</string>
     <string name="gpx_start_new_segment">Iniciar novo rastreamento</string>
     <string name="rendering_attr_hideBuildings_name">Edifícios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Estradas não trafegáveis</string>
@@ -1555,7 +1552,6 @@
     <string name="local_recordings_delete_all_confirm">Tem certeza de que deseja apagar %1$d notas\?</string>
     <string name="disable_recording_once_app_killed">Impedir o registro autônomo</string>
     <string name="gps_network_not_enabled">O serviço de localização está desligado. Deseja ligar\?</string>
-    <string name="disable_recording_once_app_killed_descrp">Pausará o registro de GPX após o encerramento do app (via apps recentes). (Indicação de OsmAnd em segundo plano desaparecerá da barra de notificação do Android.)</string>
     <string name="archive_wikipedia_data">Você tem dados da Wikipédia antigos e incompatíveis. Quer arquivá-los\?</string>
     <string name="download_wikipedia_files">Baixar dados adicionais da Wikipédia (%1$s MB)\?</string>
     <string name="lang_vo">Volapuque</string>
@@ -2342,7 +2338,6 @@
     <string name="access_autoannounce_period">Período de auto-anúncio</string>
     <string name="access_map_linked_to_location">Mapa vinculado à localização</string>
     <string name="access_shared_string_navigate_up">Navegue até</string>
-    <string name="number_of_gpx_files_selected_pattern">%s arquivos GPX selecionados</string>
     <string name="rendering_value_fine_name">Mais fino</string>
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_bold_name">Grosso</string>

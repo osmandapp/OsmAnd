@@ -880,7 +880,6 @@
     <string name="no_buildings_found">No se encontraron edificios.</string>
     <string name="search_villages_and_postcodes">Buscar más pueblos/códigos postales</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Fronteras</string>
     <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5–9).</string>
     <string name="index_srtm_parts">piezas</string>
@@ -1270,8 +1269,6 @@
     <string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
     <string name="live_monitoring_stop">Parar seguimiento en línea</string>
-    <string name="gpx_monitoring_start">Continuar grabación GPX</string>
-    <string name="gpx_monitoring_stop">Detener grabación GPX</string>
     <string name="gpx_start_new_segment">Iniciar nuevo segmento</string>
     <string name="lang_fa">Persa</string>
     <string name="lang_al">Albanés</string>
@@ -1317,7 +1314,6 @@
     <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="save_track_to_gpx_globally_descr">Registra la ubicación en un archivo GPX, pudiendo des/activarlo usando el widget de grabación GPX en el mapa.</string>
     <string name="confirm_every_run">Preguntar siempre</string>
-    <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activar mediante el widget de grabación GPX sobre el mapa).</string>
     <string name="save_global_track_interval">Intervalo de registro general</string>
     <string name="traffic_warning_speed_limit">Límite de velocidad</string>
     <string name="traffic_warning_border_control">Control fronterizo</string>
@@ -1559,7 +1555,6 @@
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="gps_network_not_enabled">Servicio de ubicación desactivado. ¿Quieres activarlo?</string>
     <string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
-    <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará al cerrar la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
     <string name="light_theme">Claro</string>
     <string name="dark_theme">Oscuro</string>
     <string name="lang_pms">Piamontés</string>
@@ -1929,7 +1924,6 @@
     <string name="no_waypoints_found">No se encontraron puntos de referencia</string>
     <string name="file_name_containes_illegal_char">El nombre del archivo contiene caracteres ilegales</string>
     <string name="map_mode">Modo del mapa</string>
-    <string name="number_of_gpx_files_selected_pattern">%s archivos GPX elegidos</string>
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_medium_name">Medio</string>
     <string name="rendering_value_bold_name">Grueso</string>

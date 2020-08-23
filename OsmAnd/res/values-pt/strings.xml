@@ -1251,7 +1251,6 @@
     <string name="sleep_mode_stop_dialog">Parar o modo de fundo do GPS\?</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Sempre perguntar</string>
-    <string name="save_global_track_interval_descr">Escolher o intervalo de registo para a gravação do trajeto geral (ativado através do widget de gravação GPX no mapa).</string>
     <string name="save_global_track_interval">Intervalo de log geral</string>
     <string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
     <string name="save_track_to_gpx_globally_descr">O registo da posição geral para um ficheiro GPX pode ser ativado ou desativado usando o widget de gravação GPX no ecrã do mapa.</string>
@@ -1594,7 +1593,6 @@
     <string name="archive_wikipedia_data">Tem dados antigos incompatíveis guardados da Wikipédia. Quer arquivá-los\?</string>
     <string name="download_wikipedia_files">Quer descarregar dados adicionais da Wikipédia (%1$s MB)\?</string>
     <string name="gps_network_not_enabled">Serviço de localização não ativado. Ligá-lo\?</string>
-    <string name="disable_recording_once_app_killed_descrp">Irá pausar o registo GPX quando a aplicação é encerrada (via aplicações recentes). (A indicação de serviço em segundo plano do Osmand desaparece da barra de notificação do Android.)</string>
     <string name="shared_string_import2osmand">Importar para Osmand</string>
     <string name="read_full_article">Ler o artigo completo (on-line)</string>
     <string name="shared_string_wikipedia">Wikipédia</string>
@@ -1660,7 +1658,6 @@
     <string name="access_shared_string_navigate_up">Navegar até</string>
     <string name="access_sort">Ordenar</string>
     <string name="map_mode">Modo mapa</string>
-    <string name="number_of_gpx_files_selected_pattern">%s ficheiros GPX selecionados</string>
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_medium_name">Média</string>
     <string name="rendering_value_bold_name">Negrito</string>
@@ -2516,8 +2513,6 @@
     <string name="live_monitoring_m">Rastreamento on-line (requer GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreamento on-line</string>
     <string name="live_monitoring_stop">Parar rastreamento on-line</string>
-    <string name="gpx_monitoring_start">Retomar o registo de GPX</string>
-    <string name="gpx_monitoring_stop">Pausar o registo de GPX</string>
     <string name="gpx_start_new_segment">Iniciar novo segmento</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Estradas não trafegáveis</string>
     <string name="rendering_attr_hideText_name">Texto</string>

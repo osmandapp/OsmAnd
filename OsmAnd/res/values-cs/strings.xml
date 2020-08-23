@@ -860,7 +860,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="map_widget_max_speed">Rychlostní omezení</string>
     <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic (administrativní úrovně 5-9).</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
@@ -1241,8 +1240,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="live_monitoring_m">On-line sledování (vyžaduje GPX)</string>
     <string name="live_monitoring_start">Spustit on-line sledování</string>
     <string name="live_monitoring_stop">Zastavit on-line sledování</string>
-    <string name="gpx_monitoring_start">Pokračovat v GPX logování</string>
-    <string name="gpx_monitoring_stop">Pozastavit GPX logování</string>
     <string name="gpx_start_new_segment">Začít nový segment</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Cesty, které nejsou pro vozidla</string>
     <string name="rendering_attr_buildings15zoom_name">Budovy při přiblížení 15</string>
@@ -1297,7 +1294,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="speak_poi">Blízké body zájmu POI</string>
     <string name="save_track_to_gpx_globally_descr">Záznam do GPX souboru může být zapnut nebo vypnut pomocí widgetu Záznam trasy na mapové obrazovce.</string>
     <string name="confirm_every_run">Vždy se zeptat</string>
-    <string name="save_global_track_interval_descr">Vybrat interval ukládání pro globální záznam trasy (aktivovaný přes widget Záznam trasy na mapové obrazovce).</string>
     <string name="save_global_track_interval">Globální interval záznamu</string>
     <string name="traffic_warning_speed_limit">Rychlostní limit</string>
     <string name="traffic_warning_border_control">Hraniční kontrola</string>
@@ -1565,7 +1561,6 @@ Délka %2$s</string>
     <string name="download_wikipedia_files">Stáhnout dodatečná Wikipedia data (%1$s MB) \?</string>
     <string name="gps_network_not_enabled">Služba zjištění polohy není zapnuta. Aktivovat\?</string>
     <string name="disable_recording_once_app_killed">Zabránit samostatnému logování</string>
-    <string name="disable_recording_once_app_killed_descrp">Pozastaví záznam GPX trasy pokud je aplikace ukončena (přes nedávné aplikace). (OsmAnd indikátor zmizí ze stavového řádku Androidu.)</string>
     <string name="download_live_updates">Okamžité aktualizace</string>
     <string name="no_updates_available">Nejsou dostupné žádné aktualizace</string>
     <string name="traffic_warning_hazard">Nebezpečí</string>
@@ -1932,7 +1927,6 @@ Délka %2$s</string>
     <string name="access_shared_string_navigate_up">Navigovat nahoru</string>
     <string name="access_sort">Setřídit</string>
     <string name="map_mode">Režim mapy</string>
-    <string name="number_of_gpx_files_selected_pattern">%s vybraných GPX souborů</string>
     <string name="rendering_value_thin_name">Tenké</string>
     <string name="rendering_value_medium_name">Střední</string>
     <string name="rendering_value_bold_name">Tučné</string>

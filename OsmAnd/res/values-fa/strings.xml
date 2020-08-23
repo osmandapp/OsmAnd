@@ -774,7 +774,6 @@
 \n 
 \nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است و تِرا ماهوار‌ه‌ای فوق‌پیشرفته برای سامانهٔ دیده‌بانی زمینِ ناساست. 
 \nاَستِر محصول تلاش مشترک ناسا، وزارت اقتصاد، صنعت و تجارت ژاپن و سامانه‌های فضایی ژاپن است.</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noPolygons_description">همهٔ عوارض زمین را روی نقشه ناپدید کنید.</string>
     <string name="rendering_attr_noPolygons_name">چندضلعی‌ها</string>
     <string name="rendering_attr_appMode_name">حالت رندرگیری</string>
@@ -1299,8 +1298,6 @@
     <string name="live_monitoring_m">ردیابی آنلاین (GPX لازم است)</string>
     <string name="live_monitoring_start">شروع ردیابی آنلاین</string>
     <string name="live_monitoring_stop">توقف ردیابی آنلاین</string>
-    <string name="gpx_monitoring_start">ازسرگیری ضبط GPX</string>
-    <string name="gpx_monitoring_stop">نگه‌داشتن ضبط GPX</string>
     <string name="rendering_attr_hideBuildings_name">ساختمان‌ها</string>
     <string name="gpx_start_new_segment">شروع بخش جدید</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">راه‌های غیرموتوری</string>
@@ -1314,7 +1311,6 @@
     <string name="rendering_attr_showSurfaceGrade_name">کیفیت راه</string>
     <string name="rendering_attr_showSurfaces_name">سطح راه</string>
     <string name="rendering_attr_showCycleRoutes_name">مسیرهای دوچرخه</string>
-    <string name="save_global_track_interval_descr">بازهٔ زمانی برای ضبط رد را انتخاب کنید (که از طریق ابزار ضبط GPX روی نقشه فعال می‌شود).</string>
     <string name="save_global_track_interval">بازهٔ زمانی ثبت (سراسری)</string>
     <string name="save_track_to_gpx_globally_descr">می‌توانید با استفاده از ابزارک ضبط GPX روی نقشه، ردنگاری در فایل GPX را خاموش یا روشن کنید.</string>
     <string name="save_track_interval_globally">بازهٔ زمانی ثبت</string>
@@ -1616,7 +1612,6 @@
     <string name="move_marker_bottom_sheet_title">نقشه را جابه‌جا کنید تا موقعیت نشانه عوض شود</string>
     <!-- string name="lat_lon_pattern">طول: %1$.5f عرض: %2$.5f</string -->
     <string name="access_sort">مرتب‌سازی</string>
-    <string name="number_of_gpx_files_selected_pattern">%s فایل GPX انتخاب شده است</string>
     <string name="osm_live_email_desc">برای اطلاع‌رسانی دربارهٔ مشارکت‌های شما.</string>
     <string name="download_files_question_space_with_temp">آیا {0} فایل را دانلود می‌کنید؟ 
 \n {3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی لازم دارید. (از {2} مگابایت)</string>
@@ -2024,7 +2019,6 @@
     <string name="lang_gl">گالیسیایی</string>
     <string name="gps_network_not_enabled">موقعیت‌یاب خاموش است. روشن شود؟</string>
     <string name="disable_recording_once_app_killed">جلوگیری از ثبت خوداتکا</string>
-    <string name="disable_recording_once_app_killed_descrp">هنگامی که برنامه را از طریق برنامه‌های اخیر ببندید ثبت اطلاعات GPX موقتاً متوقف می‌شود. (نشانگر اجرای پس‌زمینه از نوار اعلان حذف می‌شود.)</string>
     <string name="shared_string_import2osmand">درون‌برد به OsmAnd</string>
     <string name="read_full_article">مقالهٔ کامل را بخوانید (آنلاین)</string>
     <string name="shared_string_wikipedia">ویکی‌پدیا</string>
