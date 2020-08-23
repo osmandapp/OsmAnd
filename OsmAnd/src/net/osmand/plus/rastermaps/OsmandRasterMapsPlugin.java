@@ -400,7 +400,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	@Override
 	public void registerMapContextMenuActions(MapActivity mapActivity,
 											  final double latitude, final double longitude,
-											  ContextMenuAdapter adapter, Object selectedObj) {
+											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		if (mapActivity.getMapView().getMainLayer() instanceof MapTileLayer) {
 			ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
