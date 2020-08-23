@@ -327,6 +327,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		Location prevLocation = null;
 		for (int i = 0; i < length; i++) {
 			Location location = resources.getLocation(index);
+			if (location == null) {
+				break;
+			}
 			double dist = 0;
 			if (prevLocation != null) {
 				dist = MapUtils.getDistance(prevLocation.getLatitude(), prevLocation.getLongitude(), location.getLatitude(), location.getLongitude());

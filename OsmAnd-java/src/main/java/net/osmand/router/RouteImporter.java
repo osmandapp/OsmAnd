@@ -98,7 +98,7 @@ public class RouteImporter {
 		for (RouteSegment segment : gpxFile.routeSegments) {
 			RouteDataObject object = new RouteDataObject(region);
 			RouteSegmentResult segmentResult = new RouteSegmentResult(object);
-			segmentResult.readFromBundle(new RouteDataBundle(resources, segment.getStringBundle()));
+			segmentResult.readFromBundle(new RouteDataBundle(resources, segment.toStringBundle()));
 			route.add(segmentResult);
 		}
 	}
@@ -106,7 +106,7 @@ public class RouteImporter {
 	private void collectTypes() {
 		int i = 0;
 		for (RouteType routeType : gpxFile.routeTypes) {
-			StringBundle bundle = routeType.getStringBundle();
+			StringBundle bundle = routeType.toStringBundle();
 			String t = bundle.getString("t", null);
 			String v = bundle.getString("v", null);
 			region.initRouteEncodingRule(i++, t, v);

@@ -25,7 +25,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.measurementtool.NewGpxData.ActionType;
+import net.osmand.plus.measurementtool.GpxData.ActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.MapUtils;
 
@@ -224,8 +224,8 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (!TextUtils.isEmpty(pointName)) {
 			return pointName;
 		}
-		NewGpxData newGpxData = editingCtx.getNewGpxData();
-		if (newGpxData != null && newGpxData.getActionType() == ActionType.ADD_ROUTE_POINTS) {
+		GpxData gpxData = editingCtx.getGpxData();
+		if (gpxData != null && gpxData.getActionType() == ActionType.ADD_ROUTE_POINTS) {
 			return getString(R.string.route_point) + " - " + (pos + 1);
 		}
 		return getString(R.string.plugin_distance_point) + " - " + (pos + 1);
@@ -265,8 +265,8 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 			}
 			description.append(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
 		}
-		NewGpxData newGpxData = editingCtx.getNewGpxData();
-		if (newGpxData != null && newGpxData.getActionType() == ActionType.EDIT_SEGMENT) {
+		GpxData gpxData = editingCtx.getGpxData();
+		if (gpxData != null && gpxData.getActionType() == ActionType.EDIT_SEGMENT) {
 			double elevation = pt.ele;
 			if (!Double.isNaN(elevation)) {
 				description.append("  ").append((getString(R.string.altitude)).substring(0, 1)).append(": ");

@@ -54,7 +54,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
-import net.osmand.plus.measurementtool.NewGpxData;
+import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
@@ -918,14 +918,14 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 	}
 
-	public void addNewGpxData(NewGpxData.ActionType actionType) {
+	public void addNewGpxData(GpxData.ActionType actionType) {
 		TrackActivity activity = getTrackActivity();
 		if (activity != null) {
 			activity.addNewGpxData(actionType);
 		}
 	}
 
-	public void addNewGpxData(NewGpxData.ActionType actionType, GPXUtilities.TrkSegment segment) {
+	public void addNewGpxData(GpxData.ActionType actionType, GPXUtilities.TrkSegment segment) {
 		TrackActivity activity = getTrackActivity();
 		if (activity != null) {
 			activity.addNewGpxData(actionType, segment);
@@ -952,9 +952,9 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 						new PointDescription(PointDescription.POINT_TYPE_WPT, app.getString(R.string.add_waypoint));
 				addPoint(pointWptDescription);
 			} else if (i == R.id.route_text_layout || i == R.id.route_fab) {
-				addNewGpxData(NewGpxData.ActionType.ADD_ROUTE_POINTS);
+				addNewGpxData(GpxData.ActionType.ADD_ROUTE_POINTS);
 			} else if (i == R.id.line_text_layout || i == R.id.line_fab) {
-				addNewGpxData(NewGpxData.ActionType.ADD_SEGMENT);
+				addNewGpxData(GpxData.ActionType.ADD_SEGMENT);
 			}
 		}
 	};

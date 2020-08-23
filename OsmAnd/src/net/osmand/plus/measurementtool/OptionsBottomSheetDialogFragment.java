@@ -89,7 +89,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					public void onClick(View v) {
 						Fragment fragment = getTargetFragment();
 						if (fragment instanceof OptionsFragmentListener) {
-							((OptionsFragmentListener) fragment).addToGpxOnClick();
+							((OptionsFragmentListener) fragment).saveChangesOnClick();
 						}
 						dismiss();
 					}
@@ -189,7 +189,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		void snapToRoadOnCLick();
 
-		void addToGpxOnClick();
+		void saveChangesOnClick();
 
 		void saveAsNewTrackOnClick();
 

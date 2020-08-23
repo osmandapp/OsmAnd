@@ -39,7 +39,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.NEXT_SEGMENT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 
 public class MeasurementEditingContext {
@@ -54,7 +53,7 @@ public class MeasurementEditingContext {
 	private final TrkSegment after = new TrkSegment();
 	private TrkSegment afterCacheForSnap;
 
-	private NewGpxData newGpxData;
+	private GpxData gpxData;
 
 	private int selectedPointPosition = -1;
 	private WptPt originalPointToMove;
@@ -139,6 +138,14 @@ public class MeasurementEditingContext {
 		return commandManager;
 	}
 
+	public boolean hasChanges() {
+		return commandManager.hasChanges();
+	}
+
+	public void setChangesSaved() {
+		commandManager.resetChangesCounter();
+	}
+
 	boolean isInAddPointMode() {
 		return inAddPointMode;
 	}
@@ -167,20 +174,21 @@ public class MeasurementEditingContext {
 		this.inAddPointMode = inAddPointMode;
 	}
 
-	NewGpxData getNewGpxData() {
-		return newGpxData;
+	@Nullable
+	GpxData getGpxData() {
+		return gpxData;
 	}
 
 	public boolean isNewData() {
-		return newGpxData == null;
+		return gpxData == null;
 	}
 
-	public void setNewGpxData(NewGpxData newGpxData) {
-		this.newGpxData = newGpxData;
+	public void setGpxData(GpxData gpxData) {
+		this.gpxData = gpxData;
 	}
 
 	public boolean hasRoutePoints() {
-		return newGpxData != null && newGpxData.getGpxFile() != null && newGpxData.getGpxFile().hasRtePt();
+		return gpxData != null && gpxData.getGpxFile() != null && gpxData.getGpxFile().hasRtePt();
 	}
 
 	public CalculationMode getCalculationMode() {
@@ -390,15 +398,15 @@ public class MeasurementEditingContext {
 	}
 
 	void addPoints() {
-		NewGpxData newGpxData = getNewGpxData();
-		if (newGpxData == null || newGpxData.getTrkSegment() == null || Algorithms.isEmpty(newGpxData.getTrkSegment().points)) {
+		GpxData gpxData = getGpxData();
+		if (gpxData == null || gpxData.getTrkSegment() == null || Algorithms.isEmpty(gpxData.getTrkSegment().points)) {
 			return;
 		}
-		List<WptPt> points = newGpxData.getTrkSegment().points;
+		List<WptPt> points = gpxData.getTrkSegment().points;
 		if (isTrackSnappedToRoad()) {
-			RouteImporter routeImporter = new RouteImporter(newGpxData.getGpxFile());
+			RouteImporter routeImporter = new RouteImporter(gpxData.getGpxFile());
 			List<RouteSegmentResult> segments = routeImporter.importRoute();
-			List<WptPt> routePoints = newGpxData.getGpxFile().getRoutePoints();
+			List<WptPt> routePoints = gpxData.getGpxFile().getRoutePoints();
 			int prevPointIndex = 0;
 			for (int i = 0; i < routePoints.size() - 1; i++) {
 				Pair<WptPt, WptPt> pair = new Pair<>(routePoints.get(i), routePoints.get(i + 1));
@@ -504,10 +512,10 @@ public class MeasurementEditingContext {
 	}
 
 	boolean isTrackSnappedToRoad() {
-		NewGpxData newGpxData = getNewGpxData();
-		return newGpxData != null && newGpxData.getTrkSegment() != null
-				&& !newGpxData.getTrkSegment().points.isEmpty()
-				&& newGpxData.getGpxFile().hasRoute();
+		GpxData gpxData = getGpxData();
+		return gpxData != null && gpxData.getTrkSegment() != null
+				&& !gpxData.getTrkSegment().points.isEmpty()
+				&& gpxData.getGpxFile().hasRoute();
 	}
 
 	private void updateCacheForSnap(boolean both) {
