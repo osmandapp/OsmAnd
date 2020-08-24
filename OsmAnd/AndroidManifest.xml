@@ -408,6 +408,7 @@
 			</intent-filter>
 		</receiver>
 
+		<activity android:name=".activities.ServerActivity" android:label="@string/shared_string_settings" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.activities.SettingsActivity" android:label="@string/shared_string_settings" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.activities.SettingsGeneralActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation" />
