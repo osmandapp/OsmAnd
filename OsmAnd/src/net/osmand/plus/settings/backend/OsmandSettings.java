@@ -3939,7 +3939,7 @@ public class OsmandSettings {
 		return OSMAND_THEME.getModeValue(mode) != OSMAND_DARK_THEME;
 	}
 
-	private boolean isLightSystemDefaultTheme() {
+	public boolean isLightSystemDefaultTheme() {
 		Configuration config = ctx.getResources().getConfiguration();
 		int systemNightModeState = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
 		if (systemNightModeState == Configuration.UI_MODE_NIGHT_YES) {
