@@ -18,8 +18,8 @@ var goMap = {
 	'config':{
 		'containerid': 'gocontainer',		
 		'defaults':{
-			'lat':51.505,
-			'lon':-0.09,
+			'lat':50.27,
+			'lon':30.30,
 			'zoom':13
 			}
 	},
@@ -82,6 +82,15 @@ var goMap = {
 	}
 };
 
+function toColor(num) {
+            num >>>= 0;
+            var b = num & 0xFF,
+                g = (num & 0xFF00) >>> 8,
+                r = (num & 0xFF0000) >>> 16,
+                a = ( (num & 0xFF000000) >>> 24 ) / 255 ;
+            return "rgba(" + [r, g, b, a].join(",") + ")";
+         }
+
 (function($) {
 	$.mapwidget = function(config) {
 		var loc = goMap.point.lat + '/' + goMap.point.lon;
@@ -107,12 +116,29 @@ var goMap = {
 			},
 			addMarker:function(point){
 				L.marker([point.lat, point.lon]).addTo(mapobj.map);
+			},
+			addPopupMarker:function(favorite,onClickEvent){
+			    window.point = favorite;
+                var point = {};
+		    	    point.lat = favorite.latitude;
+		    	    point.lon = favorite.longitude;
+			    var popup = L.popup().setContent(
+			                "name: <b>" + favorite.name + "</b><br/>" +
+			                "address: <i>" + favorite.address + "</i><br/>"
+			                 + "category: " + favorite.category);
+			    L.marker([point.lat, point.lon])
+			        .bindPopup(popup)
+			        .addTo(mapobj.map)
+			        .on('click', function(e) {
+                        onClickEvent(e);
+                    });
 			}
 		};
 		mapobj.init();
 		return {            
             showPoint: mapobj.showPoint,
-            addMarker: mapobj.addMarker
+            addMarker: mapobj.addMarker,
+            addPopupMarker: mapobj.addPopupMarker
         };
 	};
 })(jQuery);

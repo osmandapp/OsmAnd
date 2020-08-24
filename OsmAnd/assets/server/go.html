@@ -44,6 +44,10 @@
 		return popupContent;
 	    }
 
+	    function markerClick(e){
+
+	    }
+
         function setupMarkers(){
             $.ajax({
                 type: 'GET',
@@ -54,10 +58,7 @@
             complete: function(r) {
                 var points = JSON.parse(r.responseText);
                 points.forEach(e => {
-                    var point = {};
-		    	    point.lat = e.latitude;
-		    	    point.lon = e.longitude;
-		    	    window.goMap.map.addMarker(point);
+		    	    window.goMap.map.addPopupMarker(e,markerClick);
                 });
             },
             error: function(e) {
@@ -65,8 +66,11 @@
             }
             });
         }
-        //TODO add document ready or map ready event
-        setTimeout(function(){ setupMarkers(); }, 4000);
+
+        $( document ).ready(function() {
+            setupMarkers();
+        });
+
     </script>
 </head>
 <body>
