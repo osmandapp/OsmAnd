@@ -624,7 +624,7 @@
     <string name="background_service_is_enabled_question">OsmAnd பின்னணி சேவை இன்னும் இயங்கும். அதை நிறுத்துங்கள், கூடவா\?</string>
     <string name="sleep_mode_stop_dialog">GPS பின்னணி பயன்முறையை நிறுத்தவா\?</string>
     <string name="stop_navigation_service">நிறுத்து</string>
-    <string name="confirm_every_run">எப்போதும் கேள்</string>
+    <string name="confirm_every_run">எப்போதும் கேள்
 \n</string>
     <string name="save_global_track_interval">பொது பதிவு இடைவெளி</string>
     <string name="background_service_int">ஜிபிஎஸ் வேக் அப் இடைவேளை</string>
