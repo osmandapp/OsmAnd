@@ -484,14 +484,14 @@ POIの更新は利用できません</string>
     <string name="about_version">バージョン：</string>
     <string name="shared_string_about">OsmAnd Maps &amp; Navigationについて</string>
     <string name="about_settings_descr">バージョン情報、ライセンス、プロジェクトメンバー</string>
-    <string name="local_index_tile_data_zooms">ズームダウンロード中: %1$s</string>
+    <string name="local_index_tile_data_zooms">ダウンロード済みズームレベル: %1$s</string>
     <string name="local_index_tile_data_expire">有効期限 (分): %1$s</string>
     <string name="local_index_tile_data_downloadable">ダウンロード可能: %1$s</string>
     <string name="local_index_tile_data_maxzoom">最大ズーム: %1$s</string>
     <string name="local_index_tile_data_minzoom">最小ズーム: %1$s</string>
     <string name="local_index_tile_data_name">タイルデータ: %1$s</string>
-    <string name="edit_tilesource_successfully">タイルソース %1$s は正常に保存されました</string>
-    <string name="edit_tilesource_elliptic_tile">楕円メルカトル</string>
+    <string name="edit_tilesource_successfully">タイルソース %1$s を保存しました</string>
+    <string name="edit_tilesource_elliptic_tile">楕円体メルカトル図法</string>
     <string name="edit_tilesource_maxzoom">最大ズーム</string>
     <string name="edit_tilesource_expiration_time">有効期限(分)</string>
     <string name="edit_tilesource_minzoom">最小ズーム</string>
@@ -504,8 +504,8 @@ POIの更新は利用できません</string>
     <string name="driving_region_japan">日本</string>
     <string name="driving_region_us">アメリカ</string>
     <string name="driving_region_canada">カナダ</string>
-    <string name="driving_region_europe_asia">ヨーロッパ、アジア、ラテンアメリカ＆左記類似国</string>
-    <string name="driving_region_uk">イギリス、インド＆左記類似国</string>
+    <string name="driving_region_europe_asia">ヨーロッパ、アジア、ラテンアメリカなど</string>
+    <string name="driving_region_uk">イギリス、インドなど</string>
     <string name="speak_title">音声案内…</string>
     <string name="speak_descr">道路名、交通指示警告(強制停止、スピードバンプ等含む)、スピードカメラ、法定速度の音声アナウンスの設定をします。</string>
     <string name="speak_street_names">通りの名前 (TTS形式音声のみ)</string>
@@ -1370,7 +1370,7 @@ POIの更新は利用できません</string>
     <string name="map_widget_left">左パネル</string>
     <string name="shared_string_show">表示</string>
     <string name="configure_map">マップ設定</string>
-    <string name="search_radius_proximity">内</string>
+    <string name="search_radius_proximity">以内</string>
     <string name="anonymous_user_hint">以下は匿名ユーザーでは使用できません:↵\n- グループ作成;↵\n- サーバを利用してのグループやデバイスの同期;↵\n- ウェブサイト上の個別ダッシュボードでのグループやデバイスの管理.</string>
     <string name="anonymous_user">匿名ユーザー</string>
     <string name="logged_as">%1$sとしてログインしました</string>
@@ -2102,7 +2102,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_hideWaterPolygons_name">水域ポリゴン</string>
     <string name="wiki_around">近隣のWikipedia記事</string>
     <string name="trip_rec_notification_settings">記録機能のクイックスタートを有効化</string>
-    <string name="trip_rec_notification_settings_desc">旅行記録を許可するシステム通知を表示します。</string>
+    <string name="trip_rec_notification_settings_desc">旅行記録を開始できるようにシステム通知を表示するよう設定します。</string>
     <string name="shared_string_notifications">通知</string>
     <string name="shared_string_trip">旅行</string>
     <string name="shared_string_recorded">記録</string>
@@ -2420,7 +2420,7 @@ POIの更新は利用できません</string>
     <string name="improve_coverage_mapillary">Mapillaryにて写真の有効領域を広げましょう</string>
     <string name="improve_coverage_install_mapillary_desc">Mapillaryをインストールして、このマップの場所に写真を追加します。</string>
     <string name="open_mapillary">Mapillaryを開く</string>
-    <string name="mapillary">Mapillary(ストリート写真)</string>
+    <string name="mapillary">ストリート写真(Mapillary)</string>
     <string name="mapillary_widget">Mapillaryウィジェット</string>
     <string name="mapillary_image">Mapillary画像</string>
     <string name="mapillary_action_descr">Mapillaryを利用し、あなたが撮影した路上写真を共有します。</string>
@@ -3030,7 +3030,7 @@ POIの更新は利用できません</string>
     <string name="turn_screen_on_router">方向転換時に起動</string>
     <string name="turn_screen_on_time_descr">画面がオンになる時間を調整できます。</string>
     <string name="turn_screen_on_sensor">近接センサーを使用</string>
-    <string name="turn_screen_on_sensor_descr">【近接センサー搭載端末のみ】ナビゲーション中に画面の近くに手をかざすと、画面をオンにします。</string>
+    <string name="turn_screen_on_sensor_descr">【近接センサー搭載端末のみ】画面の近くで手を振ると、画面をオンにします。</string>
     <string name="external_input_device">外部入力機器</string>
     <string name="external_input_device_descr">汎用キーボードやWunderLINQなどの外部コントロールデバイスを選択してください。</string>
     <string name="sett_no_ext_input">無し</string>
@@ -3316,7 +3316,7 @@ POIの更新は利用できません</string>
     <string name="map_during_navigation_info">ナビゲーション中のマップ表示</string>
     <string name="map_during_navigation">ナビゲーション中のマップ表示</string>
     <string name="shared_string_other">その他</string>
-    <string name="vehicle_parameters_descr">重量、高さ、速度</string>
+    <string name="vehicle_parameters_descr">重量、高さ、長さ、速度</string>
     <string name="vehicle_parameters">車両パラメーター</string>
     <string name="voice_announces_info">音声案内は、ナビゲーション中にのみ再生されます。</string>
     <string name="voice_announces_descr">ナビゲーション指示と音声案内</string>
@@ -3682,7 +3682,7 @@ POIの更新は利用できません</string>
     <string name="additional_actions_descr">“%1$s”ボタンをタップすると、これらの機能にアクセスできます。</string>
     <string name="move_inside_category">アイテムはこのカテゴリ内でのみ移動できます。</string>
     <string name="developer_plugin">開発者用プラグイン</string>
-    <string name="replace_point_descr">別のポイントと置き換えます</string>
+    <string name="replace_point_descr">別の地点と置き換えます</string>
     <string name="app_mode_ski_touring">スキーツーリング</string>
     <string name="app_mode_ski_snowmobile">スノーモービル</string>
     <string name="custom_osmand_plugin">OsmAndプラグインのカスタマイズ</string>
@@ -3695,7 +3695,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_language">言語</string>
     <string name="shared_string_all_languages">すべての言語</string>
     <string name="wiki_menu_download_descr">ウィキペディアPOIをマップ上に表示するには、追加マップが必要です。</string>
-    <string name="select_wikipedia_article_langs">ウィキペディア記事がマップに表示される際の言語を選択します。記事を読んでいる最中も言語を切り替えることができます。</string>
+    <string name="select_wikipedia_article_langs">マップに表示されるWikipedia記事の言語を選択します。記事を読んでいる最中も言語を切り替えることができます。</string>
     <string name="some_articles_may_not_available_in_lang">一部のウィキペディア記事は、ご使用の言語で利用できない場合があります。</string>
     <string name="lang_zhyue">広東語</string>
     <string name="lang_zhminnan">ビン南語(閩南語・福建語)</string>
@@ -3709,7 +3709,7 @@ POIの更新は利用できません</string>
     <string name="lang_scn">シチリア語</string>
     <string name="lang_gu">グジャラート語</string>
     <string name="lang_cv">チュヴァシ語</string>
-    <string name="gpx_parse_error">OsmAnd GPXの形式が正しくありません。サポートチームに連絡しての調査をおすすめします</string>
+    <string name="gpx_parse_error">OsmAnd GPXの形式が正しくありません。サポートチームに連絡しての調査をおすすめします。</string>
     <string name="screen_timeout">画面のタイムアウト</string>
     <string name="turn_screen_on_descr">画面復帰オプションを選択します(端末設定でロックされる場合は、OsmAndがバックグラウンド動作でないことを確認してください):</string>
     <string name="system_screen_timeout_descr">端末側の画面オフ(省電力)設定に従って画面を消灯します。</string>
@@ -3760,4 +3760,109 @@ POIの更新は利用できません</string>
     <string name="route_between_points">地点間のルート</string>
     <string name="plan_a_route">ルートを計画</string>
     <string name="add_to_a_track">経路に追加</string>
+    <string name="width_limit_description">車幅を入力してください。一部のルートにおいては、幅の広い車両では通行できない場合があります。</string>
+    <string name="height_limit_description">車高を入力してください。一部のルートにおいては、車高の高い車両では通行できない場合があります。</string>
+    <string name="weight_limit_description">車両の重量を入力してください。一部のルートにおいては、大型車両では通行できない場合があります。</string>
+    <string name="lenght_limit_description">車の長さを入力してください。一部のルートにおいては、長い車両では通行できない場合があります。</string>
+    <string name="shared_string_always">常に</string>
+    <string name="screen_control">画面制御</string>
+    <string name="turn_screen_on_power_button_disabled">現在無効。 \'画面を表示する時間\'の下にある\'画面を常に表示\'への設定が必要です。</string>
+    <string name="keep_screen_off">画面オフを維持</string>
+    <string name="pseudo_mercator_projection">疑似メルカトル図法</string>
+    <string name="one_image_per_tile">タイルごとに1つの画像ファイル</string>
+    <string name="sqlite_db_file">SQLiteDBファイル</string>
+    <string name="online_map_name_helper_text">オンラインマップソースの名前を入力します。</string>
+    <string name="online_map_url_helper_text">オンラインソースのURLを入力するか貼り付けます。</string>
+    <string name="edit_online_source">オンラインソースを編集</string>
+    <string name="expire_time">有効期限</string>
+    <string name="mercator_projection">メルカトル図法</string>
+    <string name="storage_format">保存形式</string>
+    <string name="map_source_zoom_levels">オンラインマップを表示またはロードするための最小および最大ズームレベルを設定します。</string>
+    <string name="map_source_zoom_levels_descr">マップとして、またはオーバーレイ/アンダーレイで使用すると、画面に影響します。
+\n
+\n%1$s:マップは選択したズームレベル範囲に制限されています。
+\n
+\n%2$sは、元のタイルが表示されるレベルであり、値の範囲外では強制拡大または強制縮小が発生します。</string>
+    <string name="expire_time_descr">キャッシュされたタイルは、指定された分数後に再ダウンロードされます。タイルを自動更新するつもりがなければ、このフィールドを空のままにします。
+\n
+\n1日は1,440分です。
+\n1週間は10,080分です。
+\n1か月は43,829分です。</string>
+    <string name="tiles_storage_descr">ダウンロードしたタイルの保存方法を選択します。</string>
+    <string name="export_import_quick_actions_with_profiles_promo">アプリプロファイルを利用してクイックアクションをエクスポートまたはインポートできます。</string>
+    <string name="shared_string_delete_all_q">全て削除しますか？</string>
+    <string name="delete_all_actions_message_q">%d個のクイックアクションを完全に削除してもよろしいですか？</string>
+    <string name="uninstall_speed_cameras">スピードカメラデータの削除</string>
+    <string name="shared_string_legal">法的</string>
+    <string name="speed_camera_pois">スピードカメラPOI</string>
+    <string name="speed_cameras_legal_descr">一部の国や地域では、スピードカメラ警告機能の使用が法律で禁止されています。
+\n
+\n国の法律に基づいて、使用を望むかどうかを決定する必要があります。
+\n
+\n%1$sを選択すると、スピードカメラに関するアラートと警告が表示されます。
+\n
+\n%2$sを選択すると、スピードカメラに関するすべてのデータ(警告、通知、POI)が、OsmAndの再インストールを行うまで削除されます。</string>
+    <string name="keep_active">アクティブを維持</string>
+    <string name="shared_string_uninstall">アンインストール</string>
+    <string name="speed_cameras_alert">一部の国では、スピードカメラの事前警告は法律で禁止されています。</string>
+    <string name="screen_timeout_descr">\"%1$s\"がオンの場合、設定された動作時間はそちらに依存します。</string>
+    <string name="default_screen_timeout">デフォルトの画面タイムアウト時間</string>
+    <string name="shared_string_tones">トーン</string>
+    <string name="shared_string_meters">メートル</string>
+    <string name="details_dialog_decr">追加マップの詳細を表示または非表示にします</string>
+    <string name="shared_string_night_map">夜間マップ</string>
+    <string name="add_online_source">オンラインソースを追加</string>
+    <string name="clear_tiles_warning">これらの変更を適用すると、このタイルソースのキャッシュデータがクリアされます</string>
+    <string name="vessel_height_warning_link">船の高さを設定</string>
+    <string name="vessel_height_warning">低い橋を避けるために船の高さを調整できます。ブリッジが可動式の場合は、開いた状態の高さが参照されます。</string>
+    <string name="vessel_height_limit_description">低い橋を避けるために船の高さを設定します。注：ブリッジが可動式の場合は、開いた状態の高さが参照されます。</string>
+    <string name="vessel_width_limit_description">狭い橋を避けるために船の幅を設定します</string>
+    <string name="quick_action_showhide_mapillary_title">Mapillaryの表示切替</string>
+    <string name="quick_action_mapillary_hide">Mapillaryを非表示</string>
+    <string name="quick_action_mapillary_show">Mapillaryを表示</string>
+    <string name="quick_action_showhide_mapillary_descr">マップ上のMapillaryレイヤーの表示/非表示を切り替えるトグルボタンです。</string>
+    <string name="routing_attr_length_description">ルート検索時に指定した車両の長さを考慮します。</string>
+    <string name="routing_attr_length_name">長さ制限</string>
+    <string name="shared_string_bearing">ベアリング</string>
+    <string name="item_deleted">%1$sを削除しました</string>
+    <string name="speed_cameras_restart_descr">スピードカメラのデータを完全に削除するには、再起動が必要です。</string>
+    <string name="shared_string_uninstall_and_restart">アンインストールして再起動</string>
+    <string name="speed_cameras_removed_descr">このアプリには、スピードカメラに関する情報はありません。</string>
+    <string name="app_mode_inline_skates">インラインスケート</string>
+    <string name="quick_action_remove_next_destination">次の目的地を削除</string>
+    <string name="please_provide_point_name_error">地点の名前を入力してください</string>
+    <string name="quick_action_remove_next_destination_descr">ルート上の現在の目的地点が削除されます。目的地に着いた場合はナビは停止します。</string>
+    <string name="search_download_wikipedia_maps">Wikipediaマップのダウンロード</string>
+    <string name="plugin_wikipedia_description">Wikipediaから興味のあるポイントに関する情報を取得します。それがあなたのモバイルオフラインガイドになります - Wikipediaプラグインを有効にして、周囲の名所に関する記事を楽しんでください。</string>
+    <string name="add_hidden_group_info">追加した地点はマップ上に表示されません。選択したグループは非表示になっているため、\"%s\"から見つけることができます。</string>
+    <string name="shared_string_save_as_gpx">新しい経路ファイルとして保存</string>
+    <string name="add_segment_to_the_track">経路ファイルを追加</string>
+    <string name="shared_string_gpx_files">経路</string>
+    <string name="layer_gpx_layer">経路</string>
+    <string name="show_gpx">経路</string>
+    <string name="monitoring_control_start">GPX</string>
+    <string name="save_track_to_gpx_globally">GPXファイルへの経路ログ</string>
+    <string name="shared_string_gpx_route">ルート経路</string>
+    <string name="empty_state_my_tracks">経路ファイルを追加</string>
+    <string name="empty_state_my_tracks_desc">経路ファイルを記録、またはインポートします</string>
+    <string name="context_menu_item_add_waypoint">経路経由地点を追加</string>
+    <string name="quick_action_add_gpx">経路経由地点を追加</string>
+    <string name="attach_to_the_roads">道路に貼り付ける</string>
+    <string name="map_widget_monitoring">旅程の記録</string>
+    <string name="marker_save_as_track">経路ファイルとして保存</string>
+    <string name="follow_track">経路を辿る</string>
+    <string name="follow_track_descr">辿るための経路ファイルを選択します</string>
+    <string name="import_track_descr">経路ファイルを選択、または端末のストレージからインポートします。</string>
+    <string name="select_another_track">別の経路を選択</string>
+    <string name="pass_whole_track_descr">ナビゲートする経路の地点です</string>
+    <string name="navigate_to_track_descr">現在地から経路へ移動します</string>
+    <string name="start_of_the_track">経路の出発点</string>
+    <string name="nearest_point">最寄りの地点</string>
+    <string name="delete_address">住所を削除</string>
+    <string name="add_address">住所を追加</string>
+    <string name="access_hint_enter_address">住所を入力</string>
+    <string name="plan_route_trim_before">先にトリミング</string>
+    <string name="plan_route_trim_after">後でトリミング</string>
+    <string name="plan_route_change_route_type_before">先にルートタイプを変更</string>
+    <string name="plan_route_change_route_type_after">後でルートタイプを変更</string>
 </resources>
