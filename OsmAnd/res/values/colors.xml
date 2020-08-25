@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="splash_screen_background_color">@color/map_background_color_light</color>
+
 	<color name="text_color_primary_light">#212121</color>
 	<color name="text_color_primary_dark">#cccccc</color>
 	<color name="text_color_secondary_light">#727272</color>

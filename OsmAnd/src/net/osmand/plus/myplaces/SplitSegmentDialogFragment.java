@@ -38,7 +38,6 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.TrackActivity;
@@ -83,7 +82,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		TrackActivity trackActivity = requireTrackActivity();
 		app = trackActivity.getMyApplication();
 		ic = app.getUIUtilities();
-		boolean isLightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		boolean isLightTheme = app.getSettings().isLightContent();
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}

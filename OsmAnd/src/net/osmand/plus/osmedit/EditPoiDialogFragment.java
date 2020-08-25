@@ -140,7 +140,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
-		boolean isLightTheme = getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		boolean isLightTheme = getSettings().isLightContent();
 
 		if (savedInstanceState != null) {
 			@SuppressWarnings("unchecked")

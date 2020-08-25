@@ -78,7 +78,12 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
 		RelativeLayout view = new RelativeLayout(activity);
 		view.setOnClickListener(null);
-		view.setBackgroundColor(getResources().getColor(R.color.map_background_color_light));
+		int backgroundColorId = R.color.map_background_color_light;
+		if (app.getSettings().isSupportSystemDefaultTheme()
+				&& !app.getSettings().isLightSystemDefaultTheme()) {
+			backgroundColorId = R.color.map_background_color_dark;
+		}
+		view.setBackgroundColor(getResources().getColor(backgroundColorId));
 
 		ImageView logo = new ImageView(getContext());
 		logo.setId(LOGO_ID);
