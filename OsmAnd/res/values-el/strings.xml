@@ -92,7 +92,6 @@
     <string name="map_widget_compass">Πυξίδα</string>
     <string name="map_widget_reset">Επαναφορά στα προκαθορισμένα</string>
     <string name="map_widget_parking">Στάθμευση</string>
-    <string name="map_widget_monitoring">Καταγραφή GPX</string>
     <string name="map_widget_speed">Ταχύτητα</string>
     <string name="map_widget_distance">Προορισμός</string>
     <string name="map_widget_altitude">Υψόμετρο</string>
@@ -343,7 +342,6 @@
     <string name="animate_route">Έναρξη προσομοίωσης</string>
     <string name="file_can_not_be_renamed">Το αρχείο δεν μπορούσε να μετονομαστεί.</string>
     <string name="file_with_name_already_exists">Υπάρχει ήδη ένα αρχείο με αυτό το όνομα.</string>
-    <string name="shared_string_gpx_route">διαδρομή GPX</string>
     <string name="poi_query_by_name_matches_categories">Βρέθηκαν αρκετές σχετικές κατηγορίες ΣΕ.</string>
     <string name="data_to_search_poi_not_available">Λάβετε δεδομένα εκτός διαδικτύου για να αναζητήσετε ΣΕ.</string>
     <string name="poi_filter_by_name">Αναζήτηση βάσει ονόματος</string>
@@ -360,7 +358,6 @@
     <string name="search_position_map_view">Τρέχον κέντρο χάρτη</string>
     <string name="select_search_position">Πηγή:</string>
     <string name="context_menu_item_search">Αναζήτηση κοντινών αποστάσεων</string>
-    <string name="shared_string_save_as_gpx">Αποθήκευση ως νέο αρχείο GPX</string>
     <string name="route_successfully_saved_at">Η διαδρομή αποθηκεύτηκε ως \'%1$s\'.</string>
     <string name="filename_input">Όνομα αρχείου: </string>
     <string name="file_with_name_already_exist">Υπάρχει ήδη αρχείο με το ίδιο όνομα.</string>
@@ -462,7 +459,6 @@
     <string name="context_menu_item_share_location">Κοινή χρήση τοποθεσίας</string>
     <string name="add_waypoint_dialog_added">Προστέθηκε το GPX σημείο διαδρομής \'\'{0}\'\'</string>
     <string name="add_waypoint_dialog_title">Προσθήκη σημείου διαδρομής στο εγγραφόμενο ίχνος GPX</string>
-    <string name="context_menu_item_add_waypoint">Προσθήκη σημείου GPX</string>
     <string name="amenity_type_administrative">Διοικητικό</string>
     <string name="amenity_type_barrier">Φράκτης</string>
     <string name="amenity_type_education">Εκπαίδευση</string>
@@ -553,7 +549,6 @@
     <string name="voice">Ηχογραφημένη φωνή</string>
     <string name="no_vector_map_loaded">Οι διανυσματικοί χάρτες δεν φορτώθηκαν</string>
     <string name="gpx_files_not_found">Δεν βρέθηκαν αρχεία GPX στον κατάλογο ιχνών</string>
-    <string name="layer_gpx_layer">Αρχεία GPX…</string>
     <string name="error_reading_gpx">Αδυναμία ανάγνωσης δεδομένων GPX.</string>
     <string name="vector_data">Διανυσματικοί χάρτες χωρίς σύνδεση</string>
     <string name="transport_context_menu">Αναζήτηση Μ.Μ.Μ στη στάση</string>
@@ -728,7 +723,6 @@
     <string name="save_track_interval">Διάστημα καταγραφής κατά την πλοήγηση</string>
     <string name="save_track_interval_descr">Προσδιορίστε το διάστημα καταγραφής για την εγγραφή ιχνών κατά την πλοήγηση</string>
     <string name="save_track_to_gpx_descrp">Το ίχνος GPX αποθηκεύεται αυτόματα στον κατάλογο ιχνών κατά την πλοήγηση.</string>
-    <string name="save_track_to_gpx">Αυτόματη εγγραφή ίχνους κατά την πλοήγηση</string>
     <string name="update_tile">Ενημέρωση χάρτη</string>
     <string name="reload_tile">Ανανέωση πλακιδίου</string>
     <string name="mark_point">Στόχος</string>
@@ -861,7 +855,6 @@
     <string name="no_buildings_found">Δεν βρέθηκαν κτήρια.</string>
     <string name="route_descr_lat_lon">Πλ %1$.3f μήκ %2$.3f</string>
     <string name="map_widget_max_speed">Όριο ταχύτητας</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Όρια</string>
     <string name="rendering_attr_noAdminboundaries_description">Περιορισμός εμφάνισης διοικητικών ορίων (επίπεδα διαχειριστή 5-9).</string>
     <string name="download_select_map_types">Άλλοι χάρτες</string>
@@ -1227,8 +1220,6 @@
     <string name="rendering_value_car_name">Αυτοκίνητο</string>
     <string name="rendering_value_bicycle_name">Ποδήλατο</string>
     <string name="rendering_value_pedestrian_name">Πεζοπόρος</string>
-    <string name="gpx_monitoring_start">Συνέχιση καταγραφής GPX</string>
-    <string name="gpx_monitoring_stop">Παύση καταγραφής GPX</string>
     <string name="gpx_start_new_segment">Έναρξη νέου τμήματος</string>
     <string name="shared_string_all">Όλα</string>
     <string name="way_alarms">Προειδοποιήσεις κυκλοφορίας</string>
@@ -1240,7 +1231,6 @@
     <string name="distance">Απόσταση</string>
     <string name="index_tours">Περιηγήσεις</string>
     <string name="shared_string_waypoints">Σημεία διαδρομής</string>
-    <string name="save_track_to_gpx_globally">Καταγραφή ίχνους σε αρχείο GPX</string>
     <string name="save_track_to_gpx_globally_descr">Η γενική καταγραφή θέσης σε αρχείο GPX μπορεί να ενεργοποιηθεί και να απενεργοποιηθεί χρησιμοποιώντας το γραφικό στοιχείο καταγραφής GPX στον χάρτη.</string>
     <string name="save_track_interval_globally">Διάστημα καταγραφής</string>
     <string name="rendering_attr_publicTransportMode_name">Λεωφορεία, τρόλεϊ, κλειστά δρομολόγια</string>
@@ -1525,7 +1515,6 @@
     <string name="access_hint_enter_name">Εισαγωγή ονόματος</string>
     <string name="access_hint_enter_category">Εισαγωγή κατηγορίας</string>
     <string name="access_hint_enter_description">Εισαγωγή περιγραφής.</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX αρχεία επιλέχτηκαν</string>
     <string name="rendering_value_thin_name">Λεπτή</string>
     <string name="rendering_value_medium_name">Μέτρια</string>
     <string name="rendering_value_bold_name">Παχιά</string>
@@ -1713,7 +1702,6 @@
     <string name="shared_string_sort">Ταξινόμηση</string>
     <string name="coordinate_input">Η εισαγωγή συντεταγμένης</string>
     <string name="marker_save_as_track_descr">Εξαγωγή των δεικτών σας στο παρακάτω αρχείο GPX:</string>
-    <string name="marker_save_as_track">Αποθήκευση ως αρχείο GPX</string>
     <string name="move_to_history">Μετακίνηση στο ιστορικό</string>
     <string name="group_will_be_removed_after_restart">Η ομάδα θα εξαφανιστεί την επόμενη φορά που θα ξεκινήσετε την εφαρμογή.</string>
     <string name="show_guide_line">Εμφάνιση κατευθυντήριων γραμμών</string>
@@ -2259,7 +2247,6 @@
     <string name="lang_kab">Καμπίλε</string>
     <string name="lang_ber">Βερβερικά</string>
     <string name="disable_recording_once_app_killed">Αποτροπή αυτόνομης καταγραφής</string>
-    <string name="disable_recording_once_app_killed_descrp">Θα παύσει την καταγραφή GPX όταν η εφαρμογή τερματιστεί (μέσω πρόσφατων εφαρμογών). (Η ένδειξη παρασκηνίου OsmAnd εξαφανίζεται από τη γραμμή ειδοποιήσεων του Android.)</string>
     <string name="shared_string_wikipedia">Βικιπαίδεια</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Χρώμα ανάλογα με τη σχέση του δικτύου</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Χρώμα ανάλογα με τα σύμβολα πεζοπορίας OSMC</string>
@@ -2331,7 +2318,6 @@
     <string name="fav_point_emoticons_message">Το αγαπημενο μετονομάστηκε σε \'%1$s\' για να προφυλάξει την συμβολοσειρά που περιέχει emoticons σε αρχείο.</string>
     <string name="fav_point_dublicate">Ορίστηκε διπλογραφή ονόματος Αγαπημένου</string>
     <string name="traffic_warning_calming">Χαλάρωση κυκλοφορίας</string>
-    <string name="save_global_track_interval_descr">Ορίστε τα χρονικά διαστήματα καταγραφής για τη γενική εγγραφή ιχνών (ενεργό μέσω του γραφικού στοιχείου καταγραφής GPX στον χάρτη).</string>
     <string name="save_track_to_gpx_globally_headline">Καταγραφή ίχνους κατ΄ απαίτηση</string>
     <string name="enable_proxy_descr">Διαμόρφωση μεσολαβητή HTTP για όλες τις αιτήσεις δικτύου.</string>
     <string name="proxy_host_descr">Προσδιορίστε τον υπολογιστή μεσολάβησης (π.χ. 127.0.0.1).</string>
@@ -2566,7 +2552,6 @@
     <string name="recent_places">Πρόσφατα μέρη</string>
     <string name="favourites">Αγαπημένα</string>
     <string name="saved_at_time">Τώρα αποθηκεύτηκε στο: %1$s</string>
-    <string name="show_gpx">Εμφάνιση δεδομένων GPX</string>
     <string name="count_of_lines">Πλήθος γραμμών</string>
     <string name="are_you_sure">Είσαστε σίγουρος;</string>
     <string name="unsaved_changes_will_be_lost">Οι μη αποθηκευμένες αλλαγές θα χαθούν. Συνέχεια;</string>
@@ -2646,7 +2631,6 @@
     <string name="quick_action_navigation_voice">Φωνή ναι/όχι</string>
     <string name="quick_action_navigation_voice_off">Κατάργηση σίγασης φωνής</string>
     <string name="quick_action_navigation_voice_on">Σίγαση φωνής</string>
-    <string name="quick_action_add_gpx">Προσθήκη σημείου διαδρομής GPX</string>
     <string name="quick_action_add_parking">Προσθήκη θέσης στάθμευσης</string>
     <string name="quick_action_new_action">Προσθήκη ενέργειας</string>
     <string name="quick_action_edit_action">Επεξεργασία ενέργειας</string>
@@ -2717,14 +2701,11 @@
     <string name="save_route_point">Αποθήκευση σημείου διαδρομής</string>
     <string name="waypoint_one">Σημείο διαδρομής 1</string>
     <string name="route_point_one">Σημείο διαδρομής 1</string>
-    <string name="empty_state_my_tracks">Προσθήκη αρχείων GPX</string>
-    <string name="empty_state_my_tracks_desc">Εισαγωγή αρχείων GPX, ή καταγραφή ιχνών.</string>
     <string name="empty_state_favourites">Προσθήκη αγαπημένων</string>
     <string name="empty_state_favourites_desc">Εισαγωγή αγαπημένων, ή προσθήκη τους μέσω σημείων επισήμανσης στον χάρτη.</string>
     <string name="import_track">Εισαγωγή αρχείου GPX</string>
     <string name="import_track_desc">Το αρχείο %1$s δεν περιέχει σημεία διαδρομής, να εισαχθεί ως ίχνος;</string>
     <string name="move_point">Μετακίνηση σημείου</string>
-    <string name="add_segment_to_the_track">Προσθήκη αρχείου GPX</string>
     <string name="osm_recipients_label">Αποδέκτες OSM</string>
     <string name="total_donations">Συνολικές δωρεές</string>
     <string name="day_off_label">κλειστό</string>
@@ -2798,7 +2779,6 @@
     <string name="access_intermediate_arrival_time">Χρόνος άφιξης που μεσολάβησε</string>
     <string name="map_widget_intermediate_time">Ενδιάμεσος χρόνος</string>
     <string name="unirs_render_descr">Τροποποίηση της τυπικής μορφής για αύξηση της αντίθεσης των πεζόδρομων και ποδηλάτου. Χρήση χρωμάτων παλιών Mapnik.</string>
-    <string name="shared_string_gpx_files">Αρχεία GPX</string>
     <string name="get_osmand_live">Εγγραφείτε στο OsmAnd Live για να ξεκλειδώσετε όλα τα χαρακτηριστικά: Ημερήσιες ενημερώσεις χαρτών με απεριόριστες λήψεις, όλα πληρωμένα και χωρίς πρόσθετα, βικιπαίδεια, βικιταξίδια και πολλά άλλα.</string>
     <string name="quick_action_edit_actions">Επεξεργασία ενεργειών</string>
     <string name="error_notification_desc">Παρακαλούμε, στείλτε στιγμιότυπο αυτής της ειδοποίησης στο support@osmand.net</string>

@@ -847,7 +847,6 @@
     <string name="recent_places">Njedawne městna</string>
     <string name="favourites">Fawority</string>
     <string name="saved_at_time">Składowane pod: %1$s</string>
-    <string name="show_gpx">Pokazaj GPX-daty</string>
     <string name="are_you_sure">Sy sej wěsty/wěsta?</string>
     <string name="buy">Kupić</string>
     <string name="later">Pozdźišo</string>
@@ -1170,7 +1169,6 @@
     <string name="rendering_value_default13_name">Standard (13)</string>
     <string name="shared_string_show_details">Detaile pokazać</string>
     <string name="shared_string_dismiss">Přetorhnyć</string>
-    <string name="shared_string_save_as_gpx">Jako nowu GPX-dataju składować</string>
     <string name="shared_string_apply">Přewzać</string>
     <string name="shared_string_do_not_show_again">Wjace njepokazać</string>
     <string name="record_plugin_name">Nahrawanje jězbow</string>
@@ -1332,7 +1330,6 @@
     <string name="make_round_trip_descr">Kopiju wuchadźišća jako cil přidać.</string>
     <string name="shared_string_markers">Chorhojčki</string>
     <string name="fast_coordinates_input_descr">Format zapodaća koordinatow wubrać. Móžeš jón přeco změnić pod \"Nastajenja\".</string>
-    <string name="marker_save_as_track">Jako GPX-dataju składować</string>
     <string name="move_to_history">Do archiwa přesunyć</string>
     <string name="show_guide_line">Směrnicy pokazaćs</string>
     <string name="descendingly">Z-A</string>
@@ -1455,7 +1452,6 @@
     <string name="show_passed"/>
     <string name="online_webpage_warning">Strona steji jenož online k dispoziciji. Chceš ju w browseru wočinić?</string>
     <string name="gpx_no_tracks_title_folder">Móžeš tež GPX-dataje dodać</string>
-    <string name="empty_state_my_tracks">GPX-dataje dodać</string>
     <string name="sort_by_distance">Po zdalenosći sortěrować</string>
     <string name="save_as_favorites_points">Jako skupinu faworitow składować</string>
     <string name="select_destination_and_intermediate_points">Cile wubrać</string>
@@ -1483,9 +1479,6 @@
     <string name="route_info">Informacije wo čarje</string>
     <string name="routing_attr_prefer_motorway_name">Awtodróhi preferować</string>
     <string name="routing_attr_prefer_motorway_description">Awtodróhi preferować</string>
-    <string name="gpx_monitoring_start">GPX-nahrawanje započeć</string>
-    <string name="gpx_monitoring_stop">GPX-nahrawanje zastajić</string>
-    <string name="map_widget_monitoring">GPX-nahrawanje</string>
     <string name="distance_farthest">Najdalši jako prěni</string>
     <string name="distance_nearest">Najbliši jako prěni</string>
     <string name="enter_lat_and_lon">Šěrinu a dołhotu zapodać</string>
@@ -1497,7 +1490,6 @@
     <string name="map_imported_successfully">Karta importěrowana</string>
     <string name="osm_live_banner_desc">Za njewobmjezowane sćehnjenje kartow a aktualizacije husćišo hač jónu wob měsac: tydźensce, wšědnje abo hodźinsce.</string>
     <string name="save_global_track_interval">Powšitkowny interwal nahrawanja</string>
-    <string name="save_track_to_gpx_globally">Čaru jako GPX-dataju nahrać</string>
     <string name="save_track_interval_globally">Interwal nahrawanja</string>
     <string name="save_track_interval">Interwal nahrawanja w běhu nawigacije</string>
     <string name="save_track_interval_descr">Wuběr interwal za nahrawanje čary w běhu nawigacije.</string>

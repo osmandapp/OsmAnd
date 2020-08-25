@@ -49,10 +49,9 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 
 	private boolean nightMode;
 	private boolean portrait;
-	private boolean snapToRoadEnabled = true;
 	private TextView btnDescription;
 	private CalculationMode calculationMode = WHOLE_TRACK;
-	private ApplicationMode snapToRoadAppMode;
+	private ApplicationMode appMode;
 
 	private LinearLayout customRadioButton;
 
@@ -61,7 +60,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		if (args != null) {
-			snapToRoadAppMode = ApplicationMode.valueOfStringKey(args.getString(ROUTE_APP_MODE_KEY), null);
+			appMode = ApplicationMode.valueOfStringKey(args.getString(ROUTE_APP_MODE_KEY), null);
 			calculationMode = (CalculationMode) args.get(CALCULATION_MODE_KEY);
 		}
 		if (savedInstanceState != null) {
@@ -102,11 +101,9 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 		View.OnClickListener onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				snapToRoadEnabled = false;
 				ApplicationMode mode = DEFAULT_APP_MODE;
 				if ((int) view.getTag() != STRAIGHT_LINE_TAG) {
 					mode = modes.get((int) view.getTag());
-					snapToRoadEnabled = true;
 				}
 				Fragment fragment = getTargetFragment();
 				if (fragment instanceof RouteBetweenPointsFragmentListener) {
@@ -118,13 +115,13 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 
 		Drawable icon = app.getUIUtilities().getIcon(R.drawable.ic_action_split_interval, nightMode);
 		addProfileView(navigationType, onClickListener, STRAIGHT_LINE_TAG, icon,
-				app.getText(R.string.routing_profile_straightline), snapToRoadAppMode == DEFAULT_APP_MODE);
+				app.getText(R.string.routing_profile_straightline), appMode == DEFAULT_APP_MODE);
 		addDelimiterView(navigationType);
 
 		for (int i = 0; i < modes.size(); i++) {
 			ApplicationMode mode = modes.get(i);
 			icon = app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
-			addProfileView(navigationType, onClickListener, i, icon, mode.toHumanString(), mode.equals(snapToRoadAppMode));
+			addProfileView(navigationType, onClickListener, i, icon, mode.toHumanString(), mode.equals(appMode));
 		}
 
 		segmentBtn.setOnClickListener(new View.OnClickListener() {
@@ -202,7 +199,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	public void onDestroyView() {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof RouteBetweenPointsFragmentListener) {
-			((RouteBetweenPointsFragmentListener) fragment).onCloseRouteDialog(snapToRoadEnabled);
+			((RouteBetweenPointsFragmentListener) fragment).onCloseRouteDialog();
 		}
 		super.onDestroyView();
 	}
@@ -230,7 +227,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 
 	public interface RouteBetweenPointsFragmentListener {
 
-		void onCloseRouteDialog(boolean snapToRoadEnabled);
+		void onCloseRouteDialog();
 
 		void onChangeApplicationMode(ApplicationMode mode, CalculationMode calculationMode);
 

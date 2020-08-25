@@ -120,7 +120,7 @@ import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxApproximationFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.measurementtool.NewGpxData;
+import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.SnapTrackWarningBottomSheet;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.render.RendererRegistry;
@@ -1290,12 +1290,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					QuadRect qr = newGpxPoint.getRect();
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
 					getMapLayers().getContextMenuLayer().enterAddGpxPointMode(newGpxPoint);
-				} else if (toShow instanceof NewGpxData) {
-					NewGpxData newGpxData = (NewGpxData) toShow;
-					QuadRect qr = newGpxData.getRect();
+				} else if (toShow instanceof GpxData) {
+					GpxData gpxData = (GpxData) toShow;
+					QuadRect qr = gpxData.getRect();
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
 					MeasurementEditingContext editingContext = new MeasurementEditingContext();
-					editingContext.setNewGpxData(newGpxData);
+					editingContext.setGpxData(gpxData);
 					MeasurementToolFragment.showInstance(getSupportFragmentManager(), editingContext);
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);

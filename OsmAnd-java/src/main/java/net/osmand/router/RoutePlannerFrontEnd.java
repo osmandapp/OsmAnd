@@ -404,6 +404,41 @@ public class RoutePlannerFrontEnd {
 		cleanupResultAndAddTurns(gctx);
 	}
 
+	public RouteSegmentResult generateStraightLineSegment(float averageSpeed, List<LatLon> points) {
+		RouteRegion reg = new RouteRegion();
+		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
+		RouteDataObject rdo = new RouteDataObject(reg);
+		int size = points.size();
+		TIntArrayList x = new TIntArrayList(size);
+		TIntArrayList y = new TIntArrayList(size);
+		double distance = 0;
+		double distOnRoadToPass = 0;
+		LatLon prev = null;
+		for (int i = 0; i < size; i++) {
+			LatLon l = points.get(i);
+			if (l != null) {
+				x.add(MapUtils.get31TileNumberX(l.getLongitude()));
+				y.add(MapUtils.get31TileNumberY(l.getLatitude()));
+				if (prev != null) {
+					double d = MapUtils.getDistance(l, prev);
+					distance += d;
+					distOnRoadToPass += d / averageSpeed;
+				}
+			}
+			prev = l;
+		}
+		rdo.pointsX = x.toArray();
+		rdo.pointsY = y.toArray();
+		rdo.types = new int[] { 0 } ;
+		rdo.id = -1;
+		RouteSegmentResult segment = new RouteSegmentResult(rdo, 0, rdo.getPointsLength() - 1);
+		segment.setSegmentTime((float) distOnRoadToPass);
+		segment.setSegmentSpeed(averageSpeed);
+		segment.setDistance((float) distance);
+		segment.setTurnType(TurnType.straight());
+		return segment;
+	}
+
 	public List<GpxPoint> generateGpxPoints(GpxRouteApproximation gctx, LocationsHolder locationsHolder) {
 		List<GpxPoint> gpxPoints = new ArrayList<>(locationsHolder.getSize());
 		GpxPoint prev = null;

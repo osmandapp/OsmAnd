@@ -148,7 +148,6 @@
     <string name="shared_string_sort">Urutkan</string>
     <string name="coordinate_input">Input koordinat</string>
     <string name="marker_save_as_track_descr">Ekspor penanda anda ke file yang dapat Anda tentukan di sini:</string>
-    <string name="marker_save_as_track">Simpan sebagai berkas GPX</string>
     <string name="move_to_history">Pindahkan ke riwayat</string>
     <string name="group_will_be_removed_after_restart">Grup akan dihapus setelah aplikasi berikutnya dimulai ulang.</string>
     <string name="show_guide_line">Tampilkan garis saran</string>
@@ -556,7 +555,6 @@
     <string name="rendering_value_thin_name">Tipis</string>
     <string name="rendering_value_medium_name">Medium</string>
     <string name="rendering_value_bold_name">Tebal</string>
-    <string name="number_of_gpx_files_selected_pattern">%s berkas GPX dipilih</string>
     <string name="map_mode">Mode peta</string>
     <string name="access_default_color">Warna bawaan</string>
     <string name="access_category_choice">Pilih kategori</string>

@@ -873,7 +873,6 @@
     <string name="download_regular_maps">Mapa estándar</string>
     <string name="download_roads_only_maps">Mapa de namái carreteres</string>
     <string name="map_widget_max_speed">Llende de velocidá</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nun s\'alcontraron edificaciones.</string>
     <string name="rendering_attr_showRoadMaps_name">Mapes de namái carreteres</string>
     <string name="zxing_barcode_scanner_not_found">Nun s\'instaló l\'aplicación ZXing Barcode Scanner. ¿Guetala en Google Play\?</string>

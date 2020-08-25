@@ -502,15 +502,8 @@ public class MapActivityActions implements DialogProvider {
 			mapActivity.getRoutingHelper().setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 		} else {
-			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, mapActivity.getMyApplication()
-					.getSettings());
-			if (result.hasRtePt() && !result.hasTrkPt()) {
-				settings.GPX_CALCULATE_RTEPT.set(true);
-			} else {
-				settings.GPX_CALCULATE_RTEPT.set(false);
-			}
+			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, settings);
 			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
-			params.setUseIntermediatePointsRTE(settings.GPX_CALCULATE_RTEPT.get());
 			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
 			List<Location> ps = params.getPoints(settings.getContext());
 			mapActivity.getRoutingHelper().setGpxParams(params);
@@ -1009,6 +1002,20 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 		*/
+
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.web_server, mapActivity)
+				.setId("SERVER_ID")
+				.setIcon(R.drawable.mm_shop_computer)
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+						app.logEvent("drawer_help_open");
+						Intent intent = new Intent(mapActivity, ServerActivity.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						mapActivity.startActivity(intent);
+						return true;
+					}
+				}).createItem());
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_help, mapActivity)
 				.setId(DRAWER_HELP_ID)

@@ -94,7 +94,6 @@
     <string name="map_widget_top_text">اسم الشارع</string>
     <string name="map_widget_reset">إعادة التعيين إلى الافتراضي</string>
     <string name="map_widget_parking">موقف سيارات</string>
-    <string name="map_widget_monitoring">تسجيل المسار</string>
     <string name="map_widget_speed">السرعة</string>
     <string name="map_widget_distance">الوجهة</string>
     <string name="map_widget_altitude">الارتفاع</string>
@@ -309,7 +308,6 @@
     <string name="audionotes_plugin_name">ملاحظات صوتية/مصورة</string>
     <string name="download_roads_only_maps">خرائط الطرقات فقط</string>
     <string name="rendering_attr_noAdminboundaries_description">منع عرض الحدود الإقليمية (المستويات الإدارية من 5-9).</string>
-    <string name="monitoring_control_start">سجل</string>
     <string name="rendering_attr_showRoadMaps_description">تحديد وقت عرض خرائط الطرقات فقط :</string>
     <string name="rendering_attr_showRoadMaps_name">خرائط الطرقات فقط</string>
     <string name="safe_mode_description">تشغيل التطبيق في الوضع الآمن (باستخدام تعليمات أندرويد البطيئة بدلا من التعليمات البرمجية الأصلية) .</string>
@@ -652,7 +650,6 @@
     <string name="animate_route">بدء المحاكاة</string>
     <string name="file_can_not_be_renamed">لا يمكن إعادة تسمية الملف.</string>
     <string name="file_with_name_already_exists">يوجد ملف بهذا الاسم.</string>
-    <string name="shared_string_gpx_route">GPX طريق</string>
     <string name="poi_query_by_name_matches_categories">وجد عدة تصنيفات POI توافق الاستعلام.</string>
     <string name="data_to_search_poi_not_available">البيانات المحلية لبحث POI غير موجودة.</string>
     <string name="poi_filter_by_name">البحث بالاسم</string>
@@ -670,7 +667,6 @@
     <string name="search_position_map_view">مركز الخريطة الحالي</string>
     <string name="select_search_position">المنطلق:</string>
     <string name="context_menu_item_search">بحث بالجوار</string>
-    <string name="shared_string_save_as_gpx">حفظ النقاط كمسار</string>
     <string name="route_successfully_saved_at">تم حفظ المسار بنجاح ك \'%1$s\'.</string>
     <string name="filename_input">اسم الملف:</string>
     <string name="file_with_name_already_exist">يوجد ملف بنفس الاسم موجود مسبقا.</string>
@@ -781,7 +777,6 @@
     <string name="context_menu_item_share_location">مشاركة المكان</string>
     <string name="add_waypoint_dialog_added">أُضيفت إحداثية GPX \'\' {0} \'\' بنجاح</string>
     <string name="add_waypoint_dialog_title">إضافة إحداثية لمسار مسجل</string>
-    <string name="context_menu_item_add_waypoint">إضافة إلى مسار</string>
     <string name="amenity_type_administrative">إداري</string>
     <string name="amenity_type_barrier">حاجز</string>
     <string name="amenity_type_education">تعليم</string>
@@ -981,7 +976,6 @@
     <string name="layer_map">مصدر الخريطة…</string>
     <string name="map_source">مصدر الخريطة</string>
     <string name="layer_amenity_label">عرض أسماء المفضلة</string>
-    <string name="layer_gpx_layer">المسارات المسجلة…</string>
     <string name="map_locale">لغة الخريطة</string>
     <string name="rendering_category_details">التفاصيل</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
@@ -989,16 +983,13 @@
     <string name="rotate_map_bearing_opt">حسب اتجاه الحركة</string>
     <string name="rotate_map_none_opt">الشمال في الأعلى</string>
     <string name="rotate_map_compass_opt">حسب البوصلة</string>
-    <string name="gpx_monitoring_start">بدء التسجيل</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
     <string name="live_monitoring_stop">إيقاف التتبع على الإنترنت</string>
-    <string name="gpx_monitoring_stop">إيقاف</string>
     <string name="transport_Stop">موقف</string>
     <string name="transport_stops">مواقف</string>
     <string name="shared_string_audio">صوت</string>
     <string name="shared_string_currently_recording_track">المسار الجار تسجيله</string>
     <string name="record_plugin_name">تسجيل المسار</string>
-    <string name="save_global_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار العام (مفعل عن طريق أداة تسجيل GPX على الخريطة).</string>
     <string name="save_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار أثناء الملاحة</string>
     <string name="voice">صوت مسج</string>
     <string name="get_directions">التوجيه</string>
@@ -1102,9 +1093,7 @@
     <string name="save_global_track_interval">الفاصل الزمني العام للتسجيل</string>
     <string name="background_service_int">الفاصل الزمني لإيقاظ GPS</string>
     <string name="enable_sleep_mode">تفعيل وضع GPS في الخلفية</string>
-    <string name="save_track_to_gpx_globally">تسجيل المسار في ملف GPX</string>
     <string name="save_current_track_descr">حفظ المسار الحالي إلى الذاكرة الآن.</string>
-    <string name="save_track_to_gpx">تسجيل المسار أثناء الملاحة</string>
     <string name="save_track_to_gpx_descrp">سيتم حفظ المسار إلى مجلد المسارات أثناء الملاحة.</string>
     <string name="save_track_interval_globally">الفاصل الزمني للتسجيل</string>
     <string name="save_track_interval">الفاصل الزمني للتسجيل أثناء الملاحة</string>
@@ -1420,7 +1409,6 @@
     <string name="access_widget_expand">وسع</string>
     <string name="access_sort">فرز</string>
     <string name="map_mode">وضع الخريطة</string>
-    <string name="number_of_gpx_files_selected_pattern">%s مسار محدد</string>
     <string name="rendering_value_thin_name">رقيقة</string>
     <string name="rendering_value_medium_name">متوسط</string>
     <string name="no_map_markers_found">لم تضف علامات على الخريطة</string>
@@ -1538,7 +1526,6 @@
     <string name="working_days">أيام العمل</string>
     <string name="recent_places">الأماكن الأخيرة</string>
     <string name="favourites">المفضلة</string>
-    <string name="show_gpx">عرض GPX</string>
     <string name="count_of_lines">عدد الأسطر</string>
     <string name="are_you_sure">هل أنت متأكد ؟</string>
     <string name="unsaved_changes_will_be_lost">ستفقد التعديلات الغير محفوظة. هل تريد المتابعة ؟</string>
@@ -1876,7 +1863,6 @@
     <string name="lang_ceb">لغة السيبيونو</string>
     <string name="archive_wikipedia_data">لديك بيانات ويكيبيديا منزلة قديمة غير متوافقة. هل تريد أرشفتها؟</string>
     <string name="disable_recording_once_app_killed">منع التسجيل في الخلفية</string>
-    <string name="disable_recording_once_app_killed_descrp">إيقاف تسجيل المسار عند إغلاق التطبيق من نافذة التطبيقات المستخدمة مؤخراً. (إشعار أوسماند سيختفي من شريط الإشعارات)</string>
     <string name="shared_string_import2osmand">استيراد إلى أوسماند</string>
     <string name="osm_edit_context_menu_delete">حذف تعديل OSM</string>
     <string name="rendering_value_disabled_name">معطل</string>
@@ -2114,7 +2100,6 @@
     <string name="quick_action_navigation_voice">تشغيل/إيقاف الصوت</string>
     <string name="quick_action_navigation_voice_off">الصوت معطل</string>
     <string name="quick_action_navigation_voice_on">الصوت مشغل</string>
-    <string name="quick_action_add_gpx">إضافة الإحداثية GPX</string>
     <string name="quick_action_add_parking">إضافة مكان موقف</string>
     <string name="quick_action_new_action">إضافة إجراء</string>
     <string name="quick_action_edit_action">تعديل الإجراء</string>
@@ -2489,14 +2474,11 @@
     <string name="choose_navigation_type">اختر وضع الملاحة</string>
     <string name="add_route_points">إضافة نقاط مسار</string>
     <string name="add_line">إضافة خط</string>
-    <string name="empty_state_my_tracks">إضافة ملفات GPX</string>
-    <string name="empty_state_my_tracks_desc">استيراد ملفات GPX ، أو تسجيل مسارات.</string>
     <string name="empty_state_favourites">إضافة مفضلات</string>
     <string name="empty_state_favourites_desc">استيراد المفضلة ، أو إضافة عبر نقاط على الخريطة.</string>
     <string name="import_track">استيراد مسار</string>
     <string name="import_track_desc">الملف %1$s لا يحتوي على نقاط وجهة، هل تود إدخاله كمسار؟</string>
     <string name="move_point">تحريك نقطة</string>
-    <string name="add_segment_to_the_track">إضافة إلى مسار</string>
     <string name="map_orientation_change_in_accordance_with_speed">عتبة توجيه الخريطة</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">حدد أدناه على أي سرعة يتغير توجيه الخريطة من \'اتجاه الحركة\' إلى \'البوصلة\'.</string>
     <string name="all_markers_moved_to_history">تم نقل جميع العلامات إلى السجل</string>
@@ -2535,7 +2517,6 @@
     <string name="shared_string_sort">فرز</string>
     <string name="coordinate_input">إدخال إحداثية</string>
     <string name="marker_save_as_track_descr">تصدير علاماتك إلى ملف يمكنك تحديده هنا:</string>
-    <string name="marker_save_as_track">حفظ كمسار</string>
     <string name="move_to_history">نقل إلى السجل</string>
     <string name="group_will_be_removed_after_restart">سيتم إزالة المجموعة بعد إعادة تشغيل التطبيق.</string>
     <string name="shared_string_markers">العلامات</string>
@@ -2870,7 +2851,6 @@
     <string name="distance_indication_descr">طريقة عرض المسافة من موقعي إلى العلامات النشطة.</string>
     <string name="active_markers_descr">عدد الأسهم تجاه العلامات النشطة ( للملاحة في الصحراء).</string>
     <string name="rendering_value_black_name">أسود</string>
-    <string name="shared_string_gpx_files">ملفات GPX</string>
     <string name="shared_string_launch">تشغيل</string>
     <string name="lang_gn_py">الغوارانية</string>
     <string name="access_intermediate_arrival_time">متوسط وقت الوصول</string>
@@ -3311,7 +3291,7 @@
     <string name="settings_derived_routing_mode_string">وضع المستخدم ، مشتق من:%s</string>
     <string name="routing_profile_ski">تزلج</string>
     <string name="profile_type_descr_string">النوع:%s</string>
-    <string name="profile_type_base_string">وضع أساسي</string>
+    <string name="profile_type_base_string">ملف التعريف الأساسي</string>
     <string name="profile_alert_need_routing_type_title">حدد نوع الملاحة</string>
     <string name="profile_alert_need_routing_type_msg">يرجى تحديد نوع الملاحة للوضع الجديد</string>
     <string name="profile_alert_need_profile_name_title">أدخل اسم الوضع</string>
@@ -3526,7 +3506,7 @@
     <string name="no_recalculation_setting">تعطيل إعادة الحساب</string>
     <string name="route_recalculation_dist_title">الحد الأدنى من المسافة لإعادة حساب المسار</string>
     <string name="route_recalculation_dist_descr">سيتم إعادة حساب المسار إذا كانت المسافة إلى المسار أطول من المعلمة المحددة</string>
-    <string name="profile_type_custom_string">ملف شخصي مخصص</string>
+    <string name="profile_type_custom_string">ملف تعريف مخصص</string>
     <string name="shared_string_angle_param">الزاوية: %s°</string>
     <string name="shared_string_angle">زاوية</string>
     <string name="recalc_angle_dialog_descr">سيتم عرض جزء مستقيم إضافي بين موقعي والمسار المحسوب حتى يتم إعادة حساب المسار</string>

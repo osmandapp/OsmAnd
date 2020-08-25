@@ -8,14 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 
 import java.util.Arrays;
@@ -57,7 +58,11 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			setListener(this);
-			getBottomScrollView().setScrollingEnabled(true);
+
+			View bottomScrollView = getBottomScrollView();
+			if (bottomScrollView instanceof LockableScrollView) {
+				((LockableScrollView) bottomScrollView).setScrollingEnabled(true);
+			}
 
 			mapBottomHudButtons = view.findViewById(R.id.map_controls_container);
 			if (mapBottomHudButtons != null) {

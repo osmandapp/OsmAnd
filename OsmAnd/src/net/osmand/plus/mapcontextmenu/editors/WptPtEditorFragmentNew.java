@@ -403,6 +403,9 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 	}
 
 	@Override
+	public String getAddressInitValue() { return ""; }
+
+	@Override
 	public Drawable getNameIcon() {
 		WptPt wptPt = getWpt();
 		WptPt point = null;

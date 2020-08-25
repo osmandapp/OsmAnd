@@ -129,6 +129,13 @@ public class GPXUtilities {
 			return extensions;
 		}
 
+		public void copyExtensions(GPXExtensions e) {
+			Map<String, String> extensionsToRead = e.getExtensionsToRead();
+			if (!extensionsToRead.isEmpty()) {
+				getExtensionsToWrite().putAll(extensionsToRead);
+			}
+		}
+
 		public GPXExtensionsWriter getExtensionsWriter() {
 			return extensionsWriter;
 		}
@@ -454,7 +461,21 @@ public class GPXUtilities {
 		public String pointTypes;
 		public String names;
 
-		public StringBundle getStringBundle() {
+		public static RouteSegment fromStringBundle(StringBundle bundle) {
+			RouteSegment s = new RouteSegment();
+			s.id = bundle.getString("id", null);
+			s.length = bundle.getString("length", null);
+			s.segmentTime = bundle.getString("segmentTime", null);
+			s.speed = bundle.getString("speed", null);
+			s.turnType = bundle.getString("turnType", null);
+			s.turnAngle = bundle.getString("turnAngle", null);
+			s.types = bundle.getString("types", null);
+			s.pointTypes = bundle.getString("pointTypes", null);
+			s.names = bundle.getString("names", null);
+			return s;
+		}
+
+		public StringBundle toStringBundle() {
 			StringBundle bundle = new StringBundle();
 			bundle.putString("id", id);
 			bundle.putString("length", length);
@@ -473,7 +494,14 @@ public class GPXUtilities {
 		public String tag;
 		public String value;
 
-		public StringBundle getStringBundle() {
+		public static RouteType fromStringBundle(StringBundle bundle) {
+			RouteType t = new RouteType();
+			t.tag = bundle.getString("t", null);
+			t.value = bundle.getString("v", null);
+			return t;
+		}
+
+		public StringBundle toStringBundle() {
 			StringBundle bundle = new StringBundle();
 			bundle.putString("t", tag);
 			bundle.putString("v", value);
@@ -1290,6 +1318,17 @@ public class GPXUtilities {
 			return pt;
 		}
 
+		public TrkSegment getNonEmptyTrkSegment() {
+			for (GPXUtilities.Track t : tracks) {
+				for (TrkSegment s : t.segments) {
+					if (s.points.size() > 0) {
+						return s;
+					}
+				}
+			}
+			return null;
+		}
+
 		public void addTrkSegment(List<WptPt> points) {
 			removeGeneralTrackIfExists();
 
@@ -1816,12 +1855,12 @@ public class GPXUtilities {
 					StringBundle bundle = new StringBundle();
 					List<StringBundle> segmentsBundle = new ArrayList<>();
 					for (RouteSegment segment : gpxFile.routeSegments) {
-						segmentsBundle.add(segment.getStringBundle());
+						segmentsBundle.add(segment.toStringBundle());
 					}
 					bundle.putBundleList("route", "segment", segmentsBundle);
 					List<StringBundle> typesBundle = new ArrayList<>();
 					for (RouteType routeType : gpxFile.routeTypes) {
-						typesBundle.add(routeType.getStringBundle());
+						typesBundle.add(routeType.toStringBundle());
 					}
 					bundle.putBundleList("types", "type", typesBundle);
 					StringBundleWriter bundleWriter = new StringBundleXmlWriter(bundle, serializer);

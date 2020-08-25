@@ -13,7 +13,6 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -444,7 +443,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		int shadowIconId = isNightMode() ? R.drawable.bg_contextmenu_shadow : R.drawable.bg_contextmenu_shadow;
 		final Drawable shadowIcon = app.getUIUtilities().getIcon(shadowIconId);
 
-		final ScrollView scrollView = getBottomScrollView();
+		final View scrollView = getBottomScrollView();
 		final FrameLayout bottomContainer = getBottomContainer();
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
 

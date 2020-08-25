@@ -4,42 +4,60 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ClearPointsCommand extends MeasurementModeCommand {
 
 	private List<WptPt> points;
-	private boolean needUpdateCache;
+	private ClearCommandMode clearMode;
+	private int pointPosition;
 
-	public ClearPointsCommand(MeasurementToolLayer measurementLayer) {
+	public enum ClearCommandMode {
+		ALL,
+		BEFORE,
+		AFTER
+	}
+
+	public ClearPointsCommand(MeasurementToolLayer measurementLayer, ClearCommandMode clearMode) {
 		super(measurementLayer);
+		this.clearMode = clearMode;
 	}
 
 	@Override
 	public boolean execute() {
-		List<WptPt> pts = getEditingCtx().getPoints();
-		needUpdateCache = getEditingCtx().isNeedUpdateCacheForSnap();
-		points = new ArrayList<>(pts);
-		pts.clear();
-		getEditingCtx().clearSegments();
-		refreshMap();
+		pointPosition = getEditingCtx().getSelectedPointPosition();
+		executeCommand();
 		return true;
 	}
 
-	@Override
-	public void undo() {
-		getEditingCtx().addPoints(points);
-		if (needUpdateCache) {
-			getEditingCtx().setNeedUpdateCacheForSnap(true);
+	private void executeCommand() {
+		List<WptPt> pts = getEditingCtx().getPoints();
+		points = new ArrayList<>(pts);
+		switch (clearMode) {
+			case ALL:
+				pts.clear();
+				getEditingCtx().clearSegments();
+				break;
+			case BEFORE:
+				getEditingCtx().trimBefore(pointPosition);
+				break;
+			case AFTER:
+				getEditingCtx().trimAfter(pointPosition);
 		}
 		refreshMap();
 	}
 
 	@Override
-	public void redo() {
+	public void undo() {
 		getEditingCtx().clearSegments();
+		getEditingCtx().addPoints(points);
+		getEditingCtx().updateCacheForSnap();
 		refreshMap();
+	}
+
+	@Override
+	public void redo() {
+		executeCommand();
 	}
 
 	@Override

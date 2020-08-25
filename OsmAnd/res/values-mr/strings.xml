@@ -99,7 +99,6 @@
     <string name="city_type_city">शहर</string>
     <string name="file_can_not_be_renamed">फाइलचे नाव बदलू शकत नाही.</string>
     <string name="file_with_name_already_exists">ह्या नावाची फाइल आधीच अस्तित्वात आहे.</string>
-    <string name="shared_string_gpx_route">जिपिएक्स राऊट</string>
     <string name="poi_filter_by_name">नावाने शोधा</string>
     <string name="shared_string_rename">नाव बदला</string>
     <string name="search_position_current_location_search">स्थान शोधत आहे …</string>
@@ -349,7 +348,6 @@
     <string name="download_roads_only_maps">फक्त रस्त्याचा नकाशा</string>
     <string name="rendering_attr_noAdminboundaries_name">सीमा</string>
     <string name="map_widget_max_speed">वेग मर्यादा</string>
-    <string name="monitoring_control_start">जिपिएक्स</string>
     <string name="route_descr_lat_lon">अक्षांश %1$.3f, रेखांश %2$.3f</string>
     <string name="no_buildings_found">इमारत सापडली नाही.</string>
     <string name="map_widget_show_destination_arrow">इच्छित स्थळाची दिशा दाखवा</string>

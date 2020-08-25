@@ -156,7 +156,6 @@
     <string name="shared_string_sort">Դասակարգել</string>
     <string name="coordinate_input">Կոորդինատների մուտքագրում</string>
     <string name="marker_save_as_track_descr">Արտահանեք ձեր մարկերները հետևյալ GPX ֆայլի մեջ:</string>
-    <string name="marker_save_as_track">Պահպանել որպես GPX ֆայլ</string>
     <string name="move_to_history">Տեղափոխեք պատմություն</string>
     <string name="group_will_be_removed_after_restart">Ծրագրի հերթական վերագործարկվելուց հետո խումբը կհեռացվի։</string>
     <string name="show_guide_line">Ցույց տալ ուղեցույցներ</string>
@@ -496,7 +495,6 @@
     <string name="access_shared_string_navigate_up">Անցնել վերև</string>
     <string name="access_sort">Դասակարգել</string>
     <string name="map_mode">Քարտեզի ռեժիմը</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX Ֆայլ(եր) ընտրված են</string>
     <string name="rendering_value_fine_name">Ճշգրիտ</string>
     <string name="rendering_value_thin_name">Բարակ</string>
     <string name="rendering_value_medium_name">Միջին</string>
@@ -791,7 +789,6 @@
     <string name="download_wikipedia_files">Ներբեռնել լրացուցիչ Վիքիպեդիայի տվյալները (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Կոորդինատները հայտնաբերման ծառայությունը միացված չէ: Միացնել?</string>
     <string name="disable_recording_once_app_killed">Դադարեցնել ինքնավար գրանցումը</string>
-    <string name="disable_recording_once_app_killed_descrp">Հավելվածը փակելուց հետո (ուրիշ հավելվածը միջոցով), GPX-ի գրանցումը կդադարեցվի: (Ֆոնային պատկերակը անհետանում է Android ծանուցման բարից:)</string>
     <string name="shared_string_import2osmand">Ներմուծել OsmAnd</string>
     <string name="read_full_article">Կարդալ ամբողջական հոդվածը (առցանց)</string>
     <string name="shared_string_wikipedia">Վիքիփեդիա</string>
@@ -887,7 +884,6 @@
     <string name="shared_string_clear">Մաքրել</string>
     <string name="shared_string_clear_all">Մաքրել բոլորը</string>
     <string name="shared_string_save">Պահպանել</string>
-    <string name="shared_string_save_as_gpx">Պահել որպես նոր GPX ֆայլ</string>
     <string name="shared_string_rename">Վերանվանել</string>
     <string name="shared_string_delete">Ջնջել</string>
     <string name="shared_string_delete_all">Ջնջել բոլորը</string>
@@ -1096,16 +1092,13 @@
     <string name="sleep_mode_stop_dialog">Դադարեցնել GPS-ի աշխատանքը ֆոնային ռեժիմում?</string>
     <string name="stop_navigation_service">Դադարեցնել</string>
     <string name="confirm_every_run">Միշտ հարցնել</string>
-    <string name="save_global_track_interval_descr">Ընտրեք ժամանակի ընդմիջումը տրեկի գրանցման համար (ներառյալ GPX գրանցումը վիջեթի միջոցով քարտեզի վրա)։</string>
     <string name="save_global_track_interval">Ընդհանուր ժամանակի ընդմիջումը</string>
     <string name="background_service_int">GPS-ի զարթմատ ժամանակի ընդմիջումը</string>
     <string name="enable_sleep_mode">Միացնել GPS ֆոնի ռեժիմը</string>
-    <string name="save_track_to_gpx_globally">Գրանցել տրեկը GPX ֆայլի տեքով</string>
     <string name="save_track_to_gpx_globally_headline">Տրեկի գրանցումը ըստ պահանջի</string>
     <string name="save_track_to_gpx_globally_descr">Ընդհանուր դիրքի գրանցումը GPX ֆայլի տեսքով կարող եք միացնել կամ անջատել GPX վիջետի միջոցով քարտեզի վրա։</string>
     <string name="save_current_track_descr">Պահպանել ընթացիկ տրեկը որպես GPX ֆայլ։</string>
     <string name="save_current_track">Պահպանել ընթացիկ տրեկը</string>
-    <string name="save_track_to_gpx">Նավիգացիայի ընթացքում ավտոմատ գրանցել տրեկը</string>
     <string name="save_track_to_gpx_descrp">Նավիգացիայի ընթացքում GPX տրեկները ինքնաբերաբար կպահպանվեն տրեկների թղթապանակում։</string>
     <string name="save_track_interval_globally">Մուտքագրման ժամանակի ընդմիջումը</string>
     <string name="save_track_interval">Նավիգացիայի ընթացքում մուտքագրման ժամանակի ընդմիջումը</string>
@@ -1150,8 +1143,6 @@
     <string name="live_monitoring_m">Առցանց հետևում(tracking) (GPX պահանջվում է)</string>
     <string name="live_monitoring_start">Սկսեք առցանց հետևելուն(tracking)</string>
     <string name="live_monitoring_stop">Դադարեցնել առցանց հետևելուն(tracking)</string>
-    <string name="gpx_monitoring_start">Շարունակել GPX գրանցումը</string>
-    <string name="gpx_monitoring_stop">Դադարեցնել GPX-ի գրանցումը</string>
     <string name="gpx_start_new_segment">Սկսել նոր սեգմենտ</string>
     <string name="rendering_attr_hideBuildings_name">Շենքեր</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ոչ ավտոճանապարհներ</string>
@@ -1397,7 +1388,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Սահմանները</string>
     <string name="rendering_attr_noAdminboundaries_description">Թաքցնել տարածաշրջանային սահմանները (admin levels 5–9)։</string>
     <string name="map_widget_max_speed">Արագության սահմանափակումը</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Շենքեր չեն գտնվել:</string>
     <string name="incremental_search_city">Ընտրեք քաղաք</string>
     <string name="search_villages_and_postcodes">Որոնել ըստ գյուղի/ փոստային բաժանմունքի(ինդեքսի)</string>
@@ -1660,7 +1650,6 @@
     <string name="map_widget_compass">Կողմնացույց</string>
     <string name="map_widget_reset">Վերականգնել սկզբնական պարամետրերը</string>
     <string name="map_widget_parking">Կայանատեղ</string>
-    <string name="map_widget_monitoring">GPX գրանցում</string>
     <string name="map_widget_speed">Արագություն</string>
     <string name="map_widget_distance">Նպատակակետ</string>
     <string name="map_widget_altitude">Բարձրություն</string>
@@ -1903,7 +1892,6 @@
     <string name="animate_route">Սկսեք մոդելավորում</string>
     <string name="file_can_not_be_renamed">Չհաջողվեց վերանվանել ֆայլը:</string>
     <string name="file_with_name_already_exists">Նման անվանումով Ֆայլը արդեն գոյություն ունի:</string>
-    <string name="shared_string_gpx_route">GPX երթուղին</string>
     <string name="poi_query_by_name_matches_categories">Գտնվեց մի զարք փոխկապակցված POI կատեգորիաներ:</string>
     <string name="data_to_search_poi_not_available">POIs-ի որոնման համար ներբեռնեք տեղական տվյալները:</string>
     <string name="poi_filter_by_name">Որոնել ըստ անվան</string>
@@ -2026,7 +2014,6 @@
     <string name="context_menu_item_share_location">Կիսվել(ուղարկել) գտնվելու վայրը(դիրքը)</string>
     <string name="add_waypoint_dialog_added">GPX կետը «{0}» ավելացվել է</string>
     <string name="add_waypoint_dialog_title">Ավելացնել կետ գրանցված GPX տրեկի վրա</string>
-    <string name="context_menu_item_add_waypoint">Ավելացնել կետ GPX տրեկի վրա</string>
     <string name="amenity_type_administrative">Վարչական</string>
     <string name="amenity_type_barrier">Խոչընդոտ</string>
     <string name="amenity_type_education">Կրթություն</string>
@@ -2110,7 +2097,6 @@
     <string name="voices">Ձայնային հրահանգներ</string>
     <string name="no_vector_map_loaded">Վեկտորային(offline) քարտեզները ներբեռնված չեն հավելվածի մեջ</string>
     <string name="gpx_files_not_found">GPX ֆայլերը չեն գտնվել թղթապանակում</string>
-    <string name="layer_gpx_layer">GPX ֆայլեր…</string>
     <string name="error_reading_gpx">GPX տվյալների ընթերցման սխալ։</string>
     <string name="vector_data">Տեղական վեկտորային(Offline) քարտեզներ</string>
     <string name="transport_context_menu">Տրանսպորտի որոնում կանգառում</string>
@@ -2403,7 +2389,6 @@
     <string name="favourites">«Սիրված»</string>
     <string name="saved_at_time">Պահպանվեց՝ %1$s</string>
     <string name="poi_deleted_localy">POI-րը կհեռացվեն ձեր փոփոխությունները վերբեռնելուց հետո</string>
-    <string name="show_gpx">Ցույց տալ GPX տվյալները</string>
     <string name="count_of_lines">Տողերի քանակը</string>
     <string name="are_you_sure">Վստա՞հ եք?</string>
     <string name="show_view_angle">Ցուցադրել դիտարկման ուղղությունը</string>
@@ -2485,7 +2470,6 @@
     <string name="quick_action_navigation_voice">Ձայնը on/off</string>
     <string name="quick_action_navigation_voice_off">Միացնել ձայնը</string>
     <string name="quick_action_navigation_voice_on">Անջատել ձայնը</string>
-    <string name="quick_action_add_gpx">Ավելացնել GPX կետ</string>
     <string name="quick_action_add_parking">Ավելացնել ավտոկայանատեղ</string>
     <string name="quick_action_new_action">Ավելացնել գործողություն</string>
     <string name="quick_action_edit_action">խմբագրել գործողությունը</string>
@@ -2561,14 +2545,11 @@
     <string name="save_route_point">Պահպանել երթուղու կետը</string>
     <string name="waypoint_one">Կետ 1</string>
     <string name="route_point_one">Երթուղու կետ 1</string>
-    <string name="empty_state_my_tracks">Ավելացնել GPX ֆայլերը</string>
-    <string name="empty_state_my_tracks_desc">Ներմուծեք GPX ֆայլեր կամ տրեկների գրառում:</string>
     <string name="empty_state_favourites">Ավելացնել «Սիրված»-եր</string>
     <string name="empty_state_favourites_desc">«Սիրված»-երը կարող եք ներմուծել կամ ստեղծել, նշելով կետեր քարտեզի վրա։</string>
     <string name="import_track">Ներմուծել GPX ֆայլը</string>
     <string name="import_track_desc">Ֆայլ %1$s չի պարունակում կետեր, ներմուծել այդ որպես տրեկ?</string>
     <string name="move_point">Տեղափոխել կետը</string>
-    <string name="add_segment_to_the_track">Ավելացնել սեգմենտը GPX ֆայլին</string>
     <string name="shared_string_more_without_dots">Ավելին</string>
     <string name="appearance_on_the_map">Տեսքը քարտեզի վրա</string>
     <string name="add_track_to_markers_descr">Ընտրեք տրեկերից մեկը որպեսզի ձեր Ճանապարհային կետերը (waypoints) ավելացնել մարկերներին։</string>
@@ -2842,7 +2823,6 @@
     <string name="unirs_render_descr">Հիմնական ոճի ձևափոխում, հետիոտնային և հեծանվավազք ճանապարհների հակադրությունը ավելացնելու համար։ Օգտագործում է ժառանգական Mapnik գույները։</string>
     <string name="contour_lines_hillshade_maps">Contour lines &amp; Hillshade Քարտեզներ</string>
     <string name="rendering_value_black_name">Սև</string>
-    <string name="shared_string_gpx_files">GPX ֆայլեր</string>
     <string name="access_intermediate_arrival_time">Միջանկյալ նպատակակետ ժամանելու ժամը</string>
     <string name="map_widget_intermediate_time">Միջանկյալ նպատակակետ ժամանելու ժամը</string>
     <string name="auto_follow_location_enabled">Քարտեզի ավտոմատ վերադարձումը միացված է։</string>

@@ -135,7 +135,6 @@
     <string name="access_shared_string_navigate_up">Navigeeri üles</string>
     <string name="access_sort">Sorteeri</string>
     <string name="map_mode">Kaardi režiim</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX faili valitud</string>
     <string name="rendering_value_thin_name">Õhuke</string>
     <string name="rendering_value_medium_name">Keskmine</string>
     <string name="rendering_value_bold_name">Rasvane</string>
@@ -381,7 +380,6 @@
     <string name="plan_route">Planeeri teekond</string>
     <string name="shared_string_sort">Sorteeri</string>
     <string name="coordinate_input">Koordinaatide sisestamine</string>
-    <string name="marker_save_as_track">Salvesta GPX failina</string>
     <string name="move_to_history">Teisalda ajalukku</string>
     <string name="shared_string_markers">Markerid</string>
     <string name="coordinates_format">Koordinaatide formaat</string>
@@ -541,7 +539,6 @@
     <string name="shared_string_gpx_file">GPX fail</string>
     <string name="shared_string_gpx_waypoints">Raja teekonnapunktid</string>
     <string name="shared_string_view">Vaata</string>
-    <string name="shared_string_gpx_route">GPX teekond</string>
     <string name="wikivoyage_travel_guide">Reisijuhid</string>
     <string name="shared_string_travel_guides">Reisijuhid</string>
     <string name="ask_for_location_permission">Palun luba jätkamiseks OsmAnd asukoha juurdepääs.</string>
@@ -1130,7 +1127,6 @@
     <string name="download_wikipedia_files">Laadida täiendavaid andmeid Vikipeediast (%1$s MB)\?</string>
     <string name="gps_network_not_enabled">Asukohateenus on välja lülitatud. Lülitada sisse\?</string>
     <string name="disable_recording_once_app_killed">Väldi iseseisvat logimist</string>
-    <string name="disable_recording_once_app_killed_descrp">Peatab GPX logimise rakenduse jõuga sulgemise korral (hiljutiste rakenduste kaudu). (OsmAndi taustnäit kaob Androidi teavitusribalt.)</string>
     <string name="shared_string_import2osmand">OsmAnd import</string>
     <string name="read_full_article">Loe kogu artiklit (veebis)</string>
     <string name="local_indexes_cat_wiki">Vikipeedia</string>
@@ -1195,7 +1191,6 @@
     <string name="shared_string_deselect_all">Tühista kogu valik</string>
     <string name="shared_string_clear">Tühjenda</string>
     <string name="shared_string_clear_all">Tühjenda kõik</string>
-    <string name="shared_string_save_as_gpx">Salvesta uue GPX failina</string>
     <string name="shared_string_rename">Nimeta ümber</string>
     <string name="shared_string_apply">Rakenda</string>
     <string name="shared_string_io_error">I/O viga</string>
@@ -1303,15 +1298,12 @@
     <string name="sleep_mode_stop_dialog">Peata GPS taustarežiim\?</string>
     <string name="stop_navigation_service">Peatu</string>
     <string name="confirm_every_run">Küsi alati</string>
-    <string name="save_global_track_interval_descr">Määra üldise teekonna salvestamise logimise ajavahemik (lubatud kaardil GPX logimise lisa abil).</string>
     <string name="save_global_track_interval">Üldine logimisintervall</string>
     <string name="background_service_int">GPS äratuse ajavahemik</string>
     <string name="enable_sleep_mode">Luba GPS taustarežiim</string>
-    <string name="save_track_to_gpx_globally">Logi teekond GPX faili</string>
     <string name="save_track_to_gpx_globally_headline">Vajadusel teekonna logimine</string>
     <string name="save_current_track_descr">Salvesta praegune teekond kohe GPX failina.</string>
     <string name="save_current_track">Salvesta praegune teekond</string>
-    <string name="save_track_to_gpx">Automaatne teekonna salvestamine navigeerimise ajal</string>
     <string name="save_track_to_gpx_descrp">GPX teekond salvestatakse navigeerimise ajal automaatselt teekondade kausta.</string>
     <string name="save_track_interval_globally">Logimise ajavahemik</string>
     <string name="save_track_interval">Logimise ajavahemik navigeerimise ajal</string>
@@ -1351,8 +1343,6 @@
     <string name="live_monitoring_m">Veebis jälgimine (GPX kohustuslik)</string>
     <string name="live_monitoring_start">Alusta veebis jälgimist</string>
     <string name="live_monitoring_stop">Peata veebis jälgimine</string>
-    <string name="gpx_monitoring_start">Alusta GPX logimist</string>
-    <string name="gpx_monitoring_stop">Peata GPX logimine</string>
     <string name="gpx_start_new_segment">Alusta uut lõiku</string>
     <string name="rendering_attr_hideBuildings_name">Hooned</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Liiklusvahenditele mitte mõeldud tee</string>
@@ -1657,7 +1647,6 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">Kuva rajad vastavalt OSMC radadele.</string>
     <string name="rendering_attr_noAdminboundaries_name">Piirid</string>
     <string name="map_widget_max_speed">Kiiruspiirang</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Hooneid ei leidu.</string>
     <string name="incremental_search_city">Otsi linna kasvavalt</string>
     <string name="search_villages_and_postcodes">Otsi veel külasid/postiindekseid</string>
@@ -1779,7 +1768,6 @@
     <string name="map_widget_compass">Kompass</string>
     <string name="map_widget_reset">Taasta algväärtused</string>
     <string name="map_widget_parking">Parkimine</string>
-    <string name="map_widget_monitoring">GPX logimine</string>
     <string name="map_widget_speed">Kiirus</string>
     <string name="map_widget_distance">Sihtkoht</string>
     <string name="map_widget_altitude">Kõrgus</string>
@@ -2069,7 +2057,6 @@
     <string name="context_menu_item_share_location">Jaga asukohta</string>
     <string name="add_waypoint_dialog_added">GPX teekonnapunkt \"{0}\" lisatud</string>
     <string name="add_waypoint_dialog_title">Lisa teekonnapunkt salvestatud GPX rajale</string>
-    <string name="context_menu_item_add_waypoint">Lisa GPX teekonnapunkt</string>
     <string name="amenity_type_administrative">Administratiivne</string>
     <string name="amenity_type_barrier">Tõke</string>
     <string name="amenity_type_education">Haridus</string>
@@ -2142,7 +2129,6 @@
     <string name="voice">Salvestatud hääl</string>
     <string name="voices">Hääljuhised</string>
     <string name="no_vector_map_loaded">Vektorkaarte ei laetud</string>
-    <string name="layer_gpx_layer">GPX failid…</string>
     <string name="error_reading_gpx">GPX andmete laadimine ebaõnnestus.</string>
     <string name="vector_data">Võrguühenduseta vektorkaardid</string>
     <string name="transport_context_menu">Otsi transporti peatuses</string>
@@ -2653,7 +2639,6 @@
     <string name="unirs_render_descr">Vaikimisi stiili muudatus, et parandada kõnniteede ja jalgrattateede kontrastsust. Kasutab vanu Mapnik värve.</string>
     <string name="shared_string_gpx_track">Rada</string>
     <string name="shared_string_gpx_tracks">Rajad</string>
-    <string name="shared_string_gpx_files">GPX failid</string>
     <string name="shared_string_gpx_points">Punktid</string>
     <string name="shared_string_waypoints">Teekonnapunktid</string>
     <string name="shared_string_waypoint">Teekonnapunkt</string>
@@ -3057,7 +3042,6 @@
     <string name="poi_action_delete">kustuta</string>
     <string name="saved_at_time">Nüüd salvestatud: %1$s</string>
     <string name="poi_deleted_localy">HP kustutatakse pärast muudatuste üleslaadimist</string>
-    <string name="show_gpx">Kuva GPX andmed</string>
     <string name="count_of_lines">Ridade arv</string>
     <string name="are_you_sure">Oled kindel\?</string>
     <string name="unsaved_changes_will_be_lost">Kõik salvestamata muudatused lähevad kaduma. Jätkata\?</string>
@@ -3134,7 +3118,6 @@
     <string name="quick_action_navigation_voice">Hääl sisse/välja</string>
     <string name="quick_action_navigation_voice_off">Tühista hääle vaigistus</string>
     <string name="quick_action_navigation_voice_on">Vaigista hääl</string>
-    <string name="quick_action_add_gpx">Lisa GPX teekonnapunkt</string>
     <string name="quick_action_add_parking">Lisa parkimiskoht</string>
     <string name="quick_action_new_action">Lisa tegevus</string>
     <string name="quick_action_edit_action">Muuda tegevust</string>
@@ -3304,14 +3287,11 @@
     <string name="save_gpx_waypoint">Salvesta GPX teekonnapunkt</string>
     <string name="waypoint_one">Teekonnapunkt 1</string>
     <string name="add_line">Lisa rida</string>
-    <string name="empty_state_my_tracks">Lisa GPX faile</string>
-    <string name="empty_state_my_tracks_desc">Impordi GPX faile või salvesta radu.</string>
     <string name="empty_state_favourites">Lisa lemmikuid</string>
     <string name="empty_state_favourites_desc">Impordi lemmikuid või lisa märkides punkte kaardil.</string>
     <string name="import_track">Impordi GPX fail</string>
     <string name="import_track_desc">Fail %1$s ei sisalda teekonnapunkte, kas importida see rajana\?</string>
     <string name="move_point">Teisalda punkt</string>
-    <string name="add_segment_to_the_track">Lisa GPX faili</string>
     <string name="osm_recipients_label">OSM saajad</string>
     <string name="total_donations">Annetusi kokku</string>
     <string name="day_off_label">väljas</string>

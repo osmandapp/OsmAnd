@@ -98,7 +98,6 @@
     <string name="shared_string_clear">Limpar</string>
     <string name="shared_string_clear_all">Limpar tudo</string>
     <string name="shared_string_save">Salvar</string>
-    <string name="shared_string_save_as_gpx">Salvar novo arquivo GPX</string>
     <string name="shared_string_rename">Renomear</string>
     <string name="shared_string_delete">Apagar</string>
     <string name="shared_string_delete_all">Apagar tudo</string>
@@ -307,11 +306,9 @@
     <string name="sleep_mode_stop_dialog">Parar o modo em segundo plano do GPS?</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Sempre perguntar</string>
-    <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral da pista (ativado via widget de registo GPX no mapa).</string>
     <string name="save_global_track_interval">Intervalo de registro geral</string>
     <string name="background_service_int">Intervalo de ativação do GPS</string>
     <string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
-    <string name="save_track_to_gpx_globally">Registrar trilha em arquivo GPX</string>
     <string name="save_track_to_gpx_globally_headline">Registro de trilha sob demanda</string>
     <string name="save_track_to_gpx_globally_descr">Posição geral de registro para um arquivo GPX pode ser ativada ou desativada usando o widget de registro de GPX no mapa.</string>
     <string name="save_current_track_descr">Salvar a trilha atual como arquivo GPX agora.</string>
@@ -378,8 +375,6 @@
     <string name="live_monitoring_m">Rastreamento on-line (requer GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreamento on-line</string>
     <string name="live_monitoring_stop">Parar rastreamento on-line</string>
-    <string name="gpx_monitoring_start">Retomar o registro GPX</string>
-    <string name="gpx_monitoring_stop">Pausar o registro GPX</string>
     <string name="gpx_start_new_segment">Iniciar novo rastreamento</string>
     <string name="rendering_attr_hideBuildings_name">Edifícios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Estradas não trafegáveis</string>
@@ -759,7 +754,6 @@
     <string name="map_widget_compass">Bússola</string>
     <string name="map_widget_reset">Restaurar para predefinido</string>
     <string name="map_widget_parking">Estacionamento</string>
-    <string name="map_widget_monitoring">Registro de GPX</string>
     <string name="map_widget_speed">Velocidade</string>
     <string name="map_widget_distance">Destino</string>
     <string name="map_widget_altitude">Altitude</string>
@@ -808,7 +802,6 @@
     <string name="live_monitoring_interval_descr">Especificar intervalo de monitoramento on-line.</string>
     <string name="daynight_mode_auto">Nascer/Pôr do Sol</string>
     <string name="map_widget_max_speed">Limite de velocidade</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nenhum edifício encontrado.</string>
     <string name="incremental_search_city">Pesquisar cidade incrementalmente</string>
     <string name="search_villages_and_postcodes">Pesquisar mais povoados/código postal</string>
@@ -1122,7 +1115,6 @@
     <string name="animate_route">Iniciar simulação</string>
     <string name="file_can_not_be_renamed">Não foi possível renomear o arquivo.</string>
     <string name="file_with_name_already_exists">Já existe um arquivo com esse nome.</string>
-    <string name="shared_string_gpx_route">Rota GPX</string>
     <string name="poi_query_by_name_matches_categories">Foram encontradas várias categorias de POI relacionadas.</string>
     <string name="data_to_search_poi_not_available">Faça o download de dados offline para pesquisar POIs.</string>
     <string name="poi_filter_by_name">Pesquisar por nome</string>
@@ -1228,7 +1220,6 @@
     <string name="context_menu_item_share_location">Compartilhar posição</string>
     <string name="add_waypoint_dialog_added">Ponto de trajeto GPX \'\'{0}\'\' adicionado</string>
     <string name="add_waypoint_dialog_title">Adicionar parada à trilha GPX gravada</string>
-    <string name="context_menu_item_add_waypoint">Adicionar ponto GPX</string>
     <string name="amenity_type_administrative">Administrativo</string>
     <string name="amenity_type_barrier">Barreira</string>
     <string name="amenity_type_education">Educação</string>
@@ -1309,7 +1300,6 @@
     <string name="voices">Instruções de voz</string>
     <string name="no_vector_map_loaded">Nenhum mapa vetorial foi carregado</string>
     <string name="gpx_files_not_found">Nenhum arquivo GPX encontrado no diretório de trilhas</string>
-    <string name="layer_gpx_layer">Arquivos GPX…</string>
     <string name="error_reading_gpx">Não foi possível ler os dados do GPX.</string>
     <string name="vector_data">Mapas vetoriais off-line</string>
     <string name="transport_context_menu">Pesquisar por transporte na parada</string>
@@ -1562,7 +1552,6 @@
     <string name="local_recordings_delete_all_confirm">Tem certeza de que deseja apagar %1$d notas\?</string>
     <string name="disable_recording_once_app_killed">Impedir o registro autônomo</string>
     <string name="gps_network_not_enabled">O serviço de localização está desligado. Deseja ligar\?</string>
-    <string name="disable_recording_once_app_killed_descrp">Pausará o registro de GPX após o encerramento do app (via apps recentes). (Indicação de OsmAnd em segundo plano desaparecerá da barra de notificação do Android.)</string>
     <string name="archive_wikipedia_data">Você tem dados da Wikipédia antigos e incompatíveis. Quer arquivá-los\?</string>
     <string name="download_wikipedia_files">Baixar dados adicionais da Wikipédia (%1$s MB)\?</string>
     <string name="lang_vo">Volapuque</string>
@@ -1661,7 +1650,6 @@
     <string name="poi_action_delete">apagar</string>
     <string name="saved_at_time">Salvo em: %1$s</string>
     <string name="poi_deleted_localy">POI será excluído quando você enviar suas alterações</string>
-    <string name="show_gpx">Mostrar dados GPX</string>
     <string name="show_on_start">Mostrar no início</string>
     <string name="count_of_lines">Número de linhas</string>
     <string name="are_you_sure">Tem certeza?</string>
@@ -1984,7 +1972,6 @@
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Inserção de coordenada</string>
     <string name="marker_save_as_track_descr">Exporte seus marcadores para o seguinte arquivo GPX:</string>
-    <string name="marker_save_as_track">Salvar como arquivo GPX</string>
     <string name="move_to_history">Mover para o histórico</string>
     <string name="group_will_be_removed_after_restart">O grupo será excluído na próxima vez em que reiniciar o aplicativo.</string>
     <string name="show_arrows_on_the_map">Mostrar setas no mapa</string>
@@ -2276,7 +2263,6 @@
     <string name="translit_name_if_miss">Transliterar se o nome %1$s for ausente</string>
     <string name="translit_names">Transliterar nomes</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
-    <string name="add_segment_to_the_track">Adicionar a um arquivo GPX</string>
     <string name="empty_state_av_notes_desc">Adicione notas de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou os menus de contexto.</string>
     <string name="quick_action_add_destination_desc">Um botão para fazer com que a tela centralize o destino da rota, um destino selecionado anteriormente se tornaria o último destino intermediário.</string>
     <string name="quick_action_replace_destination_desc">Um botão para fazer com que a tela centralize o novo destino da rota, substituindo o destino selecionado anteriormente (se houver).</string>
@@ -2352,7 +2338,6 @@
     <string name="access_autoannounce_period">Período de auto-anúncio</string>
     <string name="access_map_linked_to_location">Mapa vinculado à localização</string>
     <string name="access_shared_string_navigate_up">Navegue até</string>
-    <string name="number_of_gpx_files_selected_pattern">%s arquivos GPX selecionados</string>
     <string name="rendering_value_fine_name">Mais fino</string>
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_bold_name">Grosso</string>
@@ -2419,7 +2404,6 @@
     <string name="quick_action_navigation_voice">Ligar/desligar voz</string>
     <string name="quick_action_navigation_voice_off">Ligar voz</string>
     <string name="quick_action_navigation_voice_on">Silenciar voz</string>
-    <string name="quick_action_add_gpx">Adicionar ponto de passagem GPX</string>
     <string name="quick_action_add_parking">Marcar estacionamento</string>
     <string name="quick_action_new_action">Adicionar ação</string>
     <string name="quick_action_edit_action">Editar ação</string>
@@ -2538,8 +2522,6 @@
     <string name="save_route_point">Salvar ponto de rota</string>
     <string name="waypoint_one">Ponto de Passagem 1</string>
     <string name="route_point_one">Ponto de Rota 1</string>
-    <string name="empty_state_my_tracks">Adicione arquivos GPX</string>
-    <string name="empty_state_my_tracks_desc">Importe arquivos GPX ou grave trilhas.</string>
     <string name="empty_state_favourites">Adicione Favoritos</string>
     <string name="empty_state_favourites_desc">Importe Favoritos ou adicione-os marcando pontos do mapa.</string>
     <string name="import_track">Importar arquivo GPX</string>
@@ -2720,7 +2702,6 @@
     <string name="read_wikipedia_offline">Ler a Wikipédia offline</string>
     <string name="download_all">Baixar tudo</string>
     <string name="purchase_cancelled_dialog_title">Você cancelou a sua assinatura OsmAnd Live</string>
-    <string name="shared_string_gpx_files">Arquivos GPX</string>
     <string name="access_intermediate_arrival_time">Hora de chegada intermediária</string>
     <string name="map_widget_intermediate_time">Hora intermediária</string>
     <string name="get_osmand_live">Adquira OsmAnd Live para desbloquear todos estes recursos: Atualização diária de mapa com downloads ilimitados, todos os plugins pagos grátis, Wikipédia, Wikivoyage e muito mais.</string>

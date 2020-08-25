@@ -61,7 +61,6 @@
     <string name="context_menu_item_share_location">位置を共有</string>
     <string name="add_waypoint_dialog_added">GPX経由地点 \'\'{0}\'\' を追加しました</string>
     <string name="add_waypoint_dialog_title">記録済みGPXルートに経由地点を追加</string>
-    <string name="context_menu_item_add_waypoint">GPX経由地点を追加</string>
     <string name="amenity_type_administrative">行政区域</string>
     <string name="amenity_type_barrier">バリアー</string>
     <string name="amenity_type_education">教育</string>
@@ -176,7 +175,6 @@ MB)をダウンロードしますか?</string>
     <string name="voice">記録音声</string>
     <string name="no_vector_map_loaded">ベクターマップはロードされませんでした</string>
     <string name="gpx_files_not_found">GPXファイルがtracksフォルダ内に見つかりません</string>
-    <string name="layer_gpx_layer">GPX経路…</string>
     <string name="error_reading_gpx">GPXデータを読み取れませんでした。</string>
     <string name="vector_data">オフラインベクターマップ</string>
     <string name="transport_context_menu">交通機関の乗降場を検索</string>
@@ -656,7 +654,6 @@ POIの更新は利用できません</string>
     <string name="download_roads_only_maps">道路のみのマップ</string>
     <string name="rendering_attr_noAdminboundaries_name">境界</string>
     <string name="map_widget_max_speed">制限速度</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">該当する建物は見つかりませんでした。</string>
     <string name="search_villages_and_postcodes">さらに市町村検索/郵便番号</string>
     <string name="rendering_attr_showRoadMaps_description">道路のみのマップを表示するときに選択します:</string>
@@ -725,7 +722,6 @@ POIの更新は利用できません</string>
     <string name="map_widget_compass">コンパス</string>
     <string name="map_widget_reset">標準設定に戻す</string>
     <string name="map_widget_parking">駐車場</string>
-    <string name="map_widget_monitoring">GPXログ</string>
     <string name="map_widget_speed">速度</string>
     <string name="map_widget_distance">目的地</string>
     <string name="map_widget_altitude">標高</string>
@@ -974,7 +970,6 @@ POIの更新は利用できません</string>
     <string name="city_type_city">市</string>
     <string name="file_can_not_be_renamed">ファイルの名前を変更できませんでした。</string>
     <string name="file_with_name_already_exists">その名前のファイルは既に存在します。</string>
-    <string name="shared_string_gpx_route">GPXルート</string>
     <string name="poi_query_by_name_matches_categories">関連するいくつかのPOIカテゴリーが見つかりました。</string>
     <string name="data_to_search_poi_not_available">POI検索用のオフラインデータをダウンロードします。</string>
     <string name="poi_filter_by_name">名前で検索</string>
@@ -992,7 +987,6 @@ POIの更新は利用できません</string>
     <string name="search_position_map_view">マップ画面中心</string>
     <string name="select_search_position">検索基点:</string>
     <string name="context_menu_item_search">近隣を検索</string>
-    <string name="shared_string_save_as_gpx">GPX経路を新規保存</string>
     <string name="route_successfully_saved_at">ルートを「%1$s」として保存しました。</string>
     <string name="filename_input">ファイル名: </string>
     <string name="file_with_name_already_exist">同じ名前のファイルが既に存在します。</string>
@@ -1157,8 +1151,6 @@ POIの更新は利用できません</string>
     <string name="live_monitoring_m">オンライン追跡に関する設定(GPXが必要)</string>
     <string name="live_monitoring_start">オンライントラッキング開始</string>
     <string name="live_monitoring_stop">オンライントラッキング停止</string>
-    <string name="gpx_monitoring_start">GPX記録の再開</string>
-    <string name="gpx_monitoring_stop">GPS記録の一時停止</string>
     <string name="rendering_attr_hideBuildings_name">建物</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">自動車以外の専用道路</string>
     <string name="rendering_attr_hideText_name">文字列</string>
@@ -1333,11 +1325,9 @@ POIの更新は利用できません</string>
     <string name="duration">期限</string>
     <string name="distance">距離</string>
     <string name="rendering_attr_publicTransportMode_name">バス、トロリーバス、シャトルバス路線</string>
-    <string name="save_track_to_gpx_globally">GPXファイルへの経路記録に関する設定</string>
     <string name="save_track_to_gpx_globally_descr">GPXファイルへ記録される位置情報全般は、マップ画面上のGPXログウィジェットを使用してONとOFFを切り替えることが可能です。</string>
     <string name="save_track_interval_globally">記録間隔</string>
     <string name="confirm_every_run">常に尋ねる</string>
-    <string name="save_global_track_interval_descr">旅程ログ全般の記録間隔を選択します(マップ上のGPXログウィジェットで有効化)</string>
     <string name="save_global_track_interval">ログの記録間隔</string>
     <string name="traffic_warning_speed_limit">制限速度</string>
     <string name="traffic_warning_border_control">国境検問所</string>
@@ -1618,7 +1608,6 @@ POIの更新は利用できません</string>
     <string name="download_wikipedia_files">Wikipediaの追加データ(%1$s MB)をダウンロードしますか？</string>
     <string name="gps_network_not_enabled">位置取得機能(現在地、GPS、位置情報サービス等)がオフになっています。オンにしますか？</string>
     <string name="disable_recording_once_app_killed">スタンドアロン動作時のログ記録を停止</string>
-    <string name="disable_recording_once_app_killed_descrp">タスクリストからアプリが停止された場合、GPX記録を一時停止します(OsmAndバックグラウンド動作表示が、Androidの通知エリアに表示されなくなります)</string>
     <string name="rendering_value_default13_name">デフォルト(13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">デフォルト (半透明シアン)</string>
     <string name="shared_string_import2osmand">OsmAndにインポート</string>
@@ -1672,7 +1661,6 @@ POIの更新は利用できません</string>
     <string name="favourites">お気に入り</string>
     <string name="saved_at_time">正常に保存されました: %1$s</string>
     <string name="poi_deleted_localy">POIをアップロードすると変更前の情報は削除されます</string>
-    <string name="show_gpx">GPXを表示</string>
     <string name="tab_title_basic">基本</string>
     <string name="tab_title_advanced">拡張</string>
     <string name="show_on_start">起動時に表示</string>
@@ -1977,7 +1965,6 @@ POIの更新は利用できません</string>
     <string name="access_widget_expand">展開</string>
     <string name="access_sort">並べ替え</string>
     <string name="map_mode">昼夜モード切替</string>
-    <string name="number_of_gpx_files_selected_pattern">%s個のGPXファイルが選択済み</string>
     <string name="rendering_value_thin_name">細線</string>
     <string name="rendering_value_medium_name">中</string>
     <string name="rendering_value_bold_name">太線</string>
@@ -2139,7 +2126,6 @@ POIの更新は利用できません</string>
     <string name="quick_action_navigation_voice">音声のON/OFF</string>
     <string name="quick_action_navigation_voice_off">音声のミュートを解除</string>
     <string name="quick_action_navigation_voice_on">音声をミュート</string>
-    <string name="quick_action_add_gpx">GPX経由地点を追加</string>
     <string name="quick_action_add_parking">駐車場所を追加</string>
     <string name="quick_action_new_action">アクションを追加</string>
     <string name="quick_action_edit_action">アクションを編集</string>
@@ -2484,7 +2470,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_sort">並び替え</string>
     <string name="coordinate_input">座標入力</string>
     <string name="marker_save_as_track_descr">マーカーは以下に指定したファイル名でエクスポートされます:</string>
-    <string name="marker_save_as_track">経路を保存</string>
     <string name="move_to_history">履歴に移動</string>
     <string name="group_will_be_removed_after_restart">グループは再起動後に削除されます。</string>
     <string name="show_guide_line">案内線を表示</string>
@@ -2607,7 +2592,6 @@ POIの更新は利用できません</string>
     <string name="add_group">グループの追加</string>
     <string name="empty_state_osm_edits_descr">OSM用のPOIの作成や変更、OSMメモを開いたり注釈を加えたりはもちろん、記録したGPXファイルをOSMへアップロードすることもできます。</string>
     <string name="mark_passed">通過済みにする</string>
-    <string name="add_segment_to_the_track">GPXファイルに追加</string>
     <string name="shared_string_current">現在地</string>
     <string name="shared_string_actions">その他</string>
     <string name="use_two_digits_longitude">二桁の経度を使用</string>
@@ -2641,8 +2625,6 @@ POIの更新は利用できません</string>
     <string name="open_wikipedia_link_online">Wikipediaをオンライン参照</string>
     <string name="open_wikipedia_link_online_description">このリンクを開くとウェブブラウザで閲覧することができます。</string>
     <string name="import_as_gpx">GPXファイルとしてインポート</string>
-    <string name="empty_state_my_tracks">GPXファイルに追加しよう</string>
-    <string name="empty_state_my_tracks_desc">GPXファイルまたは記録した経路からインポートします。</string>
     <string name="import_track">GPXファイルからインポート</string>
     <string name="access_intermediate_arrival_time">中間経由地点への到着時間</string>
     <string name="send_search_query">検索クエリを送信しますか？</string>
@@ -2812,7 +2794,6 @@ POIの更新は利用できません</string>
     <string name="passed">最後に使用: %1$s</string>
     <string name="shared_string_in_name">%1$s内</string>
     <string name="lang_lo">ラーオ語</string>
-    <string name="shared_string_gpx_files">GPXファイル</string>
     <string name="retry">再試行</string>
     <string name="add_route_points">ルートポイントの追加</string>
     <string name="save_gpx_waypoint">GPX経由地点の追加</string>

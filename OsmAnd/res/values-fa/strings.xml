@@ -99,7 +99,6 @@
     <string name="map_widget_compass">قطب‌نما</string>
     <string name="map_widget_reset">برگرداندن تنظیمات به حالت اولیه</string>
     <string name="map_widget_parking">پارکینگ</string>
-    <string name="map_widget_monitoring">ضبط GPX</string>
     <string name="map_widget_speed">سرعت</string>
     <string name="map_widget_distance">مقصد</string>
     <string name="map_widget_altitude">ارتفاع</string>
@@ -351,7 +350,6 @@
     <string name="city_type_city">شهر</string>
     <string name="file_can_not_be_renamed">نام فایل را نمی‌توان تغییر داد.</string>
     <string name="file_with_name_already_exists">فایلی با نام یکسان وجود دارد.</string>
-    <string name="shared_string_gpx_route">مسیر GPX</string>
     <string name="poi_filter_by_name">جست‌وجو بر اساس نام</string>
     <string name="index_settings">مدیریت فایل‌های نقشه</string>
     <string name="general_settings">عمومی</string>
@@ -698,7 +696,6 @@
     <string name="data_to_search_poi_not_available">برای جست‌وجوی POIها دادهٔ آفلاین را دانلود کنید.</string>
     <string name="old_poi_file_should_be_deleted">فایل دادهٔ POI،‏ «%1$s»، زائد است و می‌توانید آن را حذف کنید.</string>
     <string name="button_upgrade_osmandplus">ارتقا به OsmAnd+‎</string>
-    <string name="shared_string_save_as_gpx">ذخیره به‌صورت فایل GPX جدید</string>
     <string name="route_successfully_saved_at">مسیر در \'%1$s\' ذخیره شد.</string>
     <string name="search_position_map_view">مرکز نقشهٔ جاری</string>
     <string name="select_search_position">مبدأ:</string>
@@ -777,7 +774,6 @@
 \n 
 \nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است و تِرا ماهوار‌ه‌ای فوق‌پیشرفته برای سامانهٔ دیده‌بانی زمینِ ناساست. 
 \nاَستِر محصول تلاش مشترک ناسا، وزارت اقتصاد، صنعت و تجارت ژاپن و سامانه‌های فضایی ژاپن است.</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noPolygons_description">همهٔ عوارض زمین را روی نقشه ناپدید کنید.</string>
     <string name="rendering_attr_noPolygons_name">چندضلعی‌ها</string>
     <string name="rendering_attr_appMode_name">حالت رندرگیری</string>
@@ -791,7 +787,6 @@
     <string name="incremental_search_building">جست‌وجوی حرف‌به‌حرف نام ساختمان‌ها</string>
     <string name="incremental_search_street">جست‌وجوی حرف‌به‌حرف نام خیابان‌ها</string>
     <string name="reload_tile">بارکردن مجدد کاشی</string>
-    <string name="save_track_to_gpx">ردنگاری خودکار در هنگام ناوبری</string>
     <string name="loading_postcodes">در حال بارکردن کدهای پستی…</string>
     <string name="converting_names">در حال تبدیل اسامی محلی/انگلیسی…</string>
     <string name="failed_op">ناموفق</string>
@@ -902,7 +897,6 @@
     <string name="voice">گفتار ضبط‌شده</string>
     <string name="no_vector_map_loaded">نقشه‌های بُرداری بار نشدند</string>
     <string name="gpx_files_not_found">هیچ فایل GPXای در پوشهٔ tracks پیدا نشد</string>
-    <string name="layer_gpx_layer">فایل‌های GPX…</string>
     <string name="error_reading_gpx">خواندن دادهٔ GPX ناموفق بود.</string>
     <string name="vector_data">نقشه‌های بُرداری آفلاین</string>
     <string name="downloading_build">در حال دانلود ساخت…</string>
@@ -917,7 +911,6 @@
     <string name="build_installed">ساختِ {0} نصب شد ({1}).</string>
     <string name="km_h">km/h</string>
     <string name="old_map_index_is_not_supported">قالب دادهٔ «{0}» برای نقشه، ازرده‌خارج است و پشتیبانی نمی‌شود</string>
-    <string name="context_menu_item_add_waypoint">افزودن نقطهٔ بین‌راهی GPX</string>
     <string name="mile_per_hour">mph</string>
     <string name="first_time_msg">متشکریم که از OsmAnd استفاده می‌کنید. برای استفادهٔ آفلاین، دادهٔ منطقه‌ای را از طریق «تنظیمات» ← «مدیریت فایل‌های نقشه» دانلود کنید. سپس می‌توانید نقشه‌ها را ببینید، نشانی‌ها را پیدا کنید، مکان‌ها را جست‌وجو کنید، مسیرهای حمل‌ونقل عمومی را بیابید و... .</string>
     <string name="rendering_out_of_memory">برای نشان‌دادن ناحیهٔ انتخابی حافظهٔ اجرایی کافی وجود ندارد</string>
@@ -1278,7 +1271,6 @@
     <string name="forward">جلو</string>
     <string name="home">پیشخوان</string>
     <string name="confirm_every_run">همیشه بپرس</string>
-    <string name="save_track_to_gpx_globally">ثبت رد در فایل GPX</string>
     <string name="rendering_attr_publicTransportMode_name">مسیرهای اتوبوس، اتوبوس برقی و مسیرهای خطی</string>
     <string name="record_plugin_name">ضبط سفر</string>
     <string name="int_hour">س</string>
@@ -1306,8 +1298,6 @@
     <string name="live_monitoring_m">ردیابی آنلاین (GPX لازم است)</string>
     <string name="live_monitoring_start">شروع ردیابی آنلاین</string>
     <string name="live_monitoring_stop">توقف ردیابی آنلاین</string>
-    <string name="gpx_monitoring_start">ازسرگیری ضبط GPX</string>
-    <string name="gpx_monitoring_stop">نگه‌داشتن ضبط GPX</string>
     <string name="rendering_attr_hideBuildings_name">ساختمان‌ها</string>
     <string name="gpx_start_new_segment">شروع بخش جدید</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">راه‌های غیرموتوری</string>
@@ -1321,7 +1311,6 @@
     <string name="rendering_attr_showSurfaceGrade_name">کیفیت راه</string>
     <string name="rendering_attr_showSurfaces_name">سطح راه</string>
     <string name="rendering_attr_showCycleRoutes_name">مسیرهای دوچرخه</string>
-    <string name="save_global_track_interval_descr">بازهٔ زمانی برای ضبط رد را انتخاب کنید (که از طریق ابزار ضبط GPX روی نقشه فعال می‌شود).</string>
     <string name="save_global_track_interval">بازهٔ زمانی ثبت (سراسری)</string>
     <string name="save_track_to_gpx_globally_descr">می‌توانید با استفاده از ابزارک ضبط GPX روی نقشه، ردنگاری در فایل GPX را خاموش یا روشن کنید.</string>
     <string name="save_track_interval_globally">بازهٔ زمانی ثبت</string>
@@ -1623,7 +1612,6 @@
     <string name="move_marker_bottom_sheet_title">نقشه را جابه‌جا کنید تا موقعیت نشانه عوض شود</string>
     <!-- string name="lat_lon_pattern">طول: %1$.5f عرض: %2$.5f</string -->
     <string name="access_sort">مرتب‌سازی</string>
-    <string name="number_of_gpx_files_selected_pattern">%s فایل GPX انتخاب شده است</string>
     <string name="osm_live_email_desc">برای اطلاع‌رسانی دربارهٔ مشارکت‌های شما.</string>
     <string name="download_files_question_space_with_temp">آیا {0} فایل را دانلود می‌کنید؟ 
 \n {3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی لازم دارید. (از {2} مگابایت)</string>
@@ -2031,7 +2019,6 @@
     <string name="lang_gl">گالیسیایی</string>
     <string name="gps_network_not_enabled">موقعیت‌یاب خاموش است. روشن شود؟</string>
     <string name="disable_recording_once_app_killed">جلوگیری از ثبت خوداتکا</string>
-    <string name="disable_recording_once_app_killed_descrp">هنگامی که برنامه را از طریق برنامه‌های اخیر ببندید ثبت اطلاعات GPX موقتاً متوقف می‌شود. (نشانگر اجرای پس‌زمینه از نوار اعلان حذف می‌شود.)</string>
     <string name="shared_string_import2osmand">درون‌برد به OsmAnd</string>
     <string name="read_full_article">مقالهٔ کامل را بخوانید (آنلاین)</string>
     <string name="shared_string_wikipedia">ویکی‌پدیا</string>
@@ -2063,7 +2050,6 @@
     <string name="lang_zh_hk">چینی (هنگ‌کنگ)</string>
     <string name="route_is_too_long_v2">برای مسافت‌های طولانی: اگر تا ۱۰ دقیقه مسیری پیدا نشد، چند مقصد میانی اضافه کنید.</string>
     <string name="driving_region_australia">استرالیا</string>
-    <string name="add_segment_to_the_track">افزودن به یک فایل GPX</string>
     <string name="shared_string_markers">نشانه‌ها</string>
     <string name="favorite_group_name">نام گروه</string>
     <string name="translit_name_if_miss">اگر نام %1$s وجود نداشت، با حروف انگلیسی نشان بده</string>
@@ -2108,7 +2094,6 @@
     <string name="recent_places">مکان‌های اخیر</string>
     <string name="favourites">علاقه‌مندی‌ها</string>
     <string name="poi_deleted_localy">پس از آپلود تغییرات، POI حذف می‌شود</string>
-    <string name="show_gpx">نمایش اطلاعات GPX</string>
     <string name="count_of_lines">تعداد خطوط</string>
     <string name="are_you_sure">مطمئن هستید؟</string>
     <string name="unsaved_changes_will_be_lost">تغییراتی که ذخیره نکرده‌اید، از دست می‌رود. ادامه می‌دهید؟</string>
@@ -2381,7 +2366,6 @@
     <string name="osn_modify_dialog_error">ویرایش یادداشت ناموفق بود.</string>
     <string name="osn_modify_dialog_title">اصلاح یادداشت</string>
     <string name="context_menu_item_modify_note">اصلاح یادداشت OSM</string>
-    <string name="marker_save_as_track">ذخیره در قالب فایل GPX</string>
     <string name="show_arrows_on_the_map">فلش‌ها را روی نقشه نشان بده</string>
     <string name="show_passed">ردشده‌ها را نشان بده</string>
     <string name="hide_passed">ردشده‌ها را مخفی کن</string>
@@ -2405,8 +2389,6 @@
     <string name="quick_action_add_create_items">دکمه‌هایی را اضافه کنید</string>
     <string name="quick_action_page_list_descr">دکمه‌ای برای گردش در لیست زیر.</string>
     <string name="quick_action_map_style_action">افزودن یک سبک نقشه</string>
-    <string name="empty_state_my_tracks">فایل GPX اضافه کنید</string>
-    <string name="empty_state_my_tracks_desc">فایل GPX درون‌برد کنید یا رد خود را ضبط کنید.</string>
     <string name="import_track">درون‌برد فایل GPX</string>
     <string name="fast_coordinates_input">ورود فوری مختصات</string>
     <string name="show_guide_line">نمایش خطوط جهت‌دار</string>
@@ -2463,7 +2445,6 @@
     <string name="context_menu_item_delete_waypoint">نقطهٔ بین‌راهی GPX را حذف می‌کنید؟</string>
     <string name="context_menu_item_edit_waypoint">ویرایش نقطهٔ بین‌راهی GPX</string>
     <string name="rendering_value_darkyellow_name">زرد تیره</string>
-    <string name="quick_action_add_gpx">افزودن نقطهٔ بین‌راهی GPX</string>
     <string name="quick_favorites_name_preset">پیش‌تنظیم نام</string>
     <string name="quick_action_add_gpx_descr">دکمه‌ای برای ایجاد یک نقطهٔ بین‌راهی GPX در مرکز صفحه.</string>
     <string name="add_waypoint">افزودن نقطهٔ بین‌راهی</string>
@@ -2813,7 +2794,6 @@
     <string name="access_intermediate_arrival_time">زمان رسیدن به میانی</string>
     <string name="map_widget_intermediate_time">مدت تا میانی</string>
     <string name="unirs_render_descr">اصلاح‌یافتهٔ سبک پیشفرض برای ایجاد پادنمایی بیشتر در راه‌های پیاده و دوچرخه. از رنگ‌بندی مپنیک استفاده می‌کند.</string>
-    <string name="shared_string_gpx_files">فایل‌های GPX</string>
     <string name="get_osmand_live">‏‏OsmAnd Live را تهیه کنید تا همهٔ این قابلیت‌ها باز شود: به‌روزآوری روزانهٔ نقشه و دانلودهای نامحدود، همهٔ افزونه‌های رایگان و پولی، ویکی‌پدیا، ویکی‌سفر و...</string>
     <string name="quick_action_edit_actions">ویرایش کنش‌ها</string>
     <string name="error_notification_desc">لطفاً یک نماگرفت از این اعلان به support@osmand.net بفرستید</string>

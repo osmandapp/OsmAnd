@@ -126,7 +126,6 @@
     <string name="av_def_action_choose">På anmodning\?</string>
     <string name="av_use_external_camera_descr">Brug systemprogram til foto.</string>
     <string name="av_use_external_camera">Brug kamera</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
     <string name="intermediate_point">Mellemliggende destination %1$s</string>
     <string name="snap_to_road_descr">Hold position på vejen under navigation.</string>
@@ -163,7 +162,6 @@
     <string name="download_hillshade_maps">Reliefskygger</string>
     <string name="map_widget_reset">Nulstil til standard</string>
     <string name="map_widget_parking">Parkering</string>
-    <string name="map_widget_monitoring">GPX-logning</string>
     <string name="map_widget_speed">Hastighed</string>
     <string name="map_widget_distance">Destination</string>
     <string name="map_widget_altitude">Højde</string>
@@ -416,7 +414,6 @@
     <string name="animate_route">Start simulering</string>
     <string name="file_can_not_be_renamed">Filen kunne ikke omdøbes.</string>
     <string name="file_with_name_already_exists">En fil med dette navn findes allerede.</string>
-    <string name="shared_string_gpx_route">GPX-rute</string>
     <string name="poi_query_by_name_matches_categories">Flere kategorier af interessepunkter fundet som matcher forespørgslen:</string>
     <string name="data_to_search_poi_not_available">Lokale data til at søge interessepunkter findes ikke.</string>
     <string name="poi_filter_by_name">Søg via navn</string>
@@ -583,7 +580,6 @@
     <string name="context_menu_item_share_location">Del placering</string>
     <string name="add_waypoint_dialog_added">GPX-rutepunkt \'{0}\' tilføjet</string>
     <string name="add_waypoint_dialog_title">Tilføj rutepunkt til optaget GPX-spor</string>
-    <string name="context_menu_item_add_waypoint">Tilføj GPX-rutepunkt</string>
     <string name="amenity_type_administrative">Administrativ</string>
     <string name="amenity_type_barrier">Forhindringer</string>
     <string name="amenity_type_education">Uddannelse</string>
@@ -666,7 +662,6 @@
     <string name="voice">Optaget stemme</string>
     <string name="no_vector_map_loaded">Vektorkort blev ikke indlæst</string>
     <string name="gpx_files_not_found">Ingen GPX-filer blev fundet i \'/tracks\' mappen</string>
-    <string name="layer_gpx_layer">GPX-filer…</string>
     <string name="error_reading_gpx">Kunne ikke læse GPX-data.</string>
     <string name="vector_data">Offline vektorkort</string>
     <string name="transport_context_menu">Søg efter transport ved stoppested</string>
@@ -880,7 +875,6 @@
     <string name="save_track_interval">Logningsinterval under navigation</string>
     <string name="save_track_interval_descr">Angiv logningsinterval for optagelse af spor under navigation</string>
     <string name="save_track_to_gpx_descrp">GPX-spor gemmes automatisk i tracks-mappen under navigation.</string>
-    <string name="save_track_to_gpx">Automatisk optagelse af spor under navigation</string>
     <string name="update_tile">Opdater kort</string>
     <string name="reload_tile">Genindlæs kortbrikker</string>
     <string name="mark_point">Mål</string>
@@ -1226,8 +1220,6 @@
     <string name="live_monitoring_m">Online sporing (GPX nødvendig)</string>
     <string name="live_monitoring_start">Start online sporing</string>
     <string name="live_monitoring_stop">Stop online sporing</string>
-    <string name="gpx_monitoring_start">Start GPX-logning</string>
-    <string name="gpx_monitoring_stop">Stop GPX-logning</string>
     <string name="gpx_start_new_segment">Start nyt segment</string>
     <string name="lang_fa">Persisk</string>
     <string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis ikke tilgængelig bruges engelske eller lokale navne).</string>
@@ -1276,11 +1268,9 @@
 \n 
 \nOptagede spor kan deles med venner eller anvendes til OSM-bidrag. Sportsfolk kan bruge optagede spor til at overvåge deres træning. En vis grundlæggende sporanalyse kan udføres direkte i OsmAnd, såsom omgangstider, gennemsnitshastighed mv., og spor kan selvfølgelig også senere analyseres i særlige tredjeparts analyseværktøjer.</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus-, shuttlebusruter</string>
-    <string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
     <string name="save_track_interval_globally">Logningsinterval</string>
     <string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til eller fra med GPX-logning udvidelsen på kortet.</string>
     <string name="confirm_every_run">Spørg altid</string>
-    <string name="save_global_track_interval_descr">Angiv logningsinterval for den almindelige optagelse af spor (aktiveres via \'GPX-logning\' på hovedskærmen).</string>
     <string name="save_global_track_interval">Generelt logningsinterval</string>
     <string name="traffic_warning_speed_limit">Hastighedsgrænse</string>
     <string name="traffic_warning_border_control">Grænsekontrol</string>
@@ -1454,7 +1444,6 @@
     <string name="shared_string_deselect_all">Fravælg alle</string>
     <string name="shared_string_clear">Slet</string>
     <string name="shared_string_save">Gem</string>
-    <string name="shared_string_save_as_gpx">Gem som en ny GPX-fil</string>
     <string name="shared_string_rename">Omdøb</string>
     <string name="shared_string_delete">Slet</string>
     <string name="shared_string_delete_all">Slet alle</string>
@@ -1572,7 +1561,6 @@
     <string name="shared_string_import2osmand">Importer til OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Slet %1$d noter. Bekræft?</string>
     <string name="disable_recording_once_app_killed">Forhindre uafhængig logning</string>
-    <string name="disable_recording_once_app_killed_descrp">Hvis markeret vil GPX-logning blive stoppet, når programmet afsluttes (via seneste programmer). OsmAnd-baggrundsmeddelse forsvinder fra meddelelseslinjen.</string>
     <string name="gps_network_not_enabled">Placeringtjenesten er slukket. Slå det til\?</string>
     <string name="archive_wikipedia_data">Der er gamle inkompatible Wikipedia data. Skal de arkiveres?</string>
     <string name="download_wikipedia_files">Hent yderligere data fra Wikipedia (%1$s MB)?</string>
@@ -1672,7 +1660,6 @@
     <string name="poi_action_delete">slet</string>
     <string name="saved_at_time">Nu gemt i: %1$s</string>
     <string name="poi_deleted_localy">Interessepunkt (IP) vil blive slettet, når ændringer overføres</string>
-    <string name="show_gpx">Vis GPX-data</string>
     <string name="count_of_lines">Antal linjer</string>
     <string name="show_on_start">Vis ved start</string>
     <string name="unsaved_changes_will_be_lost">Eventuelle ikke-gemte ændringer vil gå tabt. Fortsæt?</string>
@@ -1946,7 +1933,6 @@
     <string name="rendering_value_thin_name">Tynd</string>
     <string name="rendering_value_medium_name">Mellem</string>
     <string name="rendering_value_bold_name">Fed</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX-filer valgt</string>
     <string name="map_mode">Korttilstand</string>
     <string name="access_default_color">Standardfarve</string>
     <string name="access_category_choice">Vælg kategori</string>
@@ -2126,7 +2112,6 @@
     <string name="quick_action_navigation_voice">Talevejledning til/fra</string>
     <string name="quick_action_navigation_voice_off">Aktiver talevejledning</string>
     <string name="quick_action_navigation_voice_on">Deaktiver talevejledning</string>
-    <string name="quick_action_add_gpx">Tilføj GPX-rutepunkt</string>
     <string name="quick_action_add_parking">Tilføj en parkeringsplads</string>
     <string name="quick_action_new_action">Tilføj genvej</string>
     <string name="quick_action_edit_action">Rediger genvej</string>
@@ -2495,14 +2480,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="choose_navigation_type">Vælg navigationsprofil</string>
     <string name="add_route_points">Tilføj rutepunkter</string>
     <string name="add_line">Tilføj linje</string>
-    <string name="empty_state_my_tracks">Tilføj GPX-filer</string>
-    <string name="empty_state_my_tracks_desc">Importer GPX-filer eller optag spor.</string>
     <string name="empty_state_favourites">Tilføj favoritter</string>
     <string name="empty_state_favourites_desc">Importer Favoritter, eller tilføj ved at markere punkter på kortet.</string>
     <string name="import_track">Importer GPX-fil</string>
     <string name="import_track_desc">Filen %1$s indeholder ingen rutepunkter, importer den som et spor?</string>
     <string name="move_point">Flyt punkt</string>
-    <string name="add_segment_to_the_track">Tilføj til GPX-fil</string>
     <string name="keep_showing_on_map">Fortsæt med at vise på kortet</string>
     <string name="exit_without_saving">Afslut uden at gemme?</string>
     <string name="do_not_use_animations">Ingen animationer</string>
@@ -2541,7 +2523,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatindtastning</string>
     <string name="marker_save_as_track_descr">Eksporter markører til følgende GPX-fil:</string>
-    <string name="marker_save_as_track">Gem som GPX-fil</string>
     <string name="move_to_history">Flyt til historik</string>
     <string name="group_will_be_removed_after_restart">Gruppen vil være væk efter næste genstart.</string>
     <string name="shared_string_markers">Markører</string>
@@ -2789,7 +2770,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="access_intermediate_arrival_time">Mellemliggende ankomsttid</string>
     <string name="map_widget_intermediate_time">Mellemliggende tid</string>
     <string name="unirs_render_descr">Ændring af standard stil for at øge kontrasten på fodgænger- og cykelveje. Bruger Mapniks oprindelige farver.</string>
-    <string name="shared_string_gpx_files">GPX-filer</string>
     <string name="get_osmand_live">Abonner på OsmAnd Live og brug alle funktioner: daglige opdateringer af kort, alle gratis og betalte udvidelser, Wikipedia, Wikivoyage og meget mere.</string>
     <string name="quick_action_edit_actions">Rediger genveje</string>
     <string name="error_notification_desc">Send et skærmbillede af meddelelsen til support@osmand.net</string>

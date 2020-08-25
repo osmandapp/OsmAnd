@@ -17,16 +17,13 @@ import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
@@ -37,7 +34,11 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
 import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
@@ -263,9 +264,6 @@ public class RoutingOptionsHelper {
 				settings.GPX_ROUTE_CALC_OSMAND_PARTS.set(selected);
 			} else if (gpxParam.id == R.string.gpx_option_from_start_point) {
 				rp.setPassWholeRoute(selected);
-			} else if (gpxParam.id == R.string.use_points_as_intermediates) {
-				settings.GPX_CALCULATE_RTEPT.set(selected);
-				rp.setUseIntermediatePointsRTE(selected);
 			} else if (gpxParam.id == R.string.calculate_osmand_route_gpx) {
 				settings.GPX_ROUTE_CALC.set(selected);
 				rp.setCalculateOsmAndRoute(selected);
@@ -294,9 +292,7 @@ public class RoutingOptionsHelper {
 			if (item != null) {
 				updateRoutingParameterIcons(item);
 				list.add(item);
-				if (item instanceof GpxLocalRoutingParameter) {
-					list.addAll(getGpxRouterParameters(am));
-				} else if (item instanceof TimeConditionalRoutingItem) {
+				if (item instanceof TimeConditionalRoutingItem) {
 					list.addAll(getOsmandRouterParameters(am));
 				}
 			}
@@ -464,14 +460,9 @@ public class RoutingOptionsHelper {
 	public List<LocalRoutingParameter> getGpxRouterParameters(ApplicationMode am) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
-		RouteProvider.GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
-		boolean osmandRouter = am.getRouteService() == RouteProvider.RouteService.OSMAND;
+		GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
+		boolean osmandRouter = am.getRouteService() == RouteService.OSMAND;
 		if (rparams != null && osmandRouter) {
-			GPXUtilities.GPXFile fl = rparams.getFile();
-			if (fl.hasRtePt()) {
-				list.add(new OtherLocalRoutingParameter(R.string.use_points_as_intermediates,
-						app.getString(R.string.use_points_as_intermediates), rparams.isUseIntermediatePointsRTE()));
-			}
 			if (!routingHelper.isCurrentGPXRouteV2()) {
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_reverse_route,
 						app.getString(R.string.gpx_option_reverse_route), rparams.isReverse()));
@@ -899,10 +890,9 @@ public class RoutingOptionsHelper {
 		}
 	}
 
-
 	public static class GpxLocalRoutingParameter extends LocalRoutingParameter {
 
-		public static final String KEY = "GpxLocalRoutingParameter";
+		public static final String KEY = "FollowTrackRoutingParameter";
 
 		public String getKey() {
 			return KEY;

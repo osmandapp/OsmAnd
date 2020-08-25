@@ -15,7 +15,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescriptionDifHeight;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -27,7 +27,6 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	public static final String TAG = OptionsBottomSheetDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(OptionsBottomSheetDialogFragment.class);
 
-	public static final String SNAP_TO_ROAD_ENABLED_KEY = "snap_to_road_enabled";
 	public static final String TRACK_SNAPPED_TO_ROAD_KEY = "track_snapped_to_road";
 	public static final String SNAP_TO_ROAD_APP_MODE_KEY = "snap_to_road_app_mode";
 
@@ -36,10 +35,8 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
-		boolean snapToRoadEnabled = false;
 		boolean trackSnappedToRoad = false;
 		if (args != null) {
-			snapToRoadEnabled = args.getBoolean(SNAP_TO_ROAD_ENABLED_KEY);
 			trackSnappedToRoad = args.getBoolean(TRACK_SNAPPED_TO_ROAD_KEY);
 			routeAppMode = ApplicationMode.valueOfStringKey(args.getString(SNAP_TO_ROAD_APP_MODE_KEY), null);
 		}
@@ -49,7 +46,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		String description;
 		Drawable icon;
 		if (trackSnappedToRoad) {
-			if (!snapToRoadEnabled || routeAppMode == null) {
+			if (routeAppMode == null || routeAppMode == MeasurementEditingContext.DEFAULT_APP_MODE) {
 				description = getString(R.string.routing_profile_straightline);
 				icon = getContentIcon(R.drawable.ic_action_split_interval);
 			} else {
@@ -61,11 +58,12 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 			icon = getContentIcon(R.drawable.ic_action_help);
 		}
 
-		BaseBottomSheetItem snapToRoadItem = new BottomSheetItemWithDescription.Builder()
+		BaseBottomSheetItem snapToRoadItem = new BottomSheetItemWithDescriptionDifHeight.Builder()
+				.setMinHeight(getResources().getDimensionPixelSize(R.dimen.card_row_min_height))
 				.setDescription(description)
 				.setIcon(icon)
 				.setTitle(getString(R.string.route_between_points))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -91,7 +89,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					public void onClick(View v) {
 						Fragment fragment = getTargetFragment();
 						if (fragment instanceof OptionsFragmentListener) {
-							((OptionsFragmentListener) fragment).addToGpxOnClick();
+							((OptionsFragmentListener) fragment).saveChangesOnClick();
 						}
 						dismiss();
 					}
@@ -121,8 +119,8 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		items.add(new OptionsDividerItem(getContext()));
 
 		BaseBottomSheetItem clearAllItem = new SimpleBottomSheetItem.Builder()
-				.setIcon(getIcon(R.drawable.ic_action_reset_to_default_dark, (
-						nightMode ? R.color.color_osm_edit_delete : R.color.color_osm_edit_delete)))
+				.setIcon(getIcon(R.drawable.ic_action_reset_to_default_dark,
+						nightMode ? R.color.color_osm_edit_delete : R.color.color_osm_edit_delete))
 				.setTitle(getString(R.string.shared_string_clear_all))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +139,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 	private BaseBottomSheetItem getSaveAsNewTrackItem() {
 		return new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_save_to_file))
+				.setIcon(getContentIcon(R.drawable.ic_action_save_as_new_file))
 				.setTitle(getString(R.string.save_as_new_track))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
@@ -165,14 +163,13 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		params.rightMargin = view.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, Fragment targetFragment, boolean trackSnappedToRoad,
-	                                boolean snapToRoad, String routeAppModeStringKey) {
+	public static void showInstance(@NonNull FragmentManager fm, Fragment targetFragment,
+									boolean trackSnappedToRoad, String routeAppModeStringKey) {
 		try {
 			if (!fm.isStateSaved()) {
 				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
 				Bundle args = new Bundle();
 				args.putBoolean(TRACK_SNAPPED_TO_ROAD_KEY, trackSnappedToRoad);
-				args.putBoolean(SNAP_TO_ROAD_ENABLED_KEY, snapToRoad);
 				args.putString(SNAP_TO_ROAD_APP_MODE_KEY, routeAppModeStringKey);
 				fragment.setArguments(args);
 				fragment.setTargetFragment(targetFragment,0);
@@ -192,7 +189,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		void snapToRoadOnCLick();
 
-		void addToGpxOnClick();
+		void saveChangesOnClick();
 
 		void saveAsNewTrackOnClick();
 

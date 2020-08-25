@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class GeoPointParserUtil {
 
-	
+
 	private static String getQueryParameter(final String param, URI uri) {
 		final String query = uri.getQuery();
 		String value = null;
@@ -103,7 +103,7 @@ public class GeoPointParserUtil {
 				if(uri.getSchemeSpecificPart() == null) {
 					return null;
 				} else if(!uri.getSchemeSpecificPart().contains("=")) {
-					params = getQueryParameters("q="+uri.getSchemeSpecificPart());	
+					params = getQueryParameters("q="+uri.getSchemeSpecificPart());
 				} else {
 					params = getQueryParameters(uri.getSchemeSpecificPart());
 				}
@@ -181,7 +181,7 @@ public class GeoPointParserUtil {
 					}
 				} else if (host.startsWith("map.baidu.")) { // .com and .cn both work
 					/* Baidu Map uses a custom format for lat/lon., it is basically standard lat/lon
-                     * multiplied by 100,000, then rounded to an integer */
+					 * multiplied by 100,000, then rounded to an integer */
 					String zm = params.get("l");
 					String[] vls = silentSplit(params.get("c"), ",");
 					if (vls != null && vls.length >= 2) {
@@ -219,7 +219,7 @@ public class GeoPointParserUtil {
 					String latString = null;
 					String lonString = null;
 					String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
-					
+
 					if (params.containsKey("q")) {
 						System.out.println("q=" + params.get("q"));
 						Matcher matcher = commaSeparatedPairPattern.matcher(params.get("q"));
@@ -252,7 +252,6 @@ public class GeoPointParserUtil {
 						}
 						final String postf = "\\s\\((\\p{L}|\\p{M}|\\p{Z}|\\p{S}|\\p{N}|\\p{P}|\\p{C})*\\)$";
 						opath = opath.replaceAll(postf, "");
-						System.out.println("opath=" + opath);
 						return parseGoogleMapsPath(opath, params);
 					}
 					if (fragment != null) {
@@ -262,13 +261,32 @@ public class GeoPointParserUtil {
 							return new GeoParsedPoint(m.group(1));
 						}
 					}
-
+					String DATA_PREFIX = "/data=";
 					String[] pathPrefixes = new String[]{"/@", "/ll=",
-							"loc:", "/"};
+							"loc:", DATA_PREFIX, "/"};
 					for (String pref : pathPrefixes) {
 						if (path.contains(pref)) {
 							path = path.substring(path.lastIndexOf(pref) + pref.length());
-							return parseGoogleMapsPath(path, params);
+							if (path.contains("/")) {
+								path = path.substring(0, path.indexOf('/'));
+							}
+							if (pref.equals(DATA_PREFIX)) {
+								String[] vls = path.split("!");
+								String lat = null;
+								String lon = null;
+								for (String v : vls) {
+									if (v.startsWith("3d")) {
+										lat = v.substring(2);
+									} else if (v.startsWith("4d")) {
+										lon = v.substring(2);
+									}
+								}
+								if (lat != null && lon != null) {
+									return new GeoParsedPoint(Double.valueOf(lat), Double.valueOf(lon));
+								}
+							} else {
+								return parseGoogleMapsPath(path, params);
+							}
 						}
 					}
 				} else if (host.endsWith(".amap.com")) {
@@ -279,7 +297,7 @@ public class GeoPointParserUtil {
 					Pattern p;
 					Matcher matcher;
 					final String[] patterns = {
-						/* though this looks like Query String, it is also used as part of the Fragment */
+							/* though this looks like Query String, it is also used as part of the Fragment */
 							".*q=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?).*&radius=(\\d+).*",
 							".*q=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?).*",
 							".*p=(?:[A-Z0-9]+),([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?).*",};
@@ -297,7 +315,7 @@ public class GeoPointParserUtil {
 							}
 						}
 					}
-				} else if (host.equals("here.com") || host.endsWith(".here.com")) { // www.here.com, share.here.com, here.com 
+				} else if (host.equals("here.com") || host.endsWith(".here.com")) { // www.here.com, share.here.com, here.com
 					String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
 					String label = null;
 					if (params.containsKey("msg")) {
@@ -474,7 +492,7 @@ public class GeoPointParserUtil {
 				}
 
 				if ("z".equals(paramName) && paramValue != null) {
-					zoom = Integer.parseInt(paramValue);
+					zoom = (int) Float.parseFloat(paramValue);
 				} else if ("q".equals(paramName) && paramValue != null) {
 					searchRequest = URLDecoder.decode(paramValue);
 				}
@@ -569,7 +587,7 @@ public class GeoPointParserUtil {
 	private static int parseZoom(String zoom) {
 		try {
 			if (zoom != null) {
-				return Integer.valueOf(zoom);
+				return (int) Float.parseFloat(zoom);
 			}
 		} catch (NumberFormatException e) {
 		}
@@ -579,7 +597,7 @@ public class GeoPointParserUtil {
 	private static double parseSilentDouble(String zoom) {
 		return parseSilentDouble(zoom, 0);
 	}
-	
+
 	private static double parseSilentDouble(String zoom, double vl) {
 		try {
 			if (zoom != null) {
@@ -754,9 +772,9 @@ public class GeoPointParserUtil {
 
 		@Override
 		public String toString() {
-			return isGeoPoint() ? 
-					String.format("GeoParsedPoint [lat=%.5f, lon=%.5f, zoom=%d, label=%s]", lat, lon, zoom, label) : 
-						String.format("GeoParsedPoint [query=%s]",query);
+			return isGeoPoint() ?
+					String.format("GeoParsedPoint [lat=%.5f, lon=%.5f, zoom=%d, label=%s]", lat, lon, zoom, label) :
+					String.format("GeoParsedPoint [query=%s]",query);
 		}
 	}
 }

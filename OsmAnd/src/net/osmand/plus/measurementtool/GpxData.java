@@ -4,7 +4,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.data.QuadRect;
 
-public class NewGpxData {
+public class GpxData {
 
 	public enum ActionType {
 		ADD_SEGMENT,
@@ -18,7 +18,7 @@ public class NewGpxData {
 	private QuadRect rect;
 	private ActionType actionType;
 
-	public NewGpxData(GPXFile gpxFile, QuadRect rect, ActionType actionType, TrkSegment trkSegment) {
+	public GpxData(GPXFile gpxFile, QuadRect rect, ActionType actionType, TrkSegment trkSegment) {
 		this.gpxFile = gpxFile;
 		this.rect = rect;
 		this.actionType = actionType;

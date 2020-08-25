@@ -134,12 +134,20 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 			menu.onShow();
 		}
 		startLocationUpdate();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapViewTrackingUtilities().setDetailsMenu(menu);
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		stopLocationUpdate();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapViewTrackingUtilities().setDetailsMenu(menu);
+		}
 	}
 
 	private void startLocationUpdate() {

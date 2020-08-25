@@ -1,7 +1,10 @@
 package net.osmand.router;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXExtensionsWriter;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.RouteSegment;
+import net.osmand.GPXUtilities.RouteType;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -37,8 +40,7 @@ public class RouteExporter {
 
 	public GPXFile exportRoute() {
 		RouteDataResources resources = new RouteDataResources(locations);
-		final RouteDataBundle bundle = new RouteDataBundle(resources);
-
+		List<StringBundle> routeItems = new ArrayList<>();
 		if (!Algorithms.isEmpty(route)) {
 			for (RouteSegmentResult sr : route) {
 				sr.collectTypes(resources);
@@ -47,15 +49,12 @@ public class RouteExporter {
 				sr.collectNames(resources);
 			}
 
-			List<StringBundle> routeItems = new ArrayList<>();
 			for (RouteSegmentResult sr : route) {
 				RouteDataBundle itemBundle = new RouteDataBundle(resources);
 				sr.writeToBundle(itemBundle);
 				routeItems.add(itemBundle);
 			}
-			bundle.putBundleList("route", "segment", routeItems);
 		}
-
 		List<StringBundle> typeList = new ArrayList<>();
 		Map<RouteTypeRule, Integer> rules = resources.getRules();
 		for (RouteTypeRule rule : rules.keySet()) {
@@ -63,7 +62,6 @@ public class RouteExporter {
 			rule.writeToBundle(typeBundle);
 			typeList.add(typeBundle);
 		}
-		bundle.putBundleList("types", "type", typeList);
 
 		GPXFile gpx = new GPXFile(OSMAND_ROUTER_V2);
 		Track track = new Track();
@@ -75,7 +73,6 @@ public class RouteExporter {
 		if (locations == null || locations.isEmpty()) {
 			return gpx;
 		}
-
 		for (int i = 0; i < locations.size(); i++) {
 			Location loc = locations.get(i);
 			WptPt pt = new WptPt();
@@ -92,21 +89,22 @@ public class RouteExporter {
 			}
 			trkSegment.points.add(pt);
 		}
-
 		if (points != null) {
 			for (WptPt pt : points) {
 				gpx.addPoint(pt);
 			}
 		}
 
-		GPXExtensionsWriter extensionsWriter = new GPXExtensionsWriter() {
-			@Override
-			public void writeExtensions(XmlSerializer serializer) {
-				StringBundleWriter bundleWriter = new StringBundleXmlWriter(bundle, serializer);
-				bundleWriter.writeBundle();
-			}
-		};
-		gpx.setExtensionsWriter(extensionsWriter);
+		List<RouteSegment> routeSegments = new ArrayList<>();
+		for (StringBundle item : routeItems) {
+			routeSegments.add(RouteSegment.fromStringBundle(item));
+		}
+		gpx.routeSegments = routeSegments;
+		List<RouteType> routeTypes = new ArrayList<>();
+		for (StringBundle item : typeList) {
+			routeTypes.add(RouteType.fromStringBundle(item));
+		}
+		gpx.routeTypes = routeTypes;
 
 		return gpx;
 	}

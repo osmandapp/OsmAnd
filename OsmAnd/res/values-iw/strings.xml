@@ -80,7 +80,6 @@
     <string name="map_widget_compass">מצפן</string>
     <string name="map_widget_reset">איפוס לבררת המחדל</string>
     <string name="map_widget_parking">חנייה</string>
-    <string name="map_widget_monitoring">רישום GPX</string>
     <string name="map_widget_speed">מהירות</string>
     <string name="map_widget_distance">יעד</string>
     <string name="map_widget_altitude">גובה</string>
@@ -332,7 +331,6 @@
     <string name="animate_route">התחלת ההנפשה</string>
     <string name="file_can_not_be_renamed">לא ניתן לשנות את שם הקובץ.</string>
     <string name="file_with_name_already_exists">כבר קיים קובץ בשם הזה.</string>
-    <string name="shared_string_gpx_route">מסלול GPX</string>
     <string name="poi_query_by_name_matches_categories">נמצאו מספר קטגוריות נ״ע קשורות.</string>
     <string name="data_to_search_poi_not_available">להוריד נתונים בלתי מקוונים כדי לחפש נקודות עניין.</string>
     <string name="poi_filter_by_name">חיפוש לפי שם</string>
@@ -350,7 +348,6 @@
     <string name="search_position_map_view">מרכז המפה הנוכחי</string>
     <string name="select_search_position">מקור:</string>
     <string name="context_menu_item_search">חיפוש בסביבת מקום</string>
-    <string name="shared_string_save_as_gpx">שמירה כקובץ GPX חדש</string>
     <string name="route_successfully_saved_at">המסלול נשמר בתור ‚%1$s’.</string>
     <string name="filename_input">שם קובץ:</string>
     <string name="file_with_name_already_exist">כבר קיים קובץ השם הזה.</string>
@@ -455,7 +452,6 @@
     <string name="context_menu_item_share_location">שיתוף המיקום</string>
     <string name="add_waypoint_dialog_added">נקודת הציון „{0}” נוספה ל־GPX</string>
     <string name="add_waypoint_dialog_title">הוספת נקודת ציון לדרך GPX מוקלטת</string>
-    <string name="context_menu_item_add_waypoint">הוספת נקודת ציון ל־GPX</string>
     <string name="amenity_type_administrative">מנהלית</string>
     <string name="amenity_type_barrier">מחסום</string>
     <string name="amenity_type_education">חינוך</string>
@@ -551,7 +547,6 @@
     <string name="voice">קול מוקלט</string>
     <string name="no_vector_map_loaded">המפות הווקטוריות לא נטענו</string>
     <string name="gpx_files_not_found">לא נמצאו קובצי GPX בתיקיית המסלולים</string>
-    <string name="layer_gpx_layer">קובצי GPX…</string>
     <string name="error_reading_gpx">לא ניתן לקרוא את נתוני ה־GPX.</string>
     <string name="vector_data">מפות וקטוריות בלתי מקוונות</string>
     <string name="transport_context_menu">חיפוש תחבורה בתחנה</string>
@@ -884,7 +879,6 @@
     <string name="no_buildings_found">לא נמצאו בניינים.</string>
     <string name="route_descr_lat_lon">רוחב %1$.3f אורך %2$.3f</string>
     <string name="map_widget_max_speed">מהירות מותרת</string>
-    <string name="monitoring_control_start">התחלה</string>
     <string name="rendering_attr_noAdminboundaries_name">גבולות</string>
     <string name="rendering_attr_noAdminboundaries_description">הסתרת גבולות אזוריים (דרגות ניהול 5‏-9).</string>
     <string name="index_srtm_parts">קטעים</string>
@@ -1287,7 +1281,6 @@
     <string name="shared_string_finish">סיום</string>
     <string name="plan_route">תכנון נתיב</string>
     <string name="shared_string_sort">מיון</string>
-    <string name="marker_save_as_track">שמירה כקובץ GPX</string>
     <string name="move_to_history">העברה להיסטוריה</string>
     <string name="disable_complex_routing_descr">השבתת ניתוב דו־שלבי לניווט הרכב.</string>
     <string name="tap_on_map_to_hide_interface">מצב מסך מלא</string>
@@ -1525,7 +1518,6 @@
     <string name="stop_navigation_service">עצירה</string>
     <string name="confirm_every_run">לשאול תמיד</string>
     <string name="enable_sleep_mode">הפעלת מצב רקע ל־GPS</string>
-    <string name="save_track_to_gpx_globally">רישום המסלול לקובץ GPX</string>
     <string name="save_track_to_gpx_globally_headline">רישום מסלולים לפי דרישה</string>
     <string name="enable_proxy_title">הפעלת מתווך HTTP</string>
     <string name="enable_proxy_descr">הגדרת מתווך HTTP לכל בקשות הרשת.</string>
@@ -1560,8 +1552,6 @@
     <string name="live_monitoring_m">מעקב מקוון (נדרש GPX)</string>
     <string name="live_monitoring_start">הפעלת מעקב מקוון</string>
     <string name="live_monitoring_stop">עצירת מעקב מקוון</string>
-    <string name="gpx_monitoring_start">חידוש רישום GPX</string>
-    <string name="gpx_monitoring_stop">השהיית רישום GPX</string>
     <string name="gpx_start_new_segment">התחלת מקטע חדש</string>
     <string name="rendering_attr_hideBuildings_name">בניינים</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">דרכים מהירות שלא מיועדות למכוניות</string>
@@ -1642,7 +1632,6 @@
     <string name="quick_action_navigation_voice">הנחייה קולית כבויה/פעילה</string>
     <string name="quick_action_navigation_voice_off">ביטול השתקת הנחייה קולית</string>
     <string name="quick_action_navigation_voice_on">השתקת הנחייה קולית</string>
-    <string name="quick_action_add_gpx">הוספת נקודת דרך GPX</string>
     <string name="quick_action_add_parking">הוספת מקום חנייה</string>
     <string name="quick_action_new_action">הוספת פעולה</string>
     <string name="quick_action_edit_action">עריכת פעולה</string>
@@ -1709,14 +1698,11 @@
     <string name="save_route_point">שמירת נקודת נתיב</string>
     <string name="waypoint_one">נקודת דרך 1</string>
     <string name="route_point_one">נקודת נתיב 1</string>
-    <string name="empty_state_my_tracks">הוספת קובצי GPX</string>
-    <string name="empty_state_my_tracks_desc">ייבוא קובצי GPX או הקלטת מסלולים.</string>
     <string name="empty_state_favourites">הוספת מועדפים</string>
     <string name="empty_state_favourites_desc">ייבוא מועדפים או הוספתם על ידי סימון נקודות במפה.</string>
     <string name="import_track">ייבוא קובץ GPX</string>
     <string name="import_track_desc">הקובץ %1$s אינו מכיל נקודות דרך, לייבא אותו כמסלול?</string>
     <string name="move_point">הזזת נקודה</string>
-    <string name="add_segment_to_the_track">הוספה לקובץ GPX</string>
     <string name="last_seven_days">7 הימים האחרונים</string>
     <string name="this_year">השנה הזאת</string>
     <string name="move_all_to_history">העברת הכול להיסטוריה</string>
@@ -2085,7 +2071,6 @@
     <string name="access_shared_string_navigate_up">ניווט למעלה</string>
     <string name="access_sort">מיון</string>
     <string name="map_mode">מצב מפה</string>
-    <string name="number_of_gpx_files_selected_pattern">נבחרו %s קובצי GPX</string>
     <string name="no_map_markers_found">נא להוסיף סמני מפה דרך המפה</string>
     <string name="no_waypoints_found">לא נמצאו נקודות דרך</string>
     <string name="osmand_parking_minute">דק׳</string>
@@ -2248,7 +2233,6 @@
     <string name="trip_rec_notification_settings">הפעלת הקלטה מהירה</string>
     <string name="saved_at_time">נשמר כעת תחת: %1$s</string>
     <string name="poi_deleted_localy">נקודת העניין תימחק לאחר העלאת השינויים שלך</string>
-    <string name="show_gpx">הצגת נתוני GPX</string>
     <string name="count_of_lines">ספירה של קווים</string>
     <string name="are_you_sure">להמשיך?</string>
     <string name="unsaved_changes_will_be_lost">שינויים לא נשמרו יוסרו. להמשיך?</string>
@@ -2648,9 +2632,7 @@
 \n 
 \nניתן לשתף נתיבים מוקלטים עם חבריך או להשתמש בהם כתרומה ל־OSM. אתלטים יכולים להשתמש במסלולים מוקלטים כדי לעקוב אחר האימונים שלהם. ניתן לבצע ניתוח מסלול בסיסי ישירות ב־OsmAnd, כמו זמני הקפה, מהירות ממוצעת וכו׳, כמו כן, ניתן לנתח את המסלולים בשלב מאוחר יותר על ידי כלי ניתוח מיוחדים מגורמי צד־שלישי.</string>
     <string name="watch">צפייה</string>
-    <string name="save_global_track_interval_descr">נא לציין מרווח בין הקלטות כלליות של מסלול (מופעל דרך וידג׳ט ה־GPX על המפה).</string>
     <string name="transport_nearby_routes_within">נתיבים קרובים בטווח של עד</string>
-    <string name="disable_recording_once_app_killed_descrp">רישום ה־GPX יושהה כאשר היישומון ייסגר (דרך היישומונים האחרונים). (התראות הרקע של OsmAnd תיעלמנה מסרגל ההודעות של Android.)</string>
     <string name="action_create">פעולת יצירה</string>
     <string name="action_modify">פעולת שינוי</string>
     <string name="action_delete">פעולת מחיקה</string>
@@ -2791,7 +2773,6 @@
     <string name="access_intermediate_arrival_time">זמן הגעה לנקודת ביניים</string>
     <string name="map_widget_intermediate_time">זמן ביניים</string>
     <string name="unirs_render_descr">שינוי סגנון בררת המחדל להגברת הניגודיות של שבילי אופניים והולכי רגל. הצבעים שיהיו בשימוש תואמי Mapnik.</string>
-    <string name="shared_string_gpx_files">קובצי GPX</string>
     <string name="get_osmand_live">ניתן להירשם ל־OsmAnd חי כדי לקבל גישה לכל התכונות: עדכוני מפה יומיים עם מספר בלתי מוגבל של הורדות, כל התוספים בתשלום ובחינם, ויקיפדיה, ויקימסע ועוד הרבה.</string>
     <string name="quick_action_edit_actions">עריכת פעולות</string>
     <string name="error_notification_desc">נא לשלוח צילום מסך של ההתראה הזאת אל support@osmand.net</string>
