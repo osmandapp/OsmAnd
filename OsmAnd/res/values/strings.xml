@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="file_name">File name:</string>
+    <string name="simplified_track_description">Only the route line will be saved, the waypoints will be deleted.</string>
+    <string name="simplified_track">Simplified track</string>
     <string name="plan_route_change_route_type_after">Change route type after</string>
     <string name="plan_route_change_route_type_before">Change route type before</string>
     <string name="plan_route_trim_after">Trim after</string>

@@ -64,7 +64,6 @@ import net.osmand.plus.measurementtool.GpxApproximationFragment.GpxApproximation
 import net.osmand.plus.measurementtool.GpxData.ActionType;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
 import net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsFragmentListener;
-import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SelectedPointBottomSheetDialogFragment.SelectedPointFragmentListener;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter.MeasurementAdapterListener;
@@ -97,6 +96,7 @@ import java.util.Locale;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.SnapToRoadProgressListener;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.*;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
@@ -105,7 +105,8 @@ import static net.osmand.plus.measurementtool.command.ClearPointsCommand.*;
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.*;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
-		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener {
+		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
+		SaveAsNewTrackFragmentListener {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 
@@ -194,11 +195,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		measurementLayer.setEditingCtx(editingCtx);
 
-		// Handling screen rotation
-		Fragment saveAsNewTrackFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(SaveAsNewTrackBottomSheetDialogFragment.TAG);
-		if (saveAsNewTrackFragment != null) {
-			((SaveAsNewTrackBottomSheetDialogFragment) saveAsNewTrackFragment).setListener(createSaveAsNewTrackFragmentListener());
-		}
 		// If rotate the screen from landscape to portrait when the list of points is displayed then
 		// the RecyclerViewFragment will exist without view. This is necessary to remove it.
 		if (!portrait) {
@@ -908,18 +904,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	private SaveAsNewTrackFragmentListener createSaveAsNewTrackFragmentListener() {
-		return new SaveAsNewTrackFragmentListener() {
-			@Override
-			public void saveAsRoutePointOnClick() {
-				saveAsGpx(SaveType.ROUTE_POINT);
-			}
-
-			@Override
-			public void saveAsLineOnClick() {
-				saveAsGpx(SaveType.LINE);
-			}
-		};
+	@Override
+	public void onSaveAsNewTrack(String fileName, boolean showOnMap, boolean simplifiedTrack) {
+		//todo implement
+		saveAsGpx(SaveType.ROUTE_POINT);
 	}
 
 	private MeasurementAdapterListener createMeasurementAdapterListener(final ItemTouchHelper touchHelper) {
@@ -1045,10 +1033,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void openSaveAsNewTrackMenu(MapActivity mapActivity) {
 		if (mapActivity != null) {
 			if (editingCtx.getPointsCount() > 0) {
-				SaveAsNewTrackBottomSheetDialogFragment fragment = new SaveAsNewTrackBottomSheetDialogFragment();
-				fragment.setUsedOnMap(true);
-				fragment.setListener(createSaveAsNewTrackFragmentListener());
-				fragment.show(mapActivity.getSupportFragmentManager(), SaveAsNewTrackBottomSheetDialogFragment.TAG);
+				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
 			} else {
 				Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 			}

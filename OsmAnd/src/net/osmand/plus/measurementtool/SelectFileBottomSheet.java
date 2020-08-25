@@ -25,12 +25,12 @@ import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.Horizonta
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
+import static net.osmand.util.Algorithms.collectDirs;
 
 public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -149,19 +149,6 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 				: IndexConstants.GPX_INDEX_DIR.substring(0, IndexConstants.GPX_INDEX_DIR.length() - 1);
 	}
 
-	private void collectDirs(File dir, List<File> dirs) {
-		File[] listFiles = dir.listFiles();
-		if (listFiles != null) {
-			Arrays.sort(listFiles);
-			for (File f : listFiles) {
-				if (f.isDirectory()) {
-					dirs.add(f);
-					collectDirs(f, dirs);
-				}
-			}
-		}
-	}
-
 	@Override
 	protected int getCustomHeight() {
 		return AndroidUtils.dpToPx(mainView.getContext(), BOTTOM_SHEET_HEIGHT_DP);
@@ -170,7 +157,6 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	public static void showInstance(FragmentManager fragmentManager, SelectFileListener listener, Mode mode) {
 		if (!fragmentManager.isStateSaved()) {
 			SelectFileBottomSheet fragment = new SelectFileBottomSheet();
-			fragment.setUsedOnMap(true);
 			fragment.setRetainInstance(true);
 			fragment.setListener(listener);
 			fragment.setFragmentMode(mode);

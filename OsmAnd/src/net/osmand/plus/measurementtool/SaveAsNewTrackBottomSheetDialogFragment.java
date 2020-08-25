@@ -1,31 +1,42 @@
 package net.osmand.plus.measurementtool;
 
-import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
+import net.osmand.plus.base.bottomsheetmenu.HorizontalRecyclerBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+
+import org.apache.commons.logging.Log;
 
 public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "SaveAsNewTrackBottomSheetDialogFragment";
+	public static final String TAG = SaveAsNewTrackBottomSheetDialogFragment.class.getSimpleName();
+	private static final Log LOG = PlatformUtil.getLog(SaveAsNewTrackBottomSheetDialogFragment.class);
 
-	private SaveAsNewTrackFragmentListener listener;
-
-	public void setListener(SaveAsNewTrackFragmentListener listener) {
-		this.listener = listener;
-	}
+	boolean showOnMap;
+	boolean simplifiedTrack;
+	String fileName;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -33,84 +44,122 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		if (app == null) {
 			return;
 		}
+		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 
 		items.add(new TitleItem(getString(R.string.shared_string_save_as_gpx)));
 
-		items.add(new ShortDescriptionItem(getString(R.string.measurement_tool_save_as_new_track_descr)));
-
-		if (Build.VERSION.SDK_INT >= 18) {
-			final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-			View imagesRow = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-					R.layout.fragment_save_as_new_track_images_row, null);
-
-			final ImageView routePointImage = (ImageView) imagesRow.findViewById(R.id.route_point_image);
-			final ImageView lineImage = (ImageView) imagesRow.findViewById(R.id.line_image);
-			Drawable routePointDrawable = app.getUIUtilities().getIcon(nightMode
-					? R.drawable.img_help_trip_route_points_night
-					: R.drawable.img_help_trip_route_points_day);
-			Drawable lineDrawable = app.getUIUtilities().getIcon(nightMode
-					? R.drawable.img_help_trip_track_night
-					: R.drawable.img_help_trip_track_day);
-			if (routePointDrawable != null && lineDrawable != null) {
-				routePointImage.setImageDrawable(AndroidUtils.getDrawableForDirection(app, routePointDrawable));
-				lineImage.setImageDrawable(AndroidUtils.getDrawableForDirection(app, lineDrawable));
-			}
-			routePointImage.setOnClickListener(saveAsRoutePointOnClickListener);
-			lineImage.setOnClickListener(saveAsLineOnClickListener);
-
-			View.OnTouchListener textOnTouchListener = new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					return false;
-				}
-			};
-			imagesRow.findViewById(R.id.line_text).setOnTouchListener(textOnTouchListener);
-			imagesRow.findViewById(R.id.route_point_text).setOnTouchListener(textOnTouchListener);
-
-			items.add(new BaseBottomSheetItem.Builder().setCustomView(imagesRow).create());
+		View editNameView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.markers_track_name_edit_text,
+				null, false);
+		TextInputLayout nameTextBox = editNameView.findViewById(R.id.name_text_box);
+		nameTextBox.setBoxBackgroundColorResource(R.color.material_text_input_layout_bg);
+		nameTextBox.setHint(getString(R.string.file_name));
+		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
+				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
+		nameTextBox.setDefaultHintTextColor(colorStateList);
+		if (nameTextBox.getEditText() != null) {
+			AndroidUtils.setHintTextSecondaryColor(app, nameTextBox.getEditText(), nightMode);
 		}
-
-		BaseBottomSheetItem saveAsRoutePointsItem = new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_route_points))
-				.setTitle(getString(R.string.save_as_route_point))
-				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(saveAsRoutePointOnClickListener)
+		BaseBottomSheetItem editFileName = new BaseBottomSheetItem.Builder()
+				.setCustomView(editNameView)
 				.create();
-		items.add(saveAsRoutePointsItem);
+		this.items.add(editFileName);
 
-		BaseBottomSheetItem saveAsLineItem = new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_split_interval))
-				.setTitle(getString(R.string.save_as_line))
-				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(saveAsLineOnClickListener)
+		int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		int contentPaddingHalf = app.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+
+		items.add(new DividerSpaceItem(app, contentPaddingSmall));
+
+		FolderListAdapter adapter = new FolderListAdapter(app, nightMode);
+		View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_item_recyclerview,
+				null, false);
+		View recyclerView = view.findViewById(R.id.recycler_view);
+		recyclerView.setPadding(contentPaddingHalf, 0, contentPaddingHalf, 0);
+		BaseBottomSheetItem scrollItem = new HorizontalRecyclerBottomSheetItem.Builder()
+				.setAdapter(adapter)
+				.setCustomView(view)
 				.create();
-		items.add(saveAsLineItem);
+		this.items.add(scrollItem);
+
+		items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.dialog_content_margin)));
+
+		GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
+				R.drawable.bg_select_group_button_outline);
+		if (background != null) {
+			background = (GradientDrawable) background.mutate();
+			background.setStroke(0, Color.TRANSPARENT);
+			int color = AndroidUtils.getColorFromAttr(app, R.attr.activity_background_color);
+			background.setColor(color);
+		}
+		final BottomSheetItemWithCompoundButton[] simplifiedTrackItem = new BottomSheetItemWithCompoundButton[1];
+		simplifiedTrackItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(simplifiedTrack)
+				.setCompoundButtonColorId(activeColorRes)
+				.setDescription(getString(R.string.simplified_track_description))
+				.setBackground(background)
+				.setTitle(getString(R.string.simplified_track))
+				.setLayoutId(R.layout.bottom_sheet_item_with_switch_outlined)
+
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						simplifiedTrack = !simplifiedTrack;
+						simplifiedTrackItem[0].setChecked(simplifiedTrack);
+					}
+				})
+				.create();
+		items.add(simplifiedTrackItem[0]);
+
+		items.add(new DividerSpaceItem(app, contentPadding));
+
+		final BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
+		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setCompoundButtonColorId(activeColorRes)
+				.setChecked(showOnMap)
+				.setTitle(getString(R.string.shared_string_show_on_map))
+				.setLayoutId(R.layout.bottom_sheet_item_with_switch_outlined)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						showOnMap = !showOnMap;
+						showOnMapItem[0].setChecked(showOnMap);
+					}
+				})
+				.create();
+		items.add(showOnMapItem[0]);
+
+		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 	}
 
-	private View.OnClickListener saveAsLineOnClickListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			if (listener != null) {
-				listener.saveAsLineOnClick();
+	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment) {
+		try {
+			if (!fm.isStateSaved()) {
+				SaveAsNewTrackBottomSheetDialogFragment fragment = new SaveAsNewTrackBottomSheetDialogFragment();
+				fragment.setTargetFragment(targetFragment, 0);
+				fragment.show(fm, TAG);
 			}
-			dismiss();
+		} catch (RuntimeException e) {
+			LOG.error("showInstance", e);
 		}
-	};
+	}
 
-	private View.OnClickListener saveAsRoutePointOnClickListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			if (listener != null) {
-				listener.saveAsRoutePointOnClick();
-			}
-			dismiss();
+	@Override
+	protected int getRightBottomButtonTextId() {
+		return R.string.shared_string_save;
+	}
+
+	@Override
+	protected void onRightBottomButtonClick() {
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment instanceof SaveAsNewTrackFragmentListener) {
+			((SaveAsNewTrackFragmentListener) targetFragment).onSaveAsNewTrack(fileName, showOnMap, simplifiedTrack);
 		}
-	};
+		dismiss();
+	}
 
 	interface SaveAsNewTrackFragmentListener {
 
-		void saveAsRoutePointOnClick();
+		void onSaveAsNewTrack(String fileName, boolean showOnMap, boolean simplifiedTrack);
 
-		void saveAsLineOnClick();
 	}
 }
