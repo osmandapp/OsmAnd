@@ -28,7 +28,7 @@
     <string name="follow_track_descr">Choose track file to follow</string>
     <string name="follow_track">Follow track</string>
     <string name="marker_save_as_track">Save as track file</string>
-    <string name="map_widget_monitoring">Trip recoridng</string>
+    <string name="map_widget_monitoring">Trip recording</string>
     <string name="quick_action_add_gpx">Add track waypoint</string>
     <string name="context_menu_item_add_waypoint">Add track waypoint</string>
     <string name="empty_state_my_tracks_desc">Import or record track files</string>
