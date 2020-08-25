@@ -191,6 +191,10 @@ public class MeasurementEditingContext {
 		return gpxData != null && gpxData.getGpxFile() != null && gpxData.getGpxFile().hasRtePt();
 	}
 
+	public boolean hasSavedRoute() {
+		return gpxData != null && gpxData.getGpxFile() != null && gpxData.getGpxFile().hasRoute();
+	}
+
 	public CalculationMode getCalculationMode() {
 		return calculationMode;
 	}
@@ -321,6 +325,7 @@ public class MeasurementEditingContext {
 	public void clearSegments() {
 		clearBeforeSegments();
 		clearAfterSegments();
+		clearSnappedToRoadPoints();
 	}
 
 	public void clearBeforeSegments() {
@@ -378,6 +383,16 @@ public class MeasurementEditingContext {
 	}
 
 	private void recreateCacheForSnap(TrkSegment cache, TrkSegment original, boolean calculateIfNeeded) {
+		boolean hasDefaultModeOnly = true;
+		if (original.points.size() > 1) {
+			for (int i = 0; i < original.points.size(); i++) {
+				String profileType = original.points.get(i).getProfileType();
+				if (profileType != null && !profileType.equals(DEFAULT_APP_MODE.getStringKey())) {
+					hasDefaultModeOnly = false;
+					break;
+				}
+			}
+		}
 		if (original.points.size() > 1) {
 			for (int i = 0; i < original.points.size() - 1; i++) {
 				Pair<WptPt, WptPt> pair = new Pair<>(original.points.get(i), original.points.get(i + 1));
@@ -386,7 +401,7 @@ public class MeasurementEditingContext {
 				if (pts != null) {
 					cache.points.addAll(pts);
 				} else {
-					if (calculateIfNeeded) {
+					if (calculateIfNeeded && !hasDefaultModeOnly) {
 						scheduleRouteCalculateIfNotEmpty();
 					}
 					cache.points.addAll(Arrays.asList(pair.first, pair.second));
@@ -450,7 +465,7 @@ public class MeasurementEditingContext {
 		}
 	}
 
-	public void setPoints(GpxRouteApproximation gpxApproximation) {
+	public void setPoints(GpxRouteApproximation gpxApproximation, ApplicationMode mode) {
 		if (gpxApproximation == null || Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(gpxApproximation.result)) {
 			return;
 		}
@@ -463,12 +478,14 @@ public class MeasurementEditingContext {
 			WptPt p1 = new WptPt();
 			p1.lat = rp1.loc.getLatitude();
 			p1.lon = rp1.loc.getLongitude();
+			p1.setProfileType(mode.getStringKey());
 			if (i == 0) {
 				routePoints.add(p1);
 			}
 			WptPt p2 = new WptPt();
 			p2.lat = rp2.loc.getLatitude();
 			p2.lon = rp2.loc.getLongitude();
+			p2.setProfileType(mode.getStringKey());
 			routePoints.add(p2);
 			Pair<WptPt, WptPt> pair = new Pair<>(p1, p2);
 			List<WptPt> points = new ArrayList<>();
@@ -638,6 +655,24 @@ public class MeasurementEditingContext {
 			}
 		};
 		return params;
+	}
+
+	public List<WptPt> getDistinctRoutePoints() {
+		List<WptPt> res = new ArrayList<>();
+		List<WptPt> points = new ArrayList<>(before.points);
+		points.addAll(after.points);
+		int size = points.size();
+		for (int i = 0; i < size - 1; i++) {
+			Pair<WptPt, WptPt> pair = new Pair<>(points.get(i), points.get(i + 1));
+			RoadSegmentData data = this.roadSegmentData.get(pair);
+			if (data != null) {
+				res.addAll(data.points);
+				if (i < size - 2) {
+					res.remove(res.size() - 1);
+				}
+			}
+		}
+		return res;
 	}
 
 	@Nullable

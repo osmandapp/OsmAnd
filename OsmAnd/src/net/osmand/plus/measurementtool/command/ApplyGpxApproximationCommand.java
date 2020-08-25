@@ -66,6 +66,6 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 	public void applyApproximation() {
 		getEditingCtx().setAppMode(mode);
 		getEditingCtx().clearSegments();
-		getEditingCtx().setPoints(approximation);
+		getEditingCtx().setPoints(approximation, mode);
 	}
 }
