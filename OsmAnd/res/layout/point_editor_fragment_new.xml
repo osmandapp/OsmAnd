@@ -519,6 +519,7 @@
 							android:lines="1"
 							android:text="@string/replace_point_descr"
 							android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+							android:textColor="@null"
 							tools:text="@string/replace_point_descr" />
 
 					</LinearLayout>

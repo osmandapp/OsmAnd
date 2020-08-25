@@ -983,16 +983,13 @@
     <string name="rotate_map_bearing_opt">حسب اتجاه الحركة</string>
     <string name="rotate_map_none_opt">الشمال في الأعلى</string>
     <string name="rotate_map_compass_opt">حسب البوصلة</string>
-    <string name="gpx_monitoring_start">بدء التسجيل</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
     <string name="live_monitoring_stop">إيقاف التتبع على الإنترنت</string>
-    <string name="gpx_monitoring_stop">إيقاف</string>
     <string name="transport_Stop">موقف</string>
     <string name="transport_stops">مواقف</string>
     <string name="shared_string_audio">صوت</string>
     <string name="shared_string_currently_recording_track">المسار الجار تسجيله</string>
     <string name="record_plugin_name">تسجيل المسار</string>
-    <string name="save_global_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار العام (مفعل عن طريق أداة تسجيل GPX على الخريطة).</string>
     <string name="save_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار أثناء الملاحة</string>
     <string name="voice">صوت مسج</string>
     <string name="get_directions">التوجيه</string>
@@ -1412,7 +1409,6 @@
     <string name="access_widget_expand">وسع</string>
     <string name="access_sort">فرز</string>
     <string name="map_mode">وضع الخريطة</string>
-    <string name="number_of_gpx_files_selected_pattern">%s مسار محدد</string>
     <string name="rendering_value_thin_name">رقيقة</string>
     <string name="rendering_value_medium_name">متوسط</string>
     <string name="no_map_markers_found">لم تضف علامات على الخريطة</string>
@@ -1867,7 +1863,6 @@
     <string name="lang_ceb">لغة السيبيونو</string>
     <string name="archive_wikipedia_data">لديك بيانات ويكيبيديا منزلة قديمة غير متوافقة. هل تريد أرشفتها؟</string>
     <string name="disable_recording_once_app_killed">منع التسجيل في الخلفية</string>
-    <string name="disable_recording_once_app_killed_descrp">إيقاف تسجيل المسار عند إغلاق التطبيق من نافذة التطبيقات المستخدمة مؤخراً. (إشعار أوسماند سيختفي من شريط الإشعارات)</string>
     <string name="shared_string_import2osmand">استيراد إلى أوسماند</string>
     <string name="osm_edit_context_menu_delete">حذف تعديل OSM</string>
     <string name="rendering_value_disabled_name">معطل</string>
@@ -3296,7 +3291,7 @@
     <string name="settings_derived_routing_mode_string">وضع المستخدم ، مشتق من:%s</string>
     <string name="routing_profile_ski">تزلج</string>
     <string name="profile_type_descr_string">النوع:%s</string>
-    <string name="profile_type_base_string">وضع أساسي</string>
+    <string name="profile_type_base_string">ملف التعريف الأساسي</string>
     <string name="profile_alert_need_routing_type_title">حدد نوع الملاحة</string>
     <string name="profile_alert_need_routing_type_msg">يرجى تحديد نوع الملاحة للوضع الجديد</string>
     <string name="profile_alert_need_profile_name_title">أدخل اسم الوضع</string>
@@ -3511,7 +3506,7 @@
     <string name="no_recalculation_setting">تعطيل إعادة الحساب</string>
     <string name="route_recalculation_dist_title">الحد الأدنى من المسافة لإعادة حساب المسار</string>
     <string name="route_recalculation_dist_descr">سيتم إعادة حساب المسار إذا كانت المسافة إلى المسار أطول من المعلمة المحددة</string>
-    <string name="profile_type_custom_string">ملف شخصي مخصص</string>
+    <string name="profile_type_custom_string">ملف تعريف مخصص</string>
     <string name="shared_string_angle_param">الزاوية: %s°</string>
     <string name="shared_string_angle">زاوية</string>
     <string name="recalc_angle_dialog_descr">سيتم عرض جزء مستقيم إضافي بين موقعي والمسار المحسوب حتى يتم إعادة حساب المسار</string>

@@ -1092,8 +1092,6 @@
     <string name="live_monitoring_m">Мережеве відслідковування (потрібен GPX)</string>
     <string name="live_monitoring_start">Розпочати моніторинг</string>
     <string name="live_monitoring_stop">Зупинити моніторинг</string>
-    <string name="gpx_monitoring_start">Продовжити запис GPX</string>
-    <string name="gpx_monitoring_stop">Зупинити запис GPX</string>
     <string name="gpx_start_new_segment">Розпочати новий відрізок</string>
     <string name="rendering_attr_hideBuildings_name">Будівлі</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Дороги не призначені для автівок</string>
@@ -1320,7 +1318,6 @@
     <string name="speak_favorites">Довколишні закладки</string>
     <string name="speak_poi">Довколишні POI</string>
     <string name="confirm_every_run">Завжди питати</string>
-    <string name="save_global_track_interval_descr">Виберіть проміжковість для запису треку (вмикається через віджет запису GPX на мапі).</string>
     <string name="save_global_track_interval">Загальний інтервал запису треку</string>
     <string name="home_button">Дім</string>
     <string name="map_update">Наявні оновлення для %1$s мап</string>
@@ -1598,7 +1595,6 @@
     <string name="download_wikipedia_files">Завантажити додаткові дані з Вікіпедії (%1$s Мб)\?</string>
     <string name="gps_network_not_enabled">Служба визначення місцезнаходження вимкнена. Увімкнути?</string>
     <string name="disable_recording_once_app_killed">Запобігти самостійному логуваню</string>
-    <string name="disable_recording_once_app_killed_descrp">Запис GPX буде зупинено після припинення роботи застосунку через меню з переліком нещодавно запущених застосунків. (Індикатор, який інформує про роботу OsmAnd в фоні зникне з панелі сповіщень в Android)</string>
     <string name="shared_string_import2osmand">Імпортувати до OsmAnd</string>
     <string name="read_full_article">Читати повну статтю (мережево)</string>
     <string name="local_indexes_cat_wiki">Вікіпедія</string>
@@ -1926,7 +1922,6 @@
     <string name="access_shared_string_navigate_up">Вгору</string>
     <string name="access_sort">Впорядкувати</string>
     <string name="map_mode">Режим мапи</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX файл(ів) виділено</string>
     <string name="rendering_value_thin_name">Тонко</string>
     <string name="rendering_value_medium_name">Середньо</string>
     <string name="rendering_value_bold_name">Жирно</string>
@@ -2009,7 +2004,7 @@
     <string name="shared_string_record">Запис</string>
     <string name="gpx_logging_no_data">Немає даних</string>
     <string name="rendering_attr_contourColorScheme_description">Колірна схема горизонталей</string>
-    <string name="save_track_min_speed">Мінімальна швидкість для запису</string>
+    <string name="save_track_min_speed">Найнижча швидкість для запису</string>
     <string name="save_track_min_speed_descr">Фільтр: не записувати точки, які нижче цієї швидкості.</string>
     <string name="save_track_min_distance">Мінімальне зміщення для запису</string>
     <string name="save_track_min_distance_descr">Фільтр: налаштуйте найменшу відстань від точки, коли її можна записувати як нову.</string>
@@ -2271,7 +2266,7 @@
     <string name="no_overlay">Нема накладки мапи</string>
     <string name="no_underlay">Підкладка вимкнена</string>
     <string name="subscribe_email_error">Помилка</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Зображення вулиць</string>
     <string name="depth_contour_descr">Горизонталі морських глибин і морські знаки.</string>
     <string name="sea_depth_thanks">Дякуємо Вам за покупку контурів морських глибин</string>
     <string name="index_item_depth_contours_osmand_ext">Контури морських глибин</string>
@@ -3053,7 +3048,7 @@
     <string name="settings_derived_routing_mode_string">Користувацький режим, похідний від: %s</string>
     <string name="routing_profile_ski">Лижі</string>
     <string name="profile_type_descr_string">Тип: %s</string>
-    <string name="profile_type_base_string">Основний профіль</string>
+    <string name="profile_type_base_string">Базовий профіль</string>
     <string name="profile_alert_need_routing_type_title">Оберіть тип навігації</string>
     <string name="profile_alert_need_routing_type_msg">Оберіть тип навігації для нового профілю застосунку</string>
     <string name="profile_alert_need_profile_name_title">Введіть назву профілю</string>
@@ -3439,8 +3434,8 @@
     <string name="search_offline_geo_error">Не вдалося розібрати метод \'%s\'.</string>
     <string name="permission_is_required">Для використання цього параметра потрібен дозвіл.</string>
     <string name="monitoring_min_speed_descr">Це низькошвидкісний відсічний фільтр, щоб не записувати точки нижче певної швидкості. Це може призвести до плавнішого вигляду записаних треків при перегляді на мапі.</string>
-    <string name="monitoring_min_speed_descr_side_effect">Побічний вплив: у Вашому треці будуть відсутні всі ділянки, де не було дотримано критерій найменшої швидкості (наприклад, коли Ви підштовхуєте велосипед до крутого пагорба). Також не буде відомостей про проміжки спокою, як-от перерви. Це впливає на будь-який аналіз або після обробки, як, наприклад, при спробі визначити загальну тривалість Вашої поїздки, час у русі або середню швидкість.</string>
-    <string name="monitoring_min_speed_descr_recommendation">Порада: Спробуйте спочатку скористатись виявленням руху через фільтр найменшого переміщення (B), який може здійснюватись, це може принести кращі наслідки, і Ви втратите менше даних. Якщо Ваші треки залишаються занадто шумними на низькій швидкості, спробуйте тут ненульові значення. Зауважте, що деякі вимірювання можуть взагалі не повідомляти про значення швидкості (деякі мережеві методи), і в цьому випадку Ви нічого не записуєте.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Сторонній вплив: у вашому треці будуть відсутні всі ділянки, де не було дотримано критерію найнижчої швидкості (наприклад, коли ви штовхаєте велосипед на крутий пагорб). Також не буде відомостей про проміжки спокою, як-от перерви. Це впливає на будь-який аналіз або подальшу обробку, як, наприклад, під час спроби визначити загальну тривалість вашої поїздки, час у русі або середню швидкість.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Порада: Спробуйте спочатку скористатись виявленням руху через фільтр найменшого переміщення (B), який може здійснюватись, це може дати кращі результати й ви втратите менше даних. Якщо ваші треки залишаються занадто шумними на низькій швидкості, спробуйте тут ненульові значення. Зауважте, що деякі вимірювання можуть взагалі не повідомляти про значення швидкості (деякі мережні методи) і в цьому випадку ви нічого не записуєте.</string>
     <string name="monitoring_min_speed_descr_remark">Зауваження: швидкість &gt; 0 перевірка: Більшість наборів чіпів GPS повідомляють про значення швидкості, лише якщо алгоритм визначає, що Ви перебуваєте в русі, і жоден, якщо Ви цього не робите. Отже, використовуючи налаштування&gt; 0 у цьому фільтрі, в деякому сенсі використовується виявлення руху GPS-чіпсета. Але навіть якщо не фільтровано під час запису, ми все одно використовуємо цю функцію в нашому аналізі GPX для визначення виправленої відстані, тобто значення, що відображається в цьому полі, - це відстань, записана під час руху.</string>
     <string name="monitoring_min_accuracy_descr">Записує лише значення, виміряні з найменшою точністю (у метрах/футах, як повідомляє Android до Вашого чіпсета). Точність стосується розсіювання повторних вимірювань і не пов\'язана безпосередньо з точністю, яка визначає, наскільки близькі Ваші вимірювання до Вашого справжнього положення.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Побічний вплив: внаслідок фільтрації на точність, значення можуть бути повністю відсутні, наприклад, під мостами, під деревами, між високих будинків, або при певних погодних умовах.</string>
@@ -3454,7 +3449,7 @@
     <string name="live_monitoring_adress">Вебадреса</string>
     <string name="live_monitoring_adress_descr">Вкажіть веб-адресу з наступними параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Сповіщення</string>
-    <string name="monitoring_min_speed">Найменша швидкість</string>
+    <string name="monitoring_min_speed">Найнижча швидкість</string>
     <string name="monitoring_min_accuracy">Найменша точність</string>
     <string name="monitoring_min_distance">Найменше зміщення</string>
     <string name="reset_plugin_to_default">Скинути налаштування втулка до усталених</string>
@@ -3525,7 +3520,7 @@
     <string name="no_recalculation_setting">Без перерахунку</string>
     <string name="route_recalculation_dist_title">Найменша відстань для перерахунку маршруту</string>
     <string name="route_recalculation_dist_descr">Маршрут буде перераховано, якщо відстань до нього перевищує вказане</string>
-    <string name="profile_type_custom_string">Користувацький профіль</string>
+    <string name="profile_type_custom_string">Власний профіль</string>
     <string name="shared_string_angle_param">Кут: %s°</string>
     <string name="shared_string_angle">Кут</string>
     <string name="recalc_angle_dialog_descr">Додатковий прямий відрізок між моїм розташуванням та розрахунковим маршрутом відображатиметься, поки маршрут не буде перераховано</string>
@@ -3836,4 +3831,7 @@
     <string name="rourte_between_points_whole_track_button_desc">Весь трек буде перераховано за допомогою вибраного профілю.</string>
     <string name="rourte_between_points_next_segment_button_desc">Лише наступний сегмент буде перераховано за допомогою обраного профілю.</string>
     <string name="rourte_between_points_desc">Виберіть спосіб з\'єднання точок: прямою лінією чи розраховувати маршрут між ними за допомогою вибраного профілю.</string>
+    <string name="street_level_imagery">Зображення вулиць</string>
+    <string name="plan_route_exit_dialog_descr">Ви дійсно бажаєте закрити планування маршруту без збереження\? Внесені зміни буде втрачено.</string>
+    <string name="in_case_of_reverse_direction">Для зворотного напрямку</string>
 </resources>

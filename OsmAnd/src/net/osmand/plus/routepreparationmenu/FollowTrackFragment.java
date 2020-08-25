@@ -42,8 +42,8 @@ import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.measurementtool.NewGpxData;
-import net.osmand.plus.measurementtool.NewGpxData.ActionType;
+import net.osmand.plus.measurementtool.GpxData;
+import net.osmand.plus.measurementtool.GpxData.ActionType;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsCard;
@@ -480,10 +480,9 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			QuadRect rect = gpxFile.getRect();
 			TrkSegment segment = gpxFile.getNonEmptyTrkSegment();
 			ActionType actionType = segment == null ? ActionType.ADD_ROUTE_POINTS : ActionType.EDIT_SEGMENT;
-			NewGpxData newGpxData = new NewGpxData(gpxFile, rect, actionType, segment);
-
+			GpxData gpxData = new GpxData(gpxFile, rect, actionType, segment);
 			MeasurementEditingContext editingContext = new MeasurementEditingContext();
-			editingContext.setNewGpxData(newGpxData);
+			editingContext.setGpxData(gpxData);
 			if (useAppMode) {
 				editingContext.setAppMode(app.getRoutingHelper().getAppMode());
 			}

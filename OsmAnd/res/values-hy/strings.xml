@@ -495,7 +495,6 @@
     <string name="access_shared_string_navigate_up">Անցնել վերև</string>
     <string name="access_sort">Դասակարգել</string>
     <string name="map_mode">Քարտեզի ռեժիմը</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX Ֆայլ(եր) ընտրված են</string>
     <string name="rendering_value_fine_name">Ճշգրիտ</string>
     <string name="rendering_value_thin_name">Բարակ</string>
     <string name="rendering_value_medium_name">Միջին</string>
@@ -790,7 +789,6 @@
     <string name="download_wikipedia_files">Ներբեռնել լրացուցիչ Վիքիպեդիայի տվյալները (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Կոորդինատները հայտնաբերման ծառայությունը միացված չէ: Միացնել?</string>
     <string name="disable_recording_once_app_killed">Դադարեցնել ինքնավար գրանցումը</string>
-    <string name="disable_recording_once_app_killed_descrp">Հավելվածը փակելուց հետո (ուրիշ հավելվածը միջոցով), GPX-ի գրանցումը կդադարեցվի: (Ֆոնային պատկերակը անհետանում է Android ծանուցման բարից:)</string>
     <string name="shared_string_import2osmand">Ներմուծել OsmAnd</string>
     <string name="read_full_article">Կարդալ ամբողջական հոդվածը (առցանց)</string>
     <string name="shared_string_wikipedia">Վիքիփեդիա</string>
@@ -1094,7 +1092,6 @@
     <string name="sleep_mode_stop_dialog">Դադարեցնել GPS-ի աշխատանքը ֆոնային ռեժիմում?</string>
     <string name="stop_navigation_service">Դադարեցնել</string>
     <string name="confirm_every_run">Միշտ հարցնել</string>
-    <string name="save_global_track_interval_descr">Ընտրեք ժամանակի ընդմիջումը տրեկի գրանցման համար (ներառյալ GPX գրանցումը վիջեթի միջոցով քարտեզի վրա)։</string>
     <string name="save_global_track_interval">Ընդհանուր ժամանակի ընդմիջումը</string>
     <string name="background_service_int">GPS-ի զարթմատ ժամանակի ընդմիջումը</string>
     <string name="enable_sleep_mode">Միացնել GPS ֆոնի ռեժիմը</string>
@@ -1146,8 +1143,6 @@
     <string name="live_monitoring_m">Առցանց հետևում(tracking) (GPX պահանջվում է)</string>
     <string name="live_monitoring_start">Սկսեք առցանց հետևելուն(tracking)</string>
     <string name="live_monitoring_stop">Դադարեցնել առցանց հետևելուն(tracking)</string>
-    <string name="gpx_monitoring_start">Շարունակել GPX գրանցումը</string>
-    <string name="gpx_monitoring_stop">Դադարեցնել GPX-ի գրանցումը</string>
     <string name="gpx_start_new_segment">Սկսել նոր սեգմենտ</string>
     <string name="rendering_attr_hideBuildings_name">Շենքեր</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ոչ ավտոճանապարհներ</string>

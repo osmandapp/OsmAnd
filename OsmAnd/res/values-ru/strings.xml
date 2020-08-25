@@ -233,7 +233,6 @@
     <string name="save_filter">Сохранить фильтр</string>
     <string name="delete_filter">Удалить фильтр</string>
     <string name="new_filter">Новый фильтр</string>
-    <string name="number_of_gpx_files_selected_pattern">%s файла(ов) GPX выбрано</string>
     <string name="change_markers_position">Изменить положение маркера</string>
     <string name="current_track">Текущий путь</string>
     <string name="use_osm_live_routing">Навигация OsmAnd Live</string>
@@ -1519,8 +1518,6 @@
     <string name="forward">Вперёд</string>
     <string name="home">Панель управления</string>
     <string name="local_map_names">Местные названия</string>
-    <string name="gpx_monitoring_start">Возобновить запись GPX</string>
-    <string name="gpx_monitoring_stop">Остановить запись GPX</string>
     <string name="gpx_start_new_segment">Начать новый сегмент</string>
     <string name="enable_sleep_mode">Включить фоновый режим GPS</string>
     <string name="gps_wake_up_timer">Интервал пробуждения GPS</string>
@@ -1576,7 +1573,6 @@
 \nЗаписанными треками можно поделиться с вашими друзьями или использовать их для вклада в OSM. Спортсмены могут использовать записанные треки для контроля за тренировками. Некоторый базовый анализ треков может быть выполнен непосредственно в OsmAnd, например, время прохождения круга, средняя скорость и т.д., треки, конечно, позднее также могут быть проанализированы в специальных инструментах анализа сторонних производителей.</string>
     <string name="create_poi_link_to_osm_doc"><u>Онлайн OSM</u> классификация карт с изображениями.</string>
     <string name="confirm_every_run">Всегда спрашивать</string>
-    <string name="save_global_track_interval_descr">Укажите интервал регистрации во время записи трека (включается через виджет записи GPX на карте).</string>
     <string name="save_global_track_interval">Общий интервал записи трека</string>
     <string name="traffic_warning_speed_limit">Ограничение скорости</string>
     <string name="traffic_warning_border_control">Пограничный контроль</string>
@@ -1838,7 +1834,6 @@
     <string name="shared_string_import2osmand">Импорт в OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Вы уверены, что хотите удалить %1$d заметок\?</string>
     <string name="gps_network_not_enabled">Служба определения местоположения выключена. Включить?</string>
-    <string name="disable_recording_once_app_killed_descrp">При завершении приложения (через последние приложения) запись GPX будет поставлена на паузу. (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
     <string name="download_wikipedia_files">Загрузить дополнительные данные Википедии (%1$s Мб)\?</string>
     <string name="lang_es_ar">Испанский (аргентинский)</string>
     <string name="lang_nb">Норвежский букмол</string>

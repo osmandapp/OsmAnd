@@ -31,6 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/content_padding"
         android:contentDescription="@string/quick_action_new_action"
+        app:tint="?attr/app_bar_primary_item_color"
         app:backgroundTint="?attr/color_dialog_buttons"
         app:srcCompat="@drawable/ic_action_plus" />
 

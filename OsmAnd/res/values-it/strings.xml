@@ -1208,8 +1208,6 @@
     <string name="live_monitoring_m">Tracciamento online (GPX richiesto)</string>
     <string name="live_monitoring_start">Avvia il tracciamento online</string>
     <string name="live_monitoring_stop">Ferma il tracciamento online</string>
-    <string name="gpx_monitoring_start">Riprendi la registrazione GPX</string>
-    <string name="gpx_monitoring_stop">Metti in pausa la registrazione GPX</string>
     <string name="gpx_start_new_segment">Inizia un nuovo segmento</string>
     <string name="lang_fa">Persiano</string>
     <string name="lang_he">Ebraico</string>
@@ -1260,7 +1258,6 @@
     <string name="save_track_interval_globally">Intervallo registrazione</string>
     <string name="rendering_attr_publicTransportMode_name">Percorsi bus, filobus, servizi navetta</string>
     <string name="confirm_every_run">Chiedi sempre</string>
-    <string name="save_global_track_interval_descr">Specifica l\'intervallo di tempo per la registrazione del percorso (abilitata attraverso il widget registrazione GPX sulla mappa).</string>
     <string name="save_global_track_interval">Intervallo predefinito di registrazione</string>
     <string name="traffic_warning_speed_limit">Limite di velocità</string>
     <string name="traffic_warning_payment">Casello</string>
@@ -1544,7 +1541,6 @@
     <string name="download_wikipedia_files">Scaricare i dati aggiuntivi di Wikipedia (%1$s MB)\?</string>
     <string name="gps_network_not_enabled">Il servizio di localizzazione è spento. Vuoi accenderlo\?</string>
     <string name="disable_recording_once_app_killed">Previeni il login remoto</string>
-    <string name="disable_recording_once_app_killed_descrp">Metterà in pausa la registrazione GPX quando l\'app viene chiusa (attraverso le app recenti). L\'indicatore della modalità background di OsmAnd sparisce dalla barra delle notifiche di Android</string>
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
     <string name="read_full_article">Leggi l\'articolo intero (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -1922,7 +1918,6 @@
     <string name="rendering_value_medium_name">Medio</string>
     <string name="rendering_value_bold_name">Grosso</string>
     <string name="map_mode">Modalità mappa</string>
-    <string name="number_of_gpx_files_selected_pattern">%s file GPX selezionati</string>
     <string name="access_default_color">Colore preimpostato</string>
     <string name="access_category_choice">Scegli la categoria</string>
     <string name="access_hint_enter_name">Inserisci il nome</string>
@@ -3826,4 +3821,20 @@
     <string name="plan_route_select_track_file_for_open">Scegli il file di una traccia da aprire.</string>
     <string name="shared_string_done">Fatto</string>
     <string name="navigation_profile">Profili di navigazione</string>
+    <string name="rourte_between_points_warning_desc">Per utilizzare questa opzione OsmAnd ha bisogno di bloccare la traccia alle strade della mappa.
+\n
+\n Nel prossimo passaggio avrai bisogno di selezionare il profilo di navigazione per determinare le strade permesse e la soglia della distanza per approssimare la strada alle strade.</string>
+    <string name="rourte_between_points_desc">Scegli come collegare i punti, con una linea retta, o calcolando un percorso che li colleghi utilizzando il profilo scelto.</string>
+    <string name="overwrite_track">Sovrascrivi traccia</string>
+    <string name="save_as_new_track">Salva come nuova Traccia</string>
+    <string name="reverse_route">Inverti il percorso</string>
+    <string name="rourte_between_points_next_segment_button_desc">Solo il nuovo segmento sarà ricalcolato utilizzando il profilo scelto.</string>
+    <string name="rourte_between_points_whole_track_button_desc">Tutta la traccia sarà ricalcolata utilizzando il profilo scelto.</string>
+    <string name="whole_track">Tutta la traccia</string>
+    <string name="next_segment">Nuovo segmento</string>
+    <string name="threshold_distance">Soglia distanza</string>
+    <string name="rourte_between_points_add_track_desc">Seleziona un file traccia a cui verrà aggiunto un nuovo segmento.</string>
+    <string name="street_level_imagery">Livello immagini stradali</string>
+    <string name="plan_route_exit_dialog_descr">Sei sicuro di voler chiudere la Pianificazione del percorso senza salvare\? Perderai tutti i cambiamenti.</string>
+    <string name="in_case_of_reverse_direction">In caso di direzione inversa</string>
 </resources>

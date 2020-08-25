@@ -561,7 +561,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		int iconColorResId = getMyApplication().getSettings().isLightContent() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+		boolean nightMode = !getMyApplication().getSettings().isLightContent();
+		UiUtilities iconsCache = getMyApplication().getUIUtilities();
+		int iconColorResId = nightMode ?
+				R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
 		optionsMenuAdapter = new ContextMenuAdapter(requireMyApplication());
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
@@ -600,7 +603,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(j);
 			if (j + 1 >= max && optionsMenuAdapter.length() > max) {
 				if (split == null) {
-					Drawable icOverflowMenu = getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white);
+					Drawable icOverflowMenu = iconsCache.getIcon(R.drawable.ic_overflow_menu_white, iconColorResId);
 					split = menu.addSubMenu(0, 1, j + 1, R.string.shared_string_more_actions);
 					split.setIcon(icOverflowMenu);
 					split.getItem();

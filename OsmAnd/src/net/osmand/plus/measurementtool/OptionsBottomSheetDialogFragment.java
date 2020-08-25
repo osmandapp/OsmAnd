@@ -15,7 +15,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescriptionDifHeight;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -58,11 +58,12 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 			icon = getContentIcon(R.drawable.ic_action_help);
 		}
 
-		BaseBottomSheetItem snapToRoadItem = new BottomSheetItemWithDescription.Builder()
+		BaseBottomSheetItem snapToRoadItem = new BottomSheetItemWithDescriptionDifHeight.Builder()
+				.setMinHeight(getResources().getDimensionPixelSize(R.dimen.card_row_min_height))
 				.setDescription(description)
 				.setIcon(icon)
 				.setTitle(getString(R.string.route_between_points))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -88,7 +89,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					public void onClick(View v) {
 						Fragment fragment = getTargetFragment();
 						if (fragment instanceof OptionsFragmentListener) {
-							((OptionsFragmentListener) fragment).addToGpxOnClick();
+							((OptionsFragmentListener) fragment).saveChangesOnClick();
 						}
 						dismiss();
 					}
@@ -118,8 +119,8 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		items.add(new OptionsDividerItem(getContext()));
 
 		BaseBottomSheetItem clearAllItem = new SimpleBottomSheetItem.Builder()
-				.setIcon(getIcon(R.drawable.ic_action_reset_to_default_dark, (
-						nightMode ? R.color.color_osm_edit_delete : R.color.color_osm_edit_delete)))
+				.setIcon(getIcon(R.drawable.ic_action_reset_to_default_dark,
+						nightMode ? R.color.color_osm_edit_delete : R.color.color_osm_edit_delete))
 				.setTitle(getString(R.string.shared_string_clear_all))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
@@ -138,7 +139,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 	private BaseBottomSheetItem getSaveAsNewTrackItem() {
 		return new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_save_to_file))
+				.setIcon(getContentIcon(R.drawable.ic_action_save_as_new_file))
 				.setTitle(getString(R.string.save_as_new_track))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +189,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		void snapToRoadOnCLick();
 
-		void addToGpxOnClick();
+		void saveChangesOnClick();
 
 		void saveAsNewTrackOnClick();
 

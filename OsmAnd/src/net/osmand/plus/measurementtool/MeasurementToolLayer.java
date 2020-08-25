@@ -342,10 +342,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	WptPt getMovedPointToApply() {
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		LatLon latLon = tb.getCenterLatLon();
-		WptPt pt = new WptPt(editingCtx.getOriginalPointToMove());
-		pt.lat = latLon.getLatitude();
-		pt.lon = latLon.getLongitude();
-		return pt;
+		WptPt originalPoint = editingCtx.getOriginalPointToMove();
+		WptPt point = new WptPt(originalPoint);
+		point.lat = latLon.getLatitude();
+		point.lon = latLon.getLongitude();
+		point.copyExtensions(originalPoint);
+		return point;
 	}
 
 	private void moveMapToLatLon(double lat, double lon) {

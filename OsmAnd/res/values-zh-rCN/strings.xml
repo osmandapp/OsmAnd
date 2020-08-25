@@ -1505,7 +1505,6 @@
     <string name="access_widget_expand">展开</string>
     <string name="access_shared_string_navigate_up">向上导航</string>
     <string name="access_sort">排序</string>
-    <string name="number_of_gpx_files_selected_pattern">已选择 %s GPX 文件</string>
     <string name="rendering_value_fine_name">精细</string>
     <string name="rendering_value_thin_name">细</string>
     <string name="rendering_value_medium_name">中等</string>
@@ -1571,7 +1570,6 @@
     <string name="lang_kab">卡布列语</string>
     <string name="lang_ber">柏柏尔文</string>
     <string name="archive_wikipedia_data">已下载的旧的不兼容维基百科的数据。你想要将其存档吗？</string>
-    <string name="disable_recording_once_app_killed_descrp">当应用程序被停止，将暂停 GPX 日志记录（借由新的应用程序）。（OsmAnd 背景标示，会从通知栏消失。）</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">按线路从属标色</string>
     <string name="rendering_value_walkingRoutesOSMC_name">由 OSMC 徒步旅行符号标色</string>
     <string name="application_dir_change_warning3">你想 OsmAnd 也将其数据文件复制到新的目标吗？</string>
@@ -1694,7 +1692,6 @@
     <string name="sleep_mode_stop_dialog">停止 GPS 背景模式吗？</string>
     <string name="stop_navigation_service">停止</string>
     <string name="confirm_every_run">总是询问</string>
-    <string name="save_global_track_interval_descr">为通常的轨迹记录选择录制间隔（透过在地图上的 GPX 记录小工具启用）。</string>
     <string name="save_global_track_interval">通用记录间隔</string>
     <string name="background_service_int">GPS 唤醒时间间隔</string>
     <string name="enable_sleep_mode">启用 GPS 背景模式</string>
@@ -1743,8 +1740,6 @@
     <string name="live_monitoring_m">在线跟踪 (需要 GPX)</string>
     <string name="live_monitoring_start">开始在线跟踪</string>
     <string name="live_monitoring_stop">停止在线跟踪</string>
-    <string name="gpx_monitoring_start">启动 GPX 记录</string>
-    <string name="gpx_monitoring_stop">停止 GPX 记录</string>
     <string name="gpx_start_new_segment">开始新区段</string>
     <string name="rendering_attr_hideBuildings_name">建筑</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">非车辆公路</string>
@@ -3095,4 +3090,58 @@
     <string name="gpx_direction_arrows">方向箭头</string>
     <string name="shared_string_custom">自定义</string>
     <string name="rendering_value_thick_name">粗</string>
+    <string name="expire_time_descr">缓存数据会在指定的分钟数后被重新下载，如果该项为空，则表示永远不会重新下载
+\n
+\n一天是 1440 分钟。
+\n一周是 10080 分钟。
+\n一个月是43829 分钟。</string>
+    <string name="map_source_zoom_levels">设置展示或载入在线地图时的缩放的最小和最大值。</string>
+    <string name="online_map_url_helper_text">为访问在线资源，请输入或粘贴一个链接。</string>
+    <string name="online_map_name_helper_text">为此在线地图资源提供一个名称。</string>
+    <string name="sqlite_db_file">SQLiteDB 文件</string>
+    <string name="keep_screen_off">保持屏幕关闭</string>
+    <string name="keep_screen_on">保持屏幕开启</string>
+    <string name="expire_time">到期时间</string>
+    <string name="tiles_storage_descr">选择如何储存下载的数据。</string>
+    <string name="export_import_quick_actions_with_profiles_promo">你可以在应用配置中导入导出快捷操作。</string>
+    <string name="delete_all_actions_message_q">你确定要删除％d快捷操作吗？</string>
+    <string name="speed_cameras_legal_descr">在某些国家或地区，使用测速摄像头提示应用是非法的。
+\n
+\n你需要根据你所在的国家的法律作出选择。
+\n
+\n选择 %1$s 你会收到测速摄像头的提示和警告。
+\n
+\n选择 %2$s，以下关于测速摄像头的数据会被删除直到彻底重新安装OsmAnd:警告、消息、提示、兴趣点。</string>
+    <string name="speed_cameras_restart_descr">重启需要删除全部的测速相机数据。</string>
+    <string name="speed_cameras_removed_descr">该设备没有测速相机。</string>
+    <string name="app_mode_inline_skates">直排轮滑鞋</string>
+    <string name="quick_action_remove_next_destination_descr">路线上的当前目的地点将被删除。如果它是目的地，导航将会停止。</string>
+    <string name="search_download_wikipedia_maps">下载维基百科地图</string>
+    <string name="plugin_wikipedia_description">从维基百科获取有关兴趣点的信息。这是你的口袋离线指南-只需启用维基百科插件便可以享受有关你周围物品的文章。</string>
+    <string name="add_hidden_group_info">添加的点在地图上不可见，因为选定的组是隐藏的，您可以在\"%s\"中找到它。</string>
+    <string name="gpx_split_interval_descr">选择显示轨迹上带有距离或时间标记的间隔。</string>
+    <string name="gpx_split_interval_none_descr">选择所需的拆分选项：“按时间”或“按距离”。</string>
+    <string name="rourte_between_points_next_segment_button_desc">新的配置文件将在下一段路线计算时生效。</string>
+    <string name="whole_track">整个轨迹</string>
+    <string name="plan_route_last_edited">最后更改</string>
+    <string name="plan_route_import_track">导入轨迹</string>
+    <string name="plan_route_open_existing_track">打开一个存在的轨迹</string>
+    <string name="plan_route_create_new_route">创建新的路线</string>
+    <string name="plan_route_select_track_file_for_open">打开一个轨迹文件。</string>
+    <string name="shared_string_done">完成</string>
+    <string name="overwrite_track">覆盖轨迹</string>
+    <string name="save_as_new_track">保存为新的轨迹</string>
+    <string name="plan_route_exit_dialog_descr">你确定在不保存的情况下退出计划路线吗？所有的更改均会丢失。</string>
+    <string name="reverse_route">反转路线</string>
+    <string name="rourte_between_points_whole_track_button_desc">全部路线会以选择的配置文件进行重新计算。</string>
+    <string name="rourte_between_points_desc">选择以直线或以选择的导航文件来计算路线的方式去连接导航点。</string>
+    <string name="next_segment">下一段</string>
+    <string name="rourte_between_points_warning_desc">要使用这个选项，OsmAnd 会跟踪你在地图道路上的轨迹。
+\n
+\n在进行下一步时，你需要选择导航文件来检测与你的起始点相近的道路。</string>
+    <string name="threshold_distance">起始距离</string>
+    <string name="navigation_profile">导航文件</string>
+    <string name="rourte_between_points_add_track_desc">选择一个要添加新片段的跟踪文件。</string>
+    <string name="street_level_imagery">街道等级图像</string>
+    <string name="in_case_of_reverse_direction">防止相反的方向</string>
 </resources>

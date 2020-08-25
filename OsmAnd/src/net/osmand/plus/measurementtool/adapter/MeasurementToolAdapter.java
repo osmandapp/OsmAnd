@@ -19,7 +19,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.measurementtool.NewGpxData.ActionType;
+import net.osmand.plus.measurementtool.GpxData.ActionType;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
 import java.util.Collections;
