@@ -3927,7 +3927,6 @@ public class OsmandSettings {
 		return isLightContent();
 	}
 
-
 	public boolean isLightContent() {
 		return isLightContentForMode(APPLICATION_MODE.get());
 	}
@@ -3942,10 +3941,7 @@ public class OsmandSettings {
 	public boolean isLightSystemDefaultTheme() {
 		Configuration config = ctx.getResources().getConfiguration();
 		int systemNightModeState = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
-		if (systemNightModeState == Configuration.UI_MODE_NIGHT_YES) {
-			return false;
-		}
-		return true;
+		return systemNightModeState != Configuration.UI_MODE_NIGHT_YES;
 	}
 
 	public boolean isSystemDefaultThemeUsed() {
