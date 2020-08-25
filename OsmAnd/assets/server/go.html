@@ -17,57 +17,60 @@
     <!--
       <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     -->
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="css/leaflet.awesome-markers.css">
+    <script src="/scripts/leaflet.awesome-markers.js"></script>
 
     <script type="text/javascript" src="/scripts/js.cookie.js"></script>
     <script type="text/javascript" src="/scripts/go.js?v=5"></script>
 
     <script>
         function getMarkerContent(feature) {
-		var p = feature.properties;
-		var popupContent = p.title;
-		if(p.opr_id) {
-			popupContent += " (" + p.opr_id+") ";
-		}
-		if(p.tags) {
-			for (var t in p.tags) {
-				popupContent += "<br>" + t + " " + p.tags[t];
-			}
-		}
-		if(p.opr_id) {
-			popupContent += "<br><a href=\'/api/admin?view=objects&browse=type&type=opr.place&subtype=id&key=" +
-				p.opr_id + "\'>OpenPlaceReviews</a>";
-		}
-		if(p.osm_id) {
-			popupContent += "<br><a href=\'https://www.openstreetmap.org/" +
-				p.osm_type + "/" + p.osm_id + "\'>OpenStreetMap</a>";
-		}
-		return popupContent;
-	    }
+            var p = feature.properties;
+            var popupContent = p.title;
+            if (p.opr_id) {
+                popupContent += " (" + p.opr_id + ") ";
+            }
+            if (p.tags) {
+                for (var t in p.tags) {
+                    popupContent += "<br>" + t + " " + p.tags[t];
+                }
+            }
+            if (p.opr_id) {
+                popupContent += "<br><a href=\'/api/admin?view=objects&browse=type&type=opr.place&subtype=id&key=" +
+                    p.opr_id + "\'>OpenPlaceReviews</a>";
+            }
+            if (p.osm_id) {
+                popupContent += "<br><a href=\'https://www.openstreetmap.org/" +
+                    p.osm_type + "/" + p.osm_id + "\'>OpenStreetMap</a>";
+            }
+            return popupContent;
+        }
 
-	    function markerClick(e){
+        function markerClick(e) {
 
-	    }
+        }
 
-        function setupMarkers(){
+        function setupMarkers() {
             $.ajax({
                 type: 'GET',
                 url: "/favorites",
                 async: false,
                 contentType: "application/json",
                 dataType: 'json',
-            complete: function(r) {
-                var points = JSON.parse(r.responseText);
-                points.forEach(e => {
-		    	    window.goMap.map.addPopupMarker(e,markerClick);
-                });
-            },
-            error: function(e) {
-                alert("Error happened while getting favourite points "+e.message);
-            }
+                complete: function (r) {
+                    var points = JSON.parse(r.responseText);
+                    points.forEach(e => {
+                        window.goMap.map.addPopupMarker(e, markerClick);
+                    });
+                },
+                error: function (e) {
+                    alert("Error happened while getting favourite points " + e.message);
+                }
             });
         }
 
-        $( document ).ready(function() {
+        $(document).ready(function () {
             setupMarkers();
         });
 
@@ -90,7 +93,7 @@
         <h1>Did you know</h1>
         <p>OsmAnd has an iOS application</p>
         <a class="button yes" href="javascript:void(0);">Yep, I've already got it</a>
-        <a class="button no" href="javascript::void(0);">Nope, but I'd love to try it</a>
+        <a class="button no" href="javascript:void(0);">Nope, but I'd love to try it</a>
         <a class="button cancel" href="javascript:void(0);">Leave me alone</a>
     </div>
 </div>

@@ -126,7 +126,12 @@ function toColor(num) {
 			                "name: <b>" + favorite.name + "</b><br/>" +
 			                "address: <i>" + favorite.address + "</i><br/>"
 			                 + "category: " + favorite.category);
-			    L.marker([point.lat, point.lon])
+				var customMarker = L.AwesomeMarkers.icon({
+					icon: 'home',
+					markerColor: toColor(favorite.color),
+					iconColor: toColor(favorite.color)
+				});
+				L.marker([point.lat, point.lon],{icon: customMarker})
 			        .bindPopup(popup)
 			        .addTo(mapobj.map)
 			        .on('click', function(e) {
