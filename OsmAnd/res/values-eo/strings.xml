@@ -304,7 +304,6 @@
     <string name="download_wikipedia_files">Ĉu elŝuti aldonajn Vikipediajn datumojn (%1$s MB)\?</string>
     <string name="gps_network_not_enabled">Pozici-trova servo estas malaktiva. Ĉu aktivigi ĝin?</string>
     <string name="disable_recording_once_app_killed">Preventi de aŭtomata protokolado</string>
-    <string name="disable_recording_once_app_killed_descrp">Paŭzigi GPX-protokoladon je halto de la aplikaĵo (per lastaj aplikaĵoj). (Fona piktogramo de OsmAnd malaperas de Androida sciiga breto.)</string>
     <string name="read_full_article">Legi tutan artikolon (enrete)</string>
     <string name="shared_string_show_details">Montri detalojn</string>
     <string name="osm_edit_context_menu_delete">Forigi OSM-redaktojn</string>
@@ -589,7 +588,6 @@
     <string name="stop_navigation_service">Ĉesigi</string>
     <string name="confirm_every_run">Demandi ĉiam</string>
     <string name="save_global_track_interval">Ĝenerala registrada intervalo</string>
-    <string name="save_global_track_interval_descr">Elekti intervalon de registrado por ĝenerala registrado de kurso (aktivigita per la GPX-registrada fenestraĵo sur la mapo).</string>
     <string name="background_service_int">GPS-a vekintervalo</string>
     <string name="enable_sleep_mode">Aktivigi GPS-an fonan reĝimon</string>
     <string name="save_track_to_gpx_globally_headline">Registri spuron laŭpete</string>
@@ -629,9 +627,7 @@
     <string name="live_monitoring_m">Enreta spur-registrado (GPX bezonata)</string>
     <string name="live_monitoring_m_descr">Sendi datumojn de spuroj al difinita retservo, se GPX-registrado estas aktiva.</string>
     <string name="live_monitoring_start">Ekigi enretan kurs-registradon</string>
-    <string name="gpx_monitoring_start">Pluigi GPX-registradon</string>
     <string name="live_monitoring_stop">Ĉesigi enretan kurs-registradon</string>
-    <string name="gpx_monitoring_stop">Paŭzigi GPX-registradon</string>
     <string name="gpx_start_new_segment">Ekigi novan segmenton</string>
     <string name="rendering_attr_hideBuildings_name">Konstruaĵoj</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Vojoj ne por aŭtoj</string>
@@ -777,7 +773,6 @@
     <string name="access_shared_string_navigate_up">Supren</string>
     <string name="access_sort">Ordigi</string>
     <string name="map_mode">Map-reĝimo</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX-dosieroj elektitaj</string>
     <string name="rendering_value_thin_name">Maldika</string>
     <string name="rendering_value_medium_name">Meza</string>
     <string name="rendering_value_bold_name">Dika</string>
@@ -1008,7 +1003,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Limoj</string>
     <string name="rendering_attr_noAdminboundaries_description">Ne montri regionajn limojn (administraciaj niveloj 5–9).</string>
     <string name="map_widget_max_speed">Rapidlimo</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Neniu konstruaĵo trovita.</string>
     <string name="incremental_search_city">Serĉi urbon tajpante komencajn literojn</string>
     <string name="search_villages_and_postcodes">Serĉi pli vilaĝojn/poŝtkodojn</string>

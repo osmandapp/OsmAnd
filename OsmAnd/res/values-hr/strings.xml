@@ -994,8 +994,6 @@
     <string name="download_additional_maps">Preuzeti karte koje nedostaju %1$s (%2$d MB)?</string>
     <string name="live_monitoring_start">Započnite online praćenje</string>
     <string name="live_monitoring_stop">Zaustavi online praćenje</string>
-    <string name="gpx_monitoring_start">Započni GPX bilježenje položaja</string>
-    <string name="gpx_monitoring_stop">Zaustavi GPX bilježenje položaja</string>
     <string name="rendering_attr_hideBuildings_name">Sakrij zgrade</string>
     <string name="rendering_attr_hideText_name">Sakrij tekst</string>
     <string name="rendering_attr_hideWoodScrubs_name">Sakrij šume i šikare</string>

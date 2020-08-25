@@ -1224,8 +1224,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="live_monitoring_m">Sekimas internete (reikalingas GPX)</string>
     <string name="live_monitoring_start">Pradėti sekimą internete</string>
     <string name="live_monitoring_stop">Stabdyti sekimą internete</string>
-    <string name="gpx_monitoring_start">Pradėti GPX įrašymą</string>
-    <string name="gpx_monitoring_stop">Stabdyti GPX įrašymą</string>
     <string name="gpx_start_new_segment">Pradėti naują segmentą</string>
     <string name="lang_fa">Persų</string>
     <string name="lang_al">Albanų</string>
@@ -1271,7 +1269,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
 \n
 \nĮrašytais maršrutais galima pasidalinti su draugais arba pridėti kaip kontribuciją OSM. Sportininkai gali naudoti įrašytus maršrutus norėdami stebėti savo treniruotes. Elementarią analizę, tokią kaip ratų laikai, vidutinis greitis, ir t.t., galima atlikti tiesiai OsmAnd bei, be abejo, vėliau išanalizuoti su trečių šalių progamine įranga.</string>
     <string name="confirm_every_run">Visada klausti</string>
-    <string name="save_global_track_interval_descr">Pasirinkite bendrojo maršruto įrašymo intervalą (įjungiama per GPX valdiklį žemėlapio rodinyje).</string>
     <string name="save_global_track_interval">Bendras įrašymo intervalas</string>
     <string name="traffic_warning_speed_limit">Greičio ribojimas</string>
     <string name="traffic_warning_border_control">Pasienio kontrolė</string>
@@ -1509,7 +1506,6 @@ Ilguma %2$s</string>
     <string name="osm_edit_context_menu_delete">Ištrinti OSM taisymus</string>
     <string name="local_recordings_delete_all_confirm">Ketinate ištrinti %1$d pastabas. Ar tikrai to norite?</string>
     <string name="download_wikipedia_maps">Vikipedija</string>
-    <string name="disable_recording_once_app_killed_descrp">Bus pristabdytas GPX įrašymas, jei programa bus išjungta (per Pastarosios programos). (OsmAnd Miego foninio režimo piktograma dings iš Android pranešimų juostos.)</string>
     <string name="download_wikipedia_files">Ar norite atsisiųsti papildomų Wikipedia duomenų (%1$s MB)?</string>
     <string name="archive_wikipedia_data">Jūsų turimi Wikipedia duomenys yra pasenę. Gal norite juos suarchyvuoti?</string>
     <string name="light_theme">Šviesi</string>
@@ -1896,7 +1892,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="access_map_linked_to_location">Žemėlapis yra susietas su vietos pozicija</string>
     <string name="access_shared_string_navigate_up">Vykti aukštyn</string>
     <string name="map_mode">Žemėlapio režimas</string>
-    <string name="number_of_gpx_files_selected_pattern">Pasirinkti %s GPX failai</string>
     <string name="no_map_markers_found">Prašome pridėti žemėlapio žymeklius per žemėlapį</string>
     <string name="no_waypoints_found">Jokių krypčių taškų nerasta</string>
     <string name="storage_permission_restart_is_required">Dabar programa gebės rašyti į išorinę atmintį. Būtinas rankinis programos paleidimas iš naujo.</string>

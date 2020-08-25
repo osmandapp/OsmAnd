@@ -1249,8 +1249,6 @@
     <string name="live_monitoring_m">Online útvonalrögzítés (GPX szükséges)</string>
     <string name="live_monitoring_start">Online útvonalrögzítés indítása</string>
     <string name="live_monitoring_stop">Online útvonalrögzítés megállítása</string>
-    <string name="gpx_monitoring_start">GPX naplózás folytatása</string>
-    <string name="gpx_monitoring_stop">GPX naplózás szüneteltetése</string>
     <string name="gpx_start_new_segment">Új szakasz kezdése</string>
     <string name="rendering_attr_hideBuildings_name">Épületek</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Gyalogutak</string>
@@ -1305,7 +1303,6 @@
     <string name="duration">Időtartam</string>
     <string name="distance">Távolság</string>
     <string name="confirm_every_run">Mindig kérdezzen rá</string>
-    <string name="save_global_track_interval_descr">Adja meg az általános nyomvonalrögzítéshez használandó naplózási időközt (a térképen lévő GPX-naplózó widgettel engedélyezve).</string>
     <string name="save_global_track_interval">Általános naplózási időköz</string>
     <string name="save_track_to_gpx_globally_descr">A GPX-fájlba történő általános pozíciónaplózás be- és kikapcsolható a térképen lévő GPX-naplózó widgettel.</string>
     <string name="save_track_interval_globally">Rögzítési időköz</string>
@@ -1552,7 +1549,6 @@
     <string name="local_recordings_delete_all_confirm">Biztosan törölni szeretne %1$d jegyzetet\?</string>
     <string name="disable_recording_once_app_killed">Önálló naplózás megakadályozása</string>
     <string name="gps_network_not_enabled">A helymeghatározó szolgáltatás ki van kapcsolva. Bekapcsolja\?</string>
-    <string name="disable_recording_once_app_killed_descrp">Szüneteltetni fogja a GPX-naplózást, ha az alkalmazást kilőtték (a legutóbbi alkalmazásokon keresztül). (Az OsmAnd háttérben futás jelzője eltűnik az Android értesítési sávjáról.)</string>
     <string name="lang_vo">volapük</string>
     <string name="lang_th">thai</string>
     <string name="lang_te">telugu</string>
@@ -1937,7 +1933,6 @@
     <string name="access_shared_string_navigate_up">Navigáció fel</string>
     <string name="access_sort">Rendezés</string>
     <string name="map_mode">Térképmód</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX-fájl kijelölve</string>
     <string name="rendering_value_thin_name">Vékony</string>
     <string name="rendering_value_medium_name">Közepes</string>
     <string name="rendering_value_bold_name">Vastag</string>

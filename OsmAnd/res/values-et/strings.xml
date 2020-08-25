@@ -135,7 +135,6 @@
     <string name="access_shared_string_navigate_up">Navigeeri üles</string>
     <string name="access_sort">Sorteeri</string>
     <string name="map_mode">Kaardi režiim</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX faili valitud</string>
     <string name="rendering_value_thin_name">Õhuke</string>
     <string name="rendering_value_medium_name">Keskmine</string>
     <string name="rendering_value_bold_name">Rasvane</string>
@@ -1128,7 +1127,6 @@
     <string name="download_wikipedia_files">Laadida täiendavaid andmeid Vikipeediast (%1$s MB)\?</string>
     <string name="gps_network_not_enabled">Asukohateenus on välja lülitatud. Lülitada sisse\?</string>
     <string name="disable_recording_once_app_killed">Väldi iseseisvat logimist</string>
-    <string name="disable_recording_once_app_killed_descrp">Peatab GPX logimise rakenduse jõuga sulgemise korral (hiljutiste rakenduste kaudu). (OsmAndi taustnäit kaob Androidi teavitusribalt.)</string>
     <string name="shared_string_import2osmand">OsmAnd import</string>
     <string name="read_full_article">Loe kogu artiklit (veebis)</string>
     <string name="local_indexes_cat_wiki">Vikipeedia</string>
@@ -1300,7 +1298,6 @@
     <string name="sleep_mode_stop_dialog">Peata GPS taustarežiim\?</string>
     <string name="stop_navigation_service">Peatu</string>
     <string name="confirm_every_run">Küsi alati</string>
-    <string name="save_global_track_interval_descr">Määra üldise teekonna salvestamise logimise ajavahemik (lubatud kaardil GPX logimise lisa abil).</string>
     <string name="save_global_track_interval">Üldine logimisintervall</string>
     <string name="background_service_int">GPS äratuse ajavahemik</string>
     <string name="enable_sleep_mode">Luba GPS taustarežiim</string>
@@ -1346,8 +1343,6 @@
     <string name="live_monitoring_m">Veebis jälgimine (GPX kohustuslik)</string>
     <string name="live_monitoring_start">Alusta veebis jälgimist</string>
     <string name="live_monitoring_stop">Peata veebis jälgimine</string>
-    <string name="gpx_monitoring_start">Alusta GPX logimist</string>
-    <string name="gpx_monitoring_stop">Peata GPX logimine</string>
     <string name="gpx_start_new_segment">Alusta uut lõiku</string>
     <string name="rendering_attr_hideBuildings_name">Hooned</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Liiklusvahenditele mitte mõeldud tee</string>
@@ -1652,7 +1647,6 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">Kuva rajad vastavalt OSMC radadele.</string>
     <string name="rendering_attr_noAdminboundaries_name">Piirid</string>
     <string name="map_widget_max_speed">Kiiruspiirang</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Hooneid ei leidu.</string>
     <string name="incremental_search_city">Otsi linna kasvavalt</string>
     <string name="search_villages_and_postcodes">Otsi veel külasid/postiindekseid</string>

@@ -1092,8 +1092,6 @@
     <string name="live_monitoring_m">Мережеве відслідковування (потрібен GPX)</string>
     <string name="live_monitoring_start">Розпочати моніторинг</string>
     <string name="live_monitoring_stop">Зупинити моніторинг</string>
-    <string name="gpx_monitoring_start">Продовжити запис GPX</string>
-    <string name="gpx_monitoring_stop">Зупинити запис GPX</string>
     <string name="gpx_start_new_segment">Розпочати новий відрізок</string>
     <string name="rendering_attr_hideBuildings_name">Будівлі</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Дороги не призначені для автівок</string>
@@ -1320,7 +1318,6 @@
     <string name="speak_favorites">Довколишні закладки</string>
     <string name="speak_poi">Довколишні POI</string>
     <string name="confirm_every_run">Завжди питати</string>
-    <string name="save_global_track_interval_descr">Виберіть проміжковість для запису треку (вмикається через віджет запису GPX на мапі).</string>
     <string name="save_global_track_interval">Загальний інтервал запису треку</string>
     <string name="home_button">Дім</string>
     <string name="map_update">Наявні оновлення для %1$s мап</string>
@@ -1598,7 +1595,6 @@
     <string name="download_wikipedia_files">Завантажити додаткові дані з Вікіпедії (%1$s Мб)\?</string>
     <string name="gps_network_not_enabled">Служба визначення місцезнаходження вимкнена. Увімкнути?</string>
     <string name="disable_recording_once_app_killed">Запобігти самостійному логуваню</string>
-    <string name="disable_recording_once_app_killed_descrp">Запис GPX буде зупинено після припинення роботи застосунку через меню з переліком нещодавно запущених застосунків. (Індикатор, який інформує про роботу OsmAnd в фоні зникне з панелі сповіщень в Android)</string>
     <string name="shared_string_import2osmand">Імпортувати до OsmAnd</string>
     <string name="read_full_article">Читати повну статтю (мережево)</string>
     <string name="local_indexes_cat_wiki">Вікіпедія</string>
@@ -1926,7 +1922,6 @@
     <string name="access_shared_string_navigate_up">Вгору</string>
     <string name="access_sort">Впорядкувати</string>
     <string name="map_mode">Режим мапи</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX файл(ів) виділено</string>
     <string name="rendering_value_thin_name">Тонко</string>
     <string name="rendering_value_medium_name">Середньо</string>
     <string name="rendering_value_bold_name">Жирно</string>

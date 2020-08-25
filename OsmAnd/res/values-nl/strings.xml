@@ -1209,8 +1209,6 @@
     <string name="live_monitoring_m">Online tracking (GPX vereist)</string>
     <string name="live_monitoring_start">Start online tracken</string>
     <string name="live_monitoring_stop">Stop online tracken</string>
-    <string name="gpx_monitoring_start">GPX-opname hervatten</string>
-    <string name="gpx_monitoring_stop">GPX-opname pauzeren</string>
     <string name="gpx_start_new_segment">Start nieuw segment</string>
     <string name="keep_navigation_service">Behouden</string>
     <string name="stop_navigation_service">Stoppen</string>
@@ -1260,7 +1258,6 @@
     <string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus- en pendeltaxilijnen</string>
     <string name="confirm_every_run">Altijd vragen</string>
-    <string name="save_global_track_interval_descr">Selecteer het loggings-interval voor de GPX-track-opname (te starten via de GPX-opname widget op het kaartscherm).</string>
     <string name="save_global_track_interval">Standaard logging-interval</string>
     <string name="traffic_warning_speed_limit">Maximum snelheid</string>
     <string name="traffic_warning_border_control">Grenscontrole</string>
@@ -1566,7 +1563,6 @@
     <string name="archive_wikipedia_data">Er zijn al (verouderde en incompatibele) Wikipedia-gegevens gedownload. Wilt u deze bewaren?</string>
     <string name="download_wikipedia_files">Wilt u Wikipedia-artikelen downloaden (%1$s MB) ?</string>
     <string name="disable_recording_once_app_killed">Voorkom loggen als app wordt gesloten</string>
-    <string name="disable_recording_once_app_killed_descrp">Stopt het opnemen van een GPX-track als de app wordt afgesloten met Recente Applicaties</string>
     <string name="shared_string_import2osmand">Importeren in OsmAnd</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="rendering_value_default13_name">Standaard (13)</string>
@@ -1923,7 +1919,6 @@
     <string name="rendering_value_medium_name">Gemiddeld</string>
     <string name="rendering_value_bold_name">Vet</string>
     <string name="map_mode">Dag-Nacht stijl</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX-bestanden geselecteerd</string>
     <string name="access_default_color">Standaardkleur</string>
     <string name="access_category_choice">Kies categorie</string>
     <string name="access_hint_enter_name">Voer naam in</string>

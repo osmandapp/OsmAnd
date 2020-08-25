@@ -879,7 +879,6 @@
     <string name="download_regular_maps">Mapes estàndards</string>
     <string name="rendering_attr_noAdminboundaries_description">No mostris els límits administratius regionals (nivells 5 a 9).</string>
     <string name="map_widget_max_speed">Límit de velocitat</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="incremental_search_city">Cerca progressiva de municipis</string>
     <string name="safe_mode_description">Executeu l\'aplicació en mode segur (usant Android més lent que el codi nadiu).</string>
     <string name="delete_target_point">Elimina el destí</string>
@@ -1279,8 +1278,6 @@
     <string name="live_monitoring_m">Registre de traça en línia (cal GPX)</string>
     <string name="live_monitoring_start">Inicia un registre de traça en línia</string>
     <string name="live_monitoring_stop">Atura el registre de traça en línia</string>
-    <string name="gpx_monitoring_start">Inicia el registre GPX</string>
-    <string name="gpx_monitoring_stop">Atura el registre GPX</string>
     <string name="gpx_start_new_segment">Inicia un segment nou</string>
     <string name="lang_fa">Persa</string>
     <string name="keep_navigation_service">Mantén</string>
@@ -1332,7 +1329,6 @@
     <string name="save_track_to_gpx_globally_descr">L\'enregistrament de la posició en un fitxer GPX es pot activar o desactivar amb el giny d\'enregistrament GPX al mapa.</string>
     <string name="save_track_interval_globally">Interval d\'enregistrament</string>
     <string name="confirm_every_run">Es demana confirmació</string>
-    <string name="save_global_track_interval_descr">Indiqueu l\'interval d\'enregistrament general de les traces (s\'activa mitjançant el giny de gravació de GPX del mapa).</string>
     <string name="save_global_track_interval">Interval d\'enregistrament general</string>
     <string name="traffic_warning_speed_limit">Velocitat màxima</string>
     <string name="traffic_warning_border_control">Control de fronteres</string>
@@ -1570,7 +1566,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="download_wikipedia_maps">Viquipèdia</string>
     <string name="gps_network_not_enabled">El servei de posicionament està aturat. El voleu activar\?</string>
     <string name="disable_recording_once_app_killed">Evita la gravació en procés de fons</string>
-    <string name="disable_recording_once_app_killed_descrp">L\'enregistrament en format GPX s\'aturarà quan ho faci OsmAnd (via les aplicacions recents). (La indicació de procés de fons de l\'OsmAnd desapareixerà de la barra de notificacions d\'Android)</string>
     <string name="shared_string_import2osmand">Importa a l\'OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Esteu segur que voleu esborrar %1$d notes\?</string>
     <string name="archive_wikipedia_data">Teniu dades de Viquipèdia antigues i incompatibles. Les voleu desar?</string>
@@ -1945,7 +1940,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rec_split">Divisió d\'enregistrament</string>
     <string name="rec_split_title">Utilitza divisió d\'enregistrament</string>
     <string name="map_mode">Mode mapa</string>
-    <string name="number_of_gpx_files_selected_pattern">"Seleccionats  %s arxius GPX"</string>
     <string name="access_default_color">Color per defecte</string>
     <string name="access_category_choice">Trieu la categoria</string>
     <string name="access_hint_enter_name">Introduïu el nom</string>

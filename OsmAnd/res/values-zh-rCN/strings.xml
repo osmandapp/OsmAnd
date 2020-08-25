@@ -1505,7 +1505,6 @@
     <string name="access_widget_expand">展开</string>
     <string name="access_shared_string_navigate_up">向上导航</string>
     <string name="access_sort">排序</string>
-    <string name="number_of_gpx_files_selected_pattern">已选择 %s GPX 文件</string>
     <string name="rendering_value_fine_name">精细</string>
     <string name="rendering_value_thin_name">细</string>
     <string name="rendering_value_medium_name">中等</string>
@@ -1571,7 +1570,6 @@
     <string name="lang_kab">卡布列语</string>
     <string name="lang_ber">柏柏尔文</string>
     <string name="archive_wikipedia_data">已下载的旧的不兼容维基百科的数据。你想要将其存档吗？</string>
-    <string name="disable_recording_once_app_killed_descrp">当应用程序被停止，将暂停 GPX 日志记录（借由新的应用程序）。（OsmAnd 背景标示，会从通知栏消失。）</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">按线路从属标色</string>
     <string name="rendering_value_walkingRoutesOSMC_name">由 OSMC 徒步旅行符号标色</string>
     <string name="application_dir_change_warning3">你想 OsmAnd 也将其数据文件复制到新的目标吗？</string>
@@ -1694,7 +1692,6 @@
     <string name="sleep_mode_stop_dialog">停止 GPS 背景模式吗？</string>
     <string name="stop_navigation_service">停止</string>
     <string name="confirm_every_run">总是询问</string>
-    <string name="save_global_track_interval_descr">为通常的轨迹记录选择录制间隔（透过在地图上的 GPX 记录小工具启用）。</string>
     <string name="save_global_track_interval">通用记录间隔</string>
     <string name="background_service_int">GPS 唤醒时间间隔</string>
     <string name="enable_sleep_mode">启用 GPS 背景模式</string>
@@ -1743,8 +1740,6 @@
     <string name="live_monitoring_m">在线跟踪 (需要 GPX)</string>
     <string name="live_monitoring_start">开始在线跟踪</string>
     <string name="live_monitoring_stop">停止在线跟踪</string>
-    <string name="gpx_monitoring_start">启动 GPX 记录</string>
-    <string name="gpx_monitoring_stop">停止 GPX 记录</string>
     <string name="gpx_start_new_segment">开始新区段</string>
     <string name="rendering_attr_hideBuildings_name">建筑</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">非车辆公路</string>

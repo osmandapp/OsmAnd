@@ -1257,8 +1257,6 @@
     <string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
     <string name="live_monitoring_start">Rozpocznij śledzenie online</string>
     <string name="live_monitoring_stop">Zakończ śledzenie online</string>
-    <string name="gpx_monitoring_start">Kontynuuj rejestrowanie śladu</string>
-    <string name="gpx_monitoring_stop">Zatrzymaj rejestrowanie śladu</string>
     <string name="gpx_start_new_segment">Rozpocznij nowy segment</string>
     <string name="rendering_attr_hideBuildings_name">Budynki</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Trasy niedostępne dla aut</string>
@@ -1316,7 +1314,6 @@
 \n 
 \nZarejestrowane ślady można udostępnić znajomym lub wykorzystać na rzecz rozwoju mapy OpenStreetMap. Sportowcy mogą korzystać ze śladów do monitorowania treningów. W tym celu OsmAnd udostępnia podstawowe informacje takie jak czasy okrążeń, średnia prędkość itp. Ślady mogą być później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców oprogramowania.</string>
     <string name="confirm_every_run">Ponawianie pytania</string>
-    <string name="save_global_track_interval_descr">Wybiera tempo rejestrowania śladu (włączonego poprzez widżet rejestrowania GPX na mapie).</string>
     <string name="save_global_track_interval">Ogólna częstość rejestrowania</string>
     <string name="traffic_warning_speed_limit">Ograniczenie prędkości</string>
     <string name="traffic_warning_border_control">Kontrola graniczna</string>
@@ -1559,7 +1556,6 @@
     <string name="archive_wikipedia_data">Posiadasz stare niezgodne dane Wikipedii. Zarchiwizować je?</string>
     <string name="download_wikipedia_files">Pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Włączyć ją?</string>
-    <string name="disable_recording_once_app_killed_descrp">Wstrzymuje rejestrowanie śladu po zakończeniu działania aplikacji. (Ikona działania w tle znika z paska powiadomień.)</string>
     <string name="shared_string_import2osmand">Import do OsmAnd</string>
     <string name="read_full_article">Czytaj cały artykuł (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -1938,7 +1934,6 @@
     <string name="access_widget_expand">Rozwiń</string>
     <string name="access_sort">Sortuj</string>
     <string name="map_mode">Tryb mapy</string>
-    <string name="number_of_gpx_files_selected_pattern">Wybrano %s plików GPX</string>
     <string name="access_hint_enter_name">Proszę wprowadzić nazwę</string>
     <string name="access_map_linked_to_location">Mapa jest powiązana z położeniem</string>
     <string name="access_tree_list">Lista hierarchiczna</string>

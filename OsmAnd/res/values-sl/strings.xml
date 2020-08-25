@@ -1253,8 +1253,6 @@
     <string name="live_monitoring_m">Sledenje v živo (zahteva GPX)</string>
     <string name="live_monitoring_start">Začni sledenje v živo</string>
     <string name="live_monitoring_stop">Končaj sledenje v živo</string>
-    <string name="gpx_monitoring_start">Začni beleženje GPX</string>
-    <string name="gpx_monitoring_stop">Zaustavi beleženje GPX</string>
     <string name="gpx_start_new_segment">Začni nov odsek</string>
     <string name="rendering_attr_hideBuildings_name">Ne izriši zgradb</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Neprevozne ceste</string>
@@ -1307,7 +1305,6 @@
     <string name="rendering_value_browse_map_name">Poišči na zemljevidu</string>
     <string name="rendering_attr_alpineHiking_description">Izriši poti po lestvici SAC.</string>
     <string name="pause_navigation">Ustavi navigacijo</string>
-    <string name="save_global_track_interval_descr">Izberite časovni razmik beleženja za splošno shranjevanje (omogočeno z gumbom za beleženje sledi GPX na zemljevidu).</string>
     <string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX je mogoče vklopiti in izklopiti z gumbom za beleženje na zaslonu zemljevida.</string>
     <string name="record_plugin_description">Vstavek omogoča beleženje in shranjevanja sledi potovanj. S klikom na gradnik GPX se beleženje poti shranjuje v datoteke GPX. 
 \n 
@@ -1554,7 +1551,6 @@
     <string name="local_recordings_delete_all_confirm">Ali res želite izbrisati opombe (%1$d))?</string>
     <string name="gps_network_not_enabled">Storitev določanja trenutnega mesta ni omogočena. Ali jo želite zagnati?</string>
     <string name="disable_recording_once_app_killed">Prepreči samostojno beleženje</string>
-    <string name="disable_recording_once_app_killed_descrp">Možnost onemogoči beleženje GPX, ko program ni dejaven (preko nedavnih programov). To je možnost delovanja v ozadju, katere indikator se ne pojavi v obvestilni vrstici.</string>
     <string name="download_wikipedia_files">Ali želite prejeti dodatne podatke iz Wikipedije (%1$s MB)\?</string>
     <string name="lang_vo">Volapik</string>
     <string name="lang_th">Tajščina</string>
@@ -1948,7 +1944,6 @@
     <string name="access_shared_string_navigate_up">Vodi naprej</string>
     <string name="access_sort">Razvrsti</string>
     <string name="map_mode">Dnevni/Nočni izris</string>
-    <string name="number_of_gpx_files_selected_pattern">%s izbranih datotek GPX</string>
     <string name="map_widget_bearing">Relativna smer</string>
     <string name="access_no_destination">Ciljno mesto še ni določeno</string>
     <string name="map_widget_magnetic_bearing">Smer po magnetnem polju</string>
