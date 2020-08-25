@@ -104,6 +104,7 @@
 			android:paddingRight="@dimen/content_padding_small"
 			android:paddingEnd="@dimen/content_padding_small"
 			android:paddingLeft="@dimen/content_padding_small"
+			android:textColor="?android:textColorSecondary"
 			android:text="@string/shared_string_meters" />
 	</FrameLayout>
 

@@ -64,19 +64,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.8"
-                android:minHeight="48dp"
+                android:minHeight="@dimen/card_row_min_height"
                 android:paddingLeft="@dimen/content_padding"
-                android:paddingTop="@dimen/content_padding_half"
-                android:paddingBottom="@dimen/content_padding_half"
+				android:paddingStart="@dimen/content_padding"
+				android:paddingRight="0dp"
+				android:paddingEnd="0dp"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-	            android:paddingStart="@dimen/content_padding">
+                android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="?android:textColorPrimary"
+					android:paddingTop="@dimen/content_padding_half"
+					android:paddingBottom="@dimen/content_padding_half"
+					android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/default_list_text_size"
                     android:text="@string/shared_string_show_on_map"/>
 
@@ -119,14 +121,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.6"
-                android:minHeight="48dp"
+                android:minHeight="@dimen/card_row_min_height"
                 android:paddingLeft="@dimen/content_padding"
+				android:paddingStart="@dimen/content_padding"
+				android:paddingRight="0dp"
+				android:paddingEnd="0dp"
                 android:paddingTop="@dimen/content_padding_half"
                 android:paddingBottom="@dimen/content_padding_half"
                 android:background="?attr/selectableItemBackground"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-	            android:paddingStart="@dimen/content_padding">
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/split_interval_title"
@@ -166,7 +170,7 @@
 		    android:layout_height="wrap_content"
 		    android:background="?attr/selectableItemBackground"
 		    android:gravity="center_vertical"
-		    android:minHeight="48dp"
+		    android:minHeight="@dimen/card_row_min_height"
 		    android:orientation="horizontal"
 		    android:paddingLeft="@dimen/content_padding"
 		    android:paddingTop="@dimen/content_padding_half"
