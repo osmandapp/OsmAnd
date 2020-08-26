@@ -93,12 +93,13 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.dialog_content_margin)));
 
+		int color = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
+				R.attr.activity_background_color);
 		GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
 				R.drawable.bg_select_group_button_outline);
 		if (background != null) {
 			background = (GradientDrawable) background.mutate();
 			background.setStroke(0, Color.TRANSPARENT);
-			int color = AndroidUtils.getColorFromAttr(app, R.attr.activity_background_color);
 			background.setColor(color);
 		}
 		final BottomSheetItemWithCompoundButton[] simplifiedTrackItem = new BottomSheetItemWithCompoundButton[1];
@@ -108,8 +109,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				.setDescription(getString(R.string.simplified_track_description))
 				.setBackground(background)
 				.setTitle(getString(R.string.simplified_track))
-				.setLayoutId(R.layout.bottom_sheet_item_with_switch_outlined)
-
+				.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -122,12 +122,18 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		items.add(new DividerSpaceItem(app, contentPadding));
 
+		background = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
+		if (background != null) {
+			background = (GradientDrawable) background.mutate();
+			background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), color);
+		}
 		final BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setCompoundButtonColorId(activeColorRes)
 				.setChecked(showOnMap)
+				.setBackground(background)
 				.setTitle(getString(R.string.shared_string_show_on_map))
-				.setLayoutId(R.layout.bottom_sheet_item_with_switch_outlined)
+				.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
