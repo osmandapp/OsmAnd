@@ -1604,7 +1604,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 										@Override
 										public void onClick(View view) {
 											MapActivity mapActivity = mapActivityRef.get();
-											if (mapActivity != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+											if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 												FileUtils.renameFile(mapActivity, toSave, null);
 											}
 										}

@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -128,7 +130,13 @@ public class FileUtils {
 			dest.getParentFile().mkdirs();
 		}
 		if (source.renameTo(dest)) {
+			GpxSelectionHelper helper = ctx.getSelectedGpxHelper();
+			SelectedGpxFile selected = helper.getSelectedFileByPath(source.getAbsolutePath());
 			ctx.getGpxDbHelper().rename(source, dest);
+			if (selected != null && selected.getGpxFile() != null) {
+				selected.getGpxFile().path = dest.getAbsolutePath();
+				helper.updateSelectedGpxFile(selected);
+			}
 			if (callback != null) {
 				callback.renamedTo(dest);
 			}
