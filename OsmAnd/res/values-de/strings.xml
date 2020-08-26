@@ -3843,4 +3843,7 @@
     <string name="navigation_profile">Navigationsprofil</string>
     <string name="rourte_between_points_add_track_desc">Wählen Sie eine Trackdatei, für die ein neues Segment hinzugefügt werden soll.</string>
     <string name="follow_track_descr">Track auswählen, der verfolgt werden soll</string>
+    <string name="delete_address">Adresse löschen</string>
+    <string name="add_address">Adresse hinzufügen</string>
+    <string name="access_hint_enter_address">Adresse eingeben</string>
 </resources>
