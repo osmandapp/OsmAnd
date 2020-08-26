@@ -4,6 +4,8 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -42,6 +44,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	boolean simplifiedTrack;
 	String fileName;
 	String folderName;
+	boolean rightButtonEnabled = true;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -54,13 +57,12 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			simplifiedTrack = savedInstanceState.getBoolean(SIMPLIFIED_TRACK_KEY);
 			folderName = savedInstanceState.getString(FOLDER_NAME_KEY);
 		}
-		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 
 		items.add(new TitleItem(getString(R.string.shared_string_save_as_gpx)));
 
-		View editNameView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.track_name_edit_text,
-				null, false);
-		TextInputLayout nameTextBox = editNameView.findViewById(R.id.name_text_box);
+		View editNameView = View.inflate(UiUtilities.getThemedContext(app, nightMode),
+				R.layout.track_name_edit_text, null);
+		final TextInputLayout nameTextBox = editNameView.findViewById(R.id.name_text_box);
 		nameTextBox.setBoxBackgroundColorResource(R.color.material_text_input_layout_bg);
 		nameTextBox.setHint(getString(R.string.file_name));
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
@@ -68,21 +70,34 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		nameTextBox.setDefaultHintTextColor(colorStateList);
 		TextInputEditText nameText = editNameView.findViewById(R.id.name_edit_text);
 		nameText.setText(fileName);
+		nameText.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				checkEmptyName(s, nameTextBox);
+			}
+		});
 		BaseBottomSheetItem editFileName = new BaseBottomSheetItem.Builder()
 				.setCustomView(editNameView)
 				.create();
 		this.items.add(editFileName);
 
 		int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		int contentPaddingHalf = app.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
 
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 
 		FolderListAdapter adapter = new FolderListAdapter(app, nightMode, folderName);
 		adapter.setListener(createFolderSelectListener());
-		View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_item_recyclerview,
-				null, false);
+		View view = View.inflate(UiUtilities.getThemedContext(app, nightMode), R.layout.bottom_sheet_item_recyclerview,
+				null);
 		View recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setPadding(contentPaddingHalf, 0, contentPaddingHalf, 0);
 		BaseBottomSheetItem scrollItem = new HorizontalRecyclerBottomSheetItem.Builder()
@@ -93,14 +108,15 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.dialog_content_margin)));
 
-		int color = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
+		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int backgroundColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
 				R.attr.activity_background_color);
 		GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
 				R.drawable.bg_select_group_button_outline);
 		if (background != null) {
 			background = (GradientDrawable) background.mutate();
 			background.setStroke(0, Color.TRANSPARENT);
-			background.setColor(color);
+			background.setColor(backgroundColor);
 		}
 		final BottomSheetItemWithCompoundButton[] simplifiedTrackItem = new BottomSheetItemWithCompoundButton[1];
 		simplifiedTrackItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
@@ -120,12 +136,12 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				.create();
 		items.add(simplifiedTrackItem[0]);
 
-		items.add(new DividerSpaceItem(app, contentPadding));
+		items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.content_padding)));
 
 		background = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
 		if (background != null) {
 			background = (GradientDrawable) background.mutate();
-			background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), color);
+			background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), backgroundColor);
 		}
 		final BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
@@ -186,14 +202,31 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	protected void onRightBottomButtonClick() {
 		Fragment targetFragment = getTargetFragment();
 		if (targetFragment instanceof SaveAsNewTrackFragmentListener) {
-			((SaveAsNewTrackFragmentListener) targetFragment).onSaveAsNewTrack(fileName, showOnMap, simplifiedTrack);
+			((SaveAsNewTrackFragmentListener) targetFragment).onSaveAsNewTrack(folderName, fileName, showOnMap,
+					simplifiedTrack);
 		}
 		dismiss();
 	}
 
+	@Override
+	protected boolean isRightBottomButtonEnabled() {
+		return rightButtonEnabled;
+	}
+
+	private void checkEmptyName(Editable name, TextInputLayout nameCaption) {
+		if (name.toString().trim().isEmpty()) {
+			nameCaption.setError(getString(R.string.empty_filename));
+			rightButtonEnabled = false;
+		} else {
+			nameCaption.setError(null);
+			rightButtonEnabled = true;
+		}
+		updateBottomButtons();
+	}
+
 	interface SaveAsNewTrackFragmentListener {
 
-		void onSaveAsNewTrack(String fileName, boolean showOnMap, boolean simplifiedTrack);
+		void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack);
 
 	}
 }

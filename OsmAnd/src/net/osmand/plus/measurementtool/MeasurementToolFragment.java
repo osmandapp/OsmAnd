@@ -905,9 +905,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onSaveAsNewTrack(String fileName, boolean showOnMap, boolean simplifiedTrack) {
-		//todo implement
-		saveAsGpx(SaveType.ROUTE_POINT);
+	public void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack) {
+		File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
+		if (folderName != null) {
+			dir = new File(dir, folderName);
+		}
+		fileName = fileName + GPX_FILE_EXT;
+		SaveType saveType = simplifiedTrack ? SaveType.LINE : SaveType.ROUTE_POINT;
+		saveNewGpx(dir, fileName, showOnMap, saveType, true);
 	}
 
 	private MeasurementAdapterListener createMeasurementAdapterListener(final ItemTouchHelper touchHelper) {
