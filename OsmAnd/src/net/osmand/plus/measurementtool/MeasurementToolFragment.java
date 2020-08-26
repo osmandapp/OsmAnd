@@ -472,13 +472,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					displaySegmentPoints();
 				}
 			}
-/*
-			if (saved == null) {
-				saved = gpxData != null
-						&& (gpxData.getActionType() == ActionType.ADD_ROUTE_POINTS
-						|| gpxData.getActionType() == ActionType.EDIT_SEGMENT);
-			}
-*/
 		}
 	}
 
@@ -1443,6 +1436,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 			private ProgressDialog progressDialog;
 			private File toSave;
+			private GPXFile savedGpxFile;
 
 			@Override
 			protected void onPreExecute() {
@@ -1494,6 +1488,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					}
 					Exception res = GPXUtilities.writeGpxFile(toSave, gpx);
 					gpx.path = toSave.getAbsolutePath();
+					savedGpxFile = gpx;
 					if (showOnMap) {
 						app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
 					}
@@ -1564,6 +1559,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 						}
 					}
 					Exception res = GPXUtilities.writeGpxFile(toSave, gpx);
+					savedGpxFile = gpx;
 					if (showOnMap) {
 						SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
 						if (sf != null) {
@@ -1592,6 +1588,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				mapActivity.refreshMap();
 				if (warning == null) {
 					editingCtx.setChangesSaved();
+					if (editingCtx.isNewData() && savedGpxFile != null) {
+						QuadRect rect = savedGpxFile.getRect();
+						TrkSegment segment = savedGpxFile.getNonEmptyTrkSegment();
+						GpxData gpxData = new GpxData(savedGpxFile, rect, ActionType.EDIT_SEGMENT, segment);
+						editingCtx.setGpxData(gpxData);
+						updateToolbar();
+					}
 					if (isInEditMode()) {
 						dismiss(mapActivity);
 					} else {
@@ -1605,7 +1608,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 										public void onClick(View view) {
 											MapActivity mapActivity = mapActivityRef.get();
 											if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-												FileUtils.renameFile(mapActivity, toSave, null);
+												FileUtils.renameFile(mapActivity, toSave, new FileUtils.RenameCallback() {
+													@Override
+													public void renamedTo(File file) {
+
+													}
+												});
 											}
 										}
 									});
