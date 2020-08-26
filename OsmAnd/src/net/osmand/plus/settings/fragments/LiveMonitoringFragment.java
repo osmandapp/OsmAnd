@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -128,10 +129,10 @@ public class LiveMonitoringFragment extends BaseSettingsFragment {
 		for (int i = 0; i < MAX_INTERVAL_TO_SEND_MINUTES.length; i++) {
 			int minute = MAX_INTERVAL_TO_SEND_MINUTES[i];
 			entryValues[i] = (minute * 60) * 1000;
-			entries[i] = minute + " " + getString(R.string.int_min);
+			entries[i] = OsmAndFormatter.getFormattedDuration(minute * 60, app);
 		}
 
-		ListPreferenceEx liveMonitoringBuffer = (ListPreferenceEx) findPreference(settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND.getId());
+		ListPreferenceEx liveMonitoringBuffer = findPreference(settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND.getId());
 		liveMonitoringBuffer.setEntries(entries);
 		liveMonitoringBuffer.setEntryValues(entryValues);
 		liveMonitoringBuffer.setIcon(getPersistentPrefIcon(R.drawable.ic_action_time_span));
