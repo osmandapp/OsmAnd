@@ -3824,4 +3824,64 @@
     <string name="gpx_direction_arrows">Stefnuörvar</string>
     <string name="plan_route_select_track_file_for_open">Veldu ferilskrá til að opna.</string>
     <string name="lenght_limit_description">Settu inn lengd farartækisins, takmarkanir geta verið á sumum leiðum varðandi lengd farartækja.</string>
+    <string name="release_3_7">• Ný ónettengd brekkukort
+\n
+\n • Full sérsníðing Eftirlæta og GPX-ferilpunkta – sérsniðnir litir, táknmyndir, laganir
+\n
+\n • Sérsníðing á röð atriða í \"Samhengisvalmynd\", \"Stilla kort\" og \"Sleði\"
+\n
+\n • Wikipedia er nú sérstakt lag í kortastillingum, hægt að velja aðeins nauðsynleg tungumál
+\n
+\n • Hægt að útbúa sínar eigin síur eða kort fyrir merkisstaði/POI með miklum sveigjanleika
+\n
+\n • Möguleikar á að endurheimta stillingar í sérsniðnum leiðsagnarsniðum
+\n
+\n • Fullur stuðningur við GPX-leiðir úr leiðsögn með akreinum og leiðbeiningum fyrir beygjur
+\n
+\n • Bætt viðmót á spjaldtölvum
+\n
+\n • Löguð vandamál í RTL
+\n
+\n</string>
+    <string name="gpx_split_interval_descr">Veldu bilið þar sem merki með tíma eða vegalengd á ferlinum verða birt.</string>
+    <string name="attach_to_the_roads">Tengja við vegina</string>
+    <string name="plan_route_exit_dialog_descr">Ertu viss um að þú viljir loka leiðaskipulagningu án þess að vista\? Þú munt tapa öllum breytingum.</string>
+    <string name="marker_save_as_track">Vista sem ferilskrá</string>
+    <string name="threshold_distance">Þolvik vegalengdar</string>
+    <string name="save_track_to_gpx_globally">Skrifa feril í GPX-skrá</string>
+    <string name="navigate_to_track_descr">Leiðsegja frá staðsetningu minni að ferlinum</string>
+    <string name="follow_track">Fylgja ferli</string>
+    <string name="plan_route_change_route_type_before">Skipta um gerð leiðar á undan</string>
+    <string name="gpx_split_interval_none_descr">Veldu hvernig þú vilt skipta upp: eftir tíma eða vegalengd.</string>
+    <string name="shared_string_save_as_gpx">Vista sem nýja ferilskrá</string>
+    <string name="follow_track_descr">Veldu ferilskrá til að fylgja</string>
+    <string name="quick_action_remove_next_destination_descr">Puntinum á núverandi áfangastað leiðarinnar verður eytt. Ef þetta er sjálfur áfangastaðurinn, mun leiðsögn stöðvast.</string>
+    <string name="delete_address">Eyða heimilisfangi</string>
+    <string name="layer_gpx_layer">Ferlar</string>
+    <string name="start_of_the_track">Upphaf ferils</string>
+    <string name="shared_string_gpx_files">Ferlar</string>
+    <string name="access_hint_enter_address">Settu inn heimilisfang</string>
+    <string name="import_track_descr">Veldu ferilskrá til að fylgja eða flyttu inn úr tæki.</string>
+    <string name="add_segment_to_the_track">Bæta í ferilskrá</string>
+    <string name="rourte_between_points_warning_desc">Til að nota þennan valkost þarf OsmAnd að festa ferilinn þinn við vegi á kortinu.
+\n
+\nÍ næsta skrefi þarftu að velja leiðsagnarsnið svo hægt sé að finna hvaða vegir séu leyfilegir og hvaða þolvik vegalengdar eigi að miða við til að nálga ferilinn þinn við fyrirliggjandi vegi.</string>
+    <string name="empty_state_my_tracks">Bæta við ferilskrám</string>
+    <string name="app_mode_inline_skates">Línuskautar</string>
+    <string name="add_address">Bæta við heimilisfangi</string>
+    <string name="empty_state_my_tracks_desc">Flytja inn ferilskrár eða skrá niður ferla</string>
+    <string name="map_widget_monitoring">Skráning ferðar</string>
+    <string name="nearest_point">Næsti punktur</string>
+    <string name="show_gpx">Ferlar</string>
+    <string name="monitoring_control_start">GPX</string>
+    <string name="plan_route_trim_before">Klippa á undan</string>
+    <string name="context_menu_item_add_waypoint">Bæta við leiðarpunkti í feril</string>
+    <string name="plan_route_change_route_type_after">Skipta um gerð leiðar eftir</string>
+    <string name="plan_route_trim_after">Klippa á eftir</string>
+    <string name="quick_action_add_gpx">Bæta við leiðarpunkti í feril</string>
+    <string name="pass_whole_track_descr">Punktur ferilsins sem nota á við leiðsögn</string>
+    <string name="add_hidden_group_info">Viðbættur punktur verður ekki sýnilegur á kortinu þar sem valinn hópur er falinn, þu getur fundið hann í \"%s\".</string>
+    <string name="shared_string_gpx_route">Skrá leið í feril</string>
+    <string name="select_another_track">Velja annan feril</string>
+    <string name="save_track_to_gpx">Skrifa feril sjálfkrafa í GPX-skrá á meðan leiðsögn stendur</string>
 </resources>
