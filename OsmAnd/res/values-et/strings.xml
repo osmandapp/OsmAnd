@@ -77,7 +77,7 @@
     <string name="location_on_map">Asukoht:
 \n Lai %1$s
 \n Pik %2$s</string>
-    <string name="notes">Märkmed</string>
+    <string name="notes">Audio/video märkmed</string>
     <string name="online_map">Veebikaart</string>
     <string name="roads_only">Ainult teed</string>
     <string name="rendering_attr_pisteRoutes_name">Suusamäed</string>
@@ -141,7 +141,7 @@
     <string name="rendering_value_bold_name">Rasvane</string>
     <string name="no_map_markers_found">Palun lisa kaardi markerid kaardi abil</string>
     <string name="no_waypoints_found">Marsruudipunkte ei leitud</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Tänavataseme vaated</string>
     <string name="increase_search_radius">Suurenda otsingu raadiust</string>
     <string name="nothing_found">Ei leitud midagi</string>
     <string name="nothing_found_descr">Muuda otsingu päringut või laienda selle raadiust.</string>
@@ -888,7 +888,7 @@
     <string name="list_of_installed_plugins">Paigaldatud laiendused</string>
     <string name="configure_navigation">Seadista navigeerimine</string>
     <string name="general_settings_profile_descr">Rakenduse teema, ühikud, piirkond</string>
-    <string name="configure_profile">Seadista profiil</string>
+    <string name="configure_profile">Seadista profiili</string>
     <string name="screen_alerts_descr">Hoiatused kuvatakse navigeerimise ajal all vasakul.</string>
     <string name="switch_profile">Vaheta profiili</string>
     <string name="language_and_output">Keel ja väljund</string>
@@ -1213,7 +1213,7 @@
     <string name="plugin_touringview_name">Teekaardi vaade</string>
     <string name="plugin_ski_name">Suusakaardi vaade</string>
     <string name="osmand_parking_plugin_name">Parkimiskoht</string>
-    <string name="osmand_distance_planning_plugin_name">Kauguse kalkulaator &amp; planeerimistöövahend</string>
+    <string name="osmand_distance_planning_plugin_name">Kauguse kalkulaator ja planeerimistöövahend</string>
     <string name="osm_settings">OpenStreetMap\'i muutmine</string>
     <string name="rename_failed">Ümber nimetamine ebaõnnestus.</string>
     <string name="days_behind">päeva maas</string>
@@ -1482,8 +1482,8 @@
     <string name="routing_attr_avoid_unpaved_description">Väldib sillutamata teid</string>
     <string name="routing_attr_avoid_ferries_name">Väldi praame</string>
     <string name="routing_attr_avoid_ferries_description">Väldib praame</string>
-    <string name="routing_attr_avoid_motorway_name">Väldi maanteid</string>
-    <string name="routing_attr_avoid_motorway_description">Väldib maanteid</string>
+    <string name="routing_attr_avoid_motorway_name">Väldi kiirteid</string>
+    <string name="routing_attr_avoid_motorway_description">Väldib kiirteid</string>
     <string name="routing_attr_avoid_borders_description">Väldib riigipiiride ületusi</string>
     <string name="routing_attr_weight_name">Kaalupiirang</string>
     <string name="routing_attr_weight_description">Määra teedel lubatud sõiduki kaal.</string>
@@ -1755,7 +1755,7 @@
     <string name="map_widget_renderer">Kaardi stiil</string>
     <string name="layer_map_appearance">Ekraani seadistamine</string>
     <string name="show_lanes">Sõidurajad</string>
-    <string name="avoid_unpaved">Väldi sillutamata teid</string>
+    <string name="avoid_unpaved">Ära kasuta sillutamata teid</string>
     <string name="avoid_ferries">Väldi praame</string>
     <string name="avoid_in_routing_title">Väldi…</string>
     <string name="map_widget_show_ruler">Joonlaud</string>
@@ -2576,7 +2576,7 @@
     <string name="analyze_on_map">Analüüsi kaardil</string>
     <string name="subscribe_email_desc">Liitu meie meililistiga rakenduse allahindluste kohta teabe saamiseks ja saate veel 3 kaardi allalaadimist!</string>
     <string name="quick_action_add_destination_desc">Nupp ekraani keskkoha teekonna sihtkohaks muutmiseks; ühest varem valitud sihtkohast saab viimane vahesihtkoht.</string>
-    <string name="quick_action_replace_destination_desc">Selle nupu vajutamine muudab ekraani keskkoha uueks teekonna sihtkohaks, asendades eelnevalt valitud sihtkoha (kui olemas).</string>
+    <string name="quick_action_replace_destination_desc">Nupp, mille vajutamine muudab ekraani keskkoha uueks teekonna sihtkohaks, asendades eelnevalt valitud sihtkoha (kui olemas).</string>
     <string name="quick_action_add_first_intermediate_desc">Nupp ekraani keskkoha esimeseks vahesihtkohaks muutmiseks.</string>
     <string name="quick_action_auto_zoom_desc">Nupp, mis lülitab automaatse kiirusetundliku suumimise sisse või välja.</string>
     <string name="shared_string_paused">Peatatud</string>
@@ -2708,8 +2708,8 @@
     <string name="plugin_ski_descr">See OsmAnd laiendus toob sõrmeulatusse üksikasjad globaalsete mäesuusatamise nõlvade, murdmaasuusaradade, mäesuusaradade, köisraudteede ja suusaliftide kohta. Teekonnad ja suusaradade raskusastmed on tähistatud värvikoodidega ning kujutatud spetsiaalses talvises kaardistiilis, mis sulab ühte lumivalge talvemaastikuga.
 \n
 \nSelle vaate aktiveerimine muudab kaardi stiili väärtuseks \'Talv ja suusk\', mis näitab kõiki maastikuomadusi talvetingimustes. Selle vaate saab tagasi lülitada, aktiveerides selle siin uuesti või muutes vastavalt vajadusele jaotises \'Kaardi seadistamine\' \'Kaardistiil\'.</string>
-    <string name="audionotes_plugin_description">Heli/video märkmete lisa pakub funktsionaalsust, mille abil saad reisi ajal teha heli/pildi/videomärkmeid, kasutades kas kaardi nuppu või otse kontekstimenüüd kaardi mistahes asukoha jaoks.</string>
-    <string name="osmand_parking_plugin_description">Parkimiskoha lisa võimaldab registreerida oma auto parkimiskohta ja jälgida järelejäänud parkimisaega (kui ajaline piirang kehtib).
+    <string name="audionotes_plugin_description">Tee reisi ajal heli-, pildi- või videomärkmeid, kasutades kas kaardi nuppu või otse kontekstimenüüd.</string>
+    <string name="osmand_parking_plugin_description">Võimaldab registreerida oma auto parkimiskoha ja jälgida järelejäänud parkimisaega.
 \nNii asukoht kui aeg on nähtavad nii OsmAnd armatuurlaual kui kaardi vidinas. Meeldetuletust saab lisada Androidi kalendrisse.</string>
     <string name="unit_of_length_descr">Muuda kauguse mõõtmise ühikuid.</string>
     <string name="osmand_distance_planning_plugin_description">See lisa annab kaardi vidina, mis võimaldab teekondade loomist kaarti koputades või olemasolevaid GPX-faile kasutades, et reise kavandada ja punktide vahelist kaugust mõõta. Tulemusi saab salvestada GPX-failina, mida saab hiljem juhendamiseks kasutada.</string>
@@ -2723,7 +2723,7 @@
     <string name="background_service_is_enabled_question">OsmAnd taustateenus töötab endiselt. Kas see ka lõpetada\?</string>
     <string name="save_track_to_gpx_globally_descr">GPX faili üldist asukoha logimist saab sisse või välja lülitada kaardil oleva GPX logimisvidina abil.</string>
     <string name="live_monitoring_m_descr">Saada jälgimisandmed kindlaksmääratud veebiteenusele kui GPX logimine on sisse lülitatud.</string>
-    <string name="android_19_location_disabled">Android 4.4 (KitKat) alates ei ole vanemad salvestuskaustad (%s) enam toetatud. Kas kopeerida kõik OsmAnd failid uude salvestuskohta\?
+    <string name="android_19_location_disabled">Alates Android 4.4 (KitKat) ei ole vanemad salvestuskaustad (%s) enam toetatud. Kas kopeerime kõik OsmAnd failid uude salvestuskohta\?
 \n Märkus 1: Vanad failid jäävad puutumatuks (kuid neid saab käsitsi kustutada).
 \n Märkus 2: Uues salvestuskohas pole faile võimalik OsmAnd ja OsmAnd+ vahel jagada.</string>
     <string name="local_osm_changes_delete_all_confirm">Oled kindel, et soovid %1$d OSM muudatust kustutada\?</string>
@@ -2745,7 +2745,7 @@
     <string name="srtm_paid_version_msg">Edasise arendustöö toetamiseks palun kaalu Kõrgusjoonte lisa ostmist.</string>
     <string name="recording_playing">Esitatakse määratud salvestuse heli.
 \n%1$s</string>
-    <string name="audionotes_location_not_defined">Puuduta \'Kasuta asukohta…\' asukohta märkuse lisamiseks.</string>
+    <string name="audionotes_location_not_defined">Puuduta „Kasuta asukohta…“ asukohta märkuse lisamiseks.</string>
     <string name="rendering_attr_noAdminboundaries_description">Tühista piirkondlike piiride kuvamine (administraatori tasemed 5–9).</string>
     <string name="zxing_barcode_scanner_not_found">ZXing triipkoodilugeja rakendust ei ole paigaldatud. Kas otsida Google Playst\?</string>
     <string name="enable_plugin_monitoring_services">Asukoha logimise teenuste kasutamiseks (GPX logimine, veebis jälgimine) luba \"Reisi salvestamine\" lisa</string>
@@ -3446,8 +3446,8 @@
     <string name="saving_new_profile">Uue profiili salvestamine</string>
     <string name="restore_all_profile_settings">Kas taastada kõik profiili seaded\?</string>
     <string name="restore_all_profile_settings_descr">Kõik profiili seaded lähtestatakse peale selle profiili loomist/importimist algväärtustele.</string>
-    <string name="clear_recorded_data_warning">Kas tõesti kustutada salvestatud andmed\?</string>
-    <string name="recalculate_route_in_deviation">Arvutada teekond kõrvalekaldel ümber</string>
+    <string name="clear_recorded_data_warning">Kas sa tõesti soovid kustutada salvestatud andmed\?</string>
+    <string name="recalculate_route_in_deviation">Kõrvalekaldel arvuta teekond ümber</string>
     <string name="select_distance_route_will_recalc">Vali eemaldumine alates millest teekond arvutatakse ümber.</string>
     <string name="recalculate_route_distance_promo">Teekonna ümberarvutus, kui kaugus teekonnast praegusesse asukohta on suurem valitud väärtusest.</string>
     <string name="n_items_of_z">%1$s %2$s-st</string>
@@ -3641,4 +3641,60 @@
     <string name="shared_string_tones">toonid</string>
     <string name="shared_string_meters">meetrit</string>
     <string name="details_dialog_decr">Näita või peida täiendavaid andmeid kaardil</string>
+    <string name="export_profile_dialog_description">Võid valida täiendavad teavet, mida profiili ekspordil kaasa pannakse.</string>
+    <string name="profile_prefs_reset_successful">Kõik profiilide seadistused on lähtestatud.</string>
+    <string name="plugin_prefs_reset_successful">Kõikide lisaprogrammide seadistused on lähtestatud.</string>
+    <string name="additional_actions_descr">Nendele toimingutele pääsed ligi klõpsides nuppu „%1$s“.</string>
+    <string name="shared_string_legal">Juriidiline teave</string>
+    <string name="reverse_route">Pööra marsruut teistpidi</string>
+    <string name="whole_track">Terve rada</string>
+    <string name="next_segment">Järgmine segment</string>
+    <string name="navigation_profile">Navigeerimisprofiil</string>
+    <string name="rourte_between_points_add_track_desc">Vali rajafail, millele lisame uue segmendi.</string>
+    <string name="street_level_imagery">Tänavataseme vaated</string>
+    <string name="plan_route_exit_dialog_descr">Kas sa oled kindel et soovid sulgeda teekonna planeerija ilma seda salvestamata\? Kõik muudatused lähevad kaotsi.</string>
+    <string name="in_case_of_reverse_direction">Vastupidise suuna korral</string>
+    <string name="reorder_or_hide_from">Muuda järjekorda või peida kirjed %1$s\'st.</string>
+    <string name="hidden_items_descr">Need kirjed on menüüs peidetuna, kuid tehtud valikud või lisaprogrammid on jätkuvalt kasutatavad.</string>
+    <string name="move_inside_category">Sa võid kirjeid liigutada vaid selle kategooria piires.</string>
+    <string name="shared_string_items">Kirjed</string>
+    <string name="reset_deafult_order">Taasta kirjete vaikimisi järjekord</string>
+    <string name="expire_time_descr">Puhverdatud paanid laetakse uuesti alla peale nimetatud minutite möödumist. Kui sa ei soovi uuendamist, siis jäta väli tühjaks.
+\n
+\nÜks päev on 1440 minutit.
+\nÜks nädal on 10080 minutit.
+\nÜks kuu on 43829 minutit.</string>
+    <string name="navigation_profiles_item">Navigeerimisprofiilid</string>
+    <string name="reset_to_default_category_button_promo">„Lähtesta vaikeseadeteks“ taastab paigaldusjärgse vaikimisi sortimisjärjekorra.</string>
+    <string name="developer_plugin">Lisaprogramm arendajale</string>
+    <string name="download_unsupported_action">Toiming %1$s ei ole toetatud</string>
+    <string name="rourte_between_points_whole_track_button_desc">Terve rada arvutatakse valitud profiili abil uuesti.</string>
+    <string name="save_as_new_track">Salvesta uue rajana</string>
+    <string name="overwrite_track">Kirjuta rada üle</string>
+    <string name="create_poi_link_to_osm_doc"><u>Veebipõhine OSM</u> kaartide klassifikatsioon piltidega.</string>
+    <string name="save_track_to_gpx">Salvesta rada automaatselt navigeerimise ajal</string>
+    <string name="empty_state_my_tracks_desc">Impordi rajafaile või salvesta radu</string>
+    <string name="shared_string_save_as_gpx">Salvesta uue rajafailina</string>
+    <string name="add_segment_to_the_track">Lisa rajafaili</string>
+    <string name="shared_string_gpx_files">Rajafailid</string>
+    <string name="layer_gpx_layer">Rajafailid</string>
+    <string name="show_gpx">Näita radu</string>
+    <string name="save_track_to_gpx_globally">Logi teekond GPX faili</string>
+    <string name="shared_string_gpx_route">Raja teekond</string>
+    <string name="empty_state_my_tracks">Lisa rajafaile</string>
+    <string name="context_menu_item_add_waypoint">Lisa rajale teekonnapunkt</string>
+    <string name="quick_action_add_gpx">Lisa rajale teekonnapunkt</string>
+    <string name="map_widget_monitoring">Teekonna salvestamine</string>
+    <string name="marker_save_as_track">Salvesta rada failina</string>
+    <string name="follow_track">Jälgi rada</string>
+    <string name="follow_track_descr">Vali rajafail, mida soovid kasutada</string>
+    <string name="import_track_descr">Vali rajafail, mida soovid kasutada või impordi see seadmest.</string>
+    <string name="select_another_track">Vali muu rada</string>
+    <string name="navigate_to_track_descr">Navigeeri minu asukohast rajale</string>
+    <string name="pass_whole_track_descr">Asukoht rajal, kuhu me liigume</string>
+    <string name="start_of_the_track">Raja algus</string>
+    <string name="nearest_point">Lähim punkt</string>
+    <string name="delete_address">Kustuta aadress</string>
+    <string name="add_address">Lisa aadress</string>
+    <string name="access_hint_enter_address">Sisesta aadress</string>
 </resources>
