@@ -72,7 +72,7 @@ All main functionalities work both online and offline (no internet needed).
 
 
 OsmAnd is open-source and actively being developed.
-Everyone can contribute to the application by reporting bugs, [improving translations](https://hosted.weblate.org/projects/osmand/), or coding new features.
+Everyone can contribute to the application by reporting bugs, [improving translations](https://hosted.weblate.org/projects/osmand/), or coding new features. Please read the [contributing documentation](./CONTRIBUTING.md) first! Developers can then dive in [instructions documentation](./INSTALL.md).
 The project experiences continuous improvement by all such forms of developer and user interaction.
 The project progress also relies on financial contributions to fund the development, coding, and testing of new functionality.
 By buying OsmAnd+ and subscribing to OsmAnd Live, you help the application become even more awesome!

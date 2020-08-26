@@ -2,6 +2,7 @@
 name: "\U0001F41E Bug report"
 about: Report a bug in OsmAnd
 ---
+
 <!--🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅🔅
 
 Oh hi there! 😄
@@ -28,29 +29,29 @@ Please give us the following information so that we can try to **reproduce** you
 <!-- Did this behavior use to work in the previous version? -->
 <!-- ✍️--> Yes, the previous version in which this bug was not present was: ....
 
-
 ### Description
 
-<!-- ✍️--> A clear and concise description of the problem...
-
+<!-- A clear and concise description of the problem... -->
 
 ## 🔬 Minimal Reproduction
+
 <!--
 If the bug is reproducible, please describe steps below:
 -->
 <!-- ✍️--> 1. Open app, and click on ...
 
 ## 🔥 Exception or Error
+
 <pre><code>
 <!-- If the issue is accompanied by an exception or an error, please share it below: -->
 <!-- ✍️-->
 
 </code></pre>
 
-
-## 🌍  Your Environment
+## 🌍 Your Environment
 
 **OsmAnd Version:**
+
 <pre><code>
 <!-- paste version below -->
 <!-- ✍️-->
@@ -60,10 +61,11 @@ If the bug is reproducible, please describe steps below:
 **Device and Android/iOS version:**
 
 **Maps used (online or offline):**
-<!-- Please tick the correct box [x] (or both) -->
-- [ ] Offline maps offered within the OsmAnd app for download. 
-  <!-- If you have an issue related to offline maps, tell us the exact name of the map file where the issue occurs and its edition date. -->
-- [ ] Online (tile / raster) maps <!-- Please name it -->
 
+<!-- Please tick the correct box [x] (or both) -->
+
+- [ ] Offline maps offered within the OsmAnd app for download.
+<!-- If you have an issue related to offline maps, tell us the exact name of the map file where the issue occurs and its edition date. -->
+- [ ] Online (tile / raster) maps <!-- Please name it -->
 
 **Anything else relevant?**
