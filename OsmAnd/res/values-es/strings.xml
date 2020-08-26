@@ -3804,4 +3804,5 @@
     <string name="plan_route_open_existing_track">Abrir la pista existente</string>
     <string name="plan_route_create_new_route">Crea una nueva ruta</string>
     <string name="plan_a_route">Planea una ruta</string>
+    <string name="plan_route_change_route_type_before">Cambia el tipo de router antes</string>
 </resources>
