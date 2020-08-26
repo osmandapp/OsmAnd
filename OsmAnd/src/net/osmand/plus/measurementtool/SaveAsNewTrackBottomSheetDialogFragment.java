@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
@@ -33,10 +34,14 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	public static final String TAG = SaveAsNewTrackBottomSheetDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SaveAsNewTrackBottomSheetDialogFragment.class);
+	public static final String SHOW_ON_MAP_KEY = "show_on_map_key";
+	public static final String SIMPLIFIED_TRACK_KEY = "simplified_track_key";
+	public static final String FOLDER_NAME_KEY = "folder_name_key";
 
 	boolean showOnMap;
 	boolean simplifiedTrack;
 	String fileName;
+	String folderName;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -44,11 +49,16 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		if (app == null) {
 			return;
 		}
+		if (savedInstanceState != null) {
+			showOnMap = savedInstanceState.getBoolean(SHOW_ON_MAP_KEY);
+			simplifiedTrack = savedInstanceState.getBoolean(SIMPLIFIED_TRACK_KEY);
+			folderName = savedInstanceState.getString(FOLDER_NAME_KEY);
+		}
 		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 
 		items.add(new TitleItem(getString(R.string.shared_string_save_as_gpx)));
 
-		View editNameView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.markers_track_name_edit_text,
+		View editNameView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.track_name_edit_text,
 				null, false);
 		TextInputLayout nameTextBox = editNameView.findViewById(R.id.name_text_box);
 		nameTextBox.setBoxBackgroundColorResource(R.color.material_text_input_layout_bg);
@@ -56,9 +66,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
 				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
 		nameTextBox.setDefaultHintTextColor(colorStateList);
-		if (nameTextBox.getEditText() != null) {
-			AndroidUtils.setHintTextSecondaryColor(app, nameTextBox.getEditText(), nightMode);
-		}
+		TextInputEditText nameText = editNameView.findViewById(R.id.name_edit_text);
+		nameText.setText(fileName);
 		BaseBottomSheetItem editFileName = new BaseBottomSheetItem.Builder()
 				.setCustomView(editNameView)
 				.create();
@@ -70,7 +79,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 
-		FolderListAdapter adapter = new FolderListAdapter(app, nightMode);
+		FolderListAdapter adapter = new FolderListAdapter(app, nightMode, folderName);
+		adapter.setListener(createFolderSelectListener());
 		View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_item_recyclerview,
 				null, false);
 		View recyclerView = view.findViewById(R.id.recycler_view);
@@ -131,11 +141,29 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment) {
+	private FolderListAdapter.FolderListAdapterListener createFolderSelectListener() {
+		return new FolderListAdapter.FolderListAdapterListener() {
+			@Override
+			public void onItemSelected(String item) {
+				folderName = item;
+			}
+		};
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putBoolean(SHOW_ON_MAP_KEY, showOnMap);
+		outState.putBoolean(SIMPLIFIED_TRACK_KEY, simplifiedTrack);
+		outState.putString(FOLDER_NAME_KEY, folderName);
+		super.onSaveInstanceState(outState);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment, String fileName) {
 		try {
 			if (!fm.isStateSaved()) {
 				SaveAsNewTrackBottomSheetDialogFragment fragment = new SaveAsNewTrackBottomSheetDialogFragment();
 				fragment.setTargetFragment(targetFragment, 0);
+				fragment.fileName = fileName;
 				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {

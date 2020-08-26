@@ -29,17 +29,15 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Gr
 
 	List<String> items = new ArrayList<>();
 
-	void setSelectedItemName(String selectedItemName) {
-		this.selectedItemName = selectedItemName;
-	}
-
 	String selectedItemName;
 	OsmandApplication app;
 	boolean nightMode;
+	FolderListAdapterListener listener;
 
-	FolderListAdapter(OsmandApplication app, boolean nightMode) {
+	FolderListAdapter(OsmandApplication app, boolean nightMode, String folderName) {
 		this.app = app;
 		this.nightMode = nightMode;
+		selectedItemName = folderName;
 		fillGroups();
 	}
 
@@ -85,6 +83,9 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Gr
 				selectedItemName = items.get(holder.getAdapterPosition());
 				notifyItemChanged(holder.getAdapterPosition());
 				notifyItemChanged(previousSelectedPosition);
+				if (listener != null) {
+					listener.onItemSelected(selectedItemName);
+				}
 			}
 		});
 		final String group = Algorithms.capitalizeFirstLetter(items.get(position));
@@ -120,12 +121,12 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Gr
 		return items == null ? 0 : items.size();
 	}
 
-	String getSelectedItem() {
-		return selectedItemName;
-	}
-
 	int getItemPosition(String name) {
 		return items.indexOf(name);
+	}
+
+	public void setListener(FolderListAdapterListener listener) {
+		this.listener = listener;
 	}
 
 	static class GroupsViewHolder extends RecyclerView.ViewHolder {
@@ -140,5 +141,10 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Gr
 			groupIcon = itemView.findViewById(R.id.groupIcon);
 			groupButton = itemView.findViewById(R.id.outlineRect);
 		}
+	}
+
+	public interface FolderListAdapterListener {
+
+		void onItemSelected(String item);
 	}
 }

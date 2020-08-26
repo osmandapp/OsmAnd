@@ -41,6 +41,7 @@
 			android:layout_marginRight="@dimen/content_padding_small"
 			android:layout_gravity="end"
 			android:background="@null"
+			android:saveEnabled="false"
 			android:clickable="false"
 			android:focusable="false"
 			android:focusableInTouchMode="false" />

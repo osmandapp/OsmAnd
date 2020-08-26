@@ -1,6 +1,5 @@
 package net.osmand.plus.mapmarkers;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.ContextThemeWrapper;
@@ -70,14 +69,10 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		titleTv.setText(openFromCoordinateInput ? R.string.coord_input_save_as_track : R.string.marker_save_as_track);
 		titleTv.setTextColor(ContextCompat.getColor(getContext(), textPrimaryColor));
 		TextView descriptionTv = (TextView) mainView.findViewById(R.id.save_as_track_description);
-		descriptionTv.setText(openFromCoordinateInput ? getString(R.string.coord_input_save_as_track_descr, number) : getString(R.string.marker_save_as_track_descr));
-		int layoutRes;
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			layoutRes = R.layout.markers_track_name_text_field_box;
-		} else {
-			layoutRes = R.layout.markers_track_name_edit_text;
-		}
-		contentLayout.addView(getLayoutInflater().inflate(layoutRes, contentLayout, false), 2);
+		descriptionTv.setText(openFromCoordinateInput
+				? getString(R.string.coord_input_save_as_track_descr, String.valueOf(number))
+				: getString(R.string.marker_save_as_track_descr));
+		contentLayout.addView(getLayoutInflater().inflate(R.layout.track_name_edit_text, contentLayout, false), 2);
 		if (portrait) {
 			AndroidUtils.setBackground(getActivity(), mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}

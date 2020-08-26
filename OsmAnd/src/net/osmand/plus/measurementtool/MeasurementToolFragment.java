@@ -1033,7 +1033,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void openSaveAsNewTrackMenu(MapActivity mapActivity) {
 		if (mapActivity != null) {
 			if (editingCtx.getPointsCount() > 0) {
-				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+						this, getSuggestedFileName());
 			} else {
 				Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 			}
@@ -1329,7 +1330,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			});
 			showOnMapToggle.setChecked(true);
 
-			String displayedName = getSuggestedFileName(dir);
+			String displayedName = getSuggestedFileName();
 			nameEt.setText(displayedName);
 			nameEt.setSelection(displayedName.length());
 			final boolean[] textChanged = new boolean[1];
@@ -1388,17 +1389,21 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	private String getSuggestedFileName(File dir) {
+	private String getSuggestedFileName() {
 		GpxData gpxData = editingCtx.getGpxData();
 		String displayedName;
 		if (gpxData == null) {
 			final String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
 			displayedName = suggestedName;
-			File fout = new File(dir, suggestedName + GPX_FILE_EXT);
-			int ind = 0;
-			while (fout.exists()) {
-				displayedName = suggestedName + "_" + (++ind);
-				fout = new File(dir, displayedName + GPX_FILE_EXT);
+			OsmandApplication app = getMyApplication();
+			if (app != null) {
+				File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+				File fout = new File(dir, suggestedName + GPX_FILE_EXT);
+				int ind = 0;
+				while (fout.exists()) {
+					displayedName = suggestedName + "_" + (++ind);
+					fout = new File(dir, displayedName + GPX_FILE_EXT);
+				}
 			}
 		} else {
 			displayedName = AndroidUtils.trimExtension(new File(gpxData.getGpxFile().path).getName());
@@ -1639,7 +1644,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			return;
 		}
 		final GpxData gpxData = editingCtx.getGpxData();
-		String fileName = getSuggestedFileName(mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR));
+		String fileName = getSuggestedFileName();
 		String actionStr = getString(R.string.plan_route);
 		boolean editMode = isInEditMode();
 		if (editMode) {
