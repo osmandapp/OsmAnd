@@ -3842,4 +3842,5 @@
     <string name="next_segment">Nächstes Segment</string>
     <string name="navigation_profile">Navigationsprofil</string>
     <string name="rourte_between_points_add_track_desc">Wählen Sie eine Trackdatei, für die ein neues Segment hinzugefügt werden soll.</string>
+    <string name="follow_track_descr">Track auswählen, der verfolgt werden soll</string>
 </resources>
