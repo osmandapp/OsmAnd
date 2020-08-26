@@ -15,6 +15,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ProfileCard extends BaseCard {
@@ -34,9 +35,15 @@ public class ProfileCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-
 		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
 		modes.remove(ApplicationMode.DEFAULT);
+		Iterator<ApplicationMode> iterator = modes.iterator();
+		while (iterator.hasNext()) {
+			ApplicationMode mode = iterator.next();
+			if ("public_transport".equals(mode.getRoutingProfile())) {
+				iterator.remove();
+			}
+		}
 		for (int i = 0; i < modes.size(); i++) {
 			ApplicationMode mode = modes.get(i);
 			LinearLayout container = view.findViewById(R.id.content_container);

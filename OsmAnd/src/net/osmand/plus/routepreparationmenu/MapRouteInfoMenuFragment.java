@@ -477,8 +477,8 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		AndroidUtils.setBackground(ctx, getCardsContainer(), isNightMode(),
 				R.color.activity_background_light, R.color.activity_background_dark);
 
-		if (getTopViewId() != 0) {
-			View topView = view.findViewById(getTopViewId());
+		if (getTopView() != null) {
+			View topView = getTopView();
 			AndroidUtils.setBackground(ctx, topView, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		}
 

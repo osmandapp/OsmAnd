@@ -34,7 +34,8 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.*;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.LEFT;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.RIGHT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.NEXT_SEGMENT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
@@ -120,8 +121,10 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 
 		for (int i = 0; i < modes.size(); i++) {
 			ApplicationMode mode = modes.get(i);
-			icon = app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
-			addProfileView(navigationType, onClickListener, i, icon, mode.toHumanString(), mode.equals(appMode));
+			if (!"public_transport".equals(mode.getRoutingProfile())) {
+				icon = app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
+				addProfileView(navigationType, onClickListener, i, icon, mode.toHumanString(), mode.equals(appMode));
+			}
 		}
 
 		segmentBtn.setOnClickListener(new View.OnClickListener() {

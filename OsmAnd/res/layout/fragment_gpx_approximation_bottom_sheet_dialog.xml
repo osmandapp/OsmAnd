@@ -11,7 +11,25 @@
 		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
-		<include layout="@layout/context_menu_top_shadow" />
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<include layout="@layout/context_menu_top_shadow" />
+
+			<include
+				layout="@layout/plan_route_progress_bar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom" />
+
+		</FrameLayout>
+
+		<LinearLayout
+			android:id="@+id/gpx_approximation_top_shadow_all"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical" />
 
 		<FrameLayout
 			android:id="@+id/bottom_container"
@@ -35,8 +53,6 @@
 				</LinearLayout>
 
 			</net.osmand.plus.LockableScrollView>
-
-			<include layout="@layout/plan_route_progress_bar"/>
 
 		</FrameLayout>
 
