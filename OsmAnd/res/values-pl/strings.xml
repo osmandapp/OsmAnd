@@ -1322,7 +1322,7 @@
     <string name="traffic_warning_border_control">Kontrola graniczna</string>
     <string name="traffic_warning_payment">Punkt poboru opłat</string>
     <string name="traffic_warning_stop">Znak Stop</string>
-    <string name="traffic_warning_calming">Próg zwalniający</string>
+    <string name="traffic_warning_calming">Spowolnienie ruchu</string>
     <string name="traffic_warning_speed_camera">Fotoradar</string>
     <string name="traffic_warning">Ostrzeżenia drogowe</string>
     <string name="local_index_description">Kliknij istniejący element, aby zobaczyć szczegóły, naciśnij i przytrzymaj, aby wyłączyć lub usunąć. Aktualne dane na urządzeniu (%1$s wolne):</string>
@@ -3254,7 +3254,7 @@
     <string name="analytics_pref_title">Analityka</string>
     <string name="turn_screen_on_info">Wyświetla mapę na ekranie blokady podczas nawigacji.</string>
     <string name="route_parameters_info">Ustawienia wyznaczania trasy w wybranym profilu „%1$s”.</string>
-    <string name="wake_time">Czas wybudzenia</string>
+    <string name="wake_time">Czas oczekiwania po przebudzeniu</string>
     <string name="configure_navigation">Konfiguruje nawigację</string>
     <string name="screen_alerts_descr">Alerty będą wyświetlane w lewym dolnym rogu podczas nawigacji.</string>
     <string name="reset_to_default">Przywróć ustawienia domyślne</string>
@@ -3441,7 +3441,7 @@
     <string name="permission_is_required">Wymagane jest zezwolenie na korzystanie z tej opcji.</string>
     <string name="not_support_file_type_with_ext">Proszę wybrać obsługiwany plik z rozszerzeniem %1$s.</string>
     <string name="monitoring_min_speed_descr_remark">Uwaga: kontrola prędkości &gt; 0: większość zestawów GPS zgłasza wartość prędkości tylko wtedy, gdy algorytm określa, że jesteś w ruchu, a żadna, jeśli nie jesteś. Dlatego użycie ustawienia &gt; 0 w tym filtrze w pewnym sensie wykorzystuje wykrywanie ruchu chipsetu GPS. Ale nawet jeśli nie zostanie przefiltrowane tutaj w czasie nagrywania, nadal używamy tej funkcji w naszej analizie GPX do określenia skorygowanej odległości, tj. wartość wyświetlana w tym polu to odległość zarejestrowana podczas ruchu.</string>
-    <string name="monitoring_min_accuracy_descr">Spowoduje to zapisanie tylko punktów mierzonych ze wskazaniem minimalnej dokładności (w metrach/stopach, zgodnie z raportem systemu Android dla Twojego chipsetu). Dokładność to bliskość pomiarów do rzeczywistej pozycji i nie jest bezpośrednio związana z precyzją, która jest rozproszeniem powtarzanych pomiarów.</string>
+    <string name="monitoring_min_accuracy_descr">Spowoduje to rejestrowanie tylko punktów mierzonych przy minimalnym wskaźniku dokładności (w metrach/stopach, zgodnie z raportem systemu Android dla Twojego chipsetu). Dokładność to bliskość pomiarów do rzeczywistej pozycji i nie jest bezpośrednio związana z precyzją, która jest rozrzutem powtarzanych pomiarów.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Zalecenie: trudno jest przewidzieć, jakie dane zostaną zarejestrowane, a jakie nie. Możliwe, że najlepiej będzie wyłączyć ten filtr.</string>
     <string name="monitoring_min_distance_descr">Zapobiega zapisywaniu powielonych punktów, zbyt mało oddalonych od siebie. Zapewnia bardziej przejrzysty wygląd śladów nie poddawanych późniejszej obróbce.</string>
     <string name="search_offline_geo_error">Nie można przeanalizować intencji geograficznej \'%s\'.</string>
@@ -3811,7 +3811,7 @@
     <string name="set_working_days_to_continue">Aby kontynuować, musisz ustawić dni robocze</string>
     <string name="route_between_points">Droga pomiędzy punktami</string>
     <string name="plan_a_route">Zaplanuj trasę</string>
-    <string name="add_to_a_track">Dodaj do śladów</string>
+    <string name="add_to_a_track">Dodaj do śladu</string>
     <string name="turn_screen_on_power_button_descr">Naciśnięcie przycisku zasilania urządzenia włączy ekran z OsmAnd u góry ekranu blokady.</string>
     <string name="quick_action_showhide_mapillary_descr">Przełącznik służący do pokazywania lub ukrywania warstwy Mapillary na mapie.</string>
     <string name="add_hidden_group_info">Dodany punkt nie będzie widoczny na mapie, ponieważ wybrana grupa jest ukryta, możesz ją znaleźć w „%s”.</string>
@@ -3839,13 +3839,44 @@
     <string name="threshold_distance">Odległość graniczna</string>
     <string name="navigation_profile">Profil nawigacji</string>
     <string name="rourte_between_points_add_track_desc">Wybierz plik ścieżki do którego zostanie dodany nowy segment.</string>
-    <string name="rourte_between_points_whole_track_button_desc">Cała ścieżka zostanie ponownie obliczona przy użyciu wybranego profilu.</string>
+    <string name="rourte_between_points_whole_track_button_desc">Cała trasa zostanie ponownie obliczona przy użyciu wybranego profilu.</string>
     <string name="rourte_between_points_next_segment_button_desc">Tylko następny segment zostanie ponownie obliczony przy użyciu wybranego profilu.</string>
     <string name="rourte_between_points_desc">Wybierz sposób łączenia punktów linią prostą lub obliczania trasy między nimi z wybranym profilem.</string>
     <string name="rourte_between_points_warning_desc">Aby skorzystać z tej opcji, OsmAnd musi przyciągnąć swój ślad do dróg mapy.
 \n
-\n W następnym kroku będziesz musiał wybrać profil nawigacji, aby wykryć dozwolone drogi i odległość progową, aby w przybliżeniu śledzić trasę z drogami.</string>
+\nW następnym kroku należy wybrać profil nawigacji w celu wykrycia dozwolonych dróg i odległości progowej w celu przybliżenia śledzenia drogi.</string>
     <string name="street_level_imagery">Zdjęcia z poziomu ulicy</string>
     <string name="plan_route_exit_dialog_descr">Czy na pewno chcesz zamknąć Planowanie trasy bez zapisywania\? Utracisz wszystkie zmiany.</string>
     <string name="in_case_of_reverse_direction">W przypadku odwrotnego kierunku</string>
+    <string name="navigate_to_track_descr">Przejdź z mojej lokalizacji na trasę</string>
+    <string name="app_mode_wheelchair_forward">Wózek naprzód</string>
+    <string name="show_gpx">Ślady</string>
+    <string name="follow_track">Ślad drogi</string>
+    <string name="import_track_descr">Wybierz plik śladu lub zaimportuj go z urządzenia.</string>
+    <string name="shared_string_save_as_gpx">Zapisz jako nowy plik śladu</string>
+    <string name="add_segment_to_the_track">Dodaj do pliku śladu</string>
+    <string name="shared_string_gpx_files">Ślady</string>
+    <string name="layer_gpx_layer">Ślady</string>
+    <string name="monitoring_control_start">GPX</string>
+    <string name="save_track_to_gpx_globally">Rejestrowanie śladu GPX</string>
+    <string name="shared_string_gpx_route">Trasa szlaku</string>
+    <string name="empty_state_my_tracks">Dodaj pliki śladów</string>
+    <string name="empty_state_my_tracks_desc">Importowanie lub rejestrowanie plików śladu</string>
+    <string name="context_menu_item_add_waypoint">Dodaj punkt orientacyjny</string>
+    <string name="quick_action_add_gpx">Dodaj punkt trasy</string>
+    <string name="map_widget_monitoring">Rejestrowanie śladu</string>
+    <string name="marker_save_as_track">Zapisz jako plik śladu</string>
+    <string name="follow_track_descr">Wybiera plik śladu do podążania</string>
+    <string name="select_another_track">Wybierz inną trasę</string>
+    <string name="pass_whole_track_descr">Punkt trasy do nawigacji</string>
+    <string name="start_of_the_track">Początek trasy</string>
+    <string name="nearest_point">Najbliższy punkt</string>
+    <string name="attach_to_the_roads">Dołącz do dróg</string>
+    <string name="delete_address">Usuń adres</string>
+    <string name="add_address">Dodaj adres</string>
+    <string name="access_hint_enter_address">Wpisz adres</string>
+    <string name="plan_route_trim_before">Przytnij przed</string>
+    <string name="plan_route_trim_after">Przytnij po</string>
+    <string name="plan_route_change_route_type_before">Zmień typ trasy przed</string>
+    <string name="plan_route_change_route_type_after">Zmień typ trasy po</string>
 </resources>
