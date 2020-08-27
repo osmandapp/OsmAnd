@@ -93,6 +93,9 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 				if (category.isVisible()) {
 					ll.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
 							category.getColor()));
+				} else {
+					ll.addView(createCategoryItemHidden(activity, nightMode, category.getDisplayName(getContext()),
+							category.getColor()));
 				}
 			}
 		}
@@ -131,6 +134,32 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 					getIcon(activity, R.drawable.ic_action_folder, ContextCompat.getColor(activity,
 							gpxFile != null ? R.color.gpx_color_point : R.color.color_favorite)), null, null, null);
 		}
+		button.setCompoundDrawablePadding(AndroidUtils.dpToPx(activity,15f));
+		String name = categoryName.length() == 0 ? getString(R.string.shared_string_favorites) : categoryName;
+		button.setText(name);
+		button.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentActivity a = getActivity();
+				if (a instanceof MapActivity) {
+					PointEditor pointEditor = ((MapActivity) a).getContextMenu().getPointEditor(editorTag);
+					if (pointEditor != null) {
+						pointEditor.setCategory(categoryName, categoryColor);
+					}
+					if (selectionListener != null) {
+						selectionListener.onCategorySelected(categoryName, categoryColor);
+					}
+				}
+				dismiss();
+			}
+		});
+		return itemView;
+	}
+
+	private View createCategoryItemHidden(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor) {
+		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_category_dialog_item, null);
+		Button button = (Button)itemView.findViewById(R.id.button);
+		button.setCompoundDrawablesWithIntrinsicBounds(getIcon(activity, R.drawable.ic_action_hide), null, null, null);
 		button.setCompoundDrawablePadding(AndroidUtils.dpToPx(activity,15f));
 		String name = categoryName.length() == 0 ? getString(R.string.shared_string_favorites) : categoryName;
 		button.setText(name);
