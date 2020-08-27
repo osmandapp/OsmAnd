@@ -61,6 +61,7 @@
 						android:ellipsize="end"
 						android:maxLines="1"
 						android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+						android:textColor="@null"
 						tools:text="Amstellend North Holland"/>
 
 					<TextView
@@ -70,6 +71,7 @@
 						android:ellipsize="end"
 						android:maxLines="1"
 						android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+						android:textColor="@null"
 						tools:text="En, Ru, De, ..."/>
 
 				</LinearLayout>

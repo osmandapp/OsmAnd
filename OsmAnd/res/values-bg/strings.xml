@@ -1092,8 +1092,6 @@
     <string name="lang_he">Иврит</string>
     <string name="forward">Напред</string>
     <string name="home">Табло за управление</string>
-    <string name="gpx_monitoring_start">Старт на записа в GPX</string>
-    <string name="gpx_monitoring_stop">Край на GPX записа</string>
     <string name="gpx_start_new_segment">Започни нов сегмент</string>
     <string name="rendering_attr_hideBuildings_name">Скрий сградите</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Скрий пътищата, които не са за автомобили</string>
@@ -1195,7 +1193,6 @@
     <string name="rendering_attr_hideHouseNumbers_name">Номер</string>
     <string name="application_dir_change_warning3">Да премести ли OsmAnd своите файлове на новото място\?</string>
     <string name="general_settings_2">Общи настройки</string>
-    <string name="save_global_track_interval_descr">Изберете интервал при запис на изминат път (достъпен чрез добавката за запис в GPX)</string>
     <string name="save_global_track_interval">Интервал за запис</string>
     <string name="search_for">Търси</string>
     <string name="shared_string_show_all">Покажи всички</string>
@@ -1389,7 +1386,6 @@
     <string name="shared_string_show_details">Покажи подробни данни</string>
     <string name="gps_network_not_enabled">Услугата за местоположение е изключена. Включване\?</string>
     <string name="disable_recording_once_app_killed">Предотвратяване на самостоятелно записване</string>
-    <string name="disable_recording_once_app_killed_descrp">Спира на пауза записа на GPX, когато приложението е затворено (от последни приложения). (Иконата на OsmAnd изчезва от лентата за уведомяване на Андроид.)</string>
     <string name="shared_string_import2osmand">Импортиране към OsmAnd</string>
     <string name="read_full_article">Прочетете пълната статия (онлайн)</string>
     <string name="local_recordings_delete_all_confirm">Сигурни ли сте, че искате да изтриете %1$d бележки\?</string>

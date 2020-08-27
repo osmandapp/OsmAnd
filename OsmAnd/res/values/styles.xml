@@ -40,19 +40,21 @@
         <item name="android:background">?attr/btn_round</item>
     </style>
 
-    <style name="FirstSplashScreenCustom" parent="OsmandLightTheme.NoActionbar">
+    <style name="SplashScreenBaseTheme" parent="OsmandLightTheme.NoActionbar" />
+
+    <style name="FirstSplashScreenCustom" parent="SplashScreenBaseTheme">
         <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
     </style>
 
-    <style name="FirstSplashScreenPlus" parent="OsmandLightTheme.NoActionbar">
+    <style name="FirstSplashScreenPlus" parent="SplashScreenBaseTheme">
         <item name="android:windowBackground">@drawable/first_splash_screen_plus</item>
     </style>
 
-    <style name="FirstSplashScreenFree" parent="OsmandLightTheme.NoActionbar">
+    <style name="FirstSplashScreenFree" parent="SplashScreenBaseTheme">
         <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
     </style>
 
-    <style name="FirstSplashScreenFreeDev" parent="OsmandLightTheme.NoActionbar">
+    <style name="FirstSplashScreenFreeDev" parent="SplashScreenBaseTheme">
         <item name="android:windowBackground">@drawable/first_splash_screen_free_dev</item>
     </style>
 

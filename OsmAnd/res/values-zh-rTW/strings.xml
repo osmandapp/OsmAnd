@@ -1222,8 +1222,6 @@
     <string name="live_monitoring_m">線上即時追蹤 (需要 GPX)</string>
     <string name="live_monitoring_start">開始線上即時追蹤</string>
     <string name="live_monitoring_stop">停止線上即時追蹤</string>
-    <string name="gpx_monitoring_start">恢復 GPX 記錄</string>
-    <string name="gpx_monitoring_stop">暫停 GPX 記錄</string>
     <string name="gpx_start_new_segment">開始新區段</string>
     <string name="lang_fa">波斯</string>
     <string name="map_preferred_locale_descr">在地圖上對標簽偏好的語言(如果無法使用，將使用英文或當地名稱)。</string>
@@ -1275,7 +1273,6 @@
     <string name="save_track_interval_globally">記錄間隔</string>
     <string name="save_track_to_gpx_globally_descr">可以使用地圖上的 GPX 錄製小工具來開啟或關閉將一般的位置記錄到 GPX 檔案中。</string>
     <string name="confirm_every_run">始終詢問</string>
-    <string name="save_global_track_interval_descr">為一般的軌跡記錄指定錄製間隔（透過在地圖上的 GPX 錄製小工具啟用）。</string>
     <string name="save_global_track_interval">通常的記錄間隔</string>
     <string name="traffic_warning_speed_limit">速限</string>
     <string name="traffic_warning_border_control">邊境管制</string>
@@ -1552,7 +1549,6 @@
     <string name="local_recordings_delete_all_confirm">您確定您想要刪除 %1$d 個註記嗎？</string>
     <string name="gps_network_not_enabled">位置服務已關閉。要將其開啟嗎？</string>
     <string name="disable_recording_once_app_killed">預防單獨的日誌記錄</string>
-    <string name="disable_recording_once_app_killed_descrp">當應用程式被停止，將暫停 GPX 日誌記錄 (藉由新的應用程式)。(OsmAnd 背景標示，從通知列消失。)</string>
     <string name="archive_wikipedia_data">您已有舊的且不相容的維基百科資料。要將其封存嗎？</string>
     <string name="download_wikipedia_files">要下載額外的維基百科資料 (%1$s MB) 嗎？</string>
     <string name="lang_vo">沃拉普克語</string>
@@ -1924,7 +1920,6 @@
     <string name="rendering_value_medium_name">中等</string>
     <string name="rendering_value_bold_name">粗的</string>
     <string name="rendering_value_thin_name">細</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX 檔案已選擇</string>
     <string name="map_mode">地圖模式</string>
     <string name="access_default_color">預設顏色</string>
     <string name="access_category_choice">選擇類別</string>

@@ -1177,8 +1177,6 @@ Nyttjat utrymme är {1} MB.
     <string name="live_monitoring_m">Online-spårning (GPX krävs)</string>
     <string name="live_monitoring_start">Starta online-spårning</string>
     <string name="live_monitoring_stop">Stoppa online-spårning</string>
-    <string name="gpx_monitoring_start">Starta GPX-loggning</string>
-    <string name="gpx_monitoring_stop">Stoppa GPX-loggning</string>
     <string name="gpx_start_new_segment">Starta nytt segment</string>
     <string name="rendering_attr_hideBuildings_name">Byggnader</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Vägar, inte för motorfordon</string>
@@ -1235,7 +1233,6 @@ Nyttjat utrymme är {1} MB.
     <string name="save_track_to_gpx_globally_descr">Allmän loggning av position till en GPX-fil kan slås på/av via GPX-loggningswidgeten på kartskärmen.</string>
     <string name="save_track_interval_globally">Loggningsintervall</string>
     <string name="confirm_every_run">Fråga alltid</string>
-    <string name="save_global_track_interval_descr">Välj loggningsintervall för den allmänna spårinspelningen (aktiverad via widgeten GPX-loggning på kartan).</string>
     <string name="save_global_track_interval">Allmänt loggningsintervall</string>
     <string name="traffic_warning_speed_limit">Hastighetsbegränsning</string>
     <string name="traffic_warning_border_control">Gränskontroll</string>
@@ -1503,7 +1500,6 @@ Long %2$s</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importera till OsmAnd</string>
     <string name="gps_network_not_enabled">Platstjänsten är inte aktiverad. Vill du slå på den?</string>
-    <string name="disable_recording_once_app_killed_descrp">Gör paus i GPX-loggningen när appen stängs (via tidigare appar). (OsmAnds bakgrundsindikation försvinner från Androids aviseringsfält.)</string>
     <string name="archive_wikipedia_data">Du har gamla och inkompatibla data från Wikipedia. Vill du arkivera dem?</string>
     <string name="download_wikipedia_files">Hämta ytterligare data från Wikipedia (%1$s MB)?</string>
     <string name="lang_vo">Volapük</string>
@@ -1880,7 +1876,6 @@ Tillgängligt utrymme är blott {2} MB.</string>
     <string name="access_shared_string_navigate_up">Navigera upp</string>
     <string name="access_sort">Sortera</string>
     <string name="map_mode">Kartläge</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX-filer valda</string>
     <string name="rendering_value_thin_name">Tunn</string>
     <string name="rendering_value_medium_name">Mellan</string>
     <string name="rendering_value_bold_name">Tjock</string>

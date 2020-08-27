@@ -478,7 +478,6 @@
     <string name="access_shared_string_navigate_up">மேலே செல்க</string>
     <string name="access_sort">வரிசைப்படுத்த</string>
     <string name="map_mode">வரைபட பயன்முறை</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX கோப்புகள் தேர்ந்தெடுக்கப்பட்டன</string>
     <string name="rendering_value_fine_name">சரி</string>
     <string name="rendering_value_thin_name">மெல்லிய</string>
     <string name="rendering_value_medium_name">நடுத்தர</string>
@@ -625,8 +624,7 @@
     <string name="background_service_is_enabled_question">OsmAnd பின்னணி சேவை இன்னும் இயங்கும். அதை நிறுத்துங்கள், கூடவா\?</string>
     <string name="sleep_mode_stop_dialog">GPS பின்னணி பயன்முறையை நிறுத்தவா\?</string>
     <string name="stop_navigation_service">நிறுத்து</string>
-    <string name="confirm_every_run">எப்போதும் கேள்</string>
-    <string name="save_global_track_interval_descr">பொதுவான பாதையில் பதிவு செய்வதற்கான இடைவெளியைத் தேர்வுசெய்க (வரைபடத்தில் GPX உள்நுழைவு விட்ஜெட்டை வழியாக செயல்படுத்தப்படுகிறது).
+    <string name="confirm_every_run">எப்போதும் கேள்
 \n</string>
     <string name="save_global_track_interval">பொது பதிவு இடைவெளி</string>
     <string name="background_service_int">ஜிபிஎஸ் வேக் அப் இடைவேளை</string>
@@ -669,7 +667,6 @@
     <string name="rendering_value_bicycle_name">மிதிவண்டி</string>
     <string name="gps_network_not_enabled">இருப்பிடச் சேவை இயக்கப்பட்டது. அதை இயக்கவா\?</string>
     <string name="disable_recording_once_app_killed">தனியான பதிவுகளை தடுக்கிறது</string>
-    <string name="disable_recording_once_app_killed_descrp">பயன்பாட்டைக் கொல்லும் போது (சமீபத்திய பயன்பாடுகளின் வழியாக) ஜி.பீ.எக்ஸ் லாக்கிங் இடைநிறுத்தப்படும். (ஆஸ்மண்ட் பின்னணி அறிகுறி Android அறிவிப்பு பட்டியில் இருந்து மறைந்துவிடும்.)</string>
     <string name="shared_string_import2osmand">OsmAnd க்கு இறக்குமதி செய்</string>
     <string name="read_full_article">முழு கட்டுரை (ஆன்லைன்) படிக்கவும்</string>
     <string name="shared_string_wikipedia">விக்கிப்பீடியா</string>
@@ -709,8 +706,6 @@
     <string name="live_monitoring_m">ஆன்லைன் கண்காணிப்பு (ஜிபிஎக்ஸ் தேவை)</string>
     <string name="live_monitoring_start">ஆன்லைன் கண்காணிப்பதைத் தொடங்குங்கள்</string>
     <string name="live_monitoring_stop">ஆன்லைன் கண்காணிப்பதை நிறுத்தவும்</string>
-    <string name="gpx_monitoring_start">ஜி.பி.எக்ஸ் பதிவுகளைத் தொடங்கவும்</string>
-    <string name="gpx_monitoring_stop">ஜி.பி.எக்ஸ் பதிவுகளை நிறுத்து</string>
     <string name="gpx_start_new_segment">புதிய பிரிவைத் தொடங்குக</string>
     <string name="rendering_attr_hideBuildings_name">கட்டிடங்கள்</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">வாகன-அல்லாத நெடுஞ்சாலைகள்</string>

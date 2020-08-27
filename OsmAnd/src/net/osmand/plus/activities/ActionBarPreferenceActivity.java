@@ -33,12 +33,9 @@ public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceAct
 	protected void onCreate(final Bundle savedInstanceState) {
 		//settings needed it's own theme because of check boxes not styled properly
 		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
-		int t = R.style.OsmandLightTheme_NoActionbar_Preferences;
-		if (settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {
-			t = R.style.OsmandDarkTheme_NoActionbar_Preferences;
-		} else if (settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME) {
-			t = R.style.OsmandLightTheme_NoActionbar_Preferences;
-		}
+		int t = settings.isLightContent()
+				? R.style.OsmandLightTheme_NoActionbar_Preferences
+				: R.style.OsmandDarkTheme_NoActionbar_Preferences;
 		setTheme(t);
 		super.onCreate(savedInstanceState);
 		boolean lightTheme = settings.isLightContent();

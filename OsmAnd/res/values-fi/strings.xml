@@ -911,7 +911,6 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="access_shared_string_navigate_up">Navigointi ylös</string>
     <string name="access_sort">Lajittele</string>
     <string name="map_mode">Karttatila</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX-tiedostoa valittu</string>
     <string name="rendering_value_fine_name">Hieno</string>
     <string name="rendering_value_thin_name">Ohut</string>
     <string name="rendering_value_medium_name">Keskipaksu</string>
@@ -1373,8 +1372,6 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="live_monitoring_m">Online seuranta (GPX pakollinen)</string>
     <string name="live_monitoring_start">Aloita online seuranta</string>
     <string name="live_monitoring_stop">Lopeta online seuranta</string>
-    <string name="gpx_monitoring_start">Aloita GPX kirjaus</string>
-    <string name="gpx_monitoring_stop">Lopeta GPX kirjaus</string>
     <string name="gpx_start_new_segment">Aloita uusi segmentti</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Tie ei-kulkuneuvoille</string>
     <string name="rendering_attr_hideText_name">Teksti</string>

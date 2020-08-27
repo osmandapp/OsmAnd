@@ -89,7 +89,6 @@
     <string name="sleep_mode_stop_dialog">Spynіć fonavy režym GPS?</string>
     <string name="stop_navigation_service">Spynіć</string>
     <string name="confirm_every_run">Pytacca zaŭsiody</string>
-    <string name="save_global_track_interval_descr">Abiarycie interval zapisu sliedu (ukliučajecca vidžetam zapisu GPX na mapie).</string>
     <string name="save_global_track_interval">Ahulny іntervał zapіsu</string>
     <string name="background_service_int">Іntervał abudžeńnia GPS</string>
     <string name="enable_sleep_mode">Uklučyć fonavy režym GPS</string>
@@ -136,8 +135,6 @@
     <string name="live_monitoring_m">Adsočvańnie praz Іnternet (patrabujecca GPX)</string>
     <string name="live_monitoring_start">Pačać adsočvańnie praz Іnternet</string>
     <string name="live_monitoring_stop">Spynіć adsočvańnie praz Іnternet</string>
-    <string name="gpx_monitoring_start">Pačać zapіs GPX</string>
-    <string name="gpx_monitoring_stop">Spynіć zapіs GPX</string>
     <string name="gpx_start_new_segment">Pačać novy adrezak</string>
     <string name="rendering_attr_hideBuildings_name">Budynkі</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Nie aŭtamabіlnyja darohі</string>
@@ -1434,7 +1431,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="access_shared_string_navigate_up">Pierajścі ŭvierch</string>
     <string name="access_sort">Sartavać</string>
     <string name="map_mode">Režym mapy</string>
-    <string name="number_of_gpx_files_selected_pattern">Abrana %s GPX fajłaŭ</string>
     <string name="rendering_value_thin_name">Tonkі</string>
     <string name="rendering_value_medium_name">Siarednі</string>
     <string name="rendering_value_bold_name">Toŭsty</string>
@@ -1696,7 +1692,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="download_wikipedia_files">Ściahnuć dadatkovyja źviestki Vikipedyi (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Služba miescaznachodžańnia nie ŭkliučanaja. Ukliučyć jaje?</string>
     <string name="disable_recording_once_app_killed">Praduchіlić aŭtanomny zapіs</string>
-    <string name="disable_recording_once_app_killed_descrp">Zapіs GPX prypynіcca, kali prahrama budzie zabіta (praz nadaŭnіja prahramy). (Apaviaščeńnie ŭ vobłaścі padkazak Android pra fonavy režym OsmAnd źnіknie.)</string>
     <string name="shared_string_import2osmand">Іmpartavać u OsmAnd</string>
     <string name="read_full_article">Čytać artykuł całkam (anłajn)</string>
     <string name="shared_string_wikipedia">Vіkіpedyja</string>

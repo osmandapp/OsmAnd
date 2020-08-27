@@ -1213,7 +1213,6 @@
     <string name="lang_et">Estonca</string>
     <string name="lang_ceb">Sabuanca</string>
     <string name="disable_recording_once_app_killed">Tek başına günlüğe eklemeyi önle</string>
-    <string name="disable_recording_once_app_killed_descrp">Uygulama kapatılırsa (son uygulamalardan) GPX iz kaydına ara verilecektir. (OsmAnd arka plan göstergesi Android bildirim çubuğundan kaybolur.)</string>
     <string name="routing_attr_avoid_shuttle_train_name">Shuttle treni yok</string>
     <string name="local_indexes_cat_wiki">Vikipedi</string>
     <string name="osm_edit_context_menu_delete">OSM düzeltmesini sil</string>
@@ -1760,7 +1759,6 @@
     <string name="traffic_warning_calming">Trafik sakinleştirme</string>
     <string name="sleep_mode_stop_dialog">GPS arka plan modunu durdur?</string>
     <string name="stop_navigation_service">Dur</string>
-    <string name="save_global_track_interval_descr">(Haritadaki GPX kayıt widget\'ı aracılığıyla etkinleştirilen) genel rota kaydı için kayıt aralığını belirtin.</string>
     <string name="save_global_track_interval">Genel kayıt tutma aralığı</string>
     <string name="background_service_int">GPS Uyandırma aralık</string>
     <string name="enable_sleep_mode">GPS arka plan modunu etkinleştirin</string>
@@ -1797,8 +1795,6 @@
     <string name="live_monitoring_m">Online izleme (GPX gerekli)</string>
     <string name="live_monitoring_start">Online izleme başlat</string>
     <string name="live_monitoring_stop">Online izleme durdurun</string>
-    <string name="gpx_monitoring_start">GPX kaydını devam ettir</string>
-    <string name="gpx_monitoring_stop">GPX kaydını duraklat</string>
     <string name="gpx_start_new_segment">Yeni bir segment başlat</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Araç olmayan otoyollar</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ağaç ve çalılıklar</string>
@@ -1941,7 +1937,6 @@
     <string name="access_widget_expand">Genişlet</string>
     <string name="access_sort">Sırala</string>
     <string name="map_mode">Harita kipi</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX dosyalar seçildi</string>
     <string name="rendering_value_thin_name">İnce</string>
     <string name="rendering_value_medium_name">Orta</string>
     <string name="rendering_value_bold_name">Kalın</string>

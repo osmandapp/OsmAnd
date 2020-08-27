@@ -62,6 +62,11 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	}
 
 	@Override
+	public int getTopViewId() {
+		return R.id.gpx_approximation_top_shadow_all;
+	}
+
+	@Override
 	public int getHeaderViewHeight() {
 		return menuTitleHeight;
 	}
@@ -259,9 +264,11 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			ViewGroup cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
 
-			SliderCard sliderCard = new SliderCard(mapActivity, distanceThreshold);
-			sliderCard.setListener(this);
-			cardsContainer.addView(sliderCard.build(mapActivity));
+			if (getTopView() != null) {
+				SliderCard sliderCard = new SliderCard(mapActivity, distanceThreshold);
+				sliderCard.setListener(this);
+				getTopView().addView(sliderCard.build(mapActivity));
+			}
 
 			ProfileCard profileCard = new ProfileCard(mapActivity, snapToRoadAppMode);
 			profileCard.setListener(this);

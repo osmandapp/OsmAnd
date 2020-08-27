@@ -1204,8 +1204,6 @@
     <string name="live_monitoring_m">Online stopovanie (potrebné GPX)</string>
     <string name="live_monitoring_start">Zapnúť online stopovanie</string>
     <string name="live_monitoring_stop">Zastaviť online stopovanie</string>
-    <string name="gpx_monitoring_start">Pokračovať v zaznamenávaní GPX</string>
-    <string name="gpx_monitoring_stop">Pozastaviť zaznamenávanie GPX</string>
     <string name="gpx_start_new_segment">Začať nový segment</string>
     <string name="rendering_attr_hideBuildings_name">Budovy</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Cesty, ktoré nie sú pre vozidlá</string>
@@ -1260,7 +1258,6 @@
     <string name="duration">Trvanie</string>
     <string name="distance">Vzdialenosť</string>
     <string name="confirm_every_run">Vždy sa pýtať</string>
-    <string name="save_global_track_interval_descr">Zadajte interval pre všeobecné zaznamenávanie trasy (prístupné cez tlačidlo záznamu GPX na mape).</string>
     <string name="save_global_track_interval">Interval všeobecného zaznamenávania</string>
     <string name="save_track_to_gpx_globally_descr">Zaznamenávanie polohy do GPX súboru môže byť zapnuté a vypnuté cez tlačidlo záznamu GPX na mape.</string>
     <string name="save_track_interval_globally">Interval zaznamenávania</string>
@@ -1553,7 +1550,6 @@
     <string name="local_recordings_delete_all_confirm">Naozaj chcete vymazať %1$d poznámok\?</string>
     <string name="gps_network_not_enabled">Služba zisťovania pozície je vypnutá. Zapnúť teraz\?</string>
     <string name="disable_recording_once_app_killed">Zakázať samostatné zaznamenávanie</string>
-    <string name="disable_recording_once_app_killed_descrp">Zastaví záznam GPX keď je aplikácia ukončená (cez nedávne aplikácie). (Ikona režimu na pozadí zmizne z notifikačnej oblasti Androidu.)</string>
     <string name="archive_wikipedia_data">Máte stiahnuté staré nekompatibilné dáta z Wikipédie. Chcete ich archivovať?</string>
     <string name="download_wikipedia_files">Stiahnuť ďalšie dáta z Wikipédie (%1$s MB)\?</string>
     <string name="lang_es_ar">Španielsky (Argentína)</string>
@@ -1926,7 +1922,6 @@
     <string name="rendering_value_medium_name">Stredné</string>
     <string name="rendering_value_bold_name">Tučné</string>
     <string name="map_mode">Režim mapy</string>
-    <string name="number_of_gpx_files_selected_pattern">%s vybraných GPX súborov</string>
     <string name="access_default_color">Predvolená farba</string>
     <string name="access_category_choice">Vyberte kategóriu</string>
     <string name="access_hint_enter_name">Zadajte názov</string>

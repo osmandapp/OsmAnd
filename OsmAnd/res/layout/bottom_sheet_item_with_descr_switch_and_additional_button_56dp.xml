@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:textColor="@null"
                 android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
                 tools:text="Some description" />
         </LinearLayout>

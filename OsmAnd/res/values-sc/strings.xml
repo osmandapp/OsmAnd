@@ -389,8 +389,6 @@
     <string name="live_monitoring_m">Arrastamentu in lìnia (GPX rechestu)</string>
     <string name="live_monitoring_start">Inghitza s’arrastamentu in lìnia</string>
     <string name="live_monitoring_stop">Firma s’arrastamentu in lìnia</string>
-    <string name="gpx_monitoring_start">Sighi cun sa registratzione GPX</string>
-    <string name="gpx_monitoring_stop">Pone in pàusa sa registratzione GPX</string>
     <string name="gpx_start_new_segment">Inghitza unu segmentu nou</string>
     <string name="rendering_attr_hideBuildings_name">Edifìtzios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Caminos non carràbiles</string>
@@ -1317,7 +1315,6 @@
     <string name="save_track_to_gpx_globally_descr">Sa registratzione de sa positzione in unu documentu GPX podet èssere alluta o morta impreende su widged de registratzione GPX in sa mapa.</string>
     <string name="confirm_every_run">Pregunta semper</string>
     <string name="save_global_track_interval">Intervallu de registratzione generale</string>
-    <string name="save_global_track_interval_descr">Dislinda s’intervallu pro sa registratzione generale de sas rastas (abilitadu tramite su widget registratzione GPX in sa mapa).</string>
     <string name="traffic_warning_speed_limit">Limite de lestresa</string>
     <string name="traffic_warning_payment">Casellu</string>
     <string name="traffic_warning_stop">Cartellu de Stop</string>
@@ -1591,7 +1588,6 @@
     <string name="lang_ceb">Cebuanu</string>
     <string name="archive_wikipedia_data">Tenes datos Wikipedia betzos e non cumpatìbiles. Los cheres archiviare?</string>
     <string name="download_wikipedia_files">Iscarrigare àteros datos de Wikipedia in prus (%1$s MB) \?</string>
-    <string name="disable_recording_once_app_killed_descrp">At a pònnere in pàusa sa registratzione GPX cando OsmAnd at a èssere istudadu (pro mèdiu de sas aplicatziones reghentes). (S\'indicatore de sa modalidade OsmAnd de isfundu at a iscumpàrrere dae sa barra de notìfica de Android.)</string>
     <string name="rendering_attr_currentTrackColor_name">Colore GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Largària GPX</string>
     <string name="rendering_value_red_name">Ruju</string>
@@ -1931,7 +1927,6 @@
     <string name="rendering_value_medium_name">Mèdia</string>
     <string name="rendering_value_bold_name">Grussu</string>
     <string name="map_mode">Modalidade mapa</string>
-    <string name="number_of_gpx_files_selected_pattern">%s documentos GPX ischertados</string>
     <string name="access_default_color">Colore predefinidu</string>
     <string name="access_category_choice">Issèbera una categoria</string>
     <string name="access_hint_enter_name">Inserta su nùmene</string>

@@ -1208,8 +1208,6 @@
     <string name="live_monitoring_m">Tracciamento online (GPX richiesto)</string>
     <string name="live_monitoring_start">Avvia il tracciamento online</string>
     <string name="live_monitoring_stop">Ferma il tracciamento online</string>
-    <string name="gpx_monitoring_start">Riprendi la registrazione GPX</string>
-    <string name="gpx_monitoring_stop">Metti in pausa la registrazione GPX</string>
     <string name="gpx_start_new_segment">Inizia un nuovo segmento</string>
     <string name="lang_fa">Persiano</string>
     <string name="lang_he">Ebraico</string>
@@ -1260,7 +1258,6 @@
     <string name="save_track_interval_globally">Intervallo registrazione</string>
     <string name="rendering_attr_publicTransportMode_name">Percorsi bus, filobus, servizi navetta</string>
     <string name="confirm_every_run">Chiedi sempre</string>
-    <string name="save_global_track_interval_descr">Specifica l\'intervallo di tempo per la registrazione del percorso (abilitata attraverso il widget registrazione GPX sulla mappa).</string>
     <string name="save_global_track_interval">Intervallo predefinito di registrazione</string>
     <string name="traffic_warning_speed_limit">Limite di velocità</string>
     <string name="traffic_warning_payment">Casello</string>
@@ -1544,7 +1541,6 @@
     <string name="download_wikipedia_files">Scaricare i dati aggiuntivi di Wikipedia (%1$s MB)\?</string>
     <string name="gps_network_not_enabled">Il servizio di localizzazione è spento. Vuoi accenderlo\?</string>
     <string name="disable_recording_once_app_killed">Previeni il login remoto</string>
-    <string name="disable_recording_once_app_killed_descrp">Metterà in pausa la registrazione GPX quando l\'app viene chiusa (attraverso le app recenti). L\'indicatore della modalità background di OsmAnd sparisce dalla barra delle notifiche di Android</string>
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
     <string name="read_full_article">Leggi l\'articolo intero (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -1922,7 +1918,6 @@
     <string name="rendering_value_medium_name">Medio</string>
     <string name="rendering_value_bold_name">Grosso</string>
     <string name="map_mode">Modalità mappa</string>
-    <string name="number_of_gpx_files_selected_pattern">%s file GPX selezionati</string>
     <string name="access_default_color">Colore preimpostato</string>
     <string name="access_category_choice">Scegli la categoria</string>
     <string name="access_hint_enter_name">Inserisci il nome</string>

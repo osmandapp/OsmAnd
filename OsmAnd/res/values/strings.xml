@@ -11,6 +11,13 @@
 	Thx - Hardy
 
 -->
+    <string name="system_default_theme">System Default</string>
+    <string name="gpx_monitoring_start">Resume trip recording</string>
+    <string name="gpx_monitoring_stop">Pause trip recording</string>
+    <string name="save_global_track_interval_descr">Specify the logging interval for the general track recording (enabled via the Trip recording widget on the map).</string>
+    <string name="disable_recording_once_app_killed_descrp">Will pause track logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="number_of_gpx_files_selected_pattern">%s track files selected</string>
     <string name="file_name">File name:</string>
     <string name="simplified_track_description">Only the route line will be saved, the waypoints will be deleted.</string>
     <string name="simplified_track">Simplified track</string>
@@ -38,7 +45,6 @@
     <string name="empty_state_my_tracks">Add track files</string>
     <string name="shared_string_gpx_route">Track route</string>
     <string name="save_track_to_gpx_globally">Log track to GPX file</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="show_gpx">Tracks</string>
     <string name="layer_gpx_layer">Tracks</string>
     <string name="shared_string_gpx_files">Tracks</string>
@@ -1599,7 +1605,6 @@
     <string name="access_shared_string_navigate_up">Navigate up</string>
     <string name="access_sort">Sort</string>
     <string name="map_mode">Map mode</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX files selected</string>
     <string name="rendering_value_fine_name">Fine</string>
     <string name="rendering_value_thin_name">Thin</string>
     <string name="rendering_value_medium_name">Medium</string>
@@ -1907,7 +1912,6 @@
     <string name="download_wikipedia_files">Download additional Wikipedia data (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Location service is off. Turn it on?</string>
     <string name="disable_recording_once_app_killed">Prevent standalone logging</string>
-    <string name="disable_recording_once_app_killed_descrp">Will pause GPX logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
     <string name="shared_string_import2osmand">Import to OsmAnd</string>
     <string name="read_full_article">Read full article (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -2217,7 +2221,6 @@
     <string name="sleep_mode_stop_dialog">Stop GPS background mode?</string>
     <string name="stop_navigation_service">Stop</string>
     <string name="confirm_every_run">Always ask</string>
-    <string name="save_global_track_interval_descr">Specify the logging interval for the general track recording (enabled via the GPX logging widget on the map).</string>
     <string name="save_global_track_interval">General logging interval</string>
     <string name="background_service_int">GPS Wake-up interval</string>
     <string name="enable_sleep_mode">Enable GPS background mode</string>
@@ -2270,8 +2273,6 @@
     <string name="live_monitoring_m">Online tracking (GPX required)</string>
     <string name="live_monitoring_start">Start online tracking</string>
     <string name="live_monitoring_stop">Stop online tracking</string>
-    <string name="gpx_monitoring_start">Resume GPX logging</string>
-    <string name="gpx_monitoring_stop">Pause GPX logging</string>
     <string name="gpx_start_new_segment">Start new segment</string>
     <string name="rendering_attr_hideBuildings_name">Buildings</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Non-vehicle highways</string>

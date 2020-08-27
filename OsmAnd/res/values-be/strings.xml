@@ -1248,7 +1248,6 @@
     <string name="gps_wake_up_timer">Iнтэрвал абуджэння GPS</string>
     <string name="lang_sw">Суахілі</string>
     <string name="lang_he">Іўрыт</string>
-    <string name="gpx_monitoring_start">Працягнуць запіс GPX</string>
     <string name="gpx_start_new_segment">Пачаць новы адрэзак</string>
     <string name="lang_fa">Персідская</string>
     <string name="sleep_mode_stop_dialog">Спыніць фонавы рэжым GPS?</string>
@@ -1258,7 +1257,6 @@
     <string name="forward">Наперад</string>
     <string name="home">Панэль кіравання</string>
     <string name="keep_navigation_service">Пакінуць</string>
-    <string name="gpx_monitoring_stop">Прыпыніць запіс GPX</string>
     <string name="live_monitoring_start">Пачаць адсочванне праз Інтэрнэт</string>
     <string name="live_monitoring_stop">Спыніць адсочванне праз Інтэрнэт</string>
     <string name="live_monitoring_m">Адсочванне праз Інтэрнэт (патрабуецца GPX)</string>
@@ -1305,7 +1303,6 @@
     <string name="save_track_interval_globally">Інтэрвал запісу</string>
     <string name="save_track_to_gpx_globally_descr">Запіс месцазнаходжання ў GPX-файл можа быць уключаны або выключаны з дапамогай кнопкі запісу GPX мапе.</string>
     <string name="confirm_every_run">Пытацца заўсёды</string>
-    <string name="save_global_track_interval_descr">Вызначце інтэрвал запісу следу (уключаецца праз віджэт запісу GPX на мапе).</string>
     <string name="save_global_track_interval">Агульны інтэрвал запісу</string>
     <string name="traffic_warning_speed_limit">Абмежаванне хуткасці</string>
     <string name="traffic_warning_border_control">Памежны кантроль</string>
@@ -1592,7 +1589,6 @@
     <string name="local_recordings_delete_all_confirm">Сапраўды хочаце выдаліць %1$d нататак\?</string>
     <string name="shared_string_import2osmand">Імпартаваць у OsmAnd</string>
     <string name="disable_recording_once_app_killed">Прадухіліць аўтаномны запіс</string>
-    <string name="disable_recording_once_app_killed_descrp">Запіс GPX прыпыніцца, калі праграма будзе забітая (праз надаўнія праграмы). (Апавяшчэнне ў вобласці падказак Android пра фонавы рэжым OsmAnd знікне.)</string>
     <string name="gps_network_not_enabled">Служба вызначэння месцазнаходжання выключаная. Уключыць яе\?</string>
     <string name="archive_wikipedia_data">Даныя Вікіпедыі састарэлі і больш непрыдатныя. Заархіваваць іх\?</string>
     <string name="download_wikipedia_files">Спампаваць дадатковыя даныя Вікіпедыі (%1$s МБ)\?</string>
@@ -1960,7 +1956,6 @@
     <string name="rendering_value_medium_name">Сярэдні</string>
     <string name="rendering_value_bold_name">Тоўсты</string>
     <string name="map_mode">Рэжым мапы</string>
-    <string name="number_of_gpx_files_selected_pattern">Абрана %s GPX-файлаў</string>
     <string name="add_points_to_map_markers_q">Дадаць усе пункты як адзнакі мапы\?</string>
     <string name="shared_string_add_to_map_markers">Дадаць да адзнак мапы</string>
     <string name="no_map_markers_found">Калі ласка, дадайце адзнакі праз экран мапы</string>

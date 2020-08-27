@@ -17,8 +17,6 @@
     <string name="lang_he">Hebraisk</string>
     <string name="forward">Fram</string>
     <string name="home">Heim</string>
-    <string name="gpx_monitoring_start">Start GPS-opptak</string>
-	<string name="gpx_monitoring_stop">Stopp GPS-opptak</string>
     <string name="rendering_attr_hideBuildings_name">Gøym bygningar</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Gøym vegar som ikkje er for køyretøy</string>
     <string name="rendering_attr_hideText_name">Gøym tekst</string>
@@ -266,7 +264,6 @@
 	
 	
 	<string name="map_widget_max_speed">Fartsgrense</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Fann ingen bygningar.</string>
     <string name="rendering_attr_showRoadMaps_name">Kart med berre vegar</string>
     <string name="safe_mode">Sikkermodus</string>

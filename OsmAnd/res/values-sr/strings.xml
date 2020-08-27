@@ -459,7 +459,6 @@
     <string name="download_wikipedia_files">Преузети додатне податке са Википедије (%1$s MB)\?</string>
     <string name="gps_network_not_enabled">Услуга одређивања положаја је искључена. Укључити је\?</string>
     <string name="disable_recording_once_app_killed">Спречи аутоматско бележење</string>
-    <string name="disable_recording_once_app_killed_descrp">Паузираће GPX логовање када се апликације убије (преко скорашњих програма). (Индикатор рада OsmAnd-а у позадини тада нестаје из обавештајне траке.)</string>
     <string name="shared_string_import2osmand">Увоз у OsmAnd</string>
     <string name="read_full_article">Читај потпуни чланак (на мрежи)</string>
     <string name="shared_string_wikipedia">Википедија</string>
@@ -687,7 +686,6 @@
     <string name="sleep_mode_stop_dialog">Прекинути позадински режим GPS-а?</string>
     <string name="stop_navigation_service">Заустави</string>
     <string name="confirm_every_run">Увек питај</string>
-    <string name="save_global_track_interval_descr">Наведите интервал логовања код снимања путања (које су омогућене пријавом преко GPX справице на карти).</string>
     <string name="save_global_track_interval">Међувреме опште пријаве</string>
     <string name="background_service_int">Међувреме буђења GPS-а</string>
     <string name="enable_sleep_mode">Укључи да GPS ради у позадини</string>
@@ -1169,7 +1167,6 @@
     <string name="access_shared_string_navigate_up">Наведи горе</string>
     <string name="access_sort">Сортирај</string>
     <string name="map_mode">Приказ карте</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX фајла је одабрано</string>
     <string name="rendering_value_fine_name">Нежно</string>
     <string name="rendering_value_thin_name">Танко</string>
     <string name="rendering_value_medium_name">Средње</string>
@@ -1639,8 +1636,6 @@
     <string name="live_monitoring_m">Праћење на мрежи (потребан GPX)</string>
     <string name="live_monitoring_start">Започни праћење на мрежи</string>
     <string name="live_monitoring_stop">Заустави праћење на мрежи</string>
-    <string name="gpx_monitoring_start">Настави GPX бележење</string>
-    <string name="gpx_monitoring_stop">Заустави GPX бележење</string>
     <string name="none_selected_gpx">Одаберите GPX фајл дугим притискањем.</string>
     <string name="lang_zh">Кинески</string>
     <string name="lang_pt_br">Португалски (бразилски)</string>

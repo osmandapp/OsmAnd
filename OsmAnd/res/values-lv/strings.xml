@@ -1232,8 +1232,6 @@
     <string name="live_monitoring_m">Sekošana tīklā (no GPX ieraksta)</string>
     <string name="live_monitoring_start">Sākt sekošanu tīklā</string>
     <string name="live_monitoring_stop">Pārtraukt sekošanu tīklā</string>
-    <string name="gpx_monitoring_start">Sākt GPX ierakstu</string>
-    <string name="gpx_monitoring_stop">Pārtraukt GPX ierakstu</string>
     <string name="gpx_start_new_segment">Sākt jaunu segmentu</string>
     <string name="rendering_attr_hideBuildings_name">Ēkas</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Neizbraucamie ceļi</string>
@@ -1415,7 +1413,6 @@
     <string name="search_radius_proximity">Attālumā līdz</string>
     <string name="sleep_mode_stop_dialog">Vai izslēgt GPS darbību fonā?</string>
     <string name="stop_navigation_service">Izslēgt</string>
-    <string name="save_global_track_interval_descr">Izvēlieties intervālu treka ierakstam (ieslēgt caur GPX ieraksta logrīku kartē)</string>
     <string name="save_global_track_interval">Ierakstīšanas intervāls</string>
     <string name="enable_sleep_mode">Atļaut gps darboties fonā</string>
     <string name="save_track_to_gpx_globally_headline">Treka ieraksta logošana pēc pieprasījuma</string>
@@ -1475,7 +1472,6 @@
     <string name="archive_wikipedia_data">Lejupielādēti novecojuši vikipēdijas dati. Vai arhivēt tos?</string>
     <string name="download_wikipedia_files">Vai lejupielādēt papildus vikipēdijas datus (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">GPS ir izslēgts. Vai ieslēgt to tagad?</string>
-    <string name="disable_recording_once_app_killed_descrp">GPX ieraksts tiks nopauzēts, ja aplikāciju nobeidzēs (caur nesenajiem appiem). (OsmAnd fona servisa indikācija pazudīs no Android piezīmju joslas.)</string>
     <string name="shared_string_import2osmand">Importēt OsmAndā</string>
     <string name="read_full_article">Lasīt visu rakstu (onlainā)</string>
     <string name="shared_string_wikipedia">Vikipēdija</string>
@@ -1855,7 +1851,6 @@ failu(s)?
 \n
 \nŠo karti var atkārtoti deaktivizēt šeit vai galvenajā izvēlē - kartes attēlošana. "</string>
     <string name="map_mode">Apgaismojums</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX faili atzīmēti</string>
     <string name="rendering_value_thin_name">Tievi</string>
     <string name="rendering_value_medium_name">Viduvēji</string>
     <string name="rendering_value_bold_name">Trekni</string>

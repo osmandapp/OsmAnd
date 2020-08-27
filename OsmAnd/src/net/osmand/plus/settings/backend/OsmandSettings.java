@@ -3895,6 +3895,7 @@ public class OsmandSettings {
 
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;
+	public static final int SYSTEM_DEFAULT_THEME = 2;
 
 	public static final int NO_EXTERNAL_DEVICE = 0;
 	public static final int GENERIC_EXTERNAL_DEVICE = 1;
@@ -3908,7 +3909,16 @@ public class OsmandSettings {
 			new IntPreference("FAVORITES_TAB", 0).makeGlobal().cache();
 
 	public final CommonPreference<Integer> OSMAND_THEME =
-			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeProfile().cache();
+			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME) {
+				@Override
+				public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+					Integer theme = parseString(json.getString(getId()));
+					if (theme == SYSTEM_DEFAULT_THEME && !isSupportSystemDefaultTheme()) {
+						theme = OSMAND_LIGHT_THEME;
+					}
+					setModeValue(appMode, theme);
+				}
+			}.makeProfile().cache();
 
 	public final OsmandPreference<Boolean> OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED =
 			new BooleanPreference("open_only_header_route_calculated", false).makeProfile();
@@ -3917,13 +3927,33 @@ public class OsmandSettings {
 		return isLightContent();
 	}
 
-
 	public boolean isLightContent() {
 		return isLightContentForMode(APPLICATION_MODE.get());
 	}
 
 	public boolean isLightContentForMode(ApplicationMode mode) {
+		if (isSupportSystemDefaultTheme() && OSMAND_THEME.getModeValue(mode) == SYSTEM_DEFAULT_THEME) {
+			return isLightSystemDefaultTheme();
+		}
 		return OSMAND_THEME.getModeValue(mode) != OSMAND_DARK_THEME;
+	}
+
+	public boolean isLightSystemDefaultTheme() {
+		Configuration config = ctx.getResources().getConfiguration();
+		int systemNightModeState = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+		return systemNightModeState != Configuration.UI_MODE_NIGHT_YES;
+	}
+
+	public boolean isSystemDefaultThemeUsed() {
+		return isSystemDefaultThemeUsedForMode(APPLICATION_MODE.get());
+	}
+
+	public boolean isSystemDefaultThemeUsedForMode(ApplicationMode mode) {
+		return isSupportSystemDefaultTheme() && OSMAND_THEME.getModeValue(mode) == SYSTEM_DEFAULT_THEME;
+	}
+
+	public boolean isSupportSystemDefaultTheme() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
 	}
 
 	public final CommonPreference<Boolean> FLUORESCENT_OVERLAYS =
