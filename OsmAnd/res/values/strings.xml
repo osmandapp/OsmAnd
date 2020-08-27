@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_is_saved">is saved</string>
+    <string name="open_saved_track">Open saved track</string>
     <string name="system_default_theme">System Default</string>
     <string name="gpx_monitoring_start">Resume trip recording</string>
     <string name="gpx_monitoring_stop">Pause trip recording</string>

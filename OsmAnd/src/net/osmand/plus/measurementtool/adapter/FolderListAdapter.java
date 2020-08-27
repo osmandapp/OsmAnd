@@ -1,4 +1,4 @@
-package net.osmand.plus.measurementtool;
+package net.osmand.plus.measurementtool.adapter;
 
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -34,7 +34,7 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Gr
 	boolean nightMode;
 	FolderListAdapterListener listener;
 
-	FolderListAdapter(OsmandApplication app, boolean nightMode, String folderName) {
+	public FolderListAdapter(OsmandApplication app, boolean nightMode, String folderName) {
 		this.app = app;
 		this.nightMode = nightMode;
 		selectedItemName = folderName;
