@@ -135,6 +135,7 @@ import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationP
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
+import net.osmand.plus.server.ApiRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -308,6 +309,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		int h = dm.heightPixels - statusBarHeight;
 
 		mapView = new OsmandMapTileView(this, w, h);
+		ApiRouter.mapActivity = this;
 		if (app.getAppInitializer().checkAppVersionChanged() && WhatsNewDialogFragment.SHOW) {
 			SecondSplashScreenFragment.SHOW = false;
 			WhatsNewDialogFragment.SHOW = false;

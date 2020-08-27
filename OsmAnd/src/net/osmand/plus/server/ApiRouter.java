@@ -1,5 +1,7 @@
 package net.osmand.plus.server;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
@@ -8,24 +10,19 @@ import com.google.gson.Gson;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
 import fi.iki.elonen.NanoHTTPD;
+import net.osmand.plus.activities.MapActivity;
 
 import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 
 public class ApiRouter {
 	private OsmandApplication androidContext;
-
 	public OsmandApplication getAndroidContext() {
 		return androidContext;
 	}
@@ -33,12 +30,13 @@ public class ApiRouter {
 	private final String FOLDER_NAME = "server";
 	private Gson gson = new Gson();
 	private Map<String, ApiEndpoint> endpoints = new HashMap<>();
+	public static MapActivity mapActivity;
 
 	public ApiRouter(){
-		initFavorites();
+		initRoutes();
 	}
 
-	private void initFavorites() {
+	private void initRoutes() {
 		ApiEndpoint favorites = new ApiEndpoint();
 		favorites.uri = "/favorites";
 		favorites.apiCall = new ApiEndpoint.ApiCall(){
@@ -48,6 +46,26 @@ public class ApiRouter {
 			}
 		};
 		endpoints.put(favorites.uri,favorites);
+
+		ApiEndpoint tile = new ApiEndpoint();
+		tile.uri = "/tile";
+		tile.apiCall = new ApiEndpoint.ApiCall(){
+			@Override
+			public NanoHTTPD.Response call(NanoHTTPD.IHTTPSession session) {
+				Bitmap bitmap = mapActivity.getMapView().currentCanvas;
+				//androidContext.getApplicationContext().get
+				ByteArrayOutputStream stream = new ByteArrayOutputStream();
+				bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+				byte[] byteArray = stream.toByteArray();
+				ByteArrayInputStream str = new ByteArrayInputStream(byteArray);
+				return newFixedLengthResponse(
+						NanoHTTPD.Response.Status.OK,
+						"image/png",
+						str,
+						str.available());
+			}
+		};
+		endpoints.put(tile.uri,tile);
 	}
 
 	public void setAndroidContext(OsmandApplication androidContext) {

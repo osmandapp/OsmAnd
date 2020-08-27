@@ -77,6 +77,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	protected OsmandSettings settings = null;
 	private CanvasColors canvasColors = null;
 	private Boolean nightMode = null;
+	public Bitmap currentCanvas = null;
 
 	private class CanvasColors {
 		int colorDay = MAP_DEFAULT_COLOR;
@@ -574,6 +575,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (!bufferBitmap.isRecycled()) {
 				RectF rct = new RectF(x1, y1, x2, y2);
 				canvas.drawBitmap(bufferBitmap, null, rct, paintImg);
+				currentCanvas = bufferBitmap;
 			}
 			canvas.rotate(-rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 		}
