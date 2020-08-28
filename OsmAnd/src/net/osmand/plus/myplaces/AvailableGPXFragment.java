@@ -1500,16 +1500,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						final SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxInfo.file.getPath());
 						FileUtils.renameFile(getActivity(), gpxInfo.file, new RenameCallback() {
 							@Override
 							public void renamedTo(File file) {
 								asyncLoader = new LoadGpxTask();
 								asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
-								if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
-									selectedGpxFile.getGpxFile().path = file.getPath();
-									selectedGpxHelper.updateSelectedGpxFile(selectedGpxFile);
-								}
 							}
 						});
 					}

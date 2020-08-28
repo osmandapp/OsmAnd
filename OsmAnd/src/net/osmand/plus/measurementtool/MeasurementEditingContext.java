@@ -596,10 +596,10 @@ public class MeasurementEditingContext {
 
 			@Override
 			public void updateProgress(int progress) {
-				int pairs = calculatedPairs + pointsToCalculateSize;
+				int pairs = pointsToCalculateSize;
 				if (pairs != 0) {
-					int pairProgress = 100 / pairs;
-					progress = calculatedPairs * pairProgress + progress / pairs;
+					float pairProgress = 100f / pairs;
+					progress = (int)(calculatedPairs * pairProgress + (float) progress / pairs);
 				}
 				progressListener.updateProgress(progress);
 			}
@@ -633,6 +633,7 @@ public class MeasurementEditingContext {
 					pts.add(pt);
 				}
 				calculatedPairs++;
+				params.calculationProgressCallback.updateProgress(0);
 				List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
 				if (Algorithms.isEmpty(originalRoute)) {
 					originalRoute = Collections.singletonList(routePlannerFrontEnd.generateStraightLineSegment(

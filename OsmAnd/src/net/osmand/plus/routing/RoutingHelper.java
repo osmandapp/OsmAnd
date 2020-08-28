@@ -1263,13 +1263,12 @@ public class RoutingHelper {
 				public void run() {
 					RouteCalculationProgress calculationProgress = params.calculationProgress;
 					if (isRouteBeingCalculated()) {
-						float pr = calculationProgress.getLinearProgress();
-						progressRoute.updateProgress((int) pr);
 						Thread t = currentRunningJob;
 						if(t instanceof RouteRecalculationThread && ((RouteRecalculationThread) t).params != params) {
 							// different calculation started
 							return;
 						} else {
+							progressRoute.updateProgress((int) calculationProgress.getLinearProgress());
 							if (calculationProgress.requestPrivateAccessRouting) {
 								progressRoute.requestPrivateAccessRouting();
 							}
