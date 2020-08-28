@@ -134,6 +134,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public static int directionInfo = -1;
 	public static boolean chooseRoutesVisible = false;
 	public static boolean waypointsVisible = false;
+	public static boolean followTrackVisible = false;
 
 	private Stack<MapRouteMenuStateHolder> menuBackStack = new Stack<>();
 

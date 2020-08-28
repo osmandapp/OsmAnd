@@ -843,7 +843,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public boolean disableSingleTap() {
-		if (activity.getMapRouteInfoMenu().isVisible() || MapRouteInfoMenu.waypointsVisible) {
+		if (activity.getMapRouteInfoMenu().isVisible() || MapRouteInfoMenu.waypointsVisible
+				|| MapRouteInfoMenu.followTrackVisible) {
 			return true;
 		}
 		boolean res = false;
@@ -860,7 +861,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public boolean disableLongPressOnMap() {
 		if (mInChangeMarkerPositionMode || mInGpxDetailsMode || mInAddGpxPointMode ||
-				activity.getMapRouteInfoMenu().isVisible() || MapRouteInfoMenu.waypointsVisible) {
+				activity.getMapRouteInfoMenu().isVisible() || MapRouteInfoMenu.waypointsVisible
+				|| MapRouteInfoMenu.followTrackVisible) {
 			return true;
 		}
 		boolean res = false;

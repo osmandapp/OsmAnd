@@ -148,13 +148,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				}
 			});
 
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					openMenuHeaderOnly();
-				}
-			});
-
 			if (isPortrait()) {
 				updateCardsLayout();
 			}
@@ -270,6 +263,18 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 
 		return divider;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		MapRouteInfoMenu.followTrackVisible = true;
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		MapRouteInfoMenu.followTrackVisible = false;
 	}
 
 	@Override
