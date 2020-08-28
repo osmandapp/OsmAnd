@@ -318,7 +318,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else if (visibleType == DashboardType.OVERLAY_MAP) {
 			tv.setText(R.string.map_overlay);
 		} else if (visibleType == DashboardType.MAPILLARY) {
-			tv.setText(R.string.mapillary);
+			tv.setText(R.string.street_level_imagery);
 		} else if (visibleType == DashboardType.CONTOUR_LINES) {
 			tv.setText(R.string.srtm_plugin_name);
 		} else if (visibleType == DashboardType.OSM_NOTES) {
