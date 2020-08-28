@@ -865,7 +865,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			@Override
 			public void selectFileOnCLick(String gpxFileName) {
 				if (mapActivity != null) {
-					GPXFile gpxFile = getGpxFile(gpxFileName);
+					GPXFile gpxFile;
+					if (gpxFileName == null) {
+						gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+					} else {
+						gpxFile = getGpxFile(gpxFileName);
+					}
 					SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper()
 							.getSelectedFileByPath(gpxFile.path);
 					boolean showOnMap = selectedGpxFile != null;
@@ -1563,7 +1568,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 							gpx.addRoutePoints(points);
 						}
 					}
-					Exception res = GPXUtilities.writeGpxFile(toSave, gpx);
+					Exception res = null;
+					if (!gpx.showCurrentTrack) {
+						res = GPXUtilities.writeGpxFile(toSave, gpx);
+					}
 					savedGpxFile = gpx;
 					if (showOnMap) {
 						SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
@@ -1633,9 +1641,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 							}
 							dismiss(mapActivity);
 						} else {
-							Toast.makeText(mapActivity,
-									MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
-									Toast.LENGTH_LONG).show();
+							if (!savedGpxFile.showCurrentTrack) {
+								Toast.makeText(mapActivity,
+										MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
+										Toast.LENGTH_LONG).show();
+							}
 						}
 					}
 				} else {

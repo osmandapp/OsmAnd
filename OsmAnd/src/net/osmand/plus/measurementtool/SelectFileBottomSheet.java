@@ -63,6 +63,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	private SelectFileListener listener;
 	private Map<String, List<GPXInfo>> gpxInfoMap;
 	private Mode fragmentMode;
+	private String selectedFolder;
 
 	public void setFragmentMode(Mode fragmentMode) {
 		this.fragmentMode = fragmentMode;
@@ -90,13 +91,19 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		final File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		collectDirs(gpxDir, dirs);
 		List<String> dirItems = new ArrayList<>();
+		String allFilesFolder = context.getString(R.string.shared_string_all);
+		if (savedInstanceState == null) {
+			selectedFolder = allFilesFolder;
+		}
+		dirItems.add(allFilesFolder);
 		for (File dir : dirs) {
 			dirItems.add(dir.getName());
 		}
-		String allFilesFolder = context.getString(R.string.shared_string_all);
-		dirItems.add(0, allFilesFolder);
 
 		final List<GPXInfo> allGpxList = getSortedGPXFilesInfo(gpxDir, null, false);
+		if (isShowCurrentGpx()) {
+			allGpxList.add(0, new GPXInfo(getString(R.string.shared_string_currently_recording_track), 0, 0));
+		}
 		gpxInfoMap = new HashMap<>();
 		gpxInfoMap.put(allFilesFolder, allGpxList);
 		for (GPXInfo gpxInfo : allGpxList) {
@@ -108,12 +115,18 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			gpxList.add(gpxInfo);
 		}
-		adapter = new GpxTrackAdapter(requireContext(), allGpxList, false);
+
+		adapter = new GpxTrackAdapter(requireContext(), allGpxList, isShowCurrentGpx());
 		adapter.setAdapterListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {
 				if (position != RecyclerView.NO_POSITION && position < allGpxList.size()) {
-					String fileName = allGpxList.get(position).getFileName();
+					String fileName;
+					if (isShowCurrentGpx() && position == 0) {
+						fileName = null;
+					} else {
+						fileName = allGpxList.get(position).getFileName();
+					}
 					if (listener != null) {
 						listener.selectFileOnCLick(fileName);
 					}
@@ -128,18 +141,28 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 				RecyclerView.HORIZONTAL, false));
 		final HorizontalSelectionAdapter folderAdapter = new HorizontalSelectionAdapter(app, nightMode);
 		folderAdapter.setItems(dirItems);
-		folderAdapter.setSelectedItem(allFilesFolder);
+		folderAdapter.setSelectedItem(selectedFolder);
 		foldersRecyclerView.setAdapter(folderAdapter);
 		folderAdapter.setListener(new HorizontalSelectionAdapterListener() {
 			@Override
 			public void onItemSelected(String item) {
-				List<GPXInfo> gpxInfoList = gpxInfoMap.get(item);
-				adapter.setGpxInfoList(gpxInfoList != null ? gpxInfoList : new ArrayList<GPXInfo>());
-				adapter.notifyDataSetChanged();
-				folderAdapter.notifyDataSetChanged();
+				selectedFolder = item;
+				updateFileList(item, folderAdapter);
 			}
 		});
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
+		updateFileList(selectedFolder, folderAdapter);
+	}
+
+	private void updateFileList(String folderName, HorizontalSelectionAdapter folderAdapter) {
+		List<GPXInfo> gpxInfoList = gpxInfoMap.get(folderName);
+		adapter.setGpxInfoList(gpxInfoList != null ? gpxInfoList : new ArrayList<GPXInfo>());
+		adapter.notifyDataSetChanged();
+		folderAdapter.notifyDataSetChanged();
+	}
+
+	private boolean isShowCurrentGpx() {
+		return fragmentMode == Mode.ADD_TO_TRACK;
 	}
 
 	private String getFolderName(GPXInfo gpxInfo) {
