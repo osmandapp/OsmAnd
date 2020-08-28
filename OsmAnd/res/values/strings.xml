@@ -20,7 +20,7 @@
     <string name="disable_recording_once_app_killed_descrp">Will pause track logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
     <string name="monitoring_control_start">REC</string>
     <string name="number_of_gpx_files_selected_pattern">%s track files selected</string>
-    <string name="file_name">File name:</string>
+    <string name="shared_string_file_name">File name</string>
     <string name="simplified_track_description">Only the route line will be saved, the waypoints will be deleted.</string>
     <string name="simplified_track">Simplified track</string>
     <string name="plan_route_change_route_type_after">Change route type after</string>

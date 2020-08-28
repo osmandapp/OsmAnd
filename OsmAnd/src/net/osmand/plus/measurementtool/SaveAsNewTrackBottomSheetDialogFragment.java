@@ -65,7 +65,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				R.layout.track_name_edit_text, null);
 		final TextInputLayout nameTextBox = editNameView.findViewById(R.id.name_text_box);
 		nameTextBox.setBoxBackgroundColorResource(R.color.material_text_input_layout_bg);
-		nameTextBox.setHint(getString(R.string.file_name));
+		nameTextBox.setHint(app.getString(R.string.ltr_or_rtl_combine_via_colon,
+				app.getString(R.string.shared_string_file_name), "").trim());
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
 				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
 		nameTextBox.setDefaultHintTextColor(colorStateList);
@@ -96,19 +97,20 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 
 		FolderListAdapter adapter = new FolderListAdapter(app, nightMode, folderName);
-		adapter.setListener(createFolderSelectListener());
-		View view = View.inflate(UiUtilities.getThemedContext(app, nightMode), R.layout.bottom_sheet_item_recyclerview,
-				null);
-		View recyclerView = view.findViewById(R.id.recycler_view);
-		recyclerView.setPadding(contentPaddingHalf, 0, contentPaddingHalf, 0);
-		BaseBottomSheetItem scrollItem = new HorizontalRecyclerBottomSheetItem.Builder()
-				.setAdapter(adapter)
-				.setCustomView(view)
-				.create();
-		this.items.add(scrollItem);
+		if (adapter.getItemCount() > 0) {
+			adapter.setListener(createFolderSelectListener());
+			View view = View.inflate(UiUtilities.getThemedContext(app, nightMode), R.layout.bottom_sheet_item_recyclerview,
+					null);
+			View recyclerView = view.findViewById(R.id.recycler_view);
+			recyclerView.setPadding(contentPaddingHalf, 0, contentPaddingHalf, 0);
+			BaseBottomSheetItem scrollItem = new HorizontalRecyclerBottomSheetItem.Builder()
+					.setAdapter(adapter)
+					.setCustomView(view)
+					.create();
+			this.items.add(scrollItem);
 
-		items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.dialog_content_margin)));
-
+			items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.dialog_content_margin)));
+		}
 		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		int backgroundColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
 				R.attr.activity_background_color);
