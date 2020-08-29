@@ -128,7 +128,7 @@ import java.util.Stack;
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
 	private static final Log LOG = PlatformUtil.getLog(MapRouteInfoMenu.class);
-	
+
 	private static final int BUTTON_ANIMATION_DELAY = 2000;
 	public static final int DEFAULT_MENU_STATE = 0;
 	private static final int MAX_PEDESTRIAN_ROUTE_DURATION = 30 * 60;
@@ -452,7 +452,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				fragment.updateInfo();
 				if (!routeCalculationInProgress) {
 					fragment.hideRouteCalculationProgressBar();
-					if(!app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.
+					if (!app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.
 							getModeValue(app.getRoutingHelper().getAppMode())) {
 						fragment.openMenuHalfScreen();
 					} else {
@@ -1544,17 +1544,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		OsmandApplication app = mapActivity.getMyApplication();
 		View viaLayout = mainView.findViewById(R.id.ViaLayout);
-		View viaLayoutDivider = mainView.findViewById(R.id.viaLayoutDivider);
 
 		String viaDescription = generateViaDescription();
 		GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
 		if (routeParams == null && Algorithms.isEmpty(viaDescription)) {
 			AndroidUiHelper.updateVisibility(viaLayout, false);
-			AndroidUiHelper.updateVisibility(viaLayoutDivider, false);
 			return;
 		} else {
 			AndroidUiHelper.updateVisibility(viaLayout, true);
-			AndroidUiHelper.updateVisibility(viaLayoutDivider, true);
 		}
 
 		if (routeParams != null) {
@@ -1578,6 +1575,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		setupViaText(mainView);
 
 		FrameLayout viaButton = (FrameLayout) mainView.findViewById(R.id.via_button);
+		AndroidUiHelper.updateVisibility(viaButton, isFinishPointFromTrack());
 		viaButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1663,8 +1661,20 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		OsmandApplication app = mapActivity.getMyApplication();
 
-		setupToText(mainView);
-		final View toLayout = mainView.findViewById(R.id.ToLayout);
+		View toLayout = mainView.findViewById(R.id.ToLayout);
+		View viaLayout = mainView.findViewById(R.id.ViaLayout);
+		View toLayoutDivider = mainView.findViewById(R.id.toLayoutDivider);
+
+		if (isFinishPointFromTrack()) {
+			AndroidUiHelper.updateVisibility(toLayout, false);
+			AndroidUiHelper.updateVisibility(toLayoutDivider, false);
+			return;
+		} else {
+			boolean dividerVisible = viaLayout.getVisibility() == View.VISIBLE;
+			AndroidUiHelper.updateVisibility(toLayout, true);
+			AndroidUiHelper.updateVisibility(toLayoutDivider, dividerVisible);
+		}
+
 		toLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1674,6 +1684,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 			}
 		});
+		setupToText(mainView);
 
 		FrameLayout toButton = (FrameLayout) mainView.findViewById(R.id.to_button);
 		if (app.getRoutingHelper().isPublicTransportMode()) {
@@ -1725,6 +1736,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void updateToIcon(View parentView) {
 		ImageView toIcon = (ImageView) parentView.findViewById(R.id.toIcon);
 		toIcon.setImageDrawable(getIconOrig(R.drawable.list_destination));
+	}
+
+	private boolean isFinishPointFromTrack() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
+			if (routeParams != null) {
+				TargetPoint target = app.getTargetPointsHelper().getPointToNavigate();
+				if (target != null) {
+					PointDescription pointDescription = target.getOriginalPointDescription();
+					return pointDescription != null && routeParams.getFile().path.equals(pointDescription.getTypeName());
+				}
+			}
+		}
+		return false;
 	}
 
 	private void updateStartPointView() {
@@ -1866,7 +1893,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		addButtonCollapsing = false;
 	}
 
-	private void setupButtonIcon(ImageView imageView, @DrawableRes int iconId){
+	private void setupButtonIcon(ImageView imageView, @DrawableRes int iconId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			UiUtilities uiUtilities = mapActivity.getMyApplication().getUIUtilities();
@@ -1880,7 +1907,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	private void setupButtonBackground(View button, View buttonContainer){
+	private void setupButtonBackground(View button, View buttonContainer) {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 			AndroidUtils.setBackground(app, button, nightMode, R.drawable.btn_rounded_light, R.drawable.btn_rounded_dark);
 			AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.ripple_rounded_light, R.drawable.ripple_rounded_dark);

@@ -35,8 +35,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -46,7 +44,6 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
@@ -54,6 +51,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
+import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
@@ -66,11 +64,13 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.BaseMapLayer;
-import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
@@ -106,7 +106,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_A
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AVOID_ROAD;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_EDIT_GPX_WP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARKER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MEASURE_DISTANCE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
@@ -512,7 +511,9 @@ public class MapActivityActions implements DialogProvider {
 				TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();
 				tg.clearStartPoint(false);
 				Location finishLoc = ps.get(ps.size() - 1);
-				tg.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1);
+				PointDescription point = new PointDescription(PointDescription.POINT_TYPE_GPX, result.path, "");
+				point.setName(PointDescription.getSearchAddressStr(mapActivity));
+				tg.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1, point);
 			}
 		}
 	}
