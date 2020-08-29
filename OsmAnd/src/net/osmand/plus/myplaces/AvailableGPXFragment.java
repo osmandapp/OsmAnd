@@ -81,7 +81,6 @@ import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.Collator;
@@ -103,6 +102,7 @@ import java.util.regex.Pattern;
 import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.util.Algorithms.*;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 	FavoritesFragmentStateHolder {
@@ -742,20 +742,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	private void collectDirs(File dir, List<File> dirs, File exclDir) {
-		File[] listFiles = dir.listFiles();
-		if (listFiles != null) {
-			for (File f : listFiles) {
-				if (f.isDirectory()) {
-					if (!exclDir.equals(f)) {
-						dirs.add(f);
-					}
-					collectDirs(f, dirs, exclDir);
-				}
-			}
-		}
-	}
-
 	private void moveGpx(final GpxInfo info) {
 
 		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(app);
@@ -777,7 +763,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					dirName = dirName.substring(gpxDir.length() + 1);
 				}
 			}
-			menuAdapter.addItem(itemBuilder.setTitle(Algorithms.capitalizeFirstLetter(dirName))
+			menuAdapter.addItem(itemBuilder.setTitle(capitalizeFirstLetter(dirName))
 					.setIcon(R.drawable.ic_action_folder_stroke).setTag(i).createItem());
 			i++;
 		}
@@ -1111,7 +1097,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			// search from end
 			for (int i = category.size() - 1; i >= 0; i--) {
 				String cat = category.get(i);
-				if (Algorithms.objectEquals(catName, cat)) {
+				if (objectEquals(catName, cat)) {
 					found = i;
 					break;
 				}
@@ -1249,14 +1235,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			if (groupName.length() == 0) {
 				groupName = getString(R.string.shared_string_tracks);
 			}
-			t.append(Algorithms.capitalizeFirstLetter(groupName));
+			t.append(capitalizeFirstLetter(groupName));
 			boolean light = app.getSettings().isLightContent();
 
 			if (selectionMode) {
 				final CheckBox ch = (CheckBox) v.findViewById(R.id.toggle_item);
 				// Issue 6187: No selection box for Visible group header
 				//ch.setVisibility(View.VISIBLE);
-				ch.setVisibility((selectionMode && !(groupPosition == 0 && isShowingSelection()))? View.VISIBLE : View.GONE);
+				ch.setVisibility((selectionMode && !(groupPosition == 0 && isShowingSelection())) ? View.VISIBLE : View.GONE);
 				ch.setChecked(selectedGroups.contains(groupPosition));
 
 				ch.setOnClickListener(new View.OnClickListener() {
@@ -1361,7 +1347,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				// local_indexes_cat_gpx now obsolete in new UI screen which shows only GPX data
 				// if (Algorithms.objectEquals(getActivity().getString(R.string.local_indexes_cat_gpx) + " " +
 				// g.subfolder, cat)) {
-				if (Algorithms.objectEquals("" + g.subfolder, cat)) {
+				if (objectEquals("" + g.subfolder, cat)) {
 					found = i;
 					break;
 				}
@@ -1586,7 +1572,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			for (GpxInfo info : params) {
 				if (!isCancelled() && (info.gpx == null || !info.gpx.showCurrentTrack)) {
 					boolean successfull;
-					successfull = Algorithms.removeAllFiles(info.file);
+					successfull = removeAllFiles(info.file);
 					app.getGpxDbHelper().remove(info.file);
 					total++;
 					if (successfull) {
@@ -1849,7 +1835,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 //				if (analysis.isTimeMoving()) {
 //					time.setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000)) + "");
 //				} else {
-				time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) + "");
+				time.setText(formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) + "");
 //				}
 			} else {
 				time.setText("");

@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_is_saved">is saved</string>
+    <string name="open_saved_track">Open saved track</string>
     <string name="all_previous_segments_will_be_recalc">All previous segments will be recalculated using selected profile.</string>
     <string name="all_next_segments_will_be_recalc">All next segments will be recalculated using selected profile.</string>
     <string name="only_selected_segment_recalc">Only selected segment will be recalculated using selected profile.</string>
@@ -24,6 +26,9 @@
     <string name="disable_recording_once_app_killed_descrp">Will pause track logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
     <string name="monitoring_control_start">REC</string>
     <string name="number_of_gpx_files_selected_pattern">%s track files selected</string>
+    <string name="shared_string_file_name">File name</string>
+    <string name="simplified_track_description">Only the route line will be saved, the waypoints will be deleted.</string>
+    <string name="simplified_track">Simplified track</string>
     <string name="plan_route_change_route_type_after">Change route type after</string>
     <string name="plan_route_change_route_type_before">Change route type before</string>
     <string name="plan_route_trim_after">Trim after</string>

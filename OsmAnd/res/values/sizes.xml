@@ -262,6 +262,8 @@
 	<dimen name="measurement_tool_undo_redo_padding_small">6dp</dimen>
 	<dimen name="measurement_tool_undo_redo_padding_medium">14dp</dimen>
 	<dimen name="measurement_tool_undo_redo_padding">16dp</dimen>
+	<dimen name="measurement_tool_folder_select_width">100dp</dimen>
+	<dimen name="measurement_tool_folder_select_height">60dp</dimen>
 	<dimen name="measurement_tool_button_margin">8dp</dimen>
 	<dimen name="measurement_tool_button_padding">8dp</dimen>
 	<dimen name="measurement_tool_button_padding_top">10dp</dimen>
