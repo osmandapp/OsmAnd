@@ -2422,7 +2422,7 @@
     <string name="mapillary_widget">Mapillary-Steuerelement</string>
     <string name="mapillary_widget_descr">Ermöglicht schnelle Beiträge zu Mapillary.</string>
     <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jeden. Orte entdecken, mitwirken und die Welt in Bildern festhalten.</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Bilder auf Straßenebene</string>
     <string name="mapillary_action_descr">Mit Mapillary Bilder dieses Orts beitragen.</string>
     <string name="shared_string_install">Installieren</string>
     <string name="online_photos">Online-Fotos</string>
@@ -3846,4 +3846,6 @@
     <string name="delete_address">Adresse löschen</string>
     <string name="add_address">Adresse hinzufügen</string>
     <string name="access_hint_enter_address">Adresse eingeben</string>
+    <string name="street_level_imagery">Bilder auf Straßenebene</string>
+    <string name="plan_route_exit_dialog_descr">Sind Sie sicher, die Routenplanung ohne speichern beenden zu wollen\? Sie werden alle Änderungen verlieren.</string>
 </resources>
