@@ -529,11 +529,16 @@ public class MapActivityActions implements DialogProvider {
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
 											   boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
+		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName, useIntermediatePointsByDefault, showMenu, menuState);
+	}
+
+	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from, PointDescription fromName,
+											   boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
-		ApplicationMode mode = getRouteMode(from);
+		ApplicationMode mode = appMode != null ? appMode : getRouteMode(from);
 		//app.getSettings().APPLICATION_MODE.set(mode);
 		app.getRoutingHelper().setAppMode(mode);
 		app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, showMenu);
@@ -1102,6 +1107,10 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public AlertDialog stopNavigationActionConfirm() {
+		return stopNavigationActionConfirm(null);
+	}
+
+	public AlertDialog stopNavigationActionConfirm(final Runnable onStopAction) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		// Stop the navigation
 		builder.setTitle(getString(R.string.cancel_route));
@@ -1110,6 +1119,9 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				stopNavigationWithoutConfirm();
+				if (onStopAction != null) {
+					onStopAction.run();
+				}
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);

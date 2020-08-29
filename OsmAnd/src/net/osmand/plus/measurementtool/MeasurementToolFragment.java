@@ -54,11 +54,14 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.GpxApproximationFragment.GpxApproximationFragmentListener;
 import net.osmand.plus.measurementtool.GpxData.ActionType;
@@ -80,7 +83,6 @@ import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
-import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
@@ -99,7 +101,7 @@ import java.util.Locale;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.SnapToRoadProgressListener;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.*;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
@@ -139,6 +141,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean progressBarVisible;
 	private boolean pointsListOpened;
 	private boolean planRouteMode = false;
+	private boolean directionMode = false;
 	private boolean portrait;
 	private boolean nightMode;
 	private int cachedMapPosition;
@@ -448,7 +451,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	public boolean isInEditMode() {
-		return !planRouteMode && !editingCtx.isNewData();
+		return !planRouteMode && !editingCtx.isNewData() && !directionMode;
 	}
 
 	public void setFileName(String fileName) {
@@ -624,6 +627,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				switch (resultCode) {
 					case SnapTrackWarningBottomSheet.CANCEL_RESULT_CODE:
 						toolBarController.setSaveViewVisible(true);
+						directionMode = false;
 						updateToolbar();
 						break;
 					case SnapTrackWarningBottomSheet.CONTINUE_RESULT_CODE:
@@ -656,13 +660,65 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void directionsOnClick() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-			if (mapControlsLayer != null) {
-				if (editingCtx.getPointsCount() > 0) {
-					mapControlsLayer.doRoute(false);
+			OsmandApplication app = mapActivity.getMyApplication();
+			MapActivityActions mapActions = mapActivity.getMapActions();
+			TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+			ApplicationMode appMode = editingCtx.getAppMode();
+			if (appMode == ApplicationMode.DEFAULT) {
+				appMode = null;
+			}
+			List<WptPt> points = editingCtx.getPoints();
+			if (points.size() > 0) {
+				if (points.size() == 1) {
+					targetPointsHelper.clearAllPoints(false);
+					targetPointsHelper.navigateToPoint(new LatLon(points.get(0).getLatitude(), points.get(0).getLongitude()), false, -1);
+					dismiss(mapActivity);
+					mapActions.enterRoutePlanningModeGivenGpx(null, appMode, null, null, true, true, MenuState.HEADER_ONLY);
 				} else {
-					Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+					String trackName = getSuggestedFileName();
+					if (editingCtx.hasRoute()) {
+						GPXFile gpx = editingCtx.exportRouteAsGpx(trackName);
+						if (gpx != null) {
+							dismiss(mapActivity);
+							runNavigation(gpx, appMode);
+						} else {
+							Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
+						}
+					} else {
+						if (editingCtx.isNewData() || editingCtx.hasRoutePoints()) {
+							GPXFile gpx = new GPXFile(Version.getFullVersion(requireMyApplication()));
+							gpx.addRoutePoints(points);
+							dismiss(mapActivity);
+							targetPointsHelper.clearAllPoints(false);
+							mapActions.enterRoutePlanningModeGivenGpx(gpx, appMode, null, null, true, true, MenuState.HEADER_ONLY);
+						} else {
+							directionMode = true;
+							SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
+						}
+					}
 				}
+			} else {
+				Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
+	private void runNavigation(final GPXFile gpx, final ApplicationMode appMode) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (mapActivity.getMyApplication().getRoutingHelper().isFollowingMode()) {
+				mapActivity.getMapActions().stopNavigationActionConfirm(new Runnable() {
+					@Override
+					public void run() {
+						MapActivity mapActivity = getMapActivity();
+						if (mapActivity != null) {
+							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpx, appMode, null, null, true, true, MenuState.HEADER_ONLY);
+						}
+					}
+				});
+			} else {
+				mapActivity.getMapActions().stopNavigationWithoutConfirm();
+				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpx, appMode, null, null, true, true, MenuState.HEADER_ONLY);
 			}
 		}
 	}
@@ -1986,11 +2042,32 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onApplyGpxApproximation() {
 		doAddOrMovePointCommonStuff();
+		if (directionMode) {
+			directionMode = false;
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				if (editingCtx.hasRoute()) {
+					String trackName = getSuggestedFileName();
+					GPXFile gpx = editingCtx.exportRouteAsGpx(trackName);
+					if (gpx != null) {
+						ApplicationMode appMode = editingCtx.getAppMode();
+						dismiss(mapActivity);
+						runNavigation(gpx, appMode);
+					} else {
+						Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
+					}
+				} else {
+					Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
+				}
+			}
+		}
 	}
 
 	@Override
 	public void onCancelGpxApproximation() {
 		editingCtx.getCommandManager().undo();
+		directionMode = false;
 		updateSnapToRoadControls();
+		updateToolbar();
 	}
 }

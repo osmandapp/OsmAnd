@@ -29,6 +29,7 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 
 	protected View mainView;
 	protected GpxTrackAdapter adapter;
+	private boolean continued = false;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 	protected void onRightBottomButtonClick() {
 		Fragment fragment = getTargetFragment();
 		if (fragment != null) {
+			continued = true;
 			fragment.onActivityResult(REQUEST_CODE, CONTINUE_RESULT_CODE, null);
 		}
 		dismiss();
@@ -72,7 +74,7 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 			activity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.VISIBLE);
 		}
 		Fragment fragment = getTargetFragment();
-		if (fragment != null) {
+		if (fragment != null && !continued) {
 			fragment.onActivityResult(REQUEST_CODE, CANCEL_RESULT_CODE, null);
 		}
 	}

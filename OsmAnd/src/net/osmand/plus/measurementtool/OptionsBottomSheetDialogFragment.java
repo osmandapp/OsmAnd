@@ -118,6 +118,42 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		items.add(new OptionsDividerItem(getContext()));
 
+		BaseBottomSheetItem directions = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark))
+				.setTitle(getString(R.string.get_directions))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Fragment fragment = getTargetFragment();
+						if (fragment instanceof OptionsFragmentListener) {
+							((OptionsFragmentListener) fragment).directionsOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(directions);
+
+		/*BaseBottomSheetItem reverse = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_reverse_direction))
+				.setTitle(getString(R.string.reverse_route))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Fragment fragment = getTargetFragment();
+						if (fragment instanceof OptionsFragmentListener) {
+							((OptionsFragmentListener) fragment).reverseRouteOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(reverse);*/
+
+		items.add(new OptionsDividerItem(getContext()));
+
 		BaseBottomSheetItem clearAllItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getIcon(R.drawable.ic_action_reset_to_default_dark,
 						nightMode ? R.color.color_osm_edit_delete : R.color.color_osm_edit_delete))
