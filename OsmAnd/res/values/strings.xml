@@ -13,6 +13,12 @@
 -->
     <string name="shared_string_is_saved">is saved</string>
     <string name="open_saved_track">Open saved track</string>
+    <string name="all_previous_segments_will_be_recalc">All previous segments will be recalculated using selected profile.</string>
+    <string name="all_next_segments_will_be_recalc">All next segments will be recalculated using selected profile.</string>
+    <string name="only_selected_segment_recalc">Only selected segment will be recalculated using selected profile.</string>
+    <string name="all_previous_segments">All previous segments</string>
+    <string name="previous_segment">Previous segment</string>
+    <string name="all_next_segments">All next segments</string>
     <string name="system_default_theme">System Default</string>
     <string name="gpx_monitoring_start">Resume trip recording</string>
     <string name="gpx_monitoring_stop">Pause trip recording</string>

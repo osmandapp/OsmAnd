@@ -34,6 +34,7 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -61,11 +62,11 @@ public class MeasurementEditingContext {
 	private boolean inAddPointMode;
 	private int calculatedPairs;
 	private int pointsToCalculateSize;
-	private CalculationMode calculationMode = WHOLE_TRACK;
+	private CalculationMode lastCalculationMode = WHOLE_TRACK;
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode appMode = DEFAULT_APP_MODE;
 	private RouteCalculationProgress calculationProgress;
-	private final Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = new ConcurrentHashMap<>();
+	private Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = new ConcurrentHashMap<>();
 
 	public enum CalculationMode {
 		NEXT_SEGMENT,
@@ -195,12 +196,12 @@ public class MeasurementEditingContext {
 		return gpxData != null && gpxData.getGpxFile() != null && gpxData.getGpxFile().hasRoute();
 	}
 
-	public CalculationMode getCalculationMode() {
-		return calculationMode;
+	public CalculationMode getLastCalculationMode() {
+		return lastCalculationMode;
 	}
 
-	public void setCalculationMode(CalculationMode calculationMode) {
-		this.calculationMode = calculationMode;
+	public void setLastCalculationMode(CalculationMode lastCalculationMode) {
+		this.lastCalculationMode = lastCalculationMode;
 	}
 
 	void setProgressListener(SnapToRoadProgressListener progressListener) {
@@ -235,6 +236,14 @@ public class MeasurementEditingContext {
 			}
 		}
 		return distance;
+	}
+
+	public Map<Pair<WptPt, WptPt>, RoadSegmentData> getRoadSegmentData() {
+		return new HashMap<>(roadSegmentData);
+	}
+
+	public void setRoadSegmentData(Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData) {
+		this.roadSegmentData = new ConcurrentHashMap<>(roadSegmentData);
 	}
 
 	public boolean hasRoute() {
@@ -348,6 +357,19 @@ public class MeasurementEditingContext {
 
 	public boolean isLastPointSelected() {
 		return selectedPointPosition == getPoints().size() - 1;
+	}
+
+	public ApplicationMode getSelectedPointAppMode() {
+		return getPointAppMode(selectedPointPosition);
+	}
+
+	public ApplicationMode getBeforeSelectedPointAppMode() {
+		return getPointAppMode(Math.max(selectedPointPosition - 1, 0));
+	}
+
+	private ApplicationMode getPointAppMode(int pointPosition) {
+		String profileType = getPoints().get(pointPosition).getProfileType();
+		return ApplicationMode.valueOfStringKey(profileType, MeasurementEditingContext.DEFAULT_APP_MODE);
 	}
 
 	public void scheduleRouteCalculateIfNotEmpty() {

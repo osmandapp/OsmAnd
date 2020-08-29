@@ -157,6 +157,46 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		items.add(new OptionsDividerItem(getContext()));
 
+		BaseBottomSheetItem changeRouteTypeBefore = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getDescription(true))
+				.setIcon(getRouteTypeIcon(true))
+				.setTitle(getString(R.string.plan_route_change_route_type_before))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Fragment targetFragment = getTargetFragment();
+						if (targetFragment instanceof SelectedPointFragmentListener) {
+							((SelectedPointFragmentListener) targetFragment).onChangeRouteTypeBefore();
+						}
+						dismiss();
+					}
+				})
+				.setDisabled(editingCtx.isFirstPointSelected())
+				.create();
+		items.add(changeRouteTypeBefore);
+
+		BaseBottomSheetItem changeRouteTypeAfter = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getDescription(false))
+				.setIcon(getRouteTypeIcon(false))
+				.setTitle(getString(R.string.plan_route_change_route_type_after))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Fragment targetFragment = getTargetFragment();
+						if (targetFragment instanceof SelectedPointFragmentListener) {
+							((SelectedPointFragmentListener) targetFragment).onChangeRouteTypeAfter();
+						}
+						dismiss();
+					}
+				})
+				.setDisabled(editingCtx.isLastPointSelected())
+				.create();
+		items.add(changeRouteTypeAfter);
+
+		items.add(new OptionsDividerItem(getContext()));
+
 		BaseBottomSheetItem deleteItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getIcon(R.drawable.ic_action_delete_dark,
 						nightMode ? R.color.color_osm_edit_delete : R.color.color_osm_edit_delete))
@@ -283,12 +323,11 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Nullable
 	private Drawable getRouteTypeIcon(boolean before) {
-		Drawable icon = getContentIcon(R.drawable.ic_action_split_interval);
-		int pos = editingCtx.getSelectedPointPosition();
-		pos = before ? pos : Math.max(pos - 1, 0);
-		String profileType = editingCtx.getPoints().get(pos).getProfileType();
-		ApplicationMode routeAppMode = ApplicationMode.valueOfStringKey(profileType, null);
-		if (routeAppMode != null) {
+		ApplicationMode routeAppMode = before ? editingCtx.getBeforeSelectedPointAppMode() : editingCtx.getSelectedPointAppMode();
+		Drawable icon;
+		if (MeasurementEditingContext.DEFAULT_APP_MODE.equals(routeAppMode)) {
+			icon = getContentIcon(R.drawable.ic_action_split_interval);
+		} else {
 			icon = getIcon(routeAppMode.getIconRes(), routeAppMode.getIconColorInfo().getColor(nightMode));
 		}
 		return icon;
