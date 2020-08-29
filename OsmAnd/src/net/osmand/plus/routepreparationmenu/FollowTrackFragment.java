@@ -40,10 +40,10 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.ImportHelper.OnGpxImportCompleteListener;
-import net.osmand.plus.measurementtool.MeasurementEditingContext;
-import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.GpxData.ActionType;
+import net.osmand.plus.measurementtool.MeasurementEditingContext;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsCard;
@@ -148,13 +148,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				}
 			});
 
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					openMenuHeaderOnly();
-				}
-			});
-
 			if (isPortrait()) {
 				updateCardsLayout();
 			}
@@ -195,7 +188,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				SelectTrackCard selectTrackCard = new SelectTrackCard(mapActivity);
 				selectTrackCard.setListener(this);
 				cardsContainer.addView(selectTrackCard.build(mapActivity));
-				cardsContainer.addView(buildDividerView(cardsContainer,false));
+				cardsContainer.addView(buildDividerView(cardsContainer, false));
 
 				ApplicationMode mode = app.getRoutingHelper().getAppMode();
 
@@ -213,7 +206,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 					cardsContainer.addView(reverseTrackCard.build(mapActivity));
 //					}
 					if (!gpxFile.hasRtePt()) {
-						cardsContainer.addView(buildDividerView(cardsContainer,true));
+						cardsContainer.addView(buildDividerView(cardsContainer, true));
 
 						AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
 						attachTrackCard.setListener(this);
@@ -270,6 +263,18 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 
 		return divider;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		MapRouteInfoMenu.followTrackVisible = true;
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		MapRouteInfoMenu.followTrackVisible = false;
 	}
 
 	@Override
@@ -519,7 +524,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				dismiss();
 			}
 		});
-		UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
+		UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_close);
 	}
 
 	private void setupScrollShadow() {

@@ -12,6 +12,8 @@
 		android:layout_height="wrap_content"
 		android:gravity="center_vertical"
 		android:minHeight="@dimen/setting_list_item_small_height"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
 		android:textAppearance="@style/TextAppearance.ListItemTitle"
 		osmand:typeface="@string/font_roboto_regular"
 		tools:text="@string/pass_whole_track_descr" />

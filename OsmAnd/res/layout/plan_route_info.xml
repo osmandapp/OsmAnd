@@ -328,7 +328,7 @@
 				</LinearLayout>
 
 				<View
-					android:id="@+id/viaLayoutDivider"
+					android:id="@+id/toLayoutDivider"
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
 					android:layout_marginStart="@dimen/route_info_start_divider_margin"
