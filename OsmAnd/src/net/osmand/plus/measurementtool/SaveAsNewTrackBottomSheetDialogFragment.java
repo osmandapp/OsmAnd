@@ -40,12 +40,13 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	public static final String SHOW_ON_MAP_KEY = "show_on_map_key";
 	public static final String SIMPLIFIED_TRACK_KEY = "simplified_track_key";
 	public static final String FOLDER_NAME_KEY = "folder_name_key";
+	public static final String FILE_NAME_KEY = "file_name_key";
 
-	boolean showOnMap;
-	boolean simplifiedTrack;
-	String fileName;
-	String folderName;
-	boolean rightButtonEnabled = true;
+	private boolean showOnMap;
+	private boolean simplifiedTrack;
+	private String fileName;
+	private String folderName;
+	private boolean rightButtonEnabled = true;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			showOnMap = savedInstanceState.getBoolean(SHOW_ON_MAP_KEY);
 			simplifiedTrack = savedInstanceState.getBoolean(SIMPLIFIED_TRACK_KEY);
 			folderName = savedInstanceState.getString(FOLDER_NAME_KEY);
+			fileName = savedInstanceState.getString(FILE_NAME_KEY);
 		}
 
 		items.add(new TitleItem(getString(R.string.shared_string_save_as_gpx)));
@@ -180,6 +182,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		outState.putBoolean(SHOW_ON_MAP_KEY, showOnMap);
 		outState.putBoolean(SIMPLIFIED_TRACK_KEY, simplifiedTrack);
 		outState.putString(FOLDER_NAME_KEY, folderName);
+		outState.putString(FILE_NAME_KEY, fileName);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -217,11 +220,13 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	}
 
 	private void checkEmptyName(Editable name, TextInputLayout nameCaption) {
-		if (name.toString().trim().isEmpty()) {
+		String text = name.toString().trim();
+		if (text.isEmpty()) {
 			nameCaption.setError(getString(R.string.empty_filename));
 			rightButtonEnabled = false;
 		} else {
 			nameCaption.setError(null);
+			fileName = text;
 			rightButtonEnabled = true;
 		}
 		updateBottomButtons();
