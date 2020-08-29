@@ -63,6 +63,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.GpxApproximationFragment.GpxApproximationFragmentListener;
 import net.osmand.plus.measurementtool.GpxData.ActionType;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
+import net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogMode;
+import net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogType;
 import net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsFragmentListener;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SelectedPointBottomSheetDialogFragment.SelectedPointFragmentListener;
@@ -71,6 +73,7 @@ import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter.Measuremen
 import net.osmand.plus.measurementtool.command.AddPointCommand;
 import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
 import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand;
+import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand.ChangeRouteType;
 import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
@@ -101,8 +104,10 @@ import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
 import static net.osmand.plus.measurementtool.StartPlanRouteBottomSheet.StartPlanRouteListener;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.*;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.*;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener {
@@ -573,7 +578,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 			if (editingCtx.isNewData() || editingCtx.hasRoutePoints() || editingCtx.hasRoute() || editingCtx.getPointsCount() < 2) {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-						this, editingCtx.getCalculationMode(),
+						this, RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION,
+						editingCtx.getLastCalculationMode() == CalculationMode.NEXT_SEGMENT
+								? RouteBetweenPointsDialogMode.SINGLE
+								: RouteBetweenPointsDialogMode.ALL,
 						editingCtx.getAppMode());
 			} else {
 				SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
@@ -759,12 +767,24 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onChangeRouteTypeBefore() {
-
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+					this, RouteBetweenPointsDialogType.PREV_ROUTE_CALCULATION,
+					RouteBetweenPointsDialogMode.SINGLE,
+					editingCtx.getBeforeSelectedPointAppMode());
+		}
 	}
 
 	@Override
 	public void onChangeRouteTypeAfter() {
-
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+					this, RouteBetweenPointsDialogType.NEXT_ROUTE_CALCULATION,
+					RouteBetweenPointsDialogMode.SINGLE,
+					editingCtx.getSelectedPointAppMode());
+		}
 	}
 
 	@Override
@@ -780,6 +800,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onCloseRouteDialog() {
 		toolBarController.setTitle(previousToolBarTitle);
+		editingCtx.setSelectedPointPosition(-1);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.refreshMap();
@@ -787,10 +808,26 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onChangeApplicationMode(ApplicationMode mode, CalculationMode calculationMode) {
+	public void onChangeApplicationMode(ApplicationMode mode, RouteBetweenPointsDialogType dialogType,
+										RouteBetweenPointsDialogMode dialogMode) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			editingCtx.getCommandManager().execute(new ChangeRouteModeCommand(measurementLayer, mode, calculationMode));
+			ChangeRouteType changeRouteType = ChangeRouteType.NEXT_SEGMENT;
+			switch (dialogType) {
+				case WHOLE_ROUTE_CALCULATION:
+					changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
+							? ChangeRouteType.LAST_SEGMENT : ChangeRouteType.WHOLE_ROUTE;
+					break;
+				case NEXT_ROUTE_CALCULATION:
+					changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
+							? ChangeRouteType.NEXT_SEGMENT : ChangeRouteType.ALL_NEXT_SEGMENTS;
+					break;
+				case PREV_ROUTE_CALCULATION:
+					changeRouteType = dialogMode == RouteBetweenPointsDialogMode.SINGLE
+							? ChangeRouteType.PREV_SEGMENT : ChangeRouteType.ALL_PREV_SEGMENTS;
+					break;
+			}
+			editingCtx.getCommandManager().execute(new ChangeRouteModeCommand(measurementLayer, mode, changeRouteType, editingCtx.getSelectedPointPosition()));
 			updateUndoRedoButton(false, redoBtn);
 			updateUndoRedoButton(true, undoBtn);
 			disable(upDownBtn);
