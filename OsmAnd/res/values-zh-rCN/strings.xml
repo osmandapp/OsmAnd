@@ -762,9 +762,9 @@
     <string name="search_POI_level_btn">搜索更多</string>
     <string name="choose_available_region">从列表中选择区域</string>
     <string name="navigate_point_top_text">用选中的格式输入纬度和经度(D - 度，M - 分，S - 秒)</string>
-    <string name="navigate_point_format_D">DDD.DDDDD</string>
-    <string name="navigate_point_format_DM">DDD MM.MM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+    <string name="navigate_point_format_D">度度度.度度度度度</string>
+    <string name="navigate_point_format_DM">度度度 分分.分分分</string>
+    <string name="navigate_point_format_DMS">度度度 分分 秒秒.秒</string>
     <string name="shared_string_show_on_map">在地图上显示</string>
     <string name="context_menu_item_update_map">更新地图</string>
     <string name="context_menu_item_create_poi">创建POI</string>
@@ -1539,7 +1539,7 @@
     <string name="lang_nds">低地德语</string>
     <string name="lang_mk">马其顿</string>
     <string name="lang_fy">菲士兰</string>
-    <string name="lang_als">"阿尔巴尼亚语  (Tosk)"</string>
+    <string name="lang_als">阿尔巴尼亚语 (Tosk)</string>
     <string name="world_map_download_descr">世界底图（涵盖整个世界的缩小版）可能存在丢失或过期。请考虑下载它的全球概览。</string>
     <string name="map_downloaded_descr">已下载 %1$s 的地图，你现在可以开始使用它。</string>
     <string name="simulate_initial_startup_descr">设置标志，指示第一个应用程序启动，保持所有其他设置保持不变。</string>
@@ -1667,7 +1667,7 @@
     <string name="navigate_point_northing">北距</string>
     <string name="navigate_point_easting">东距</string>
     <string name="error_avoid_specific_road">没有找到支线</string>
-    <string name="home_button">主页</string>
+    <string name="home_button">家</string>
     <string name="map_update">有 %1$s 个地图可更新</string>
     <string name="search_for">搜索</string>
     <string name="coordinates">坐标</string>
@@ -2372,7 +2372,7 @@
     <string name="will_open_at">开始营业于</string>
     <string name="will_open_on">开始营业于</string>
     <string name="additional_actions">额外的活动</string>
-    <string name="av_locations_selected_desc">GPX文件，包含所选笔记的坐标和数据。</string>
+    <string name="av_locations_selected_desc">GPX文件，包含所选注记的坐标和数据。</string>
     <string name="av_locations_all_desc">GPX文件，包含所有注释的坐标和数据。</string>
     <string name="modify_the_search_query">修改搜索查询。</string>
     <string name="shared_string_actions">操作</string>
@@ -3149,4 +3149,7 @@
     <string name="rourte_between_points_add_track_desc">选择一个要添加新片段的跟踪文件。</string>
     <string name="street_level_imagery">街道等级图像</string>
     <string name="in_case_of_reverse_direction">防止相反的方向</string>
+    <string name="delete_address">删除地址</string>
+    <string name="add_address">添加地址</string>
+    <string name="access_hint_enter_address">输入地址</string>
 </resources>
