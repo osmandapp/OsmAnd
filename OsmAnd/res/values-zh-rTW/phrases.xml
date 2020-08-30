@@ -3831,4 +3831,5 @@
     <string name="poi_give_box">禮物箱</string>
     <string name="poi_city_block">街區</string>
     <string name="poi_borough">自治市鎮</string>
+    <string name="poi_traffic_signals_arrow_no">箭頭：否</string>
 </resources>

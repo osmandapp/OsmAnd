@@ -1174,7 +1174,7 @@
     <string name="poi_pump_powered">Automática</string>
     <string name="poi_pump_no">Sin bomba</string>
     <string name="poi_water_characteristic_mineral">Mineralizada</string>
-    <string name="poi_water_characteristic_mud">Característica del agua: lodosa</string>
+    <string name="poi_water_characteristic_mud">Lodosa</string>
     <string name="poi_water_characteristic_sulfuric">Sulfúrica</string>
     <string name="poi_water_point">Toma de agua</string>
     <string name="poi_species">Especie</string>
@@ -3059,7 +3059,7 @@
     <string name="poi_railway_yard">Estación ferroviaria de carga</string>
     <string name="poi_coworking_space">Espacio de trabajo conjunto</string>
     <string name="poi_fast_food_cafeteria">Sí</string>
-    <string name="poi_drive_in">Conducir por dentro</string>
+    <string name="poi_drive_in">Drive-in</string>
     <string name="poi_drive_through">Servicio en el automóvil</string>
     <string name="poi_cuisine_bubble_tea">Té de burbujas</string>
     <string name="poi_cuisine_sagardotegia">Sidrería</string>
@@ -3252,7 +3252,7 @@
     <string name="poi_socket_cee_red_16a">Conector: CEE rojo 16A</string>
     <string name="poi_socket_cee_red_16a_current">Conector: CEE rojo 16A: corriente</string>
     <string name="poi_socket_cee_red_16a_output">Conector: CEE rojo 16A: salida</string>
-    <string name="poi_socket_cee_red_32a">"Conector: CEE  rojo 32A"</string>
+    <string name="poi_socket_cee_red_32a">Conector: CEE rojo 32A</string>
     <string name="poi_socket_cee_red_32a_current">Conector: CEE rojo 32A: corriente</string>
     <string name="poi_socket_cee_red_32a_output">Conector: CEE rojo 32A: salida</string>
     <string name="poi_socket_cee_red_64a">Conector: CEE rojo 64A</string>
@@ -3819,7 +3819,7 @@
     <string name="poi_memorial_ghost_bike">Bicicleta blanca</string>
     <string name="poi_fire_hydrant_pressure_filter">Presión</string>
     <string name="poi_sms">SMS</string>
-    <string name="poi_give_box">Caja de regalo</string>
+    <string name="poi_give_box">Caja libre</string>
     <string name="poi_traffic_signals_arrow_yes">Sí</string>
     <string name="poi_traffic_signals_vibration_yes">Sí</string>
     <string name="poi_traffic_signals_vibration_no">Vibración: no</string>
@@ -3831,4 +3831,6 @@
     <string name="poi_tactile_paving_contrasted">Contrastado</string>
     <string name="poi_traffic_signals_arrow">Flecha</string>
     <string name="poi_traffic_signals_vibration">Vibración</string>
+    <string name="poi_city_block">Manzana</string>
+    <string name="poi_traffic_signals_arrow_no">Flecha: no</string>
 </resources>

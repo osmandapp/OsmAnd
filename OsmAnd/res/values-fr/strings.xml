@@ -3121,7 +3121,7 @@
     <string name="routing_attr_piste_type_sled_description">Pistes pour chiens de traîneau.</string>
     <string name="routing_attr_allow_intermediate_name">Autoriser les itinéraires intermédiaires</string>
     <string name="routing_attr_allow_intermediate_description">Itinéraires plus difficiles avec des sections pentues et souvent des obstacles à contourner.</string>
-    <string name="routing_attr_allow_skating_only_name">Autoriser uniquement les pistes skating</string>
+    <string name="routing_attr_allow_skating_only_name">Autoriser uniquement les pistes de skating</string>
     <string name="routing_attr_allow_skating_only_description">Pistes damées pour le skating, sans traces parallèles.</string>
     <string name="routing_attr_allow_classic_only_name">Autoriser uniquement les pistes classiques</string>
     <string name="routing_attr_allow_classic_only_description">Pistes de ski de fond (inclus les pistes tracées par le passage des skieurs).</string>
@@ -3502,7 +3502,7 @@
     <string name="no_recalculation_setting">Sans re-calcul</string>
     <string name="route_recalculation_dist_title">Distance à partir de laquelle recalculer l’itinéraire</string>
     <string name="route_recalculation_dist_descr">L’itinéraire sera recalculé si votre éloignement de l\'itinéraire est supérieur à ce paramètre</string>
-    <string name="profile_type_custom_string">Profil personnel</string>
+    <string name="profile_type_custom_string">Profil personnalisé</string>
     <string name="shared_string_angle_param">Angle : %s°</string>
     <string name="shared_string_angle">Angle</string>
     <string name="recalc_angle_dialog_descr">Un segment supplémentaire sera affiché entre ma position et l\'itinéraire initial jusqu\'à ce que l\'itinéraire soit recalculé</string>
@@ -3817,4 +3817,29 @@
     <string name="street_level_imagery">Photos des rues</string>
     <string name="plan_route_exit_dialog_descr">Voulez-vous vraiment fermer l\'itinéraire planifié sans enregistrer \? Vous perdrez toutes les modifications.</string>
     <string name="in_case_of_reverse_direction">Si inversion du sens</string>
+    <string name="pass_whole_track_descr">Point de la trace vers lequel naviguer</string>
+    <string name="shared_string_gpx_route">Enregistrer le parcours</string>
+    <string name="access_hint_enter_address">Saisissez l\'adresse</string>
+    <string name="add_segment_to_the_track">Ajouter à un fichier de trace</string>
+    <string name="empty_state_my_tracks">Ajouter des fichiers de trace</string>
+    <string name="context_menu_item_add_waypoint">Ajouter un point de passage</string>
+    <string name="quick_action_add_gpx">Ajouter un point de passage à la trace</string>
+    <string name="start_of_the_track">Début de la trace</string>
+    <string name="attach_to_the_roads">Déplacer sur les routes</string>
+    <string name="save_track_to_gpx">Enregistrer automatiquement le parcours pendant la navigation</string>
+    <string name="shared_string_save_as_gpx">Enregistrer comme nouveau fichier de trace</string>
+    <string name="shared_string_gpx_files">Traces</string>
+    <string name="layer_gpx_layer">Traces</string>
+    <string name="show_gpx">Traces</string>
+    <string name="monitoring_control_start">GPX</string>
+    <string name="save_track_to_gpx_globally">Enregistrer le parcours dans un fichier GPX</string>
+    <string name="map_widget_monitoring">Enregistrement du parcours</string>
+    <string name="marker_save_as_track">Enregistrer comme fichier de trace</string>
+    <string name="follow_track">Suivre la trace</string>
+    <string name="follow_track_descr">Sélectionner un fichier de trace à suivre</string>
+    <string name="select_another_track">Sélectionner une autre trace</string>
+    <string name="navigate_to_track_descr">Naviguez de ma position vers la trace</string>
+    <string name="nearest_point">Point le plus proche</string>
+    <string name="delete_address">Supprimer l\'adresse</string>
+    <string name="add_address">Ajouter une adresse</string>
 </resources>

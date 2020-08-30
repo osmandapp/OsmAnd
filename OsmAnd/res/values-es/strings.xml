@@ -2327,19 +2327,13 @@
     <string name="animate_my_location">Ubicación propia animada</string>
     <string name="animate_my_location_desc">Activa el desplazamiento animado del mapa para «Mi ubicación» durante la navegación.</string>
     <string name="shared_string_overview">Resumen</string>
-    <string name="osmand_plus_extended_description_part2">Navegación GPS 
+    <string name="osmand_plus_extended_description_part2">Navegación GPS
 \n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero)
-\n
-\n • Guía por voz giro-a-giro (voces grabadas y sintetizadas) 
-\n
-\n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino 
-\n
-\n • Soporta puntos intermedios en el itinerario 
-\n
-\n • La ruta se recalcula al salirse de la misma 
-\n
-\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica 
-\n</string>
+\n • Guía por voz giro-a-giro (voces grabadas y sintetizadas)
+\n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino
+\n • Soporta puntos intermedios en el itinerario
+\n • La ruta se recalcula al salirse de la misma
+\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
 \n • (Opcional) Ajusta el mapa a la dirección del movimiento (o la brújula) 
@@ -2400,7 +2394,7 @@
     <string name="routing_attr_allow_private_description">Permite acceder a áreas privadas.</string>
     <string name="display_zoom_level">Nivel de zoom de pantalla: %1$s</string>
     <string name="route_is_too_long_v2">Para largas distancias: Añada destinos intermedios si no se encuentra ninguna ruta en 10 minutos.</string>
-    <string name="quick_action_showhide_osmbugs_title">Alternar notas de OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">Mostrar u ocultar notas de OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Un botón que muestra u oculta las notas de OSM en el mapa.</string>
@@ -2586,7 +2580,7 @@
     <string name="show_guide_line_descr">Muestra líneas direccionales desde su ubicación hasta los marcadores activos.</string>
     <string name="show_arrows_descr">Muestra una o dos flechas indicando la dirección a los marcadores activos.</string>
     <string name="distance_indication_descr">Elige cómo mostrar la distancia a los marcadores activos.</string>
-    <string name="active_markers_descr">Define el número de indicadores de dirección:</string>
+    <string name="active_markers_descr">Define el número de indicadores de dirección.</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de referencia</string>
     <string name="release_3_0">• Nuevo: Soporte para guías turísticas globales sin conexión a Internet. Las ubicaciones de referencia, están vinculadas al mapa. Datos iniciales de Wikiviajes 
@@ -3556,7 +3550,7 @@
     <string name="add_description">Añade descripción</string>
     <string name="select_group">Elige grupo</string>
     <string name="select_shape">Elige forma</string>
-    <string name="replace_point_descr">Reemplazar otro punto con este</string>
+    <string name="replace_point_descr">Reemplazar otro punto con este.</string>
     <string name="changes_applied_to_profile">Cambios aplicados al perfil \'%1$s\'.</string>
     <string name="settings_item_read_error">No se pudo leer \'%1$s\'.</string>
     <string name="settings_item_write_error">No se pudo escribir \'%1$s\'.</string>
@@ -3718,7 +3712,7 @@
 \nUn día son 1.440 minutos.
 \nUna semana son 10.080 minutos.
 \nUn mes son 43.829 minutos.</string>
-    <string name="tiles_storage_descr">Elige cómo se guardarán las teselas descargadas</string>
+    <string name="tiles_storage_descr">Elige cómo se guardarán las teselas descargadas.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Puedes Exportar o Importar acciones rápidas con perfiles de aplicación.</string>
     <string name="shared_string_delete_all_q">¿Eliminar todo\?</string>
     <string name="delete_all_actions_message_q">¿Estás seguro de que deseas eliminar irrevocablemente% d acciones rápidas\?</string>
@@ -3798,4 +3792,9 @@
     <string name="plan_route_open_existing_track">Abrir la pista existente</string>
     <string name="plan_route_create_new_route">Crea una nueva ruta</string>
     <string name="plan_a_route">Planea una ruta</string>
+    <string name="plan_route_change_route_type_before">Cambia el tipo de router antes</string>
+    <string name="delete_address">Borrar dirección</string>
+    <string name="add_address">Añadir dirección</string>
+    <string name="access_hint_enter_address">Introducir la dirección</string>
+    <string name="shared_string_done">Hecho</string>
 </resources>

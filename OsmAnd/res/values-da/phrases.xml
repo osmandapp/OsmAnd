@@ -1127,7 +1127,7 @@
     <string name="poi_trees_tea">Te</string>
     <string name="poi_trees_coca">Cocabuske</string>
     <string name="poi_trees_kiwi">Kiwi</string>
-    <string name="poi_trees_meadow_orchard">"Eng  frugthave"</string>
+    <string name="poi_trees_meadow_orchard">Eng frugthave</string>
     <string name="poi_trees_nectorine">Nektarin</string>
     <string name="poi_trees_mango">Mango</string>
     <string name="poi_trees_rubber">Gummitræ</string>
@@ -1385,7 +1385,7 @@
     <string name="poi_payment_ep_quick_yes">Quick</string>
     <string name="poi_payment_ep_quick_no">Quick kort accepteres ikke</string>
     <string name="poi_payment_eurowag_yes">Eurowag</string>
-    <string name="poi_payment_eurowag_no">Eurowag kort accepteres accepteres</string>
+    <string name="poi_payment_eurowag_no">Eurowag kort accepteres ikke</string>
     <string name="poi_payment_e_zpass_yes">E‑ZPass</string>
     <string name="poi_payment_e_zpass_no">E‑ZPass accepteres ikke</string>
     <string name="poi_payment_euroshell_yes">Euroshell</string>
@@ -1583,7 +1583,7 @@
     <string name="poi_memorial_stele">Stele</string>
     <string name="poi_memorial_bust">Buste</string>
     <string name="poi_memorial_koshinto">Koshinto</string>
-    <string name="poi_memorial_blue_plaque">"Blå  plakette"</string>
+    <string name="poi_memorial_blue_plaque">Blå plakette</string>
     <string name="poi_memorial_jizo">Jizo</string>
     <string name="poi_memorial_cross">Korsformet</string>
     <string name="poi_memorial_vehicle">Køretøj</string>
@@ -2123,7 +2123,7 @@
     <string name="poi_tourism_yes">Turistmæssigt objekt</string>
     <string name="poi_historic_era_paleolithic">Historisk æra: ældste stenalder (2,6 millioner år - 10.000 f.Kr.)</string>
     <string name="poi_historic_era_mesolithic">Historisk æra: ældre stenalder</string>
-    <string name="poi_historic_era_neolithic">"Historisk æra:  yngre stenalder"</string>
+    <string name="poi_historic_era_neolithic">Historisk æra: yngre stenalder</string>
     <string name="poi_historic_era_chalcolithic">Historisk æra: kobberalderen (4.-3. årtusinde f.Kr.)</string>
     <string name="poi_historic_stone">Historisk sten</string>
     <string name="poi_stone_type_conciliation_cross">Type: stenkors</string>
@@ -2591,7 +2591,7 @@
     <string name="poi_provided_for_infant_yes">For spædbørn: ja</string>
     <string name="poi_provided_for_infant_no">For spædbørn: nej</string>
     <string name="poi_provided_for_toddler_yes">For småbørn: ja</string>
-    <string name="poi_provided_for_toddler_no">"Stillet til rådighed for småbørn:  nej"</string>
+    <string name="poi_provided_for_toddler_no">Stillet til rådighed for småbørn: nej</string>
     <string name="poi_provided_for_child_yes">For børn: ja</string>
     <string name="poi_provided_for_child_no">For børn: nej</string>
     <string name="poi_provided_for_adult_yes">For voksne: ja</string>
@@ -3741,7 +3741,7 @@
     <string name="poi_cash_withdrawal">Hævning af kontanter</string>
     <string name="poi_cash_withdrawal_type_checkout">Hævning af kontanter: kasse</string>
     <string name="poi_cash_withdrawal_type_self_checkout">Hævning af kontanter: selvbetjening</string>
-    <string name="poi_cash_withdrawal_limit">Hævning af kontanter grænse</string>
+    <string name="poi_cash_withdrawal_limit">Grænse for hævning af kontanter</string>
     <string name="poi_cash_withdrawal_currency">Hævning af kontanter valuta</string>
     <string name="poi_cash_withdrawal_purchase_required_yes">Hævning af kontanter: køb kræves</string>
     <string name="poi_cash_withdrawal_purchase_required_no">Hævning af kontanter: der kræves ingen køb</string>
@@ -3827,14 +3827,18 @@
     <string name="poi_drinking_water_refill_no">Påfyldning af drikkevand: nej</string>
     <string name="poi_drinking_water_refill_yes">Påfyldning af drikkevand: ja</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Sugning</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">under tryk</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Under tryk</string>
     <string name="poi_fire_hydrant_style_water_source_groundwater">Grundvand</string>
     <string name="poi_fire_hydrant_type_pipe">Rør</string>
-    <string name="poi_fire_hydrant_pressure_filter">Lufttryk</string>
+    <string name="poi_fire_hydrant_pressure_filter">Tryk</string>
     <string name="poi_pump_status_missing_beam">Pumpens tilstand: ingen håndtag</string>
     <string name="poi_traffic_signals_arrow_yes">Ja</string>
     <string name="poi_traffic_signals_vibration_yes">Ja</string>
     <string name="poi_traffic_signals_vibration_no">Vibration: nej</string>
     <string name="poi_traffic_signals_arrow">Pil</string>
     <string name="poi_traffic_signals_vibration">Vibration</string>
+    <string name="poi_city_block">Karré</string>
+    <string name="poi_borough">Bydistrikt</string>
+    <string name="poi_give_box">Donationsboks</string>
+    <string name="poi_traffic_signals_arrow_no">Pil: nej</string>
 </resources>
