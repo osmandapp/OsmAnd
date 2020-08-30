@@ -3709,7 +3709,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="vessel_height_warning_link">Indstil fartøjets højde</string>
     <string name="vessel_width_limit_description">Indstil fartøjets bredde for at undgå smalle broer</string>
     <string name="plugin_wikipedia_description">Få oplysninger om interessepunkter fra Wikipedia. En lomme offlineguide - aktiver Wikipedia udvidelsen og nyd artikler omkring omgivelserne.</string>
-    <string name="add_hidden_group_info">Det tilføjede punkt vil ikke være synligt på kortet, da den valgte gruppe er skjult, find det i \"% s\".</string>
+    <string name="add_hidden_group_info">Det tilføjede punkt vil ikke være synligt på kortet, da den valgte gruppe er skjult, find det i \"%s\".</string>
     <string name="app_mode_wheelchair_forward">Kørestol fremad</string>
     <string name="set_working_days_to_continue">Indstil arbejdsdage for at fortsætte</string>
     <string name="route_between_points">Rute mellem punkter</string>
