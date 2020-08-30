@@ -3848,4 +3848,8 @@
     <string name="access_hint_enter_address">Adresse eingeben</string>
     <string name="street_level_imagery">Bilder auf Straßenebene</string>
     <string name="plan_route_exit_dialog_descr">Sind Sie sicher, die Routenplanung ohne speichern beenden zu wollen\? Sie werden alle Änderungen verlieren.</string>
+    <string name="plan_route_change_route_type_before"></string>
+    <string name="plan_route_change_route_type_after"></string>
+    <string name="plan_route_trim_before">Davor trimmen</string>
+    <string name="plan_route_trim_after">Danach trimmen</string>
 </resources>
