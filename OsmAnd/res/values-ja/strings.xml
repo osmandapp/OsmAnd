@@ -3664,7 +3664,7 @@ POIの更新は利用できません</string>
 \n• RTLのバグを修正
 \n
 \n</string>
-    <string name="unsupported_type_error">サポートされていないタイプです</string>
+    <string name="unsupported_type_error">サポートされていないタイプ</string>
     <string name="shared_string_resume">再開</string>
     <string name="hillshade_download_description">マップ上で起伏の陰影表示をするには、追加マップが必要です。</string>
     <string name="shared_string_drawer">ドロワーメニュー</string>
