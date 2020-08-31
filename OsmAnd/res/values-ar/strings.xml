@@ -3831,7 +3831,7 @@
     <string name="shared_string_gpx_files">المسارات</string>
     <string name="layer_gpx_layer">المسارات</string>
     <string name="show_gpx">المسارات</string>
-    <string name="monitoring_control_start">سجل</string>
+    <string name="monitoring_control_start">تسجيل</string>
     <string name="save_track_to_gpx_globally">تسجيل المسار في ملف GPX</string>
     <string name="shared_string_gpx_route">توجيه المسار</string>
     <string name="empty_state_my_tracks">إضافة ملفات المسار</string>
