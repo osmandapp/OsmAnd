@@ -274,21 +274,31 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		});
 
-		mainView.findViewById(R.id.apply_move_point_button).setOnClickListener(new OnClickListener() {
+		View applyMovePointButton = mainView.findViewById(R.id.apply_move_point_button);
+		UiUtilities.setupDialogButton(nightMode, applyMovePointButton, UiUtilities.DialogButtonType.PRIMARY,
+				R.string.shared_string_apply);
+		applyMovePointButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				applyMovePointMode();
 			}
 		});
 
-		mainView.findViewById(R.id.apply_point_before_after_point_button).setOnClickListener(new OnClickListener() {
+
+		View applyPointBeforeAfterButton = mainView.findViewById(R.id.apply_point_before_after_point_button);
+		UiUtilities.setupDialogButton(nightMode, applyPointBeforeAfterButton, UiUtilities.DialogButtonType.PRIMARY,
+				R.string.shared_string_apply);
+		applyPointBeforeAfterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				applyAddPointBeforeAfterMode();
 			}
 		});
 
-		mainView.findViewById(R.id.add_point_before_after_button).setOnClickListener(new OnClickListener() {
+		View addPointBeforeAfterButton = mainView.findViewById(R.id.add_point_before_after_button);
+		UiUtilities.setupDialogButton(nightMode, addPointBeforeAfterButton, UiUtilities.DialogButtonType.PRIMARY,
+				R.string.shared_string_add);
+		addPointBeforeAfterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				addPointBeforeAfter();
@@ -333,7 +343,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		});
 
-		mainView.findViewById(R.id.add_point_button).setOnClickListener(new OnClickListener() {
+		View addPointButton = mainView.findViewById(R.id.add_point_button);
+		UiUtilities.setupDialogButton(nightMode, addPointButton, UiUtilities.DialogButtonType.PRIMARY,
+				R.string.shared_string_add);
+		addPointButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				addCenterPoint();
