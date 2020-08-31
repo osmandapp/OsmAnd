@@ -3840,7 +3840,7 @@
     <string name="shared_string_gpx_files">Треки</string>
     <string name="layer_gpx_layer">Треки</string>
     <string name="show_gpx">Треки</string>
-    <string name="monitoring_control_start">GPX</string>
+    <string name="monitoring_control_start">REC</string>
     <string name="save_track_to_gpx_globally">Запись трека в файл GPX</string>
     <string name="shared_string_gpx_route">Маршрут трека</string>
     <string name="empty_state_my_tracks">Добавить файлы треков</string>
@@ -3851,7 +3851,7 @@
     <string name="marker_save_as_track">Сохранить как файл трека</string>
     <string name="follow_track">Следить за треком</string>
     <string name="follow_track_descr">Выберите файл трека для отслеживания</string>
-    <string name="import_track_descr">Выберите файл трека для отслеживания или импортируйте его с устройства.</string>
+    <string name="import_track_descr">Выберите файл трека или импортируйте его.</string>
     <string name="select_another_track">Выбрать другой трек</string>
     <string name="navigate_to_track_descr">Перейдите от моего местоположения к треку</string>
     <string name="pass_whole_track_descr">Точка трека для навигации</string>
@@ -3865,4 +3865,20 @@
     <string name="plan_route_trim_after">Обрезать после</string>
     <string name="plan_route_change_route_type_before">Изменить тип маршрута до</string>
     <string name="plan_route_change_route_type_after">Изменить тип маршрута после</string>
+    <string name="web_server">Веб-сервер</string>
+    <string name="simplified_track">Упрощённый трек</string>
+    <string name="simplified_track_description">Будет сохранена только линия маршрута, путевые точки будут удалены.</string>
+    <string name="shared_string_file_name">Имя файла</string>
+    <string name="number_of_gpx_files_selected_pattern">%s трек файла(ов) выбрано</string>
+    <string name="save_global_track_interval_descr">Укажите интервал записи для общей записи трека (активируется через виджет Запись поездки на карте).</string>
+    <string name="gpx_monitoring_stop">Приостановить запись поездки</string>
+    <string name="gpx_monitoring_start">Возобновить запись поездки</string>
+    <string name="system_default_theme">По умолчанию системы</string>
+    <string name="all_next_segments">Все последующие сегменты</string>
+    <string name="previous_segment">Предыдущий сегмент</string>
+    <string name="all_previous_segments">Все предыдущие сегменты</string>
+    <string name="only_selected_segment_recalc">Только выбранный сегмент будет пересчитан с использованием выбранного профиля.</string>
+    <string name="all_next_segments_will_be_recalc">Все последующие сегменты будут пересчитаны с использованием выбранного профиля.</string>
+    <string name="all_previous_segments_will_be_recalc">Все предыдущие сегменты будут пересчитаны с использованием выбранного профиля.</string>
+    <string name="open_saved_track">Открыть сохранённый трек</string>
 </resources>
