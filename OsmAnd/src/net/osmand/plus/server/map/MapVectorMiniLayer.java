@@ -78,7 +78,8 @@ public class MapVectorMiniLayer extends OsmandMapMiniLayer {
     @Override
     public void initLayer(OsmandMapTileMiniView view) {
         this.view = view;
-        resourceManager = view.getApplication().getResourceManager();
+        //resourceManager = view.getApplication().getResourceManager();
+        resourceManager = new ResourceManager(view.getApplication());
         paintImg = new Paint();
         paintImg.setFilterBitmap(true);
         paintImg.setAlpha(getAlpha());
@@ -183,6 +184,10 @@ public class MapVectorMiniLayer extends OsmandMapMiniLayer {
             MapRenderRepositories renderer = resourceManager.getRenderer();
 
             RotatedTileBox currentTileBlock = tilesRect;
+//            RotatedTileBox currentTileBlock = new RotatedTileBox.RotatedTileBoxBuilder()
+//                    .setLocation(50.901430, 34.801775)
+//                    .setZoom(15)
+//                    .setPixelDimensions(canvas.getWidth(), canvas.getHeight(), 0.5f, 0.5f).build();
             resourceManager.getRenderer().loadMap(currentTileBlock, resourceManager.getMapTileDownloader());
             drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation(), tilesRect);
             drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation(), tilesRect);
