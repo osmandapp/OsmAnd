@@ -3857,4 +3857,18 @@
     <string name="navigate_to_track_descr">Von meinem Standort zum Track navigieren</string>
     <string name="start_of_the_track">Startpunkt des Tracks</string>
     <string name="attach_to_the_roads">Auf Straßen einrasten</string>
+    <string name="simplified_track">Vereinfachter Track</string>
+    <string name="shared_string_file_name">Dateiname</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="gpx_monitoring_stop">Streckenaufzeichnung pausieren</string>
+    <string name="gpx_monitoring_start">Streckenaufzeichnung fortsetzen</string>
+    <string name="system_default_theme">Systemvorgabe</string>
+    <string name="all_next_segments">Alle nachfolgenden Segmente</string>
+    <string name="previous_segment">Vorheriges Segment</string>
+    <string name="all_previous_segments">Alle vorherigen Segmente</string>
+    <string name="only_selected_segment_recalc">Nur das ausgewählte Segment wird unter Verwendung des ausgewählten Profils neu berechnet.</string>
+    <string name="all_next_segments_will_be_recalc">Alle nachfolgenden Segmente werden unter Verwendung des ausgewählten Profils neu berechnet.</string>
+    <string name="all_previous_segments_will_be_recalc">Alle vorherigen Segmente werden unter Verwendung des ausgewählten Profils neu berechnet.</string>
+    <string name="open_saved_track">Gespeicherten Track öffnen</string>
+    <string name="shared_string_is_saved">wird gespeichert</string>
 </resources>
