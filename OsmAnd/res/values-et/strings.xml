@@ -140,7 +140,7 @@
     <string name="rendering_value_bold_name">Rasvane</string>
     <string name="no_map_markers_found">Palun lisa kaardi markerid kaardi abil</string>
     <string name="no_waypoints_found">Marsruudipunkte ei leitud</string>
-    <string name="mapillary">Tänavataseme vaated</string>
+    <string name="mapillary">Mapillary</string>
     <string name="increase_search_radius">Suurenda otsingu raadiust</string>
     <string name="nothing_found">Ei leitud midagi</string>
     <string name="nothing_found_descr">Muuda otsingu päringut või laienda selle raadiust.</string>
@@ -3682,7 +3682,7 @@
     <string name="marker_save_as_track">Salvesta rada failina</string>
     <string name="follow_track">Jälgi rada</string>
     <string name="follow_track_descr">Vali rajafail, mida soovid kasutada</string>
-    <string name="import_track_descr">Vali rajafail, mida soovid kasutada või impordi see seadmest.</string>
+    <string name="import_track_descr">Vali rajafail, mida soovid kasutada või impordi see.</string>
     <string name="select_another_track">Vali muu rada</string>
     <string name="navigate_to_track_descr">Navigeeri minu asukohast rajale</string>
     <string name="pass_whole_track_descr">Asukoht rajal, kuhu me liigume</string>
@@ -3691,4 +3691,20 @@
     <string name="delete_address">Kustuta aadress</string>
     <string name="add_address">Lisa aadress</string>
     <string name="access_hint_enter_address">Sisesta aadress</string>
+    <string name="simplified_track">Lihtsustatud rada</string>
+    <string name="simplified_track_description">Salvestatakse ainult üldine marsruut, teekonnapunktid kustutatakse.</string>
+    <string name="shared_string_file_name">Faili nimi</string>
+    <string name="number_of_gpx_files_selected_pattern">%s rajafaili valitud</string>
+    <string name="disable_recording_once_app_killed_descrp">Peatab raja logimise rakenduse jõuga sulgemise korral (hiljutiste rakenduste kaudu). (OsmAndi taustnäit kaob Androidi teavitusribalt.)</string>
+    <string name="save_global_track_interval_descr">Määra üldisel raja salvestamisel kasutatav logimisvälp (lülitatakse sisse kaardil asuvast teekonna salvestamise vidinast).</string>
+    <string name="system_default_theme">Süsteemi vaikeseadistused</string>
+    <string name="all_next_segments">Kõik järgnevad segmendid</string>
+    <string name="previous_segment">Eelmine segment</string>
+    <string name="all_previous_segments">Kõik eelmised segmendid</string>
+    <string name="only_selected_segment_recalc">Ainult valitud segment arvutatakse ümber vastavalt valitud profiilile.</string>
+    <string name="all_next_segments_will_be_recalc">Kõik järgnevad segmendid arvutatakse ümber vastavalt valitud profiilile.</string>
+    <string name="all_previous_segments_will_be_recalc">Kõik eelmised segmendid arvutatakse ümber vastavalt valitud profiilile.</string>
+    <string name="open_saved_track">Ava salvestatud rada</string>
+    <string name="shared_string_is_saved">on salvestatud</string>
+    <string name="monitoring_control_start">SALVESTA</string>
 </resources>
