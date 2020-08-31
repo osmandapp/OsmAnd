@@ -3842,8 +3842,19 @@
     <string name="access_hint_enter_address">Adresse eingeben</string>
     <string name="street_level_imagery">Bilder auf Straßenebene</string>
     <string name="plan_route_exit_dialog_descr">Sind Sie sicher, die Routenplanung ohne speichern beenden zu wollen\? Sie werden alle Änderungen verlieren.</string>
-    <string name="plan_route_change_route_type_before"></string>
-    <string name="plan_route_change_route_type_after"></string>
+    <string name="plan_route_change_route_type_before"/>
+    <string name="plan_route_change_route_type_after"/>
     <string name="plan_route_trim_before">Davor trimmen</string>
     <string name="plan_route_trim_after">Danach trimmen</string>
+    <string name="in_case_of_reverse_direction">Falls in Gegenrichtung</string>
+    <string name="add_segment_to_the_track">Zu Track-Datei hinzufügen</string>
+    <string name="layer_gpx_layer">Tracks</string>
+    <string name="save_track_to_gpx_globally">Track in GPX-Datei schreiben</string>
+    <string name="empty_state_my_tracks">Track-Dateien hinzufügen</string>
+    <string name="context_menu_item_add_waypoint">Track-Wegpunkt hinzufügen</string>
+    <string name="map_widget_monitoring">Streckenaufzeichnung</string>
+    <string name="follow_track">Track folgen</string>
+    <string name="navigate_to_track_descr">Von meinem Standort zum Track navigieren</string>
+    <string name="start_of_the_track">Startpunkt des Tracks</string>
+    <string name="attach_to_the_roads">Auf Straßen einrasten</string>
 </resources>
