@@ -25,6 +25,11 @@ public class LayersDraw {
         //mapView.addLayer(contextMenuLayer, 8);
         // mapView.addLayer(underlayLayer, -0.5f);
         RotatedTileBox currentTileBlock = mapView.getCurrentRotatedTileBox();
+//        RotatedTileBox currentTileBlock = new RotatedTileBox.RotatedTileBoxBuilder()
+//                .setLocation(50.901430, 34.801775)
+//                .setZoom(15)
+//                .setPixelDimensions(canvas.getWidth(), canvas.getHeight(), 0.5f, 0.5f).build();
+
         MapTileMiniLayer mapTileLayer = new MapTileMiniLayer(true);
         mapView.addLayer(mapTileLayer, 0.0f);
 

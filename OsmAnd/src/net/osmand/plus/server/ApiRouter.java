@@ -9,10 +9,7 @@ import android.webkit.MimeTypeMap;
 import androidx.core.util.Pair;
 import com.google.gson.Gson;
 import fi.iki.elonen.NanoHTTPD;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.GeometryTile;
-import net.osmand.data.QuadPointDouble;
-import net.osmand.data.QuadRect;
+import net.osmand.data.*;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
@@ -28,6 +25,7 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 
@@ -63,11 +61,29 @@ public class ApiRouter {
 			@Override
 			public NanoHTTPD.Response call(NanoHTTPD.IHTTPSession session) {
 				try{
+					int zoom = 0;
+					double lat = 0;//50.901430;
+					double lon = 0;//34.801775;
+					try{
+						String fullUri = session.getUri().replace("/tile/","");
+						Scanner s = new Scanner(fullUri).useDelimiter("/");
+						zoom = s.nextInt();
+						lat = s.nextDouble();//50.901430;
+						lon = s.nextDouble();//34.801775;
+					}
+					catch (Exception e){
+						e.printStackTrace();
+						return ErrorResponses.response500;
+					}
+					Log.d("TILE","HAVING VALUES" + zoom + " " + lat + " " + lon);
 					ITileSource map = TileSourceManager.getMapillaryVectorSource();
 					Bitmap bitmap = Bitmap.createBitmap(512,512,Bitmap.Config.ARGB_8888);//mapActivity.getMapView().currentCanvas;
 					//OsmandMapTileView tileView = new OsmandMapTileView(mapActivity,300,300);
 					OsmandMapTileMiniView tileView = new OsmandMapTileMiniView(androidContext,512,512);
 					Canvas canvas = new Canvas(bitmap);
+					RotatedTileBox tileBox = tileView.getCurrentRotatedTileBox();
+					tileBox.setLatLonCenter(lat,lon);
+					tileBox.setZoom(zoom);
 					LayersDraw.createLayers(androidContext,canvas, tileView);
 					Paint p = new Paint();
 					p.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -148,6 +164,10 @@ public class ApiRouter {
 
 	private NanoHTTPD.Response routeApi(NanoHTTPD.IHTTPSession session) {
 		String uri = session.getUri();
+		//TODO rewrite
+		if (uri.contains("tile")){
+			return endpoints.get("/tile").apiCall.call(session);
+		}
 		ApiEndpoint endpoint = endpoints.get(uri);
 		if (endpoint != null){
 			return endpoint.apiCall.call(session);
@@ -157,7 +177,8 @@ public class ApiRouter {
 
 	private boolean isApiUrl(String uri) {
 		for (String endpoint : endpoints.keySet()){
-			if (endpoint.equals(uri)) return true;
+			//TODO rewrite contains
+			if (endpoint.equals(uri) || uri.contains("tile")) return true;
 		}
 		return false;
 	}
