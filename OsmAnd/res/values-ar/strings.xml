@@ -3856,4 +3856,18 @@
     <string name="plan_route_trim_after">تهذيب بعد</string>
     <string name="plan_route_change_route_type_before">تغيير نوع المسار قبل</string>
     <string name="plan_route_change_route_type_after">تغيير نوع المسار بعد</string>
+    <string name="number_of_gpx_files_selected_pattern">%s ملفات مسارات محددة</string>
+    <string name="disable_recording_once_app_killed_descrp">سيتم إيقاف تسجيل المسار مؤقتًا عند غلق التطبيق (عبر نافذة التطبيقات المستخدمة مؤخرا). (إشارة تشغيل التطبيق في الخلفية ستختفي من الشريط العلوي.)</string>
+    <string name="save_global_track_interval_descr">حدد الفاصل الزمني للادخال الخاص بالتسجيل العام للمسار (مفعل من خلال أداة تسجيل الرحلة على الخريطة).</string>
+    <string name="gpx_monitoring_stop">إيقاف تسجيل الرحلة مؤقتًا</string>
+    <string name="gpx_monitoring_start">استئناف تسجيل الرحلة</string>
+    <string name="system_default_theme">النظام الافتراضي</string>
+    <string name="all_next_segments">جميع الأجزاء اللاحقة</string>
+    <string name="previous_segment">المقطع السابق</string>
+    <string name="all_previous_segments">جميع المقاطع السابقة</string>
+    <string name="only_selected_segment_recalc">سيتم إعادة حساب المقطع المحدد فقط باستخدام ملف التعريف المحدد.</string>
+    <string name="all_next_segments_will_be_recalc">سيتم إعادة حساب كافة الشرائح اللاحقة باستخدام ملف التعريف المحدد.</string>
+    <string name="all_previous_segments_will_be_recalc">سيتم إعادة حساب كافة الشرائح السابقة باستخدام ملف التعريف المحدد.</string>
+    <string name="open_saved_track">فتح المسار المحفوظ</string>
+    <string name="shared_string_is_saved">محفوظ</string>
 </resources>
