@@ -887,12 +887,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public boolean disableSingleTap() {
-		return false;
+		return isInTrackAppearanceMode();
 	}
 
 	@Override
 	public boolean disableLongPressOnMap() {
-		return false;
+		return isInTrackAppearanceMode();
 	}
 
 	@Override

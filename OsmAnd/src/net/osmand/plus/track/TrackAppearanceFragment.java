@@ -79,6 +79,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private TrackColoringCard trackColoringCard;
 
 	private ImageView trackIcon;
+	private View buttonsShadow;
 
 	@Override
 	public int getMainLayoutId() {
@@ -106,6 +107,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	public TrackDrawInfo getTrackDrawInfo() {
 		return trackDrawInfo;
+	}
+
+	@Override
+	public int getSupportedMenuStatesPortrait() {
+		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
 
 	@Override
@@ -172,6 +178,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			trackIcon = view.findViewById(R.id.track_icon);
+			buttonsShadow = view.findViewById(R.id.buttons_shadow);
 
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -202,8 +209,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	protected void calculateLayout(View view, boolean initLayout) {
 		menuTitleHeight = view.findViewById(R.id.route_menu_top_shadow_all).getHeight()
-				+ view.findViewById(R.id.control_buttons).getHeight()
-				- view.findViewById(R.id.buttons_shadow).getHeight();
+				+ view.findViewById(R.id.control_buttons).getHeight() - buttonsShadow.getHeight();
 		super.calculateLayout(view, initLayout);
 	}
 
@@ -217,6 +223,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	protected void updateMainViewLayout(int posY) {
 		super.updateMainViewLayout(posY);
 		updateStatusBarColor();
+	}
+
+	@Override
+	public boolean shouldShowMapControls(int menuState) {
+		return menuState == MenuState.HEADER_ONLY || menuState == MenuState.HALF_SCREEN;
 	}
 
 	@Override
@@ -315,10 +326,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			if (card instanceof SplitIntervalCard) {
 				SplitIntervalBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), trackDrawInfo, this);
 			} else if (card instanceof TrackColoringCard) {
-				updateAppearanceIcon();
-				if (trackWidthCard != null) {
-					trackWidthCard.updateItems();
-				}
+				updateColorItems();
 			} else if (card instanceof TrackWidthCard) {
 				updateAppearanceIcon();
 			} else if (card instanceof DirectionArrowsCard) {
@@ -335,6 +343,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onColorSelected(int prevColor, int newColor) {
 		trackColoringCard.onColorSelected(prevColor, newColor);
+		updateColorItems();
 	}
 
 	@Override
@@ -455,8 +464,21 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				} else if (scrollY > 0 && bottomContainer.getForeground() == null) {
 					bottomContainer.setForeground(shadowIcon);
 				}
+				updateButtonsShadow();
 			}
 		});
+	}
+
+	private void updateButtonsShadow() {
+		boolean scrollToBottomAvailable = getBottomScrollView().canScrollVertically(1);
+		AndroidUiHelper.updateVisibility(buttonsShadow, scrollToBottomAvailable);
+	}
+
+	private void updateColorItems() {
+		updateAppearanceIcon();
+		if (trackWidthCard != null) {
+			trackWidthCard.updateItems();
+		}
 	}
 
 	private void saveTrackInfo() {
@@ -537,19 +559,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void saveGpx(final GPXFile gpxFile) {
-		new SaveGpxAsyncTask(gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
-			@Override
-			public void gpxSavingStarted() {
-
-			}
-
-			@Override
-			public void gpxSavingFinished(Exception errorMessage) {
-				if (errorMessage == null) {
-					app.showShortToastMessage(R.string.shared_string_track_is_saved, Algorithms.getFileWithoutDirs(gpxFile.path));
-				}
-			}
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		new SaveGpxAsyncTask(gpxFile, null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void setupCards() {

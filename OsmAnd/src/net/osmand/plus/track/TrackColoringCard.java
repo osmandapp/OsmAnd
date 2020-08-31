@@ -281,6 +281,7 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 	public void onColorSelected(int prevColor, int newColor) {
 		if (prevColor == INVALID_VALUE && customColors.size() < 6) {
 			customColors.add(newColor);
+			trackDrawInfo.setColor(newColor);
 		} else if (!Algorithms.isEmpty(customColors)) {
 			int index = customColors.indexOf(prevColor);
 			if (index != INVALID_VALUE) {
