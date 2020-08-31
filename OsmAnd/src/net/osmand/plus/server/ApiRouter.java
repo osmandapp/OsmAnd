@@ -2,22 +2,32 @@ package net.osmand.plus.server;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
-
+import androidx.core.util.Pair;
 import com.google.gson.Gson;
-
+import fi.iki.elonen.NanoHTTPD;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.GeometryTile;
+import net.osmand.data.QuadPointDouble;
+import net.osmand.data.QuadRect;
+import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.server.map.LayersDraw;
+import net.osmand.plus.server.map.MapTileMiniLayer;
+import net.osmand.plus.server.map.OsmandMapMiniLayer;
+import net.osmand.plus.server.map.OsmandMapTileMiniView;
 
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import fi.iki.elonen.NanoHTTPD;
-import net.osmand.plus.activities.MapActivity;
 
 import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 
@@ -47,22 +57,74 @@ public class ApiRouter {
 		};
 		endpoints.put(favorites.uri,favorites);
 
-		ApiEndpoint tile = new ApiEndpoint();
+		final ApiEndpoint tile = new ApiEndpoint();
 		tile.uri = "/tile";
 		tile.apiCall = new ApiEndpoint.ApiCall(){
 			@Override
 			public NanoHTTPD.Response call(NanoHTTPD.IHTTPSession session) {
-				Bitmap bitmap = mapActivity.getMapView().currentCanvas;
-				//androidContext.getApplicationContext().get
-				ByteArrayOutputStream stream = new ByteArrayOutputStream();
-				bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-				byte[] byteArray = stream.toByteArray();
-				ByteArrayInputStream str = new ByteArrayInputStream(byteArray);
-				return newFixedLengthResponse(
-						NanoHTTPD.Response.Status.OK,
-						"image/png",
-						str,
-						str.available());
+				try{
+					ITileSource map = TileSourceManager.getMapillaryVectorSource();
+					Bitmap bitmap = Bitmap.createBitmap(512,512,Bitmap.Config.ARGB_8888);//mapActivity.getMapView().currentCanvas;
+					//OsmandMapTileView tileView = new OsmandMapTileView(mapActivity,300,300);
+					OsmandMapTileMiniView tileView = new OsmandMapTileMiniView(androidContext,512,512);
+					Canvas canvas = new Canvas(bitmap);
+					LayersDraw.createLayers(androidContext,canvas, tileView);
+					Paint p = new Paint();
+					p.setStyle(Paint.Style.FILL_AND_STROKE);
+					p.setColor(Color.BLACK);
+					//canvas.drawBitmap(bitmap ,0, 0, null);
+					boolean nightMode = androidContext.getDaynightHelper().isNightMode();
+					OsmandMapMiniLayer.DrawSettings drawSettings = new OsmandMapMiniLayer.DrawSettings(nightMode, false);
+					tileView.refreshMapInternal(drawSettings);
+					tileView.refreshMap();
+					MapTileMiniLayer mapTileLayer = new MapTileMiniLayer(true);
+					//mapView.addLayer(mapTileLayer, 0.0f);
+					//mapTileLayer.drawTileMap(canvas,tileView.getCurrentRotatedTileBox());
+					tileView.drawOverMap(canvas,tileView.getCurrentRotatedTileBox(),drawSettings);
+					//androidContext.getApplicationContext().get
+					ByteArrayOutputStream stream = new ByteArrayOutputStream();
+					//bitmap = tileView.currentCanvas;
+					final QuadRect tilesRect = tileView.getCurrentRotatedTileBox().getTileBounds();
+					int left = (int) Math.floor(tilesRect.left);
+					int top = (int) Math.floor(tilesRect.top);
+					int width = (int) Math.ceil(tilesRect.right - left);
+					int height = (int) Math.ceil(tilesRect.bottom - top);
+					int dzoom = 1;
+					int div = (int) Math.pow(2.0, dzoom);
+
+					ResourceManager mgr = androidContext.getResourceManager();
+					int tileX = (left ) / div;
+					int tileY = (top) / div;
+					String tileId = mgr.calculateTileId(map, tileX, tileY, 14);
+					//androidContext.getResourceManager().
+					//		getMapTileDownloader().
+					//String imgTileId = mgr.calculateTileId(map, tileX / div, tileY / div, nzoom - kzoom);
+					Map<String, Pair<QuadPointDouble, GeometryTile>> tiles = new HashMap<>();
+					//bitmap = null;
+					boolean first = true;
+					//while (bitmap == null){
+//						bitmap = androidContext.getResourceManager().getBitmapTilesCache().getTileForMapAsync(
+//								tileId,map,tileX,tileY,14,first
+//						);
+//						first = false;
+					//}
+					canvas.drawLine(0,0,canvas.getWidth(),canvas.getHeight(), p);
+					//bitmap = tileView.currentCanvas;
+					bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+					byte[] byteArray = stream.toByteArray();
+					ByteArrayInputStream str = new ByteArrayInputStream(byteArray);
+
+					return newFixedLengthResponse(
+							NanoHTTPD.Response.Status.OK,
+							"image/png",
+							str,
+							str.available());
+				}
+				catch (Exception e){
+					e.printStackTrace();
+				}
+				return ErrorResponses.response500;
 			}
 		};
 		endpoints.put(tile.uri,tile);

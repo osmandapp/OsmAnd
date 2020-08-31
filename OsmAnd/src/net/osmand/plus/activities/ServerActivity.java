@@ -91,8 +91,10 @@ public class ServerActivity extends AppCompatActivity {
 	}
 
 	private void deInitServer() {
-		server.closeAllConnections();
-		server.stop();
+		if (server != null){
+			server.closeAllConnections();
+			server.stop();
+		}
 		initialized = false;
 	}
 
