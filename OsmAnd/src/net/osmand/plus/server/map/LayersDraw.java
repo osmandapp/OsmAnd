@@ -35,9 +35,9 @@ public class LayersDraw {
         // 0.5 layer
         MapVectorMiniLayer mapVectorLayer = new MapVectorMiniLayer(mapTileLayer, false);
         mapView.addLayer(mapVectorLayer, 0.5f);
-        mapVectorLayer.onPrepareBufferImage(canvas,
-                currentTileBlock,
-                new OsmandMapMiniLayer.DrawSettings(false));
+//        mapVectorLayer.onPrepareBufferImage(canvas,
+//                currentTileBlock,
+//                new OsmandMapMiniLayer.DrawSettings(false));
         //DownloadedRegionsLayer downloadedRegionsLayer = new DownloadedRegionsLayer(activity);
         //mapView.addLayer(downloadedRegionsLayer, 0.5f);
 

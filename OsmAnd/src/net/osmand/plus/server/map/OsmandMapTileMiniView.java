@@ -715,9 +715,9 @@ public class OsmandMapTileMiniView implements MapTileDownloader.IMapDownloaderCa
                 if (!layer.drawInScreenPixels()) {
                     canvas.rotate(tileBox.getRotate(), c.x, c.y);
                 }
-                if (mapRenderer != null) {
+                //if (mapRenderer != null) {
                     layer.onPrepareBufferImage(canvas, tileBox, drawSettings);
-                }
+                //}
                 try{
                     layer.onDraw(canvas, tileBox, drawSettings);
                 }

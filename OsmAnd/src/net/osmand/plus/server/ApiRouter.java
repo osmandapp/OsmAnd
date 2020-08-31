@@ -75,13 +75,6 @@ public class ApiRouter {
 					//canvas.drawBitmap(bitmap ,0, 0, null);
 					boolean nightMode = androidContext.getDaynightHelper().isNightMode();
 					OsmandMapMiniLayer.DrawSettings drawSettings = new OsmandMapMiniLayer.DrawSettings(nightMode, false);
-					tileView.refreshMapInternal(drawSettings);
-					tileView.refreshMap();
-					MapTileMiniLayer mapTileLayer = new MapTileMiniLayer(true);
-					//mapView.addLayer(mapTileLayer, 0.0f);
-					//mapTileLayer.drawTileMap(canvas,tileView.getCurrentRotatedTileBox());
-					tileView.drawOverMap(canvas,tileView.getCurrentRotatedTileBox(),drawSettings);
-					//androidContext.getApplicationContext().get
 					ByteArrayOutputStream stream = new ByteArrayOutputStream();
 					//bitmap = tileView.currentCanvas;
 					final QuadRect tilesRect = tileView.getCurrentRotatedTileBox().getTileBounds();
@@ -91,6 +84,7 @@ public class ApiRouter {
 					int height = (int) Math.ceil(tilesRect.bottom - top);
 					int dzoom = 1;
 					int div = (int) Math.pow(2.0, dzoom);
+					tileView.drawOverMap(canvas,tileView.getCurrentRotatedTileBox(),drawSettings);
 
 					ResourceManager mgr = androidContext.getResourceManager();
 					int tileX = (left ) / div;
