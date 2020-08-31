@@ -183,11 +183,11 @@ public class MapVectorMiniLayer extends OsmandMapMiniLayer {
 
             MapRenderRepositories renderer = resourceManager.getRenderer();
 
-            RotatedTileBox currentTileBlock = tilesRect;
-//            RotatedTileBox currentTileBlock = new RotatedTileBox.RotatedTileBoxBuilder()
-//                    .setLocation(50.901430, 34.801775)
-//                    .setZoom(15)
-//                    .setPixelDimensions(canvas.getWidth(), canvas.getHeight(), 0.5f, 0.5f).build();
+            //RotatedTileBox currentTileBlock = tilesRect;
+            RotatedTileBox currentTileBlock = new RotatedTileBox.RotatedTileBoxBuilder()
+                    .setLocation(50.901430, 34.801775)
+                    .setZoom(15)
+                    .setPixelDimensions(canvas.getWidth(), canvas.getHeight(), 0.5f, 0.5f).build();
             resourceManager.getRenderer().loadMap(currentTileBlock, resourceManager.getMapTileDownloader());
             drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation(), tilesRect);
             drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation(), tilesRect);
@@ -214,7 +214,7 @@ public class MapVectorMiniLayer extends OsmandMapMiniLayer {
 //			final float x2 = calc.getPixXFromLatLon(rb.getLatitude(), rb.getLongitude());
 //			final float y1 = calc.getPixYFromLatLon(lt.getLatitude(), lt.getLongitude());
 //			final float y2 = calc.getPixYFromLatLon(rb.getLatitude(), rb.getLongitude());
-            destImage.set(x1, y1, x2, y2);
+            destImage.set(0, 0, 512, 512);
             if (!bmp.isRecycled()) {
                 canvas.drawBitmap(bmp, null, destImage, paintImg);
                 shown = true;
