@@ -80,6 +80,7 @@ import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
+import net.osmand.plus.measurementtool.command.ReversePointsCommand;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
@@ -760,7 +761,22 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void reverseRouteOnClick() {
-
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			List<WptPt> points = editingCtx.getPoints();
+			if (points.size() > 1) {
+				MeasurementToolLayer measurementLayer = getMeasurementLayer();
+				editingCtx.getCommandManager().execute(new ReversePointsCommand(measurementLayer));
+				if (pointsListOpened) {
+					hidePointsList();
+				}
+				updateUndoRedoButton(false, redoBtn);
+				updateUndoRedoButton(true, undoBtn);
+				updateDistancePointsText();
+			} else {
+				Toast.makeText(mapActivity, getString(R.string.one_point_error), Toast.LENGTH_SHORT).show();
+			}
+		}
 	}
 
 	@Override

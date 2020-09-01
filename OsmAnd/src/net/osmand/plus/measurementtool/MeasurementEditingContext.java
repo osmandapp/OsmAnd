@@ -598,7 +598,6 @@ public class MeasurementEditingContext {
 
 		RouteRegion reg = new RouteRegion();
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
-		final RoutePlannerFrontEnd routePlannerFrontEnd = new RoutePlannerFrontEnd();
 
 		final RouteCalculationParams params = new RouteCalculationParams();
 		params.inSnapToRoadMode = true;
@@ -658,7 +657,7 @@ public class MeasurementEditingContext {
 				params.calculationProgressCallback.updateProgress(0);
 				List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
 				if (Algorithms.isEmpty(originalRoute)) {
-					originalRoute = Collections.singletonList(routePlannerFrontEnd.generateStraightLineSegment(
+					originalRoute = Collections.singletonList(RoutePlannerFrontEnd.generateStraightLineSegment(
 							DEFAULT_APP_MODE.getDefaultSpeed(), new LocationsHolder(pts).getLatLonList()));
 				}
 				roadSegmentData.put(currentPair, new RoadSegmentData(route.getAppMode(), currentPair.first, currentPair.second, pts, originalRoute));
