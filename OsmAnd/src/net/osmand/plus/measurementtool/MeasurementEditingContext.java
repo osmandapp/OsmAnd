@@ -61,6 +61,7 @@ public class MeasurementEditingContext {
 
 	private boolean inAddPointMode;
 	private boolean inApproximationMode;
+	List<WptPt> originalTrackPointList = new ArrayList<>();
 	private int calculatedPairs;
 	private int pointsToCalculateSize;
 	private CalculationMode lastCalculationMode = WHOLE_TRACK;
@@ -68,6 +69,7 @@ public class MeasurementEditingContext {
 	private ApplicationMode appMode = DEFAULT_APP_MODE;
 	private RouteCalculationProgress calculationProgress;
 	private Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = new ConcurrentHashMap<>();
+
 
 	public enum CalculationMode {
 		NEXT_SEGMENT,
@@ -182,8 +184,14 @@ public class MeasurementEditingContext {
 
 	public void setInApproximationMode(boolean inApproximationMode) {
 		this.inApproximationMode = inApproximationMode;
+		if (inApproximationMode) {
+			originalTrackPointList = new ArrayList<>(before.points);
+		}
 	}
 
+	public List<WptPt> getOriginalTrackPointList() {
+		return originalTrackPointList;
+	}
 
 	@Nullable
 	GpxData getGpxData() {

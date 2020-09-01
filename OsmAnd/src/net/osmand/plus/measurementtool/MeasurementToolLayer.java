@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 
+import androidx.core.content.ContextCompat;
+
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
@@ -178,7 +180,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			TrkSegment after = editingCtx.getAfterTrkSegmentLine();
 			new Renderable.StandardTrack(new ArrayList<>(after.points), 17.2).
 					drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
-
+			if (editingCtx.isInApproximationMode()) {
+				List<WptPt> current = editingCtx.getOriginalTrackPointList();
+				lineAttrs.customColorPaint.setColor(ContextCompat.getColor(view.getContext(),
+						R.color.activity_background_transparent_color_dark));
+				new Renderable.StandardTrack(new ArrayList<>(current), 17.2).
+						drawSegment(view.getZoom(), lineAttrs.customColorPaint, canvas, tb);
+			}
 			drawPoints(canvas, tb);
 		}
 	}
