@@ -102,7 +102,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		if (inMeasurementMode && editingCtx.getSelectedPointPosition() == -1) {
+		if (inMeasurementMode && !editingCtx.isInApproximationMode() && editingCtx.getSelectedPointPosition() == -1) {
 			if (!overlapped) {
 				selectPoint(point.x, point.y, true);
 			}

@@ -60,6 +60,7 @@ public class MeasurementEditingContext {
 	private WptPt originalPointToMove;
 
 	private boolean inAddPointMode;
+	private boolean inApproximationMode;
 	private int calculatedPairs;
 	private int pointsToCalculateSize;
 	private CalculationMode lastCalculationMode = WHOLE_TRACK;
@@ -174,6 +175,15 @@ public class MeasurementEditingContext {
 	void setInAddPointMode(boolean inAddPointMode) {
 		this.inAddPointMode = inAddPointMode;
 	}
+
+	public boolean isInApproximationMode() {
+		return inApproximationMode;
+	}
+
+	public void setInApproximationMode(boolean inApproximationMode) {
+		this.inApproximationMode = inApproximationMode;
+	}
+
 
 	@Nullable
 	GpxData getGpxData() {
