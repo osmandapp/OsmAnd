@@ -14,13 +14,13 @@
     <string name="one_point_error">Please add at least two points.</string>
     <string name="shared_string_is_saved">is saved</string>
     <string name="open_saved_track">Open saved track</string>
-    <string name="all_previous_segments_will_be_recalc">All previous segments will be recalculated using selected profile.</string>
-    <string name="all_next_segments_will_be_recalc">All next segments will be recalculated using selected profile.</string>
-    <string name="only_selected_segment_recalc">Only selected segment will be recalculated using selected profile.</string>
+    <string name="all_previous_segments_will_be_recalc">All previous segments will be recalculated using the selected profile.</string>
+    <string name="all_next_segments_will_be_recalc">All subsequent segments will be recalculated using the selected profile.</string>
+    <string name="only_selected_segment_recalc">Only the selected segment will be recalculated using the selected profile.</string>
     <string name="all_previous_segments">All previous segments</string>
     <string name="previous_segment">Previous segment</string>
-    <string name="all_next_segments">All next segments</string>
-    <string name="system_default_theme">System Default</string>
+    <string name="all_next_segments">All subsequent segments</string>
+    <string name="system_default_theme">System default</string>
     <string name="gpx_monitoring_start">Resume trip recording</string>
     <string name="gpx_monitoring_stop">Pause trip recording</string>
     <string name="save_global_track_interval_descr">Specify the logging interval for the general track recording (enabled via the Trip recording widget on the map).</string>
@@ -43,7 +43,7 @@
     <string name="pass_whole_track_descr">Point of the track to navigate</string>
     <string name="navigate_to_track_descr">Navigate from my location to the track</string>
     <string name="select_another_track">Select another track</string>
-    <string name="import_track_descr">Choose track file to follow or import it from device.</string>
+    <string name="import_track_descr">Choose track file to follow, or import one.</string>
     <string name="follow_track_descr">Choose track file to follow</string>
     <string name="follow_track">Follow track</string>
     <string name="marker_save_as_track">Save as track file</string>
@@ -59,7 +59,6 @@
     <string name="shared_string_gpx_files">Tracks</string>
     <string name="add_segment_to_the_track">Add to a track file</string>
     <string name="shared_string_save_as_gpx">Save as new track file</string>
-    <string name="web_server">Web server</string>
     <string name="in_case_of_reverse_direction">In case of reverse direction</string>
     <string name="plan_route_exit_dialog_descr">Are you sure you want to close Plan route without saving? You will lose all changes.</string>
     <string name="street_level_imagery">Street-level imagery</string>

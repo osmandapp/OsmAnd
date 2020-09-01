@@ -29,9 +29,10 @@
     <string name="recording_default_name">Optager</string>
     <string name="map_widget_av_notes">lyd-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">Udvidelse for offline højdekurver</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Udvidelsen giver både en højdekurver overlejring og reliefskygger, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet. 
+    <string name="osmand_srtm_long_description_1000_chars">Udvidelsen giver både en højdekurver overlejring og reliefskygger, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet. 
 \n
-\nDe globale data (mellem 70° nord og 70° syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry  (METI), og Japan Space Systems (J-spacesystems)."</string>
+\n
+\nDe globale data (mellem 70° nord og 70° syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
     <string name="audionotes_location_not_defined">Tryk på \'Brug placering...\' for at tilføje en note til placeringen.</string>
     <string name="map_widget_audionotes">Lydnoter</string>
@@ -39,9 +40,10 @@
     <string name="audionotes_plugin_name">Lyd-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">"Udvidelsen giver både en højdekurver overlejring og et reliefskygger, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.(Bemærk, at højdekurver og/eller relieflag er separate, yderligere data er tilgængelige efter aktivering af udvidelse.) 
+    <string name="srtm_plugin_description">Udvidelsen giver både en højdekurver overlejring og et reliefskygger, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.(Bemærk, at højdekurver og/eller relieflag er separate, yderligere data er tilgængelige efter aktivering af udvidelse.) 
 \n
-\nDe globale data (mellem 70° nord og 70° syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry  (METI), og Japan Space Systems (J-spacesystems)."</string>
+\n
+\nDe globale data (mellem 70° nord og 70° syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="srtm_plugin_name">Højdekurver</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
@@ -414,7 +416,7 @@
     <string name="animate_route">Start simulering</string>
     <string name="file_can_not_be_renamed">Filen kunne ikke omdøbes.</string>
     <string name="file_with_name_already_exists">En fil med dette navn findes allerede.</string>
-    <string name="poi_query_by_name_matches_categories">Flere kategorier af interessepunkter fundet som matcher forespørgslen:</string>
+    <string name="poi_query_by_name_matches_categories">Der blev fundet flere relaterede IP-kategorier.</string>
     <string name="data_to_search_poi_not_available">Lokale data til at søge interessepunkter findes ikke.</string>
     <string name="poi_filter_by_name">Søg via navn</string>
     <string name="old_poi_file_should_be_deleted">Interessepunkt-datafilen \'%1$s\' er overflødig og kan slettes.</string>
@@ -524,7 +526,7 @@
     <string name="installing_new_resources">Udpakker nye data…</string>
     <string name="internet_connection_required_for_online_route">Online navigation fungerer ikke offline.</string>
     <string name="tts_language_not_supported_title">Sproget er ikke understøttet</string>
-    <string name="tts_language_not_supported">Det valgte sprog er ikke understøttet af den installerede Android TTS (tekst-til-tale)-motor. Søg på Google Play efter en anden TTS-motor? Ellers vil standard TTS-sprog blive brugt.</string>
+    <string name="tts_language_not_supported">Det valgte sprog er ikke understøttet af Android TTS (tekst-til-tale)-motor der er installeret, det forudindstillede TTS-sprog bruges i stedet. Kig efter en anden TTS-motor på markedet\?</string>
     <string name="tts_missing_language_data_title">Manglende data</string>
     <string name="tts_missing_language_data">Gå til Google Play for at hente det valgte sprog??</string>
     <string name="gpx_option_reverse_route">Omvend GPX-retning</string>
@@ -615,7 +617,7 @@
     <string name="application_dir">Datalagringsmappe</string>
     <string name="build_installed">Version {0} blev installeret ({1}).</string>
     <string name="downloading_build">Henter version…</string>
-    <string name="install_selected_build">"Installer OsmAnd:  {0} - {1} - {2} MB ?"</string>
+    <string name="install_selected_build">Installer OsmAnd - {0} af {1} {2} MB \?</string>
     <string name="loading_builds_failed">Hentning af versionslisten for OsmAnd mislykkedes</string>
     <string name="loading_builds">Indlæser OsmAnd-versioner…</string>
     <string name="select_build_to_install">Vælg en OsmAnd-version, der skal installeres</string>
@@ -635,7 +637,7 @@
     <string name="items_were_selected">{0} emner valgt</string>
     <string name="filter_existing_indexes">Hentet</string>
     <string name="fast_route_mode">Hurtigste rute</string>
-    <string name="fast_route_mode_descr">"Aktiver for at beregne den hurtigste rute eller deaktiver for  brændstofbesparende rute."</string>
+    <string name="fast_route_mode_descr">Aktiver for at beregne den hurtigste rute eller deaktiver for brændstofbesparende rute.</string>
     <string name="tiles_to_download_estimated_size">Ved zoom {0} hent {1} kortbrikker ({2} MB)</string>
     <string name="shared_string_download_map">Hent kort</string>
     <string name="select_max_zoom_preload_area">Maksimal zoom der skal indlæses på forhånd</string>
@@ -1373,8 +1375,8 @@
     <string name="get_plugin">Hent</string>
     <string name="plugin_ski_name">Skikort</string>
     <string name="plugin_nautical_name">Søkort</string>
-    <string name="world_ski_missing">For at vise skikort, skal det særlige offline kort hentes</string>
-    <string name="nautical_maps_missing">For at vise søkort, skal det særlige offline kort hentes</string>
+    <string name="world_ski_missing">Hent det særlige offlinekort for at få vist skifaciliteter.</string>
+    <string name="nautical_maps_missing">Hent det særlige offlinekort for at få vist nautiske detaljer.</string>
     <string name="rendering_attr_pisteGrooming_name">Pistepreparering</string>
     <string name="free">Ledig %1$s</string>
     <string name="device_memory">Lagerplads</string>
@@ -1828,7 +1830,7 @@
     <string name="updates_size">Opdateringsstørrelse</string>
     <string name="last_map_change">Sidste kortændring: %s</string>
     <string name="rec_split">Optagelse automatisk opdelt</string>
-    <string name="rec_split_title">"Brug  automatisk opdeling"</string>
+    <string name="rec_split_title">Brug automatisk opdeling</string>
     <string name="rec_split_desc">Overskriv klip når lagerpladsen er fuld.</string>
     <string name="rec_split_clip_length">Kliplængde</string>
     <string name="rec_split_clip_length_desc">Øvre tidsgrænse for optagede videoklip.</string>
@@ -1962,9 +1964,9 @@
     <string name="use_osm_live_routing_description">Aktiver navigation for OsmAnd Live ændringer.</string>
     <string name="use_osm_live_routing">OsmAnd Live navigation</string>
     <string name="access_direction_audio_feedback">Anvisninger med lyd</string>
-    <string name="access_direction_audio_feedback_descr">"Indikerer retning til målpunkt  med lyd."</string>
+    <string name="access_direction_audio_feedback_descr">Indikerer retning til målpunkt med lyd.</string>
     <string name="access_direction_haptic_feedback">Anvisninger med vibration</string>
-    <string name="access_direction_haptic_feedback_descr">"Indikerer retning til målpunkt  med vibrationer."</string>
+    <string name="access_direction_haptic_feedback_descr">Indikerer retning til målpunkt med vibrationer.</string>
     <string name="follow_us">Følg os</string>
     <string name="move_marker_bottom_sheet_title">Flyt kortet for at ændre markør-position</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
@@ -2048,7 +2050,7 @@
     <string name="subcategories">Underkategorier</string>
     <string name="translit_names">Translitterere navne</string>
     <string name="translit_name_if_miss">Transliteration hvis %1$s navn mangler</string>
-    <string name="search_hint">"Indtast by, adresse,  IP-navn"</string>
+    <string name="search_hint">Indtast by, adresse, IP-navn</string>
     <string name="rendering_value_light_brown_name">Lysebrun</string>
     <string name="rendering_value_dark_brown_name">Mørkebrun</string>
     <string name="rendering_attr_contourColorScheme_name">Farveskema for højdekurver</string>
@@ -2385,7 +2387,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
     <string name="save_poi_too_many_uppercase">Navnet indeholder for mange store bogstaver. Fortsæt?</string>
-    <string name="route_is_too_long_v2">"For lange afstande: tilføj  mellemliggende destinationer, hvis ingen rute er beregnet efter 10 minutter."</string>
+    <string name="route_is_too_long_v2">For lange afstande: tilføj mellemliggende destinationer, hvis ingen rute er beregnet efter 10 minutter.</string>
     <string name="display_zoom_level">Vise zoomniveau: %1$s</string>
     <string name="srtm_color_scheme">Farveskema</string>
     <string name="show_from_zoom_level">Vis fra zoomniveau</string>
@@ -2393,9 +2395,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_allow_private_description">Tillad adgang til private områder.</string>
     <string name="srtm_menu_download_descr">Hent \'Højdekurve\' kort til brug i området.</string>
     <string name="shared_string_plugin">Udvidelse</string>
-    <string name="srtm_purchase_header">For at se højdekurver på kortet, køb og installer \'Højdekurve\' udvidelsen</string>
+    <string name="srtm_purchase_header">Køb og installer \'Højdekurve\' udvidelsen for at få vist graduerede lodrette områder.</string>
     <string name="hillshade_menu_download_descr">For at se reliefskygger, hent overlejringskort med reliefskygger for området.</string>
-    <string name="hillshade_purchase_header">For at se reliefskygger på kortet er det nødvendigt at installere \'Højdekurve\' udvidelsen</string>
+    <string name="hillshade_purchase_header">Installer \'Højdekurve\' udvidelsen for at få vist graduerede lodrette områder.</string>
     <string name="hide_from_zoom_level">Skjul fra zoom-niveau</string>
     <string name="sorted_by_distance">Sorteret efter afstand</string>
     <string name="search_favorites">Søg i Favoritter</string>
@@ -2568,7 +2570,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Vis retningsbestemt linje fra position til de aktive markørplaceringer.</string>
     <string name="show_arrows_descr">Vis en eller to pile der angiver retningen til de aktive markører.</string>
     <string name="distance_indication_descr">Vælg hvordan afstanden til de aktive markører skal vises.</string>
-    <string name="active_markers_descr">Angiv antal retningsindikatorer:</string>
+    <string name="active_markers_descr">Angiv antal retningsindikatorer.</string>
     <string name="add_track_to_markers_descr">Vælg et spor for at tilføje dens rutepunkter til markører.</string>
     <string name="add_favourites_group_to_markers_descr">Vælg en katagori af Favoriter, der skal tilføjes markørerne.</string>
     <string name="shared_string_gpx_waypoints">Sporrutepunkter</string>
@@ -2725,7 +2727,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="paid_plugin">Betalt udvidelse</string>
     <string name="popular_destinations">Populære destinationer</string>
     <string name="travel_card_update_descr">Nye Wikivoyage data er tilgængelige, opdater for at bruge dem.</string>
-    <string name="travel_card_download_descr">"Hent Wikivoyage rejseguider for at se artikler om steder rundt om i verden uden  forbindelse  til internettet."</string>
+    <string name="travel_card_download_descr">"Hent Wikivoyage rejseguider for at se artikler om steder rundt om i verden uden forbindelse  til internettet."</string>
     <string name="update_is_available">Opdatering er tilgængelig</string>
     <string name="download_file">Hent fil</string>
     <string name="start_editing_card_image_text">Den gratis verdensomspændende rejseguide, som alle kan redigere.</string>
@@ -2804,7 +2806,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="poi_cannot_be_found">Node eller vej kan ikke findes.</string>
     <string name="search_no_results_feedback">Ingen søgeresultater?
 \nGiv tilbagemelding</string>
-    <string name="test_voice_desrc">Tryk på en knap og lyt til den tilsvarende talemeddelelse for at identificere manglende eller fejlagtige meddelelser.</string>
+    <string name="test_voice_desrc">Tryk på en knap og lyt til den tilsvarende talemeddelelse for at høre, om den mangler eller er defekt</string>
     <string name="commiting_way">Indsendelsesmåde…</string>
     <string name="release_3_2_pre">• Løst nedbrud ved start, der opstod på nogle enheder 
 \n 
@@ -3560,7 +3562,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_transparency">Gennemsigtighed</string>
     <string name="shared_string_zoom_levels">Zoomniveauer</string>
     <string name="shared_string_legend">Tegnforklaring</string>
-    <string name="terrain_empty_state_text">Gøre det muligt at få vist relief- eller hældningskort. Læs mere om kort-typerne på vores hjemmeside</string>
+    <string name="terrain_empty_state_text">Gøre det muligt at få vist relief- eller hældningskort. Læs mere om kort-typerne på vores hjemmeside.</string>
     <string name="shared_string_hillshade">Reliefskygge</string>
     <string name="import_complete_description">Alle data fra %1$s er importeret, brug knapperne nedenfor til at åbne den nødvendige del af programmet til at håndtere det.</string>
     <string name="items_added">Poster tilføjet</string>
@@ -3571,7 +3573,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="settings_item_read_error">Kunne ikke læse %1$s.</string>
     <string name="settings_item_write_error">Kunne ikke skrive til %1$s.</string>
     <string name="settings_item_import_error">Kunne ikke importere %1$s.</string>
-    <string name="replace_point_descr">Erstat et andet punkt med dette</string>
+    <string name="replace_point_descr">Erstat et andet punkt med dette.</string>
     <string name="select_track_file">Vælg sporfil</string>
     <string name="shared_string_languages">Sprog</string>
     <string name="shared_string_language">Sprog</string>
@@ -3698,4 +3700,61 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="app_mode_wheelchair">Kørestol</string>
     <string name="app_mode_go_cart">Go cart</string>
     <string name="osm_edit_closed_note">Lukket OSM-note</string>
+    <string name="save_track_to_gpx">Automatisk optagelse af spor under navigation</string>
+    <string name="one_image_per_tile">En billedfil pr. flise</string>
+    <string name="online_map_url_helper_text">Angiv eller indsæt URL-adressen til onlinekilden.</string>
+    <string name="shared_string_legal">Juridisk</string>
+    <string name="keep_active">Hold aktiv</string>
+    <string name="speed_cameras_alert">I nogle lande er indberetninger om hastighedskameraer forbudt i henhold til loven.</string>
+    <string name="vessel_height_warning_link">Indstil fartøjets højde</string>
+    <string name="vessel_width_limit_description">Indstil fartøjets bredde for at undgå smalle broer</string>
+    <string name="plugin_wikipedia_description">Få oplysninger om interessepunkter fra Wikipedia. En lomme offlineguide - aktiver Wikipedia udvidelsen og nyd artikler omkring omgivelserne.</string>
+    <string name="add_hidden_group_info">Det tilføjede punkt vil ikke være synligt på kortet, da den valgte gruppe er skjult, find det i \"%s\".</string>
+    <string name="app_mode_wheelchair_forward">Kørestol fremad</string>
+    <string name="set_working_days_to_continue">Indstil arbejdsdage for at fortsætte</string>
+    <string name="route_between_points">Rute mellem punkter</string>
+    <string name="plan_a_route">Planlæg en rute</string>
+    <string name="add_to_a_track">Føj til et spor</string>
+    <string name="track_show_start_finish_icons">Vis ikoner for start - ankomst</string>
+    <string name="select_track_width">Vælg bredde</string>
+    <string name="gpx_split_interval_none_descr">Vælg den ønskede opdelingsindstilling: efter tid eller afstand.</string>
+    <string name="shared_string_custom">Brugerdefinerede</string>
+    <string name="gpx_direction_arrows">Retningspile</string>
+    <string name="plan_route_last_edited">Sidst redigeret</string>
+    <string name="plan_route_import_track">Importer spor</string>
+    <string name="plan_route_open_existing_track">Åbn eksisterende spor</string>
+    <string name="plan_route_create_new_route">Opret en ny rute</string>
+    <string name="shared_string_done">Færdig</string>
+    <string name="overwrite_track">Overskriv spor</string>
+    <string name="save_as_new_track">Gem som nyt spor</string>
+    <string name="reverse_route">Omvendt rute</string>
+    <string name="rourte_between_points_whole_track_button_desc">Hele sporet genberegnes ved hjælp af den valgte profil.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Kun det næste segment genberegnes ved hjælp af den valgte profil.</string>
+    <string name="whole_track">Hele sporet</string>
+    <string name="next_segment">Næste segment</string>
+    <string name="threshold_distance">Tærskelafstand</string>
+    <string name="navigation_profile">Navigationsprofil</string>
+    <string name="street_level_imagery">Billeder på gadeniveau</string>
+    <string name="in_case_of_reverse_direction">I tilfælde af modsat retning</string>
+    <string name="shared_string_save_as_gpx">Gem som ny sporfil</string>
+    <string name="shared_string_gpx_files">Spor</string>
+    <string name="layer_gpx_layer">Spor</string>
+    <string name="show_gpx">Spor</string>
+    <string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
+    <string name="empty_state_my_tracks">Tilføj sporfiler</string>
+    <string name="map_widget_monitoring">Optag tur</string>
+    <string name="marker_save_as_track">Gem som sporfil</string>
+    <string name="follow_track">Følg spor</string>
+    <string name="follow_track_descr">Vælg den sporfil, der skal følges</string>
+    <string name="select_another_track">Vælg et andet spor</string>
+    <string name="start_of_the_track">Starten af sporet</string>
+    <string name="nearest_point">Nærmeste punkt</string>
+    <string name="attach_to_the_roads">Fastgør til veje</string>
+    <string name="delete_address">Slet adresse</string>
+    <string name="add_address">Tilføj adresse</string>
+    <string name="access_hint_enter_address">Angiv adresse</string>
+    <string name="plan_route_trim_before">Trim før</string>
+    <string name="plan_route_trim_after">Trim efter</string>
+    <string name="plan_route_change_route_type_before">Skift rutetype før</string>
+    <string name="plan_route_change_route_type_after">Skift rutetype efter</string>
 </resources>

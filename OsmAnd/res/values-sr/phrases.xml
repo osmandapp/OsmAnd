@@ -3814,4 +3814,5 @@
     <string name="poi_volcano_type_lava_dome">Купола лаве</string>
     <string name="poi_volcano_type_caldera">Калдера</string>
     <string name="poi_volcano_type_maar">Мар</string>
+    <string name="poi_traffic_signals_arrow_no">Стрелица: не</string>
 </resources>
