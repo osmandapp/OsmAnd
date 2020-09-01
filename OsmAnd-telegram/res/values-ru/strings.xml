@@ -2,7 +2,7 @@
 <resources>
     <string name="timeline_available_for_free_now">Хронология теперь доступна бесплатно.</string>
     <string name="location_recording_enabled">Запись местоположений включена</string>
-    <string name="privacy_policy_use_telegram">Telegram (менеджер сообщений) используется для связи и общения с людьми.</string>
+    <string name="privacy_policy_use_telegram">Telegram (мессенджер) используется для связи и общения с людьми.</string>
     <string name="privacy_policy_telegram_client">OsmAnd Tracker является одним из клиентов, использующих открытую платформу Telegram. Ваши контакты могут использовать любой другой клиент Telegram.</string>
     <string name="privacy_policy_agree">Нажимая \"Продолжить\", вы соглашаетесь с условиями политики конфиденциальности Telegram и OsmAnd.</string>
     <string name="timeline_description">Включите мониторинг, чтобы сохранять все местоположения в истории.</string>
@@ -106,7 +106,7 @@
     <string name="last_updated_location">Последнее обновление локации:</string>
     <string name="successfully_sent_and_updated">Успешно отправлено и обновлено</string>
     <string name="not_possible_to_send_to_telegram_chats">Невозможно отправить Telegram чаты:</string>
-    <string name="waiting_for_response_from_telegram">Ожидание ответа от Telegram</string>
+    <string name="waiting_for_response_from_telegram">Ожидание ответа Telegram</string>
     <string name="searching_for_gps">Поиск GPS…</string>
     <string name="connecting_to_the_internet">Подключение к Интернету</string>
     <string name="background_work_description">Измените настройки оптимизации батареи, чтобы обеспечить стабильную отправку местоположения.</string>
@@ -166,8 +166,8 @@
     <string name="shared_string_collected">Собрано</string>
     <string name="gps_points">Точки GPS</string>
     <string name="shared_string_sent">Отправлено</string>
-    <string name="monitoring_is_enabled">Мониторинг включен</string>
-    <string name="monitoring_is_disabled">Мониторинг отключен</string>
+    <string name="monitoring_is_enabled">Мониторинг включён</string>
+    <string name="monitoring_is_disabled">Мониторинг отключён</string>
     <string name="time_on_the_move">Время в движении</string>
     <string name="average_altitude">Средняя высота</string>
     <string name="average_speed">Средняя скорость</string>
@@ -211,7 +211,7 @@
     <string name="timeline">Хронология</string>
     <string name="search_contacts">Искать контакты</string>
     <string name="search_contacts_descr">Поиск среди всех ваших групп и контактов.</string>
-    <string name="type_contact_or_group_name">Введите контакт или название группы</string>
+    <string name="type_contact_or_group_name">Имя контакта или название группы</string>
     <string name="shared_string_search">Поиск</string>
     <string name="direction">Направление</string>
     <string name="precision">Точность</string>
@@ -220,8 +220,8 @@
     <string name="proxy_server">Сервер</string>
     <string name="shared_string_connection">Соединение</string>
     <string name="proxy_type">Тип прокси</string>
-    <string name="proxy_connected">Соединено</string>
-    <string name="proxy_disconnected">Разъединено</string>
+    <string name="proxy_connected">Подключено</string>
+    <string name="proxy_disconnected">Отключено</string>
     <string name="proxy_settings">Настройки прокси</string>
     <string name="proxy">Прокси</string>
     <string name="gpx_settings">Настройки GPX</string>
@@ -233,7 +233,7 @@
     <string name="mile">миля</string>
     <string name="mile_per_hour">миль/ч</string>
     <string name="altitude">Высота</string>
-    <string name="bearing">Ориентация</string>
+    <string name="bearing">Пеленг</string>
     <string name="proxy_key">Ключ</string>
     <string name="proxy_password">Пароль</string>
     <string name="proxy_username">Имя пользователя</string>
