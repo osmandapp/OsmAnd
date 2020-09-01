@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -46,7 +47,7 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 	private boolean fromEditText;
 
 	@ColorInt
-	private int prevColor;
+	private Integer prevColor;
 	@ColorInt
 	private int newColor;
 
@@ -60,10 +61,10 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 			if (args != null) {
 				if (args.containsKey(PREV_SELECTED_COLOR)) {
 					prevColor = args.getInt(PREV_SELECTED_COLOR);
+					newColor = prevColor;
 				} else {
-					prevColor = Color.RED;
+					newColor = Color.RED;
 				}
-				newColor = prevColor;
 			}
 		}
 
@@ -78,7 +79,9 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putInt(NEW_SELECTED_COLOR, newColor);
-		outState.putInt(PREV_SELECTED_COLOR, prevColor);
+		if (prevColor != null) {
+			outState.putInt(PREV_SELECTED_COLOR, prevColor);
+		}
 		super.onSaveInstanceState(outState);
 	}
 
@@ -161,11 +164,13 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, int prevColor) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, @Nullable Integer prevColor) {
 		try {
 			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(CustomColorBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
-				args.putInt(PREV_SELECTED_COLOR, prevColor);
+				if (prevColor != null) {
+					args.putInt(PREV_SELECTED_COLOR, prevColor);
+				}
 
 				CustomColorBottomSheet customColorBottomSheet = new CustomColorBottomSheet();
 				customColorBottomSheet.setArguments(args);
@@ -179,7 +184,7 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 
 	public interface ColorPickerListener {
 
-		void onColorSelected(@ColorInt int prevColor, @ColorInt int newColor);
+		void onColorSelected(@ColorInt Integer prevColor, @ColorInt int newColor);
 
 	}
 }

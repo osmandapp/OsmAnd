@@ -180,13 +180,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			trackIcon = view.findViewById(R.id.track_icon);
 			buttonsShadow = view.findViewById(R.id.buttons_shadow);
 
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					openMenuHeaderOnly();
-				}
-			});
-
 			if (isPortrait()) {
 				updateCardsLayout();
 			}
@@ -341,7 +334,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
-	public void onColorSelected(int prevColor, int newColor) {
+	public void onColorSelected(Integer prevColor, int newColor) {
 		trackColoringCard.onColorSelected(prevColor, newColor);
 		updateColorItems();
 	}

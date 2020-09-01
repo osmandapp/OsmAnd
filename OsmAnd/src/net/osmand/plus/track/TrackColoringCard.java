@@ -23,9 +23,6 @@ import com.google.android.material.internal.FlowLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.GPXDatabase;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -46,9 +43,8 @@ import static net.osmand.plus.dialogs.GpxAppearanceAdapter.getAppearanceItems;
 
 public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 
-	public static final int INVALID_VALUE = -1;
-
-	private final static String SOLID_COLOR = "solid_color";
+	private static final int INVALID_VALUE = -1;
+	private static final String SOLID_COLOR = "solid_color";
 	private static final Log log = PlatformUtil.getLog(TrackColoringCard.class);
 
 	private TrackDrawInfo trackDrawInfo;
@@ -202,7 +198,7 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					CustomColorBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), target, TrackColoringCard.INVALID_VALUE);
+					CustomColorBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), target, null);
 				}
 			}
 		});
@@ -289,8 +285,8 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 	}
 
 	@Override
-	public void onColorSelected(int prevColor, int newColor) {
-		if (prevColor == INVALID_VALUE && customColors.size() < 6) {
+	public void onColorSelected(Integer prevColor, int newColor) {
+		if (prevColor == null && customColors.size() < 6) {
 			customColors.add(newColor);
 			trackDrawInfo.setColor(newColor);
 		} else if (!Algorithms.isEmpty(customColors)) {
@@ -299,33 +295,7 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 				customColors.set(index, newColor);
 			}
 		}
-		saveCustomColors();
-		saveCustomColorsToTracks(prevColor, newColor);
 		updateContent();
-	}
-
-	private void saveCustomColorsToTracks(int prevColor, int newColor) {
-		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
-		for (GPXDatabase.GpxDataItem dataItem : gpxDataItems) {
-			if (prevColor == dataItem.getColor()) {
-				app.getGpxDbHelper().updateColor(dataItem, newColor);
-			}
-		}
-		List<SelectedGpxFile> files = app.getSelectedGpxHelper().getSelectedGPXFiles();
-		for (SelectedGpxFile selectedGpxFile : files) {
-			if (prevColor == selectedGpxFile.getGpxFile().getColor(0)) {
-				selectedGpxFile.getGpxFile().setColor(newColor);
-			}
-		}
-	}
-
-	private void saveCustomColors() {
-		List<String> colorNames = new ArrayList<>();
-		for (Integer color : customColors) {
-			String colorHex = Algorithms.colorToString(color);
-			colorNames.add(colorHex);
-		}
-		app.getSettings().CUSTOM_TRACK_COLORS.setStringsList(colorNames);
 	}
 
 	private class TrackColoringAdapter extends RecyclerView.Adapter<TrackAppearanceViewHolder> {
