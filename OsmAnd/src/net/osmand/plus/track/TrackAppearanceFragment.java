@@ -390,13 +390,21 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		int strokeColor = UiUtilities.getColorWithAlpha(Color.BLACK, 0.7f);
 		Drawable strokeIcon = app.getUIUtilities().getPaintedIcon(strokeIconId, strokeColor);
 
+		Drawable transparencyIcon = getTransparencyIcon(app, widthAttr, color);
 		if (showArrows) {
 			int arrowsIconId = getArrowsIconId(widthAttr);
 			int contrastColor = UiUtilities.getContrastColor(app, color, false);
 			Drawable arrows = app.getUIUtilities().getPaintedIcon(arrowsIconId, contrastColor);
-			return UiUtilities.getLayeredIcon(widthIcon, strokeIcon, arrows);
+			return UiUtilities.getLayeredIcon(transparencyIcon, widthIcon, strokeIcon, arrows);
 		}
-		return UiUtilities.getLayeredIcon(widthIcon, strokeIcon);
+		return UiUtilities.getLayeredIcon(transparencyIcon, widthIcon, strokeIcon);
+	}
+
+	private Drawable getTransparencyIcon(OsmandApplication app, String widthAttr, @ColorInt int color) {
+		int transparencyIconId = getTransparencyIconId(widthAttr);
+		int colorWithoutAlpha = UiUtilities.removeAlpha(color);
+		int transparencyColor = UiUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
+		return app.getUIUtilities().getPaintedIcon(transparencyIconId, transparencyColor);
 	}
 
 	private void updateCardsLayout() {
@@ -635,6 +643,16 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			return true;
 		} catch (RuntimeException e) {
 			return false;
+		}
+	}
+
+	public static int getTransparencyIconId(String widthAttr) {
+		if (TRACK_WIDTH_BOLD.equals(widthAttr)) {
+			return R.drawable.ic_action_track_line_bold_transparency;
+		} else if (TRACK_WIDTH_MEDIUM.equals(widthAttr)) {
+			return R.drawable.ic_action_track_line_medium_transparency;
+		} else {
+			return R.drawable.ic_action_track_line_thin_transparency;
 		}
 	}
 

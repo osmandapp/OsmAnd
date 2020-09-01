@@ -58,8 +58,12 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 		} else {
 			Bundle args = getArguments();
 			if (args != null) {
-				prevColor = args.getInt(PREV_SELECTED_COLOR);
-				newColor = prevColor != -1 ? prevColor : Color.RED;
+				if (args.containsKey(PREV_SELECTED_COLOR)) {
+					prevColor = args.getInt(PREV_SELECTED_COLOR);
+				} else {
+					prevColor = Color.RED;
+				}
+				newColor = prevColor;
 			}
 		}
 

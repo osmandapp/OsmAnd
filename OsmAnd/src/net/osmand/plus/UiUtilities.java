@@ -230,8 +230,12 @@ public class UiUtilities {
 	}
 
 	@ColorInt
-	public static int mixTwoColors(@ColorInt int color1, @ColorInt int color2, float amount )
-	{
+	public static int removeAlpha(@ColorInt int color) {
+		return Color.rgb(Color.red(color), Color.green(color), Color.blue(color));
+	}
+
+	@ColorInt
+	public static int mixTwoColors(@ColorInt int color1, @ColorInt int color2, float amount) {
 		final byte ALPHA_CHANNEL = 24;
 		final byte RED_CHANNEL   = 16;
 		final byte GREEN_CHANNEL =  8;

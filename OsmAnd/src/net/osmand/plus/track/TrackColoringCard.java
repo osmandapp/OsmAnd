@@ -26,6 +26,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -143,7 +144,11 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 	private View createColorItemView(@ColorInt final int color, final FlowLayout rootView, boolean customColor) {
 		View colorItemView = createCircleView(rootView);
 		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
-		backgroundCircle.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle), color));
+
+		Drawable transparencyIcon = getTransparencyIcon(app, color);
+		Drawable colorIcon = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle, color);
+		Drawable layeredIcon = UiUtilities.getLayeredIcon(transparencyIcon, colorIcon);
+		backgroundCircle.setImageDrawable(layeredIcon);
 		backgroundCircle.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -173,6 +178,12 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 		return colorItemView;
 	}
 
+	private Drawable getTransparencyIcon(OsmandApplication app, @ColorInt int color) {
+		int colorWithoutAlpha = UiUtilities.removeAlpha(color);
+		int transparencyColor = UiUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
+		return app.getUIUtilities().getPaintedIcon(R.drawable.ic_bg_transparency, transparencyColor);
+	}
+
 	private View createAddCustomColorItemView(FlowLayout rootView) {
 		View colorItemView = createCircleView(rootView);
 		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
@@ -183,7 +194,7 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 		ImageView icon = colorItemView.findViewById(R.id.icon);
 		icon.setVisibility(View.VISIBLE);
 		int activeColorResId = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
-		icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_add, activeColorResId));
+		icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_plus, activeColorResId));
 
 		backgroundCircle.setImageDrawable(backgroundIcon);
 		backgroundCircle.setOnClickListener(new View.OnClickListener() {
