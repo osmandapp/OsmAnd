@@ -2027,8 +2027,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			int paddingH = ctx.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_large);
 			int paddingV = ctx.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_small);
 			done.setPadding(paddingH, paddingV, paddingH, paddingV);
-			AndroidUtils.setBackground(ctx, done, nightMode, R.drawable.dlg_btn_stroked_light,
-					R.drawable.dlg_btn_stroked_dark);
+			AndroidUtils.setBackground(ctx, done, nightMode, R.drawable.purchase_dialog_outline_btn_bg_light,
+					R.drawable.purchase_dialog_outline_btn_bg_dark);
 		}
 
 		@Override
