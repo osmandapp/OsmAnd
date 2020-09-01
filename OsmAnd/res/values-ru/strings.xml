@@ -3112,7 +3112,7 @@
     <string name="routing_attr_piste_type_skitour_name">Лыжные туры</string>
     <string name="routing_attr_piste_type_sled_name">Сани</string>
     <string name="routing_attr_piste_type_sled_description">Склоны для катания на санях.</string>
-    <string name="routing_attr_allow_intermediate_description">Более сложные маршруты с крутыми участками. Может содержать препятствия, которые следует избегать.</string>
+    <string name="routing_attr_allow_intermediate_description">Более сложные маршруты с крутыми участками. Возможны препятствия, которых следует избегать.</string>
     <string name="routing_attr_allow_advanced_description">Сложные маршруты, с опасными препятствиями и крутыми участками.</string>
     <string name="routing_attr_difficulty_preference_name">Предпочитаемая сложность</string>
     <string name="process_downloading_service">Служба скачивания OsmAnd</string>
