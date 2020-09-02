@@ -66,10 +66,10 @@ public class ApiRouter implements OsmandMapTileView.IMapImageDrawListener {
 
 	ExecutorService executor = Executors.newFixedThreadPool(3);
 
-	Map<RotatedTileBox,Bitmap> hashMap = new HashMap<>();
-	Map<RotatedTileBox,Bitmap> map = Collections.synchronizedMap(hashMap);
+	Map<RotatedTileBox, Bitmap> hashMap = new HashMap<>();
+	Map<RotatedTileBox, Bitmap> map = Collections.synchronizedMap(hashMap);
 
-	private NanoHTTPD.Response tileApiCall(NanoHTTPD.IHTTPSession session) {
+	private synchronized NanoHTTPD.Response tileApiCall(NanoHTTPD.IHTTPSession session) {
 		int zoom = 0;
 		double lat = 0;//50.901430;
 		double lon = 0;//34.801775;
@@ -84,19 +84,19 @@ public class ApiRouter implements OsmandMapTileView.IMapImageDrawListener {
 			return ErrorResponses.response500;
 		}
 		mapActivity.getMapView().setMapImageDrawListener(this);
-		Future<Pair<RotatedTileBox,Bitmap>> future;
-		final RotatedTileBox rotatedTileBox = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
-		rotatedTileBox.setZoom(zoom);
-		rotatedTileBox.setLatLonCenter(lat, lon);
-		rotatedTileBox.setPixelDimensions(512, 512);
+		Future<Pair<RotatedTileBox, Bitmap>> future;
+		final RotatedTileBox rotatedTileBox = new RotatedTileBox.RotatedTileBoxBuilder()
+				.setLocation(lat, lon)
+				.setZoom(zoom)
+				.setPixelDimensions(512, 512, 0.5f, 0.5f).build();
 		future = executor.submit(new Callable<Pair<RotatedTileBox, Bitmap>>() {
 			@Override
 			public Pair<RotatedTileBox, Bitmap> call() throws Exception {
 				Bitmap bmp;
-				while((bmp = map.get(rotatedTileBox)) == null) {
+				while ((bmp = map.get(rotatedTileBox)) == null) {
 					Thread.sleep(1000);
 				}
-				return Pair.create(rotatedTileBox,bmp);
+				return Pair.create(rotatedTileBox, bmp);
 			}
 		});
 		mapActivity.getMapView().setCurrentRotatedTileBox(rotatedTileBox);
@@ -251,7 +251,7 @@ public class ApiRouter implements OsmandMapTileView.IMapImageDrawListener {
 
 	@Override
 	public void onDraw(RotatedTileBox viewport, Bitmap bmp) {
-		this.map.put(viewport,bmp);
+		this.map.put(viewport, bmp);
 	}
 
 	static class ErrorResponses {

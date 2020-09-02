@@ -76,39 +76,49 @@ public class RotatedTileBox {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		RotatedTileBox tileBox = (RotatedTileBox) o;
-		return Double.compare(tileBox.lat, lat) == 0 &&
-				Double.compare(tileBox.lon, lon) == 0 &&
-				Float.compare(tileBox.rotate, rotate) == 0 &&
-				Float.compare(tileBox.density, density) == 0 &&
+		return this.compare(tileBox.lat, lat) &&
+				this.compare(tileBox.lon, lon) &&
+				this.compare(tileBox.rotate, rotate) &&
+				this.compare(tileBox.density, density) &&
 				zoom == tileBox.zoom &&
-				Double.compare(tileBox.mapDensity, mapDensity) == 0 &&
-				Double.compare(tileBox.zoomAnimation, zoomAnimation) == 0 &&
-				Double.compare(tileBox.zoomFloatPart, zoomFloatPart) == 0 &&
+				this.compare(tileBox.mapDensity, mapDensity) &&
+				this.compare(tileBox.zoomAnimation, zoomAnimation) &&
+				this.compare(tileBox.zoomFloatPart, zoomFloatPart) &&
 				cx == tileBox.cx &&
 				cy == tileBox.cy &&
 				pixWidth == tileBox.pixWidth &&
 				pixHeight == tileBox.pixHeight &&
-				Double.compare(tileBox.zoomFactor, zoomFactor) == 0 &&
-				Double.compare(tileBox.rotateCos, rotateCos) == 0 &&
-				Double.compare(tileBox.rotateSin, rotateSin) == 0 &&
-				Double.compare(tileBox.oxTile, oxTile) == 0 &&
-				Double.compare(tileBox.oyTile, oyTile) == 0;
+				this.compare(tileBox.zoomFactor, zoomFactor) &&
+				this.compare(tileBox.rotateCos, rotateCos) &&
+				this.compare(tileBox.rotateSin, rotateSin) &&
+				this.compare(tileBox.oxTile, oxTile) &&
+				this.compare(tileBox.oyTile, oyTile);
+	}
+
+	private double E = 0.0001;
+
+	private boolean compare(float lon, float lon1) {
+		return Math.abs(lon1-lon) < E;
+	}
+
+	private boolean compare(double lon, double lon1) {
+		return Math.abs(lon1-lon) < E;
 	}
 
 	@Override
 	public int hashCode() {
 		int result = 1 + (int)lat +
-				3* (int)lon +
-				5* (int)rotate +
-				7* (int)density +
-				11* (int)zoom  +
-				13* (int)mapDensity +
-				17* (int)zoomAnimation +
-				19* (int)zoomFloatPart +
-				23* (int)cx +
-				29* (int)cy +
-				31* (int)pixWidth +
-				37* (int)pixHeight;
+				3* (int)(lon*1/E) +
+				5* (int)(rotate*1/E) +
+				7* (int)(density*1/E) +
+				11* zoom  +
+				13* (int)(mapDensity*1/E) +
+				17* (int)(zoomAnimation*1/E) +
+				19* (int)(zoomFloatPart*1/E) +
+				23* cx +
+				29* cy +
+				31* pixWidth +
+				37* pixHeight;
 		return result;
 	}
 
