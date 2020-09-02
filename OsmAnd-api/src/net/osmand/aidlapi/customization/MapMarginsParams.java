@@ -59,6 +59,7 @@ public class MapMarginsParams extends AidlParams {
 
 	@Override
 	public void writeToBundle(Bundle bundle) {
+		bundle.putString("appModeKey", appModeKey);
 		bundle.putInt("leftMargin", leftMargin);
 		bundle.putInt("topMargin", topMargin);
 		bundle.putInt("rightMargin", rightMargin);
@@ -67,6 +68,7 @@ public class MapMarginsParams extends AidlParams {
 
 	@Override
 	protected void readFromBundle(Bundle bundle) {
+		appModeKey = bundle.getString("appModeKey");
 		leftMargin = bundle.getInt("leftMargin");
 		topMargin = bundle.getInt("topMargin");
 		rightMargin = bundle.getInt("rightMargin");
