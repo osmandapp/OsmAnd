@@ -22,6 +22,7 @@ import net.osmand.aidlapi.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidlapi.contextmenu.RemoveContextMenuButtonsParams;
 import net.osmand.aidlapi.contextmenu.UpdateContextMenuButtonsParams;
 import net.osmand.aidlapi.copyfile.CopyFileParams;
+import net.osmand.aidlapi.customization.MapMarginsParams;
 import net.osmand.aidlapi.info.AppInfoParams;
 import net.osmand.aidlapi.customization.CustomizationInfoParams;
 import net.osmand.aidlapi.customization.OsmandSettingsInfoParams;
@@ -1305,6 +1306,18 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			} catch (Exception e) {
 				handleException(e);
 				return null;
+			}
+		}
+
+		@Override
+		public boolean setMapMargins(MapMarginsParams params) {
+			try {
+				OsmandAidlApi api = getApi("setMapMargins");
+				return api != null && api.setMapMargins(params.getAppModeKey(), params.getLeftMargin(), params.getTopMargin(),
+						params.getBottomMargin(), params.getRightMargin());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
 			}
 		}
 	};

@@ -2273,6 +2273,10 @@ public class OsmandAidlApi {
 		return true;
 	}
 
+	public boolean setMapMargins(String appModeKey, int leftMargin, int topMargin, int bottomMargin, int rightMargin) {
+		return false;
+	}
+
 	private class FileCopyInfo {
 		long startTime;
 		long lastAccessTime;
