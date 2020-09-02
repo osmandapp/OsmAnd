@@ -105,7 +105,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	protected static final int emptyTileDivisor = 16;
 
-
 	public interface OnTrackBallListener {
 		public boolean onTrackBallEvent(MotionEvent e);
 	}
@@ -120,6 +119,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public interface OnDrawMapListener {
 		public void onDrawOverMap();
+	}
+
+	public interface IMapImageDrawListener {
+		public void onDraw(RotatedTileBox viewport,Bitmap bmp);
 	}
 
 	protected static final Log LOG = PlatformUtil.getLog(OsmandMapTileView.class);
@@ -144,6 +147,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private OnClickListener onClickListener;
 
 	private OnTrackBallListener trackBallDelegate;
+
+	private IMapImageDrawListener iMapImageDrawListener;
 
 	private AccessibilityActionsProvider accessibilityActions;
 
@@ -367,6 +372,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return wasZoomInMultiTouch;
 	}
 
+	public IMapImageDrawListener getMapImageDrawListener() {
+		return iMapImageDrawListener;
+	}
+
+	public void setMapImageDrawListener(IMapImageDrawListener iMapImageDrawListener) {
+		this.iMapImageDrawListener = iMapImageDrawListener;
+	}
+
 	public boolean mapGestureAllowed(OsmandMapLayer.MapGestureType type) {
 		for (OsmandMapLayer layer : layers) {
 			if (!layer.isMapGestureAllowed(type)) {
@@ -518,8 +531,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void restoreMapRatio() {
 		RotatedTileBox box = currentViewport.copy();
-		float rx = (float)box.getCenterPixelX() / box.getPixWidth();
-		float ry = (float)box.getCenterPixelY() / box.getPixHeight();
+		float rx = (float) box.getCenterPixelX() / box.getPixWidth();
+		float ry = (float) box.getCenterPixelY() / box.getPixHeight();
 		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
 			ry -= 0.35;
 		}
@@ -616,6 +629,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		long end = SystemClock.elapsedRealtime();
 		additional.calculateFPS(start, end);
+		if (iMapImageDrawListener != null){
+			iMapImageDrawListener.onDraw(tileBox,bufferBitmap);
+		}
 	}
 
 	public void refreshMapInternal(DrawSettings drawSettings) {
@@ -869,6 +885,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public net.osmand.data.RotatedTileBox getCurrentRotatedTileBox() {
 		return currentViewport;
+	}
+
+	public void setCurrentRotatedTileBox(net.osmand.data.RotatedTileBox tileBox) {
+		float rx = (float) tileBox.getCenterPixelX() / tileBox.getPixWidth();
+		float ry = (float) tileBox.getCenterPixelY() / tileBox.getPixHeight();
+		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
+			ry -= 0.35;
+		}
+		tileBox.setCenterLocation(rx, ry);
+		LatLon screenCenter = tileBox.getLatLonFromPixel(tileBox.getPixWidth() / 2f, tileBox.getPixHeight() / 2f);
+		mapRatioX = 0;
+		mapRatioY = 0;
+		setLatLon(screenCenter.getLatitude(), screenCenter.getLongitude());
+		currentViewport = tileBox;
 	}
 
 	public float getDensity() {

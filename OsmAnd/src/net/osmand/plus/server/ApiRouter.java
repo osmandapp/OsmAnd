@@ -1,37 +1,28 @@
 package net.osmand.plus.server;
 
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.Log;
+import android.util.Pair;
 import android.webkit.MimeTypeMap;
-import androidx.core.util.Pair;
 import com.google.gson.Gson;
 import fi.iki.elonen.NanoHTTPD;
-import net.osmand.data.*;
-import net.osmand.map.ITileSource;
-import net.osmand.map.TileSourceManager;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.server.map.LayersDraw;
-import net.osmand.plus.server.map.MapTileMiniLayer;
-import net.osmand.plus.server.map.OsmandMapMiniLayer;
-import net.osmand.plus.server.map.OsmandMapTileMiniView;
 import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+import java.util.concurrent.*;
 
 import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 
-public class ApiRouter {
+public class ApiRouter implements OsmandMapTileView.IMapImageDrawListener {
 	private OsmandApplication androidContext;
+
 	public OsmandApplication getAndroidContext() {
 		return androidContext;
 	}
@@ -42,80 +33,92 @@ public class ApiRouter {
 	//change to weakreference
 	public static MapActivity mapActivity;
 
-	public ApiRouter(){
+	public ApiRouter() {
 		initRoutes();
 	}
 
 	private void initRoutes() {
 		ApiEndpoint favorites = new ApiEndpoint();
 		favorites.uri = "/favorites";
-		favorites.apiCall = new ApiEndpoint.ApiCall(){
+		favorites.apiCall = new ApiEndpoint.ApiCall() {
 			@Override
 			public NanoHTTPD.Response call(NanoHTTPD.IHTTPSession session) {
 				return newFixedLengthResponse(getFavoritesJson());
 			}
 		};
-		endpoints.put(favorites.uri,favorites);
+		endpoints.put(favorites.uri, favorites);
 
 		final ApiEndpoint tile = new ApiEndpoint();
 		tile.uri = "/tile";
-		tile.apiCall = new ApiEndpoint.ApiCall(){
+		tile.apiCall = new ApiEndpoint.ApiCall() {
 			@Override
 			public NanoHTTPD.Response call(NanoHTTPD.IHTTPSession session) {
-				try{
-					int zoom = 0;
-					double lat = 0;//50.901430;
-					double lon = 0;//34.801775;
-					try{
-						String fullUri = session.getUri().replace("/tile/","");
-						Scanner s = new Scanner(fullUri).useDelimiter("/");
-						zoom = s.nextInt();
-						lat = s.nextDouble();//50.901430;
-						lon = s.nextDouble();//34.801775;
-					}
-					catch (Exception e){
-						e.printStackTrace();
-						return ErrorResponses.response500;
-					}
-					Log.d("TILE","HAVING VALUES" + zoom + " " + lat + " " + lon);
-					RotatedTileBox rotatedTileBox = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
-					rotatedTileBox.setZoom(zoom);
-					rotatedTileBox.setLatLonCenter(lat,lon);
-					rotatedTileBox.setPixelDimensions(512,512);
-					mapActivity.getMapView().setIntZoom(zoom);
-					mapActivity.getMapView().setLatLon(lat,lon);
-					OsmandMapLayer.DrawSettings param =
-							new OsmandMapLayer.DrawSettings(androidContext.getDaynightHelper().isNightMode(),
-									false);
-					mapActivity.getMapView().refreshMap();
-					mapActivity.getMapView().refreshMapInternal(param);
-					mapActivity.getMapView().refreshBaseMapInternal(rotatedTileBox, param);
-					Bitmap bitmap = mapActivity.getMapView().currentCanvas;
-					Canvas canvas = new Canvas(bitmap);
-					OsmandMapLayer.DrawSettings drawSettings = new OsmandMapLayer.DrawSettings(
-							androidContext.getDaynightHelper().isNightMode(),
-							true);
-//					mapActivity.getMapView().drawOverMap(canvas,
-//							rotatedTileBox,
-//							drawSettings);
-					//Bitmap bitmap = Bitmap.createBitmap(512,512,Bitmap.Config.ARGB_8888);
-					ByteArrayOutputStream stream = new ByteArrayOutputStream();
-					bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-					byte[] byteArray = stream.toByteArray();
-					ByteArrayInputStream str = new ByteArrayInputStream(byteArray);
-					return newFixedLengthResponse(
-							NanoHTTPD.Response.Status.OK,
-							"image/png",
-							str,
-							str.available());
-				}
-				catch (Exception e){
+				try {
+					return tileApiCall(session);
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				return ErrorResponses.response500;
 			}
 		};
-		endpoints.put(tile.uri,tile);
+		endpoints.put(tile.uri, tile);
+	}
+
+	ExecutorService executor = Executors.newFixedThreadPool(3);
+
+	Map<RotatedTileBox,Bitmap> hashMap = new HashMap<>();
+	Map<RotatedTileBox,Bitmap> map = Collections.synchronizedMap(hashMap);
+
+	private NanoHTTPD.Response tileApiCall(NanoHTTPD.IHTTPSession session) {
+		int zoom = 0;
+		double lat = 0;//50.901430;
+		double lon = 0;//34.801775;
+		try {
+			String fullUri = session.getUri().replace("/tile/", "");
+			Scanner s = new Scanner(fullUri).useDelimiter("/");
+			zoom = s.nextInt();
+			lat = s.nextDouble();
+			lon = s.nextDouble();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ErrorResponses.response500;
+		}
+		mapActivity.getMapView().setMapImageDrawListener(this);
+		Future<Pair<RotatedTileBox,Bitmap>> future;
+		final RotatedTileBox rotatedTileBox = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+		rotatedTileBox.setZoom(zoom);
+		rotatedTileBox.setLatLonCenter(lat, lon);
+		rotatedTileBox.setPixelDimensions(512, 512);
+		future = executor.submit(new Callable<Pair<RotatedTileBox, Bitmap>>() {
+			@Override
+			public Pair<RotatedTileBox, Bitmap> call() throws Exception {
+				Bitmap bmp;
+				while((bmp = map.get(rotatedTileBox)) == null) {
+					Thread.sleep(1000);
+				}
+				return Pair.create(rotatedTileBox,bmp);
+			}
+		});
+		mapActivity.getMapView().setCurrentRotatedTileBox(rotatedTileBox);
+		try {
+			Pair<RotatedTileBox, Bitmap> pair = future.get();
+			Bitmap bitmap = pair.second;// mapActivity.getMapView().currentCanvas;
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+			byte[] byteArray = stream.toByteArray();
+			ByteArrayInputStream str = new ByteArrayInputStream(byteArray);
+			return newFixedLengthResponse(
+					NanoHTTPD.Response.Status.OK,
+					"image/png",
+					str,
+					str.available());
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+			return ErrorResponses.response500;
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return ErrorResponses.response500;
+		}
 	}
 
 	public void setAndroidContext(OsmandApplication androidContext) {
@@ -132,10 +135,9 @@ public class ApiRouter {
 				uri.contains("/fonts/") ||
 				uri.contains("/favicon.ico")
 		) return getStatic(uri);
-		if (isApiUrl(uri)){
+		if (isApiUrl(uri)) {
 			return routeApi(session);
-		}
-		else {
+		} else {
 			return routeContent(session);
 		}
 	}
@@ -143,18 +145,18 @@ public class ApiRouter {
 	private NanoHTTPD.Response routeApi(NanoHTTPD.IHTTPSession session) {
 		String uri = session.getUri();
 		//TODO rewrite
-		if (uri.contains("tile")){
+		if (uri.contains("tile")) {
 			return endpoints.get("/tile").apiCall.call(session);
 		}
 		ApiEndpoint endpoint = endpoints.get(uri);
-		if (endpoint != null){
+		if (endpoint != null) {
 			return endpoint.apiCall.call(session);
 		}
 		return ErrorResponses.response404;
 	}
 
 	private boolean isApiUrl(String uri) {
-		for (String endpoint : endpoints.keySet()){
+		for (String endpoint : endpoints.keySet()) {
 			//TODO rewrite contains
 			if (endpoint.equals(uri) || uri.contains("tile")) return true;
 		}
@@ -240,11 +242,16 @@ public class ApiRouter {
 			text.append(json);
 			text.append(",");
 		}
-		return "[" + text.substring(0,text.length()-1) + "]";
+		return "[" + text.substring(0, text.length() - 1) + "]";
 	}
 
 	private String jsonFromFavorite(FavouritePoint favouritePoint) {
 		return gson.toJson(favouritePoint);
+	}
+
+	@Override
+	public void onDraw(RotatedTileBox viewport, Bitmap bmp) {
+		this.map.put(viewport,bmp);
 	}
 
 	static class ErrorResponses {

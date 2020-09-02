@@ -2,6 +2,8 @@ package net.osmand.data;
 
 import net.osmand.util.MapUtils;
 
+import java.util.Objects;
+
 public class RotatedTileBox {
 
 	/// primary fields
@@ -67,6 +69,47 @@ public class RotatedTileBox {
 			tileRB = new QuadPointDouble(r.tileRB);
 			tileLB = new QuadPointDouble(r.tileLB);
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		RotatedTileBox tileBox = (RotatedTileBox) o;
+		return Double.compare(tileBox.lat, lat) == 0 &&
+				Double.compare(tileBox.lon, lon) == 0 &&
+				Float.compare(tileBox.rotate, rotate) == 0 &&
+				Float.compare(tileBox.density, density) == 0 &&
+				zoom == tileBox.zoom &&
+				Double.compare(tileBox.mapDensity, mapDensity) == 0 &&
+				Double.compare(tileBox.zoomAnimation, zoomAnimation) == 0 &&
+				Double.compare(tileBox.zoomFloatPart, zoomFloatPart) == 0 &&
+				cx == tileBox.cx &&
+				cy == tileBox.cy &&
+				pixWidth == tileBox.pixWidth &&
+				pixHeight == tileBox.pixHeight &&
+				Double.compare(tileBox.zoomFactor, zoomFactor) == 0 &&
+				Double.compare(tileBox.rotateCos, rotateCos) == 0 &&
+				Double.compare(tileBox.rotateSin, rotateSin) == 0 &&
+				Double.compare(tileBox.oxTile, oxTile) == 0 &&
+				Double.compare(tileBox.oyTile, oyTile) == 0;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = 1 + (int)lat +
+				3* (int)lon +
+				5* (int)rotate +
+				7* (int)density +
+				11* (int)zoom  +
+				13* (int)mapDensity +
+				17* (int)zoomAnimation +
+				19* (int)zoomFloatPart +
+				23* (int)cx +
+				29* (int)cy +
+				31* (int)pixWidth +
+				37* (int)pixHeight;
+		return result;
 	}
 
 	public void calculateDerivedFields() {
