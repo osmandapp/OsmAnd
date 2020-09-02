@@ -3884,4 +3884,5 @@
     <string name="save_global_track_interval_descr">Zadaj interval pre všeobecné zaznamenávanie výletu (zapínané cez tlačidlo Záznamu výletu na mape).</string>
     <string name="gpx_monitoring_stop">Pozastaviť nahrávanie výletu</string>
     <string name="gpx_monitoring_start">Pokračovať v nahrávaní výletu</string>
+    <string name="one_point_error">Prosím pridajte aspoň dva body.</string>
 </resources>
