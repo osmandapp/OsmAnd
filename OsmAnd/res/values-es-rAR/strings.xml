@@ -3856,7 +3856,7 @@
     <string name="marker_save_as_track">Guardar como archivo de traza</string>
     <string name="follow_track">Seguir traza</string>
     <string name="follow_track_descr">Elige el archivo de la traza a seguir</string>
-    <string name="import_track_descr">Elige el archivo de la traza a seguir o impórtala desde el dispositivo.</string>
+    <string name="import_track_descr">Elige el archivo de la traza a seguir o importa una.</string>
     <string name="select_another_track">Elegir otra traza</string>
     <string name="navigate_to_track_descr">Navegar desde mi ubicación a la traza</string>
     <string name="pass_whole_track_descr">Punto de la traza para navegar</string>
@@ -3886,4 +3886,7 @@
     <string name="all_previous_segments_will_be_recalc">Todos los segmentos anteriores serán recalculados usando el perfil elegido.</string>
     <string name="open_saved_track">Abrir traza guardada</string>
     <string name="shared_string_is_saved">está guardado</string>
+    <string name="simplified_track_description">Sólo se guardará la línea de la ruta, los puntos de referencia serán borrados.</string>
+    <string name="number_of_gpx_files_selected_pattern">%s archivo(s) de trazas marcado(s)</string>
+    <string name="one_point_error">Añade al menos dos puntos.</string>
 </resources>
