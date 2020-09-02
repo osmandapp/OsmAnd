@@ -150,7 +150,7 @@
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/address_button"
 					android:layout_width="wrap_content"
-					android:layout_height="@dimen/context_menu_buttons_bottom_height"
+					android:layout_height="@dimen/point_editor_fragment_expand_button_height"
 					android:layout_marginStart="@dimen/content_padding_half"
 					android:layout_marginLeft="@dimen/content_padding_half"
 					android:layout_marginTop="@dimen/content_padding_small"
@@ -165,6 +165,11 @@
 					android:textSize="@dimen/default_desc_text_size"
 					osmand:typeface="@string/font_roboto_medium"
 					tools:text="@string/add_address" />
+
+				<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:background="?attr/dashboard_divider" />
 
 				<LinearLayout
 					android:id="@+id/description"
@@ -206,7 +211,7 @@
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/description_button"
 					android:layout_width="wrap_content"
-					android:layout_height="@dimen/context_menu_buttons_bottom_height"
+					android:layout_height="@dimen/point_editor_fragment_expand_button_height"
 					android:layout_marginStart="@dimen/content_padding_half"
 					android:layout_marginLeft="@dimen/content_padding_half"
 					android:drawablePadding="8dp"
