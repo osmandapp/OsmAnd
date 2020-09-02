@@ -3882,4 +3882,5 @@
     <string name="all_previous_segments_will_be_recalc">Все предыдущие сегменты будут пересчитаны с использованием выбранного профиля.</string>
     <string name="open_saved_track">Открыть сохранённый трек</string>
     <string name="disable_recording_once_app_killed_descrp">Остановка записи GPX при принудительном закрытии (через последние приложения). (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
+    <string name="shared_string_is_saved">сохраняется</string>
 </resources>
