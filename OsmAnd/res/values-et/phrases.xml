@@ -3814,4 +3814,6 @@
     <string name="poi_fire_hydrant_type_pipe">Toru</string>
     <string name="poi_traffic_signals_vibration">Värin</string>
     <string name="poi_fire_hydrant_pressure_filter">Surve</string>
+    <string name="poi_traffic_signals_arrow_no">Nool: ei</string>
+    <string name="poi_elevator">Lift</string>
 </resources>

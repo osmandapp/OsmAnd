@@ -2241,7 +2241,7 @@
     <string name="mapillary_widget">Mapillary widget\'ı</string>
     <string name="mapillary_widget_descr">Mapillary\'ye hızlıca katkıda bulunmanıza imkan verir.</string>
     <string name="mapillary_descr">Herkes için sokak seviyesinde fotoğraflar. Yerler keşfedin, katkıda bulunun, dünyayı yakalatın.</string>
-    <string name="mapillary">Sokak seviyesi görüntüleri</string>
+    <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Herkes için sokak seviyesinde fotoğraflar. Yerler keşfedin, katkıda bulunun, dünyayı yakalayın.</string>
     <string name="parking_options">Park etme seçenekleri</string>
     <string name="routing_attr_allow_motorway_name">Otoyolları kullan</string>
@@ -3794,4 +3794,5 @@
     <string name="street_level_imagery">Sokak seviyesi görüntüleri</string>
     <string name="plan_route_exit_dialog_descr">Kaydetmeden güzergah planlamayı kapatmak istediğinize emin misiniz\? Tüm değişiklikleri kaybedeceksiniz.</string>
     <string name="in_case_of_reverse_direction">Ters yön durumunda</string>
+    <string name="monitoring_control_start">REC</string>
 </resources>

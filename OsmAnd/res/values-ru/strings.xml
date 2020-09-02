@@ -887,7 +887,7 @@
     <string name="app_mode_pedestrian">Пешеход</string>
     <string name="position_on_map_center">По центру</string>
     <string name="position_on_map_bottom">Внизу</string>
-    <string name="navigate_point_top_text">Введите широту и долготу в формате (Г — градусы, М — минуты, С — секунды)</string>
+    <string name="navigate_point_top_text">Введите широту и долготу в выбранном формате (Г — градусы, М — минуты, С — секунды)</string>
     <string name="navigate_point_latitude">Широта</string>
     <string name="navigate_point_longitude">Долгота</string>
     <string name="navigate_point_format_D">ГГГ.ГГГГГ</string>
@@ -1353,9 +1353,9 @@
     <string name="routing_attr_prefer_motorway_name">Предпочитать автомагистрали</string>
     <string name="routing_attr_prefer_motorway_description">Предпочитать автомагистрали</string>
     <string name="routing_attr_avoid_toll_name">Без платных дорог</string>
-    <string name="routing_attr_avoid_toll_description">Избегать платные дороги</string>
+    <string name="routing_attr_avoid_toll_description">Избегать платных дорог</string>
     <string name="routing_attr_avoid_unpaved_name">Без грунтовых дорог</string>
-    <string name="routing_attr_avoid_unpaved_description">Избегать грунтовые дороги</string>
+    <string name="routing_attr_avoid_unpaved_description">Избегать грунтовых дорог</string>
     <string name="routing_attr_avoid_ferries_name">Без паромов</string>
     <string name="routing_attr_avoid_ferries_description">Избегать паромные переправы</string>
     <string name="routing_attr_weight_name">Максимальная масса</string>
@@ -2293,8 +2293,8 @@
     <string name="mapillary_action_descr">Поделитесь вашим просмотром улиц через Mapillary.</string>
     <string name="mapillary_widget">Виджет Mapillary</string>
     <string name="mapillary_widget_descr">Позволяет быстро внести свой вклад в Mapillary.</string>
-    <string name="mapillary_descr">Фото с улиц онлайн для каждого. Открывайте для себя места, сотрудничайте, снимайте мир.</string>
-    <string name="mapillary">Изображения на уровне улиц</string>
+    <string name="mapillary_descr">Фото с улиц онлайн для каждого. Открывайте места, взаимодействуйте, запечатлейте весь мир.</string>
+    <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Уличные фотографии для всех. Открывайте для себя места, сотрудничайте, снимайте мир.</string>
     <string name="save_poi_too_many_uppercase">Название содержит слишком много заглавных букв. Вы хотите продолжить?</string>
     <string name="quick_action_resume_pause_navigation_descr">Переключатель, чтобы приостановить или возобновить навигацию.</string>
@@ -2377,7 +2377,7 @@
     <string name="fast_coordinates_input_descr">Выберите формат ввода координат. Вы всегда можете изменить его, нажав «Параметры».</string>
     <string name="fast_coordinates_input">Быстрый ввод координат</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Без ледовых дорог или бродов</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Избегать ледовые дороги и броды.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Избегать ледовых дорог и бродов.</string>
     <string name="my_location">Моё местоположение</string>
     <string name="shared_string_finish">Финиш</string>
     <string name="shared_string_sort">Сортировать</string>
@@ -3536,7 +3536,7 @@
     <string name="clear_recorded_data_warning">Очистить записанные данные\?</string>
     <string name="monitoring_min_speed_descr_side_effect">Побочный эффект: в записи трека будут отсутствовать все участки, где критерий минимальной скорости не был соблюдён (например, когда вы толкаете велосипед вверх по крутому склону). Также не будет информации о периодах покоя, например, во время отдыха. Это влияет на любой анализ или последующую обработку, например, при попытке определить общую продолжительность поездки, время в движении или среднюю скорость.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Побочный эффект: в результате фильтрации по точности, точки могут быть полностью пропущены, например, под мостами, под деревьями, между высокими зданиями или при определённых погодных условиях.</string>
-    <string name="monitoring_min_accuracy_descr_remark">Примечание: если GPS был отключён непосредственно перед записью, первая измеренная точка может иметь пониженную точность, поэтому в приложении будет ожидание около секунды перед записью точки (или запись лучшей из 3 последовательных точек и т. д.), но это ещё не реализовано.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Примечание: при включении GPS непосредственно перед записью точность определения первой точки может быть снижена, поэтому мы рассматриваем добавление секундной задержки перед записью точки (либо записи лучшей из трёх последовательных точек и т. д.), но пока это не реализовано.</string>
     <string name="monitoring_min_distance_descr">Этот фильтр позволяет избежать записи повторяющихся точек, между которыми могло произойти очень малое фактическое перемещение, и создаёт более приятный визуальный вид треков без последующей обработки.</string>
     <string name="monitoring_min_distance_descr_side_effect">Побочные эффекты: периоды в состоянии покоя не записываются вообще или только по одной точке каждый. Небольшие (в реальности) перемещения (например, в сторону, указывающие возможное изменение направления движения) могут быть отфильтрованы. Файл содержит меньше информации для последующей обработки и имеет худшую статистику, отфильтровывая явно избыточные точки во время записи, при этом потенциально сохраняя артефакты, вызванные плохим приёмом или эффектами модуля GPS.</string>
     <string name="monitoring_min_distance_descr_recommendation">Рекомендация: настройка 5 метров может должна вас устроить, если нет необходимости учитывать более короткие перемещения, и вы точное не хотите записывать данные в состоянии покоя.</string>
@@ -3849,15 +3849,15 @@
     <string name="quick_action_add_gpx">Добавить путевую точку</string>
     <string name="map_widget_monitoring">Запись поездки</string>
     <string name="marker_save_as_track">Сохранить как файл трека</string>
-    <string name="follow_track">Следить за треком</string>
-    <string name="follow_track_descr">Выберите файл трека для отслеживания</string>
-    <string name="import_track_descr">Выберите файл трека или импортируйте его.</string>
+    <string name="follow_track">Следовать по маршруту</string>
+    <string name="follow_track_descr">Выберите файл маршрута для ведения</string>
+    <string name="import_track_descr">Выберите или импортируйте файл маршрута.</string>
     <string name="select_another_track">Выбрать другой трек</string>
     <string name="navigate_to_track_descr">Перейдите от моего местоположения к треку</string>
     <string name="pass_whole_track_descr">Точка трека для навигации</string>
     <string name="start_of_the_track">Начало трека</string>
     <string name="nearest_point">Ближайшая точка</string>
-    <string name="attach_to_the_roads">Прикрепить к дорогам</string>
+    <string name="attach_to_the_roads">Привязка к дороге</string>
     <string name="delete_address">Удалить адрес</string>
     <string name="add_address">Добавить адрес</string>
     <string name="access_hint_enter_address">Введите адрес</string>
@@ -3869,9 +3869,9 @@
     <string name="simplified_track">Упрощённый трек</string>
     <string name="simplified_track_description">Будет сохранена только линия маршрута, путевые точки будут удалены.</string>
     <string name="shared_string_file_name">Имя файла</string>
-    <string name="number_of_gpx_files_selected_pattern">%s трек файла(ов) выбрано</string>
-    <string name="save_global_track_interval_descr">Укажите интервал записи для общей записи трека (активируется через виджет Запись поездки на карте).</string>
-    <string name="gpx_monitoring_stop">Приостановить запись поездки</string>
+    <string name="number_of_gpx_files_selected_pattern">Выбрано файлов треков: %s</string>
+    <string name="save_global_track_interval_descr">Укажите интервал общей записи трека (включается через виджет Запись GPX на карте).</string>
+    <string name="gpx_monitoring_stop">Остановить запись</string>
     <string name="gpx_monitoring_start">Возобновить запись поездки</string>
     <string name="system_default_theme">По умолчанию системы</string>
     <string name="all_next_segments">Все последующие сегменты</string>
@@ -3881,4 +3881,5 @@
     <string name="all_next_segments_will_be_recalc">Все последующие сегменты будут пересчитаны с использованием выбранного профиля.</string>
     <string name="all_previous_segments_will_be_recalc">Все предыдущие сегменты будут пересчитаны с использованием выбранного профиля.</string>
     <string name="open_saved_track">Открыть сохранённый трек</string>
+    <string name="disable_recording_once_app_killed_descrp">Остановка записи GPX при принудительном закрытии (через последние приложения). (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
 </resources>

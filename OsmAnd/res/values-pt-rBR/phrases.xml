@@ -3833,4 +3833,5 @@
     <string name="poi_city_block">Quarteirão</string>
     <string name="poi_borough">Burgo</string>
     <string name="poi_traffic_signals_arrow_no">Flecha: não</string>
+    <string name="poi_elevator">Elevador</string>
 </resources>

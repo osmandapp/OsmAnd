@@ -2085,7 +2085,7 @@
     <string name="gpx_logging_no_data">Даныя адсутнічаюць</string>
     <string name="gpx_add_track">Дадаць яшчэ…</string>
     <string name="shared_string_appearance">Выгляд</string>
-    <string name="trip_rec_notification_settings_desc">Паказваць апавяшчэнне, якое дазволіць запіс падарожжа.</string>
+    <string name="trip_rec_notification_settings_desc">Паказваць сістэмнае апавяшчэнне, якое дазволіць запіс падарожжа.</string>
     <string name="christmas_poi">Калядныя POI</string>
     <string name="christmas_desc_q">Паказваць калядныя POI\?</string>
     <string name="rendering_value_light_brown_name">Светла-карычневы</string>
@@ -2827,9 +2827,9 @@
     <string name="coord_input_save_as_track_descr">Вы дадалі %1$s пунктаў. Увядзіце назву файла і націсніце \"захаваць\".</string>
     <string name="point_deleted">Пункт %1$s выдалены</string>
     <string name="shared_string_world">Свет</string>
-    <string name="send_search_query_description">Мы адправім ваш пашуковы запыт \"%1$s\", а таксама вашае месцазнаходжанне. 
-\n 
-\n Збіраюцца толькі неперасанальныя даныя, даныя пошуку выкарыстоўваюцца толькі для таго, каб палепшыць алгарытм пошуку.</string>
+    <string name="send_search_query_description">Мы адправім ваш пашуковы запыт \"%1$s\", а таксама вашае месцазнаходжанне.
+\n
+\n Збіраюцца толькі агульныя звесткі, даныя пошуку выкарыстоўваюцца толькі для таго, каб палепшыць алгарытм пошуку.</string>
     <string name="search_no_results_description">Няма вынікаў?
 \nРаспавядзіце нам аб гэтым.</string>
     <string name="send_search_query">Адправіць пашуковы запыт?</string>
@@ -3624,4 +3624,28 @@
     <string name="search_download_wikipedia_maps">Спампаваць мапы Вікіпедыі</string>
     <string name="app_mode_wheelchair">Інвалідны вазок</string>
     <string name="osm_edit_closed_note">Закрытая нататка OSM</string>
+    <string name="all_next_segments_will_be_recalc">Усе наступныя сегменты пералічацца з выкарыстаннем абранага профілю.</string>
+    <string name="all_previous_segments_will_be_recalc">Усе папярэднія сегменты пералічацца з выкарыстаннем абранага профілю.</string>
+    <string name="open_saved_track">Адкрыць захаваны след</string>
+    <string name="shared_string_is_saved">захавана</string>
+    <string name="save_track_to_gpx">Аўтаматычна запісваць след падчас навігацыі</string>
+    <string name="disable_recording_once_app_killed_descrp">Запіс GPX прыпыніцца, калі праграма будзе забітая (праз надаўнія праграмы). (Апавяшчэнне ў вобласці падказак Android пра фонавы рэжым OsmAnd знікне.)</string>
+    <string name="save_global_track_interval_descr">Вызначце інтэрвал запісу следу (уключаецца праз віджэт запісу GPX на мапе).</string>
+    <string name="monitoring_control_start">ЗАПІС</string>
+    <string name="shared_string_done">Завершана</string>
+    <string name="shared_string_save_as_gpx">Захаваць як новы файл следу</string>
+    <string name="add_segment_to_the_track">Дадаць у файл следу</string>
+    <string name="shared_string_gpx_files">Сляды</string>
+    <string name="layer_gpx_layer">Сляды</string>
+    <string name="show_gpx">Сляды</string>
+    <string name="save_track_to_gpx_globally">Запіс следу ў файл GPX</string>
+    <string name="empty_state_my_tracks">Дадаць файлы слядоў</string>
+    <string name="empty_state_my_tracks_desc">Імпартуйце альбо запішыце файлы следу</string>
+    <string name="context_menu_item_add_waypoint">Дадаць пункт шляху</string>
+    <string name="quick_action_add_gpx">Дадаць пункт шляху</string>
+    <string name="map_widget_monitoring">Запіс паездкі</string>
+    <string name="marker_save_as_track">Захаваць як файл следу</string>
+    <string name="number_of_gpx_files_selected_pattern">Абрана %s файлаў слядоў</string>
+    <string name="gpx_monitoring_stop">Прыпыніць запіс паездкі</string>
+    <string name="gpx_monitoring_start">Аднавіць запіс паездкі</string>
 </resources>
