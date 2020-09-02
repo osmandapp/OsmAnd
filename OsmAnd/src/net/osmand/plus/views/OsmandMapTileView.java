@@ -581,7 +581,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void refreshBaseMapInternal(RotatedTileBox tileBox, DrawSettings drawSettings) {
+	public void refreshBaseMapInternal(RotatedTileBox tileBox, DrawSettings drawSettings) {
 		if (tileBox.getPixHeight() == 0 || tileBox.getPixWidth() == 0) {
 			return;
 		}
@@ -618,7 +618,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		additional.calculateFPS(start, end);
 	}
 
-	private void refreshMapInternal(DrawSettings drawSettings) {
+	public void refreshMapInternal(DrawSettings drawSettings) {
 		if (view == null) {
 			return;
 		}
@@ -823,7 +823,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	// this method could be called in non UI thread
 	public void refreshMap(final boolean updateVectorRendering) {
-		if (view != null && view.isShown()) {
+		if (view != null) {
 			boolean nightMode = application.getDaynightHelper().isNightMode();
 			Boolean currentNightMode = this.nightMode;
 			boolean forceUpdateVectorDrawing = currentNightMode != null && currentNightMode != nightMode;

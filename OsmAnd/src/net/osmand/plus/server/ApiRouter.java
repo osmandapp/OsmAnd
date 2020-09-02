@@ -19,6 +19,7 @@ import net.osmand.plus.server.map.LayersDraw;
 import net.osmand.plus.server.map.MapTileMiniLayer;
 import net.osmand.plus.server.map.OsmandMapMiniLayer;
 import net.osmand.plus.server.map.OsmandMapTileMiniView;
+import net.osmand.plus.views.OsmandMapLayer;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -38,6 +39,7 @@ public class ApiRouter {
 	private final String FOLDER_NAME = "server";
 	private Gson gson = new Gson();
 	private Map<String, ApiEndpoint> endpoints = new HashMap<>();
+	//change to weakreference
 	public static MapActivity mapActivity;
 
 	public ApiRouter(){
@@ -76,55 +78,31 @@ public class ApiRouter {
 						return ErrorResponses.response500;
 					}
 					Log.d("TILE","HAVING VALUES" + zoom + " " + lat + " " + lon);
-					ITileSource map = TileSourceManager.getMapillaryVectorSource();
-					Bitmap bitmap = Bitmap.createBitmap(512,512,Bitmap.Config.ARGB_8888);//mapActivity.getMapView().currentCanvas;
-					//OsmandMapTileView tileView = new OsmandMapTileView(mapActivity,300,300);
-					OsmandMapTileMiniView tileView = new OsmandMapTileMiniView(androidContext,512,512);
+					RotatedTileBox rotatedTileBox = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+					rotatedTileBox.setZoom(zoom);
+					rotatedTileBox.setLatLonCenter(lat,lon);
+					rotatedTileBox.setPixelDimensions(512,512);
+					mapActivity.getMapView().setIntZoom(zoom);
+					mapActivity.getMapView().setLatLon(lat,lon);
+					OsmandMapLayer.DrawSettings param =
+							new OsmandMapLayer.DrawSettings(androidContext.getDaynightHelper().isNightMode(),
+									false);
+					mapActivity.getMapView().refreshMap();
+					mapActivity.getMapView().refreshMapInternal(param);
+					mapActivity.getMapView().refreshBaseMapInternal(rotatedTileBox, param);
+					Bitmap bitmap = mapActivity.getMapView().currentCanvas;
 					Canvas canvas = new Canvas(bitmap);
-					RotatedTileBox tileBox = tileView.getCurrentRotatedTileBox();
-					tileBox.setLatLonCenter(lat,lon);
-					tileBox.setZoom(zoom);
-					LayersDraw.createLayers(androidContext,canvas, tileView);
-					Paint p = new Paint();
-					p.setStyle(Paint.Style.FILL_AND_STROKE);
-					p.setColor(Color.BLACK);
-					//canvas.drawBitmap(bitmap ,0, 0, null);
-					boolean nightMode = androidContext.getDaynightHelper().isNightMode();
-					OsmandMapMiniLayer.DrawSettings drawSettings = new OsmandMapMiniLayer.DrawSettings(nightMode, false);
+					OsmandMapLayer.DrawSettings drawSettings = new OsmandMapLayer.DrawSettings(
+							androidContext.getDaynightHelper().isNightMode(),
+							true);
+//					mapActivity.getMapView().drawOverMap(canvas,
+//							rotatedTileBox,
+//							drawSettings);
+					//Bitmap bitmap = Bitmap.createBitmap(512,512,Bitmap.Config.ARGB_8888);
 					ByteArrayOutputStream stream = new ByteArrayOutputStream();
-					//bitmap = tileView.currentCanvas;
-					final QuadRect tilesRect = tileView.getCurrentRotatedTileBox().getTileBounds();
-					int left = (int) Math.floor(tilesRect.left);
-					int top = (int) Math.floor(tilesRect.top);
-					int width = (int) Math.ceil(tilesRect.right - left);
-					int height = (int) Math.ceil(tilesRect.bottom - top);
-					int dzoom = 1;
-					int div = (int) Math.pow(2.0, dzoom);
-					tileView.drawOverMap(canvas,tileView.getCurrentRotatedTileBox(),drawSettings);
-
-					ResourceManager mgr = androidContext.getResourceManager();
-					int tileX = (left ) / div;
-					int tileY = (top) / div;
-					String tileId = mgr.calculateTileId(map, tileX, tileY, 14);
-					//androidContext.getResourceManager().
-					//		getMapTileDownloader().
-					//String imgTileId = mgr.calculateTileId(map, tileX / div, tileY / div, nzoom - kzoom);
-					Map<String, Pair<QuadPointDouble, GeometryTile>> tiles = new HashMap<>();
-					//bitmap = null;
-					boolean first = true;
-					//while (bitmap == null){
-//						bitmap = androidContext.getResourceManager().getBitmapTilesCache().getTileForMapAsync(
-//								tileId,map,tileX,tileY,14,first
-//						);
-//						first = false;
-					//}
-					canvas.drawLine(0,0,canvas.getWidth(),canvas.getHeight(), p);
-					//bitmap = tileView.currentCanvas;
 					bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-
 					byte[] byteArray = stream.toByteArray();
 					ByteArrayInputStream str = new ByteArrayInputStream(byteArray);
-
 					return newFixedLengthResponse(
 							NanoHTTPD.Response.Status.OK,
 							"image/png",
