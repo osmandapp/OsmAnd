@@ -13,7 +13,9 @@ import net.osmand.LocationsHolder;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
+import net.osmand.plus.measurementtool.command.MeasurementModeCommand;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -41,6 +43,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
+import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.*;
 
 public class MeasurementEditingContext {
 
@@ -60,6 +63,7 @@ public class MeasurementEditingContext {
 	private WptPt originalPointToMove;
 
 	private boolean inAddPointMode;
+	private boolean inApproximationMode;
 	private int calculatedPairs;
 	private int pointsToCalculateSize;
 	private CalculationMode lastCalculationMode = WHOLE_TRACK;
@@ -67,6 +71,7 @@ public class MeasurementEditingContext {
 	private ApplicationMode appMode = DEFAULT_APP_MODE;
 	private RouteCalculationProgress calculationProgress;
 	private Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = new ConcurrentHashMap<>();
+
 
 	public enum CalculationMode {
 		NEXT_SEGMENT,
@@ -173,6 +178,22 @@ public class MeasurementEditingContext {
 
 	void setInAddPointMode(boolean inAddPointMode) {
 		this.inAddPointMode = inAddPointMode;
+	}
+
+	public boolean isInApproximationMode() {
+		return inApproximationMode;
+	}
+
+	public void setInApproximationMode(boolean inApproximationMode) {
+		this.inApproximationMode = inApproximationMode;
+	}
+
+	public List<WptPt> getOriginalTrackPointList() {
+		MeasurementModeCommand command = commandManager.getLastCommand();
+		if (command.getType() == APPROXIMATE_POINTS) {
+			return ((ApplyGpxApproximationCommand) command).getPoints();
+		}
+		return null;
 	}
 
 	@Nullable

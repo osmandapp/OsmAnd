@@ -22,7 +22,7 @@ public abstract class MeasurementModeCommand implements Command {
 		return false;
 	}
 
-	abstract MeasurementCommandType getType();
+	public abstract MeasurementCommandType getType();
 
 	MeasurementEditingContext getEditingCtx() {
 		return measurementLayer.getEditingCtx();
