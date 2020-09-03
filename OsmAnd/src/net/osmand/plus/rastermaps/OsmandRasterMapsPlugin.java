@@ -400,37 +400,45 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	@Override
 	public void registerMapContextMenuActions(MapActivity mapActivity,
 											  final double latitude, final double longitude,
-											  ContextMenuAdapter adapter, Object selectedObj) {
-		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-		if (mapActivity.getMapView().getMainLayer() instanceof MapTileLayer) {
-			ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked, int[] viewCoordinates) {
-					MapActivity mapActivity = mapActivityRef.get();
-					if (mapActivity != null && !mapActivity.isFinishing()) {
-						OsmandMapTileView mapView = mapActivity.getMapView();
-						if (resId == R.string.context_menu_item_update_map) {
-							mapActivity.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
-						} else if (resId == R.string.shared_string_download_map) {
-							DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), mapView);
-							dlg.openDialog();
-						}
-					}
-					return true;
-				}
-			};
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
+											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+		boolean mapTileLayer = mapActivity.getMapView().getMainLayer() instanceof MapTileLayer;
+		if (configureMenu || mapTileLayer) {
+			ContextMenuItem.ItemBuilder updateMapItemBuilder = new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_update_map, mapActivity)
 					.setId(MAP_CONTEXT_MENU_UPDATE_MAP)
 					.setIcon(R.drawable.ic_action_refresh_dark)
-					.setOrder(UPDATE_MAP_ITEM_ORDER)
-					.setListener(listener).createItem());
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setOrder(UPDATE_MAP_ITEM_ORDER);
+
+			ContextMenuItem.ItemBuilder downloadMapItemBuilder = new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_download_map, mapActivity)
 					.setId(MAP_CONTEXT_MENU_DOWNLOAD_MAP)
 					.setIcon(R.drawable.ic_action_import)
-					.setOrder(DOWNLOAD_MAP_ITEM_ORDER)
-					.setListener(listener).createItem());
+					.setOrder(DOWNLOAD_MAP_ITEM_ORDER);
+
+			if (mapTileLayer) {
+				final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+				ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked, int[] viewCoordinates) {
+						MapActivity mapActivity = mapActivityRef.get();
+						if (mapActivity != null && !mapActivity.isFinishing()) {
+							OsmandMapTileView mapView = mapActivity.getMapView();
+							if (resId == R.string.context_menu_item_update_map) {
+								mapActivity.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
+							} else if (resId == R.string.shared_string_download_map) {
+								DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), mapView);
+								dlg.openDialog();
+							}
+						}
+						return true;
+					}
+				};
+				updateMapItemBuilder.setListener(listener);
+				downloadMapItemBuilder.setListener(listener);
+			}
+
+			adapter.addItem(updateMapItemBuilder.createItem());
+			adapter.addItem(downloadMapItemBuilder.createItem());
 		}
 	}
 
