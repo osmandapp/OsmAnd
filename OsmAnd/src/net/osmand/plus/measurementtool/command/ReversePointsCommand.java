@@ -67,7 +67,7 @@ public class ReversePointsCommand extends MeasurementModeCommand {
 	}
 
 	@Override
-	MeasurementCommandType getType() {
+	public MeasurementCommandType getType() {
 		return MeasurementCommandType.REVERSE_POINTS;
 	}
 }
