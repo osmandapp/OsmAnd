@@ -2273,7 +2273,7 @@
     <string name="mapillary_widget">ويدجت مابيلاري</string>
     <string name="mapillary_widget_descr">يسمح لك بالمساهمة بسرعة لمابيلاري.</string>
     <string name="mapillary_descr">صور شوارع متاحة على الإنترنت للجميع. اكتشف أماكن، تعاون، والتقط صورا للعالم.</string>
-    <string name="mapillary">صور للشارع</string>
+    <string name="mapillary">مابيلاري</string>
     <string name="plugin_mapillary_descr">صور شوارع متاحة للجميع. اكتشف أماكن، تعاون، والتقط صورا للعالم.</string>
     <string name="private_access_routing_req">الوجهة الخاص بك تقع في منطقة ذات ولوج خاص. هل تسمح بالدخول إلى الطرق الخاصة لهذه الرحلة؟</string>
     <string name="quick_action_showhide_osmbugs_descr">زر يظهر أو يخفي ملاحظات OSM على الخريطة.</string>
@@ -3831,7 +3831,7 @@
     <string name="shared_string_gpx_files">المسارات</string>
     <string name="layer_gpx_layer">المسارات</string>
     <string name="show_gpx">المسارات</string>
-    <string name="monitoring_control_start">سجل</string>
+    <string name="monitoring_control_start">تسجيل</string>
     <string name="save_track_to_gpx_globally">تسجيل المسار في ملف GPX</string>
     <string name="shared_string_gpx_route">توجيه المسار</string>
     <string name="empty_state_my_tracks">إضافة ملفات المسار</string>
@@ -3842,7 +3842,7 @@
     <string name="marker_save_as_track">حفظ كمسار</string>
     <string name="follow_track">تتبع المسار</string>
     <string name="follow_track_descr">اختر مسار للمتابعة</string>
-    <string name="import_track_descr">اختر ملف المسار للمتابعة أو استورده من الجهاز.</string>
+    <string name="import_track_descr">"اختر ملف المسار للمتابعة أو قم باستيراده  من الجهاز."</string>
     <string name="select_another_track">حدد مسارا آخر</string>
     <string name="navigate_to_track_descr">انتقل من موقعي إلى المسار</string>
     <string name="pass_whole_track_descr">نقطة المسار للتنقل</string>
@@ -3856,4 +3856,22 @@
     <string name="plan_route_trim_after">تهذيب بعد</string>
     <string name="plan_route_change_route_type_before">تغيير نوع المسار قبل</string>
     <string name="plan_route_change_route_type_after">تغيير نوع المسار بعد</string>
+    <string name="number_of_gpx_files_selected_pattern">%s ملفات مسارات محددة</string>
+    <string name="disable_recording_once_app_killed_descrp">سيتم إيقاف تسجيل المسار مؤقتًا عند غلق التطبيق (عبر نافذة التطبيقات المستخدمة مؤخرا). (إشارة تشغيل التطبيق في الخلفية ستختفي من الشريط العلوي.)</string>
+    <string name="save_global_track_interval_descr">حدد الفاصل الزمني للادخال الخاص بالتسجيل العام للمسار (مفعل من خلال أداة تسجيل الرحلة على الخريطة).</string>
+    <string name="gpx_monitoring_stop">إيقاف تسجيل الرحلة مؤقتًا</string>
+    <string name="gpx_monitoring_start">استئناف تسجيل الرحلة</string>
+    <string name="system_default_theme">النظام الافتراضي</string>
+    <string name="all_next_segments">جميع الأجزاء اللاحقة</string>
+    <string name="previous_segment">المقطع السابق</string>
+    <string name="all_previous_segments">جميع المقاطع السابقة</string>
+    <string name="only_selected_segment_recalc">سيتم إعادة حساب المقطع المحدد فقط باستخدام ملف التعريف المحدد.</string>
+    <string name="all_next_segments_will_be_recalc">سيتم إعادة حساب كافة الشرائح اللاحقة باستخدام ملف التعريف المحدد.</string>
+    <string name="all_previous_segments_will_be_recalc">سيتم إعادة حساب كافة الشرائح السابقة باستخدام ملف التعريف المحدد.</string>
+    <string name="open_saved_track">فتح المسار المحفوظ</string>
+    <string name="shared_string_is_saved">محفوظ</string>
+    <string name="simplified_track">مسار مبسط</string>
+    <string name="simplified_track_description">سيتم حفظ خط التوجيه فقط، وسيتم حذف نقاط الطريق.</string>
+    <string name="shared_string_file_name">اسم الملف</string>
+    <string name="one_point_error">الرجاء إضافة نقطتين على الأقل.</string>
 </resources>

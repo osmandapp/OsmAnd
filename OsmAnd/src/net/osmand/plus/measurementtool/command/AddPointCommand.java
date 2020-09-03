@@ -64,7 +64,7 @@ public class AddPointCommand extends MeasurementModeCommand {
 	}
 
 	@Override
-	MeasurementCommandType getType() {
+	public MeasurementCommandType getType() {
 		return MeasurementCommandType.ADD_POINT;
 	}
 }

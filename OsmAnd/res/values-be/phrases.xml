@@ -1117,7 +1117,7 @@
     <string name="poi_pump_powered">Аўтаматычная</string>
     <string name="poi_pump_no">Без помпы</string>
     <string name="poi_water_characteristic_mineral">Мінеральная</string>
-    <string name="poi_water_characteristic_mud">Характарыстыка вады: брудная</string>
+    <string name="poi_water_characteristic_mud">Бруд</string>
     <string name="poi_water_characteristic_sulfuric">Серная</string>
     <string name="poi_water_point">Пункт водазабеспечэння</string>
     <string name="poi_cuisine">Кухня</string>
@@ -1866,7 +1866,7 @@
     <string name="poi_fuel_91ul">Паліва 91UL</string>
     <string name="poi_fuel_100ll">Паліва 100LL</string>
     <string name="poi_fuel_jeta1">Паліва Jet A-1</string>
-    <string name="poi_fuel_adblue">Паліва AdBlue</string>
+    <string name="poi_fuel_adblue">Дызельная выцяжная вадкасць</string>
     <string name="poi_fuel_wood">Паліва: дровы</string>
     <string name="poi_fuel_charcoal">Паліва: драўняны вугаль</string>
     <string name="poi_fuel_coal">Паліва: каменны вугаль</string>

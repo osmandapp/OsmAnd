@@ -76,6 +76,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRouti
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameterGroup;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.MuteSoundRoutingParameter;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.RouteMenuAppModes;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRouteItem;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -1794,16 +1795,23 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					} else if (endPoint == null) {
 						app.showShortToastMessage(R.string.mark_final_location_first);
 					} else {
-						if (startPoint == null && loc != null) {
-							startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
-									new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActivity.getString(R.string.shared_string_my_location)));
-						}
-						if (startPoint != null) {
-							targetPointsHelper.navigateToPoint(startPoint.point, false, -1, startPoint.getPointDescription(mapActivity));
-							targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
-							targetPointsHelper.updateRouteAndRefresh(true);
+						GPXRouteParamsBuilder gpxParams = app.getRoutingHelper().getCurrentGPXRoute();
+						if (gpxParams != null) {
+							boolean reverse = !gpxParams.isReverse();
+							LocalRoutingParameter parameter = new OtherLocalRoutingParameter(R.string.gpx_option_reverse_route, app.getString(R.string.gpx_option_reverse_route), reverse);
+							app.getRoutingOptionsHelper().applyRoutingParameter(parameter, reverse);
 						} else {
-							app.showShortToastMessage(R.string.route_add_start_point);
+							if (startPoint == null && loc != null) {
+								startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
+										new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActivity.getString(R.string.shared_string_my_location)));
+							}
+							if (startPoint != null) {
+								targetPointsHelper.navigateToPoint(startPoint.point, false, -1, startPoint.getPointDescription(mapActivity));
+								targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
+								targetPointsHelper.updateRouteAndRefresh(true);
+							} else {
+								app.showShortToastMessage(R.string.route_add_start_point);
+							}
 						}
 					}
 				}

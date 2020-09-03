@@ -78,4 +78,8 @@ public class MeasurementCommandManager {
 			command.setMeasurementLayer(layer);
 		}
 	}
+
+	public MeasurementModeCommand getLastCommand() {
+		return undoCommands.getLast();
+	}
 }

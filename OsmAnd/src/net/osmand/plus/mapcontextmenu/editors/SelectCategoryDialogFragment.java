@@ -84,18 +84,17 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 			if (gpxCategories != null) {
 				for (Map.Entry<String, Integer> e : gpxCategories.entrySet()) {
 					String categoryName = e.getKey();
-					ll.addView(createCategoryItem(activity, nightMode, categoryName, e.getValue()));
+					ll.addView(createCategoryItem(activity, nightMode, categoryName, e.getValue(), false));
 				}
 			}
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				if (category.isVisible()) {
-					ll.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
-							category.getColor()));
-				}
+				ll.addView(createCategoryItem(activity, nightMode, category.getDisplayName(getContext()),
+						category.getColor(), !category.isVisible()));
 			}
 		}
+
 		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_category_dialog_item, null);
 		Button button = (Button)itemView.findViewById(R.id.button);
 		button.setCompoundDrawablesWithIntrinsicBounds(getIcon(activity, R.drawable.ic_zoom_in), null, null, null);
@@ -120,16 +119,20 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		return builder.create();
 	}
 
-	private View createCategoryItem(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor) {
+	private View createCategoryItem(@NonNull final Activity activity, boolean nightMode, final String categoryName, final int categoryColor, boolean isHidden) {
 		View itemView = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.favorite_category_dialog_item, null);
 		Button button = (Button)itemView.findViewById(R.id.button);
-		if (categoryColor != 0) {
-			button.setCompoundDrawablesWithIntrinsicBounds(
-					getIcon(activity, R.drawable.ic_action_folder, categoryColor), null, null, null);
+		if(isHidden){
+			button.setCompoundDrawablesWithIntrinsicBounds(getIcon(activity, R.drawable.ic_action_hide), null, null, null);
 		} else {
-			button.setCompoundDrawablesWithIntrinsicBounds(
-					getIcon(activity, R.drawable.ic_action_folder, ContextCompat.getColor(activity,
-							gpxFile != null ? R.color.gpx_color_point : R.color.color_favorite)), null, null, null);
+			if (categoryColor != 0) {
+				button.setCompoundDrawablesWithIntrinsicBounds(
+						getIcon(activity, R.drawable.ic_action_folder, categoryColor), null, null, null);
+			} else {
+				button.setCompoundDrawablesWithIntrinsicBounds(
+						getIcon(activity, R.drawable.ic_action_folder, ContextCompat.getColor(activity,
+								gpxFile != null ? R.color.gpx_color_point : R.color.color_favorite)), null, null, null);
+			}
 		}
 		button.setCompoundDrawablePadding(AndroidUtils.dpToPx(activity,15f));
 		String name = categoryName.length() == 0 ? getString(R.string.shared_string_favorites) : categoryName;

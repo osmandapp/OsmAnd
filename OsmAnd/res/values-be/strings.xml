@@ -2085,7 +2085,7 @@
     <string name="gpx_logging_no_data">Даныя адсутнічаюць</string>
     <string name="gpx_add_track">Дадаць яшчэ…</string>
     <string name="shared_string_appearance">Выгляд</string>
-    <string name="trip_rec_notification_settings_desc">Паказваць апавяшчэнне, якое дазволіць запіс падарожжа.</string>
+    <string name="trip_rec_notification_settings_desc">Паказваць сістэмнае апавяшчэнне, якое дазволіць запіс падарожжа.</string>
     <string name="christmas_poi">Калядныя POI</string>
     <string name="christmas_desc_q">Паказваць калядныя POI\?</string>
     <string name="rendering_value_light_brown_name">Светла-карычневы</string>
@@ -2792,7 +2792,7 @@
     <string name="nautical_render_descr">Для марской навігацыі. Асноўныя магчымасці: буі, маякі, рачныя і марскія маршруты і адзнакі, гавані, марскія паслугі, контуры глыбіні.</string>
     <string name="ski_map_render_descr">Для катання на лыжах. Асноўныя магчымасці: адмалёўка трас, пад\'ёмнікаў і іншых лыжных аб\'ектаў зручным спосабам. Менш другасных аб\'ектаў.</string>
     <string name="light_rs_render_descr">Просты стыль для аўтамабільнай навігацыі. Мяккі начны рэжым, контурныя лініі, кантрастныя дарогі ў аранжавым стылі, зацененыя другасныя аб\'екты мапы.</string>
-    <string name="topo_render_descr">Для шпацыру, паходу і катання на ровары. Добрая чытальнасць пры слабым асвятленні. Кантрастныя дарогі і прыродныя аб\'екты, розныя тыпы маршрутаў, контурныя лініі з дадатковымі наладамі, больш падрабязная інфармацыя. Параметр якасці дарожнага пакрыцця дае магчымасць адрозніваць дарогі з розным пакрыццём. Без начнога рэжыму.</string>
+    <string name="topo_render_descr">Для шпацыру і катання на ровары. Добрая чытальнасць пры слабым асвятленні. Кантрастныя дарогі і прыродныя аб\'екты, розныя тыпы маршрутаў, контурныя лініі з дадатковымі наладамі, больш падрабязная інфармацыя. Параметр якасці дарожнага пакрыцця дае магчымасць адрозніваць дарогі з розным пакрыццём. Без начнога рэжыму.</string>
     <string name="mapnik_render_descr">Стары прадвызначаны стыль Mapnik. Колеры падобныя на Mapnik.</string>
     <string name="default_render_descr">Стыль агульнага прызначэння. Спрошчанае адлюстраванне шчыльнанаселеных гарадоў. Пазначаюцца контурныя лініі, якасць паверхні, абмежаванні доступу, дарожныя шчыты, візуалізацыя маршрутаў па шкале SAC, аб\'екты спартовых сплаваў.</string>
     <string name="open_wikipedia_link_online">Адкрыць спасылку на Вікіпедыю анлайн</string>
@@ -2827,9 +2827,9 @@
     <string name="coord_input_save_as_track_descr">Вы дадалі %1$s пунктаў. Увядзіце назву файла і націсніце \"захаваць\".</string>
     <string name="point_deleted">Пункт %1$s выдалены</string>
     <string name="shared_string_world">Свет</string>
-    <string name="send_search_query_description">Мы адправім ваш пашуковы запыт \"%1$s\", а таксама вашае месцазнаходжанне. 
-\n 
-\n Збіраюцца толькі неперасанальныя даныя, даныя пошуку выкарыстоўваюцца толькі для таго, каб палепшыць алгарытм пошуку.</string>
+    <string name="send_search_query_description">Мы адправім ваш пашуковы запыт \"%1$s\", а таксама вашае месцазнаходжанне.
+\n
+\n Збіраюцца толькі агульныя звесткі, даныя пошуку выкарыстоўваюцца толькі для таго, каб палепшыць алгарытм пошуку.</string>
     <string name="search_no_results_description">Няма вынікаў?
 \nРаспавядзіце нам аб гэтым.</string>
     <string name="send_search_query">Адправіць пашуковы запыт?</string>
@@ -3624,4 +3624,117 @@
     <string name="search_download_wikipedia_maps">Спампаваць мапы Вікіпедыі</string>
     <string name="app_mode_wheelchair">Інвалідны вазок</string>
     <string name="osm_edit_closed_note">Закрытая нататка OSM</string>
+    <string name="all_next_segments_will_be_recalc">Усе наступныя сегменты пералічацца з выкарыстаннем абранага профілю.</string>
+    <string name="all_previous_segments_will_be_recalc">Усе папярэднія сегменты пералічацца з выкарыстаннем абранага профілю.</string>
+    <string name="open_saved_track">Адкрыць захаваны след</string>
+    <string name="shared_string_is_saved">захавана</string>
+    <string name="save_track_to_gpx">Аўтаматычна запісваць след падчас навігацыі</string>
+    <string name="disable_recording_once_app_killed_descrp">Запіс GPX прыпыніцца, калі праграма будзе забітая (праз надаўнія праграмы). (Апавяшчэнне ў вобласці падказак Android пра фонавы рэжым OsmAnd знікне.)</string>
+    <string name="save_global_track_interval_descr">Вызначце інтэрвал запісу следу (уключаецца праз віджэт запісу GPX на мапе).</string>
+    <string name="monitoring_control_start">ЗАПІС</string>
+    <string name="shared_string_done">Завершана</string>
+    <string name="shared_string_save_as_gpx">Захаваць як новы файл следу</string>
+    <string name="add_segment_to_the_track">Дадаць у файл следу</string>
+    <string name="shared_string_gpx_files">Сляды</string>
+    <string name="layer_gpx_layer">Сляды</string>
+    <string name="show_gpx">Сляды</string>
+    <string name="save_track_to_gpx_globally">Запіс следу ў файл GPX</string>
+    <string name="empty_state_my_tracks">Дадаць файлы слядоў</string>
+    <string name="empty_state_my_tracks_desc">Імпартуйце альбо запішыце файлы следу</string>
+    <string name="context_menu_item_add_waypoint">Дадаць пункт шляху</string>
+    <string name="quick_action_add_gpx">Дадаць пункт шляху</string>
+    <string name="map_widget_monitoring">Запіс паездкі</string>
+    <string name="marker_save_as_track">Захаваць як файл следу</string>
+    <string name="number_of_gpx_files_selected_pattern">Абрана %s файлаў слядоў</string>
+    <string name="gpx_monitoring_stop">Прыпыніць запіс паездкі</string>
+    <string name="gpx_monitoring_start">Аднавіць запіс паездкі</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Вы можаце экспартаваць і імпартаваць хуткія дзеянні разам з профілямі праграмы.</string>
+    <string name="shared_string_delete_all_q">Выдаліць усе\?</string>
+    <string name="delete_all_actions_message_q">Сапраўды хочаце выдаліць %d хуткіх дзеянняў\?</string>
+    <string name="screen_timeout">Час да выключэння экрана</string>
+    <string name="uninstall_speed_cameras">Выдаліць камеры кантролю хуткасці</string>
+    <string name="shared_string_legal">Юрыдычная інфармацыя</string>
+    <string name="speed_camera_pois">POI камер кантролю хуткасці</string>
+    <string name="speed_cameras_legal_descr">У некаторых краінах і рэгіёнах апавяшчэнні пра камеры кантролю хуткасці забароненыя законам.
+\n
+\nВам неабходна здзейсніць выбар у залежнасці ад вашай краіны.
+\n
+\nАбярыце \"%1$s\", каб атрымліваць апавяшчэнні пра камеры кантролю хуткасці.
+\n
+\nАбярыце \"%2$s\", каб выдаліць усе даныя, звязаныя з камерамі кантролю хуткасці: апавяшчэнні, папярэджанні і POI.</string>
+    <string name="keep_active">Пакінуць уключанымі</string>
+    <string name="speed_cameras_alert">Апавяшчэнні пра камеры кантролю хуткасці ў некаторых краінах забароненыя законам.</string>
+    <string name="screen_timeout_descr">Калі функцыя \"%1$s\" уключаная, то час працы будзе залежыць ад яе.</string>
+    <string name="default_screen_timeout">Прадвызначаныя налады выключэння экрана</string>
+    <string name="shared_string_tones">тоны</string>
+    <string name="shared_string_meters">метры</string>
+    <string name="details_dialog_decr">Кіраванне паказам дадатковых адзнак мапы</string>
+    <string name="shared_string_night_map">Начная мапа</string>
+    <string name="add_online_source">Дадаць сеціўную крыніцу</string>
+    <string name="clear_tiles_warning">Калі ўжыць гэтыя змены, то кэшаваныя даныя гэтай крыніцы страцяцца</string>
+    <string name="vessel_height_warning_link">Пазначыць вышыню судна</string>
+    <string name="vessel_height_warning">Вы можаце пазначыць вышыню судна, каб пазбегнуць нізкіх мастоў. Звярніце ўвагу, што калі мост развадны, то будзе выкарыстоўвацца яго вышыня ў адкрытым стане.</string>
+    <string name="vessel_height_limit_description">Пазначце вышыню судна, каб пазбегнуць нізкіх мастоў. Звярніце ўвагу, што калі мост развадны, то будзе выкарыстоўвацца яго вышыня ў адкрытым стане.</string>
+    <string name="add_hidden_group_info">Дададзены пункт не будзе бачны на мапе, бо абраная група схаваная. Знайсці пункт можна ў \"%s\".</string>
+    <string name="app_mode_wheelchair_forward">Інвалідны вазок спераду</string>
+    <string name="app_mode_go_cart">Go-cart</string>
+    <string name="set_working_days_to_continue">Для працягу неабходна пазначыць працоўныя дні</string>
+    <string name="route_between_points">Маршрут паміж пунктамі</string>
+    <string name="plan_a_route">План маршруту</string>
+    <string name="add_to_a_track">Дадаць да следу</string>
+    <string name="track_show_start_finish_icons">Паказваць значкі старту і фінішу</string>
+    <string name="select_track_width">Абярыце шырыню</string>
+    <string name="gpx_split_interval_descr">Абярыце інтэрвал паказу адзнак з дыстанцыяй альбо часам.</string>
+    <string name="gpx_split_interval_none_descr">Абярыце варыянт падзелу: па часе альбо дыстанцыі.</string>
+    <string name="shared_string_custom">Адвольны</string>
+    <string name="gpx_direction_arrows">Стрэлкі кірунку</string>
+    <string name="track_coloring_solid">Суцэльны</string>
+    <string name="plan_route_last_edited">Апошняя змена</string>
+    <string name="plan_route_import_track">Імпартаваць след</string>
+    <string name="plan_route_open_existing_track">Адкрыць існы след</string>
+    <string name="plan_route_create_new_route">Стварыць новы маршрут</string>
+    <string name="plan_route_select_track_file_for_open">Абярыце файл следу для адкрыцця.</string>
+    <string name="overwrite_track">Перазапісаць след</string>
+    <string name="save_as_new_track">Захаваць як новы след</string>
+    <string name="reverse_route">Зваротны маршрут</string>
+    <string name="rourte_between_points_whole_track_button_desc">Увесь след будзе пералічаны з выкарыстаннем абранага профілю.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Толькі наступны сегмент будзе пералічаны паводле абранага профілю.</string>
+    <string name="rourte_between_points_desc">Абярыце спосаб злучэння пунктаў. Варыянты: прамая лінія; разлік маршруту паводле абранага профілю.</string>
+    <string name="whole_track">Увесь след</string>
+    <string name="next_segment">Наступны сегмент</string>
+    <string name="rourte_between_points_warning_desc">Для выкарыстання гэтага параметру OsmAnd пракладзе ваш след па дарогах.
+\n
+\n Пасля вам патрэбна абраць профіль навігацыі для вызначэння маршруту з улікам параметраў і абмежаванняў гэтага профілю.</string>
+    <string name="threshold_distance">Максімальная дыстанцыя</string>
+    <string name="navigation_profile">Профіль навігацыі</string>
+    <string name="rourte_between_points_add_track_desc">Абраць файл следу, да якога будзе дададзены новы сегмент.</string>
+    <string name="street_level_imagery">Выявы на ўзроўні вуліц</string>
+    <string name="plan_route_exit_dialog_descr">Сапраўды закрыць план маршруту без захавання\? Усе змены страцяцца.</string>
+    <string name="in_case_of_reverse_direction">У выпадку адваротнага кірунку</string>
+    <string name="shared_string_gpx_route">Маршрут следу</string>
+    <string name="follow_track">Кіравацца следу</string>
+    <string name="follow_track_descr">Абярыце файл следу</string>
+    <string name="import_track_descr">Абярыце альбо імпартуйце файл следу.</string>
+    <string name="select_another_track">Абраць іншы след</string>
+    <string name="navigate_to_track_descr">Перайдзіце ад маёй пазіцыі да следу</string>
+    <string name="pass_whole_track_descr">Пункт следу для навігацыі</string>
+    <string name="start_of_the_track">Пачатак следу</string>
+    <string name="one_point_error">Калі ласка, дадайце прынамсі два пункты.</string>
+    <string name="nearest_point">Бліжэйшы пункт</string>
+    <string name="attach_to_the_roads">Спалучэнне з дарогай</string>
+    <string name="delete_address">Выдаліць адрас</string>
+    <string name="add_address">Дадаць адрас</string>
+    <string name="access_hint_enter_address">Увядзіце адрас</string>
+    <string name="plan_route_trim_before">Абрэзаць перад</string>
+    <string name="plan_route_trim_after">Абрэзаць пасля</string>
+    <string name="plan_route_change_route_type_before">Змяніць тып маршруту перад</string>
+    <string name="plan_route_change_route_type_after">Змяніць тып маршруту пасля</string>
+    <string name="simplified_track">Сціслы след</string>
+    <string name="simplified_track_description">Захаваецца толькі лінія маршруту, пункты шляху выдаляцца.</string>
+    <string name="shared_string_file_name">Назва файла</string>
+    <string name="system_default_theme">Прадвызначана</string>
+    <string name="all_next_segments">Усе наступныя сегменты</string>
+    <string name="previous_segment">Папярэдні сегмент</string>
+    <string name="all_previous_segments">Усе папярэднія сегменты</string>
+    <string name="only_selected_segment_recalc">Толькі абраны сегмент пералічыцца з выкарыстаннем абранага профілю.</string>
 </resources>

@@ -2409,7 +2409,7 @@
     <string name="nothing_found">Nada encontrado</string>
     <string name="nothing_found_descr">Cambiar la búsqueda o aumentar su radio.</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Permitir el uso de caminos privados para este viaje\?</string>
-    <string name="mapillary">Imágenes a nivel de calle</string>
+    <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Widget de Mapillary</string>
     <string name="mapillary_widget_descr">Permite realizar contribuciones rápidas a Mapillary.</string>
     <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre sitios, colabora, captura el mundo.</string>
@@ -3852,11 +3852,11 @@
     <string name="empty_state_my_tracks">Añadir archivos de traza</string>
     <string name="context_menu_item_add_waypoint">Añadir punto de referencia de la traza</string>
     <string name="quick_action_add_gpx">Añadir punto de referencia de la traza</string>
-    <string name="map_widget_monitoring">Grabación de viaje</string>
+    <string name="map_widget_monitoring">Grabación del viaje</string>
     <string name="marker_save_as_track">Guardar como archivo de traza</string>
     <string name="follow_track">Seguir traza</string>
     <string name="follow_track_descr">Elige el archivo de la traza a seguir</string>
-    <string name="import_track_descr">Elige el archivo de la traza a seguir o impórtala desde el dispositivo.</string>
+    <string name="import_track_descr">Elige el archivo de la traza a seguir o importa una.</string>
     <string name="select_another_track">Elegir otra traza</string>
     <string name="navigate_to_track_descr">Navegar desde mi ubicación a la traza</string>
     <string name="pass_whole_track_descr">Punto de la traza para navegar</string>
@@ -3870,4 +3870,23 @@
     <string name="plan_route_trim_after">Recortar después</string>
     <string name="plan_route_change_route_type_before">Cambiar el tipo de ruta anterior</string>
     <string name="plan_route_change_route_type_after">Cambiar el tipo de ruta posterior</string>
+    <string name="simplified_track">Traza simplificada</string>
+    <string name="shared_string_file_name">Nombre del archivo</string>
+    <string name="monitoring_control_start">GRABAR</string>
+    <string name="disable_recording_once_app_killed_descrp">La grabación de la traza se pausará al cerrar la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
+    <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activar mediante el widget de grabación de viaje sobre el mapa).</string>
+    <string name="gpx_monitoring_stop">Pausar grabación del viaje</string>
+    <string name="gpx_monitoring_start">Reanudar grabación del viaje</string>
+    <string name="system_default_theme">Predefinido del sistema</string>
+    <string name="all_next_segments">Todos los segmentos posteriores</string>
+    <string name="previous_segment">Segmento anterior</string>
+    <string name="all_previous_segments">Todos los segmentos anteriores</string>
+    <string name="only_selected_segment_recalc">Sólo el segmento marcado será recalculado usando el perfil elegido.</string>
+    <string name="all_next_segments_will_be_recalc">Todos los segmentos subsiguientes serán recalculados usando el perfil elegido.</string>
+    <string name="all_previous_segments_will_be_recalc">Todos los segmentos anteriores serán recalculados usando el perfil elegido.</string>
+    <string name="open_saved_track">Abrir traza guardada</string>
+    <string name="shared_string_is_saved">está guardado</string>
+    <string name="simplified_track_description">Sólo se guardará la línea de la ruta, los puntos de referencia serán borrados.</string>
+    <string name="number_of_gpx_files_selected_pattern">%s archivo(s) de trazas marcado(s)</string>
+    <string name="one_point_error">Añade al menos dos puntos.</string>
 </resources>

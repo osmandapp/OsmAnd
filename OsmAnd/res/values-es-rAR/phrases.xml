@@ -3840,4 +3840,5 @@
     <string name="poi_city_block">Manzana (cuadra)</string>
     <string name="poi_borough">Municipio</string>
     <string name="poi_traffic_signals_arrow_no">Flecha: no</string>
+    <string name="poi_elevator">Ascensor</string>
 </resources>

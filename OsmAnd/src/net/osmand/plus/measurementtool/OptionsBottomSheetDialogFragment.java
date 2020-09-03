@@ -135,8 +135,8 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.create();
 		items.add(directions);
 
-		/*BaseBottomSheetItem reverse = new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_reverse_direction))
+		BaseBottomSheetItem reverse = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_change_navigation_points))
 				.setTitle(getString(R.string.reverse_route))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(new View.OnClickListener() {
@@ -150,7 +150,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					}
 				})
 				.create();
-		items.add(reverse);*/
+		items.add(reverse);
 
 		items.add(new OptionsDividerItem(getContext()));
 

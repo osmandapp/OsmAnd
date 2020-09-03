@@ -756,7 +756,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		final int[] maxValue = new int[1];
 		final int min;
 		final int max;
-		if (defaultSpeedOnly) {
+		if (defaultSpeedOnly || router == null) {
 			minValue[0] = Math.round(Math.min(1, settingsDefaultSpeed) * ratio[0]);
 			maxValue[0] = Math.round(Math.max(300, settingsDefaultSpeed) * ratio[0]);
 			min = minValue[0];

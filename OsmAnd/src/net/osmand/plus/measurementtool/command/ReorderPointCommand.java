@@ -41,7 +41,7 @@ public class ReorderPointCommand extends MeasurementModeCommand {
 	}
 
 	@Override
-	MeasurementCommandType getType() {
+	public MeasurementCommandType getType() {
 		return MeasurementCommandType.REORDER_POINT;
 	}
 }

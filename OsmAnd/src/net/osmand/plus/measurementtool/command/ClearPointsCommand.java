@@ -61,7 +61,7 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 	}
 
 	@Override
-	MeasurementCommandType getType() {
+	public MeasurementCommandType getType() {
 		return MeasurementCommandType.CLEAR_POINTS;
 	}
 }

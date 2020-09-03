@@ -22,7 +22,7 @@ public abstract class MeasurementModeCommand implements Command {
 		return false;
 	}
 
-	abstract MeasurementCommandType getType();
+	public abstract MeasurementCommandType getType();
 
 	MeasurementEditingContext getEditingCtx() {
 		return measurementLayer.getEditingCtx();
@@ -40,6 +40,7 @@ public abstract class MeasurementModeCommand implements Command {
 		REORDER_POINT,
 		SNAP_TO_ROAD,
 		CHANGE_ROUTE_MODE,
-		APPROXIMATE_POINTS
+		APPROXIMATE_POINTS,
+		REVERSE_POINTS
 	}
 }
