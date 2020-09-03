@@ -2,6 +2,8 @@ package net.osmand.data;
 
 import net.osmand.util.MapUtils;
 
+import java.util.Objects;
+
 public class RotatedTileBox {
 
 	/// primary fields
@@ -67,6 +69,57 @@ public class RotatedTileBox {
 			tileRB = new QuadPointDouble(r.tileRB);
 			tileLB = new QuadPointDouble(r.tileLB);
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		RotatedTileBox tileBox = (RotatedTileBox) o;
+		return this.compare(tileBox.lat, lat) &&
+				this.compare(tileBox.lon, lon) &&
+				this.compare(tileBox.rotate, rotate) &&
+				this.compare(tileBox.density, density) &&
+				zoom == tileBox.zoom &&
+				this.compare(tileBox.mapDensity, mapDensity) &&
+				this.compare(tileBox.zoomAnimation, zoomAnimation) &&
+				this.compare(tileBox.zoomFloatPart, zoomFloatPart) &&
+				cx == tileBox.cx &&
+				cy == tileBox.cy &&
+				pixWidth == tileBox.pixWidth &&
+				pixHeight == tileBox.pixHeight &&
+				this.compare(tileBox.zoomFactor, zoomFactor) &&
+				this.compare(tileBox.rotateCos, rotateCos) &&
+				this.compare(tileBox.rotateSin, rotateSin) &&
+				this.compare(tileBox.oxTile, oxTile) &&
+				this.compare(tileBox.oyTile, oyTile);
+	}
+
+	private double E = 0.0001;
+
+	private boolean compare(float lon, float lon1) {
+		return Math.abs(lon1-lon) < E;
+	}
+
+	private boolean compare(double lon, double lon1) {
+		return Math.abs(lon1-lon) < E;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = 1 + (int)lat +
+				3* (int)(lon*1/E) +
+				5* (int)(rotate*1/E) +
+				7* (int)(density*1/E) +
+				11* zoom  +
+				13* (int)(mapDensity*1/E) +
+				17* (int)(zoomAnimation*1/E) +
+				19* (int)(zoomFloatPart*1/E) +
+				23* cx +
+				29* cy +
+				31* pixWidth +
+				37* pixHeight;
+		return result;
 	}
 
 	public void calculateDerivedFields() {
