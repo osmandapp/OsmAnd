@@ -3879,4 +3879,5 @@
     <string name="all_previous_segments_will_be_recalc">Todos os segmentos anteriores serão recalculados usando o perfil selecionado.</string>
     <string name="open_saved_track">Abrir trilha salva</string>
     <string name="shared_string_is_saved">está salvo</string>
+    <string name="one_point_error">Adicione pelo menos dois pontos.</string>
 </resources>
