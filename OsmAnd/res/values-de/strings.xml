@@ -2416,7 +2416,7 @@
     <string name="mapillary_widget">Mapillary-Steuerelement</string>
     <string name="mapillary_widget_descr">Ermöglicht schnelle Beiträge zu Mapillary.</string>
     <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jeden. Orte entdecken, mitwirken und die Welt in Bildern festhalten.</string>
-    <string name="mapillary">Bilder auf Straßenebene</string>
+    <string name="mapillary">Mapillary</string>
     <string name="mapillary_action_descr">Mit Mapillary Bilder dieses Orts beitragen.</string>
     <string name="shared_string_install">Installieren</string>
     <string name="online_photos">Online-Fotos</string>
@@ -3876,4 +3876,11 @@
     <string name="import_track_descr">Track Datei zum Folgen auswählen, oder importieren.</string>
     <string name="disable_recording_once_app_killed_descrp">Die GPX-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
     <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung festlegen (via Schaltfläche \'GPX\' auf dem Kartenbildschirm).</string>
+    <string name="rourte_between_points_warning_desc">Um diese Option nutzen zu können, muss OsmAnd den Track auf die Straßen der Karte einrasten.
+\n
+\n Wählen Sie im nächsten Schritt ein Navigationsprofil um festzulegen, welche Straßentypen verwendet werden sollen, und wählen Sie einen Wert für die maximal zulässige Entfernung zwischen Track und Straße.</string>
+    <string name="quick_action_add_gpx">Track-Wegpunkt hinzufügen</string>
+    <string name="number_of_gpx_files_selected_pattern">%s Track Dateien ausgewählt</string>
+    <string name="simplified_track_description">Nur die Routenlinie wird gespeichert, die Wegpunkte werden gelöscht.</string>
+    <string name="one_point_error">Bitte fügen Sie mindestens zwei Punkte hinzu.</string>
 </resources>
