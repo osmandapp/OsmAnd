@@ -36,7 +36,7 @@ public class MovePointCommand extends MeasurementModeCommand {
 	}
 
 	@Override
-	MeasurementCommandType getType() {
+	public MeasurementCommandType getType() {
 		return MeasurementCommandType.MOVE_POINT;
 	}
 }
