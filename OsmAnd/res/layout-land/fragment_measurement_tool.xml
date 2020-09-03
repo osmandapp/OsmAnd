@@ -34,8 +34,9 @@
             <RelativeLayout
                 android:id="@+id/up_down_row"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/measurement_tool_controls_height_land"
+                android:layout_height="@dimen/measurement_tool_controls_height"
                 android:layout_weight="0.45"
+                android:layout_gravity="center_vertical"
                 android:background="?attr/selectableItemBackground">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -72,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/measurement_tool_text_button_padding"
                     android:layout_marginLeft="@dimen/measurement_tool_text_button_padding"
-                    android:layout_marginTop="@dimen/measurement_tool_button_padding"
+                    android:layout_marginTop="@dimen/bottom_sheet_title_padding_bottom"
                     android:layout_marginEnd="@dimen/text_margin_small"
                     android:layout_marginRight="@dimen/text_margin_small"
                     android:layout_toEndOf="@id/main_icon"
@@ -88,7 +89,7 @@
                     android:layout_toEndOf="@id/measurement_distance_text_view"
                     android:layout_toRightOf="@id/measurement_distance_text_view"
                     android:layout_alignRight="@id/up_down_button"
-                    android:layout_marginTop="@dimen/measurement_tool_button_padding"
+                    android:layout_marginTop="@dimen/bottom_sheet_title_padding_bottom"
                     android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
                     tools:text="points: 3" />
 
@@ -143,7 +144,7 @@
             <RelativeLayout
                 android:id="@+id/measure_mode_controls"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/measurement_tool_controls_height_land"
+                android:layout_height="@dimen/measurement_tool_controls_height"
                 android:layout_weight="0.55"
                 android:padding="@dimen/content_padding_half">
 
@@ -152,9 +153,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/measurement_tool_button_height"
                     android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
                     android:background="?attr/selectableItemBackground"
                     android:maxLines="1"
-                    android:padding="@dimen/measurement_tool_text_button_padding_small"
+                    android:paddingLeft="@dimen/measurement_tool_text_button_padding_small"
+                    android:paddingRight="@dimen/measurement_tool_text_button_padding_small"
                     android:text="@string/shared_string_options"
                     android:textColor="?attr/color_dialog_buttons"
                     osmand:typeface="@string/font_roboto_medium" />
@@ -202,7 +205,7 @@
             <RelativeLayout
                 android:id="@+id/move_point_controls"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/measurement_tool_controls_height_land"
+                android:layout_height="@dimen/measurement_tool_controls_height"
                 android:layout_weight="0.55"
                 android:visibility="gone">
 
@@ -239,7 +242,7 @@
             <RelativeLayout
                 android:id="@+id/add_point_before_after_controls"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/measurement_tool_controls_height_land"
+                android:layout_height="@dimen/measurement_tool_controls_height"
                 android:layout_weight="0.55"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"

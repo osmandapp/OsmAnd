@@ -257,7 +257,6 @@
 	<dimen name="measurement_tool_points_list_container_height">220dp</dimen>
 	<dimen name="measurement_tool_up_down_row_height">60dp</dimen>
 	<dimen name="measurement_tool_controls_height">52dp</dimen>
-	<dimen name="measurement_tool_controls_height_land">56dp</dimen>
 	<dimen name="measurement_tool_text_button_padding_small">8dp</dimen>
 	<dimen name="measurement_tool_text_button_padding">16dp</dimen>
 	<dimen name="measurement_tool_undo_redo_padding_small">6dp</dimen>
