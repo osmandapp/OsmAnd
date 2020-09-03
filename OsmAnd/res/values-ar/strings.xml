@@ -3842,7 +3842,7 @@
     <string name="marker_save_as_track">حفظ كمسار</string>
     <string name="follow_track">تتبع المسار</string>
     <string name="follow_track_descr">اختر مسار للمتابعة</string>
-    <string name="import_track_descr">"اختر ملف المسار للمتابعة أو قم باستيراده  من الجهاز."</string>
+    <string name="import_track_descr">اختر ملف المسار للمتابعة أو قم باستيراده من الجهاز.</string>
     <string name="select_another_track">حدد مسارا آخر</string>
     <string name="navigate_to_track_descr">انتقل من موقعي إلى المسار</string>
     <string name="pass_whole_track_descr">نقطة المسار للتنقل</string>
