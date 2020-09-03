@@ -27,20 +27,20 @@ public class ServerActivity extends AppCompatActivity {
 		enableStrictMode();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.server_activity);
-		findViewById(R.id.Button01).setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.server_start_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				if (!initialized) {
-					updateTextView("Click second button to deactivate server");
+					updateTextView(getString(R.string.click_button_to_stop_server));
 					initServer();
 				}
 			}
 		});
-		findViewById(R.id.Button03).setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.server_stop_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				if (initialized) {
-					updateTextView("Click first button to activate server");
+					updateTextView(getString(R.string.click_button_to_start_server));
 					deInitServer();
 				}
 			}
@@ -64,7 +64,7 @@ public class ServerActivity extends AppCompatActivity {
 
 
 	private void updateTextView(String text) {
-		((TextView) findViewById(R.id.TextView02)).setText(text);
+		((TextView) findViewById(R.id.server_status_textview)).setText(text);
 	}
 
 	private void initServer() {

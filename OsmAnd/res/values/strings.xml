@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="global_start">Start</string>
+    <string name="global_stop">Stop</string>
+    <string name="click_button_to_start_server">Click button to start server</string>
+    <string name="click_button_to_stop_server">Click second button to deactivate server</string>
     <string name="web_server">Web server</string>
     <string name="one_point_error">Please add at least two points.</string>
     <string name="shared_string_is_saved">is saved</string>

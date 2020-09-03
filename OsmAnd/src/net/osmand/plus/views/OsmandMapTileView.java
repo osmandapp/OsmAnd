@@ -578,7 +578,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public void refreshBaseMapInternal(RotatedTileBox tileBox, DrawSettings drawSettings) {
+	private void refreshBaseMapInternal(RotatedTileBox tileBox, DrawSettings drawSettings) {
 		if (tileBox.getPixHeight() == 0 || tileBox.getPixWidth() == 0) {
 			return;
 		}
@@ -615,7 +615,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		additional.calculateFPS(start, end);
 	}
 
-	public void refreshMapInternal(DrawSettings drawSettings) {
+	private void refreshMapInternal(DrawSettings drawSettings) {
 		if (view == null) {
 			return;
 		}
@@ -866,20 +866,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public net.osmand.data.RotatedTileBox getCurrentRotatedTileBox() {
 		return currentViewport;
-	}
-
-	public void setCurrentRotatedTileBox(net.osmand.data.RotatedTileBox tileBox) {
-		float rx = (float) tileBox.getCenterPixelX() / tileBox.getPixWidth();
-		float ry = (float) tileBox.getCenterPixelY() / tileBox.getPixHeight();
-		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
-			ry -= 0.35;
-		}
-		tileBox.setCenterLocation(rx, ry);
-		LatLon screenCenter = tileBox.getLatLonFromPixel(tileBox.getPixWidth() / 2f, tileBox.getPixHeight() / 2f);
-		mapRatioX = 0;
-		mapRatioY = 0;
-		setLatLon(screenCenter.getLatitude(), screenCenter.getLongitude());
-		currentViewport = tileBox;
 	}
 
 	public float getDensity() {

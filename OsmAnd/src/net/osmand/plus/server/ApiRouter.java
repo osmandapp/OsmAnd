@@ -6,6 +6,7 @@ import fi.iki.elonen.NanoHTTPD;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.server.endpoints.TileEndpoint;
+import net.osmand.util.Algorithms;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,13 +46,17 @@ public class ApiRouter {
 	public NanoHTTPD.Response route(NanoHTTPD.IHTTPSession session) {
 		Log.d("SERVER", "URI: " + session.getUri());
 		String uri = session.getUri();
-		if (uri.equals("/")) return getStatic("/go.html");
+		if (uri.equals("/")) {
+			return getStatic("/go.html");
+		}
 		if (uri.contains("/scripts/") ||
 				uri.contains("/images/") ||
 				uri.contains("/css/") ||
 				uri.contains("/fonts/") ||
 				uri.contains("/favicon.ico")
-		) return getStatic(uri);
+		) {
+			return getStatic(uri);
+		}
 		if (isApiUrl(uri)) {
 			return routeApi(session);
 		} else {
@@ -86,6 +91,7 @@ public class ApiRouter {
 	private NanoHTTPD.Response routeContent(NanoHTTPD.IHTTPSession session) {
 		String url = session.getUri();
 		//add index page
+		//return getStatic(session.getUri());
 		String responseText = getHtmlPage(url);
 		if (responseText != null) {
 			return newFixedLengthResponse(responseText);
@@ -126,6 +132,13 @@ public class ApiRouter {
 	}
 
 	private String readHTMLFromFile(String filename) {
+//		try {
+//			InputStream is = application.getAssets().open(FOLDER_NAME + filename);
+//			return Algorithms.readFromInputStream(is,false).toString();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return null;
 		StringBuilder sb = new StringBuilder();
 		try {
 			InputStream is = application.getAssets().open(FOLDER_NAME + filename);
