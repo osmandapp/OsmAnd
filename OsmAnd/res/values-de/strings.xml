@@ -3883,4 +3883,12 @@
     <string name="number_of_gpx_files_selected_pattern">%s Track Dateien ausgewählt</string>
     <string name="simplified_track_description">Nur die Routenlinie wird gespeichert, die Wegpunkte werden gelöscht.</string>
     <string name="one_point_error">Bitte fügen Sie mindestens zwei Punkte hinzu.</string>
+    <string name="shared_string_save_as_gpx">Als neue Track-Datei speichern</string>
+    <string name="empty_state_my_tracks_desc">Track-Dateien importieren oder aufzeichnen</string>
+    <string name="shared_string_gpx_files">Tracks</string>
+    <string name="show_gpx">Tracks</string>
+    <string name="marker_save_as_track">Als Track-Datei speichern</string>
+    <string name="select_another_track">Anderen Track wählen</string>
+    <string name="pass_whole_track_descr">Track-Punkt, zu dem navigiert werden soll</string>
+    <string name="nearest_point">Nächstgelegener Punkt</string>
 </resources>
