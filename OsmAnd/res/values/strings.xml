@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="web_server">Web server</string>
     <string name="one_point_error">Please add at least two points.</string>
     <string name="shared_string_is_saved">is saved</string>
     <string name="open_saved_track">Open saved track</string>
