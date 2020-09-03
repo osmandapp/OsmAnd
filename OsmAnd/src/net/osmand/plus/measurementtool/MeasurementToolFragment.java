@@ -636,7 +636,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					case SnapTrackWarningBottomSheet.CANCEL_RESULT_CODE:
 						toolBarController.setSaveViewVisible(true);
 						directionMode = false;
-						afterExitApproximationMode();
+						exitApproximationMode();
 						updateToolbar();
 						break;
 					case SnapTrackWarningBottomSheet.CONTINUE_RESULT_CODE:
@@ -2051,7 +2051,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onApplyGpxApproximation() {
-		afterExitApproximationMode();
+		exitApproximationMode();
 		doAddOrMovePointCommonStuff();
 		if (directionMode) {
 			directionMode = false;
@@ -2077,13 +2077,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onCancelGpxApproximation() {
 		editingCtx.getCommandManager().undo();
-		afterExitApproximationMode();
+		exitApproximationMode();
 		directionMode = false;
 		updateSnapToRoadControls();
 		updateToolbar();
 	}
 
-	private void afterExitApproximationMode() {
+	private void exitApproximationMode() {
 		editingCtx.setInApproximationMode(false);
 		MeasurementToolLayer layer = getMeasurementLayer();
 		if (layer != null) {
