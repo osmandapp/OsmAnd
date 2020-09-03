@@ -660,7 +660,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude,
 											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
-		if (isRecording()) {
+		if (!configureMenu && isRecording()) {
 			return;
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_arecord, app)
