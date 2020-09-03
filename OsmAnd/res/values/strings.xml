@@ -889,10 +889,10 @@
     <string name="shared_string_swap">Swap</string>
     <string name="show_more">Show more</string>
     <string name="tracks_on_map">Displayed tracks</string>
-    <string name="quick_action_show_hide_gpx_tracks">Show/hide GPX tracks</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">A button to show or hide selected GPX tracks on the map.</string>
-    <string name="quick_action_gpx_tracks_hide">Hide GPX Tracks</string>
-    <string name="quick_action_gpx_tracks_show">Show GPX Tracks</string>
+    <string name="quick_action_show_hide_gpx_tracks">Show/hide tracks</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">A button to show or hide selected tracks on the map.</string>
+    <string name="quick_action_gpx_tracks_hide">Hide Tracks</string>
+    <string name="quick_action_gpx_tracks_show">Show Tracks</string>
     <string name="add_destination_query">Please set the destination first</string>
     <string name="previous_route">Previous route</string>
     <string name="add_home">Add home</string>
@@ -1462,8 +1462,8 @@
     <string name="route_roundabout_short">Take %1$d exit and go</string>
     <string name="upload_poi">Upload POI</string>
     <string name="route_calculation">Route calculation</string>
-    <string name="gpx_no_tracks_title">You do not have any GPX files yet</string>
-    <string name="gpx_no_tracks_title_folder">You may also add GPX files to the folder</string>
+    <string name="gpx_no_tracks_title">You do not have any track files yet</string>
+    <string name="gpx_no_tracks_title_folder">You may also add track files to the folder</string>
     <string name="gpx_add_track">Add more…</string>
     <string name="shared_string_appearance">Appearance</string>
     <string name="trip_rec_notification_settings">Turn on quick recording</string>
@@ -1533,7 +1533,7 @@
     <string name="no_inet_connection_desc_map">Required to download maps.</string>
     <string name="search_location">Searching for location…</string>
     <string name="storage_free_space">Free space</string>
-    <string name="storage_place_description">OsmAnd\'s data storage (for maps, GPX files, etc.): %1$s.</string>
+    <string name="storage_place_description">OsmAnd\'s data storage (for maps, track files, etc.): %1$s.</string>
     <string name="give_permission">Grant permission</string>
     <string name="allow_access_location">Allow location access</string>
     <string name="first_usage_greeting">Get directions and discover new places without an Internet connection</string>
