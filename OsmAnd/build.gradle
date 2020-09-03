@@ -544,6 +544,7 @@ dependencies {
 	implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
 	// JS core
 	implementation group: 'org.mozilla', name: 'rhino', version: '1.7.9'
+	implementation 'org.nanohttpd:nanohttpd:2.2.0'
 // size restrictions
 // implementation 'com.ibm.icu:icu4j:50.1' 
 // implementation 'net.sf.trove4j:trove4j:3.0.3'
