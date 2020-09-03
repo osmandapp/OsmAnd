@@ -443,16 +443,19 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
 						createStartPlanRouteListener());
 			} else if (!editingCtx.isNewData() && !editingCtx.hasRoutePoints() && !editingCtx.hasRoute() && editingCtx.getPointsCount() > 1) {
-				showSnapTrackWarning(mapActivity);
+				enterApproximationMode(mapActivity);
 			}
 		}
 
 		return view;
 	}
 
-	private void showSnapTrackWarning(MapActivity mapActivity) {
-		editingCtx.setInApproximationMode(true);
-		SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
+	private void enterApproximationMode(MapActivity mapActivity) {
+		MeasurementToolLayer layer = getMeasurementLayer();
+		if (layer != null) {
+			layer.setTapsDisabled(true);
+			SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
+		}
 	}
 
 	public boolean isInEditMode() {
@@ -601,7 +604,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 								: RouteBetweenPointsDialogMode.ALL,
 						editingCtx.getAppMode());
 			} else {
-				showSnapTrackWarning(mapActivity);
+				enterApproximationMode(mapActivity);
 			}
 		}
 	}
@@ -633,7 +636,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					case SnapTrackWarningBottomSheet.CANCEL_RESULT_CODE:
 						toolBarController.setSaveViewVisible(true);
 						directionMode = false;
-						editingCtx.setInApproximationMode(false);
+						afterExitApproximationMode();
 						updateToolbar();
 						break;
 					case SnapTrackWarningBottomSheet.CONTINUE_RESULT_CODE:
@@ -699,7 +702,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 							mapActions.enterRoutePlanningModeGivenGpx(gpx, appMode, null, null, true, true, MenuState.HEADER_ONLY);
 						} else {
 							directionMode = true;
-							showSnapTrackWarning(mapActivity);
+							enterApproximationMode(mapActivity);
 						}
 					}
 				}
@@ -2034,6 +2037,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void onGpxApproximationDone(GpxRouteApproximation gpxApproximation, ApplicationMode mode) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
+			editingCtx.setInApproximationMode(true);
 			ApplyGpxApproximationCommand command = new ApplyGpxApproximationCommand(measurementLayer, gpxApproximation, mode);
 			if (!editingCtx.getCommandManager().update(command)) {
 				editingCtx.getCommandManager().execute(command);
@@ -2047,7 +2051,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onApplyGpxApproximation() {
-		editingCtx.setInApproximationMode(false);
+		afterExitApproximationMode();
 		doAddOrMovePointCommonStuff();
 		if (directionMode) {
 			directionMode = false;
@@ -2073,9 +2077,17 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onCancelGpxApproximation() {
 		editingCtx.getCommandManager().undo();
-		editingCtx.setInApproximationMode(false);
+		afterExitApproximationMode();
 		directionMode = false;
 		updateSnapToRoadControls();
 		updateToolbar();
+	}
+
+	private void afterExitApproximationMode() {
+		editingCtx.setInApproximationMode(false);
+		MeasurementToolLayer layer = getMeasurementLayer();
+		if (layer != null) {
+			layer.setTapsDisabled(false);
+		}
 	}
 }

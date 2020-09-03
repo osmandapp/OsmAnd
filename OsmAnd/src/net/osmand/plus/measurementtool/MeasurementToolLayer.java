@@ -51,6 +51,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private OnEnterMovePointModeListener enterMovePointModeListener;
 	private LatLon pressedPointLatLon;
 	private boolean overlapped;
+	private boolean tapsDisabled;
 	private MeasurementEditingContext editingCtx;
 
 	@Override
@@ -102,9 +103,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		this.inMeasurementMode = inMeasurementMode;
 	}
 
+	public void setTapsDisabled(boolean tapsDisabled) {
+		this.tapsDisabled = tapsDisabled;
+	}
+
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		if (inMeasurementMode && !editingCtx.isInApproximationMode() && editingCtx.getSelectedPointPosition() == -1) {
+		if (inMeasurementMode && !tapsDisabled && editingCtx.getSelectedPointPosition() == -1) {
 			if (!overlapped) {
 				selectPoint(point.x, point.y, true);
 			}
@@ -120,7 +125,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
-		if (inMeasurementMode) {
+		if (inMeasurementMode && !tapsDisabled) {
 			if (!overlapped && getEditingCtx().getSelectedPointPosition() == -1 && editingCtx.getPointsCount() > 0) {
 				selectPoint(point.x, point.y, false);
 				if (editingCtx.getSelectedPointPosition() != -1) {
@@ -181,11 +186,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			new Renderable.StandardTrack(new ArrayList<>(after.points), 17.2).
 					drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
 			if (editingCtx.isInApproximationMode()) {
-				List<WptPt> current = editingCtx.getOriginalTrackPointList();
-				lineAttrs.customColorPaint.setColor(ContextCompat.getColor(view.getContext(),
-						R.color.activity_background_transparent_color_dark));
-				new Renderable.StandardTrack(new ArrayList<>(current), 17.2).
-						drawSegment(view.getZoom(), lineAttrs.customColorPaint, canvas, tb);
+				List<WptPt> originalTrackPointList = editingCtx.getOriginalTrackPointList();
+				if (originalTrackPointList != null) {
+					lineAttrs.customColorPaint.setColor(ContextCompat.getColor(view.getContext(),
+							R.color.activity_background_transparent_color_dark));
+					new Renderable.StandardTrack(new ArrayList<>(originalTrackPointList), 17.2).
+							drawSegment(view.getZoom(), lineAttrs.customColorPaint, canvas, tb);
+				}
 			}
 			drawPoints(canvas, tb);
 		}
