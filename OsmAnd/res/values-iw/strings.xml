@@ -1121,7 +1121,7 @@
     <string name="mapillary_widget">וידג׳ט Mapillary</string>
     <string name="mapillary_widget_descr">מאפשר תרומה במהירות ל־Mapillary.</string>
     <string name="mapillary_descr">תמונות מקוונות ברמת רחוב לכולם. היכרות עם מקומות חדשים, שיתוף פעולה וצילום העולם.</string>
-    <string name="mapillary">תמונות ברמת רחוב</string>
+    <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">תמונות ברמת הרחוב לכולם. להכיר מקומות, לשתף פעולה ולצלם את העולם.</string>
     <string name="private_access_routing_req">היעד שלך ממוקם באיזור עם גישה פרטית. לאשר שימוש בכבישים פרטיים לצורך טיול זה\?</string>
     <string name="restart_search">חיפוש מחדש</string>
@@ -3849,7 +3849,7 @@
     <string name="shared_string_gpx_files">מסלולים</string>
     <string name="layer_gpx_layer">מסלולים</string>
     <string name="show_gpx">מסלולים</string>
-    <string name="monitoring_control_start">GPX</string>
+    <string name="monitoring_control_start">הקלטה</string>
     <string name="save_track_to_gpx_globally">תיעוד המסלול לקובץ GPX</string>
     <string name="shared_string_gpx_route">נתיב המסלול</string>
     <string name="empty_state_my_tracks">הוספת קובצי מסלול</string>
@@ -3860,7 +3860,7 @@
     <string name="marker_save_as_track">שמירה כקובץ מסלול</string>
     <string name="follow_track">מעקב אחר מסלול</string>
     <string name="follow_track_descr">בחירת קובץ מסלול למעקב</string>
-    <string name="import_track_descr">נא לבחור בקובץ מסלול אחר לעקוב אחריו או לייבא אותו מהמכשיר.</string>
+    <string name="import_track_descr">נא לבחור בקובץ מסלול לעקוב אחריו או לייבא אחד כזה.</string>
     <string name="select_another_track">בחירת מסלול אחר</string>
     <string name="navigate_to_track_descr">לנווט מהמיקום שלי אל המסלול</string>
     <string name="pass_whole_track_descr">נקודה במסלול לניווט</string>
@@ -3874,4 +3874,22 @@
     <string name="plan_route_trim_after">חיתוך אחרי</string>
     <string name="plan_route_change_route_type_before">החלפת סוג המסלול לפני</string>
     <string name="plan_route_change_route_type_after">החלפת סוג המסלול לאחר</string>
+    <string name="save_global_track_interval_descr">נא לציין מרווח בין הקלטות כלליות של מסלול (מופעל דרך וידג׳ט הקלטת המסלול שעל המפה).</string>
+    <string name="simplified_track">מסלול מפושט</string>
+    <string name="simplified_track_description">רק קו המסלול יישמר, נקודות הדרך תימחקנה.</string>
+    <string name="shared_string_file_name">שם קובץ</string>
+    <string name="number_of_gpx_files_selected_pattern">%s קובצי מסלול נבחרו</string>
+    <string name="disable_recording_once_app_killed_descrp">רישום ה־GPX יושהה כאשר היישומון ייסגר (דרך היישומונים האחרונים). (התראות הרקע של OsmAnd תיעלמנה מסרגל ההודעות של Android.)</string>
+    <string name="gpx_monitoring_stop">להשהות הקלטת מסלול</string>
+    <string name="gpx_monitoring_start">להמשיך בהקלטת המסלול</string>
+    <string name="system_default_theme">בררת המחדל של המערכת</string>
+    <string name="all_next_segments">כל המקטעים הבאים</string>
+    <string name="previous_segment">מקטע קודם</string>
+    <string name="all_previous_segments">כל המקטעים הקודמים</string>
+    <string name="only_selected_segment_recalc">רק המקטעים הנבחרים יחושבו מחדש בעזרת הפרופיל הנבחר.</string>
+    <string name="all_next_segments_will_be_recalc">כל המקטעים הבאים יחושבו מחדש בעזרת הפרופיל הנבחר.</string>
+    <string name="all_previous_segments_will_be_recalc">כל המקטעים הקודמים יחושבו מחדש בעזרת הפרופיל הנבחר.</string>
+    <string name="open_saved_track">פתיחת מסלולים שמורים</string>
+    <string name="shared_string_is_saved">נשמר</string>
+    <string name="one_point_error">נא להוסיף שתי נקודות לפחות.</string>
 </resources>

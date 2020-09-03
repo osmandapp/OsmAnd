@@ -2357,7 +2357,7 @@
     <string name="online_photos">Photos en ligne</string>
     <string name="no_photos_descr">Aucune photo pour ce lieu.</string>
     <string name="shared_string_install">Installer</string>
-    <string name="mapillary">Photos des rues</string>
+    <string name="mapillary">Mapillary</string>
     <string name="open_mapillary">Ouvrir Mapillary</string>
     <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter des photos à cet emplacement de la carte.</string>
@@ -3831,7 +3831,7 @@
     <string name="shared_string_gpx_files">Traces</string>
     <string name="layer_gpx_layer">Traces</string>
     <string name="show_gpx">Traces</string>
-    <string name="monitoring_control_start">GPX</string>
+    <string name="monitoring_control_start">REC</string>
     <string name="save_track_to_gpx_globally">Enregistrer le parcours dans un fichier GPX</string>
     <string name="map_widget_monitoring">Enregistrement du parcours</string>
     <string name="marker_save_as_track">Enregistrer comme fichier de trace</string>
@@ -3842,4 +3842,12 @@
     <string name="nearest_point">Point le plus proche</string>
     <string name="delete_address">Supprimer l\'adresse</string>
     <string name="add_address">Ajouter une adresse</string>
+    <string name="number_of_gpx_files_selected_pattern">%s fichiers trace sélectionnés</string>
+    <string name="empty_state_my_tracks_desc">Importer ou enregistrer des fichiers de trace</string>
+    <string name="simplified_track">Trace simplifiée</string>
+    <string name="shared_string_file_name">Nom de fichier</string>
+    <string name="system_default_theme">Par défaut</string>
+    <string name="open_saved_track">Ouvrir une trace enregistrée</string>
+    <string name="shared_string_is_saved">a été enregistré</string>
+    <string name="one_point_error">Veuillez ajouter au moins deux points.</string>
 </resources>

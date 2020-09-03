@@ -3881,4 +3881,5 @@
     <string name="all_previous_segments_will_be_recalc">將會使用選定的設定檔重新計算先前所有的部份。</string>
     <string name="open_saved_track">開啟已儲存的軌跡</string>
     <string name="shared_string_is_saved">已儲存</string>
+    <string name="one_point_error">請至少新增兩個點。</string>
 </resources>

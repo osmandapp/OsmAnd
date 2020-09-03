@@ -64,7 +64,7 @@
     <string name="disconnect_from_telegram">Як выключыць назіральнік OsmAnd праз Telegram</string>
     <string name="logout_help_desc">Як выключыць назіральнік OsmAnd праз Тэлеграм</string>
     <string name="connected_account">Падлучаны акаўнт</string>
-    <string name="shared_string_account">Рахунак</string>
+    <string name="shared_string_account">Акаўнт</string>
     <string name="in_time">у %1$s</string>
     <string name="osmand_connect_desc">Абраць версію OsmAnd, якую OsmAnd Tracker будзе выкарыстоўваць для адлюстравання пазіцыі.</string>
     <string name="osmand_connect">Злучэнне з OsmAnd</string>
