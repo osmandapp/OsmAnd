@@ -77,7 +77,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	protected OsmandSettings settings = null;
 	private CanvasColors canvasColors = null;
 	private Boolean nightMode = null;
-	public Bitmap currentCanvas = null;
 
 	private class CanvasColors {
 		int colorDay = MAP_DEFAULT_COLOR;
@@ -121,10 +120,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onDrawOverMap();
 	}
 
-	public interface IMapImageDrawListener {
-		public void onDraw(RotatedTileBox viewport,Bitmap bmp);
-	}
-
 	protected static final Log LOG = PlatformUtil.getLog(OsmandMapTileView.class);
 
 
@@ -147,8 +142,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private OnClickListener onClickListener;
 
 	private OnTrackBallListener trackBallDelegate;
-
-	private IMapImageDrawListener iMapImageDrawListener;
 
 	private AccessibilityActionsProvider accessibilityActions;
 
@@ -372,14 +365,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return wasZoomInMultiTouch;
 	}
 
-	public IMapImageDrawListener getMapImageDrawListener() {
-		return iMapImageDrawListener;
-	}
-
-	public void setMapImageDrawListener(IMapImageDrawListener iMapImageDrawListener) {
-		this.iMapImageDrawListener = iMapImageDrawListener;
-	}
-
 	public boolean mapGestureAllowed(OsmandMapLayer.MapGestureType type) {
 		for (OsmandMapLayer layer : layers) {
 			if (!layer.isMapGestureAllowed(type)) {
@@ -588,7 +573,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (!bufferBitmap.isRecycled()) {
 				RectF rct = new RectF(x1, y1, x2, y2);
 				canvas.drawBitmap(bufferBitmap, null, rct, paintImg);
-				currentCanvas = bufferBitmap;
 			}
 			canvas.rotate(-rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 		}
@@ -629,9 +613,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		long end = SystemClock.elapsedRealtime();
 		additional.calculateFPS(start, end);
-		if (iMapImageDrawListener != null){
-			iMapImageDrawListener.onDraw(tileBox,bufferBitmap);
-		}
 	}
 
 	public void refreshMapInternal(DrawSettings drawSettings) {

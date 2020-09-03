@@ -1,128 +1,45 @@
 package net.osmand.plus.server;
 
-import android.graphics.Bitmap;
 import android.util.Log;
-import android.util.Pair;
 import android.webkit.MimeTypeMap;
-import com.google.gson.Gson;
 import fi.iki.elonen.NanoHTTPD;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.RotatedTileBox;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.OsmandMapLayer;
-import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.server.endpoints.TileEndpoint;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 
-public class ApiRouter implements OsmandMapTileView.IMapImageDrawListener {
-	private OsmandApplication androidContext;
-
-	public OsmandApplication getAndroidContext() {
-		return androidContext;
-	}
-
+public class ApiRouter {
+	private OsmandApplication application;
 	private final String FOLDER_NAME = "server";
-	private Gson gson = new Gson();
-	private Map<String, ApiEndpoint> endpoints = new HashMap<>();
-	//change to weakreference
-	public static MapActivity mapActivity;
+	private final Map<String, ApiEndpoint> endpoints = new HashMap<>();
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(ApiRouter.class);
 
 	public ApiRouter() {
 		initRoutes();
 	}
 
+	public OsmandApplication getApplication() {
+		return application;
+	}
+
+	final TileEndpoint tileEndpoint = new TileEndpoint(application);
+
 	private void initRoutes() {
-		ApiEndpoint favorites = new ApiEndpoint();
-		favorites.uri = "/favorites";
-		favorites.apiCall = new ApiEndpoint.ApiCall() {
-			@Override
-			public NanoHTTPD.Response call(NanoHTTPD.IHTTPSession session) {
-				return newFixedLengthResponse(getFavoritesJson());
-			}
-		};
-		endpoints.put(favorites.uri, favorites);
-
-		final ApiEndpoint tile = new ApiEndpoint();
-		tile.uri = "/tile";
-		tile.apiCall = new ApiEndpoint.ApiCall() {
-			@Override
-			public NanoHTTPD.Response call(NanoHTTPD.IHTTPSession session) {
-				try {
-					return tileApiCall(session);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				return ErrorResponses.response500;
-			}
-		};
-		endpoints.put(tile.uri, tile);
+		endpoints.put(tileEndpoint.uri, tileEndpoint);
 	}
 
-	ExecutorService executor = Executors.newFixedThreadPool(3);
-
-	Map<RotatedTileBox, Bitmap> hashMap = new HashMap<>();
-	Map<RotatedTileBox, Bitmap> map = Collections.synchronizedMap(hashMap);
-
-	private synchronized NanoHTTPD.Response tileApiCall(NanoHTTPD.IHTTPSession session) {
-		int zoom = 0;
-		double lat = 0;//50.901430;
-		double lon = 0;//34.801775;
-		try {
-			String fullUri = session.getUri().replace("/tile/", "");
-			Scanner s = new Scanner(fullUri).useDelimiter("/");
-			zoom = s.nextInt();
-			lat = s.nextDouble();
-			lon = s.nextDouble();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ErrorResponses.response500;
-		}
-		mapActivity.getMapView().setMapImageDrawListener(this);
-		Future<Pair<RotatedTileBox, Bitmap>> future;
-		final RotatedTileBox rotatedTileBox = new RotatedTileBox.RotatedTileBoxBuilder()
-				.setLocation(lat, lon)
-				.setZoom(zoom)
-				.setPixelDimensions(512, 512, 0.5f, 0.5f).build();
-		future = executor.submit(new Callable<Pair<RotatedTileBox, Bitmap>>() {
-			@Override
-			public Pair<RotatedTileBox, Bitmap> call() throws Exception {
-				Bitmap bmp;
-				while ((bmp = map.get(rotatedTileBox)) == null) {
-					Thread.sleep(1000);
-				}
-				return Pair.create(rotatedTileBox, bmp);
-			}
-		});
-		mapActivity.getMapView().setCurrentRotatedTileBox(rotatedTileBox);
-		try {
-			Pair<RotatedTileBox, Bitmap> pair = future.get();
-			Bitmap bitmap = pair.second;// mapActivity.getMapView().currentCanvas;
-			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-			byte[] byteArray = stream.toByteArray();
-			ByteArrayInputStream str = new ByteArrayInputStream(byteArray);
-			return newFixedLengthResponse(
-					NanoHTTPD.Response.Status.OK,
-					"image/png",
-					str,
-					str.available());
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-			return ErrorResponses.response500;
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			return ErrorResponses.response500;
-		}
-	}
-
-	public void setAndroidContext(OsmandApplication androidContext) {
-		this.androidContext = androidContext;
+	public void setApplication(OsmandApplication application) {
+		this.application = application;
+		tileEndpoint.setApplication(application);
 	}
 
 	public NanoHTTPD.Response route(NanoHTTPD.IHTTPSession session) {
@@ -144,9 +61,9 @@ public class ApiRouter implements OsmandMapTileView.IMapImageDrawListener {
 
 	private NanoHTTPD.Response routeApi(NanoHTTPD.IHTTPSession session) {
 		String uri = session.getUri();
-		//TODO rewrite
-		if (uri.contains("tile")) {
-			return endpoints.get("/tile").apiCall.call(session);
+		int pathEnd = uri.indexOf("/", 1);
+		if (pathEnd != -1) {
+			uri = uri.substring(0, pathEnd);
 		}
 		ApiEndpoint endpoint = endpoints.get(uri);
 		if (endpoint != null) {
@@ -157,8 +74,11 @@ public class ApiRouter implements OsmandMapTileView.IMapImageDrawListener {
 
 	private boolean isApiUrl(String uri) {
 		for (String endpoint : endpoints.keySet()) {
-			//TODO rewrite contains
-			if (endpoint.equals(uri) || uri.contains("tile")) return true;
+			int stringLength = endpoint.length();
+			if (uri.startsWith(endpoint) &&
+					(uri.length() == endpoint.length() || uri.charAt(stringLength) == '/')) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -175,11 +95,11 @@ public class ApiRouter implements OsmandMapTileView.IMapImageDrawListener {
 	}
 
 	public NanoHTTPD.Response getStatic(String uri) {
-		InputStream is = null;
+		InputStream is;
 		String mimeType = parseMimeType(uri);
-		if (androidContext != null) {
+		if (application != null) {
 			try {
-				is = androidContext.getAssets().open(FOLDER_NAME + uri);
+				is = application.getAssets().open(FOLDER_NAME + uri);
 				if (is.available() == 0) {
 					return ErrorResponses.response404;
 				}
@@ -208,7 +128,7 @@ public class ApiRouter implements OsmandMapTileView.IMapImageDrawListener {
 	private String readHTMLFromFile(String filename) {
 		StringBuilder sb = new StringBuilder();
 		try {
-			InputStream is = androidContext.getAssets().open(FOLDER_NAME + filename);
+			InputStream is = application.getAssets().open(FOLDER_NAME + filename);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is,
 					Charset.forName("UTF-8")));
 			String str;
@@ -217,7 +137,7 @@ public class ApiRouter implements OsmandMapTileView.IMapImageDrawListener {
 			}
 			br.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error("IOException", e);
 			return null;
 		}
 		return sb.toString();
@@ -225,41 +145,18 @@ public class ApiRouter implements OsmandMapTileView.IMapImageDrawListener {
 
 	public String getHtmlPage(String name) {
 		String responseText = "";
-		if (androidContext != null) {
+		if (application != null) {
 			responseText = readHTMLFromFile(name);
-		}
-		if (responseText == null) {
-			return null;
 		}
 		return responseText;
 	}
 
-	private String getFavoritesJson() {
-		List<FavouritePoint> points = androidContext.getFavorites().getFavouritePoints();
-		StringBuilder text = new StringBuilder();
-		for (FavouritePoint p : points) {
-			String json = jsonFromFavorite(p);
-			text.append(json);
-			text.append(",");
-		}
-		return "[" + text.substring(0, text.length() - 1) + "]";
-	}
-
-	private String jsonFromFavorite(FavouritePoint favouritePoint) {
-		return gson.toJson(favouritePoint);
-	}
-
-	@Override
-	public void onDraw(RotatedTileBox viewport, Bitmap bmp) {
-		this.map.put(viewport, bmp);
-	}
-
-	static class ErrorResponses {
-		static NanoHTTPD.Response response404 =
+	public static class ErrorResponses {
+		public static NanoHTTPD.Response response404 =
 				newFixedLengthResponse(NanoHTTPD.Response.Status.NOT_FOUND,
 						NanoHTTPD.MIME_PLAINTEXT, "404 Not Found");
 
-		static NanoHTTPD.Response response500 =
+		public static NanoHTTPD.Response response500 =
 				newFixedLengthResponse(NanoHTTPD.Response.Status.INTERNAL_ERROR,
 						NanoHTTPD.MIME_PLAINTEXT, "500 Internal Server Error");
 	}
