@@ -60,7 +60,7 @@ public class ApiRouter {
 		if (isApiUrl(uri)) {
 			return routeApi(session);
 		} else {
-			return routeContent(session);
+			return getStatic(session.getUri());
 		}
 	}
 
@@ -88,18 +88,6 @@ public class ApiRouter {
 		return false;
 	}
 
-	private NanoHTTPD.Response routeContent(NanoHTTPD.IHTTPSession session) {
-		String url = session.getUri();
-		//add index page
-		//return getStatic(session.getUri());
-		String responseText = getHtmlPage(url);
-		if (responseText != null) {
-			return newFixedLengthResponse(responseText);
-		} else {
-			return ErrorResponses.response404;
-		}
-	}
-
 	public NanoHTTPD.Response getStatic(String uri) {
 		InputStream is;
 		String mimeType = parseMimeType(uri);
@@ -122,46 +110,13 @@ public class ApiRouter {
 	}
 
 	private String parseMimeType(String url) {
-		String type = null;
+		String type = "text/plain";
 		if (url.endsWith(".js")) return "text/javascript";
 		String extension = MimeTypeMap.getFileExtensionFromUrl(url);
 		if (extension != null) {
 			type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
 		}
 		return type;
-	}
-
-	private String readHTMLFromFile(String filename) {
-//		try {
-//			InputStream is = application.getAssets().open(FOLDER_NAME + filename);
-//			return Algorithms.readFromInputStream(is,false).toString();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-		StringBuilder sb = new StringBuilder();
-		try {
-			InputStream is = application.getAssets().open(FOLDER_NAME + filename);
-			BufferedReader br = new BufferedReader(new InputStreamReader(is,
-					Charset.forName("UTF-8")));
-			String str;
-			while ((str = br.readLine()) != null) {
-				sb.append(str);
-			}
-			br.close();
-		} catch (IOException e) {
-			LOG.error("IOException", e);
-			return null;
-		}
-		return sb.toString();
-	}
-
-	public String getHtmlPage(String name) {
-		String responseText = "";
-		if (application != null) {
-			responseText = readHTMLFromFile(name);
-		}
-		return responseText;
 	}
 
 	public static class ErrorResponses {
