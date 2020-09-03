@@ -63,7 +63,7 @@
     <string name="shared_string_next">Siguiente</string>
     <string name="shared_string_enable">Activar</string>
     <string name="shared_string_disable">Desactivar</string>
-    <string name="shared_string_ok">Aplicar</string>
+    <string name="shared_string_ok">Aceptar</string>
     <string name="shared_string_on">Sí</string>
     <string name="shared_string_off">No</string>
     <string name="shared_string_enabled">Activado</string>
@@ -2610,7 +2610,7 @@
 \n</string>
     <string name="av_locations_selected_desc">Archivo GPX con coordenadas y datos de las notas elegidas.</string>
     <string name="av_locations_all_desc">Archivo GPX con coordenadas y datos de todas las notas.</string>
-    <string name="osm_recipient_stat">%1$s ediciones, suman %2$s mBTC</string>
+    <string name="osm_recipient_stat">\'%1$s ediciones, suman %2$s mBTC\'</string>
     <string name="osm_recipients_label">Destinatarios de OSM</string>
     <string name="total_donations">Total de donaciones</string>
     <string name="what_is_here">Aquí hay:</string>
@@ -3822,7 +3822,7 @@
     <string name="plan_route_open_existing_track">Abrir traza existente</string>
     <string name="plan_route_create_new_route">Crear nueva ruta</string>
     <string name="plan_route_select_track_file_for_open">Marca un archivo de traza para abrir.</string>
-    <string name="shared_string_done">Hecho</string>
+    <string name="shared_string_done">Listo</string>
     <string name="overwrite_track">Sobrescribir traza</string>
     <string name="save_as_new_track">Guardar como nueva traza</string>
     <string name="reverse_route">Ruta inversa</string>
@@ -3882,7 +3882,7 @@
     <string name="previous_segment">Segmento anterior</string>
     <string name="all_previous_segments">Todos los segmentos anteriores</string>
     <string name="only_selected_segment_recalc">Sólo el segmento marcado será recalculado usando el perfil elegido.</string>
-    <string name="all_next_segments_will_be_recalc">Todos los segmentos subsiguientes serán recalculados usando el perfil elegido.</string>
+    <string name="all_next_segments_will_be_recalc">Todos los segmentos posteriores serán recalculados usando el perfil elegido.</string>
     <string name="all_previous_segments_will_be_recalc">Todos los segmentos anteriores serán recalculados usando el perfil elegido.</string>
     <string name="open_saved_track">Abrir traza guardada</string>
     <string name="shared_string_is_saved">está guardado</string>
