@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_transparent"
-    android:clickable="true">
+    android:clickable="true"
+    android:focusable="true">
 
     <LinearLayout
         android:id="@+id/main_view"
@@ -14,8 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@drawable/bg_bottom_menu_dark"
+        android:orientation="vertical"
         android:clickable="true"
-        android:orientation="vertical">
+        android:focusable="true">
 
         <ProgressBar
             android:id="@+id/snap_to_road_progress_bar"
@@ -24,7 +25,7 @@
             android:layout_height="wrap_content"
             android:minHeight="0dp"
             android:visibility="gone"
-            tools:visibility="visible"/>
+            tools:visibility="visible" />
 
         <RelativeLayout
             android:id="@+id/up_down_row"
@@ -81,8 +82,10 @@
                 android:layout_marginTop="@dimen/measurement_tool_button_padding"
                 android:layout_toEndOf="@id/measurement_distance_text_view"
                 android:layout_toRightOf="@id/measurement_distance_text_view"
+                android:layout_alignEnd="@id/up_down_button"
+                android:layout_alignRight="@id/up_down_button"
                 android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
-                tools:text="points: 3"/>
+                tools:text="points: 3" />
 
             <TextView
                 android:id="@+id/distance_to_center_text_view"
@@ -159,8 +162,8 @@
             android:id="@+id/measure_mode_controls"
             android:layout_width="match_parent"
             android:layout_height="@dimen/measurement_tool_controls_height"
-            android:paddingTop="@dimen/measurement_tool_button_padding_top"
-            android:paddingBottom="@dimen/measurement_tool_button_padding_top"
+            android:paddingTop="@dimen/measurement_tool_button_margin"
+            android:paddingBottom="@dimen/measurement_tool_button_margin"
             android:paddingLeft="@dimen/measurement_tool_button_margin"
             android:paddingRight="@dimen/measurement_tool_button_margin">
 
@@ -189,6 +192,7 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
                 android:padding="@dimen/measurement_tool_undo_redo_padding_small"
+                android:contentDescription="@string/shared_string_undo"
                 tools:src="@drawable/ic_action_undo_dark"/>
 
             <ImageButton
@@ -199,6 +203,7 @@
                 android:layout_marginStart="@dimen/measurement_tool_button_padding"
                 android:background="?attr/selectableItemBackground"
                 android:padding="@dimen/measurement_tool_undo_redo_padding_small"
+                android:contentDescription="@string/shared_string_redo"
                 tools:src="@drawable/ic_action_redo_dark"/>
 
             <FrameLayout
@@ -206,22 +211,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-                <Button
+                <include
                     android:id="@+id/add_point_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/measurement_tool_button_width"
                     android:layout_gravity="end"
-                    android:background="?attr/btn_round"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:minHeight="@dimen/measurement_tool_button_height"
-                    android:paddingLeft="@dimen/measurement_tool_button_padding"
-                    android:paddingRight="@dimen/measurement_tool_button_padding"
-                    android:text="@string/shared_string_add"
-                    android:textColor="@color/color_white"
-                    android:textAllCaps="false"
-                    android:paddingEnd="@dimen/measurement_tool_button_padding"
-                    android:paddingStart="@dimen/measurement_tool_button_padding" />
+                    layout="@layout/bottom_sheet_dialog_button" />
             </FrameLayout>
 
         </LinearLayout>
@@ -232,26 +227,16 @@
             android:layout_height="@dimen/measurement_tool_controls_height"
             android:visibility="gone">
 
-            <Button
+            <include
                 android:id="@+id/apply_move_point_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/measurement_tool_button_height"
+                android:layout_width="@dimen/measurement_tool_button_width"
+                android:layout_marginEnd="@dimen/measurement_tool_button_margin"
+                android:layout_marginRight="@dimen/measurement_tool_button_margin"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginBottom="@dimen/measurement_tool_button_margin"
-                android:layout_marginEnd="@dimen/measurement_tool_button_margin"
-                android:layout_marginRight="@dimen/measurement_tool_button_margin"
-                android:layout_marginTop="@dimen/measurement_tool_button_margin"
-                android:background="?attr/btn_round"
-                android:minHeight="@dimen/measurement_tool_button_height"
-                android:paddingLeft="@dimen/measurement_tool_button_padding"
-                android:paddingRight="@dimen/measurement_tool_button_padding"
-                android:text="@string/shared_string_apply"
-                android:textColor="@color/color_white"
-                android:textAllCaps="false"
-                android:paddingEnd="@dimen/measurement_tool_button_padding"
-                android:paddingStart="@dimen/measurement_tool_button_padding" />
+                layout="@layout/bottom_sheet_dialog_button" />
 
             <net.osmand.plus.widgets.TextViewEx
                 android:id="@+id/cancel_move_point_button"
@@ -269,7 +254,7 @@
         <LinearLayout
             android:id="@+id/add_point_before_after_controls"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="@dimen/measurement_tool_controls_height"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:visibility="gone">
@@ -291,41 +276,24 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
 
-            <Button
+            <include
                 android:id="@+id/apply_point_before_after_point_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/measurement_tool_button_margin"
+                android:layout_height="@dimen/measurement_tool_button_height"
+                android:layout_gravity="center_vertical"
+                android:layout_width="@dimen/measurement_tool_button_width"
                 android:layout_marginEnd="@dimen/measurement_tool_button_margin"
                 android:layout_marginRight="@dimen/measurement_tool_button_margin"
-                android:layout_marginTop="@dimen/measurement_tool_button_margin"
-                android:background="?attr/btn_round_border"
-                android:minHeight="@dimen/measurement_tool_button_height"
-                android:paddingLeft="@dimen/measurement_tool_button_padding"
-                android:paddingRight="@dimen/measurement_tool_button_padding"
-                android:text="@string/shared_string_apply"
-                android:textColor="@color/color_white"
-                android:textAllCaps="false"
-                android:paddingEnd="@dimen/measurement_tool_button_padding"
-                android:paddingStart="@dimen/measurement_tool_button_padding" />
+                layout="@layout/bottom_sheet_dialog_button" />
 
-            <Button
+            <include
                 android:id="@+id/add_point_before_after_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/measurement_tool_button_margin"
+                android:layout_height="@dimen/measurement_tool_button_height"
+                android:layout_gravity="center_vertical"
+                android:layout_width="@dimen/measurement_tool_button_width"
                 android:layout_marginEnd="@dimen/measurement_tool_button_margin"
                 android:layout_marginRight="@dimen/measurement_tool_button_margin"
-                android:layout_marginTop="@dimen/measurement_tool_button_margin"
-                android:background="?attr/btn_round"
-                android:minHeight="@dimen/measurement_tool_button_height"
-                android:paddingLeft="@dimen/measurement_tool_button_padding"
-                android:paddingRight="@dimen/measurement_tool_button_padding"
-                android:text="@string/shared_string_add"
-                android:textColor="@color/color_white"
-                android:textAllCaps="false"
-                android:paddingEnd="@dimen/measurement_tool_button_padding"
-                android:paddingStart="@dimen/measurement_tool_button_padding" />
+                layout="@layout/bottom_sheet_dialog_button" />
+
         </LinearLayout>
 
     </LinearLayout>
