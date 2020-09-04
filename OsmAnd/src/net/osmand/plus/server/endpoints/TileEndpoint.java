@@ -22,27 +22,30 @@ import java.util.concurrent.*;
 
 import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 
-public class TileEndpoint extends ApiEndpoint {
+public class TileEndpoint implements ApiEndpoint {
+	private static final Log LOG = PlatformUtil.getLog(TileEndpoint.class);
 	ExecutorService executor = Executors.newFixedThreadPool(3);
 	Map<RotatedTileBox, Bitmap> hashMap = new HashMap<>();
 	Map<RotatedTileBox, Bitmap> map = Collections.synchronizedMap(hashMap);
 	OsmandApplication application;
-	private static final Log LOG = PlatformUtil.getLog(TileEndpoint.class);
 
 	public TileEndpoint(OsmandApplication application) {
 		this.application = application;
-		this.uri = "/tile";
-		this.apiCall = new ApiEndpoint.ApiCall() {
-			@Override
-			public NanoHTTPD.Response call(NanoHTTPD.IHTTPSession session) {
-				try {
-					return tileApiCall(session);
-				} catch (Exception e) {
-					LOG.error("Exception", e);
-				}
-				return ApiRouter.ErrorResponses.response500;
-			}
-		};
+	}
+
+	@Override
+	public NanoHTTPD.Response process(NanoHTTPD.IHTTPSession session) {
+		try {
+			return tileApiCall(session);
+		} catch (Exception e) {
+			LOG.error("Exception", e);
+		}
+		return ApiRouter.ErrorResponses.response500;
+	}
+
+	@Override
+	public void setApplication(OsmandApplication application) {
+		this.application = application;
 	}
 
 	private synchronized NanoHTTPD.Response tileApiCall(NanoHTTPD.IHTTPSession session) {
@@ -95,9 +98,5 @@ public class TileEndpoint extends ApiEndpoint {
 			LOG.error("Interrupted exception", e);
 			return ApiRouter.ErrorResponses.response500;
 		}
-	}
-
-	public void setApplication(OsmandApplication application) {
-		this.application = application;
 	}
 }

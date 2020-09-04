@@ -8,6 +8,7 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_MAP_MARKERS_ID = DRAWER_ITEM_ID_SCHEME + "map_markers";
 	String DRAWER_MY_PLACES_ID = DRAWER_ITEM_ID_SCHEME + "my_places";
 	String DRAWER_SEARCH_ID = DRAWER_ITEM_ID_SCHEME + "search";
+	String DRAWER_WEBSERVER_ID = DRAWER_ITEM_ID_SCHEME + "server";
 	String DRAWER_DIRECTIONS_ID = DRAWER_ITEM_ID_SCHEME + "directions";
 	String DRAWER_CONFIGURE_MAP_ID = DRAWER_ITEM_ID_SCHEME + "configure_map";
 	String DRAWER_DOWNLOAD_MAPS_ID = DRAWER_ITEM_ID_SCHEME + "download_maps";

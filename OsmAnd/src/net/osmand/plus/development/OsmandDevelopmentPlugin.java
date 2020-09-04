@@ -13,6 +13,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.ServerActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -21,6 +22,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_WEBSERVER_ID;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
@@ -71,8 +73,20 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 							return true;
 						}
 					}).createItem());
-		}
 
+			helper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.web_server, mapActivity)
+					.setId(DRAWER_WEBSERVER_ID)
+					.setIcon(R.drawable.mm_shop_computer)
+					.setListener(new ContextMenuAdapter.ItemClickListener() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+							Intent intent = new Intent(mapActivity, ServerActivity.class);
+							intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+							mapActivity.startActivity(intent);
+							return true;
+						}
+					}).createItem());
+		}
 	}
 
 	@Override

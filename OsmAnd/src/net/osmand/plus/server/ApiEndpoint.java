@@ -1,18 +1,10 @@
 package net.osmand.plus.server;
 
-import java.util.concurrent.Callable;
-
 import fi.iki.elonen.NanoHTTPD;
+import net.osmand.plus.OsmandApplication;
 
-public class ApiEndpoint{
-	public String uri = "";
-	public ApiCall apiCall;
+public interface ApiEndpoint {
+	NanoHTTPD.Response process(NanoHTTPD.IHTTPSession session);
 
-	public NanoHTTPD.Response run(NanoHTTPD.IHTTPSession session){
-		return apiCall.call(session);
-	}
-
-	public interface ApiCall{
-		NanoHTTPD.Response call(NanoHTTPD.IHTTPSession session);
-	}
+	void setApplication(OsmandApplication application);
 }

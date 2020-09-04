@@ -5,87 +5,29 @@ import android.webkit.MimeTypeMap;
 import fi.iki.elonen.NanoHTTPD;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.server.endpoints.TileEndpoint;
-import net.osmand.util.Algorithms;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
 import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 
 public class ApiRouter {
-	private OsmandApplication application;
-	private final String FOLDER_NAME = "server";
-	private final Map<String, ApiEndpoint> endpoints = new HashMap<>();
+	private static final String FOLDER_NAME = "server";
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(ApiRouter.class);
-
-	public ApiRouter() {
-		initRoutes();
-	}
+	private final Map<String, ApiEndpoint> endpoints = new HashMap<>();
+	private OsmandApplication application;
 
 	public OsmandApplication getApplication() {
 		return application;
 	}
 
-	final TileEndpoint tileEndpoint = new TileEndpoint(application);
-
-	private void initRoutes() {
-		endpoints.put(tileEndpoint.uri, tileEndpoint);
-	}
-
 	public void setApplication(OsmandApplication application) {
 		this.application = application;
-		tileEndpoint.setApplication(application);
-	}
-
-	public NanoHTTPD.Response route(NanoHTTPD.IHTTPSession session) {
-		Log.d("SERVER", "URI: " + session.getUri());
-		String uri = session.getUri();
-		if (uri.equals("/")) {
-			return getStatic("/go.html");
+		for (String s : endpoints.keySet()) {
+			endpoints.get(s).setApplication(application);
 		}
-		if (uri.contains("/scripts/") ||
-				uri.contains("/images/") ||
-				uri.contains("/css/") ||
-				uri.contains("/fonts/") ||
-				uri.contains("/favicon.ico")
-		) {
-			return getStatic(uri);
-		}
-		if (isApiUrl(uri)) {
-			return routeApi(session);
-		} else {
-			return getStatic(session.getUri());
-		}
-	}
-
-	private NanoHTTPD.Response routeApi(NanoHTTPD.IHTTPSession session) {
-		String uri = session.getUri();
-		int pathEnd = uri.indexOf("/", 1);
-		if (pathEnd != -1) {
-			uri = uri.substring(0, pathEnd);
-		}
-		ApiEndpoint endpoint = endpoints.get(uri);
-		if (endpoint != null) {
-			return endpoint.apiCall.call(session);
-		}
-		return ErrorResponses.response404;
-	}
-
-	private boolean isApiUrl(String uri) {
-		for (String endpoint : endpoints.keySet()) {
-			int stringLength = endpoint.length();
-			if (uri.startsWith(endpoint) &&
-					(uri.length() == endpoint.length() || uri.charAt(stringLength) == '/')) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public NanoHTTPD.Response getStatic(String uri) {
@@ -108,6 +50,48 @@ public class ApiRouter {
 		}
 		return ErrorResponses.response500;
 	}
+
+	public NanoHTTPD.Response route(NanoHTTPD.IHTTPSession session) {
+		Log.d("SERVER", "URI: " + session.getUri());
+		String uri = session.getUri();
+		if (uri.equals("/")) {
+			return getStatic("/go.html");
+		}
+		if (isApiUrl(uri)) {
+			return routeApi(session);
+		}
+		return getStatic(uri);
+	}
+
+	public void register(String path, ApiEndpoint endpoint) {
+		endpoint.setApplication(application);
+		endpoints.put(path, endpoint);
+	}
+
+	private NanoHTTPD.Response routeApi(NanoHTTPD.IHTTPSession session) {
+		String uri = session.getUri();
+		int pathEnd = uri.indexOf("/", 1);
+		if (pathEnd != -1) {
+			uri = uri.substring(0, pathEnd);
+		}
+		ApiEndpoint endpoint = endpoints.get(uri);
+		if (endpoint != null) {
+			return endpoint.process(session);
+		}
+		return ErrorResponses.response404;
+	}
+
+	private boolean isApiUrl(String uri) {
+		for (String endpoint : endpoints.keySet()) {
+			int stringLength = endpoint.length();
+			if (uri.startsWith(endpoint) &&
+					(uri.length() == endpoint.length() || uri.charAt(stringLength) == '/')) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	private String parseMimeType(String url) {
 		String type = "text/plain";
