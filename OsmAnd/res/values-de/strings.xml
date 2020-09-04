@@ -3842,8 +3842,8 @@
     <string name="access_hint_enter_address">Adresse eingeben</string>
     <string name="street_level_imagery">Bilder auf Straßenebene</string>
     <string name="plan_route_exit_dialog_descr">Sind Sie sicher, die Routenplanung ohne speichern beenden zu wollen\? Sie werden alle Änderungen verlieren.</string>
-    <string name="plan_route_change_route_type_before"/>
-    <string name="plan_route_change_route_type_after"/>
+    <string name="plan_route_change_route_type_before">Routentyp davor ändern</string>
+    <string name="plan_route_change_route_type_after">Routentyp danach ändern</string>
     <string name="plan_route_trim_before">Davor trimmen</string>
     <string name="plan_route_trim_after">Danach trimmen</string>
     <string name="in_case_of_reverse_direction">Falls in Gegenrichtung</string>
@@ -3871,4 +3871,9 @@
     <string name="all_previous_segments_will_be_recalc">Alle vorherigen Segmente werden unter Verwendung des ausgewählten Profils neu berechnet.</string>
     <string name="open_saved_track">Gespeicherten Track öffnen</string>
     <string name="shared_string_is_saved">wird gespeichert</string>
+    <string name="save_track_to_gpx">Während der Navigation automatisch Track aufzeichnen</string>
+    <string name="shared_string_gpx_route">Track Route</string>
+    <string name="import_track_descr">Track Datei zum Folgen auswählen, oder importieren.</string>
+    <string name="disable_recording_once_app_killed_descrp">Die GPX-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
+    <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung festlegen (via Schaltfläche \'GPX\' auf dem Kartenbildschirm).</string>
 </resources>
