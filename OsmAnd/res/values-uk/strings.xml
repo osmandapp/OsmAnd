@@ -3878,4 +3878,8 @@
     <string name="open_saved_track">Відкрити збережений трек</string>
     <string name="shared_string_is_saved">збережено</string>
     <string name="one_point_error">Додайте принаймні дві точки.</string>
+    <string name="disable_recording_once_app_killed_descrp">Запис треку буде зупинено після припинення роботи застосунку через меню з переліком нещодавно запущених застосунків. (Індикатор, який інформує про роботу OsmAnd у фоні зникне з панелі сповіщень Android)</string>
+    <string name="simplified_track">Спрощений трек</string>
+    <string name="simplified_track_description">Буде збережено лише лінію маршруту, а проміжні точки буде видалено.</string>
+    <string name="shared_string_file_name">Назва файлу</string>
 </resources>

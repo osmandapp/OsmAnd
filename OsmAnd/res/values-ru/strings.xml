@@ -3254,7 +3254,7 @@
     <string name="move_maps_to_new_destination">Переместить в новое место назначения</string>
     <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от пользователя и других приложений.</string>
     <string name="change_data_storage_folder">Изменение папки хранилища</string>
-    <string name="avoid_in_routing_descr_">Избегать определённые маршруты и типы дорог</string>
+    <string name="avoid_in_routing_descr_">Избегать определённых маршрутов и типов дорог</string>
     <string name="shared_string_memory_used_tb_desc">Использовано %1$s ТБ</string>
     <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
@@ -3870,7 +3870,7 @@
     <string name="simplified_track_description">Будет сохранена только линия маршрута, путевые точки будут удалены.</string>
     <string name="shared_string_file_name">Имя файла</string>
     <string name="number_of_gpx_files_selected_pattern">Выбрано файлов треков: %s</string>
-    <string name="save_global_track_interval_descr">Укажите интервал общей записи трека (включается через виджет Запись GPX на карте).</string>
+    <string name="save_global_track_interval_descr">Укажите интервал общей записи трека (включается через виджет «Запись GPX» на карте).</string>
     <string name="gpx_monitoring_stop">Остановить запись</string>
     <string name="gpx_monitoring_start">Возобновить запись поездки</string>
     <string name="system_default_theme">По умолчанию системы</string>
@@ -3883,4 +3883,5 @@
     <string name="open_saved_track">Открыть сохранённый трек</string>
     <string name="disable_recording_once_app_killed_descrp">Остановка записи GPX при принудительном закрытии (через последние приложения). (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
     <string name="shared_string_is_saved">сохраняется</string>
+    <string name="one_point_error">Добавьте как минимум два пункта.</string>
 </resources>
