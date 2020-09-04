@@ -1790,7 +1790,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> ARRIVAL_DISTANCE_FACTOR =
 			new FloatPreference("arrival_distance_factor", 1f).makeProfile();
 
-	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED =
+	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED_KMH =
 			new FloatPreference("speed_limit_exceed", 5f).makeProfile();
 
 	public final CommonPreference<Float> DEFAULT_SPEED = new FloatPreference("default_speed", 10f).makeProfile().cache();
@@ -1873,7 +1873,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> APP_MODE_ORDER = new IntPreference("app_mode_order", 0).makeProfile().cache();
 
-	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS =
+	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS_KMH =
 			new FloatPreference("speed_for_map_to_direction_of_movement", 0f).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
