@@ -1,6 +1,7 @@
 package net.osmand.plus.server.endpoints;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import fi.iki.elonen.NanoHTTPD;
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
@@ -9,7 +10,6 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.server.ApiEndpoint;
 import net.osmand.plus.server.OsmAndHttpServer;
-import org.apache.commons.logging.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -23,6 +23,7 @@ import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 public class TileEndpoint implements ApiEndpoint {
 	private static final int RENDER_WAIT_THRESHOLD = 5000;
 	private static final Object lock = new Object();
+	private static final int TILE_SIZE_PX = 512;
 	Map<RotatedTileBox, Bitmap> hashMap = new HashMap<>();
 	Map<RotatedTileBox, Bitmap> map = Collections.synchronizedMap(hashMap);
 	OsmandApplication application;
@@ -46,6 +47,7 @@ public class TileEndpoint implements ApiEndpoint {
 			if (bitmap == null) {
 				return OsmAndHttpServer.ErrorResponses.response500;
 			}
+			//stream also needs to be synchronized
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 			byte[] byteArray = stream.toByteArray();
@@ -67,7 +69,7 @@ public class TileEndpoint implements ApiEndpoint {
 		final RotatedTileBox rotatedTileBox = new RotatedTileBox.RotatedTileBoxBuilder()
 				.setLocation(lat, lon)
 				.setZoom(zoom)
-				.setPixelDimensions(512, 512, 0.5f, 0.5f).build();
+				.setPixelDimensions(TILE_SIZE_PX, TILE_SIZE_PX, 0.5f, 0.5f).build();
 		final MapRenderRepositories renderer = application.getResourceManager().getRenderer();
 		application.getResourceManager().updateRendererMap(rotatedTileBox, new AsyncLoadingThread.OnMapLoadedListener() {
 			@Override
