@@ -383,7 +383,7 @@ public class MapActivityActions implements DialogProvider {
 				.setOrder(SEARCH_NEAR_ITEM_ORDER)
 				.createItem());
 
-		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
+		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj, configureMenu);
 
 		ItemClickListener listener = new ItemClickListener() {
 			@Override

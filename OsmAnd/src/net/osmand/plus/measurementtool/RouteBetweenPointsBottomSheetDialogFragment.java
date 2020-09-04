@@ -1,31 +1,24 @@
 package net.osmand.plus.measurementtool;
 
-import android.app.Dialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 import org.apache.commons.logging.Log;
@@ -37,7 +30,7 @@ import static net.osmand.plus.UiUtilities.CustomRadioButtonType.LEFT;
 import static net.osmand.plus.UiUtilities.CustomRadioButtonType.RIGHT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
 
-public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class RouteBetweenPointsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	private static final Log LOG = PlatformUtil.getLog(RouteBetweenPointsBottomSheetDialogFragment.class);
 	public static final String TAG = RouteBetweenPointsBottomSheetDialogFragment.class.getSimpleName();
@@ -47,7 +40,6 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	public static final String ROUTE_APP_MODE_KEY = "route_app_mode";
 
 	private boolean nightMode;
-	private boolean portrait;
 	private TextView btnDescription;
 	private RouteBetweenPointsDialogType dialogType = RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION;
 	private RouteBetweenPointsDialogMode defaultDialogMode = RouteBetweenPointsDialogMode.SINGLE;
@@ -64,95 +56,6 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	public enum RouteBetweenPointsDialogMode {
 		SINGLE,
 		ALL,
-	}
-
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		Bundle args = getArguments();
-		if (args != null) {
-			appMode = ApplicationMode.valueOfStringKey(args.getString(ROUTE_APP_MODE_KEY), null);
-			dialogType = (RouteBetweenPointsDialogType) args.get(DIALOG_TYPE_KEY);
-			defaultDialogMode = (RouteBetweenPointsDialogMode) args.get(DEFAULT_DIALOG_MODE_KEY);
-		}
-		if (savedInstanceState != null) {
-			dialogType = (RouteBetweenPointsDialogType) savedInstanceState.get(DIALOG_TYPE_KEY);
-			defaultDialogMode = (RouteBetweenPointsDialogMode) savedInstanceState.get(DEFAULT_DIALOG_MODE_KEY);
-		}
-		OsmandApplication app = requiredMyApplication();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		FragmentActivity activity = requireActivity();
-		portrait = AndroidUiHelper.isOrientationPortrait(activity);
-		final View mainView = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.fragment_route_between_points_bottom_sheet_dialog,
-						container, false);
-		AndroidUtils.setBackground(activity, mainView, nightMode,
-				portrait ? R.drawable.bg_bottom_menu_light : R.drawable.bg_bottom_sheet_topsides_landscape_light,
-				portrait ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_sheet_topsides_landscape_dark);
-
-		View cancelButton = mainView.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(nightMode, cancelButton, UiUtilities.DialogButtonType.SECONDARY,
-				R.string.shared_string_close);
-		mainView.findViewById(R.id.dismiss_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
-
-		customRadioButton = mainView.findViewById(R.id.custom_radio_buttons);
-		TextView singleModeButton = mainView.findViewById(R.id.left_button);
-		singleModeButton.setText(getButtonText(RouteBetweenPointsDialogMode.SINGLE));
-		TextView allModeButton = mainView.findViewById(R.id.right_button);
-		allModeButton.setText(getButtonText(RouteBetweenPointsDialogMode.ALL));
-		btnDescription = mainView.findViewById(R.id.button_description);
-
-		LinearLayout navigationType = mainView.findViewById(R.id.navigation_types_container);
-		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
-		modes.remove(ApplicationMode.DEFAULT);
-
-		View.OnClickListener onClickListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				ApplicationMode mode = DEFAULT_APP_MODE;
-				if ((int) view.getTag() != STRAIGHT_LINE_TAG) {
-					mode = modes.get((int) view.getTag());
-				}
-				Fragment fragment = getTargetFragment();
-				if (fragment instanceof RouteBetweenPointsFragmentListener) {
-					((RouteBetweenPointsFragmentListener) fragment).onChangeApplicationMode(mode, dialogType, defaultDialogMode);
-				}
-				dismiss();
-			}
-		};
-
-		Drawable icon = app.getUIUtilities().getIcon(R.drawable.ic_action_split_interval, nightMode);
-		addProfileView(navigationType, onClickListener, STRAIGHT_LINE_TAG, icon,
-				app.getText(R.string.routing_profile_straightline), appMode == DEFAULT_APP_MODE);
-		addDelimiterView(navigationType);
-
-		for (int i = 0; i < modes.size(); i++) {
-			ApplicationMode mode = modes.get(i);
-			if (!"public_transport".equals(mode.getRoutingProfile())) {
-				icon = app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
-				addProfileView(navigationType, onClickListener, i, icon, mode.toHumanString(), mode.equals(appMode));
-			}
-		}
-
-		singleModeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				setDefaultDialogMode(RouteBetweenPointsDialogMode.SINGLE);
-			}
-		});
-		allModeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				setDefaultDialogMode(RouteBetweenPointsDialogMode.ALL);
-			}
-		});
-		updateModeButtons();
-		return mainView;
 	}
 
 	private String getButtonText(RouteBetweenPointsDialogMode dialogMode) {
@@ -251,17 +154,80 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
-		if (!portrait) {
-			Dialog dialog = getDialog();
-			if (dialog != null && dialog.getWindow() != null) {
-				Window window = dialog.getWindow();
-				WindowManager.LayoutParams params = window.getAttributes();
-				params.width = dialog.getContext().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
-				window.setAttributes(params);
+	public void createMenuItems(Bundle savedInstanceState) {
+		Bundle args = getArguments();
+		if (args != null) {
+			appMode = ApplicationMode.valueOfStringKey(args.getString(ROUTE_APP_MODE_KEY), null);
+			dialogType = (RouteBetweenPointsDialogType) args.get(DIALOG_TYPE_KEY);
+			defaultDialogMode = (RouteBetweenPointsDialogMode) args.get(DEFAULT_DIALOG_MODE_KEY);
+		}
+		if (savedInstanceState != null) {
+			dialogType = (RouteBetweenPointsDialogType) savedInstanceState.get(DIALOG_TYPE_KEY);
+			defaultDialogMode = (RouteBetweenPointsDialogMode) savedInstanceState.get(DEFAULT_DIALOG_MODE_KEY);
+		}
+		OsmandApplication app = requiredMyApplication();
+		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		final View mainView = UiUtilities.getInflater(getContext(), nightMode)
+				.inflate(R.layout.fragment_route_between_points_bottom_sheet_dialog,
+						null, false);
+		customRadioButton = mainView.findViewById(R.id.custom_radio_buttons);
+		TextView singleModeButton = mainView.findViewById(R.id.left_button);
+		singleModeButton.setText(getButtonText(RouteBetweenPointsDialogMode.SINGLE));
+		TextView allModeButton = mainView.findViewById(R.id.right_button);
+		allModeButton.setText(getButtonText(RouteBetweenPointsDialogMode.ALL));
+		btnDescription = mainView.findViewById(R.id.button_description);
+
+		LinearLayout navigationType = mainView.findViewById(R.id.navigation_types_container);
+		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
+		modes.remove(ApplicationMode.DEFAULT);
+
+		View.OnClickListener onClickListener = new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				ApplicationMode mode = DEFAULT_APP_MODE;
+				if ((int) view.getTag() != STRAIGHT_LINE_TAG) {
+					mode = modes.get((int) view.getTag());
+				}
+				Fragment fragment = getTargetFragment();
+				if (fragment instanceof RouteBetweenPointsFragmentListener) {
+					((RouteBetweenPointsFragmentListener) fragment).onChangeApplicationMode(mode, dialogType, defaultDialogMode);
+				}
+				dismiss();
+			}
+		};
+
+		Drawable icon = app.getUIUtilities().getIcon(R.drawable.ic_action_split_interval, nightMode);
+		addProfileView(navigationType, onClickListener, STRAIGHT_LINE_TAG, icon,
+				app.getText(R.string.routing_profile_straightline), appMode == DEFAULT_APP_MODE);
+		addDelimiterView(navigationType);
+
+		for (int i = 0; i < modes.size(); i++) {
+			ApplicationMode mode = modes.get(i);
+			if (!"public_transport".equals(mode.getRoutingProfile())) {
+				icon = app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
+				addProfileView(navigationType, onClickListener, i, icon, mode.toHumanString(), mode.equals(appMode));
 			}
 		}
+
+		singleModeButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setDefaultDialogMode(RouteBetweenPointsDialogMode.SINGLE);
+			}
+		});
+		allModeButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setDefaultDialogMode(RouteBetweenPointsDialogMode.ALL);
+			}
+		});
+		updateModeButtons();
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
+	}
+
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_close;
 	}
 
 	@Override

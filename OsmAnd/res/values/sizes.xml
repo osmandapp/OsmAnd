@@ -256,7 +256,7 @@
 	<dimen name="measurement_tool_text_margin">8dp</dimen>
 	<dimen name="measurement_tool_points_list_container_height">220dp</dimen>
 	<dimen name="measurement_tool_up_down_row_height">60dp</dimen>
-	<dimen name="measurement_tool_controls_height">56dp</dimen>
+	<dimen name="measurement_tool_controls_height">52dp</dimen>
 	<dimen name="measurement_tool_text_button_padding_small">8dp</dimen>
 	<dimen name="measurement_tool_text_button_padding">16dp</dimen>
 	<dimen name="measurement_tool_undo_redo_padding_small">6dp</dimen>
@@ -268,6 +268,7 @@
 	<dimen name="measurement_tool_button_padding">8dp</dimen>
 	<dimen name="measurement_tool_button_padding_top">10dp</dimen>
 	<dimen name="measurement_tool_button_height">36dp</dimen>
+	<dimen name="measurement_tool_button_width">98dp</dimen>
 	<dimen name="measurement_tool_options_divider_margin_start">72dp</dimen>
 	<dimen name="bottom_sheet_title_height">52dp</dimen>
 	<dimen name="bottom_sheet_descr_height">44dp</dimen>
@@ -352,6 +353,8 @@
 	<dimen name="toolbar_height_expanded">96dp</dimen>
 	<dimen name="toolbar_inset_start_with_navigation">72dp</dimen>
 	<dimen name="toolbar_inset_start">54dp</dimen>
+	<dimen name="toolbar_title_padding_top">7dp</dimen>
+	<dimen name="toolbar_title_padding_bottom">6dp</dimen>
 
 	<dimen name="wikivoyage_search_list_header_height">36dp</dimen>
 	<dimen name="wikivoyage_article_card_icon_size">80dp</dimen>

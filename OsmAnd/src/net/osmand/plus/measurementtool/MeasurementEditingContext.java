@@ -731,8 +731,15 @@ public class MeasurementEditingContext {
 			Pair<WptPt, WptPt> pair = new Pair<>(before.points.get(i), before.points.get(i + 1));
 			RoadSegmentData data = this.roadSegmentData.get(pair);
 			if (data != null) {
-				LocationsHolder locationsHolder = new LocationsHolder(data.points);
-				locations.addAll(locationsHolder.getLocationsList());
+				for (WptPt pt : data.points) {
+					Location l = new Location("");
+					l.setLatitude(pt.getLatitude());
+					l.setLongitude(pt.getLongitude());
+					if (!Double.isNaN(pt.ele)) {
+						l.setAltitude(pt.ele);
+					}
+					locations.add(l);
+				}
 				pair.second.setTrkPtIndex(locations.size() - 1);
 				if (i < size - 2) {
 					locations.remove(locations.size() - 1);
