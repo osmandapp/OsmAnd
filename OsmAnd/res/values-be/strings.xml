@@ -743,8 +743,8 @@
     <string name="reading_cached_tiles">Чытанне захаваных фрагментаў…</string>
     <string name="version_index_is_big_for_memory">Недастаткова памяці для лакальнай мапы \'\'{0}\'\'</string>
     <string name="version_index_is_not_supported">Версія індэкса \'\'{0}\'\' не падтрымліваецца</string>
-    <string name="osmand_routing_experimental">Аўтаномная навігацыя OsmAnd з’яўляецца эксперыментальнай і не працуе на доўгіх адлегласцях каля 20 км. 
-\n 
+    <string name="osmand_routing_experimental">Аўтаномная навігацыя OsmAnd ёсць эксперыментальнай і не працуе на доўгіх адлегласцях каля 20 км.
+\n
 \nНавігацыя часова пераключаецца на сэрвіс CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Не атрымалася знайсці вызначаны каталог.</string>
     <string name="application_dir">Каталог захоўвання даных</string>
@@ -3737,4 +3737,207 @@
     <string name="previous_segment">Папярэдні сегмент</string>
     <string name="all_previous_segments">Усе папярэднія сегменты</string>
     <string name="only_selected_segment_recalc">Толькі абраны сегмент пералічыцца з выкарыстаннем абранага профілю.</string>
+    <string name="osm_edits_view_descr">Прагляд вашых правак альбо хібаў OSM, яшчэ не адпраўленых у %1$s. Запампаваныя пункты больш не будуць паказвацца.</string>
+    <string name="live_monitoring_adress_descr">Пазначце сеціўны адрас з наступнымі параметрамі: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Рэкамендацыя: наладка ў 5 метраў можа вас задаволіць, калі вам не патрэбна фіксаваць больш кароткія перамяшчэнні, і вы не хочаце відавочна збіраць даныя ў стане спакою.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Пабочныя эфекты: перыяды ў стане спакою не запісваюцца наогул альбо па адным пункце кожны. Невялікія (у рэальным свеце) перамяшчэнні (напрыклад, убок, што адзначаюць магчымы паварот у вашай паездцы) могуць быць адфільтраваныя. Файл змяшчае менш інфармацыі для наступнай апрацоўкі і мае горшую статыстыку, адфільтроўваючы відавочна лішнія пункты падчас запісу. Пры гэтым патэнцыйна захоўваюцца артэфакты, выкліканыя дрэнным прыёмам альбо эфектамі модуля GPS.</string>
+    <string name="monitoring_min_distance_descr">Гэты фільтр дазваляе пазбегнуць запісу паўторных пунктаў, паміж якімі магло быць занадта мала руху, і робіць больш прыемным выгляд слядоў.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Нататка: калі GPS быў адключаны непасрэдна перад запісам, дакладнасць вымярэння першага пункта можа быць нізкай, таму мы разглядаем магчымасць дадання секунднай затрымкі перад запісам першага пункта (альбо запісу лепшага з 3 паслядоўных пунктаў), але гэта яшчэ не рэалізавана.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Рэкамендацыя: цяжка прадбачыць, што будзе запісана, а што не. Магчыма, лепш выключыць гэты фільтр.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Пабочны эфект: у выніку фільтрацыі па дакладнасці пункты могуць цалкам адсутнічаць, напрыклад, пад мастамі, пад дрэвамі, паміж высокімі будынкамі альбо пры пэўным надвор\'і.</string>
+    <string name="monitoring_min_accuracy_descr">У гэтым выпадку будуць запісвацца толькі пункты, вымераныя з мінімальнай дакладнасцю (у метрах / футах паводле налад прылады). Дакладнасць - гэта набліжэнне вымярэнняў да сапраўднага становішча, яна не мае дачынення да дакладнасці, што ўяўляе сабой мноства паўторных вымярэнняў.</string>
+    <string name="monitoring_min_speed_descr_remark">Нататка: праверка хуткасці&gt; 0: большасць модуляў GPS паведамляюць значэнне хуткасці толькі ў тым выпадку, калі алгарытм вызначае, што вы рухаецеся, і нічога не паведамляюць, калі вы не рухаецеся. Такім чынам, выкарыстанне ў гэтым фільтры параметра \"&gt; 0\" у пэўным сэнсе ёсць выяўленне руху модуля GPS. Але нават калі падчас запісу нічога не фільтруецца, то ўсё адно гэтая функцыя выкарыстоўваецца ў аналізе GPX для вызначэння скарэктаванай адлегласці. Гэта азначае, што значэнне, якое адлюстроўваецца ў гэтым полі - гэта адлегласць, запісаная падчас руху.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Рэкамендацыя: Паспрабуйце спачатку выкарыстоўваць выяўленне руху праз фільтр мінімальнага зруху (B), гэта можа даць лепшыя вынікі, і вы страціце менш даных. Калі на слядах застаецца шум на нізкіх хуткасцях, паспрабуйце ненулявыя значэнні. Звярніце ўвагу, што некаторыя вымярэнні могуць не ўжываць ніякіх значэнняў хуткасці (некаторыя сеціўныя метады), і ў гэтым выпадку вы нічога не зафіксуеце.</string>
+    <string name="search_offline_geo_error">Немагчыма разабраць геаспасылку \"%s\".</string>
+    <string name="index_name_antarctica">Антарктыда</string>
+    <string name="sort_by_category">Сартаваць па катэгорыі</string>
+    <string name="shared_string_resume">Працягнуць</string>
+    <string name="select_map_icon_descr">Значок у стане бяздзейнасці.</string>
+    <string name="accessibility_announce">Абвестка</string>
+    <string name="multimedia_notes_view_descr">Вашыя нататкі OSM знаходзяцца ў %1$s.</string>
+    <string name="tracks_view_descr">Вашыя запісаныя сляды знаходзяцца ў %1$s альбо каталозе OsmAnd.</string>
+    <string name="osm_authorization_success">Паспяховая аўтарызацыя</string>
+    <string name="multimedia_photo_play_sound">Гук засаўкі камеры</string>
+    <string name="multimedia_use_system_camera">Выкарыстоўваць сістэмную праграму</string>
+    <string name="multimedia_rec_split_title">Падзел запісу</string>
+    <string name="reset_plugin_to_default">Скід налад убудовы да прадвызначаных</string>
+    <string name="monitoring_min_distance">Мінімальны зрух</string>
+    <string name="monitoring_min_accuracy">Мінімальная дакладнасць</string>
+    <string name="monitoring_min_speed">Мінімальная хуткасць</string>
+    <string name="monitoring_notification">Апавяшчэнне</string>
+    <string name="live_monitoring_adress">Сеціўны адрас</string>
+    <string name="live_monitoring_tracking_interval">Інтэрвал адсочвання</string>
+    <string name="live_monitoring_time_buffer">Буфер часу</string>
+    <string name="monitoring_min_speed_descr_side_effect">Пабочны эфект: на следзе будуць адсутнічаць усе ўчасткі, дзе не быў выкананы крытэрый мінімальнай хуткасці (напрыклад, калі вы вядзеце ровар на круты пагорак). Таксама не будзе інфармацыі пра перыяды адпачынку, напрыклад, перапынкі. Гэта ўплывае на любы аналіз альбо наступную апрацоўку, напрыклад, пры спробе вызначыць агульную працягласць паездкі, час руху, сярэднюю хуткасць.</string>
+    <string name="monitoring_min_speed_descr">Гэта адсечны фільтр з нізкай хуткасцю. Ён прызначаны для таго, каб не фіксаваць кропкі ніжэй пэўнай хуткасці. Гэта можа зрабіць запісаныя сляды больш плаўнымі пры праглядзе на мапе.</string>
+    <string name="not_support_file_type_with_ext">Абярыце падтрымліваемы файл з пашырэннем %1$s.</string>
+    <string name="file_does_not_contain_routing_rules">У \"%1$s\" няма правіл маршрутызацыі. Калі ласка, абярыце іншы файл.</string>
+    <string name="logcat_buffer_descr">Праверце і падзяліцеся падрабязнымі журналамі праграмы</string>
+    <string name="permission_is_required">Для выкарыстання гэтага параметра патрабуецца дазвол.</string>
+    <string name="export_profile_dialog_description">Вы можаце дадатковыя даныя, каб імпартаваць разам з профілям.</string>
+    <string name="import_profile_dialog_description">Імпартуемы профіль змяшчае дадатковыя даныя. Націсніце \"Імпарт\", каб імпартаваць толькі даныя профілю, альбо абярыце дадатковыя даныя.</string>
+    <string name="shared_string_include_data">Уключыць дадатковыя даныя</string>
+    <string name="shared_string_rendering_style">Стыль адмалёўкі</string>
+    <string name="shared_string_routing">Маршрутызацыя</string>
+    <string name="sunrise_at">Усход а %1$s</string>
+    <string name="sunset_at">Заход а %1$s</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="profile_prefs_reset_successful">Усе налады профілю скінутыя да прадвызначаных.</string>
+    <string name="plugin_prefs_reset_successful">Усе налады ўбудовы скінутыя да прадвызначаных.</string>
+    <string name="rendering_attr_streetLightingNight_name">Паказваць толькі ўначы</string>
+    <string name="add_custom_category">Дадаць адвольную катэгорыю</string>
+    <string name="shared_string_available">Даступна</string>
+    <string name="add_new_custom_category_button_promo">Вы можаце дадаць новую адвольную катэгорыю, абраўшы адну альбо некалькі катэгорый.</string>
+    <string name="create_custom_categories_list_promo">Змяняйце парадак сартавання спіса, хавайце катэгорыі. Вы можаце імпартаваць і экспартаваць усе змены з профілямі.</string>
+    <string name="rearrange_categories">Перапарадкаваць катэгорыі</string>
+    <string name="accessibility_mode_disabled">Рэжым адмысловых магчымасцяў адключаны ў наладах сістэмы.</string>
+    <string name="use_system_screen_timeout_promo">Прадвызначана адключана: пакуль OsmAnd працуе на пярэднім плане, экран не выключаецца.
+\n
+\nКалі ўключана, OsmAnd будзе выкарыстоўваць сістэмныя налады выключэння экрана.</string>
+    <string name="use_system_screen_timeout">Выкарыстоўваць сістэмны час выключэння экрана</string>
+    <string name="reset_to_default_category_button_promo">Калі налады скінуць да прадвызначаных, то парадак сартавання таксама скінецца.</string>
+    <string name="copy_coordinates">Скапіяваць каардынаты</string>
+    <string name="release_3_6">• Профілі: ад гэтай пары вы можаце змяніць парадак, прызначыць мапе значок, змяніць усе налады для базавых профіляў і вярнуць іх да прадвызначаных
+\n
+\n• Дададзены нумар з’езду ў навігацыі
+\n
+\n• Пераробленыя налады ўбудоў
+\n
+\n• Перароблены экран налад для хуткага доступу да ўсіх профіляў
+\n
+\n• Дададзена магчымасць капіявання налад з іншага профілю
+\n
+\n• Дададзена магчымасць змяняць парадак альбо хаваць катэгорыі POІ у пошуку
+\n
+\n• На мапе правільна выраўнаваны значкі POI
+\n
+\n• Для наладкі мапы дададзеныя даныя ўзыходу/заходу сонца
+\n
+\n• На мапе дададзеныя значкі «Дом/праца»
+\n
+\n• У наладах дададзеная падтрымка шматрадковага апісання
+\n
+\n• Дададзена карэктная транслітэрацыя на мапе Японіі
+\n
+\n• Дададзена мапа Антарктыды
+\n
+\n</string>
+    <string name="clear_recorded_data">Выдаліць запісаныя даныя</string>
+    <string name="routing_profile_direct_to">Наўпрост-да-пункта</string>
+    <string name="route_recalculation_dist_descr">Маршрут будзе пералічаны, калі адлегласць да яго большая за вызначаны параметр</string>
+    <string name="route_recalculation_dist_title">Мінімальная адлегласць да пераліку маршруту</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_menu">Меню</string>
+    <string name="plugin_disabled_descr">Гатая ўбудова ёсць асобнай праграмай. Калі вы больш не хочаце ёй карыстацца, то яе патрэбна яе выдаліць асобна.
+\n
+\nУбодова застанецца пасля выдалення OsmAnd.</string>
+    <string name="plugin_disabled">Убудова адключаная</string>
+    <string name="open_settings">Адкрыць налады</string>
+    <string name="no_recalculation_setting">Не пералічваць</string>
+    <string name="please_provide_profile_name_message">Пазначце назву профілю</string>
+    <string name="select_data_to_import">Абярыце даныя для імпарту.</string>
+    <string name="import_duplicates_title">Некаторыя элементы ўжо існуюць</string>
+    <string name="import_duplicates_description">У OsmAnd ужо ёсць элементы з тымі самымі назвамі, што і імпартаваныя.
+\n
+\nАбярыце дзеянне.</string>
+    <string name="keep_both_desc">Імпартаваныя элементы дададуцца з прэфіксам</string>
+    <string name="keep_both">Пакінуць абодва</string>
+    <string name="recalc_angle_dialog_descr">Да той пары, пакуль маршрут не будзе пералічаны, будзе паказвацца адрэзак паміж месцазнаходжаннем і разлічаным маршрутам</string>
+    <string name="import_rendering_file">Імпарт файла адмалёўкі</string>
+    <string name="shared_string_terrain">Рэльеф</string>
+    <string name="hillshade_description">Зацяненне рэльефу выкарыстоўвае цёмныя адценні для адлюстравання схілаў, пагоркаў і нізін.</string>
+    <string name="slope_description">Схіл выкарыстоўвае колеры для візуалізацыі крутасці мясцовасці.</string>
+    <string name="terrain_slider_description">Вызначэнне максімальнага і мінімальнага ўзроўняў маштабавання, пры якіх пласт будзе адлюстроўвацца.</string>
+    <string name="hillshade_download_description">Для адлюстравання зацянення рэльефу на мапе патрабуюцца дадатковыя мапы.</string>
+    <string name="slope_download_description">Для адлюстравання схілаў на мапе патрабуюцца дадатковыя мапы.</string>
+    <string name="slope_read_more">Падрабязней пра схілы можна прачытаць у %1$s.</string>
+    <string name="shared_string_transparency">Празрыстасць</string>
+    <string name="shared_string_zoom_levels">Узроўні маштабу</string>
+    <string name="shared_string_legend">Легенда</string>
+    <string name="terrain_empty_state_text">Уключэнне зацянення рэльефу альбо схілаў. Падрабязней пра гэтыя тыпы мапаў вы можаце прачытаць на нашым сайце.</string>
+    <string name="shared_string_hillshade">Зацяненне рэльефу</string>
+    <string name="import_complete_description">Усе даныя з %1$s імпартаваныя, вы можаце выкарыстоўваць кнопкі ніжэй, каб адкрыць адпаведны раздзел праграмы для кіравання імі.</string>
+    <string name="shared_string_import_complete">Імпарт завершаны</string>
+    <string name="items_added">Элементы дададзеныя</string>
+    <string name="checking_for_duplicate_description">OsmAnd правярае %1$s на дублікаты існых элементаў праграмы.
+\n
+\nГэта можа заняць пэўны час.</string>
+    <string name="shared_string_importing">Імпарт</string>
+    <string name="importing_from">Імпарт даных з %1$s</string>
+    <string name="profile_backup_failed">Не атрымалася стварыць рэзервовую копію профілю.</string>
+    <string name="saving_new_profile">Захаванне новага профілю</string>
+    <string name="restore_all_profile_settings">Вярнуць усе налады профілю\?</string>
+    <string name="restore_all_profile_settings_descr">Пасля стварэння ці імпарту гэтага профілю ўсе налады профілю вернуцца ў першапачатковы стан.</string>
+    <string name="clear_recorded_data_warning">Выдаліць запісаныя даныя\?</string>
+    <string name="select_distance_route_will_recalc">Абярыце адлегласць, пасля якой маршрут будзе пералічаны.</string>
+    <string name="recalculate_route_distance_promo">Маршрут будзе пералічаны, калі адлегласць ад маршруту да бягучай пазіцыі большы абранага значэння.</string>
+    <string name="quick_action_terrain_descr">Кнопка кіравання адлюстраваннем пласта рэльефу мясцовасці на мапе.</string>
+    <string name="ui_customization_description">Наладка колькасці элементаў у раздзелах \"Панэль\", \"Наладзіць мапу\" і кантэкстным меню.
+\n
+\nМожна адключыць невыкарыстоўваемыя ўбудовы, каб прыбраць іх элементы кіравання. %1$s.</string>
+    <string name="osm_live_payment_subscription_management">Пры пацвярджэнні пакупкі аплата будзе спаганяцца з рахунка, звязанага з вашым акаўнтам Google Plaу.
+\n
+\nПадпіска аўтаматычна працягваецца, калі вы не скасуеце яе да даты працягу. З вашага рахунка будзе адзін раз спаганяцца аплата за перыяд працягу (месяц/тры месяцы/год).
+\n
+\nВы можаце кіраваць падпіскамі і скасоўваць іх у наладах Google Play.</string>
+    <string name="release_3_7">• Новыя лакальныя мапы схілаў
+\n
+\n • Поўная наладка ўлюбёных пунктаў і пунктаў шляху GPX: адвольныя колеры, значкі, формы
+\n
+\n • Змена парадку элементаў у кантэкстным меню, наладах мапы і панэлі
+\n
+\n • Вікіпедыя як асобны пласт у наладах мапы, магчыма абраць толькі патрэбныя мовы
+\n
+\n • Можна стварыць адвольны фільтр POI/мапы
+\n
+\n • Дададзены параметры для аднаўлення налад профіляў карыстальніка
+\n
+\n • Поўныя GPX-маршруты ў навігацыі з падтрымкай палос руху і падрабязнымі інструкцыямі паваротаў
+\n
+\n • Выпраўлены памеры інтэрфейсу на планшэтах
+\n
+\n • Выпраўлены памылкі для моў, якія пішуцца справа ўлева
+\n
+\n</string>
+    <string name="unsupported_type_error">Непадтрымліваемы тып</string>
+    <string name="width_limit_description">Пазначце шырыню аўтамабіля, для шырокіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
+    <string name="height_limit_description">Пазначце вышыню аўтамабіля, для высокіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
+    <string name="weight_limit_description">Пазначце вагу аўтамабіля, для цяжкіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
+    <string name="lenght_limit_description">Пазначце даўжыню аўтамабіля, для доўгіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
+    <string name="gpx_parse_error">OsmAnd стварыў GPX не зусім правільна. Калі ласка, звяжыцеся са службай падтрымкі.</string>
+    <string name="shared_string_always">Заўсёды</string>
+    <string name="screen_control">Кіраванне экранам</string>
+    <string name="system_screen_timeout_descr">Экран будзе выключацца пасля вызначанага ў сістэмных наладах перыяду бяздзейнасці.</string>
+    <string name="system_screen_timeout">Выкарыстоўваць сістэмныя параметры</string>
+    <string name="turn_screen_on_descr">Параметры абуджэння экрана (пераканайцеся, што перад блакаваннем OsmAnd знаходзіцца на пярэднім плане):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Кожная інструкцыя па навігацыі ўключае экран.</string>
+    <string name="turn_screen_on_navigation_instructions">Інструкцыя па навігацыі</string>
+    <string name="turn_screen_on_power_button_disabled">Выключана. Неабходна ў раздзеле \"Час працы пасля абуджэння\" уключыць \"Не выключаць экран\".</string>
+    <string name="turn_screen_on_power_button_descr">Калі націснуць на кнопку сілкавання прылады, то на экране блакавання з’явіцца экран OsmAnd.</string>
+    <string name="turn_screen_on_power_button">Кнопка сілкавання</string>
+    <string name="turn_screen_on_proximity_sensor">Датчык набліжэння</string>
+    <string name="turn_screen_on_wake_time_descr">Час працы экрана пасля абуджэння. (\"%1$s\" прыбірае выключэнне.)</string>
+    <string name="keep_screen_on">Не выключаць экран</string>
+    <string name="keep_screen_off">Не ўключаць экран</string>
+    <string name="pseudo_mercator_projection">Псеўда-праекцыя Меркатара</string>
+    <string name="one_image_per_tile">Кожны фрагмент у асобным файле</string>
+    <string name="sqlite_db_file">Файл SQLiteDB</string>
+    <string name="online_map_name_helper_text">Пазначце назву крыніцы сеціўнай мапы.</string>
+    <string name="online_map_url_helper_text">Увядзіце альбо ўстаўце URL-адрас сеціўнай крыніцы.</string>
+    <string name="edit_online_source">Рэдагаваць сеціўную крыніцу</string>
+    <string name="expire_time">Тэрмін прыдатнасці</string>
+    <string name="mercator_projection">Праекцыя Меркатара</string>
+    <string name="storage_format">Фармат захоўвання</string>
+    <string name="map_source_zoom_levels">Вызначце максімальны і мінімальны ўзровень маштабавання для паказу ці загрузкі сеціўнай мапы.</string>
+    <string name="map_source_zoom_levels_descr">Параметры ўплываюць на выгляд экрана пры выкарыстанні ў якасці мапы альбо падкладкі.
+\n
+\n%1$s: мапа будзе абмяжоўвацца абранымі ўзроўнямі маштабавання.
+\n
+\n%2$s: узроўні маштабавання, пры якіх бачныя арыгінальныя фрагменты. Павелічэнне ці памяншэнне будзе адбывацца па-за межамі гэтых значэнняў.</string>
+    <string name="expire_time_descr">Кэшаваныя фрагменты нанова спампуюцца праз вызначаную колькасць хвілін. Пакіньце поле пустым, каб ніколі не абнаўляць фрагменты з гэтай крыніцы.
+\n
+\nАдзін дзень - 1440 хвілін.
+\nАдзін тыдзень - 10 080 хвілін.
+\nАдзін месяц - 43 829 хвілін.</string>
+    <string name="tiles_storage_descr">Абярыце спосаб захоўвання спампаваных фрагментаў.</string>
 </resources>
