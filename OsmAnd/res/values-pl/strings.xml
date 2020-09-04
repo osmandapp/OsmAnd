@@ -2317,7 +2317,7 @@
     <string name="nothing_found_descr">Zmień wyszukiwanie lub zwiększ jego promień.</string>
     <string name="private_access_routing_req">Cel podróży jest położony na obszarze z dostępem prywatnym. Umożliwić używanie prywatnych dróg dla tej trasy\?</string>
     <string name="search_favorites">Szukaj w Ulubionych</string>
-    <string name="mapillary">Zdjęcia z poziomu ulicy</string>
+    <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Widżet Mapillary</string>
     <string name="shared_string_add_photos">Dodaj zdjęcia</string>
     <string name="mapillary_action_descr">Udostępnij widok z poziomu ulicy przez Mapillary.</string>
@@ -3847,12 +3847,12 @@
     <string name="app_mode_wheelchair_forward">Wózek naprzód</string>
     <string name="show_gpx">Ślady</string>
     <string name="follow_track">Podążanie za śladem</string>
-    <string name="import_track_descr">Proszę wybrać plik śladu lub zaimportować go z urządzenia.</string>
+    <string name="import_track_descr">Wybierz plik śladu do obserwacji lub zaimportować go.</string>
     <string name="shared_string_save_as_gpx">Zapisz jako nowy plik śladu</string>
     <string name="add_segment_to_the_track">Dodaj do pliku śladu</string>
     <string name="shared_string_gpx_files">Ślady</string>
     <string name="layer_gpx_layer">Ślady</string>
-    <string name="monitoring_control_start">GPX</string>
+    <string name="monitoring_control_start">REC</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
     <string name="shared_string_gpx_route">Trasa szlaku</string>
     <string name="empty_state_my_tracks">Dodaj pliki śladów</string>
@@ -3874,4 +3874,21 @@
     <string name="plan_route_trim_after">Przytnij po</string>
     <string name="plan_route_change_route_type_before">Zmień typ trasy przed</string>
     <string name="plan_route_change_route_type_after">Zmień typ trasy po</string>
+    <string name="simplified_track">Uproszczona ścieżka</string>
+    <string name="simplified_track_description">Zapisana zostanie tylko linia trasy, punkty trasy zostaną usunięte.</string>
+    <string name="shared_string_file_name">Nazwa pliku</string>
+    <string name="number_of_gpx_files_selected_pattern">%s wybrane pliki ścieżki</string>
+    <string name="save_global_track_interval_descr">Określ interwał rejestrowania dla ogólnego rejestrowania śladu (włączany za pomocą widżetu Rejestrowanie podróży na mapie).</string>
+    <string name="gpx_monitoring_stop">Wstrzymaj nagrywanie podróży</string>
+    <string name="gpx_monitoring_start">Wznów nagrywanie podróży</string>
+    <string name="system_default_theme">Domyślny systemu</string>
+    <string name="all_next_segments">Wszystkie kolejne segmenty</string>
+    <string name="previous_segment">Poprzedni segment</string>
+    <string name="all_previous_segments">Wszystkie poprzednie segmenty</string>
+    <string name="only_selected_segment_recalc">Tylko wybrany segment zostanie ponownie obliczony przy użyciu wybranego profilu.</string>
+    <string name="all_next_segments_will_be_recalc">Wszystkie kolejne segmenty zostaną ponownie obliczone przy użyciu wybranego profilu.</string>
+    <string name="all_previous_segments_will_be_recalc">Wszystkie poprzednie segmenty zostaną ponownie obliczone przy użyciu wybranego profilu.</string>
+    <string name="open_saved_track">Otwórz zapisaną ścieżkę</string>
+    <string name="shared_string_is_saved">jest zapisywany</string>
+    <string name="one_point_error">Należy dodać co najmniej dwa punkty.</string>
 </resources>
