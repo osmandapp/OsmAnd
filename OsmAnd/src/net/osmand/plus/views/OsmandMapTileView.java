@@ -104,6 +104,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	protected static final int emptyTileDivisor = 16;
 
+
 	public interface OnTrackBallListener {
 		public boolean onTrackBallEvent(MotionEvent e);
 	}
@@ -516,8 +517,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void restoreMapRatio() {
 		RotatedTileBox box = currentViewport.copy();
-		float rx = (float) box.getCenterPixelX() / box.getPixWidth();
-		float ry = (float) box.getCenterPixelY() / box.getPixHeight();
+		float rx = (float)box.getCenterPixelX() / box.getPixWidth();
+		float ry = (float)box.getCenterPixelY() / box.getPixHeight();
 		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
 			ry -= 0.35;
 		}
