@@ -90,6 +90,10 @@ import java.util.StringTokenizer;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
+import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
 
 public class OsmandSettings {
 
@@ -3802,6 +3806,13 @@ public class OsmandSettings {
 			customRoutingProps.put(attrName, new StringPreference("prouting_" + attrName, defValue).makeProfile());
 		}
 		return customRoutingProps.get(attrName);
+	}
+
+	{
+		getCustomRoutingProperty(VEHICLE_HEIGHT, "0.0");
+		getCustomRoutingProperty(VEHICLE_WIDTH, "0.0");
+		getCustomRoutingProperty(VEHICLE_LENGTH, "0.0");
+		getCustomRoutingProperty(VEHICLE_WEIGHT, "0.0");
 	}
 
 	{
