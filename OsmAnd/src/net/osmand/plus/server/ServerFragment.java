@@ -1,33 +1,40 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.server;
 
 import android.net.TrafficStats;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.format.Formatter;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.server.OsmAndHttpServer;
+import net.osmand.plus.base.BaseOsmAndFragment;
 
 import java.io.IOException;
 
-public class ServerActivity extends AppCompatActivity {
+import static android.content.Context.WIFI_SERVICE;
+
+public class ServerFragment extends BaseOsmAndFragment {
 	private boolean initialized = false;
 	private OsmAndHttpServer server;
+	private View view;
 
 	@Override
-	protected void onCreate(@Nullable Bundle savedInstanceState) {
-		enableStrictMode();
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.server_activity);
-		findViewById(R.id.server_start_button).setOnClickListener(new View.OnClickListener() {
+		enableStrictMode();
+	}
+
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		view = inflater.inflate(R.layout.server_fragment, container, false);
+		view.findViewById(R.id.server_start_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				if (!initialized) {
@@ -36,15 +43,20 @@ public class ServerActivity extends AppCompatActivity {
 				}
 			}
 		});
-		findViewById(R.id.server_stop_button).setOnClickListener(new View.OnClickListener() {
+		view.findViewById(R.id.server_stop_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (initialized) {
-					updateTextView(getString(R.string.click_button_to_start_server));
-					deInitServer();
-				}
+				updateTextView(getString(R.string.click_button_to_start_server));
+				deInitServer();
 			}
 		});
+		return view;
+	}
+
+	@Override
+	public void onDestroy() {
+		deInitServer();
+		super.onDestroy();
 	}
 
 	public static void enableStrictMode() {
@@ -62,9 +74,8 @@ public class ServerActivity extends AppCompatActivity {
 						.build());
 	}
 
-
 	private void updateTextView(String text) {
-		((TextView) findViewById(R.id.server_status_textview)).setText(text);
+		((TextView) view.findViewById(R.id.server_status_textview)).setText(text);
 	}
 
 	private void initServer() {
@@ -73,11 +84,11 @@ public class ServerActivity extends AppCompatActivity {
 		OsmAndHttpServer.HOSTNAME = getDeviceAddress();
 		try {
 			server = new OsmAndHttpServer();
-			server.setApplication((OsmandApplication) this.getApplication());
+			server.setApplication((OsmandApplication) getMyApplication());
 			initialized = true;
 			updateTextView("Server started at: http://" + getDeviceAddress() + ":" + OsmAndHttpServer.PORT);
 		} catch (IOException e) {
-			Toast.makeText(this,
+			Toast.makeText(requireContext(),
 					e.getLocalizedMessage(),
 					Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
@@ -85,7 +96,7 @@ public class ServerActivity extends AppCompatActivity {
 	}
 
 	private String getDeviceAddress() {
-		WifiManager wm = (WifiManager) this.getApplicationContext().getSystemService(WIFI_SERVICE);
+		WifiManager wm = (WifiManager) requireContext().getSystemService(WIFI_SERVICE);
 		String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
 		return ip != null ? ip : "0.0.0.0";
 	}
@@ -96,12 +107,11 @@ public class ServerActivity extends AppCompatActivity {
 			server.stop();
 		}
 		initialized = false;
-		finish();
-	}
-
-	@Override
-	protected void onDestroy() {
-		deInitServer();
-		super.onDestroy();
+		if (getActivity() != null) {
+			try {
+				getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+			} catch (Exception e) {
+			}
+		}
 	}
 }

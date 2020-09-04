@@ -3,7 +3,8 @@
               android:layout_width="fill_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              android:padding="10px">
+              android:padding="32dp"
+              android:background="@color/color_black">
 
     <TextView
         android:id="@+id/server_status_textview"
@@ -11,6 +12,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:autoLink="web"
+        android:textColor="@color/color_white"
         android:text="@string/click_button_to_start_server"
         android:gravity="center_horizontal"/>
 

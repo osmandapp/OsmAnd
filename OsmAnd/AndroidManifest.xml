@@ -65,7 +65,6 @@
 		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@mipmap/icon" android:value="" />
         <activity android:name="net.osmand.plus.activities.HelpActivity" />
         <activity android:name="net.osmand.plus.activities.ExitActivity" />
-		<activity android:name=".activities.ServerActivity" />
 
 		<provider
             android:name="androidx.core.content.FileProvider"

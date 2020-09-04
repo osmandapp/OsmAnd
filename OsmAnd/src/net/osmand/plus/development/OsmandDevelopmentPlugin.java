@@ -3,8 +3,11 @@ package net.osmand.plus.development;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -13,8 +16,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.ServerActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.firstusage.FirstUsageWizardFragment;
+import net.osmand.plus.server.ServerFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -80,15 +84,22 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-							Intent intent = new Intent(mapActivity, ServerActivity.class);
-							intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-							mapActivity.startActivity(intent);
+							Fragment fragment = new ServerFragment();
+							showFragment(mapActivity, fragment);
 							return true;
 						}
 					}).createItem());
 		}
 	}
 
+	private static void showFragment(FragmentActivity activity, Fragment fragment) {
+		if (activity != null) {
+			activity.getSupportFragmentManager()
+					.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, FirstUsageWizardFragment.TAG)
+					.commitAllowingStateLoss();
+		}
+	}
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
 		if (isActive()) {
