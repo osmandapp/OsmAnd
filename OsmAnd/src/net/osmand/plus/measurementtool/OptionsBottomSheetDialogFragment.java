@@ -138,7 +138,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		BaseBottomSheetItem reverse = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_change_navigation_points))
 				.setTitle(getString(R.string.reverse_route))
-				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
