@@ -46,6 +46,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.widgets.FlowLayout;
@@ -726,6 +727,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	public void setCategory(String name, int color) {
 		setSelectedItemWithScroll(name);
 		updateColorSelector(color, groupRecyclerView.getRootView());
+		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(name));
 	}
 
 	private void setSelectedItemWithScroll(String name) {
@@ -952,7 +954,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 						int previousSelectedPosition = getItemPosition(selectedItemName);
 						selectedItemName = items.get(holder.getAdapterPosition());
 						updateColorSelector(getCategoryColor(selectedItemName), groupRecyclerView.getRootView());
-						addToHiddenGroupInfo.setVisibility(isCategoryVisible(selectedItemName) ? View.GONE : View.VISIBLE);
+						AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(selectedItemName));
 						notifyItemChanged(holder.getAdapterPosition());
 						notifyItemChanged(previousSelectedPosition);
 					}
