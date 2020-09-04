@@ -3870,7 +3870,7 @@
     <string name="simplified_track_description">Будет сохранена только линия маршрута, путевые точки будут удалены.</string>
     <string name="shared_string_file_name">Имя файла</string>
     <string name="number_of_gpx_files_selected_pattern">Выбрано файлов треков: %s</string>
-    <string name="save_global_track_interval_descr">Укажите интервал общей записи трека (включается через виджет Запись GPX на карте).</string>
+    <string name="save_global_track_interval_descr">Укажите интервал общей записи трека (включается через виджет «Запись GPX» на карте).</string>
     <string name="gpx_monitoring_stop">Остановить запись</string>
     <string name="gpx_monitoring_start">Возобновить запись поездки</string>
     <string name="system_default_theme">По умолчанию системы</string>
