@@ -2,6 +2,7 @@ package net.osmand.plus.measurementtool;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -113,22 +114,14 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 			items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.dialog_content_margin)));
 		}
+
 		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-		int backgroundColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
-				R.attr.activity_background_color);
-		GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
-				R.drawable.bg_select_group_button_outline);
-		if (background != null) {
-			background = (GradientDrawable) background.mutate();
-			background.setStroke(0, Color.TRANSPARENT);
-			background.setColor(backgroundColor);
-		}
 		final BottomSheetItemWithCompoundButton[] simplifiedTrackItem = new BottomSheetItemWithCompoundButton[1];
 		simplifiedTrackItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(simplifiedTrack)
 				.setCompoundButtonColorId(activeColorRes)
-				.setDescription(getString(R.string.simplified_track_description))
-				.setBackground(background)
+				.setDescription(getSimplifiedTrackDescription())
+				.setBackground(getBackground(simplifiedTrack))
 				.setTitle(getString(R.string.simplified_track))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
 				.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +129,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 					public void onClick(View v) {
 						simplifiedTrack = !simplifiedTrack;
 						simplifiedTrackItem[0].setChecked(simplifiedTrack);
+						AndroidUtils.setBackground(simplifiedTrackItem[0].getView(), getBackground(simplifiedTrack));
+						simplifiedTrackItem[0].setDescription(getSimplifiedTrackDescription());
 					}
 				})
 				.create();
@@ -143,16 +138,11 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.content_padding)));
 
-		background = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
-		if (background != null) {
-			background = (GradientDrawable) background.mutate();
-			background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), backgroundColor);
-		}
 		final BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setCompoundButtonColorId(activeColorRes)
 				.setChecked(showOnMap)
-				.setBackground(background)
+				.setBackground(getBackground(showOnMap))
 				.setTitle(getString(R.string.shared_string_show_on_map))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
 				.setOnClickListener(new View.OnClickListener() {
@@ -160,12 +150,38 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 					public void onClick(View v) {
 						showOnMap = !showOnMap;
 						showOnMapItem[0].setChecked(showOnMap);
+						AndroidUtils.setBackground(showOnMapItem[0].getView(), getBackground(showOnMap));
 					}
 				})
 				.create();
 		items.add(showOnMapItem[0]);
 
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
+	}
+
+	private String getSimplifiedTrackDescription() {
+		return simplifiedTrack ? getString(R.string.simplified_track_description) : "";
+	}
+
+	private Drawable getBackground(boolean checked) {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
+					R.drawable.bg_select_group_button_outline);
+			if (background != null) {
+				int backgroundColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
+						R.attr.activity_background_color);
+				background = (GradientDrawable) background.mutate();
+				if (checked) {
+					background.setStroke(0, Color.TRANSPARENT);
+					background.setColor(backgroundColor);
+				} else {
+					background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), backgroundColor);
+				}
+			}
+			return background;
+		}
+		return null;
 	}
 
 	private FolderListAdapter.FolderListAdapterListener createFolderSelectListener() {
