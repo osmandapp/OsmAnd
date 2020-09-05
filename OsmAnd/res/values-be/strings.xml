@@ -35,7 +35,7 @@
     <string name="speak_descr">Наладка агалошвання назваў вуліц, дарожных апавяшчэнняў (вымушаныя прыпынкі, ляжачыя паліцэйскія), перасцярог пра камеры хуткасці, абмежаванні хуткасці.</string>
     <string name="speak_street_names">Назвы вуліц (TTS)</string>
     <string name="speak_speed_limit">Абмежаванне хуткасці</string>
-    <string name="speak_cameras">Камеры хуткасці</string>
+    <string name="speak_cameras">Камеры кантролю хуткасці</string>
     <string name="speak_traffic_warnings">Папярэджанні руху</string>
     <string name="osb_author_or_password_not_specified">Калі ласка, пазначце карыстальніка OSM і ягоны пароль у «Наладах»</string>
     <string name="clear_intermediate_points">Ачысціць прамежкавыя пункты</string>
@@ -357,7 +357,7 @@
     <string name="bg_service_screen_unlock">Разблакаваць</string>
     <string name="bg_service_screen_lock_toast">Экран заблакаваны</string>
     <string name="bg_service_interval">Задайце інтэрвал абуджэння:</string>
-    <string name="show_cameras">Камеры хуткасці</string>
+    <string name="show_cameras">Камеры кантролю хуткасці</string>
     <string name="show_traffic_warnings">Абмежаванні руху</string>
     <string name="avoid_toll_roads">Без платных дарог</string>
     <string name="continue_follow_previous_route_auto">Працягнуць прытрымлівацца папярэдняй незавершанай навігацыі\? (%1$s секунд)</string>
@@ -760,7 +760,7 @@
     <string name="voice_is_not_available_title">Абярыце пакунак галасавых падказак</string>
     <string name="daynight_mode_day">Дзень</string>
     <string name="daynight_mode_night">Ноч</string>
-    <string name="daynight_mode_auto">Усход/Заход</string>
+    <string name="daynight_mode_auto">Узыход/Заход</string>
     <string name="daynight_mode_sensor">Датчык святла</string>
     <string name="daynight_descr">Наладзьце пераключэнне паміж дзённым і начным рэжымамі.</string>
     <string name="daynight">Рэжым дзень/ноч</string>
@@ -1344,7 +1344,7 @@
     <string name="rendering_attr_tramTrainRoutes_name">Маршруты трамваяў і цягнікоў</string>
     <string name="impassable_road">Пазбягаць дарог…</string>
     <string name="rendering_category_hide">Схаваць</string>
-    <string name="wake_on_voice">Уключыць экран</string>
+    <string name="wake_on_voice">Уключэнне экрана</string>
     <string name="wake_on_voice_descr">Уключаць экран прылады пры набліжэнні да павароту.</string>
     <string name="lock_screen_request_explanation">%1$s патрабуе дазволу на выключэнне экрану для энергазберажэння.</string>
     <string name="home_button">Дом</string>
@@ -1433,7 +1433,7 @@
     <string name="shared_string_no">Не</string>
     <string name="shared_string_on">Уключыць</string>
     <string name="shared_string_off">Выкл</string>
-    <string name="shared_string_previous">Назад</string>
+    <string name="shared_string_previous">Папярэдні</string>
     <string name="shared_string_next">Далей</string>
     <string name="shared_string_enable">Уключыць</string>
     <string name="shared_string_disable">Выключыць</string>
@@ -1994,7 +1994,7 @@
     <string name="access_direction_audio_feedback_descr">Індыцыраваць гукам кірунак на мэтавы пункт.</string>
     <string name="access_direction_haptic_feedback">Тактыльныя напрамкі</string>
     <string name="access_direction_haptic_feedback_descr">Індыцыраваць вібрацыяй кірунак на мэтавы пункт.</string>
-    <string name="map_widget_battery">Зарад батарэі</string>
+    <string name="map_widget_battery">Узровень зараду батарэі</string>
     <!-- string name="lat_lon_pattern">Шыр: %1$.5f Даў: %2$.5f</string -->
     <string name="lang_hu_formal">Венгерская (афіцыйная)</string>
     <string name="move_marker_bottom_sheet_title">Перамясціце мапу, каб змяніць пазіцыю адзнакі</string>
@@ -2047,7 +2047,7 @@
     <string name="no_inet_connection_desc_map">Патрабуецца для спампоўвання мапаў.</string>
     <string name="search_location">Пашук месцазнаходжання…</string>
     <string name="storage_free_space">Вольнае месца</string>
-    <string name="storage_place_description">Сховішча даных OsmAnd (для мапаў, GPX-файлаў і г.д.): %1$s.</string>
+    <string name="storage_place_description">Сховішча даных OsmAnd (для мапаў, файлаў слядоў і г.д.): %1$s.</string>
     <string name="give_permission">Дазволіць</string>
     <string name="allow_access_location">Дазволіць доступ да месцазнаходжання</string>
     <string name="first_usage_greeting">Пракладвайце маршруты і адкрывайце новыя месцы без злучэння з Інтэрнэтам</string>
@@ -2094,8 +2094,8 @@
     <string name="search_hint">Увядзіце горад, адрас, назву POI</string>
     <string name="translit_name_if_miss">Транслітарыраваць калі назва на %1$s адсутнічае</string>
     <string name="route_calculation">Разлік шляху</string>
-    <string name="gpx_no_tracks_title">У вас яшчэ няма GPX-файлаў</string>
-    <string name="gpx_no_tracks_title_folder">Вы таксама можаце дадаць GPX-файлы ў каталог</string>
+    <string name="gpx_no_tracks_title">У вас яшчэ няма файлаў слядоў</string>
+    <string name="gpx_no_tracks_title_folder">Вы таксама можаце дадаць файлы слядоў у каталог</string>
     <string name="route_roundabout_short">Збочце на %1$d з’ездзе</string>
     <string name="upload_poi">Запампаваць POI</string>
     <string name="search_map_hint">Горад ці краіна</string>
@@ -2674,7 +2674,7 @@
     <string name="will_open_tomorrow_at">Адчыніцца заўтра а</string>
     <string name="copy_location_name">Скапіяваць назву мясціны/POI</string>
     <string name="toast_empty_name_error">Месца без назвы</string>
-    <string name="shared_string_current">Быгучы</string>
+    <string name="shared_string_current">Бягучы</string>
     <string name="last_intermediate_dest_description">Дадае прамежкавы прыпынак</string>
     <string name="first_intermediate_dest_description">Дадае першы прыпынак</string>
     <string name="subsequent_dest_description">Перамясціць прызначэнне далей і стварыць яго</string>
@@ -2946,10 +2946,10 @@
     <string name="shared_string_swap">Памяняць</string>
     <string name="show_more">Паказаць больш</string>
     <string name="tracks_on_map">Адлюстроўваемыя сляды</string>
-    <string name="quick_action_show_hide_gpx_tracks">Паказаць/схаваць GPX-сляды</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Кнопка для адлюстравання/хавання абраных GPX-слядоў на мапе.</string>
-    <string name="quick_action_gpx_tracks_hide">Схаваць GPX-сляды</string>
-    <string name="quick_action_gpx_tracks_show">Паказаць GPX-сляды</string>
+    <string name="quick_action_show_hide_gpx_tracks">Паказаць/схаваць сляды</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Кнопка для адлюстравання/хавання абраных слядоў на мапе.</string>
+    <string name="quick_action_gpx_tracks_hide">Схаваць сляды</string>
+    <string name="quick_action_gpx_tracks_show">Паказаць сляды</string>
     <string name="use_osm_live_public_transport_description">Уключыць грамадскі транспарт для змен OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Грамадскі транспарт OsmAnd Live</string>
     <string name="release_3_3">• Новы экран «Напрамкі»: адлюстроўвае кнопкі напрамкаў дахаты і на працу, скарот «папярэдні маршрут», спіс актыўных GPX-слядоў і адзнак, гісторыю пошуку
@@ -3940,4 +3940,5 @@
 \nАдзін тыдзень - 10 080 хвілін.
 \nАдзін месяц - 43 829 хвілін.</string>
     <string name="tiles_storage_descr">Абярыце спосаб захоўвання спампаваных фрагментаў.</string>
+    <string name="shared_string_redo">Вярнуць</string>
 </resources>
