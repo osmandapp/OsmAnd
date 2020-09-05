@@ -192,8 +192,8 @@
     <string name="route_roundabout_short">Сверните на %1$d съезд</string>
     <string name="upload_poi">Отправить POI</string>
     <string name="route_calculation">Построение маршрута</string>
-    <string name="gpx_no_tracks_title">У вас пока нет файлов GPX</string>
-    <string name="gpx_no_tracks_title_folder">Вы также можете добавить файлы GPX в папку</string>
+    <string name="gpx_no_tracks_title">У вас пока нет файлов треков</string>
+    <string name="gpx_no_tracks_title_folder">Вы также можете добавить файлы треков в папку</string>
     <string name="gpx_add_track">Добавь ещё…</string>
     <string name="shared_string_appearance">Внешний вид</string>
     <string name="trip_rec_notification_settings">Включить быструю запись</string>
@@ -2219,7 +2219,7 @@
     <string name="first_usage_greeting">Прокладывайте маршруты и открывайте новые для себя места без подключения к интернету</string>
     <string name="allow_access_location">Разрешить доступ к местоположению</string>
     <string name="give_permission">Дать разрешение</string>
-    <string name="storage_place_description">Хранилище данных OsmAnd (для карт, файлов GPX и пр.): %1$s.</string>
+    <string name="storage_place_description">Хранилище данных OsmAnd (для карт, файлов треков и пр.): %1$s.</string>
     <string name="storage_free_space">Свободное место</string>
     <string name="search_location">Определение местоположения…</string>
     <string name="no_inet_connection_desc_map">Требуется загрузить карты</string>
@@ -2919,13 +2919,13 @@
     <string name="shared_string_swap">Поменять</string>
     <string name="show_more">Показать больше</string>
     <string name="tracks_on_map">Отображаемые треки</string>
-    <string name="quick_action_show_hide_gpx_tracks">Показать/скрыть GPX-треки</string>
-    <string name="quick_action_gpx_tracks_hide">Скрыть GPX-треки</string>
-    <string name="quick_action_gpx_tracks_show">Показать GPX-треки</string>
+    <string name="quick_action_show_hide_gpx_tracks">Показать/скрыть треки</string>
+    <string name="quick_action_gpx_tracks_hide">Скрыть треки</string>
+    <string name="quick_action_gpx_tracks_show">Показать треки</string>
     <string name="time_of_day">Время суток</string>
     <string name="step_by_step">Поворот за поворотом</string>
     <string name="routeInfo_road_types_name">Типы дорог</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Переключатель, чтобы показать или скрыть выбранные GPX-треки на карте.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Переключатель, чтобы показать или скрыть выбранные треки на карте.</string>
     <string name="by_transport_type">На %1$s</string>
     <string name="exit_at">Выход на</string>
     <string name="sit_on_the_stop">Посадка на остановке</string>
@@ -3884,4 +3884,5 @@
     <string name="disable_recording_once_app_killed_descrp">Остановка записи GPX при принудительном закрытии (через последние приложения). (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
     <string name="shared_string_is_saved">сохраняется</string>
     <string name="one_point_error">Добавьте как минимум два пункта.</string>
+    <string name="shared_string_redo">ПОВТОРИТЬ</string>
 </resources>
