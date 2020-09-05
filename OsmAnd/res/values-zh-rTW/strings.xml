@@ -2002,7 +2002,7 @@
     <string name="no_inet_connection_desc_map">需要下載地圖。</string>
     <string name="search_location">正在搜尋位置…</string>
     <string name="storage_free_space">可用空間</string>
-    <string name="storage_place_description">OsmAnd 資料存儲 (給地圖、GPX 檔案等)：%1$s。</string>
+    <string name="storage_place_description">OsmAnd 資料儲存空間（給地圖、軌跡檔案等）：%1$s。</string>
     <string name="give_permission">授予權限</string>
     <string name="allow_access_location">允許位置的存取</string>
     <string name="first_usage_greeting">在沒有網際網路連線的情況下，取得指引與探索新地點</string>
@@ -2056,8 +2056,8 @@
     <string name="christmas_desc">預知聖誕節和新年假期，您可以選擇顯示相關的 POI，如聖誕樹、市集等等。</string>
     <string name="donation_to_osm_desc">您的部分捐款會發送給 OSM 製圖者。訂閱的花費不變。</string>
     <string name="shared_string_notifications">通知</string>
-    <string name="gpx_no_tracks_title">您尚未有任何的 GPX 檔案</string>
-    <string name="gpx_no_tracks_title_folder">您也可以增加 GPX 檔案到資料夾</string>
+    <string name="gpx_no_tracks_title">您尚未有任何的軌跡檔案</string>
+    <string name="gpx_no_tracks_title_folder">您也可以增加軌跡檔案到資料夾</string>
     <string name="gpx_add_track">增加更多…</string>
     <string name="shared_string_appearance">外觀</string>
     <string name="trip_rec_notification_settings">啟用快速錄製</string>
@@ -2890,10 +2890,10 @@
     <string name="routeInfo_road_types_name">道路類型</string>
     <string name="exit_at">離開於</string>
     <string name="sit_on_the_stop">站點的座位</string>
-    <string name="quick_action_show_hide_gpx_tracks">顯示／隱藏 GPX 軌跡</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">在地圖上顯示或隱藏所選 GPX 軌跡的按鈕。</string>
-    <string name="quick_action_gpx_tracks_hide">隱藏 GPX 軌跡</string>
-    <string name="quick_action_gpx_tracks_show">顯示 GPX 軌跡</string>
+    <string name="quick_action_show_hide_gpx_tracks">顯示／隱藏軌跡</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">在地圖上顯示或隱藏所選軌跡的按鈕。</string>
+    <string name="quick_action_gpx_tracks_hide">隱藏軌跡</string>
+    <string name="quick_action_gpx_tracks_show">顯示軌跡</string>
     <string name="send_log">傳送紀錄檔</string>
     <string name="routing_attr_avoid_tram_name">避免電車</string>
     <string name="routing_attr_avoid_tram_description">避免電車</string>
@@ -3882,4 +3882,5 @@
     <string name="open_saved_track">開啟已儲存的軌跡</string>
     <string name="shared_string_is_saved">已儲存</string>
     <string name="one_point_error">請至少新增兩個點。</string>
+    <string name="shared_string_redo">重做</string>
 </resources>
