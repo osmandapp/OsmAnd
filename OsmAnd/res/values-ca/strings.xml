@@ -3787,4 +3787,17 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="plan_route_trim_after">Retalla després</string>
     <string name="plan_route_change_route_type_before">Canvia abans el tipus de ruta</string>
     <string name="plan_route_change_route_type_after">Canvia després el tipus de ruta</string>
+    <string name="gpx_monitoring_stop">Pausa l\'enregistrament del viatge</string>
+    <string name="gpx_monitoring_start">Reprèn l\'enregistrament del viatge</string>
+    <string name="system_default_theme">Predeterminat del sistema</string>
+    <string name="all_next_segments">Tots els segments posteriors</string>
+    <string name="previous_segment">Segment anterior</string>
+    <string name="all_previous_segments">Tots els segments anteriors</string>
+    <string name="only_selected_segment_recalc">Només es recalcularà el segment seleccionat mitjançant el perfil seleccionat.</string>
+    <string name="all_next_segments_will_be_recalc">Tots els segments posteriors es tornaran a calcular mitjançant el perfil seleccionat.</string>
+    <string name="all_previous_segments_will_be_recalc">Tots els segments anteriors es tornaran a calcular mitjançant el perfil seleccionat.</string>
+    <string name="open_saved_track">Obre una traça enregistrada</string>
+    <string name="shared_string_is_saved">s\'ha desat</string>
+    <string name="one_point_error">Afegiu almenys dos punts.</string>
+    <string name="shared_string_redo">Torna a fer</string>
 </resources>
