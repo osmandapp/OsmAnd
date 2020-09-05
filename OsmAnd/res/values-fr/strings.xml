@@ -2054,8 +2054,8 @@
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
     <string name="trip_rec_notification_settings_desc">Afficher une notification système permettant de démarrer l\'enregistrement de l\'itinéraire.</string>
-    <string name="gpx_no_tracks_title">Vous n\'avez pas encore de fichier GPX</string>
-    <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers GPX dans le dossier</string>
+    <string name="gpx_no_tracks_title">Vous n\'avez aucun fichier de trace pour l\'instant</string>
+    <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers de trace GPX dans le dossier</string>
     <string name="gpx_add_track">Autre trace GPX …</string>
     <string name="shared_string_appearance">Apparence</string>
     <string name="rendering_value_fine_name">Bien</string>
@@ -2883,13 +2883,13 @@
     <string name="step_by_step">Instructions pas à pas</string>
     <string name="routeInfo_road_types_name">Types de route</string>
     <string name="exit_at">Sortir à</string>
-    <string name="quick_action_show_hide_gpx_tracks">Afficher / masquer les traces GPX</string>
-    <string name="quick_action_gpx_tracks_hide">Masquer les traces GPX</string>
-    <string name="quick_action_gpx_tracks_show">Afficher les traces GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Afficher / masquer les traces</string>
+    <string name="quick_action_gpx_tracks_hide">Masquer les traces</string>
+    <string name="quick_action_gpx_tracks_show">Afficher les traces</string>
     <string name="use_osm_live_public_transport_description">Activer les modifications de transports publics en temps réel avec OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transports publics OsmAnd Live</string>
     <string name="sit_on_the_stop">Panneau d\'affichage à l\'arrêt</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Bouton affichant ou masquant les traces GPX sélectionnées sur la carte.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Bouton affichant ou masquant, sur la carte, les traces sélectionnées.</string>
     <string name="transfers_size">%1$d transferts</string>
     <string name="add_start_and_end_points">Ajoutez un point de départ et d\'arrivée</string>
     <string name="route_add_start_point">Ajouter un point de départ</string>
@@ -3850,4 +3850,7 @@
     <string name="open_saved_track">Ouvrir une trace enregistrée</string>
     <string name="shared_string_is_saved">a été enregistré</string>
     <string name="one_point_error">Veuillez ajouter au moins deux points.</string>
+    <string name="import_track_descr">Sélectionnez le fichier de trace à suivre ou importez-en un.</string>
+    <string name="gpx_monitoring_start">Reprendre l\'enregistrement du trajet</string>
+    <string name="gpx_monitoring_stop">Suspendre l\'enregistrement du trajet</string>
 </resources>
