@@ -657,7 +657,7 @@
     <string name="tts_language_not_supported">Абраная мова не падтрымліваецца Android TTS (пераўтварэнне тэксту ў гук), таму будзе выкарыстоўвацца прадвызначаная мова TTS. Пашукаць іншы TTS у краме\?</string>
     <string name="tts_missing_language_data_title">Даныя адсутнічаюць</string>
     <string name="tts_missing_language_data">Перайсці ў краму, каб спампаваць абраную мову\?</string>
-    <string name="gpx_option_reverse_route">Развярнуць накірунак GPX</string>
+    <string name="gpx_option_reverse_route">Развярнуць кірунак GPX</string>
     <string name="gpx_option_destination_point">Выкарыстоўваць дзейны пункт прызначэння</string>
     <string name="gpx_option_from_start_point">Прайсці ўвесь шлях</string>
     <string name="switch_to_vector_map_to_see">Для гэтага рэгіёну даступныя лакальныя вектарныя мапы.
@@ -1307,10 +1307,10 @@
     <string name="traffic_warning_speed_limit">Абмежаванне хуткасці</string>
     <string name="traffic_warning_border_control">Памежны кантроль</string>
     <string name="traffic_warning_payment">Платны праезд</string>
-    <string name="traffic_warning_stop">Знак СТОП</string>
+    <string name="traffic_warning_stop">Знак \"СТОП\"</string>
     <string name="traffic_warning_calming">Паменшыце хуткасць</string>
-    <string name="traffic_warning_speed_camera">Камера хуткасці</string>
-    <string name="traffic_warning">Абмежаванне руху</string>
+    <string name="traffic_warning_speed_camera">Камера кантролю хуткасці</string>
+    <string name="traffic_warning">Абмежаванні руху</string>
     <string name="text_size_descr">Змяніць памер тэксту на мапе.</string>
     <string name="text_size">Памер тэксту</string>
     <string name="speed_limit_exceed">Дапушчальнае значэнне перавышэння хуткасці</string>
