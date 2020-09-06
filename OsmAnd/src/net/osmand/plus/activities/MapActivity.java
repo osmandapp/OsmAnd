@@ -127,6 +127,7 @@ import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
+import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -2327,6 +2328,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public GpxApproximationFragment getGpxApproximationFragment() {
 		return getFragment(GpxApproximationFragment.TAG);
+	}
+
+	public FollowTrackFragment getFollowTrackFragment() {
+		return getFragment(FollowTrackFragment.TAG);
 	}
 
 	private SnapTrackWarningBottomSheet getSnapTrackWarningBottomSheet() {

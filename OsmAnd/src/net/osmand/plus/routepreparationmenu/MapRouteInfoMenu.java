@@ -1575,8 +1575,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		setupViaText(mainView);
 
-		FrameLayout viaButton = (FrameLayout) mainView.findViewById(R.id.via_button);
-		AndroidUiHelper.updateVisibility(viaButton, isFinishPointFromTrack());
+		FrameLayout viaButton = mainView.findViewById(R.id.via_button);
+		AndroidUiHelper.updateVisibility(viaButton, routeParams == null || isFinishPointFromTrack());
+
 		viaButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -2248,7 +2249,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (switched) {
 					mapActivity.getMapLayers().getMapControlsLayer().switchToRouteFollowingLayout();
 				}
-				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch) {
+				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch && mapActivity.getFollowTrackFragment() == null) {
 					mapActivity.getMapActions().stopNavigationWithoutConfirm();
 				}
 				mapActivity.updateStatusBarColor();
