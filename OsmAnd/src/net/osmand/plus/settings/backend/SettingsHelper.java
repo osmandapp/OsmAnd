@@ -813,6 +813,11 @@ public class SettingsHelper {
 					while (iter.hasNext()) {
 						String key = iter.next();
 						OsmandPreference<?> p = prefs.get(key);
+						if (p == null) {
+							if (OsmandSettings.isRoutingPreference(key)) {
+								p = settings.registerStringPreference(key, "");
+							}
+						}
 						if (p != null) {
 							try {
 								readPreferenceFromJson(p, json);

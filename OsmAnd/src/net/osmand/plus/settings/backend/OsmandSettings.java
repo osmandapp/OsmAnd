@@ -179,6 +179,8 @@ public class OsmandSettings {
 	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings";
 	private static String CUSTOM_SHARED_PREFERENCES_NAME;
 
+	private static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
+	private static final String ROUTING_PREFERENCE_PREFIX = "prouting_";
 
 	/// Settings variables
 	private final OsmandApplication ctx;
@@ -217,6 +219,14 @@ public class OsmandSettings {
 
 	public Map<String, OsmandPreference<?>> getRegisteredPreferences() {
 		return Collections.unmodifiableMap(registeredPreferences);
+	}
+
+	public static boolean isRendererPreference(String key) {
+		return key.startsWith(RENDERER_PREFERENCE_PREFIX);
+	}
+
+	public static boolean isRoutingPreference(String key) {
+		return key.startsWith(ROUTING_PREFERENCE_PREFIX);
 	}
 
 	private static final String SETTING_CUSTOMIZED_ID = "settings_customized";
@@ -958,7 +968,6 @@ public class OsmandSettings {
 
 	public class BooleanPreference extends CommonPreference<Boolean> {
 
-
 		private BooleanPreference(String id, boolean defaultValue) {
 			super(id, defaultValue);
 		}
@@ -976,6 +985,23 @@ public class OsmandSettings {
 		@Override
 		public Boolean parseString(String s) {
 			return Boolean.parseBoolean(s);
+		}
+	}
+
+	public class BooleanStringPreference extends BooleanPreference {
+
+		public BooleanStringPreference(String id, boolean defaultValue) {
+			super(id, defaultValue);
+		}
+
+		@Override
+		protected Boolean getValue(Object prefs, Boolean defaultValue) {
+			return parseString(settingsAPI.getString(prefs, getId(), defaultValue != null ? defaultValue.toString() : null));
+		}
+
+		@Override
+		protected boolean setValue(Object prefs, Boolean val) {
+			return settingsAPI.edit(prefs).putString(getId(), val != null ? val.toString() : null).commit();
 		}
 	}
 
@@ -3776,7 +3802,7 @@ public class OsmandSettings {
 
 	public CommonPreference<String> getCustomRenderProperty(String attrName) {
 		if (!customRendersProps.containsKey(attrName)) {
-			customRendersProps.put(attrName, new StringPreference("nrenderer_" + attrName, "").makeProfile());
+			customRendersProps.put(attrName, new StringPreference(RENDERER_PREFERENCE_PREFIX + attrName, "").makeProfile());
 		}
 		return customRendersProps.get(attrName);
 	}
@@ -3790,30 +3816,25 @@ public class OsmandSettings {
 
 	public CommonPreference<Boolean> getCustomRenderBooleanProperty(String attrName) {
 		if (!customBooleanRendersProps.containsKey(attrName)) {
-			customBooleanRendersProps.put(attrName, new BooleanPreference("nrenderer_" + attrName, false).makeProfile());
+			customBooleanRendersProps.put(attrName, new BooleanPreference(RENDERER_PREFERENCE_PREFIX + attrName, false).makeProfile());
 		}
 		return customBooleanRendersProps.get(attrName);
 	}
 
-	Map<String, CommonPreference<String>> customRoutingProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<String>>();
+	Map<String, CommonPreference<String>> customRoutingProps = new LinkedHashMap<>();
 
 	public CommonPreference<String> getCustomRoutingProperty(String attrName, String defValue) {
 		if (!customRoutingProps.containsKey(attrName)) {
-			customRoutingProps.put(attrName, new StringPreference("prouting_" + attrName, defValue).makeProfile());
+			customRoutingProps.put(attrName, new StringPreference(ROUTING_PREFERENCE_PREFIX + attrName, defValue).makeProfile());
 		}
 		return customRoutingProps.get(attrName);
 	}
 
-	{
-//		CommonPreference<String> pref = getCustomRoutingProperty("appMode");
-//		pref.setModeDefaultValue(ApplicationMode.CAR, "car");
-	}
-
-	Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<Boolean>>();
+	Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<>();
 
 	public CommonPreference<Boolean> getCustomRoutingBooleanProperty(String attrName, boolean defaulfValue) {
 		if (!customBooleanRoutingProps.containsKey(attrName)) {
-			customBooleanRoutingProps.put(attrName, new BooleanPreference("prouting_" + attrName, defaulfValue).makeProfile());
+			customBooleanRoutingProps.put(attrName, new BooleanStringPreference(ROUTING_PREFERENCE_PREFIX + attrName, defaulfValue).makeProfile());
 		}
 		return customBooleanRoutingProps.get(attrName);
 	}
