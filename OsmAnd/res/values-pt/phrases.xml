@@ -3818,4 +3818,5 @@
     <string name="poi_borough">Bairro</string>
     <string name="poi_give_box">Give-box</string>
     <string name="poi_traffic_signals_arrow_no">Seta: não</string>
+    <string name="poi_elevator">Elevador</string>
 </resources>
