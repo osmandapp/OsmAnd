@@ -59,7 +59,7 @@
     <string name="favorite_group_name">Имя группы</string>
     <string name="change_color">Изменить цвет</string>
     <string name="edit_name">Изменить имя</string>
-    <string name="route_is_too_long_v2">Для больших расстояний: пожалуйста, добавьте промежуточные пункты назначения, если маршрут не найден в течение 10 минут.</string>
+    <string name="route_is_too_long_v2">Для больших расстояний: добавьте промежуточные пункты, если маршрут не построен в течение 10 минут.</string>
     <string name="routing_attr_allow_private_name">Разрешить частный доступ</string>
     <string name="routing_attr_allow_private_description">Разрешить доступ на частную территорию.</string>
     <string name="shared_string_overview">Обзор</string>
@@ -96,7 +96,7 @@
     <string name="subscribe_email_desc">Подпишитесь на нашу рассылку о скидках на приложение и получите 3 дополнительные загрузки карт!</string>
     <string name="subscribe_email_error">Ошибка</string>
     <string name="quick_action_auto_zoom">Переключатель автомасштаба карты</string>
-    <string name="quick_action_auto_zoom_desc">Переключатель, чтобы включить или выключить автоматическое масштабирование карты.</string>
+    <string name="quick_action_auto_zoom_desc">Кнопка переключения автомасштабирования на основе скорости.</string>
     <string name="quick_action_auto_zoom_on">Включение автомасштаба</string>
     <string name="quick_action_auto_zoom_off">Выключение автомасштаба</string>
     <string name="quick_action_add_destination">Установить пункт назначения</string>
@@ -170,7 +170,7 @@
     <string name="quick_action_map_source_title">Источники карты</string>
     <string name="quick_action_map_source_action">Добавить источник карты</string>
     <string name="quick_action_map_source_switch">Источник карты изменён на «%s».</string>
-    <string name="quick_action_btn_tutorial_descr">Долгое нажатие и перетаскивание позволит переместить кнопку.</string>
+    <string name="quick_action_btn_tutorial_descr">Удерживайте кнопку для перемещения её по экрану.</string>
     <string name="rendering_attr_depthContours_description">Показывать контуры и точки глубины.</string>
     <string name="rendering_attr_depthContours_name">Контуры морских глубин</string>
     <string name="rendering_attr_contourDensity_description">Частота горизонталей</string>
@@ -450,7 +450,7 @@
     <string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернётся к текущей позиции.</string>
     <string name="auto_follow_route_navigation">Автовозврат карты только при следовании по маршруту</string>
     <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту.</string>
-    <string name="auto_follow_location_enabled">Центрировать карту при использовании.</string>
+    <string name="auto_follow_location_enabled">Возврат к позиции на карте...</string>
     <string name="poi_query_by_name_matches_categories">Найдено несколько связанных категорий POI.</string>
     <string name="data_to_search_poi_not_available">Загрузите данные для локального поиска POI.</string>
     <string name="poi_filter_by_name">Поиск по имени</string>
@@ -726,13 +726,13 @@
     <string name="sd_mounted_ro">Карта памяти доступна только для чтения. 
 \nТеперь можно только просматривать предварительно загруженную карту, а не загружать новые области.</string>
     <string name="unzipping_file">Файл распаковывается…</string>
-    <string name="route_tr">Поверните направо и двигайтесь</string>
-    <string name="route_tshr">Поверните резко направо и двигайтесь</string>
-    <string name="route_tslr">Поверните плавно направо и двигайтесь</string>
-    <string name="route_tl">Поверните налево и двигайтесь</string>
-    <string name="route_tshl">Поверните резко налево и двигайтесь</string>
-    <string name="route_tsll">Поверните плавно налево и двигайтесь</string>
-    <string name="route_tu">Выполните разворот и двигайтесь</string>
+    <string name="route_tr">Направо и прямо</string>
+    <string name="route_tshr">Резко направо и прямо</string>
+    <string name="route_tslr">Плавно направо и прямо</string>
+    <string name="route_tl">Налево и прямо</string>
+    <string name="route_tshl">Резко налево и прямо</string>
+    <string name="route_tsll">Плавно налево и прямо</string>
+    <string name="route_tu">Выполните разворот, затем прямо</string>
     <string name="route_head">Двигайтесь прямо</string>
     <string name="first_time_continue">Продолжить</string>
     <string name="first_time_download">Загрузить детальные карты регионов</string>
@@ -837,7 +837,7 @@
     <string name="data_settings_descr">Настройка данных: язык, обновление данных.</string>
     <string name="data_settings">Данные</string>
     <string name="osm_settings">Редактирование OSM</string>
-    <string name="auto_zoom_map_descr">Автоматически изменять масштаб карты при изменении скорости (пока карта синхронизирована с текущим положением).</string>
+    <string name="auto_zoom_map_descr">Масштабирование по скорости (при отображении позиции на карте).</string>
     <string name="auto_zoom_map">Автомасштаб</string>
     <string name="additional_settings">Дополнительные настройки</string>
     <string name="save_current_track_descr">Сохранить текущий трек как файл GPX.</string>
@@ -1048,8 +1048,8 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Точка парковки</string>
-    <string name="osmand_parking_plugin_description">Позволяет записывать, где припаркован ваш автомобиль, а также сколько времени он на парковке.
-\nМесто и время парковки доступны на панели управления, а также в виде виджета на карте. Для напоминания в календарь Android может быть добавлено уведомление.</string>
+    <string name="osmand_parking_plugin_description">Запись места и времени парковки вашего авто.
+\nИ место, и время отображаются на панели управления или как виджет на карте. Можно добавить напоминание в календаре Android.</string>
     <string name="osmand_parking_plugin_name">Место парковки</string>
     <string name="context_menu_item_add_parking_point">Пометить место парковки</string>
     <string name="context_menu_item_delete_parking_point">Удалить метку места парковки</string>
@@ -1345,9 +1345,9 @@
     <string name="animate_routing_route">Симуляция использования рассчитанного маршрута </string>
     <string name="animate_routing_gpx">Симуляция использования трека GPX</string>
     <string name="auto_zoom_none">Без автомасштаба</string>
-    <string name="auto_zoom_close">К крупному плану</string>
-    <string name="auto_zoom_far">К среднему плану</string>
-    <string name="auto_zoom_farthest">К дальнему плану</string>
+    <string name="auto_zoom_close">Ближний план</string>
+    <string name="auto_zoom_far">Средний план</string>
+    <string name="auto_zoom_farthest">Дальний план</string>
     <string name="routing_attr_avoid_motorway_description">Избегать автомагистрали</string>
     <string name="routing_attr_avoid_motorway_name">Без автомагистралей</string>
     <string name="routing_attr_prefer_motorway_name">Предпочитать автомагистрали</string>
@@ -1627,7 +1627,7 @@
     <string name="download_tab_local">Локальные</string>
     <string name="navigate_point_zone">Зона</string>
     <string name="rendering_attr_transportStops_name">Остановки транспорта</string>
-    <string name="shared_string_dismiss">Отклонить</string>
+    <string name="shared_string_dismiss">Отменить</string>
     <string name="dash_download_msg_none">Загрузить локальные карты\?</string>
     <string name="dash_download_msg">Загружено карт: %1$s</string>
     <string name="dash_download_new_one">Загрузить новую карту</string>
@@ -1650,7 +1650,7 @@
     <string name="traffic_warning_pedestrian">Пешеходный переход</string>
     <string name="speak_pedestrian">Пешеходные переходы</string>
     <string name="navigation_over_track">Начать навигацию по треку?</string>
-    <string name="avoid_roads_msg">Запуск альтернативного маршрута путём выбора дорог, которых стоит избегать</string>
+    <string name="avoid_roads_msg">Запуск альтернативного маршрута путём указания дорог, которых следует избегать</string>
     <string name="save_track_to_gpx_globally_headline">Запись трека по требованию</string>
     <string name="proxy_pref_title">Прокси-сервер</string>
     <string name="proxy_pref_descr">Укажите прокси-сервер.</string>
@@ -1758,7 +1758,7 @@
     <string name="action_create">Создать действие</string>
     <string name="osm_edits">Правки OSM</string>
     <string name="osmand_parking_hour">ч.</string>
-    <string name="osmand_parking_minute">м.</string>
+    <string name="osmand_parking_minute">мин.</string>
     <string name="osmand_parking_time_left">осталось</string>
     <string name="parking_place_limited">Парковка ограничена временем</string>
     <string name="your_edits">Ваши правки</string>
@@ -2891,7 +2891,7 @@
     <string name="points_of_interests">Точки интереса (POI)</string>
     <string name="waiting_for_route_calculation">Расчёт маршрута…</string>
     <string name="app_mode_public_transport">Общественный транспорт</string>
-    <string name="avoid_roads_descr">Выберите дорогу на карте или из списка ниже, которую вы хотите избежать во время навигации:</string>
+    <string name="avoid_roads_descr">Укажите на карте или в списке ниже, каких дорог следует избегать при навигации:</string>
     <string name="simulate_navigation">Моделировать навигацию</string>
     <string name="choose_track_file_to_follow">Выберите файл трека для следования</string>
     <string name="voice_announcements">Голосовые подсказки</string>
@@ -3220,7 +3220,7 @@
     <string name="navigate_point_format_olc">Открытый код местоположения (OLC)</string>
     <string name="coordinates_format_info">Выбранный формат будет применён во всём приложении.</string>
     <string name="pref_selected_by_default_for_profiles">Параметр выбран по умолчанию для профилей: %s</string>
-    <string name="route_parameters_info">Настройки для маршрутизации в выбранном профиле «%1$s».</string>
+    <string name="route_parameters_info">Настройки маршрутизации в профиле «%1$s».</string>
     <string name="wake_time">Время работы после пробуждения</string>
     <string name="appearance">Внешний вид</string>
     <string name="configure_navigation">Настроить навигацию</string>
@@ -3850,7 +3850,7 @@
     <string name="map_widget_monitoring">Запись поездки</string>
     <string name="marker_save_as_track">Сохранить как файл трека</string>
     <string name="follow_track">Следовать по маршруту</string>
-    <string name="follow_track_descr">Выберите файл маршрута для ведения</string>
+    <string name="follow_track_descr">Выберите файл маршрута для следования</string>
     <string name="import_track_descr">Выберите или импортируйте файл маршрута.</string>
     <string name="select_another_track">Выбрать другой трек</string>
     <string name="navigate_to_track_descr">Перейдите от моего местоположения к треку</string>
