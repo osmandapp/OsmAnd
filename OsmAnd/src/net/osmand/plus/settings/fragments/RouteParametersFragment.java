@@ -457,6 +457,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			}
 			recalculateRoute();
 		} else if (ROUTING_SHORT_WAY.equals(prefId) && newValue instanceof Boolean) {
+			applyPreference(ROUTING_SHORT_WAY, applyToAllProfiles, newValue);
 			applyPreference(settings.FAST_ROUTE_MODE.getId(), applyToAllProfiles, !(Boolean) newValue);
 		} else if (ROUTING_RECALC_DISTANCE.equals(prefId)) {
 			boolean enabled = false;
