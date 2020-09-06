@@ -367,8 +367,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
-						FollowTrackFragment.showInstance(mapActivity, trackOptionsFragment);
+						MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
+						mapRouteInfoMenu.hide();
+						mapRouteInfoMenu.selectTrack();
 						dismiss();
 					}
 				})

@@ -147,6 +147,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private PointType selectFromMapPointType;
 	private int selectFromMapMenuState = MenuState.HEADER_ONLY;
 	private boolean selectFromMapWaypoints;
+	private boolean selectFromTracks;
 
 	private boolean showMenu = false;
 	private int showMenuState = DEFAULT_MENU_STATE;
@@ -1563,8 +1564,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					if (mapActivity != null) {
 						GPXRouteParamsBuilder routeParams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 						if (routeParams != null) {
-							FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
-							FollowTrackFragment.showInstance(mapActivity, trackOptionsFragment);
+							selectTrack();
 						}
 					}
 				}
@@ -1950,6 +1950,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
+	public void selectTrack() {
+		selectFromTracks = true;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
+			FollowTrackFragment.showInstance(mapActivity, trackOptionsFragment);
+		}
+	}
+
+	public void cancelSelectionFromTracks() {
+		selectFromTracks = false;
+	}
+
 	public void setupFields(PointType pointType) {
 		View mainView = getMainView();
 		if (mainView != null) {
@@ -2249,7 +2262,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (switched) {
 					mapActivity.getMapLayers().getMapControlsLayer().switchToRouteFollowingLayout();
 				}
-				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch && mapActivity.getFollowTrackFragment() == null) {
+				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch && !selectFromTracks) {
 					mapActivity.getMapActions().stopNavigationWithoutConfirm();
 				}
 				mapActivity.updateStatusBarColor();

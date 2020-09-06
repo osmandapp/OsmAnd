@@ -297,6 +297,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitTrackAppearanceMode();
+		onDismiss();
 	}
 
 	@Override
@@ -549,6 +550,20 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (mapActivity != null) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				fragmentManager.beginTransaction().remove(this).commitAllowingStateLoss();
+			}
+		} catch (Exception e) {
+			log.error(e);
+		}
+	}
+
+	private void onDismiss() {
+		try {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				if (!mapActivity.isChangingConfigurations()) {
+					mapActivity.getMapRouteInfoMenu().cancelSelectionFromTracks();
+				}
+				mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
 			}
 		} catch (Exception e) {
 			log.error(e);
