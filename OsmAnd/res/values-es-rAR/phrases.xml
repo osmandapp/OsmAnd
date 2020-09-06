@@ -333,7 +333,7 @@
     <string name="poi_doctors">Doctor</string>
     <string name="poi_clinic">Clínica</string>
     <string name="poi_first_aid">Primeros auxilios</string>
-    <string name="poi_dentist">Dentista;Odontólogo</string>
+    <string name="poi_dentist">Dentista;Odontología</string>
     <string name="poi_nursing_home">Asilo de ancianos;Geriátrico</string>
     <string name="poi_baby_hatch">Escotilla de bebé</string>
     <string name="poi_veterinary">Veterinaria</string>
@@ -2309,7 +2309,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Cirugía maxilofacial</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Radiología diagnóstica</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterología</string>
-    <string name="poi_health_specialty_dentistry_yes">Odontología</string>
+    <string name="poi_health_specialty_dentistry_yes">Dentista;Odontología</string>
     <string name="poi_health_specialty_nephrology_yes">Nefrología (enfermedades renales)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurocirugía</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsiquiatría</string>
