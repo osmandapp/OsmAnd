@@ -166,8 +166,8 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		OsmandSettings.ContextMenuItemsSettings pref = getSettingForScreen(app, screenType).getModeValue(appMode);
 		if (pref instanceof OsmandSettings.MainContextMenuItemsSettings) {
 			mainActionItems = new ArrayList<>(((OsmandSettings.MainContextMenuItemsSettings) pref).getMainIds());
-			if (mainActionItems.isEmpty() && !defItems.isEmpty()) {
-				for (int i = 0; i < MAIN_BUTTONS_QUANTITY; i++) {
+			if (mainActionItems.isEmpty()) {
+				for (int i = 0; i < MAIN_BUTTONS_QUANTITY && i < defItems.size(); i++) {
 					mainActionItems.add(defItems.get(i).getId());
 				}
 			}
