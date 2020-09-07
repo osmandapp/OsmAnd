@@ -10,10 +10,11 @@ import net.osmand.plus.server.endpoints.TileEndpoint;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class OsmAndHttpServer extends NanoHTTPD {
-	private static final String FOLDER_NAME = "server";
+	private static final String ASSETS_FOLDER_NAME = "server";
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmAndHttpServer.class);
 	private final Map<String, ApiEndpoint> endpoints = new HashMap<>();
 	private MapActivity mapActivity;
@@ -46,9 +47,11 @@ public class OsmAndHttpServer extends NanoHTTPD {
 
 	private NanoHTTPD.Response routeApi(NanoHTTPD.IHTTPSession session) {
 		String uri = session.getUri();
-		for (String path : endpoints.keySet()) {
-			if (uri.startsWith(path)) {
-				return endpoints.get(path).process(session);
+		Iterator<Map.Entry<String, ApiEndpoint>> it = endpoints.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<String, ApiEndpoint> e = it.next();
+			if (uri.startsWith(e.getKey())) {
+				return e.getValue().process(session, uri);
 			}
 		}
 		return ErrorResponses.response404;
@@ -79,7 +82,7 @@ public class OsmAndHttpServer extends NanoHTTPD {
 		OsmandApplication app = mapActivity.getMyApplication();
 		if (app != null) {
 			try {
-				is = app.getAssets().open(FOLDER_NAME + uri);
+				is = app.getAssets().open(ASSETS_FOLDER_NAME + uri);
 				if (is.available() == 0) {
 					return ErrorResponses.response404;
 				}
@@ -107,7 +110,7 @@ public class OsmAndHttpServer extends NanoHTTPD {
 	}
 
 	public interface ApiEndpoint {
-		NanoHTTPD.Response process(NanoHTTPD.IHTTPSession session);
+		NanoHTTPD.Response process(IHTTPSession session, String url);
 	}
 
 	public static class ErrorResponses {
