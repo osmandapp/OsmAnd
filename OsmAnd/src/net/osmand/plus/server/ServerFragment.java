@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import org.apache.commons.logging.Log;
 
@@ -86,8 +87,7 @@ public class ServerFragment extends BaseOsmAndFragment {
 		TrafficStats.setThreadStatsTag(THREAD_ID);
 		OsmAndHttpServer.HOSTNAME = getDeviceAddress();
 		try {
-			server = new OsmAndHttpServer(getMyApplication());
-			server.setActivity(this.getActivity());
+			server = new OsmAndHttpServer((MapActivity) getActivity());
 			initialized = true;
 			updateTextView("Server started at: http://" + getDeviceAddress() + ":" + OsmAndHttpServer.PORT);
 		} catch (IOException e) {

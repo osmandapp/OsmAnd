@@ -36,14 +36,19 @@ public class TileEndpoint implements ApiEndpoint, IMapOnImageDrawn {
 	private Bitmap resultBitmap;
 	private MapActivity mapActivity;
 
+	public TileEndpoint(MapActivity mapActivity) {
+		setMapActivity(mapActivity);
+	}
+
+	@Override
+	public void setMapActivity(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+		this.application = mapActivity.getMyApplication();
+	}
+
 	@Override
 	public void onDraw(RotatedTileBox viewport, Bitmap bmp) {
 		map.put(viewport, bmp);
-	}
-
-	public TileEndpoint(OsmandApplication application, MapActivity mapActivity) {
-		this.application = application;
-		this.mapActivity = mapActivity;
 	}
 
 	@Override
@@ -75,15 +80,6 @@ public class TileEndpoint implements ApiEndpoint, IMapOnImageDrawn {
 					str,
 					str.available());
 		}
-	}
-
-	@Override
-	public void setApplication(OsmandApplication application) {
-		this.application = application;
-	}
-
-	public void setMapActivity(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
 	}
 
 	private Bitmap requestTile(double lat, double lon, int zoom) {

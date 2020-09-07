@@ -1,10 +1,10 @@
 package net.osmand.plus.server;
 
 import fi.iki.elonen.NanoHTTPD;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 
 public interface ApiEndpoint {
 	NanoHTTPD.Response process(NanoHTTPD.IHTTPSession session);
 
-	void setApplication(OsmandApplication application);
+	void setMapActivity(MapActivity mapActivity);
 }
