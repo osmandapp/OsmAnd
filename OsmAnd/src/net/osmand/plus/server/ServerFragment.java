@@ -26,6 +26,7 @@ import static android.content.Context.WIFI_SERVICE;
 public class ServerFragment extends BaseOsmAndFragment {
 	private final static Log LOG = PlatformUtil.getLog(ServerFragment.class);
 	private final int port = 24990;
+	final int THREAD_ID = 14231; // random number
 	private boolean initialized = false;
 	private OsmAndHttpServer server;
 	private View view;
@@ -84,7 +85,7 @@ public class ServerFragment extends BaseOsmAndFragment {
 	}
 
 	private void initServer() {
-		final int THREAD_ID = 10000;
+
 		TrafficStats.setThreadStatsTag(THREAD_ID);
 		String hostname = getDeviceAddress();
 		try {
@@ -115,7 +116,8 @@ public class ServerFragment extends BaseOsmAndFragment {
 		if (getActivity() != null) {
 			try {
 				getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-			} catch (Exception e) {
+			} catch (RuntimeException e) {
+				LOG.error(e.getMessage(), e);
 			}
 		}
 	}

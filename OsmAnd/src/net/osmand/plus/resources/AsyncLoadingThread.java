@@ -69,6 +69,11 @@ public class AsyncLoadingThread extends Thread {
 		}
 	}
 
+	public boolean areResourcesLoading() {
+		return !requests.isEmpty();
+
+	}
+
 	public void requestToLoadTile(TileLoadDownloadRequest req) {
 		requests.push(req);
 	}
