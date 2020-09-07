@@ -1431,7 +1431,7 @@
     <string name="shared_string_dismiss">Адхіліць</string>
     <string name="shared_string_yes">Так</string>
     <string name="shared_string_no">Не</string>
-    <string name="shared_string_on">Уключыць</string>
+    <string name="shared_string_on">Укл</string>
     <string name="shared_string_off">Выкл</string>
     <string name="shared_string_previous">Папярэдні</string>
     <string name="shared_string_next">Далей</string>
@@ -1507,7 +1507,7 @@
     <string name="tips_and_tricks_descr">Пытанні і адказы, апошнія змены і іншае.</string>
     <string name="routing_settings_2">Налады навігацыі</string>
     <string name="general_settings_2">Агульныя налады</string>
-    <string name="shared_string_clear_all">Ачысціць ўсё</string>
+    <string name="shared_string_clear_all">Ачысціць усё</string>
     <string name="shared_string_collapse">Згарнуць</string>
     <string name="shared_string_my_location">Маё месцазнаходжанне</string>
     <string name="shared_string_tracks">Сляды</string>
@@ -2041,7 +2041,7 @@
     <string name="skip_map_downloading_desc">У вас адсутнічаюць мапы. Вы можаце абраць мапу са спіса альбо спампаваць яе пазней праз \"Меню - %1$s\".</string>
     <string name="search_another_country">Абраць іншы рэгіён</string>
     <string name="search_map">Пошук мапаў…</string>
-    <string name="first_usage_wizard_desc">OsmAnd вызначыць вашае месцазнаходжанне і прапануе спампаваць мапы для гэтага рэгіёна.</string>
+    <string name="first_usage_wizard_desc">OsmAnd вызначыць ваша месцазнаходжанне і прапануе спампаваць мапы для гэтага рэгіёна.</string>
     <string name="location_not_found">Не атрымалася вызначыць месцазнаходжанне</string>
     <string name="no_inet_connection">Злучэнне з Інтэрнэтам адсутнічае</string>
     <string name="no_inet_connection_desc_map">Патрабуецца для спампоўвання мапаў.</string>
