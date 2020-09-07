@@ -40,6 +40,10 @@ public class OsmAndHttpServer extends NanoHTTPD {
 		return getStatic(uri);
 	}
 
+	public String getUrl() {
+		return "http://" + getHostname() + ":" + getListeningPort();
+	}
+
 	private NanoHTTPD.Response routeApi(NanoHTTPD.IHTTPSession session) {
 		String uri = session.getUri();
 		for (String path : endpoints.keySet()) {
@@ -100,10 +104,6 @@ public class OsmAndHttpServer extends NanoHTTPD {
 			type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
 		}
 		return type;
-	}
-
-	public String getUrl() {
-		return "http://" + getHostname()  + ":" + getListeningPort();
 	}
 
 	public interface ApiEndpoint {

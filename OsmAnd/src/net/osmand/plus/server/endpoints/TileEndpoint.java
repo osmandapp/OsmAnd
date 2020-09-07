@@ -20,9 +20,9 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint, OsmandMapTile
 	private static final int TILE_SIZE_PX = 512;
 	private static final int TIMEOUT_STEP = 500;
 	private static final Log LOG = PlatformUtil.getLog(TileEndpoint.class);
+	private final MapActivity mapActivity;
 	private RotatedTileBox resultBmpViewport;
 	private Bitmap resultBitmap;
-	private MapActivity mapActivity;
 
 	public TileEndpoint(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -48,7 +48,6 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint, OsmandMapTile
 		if (bitmap == null) {
 			return OsmAndHttpServer.ErrorResponses.response500;
 		}
-		//stream also needs to be synchronized
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 		byte[] byteArray = stream.toByteArray();
@@ -68,7 +67,6 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint, OsmandMapTile
 				.setZoom(zoom)
 				.setPixelDimensions(TILE_SIZE_PX, TILE_SIZE_PX, 0.5f, 0.5f).build();
 		mapActivity.getMapView().setCurrentViewport(rotatedTileBox);
-		Bitmap bmp = null;
 		int timeout = 0;
 		try {
 			while (!rotatedTileBox.equals(resultBmpViewport) && timeout < SOCKET_READ_TIMEOUT) {
@@ -80,6 +78,6 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint, OsmandMapTile
 		} catch (InterruptedException e) {
 			LOG.error(e);
 		}
-		return bmp;
+		return null;
 	}
 }
