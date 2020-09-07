@@ -43,6 +43,7 @@ import net.osmand.ValueHolder;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
@@ -95,6 +96,7 @@ import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarning
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
@@ -2375,6 +2377,32 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	@Override
 	public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
 		updateMenu();
+	}
+
+	@NonNull
+	public QuadRect getRouteRect(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		MapRouteInfoMenu menu = mapActivity.getMapRouteInfoMenu();
+
+		QuadRect rect = new QuadRect(0, 0, 0, 0);
+		if (menu.isTransportRouteCalculated()) {
+			TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
+			TransportRouteResult result = transportRoutingHelper.getCurrentRouteResult();
+			if (result != null) {
+				QuadRect transportRouteRect = transportRoutingHelper.getTransportRouteRect(result);
+				if (transportRouteRect != null) {
+					rect = transportRouteRect;
+				}
+			}
+		} else if (routingHelper.isRouteCalculated()) {
+			RouteCalculationResult result = routingHelper.getRoute();
+			QuadRect routeRect = routingHelper.getRouteRect(result);
+			if (routeRect != null) {
+				rect = routeRect;
+			}
+		}
+		return rect;
 	}
 
 	public enum MapRouteMenuType {
