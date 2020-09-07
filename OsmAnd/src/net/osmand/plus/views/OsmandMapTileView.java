@@ -77,7 +77,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	protected OsmandSettings settings = null;
 	private CanvasColors canvasColors = null;
 	private Boolean nightMode = null;
-	private IMapOnImageDrawn mapOnImageDrawnListener;
 
 	private class CanvasColors {
 		int colorDay = MAP_DEFAULT_COLOR;
@@ -105,10 +104,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	protected static final int emptyTileDivisor = 16;
 
-
-	public interface IMapOnImageDrawn {
-		void onDraw(RotatedTileBox viewport, Bitmap bmp);
-	}
 
 	public interface OnTrackBallListener {
 		public boolean onTrackBallEvent(MotionEvent e);
@@ -346,10 +341,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return application;
 	}
 
-	public void setOnImageDrawnListener(IMapOnImageDrawn iMapOnImageDrawn) {
-		this.mapOnImageDrawnListener = iMapOnImageDrawn;
-	}
-
 	// ///////////////////////// NON UI PART (could be extracted in common) /////////////////////////////
 	public LatLon getFirstTouchPointLatLon() {
 		return firstTouchPointLatLon;
@@ -583,9 +574,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (!bufferBitmap.isRecycled()) {
 				RectF rct = new RectF(x1, y1, x2, y2);
 				canvas.drawBitmap(bufferBitmap, null, rct, paintImg);
-				if (mapOnImageDrawnListener != null){
-					mapOnImageDrawnListener.onDraw(bufferImgLoc,bufferBitmap);
-				}
 			}
 			canvas.rotate(-rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 		}
@@ -884,6 +872,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void setCurrentViewport(RotatedTileBox viewport) {
 		currentViewport = viewport;
 		refreshMap();
+	}
+
+	public Bitmap getBufferBitmap() {
+		return bufferBitmap;
+	}
+
+	public RotatedTileBox getBufferImgLoc() {
+		return bufferImgLoc;
 	}
 
 	public float getDensity() {

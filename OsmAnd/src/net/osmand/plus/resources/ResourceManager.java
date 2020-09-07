@@ -1176,7 +1176,12 @@ public class ResourceManager {
 			tc.tilesOnFS.clear();
 		}
 	}
-	
+
+
+	public AsyncLoadingThread getAsyncLoadingThread() {
+		return asyncLoadingThread;
+	}
+
 	/// On low memory method ///
 	public void onLowMemory() {
 		log.info("On low memory");
