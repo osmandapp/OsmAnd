@@ -3853,4 +3853,6 @@
     <string name="import_track_descr">Sélectionnez le fichier de trace à suivre ou importez-en un.</string>
     <string name="gpx_monitoring_start">Reprendre l\'enregistrement du trajet</string>
     <string name="gpx_monitoring_stop">Suspendre l\'enregistrement du trajet</string>
+    <string name="save_global_track_interval_descr">Définit la fréquence d’enregistrement du parcours (enregistrement activé depuis le gadget sur la carte).</string>
+    <string name="disable_recording_once_app_killed_descrp">Suspend l\'enregistrement du parcours lorsque l\'application est arrêtée via Applications récentes ; les indications OsmAnd ne seront plus affichées dans la barre de notifications.</string>
 </resources>
