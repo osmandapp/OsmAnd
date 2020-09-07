@@ -52,13 +52,10 @@ public class OsmAndHttpServer extends NanoHTTPD {
 
 	private NanoHTTPD.Response routeApi(NanoHTTPD.IHTTPSession session) {
 		String uri = session.getUri();
-		int pathEnd = uri.indexOf("/", 1);
-		if (pathEnd != -1) {
-			uri = uri.substring(0, pathEnd);
-		}
-		ApiEndpoint endpoint = endpoints.get(uri);
-		if (endpoint != null) {
-			return endpoint.process(session);
+		for (String path : endpoints.keySet()){
+			if (uri.startsWith(path)) {
+				return endpoints.get(path).process(session);
+			}
 		}
 		return ErrorResponses.response404;
 	}
