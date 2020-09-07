@@ -593,20 +593,20 @@
     <string name="update_poi_does_not_change_indexes">التغييرات POI داخل التطبيق لا تؤثرعلى ملفات الخرائط المحملة، يتم حفظ التغييرات إلى ملف محلي بدلا من ذلك.</string>
     <string name="av_camera_focus_descr">وضع تركيز الكاميرا:</string>
     <string name="osmand_plus_long_description_1000_chars">أوسماند+ (OSM اتجاهات التنقل التلقائية)
-\n عبارة عن تطبيق ملاحة مفتوح المصدر مع إمكانية الوصول إلى العديد من بيانات عالمية للموقع. كل بيانات الخرائط (خرائط التوجيه أو الخرائط الجزئية) يمكن تخزينها في ذاكرة الجهاز للإستخدام دون إنترنت. يوفر التطبيق كذلك وظائف توجيه بما في ذلك التوجيه الصوتي. 
+\n عبارة عن تطبيق ملاحة مفتوح المصدر مع إمكانية الوصول إلى العديد من بيانات عالمية للموقع. كل بيانات الخرائط (خرائط التوجيه أو الخرائط الجزئية) يمكن تخزينها في ذاكرة الجهاز للإستخدام دون إنترنت. يوفر التطبيق كذلك وظائف توجيه بما في ذلك التوجيه الصوتي.
 \n
-\nبعض الميزات الأساسية: 
-\n - تشغيل كامل دون إنترنت( خزن الخرائط التوجيه أو الخرائط الجزئية المنزلة في ذاكرة الجهاز) 
-\n - خرائط التوجيه المدمجة للعالم ككل متاحة لتعمل دون إنترنت 
-\n - تحميل غير محدود لخرائط البلدان أو المناطق مباشرة من التطبيق 
-\n - ميزة ويكيبيديا المحلية ( قم بتحميل POI لويكيبيديا)، الأمثل لمشاهدة المعالم الأثرية 
-\n - يمكن تراكب عدة طبقات للخرائط، ك GPX أو مسارات الملاحة، مواقع ذات الاهتمام (POI)، الأماكن المفضلة، الحدود المحيطية، أماكن توقف النقل العمومي، خرائط إضافية بشفافية قابلة للتعديل 
-\n - البحث عن العناوين والأماكن (POI) دون إنترنت 
-\n - تحديد الطريق لمسافات متوسطة المدى 
-\n - وضع السيارة، الدراجة والمشاة متوفر مع: 
-\n - تبديل اختياري آلي لوضع الرؤية في الليل/النهار 
-\n - تكبير اختياري حسب السرعة 
-\n - محاذاة اختيارية للخريطة حسب البوصلة أو اتجاه الحركة 
+\nبعض الميزات الأساسية:
+\n - تشغيل كامل دون إنترنت( خزن خرائط التوجيه أو الخرائط الجزئية المنزلة في ذاكرة الجهاز)
+\n - خرائط التوجيه المدمجة للعالم ككل متاحة لتعمل دون إنترنت
+\n - تحميل غير محدود لخرائط البلدان أو المناطق مباشرة من التطبيق
+\n - ميزة ويكيبيديا المحلية ( قم بتحميل POI لويكيبيديا)، الأمثل لمشاهدة المعالم الأثرية
+\n - يمكن تراكب عدة طبقات للخرائط، ك GPX أو مسارات الملاحة، مواقع ذات الاهتمام (POI)، الأماكن المفضلة، الحدود المحيطية، أماكن توقف النقل العمومي، خرائط إضافية بشفافية قابلة للتعديل
+\n - البحث عن العناوين والأماكن (POI) دون إنترنت
+\n - تحديد الطريق لمسافات متوسطة المدى
+\n - وضع السيارة، الدراجة والمشاة متوفر مع:
+\n - تبديل اختياري آلي لوضع الرؤية في الليل/النهار
+\n - تكبير اختياري حسب السرعة
+\n - محاذاة اختيارية للخريطة حسب البوصلة أو اتجاه الحركة
 \n - توجيه اختياري للممر، عرض الحد الأقصى للسرعة، أصوات TTS (نص إلى كلام) أو أخرى مسجلة
 \n</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/الملاحظات تم رفعها</string>
@@ -2064,12 +2064,12 @@
     <string name="trip_rec_notification_settings">تشغيل التسجيل السريع</string>
     <string name="trip_rec_notification_settings_desc">عرض نظام الإشعار للسماح بتسجيل الرحلة.</string>
     <string name="shared_string_notifications">الإشعارات</string>
-    <string name="gpx_no_tracks_title_folder">يمكنك أيضا إضافة مسارات إلى المجلد</string>
+    <string name="gpx_no_tracks_title_folder">يمكنك إضافة مسارات إلى المجلد</string>
     <string name="gpx_add_track">أضف المزيد…</string>
     <string name="shared_string_appearance">المظهر</string>
     <string name="upload_poi">رفع POI</string>
     <string name="route_calculation">حساب المسار</string>
-    <string name="gpx_no_tracks_title">ليس لديك مسارات بعد</string>
+    <string name="gpx_no_tracks_title">لايوجد مسارات</string>
     <string name="rendering_value_fine_name">اللون والسمك</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="search_map_hint">المدينة أو المنطقة</string>
@@ -2878,7 +2878,7 @@
     <string name="show_more">اعرض المزيد</string>
     <string name="tracks_on_map">المسارات على الخريطة</string>
     <string name="quick_action_show_hide_gpx_tracks">إظهار/إخفاء مسارات GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">زر لإظهار أو إخفاء مسارات GPX المحددة على الخريطة.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">إظهار أو إخفاء مسارات GPX المحددة على الخريطة.</string>
     <string name="quick_action_gpx_tracks_hide">إخفاء المسارات</string>
     <string name="quick_action_gpx_tracks_show">عرض المسارات</string>
     <string name="add_destination_query">الرجاء إضافة الوجهة أولاً</string>
@@ -3016,15 +3016,15 @@
     <string name="enter_path_to_folder">إدخال مسار المجلد</string>
     <string name="shared_string_select_folder">المجلد…</string>
     <string name="paste_Osmand_data_folder_path">لصق مسار مجلد بيانات أوسماند</string>
-    <string name="change_osmand_data_folder_question">تغيير مجلد البيانات ؟</string>
+    <string name="change_osmand_data_folder_question">تغيير مجلد التخزين ؟</string>
     <string name="move_maps_to_new_destination">نقل للموقع الجديد</string>
     <string name="avoid_in_routing_descr_">تجنب بعض الطرق، أو بعض أنواع الطرق</string>
     <string name="app_mode_utv">جنبًا إلى جنب</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">طريق تلفريك</string>
     <string name="rendering_attr_piste_difficulty_connection_name">اتصال</string>
     <string name="shared_string_calculate">حساب</string>
-    <string name="shared_string_osmand_usage">استخدام أوسماند</string>
-    <string name="shared_sting_tiles">طبقات</string>
+    <string name="shared_string_osmand_usage">المستخدم</string>
+    <string name="shared_sting_tiles">الطبقات</string>
     <string name="shared_string_maps">الخرائط</string>
     <string name="shared_string_memory_tb_desc">تيرا بايت %1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3162,7 +3162,7 @@
     <string name="shared_string_by_default">بشكل افتراضي</string>
     <string name="download_detailed_map">قم بتنزيل خريطة مفصلة%s لعرض هذه المنطقة.</string>
     <string name="internal_app_storage_description">تخزين داخلي ، مخفي عن المستخدم والتطبيقات الأخرى ، يمكن الوصول إليه حصريا من أوسماند.</string>
-    <string name="change_data_storage_folder">تغيير مجلد التخزين</string>
+    <string name="change_data_storage_folder">مجلد التخزين</string>
     <string name="rendering_attr_piste_type_snow_park_name">حديقة التضاريس</string>
     <string name="rendering_attr_piste_type_sleigh_name">زلاجة</string>
     <string name="rendering_attr_piste_type_sled_name">تزلج</string>
@@ -3874,4 +3874,5 @@
     <string name="simplified_track_description">سيتم حفظ خط التوجيه فقط، وسيتم حذف نقاط الطريق.</string>
     <string name="shared_string_file_name">اسم الملف</string>
     <string name="one_point_error">الرجاء إضافة نقطتين على الأقل.</string>
+    <string name="shared_string_redo">إعادة</string>
 </resources>

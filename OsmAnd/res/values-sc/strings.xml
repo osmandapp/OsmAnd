@@ -2009,7 +2009,7 @@
     <string name="no_inet_connection_desc_map">Nde b\'est bisòngiu pro iscarrigare mapas.</string>
     <string name="search_location">Chirchende sa positzione…</string>
     <string name="storage_free_space">Ispàtziu lìberu</string>
-    <string name="storage_place_description">Ispàtziu impreadu pro sos datos de OsmAnd (mapas, documentos GPX etc.): %1$s.</string>
+    <string name="storage_place_description">Ispàtziu impreadu pro sos datos de OsmAnd (mapas, documentos de rasta etc.): %1$s.</string>
     <string name="give_permission">Dae su permissu</string>
     <string name="allow_access_location">Dae su permissu pro s\'atzessu a sa positzione</string>
     <string name="search_my_location">Agata sa positzione mea</string>
@@ -2064,8 +2064,8 @@
     <string name="trip_rec_notification_settings">Allughe sa registratzione de biàgios lestra</string>
     <string name="trip_rec_notification_settings_desc">Ammustra una notìfica chi permitit de incumentzare a registrare su biàgiu.</string>
     <string name="shared_string_notifications">Notìficas</string>
-    <string name="gpx_no_tracks_title">Non tenes galu documentos GPX</string>
-    <string name="gpx_no_tracks_title_folder">Podes fintzas annànghere documentos GPX a sa cartella</string>
+    <string name="gpx_no_tracks_title">Non tenes galu documentos de rasta</string>
+    <string name="gpx_no_tracks_title_folder">Podes fintzas annànghere documentos de rasta a sa cartella</string>
     <string name="gpx_add_track">Annanghe àteru…</string>
     <string name="shared_string_appearance">Aparèntzia</string>
     <string name="rendering_value_fine_name">Bonu</string>
@@ -2408,7 +2408,7 @@
     <string name="nothing_found">Nudda de agatadu</string>
     <string name="nothing_found_descr">Muda sa chirca o ismànnia su raju suo.</string>
     <string name="private_access_routing_req">Sa destinatzione tua est positzionada in un\'àrea cun atzessu privadu. Cheres abilitare s\'impreu de sos caminos privados pro custu biàgiu\?</string>
-    <string name="mapillary">Fotografias a livellu de sas carreras</string>
+    <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Widget pro Mapillary</string>
     <string name="mapillary_widget_descr">Permitit de contribuire in manera lestra e fàtzile a Mapillary.</string>
     <string name="mapillary_descr">Fotografias a livellu de sos caminos in lìnia pro totus. Iscoberi logos, agiuda, catura su mundu.</string>
@@ -2898,10 +2898,10 @@
     <string name="routeInfo_road_types_name">Castas de àndalas</string>
     <string name="exit_at">Essi in</string>
     <string name="sit_on_the_stop">Àrtzia in sa firmada</string>
-    <string name="quick_action_show_hide_gpx_tracks">Ammustra/cua sas rastas GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Unu butone pro ammustrare o cuare sas rastas GPX ischertadas in sa mapa.</string>
-    <string name="quick_action_gpx_tracks_hide">Istichi sas rastas GPX</string>
-    <string name="quick_action_gpx_tracks_show">Ammustra sas rastas GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Ammustra/cua sas rastas</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Unu butone pro ammustrare o cuare sas rastas ischertadas in sa mapa.</string>
+    <string name="quick_action_gpx_tracks_hide">Istichi sas rastas</string>
+    <string name="quick_action_gpx_tracks_show">Ammustra sas rastas</string>
     <string name="release_3_3">• Ischermada \'Diretziones\' noa: Ammustrat sos butones de destinatzione pro sa domo e su logu de traballu, s\'incurtzada \'àndala imbeniente\', sa lista de rastas GPX e de marcadores ativos e sa cronologia de sas chircas 
 \n 
 \n • Informatziones agiuntivas in suta de \'Minujas de s\'àndala\': casta de carreras, superfìtzies, ratesa, uniformidade 
@@ -3838,4 +3838,22 @@
     <string name="street_level_imagery">Fotografias a livellu de sas carreras</string>
     <string name="plan_route_exit_dialog_descr">Ses seguru de chèrrere serrare sa pianificatzione de s\'àndala chene sarvare\? As a pèrdere totu sas modìficas.</string>
     <string name="in_case_of_reverse_direction">In casu de diretzione furriada</string>
+    <string name="layer_gpx_layer">Rastas</string>
+    <string name="save_track_to_gpx_globally">Càrriga sa rasta in unu documentu GPX</string>
+    <string name="empty_state_my_tracks_desc">Importa o registra documentos de rasta</string>
+    <string name="shared_string_save_as_gpx">Sarva s’àndala comente unu documentu de rasta nou</string>
+    <string name="add_segment_to_the_track">Annanghe a unu documentu de rasta</string>
+    <string name="shared_string_gpx_files">Rastas</string>
+    <string name="show_gpx">Rastas</string>
+    <string name="empty_state_my_tracks">Annanghe documentos de rasta</string>
+    <string name="context_menu_item_add_waypoint">Annanghe unu puntu de coladòrgiu a sa rasta</string>
+    <string name="quick_action_add_gpx">Annanghe unu puntu de coladòrgiu a sa rasta</string>
+    <string name="map_widget_monitoring">Registratzione de su biàgiu</string>
+    <string name="disable_recording_once_app_killed_descrp">At a pònnere in pàusa sa registratzione de sa rasta cando OsmAnd at a èssere istudadu (pro mèdiu de sas aplicatziones reghentes). (S\'indicatore de sa modalidade OsmAnd de isfundu at a iscumpàrrere dae sa barra de notìfica de Android.)</string>
+    <string name="gpx_monitoring_stop">Pone in pàusa sa registratzione de su biàgiu</string>
+    <string name="gpx_monitoring_start">Sighi cun sa registratzione de su biàgiu</string>
+    <string name="marker_save_as_track">Sarva comente documentu de rasta</string>
+    <string name="number_of_gpx_files_selected_pattern">%s documentos de rasta ischertados</string>
+    <string name="save_global_track_interval_descr">Dislinda s’intervallu pro sa registratzione generale de sas rastas (abilitadu pro mèdiu de su widget registratzione GPX in sa mapa).</string>
+    <string name="monitoring_control_start">Registra</string>
 </resources>

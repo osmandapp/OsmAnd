@@ -3871,4 +3871,18 @@
     <string name="context_menu_item_add_waypoint">Adicionar ponto de passagem de trilha</string>
     <string name="map_widget_monitoring">Gravação de viagem</string>
     <string name="monitoring_control_start">GPX</string>
+    <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral da faixa (ativado através do widget de gravação Trip no mapa).</string>
+    <string name="gpx_monitoring_stop">Pausar a gravação da viagem</string>
+    <string name="gpx_monitoring_start">Retomar a gravação da viagem</string>
+    <string name="system_default_theme">Predefinição do sistema</string>
+    <string name="all_next_segments">Todos os segmentos subsequentes</string>
+    <string name="previous_segment">Segmento anterior</string>
+    <string name="all_previous_segments">Todos os segmentos anteriores</string>
+    <string name="only_selected_segment_recalc">Apenas o segmento selecionado será recalculado a usar o perfil selecionado.</string>
+    <string name="all_next_segments_will_be_recalc">Todos os segmentos subsequentes serão recalculados a utilizar o perfil selecionado.</string>
+    <string name="all_previous_segments_will_be_recalc">Todos os segmentos anteriores serão recalculados a usar o perfil selecionado.</string>
+    <string name="open_saved_track">Abrir trilho gravado</string>
+    <string name="shared_string_is_saved">está gravado</string>
+    <string name="one_point_error">Adicione pelo menos dois pontos.</string>
+    <string name="shared_string_redo">Refazer</string>
 </resources>

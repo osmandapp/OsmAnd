@@ -3711,4 +3711,5 @@
     <string name="screen_control">Ekraani juhtimine</string>
     <string name="threshold_distance">Läve kaugus</string>
     <string name="one_point_error">Palun lisa vähemalt kaks punkti.</string>
+    <string name="shared_string_redo">Korda tegevust</string>
 </resources>
