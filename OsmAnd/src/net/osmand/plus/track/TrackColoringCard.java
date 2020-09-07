@@ -15,6 +15,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +45,8 @@ import java.util.List;
 import static net.osmand.plus.dialogs.GpxAppearanceAdapter.getAppearanceItems;
 
 public class TrackColoringCard extends BaseCard implements ColorPickerListener {
+
+	private static final int MINIMUM_CONTRAST_RATIO = 3;
 
 	public static final int INVALID_VALUE = -1;
 
@@ -142,7 +145,12 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 
 	private View createColorItemView(@ColorInt final int color, final FlowLayout rootView, boolean customColor) {
 		View colorItemView = createCircleView(rootView);
+
 		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
+		double contrastRatio = ColorUtils.calculateContrast(color, ContextCompat.getColor(app, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
+		if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
+			backgroundCircle.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
+		}
 		backgroundCircle.setImageDrawable(UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_point_circle), color));
 		backgroundCircle.setOnClickListener(new View.OnClickListener() {
 			@Override
