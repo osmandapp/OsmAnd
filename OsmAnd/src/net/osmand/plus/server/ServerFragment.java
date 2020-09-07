@@ -12,15 +12,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 
 import static android.content.Context.WIFI_SERVICE;
 
 public class ServerFragment extends BaseOsmAndFragment {
+	private final static Log LOG = PlatformUtil.getLog(ServerFragment.class);
 	private boolean initialized = false;
 	private OsmAndHttpServer server;
 	private View view;
@@ -85,13 +88,14 @@ public class ServerFragment extends BaseOsmAndFragment {
 		try {
 			server = new OsmAndHttpServer();
 			server.setApplication((OsmandApplication) getMyApplication());
+			server.setActivity(this.getActivity());
 			initialized = true;
 			updateTextView("Server started at: http://" + getDeviceAddress() + ":" + OsmAndHttpServer.PORT);
 		} catch (IOException e) {
 			Toast.makeText(requireContext(),
 					e.getLocalizedMessage(),
 					Toast.LENGTH_SHORT).show();
-			e.printStackTrace();
+			LOG.error(e);
 		}
 	}
 

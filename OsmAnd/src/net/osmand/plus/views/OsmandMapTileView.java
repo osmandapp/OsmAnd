@@ -46,6 +46,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
+import net.osmand.plus.server.IMapOnImageDrawn;
+import net.osmand.plus.server.endpoints.TileEndpoint;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -77,6 +79,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	protected OsmandSettings settings = null;
 	private CanvasColors canvasColors = null;
 	private Boolean nightMode = null;
+	private IMapOnImageDrawn mapOnImageDrawnListener;
 
 	private class CanvasColors {
 		int colorDay = MAP_DEFAULT_COLOR;
@@ -86,7 +89,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private class FPSMeasurement {
 		int fpsMeasureCount = 0;
 		int fpsMeasureMs = 0;
-		long fpsFirstMeasurement = 0;
+		long fpsFirstMeasurement = 0 	;
 		float fps;
 
 		void calculateFPS(long start, long end) {
@@ -341,6 +344,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return application;
 	}
 
+	public void setOnImageDrawnListener(IMapOnImageDrawn iMapOnImageDrawn) {
+		this.mapOnImageDrawnListener = iMapOnImageDrawn;
+	}
+
 	// ///////////////////////// NON UI PART (could be extracted in common) /////////////////////////////
 	public LatLon getFirstTouchPointLatLon() {
 		return firstTouchPointLatLon;
@@ -574,6 +581,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (!bufferBitmap.isRecycled()) {
 				RectF rct = new RectF(x1, y1, x2, y2);
 				canvas.drawBitmap(bufferBitmap, null, rct, paintImg);
+				if (mapOnImageDrawnListener != null){
+					mapOnImageDrawnListener.onDraw(currentViewport,bufferBitmap);
+				}
 			}
 			canvas.rotate(-rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 		}
@@ -867,6 +877,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public net.osmand.data.RotatedTileBox getCurrentRotatedTileBox() {
 		return currentViewport;
+	}
+
+	public void setCurrentViewport(RotatedTileBox viewport) {
+		currentViewport = viewport;
+		refreshMap();
 	}
 
 	public float getDensity() {

@@ -1,10 +1,14 @@
 package net.osmand.plus.server;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
+import androidx.fragment.app.FragmentActivity;
 import fi.iki.elonen.NanoHTTPD;
 import net.osmand.PlatformUtil;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.server.endpoints.TileEndpoint;
 
 import java.io.IOException;
@@ -12,13 +16,14 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OsmAndHttpServer extends NanoHTTPD {
+public class OsmAndHttpServer extends NanoHTTPD{
 	private static final String FOLDER_NAME = "server";
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmAndHttpServer.class);
 	public static final int PORT = 24990;
 	public static String HOSTNAME = "0.0.0.0";
 	private final Map<String, ApiEndpoint> endpoints = new HashMap<>();
 	private OsmandApplication application;
+	private MapActivity mapActivity;
 
 	public OsmAndHttpServer() throws IOException {
 		super(HOSTNAME, PORT);
@@ -72,7 +77,7 @@ public class OsmAndHttpServer extends NanoHTTPD {
 	}
 
 	private void registerEndpoints() {
-		register("/tile", new TileEndpoint(application));
+		register("/tile", new TileEndpoint(application,mapActivity));
 	}
 
 	private void register(String path, ApiEndpoint endpoint) {
@@ -95,6 +100,7 @@ public class OsmAndHttpServer extends NanoHTTPD {
 						is,
 						is.available());
 			} catch (IOException e) {
+				LOG.error(e);
 				return ErrorResponses.response404;
 			}
 		}
@@ -109,6 +115,17 @@ public class OsmAndHttpServer extends NanoHTTPD {
 			type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
 		}
 		return type;
+	}
+
+	public void setActivity(FragmentActivity activity) {
+		if (activity instanceof MapActivity){
+			this.mapActivity = (MapActivity)activity;
+		}
+		for (String endpoint : endpoints.keySet()){
+			if (endpoints.get(endpoint) instanceof TileEndpoint){
+				((TileEndpoint) endpoints.get(endpoint)).setMapActivity(mapActivity);
+			}
+		}
 	}
 
 	public static class ErrorResponses {
