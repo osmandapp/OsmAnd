@@ -44,7 +44,6 @@ public class OsmAndHttpServer extends NanoHTTPD{
 
 	@Override
 	public Response serve(IHTTPSession session) {
-		Log.d("SERVER", "URI: " + session.getUri());
 		String uri = session.getUri();
 		if (uri.equals("/")) {
 			return getStatic("/go.html");
