@@ -315,7 +315,16 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isRoutePlanningMode() && mapActivity.getMapView() != null) {
-			QuadRect r = mapActivity.getMapRouteInfoMenu().getRouteRect(mapActivity);
+			QuadRect rect = mapActivity.getMapRouteInfoMenu().getRouteRect(mapActivity);
+
+			if (gpxFile != null) {
+				QuadRect gpxRect = gpxFile.getRect();
+
+				rect.left = Math.min(rect.left, gpxRect.left);
+				rect.right = Math.max(rect.right, gpxRect.right);
+				rect.top = Math.max(rect.top, gpxRect.top);
+				rect.bottom = Math.min(rect.bottom, gpxRect.bottom);
+			}
 
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
 			int tileBoxWidthPx = 0;
@@ -327,8 +336,9 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				int fHeight = getViewHeight() - y - AndroidUtils.getStatusBarHeight(app);
 				tileBoxHeightPx = tb.getPixHeight() - fHeight;
 			}
-			if (r.left != 0 && r.right != 0) {
-				mapActivity.getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+			if (rect.left != 0 && rect.right != 0) {
+				mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
+						tileBoxWidthPx, tileBoxHeightPx, 0);
 			}
 		}
 	}
@@ -447,6 +457,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 					public boolean processResult(GPXFile[] result) {
 						selectTrackToFollow(result[0]);
 						updateSelectionMode(false);
+						app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, true);
 						return true;
 					}
 				};
