@@ -7,7 +7,7 @@
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-
+     
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.STORAGE" />
@@ -65,7 +65,7 @@
 		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@mipmap/icon" android:value="" />
         <activity android:name="net.osmand.plus.activities.HelpActivity" />
         <activity android:name="net.osmand.plus.activities.ExitActivity" />
-        
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="net.osmand.plus.fileprovider"
