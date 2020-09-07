@@ -69,7 +69,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint, OsmandMapTile
 		mapActivity.getMapView().setCurrentViewport(rotatedTileBox);
 		int timeout = 0;
 		try {
-			while (!rotatedTileBox.equals(resultBmpViewport) && timeout < SOCKET_READ_TIMEOUT) {
+			while (timeout < SOCKET_READ_TIMEOUT) {
 				Thread.sleep(TIMEOUT_STEP);
 				timeout += TIMEOUT_STEP;
 			}
