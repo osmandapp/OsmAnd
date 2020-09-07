@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import fi.iki.elonen.NanoHTTPD;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -25,6 +25,7 @@ import static android.content.Context.WIFI_SERVICE;
 
 public class ServerFragment extends BaseOsmAndFragment {
 	private final static Log LOG = PlatformUtil.getLog(ServerFragment.class);
+	private final int port = 24990;
 	private boolean initialized = false;
 	private OsmAndHttpServer server;
 	private View view;
@@ -85,11 +86,12 @@ public class ServerFragment extends BaseOsmAndFragment {
 	private void initServer() {
 		final int THREAD_ID = 10000;
 		TrafficStats.setThreadStatsTag(THREAD_ID);
-		OsmAndHttpServer.HOSTNAME = getDeviceAddress();
+		String hostname = getDeviceAddress();
 		try {
-			server = new OsmAndHttpServer((MapActivity) getActivity());
+			server = new OsmAndHttpServer(hostname, port);
+			server.start((MapActivity) getActivity());
 			initialized = true;
-			updateTextView("Server started at: http://" + getDeviceAddress() + ":" + OsmAndHttpServer.PORT);
+			updateTextView("Server started at: " + server.getUrl());
 		} catch (IOException e) {
 			Toast.makeText(requireContext(),
 					e.getLocalizedMessage(),

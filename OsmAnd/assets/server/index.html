@@ -10,18 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OsmAnd - Offline Mobile Maps and Navigation</title>
     <link rel="stylesheet" type="text/css" href="/css/site.css?v=4"/>
-    <!--  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" /> -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
     <script type="text/javascript" src="/scripts/jquery-3.1.0.min.js"></script>
-    <!--
-      <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    -->
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
-    <link rel="stylesheet" href="css/leaflet.awesome-markers.css">
     <script src="/scripts/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
 
-    <script type="text/javascript" src="/scripts/js.cookie.js"></script>
     <script type="text/javascript" src="/scripts/go.js?v=5"></script>
 
     <script>
@@ -70,9 +64,9 @@
             });
         }
 
-        $(document).ready(function () {
-            setupMarkers();
-        });
+        // $(document).ready(function () {
+        //     //setupMarkers();
+        // });
 
     </script>
 </head>
@@ -80,22 +74,8 @@
 <div class="gocontainer" id="gocontainer">
     <div class="goheader">
         <a href="/"><img src="/images/logo-grey.png" class="logo"/></a>
-        <div class="coordinatescontainer">
-            <div><span class="title">LAT</span><span class="coordinate latitude"></span></div>
-            <div><span class="title">LON</span><span class="coordinate longitude"></span></div>
-        </div>
-        <div class="clear:both;"></div>
     </div>
     <div id="map"></div>
-    <div class="overlay" style="display:none;"></div>
-    <div class="popup" style="display:none;">
-        <div class="logo"></div>
-        <h1>Did you know</h1>
-        <p>OsmAnd has an iOS application</p>
-        <a class="button yes" href="javascript:void(0);">Yep, I've already got it</a>
-        <a class="button no" href="javascript:void(0);">Nope, but I'd love to try it</a>
-        <a class="button cancel" href="javascript:void(0);">Leave me alone</a>
-    </div>
 </div>
 </body>
 </html>

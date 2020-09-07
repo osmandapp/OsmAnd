@@ -15,29 +15,17 @@ import java.util.Map;
 public class OsmAndHttpServer extends NanoHTTPD {
 	private static final String FOLDER_NAME = "server";
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmAndHttpServer.class);
-	public static final int PORT = 24990;
-	public static String HOSTNAME = "0.0.0.0";
 	private final Map<String, ApiEndpoint> endpoints = new HashMap<>();
-	private OsmandApplication application;
 	private MapActivity mapActivity;
 
-	public OsmAndHttpServer(MapActivity mapActivity) throws IOException {
-		super(HOSTNAME, PORT);
-		setMapActivity(mapActivity);
-		start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
-		registerEndpoints();
+	public OsmAndHttpServer(String hostname, int port) {
+		super(hostname, port);
 	}
 
-	public OsmandApplication getApplication() {
-		return application;
-	}
-
-	public void setMapActivity(MapActivity mapActivity) {
-		this.application = mapActivity.getMyApplication();
+	public void start(MapActivity mapActivity) throws IOException {
 		this.mapActivity = mapActivity;
-		for (String s : endpoints.keySet()) {
-			endpoints.get(s).setMapActivity(mapActivity);
-		}
+		registerEndpoints();
+		start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
 	}
 
 	@Override
@@ -78,16 +66,16 @@ public class OsmAndHttpServer extends NanoHTTPD {
 	}
 
 	private void register(String path, ApiEndpoint endpoint) {
-		endpoint.setMapActivity(mapActivity);
 		endpoints.put(path, endpoint);
 	}
 
 	private NanoHTTPD.Response getStatic(String uri) {
 		InputStream is;
 		String mimeType = parseMimeType(uri);
-		if (application != null) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		if (app != null) {
 			try {
-				is = application.getAssets().open(FOLDER_NAME + uri);
+				is = app.getAssets().open(FOLDER_NAME + uri);
 				if (is.available() == 0) {
 					return ErrorResponses.response404;
 				}
@@ -112,6 +100,14 @@ public class OsmAndHttpServer extends NanoHTTPD {
 			type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
 		}
 		return type;
+	}
+
+	public String getUrl() {
+		return "http://" + getHostname()  + ":" + getListeningPort();
+	}
+
+	public interface ApiEndpoint {
+		NanoHTTPD.Response process(NanoHTTPD.IHTTPSession session);
 	}
 
 	public static class ErrorResponses {

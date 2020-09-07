@@ -46,8 +46,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
-import net.osmand.plus.server.IMapOnImageDrawn;
-import net.osmand.plus.server.endpoints.TileEndpoint;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -89,7 +87,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private class FPSMeasurement {
 		int fpsMeasureCount = 0;
 		int fpsMeasureMs = 0;
-		long fpsFirstMeasurement = 0 	;
+		long fpsFirstMeasurement = 0;
 		float fps;
 
 		void calculateFPS(long start, long end) {
@@ -107,6 +105,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	protected static final int emptyTileDivisor = 16;
 
+
+	public interface IMapOnImageDrawn {
+		void onDraw(RotatedTileBox viewport, Bitmap bmp);
+	}
 
 	public interface OnTrackBallListener {
 		public boolean onTrackBallEvent(MotionEvent e);
@@ -582,7 +584,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				RectF rct = new RectF(x1, y1, x2, y2);
 				canvas.drawBitmap(bufferBitmap, null, rct, paintImg);
 				if (mapOnImageDrawnListener != null){
-					mapOnImageDrawnListener.onDraw(currentViewport,bufferBitmap);
+					mapOnImageDrawnListener.onDraw(bufferImgLoc,bufferBitmap);
 				}
 			}
 			canvas.rotate(-rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
