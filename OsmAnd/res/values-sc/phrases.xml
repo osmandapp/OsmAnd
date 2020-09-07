@@ -3828,4 +3828,6 @@
     <string name="poi_give_box">Iscàtula pro donos (give box)</string>
     <string name="poi_city_block">Isuladu</string>
     <string name="poi_borough">Unidade amministrativa (Borough)</string>
+    <string name="poi_elevator">Ascensore</string>
+    <string name="poi_traffic_signals_arrow_no">Fritza: nono</string>
 </resources>

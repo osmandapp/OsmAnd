@@ -2236,8 +2236,8 @@
     <string name="route_roundabout_short">Tome %1$d sair e ir</string>
     <string name="upload_poi">Subir POI</string>
     <string name="route_calculation">Cálculo da rota</string>
-    <string name="gpx_no_tracks_title">Você não tem arquivos GPX ainda</string>
-    <string name="gpx_no_tracks_title_folder">Você pode também adicionar arquivos GPX na pasta</string>
+    <string name="gpx_no_tracks_title">Você não tem arquivos de trilha ainda</string>
+    <string name="gpx_no_tracks_title_folder">Você pode também adicionar arquivos de trilha na pasta</string>
     <string name="gpx_add_track">Adicionar…</string>
     <string name="shared_string_appearance">Aparência</string>
     <string name="trip_rec_notification_settings">Ativar gravação rápida</string>
@@ -2282,7 +2282,7 @@
     <string name="osm_live_banner_desc">Obtenha downloads ilimitados de mapas, adicionando atualizações semanais, diárias e a cada hora.</string>
     <string name="quick_action_add_gpx_descr">Um botão para adicionar um waypoint GPX no meio da tela.</string>
     <string name="av_locations_all_desc">Arquivo GPX com coordenadas e dados de todas as notas.</string>
-    <string name="storage_place_description">Armazenamento de dados do OsmAnd (para mapas, arquivos GPX, etc.): %1$s.</string>
+    <string name="storage_place_description">Armazenamento de dados do OsmAnd (para mapas, arquivos de trilha, etc.): %1$s.</string>
     <string name="first_usage_greeting">Obtenha direções e descobra novos lugares sem precisar de conexão com a Internet</string>
     <string name="rendering_attr_hideOverground_name">Objetos superficiais</string>
     <string name="get_started">Vamos começar</string>
@@ -2891,10 +2891,10 @@
     <string name="routeInfo_road_types_name">Tipos de estrada</string>
     <string name="exit_at">Desembarque em</string>
     <string name="sit_on_the_stop">Embarque na parada</string>
-    <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar faixas GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Um botão para mostrar ou ocultar as trilhas GPX selecionadas no mapa.</string>
-    <string name="quick_action_gpx_tracks_hide">Ocultar faixas de GPX</string>
-    <string name="quick_action_gpx_tracks_show">Mostrar faixas GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar trilhas</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Um botão para mostrar ou ocultar as trilhas selecionadas no mapa.</string>
+    <string name="quick_action_gpx_tracks_hide">Ocultar trilhas</string>
+    <string name="quick_action_gpx_tracks_show">Mostrar trilhas</string>
     <string name="release_3_3">- Nova tela \'Direções\': Apresenta os botões de destino Casa e Trabalho, atalho \"percurso anterior\", lista de faixas e marcadores GPX activos, histórico de pesquisa 
 \n 
 \n - Informação adicional em \"Detalhes da rota\": tipos de estrada, superfície, declive, suavidade 
@@ -3880,4 +3880,5 @@
     <string name="open_saved_track">Abrir trilha salva</string>
     <string name="shared_string_is_saved">está salvo</string>
     <string name="one_point_error">Adicione pelo menos dois pontos.</string>
+    <string name="shared_string_redo">Refazer</string>
 </resources>

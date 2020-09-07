@@ -1990,8 +1990,8 @@
     <string name="route_roundabout_short">Поверніть на %1$d з’їзд</string>
     <string name="upload_poi">Вивантажити POI</string>
     <string name="route_calculation">Побудова маршруту</string>
-    <string name="gpx_no_tracks_title">Ви досі не маєте жодних GPX-файлів</string>
-    <string name="gpx_no_tracks_title_folder">Ви також можете додати GPX-файли до теки</string>
+    <string name="gpx_no_tracks_title">Ви досі не маєте жодних файлів з треками</string>
+    <string name="gpx_no_tracks_title_folder">Ви також можете додати файли з треками до теки</string>
     <string name="gpx_add_track">Додати ще…</string>
     <string name="shared_string_appearance">Зовнішній вигляд</string>
     <string name="trip_rec_notification_settings">Ввімкнути швидкий запуск запису</string>
@@ -2050,7 +2050,7 @@
     <string name="no_inet_connection_desc_map">Необхідно завантажити мапи.</string>
     <string name="search_location">Визначення місцезнаходження…</string>
     <string name="storage_free_space">Вільне місце</string>
-    <string name="storage_place_description">Сховище даних OsmAnd (мапи, GPXфайли та ін.): %1$s.</string>
+    <string name="storage_place_description">Сховище даних OsmAnd (мапи, файли з треками, тощо): %1$s.</string>
     <string name="give_permission">Дати дозвіл</string>
     <string name="allow_access_location">Дозволити доступ до місця розташування</string>
     <string name="first_usage_greeting">Прокладайте маршрути і відкривайте нові для себе місця без підключення до Інтернету</string>
@@ -2853,9 +2853,9 @@
     <string name="shared_string_swap">Поміняти</string>
     <string name="show_more">Показати більше</string>
     <string name="tracks_on_map">Показані треки</string>
-    <string name="quick_action_show_hide_gpx_tracks">Показати/Приховати GPX-треки</string>
-    <string name="quick_action_gpx_tracks_hide">Приховати GPX-треки</string>
-    <string name="quick_action_gpx_tracks_show">Показати GPX-треки</string>
+    <string name="quick_action_show_hide_gpx_tracks">Показати/Приховати треки</string>
+    <string name="quick_action_gpx_tracks_hide">Приховати треки</string>
+    <string name="quick_action_gpx_tracks_show">Показати треки</string>
     <string name="add_destination_query">Спершу додайте пункт призначення</string>
     <string name="previous_route">Попередній маршрут</string>
     <string name="add_home">Додати домівку</string>
@@ -2990,7 +2990,7 @@
 \n</string>
     <string name="time_of_day">Час доби</string>
     <string name="by_transport_type">На %1$s</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Кнопка, що показує чи приховує вибрані треки GPX на мапі.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Кнопка, що показує чи приховує вибрані треки на мапі.</string>
     <string name="points_of_interests">Цікаві місця (POI)</string>
     <string name="avoid_roads_descr">Оберіть дорогу, яку Ви хочете уникати при навігації, або на мапі, або зі списку нижче:</string>
     <string name="show_along_the_route">Показувати поруч з маршрутом</string>
@@ -3882,4 +3882,5 @@
     <string name="simplified_track">Спрощений трек</string>
     <string name="simplified_track_description">Буде збережено лише лінію маршруту, а проміжні точки буде видалено.</string>
     <string name="shared_string_file_name">Назва файлу</string>
+    <string name="shared_string_redo">Повторити</string>
 </resources>
