@@ -84,7 +84,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		view.setOnClickListener(null);
 
 		int backgroundColorId = systemDefaultNightMode ?
-				R.color.map_background_color_dark :
+				R.color.list_background_color_dark :
 				R.color.map_background_color_light;
 		view.setBackgroundColor(getResources().getColor(backgroundColorId));
 
@@ -184,6 +184,6 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		return R.color.status_bar_transparent_light;
+		return R.color.status_bar_color_dark;
 	}
 }
