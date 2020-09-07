@@ -7,7 +7,7 @@
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-     
+
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.STORAGE" />
@@ -952,7 +952,7 @@
 
 		<!-- keep android:process on a separate line !! -->
 		<service
-		    android:process="net.osmand.plus"
+		    android:process="net.osmand.plus" 
 		    android:label="@string/process_navigation_service"
 			android:name="net.osmand.plus.NavigationService"
 			android:foregroundServiceType="location"
