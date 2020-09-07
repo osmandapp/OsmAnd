@@ -65,23 +65,6 @@
 				android:textSize="@dimen/default_desc_text_size" />
 		</LinearLayout>
 
-		<LinearLayout
-			android:id="@+id/buttons_container"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/dialog_button_ex_height"
-			android:gravity="center"
-			android:layout_gravity="bottom"
-			android:orientation="horizontal"
-			android:paddingLeft="@dimen/content_padding"
-			android:paddingRight="@dimen/content_padding"
-			android:paddingEnd="@dimen/content_padding"
-			android:paddingStart="@dimen/content_padding">
-
-			<include
-				android:id="@+id/dismiss_button"
-				layout="@layout/bottom_sheet_dialog_button" />
-		</LinearLayout>
-
 	</LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

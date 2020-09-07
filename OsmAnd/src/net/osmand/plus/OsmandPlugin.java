@@ -525,7 +525,7 @@ public abstract class OsmandPlugin {
 	protected void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
 	}
 
-	protected void registerMapContextMenuActions(MapActivity mapActivity, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {
+	protected void registerMapContextMenuActions(MapActivity mapActivity, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 	}
 
 	protected void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
@@ -791,9 +791,9 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void registerMapContextMenu(MapActivity map, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {
+	public static void registerMapContextMenu(MapActivity map, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
+			plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj, configureMenu);
 		}
 	}
 

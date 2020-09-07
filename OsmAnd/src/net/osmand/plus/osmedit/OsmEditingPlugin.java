@@ -219,7 +219,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 											  final double latitude,
 											  final double longitude,
 											  ContextMenuAdapter adapter,
-											  final Object selectedObj) {
+											  final Object selectedObj, boolean configureMenu) {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked, int[] viewCoordinates) {
