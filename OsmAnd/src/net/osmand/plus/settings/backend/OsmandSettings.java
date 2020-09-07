@@ -996,7 +996,14 @@ public class OsmandSettings {
 
 		@Override
 		protected Boolean getValue(Object prefs, Boolean defaultValue) {
-			return parseString(settingsAPI.getString(prefs, getId(), defaultValue != null ? defaultValue.toString() : null));
+			Boolean value;
+			try {
+				value = parseString(settingsAPI.getString(prefs, getId(), defaultValue.toString()));
+			} catch (ClassCastException e) {
+				value = settingsAPI.getBoolean(prefs, getId(), defaultValue);
+				setValue(prefs, value);
+			}
+			return value;
 		}
 
 		@Override
