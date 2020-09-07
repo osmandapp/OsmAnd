@@ -13,19 +13,19 @@
         android:textAlignment="center"
         android:autoLink="web"
         android:textColor="@color/color_white"
-        android:text="@string/click_button_to_start_server"
+        android:text="@string/start_web_server"
         android:gravity="center_horizontal"/>
 
     <Button
         android:id="@+id/server_start_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/global_start"/>
+        android:text="@string/shared_string_start"/>
 
     <Button
         android:id="@+id/server_stop_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/global_stop"/>
+        android:text="@string/shared_string_stop"/>
 
 </LinearLayout>

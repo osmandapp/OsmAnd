@@ -25,8 +25,9 @@ public class OsmAndHttpServer extends NanoHTTPD{
 	private OsmandApplication application;
 	private MapActivity mapActivity;
 
-	public OsmAndHttpServer() throws IOException {
+	public OsmAndHttpServer(OsmandApplication application) throws IOException {
 		super(HOSTNAME, PORT);
+		this.application = application;
 		start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
 		registerEndpoints();
 	}
@@ -46,7 +47,7 @@ public class OsmAndHttpServer extends NanoHTTPD{
 	public Response serve(IHTTPSession session) {
 		String uri = session.getUri();
 		if (uri.equals("/")) {
-			return getStatic("/go.html");
+			return getStatic("/index.html");
 		}
 		if (isApiUrl(uri)) {
 			return routeApi(session);

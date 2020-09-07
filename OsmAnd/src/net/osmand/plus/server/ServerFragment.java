@@ -41,7 +41,7 @@ public class ServerFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View view) {
 				if (!initialized) {
-					updateTextView(getString(R.string.click_button_to_stop_server));
+					updateTextView(getString(R.string.stop_web_server));
 					initServer();
 				}
 			}
@@ -49,7 +49,7 @@ public class ServerFragment extends BaseOsmAndFragment {
 		view.findViewById(R.id.server_stop_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				updateTextView(getString(R.string.click_button_to_start_server));
+				updateTextView(getString(R.string.start_web_server));
 				deInitServer();
 			}
 		});
@@ -86,8 +86,7 @@ public class ServerFragment extends BaseOsmAndFragment {
 		TrafficStats.setThreadStatsTag(THREAD_ID);
 		OsmAndHttpServer.HOSTNAME = getDeviceAddress();
 		try {
-			server = new OsmAndHttpServer();
-			server.setApplication((OsmandApplication) getMyApplication());
+			server = new OsmAndHttpServer(getMyApplication());
 			server.setActivity(this.getActivity());
 			initialized = true;
 			updateTextView("Server started at: http://" + getDeviceAddress() + ":" + OsmAndHttpServer.PORT);
