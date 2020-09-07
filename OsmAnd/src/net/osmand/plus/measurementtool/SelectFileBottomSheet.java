@@ -125,7 +125,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 					if (isShowCurrentGpx() && position == 0) {
 						fileName = null;
 					} else {
-						fileName = allGpxList.get(position).getFileName();
+						fileName = adapter.getGpxInfoList().get(position).getFileName();
 					}
 					if (listener != null) {
 						listener.selectFileOnCLick(fileName);
