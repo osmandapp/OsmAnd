@@ -100,7 +100,7 @@ function toColor(num) {
 				'mapid':'map',
                 'maxzoom':20,
 				'maxnativezoom':19,
-				'sourceurl':'https://tile.osmand.net/hd/{z}/{x}/{y}.png',
+				'sourceurl': window.location.protocol + "//" + window.location.host + '/tile/{z}/{x}/{y}.png',
 				'attribution':'&copy; <a href="https://www.openstreetmap.org/'+lparams+'#map=15/'+loc+'">OpenStreetMap</a> contributors'
             }, config),
 			init:function(){
