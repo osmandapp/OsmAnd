@@ -3835,4 +3835,5 @@
     <string name="poi_give_box">Give box</string>
     <string name="poi_city_block">Stadtteil</string>
     <string name="poi_borough">Bezirk</string>
+    <string name="poi_elevator">Aufzug</string>
 </resources>
