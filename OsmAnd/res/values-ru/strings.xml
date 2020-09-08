@@ -3375,7 +3375,7 @@
     <string name="rendering_attr_highway_class_track_grade5_name">Класс 5</string>
     <string name="app_mode_wagon">Фургон</string>
     <string name="map_look">Вид карты</string>
-    <string name="reset_to_default">Сбросить на значения по умолчанию</string>
+    <string name="reset_to_default">Сброс к настройкам по умолчанию</string>
     <string name="rendering_attr_piste_type_sled_name">Только самоходные сани</string>
     <string name="rendering_attr_piste_type_hike_name">Хайк</string>
     <string name="rendering_attr_piste_type_connection_name">Соединение</string>
