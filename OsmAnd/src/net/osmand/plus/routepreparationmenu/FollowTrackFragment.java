@@ -457,7 +457,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 					public boolean processResult(GPXFile[] result) {
 						selectTrackToFollow(result[0]);
 						updateSelectionMode(false);
-						app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, true);
 						return true;
 					}
 				};
