@@ -2555,4 +2555,9 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="lang_sco">skotti</string>
     <string name="lang_ne">nepali</string>
     <string name="search_poi_types">Etsi POI-tyyppejä</string>
+    <string name="custom_osmand_plugin">Muokattu OsmAnd-laajennus</string>
+    <string name="changes_applied_to_profile">Muutokset lisätty \'%1$s\' profiiliin.</string>
+    <string name="settings_item_read_error">Ei voitu lukea \'%1$s\'.</string>
+    <string name="settings_item_write_error">Ei voitu kirjoittaa \'%1$s\'.</string>
+    <string name="settings_item_import_error">Ei voitu tuoda kohteesta \'%1$s\'.</string>
 </resources>
