@@ -2545,7 +2545,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="radius_ruler_item">Sädeviivain</string>
     <string name="download_unsupported_action">Ei tuettu toiminto %1$s</string>
     <string name="travel_item">Matkailu (Wikivoyage ja Wikipedia)</string>
-    <string name="select_track_file">"Valitse reitti tiedosto "</string>
+    <string name="select_track_file">Valitse jälkitiedosto</string>
     <string name="wiki_menu_download_descr">Lisäkarttoja tarvitaan Wikipedian erikoiskohteiden tarkastelemiseen kartalla.</string>
     <string name="select_wikipedia_article_langs">Valitse kielet, joilla Wikipedia-artikkelit näkyvät kartalla. Voit vaihtaa kaikkien käytettävissä olevien kielten välillä lukiessasi artikkelia.</string>
     <string name="some_articles_may_not_available_in_lang">Jotkut Wikipedia-artikkelit eivät välttämättä ole saatavilla omalla kielelläsi.</string>
