@@ -2006,7 +2006,7 @@
     <string name="no_inet_connection_desc_map">A térképek letöltéséhez szükséges.</string>
     <string name="search_location">Hely keresése…</string>
     <string name="storage_free_space">Szabad hely</string>
-    <string name="storage_place_description">Az OsmAnd tárolt adatai (térképek, GPX fájlok, stb.): %1$s.</string>
+    <string name="storage_place_description">Az OsmAnd tárolt adatai (térképek, nyomvonalfájlok, stb.): %1$s.</string>
     <string name="give_permission">Engedélyezés</string>
     <string name="allow_access_location">Hozzáférés a pozíciódhoz engedélyezése</string>
     <string name="search_my_location">Pozícióm meghatározása</string>
@@ -2037,8 +2037,8 @@
     <string name="route_roundabout_short">Hajts ki a(z) %1$d kijáraton és menj</string>
     <string name="upload_poi">POI feltöltése</string>
     <string name="route_calculation">Útvonalszámítás</string>
-    <string name="gpx_no_tracks_title">Még nincsenek GPX fájljaid</string>
-    <string name="gpx_no_tracks_title_folder">A mappához GPX-fájlokat is hozzáadhat</string>
+    <string name="gpx_no_tracks_title">Még nincsenek nyomvonalfájljai</string>
+    <string name="gpx_no_tracks_title_folder">A mappához ön is adhat nyomvonalfájlokat</string>
     <string name="gpx_add_track">Továbbiak hozzáadása…</string>
     <string name="shared_string_appearance">Megjelenés</string>
     <string name="trip_rec_notification_settings">Gyors rögzítés bekapcsolása</string>
@@ -2849,10 +2849,10 @@
     <string name="step_by_step">Részletes navigáció</string>
     <string name="routeInfo_road_types_name">Úttípusok</string>
     <string name="exit_at">Szálljon le itt:</string>
-    <string name="quick_action_show_hide_gpx_tracks">GPX-nyomvonalak megjelenítése/elrejtése</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Gomb, amely a térképen megjeleníti vagy elrejti a GPX-nyomvonalakat.</string>
-    <string name="quick_action_gpx_tracks_hide">GPX nyomvonalak elrejtése</string>
-    <string name="quick_action_gpx_tracks_show">GPX nyomvonalak megjelenítése</string>
+    <string name="quick_action_show_hide_gpx_tracks">Nyomvonalak megjelenítése/elrejtése</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Gomb, amely a térképen megjeleníti vagy elrejti a nyomvonalakat.</string>
+    <string name="quick_action_gpx_tracks_hide">Nyomvonalak elrejtése</string>
+    <string name="quick_action_gpx_tracks_show">Nyomvonalak megjelenítése</string>
     <string name="add_destination_query">Először adjon meg egy célpontot</string>
     <string name="release_3_3">"• Új \'Navigáció\' képernyő:  Új gomb az Otthon és Munkahely célpontokhoz, \'előző útvonal\' gyors gomb, az aktív GPX útvonalak és jelölők listája, keresési előzmények
 \n
@@ -3785,7 +3785,7 @@
     <string name="gpx_split_interval_descr">Válassza ki, hogy a nyomvonalon milyen távolság- vagy időintervallumok jelzései jelenjenek meg.</string>
     <string name="monitoring_min_distance_descr">Ez a szűrő kiküszöböli az ismétlődő pontok rögzítését ott, ahol túl kevés tényleges mozgás történhetett, így szebb lesz a később utólag fel nem dolgozott nyomvonalak térbeli megjelenése.</string>
     <string name="multimedia_rec_split_title">Felvétel vágása</string>
-    <string name="disable_recording_once_app_killed_descrp">Szünetelteti a nyomvonal naplózását, amikor az alkalmazást (később megnyitott alkalmazások) bezárják. (Az OsmAnd háttérjelzése eltűnik az Android értesítési sávjáról.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Szünetelteti a nyomvonal naplózását, amikor az alkalmazást bezárják (a \'mostanában használt alkalmazások\' felületen). (Az OsmAnd háttérjelzése eltűnik az Android értesítési sávjáról.)</string>
     <string name="monitoring_min_speed_descr_recommendation">Javaslat: Először próbálja meg a mozgásérzékelést használni a legkisebb elmozdulást naplózó szűrővel (B). Ez jobb eredményeket hozhat, és kevesebb adatot veszít. Ha a nyomvonalak alacsony sebességnél továbbra is zajosak, próbálkozzon itt nullától eltérő értékekkel. Felhívjuk figyelmét, hogy egyes (hálózatalapú módszereket használó) mérőeszközök egyáltalán nem adnak sebességértéket, így ebben az esetben semmi sem fog rögzülni.</string>
     <string name="street_level_imagery">Utcaszintű képek</string>
     <string name="simplified_track_description">Csak az út vonala lesz elmentve, az útpontok törlődnek.</string>
@@ -3879,4 +3879,5 @@
     <string name="number_of_gpx_files_selected_pattern">%s nyomvonalfájl kijelölve</string>
     <string name="rourte_between_points_add_track_desc">Jelölje ki azt a nyomvonalfájlt, amelyhez az új szakasz hozzáadódjék.</string>
     <string name="show_gpx">Nyomvonalak</string>
+    <string name="shared_string_redo">Mégis</string>
 </resources>
