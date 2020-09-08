@@ -1392,7 +1392,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			});
 			if (item != null) {
 				LinearLayout.LayoutParams layoutParams = getContainerButtonLayoutParams(mapActivity, false);
-				layoutParams.setMargins(margin, 0, margin, 0);
+				AndroidUtils.setMargins(layoutParams, margin, 0, margin, 0);
 				optionsContainer.addView(item, layoutParams);
 			}
 		}
@@ -1402,7 +1402,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (containerParams) {
 			int margin = AndroidUtils.dpToPx(context, 3);
 			LinearLayout.LayoutParams containerBtnLp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-			containerBtnLp.setMargins(margin, 0, margin, 0);
+			AndroidUtils.setMargins(containerBtnLp, margin, 0, margin, 0);
 			return containerBtnLp;
 		} else {
 			return new LinearLayout.LayoutParams(AndroidUtils.dpToPx(context, 100), ViewGroup.LayoutParams.MATCH_PARENT);
