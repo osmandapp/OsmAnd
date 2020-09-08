@@ -1575,8 +1575,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		setupViaText(mainView);
 
-		FrameLayout viaButton = (FrameLayout) mainView.findViewById(R.id.via_button);
-		AndroidUiHelper.updateVisibility(viaButton, isFinishPointFromTrack());
+		FrameLayout viaButton = mainView.findViewById(R.id.via_button);
+		AndroidUiHelper.updateVisibility(viaButton, routeParams == null || isFinishPointFromTrack());
 		viaButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
