@@ -43,6 +43,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class GpxSelectionHelper {
+
+	private final static Log LOG = PlatformUtil.getLog(GpxSelectionHelper.class);
 
 	public static final String CURRENT_TRACK = "currentTrack";
 	private static final String FILE = "file";
@@ -61,52 +64,21 @@ public class GpxSelectionHelper {
 	private static final String SHOW_ARROWS = "show_arrows";
 	private static final String GRADIENT_SCALE_TYPE = "gradient_scale_type";
 	private static final String SHOW_START_FINISH = "show_start_finish";
-	private static final String TRACK_TO_FOLLOW = "trackToFollow";
-	private static final String SHOULD_HIDE_TRACK_TO_FOLLOW = "should_hide_track_to_follow";
 
 	private OsmandApplication app;
 	@NonNull
-	private List<SelectedGpxFile> selectedGPXFiles = new java.util.ArrayList<>();
-	private Map<GPXFile, Long> selectedGpxFilesBackUp = new java.util.HashMap<>();
+	private List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>();
+	private Map<GPXFile, Long> selectedGpxFilesBackUp = new HashMap<>();
 	private SavingTrackHelper savingTrackHelper;
-	private final static Log LOG = PlatformUtil.getLog(GpxSelectionHelper.class);
 	private SelectGpxTask selectGpxTask;
-	private StateChangedListener<String> followTrackListener;
 	private SelectedGpxFile trackToFollow;
+	private StateChangedListener<String> followTrackListener;
 	private boolean shouldHideTrackToFollow;
 
 	public GpxSelectionHelper(OsmandApplication app, SavingTrackHelper trackHelper) {
 		this.app = app;
 		savingTrackHelper = trackHelper;
-		followTrackListener = new StateChangedListener<String>() {
-			@Override
-			public void stateChanged(String gpxRoutePath) {
-				if (trackToFollow != null) {
-					if (shouldHideTrackToFollow) {
-						selectGpxFile(trackToFollow.getGpxFile(), false, false);
-						shouldHideTrackToFollow = false;
-					}
-					trackToFollow = null;
-				}
-				if (!Algorithms.isEmpty(gpxRoutePath)) {
-					trackToFollow = getSelectedFileByPath(gpxRoutePath);
-					if (trackToFollow == null) {
-						shouldHideTrackToFollow = true;
-						File file = new File(gpxRoutePath);
-						if (file.exists() && !file.isDirectory()) {
-							new GpxFileLoaderTask(file, new CallbackWithObject<GPXFile>() {
-								@Override
-								public boolean processResult(GPXFile result) {
-									trackToFollow = selectGpxFile(result, true, false);
-									return true;
-								}
-							}).execute();
-						}
-					}
-				}
-			}
-		};
-		app.getSettings().FOLLOW_THE_GPX_ROUTE.addListener(followTrackListener);
+		app.getSettings().FOLLOW_THE_GPX_ROUTE.addListener(getFollowTrackListener());
 	}
 
 	public void clearAllGpxFilesToShow(boolean backupSelection) {
@@ -142,6 +114,40 @@ public class GpxSelectionHelper {
 			}
 			saveCurrentSelections();
 		}
+	}
+
+	private StateChangedListener<String> getFollowTrackListener() {
+		if (followTrackListener == null) {
+			followTrackListener = new StateChangedListener<String>() {
+				@Override
+				public void stateChanged(String gpxRoutePath) {
+					if (trackToFollow != null) {
+						if (shouldHideTrackToFollow) {
+							selectGpxFile(trackToFollow.getGpxFile(), false, false);
+							shouldHideTrackToFollow = false;
+						}
+						trackToFollow = null;
+					}
+					if (!Algorithms.isEmpty(gpxRoutePath)) {
+						trackToFollow = getSelectedFileByPath(gpxRoutePath);
+						if (trackToFollow == null) {
+							shouldHideTrackToFollow = true;
+							File file = new File(gpxRoutePath);
+							if (file.exists() && !file.isDirectory()) {
+								new GpxFileLoaderTask(file, new CallbackWithObject<GPXFile>() {
+									@Override
+									public boolean processResult(GPXFile result) {
+										trackToFollow = selectGpxFile(result, true, false);
+										return true;
+									}
+								}).execute();
+							}
+						}
+					}
+				}
+			};
+		}
+		return followTrackListener;
 	}
 
 	private static class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
@@ -647,7 +653,6 @@ public class GpxSelectionHelper {
 								obj.put(scaleType.getColorTypeName(), Algorithms.colorToString(gradientScaleColor));
 							}
 						}
-						obj.put(TRACK_TO_FOLLOW, shouldHideTrackToFollow);
 					}
 					obj.put(SELECTED_BY_USER, s.selectedByUser);
 				} catch (JSONException e) {
