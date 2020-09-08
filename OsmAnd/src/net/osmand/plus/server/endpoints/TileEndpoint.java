@@ -60,7 +60,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 	}
 
 	@Override
-	public NanoHTTPD.Response process(NanoHTTPD.IHTTPSession session, String url) {
+	public synchronized NanoHTTPD.Response process(NanoHTTPD.IHTTPSession session, String url) {
 		// https://tile.osmand.net/hd/6/55/25.png
 		int extInd = url.indexOf('.');
 		if (extInd >= 0) {
@@ -107,7 +107,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		final RotatedTileBox cp = mapActivity.getMapView().getCurrentRotatedTileBox();
 		final RotatedTileBox rotatedTileBox = new RotatedTileBox.RotatedTileBoxBuilder()
 				.setLocation(lat, lon)
-				.setMapDensity(cp.getMapDensity()).density(TILE_DENSITY)
+				.setMapDensity(TILE_DENSITY).density(TILE_DENSITY)
 				.setZoom(zoom)
 				.setPixelDimensions(TILE_SIZE_PX * TILE_DENSITY * METATILE_SIZE, TILE_SIZE_PX * TILE_DENSITY * METATILE_SIZE, 0.5f, 0.5f).build();
 		mapActivity.getMapView().setCurrentViewport(rotatedTileBox);
