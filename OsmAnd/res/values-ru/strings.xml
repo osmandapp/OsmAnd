@@ -1650,7 +1650,7 @@
     <string name="traffic_warning_pedestrian">Пешеходный переход</string>
     <string name="speak_pedestrian">Пешеходные переходы</string>
     <string name="navigation_over_track">Начать навигацию по треку?</string>
-    <string name="avoid_roads_msg">Запуск альтернативного маршрута путём указания дорог, которых следует избегать</string>
+    <string name="avoid_roads_msg">Запуск альтернативного маршрута путём исключения указанных дорог</string>
     <string name="save_track_to_gpx_globally_headline">Запись трека по требованию</string>
     <string name="proxy_pref_title">Прокси-сервер</string>
     <string name="proxy_pref_descr">Укажите прокси-сервер.</string>
@@ -3802,7 +3802,7 @@
     <string name="app_mode_wheelchair_forward">Инвалидное кресло впереди</string>
     <string name="add_to_a_track">Добавить к треку</string>
     <string name="set_working_days_to_continue">Необходимо указать рабочие дни для продолжения</string>
-    <string name="route_between_points">Маршрут между пунктами</string>
+    <string name="route_between_points">Маршрут между точками</string>
     <string name="plan_a_route">План маршрута</string>
     <string name="gpx_split_interval_none_descr">Выберите нужный вариант разбиения: по времени или по расстоянию.</string>
     <string name="gpx_split_interval_descr">Выберите интервал с которым будут отображаться метки с расстоянием или временем на треке.</string>
@@ -3831,7 +3831,7 @@
     <string name="rourte_between_points_warning_desc">Для использования данной возможности OsmAnd проложит ваш трек по дорогам.
 \n
 \nДалее вам следует выбрать профиль для построения маршрута с учётом ограничений этого профиля.</string>
-    <string name="rourte_between_points_desc">Выберите как соединять точки: по прямой линии или построением маршрута.</string>
+    <string name="rourte_between_points_desc">Выберите способ соединения точек: прямой линией или прокладкой маршрута с выбранным профилем.</string>
     <string name="in_case_of_reverse_direction">В случае обратного направления</string>
     <string name="plan_route_exit_dialog_descr">Закрыть план маршрута без сохранения\? Все изменения будут потеряны.</string>
     <string name="street_level_imagery">Изображения на уровне улиц</string>
