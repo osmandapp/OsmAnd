@@ -34,6 +34,8 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	public static boolean SHOW = true;
 	public static boolean VISIBLE = false;
 
+	private boolean systemDefaultNightMode;
+
 	public MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
 	}
@@ -77,7 +79,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		OsmandApplication app = requireMyApplication();
 		FragmentActivity activity = requireActivity();
 		UiUtilities iconsCache = app.getUIUtilities();
-		boolean systemDefaultNightMode = app.getSettings().isSupportSystemDefaultTheme() &&
+		systemDefaultNightMode = app.getSettings().isSupportSystemDefaultTheme() &&
 				!app.getSettings().isLightSystemDefaultTheme();
 
 		RelativeLayout view = new RelativeLayout(activity);
@@ -184,6 +186,8 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		return R.color.status_bar_color_dark;
+		return systemDefaultNightMode ?
+				R.color.status_bar_color_dark :
+				R.color.status_bar_transparent_light;
 	}
 }
