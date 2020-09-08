@@ -1835,7 +1835,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 
 			TextView line3 = (TextView) view.findViewById(R.id.context_menu_line3);
-			String subtypeStr = menu.getSubtypeStr();
+			CharSequence subtypeStr = menu.getSubtypeStr();
 			if (TextUtils.isEmpty(subtypeStr)) {
 				line3.setVisibility(View.GONE);
 			} else {
