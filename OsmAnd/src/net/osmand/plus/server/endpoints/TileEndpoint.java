@@ -1,23 +1,17 @@
 package net.osmand.plus.server.endpoints;
 
 import android.graphics.Bitmap;
-
 import fi.iki.elonen.NanoHTTPD;
-
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.server.OsmAndHttpServer;
 import net.osmand.util.MapUtils;
-
 import org.apache.commons.logging.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
@@ -27,7 +21,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 	private static final int TILE_DENSITY = 2;
 	private static final int TIMEOUT_STEP = 500;
 	private static final int TIMEOUT = 5000;
-	private static final int METATILE_SIZE = 2;
+	private static final int METATILE_SIZE = 1;
 	private static final int MAX_CACHE_SIZE = 4;
 
 	private static final Log LOG = PlatformUtil.getLog(TileEndpoint.class);
@@ -72,7 +66,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		if (extInd >= 0) {
 			url = url.substring(0, extInd);
 		}
-		if(url.charAt(0) == '/') {
+		if (url.charAt(0) == '/') {
 			url = url.substring(1);
 		}
 		String[] prms = url.split("/");
@@ -82,20 +76,18 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		int zoom = Integer.parseInt(prms[1]);
 		int x = Integer.parseInt(prms[2]);
 		int y = Integer.parseInt(prms[3]);
-		MetaTileCache res = null;
-		for (MetaTileCache r : cache) {
-			if (r.zoom == zoom && r.ex >= x && r.ey >= y && r.sx <= x && r.sy <= y) {
-				res = r;
-			}
-		}
-		if(res == null) {
-			res = requestMetatile(x, y, zoom);
-		}
+		//incorrect condition
+//		for (MetaTileCache r : cache) {
+//			if (r.zoom == zoom && r.ex >= x && r.ey >= y && r.sx <= x && r.sy <= y) {
+//				res = r;
+//			}
+//		}
+		MetaTileCache res = requestMetatile(x, y, zoom);
 		if (res == null) {
 			return OsmAndHttpServer.ErrorResponses.response500;
 		}
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		Bitmap bmp = res.getSubtile(x, y);
+		Bitmap bmp = res.bmp;
 		if (bmp == null) {
 			return OsmAndHttpServer.ErrorResponses.response500;
 		}
@@ -119,8 +111,6 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 				.setZoom(zoom)
 				.setPixelDimensions(TILE_SIZE_PX * TILE_DENSITY * METATILE_SIZE, TILE_SIZE_PX * TILE_DENSITY * METATILE_SIZE, 0.5f, 0.5f).build();
 		mapActivity.getMapView().setCurrentViewport(rotatedTileBox);
-
-
 		int timeout = 0;
 		try {
 			AsyncLoadingThread athread = mapActivity.getMyApplication().getResourceManager().getAsyncLoadingThread();
@@ -138,10 +128,8 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 				res.ey = my + METATILE_SIZE - 1;
 				res.zoom = zoom;
 				RotatedTileBox tilebox = mapActivity.getMapView().getBufferImgLoc();
-				// TODO here we need to properly cut image according to tilebox
 				res.bmp = mapActivity.getMapView().getBufferBitmap();
 				LOG.debug(mapActivity.getMapView().getBufferImgLoc());
-
 				addToMemoryCache(res);
 			}
 			return res;
@@ -150,6 +138,4 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		}
 		return null;
 	}
-
-
 }

@@ -23,10 +23,10 @@ public class OsmAndHttpServer extends NanoHTTPD {
 		super(hostname, port);
 	}
 
-	public void start(MapActivity mapActivity) throws IOException {
-		this.mapActivity = mapActivity;
-		registerEndpoints();
-		start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
+	@Override
+	public void stop() {
+		mapActivity.getMapView().setServerRendering(false);
+		super.stop();
 	}
 
 	@Override
@@ -39,6 +39,13 @@ public class OsmAndHttpServer extends NanoHTTPD {
 			return routeApi(session);
 		}
 		return getStatic(uri);
+	}
+
+	public void start(MapActivity mapActivity) throws IOException {
+		this.mapActivity = mapActivity;
+		registerEndpoints();
+		start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
+		mapActivity.getMapView().setServerRendering(true);
 	}
 
 	public String getUrl() {
