@@ -4,20 +4,16 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -27,8 +23,6 @@ import android.widget.Toast;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.TextViewCompat;
 import androidx.fragment.app.Fragment;
@@ -40,13 +34,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
-import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.IndexConstants;
 import net.osmand.LocationsHolder;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -100,6 +92,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.SnapToRoadProgressListener;
 import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
@@ -629,9 +622,17 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (editingCtx.getPointsCount() > 0) {
 				GpxData gpxData = editingCtx.getGpxData();
 				if (editingCtx.isNewData()) {
-					saveAsGpx(SaveType.ROUTE_POINT, saveAction);
+					if (saveAction == SaveAction.SHOW_TOAST) {
+						openSaveAsNewTrackMenu(mapActivity);
+					} else {
+						saveNewGpx(null, getSuggestedFileName(), true, false, saveAction);
+					}
 				} else if (isInEditMode() && gpxData.getActionType() == ActionType.EDIT_SEGMENT) {
-					openSaveAsNewTrackMenu(mapActivity);
+					if (saveAction == SaveAction.SHOW_TOAST) {
+						openSaveAsNewTrackMenu(mapActivity);
+					} else {
+						saveNewGpx(null, getSuggestedFileName(), true, false, saveAction);
+					}
 				} else {
 					addToGpx(mapActivity, saveAction);
 				}
@@ -912,7 +913,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onChangeApplicationMode(ApplicationMode mode, RouteBetweenPointsDialogType dialogType,
-										RouteBetweenPointsDialogMode dialogMode) {
+	                                    RouteBetweenPointsDialogMode dialogMode) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			ChangeRouteType changeRouteType = ChangeRouteType.NEXT_SEGMENT;
@@ -988,8 +989,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (selectedGpxFile != null) {
 				gpxFile = selectedGpxFile.getGpxFile();
 			} else {
-				gpxFile = GPXUtilities.loadGPXFile(new File(
-						getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR), gpxFileName));
+				gpxFile = GPXUtilities.loadGPXFile(new File(app.getAppPath(GPX_INDEX_DIR), gpxFileName));
 			}
 
 		}
@@ -1050,13 +1050,21 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack) {
-		File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-		if (folderName != null) {
-			dir = new File(dir, folderName);
+		saveNewGpx(folderName, fileName, showOnMap, simplifiedTrack, SaveAction.SHOW_IS_SAVED_FRAGMENT);
+	}
+
+	private void saveNewGpx(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack,
+	                        SaveAction saveAction) {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			File dir = getMyApplication().getAppPath(GPX_INDEX_DIR);
+			if (folderName != null) {
+				dir = new File(dir, folderName);
+			}
+			fileName += GPX_FILE_EXT;
+			SaveType saveType = simplifiedTrack ? SaveType.LINE : SaveType.ROUTE_POINT;
+			saveNewGpx(dir, fileName, showOnMap, saveType, saveAction);
 		}
-		fileName = fileName + GPX_FILE_EXT;
-		SaveType saveType = simplifiedTrack ? SaveType.LINE : SaveType.ROUTE_POINT;
-		saveNewGpx(dir, fileName, showOnMap, saveType, SaveAction.SHOW_IS_SAVED_FRAGMENT);
 	}
 
 	private MeasurementAdapterListener createMeasurementAdapterListener(final ItemTouchHelper touchHelper) {
@@ -1183,7 +1191,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (mapActivity != null) {
 			if (editingCtx.getPointsCount() > 0) {
 				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-						this, getSuggestedFileName());
+						this, "", getSuggestedFileName(), true, true);
 			} else {
 				Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 			}
@@ -1462,83 +1470,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	private void saveAsGpx(final SaveType saveType, final SaveAction saveAction) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-			final View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.save_gpx_dialog, null);
-			final EditText nameEt = (EditText) view.findViewById(R.id.gpx_name_et);
-			final TextView warningTextView = (TextView) view.findViewById(R.id.file_exists_text_view);
-			final View buttonView = view.findViewById(R.id.button_view);
-			final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
-			UiUtilities.setupCompoundButton(showOnMapToggle, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
-			buttonView.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					showOnMapToggle.setChecked(!showOnMapToggle.isChecked());
-				}
-			});
-			showOnMapToggle.setChecked(true);
-
-			String displayedName = getSuggestedFileName();
-			nameEt.setText(displayedName);
-			nameEt.setSelection(displayedName.length());
-			final boolean[] textChanged = new boolean[1];
-
-			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode))
-					.setTitle(R.string.enter_gpx_name)
-					.setView(view)
-					.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							final String name = nameEt.getText().toString();
-							String fileName = name + GPX_FILE_EXT;
-							if (textChanged[0]) {
-								File fout = new File(dir, fileName);
-								int ind = 1;
-								while (fout.exists()) {
-									fileName = name + "_" + (++ind) + GPX_FILE_EXT;
-									fout = new File(dir, fileName);
-								}
-							}
-							saveNewGpx(dir, fileName, showOnMapToggle.isChecked(), saveType, saveAction);
-						}
-					})
-					.setNegativeButton(R.string.shared_string_cancel, null);
-			final AlertDialog dialog = builder.create();
-			dialog.show();
-
-			nameEt.addTextChangedListener(new TextWatcher() {
-				@Override
-				public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-				}
-
-				@Override
-				public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-				}
-
-				@Override
-				public void afterTextChanged(Editable editable) {
-					if (new File(dir, editable.toString() + GPX_FILE_EXT).exists()) {
-						warningTextView.setVisibility(View.VISIBLE);
-						warningTextView.setText(R.string.file_with_name_already_exists);
-						dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
-					} else if (editable.toString().trim().isEmpty()) {
-						warningTextView.setVisibility(View.VISIBLE);
-						warningTextView.setText(R.string.enter_the_file_name);
-						dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-					} else {
-						warningTextView.setVisibility(View.INVISIBLE);
-						dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
-					}
-					textChanged[0] = true;
-				}
-			});
-		}
-	}
-
 	private String getSuggestedFileName() {
 		GpxData gpxData = editingCtx.getGpxData();
 		String displayedName;
@@ -1547,7 +1478,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			displayedName = suggestedName;
 			OsmandApplication app = getMyApplication();
 			if (app != null) {
-				File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+				File dir = app.getAppPath(GPX_INDEX_DIR);
 				File fout = new File(dir, suggestedName + GPX_FILE_EXT);
 				int ind = 0;
 				while (fout.exists()) {
@@ -1754,19 +1685,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 								snackbar = Snackbar.make(mapActivity.getLayout(),
 										MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getName()),
 										Snackbar.LENGTH_LONG)
-										.setAction(R.string.shared_string_rename, new OnClickListener() {
-											@Override
-											public void onClick(View view) {
-												MapActivity mapActivity = mapActivityRef.get();
-												if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-													FileUtils.renameFile(mapActivity, toSave, new FileUtils.RenameCallback() {
-														@Override
-														public void renamedTo(File file) {
-														}
-													});
-												}
-											}
-										});
+										.setAction(R.string.shared_string_rename, getRenameListener(mapActivityRef));
 								snackbar.getView().<TextView>findViewById(com.google.android.material.R.id.snackbar_action)
 										.setAllCaps(false);
 								UiUtilities.setupSnackbar(snackbar, nightMode);
@@ -1789,6 +1708,22 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				} else {
 					Toast.makeText(mapActivity, warning.getMessage(), Toast.LENGTH_LONG).show();
 				}
+			}
+
+			private OnClickListener getRenameListener(final WeakReference<MapActivity> mapActivityRef) {
+				return new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						MapActivity mapActivity = mapActivityRef.get();
+						String parentFolder = toSave.getParentFile().getName();
+						if (GPX_INDEX_DIR.equals(parentFolder + File.separator)) {
+							parentFolder = null;
+						}
+						SaveAsNewTrackBottomSheetDialogFragment.showInstance(
+								mapActivity.getSupportFragmentManager(), null, parentFolder,
+								AndroidUtils.trimExtension(toSave.getName()), false, showOnMap);
+					}
+				};
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
