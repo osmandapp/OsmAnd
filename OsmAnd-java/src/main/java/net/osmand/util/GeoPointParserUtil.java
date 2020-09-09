@@ -3,6 +3,8 @@ package net.osmand.util;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -10,6 +12,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import net.osmand.data.LatLon;
+import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 
 public class GeoPointParserUtil {
 
@@ -68,6 +73,31 @@ public class GeoPointParserUtil {
 			}
 		}
 		return map;
+	}
+	
+	private static int kMaxPointBytes = 10;
+	private static int kMaxCoordBits = kMaxPointBytes * 3;
+	public static LatLon decodeMapsMeLatLonToInt(String s) {
+		// 44TvlEGXf-
+		int lat = 0, lon = 0;
+		int shift = kMaxCoordBits - 3;
+		for (int i = 0; i < s.length(); ++i, shift -= 3) {
+			int a = net.osmand.osm.io.Base64.indexOf(s.charAt(i));
+			if (a < 0)
+				return null;
+
+			int lat1 = (((a >> 5) & 1) << 2 | ((a >> 3) & 1) << 1 | ((a >> 1) & 1));
+			int lon1 = (((a >> 4) & 1) << 2 | ((a >> 2) & 1) << 1 | (a & 1));
+			lat |= lat1 << shift;
+			lon |= lon1 << shift;
+		}
+		double middleOfSquare = 1 << (3 * (kMaxPointBytes - s.length()) - 1);
+		lat += middleOfSquare;
+		lon += middleOfSquare;
+
+		double dlat = ((double) lat) / ((1 << kMaxCoordBits) - 1) * 180 - 90;
+		double dlon = ((double) lon) / ((1 << kMaxCoordBits) - 1 + 1) * 360.0 - 180;
+		return new LatLon(dlat, dlon);
 	}
 
 	/**
@@ -190,6 +220,31 @@ public class GeoPointParserUtil {
 						int zoom = parseZoom(zm);
 						return new GeoParsedPoint(lat, lon, zoom);
 					}
+				} else if (host.equals("ge0.me")) {
+					// http:///44TvlEGXf-/Kyiv
+					if (path.startsWith("/")) {
+						path = path.substring(1);
+					}
+					String[] pms = path.split("/");
+					String label = "";
+					if (pms.length > 1) {
+						label = pms[1];
+					}
+					String qry = pms[0];
+					if (qry.length() < 10) {
+						return null;
+					}
+					int indZoom = net.osmand.osm.io.Base64.indexOf(qry.charAt(0));
+					int zoom = 15;
+					if (indZoom >= 0) {
+						zoom = indZoom / 4 + 4;
+					}
+					LatLon l = decodeMapsMeLatLonToInt(qry.substring(1).replace('-', '/'));
+					if (l == null) {
+						return null;
+					}
+					return new GeoParsedPoint(l.getLatitude(), l.getLongitude(), zoom, label);
+
 				} else if (simpleDomains.contains(host)) {
 					if (uri.getQuery() == null && params.size() == 0) {
 						// DOUBLE check this may be wrong test of openstreetmap.de (looks very weird url and server doesn't respond)
@@ -221,7 +276,6 @@ public class GeoPointParserUtil {
 					String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
 
 					if (params.containsKey("q")) {
-						System.out.println("q=" + params.get("q"));
 						Matcher matcher = commaSeparatedPairPattern.matcher(params.get("q"));
 						if (matcher.matches()) {
 							latString = matcher.group(1);
