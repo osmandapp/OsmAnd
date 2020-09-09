@@ -3143,7 +3143,7 @@
     <string name="manage_profiles">إدارة أوضاع التطبيق …</string>
     <string name="osmand_settings_descr">لكامل التطبيق</string>
     <string name="osmand_settings">الإعدادات</string>
-    <string name="copy_from_other_profile">نسخ من وضع آخر</string>
+    <string name="copy_from_other_profile">نسخة من ملف تعريف آخر</string>
     <string name="turn_screen_on">قم بتشغيل الشاشة</string>
     <string name="map_during_navigation_info">خريطة أثناء التنقل</string>
     <string name="map_during_navigation">خريطة أثناء التنقل</string>
@@ -3301,7 +3301,7 @@
     <string name="profile_alert_cant_delete_base">لايمكن حذف الأوضاع الأساسية</string>
     <string name="profile_alert_need_save_title">حفظ التغييرات</string>
     <string name="profile_alert_need_save_msg">احفظ تغييرات الوضع أولاً</string>
-    <string name="profile_alert_delete_title">حذف الوضع</string>
+    <string name="profile_alert_delete_title">حذف الملف الشخصي</string>
     <string name="profile_alert_delete_msg">هل تريد حذف الوضع \"%s\"</string>
     <string name="select_base_profile_dialog_title">حدد وضع أساسي</string>
     <string name="select_base_profile_dialog_message">إسناد الوضع المخصص الخاص بك إلى أحد أوضاع التطبيق الافتراضية ، يحدد الإعداد الأساسي مثل الرؤية الافتراضية لعناصر واجهة المستخدم ووحدات السرعة والمسافة. وهذه هي أوضاع التطبيق الافتراضية ، إلى جانب أمثلة لأوضاع مخصصة يمكن تمديدها إلى:</string>

@@ -210,7 +210,7 @@
     <string name="osmand_service_descr">OsmAnd aztarnaria atzeko planoan exekutatzen da pantaila itzalita dagoenean.</string>
     <string name="location_service_no_gps_available">Hautatu kokapen-hornitzaileetako bat zure kokapena partekatzeko.</string>
     <string name="no_location_permission">Aplikazioak ez du kokapena atzitzeko baimenik.</string>
-    <string name="authentication_code_descr">"Telegramek kode bat bidali dizu OsmAnd-ek  zure kontuan saioa hasteko."</string>
+    <string name="authentication_code_descr">Telegramek kode bat bidali dizu OsmAnd-ek zure kontuan saioa hasteko.</string>
     <string name="my_location_search_hint">Bilaketa: Taldea edo kontaktua</string>
     <string name="location_sharing_description">Hautatu kokapena partekatzeko kontaktuak eta taldeak.</string>
     <string name="set_time">Ezarri denbora</string>
@@ -232,14 +232,14 @@
     <string name="send_my_location_desc">Ezarri kokapena partekatzeko gutxieneko tartea.</string>
     <string name="stale_location">Ez da mugitzen</string>
     <string name="stale_location_desc">Kontaktu bat mugitu zen azken aldia.</string>
-    <string name="location_history_desc">Ezkutatu denbora jakin batean mugitu ez diren kontaktuak</string>
+    <string name="location_history_desc">Ezkutatu denbora jakin batean mugitu ez diren kontaktuak.</string>
     <string name="osmand_connect">OsmAnd konexioa</string>
     <string name="osmand_connect_desc">Aukeratu OsmAnd aztarnariak posizioak bistaratzeko erabiliko duen OsmAnd bertsioa.</string>
     <string name="in_time">%1$s-n</string>
     <string name="logout_help_desc">Nola itzali OsmAnd aztarnaria Telegram-etik</string>
     <string name="disconnect_from_telegram">Nola itzali OsmAnd aztarnaria Telegram-etik</string>
     <string name="disconnect_from_telegram_desc">Kokapena partekatzeko sarbidea baliogabetzeko. Ireki Telegram, joan Ezarpenak → Pribatutasuna eta segurtasuna → Saioak eta amaitu OsmAnd aztarnariaren saioa atalera.</string>
-    <string name="logout_no_internet_msg">"Konektatu Internetera Telegram saioa behar bezala  amaiatzeko."</string>
+    <string name="logout_no_internet_msg">Konektatu Internetera Telegram saioa behar bezala amaiatzeko.</string>
     <string name="last_response">Azken erantzuna</string>
     <string name="disable_all_sharing_desc">Kokapena partekatzea itzaltzen du hautatutako txat guztietan (%1$d).</string>
     <string name="choose_osmand_desc">Hautatu kontaktuak mapan bistaratzeko OsmAnd bertsioa.</string>

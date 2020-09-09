@@ -601,10 +601,10 @@
     <string name="step_by_step">Pöörangupõhine</string>
     <string name="exit_at">Välju</string>
     <string name="sit_on_the_stop">Sisene peatuses</string>
-    <string name="quick_action_show_hide_gpx_tracks">Kuva/peida GPX rajad</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Nupp valitud GPX radade kaardil kuvamiseks või peitmiseks.</string>
-    <string name="quick_action_gpx_tracks_hide">Peida GPX rajad</string>
-    <string name="quick_action_gpx_tracks_show">Kuva GPX rajad</string>
+    <string name="quick_action_show_hide_gpx_tracks">Kuva/peida rajad</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Nupp valitud radade kaardil kuvamiseks või peitmiseks.</string>
+    <string name="quick_action_gpx_tracks_hide">Peida rajad</string>
+    <string name="quick_action_gpx_tracks_show">Kuva rajad</string>
     <string name="add_destination_query">Palun määra esmalt sihtkoht</string>
     <string name="use_osm_live_public_transport_description">Luba ühistransport OsmAnd Live muudatustele.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live ühistransport</string>
@@ -891,7 +891,7 @@
     <string name="screen_alerts_descr">Hoiatused kuvatakse navigeerimise ajal all vasakul.</string>
     <string name="switch_profile">Vaheta profiili</string>
     <string name="language_and_output">Keel ja väljund</string>
-    <string name="reset_to_default">Taasta vaikeseaded</string>
+    <string name="reset_to_default">Taasta algväärtused</string>
     <string name="manage_profiles_descr">Loo, impordi, muuda profiile</string>
     <string name="manage_profiles">Halda rakenduse profiile…</string>
     <string name="osmand_settings_descr">Jõus kogu rakenduses</string>
@@ -3712,4 +3712,6 @@
     <string name="threshold_distance">Läve kaugus</string>
     <string name="one_point_error">Palun lisa vähemalt kaks punkti.</string>
     <string name="shared_string_redo">Korda tegevust</string>
+    <string name="rearrange_categories">Järjesta kategooriad ümber</string>
+    <string name="shared_string_rendering_style">Visualiseerimise stiil</string>
 </resources>
