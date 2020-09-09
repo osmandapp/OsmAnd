@@ -24,6 +24,7 @@ import java.io.IOException;
 import static android.content.Context.WIFI_SERVICE;
 
 public class ServerFragment extends BaseOsmAndFragment {
+	public static final String TAG = "ServerFrag";
 	private final static Log LOG = PlatformUtil.getLog(ServerFragment.class);
 	private final int port = 24990;
 	final int THREAD_ID = 14231; // random number

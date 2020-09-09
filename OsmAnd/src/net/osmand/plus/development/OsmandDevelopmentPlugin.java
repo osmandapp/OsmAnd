@@ -96,7 +96,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		if (activity != null) {
 			activity.getSupportFragmentManager()
 					.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, FirstUsageWizardFragment.TAG)
+					.replace(R.id.fragmentContainer, fragment, ServerFragment.TAG)
 					.commitAllowingStateLoss();
 		}
 	}
