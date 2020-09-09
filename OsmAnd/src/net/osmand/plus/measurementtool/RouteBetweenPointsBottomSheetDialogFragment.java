@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -29,6 +30,7 @@ import java.util.List;
 import static net.osmand.plus.UiUtilities.CustomRadioButtonType.LEFT;
 import static net.osmand.plus.UiUtilities.CustomRadioButtonType.RIGHT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.BOTTOM_SHEET_HEIGHT_DP;
 
 public class RouteBetweenPointsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -223,6 +225,11 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends MenuBottomSheet
 		});
 		updateModeButtons();
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
+	}
+
+	@Override
+	protected int getCustomHeight() {
+		return AndroidUtils.dpToPx(getContext(), BOTTOM_SHEET_HEIGHT_DP);
 	}
 
 	@Override
