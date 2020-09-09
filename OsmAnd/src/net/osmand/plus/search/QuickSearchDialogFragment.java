@@ -1491,7 +1491,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				limit--;
 			}
 		}
-		addressSearchFragment.updateListAdapter(rows, false);
+		if (addressSearchFragment != null) {
+			addressSearchFragment.updateListAdapter(rows, false);
+		}
 	}
 
 	public void reloadHistory() {
