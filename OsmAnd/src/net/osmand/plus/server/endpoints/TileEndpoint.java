@@ -6,13 +6,13 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.resources.AsyncLoadingThread;
+import net.osmand.plus.server.MetaTileFileSystemCache;
 import net.osmand.plus.server.OsmAndHttpServer;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 
@@ -22,14 +22,12 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 	private static final int TIMEOUT_STEP = 500;
 	private static final int TIMEOUT = 5000;
 	private static final int METATILE_SIZE = 2;
-	private static final int MAX_CACHE_SIZE = 4;
 
 	private static final Log LOG = PlatformUtil.getLog(TileEndpoint.class);
 	private final MapActivity mapActivity;
-	// TODO store on file system
-	private final ConcurrentLinkedQueue<MetaTileCache> cache = new ConcurrentLinkedQueue<>();
+	private final MetaTileFileSystemCache cache;
 
-	private static class MetaTileCache {
+	public static class MetaTileCache {
 		Bitmap bmp;
 		int sx;
 		int sy;
@@ -37,9 +35,26 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		int ey;
 		int zoom;
 
+		public MetaTileCache() {
+
+		}
+
+		public MetaTileCache(Bitmap bmp, int sx, int sy, int ex, int ey, int zoom) {
+			this.bmp = bmp;
+			this.sx = sx;
+			this.sy = sy;
+			this.ex = ex;
+			this.ey = ey;
+			this.zoom = zoom;
+		}
+
 		// to be used in file name
 		public String getTileId() {
 			return zoom + "_" + METATILE_SIZE + "_" + sx + "_" + sy;
+		}
+
+		public Bitmap getBitmap() {
+			return bmp;
 		}
 
 		public Bitmap getSubtile(int x, int y) {
@@ -52,13 +67,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 
 	public TileEndpoint(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-	}
-
-	private void addToMemoryCache(MetaTileCache res) {
-		while (cache.size() > MAX_CACHE_SIZE) {
-			cache.poll();
-		}
-		cache.add(res);
+		this.cache = new MetaTileFileSystemCache(mapActivity.getMyApplication());
 	}
 
 	@Override
@@ -78,13 +87,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		int zoom = Integer.parseInt(prms[1]);
 		int x = Integer.parseInt(prms[2]);
 		int y = Integer.parseInt(prms[3]);
-
-		MetaTileCache res = null;
-		for (MetaTileCache r : cache) {
-			if (r.zoom == zoom && r.ex >= x && r.ey >= y && r.sx <= x && r.sy <= y) {
-				res = r;
-			}
-		}
+		MetaTileCache res = cache.get(zoom, METATILE_SIZE, x, y);
 		if (res == null) {
 			res = requestMetatile(x, y, zoom);
 			if (res == null) {
@@ -137,7 +140,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 				res.zoom = zoom;
 				Bitmap tempBmp = mapActivity.getMapView().getBufferBitmap();
 				res.bmp = tempBmp.copy(tempBmp.getConfig(), true);
-				addToMemoryCache(res);
+				cache.put(res);
 			}
 			return res;
 		} catch (InterruptedException e) {

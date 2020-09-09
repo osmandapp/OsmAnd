@@ -62,6 +62,7 @@ public class OsmAndHttpServer extends NanoHTTPD {
 					return e.getValue().process(session, uri);
 				} catch (Exception exception) {
 					LOG.error("SERVER ERROR: " + exception.getMessage());
+					return ErrorResponses.response500;
 				}
 			}
 		}
