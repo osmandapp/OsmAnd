@@ -85,14 +85,13 @@ public class ServerFragment extends BaseOsmAndFragment {
 	}
 
 	private void initServer() {
-
 		TrafficStats.setThreadStatsTag(THREAD_ID);
 		String hostname = getDeviceAddress();
 		try {
 			server = new OsmAndHttpServer(hostname, port);
 			server.start((MapActivity) getActivity());
 			initialized = true;
-			updateTextView("Server started at: " + server.getUrl());
+			updateTextView("Server started at " + server.getUrl());
 		} catch (IOException e) {
 			Toast.makeText(requireContext(),
 					e.getLocalizedMessage(),

@@ -58,7 +58,11 @@ public class OsmAndHttpServer extends NanoHTTPD {
 		while (it.hasNext()) {
 			Map.Entry<String, ApiEndpoint> e = it.next();
 			if (uri.startsWith(e.getKey())) {
-				return e.getValue().process(session, uri);
+				try {
+					return e.getValue().process(session, uri);
+				} catch (Exception exception) {
+					LOG.error("SERVER ERROR: " + exception.getMessage());
+				}
 			}
 		}
 		return ErrorResponses.response404;
