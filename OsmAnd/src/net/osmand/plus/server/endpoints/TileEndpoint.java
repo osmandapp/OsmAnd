@@ -62,7 +62,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 	}
 
 	@Override
-	public synchronized NanoHTTPD.Response process(NanoHTTPD.IHTTPSession session, String url) {
+	public NanoHTTPD.Response process(NanoHTTPD.IHTTPSession session, String url) {
 		// https://tile.osmand.net/hd/6/55/25.png
 		int extInd = url.indexOf('.');
 		if (extInd >= 0) {
