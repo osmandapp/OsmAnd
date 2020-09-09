@@ -165,7 +165,6 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			params.gravity = Gravity.BOTTOM | Gravity.START;
 			mainView.findViewById(R.id.control_buttons).setLayoutParams(params);
 		}
-		enterGpxApproximationMode();
 		runLayoutListener();
 
 		calculateGpxApproximation();
@@ -193,7 +192,6 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		if (gpxApproximator != null) {
 			gpxApproximator.cancelApproximation();
 		}
-		exitGpxApproximationMode();
 		if (!applyApproximation) {
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof GpxApproximationFragmentListener) {
@@ -273,28 +271,6 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			ProfileCard profileCard = new ProfileCard(mapActivity, snapToRoadAppMode);
 			profileCard.setListener(this);
 			cardsContainer.addView(profileCard.build(mapActivity));
-		}
-	}
-
-	private void enterGpxApproximationMode() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			AndroidUiHelper.setVisibility(mapActivity, portrait ? View.INVISIBLE : View.GONE,
-					R.id.map_left_widgets_panel,
-					R.id.map_right_widgets_panel,
-					R.id.map_center_info);
-		}
-	}
-
-	private void exitGpxApproximationMode() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
-					R.id.map_left_widgets_panel,
-					R.id.map_right_widgets_panel,
-					R.id.map_center_info,
-					R.id.map_search_button);
 		}
 	}
 
