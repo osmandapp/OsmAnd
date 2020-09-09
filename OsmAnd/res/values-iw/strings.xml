@@ -1062,7 +1062,7 @@
     <string name="shared_string_pause">הפסקה</string>
     <string name="map_markers_other">סמנים אחרים</string>
     <string name="gpx_add_track">הוספת עוד…</string>
-    <string name="gpx_no_tracks_title">עדיין אין לך קובצי GPX</string>
+    <string name="gpx_no_tracks_title">עדיין אין לך קובצי מסלול</string>
     <string name="rendering_value_dark_brown_name">חום כהה</string>
     <string name="rendering_value_light_brown_name">חום בהיר</string>
     <string name="morning">בוקר</string>
@@ -2229,7 +2229,7 @@
     <string name="route_roundabout_short">יש לצאת ביציאה מס׳ %1$d ולהמשיך</string>
     <string name="upload_poi">העלאת נקודות עניין</string>
     <string name="route_calculation">חישוב נתיב</string>
-    <string name="gpx_no_tracks_title_folder">ניתן גם להוסיף קובצי GPX לתיקייה</string>
+    <string name="gpx_no_tracks_title_folder">ניתן גם להוסיף קובצי מסלול לתיקייה</string>
     <string name="trip_rec_notification_settings">הפעלת הקלטה מהירה</string>
     <string name="saved_at_time">נשמר כעת תחת: %1$s</string>
     <string name="poi_deleted_localy">נקודת העניין תימחק לאחר העלאת השינויים שלך</string>
@@ -2337,7 +2337,7 @@
     <string name="no_inet_connection_desc_map">נדרש לטובת הורדת מפות.</string>
     <string name="search_location">מתבצע חיפוש אחר המיקום…</string>
     <string name="storage_free_space">מקום פנוי</string>
-    <string name="storage_place_description">אחסון נתונים של OsmAnd (למפות, קובצי GPX וכו׳): %1$s.</string>
+    <string name="storage_place_description">אחסון נתונים של OsmAnd (למפות, קובצי מסלולים וכו׳): %1$s.</string>
     <string name="move_marker_bottom_sheet_title">יש להזיז את המפה כדי לשנות את מיקום הסמן</string>
     <string name="follow_us">לעקוב אחרינו</string>
     <string name="access_direction_audio_feedback">חיווי כיוון קולי</string>
@@ -2893,10 +2893,10 @@
     <string name="step_by_step">פנייה אחר פנייה</string>
     <string name="routeInfo_road_types_name">סוגי כבישים</string>
     <string name="exit_at">לצאת ב־</string>
-    <string name="quick_action_show_hide_gpx_tracks">הצגה/הסתרה של מסלולי GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">כפתור להצגה או הסתרה של מסלולי ה־GPX הנבחרים במפה.</string>
-    <string name="quick_action_gpx_tracks_hide">הסתרת מסלולי GPX</string>
-    <string name="quick_action_gpx_tracks_show">הצגת מסלולי GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">הצגה/הסתרה של מסלולים</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">כפתור להצגה או הסתרה של המסלולים הנבחרים במפה.</string>
+    <string name="quick_action_gpx_tracks_hide">הסתרת מסלולים</string>
+    <string name="quick_action_gpx_tracks_show">הצגת מסלולים</string>
     <string name="use_osm_live_public_transport_description">הפעלת תחבורה ציבורית לשינויים ב־OsmAnd החי.</string>
     <string name="use_osm_live_public_transport">OsmAnd חי תחבורה ציבורית</string>
     <string name="transfers_size">%1$d העברות</string>
@@ -3892,4 +3892,5 @@
     <string name="open_saved_track">פתיחת מסלולים שמורים</string>
     <string name="shared_string_is_saved">נשמר</string>
     <string name="one_point_error">נא להוסיף שתי נקודות לפחות.</string>
+    <string name="shared_string_redo">ביצוע מחדש</string>
 </resources>

@@ -2014,7 +2014,7 @@
     <string name="no_inet_connection_desc_map">Necesario para descargar mapas.</string>
     <string name="search_location">Buscando la ubicación…</string>
     <string name="storage_free_space">Espacio libre</string>
-    <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, archivos GPX, etc.): %1$s.</string>
+    <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, archivos de trazas, etc.): %1$s.</string>
     <string name="give_permission">Conceder permiso</string>
     <string name="allow_access_location">Permitir el acceso a la ubicación</string>
     <string name="first_usage_greeting">Obtén direcciones y descubre sitios nuevos sin una conexión a Internet</string>
@@ -2066,8 +2066,8 @@
     <string name="trip_rec_notification_settings">Activar la grabación rápida</string>
     <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación del viaje.</string>
     <string name="shared_string_notifications">Notificaciones</string>
-    <string name="gpx_no_tracks_title">Sin archivos GPX aún</string>
-    <string name="gpx_no_tracks_title_folder">También puedes añadir archivos GPX a la carpeta</string>
+    <string name="gpx_no_tracks_title">Sin archivos de trazas aún</string>
+    <string name="gpx_no_tracks_title_folder">También puedes añadir archivos de trazas a la carpeta</string>
     <string name="gpx_add_track">Añadir GPX</string>
     <string name="shared_string_appearance">Aspecto</string>
     <string name="rendering_value_fine_name">Muy fino</string>
@@ -2897,10 +2897,10 @@
     <string name="routeInfo_road_types_name">Tipos de caminos</string>
     <string name="exit_at">Bajar en</string>
     <string name="sit_on_the_stop">Esperar en la parada</string>
-    <string name="quick_action_show_hide_gpx_tracks">Mostrar u ocultar trazas GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que muestra u oculta las trazas GPX elegidas en el mapa.</string>
-    <string name="quick_action_gpx_tracks_hide">Ocultar trazas GPX</string>
-    <string name="quick_action_gpx_tracks_show">Mostrar trazas GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Mostrar u ocultar trazas</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que muestra u oculta las trazas elegidas en el mapa.</string>
+    <string name="quick_action_gpx_tracks_hide">Ocultar trazas</string>
+    <string name="quick_action_gpx_tracks_show">Mostrar trazas</string>
     <string name="release_3_3">• Nueva pantalla «Direcciones»: Muestra los botones de destino «Casa» y «Trabajo», el atajo de la «ruta anterior», la lista de trazas, marcadores GPX activos y el historial de búsqueda.
 \n
 \n • Información adicional en «Detalles de la ruta»: Tipos de caminos, superficie, pendiente y suavidad
@@ -3889,4 +3889,5 @@
     <string name="simplified_track_description">Sólo se guardará la línea de la ruta, los puntos de referencia serán borrados.</string>
     <string name="number_of_gpx_files_selected_pattern">%s archivo(s) de trazas marcado(s)</string>
     <string name="one_point_error">Añade al menos dos puntos.</string>
+    <string name="shared_string_redo">Rehacer</string>
 </resources>

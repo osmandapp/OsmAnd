@@ -657,7 +657,7 @@
     <string name="tts_language_not_supported">Абраная мова не падтрымліваецца Android TTS (пераўтварэнне тэксту ў гук), таму будзе выкарыстоўвацца прадвызначаная мова TTS. Пашукаць іншы TTS у краме\?</string>
     <string name="tts_missing_language_data_title">Даныя адсутнічаюць</string>
     <string name="tts_missing_language_data">Перайсці ў краму, каб спампаваць абраную мову\?</string>
-    <string name="gpx_option_reverse_route">Развярнуць накірунак GPX</string>
+    <string name="gpx_option_reverse_route">Развярнуць кірунак GPX</string>
     <string name="gpx_option_destination_point">Выкарыстоўваць дзейны пункт прызначэння</string>
     <string name="gpx_option_from_start_point">Прайсці ўвесь шлях</string>
     <string name="switch_to_vector_map_to_see">Для гэтага рэгіёну даступныя лакальныя вектарныя мапы.
@@ -1307,10 +1307,10 @@
     <string name="traffic_warning_speed_limit">Абмежаванне хуткасці</string>
     <string name="traffic_warning_border_control">Памежны кантроль</string>
     <string name="traffic_warning_payment">Платны праезд</string>
-    <string name="traffic_warning_stop">Знак СТОП</string>
+    <string name="traffic_warning_stop">Знак \"СТОП\"</string>
     <string name="traffic_warning_calming">Паменшыце хуткасць</string>
-    <string name="traffic_warning_speed_camera">Камера хуткасці</string>
-    <string name="traffic_warning">Абмежаванне руху</string>
+    <string name="traffic_warning_speed_camera">Камера кантролю хуткасці</string>
+    <string name="traffic_warning">Абмежаванні руху</string>
     <string name="text_size_descr">Змяніць памер тэксту на мапе.</string>
     <string name="text_size">Памер тэксту</string>
     <string name="speed_limit_exceed">Дапушчальнае значэнне перавышэння хуткасці</string>
@@ -1431,7 +1431,7 @@
     <string name="shared_string_dismiss">Адхіліць</string>
     <string name="shared_string_yes">Так</string>
     <string name="shared_string_no">Не</string>
-    <string name="shared_string_on">Уключыць</string>
+    <string name="shared_string_on">Укл</string>
     <string name="shared_string_off">Выкл</string>
     <string name="shared_string_previous">Папярэдні</string>
     <string name="shared_string_next">Далей</string>
@@ -1507,7 +1507,7 @@
     <string name="tips_and_tricks_descr">Пытанні і адказы, апошнія змены і іншае.</string>
     <string name="routing_settings_2">Налады навігацыі</string>
     <string name="general_settings_2">Агульныя налады</string>
-    <string name="shared_string_clear_all">Ачысціць ўсё</string>
+    <string name="shared_string_clear_all">Ачысціць усё</string>
     <string name="shared_string_collapse">Згарнуць</string>
     <string name="shared_string_my_location">Маё месцазнаходжанне</string>
     <string name="shared_string_tracks">Сляды</string>
@@ -2014,7 +2014,7 @@
     <string name="shared_string_is_open_24_7">Адчынена 24/7</string>
     <string name="map_widget_search">Шукаць</string>
     <string name="shared_string_from">ад</string>
-    <string name="city_type_neighbourhood">Суседства</string>
+    <string name="city_type_neighbourhood">Ваколіцы</string>
     <string name="city_type_district">Раён</string>
     <string name="lang_hsb">Верхнялужыцкая</string>
     <string name="search_categories">Катэгорыі</string>
@@ -2041,7 +2041,7 @@
     <string name="skip_map_downloading_desc">У вас адсутнічаюць мапы. Вы можаце абраць мапу са спіса альбо спампаваць яе пазней праз \"Меню - %1$s\".</string>
     <string name="search_another_country">Абраць іншы рэгіён</string>
     <string name="search_map">Пошук мапаў…</string>
-    <string name="first_usage_wizard_desc">OsmAnd вызначыць вашае месцазнаходжанне і прапануе спампаваць мапы для гэтага рэгіёна.</string>
+    <string name="first_usage_wizard_desc">OsmAnd вызначыць ваша месцазнаходжанне і прапануе спампаваць мапы для гэтага рэгіёна.</string>
     <string name="location_not_found">Не атрымалася вызначыць месцазнаходжанне</string>
     <string name="no_inet_connection">Злучэнне з Інтэрнэтам адсутнічае</string>
     <string name="no_inet_connection_desc_map">Патрабуецца для спампоўвання мапаў.</string>
