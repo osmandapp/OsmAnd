@@ -117,6 +117,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		SaveAsNewTrackFragmentListener {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
+	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
 
 	private RecyclerView pointsRv;
 	private String previousToolBarTitle = "";
@@ -459,17 +460,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			} else if (!editingCtx.isNewData() && !editingCtx.hasRoutePoints() && !editingCtx.hasRoute() && editingCtx.getPointsCount() > 1) {
 				enterApproximationMode(mapActivity);
 			}
+		} else {
+			measurementLayer.setTapsDisabled(savedInstanceState.getBoolean(TAPS_DISABLED_KEY));
 		}
 
 		return view;
-	}
-
-	private void enterApproximationMode(MapActivity mapActivity) {
-		MeasurementToolLayer layer = getMeasurementLayer();
-		if (layer != null) {
-			layer.setTapsDisabled(true);
-			SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
-		}
 	}
 
 	public boolean isInEditMode() {
@@ -912,7 +907,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onChangeApplicationMode(ApplicationMode mode, RouteBetweenPointsDialogType dialogType,
-										RouteBetweenPointsDialogMode dialogMode) {
+	                                    RouteBetweenPointsDialogMode dialogMode) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			ChangeRouteType changeRouteType = ChangeRouteType.NEXT_SEGMENT;
@@ -936,6 +931,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			disable(upDownBtn);
 			updateSnapToRoadControls();
 			updateDistancePointsText();
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			outState.putBoolean(TAPS_DISABLED_KEY, measurementLayer.isTapsDisabled());
 		}
 	}
 
@@ -1050,13 +1054,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack) {
-		File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-		if (folderName != null) {
-			dir = new File(dir, folderName);
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
+			if (folderName != null) {
+				dir = new File(dir, folderName);
+			}
+			fileName = fileName + GPX_FILE_EXT;
+			SaveType saveType = simplifiedTrack ? SaveType.LINE : SaveType.ROUTE_POINT;
+			saveNewGpx(dir, fileName, showOnMap, saveType, SaveAction.SHOW_IS_SAVED_FRAGMENT);
 		}
-		fileName = fileName + GPX_FILE_EXT;
-		SaveType saveType = simplifiedTrack ? SaveType.LINE : SaveType.ROUTE_POINT;
-		saveNewGpx(dir, fileName, showOnMap, saveType, SaveAction.SHOW_IS_SAVED_FRAGMENT);
 	}
 
 	private MeasurementAdapterListener createMeasurementAdapterListener(final ItemTouchHelper touchHelper) {
@@ -2112,11 +2119,28 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		updateToolbar();
 	}
 
+	private void enterApproximationMode(MapActivity mapActivity) {
+		MeasurementToolLayer layer = getMeasurementLayer();
+		if (layer != null) {
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
+			manager.beginTransaction()
+					.hide(this).commit();
+			layer.setTapsDisabled(true);
+			SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
+			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.map_ruler_container);
+		}
+	}
+
 	private void exitApproximationMode() {
 		editingCtx.setInApproximationMode(false);
 		MeasurementToolLayer layer = getMeasurementLayer();
-		if (layer != null) {
+		MapActivity mapActivity = getMapActivity();
+		if (layer != null && mapActivity != null) {
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
+			manager.beginTransaction()
+					.show(this).commit();
 			layer.setTapsDisabled(false);
+			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_container);
 		}
 	}
 }
