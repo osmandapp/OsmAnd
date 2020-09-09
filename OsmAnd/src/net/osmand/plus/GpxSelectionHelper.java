@@ -116,6 +116,10 @@ public class GpxSelectionHelper {
 		}
 	}
 
+	public boolean shouldHideTrackToFollow() {
+		return shouldHideTrackToFollow;
+	}
+
 	private StateChangedListener<String> getFollowTrackListener() {
 		if (followTrackListener == null) {
 			followTrackListener = new StateChangedListener<String>() {
