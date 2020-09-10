@@ -18,7 +18,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.router.RouteResultPreparation;
@@ -61,7 +61,7 @@ public class LanesControl {
 		TextInfoWidget.updateTextColor(lanesText, lanesShadowText, textColor, textShadowColor, textBold, shadowRadius);
 	}
 
-	public boolean updateInfo(OsmandMapLayer.DrawSettings drawSettings) {
+	public boolean updateInfo(DrawSettings drawSettings) {
 		boolean visible = false;
 		int locimminent = -1;
 		int[] loclanes = null;
@@ -105,7 +105,8 @@ public class LanesControl {
 				}
 			}
 		}
-		visible = loclanes != null && loclanes.length > 0 && !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible;
+		visible = loclanes != null && loclanes.length > 0 && !MapRouteInfoMenu.chooseRoutesVisible
+				&& !MapRouteInfoMenu.waypointsVisible && !MapRouteInfoMenu.followTrackVisible;
 		if (visible) {
 			if (!Arrays.equals(lanesDrawable.lanes, loclanes) ||
 					(locimminent == 0) != lanesDrawable.imminent) {

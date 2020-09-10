@@ -1232,7 +1232,8 @@ public class MapInfoWidgetsFactory {
 			boolean visible = settings.SHOW_COORDINATES_WIDGET.get() && map.getContextMenu().shouldShowTopControls()
 					&& map.getMapRouteInfoMenu().shouldShowTopControls() && !map.isTopToolbarActive()
 					&& !map.getMapLayers().getGpxLayer().isInTrackAppearanceMode()
-					&& !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible;
+					&& !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible
+					&& !MapRouteInfoMenu.followTrackVisible;
 
 			updateVisibility(visible);
 			if (visible) {

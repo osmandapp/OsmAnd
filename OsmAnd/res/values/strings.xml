@@ -11,6 +11,15 @@
 	Thx - Hardy
 
 -->
+    <string name="release_3_8">
+    • Updated "Plan Route" mode allows using different navigation types for each segment and attaches any track to the roads\n\n
+    • New "Appearance" options for tracks: select color, thickness turn on the direction arrows and start/finish marks\n\n
+    • Improved bicycle nodes visibility\n\n
+    • Context menu for tracks with basic info\n\n
+    • Improved "Search" algorithms\n\n
+    • Improved "Follow track" options in Navigation\n\n
+    • Fixed issues with import/export of profile settings\n\n
+    </string>
     <string name="shared_string_redo">Redo</string>
     <string name="one_point_error">Please add at least two points.</string>
     <string name="shared_string_is_saved">is saved</string>
