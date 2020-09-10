@@ -880,7 +880,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void setCurrentViewport(RotatedTileBox viewport) {
 		currentViewport = viewport;
-		refreshMap();
+		refreshMap(true);
 	}
 
 	public Bitmap getBufferBitmap() {
