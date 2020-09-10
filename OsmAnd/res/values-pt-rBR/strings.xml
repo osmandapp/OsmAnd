@@ -2049,7 +2049,7 @@
     <string name="mapillary_widget">Ferramenta Mapillary</string>
     <string name="mapillary_widget_descr">Permite contribuições rápidas ao Mapillary.</string>
     <string name="mapillary_descr">Fotos ao nível da rua, online, para todos. Descobrir lugares, colaborar, capturar o mundo.</string>
-    <string name="mapillary">Imagens de rua</string>
+    <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Fotos ao nível da rua para todos. Descubra lugares, colabore, capture o mundo.</string>
     <string name="private_access_routing_req">Seu destino está localizado numa área de acesso privado. Permitir uso de vias privadas para esta viagem\?</string>
     <string name="restart_search">Reiniciar pesquisa</string>
@@ -2236,8 +2236,8 @@
     <string name="route_roundabout_short">Tome %1$d sair e ir</string>
     <string name="upload_poi">Subir POI</string>
     <string name="route_calculation">Cálculo da rota</string>
-    <string name="gpx_no_tracks_title">Você não tem arquivos GPX ainda</string>
-    <string name="gpx_no_tracks_title_folder">Você pode também adicionar arquivos GPX na pasta</string>
+    <string name="gpx_no_tracks_title">Você não tem arquivos de trilha ainda</string>
+    <string name="gpx_no_tracks_title_folder">Você pode também adicionar arquivos de trilha na pasta</string>
     <string name="gpx_add_track">Adicionar…</string>
     <string name="shared_string_appearance">Aparência</string>
     <string name="trip_rec_notification_settings">Ativar gravação rápida</string>
@@ -2282,7 +2282,7 @@
     <string name="osm_live_banner_desc">Obtenha downloads ilimitados de mapas, adicionando atualizações semanais, diárias e a cada hora.</string>
     <string name="quick_action_add_gpx_descr">Um botão para adicionar um waypoint GPX no meio da tela.</string>
     <string name="av_locations_all_desc">Arquivo GPX com coordenadas e dados de todas as notas.</string>
-    <string name="storage_place_description">Armazenamento de dados do OsmAnd (para mapas, arquivos GPX, etc.): %1$s.</string>
+    <string name="storage_place_description">Armazenamento de dados do OsmAnd (para mapas, arquivos de trilha, etc.): %1$s.</string>
     <string name="first_usage_greeting">Obtenha direções e descobra novos lugares sem precisar de conexão com a Internet</string>
     <string name="rendering_attr_hideOverground_name">Objetos superficiais</string>
     <string name="get_started">Vamos começar</string>
@@ -2891,10 +2891,10 @@
     <string name="routeInfo_road_types_name">Tipos de estrada</string>
     <string name="exit_at">Desembarque em</string>
     <string name="sit_on_the_stop">Embarque na parada</string>
-    <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar faixas GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Um botão para mostrar ou ocultar as trilhas GPX selecionadas no mapa.</string>
-    <string name="quick_action_gpx_tracks_hide">Ocultar faixas de GPX</string>
-    <string name="quick_action_gpx_tracks_show">Mostrar faixas GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar trilhas</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Um botão para mostrar ou ocultar as trilhas selecionadas no mapa.</string>
+    <string name="quick_action_gpx_tracks_hide">Ocultar trilhas</string>
+    <string name="quick_action_gpx_tracks_show">Mostrar trilhas</string>
     <string name="release_3_3">- Nova tela \'Direções\': Apresenta os botões de destino Casa e Trabalho, atalho \"percurso anterior\", lista de faixas e marcadores GPX activos, histórico de pesquisa 
 \n 
 \n - Informação adicional em \"Detalhes da rota\": tipos de estrada, superfície, declive, suavidade 
@@ -3836,7 +3836,7 @@
     <string name="add_segment_to_the_track">Adicionar a um arquivo de trilha</string>
     <string name="layer_gpx_layer">Trilhas</string>
     <string name="show_gpx">Trilhas</string>
-    <string name="monitoring_control_start">GPX</string>
+    <string name="monitoring_control_start">REC</string>
     <string name="save_track_to_gpx_globally">Registrar de trilha para arquivo GPX</string>
     <string name="shared_string_gpx_route">Rota de trilha</string>
     <string name="empty_state_my_tracks">Adicionar arquivos de trilha</string>
@@ -3847,7 +3847,7 @@
     <string name="marker_save_as_track">Salvar como arquivo de trilha</string>
     <string name="follow_track">Seguir a trilha</string>
     <string name="follow_track_descr">Escolha o arquivo de trilha a seguir</string>
-    <string name="import_track_descr">Escolha o arquivo de trilha a seguir ou importe-o do dispositivo.</string>
+    <string name="import_track_descr">Escolha o arquivo de trilha a seguir ou importe um.</string>
     <string name="select_another_track">Selecionar outra trilha</string>
     <string name="navigate_to_track_descr">Navegue de minha localização até a trilha</string>
     <string name="pass_whole_track_descr">Ponto da trilha para navegar</string>
@@ -3861,4 +3861,24 @@
     <string name="plan_route_trim_after">Aparecer depois</string>
     <string name="plan_route_change_route_type_before">Alterar o tipo de rota antes</string>
     <string name="plan_route_change_route_type_after">Alterar o tipo de rota após</string>
+    <string name="web_server">Servidor web</string>
+    <string name="simplified_track">Trilha simplificada</string>
+    <string name="simplified_track_description">Apenas a linha da rota será salva, os waypoints serão excluídos.</string>
+    <string name="shared_string_file_name">Nome do arquivo</string>
+    <string name="number_of_gpx_files_selected_pattern">%s arquivos de trilha selecionados</string>
+    <string name="disable_recording_once_app_killed_descrp">Pausará o registro de rastreamento quando o aplicativo for encerrado (por meio de aplicativos recentes). (A indicação de uso em segundo plano do OsmAnd desaparece da barra de notificação do Android.)</string>
+    <string name="save_global_track_interval_descr">Especifique o intervalo de registro para a gravação geral da trilha (habilitado por meio do widget Gravação de viagem no mapa).</string>
+    <string name="gpx_monitoring_stop">Pausar gravação de viagem</string>
+    <string name="gpx_monitoring_start">Retomar a gravação da viagem</string>
+    <string name="system_default_theme">Padrão do sistema</string>
+    <string name="all_next_segments">Todos os segmentos subsequentes</string>
+    <string name="previous_segment">Segmento anterior</string>
+    <string name="all_previous_segments">Todos os segmentos anteriores</string>
+    <string name="only_selected_segment_recalc">Apenas o segmento selecionado será recalculado usando o perfil selecionado.</string>
+    <string name="all_next_segments_will_be_recalc">Todos os segmentos subsequentes serão recalculados usando o perfil selecionado.</string>
+    <string name="all_previous_segments_will_be_recalc">Todos os segmentos anteriores serão recalculados usando o perfil selecionado.</string>
+    <string name="open_saved_track">Abrir trilha salva</string>
+    <string name="shared_string_is_saved">está salvo</string>
+    <string name="one_point_error">Adicione pelo menos dois pontos.</string>
+    <string name="shared_string_redo">Refazer</string>
 </resources>

@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -32,6 +33,8 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	public static final int MIN_SCREEN_WIDTH_TABLET_DP = 600;
 	public static boolean SHOW = true;
 	public static boolean VISIBLE = false;
+
+	private boolean systemDefaultNightMode;
 
 	public MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
@@ -75,14 +78,16 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		OsmandApplication app = requireMyApplication();
 		FragmentActivity activity = requireActivity();
+		UiUtilities iconsCache = app.getUIUtilities();
+		systemDefaultNightMode = app.getSettings().isSupportSystemDefaultTheme() &&
+				!app.getSettings().isLightSystemDefaultTheme();
 
 		RelativeLayout view = new RelativeLayout(activity);
 		view.setOnClickListener(null);
-		int backgroundColorId = R.color.map_background_color_light;
-		if (app.getSettings().isSupportSystemDefaultTheme()
-				&& !app.getSettings().isLightSystemDefaultTheme()) {
-			backgroundColorId = R.color.map_background_color_dark;
-		}
+
+		int backgroundColorId = systemDefaultNightMode ?
+				R.color.list_background_color_dark :
+				R.color.map_background_color_light;
 		view.setBackgroundColor(getResources().getColor(backgroundColorId));
 
 		ImageView logo = new ImageView(getContext());
@@ -102,19 +107,22 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
 		ImageView text = new ImageView(activity);
 		text.setId(TEXT_ID);
+		int textColorId = systemDefaultNightMode ?
+				R.color.text_color_tertiary_dark :
+				R.color.text_color_tertiary_light;
 		if (Version.isFreeVersion(app)) {
 			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
-				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand_osmlive));
+				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_osmlive, textColorId));
 			} else if (InAppPurchaseHelper.isFullVersionPurchased(app)) {
-				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand_inapp));
+				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_inapp, textColorId));
 			} else {
-				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand));
+				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand, textColorId));
 			}
 		} else if (Version.isPaidVersion(app) || Version.isDeveloperVersion(app)) {
 			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
-				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand_plus_osmlive));
+				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_plus_osmlive, textColorId));
 			} else {
-				text.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_osmand_plus));
+				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_plus, textColorId));
 			}
 		}
 		RelativeLayout.LayoutParams textLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -123,7 +131,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		
 		ImageView osmText = new ImageView(activity);
 		osmText.setId(OSM_TEXT_ID);
-		osmText.setImageDrawable(AppCompatResources.getDrawable(activity, R.drawable.image_text_openstreetmap));
+		osmText.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_openstreetmap, textColorId));
 		RelativeLayout.LayoutParams osmTextLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		osmTextLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		osmTextLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
@@ -178,6 +186,8 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		return R.color.status_bar_transparent_light;
+		return systemDefaultNightMode ?
+				R.color.status_bar_color_dark :
+				R.color.status_bar_transparent_light;
 	}
 }

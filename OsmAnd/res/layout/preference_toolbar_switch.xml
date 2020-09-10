@@ -39,6 +39,7 @@
 			android:background="@null"
 			android:clickable="false"
 			android:focusable="false"
+			android:saveEnabled="false"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
 			android:paddingStart="@dimen/content_padding"

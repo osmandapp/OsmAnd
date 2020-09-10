@@ -2416,7 +2416,7 @@
     <string name="mapillary_widget">Mapillary-Steuerelement</string>
     <string name="mapillary_widget_descr">Ermöglicht schnelle Beiträge zu Mapillary.</string>
     <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jeden. Orte entdecken, mitwirken und die Welt in Bildern festhalten.</string>
-    <string name="mapillary">Bilder auf Straßenebene</string>
+    <string name="mapillary">Mapillary</string>
     <string name="mapillary_action_descr">Mit Mapillary Bilder dieses Orts beitragen.</string>
     <string name="shared_string_install">Installieren</string>
     <string name="online_photos">Online-Fotos</string>
@@ -3842,8 +3842,8 @@
     <string name="access_hint_enter_address">Adresse eingeben</string>
     <string name="street_level_imagery">Bilder auf Straßenebene</string>
     <string name="plan_route_exit_dialog_descr">Sind Sie sicher, die Routenplanung ohne speichern beenden zu wollen\? Sie werden alle Änderungen verlieren.</string>
-    <string name="plan_route_change_route_type_before"/>
-    <string name="plan_route_change_route_type_after"/>
+    <string name="plan_route_change_route_type_before">Routentyp davor ändern</string>
+    <string name="plan_route_change_route_type_after">Routentyp danach ändern</string>
     <string name="plan_route_trim_before">Davor trimmen</string>
     <string name="plan_route_trim_after">Danach trimmen</string>
     <string name="in_case_of_reverse_direction">Falls in Gegenrichtung</string>
@@ -3871,4 +3871,24 @@
     <string name="all_previous_segments_will_be_recalc">Alle vorherigen Segmente werden unter Verwendung des ausgewählten Profils neu berechnet.</string>
     <string name="open_saved_track">Gespeicherten Track öffnen</string>
     <string name="shared_string_is_saved">wird gespeichert</string>
+    <string name="save_track_to_gpx">Während der Navigation automatisch Track aufzeichnen</string>
+    <string name="shared_string_gpx_route">Track Route</string>
+    <string name="import_track_descr">Track Datei zum Folgen auswählen, oder importieren.</string>
+    <string name="disable_recording_once_app_killed_descrp">Die GPX-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
+    <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung festlegen (via Schaltfläche \'GPX\' auf dem Kartenbildschirm).</string>
+    <string name="rourte_between_points_warning_desc">Um diese Option nutzen zu können, muss OsmAnd den Track auf die Straßen der Karte einrasten.
+\n
+\n Wählen Sie im nächsten Schritt ein Navigationsprofil um festzulegen, welche Straßentypen verwendet werden sollen, und wählen Sie einen Wert für die maximal zulässige Entfernung zwischen Track und Straße.</string>
+    <string name="quick_action_add_gpx">Track-Wegpunkt hinzufügen</string>
+    <string name="number_of_gpx_files_selected_pattern">%s Track Dateien ausgewählt</string>
+    <string name="simplified_track_description">Nur die Routenlinie wird gespeichert, die Wegpunkte werden gelöscht.</string>
+    <string name="one_point_error">Bitte fügen Sie mindestens zwei Punkte hinzu.</string>
+    <string name="shared_string_save_as_gpx">Als neue Track-Datei speichern</string>
+    <string name="empty_state_my_tracks_desc">Track-Dateien importieren oder aufzeichnen</string>
+    <string name="shared_string_gpx_files">Tracks</string>
+    <string name="show_gpx">Tracks</string>
+    <string name="marker_save_as_track">Als Track-Datei speichern</string>
+    <string name="select_another_track">Anderen Track wählen</string>
+    <string name="pass_whole_track_descr">Track-Punkt, zu dem navigiert werden soll</string>
+    <string name="nearest_point">Nächstgelegener Punkt</string>
 </resources>

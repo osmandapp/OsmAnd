@@ -128,7 +128,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			headingChanged = Math.abs(MapUtils.degreesDiff(prevHeading, heading)) > 1.0;
 		}
 		if (mapView != null) {
-			float speedForDirectionOfMovement = settings.SWITCH_MAP_DIRECTION_TO_COMPASS.get()/3.6f;
+			float speedForDirectionOfMovement = settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH.get()/3.6f;
 			boolean smallSpeedForDirectionOfMovement = speedForDirectionOfMovement != 0 && 
 					myLocation != null && isSmallSpeedForDirectionOfMovement(myLocation, speedForDirectionOfMovement);
 			if ((settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS || (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING && smallSpeedForDirectionOfMovement)) && !routePlanningMode) {
@@ -187,7 +187,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					zoom = autozoom(tb, location);
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
-				float speedForDirectionOfMovement = settings.SWITCH_MAP_DIRECTION_TO_COMPASS.get()/3.6f;
+				float speedForDirectionOfMovement = settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH.get()/3.6f;
 				boolean smallSpeedForDirectionOfMovement = speedForDirectionOfMovement != 0
 						&& isSmallSpeedForDirectionOfMovement(location, speedForDirectionOfMovement);
 				boolean smallSpeedForCompass = isSmallSpeedForCompass(location);

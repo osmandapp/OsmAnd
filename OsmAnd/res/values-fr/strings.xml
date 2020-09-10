@@ -2054,8 +2054,8 @@
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
     <string name="trip_rec_notification_settings_desc">Afficher une notification système permettant de démarrer l\'enregistrement de l\'itinéraire.</string>
-    <string name="gpx_no_tracks_title">Vous n\'avez pas encore de fichier GPX</string>
-    <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers GPX dans le dossier</string>
+    <string name="gpx_no_tracks_title">Vous n\'avez aucun fichier de trace pour l\'instant</string>
+    <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers de trace GPX dans le dossier</string>
     <string name="gpx_add_track">Autre trace GPX …</string>
     <string name="shared_string_appearance">Apparence</string>
     <string name="rendering_value_fine_name">Bien</string>
@@ -2357,7 +2357,7 @@
     <string name="online_photos">Photos en ligne</string>
     <string name="no_photos_descr">Aucune photo pour ce lieu.</string>
     <string name="shared_string_install">Installer</string>
-    <string name="mapillary">Photos des rues</string>
+    <string name="mapillary">Mapillary</string>
     <string name="open_mapillary">Ouvrir Mapillary</string>
     <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter des photos à cet emplacement de la carte.</string>
@@ -2883,13 +2883,13 @@
     <string name="step_by_step">Instructions pas à pas</string>
     <string name="routeInfo_road_types_name">Types de route</string>
     <string name="exit_at">Sortir à</string>
-    <string name="quick_action_show_hide_gpx_tracks">Afficher / masquer les traces GPX</string>
-    <string name="quick_action_gpx_tracks_hide">Masquer les traces GPX</string>
-    <string name="quick_action_gpx_tracks_show">Afficher les traces GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Afficher / masquer les traces</string>
+    <string name="quick_action_gpx_tracks_hide">Masquer les traces</string>
+    <string name="quick_action_gpx_tracks_show">Afficher les traces</string>
     <string name="use_osm_live_public_transport_description">Activer les modifications de transports publics en temps réel avec OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transports publics OsmAnd Live</string>
     <string name="sit_on_the_stop">Panneau d\'affichage à l\'arrêt</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Bouton affichant ou masquant les traces GPX sélectionnées sur la carte.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Bouton affichant ou masquant, sur la carte, les traces sélectionnées.</string>
     <string name="transfers_size">%1$d transferts</string>
     <string name="add_start_and_end_points">Ajoutez un point de départ et d\'arrivée</string>
     <string name="route_add_start_point">Ajouter un point de départ</string>
@@ -3831,7 +3831,7 @@
     <string name="shared_string_gpx_files">Traces</string>
     <string name="layer_gpx_layer">Traces</string>
     <string name="show_gpx">Traces</string>
-    <string name="monitoring_control_start">GPX</string>
+    <string name="monitoring_control_start">REC</string>
     <string name="save_track_to_gpx_globally">Enregistrer le parcours dans un fichier GPX</string>
     <string name="map_widget_monitoring">Enregistrement du parcours</string>
     <string name="marker_save_as_track">Enregistrer comme fichier de trace</string>
@@ -3842,4 +3842,17 @@
     <string name="nearest_point">Point le plus proche</string>
     <string name="delete_address">Supprimer l\'adresse</string>
     <string name="add_address">Ajouter une adresse</string>
+    <string name="number_of_gpx_files_selected_pattern">%s fichiers trace sélectionnés</string>
+    <string name="empty_state_my_tracks_desc">Importer ou enregistrer des fichiers de trace</string>
+    <string name="simplified_track">Trace simplifiée</string>
+    <string name="shared_string_file_name">Nom de fichier</string>
+    <string name="system_default_theme">Par défaut</string>
+    <string name="open_saved_track">Ouvrir une trace enregistrée</string>
+    <string name="shared_string_is_saved">a été enregistré</string>
+    <string name="one_point_error">Veuillez ajouter au moins deux points.</string>
+    <string name="import_track_descr">Sélectionnez le fichier de trace à suivre ou importez-en un.</string>
+    <string name="gpx_monitoring_start">Reprendre l\'enregistrement du trajet</string>
+    <string name="gpx_monitoring_stop">Suspendre l\'enregistrement du trajet</string>
+    <string name="save_global_track_interval_descr">Définit la fréquence d’enregistrement du parcours (enregistrement activé depuis le gadget sur la carte).</string>
+    <string name="disable_recording_once_app_killed_descrp">Suspend l\'enregistrement du parcours lorsque l\'application est arrêtée via Applications récentes ; les indications OsmAnd ne seront plus affichées dans la barre de notifications.</string>
 </resources>

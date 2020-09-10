@@ -13,7 +13,9 @@ import net.osmand.LocationsHolder;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
+import net.osmand.plus.measurementtool.command.MeasurementModeCommand;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -41,6 +43,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
+import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.*;
 
 public class MeasurementEditingContext {
 
@@ -60,6 +63,7 @@ public class MeasurementEditingContext {
 	private WptPt originalPointToMove;
 
 	private boolean inAddPointMode;
+	private boolean inApproximationMode;
 	private int calculatedPairs;
 	private int pointsToCalculateSize;
 	private CalculationMode lastCalculationMode = WHOLE_TRACK;
@@ -67,6 +71,7 @@ public class MeasurementEditingContext {
 	private ApplicationMode appMode = DEFAULT_APP_MODE;
 	private RouteCalculationProgress calculationProgress;
 	private Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = new ConcurrentHashMap<>();
+
 
 	public enum CalculationMode {
 		NEXT_SEGMENT,
@@ -173,6 +178,22 @@ public class MeasurementEditingContext {
 
 	void setInAddPointMode(boolean inAddPointMode) {
 		this.inAddPointMode = inAddPointMode;
+	}
+
+	public boolean isInApproximationMode() {
+		return inApproximationMode;
+	}
+
+	public void setInApproximationMode(boolean inApproximationMode) {
+		this.inApproximationMode = inApproximationMode;
+	}
+
+	public List<WptPt> getOriginalTrackPointList() {
+		MeasurementModeCommand command = commandManager.getLastCommand();
+		if (command.getType() == APPROXIMATE_POINTS) {
+			return ((ApplyGpxApproximationCommand) command).getPoints();
+		}
+		return null;
 	}
 
 	@Nullable
@@ -598,7 +619,6 @@ public class MeasurementEditingContext {
 
 		RouteRegion reg = new RouteRegion();
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
-		final RoutePlannerFrontEnd routePlannerFrontEnd = new RoutePlannerFrontEnd();
 
 		final RouteCalculationParams params = new RouteCalculationParams();
 		params.inSnapToRoadMode = true;
@@ -658,7 +678,7 @@ public class MeasurementEditingContext {
 				params.calculationProgressCallback.updateProgress(0);
 				List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
 				if (Algorithms.isEmpty(originalRoute)) {
-					originalRoute = Collections.singletonList(routePlannerFrontEnd.generateStraightLineSegment(
+					originalRoute = Collections.singletonList(RoutePlannerFrontEnd.generateStraightLineSegment(
 							DEFAULT_APP_MODE.getDefaultSpeed(), new LocationsHolder(pts).getLatLonList()));
 				}
 				roadSegmentData.put(currentPair, new RoadSegmentData(route.getAppMode(), currentPair.first, currentPair.second, pts, originalRoute));
@@ -711,8 +731,15 @@ public class MeasurementEditingContext {
 			Pair<WptPt, WptPt> pair = new Pair<>(before.points.get(i), before.points.get(i + 1));
 			RoadSegmentData data = this.roadSegmentData.get(pair);
 			if (data != null) {
-				LocationsHolder locationsHolder = new LocationsHolder(data.points);
-				locations.addAll(locationsHolder.getLocationsList());
+				for (WptPt pt : data.points) {
+					Location l = new Location("");
+					l.setLatitude(pt.getLatitude());
+					l.setLongitude(pt.getLongitude());
+					if (!Double.isNaN(pt.ele)) {
+						l.setAltitude(pt.ele);
+					}
+					locations.add(l);
+				}
 				pair.second.setTrkPtIndex(locations.size() - 1);
 				if (i < size - 2) {
 					locations.remove(locations.size() - 1);

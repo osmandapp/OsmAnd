@@ -404,7 +404,7 @@ public class RoutePlannerFrontEnd {
 		cleanupResultAndAddTurns(gctx);
 	}
 
-	public RouteSegmentResult generateStraightLineSegment(float averageSpeed, List<LatLon> points) {
+	public static RouteSegmentResult generateStraightLineSegment(float averageSpeed, List<LatLon> points) {
 		RouteRegion reg = new RouteRegion();
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 		RouteDataObject rdo = new RouteDataObject(reg);

@@ -3821,4 +3821,5 @@
     <string name="poi_borough">Муниципалитет</string>
     <string name="poi_give_box">Подарочная коробка</string>
     <string name="poi_traffic_signals_arrow_no">Стрелка: нет</string>
+    <string name="poi_elevator">Лифт</string>
 </resources>

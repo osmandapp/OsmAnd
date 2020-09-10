@@ -10,15 +10,19 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
 
 public class ReverseTrackCard extends BaseCard {
 
 	private LocalRoutingParameter parameter;
 
-	public ReverseTrackCard(@NonNull MapActivity mapActivity, @NonNull LocalRoutingParameter parameter) {
+	public ReverseTrackCard(@NonNull MapActivity mapActivity, boolean isReverse) {
 		super(mapActivity);
-		this.parameter = parameter;
+		int textId = R.string.gpx_option_reverse_route;
+		String title = app.getString(textId);
+		this.parameter = new OtherLocalRoutingParameter(textId, title, isReverse);
 	}
 
 	@Override

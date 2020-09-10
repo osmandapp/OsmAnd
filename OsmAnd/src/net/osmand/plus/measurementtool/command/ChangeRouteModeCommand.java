@@ -123,7 +123,7 @@ public class ChangeRouteModeCommand extends MeasurementModeCommand {
 	}
 
 	@Override
-	MeasurementCommandType getType() {
+	public MeasurementCommandType getType() {
 		return MeasurementCommandType.CHANGE_ROUTE_MODE;
 	}
 

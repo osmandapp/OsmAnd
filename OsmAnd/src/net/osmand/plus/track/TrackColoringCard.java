@@ -15,6 +15,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,8 +44,11 @@ import static net.osmand.plus.dialogs.GpxAppearanceAdapter.getAppearanceItems;
 
 public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 
-	private static final int INVALID_VALUE = -1;
-	private static final String SOLID_COLOR = "solid_color";
+	private static final int MINIMUM_CONTRAST_RATIO = 3;
+
+	public static final int INVALID_VALUE = -1;
+
+	private final static String SOLID_COLOR = "solid_color";
 	private static final Log log = PlatformUtil.getLog(TrackColoringCard.class);
 
 	private TrackDrawInfo trackDrawInfo;
@@ -139,11 +143,16 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 
 	private View createColorItemView(@ColorInt final int color, final FlowLayout rootView, boolean customColor) {
 		View colorItemView = createCircleView(rootView);
+
 		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
 
 		Drawable transparencyIcon = getTransparencyIcon(app, color);
 		Drawable colorIcon = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle, color);
 		Drawable layeredIcon = UiUtilities.getLayeredIcon(transparencyIcon, colorIcon);
+		double contrastRatio = ColorUtils.calculateContrast(color, ContextCompat.getColor(app, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
+		if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
+			backgroundCircle.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
+		}
 		backgroundCircle.setImageDrawable(layeredIcon);
 		backgroundCircle.setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -1,7 +1,5 @@
 package net.osmand.router;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXExtensionsWriter;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.RouteSegment;
 import net.osmand.GPXUtilities.RouteType;
@@ -12,11 +10,7 @@ import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataBundle;
 import net.osmand.binary.StringBundle;
-import net.osmand.binary.StringBundleWriter;
-import net.osmand.binary.StringBundleXmlWriter;
 import net.osmand.util.Algorithms;
-
-import org.xmlpull.v1.XmlSerializer;
 
 import java.util.ArrayList;
 import java.util.List;

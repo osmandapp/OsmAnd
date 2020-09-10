@@ -116,12 +116,13 @@
                 tools:src="@drawable/ic_action_remove_dark"
                 android:contentDescription="@string/snap_to_road" />
 
-	        <include
-		        layout="@layout/map_ruler"
-		        android:layout_width="@dimen/map_ruler_width"
-		        android:layout_height="wrap_content"
-		        android:layout_marginStart="@dimen/map_button_margin"
-		        android:layout_marginLeft="@dimen/map_button_margin" />
+            <include
+                layout="@layout/map_ruler"
+                android:layout_width="@dimen/map_ruler_width"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/map_button_margin"
+                android:layout_marginLeft="@dimen/map_button_margin" />
 
         </LinearLayout>
 

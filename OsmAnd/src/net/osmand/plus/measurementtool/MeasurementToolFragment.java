@@ -80,6 +80,7 @@ import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
+import net.osmand.plus.measurementtool.command.ReversePointsCommand;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
@@ -274,21 +275,31 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		});
 
-		mainView.findViewById(R.id.apply_move_point_button).setOnClickListener(new OnClickListener() {
+		View applyMovePointButton = mainView.findViewById(R.id.apply_move_point_button);
+		UiUtilities.setupDialogButton(nightMode, applyMovePointButton, UiUtilities.DialogButtonType.PRIMARY,
+				R.string.shared_string_apply);
+		applyMovePointButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				applyMovePointMode();
 			}
 		});
 
-		mainView.findViewById(R.id.apply_point_before_after_point_button).setOnClickListener(new OnClickListener() {
+
+		View applyPointBeforeAfterButton = mainView.findViewById(R.id.apply_point_before_after_point_button);
+		UiUtilities.setupDialogButton(nightMode, applyPointBeforeAfterButton, UiUtilities.DialogButtonType.PRIMARY,
+				R.string.shared_string_apply);
+		applyPointBeforeAfterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				applyAddPointBeforeAfterMode();
 			}
 		});
 
-		mainView.findViewById(R.id.add_point_before_after_button).setOnClickListener(new OnClickListener() {
+		View addPointBeforeAfterButton = mainView.findViewById(R.id.add_point_before_after_button);
+		UiUtilities.setupDialogButton(nightMode, addPointBeforeAfterButton, UiUtilities.DialogButtonType.PRIMARY,
+				R.string.shared_string_add);
+		addPointBeforeAfterButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				addPointBeforeAfter();
@@ -333,7 +344,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		});
 
-		mainView.findViewById(R.id.add_point_button).setOnClickListener(new OnClickListener() {
+		View addPointButton = mainView.findViewById(R.id.add_point_button);
+		UiUtilities.setupDialogButton(nightMode, addPointButton, UiUtilities.DialogButtonType.PRIMARY,
+				R.string.shared_string_add);
+		addPointButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				addCenterPoint();
@@ -443,11 +457,19 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
 						createStartPlanRouteListener());
 			} else if (!editingCtx.isNewData() && !editingCtx.hasRoutePoints() && !editingCtx.hasRoute() && editingCtx.getPointsCount() > 1) {
-				SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
+				enterApproximationMode(mapActivity);
 			}
 		}
 
 		return view;
+	}
+
+	private void enterApproximationMode(MapActivity mapActivity) {
+		MeasurementToolLayer layer = getMeasurementLayer();
+		if (layer != null) {
+			layer.setTapsDisabled(true);
+			SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
+		}
 	}
 
 	public boolean isInEditMode() {
@@ -596,7 +618,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 								: RouteBetweenPointsDialogMode.ALL,
 						editingCtx.getAppMode());
 			} else {
-				SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
+				enterApproximationMode(mapActivity);
 			}
 		}
 	}
@@ -628,6 +650,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					case SnapTrackWarningBottomSheet.CANCEL_RESULT_CODE:
 						toolBarController.setSaveViewVisible(true);
 						directionMode = false;
+						exitApproximationMode();
 						updateToolbar();
 						break;
 					case SnapTrackWarningBottomSheet.CONTINUE_RESULT_CODE:
@@ -693,7 +716,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 							mapActions.enterRoutePlanningModeGivenGpx(gpx, appMode, null, null, true, true, MenuState.HEADER_ONLY);
 						} else {
 							directionMode = true;
-							SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
+							enterApproximationMode(mapActivity);
 						}
 					}
 				}
@@ -760,7 +783,22 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void reverseRouteOnClick() {
-
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			List<WptPt> points = editingCtx.getPoints();
+			if (points.size() > 1) {
+				MeasurementToolLayer measurementLayer = getMeasurementLayer();
+				editingCtx.getCommandManager().execute(new ReversePointsCommand(measurementLayer));
+				if (pointsListOpened) {
+					hidePointsList();
+				}
+				updateUndoRedoButton(false, redoBtn);
+				updateUndoRedoButton(true, undoBtn);
+				updateDistancePointsText();
+			} else {
+				Toast.makeText(mapActivity, getString(R.string.one_point_error), Toast.LENGTH_SHORT).show();
+			}
+		}
 	}
 
 	@Override
@@ -2014,8 +2052,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			int paddingH = ctx.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_large);
 			int paddingV = ctx.getResources().getDimensionPixelSize(R.dimen.context_menu_padding_margin_small);
 			done.setPadding(paddingH, paddingV, paddingH, paddingV);
-			AndroidUtils.setBackground(ctx, done, nightMode, R.drawable.dlg_btn_stroked_light,
-					R.drawable.dlg_btn_stroked_dark);
+			AndroidUtils.setBackground(ctx, done, nightMode, R.drawable.purchase_dialog_outline_btn_bg_light,
+					R.drawable.purchase_dialog_outline_btn_bg_dark);
 		}
 
 		@Override
@@ -2028,6 +2066,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void onGpxApproximationDone(GpxRouteApproximation gpxApproximation, ApplicationMode mode) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
+			editingCtx.setInApproximationMode(true);
 			ApplyGpxApproximationCommand command = new ApplyGpxApproximationCommand(measurementLayer, gpxApproximation, mode);
 			if (!editingCtx.getCommandManager().update(command)) {
 				editingCtx.getCommandManager().execute(command);
@@ -2041,6 +2080,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onApplyGpxApproximation() {
+		exitApproximationMode();
 		doAddOrMovePointCommonStuff();
 		if (directionMode) {
 			directionMode = false;
@@ -2066,8 +2106,17 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onCancelGpxApproximation() {
 		editingCtx.getCommandManager().undo();
+		exitApproximationMode();
 		directionMode = false;
 		updateSnapToRoadControls();
 		updateToolbar();
+	}
+
+	private void exitApproximationMode() {
+		editingCtx.setInApproximationMode(false);
+		MeasurementToolLayer layer = getMeasurementLayer();
+		if (layer != null) {
+			layer.setTapsDisabled(false);
+		}
 	}
 }

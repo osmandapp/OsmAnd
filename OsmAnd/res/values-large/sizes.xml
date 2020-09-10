@@ -80,7 +80,6 @@
 	<dimen name="measurement_tool_text_margin">12dp</dimen>
 	<dimen name="measurement_tool_points_list_container_height">330dp</dimen>
 	<dimen name="measurement_tool_up_down_row_height">48dp</dimen>
-	<dimen name="measurement_tool_controls_height">84dp</dimen>
 	<dimen name="measurement_tool_text_button_padding_small">18dp</dimen>
 	<dimen name="measurement_tool_text_button_padding">24dp</dimen>
 	<dimen name="measurement_tool_undo_redo_padding_small">18dp</dimen>

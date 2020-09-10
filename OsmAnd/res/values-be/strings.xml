@@ -35,7 +35,7 @@
     <string name="speak_descr">Наладка агалошвання назваў вуліц, дарожных апавяшчэнняў (вымушаныя прыпынкі, ляжачыя паліцэйскія), перасцярог пра камеры хуткасці, абмежаванні хуткасці.</string>
     <string name="speak_street_names">Назвы вуліц (TTS)</string>
     <string name="speak_speed_limit">Абмежаванне хуткасці</string>
-    <string name="speak_cameras">Камеры хуткасці</string>
+    <string name="speak_cameras">Камеры кантролю хуткасці</string>
     <string name="speak_traffic_warnings">Папярэджанні руху</string>
     <string name="osb_author_or_password_not_specified">Калі ласка, пазначце карыстальніка OSM і ягоны пароль у «Наладах»</string>
     <string name="clear_intermediate_points">Ачысціць прамежкавыя пункты</string>
@@ -357,7 +357,7 @@
     <string name="bg_service_screen_unlock">Разблакаваць</string>
     <string name="bg_service_screen_lock_toast">Экран заблакаваны</string>
     <string name="bg_service_interval">Задайце інтэрвал абуджэння:</string>
-    <string name="show_cameras">Камеры хуткасці</string>
+    <string name="show_cameras">Камеры кантролю хуткасці</string>
     <string name="show_traffic_warnings">Абмежаванні руху</string>
     <string name="avoid_toll_roads">Без платных дарог</string>
     <string name="continue_follow_previous_route_auto">Працягнуць прытрымлівацца папярэдняй незавершанай навігацыі\? (%1$s секунд)</string>
@@ -657,7 +657,7 @@
     <string name="tts_language_not_supported">Абраная мова не падтрымліваецца Android TTS (пераўтварэнне тэксту ў гук), таму будзе выкарыстоўвацца прадвызначаная мова TTS. Пашукаць іншы TTS у краме\?</string>
     <string name="tts_missing_language_data_title">Даныя адсутнічаюць</string>
     <string name="tts_missing_language_data">Перайсці ў краму, каб спампаваць абраную мову\?</string>
-    <string name="gpx_option_reverse_route">Развярнуць накірунак GPX</string>
+    <string name="gpx_option_reverse_route">Развярнуць кірунак GPX</string>
     <string name="gpx_option_destination_point">Выкарыстоўваць дзейны пункт прызначэння</string>
     <string name="gpx_option_from_start_point">Прайсці ўвесь шлях</string>
     <string name="switch_to_vector_map_to_see">Для гэтага рэгіёну даступныя лакальныя вектарныя мапы.
@@ -743,8 +743,8 @@
     <string name="reading_cached_tiles">Чытанне захаваных фрагментаў…</string>
     <string name="version_index_is_big_for_memory">Недастаткова памяці для лакальнай мапы \'\'{0}\'\'</string>
     <string name="version_index_is_not_supported">Версія індэкса \'\'{0}\'\' не падтрымліваецца</string>
-    <string name="osmand_routing_experimental">Аўтаномная навігацыя OsmAnd з’яўляецца эксперыментальнай і не працуе на доўгіх адлегласцях каля 20 км. 
-\n 
+    <string name="osmand_routing_experimental">Аўтаномная навігацыя OsmAnd ёсць эксперыментальнай і не працуе на доўгіх адлегласцях каля 20 км.
+\n
 \nНавігацыя часова пераключаецца на сэрвіс CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Не атрымалася знайсці вызначаны каталог.</string>
     <string name="application_dir">Каталог захоўвання даных</string>
@@ -760,7 +760,7 @@
     <string name="voice_is_not_available_title">Абярыце пакунак галасавых падказак</string>
     <string name="daynight_mode_day">Дзень</string>
     <string name="daynight_mode_night">Ноч</string>
-    <string name="daynight_mode_auto">Усход/Заход</string>
+    <string name="daynight_mode_auto">Узыход/Заход</string>
     <string name="daynight_mode_sensor">Датчык святла</string>
     <string name="daynight_descr">Наладзьце пераключэнне паміж дзённым і начным рэжымамі.</string>
     <string name="daynight">Рэжым дзень/ноч</string>
@@ -1307,10 +1307,10 @@
     <string name="traffic_warning_speed_limit">Абмежаванне хуткасці</string>
     <string name="traffic_warning_border_control">Памежны кантроль</string>
     <string name="traffic_warning_payment">Платны праезд</string>
-    <string name="traffic_warning_stop">Знак СТОП</string>
+    <string name="traffic_warning_stop">Знак \"СТОП\"</string>
     <string name="traffic_warning_calming">Паменшыце хуткасць</string>
-    <string name="traffic_warning_speed_camera">Камера хуткасці</string>
-    <string name="traffic_warning">Абмежаванне руху</string>
+    <string name="traffic_warning_speed_camera">Камера кантролю хуткасці</string>
+    <string name="traffic_warning">Абмежаванні руху</string>
     <string name="text_size_descr">Змяніць памер тэксту на мапе.</string>
     <string name="text_size">Памер тэксту</string>
     <string name="speed_limit_exceed">Дапушчальнае значэнне перавышэння хуткасці</string>
@@ -1344,7 +1344,7 @@
     <string name="rendering_attr_tramTrainRoutes_name">Маршруты трамваяў і цягнікоў</string>
     <string name="impassable_road">Пазбягаць дарог…</string>
     <string name="rendering_category_hide">Схаваць</string>
-    <string name="wake_on_voice">Уключыць экран</string>
+    <string name="wake_on_voice">Уключэнне экрана</string>
     <string name="wake_on_voice_descr">Уключаць экран прылады пры набліжэнні да павароту.</string>
     <string name="lock_screen_request_explanation">%1$s патрабуе дазволу на выключэнне экрану для энергазберажэння.</string>
     <string name="home_button">Дом</string>
@@ -1431,9 +1431,9 @@
     <string name="shared_string_dismiss">Адхіліць</string>
     <string name="shared_string_yes">Так</string>
     <string name="shared_string_no">Не</string>
-    <string name="shared_string_on">Уключыць</string>
+    <string name="shared_string_on">Укл</string>
     <string name="shared_string_off">Выкл</string>
-    <string name="shared_string_previous">Назад</string>
+    <string name="shared_string_previous">Папярэдні</string>
     <string name="shared_string_next">Далей</string>
     <string name="shared_string_enable">Уключыць</string>
     <string name="shared_string_disable">Выключыць</string>
@@ -1507,7 +1507,7 @@
     <string name="tips_and_tricks_descr">Пытанні і адказы, апошнія змены і іншае.</string>
     <string name="routing_settings_2">Налады навігацыі</string>
     <string name="general_settings_2">Агульныя налады</string>
-    <string name="shared_string_clear_all">Ачысціць ўсё</string>
+    <string name="shared_string_clear_all">Ачысціць усё</string>
     <string name="shared_string_collapse">Згарнуць</string>
     <string name="shared_string_my_location">Маё месцазнаходжанне</string>
     <string name="shared_string_tracks">Сляды</string>
@@ -1994,7 +1994,7 @@
     <string name="access_direction_audio_feedback_descr">Індыцыраваць гукам кірунак на мэтавы пункт.</string>
     <string name="access_direction_haptic_feedback">Тактыльныя напрамкі</string>
     <string name="access_direction_haptic_feedback_descr">Індыцыраваць вібрацыяй кірунак на мэтавы пункт.</string>
-    <string name="map_widget_battery">Зарад батарэі</string>
+    <string name="map_widget_battery">Узровень зараду батарэі</string>
     <!-- string name="lat_lon_pattern">Шыр: %1$.5f Даў: %2$.5f</string -->
     <string name="lang_hu_formal">Венгерская (афіцыйная)</string>
     <string name="move_marker_bottom_sheet_title">Перамясціце мапу, каб змяніць пазіцыю адзнакі</string>
@@ -2041,13 +2041,13 @@
     <string name="skip_map_downloading_desc">У вас адсутнічаюць мапы. Вы можаце абраць мапу са спіса альбо спампаваць яе пазней праз \"Меню - %1$s\".</string>
     <string name="search_another_country">Абраць іншы рэгіён</string>
     <string name="search_map">Пошук мапаў…</string>
-    <string name="first_usage_wizard_desc">OsmAnd вызначыць вашае месцазнаходжанне і прапануе спампаваць мапы для гэтага рэгіёна.</string>
+    <string name="first_usage_wizard_desc">OsmAnd вызначыць ваша месцазнаходжанне і прапануе спампаваць мапы для гэтага рэгіёна.</string>
     <string name="location_not_found">Не атрымалася вызначыць месцазнаходжанне</string>
     <string name="no_inet_connection">Злучэнне з Інтэрнэтам адсутнічае</string>
     <string name="no_inet_connection_desc_map">Патрабуецца для спампоўвання мапаў.</string>
     <string name="search_location">Пашук месцазнаходжання…</string>
     <string name="storage_free_space">Вольнае месца</string>
-    <string name="storage_place_description">Сховішча даных OsmAnd (для мапаў, GPX-файлаў і г.д.): %1$s.</string>
+    <string name="storage_place_description">Сховішча даных OsmAnd (для мапаў, файлаў слядоў і г.д.): %1$s.</string>
     <string name="give_permission">Дазволіць</string>
     <string name="allow_access_location">Дазволіць доступ да месцазнаходжання</string>
     <string name="first_usage_greeting">Пракладвайце маршруты і адкрывайце новыя месцы без злучэння з Інтэрнэтам</string>
@@ -2085,7 +2085,7 @@
     <string name="gpx_logging_no_data">Даныя адсутнічаюць</string>
     <string name="gpx_add_track">Дадаць яшчэ…</string>
     <string name="shared_string_appearance">Выгляд</string>
-    <string name="trip_rec_notification_settings_desc">Паказваць апавяшчэнне, якое дазволіць запіс падарожжа.</string>
+    <string name="trip_rec_notification_settings_desc">Паказваць сістэмнае апавяшчэнне, якое дазволіць запіс падарожжа.</string>
     <string name="christmas_poi">Калядныя POI</string>
     <string name="christmas_desc_q">Паказваць калядныя POI\?</string>
     <string name="rendering_value_light_brown_name">Светла-карычневы</string>
@@ -2094,8 +2094,8 @@
     <string name="search_hint">Увядзіце горад, адрас, назву POI</string>
     <string name="translit_name_if_miss">Транслітарыраваць калі назва на %1$s адсутнічае</string>
     <string name="route_calculation">Разлік шляху</string>
-    <string name="gpx_no_tracks_title">У вас яшчэ няма GPX-файлаў</string>
-    <string name="gpx_no_tracks_title_folder">Вы таксама можаце дадаць GPX-файлы ў каталог</string>
+    <string name="gpx_no_tracks_title">У вас яшчэ няма файлаў слядоў</string>
+    <string name="gpx_no_tracks_title_folder">Вы таксама можаце дадаць файлы слядоў у каталог</string>
     <string name="route_roundabout_short">Збочце на %1$d з’ездзе</string>
     <string name="upload_poi">Запампаваць POI</string>
     <string name="search_map_hint">Горад ці краіна</string>
@@ -2674,7 +2674,7 @@
     <string name="will_open_tomorrow_at">Адчыніцца заўтра а</string>
     <string name="copy_location_name">Скапіяваць назву мясціны/POI</string>
     <string name="toast_empty_name_error">Месца без назвы</string>
-    <string name="shared_string_current">Быгучы</string>
+    <string name="shared_string_current">Бягучы</string>
     <string name="last_intermediate_dest_description">Дадае прамежкавы прыпынак</string>
     <string name="first_intermediate_dest_description">Дадае першы прыпынак</string>
     <string name="subsequent_dest_description">Перамясціць прызначэнне далей і стварыць яго</string>
@@ -2792,7 +2792,7 @@
     <string name="nautical_render_descr">Для марской навігацыі. Асноўныя магчымасці: буі, маякі, рачныя і марскія маршруты і адзнакі, гавані, марскія паслугі, контуры глыбіні.</string>
     <string name="ski_map_render_descr">Для катання на лыжах. Асноўныя магчымасці: адмалёўка трас, пад\'ёмнікаў і іншых лыжных аб\'ектаў зручным спосабам. Менш другасных аб\'ектаў.</string>
     <string name="light_rs_render_descr">Просты стыль для аўтамабільнай навігацыі. Мяккі начны рэжым, контурныя лініі, кантрастныя дарогі ў аранжавым стылі, зацененыя другасныя аб\'екты мапы.</string>
-    <string name="topo_render_descr">Для шпацыру, паходу і катання на ровары. Добрая чытальнасць пры слабым асвятленні. Кантрастныя дарогі і прыродныя аб\'екты, розныя тыпы маршрутаў, контурныя лініі з дадатковымі наладамі, больш падрабязная інфармацыя. Параметр якасці дарожнага пакрыцця дае магчымасць адрозніваць дарогі з розным пакрыццём. Без начнога рэжыму.</string>
+    <string name="topo_render_descr">Для шпацыру і катання на ровары. Добрая чытальнасць пры слабым асвятленні. Кантрастныя дарогі і прыродныя аб\'екты, розныя тыпы маршрутаў, контурныя лініі з дадатковымі наладамі, больш падрабязная інфармацыя. Параметр якасці дарожнага пакрыцця дае магчымасць адрозніваць дарогі з розным пакрыццём. Без начнога рэжыму.</string>
     <string name="mapnik_render_descr">Стары прадвызначаны стыль Mapnik. Колеры падобныя на Mapnik.</string>
     <string name="default_render_descr">Стыль агульнага прызначэння. Спрошчанае адлюстраванне шчыльнанаселеных гарадоў. Пазначаюцца контурныя лініі, якасць паверхні, абмежаванні доступу, дарожныя шчыты, візуалізацыя маршрутаў па шкале SAC, аб\'екты спартовых сплаваў.</string>
     <string name="open_wikipedia_link_online">Адкрыць спасылку на Вікіпедыю анлайн</string>
@@ -2827,9 +2827,9 @@
     <string name="coord_input_save_as_track_descr">Вы дадалі %1$s пунктаў. Увядзіце назву файла і націсніце \"захаваць\".</string>
     <string name="point_deleted">Пункт %1$s выдалены</string>
     <string name="shared_string_world">Свет</string>
-    <string name="send_search_query_description">Мы адправім ваш пашуковы запыт \"%1$s\", а таксама вашае месцазнаходжанне. 
-\n 
-\n Збіраюцца толькі неперасанальныя даныя, даныя пошуку выкарыстоўваюцца толькі для таго, каб палепшыць алгарытм пошуку.</string>
+    <string name="send_search_query_description">Мы адправім ваш пашуковы запыт \"%1$s\", а таксама вашае месцазнаходжанне.
+\n
+\n Збіраюцца толькі агульныя звесткі, даныя пошуку выкарыстоўваюцца толькі для таго, каб палепшыць алгарытм пошуку.</string>
     <string name="search_no_results_description">Няма вынікаў?
 \nРаспавядзіце нам аб гэтым.</string>
     <string name="send_search_query">Адправіць пашуковы запыт?</string>
@@ -2946,10 +2946,10 @@
     <string name="shared_string_swap">Памяняць</string>
     <string name="show_more">Паказаць больш</string>
     <string name="tracks_on_map">Адлюстроўваемыя сляды</string>
-    <string name="quick_action_show_hide_gpx_tracks">Паказаць/схаваць GPX-сляды</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Кнопка для адлюстравання/хавання абраных GPX-слядоў на мапе.</string>
-    <string name="quick_action_gpx_tracks_hide">Схаваць GPX-сляды</string>
-    <string name="quick_action_gpx_tracks_show">Паказаць GPX-сляды</string>
+    <string name="quick_action_show_hide_gpx_tracks">Паказаць/схаваць сляды</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Кнопка для адлюстравання/хавання абраных слядоў на мапе.</string>
+    <string name="quick_action_gpx_tracks_hide">Схаваць сляды</string>
+    <string name="quick_action_gpx_tracks_show">Паказаць сляды</string>
     <string name="use_osm_live_public_transport_description">Уключыць грамадскі транспарт для змен OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Грамадскі транспарт OsmAnd Live</string>
     <string name="release_3_3">• Новы экран «Напрамкі»: адлюстроўвае кнопкі напрамкаў дахаты і на працу, скарот «папярэдні маршрут», спіс актыўных GPX-слядоў і адзнак, гісторыю пошуку
@@ -3624,4 +3624,321 @@
     <string name="search_download_wikipedia_maps">Спампаваць мапы Вікіпедыі</string>
     <string name="app_mode_wheelchair">Інвалідны вазок</string>
     <string name="osm_edit_closed_note">Закрытая нататка OSM</string>
+    <string name="all_next_segments_will_be_recalc">Усе наступныя сегменты пералічацца з выкарыстаннем абранага профілю.</string>
+    <string name="all_previous_segments_will_be_recalc">Усе папярэднія сегменты пералічацца з выкарыстаннем абранага профілю.</string>
+    <string name="open_saved_track">Адкрыць захаваны след</string>
+    <string name="shared_string_is_saved">захавана</string>
+    <string name="save_track_to_gpx">Аўтаматычна запісваць след падчас навігацыі</string>
+    <string name="disable_recording_once_app_killed_descrp">Запіс GPX прыпыніцца, калі праграма будзе забітая (праз надаўнія праграмы). (Апавяшчэнне ў вобласці падказак Android пра фонавы рэжым OsmAnd знікне.)</string>
+    <string name="save_global_track_interval_descr">Вызначце інтэрвал запісу следу (уключаецца праз віджэт запісу GPX на мапе).</string>
+    <string name="monitoring_control_start">ЗАПІС</string>
+    <string name="shared_string_done">Завершана</string>
+    <string name="shared_string_save_as_gpx">Захаваць як новы файл следу</string>
+    <string name="add_segment_to_the_track">Дадаць у файл следу</string>
+    <string name="shared_string_gpx_files">Сляды</string>
+    <string name="layer_gpx_layer">Сляды</string>
+    <string name="show_gpx">Сляды</string>
+    <string name="save_track_to_gpx_globally">Запіс следу ў файл GPX</string>
+    <string name="empty_state_my_tracks">Дадаць файлы слядоў</string>
+    <string name="empty_state_my_tracks_desc">Імпартуйце альбо запішыце файлы следу</string>
+    <string name="context_menu_item_add_waypoint">Дадаць пункт шляху</string>
+    <string name="quick_action_add_gpx">Дадаць пункт шляху</string>
+    <string name="map_widget_monitoring">Запіс паездкі</string>
+    <string name="marker_save_as_track">Захаваць як файл следу</string>
+    <string name="number_of_gpx_files_selected_pattern">Абрана %s файлаў слядоў</string>
+    <string name="gpx_monitoring_stop">Прыпыніць запіс паездкі</string>
+    <string name="gpx_monitoring_start">Аднавіць запіс паездкі</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Вы можаце экспартаваць і імпартаваць хуткія дзеянні разам з профілямі праграмы.</string>
+    <string name="shared_string_delete_all_q">Выдаліць усе\?</string>
+    <string name="delete_all_actions_message_q">Сапраўды хочаце выдаліць %d хуткіх дзеянняў\?</string>
+    <string name="screen_timeout">Час да выключэння экрана</string>
+    <string name="uninstall_speed_cameras">Выдаліць камеры кантролю хуткасці</string>
+    <string name="shared_string_legal">Юрыдычная інфармацыя</string>
+    <string name="speed_camera_pois">POI камер кантролю хуткасці</string>
+    <string name="speed_cameras_legal_descr">У некаторых краінах і рэгіёнах апавяшчэнні пра камеры кантролю хуткасці забароненыя законам.
+\n
+\nВам неабходна здзейсніць выбар у залежнасці ад вашай краіны.
+\n
+\nАбярыце \"%1$s\", каб атрымліваць апавяшчэнні пра камеры кантролю хуткасці.
+\n
+\nАбярыце \"%2$s\", каб выдаліць усе даныя, звязаныя з камерамі кантролю хуткасці: апавяшчэнні, папярэджанні і POI.</string>
+    <string name="keep_active">Пакінуць уключанымі</string>
+    <string name="speed_cameras_alert">Апавяшчэнні пра камеры кантролю хуткасці ў некаторых краінах забароненыя законам.</string>
+    <string name="screen_timeout_descr">Калі функцыя \"%1$s\" уключаная, то час працы будзе залежыць ад яе.</string>
+    <string name="default_screen_timeout">Прадвызначаныя налады выключэння экрана</string>
+    <string name="shared_string_tones">тоны</string>
+    <string name="shared_string_meters">метры</string>
+    <string name="details_dialog_decr">Кіраванне паказам дадатковых адзнак мапы</string>
+    <string name="shared_string_night_map">Начная мапа</string>
+    <string name="add_online_source">Дадаць сеціўную крыніцу</string>
+    <string name="clear_tiles_warning">Калі ўжыць гэтыя змены, то кэшаваныя даныя гэтай крыніцы страцяцца</string>
+    <string name="vessel_height_warning_link">Пазначыць вышыню судна</string>
+    <string name="vessel_height_warning">Вы можаце пазначыць вышыню судна, каб пазбегнуць нізкіх мастоў. Звярніце ўвагу, што калі мост развадны, то будзе выкарыстоўвацца яго вышыня ў адкрытым стане.</string>
+    <string name="vessel_height_limit_description">Пазначце вышыню судна, каб пазбегнуць нізкіх мастоў. Звярніце ўвагу, што калі мост развадны, то будзе выкарыстоўвацца яго вышыня ў адкрытым стане.</string>
+    <string name="add_hidden_group_info">Дададзены пункт не будзе бачны на мапе, бо абраная група схаваная. Знайсці пункт можна ў \"%s\".</string>
+    <string name="app_mode_wheelchair_forward">Інвалідны вазок спераду</string>
+    <string name="app_mode_go_cart">Go-cart</string>
+    <string name="set_working_days_to_continue">Для працягу неабходна пазначыць працоўныя дні</string>
+    <string name="route_between_points">Маршрут паміж пунктамі</string>
+    <string name="plan_a_route">План маршруту</string>
+    <string name="add_to_a_track">Дадаць да следу</string>
+    <string name="track_show_start_finish_icons">Паказваць значкі старту і фінішу</string>
+    <string name="select_track_width">Абярыце шырыню</string>
+    <string name="gpx_split_interval_descr">Абярыце інтэрвал паказу адзнак з дыстанцыяй альбо часам.</string>
+    <string name="gpx_split_interval_none_descr">Абярыце варыянт падзелу: па часе альбо дыстанцыі.</string>
+    <string name="shared_string_custom">Адвольны</string>
+    <string name="gpx_direction_arrows">Стрэлкі кірунку</string>
+    <string name="track_coloring_solid">Суцэльны</string>
+    <string name="plan_route_last_edited">Апошняя змена</string>
+    <string name="plan_route_import_track">Імпартаваць след</string>
+    <string name="plan_route_open_existing_track">Адкрыць існы след</string>
+    <string name="plan_route_create_new_route">Стварыць новы маршрут</string>
+    <string name="plan_route_select_track_file_for_open">Абярыце файл следу для адкрыцця.</string>
+    <string name="overwrite_track">Перазапісаць след</string>
+    <string name="save_as_new_track">Захаваць як новы след</string>
+    <string name="reverse_route">Зваротны маршрут</string>
+    <string name="rourte_between_points_whole_track_button_desc">Увесь след будзе пералічаны з выкарыстаннем абранага профілю.</string>
+    <string name="rourte_between_points_next_segment_button_desc">Толькі наступны сегмент будзе пералічаны паводле абранага профілю.</string>
+    <string name="rourte_between_points_desc">Абярыце спосаб злучэння пунктаў. Варыянты: прамая лінія; разлік маршруту паводле абранага профілю.</string>
+    <string name="whole_track">Увесь след</string>
+    <string name="next_segment">Наступны сегмент</string>
+    <string name="rourte_between_points_warning_desc">Для выкарыстання гэтага параметру OsmAnd пракладзе ваш след па дарогах.
+\n
+\n Пасля вам патрэбна абраць профіль навігацыі для вызначэння маршруту з улікам параметраў і абмежаванняў гэтага профілю.</string>
+    <string name="threshold_distance">Максімальная дыстанцыя</string>
+    <string name="navigation_profile">Профіль навігацыі</string>
+    <string name="rourte_between_points_add_track_desc">Абраць файл следу, да якога будзе дададзены новы сегмент.</string>
+    <string name="street_level_imagery">Выявы на ўзроўні вуліц</string>
+    <string name="plan_route_exit_dialog_descr">Сапраўды закрыць план маршруту без захавання\? Усе змены страцяцца.</string>
+    <string name="in_case_of_reverse_direction">У выпадку адваротнага кірунку</string>
+    <string name="shared_string_gpx_route">Маршрут следу</string>
+    <string name="follow_track">Кіравацца следу</string>
+    <string name="follow_track_descr">Абярыце файл следу</string>
+    <string name="import_track_descr">Абярыце альбо імпартуйце файл следу.</string>
+    <string name="select_another_track">Абраць іншы след</string>
+    <string name="navigate_to_track_descr">Перайдзіце ад маёй пазіцыі да следу</string>
+    <string name="pass_whole_track_descr">Пункт следу для навігацыі</string>
+    <string name="start_of_the_track">Пачатак следу</string>
+    <string name="one_point_error">Калі ласка, дадайце прынамсі два пункты.</string>
+    <string name="nearest_point">Бліжэйшы пункт</string>
+    <string name="attach_to_the_roads">Спалучэнне з дарогай</string>
+    <string name="delete_address">Выдаліць адрас</string>
+    <string name="add_address">Дадаць адрас</string>
+    <string name="access_hint_enter_address">Увядзіце адрас</string>
+    <string name="plan_route_trim_before">Абрэзаць перад</string>
+    <string name="plan_route_trim_after">Абрэзаць пасля</string>
+    <string name="plan_route_change_route_type_before">Змяніць тып маршруту перад</string>
+    <string name="plan_route_change_route_type_after">Змяніць тып маршруту пасля</string>
+    <string name="simplified_track">Сціслы след</string>
+    <string name="simplified_track_description">Захаваецца толькі лінія маршруту, пункты шляху выдаляцца.</string>
+    <string name="shared_string_file_name">Назва файла</string>
+    <string name="system_default_theme">Прадвызначана</string>
+    <string name="all_next_segments">Усе наступныя сегменты</string>
+    <string name="previous_segment">Папярэдні сегмент</string>
+    <string name="all_previous_segments">Усе папярэднія сегменты</string>
+    <string name="only_selected_segment_recalc">Толькі абраны сегмент пералічыцца з выкарыстаннем абранага профілю.</string>
+    <string name="osm_edits_view_descr">Прагляд вашых правак альбо хібаў OSM, яшчэ не адпраўленых у %1$s. Запампаваныя пункты больш не будуць паказвацца.</string>
+    <string name="live_monitoring_adress_descr">Пазначце сеціўны адрас з наступнымі параметрамі: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Рэкамендацыя: наладка ў 5 метраў можа вас задаволіць, калі вам не патрэбна фіксаваць больш кароткія перамяшчэнні, і вы не хочаце відавочна збіраць даныя ў стане спакою.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Пабочныя эфекты: перыяды ў стане спакою не запісваюцца наогул альбо па адным пункце кожны. Невялікія (у рэальным свеце) перамяшчэнні (напрыклад, убок, што адзначаюць магчымы паварот у вашай паездцы) могуць быць адфільтраваныя. Файл змяшчае менш інфармацыі для наступнай апрацоўкі і мае горшую статыстыку, адфільтроўваючы відавочна лішнія пункты падчас запісу. Пры гэтым патэнцыйна захоўваюцца артэфакты, выкліканыя дрэнным прыёмам альбо эфектамі модуля GPS.</string>
+    <string name="monitoring_min_distance_descr">Гэты фільтр дазваляе пазбегнуць запісу паўторных пунктаў, паміж якімі магло быць занадта мала руху, і робіць больш прыемным выгляд слядоў.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Нататка: калі GPS быў адключаны непасрэдна перад запісам, дакладнасць вымярэння першага пункта можа быць нізкай, таму мы разглядаем магчымасць дадання секунднай затрымкі перад запісам першага пункта (альбо запісу лепшага з 3 паслядоўных пунктаў), але гэта яшчэ не рэалізавана.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Рэкамендацыя: цяжка прадбачыць, што будзе запісана, а што не. Магчыма, лепш выключыць гэты фільтр.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Пабочны эфект: у выніку фільтрацыі па дакладнасці пункты могуць цалкам адсутнічаць, напрыклад, пад мастамі, пад дрэвамі, паміж высокімі будынкамі альбо пры пэўным надвор\'і.</string>
+    <string name="monitoring_min_accuracy_descr">У гэтым выпадку будуць запісвацца толькі пункты, вымераныя з мінімальнай дакладнасцю (у метрах / футах паводле налад прылады). Дакладнасць - гэта набліжэнне вымярэнняў да сапраўднага становішча, яна не мае дачынення да дакладнасці, што ўяўляе сабой мноства паўторных вымярэнняў.</string>
+    <string name="monitoring_min_speed_descr_remark">Нататка: праверка хуткасці&gt; 0: большасць модуляў GPS паведамляюць значэнне хуткасці толькі ў тым выпадку, калі алгарытм вызначае, што вы рухаецеся, і нічога не паведамляюць, калі вы не рухаецеся. Такім чынам, выкарыстанне ў гэтым фільтры параметра \"&gt; 0\" у пэўным сэнсе ёсць выяўленне руху модуля GPS. Але нават калі падчас запісу нічога не фільтруецца, то ўсё адно гэтая функцыя выкарыстоўваецца ў аналізе GPX для вызначэння скарэктаванай адлегласці. Гэта азначае, што значэнне, якое адлюстроўваецца ў гэтым полі - гэта адлегласць, запісаная падчас руху.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Рэкамендацыя: Паспрабуйце спачатку выкарыстоўваць выяўленне руху праз фільтр мінімальнага зруху (B), гэта можа даць лепшыя вынікі, і вы страціце менш даных. Калі на слядах застаецца шум на нізкіх хуткасцях, паспрабуйце ненулявыя значэнні. Звярніце ўвагу, што некаторыя вымярэнні могуць не ўжываць ніякіх значэнняў хуткасці (некаторыя сеціўныя метады), і ў гэтым выпадку вы нічога не зафіксуеце.</string>
+    <string name="search_offline_geo_error">Немагчыма разабраць геаспасылку \"%s\".</string>
+    <string name="index_name_antarctica">Антарктыда</string>
+    <string name="sort_by_category">Сартаваць па катэгорыі</string>
+    <string name="shared_string_resume">Працягнуць</string>
+    <string name="select_map_icon_descr">Значок у стане бяздзейнасці.</string>
+    <string name="accessibility_announce">Абвестка</string>
+    <string name="multimedia_notes_view_descr">Вашыя нататкі OSM знаходзяцца ў %1$s.</string>
+    <string name="tracks_view_descr">Вашыя запісаныя сляды знаходзяцца ў %1$s альбо каталозе OsmAnd.</string>
+    <string name="osm_authorization_success">Паспяховая аўтарызацыя</string>
+    <string name="multimedia_photo_play_sound">Гук засаўкі камеры</string>
+    <string name="multimedia_use_system_camera">Выкарыстоўваць сістэмную праграму</string>
+    <string name="multimedia_rec_split_title">Падзел запісу</string>
+    <string name="reset_plugin_to_default">Скід налад убудовы да прадвызначаных</string>
+    <string name="monitoring_min_distance">Мінімальны зрух</string>
+    <string name="monitoring_min_accuracy">Мінімальная дакладнасць</string>
+    <string name="monitoring_min_speed">Мінімальная хуткасць</string>
+    <string name="monitoring_notification">Апавяшчэнне</string>
+    <string name="live_monitoring_adress">Сеціўны адрас</string>
+    <string name="live_monitoring_tracking_interval">Інтэрвал адсочвання</string>
+    <string name="live_monitoring_time_buffer">Буфер часу</string>
+    <string name="monitoring_min_speed_descr_side_effect">Пабочны эфект: на следзе будуць адсутнічаць усе ўчасткі, дзе не быў выкананы крытэрый мінімальнай хуткасці (напрыклад, калі вы вядзеце ровар на круты пагорак). Таксама не будзе інфармацыі пра перыяды адпачынку, напрыклад, перапынкі. Гэта ўплывае на любы аналіз альбо наступную апрацоўку, напрыклад, пры спробе вызначыць агульную працягласць паездкі, час руху, сярэднюю хуткасць.</string>
+    <string name="monitoring_min_speed_descr">Гэта адсечны фільтр з нізкай хуткасцю. Ён прызначаны для таго, каб не фіксаваць кропкі ніжэй пэўнай хуткасці. Гэта можа зрабіць запісаныя сляды больш плаўнымі пры праглядзе на мапе.</string>
+    <string name="not_support_file_type_with_ext">Абярыце падтрымліваемы файл з пашырэннем %1$s.</string>
+    <string name="file_does_not_contain_routing_rules">У \"%1$s\" няма правіл маршрутызацыі. Калі ласка, абярыце іншы файл.</string>
+    <string name="logcat_buffer_descr">Праверце і падзяліцеся падрабязнымі журналамі праграмы</string>
+    <string name="permission_is_required">Для выкарыстання гэтага параметра патрабуецца дазвол.</string>
+    <string name="export_profile_dialog_description">Вы можаце дадатковыя даныя, каб імпартаваць разам з профілям.</string>
+    <string name="import_profile_dialog_description">Імпартуемы профіль змяшчае дадатковыя даныя. Націсніце \"Імпарт\", каб імпартаваць толькі даныя профілю, альбо абярыце дадатковыя даныя.</string>
+    <string name="shared_string_include_data">Уключыць дадатковыя даныя</string>
+    <string name="shared_string_rendering_style">Стыль адмалёўкі</string>
+    <string name="shared_string_routing">Маршрутызацыя</string>
+    <string name="sunrise_at">Усход а %1$s</string>
+    <string name="sunset_at">Заход а %1$s</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="profile_prefs_reset_successful">Усе налады профілю скінутыя да прадвызначаных.</string>
+    <string name="plugin_prefs_reset_successful">Усе налады ўбудовы скінутыя да прадвызначаных.</string>
+    <string name="rendering_attr_streetLightingNight_name">Паказваць толькі ўначы</string>
+    <string name="add_custom_category">Дадаць адвольную катэгорыю</string>
+    <string name="shared_string_available">Даступна</string>
+    <string name="add_new_custom_category_button_promo">Вы можаце дадаць новую адвольную катэгорыю, абраўшы адну альбо некалькі катэгорый.</string>
+    <string name="create_custom_categories_list_promo">Змяняйце парадак сартавання спіса, хавайце катэгорыі. Вы можаце імпартаваць і экспартаваць усе змены з профілямі.</string>
+    <string name="rearrange_categories">Перапарадкаваць катэгорыі</string>
+    <string name="accessibility_mode_disabled">Рэжым адмысловых магчымасцяў адключаны ў наладах сістэмы.</string>
+    <string name="use_system_screen_timeout_promo">Прадвызначана адключана: пакуль OsmAnd працуе на пярэднім плане, экран не выключаецца.
+\n
+\nКалі ўключана, OsmAnd будзе выкарыстоўваць сістэмныя налады выключэння экрана.</string>
+    <string name="use_system_screen_timeout">Выкарыстоўваць сістэмны час выключэння экрана</string>
+    <string name="reset_to_default_category_button_promo">Калі налады скінуць да прадвызначаных, то парадак сартавання таксама скінецца.</string>
+    <string name="copy_coordinates">Скапіяваць каардынаты</string>
+    <string name="release_3_6">• Профілі: ад гэтай пары вы можаце змяніць парадак, прызначыць мапе значок, змяніць усе налады для базавых профіляў і вярнуць іх да прадвызначаных
+\n
+\n• Дададзены нумар з’езду ў навігацыі
+\n
+\n• Пераробленыя налады ўбудоў
+\n
+\n• Перароблены экран налад для хуткага доступу да ўсіх профіляў
+\n
+\n• Дададзена магчымасць капіявання налад з іншага профілю
+\n
+\n• Дададзена магчымасць змяняць парадак альбо хаваць катэгорыі POІ у пошуку
+\n
+\n• На мапе правільна выраўнаваны значкі POI
+\n
+\n• Для наладкі мапы дададзеныя даныя ўзыходу/заходу сонца
+\n
+\n• На мапе дададзеныя значкі «Дом/праца»
+\n
+\n• У наладах дададзеная падтрымка шматрадковага апісання
+\n
+\n• Дададзена карэктная транслітэрацыя на мапе Японіі
+\n
+\n• Дададзена мапа Антарктыды
+\n
+\n</string>
+    <string name="clear_recorded_data">Выдаліць запісаныя даныя</string>
+    <string name="routing_profile_direct_to">Наўпрост-да-пункта</string>
+    <string name="route_recalculation_dist_descr">Маршрут будзе пералічаны, калі адлегласць да яго большая за вызначаны параметр</string>
+    <string name="route_recalculation_dist_title">Мінімальная адлегласць да пераліку маршруту</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_menu">Меню</string>
+    <string name="plugin_disabled_descr">Гатая ўбудова ёсць асобнай праграмай. Калі вы больш не хочаце ёй карыстацца, то яе патрэбна яе выдаліць асобна.
+\n
+\nУбодова застанецца пасля выдалення OsmAnd.</string>
+    <string name="plugin_disabled">Убудова адключаная</string>
+    <string name="open_settings">Адкрыць налады</string>
+    <string name="no_recalculation_setting">Не пералічваць</string>
+    <string name="please_provide_profile_name_message">Пазначце назву профілю</string>
+    <string name="select_data_to_import">Абярыце даныя для імпарту.</string>
+    <string name="import_duplicates_title">Некаторыя элементы ўжо існуюць</string>
+    <string name="import_duplicates_description">У OsmAnd ужо ёсць элементы з тымі самымі назвамі, што і імпартаваныя.
+\n
+\nАбярыце дзеянне.</string>
+    <string name="keep_both_desc">Імпартаваныя элементы дададуцца з прэфіксам</string>
+    <string name="keep_both">Пакінуць абодва</string>
+    <string name="recalc_angle_dialog_descr">Да той пары, пакуль маршрут не будзе пералічаны, будзе паказвацца адрэзак паміж месцазнаходжаннем і разлічаным маршрутам</string>
+    <string name="import_rendering_file">Імпарт файла адмалёўкі</string>
+    <string name="shared_string_terrain">Рэльеф</string>
+    <string name="hillshade_description">Зацяненне рэльефу выкарыстоўвае цёмныя адценні для адлюстравання схілаў, пагоркаў і нізін.</string>
+    <string name="slope_description">Схіл выкарыстоўвае колеры для візуалізацыі крутасці мясцовасці.</string>
+    <string name="terrain_slider_description">Вызначэнне максімальнага і мінімальнага ўзроўняў маштабавання, пры якіх пласт будзе адлюстроўвацца.</string>
+    <string name="hillshade_download_description">Для адлюстравання зацянення рэльефу на мапе патрабуюцца дадатковыя мапы.</string>
+    <string name="slope_download_description">Для адлюстравання схілаў на мапе патрабуюцца дадатковыя мапы.</string>
+    <string name="slope_read_more">Падрабязней пра схілы можна прачытаць у %1$s.</string>
+    <string name="shared_string_transparency">Празрыстасць</string>
+    <string name="shared_string_zoom_levels">Узроўні маштабу</string>
+    <string name="shared_string_legend">Легенда</string>
+    <string name="terrain_empty_state_text">Уключэнне зацянення рэльефу альбо схілаў. Падрабязней пра гэтыя тыпы мапаў вы можаце прачытаць на нашым сайце.</string>
+    <string name="shared_string_hillshade">Зацяненне рэльефу</string>
+    <string name="import_complete_description">Усе даныя з %1$s імпартаваныя, вы можаце выкарыстоўваць кнопкі ніжэй, каб адкрыць адпаведны раздзел праграмы для кіравання імі.</string>
+    <string name="shared_string_import_complete">Імпарт завершаны</string>
+    <string name="items_added">Элементы дададзеныя</string>
+    <string name="checking_for_duplicate_description">OsmAnd правярае %1$s на дублікаты існых элементаў праграмы.
+\n
+\nГэта можа заняць пэўны час.</string>
+    <string name="shared_string_importing">Імпарт</string>
+    <string name="importing_from">Імпарт даных з %1$s</string>
+    <string name="profile_backup_failed">Не атрымалася стварыць рэзервовую копію профілю.</string>
+    <string name="saving_new_profile">Захаванне новага профілю</string>
+    <string name="restore_all_profile_settings">Вярнуць усе налады профілю\?</string>
+    <string name="restore_all_profile_settings_descr">Пасля стварэння ці імпарту гэтага профілю ўсе налады профілю вернуцца ў першапачатковы стан.</string>
+    <string name="clear_recorded_data_warning">Выдаліць запісаныя даныя\?</string>
+    <string name="select_distance_route_will_recalc">Абярыце адлегласць, пасля якой маршрут будзе пералічаны.</string>
+    <string name="recalculate_route_distance_promo">Маршрут будзе пералічаны, калі адлегласць ад маршруту да бягучай пазіцыі большы абранага значэння.</string>
+    <string name="quick_action_terrain_descr">Кнопка кіравання адлюстраваннем пласта рэльефу мясцовасці на мапе.</string>
+    <string name="ui_customization_description">Наладка колькасці элементаў у раздзелах \"Панэль\", \"Наладзіць мапу\" і кантэкстным меню.
+\n
+\nМожна адключыць невыкарыстоўваемыя ўбудовы, каб прыбраць іх элементы кіравання. %1$s.</string>
+    <string name="osm_live_payment_subscription_management">Пры пацвярджэнні пакупкі аплата будзе спаганяцца з рахунка, звязанага з вашым акаўнтам Google Plaу.
+\n
+\nПадпіска аўтаматычна працягваецца, калі вы не скасуеце яе да даты працягу. З вашага рахунка будзе адзін раз спаганяцца аплата за перыяд працягу (месяц/тры месяцы/год).
+\n
+\nВы можаце кіраваць падпіскамі і скасоўваць іх у наладах Google Play.</string>
+    <string name="release_3_7">• Новыя лакальныя мапы схілаў
+\n
+\n • Поўная наладка ўлюбёных пунктаў і пунктаў шляху GPX: адвольныя колеры, значкі, формы
+\n
+\n • Змена парадку элементаў у кантэкстным меню, наладах мапы і панэлі
+\n
+\n • Вікіпедыя як асобны пласт у наладах мапы, магчыма абраць толькі патрэбныя мовы
+\n
+\n • Можна стварыць адвольны фільтр POI/мапы
+\n
+\n • Дададзены параметры для аднаўлення налад профіляў карыстальніка
+\n
+\n • Поўныя GPX-маршруты ў навігацыі з падтрымкай палос руху і падрабязнымі інструкцыямі паваротаў
+\n
+\n • Выпраўлены памеры інтэрфейсу на планшэтах
+\n
+\n • Выпраўлены памылкі для моў, якія пішуцца справа ўлева
+\n
+\n</string>
+    <string name="unsupported_type_error">Непадтрымліваемы тып</string>
+    <string name="width_limit_description">Пазначце шырыню аўтамабіля, для шырокіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
+    <string name="height_limit_description">Пазначце вышыню аўтамабіля, для высокіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
+    <string name="weight_limit_description">Пазначце вагу аўтамабіля, для цяжкіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
+    <string name="lenght_limit_description">Пазначце даўжыню аўтамабіля, для доўгіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
+    <string name="gpx_parse_error">OsmAnd стварыў GPX не зусім правільна. Калі ласка, звяжыцеся са службай падтрымкі.</string>
+    <string name="shared_string_always">Заўсёды</string>
+    <string name="screen_control">Кіраванне экранам</string>
+    <string name="system_screen_timeout_descr">Экран будзе выключацца пасля вызначанага ў сістэмных наладах перыяду бяздзейнасці.</string>
+    <string name="system_screen_timeout">Выкарыстоўваць сістэмныя параметры</string>
+    <string name="turn_screen_on_descr">Параметры абуджэння экрана (пераканайцеся, што перад блакаваннем OsmAnd знаходзіцца на пярэднім плане):</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Кожная інструкцыя па навігацыі ўключае экран.</string>
+    <string name="turn_screen_on_navigation_instructions">Інструкцыя па навігацыі</string>
+    <string name="turn_screen_on_power_button_disabled">Выключана. Неабходна ў раздзеле \"Час працы пасля абуджэння\" уключыць \"Не выключаць экран\".</string>
+    <string name="turn_screen_on_power_button_descr">Калі націснуць на кнопку сілкавання прылады, то на экране блакавання з’явіцца экран OsmAnd.</string>
+    <string name="turn_screen_on_power_button">Кнопка сілкавання</string>
+    <string name="turn_screen_on_proximity_sensor">Датчык набліжэння</string>
+    <string name="turn_screen_on_wake_time_descr">Час працы экрана пасля абуджэння. (\"%1$s\" прыбірае выключэнне.)</string>
+    <string name="keep_screen_on">Не выключаць экран</string>
+    <string name="keep_screen_off">Не ўключаць экран</string>
+    <string name="pseudo_mercator_projection">Псеўда-праекцыя Меркатара</string>
+    <string name="one_image_per_tile">Кожны фрагмент у асобным файле</string>
+    <string name="sqlite_db_file">Файл SQLiteDB</string>
+    <string name="online_map_name_helper_text">Пазначце назву крыніцы сеціўнай мапы.</string>
+    <string name="online_map_url_helper_text">Увядзіце альбо ўстаўце URL-адрас сеціўнай крыніцы.</string>
+    <string name="edit_online_source">Рэдагаваць сеціўную крыніцу</string>
+    <string name="expire_time">Тэрмін прыдатнасці</string>
+    <string name="mercator_projection">Праекцыя Меркатара</string>
+    <string name="storage_format">Фармат захоўвання</string>
+    <string name="map_source_zoom_levels">Вызначце максімальны і мінімальны ўзровень маштабавання для паказу ці загрузкі сеціўнай мапы.</string>
+    <string name="map_source_zoom_levels_descr">Параметры ўплываюць на выгляд экрана пры выкарыстанні ў якасці мапы альбо падкладкі.
+\n
+\n%1$s: мапа будзе абмяжоўвацца абранымі ўзроўнямі маштабавання.
+\n
+\n%2$s: узроўні маштабавання, пры якіх бачныя арыгінальныя фрагменты. Павелічэнне ці памяншэнне будзе адбывацца па-за межамі гэтых значэнняў.</string>
+    <string name="expire_time_descr">Кэшаваныя фрагменты нанова спампуюцца праз вызначаную колькасць хвілін. Пакіньце поле пустым, каб ніколі не абнаўляць фрагменты з гэтай крыніцы.
+\n
+\nАдзін дзень - 1440 хвілін.
+\nАдзін тыдзень - 10 080 хвілін.
+\nАдзін месяц - 43 829 хвілін.</string>
+    <string name="tiles_storage_descr">Абярыце спосаб захоўвання спампаваных фрагментаў.</string>
+    <string name="shared_string_redo">Вярнуць</string>
 </resources>
