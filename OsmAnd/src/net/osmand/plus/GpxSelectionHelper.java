@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -19,6 +20,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
@@ -26,6 +28,7 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.settings.backend.OsmandSettings.MetricsConstants;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
@@ -40,6 +43,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +51,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class GpxSelectionHelper {
+
+	private final static Log LOG = PlatformUtil.getLog(GpxSelectionHelper.class);
 
 	public static final String CURRENT_TRACK = "currentTrack";
 	private static final String FILE = "file";
@@ -61,15 +67,18 @@ public class GpxSelectionHelper {
 
 	private OsmandApplication app;
 	@NonNull
-	private List<SelectedGpxFile> selectedGPXFiles = new java.util.ArrayList<>();
-	private Map<GPXFile, Long> selectedGpxFilesBackUp = new java.util.HashMap<>();
+	private List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>();
+	private Map<GPXFile, Long> selectedGpxFilesBackUp = new HashMap<>();
 	private SavingTrackHelper savingTrackHelper;
-	private final static Log LOG = PlatformUtil.getLog(GpxSelectionHelper.class);
 	private SelectGpxTask selectGpxTask;
+	private SelectedGpxFile trackToFollow;
+	private StateChangedListener<String> followTrackListener;
+	private boolean shouldHideTrackToFollow;
 
-	public GpxSelectionHelper(OsmandApplication osmandApplication, SavingTrackHelper trackHelper) {
-		this.app = osmandApplication;
+	public GpxSelectionHelper(OsmandApplication app, SavingTrackHelper trackHelper) {
+		this.app = app;
 		savingTrackHelper = trackHelper;
+		app.getSettings().FOLLOW_THE_GPX_ROUTE.addListener(getFollowTrackListener());
 	}
 
 	public void clearAllGpxFilesToShow(boolean backupSelection) {
@@ -86,10 +95,18 @@ public class GpxSelectionHelper {
 	public void restoreSelectedGpxFiles() {
 		for (Entry<GPXFile, Long> gpxEntry : selectedGpxFilesBackUp.entrySet()) {
 			if (!Algorithms.isEmpty(gpxEntry.getKey().path)) {
-				final File file = new File(gpxEntry.getKey().path);
+				File file = new File(gpxEntry.getKey().path);
 				if (file.exists() && !file.isDirectory()) {
 					if (file.lastModified() > gpxEntry.getValue()) {
-						new GpxFileLoaderTask(file, app).execute();
+						new GpxFileLoaderTask(file, new CallbackWithObject<GPXFile>() {
+							@Override
+							public boolean processResult(GPXFile result) {
+								if (result != null) {
+									selectGpxFile(result, true, false);
+								}
+								return true;
+							}
+						}).execute();
 					} else {
 						selectGpxFile(gpxEntry.getKey(), true, false);
 					}
@@ -99,14 +116,52 @@ public class GpxSelectionHelper {
 		}
 	}
 
+	public boolean shouldHideTrackToFollow() {
+		return shouldHideTrackToFollow;
+	}
+
+	private StateChangedListener<String> getFollowTrackListener() {
+		if (followTrackListener == null) {
+			followTrackListener = new StateChangedListener<String>() {
+				@Override
+				public void stateChanged(String gpxRoutePath) {
+					if (trackToFollow != null) {
+						if (shouldHideTrackToFollow) {
+							selectGpxFile(trackToFollow.getGpxFile(), false, false);
+							shouldHideTrackToFollow = false;
+						}
+						trackToFollow = null;
+					}
+					if (!Algorithms.isEmpty(gpxRoutePath)) {
+						trackToFollow = getSelectedFileByPath(gpxRoutePath);
+						if (trackToFollow == null) {
+							shouldHideTrackToFollow = true;
+							File file = new File(gpxRoutePath);
+							if (file.exists() && !file.isDirectory()) {
+								new GpxFileLoaderTask(file, new CallbackWithObject<GPXFile>() {
+									@Override
+									public boolean processResult(GPXFile result) {
+										trackToFollow = selectGpxFile(result, true, false);
+										return true;
+									}
+								}).execute();
+							}
+						}
+					}
+				}
+			};
+		}
+		return followTrackListener;
+	}
+
 	private static class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 
-		File fileToLoad;
-		GpxSelectionHelper helper;
+		private File fileToLoad;
+		private CallbackWithObject<GPXFile> callback;
 
-		GpxFileLoaderTask(File fileToLoad, OsmandApplication app) {
+		GpxFileLoaderTask(File fileToLoad, CallbackWithObject<GPXFile> callback) {
 			this.fileToLoad = fileToLoad;
-			this.helper = app.getSelectedGpxHelper();
+			this.callback = callback;
 		}
 
 		@Override
@@ -116,8 +171,8 @@ public class GpxSelectionHelper {
 
 		@Override
 		protected void onPostExecute(GPXFile gpxFile) {
-			if (gpxFile != null) {
-				helper.selectGpxFile(gpxFile, true, false);
+			if (callback != null) {
+				callback.processResult(gpxFile);
 			}
 		}
 	}
@@ -875,7 +930,13 @@ public class GpxSelectionHelper {
 			this.displayGroups = displayGroups;
 		}
 
-
+		public boolean isFollowTrack(OsmandApplication app) {
+			RouteProvider.GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
+			if (routeParams != null) {
+				return gpxFile.path.equals(routeParams.getFile().path);
+			}
+			return false;
+		}
 	}
 
 	public enum GpxDisplayItemType {

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -13,14 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -35,7 +30,6 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerStartItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DividerItem;
@@ -367,8 +361,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
-						FollowTrackFragment.showInstance(mapActivity, trackOptionsFragment);
+						MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
+						mapRouteInfoMenu.hide();
+						mapRouteInfoMenu.selectTrack();
 						dismiss();
 					}
 				})
@@ -498,58 +493,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	public static void showInstance(FragmentManager fragmentManager) {
 		RouteOptionsBottomSheet f = new RouteOptionsBottomSheet();
 		f.show(fragmentManager, RouteOptionsBottomSheet.TAG);
-	}
-
-	protected void openGPXFileSelection() {
-		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
-
-			@Override
-			public boolean processResult(GPXUtilities.GPXFile[] result) {
-				mapActivity.getMapActions().setGPXRouteParams(result[0]);
-				app.getTargetPointsHelper().updateRouteAndRefresh(true);
-				updateParameters();
-				routingHelper.recalculateRouteDueToSettingsChange();
-				return true;
-			}
-		}, nightMode);
-	}
-
-	private void showOptionsMenu(View view) {
-		RouteProvider.GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
-		final PopupMenu optionsMenu = new PopupMenu(new ContextThemeWrapper(view.getContext(), themeRes), view);
-		MenuItem item = optionsMenu.getMenu().add(
-				mapActivity.getString(R.string.shared_string_none));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				if (mapActivity.getRoutingHelper().getCurrentGPXRoute() != null) {
-					mapActivity.getRoutingHelper().setGpxParams(null);
-					settings.FOLLOW_THE_GPX_ROUTE.set(null);
-					mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
-				}
-				updateParameters();
-				return true;
-			}
-		});
-		item = optionsMenu.getMenu().add(mapActivity.getString(R.string.select_gpx));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				openGPXFileSelection();
-				return true;
-			}
-		});
-		if (rp != null) {
-			item = optionsMenu.getMenu().add(new File(rp.getFile().path).getName());
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					// nothing to change
-					return true;
-				}
-			});
-		}
-		optionsMenu.show();
 	}
 
 	public void updateParameters() {
