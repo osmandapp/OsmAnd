@@ -6,7 +6,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.MapUtils;
-
 import org.apache.commons.logging.Log;
 
 import java.io.File;
@@ -18,7 +17,7 @@ public class MetaTileFileSystemCache {
 	private static final String TILES_FOLDER = "webtiles";
 	static final int TILE_SIZE_PX = 256;
 	static final int TILE_DENSITY = 2;
-	static final int METATILE_SIZE = 4;
+	static final int METATILE_SIZE = 2;
 	private static final int MAX_IN_MEMORY_CACHE_SIZE = 16 / METATILE_SIZE;
 	private static final int MAX_CACHE_SIZE = 128;
 

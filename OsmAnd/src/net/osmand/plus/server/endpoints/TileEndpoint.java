@@ -1,13 +1,13 @@
 package net.osmand.plus.server.endpoints;
 
 import android.graphics.*;
+import androidx.annotation.GuardedBy;
 import fi.iki.elonen.NanoHTTPD;
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.server.OsmAndHttpServer;
-import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.ByteArrayInputStream;
@@ -16,16 +16,16 @@ import java.io.ByteArrayOutputStream;
 import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 
 public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
-
 	private static final int TIMEOUT_STEP = 150;
 	private static final int TIMEOUT = 15000;
-
-
 	private static final Log LOG = PlatformUtil.getLog(TileEndpoint.class);
-	private final MapActivity mapActivity;
-	private final MetaTileFileSystemCache cache;
+	@GuardedBy("this")
+	//todo cancel on zoom
+	private static int lastZoom = -999;
 	//TODO restore mapState on Exit
 	private final RotatedTileBox mapTileBoxCopy;
+	private final MapActivity mapActivity;
+	private final MetaTileFileSystemCache cache;
 
 	public TileEndpoint(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -82,7 +82,6 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		if (cacheTile != null) {
 			return cacheTile;
 		}
-
 		MetaTileFileSystemCache.MetaTileCache res = cache.createMetaTile(zoom, x, y);
 		mapActivity.getMapView().setCurrentViewport(res.bbox);
 		int timeout = 0;
