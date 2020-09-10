@@ -22,7 +22,6 @@ public class MetaTileFileSystemCache {
 
 	public MetaTileFileSystemCache(OsmandApplication application) {
 		externalCacheDir = application.getAppPath(TILES_FOLDER);
-		new File(application.getExternalCacheDir(), TILES_FOLDER)
 		if (!externalCacheDir.exists()) {
 			externalCacheDir.mkdir();
 		}
