@@ -51,11 +51,11 @@ public class OsmAndHttpServer extends NanoHTTPD {
 
 	public String getUrl() {
 		RotatedTileBox rtb = mapActivity.getMapView().getCurrentRotatedTileBox();
-		double lat = rtb.getLatitude();
-		double lon = rtb.getLongitude();
-		double z = rtb.getZoom();
-		return "http://" + getHostname() + ":" + getListeningPort()
-				+ "/?lat=" + lat + "&lon=" + lon + "&zoom=" + z;
+		float lat = (float) rtb.getLatitude();
+		float lon = (float) rtb.getLongitude();
+		int z = rtb.getZoom();
+		return String.format("http://%s:%d/?lat=%.4f&lon%.4f&zoom=%d", getHostname(), getListeningPort(),
+				lat, lon, z);
 	}
 
 	private NanoHTTPD.Response routeApi(NanoHTTPD.IHTTPSession session) {
