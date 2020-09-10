@@ -14,11 +14,11 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class MetaTileFileSystemCache {
 	private static final Log LOG = PlatformUtil.getLog(TileEndpoint.class);
 	private static final Object TILES_FOLDER = "tiles";
-	private static final int MAX_IN_MEMORY_CACHE_SIZE = 4;
-	private static final int MAX_CACHE_SIZE = 4;
+	private static final int MAX_IN_MEMORY_CACHE_SIZE = 128;
+	private static final int MAX_CACHE_SIZE = 64;
 	private final ConcurrentLinkedQueue<TileEndpoint.MetaTileCache> inMemoryCache = new ConcurrentLinkedQueue<>();
 	private final File externalCacheDir;
-	public boolean inMemoryCacheEnabled = false;
+	public boolean inMemoryCacheEnabled = true;
 
 	public MetaTileFileSystemCache(OsmandApplication application) {
 		externalCacheDir = new File(
@@ -57,21 +57,40 @@ public class MetaTileFileSystemCache {
 	}
 
 	public TileEndpoint.MetaTileCache get(int zoom, int METATILE_SIZE, int x, int y) {
-		for (int tx = x - METATILE_SIZE + 1; tx < METATILE_SIZE + x - 1; tx++) {
-			for (int ty = y - METATILE_SIZE + 1; ty < METATILE_SIZE + y - 1; ty++) {
-				File file = new File(externalCacheDir, zoom + "_" + METATILE_SIZE + "_" + tx + "_" + ty);
-				if (file.exists()) {
-					TileEndpoint.MetaTileCache tile = new TileEndpoint.MetaTileCache(
-							BitmapFactory.decodeFile(file.getAbsolutePath()),
-							tx, ty, tx + METATILE_SIZE, ty + METATILE_SIZE, zoom
-					);
-					if (inMemoryCacheEnabled) {
-						inMemoryCache.add(tile);
-					}
-					return tile;
+		int mx = (x / METATILE_SIZE) * METATILE_SIZE;
+		int my = (y / METATILE_SIZE) * METATILE_SIZE;
+		if (inMemoryCacheEnabled) {
+			for (TileEndpoint.MetaTileCache r : inMemoryCache) {
+				if (r.getZoom() == zoom && r.getEx() >= x && r.getEy() >= y && r.getSx() <= x && r.getSy() <= y) {
+					return r;
 				}
 			}
 		}
+		File file = new File(externalCacheDir, zoom + "_" + METATILE_SIZE + "_" + mx + "_" + my);
+		if (file.exists()) {
+			TileEndpoint.MetaTileCache tile = new TileEndpoint.MetaTileCache(
+					BitmapFactory.decodeFile(file.getAbsolutePath()),
+					mx, my, mx + METATILE_SIZE - 1, my + METATILE_SIZE - 1, zoom);
+			if (inMemoryCacheEnabled) {
+				inMemoryCache.add(tile);
+			}
+			return tile;
+		}
 		return null;
+	}
+
+	public void clearCache() {
+		clearInMemoryCache();
+		clearFileCache();
+	}
+
+	private void clearFileCache() {
+		for (int i = 0; i < externalCacheDir.listFiles().length; i++) {
+			externalCacheDir.listFiles()[i].delete();
+		}
+	}
+
+	private void clearInMemoryCache() {
+		inMemoryCache.clear();
 	}
 }

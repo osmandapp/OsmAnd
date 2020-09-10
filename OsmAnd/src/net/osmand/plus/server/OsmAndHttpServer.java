@@ -3,6 +3,7 @@ package net.osmand.plus.server;
 import android.webkit.MimeTypeMap;
 import fi.iki.elonen.NanoHTTPD;
 import net.osmand.PlatformUtil;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.server.endpoints.TileEndpoint;
@@ -49,7 +50,12 @@ public class OsmAndHttpServer extends NanoHTTPD {
 	}
 
 	public String getUrl() {
-		return "http://" + getHostname() + ":" + getListeningPort();
+		RotatedTileBox rtb = mapActivity.getMapView().getCurrentRotatedTileBox();
+		double lat = rtb.getLatitude();
+		double lon = rtb.getLongitude();
+		double z = rtb.getZoom();
+		return "http://" + getHostname() + ":" + getListeningPort()
+				+ "/?lat=" + lat + "&lon=" + lon + "&zoom=" + z;
 	}
 
 	private NanoHTTPD.Response routeApi(NanoHTTPD.IHTTPSession session) {
