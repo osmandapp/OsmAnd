@@ -15,7 +15,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.GpxTrackAdapter.OnItemClickListener;
@@ -32,7 +32,7 @@ import java.util.Map;
 import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 import static net.osmand.util.Algorithms.collectDirs;
 
-public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
+public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 
 	enum Mode {
 		OPEN_TRACK(R.string.plan_route_open_existing_track, R.string.plan_route_select_track_file_for_open),
@@ -173,8 +173,8 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	protected int getCustomHeight() {
-		return AndroidUtils.dpToPx(mainView.getContext(), BOTTOM_SHEET_HEIGHT_DP);
+	protected int getPeekHeight() {
+		return AndroidUtils.dpToPx(getContext(), BOTTOM_SHEET_HEIGHT_DP);
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, SelectFileListener listener, Mode mode) {
