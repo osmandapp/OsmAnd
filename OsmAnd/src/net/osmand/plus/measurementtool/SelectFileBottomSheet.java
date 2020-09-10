@@ -120,12 +120,13 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		adapter.setAdapterListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {
-				if (position != RecyclerView.NO_POSITION && position < allGpxList.size()) {
+				if (position != RecyclerView.NO_POSITION && position < adapter.getItemCount()) {
 					String fileName;
 					if (isShowCurrentGpx() && position == 0) {
 						fileName = null;
 					} else {
-						fileName = adapter.getGpxInfoList().get(position).getFileName();
+						List<GPXInfo> gpxList = adapter.getGpxInfoList();
+						fileName = gpxList.get(position).getFileName();
 					}
 					if (listener != null) {
 						listener.selectFileOnCLick(fileName);
