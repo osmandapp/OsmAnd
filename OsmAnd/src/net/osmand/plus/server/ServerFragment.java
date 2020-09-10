@@ -34,8 +34,8 @@ public class ServerFragment extends BaseOsmAndFragment {
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		enableStrictMode();
+		super.onCreate(savedInstanceState);
 	}
 
 	@Override
@@ -72,6 +72,8 @@ public class ServerFragment extends BaseOsmAndFragment {
 						.detectDiskReads()
 						.detectDiskWrites()
 						.detectNetwork()
+						.permitDiskReads()
+						.permitDiskWrites()
 						.penaltyLog()
 						.build());
 		StrictMode.setVmPolicy(

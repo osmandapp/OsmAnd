@@ -24,6 +24,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 	private static final Log LOG = PlatformUtil.getLog(TileEndpoint.class);
 	private final MapActivity mapActivity;
 	private final MetaTileFileSystemCache cache;
+	//TODO restore mapState on Exit
 	private final RotatedTileBox mapTileBoxCopy;
 
 	public TileEndpoint(MapActivity mapActivity) {
@@ -31,12 +32,13 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		this.cache = new MetaTileFileSystemCache(mapActivity.getMyApplication());
 		this.mapTileBoxCopy = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
 		//for debug
-		//this.cache.clearCache();
+		this.cache.clearCache();
 	}
 
 	@Override
 	public NanoHTTPD.Response process(NanoHTTPD.IHTTPSession session, String url) {
 		// https://tile.osmand.net/hd/6/55/25.png
+		LOG.debug("SERVER: STARTED REQUEST");
 		int extInd = url.indexOf('.');
 		if (extInd >= 0) {
 			url = url.substring(0, extInd);
@@ -75,6 +77,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 	}
 
 	private synchronized MetaTileFileSystemCache.MetaTileCache requestMetatile(int x, int y, int zoom) {
+		long time2 = System.currentTimeMillis();
 		MetaTileFileSystemCache.MetaTileCache cacheTile = this.cache.get(zoom, x, y);
 		if (cacheTile != null) {
 			return cacheTile;
@@ -102,6 +105,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 			}
 			res.bmp = tempBmp.copy(tempBmp.getConfig(), true);
 			this.cache.put(res);
+			LOG.debug("SERVER: TIME TO REQUEST TILE: " + (System.currentTimeMillis() - time2));
 			return res;
 		} catch (InterruptedException e) {
 			LOG.error(e);

@@ -5,7 +5,9 @@
               android:orientation="vertical"
               android:padding="32dp"
               android:gravity="center"
-              android:background="@color/color_black">
+              android:clickable="true"
+              android:background="@color/color_black"
+              android:focusable="true">
 
     <TextView
         android:id="@+id/server_status_textview"

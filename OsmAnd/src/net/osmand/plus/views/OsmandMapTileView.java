@@ -830,7 +830,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	// this method could be called in non UI thread
 	public void refreshMap(final boolean updateVectorRendering) {
-		if (view != null && view.isShown()) {
+		if ((view != null && view.isShown()) || isScreenViewDetached) {
 			boolean nightMode = application.getDaynightHelper().isNightMode();
 			Boolean currentNightMode = this.nightMode;
 			boolean forceUpdateVectorDrawing = currentNightMode != null && currentNightMode != nightMode;
