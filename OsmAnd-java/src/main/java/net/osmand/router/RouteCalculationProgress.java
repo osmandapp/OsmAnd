@@ -58,7 +58,7 @@ public class RouteCalculationProgress {
 				progress = (INITIAL_PROGRESS + FIRST_ITERATION) + pr * (1 - FIRST_ITERATION - INITIAL_PROGRESS);
 			}
 		} else {
-			progress = (iteration + Math.min(pr, 1)) / totalIterations;
+			progress = (float) ((iteration + Math.min(pr, 0.7)) / totalIterations);
 		}
 		return Math.min(progress * 100f, 99);
 	}
