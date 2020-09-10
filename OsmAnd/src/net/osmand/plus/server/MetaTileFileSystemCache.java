@@ -13,16 +13,16 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class MetaTileFileSystemCache {
 	private static final Log LOG = PlatformUtil.getLog(TileEndpoint.class);
-	private static final Object TILES_FOLDER = "tiles";
-	private static final int MAX_IN_MEMORY_CACHE_SIZE = 128;
+	private static final String TILES_FOLDER = "webtiles";
+	private static final int MAX_IN_MEMORY_CACHE_SIZE = 16;
 	private static final int MAX_CACHE_SIZE = 64;
 	private final ConcurrentLinkedQueue<TileEndpoint.MetaTileCache> inMemoryCache = new ConcurrentLinkedQueue<>();
 	private final File externalCacheDir;
 	public boolean inMemoryCacheEnabled = true;
 
 	public MetaTileFileSystemCache(OsmandApplication application) {
-		externalCacheDir = new File(
-				application.getExternalCacheDir().getAbsoluteFile() + File.separator + TILES_FOLDER);
+		externalCacheDir = application.getAppPath(TILES_FOLDER);
+		new File(application.getExternalCacheDir(), TILES_FOLDER)
 		if (!externalCacheDir.exists()) {
 			externalCacheDir.mkdir();
 		}
@@ -32,8 +32,9 @@ public class MetaTileFileSystemCache {
 		while (inMemoryCache.size() > MAX_IN_MEMORY_CACHE_SIZE) {
 			inMemoryCache.poll();
 		}
+		// TODO list files too slow, better to have local variable to monitor or local list
 		while (externalCacheDir.listFiles().length > MAX_CACHE_SIZE) {
-			//remove outdated files
+
 			for (int i = 0; i < externalCacheDir.listFiles().length - MAX_CACHE_SIZE; i++) {
 				externalCacheDir.listFiles()[i].delete();
 			}
@@ -56,9 +57,9 @@ public class MetaTileFileSystemCache {
 		}
 	}
 
-	public TileEndpoint.MetaTileCache get(int zoom, int METATILE_SIZE, int x, int y) {
-		int mx = (x / METATILE_SIZE) * METATILE_SIZE;
-		int my = (y / METATILE_SIZE) * METATILE_SIZE;
+	public TileEndpoint.MetaTileCache get(int zoom, int metaTileSize, int x, int y) {
+		int mx = (x / metaTileSize) * metaTileSize;
+		int my = (y / metaTileSize) * metaTileSize;
 		if (inMemoryCacheEnabled) {
 			for (TileEndpoint.MetaTileCache r : inMemoryCache) {
 				if (r.getZoom() == zoom && r.getEx() >= x && r.getEy() >= y && r.getSx() <= x && r.getSy() <= y) {
@@ -66,11 +67,11 @@ public class MetaTileFileSystemCache {
 				}
 			}
 		}
-		File file = new File(externalCacheDir, zoom + "_" + METATILE_SIZE + "_" + mx + "_" + my);
+		File file = new File(externalCacheDir, zoom + "_" + metaTileSize + "_" + mx + "_" + my);
 		if (file.exists()) {
 			TileEndpoint.MetaTileCache tile = new TileEndpoint.MetaTileCache(
 					BitmapFactory.decodeFile(file.getAbsolutePath()),
-					mx, my, mx + METATILE_SIZE - 1, my + METATILE_SIZE - 1, zoom);
+					mx, my, mx + metaTileSize - 1, my + metaTileSize - 1, zoom);
 			if (inMemoryCacheEnabled) {
 				inMemoryCache.add(tile);
 			}

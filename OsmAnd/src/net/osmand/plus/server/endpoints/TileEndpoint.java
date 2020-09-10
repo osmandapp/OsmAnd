@@ -132,10 +132,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		int zoom = Integer.parseInt(prms[1]);
 		int x = Integer.parseInt(prms[2]);
 		int y = Integer.parseInt(prms[3]);
-		MetaTileCache res;
-		synchronized (this) {
-			res = cache.get(zoom, METATILE_SIZE, x, y);
-		}
+		MetaTileCache res = cache.get(zoom, METATILE_SIZE, x, y);
 		if (res == null) {
 			res = requestMetatile(x, y, zoom);
 			if (res == null) {
@@ -143,6 +140,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 				return OsmAndHttpServer.ErrorResponses.response500;
 			}
 		}
+
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		Bitmap bmp = res.getSubtile(x, y);
 		if (bmp == null) {
@@ -158,6 +156,10 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 	}
 
 	private synchronized MetaTileCache requestMetatile(int x, int y, int zoom) {
+		MetaTileCache cacheTile = this.cache.get(zoom, METATILE_SIZE, x, y);
+		if (cacheTile != null) {
+			return cacheTile;
+		}
 		int mx = (x / METATILE_SIZE) * METATILE_SIZE;
 		int my = (y / METATILE_SIZE) * METATILE_SIZE;
 		double lat = MapUtils.getLatitudeFromTile(zoom, my + 0.5 * METATILE_SIZE);
@@ -204,7 +206,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 				res.zoom = zoom;
 				Bitmap tempBmp = mapActivity.getMapView().getBufferBitmap();
 				res.bmp = tempBmp.copy(tempBmp.getConfig(), true);
-				cache.put(res);
+				this.cache.put(res);
 			}
 			return res;
 		} catch (InterruptedException e) {
