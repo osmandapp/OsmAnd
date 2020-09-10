@@ -122,7 +122,7 @@ import net.osmand.plus.measurementtool.GpxApproximationFragment;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.measurementtool.SnapTrackWarningBottomSheet;
+import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -692,9 +692,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 
-		SnapTrackWarningBottomSheet snapTrackWarningBottomSheet = getSnapTrackWarningBottomSheet();
-		if (snapTrackWarningBottomSheet != null) {
-			snapTrackWarningBottomSheet.dismiss();
+		SnapTrackWarningFragment snapTrackWarningFragment = getSnapTrackWarningBottomSheet();
+		if (snapTrackWarningFragment != null) {
+			snapTrackWarningFragment.dismissImmediate();
 			return;
 		}
 
@@ -2329,8 +2329,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(GpxApproximationFragment.TAG);
 	}
 
-	private SnapTrackWarningBottomSheet getSnapTrackWarningBottomSheet() {
-		return getFragment(SnapTrackWarningBottomSheet.TAG);
+	public SnapTrackWarningFragment getSnapTrackWarningBottomSheet() {
+		return getFragment(SnapTrackWarningFragment.TAG);
 	}
 
 	public PointEditorFragmentNew getPointEditorFragmentNew() {

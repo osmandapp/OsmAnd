@@ -414,7 +414,18 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		toolBarController.setOnBackButtonClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				quit(false);
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					GpxApproximationFragment gpxApproximationFragment = mapActivity.getGpxApproximationFragment();
+					SnapTrackWarningFragment snapTrackWarningFragment = mapActivity.getSnapTrackWarningBottomSheet();
+					if (gpxApproximationFragment != null) {
+						gpxApproximationFragment.dismissImmediate();
+					} else if (snapTrackWarningFragment != null) {
+						snapTrackWarningFragment.dismissImmediate();
+					} else {
+						quit(false);
+					}
+				}
 			}
 		});
 		toolBarController.setOnSaveViewClickListener(new OnClickListener() {
@@ -640,15 +651,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
-			case SnapTrackWarningBottomSheet.REQUEST_CODE:
+			case SnapTrackWarningFragment.REQUEST_CODE:
 				switch (resultCode) {
-					case SnapTrackWarningBottomSheet.CANCEL_RESULT_CODE:
+					case SnapTrackWarningFragment.CANCEL_RESULT_CODE:
 						toolBarController.setSaveViewVisible(true);
 						directionMode = false;
 						exitApproximationMode();
 						updateToolbar();
 						break;
-					case SnapTrackWarningBottomSheet.CONTINUE_RESULT_CODE:
+					case SnapTrackWarningFragment.CONTINUE_RESULT_CODE:
 						MapActivity mapActivity = getMapActivity();
 						if (mapActivity != null) {
 							GpxApproximationFragment.showInstance(mapActivity.getSupportFragmentManager(),
@@ -2126,7 +2137,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			manager.beginTransaction()
 					.hide(this).commit();
 			layer.setTapsDisabled(true);
-			SnapTrackWarningBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this);
+			SnapTrackWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
 			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.map_ruler_container);
 		}
 	}
