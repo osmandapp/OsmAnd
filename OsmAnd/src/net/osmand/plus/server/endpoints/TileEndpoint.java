@@ -17,8 +17,8 @@ import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 
 public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 
-	private static final int TIMEOUT_STEP = 500;
-	private static final int TIMEOUT = 10000;
+	private static final int TIMEOUT_STEP = 150;
+	private static final int TIMEOUT = 15000;
 
 
 	private static final Log LOG = PlatformUtil.getLog(TileEndpoint.class);
