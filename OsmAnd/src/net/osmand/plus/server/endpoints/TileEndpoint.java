@@ -8,6 +8,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.server.OsmAndHttpServer;
+import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.ByteArrayInputStream;
@@ -20,7 +21,6 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 	private static final int TIMEOUT = 15000;
 	private static final Log LOG = PlatformUtil.getLog(TileEndpoint.class);
 	@GuardedBy("this")
-	//todo cancel on zoom
 	private static int lastZoom = -999;
 	//TODO restore mapState on Exit
 	private final RotatedTileBox mapTileBoxCopy;
@@ -53,6 +53,11 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		int zoom = Integer.parseInt(prms[1]);
 		int x = Integer.parseInt(prms[2]);
 		int y = Integer.parseInt(prms[3]);
+		synchronized (this){
+			if (zoom > lastZoom+1 || zoom < lastZoom-1){
+				lastZoom = zoom;
+			}
+		}
 		MetaTileFileSystemCache.MetaTileCache res = cache.get(zoom, x, y);
 		if (res == null) {
 			res = requestMetatile(x, y, zoom);
@@ -81,6 +86,9 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		MetaTileFileSystemCache.MetaTileCache cacheTile = this.cache.get(zoom, x, y);
 		if (cacheTile != null) {
 			return cacheTile;
+		}
+		if (zoom != lastZoom){
+			return null;
 		}
 		MetaTileFileSystemCache.MetaTileCache res = cache.createMetaTile(zoom, x, y);
 		mapActivity.getMapView().setCurrentViewport(res.bbox);
