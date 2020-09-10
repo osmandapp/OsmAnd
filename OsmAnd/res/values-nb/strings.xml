@@ -3719,4 +3719,5 @@
     <string name="shared_string_done">Ferdig</string>
     <string name="threshold_distance">Terskeldistanse</string>
     <string name="navigation_profile">Navigeringsprofil</string>
+    <string name="osm_edit_closed_note">Lukket OSM-notat</string>
 </resources>

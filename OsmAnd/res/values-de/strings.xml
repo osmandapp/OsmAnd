@@ -2015,7 +2015,7 @@
     <string name="no_inet_connection_desc_map">Erforderlich, um Karten herunterzuladen.</string>
     <string name="search_location">Standort wird gesucht …</string>
     <string name="storage_free_space">Freier Speicherplatz</string>
-    <string name="storage_place_description">OsmAnd speichert Daten (Karten, GPX-Dateien usw.) in \'%1$s\'.</string>
+    <string name="storage_place_description">OsmAnd speichert Daten (Karten, Track-Dateien usw.) in \'%1$s\'.</string>
     <string name="give_permission">Berechtigung erteilen</string>
     <string name="allow_access_location">Standortbestimmung zulassen</string>
     <string name="first_usage_greeting">Erhalten Sie Wegbeschreibungen und entdecken Sie neue Orte ohne Internetverbindung</string>
@@ -2072,8 +2072,8 @@
     <string name="shared_string_notifications">Benachrichtigungen</string>
     <string name="shared_string_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
-    <string name="gpx_no_tracks_title">Sie haben noch keine GPX-Dateien</string>
-    <string name="gpx_no_tracks_title_folder">GPX-Dateien können dem Ordner hinzugefügt werden</string>
+    <string name="gpx_no_tracks_title">Sie haben noch keine Track-Dateien</string>
+    <string name="gpx_no_tracks_title_folder">Track-Dateien können dem Ordner hinzugefügt werden</string>
     <string name="gpx_add_track">Weitere hinzufügen …</string>
     <string name="upload_poi">POI hochladen</string>
     <string name="route_roundabout_short">Nehmen Sie die %1$d Ausfahrt</string>
@@ -2901,10 +2901,10 @@
     <string name="by_transport_type">Von %1$s</string>
     <string name="step_by_step">Schritt für Schritt</string>
     <string name="routeInfo_road_types_name">Straßentypen</string>
-    <string name="quick_action_show_hide_gpx_tracks">GPX-Tracks ein-/ausblenden</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Eine Schaltfläche zum Ein- oder Ausblenden ausgewählter GPX-Tracks auf der Karte.</string>
-    <string name="quick_action_gpx_tracks_hide">GPX-Tracks ausblenden</string>
-    <string name="quick_action_gpx_tracks_show">GPX-Tracks einblenden</string>
+    <string name="quick_action_show_hide_gpx_tracks">Tracks ein-/ausblenden</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Eine Schaltfläche zum Ein- oder Ausblenden ausgewählter Tracks auf der Karte.</string>
+    <string name="quick_action_gpx_tracks_hide">Tracks ausblenden</string>
+    <string name="quick_action_gpx_tracks_show">Tracks einblenden</string>
     <string name="exit_at">Aussteigen bei</string>
     <string name="sit_on_the_stop">Zusteigen an Haltestelle</string>
     <string name="use_osm_live_public_transport_description">Aktivierung von OsmAnd Live für Änderungen bei öffentlichen Verkehrsmitteln.</string>
@@ -3891,4 +3891,5 @@
     <string name="select_another_track">Anderen Track wählen</string>
     <string name="pass_whole_track_descr">Track-Punkt, zu dem navigiert werden soll</string>
     <string name="nearest_point">Nächstgelegener Punkt</string>
+    <string name="shared_string_redo">Wiederholen</string>
 </resources>

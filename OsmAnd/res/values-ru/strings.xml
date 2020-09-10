@@ -35,7 +35,7 @@
     <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>
     <string name="av_locations_all_desc">Файл GPX с координатами и данными всех заметок.</string>
     <string name="favorite_empty_place_name">Место</string>
-    <string name="private_access_routing_req">Ваш пункт назначения находится на частной территории. Разрешить использование частных дорог для этой поездки\?</string>
+    <string name="private_access_routing_req">Пункт назначения находится на частной территории. Разрешить использование частных дорог на этом маршруте\?</string>
     <string name="restart_search">Искать снова</string>
     <string name="increase_search_radius">Увеличить радиус поиска</string>
     <string name="nothing_found">Ничего не найдено</string>
@@ -99,12 +99,12 @@
     <string name="quick_action_auto_zoom_desc">Кнопка переключения автомасштабирования на основе скорости.</string>
     <string name="quick_action_auto_zoom_on">Включение автомасштаба</string>
     <string name="quick_action_auto_zoom_off">Выключение автомасштаба</string>
-    <string name="quick_action_add_destination">Установить пункт назначения</string>
+    <string name="quick_action_add_destination">Добавить точку маршрута</string>
     <string name="quick_action_replace_destination">Заменить пункт назначения</string>
     <string name="quick_action_add_first_intermediate">Добавить первую промежуточную точку</string>
     <string name="quick_action_add_destination_desc">Кнопка для установки центра экрана пунктом назначения маршрута, любой ранее выбранный пункт назначения станет последним промежуточным пунктом.</string>
     <string name="quick_action_directions_from_desc">Кнопка для установки центра экрана пунктом отправления. Затем будет предложено установить пункт назначения или запустить расчёт маршрута.</string>
-    <string name="quick_action_replace_destination_desc">Кнопка для установки центра экрана пунктом назначения, заменив ранее выбранный пункт назначения (если такой был задан).</string>
+    <string name="quick_action_replace_destination_desc">Кнопка для установки центра экрана пунктом назначения с заменой предыдущего (если был задан).</string>
     <string name="quick_action_add_first_intermediate_desc">Кнопка для установки центра экрана первой промежуточной точкой маршрута.</string>
     <string name="no_overlay">Нет покрытия</string>
     <string name="no_underlay">Нет подложки</string>
@@ -143,7 +143,7 @@
     <string name="routing_attr_relief_smoothness_factor_name">Выберите пересечённость местности</string>
     <string name="routing_attr_height_obstacles_name">Использовать данные о высотах</string>
     <string name="routing_attr_height_obstacles_description">Фактор рельефа местности (по данным SRTM, ASTER и EU-DEM).</string>
-    <string name="quick_action_duplicates">Название быстрого действия было изменено на %1$s, чтобы избежать дублирования.</string>
+    <string name="quick_action_duplicates">Действие переименовано в %1$s, чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
     <string name="quick_action_showhide_favorites_descr">Переключатель, чтобы показать или скрыть избранные точки на карте.</string>
     <string name="quick_action_showhide_poi_descr">Переключатель, чтобы показать или скрыть POI на карте.</string>
@@ -801,7 +801,7 @@
     <string name="only_show">Только показать</string>
     <string name="follow">Запуск сопровождения</string>
     <string name="recalculate_route_to_your_location">Вид транспорта:</string>
-    <string name="mark_final_location_first">Сначала выберите пункт назначения</string>
+    <string name="mark_final_location_first">Сначала задайте пункт назначения</string>
     <string name="get_directions">Маршрут</string>
     <string name="gps_status_app_not_found">Приложение «Статус GPS» не найдено. Искать в магазине приложений\?</string>
     <string name="opening_hours">Рабочие часы</string>
@@ -1181,9 +1181,9 @@
     <string name="add_as_last_destination_point">Добавить последним промежуточным пунктом</string>
     <string name="add_as_first_destination_point">Добавить первым промежуточным пунктом</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
-    <string name="new_destination_point_dialog">Пункт назначения уже установлен:</string>
+    <string name="new_destination_point_dialog">Пункт назначения уже задан:</string>
     <string name="target_point">Пункт %1$s</string>
-    <string name="shared_string_target_points">Пункты назначения</string>
+    <string name="shared_string_target_points">Точки маршрута</string>
     <string name="intermediate_point">Промежуточный пункт %1$s</string>
     <string name="delete_target_point">Удалить пункт</string>
     <string name="map_widget_monitoring_services">Службы мониторинга</string>
@@ -1267,7 +1267,7 @@
     <string name="gpx_file_name">Имя файла GPX</string>
     <string name="gpx_saved_sucessfully">Файл GPX сохранён в {0}</string>
     <string name="osmand_distance_planning_plugin_name">Инструмент расчёта дистанции и планирования</string>
-    <string name="intermediate_items_sort_return">Промежуточные пункты выстроены в оптимальный маршрут от текущего местоположения до пункта назначения.</string>
+    <string name="intermediate_items_sort_return">Оптимальный порядок точек по пути к месту назначения.</string>
     <string name="local_osm_changes_backup_failed">Не удалось выполнить резервное копирование изменений OSM.</string>
     <string name="local_osm_changes_backup">Резервное копирование как правка OSM</string>
     <string name="plugin_distance_point_ele">высота</string>
@@ -1281,7 +1281,7 @@
     <string name="local_indexes_cat_srtm">Контурные линии</string>
     <string name="shared_string_downloading">Загрузка…</string>
     <string name="osmand_distance_planning_plugin_description">Создание маршрутов по нажатию на карте, а также использование или изменение существующих файлов GPX, планирование поездки и измерение расстояния между точками. Результаты могут быть сохранены в виде файла GPX, который впоследствии может быть использован для навигации.</string>
-    <string name="context_menu_item_destination_point">Установить как пункт назначения</string>
+    <string name="context_menu_item_destination_point">Сделать пунктом назначения</string>
     <string name="please_select_address">Сначала установите город или улицу</string>
     <string name="destination_point">Пункт назначения %1$s</string>
     <string name="av_camera_focus">Тип фокусировки камеры</string>
@@ -1348,7 +1348,7 @@
     <string name="auto_zoom_close">Ближний план</string>
     <string name="auto_zoom_far">Средний план</string>
     <string name="auto_zoom_farthest">Дальний план</string>
-    <string name="routing_attr_avoid_motorway_description">Избегать автомагистрали</string>
+    <string name="routing_attr_avoid_motorway_description">Избегать автомагистралей</string>
     <string name="routing_attr_avoid_motorway_name">Без автомагистралей</string>
     <string name="routing_attr_prefer_motorway_name">Предпочитать автомагистрали</string>
     <string name="routing_attr_prefer_motorway_description">Предпочитать автомагистрали</string>
@@ -1357,7 +1357,7 @@
     <string name="routing_attr_avoid_unpaved_name">Без грунтовых дорог</string>
     <string name="routing_attr_avoid_unpaved_description">Избегать грунтовых дорог</string>
     <string name="routing_attr_avoid_ferries_name">Без паромов</string>
-    <string name="routing_attr_avoid_ferries_description">Избегать паромные переправы</string>
+    <string name="routing_attr_avoid_ferries_description">Исключить паромные переправы</string>
     <string name="routing_attr_weight_name">Максимальная масса</string>
     <string name="routing_attr_weight_description">Укажите допустимый предел массы автомобиля для учёта при построении маршрута.</string>
     <string name="map_widget_map_rendering">Отображение карты</string>
@@ -1383,7 +1383,7 @@
     <string name="complex_route_calculation_failed">Быстрое построение маршрута не удалось (%s), отмените для возврата к медленному построению.</string>
     <string name="map_magnifier">Масштаб</string>
     <string name="select_gpx">Выберите GPX…</string>
-    <string name="route_descr_select_destination">Установить пункт назначения</string>
+    <string name="route_descr_select_destination">Задать пункт назначения</string>
     <string name="route_preferences">Предпочтения маршрута</string>
     <string name="route_info">Информация про маршрут</string>
     <string name="keep_and_add_destination_point">Добавить следующим пунктом назначения</string>
@@ -1483,7 +1483,7 @@
     <string name="gpx_split_interval">Интервал разбиения</string>
     <string name="delay_navigation_start">Старт навигации автоматически</string>
     <string name="save_as_favorites_points">Сохранить как группу избранных</string>
-    <string name="select_destination_and_intermediate_points">Установить пункты назначения</string>
+    <string name="select_destination_and_intermediate_points">Задать точки маршрута</string>
     <string name="layer_amenity_label">Метки точек</string>
     <string name="selected_gpx_info_show">"
 \n
@@ -1594,7 +1594,7 @@
     <string name="anonymous_user_hint">Анонимному пользователю недоступно:\n- создание групп;\n- синхронизация групп и устройств с сервером;\n- управление группами и устройствами в личном кабинете.</string>
     <string name="logged_as">Вы вошли как %1$s</string>
     <string name="rendering_category_routes">Маршруты</string>
-    <string name="rendering_category_details">Подробности</string>
+    <string name="rendering_category_details">Детали</string>
     <string name="rendering_category_transport">Транспорт</string>
     <string name="rendering_category_others">Другие атрибуты карты</string>
     <string name="configure_map">Настройки карты</string>
@@ -1815,11 +1815,11 @@
     <string name="application_dir_change_warning3">Переместить файлы данных Osmand в новое место назначения\?</string>
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номера домов</string>
-    <string name="routing_attr_avoid_borders_description">Избегать пересечение национальных границ</string>
+    <string name="routing_attr_avoid_borders_description">Избегать перехода границы</string>
     <string name="routing_attr_height_name">Максимальная высота</string>
     <string name="routing_attr_height_description">Укажите высоту транспортного средства для учёта при построении маршрута.</string>
-    <string name="use_fast_recalculation">Умный перерасчёт маршрута</string>
-    <string name="use_fast_recalculation_desc">Перерасчёт только начальной части маршрута для длительных поездок.</string>
+    <string name="use_fast_recalculation">Умный пересчёт маршрута</string>
+    <string name="use_fast_recalculation_desc">Для больших маршрутов пересчитывать только начало.</string>
     <string name="osm_edit_context_menu_delete">Удалить правки OSM</string>
     <string name="rendering_value_disabled_name">Выключено</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Раскраска по сетевой принадлежности</string>
@@ -2029,7 +2029,7 @@
     <string name="context_menu_item_delete_waypoint">Удалить путевую точку GPX\?</string>
     <string name="context_menu_item_edit_waypoint">Редактировать путевую точку GPX</string>
     <string name="routing_attr_avoid_stairs_name">Без лестниц</string>
-    <string name="routing_attr_avoid_stairs_description">Избегать лестницы и ступеньки</string>
+    <string name="routing_attr_avoid_stairs_description">Избегать ступеней и лестниц</string>
     <string name="routing_attr_avoid_borders_name">Без пересечений границ</string>
     <string name="update">Обновлять</string>
     <string name="only_download_over_wifi">Загружать только по Wi-Fi</string>
@@ -2112,7 +2112,7 @@
     <string name="live_updates">Автообновления</string>
     <string name="select_voice_provider_descr">Выберите или скачайте голосовые оповещения для вашего языка.</string>
     <string name="full_report">Полный отчёт</string>
-    <string name="recalculate_route">Пересчитать маршрут</string>
+    <string name="recalculate_route">Пересчёт маршрута</string>
     <string name="open_street_map_login_and_pass">Имя пользователя и пароль OSM</string>
     <string name="number_of_recipients">Количество получателей</string>
     <string name="osm_live_active">Активные</string>
@@ -2205,7 +2205,7 @@
     <string name="no_update_info">Не показывать новые версии</string>
     <string name="update_all_maps_now">Обновить все карты сейчас?</string>
     <string name="clear_tile_data">Очистить всю плитку</string>
-    <string name="routing_attr_short_way_name">Топливно-эффективный способ</string>
+    <string name="routing_attr_short_way_name">Снижать расход топлива</string>
     <string name="routing_attr_short_way_description">Использование топливо-сберегающего пути (обычно короче).</string>
     <string name="replace_favorite_confirmation">Вы уверены, что хотите заменить избранные %1$s\?</string>
     <string name="shared_string_change">Изменить</string>
@@ -2670,7 +2670,7 @@
     <string name="shared_string_current">Текущий</string>
     <string name="last_intermediate_dest_description">Добавляет промежуточную остановку</string>
     <string name="first_intermediate_dest_description">Добавляет первую остановку</string>
-    <string name="subsequent_dest_description">Перемещает пункт назначения и создаёт промежуточную остановку</string>
+    <string name="subsequent_dest_description">Перемещает пункт назначения и создаёт промежуточную точку</string>
     <string name="show_closed_notes">Показать закрытые заметки</string>
     <string name="switch_osm_notes_visibility_desc">Показать/скрыть заметки OSM на карте.</string>
     <string name="gpx_file_desc">GPX — подходит для экспорта в JOSM и другие OSM редакторы.</string>
@@ -2884,7 +2884,7 @@
     <string name="lang_gn_py">Гуарани</string>
     <string name="run_full_osmand_msg">Вы используете {0} карту, которая поставляется OsmAnd. Хотите запустить полную версию Osmand\?</string>
     <string name="run_full_osmand_header">Запустить OsmAnd\?</string>
-    <string name="add_destination_point">Установить пункт назначения</string>
+    <string name="add_destination_point">Добавить точку маршрута</string>
     <string name="add_intermediate_point">Добавить промежуточный пункт</string>
     <string name="add_start_point">Установить отправную точку</string>
     <string name="route_way">Путь</string>
@@ -2915,7 +2915,7 @@
     <string name="work_button">Работа</string>
     <string name="routeInfo_smoothness_name">Ровность</string>
     <string name="previous_route">Предыдущий маршрут</string>
-    <string name="add_destination_query">Пожалуйста, сначала установите пункт назначения</string>
+    <string name="add_destination_query">Сначала задайте пункт назначения</string>
     <string name="shared_string_swap">Поменять</string>
     <string name="show_more">Показать больше</string>
     <string name="tracks_on_map">Отображаемые треки</string>
@@ -2998,28 +2998,28 @@
     <string name="rendering_attr_highway_class_state_road_name">Государственная дорога</string>
     <string name="shared_string_walk">Пешком</string>
     <string name="save_poi_value_exceed_length">Сократите длину тега «%s» до менее чем 255 символов.</string>
-    <string name="avoid_pt_types_descr">Выберите виды общественного транспорта, которые следует избегать при навигации:</string>
-    <string name="avoid_pt_types">Избегать виды транспорта…</string>
+    <string name="avoid_pt_types_descr">Выберите виды транспорта, которых следует избегать при навигации:</string>
+    <string name="avoid_pt_types">Исключить виды транспорта…</string>
     <string name="save_poi_value_exceed_length_title">Длина значения «%s»</string>
     <string name="quick_action_day_night_mode">Режим %s</string>
     <string name="routing_attr_avoid_sett_name">Без булыжников или брусчатки</string>
-    <string name="routing_attr_avoid_sett_description">Избегать булыжники и брусчатку</string>
+    <string name="routing_attr_avoid_sett_description">Избегать мощёных улиц и брусчатки</string>
     <string name="shared_string_milliradians">Миллирадианы</string>
     <string name="angular_measeurement">Угловые единицы</string>
     <string name="angular_measeurement_descr">Изменить, в чём измеряется азимут.</string>
     <string name="shared_string_degrees">Градусы</string>
     <string name="routing_attr_avoid_tram_name">Без трамваев</string>
-    <string name="routing_attr_avoid_tram_description">Избегать трамваи</string>
+    <string name="routing_attr_avoid_tram_description">Исключить трамваи</string>
     <string name="routing_attr_avoid_bus_name">Без автобусов</string>
-    <string name="routing_attr_avoid_bus_description">Избегать автобусы и троллейбусы</string>
+    <string name="routing_attr_avoid_bus_description">Исключить автобусы и троллейбусы</string>
     <string name="routing_attr_avoid_share_taxi_name">Без маршрутных такси</string>
-    <string name="routing_attr_avoid_share_taxi_description">Избегать маршрутные такси</string>
+    <string name="routing_attr_avoid_share_taxi_description">Исключить маршрутные такси</string>
     <string name="routing_attr_avoid_train_name">Без поездов</string>
-    <string name="routing_attr_avoid_train_description">Избегать поезда</string>
+    <string name="routing_attr_avoid_train_description">Исключить поезда</string>
     <string name="routing_attr_avoid_subway_name">Без метро</string>
-    <string name="routing_attr_avoid_subway_description">Избегать метро и лёгкий железнодорожный транспорт</string>
+    <string name="routing_attr_avoid_subway_description">Исключить метро и рельсовый транспорт</string>
     <string name="routing_attr_avoid_ferry_name">Без паромов</string>
-    <string name="routing_attr_avoid_ferry_description">Избегать паромы</string>
+    <string name="routing_attr_avoid_ferry_description">Исключить паромы</string>
     <string name="release_3_3_7">• Отображение времени между пересадками в общественном транспорте
 \n
 \n• Исправлен пользовательский интерфейс для \"Детали маршрута\"
@@ -3112,7 +3112,7 @@
     <string name="routing_attr_piste_type_skitour_name">Лыжные туры</string>
     <string name="routing_attr_piste_type_sled_name">Сани</string>
     <string name="routing_attr_piste_type_sled_description">Склоны для катания на санях.</string>
-    <string name="routing_attr_allow_intermediate_description">Более сложные маршруты с крутыми участками. Возможны препятствия, которых следует избегать.</string>
+    <string name="routing_attr_allow_intermediate_description">Более сложные маршруты с крутыми участками дороги. В целом, препятствия, которых следует избегать.</string>
     <string name="routing_attr_allow_advanced_description">Сложные маршруты, с опасными препятствиями и крутыми участками.</string>
     <string name="routing_attr_difficulty_preference_name">Предпочитаемая сложность</string>
     <string name="process_downloading_service">Служба скачивания OsmAnd</string>
@@ -3162,7 +3162,7 @@
     <string name="edit_profile_nav_settings_subtitle">Выбор настроек навигации для профиля</string>
     <string name="routing_attr_max_num_changes_description">Выбор верхней границы изменений</string>
     <string name="turn_screen_on_sensor">Использовать бесконтактный датчик (сенсорный выключатель)</string>
-    <string name="turn_on_profile_desc">Пожалуйста, включите хотя бы один профиль приложения, чтобы использовать эту настройку.</string>
+    <string name="turn_on_profile_desc">Включите хотя бы один профиль, чтобы использовать эту настройку.</string>
     <string name="shared_string_file_is_saved">%s сохранено</string>
     <string name="osmand_default_routing">Навигация OsmAnd</string>
     <string name="custom_routing">Пользовательский профиль навигации</string>
@@ -3254,7 +3254,7 @@
     <string name="move_maps_to_new_destination">Переместить в новое место назначения</string>
     <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от пользователя и других приложений.</string>
     <string name="change_data_storage_folder">Изменение папки хранилища</string>
-    <string name="avoid_in_routing_descr_">Избегать определённых маршрутов и типов дорог</string>
+    <string name="avoid_in_routing_descr_">Исключить определённые маршруты и типы дорог</string>
     <string name="shared_string_memory_used_tb_desc">Использовано %1$s ТБ</string>
     <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
@@ -3454,9 +3454,9 @@
     <string name="please_provide_profile_name_message">Укажите имя профиля</string>
     <string name="open_settings">Открыть настройки</string>
     <string name="plugin_disabled">Плагин отключён</string>
-    <string name="plugin_disabled_descr">Этот плагин представляет собой отдельное приложение, вам нужно будет удалить его отдельно, если вы больше не планируете его использовать.
+    <string name="plugin_disabled_descr">Плагин является отдельным приложением, удалите его отдельно, если больше не собираетесь использовать.
 \n
-\nПлагин останется на устройстве после удаления OsmAnd.</string>
+\nПосле удаления OsmAnd плагин останется на устройстве.</string>
     <string name="shared_string_menu">Меню</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Маршрутизация</string>
@@ -3464,8 +3464,8 @@
     <string name="import_profile_dialog_description">Импортируемый профиль содержит дополнительные данные. Нажмите «Импорт», чтобы импортировать только данные профиля, или выберите дополнительные данные.</string>
     <string name="export_profile_dialog_description">Вы можете выбрать дополнительные данные для экспорта вместе с профилем.</string>
     <string name="shared_string_app_default_w_val">Приложение по умолчанию (%s)</string>
-    <string name="no_recalculation_setting">Отключить перерасчёт</string>
-    <string name="route_recalculation_dist_title">Минимальное расстояние для перерасчёта маршрута</string>
+    <string name="no_recalculation_setting">Не перестраивать</string>
+    <string name="route_recalculation_dist_title">Минимальное отклонение для перестроения маршрута</string>
     <string name="route_recalculation_dist_descr">Маршрут будет пересчитан, если расстояние до него больше заданного параметра</string>
     <string name="profile_type_custom_string">Пользовательский профиль</string>
     <string name="shared_string_angle_param">Угол: %s°</string>
@@ -3501,7 +3501,7 @@
     <string name="multimedia_notes_view_descr">Ваши заметки OSM находятся в %1$s.</string>
     <string name="video_notes">Видеозаметки</string>
     <string name="photo_notes">Фотозаметки</string>
-    <string name="route_recalculation">Перерасчёт маршрута</string>
+    <string name="route_recalculation">Пересчёт маршрута</string>
     <string name="login_and_pass">Имя пользователя и пароль</string>
     <string name="plugin_global_prefs_info">Эти настройки применяются ко всем профилям.</string>
     <string name="osm_editing">Редактирование OSM</string>
@@ -3537,7 +3537,7 @@
     <string name="monitoring_min_speed_descr_side_effect">Побочный эффект: в записи трека будут отсутствовать все участки, где критерий минимальной скорости не был соблюдён (например, когда вы толкаете велосипед вверх по крутому склону). Также не будет информации о периодах покоя, например, во время отдыха. Это влияет на любой анализ или последующую обработку, например, при попытке определить общую продолжительность поездки, время в движении или среднюю скорость.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Побочный эффект: в результате фильтрации по точности, точки могут быть полностью пропущены, например, под мостами, под деревьями, между высокими зданиями или при определённых погодных условиях.</string>
     <string name="monitoring_min_accuracy_descr_remark">Примечание: при включении GPS непосредственно перед записью точность определения первой точки может быть снижена, поэтому мы рассматриваем добавление секундной задержки перед записью точки (либо записи лучшей из трёх последовательных точек и т. д.), но пока это не реализовано.</string>
-    <string name="monitoring_min_distance_descr">Этот фильтр позволяет избежать записи повторяющихся точек, между которыми могло произойти очень малое фактическое перемещение, и создаёт более приятный визуальный вид треков без последующей обработки.</string>
+    <string name="monitoring_min_distance_descr">Фильтр предотвращает запись точек при отсутствии фактического перемещения и улучшает вид треков без обработки.</string>
     <string name="monitoring_min_distance_descr_side_effect">Побочные эффекты: периоды в состоянии покоя не записываются вообще или только по одной точке каждый. Небольшие (в реальности) перемещения (например, в сторону, указывающие возможное изменение направления движения) могут быть отфильтрованы. Файл содержит меньше информации для последующей обработки и имеет худшую статистику, отфильтровывая явно избыточные точки во время записи, при этом потенциально сохраняя артефакты, вызванные плохим приёмом или эффектами модуля GPS.</string>
     <string name="monitoring_min_distance_descr_recommendation">Рекомендация: настройка 5 метров может должна вас устроить, если нет необходимости учитывать более короткие перемещения, и вы точное не хотите записывать данные в состоянии покоя.</string>
     <string name="listed_exist">Указанные %1$s уже существуют в OsmAnd.</string>
@@ -3598,9 +3598,9 @@
     <string name="shared_string_language">Язык</string>
     <string name="shared_string_all_languages">Все языки</string>
     <string name="wiki_menu_download_descr">Для просмотра POI Википедии на карте необходимы дополнительные карты.</string>
-    <string name="ui_customization_description">Настройка количества элементов в разделах «Панель», «Настройка карты» и контекстном меню. 
-\n 
-\nМожно отключить неиспользуемые плагины, чтобы скрыть их элементы управления. %1$s.</string>
+    <string name="ui_customization_description">Настройка элементов в разделах «Панель», «Настройка карты» и контекстном меню.
+\n
+\nОтключите неиспользуемые плагины, чтобы скрыть их элементы управления. %1$s.</string>
     <string name="ui_customization_short_descr">Элементы панели, контекстное меню</string>
     <string name="shared_string_drawer">Боковое меню</string>
     <string name="divider_descr">Элементы ниже разделённые делителем.</string>
@@ -3790,9 +3790,9 @@
     <string name="use_volume_buttons_as_zoom">Масштабирование кнопками громкости</string>
     <string name="lenght_limit_description">Укажите длину автомобиля, для длинных транспортных средств могут применяться ограничения на маршруте.</string>
     <string name="quick_action_remove_next_destination">Удалить следующий пункт</string>
-    <string name="please_provide_point_name_error">Пожалуйста, укажите название точки</string>
-    <string name="quick_action_remove_next_destination_descr">Текущий пункт назначения на маршруте будет удалён. Если это пункт назначения, навигация остановится.</string>
-    <string name="plugin_wikipedia_description">Информация о достопримечательностях из Википедии. Это ваш карманный автономный гид — просто включите плагин Википедии и наслаждайтесь статьями об объектах вокруг вас.</string>
+    <string name="please_provide_point_name_error">Задайте название точки</string>
+    <string name="quick_action_remove_next_destination_descr">Следующая точка маршрута будет удалена. Если это конечный пункт, навигация завершится.</string>
+    <string name="plugin_wikipedia_description">Информация о достопримечательностях из Википедии. Ваш карманный офлайн-гид — просто включите плагин и читайте об объектах вокруг вас.</string>
     <string name="search_download_wikipedia_maps">Скачать карты Википедии</string>
     <string name="app_mode_enduro_motorcycle">Эндуро мотоцикл</string>
     <string name="app_mode_motor_scooter">Мотороллер</string>
@@ -3832,7 +3832,7 @@
 \n
 \nДалее вам следует выбрать профиль для построения маршрута с учётом ограничений этого профиля.</string>
     <string name="rourte_between_points_desc">Выберите способ соединения точек: прямой линией или прокладкой маршрута с выбранным профилем.</string>
-    <string name="in_case_of_reverse_direction">В случае обратного направления</string>
+    <string name="in_case_of_reverse_direction">При обратном направлении</string>
     <string name="plan_route_exit_dialog_descr">Закрыть план маршрута без сохранения\? Все изменения будут потеряны.</string>
     <string name="street_level_imagery">Изображения на уровне улиц</string>
     <string name="shared_string_save_as_gpx">Сохранить как новый файл трека</string>
