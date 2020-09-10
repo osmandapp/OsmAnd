@@ -232,7 +232,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				switchToRoutePlanningMode();
 			}
 			// When location is changed we need to refresh map in order to show movement!
-			if (!mapView.isServerRendering()){
+			if (!mapView.isScreenViewDetached()){
 				mapView.refreshMap();
 			}
 		}

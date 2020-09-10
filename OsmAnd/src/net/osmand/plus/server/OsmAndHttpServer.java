@@ -26,7 +26,7 @@ public class OsmAndHttpServer extends NanoHTTPD {
 
 	@Override
 	public void stop() {
-		mapActivity.getMapView().setServerRendering(false);
+		mapActivity.getMapView().setScreenViewDetached(false);
 		super.stop();
 	}
 
@@ -46,7 +46,7 @@ public class OsmAndHttpServer extends NanoHTTPD {
 		this.mapActivity = mapActivity;
 		registerEndpoints();
 		start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
-		mapActivity.getMapView().setServerRendering(true);
+		mapActivity.getMapView().setScreenViewDetached(true);
 	}
 
 	public String getUrl() {

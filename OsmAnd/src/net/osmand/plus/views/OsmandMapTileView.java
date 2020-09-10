@@ -77,7 +77,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	protected OsmandSettings settings = null;
 	private CanvasColors canvasColors = null;
 	private Boolean nightMode = null;
-	private boolean isServerRendering = false;
+	private boolean isScreenViewDetached = false;
 
 	private class CanvasColors {
 		int colorDay = MAP_DEFAULT_COLOR;
@@ -284,12 +284,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return layers.contains(layer);
 	}
 
-	public boolean isServerRendering() {
-		return isServerRendering;
+	public boolean isScreenViewDetached() {
+		return isScreenViewDetached;
 	}
 
-	public void setServerRendering(boolean serverRendering) {
-		isServerRendering = serverRendering;
+	public void setScreenViewDetached(boolean screenViewDetached) {
+		isScreenViewDetached = screenViewDetached;
 	}
 
 	public float getZorder(OsmandMapLayer layer) {
@@ -654,7 +654,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		final int cx = (int) (ratiox * view.getWidth());
 		if ((currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
 				currentViewport.getCenterPixelY() != cy ||
-				currentViewport.getCenterPixelX() != cx) && !isServerRendering)  {
+				currentViewport.getCenterPixelX() != cx) && !isScreenViewDetached)  {
 			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratiox, ratioy);
 			refreshBufferImage(drawSettings);
 		}
