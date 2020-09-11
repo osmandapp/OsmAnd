@@ -3231,7 +3231,7 @@
     <string name="map_look_descr">Apparence de la carte</string>
     <string name="map_look">Apparence de la carte</string>
     <string name="general_settings_profile_descr">Thème de l\'application, unités, région</string>
-    <string name="reset_to_default">Restaurer les valeurs par défaut</string>
+    <string name="reset_to_default">Rétablir les paramètres par défaut</string>
     <string name="screen_alerts">Alertes visuelles</string>
     <string name="route_parameters_descr">Définir les paramètres de l\'itinéraire</string>
     <string name="route_parameters">Paramètres de l\'itinéraire</string>

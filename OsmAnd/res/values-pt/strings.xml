@@ -3890,4 +3890,19 @@
     <string name="shared_string_file_name">Nome do ficheiro</string>
     <string name="number_of_gpx_files_selected_pattern">%s ficheiros de faixa selecionados</string>
     <string name="disable_recording_once_app_killed_descrp">Vai pausar o registo de faixas quando a aplicação for morta (através de aplicações recentes). (indicação de fundo de OsmAnd desaparece da barra de notificação do Android.)</string>
+    <string name="release_3_8">- O modo Rota do Plano Atualizado permite usar diferentes tipos de navegação para cada segmento e anexa qualquer pista às estradas
+\n
+\n - Novas opções de aparência para pistas: selecionar cor, espessura, rodar nas setas de direcção e marcas de início/fim
+\n
+\n - Melhoria da visibilidade dos nós da bicicleta
+\n
+\n - Menu de contexto para faixas com informações básicas
+\n
+\n - Algoritmos de pesquisa melhorados
+\n
+\n - Opções de faixa de acompanhamento melhoradas na navegação
+\n
+\n - Problemas fixos com as configurações de importação/exportação de perfis
+\n
+\n</string>
 </resources>

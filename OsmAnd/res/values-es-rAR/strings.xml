@@ -3890,4 +3890,19 @@
     <string name="number_of_gpx_files_selected_pattern">%s archivo(s) de trazas marcado(s)</string>
     <string name="one_point_error">Añade al menos dos puntos.</string>
     <string name="shared_string_redo">Rehacer</string>
+    <string name="release_3_8">• Se ha actualizado el modo «Planificar ruta»: ahora permite usar diferentes tipos de navegación para cada segmento y adjunta cualquier traza a los caminos
+\n
+\n • Nuevas opciones en el aspecto de las trazas: elegir el color, cambiar el grosor de las flechas de dirección y las marcas de inicio/fin.
+\n
+\n • Mejoras en la visibilidad de los nodos de bicicleta
+\n
+\n • Menú contextual con información básica para las trazas
+\n
+\n • Algoritmos de búsqueda mejorados
+\n
+\n • Mejoras en las opciones de seguimiento de la navegación
+\n
+\n • Se han solucionado los problemas de la importación y exportación en los ajustes de los perfiles
+\n
+\n</string>
 </resources>

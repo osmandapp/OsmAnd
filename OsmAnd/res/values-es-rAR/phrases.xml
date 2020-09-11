@@ -3848,4 +3848,5 @@
     <string name="poi_departures_board_no">Tablero de partidas: no</string>
     <string name="poi_departures_board">Tablero de partidas</string>
     <string name="poi_drinking_water_refill">Recarga de agua potable</string>
+    <string name="poi_recycling_small_electrical_appliances">Pequeños electrodomésticos</string>
 </resources>

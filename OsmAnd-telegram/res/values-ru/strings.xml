@@ -63,7 +63,7 @@
     <string name="do_not_have_telegram">У меня нет учетной записи Telegram</string>
     <string name="enter_phone_number">Введите номер телефона</string>
     <string name="enter_authentication_code">Введите код аутентификации</string>
-    <string name="shared_string_add">Добавить</string>
+    <string name="shared_string_add">Сохранить</string>
     <string name="enter_device_name_description">Назовите новое устройство макс. 200 символов.</string>
     <string name="shared_string_distance">Расстояние</string>
     <string name="my_location">Моя локация</string>
