@@ -158,7 +158,6 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		items.add(new OptionsDividerItem(getContext()));
 
 		BaseBottomSheetItem changeRouteTypeBefore = new BottomSheetItemWithDescription.Builder()
-				.setDescription(getDescription(true))
 				.setIcon(getRouteTypeIcon(true))
 				.setTitle(getString(R.string.plan_route_change_route_type_before))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
@@ -177,7 +176,6 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		items.add(changeRouteTypeBefore);
 
 		BaseBottomSheetItem changeRouteTypeAfter = new BottomSheetItemWithDescription.Builder()
-				.setDescription(getDescription(false))
 				.setIcon(getRouteTypeIcon(false))
 				.setTitle(getString(R.string.plan_route_change_route_type_after))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
