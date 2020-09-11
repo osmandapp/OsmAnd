@@ -180,7 +180,10 @@
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:padding="@dimen/measurement_tool_text_button_padding_small"
+                    android:paddingStart="@dimen/measurement_tool_text_button_padding_small"
+                    android:paddingLeft="@dimen/measurement_tool_text_button_padding_small"
+                    android:paddingEnd="@dimen/measurement_tool_text_button_padding_small"
+                    android:paddingRight="@dimen/measurement_tool_text_button_padding_small"
                     android:text="@string/shared_string_options"
                     android:textColor="?attr/color_dialog_buttons"
                     osmand:typeface="@string/font_roboto_medium"/>

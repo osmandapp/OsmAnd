@@ -3833,11 +3833,11 @@
     <string name="next_segment">Nowy segment</string>
     <string name="threshold_distance">Odległość graniczna</string>
     <string name="navigation_profile">Profil nawigacji</string>
-    <string name="rourte_between_points_add_track_desc">Wybierz plik śladu do którego zostanie dodany nowy segment.</string>
-    <string name="rourte_between_points_whole_track_button_desc">Cała trasa zostanie ponownie wyznaczona przy użyciu wybranego profilu.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Tylko następny segment zostanie ponownie obliczony przy użyciu wybranego profilu.</string>
-    <string name="rourte_between_points_desc">Wybierz sposób łączenia punktów linią prostą lub obliczania trasy między nimi z wybranym profilem.</string>
-    <string name="rourte_between_points_warning_desc">Aby skorzystać z tej opcji, OsmAnd musi przyciągnąć ślad do dróg mapy.
+    <string name="route_between_points_add_track_desc">Wybierz plik śladu do którego zostanie dodany nowy segment.</string>
+    <string name="route_between_points_whole_track_button_desc">Cała trasa zostanie ponownie wyznaczona przy użyciu wybranego profilu.</string>
+    <string name="route_between_points_next_segment_button_desc">Tylko następny segment zostanie ponownie obliczony przy użyciu wybranego profilu.</string>
+    <string name="route_between_points_desc">Wybierz sposób łączenia punktów linią prostą lub obliczania trasy między nimi z wybranym profilem.</string>
+    <string name="route_between_points_warning_desc">Aby skorzystać z tej opcji, OsmAnd musi przyciągnąć ślad do dróg mapy.
 \n
 \nW następnym kroku należy wybrać profil nawigacji w celu wykrycia dozwolonych dróg i odległości progowej w celu przybliżenia śledzenia drogi.</string>
     <string name="street_level_imagery">Zdjęcia z poziomu ulicy</string>

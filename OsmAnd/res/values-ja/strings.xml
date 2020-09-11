@@ -3733,17 +3733,17 @@ POIの更新は利用できません</string>
     <string name="overwrite_track">経路を上書き</string>
     <string name="save_as_new_track">新しい経路として保存</string>
     <string name="reverse_route">ルート反転</string>
-    <string name="rourte_between_points_next_segment_button_desc">選択したプロファイルを使用して、次のセグメントのみ再計算します。</string>
-    <string name="rourte_between_points_whole_track_button_desc">選択したプロファイルを使用して、経路全体が再計算されます。</string>
-    <string name="rourte_between_points_desc">直線で地点間をつなげる方法をとるか、選択したプロファイルで地点間のルートを計算します。</string>
+    <string name="route_between_points_next_segment_button_desc">選択したプロファイルを使用して、次のセグメントのみ再計算します。</string>
+    <string name="route_between_points_whole_track_button_desc">選択したプロファイルを使用して、経路全体が再計算されます。</string>
+    <string name="route_between_points_desc">直線で地点間をつなげる方法をとるか、選択したプロファイルで地点間のルートを計算します。</string>
     <string name="whole_track">全経路</string>
     <string name="next_segment">次のセグメント</string>
-    <string name="rourte_between_points_warning_desc">このオプションを使用するには、OsmAndで経路をマップ上の道路にスナップする必要があります。
+    <string name="route_between_points_warning_desc">このオプションを使用するには、OsmAndで経路をマップ上の道路にスナップする必要があります。
 \n
 \n次にナビゲーションプロファイルを選択して、利用予定の道路(一般道、高速道路)と、道路を追跡するおおよその距離を検出する必要があります。</string>
     <string name="threshold_distance">限界距離</string>
     <string name="navigation_profile">ナビゲーションプロファイル</string>
-    <string name="rourte_between_points_add_track_desc">新しいセグメントを追加するための経路ファイルを選択します。</string>
+    <string name="route_between_points_add_track_desc">新しいセグメントを追加するための経路ファイルを選択します。</string>
     <string name="street_level_imagery">ストリート画像</string>
     <string name="plan_route_exit_dialog_descr">保存せずにルート計画を終了した場合すべての変更が失われます。よろしいですか？</string>
     <string name="app_mode_enduro_motorcycle">エンデューロバイク</string>

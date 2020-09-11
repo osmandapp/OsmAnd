@@ -16,23 +16,16 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.Location;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.TextViewExProgress;
-import net.osmand.router.TransportRouteResult;
-import net.osmand.util.MapUtils;
-
-import java.util.List;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 	public static final String TAG = MapRouteInfoMenuFragment.class.getName();
@@ -289,36 +282,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isRoutePlanningMode() && mapActivity.getMapView() != null) {
-			QuadRect r = new QuadRect(0, 0, 0, 0);
-			if (menu.isTransportRouteCalculated()) {
-				TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
-				TransportRouteResult result = transportRoutingHelper.getCurrentRouteResult();
-				if (result != null) {
-					QuadRect transportRouteRect = transportRoutingHelper.getTransportRouteRect(result);
-					if (transportRouteRect != null) {
-						r = transportRouteRect;
-					}
-				}
-			} else if (rh.isRouteCalculated()) {
-				Location lt = rh.getLastProjection();
-				if (lt == null) {
-					lt = app.getTargetPointsHelper().getPointToStartLocation();
-				}
-				if (lt == null) {
-					lt = app.getLocationProvider().getLastKnownLocation();
-				}
-				if (lt != null) {
-					MapUtils.insetLatLonRect(r, lt.getLatitude(), lt.getLongitude());
-				}
-				List<Location> list = rh.getCurrentCalculatedRoute();
-				for (Location l : list) {
-					MapUtils.insetLatLonRect(r, l.getLatitude(), l.getLongitude());
-				}
-				List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-				for (TargetPoint l : targetPoints) {
-					MapUtils.insetLatLonRect(r, l.getLatitude(), l.getLongitude());
-				}
-			}
+			QuadRect r = menu.getRouteRect(mapActivity);
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;

@@ -3835,4 +3835,10 @@
     <string name="poi_dive_centre">Цэнтр дайвінгу</string>
     <string name="poi_resort_hunting">Паляўнічая база</string>
     <string name="poi_drinking_water_refill">Папаўненне пітной вады</string>
+    <string name="poi_departures_board_yes">Так</string>
+    <string name="poi_departures_board_no">Расклад адпраўленняў: не</string>
+    <string name="poi_departures_board">Расклад адпраўленняў</string>
+    <string name="poi_departures_board_timetable">Расклад</string>
+    <string name="poi_departures_board_realtime">Рэальны час</string>
+    <string name="poi_departures_board_delay">Затрымка</string>
 </resources>

@@ -11,6 +11,15 @@
 	Thx - Hardy
 
 -->
+    <string name="release_3_8">
+    • Updated "Plan Route" mode allows using different navigation types for each segment and attaches any track to the roads\n\n
+    • New "Appearance" options for tracks: select color, thickness turn on the direction arrows and start/finish marks\n\n
+    • Improved bicycle nodes visibility\n\n
+    • Context menu for tracks with basic info\n\n
+    • Improved "Search" algorithms\n\n
+    • Improved "Follow track" options in Navigation\n\n
+    • Fixed issues with import/export of profile settings\n\n
+    </string>
     <string name="shared_string_redo">Redo</string>
     <string name="one_point_error">Please add at least two points.</string>
     <string name="shared_string_is_saved">is saved</string>
@@ -63,15 +72,15 @@
     <string name="in_case_of_reverse_direction">In case of reverse direction</string>
     <string name="plan_route_exit_dialog_descr">Are you sure you want to close Plan route without saving? You will lose all changes.</string>
     <string name="street_level_imagery">Street-level imagery</string>
-    <string name="rourte_between_points_add_track_desc">Select a track file for which a new segment will be added.</string>
+    <string name="route_between_points_add_track_desc">Select a track file for which a new segment will be added.</string>
     <string name="navigation_profile">Navigation profile</string>
     <string name="threshold_distance">Threshold distance</string>
-    <string name="rourte_between_points_warning_desc">To use this option OsmAnd need to snap your track to the map roads. \n\n On the next step you will need to select navigation profile to detect allowed roads and threshold distance to approximate you track with roads.</string>
+    <string name="route_between_points_warning_desc">To use this option OsmAnd need to snap your track to the map roads. \n\n On the next step you will need to select navigation profile to detect allowed roads and threshold distance to approximate you track with roads.</string>
     <string name="next_segment">Next segment</string>
     <string name="whole_track">Whole track</string>
-    <string name="rourte_between_points_desc">Select how to connect points, with a straight line, or calculate a route between them with selected profile.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Only next segment will be recalculated using selected profile.</string>
-    <string name="rourte_between_points_whole_track_button_desc">Whole track will be recalculated using selected profile.</string>
+    <string name="route_between_points_desc">Select how to connect points, with a straight line, or calculate a route between them with selected profile.</string>
+    <string name="route_between_points_next_segment_button_desc">Only next segment will be recalculated using selected profile.</string>
+    <string name="route_between_points_whole_track_button_desc">Whole track will be recalculated using selected profile.</string>
     <string name="reverse_route">Reverse route</string>
     <string name="save_as_new_track">Save as new Track</string>
     <string name="overwrite_track">Overwrite track</string>

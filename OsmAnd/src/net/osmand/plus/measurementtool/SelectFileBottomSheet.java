@@ -15,7 +15,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.GpxTrackAdapter;
 import net.osmand.plus.helpers.GpxTrackAdapter.OnItemClickListener;
@@ -32,11 +32,11 @@ import java.util.Map;
 import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 import static net.osmand.util.Algorithms.collectDirs;
 
-public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
+public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 
 	enum Mode {
 		OPEN_TRACK(R.string.plan_route_open_existing_track, R.string.plan_route_select_track_file_for_open),
-		ADD_TO_TRACK(R.string.add_to_a_track, R.string.rourte_between_points_add_track_desc);
+		ADD_TO_TRACK(R.string.add_to_a_track, R.string.route_between_points_add_track_desc);
 
 		int title;
 		int description;
@@ -120,12 +120,13 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		adapter.setAdapterListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {
-				if (position != RecyclerView.NO_POSITION && position < allGpxList.size()) {
+				List<GPXInfo> gpxList = adapter.getGpxInfoList();
+				if (position != RecyclerView.NO_POSITION && position < gpxList.size()) {
 					String fileName;
 					if (isShowCurrentGpx() && position == 0) {
 						fileName = null;
 					} else {
-						fileName = allGpxList.get(position).getFileName();
+						fileName = gpxList.get(position).getFileName();
 					}
 					if (listener != null) {
 						listener.selectFileOnCLick(fileName);
@@ -173,8 +174,8 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	protected int getCustomHeight() {
-		return AndroidUtils.dpToPx(mainView.getContext(), BOTTOM_SHEET_HEIGHT_DP);
+	protected int getPeekHeight() {
+		return AndroidUtils.dpToPx(getContext(), BOTTOM_SHEET_HEIGHT_DP);
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, SelectFileListener listener, Mode mode) {

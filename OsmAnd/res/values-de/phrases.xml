@@ -3817,7 +3817,7 @@
     <string name="poi_seamark_water_level_above_mwl">Wasserstand: über dem mittleren Wasserstand</string>
     <string name="poi_seamark_water_level_below_mwl">Wasserstand: unter dem mittleren Wasserstand</string>
     <string name="poi_seamark_obstruction">Hindernis</string>
-    <string name="poi_drinking_water_refill_yes">Trinkwassernachfüllung: ja</string>
+    <string name="poi_drinking_water_refill_yes">ja</string>
     <string name="poi_drinking_water_refill_no">Trinkwassernachfüllung: nein</string>
     <string name="poi_drinking_water_refill_network">Trinkwasser-Nachfüllnetz</string>
     <string name="poi_internet_access_fee_customers">Internetzugangsgebühr für Kunden</string>
@@ -3827,7 +3827,7 @@
     <string name="poi_fire_hydrant_type_pipe">Rohr</string>
     <string name="poi_fire_hydrant_pressure_filter">Druck</string>
     <string name="poi_pump_status_missing_beam">Pumpenzustand: fehlender Arm</string>
-    <string name="poi_traffic_signals_arrow_yes">Ja</string>
+    <string name="poi_traffic_signals_arrow_yes">ja</string>
     <string name="poi_traffic_signals_vibration_yes">ja</string>
     <string name="poi_traffic_signals_vibration_no">kein Vibrieren</string>
     <string name="poi_traffic_signals_arrow">Pfeil</string>
@@ -3836,4 +3836,12 @@
     <string name="poi_city_block">Stadtteil</string>
     <string name="poi_borough">Bezirk</string>
     <string name="poi_elevator">Aufzug</string>
+    <string name="poi_departures_board_timetable">Fahrplan</string>
+    <string name="poi_departures_board_realtime">Echtzeit</string>
+    <string name="poi_departures_board_delay">Verspätung</string>
+    <string name="poi_departures_board_yes">ja</string>
+    <string name="poi_departures_board_no">Anzeige der Abreisezeiten: nein</string>
+    <string name="poi_traffic_signals_arrow_no">Abbiegepfeil: nein</string>
+    <string name="poi_departures_board">Anzeige der Abreisezeiten</string>
+    <string name="poi_drinking_water_refill">Nachfüllen von Trinkwasser</string>
 </resources>

@@ -53,6 +53,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	public void setDescription(CharSequence description) {
 		this.description = description;
 		descriptionTv.setText(description);
+		changeDescriptionVisibility();
 	}
 
 	public void setDescriptionMaxLines(int maxLines) {
@@ -76,11 +77,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 		super.inflate(context, container, nightMode);
 		descriptionTv = view.findViewById(R.id.description);
 		if (descriptionTv != null) {
-			if (Algorithms.isEmpty(description)) {
-				descriptionTv.setVisibility(View.GONE);
-			} else {
-				descriptionTv.setVisibility(View.VISIBLE);
-			}
+			changeDescriptionVisibility();
 			descriptionTv.setText(description);
 			if (descriptionColorId != INVALID_ID) {
 				descriptionTv.setTextColor(ContextCompat.getColor(context, descriptionColorId));
@@ -91,6 +88,14 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 			if (descriptionLinksClickable) {
 				descriptionTv.setMovementMethod(LinkMovementMethod.getInstance());
 			}
+		}
+	}
+
+	private void changeDescriptionVisibility() {
+		if (Algorithms.isEmpty(description)) {
+			descriptionTv.setVisibility(View.GONE);
+		} else {
+			descriptionTv.setVisibility(View.VISIBLE);
 		}
 	}
 
