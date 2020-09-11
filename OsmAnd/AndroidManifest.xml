@@ -484,10 +484,16 @@
 				<data android:host="map.wap.qq.com" />
 				<data android:host="map.qq.com" />
 				<data android:host="maps.apple.com" />
-				<data android:host="ge0.me" />
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+			<intent-filter>
+				<data android:host="ge0.me" android:scheme="https"/>
+				<data android:host="ge0.me" android:scheme="http"/>
+				<action android:name="android.intent.action.VIEW"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
 			</intent-filter>
 			<intent-filter>
 				<data android:scheme="http" android:host="openstreetmap.de" android:pathPrefix="/karte" />
