@@ -108,7 +108,7 @@ public class OsmAndHttpServer extends NanoHTTPD {
 	}
 
 	private void registerEndpoints() {
-		register("/tile", new TileEndpoint(mapActivity));
+		register("/tile", new TileEndpoint(this));
 	}
 
 	private void register(String path, ApiEndpoint endpoint) {

@@ -156,7 +156,8 @@ public class MapVectorLayer extends BaseMapLayer {
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 		} else {
 			if (!view.isZooming()) {
-				if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {
+				if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings) &&
+						!view.isScreenViewDetached()) {
 					// pixRect.set(-view.getWidth(), -view.getHeight() / 2, 2 * view.getWidth(), 3 *
 					// view.getHeight() / 2);
 					final RotatedTileBox copy = tilesRect.copy();
