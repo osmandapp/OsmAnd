@@ -93,9 +93,9 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends MenuBottomSheet
 			case WHOLE_ROUTE_CALCULATION:
 				switch (dialogMode) {
 					case SINGLE:
-						return getString(R.string.rourte_between_points_next_segment_button_desc);
+						return getString(R.string.route_between_points_next_segment_button_desc);
 					case ALL:
-						return getString(R.string.rourte_between_points_whole_track_button_desc);
+						return getString(R.string.route_between_points_whole_track_button_desc);
 				}
 				break;
 			case NEXT_ROUTE_CALCULATION:

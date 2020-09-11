@@ -3818,7 +3818,7 @@
     <string name="plan_route_select_track_file_for_open">Оберіть файл з треком для перегляду.</string>
     <string name="shared_string_done">Готово</string>
     <string name="overwrite_track">Перезаписати трек</string>
-    <string name="rourte_between_points_warning_desc">Для користування цією функцією, OsmAnd необхідно прив\'язати цей трек до мапи доріг.
+    <string name="route_between_points_warning_desc">Для користування цією функцією, OsmAnd необхідно прив\'язати цей трек до мапи доріг.
 \n
 \nДалі вам потрібно вибрати профіль навігації для виявлення дозволених доріг та обмеження відстані наближення вашого треку до доріг.</string>
     <string name="reverse_route">Зворотний маршрут</string>
@@ -3826,11 +3826,11 @@
     <string name="next_segment">Наступний сегмент</string>
     <string name="threshold_distance">Обмеження відстані</string>
     <string name="navigation_profile">Профіль навігації</string>
-    <string name="rourte_between_points_add_track_desc">Виберіть файл треку, до якого буде додано новий сегмент.</string>
+    <string name="route_between_points_add_track_desc">Виберіть файл треку, до якого буде додано новий сегмент.</string>
     <string name="save_as_new_track">Зберегти як новий трек</string>
-    <string name="rourte_between_points_whole_track_button_desc">Весь трек буде перераховано за допомогою вибраного профілю.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Лише наступний сегмент буде перераховано за допомогою обраного профілю.</string>
-    <string name="rourte_between_points_desc">Виберіть спосіб з\'єднання точок: прямою лінією чи розраховувати маршрут між ними за допомогою вибраного профілю.</string>
+    <string name="route_between_points_whole_track_button_desc">Весь трек буде перераховано за допомогою вибраного профілю.</string>
+    <string name="route_between_points_next_segment_button_desc">Лише наступний сегмент буде перераховано за допомогою обраного профілю.</string>
+    <string name="route_between_points_desc">Виберіть спосіб з\'єднання точок: прямою лінією чи розраховувати маршрут між ними за допомогою вибраного профілю.</string>
     <string name="street_level_imagery">Зображення вулиць</string>
     <string name="plan_route_exit_dialog_descr">Ви дійсно бажаєте закрити планування маршруту без збереження\? Внесені зміни буде втрачено.</string>
     <string name="in_case_of_reverse_direction">Для зворотного напрямку</string>

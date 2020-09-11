@@ -3827,17 +3827,17 @@
     <string name="overwrite_track">Sobrescrever trilho</string>
     <string name="save_as_new_track">Gravar como novo trilho</string>
     <string name="reverse_route">Rota inversa</string>
-    <string name="rourte_between_points_whole_track_button_desc">O trilho inteiro será recalculado a usar o perfil selecionado.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Somente o próximo segmento será recalculado a usar o perfil selecionado.</string>
-    <string name="rourte_between_points_desc">Selecione como ligar pontos, com uma linha reta ou calcule uma rota entre eles com o perfil selecionado.</string>
+    <string name="route_between_points_whole_track_button_desc">O trilho inteiro será recalculado a usar o perfil selecionado.</string>
+    <string name="route_between_points_next_segment_button_desc">Somente o próximo segmento será recalculado a usar o perfil selecionado.</string>
+    <string name="route_between_points_desc">Selecione como ligar pontos, com uma linha reta ou calcule uma rota entre eles com o perfil selecionado.</string>
     <string name="whole_track">Trilho inteiro</string>
     <string name="next_segment">Próximo segmento</string>
-    <string name="rourte_between_points_warning_desc">Para usar esta opção o OsmAnd precisa de encaixar o seu trilho nas estradas do mapa.
+    <string name="route_between_points_warning_desc">Para usar esta opção o OsmAnd precisa de encaixar o seu trilho nas estradas do mapa.
 \n
 \n No passo seguinte, terá de selecionar o perfil de navegação para detetar estradas permitidas e a distância limiar para se aproximar do seu trilho com as estradas.</string>
     <string name="threshold_distance">Distância limiar</string>
     <string name="navigation_profile">Perfil de navegação</string>
-    <string name="rourte_between_points_add_track_desc">Selecione um ficheiro de faixa para o qual um novo segmento será adicionado.</string>
+    <string name="route_between_points_add_track_desc">Selecione um ficheiro de faixa para o qual um novo segmento será adicionado.</string>
     <string name="follow_track">Seguir a trilha</string>
     <string name="follow_track_descr">Escolha o ficheiro de trilha a seguir</string>
     <string name="import_track_descr">Escolha o ficheiro de trilho a seguir ou importe um.</string>

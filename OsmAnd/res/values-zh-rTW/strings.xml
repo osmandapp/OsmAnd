@@ -3819,17 +3819,17 @@
     <string name="overwrite_track">覆寫軌跡</string>
     <string name="save_as_new_track">儲存為新軌跡</string>
     <string name="reverse_route">反向路線</string>
-    <string name="rourte_between_points_whole_track_button_desc">整個軌跡都會使用選定的設定檔重新計算。</string>
-    <string name="rourte_between_points_next_segment_button_desc">僅下一個片段會使用選定的設定檔重新計算。</string>
-    <string name="rourte_between_points_desc">選取如何連接點，用直線或以選定的設定檔計算其間的路徑。</string>
+    <string name="route_between_points_whole_track_button_desc">整個軌跡都會使用選定的設定檔重新計算。</string>
+    <string name="route_between_points_next_segment_button_desc">僅下一個片段會使用選定的設定檔重新計算。</string>
+    <string name="route_between_points_desc">選取如何連接點，用直線或以選定的設定檔計算其間的路徑。</string>
     <string name="whole_track">整個軌道</string>
     <string name="next_segment">下一段</string>
-    <string name="rourte_between_points_warning_desc">要使用此選項，OsmAnd 必須將您的軌跡捕捉到地圖道路上。
+    <string name="route_between_points_warning_desc">要使用此選項，OsmAnd 必須將您的軌跡捕捉到地圖道路上。
 \n
 \n在下一步，您只需要選取設定檔以偵測允許的道路與距離門檻以追蹤道路。</string>
     <string name="threshold_distance">門檻距離</string>
     <string name="navigation_profile">導航設定檔</string>
-    <string name="rourte_between_points_add_track_desc">選取要加入新片段的軌道檔案。</string>
+    <string name="route_between_points_add_track_desc">選取要加入新片段的軌道檔案。</string>
     <string name="street_level_imagery">街道級照片</string>
     <string name="plan_route_exit_dialog_descr">您確定要不儲存就關閉計劃錄線嗎？您將會失去所有變更。</string>
     <string name="in_case_of_reverse_direction">反向時</string>

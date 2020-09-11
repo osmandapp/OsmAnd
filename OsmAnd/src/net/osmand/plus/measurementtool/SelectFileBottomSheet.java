@@ -36,7 +36,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
 	enum Mode {
 		OPEN_TRACK(R.string.plan_route_open_existing_track, R.string.plan_route_select_track_file_for_open),
-		ADD_TO_TRACK(R.string.add_to_a_track, R.string.rourte_between_points_add_track_desc);
+		ADD_TO_TRACK(R.string.add_to_a_track, R.string.route_between_points_add_track_desc);
 
 		int title;
 		int description;
