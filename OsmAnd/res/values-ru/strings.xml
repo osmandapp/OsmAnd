@@ -1739,7 +1739,7 @@
     <string name="shared_string_deselect_all">Отменить выбор всех</string>
     <string name="shared_string_share">Поделиться</string>
     <string name="shared_string_my_places">Мои места</string>
-    <string name="shared_string_my_favorites">Точки</string>
+    <string name="shared_string_my_favorites">Избранные</string>
     <string name="shared_string_tracks">Треки</string>
     <string name="shared_string_currently_recording_track">Текущий трек</string>
     <string name="share_note">Поделиться заметкой</string>
@@ -1925,7 +1925,7 @@
     <string name="please_specify_poi_type">Укажите тип POI.</string>
     <string name="rendering_value_boldOutline_name">Жирный контур</string>
     <string name="working_days">Рабочие дни</string>
-    <string name="favourites">Сохранённые</string>
+    <string name="favourites">Избранные</string>
     <string name="saved_at_time">Успешно сохранён в: %1$s</string>
     <string name="poi_deleted_localy">POI будут удалены после того как вы отправите ваши изменения</string>
     <string name="poi_action_delete">удалить</string>
@@ -1958,7 +1958,7 @@
     <string name="traffic_warning_hazard">Опасность</string>
     <string name="regions">Регионы</string>
     <string name="world_maps">Карты мира</string>
-    <string name="favourites_context_menu_add">Сохранить в Мои места</string>
+    <string name="favourites_context_menu_add">Добавить в избранное</string>
     <string name="region_maps">Региональные карты</string>
     <string name="favorite_category_dublicate_message">Задайте название, которое ещё не используется.</string>
     <string name="favorite_category_name">Название категории</string>
@@ -2261,10 +2261,10 @@
     <string name="quick_action_add_poi">Добавить POI</string>
     <string name="quick_action_map_style">Изменить стиль карты</string>
     <string name="quick_action_map_style_switch">Стиль карты изменён на «%s».</string>
-    <string name="quick_action_add_parking">Сохранить парковку</string>
+    <string name="quick_action_add_parking">Добавить место парковки</string>
     <string name="quick_action_new_action">Добавить действие</string>
     <string name="quick_action_edit_action">Редактировать действие</string>
-    <string name="quick_action_add_favorite">Сохранить место</string>
+    <string name="quick_action_add_favorite">Добавить в избранное</string>
     <string name="dialog_add_action_title">Добавить действие</string>
     <string name="quick_actions_delete">Удалить действие</string>
     <string name="quick_actions_delete_text">Вы уверены, что хотите удалить действие «%s»\?</string>
