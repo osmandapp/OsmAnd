@@ -167,9 +167,11 @@
 					tools:text="@string/add_address" />
 
 				<View
-						android:layout_width="match_parent"
-						android:layout_height="1dp"
-						android:background="?attr/dashboard_divider" />
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:layout_marginLeft="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding"
+					android:background="?attr/dashboard_divider" />
 
 				<LinearLayout
 					android:id="@+id/description"
