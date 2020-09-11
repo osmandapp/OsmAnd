@@ -56,6 +56,8 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	private View cancelButton;
 	private View applyButton;
 
+	private SliderCard sliderCard;
+
 	@Override
 	public int getMainLayoutId() {
 		return R.layout.fragment_gpx_approximation_bottom_sheet_dialog;
@@ -87,7 +89,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 
 	@Override
 	public int getSupportedMenuStatesPortrait() {
-		return MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
+		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
 
 	@Override
@@ -175,9 +177,15 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 
 	@Override
 	protected void calculateLayout(View view, boolean initLayout) {
+		int sliderHeight = sliderCard != null ? sliderCard.getViewHeight() : 0;
 		menuTitleHeight = view.findViewById(R.id.control_buttons).getHeight()
-				- view.findViewById(R.id.buttons_shadow).getHeight();
+				- view.findViewById(R.id.buttons_shadow).getHeight() + sliderHeight;
 		super.calculateLayout(view, initLayout);
+	}
+
+	@Override
+	protected boolean isHideable() {
+		return false;
 	}
 
 	@Override
@@ -265,7 +273,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			cardsContainer.removeAllViews();
 
 			if (getTopView() != null) {
-				SliderCard sliderCard = new SliderCard(mapActivity, distanceThreshold);
+				sliderCard = new SliderCard(mapActivity, distanceThreshold);
 				sliderCard.setListener(this);
 				getTopView().addView(sliderCard.build(mapActivity));
 			}

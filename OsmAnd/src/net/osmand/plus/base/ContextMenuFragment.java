@@ -612,6 +612,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	protected boolean isHideable() {
+		return true;
+	}
+
 	private void processScreenHeight(ViewParent parent) {
 		View container = (View) parent;
 		MapActivity mapActivity = getMapActivity();
@@ -783,7 +787,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 
 	private int getPosY(final int currentY, boolean needCloseMenu, int previousState) {
-		if (needCloseMenu) {
+		if (needCloseMenu && isHideable()) {
 			return screenHeight;
 		}
 		MapActivity mapActivity = getMapActivity();
@@ -858,7 +862,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 							@Override
 							public void onAnimationEnd(Animator animation) {
 								if (!canceled) {
-									if (needCloseMenu) {
+									if (needCloseMenu && isHideable()) {
 										dismiss();
 									} else {
 										updateMainViewLayout(posY);
@@ -870,7 +874,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 							}
 						}).start();
 			} else {
-				if (needCloseMenu) {
+				if (needCloseMenu && isHideable()) {
 					dismiss();
 				} else {
 					mainView.setY(posY);
