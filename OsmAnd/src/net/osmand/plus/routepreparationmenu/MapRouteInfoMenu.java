@@ -1566,6 +1566,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					if (mapActivity != null) {
 						GPXRouteParamsBuilder routeParams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 						if (routeParams != null) {
+							hide();
 							selectTrack();
 						}
 					}
