@@ -1108,11 +1108,7 @@ public class ImportHelper {
 		}
 
 		private void showPlanRouteFragment() {
-			MeasurementToolFragment fragment = (MeasurementToolFragment) activity.getSupportFragmentManager()
-					.findFragmentByTag(MeasurementToolFragment.TAG);
-			if (fragment != null && !fragment.isDetached() && !fragment.isRemoving()) {
-				fragment.addNewGpxData(result);
-			}
+			MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), result);
 		}
 	}
 

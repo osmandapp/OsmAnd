@@ -97,9 +97,7 @@ import static net.osmand.plus.measurementtool.MeasurementEditingContext.Calculat
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.SnapToRoadProgressListener;
 import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
-import static net.osmand.plus.measurementtool.StartPlanRouteBottomSheet.StartPlanRouteListener;
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
@@ -462,9 +460,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (savedInstanceState == null) {
 			if (fileName != null) {
 				addNewGpxData(getGpxFile(fileName));
-			} else if (editingCtx.isNewData() && planRouteMode && initialPoint == null) {
-				StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
-						createStartPlanRouteListener());
 			} else if (!editingCtx.isNewData() && !editingCtx.hasRoutePoints() && !editingCtx.hasRoute() && editingCtx.getPointsCount() > 1) {
 				enterApproximationMode(mapActivity);
 			}
@@ -951,47 +946,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (measurementLayer != null) {
 			outState.putBoolean(TAPS_DISABLED_KEY, measurementLayer.isTapsDisabled());
 		}
-	}
-
-	private StartPlanRouteListener createStartPlanRouteListener() {
-		return new StartPlanRouteListener() {
-			@Override
-			public void openExistingTrackOnClick() {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					SelectFileBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
-							createSelectFileListener(), OPEN_TRACK);
-				}
-			}
-
-			@Override
-			public void openLastEditTrackOnClick(String gpxFileName) {
-				addNewGpxData(getGpxFile(gpxFileName));
-			}
-
-			@Override
-			public void dismissButtonOnClick() {
-				quit(true);
-			}
-		};
-	}
-
-	private SelectFileListener createSelectFileListener() {
-		return new SelectFileListener() {
-			@Override
-			public void selectFileOnCLick(String gpxFileName) {
-				addNewGpxData(getGpxFile(gpxFileName));
-			}
-
-			@Override
-			public void dismissButtonOnClick() {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
-							createStartPlanRouteListener());
-				}
-			}
-		};
 	}
 
 	private GPXFile getGpxFile(String gpxFileName) {
@@ -1933,6 +1887,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public static boolean showInstance(FragmentManager fragmentManager, String fileName) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setFileName(fileName);
+		fragment.setPlanRouteMode(true);
+		return showFragment(fragment, fragmentManager);
+	}
+
+	public static boolean showInstance(FragmentManager fragmentManager, GPXFile gpxFile) {
+		MeasurementToolFragment fragment = new MeasurementToolFragment();
+		fragment.addNewGpxData(gpxFile);
 		fragment.setPlanRouteMode(true);
 		return showFragment(fragment, fragmentManager);
 	}
