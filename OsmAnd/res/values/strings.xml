@@ -72,10 +72,10 @@
     <string name="in_case_of_reverse_direction">In case of reverse direction</string>
     <string name="plan_route_exit_dialog_descr">Are you sure you want discard all changes in the planned route by closing it?</string>
     <string name="street_level_imagery">Street-level imagery</string>
-    <string name="rourte_between_points_add_track_desc">Select a track file to add the new segment to.</string>
+    <string name="route_between_points_add_track_desc">Select a track file to add the new segment to.</string>
     <string name="navigation_profile">Navigation profile</string>
     <string name="threshold_distance">Threshold distance</string>
-    <string name="rourte_between_points_warning_desc">Next, snap your track to the nearest allowed road with one of your navigation profiles to use this option.</string>
+    <string name="route_between_points_warning_desc">Next, snap your track to the nearest allowed road with one of your navigation profiles to use this option.</string>
     <string name="next_segment">Next segment</string>
     <string name="whole_track">Whole track</string>
     <string name="route_between_points_desc">Select how to connect points, with a straight line, or calculate a route between them with selected profile.</string>
