@@ -80,7 +80,7 @@
     <string name="whole_track">Whole track</string>
     <string name="rourte_between_points_desc">Select how to connect points, with a straight line, or calculate a route between them with selected profile.</string>
     <string name="rourte_between_points_next_segment_button_desc">Only the next segment will be recalculated using selected profile.</string>
-    <string name="rourte_between_points_whole_track_button_desc">The whole track will be recalculated using the selected profile.
+    <string name="rourte_between_points_whole_track_button_desc">The whole track will be recalculated using the selected profile.</string>
     <string name="reverse_route">Reverse route</string>
     <string name="save_as_new_track">Save as new track</string>
     <string name="overwrite_track">Overwrite track</string>
