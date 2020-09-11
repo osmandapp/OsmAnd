@@ -1,6 +1,8 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -18,14 +20,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragmentNew;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.OpeningHoursParser;
-import net.osmand.view.GravityDrawable;
 
 import java.util.List;
 
@@ -155,8 +158,12 @@ public class FavouritePointMenuController extends MenuController {
 
 	@NonNull
 	@Override
-	public String getSubtypeStr() {
-		return fav.getAddress();
+	public CharSequence getSubtypeStr() {
+		Typeface typeface = FontCache.getRobotoRegular(getMapActivity());
+		SpannableString addressSpannable = new SpannableString(fav.getAddress());
+		addressSpannable.setSpan(new CustomTypefaceSpan(typeface), 0, addressSpannable.length(), 0);
+
+		return addressSpannable;
 	}
 
 	@Override
@@ -167,10 +174,8 @@ public class FavouritePointMenuController extends MenuController {
 			FavouritesDbHelper helper = app.getFavorites();
 			String group = fav.getCategory();
 			if (helper.getGroup(group) != null) {
-				Drawable line2icon = helper.getColoredIconForGroup(group);
-				GravityDrawable gravityIcon = new GravityDrawable(line2icon);
-				gravityIcon.setBoundsFrom(line2icon);
-				return gravityIcon;
+				int colorId = R.color.color_favorite;
+				return getIcon(R.drawable.ic_action_group_name_16, colorId);
 			} else {
 				int colorId = isLight() ? R.color.icon_color_default_light : R.color.ctx_menu_bottom_view_icon_dark;
 				return getIcon(R.drawable.ic_action_group_name_16, colorId);

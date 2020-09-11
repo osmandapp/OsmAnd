@@ -38,7 +38,6 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -97,7 +96,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		isLightTheme = getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		isLightTheme = getMyApplication().getSettings().isLightContent();
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}

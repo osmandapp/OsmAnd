@@ -18,6 +18,7 @@
 		android:paddingRight="@dimen/content_padding"
 		android:text="@string/import_track_descr"
 		android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+		android:textColor="?android:textColorSecondary"
 		osmand:typeface="@string/font_roboto_regular" />
 
 	<include layout="@layout/bottom_sheet_item_simple" />

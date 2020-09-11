@@ -22,8 +22,12 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 		this.mode = mode;
 	}
 
+	public List<WptPt> getPoints() {
+		return points;
+	}
+
 	@Override
-	MeasurementCommandType getType() {
+	public MeasurementCommandType getType() {
 		return MeasurementCommandType.APPROXIMATE_POINTS;
 	}
 
@@ -66,6 +70,6 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 	public void applyApproximation() {
 		getEditingCtx().setAppMode(mode);
 		getEditingCtx().clearSegments();
-		getEditingCtx().setPoints(approximation);
+		getEditingCtx().setPoints(approximation, mode);
 	}
 }

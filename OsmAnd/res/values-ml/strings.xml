@@ -205,7 +205,6 @@
     <string name="access_direction_audio_feedback">ദിശ ശബ്ദസൂചിക</string>
     <string name="access_direction_haptic_feedback">"ദിശ ഹാപ്ടിക്  ഫീഡ്ബാക്ക്"</string>
     <string name="map_mode">മാപ് രീതി</string>
-    <string name="number_of_gpx_files_selected_pattern">"%s ജിപിഎക്സ് ഫയലുകള്‍ തിരഞ്ഞെടുത്തിരിക്കുന്നു "</string>
     <string name="no_waypoints_found">"വഴിത്തിരിവുകളൊന്നും കണ്ടെത്താനായില്ല "</string>
     <string name="osm_editors_ranking">ഓ എസ് എം എഡിറ്ററുഡെ റാങ്കിങ്ങ്</string>
     <string name="osm_live_month_cost_desc">മാസവരി.</string>
@@ -272,8 +271,6 @@
     <string name="int_hour">മ.</string>
     <string name="keep_navigation_service">നിലനിര്‍ത്തുക</string>
     <string name="lang_he">"ഹീബ്രൂ ഭാക്ഷ "</string>
-    <string name="gpx_monitoring_start">"ജിപിഎക്സ് റിക്കോഡിങ്ങ് തുടങ്ങുക "</string>
-    <string name="gpx_monitoring_stop">"ജിപിഎക്സ് റിക്കോഡിങ്ങ് നിര്‍ത്തുക "</string>
     <string name="rendering_attr_showSurfaces_name">പാതയുടെ പ്രതലം കാണിക്കുക</string>
     <string name="sort_by_distance">"ദൂരക്രമത്തിലടുക്കുക "</string>
     <string name="loading_smth">%1$s... വന്ന് കൊണ്ടിരിക്കുന്നു…</string>
@@ -946,7 +943,6 @@
     <string name="switch_start_finish">പ്രാരംഭ സ്ഥലം ലക്ഷ്യസ്ഥാനവും തിരിച്ചിടുക</string>
     <string name="simulate_your_location_stop_descr">"നിങ്ങളുടെ സ്ഥാനം  സിമുലേറ്റ് ചെയ്യുന്നത് നിര്‍ത്തുക"</string>
     <string name="download_live_updates">"പരിഷ്കരണങ്ങള്‍ "</string>
-    <string name="disable_recording_once_app_killed_descrp">"ആപ്പിനെ (അടുത്തകാലത്തുള്ള അപ്പുകള്‍ -ആന്ഡ്രോയിഡ് വഴി)നിര്‍ത്തിയാല്‍ ജി പി എക്സ് റിക്കോഡിങ്ങ് നിര്‍ത്തും. (ഓഎസ്എംആന്ഡിന്റെ ബാക്ക്ഗ്രൗണ്ട് സൂചിക ആന്ഡ്രോയിഡില്‍ നോട്ടിഫിക്കേഷന്‍ പലകയില്‍ നിന്നും  അപ്രത്യ്ക്ഷമാകും"</string>
     <string name="application_dir_change_warning3">പുതിയ ലക്ഷ്യത്തിലേക്കുള്ള OsmAnd ഡാറ്റാ ഫയലുകൾ നീക്കണോ\?</string>
     <string name="storage_directory_multiuser">ഒന്നിലധികം ഉപഭോക്താക്കളുടെ സംഭരണസ്ഥലം</string>
     <string name="agps_data_last_downloaded">അവസാനം ഡൗണ്‍ലോഡ് ചെയ്തത്: %1$s</string>
@@ -2081,7 +2077,6 @@
     <string name="speed_limit_exceed_message">സ്പീഡ് ലിമിറ്റ് ടോളറൻസ് മാർജിൻ തിരഞ്ഞെടുക്കുക, അതിന് മുകളിൽ നിങ്ങൾക്ക് ഒരു വോയ്സ് മുന്നറിയിപ്പ് ലഭിക്കും.</string>
     <string name="fav_point_emoticons_message">സ്ട്രിംഗ് ഇമോട്ടിക്കോണുകൾ ഒരു ഫയലിലേക്ക് ശരിയായി സംരക്ഷിക്കുന്നതിന് പേര് %1$s എന്നതിലേക്ക് പരിഷ്ക്കരിച്ചു.</string>
     <string name="print_route">പ്രിന്റ് റൂട്ട്</string>
-    <string name="save_global_track_interval_descr">" ട്രാക്ക് റെക്കോർഡിംഗിന് പൊതുവായ ലോഗിംഗ് ഇടവേള തിരഞ്ഞെടുക്കുക (മാപ്പിലെ ജിപിഎക്സ് ലോഗിംഗ് വിഡ്ജറ്റ് വഴി പ്രവർത്തനക്ഷമമാക്കിയത്)."</string>
     <string name="save_track_to_gpx_globally_descr">"ജിപിഎക്സ് ഫയലിലേക്കു്  സ്ഥാനം ലോഗ്ഗിങ് ചെയ്യുന്നത്, ഭൂപടത്തിൽ ജിപിഎക്സ് ലോഗിങ് വിഡ്ജെറ്റ് ഉപയോഗിച്ചു് ഓണാക്കുന്നതാണു്."</string>
     <string name="save_current_track_descr">ഇപ്പോൾ നിലവിലുള്ള ട്രാക്ക് ജിപിഎക്സ് ഫയൽ ആയി സംരക്ഷിക്കുക.</string>
     <string name="save_track_to_gpx">നാവിഗേഷൻ സമയത്ത് ട്രാക്ക് ഓട്ടോമാറ്റിക്കായി റെക്കോർഡ് ചെയ്യുക</string>

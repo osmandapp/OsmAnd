@@ -880,7 +880,6 @@
     <string name="no_buildings_found">No se encontraron edificios.</string>
     <string name="search_villages_and_postcodes">Buscar más pueblos/códigos postales</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Fronteras</string>
     <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5–9).</string>
     <string name="index_srtm_parts">piezas</string>
@@ -1270,8 +1269,6 @@
     <string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
     <string name="live_monitoring_stop">Parar seguimiento en línea</string>
-    <string name="gpx_monitoring_start">Continuar grabación GPX</string>
-    <string name="gpx_monitoring_stop">Detener grabación GPX</string>
     <string name="gpx_start_new_segment">Iniciar nuevo segmento</string>
     <string name="lang_fa">Persa</string>
     <string name="lang_al">Albanés</string>
@@ -1317,7 +1314,6 @@
     <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="save_track_to_gpx_globally_descr">Registra la ubicación en un archivo GPX, pudiendo des/activarlo usando el widget de grabación GPX en el mapa.</string>
     <string name="confirm_every_run">Preguntar siempre</string>
-    <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activar mediante el widget de grabación GPX sobre el mapa).</string>
     <string name="save_global_track_interval">Intervalo de registro general</string>
     <string name="traffic_warning_speed_limit">Límite de velocidad</string>
     <string name="traffic_warning_border_control">Control fronterizo</string>
@@ -1559,7 +1555,6 @@
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="gps_network_not_enabled">Servicio de ubicación desactivado. ¿Quieres activarlo?</string>
     <string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
-    <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará al cerrar la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
     <string name="light_theme">Claro</string>
     <string name="dark_theme">Oscuro</string>
     <string name="lang_pms">Piamontés</string>
@@ -1929,7 +1924,6 @@
     <string name="no_waypoints_found">No se encontraron puntos de referencia</string>
     <string name="file_name_containes_illegal_char">El nombre del archivo contiene caracteres ilegales</string>
     <string name="map_mode">Modo del mapa</string>
-    <string name="number_of_gpx_files_selected_pattern">%s archivos GPX elegidos</string>
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_medium_name">Medio</string>
     <string name="rendering_value_bold_name">Grueso</string>
@@ -2333,19 +2327,13 @@
     <string name="animate_my_location">Ubicación propia animada</string>
     <string name="animate_my_location_desc">Activa el desplazamiento animado del mapa para «Mi ubicación» durante la navegación.</string>
     <string name="shared_string_overview">Resumen</string>
-    <string name="osmand_plus_extended_description_part2">Navegación GPS 
+    <string name="osmand_plus_extended_description_part2">Navegación GPS
 \n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero)
-\n
-\n • Guía por voz giro-a-giro (voces grabadas y sintetizadas) 
-\n
-\n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino 
-\n
-\n • Soporta puntos intermedios en el itinerario 
-\n
-\n • La ruta se recalcula al salirse de la misma 
-\n
-\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica 
-\n</string>
+\n • Guía por voz giro-a-giro (voces grabadas y sintetizadas)
+\n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino
+\n • Soporta puntos intermedios en el itinerario
+\n • La ruta se recalcula al salirse de la misma
+\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
 \n • (Opcional) Ajusta el mapa a la dirección del movimiento (o la brújula) 
@@ -2406,7 +2394,7 @@
     <string name="routing_attr_allow_private_description">Permite acceder a áreas privadas.</string>
     <string name="display_zoom_level">Nivel de zoom de pantalla: %1$s</string>
     <string name="route_is_too_long_v2">Para largas distancias: Añada destinos intermedios si no se encuentra ninguna ruta en 10 minutos.</string>
-    <string name="quick_action_showhide_osmbugs_title">Alternar notas de OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">Mostrar u ocultar notas de OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Un botón que muestra u oculta las notas de OSM en el mapa.</string>
@@ -2592,7 +2580,7 @@
     <string name="show_guide_line_descr">Muestra líneas direccionales desde su ubicación hasta los marcadores activos.</string>
     <string name="show_arrows_descr">Muestra una o dos flechas indicando la dirección a los marcadores activos.</string>
     <string name="distance_indication_descr">Elige cómo mostrar la distancia a los marcadores activos.</string>
-    <string name="active_markers_descr">Define el número de indicadores de dirección:</string>
+    <string name="active_markers_descr">Define el número de indicadores de dirección.</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de referencia</string>
     <string name="release_3_0">• Nuevo: Soporte para guías turísticas globales sin conexión a Internet. Las ubicaciones de referencia, están vinculadas al mapa. Datos iniciales de Wikiviajes 
@@ -3562,7 +3550,7 @@
     <string name="add_description">Añade descripción</string>
     <string name="select_group">Elige grupo</string>
     <string name="select_shape">Elige forma</string>
-    <string name="replace_point_descr">Reemplazar otro punto con este</string>
+    <string name="replace_point_descr">Reemplazar otro punto con este.</string>
     <string name="changes_applied_to_profile">Cambios aplicados al perfil \'%1$s\'.</string>
     <string name="settings_item_read_error">No se pudo leer \'%1$s\'.</string>
     <string name="settings_item_write_error">No se pudo escribir \'%1$s\'.</string>
@@ -3724,7 +3712,7 @@
 \nUn día son 1.440 minutos.
 \nUna semana son 10.080 minutos.
 \nUn mes son 43.829 minutos.</string>
-    <string name="tiles_storage_descr">Elige cómo se guardarán las teselas descargadas</string>
+    <string name="tiles_storage_descr">Elige cómo se guardarán las teselas descargadas.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Puedes Exportar o Importar acciones rápidas con perfiles de aplicación.</string>
     <string name="shared_string_delete_all_q">¿Eliminar todo\?</string>
     <string name="delete_all_actions_message_q">¿Estás seguro de que deseas eliminar irrevocablemente% d acciones rápidas\?</string>
@@ -3804,4 +3792,27 @@
     <string name="plan_route_open_existing_track">Abrir la pista existente</string>
     <string name="plan_route_create_new_route">Crea una nueva ruta</string>
     <string name="plan_a_route">Planea una ruta</string>
+    <string name="plan_route_change_route_type_before">Cambiar el tipo de ruta antes</string>
+    <string name="delete_address">Borrar dirección</string>
+    <string name="add_address">Añadir dirección</string>
+    <string name="access_hint_enter_address">Introducir la dirección</string>
+    <string name="shared_string_done">Hecho</string>
+    <string name="simplified_track">Traza simplificada</string>
+    <string name="simplified_track_description">Sólo se grabará la línea de la ruta, los puntos intermedios (waypoints) se borrarán.</string>
+    <string name="shared_string_file_name">Nombre de archivo</string>
+    <string name="number_of_gpx_files_selected_pattern">%s archivos de traza seleccionados</string>
+    <string name="monitoring_control_start">GRABAR</string>
+    <string name="save_global_track_interval_descr">Especifica el intervalo de grabación general para trazas (habilitado a través del widget de grabación en el mapa).</string>
+    <string name="gpx_monitoring_stop">Pausar grabación del viaje</string>
+    <string name="gpx_monitoring_start">Seguir grabando el viaje</string>
+    <string name="system_default_theme">Predeterminado del sistema</string>
+    <string name="all_next_segments">Todos los segmentos siguientes</string>
+    <string name="previous_segment">Segmento anterior</string>
+    <string name="all_previous_segments">Todos los segmentos anteriores</string>
+    <string name="only_selected_segment_recalc">Sólo se recalculará el segmento elegido usando el perfil seleccionado.</string>
+    <string name="all_next_segments_will_be_recalc">Todos los segmentos siguientes se recalcularán usando el perfil seleccionado.</string>
+    <string name="all_previous_segments_will_be_recalc">Todos los segmentos anteriores se recalcularán usando el perfil seleccionado.</string>
+    <string name="open_saved_track">Abrir traza guardada</string>
+    <string name="shared_string_is_saved">está guardada</string>
+    <string name="one_point_error">Añade al menos dos puntos.</string>
 </resources>

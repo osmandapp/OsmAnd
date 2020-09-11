@@ -11,6 +11,35 @@
 	Thx - Hardy
 
 -->
+    <string name="release_3_8">
+    • Updated "Plan Route" mode allows using different navigation types for each segment and attaches any track to the roads\n\n
+    • New "Appearance" options for tracks: select color, thickness turn on the direction arrows and start/finish marks\n\n
+    • Improved bicycle nodes visibility\n\n
+    • Context menu for tracks with basic info\n\n
+    • Improved "Search" algorithms\n\n
+    • Improved "Follow track" options in Navigation\n\n
+    • Fixed issues with import/export of profile settings\n\n
+    </string>
+    <string name="shared_string_redo">Redo</string>
+    <string name="one_point_error">Please add at least two points.</string>
+    <string name="shared_string_is_saved">is saved</string>
+    <string name="open_saved_track">Open saved track</string>
+    <string name="all_previous_segments_will_be_recalc">All previous segments will be recalculated using the selected profile.</string>
+    <string name="all_next_segments_will_be_recalc">All subsequent segments will be recalculated using the selected profile.</string>
+    <string name="only_selected_segment_recalc">Only the selected segment will be recalculated using the selected profile.</string>
+    <string name="all_previous_segments">All previous segments</string>
+    <string name="previous_segment">Previous segment</string>
+    <string name="all_next_segments">All subsequent segments</string>
+    <string name="system_default_theme">System default</string>
+    <string name="gpx_monitoring_start">Resume trip recording</string>
+    <string name="gpx_monitoring_stop">Pause trip recording</string>
+    <string name="save_global_track_interval_descr">Specify the logging interval for the general track recording (enabled via the Trip recording widget on the map).</string>
+    <string name="disable_recording_once_app_killed_descrp">Will pause track logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="number_of_gpx_files_selected_pattern">%s track files selected</string>
+    <string name="shared_string_file_name">File name</string>
+    <string name="simplified_track_description">Only the route line will be saved, the waypoints will be deleted.</string>
+    <string name="simplified_track">Simplified track</string>
     <string name="plan_route_change_route_type_after">Change route type after</string>
     <string name="plan_route_change_route_type_before">Change route type before</string>
     <string name="plan_route_trim_after">Trim after</string>
@@ -35,7 +64,6 @@
     <string name="empty_state_my_tracks">Add track files</string>
     <string name="shared_string_gpx_route">Track route</string>
     <string name="save_track_to_gpx_globally">Log track to GPX file</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="show_gpx">Tracks</string>
     <string name="layer_gpx_layer">Tracks</string>
     <string name="shared_string_gpx_files">Tracks</string>
@@ -52,7 +80,7 @@
     <string name="whole_track">Whole track</string>
     <string name="rourte_between_points_desc">Select how to connect points, with a straight line, or calculate a route between them with selected profile.</string>
     <string name="rourte_between_points_next_segment_button_desc">Only the next segment will be recalculated using selected profile.</string>
-    <string name="rourte_between_points_whole_track_button_desc">The whole track will be recalculated using the selected profile.</string>
+    <string name="rourte_between_points_whole_track_button_desc">The whole track will be recalculated using the selected profile.
     <string name="reverse_route">Reverse route</string>
     <string name="save_as_new_track">Save as new track</string>
     <string name="overwrite_track">Overwrite track</string>
@@ -871,10 +899,10 @@
     <string name="shared_string_swap">Swap</string>
     <string name="show_more">Show more</string>
     <string name="tracks_on_map">Displayed tracks</string>
-    <string name="quick_action_show_hide_gpx_tracks">Show/hide GPX tracks</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">A button to show or hide selected GPX tracks on the map.</string>
-    <string name="quick_action_gpx_tracks_hide">Hide GPX Tracks</string>
-    <string name="quick_action_gpx_tracks_show">Show GPX Tracks</string>
+    <string name="quick_action_show_hide_gpx_tracks">Show/hide tracks</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">A button to show or hide selected tracks on the map.</string>
+    <string name="quick_action_gpx_tracks_hide">Hide Tracks</string>
+    <string name="quick_action_gpx_tracks_show">Show Tracks</string>
     <string name="add_destination_query">Please set the destination first</string>
     <string name="previous_route">Previous route</string>
     <string name="add_home">Add home</string>
@@ -1276,7 +1304,7 @@
     <string name="mapillary_widget">Mapillary widget</string>
     <string name="mapillary_widget_descr">Allows quick contributions to Mapillary.</string>
     <string name="mapillary_descr">Online street-level photos for everyone. Discover places, collaborate, capture the world.</string>
-    <string name="mapillary">Street-level imagery</string>
+    <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Street-level photos for everyone. Discover places, collaborate, capture the world.</string>
     <string name="private_access_routing_req">Your destination is located in an area with private access. Allow using private roads for this trip?</string>
     <string name="restart_search">Restart search</string>
@@ -1444,8 +1472,8 @@
     <string name="route_roundabout_short">Take %1$d exit and go</string>
     <string name="upload_poi">Upload POI</string>
     <string name="route_calculation">Route calculation</string>
-    <string name="gpx_no_tracks_title">You do not have any GPX files yet</string>
-    <string name="gpx_no_tracks_title_folder">You may also add GPX files to the folder</string>
+    <string name="gpx_no_tracks_title">You do not have any track files yet</string>
+    <string name="gpx_no_tracks_title_folder">You may also add track files to the folder</string>
     <string name="gpx_add_track">Add more…</string>
     <string name="shared_string_appearance">Appearance</string>
     <string name="trip_rec_notification_settings">Turn on quick recording</string>
@@ -1515,7 +1543,7 @@
     <string name="no_inet_connection_desc_map">Required to download maps.</string>
     <string name="search_location">Searching for location…</string>
     <string name="storage_free_space">Free space</string>
-    <string name="storage_place_description">OsmAnd\'s data storage (for maps, GPX files, etc.): %1$s.</string>
+    <string name="storage_place_description">OsmAnd\'s data storage (for maps, track files, etc.): %1$s.</string>
     <string name="give_permission">Grant permission</string>
     <string name="allow_access_location">Allow location access</string>
     <string name="first_usage_greeting">Get directions and discover new places without an Internet connection</string>
@@ -1595,7 +1623,6 @@
     <string name="access_shared_string_navigate_up">Navigate up</string>
     <string name="access_sort">Sort</string>
     <string name="map_mode">Map mode</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX files selected</string>
     <string name="rendering_value_fine_name">Fine</string>
     <string name="rendering_value_thin_name">Thin</string>
     <string name="rendering_value_medium_name">Medium</string>
@@ -1903,7 +1930,6 @@
     <string name="download_wikipedia_files">Download additional Wikipedia data (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Location service is off. Turn it on?</string>
     <string name="disable_recording_once_app_killed">Prevent standalone logging</string>
-    <string name="disable_recording_once_app_killed_descrp">Will pause GPX logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
     <string name="shared_string_import2osmand">Import to OsmAnd</string>
     <string name="read_full_article">Read full article (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -2213,7 +2239,6 @@
     <string name="sleep_mode_stop_dialog">Stop GPS background mode?</string>
     <string name="stop_navigation_service">Stop</string>
     <string name="confirm_every_run">Always ask</string>
-    <string name="save_global_track_interval_descr">Specify the logging interval for the general track recording (enabled via the GPX logging widget on the map).</string>
     <string name="save_global_track_interval">General logging interval</string>
     <string name="background_service_int">GPS Wake-up interval</string>
     <string name="enable_sleep_mode">Enable GPS background mode</string>
@@ -2266,8 +2291,6 @@
     <string name="live_monitoring_m">Online tracking (GPX required)</string>
     <string name="live_monitoring_start">Start online tracking</string>
     <string name="live_monitoring_stop">Stop online tracking</string>
-    <string name="gpx_monitoring_start">Resume GPX logging</string>
-    <string name="gpx_monitoring_stop">Pause GPX logging</string>
     <string name="gpx_start_new_segment">Start new segment</string>
     <string name="rendering_attr_hideBuildings_name">Buildings</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Non-vehicle highways</string>

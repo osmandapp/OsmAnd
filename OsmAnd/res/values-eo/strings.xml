@@ -304,7 +304,6 @@
     <string name="download_wikipedia_files">Ĉu elŝuti aldonajn Vikipediajn datumojn (%1$s MB)\?</string>
     <string name="gps_network_not_enabled">Pozici-trova servo estas malaktiva. Ĉu aktivigi ĝin?</string>
     <string name="disable_recording_once_app_killed">Preventi de aŭtomata protokolado</string>
-    <string name="disable_recording_once_app_killed_descrp">Paŭzigi GPX-protokoladon je halto de la aplikaĵo (per lastaj aplikaĵoj). (Fona piktogramo de OsmAnd malaperas de Androida sciiga breto.)</string>
     <string name="read_full_article">Legi tutan artikolon (enrete)</string>
     <string name="shared_string_show_details">Montri detalojn</string>
     <string name="osm_edit_context_menu_delete">Forigi OSM-redaktojn</string>
@@ -589,7 +588,6 @@
     <string name="stop_navigation_service">Ĉesigi</string>
     <string name="confirm_every_run">Demandi ĉiam</string>
     <string name="save_global_track_interval">Ĝenerala registrada intervalo</string>
-    <string name="save_global_track_interval_descr">Elekti intervalon de registrado por ĝenerala registrado de kurso (aktivigita per la GPX-registrada fenestraĵo sur la mapo).</string>
     <string name="background_service_int">GPS-a vekintervalo</string>
     <string name="enable_sleep_mode">Aktivigi GPS-an fonan reĝimon</string>
     <string name="save_track_to_gpx_globally_headline">Registri spuron laŭpete</string>
@@ -629,9 +627,7 @@
     <string name="live_monitoring_m">Enreta spur-registrado (GPX bezonata)</string>
     <string name="live_monitoring_m_descr">Sendi datumojn de spuroj al difinita retservo, se GPX-registrado estas aktiva.</string>
     <string name="live_monitoring_start">Ekigi enretan kurs-registradon</string>
-    <string name="gpx_monitoring_start">Pluigi GPX-registradon</string>
     <string name="live_monitoring_stop">Ĉesigi enretan kurs-registradon</string>
-    <string name="gpx_monitoring_stop">Paŭzigi GPX-registradon</string>
     <string name="gpx_start_new_segment">Ekigi novan segmenton</string>
     <string name="rendering_attr_hideBuildings_name">Konstruaĵoj</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Vojoj ne por aŭtoj</string>
@@ -777,7 +773,6 @@
     <string name="access_shared_string_navigate_up">Supren</string>
     <string name="access_sort">Ordigi</string>
     <string name="map_mode">Map-reĝimo</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX-dosieroj elektitaj</string>
     <string name="rendering_value_thin_name">Maldika</string>
     <string name="rendering_value_medium_name">Meza</string>
     <string name="rendering_value_bold_name">Dika</string>
@@ -1008,7 +1003,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Limoj</string>
     <string name="rendering_attr_noAdminboundaries_description">Ne montri regionajn limojn (administraciaj niveloj 5–9).</string>
     <string name="map_widget_max_speed">Rapidlimo</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Neniu konstruaĵo trovita.</string>
     <string name="incremental_search_city">Serĉi urbon tajpante komencajn literojn</string>
     <string name="search_villages_and_postcodes">Serĉi pli vilaĝojn/poŝtkodojn</string>
@@ -2482,7 +2476,7 @@
     <string name="choose_navigation_type">Elektu profilon de navigo</string>
     <string name="add_route_points">Aldoni kurspunktojn</string>
     <string name="add_line">Aldoni linion</string>
-    <string name="empty_state_favourites">Aldoni ŝatatajn</string>
+    <string name="empty_state_favourites">Aldoni ŝatatan punkton</string>
     <string name="empty_state_favourites_desc">Enportu ŝatatajn punktojn aŭ aldonu ilin per map‑markoj al la mapo.</string>
     <string name="import_track">Enporti GPX-dosieron</string>
     <string name="import_track_desc">Dosiero %1$s ne enhavas navigadpunktojn, ĉe enporti ĝin kiel spuron?</string>
@@ -3827,18 +3821,48 @@
     <string name="overwrite_track">Superskribi kurson</string>
     <string name="save_as_new_track">Konservi kiel novan spuron</string>
     <string name="reverse_route">Inversigi kurson</string>
-    <string name="rourte_between_points_whole_track_button_desc">Tuta kurso estos rekalkulita uzante la elektitan profilon.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Nur sekva segmento estos rekalkulita uzante la elektitan profilon.</string>
-    <string name="rourte_between_points_desc">Elektu kiel konekti punktojn: ĉu per rekta linio, ĉu kalkuli kurson inter ilin uzante la elektitan profilon.</string>
+    <string name="route_between_points_whole_track_button_desc">Tuta kurso estos rekalkulita uzante la elektitan profilon.</string>
+    <string name="route_between_points_next_segment_button_desc">Nur sekva segmento estos rekalkulita uzante la elektitan profilon.</string>
+    <string name="route_between_points_desc">Elektu kiel konekti punktojn: ĉu per rekta linio, ĉu kalkuli kurson inter ilin uzante la elektitan profilon.</string>
     <string name="whole_track">Tuta kurso</string>
     <string name="next_segment">Sekva segmento</string>
-    <string name="rourte_between_points_warning_desc">Por uzi tiun ĉi agordon, OsmAnd postulas ĝustigi vian kurson al vojoj sur la mapo.
+    <string name="route_between_points_warning_desc">Por uzi tiun ĉi agordon, OsmAnd postulas ĝustigi vian kurson al vojoj sur la mapo.
 \n
 \n Sekve vi devos elekti profilon de navigo (por trovi permesatajn vojojn) kaj sojlan distancon (por alproksimigi vian kurson al vojoj).</string>
     <string name="threshold_distance">Sojla distanco</string>
     <string name="navigation_profile">Profilo de navigo</string>
-    <string name="rourte_between_points_add_track_desc">Elektu dosieron de spuro al kiu nova segmento estos aldonita.</string>
+    <string name="route_between_points_add_track_desc">Elektu dosieron de spuro al kiu nova segmento estos aldonita.</string>
     <string name="street_level_imagery">Strat-nivela fotaro</string>
     <string name="plan_route_exit_dialog_descr">Ĉu vi certe volas fermi planadon de kurso sen konservi\? Ĉiuj viaj ŝanĝoj perdiĝos.</string>
     <string name="in_case_of_reverse_direction">Kiam en inversa direkto</string>
+    <string name="save_track_to_gpx">Aŭtomate registri spuron dum navigi</string>
+    <string name="shared_string_save_as_gpx">Konservi kiel novan dosieron de spuro</string>
+    <string name="add_segment_to_the_track">Aldoni al dosiero de spuro</string>
+    <string name="shared_string_gpx_files">Spuroj</string>
+    <string name="layer_gpx_layer">Spuroj</string>
+    <string name="show_gpx">Spuroj</string>
+    <string name="save_track_to_gpx_globally">Registri spuron al GPX-dosiero</string>
+    <string name="shared_string_gpx_route">Spuro de kurso</string>
+    <string name="empty_state_my_tracks">Aldoni spuron</string>
+    <string name="empty_state_my_tracks_desc">Registru novan spuron aŭ enportu dosierojn de spuroj</string>
+    <string name="context_menu_item_add_waypoint">Aldoni navigadpunkton al spuro</string>
+    <string name="quick_action_add_gpx">Aldoni navigadpunkton al spuro</string>
+    <string name="map_widget_monitoring">Registri spuron</string>
+    <string name="marker_save_as_track">Konservi kiel dosieron de kurso</string>
+    <string name="import_track_descr">Elekti dosieron de spuro por sekvi aŭ enporti el la aparato.</string>
+    <string name="select_another_track">Elekti alian spuron</string>
+    <string name="navigate_to_track_descr">Navigi el mia pozicio al la spuro</string>
+    <string name="pass_whole_track_descr">Punkto de spuro por navigi</string>
+    <string name="start_of_the_track">Komenco de spuro</string>
+    <string name="follow_track">Sekvi spuron</string>
+    <string name="follow_track_descr">Elekti dosieron de spuro por sekvi</string>
+    <string name="nearest_point">Plej proksima punkto</string>
+    <string name="attach_to_the_roads">Alproksimigi al vojoj</string>
+    <string name="delete_address">Forigi adreson</string>
+    <string name="add_address">Aldoni adreson</string>
+    <string name="access_hint_enter_address">Enigu adreson</string>
+    <string name="plan_route_trim_before">Tondi antaŭ</string>
+    <string name="plan_route_trim_after">Tondi post</string>
+    <string name="plan_route_change_route_type_before">Ŝanĝi specon de vojo antaŭ</string>
+    <string name="plan_route_change_route_type_after">Ŝanĝi specon de vojo post</string>
 </resources>

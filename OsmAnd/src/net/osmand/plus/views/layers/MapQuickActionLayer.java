@@ -426,6 +426,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
                 mapRouteInfoMenu.isVisible() ||
                 MapRouteInfoMenu.chooseRoutesVisible ||
                 MapRouteInfoMenu.waypointsVisible ||
+                MapRouteInfoMenu.followTrackVisible ||
                 contextMenu.isVisible() && contextMenuMenuFragment != null && !contextMenuMenuFragment.isRemoving() ||
                 contextMenu.isVisible() && contextMenuMenuFragment != null && contextMenuMenuFragment.isAdded() ||
                 multiSelectionMenu.isVisible() && multiMenuFragment != null && multiMenuFragment.isAdded() ||

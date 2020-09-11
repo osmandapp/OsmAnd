@@ -56,15 +56,15 @@
 		android:layout_gravity="end|center_vertical"
 		android:layout_marginLeft="1dp"
 		android:layout_marginRight="1dp"
-		android:paddingLeft="@dimen/route_info_icon_vertical_padding"
 		android:paddingTop="3dp"
+		android:paddingLeft="@dimen/route_info_icon_vertical_padding"
 		android:paddingRight="@dimen/route_info_icon_vertical_padding"
+		android:paddingStart="@dimen/route_info_icon_vertical_padding"
+		android:paddingEnd="@dimen/route_info_icon_vertical_padding"
 		android:paddingBottom="3dp"
 		android:contentDescription="@string/shared_string_remove"
 		tools:src="@drawable/ic_action_remove_dark"
 		android:layout_marginEnd="1dp"
-		android:paddingStart="@dimen/route_info_icon_vertical_padding"
-		android:paddingEnd="@dimen/route_info_icon_vertical_padding"
 		android:layout_marginStart="1dp" />
 
 	<View

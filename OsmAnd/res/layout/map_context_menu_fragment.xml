@@ -175,6 +175,38 @@
                     android:paddingTop="3dp">
 
                     <LinearLayout
+                        android:id="@+id/compass_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/direction"
+                            android:layout_width="@dimen/directionIconSize"
+                            android:layout_height="@dimen/directionIconSize"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="1sp"
+                            tools:src="@drawable/ic_direction_arrow"/>
+
+                        <TextView
+                            android:id="@+id/distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginStart="2dp"
+                            android:textSize="@dimen/default_desc_text_size"
+                            tools:text="100500 km"
+                            tools:textColor="?android:textColorSecondary"/>
+
+                        <View
+                            android:id="@+id/favourite_right_point_space"
+                            android:layout_width="@dimen/text_margin_small"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/additional_info_row"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -188,7 +220,7 @@
                             android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                             android:layout_weight="1"
                             android:ellipsize="end"
-                            android:maxLines="1"
+                            android:maxLines="2"
                             osmand:typeface="@string/font_roboto_medium"
                             tools:text="Some really long string"/>
 
@@ -222,32 +254,6 @@
                             android:visibility="gone"
                             tools:visibility="visible"/>
 
-                        <LinearLayout
-                            android:id="@+id/compass_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/direction"
-                                android:layout_width="@dimen/directionIconSize"
-                                android:layout_height="@dimen/directionIconSize"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginTop="1sp"
-                                tools:src="@drawable/ic_direction_arrow"/>
-
-                            <TextView
-                                android:id="@+id/distance"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="2dp"
-                                android:layout_marginStart="2dp"
-                                android:textSize="@dimen/default_desc_text_size"
-                                tools:text="100500 km"
-                                tools:textColor="?android:textColorSecondary"/>
-
-                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>

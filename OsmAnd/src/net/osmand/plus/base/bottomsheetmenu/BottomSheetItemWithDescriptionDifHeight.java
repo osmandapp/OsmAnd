@@ -8,7 +8,8 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
-import androidx.core.view.ViewCompat;
+
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class BottomSheetItemWithDescriptionDifHeight extends BottomSheetItemWithDescription {
 
@@ -50,22 +51,19 @@ public class BottomSheetItemWithDescriptionDifHeight extends BottomSheetItemWith
 
 	}
 
-
 	@Override
 	public void inflate(Context context, ViewGroup container, boolean nightMode) {
 		super.inflate(context, container, nightMode);
-		if (minHeight == 0) {
-			minHeight = ViewCompat.getMinimumHeight(view);
+		if (minHeight != INVALID_VALUE) {
+			LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+			params.height = WRAP_CONTENT;
+			view.setMinimumHeight(minHeight);
 		}
-		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-		params.height = minHeight;
-		view.setMinimumHeight(minHeight);
-
 	}
 
 	public static class Builder extends BottomSheetItemWithDescription.Builder {
 
-		int minHeight;
+		int minHeight = INVALID_VALUE;
 
 		public Builder setMinHeight(int minHeight) {
 			this.minHeight = minHeight;

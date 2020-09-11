@@ -860,7 +860,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="map_widget_max_speed">Rychlostní omezení</string>
     <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic (administrativní úrovně 5-9).</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
@@ -1241,8 +1240,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="live_monitoring_m">On-line sledování (vyžaduje GPX)</string>
     <string name="live_monitoring_start">Spustit on-line sledování</string>
     <string name="live_monitoring_stop">Zastavit on-line sledování</string>
-    <string name="gpx_monitoring_start">Pokračovat v GPX logování</string>
-    <string name="gpx_monitoring_stop">Pozastavit GPX logování</string>
     <string name="gpx_start_new_segment">Začít nový segment</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Cesty, které nejsou pro vozidla</string>
     <string name="rendering_attr_buildings15zoom_name">Budovy při přiblížení 15</string>
@@ -1297,7 +1294,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="speak_poi">Blízké body zájmu POI</string>
     <string name="save_track_to_gpx_globally_descr">Záznam do GPX souboru může být zapnut nebo vypnut pomocí widgetu Záznam trasy na mapové obrazovce.</string>
     <string name="confirm_every_run">Vždy se zeptat</string>
-    <string name="save_global_track_interval_descr">Vybrat interval ukládání pro globální záznam trasy (aktivovaný přes widget Záznam trasy na mapové obrazovce).</string>
     <string name="save_global_track_interval">Globální interval záznamu</string>
     <string name="traffic_warning_speed_limit">Rychlostní limit</string>
     <string name="traffic_warning_border_control">Hraniční kontrola</string>
@@ -1565,7 +1561,6 @@ Délka %2$s</string>
     <string name="download_wikipedia_files">Stáhnout dodatečná Wikipedia data (%1$s MB) \?</string>
     <string name="gps_network_not_enabled">Služba zjištění polohy není zapnuta. Aktivovat\?</string>
     <string name="disable_recording_once_app_killed">Zabránit samostatnému logování</string>
-    <string name="disable_recording_once_app_killed_descrp">Pozastaví záznam GPX trasy pokud je aplikace ukončena (přes nedávné aplikace). (OsmAnd indikátor zmizí ze stavového řádku Androidu.)</string>
     <string name="download_live_updates">Okamžité aktualizace</string>
     <string name="no_updates_available">Nejsou dostupné žádné aktualizace</string>
     <string name="traffic_warning_hazard">Nebezpečí</string>
@@ -1932,7 +1927,6 @@ Délka %2$s</string>
     <string name="access_shared_string_navigate_up">Navigovat nahoru</string>
     <string name="access_sort">Setřídit</string>
     <string name="map_mode">Režim mapy</string>
-    <string name="number_of_gpx_files_selected_pattern">%s vybraných GPX souborů</string>
     <string name="rendering_value_thin_name">Tenké</string>
     <string name="rendering_value_medium_name">Střední</string>
     <string name="rendering_value_bold_name">Tučné</string>
@@ -3427,7 +3421,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="favorites_item">Oblíbené</string>
     <string name="subscription_osmandlive_item">Předplatné - OsmAnd Live</string>
     <string name="osmand_purchases_item">Nákupy v OsmAnd</string>
-    <string name="legend_item_description">Průvodce symboly na mapě</string>
+    <string name="legend_item_description">Průvodce symboly na mapě.</string>
     <string name="navigation_profiles_item">Navigační profily</string>
     <string name="release_3_7">• Nové offline mapy svahů
 \n
@@ -3475,7 +3469,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="track_show_start_finish_icons">Zobrazit ikony startu a cíle</string>
     <string name="select_track_width">Zvolte šířku</string>
     <string name="gpx_split_interval_descr">Vyberte interval pro zobrazování značek na trase se vzdáleností nebo časem.</string>
-    <string name="gpx_split_interval_none_descr">Vyberte požadované dělení: podle času nebo podle vzdálenosti.</string>
+    <string name="gpx_split_interval_none_descr">Vyberte požadovaný způsob dělení: podle času nebo podle vzdálenosti.</string>
     <string name="shared_string_custom">Vlastní</string>
     <string name="gpx_direction_arrows">Směrové šipky</string>
     <string name="plan_route_last_edited">Naposledy upraveno</string>
@@ -3493,4 +3487,42 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="app_mode_motor_scooter">Motorový skútr</string>
     <string name="app_mode_wheelchair">Invalidní vozík</string>
     <string name="app_mode_wheelchair_forward">Invalidní vozík vpřed</string>
+    <string name="context_menu_item_add_waypoint">Přidat mezicíl</string>
+    <string name="quick_action_add_gpx">Přidat mezicíl</string>
+    <string name="map_widget_monitoring">Záznam trasy</string>
+    <string name="marker_save_as_track">Uložit jako soubor trasy</string>
+    <string name="follow_track">Sledovat trasu</string>
+    <string name="follow_track_descr">Zvolte soubor trasy, kterou chcete sledovat</string>
+    <string name="import_track_descr">Zvolte soubor trasy, kterou chcete sledovat, nebo jej importujte ze zařízení.</string>
+    <string name="select_another_track">Zvolit jinou trasu</string>
+    <string name="navigate_to_track_descr">Navigovat z mé polohy k trase</string>
+    <string name="pass_whole_track_descr">Bod trasy pro navigování</string>
+    <string name="start_of_the_track">Začátek trasy</string>
+    <string name="nearest_point">Nejbližší bod</string>
+    <string name="attach_to_the_roads">Připojit k cestám</string>
+    <string name="delete_address">Smazat adresu</string>
+    <string name="add_address">Přidat adresu</string>
+    <string name="access_hint_enter_address">Zadat adresu</string>
+    <string name="plan_route_trim_before">Oříznout před</string>
+    <string name="plan_route_trim_after">Oříznout po</string>
+    <string name="plan_route_change_route_type_before">Změnit typ trasy před</string>
+    <string name="plan_route_change_route_type_after">Změnit typ trasy po</string>
+    <string name="video_notes">Video poznámky</string>
+    <string name="vessel_height_limit_description">Nastavte výšku plavidla, abyste se vyhnuli nízkým mostům. Mějte na paměti, že u pohyblivých mostů se zohledňuje jejich výška v otevřeném stavu.</string>
+    <string name="vessel_width_limit_description">Nastavte šířku plavidla, abyste se vyhnuli úzkým mostům</string>
+    <string name="quick_action_showhide_mapillary_title">Zobrazit/skrýt Mapillary</string>
+    <string name="quick_action_mapillary_hide">Skrýt Mapillary</string>
+    <string name="quick_action_mapillary_show">Zobrazit Mapillary</string>
+    <string name="quick_action_showhide_mapillary_descr">Přepínač pro zobrazení nebo skrytí mapové vrstvy Mapillary.</string>
+    <string name="routing_attr_length_description">Zadejte délku vozidla, která musí být na trase povolená.</string>
+    <string name="routing_attr_length_name">Omezení délky</string>
+    <string name="shared_string_bearing">Azimut</string>
+    <string name="item_deleted">%1$s smazáno</string>
+    <string name="speed_cameras_restart_descr">Ke kompletnímu smazání dat o rychlostních radarech je nutný restart.</string>
+    <string name="shared_string_uninstall_and_restart">Odinstalovat a restartovat</string>
+    <string name="speed_cameras_removed_descr">Toto zařízení nemá rychlostní kamery.</string>
+    <string name="app_mode_inline_skates">Inline brusle</string>
+    <string name="quick_action_remove_next_destination">Smazat následující cílový bod</string>
+    <string name="use_volume_buttons_as_zoom_descr">Umožní ovládat úroveň přiblížení mapy pomocí tlačítek hlasitosti zařízení.</string>
+    <string name="use_volume_buttons_as_zoom">Tlačítka hlasitosti pro přibližování</string>
 </resources>

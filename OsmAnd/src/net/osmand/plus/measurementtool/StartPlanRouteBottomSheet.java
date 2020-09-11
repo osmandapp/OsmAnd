@@ -19,7 +19,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
@@ -38,7 +38,7 @@ import java.util.List;
 
 import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 
-public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
+public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragment {
 
 	public static final String TAG = StartPlanRouteBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(StartPlanRouteBottomSheet.class);
@@ -136,8 +136,8 @@ public class StartPlanRouteBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	protected int getCustomHeight() {
-		return AndroidUtils.dpToPx(mainView.getContext(), BOTTOM_SHEET_HEIGHT_DP);
+	protected int getPeekHeight() {
+		return AndroidUtils.dpToPx(getContext(), BOTTOM_SHEET_HEIGHT_DP);
 	}
 
 	private void onItemClick(int position, List<GPXInfo> gpxInfoList) {

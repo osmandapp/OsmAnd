@@ -20,7 +20,6 @@
     <string name="sleep_mode_stop_dialog">Deter o modo de segundo plano do GPS?</string>
     <string name="stop_navigation_service">Deter</string>
     <string name="confirm_every_run">Preguntar sempre</string>
-    <string name="save_global_track_interval_descr">Especifica o intre de rexistro para a gravación xeral de pistas (activar mediante o trebello da gravación GPX no mapa).</string>
     <string name="save_global_track_interval">Intre de rexistro xeral</string>
     <string name="background_service_int">Intre de activación do GPS</string>
     <string name="enable_sleep_mode">Activar o modo de segundo plano do GPS</string>
@@ -69,8 +68,6 @@
     <string name="live_monitoring_m">Seguimento con conexión (requírese GPX)</string>
     <string name="live_monitoring_start">Iniciar o seguimento con conexión</string>
     <string name="live_monitoring_stop">Deter o seguemento con conexión</string>
-    <string name="gpx_monitoring_start">Retomar a gravación de GPX</string>
-    <string name="gpx_monitoring_stop">Deter a gravación de GPX</string>
     <string name="gpx_start_new_segment">Comezar un segmento novo</string>
     <string name="rendering_attr_hideBuildings_name">Edificios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Estradas que non sexan para vehículos</string>
@@ -1615,7 +1612,6 @@ Lon %2$s</string>
     <string name="av_locations">Localizacións</string>
     <string name="rendering_value_boldOutline_name">Bordo groso</string>
     <string name="lang_nv">Navaho</string>
-    <string name="disable_recording_once_app_killed_descrp">Detén o rexistro de GPX cando se pecha a aplicación (mediante a lapela de aplicacións recentes). (A indicación do OsmAnd desaparece da barra das notificacións do Android.)</string>
     <string name="agps_info">Información de A-GPS</string>
     <string name="agps_data_last_downloaded">Datos A-GPS baixados: %1$s</string>
     <string name="delay_to_start_navigation_descr">Indicar o tempo de espera durante o que ficar na pantalla de planificación das rutas.</string>
@@ -1985,7 +1981,6 @@ Lon %2$s</string>
     <string name="access_expanded_list">Listaxe despregada</string>
     <string name="access_empty_list">Listaxe baleira</string>
     <string name="access_tree_list">Listaxe en árbore</string>
-    <string name="number_of_gpx_files_selected_pattern">%s ficheiros GPX seleccionados</string>
     <string name="osmand_plus_banner_desc">Descargas ilimitadas dos mapas, actualizacións e plugin da Wikipedia.</string>
     <string name="routing_attr_short_way_name">Camiño con aforro no combustíbel</string>
     <string name="routing_attr_short_way_description">Empregar o camiño con aforro no combustíbel (normalmente máis curto).</string>

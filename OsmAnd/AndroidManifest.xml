@@ -489,6 +489,13 @@
 				<category android:name="android.intent.category.BROWSABLE" />
 			</intent-filter>
 			<intent-filter>
+				<data android:host="ge0.me" android:scheme="https"/>
+				<data android:host="ge0.me" android:scheme="http"/>
+				<action android:name="android.intent.action.VIEW"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+			</intent-filter>
+			<intent-filter>
 				<data android:scheme="http" android:host="openstreetmap.de" android:pathPrefix="/karte" />
 				<data android:scheme="https" android:host="openstreetmap.de" android:pathPrefix="/karte" />
 				<action android:name="android.intent.action.VIEW" />

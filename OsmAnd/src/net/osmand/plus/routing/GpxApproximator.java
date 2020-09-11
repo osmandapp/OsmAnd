@@ -140,13 +140,13 @@ public class GpxApproximator {
 
 	public void cancelApproximation() {
 		if (gctx != null) {
-			gctx.calculationCancelled = true;
+			gctx.ctx.calculationProgress.isCancelled = true;
 		}
 	}
 
 	public void calculateGpxApproximation(@NonNull final ResultMatcher<GpxRouteApproximation> resultMatcher) {
 		if (gctx != null) {
-			gctx.calculationCancelled = true;
+			gctx.ctx.calculationProgress.isCancelled = true;
 		}
 		final GpxRouteApproximation gctx = getNewGpxApproximationContext(this.gctx);
 		this.gctx = gctx;
@@ -187,10 +187,10 @@ public class GpxApproximator {
 				@Override
 				public void run() {
 					RouteCalculationProgress calculationProgress = gctx.ctx.calculationProgress;
-					if (gctx.isCalculationDone() && GpxApproximator.this.gctx == gctx) {
+					if (!gctx.result.isEmpty() && GpxApproximator.this.gctx == gctx) {
 						finishProgress();
 					}
-					if (!gctx.isCalculationDone() && calculationProgress != null && !calculationProgress.isCancelled) {
+					if (gctx.result.isEmpty() && calculationProgress != null && !calculationProgress.isCancelled) {
 						float pr = calculationProgress.getLinearProgress();
 						approximationProgress.updateProgress((int) pr);
 						if (GpxApproximator.this.gctx != gctx) {

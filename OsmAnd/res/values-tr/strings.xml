@@ -1213,7 +1213,6 @@
     <string name="lang_et">Estonca</string>
     <string name="lang_ceb">Sabuanca</string>
     <string name="disable_recording_once_app_killed">Tek başına günlüğe eklemeyi önle</string>
-    <string name="disable_recording_once_app_killed_descrp">Uygulama kapatılırsa (son uygulamalardan) GPX iz kaydına ara verilecektir. (OsmAnd arka plan göstergesi Android bildirim çubuğundan kaybolur.)</string>
     <string name="routing_attr_avoid_shuttle_train_name">Shuttle treni yok</string>
     <string name="local_indexes_cat_wiki">Vikipedi</string>
     <string name="osm_edit_context_menu_delete">OSM düzeltmesini sil</string>
@@ -1760,7 +1759,6 @@
     <string name="traffic_warning_calming">Trafik sakinleştirme</string>
     <string name="sleep_mode_stop_dialog">GPS arka plan modunu durdur?</string>
     <string name="stop_navigation_service">Dur</string>
-    <string name="save_global_track_interval_descr">(Haritadaki GPX kayıt widget\'ı aracılığıyla etkinleştirilen) genel rota kaydı için kayıt aralığını belirtin.</string>
     <string name="save_global_track_interval">Genel kayıt tutma aralığı</string>
     <string name="background_service_int">GPS Uyandırma aralık</string>
     <string name="enable_sleep_mode">GPS arka plan modunu etkinleştirin</string>
@@ -1797,8 +1795,6 @@
     <string name="live_monitoring_m">Online izleme (GPX gerekli)</string>
     <string name="live_monitoring_start">Online izleme başlat</string>
     <string name="live_monitoring_stop">Online izleme durdurun</string>
-    <string name="gpx_monitoring_start">GPX kaydını devam ettir</string>
-    <string name="gpx_monitoring_stop">GPX kaydını duraklat</string>
     <string name="gpx_start_new_segment">Yeni bir segment başlat</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Araç olmayan otoyollar</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ağaç ve çalılıklar</string>
@@ -1941,7 +1937,6 @@
     <string name="access_widget_expand">Genişlet</string>
     <string name="access_sort">Sırala</string>
     <string name="map_mode">Harita kipi</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX dosyalar seçildi</string>
     <string name="rendering_value_thin_name">İnce</string>
     <string name="rendering_value_medium_name">Orta</string>
     <string name="rendering_value_bold_name">Kalın</string>
@@ -2246,7 +2241,7 @@
     <string name="mapillary_widget">Mapillary widget\'ı</string>
     <string name="mapillary_widget_descr">Mapillary\'ye hızlıca katkıda bulunmanıza imkan verir.</string>
     <string name="mapillary_descr">Herkes için sokak seviyesinde fotoğraflar. Yerler keşfedin, katkıda bulunun, dünyayı yakalatın.</string>
-    <string name="mapillary">Sokak seviyesi görüntüleri</string>
+    <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Herkes için sokak seviyesinde fotoğraflar. Yerler keşfedin, katkıda bulunun, dünyayı yakalayın.</string>
     <string name="parking_options">Park etme seçenekleri</string>
     <string name="routing_attr_allow_motorway_name">Otoyolları kullan</string>
@@ -3783,20 +3778,21 @@
     <string name="plan_route_select_track_file_for_open">Açmak için bir yol dosyası seçin.</string>
     <string name="shared_string_done">Bitti</string>
     <string name="overwrite_track">Yolun üzerine yaz</string>
-    <string name="rourte_between_points_warning_desc">Bu seçeneği kullanmak için OsmAnd\'ın izlediğiniz yolu harita yollarına eşleştirmesi gereklidir.
+    <string name="route_between_points_warning_desc">Bu seçeneği kullanmak için OsmAnd\'ın izlediğiniz yolu harita yollarına eşleştirmesi gereklidir.
 \n
 \n Sonraki adımda, izin verilen yolları tespit etmek için navigasyon profilini ve izlediğiniz yolu yaklaşık olarak belirlemek için eşik mesafesini seçmeniz gerekecektir.</string>
     <string name="save_as_new_track">Yeni bir Yol olarak kaydet</string>
     <string name="reverse_route">Ters güzergah</string>
-    <string name="rourte_between_points_whole_track_button_desc">Tüm yol, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Sadece sonraki bölüm, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
-    <string name="rourte_between_points_desc">Düz bir çizgi ile noktaları nasıl birleştireceğinizi veya seçili profille aralarında nasıl güzergah hesaplayacağınızı seçin.</string>
+    <string name="route_between_points_whole_track_button_desc">Tüm yol, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="route_between_points_next_segment_button_desc">Sadece sonraki bölüm, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="route_between_points_desc">Düz bir çizgi ile noktaları nasıl birleştireceğinizi veya seçili profille aralarında nasıl güzergah hesaplayacağınızı seçin.</string>
     <string name="whole_track">Tüm yol</string>
     <string name="next_segment">Sonraki bölüm</string>
     <string name="threshold_distance">Eşik mesafesi</string>
     <string name="navigation_profile">Navigasyon profili</string>
-    <string name="rourte_between_points_add_track_desc">Kendisine yeni bir bölümün ekleneceği bir yol dosyası seçin.</string>
+    <string name="route_between_points_add_track_desc">Kendisine yeni bir bölümün ekleneceği bir yol dosyası seçin.</string>
     <string name="street_level_imagery">Sokak seviyesi görüntüleri</string>
     <string name="plan_route_exit_dialog_descr">Kaydetmeden güzergah planlamayı kapatmak istediğinize emin misiniz\? Tüm değişiklikleri kaybedeceksiniz.</string>
     <string name="in_case_of_reverse_direction">Ters yön durumunda</string>
+    <string name="monitoring_control_start">REC</string>
 </resources>

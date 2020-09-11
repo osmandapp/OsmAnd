@@ -459,7 +459,6 @@
     <string name="download_wikipedia_files">Преузети додатне податке са Википедије (%1$s MB)\?</string>
     <string name="gps_network_not_enabled">Услуга одређивања положаја је искључена. Укључити је\?</string>
     <string name="disable_recording_once_app_killed">Спречи аутоматско бележење</string>
-    <string name="disable_recording_once_app_killed_descrp">Паузираће GPX логовање када се апликације убије (преко скорашњих програма). (Индикатор рада OsmAnd-а у позадини тада нестаје из обавештајне траке.)</string>
     <string name="shared_string_import2osmand">Увоз у OsmAnd</string>
     <string name="read_full_article">Читај потпуни чланак (на мрежи)</string>
     <string name="shared_string_wikipedia">Википедија</string>
@@ -687,7 +686,6 @@
     <string name="sleep_mode_stop_dialog">Прекинути позадински режим GPS-а?</string>
     <string name="stop_navigation_service">Заустави</string>
     <string name="confirm_every_run">Увек питај</string>
-    <string name="save_global_track_interval_descr">Наведите интервал логовања код снимања путања (које су омогућене пријавом преко GPX справице на карти).</string>
     <string name="save_global_track_interval">Међувреме опште пријаве</string>
     <string name="background_service_int">Међувреме буђења GPS-а</string>
     <string name="enable_sleep_mode">Укључи да GPS ради у позадини</string>
@@ -1169,7 +1167,6 @@
     <string name="access_shared_string_navigate_up">Наведи горе</string>
     <string name="access_sort">Сортирај</string>
     <string name="map_mode">Приказ карте</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX фајла је одабрано</string>
     <string name="rendering_value_fine_name">Нежно</string>
     <string name="rendering_value_thin_name">Танко</string>
     <string name="rendering_value_medium_name">Средње</string>
@@ -1639,8 +1636,6 @@
     <string name="live_monitoring_m">Праћење на мрежи (потребан GPX)</string>
     <string name="live_monitoring_start">Започни праћење на мрежи</string>
     <string name="live_monitoring_stop">Заустави праћење на мрежи</string>
-    <string name="gpx_monitoring_start">Настави GPX бележење</string>
-    <string name="gpx_monitoring_stop">Заустави GPX бележење</string>
     <string name="none_selected_gpx">Одаберите GPX фајл дугим притискањем.</string>
     <string name="lang_zh">Кинески</string>
     <string name="lang_pt_br">Португалски (бразилски)</string>
@@ -3824,18 +3819,48 @@
     <string name="overwrite_track">Замени стазу</string>
     <string name="save_as_new_track">Сачувај као нову стазу</string>
     <string name="reverse_route">Обрнута рута</string>
-    <string name="rourte_between_points_whole_track_button_desc">Читава стаза ће се прерачунати користећи одабрани профил.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Само ће се следећи сегмент прерачунати користећи одабрани профил.</string>
-    <string name="rourte_between_points_desc">Изаберите како повезати тачке, са правом линијом, или израчунајте руту између њих са одабраним профилом.</string>
+    <string name="route_between_points_whole_track_button_desc">Читава стаза ће се прерачунати користећи одабрани профил.</string>
+    <string name="route_between_points_next_segment_button_desc">Само ће се следећи сегмент прерачунати користећи одабрани профил.</string>
+    <string name="route_between_points_desc">Изаберите како повезати тачке, са правом линијом, или израчунајте руту између њих са одабраним профилом.</string>
     <string name="whole_track">Цела стаза</string>
     <string name="next_segment">Следећи сегмент</string>
-    <string name="rourte_between_points_warning_desc">Да бисте користили ову опцију, ОсмАнд мора да прилагоди вашу стазу путевима на мапи.
+    <string name="route_between_points_warning_desc">Да бисте користили ову опцију, ОсмАнд мора да прилагоди вашу стазу путевима на мапи.
 \n
 \n На следећем кораку мора ћете одабрати навигацијски профил како бисте открили дозвољене путеве и праг удаљености и тиме приближили вашу стазу путевима.</string>
     <string name="threshold_distance">Праг удаљености</string>
     <string name="navigation_profile">Навигацијски профил</string>
-    <string name="rourte_between_points_add_track_desc">Изаберите датотеку записа којој ће се додати нови сегмент.</string>
+    <string name="route_between_points_add_track_desc">Изаберите датотеку записа којој ће се додати нови сегмент.</string>
     <string name="street_level_imagery">Слике на нивоу улице</string>
     <string name="plan_route_exit_dialog_descr">Јесте ли сигурни да желите затворити План руте без чувања\? Изгуби ћете све промене.</string>
     <string name="in_case_of_reverse_direction">У случају обрнутог правца</string>
+    <string name="shared_string_save_as_gpx">Сачувај као нову датотеку стазе</string>
+    <string name="add_segment_to_the_track">Додај у датотеку стазе</string>
+    <string name="shared_string_gpx_files">Путање</string>
+    <string name="layer_gpx_layer">Путање</string>
+    <string name="show_gpx">Путање</string>
+    <string name="monitoring_control_start">GPX</string>
+    <string name="save_track_to_gpx_globally">Уписуј путању у GPX фајл</string>
+    <string name="shared_string_gpx_route">Траса руте</string>
+    <string name="empty_state_my_tracks">Додајте датотеке стаза</string>
+    <string name="empty_state_my_tracks_desc">Увезите или снимите датотеке стаза</string>
+    <string name="context_menu_item_add_waypoint">Додајте тачку стазе</string>
+    <string name="quick_action_add_gpx">Додајте тачку стазе</string>
+    <string name="map_widget_monitoring">Снимање путовања</string>
+    <string name="marker_save_as_track">Сачувај као датотеку стазе</string>
+    <string name="follow_track">Следи стазу</string>
+    <string name="follow_track_descr">Изаберите датотеку стазе ради праћења</string>
+    <string name="import_track_descr">Изаберите датотеку стазе ради праћења или увоза са уређаја.</string>
+    <string name="select_another_track">Изаберите другу стазу</string>
+    <string name="navigate_to_track_descr">Наводите од моје локације до стазе</string>
+    <string name="pass_whole_track_descr">Тачка стазе за навигацију</string>
+    <string name="start_of_the_track">Почетак стазе</string>
+    <string name="nearest_point">Најближа тачка</string>
+    <string name="attach_to_the_roads">Причврстите на путеве</string>
+    <string name="delete_address">Избришите адресу</string>
+    <string name="add_address">Додајте адресу</string>
+    <string name="access_hint_enter_address">Унесите адресу</string>
+    <string name="plan_route_trim_before">Скрати пре</string>
+    <string name="plan_route_trim_after">Скрати после</string>
+    <string name="plan_route_change_route_type_before">Промените врсту руте пре</string>
+    <string name="plan_route_change_route_type_after">Промените врсту руте након</string>
 </resources>

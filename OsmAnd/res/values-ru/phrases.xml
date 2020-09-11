@@ -3730,7 +3730,7 @@
     <string name="poi_traffic_signals_sound_locate">Только если разрешена ходьба</string>
     <string name="poi_drinking_water_refill_network">Сеть заправки питьевой воды</string>
     <string name="poi_drinking_water_refill_no">Заправка питьевой водой: нет</string>
-    <string name="poi_drinking_water_refill_yes">Заправка питьевой водой: да</string>
+    <string name="poi_drinking_water_refill_yes">Да</string>
     <string name="poi_socket_type3_yes">Тип 3</string>
     <string name="poi_socket_type2_combo_yes">Тип 2 комбинированный</string>
     <string name="poi_socket_type2_yes">Тип 2</string>
@@ -3820,4 +3820,13 @@
     <string name="poi_city_block">Городской квартал</string>
     <string name="poi_borough">Муниципалитет</string>
     <string name="poi_give_box">Подарочная коробка</string>
+    <string name="poi_traffic_signals_arrow_no">Стрелка: нет</string>
+    <string name="poi_elevator">Лифт</string>
+    <string name="poi_departures_board_yes">Да</string>
+    <string name="poi_departures_board_no">Расписание отправлений: нет</string>
+    <string name="poi_departures_board">Расписание отправлений</string>
+    <string name="poi_drinking_water_refill">Заправка питьевой воды</string>
+    <string name="poi_departures_board_realtime">Реальное время</string>
+    <string name="poi_departures_board_delay">Задержка</string>
+    <string name="poi_departures_board_timetable">Расписание</string>
 </resources>

@@ -66,6 +66,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	private View view;
 	private OnLayoutChangeListener containerLayoutListener;
 	private View topShadow;
+	private ViewGroup topView;
 	private View bottomScrollView;
 	private LinearLayout cardsContainer;
 	private FrameLayout bottomContainer;
@@ -165,6 +166,11 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	@Nullable
 	public LinearLayout getMainView() {
 		return mainView;
+	}
+
+	@Nullable
+	public ViewGroup getTopView() {
+		return topView;
 	}
 
 	public boolean isNightMode() {
@@ -290,7 +296,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		final int touchSlop = vc.getScaledTouchSlop();
 
 		if (getTopViewId() != 0) {
-			View topView = view.findViewById(getTopViewId());
+			topView = view.findViewById(getTopViewId());
 			AndroidUtils.setBackground(app, topView, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		}
 		if (!portrait) {
@@ -606,6 +612,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	protected boolean isHideable() {
+		return true;
+	}
+
 	private void processScreenHeight(ViewParent parent) {
 		View container = (View) parent;
 		MapActivity mapActivity = getMapActivity();
@@ -777,7 +787,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 
 	private int getPosY(final int currentY, boolean needCloseMenu, int previousState) {
-		if (needCloseMenu) {
+		if (needCloseMenu && isHideable()) {
 			return screenHeight;
 		}
 		MapActivity mapActivity = getMapActivity();
@@ -852,7 +862,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 							@Override
 							public void onAnimationEnd(Animator animation) {
 								if (!canceled) {
-									if (needCloseMenu) {
+									if (needCloseMenu && isHideable()) {
 										dismiss();
 									} else {
 										updateMainViewLayout(posY);
@@ -864,7 +874,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 							}
 						}).start();
 			} else {
-				if (needCloseMenu) {
+				if (needCloseMenu && isHideable()) {
 					dismiss();
 				} else {
 					mainView.setY(posY);

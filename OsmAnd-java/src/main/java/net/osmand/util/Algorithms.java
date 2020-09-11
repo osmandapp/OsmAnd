@@ -26,6 +26,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -137,6 +138,26 @@ public class Algorithms {
 			return name.substring(i + 1);
 		}
 		return name;
+	}
+
+	public static List<File> collectDirs(File parentDir, List<File> dirs) {
+		return collectDirs(parentDir, dirs, null);
+	}
+
+	public static List<File> collectDirs(File parentDir, List<File> dirs, File exclDir) {
+		File[] listFiles = parentDir.listFiles();
+		if (listFiles != null) {
+			Arrays.sort(listFiles);
+			for (File f : listFiles) {
+				if (f.isDirectory()) {
+					if (!f.equals(exclDir)) {
+						dirs.add(f);
+					}
+					Algorithms.collectDirs(f, dirs);
+				}
+			}
+		}
+		return dirs;
 	}
 
 	public static File[] getSortedFilesVersions(File dir) {

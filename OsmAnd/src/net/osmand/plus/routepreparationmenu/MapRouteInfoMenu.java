@@ -43,11 +43,13 @@ import net.osmand.ValueHolder;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
+import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -75,6 +77,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRouti
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameterGroup;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.MuteSoundRoutingParameter;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.RouteMenuAppModes;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRouteItem;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -93,6 +96,7 @@ import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarning
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
@@ -107,6 +111,7 @@ import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.SearchResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -126,7 +131,7 @@ import java.util.Stack;
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
 	private static final Log LOG = PlatformUtil.getLog(MapRouteInfoMenu.class);
-	
+
 	private static final int BUTTON_ANIMATION_DELAY = 2000;
 	public static final int DEFAULT_MENU_STATE = 0;
 	private static final int MAX_PEDESTRIAN_ROUTE_DURATION = 30 * 60;
@@ -134,6 +139,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public static int directionInfo = -1;
 	public static boolean chooseRoutesVisible = false;
 	public static boolean waypointsVisible = false;
+	public static boolean followTrackVisible = false;
 
 	private Stack<MapRouteMenuStateHolder> menuBackStack = new Stack<>();
 
@@ -143,6 +149,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private PointType selectFromMapPointType;
 	private int selectFromMapMenuState = MenuState.HEADER_ONLY;
 	private boolean selectFromMapWaypoints;
+	private boolean selectFromTracks;
 
 	private boolean showMenu = false;
 	private int showMenuState = DEFAULT_MENU_STATE;
@@ -449,7 +456,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				fragment.updateInfo();
 				if (!routeCalculationInProgress) {
 					fragment.hideRouteCalculationProgressBar();
-					if(!app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.
+					if (!app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.
 							getModeValue(app.getRoutingHelper().getAppMode())) {
 						fragment.openMenuHalfScreen();
 					} else {
@@ -527,7 +534,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
 		updateStartPointView();
-		updateWaypointsView();
+		updateViaView();
 		updateFinishPointView();
 
 		updateApplicationModes();
@@ -978,12 +985,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		LinearLayout optionsButton = (LinearLayout) mainView.findViewById(R.id.map_options_route_button);
 		TextView optionsTitle = (TextView) mainView.findViewById(R.id.map_options_route_button_title);
 		ImageView optionsIcon = (ImageView) mainView.findViewById(R.id.map_options_route_button_icon);
-		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable active = app.getUIUtilities().getIcon(R.drawable.ic_action_settings, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-			drawable = AndroidUtils.createPressedStateListDrawable(drawable, active);
-		}
-		optionsIcon.setImageDrawable(drawable);
+
+		setupButtonIcon(optionsIcon, R.drawable.ic_action_settings);
 		optionsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -992,7 +995,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		});
 		AndroidUtils.setBackground(app, optionsButton, nightMode,
 				isLayoutRTL ? R.drawable.route_info_trans_gradient_left_light : R.drawable.route_info_trans_gradient_light,
-				isLayoutRTL ? R.drawable.route_info_trans_gradient_left_dark :R.drawable.route_info_trans_gradient_dark);
+				isLayoutRTL ? R.drawable.route_info_trans_gradient_left_dark : R.drawable.route_info_trans_gradient_dark);
 
 		HorizontalScrollView scrollView = mainView.findViewById(R.id.route_options_scroll_container);
 		scrollView.setVerticalScrollBarEnabled(false);
@@ -1392,7 +1395,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			});
 			if (item != null) {
 				LinearLayout.LayoutParams layoutParams = getContainerButtonLayoutParams(mapActivity, false);
-				layoutParams.setMargins(margin, 0, margin, 0);
+				AndroidUtils.setMargins(layoutParams, margin, 0, margin, 0);
 				optionsContainer.addView(item, layoutParams);
 			}
 		}
@@ -1402,7 +1405,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (containerParams) {
 			int margin = AndroidUtils.dpToPx(context, 3);
 			LinearLayout.LayoutParams containerBtnLp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-			containerBtnLp.setMargins(margin, 0, margin, 0);
+			AndroidUtils.setMargins(containerBtnLp, margin, 0, margin, 0);
 			return containerBtnLp;
 		} else {
 			return new LinearLayout.LayoutParams(AndroidUtils.dpToPx(context, 100), ViewGroup.LayoutParams.MATCH_PARENT);
@@ -1537,58 +1540,70 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	private void updateWaypointsView() {
+	private void updateViaView() {
+		View mainView = getMainView();
 		MapActivity mapActivity = getMapActivity();
-		final View mainView = getMainView();
 		if (mapActivity == null || mainView == null) {
 			return;
 		}
 		OsmandApplication app = mapActivity.getMyApplication();
-		String via = generateViaDescription();
 		View viaLayout = mainView.findViewById(R.id.ViaLayout);
-		View viaLayoutDivider = mainView.findViewById(R.id.viaLayoutDivider);
-		if (via.length() == 0) {
-			viaLayout.setVisibility(View.GONE);
-			viaLayoutDivider.setVisibility(View.GONE);
+
+		String viaDescription = generateViaDescription();
+		GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
+		if (routeParams == null && Algorithms.isEmpty(viaDescription)) {
+			AndroidUiHelper.updateVisibility(viaLayout, false);
+			return;
 		} else {
-			viaLayout.setVisibility(View.VISIBLE);
-			viaLayoutDivider.setVisibility(View.VISIBLE);
-			((TextView) mainView.findViewById(R.id.ViaView)).setText(via);
-			((TextView) mainView.findViewById(R.id.ViaSubView)).setText(mapActivity.getString(R.string.intermediate_destinations) + " (" +
-					mapActivity.getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() + ")");
+			AndroidUiHelper.updateVisibility(viaLayout, true);
 		}
-		FrameLayout viaButton = (FrameLayout) mainView.findViewById(R.id.via_button);
+
+		if (routeParams != null) {
+			viaLayout.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						GPXRouteParamsBuilder routeParams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+						if (routeParams != null) {
+							hide();
+							selectTrack();
+						}
+					}
+				}
+			});
+		} else {
+			viaLayout.setClickable(false);
+			viaLayout.setOnClickListener(null);
+		}
+		setupViaText(mainView);
+
+		FrameLayout viaButton = mainView.findViewById(R.id.via_button);
+		AndroidUiHelper.updateVisibility(viaButton, routeParams == null || isFinishPointFromTrack());
 
 		viaButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null && mapActivity.getMyApplication().getTargetPointsHelper().checkPointToNavigateShort()) {
-					hide();
-					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
+				if (mapActivity != null) {
+					GPXRouteParamsBuilder routeParams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+					if (routeParams != null) {
+						AddPointBottomSheetDialog.showInstance(mapActivity, PointType.TARGET);
+					} else if (mapActivity.getMyApplication().getTargetPointsHelper().checkPointToNavigateShort()) {
+						hide();
+						WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
+					}
 				}
 			}
 		});
 
-		ImageView viaIcon = (ImageView) mainView.findViewById(R.id.viaIcon);
-		viaIcon.setImageDrawable(getIconOrig(R.drawable.list_intermediate));
 		LinearLayout viaButtonContainer = (LinearLayout) mainView.findViewById(R.id.via_button_container);
+		setupButtonBackground(viaButton, viaButtonContainer);
 
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, viaButton, nightMode, R.drawable.btn_rounded_light, R.drawable.btn_rounded_dark);
-			AndroidUtils.setBackground(app, viaButtonContainer, nightMode, R.drawable.ripple_rounded_light, R.drawable.ripple_rounded_dark);
-		} else {
-			AndroidUtils.setBackground(app, viaButtonContainer, nightMode, R.drawable.btn_trans_rounded_light, R.drawable.btn_trans_rounded_dark);
-		}
 		ImageView viaButtonImageView = (ImageView) mainView.findViewById(R.id.via_button_image_view);
 
-		Drawable normal = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_edit_dark, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable active = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_edit_dark, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-
-			normal = AndroidUtils.createPressedStateListDrawable(normal, active);
-		}
-		viaButtonImageView.setImageDrawable(normal);
+		int iconId = routeParams != null ? R.drawable.ic_action_plus : R.drawable.ic_action_edit_dark;
+		setupButtonIcon(viaButtonImageView, iconId);
 
 		final View textView = mainView.findViewById(R.id.via_button_description);
 		if (!editButtonCollapsing && !editButtonCollapsed &&
@@ -1604,6 +1619,43 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		} else if (editButtonCollapsed) {
 			textView.setVisibility(View.GONE);
 		}
+		updateViaIcon(mainView);
+	}
+
+	private void setupViaText(View view) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			TextView title = view.findViewById(R.id.ViaView);
+			TextView description = view.findViewById(R.id.ViaSubView);
+			TextView buttonDescription = view.findViewById(R.id.via_button_description);
+
+			String via = generateViaDescription();
+			GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+			if (routeParamsBuilder != null) {
+				String fileName = new File(routeParamsBuilder.getFile().path).getName();
+				title.setText(GpxUiHelper.getGpxTitle(fileName));
+				description.setText(R.string.follow_track);
+				buttonDescription.setText(R.string.shared_string_add);
+			} else {
+				title.setText(via);
+				buttonDescription.setText(R.string.shared_string_edit);
+				description.setText(app.getString(R.string.intermediate_destinations) + " (" +
+						app.getTargetPointsHelper().getIntermediatePoints().size() + ")");
+			}
+		}
+	}
+
+	private void updateViaIcon(View parentView) {
+		ImageView viaIcon = parentView.findViewById(R.id.viaIcon);
+
+		OsmandApplication app = (OsmandApplication) parentView.getContext().getApplicationContext();
+		GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
+		if (routeParams != null) {
+			viaIcon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
+		} else {
+			viaIcon.setImageDrawable(getIconOrig(R.drawable.list_intermediate));
+		}
 	}
 
 	private void updateFinishPointView() {
@@ -1614,48 +1666,43 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		OsmandApplication app = mapActivity.getMyApplication();
 
-		setupToText(mainView);
-		final View toLayout = mainView.findViewById(R.id.ToLayout);
+		View toLayout = mainView.findViewById(R.id.ToLayout);
+		View viaLayout = mainView.findViewById(R.id.ViaLayout);
+		View toLayoutDivider = mainView.findViewById(R.id.toLayoutDivider);
+
+		if (isFinishPointFromTrack()) {
+			AndroidUiHelper.updateVisibility(toLayout, false);
+			AndroidUiHelper.updateVisibility(toLayoutDivider, false);
+			return;
+		} else {
+			boolean dividerVisible = viaLayout.getVisibility() == View.VISIBLE;
+			AndroidUiHelper.updateVisibility(toLayout, true);
+			AndroidUiHelper.updateVisibility(toLayoutDivider, dividerVisible);
+		}
+
 		toLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					GPXRouteParamsBuilder routeParamsBuilder = mapActivity.getRoutingHelper().getCurrentGPXRoute();
-					if (routeParamsBuilder != null) {
-						FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
-						FollowTrackFragment.showInstance(mapActivity, trackOptionsFragment);
-					} else {
-						AddPointBottomSheetDialog.showInstance(mapActivity, PointType.TARGET);
-					}
+					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.TARGET);
 				}
 			}
 		});
+		setupToText(mainView);
 
-		final FrameLayout toButton = (FrameLayout) mainView.findViewById(R.id.to_button);
+		FrameLayout toButton = (FrameLayout) mainView.findViewById(R.id.to_button);
 		if (app.getRoutingHelper().isPublicTransportMode()) {
 			toButton.setVisibility(View.GONE);
 		} else {
 			toButton.setVisibility(View.VISIBLE);
 
-			final LinearLayout toButtonContainer = (LinearLayout) mainView.findViewById(R.id.to_button_container);
+			LinearLayout toButtonContainer = (LinearLayout) mainView.findViewById(R.id.to_button_container);
+			setupButtonBackground(toButton, toButtonContainer);
 
-			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-				AndroidUtils.setBackground(app, toButton, nightMode, R.drawable.btn_rounded_light, R.drawable.btn_rounded_dark);
-				AndroidUtils.setBackground(app, toButtonContainer, nightMode, R.drawable.ripple_rounded_light, R.drawable.ripple_rounded_dark);
-			} else {
-				AndroidUtils.setBackground(app, toButtonContainer, nightMode, R.drawable.btn_trans_rounded_light, R.drawable.btn_trans_rounded_dark);
-			}
 			ImageView toButtonImageView = (ImageView) mainView.findViewById(R.id.to_button_image_view);
+			setupButtonIcon(toButtonImageView, R.drawable.ic_action_plus);
 
-			Drawable normal = app.getUIUtilities().getIcon(R.drawable.ic_action_plus, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-			if (Build.VERSION.SDK_INT >= 21) {
-				Drawable active = app.getUIUtilities().getIcon(R.drawable.ic_action_plus, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-
-				normal = AndroidUtils.createPressedStateListDrawable(normal, active);
-			}
-
-			toButtonImageView.setImageDrawable(normal);
 			toButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -1692,15 +1739,24 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void updateToIcon(View parentView) {
-		ImageView toIcon = parentView.findViewById(R.id.toIcon);
+		ImageView toIcon = (ImageView) parentView.findViewById(R.id.toIcon);
+		toIcon.setImageDrawable(getIconOrig(R.drawable.list_destination));
+	}
 
-		OsmandApplication app = (OsmandApplication) parentView.getContext().getApplicationContext();
-		GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
-		if (routeParamsBuilder != null) {
-			toIcon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
-		} else {
-			toIcon.setImageDrawable(getIconOrig(R.drawable.list_destination));
+	private boolean isFinishPointFromTrack() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
+			if (routeParams != null) {
+				TargetPoint target = app.getTargetPointsHelper().getPointToNavigate();
+				if (target != null) {
+					PointDescription pointDescription = target.getOriginalPointDescription();
+					return pointDescription != null && routeParams.getFile().path.equals(pointDescription.getTypeName());
+				}
+			}
 		}
+		return false;
 	}
 
 	private void updateStartPointView() {
@@ -1709,10 +1765,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity == null || mainView == null) {
 			return;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
-
 		setupFromText(mainView);
-		final View fromLayout = mainView.findViewById(R.id.FromLayout);
+		View fromLayout = mainView.findViewById(R.id.FromLayout);
 		fromLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1724,24 +1778,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		});
 
 		FrameLayout fromButton = (FrameLayout) mainView.findViewById(R.id.from_button);
-		final LinearLayout fromButtonContainer = (LinearLayout) mainView.findViewById(R.id.from_button_container);
-
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, fromButton, nightMode, R.drawable.btn_rounded_light, R.drawable.btn_rounded_dark);
-			AndroidUtils.setBackground(app, fromButtonContainer, nightMode, R.drawable.ripple_rounded_light, R.drawable.ripple_rounded_dark);
-		} else {
-			AndroidUtils.setBackground(app, fromButtonContainer, nightMode, R.drawable.btn_trans_rounded_light, R.drawable.btn_trans_rounded_dark);
-		}
+		LinearLayout fromButtonContainer = (LinearLayout) mainView.findViewById(R.id.from_button_container);
+		setupButtonBackground(fromButton, fromButtonContainer);
 
 		ImageView swapDirectionView = (ImageView) mainView.findViewById(R.id.from_button_image_view);
+		setupButtonIcon(swapDirectionView, R.drawable.ic_action_change_navigation_points);
 
-		Drawable normal = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_change_navigation_points, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable active = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_change_navigation_points, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-			normal = AndroidUtils.createPressedStateListDrawable(normal, active);
-		}
-
-		swapDirectionView.setImageDrawable(normal);
 		fromButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -1757,16 +1799,23 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					} else if (endPoint == null) {
 						app.showShortToastMessage(R.string.mark_final_location_first);
 					} else {
-						if (startPoint == null && loc != null) {
-							startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
-									new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActivity.getString(R.string.shared_string_my_location)));
-						}
-						if (startPoint != null) {
-							targetPointsHelper.navigateToPoint(startPoint.point, false, -1, startPoint.getPointDescription(mapActivity));
-							targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
-							targetPointsHelper.updateRouteAndRefresh(true);
+						GPXRouteParamsBuilder gpxParams = app.getRoutingHelper().getCurrentGPXRoute();
+						if (gpxParams != null) {
+							boolean reverse = !gpxParams.isReverse();
+							LocalRoutingParameter parameter = new OtherLocalRoutingParameter(R.string.gpx_option_reverse_route, app.getString(R.string.gpx_option_reverse_route), reverse);
+							app.getRoutingOptionsHelper().applyRoutingParameter(parameter, reverse);
 						} else {
-							app.showShortToastMessage(R.string.route_add_start_point);
+							if (startPoint == null && loc != null) {
+								startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
+										new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActivity.getString(R.string.shared_string_my_location)));
+							}
+							if (startPoint != null) {
+								targetPointsHelper.navigateToPoint(startPoint.point, false, -1, startPoint.getPointDescription(mapActivity));
+								targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
+								targetPointsHelper.updateRouteAndRefresh(true);
+							} else {
+								app.showShortToastMessage(R.string.route_add_start_point);
+							}
 						}
 					}
 				}
@@ -1856,6 +1905,29 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		addButtonCollapsing = false;
 	}
 
+	private void setupButtonIcon(ImageView imageView, @DrawableRes int iconId) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			UiUtilities uiUtilities = mapActivity.getMyApplication().getUIUtilities();
+
+			Drawable normal = uiUtilities.getIcon(iconId, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+			if (Build.VERSION.SDK_INT >= 21) {
+				Drawable active = uiUtilities.getIcon(iconId, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+				normal = AndroidUtils.createPressedStateListDrawable(normal, active);
+			}
+			imageView.setImageDrawable(normal);
+		}
+	}
+
+	private void setupButtonBackground(View button, View buttonContainer) {
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			AndroidUtils.setBackground(app, button, nightMode, R.drawable.btn_rounded_light, R.drawable.btn_rounded_dark);
+			AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.ripple_rounded_light, R.drawable.ripple_rounded_dark);
+		} else {
+			AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.btn_trans_rounded_light, R.drawable.btn_trans_rounded_dark);
+		}
+	}
+
 	public void selectOnScreen(PointType pointType) {
 		selectOnScreen(pointType, getCurrentMenuState(), false);
 	}
@@ -1879,6 +1951,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			choosePointTypeAction(mapActivity, latLon, pointType, pd, name);
 			updateMenu();
 		}
+	}
+
+	public void selectTrack() {
+		selectFromTracks = true;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
+			FollowTrackFragment.showInstance(mapActivity, trackOptionsFragment);
+		}
+	}
+
+	public void cancelSelectionFromTracks() {
+		selectFromTracks = false;
 	}
 
 	public void setupFields(PointType pointType) {
@@ -2115,36 +2200,26 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			TextView toText = view.findViewById(R.id.toText);
-			TextView toTitle = view.findViewById(R.id.toTitle);
+			TargetPointsHelper targets = app.getTargetPointsHelper();
+			TargetPoint finish = targets.getPointToNavigate();
+			if (finish != null) {
+				toText.setText(getRoutePointDescription(finish.point, finish.getOnlyName()));
 
-			GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
-			if (routeParamsBuilder != null) {
-				String fileName = new File(routeParamsBuilder.getFile().path).getName();
-				toText.setText(GpxUiHelper.getGpxTitle(fileName));
-				toTitle.setText(R.string.follow_track);
-			} else {
-				TargetPointsHelper targets = app.getTargetPointsHelper();
-				TargetPoint finish = targets.getPointToNavigate();
-				if (finish != null) {
-					toText.setText(getRoutePointDescription(finish.point, finish.getOnlyName()));
-
-					PointDescription pointDescription = finish.getOriginalPointDescription();
-					boolean needAddress = pointDescription != null && pointDescription.isSearchingAddress(mapActivity);
-					cancelTargetPointAddressRequest();
-					if (needAddress) {
-						targetPointRequest = new AddressLookupRequest(finish.point, new GeocodingLookupService.OnAddressLookupResult() {
-							@Override
-							public void geocodingDone(String address) {
-								targetPointRequest = null;
-								updateMenu();
-							}
-						}, null);
-						app.getGeocodingLookupService().lookupAddress(targetPointRequest);
-					}
-				} else {
-					toText.setText(R.string.route_descr_select_destination);
+				PointDescription pointDescription = finish.getOriginalPointDescription();
+				boolean needAddress = pointDescription != null && pointDescription.isSearchingAddress(mapActivity);
+				cancelTargetPointAddressRequest();
+				if (needAddress) {
+					targetPointRequest = new AddressLookupRequest(finish.point, new OnAddressLookupResult() {
+						@Override
+						public void geocodingDone(String address) {
+							targetPointRequest = null;
+							updateMenu();
+						}
+					}, null);
+					app.getGeocodingLookupService().lookupAddress(targetPointRequest);
 				}
-				toTitle.setText(R.string.route_to);
+			} else {
+				toText.setText(R.string.route_descr_select_destination);
 			}
 		}
 	}
@@ -2190,7 +2265,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (switched) {
 					mapActivity.getMapLayers().getMapControlsLayer().switchToRouteFollowingLayout();
 				}
-				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch) {
+				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch && !selectFromTracks) {
 					mapActivity.getMapActions().stopNavigationWithoutConfirm();
 				}
 				mapActivity.updateStatusBarColor();
@@ -2305,6 +2380,32 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		updateMenu();
 	}
 
+	@NonNull
+	public QuadRect getRouteRect(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		MapRouteInfoMenu menu = mapActivity.getMapRouteInfoMenu();
+
+		QuadRect rect = new QuadRect(0, 0, 0, 0);
+		if (menu.isTransportRouteCalculated()) {
+			TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
+			TransportRouteResult result = transportRoutingHelper.getCurrentRouteResult();
+			if (result != null) {
+				QuadRect transportRouteRect = transportRoutingHelper.getTransportRouteRect(result);
+				if (transportRouteRect != null) {
+					rect = transportRouteRect;
+				}
+			}
+		} else if (routingHelper.isRouteCalculated()) {
+			RouteCalculationResult result = routingHelper.getRoute();
+			QuadRect routeRect = routingHelper.getRouteRect(result);
+			if (routeRect != null) {
+				rect = routeRect;
+			}
+		}
+		return rect;
+	}
+
 	public enum MapRouteMenuType {
 		ROUTE_INFO,
 		ROUTE_DETAILS
@@ -2369,6 +2470,5 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 			}
 		}
-
 	}
 }

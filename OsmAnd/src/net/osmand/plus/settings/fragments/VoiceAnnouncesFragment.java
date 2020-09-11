@@ -103,28 +103,24 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 	}
 
 	private void setupSpeedLimitExceedPref() {
-		Float[] speedLimitValues;
-		String[] speedLimitNames;
-
+		//array size must be equal!
+		Float[] valuesKmh = new Float[]{-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
+		Float[] valuesMph = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
+		String[] names;
 		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
-			speedLimitValues = new Float[] {-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
-			speedLimitNames = new String[speedLimitValues.length];
-
-			for (int i = 0; i < speedLimitValues.length; i++) {
-				speedLimitNames[i] = speedLimitValues[i].intValue() + " " + getString(R.string.km_h);
+			names = new String[valuesKmh.length];
+			for (int i = 0; i < names.length; i++) {
+				names[i] = valuesKmh[i].intValue() + " " + getString(R.string.km_h);
 			}
 		} else {
-			speedLimitValues = new Float[] {-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
-			speedLimitNames = new String[speedLimitValues.length];
-
-			for (int i = 0; i < speedLimitNames.length; i++) {
-				speedLimitNames[i] = speedLimitValues[i].intValue() + " " + getString(R.string.mile_per_hour);
+			names = new String[valuesMph.length];
+			for (int i = 0; i < names.length; i++) {
+				names[i] = valuesMph[i].intValue() + " " + getString(R.string.mile_per_hour);
 			}
 		}
-
-		ListPreferenceEx voiceProvider = (ListPreferenceEx) findPreference(settings.SPEED_LIMIT_EXCEED.getId());
-		voiceProvider.setEntries(speedLimitNames);
-		voiceProvider.setEntryValues(speedLimitValues);
+		ListPreferenceEx voiceProvider = (ListPreferenceEx) findPreference(settings.SPEED_LIMIT_EXCEED_KMH.getId());
+		voiceProvider.setEntries(names);
+		voiceProvider.setEntryValues(valuesKmh);
 	}
 
 	private void setupKeepInformingPref() {

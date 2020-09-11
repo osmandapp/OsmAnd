@@ -43,11 +43,13 @@ import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackDrawInfo;
@@ -70,6 +72,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -234,7 +237,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
+		List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
+
+		Iterator<SelectedGpxFile> iterator = selectedGPXFiles.iterator();
+		while (iterator.hasNext()) {
+			SelectedGpxFile selectedGpxFile = iterator.next();
+			if (selectedGpxFile.isFollowTrack(view.getApplication()) && !showTrackToFollow()) {
+				iterator.remove();
+			}
+		}
 		cache.clear();
 		if (!selectedGPXFiles.isEmpty()) {
 			drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
@@ -708,6 +719,21 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private boolean hasTrackDrawInfoForTrack(GPXFile gpxFile) {
 		return trackDrawInfo != null && (trackDrawInfo.isCurrentRecording() && gpxFile.showCurrentTrack
 				|| gpxFile.path.equals(trackDrawInfo.getFilePath()));
+	}
+
+	private boolean showTrackToFollow() {
+		if (view.getContext() instanceof MapActivity) {
+			MapActivity mapActivity = (MapActivity) view.getContext();
+			OsmandApplication app = mapActivity.getMyApplication();
+			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapRouteInfoMenu();
+			return !app.getSelectedGpxHelper().shouldHideTrackToFollow()
+					|| routeInfoMenu.isVisible()
+					|| app.getRoutingHelper().isFollowingMode()
+					|| MapRouteInfoMenu.followTrackVisible
+					|| MapRouteInfoMenu.chooseRoutesVisible
+					|| MapRouteInfoMenu.waypointsVisible;
+		}
+		return false;
 	}
 
 	private boolean isPointVisited(WptPt o) {

@@ -165,33 +165,34 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		registerListPreference(settings.ARRIVAL_DISTANCE_FACTOR, screen, arrivalNames, arrivalValues);
 
 
+		//array size must be equal!
+		Float[] speedLimitsKmh = new Float[]{-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
+		Float[] speedLimitsMph = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
+		//array size must be equal!
+		Float[] speedLimitsKmhPos = new Float[]{0f, 5f, 7f, 10f, 15f, 20f};
+		Float[] speedLimitsMphPos = new Float[]{0f, 3f, 5f, 7f, 10f, 15f};
 		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
-			Float[] speedLimitsKm = new Float[]{-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
-			Float[] speedLimitsKmPos = new Float[]{0f, 5f, 7f, 10f, 15f, 20f};
-			String[] speedNames = new String[speedLimitsKm.length];
-			String[] speedNamesPos = new String[speedLimitsKmPos.length];
-			for (int i = 0; i < speedLimitsKm.length; i++) {
-				speedNames[i] = speedLimitsKm[i].intValue() + " " + getString(R.string.km_h);
+			String[] speedNames = new String[speedLimitsKmh.length];
+			String[] speedNamesPos = new String[speedLimitsKmhPos.length];
+			for (int i = 0; i < speedLimitsKmh.length; i++) {
+				speedNames[i] = speedLimitsKmh[i].intValue() + " " + getString(R.string.km_h);
 			}
-			for (int i = 0; i < speedLimitsKmPos.length; i++) {
-				speedNamesPos[i] = speedLimitsKmPos[i].intValue() + " " + getString(R.string.km_h);
+			for (int i = 0; i < speedLimitsKmhPos.length; i++) {
+				speedNamesPos[i] = speedLimitsKmhPos[i].intValue() + " " + getString(R.string.km_h);
 			}
-			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsKm);
-			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS, screen, speedNamesPos, speedLimitsKmPos);
+			registerListPreference(settings.SPEED_LIMIT_EXCEED_KMH, screen, speedNames, speedLimitsKmh);
+			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH, screen, speedNamesPos, speedLimitsKmhPos);
 		} else {
-			Float[] speedLimitsMiles = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
-			Float[] speedLimitsMilesPos = new Float[]{0f, 3f, 5f, 7f, 10f, 15f};
-
-			String[] speedNames = new String[speedLimitsMiles.length];
+			String[] speedNames = new String[speedLimitsMph.length];
+			String[] speedNamesPos = new String[speedLimitsMphPos.length];
 			for (int i = 0; i < speedNames.length; i++) {
-				speedNames[i] = speedLimitsMiles[i].intValue() + " " + getString(R.string.mile_per_hour);
+				speedNames[i] = speedLimitsMph[i].intValue() + " " + getString(R.string.mile_per_hour);
 			}
-			String[] speedNamesPos = new String[speedLimitsMilesPos.length];
 			for (int i = 0; i < speedNamesPos.length; i++) {
-				speedNamesPos[i] = speedLimitsMiles[i].intValue() + " " + getString(R.string.mile_per_hour);
+				speedNamesPos[i] = speedLimitsMphPos[i].intValue() + " " + getString(R.string.mile_per_hour);
 			}
-			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsMiles);
-			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS, screen, speedNamesPos, speedLimitsMilesPos);
+			registerListPreference(settings.SPEED_LIMIT_EXCEED_KMH, screen, speedNames, speedLimitsKmh);
+			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH, screen, speedNamesPos, speedLimitsKmhPos);
 		}
 
 		PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");
@@ -756,7 +757,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		final int[] maxValue = new int[1];
 		final int min;
 		final int max;
-		if (defaultSpeedOnly) {
+		if (defaultSpeedOnly || router == null) {
 			minValue[0] = Math.round(Math.min(1, settingsDefaultSpeed) * ratio[0]);
 			maxValue[0] = Math.round(Math.max(300, settingsDefaultSpeed) * ratio[0]);
 			min = minValue[0];

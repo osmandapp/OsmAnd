@@ -89,7 +89,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 					public void onClick(View v) {
 						Fragment fragment = getTargetFragment();
 						if (fragment instanceof OptionsFragmentListener) {
-							((OptionsFragmentListener) fragment).addToGpxOnClick();
+							((OptionsFragmentListener) fragment).saveChangesOnClick();
 						}
 						dismiss();
 					}
@@ -115,6 +115,42 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				})
 				.create();
 		items.add(addToTrackItem);
+
+		items.add(new OptionsDividerItem(getContext()));
+
+		BaseBottomSheetItem directions = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark))
+				.setTitle(getString(R.string.get_directions))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Fragment fragment = getTargetFragment();
+						if (fragment instanceof OptionsFragmentListener) {
+							((OptionsFragmentListener) fragment).directionsOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(directions);
+
+		BaseBottomSheetItem reverse = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_change_navigation_points))
+				.setTitle(getString(R.string.reverse_route))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Fragment fragment = getTargetFragment();
+						if (fragment instanceof OptionsFragmentListener) {
+							((OptionsFragmentListener) fragment).reverseRouteOnClick();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(reverse);
 
 		items.add(new OptionsDividerItem(getContext()));
 
@@ -189,7 +225,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		void snapToRoadOnCLick();
 
-		void addToGpxOnClick();
+		void saveChangesOnClick();
 
 		void saveAsNewTrackOnClick();
 

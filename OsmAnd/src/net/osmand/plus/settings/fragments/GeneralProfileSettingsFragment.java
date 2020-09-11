@@ -95,14 +95,37 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	};
 
 	private void setupAppThemePref() {
-		final ListPreferenceEx appTheme = (ListPreferenceEx) findPreference(settings.OSMAND_THEME.getId());
-		appTheme.setEntries(new String[] {getString(R.string.dark_theme), getString(R.string.light_theme)});
-		appTheme.setEntryValues(new Integer[] {OsmandSettings.OSMAND_DARK_THEME, OsmandSettings.OSMAND_LIGHT_THEME});
+		final ListPreferenceEx appTheme =
+				(ListPreferenceEx) findPreference(settings.OSMAND_THEME.getId());
+
+		ArrayList<String> entries = new ArrayList<>();
+		entries.add(getString(R.string.dark_theme));
+		entries.add(getString(R.string.light_theme));
+
+		ArrayList<Integer> values = new ArrayList<>();
+		values.add(OsmandSettings.OSMAND_DARK_THEME);
+		values.add(OsmandSettings.OSMAND_LIGHT_THEME);
+
+		if (settings.isSupportSystemDefaultTheme()) {
+			entries.add(getString(R.string.system_default_theme));
+			values.add(OsmandSettings.SYSTEM_DEFAULT_THEME);
+		}
+
+		String[] entriesStrings = new String[entries.size()];
+		appTheme.setEntries(entries.toArray(entriesStrings));
+		appTheme.setEntryValues(values.toArray());
 		appTheme.setIcon(getOsmandThemeIcon());
 	}
 
 	private Drawable getOsmandThemeIcon() {
-		return getActiveIcon(settings.isLightContent() ? R.drawable.ic_action_sun : R.drawable.ic_action_moon);
+		int iconId;
+		ApplicationMode mode = getSelectedAppMode();
+		if (settings.isSystemDefaultThemeUsedForMode(mode)) {
+			iconId = R.drawable.ic_action_android;
+		} else {
+			iconId = settings.isLightContent() ? R.drawable.ic_action_sun : R.drawable.ic_action_moon;
+		}
+		return getActiveIcon(iconId);
 	}
 
 	private void setupRotateMapPref() {

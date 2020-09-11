@@ -1,22 +1,16 @@
 package net.osmand.plus.measurementtool;
 
-import android.app.Dialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -24,9 +18,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
+import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 import org.apache.commons.logging.Log;
@@ -34,64 +27,156 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.*;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.NEXT_SEGMENT;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.LEFT;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.RIGHT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.BOTTOM_SHEET_HEIGHT_DP;
 
-public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBehaviourDialogFragment {
 
 	private static final Log LOG = PlatformUtil.getLog(RouteBetweenPointsBottomSheetDialogFragment.class);
 	public static final String TAG = RouteBetweenPointsBottomSheetDialogFragment.class.getSimpleName();
 	public static final int STRAIGHT_LINE_TAG = -1;
-	public static final String CALCULATION_MODE_KEY = "calculation_type";
+	public static final String DIALOG_TYPE_KEY = "dialog_type_key";
+	public static final String DEFAULT_DIALOG_MODE_KEY = "default_dialog_mode_key";
 	public static final String ROUTE_APP_MODE_KEY = "route_app_mode";
 
 	private boolean nightMode;
-	private boolean portrait;
 	private TextView btnDescription;
-	private CalculationMode calculationMode = WHOLE_TRACK;
+	private RouteBetweenPointsDialogType dialogType = RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION;
+	private RouteBetweenPointsDialogMode defaultDialogMode = RouteBetweenPointsDialogMode.SINGLE;
 	private ApplicationMode appMode;
 
 	private LinearLayout customRadioButton;
 
-	@Nullable
+	public enum RouteBetweenPointsDialogType {
+		WHOLE_ROUTE_CALCULATION,
+		NEXT_ROUTE_CALCULATION,
+		PREV_ROUTE_CALCULATION
+	}
+
+	public enum RouteBetweenPointsDialogMode {
+		SINGLE,
+		ALL,
+	}
+
+	private String getButtonText(RouteBetweenPointsDialogMode dialogMode) {
+		switch (dialogType) {
+			case WHOLE_ROUTE_CALCULATION:
+				switch (dialogMode) {
+					case SINGLE:
+						return getString(R.string.next_segment);
+					case ALL:
+						return getString(R.string.whole_track);
+				}
+				break;
+			case NEXT_ROUTE_CALCULATION:
+				switch (dialogMode) {
+					case SINGLE:
+						return getString(R.string.next_segment);
+					case ALL:
+						return getString(R.string.all_next_segments);
+				}
+				break;
+			case PREV_ROUTE_CALCULATION:
+				switch (dialogMode) {
+					case SINGLE:
+						return getString(R.string.previous_segment);
+					case ALL:
+						return getString(R.string.all_previous_segments);
+				}
+				break;
+		}
+		return "";
+	}
+
+	private String getButtonDescr(RouteBetweenPointsDialogMode dialogMode) {
+		switch (dialogType) {
+			case WHOLE_ROUTE_CALCULATION:
+				switch (dialogMode) {
+					case SINGLE:
+						return getString(R.string.route_between_points_next_segment_button_desc);
+					case ALL:
+						return getString(R.string.route_between_points_whole_track_button_desc);
+				}
+				break;
+			case NEXT_ROUTE_CALCULATION:
+				switch (dialogMode) {
+					case SINGLE:
+						return getString(R.string.only_selected_segment_recalc);
+					case ALL:
+						return getString(R.string.all_next_segments_will_be_recalc);
+				}
+				break;
+			case PREV_ROUTE_CALCULATION:
+				switch (dialogMode) {
+					case SINGLE:
+						return getString(R.string.only_selected_segment_recalc);
+					case ALL:
+						return getString(R.string.all_previous_segments_will_be_recalc);
+				}
+				break;
+		}
+		return "";
+	}
+
+	private void addDelimiterView(LinearLayout container) {
+		View row = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.divider, container, false);
+		View divider = row.findViewById(R.id.divider);
+		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) divider.getLayoutParams();
+		params.topMargin = row.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
+		params.bottomMargin = row.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
+		container.addView(row);
+	}
+
+	public void setDefaultDialogMode(RouteBetweenPointsDialogMode defaultDialogMode) {
+		this.defaultDialogMode = defaultDialogMode;
+		updateModeButtons();
+	}
+
+	public void updateModeButtons() {
+		UiUtilities.updateCustomRadioButtons(getMyApplication(), customRadioButton, nightMode,
+				defaultDialogMode == RouteBetweenPointsDialogMode.SINGLE ? LEFT : RIGHT);
+		btnDescription.setText(getButtonDescr(defaultDialogMode));
+	}
+
+	private void addProfileView(LinearLayout container, View.OnClickListener onClickListener, Object tag,
+								Drawable icon, CharSequence title, boolean check) {
+		View row = UiUtilities.getInflater(getContext(), nightMode)
+				.inflate(R.layout.bottom_sheet_item_with_radio_btn, container, false);
+		((RadioButton) row.findViewById(R.id.compound_button)).setChecked(check);
+		ImageView imageView = row.findViewById(R.id.icon);
+		imageView.setImageDrawable(icon);
+		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) imageView.getLayoutParams();
+		params.rightMargin = container.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
+		((TextView) row.findViewById(R.id.title)).setText(title);
+		row.setOnClickListener(onClickListener);
+		row.setTag(tag);
+		container.addView(row);
+	}
+
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		if (args != null) {
 			appMode = ApplicationMode.valueOfStringKey(args.getString(ROUTE_APP_MODE_KEY), null);
-			calculationMode = (CalculationMode) args.get(CALCULATION_MODE_KEY);
+			dialogType = (RouteBetweenPointsDialogType) args.get(DIALOG_TYPE_KEY);
+			defaultDialogMode = (RouteBetweenPointsDialogMode) args.get(DEFAULT_DIALOG_MODE_KEY);
 		}
 		if (savedInstanceState != null) {
-			calculationMode = (CalculationMode) savedInstanceState.get(CALCULATION_MODE_KEY);
+			dialogType = (RouteBetweenPointsDialogType) savedInstanceState.get(DIALOG_TYPE_KEY);
+			defaultDialogMode = (RouteBetweenPointsDialogMode) savedInstanceState.get(DEFAULT_DIALOG_MODE_KEY);
 		}
 		OsmandApplication app = requiredMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		FragmentActivity activity = requireActivity();
-		portrait = AndroidUiHelper.isOrientationPortrait(activity);
 		final View mainView = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.fragment_route_between_points_bottom_sheet_dialog,
-						container, false);
-		AndroidUtils.setBackground(activity, mainView, nightMode,
-				portrait ? R.drawable.bg_bottom_menu_light : R.drawable.bg_bottom_sheet_topsides_landscape_light,
-				portrait ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_sheet_topsides_landscape_dark);
-
-		View cancelButton = mainView.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(nightMode, cancelButton, UiUtilities.DialogButtonType.SECONDARY,
-				R.string.shared_string_close);
-		mainView.findViewById(R.id.dismiss_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
-
+						null, false);
 		customRadioButton = mainView.findViewById(R.id.custom_radio_buttons);
-		TextView segmentBtn = mainView.findViewById(R.id.left_button);
-		segmentBtn.setText(R.string.next_segment);
-		TextView wholeTrackBtn = mainView.findViewById(R.id.right_button);
-		wholeTrackBtn.setText(R.string.whole_track);
+		TextView singleModeButton = mainView.findViewById(R.id.left_button);
+		singleModeButton.setText(getButtonText(RouteBetweenPointsDialogMode.SINGLE));
+		TextView allModeButton = mainView.findViewById(R.id.right_button);
+		allModeButton.setText(getButtonText(RouteBetweenPointsDialogMode.ALL));
 		btnDescription = mainView.findViewById(R.id.button_description);
 
 		LinearLayout navigationType = mainView.findViewById(R.id.navigation_types_container);
@@ -107,7 +192,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 				}
 				Fragment fragment = getTargetFragment();
 				if (fragment instanceof RouteBetweenPointsFragmentListener) {
-					((RouteBetweenPointsFragmentListener) fragment).onChangeApplicationMode(mode, calculationMode);
+					((RouteBetweenPointsFragmentListener) fragment).onChangeApplicationMode(mode, dialogType, defaultDialogMode);
 				}
 				dismiss();
 			}
@@ -120,79 +205,43 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 
 		for (int i = 0; i < modes.size(); i++) {
 			ApplicationMode mode = modes.get(i);
-			icon = app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
-			addProfileView(navigationType, onClickListener, i, icon, mode.toHumanString(), mode.equals(appMode));
+			if (!"public_transport".equals(mode.getRoutingProfile())) {
+				icon = app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
+				addProfileView(navigationType, onClickListener, i, icon, mode.toHumanString(), mode.equals(appMode));
+			}
 		}
 
-		segmentBtn.setOnClickListener(new View.OnClickListener() {
+		singleModeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				updateModeButtons(NEXT_SEGMENT);
+				setDefaultDialogMode(RouteBetweenPointsDialogMode.SINGLE);
 			}
 		});
-		wholeTrackBtn.setOnClickListener(new View.OnClickListener() {
+		allModeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				updateModeButtons(WHOLE_TRACK);
+				setDefaultDialogMode(RouteBetweenPointsDialogMode.ALL);
 			}
 		});
-		updateModeButtons(calculationMode);
-		return mainView;
-	}
-
-	private void addDelimiterView(LinearLayout container) {
-		View row = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.divider, container, false);
-		View divider = row.findViewById(R.id.divider);
-		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) divider.getLayoutParams();
-		params.topMargin = row.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
-		params.bottomMargin = row.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
-		container.addView(row);
-	}
-
-	private void updateModeButtons(CalculationMode calculationMode) {
-		if (calculationMode == NEXT_SEGMENT) {
-			UiUtilities.updateCustomRadioButtons(getMyApplication(), customRadioButton, nightMode, LEFT);
-			btnDescription.setText(R.string.rourte_between_points_next_segment_button_desc);
-		} else {
-			btnDescription.setText(R.string.rourte_between_points_whole_track_button_desc);
-			UiUtilities.updateCustomRadioButtons(getMyApplication(), customRadioButton, nightMode, RIGHT);
-		}
-		setCalculationMode(calculationMode);
-	}
-
-	private void addProfileView(LinearLayout container, View.OnClickListener onClickListener, Object tag,
-	                            Drawable icon, CharSequence title, boolean check) {
-		View row = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.bottom_sheet_item_with_radio_btn, container, false);
-		((RadioButton) row.findViewById(R.id.compound_button)).setChecked(check);
-		ImageView imageView = row.findViewById(R.id.icon);
-		imageView.setImageDrawable(icon);
-		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) imageView.getLayoutParams();
-		params.rightMargin = container.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
-		((TextView) row.findViewById(R.id.title)).setText(title);
-		row.setOnClickListener(onClickListener);
-		row.setTag(tag);
-		container.addView(row);
+		updateModeButtons();
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
-		if (!portrait) {
-			Dialog dialog = getDialog();
-			if (dialog != null && dialog.getWindow() != null) {
-				Window window = dialog.getWindow();
-				WindowManager.LayoutParams params = window.getAttributes();
-				params.width = dialog.getContext().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
-				window.setAttributes(params);
-			}
-		}
+	protected int getPeekHeight() {
+		return AndroidUtils.dpToPx(getContext(), BOTTOM_SHEET_HEIGHT_DP);
+	}
+
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_close;
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putSerializable(CALCULATION_MODE_KEY, calculationMode);
+		outState.putSerializable(DIALOG_TYPE_KEY, dialogType);
+		outState.putSerializable(DEFAULT_DIALOG_MODE_KEY, defaultDialogMode);
 	}
 
 	@Override
@@ -204,18 +253,17 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 		super.onDestroyView();
 	}
 
-	public void setCalculationMode(CalculationMode calculationMode) {
-		this.calculationMode = calculationMode;
-	}
-
-	public static void showInstance(FragmentManager fm, Fragment targetFragment, CalculationMode calculationMode,
-	                                ApplicationMode applicationMode) {
+	public static void showInstance(FragmentManager fm, Fragment targetFragment,
+									RouteBetweenPointsDialogType dialogType,
+									RouteBetweenPointsDialogMode defaultDialogMode,
+									ApplicationMode applicationMode) {
 		try {
 			if (!fm.isStateSaved()) {
 				RouteBetweenPointsBottomSheetDialogFragment fragment = new RouteBetweenPointsBottomSheetDialogFragment();
 				Bundle args = new Bundle();
 				args.putString(ROUTE_APP_MODE_KEY, applicationMode != null ? applicationMode.getStringKey() : null);
-				args.putSerializable(CALCULATION_MODE_KEY, calculationMode);
+				args.putSerializable(DIALOG_TYPE_KEY, dialogType);
+				args.putSerializable(DEFAULT_DIALOG_MODE_KEY, defaultDialogMode);
 				fragment.setArguments(args);
 				fragment.setTargetFragment(targetFragment, 0);
 				fragment.show(fm, TAG);
@@ -229,7 +277,8 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetDial
 
 		void onCloseRouteDialog();
 
-		void onChangeApplicationMode(ApplicationMode mode, CalculationMode calculationMode);
+		void onChangeApplicationMode(ApplicationMode mode, RouteBetweenPointsDialogType dialogType,
+									 RouteBetweenPointsDialogMode dialogMode);
 
 	}
 }

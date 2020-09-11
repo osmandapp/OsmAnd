@@ -34,7 +34,7 @@ public class RemovePointCommand extends MeasurementModeCommand {
 	}
 
 	@Override
-	MeasurementCommandType getType() {
+	public MeasurementCommandType getType() {
 		return MeasurementCommandType.REMOVE_POINT;
 	}
 }

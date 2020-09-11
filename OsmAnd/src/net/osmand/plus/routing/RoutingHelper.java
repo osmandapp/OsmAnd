@@ -1,9 +1,10 @@
 package net.osmand.plus.routing;
 
 
-import net.osmand.GPXUtilities;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
@@ -12,14 +13,11 @@ import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
-import net.osmand.plus.routing.RouteProvider.RoutingEnvironment;
-import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.NavigationService;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -27,9 +25,12 @@ import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RouteProvider.RoutingEnvironment;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
-import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
@@ -1041,7 +1042,30 @@ public class RoutingHelper {
 		return route.getRouteDirections();
 	}
 
+	@Nullable
+	public QuadRect getRouteRect(@NonNull RouteCalculationResult result) {
+		QuadRect rect = new QuadRect(0, 0, 0, 0);
+		Location lt = getLastProjection();
+		if (lt == null) {
+			lt = app.getTargetPointsHelper().getPointToStartLocation();
+		}
+		if (lt == null) {
+			lt = app.getLocationProvider().getLastKnownLocation();
+		}
+		if (lt != null) {
+			MapUtils.insetLatLonRect(rect, lt.getLatitude(), lt.getLongitude());
+		}
+		List<Location> list = result.getImmutableAllLocations();
+		for (Location l : list) {
+			MapUtils.insetLatLonRect(rect, l.getLatitude(), l.getLongitude());
+		}
+		List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+		for (TargetPoint l : targetPoints) {
+			MapUtils.insetLatLonRect(rect, l.getLatitude(), l.getLongitude());
+		}
 
+		return rect.left == 0 && rect.right == 0 ? null : rect;
+	}
 
 	private class RouteRecalculationThread extends Thread {
 
@@ -1263,13 +1287,12 @@ public class RoutingHelper {
 				public void run() {
 					RouteCalculationProgress calculationProgress = params.calculationProgress;
 					if (isRouteBeingCalculated()) {
-						float pr = calculationProgress.getLinearProgress();
-						progressRoute.updateProgress((int) pr);
 						Thread t = currentRunningJob;
 						if(t instanceof RouteRecalculationThread && ((RouteRecalculationThread) t).params != params) {
 							// different calculation started
 							return;
 						} else {
+							progressRoute.updateProgress((int) calculationProgress.getLinearProgress());
 							if (calculationProgress.requestPrivateAccessRouting) {
 								progressRoute.requestPrivateAccessRouting();
 							}
@@ -1345,6 +1368,7 @@ public class RoutingHelper {
 
 
 	// NEVER returns null
+	@NonNull
 	public RouteCalculationResult getRoute() {
 		return route;
 	}

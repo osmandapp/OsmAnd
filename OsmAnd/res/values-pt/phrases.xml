@@ -3771,7 +3771,7 @@
     <string name="poi_volcano_number_of_eruptions">Quantidade de erupções</string>
     <string name="poi_drinking_water_refill_network">Rede de reabastecimento de água potável</string>
     <string name="poi_drinking_water_refill_no">Reabastecimento de água potável: não</string>
-    <string name="poi_drinking_water_refill_yes">Reabastecimento de água potável: sim</string>
+    <string name="poi_drinking_water_refill_yes">Sim</string>
     <string name="poi_seamark_obstruction">Obstrução</string>
     <string name="poi_seamark_water_level_below_mwl">Nível da água: abaixo do nível médio da água</string>
     <string name="poi_seamark_water_level_above_mwl">Nível da água: acima do nível médio da água</string>
@@ -3817,4 +3817,13 @@
     <string name="poi_city_block">Quarteirão</string>
     <string name="poi_borough">Bairro</string>
     <string name="poi_give_box">Give-box</string>
+    <string name="poi_traffic_signals_arrow_no">Seta: não</string>
+    <string name="poi_elevator">Elevador</string>
+    <string name="poi_departures_board_timetable">Calendário</string>
+    <string name="poi_departures_board_realtime">Tempo real</string>
+    <string name="poi_departures_board_delay">Atraso</string>
+    <string name="poi_departures_board_yes">Sim</string>
+    <string name="poi_departures_board_no">Quadro de partidas: não</string>
+    <string name="poi_departures_board">Quadro de partidas</string>
+    <string name="poi_drinking_water_refill">Reabastecimento de água potável</string>
 </resources>

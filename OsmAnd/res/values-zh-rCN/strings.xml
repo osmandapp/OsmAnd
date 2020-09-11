@@ -762,9 +762,9 @@
     <string name="search_POI_level_btn">搜索更多</string>
     <string name="choose_available_region">从列表中选择区域</string>
     <string name="navigate_point_top_text">用选中的格式输入纬度和经度(D - 度，M - 分，S - 秒)</string>
-    <string name="navigate_point_format_D">DDD.DDDDD</string>
-    <string name="navigate_point_format_DM">DDD MM.MM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+    <string name="navigate_point_format_D">度度度.度度度度度</string>
+    <string name="navigate_point_format_DM">度度度 分分.分分分</string>
+    <string name="navigate_point_format_DMS">度度度 分分 秒秒.秒</string>
     <string name="shared_string_show_on_map">在地图上显示</string>
     <string name="context_menu_item_update_map">更新地图</string>
     <string name="context_menu_item_create_poi">创建POI</string>
@@ -1505,7 +1505,6 @@
     <string name="access_widget_expand">展开</string>
     <string name="access_shared_string_navigate_up">向上导航</string>
     <string name="access_sort">排序</string>
-    <string name="number_of_gpx_files_selected_pattern">已选择 %s GPX 文件</string>
     <string name="rendering_value_fine_name">精细</string>
     <string name="rendering_value_thin_name">细</string>
     <string name="rendering_value_medium_name">中等</string>
@@ -1539,7 +1538,7 @@
     <string name="lang_nds">低地德语</string>
     <string name="lang_mk">马其顿</string>
     <string name="lang_fy">菲士兰</string>
-    <string name="lang_als">"阿尔巴尼亚语  (Tosk)"</string>
+    <string name="lang_als">阿尔巴尼亚语 (Tosk)</string>
     <string name="world_map_download_descr">世界底图（涵盖整个世界的缩小版）可能存在丢失或过期。请考虑下载它的全球概览。</string>
     <string name="map_downloaded_descr">已下载 %1$s 的地图，你现在可以开始使用它。</string>
     <string name="simulate_initial_startup_descr">设置标志，指示第一个应用程序启动，保持所有其他设置保持不变。</string>
@@ -1571,7 +1570,6 @@
     <string name="lang_kab">卡布列语</string>
     <string name="lang_ber">柏柏尔文</string>
     <string name="archive_wikipedia_data">已下载的旧的不兼容维基百科的数据。你想要将其存档吗？</string>
-    <string name="disable_recording_once_app_killed_descrp">当应用程序被停止，将暂停 GPX 日志记录（借由新的应用程序）。（OsmAnd 背景标示，会从通知栏消失。）</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">按线路从属标色</string>
     <string name="rendering_value_walkingRoutesOSMC_name">由 OSMC 徒步旅行符号标色</string>
     <string name="application_dir_change_warning3">你想 OsmAnd 也将其数据文件复制到新的目标吗？</string>
@@ -1667,7 +1665,7 @@
     <string name="navigate_point_northing">北距</string>
     <string name="navigate_point_easting">东距</string>
     <string name="error_avoid_specific_road">没有找到支线</string>
-    <string name="home_button">主页</string>
+    <string name="home_button">家</string>
     <string name="map_update">有 %1$s 个地图可更新</string>
     <string name="search_for">搜索</string>
     <string name="coordinates">坐标</string>
@@ -1694,7 +1692,6 @@
     <string name="sleep_mode_stop_dialog">停止 GPS 背景模式吗？</string>
     <string name="stop_navigation_service">停止</string>
     <string name="confirm_every_run">总是询问</string>
-    <string name="save_global_track_interval_descr">为通常的轨迹记录选择录制间隔（透过在地图上的 GPX 记录小工具启用）。</string>
     <string name="save_global_track_interval">通用记录间隔</string>
     <string name="background_service_int">GPS 唤醒时间间隔</string>
     <string name="enable_sleep_mode">启用 GPS 背景模式</string>
@@ -1743,8 +1740,6 @@
     <string name="live_monitoring_m">在线跟踪 (需要 GPX)</string>
     <string name="live_monitoring_start">开始在线跟踪</string>
     <string name="live_monitoring_stop">停止在线跟踪</string>
-    <string name="gpx_monitoring_start">启动 GPX 记录</string>
-    <string name="gpx_monitoring_stop">停止 GPX 记录</string>
     <string name="gpx_start_new_segment">开始新区段</string>
     <string name="rendering_attr_hideBuildings_name">建筑</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">非车辆公路</string>
@@ -2372,7 +2367,7 @@
     <string name="will_open_at">开始营业于</string>
     <string name="will_open_on">开始营业于</string>
     <string name="additional_actions">额外的活动</string>
-    <string name="av_locations_selected_desc">GPX文件，包含所选笔记的坐标和数据。</string>
+    <string name="av_locations_selected_desc">GPX文件，包含所选注记的坐标和数据。</string>
     <string name="av_locations_all_desc">GPX文件，包含所有注释的坐标和数据。</string>
     <string name="modify_the_search_query">修改搜索查询。</string>
     <string name="shared_string_actions">操作</string>
@@ -3126,7 +3121,7 @@
     <string name="add_hidden_group_info">添加的点在地图上不可见，因为选定的组是隐藏的，您可以在\"%s\"中找到它。</string>
     <string name="gpx_split_interval_descr">选择显示轨迹上带有距离或时间标记的间隔。</string>
     <string name="gpx_split_interval_none_descr">选择所需的拆分选项：“按时间”或“按距离”。</string>
-    <string name="rourte_between_points_next_segment_button_desc">新的配置文件将在下一段路线计算时生效。</string>
+    <string name="route_between_points_next_segment_button_desc">新的配置文件将在下一段路线计算时生效。</string>
     <string name="whole_track">整个轨迹</string>
     <string name="plan_route_last_edited">最后更改</string>
     <string name="plan_route_import_track">导入轨迹</string>
@@ -3138,15 +3133,18 @@
     <string name="save_as_new_track">保存为新的轨迹</string>
     <string name="plan_route_exit_dialog_descr">你确定在不保存的情况下退出计划路线吗？所有的更改均会丢失。</string>
     <string name="reverse_route">反转路线</string>
-    <string name="rourte_between_points_whole_track_button_desc">全部路线会以选择的配置文件进行重新计算。</string>
-    <string name="rourte_between_points_desc">选择以直线或以选择的导航文件来计算路线的方式去连接导航点。</string>
+    <string name="route_between_points_whole_track_button_desc">全部路线会以选择的配置文件进行重新计算。</string>
+    <string name="route_between_points_desc">选择以直线或以选择的导航文件来计算路线的方式去连接导航点。</string>
     <string name="next_segment">下一段</string>
-    <string name="rourte_between_points_warning_desc">要使用这个选项，OsmAnd 会跟踪你在地图道路上的轨迹。
+    <string name="route_between_points_warning_desc">要使用这个选项，OsmAnd 会跟踪你在地图道路上的轨迹。
 \n
 \n在进行下一步时，你需要选择导航文件来检测与你的起始点相近的道路。</string>
     <string name="threshold_distance">起始距离</string>
     <string name="navigation_profile">导航文件</string>
-    <string name="rourte_between_points_add_track_desc">选择一个要添加新片段的跟踪文件。</string>
+    <string name="route_between_points_add_track_desc">选择一个要添加新片段的跟踪文件。</string>
     <string name="street_level_imagery">街道等级图像</string>
     <string name="in_case_of_reverse_direction">防止相反的方向</string>
+    <string name="delete_address">删除地址</string>
+    <string name="add_address">添加地址</string>
+    <string name="access_hint_enter_address">输入地址</string>
 </resources>

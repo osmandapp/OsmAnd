@@ -74,28 +74,24 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 	}
 
 	private void setupMapDirectionToCompassPref() {
-		String[] entries;
-		Float[] entryValues;
+		//array size must be equal!
+		Float[] valuesKmh = new Float[]{0f, 5f, 7f, 10f, 15f, 20f};
+		Float[] valuesMph = new Float[]{0f, 3f, 5f, 7f, 10f, 15f};
+		String[] names;
 		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
-			entryValues = new Float[] {0f, 5f, 7f, 10f, 15f, 20f};
-			entries = new String[entryValues.length];
-
-			for (int i = 0; i < entryValues.length; i++) {
-				entries[i] = entryValues[i].intValue() + " " + getString(R.string.km_h);
+			names = new String[valuesKmh.length];
+			for (int i = 0; i < names.length; i++) {
+				names[i] = valuesKmh[i].intValue() + " " + getString(R.string.km_h);
 			}
 		} else {
-			Float[] speedLimitsMiles = new Float[] {-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
-			entryValues = new Float[] {0f, 3f, 5f, 7f, 10f, 15f};
-			entries = new String[entryValues.length];
-
-			for (int i = 0; i < entries.length; i++) {
-				entries[i] = speedLimitsMiles[i].intValue() + " " + getString(R.string.mile_per_hour);
+			names = new String[valuesMph.length];
+			for (int i = 0; i < names.length; i++) {
+				names[i] = valuesMph[i].intValue() + " " + getString(R.string.mile_per_hour);
 			}
 		}
-
-		ListPreferenceEx switchMapDirectionToCompass = (ListPreferenceEx) findPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS.getId());
-		switchMapDirectionToCompass.setEntries(entries);
-		switchMapDirectionToCompass.setEntryValues(entryValues);
+		ListPreferenceEx switchMapDirectionToCompass = (ListPreferenceEx) findPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH.getId());
+		switchMapDirectionToCompass.setEntries(names);
+		switchMapDirectionToCompass.setEntryValues(valuesKmh);
 	}
 
 	@Override

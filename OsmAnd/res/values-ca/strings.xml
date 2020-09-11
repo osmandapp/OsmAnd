@@ -879,7 +879,6 @@
     <string name="download_regular_maps">Mapes estàndards</string>
     <string name="rendering_attr_noAdminboundaries_description">No mostris els límits administratius regionals (nivells 5 a 9).</string>
     <string name="map_widget_max_speed">Límit de velocitat</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="incremental_search_city">Cerca progressiva de municipis</string>
     <string name="safe_mode_description">Executeu l\'aplicació en mode segur (usant Android més lent que el codi nadiu).</string>
     <string name="delete_target_point">Elimina el destí</string>
@@ -1279,8 +1278,6 @@
     <string name="live_monitoring_m">Registre de traça en línia (cal GPX)</string>
     <string name="live_monitoring_start">Inicia un registre de traça en línia</string>
     <string name="live_monitoring_stop">Atura el registre de traça en línia</string>
-    <string name="gpx_monitoring_start">Inicia el registre GPX</string>
-    <string name="gpx_monitoring_stop">Atura el registre GPX</string>
     <string name="gpx_start_new_segment">Inicia un segment nou</string>
     <string name="lang_fa">Persa</string>
     <string name="keep_navigation_service">Mantén</string>
@@ -1332,7 +1329,6 @@
     <string name="save_track_to_gpx_globally_descr">L\'enregistrament de la posició en un fitxer GPX es pot activar o desactivar amb el giny d\'enregistrament GPX al mapa.</string>
     <string name="save_track_interval_globally">Interval d\'enregistrament</string>
     <string name="confirm_every_run">Es demana confirmació</string>
-    <string name="save_global_track_interval_descr">Indiqueu l\'interval d\'enregistrament general de les traces (s\'activa mitjançant el giny de gravació de GPX del mapa).</string>
     <string name="save_global_track_interval">Interval d\'enregistrament general</string>
     <string name="traffic_warning_speed_limit">Velocitat màxima</string>
     <string name="traffic_warning_border_control">Control de fronteres</string>
@@ -1570,7 +1566,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="download_wikipedia_maps">Viquipèdia</string>
     <string name="gps_network_not_enabled">El servei de posicionament està aturat. El voleu activar\?</string>
     <string name="disable_recording_once_app_killed">Evita la gravació en procés de fons</string>
-    <string name="disable_recording_once_app_killed_descrp">L\'enregistrament en format GPX s\'aturarà quan ho faci OsmAnd (via les aplicacions recents). (La indicació de procés de fons de l\'OsmAnd desapareixerà de la barra de notificacions d\'Android)</string>
     <string name="shared_string_import2osmand">Importa a l\'OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Esteu segur que voleu esborrar %1$d notes\?</string>
     <string name="archive_wikipedia_data">Teniu dades de Viquipèdia antigues i incompatibles. Les voleu desar?</string>
@@ -1945,7 +1940,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rec_split">Divisió d\'enregistrament</string>
     <string name="rec_split_title">Utilitza divisió d\'enregistrament</string>
     <string name="map_mode">Mode mapa</string>
-    <string name="number_of_gpx_files_selected_pattern">"Seleccionats  %s arxius GPX"</string>
     <string name="access_default_color">Color per defecte</string>
     <string name="access_category_choice">Trieu la categoria</string>
     <string name="access_hint_enter_name">Introduïu el nom</string>
@@ -3719,17 +3713,17 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="add_to_a_track">Afegir a una ruta</string>
     <string name="track_show_start_finish_icons">Mostrar icones d\'inici final</string>
     <string name="select_track_width">Triar amplària</string>
-    <string name="rourte_between_points_add_track_desc">Trieu un arxiu de ruta al qual s\'afegirà un nou segment.</string>
-    <string name="rourte_between_points_warning_desc">Per usar aquesta opció OsmAnd ha d\'ajustar la seua ruta a les vies del mapa.
+    <string name="route_between_points_add_track_desc">Trieu un arxiu de ruta al qual s\'afegirà un nou segment.</string>
+    <string name="route_between_points_warning_desc">Per usar aquesta opció OsmAnd ha d\'ajustar la seua ruta a les vies del mapa.
 \n
 \nEn el pas següent cal que elegiu el perfil de navegació per detectar vies permeses i el llindar de distància per aproximar la ruta a les vies.</string>
-    <string name="rourte_between_points_desc">Trieu com connectar els punts, amb una línia recta, o calcular la ruta entre ells d\'acord amb el perfil seleccionat.</string>
+    <string name="route_between_points_desc">Trieu com connectar els punts, amb una línia recta, o calcular la ruta entre ells d\'acord amb el perfil seleccionat.</string>
     <string name="gpx_split_interval_descr">Trieu l\'interval a què les marques de distància o temps sobre la ruta es mostraran.</string>
     <string name="shared_string_custom">Personalitzat</string>
     <string name="save_as_new_track">Desar com a una ruta nova</string>
     <string name="reverse_route">Ruta inversa</string>
-    <string name="rourte_between_points_whole_track_button_desc">La ruta sencera serà recalculada fent ús del perfil seleccionat.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Només el següent segment serà recalculat fent ús del perfil seleccionat.</string>
+    <string name="route_between_points_whole_track_button_desc">La ruta sencera serà recalculada fent ús del perfil seleccionat.</string>
+    <string name="route_between_points_next_segment_button_desc">Només el següent segment serà recalculat fent ús del perfil seleccionat.</string>
     <string name="whole_track">Ruta sencera</string>
     <string name="next_segment">Següent segment</string>
     <string name="threshold_distance">Llindar de distància</string>
@@ -3776,4 +3770,46 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \nUna setmana té 10.080 minuts.
 \nUn mes dura 43.829 minuts.</string>
     <string name="in_case_of_reverse_direction">Cas de sentit invers</string>
+    <string name="empty_state_my_tracks">Afegeix fitxers de traces</string>
+    <string name="context_menu_item_add_waypoint">Afegeix una fita de la traça</string>
+    <string name="quick_action_add_gpx">Afegeix una fita de la traça</string>
+    <string name="map_widget_monitoring">Enregistrament del trajecte</string>
+    <string name="marker_save_as_track">Desa com un fitxer de traçats</string>
+    <string name="follow_track">Segueix el trajecte</string>
+    <string name="follow_track_descr">Seleccioneu l\'arxiu de la traça a seguir</string>
+    <string name="select_another_track">Seleccioneu un altre traçat</string>
+    <string name="start_of_the_track">Inici de la traça</string>
+    <string name="nearest_point">El punt més proper</string>
+    <string name="attach_to_the_roads">Circumscriu a les carreteres</string>
+    <string name="delete_address">Suprimeix l\'adreça</string>
+    <string name="access_hint_enter_address">Introduïu l’adreça</string>
+    <string name="plan_route_trim_before">Retalla abans</string>
+    <string name="plan_route_trim_after">Retalla després</string>
+    <string name="plan_route_change_route_type_before">Canvia abans el tipus de ruta</string>
+    <string name="plan_route_change_route_type_after">Canvia després el tipus de ruta</string>
+    <string name="gpx_monitoring_stop">Pausa l\'enregistrament del viatge</string>
+    <string name="gpx_monitoring_start">Reprèn l\'enregistrament del viatge</string>
+    <string name="system_default_theme">Predeterminat del sistema</string>
+    <string name="all_next_segments">Tots els segments posteriors</string>
+    <string name="previous_segment">Segment anterior</string>
+    <string name="all_previous_segments">Tots els segments anteriors</string>
+    <string name="only_selected_segment_recalc">Només es recalcularà el segment seleccionat mitjançant el perfil seleccionat.</string>
+    <string name="all_next_segments_will_be_recalc">Tots els segments posteriors es tornaran a calcular mitjançant el perfil seleccionat.</string>
+    <string name="all_previous_segments_will_be_recalc">Tots els segments anteriors es tornaran a calcular mitjançant el perfil seleccionat.</string>
+    <string name="open_saved_track">Obre una traça enregistrada</string>
+    <string name="shared_string_is_saved">s\'ha desat</string>
+    <string name="one_point_error">Afegiu almenys dos punts.</string>
+    <string name="shared_string_redo">Torna a fer</string>
+    <string name="keep_screen_off">Manté la pantalla desactivada</string>
+    <string name="app_mode_enduro_motorcycle">Moto enduro</string>
+    <string name="plan_route_exit_dialog_descr">Esteu segur que voleu tancar la ruta planificada sense desar-la\? Perdreu tots els canvis.</string>
+    <string name="add_segment_to_the_track">Afegeix a un fitxer de traces</string>
+    <string name="layer_gpx_layer">Traces</string>
+    <string name="save_track_to_gpx_globally">Enregistra el trajecte a un fitxer GPX</string>
+    <string name="navigate_to_track_descr">Navegua des de la meva ubicació fins a la traça</string>
+    <string name="add_address">Afegeix una adreça</string>
+    <string name="shared_string_file_name">Nom del fitxer</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="disable_recording_once_app_killed_descrp">Aturarà l\'enregistrament de traces quan es mati l\'aplicació (mitjançant aplicacions recents). (La indicació de fons OsmAnd desapareix de la barra de notificacions d\'Android.)</string>
+    <string name="save_global_track_interval_descr">Trieu l\'interval d\'enregistrament general dels desplaçaments (s\'activa mitjançant el giny de gravació del mapa).</string>
 </resources>

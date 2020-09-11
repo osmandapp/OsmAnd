@@ -267,4 +267,5 @@
     <string name="last_update_from_telegram_duration">Utolsó frissítés a Telegramtól: %1$s</string>
     <string name="last_response_duration">Utolsó válasz: %1$s</string>
     <string name="duration_ago">Ennyivel ezelőtt: %1$s</string>
+    <string name="shared_string_error_short">HIBA</string>
 </resources>

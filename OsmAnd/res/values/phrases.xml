@@ -136,6 +136,8 @@
 	<string name="poi_fire_hydrant_pressure_filter">Pressure</string>
 	<string name="poi_traffic_signals_vibration">Vibration</string>
 	<string name="poi_traffic_signals_arrow">Arrow</string>
+	<string name="poi_drinking_water_refill">Drinking water refill</string>
+	<string name="poi_departures_board">Departures board</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -496,6 +498,7 @@
 	<string name="poi_recycling_magazines">Magazines</string>
 	<string name="poi_recycling_paper_packaging">Paper packaging</string>
 	<string name="poi_recycling_small_appliances">Small appliances</string>
+	<string name="poi_recycling_small_electrical_appliances">Small electrical appliances</string>
 	<string name="poi_recycling_wood">Wood</string>
 	<string name="poi_recycling_books">Books</string>
 	<string name="poi_recycling_shoes">Shoes</string>
@@ -4220,7 +4223,7 @@
 	<string name="poi_seamark_water_level_below_mwl">Water level: below mean water level</string>
 	<string name="poi_seamark_obstruction">Obstruction</string>
 
-	<string name="poi_drinking_water_refill_yes">Drinking water refill: yes</string>
+	<string name="poi_drinking_water_refill_yes">Yes</string>
 	<string name="poi_drinking_water_refill_no">Drinking water refill: no</string>
 	<string name="poi_drinking_water_refill_network">Drinking water refill network</string>
 
@@ -4241,5 +4244,13 @@
 	<string name="poi_borough">Borough</string>
 	<string name="poi_city_block">City block</string>
 
+	<string name="poi_elevator">Elevator</string>
+
+	<string name="poi_departures_board_no">Departures board: no</string>
+
+	<string name="poi_departures_board_yes">Yes</string>
+	<string name="poi_departures_board_delay">Delay</string>
+	<string name="poi_departures_board_realtime">Realtime</string>
+	<string name="poi_departures_board_timetable">Timetable</string>
 
 </resources>

@@ -333,7 +333,7 @@
     <string name="poi_doctors">Doctor</string>
     <string name="poi_clinic">Clínica</string>
     <string name="poi_first_aid">Primeros auxilios</string>
-    <string name="poi_dentist">Dentista;Odontólogo</string>
+    <string name="poi_dentist">Dentista;Odontología</string>
     <string name="poi_nursing_home">Asilo de ancianos;Geriátrico</string>
     <string name="poi_baby_hatch">Escotilla de bebé</string>
     <string name="poi_veterinary">Veterinaria</string>
@@ -2309,7 +2309,7 @@
     <string name="poi_health_specialty_maxillofacial_surgery_yes">Cirugía maxilofacial</string>
     <string name="poi_health_specialty_diagnostic_radiology_yes">Radiología diagnóstica</string>
     <string name="poi_health_specialty_gastroenterology_yes">Gastroenterología</string>
-    <string name="poi_health_specialty_dentistry_yes">Odontología</string>
+    <string name="poi_health_specialty_dentistry_yes">Dentista;Odontología</string>
     <string name="poi_health_specialty_nephrology_yes">Nefrología (enfermedades renales)</string>
     <string name="poi_health_specialty_neurosurgery_yes">Neurocirugía</string>
     <string name="poi_health_specialty_neuropsychiatry_yes">Neuropsiquiatría</string>
@@ -3822,7 +3822,7 @@
     <string name="poi_seamark_water_level_above_mwl">Nivel del agua: por encima del nivel medio del agua</string>
     <string name="poi_seamark_water_level_below_mwl">Nivel del agua: por debajo del nivel medio del agua</string>
     <string name="poi_seamark_obstruction">Obstrucción</string>
-    <string name="poi_drinking_water_refill_yes">Recarga de agua potable: sí</string>
+    <string name="poi_drinking_water_refill_yes">Sí</string>
     <string name="poi_drinking_water_refill_no">Recarga de agua potable: no</string>
     <string name="poi_drinking_water_refill_network">Red de recarga de agua potable</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Succión</string>
@@ -3839,4 +3839,13 @@
     <string name="poi_give_box">Caja de regalo</string>
     <string name="poi_city_block">Manzana (cuadra)</string>
     <string name="poi_borough">Municipio</string>
+    <string name="poi_traffic_signals_arrow_no">Flecha: no</string>
+    <string name="poi_elevator">Ascensor</string>
+    <string name="poi_departures_board_timetable">A horario</string>
+    <string name="poi_departures_board_realtime">En tiempo real</string>
+    <string name="poi_departures_board_delay">Con retraso</string>
+    <string name="poi_departures_board_yes">Sí</string>
+    <string name="poi_departures_board_no">Tablero de partidas: no</string>
+    <string name="poi_departures_board">Tablero de partidas</string>
+    <string name="poi_drinking_water_refill">Recarga de agua potable</string>
 </resources>

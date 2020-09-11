@@ -855,7 +855,6 @@
     <string name="no_buildings_found">Δεν βρέθηκαν κτήρια.</string>
     <string name="route_descr_lat_lon">Πλ %1$.3f μήκ %2$.3f</string>
     <string name="map_widget_max_speed">Όριο ταχύτητας</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Όρια</string>
     <string name="rendering_attr_noAdminboundaries_description">Περιορισμός εμφάνισης διοικητικών ορίων (επίπεδα διαχειριστή 5-9).</string>
     <string name="download_select_map_types">Άλλοι χάρτες</string>
@@ -1221,8 +1220,6 @@
     <string name="rendering_value_car_name">Αυτοκίνητο</string>
     <string name="rendering_value_bicycle_name">Ποδήλατο</string>
     <string name="rendering_value_pedestrian_name">Πεζοπόρος</string>
-    <string name="gpx_monitoring_start">Συνέχιση καταγραφής GPX</string>
-    <string name="gpx_monitoring_stop">Παύση καταγραφής GPX</string>
     <string name="gpx_start_new_segment">Έναρξη νέου τμήματος</string>
     <string name="shared_string_all">Όλα</string>
     <string name="way_alarms">Προειδοποιήσεις κυκλοφορίας</string>
@@ -1518,7 +1515,6 @@
     <string name="access_hint_enter_name">Εισαγωγή ονόματος</string>
     <string name="access_hint_enter_category">Εισαγωγή κατηγορίας</string>
     <string name="access_hint_enter_description">Εισαγωγή περιγραφής.</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX αρχεία επιλέχτηκαν</string>
     <string name="rendering_value_thin_name">Λεπτή</string>
     <string name="rendering_value_medium_name">Μέτρια</string>
     <string name="rendering_value_bold_name">Παχιά</string>
@@ -2251,7 +2247,6 @@
     <string name="lang_kab">Καμπίλε</string>
     <string name="lang_ber">Βερβερικά</string>
     <string name="disable_recording_once_app_killed">Αποτροπή αυτόνομης καταγραφής</string>
-    <string name="disable_recording_once_app_killed_descrp">Θα παύσει την καταγραφή GPX όταν η εφαρμογή τερματιστεί (μέσω πρόσφατων εφαρμογών). (Η ένδειξη παρασκηνίου OsmAnd εξαφανίζεται από τη γραμμή ειδοποιήσεων του Android.)</string>
     <string name="shared_string_wikipedia">Βικιπαίδεια</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Χρώμα ανάλογα με τη σχέση του δικτύου</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Χρώμα ανάλογα με τα σύμβολα πεζοπορίας OSMC</string>
@@ -2323,7 +2318,6 @@
     <string name="fav_point_emoticons_message">Το αγαπημενο μετονομάστηκε σε \'%1$s\' για να προφυλάξει την συμβολοσειρά που περιέχει emoticons σε αρχείο.</string>
     <string name="fav_point_dublicate">Ορίστηκε διπλογραφή ονόματος Αγαπημένου</string>
     <string name="traffic_warning_calming">Χαλάρωση κυκλοφορίας</string>
-    <string name="save_global_track_interval_descr">Ορίστε τα χρονικά διαστήματα καταγραφής για τη γενική εγγραφή ιχνών (ενεργό μέσω του γραφικού στοιχείου καταγραφής GPX στον χάρτη).</string>
     <string name="save_track_to_gpx_globally_headline">Καταγραφή ίχνους κατ΄ απαίτηση</string>
     <string name="enable_proxy_descr">Διαμόρφωση μεσολαβητή HTTP για όλες τις αιτήσεις δικτύου.</string>
     <string name="proxy_host_descr">Προσδιορίστε τον υπολογιστή μεσολάβησης (π.χ. 127.0.0.1).</string>
@@ -3714,17 +3708,17 @@
     <string name="turn_screen_on_descr">Σημειώστε τις επιλογές αφύπνισης της οθόνης (εξασφαλίστε ότι το OsmAnd είναι στο προσκήνιο όταν η συσκευή κλειδώνεται):</string>
     <string name="save_as_new_track">Αποθήκευση ως νέου ίχνους</string>
     <string name="reverse_route">Αντιστροφή διαδρομής</string>
-    <string name="rourte_between_points_whole_track_button_desc">Ολόκληρο το ίχνος θα επανυπολογιστεί χρησιμοποιώντας την επιλεγμένη κατατομή (προφίλ).</string>
-    <string name="rourte_between_points_next_segment_button_desc">Μόνο το επόμενο τμήμα θα επανυπολογιστεί χρησιμοποιώντας την επιλεγμένη κατατομή (προφίλ).</string>
-    <string name="rourte_between_points_desc">Επιλέξτε πώς να συνδέσετε τα σημεία, με ευθεία γραμμή, ή να υπολογίσετε μια διαδρομή μεταξύ τους με την επιλεγμένη κατατομή (προφίλ).</string>
-    <string name="rourte_between_points_warning_desc">Για να χρησιμοποιήσετε αυτήν την επιλογή το OsmAnd χρειάζεται να προσκολλήσει το ίχνος σας στους δρόμους του χάρτη.
+    <string name="route_between_points_whole_track_button_desc">Ολόκληρο το ίχνος θα επανυπολογιστεί χρησιμοποιώντας την επιλεγμένη κατατομή (προφίλ).</string>
+    <string name="route_between_points_next_segment_button_desc">Μόνο το επόμενο τμήμα θα επανυπολογιστεί χρησιμοποιώντας την επιλεγμένη κατατομή (προφίλ).</string>
+    <string name="route_between_points_desc">Επιλέξτε πώς να συνδέσετε τα σημεία, με ευθεία γραμμή, ή να υπολογίσετε μια διαδρομή μεταξύ τους με την επιλεγμένη κατατομή (προφίλ).</string>
+    <string name="route_between_points_warning_desc">Για να χρησιμοποιήσετε αυτήν την επιλογή το OsmAnd χρειάζεται να προσκολλήσει το ίχνος σας στους δρόμους του χάρτη.
 \n
 \nΣτο επόμενο βήμα θα χρειαστείτε να επιλέξετε κατατομή (προφίλ) πλοήγησης για να εντοπίσετε τους επιτρεπόμενους δρόμους και την απόσταση κατωφλίου για να προσεγγίσετε το ίχνος σας με τους δρόμους.</string>
     <string name="whole_track">Ολόκληρο το ίχνος</string>
     <string name="next_segment">Επόμενο τμήμα</string>
     <string name="threshold_distance">Απόσταση κατωφλίου</string>
     <string name="navigation_profile">Κατατομή (προφίλ) πλοήγησης</string>
-    <string name="rourte_between_points_add_track_desc">Επιλέξτε ένα αρχείο ίχνους στο οποίο θα προστεθεί νέο τμήμα.</string>
+    <string name="route_between_points_add_track_desc">Επιλέξτε ένα αρχείο ίχνους στο οποίο θα προστεθεί νέο τμήμα.</string>
     <string name="lang_tg">Τατζίκικα</string>
     <string name="some_articles_may_not_available_in_lang">Μερικά άρθρα της Wikipedia μπορεί να μην είναι διαθέσιμα στη γλώσσα σας.</string>
     <string name="lang_zhyue">Καντονέζικα</string>

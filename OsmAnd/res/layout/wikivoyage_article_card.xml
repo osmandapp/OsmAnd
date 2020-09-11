@@ -54,6 +54,7 @@
 						android:ellipsize="end"
 						android:maxLines="3"
 						android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+						android:textColor="@null"
 						tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard."/>
 
 				</LinearLayout>
@@ -84,6 +85,7 @@
 				android:ellipsize="end"
 				android:maxLines="1"
 				android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+				android:textColor="@null"
 				tools:text="England • United Kingdom"
 				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginEnd="@dimen/content_padding" />

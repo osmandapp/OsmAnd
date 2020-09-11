@@ -230,7 +230,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity,
 			final double latitude, final double longitude,
-			ContextMenuAdapter adapter, Object selectedObj) {
+			ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 
 		ItemClickListener addListener = new ItemClickListener() {
 			@Override

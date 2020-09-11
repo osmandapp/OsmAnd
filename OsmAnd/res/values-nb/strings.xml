@@ -1478,7 +1478,6 @@
     <string name="access_widget_expand">Utvid</string>
     <string name="access_sort">Sorter</string>
     <string name="map_mode">Kartmodus</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX-filer valgt</string>
     <string name="follow_us">Følg oss</string>
     <string name="use_osm_live_routing">OsmAnd Live-navigering</string>
     <string name="access_no_destination">Reisemål er ikke angitt</string>
@@ -1660,7 +1659,6 @@
     <string name="proxy_host_title">Mellomtjenervert</string>
     <string name="proxy_host_descr">Angi din mellomtjeners vertsnavn (f.eks. 127.0.0.1).</string>
     <string name="proxy_port_title">Mellomtjener-port</string>
-    <string name="gpx_monitoring_stop">Ta en pause i GPX-logging</string>
     <string name="gpx_start_new_segment">Start nytt segment</string>
     <string name="no_index_file_to_download">Ingen nedlastinger funnet, sjekk din internettforbindelse.</string>
     <string name="gpx_info_subtracks">Underspor: %1$s</string>
@@ -1787,14 +1785,12 @@
     <string name="navigate_point_northing">Nordverdi</string>
     <string name="navigate_point_easting">Østverdi</string>
     <string name="fav_point_emoticons_message">Favorittnavn endret til \"%1$s\" for å muliggjøre lagring av streng med uttrykksikoner til en fil.</string>
-    <string name="save_global_track_interval_descr">Angi loggingsintervall for det generelle sporingsopptaket (påskrudd via miniprogrammet for GPX-logging på kartet).</string>
     <string name="save_track_to_gpx_globally_headline">Sporingslogging på etterspørsel</string>
     <string name="proxy_port_descr">Angi din mellomtjeners portnummer (f.eks. 8118).</string>
     <string name="live_monitoring_m_descr">Send sporingsdata til en angitt nettjeneste hvis GPX-logging er påslått.</string>
     <string name="live_monitoring_m">Nettbasert sporing (GPX kreves)</string>
     <string name="live_monitoring_start">Start nettbasert sporing</string>
     <string name="live_monitoring_stop">Stopp nettbasert sporing</string>
-    <string name="gpx_monitoring_start">Fortsett GPX-logging</string>
     <string name="select_index_file_to_download">Fant ikke noe. Hvis du ikke finner din region, kan du lage den selv (se https://osmand.net).</string>
     <string name="none_selected_gpx">Ingen GPX-filer valgt. Velg en ved lang-trykking.</string>
     <string name="gpx_split_interval">Oppdelingsintervall</string>
@@ -2436,7 +2432,6 @@
     <string name="will_open_tomorrow_at">Åpner i morgen</string>
     <string name="winter_and_ski_renderer">Vinter og ski</string>
     <string name="touring_view_renderer">Turvisning</string>
-    <string name="disable_recording_once_app_killed_descrp">Vil sette GPX-logging i pausemodus når programmet avsluttes (via nylig brukte apper). (OsmAnds bakgrunnsindikasjon forsvinner fra Android-varslingslinjen.)</string>
     <string name="route_is_too_long_v2">For lange distanser: Legg til mellomliggende reisemål hvis denne lange ruten ikke er beregnet innen 10 minutter.</string>
     <string name="intermediate_items_sort_return">Optimalisert rekkefølge av mellomliggende reisemål underveis til målet.</string>
     <string name="audionotes_location_not_defined">Sted å assosiere med notatet er ikke definert ennå. \"Bruk posisjon…\" for å tilordne et notat til det angitte stedet.</string>
@@ -3710,18 +3705,19 @@
     <string name="plan_route_select_track_file_for_open">Velg en sporfil for åpning.</string>
     <string name="reverse_route">Snu rute</string>
     <string name="overwrite_track">Overskriv spor</string>
-    <string name="rourte_between_points_whole_track_button_desc">Hele sporet vil bli omregnet ved bruk av valgt profil.</string>
-    <string name="rourte_between_points_desc">Velg hvordan punkter skal knyttes sammen, i rett linje, eller utregnet rute mellom dem med valgt profil.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Kun neste segment vil bli omregnet ved bruk av valgt profil.</string>
+    <string name="route_between_points_whole_track_button_desc">Hele sporet vil bli omregnet ved bruk av valgt profil.</string>
+    <string name="route_between_points_desc">Velg hvordan punkter skal knyttes sammen, i rett linje, eller utregnet rute mellom dem med valgt profil.</string>
+    <string name="route_between_points_next_segment_button_desc">Kun neste segment vil bli omregnet ved bruk av valgt profil.</string>
     <string name="whole_track">Hele sporet</string>
     <string name="next_segment">Neste segment</string>
-    <string name="rourte_between_points_warning_desc">For å bruke dette valget må OsmAnd rute sporet ditt til kartveiene.
+    <string name="route_between_points_warning_desc">For å bruke dette valget må OsmAnd rute sporet ditt til kartveiene.
 \n
 \n På neste steg vil du måtte velge navigasjonsprofil for oppdagelse av tillatte veier, og terskeldistanse for å anslå sporet ditt til veier.</string>
-    <string name="rourte_between_points_add_track_desc">Velg en sporfil å legge til det nye segmentet i.</string>
+    <string name="route_between_points_add_track_desc">Velg en sporfil å legge til det nye segmentet i.</string>
     <string name="save_as_new_track">Lagre som nytt spor</string>
     <string name="plan_route_create_new_route">Opprett ny rute</string>
     <string name="shared_string_done">Ferdig</string>
     <string name="threshold_distance">Terskeldistanse</string>
     <string name="navigation_profile">Navigeringsprofil</string>
+    <string name="osm_edit_closed_note">Lukket OSM-notat</string>
 </resources>

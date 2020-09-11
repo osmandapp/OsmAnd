@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
 	<net.osmand.plus.widgets.TextViewEx
@@ -12,9 +12,9 @@
 		android:layout_height="wrap_content"
 		android:paddingStart="@dimen/content_padding"
 		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/measurement_tool_menu_title_padding_top"
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
-		android:paddingTop="@dimen/measurement_tool_menu_title_padding_top"
 		android:paddingBottom="@dimen/measurement_tool_menu_title_padding_bottom"
 		android:text="@string/plan_route_open_existing_track"
 		android:textAppearance="@style/TextAppearance.ListItemTitle"
@@ -38,23 +38,22 @@
 		android:id="@+id/folder_list"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:paddingLeft="@dimen/content_padding"
-		android:paddingRight="@dimen/content_padding"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingEnd="@dimen/content_padding"
 		android:clipToPadding="false"
 		android:orientation="horizontal"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
 		tools:itemCount="3"
-		tools:orientation="horizontal"
 		tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-		tools:listitem="@layout/point_editor_icon_category_item" />
+		tools:listitem="@layout/point_editor_icon_category_item"
+		tools:orientation="horizontal" />
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/gpx_track_list"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		tools:itemCount="1"
-		tools:listitem="@layout/gpx_track_select_item">
+		tools:listitem="@layout/gpx_track_select_item" />
 
-	</androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

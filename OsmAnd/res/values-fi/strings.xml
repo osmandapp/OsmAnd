@@ -911,7 +911,6 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="access_shared_string_navigate_up">Navigointi ylös</string>
     <string name="access_sort">Lajittele</string>
     <string name="map_mode">Karttatila</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX-tiedostoa valittu</string>
     <string name="rendering_value_fine_name">Hieno</string>
     <string name="rendering_value_thin_name">Ohut</string>
     <string name="rendering_value_medium_name">Keskipaksu</string>
@@ -1373,8 +1372,6 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="live_monitoring_m">Online seuranta (GPX pakollinen)</string>
     <string name="live_monitoring_start">Aloita online seuranta</string>
     <string name="live_monitoring_stop">Lopeta online seuranta</string>
-    <string name="gpx_monitoring_start">Aloita GPX kirjaus</string>
-    <string name="gpx_monitoring_stop">Lopeta GPX kirjaus</string>
     <string name="gpx_start_new_segment">Aloita uusi segmentti</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Tie ei-kulkuneuvoille</string>
     <string name="rendering_attr_hideText_name">Teksti</string>
@@ -2546,5 +2543,21 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="mapillary_item">OsmAnd + mapillary</string>
     <string name="quick_action_item">Pikatoiminto</string>
     <string name="radius_ruler_item">Sädeviivain</string>
-    <string name="download_unsupported_action">Toimintoa ei tuettu %1$s</string>
+    <string name="download_unsupported_action">Ei tuettu toiminto %1$s</string>
+    <string name="travel_item">Matkailu (Wikivoyage ja Wikipedia)</string>
+    <string name="select_track_file">"Valitse reitti tiedosto "</string>
+    <string name="wiki_menu_download_descr">Lisäkarttoja tarvitaan Wikipedian erikoiskohteiden tarkastelemiseen kartalla.</string>
+    <string name="select_wikipedia_article_langs">Valitse kielet, joilla Wikipedia-artikkelit näkyvät kartalla. Voit vaihtaa kaikkien käytettävissä olevien kielten välillä lukiessasi artikkelia.</string>
+    <string name="some_articles_may_not_available_in_lang">Jotkut Wikipedia-artikkelit eivät välttämättä ole saatavilla omalla kielelläsi.</string>
+    <string name="lang_zhyue">Kantoninkiina</string>
+    <string name="lang_uz">uzbekki</string>
+    <string name="lang_tt">tataari</string>
+    <string name="lang_sco">skotti</string>
+    <string name="lang_ne">nepali</string>
+    <string name="search_poi_types">Etsi POI-tyyppejä</string>
+    <string name="custom_osmand_plugin">Muokattu OsmAnd-laajennus</string>
+    <string name="changes_applied_to_profile">Muutokset lisätty \'%1$s\' profiiliin.</string>
+    <string name="settings_item_read_error">Ei voitu lukea \'%1$s\'.</string>
+    <string name="settings_item_write_error">Ei voitu kirjoittaa \'%1$s\'.</string>
+    <string name="settings_item_import_error">Ei voitu tuoda kohteesta \'%1$s\'.</string>
 </resources>

@@ -17,15 +17,19 @@ import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
@@ -50,6 +54,7 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -231,7 +236,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public void updateGpxRoutingParameter(OtherLocalRoutingParameter gpxParam) {
-		RouteProvider.GPXRouteParamsBuilder rp = app.getRoutingHelper().getCurrentGPXRoute();
+		GPXRouteParamsBuilder rp = app.getRoutingHelper().getCurrentGPXRoute();
 		final OsmandSettings settings = app.getSettings();
 		boolean selected = gpxParam.isSelected(settings);
 		if (rp != null) {
@@ -240,23 +245,31 @@ public class RoutingOptionsHelper {
 				TargetPointsHelper tg = app.getTargetPointsHelper();
 				List<Location> ps = rp.getPoints(app);
 				if (ps.size() > 0) {
-					Location first = ps.get(0);
-					Location end = ps.get(ps.size() - 1);
-					TargetPointsHelper.TargetPoint pn = tg.getPointToNavigate();
-					boolean update = false;
-					if (pn == null
-							|| MapUtils.getDistance(pn.point, new LatLon(first.getLatitude(), first.getLongitude())) < 10) {
-						tg.navigateToPoint(new LatLon(end.getLatitude(), end.getLongitude()), false, -1);
-						update = true;
-					}
-					if (tg.getPointToStart() == null
-							|| MapUtils.getDistance(tg.getPointToStart().point,
-							new LatLon(end.getLatitude(), end.getLongitude())) < 10) {
-						tg.setStartPoint(new LatLon(first.getLatitude(), first.getLongitude()), false, null);
-						update = true;
-					}
-					if (update) {
+					if (rp.getFile().hasRoute()) {
+						tg.clearStartPoint(false);
+						Location finishLoc = ps.get(ps.size() - 1);
+						TargetPoint pn = tg.getPointToNavigate();
+						tg.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1, pn != null ? pn.getOriginalPointDescription() : null);
 						tg.updateRouteAndRefresh(true);
+					} else {
+						Location first = ps.get(0);
+						Location end = ps.get(ps.size() - 1);
+						TargetPoint pn = tg.getPointToNavigate();
+						boolean update = false;
+						if (pn == null
+								|| MapUtils.getDistance(pn.point, new LatLon(first.getLatitude(), first.getLongitude())) < 10) {
+							tg.navigateToPoint(new LatLon(end.getLatitude(), end.getLongitude()), false, -1);
+							update = true;
+						}
+						if (tg.getPointToStart() == null
+								|| MapUtils.getDistance(tg.getPointToStart().point,
+								new LatLon(end.getLatitude(), end.getLongitude())) < 10) {
+							tg.setStartPoint(new LatLon(first.getLatitude(), first.getLongitude()), false, null);
+							update = true;
+						}
+						if (update) {
+							tg.updateRouteAndRefresh(true);
+						}
 					}
 				}
 			} else if (gpxParam.id == R.string.gpx_option_calculate_first_last_segment) {
@@ -403,7 +416,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public LocalRoutingParameter getRoutingParameterInnerById(ApplicationMode am, String parameterId) {
-		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
+		GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		GeneralRouter rm = app.getRouter(am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return null;
@@ -484,7 +497,7 @@ public class RoutingOptionsHelper {
 			return getOsmandRouterParameters(am);
 		}
 
-		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
+		GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>(getGpxRouterParameters(am));
 		GeneralRouter rm = app.getRouter(am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {

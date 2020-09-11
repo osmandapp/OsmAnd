@@ -12,6 +12,7 @@ import androidx.annotation.LayoutRes;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 
@@ -52,6 +53,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	public void setDescription(CharSequence description) {
 		this.description = description;
 		descriptionTv.setText(description);
+		changeDescriptionVisibility();
 	}
 
 	public void setDescriptionMaxLines(int maxLines) {
@@ -73,8 +75,9 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	@Override
 	public void inflate(Context context, ViewGroup container, boolean nightMode) {
 		super.inflate(context, container, nightMode);
-		descriptionTv = (TextView) view.findViewById(R.id.description);
+		descriptionTv = view.findViewById(R.id.description);
 		if (descriptionTv != null) {
+			changeDescriptionVisibility();
 			descriptionTv.setText(description);
 			if (descriptionColorId != INVALID_ID) {
 				descriptionTv.setTextColor(ContextCompat.getColor(context, descriptionColorId));
@@ -85,6 +88,14 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 			if (descriptionLinksClickable) {
 				descriptionTv.setMovementMethod(LinkMovementMethod.getInstance());
 			}
+		}
+	}
+
+	private void changeDescriptionVisibility() {
+		if (Algorithms.isEmpty(description)) {
+			descriptionTv.setVisibility(View.GONE);
+		} else {
+			descriptionTv.setVisibility(View.VISIBLE);
 		}
 	}
 
