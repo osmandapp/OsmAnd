@@ -432,7 +432,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		} else {
 			ActivityCompat.requestPermissions(mapActivity,
-					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
 					OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
 		}
 	}
@@ -477,7 +477,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void navigateButton() {
 		if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 			ActivityCompat.requestPermissions(mapActivity,
-					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
 					REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION);
 		} else {
 			final MapContextMenu menu = mapActivity.getContextMenu();
@@ -503,8 +503,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 				} else {
 					AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
 					bld.setTitle(R.string.new_directions_point_dialog);
-					final int[] defaultVls = new int[] {0};
-					bld.setSingleChoiceItems(new String[] {
+					final int[] defaultVls = new int[]{0};
+					bld.setSingleChoiceItems(new String[]{
 							mapActivity.getString(R.string.clear_intermediate_points),
 							mapActivity.getString(R.string.keep_intermediate_points)
 					}, 0, new DialogInterface.OnClickListener() {
@@ -870,6 +870,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		menuControl.updateVisibility(showBottomMenuButtons);
 
 		boolean showZoomButtons = !routeDialogOpened && !contextMenuOpened && !isInTrackAppearanceMode()
+				&& (!isInGpxApproximationMode() || !isPotrait())
 				&& !isInFollowTrackMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !portrait);
 		mapZoomIn.updateVisibility(showZoomButtons);
 		mapZoomOut.updateVisibility(showZoomButtons);
@@ -993,7 +994,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void updateMyLocationVisibility(MapHudButton backToLocationControl, RoutingHelper rh, boolean dialogOpened) {
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
-		boolean visible = !(tracked && rh.isFollowingMode());
+		boolean visible = !(tracked && rh.isFollowingMode()) && (!isInGpxApproximationMode() || !isPotrait());
 		backToLocationControl.updateVisibility(visible && !dialogOpened && !isInPlanRouteMode()
 				&& !isInTrackAppearanceMode() && (!isInChoosingRoutesMode() || !isInWaypointsChoosingMode() || !isInFollowTrackMode() || !isPotrait()));
 	}
@@ -1044,7 +1045,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void showTransparencyBar(CommonPreference<Integer> transparenPreference,
-									boolean isTransparencyBarEnabled) {
+	                                boolean isTransparencyBarEnabled) {
 		this.isTransparencyBarEnabled = isTransparencyBarEnabled;
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		if (MapControlsLayer.transparencySetting != transparenPreference) {
@@ -1303,12 +1304,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return mapActivity.getMapLayers().getGpxLayer().isInTrackAppearanceMode();
 	}
 
+	private boolean isInGpxApproximationMode() {
+		return mapActivity.getMapLayers().getMeasurementToolLayer().isTapsDisabled();
+	}
+
 	private boolean isInChoosingRoutesMode() {
 		return MapRouteInfoMenu.chooseRoutesVisible;
 	}
 
 	private boolean isInWaypointsChoosingMode() {
-		return  MapRouteInfoMenu.waypointsVisible;
+		return MapRouteInfoMenu.waypointsVisible;
 	}
 
 	private boolean isInFollowTrackMode() {
