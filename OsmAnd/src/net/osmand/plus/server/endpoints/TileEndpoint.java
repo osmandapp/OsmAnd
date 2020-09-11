@@ -81,10 +81,10 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 	private synchronized MetaTileFileSystemCache.MetaTileCache requestMetatile(int x, int y, int zoom) {
 		long tm = System.currentTimeMillis();
 		MapActivity mapActivity = server.getMapActivity();
-		ResourceManager resourceManager = mapActivity.getMyApplication().getResourceManager();
 		if (mapActivity == null) {
 			return null;
 		}
+		ResourceManager resourceManager = mapActivity.getMyApplication().getResourceManager();
 		MetaTileFileSystemCache.MetaTileCache cacheTile = this.cache.get(zoom, x, y);
 		if (cacheTile != null) {
 			return cacheTile;
