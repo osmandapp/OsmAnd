@@ -82,6 +82,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	private GPXFile gpxFile;
 
+	private boolean editingTrack;
 	private boolean selectingTrack;
 	private int menuTitleHeight;
 
@@ -529,6 +530,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	public void openPlanRoute(boolean useAppMode) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && gpxFile != null) {
+			editingTrack = true;
 			QuadRect rect = gpxFile.getRect();
 			TrkSegment segment = gpxFile.getNonEmptyTrkSegment();
 			ActionType actionType = segment == null ? ActionType.ADD_ROUTE_POINTS : ActionType.EDIT_SEGMENT;
@@ -538,7 +540,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (useAppMode) {
 				editingContext.setAppMode(app.getRoutingHelper().getAppMode());
 			}
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true);
+			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true, true);
 		}
 	}
 
@@ -609,7 +611,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	private void onDismiss() {
 		try {
 			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
+			if (mapActivity != null && !editingTrack) {
 				if (!mapActivity.isChangingConfigurations()) {
 					mapActivity.getMapRouteInfoMenu().cancelSelectionFromTracks();
 				}
