@@ -166,6 +166,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		this.planRouteMode = planRouteMode;
 	}
 
+	private void setDirectionMode(boolean directionMode) {
+		this.directionMode = directionMode;
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -1894,10 +1898,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return showFragment(fragment, fragmentManager);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx, boolean planRoute) {
+	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx,
+	                                   boolean planRoute, boolean directionMode) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setEditingCtx(editingCtx);
 		fragment.setPlanRouteMode(planRoute);
+		fragment.setDirectionMode(directionMode);
 		return showFragment(fragment, fragmentManager);
 	}
 

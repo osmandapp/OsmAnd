@@ -743,7 +743,7 @@ public class MeasurementEditingContext {
 					locations.add(l);
 				}
 				pair.second.setTrkPtIndex(locations.size() - 1);
-				if (i < size - 2) {
+				if (i < size - 2 && !locations.isEmpty()) {
 					locations.remove(locations.size() - 1);
 				}
 				route.addAll(data.segments);
