@@ -1132,10 +1132,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		final ApplicationMode appMode = editingCtx.getAppMode();
 		if (mapActivity != null) {
 			Drawable icon;
-			if (appMode == MeasurementEditingContext.DEFAULT_APP_MODE) {
-				icon = getActiveIcon(R.drawable.ic_action_split_interval);
+			if (editingCtx.isTrackSnappedToRoad() || editingCtx.isNewData()) {
+				if (appMode == MeasurementEditingContext.DEFAULT_APP_MODE) {
+					icon = getActiveIcon(R.drawable.ic_action_split_interval);
+				} else {
+					icon = getIcon(appMode.getIconRes(), appMode.getIconColorInfo().getColor(nightMode));
+				}
 			} else {
-				icon = getIcon(appMode.getIconRes(), appMode.getIconColorInfo().getColor(nightMode));
+				icon = getContentIcon(R.drawable.ic_action_help);
 			}
 			ImageButton snapToRoadBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
 			snapToRoadBtn.setImageDrawable(icon);
