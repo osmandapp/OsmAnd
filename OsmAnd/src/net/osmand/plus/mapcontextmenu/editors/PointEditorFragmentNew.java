@@ -268,6 +268,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				}
 			}
 		});
+		AndroidUiHelper.updateVisibility(addressCaption, false);
+		addAddressBtn.setText(getAddressInitValue());
 		addAddressBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -279,7 +281,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					AndroidUtils.softKeyboardDelayed(requireActivity(),addressEdit);
 				} else {
 					addressCaption.setVisibility(View.GONE);
-					addAddressBtn.setText(view.getResources().getString(R.string.add_address));
+					addAddressBtn.setText(getAddressTextValue());
 					AndroidUtils.hideSoftKeyboard(requireActivity(), addressEdit);
 					addressEdit.clearFocus();
 				}
@@ -388,13 +390,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			descriptionCaption.setVisibility(View.GONE);
 			addDelDescription.setText(app.getString(R.string.add_description));
 		}
-		if (!addressEdit.getText().toString().isEmpty() || addressEdit.hasFocus()) {
-			addressCaption.setVisibility(View.VISIBLE);
-			addAddressBtn.setText(app.getString(R.string.delete_address));
-		} else {
-			addressCaption.setVisibility(View.GONE);
-			addAddressBtn.setText(app.getString(R.string.add_address));
-		}
+
 	}
 
 	private void createGroupSelector() {

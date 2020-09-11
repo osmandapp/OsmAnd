@@ -1473,7 +1473,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController != null && menuController.displayDistanceDirection();
 	}
 
-	public String getSubtypeStr() {
+	public CharSequence getSubtypeStr() {
 		MenuController menuController = getMenuController();
 		if (menuController != null) {
 			return menuController.getSubtypeStr();

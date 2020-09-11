@@ -148,7 +148,7 @@ public class AMapPointMenuController extends MenuController {
 
 	@NonNull
 	@Override
-	public String getSubtypeStr() {
+	public CharSequence getSubtypeStr() {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			float bearing = getPointBearing();
