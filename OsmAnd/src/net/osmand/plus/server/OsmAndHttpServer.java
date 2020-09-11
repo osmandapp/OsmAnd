@@ -19,16 +19,14 @@ public class OsmAndHttpServer extends NanoHTTPD {
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmAndHttpServer.class);
 	private final Map<String, ApiEndpoint> endpoints = new HashMap<>();
 	private MapActivity mapActivity;
+	private RotatedTileBox mapTileBoxCopy;
+	private boolean mapLinkedToLocation;
+	private OsmandApplication app;
 
 	public OsmAndHttpServer(String hostname, int port) {
 		super(hostname, port);
 	}
 
-	@Override
-	public void stop() {
-		mapActivity.getMapView().setScreenViewDetached(false);
-		super.stop();
-	}
 
 	@Override
 	public Response serve(IHTTPSession session) {
@@ -44,9 +42,32 @@ public class OsmAndHttpServer extends NanoHTTPD {
 
 	public void start(MapActivity mapActivity) throws IOException {
 		this.mapActivity = mapActivity;
+		// don't leak map activity with applciation
+		this.app = mapActivity.getMyApplication();
 		registerEndpoints();
 		start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
 		mapActivity.getMapView().setScreenViewDetached(true);
+		this.mapTileBoxCopy = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+		mapLinkedToLocation = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		mapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+	}
+
+
+	@Override
+	public void stop() {
+		mapActivity.getMapView().setScreenViewDetached(false);
+		mapActivity.getMapView().setCurrentViewport(mapTileBoxCopy);
+		mapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(mapLinkedToLocation);
+		mapActivity = null;
+		super.stop();
+	}
+
+	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
+	public OsmandApplication getMyApplication() {
+		return app;
 	}
 
 	public String getUrl() {
