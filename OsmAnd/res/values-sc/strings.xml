@@ -3824,17 +3824,17 @@
     <string name="overwrite_track">Subraiscrie sa rasta</string>
     <string name="save_as_new_track">Sarva comente una rasta noa</string>
     <string name="reverse_route">Fùrria s\'àndala</string>
-    <string name="rourte_between_points_whole_track_button_desc">Sa rasta intrea at a èssere torrada a calculare impreende su profilu ischertadu.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Petzi su segmentu imbeniente at a èssere torradu a calculare impreende su profilu ischertadu.</string>
-    <string name="rourte_between_points_desc">Ischerta comente connètere sos puntos: cun una lìnia reta o calculende un\'àndala intre issos cun su profilu ischertadu.</string>
+    <string name="route_between_points_whole_track_button_desc">Sa rasta intrea at a èssere torrada a calculare impreende su profilu ischertadu.</string>
+    <string name="route_between_points_next_segment_button_desc">Petzi su segmentu imbeniente at a èssere torradu a calculare impreende su profilu ischertadu.</string>
+    <string name="route_between_points_desc">Ischerta comente connètere sos puntos: cun una lìnia reta o calculende un\'àndala intre issos cun su profilu ischertadu.</string>
     <string name="whole_track">Rasta intrea</string>
     <string name="next_segment">Segmentu imbeniente</string>
-    <string name="rourte_between_points_warning_desc">Pro impreare custa optzione OsmAnd tenet bisòngiu de alliniare sa rasta tua a sos caminos de sa mapa.
+    <string name="route_between_points_warning_desc">Pro impreare custa optzione OsmAnd tenet bisòngiu de alliniare sa rasta tua a sos caminos de sa mapa.
 \n
 \n In su passu chi benit as a dèpere ischertare su profilu de navigatzione pro rilevare sos caminos permìtidos e su lìmite de distàntzia pro aprossimare sa rasta tua cun sos caminos.</string>
     <string name="threshold_distance">Lìmite de distàntzia</string>
     <string name="navigation_profile">Profilu de navigatzione</string>
-    <string name="rourte_between_points_add_track_desc">Ischerta unu documentu de rasta in ue annànghere su segmentu nou.</string>
+    <string name="route_between_points_add_track_desc">Ischerta unu documentu de rasta in ue annànghere su segmentu nou.</string>
     <string name="street_level_imagery">Fotografias a livellu de sas carreras</string>
     <string name="plan_route_exit_dialog_descr">Ses seguru de chèrrere serrare sa pianificatzione de s\'àndala chene sarvare\? As a pèrdere totu sas modìficas.</string>
     <string name="in_case_of_reverse_direction">In casu de diretzione furriada</string>

@@ -3731,8 +3731,8 @@
     <string name="overwrite_track">Overskriv spor</string>
     <string name="save_as_new_track">Gem som nyt spor</string>
     <string name="reverse_route">Omvendt rute</string>
-    <string name="rourte_between_points_whole_track_button_desc">Hele sporet genberegnes ved hjælp af den valgte profil.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Kun det næste segment genberegnes ved hjælp af den valgte profil.</string>
+    <string name="route_between_points_whole_track_button_desc">Hele sporet genberegnes ved hjælp af den valgte profil.</string>
+    <string name="route_between_points_next_segment_button_desc">Kun det næste segment genberegnes ved hjælp af den valgte profil.</string>
     <string name="whole_track">Hele sporet</string>
     <string name="next_segment">Næste segment</string>
     <string name="threshold_distance">Tærskelafstand</string>

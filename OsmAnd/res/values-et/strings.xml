@@ -3644,7 +3644,7 @@
     <string name="whole_track">Terve rada</string>
     <string name="next_segment">Järgmine segment</string>
     <string name="navigation_profile">Navigeerimisprofiil</string>
-    <string name="rourte_between_points_add_track_desc">Vali rajafail, millele lisame uue segmendi.</string>
+    <string name="route_between_points_add_track_desc">Vali rajafail, millele lisame uue segmendi.</string>
     <string name="street_level_imagery">Tänavataseme vaated</string>
     <string name="plan_route_exit_dialog_descr">Kas sa oled kindel et soovid sulgeda teekonna planeerija ilma seda salvestamata\? Kõik muudatused lähevad kaotsi.</string>
     <string name="in_case_of_reverse_direction">Vastupidise suuna korral</string>
@@ -3662,7 +3662,7 @@
     <string name="reset_to_default_category_button_promo">„Lähtesta vaikeseadeteks“ taastab paigaldusjärgse vaikimisi sortimisjärjekorra.</string>
     <string name="developer_plugin">Lisaprogramm arendajale</string>
     <string name="download_unsupported_action">Toiming %1$s ei ole toetatud</string>
-    <string name="rourte_between_points_whole_track_button_desc">Terve rada arvutatakse valitud profiili abil uuesti.</string>
+    <string name="route_between_points_whole_track_button_desc">Terve rada arvutatakse valitud profiili abil uuesti.</string>
     <string name="save_as_new_track">Salvesta uue rajana</string>
     <string name="overwrite_track">Kirjuta rada üle</string>
     <string name="create_poi_link_to_osm_doc"><u>Veebipõhine OSM</u> kaartide klassifikatsioon piltidega.</string>

@@ -38,7 +38,7 @@ public class SnapTrackWarningBottomSheet extends MenuBottomSheetDialogFragment {
 			activity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
 		}
 		BaseBottomSheetItem description = new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(R.string.rourte_between_points_warning_desc))
+				.setDescription(getString(R.string.route_between_points_warning_desc))
 				.setTitle(getString(R.string.route_between_points))
 				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
 				.create();

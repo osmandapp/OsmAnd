@@ -2015,7 +2015,7 @@
     <string name="no_inet_connection_desc_map">Erforderlich, um Karten herunterzuladen.</string>
     <string name="search_location">Standort wird gesucht …</string>
     <string name="storage_free_space">Freier Speicherplatz</string>
-    <string name="storage_place_description">OsmAnd speichert Daten (Karten, GPX-Dateien usw.) in \'%1$s\'.</string>
+    <string name="storage_place_description">OsmAnd speichert Daten (Karten, Track-Dateien usw.) in \'%1$s\'.</string>
     <string name="give_permission">Berechtigung erteilen</string>
     <string name="allow_access_location">Standortbestimmung zulassen</string>
     <string name="first_usage_greeting">Erhalten Sie Wegbeschreibungen und entdecken Sie neue Orte ohne Internetverbindung</string>
@@ -2072,8 +2072,8 @@
     <string name="shared_string_notifications">Benachrichtigungen</string>
     <string name="shared_string_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
-    <string name="gpx_no_tracks_title">Sie haben noch keine GPX-Dateien</string>
-    <string name="gpx_no_tracks_title_folder">GPX-Dateien können dem Ordner hinzugefügt werden</string>
+    <string name="gpx_no_tracks_title">Sie haben noch keine Track-Dateien</string>
+    <string name="gpx_no_tracks_title_folder">Track-Dateien können dem Ordner hinzugefügt werden</string>
     <string name="gpx_add_track">Weitere hinzufügen …</string>
     <string name="upload_poi">POI hochladen</string>
     <string name="route_roundabout_short">Nehmen Sie die %1$d Ausfahrt</string>
@@ -2901,10 +2901,10 @@
     <string name="by_transport_type">Von %1$s</string>
     <string name="step_by_step">Schritt für Schritt</string>
     <string name="routeInfo_road_types_name">Straßentypen</string>
-    <string name="quick_action_show_hide_gpx_tracks">GPX-Tracks ein-/ausblenden</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Eine Schaltfläche zum Ein- oder Ausblenden ausgewählter GPX-Tracks auf der Karte.</string>
-    <string name="quick_action_gpx_tracks_hide">GPX-Tracks ausblenden</string>
-    <string name="quick_action_gpx_tracks_show">GPX-Tracks einblenden</string>
+    <string name="quick_action_show_hide_gpx_tracks">Tracks ein-/ausblenden</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Eine Schaltfläche zum Ein- oder Ausblenden ausgewählter Tracks auf der Karte.</string>
+    <string name="quick_action_gpx_tracks_hide">Tracks ausblenden</string>
+    <string name="quick_action_gpx_tracks_show">Tracks einblenden</string>
     <string name="exit_at">Aussteigen bei</string>
     <string name="sit_on_the_stop">Zusteigen an Haltestelle</string>
     <string name="use_osm_live_public_transport_description">Aktivierung von OsmAnd Live für Änderungen bei öffentlichen Verkehrsmitteln.</string>
@@ -3829,13 +3829,13 @@
     <string name="threshold_distance">Schwellenwert-Distanz</string>
     <string name="save_as_new_track">Als neuen Track speichern</string>
     <string name="reverse_route">Route umkehren</string>
-    <string name="rourte_between_points_whole_track_button_desc">Der gesamte Track wird mit dem ausgewählten Profil neu berechnet.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Nur das nächste Segment wird mit dem ausgewählten Profil neu berechnet.</string>
-    <string name="rourte_between_points_desc">Wählen Sie, wie Punkte mit einer geraden Linie verbunden werden sollen, oder berechnen Sie eine Route zwischen ihnen mit dem ausgewählten Profil.</string>
+    <string name="route_between_points_whole_track_button_desc">Der gesamte Track wird mit dem ausgewählten Profil neu berechnet.</string>
+    <string name="route_between_points_next_segment_button_desc">Nur das nächste Segment wird mit dem ausgewählten Profil neu berechnet.</string>
+    <string name="route_between_points_desc">Wählen Sie, wie Punkte mit einer geraden Linie verbunden werden sollen, oder berechnen Sie eine Route zwischen ihnen mit dem ausgewählten Profil.</string>
     <string name="whole_track">Ganzer Track</string>
     <string name="next_segment">Nächstes Segment</string>
     <string name="navigation_profile">Navigationsprofil</string>
-    <string name="rourte_between_points_add_track_desc">Wählen Sie eine Trackdatei, für die ein neues Segment hinzugefügt werden soll.</string>
+    <string name="route_between_points_add_track_desc">Wählen Sie eine Trackdatei, für die ein neues Segment hinzugefügt werden soll.</string>
     <string name="follow_track_descr">Track auswählen, der verfolgt werden soll</string>
     <string name="delete_address">Adresse löschen</string>
     <string name="add_address">Adresse hinzufügen</string>
@@ -3876,7 +3876,7 @@
     <string name="import_track_descr">Track Datei zum Folgen auswählen, oder importieren.</string>
     <string name="disable_recording_once_app_killed_descrp">Die GPX-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
     <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung festlegen (via Schaltfläche \'GPX\' auf dem Kartenbildschirm).</string>
-    <string name="rourte_between_points_warning_desc">Um diese Option nutzen zu können, muss OsmAnd den Track auf die Straßen der Karte einrasten.
+    <string name="route_between_points_warning_desc">Um diese Option nutzen zu können, muss OsmAnd den Track auf die Straßen der Karte einrasten.
 \n
 \n Wählen Sie im nächsten Schritt ein Navigationsprofil um festzulegen, welche Straßentypen verwendet werden sollen, und wählen Sie einen Wert für die maximal zulässige Entfernung zwischen Track und Straße.</string>
     <string name="quick_action_add_gpx">Track-Wegpunkt hinzufügen</string>
@@ -3891,4 +3891,5 @@
     <string name="select_another_track">Anderen Track wählen</string>
     <string name="pass_whole_track_descr">Track-Punkt, zu dem navigiert werden soll</string>
     <string name="nearest_point">Nächstgelegener Punkt</string>
+    <string name="shared_string_redo">Wiederholen</string>
 </resources>
