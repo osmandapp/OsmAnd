@@ -92,6 +92,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		int timeout = 0;
 		try {
 			AsyncLoadingThread athread = mapActivity.getMyApplication().getResourceManager().getAsyncLoadingThread();
+			mapActivity.getMyApplication().getResourceManager().updateRendererMap(res.bbox, null);
 			Thread.sleep(TIMEOUT_STEP); // to do line should be removed in future
 			while (athread.areResourcesLoading() && timeout < TIMEOUT) {
 				if(lastRequestedZoom != zoom) {
