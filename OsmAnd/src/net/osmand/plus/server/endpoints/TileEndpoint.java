@@ -7,6 +7,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.resources.AsyncLoadingThread;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.server.OsmAndHttpServer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
@@ -80,6 +81,7 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 	private synchronized MetaTileFileSystemCache.MetaTileCache requestMetatile(int x, int y, int zoom) {
 		long tm = System.currentTimeMillis();
 		MapActivity mapActivity = server.getMapActivity();
+		ResourceManager resourceManager = mapActivity.getMyApplication().getResourceManager();
 		if (mapActivity == null) {
 			return null;
 		}
@@ -91,13 +93,21 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		mapActivity.getMapView().setCurrentViewport(res.bbox);
 		int timeout = 0;
 		try {
-			AsyncLoadingThread athread = mapActivity.getMyApplication().getResourceManager().getAsyncLoadingThread();
-			mapActivity.getMyApplication().getResourceManager().updateRendererMap(res.bbox, null);
+			AsyncLoadingThread athread = resourceManager.getAsyncLoadingThread();
+			resourceManager.updateRendererMap(res.bbox, null);
 			Thread.sleep(TIMEOUT_STEP); // to do line should be removed in future
+			// wait till all resources rendered and loaded
 			while (athread.areResourcesLoading() && timeout < TIMEOUT) {
 				if(lastRequestedZoom != zoom) {
 					return null;
 				}
+				Thread.sleep(TIMEOUT_STEP);
+				timeout += TIMEOUT_STEP;
+			}
+			mapActivity.getMapView().refreshMap();
+			// wait for image to be refreshed
+			while(!resourceManager.getRenderingBufferImageThread().getLooper().getQueue().isIdle() &&
+					timeout < TIMEOUT) {
 				Thread.sleep(TIMEOUT_STEP);
 				timeout += TIMEOUT_STEP;
 			}
