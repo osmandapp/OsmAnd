@@ -3828,9 +3828,9 @@
     <string name="rourte_between_points_next_segment_button_desc">Только следующий сегмент будет перестроен с использованием выбранного профиля.</string>
     <string name="next_segment">Следующий сегмент</string>
     <string name="whole_track">Весь трек</string>
-    <string name="rourte_between_points_warning_desc">Для использования данной возможности OsmAnd проложит ваш трек по дорогам.
+    <string name="rourte_between_points_warning_desc">Для использования данной возможности OsmAnd необходимо привязать ваш трек по дорогам.
 \n
-\nДалее вам следует выбрать профиль для построения маршрута с учётом ограничений этого профиля.</string>
+\nНа следующем шаге необходимо выбрать профиль навигации для определения разрешенных дорог и пороговое расстояние, чтобы приблизительно привязать маршрут к дорогам.</string>
     <string name="rourte_between_points_desc">Выберите способ соединения точек: прямой линией или прокладкой маршрута с выбранным профилем.</string>
     <string name="in_case_of_reverse_direction">При обратном направлении</string>
     <string name="plan_route_exit_dialog_descr">Закрыть план маршрута\? Все изменения будут утеряны.</string>
@@ -3882,12 +3882,12 @@
     <string name="all_previous_segments_will_be_recalc">Все предыдущие сегменты будут пересчитаны с использованием выбранного профиля.</string>
     <string name="open_saved_track">Открыть сохранённый трек</string>
     <string name="disable_recording_once_app_killed_descrp">Остановка записи GPX при принудительном закрытии (через последние приложения). (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
-    <string name="shared_string_is_saved">сохраняется</string>
-    <string name="one_point_error">Добавьте как минимум два пункта.</string>
+    <string name="shared_string_is_saved">сохранен</string>
+    <string name="one_point_error">Добавьте как минимум две точки.</string>
     <string name="shared_string_redo">ПОВТОРИТЬ</string>
     <string name="release_3_8">• Обновленный режим планирования маршрута позволяет использовать разные типы навигации для каждого сегмента и прикрепляет любой трек к дорогам
 \n
-\n • Новые параметры внешнего вида для дорожек: выберите цвет, толщину, включите стрелки направления и отметки начала/окончания
+\n • Новые параметры внешнего вида для треков: выберите цвет, толщину, включите стрелки направления и отметки начала/окончания
 \n
 \n • Улучшена видимость велосипедных узлов
 \n
