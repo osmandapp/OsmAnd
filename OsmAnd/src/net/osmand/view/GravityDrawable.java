@@ -64,10 +64,9 @@ public class GravityDrawable extends Drawable {
 
 	@Override
 	public void draw(Canvas canvas) {
-		int halfCanvas = canvas.getHeight() / 2;
-		int halfDrawable = original.getIntrinsicHeight() / 2;
+		int halfCanvas = getBounds().height() / 3;
+		int halfDrawable = original.getIntrinsicHeight() / 3;
 
-		// align to top
 		canvas.save();
 		canvas.translate(0, -halfCanvas + halfDrawable);
 		original.draw(canvas);
