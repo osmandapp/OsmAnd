@@ -3806,7 +3806,7 @@
     <string name="plan_route_import_track">استيراد المسار</string>
     <string name="plan_route_open_existing_track">فتح المسار الموجود</string>
     <string name="plan_route_create_new_route">إنشاء مسار جديد</string>
-    <string name="plan_route_select_track_file_for_open">حدد ملف المسار للفتح.</string>
+    <string name="plan_route_select_track_file_for_open">حدد المسار للفتح.</string>
     <string name="shared_string_done">تم</string>
     <string name="overwrite_track">الكتابة فوق المسار</string>
     <string name="navigation_profile">ملف تعريف التنقل</string>
