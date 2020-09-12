@@ -3779,20 +3779,20 @@
     <string name="speed_cameras_alert">Оповещение о камерах контроля скорости в некоторых странах запрещено законом.</string>
     <string name="shared_string_bearing">Ориентация</string>
     <string name="item_deleted">Удалено: %1$s</string>
-    <string name="speed_cameras_restart_descr">Перезапуск необходим для полного удаления данных камер контроля скорости.</string>
+    <string name="speed_cameras_restart_descr">Перезапустите приложение, чтобы удалить все данные о камерах контроля скорости.</string>
     <string name="shared_string_uninstall_and_restart">Удалить и перезапустить</string>
     <string name="shared_string_uninstall">Удалить</string>
     <string name="routing_attr_length_description">Укажите длину транспортного средства, разрешённую для движения по маршрутам.</string>
     <string name="routing_attr_length_name">Предельная длина</string>
     <string name="speed_cameras_removed_descr">В этом устройстве нет камер контроля скорости.</string>
     <string name="app_mode_inline_skates">Роликовые коньки</string>
-    <string name="use_volume_buttons_as_zoom_descr">Управление уровнем масштабирования карты с помощью кнопок регулировки громкости устройства.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Управляйте уровнем масштабирования карты с помощью кнопок громкости на устройстве.</string>
     <string name="use_volume_buttons_as_zoom">Масштабирование кнопками громкости</string>
     <string name="lenght_limit_description">Укажите длину автомобиля, для длинных транспортных средств могут применяться ограничения на маршруте.</string>
-    <string name="quick_action_remove_next_destination">Удалить следующий пункт</string>
+    <string name="quick_action_remove_next_destination">Удалить ближайшую точку назначения</string>
     <string name="please_provide_point_name_error">Задайте название точки</string>
     <string name="quick_action_remove_next_destination_descr">Следующая точка маршрута будет удалена. Если это конечный пункт, навигация завершится.</string>
-    <string name="plugin_wikipedia_description">Информация о достопримечательностях из Википедии. Ваш карманный офлайн-гид — просто включите плагин и читайте об объектах вокруг вас.</string>
+    <string name="plugin_wikipedia_description">Получите информацию о достопримечательностях из Википедии. Это ваш карманный автономный путеводитель - просто включите плагин Википедии и наслаждайтесь статьями об объектах вокруг вас.</string>
     <string name="search_download_wikipedia_maps">Скачать карты Википедии</string>
     <string name="app_mode_enduro_motorcycle">Эндуро мотоцикл</string>
     <string name="app_mode_motor_scooter">Мотороллер</string>
@@ -3801,7 +3801,7 @@
     <string name="app_mode_go_cart">В карту</string>
     <string name="app_mode_wheelchair_forward">Инвалидное кресло впереди</string>
     <string name="add_to_a_track">Добавить к треку</string>
-    <string name="set_working_days_to_continue">Необходимо указать рабочие дни для продолжения</string>
+    <string name="set_working_days_to_continue">Установите рабочие дни, чтобы продолжить</string>
     <string name="route_between_points">Маршрут между точками</string>
     <string name="plan_a_route">План маршрута</string>
     <string name="gpx_split_interval_none_descr">Выберите нужный вариант разбиения: по времени или по расстоянию.</string>
@@ -3833,7 +3833,7 @@
 \nНа следующем шаге необходимо выбрать профиль навигации для определения разрешенных дорог и пороговое расстояние, чтобы приблизительно привязать маршрут к дорогам.</string>
     <string name="route_between_points_desc">Выберите способ соединения точек: прямой линией или прокладкой маршрута с выбранным профилем.</string>
     <string name="in_case_of_reverse_direction">При обратном направлении</string>
-    <string name="plan_route_exit_dialog_descr">Закрыть план маршрута\? Все изменения будут утеряны.</string>
+    <string name="plan_route_exit_dialog_descr">Вы уверены, что хотите отменить все изменения в запланированном маршруте, закрыв его\?</string>
     <string name="street_level_imagery">Изображения на уровне улиц</string>
     <string name="shared_string_save_as_gpx">Сохранить как новый файл трека</string>
     <string name="add_segment_to_the_track">Добавить в файл трека</string>
@@ -3851,7 +3851,7 @@
     <string name="marker_save_as_track">Сохранить как файл трека</string>
     <string name="follow_track">Следовать по маршруту</string>
     <string name="follow_track_descr">Выберите файл маршрута для следования</string>
-    <string name="import_track_descr">Выберите или импортируйте файл маршрута.</string>
+    <string name="import_track_descr">Выберите файл трека или импортируйте его со своего устройства.</string>
     <string name="select_another_track">Выбрать другой трек</string>
     <string name="navigate_to_track_descr">Ведение от моей позиции к треку</string>
     <string name="pass_whole_track_descr">Точка трека для навигации</string>
