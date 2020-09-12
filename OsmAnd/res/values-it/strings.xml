@@ -563,9 +563,7 @@
     <string name="plugins_screen">Componenti aggiuntivi</string>
     <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate.</string>
     <string name="prefs_plugins">Componenti aggiuntivi</string>
-    <string name="osm_editing_plugin_description">Realizza contributi OSM come la creazione o la modifica di PDI OSM, aprendo o commentando note OSM, 
-\ne contribuendo i file GPX registrati in OsmAnd inserendo il tuo nome utente e password.
-\nOpenStreetMap.org è un progetto collaborativo di mappatura globale di dominio pubblico.</string>
+    <string name="osm_editing_plugin_description">Realizza contributi OSM come la creazione o la modifica di PDI OSM, aprendo o commentando note OSM, e contribuendo i file GPX registrati in OsmAnd inserendo il tuo nome utente e password. OpenStreetMap.org è un progetto collaborativo di mappatura globale di dominio pubblico.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
     <string name="play_commands_of_currently_selected_voice">Seleziona una voce e provane gli annunci vocali:</string>
     <string name="debugging_and_development">Sviluppo di OsmAnd</string>
@@ -3823,9 +3821,7 @@
     <string name="plan_route_select_track_file_for_open">Scegli il file di una traccia da aprire.</string>
     <string name="shared_string_done">Fatto</string>
     <string name="navigation_profile">Profilo di navigazione</string>
-    <string name="route_between_points_warning_desc">Per utilizzare questa opzione OsmAnd ha bisogno di bloccare la traccia alle strade della mappa.
-\n
-\n Nel prossimo passaggio avrai bisogno di selezionare il profilo di navigazione per determinare le strade permesse e la soglia della distanza per approssimare la strada alle strade.</string>
+    <string name="route_between_points_warning_desc">Poi approssima la traccia alle strade più vicine permesse da uno dei tuoi profili di navigazione per utilizzare questa opzione.</string>
     <string name="route_between_points_desc">Scegli come collegare i punti, con una linea retta, o calcolando un percorso che li colleghi utilizzando il profilo scelto.</string>
     <string name="overwrite_track">Sovrascrivi traccia</string>
     <string name="save_as_new_track">Salva come nuova Traccia</string>
@@ -3837,7 +3833,7 @@
     <string name="threshold_distance">Soglia distanza</string>
     <string name="route_between_points_add_track_desc">Seleziona un file traccia a cui verrà aggiunto un nuovo segmento.</string>
     <string name="street_level_imagery">Immagini stradali</string>
-    <string name="plan_route_exit_dialog_descr">Sei sicuro di voler chiudere la Pianificazione del percorso senza salvare\? Perderai tutti i cambiamenti.</string>
+    <string name="plan_route_exit_dialog_descr">Sei sicuro di voler chiudere la Pianificazione del percorso perdendo così le modifiche effettuate\?</string>
     <string name="in_case_of_reverse_direction">In caso di direzione inversa</string>
     <string name="save_track_to_gpx">Registra automaticamente la traccia durante la navigazione</string>
     <string name="shared_string_save_as_gpx">Salva come un nuovo file traccia</string>
@@ -3852,11 +3848,11 @@
     <string name="empty_state_my_tracks_desc">Importa o registra dei file traccia</string>
     <string name="context_menu_item_add_waypoint">Aggiungi un punto intermedio alla traccia</string>
     <string name="quick_action_add_gpx">Aggiungi un punto intermedio alla traccia</string>
-    <string name="map_widget_monitoring">Registrazione viaggio</string>
+    <string name="map_widget_monitoring">Registrazione percorso</string>
     <string name="marker_save_as_track">Salva come un file traccia</string>
     <string name="follow_track">Segui la traccia</string>
     <string name="follow_track_descr">Scegli il file della traccia da seguire</string>
-    <string name="import_track_descr">Scegli il file della traccia da seguire o importala dal dispositivo.</string>
+    <string name="import_track_descr">Scegli il file della traccia da seguire o importare dal dispositivo.</string>
     <string name="select_another_track">Seleziona un\'altra traccia</string>
     <string name="navigate_to_track_descr">Naviga dalla mia posizione alla traccia</string>
     <string name="pass_whole_track_descr">Punto della traccia da navigare</string>
@@ -3868,9 +3864,9 @@
     <string name="access_hint_enter_address">Immetti un indirizzo</string>
     <string name="plan_route_trim_before">Taglia prima</string>
     <string name="plan_route_trim_after">Taglia dopo</string>
-    <string name="plan_route_change_route_type_before">Cambia il tipo di percorso prima</string>
-    <string name="plan_route_change_route_type_after">Cambia il tipo di percorso dopo</string>
-    <string name="simplified_track_description">Solo la linea del percorso verrà salvato, i punti intermedi saranno cancellati.</string>
+    <string name="plan_route_change_route_type_before">Cambia il tipo di percorso precedente</string>
+    <string name="plan_route_change_route_type_after">Cambia il tipo di percorso seguente</string>
+    <string name="simplified_track_description">Solo la linea del percorso verrà salvata, i punti intermedi saranno cancellati.</string>
     <string name="shared_string_file_name">Nome del file</string>
     <string name="number_of_gpx_files_selected_pattern">%s file traccia selezionati</string>
     <string name="disable_recording_once_app_killed_descrp">Metterà in pausa la registrazione della traccia quando l\'applicazione viene terminata (attraverso le app recenti). (L\'indicazione di OsmAnd in background scomparirà dalla barra delle notifiche di Android.)</string>
@@ -3886,7 +3882,7 @@
     <string name="all_previous_segments_will_be_recalc">Tutti i segmenti precedenti verranno ricalcolati con il profilo selezionato.</string>
     <string name="open_saved_track">Apri una traccia salvata</string>
     <string name="shared_string_is_saved">è stato salvato</string>
-    <string name="one_point_error">Per favore aggiungi gli ultimi due punti.</string>
+    <string name="one_point_error">Per favore aggiungi almeno due punti.</string>
     <string name="shared_string_redo">Ripeti</string>
     <string name="release_3_8">• Aggiornata la modalità Pianificazione dell\'Itinerario che permette l\'utilizzo di diversi profili di navigazione per ogni segmento e incolla le tracce alle strade
 \n
@@ -3903,4 +3899,5 @@
 \n • Corretto il problema all\'importa/esporta le impostazioni dei profili
 \n
 \n</string>
+    <string name="simplified_track">Traccia semplificata</string>
 </resources>
