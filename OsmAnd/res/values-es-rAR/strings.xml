@@ -2337,7 +2337,8 @@
 \n • Medio Oriente: **
 \n • África: **
 \n • Antártida: *
-\n ¡Más países alrededor del globo están disponibles para descargar! Desde Afganistán a Zimbabue, desde Australia a Estados Unidos. Argentina, Brasil, Canadá, Francia, Alemania, México, Reino Unido, España, …
+\n ¡Más países alrededor del globo están disponibles para descargar!
+\nDesde Afganistán a Zimbabue, desde Australia a Estados Unidos. Argentina, Brasil, Canadá, Francia, Alemania, México, Reino Unido, España, …
 \n</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad. 
 \n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, utiliza la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más. 
@@ -3776,7 +3777,7 @@
 \nPulsa en «%2$s», para borrar todos los datos relacionados con los radares de velocidad (alertas, notificaciones y PDI) hasta reinstalar OsmAnd completamente.</string>
     <string name="uninstall_speed_cameras">Desinstalar radares de velocidad</string>
     <string name="speed_camera_pois">PDI de los radares de velocidad</string>
-    <string name="speed_cameras_restart_descr">Se debe reiniciar para borrar completamente los datos de los radares de velocidad.</string>
+    <string name="speed_cameras_restart_descr">Reiniciar la aplicación para borrar todos los datos de los radares de velocidad.</string>
     <string name="shared_string_legal">Legal</string>
     <string name="keep_active">Mantener</string>
     <string name="shared_string_uninstall">Desinstalar</string>
@@ -3791,10 +3792,10 @@
     <string name="routing_attr_length_name">Límite de longitud</string>
     <string name="speed_cameras_removed_descr">Este dispositivo no tiene radares de velocidad.</string>
     <string name="app_mode_inline_skates">Patines en línea</string>
-    <string name="use_volume_buttons_as_zoom_descr">Permite controlar el nivel de zoom del mapa con los botones de volumen del dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Controla el nivel de zoom del mapa usando los botones de volumen del dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botones de volumen como zoom</string>
     <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
-    <string name="quick_action_remove_next_destination">Borrar el siguiente punto de destino</string>
+    <string name="quick_action_remove_next_destination">Borrar el punto de destino más cercano</string>
     <string name="please_provide_point_name_error">Proporciona un nombre para el punto</string>
     <string name="quick_action_remove_next_destination_descr">El punto de destino actual de la ruta será borrado. Si será el destino, la navegación se detendrá.</string>
     <string name="search_download_wikipedia_maps">Descargar datos de Wikipedia</string>
@@ -3805,7 +3806,7 @@
     <string name="app_mode_go_cart">Go-kart</string>
     <string name="osm_edit_closed_note">Nota de OSM cerrada</string>
     <string name="app_mode_wheelchair_forward">Silla de ruedas (hacia adelante)</string>
-    <string name="set_working_days_to_continue">Debes definir los días laborales para continuar</string>
+    <string name="set_working_days_to_continue">Definir los días laborales para continuar</string>
     <string name="route_between_points">Ruta entre puntos</string>
     <string name="plan_a_route">Crear una ruta</string>
     <string name="add_to_a_track">Añadir a una traza</string>
@@ -3821,7 +3822,7 @@
     <string name="plan_route_import_track">Importar traza</string>
     <string name="plan_route_open_existing_track">Abrir traza existente</string>
     <string name="plan_route_create_new_route">Crear nueva ruta</string>
-    <string name="plan_route_select_track_file_for_open">Marca un archivo de traza para abrir.</string>
+    <string name="plan_route_select_track_file_for_open">Marcar un archivo de traza para abrir.</string>
     <string name="shared_string_done">Listo</string>
     <string name="overwrite_track">Sobrescribir traza</string>
     <string name="save_as_new_track">Guardar como nueva traza</string>
@@ -3831,14 +3832,12 @@
     <string name="route_between_points_desc">Marca cómo conectar los puntos, con una línea recta o calcular una ruta entre ellos con el perfil elegido.</string>
     <string name="whole_track">Traza completa</string>
     <string name="next_segment">Siguiente segmento</string>
-    <string name="route_between_points_warning_desc">Para utilizar esta opción, OsmAnd debe ajustar su traza a los caminos del mapa.
-\n
-\n En el siguiente paso se debe elegir el perfil de navegación para detectar los caminos permitidos y el umbral de distancia para aproximar la traza a los caminos.</string>
+    <string name="route_between_points_warning_desc">A continuación, ajusta la traza al camino permitido más cercano con un perfil de navegación.</string>
     <string name="threshold_distance">Distancia de umbral</string>
     <string name="navigation_profile">Perfil de navegación</string>
     <string name="route_between_points_add_track_desc">Elige un archivo de traza al que se añadirá un nuevo segmento.</string>
     <string name="street_level_imagery">Imágenes a nivel de calle</string>
-    <string name="plan_route_exit_dialog_descr">¿Cerrar el plan de ruta sin guardar\? Se perderán todos los cambios.</string>
+    <string name="plan_route_exit_dialog_descr">¿Cerrar el plan de ruta sin guardar\?, se descartarán todos los cambios.</string>
     <string name="in_case_of_reverse_direction">En caso de dirección inversa</string>
     <string name="save_track_to_gpx">Grabar la traza automáticamente al navegar</string>
     <string name="shared_string_gpx_files">Trazas</string>
@@ -3856,7 +3855,7 @@
     <string name="marker_save_as_track">Guardar como archivo de traza</string>
     <string name="follow_track">Seguir traza</string>
     <string name="follow_track_descr">Elige el archivo de la traza a seguir</string>
-    <string name="import_track_descr">Elige el archivo de la traza a seguir o importa una.</string>
+    <string name="import_track_descr">Elige el archivo de la traza a seguir o impórtala desde el dispositivo.</string>
     <string name="select_another_track">Elegir otra traza</string>
     <string name="navigate_to_track_descr">Navegar desde mi ubicación a la traza</string>
     <string name="pass_whole_track_descr">Punto de la traza para navegar</string>
@@ -3872,7 +3871,7 @@
     <string name="plan_route_change_route_type_after">Cambiar el tipo de ruta posterior</string>
     <string name="simplified_track">Traza simplificada</string>
     <string name="shared_string_file_name">Nombre del archivo</string>
-    <string name="monitoring_control_start">GRABAR</string>
+    <string name="monitoring_control_start">Grabar</string>
     <string name="disable_recording_once_app_killed_descrp">La grabación de la traza se pausará al cerrar la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
     <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activar mediante el widget de grabación de viaje sobre el mapa).</string>
     <string name="gpx_monitoring_stop">Pausar grabación del viaje</string>
