@@ -1221,6 +1221,7 @@ public class ImportHelper {
 				if (p.desc != null) {
 					fp.setDescription(p.desc);
 				}
+				fp.setAddress(p.getExtensionsToRead().get("address"));
 				fp.setColor(p.getColor(0));
 				fp.setIconIdFromName(app, p.getIconName());
 				fp.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));

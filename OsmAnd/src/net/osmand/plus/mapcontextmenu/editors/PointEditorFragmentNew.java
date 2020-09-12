@@ -234,6 +234,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		}
 		if (getAddressInitValue() != null){
 			addressEdit.setText(getAddressInitValue());
+			addressEdit.setSelection(addressEdit.getText().length());
 		}
 
 		descriptionCaption = view.findViewById(R.id.description);
