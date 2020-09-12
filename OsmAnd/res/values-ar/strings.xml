@@ -3818,9 +3818,7 @@
     <string name="route_between_points_desc">حدد كيفية توصيل النقاط، بخط مستقيم، أو حساب مسار بينها مع ملف التعريف المحدد.</string>
     <string name="whole_track">مسار كامل</string>
     <string name="next_segment">المقطع التالي</string>
-    <string name="route_between_points_warning_desc">لاستخدام هذا الخيارتحتاج إلى محاذاة المسار الخاص بك إلى خريطة الطرق.
-\n
-\nفي الخطوة التالية ، ستحتاج إلى تحديد ملف تعريف الملاحة لاكتشاف الطرق المسموح بها وبداية المسافة لتقريب تتبعك بالطرق.</string>
+    <string name="route_between_points_warning_desc">بعد ذلك ، ألقط مسارك بأقرب طريق مسموح به باستخدام أحد ملفات تعريف التنقل الخاصة بك لاستخدام هذا الخيار.</string>
     <string name="threshold_distance">بداية المسافة</string>
     <string name="street_level_imagery">صور للشارع</string>
     <string name="plan_route_exit_dialog_descr">هل أنت متأكد أنك تريد إغلاق مسار الخطة دون حفظ؟ سوف تفقد كل التغييرات؟</string>
