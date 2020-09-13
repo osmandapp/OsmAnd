@@ -34,6 +34,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
@@ -85,11 +86,8 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
@@ -1487,18 +1485,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		GpxData gpxData = editingCtx.getGpxData();
 		String displayedName;
 		if (gpxData == null) {
-			final String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
-			displayedName = suggestedName;
-			OsmandApplication app = getMyApplication();
-			if (app != null) {
-				File dir = app.getAppPath(GPX_INDEX_DIR);
-				File fout = new File(dir, suggestedName + GPX_FILE_EXT);
-				int ind = 0;
-				while (fout.exists()) {
-					displayedName = suggestedName + "_" + (++ind);
-					fout = new File(dir, displayedName + GPX_FILE_EXT);
-				}
-			}
+			displayedName = FileUtils.createName(getMyApplication());
 		} else {
 			displayedName = AndroidUtils.trimExtension(new File(gpxData.getGpxFile().path).getName());
 		}
