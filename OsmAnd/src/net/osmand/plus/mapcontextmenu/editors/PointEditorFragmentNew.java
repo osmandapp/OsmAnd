@@ -38,6 +38,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
@@ -233,6 +234,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		}
 		if (getAddressInitValue() != null){
 			addressEdit.setText(getAddressInitValue());
+			addressEdit.setSelection(addressEdit.getText().length());
 		}
 
 		descriptionCaption = view.findViewById(R.id.description);
@@ -276,8 +278,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				if (addressCaption.getVisibility() != View.VISIBLE) {
 					addressCaption.setVisibility(View.VISIBLE);
 					addAddressBtn.setText(view.getResources().getString(R.string.delete_address));
-					View addressEdit = view.findViewById(R.id.address_edit);
+					TextInputEditText addressEdit = view.findViewById(R.id.address_edit);
 					addressEdit.requestFocus();
+					addressEdit.setSelection(addressEdit.getText().length());
 					AndroidUtils.softKeyboardDelayed(requireActivity(),addressEdit);
 				} else {
 					addressCaption.setVisibility(View.GONE);

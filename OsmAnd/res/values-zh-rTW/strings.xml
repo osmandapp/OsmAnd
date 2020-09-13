@@ -3883,4 +3883,19 @@
     <string name="shared_string_is_saved">已儲存</string>
     <string name="one_point_error">請至少新增兩個點。</string>
     <string name="shared_string_redo">重做</string>
+    <string name="release_3_8">• 更新的規劃路線模式允許對不同路段使用不同的導航類型，並可將任何軌跡附加到道路上
+\n
+\n • 新的軌跡外觀選項：選取顏色、厚度、開啟方向箭頭與開始／結束標記
+\n
+\n • 改善自行車節點的能見度
+\n
+\n • 有基本資訊的軌跡情境選單
+\n
+\n • 改進了搜尋演算法
+\n
+\n • 改進了導航中的「跟隨軌跡」選項
+\n
+\n • 修復設定檔的匯入／匯出問題
+\n
+\n</string>
 </resources>

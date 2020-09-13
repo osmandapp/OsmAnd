@@ -3823,4 +3823,5 @@
     <string name="poi_departures_board_no">Väljuvate reiside tabloo: ei</string>
     <string name="poi_departures_board">Väljuvate reiside tabloo</string>
     <string name="poi_drinking_water_refill">Joogivee täitmine</string>
+    <string name="poi_recycling_small_electrical_appliances">Väikesed elektriseadmed</string>
 </resources>

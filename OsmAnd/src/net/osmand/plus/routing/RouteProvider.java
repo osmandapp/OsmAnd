@@ -469,7 +469,9 @@ public class RouteProvider {
 			List<Location> gpxRouteLocations = result.getImmutableAllLocations();
 			int gpxNextIndex = calcWholeRoute ? 0 : findStartIndexFromRoute(gpxRouteLocations, routeParams.start, calculateOsmAndRouteParts);
 			Location gpxNextLocation = null;
+			Location gpxLastLocation = !gpxRouteLocations.isEmpty() ? gpxRouteLocations.get(gpxRouteLocations.size() - 1) : null;
 			List<RouteSegmentResult> firstSegmentRoute = null;
+			List<RouteSegmentResult> lastSegmentRoute = null;
 			List<RouteSegmentResult> gpxRoute;
 			if (gpxNextIndex > 0) {
 				gpxNextLocation = gpxRouteLocations.get(gpxNextIndex);
@@ -486,14 +488,25 @@ public class RouteProvider {
 			if (calculateOsmAndRouteParts
 					&& routeParams.start != null && gpxNextLocation != null
 					&& gpxNextLocation.distanceTo(routeParams.start) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
-				RouteCalculationResult firstSegmentResult = findOfflineRouteSegment(routeParams, routeParams.start, new LatLon(gpxNextLocation.getLatitude(), gpxNextLocation.getLongitude()));
+				RouteCalculationResult firstSegmentResult = findOfflineRouteSegment(
+						routeParams, routeParams.start, new LatLon(gpxNextLocation.getLatitude(), gpxNextLocation.getLongitude()));
 				firstSegmentRoute = firstSegmentResult.getOriginalRoute();
+			}
+			if (calculateOsmAndRouteParts
+					&& routeParams.end != null && gpxLastLocation != null
+					&& MapUtils.getDistance(gpxLastLocation.getLatitude(), gpxLastLocation.getLongitude(),
+					routeParams.end.getLatitude(), routeParams.end.getLongitude()) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
+				RouteCalculationResult lastSegmentResult = findOfflineRouteSegment(routeParams, gpxLastLocation, routeParams.end);
+				lastSegmentRoute = lastSegmentResult.getOriginalRoute();
 			}
 			List<RouteSegmentResult> newGpxRoute = new ArrayList<>();
 			if (firstSegmentRoute != null && !firstSegmentRoute.isEmpty()) {
 				newGpxRoute.addAll(firstSegmentRoute);
 			}
 			newGpxRoute.addAll(gpxRoute);
+			if (lastSegmentRoute != null && !lastSegmentRoute.isEmpty()) {
+				newGpxRoute.addAll(lastSegmentRoute);
+			}
 			return new RouteCalculationResult(newGpxRoute, routeParams.start, routeParams.end,
 					routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, null, routeParams.mode, true);
 		}

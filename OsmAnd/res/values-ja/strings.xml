@@ -2703,7 +2703,7 @@ POIの更新は利用できません</string>
     <string name="wikivoyage_travel_guide_descr">インターネットへ接続せずにOsmAnd上で地球上のあらゆる興味深いスポットのガイドを利用することができます。</string>
     <string name="in_app_purchase">アプリ内課金</string>
     <string name="in_app_purchase_desc">1回払い</string>
-    <string name="in_app_purchase_desc_ex">買いきり購入の場合、期限を気にせず利用できるようになります。</string>
+    <string name="in_app_purchase_desc_ex">買いきりの場合、期限を問わず利用可能です。</string>
     <string name="purchase_unlim_title">購入 - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyageオフライン</string>
     <string name="contour_lines_hillshade_maps">等高線と陰影起伏図</string>
@@ -3797,7 +3797,7 @@ POIの更新は利用できません</string>
 \n%1$sを選択すると、スピードカメラに関するアラートと警告が表示されます。
 \n
 \n%2$sを選択すると、スピードカメラに関するすべてのデータ(警告、通知、POI)が、OsmAndの再インストールを行うまで削除されます。</string>
-    <string name="keep_active">アクティブを維持</string>
+    <string name="keep_active">機能を維持</string>
     <string name="shared_string_uninstall">アンインストール</string>
     <string name="speed_cameras_alert">一部の国では、スピードカメラの事前警告は法律で禁止されています。</string>
     <string name="screen_timeout_descr">\"%1$s\"がオンの場合、設定された動作時間はそちらに依存します。</string>
@@ -3860,4 +3860,7 @@ POIの更新は利用できません</string>
     <string name="plan_route_trim_after">後でトリミング</string>
     <string name="plan_route_change_route_type_before">先にルートタイプを変更</string>
     <string name="plan_route_change_route_type_after">後でルートタイプを変更</string>
+    <string name="get_discount_second_part">次年度以降 %1$s</string>
+    <string name="get_discount_first_few_part">初%2$s度 %1$s</string>
+    <string name="get_discount_first_part">初%2$s度 %1$s</string>
 </resources>
