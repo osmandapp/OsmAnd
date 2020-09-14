@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -33,7 +34,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -42,22 +45,23 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.PrintDialogActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
@@ -73,12 +77,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 
 public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener,
-		RouteDetailsFragmentListener {
+		RouteDetailsFragmentListener, SaveAsNewTrackFragmentListener {
 
 	public static final String TAG = "ChooseRouteFragment";
 	public static final String ROUTE_INDEX_KEY = "route_index_key";
@@ -461,8 +468,19 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
-					MapActivityActions.createSaveDirections(mapActivity, routingHelper).show();
+					OsmandApplication app = mapActivity.getMyApplication();
+					GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+
+					String fileName;
+					if (paramsBuilder == null || paramsBuilder.getFile() == null || paramsBuilder.getFile().path == null) {
+						String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
+						fileName = FileUtils.createUniqueFileName(app, suggestedName, IndexConstants.GPX_INDEX_DIR, GPX_FILE_EXT);
+					} else {
+						fileName = new File(paramsBuilder.getFile().path).getName();
+					}
+					SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+							ChooseRouteFragment.this, null, fileName,
+							false, true);
 				}
 			}
 		};
@@ -858,6 +876,16 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			if (!mapActivity.getMyApplication().getRoutingHelper().isPublicTransportMode()) {
 				mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
 			}
+		}
+	}
+
+	@Override
+	public void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack) {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			File fileDir = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), folderName == null ? "" : folderName);
+			File toSave = new File(fileDir, fileName + GPX_FILE_EXT);
+			new SaveDirectionsAsyncTask(app, showOnMap).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
 		}
 	}
 
