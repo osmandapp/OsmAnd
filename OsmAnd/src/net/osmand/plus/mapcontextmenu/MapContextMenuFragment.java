@@ -168,17 +168,21 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			public void handleOnBackPressed() {
-				if (menu.isVisible() && menu.isClosable()) {
-					if (menu.getCurrentMenuState() != MenuState.HEADER_ONLY && !menu.isLandscapeLayout()) {
-						menu.openMenuHeaderOnly();
-					} else {
-						menu.close();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			boolean enabled = mapActivity.getQuickSearchDialogFragment() == null;
+			mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(enabled) {
+				public void handleOnBackPressed() {
+					if (menu.isVisible() && menu.isClosable()) {
+						if (menu.getCurrentMenuState() != MenuState.HEADER_ONLY && !menu.isLandscapeLayout()) {
+							menu.openMenuHeaderOnly();
+						} else {
+							menu.close();
+						}
 					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 	@Override

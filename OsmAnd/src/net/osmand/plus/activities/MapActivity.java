@@ -657,14 +657,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			closeDrawer();
 			return;
 		}
-		if (getQuickSearchDialogFragment() != null) {
-			showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-			return;
-		}
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
 			quitAddGpxPointMode();
 		}
-		if (launchPrevActivityIntent()) {
+		if (!getOnBackPressedDispatcher().hasEnabledCallbacks() && launchPrevActivityIntent()) {
 			return;
 		}
 		super.onBackPressed();
