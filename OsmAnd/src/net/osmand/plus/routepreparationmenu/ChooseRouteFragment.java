@@ -56,12 +56,12 @@ import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routing.RouteDirectionInfo;
-import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
@@ -81,8 +81,8 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.activities.MapActivityActions.*;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.*;
+import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 
 public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener,
 		RouteDetailsFragmentListener, SaveAsNewTrackFragmentListener {
@@ -467,15 +467,16 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			@Override
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
-				OsmandApplication app = getMyApplication();
-				if (mapActivity != null && app != null) {
-					RoutingHelper routingHelper = app.getRoutingHelper();
-					final RouteProvider.GPXRouteParamsBuilder rp = routingHelper.getCurrentGPXRoute();
-					final String fileName;
-					if (rp == null || rp.getFile() == null || rp.getFile().path == null) {
-						fileName = FileUtils.createName(app);
+				if (mapActivity != null) {
+					OsmandApplication app = mapActivity.getMyApplication();
+					GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+
+					String fileName;
+					if (paramsBuilder == null || paramsBuilder.getFile() == null || paramsBuilder.getFile().path == null) {
+						String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
+						fileName = FileUtils.createUniqueFileName(app, suggestedName, IndexConstants.GPX_INDEX_DIR, GPX_FILE_EXT);
 					} else {
-						fileName = new File(rp.getFile().path).getName();
+						fileName = new File(paramsBuilder.getFile().path).getName();
 					}
 					SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 							ChooseRouteFragment.this, null, fileName,

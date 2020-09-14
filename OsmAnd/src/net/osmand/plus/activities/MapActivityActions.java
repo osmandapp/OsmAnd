@@ -294,8 +294,7 @@ public class MapActivityActions implements DialogProvider {
 					dlg.findViewById(R.id.DuplicateFileName).setVisibility(View.VISIBLE);
 				} else {
 					dlg.dismiss();
-					new SaveDirectionsAsyncTask(app, false)
-							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
+					new SaveDirectionsAsyncTask(app, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
 				}
 			}
 		});
@@ -325,8 +324,8 @@ public class MapActivityActions implements DialogProvider {
 		protected GPXFile doInBackground(File... params) {
 			if (params.length > 0) {
 				File file = params[0];
-				String fileName = file.getName();
-				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName.substring(0, fileName.length() - GPX_FILE_EXT.length()));
+				String fileName = Algorithms.getFileNameWithoutExtension(file);
+				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName);
 				gpx.error = GPXUtilities.writeGpxFile(file, gpx);
 				return gpx;
 			}
@@ -335,19 +334,18 @@ public class MapActivityActions implements DialogProvider {
 
 		@Override
 		protected void onPostExecute(GPXFile gpxFile) {
-			if (gpxFile.error != null) {
+			if (gpxFile.error == null) {
+				app.getSelectedGpxHelper().selectGpxFile(gpxFile, showOnMap, false);
+				String result = app.getString(R.string.route_successfully_saved_at, gpxFile.tracks.get(0).name);
+				Toast.makeText(app, result, Toast.LENGTH_LONG).show();
+			} else {
 				String errorMessage = gpxFile.error.getMessage();
 				if (errorMessage == null) {
 					errorMessage = app.getString(R.string.error_occurred_saving_gpx);
 				}
 				Toast.makeText(app, errorMessage, Toast.LENGTH_LONG).show();
-				return;
 			}
-			app.getSelectedGpxHelper().selectGpxFile(gpxFile, showOnMap, false);
-			String result = app.getString(R.string.route_successfully_saved_at, gpxFile.tracks.get(0).name);
-			Toast.makeText(app, result, Toast.LENGTH_LONG).show();
 		}
-
 	}
 
 	public void addActionsToAdapter(final double latitude,

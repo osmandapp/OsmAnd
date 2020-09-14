@@ -86,8 +86,11 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
@@ -1443,7 +1446,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		GpxData gpxData = editingCtx.getGpxData();
 		String displayedName;
 		if (gpxData == null) {
-			displayedName = FileUtils.createName(getMyApplication());
+			String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
+			displayedName = FileUtils.createUniqueFileName(requireMyApplication(), suggestedName, GPX_INDEX_DIR, GPX_FILE_EXT);
 		} else {
 			displayedName = AndroidUtils.trimExtension(new File(gpxData.getGpxFile().path).getName());
 		}

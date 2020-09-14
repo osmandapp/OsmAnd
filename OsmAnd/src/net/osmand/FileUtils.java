@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.plus.GpxSelectionHelper;
@@ -19,13 +20,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.regex.Pattern;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
 public class FileUtils {
 
@@ -171,20 +166,16 @@ public class FileUtils {
 		return dest;
 	}
 
-	public static String createName(OsmandApplication app) {
-		String displayedName;
-		final String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
-		displayedName = suggestedName;
-		if (app != null) {
-			File dir = app.getAppPath(GPX_INDEX_DIR);
-			File fout = new File(dir, suggestedName + GPX_FILE_EXT);
-			int ind = 0;
-			while (fout.exists()) {
-				displayedName = suggestedName + "_" + (++ind);
-				fout = new File(dir, displayedName + GPX_FILE_EXT);
-			}
+	public static String createUniqueFileName(@NonNull OsmandApplication app, String name, String dirName, String extension) {
+		String uniqueFileName = name;
+		File dir = app.getAppPath(dirName);
+		File fout = new File(dir, name + extension);
+		int ind = 0;
+		while (fout.exists()) {
+			uniqueFileName = name + "_" + (++ind);
+			fout = new File(dir, uniqueFileName + extension);
 		}
-		return displayedName;
+		return uniqueFileName;
 	}
 
 	public interface RenameCallback {
