@@ -13,9 +13,9 @@
 -->
     <string name="release_3_8">
     • Updated "Plan a route" function: allows using different navigation types per segment and the inclusion of tracks\n\n
-    • New "Appearance" menu for tracks: select color, thickness, and direction arrows. Tracks now indicate start/finish icons.\n\n
-    • Improved visibility of bicycle nodes\n\n
-    • Tracks are now tappable, have context menu with basic info\n\n
+    • New "Appearance" menu for tracks: select color, thickness, display direction arrows, start/finish icons\n\n
+    • Improved visibility of bicycle nodes.\n\n
+    • Tracks are now tappable, have context menu with basic info.\n\n
     • Improved "Search" algorithms\n\n
     • Improved "Follow track" options in Navigation\n\n
     • Fixed issues with import/export of profile settings\n\n
