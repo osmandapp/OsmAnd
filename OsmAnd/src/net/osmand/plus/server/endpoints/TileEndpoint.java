@@ -1,16 +1,13 @@
 package net.osmand.plus.server.endpoints;
 
-import android.graphics.*;
-import androidx.annotation.GuardedBy;
+import android.graphics.Bitmap;
 import fi.iki.elonen.NanoHTTPD;
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.server.OsmAndHttpServer;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.util.MapUtils;
+import net.osmand.plus.views.OsmandMapLayer;
 import org.apache.commons.logging.Log;
 
 import java.io.ByteArrayInputStream;
@@ -36,7 +33,6 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 	}
 
 
-
 	@Override
 	public NanoHTTPD.Response process(NanoHTTPD.IHTTPSession session, String url) {
 		// https://tile.osmand.net/hd/6/55/25.png
@@ -56,7 +52,9 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		int y = Integer.parseInt(prms[3]);
 		MetaTileFileSystemCache.MetaTileCache res = cache.get(zoom, x, y);
 		if (res == null) {
-			lastRequestedZoom = zoom;
+			synchronized (this) {
+				lastRequestedZoom = zoom;
+			}
 			res = requestMetatile(x, y, zoom);
 			if (res == null) {
 				return OsmAndHttpServer.ErrorResponses.response500;
@@ -93,42 +91,30 @@ public class TileEndpoint implements OsmAndHttpServer.ApiEndpoint {
 		mapActivity.getMapView().setCurrentViewport(res.bbox);
 		int timeout = 0;
 		try {
-			AsyncLoadingThread athread = resourceManager.getAsyncLoadingThread();
-			resourceManager.updateRendererMap(res.bbox, null);
+			LOG.debug("SERVER: interrupt in request");
+			resourceManager.getRenderer().loadMap(res.bbox, resourceManager.getMapTileDownloader());
 			Thread.sleep(TIMEOUT_STEP); // to do line should be removed in future
-			// wait till all resources rendered and loaded
-			while (athread.areResourcesLoading() && timeout < TIMEOUT) {
-				if(lastRequestedZoom != zoom) {
-					return null;
-				}
-				Thread.sleep(TIMEOUT_STEP);
-				timeout += TIMEOUT_STEP;
-			}
-			mapActivity.getMapView().refreshMap();
+			OsmandMapLayer.DrawSettings drawSettings =
+					new OsmandMapLayer.DrawSettings(mapActivity.getMapView().getSettings().isLightContent(),
+							true);
+			mapActivity.getMapView().refreshMapInternal(drawSettings);
+			mapActivity.getMapView().refreshBaseMapInternal(res.bbox, drawSettings);
+			Thread.sleep(TIMEOUT_STEP); // to do line should be removed in future
 			// wait for image to be refreshed
-			while(!resourceManager.getRenderingBufferImageThread().getLooper().getQueue().isIdle() &&
+			while (!resourceManager.getRenderingBufferImageThread().getLooper().getQueue().isIdle() &&
 					timeout < TIMEOUT) {
 				Thread.sleep(TIMEOUT_STEP);
 				timeout += TIMEOUT_STEP;
 			}
 			Bitmap rbmp = mapActivity.getMapView().getBufferBitmap();
-			if (timeout >= TIMEOUT) {
-				return null;
-//				Canvas canvas = new Canvas(tempBmp);
-//				Paint paint = new Paint();
-//				paint.setColor(Color.RED);
-//				paint.setTextSize(12);
-//				paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
-//				canvas.drawText("TIMEOUT", tempBmp.getWidth() / 2, tempBmp.getHeight() / 2, paint);
-				// here we could return stub
-			}
 			res.bmp = rbmp.copy(rbmp.getConfig(), true);
 			this.cache.put(res);
-			LOG.debug("Render metatile: " + (System.currentTimeMillis() - tm)/1000.0f);
+			LOG.debug("SERVER: metatile: " + (System.currentTimeMillis() - tm) / 1000.0f);
 			return res;
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			LOG.error(e);
 		}
+		LOG.debug("SERVER: metatile1: " + (System.currentTimeMillis() - tm) / 1000.0f);
 		return null;
 	}
 }

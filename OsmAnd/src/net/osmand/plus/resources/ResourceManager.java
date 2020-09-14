@@ -1040,7 +1040,7 @@ public class ResourceManager {
 		return renderer.updateMapIsNeeded(rotatedTileBox, drawSettings);
 	}
 	
-	public void updateRendererMap(RotatedTileBox rotatedTileBox, OnMapLoadedListener mapLoadedListener){
+	public synchronized void updateRendererMap(RotatedTileBox rotatedTileBox, OnMapLoadedListener mapLoadedListener){
 		renderer.interruptLoadingMap();
 		asyncLoadingThread.requestToLoadMap(new MapLoadRequest(rotatedTileBox, mapLoadedListener));
 	}

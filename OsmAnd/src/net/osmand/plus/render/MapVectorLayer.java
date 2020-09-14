@@ -1,5 +1,6 @@
 package net.osmand.plus.render;
 
+import android.util.Log;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.TileSourceProxyProvider;
 import net.osmand.core.jni.MapLayerConfiguration;
@@ -156,13 +157,19 @@ public class MapVectorLayer extends BaseMapLayer {
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 		} else {
 			if (!view.isZooming()) {
-				if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings) &&
-						!view.isScreenViewDetached()) {
+				if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings) ||
+						view.isScreenViewDetached()) {
 					// pixRect.set(-view.getWidth(), -view.getHeight() / 2, 2 * view.getWidth(), 3 *
 					// view.getHeight() / 2);
 					final RotatedTileBox copy = tilesRect.copy();
-					copy.increasePixelDimensions(copy.getPixWidth() / 3, copy.getPixHeight() / 4);
-					resourceManager.updateRendererMap(copy, null);
+					Log.d("SERVER: ","SERVER: interrupt in layer");
+					if (view.isScreenViewDetached()){
+						resourceManager.getRenderer().loadMap(copy, resourceManager.getMapTileDownloader());
+					}
+					else {
+						copy.increasePixelDimensions(copy.getPixWidth() / 3, copy.getPixHeight() / 4);
+						resourceManager.updateRendererMap(copy, null);
+					}
 				}
 
 			}
@@ -175,7 +182,7 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	private boolean drawRenderedMap(Canvas canvas, Bitmap bmp, RotatedTileBox bmpLoc, RotatedTileBox currentViewport) {
 		boolean shown = false;
-		if (bmp != null && bmpLoc != null) {
+			if (bmp != null && bmpLoc != null) {
 			float rot = -bmpLoc.getRotate();
 			canvas.rotate(rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 			final RotatedTileBox calc = currentViewport.copy();

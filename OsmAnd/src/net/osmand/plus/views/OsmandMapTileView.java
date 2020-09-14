@@ -588,7 +588,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void refreshBaseMapInternal(RotatedTileBox tileBox, DrawSettings drawSettings) {
+	public void refreshBaseMapInternal(RotatedTileBox tileBox, DrawSettings drawSettings) {
 		if (tileBox.getPixHeight() == 0 || tileBox.getPixWidth() == 0) {
 			return;
 		}
@@ -625,7 +625,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		additional.calculateFPS(start, end);
 	}
 
-	private void refreshMapInternal(DrawSettings drawSettings) {
+	public void refreshMapInternal(DrawSettings drawSettings) {
 		if (view == null) {
 			return;
 		}
@@ -788,7 +788,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		canvas.drawCircle(x, y, 7 * dm.density, paintCenter);
 	}
 
-	private void refreshBufferImage(final DrawSettings drawSettings) {
+	public void refreshBufferImage(final DrawSettings drawSettings) {
 		if (mapRenderer != null) {
 			return;
 		}
@@ -831,16 +831,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	// this method could be called in non UI thread
 	public void refreshMap(final boolean updateVectorRendering) {
 		if ((view != null && view.isShown()) || isScreenViewDetached) {
-			boolean nightMode = application.getDaynightHelper().isNightMode();
-			Boolean currentNightMode = this.nightMode;
-			boolean forceUpdateVectorDrawing = currentNightMode != null && currentNightMode != nightMode;
-			if (forceUpdateVectorDrawing) {
-				resetDefaultColor();
-			}
-			this.nightMode = nightMode;
-			DrawSettings drawSettings = new DrawSettings(nightMode, updateVectorRendering || forceUpdateVectorDrawing);
-			sendRefreshMapMsg(drawSettings, 20);
-			refreshBufferImage(drawSettings);
+//			boolean nightMode = application.getDaynightHelper().isNightMode();
+//			Boolean currentNightMode = this.nightMode;
+//			boolean forceUpdateVectorDrawing = currentNightMode != null && currentNightMode != nightMode;
+//			if (forceUpdateVectorDrawing) {
+//				resetDefaultColor();
+//			}
+//			this.nightMode = nightMode;
+//			DrawSettings drawSettings = new DrawSettings(nightMode, updateVectorRendering || forceUpdateVectorDrawing);
+//			sendRefreshMapMsg(drawSettings, 20);
+//			refreshBufferImage(drawSettings);
 		}
 	}
 
@@ -880,7 +880,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void setCurrentViewport(RotatedTileBox viewport) {
 		currentViewport = viewport;
-		refreshMap(true);
+		//refreshMap(true);
 	}
 
 	public Bitmap getBufferBitmap() {
