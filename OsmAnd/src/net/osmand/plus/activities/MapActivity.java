@@ -660,14 +660,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
 			quitAddGpxPointMode();
 		}
-		if (!getOnBackPressedDispatcher().hasEnabledCallbacks() && launchPrevActivityIntent()) {
+		if (getSupportFragmentManager().getBackStackEntryCount() == 0 && launchPrevActivityIntent()) {
 			return;
 		}
 		super.onBackPressed();
 	}
 
 	public boolean launchPrevActivityIntent() {
-		if (prevActivityIntent != null && getSupportFragmentManager().getBackStackEntryCount() == 0) {
+		if (prevActivityIntent != null) {
 			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon loc = getMapLocation();
 			prevActivityIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
