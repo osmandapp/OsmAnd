@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -106,6 +107,12 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 		app = requireMyApplication();
 		settingsHelper = app.getSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
+		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				showExitDialog();
+			}
+		});
 	}
 
 	@Nullable

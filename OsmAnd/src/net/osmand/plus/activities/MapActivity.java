@@ -116,7 +116,6 @@ import net.osmand.plus.mapcontextmenu.editors.PointEditorFragmentNew;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxApproximationFragment;
 import net.osmand.plus.measurementtool.GpxData;
@@ -141,12 +140,8 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
 import net.osmand.plus.settings.fragments.DataStorageFragment;
-import net.osmand.plus.settings.fragments.ImportCompleteFragment;
-import net.osmand.plus.settings.fragments.ImportSettingsFragment;
-import net.osmand.plus.settings.fragments.ProfileAppearanceFragment;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -684,42 +679,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				return;
 			}
 		}
-		PlanRouteFragment planRouteFragment = getPlanRouteFragment();
-		if (planRouteFragment != null) {
-			if (planRouteFragment.quit(true)) {
-				MapMarkersDialogFragment.showInstance(this);
-			}
-			return;
-		}
-
-		SnapTrackWarningFragment snapTrackWarningFragment = getSnapTrackWarningBottomSheet();
-		if (snapTrackWarningFragment != null) {
-			snapTrackWarningFragment.dismissImmediate();
-			return;
-		}
-
-		GpxApproximationFragment gpxApproximationFragment = getGpxApproximationFragment();
-		if (gpxApproximationFragment != null) {
-			gpxApproximationFragment.dismissImmediate();
-			return;
-		}
-
-		MeasurementToolFragment measurementToolFragment = getMeasurementToolFragment();
-		if (measurementToolFragment != null) {
-			measurementToolFragment.quit(true);
-			return;
-		}
-		ChooseRouteFragment chooseRouteFragment = getChooseRouteFragment();
-		if (chooseRouteFragment != null) {
-			chooseRouteFragment.dismiss(true);
-			return;
-		}
-		ProfileAppearanceFragment profileAppearanceFragment = getProfileAppearanceFragment();
-		if (profileAppearanceFragment != null) {
-			if (profileAppearanceFragment.isProfileAppearanceChanged()) {
-				return;
-			}
-		}
 
 		PointEditorFragmentNew pointEditorFragmentNew = getPointEditorFragmentNew();
 		if (pointEditorFragmentNew != null) {
@@ -769,25 +728,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed()) {
 			return;
 		}
-		ImportSettingsFragment importSettingsFragment = getImportSettingsFragment();
-		if (importSettingsFragment != null) {
-			importSettingsFragment.showExitDialog();
-			return;
-		}
-		ImportCompleteFragment importCompleteFragment = getImportCompleteFragment();
-		if (importCompleteFragment != null) {
-			importCompleteFragment.dismissFragment();
-			return;
-		}
-		ConfigureMenuItemsFragment configureMenuItemsFragment = getConfigureMenuItemsFragment();
-		if (configureMenuItemsFragment != null) {
-			configureMenuItemsFragment.exitFragment();
-			return;
-		}
-
 		super.onBackPressed();
 	}
-
 
 	private void quitAddGpxPointMode() {
 		getMapLayers().getContextMenuLayer().getAddGpxPointBottomSheetHelper().hide();
@@ -930,7 +872,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
 					} else {
 						ActivityCompat.requestPermissions(this,
-								new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
 								DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 					}
 				}
@@ -2301,24 +2243,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(ChooseRouteFragment.TAG);
 	}
 
-	public ProfileAppearanceFragment getProfileAppearanceFragment() {
-		return getFragment(ProfileAppearanceFragment.TAG);
-	}
-
 	public QuickActionListFragment getQuickActionListFragment() {
-		return  getFragment(QuickActionListFragment.TAG);
-	}
-
-	public ImportSettingsFragment getImportSettingsFragment() {
-		return getFragment(ImportSettingsFragment.TAG);
-	}
-
-	public ImportCompleteFragment getImportCompleteFragment() {
-		return getFragment(ImportCompleteFragment.TAG);
-	}
-
-	public ConfigureMenuItemsFragment getConfigureMenuItemsFragment() {
-		return getFragment(ConfigureMenuItemsFragment.TAG);
+		return getFragment(QuickActionListFragment.TAG);
 	}
 
 	public TrackAppearanceFragment getTrackAppearanceFragment() {
@@ -2353,7 +2279,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	<T> T getFragment(String fragmentTag){
+	<T> T getFragment(String fragmentTag) {
 		Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
 		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (T) fragment : null;
 	}

@@ -12,6 +12,7 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
@@ -62,6 +63,12 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		nightMode = !app.getSettings().isLightContent();
+		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				dismissFragment();
+			}
+		});
 	}
 
 	@Nullable
