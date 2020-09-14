@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -49,6 +50,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.util.Algorithms;
@@ -98,6 +100,19 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private EditText descriptionEdit;
 	private EditText addressEdit;
 	private int layoutHeightPrevious = 0;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					showExitDialog();
+				}
+			}
+		});
+	}
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
@@ -867,14 +882,28 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					cancelled = true;
-					dismiss();
+					exitEditing();
 				}
 			});
 			dismissDialog.show();
 		} else {
-			cancelled = true;
-			dismiss();
+			exitEditing();
+		}
+	}
+
+	private void exitEditing() {
+		cancelled = true;
+		dismiss();
+		showContextMenu();
+	}
+
+	private void showContextMenu() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			MapContextMenu mapContextMenu = mapActivity.getContextMenu();
+			if (!mapContextMenu.isVisible() && mapContextMenu.isActive()) {
+				mapContextMenu.show();
+			}
 		}
 	}
 

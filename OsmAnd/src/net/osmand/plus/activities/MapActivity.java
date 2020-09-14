@@ -86,7 +86,6 @@ import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.chooseplan.OsmLiveCancelledDialog;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
@@ -109,11 +108,7 @@ import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
-import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.PointEditorFragmentNew;
-import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.PlanRouteFragment;
@@ -122,7 +117,6 @@ import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
-import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -153,7 +147,6 @@ import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.render.RenderingRulesStorage;
@@ -668,44 +661,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
-		if (trackDetailsMenu.isVisible()) {
-			trackDetailsMenu.hide(true);
-			if (mapContextMenu.isActive() && mapContextMenu.getPointDescription() != null
-					&& mapContextMenu.getPointDescription().isGpxPoint()) {
-				mapContextMenu.show();
-				return;
-			}
-			if (prevActivityIntent == null) {
-				return;
-			}
-		}
-
-		PointEditorFragmentNew pointEditorFragmentNew = getPointEditorFragmentNew();
-		if (pointEditorFragmentNew != null) {
-			pointEditorFragmentNew.showExitDialog();
-			return;
-		}
-
-		TrackAppearanceFragment trackAppearanceFragment = getTrackAppearanceFragment();
-		if (trackAppearanceFragment != null) {
-			trackAppearanceFragment.dismissImmediate();
-			if (prevActivityIntent == null) {
-				return;
-			}
-		}
-
-
-		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
-			if (mapContextMenu.getCurrentMenuState() != MenuState.HEADER_ONLY && !isLandscapeLayout()) {
-				mapContextMenu.openMenuHeaderOnly();
-			} else {
-				mapContextMenu.close();
-			}
-			return;
-		}
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
 			quitAddGpxPointMode();
 		}
+		if (launchPrevActivityIntent()) {
+			return;
+		}
+		super.onBackPressed();
+	}
+
+	public boolean launchPrevActivityIntent() {
 		if (prevActivityIntent != null && getSupportFragmentManager().getBackStackEntryCount() == 0) {
 			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon loc = getMapLocation();
@@ -714,21 +679,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (mapViewTrackingUtilities.isMapLinkedToLocation()) {
 				prevActivityIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 			}
-			this.startActivity(prevActivityIntent);
+			startActivity(prevActivityIntent);
 			prevActivityIntent = null;
-			return;
+			return true;
 		}
-		QuickActionListFragment quickActionListFragment = getQuickActionListFragment();
-		if (quickActionListFragment != null && quickActionListFragment.isVisible()) {
-			if (quickActionListFragment.fromDashboard()) {
-				this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
-			} else {
-				getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed();
-			}
-		} else if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed()) {
-			return;
-		}
-		super.onBackPressed();
+		return false;
 	}
 
 	private void quitAddGpxPointMode() {
@@ -2243,29 +2198,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(ChooseRouteFragment.TAG);
 	}
 
-	public QuickActionListFragment getQuickActionListFragment() {
-		return getFragment(QuickActionListFragment.TAG);
-	}
-
-	public TrackAppearanceFragment getTrackAppearanceFragment() {
-		return getFragment(TrackAppearanceFragment.TAG);
-	}
-
 	public GpxApproximationFragment getGpxApproximationFragment() {
 		return getFragment(GpxApproximationFragment.TAG);
 	}
 
 	public SnapTrackWarningFragment getSnapTrackWarningBottomSheet() {
 		return getFragment(SnapTrackWarningFragment.TAG);
-	}
-
-	public PointEditorFragmentNew getPointEditorFragmentNew() {
-		PointEditorFragmentNew pointEditorFragmentNew;
-		pointEditorFragmentNew = getFragment(FavoritePointEditor.TAG);
-		if (pointEditorFragmentNew == null) {
-			pointEditorFragmentNew = getFragment(WptPtEditor.TAG);
-		}
-		return pointEditorFragmentNew;
 	}
 
 	public void backToConfigureProfileFragment() {
