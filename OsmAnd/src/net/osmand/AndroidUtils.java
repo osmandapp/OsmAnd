@@ -63,6 +63,7 @@ import androidx.core.view.ViewCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.OnVisibilityChangeListener;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -602,6 +603,12 @@ public class AndroidUtils {
 		return coordinates;
 	}
 
+	public static boolean isPointInsideView(@NonNull View view, float x, float y) {
+		boolean matchVertical = y >= view.getY() && y <= view.getY() + view.getHeight();
+		boolean mathHorizontal = x >= view.getX() && x <= view.getX() + view.getWidth();
+		return matchVertical && mathHorizontal;
+	}
+
 	public static void enterToFullScreen(Activity activity, View view) {
 		if (Build.VERSION.SDK_INT >= 21) {
 			requestLayout(view);
@@ -888,5 +895,21 @@ public class AndroidUtils {
 			builder.append(w);
 		}
 		return builder;
+	}
+
+	public static void addVisibilityChangeListener(final @NonNull View parent,
+	                                               final @NonNull View v,
+	                                               final @NonNull OnVisibilityChangeListener listener) {
+		parent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			int visibility = v.getVisibility();
+
+			@Override
+			public void onGlobalLayout() {
+				if (visibility != v.getVisibility()) {
+					visibility = v.getVisibility();
+					listener.onVisibilityChange(visibility);
+				}
+			}
+		});
 	}
 }

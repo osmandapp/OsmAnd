@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -80,6 +81,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private ImageView trackIcon;
 	private View buttonsShadow;
+	private View routeMenuTopShadowAll;
+	private View controlButtons;
 
 	@Override
 	public int getMainLayoutId() {
@@ -179,6 +182,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (view != null) {
 			trackIcon = view.findViewById(R.id.track_icon);
 			buttonsShadow = view.findViewById(R.id.buttons_shadow);
+			controlButtons = view.findViewById(R.id.control_buttons);
+			routeMenuTopShadowAll = view.findViewById(R.id.route_menu_top_shadow_all);
 
 			if (isPortrait()) {
 				updateCardsLayout();
@@ -191,7 +196,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				int widthNoShadow = getLandscapeNoShadowWidth();
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
 				params.gravity = Gravity.BOTTOM | Gravity.START;
-				view.findViewById(R.id.control_buttons).setLayoutParams(params);
+				controlButtons.setLayoutParams(params);
 			}
 			enterTrackAppearanceMode();
 			runLayoutListener();
@@ -201,8 +206,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	@Override
 	protected void calculateLayout(View view, boolean initLayout) {
-		menuTitleHeight = view.findViewById(R.id.route_menu_top_shadow_all).getHeight()
-				+ view.findViewById(R.id.control_buttons).getHeight() - buttonsShadow.getHeight();
+		menuTitleHeight = routeMenuTopShadowAll.getHeight()
+				+ controlButtons.getHeight() - buttonsShadow.getHeight();
 		super.calculateLayout(view, initLayout);
 	}
 
@@ -351,6 +356,14 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private void updateAppearanceIcon() {
 		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), trackDrawInfo.getColor());
 		trackIcon.setImageDrawable(icon);
+	}
+
+	@Override
+	protected void onShortClick(View v, MotionEvent event) {
+		if (routeMenuTopShadowAll != null &&
+				AndroidUtils.isPointInsideView(routeMenuTopShadowAll, event.getX(), event.getY())) {
+			adjustMapPosition(getViewY());
+		}
 	}
 
 	private void adjustMapPosition(int y) {
@@ -583,7 +596,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			trackColoringCard.setListener(this);
 			cardsContainer.addView(trackColoringCard.build(mapActivity));
 
-			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo);
+			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo, this);
 			trackWidthCard.setListener(this);
 			cardsContainer.addView(trackWidthCard.build(mapActivity));
 		}
@@ -624,6 +637,28 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				log.error(e);
 			}
 		}
+	}
+
+	@Override
+	public void onNeedVerticalScroll(@NonNull String tag, int y) {
+		if (tag.equals(TrackWidthCard.TAG)) {
+			View trackWidthCardView = trackWidthCard.getView();
+			if (trackWidthCardView == null) return;
+
+			int currentScrollYPosition = getBottomScrollView().getScrollY();
+			int dialogHeight = getInnerScrollableHeight();
+			int resultYPosition = trackWidthCardView.getTop() + y;
+			if (resultYPosition > (currentScrollYPosition + dialogHeight)) {
+				verticalScrollToYPosition(resultYPosition - dialogHeight);
+			}
+		}
+	}
+
+	public int getInnerScrollableHeight() {
+		int totalScreenHeight = getViewHeight() - getMenuStatePosY(getCurrentMenuState());
+		int frameTotalHeight = routeMenuTopShadowAll.getHeight()
+				+ controlButtons.getHeight() + buttonsShadow.getHeight();
+		return totalScreenHeight - frameTotalHeight;
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity, TrackAppearanceFragment fragment) {

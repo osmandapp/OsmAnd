@@ -24,6 +24,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.IdRes;
@@ -49,7 +50,7 @@ import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 
 import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
 
-public abstract class ContextMenuFragment extends BaseOsmAndFragment {
+public abstract class ContextMenuFragment extends BaseOsmAndFragment implements OnNeedScrollUiAdapter {
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
@@ -67,7 +68,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	private OnLayoutChangeListener containerLayoutListener;
 	private View topShadow;
 	private ViewGroup topView;
-	private View bottomScrollView;
+	private ScrollView bottomScrollView;
 	private LinearLayout cardsContainer;
 	private FrameLayout bottomContainer;
 
@@ -247,7 +248,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return bottomContainer;
 	}
 
-	public View getBottomScrollView() {
+	public ScrollView getBottomScrollView() {
 		return bottomScrollView;
 	}
 
@@ -318,6 +319,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		final GestureDetector swipeDetector = new GestureDetector(app, new HorizontalSwipeConfirm(true));
 
 		final OnTouchListener slideTouchListener = new OnTouchListener() {
+			private static final int SHORT_CLICK_DURATION_TOP_LIMIT = 500;
+
 			private float dy;
 			private float dyMain;
 			private float mDownY;
@@ -329,6 +332,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 			private boolean slidingUp;
 			private boolean slidingDown;
+			private boolean isHolding;
+
+			private long downMotionEventTimeMs;
 
 			{
 				OsmandApplication app = requireMyApplication();
@@ -352,6 +358,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 				switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
+						if (!isHolding) {
+							isHolding = true;
+							downMotionEventTimeMs = event.getDownTime();
+						}
 						mDownY = event.getRawY();
 						dy = event.getY();
 						dyMain = getViewY();
@@ -388,6 +398,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 						break;
 
 					case MotionEvent.ACTION_UP:
+						isHolding = false;
 						if (moving) {
 							moving = false;
 							int currentY = getViewY();
@@ -412,6 +423,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 							}
 
 							changeMenuState(currentY, slidingUp, slidingDown, true);
+						} else if (isShortClick(event.getEventTime())) {
+							onShortClick(v, event);
 						}
 						recycleVelocityTracker();
 						break;
@@ -445,6 +458,11 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 					velocityTracker = null;
 				}
 			}
+
+			private boolean isShortClick(long upActionTime) {
+				long holdingDuration = upActionTime - downMotionEventTimeMs;
+				return holdingDuration <= SHORT_CLICK_DURATION_TOP_LIMIT;
+			}
 		};
 
 		if (mainView instanceof InterceptorLinearLayout) {
@@ -466,6 +484,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 		return view;
 	}
+
+	protected void onShortClick(View v, MotionEvent event) { }
 
 	public float getToolbarAlpha(int y) {
 		float a = 0;
@@ -1046,5 +1066,17 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		} catch (RuntimeException e) {
 			return false;
 		}
+	}
+
+	@Override
+	public void onNeedVerticalScroll(String tag, int y) { }
+
+	public void verticalScrollToYPosition(final int y) {
+		bottomScrollView.post(new Runnable() {
+			@Override
+			public void run() {
+				bottomScrollView.smoothScrollTo(0, y);
+			}
+		});
 	}
 }
