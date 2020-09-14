@@ -1178,7 +1178,7 @@
     <string name="poi_pump_powered">動力泵浦</string>
     <string name="poi_pump_no">無泵浦</string>
     <string name="poi_water_characteristic_mineral">礦泉水</string>
-    <string name="poi_water_characteristic_mud">水的特質：泥漿</string>
+    <string name="poi_water_characteristic_mud">泥漿</string>
     <string name="poi_water_characteristic_sulfuric">硫酸</string>
     <string name="poi_water_point">供水點</string>
     <string name="poi_cuisine">美食</string>
@@ -1868,7 +1868,7 @@
     <string name="poi_fuel_100ll">100LL 燃料</string>
     <string name="poi_fuel_autogas">液化石油氣</string>
     <string name="poi_fuel_jeta1">Jet A-1 燃料</string>
-    <string name="poi_fuel_adblue">AdBlue 燃料</string>
+    <string name="poi_fuel_adblue">柴油排氣液</string>
     <string name="poi_fuel_wood">燃料：木材</string>
     <string name="poi_fuel_charcoal">燃料：木炭</string>
     <string name="poi_fuel_coal">燃料：煤</string>
@@ -3814,7 +3814,7 @@
     <string name="poi_seamark_water_level_above_mwl">水位：高於平均水位</string>
     <string name="poi_seamark_water_level_below_mwl">水位：低於平均水位</string>
     <string name="poi_seamark_obstruction">堵塞</string>
-    <string name="poi_drinking_water_refill_yes">飲用水填充：是</string>
+    <string name="poi_drinking_water_refill_yes">是</string>
     <string name="poi_drinking_water_refill_no">飲用水填充：否</string>
     <string name="poi_drinking_water_refill_network">飲用水填充網路</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">吸力</string>
@@ -3831,4 +3831,14 @@
     <string name="poi_give_box">禮物箱</string>
     <string name="poi_city_block">街區</string>
     <string name="poi_borough">自治市鎮</string>
+    <string name="poi_traffic_signals_arrow_no">箭頭：否</string>
+    <string name="poi_elevator">電梯</string>
+    <string name="poi_departures_board_timetable">時刻表</string>
+    <string name="poi_departures_board_realtime">即時</string>
+    <string name="poi_departures_board_delay">間隔時間</string>
+    <string name="poi_departures_board_yes">是</string>
+    <string name="poi_departures_board_no">時刻表：否</string>
+    <string name="poi_departures_board">時刻表</string>
+    <string name="poi_drinking_water_refill">飲用水補充</string>
+    <string name="poi_recycling_small_electrical_appliances">小電器</string>
 </resources>

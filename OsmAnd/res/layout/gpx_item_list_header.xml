@@ -64,19 +64,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.8"
-                android:minHeight="48dp"
+                android:minHeight="@dimen/card_row_min_height"
                 android:paddingLeft="@dimen/content_padding"
-                android:paddingTop="@dimen/content_padding_half"
-                android:paddingBottom="@dimen/content_padding_half"
+				android:paddingStart="@dimen/content_padding"
+				android:paddingRight="0dp"
+				android:paddingEnd="0dp"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-	            android:paddingStart="@dimen/content_padding">
+                android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="?android:textColorPrimary"
+					android:paddingTop="@dimen/content_padding_half"
+					android:paddingBottom="@dimen/content_padding_half"
+					android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/default_list_text_size"
                     android:text="@string/shared_string_show_on_map"/>
 
@@ -119,14 +121,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.6"
-                android:minHeight="48dp"
+                android:minHeight="@dimen/card_row_min_height"
                 android:paddingLeft="@dimen/content_padding"
+				android:paddingStart="@dimen/content_padding"
+				android:paddingRight="0dp"
+				android:paddingEnd="0dp"
                 android:paddingTop="@dimen/content_padding_half"
                 android:paddingBottom="@dimen/content_padding_half"
                 android:background="?attr/selectableItemBackground"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-	            android:paddingStart="@dimen/content_padding">
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/split_interval_title"
@@ -158,41 +162,37 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/color_view"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:minHeight="48dp"
-                android:paddingRight="@dimen/content_padding"
-                android:paddingTop="@dimen/content_padding_half"
-                android:paddingBottom="@dimen/content_padding_half"
-                android:background="?attr/selectableItemBackground"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-	            android:paddingEnd="@dimen/content_padding">
-
-                <TextView
-                    android:id="@+id/colorText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:textColor="?android:textColorPrimary"
-                    android:textSize="@dimen/default_list_text_size"
-                    android:text="@string/shared_string_color"/>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/colorImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/content_padding"
-                    osmand:srcCompat="@drawable/ic_action_circle"
-	                android:paddingStart="@dimen/content_padding" />
-
-            </LinearLayout>
-
         </LinearLayout>
+
+	    <LinearLayout
+		    android:id="@+id/appearance_view"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:background="?attr/selectableItemBackground"
+		    android:gravity="center_vertical"
+		    android:minHeight="@dimen/card_row_min_height"
+		    android:orientation="horizontal"
+		    android:paddingLeft="@dimen/content_padding"
+		    android:paddingTop="@dimen/content_padding_half"
+		    android:paddingRight="@dimen/content_padding"
+		    android:paddingBottom="@dimen/content_padding_half">
+
+		    <TextView
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="1"
+			    android:text="@string/shared_string_appearance"
+			    android:textColor="?android:textColorPrimary"
+			    android:textSize="@dimen/default_list_text_size" />
+
+		    <androidx.appcompat.widget.AppCompatImageView
+			    android:id="@+id/appearanceImage"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:tint="?attr/default_icon_color"
+			    osmand:srcCompat="@drawable/ic_action_appearance" />
+
+	    </LinearLayout>
 
     </LinearLayout>
 

@@ -30,6 +30,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.TrackActivity;
@@ -442,8 +443,9 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	@Override
 	protected void setupToolbar(Toolbar toolbar) {
 		super.setupToolbar(toolbar);
-		toolbar.setOverflowIcon(getIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color_default_light));
 
+		UiUtilities.setupToolbarOverflowIcon(
+				toolbar, R.drawable.ic_overflow_menu_white, R.color.icon_color_default_light);
 		Menu menu = toolbar.getMenu();
 		MenuItem.OnMenuItemClickListener itemClickListener = new MenuItem.OnMenuItemClickListener() {
 			@Override

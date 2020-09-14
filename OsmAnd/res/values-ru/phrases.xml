@@ -326,7 +326,7 @@
     <string name="poi_pharmacy">Аптека</string>
     <string name="poi_hospital">Больница</string>
     <string name="poi_doctors">Врач;Доктор</string>
-    <string name="poi_clinic">Поликлиника, клиника</string>
+    <string name="poi_clinic">Поликлиника;Клиника</string>
     <string name="poi_first_aid">Первая помощь</string>
     <string name="poi_dentist">Стоматология;Лечение зубов;Зубной врач</string>
     <string name="poi_nursing_home">Дом престарелых</string>
@@ -626,7 +626,7 @@
     <string name="poi_nature_reserve">Заповедник</string>
     <string name="poi_strait">Пролив</string>
     <string name="poi_island">Остров</string>
-    <string name="poi_islet">Остров (небольшой)</string>
+    <string name="poi_islet">Островок</string>
     <string name="poi_anchorage">Якорная стоянка</string>
     <string name="poi_anchor_berth">Якорный причал</string>
     <string name="poi_beacon">Бакен</string>
@@ -992,7 +992,7 @@
     <string name="poi_pump_yes">Есть</string>
     <string name="poi_water_characteristic">Характеристика воды</string>
     <string name="poi_water_characteristic_mineral">Характеристика воды: минеральная</string>
-    <string name="poi_water_characteristic_mud">Характеристика воды: грязь</string>
+    <string name="poi_water_characteristic_mud">Грязь</string>
     <string name="poi_water_characteristic_sulfuric">Серная</string>
     <string name="poi_water_point">Пункт водоснабжения</string>
     <string name="poi_monitoring_station">Станция наблюдения</string>
@@ -1361,7 +1361,7 @@
     <string name="poi_diet_lactose_free_yes">Безлактозное питание</string>
     <string name="poi_diet_lactose_free_no">Безлактозные продукты не предлагаются</string>
     <string name="poi_diet_pescetarian_yes">Пескетарианское питание</string>
-    <string name="poi_drive_in">Обслуживание клиентов сидящих в автомобиле</string>
+    <string name="poi_drive_in">Обслуживание клиентов, сидящих в автомобиле</string>
     <string name="poi_drive_in_yes">Да</string>
     <string name="poi_drive_in_no">Приобрести продукты не покидая авто на парковке (drive-in): нет</string>
     <string name="poi_drive_through">Обслуживание клиентов, сидящих в автомобиле</string>
@@ -1759,7 +1759,7 @@
     <string name="poi_fuel_91ul">Топливо 91UL</string>
     <string name="poi_fuel_100ll">Топливо 100LL</string>
     <string name="poi_fuel_jeta1">Топливо Jet A-1</string>
-    <string name="poi_fuel_adblue">Топливо AdBlue</string>
+    <string name="poi_fuel_adblue">Дизельная выхлопная жидкость</string>
     <string name="poi_fuel_wood">Топливо: дрова</string>
     <string name="poi_fuel_charcoal">Топливо: древесный уголь</string>
     <string name="poi_fuel_coal">Топливо: каменный уголь</string>
@@ -1937,7 +1937,7 @@
     <string name="poi_clothes_leather">Кожаная</string>
     <string name="poi_clothes_costumes">Карнавальные костюмы</string>
     <string name="poi_clothes_traditional">Традиционная</string>
-    <string name="poi_clothes_suits">Костюмы, смокинги</string>
+    <string name="poi_clothes_suits">Костюмы;Смокинги</string>
     <string name="poi_clothes_maternity">Для беременных</string>
     <string name="poi_clothes_vintage">Старинная</string>
     <string name="poi_clothes_oversize">Для больших людей</string>
@@ -3308,8 +3308,8 @@
     <string name="poi_climbing_rock_quartzite">Тип камня: кварцит</string>
     <string name="poi_climbing_rock_gneiss">Тип камня: гнейс</string>
     <string name="poi_climbing_rock_porphyry">Тип камня: порфир</string>
-    <string name="poi_climbing_quality_solid">Надежность камней: прочно</string>
-    <string name="poi_climbing_quality_fragile">Надежность камней: ненадёжно</string>
+    <string name="poi_climbing_quality_solid">Надёжность камней: надёжно</string>
+    <string name="poi_climbing_quality_fragile">Надёжность камней: ненадёжно</string>
     <string name="poi_climbing_bolted_yes">Фиксированные зацепы: есть</string>
     <string name="poi_climbing_bolted_no">Фиксированные зацепы: нет</string>
     <string name="poi_climbing_orientation_n">Ориентация стены: С</string>
@@ -3730,7 +3730,7 @@
     <string name="poi_traffic_signals_sound_locate">Только если разрешена ходьба</string>
     <string name="poi_drinking_water_refill_network">Сеть заправки питьевой воды</string>
     <string name="poi_drinking_water_refill_no">Заправка питьевой водой: нет</string>
-    <string name="poi_drinking_water_refill_yes">Заправка питьевой водой: да</string>
+    <string name="poi_drinking_water_refill_yes">Да</string>
     <string name="poi_socket_type3_yes">Тип 3</string>
     <string name="poi_socket_type2_combo_yes">Тип 2 комбинированный</string>
     <string name="poi_socket_type2_yes">Тип 2</string>
@@ -3820,4 +3820,14 @@
     <string name="poi_city_block">Городской квартал</string>
     <string name="poi_borough">Муниципалитет</string>
     <string name="poi_give_box">Подарочная коробка</string>
+    <string name="poi_traffic_signals_arrow_no">Стрелка: нет</string>
+    <string name="poi_elevator">Лифт</string>
+    <string name="poi_departures_board_yes">Да</string>
+    <string name="poi_departures_board_no">Расписание отправлений: нет</string>
+    <string name="poi_departures_board">Расписание отправлений</string>
+    <string name="poi_drinking_water_refill">Заправка питьевой воды</string>
+    <string name="poi_departures_board_realtime">Реальное время</string>
+    <string name="poi_departures_board_delay">Задержка</string>
+    <string name="poi_departures_board_timetable">Расписание</string>
+    <string name="poi_recycling_small_electrical_appliances">Малые электроприборы</string>
 </resources>

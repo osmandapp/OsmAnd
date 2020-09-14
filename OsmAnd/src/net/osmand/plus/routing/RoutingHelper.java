@@ -1,20 +1,23 @@
 package net.osmand.plus.routing;
 
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
+import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
-import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.NavigationService;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -22,13 +25,20 @@ import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RouteProvider.RoutingEnvironment;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
+import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -468,8 +478,8 @@ public class RoutingHelper {
 				boolean isStraight =
 						route.getRouteService() == RouteService.DIRECT_TO || route.getRouteService() == RouteService.STRAIGHT;
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				if (allowableDeviation > 0 && wrongMovementDirection && !isStraight
-						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) {
+				if ((allowableDeviation > 0 && wrongMovementDirection && !isStraight
+						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) && !settings.DISABLE_WRONG_DIRECTION_RECALC.get()) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					isDeviatedFromRoute = true;
 					calculateRoute = true;
@@ -857,10 +867,9 @@ public class RoutingHelper {
 						l.newRouteIsCalculated(newRoute, showToast);
 					}
 				}
-				if (showToast.value && OsmandPlugin.isDevelopment()) {
+				if (showToast.value && newRoute && OsmandPlugin.isDevelopment()) {
 					String msg = app.getString(R.string.new_route_calculated_dist_dbg,
 							OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app),
-
 							((int)res.getRoutingTime()) + " sec",
 							res.getCalculateTime(), res.getVisitedSegments(), res.getLoadedTiles());
 					app.showToastMessage(msg);
@@ -1033,7 +1042,30 @@ public class RoutingHelper {
 		return route.getRouteDirections();
 	}
 
+	@Nullable
+	public QuadRect getRouteRect(@NonNull RouteCalculationResult result) {
+		QuadRect rect = new QuadRect(0, 0, 0, 0);
+		Location lt = getLastProjection();
+		if (lt == null) {
+			lt = app.getTargetPointsHelper().getPointToStartLocation();
+		}
+		if (lt == null) {
+			lt = app.getLocationProvider().getLastKnownLocation();
+		}
+		if (lt != null) {
+			MapUtils.insetLatLonRect(rect, lt.getLatitude(), lt.getLongitude());
+		}
+		List<Location> list = result.getImmutableAllLocations();
+		for (Location l : list) {
+			MapUtils.insetLatLonRect(rect, l.getLatitude(), l.getLongitude());
+		}
+		List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+		for (TargetPoint l : targetPoints) {
+			MapUtils.insetLatLonRect(rect, l.getLatitude(), l.getLongitude());
+		}
 
+		return rect.left == 0 && rect.right == 0 ? null : rect;
+	}
 
 	private class RouteRecalculationThread extends Thread {
 
@@ -1255,13 +1287,12 @@ public class RoutingHelper {
 				public void run() {
 					RouteCalculationProgress calculationProgress = params.calculationProgress;
 					if (isRouteBeingCalculated()) {
-						float pr = calculationProgress.getLinearProgress();
-						progressRoute.updateProgress((int) pr);
 						Thread t = currentRunningJob;
 						if(t instanceof RouteRecalculationThread && ((RouteRecalculationThread) t).params != params) {
 							// different calculation started
 							return;
 						} else {
+							progressRoute.updateProgress((int) calculationProgress.getLinearProgress());
 							if (calculationProgress.requestPrivateAccessRouting) {
 								progressRoute.requestPrivateAccessRouting();
 							}
@@ -1337,6 +1368,7 @@ public class RoutingHelper {
 
 
 	// NEVER returns null
+	@NonNull
 	public RouteCalculationResult getRoute() {
 		return route;
 	}
@@ -1345,12 +1377,24 @@ public class RoutingHelper {
 		return generateGPXFileWithRoute(route, name);
 	}
 
-	public GPXFile generateGPXFileWithRoute(RouteCalculationResult route, String name){
+	public GPXFile generateGPXFileWithRoute(RouteCalculationResult route, String name) {
 		return provider.createOsmandRouterGPX(route, app, name);
 	}
 
+	public RoutingEnvironment getRoutingEnvironment(OsmandApplication ctx, ApplicationMode mode, LatLon start, LatLon end) throws IOException {
+		return provider.getRoutingEnvironment(ctx, mode, start, end);
+	}
+
+	public List<GpxPoint> generateGpxPoints(RoutingEnvironment env, GpxRouteApproximation gctx, LocationsHolder locationsHolder) {
+		return provider.generateGpxPoints(env, gctx, locationsHolder);
+	}
+
+	public GpxRouteApproximation calculateGpxApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
+		return provider.calculateGpxPointsApproximation(env, gctx, points, resultMatcher);
+	}
+
 	public void notifyIfRouteIsCalculated() {
-		if(route.isCalculated()) {
+		if (route.isCalculated()) {
 			voiceRouter.newRouteIsCalculated(true)	;
 		}
 	}

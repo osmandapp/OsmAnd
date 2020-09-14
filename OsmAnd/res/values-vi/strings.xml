@@ -22,7 +22,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="animate_route">Bắt đầu mô phỏng</string>
 	<string name="file_can_not_be_renamed">Không thể đổi tên tập tin.</string>
 	<string name="file_with_name_already_exists">Tên tập tin đã có.</string>
-	<string name="shared_string_gpx_route">Tuyến GPX</string>
 	<string name="poi_query_by_name_matches_categories">Tìm thấy một số danh mục địa điểm theo yêu cầu tìm kiếm:</string>
 	<string name="data_to_search_poi_not_available">Dữ liệu tìm kiếm địa điểm không có.</string>
 	<string name="poi_filter_by_name">Tìm theo tên</string>
@@ -40,14 +39,13 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="search_position_current_location_found">Vị trí (Đã tìm thấy)</string>
 	<string name="search_position_address">Địa chỉ…</string>
 	<string name="search_position_favorites">Ưa thích…</string>
-	<string name="search_position_undefined">Chưa rõ</string>
+	<string name="shared_string_undefined">Chưa rõ</string>
 	
 	
 	<string name="search_position_map_view">Lần hiển thị bản đồ trước</string>
 	
 	<string name="select_search_position">Tìm kiếm gần:</string>
 	<string name="context_menu_item_search">Tìm kiếm</string>
-	<string name="shared_string_save_as_gpx">Lưu tuyến đường thành tập tin GPX</string>
 	<string name="route_successfully_saved_at">Đã lưu thành công \'%1$s\'.</string>
 	<string name="filename_input">Tên tập tin : </string>
 	<string name="file_with_name_already_exist">Tên tập tin đã có.</string>
@@ -193,7 +191,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="context_menu_item_share_location">Chia sẻ vị trí</string>
 	<string name="add_waypoint_dialog_added">Đích đến \'\'{0}\'\' được thêm vào thành công</string>
 	<string name="add_waypoint_dialog_title">Thêm đích đến vào theo dõi GPX</string>
-	<string name="context_menu_item_add_waypoint">Thêm điểm đến GPX</string>
 	<string name="amenity_type_administrative">Hành chính</string>
 	<string name="amenity_type_barrier">Rào chắn</string>
 	<string name="amenity_type_education">Giáo dục</string>
@@ -309,7 +306,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	
 	
 	<string name="gpx_files_not_found">Tập tin GPX không tìm thấy trong thư mục /track</string>
-	<string name="layer_gpx_layer">Theo dõi GPX…</string>
 	<string name="error_reading_gpx">Gặp lỗi khi đọc tập tin GPX</string>
 
 	<string name="vector_data">Bản đồ vector Offline</string>

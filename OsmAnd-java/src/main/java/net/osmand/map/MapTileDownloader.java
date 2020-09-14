@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
-import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -91,6 +90,7 @@ public class MapTileDownloader {
 		public final int yTile;
 		public String url;
 		public String referer = null;
+		public String userAgent = null;
 		public boolean error;
 
 		public DownloadRequest(String url, File fileToSave, int xTile, int yTile, int zoom) {
@@ -267,7 +267,7 @@ public class MapTileDownloader {
 				request.setError(false);
 				try {
 					URLConnection connection = NetworkUtils.getHttpURLConnection(request.url);
-					connection.setRequestProperty("User-Agent", USER_AGENT); //$NON-NLS-1$
+					connection.setRequestProperty("User-Agent", Algorithms.isEmpty(request.userAgent) ? USER_AGENT : request.userAgent); //$NON-NLS-1$
 					if (request.referer != null)
 						connection.setRequestProperty("Referer", request.referer); //$NON-NLS-1$
 					connection.setConnectTimeout(CONNECTION_TIMEOUT);

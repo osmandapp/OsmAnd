@@ -206,7 +206,7 @@
     <string name="shared_string_appearance">Aspecto</string>
     <string name="show_gps_points">Mostrar puntos GPS</string>
     <string name="show_gps_points_descr">Muestra la cantidad de puntos GPS recibidos y enviados.</string>
-    <string name="shared_string_ok">Aplicar</string>
+    <string name="shared_string_ok">Aceptar</string>
     <string name="timeline_available_for_free_now">La línea de tiempo es una función disponible ahora de forma gratuita.</string>
     <string name="disable_monitoring">Desactivar la monitorización</string>
     <string name="location_recording_enabled">Grabación de ubicación activada</string>

@@ -18,7 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.LanesDrawable;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -80,7 +80,7 @@ public class RouteDirectionsCard extends BaseCard {
 
 		int[] lanes = model.getTurnType().getLanes();
 		if (lanes != null){
-			RouteInfoWidgetsFactory.LanesDrawable lanesDrawable = new RouteInfoWidgetsFactory.LanesDrawable(mapActivity,1);
+			LanesDrawable lanesDrawable = new LanesDrawable(mapActivity,1);
 			lanesDrawable.lanes = lanes;
 			lanesDrawable.isTurnByTurn = true;
 			lanesDrawable.isNightMode = nightMode;

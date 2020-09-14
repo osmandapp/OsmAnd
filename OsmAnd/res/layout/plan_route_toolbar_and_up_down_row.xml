@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,10 +13,10 @@
         android:layout_height="@dimen/dashboard_map_toolbar"
         android:minHeight="@dimen/dashboard_map_toolbar"
         android:visibility="gone"
-        app:contentInsetLeft="54dp"
-        app:contentInsetStart="54dp"
-        app:contentInsetRight="0dp"
-        app:contentInsetEnd="0dp"
+        osmand:contentInsetLeft="@dimen/toolbar_inset_start"
+        osmand:contentInsetStart="@dimen/toolbar_inset_start"
+        osmand:contentInsetRight="0dp"
+        osmand:contentInsetEnd="0dp"
         tools:visibility="visible">
 
         <LinearLayout
@@ -53,8 +52,8 @@
                 android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_list_text_size"
                 osmand:typeface="@string/font_roboto_medium"
-	            android:paddingStart="@dimen/content_padding"
-	            android:paddingEnd="@dimen/content_padding" />
+                android:paddingStart="@dimen/content_padding"
+                android:paddingEnd="@dimen/content_padding" />
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
@@ -63,8 +62,8 @@
         android:id="@+id/toolbar_divider"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:layout_marginLeft="54dp"
-        android:layout_marginStart="54dp"
+        android:layout_marginLeft="@dimen/toolbar_inset_start"
+        android:layout_marginStart="@dimen/toolbar_inset_start"
         android:visibility="gone"
         tools:background="?attr/dashboard_divider"
         tools:visibility="visible"/>
@@ -81,7 +80,7 @@
     <LinearLayout
         android:id="@+id/up_down_row"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/measurement_tool_up_down_row_height"
+        android:layout_height="@dimen/route_info_modes_height"
         android:background="?attr/selectableItemBackground">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -151,10 +150,10 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:paddingEnd="@dimen/measurement_tool_text_button_padding_small"
-            android:paddingLeft="@dimen/measurement_tool_text_button_padding"
-            android:paddingRight="@dimen/measurement_tool_text_button_padding_small"
-            android:paddingStart="@dimen/measurement_tool_text_button_padding"
+            android:paddingEnd="@dimen/route_info_details_padding"
+            android:paddingLeft="@dimen/route_info_buttons_padding_top_bottom"
+            android:paddingRight="@dimen/route_info_details_padding"
+            android:paddingStart="@dimen/route_info_buttons_padding_top_bottom"
             android:text="@string/shared_string_select_all"
             android:textColor="?attr/color_dialog_buttons"
             osmand:textAllCapsCompat="true"

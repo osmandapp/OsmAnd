@@ -14,13 +14,13 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
@@ -131,9 +131,6 @@ public class FailSafeFuntions {
 								if (settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
 									gpxRoute.setCalculateOsmAndRouteParts(true);
 								}
-								if (settings.GPX_CALCULATE_RTEPT.get()) {
-									gpxRoute.setUseIntermediatePointsRTE(true);
-								}
 								if(settings.GPX_ROUTE_CALC.get()) {
 									gpxRoute.setCalculateOsmAndRoute(true);
 								}
@@ -164,9 +161,8 @@ public class FailSafeFuntions {
 		OsmandApplication app = ma.getMyApplication();
 		ma.getMapViewTrackingUtilities().backToLocationImpl();
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		if(gpxRoute == null) {
-			app.getSettings().FOLLOW_THE_GPX_ROUTE.set(null);
-		}
+		app.getSettings().FOLLOW_THE_GPX_ROUTE.set(gpxRoute != null ? gpxRoute.getFile().path : null);
+
 		routingHelper.setGpxParams(gpxRoute);
 		if (app.getTargetPointsHelper().getPointToStart() == null) {
 			app.getTargetPointsHelper().setStartPoint(null, false, null);

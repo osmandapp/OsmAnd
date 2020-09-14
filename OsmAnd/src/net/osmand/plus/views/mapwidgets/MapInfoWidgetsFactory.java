@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,7 +11,6 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.ClipboardManager;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -67,9 +67,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.RulerMode;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.RulerControlLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetState;
-import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
+import net.osmand.plus.views.layers.RulerControlLayer;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -158,54 +157,6 @@ public class MapInfoWidgetsFactory {
 			}
 		});
 		return gpsInfoControl;
-	}
-
-	public static class CompassRulerControlWidgetState extends WidgetState {
-
-		public static final int COMPASS_CONTROL_WIDGET_STATE_SHOW = R.id.compass_ruler_control_widget_state_show;
-		public static final int COMPASS_CONTROL_WIDGET_STATE_HIDE = R.id.compass_ruler_control_widget_state_hide;
-
-		private final OsmandSettings.OsmandPreference<Boolean> showCompass;
-
-		public CompassRulerControlWidgetState(OsmandApplication ctx) {
-			super(ctx);
-			showCompass = ctx.getSettings().SHOW_COMPASS_CONTROL_RULER;
-		}
-
-		@Override
-		public int getMenuTitleId() {
-			return R.string.map_widget_ruler_control;
-		}
-
-		@Override
-		public int getMenuIconId() {
-			return R.drawable.ic_action_ruler_circle;
-		}
-
-		@Override
-		public int getMenuItemId() {
-			return showCompass.get() ? COMPASS_CONTROL_WIDGET_STATE_SHOW : COMPASS_CONTROL_WIDGET_STATE_HIDE;
-		}
-
-		@Override
-		public int[] getMenuTitleIds() {
-			return new int[]{R.string.show_compass_ruler, R.string.hide_compass_ruler};
-		}
-
-		@Override
-		public int[] getMenuIconIds() {
-			return new int[]{R.drawable.ic_action_compass_widget, R.drawable.ic_action_compass_widget_hide};
-		}
-
-		@Override
-		public int[] getMenuItemIds() {
-			return new int[]{COMPASS_CONTROL_WIDGET_STATE_SHOW, COMPASS_CONTROL_WIDGET_STATE_HIDE};
-		}
-
-		@Override
-		public void changeState(int stateId) {
-			showCompass.set(stateId == COMPASS_CONTROL_WIDGET_STATE_SHOW);
-		}
 	}
 
 	public TextInfoWidget createRulerControl(final MapActivity map) {
@@ -936,7 +887,7 @@ public class MapInfoWidgetsFactory {
 		private boolean showMarker;
 
 		public TopTextView(OsmandApplication app, MapActivity map) {
-			turnDrawable = new NextTurnInfoWidget.TurnDrawable(map, true);
+			turnDrawable = new TurnDrawable(map, true);
 			topBar = map.findViewById(R.id.map_top_bar);
 			addressText = (TextView) map.findViewById(R.id.map_address_text);
 			addressTextShadow = (TextView) map.findViewById(R.id.map_address_text_shadow);
@@ -1022,10 +973,13 @@ public class MapInfoWidgetsFactory {
 			}
 			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowTopControls() || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
 				updateVisibility(false);
-			} else if (!showClosestWaypointFirstInAddress && updateWaypoint()) {
+			} else if (showClosestWaypointFirstInAddress && updateWaypoint()) {
 				updateVisibility(true);
 				AndroidUiHelper.updateVisibility(addressText, false);
 				AndroidUiHelper.updateVisibility(addressTextShadow, false);
+				AndroidUiHelper.updateVisibility(turnIcon, false);
+				AndroidUiHelper.updateVisibility(shieldIcon, false);
+				AndroidUiHelper.updateVisibility(exitRefText, false);
 			} else if (streetName == null) {
 				updateVisibility(false);
 			} else {
@@ -1269,13 +1223,17 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			});
+			AndroidUtils.setTextDirection(latitudeText, false);
+			AndroidUtils.setTextDirection(longitudeText, false);
 		}
 
 		@SuppressLint("SetTextI18n")
 		public boolean updateInfo() {
 			boolean visible = settings.SHOW_COORDINATES_WIDGET.get() && map.getContextMenu().shouldShowTopControls()
 					&& map.getMapRouteInfoMenu().shouldShowTopControls() && !map.isTopToolbarActive()
-					&& !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible;
+					&& !map.getMapLayers().getGpxLayer().isInTrackAppearanceMode()
+					&& !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible
+					&& !MapRouteInfoMenu.followTrackVisible;
 
 			updateVisibility(visible);
 			if (visible) {

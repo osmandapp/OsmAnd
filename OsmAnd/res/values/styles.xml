@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Dialog_Fullscreen" parent="android:Theme">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@color/color_transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:backgroundDimEnabled">false</item>
-    </style>
-
     <!-- Dashboard styles -->
     <style name="DashboardSubHeader">
         <item name="android:layout_width">0dp</item>
@@ -36,18 +28,6 @@
         <item name="android:background">?attr/dashboard_button</item>
     </style>
 
-    <style name="DashboardSearchButton">
-        <item name="android:paddingTop">@dimen/dashSearchPaddingTop</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:textSize">@dimen/default_sub_text_size</item>
-        <item name="android:gravity">bottom|center_horizontal</item>
-        <item name="android:paddingBottom">@dimen/dashSearchPaddingBot</item>
-        <item name="android:background">?attr/dashboard_button</item>
-    </style>
-
     <style name="DialogActionButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -60,71 +40,32 @@
         <item name="android:background">?attr/btn_round</item>
     </style>
 
-    <style name="DialogCancelButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">@dimen/dialog_button_height</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
-        <item name="android:textColor">?attr/contextMenuButtonColor</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
-    </style>
-    
-    <style name="FirstSplashScreenCustom" parent="OsmandLightTheme.NoActionbar">
+    <style name="SplashScreenBaseTheme" parent="OsmandLightTheme.NoActionbar" />
+
+    <style name="FirstSplashScreenCustom" parent="SplashScreenBaseTheme">
         <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
     </style>
 
-    <style name="FirstSplashScreenPlus" parent="OsmandLightTheme.NoActionbar">
+    <style name="FirstSplashScreenPlus" parent="SplashScreenBaseTheme">
         <item name="android:windowBackground">@drawable/first_splash_screen_plus</item>
     </style>
 
-    <style name="FirstSplashScreenFree" parent="OsmandLightTheme.NoActionbar">
+    <style name="FirstSplashScreenFree" parent="SplashScreenBaseTheme">
         <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
     </style>
 
-    <style name="FirstSplashScreenFreeDev" parent="OsmandLightTheme.NoActionbar">
+    <style name="FirstSplashScreenFreeDev" parent="SplashScreenBaseTheme">
         <item name="android:windowBackground">@drawable/first_splash_screen_free_dev</item>
-    </style>
-
-    <style name="OsmandTextFieldBoxes" parent="OsmandDarkTheme">
-        <item name="android:textColorTertiary">@color/white_50_transparent</item>
-        <item name="primaryColor">@color/white_50_transparent</item>
-        <item name="errorColor">@color/coordinate_input_error_color</item>
-    </style>
-
-    <style name="OsmandLightThemeWithLightStatusBar" parent="OsmandLightTheme">
-        <item name="android:statusBarColor">@color/status_bar_route_light</item>
     </style>
 
     <style name="TextAppearance.App.DarkTextInputLayout" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/active_color_primary_dark</item>
     </style>
 
-    <style name="OsmandMaterialLightTheme" parent="Theme.MaterialComponents.Light">
-        <item name="colorPrimary">@color/active_color_primary_light</item>
-        <item name="dashboard_divider">@color/divider_color_light</item>
-        <item name="divider_color">@color/divider_color</item>
-        <item name="android:textColorPrimary">@color/text_color_primary_light</item>
-        <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
-    </style>
-
-    <style name="OsmandMaterialDarkTheme" parent="Theme.MaterialComponents">
-        <item name="colorPrimary">@color/active_color_primary_dark</item>
-        <item name="dashboard_divider">@color/divider_color_dark</item>
-        <item name="divider_color">@color/divider_color_dark</item>
-        <item name="android:textColorPrimary">@color/text_color_primary_dark</item>
-        <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
-    </style>
-
-    <!-- MaterialComponents Widgets override -->
-    <style name="Widget.Styled.Slider" parent="Widget.MaterialComponents.Slider">
-        <item name="android:theme">@style/Theme.MaterialComponents</item>
-    </style>
-
     <!-- Osmand themes styles -->
-    <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+    <style name="OsmandLightTheme" parent="Theme.MaterialComponents.Light">
+        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
+        <item name="buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
         <item name="bottom_bar_background_color">@color/bottom_bar_background_color_light</item>
         <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_color_light</item>
@@ -188,6 +129,7 @@
         <item name="dashboard_general_button_text_color">@color/active_color_primary_light</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/check_light</item>
 
+        <item name="android:textColor">@color/text_color_primary_light</item>
         <item name="android:textColorPrimary">@color/text_color_primary_light</item>
         <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
         <item name="android:textColorTertiary">@color/text_color_tertiary_light</item>
@@ -196,7 +138,7 @@
         <item name="spinnerListBackground">@color/spinner_list_background_light</item>
         <item name="colorButtonNormal">@color/color_white</item>
 
-        <item name="colorPrimary">@color/osmand_orange</item>
+        <item name="colorPrimary">@color/active_color_primary_light</item>
         <item name="colorPrimaryDark">@color/osmand_orange_dark</item>
         <item name="colorAccent">@color/active_color_primary_light</item>
 
@@ -296,6 +238,12 @@
         <item name="actionBarSize">@dimen/action_bar_height</item>
         <item name="android:toolbarStyle">@style/ToolbarStyle</item>
         <item name="toolbarStyle">@style/ToolbarStyle</item>
+        <item name="bg_dash_line">@drawable/bg_dash_line_light</item>
+        <item name="btn_radio_button_left">@drawable/radio_button_left_light</item>
+        <item name="btn_radio_button_right">@drawable/radio_button_right_light</item>
+        <item name="btn_radio_button_center">@drawable/radio_button_center_light</item>
+        <item name="checkboxStyle">@style/CheckboxStyle</item>
+        <item name="radioButtonStyle">@style/RadioButtonStyle</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -339,9 +287,11 @@
         <!--<item name="actionMenuTextColor">@color/color_white</item>-->
     </style>
 
-    <style name="OsmandLightTheme.SearchTabbar">
-        <item name="android:textColorPrimary">@color/osmand_orange</item>
+    <style name="OsmandLightTheme.SearchTabbar" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabIndicatorColor">@color/app_bar_main_light</item>
+        <item name="tabTextColor">@color/text_color_secondary_light</item>
         <item name="colorAccent">@color/osmand_orange</item>
+        <item name="tabSelectedTextColor">@color/osmand_orange</item>
         <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
         <item name="android:textColorHint">@color/text_color_secondary_light</item>
     </style>
@@ -367,9 +317,11 @@
         <item name="colorAccent">@color/color_white</item>
     </style>
 
-    <style name="OsmandDarkTheme.SearchTabbar">
-        <item name="android:textColorPrimary">@color/osmand_orange</item>
+    <style name="OsmandDarkTheme.SearchTabbar"  parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabIndicatorColor">@color/app_bar_main_light</item>
+        <item name="tabTextColor">@color/text_color_secondary_dark</item>
         <item name="colorAccent">@color/osmand_orange</item>
+        <item name="tabSelectedTextColor">@color/osmand_orange</item>
         <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
         <item name="android:textColorHint">@color/text_color_secondary_dark</item>
     </style>
@@ -416,7 +368,7 @@
         <item name="colorControlNormal">?attr/coordinate_input_edit_text_normal</item>
     </style>
 
-    <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+    <style name="OsmandDarkTheme" parent="Theme.MaterialComponents">
         <item name="bottom_bar_background_color">@color/bottom_bar_background_color_dark</item>
         <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_color_dark</item>
@@ -474,6 +426,7 @@
         <item name="dashboard_general_button_text_color">@color/active_color_primary_dark</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/check_dark</item>
 
+        <item name="android:textColor">@color/text_color_primary_dark</item>
         <item name="android:textColorPrimary">@color/text_color_primary_dark</item>
         <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
         <item name="android:textColorTertiary">@color/text_color_tertiary_dark</item>
@@ -497,6 +450,8 @@
         <item name="search_tabbar_layout_theme">@style/OsmandDarkTheme.SearchTabbar</item>
         <item name="toolbar_theme">@style/OsmandDarkTheme</item>
         <item name="new_app_theme">@style/OsmandDarkTheme</item>
+
+        <item name="colorPrimary">@color/active_color_primary_dark</item>
         <item name="colorAccent">@color/active_color_primary_dark</item>
 
         <item name="contextMenuButtonColor">@color/osmand_orange</item>
@@ -576,6 +531,12 @@
         <item name="actionBarSize">@dimen/action_bar_height</item>
         <item name="android:toolbarStyle">@style/ToolbarStyle</item>
         <item name="toolbarStyle">@style/ToolbarStyle</item>
+        <item name="bg_dash_line">@drawable/bg_dash_line_dark</item>
+        <item name="btn_radio_button_left">@drawable/radio_button_left_dark</item>
+        <item name="btn_radio_button_right">@drawable/radio_button_right_dark</item>
+        <item name="btn_radio_button_center">@drawable/radio_button_center_dark</item>
+        <item name="checkboxStyle">@style/CheckboxStyle</item>
+        <item name="radioButtonStyle">@style/RadioButtonStyle</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
@@ -624,6 +585,16 @@
         <item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarSubtitle</item>
         <item name="android:actionBarWidgetTheme">@style/Theme.AppCompat</item>
         <item name="elevation">0dp</item>
+    </style>
+
+    <style name="CheckboxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:height">@dimen/checkBoxSize</item>
+        <item name="android:width">@dimen/checkBoxSize</item>
+    </style>
+
+    <style name="RadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:height">@dimen/radioButtonSize</item>
+        <item name="android:width">@dimen/radioButtonSize</item>
     </style>
 
     <style name="Widget.Styled.LightActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">

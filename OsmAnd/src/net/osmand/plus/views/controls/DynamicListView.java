@@ -458,7 +458,7 @@ public class DynamicListView extends ObservableListView {
 					int switchViewNewTop = switchView.getTop();
 					int delta = switchViewStartTop - switchViewNewTop;
 
-					ViewCompat.setTranslationY(switchView, delta);
+					switchView.setTranslationY(delta);
 
 					if (android.os.Build.VERSION.SDK_INT < 12) {
 						ViewCompat.animate(switchView)

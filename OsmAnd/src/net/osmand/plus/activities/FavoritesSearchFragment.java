@@ -83,7 +83,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
 		accessibilityAssistant = new AccessibilityAssistant(getActivity());
-		boolean isLightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		boolean isLightTheme = app.getSettings().isLightContent();
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
@@ -249,7 +249,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 
 	private void openKeyboard() {
 		searchEditText.requestFocus();
-		AndroidUtils.softKeyboardDelayed(searchEditText);
+		AndroidUtils.softKeyboardDelayed(getActivity(), searchEditText);
 	}
 
 	public void hideKeyboard() {

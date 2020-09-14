@@ -33,7 +33,6 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarkersSortByDef;
 import net.osmand.plus.MapMarkersHelper.OnGroupSyncedListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -79,7 +78,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		OsmandApplication app = getMyApplication();
-		lightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		lightTheme = app.getSettings().isLightContent();
 		int themeId = lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
@@ -551,7 +550,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 		private final List<Fragment> fragments;
 
 		MapMarkersViewPagerAdapter(FragmentManager fm) {
-			super(fm);
+			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 			fragments = Arrays.asList(activeFragment, groupsFragment, historyFragment);
 		}
 

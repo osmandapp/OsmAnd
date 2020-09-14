@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="splash_screen_background_color">@color/map_background_color_light</color>
+
 	<color name="text_color_primary_light">#212121</color>
 	<color name="text_color_primary_dark">#cccccc</color>
 	<color name="text_color_secondary_light">#727272</color>
@@ -189,7 +191,7 @@
 	<color name="gpx_time_span_color">#0080FF</color>
 
 	<color name="color_favorite">#eecc22</color>
-	<color name="color_favorite_gray">#b3b3b3</color>
+	<color name="color_favorite_gray">#727272</color>
 	<color name="parking_icon_background">#244DBD</color>
 	<color name="transport_stop_icon_background">#5870FE</color>
 
@@ -471,7 +473,8 @@
 
 	<color name="switch_button_active_light">#1A237BFF</color>
 	<color name="switch_button_active_dark">#1AD28521</color>
-	<color name="switch_button_active_stroke">#80237BFF</color>
+	<color name="switch_button_active_stroke_light">#80237BFF</color>
+	<color name="switch_button_active_stroke_dark">#80D28521</color>
 	<color name="empty_hint_bg">#80000000</color>
 	<color name="input_layout_bg_color">#4DCCCCCC</color>
 

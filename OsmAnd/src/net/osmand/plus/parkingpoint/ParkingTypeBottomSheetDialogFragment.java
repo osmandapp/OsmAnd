@@ -63,20 +63,21 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 			if (plugin.isParkingEventAdded()) {
 				plugin.showDeleteEventWarning(mapActivity);
 			}
+
 			if (limited) {
 				plugin.setParkingPosition(latitude, longitude, true);
-				plugin.showSetTimeLimitDialog(mapActivity, new Dialog(getContext()));
-				mapActivity.refreshMap();
+				plugin.showSetTimeLimitDialog(mapActivity, new Dialog(mapActivity));
 			} else {
 				plugin.addOrRemoveParkingEvent(false);
 				plugin.setParkingPosition(latitude, longitude, false);
-				plugin.showContextMenuIfNeeded(mapActivity, true);
-
-				mapActivity.refreshMap();
 			}
+			mapActivity.refreshMap();
 			mapActivity.getMyApplication().getFavorites().setSpecialPoint(
 					plugin.getParkingPosition(), SpecialPointType.PARKING, null);
+			if (!limited) {
+				plugin.showContextMenuIfNeeded(mapActivity, true);
+			}
+			dismiss();
 		}
-		dismiss();
 	}
 }

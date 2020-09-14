@@ -43,26 +43,32 @@
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll">
 
-                <com.google.android.material.textfield.TextInputLayout
+                <net.osmand.plus.widgets.OsmandTextFieldBoxes
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/shared_string_name"
+                    app:labelText="@string/shared_string_name"
+                    app:panelBackgroundColor="@color/color_transparent"
+                    app:colorControlHighlight="@color/color_transparent"
+                    app:primaryColor="@color/color_white"
+                    app:secondaryColor="@color/white_50_transparent"
+                    app:useDenseSpacing="true"
                     android:importantForAutofill="noExcludeDescendants"
                     android:layout_marginLeft="@dimen/settings_divider_margin_start"
                     android:layout_marginRight="@dimen/content_padding"
                     android:layout_marginStart="@dimen/settings_divider_margin_start"
                     android:layout_marginEnd="@dimen/content_padding">
 
-                    <EditText
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                         android:id="@+id/poiNameEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/color_transparent"
                         android:imeOptions="actionNext"
                         android:importantForAutofill="noExcludeDescendants"
                         android:inputType="textCapSentences"
                         tools:text="@string/lorem_ipsum"/>
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </net.osmand.plus.widgets.OsmandTextFieldBoxes>
             </LinearLayout>
 
             <LinearLayout
@@ -80,29 +86,33 @@
                     android:background="@null"
                     app:srcCompat="@drawable/ic_action_label"/>
 
-                <com.google.android.material.textfield.TextInputLayout
+                <net.osmand.plus.widgets.OsmandTextFieldBoxes
                     android:id="@+id/poiTypeTextInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/poi_dialog_poi_type"
-                    android:importantForAutofill="noExcludeDescendants"
-                    android:layout_marginLeft="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:importantForAutofill="noExcludeDescendants"
+                    app:endIcon="@drawable/ic_action_arrow_drop_down"
+                    app:labelText="@string/poi_dialog_poi_type"
+                    app:panelBackgroundColor="@color/color_transparent"
+                    app:primaryColor="@color/color_white"
+                    app:secondaryColor="@color/white_50_transparent">
 
-                    <AutoCompleteTextView
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                         android:id="@+id/poiTypeEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:completionThreshold="1"
-                        app:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
-                        app:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
-                        android:importantForAutofill="noExcludeDescendants"
+                        android:gravity="bottom|start"
                         android:imeOptions="actionSend"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:inputType="text"
+                        android:paddingBottom="@dimen/text_margin_small"
                         tools:text="@string/lorem_ipsum" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </net.osmand.plus.widgets.OsmandTextFieldBoxes>
 
                 <ImageButton
                     android:id="@+id/onlineDocumentationButton"

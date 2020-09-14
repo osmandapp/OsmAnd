@@ -44,7 +44,7 @@
 
     <dimen name="subHeaderPadding">2dp</dimen>
     <dimen name="subHeaderMarginLeft">15dp</dimen>
-		<dimen name = "subHeaderMarginRight">15dp</dimen>
+	<dimen name="subHeaderMarginRight">15dp</dimen>
     <dimen name="showAllButtonMarginRight">14dp</dimen>
     <dimen name="showAllButtonHeight">36dp</dimen>
     <dimen name="dashFavIconSize">28dp</dimen>
@@ -96,7 +96,8 @@
 	<dimen name="gpx_small_icon_margin">3dp</dimen>
 	<dimen name="gpx_small_text_margin">14dp</dimen>
 	<dimen name="gpx_text_top_margin">6dp</dimen>
-
+	<dimen name="gpx_group_button_height">60dp</dimen>
+	<dimen name="gpx_group_button_width">96dp</dimen>
 
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
@@ -241,31 +242,42 @@
 
 	<dimen name="measurement_tool_select_radius">20dp</dimen>
 	<dimen name="bottom_sheet_content_margin">16dp</dimen>
+	<dimen name="bottom_sheet_exit_button_margin">18dp</dimen>
 	<dimen name="bottom_sheet_content_margin_small">8dp</dimen>
 	<dimen name="content_padding">16dp</dimen>
 	<dimen name="content_padding_small">12dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="bottom_sheet_content_padding_small">8dp</dimen>
+	<dimen name="measurement_tool_menu_title_padding_top">13dp</dimen>
+	<dimen name="measurement_tool_menu_title_padding_bottom">5dp</dimen>
 	<dimen name="measurement_tool_divider_margin">8dp</dimen>
 	<dimen name="measurement_tool_content_padding_medium">12dp</dimen>
 	<dimen name="text_margin_small">4dp</dimen>
 	<dimen name="measurement_tool_text_margin">8dp</dimen>
 	<dimen name="measurement_tool_points_list_container_height">220dp</dimen>
-	<dimen name="measurement_tool_up_down_row_height">48dp</dimen>
+	<dimen name="measurement_tool_up_down_row_height">60dp</dimen>
 	<dimen name="measurement_tool_controls_height">52dp</dimen>
-	<dimen name="measurement_tool_text_button_padding_small">12dp</dimen>
+	<dimen name="measurement_tool_text_button_padding_small">8dp</dimen>
 	<dimen name="measurement_tool_text_button_padding">16dp</dimen>
-	<dimen name="measurement_tool_undo_redo_padding_small">12dp</dimen>
+	<dimen name="measurement_tool_undo_redo_padding_small">6dp</dimen>
 	<dimen name="measurement_tool_undo_redo_padding_medium">14dp</dimen>
 	<dimen name="measurement_tool_undo_redo_padding">16dp</dimen>
+	<dimen name="measurement_tool_folder_select_width">100dp</dimen>
+	<dimen name="measurement_tool_folder_select_height">60dp</dimen>
 	<dimen name="measurement_tool_button_margin">8dp</dimen>
 	<dimen name="measurement_tool_button_padding">8dp</dimen>
+	<dimen name="measurement_tool_button_padding_top">10dp</dimen>
 	<dimen name="measurement_tool_button_height">36dp</dimen>
+	<dimen name="measurement_tool_button_width">98dp</dimen>
+	<dimen name="measurement_tool_options_divider_margin_start">72dp</dimen>
 	<dimen name="bottom_sheet_title_height">52dp</dimen>
 	<dimen name="bottom_sheet_descr_height">44dp</dimen>
 	<dimen name="bottom_sheet_list_item_height">48dp</dimen>
 	<dimen name="bottom_sheet_large_list_item_height">64dp</dimen>
 	<dimen name="bottom_sheet_icon_margin">24dp</dimen>
+	<dimen name="bottom_sheet_title_padding_top">10dp</dimen>
+	<dimen name="bottom_sheet_title_padding_bottom">6dp</dimen>
+	<dimen name="bottom_sheet_icon_margin_large">32dp</dimen>
 	<dimen name="bottom_sheet_divider_margin_top">7dp</dimen>
 	<dimen name="bottom_sheet_divider_margin_bottom">8dp</dimen>
 	<dimen name="bottom_sheet_divider_margin_start">64dp</dimen>
@@ -340,6 +352,9 @@
 	<dimen name="toolbar_height">56dp</dimen>
 	<dimen name="toolbar_height_expanded">96dp</dimen>
 	<dimen name="toolbar_inset_start_with_navigation">72dp</dimen>
+	<dimen name="toolbar_inset_start">54dp</dimen>
+	<dimen name="toolbar_title_padding_top">7dp</dimen>
+	<dimen name="toolbar_title_padding_bottom">6dp</dimen>
 
 	<dimen name="wikivoyage_search_list_header_height">36dp</dimen>
 	<dimen name="wikivoyage_article_card_icon_size">80dp</dimen>
@@ -389,4 +404,7 @@
 	<dimen name="info_description_line_spacing_multiplier" format="float">1.4</dimen>
 
 	<dimen name="screen_alert_big_warning_icon_size">92dp</dimen>
+
+	<dimen name="radioButtonSize">32dp</dimen>
+	<dimen name="checkBoxSize">24dp</dimen>
 </resources>

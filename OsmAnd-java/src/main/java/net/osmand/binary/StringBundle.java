@@ -21,7 +21,7 @@ public class StringBundle {
 	private static final DecimalFormat FIVE_DIGITS_FORMATTER = new DecimalFormat("#.#####");
 	private static final DecimalFormat SIX_DIGITS_FORMATTER = new DecimalFormat("#.######");
 
-	private Map<String, Item> map = new LinkedHashMap<>();
+	private Map<String, Item<?>> map = new LinkedHashMap<>();
 
 	public enum ItemType {
 		STRING,
@@ -32,7 +32,7 @@ public class StringBundle {
 	public StringBundle() {
 	}
 
-	protected StringBundle(Map<String, Item> map) {
+	protected StringBundle(Map<String, Item<?>> map) {
 		this.map = map;
 	}
 
@@ -156,16 +156,16 @@ public class StringBundle {
 		}
 	}
 
-	public static class StringListItem extends Item<List<Item>> {
+	public static class StringListItem extends Item<List<Item<?>>> {
 
-		private StringListItem(String name, List<Item> list) {
+		private StringListItem(String name, List<Item<?>> list) {
 			super(name, ItemType.LIST, list);
 		}
 	}
 
-	public static class StringMapItem extends Item<Map<String, Item>> {
+	public static class StringMapItem extends Item<Map<String, Item<?>>> {
 
-		private StringMapItem(String name, Map<String, Item> map) {
+		private StringMapItem(String name, Map<String, Item<?>> map) {
 			super(name, ItemType.MAP, map);
 		}
 	}
@@ -177,11 +177,11 @@ public class StringBundle {
 		}
 	}
 
-	public Map<String, Item> getMap() {
+	public Map<String, Item<?>> getMap() {
 		return Collections.unmodifiableMap(map);
 	}
 
-	public Item getItem(String key) {
+	public Item<?> getItem(String key) {
 		return map.get(key);
 	}
 
@@ -190,7 +190,7 @@ public class StringBundle {
 	}
 
 	public int getInt(String key, int defaultValue) {
-		Item item = map.get(key);
+		Item<?> item = map.get(key);
 		return item instanceof StringItem ? ((StringItem) item).asInt(defaultValue) : defaultValue;
 	}
 
@@ -199,7 +199,7 @@ public class StringBundle {
 	}
 
 	public long getLong(String key, long defaultValue) {
-		Item item = map.get(key);
+		Item<?> item = map.get(key);
 		return item instanceof StringItem ? ((StringItem) item).asLong(defaultValue) : defaultValue;
 	}
 
@@ -212,7 +212,7 @@ public class StringBundle {
 	}
 
 	public float getFloat(String key, float defaultValue) {
-		Item item = map.get(key);
+		Item<?> item = map.get(key);
 		return item instanceof StringItem ? ((StringItem) item).asFloat(defaultValue) : defaultValue;
 	}
 
@@ -221,7 +221,7 @@ public class StringBundle {
 	}
 
 	public boolean getBoolean(String key, boolean defaultValue) {
-		Item item = map.get(key);
+		Item<?> item = map.get(key);
 		return item instanceof StringItem ? ((StringItem) item).asBoolean(defaultValue) : defaultValue;
 	}
 
@@ -232,35 +232,13 @@ public class StringBundle {
 	}
 
 	public String getString(String key, String defaultValue) {
-		Item item = map.get(key);
+		Item<?> item = map.get(key);
 		return item instanceof StringItem ? ((StringItem) item).getValue() : defaultValue;
-	}
-
-	public void putObject(String key, StringExternalizable object) {
-		if (object != null) {
-			StringBundle bundle = newInstance();
-			object.writeToBundle(bundle);
-			map.put(key, new StringBundleItem(key, bundle));
-		}
-	}
-
-	public void putList(String key, String itemName, List<? extends StringExternalizable> list) {
-		if (list != null) {
-			List<Item> itemList = new ArrayList<>();
-			for (StringExternalizable ex : list) {
-				if (ex != null) {
-					StringBundle bundle = newInstance();
-					ex.writeToBundle(bundle);
-					itemList.add(new StringBundleItem(itemName, bundle));
-				}
-			}
-			map.put(key, new StringListItem(key, itemList));
-		}
 	}
 
 	public void putBundleList(String key, String itemName, List<StringBundle> list) {
 		if (list != null) {
-			List<Item> itemList = new ArrayList<>();
+			List<Item<?>> itemList = new ArrayList<>();
 			for (StringBundle bundle : list) {
 				itemList.add(new StringBundleItem(itemName, bundle));
 			}
@@ -279,7 +257,7 @@ public class StringBundle {
 	}
 
 	public int[] getIntArray(String key, int[] defaultValue) {
-		Item item = map.get(key);
+		Item<?> item = map.get(key);
 		return item instanceof StringItem ? ((StringItem) item).asIntArray(defaultValue) : defaultValue;
 	}
 
@@ -290,7 +268,7 @@ public class StringBundle {
 	}
 
 	public int[][] getIntIntArray(String key, int[][] defaultValue) {
-		Item item = map.get(key);
+		Item<?> item = map.get(key);
 		return item instanceof StringItem ? ((StringItem) item).asIntIntArray(defaultValue) : defaultValue;
 	}
 

@@ -556,6 +556,9 @@ public class OsmMapUtils {
         
         // take centroid as the first best guess
         Cell bestCell = getCentroidCell(rings);
+        if(bestCell == null) {
+        	 return new LatLon(minX, minY);
+        }
 
         // special case for rectangular polygons
         Cell bboxCell = new Cell(minX + width / 2, minY + height / 2, 0, rings);
@@ -606,10 +609,13 @@ public class OsmMapUtils {
             area += f * 3;
         }
 
-        if (area == 0) {
-            LatLon p = points.get(0);
-            return new Cell(p.getLatitude(), p.getLongitude(), 0, rings);
-        }
+		if (area == 0) {
+			if (points.size() == 0) {
+				return null;
+			}
+			LatLon p = points.get(0);
+			return new Cell(p.getLatitude(), p.getLongitude(), 0, rings);
+		}
 
         return new Cell(x / area, y / area, 0, rings);
     }

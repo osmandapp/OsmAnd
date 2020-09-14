@@ -11,15 +11,15 @@ public class ReorderPointCommand extends MeasurementModeCommand {
 	private final int to;
 
 	public ReorderPointCommand(MeasurementToolLayer measurementLayer, int from, int to) {
-		this.measurementLayer = measurementLayer;
+		super(measurementLayer);
 		this.from = from;
 		this.to = to;
 	}
 
 	@Override
 	public boolean execute() {
-		measurementLayer.getEditingCtx().setNeedUpdateCacheForSnap(true);
-		measurementLayer.refreshMap();
+		getEditingCtx().updateCacheForSnap();
+		refreshMap();
 		return true;
 	}
 
@@ -34,14 +34,14 @@ public class ReorderPointCommand extends MeasurementModeCommand {
 	}
 
 	private void reorder(int addTo, int removeFrom) {
-		List<WptPt> points = measurementLayer.getEditingCtx().getPoints();
+		List<WptPt> points = getEditingCtx().getPoints();
 		points.add(addTo, points.remove(removeFrom));
-		measurementLayer.getEditingCtx().setNeedUpdateCacheForSnap(true);
-		measurementLayer.refreshMap();
+		getEditingCtx().updateCacheForSnap();
+		refreshMap();
 	}
 
 	@Override
-	MeasurementCommandType getType() {
+	public MeasurementCommandType getType() {
 		return MeasurementCommandType.REORDER_POINT;
 	}
 }

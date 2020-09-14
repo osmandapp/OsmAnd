@@ -75,6 +75,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -178,6 +179,8 @@ public class OsmandSettings {
 	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings";
 	private static String CUSTOM_SHARED_PREFERENCES_NAME;
 
+	private static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
+	private static final String ROUTING_PREFERENCE_PREFIX = "prouting_";
 
 	/// Settings variables
 	private final OsmandApplication ctx;
@@ -216,6 +219,14 @@ public class OsmandSettings {
 
 	public Map<String, OsmandPreference<?>> getRegisteredPreferences() {
 		return Collections.unmodifiableMap(registeredPreferences);
+	}
+
+	public static boolean isRendererPreference(String key) {
+		return key.startsWith(RENDERER_PREFERENCE_PREFIX);
+	}
+
+	public static boolean isRoutingPreference(String key) {
+		return key.startsWith(ROUTING_PREFERENCE_PREFIX);
 	}
 
 	private static final String SETTING_CUSTOMIZED_ID = "settings_customized";
@@ -313,6 +324,27 @@ public class OsmandSettings {
 				for (ApplicationModeBean modeBean : customProfiles) {
 					ApplicationModeBuilder builder = ApplicationMode.fromModeBean(ctx, modeBean);
 					ApplicationMode.saveProfile(builder, ctx);
+				}
+			}
+		}
+	}
+
+	public void migrateQuickActionStates() {
+		String quickActionsJson = settingsAPI.getString(globalPreferences, "quick_action_new", "");
+		if (!Algorithms.isEmpty(quickActionsJson)) {
+			Gson gson = new GsonBuilder().create();
+			Type type = new TypeToken<HashMap<String, Boolean>>() {
+			}.getType();
+			HashMap<String, Boolean> quickActions = gson.fromJson(quickActionsJson, type);
+			if (!Algorithms.isEmpty(quickActions)) {
+				for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+					if (!QUICK_ACTION.isSetForMode(mode)) {
+						Boolean actionState = quickActions.get(mode.getStringKey());
+						if (actionState == null) {
+							actionState = QUICK_ACTION.getDefaultValue();
+						}
+						setPreference(QUICK_ACTION.getId(), actionState, mode);
+					}
 				}
 			}
 		}
@@ -936,7 +968,6 @@ public class OsmandSettings {
 
 	public class BooleanPreference extends CommonPreference<Boolean> {
 
-
 		private BooleanPreference(String id, boolean defaultValue) {
 			super(id, defaultValue);
 		}
@@ -954,6 +985,30 @@ public class OsmandSettings {
 		@Override
 		public Boolean parseString(String s) {
 			return Boolean.parseBoolean(s);
+		}
+	}
+
+	public class BooleanStringPreference extends BooleanPreference {
+
+		public BooleanStringPreference(String id, boolean defaultValue) {
+			super(id, defaultValue);
+		}
+
+		@Override
+		protected Boolean getValue(Object prefs, Boolean defaultValue) {
+			Boolean value;
+			try {
+				value = parseString(settingsAPI.getString(prefs, getId(), defaultValue.toString()));
+			} catch (ClassCastException e) {
+				value = settingsAPI.getBoolean(prefs, getId(), defaultValue);
+				setValue(prefs, value);
+			}
+			return value;
+		}
+
+		@Override
+		protected boolean setValue(Object prefs, Boolean val) {
+			return settingsAPI.edit(prefs).putString(getId(), val != null ? val.toString() : null).commit();
 		}
 	}
 
@@ -1768,7 +1823,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> ARRIVAL_DISTANCE_FACTOR =
 			new FloatPreference("arrival_distance_factor", 1f).makeProfile();
 
-	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED =
+	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED_KMH =
 			new FloatPreference("speed_limit_exceed", 5f).makeProfile();
 
 	public final CommonPreference<Float> DEFAULT_SPEED = new FloatPreference("default_speed", 10f).makeProfile().cache();
@@ -1823,6 +1878,7 @@ public class OsmandSettings {
 	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<>("route_service", RouteService.OSMAND, RouteService.values()).makeProfile().cache();
 
 	{
+		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.DEFAULT, RouteService.STRAIGHT);
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.AIRCRAFT, RouteService.STRAIGHT);
 	}
 
@@ -1850,7 +1906,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> APP_MODE_ORDER = new IntPreference("app_mode_order", 0).makeProfile().cache();
 
-	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS =
+	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS_KMH =
 			new FloatPreference("speed_for_map_to_direction_of_movement", 0f).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
@@ -1864,14 +1920,14 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<Integer> ACCESSIBILITY_AUTOANNOUNCE_PERIOD = new IntPreference("accessibility_autoannounce_period", 10000).makeProfile().cache();
-	
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DISABLE_OFFROUTE_RECALC =
-		new BooleanAccessibilityPreference("disable_offroute_recalc", false).makeProfile();
-	
+		new BooleanPreference("disable_offroute_recalc", false).makeProfile();
+
 	// this value string is synchronized with settings_pref.xml preference name
-//	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
-//		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeProfile();
+	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
+		new BooleanPreference("disable_wrong_direction_recalc", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DIRECTION_AUDIO_FEEDBACK =
@@ -2159,7 +2215,7 @@ public class OsmandSettings {
 	}.makeProfile().cache();
 
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference("gpx_routing_calculate_osmand_route", true).makeGlobal().cache();
-	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference("gpx_routing_calculate_rtept", true).makeGlobal().cache();
+//	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference("gpx_routing_calculate_rtept", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC = new BooleanPreference("calc_gpx_route", false).makeGlobal().cache();
 
 	public final OsmandPreference<Boolean> AVOID_TOLL_ROADS = new BooleanPreference("avoid_toll_roads", false).makeProfile().cache();
@@ -2172,6 +2228,10 @@ public class OsmandSettings {
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference("last_updates_card_refresh", 0).makeGlobal();
 
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference("current_track_color", 0).makeGlobal().cache();
+	public final CommonPreference<String> CURRENT_TRACK_WIDTH = new StringPreference("current_track_width", "").makeGlobal().cache();
+	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_ARROWS = new BooleanPreference("current_track_show_arrows", false).makeGlobal().cache();
+	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_START_FINISH = new BooleanPreference("current_track_show_start_finish", true).makeGlobal().cache();
+	public final ListStringPreference CUSTOM_TRACK_COLORS = (ListStringPreference) new ListStringPreference("custom_track_colors", null, ",").makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5000).makeProfile();
@@ -3499,7 +3559,7 @@ public class OsmandSettings {
 	public static final String QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN = "quick_fab_margin_x_landscape_margin";
 	public static final String QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN = "quick_fab_margin_y_landscape_margin";
 
-	public final CommonPreference<String> QUICK_ACTION = new StringPreference("quick_action_new", "").makeGlobal();
+	public final CommonPreference<Boolean> QUICK_ACTION = new BooleanPreference("quick_action_state", false).makeProfile();
 
 	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference("quick_action_list", "").makeGlobal();
 
@@ -3749,7 +3809,7 @@ public class OsmandSettings {
 
 	public CommonPreference<String> getCustomRenderProperty(String attrName) {
 		if (!customRendersProps.containsKey(attrName)) {
-			customRendersProps.put(attrName, new StringPreference("nrenderer_" + attrName, "").makeProfile());
+			customRendersProps.put(attrName, new StringPreference(RENDERER_PREFERENCE_PREFIX + attrName, "").makeProfile());
 		}
 		return customRendersProps.get(attrName);
 	}
@@ -3763,30 +3823,25 @@ public class OsmandSettings {
 
 	public CommonPreference<Boolean> getCustomRenderBooleanProperty(String attrName) {
 		if (!customBooleanRendersProps.containsKey(attrName)) {
-			customBooleanRendersProps.put(attrName, new BooleanPreference("nrenderer_" + attrName, false).makeProfile());
+			customBooleanRendersProps.put(attrName, new BooleanPreference(RENDERER_PREFERENCE_PREFIX + attrName, false).makeProfile());
 		}
 		return customBooleanRendersProps.get(attrName);
 	}
 
-	Map<String, CommonPreference<String>> customRoutingProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<String>>();
+	Map<String, CommonPreference<String>> customRoutingProps = new LinkedHashMap<>();
 
 	public CommonPreference<String> getCustomRoutingProperty(String attrName, String defValue) {
 		if (!customRoutingProps.containsKey(attrName)) {
-			customRoutingProps.put(attrName, new StringPreference("prouting_" + attrName, defValue).makeProfile());
+			customRoutingProps.put(attrName, new StringPreference(ROUTING_PREFERENCE_PREFIX + attrName, defValue).makeProfile());
 		}
 		return customRoutingProps.get(attrName);
 	}
 
-	{
-//		CommonPreference<String> pref = getCustomRoutingProperty("appMode");
-//		pref.setModeDefaultValue(ApplicationMode.CAR, "car");
-	}
-
-	Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<Boolean>>();
+	Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<>();
 
 	public CommonPreference<Boolean> getCustomRoutingBooleanProperty(String attrName, boolean defaulfValue) {
 		if (!customBooleanRoutingProps.containsKey(attrName)) {
-			customBooleanRoutingProps.put(attrName, new BooleanPreference("prouting_" + attrName, defaulfValue).makeProfile());
+			customBooleanRoutingProps.put(attrName, new BooleanStringPreference(ROUTING_PREFERENCE_PREFIX + attrName, defaulfValue).makeProfile());
 		}
 		return customBooleanRoutingProps.get(attrName);
 	}
@@ -3868,6 +3923,7 @@ public class OsmandSettings {
 
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;
+	public static final int SYSTEM_DEFAULT_THEME = 2;
 
 	public static final int NO_EXTERNAL_DEVICE = 0;
 	public static final int GENERIC_EXTERNAL_DEVICE = 1;
@@ -3881,7 +3937,16 @@ public class OsmandSettings {
 			new IntPreference("FAVORITES_TAB", 0).makeGlobal().cache();
 
 	public final CommonPreference<Integer> OSMAND_THEME =
-			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeProfile().cache();
+			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME) {
+				@Override
+				public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+					Integer theme = parseString(json.getString(getId()));
+					if (theme == SYSTEM_DEFAULT_THEME && !isSupportSystemDefaultTheme()) {
+						theme = OSMAND_LIGHT_THEME;
+					}
+					setModeValue(appMode, theme);
+				}
+			}.makeProfile().cache();
 
 	public final OsmandPreference<Boolean> OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED =
 			new BooleanPreference("open_only_header_route_calculated", false).makeProfile();
@@ -3890,13 +3955,33 @@ public class OsmandSettings {
 		return isLightContent();
 	}
 
-
 	public boolean isLightContent() {
 		return isLightContentForMode(APPLICATION_MODE.get());
 	}
 
 	public boolean isLightContentForMode(ApplicationMode mode) {
+		if (isSupportSystemDefaultTheme() && OSMAND_THEME.getModeValue(mode) == SYSTEM_DEFAULT_THEME) {
+			return isLightSystemDefaultTheme();
+		}
 		return OSMAND_THEME.getModeValue(mode) != OSMAND_DARK_THEME;
+	}
+
+	public boolean isLightSystemDefaultTheme() {
+		Configuration config = ctx.getResources().getConfiguration();
+		int systemNightModeState = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+		return systemNightModeState != Configuration.UI_MODE_NIGHT_YES;
+	}
+
+	public boolean isSystemDefaultThemeUsed() {
+		return isSystemDefaultThemeUsedForMode(APPLICATION_MODE.get());
+	}
+
+	public boolean isSystemDefaultThemeUsedForMode(ApplicationMode mode) {
+		return isSupportSystemDefaultTheme() && OSMAND_THEME.getModeValue(mode) == SYSTEM_DEFAULT_THEME;
+	}
+
+	public boolean isSupportSystemDefaultTheme() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
 	}
 
 	public final CommonPreference<Boolean> FLUORESCENT_OVERLAYS =

@@ -242,7 +242,7 @@
     <string name="poi_hockey">Hockey</string>
     <string name="poi_horse_racing">Cursas de sos caddos</string>
     <string name="poi_ice_skating">Patinàgiu in s\'astra</string>
-    <string name="poi_korfbal">Korfbal</string>
+    <string name="poi_korfbal">Korfball</string>
     <string name="poi_sport_multi">Prus isports</string>
     <string name="poi_paddle_tennis">Paddle tènnis</string>
     <string name="poi_pelota">Pelota</string>
@@ -1010,7 +1010,7 @@
     <string name="poi_toll_hgv_yes">Pedàgiu pro veìculos pesantes</string>
     <string name="poi_information_bicyclemap">Mapa tziclìstica</string>
     <string name="poi_water_characteristic_mineral">Minerale</string>
-    <string name="poi_water_characteristic_mud">Caraterìsica de s’abba: ludu</string>
+    <string name="poi_water_characteristic_mud">Ludu</string>
     <string name="poi_water_characteristic_sulfuric">Solfòrica</string>
     <string name="poi_water_point">Puntu de abba</string>
     <string name="poi_cuisine">Coghina</string>
@@ -2215,7 +2215,7 @@
     <string name="poi_fuel_100ll">Carburante 100LL</string>
     <string name="poi_fuel_autogas">Autogas</string>
     <string name="poi_fuel_jeta1">Carburante Jet A-1</string>
-    <string name="poi_fuel_adblue">Carburante AdBlue</string>
+    <string name="poi_fuel_adblue">AdBlue - additivu de iscàrrigu diesel</string>
     <string name="poi_fuel_wood">Combustìbile: linna</string>
     <string name="poi_fuel_charcoal">Combustìbile: carbone vegetale</string>
     <string name="poi_fuel_coal">Combustìbile: carbone</string>
@@ -3828,4 +3828,6 @@
     <string name="poi_give_box">Iscàtula pro donos (give box)</string>
     <string name="poi_city_block">Isuladu</string>
     <string name="poi_borough">Unidade amministrativa (Borough)</string>
+    <string name="poi_elevator">Ascensore</string>
+    <string name="poi_traffic_signals_arrow_no">Fritza: nono</string>
 </resources>

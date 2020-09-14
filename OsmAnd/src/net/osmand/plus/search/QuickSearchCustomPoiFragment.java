@@ -47,7 +47,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -112,7 +111,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 		app = getMyApplication();
 		uiUtilities = app.getUIUtilities();
 		searchUICore = app.getSearchUICore().getCore();
-		this.nightMode = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME;
+		this.nightMode = !app.getSettings().isLightContent();
 		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		poiCategoryList = app.getPoiTypes().getCategories(false);
 		Collections.sort(poiCategoryList, new Comparator<PoiCategory>() {
@@ -223,7 +222,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 			@Override
 			public void onClick(View view) {
 				searchEditText.requestFocus();
-				AndroidUtils.showSoftKeyboard(searchEditText);
+				AndroidUtils.showSoftKeyboard(getActivity(), searchEditText);
 			}
 		});
 		searchCloseIcon = view.findViewById(R.id.search_close);

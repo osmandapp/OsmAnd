@@ -75,7 +75,7 @@ import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
+import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
@@ -534,7 +534,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	@NonNull
-	public String getSubtypeStr() {
+	public CharSequence getSubtypeStr() {
 		return "";
 	}
 

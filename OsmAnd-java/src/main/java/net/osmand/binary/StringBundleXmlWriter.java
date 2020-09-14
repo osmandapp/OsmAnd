@@ -25,7 +25,7 @@ public class StringBundleXmlWriter extends StringBundleWriter {
 	}
 
 	@Override
-	protected void writeItem(String name, Item item) {
+	protected void writeItem(String name, Item<?> item) {
 		if (serializer != null) {
 			try {
 				writeItemImpl(name, item);
@@ -47,7 +47,7 @@ public class StringBundleXmlWriter extends StringBundleWriter {
 		}
 	}
 
-	private void writeItemImpl(String name, Item item) throws IOException {
+	private void writeItemImpl(String name, Item<?> item) throws IOException {
 		if (serializer != null && item != null) {
 			switch (item.getType()) {
 				case STRING: {
@@ -58,13 +58,13 @@ public class StringBundleXmlWriter extends StringBundleWriter {
 				case LIST: {
 					StringListItem listItem = (StringListItem) item;
 					serializer.startTag(null, name);
-					List<Item> list = listItem.getValue();
-					for (Item i : list) {
+					List<Item<?>> list = listItem.getValue();
+					for (Item<?> i : list) {
 						if (i.getType() == StringBundle.ItemType.STRING) {
 							writeItemImpl(i.getName(), i);
 						}
 					}
-					for (Item i : list) {
+					for (Item<?> i : list) {
 						if (i.getType() != StringBundle.ItemType.STRING) {
 							writeItemImpl(i.getName(), i);
 						}
@@ -75,14 +75,14 @@ public class StringBundleXmlWriter extends StringBundleWriter {
 				case MAP: {
 					StringMapItem mapItem = (StringMapItem) item;
 					serializer.startTag(null, name);
-					for (Entry<String, Item> entry : mapItem.getValue().entrySet()) {
-						Item i = entry.getValue();
+					for (Entry<String, Item<?>> entry : mapItem.getValue().entrySet()) {
+						Item<?> i = entry.getValue();
 						if (i.getType() == StringBundle.ItemType.STRING) {
 							writeItemImpl(entry.getKey(), i);
 						}
 					}
-					for (Entry<String, Item> entry : mapItem.getValue().entrySet()) {
-						Item i = entry.getValue();
+					for (Entry<String, Item<?>> entry : mapItem.getValue().entrySet()) {
+						Item<?> i = entry.getValue();
 						if (i.getType() != StringBundle.ItemType.STRING) {
 							writeItemImpl(entry.getKey(), i);
 						}

@@ -35,6 +35,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -767,11 +768,11 @@ public class SettingsHelper {
 		}
 	}
 
-	public abstract static class OsmandSettingsItemReader extends SettingsItemReader<OsmandSettingsItem> {
+	public abstract static class OsmandSettingsItemReader<T extends OsmandSettingsItem> extends SettingsItemReader<T> {
 
 		private OsmandSettings settings;
 
-		public OsmandSettingsItemReader(@NonNull OsmandSettingsItem item, @NonNull OsmandSettings settings) {
+		public OsmandSettingsItemReader(@NonNull T item, @NonNull OsmandSettings settings) {
 			super(item);
 			this.settings = settings;
 		}
@@ -828,11 +829,11 @@ public class SettingsHelper {
 		}
 	}
 
-	public abstract static class OsmandSettingsItemWriter extends SettingsItemWriter<OsmandSettingsItem> {
+	public abstract static class OsmandSettingsItemWriter<T extends OsmandSettingsItem> extends SettingsItemWriter<T> {
 
 		private OsmandSettings settings;
 
-		public OsmandSettingsItemWriter(OsmandSettingsItem item, OsmandSettings settings) {
+		public OsmandSettingsItemWriter(@NonNull T item, @NonNull OsmandSettings settings) {
 			super(item);
 			this.settings = settings;
 		}
@@ -896,7 +897,7 @@ public class SettingsHelper {
 		@Nullable
 		@Override
 		SettingsItemReader<? extends SettingsItem> getReader() {
-			return new OsmandSettingsItemReader(this, getSettings()) {
+			return new OsmandSettingsItemReader<OsmandSettingsItem>(this, getSettings()) {
 				@Override
 				protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
 					preference.readFromJson(json, null);
@@ -907,7 +908,7 @@ public class SettingsHelper {
 		@Nullable
 		@Override
 		SettingsItemWriter<? extends SettingsItem> getWriter() {
-			return new OsmandSettingsItemWriter(this, getSettings()) {
+			return new OsmandSettingsItemWriter<OsmandSettingsItem>(this, getSettings()) {
 				@Override
 				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
 					preference.writeToJson(json, null);
@@ -1127,12 +1128,48 @@ public class SettingsHelper {
 		@Nullable
 		@Override
 		SettingsItemReader<? extends SettingsItem> getReader() {
-			return new OsmandSettingsItemReader(this, getSettings()) {
+			return new OsmandSettingsItemReader<ProfileSettingsItem>(this, getSettings()) {
 				@Override
 				protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
 					if (!appModeBeanPrefsIds.contains(preference.getId())) {
 						preference.readFromJson(json, appMode);
 					}
+				}
+
+				@Override
+				void readPreferencesFromJson(final JSONObject json) {
+					getSettings().getContext().runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							OsmandSettings settings = getSettings();
+							Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
+							Iterator<String> iter = json.keys();
+							while (iter.hasNext()) {
+								String key = iter.next();
+								OsmandPreference<?> p = prefs.get(key);
+								if (p == null) {
+									if (OsmandSettings.isRoutingPreference(key)) {
+										p = settings.registerStringPreference(key, "");
+									}
+								}
+								if (p != null) {
+									try {
+										readPreferenceFromJson(p, json);
+										if (OsmandSettings.isRoutingPreference(p.getId())) {
+											if (p.getId().endsWith(GeneralRouter.USE_SHORTEST_WAY)) {
+												settings.FAST_ROUTE_MODE.setModeValue(appMode,
+														!settings.getCustomRoutingBooleanProperty(GeneralRouter.USE_SHORTEST_WAY, false).getModeValue(appMode));
+											}
+										}
+									} catch (Exception e) {
+										LOG.error("Failed to read preference: " + key, e);
+									}
+								} else {
+									LOG.warn("No preference while importing settings: " + key);
+								}
+							}
+						}
+					});
 				}
 			};
 		}
@@ -1140,7 +1177,7 @@ public class SettingsHelper {
 		@Nullable
 		@Override
 		SettingsItemWriter<? extends SettingsItem> getWriter() {
-			return new OsmandSettingsItemWriter(this, getSettings()) {
+			return new OsmandSettingsItemWriter<ProfileSettingsItem>(this, getSettings()) {
 				@Override
 				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
 					if (!appModeBeanPrefsIds.contains(preference.getId())) {
@@ -2035,6 +2072,7 @@ public class SettingsHelper {
 					boolean ellipsoid = object.optBoolean("ellipsoid", false);
 					boolean invertedY = object.optBoolean("inverted_y", false);
 					String referer = object.optString("referer");
+					String userAgent = object.optString("userAgent");
 					boolean timeSupported = object.optBoolean("timesupported", false);
 					long expire = object.optLong("expire", -1);
 					boolean inversiveZoom = object.optBoolean("inversiveZoom", false);
@@ -2054,13 +2092,14 @@ public class SettingsHelper {
 						tileSourceTemplate.setRule(rule);
 						tileSourceTemplate.setRandoms(randoms);
 						tileSourceTemplate.setReferer(referer);
+						tileSourceTemplate.setUserAgent(userAgent);
 						tileSourceTemplate.setEllipticYTile(ellipsoid);
 						tileSourceTemplate.setInvertedYTile(invertedY);
 						tileSourceTemplate.setExpirationTimeMillis(timeSupported ? expire : -1);
 
 						template = tileSourceTemplate;
 					} else {
-						template = new SQLiteTileSource(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY, referer, timeSupported, expire, inversiveZoom, rule);
+						template = new SQLiteTileSource(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY, referer, userAgent, timeSupported, expire, inversiveZoom, rule);
 					}
 					items.add(template);
 				}
@@ -2087,6 +2126,7 @@ public class SettingsHelper {
 						jsonObject.put("ellipsoid", template.isEllipticYTile());
 						jsonObject.put("inverted_y", template.isInvertedYTile());
 						jsonObject.put("referer", template.getReferer());
+						jsonObject.put("userAgent", template.getUserAgent());
 						jsonObject.put("timesupported", template.isTimeSupported());
 						jsonObject.put("expire", template.getExpirationTimeMinutes());
 						jsonObject.put("inversiveZoom", template.getInversiveZoom());
@@ -2493,7 +2533,7 @@ public class SettingsHelper {
 					if (fileName.equals("items.json")) {
 						String itemsJson = null;
 						try {
-							itemsJson = Algorithms.readFromInputStream(ois).toString();
+							itemsJson = Algorithms.readFromInputStream(ois, false).toString();
 						} catch (IOException e) {
 							LOG.error("Error reading items.json: " + itemsJson, e);
 							throw new IllegalArgumentException("No items");

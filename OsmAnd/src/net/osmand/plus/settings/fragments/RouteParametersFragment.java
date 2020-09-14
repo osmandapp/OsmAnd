@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,8 +17,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.slider.Slider;
 
@@ -33,6 +36,7 @@ import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -61,6 +65,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private static final String RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
 	private static final String ROUTING_SHORT_WAY = "prouting_short_way";
 	private static final String ROUTING_RECALC_DISTANCE= "routing_recalc_distance";
+	private static final String ROUTING_RECALC_WRONG_DIRECTION= "disable_wrong_direction_recalc";
 
 	public static final float DISABLE_MODE = -1.0f;
 	public static final float DEFAULT_MODE = 0.0f;
@@ -90,6 +95,15 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				recalculateRoute();
 			}
 		};
+	}
+
+	@Override
+	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		final RecyclerView view = super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+		//To prevent icons from flashing when the user turns switch on/off
+		view.setItemAnimator(null);
+		view.setLayoutAnimation(null);
+		return view;
 	}
 
 	@Override
@@ -156,8 +170,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		fastRoute.setSummaryOn(R.string.shared_string_on);
 		fastRoute.setSummaryOff(R.string.shared_string_off);
 
-		setupSelectRouteRecalcDistance(screen);
-
 		if (am.getRouteService() == RouteProvider.RouteService.OSMAND){
 			GeneralRouter router = app.getRouter(am);
 			clearParameters();
@@ -219,14 +231,12 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 					String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, p.getId(), p.getDescription());
 
 					if (p.getType() == RoutingParameterType.BOOLEAN) {
-						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
-
+						OsmandPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 						SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_with_descr_dialog_and_switch);
 						switchPreferenceEx.setDescription(description);
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
 						switchPreferenceEx.setSummaryOn(R.string.shared_string_on);
 						switchPreferenceEx.setSummaryOff(R.string.shared_string_off);
-
 						screen.addPreference(switchPreferenceEx);
 					} else {
 						Object[] vls = p.getPossibleValues();
@@ -235,12 +245,10 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 						for (Object o : vls) {
 							svlss[i++] = o.toString();
 						}
-						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingProperty(p.getId(), p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
-
+						OsmandPreference<String> pref = settings.getCustomRoutingProperty(p.getId(), p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
 						ListPreferenceEx listPreferenceEx = (ListPreferenceEx) createListPreferenceEx(pref.getId(), p.getPossibleValueDescriptions(), svlss, title, R.layout.preference_with_descr);
 						listPreferenceEx.setDescription(description);
 						listPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
-
 						screen.addPreference(listPreferenceEx);
 					}
 				}
@@ -260,6 +268,36 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			straightAngle.setIcon(getRoutingPrefIcon("routing_recalc_distance")); //TODO change for appropriate icon when available
 			getPreferenceScreen().addPreference(straightAngle);
 		}
+
+		addDivider(screen);
+		setupRouteRecalcHeader(screen);
+		setupSelectRouteRecalcDistance(screen);
+		setupReverseDirectionRecalculation(screen);
+	}
+
+	private void addDivider(PreferenceScreen screen) {
+		Preference divider = new Preference(requireContext());
+		divider.setLayoutResource(R.layout.simple_divider_item);
+		screen.addPreference(divider);
+	}
+
+	private void setupReverseDirectionRecalculation(PreferenceScreen screen) {
+		SwitchPreferenceEx recalcRouteReverseDirectionPreference =
+				createSwitchPreferenceEx(settings.DISABLE_WRONG_DIRECTION_RECALC.getId(),
+						R.string.in_case_of_reverse_direction,
+						R.layout.preference_with_descr_dialog_and_switch);
+		recalcRouteReverseDirectionPreference.setIcon(
+				getRoutingPrefIcon(settings.DISABLE_WRONG_DIRECTION_RECALC.getId()));
+		recalcRouteReverseDirectionPreference.setSummaryOn(R.string.shared_string_enabled);
+		recalcRouteReverseDirectionPreference.setSummaryOff(R.string.shared_string_disabled);
+		screen.addPreference(recalcRouteReverseDirectionPreference);
+	}
+
+	private void setupRouteRecalcHeader(PreferenceScreen screen) {
+		PreferenceCategory routingCategory = new PreferenceCategory(requireContext());
+		routingCategory.setLayoutResource(R.layout.preference_category_with_descr);
+		routingCategory.setTitle(R.string.recalculate_route);
+		screen.addPreference(routingCategory);
 	}
 
 	@Override
@@ -419,6 +457,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			}
 			recalculateRoute();
 		} else if (ROUTING_SHORT_WAY.equals(prefId) && newValue instanceof Boolean) {
+			applyPreference(ROUTING_SHORT_WAY, applyToAllProfiles, newValue);
 			applyPreference(settings.FAST_ROUTE_MODE.getId(), applyToAllProfiles, !(Boolean) newValue);
 		} else if (ROUTING_RECALC_DISTANCE.equals(prefId)) {
 			boolean enabled = false;
@@ -433,6 +472,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			applyPreference(ROUTING_RECALC_DISTANCE, applyToAllProfiles, valueToSave);
 			applyPreference(settings.DISABLE_OFFROUTE_RECALC.getId(), applyToAllProfiles, !enabled);
 			updateRouteRecalcDistancePref();
+		} else if (settings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(prefId)){
+			applyPreference(settings.DISABLE_WRONG_DIRECTION_RECALC.getId(), applyToAllProfiles, newValue);
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}
@@ -544,7 +585,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 				return getPersistentPrefIcon(R.drawable.ic_action_road_works_dark);
 			case ROUTING_RECALC_DISTANCE:
 				return getPersistentPrefIcon(R.drawable.ic_action_minimal_distance);
-
+			case ROUTING_RECALC_WRONG_DIRECTION:
+				return getPersistentPrefIcon(R.drawable.ic_action_reverse_direction);
 			default:
 				return null;
 		}

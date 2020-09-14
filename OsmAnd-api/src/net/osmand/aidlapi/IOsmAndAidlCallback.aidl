@@ -51,4 +51,9 @@ interface IOsmAndAidlCallback {
      *  Callback for {@link IOsmAndAidlInterface} registerForVoiceRouterMessages() method.
      */
     void onVoiceRouterNotify(in OnVoiceNavigationParams params);
+
+    /**
+     *  Callback for {@link IOsmAndAidlInterface} registerForKeyEvents() method.
+     */
+    void onKeyEvent(in KeyEvent params);
 }

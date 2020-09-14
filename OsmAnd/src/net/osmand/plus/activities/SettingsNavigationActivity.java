@@ -30,15 +30,10 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandSettings.AutoZoomMap;
-import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings.SpeedConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -48,6 +43,11 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.AutoZoomMap;
+import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings.SpeedConstants;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
@@ -165,33 +165,34 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		registerListPreference(settings.ARRIVAL_DISTANCE_FACTOR, screen, arrivalNames, arrivalValues);
 
 
+		//array size must be equal!
+		Float[] speedLimitsKmh = new Float[]{-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
+		Float[] speedLimitsMph = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
+		//array size must be equal!
+		Float[] speedLimitsKmhPos = new Float[]{0f, 5f, 7f, 10f, 15f, 20f};
+		Float[] speedLimitsMphPos = new Float[]{0f, 3f, 5f, 7f, 10f, 15f};
 		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
-			Float[] speedLimitsKm = new Float[]{-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
-			Float[] speedLimitsKmPos = new Float[]{0f, 5f, 7f, 10f, 15f, 20f};
-			String[] speedNames = new String[speedLimitsKm.length];
-			String[] speedNamesPos = new String[speedLimitsKmPos.length];
-			for (int i = 0; i < speedLimitsKm.length; i++) {
-				speedNames[i] = speedLimitsKm[i].intValue() + " " + getString(R.string.km_h);
+			String[] speedNames = new String[speedLimitsKmh.length];
+			String[] speedNamesPos = new String[speedLimitsKmhPos.length];
+			for (int i = 0; i < speedLimitsKmh.length; i++) {
+				speedNames[i] = speedLimitsKmh[i].intValue() + " " + getString(R.string.km_h);
 			}
-			for (int i = 0; i < speedLimitsKmPos.length; i++) {
-				speedNamesPos[i] = speedLimitsKmPos[i].intValue() + " " + getString(R.string.km_h);
+			for (int i = 0; i < speedLimitsKmhPos.length; i++) {
+				speedNamesPos[i] = speedLimitsKmhPos[i].intValue() + " " + getString(R.string.km_h);
 			}
-			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsKm);
-			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS, screen, speedNamesPos, speedLimitsKmPos);
+			registerListPreference(settings.SPEED_LIMIT_EXCEED_KMH, screen, speedNames, speedLimitsKmh);
+			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH, screen, speedNamesPos, speedLimitsKmhPos);
 		} else {
-			Float[] speedLimitsMiles = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
-			Float[] speedLimitsMilesPos = new Float[]{0f, 3f, 5f, 7f, 10f, 15f};
-
-			String[] speedNames = new String[speedLimitsMiles.length];
+			String[] speedNames = new String[speedLimitsMph.length];
+			String[] speedNamesPos = new String[speedLimitsMphPos.length];
 			for (int i = 0; i < speedNames.length; i++) {
-				speedNames[i] = speedLimitsMiles[i].intValue() + " " + getString(R.string.mile_per_hour);
+				speedNames[i] = speedLimitsMph[i].intValue() + " " + getString(R.string.mile_per_hour);
 			}
-			String[] speedNamesPos = new String[speedLimitsMilesPos.length];
 			for (int i = 0; i < speedNamesPos.length; i++) {
-				speedNamesPos[i] = speedLimitsMiles[i].intValue() + " " + getString(R.string.mile_per_hour);
+				speedNamesPos[i] = speedLimitsMphPos[i].intValue() + " " + getString(R.string.mile_per_hour);
 			}
-			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsMiles);
-			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS, screen, speedNamesPos, speedLimitsMilesPos);
+			registerListPreference(settings.SPEED_LIMIT_EXCEED_KMH, screen, speedNames, speedLimitsKmh);
+			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH, screen, speedNamesPos, speedLimitsKmhPos);
 		}
 
 		PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");
@@ -749,22 +750,26 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 		float settingsMinSpeed = mode.getMinSpeed();
 		float settingsMaxSpeed = mode.getMaxSpeed();
+		float settingsDefaultSpeed = mode.getDefaultSpeed();
 
-		final int[] defaultValue = {Math.round(mode.getDefaultSpeed() * ratio[0])};
+		final int[] defaultValue = {Math.round(settingsDefaultSpeed * ratio[0])};
 		final int[] minValue = new int[1];
 		final int[] maxValue = new int[1];
 		final int min;
 		final int max;
-		if (defaultSpeedOnly) {
-			minValue[0] = Math.round(1 * ratio[0]);
-			maxValue[0] = Math.round(300 * ratio[0]);
+		if (defaultSpeedOnly || router == null) {
+			minValue[0] = Math.round(Math.min(1, settingsDefaultSpeed) * ratio[0]);
+			maxValue[0] = Math.round(Math.max(300, settingsDefaultSpeed) * ratio[0]);
 			min = minValue[0];
 			max = maxValue[0];
 		} else {
-			minValue[0] = Math.round((settingsMinSpeed > 0 ? settingsMinSpeed : router.getMinSpeed()) * ratio[0]);
-			maxValue[0] = Math.round((settingsMaxSpeed > 0 ? settingsMaxSpeed : router.getMaxSpeed()) * ratio[0]);
-			min = Math.round(router.getMinSpeed() * ratio[0] / 2f);
-			max = Math.round(router.getMaxSpeed() * ratio[0] * 1.5f);
+			float minSpeedValue = settingsMinSpeed > 0 ? settingsMinSpeed : router.getMinSpeed();
+			float maxSpeedValue = settingsMaxSpeed > 0 ? settingsMaxSpeed : router.getMaxSpeed();
+			minValue[0] = Math.round(Math.min(minSpeedValue, settingsDefaultSpeed) * ratio[0]);
+			maxValue[0] = Math.round(Math.max(maxSpeedValue, settingsDefaultSpeed) * ratio[0]);
+
+			min = Math.round(Math.min(minValue[0], router.getMinSpeed() * ratio[0] / 2f));
+			max = Math.round(Math.max(maxValue[0], router.getMaxSpeed() * ratio[0] * 1.5f));
 		}
 
 		boolean nightMode = !app.getSettings().isLightContentForMode(mode);

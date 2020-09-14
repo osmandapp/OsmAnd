@@ -63,10 +63,16 @@ public class SimplePopUpMenuItemAdapter
 	public static class SimplePopUpMenuItem {
 		private CharSequence title;
 		private Drawable icon;
+		private View.OnClickListener onClickListener;
 
 		public SimplePopUpMenuItem(CharSequence title, Drawable icon) {
 			this.title = title;
 			this.icon = icon;
+		}
+
+		public SimplePopUpMenuItem(CharSequence title, Drawable icon, View.OnClickListener onClickListener) {
+			this(title, icon);
+			this.onClickListener = onClickListener;
 		}
 
 		public CharSequence getTitle() {
@@ -75,6 +81,10 @@ public class SimplePopUpMenuItemAdapter
 
 		public Drawable getIcon() {
 			return icon;
+		}
+
+		public View.OnClickListener getOnClickListener() {
+			return onClickListener;
 		}
 	}
 }

@@ -1384,7 +1384,7 @@
     <string name="poi_social_facility_for_diseased">Хворі</string>
     <string name="poi_water_characteristic_mineral">Мінеральні</string>
     <string name="poi_social_facility_for_child_juvenile">Діти та підлітки</string>
-    <string name="poi_water_characteristic_mud">Характеристика води: брудна</string>
+    <string name="poi_water_characteristic_mud">Брудна</string>
     <string name="poi_theatre_genre_philharmonic">Філармонія</string>
     <string name="poi_water_characteristic_sulfuric">Сірчана</string>
     <string name="poi_theatre_genre_musical">Музичний</string>
@@ -2429,7 +2429,7 @@
     <string name="poi_traffic_mirror">Дорожнє дзеркало</string>
     <string name="poi_cuisine_international">Міжнародна</string>
     <string name="poi_payment_yandexmoney_no">Оплата через Яндекс.Гроші не приймається</string>
-    <string name="poi_memorial_cross">У вигляді хреста</string>
+    <string name="poi_memorial_cross">Хрестоподібна</string>
     <string name="poi_service_bicycle_rental_yes">Прокат</string>
     <string name="poi_openfire_yes">Розведення відкритого вогню дозволено</string>
     <string name="poi_nuclear_explosion_device">Пристрій</string>
@@ -2732,7 +2732,7 @@
     <string name="poi_delivery_yes">Доставка</string>
     <string name="poi_vending_dvd">DVD-диск</string>
     <string name="poi_surface_sett">Поверхня: бруківка</string>
-    <string name="poi_fuel_adblue">Паливо AdBlue</string>
+    <string name="poi_fuel_adblue">Рідина для очищення вихлопу дизелів</string>
     <string name="poi_massage_thai">Тайський</string>
     <string name="poi_nuclear_explosion_type_atmospheric_airdrop">Вид вибуху: атмосферний, скидання з літака</string>
     <string name="poi_provided_for_infant_yes">Послуги надаються немовлятам: так</string>
@@ -3803,7 +3803,7 @@
     <string name="poi_seamark_water_level_above_mwl">Рівень води: вище середнього</string>
     <string name="poi_seamark_water_level_below_mwl">Рівень води: нижче середнього</string>
     <string name="poi_seamark_obstruction">Завада</string>
-    <string name="poi_drinking_water_refill_yes">Поповнення питної води: так</string>
+    <string name="poi_drinking_water_refill_yes">Так</string>
     <string name="poi_drinking_water_refill_no">Поповнення питної води: ні</string>
     <string name="poi_drinking_water_refill_network">Мережа поповнення питної води</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Під тиском</string>
@@ -3820,4 +3820,14 @@
     <string name="poi_city_block">Міський квартал</string>
     <string name="poi_borough">Район</string>
     <string name="poi_give_box">Подарункова коробка</string>
+    <string name="poi_elevator">Ліфт</string>
+    <string name="poi_traffic_signals_arrow_no">Стрілка: ні</string>
+    <string name="poi_departures_board_timetable">Розклад</string>
+    <string name="poi_departures_board_realtime">Реальний час</string>
+    <string name="poi_departures_board_delay">Затримка</string>
+    <string name="poi_departures_board_yes">Так</string>
+    <string name="poi_departures_board_no">Дошка відправлень: немає</string>
+    <string name="poi_departures_board">Дошка відправлень</string>
+    <string name="poi_drinking_water_refill">Поповнення питної води</string>
+    <string name="poi_recycling_small_electrical_appliances">Невеликі електроприлади</string>
 </resources>

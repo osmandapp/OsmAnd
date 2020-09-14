@@ -11,7 +11,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -28,18 +27,18 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
@@ -48,6 +47,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.widgets.FlowLayout;
@@ -64,7 +64,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import static net.osmand.data.FavouritePoint.*;
+import static net.osmand.data.FavouritePoint.BackgroundType;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
@@ -75,6 +77,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private View view;
 	private EditText nameEdit;
 	private TextView addDelDescription;
+	private TextView addAddressBtn;
+	private TextView addToHiddenGroupInfo;
 	private boolean cancelled;
 	private boolean nightMode;
 	@DrawableRes
@@ -90,7 +94,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private LinkedHashMap<String, JSONArray> iconCategories;
 	private OsmandApplication app;
 	private View descriptionCaption;
+	private View addressCaption;
 	private EditText descriptionEdit;
+	private EditText addressEdit;
 	private int layoutHeightPrevious = 0;
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -100,7 +106,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 		app = requireMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		view = UiUtilities.getMaterialInflater(getContext(), nightMode)
+		view = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.point_editor_fragment_new, container, false);
 		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 
@@ -141,11 +147,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 					hideKeyboard();
 					descriptionEdit.clearFocus();
 					nameEdit.clearFocus();
+					addressEdit.clearFocus();
 				}
 			}
 		});
 
-		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		final int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		ImageView toolbarAction = (ImageView) view.findViewById(R.id.toolbar_action);
 		view.findViewById(R.id.background_layout).setBackgroundResource(nightMode
 				? R.color.app_bar_color_dark : R.color.list_background_color_light);
@@ -155,6 +162,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		deleteIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
 		ImageView groupListIcon = (ImageView) view.findViewById(R.id.group_list_button_icon);
 		groupListIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_group_select_all, activeColorResId));
+		addToHiddenGroupInfo = view.findViewById(R.id.add_hidden_group_info);
+		addToHiddenGroupInfo.setText(getString(R.string.add_hidden_group_info, getString(R.string.shared_string_my_places)));
 		View groupList = view.findViewById(R.id.group_list_button);
 		groupList.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -215,29 +224,69 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		}
 
 		descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
+		addressEdit = (EditText) view.findViewById(R.id.address_edit);
 		AndroidUtils.setTextPrimaryColor(view.getContext(), descriptionEdit, nightMode);
+		AndroidUtils.setTextPrimaryColor(view.getContext(), addressEdit, nightMode);
 		AndroidUtils.setHintTextSecondaryColor(view.getContext(), descriptionEdit, nightMode);
+		AndroidUtils.setHintTextSecondaryColor(view.getContext(), addressEdit, nightMode);
 		if (getDescriptionInitValue() != null) {
 			descriptionEdit.setText(getDescriptionInitValue());
 		}
+		if (getAddressInitValue() != null){
+			addressEdit.setText(getAddressInitValue());
+			addressEdit.setSelection(addressEdit.getText().length());
+		}
 
 		descriptionCaption = view.findViewById(R.id.description);
+		addressCaption = view.findViewById(R.id.address);
 		addDelDescription = (TextView) view.findViewById(R.id.description_button);
+		addAddressBtn = view.findViewById(R.id.address_button);
 		addDelDescription.setTextColor(getResources().getColor(activeColorResId));
+		addAddressBtn.setTextColor(getResources().getColor(activeColorResId));
+		addAddressBtn.setCompoundDrawablesWithIntrinsicBounds(
+				app.getUIUtilities().getIcon(R.drawable.ic_action_location_16, activeColorResId),null,null,null);
+		addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
+				app.getUIUtilities().getIcon(R.drawable.ic_action_description_16, activeColorResId),null,null,null);
 		addDelDescription.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (descriptionCaption.getVisibility() != View.VISIBLE) {
 					descriptionCaption.setVisibility(View.VISIBLE);
 					addDelDescription.setText(view.getResources().getString(R.string.delete_description));
+					addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
+							app.getUIUtilities().getIcon(R.drawable.ic_action_trash_basket_16,
+									activeColorResId),null,null,null);
 					View descriptionEdit = view.findViewById(R.id.description_edit);
 					descriptionEdit.requestFocus();
-					AndroidUtils.softKeyboardDelayed(descriptionEdit);
+					AndroidUtils.softKeyboardDelayed(getActivity(), descriptionEdit);
 				} else {
 					descriptionCaption.setVisibility(View.GONE);
 					addDelDescription.setText(view.getResources().getString(R.string.add_description));
+					addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
+							app.getUIUtilities().getIcon(R.drawable.ic_action_description_16,
+									activeColorResId),null,null,null);
 					AndroidUtils.hideSoftKeyboard(requireActivity(), descriptionEdit);
 					descriptionEdit.clearFocus();
+				}
+			}
+		});
+		AndroidUiHelper.updateVisibility(addressCaption, false);
+		addAddressBtn.setText(getAddressInitValue());
+		addAddressBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (addressCaption.getVisibility() != View.VISIBLE) {
+					addressCaption.setVisibility(View.VISIBLE);
+					addAddressBtn.setText(view.getResources().getString(R.string.delete_address));
+					TextInputEditText addressEdit = view.findViewById(R.id.address_edit);
+					addressEdit.requestFocus();
+					addressEdit.setSelection(addressEdit.getText().length());
+					AndroidUtils.softKeyboardDelayed(requireActivity(),addressEdit);
+				} else {
+					addressCaption.setVisibility(View.GONE);
+					addAddressBtn.setText(getAddressTextValue());
+					AndroidUtils.hideSoftKeyboard(requireActivity(), addressEdit);
+					addressEdit.clearFocus();
 				}
 			}
 		});
@@ -246,7 +295,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		if (app.accessibilityEnabled()) {
 			nameCaption.setFocusable(true);
 			nameEdit.setHint(R.string.access_hint_enter_name);
-			descriptionEdit.setHint(R.string.access_hint_enter_description);
 		}
 
 		View deleteButton = view.findViewById(R.id.button_delete_container);
@@ -264,7 +312,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			deleteIcon.setVisibility(View.GONE);
 			nameEdit.selectAll();
 			nameEdit.requestFocus();
-			AndroidUtils.softKeyboardDelayed(nameEdit);
+			AndroidUtils.softKeyboardDelayed(getActivity(), nameEdit);
 		} else {
 			toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
 			deleteButton.setVisibility(View.VISIBLE);
@@ -345,6 +393,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			descriptionCaption.setVisibility(View.GONE);
 			addDelDescription.setText(app.getString(R.string.add_description));
 		}
+
 	}
 
 	private void createGroupSelector() {
@@ -677,6 +726,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	public void setCategory(String name, int color) {
 		setSelectedItemWithScroll(name);
 		updateColorSelector(color, groupRecyclerView.getRootView());
+		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(name));
 	}
 
 	private void setSelectedItemWithScroll(String name) {
@@ -751,6 +801,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 
 	public abstract String getDescriptionInitValue();
 
+	public abstract String getAddressInitValue();
+
 	public abstract Drawable getNameIcon();
 
 	public abstract Drawable getCategoryIcon();
@@ -794,6 +846,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	String getDescriptionTextValue() {
 		EditText descriptionEdit = view.findViewById(R.id.description_edit);
 		String res = descriptionEdit.getText().toString().trim();
+		return Algorithms.isEmpty(res) ? null : res;
+	}
+
+	String getAddressTextValue() {
+		EditText addressEdit = view.findViewById(R.id.address_edit);
+		String res = addressEdit.getText().toString().trim();
 		return Algorithms.isEmpty(res) ? null : res;
 	}
 
@@ -895,6 +953,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 						int previousSelectedPosition = getItemPosition(selectedItemName);
 						selectedItemName = items.get(holder.getAdapterPosition());
 						updateColorSelector(getCategoryColor(selectedItemName), groupRecyclerView.getRootView());
+						AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(selectedItemName));
 						notifyItemChanged(holder.getAdapterPosition());
 						notifyItemChanged(previousSelectedPosition);
 					}
@@ -921,15 +980,15 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				}
 				int color;
 				int iconID;
-				if (!isCategoryVisible(group)) {
-					color = ContextCompat.getColor(app, R.color.text_color_secondary_light);
-					iconID = R.drawable.ic_action_hide;
-					holder.groupName.setTypeface(null, Typeface.ITALIC);
-				} else {
+				if (isCategoryVisible(group)) {
 					int categoryColor = getCategoryColor(group);
 					color = categoryColor == 0 ? getDefaultColor() : categoryColor;
 					iconID = R.drawable.ic_action_folder;
 					holder.groupName.setTypeface(null, Typeface.NORMAL);
+				} else {
+					color = ContextCompat.getColor(app, R.color.text_color_secondary_light);
+					iconID = R.drawable.ic_action_hide;
+					holder.groupName.setTypeface(null, Typeface.ITALIC);
 				}
 				holder.groupIcon.setImageDrawable(UiUtilities.tintDrawable(
 						AppCompatResources.getDrawable(app, iconID), color));

@@ -21,7 +21,7 @@ import org.xmlpull.v1.XmlPullParserException;
 public class RenderingRulesStoragePrinter {
 	
 	public static void main(String[] args) throws XmlPullParserException, IOException {
-		RenderingRulesStorage.STORE_ATTTRIBUTES = true;
+		RenderingRulesStorage.STORE_ATTRIBUTES = true;
 //		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
 		String defaultFile = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/default.render.xml";
 		if(args.length > 0) {

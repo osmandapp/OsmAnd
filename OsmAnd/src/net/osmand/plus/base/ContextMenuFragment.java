@@ -4,10 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.ClipboardManager;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -62,13 +62,14 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	public static final int MIDDLE_STATE_MIN_HEIGHT_DP = 520;
 	public static final String MENU_STATE_KEY = "menu_state_key";
 
-	private InterceptorLinearLayout mainView;
+	private LinearLayout mainView;
 	private View view;
 	private OnLayoutChangeListener containerLayoutListener;
 	private View topShadow;
+	private ViewGroup topView;
+	private View bottomScrollView;
 	private LinearLayout cardsContainer;
 	private FrameLayout bottomContainer;
-	private LockableScrollView bottomScrollView;
 
 	private boolean portrait;
 	private boolean nightMode;
@@ -148,6 +149,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return getLandscapeWidth() - getResources().getDimensionPixelSize(R.dimen.dashboard_land_shadow_width);
 	}
 
+	public float getMiddleStateKoef() {
+		return MIDDLE_STATE_KOEF;
+	}
+
 	public abstract int getToolbarHeight();
 
 	public boolean isSingleFragment() {
@@ -159,8 +164,13 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	}
 
 	@Nullable
-	public InterceptorLinearLayout getMainView() {
+	public LinearLayout getMainView() {
 		return mainView;
+	}
+
+	@Nullable
+	public ViewGroup getTopView() {
+		return topView;
 	}
 
 	public boolean isNightMode() {
@@ -237,7 +247,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return bottomContainer;
 	}
 
-	public LockableScrollView getBottomScrollView() {
+	public View getBottomScrollView() {
 		return bottomScrollView;
 	}
 
@@ -274,13 +284,19 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 		mainView = view.findViewById(getMainViewId());
 		topShadow = view.findViewById(getTopShadowViewId());
-		cardsContainer = (LinearLayout) view.findViewById(getCardsContainerViewId());
-		bottomContainer = (FrameLayout) view.findViewById(getBottomContainerViewId());
-		bottomScrollView = (LockableScrollView) view.findViewById(getBottomScrollViewId());
+		cardsContainer = view.findViewById(getCardsContainerViewId());
+		bottomContainer = view.findViewById(getBottomContainerViewId());
+		bottomScrollView = view.findViewById(getBottomScrollViewId());
 
-		bottomScrollView.setScrollingEnabled(false);
+		if (bottomScrollView instanceof LockableScrollView) {
+			((LockableScrollView) bottomScrollView).setScrollingEnabled(false);
+		}
+
+		ViewConfiguration vc = ViewConfiguration.get(context);
+		final int touchSlop = vc.getScaledTouchSlop();
+
 		if (getTopViewId() != 0) {
-			View topView = view.findViewById(getTopViewId());
+			topView = view.findViewById(getTopViewId());
 			AndroidUtils.setBackground(app, topView, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		}
 		if (!portrait) {
@@ -345,7 +361,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 						break;
 
 					case MotionEvent.ACTION_MOVE:
-						if (Math.abs(event.getRawY() - mDownY) > mainView.getTouchSlop()) {
+						if (Math.abs(event.getRawY() - mDownY) > touchSlop) {
 							moving = true;
 						}
 						if (moving) {
@@ -431,7 +447,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 			}
 		};
 
-		((InterceptorLinearLayout) mainView).setListener(slideTouchListener);
+		if (mainView instanceof InterceptorLinearLayout) {
+			((InterceptorLinearLayout) mainView).setListener(slideTouchListener);
+		}
 		mainView.setOnTouchListener(slideTouchListener);
 
 		containerLayoutListener = new OnLayoutChangeListener() {
@@ -594,6 +612,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	protected boolean isHideable() {
+		return true;
+	}
+
 	private void processScreenHeight(ViewParent parent) {
 		View container = (View) parent;
 		MapActivity mapActivity = getMapActivity();
@@ -605,7 +627,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	}
 
 	private int getMinHalfY(MapActivity mapActivity) {
-		return viewHeight - (int) Math.min(viewHeight * MIDDLE_STATE_KOEF,
+		return viewHeight - (int) Math.min(viewHeight * getMiddleStateKoef(),
 				MIDDLE_STATE_MIN_HEIGHT_DP * mapActivity.getMapView().getDensity() );
 	}
 
@@ -614,7 +636,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public int getWidth() {
-		InterceptorLinearLayout mainView = getMainView();
+		LinearLayout mainView = getMainView();
 		if (mainView != null) {
 			return mainView.getWidth();
 		} else {
@@ -765,7 +787,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 
 	private int getPosY(final int currentY, boolean needCloseMenu, int previousState) {
-		if (needCloseMenu) {
+		if (needCloseMenu && isHideable()) {
 			return screenHeight;
 		}
 		MapActivity mapActivity = getMapActivity();
@@ -840,7 +862,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 							@Override
 							public void onAnimationEnd(Animator animation) {
 								if (!canceled) {
-									if (needCloseMenu) {
+									if (needCloseMenu && isHideable()) {
 										dismiss();
 									} else {
 										updateMainViewLayout(posY);
@@ -852,7 +874,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 							}
 						}).start();
 			} else {
-				if (needCloseMenu) {
+				if (needCloseMenu && isHideable()) {
 					dismiss();
 				} else {
 					mainView.setY(posY);
@@ -1015,7 +1037,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	protected static boolean showInstance(@NonNull MapActivity mapActivity, ContextMenuFragment fragment) {
+	public static boolean showInstance(@NonNull MapActivity mapActivity, ContextMenuFragment fragment) {
 		try {
 			mapActivity.getSupportFragmentManager()
 					.beginTransaction()

@@ -32,6 +32,8 @@ public interface ITileSource {
 
 	public String getReferer();
 
+	public String getUserAgent();
+
 	public void deleteTiles(String path);
 
 	public int getAvgSize();

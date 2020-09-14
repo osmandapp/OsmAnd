@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="last_update_from_telegram_date">Senaste uppdatering från Telegram: %1$s</string>
+</resources>

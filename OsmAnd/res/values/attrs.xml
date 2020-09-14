@@ -133,6 +133,10 @@
 		<attr name="profile_save_btn" format="reference"/>
 		<attr name="profile_cancel_btn" format="reference"/>
 		<attr name="btn_bg_border_inactive" format="reference"/>
+		<attr name="btn_radio_button_left" format="reference"/>
+		<attr name="btn_radio_button_right" format="reference"/>
+		<attr name="btn_radio_button_center" format="reference"/>
+		<attr name="bg_dash_line" format="reference"/>
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

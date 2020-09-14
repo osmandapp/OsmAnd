@@ -21,7 +21,6 @@ import android.widget.TextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.MenuItemCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.core.samples.android.sample1.OsmandResources;
@@ -91,7 +90,7 @@ public class ContextMenuHelper {
 				return true;
 			}
 		});
-		MenuItemCompat.setShowAsAction(mi, MenuItem.SHOW_AS_ACTION_ALWAYS);
+		mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		topBar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
@@ -108,21 +107,7 @@ public class ContextMenuHelper {
 
 		//Scale web view font size with system font size
 		float scale = ctx.getResources().getConfiguration().fontScale;
-		if (android.os.Build.VERSION.SDK_INT >= 14) {
-			settings.setTextZoom((int) (scale * 100f));
-		} else {
-			if (scale <= 0.7f) {
-				settings.setTextSize(WebSettings.TextSize.SMALLEST);
-			} else if (scale <= 0.85f) {
-				settings.setTextSize(WebSettings.TextSize.SMALLER);
-			} else if (scale <= 1.0f) {
-				settings.setTextSize(WebSettings.TextSize.NORMAL);
-			} else if (scale <= 1.15f) {
-				settings.setTextSize(WebSettings.TextSize.LARGER);
-			} else {
-				settings.setTextSize(WebSettings.TextSize.LARGEST);
-			}
-		}
+		settings.setTextZoom((int) (scale * 100f));
 
 		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
 //		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());

@@ -58,7 +58,6 @@
     <string name="map_widget_lock_screen">Kilitle</string>
     <string name="map_widget_compass">Pusula</string>
     <string name="map_widget_reset">Öntanımlılara sıfırla</string>
-    <string name="map_widget_monitoring">GPX günlüğü</string>
     <string name="map_widget_speed">Hız</string>
     <string name="map_widget_distance">Varış Noktası</string>
     <string name="bg_service_screen_lock">Kilitle</string>
@@ -155,7 +154,7 @@
     <string name="rendering_attr_showRoadMaps_name">Yollar-sadece haritalar</string>
     <string name="show_warnings_descr">Trafik uyarıları (hız sınırları, zorunlu duruşlar, hız tümsekleri, tüneller), hız kamerası uyarıları ve şerit bilgilerini ayarlayın.</string>
     <string name="use_compass_navigation_descr">Başka bir başlık algılanmadığında pusulayı kullan.</string>
-    <string name="snap_to_road_descr">Navigasyon sırasında konumu yola uydur.</string>
+    <string name="snap_to_road_descr">Navigasyon sırasında konumu yola tuttur.</string>
     <string name="snap_to_road">Yola tuttur</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
 \n 
@@ -608,7 +607,6 @@
     <string name="av_def_action_choose">İstek üzerine\?</string>
     <string name="osmand_play_title_30_chars">OsmAnd Haritalar &amp; Navigasyon</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Haritalar &amp; Yolbul</string>
-    <string name="shared_string_gpx_route">GPX Rotası</string>
     <string name="poi_query_by_name_matches_categories">Birkaç ilgili POI kategorisi bulundu.</string>
     <string name="data_to_search_poi_not_available">POI\'leri aramak için çevrim dışı verileri indirin.</string>
     <string name="old_poi_file_should_be_deleted">POI veri dosyası \'%1$s\' gereksiz ve silinebilir.</string>
@@ -617,11 +615,10 @@
     <string name="map_version_changed_info">Yeni harita dosyalarını kullanabilmek için uygulamanın yeni sürümünü indirin.</string>
     <string name="search_position_current_location_search">Konum aranıyor…</string>
     <string name="search_position_current_location_found">Benim Konum (bulundu)</string>
-    <string name="search_position_undefined">Tanımlanmamış</string>
+    <string name="shared_string_undefined">Tanımlanmamış</string>
     <string name="search_position_map_view">Güncel harita merkezi</string>
     <string name="select_search_position">Menşei:</string>
     <string name="context_menu_item_search">Yakınlarda ara</string>
-    <string name="shared_string_save_as_gpx">Yeni GPX dosyası olarak kaydet</string>
     <string name="route_successfully_saved_at">Rota \'%1$s\' olarak kaydedildi.</string>
     <string name="filename_input">Dosya adı:</string>
     <string name="local_index_upload_gpx_description">GPX dosyalarını OSM topluluğuna yükleyin ve haritaları iyileştirin.</string>
@@ -993,7 +990,7 @@
     <string name="shared_string_delete_all">Tümünü sil</string>
     <string name="animate_routing_route_not_calculated">Lütfen ilk olarak rotayı hesaplayın</string>
     <string name="animate_routing_route">Hesaplanan rotayı kullanarak simülasyon </string>
-    <string name="animate_routing_gpx">GPX Rota kullanarak simülasyonlar</string>
+    <string name="animate_routing_gpx">GPX yolu kullanarak simülasyon</string>
     <string name="shared_string_remember_my_choice">Seçimi anımsa</string>
     <string name="shared_string_and">ve</string>
     <string name="shared_string_or">veya</string>
@@ -1216,7 +1213,6 @@
     <string name="lang_et">Estonca</string>
     <string name="lang_ceb">Sabuanca</string>
     <string name="disable_recording_once_app_killed">Tek başına günlüğe eklemeyi önle</string>
-    <string name="disable_recording_once_app_killed_descrp">Uygulama kapatılırsa (son uygulamalardan) GPX iz kaydına ara verilecektir. (OsmAnd arka plan göstergesi Android bildirim çubuğundan kaybolur.)</string>
     <string name="routing_attr_avoid_shuttle_train_name">Shuttle treni yok</string>
     <string name="local_indexes_cat_wiki">Vikipedi</string>
     <string name="osm_edit_context_menu_delete">OSM düzeltmesini sil</string>
@@ -1242,8 +1238,8 @@
     <string name="shared_string_deselect">Seçimini kaldırın</string>
     <string name="shared_string_deselect_all">Tüm Seçimleri Kaldır</string>
     <string name="shared_string_collapse">Daralt</string>
-    <string name="shared_string_tracks">Benim İzlerim</string>
-    <string name="shared_string_currently_recording_track">Mevcut kaydedilen izim</string>
+    <string name="shared_string_tracks">İzlenen yollar</string>
+    <string name="shared_string_currently_recording_track">Şu anda kaydedilen yol</string>
     <string name="route_points">Rota noktaları</string>
     <string name="track_segments">İz bölümü</string>
     <string name="track_points">İz noktası</string>
@@ -1356,7 +1352,6 @@
     <string name="show_free_version_banner">Ücretsiz sürümü banner göster</string>
     <string name="show_free_version_banner_description">Ücretli sürümde bile ücretsiz sürümün afişini göster.</string>
     <string name="poi_deleted_localy">Yaptığınız değişiklikleri karşıya kez POI silinecektir</string>
-    <string name="show_gpx">GPX verilerini göster</string>
     <string name="count_of_lines">Hatlarının Sayısı</string>
     <string name="are_you_sure">Emin misiniz?</string>
     <string name="unsaved_changes_will_be_lost">Kaydedilmemiş değişiklikler kaybolacak. Devam edilsin mi\?</string>
@@ -1468,7 +1463,6 @@
     <string name="map_screen_orientation">Ekran yönlendirme</string>
     <string name="no_address_found">Hiçbir adres belirlenmedi</string>
     <string name="voices">Sesli uyarılar</string>
-    <string name="layer_gpx_layer">GPX dosyaları…</string>
     <string name="transport_context_menu">Durakta ulaşım aracı ara</string>
     <string name="rotate_map_to_bearing">Harita yönlendirme</string>
     <string name="version_index_is_not_supported">\'\'{0}\'\' indeks sürümü desteklenmemektedir</string>
@@ -1497,7 +1491,6 @@
     <string name="send_location_email_pattern">Konumu görmek için %1$s web linkini ya da %2$s Android niyet linkini takip edin</string>
     <string name="add_waypoint_dialog_added">GPX ara-noktası \'\'{0}\'\' eklendi</string>
     <string name="add_waypoint_dialog_title">Kaydedilen GPX parçaya yol noktasını ekle</string>
-    <string name="context_menu_item_add_waypoint">GPX yol noktası ekle</string>
     <string name="amenity_type_geocache">Geocache</string>
     <string name="amenity_type_leisure">Boş</string>
     <string name="gpx_option_from_start_point">Tüm izlenen yol boyunca geç</string>
@@ -1527,7 +1520,6 @@
     <string name="rendering_attr_alpineHiking_description">SAC ölçeğine göre yolları görselleştir.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Yürüyüş sembolü üst katmanı</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMC izlerine göre yolları görselleştir.</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="interrupt_music_descr">Sesli uyarılar müzik çalmayı duraklatır.</string>
     <string name="interrupt_music">Müziği duraklat</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
@@ -1632,9 +1624,12 @@
     <string name="gpx_selection_segment_title">Bölüm</string>
     <string name="gpx_selection_number_of_points">%1$s nokta</string>
     <string name="gpx_selection_point">Nokta%1$s</string>
-    <string name="gpx_selection_route_points">%1$s\nRota%2$s işaret</string>
-    <string name="gpx_selection_points">%1$s\nPoints</string>
-    <string name="gpx_selection_track">%1$s\nParça%2$s</string>
+    <string name="gpx_selection_route_points">%1$s
+\nGüzergah noktaları %2$s</string>
+    <string name="gpx_selection_points">%1$s
+\nNoktalar</string>
+    <string name="gpx_selection_track">%1$s
+\nYol %2$s</string>
     <string name="gpx_file_is_empty">Boş GPX dosyası</string>
     <string name="osmo_edit_color">Ekran rengi</string>
     <string name="int_days">Günler</string>
@@ -1663,7 +1658,7 @@
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
-    <string name="shared_string_trip_recording">Seyahat kayıt</string>
+    <string name="shared_string_trip_recording">Seyahat kaydetme</string>
     <string name="shared_string_navigation">Navigasyon</string>
     <string name="osmand_running_in_background">Arka planda çalıştır</string>
     <string name="gps_wake_up_timer">GPS uyanma aralığı</string>
@@ -1761,14 +1756,12 @@
     <string name="fav_point_dublicate_message">Sık Kullanılan, yinelemeyi önlemek için %1$s olarak yeniden adlandırıldı.</string>
     <string name="traffic_warning_border_control">Sınır denetimi</string>
     <string name="traffic_warning_payment">Gişe</string>
-    <string name="traffic_warning_calming">Trafik-hızı-yavaşlatıcı-düzenek</string>
+    <string name="traffic_warning_calming">Trafik sakinleştirme</string>
     <string name="sleep_mode_stop_dialog">GPS arka plan modunu durdur?</string>
     <string name="stop_navigation_service">Dur</string>
-    <string name="save_global_track_interval_descr">(Haritadaki GPX kayıt widget\'ı aracılığıyla etkinleştirilen) genel rota kaydı için kayıt aralığını belirtin.</string>
     <string name="save_global_track_interval">Genel kayıt tutma aralığı</string>
     <string name="background_service_int">GPS Uyandırma aralık</string>
     <string name="enable_sleep_mode">GPS arka plan modunu etkinleştirin</string>
-    <string name="save_track_to_gpx_globally">GPX dosyası parça Log</string>
     <string name="save_track_to_gpx_globally_headline">İsteğe bağlı olarak günlük takip</string>
     <string name="save_track_to_gpx_globally_descr">GPX dosyasına genel pozisyon kaydı, harita üzerindeki GPX kayıt widget\'ı kullanılarak açılabilir veya kapatılabilir.</string>
     <string name="save_current_track_descr">Geçerli rotayı şimdi GPX dosyası olarak kaydedin.</string>
@@ -1802,8 +1795,6 @@
     <string name="live_monitoring_m">Online izleme (GPX gerekli)</string>
     <string name="live_monitoring_start">Online izleme başlat</string>
     <string name="live_monitoring_stop">Online izleme durdurun</string>
-    <string name="gpx_monitoring_start">GPX kaydını devam ettir</string>
-    <string name="gpx_monitoring_stop">GPX kaydını duraklat</string>
     <string name="gpx_start_new_segment">Yeni bir segment başlat</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Araç olmayan otoyollar</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ağaç ve çalılıklar</string>
@@ -1927,7 +1918,7 @@
     <string name="storage_directory_readonly_desc">Seçilen veri saklama klasörü yazma korumalı olduğu için dahili hafızaya geçildi. Lütfen yazılabilir bir depolama dizini seçin.</string>
     <string name="storage_directory_shared">Paylaşılan bellek</string>
     <string name="shared_string_topbar">Üst menü</string>
-    <string name="recalculate_route">Rota yeniden hesapla</string>
+    <string name="recalculate_route">Güzergahı yeniden hesapla</string>
     <string name="report">Rapor</string>
     <string name="access_no_destination">Hedef ayarlanmadı</string>
     <string name="access_disable_offroute_recalc">Rota terkedildiğinde yeniden hesaplanmasın</string>
@@ -1946,7 +1937,6 @@
     <string name="access_widget_expand">Genişlet</string>
     <string name="access_sort">Sırala</string>
     <string name="map_mode">Harita kipi</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX dosyalar seçildi</string>
     <string name="rendering_value_thin_name">İnce</string>
     <string name="rendering_value_medium_name">Orta</string>
     <string name="rendering_value_bold_name">Kalın</string>
@@ -1970,7 +1960,7 @@
     <string name="search_location">Konum aranıyor…</string>
     <string name="first_usage_wizard_desc">OsmAnd\'ın konumunuzu bulmasına ve o bölge için harita indirmeyi önermesine izin verin.</string>
     <string name="search_another_country">Başka bölge seç</string>
-    <string name="storage_place_description">OsmAnd\'ın veri deposu (haritalar, GPX dosyaları vb. için): %1$s.</string>
+    <string name="storage_place_description">OsmAnd\'ın veri deposu (haritalar, yol dosyaları vb. için): %1$s.</string>
     <string name="shared_string_change">Değiştir</string>
     <string name="get_it">Al</string>
     <string name="si_mi_meters">Mil/metre</string>
@@ -1980,7 +1970,7 @@
     <string name="points_delete_multiple_succesful">Nokta(lar) silindi.</string>
     <string name="shared_string_gpx_track">Takip et</string>
     <string name="track_points_category_name">Waypointler, ilgi çekici noktalar, adlandırılmış özellikler</string>
-    <string name="max_speed">Azami hız</string>
+    <string name="max_speed">En yüksek hız</string>
     <string name="average_speed">Ortalama hız</string>
     <string name="shared_string_max">Azami</string>
     <string name="shared_string_start_time">Başlangıç zamanı</string>
@@ -2148,7 +2138,7 @@
     <string name="modify_the_search_query">Arama sorgunuzu değiştirin.</string>
     <string name="add_favourites_group_to_markers_descr">İşaretleyicilere eklemek için bir Sık Kullanılanlar kategorisi seçin.</string>
     <string name="import_as_gpx">GPX dosyası olarak içe aktar</string>
-    <string name="plan_route">Rotayı planla</string>
+    <string name="plan_route">Güzergah planla</string>
     <string name="shared_string_list">Liste</string>
     <string name="shared_string_groups">Gruplar</string>
     <string name="passed">Son kullanılan: %1$s</string>
@@ -2239,7 +2229,6 @@
     <string name="tap_on_map_to_hide_interface_descr">Harita üzerine dokunmak denetim düğmeleri ve widget\'lara geçiş yapmayı sağlar.</string>
     <string name="waypoints_added_to_map_markers">Waypoint\'ler harita işaretleyicilerine eklendi</string>
     <string name="marker_save_as_track_descr">İşaretleyicilerinizi şu GPX dosyasına aktarın:</string>
-    <string name="marker_save_as_track">GPX dosyası olarak kaydet</string>
     <string name="show_arrows_on_the_map">Haritada yön gösterici okları göster</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd seçilmiş profil için rotalı noktalara bağlanacak.</string>
     <string name="none_point_error">Lütfen en az bir nokta ekleyiniz.</string>
@@ -2258,7 +2247,7 @@
     <string name="routing_attr_allow_motorway_name">Otoyolları kullan</string>
     <string name="routing_attr_allow_motorway_description">Otoyollara izin verir.</string>
     <string name="upload_poi">POI yükleyin</string>
-    <string name="trip_rec_notification_settings_desc">Gezi kaydına izin veren bir sistem bildirimi görüntüle.</string>
+    <string name="trip_rec_notification_settings_desc">Gezi kaydını başlatmaya izin veren bir sistem bildirimi görüntüle.</string>
     <string name="shared_string_trip">Seyahat</string>
     <string name="shared_string_recorded">Kaydedildi</string>
     <string name="create_custom_poi">Özel süzgeç oluştur</string>
@@ -2328,8 +2317,8 @@
     <string name="routing_attr_height_obstacles_description">Arazi kotunda faktör (SRTM, ASTER ve EU-DEM verileri aracılığıyla).</string>
     <string name="search_map_hint">Şehir veya bölge</string>
     <string name="route_roundabout_short">%1$d çıkışa gir ve ilerle</string>
-    <string name="gpx_no_tracks_title">Henüz GPX dosyanız yok</string>
-    <string name="gpx_no_tracks_title_folder">Ayrıca klasöre GPX dosyaları ekleyebilirsiniz</string>
+    <string name="gpx_no_tracks_title">Henüz yol dosyanız yok</string>
+    <string name="gpx_no_tracks_title_folder">Ayrıca klasöre yol dosyaları ekleyebilirsiniz</string>
     <string name="gpx_add_track">Daha fazla ekle…</string>
     <string name="shared_string_appearance">Görünüm</string>
     <string name="trip_rec_notification_settings">Hızlı kaydı aç</string>
@@ -2393,7 +2382,6 @@
     <string name="make_as_start_point">Bunu kalkış noktası yap</string>
     <string name="shared_string_current">Geçerli</string>
     <string name="last_intermediate_dest_description">Ara durak ekler</string>
-    <string name="shared_string_gpx_files">GPX dosyaları</string>
     <string name="files_moved">%1$d dosya taşındı (%2$s).</string>
     <string name="files_copied">%1$d dosya kopyalandı (%2$s).</string>
     <string name="files_failed">%1$d dosya kopyalanamadı (%2$s).</string>
@@ -2462,9 +2450,9 @@
     <string name="routeInfo_road_types_name">Yol türleri</string>
     <string name="shared_string_swap">Takas</string>
     <string name="show_more">Daha fazla görüntüle</string>
-    <string name="quick_action_show_hide_gpx_tracks">GPX yollarını göster/gizle</string>
-    <string name="quick_action_gpx_tracks_hide">Gps izlerini gizle</string>
-    <string name="quick_action_gpx_tracks_show">Gps izlerini göster</string>
+    <string name="quick_action_show_hide_gpx_tracks">Yolları göster/gizle</string>
+    <string name="quick_action_gpx_tracks_hide">Yolları Gizle</string>
+    <string name="quick_action_gpx_tracks_show">Yolları Göster</string>
     <string name="add_home">Ev ekle</string>
     <string name="add_work">Iş ekle</string>
     <string name="work_button">İş</string>
@@ -2932,7 +2920,7 @@
     <string name="step_by_step">Adım adım</string>
     <string name="exit_at">Burada çık</string>
     <string name="sit_on_the_stop">Durakta bin</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Seçilen GPX yollarını haritada göstermek veya gizlemek için bir düğme.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Seçilen yolları haritada göstermek veya gizlemek için bir düğme.</string>
     <string name="add_destination_query">Lütfen önce hedefi ayarlayın</string>
     <string name="release_3_3">• Yeni \'Yol Tarifleri\' ekranı: Ev ve İş hedefi düğmelerini, \'önceki rota\' kısayolunu, etkin GPX yol-izlerinin ve işaretleyicilerin listesini, arama geçmişini görüntüler
 \n
@@ -3003,7 +2991,6 @@
     <string name="quick_action_map_style_switch">Harita tarzı \"%s\" olarak değiştirildi.</string>
     <string name="quick_action_navigation_voice_off">Sesi Aç</string>
     <string name="quick_action_navigation_voice_on">Sesi Kapat</string>
-    <string name="quick_action_add_gpx">GPX ara noktası ekle</string>
     <string name="quick_action_edit_action">Eylemi düzenle</string>
     <string name="quick_actions_delete">Eylemi sil</string>
     <string name="quick_actions_delete_text">\"%s\" eylemini silmek istediğinizden emin misiniz\?</string>
@@ -3165,14 +3152,11 @@
     <string name="route_point_one">1. rota noktası</string>
     <string name="add_route_points">Rota Noktaları Ekle</string>
     <string name="add_line">Hat Ekle</string>
-    <string name="empty_state_my_tracks">GPX dosyaları ekle</string>
-    <string name="empty_state_my_tracks_desc">GPX dosyalarını içe aktarın veya izlenen yolları kaydedin.</string>
     <string name="empty_state_favourites">Sık Kullanılanlara ekle</string>
     <string name="empty_state_favourites_desc">Sık Kullanılanları içe aktarın veya haritadaki noktaları işaretleyerek ekleyin.</string>
     <string name="import_track">GPX dosyasını içe aktar</string>
     <string name="import_track_desc">%1$s dosyası ara noktalar içermiyor, izlenen yol olarak içe aktar\?</string>
     <string name="move_point">Hareket Noktası</string>
-    <string name="add_segment_to_the_track">GPX dosyasına ekle</string>
     <string name="osm_recipients_label">OSM alıcıları</string>
     <string name="total_donations">Toplam bağış</string>
     <string name="day_off_label">kapalı</string>
@@ -3265,7 +3249,7 @@
     <string name="routeInfo_piste_difficulty_name">Pist zorluğu</string>
     <string name="routing_attr_width_name">Genişlik sınırı</string>
     <string name="routing_attr_width_description">Rotalarda izin verilen araç genişlik sınırını belirtin.</string>
-    <string name="avoid_in_routing_descr_">Belirli rotalardan ve yol türlerinden kaçının</string>
+    <string name="avoid_in_routing_descr_">Belirli güzergahlardan ve yol türlerinden kaçının</string>
     <string name="app_mode_utv">Yan yana</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Hava yolu</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Bağlantı</string>
@@ -3396,7 +3380,7 @@
     <string name="video_notes">Video notları</string>
     <string name="photo_notes">Fotoğraf notları</string>
     <string name="route_recalculation">Rotanın yeniden hesaplanması</string>
-    <string name="accessibility_announce">Anons</string>
+    <string name="accessibility_announce">Duyuru</string>
     <string name="login_and_pass">Kullanıcı adı ve parola</string>
     <string name="plugin_global_prefs_info">Bu ayarlar tüm profiller için geçerlidir.</string>
     <string name="osm_editing">OSM düzenleme</string>
@@ -3543,9 +3527,9 @@
     <string name="restore_all_profile_settings">Tüm profil ayarları geri yüklensin mi\?</string>
     <string name="restore_all_profile_settings_descr">Bu profili oluşturduktan/ içe aktardıktan sonra tüm profil ayarları orijinal değerlerine geri yüklenecektir.</string>
     <string name="clear_recorded_data_warning">Kayıtlı verileri silmek istediğinize emin misiniz\?</string>
-    <string name="recalculate_route_in_deviation">Sapma durumunda rotayı yeniden hesapla</string>
-    <string name="select_distance_route_will_recalc">Rotanın yeniden hesaplanacağı mesafeyi seçin.</string>
-    <string name="recalculate_route_distance_promo">Rotadan geçerli konuma olan mesafe seçilen değerden fazla ise rota yeniden hesaplanacaktır.</string>
+    <string name="recalculate_route_in_deviation">Sapma durumunda güzergahı yeniden hesapla</string>
+    <string name="select_distance_route_will_recalc">Güzergahın yeniden hesaplanacağı mesafeyi seçin.</string>
+    <string name="recalculate_route_distance_promo">Güzergahtan geçerli konuma olan mesafe seçilen değerden fazla ise güzergah yeniden hesaplanacaktır.</string>
     <string name="n_items_of_z">%1$s / %2$s</string>
     <string name="download_slope_maps">Yamaçlar</string>
     <string name="quick_action_show_hide_terrain">Araziyi göster / gizle</string>
@@ -3755,7 +3739,7 @@
     <string name="shared_string_uninstall">Kaldır</string>
     <string name="shared_string_bearing">Kerteriz</string>
     <string name="item_deleted">%1$s silindi</string>
-    <string name="speed_cameras_restart_descr">Hız kamerası verilerini tamamen silmek için yeniden başlatma gerekmektedir.</string>
+    <string name="speed_cameras_restart_descr">Tüm hız kamerası verilerini silmek için uygulamayı yeniden başlatın.</string>
     <string name="shared_string_uninstall_and_restart">Kaldır ve Yeniden Başlat</string>
     <string name="speed_cameras_removed_descr">Bu aygıtta hız kameraları yok.</string>
     <string name="app_mode_inline_skates">Paten</string>
@@ -3764,8 +3748,8 @@
     <string name="quick_action_remove_next_destination_descr">Güzergahdaki geçerli hedef noktası silinecektir. Eğer bu varış noktası olacaksa, navigasyon duracaktır.</string>
     <string name="please_provide_point_name_error">Lütfen nokta için bir ad belirtin</string>
     <string name="lenght_limit_description">Aracınızın uzunluğunu belirtin, uzun araçlar için bazı güzergah kısıtlamaları geçerli olabilir.</string>
-    <string name="quick_action_remove_next_destination">Sonraki varış noktasını sil</string>
-    <string name="use_volume_buttons_as_zoom_descr">Harita yakınlaştırma seviyesini cihaz ses seviyesi düğmeleriyle denetlemeyi etkinleştirin.</string>
+    <string name="quick_action_remove_next_destination">En yakın varış noktasını sil</string>
+    <string name="use_volume_buttons_as_zoom_descr">Harita yakınlaştırma seviyesini cihaz ses seviyesi düğmelerini kullanarak denetleyin.</string>
     <string name="use_volume_buttons_as_zoom">Yakınlaştırma için ses seviyesi düğmeleri</string>
     <string name="search_download_wikipedia_maps">Wikipedia haritalarını indir</string>
     <string name="plugin_wikipedia_description">Wikipedia\'dan ilgi çekici yerler hakkında bilgi alın. Bu sizin çevrim dışı cep rehberinizdir - sadece Wikipedia eklentisini etkinleştirin ve etrafınızdaki nesneler hakkında makalelerin tadını çıkarın.</string>
@@ -3774,5 +3758,60 @@
     <string name="app_mode_wheelchair">Tekerlekli sandalye</string>
     <string name="app_mode_wheelchair_forward">İleri tekerlekli sandalye</string>
     <string name="app_mode_go_cart">Go-kart</string>
-    <string name="osm_edit_closed_note">Kapatılmış OSM Notu</string>
+    <string name="osm_edit_closed_note">Kapatılmış OSM notu</string>
+    <string name="add_to_a_track">İzlemeye ekle</string>
+    <string name="set_working_days_to_continue">Devam etmek için çalışma günlerini ayarla</string>
+    <string name="route_between_points">Noktalar arasındaki güzergah</string>
+    <string name="plan_a_route">Güzergah planla</string>
+    <string name="add_hidden_group_info">Seçilen grup gizli olduğu için eklenen nokta haritada görünmeyecek, \"%s\" içinde bulabilirsiniz.</string>
+    <string name="track_show_start_finish_icons">Başlangıç ve bitiş simgelerini göster</string>
+    <string name="select_track_width">Genişlik seç</string>
+    <string name="gpx_split_interval_descr">Yol üzerinde mesafe veya zaman işaretlerinin görüntüleneceği aralığı seçin.</string>
+    <string name="gpx_split_interval_none_descr">İstediğiniz bölme seçeneğini seçin: zamana veya mesafeye göre.</string>
+    <string name="shared_string_custom">Özel</string>
+    <string name="gpx_direction_arrows">Yön okları</string>
+    <string name="track_coloring_solid">Koyu</string>
+    <string name="plan_route_last_edited">Son düzenleme</string>
+    <string name="plan_route_import_track">Yolu içe aktar</string>
+    <string name="plan_route_open_existing_track">Mevcut yolu aç</string>
+    <string name="plan_route_create_new_route">Yeni güzergah oluştur</string>
+    <string name="plan_route_select_track_file_for_open">Açmak için bir yol dosyası seçin.</string>
+    <string name="shared_string_done">Bitti</string>
+    <string name="overwrite_track">Yolun üzerine yaz</string>
+    <string name="route_between_points_warning_desc">Ardından, bu seçeneği kullanmak için navigasyon profillerinizden biriyle izlenen yolunuzu izin verilen en yakın yola tutturun.</string>
+    <string name="save_as_new_track">Yeni bir yol olarak kaydet</string>
+    <string name="reverse_route">Ters güzergah</string>
+    <string name="route_between_points_whole_track_button_desc">Tüm yol, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="route_between_points_next_segment_button_desc">Sadece sonraki bölüm, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="route_between_points_desc">Düz bir çizgi ile noktaları nasıl birleştireceğinizi veya seçili profille aralarında nasıl güzergah hesaplayacağınızı seçin.</string>
+    <string name="whole_track">Tüm yol</string>
+    <string name="next_segment">Sonraki bölüm</string>
+    <string name="threshold_distance">Eşik mesafesi</string>
+    <string name="navigation_profile">Navigasyon profili</string>
+    <string name="route_between_points_add_track_desc">Kendisine yeni bir bölümün ekleneceği bir yol dosyası seçin.</string>
+    <string name="street_level_imagery">Sokak seviyesi görüntüleri</string>
+    <string name="plan_route_exit_dialog_descr">Planlanan güzergahtaki tüm değişiklikleri kapatarak atmak istediğinizden emin misiniz\?</string>
+    <string name="in_case_of_reverse_direction">Ters yön durumunda</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="open_saved_track">Kaydedilen yolu aç</string>
+    <string name="shared_string_is_saved">kaydedildi</string>
+    <string name="one_point_error">Lütfen en az iki nokta ekleyin.</string>
+    <string name="shared_string_redo">Yeniden yap</string>
+    <string name="layer_gpx_layer">İzlenen yollar</string>
+    <string name="save_track_to_gpx_globally">Yolu GPX dosyasına kaydet</string>
+    <string name="empty_state_my_tracks_desc">Yol dosyalarını içe aktarın veya kaydedin</string>
+    <string name="shared_string_save_as_gpx">Yeni yol dosyası olarak kaydet</string>
+    <string name="add_segment_to_the_track">Bir yol dosyasına ekle</string>
+    <string name="shared_string_gpx_files">İzlenen yollar</string>
+    <string name="show_gpx">İzlenen yollar</string>
+    <string name="empty_state_my_tracks">Yol dosyaları ekle</string>
+    <string name="context_menu_item_add_waypoint">Yol ara noktası ekle</string>
+    <string name="quick_action_add_gpx">Yol ara noktası ekle</string>
+    <string name="map_widget_monitoring">Seyahat kaydetme</string>
+    <string name="marker_save_as_track">Yol dosyası olarak kaydet</string>
+    <string name="number_of_gpx_files_selected_pattern">%s yol dosyası seçildi</string>
+    <string name="disable_recording_once_app_killed_descrp">(Son uygulamalar aracılığıyla) uygulama kapatıldığında yol kaydını duraklatacaktır. (OsmAnd arka plan göstergesi Android bildirim çubuğundan kaybolur.)</string>
+    <string name="save_global_track_interval_descr">Genel yol kaydı için kayıt aralığını seçin (haritadaki seyahat kayıt widget\'ı aracılığıyla etkin).</string>
+    <string name="gpx_monitoring_stop">Seyahat kaydetmeyi duraklat</string>
+    <string name="gpx_monitoring_start">Seyahat kaydetmeyi devam ettir</string>
 </resources>

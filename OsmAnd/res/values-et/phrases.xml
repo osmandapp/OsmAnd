@@ -326,7 +326,7 @@
     <string name="poi_service_tyres">Rehvid</string>
     <string name="poi_vehicle_inspection">Sõiduki tehnoülevaatus</string>
     <string name="poi_car_wash">Autopesula</string>
-    <string name="poi_fuel">Bensiinijaam; Bensiinijaam; Tankla; Bensiinijaam</string>
+    <string name="poi_fuel">Tankla; Bensiinijaam</string>
     <string name="poi_vehicle_ramp">Sõiduki kaldtee</string>
     <string name="poi_compressed_air">Suruõhk</string>
     <string name="poi_parking">Parkimine</string>
@@ -634,7 +634,7 @@
     <string name="poi_route_ferry_ref">Parvlaev</string>
     <string name="poi_fuel_91ul">91UL kütus</string>
     <string name="poi_fuel_100ll">100LL kütus</string>
-    <string name="poi_fuel_adblue">AdBlue kütus</string>
+    <string name="poi_fuel_adblue">Diiselväljalaske vedelik (AdBlue)</string>
     <string name="poi_fuel_wood">Kütus: puit</string>
     <string name="poi_fuel_charcoal">Kütus: puusüsi</string>
     <string name="poi_fuel_coal">Kütus: kivisüsi</string>
@@ -678,7 +678,7 @@
     <string name="poi_horse_racing">Traavivõistlused</string>
     <string name="poi_ice_skating">Uisutamine</string>
     <string name="poi_ice_stock">Jäävaru</string>
-    <string name="poi_korfbal">Korfbal</string>
+    <string name="poi_korfbal">Korfball</string>
     <string name="poi_orienteering">Orienteerumine</string>
     <string name="poi_paddle_tennis">Mõlatennis</string>
     <string name="poi_paragliding">Paraliuglemine</string>
@@ -1311,7 +1311,7 @@
     <string name="poi_pump_powered">Tehisjõul</string>
     <string name="poi_pump_no">Pump puudub</string>
     <string name="poi_water_characteristic_mineral">Mineraal</string>
-    <string name="poi_water_characteristic_mud">Vee omadus: muda</string>
+    <string name="poi_water_characteristic_mud">Muda</string>
     <string name="poi_water_characteristic_sulfuric">Väävelhape</string>
     <string name="poi_water_point">Veepunkt</string>
     <string name="poi_species">Liigid</string>
@@ -1354,7 +1354,7 @@
     <string name="poi_tactile_paving_yes">Jah</string>
     <string name="poi_tactile_paving_no">Ilma kombatava sillutiseta</string>
     <string name="poi_traffic_signals_sound_yes">Jah</string>
-    <string name="poi_traffic_signals_sound_no">Ei</string>
+    <string name="poi_traffic_signals_sound_no">Heli: ei</string>
     <string name="poi_traffic_signals_sound_walk">Ainult kui kõndimine on lubatud</string>
     <string name="poi_toll_hgv_yes">Raskeveokite teemaks</string>
     <string name="poi_rescue_station">Päästejaam</string>
@@ -1639,7 +1639,7 @@
     <string name="poi_service_electrical">Elektrisõidukite remont</string>
     <string name="poi_motorcycle_repair">Mootorrataste remont</string>
     <string name="poi_self_service_yes">Jah</string>
-    <string name="poi_self_service_no">Iseteenindust ei ole</string>
+    <string name="poi_self_service_no">Ei</string>
     <string name="poi_automated_yes">Jah</string>
     <string name="poi_automated_no">Mitteautomaatne</string>
     <string name="poi_full_service_yes">Täisteenus</string>
@@ -1663,7 +1663,7 @@
     <string name="poi_diaper_yes">Mähkmevahetuslaud</string>
     <string name="poi_diaper_no">Mähkmevahetuslaud puudub</string>
     <string name="poi_diaper_room">Mähkmevahetustuba</string>
-    <string name="poi_car_wash_no">Autopesu: ei</string>
+    <string name="poi_car_wash_no">Ei</string>
     <string name="poi_maxstay">Parkimisaja piir</string>
     <string name="poi_vending_parking_tickets">Parkimispiletid</string>
     <string name="poi_vending_cigarettes">Sigaretid</string>
@@ -1709,7 +1709,7 @@
     <string name="poi_memorial_koshinto">Koshinto</string>
     <string name="poi_memorial_blue_plaque">Sinine tahvel</string>
     <string name="poi_memorial_jizo">Jizo</string>
-    <string name="poi_memorial_cross">Ristikujuline</string>
+    <string name="poi_memorial_cross">Risti kuju</string>
     <string name="poi_memorial_vehicle">Sõiduk</string>
     <string name="poi_memorial_obelisk">Obelisk</string>
     <string name="poi_inscription">Pealdis</string>
@@ -3792,7 +3792,7 @@
     <string name="poi_sms">SMS</string>
     <string name="poi_drinking_water_refill_network">Joogivee täitmise võrgustik</string>
     <string name="poi_drinking_water_refill_no">Joogivee täitmine: ei</string>
-    <string name="poi_drinking_water_refill_yes">Joogivee täitmine: jah</string>
+    <string name="poi_drinking_water_refill_yes">Jah</string>
     <string name="poi_seamark_obstruction">Takistus</string>
     <string name="poi_seamark_water_level_below_mwl">Veetase: alla keskmise veetaseme</string>
     <string name="poi_seamark_water_level_above_mwl">Veetase: üle keskmise veetaseme</string>
@@ -3800,4 +3800,28 @@
     <string name="poi_seamark_water_level_floods">Veetase: üleujutatud</string>
     <string name="poi_seamark_water_level_covers">Veetase: kaetud</string>
     <string name="poi_seamark_water_level_awash">Veetase: veega kaetud</string>
+    <string name="poi_city_block">Linnaosa</string>
+    <string name="poi_borough">Vald</string>
+    <string name="poi_give_box">Annetuskast</string>
+    <string name="poi_traffic_signals_arrow">Teeviit</string>
+    <string name="poi_traffic_signals_arrow_yes">Jah</string>
+    <string name="poi_traffic_signals_vibration_yes">Jah</string>
+    <string name="poi_traffic_signals_vibration_no">Vibreerimine: ei</string>
+    <string name="poi_pump_status_missing_beam">Pumba olek: kiir puudub</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">Imatav</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Hüdrant</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">Pinnavesi</string>
+    <string name="poi_fire_hydrant_type_pipe">Toru</string>
+    <string name="poi_traffic_signals_vibration">Värin</string>
+    <string name="poi_fire_hydrant_pressure_filter">Surve</string>
+    <string name="poi_traffic_signals_arrow_no">Nool: ei</string>
+    <string name="poi_elevator">Lift</string>
+    <string name="poi_departures_board_timetable">Sõiduplaan</string>
+    <string name="poi_departures_board_realtime">Reaalajas</string>
+    <string name="poi_departures_board_delay">Viivitus</string>
+    <string name="poi_departures_board_yes">Jah</string>
+    <string name="poi_departures_board_no">Väljuvate reiside tabloo: ei</string>
+    <string name="poi_departures_board">Väljuvate reiside tabloo</string>
+    <string name="poi_drinking_water_refill">Joogivee täitmine</string>
+    <string name="poi_recycling_small_electrical_appliances">Väikesed elektriseadmed</string>
 </resources>

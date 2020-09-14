@@ -62,8 +62,8 @@
     <string name="waypoint_visit_before">Passar antes</string>
     <string name="simulate_your_location">Simular rota</string>
     <string name="drawer">Lista simples</string>
-    <string name="short_location_on_map">Lat %1$s
-\nLon %2$s</string>
+    <string name="short_location_on_map">Latitude %1$s
+\nLongitude %2$s</string>
     <string name="tips_and_tricks_descr">Respostas às perguntas frequentes, mudanças recentes e outras.</string>
     <string name="routing_settings_2">Configurações de navegação</string>
     <string name="general_settings_2">Configurações gerais</string>
@@ -98,11 +98,10 @@
     <string name="shared_string_clear">Limpar</string>
     <string name="shared_string_clear_all">Limpar tudo</string>
     <string name="shared_string_save">Salvar</string>
-    <string name="shared_string_save_as_gpx">Salvar novo arquivo GPX</string>
     <string name="shared_string_rename">Renomear</string>
     <string name="shared_string_delete">Apagar</string>
     <string name="shared_string_delete_all">Apagar tudo</string>
-    <string name="shared_string_share">Enviar</string>
+    <string name="shared_string_share">Compartilhe</string>
     <string name="shared_string_apply">Aplicar</string>
     <string name="shared_string_control_start">Iniciar</string>
     <string name="shared_string_control_stop">Parar</string>
@@ -172,10 +171,9 @@
 \n
 \nPara retornar a um estilo convencional de mapa do OsmAnd, simplesmente desative este complemento ou altere o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado.</string>
     <string name="plugin_ski_name">Mapa de esqui</string>
-    <string name="plugin_ski_descr">Este plugin para o OsmAnd coloca ao seu alcance detalhes de pistas de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. Rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas em um estilo especial de mapa \'Inverno\' que assimila uma paisagem de inverno cor de neve. 
+    <string name="plugin_ski_descr">Este plugin para o OsmAnd coloca ao seu alcance detalhes de pistas de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. Rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas em um estilo especial de mapa \'Inverno\' que assimila uma paisagem de inverno cor de neve.
 \n
-\n 
-\nAtivando esta visão muda o estilo de mapa de \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado.</string>
+\nAtivando esta visão muda o estilo de mapa para \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado.</string>
     <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
     <string name="audionotes_plugin_description">Faça anotações de áudio/foto/vídeo durante uma viagem, usando um botão de mapa ou o menu de contexto da localização.</string>
     <string name="osmand_parking_plugin_name">Estacionamento</string>
@@ -299,8 +297,8 @@
     <string name="traffic_warning_speed_limit">Limite de velocidade</string>
     <string name="traffic_warning_border_control">Alfândega</string>
     <string name="traffic_warning_payment">Pedágio</string>
-    <string name="traffic_warning_stop">Placa de pare</string>
-    <string name="traffic_warning_calming">Moderador de tráfego</string>
+    <string name="traffic_warning_stop">Sinal de pare</string>
+    <string name="traffic_warning_calming">Moderação do trafego</string>
     <string name="traffic_warning">Aviso de tráfego</string>
     <string name="speak_poi">POIs próximos</string>
     <string name="way_alarms">Moderadores de tráfego</string>
@@ -308,11 +306,9 @@
     <string name="sleep_mode_stop_dialog">Parar o modo em segundo plano do GPS?</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Sempre perguntar</string>
-    <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral da pista (ativado via widget de registo GPX no mapa).</string>
     <string name="save_global_track_interval">Intervalo de registro geral</string>
     <string name="background_service_int">Intervalo de ativação do GPS</string>
     <string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
-    <string name="save_track_to_gpx_globally">Registrar trilha em arquivo GPX</string>
     <string name="save_track_to_gpx_globally_headline">Registro de trilha sob demanda</string>
     <string name="save_track_to_gpx_globally_descr">Posição geral de registro para um arquivo GPX pode ser ativada ou desativada usando o widget de registro de GPX no mapa.</string>
     <string name="save_current_track_descr">Salvar a trilha atual como arquivo GPX agora.</string>
@@ -379,8 +375,6 @@
     <string name="live_monitoring_m">Rastreamento on-line (requer GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreamento on-line</string>
     <string name="live_monitoring_stop">Parar rastreamento on-line</string>
-    <string name="gpx_monitoring_start">Retomar o registro GPX</string>
-    <string name="gpx_monitoring_stop">Pausar o registro GPX</string>
     <string name="gpx_start_new_segment">Iniciar novo rastreamento</string>
     <string name="rendering_attr_hideBuildings_name">Edifícios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Estradas não trafegáveis</string>
@@ -429,7 +423,8 @@
     <string name="gpx_timemoving">Tempo em movimento: %1$s</string>
     <string name="gpx_selection_number_of_points">%1$s pontos</string>
     <string name="gpx_selection_point">Ponto %1$s</string>
-    <string name="gpx_selection_route_points">%1$s ↵\nPontos de Rota %2$s</string>
+    <string name="gpx_selection_route_points">%1$s↵
+\nPontos de Rota %2$s</string>
     <string name="gpx_selection_points">%1$s↵\nPontos</string>
     <string name="gpx_selection_track">%1$s
 \nTrilha %2$s</string>
@@ -608,8 +603,8 @@
 \n - Sem acesso offline a POIs da Wikipedia 
 \n 
 \n OsmAnd está sendo desenvolvido ativamente e o nosso projeto e seu progresso contínuo depende de contribuições financeiras para o desenvolvimento e teste de novas funcionalidades. Por favor, considere adquirir OsmAnd+, ou financiar novas funcionalidades específicas ou fazer uma doação geral em https://osmand.net.</string>
-    <string name="day_night_info_description">Nascer do Sol: %1$s
-Pôr do Sol: %2$s</string>
+    <string name="day_night_info_description">Nascer do sol: %1$s
+\nPôr do sol: %2$s</string>
     <string name="avoid_unpaved">Sem estradas não pavimentadas</string>
     <string name="bg_service_sleep_mode_off">Ativar\n modo segundo plano</string>
     <string name="show_cameras">Radares</string>
@@ -759,7 +754,6 @@ Pôr do Sol: %2$s</string>
     <string name="map_widget_compass">Bússola</string>
     <string name="map_widget_reset">Restaurar para predefinido</string>
     <string name="map_widget_parking">Estacionamento</string>
-    <string name="map_widget_monitoring">Registro de GPX</string>
     <string name="map_widget_speed">Velocidade</string>
     <string name="map_widget_distance">Destino</string>
     <string name="map_widget_altitude">Altitude</string>
@@ -779,7 +773,7 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_parking_minutes">Minutos</string>
     <string name="osmand_parking_position_description_add_time">O carro foi estacionado em</string>
     <string name="index_settings">Gerenciar mapas</string>
-    <string name="context_menu_item_search">Pesquisar entorno</string>
+    <string name="context_menu_item_search">Pesquise por perto</string>
     <string name="local_index_descr_title">Gerenciar mapas.</string>
     <string name="show_point_options">Usar posição…</string>
     <string name="only_show">Exibir rota</string>
@@ -808,7 +802,6 @@ Pôr do Sol: %2$s</string>
     <string name="live_monitoring_interval_descr">Especificar intervalo de monitoramento on-line.</string>
     <string name="daynight_mode_auto">Nascer/Pôr do Sol</string>
     <string name="map_widget_max_speed">Limite de velocidade</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nenhum edifício encontrado.</string>
     <string name="incremental_search_city">Pesquisar cidade incrementalmente</string>
     <string name="search_villages_and_postcodes">Pesquisar mais povoados/código postal</string>
@@ -1122,7 +1115,6 @@ Pôr do Sol: %2$s</string>
     <string name="animate_route">Iniciar simulação</string>
     <string name="file_can_not_be_renamed">Não foi possível renomear o arquivo.</string>
     <string name="file_with_name_already_exists">Já existe um arquivo com esse nome.</string>
-    <string name="shared_string_gpx_route">Rota GPX</string>
     <string name="poi_query_by_name_matches_categories">Foram encontradas várias categorias de POI relacionadas.</string>
     <string name="data_to_search_poi_not_available">Faça o download de dados offline para pesquisar POIs.</string>
     <string name="poi_filter_by_name">Pesquisar por nome</string>
@@ -1135,7 +1127,7 @@ Pôr do Sol: %2$s</string>
     <string name="search_position_current_location_found">Minha Posição (encontrada)</string>
     <string name="search_position_address">Endereço…</string>
     <string name="search_position_favorites">Favoritos…</string>
-    <string name="search_position_undefined">Indefinido</string>
+    <string name="shared_string_undefined">Indefinido</string>
     <string name="search_position_map_view">Centro atual do mapa</string>
     <string name="select_search_position">Próximo a:</string>
     <string name="route_successfully_saved_at">Rota salva como \'%1$s\'.</string>
@@ -1228,7 +1220,6 @@ Pôr do Sol: %2$s</string>
     <string name="context_menu_item_share_location">Compartilhar posição</string>
     <string name="add_waypoint_dialog_added">Ponto de trajeto GPX \'\'{0}\'\' adicionado</string>
     <string name="add_waypoint_dialog_title">Adicionar parada à trilha GPX gravada</string>
-    <string name="context_menu_item_add_waypoint">Adicionar ponto GPX</string>
     <string name="amenity_type_administrative">Administrativo</string>
     <string name="amenity_type_barrier">Barreira</string>
     <string name="amenity_type_education">Educação</string>
@@ -1309,7 +1300,6 @@ Pôr do Sol: %2$s</string>
     <string name="voices">Instruções de voz</string>
     <string name="no_vector_map_loaded">Nenhum mapa vetorial foi carregado</string>
     <string name="gpx_files_not_found">Nenhum arquivo GPX encontrado no diretório de trilhas</string>
-    <string name="layer_gpx_layer">Arquivos GPX…</string>
     <string name="error_reading_gpx">Não foi possível ler os dados do GPX.</string>
     <string name="vector_data">Mapas vetoriais off-line</string>
     <string name="transport_context_menu">Pesquisar por transporte na parada</string>
@@ -1363,7 +1353,7 @@ Pôr do Sol: %2$s</string>
     <string name="route_tsll">Vire levemente à esquerda e siga</string>
     <string name="search_poi_location">Aguardando sinal…</string>
     <string name="search_near_map">Pesquisar próximo ao centro do mapa</string>
-    <string name="search_nearby">Pesquisar entorno</string>
+    <string name="search_nearby">Pesquise por perto</string>
     <string name="map_orientation_default">Mesma do aparelho</string>
     <string name="map_orientation_portrait">Vertical</string>
     <string name="map_orientation_landscape">Horizontal</string>
@@ -1562,7 +1552,6 @@ Pôr do Sol: %2$s</string>
     <string name="local_recordings_delete_all_confirm">Tem certeza de que deseja apagar %1$d notas\?</string>
     <string name="disable_recording_once_app_killed">Impedir o registro autônomo</string>
     <string name="gps_network_not_enabled">O serviço de localização está desligado. Deseja ligar\?</string>
-    <string name="disable_recording_once_app_killed_descrp">Pausará o registro de GPX após o encerramento do app (via apps recentes). (Indicação de OsmAnd em segundo plano desaparecerá da barra de notificação do Android.)</string>
     <string name="archive_wikipedia_data">Você tem dados da Wikipédia antigos e incompatíveis. Quer arquivá-los\?</string>
     <string name="download_wikipedia_files">Baixar dados adicionais da Wikipédia (%1$s MB)\?</string>
     <string name="lang_vo">Volapuque</string>
@@ -1661,7 +1650,6 @@ Pôr do Sol: %2$s</string>
     <string name="poi_action_delete">apagar</string>
     <string name="saved_at_time">Salvo em: %1$s</string>
     <string name="poi_deleted_localy">POI será excluído quando você enviar suas alterações</string>
-    <string name="show_gpx">Mostrar dados GPX</string>
     <string name="show_on_start">Mostrar no início</string>
     <string name="count_of_lines">Número de linhas</string>
     <string name="are_you_sure">Tem certeza?</string>
@@ -1811,7 +1799,7 @@ Pôr do Sol: %2$s</string>
     <string name="update">Atualizar</string>
     <string name="only_download_over_wifi">Somente baixar via Wi-Fi</string>
     <string name="live_update">Atualização ao vivo</string>
-    <string name="update_now">Atualizar agora</string>
+    <string name="update_now">Atualizar</string>
     <string name="route_distance">Distância:</string>
     <string name="route_duration">Tempo:</string>
     <string name="missing_write_external_storage_permission">OsmAnd não tem permissão para usar o cartão de memória</string>
@@ -1834,7 +1822,7 @@ Pôr do Sol: %2$s</string>
     <string name="rec_split_clip_length_desc">Limite de tempo máximo para clipes gravados.</string>
     <string name="rec_split_storage_size">Limite de armazenamento</string>
     <string name="rec_split_storage_size_desc">Quantidade de espaço que pode ser ocupado por todos os clipes gravados.</string>
-    <string name="last_map_change">Última mudança: %s</string>
+    <string name="last_map_change">Última alteração: %s</string>
     <string name="hourly">A cada hora</string>
     <string name="daily">Diariamente</string>
     <string name="weekly">Semanalmente</string>
@@ -1984,7 +1972,6 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Inserção de coordenada</string>
     <string name="marker_save_as_track_descr">Exporte seus marcadores para o seguinte arquivo GPX:</string>
-    <string name="marker_save_as_track">Salvar como arquivo GPX</string>
     <string name="move_to_history">Mover para o histórico</string>
     <string name="group_will_be_removed_after_restart">O grupo será excluído na próxima vez em que reiniciar o aplicativo.</string>
     <string name="show_arrows_on_the_map">Mostrar setas no mapa</string>
@@ -2086,7 +2073,7 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Sem estradas de gelo ou vaus</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas de gelo e vaus.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Limite para orientação do mapa</string>
-    <string name="quick_action_show_navigation_finish_dialog">Exibir \'Navegação finalizada\'</string>
+    <string name="quick_action_show_navigation_finish_dialog">Exibir notif. \'Navegação finalizada\'</string>
     <string name="mapillary_menu_title_tile_cache">Cache de quadrícula</string>
     <string name="map_widget_ruler_control">Régua de raio</string>
     <string name="show_from_zoom_level">Exibir a partir do nível de zoom</string>
@@ -2249,8 +2236,8 @@ Pôr do Sol: %2$s</string>
     <string name="route_roundabout_short">Tome %1$d sair e ir</string>
     <string name="upload_poi">Subir POI</string>
     <string name="route_calculation">Cálculo da rota</string>
-    <string name="gpx_no_tracks_title">Você não tem arquivos GPX ainda</string>
-    <string name="gpx_no_tracks_title_folder">Você pode também adicionar arquivos GPX na pasta</string>
+    <string name="gpx_no_tracks_title">Você não tem arquivos de trilha ainda</string>
+    <string name="gpx_no_tracks_title_folder">Você pode também adicionar arquivos de trilha na pasta</string>
     <string name="gpx_add_track">Adicionar…</string>
     <string name="shared_string_appearance">Aparência</string>
     <string name="trip_rec_notification_settings">Ativar gravação rápida</string>
@@ -2276,7 +2263,6 @@ Pôr do Sol: %2$s</string>
     <string name="translit_name_if_miss">Transliterar se o nome %1$s for ausente</string>
     <string name="translit_names">Transliterar nomes</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
-    <string name="add_segment_to_the_track">Adicionar a um arquivo GPX</string>
     <string name="empty_state_av_notes_desc">Adicione notas de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou os menus de contexto.</string>
     <string name="quick_action_add_destination_desc">Um botão para fazer com que a tela centralize o destino da rota, um destino selecionado anteriormente se tornaria o último destino intermediário.</string>
     <string name="quick_action_replace_destination_desc">Um botão para fazer com que a tela centralize o novo destino da rota, substituindo o destino selecionado anteriormente (se houver).</string>
@@ -2286,7 +2272,7 @@ Pôr do Sol: %2$s</string>
     <string name="auto_split_recording_title">Autodividir gravações após um intervalo</string>
     <string name="auto_split_recording_descr">Iniciar novo segmento após intervalo de 6 min, uma nova trilha após intervalo de 2 h, ou um novo arquivo depois de um longo intervalo se a data foi alterada.</string>
     <string name="upload_osm_note_description">Envie sua Nota OSM anonimamente ou através do seu perfil do OpenStreetMap.org.</string>
-    <string name="trip_rec_notification_settings_desc">Exibir uma notificação do sistema permitindo a gravação de viagem.</string>
+    <string name="trip_rec_notification_settings_desc">Exibir uma notificação do sistema que permite iniciar a gravação da viagem.</string>
     <string name="christmas_desc">Antecipando os feriados de Natal e ano novo, você pode optar por exibir POIs relacionados ao Natal, como árvores de Natal, mercados, etc.</string>
     <string name="osm_live_payment_desc">Assinatura cobrada por período selecionado. Cancele-o no Google Play a qualquer momento.</string>
     <string name="donation_to_osm_desc">Parte da sua doação é enviada aos colaboradores do OSM. O custo da assinatura permanece o mesmo.</string>
@@ -2296,7 +2282,7 @@ Pôr do Sol: %2$s</string>
     <string name="osm_live_banner_desc">Obtenha downloads ilimitados de mapas, adicionando atualizações semanais, diárias e a cada hora.</string>
     <string name="quick_action_add_gpx_descr">Um botão para adicionar um waypoint GPX no meio da tela.</string>
     <string name="av_locations_all_desc">Arquivo GPX com coordenadas e dados de todas as notas.</string>
-    <string name="storage_place_description">Armazenamento de dados do OsmAnd (para mapas, arquivos GPX, etc.): %1$s.</string>
+    <string name="storage_place_description">Armazenamento de dados do OsmAnd (para mapas, arquivos de trilha, etc.): %1$s.</string>
     <string name="first_usage_greeting">Obtenha direções e descobra novos lugares sem precisar de conexão com a Internet</string>
     <string name="rendering_attr_hideOverground_name">Objetos superficiais</string>
     <string name="get_started">Vamos começar</string>
@@ -2352,7 +2338,6 @@ Pôr do Sol: %2$s</string>
     <string name="access_autoannounce_period">Período de auto-anúncio</string>
     <string name="access_map_linked_to_location">Mapa vinculado à localização</string>
     <string name="access_shared_string_navigate_up">Navegue até</string>
-    <string name="number_of_gpx_files_selected_pattern">%s arquivos GPX selecionados</string>
     <string name="rendering_value_fine_name">Mais fino</string>
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_bold_name">Grosso</string>
@@ -2419,7 +2404,6 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_navigation_voice">Ligar/desligar voz</string>
     <string name="quick_action_navigation_voice_off">Ligar voz</string>
     <string name="quick_action_navigation_voice_on">Silenciar voz</string>
-    <string name="quick_action_add_gpx">Adicionar ponto de passagem GPX</string>
     <string name="quick_action_add_parking">Marcar estacionamento</string>
     <string name="quick_action_new_action">Adicionar ação</string>
     <string name="quick_action_edit_action">Editar ação</string>
@@ -2462,20 +2446,23 @@ Pôr do Sol: %2$s</string>
 \n • Opção de gravação GPX permite-lhe gravar a sua viagem e compartilhá-la
 \n • Através de plugin adicionais, você pode ativar curvas de nível e sombreamento de relevo</string>
     <string name="osmand_extended_description_part6">Passeio, caminhada, turismo pela cidade
-\n• O mapa mostra caminhos para passeios e caminhadas
-\n• A Wikipédia no seu idioma preferido pode dizer muito durante um turismo pela cidade
-\n• Paradas de transportes públicos (ônibus, troleibus, trem) incluindo nomes de linha, ajuda a navegar em uma nova cidade
-\n• Navegação GPS em modo pedestre constrói a sua rota usando caminhos para pedestres
-\n• Fazer upload e seguir uma rota GPX ou gravar e compartilhar a sua própria rota</string>
-    <string name="osmand_extended_description_part7">Contribua para o OSM 
-\n• Comunique falha de dados 
-\n• Carregue trilhas GPX diretamente do app 
-\n• Adicione POIs e carregue-os diretamente ao OSM (ou mais tarde se off-line)</string>
+\n • O mapa mostra caminhos para passeios e caminhadas
+\n • A Wikipédia no seu idioma preferido pode dizer muito durante um turismo pela cidade
+\n • Paradas de transportes públicos (ônibus, troleibus, trem) incluindo nomes de linha, ajuda a navegar em uma nova cidade
+\n • Navegação GPS em modo pedestre constrói a sua rota usando caminhos para pedestres
+\n • Fazer upload e seguir uma rota GPX ou gravar e compartilhar a sua própria rota
+\n</string>
+    <string name="osmand_extended_description_part7">Contribua para o OSM
+\n • Comunique falha de dados
+\n • Carregue trilhas GPX diretamente do app
+\n • Adicione POIs e carregue-os diretamente ao OSM (ou mais tarde se off-line)
+\n</string>
     <string name="osmand_plus_extended_description_part5">Recursos de segurança
-\n• Alternância de exibição dia/noite automatizada opcional
-\n• Exibição de limite de velocidade opcional, com lembrete se você ultrapassá-lo
-\n• Zoom dependente da velocidade opcional
-\n• Compartilhe sua localização para que seus amigos possam encontrar você</string>
+\n • Alternância de exibição dia/noite automatizada opcional
+\n • Exibição de limite de velocidade opcional, com lembrete se você ultrapassá-lo
+\n • Zoom dependente da velocidade opcional
+\n • Compartilhe sua localização para que seus amigos possam encontrar você
+\n</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especificar um buffer de tempo para manter locais para enviar sem conexão</string>
     <string name="quick_action_take_audio_note_descr">Um botão para adicionar uma nota de áudio no meio da tela.</string>
     <string name="quick_action_take_video_note_descr">Um botão para adicionar uma nota de vídeo no meio da tela.</string>
@@ -2535,19 +2522,18 @@ Pôr do Sol: %2$s</string>
     <string name="save_route_point">Salvar ponto de rota</string>
     <string name="waypoint_one">Ponto de Passagem 1</string>
     <string name="route_point_one">Ponto de Rota 1</string>
-    <string name="empty_state_my_tracks">Adicione arquivos GPX</string>
-    <string name="empty_state_my_tracks_desc">Importe arquivos GPX ou grave trilhas.</string>
     <string name="empty_state_favourites">Adicione Favoritos</string>
     <string name="empty_state_favourites_desc">Importe Favoritos ou adicione-os marcando pontos do mapa.</string>
     <string name="import_track">Importar arquivo GPX</string>
     <string name="move_point">Mover Ponto</string>
     <string name="osm_recipients_label">Destinatários OSM</string>
-    <string name="osmand_plus_extended_description_part6">Recursos de ciclismo e pedestre
-\n• Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre
-\n• Roteamento e modos de exibição especiais para bicicleta e pedestres
-\n• Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas
-\n• Gravação opcional de viagem para arquivo GPX local ou serviço on-line • Exibição opcional de velocidade e altitudes
-\n• Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
+    <string name="osmand_plus_extended_description_part6">Recursos de Ciclismo e Pedestre
+\n • Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre
+\n • Roteamento e modos de exibição especiais para bicicleta e pedestres
+\n • Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas
+\n • Gravação opcional de viagem para arquivo GPX local ou serviço on-line
+\n • Exibição opcional de velocidade e altitudes
+\n • Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
     <string name="shared_string_without_name">Sem nome</string>
     <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada: 
 \n• Europa Ocidental: **** 
@@ -2623,12 +2609,13 @@ Pôr do Sol: %2$s</string>
     <string name="waypoints_removed_from_map_markers">Pontos de passagem removidos dos marcadores de mapa</string>
     <string name="shared_string_result">Resultado</string>
     <string name="osmand_plus_extended_description_part2">Navegação
-\n• Funciona on-line (rápido) ou offline (sem custo de roaming quando estiver no exterior)
-\n• Orientação por voz passo-a-passo (vozes gravadas e sintetizadas)
-\n• Orientação de faixas opcional, exibição do nome da rua e tempo estimado de chegada
-\n• Suporta pontos intermediários do seu itinerário
-\n• Correção de rota automático sempre que você sair da rota
-\n• Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas</string>
+\n • Funciona on-line (rápido) ou offline (sem custo de roaming quando estiver no exterior)
+\n • Orientação por voz passo-a-passo (vozes gravadas e sintetizadas)
+\n • Orientação de faixas opcional, exibição do nome da rua e tempo estimado de chegada
+\n • Suporta pontos intermediários do seu itinerário
+\n • Correção de rota automático sempre que você sair da rota
+\n • Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas
+\n</string>
     <string name="osmand_plus_extended_description_part3">Visualização de mapa 
 \n• Exiba sua posição e orientação 
 \n• Opcionalmente alinhe a tela de acordo com a bússola ou a direção de seu movimento 
@@ -2637,13 +2624,14 @@ Pôr do Sol: %2$s</string>
 \n• Exiba imagens online especializadas, vista de satélite (do Bing), diferentes camadas como trilhas de navegação GPX e camadas adicionais com transparência personalizável 
 \n• Opcionalmente exiba nomes de lugares em inglês, língua local ou fonético
 \n</string>
-    <string name="osmand_plus_extended_description_part4">Use dados OSM e da Wikipédia 
-\n• Informações de alta qualidade dos melhores projetos colaborativos do mundo 
-\n• Dados OSM disponíveis por país ou região 
-\n• POIs da Wikipédia, ótimo para visitas turísticas 
-\n• Downloads grátis ilimitados, diretamente do aplicativo 
-\n• Mapas vetoriais offline compactos e atualizados mensalmente 
-\n• Escolha entre região completa ou apenas rede rodoviária (Exemplo: Japão inteiro tem 700 MB ou apenas 200 MB para rede rodoviária)</string>
+    <string name="osmand_plus_extended_description_part4">Use dados OSM e da Wikipédia
+\n • Informações de alta qualidade dos melhores projetos colaborativos do mundo
+\n • Dados OSM disponíveis por país ou região
+\n • POIs da Wikipédia, ótimo para visitas turísticas
+\n • Downloads grátis ilimitados, diretamente do aplicativo
+\n • Mapas vetoriais offline compactos e atualizados mensalmente
+\n
+\n • Escolha entre região completa ou apenas rede rodoviária (Exemplo: Japão inteiro tem 700 MB ou apenas 200 MB para rede rodoviária)</string>
     <string name="online_webpage_warning">Página disponível só online. Abrir num navegador web?</string>
     <string name="images_cache">Cache de imagens</string>
     <string name="delete_search_history">Apagar histórico de pesquisa</string>
@@ -2714,7 +2702,6 @@ Pôr do Sol: %2$s</string>
     <string name="read_wikipedia_offline">Ler a Wikipédia offline</string>
     <string name="download_all">Baixar tudo</string>
     <string name="purchase_cancelled_dialog_title">Você cancelou a sua assinatura OsmAnd Live</string>
-    <string name="shared_string_gpx_files">Arquivos GPX</string>
     <string name="access_intermediate_arrival_time">Hora de chegada intermediária</string>
     <string name="map_widget_intermediate_time">Hora intermediária</string>
     <string name="get_osmand_live">Adquira OsmAnd Live para desbloquear todos estes recursos: Atualização diária de mapa com downloads ilimitados, todos os plugins pagos grátis, Wikipédia, Wikivoyage e muito mais.</string>
@@ -2765,25 +2752,27 @@ Pôr do Sol: %2$s</string>
 \n• Grave ou carregue uma trilha GPX e siga-a
 \n</string>
     <string name="osmand_extended_description_part3">Mapa
-\n• Exibe POIs (ponto de interesse) em torno de você
-\n• Ajusta o mapa na sua direção de movimento (ou bússola)
-\n• Mostra a sua posição e direção para onde está olhando
-\n• Compartilhe sua posição para que seus amigos possam encontrá-lo
-\n• Mantém seus lugares mais importantes em \'Favoritos\'
-\n• Permite-lhe escolher como exibir nomes no mapa: em inglês, local ou escrita fonética
-\n• Exibe mapas on-line especializados, vista de satélite (do Bing), camadas diferentes como trilhas GPX de navegação/turismo e camadas adicionais com transparência personalizável</string>
+\n • Exibe PDIs (ponto de interesse) em torno de você
+\n • Ajusta o mapa na sua direção de movimento (ou bússola)
+\n • Mostra a sua posição e direção para onde está olhando
+\n • Compartilhe sua posição para que seus amigos possam encontrá-lo
+\n • Mantém seus lugares mais importantes em \'Favoritos\'
+\n • Permite-lhe escolher como exibir nomes no mapa: em inglês, local ou escrita fonética
+\n • Exibe mapas on-line especializados, vista de satélite (do Bing), camadas diferentes como trilhas GPX de navegação/turismo e camadas adicionais com transparência personalizável
+\n</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (Direções de Navegação Automatizada do OSM) é um aplicativo de mapa e navegação com acesso a dados livres de todo o mundo em alta qualidade do OSM. 
 \nPoderá usar a navegação visual ou por voz, ver POIs (pontos de interesse), criar e gerenciar trilhas GPX, usar informação de altitude e curvas de nível, escolher entre modos dirigir, andar de bicicleta e pedestres, editar o OSM e muito mais. 
 \n 
 \nOsmAnd+ é a versão paga do app. Ao comprá-lo, você apoia o projeto, financia o desenvolvimento de novas funcionalidades e recebe as últimas atualizações. 
 \n 
 \nAlgumas das principais características:</string>
-    <string name="osmand_plus_extended_description_part7">Contribua diretamente para o OSM 
-\n• Avisar erros de dados 
-\n• Fazer upload de trilhas GPX para o OSM diretamente do app 
-\n• Adicionar POIs e fazer o upload diretamente para OSM (ou mais tarde se offline) 
-\n• Gravação de viagem opcional também em modo background (enquanto o dispositivo está no modo sleep) 
-\nOsmAnd é um software de código aberto desenvolvido ativamente. Todos podem contribuir para o app, reportando bugs, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com as contribuições financeiras para financiar o desenvolvimento e testes de novas funcionalidades.</string>
+    <string name="osmand_plus_extended_description_part7">Contribua diretamente para o OSM
+\n • Avisar erros de dados
+\n • Fazer upload de trilhas GPX para o OSM diretamente do app
+\n • Adicionar POIs e fazer o upload diretamente para OSM (ou mais tarde se offline)
+\n • Gravação de viagem opcional também em modo background (enquanto o dispositivo está no modo sleep)
+\n OsmAnd é um software de código aberto desenvolvido ativamente. Todos podem contribuir para o app, reportando bugs, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com as contribuições financeiras para financiar o desenvolvimento e testes de novas funcionalidades.
+\n</string>
     <string name="point_deleted">Ponto %1$s foi excluído</string>
     <string name="shared_string_world">Mundo</string>
     <string name="thank_you_for_feedback">Obrigado por seus comentários</string>
@@ -2902,10 +2891,10 @@ Pôr do Sol: %2$s</string>
     <string name="routeInfo_road_types_name">Tipos de estrada</string>
     <string name="exit_at">Desembarque em</string>
     <string name="sit_on_the_stop">Embarque na parada</string>
-    <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar faixas GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Um botão para mostrar ou ocultar as trilhas GPX selecionadas no mapa.</string>
-    <string name="quick_action_gpx_tracks_hide">Ocultar faixas de GPX</string>
-    <string name="quick_action_gpx_tracks_show">Mostrar faixas GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar trilhas</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Um botão para mostrar ou ocultar as trilhas selecionadas no mapa.</string>
+    <string name="quick_action_gpx_tracks_hide">Ocultar trilhas</string>
+    <string name="quick_action_gpx_tracks_show">Mostrar trilhas</string>
     <string name="release_3_3">- Nova tela \'Direções\': Apresenta os botões de destino Casa e Trabalho, atalho \"percurso anterior\", lista de faixas e marcadores GPX activos, histórico de pesquisa 
 \n 
 \n - Informação adicional em \"Detalhes da rota\": tipos de estrada, superfície, declive, suavidade 
@@ -3368,7 +3357,7 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_value_white_name">Branco</string>
     <string name="swap_two_places">Trocar %1$s e %2$s</string>
     <string name="route_start_point">Ponto de partida</string>
-    <string name="default_speed_dialog_msg">Estima a hora de chegada de tipos de estradas desconhecidos e limita a velocidade de todas as estradas (pode afetar o roteamento)</string>
+    <string name="default_speed_dialog_msg">Estima a hora de chegada de tipos de estradas desconhecidas e limita a velocidade de todas as estradas (pode afetar o roteamento)</string>
     <string name="track_saved">Trilha salva</string>
     <string name="empty_filename">O nome do arquivo está vazio</string>
     <string name="shared_string_revert">Reverter</string>
@@ -3766,7 +3755,7 @@ Pôr do Sol: %2$s</string>
     <string name="clear_tiles_warning">A aplicação dessas alterações limpará os dados em cache dessa origem de bloco</string>
     <string name="vessel_height_warning_link">Definir altura da embarcação</string>
     <string name="vessel_height_warning">Você pode definir a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
-    <string name="vessel_height_limit_description">Defina a altura do vaso para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
+    <string name="vessel_height_limit_description">Defina a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
     <string name="vessel_width_limit_description">Defina a largura da embarcação para evitar pontes estreitas</string>
     <string name="quick_action_showhide_mapillary_title">Mostrar/ocultar Mapillary</string>
     <string name="quick_action_mapillary_hide">Ocultar Mapillary</string>
@@ -3787,24 +3776,124 @@ Pôr do Sol: %2$s</string>
     <string name="speed_cameras_alert">Os alertas de radares de velocidade em alguns países são proibidos por lei.</string>
     <string name="shared_string_bearing">Rolamento</string>
     <string name="item_deleted">%1$s excluído</string>
-    <string name="speed_cameras_restart_descr">É necessário reiniciar para excluir completamente os dados da câmera de velocidade.</string>
+    <string name="speed_cameras_restart_descr">Reinicie o aplicativo para excluir todos os dados da câmera de velocidade.</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>
     <string name="routing_attr_length_description">Especifique o comprimento do veículo a ser permitido nas rotas.</string>
     <string name="routing_attr_length_name">Limite de comprimento</string>
     <string name="speed_cameras_removed_descr">Este dispositivo não possui câmeras de velocidade.</string>
     <string name="app_mode_inline_skates">Patins em linha</string>
-    <string name="use_volume_buttons_as_zoom_descr">Ativar para controlar o nível de zoom do mapa com os botões de volume do dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Controle o nível de zoom do mapa usando os botões de volume do dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botões de volume como zoom</string>
     <string name="lenght_limit_description">Forneça o comprimento do seu veículo. Algumas restrições de rotas podem ser aplicadas a veículos longos.</string>
-    <string name="quick_action_remove_next_destination">Excluir próximo ponto de destino</string>
+    <string name="quick_action_remove_next_destination">Apagar o ponto de destino mais próximo</string>
     <string name="please_provide_point_name_error">Forneça um nome para o ponto</string>
     <string name="quick_action_remove_next_destination_descr">O ponto de destino atual na rota será excluído. Se for o destino, a navegação será interrompida.</string>
     <string name="search_download_wikipedia_maps">Baixar mapas da Wikipédia</string>
-    <string name="plugin_wikipedia_description">Obter informações sobre pontos de interesse da Wikipédia. É o seu guia de bolso off-line - só ativar o complemento Wikipédia e desfrutar de artigos sobre os elementos ao seu redor.</string>
+    <string name="plugin_wikipedia_description">Obtenha informações sobre pontos de interesse na Wikipédia. É o seu guia offline de bolso - basta ativar o plug-in da Wikipédia e desfrutar dos artigos sobre os objetos ao seu redor.</string>
     <string name="app_mode_enduro_motorcycle">Motocicleta enduro</string>
     <string name="app_mode_motor_scooter">Motoneta</string>
     <string name="app_mode_wheelchair">Cadeira de rodas</string>
     <string name="app_mode_wheelchair_forward">Cadeira de rodas para a frente</string>
     <string name="app_mode_go_cart">Carrinho de compras</string>
     <string name="osm_edit_closed_note">Nota OSM fechada</string>
+    <string name="add_to_a_track">Adicionar a uma trilha</string>
+    <string name="set_working_days_to_continue">Defina dias úteis para continuar</string>
+    <string name="route_between_points">Rota entre pontos</string>
+    <string name="plan_a_route">Planejar uma rota</string>
+    <string name="add_hidden_group_info">O ponto adicionado não será visível no mapa, já que o grupo selecionado está oculto, você pode encontrá-lo em \"%s\".</string>
+    <string name="track_show_start_finish_icons">Mostrar ícones de início e fim</string>
+    <string name="select_track_width">Selecionar largura</string>
+    <string name="gpx_split_interval_descr">Selecione o intervalo no qual as marcas com distância ou tempo na pista serão exibidas.</string>
+    <string name="gpx_split_interval_none_descr">Selecione a opção de divisão desejada: por tempo ou por distância.</string>
+    <string name="shared_string_custom">Personalizados</string>
+    <string name="gpx_direction_arrows">Setas de direção</string>
+    <string name="track_coloring_solid">Sólido</string>
+    <string name="plan_route_last_edited">Última edição</string>
+    <string name="plan_route_import_track">Importar trilha</string>
+    <string name="plan_route_open_existing_track">Abrir trilha existente</string>
+    <string name="plan_route_create_new_route">Criar nova rota</string>
+    <string name="plan_route_select_track_file_for_open">Selecione um arquivo de trilha para abrir.</string>
+    <string name="shared_string_done">Concluído</string>
+    <string name="overwrite_track">Substituir trilha</string>
+    <string name="save_as_new_track">Salvar como nova trilha</string>
+    <string name="reverse_route">Rota reversa</string>
+    <string name="route_between_points_whole_track_button_desc">A trilha inteira será recalculada usando o perfil selecionado.</string>
+    <string name="route_between_points_next_segment_button_desc">Apenas o próximo segmento será recalculado usando o perfil selecionado.</string>
+    <string name="route_between_points_desc">Selecione como conectar pontos, com uma linha reta, ou calcular uma rota entre eles com o perfil selecionado.</string>
+    <string name="whole_track">Trilha inteira</string>
+    <string name="next_segment">Próximo segmento</string>
+    <string name="route_between_points_warning_desc">Para usar esta opção, OsmAnd precisa ajustar sua trilha para as estradas do mapa.
+\n
+\n Na próxima etapa, você precisará selecionar o perfil de navegação para detectar as estradas permitidas e a distância limite para aproximar o rastreamento das estradas.</string>
+    <string name="threshold_distance">Distância limite</string>
+    <string name="navigation_profile">Perfil de navegação</string>
+    <string name="route_between_points_add_track_desc">Selecione um arquivo de trilha para o qual um novo segmento será adicionado.</string>
+    <string name="street_level_imagery">Imagens de rua</string>
+    <string name="plan_route_exit_dialog_descr">Tem certeza de que deseja descartar todas as alterações no percurso planejado, fechando-o\?</string>
+    <string name="in_case_of_reverse_direction">Em caso de direção reversa</string>
+    <string name="shared_string_save_as_gpx">Salvar como novo arquivo de trilha</string>
+    <string name="shared_string_gpx_files">Trilhas</string>
+    <string name="add_segment_to_the_track">Adicionar a um arquivo de trilha</string>
+    <string name="layer_gpx_layer">Trilhas</string>
+    <string name="show_gpx">Trilhas</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="save_track_to_gpx_globally">Registrar de trilha para arquivo GPX</string>
+    <string name="shared_string_gpx_route">Rota de trilha</string>
+    <string name="empty_state_my_tracks">Adicionar arquivos de trilha</string>
+    <string name="empty_state_my_tracks_desc">Importar ou gravar arquivos de trilha</string>
+    <string name="context_menu_item_add_waypoint">Adicionar ponto de passagem de trilha</string>
+    <string name="quick_action_add_gpx">Adicionar ponto de passagem de trilha</string>
+    <string name="map_widget_monitoring">Gravação de viagem</string>
+    <string name="marker_save_as_track">Salvar como arquivo de trilha</string>
+    <string name="follow_track">Seguir a trilha</string>
+    <string name="follow_track_descr">Escolha o arquivo de trilha a seguir</string>
+    <string name="import_track_descr">Escolha o arquivo de trilha a seguir ou importe-o de seu dispositivo.</string>
+    <string name="select_another_track">Selecionar outra trilha</string>
+    <string name="navigate_to_track_descr">Navegue de minha localização até a trilha</string>
+    <string name="pass_whole_track_descr">Ponto da trilha para navegar</string>
+    <string name="start_of_the_track">Início da pista</string>
+    <string name="nearest_point">Ponto próximo</string>
+    <string name="attach_to_the_roads">Anexar às estradas</string>
+    <string name="delete_address">Apagar endereço</string>
+    <string name="add_address">Adicionar endereço</string>
+    <string name="access_hint_enter_address">Insira o endereço</string>
+    <string name="plan_route_trim_before">Aparecer antes</string>
+    <string name="plan_route_trim_after">Aparecer depois</string>
+    <string name="plan_route_change_route_type_before">Alterar o tipo de rota antes</string>
+    <string name="plan_route_change_route_type_after">Alterar o tipo de rota após</string>
+    <string name="web_server">Servidor web</string>
+    <string name="simplified_track">Trilha simplificada</string>
+    <string name="simplified_track_description">Apenas a linha da rota será salva, os waypoints serão excluídos.</string>
+    <string name="shared_string_file_name">Nome do arquivo</string>
+    <string name="number_of_gpx_files_selected_pattern">%s arquivos de trilha selecionados</string>
+    <string name="disable_recording_once_app_killed_descrp">Pausará o registro de rastreamento quando o aplicativo for encerrado (por meio de aplicativos recentes). (A indicação de uso em segundo plano do OsmAnd desaparece da barra de notificação do Android.)</string>
+    <string name="save_global_track_interval_descr">Especifique o intervalo de registro para a gravação geral da trilha (habilitado por meio do widget Gravação de viagem no mapa).</string>
+    <string name="gpx_monitoring_stop">Pausar gravação de viagem</string>
+    <string name="gpx_monitoring_start">Retomar a gravação da viagem</string>
+    <string name="system_default_theme">Padrão do sistema</string>
+    <string name="all_next_segments">Todos os segmentos subsequentes</string>
+    <string name="previous_segment">Segmento anterior</string>
+    <string name="all_previous_segments">Todos os segmentos anteriores</string>
+    <string name="only_selected_segment_recalc">Apenas o segmento selecionado será recalculado usando o perfil selecionado.</string>
+    <string name="all_next_segments_will_be_recalc">Todos os segmentos subsequentes serão recalculados usando o perfil selecionado.</string>
+    <string name="all_previous_segments_will_be_recalc">Todos os segmentos anteriores serão recalculados usando o perfil selecionado.</string>
+    <string name="open_saved_track">Abrir trilha salva</string>
+    <string name="shared_string_is_saved">está salvo</string>
+    <string name="one_point_error">Adicione pelo menos dois pontos.</string>
+    <string name="shared_string_redo">Refazer</string>
+    <string name="release_3_8">"• O modo de rota de plano atualizado permite o uso de diferentes tipos de navegação para cada segmento e anexa qualquer trilha às estradas
+\n
+\n • Novas opções de aparência para trilhas: selecione a cor, a espessura, ative as setas de direção e as marcas de início/fim
+\n
+\n  • Melhor visibilidade dos nós da bicicleta
+\n
+\n  • Menu de contexto para trilhas com informações básicas
+\n
+\n  • Algoritmos de pesquisa aprimorados
+\n
+\n  • Opções de acompanhamento de trilha aprimoradas na navegação
+\n
+\n  • Problemas corrigidos com importação/exportação de configurações de perfil
+\n
+\n"</string>
 </resources>

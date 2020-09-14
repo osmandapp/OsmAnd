@@ -22,7 +22,6 @@
     <string name="animate_route">Rozpocznij symulację</string>
     <string name="file_can_not_be_renamed">Nie można zmienić nazwy pliku.</string>
     <string name="file_with_name_already_exists">Plik o takiej nazwie już istnieje.</string>
-    <string name="shared_string_gpx_route">Trasa GPX</string>
     <string name="data_to_search_poi_not_available">Pobierz dane offline, aby wyszukać użyteczne miejsca.</string>
     <string name="poi_filter_by_name">Szukaj wg nazwy</string>
     <string name="old_poi_file_should_be_deleted">Plik „%1$s” z danymi użytecznych miejsc jest zbędny i można go usunąć.</string>
@@ -36,11 +35,10 @@
     <string name="search_position_current_location_found">Aktualne położenie (ustalone)</string>
     <string name="search_position_address">Adres…</string>
     <string name="search_position_favorites">Ulubione…</string>
-    <string name="search_position_undefined">Niezdefiniowane</string>
+    <string name="shared_string_undefined">Niezdefiniowane</string>
     <string name="search_position_map_view">Aktualny środek mapy</string>
     <string name="select_search_position">Zasób:</string>
     <string name="context_menu_item_search">Szukaj w pobliżu</string>
-    <string name="shared_string_save_as_gpx">Zapisz jako nowy plik GPX</string>
     <string name="route_successfully_saved_at">Zapisano trasę jako „%1$s”.</string>
     <string name="filename_input">Nazwa pliku: </string>
     <string name="file_with_name_already_exist">Plik o takiej nazwie już istnieje.</string>
@@ -148,7 +146,6 @@
     <string name="context_menu_item_share_location">Udostępnij położenie</string>
     <string name="add_waypoint_dialog_added">Dodano punkt GPX „{0}”</string>
     <string name="add_waypoint_dialog_title">Dodaj punkt pośredni do śladu GPX</string>
-    <string name="context_menu_item_add_waypoint">Dodaj punkt do GPX</string>
     <string name="amenity_type_administrative">Administracyjne</string>
     <string name="amenity_type_barrier">Przeszkody</string>
     <string name="amenity_type_education">Edukacja</string>
@@ -250,7 +247,6 @@
     <string name="voice">Nagrany głos</string>
     <string name="no_vector_map_loaded">Nie wczytano map wektorowych</string>
     <string name="gpx_files_not_found">Nie odnaleziono plików GPX w katalogu śladów</string>
-    <string name="layer_gpx_layer">Pliki GPX…</string>
     <string name="error_reading_gpx">Nie można odczytać danych GPX.</string>
     <string name="vector_data">Wektorowe mapy offline</string>
     <string name="transport_context_menu">Wyszukaj komunikację na przystanku</string>
@@ -751,7 +747,6 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_reset">Przywróć domyślne</string>
     <string name="map_widget_parking">Miejsce parkowania</string>
-    <string name="map_widget_monitoring">Rejestrowanie GPX</string>
     <string name="map_widget_speed">Prędkość</string>
     <string name="map_widget_distance">Cel</string>
     <string name="map_widget_altitude">Wysokość</string>
@@ -886,7 +881,6 @@
     <string name="rendering_attr_noAdminboundaries_name">Granice</string>
     <string name="rendering_attr_noAdminboundaries_description">Pomiń wyświetlenie granic regionalnych (poziomy administratora 5-9).</string>
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
-    <string name="monitoring_control_start">Ślad</string>
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
@@ -1263,8 +1257,6 @@
     <string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
     <string name="live_monitoring_start">Rozpocznij śledzenie online</string>
     <string name="live_monitoring_stop">Zakończ śledzenie online</string>
-    <string name="gpx_monitoring_start">Kontynuuj rejestrowanie śladu</string>
-    <string name="gpx_monitoring_stop">Zatrzymaj rejestrowanie śladu</string>
     <string name="gpx_start_new_segment">Rozpocznij nowy segment</string>
     <string name="rendering_attr_hideBuildings_name">Budynki</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Trasy niedostępne dla aut</string>
@@ -1316,20 +1308,18 @@
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
     <string name="speak_favorites">Najbliższe ulubione miejsca</string>
     <string name="speak_poi">Pobliskie użyteczne miejsca</string>
-    <string name="save_track_to_gpx_globally">Rejestrowanie śladu GPX</string>
     <string name="save_track_to_gpx_globally_descr">Ogólne rejestrowanie pozycji do pliku GPX można włączyć lub wyłączyć za pomocą widgetu rejestrowania GPX na mapie.</string>
     <string name="save_track_interval_globally">Częstość rejestrowania</string>
     <string name="record_plugin_description">Aktywuje funkcje rejestrowania i zapisywania śladów za pomocą widżetu rejestrowania śladów GPX na mapie lub automatyczne rejestruje przebiegi wszystkich tras do plików GPX.
 \n 
 \nZarejestrowane ślady można udostępnić znajomym lub wykorzystać na rzecz rozwoju mapy OpenStreetMap. Sportowcy mogą korzystać ze śladów do monitorowania treningów. W tym celu OsmAnd udostępnia podstawowe informacje takie jak czasy okrążeń, średnia prędkość itp. Ślady mogą być później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców oprogramowania.</string>
     <string name="confirm_every_run">Ponawianie pytania</string>
-    <string name="save_global_track_interval_descr">Wybiera tempo rejestrowania śladu (włączonego poprzez widżet rejestrowania GPX na mapie).</string>
     <string name="save_global_track_interval">Ogólna częstość rejestrowania</string>
     <string name="traffic_warning_speed_limit">Ograniczenie prędkości</string>
     <string name="traffic_warning_border_control">Kontrola graniczna</string>
     <string name="traffic_warning_payment">Punkt poboru opłat</string>
     <string name="traffic_warning_stop">Znak Stop</string>
-    <string name="traffic_warning_calming">Uspokojenie ruchu</string>
+    <string name="traffic_warning_calming">Spowolnienie ruchu</string>
     <string name="traffic_warning_speed_camera">Fotoradar</string>
     <string name="traffic_warning">Ostrzeżenia drogowe</string>
     <string name="local_index_description">Kliknij istniejący element, aby zobaczyć szczegóły, naciśnij i przytrzymaj, aby wyłączyć lub usunąć. Aktualne dane na urządzeniu (%1$s wolne):</string>
@@ -1566,7 +1556,6 @@
     <string name="archive_wikipedia_data">Posiadasz stare niezgodne dane Wikipedii. Zarchiwizować je?</string>
     <string name="download_wikipedia_files">Pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Włączyć ją?</string>
-    <string name="disable_recording_once_app_killed_descrp">Wstrzymuje rejestrowanie śladu po zakończeniu działania aplikacji. (Ikona działania w tle znika z paska powiadomień.)</string>
     <string name="shared_string_import2osmand">Import do OsmAnd</string>
     <string name="read_full_article">Czytaj cały artykuł (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -1665,7 +1654,6 @@
     <string name="favourites">Ulubione</string>
     <string name="saved_at_time">Zapisano o: %1$s</string>
     <string name="poi_deleted_localy">Użyteczne miejsce zostanie usunięte po wysłaniu zmian</string>
-    <string name="show_gpx">Wyświetlanie danych GPX</string>
     <string name="show_on_start">Wyświetlanie podczas uruchamiania</string>
     <string name="count_of_lines">Liczba linii</string>
     <string name="unsaved_changes_will_be_lost">Wszelkie niezapisane zmiany zostaną utracone. Kontynuować?</string>
@@ -1946,7 +1934,6 @@
     <string name="access_widget_expand">Rozwiń</string>
     <string name="access_sort">Sortuj</string>
     <string name="map_mode">Tryb mapy</string>
-    <string name="number_of_gpx_files_selected_pattern">Wybrano %s plików GPX</string>
     <string name="access_hint_enter_name">Proszę wprowadzić nazwę</string>
     <string name="access_map_linked_to_location">Mapa jest powiązana z położeniem</string>
     <string name="access_tree_list">Lista hierarchiczna</string>
@@ -2142,7 +2129,6 @@
     <string name="quick_action_map_underlay_action">Dodaj podkład</string>
     <string name="quick_action_map_underlay_title">Podkłady map</string>
     <string name="quick_action_map_source_title">Zasoby map</string>
-    <string name="quick_action_add_gpx">Dodaj punkt pośredni GPX</string>
     <string name="quick_favorites_name_preset">Nazwa</string>
     <string name="quick_action_add_marker_descr">Przycisk dodawania znacznika mapy na środku ekranu.</string>
     <string name="quick_action_add_gpx_descr">Przycisk dodawania punktu pośredniego GPX na środku ekranu.</string>
@@ -2408,14 +2394,11 @@
     <string name="measurement_tool_snap_to_road_descr">Punkty zostaną połączone trasą wyznaczoną na podstawie wybranego profilu.</string>
     <string name="add_route_points">Dodaj punkty trasy</string>
     <string name="add_line">Dodaj linię</string>
-    <string name="empty_state_my_tracks">Dodaj pliki GPX</string>
-    <string name="empty_state_my_tracks_desc">Importowanie plików GPX lub nagranych tras.</string>
     <string name="empty_state_favourites">Dodaj do ulubionych</string>
     <string name="empty_state_favourites_desc">Zaimportuj Ulubione lub dodaj je poprzez zaznaczenie punktów na mapie.</string>
     <string name="import_track">Importuj plik GPX</string>
     <string name="import_track_desc">Plik %1$s nie zawiera punktów trasy, czy zaimportować go jako ślad?</string>
     <string name="move_point">Przesuń punkt</string>
-    <string name="add_segment_to_the_track">Dodaj do pliku GPX</string>
     <string name="keep_showing_on_map">Wyświetlanie na mapie</string>
     <string name="exit_without_saving">Zakończyć bez zapisywania?</string>
     <string name="do_not_use_animations">Wyłączenie animacji</string>
@@ -2458,7 +2441,6 @@
     <string name="plan_route">Planowanie trasy</string>
     <string name="shared_string_sort">Sortuj</string>
     <string name="marker_save_as_track_descr">Znaczniki zostaną wyeksportowane do poniższego pliku GPX:</string>
-    <string name="marker_save_as_track">Zapisz jako plik GPX</string>
     <string name="move_to_history">Przenieś do historii</string>
     <string name="group_will_be_removed_after_restart">Grupa zostanie usunięta po ponownym uruchomieniu.</string>
     <string name="use_system_keyboard">Użycie klawiatury systemowej</string>
@@ -2741,7 +2723,6 @@
     <string name="open_wikipedia_link_online">Otwórz odnośnik do Wikipedii online</string>
     <string name="read_wikipedia_offline_description">Zasubskrybuj OsmAnd Live, by czytać artykuły Wikipedii i Wikipodróży offline.</string>
     <string name="read_wikipedia_offline">Czytaj Wikipedię offline</string>
-    <string name="shared_string_gpx_files">Pliki GPX</string>
     <string name="quick_action_edit_actions">Edycja działań</string>
     <string name="error_notification_desc">Wyślij zrzut ekranu z tego powiadomienia na adres support@osmand.net</string>
     <string name="coord_input_edit_point">Edytuj punkt</string>
@@ -3268,7 +3249,7 @@
     <string name="analytics_pref_title">Analityka</string>
     <string name="turn_screen_on_info">Wyświetla mapę na ekranie blokady podczas nawigacji.</string>
     <string name="route_parameters_info">Ustawienia wyznaczania trasy w wybranym profilu „%1$s”.</string>
-    <string name="wake_time">Czas wybudzenia</string>
+    <string name="wake_time">Czas oczekiwania po przebudzeniu</string>
     <string name="configure_navigation">Konfiguruje nawigację</string>
     <string name="screen_alerts_descr">Alerty będą wyświetlane w lewym dolnym rogu podczas nawigacji.</string>
     <string name="reset_to_default">Przywróć ustawienia domyślne</string>
@@ -3455,7 +3436,7 @@
     <string name="permission_is_required">Wymagane jest zezwolenie na korzystanie z tej opcji.</string>
     <string name="not_support_file_type_with_ext">Proszę wybrać obsługiwany plik z rozszerzeniem %1$s.</string>
     <string name="monitoring_min_speed_descr_remark">Uwaga: kontrola prędkości &gt; 0: większość zestawów GPS zgłasza wartość prędkości tylko wtedy, gdy algorytm określa, że jesteś w ruchu, a żadna, jeśli nie jesteś. Dlatego użycie ustawienia &gt; 0 w tym filtrze w pewnym sensie wykorzystuje wykrywanie ruchu chipsetu GPS. Ale nawet jeśli nie zostanie przefiltrowane tutaj w czasie nagrywania, nadal używamy tej funkcji w naszej analizie GPX do określenia skorygowanej odległości, tj. wartość wyświetlana w tym polu to odległość zarejestrowana podczas ruchu.</string>
-    <string name="monitoring_min_accuracy_descr">Zapisuje tylko punkty zmierzone z minimalną dokładnością (w metrach/stopach, zgłoszoną przez system Android dla chipsetu). Dokładność odnosi się do rozproszenia powtarzanych pomiarów i nie jest bezpośrednio związana z precyzją, która określa, jak blisko są twoje pomiary do twojej prawdziwej pozycji.</string>
+    <string name="monitoring_min_accuracy_descr">Spowoduje to rejestrowanie tylko punktów mierzonych przy minimalnym wskaźniku dokładności (w metrach/stopach, zgodnie z raportem systemu Android dla Twojego chipsetu). Dokładność to bliskość pomiarów do rzeczywistej pozycji i nie jest bezpośrednio związana z precyzją, która jest rozrzutem powtarzanych pomiarów.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Zalecenie: trudno jest przewidzieć, jakie dane zostaną zarejestrowane, a jakie nie. Możliwe, że najlepiej będzie wyłączyć ten filtr.</string>
     <string name="monitoring_min_distance_descr">Zapobiega zapisywaniu powielonych punktów, zbyt mało oddalonych od siebie. Zapewnia bardziej przejrzysty wygląd śladów nie poddawanych późniejszej obróbce.</string>
     <string name="search_offline_geo_error">Nie można przeanalizować intencji geograficznej \'%s\'.</string>
@@ -3518,7 +3499,7 @@
 \nWtyczka pozostanie na urządzeniu po usunięciu OsmAnd.</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_include_data">Uwzględnij dodatkowe dane</string>
-    <string name="import_profile_dialog_description">Zaimportowany profil zawiera dodatkowe dane. Kliknij przycisk Importuj, aby zaimportować tylko dane profilu lub wybierz dodatkowe dane do zaimportowania.</string>
+    <string name="import_profile_dialog_description">Zaimportowany profil zawiera dodatkowe dane. Kliknij \"Importuj\", aby zaimportować tylko dane profilu, lub wybierz dodatkowe dane.</string>
     <string name="export_profile_dialog_description">Można wybrać dodatkowe dane do wyeksportowania wraz z profilem.</string>
     <string name="routing_profile_direct_to">Bezpośrednio do punktu</string>
     <string name="navigation_notification_desc">Pokaż powiadomienia systemowe podczas nawigacji z instrukcjami nawigacji.</string>
@@ -3528,9 +3509,9 @@
     <string name="route_recalculation_dist_title">Minimalna odległość do ponownego wyznaczenia trasy</string>
     <string name="route_recalculation_dist_descr">Wyznacza ponownie trasę, jeśli odległość do trasy jest dłuższa niż określony parametr</string>
     <string name="tracks_view_descr">Twoje nagrane ślady są w %1$s lub w folderze OsmAnd.</string>
-    <string name="use_system_screen_timeout_promo">Domyślnie wyłączone, jeśli OsmAnd jest włączony na pierwszym planie, ekran nie będzie się wygaszał.
+    <string name="use_system_screen_timeout_promo">Domyślnie wyłączone: gdy OsmAnd działa na pierwszym planie, ekran nie wyłączy się.
 \n
-\nJeśli włączone, OsmAnd będzie używał systemowych ustawień wygaszania.</string>
+\nJeśli włączone, OsmAnd użyje ustawienia limitu czasu systemu.</string>
     <string name="sort_by_category">Sortuj wg kategorii</string>
     <string name="shared_string_menu">Menu</string>
     <string name="shared_string_routing">Wyznaczanie trasy</string>
@@ -3675,9 +3656,9 @@
     <string name="lang_an">Aragoński</string>
     <string name="lang_gu">Gudźarati</string>
     <string name="lang_yo">Joruba</string>
-    <string name="ui_customization_description">Dostosuj liczbę elementów w menu bocznym, konfiguracji mapy i menu kontekstowym. 
-\n 
-\nMożesz wyłączyć nieużywane wtyczki, aby ukryć ich elementy w aplikacji. %1$s.</string>
+    <string name="ui_customization_description">Dostosuj ilość pozycji w „Szufladzie”, „Konfiguracja mapy” i „Menu kontekstowe”.
+\n
+\nWyłącz nieużywane wtyczki, aby ukryć wszystkie ich elementy sterujące. %1$s.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types">Szukaj typów użytecznych miejsc</string>
     <string name="search_poi_types_descr">Łącz typy użytecznych zmian z różnych kategorii. Stuknij przełącznik, aby zaznaczyć wszystko, stuknij lewą stronę, aby wybrać kategorię.</string>
@@ -3815,4 +3796,99 @@
     <string name="plugin_wikipedia_description">Uzyskaj informacje o interesujących miejscach z Wikipedii. Jest to kieszonkowy przewodnik offline - wystarczy włączyć wtyczkę Wikipedii i cieszyć się artykułami o obiektach wokół ciebie.</string>
     <string name="app_mode_enduro_motorcycle">Motocykl Enduro</string>
     <string name="app_mode_motor_scooter">Skuter</string>
+    <string name="routing_attr_length_description">Określ długość pojazdu dozwoloną na trasach.</string>
+    <string name="routing_attr_length_name">Limit długości</string>
+    <string name="app_mode_inline_skates">Rolki</string>
+    <string name="use_volume_buttons_as_zoom">Przyciski głośności jako powiększenie</string>
+    <string name="app_mode_wheelchair">Wózek inwalidzki</string>
+    <string name="app_mode_go_cart">Gokart</string>
+    <string name="osm_edit_closed_note">Zamknięte Uwagi OSM</string>
+    <string name="set_working_days_to_continue">Aby kontynuować, musisz ustawić dni robocze</string>
+    <string name="route_between_points">Droga pomiędzy punktami</string>
+    <string name="plan_a_route">Zaplanuj trasę</string>
+    <string name="add_to_a_track">Dodaj do śladu</string>
+    <string name="turn_screen_on_power_button_descr">Naciśnięcie przycisku zasilania urządzenia włączy ekran z OsmAnd u góry ekranu blokady.</string>
+    <string name="quick_action_showhide_mapillary_descr">Przełącznik służący do pokazywania lub ukrywania warstwy Mapillary na mapie.</string>
+    <string name="add_hidden_group_info">Dodany punkt nie będzie widoczny na mapie, ponieważ wybrana grupa jest ukryta, możesz ją znaleźć w „%s”.</string>
+    <string name="select_track_width">Wybierz szerokość</string>
+    <string name="gpx_split_interval_none_descr">Wybierz żądaną opcję podziału: według czasu lub odległości.</string>
+    <string name="track_coloring_solid">Stałe</string>
+    <string name="gpx_parse_error">OsmAnd GPX nie jest dobrze uformowany, prosimy o kontakt z zespołem wsparcia technicznego w celu dalszego zbadania sprawy.</string>
+    <string name="turn_screen_on_wake_time_descr">Ustaw limit czasu ekranu po przebudzeniu. (\"%1$s\" nie stosuje się żadnego limitu czasu.)</string>
+    <string name="track_show_start_finish_icons">Pokaż ikony rozpoczęcia i zakończenia</string>
+    <string name="gpx_split_interval_descr">Wybierz przedział czasowy, w którym będą wyświetlane znaki z odległością lub czasem na torze.</string>
+    <string name="shared_string_custom">Dostosowany</string>
+    <string name="gpx_direction_arrows">Strzałki kierunku</string>
+    <string name="plan_route_last_edited">Ostatnio edytowane</string>
+    <string name="plan_route_import_track">Importuj trasę</string>
+    <string name="plan_route_open_existing_track">Otwórz istniejącą trasę</string>
+    <string name="plan_route_create_new_route">Utwórz nową trasę</string>
+    <string name="plan_route_select_track_file_for_open">Wybierz plik śladu do otwarcia.</string>
+    <string name="shared_string_done">Wykonane</string>
+    <string name="turn_screen_on_power_button_disabled">Wyłączone. Wymagane „Pozostaw ekran włączony” w sekcji „Limit czasu po wybudzeniu”.</string>
+    <string name="overwrite_track">Zastępowanie ścieżki</string>
+    <string name="save_as_new_track">Zapisz jako nowa Ścieżka</string>
+    <string name="reverse_route">Odwróć trasę</string>
+    <string name="whole_track">Cała trasa</string>
+    <string name="next_segment">Nowy segment</string>
+    <string name="threshold_distance">Odległość graniczna</string>
+    <string name="navigation_profile">Profil nawigacji</string>
+    <string name="route_between_points_add_track_desc">Wybierz plik śladu do którego zostanie dodany nowy segment.</string>
+    <string name="route_between_points_whole_track_button_desc">Cała trasa zostanie ponownie wyznaczona przy użyciu wybranego profilu.</string>
+    <string name="route_between_points_next_segment_button_desc">Tylko następny segment zostanie ponownie obliczony przy użyciu wybranego profilu.</string>
+    <string name="route_between_points_desc">Wybierz sposób łączenia punktów linią prostą lub obliczania trasy między nimi z wybranym profilem.</string>
+    <string name="route_between_points_warning_desc">Aby skorzystać z tej opcji, OsmAnd musi przyciągnąć ślad do dróg mapy.
+\n
+\nW następnym kroku należy wybrać profil nawigacji w celu wykrycia dozwolonych dróg i odległości progowej w celu przybliżenia śledzenia drogi.</string>
+    <string name="street_level_imagery">Zdjęcia z poziomu ulicy</string>
+    <string name="plan_route_exit_dialog_descr">Zakończyć planowanie trasy bez zapisywania\? Wszystkie zmiany zostaną utracone.</string>
+    <string name="in_case_of_reverse_direction">W przypadku odwrotnego kierunku</string>
+    <string name="navigate_to_track_descr">Przejdź z mojej lokalizacji na trasę</string>
+    <string name="app_mode_wheelchair_forward">Wózek naprzód</string>
+    <string name="show_gpx">Ślady</string>
+    <string name="follow_track">Podążanie za śladem</string>
+    <string name="import_track_descr">Wybierz plik śladu do obserwacji lub zaimportować go.</string>
+    <string name="shared_string_save_as_gpx">Zapisz jako nowy plik śladu</string>
+    <string name="add_segment_to_the_track">Dodaj do pliku śladu</string>
+    <string name="shared_string_gpx_files">Ślady</string>
+    <string name="layer_gpx_layer">Ślady</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
+    <string name="shared_string_gpx_route">Trasa szlaku</string>
+    <string name="empty_state_my_tracks">Dodaj pliki śladów</string>
+    <string name="empty_state_my_tracks_desc">Importowanie lub rejestrowanie plików śladu</string>
+    <string name="context_menu_item_add_waypoint">Dodaj punkt orientacyjny</string>
+    <string name="quick_action_add_gpx">Dodaj punkt trasy</string>
+    <string name="map_widget_monitoring">Rejestrowanie śladu</string>
+    <string name="marker_save_as_track">Zapisz jako plik śladu</string>
+    <string name="follow_track_descr">Wybiera plik śladu do podążania</string>
+    <string name="select_another_track">Wybierz inną trasę</string>
+    <string name="pass_whole_track_descr">Punkt trasy do nawigacji</string>
+    <string name="start_of_the_track">Początek trasy</string>
+    <string name="nearest_point">Najbliższy punkt</string>
+    <string name="attach_to_the_roads">Dołącz do dróg</string>
+    <string name="delete_address">Usuń adres</string>
+    <string name="add_address">Dodaj adres</string>
+    <string name="access_hint_enter_address">Wpisz adres</string>
+    <string name="plan_route_trim_before">Przytnij przed</string>
+    <string name="plan_route_trim_after">Przytnij po</string>
+    <string name="plan_route_change_route_type_before">Zmień typ trasy przed</string>
+    <string name="plan_route_change_route_type_after">Zmień typ trasy po</string>
+    <string name="simplified_track">Uproszczona ścieżka</string>
+    <string name="simplified_track_description">Zapisana zostanie tylko linia trasy, punkty trasy zostaną usunięte.</string>
+    <string name="shared_string_file_name">Nazwa pliku</string>
+    <string name="number_of_gpx_files_selected_pattern">%s wybrane pliki ścieżki</string>
+    <string name="save_global_track_interval_descr">Określ interwał rejestrowania dla ogólnego rejestrowania śladu (włączany za pomocą widżetu Rejestrowanie podróży na mapie).</string>
+    <string name="gpx_monitoring_stop">Wstrzymaj nagrywanie podróży</string>
+    <string name="gpx_monitoring_start">Wznów nagrywanie podróży</string>
+    <string name="system_default_theme">Domyślny systemu</string>
+    <string name="all_next_segments">Wszystkie kolejne segmenty</string>
+    <string name="previous_segment">Poprzedni segment</string>
+    <string name="all_previous_segments">Wszystkie poprzednie segmenty</string>
+    <string name="only_selected_segment_recalc">Tylko wybrany segment zostanie ponownie obliczony przy użyciu wybranego profilu.</string>
+    <string name="all_next_segments_will_be_recalc">Wszystkie kolejne segmenty zostaną ponownie obliczone przy użyciu wybranego profilu.</string>
+    <string name="all_previous_segments_will_be_recalc">Wszystkie poprzednie segmenty zostaną ponownie obliczone przy użyciu wybranego profilu.</string>
+    <string name="open_saved_track">Otwórz zapisaną ścieżkę</string>
+    <string name="shared_string_is_saved">jest zapisywany</string>
+    <string name="one_point_error">Należy dodać co najmniej dwa punkty.</string>
 </resources>

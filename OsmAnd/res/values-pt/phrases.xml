@@ -286,7 +286,7 @@
     <string name="poi_fee">Taxa</string>
     <string name="poi_smoking">Fumar</string>
     <string name="poi_delivery">Entrega</string>
-    <string name="poi_drive_in">Drive - in</string>
+    <string name="poi_drive_in">Drive-in</string>
     <string name="poi_drive_through">Drive - through</string>
     <string name="poi_takeaway">Serviço de take-away</string>
     <string name="poi_cocktails">Cocktails</string>
@@ -1386,7 +1386,7 @@
     <string name="poi_pump_no">Sem bomba</string>
     <string name="poi_pump_yes">Sim</string>
     <string name="poi_water_characteristic_mineral">Mineral</string>
-    <string name="poi_water_characteristic_mud">Característica d\'água: barrenta</string>
+    <string name="poi_water_characteristic_mud">Lama</string>
     <string name="poi_water_characteristic_sulfuric">Sulfurosa</string>
     <string name="poi_water_point">Ponto de água</string>
     <string name="poi_information_guidepost">Poste com direções</string>
@@ -1785,7 +1785,7 @@
     <string name="poi_memorial_koshinto">Koshinto</string>
     <string name="poi_memorial_blue_plaque">Placa azul</string>
     <string name="poi_memorial_jizo">Jizo</string>
-    <string name="poi_memorial_cross">Cruzeiro</string>
+    <string name="poi_memorial_cross">Em forma cruzada</string>
     <string name="poi_memorial_vehicle">Veículo</string>
     <string name="poi_memorial_stolperstein">Stolpersteine</string>
     <string name="poi_memorial_obelisk">Obelisco</string>
@@ -2069,7 +2069,7 @@
     <string name="poi_fuel_100ll">Combustível 100LL</string>
     <string name="poi_fuel_autogas">Autogás (GPL)</string>
     <string name="poi_fuel_jeta1">Combustível Jet A-1</string>
-    <string name="poi_fuel_adblue">Combustível AdBlue</string>
+    <string name="poi_fuel_adblue">Fluido de escape diesel</string>
     <string name="poi_fuel_wood">Combustível: madeira</string>
     <string name="poi_fuel_charcoal">Combustível: carvão vegetal</string>
     <string name="poi_fuel_coal">Combustível: carvão</string>
@@ -2568,7 +2568,7 @@
     <string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Salva de explosão: segunda ou posterior detonação de um teste de salva</string>
     <string name="poi_nuclear_explosion_crater_diameter">Explosão: diâmetro de cratera</string>
     <string name="poi_nuclear_explosion_warhead">Explosão: ogiva</string>
-    <string name="poi_nuclear_explosion_device">Explosão: dispositivo</string>
+    <string name="poi_nuclear_explosion_device">Explosão: aparelho</string>
     <string name="poi_addr_housename">Complemento</string>
     <string name="poi_plant_nursery">Viveiro de plantas</string>
     <string name="poi_compressed_air_yes">Sim</string>
@@ -3771,7 +3771,7 @@
     <string name="poi_volcano_number_of_eruptions">Quantidade de erupções</string>
     <string name="poi_drinking_water_refill_network">Rede de reabastecimento de água potável</string>
     <string name="poi_drinking_water_refill_no">Reabastecimento de água potável: não</string>
-    <string name="poi_drinking_water_refill_yes">Reabastecimento de água potável: sim</string>
+    <string name="poi_drinking_water_refill_yes">Sim</string>
     <string name="poi_seamark_obstruction">Obstrução</string>
     <string name="poi_seamark_water_level_below_mwl">Nível da água: abaixo do nível médio da água</string>
     <string name="poi_seamark_water_level_above_mwl">Nível da água: acima do nível médio da água</string>
@@ -3814,4 +3814,17 @@
     <string name="poi_traffic_signals_vibration_no">Vibração: não</string>
     <string name="poi_traffic_signals_arrow">Seta</string>
     <string name="poi_traffic_signals_vibration">Vibração</string>
+    <string name="poi_city_block">Quarteirão</string>
+    <string name="poi_borough">Bairro</string>
+    <string name="poi_give_box">Give-box</string>
+    <string name="poi_traffic_signals_arrow_no">Seta: não</string>
+    <string name="poi_elevator">Elevador</string>
+    <string name="poi_departures_board_timetable">Calendário</string>
+    <string name="poi_departures_board_realtime">Tempo real</string>
+    <string name="poi_departures_board_delay">Atraso</string>
+    <string name="poi_departures_board_yes">Sim</string>
+    <string name="poi_departures_board_no">Quadro de partidas: não</string>
+    <string name="poi_departures_board">Quadro de partidas</string>
+    <string name="poi_drinking_water_refill">Reabastecimento de água potável</string>
+    <string name="poi_recycling_small_electrical_appliances">Pequenos aparelhos elétricos</string>
 </resources>

@@ -39,7 +39,7 @@ public class TabActivity extends ActionBarProgressActivity {
 		private List<TabItem> mTabs;
 
 		public OsmandFragmentPagerAdapter(FragmentManager fm, List<TabItem> items) {
-			super(fm);
+			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 			mTabs = items;
 		}
 

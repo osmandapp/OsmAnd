@@ -13,6 +13,7 @@ import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 
+import static net.osmand.plus.settings.backend.OsmandSettings.NO_EXTERNAL_DEVICE;
 import static net.osmand.plus.settings.backend.OsmandSettings.GENERIC_EXTERNAL_DEVICE;
 import static net.osmand.plus.settings.backend.OsmandSettings.PARROT_EXTERNAL_DEVICE;
 import static net.osmand.plus.settings.backend.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
@@ -60,10 +61,12 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 				mapActivity.changeZoom(1);
 				return true;
 			}
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() != NO_EXTERNAL_DEVICE) {
+			return true;
 		} else if (mapScrollHelper.isScrollingDirectionKeyCode(keyCode)) {
 			return mapScrollHelper.onKeyDown(keyCode, event);
 		}
-		return false;
+		return app.getAidlApi().onKeyEvent(event);
 	}
 
 	@Override
@@ -123,10 +126,10 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 				mapActivity.changeZoom(1);
 				return true;
 			}
-		} else {
-			return OsmandPlugin.onMapActivityKeyUp(mapActivity, keyCode);
+		} else if (OsmandPlugin.onMapActivityKeyUp(mapActivity, keyCode)) {
+			return true;
 		}
-		return false;
+		return app.getAidlApi().onKeyEvent(event);
 	}
 
 	@Override

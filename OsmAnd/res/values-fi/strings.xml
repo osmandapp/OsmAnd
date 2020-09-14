@@ -57,7 +57,6 @@
     <string name="map_widget_compass">Kompassi</string>
     <string name="map_widget_reset">Palauta oletusasetukset</string>
     <string name="map_widget_parking">Pysäköinti</string>
-    <string name="map_widget_monitoring">GPX kirjaus</string>
     <string name="map_widget_speed">Nopeus</string>
     <string name="map_widget_distance">Päämäärä</string>
     <string name="map_widget_altitude">Korkeus</string>
@@ -191,7 +190,7 @@
     <string name="search_position_current_location_found">Sijaintini (löydetty)</string>
     <string name="search_position_address">Osoite…</string>
     <string name="search_position_favorites">Suosikit…</string>
-    <string name="search_position_undefined">Määrittelemätön</string>
+    <string name="shared_string_undefined">Määrittelemätön</string>
     <string name="select_search_position">Alkuperä:</string>
     <string name="shared_string_save">Tallenna</string>
     <string name="local_index_upload_gpx_description">Lähetä GPX tiedostot OSM yhteisölle. Niitä käytetään karttojen parantamiseen.</string>
@@ -331,7 +330,6 @@
     <string name="save_current_track">Tallenna nykyinen reitti</string>
     <string name="save_track_interval">Kirjausväli suunnistuksen aikana</string>
     <string name="save_track_to_gpx_descrp">Jäljet tallennetaan jälkihakemistoon suunnistuksen aikana.</string>
-    <string name="save_track_to_gpx">Kirjaa reitti automaattisesti suunnistuksen aikana</string>
     <string name="update_tile">Päivitä kartta</string>
     <string name="mark_point">Kohde</string>
     <string name="shared_string_add_to_favorites">Lisää suosikkeihin</string>
@@ -502,7 +500,6 @@
     <string name="auto_follow_route_navigation_descr">Keskitä karttanäkymä automaattisesti vain navigoidessa.</string>
     <string name="pref_vector_map">Vektorikarttojen asetukset</string>
     <string name="file_with_name_already_exists">Tiedosto tällä nimellä on jo olemassa.</string>
-    <string name="shared_string_gpx_route">GPX reitti</string>
     <string name="button_upgrade_osmandplus">Päivitä OsmAnd+ ohjelmaan</string>
     <string name="context_menu_item_search">Etsi läheltä</string>
     <string name="route_successfully_saved_at">Reitti tallennettiin nimellä ”%1$s”.</string>
@@ -518,7 +515,6 @@
     <string name="no_buildings_found">Rakennuksia ei löytynyt.</string>
     <string name="search_villages_and_postcodes">Etsi lisää paikkakuntia/postinumeroita</string>
     <string name="map_widget_max_speed">Nopeusrajoitus</string>
-    <string name="monitoring_control_start">GPX</string>
     <string name="osmand_parking_position_name">Pysäköintipaikka</string>
     <string name="osmand_parking_plugin_description"/>
     <string name="context_menu_item_add_parking_point">Merkitse pysäköintipaikaksi</string>
@@ -640,7 +636,6 @@
     <string name="shared_string_select_on_map">Valitse kartalta</string>
     <string name="shared_string_deselect">Poista valinta</string>
     <string name="shared_string_deselect_all">Poista kaikki valinnat</string>
-    <string name="shared_string_save_as_gpx">Tallenna uutena GPX-tiedostona</string>
     <string name="shared_string_delete_all">Poista kaikki</string>
     <string name="shared_string_share">Jaa</string>
     <string name="shared_string_export">Vie</string>
@@ -772,7 +767,6 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
 
 Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläistä) perustuu mittauksiin jotka on tehnyt SRTM (Shuttle Radar Topography Mission) ja ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ja kuvausvälineet mukana kulkeva Terra, NASAn maapallontarkkailujärjestelmän lippulaiva satelliitti. ASTER on yhteistyö NASAn, Japanin talous-, kauppa ja teollisuusministeriön (METI), ja Japanin avaruusjärjestelmien (J-spacesystems) välillä.
  "</string>
-    <string name="layer_gpx_layer">GPX-tiedostot…</string>
     <string name="layer_map">Kartan lähde…</string>
     <string name="text_size">Tekstin koko</string>
     <string name="map_locale">Kartan kieli</string>
@@ -799,7 +793,6 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="notes">Muistiinpanot</string>
     <string name="roads_only">Vain tiet</string>
     <string name="edit_group">Muokkaa ryhmää</string>
-    <string name="show_gpx">Näytä GPX-tiedot</string>
     <string name="favourites">Suosikit</string>
     <string name="closing_at">Sulkeutuu</string>
     <string name="opening_at">Avautuu</string>
@@ -918,7 +911,6 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="access_shared_string_navigate_up">Navigointi ylös</string>
     <string name="access_sort">Lajittele</string>
     <string name="map_mode">Karttatila</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX-tiedostoa valittu</string>
     <string name="rendering_value_fine_name">Hieno</string>
     <string name="rendering_value_thin_name">Ohut</string>
     <string name="rendering_value_medium_name">Keskipaksu</string>
@@ -1380,8 +1372,6 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="live_monitoring_m">Online seuranta (GPX pakollinen)</string>
     <string name="live_monitoring_start">Aloita online seuranta</string>
     <string name="live_monitoring_stop">Lopeta online seuranta</string>
-    <string name="gpx_monitoring_start">Aloita GPX kirjaus</string>
-    <string name="gpx_monitoring_stop">Lopeta GPX kirjaus</string>
     <string name="gpx_start_new_segment">Aloita uusi segmentti</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Tie ei-kulkuneuvoille</string>
     <string name="rendering_attr_hideText_name">Teksti</string>
@@ -1727,7 +1717,6 @@ Reitin pisteet %2$s</string>
     <string name="closing_changeset">Suljetaan muutosjoukkoa…</string>
     <string name="text_size_descr">Aseta tekstin koko kartalle.</string>
     <string name="background_service_is_enabled_question">OsmAnd taustapalvelu on vielä suorituksessa. Haluatko puysäyttää myös sen?</string>
-    <string name="save_track_to_gpx_globally">Kirjaa jälki GPX tiedostoon</string>
     <string name="save_track_to_gpx_globally_headline">Jäljen kirjaus tarpeen vaatiessa</string>
     <string name="selected_gpx_info_show">
 
@@ -1860,7 +1849,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
 %2$s</string>
     <string name="add_waypoint_dialog_added">GPX väyläpiste \'\'{0}\'\' lisätty</string>
     <string name="add_waypoint_dialog_title">Lisää väyläpiste tallennettuun GPX jälkeen</string>
-    <string name="context_menu_item_add_waypoint">Lisää GPX väyläpiste</string>
     <string name="amenity_type_administrative">Hallinnollinen</string>
     <string name="indexing_address">Indeksoidaan osoitteita.…</string>
     <string name="indexing_map">Indeksoidaan karttaa…</string>
@@ -1963,7 +1951,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="shared_string_sort">Lajittele</string>
     <string name="coordinate_input">Koordinaattien syöttö</string>
     <string name="marker_save_as_track_descr">Vie markkerisi seuraavaan GPX-tiedostoon:</string>
-    <string name="marker_save_as_track">Tallenna GPX-tiedostona</string>
     <string name="move_to_history">Siirrä historiaan</string>
     <string name="group_will_be_removed_after_restart">Ryhmä poistetaan sovelluksen uudelleenkäynnistyksen jälkeen.</string>
     <string name="show_arrows_on_the_map">Näytä nuolet kartalla</string>
@@ -2411,7 +2398,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="min_max">Min/Max</string>
     <string name="rendering_value_translucent_pink_name">Läpikuultava vaaleanpunainen</string>
     <string name="rendering_value_darkyellow_name">Tummankeltainen</string>
-    <string name="shared_string_gpx_files">GPX-tiedostot</string>
     <string name="rendering_value_black_name">Musta</string>
     <string name="osm_live_payment_monthly_title">Kuukausittain</string>
     <string name="osm_live_payment_3_months_title">Joka kolmas kuukausi</string>
@@ -2498,7 +2484,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="suggested_maps">Ehdotetut kartat</string>
     <string name="new_plugin_added">Uusi laajennus lisätty</string>
     <string name="join_segments">Yhdistä segmentit</string>
-    <string name="add_segment_to_the_track">Lisää GPX-tiedostoon</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / kuukausi</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / kuukausi</string>
     <string name="month">Kuukausi</string>
@@ -2558,5 +2543,21 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="mapillary_item">OsmAnd + mapillary</string>
     <string name="quick_action_item">Pikatoiminto</string>
     <string name="radius_ruler_item">Sädeviivain</string>
-    <string name="download_unsupported_action">Toimintoa ei tuettu %1$s</string>
+    <string name="download_unsupported_action">Ei tuettu toiminto %1$s</string>
+    <string name="travel_item">Matkailu (Wikivoyage ja Wikipedia)</string>
+    <string name="select_track_file">"Valitse reitti tiedosto "</string>
+    <string name="wiki_menu_download_descr">Lisäkarttoja tarvitaan Wikipedian erikoiskohteiden tarkastelemiseen kartalla.</string>
+    <string name="select_wikipedia_article_langs">Valitse kielet, joilla Wikipedia-artikkelit näkyvät kartalla. Voit vaihtaa kaikkien käytettävissä olevien kielten välillä lukiessasi artikkelia.</string>
+    <string name="some_articles_may_not_available_in_lang">Jotkut Wikipedia-artikkelit eivät välttämättä ole saatavilla omalla kielelläsi.</string>
+    <string name="lang_zhyue">Kantoninkiina</string>
+    <string name="lang_uz">uzbekki</string>
+    <string name="lang_tt">tataari</string>
+    <string name="lang_sco">skotti</string>
+    <string name="lang_ne">nepali</string>
+    <string name="search_poi_types">Etsi POI-tyyppejä</string>
+    <string name="custom_osmand_plugin">Muokattu OsmAnd-laajennus</string>
+    <string name="changes_applied_to_profile">Muutokset lisätty \'%1$s\' profiiliin.</string>
+    <string name="settings_item_read_error">Ei voitu lukea \'%1$s\'.</string>
+    <string name="settings_item_write_error">Ei voitu kirjoittaa \'%1$s\'.</string>
+    <string name="settings_item_import_error">Ei voitu tuoda kohteesta \'%1$s\'.</string>
 </resources>

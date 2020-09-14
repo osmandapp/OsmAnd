@@ -32,6 +32,24 @@ public class GeoPointParserUtilTest {
 		System.out.println(actual);
 		assertGeoPoint(actual, new GeoParsedPoint(46.853582, 9.529903));
 	}
+	
+	@Test
+	public void testGoogleMapsData() {
+		// https://www.google.com/maps?daddr=Bahnhofplatz+3,+7000+Chur@46.853582,9.529903
+		GeoParsedPoint actual = GeoPointParserUtil.parse(
+				"https://www.google.co.in/maps/place/10%C2%B007'16.8%22N+76%C2%B020'54.2%22E/@10.1213253,76.3478427,247m/data=!3m2!1e3!4b1!4m6!3m5!1s0x0:0x0!7e2!8m2!3d10.1213237!4d76.348392?shorturl=1");
+		assertGeoPoint(actual, new GeoParsedPoint(10.1213253, 76.3478427));
+		actual = GeoPointParserUtil.parse(
+				"https://www.google.co.in/maps/place/data=!3m2!1e3!4b1!4m6!3m5!1s0x0:0x0!7e2!8m2!3d10.1213237!4d76.348392?shorturl=1");
+		assertGeoPoint(actual, new GeoParsedPoint(10.1213237, 76.348392));
+	}
+	
+	@Test
+	public void testMapsMeParser() {
+		GeoParsedPoint actual = GeoPointParserUtil.parse(
+				"http://ge0.me/44TvlEGXf-/Kyiv");
+		assertGeoPoint(actual, new GeoParsedPoint(50.45003, 30.52414, 18, "Kyiv"));
+	}
 
 	@Test
 	public void testGeoPoint() {
@@ -438,21 +456,21 @@ public class GeoPointParserUtilTest {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint("paris"));
 
-		// TODO this URL does not work, where is it used?
+		// LEGACY this URL does not work, where is it used?
 		// http://maps.google.com/maps/q=loc:34,-106&z=11
 		url = "http://maps.google.com/maps/q=loc:" + ilat + "," + ilon + "&z=" + z;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
-		// TODO this URL does not work, where is it used?
+		// LEGACY this URL does not work, where is it used?
 		// http://maps.google.com/maps/q=loc:34.99393,-106.61568&z=11
 		url = "http://maps.google.com/maps/q=loc:" + dlat + "," + dlon + "&z=" + z;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// TODO this URL does not work, where is it used?
+		// LEGACY  this URL does not work, where is it used?
 		// whatsapp
 		// http://maps.google.com/maps/q=loc:34,-106 (You)
 		z = GeoParsedPoint.NO_ZOOM;
@@ -461,7 +479,7 @@ public class GeoPointParserUtilTest {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
-		// TODO this URL does not work, where is it used?
+		// LEGACY this URL does not work, where is it used?
 		// whatsapp
 		// http://maps.google.com/maps/q=loc:34.99393,-106.61568 (You)
 		z = GeoParsedPoint.NO_ZOOM;
@@ -705,7 +723,7 @@ public class GeoPointParserUtilTest {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-        /* URLs straight from various services, instead of generated here */
+		/* URLs straight from various services, instead of generated here */
 
 		String urls[] = {
 				"https://openstreetmap.org/go/0LQ127-?m",

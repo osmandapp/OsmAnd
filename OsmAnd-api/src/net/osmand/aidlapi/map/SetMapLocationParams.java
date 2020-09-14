@@ -10,12 +10,14 @@ public class SetMapLocationParams extends AidlParams {
 	private double latitude;
 	private double longitude;
 	private int zoom;
+	private float rotation;
 	private boolean animated;
 
-	public SetMapLocationParams(double latitude, double longitude, int zoom, boolean animated) {
+	public SetMapLocationParams(double latitude, double longitude, int zoom, float rotation, boolean animated) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.zoom = zoom;
+		this.rotation = rotation;
 		this.animated = animated;
 	}
 
@@ -47,6 +49,10 @@ public class SetMapLocationParams extends AidlParams {
 		return zoom;
 	}
 
+	public float getRotation() {
+		return rotation;
+	}
+	
 	public boolean isAnimated() {
 		return animated;
 	}
@@ -56,6 +62,7 @@ public class SetMapLocationParams extends AidlParams {
 		bundle.putDouble("latitude", latitude);
 		bundle.putDouble("longitude", longitude);
 		bundle.putInt("zoom", zoom);
+		bundle.putFloat("rotation", rotation);
 		bundle.putBoolean("animated", animated);
 	}
 
@@ -64,6 +71,7 @@ public class SetMapLocationParams extends AidlParams {
 		latitude = bundle.getDouble("latitude");
 		longitude = bundle.getDouble("longitude");
 		zoom = bundle.getInt("zoom");
+		rotation = bundle.getFloat("rotation");
 		animated = bundle.getBoolean("animated");
 	}
 }

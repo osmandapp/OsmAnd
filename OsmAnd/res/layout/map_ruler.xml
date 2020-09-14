@@ -1,0 +1,42 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/map_ruler_layout"
+	android:layout_width="@dimen/map_ruler_width"
+	android:layout_height="wrap_content"
+	android:layout_gravity="bottom">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginBottom="@dimen/map_ruler_bottom_margin">
+
+		<TextView
+			android:id="@+id/map_ruler_text_shadow"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_gravity="bottom"
+			android:gravity="center_horizontal"
+			android:lineSpacingMultiplier="0.9"
+			android:textSize="@dimen/map_widget_text_size_small"
+			tools:text="100 m" />
+
+		<TextView
+			android:id="@+id/map_ruler_text"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_gravity="bottom"
+			android:gravity="center_horizontal"
+			android:lineSpacingMultiplier="0.9"
+			android:textSize="@dimen/map_widget_text_size_small"
+			tools:text="100 m" />
+
+	</FrameLayout>
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/map_ruler_image"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:background="@drawable/ruler" />
+
+</FrameLayout>

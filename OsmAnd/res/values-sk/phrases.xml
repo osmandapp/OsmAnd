@@ -1123,7 +1123,7 @@
     <string name="poi_pump_powered">Poháňaná</string>
     <string name="poi_pump_no">Žiadna pumpa</string>
     <string name="poi_water_characteristic_mineral">Minerálna</string>
-    <string name="poi_water_characteristic_mud">Vlastnosti vody: blato</string>
+    <string name="poi_water_characteristic_mud">Blato</string>
     <string name="poi_water_characteristic_sulfuric">Sírnatá</string>
     <string name="poi_water_point">Vodný bod</string>
     <string name="poi_cuisine">Kuchyňa</string>
@@ -2110,7 +2110,7 @@
     <string name="poi_vending_sim_cards">SIM karty</string>
     <string name="poi_branch">Pobočka</string>
     <string name="poi_memorial_blue_plaque">Modrá plaketa</string>
-    <string name="poi_memorial_cross">V tvare kríža</string>
+    <string name="poi_memorial_cross">Tvar kríža</string>
     <string name="poi_memorial_vehicle">Vozidlo</string>
     <string name="poi_memorial_stolperstein">Značka na chodníku</string>
     <string name="poi_memorial_obelisk">Obelisk</string>
@@ -2210,7 +2210,7 @@
     <string name="poi_fuel_91ul">Palivo 91UL</string>
     <string name="poi_fuel_100ll">Palivo 100LL</string>
     <string name="poi_fuel_jeta1">Letecké palivo A-1</string>
-    <string name="poi_fuel_adblue">Palivo AdBlue</string>
+    <string name="poi_fuel_adblue">Naftová výfuková tekutina (AdBlue)</string>
     <string name="poi_fuel_wood">Palivo: drevo</string>
     <string name="poi_fuel_charcoal">Palivo: drevné uhlie</string>
     <string name="poi_fuel_coal">Palivo: uhlie</string>
@@ -2219,8 +2219,8 @@
     <string name="poi_historic_milestone">Historický míľnik</string>
     <string name="poi_tents_yes">Povolené</string>
     <string name="poi_tents_no">Stany nepovolené</string>
-    <string name="poi_openfire_yes">Otvorený oheň polovený</string>
-    <string name="poi_openfire_no">Otvorený oheň nepolovený</string>
+    <string name="poi_openfire_yes">Otvorený oheň povolený</string>
+    <string name="poi_openfire_no">Otvorený oheň nepovolený</string>
     <string name="poi_scout_yes">Áno</string>
     <string name="poi_scout_no">Skautský tábor: nie</string>
     <string name="poi_group_only_yes">Len skupiny: áno</string>
@@ -2521,7 +2521,7 @@
     <string name="poi_historic_period_new_kingdom">Historické obdobie: nové kráľovstvo (1550 – 1069 p. n. l.)</string>
     <string name="poi_historic_period_middle_kingdom">Historické obdobie: stredné kráľovstvo (2055 – 1650 p. n. l.)</string>
     <string name="poi_historic_period_predynastic_egypt">Historické obdobie: preddynastický Egypt</string>
-    <string name="poi_historic_period_early_dynastic_period">Historické obdobie: obdobie rannej dynastie (3100 – 2686 p. n. l.)</string>
+    <string name="poi_historic_period_early_dynastic_period">Historické obdobie: ranná dynastia (3100 – 2686 p. n. l.)</string>
     <string name="poi_historic_period_old_kingdom">Historické obdobie: staré kráľovstvo (2686 – 2181 p. n. l.)</string>
     <string name="poi_historic_period_first_intermediate_period">Historické obdobie: prvé prechodné obdobie (2181 – 2055 p. n. l.)</string>
     <string name="poi_historic_period_second_intermediate_period">Historické obdobie: druhé prechodné obdobie (1650 – 1550 p. n. l.)</string>
@@ -3555,4 +3555,16 @@
     <string name="poi_video_telephone">Video</string>
     <string name="poi_sms">SMS</string>
     <string name="poi_climbing_crag_filter">Lezecká stena</string>
+    <string name="poi_cellar_entrance">Vstup do pivnice</string>
+    <string name="poi_surface_artificial_turf">Umelý trávnik</string>
+    <string name="poi_atm_yes">Bankomat: áno</string>
+    <string name="poi_health_specialty_naturopathy_yes">Prírodná medicína</string>
+    <string name="poi_health_specialty_manual_therapy_yes">Manuálna terapia</string>
+    <string name="poi_health_specialty_optometry_yes">Optometria</string>
+    <string name="poi_health_specialty_obstetrics_caesarean_section_yes">Pôrodníctvo (cisársky rez)</string>
+    <string name="poi_cooperative">Družstevná kancelária</string>
+    <string name="poi_wetland_bog">Močiar</string>
+    <string name="poi_traffic_signals_arrow">Šípka</string>
+    <string name="poi_traffic_signals_vibration">Vibrácie</string>
+    <string name="poi_fire_hydrant_pressure_filter">Tlak</string>
 </resources>

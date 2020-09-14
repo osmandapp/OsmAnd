@@ -17,7 +17,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.MotionEventCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -392,7 +391,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 					profileViewHolder.moveButton.setOnTouchListener(new View.OnTouchListener() {
 						@Override
 						public boolean onTouch(View view, MotionEvent event) {
-							if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+							if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 								listener.onDragStarted(holder);
 							}
 							return false;
