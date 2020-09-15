@@ -63,6 +63,7 @@ public class InAppPurchaseHelper {
 
 	private InAppPurchases purchases;
 	private long lastValidationCheckTime;
+	private boolean inventoryRequested;
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
 	// (arbitrary) request code for the purchase flow
@@ -333,8 +334,8 @@ public class InAppPurchaseHelper {
 	}
 
 	public boolean needRequestInventory() {
-		return (isSubscribedToLiveUpdates(ctx) && Algorithms.isEmpty(ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.get()))
-				|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC;
+		return !inventoryRequested && ((isSubscribedToLiveUpdates(ctx) && Algorithms.isEmpty(ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.get()))
+				|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC);
 	}
 
 	public void requestInventory() {
@@ -803,6 +804,7 @@ public class InAppPurchaseHelper {
 		protected void onPostExecute(String response) {
 			logDebug("Response=" + response);
 			if (response != null) {
+				inventoryRequested = true;
 				try {
 					JSONObject obj = new JSONObject(response);
 					JSONArray names = obj.names();
