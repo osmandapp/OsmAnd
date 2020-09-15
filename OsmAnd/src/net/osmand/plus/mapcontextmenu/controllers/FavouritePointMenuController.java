@@ -160,11 +160,13 @@ public class FavouritePointMenuController extends MenuController {
 	@NonNull
 	@Override
 	public CharSequence getSubtypeStr() {
-		Typeface typeface = FontCache.getRobotoRegular(getMapActivity());
-		SpannableString addressSpannable = new SpannableString(fav.getAddress());
-		addressSpannable.setSpan(new CustomTypefaceSpan(typeface), 0, addressSpannable.length(), 0);
-
-		return addressSpannable;
+		if (fav.getAddress() != null) {Typeface typeface = FontCache.getRobotoRegular(getMapActivity());
+			SpannableString addressSpannable = new SpannableString(fav.getAddress());
+			addressSpannable.setSpan(new CustomTypefaceSpan(typeface), 0, addressSpannable.length(), 0);
+			return addressSpannable;
+		} else {
+			return "";
+		}
 	}
 
 	@Override

@@ -243,9 +243,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		addDelDescription.setTextColor(getResources().getColor(activeColorResId));
 		addAddressBtn.setTextColor(getResources().getColor(activeColorResId));
 		addAddressBtn.setCompoundDrawablesWithIntrinsicBounds(
-				app.getUIUtilities().getIcon(R.drawable.ic_action_location_16, activeColorResId),null,null,null);
-		addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
-				app.getUIUtilities().getIcon(R.drawable.ic_action_description_16, activeColorResId),null,null,null);
+				app.getUIUtilities().getIcon(R.drawable.ic_action_location_16,
+						activeColorResId),null,null,null);
+		selectIconDescription(activeColorResId);
 		addDelDescription.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -270,13 +270,36 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			}
 		});
 		AndroidUiHelper.updateVisibility(addressCaption, false);
-		addAddressBtn.setText(getAddressInitValue());
+		if(!Algorithms.isEmpty(getAddressInitValue())){
+			addAddressBtn.setText(getAddressInitValue());
+		} else {
+			addAddressBtn.setText(getString(R.string.add_address));
+		};
+		final ImageView deleteAddressIcon = (ImageView) view.findViewById(R.id.delete_address_icon);
+		deleteAddressIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_trash_basket_16, activeColorResId));
+		if(!Algorithms.isEmpty(getAddressInitValue())){
+			deleteAddressIcon.setVisibility(View.VISIBLE);
+		} else {
+			deleteAddressIcon.setVisibility(View.GONE);
+		}
+		deleteAddressIcon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				addressCaption.setVisibility(View.GONE);
+				addAddressBtn.setText(view.getResources().getString(R.string.add_address));
+				addressEdit.setText("");
+				deleteAddressIcon.setVisibility(View.GONE);
+			}
+		});
 		addAddressBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (addressCaption.getVisibility() != View.VISIBLE) {
 					addressCaption.setVisibility(View.VISIBLE);
 					addAddressBtn.setText(view.getResources().getString(R.string.delete_address));
+					View row = view.findViewById(R.id.address_row);
+					row.setVisibility(View.GONE);
+					addAddressBtn.setText(getString(R.string.add_address));
 					View addressEdit = view.findViewById(R.id.address_edit);
 					addressEdit.requestFocus();
 					AndroidUtils.softKeyboardDelayed(requireActivity(),addressEdit);
@@ -354,6 +377,19 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		return view;
 	}
 
+
+	private void selectIconDescription(int activeColorResId) {
+		if (descriptionCaption.getVisibility() != View.VISIBLE) {
+			addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
+					app.getUIUtilities().getIcon(R.drawable.ic_action_description_16, activeColorResId),null,null,null);
+		} else {
+			addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
+					app.getUIUtilities().getIcon(R.drawable.ic_action_trash_basket_16,
+							activeColorResId),null,null,null);
+		}
+	}
+
+
 	private void checkEmptyName(Editable name, TextInputLayout nameCaption, View saveButton) {
 		if (name.toString().trim().isEmpty()) {
 			nameCaption.setError(app.getString(R.string.please_provide_point_name_error));
@@ -393,7 +429,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		}
 
 	}
-
+	boolean isAddressAvailable(){
+		return addressCaption.getVisibility() == View.VISIBLE;
+	}
+	boolean isDescriptionAvailable(){
+		return descriptionCaption.getVisibility() == View.VISIBLE;
+	}
 	private void createGroupSelector() {
 		groupListAdapter = new GroupAdapter();
 		groupRecyclerView = view.findViewById(R.id.group_recycler_view);

@@ -243,8 +243,8 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		if (favorite != null) {
 			final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
 					getNameTextValue(), getCategoryTextValue());
-			point.setDescription(getDescriptionTextValue());
-			point.setAddress(getAddressTextValue());
+			point.setDescription(isDescriptionAvailable()?getDescriptionTextValue():null);
+			point.setAddress(isAddressAvailable()?getAddressTextValue():null);
 			point.setColor(color);
 			point.setBackgroundType(backgroundType);
 			point.setIconId(iconId);
@@ -259,8 +259,8 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		if (favorite != null) {
 			final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
 					getNameTextValue(), getCategoryTextValue());
-			point.setDescription(getDescriptionTextValue());
-			point.setAddress(getAddressTextValue());
+			point.setDescription(isDescriptionAvailable()?getDescriptionTextValue():null);
+			point.setAddress(isAddressAvailable()?getAddressTextValue():null);
 			point.setColor(color);
 			point.setBackgroundType(backgroundType);
 			point.setIconId(iconId);
