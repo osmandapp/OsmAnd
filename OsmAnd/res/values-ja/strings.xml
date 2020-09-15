@@ -3863,4 +3863,31 @@ POIの更新は利用できません</string>
     <string name="get_discount_second_part">次年度以降 %1$s</string>
     <string name="get_discount_first_few_part">初%2$s度 %1$s</string>
     <string name="get_discount_first_part">初%2$s度 %1$s</string>
+    <string name="gpx_monitoring_stop">ルート記録を一時停止</string>
+    <string name="gpx_monitoring_start">ルート記録を続行</string>
+    <string name="system_default_theme">システムのデフォルト</string>
+    <string name="all_next_segments_will_be_recalc">以後のすべてのセグメントは、選択したプロファイルを使用して再計算されます。</string>
+    <string name="all_next_segments">以後のすべてのセグメント</string>
+    <string name="previous_segment">前のセグメント</string>
+    <string name="all_previous_segments">以前のすべてのセグメント</string>
+    <string name="only_selected_segment_recalc">選択したセグメントのみ、選択したプロファイルを使用して再計算されます。</string>
+    <string name="all_previous_segments_will_be_recalc">以前のセグメントは、選択したプロファイルを使用して再計算されます。</string>
+    <string name="open_saved_track">保存した経路を開く</string>
+    <string name="one_point_error">少なくとも2つの地点を追加してください。</string>
+    <string name="shared_string_redo">繰り返し</string>
+    <string name="release_3_8">• アップデートで追加されたルート計画モードは、セグメントごとに異なるナビゲーションタイプを使用でき、おおまかな指定を実際の道路に沿って反映可能に。
+\n
+\n• 経路の新しい外観オプション : 色、厚さを選択し、方向矢印のオン、マークの開始/終了など
+\n
+\n• 自転車ノードの可視性の向上
+\n
+\n• 基本情報を含む経路のコンテキストメニュー追加
+\n
+\n• 検索アルゴリズムの改善
+\n
+\n• ナビゲーションの追跡オプションの改善
+\n
+\n• プロファイル設定のインポート/エクスポートに関する問題を修正
+\n
+\n</string>
 </resources>

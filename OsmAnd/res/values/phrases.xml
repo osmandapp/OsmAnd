@@ -4253,4 +4253,6 @@
 	<string name="poi_departures_board_realtime">Realtime</string>
 	<string name="poi_departures_board_timetable">Timetable</string>
 
+	<string name="poi_beehive">Beehive</string>
+
 </resources>

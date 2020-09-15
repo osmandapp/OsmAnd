@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
@@ -168,6 +170,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private void setDirectionMode(boolean directionMode) {
 		this.directionMode = directionMode;
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				quit(true);
+			}
+		});
 	}
 
 	@Nullable
@@ -1445,18 +1457,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		GpxData gpxData = editingCtx.getGpxData();
 		String displayedName;
 		if (gpxData == null) {
-			final String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
-			displayedName = suggestedName;
-			OsmandApplication app = getMyApplication();
-			if (app != null) {
-				File dir = app.getAppPath(GPX_INDEX_DIR);
-				File fout = new File(dir, suggestedName + GPX_FILE_EXT);
-				int ind = 0;
-				while (fout.exists()) {
-					displayedName = suggestedName + "_" + (++ind);
-					fout = new File(dir, displayedName + GPX_FILE_EXT);
-				}
-			}
+			String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
+			displayedName = FileUtils.createUniqueFileName(requireMyApplication(), suggestedName, GPX_INDEX_DIR, GPX_FILE_EXT);
 		} else {
 			displayedName = AndroidUtils.trimExtension(new File(gpxData.getGpxFile().path).getName());
 		}

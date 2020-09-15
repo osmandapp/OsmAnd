@@ -294,7 +294,7 @@ public class MapActivityActions implements DialogProvider {
 					dlg.findViewById(R.id.DuplicateFileName).setVisibility(View.VISIBLE);
 				} else {
 					dlg.dismiss();
-					new SaveDirectionsAsyncTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
+					new SaveDirectionsAsyncTask(app, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
 				}
 			}
 		});
@@ -310,33 +310,42 @@ public class MapActivityActions implements DialogProvider {
 		return dlg;
 	}
 
-	private static class SaveDirectionsAsyncTask extends AsyncTask<File, Void, String> {
+	public static class SaveDirectionsAsyncTask extends AsyncTask<File, Void, GPXFile> {
 
 		private final OsmandApplication app;
+		boolean showOnMap;
 
-		public SaveDirectionsAsyncTask(OsmandApplication app) {
+		public SaveDirectionsAsyncTask(OsmandApplication app, boolean showOnMap) {
 			this.app = app;
+			this.showOnMap = showOnMap;
 		}
 
 		@Override
-		protected String doInBackground(File... params) {
+		protected GPXFile doInBackground(File... params) {
 			if (params.length > 0) {
 				File file = params[0];
-				String fileName = file.getName();
-				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName.substring(0,fileName.length()-GPX_FILE_EXT.length()));
-				GPXUtilities.writeGpxFile(file, gpx);
-				return app.getString(R.string.route_successfully_saved_at, file.getName());
+				String fileName = Algorithms.getFileNameWithoutExtension(file);
+				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName);
+				gpx.error = GPXUtilities.writeGpxFile(file, gpx);
+				return gpx;
 			}
 			return null;
 		}
 
 		@Override
-		protected void onPostExecute(String result) {
-			if (result != null) {
+		protected void onPostExecute(GPXFile gpxFile) {
+			if (gpxFile.error == null) {
+				app.getSelectedGpxHelper().selectGpxFile(gpxFile, showOnMap, false);
+				String result = app.getString(R.string.route_successfully_saved_at, gpxFile.tracks.get(0).name);
 				Toast.makeText(app, result, Toast.LENGTH_LONG).show();
+			} else {
+				String errorMessage = gpxFile.error.getMessage();
+				if (errorMessage == null) {
+					errorMessage = app.getString(R.string.error_occurred_saving_gpx);
+				}
+				Toast.makeText(app, errorMessage, Toast.LENGTH_LONG).show();
 			}
 		}
-
 	}
 
 	public void addActionsToAdapter(final double latitude,
@@ -476,6 +485,7 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.avoid_road) {
 					getMyApplication().getAvoidSpecificRoads().addImpassableRoad(mapActivity, new LatLon(latitude, longitude), true, false, null);
 				} else if (standardId == R.string.shared_string_add || standardId == R.string.favourites_context_menu_edit) {
+					mapActivity.getContextMenu().hide();
 					mapActivity.getContextMenu().buttonFavoritePressed();
 				} else if (standardId == R.string.shared_string_marker || standardId == R.string.shared_string_edit) {
 					mapActivity.getContextMenu().buttonWaypointPressed();

@@ -3843,4 +3843,23 @@
     <string name="plan_route_select_track_file_for_open">یک فایل رد انتخاب کنید تا باز شود.</string>
     <string name="shared_string_done">تمام</string>
     <string name="overwrite_track">بَرنویسی رد</string>
+    <string name="open_saved_track">آهنگ ذخیره شده را باز کنید</string>
+    <string name="shared_string_is_saved">ذخیره شده</string>
+    <string name="one_point_error">لطفا حداقل دو امتیاز اضافه کنید.</string>
+    <string name="shared_string_redo">آماده</string>
+    <string name="release_3_8">"به روز شده برنامه یک عملکرد مسیر: اجازه می دهد تا از انواع مختلف پیمایش در هر بخش و گنجاندن مسیرها استفاده کنید
+\n
+\n  • منوی New Appearance برای آهنگ ها، رنگ ، ضخامت ، فلش جهت نمایش ، نمادهای شروع / پایان استفاده می شوئ
+\n
+\n  • بهبود دید نود های دوچرخه.
+\n
+\n  • آهنگ ها اکنون قابل لمس هستند ، دارای منوی زمینه با اطلاعات اولیه هستند.
+\n
+\n  • بهبود الگوریتم های جستجو
+\n
+\n  • گزینه های ردیابی را در پیمایش بهبود بخشید
+\n
+\n  • مشکلات مربوط به واردات / صادرات تنظیمات نمایه برطرف شده است
+\n
+\n"</string>
 </resources>

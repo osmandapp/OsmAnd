@@ -86,7 +86,6 @@ import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.chooseplan.OsmLiveCancelledDialog;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
@@ -109,21 +108,15 @@ import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
-import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.PointEditorFragmentNew;
-import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxApproximationFragment;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
-import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -141,12 +134,8 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
 import net.osmand.plus.settings.fragments.DataStorageFragment;
-import net.osmand.plus.settings.fragments.ImportCompleteFragment;
-import net.osmand.plus.settings.fragments.ImportSettingsFragment;
-import net.osmand.plus.settings.fragments.ProfileAppearanceFragment;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -158,7 +147,6 @@ import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.render.RenderingRulesStorage;
@@ -669,85 +657,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			closeDrawer();
 			return;
 		}
-		if (getQuickSearchDialogFragment() != null) {
-			showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-			return;
-		}
-		if (trackDetailsMenu.isVisible()) {
-			trackDetailsMenu.hide(true);
-			if (mapContextMenu.isActive() && mapContextMenu.getPointDescription() != null
-					&& mapContextMenu.getPointDescription().isGpxPoint()) {
-				mapContextMenu.show();
-				return;
-			}
-			if (prevActivityIntent == null) {
-				return;
-			}
-		}
-		PlanRouteFragment planRouteFragment = getPlanRouteFragment();
-		if (planRouteFragment != null) {
-			if (planRouteFragment.quit(true)) {
-				MapMarkersDialogFragment.showInstance(this);
-			}
-			return;
-		}
-
-		SnapTrackWarningFragment snapTrackWarningFragment = getSnapTrackWarningBottomSheet();
-		if (snapTrackWarningFragment != null) {
-			snapTrackWarningFragment.dismissImmediate();
-			return;
-		}
-
-		GpxApproximationFragment gpxApproximationFragment = getGpxApproximationFragment();
-		if (gpxApproximationFragment != null) {
-			gpxApproximationFragment.dismissImmediate();
-			return;
-		}
-
-		MeasurementToolFragment measurementToolFragment = getMeasurementToolFragment();
-		if (measurementToolFragment != null) {
-			measurementToolFragment.quit(true);
-			return;
-		}
-		ChooseRouteFragment chooseRouteFragment = getChooseRouteFragment();
-		if (chooseRouteFragment != null) {
-			chooseRouteFragment.dismiss(true);
-			return;
-		}
-		ProfileAppearanceFragment profileAppearanceFragment = getProfileAppearanceFragment();
-		if (profileAppearanceFragment != null) {
-			if (profileAppearanceFragment.isProfileAppearanceChanged()) {
-				return;
-			}
-		}
-
-		PointEditorFragmentNew pointEditorFragmentNew = getPointEditorFragmentNew();
-		if (pointEditorFragmentNew != null) {
-			pointEditorFragmentNew.showExitDialog();
-			return;
-		}
-
-		TrackAppearanceFragment trackAppearanceFragment = getTrackAppearanceFragment();
-		if (trackAppearanceFragment != null) {
-			trackAppearanceFragment.dismissImmediate();
-			if (prevActivityIntent == null) {
-				return;
-			}
-		}
-
-
-		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
-			if (mapContextMenu.getCurrentMenuState() != MenuState.HEADER_ONLY && !isLandscapeLayout()) {
-				mapContextMenu.openMenuHeaderOnly();
-			} else {
-				mapContextMenu.close();
-			}
-			return;
-		}
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
 			quitAddGpxPointMode();
 		}
-		if (prevActivityIntent != null && getSupportFragmentManager().getBackStackEntryCount() == 0) {
+		if (getSupportFragmentManager().getBackStackEntryCount() == 0 && launchPrevActivityIntent()) {
+			return;
+		}
+		super.onBackPressed();
+	}
+
+	public boolean launchPrevActivityIntent() {
+		if (prevActivityIntent != null) {
 			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon loc = getMapLocation();
 			prevActivityIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
@@ -755,39 +675,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (mapViewTrackingUtilities.isMapLinkedToLocation()) {
 				prevActivityIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 			}
-			this.startActivity(prevActivityIntent);
+			startActivity(prevActivityIntent);
 			prevActivityIntent = null;
-			return;
+			return true;
 		}
-		QuickActionListFragment quickActionListFragment = getQuickActionListFragment();
-		if (quickActionListFragment != null && quickActionListFragment.isVisible()) {
-			if (quickActionListFragment.fromDashboard()) {
-				this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
-			} else {
-				getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed();
-			}
-		} else if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed()) {
-			return;
-		}
-		ImportSettingsFragment importSettingsFragment = getImportSettingsFragment();
-		if (importSettingsFragment != null) {
-			importSettingsFragment.showExitDialog();
-			return;
-		}
-		ImportCompleteFragment importCompleteFragment = getImportCompleteFragment();
-		if (importCompleteFragment != null) {
-			importCompleteFragment.dismissFragment();
-			return;
-		}
-		ConfigureMenuItemsFragment configureMenuItemsFragment = getConfigureMenuItemsFragment();
-		if (configureMenuItemsFragment != null) {
-			configureMenuItemsFragment.exitFragment();
-			return;
-		}
-
-		super.onBackPressed();
+		return false;
 	}
-
 
 	private void quitAddGpxPointMode() {
 		getMapLayers().getContextMenuLayer().getAddGpxPointBottomSheetHelper().hide();
@@ -930,7 +823,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
 					} else {
 						ActivityCompat.requestPermissions(this,
-								new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
 								DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 					}
 				}
@@ -2301,45 +2194,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(ChooseRouteFragment.TAG);
 	}
 
-	public ProfileAppearanceFragment getProfileAppearanceFragment() {
-		return getFragment(ProfileAppearanceFragment.TAG);
-	}
-
-	public QuickActionListFragment getQuickActionListFragment() {
-		return  getFragment(QuickActionListFragment.TAG);
-	}
-
-	public ImportSettingsFragment getImportSettingsFragment() {
-		return getFragment(ImportSettingsFragment.TAG);
-	}
-
-	public ImportCompleteFragment getImportCompleteFragment() {
-		return getFragment(ImportCompleteFragment.TAG);
-	}
-
-	public ConfigureMenuItemsFragment getConfigureMenuItemsFragment() {
-		return getFragment(ConfigureMenuItemsFragment.TAG);
-	}
-
-	public TrackAppearanceFragment getTrackAppearanceFragment() {
-		return getFragment(TrackAppearanceFragment.TAG);
-	}
-
 	public GpxApproximationFragment getGpxApproximationFragment() {
 		return getFragment(GpxApproximationFragment.TAG);
 	}
 
 	public SnapTrackWarningFragment getSnapTrackWarningBottomSheet() {
 		return getFragment(SnapTrackWarningFragment.TAG);
-	}
-
-	public PointEditorFragmentNew getPointEditorFragmentNew() {
-		PointEditorFragmentNew pointEditorFragmentNew;
-		pointEditorFragmentNew = getFragment(FavoritePointEditor.TAG);
-		if (pointEditorFragmentNew == null) {
-			pointEditorFragmentNew = getFragment(WptPtEditor.TAG);
-		}
-		return pointEditorFragmentNew;
 	}
 
 	public void backToConfigureProfileFragment() {
@@ -2353,7 +2213,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	<T> T getFragment(String fragmentTag){
+	<T> T getFragment(String fragmentTag) {
 		Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
 		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (T) fragment : null;
 	}

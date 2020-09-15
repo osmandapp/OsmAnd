@@ -113,30 +113,27 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 		}
 
 		if (trackWidthProp != null) {
-			AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR, "",
-					SettingsActivity.getStringPropertyValue(app, trackWidthProp.getDefaultValueDescription()));
-			items.add(item);
 			for (int j = 0; j < trackWidthProp.getPossibleValues().length; j++) {
-				item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR,
+				AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR,
 						trackWidthProp.getPossibleValues()[j],
 						SettingsActivity.getStringPropertyValue(app, trackWidthProp.getPossibleValues()[j]));
 				items.add(item);
+				if (j == trackWidthProp.getPossibleValues().length - 1) {
+					item.setLastItem(true);
+				}
 			}
-			item.setLastItem(true);
 		}
 		if (trackColorProp != null) {
-			AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR, "",
-					SettingsActivity.getStringPropertyValue(app, trackColorProp.getDefaultValueDescription()),
-					parseTrackColor(renderer, ""));
-			items.add(item);
 			for (int j = 0; j < trackColorProp.getPossibleValues().length; j++) {
-				item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR,
+				AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR,
 						trackColorProp.getPossibleValues()[j],
 						SettingsActivity.getStringPropertyValue(app, trackColorProp.getPossibleValues()[j]),
 						parseTrackColor(renderer, trackColorProp.getPossibleValues()[j]));
 				items.add(item);
+				if (j == trackColorProp.getPossibleValues().length - 1) {
+					item.setLastItem(true);
+				}
 			}
-			item.setLastItem(true);
 		}
 		return items;
 	}
