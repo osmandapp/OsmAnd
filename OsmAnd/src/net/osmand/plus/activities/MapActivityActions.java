@@ -1046,7 +1046,7 @@ public class MapActivityActions implements DialogProvider {
 		String modeDescription;
 		if (currentMode.isCustomProfile()) {
 			modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
-					Algorithms.capitalizeFirstLetterAndLowercase(currentMode.getParent().toHumanString()));
+					Algorithms.capitalizeFirstLetterAndLowercase(currentMode.getRoutingProfile()));
 		} else {
 			modeDescription = getString(R.string.profile_type_base_string);
 		}
