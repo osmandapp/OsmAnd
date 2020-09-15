@@ -2357,7 +2357,7 @@
     <string name="measurement_tool_save_as_new_track_descr">Сохранить точки, как точки маршрута или как линию.</string>
     <string name="choose_navigation_type">Выберите профиль навигации</string>
     <string name="of">%1$d из %2$d</string>
-    <string name="shared_string_list">Списком</string>
+    <string name="shared_string_list">Список</string>
     <string name="shared_string_groups">Группы</string>
     <string name="passed">Использовано: %1$s</string>
     <string name="make_active">Сделать активным</string>
@@ -2703,7 +2703,7 @@
     <string name="north_abbreviation">С</string>
     <string name="optional_point_name">Необязательное имя точки</string>
     <string name="rendering_attr_whiteWaterSports_name">Спортивные сплавы</string>
-    <string name="distance_farthest">По удалённости (сначала дальние)</string>
+    <string name="distance_farthest">Сначала дальние</string>
     <string name="distance_nearest">Удалённость (сначала ближние)</string>
     <string name="group_deleted">Группа удалена</string>
     <string name="clear_all_intermediates">Очистить все промежуточные точки</string>
@@ -3833,8 +3833,8 @@
 \nНа следующем шаге необходимо выбрать профиль навигации для определения разрешенных дорог и пороговое расстояние, чтобы приблизительно привязать маршрут к дорогам.</string>
     <string name="route_between_points_desc">Выберите способ соединения точек: прямой линией или прокладкой маршрута с выбранным профилем.</string>
     <string name="in_case_of_reverse_direction">При обратном направлении</string>
-    <string name="plan_route_exit_dialog_descr">Вы уверены, что хотите отменить все изменения в запланированном маршруте, закрыв его\?</string>
-    <string name="street_level_imagery">Изображения на уровне улиц</string>
+    <string name="plan_route_exit_dialog_descr">Все изменения будут утеряны. Закрыть план маршрута\?</string>
+    <string name="street_level_imagery">Съёмка уличного уровня</string>
     <string name="shared_string_save_as_gpx">Сохранить как новый файл трека</string>
     <string name="add_segment_to_the_track">Добавить в файл трека</string>
     <string name="shared_string_gpx_files">Треки</string>
