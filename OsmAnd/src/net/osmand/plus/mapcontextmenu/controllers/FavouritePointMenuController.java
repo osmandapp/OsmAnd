@@ -28,6 +28,7 @@ import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragmentNew;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.view.GravityDrawable;
 
@@ -160,11 +161,16 @@ public class FavouritePointMenuController extends MenuController {
 	@NonNull
 	@Override
 	public CharSequence getSubtypeStr() {
-		Typeface typeface = FontCache.getRobotoRegular(getMapActivity());
-		SpannableString addressSpannable = new SpannableString(fav.getAddress());
-		addressSpannable.setSpan(new CustomTypefaceSpan(typeface), 0, addressSpannable.length(), 0);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !Algorithms.isEmpty(fav.getAddress())) {
+			Typeface typeface = FontCache.getRobotoRegular(mapActivity);
+			SpannableString addressSpannable = new SpannableString(fav.getAddress());
+			addressSpannable.setSpan(new CustomTypefaceSpan(typeface), 0, addressSpannable.length(), 0);
 
-		return addressSpannable;
+			return addressSpannable;
+		} else {
+			return "";
+		}
 	}
 
 	@Override
