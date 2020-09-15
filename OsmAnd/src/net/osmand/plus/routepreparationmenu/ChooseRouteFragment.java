@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -117,6 +118,16 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	private boolean publicTransportMode;
 	private boolean needAdjustMap;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				dismiss(true);
+			}
+		});
+	}
 
 	@Nullable
 	@Override

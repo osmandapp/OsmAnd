@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -30,11 +32,12 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import org.apache.commons.logging.Log;
 
 import static android.view.Gravity.TOP;
-import static android.view.ViewGroup.LayoutParams.*;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.UiUtilities.DialogButtonType.*;
+import static net.osmand.plus.UiUtilities.DialogButtonType.PRIMARY;
+import static net.osmand.plus.UiUtilities.DialogButtonType.SECONDARY;
 
 public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 
@@ -55,6 +58,16 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 	private View applyButton;
 	private boolean nightMode;
 	private boolean portrait;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				dismissImmediate();
+			}
+		});
+	}
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		OsmandApplication app = getMyApplication();
