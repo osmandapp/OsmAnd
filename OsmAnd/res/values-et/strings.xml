@@ -2673,7 +2673,7 @@
     <string name="routing_attr_width_name">Laiuspiirang</string>
     <string name="routing_attr_width_description">Määra teedel lubatud sõiduki laius.</string>
     <string name="simulate_your_location_gpx_descr">Simuleeri oma asukohta kasutades salvestatud GPX rada.</string>
-    <string name="quick_action_directions_from_desc">Nupp ekraani keskkoha lähtekohaks muutmiseks ja sihtkohta teekonna arvutamiseks või sihtkoha valimise dialoogi avamiseks kui sihtkoha marker puudub kaardil.</string>
+    <string name="quick_action_directions_from_desc">Nupp ekraani keskkoha lähtekohaks muutmiseks. Seejärel on kas võimalik valida sihtkohta või alustada teekonna arvutamist.</string>
     <string name="record_plugin_description">See lisa aktiveerib radade salvestamise funktsionaalsuse, puudutades käsitsi kaardil GPX logimisvidinat või logides automaatselt kõik oma navigeerimise marsruudid GPX faili.
 \n
 \nSalvestatud radu saab jagada oma sõpradega või kasutada OSM kaastöödeks. Sportlased saavad kasutada salvestatud radu oma treeningute jälgimiseks. Mõningast raja põhianalüüsi saab teha otse OsmAnd sees, näiteks ringiajad, keskmine kiirus jne. Lisaks muidugi saab radu hiljem analüüsia ka spetsiaalsetete 3. osapoolte analüüsitööriistadega.</string>
@@ -2706,7 +2706,7 @@
     <string name="osmand_parking_plugin_description">Võimaldab registreerida oma auto parkimiskoha ja jälgida järelejäänud parkimisaega.
 \nNii asukoht kui aeg on nähtavad nii OsmAnd armatuurlaual kui kaardi vidinas. Meeldetuletust saab lisada Androidi kalendrisse.</string>
     <string name="unit_of_length_descr">Muuda kauguse mõõtmise ühikuid.</string>
-    <string name="osmand_distance_planning_plugin_description">See lisa annab kaardi vidina, mis võimaldab teekondade loomist kaarti koputades või olemasolevaid GPX-faile kasutades, et reise kavandada ja punktide vahelist kaugust mõõta. Tulemusi saab salvestada GPX-failina, mida saab hiljem juhendamiseks kasutada.</string>
+    <string name="osmand_distance_planning_plugin_description">Selleks, et reise kavandada ja punktide vahelist kaugust mõõta, loo teekondi kaardil koputades või olemasolevaid GPX-faile kasutades, Tulemusi saad salvestada GPX-failina, mida on hiljem võimalik juhendamiseks kasutada.</string>
     <string name="osmand_accessibility_description">See lisa teeb seadme erivajadusega kasutajatele mõeldud funktsioonid otse OsmAndis kättesaadavaks. See lihtsustab nt. kõnesünteesi häälte kõnekiiruse reguleerimist, ekraanil navigeerimise suuna seadistamist, rulliku kasutamist suurenduse juhtimiseks või kõnesünteesi tagasisidet, näiteks oma asukoha automaatseks teatamiseks.</string>
     <string name="osm_editing_plugin_description">See lisa võimaldab OsmAnd abil OSM kaastöid teha, näiteks OSM huvipunkte luua või muuta, OSM märkmeid avada või kommenteerida ning salvestatud GPX faile lisada. OSM on kogukonna juhitud globaalne üldkasutatav kaardistamisprojekt. Üksikasju leiad https://openstreetmap.org. Aktiivset osalemist hinnatakse ja panust saab teha otse OsmAnd rakendusest, kui seadistada rakenduses oma isiklikud OSM kasutajatunnused.</string>
     <string name="osmand_development_plugin_description">See lisa kuvab arendus- ja silumisfunktsioonide sätteid nagu teekonna arvutamine, renderdamise jõudlus või hääljuhiste testimine ja simuleerimine. Need seaded on mõeldud arendajatele ja pole tavakasutaja jaoks vajalikud.</string>
@@ -3495,7 +3495,7 @@
     <string name="lang_an">Aragoni</string>
     <string name="lang_lmo">Lombardi</string>
     <string name="custom_color">Kohandatud värv</string>
-    <string name="set_working_days_to_continue">Jätkamiseks pead valima tööpäevad</string>
+    <string name="set_working_days_to_continue">Jätkamiseks vali tööpäevad</string>
     <string name="route_between_points">Teekond punktide vahel</string>
     <string name="plan_a_route">Kavanda teekonda</string>
     <string name="add_to_a_track">Lisa rajale</string>
@@ -3552,8 +3552,8 @@
     <string name="quick_action_showhide_mapillary_descr">Nupp, mis näitab või peidab kaardil Mapillary kihti.</string>
     <string name="shared_string_uninstall_and_restart">Eemalda ja taaskäivita</string>
     <string name="app_mode_inline_skates">Rulluisud</string>
-    <string name="quick_action_remove_next_destination">Kustuta järgmine sihtpunkt</string>
-    <string name="use_volume_buttons_as_zoom_descr">Sisselülitades saad seadme helitugevuse nuppudega kontrollida kaardi suumi taset.</string>
+    <string name="quick_action_remove_next_destination">Kustuta lähim sihtpunkt</string>
+    <string name="use_volume_buttons_as_zoom_descr">Nutiseadme helitugevuse nuppudega kontrollida saad kaardi suumi taset.</string>
     <string name="use_volume_buttons_as_zoom">Helitugevuse nupud toimivad suumina</string>
     <string name="please_provide_point_name_error">Palun sisestage punkti nimi</string>
     <string name="search_download_wikipedia_maps">Lae alla Vikipeedia kaardid</string>
@@ -3582,7 +3582,7 @@
     <string name="routing_attr_length_name">Pikkuse piirang</string>
     <string name="shared_string_bearing">Kurss</string>
     <string name="item_deleted">%1$s on kustutatud</string>
-    <string name="speed_cameras_restart_descr">Selleks, et eemaldada kõik kiiruskaamerate andmed on vajalik seadme taaskäivitamine.</string>
+    <string name="speed_cameras_restart_descr">Kiiruskaamerate kõikide andmete eemaldamiseks on vajalik nutiseadme taaskäivitamine.</string>
     <string name="speed_cameras_removed_descr">Siin seadmes puudub teave liikluskaamerate kohta.</string>
     <string name="shared_string_add_profile">Lisa profiil</string>
     <string name="change_application_profile">Muuda rakenduse profiili</string>
@@ -3682,7 +3682,7 @@
     <string name="marker_save_as_track">Salvesta rada failina</string>
     <string name="follow_track">Jälgi rada</string>
     <string name="follow_track_descr">Vali rajafail, mida soovid kasutada</string>
-    <string name="import_track_descr">Vali rajafail, mida soovid kasutada või impordi see.</string>
+    <string name="import_track_descr">Vali rajafail, mida soovid kasutada või impordi see oma nutiseadmest.</string>
     <string name="select_another_track">Vali muu rada</string>
     <string name="navigate_to_track_descr">Navigeeri minu asukohast rajale</string>
     <string name="pass_whole_track_descr">Asukoht rajal, kuhu me liigume</string>
@@ -3729,4 +3729,13 @@
     <string name="attach_to_the_roads">Kinnita teede külge</string>
     <string name="route_between_points_warning_desc">Selle valiku kasutamiseks mõne oma navigeerimisprofiili kasutamisel kinnita oma rada lähimale lubatud teele.</string>
     <string name="route_between_points_next_segment_button_desc">Valitud profiili alusel arvutatakse uus teekond vaid järgmise segmendi osas.</string>
+    <string name="main_actions">Põhitegevused</string>
+    <string name="osm_live_payment_subscription_management">Ostu kinnitusel võetakse sinu Google Play kontolt tasu.
+\n
+\nTellimus uuendatakse automaatselt, kui sa seda enne uuendamise kuupäeva ei tühista. Sonu kontolt võetakse pikendamisperioodi eest (kuu/kolm kuud/aasta) tasu ainult uuendamise kuupäeval.
+\n
+\nTellimuste haldamiseks ja tühistamiseks ava Google Play seadistused.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Kiirtegevusi saad eksportida või importida koos rakenduse profiilidega.</string>
+    <string name="delete_all_actions_message_q">Kas sa oled kindel, et soovid pöördumatult kustutada %d kiirtegevust\?</string>
+    <string name="route_between_points_desc">Vali kas soovid ühendada punkte sirge joonega või arvutada nendevahelist teekonda vastavalt oma valitud profiilile.</string>
 </resources>

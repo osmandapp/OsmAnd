@@ -145,9 +145,9 @@
     <string name="routing_attr_height_obstacles_description">Фактор рельефа местности (по данным SRTM, ASTER и EU-DEM).</string>
     <string name="quick_action_duplicates">Действие переименовано в %1$s, чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
-    <string name="quick_action_showhide_favorites_descr">Переключатель, чтобы показать или скрыть сохранённые точки на карте.</string>
+    <string name="quick_action_showhide_favorites_descr">Переключатель, чтобы показать или скрыть избранные точки на карте.</string>
     <string name="quick_action_showhide_poi_descr">Переключатель, чтобы показать или скрыть POI на карте.</string>
-    <string name="quick_action_showhide_favorites_title">Показать/скрыть Мои места</string>
+    <string name="quick_action_showhide_favorites_title">Показать/скрыть избранные</string>
     <string name="quick_action_add_category">Добавить категорию</string>
     <string name="quick_action_add_create_items">Действия</string>
     <string name="quick_action_fav_name_descr">Если оставить это поле пустым, то оно будет автоматически заполнено адресом или названием места.</string>
@@ -462,7 +462,7 @@
     <string name="search_position_current_location_search">Определение положения…</string>
     <string name="search_position_current_location_found">Моё местоположение (найдено)</string>
     <string name="search_position_address">Адрес…</string>
-    <string name="search_position_favorites">Сохранённые…</string>
+    <string name="search_position_favorites">Избранные…</string>
     <string name="shared_string_undefined">Неопределённо</string>
     <string name="search_position_map_view">Текущий центр карты</string>
     <string name="select_search_position">Начало:</string>
@@ -475,7 +475,7 @@
     <string name="local_index_mi_upload_gpx">Отправить в OSM</string>
     <string name="show_more_map_detail">Детализированная карта</string>
     <string name="show_more_map_detail_descr">Показывать детали (дороги и др.), начиная с мелких масштабов.</string>
-    <string name="favourites_delete_multiple_succesful">Сохранённые места удалены.</string>
+    <string name="favourites_delete_multiple_succesful">Избранные точки удалены.</string>
     <string name="favorite_delete_multiple">Вы уверены, что хотите удалить %1$d избранных и %2$d избранных групп\?</string>
     <string name="favorite_home_category">Дом</string>
     <string name="favorite_friends_category">Друзья</string>
@@ -610,7 +610,7 @@
 \nНавигация временно переключена на онлайн-сервис CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Невозможно найти указанную папку.</string>
     <string name="application_dir">Папка хранилища данных</string>
-    <string name="osmand_net_previously_installed">У вас установлена предыдущая версия OsmAnd. Все локальные данные поддерживаются новой версией. Однако сохранённые точки нужно вручную экспортировать из старой версии и импортировать в новую.</string>
+    <string name="osmand_net_previously_installed">У вас установлена предыдущая версия OsmAnd. Все локальные данные поддерживаются новой версией. Однако избранные точки нужно выгрузить из предыдущей версии приложения и загрузить в новую.</string>
     <string name="build_installed">Сборка {0} успешно установлена ({1}).</string>
     <string name="downloading_build">Загружается сборка…</string>
     <string name="install_selected_build">Установить OsmAnd — {0} из {1} {2} МБ\?</string>
@@ -675,7 +675,7 @@
     <string name="rotate_map_to_bearing_descr">Выравнивание карты:</string>
     <string name="rotate_map_to_bearing">Ориентация карты</string>
     <string name="show_route">Детали маршрута</string>
-    <string name="fav_imported_sucessfully">Сохранённые успешно импортированы</string>
+    <string name="fav_imported_sucessfully">Избранные точки успешно импортированы</string>
     <string name="fav_file_to_load_not_found">GPX-файл с сохранёнными точками отсутствует в {0}</string>
     <string name="fav_saved_sucessfully">Точки сохранены в {0}</string>
     <string name="no_fav_to_save">Нет избранных точек для сохранения</string>
@@ -796,7 +796,7 @@
     <string name="downloading_list_indexes">Загружается список доступных регионов…</string>
     <string name="list_index_files_was_not_loaded">Не удалось получить список регионов с https://osmand.net.</string>
     <string name="fav_points_edited">Отредактирована избранная точка</string>
-    <string name="fav_points_not_exist">Нет сохранённых точек</string>
+    <string name="fav_points_not_exist">Избранные точки отсутствуют</string>
     <string name="update_existing">Заменить</string>
     <string name="only_show">Только показать</string>
     <string name="follow">Запуск сопровождения</string>
@@ -906,11 +906,11 @@
     <string name="shared_string_cancel">Отмена</string>
     <string name="shared_string_no">Нет</string>
     <string name="add_favorite_dialog_top_text">Название точки</string>
-    <string name="add_favorite_dialog_default_favourite_name">Сохранённая</string>
-    <string name="add_favorite_dialog_favourite_added_template">Точка «{0}» сохранена.</string>
+    <string name="add_favorite_dialog_default_favourite_name">Избранная</string>
+    <string name="add_favorite_dialog_favourite_added_template">Точка «{0}» была успешно добавлена к избранным.</string>
     <string name="favourites_context_menu_edit">Редактировать место</string>
     <string name="favourites_context_menu_delete">Удалить из моих</string>
-    <string name="favourites_remove_dialog_msg">Удалить точку «%s» из сохранённых\?</string>
+    <string name="favourites_remove_dialog_msg">Удалить точку «%s» из избранных\?</string>
     <string name="favourites_remove_dialog_success">Точка {0} удалена.</string>
     <string name="osb_comment_dialog_success">Комментарий добавлен</string>
     <string name="osb_comment_dialog_error">Не удалось добавить комментарий.</string>
@@ -1460,7 +1460,7 @@
     <string name="index_item_world_bitcoin_payments">Мировые пункты обмена bitcoin</string>
     <string name="int_days">дней</string>
     <string name="osmo_connect_menu">Соединение</string>
-    <string name="import_file_favourites">Сохранить данные в файл GPX или импортировать путевые точки в Мои места\?</string>
+    <string name="import_file_favourites">Сохранить данные как трек файл или импортировать путевые точки в избранные\?</string>
     <string name="rendering_value_pink_name">Розовый</string>
     <string name="rendering_value_brown_name">Коричневый</string>
     <string name="gpx_file_is_empty">Пустой файл GPX</string>
@@ -1701,7 +1701,7 @@
     <string name="shared_string_rename">Переименовать</string>
     <string name="shared_string_delete">Удалить</string>
     <string name="shared_string_delete_all">Удалить все</string>
-    <string name="shared_string_add">Сохранить</string>
+    <string name="shared_string_add">Добавить</string>
     <string name="shared_string_apply">Применить</string>
     <string name="shared_string_control_start">Старт</string>
     <string name="shared_string_control_stop">Стоп</string>
@@ -1722,7 +1722,7 @@
     <string name="shared_string_show_on_map">Показывать на карте</string>
     <string name="shared_string_map">Карта</string>
     <string name="shared_string_favorite">Сохранено</string>
-    <string name="shared_string_favorites">Сохранённые</string>
+    <string name="shared_string_favorites">Избранные</string>
     <string name="shared_string_add_to_favorites">Добавить к избранным</string>
     <string name="shared_string_audio">Аудио</string>
     <string name="shared_string_video">Видео</string>
@@ -1958,7 +1958,7 @@
     <string name="traffic_warning_hazard">Опасность</string>
     <string name="regions">Регионы</string>
     <string name="world_maps">Карты мира</string>
-    <string name="favourites_context_menu_add">Добавить в избранное</string>
+    <string name="favourites_context_menu_add">Добавить в избранные</string>
     <string name="region_maps">Региональные карты</string>
     <string name="favorite_category_dublicate_message">Задайте название, которое ещё не используется.</string>
     <string name="favorite_category_name">Название категории</string>
@@ -2207,7 +2207,7 @@
     <string name="clear_tile_data">Очистить всю плитку</string>
     <string name="routing_attr_short_way_name">Снижать расход топлива</string>
     <string name="routing_attr_short_way_description">Использование топливо-сберегающего пути (обычно короче).</string>
-    <string name="replace_favorite_confirmation">Вы уверены, что хотите заменить %1$s\?</string>
+    <string name="replace_favorite_confirmation">Вы уверены, что хотите заменить избранные %1$s\?</string>
     <string name="shared_string_change">Изменить</string>
     <string name="get_started">Начать</string>
     <string name="shared_string_from">от</string>
@@ -2264,11 +2264,11 @@
     <string name="quick_action_add_parking">Добавить место парковки</string>
     <string name="quick_action_new_action">Добавить действие</string>
     <string name="quick_action_edit_action">Редактировать действие</string>
-    <string name="quick_action_add_favorite">Добавить в избранное</string>
+    <string name="quick_action_add_favorite">Добавить в избранные</string>
     <string name="dialog_add_action_title">Добавить действие</string>
     <string name="quick_actions_delete">Удалить действие</string>
     <string name="quick_actions_delete_text">Вы уверены, что хотите удалить действие «%s»\?</string>
-    <string name="quick_action_favorites_show">Показать сохранённые</string>
+    <string name="quick_action_favorites_show">Показать избранные</string>
     <string name="quick_action_favorites_hide">Скрыть сохранённые</string>
     <string name="quick_action_showhide_poi_title">Показать/скрыть POI</string>
     <string name="quick_action_poi_show">Показать %1$s</string>
@@ -2357,7 +2357,7 @@
     <string name="measurement_tool_save_as_new_track_descr">Сохранить точки, как точки маршрута или как линию.</string>
     <string name="choose_navigation_type">Выберите профиль навигации</string>
     <string name="of">%1$d из %2$d</string>
-    <string name="shared_string_list">Списком</string>
+    <string name="shared_string_list">Список</string>
     <string name="shared_string_groups">Группы</string>
     <string name="passed">Использовано: %1$s</string>
     <string name="make_active">Сделать активным</string>
@@ -2476,7 +2476,7 @@
     <string name="shared_string_left">Налево</string>
     <string name="show_number_pad">Показать цифровую панель</string>
     <string name="tap_on_map_to_hide_interface_descr">Нажатие на карте переключает кнопки управления и виджеты.</string>
-    <string name="import_gpx_file_description">возможет импорт в сохранённые точки или как файл GPX.</string>
+    <string name="import_gpx_file_description">возможен импорт в избранные точки или как трек файл.</string>
     <string name="shared_string_more_without_dots">Больше</string>
     <string name="import_as_gpx">Импортировать как файл GPX</string>
     <string name="import_as_favorites">Импортировать в Мои места</string>
@@ -2583,7 +2583,7 @@
     <string name="save_route_point">Сохранить точку маршрута</string>
     <string name="waypoint_one">Путевая точка 1</string>
     <string name="route_point_one">Точка маршрута 1</string>
-    <string name="empty_state_favourites">Добавить сохранённые</string>
+    <string name="empty_state_favourites">Добавить избранные</string>
     <string name="empty_state_favourites_desc">Избранное можно импортировать или создать, отмечая точки на карте.</string>
     <string name="import_track">Импортировать файл GPX</string>
     <string name="move_point">Переместить точку</string>
@@ -2703,7 +2703,7 @@
     <string name="north_abbreviation">С</string>
     <string name="optional_point_name">Необязательное имя точки</string>
     <string name="rendering_attr_whiteWaterSports_name">Спортивные сплавы</string>
-    <string name="distance_farthest">По удалённости (сначала дальние)</string>
+    <string name="distance_farthest">Сначала дальние</string>
     <string name="distance_nearest">Удалённость (сначала ближние)</string>
     <string name="group_deleted">Группа удалена</string>
     <string name="clear_all_intermediates">Очистить все промежуточные точки</string>
@@ -3346,7 +3346,7 @@
     <string name="select_map_icon">Положение значка в состоянии покоя</string>
     <string name="delete_profiles_descr">После нажатия кнопки «Применить» удалённые профили будут полностью потеряны.</string>
     <string name="master_profile">Базовый профиль</string>
-    <string name="select_color">Цвет</string>
+    <string name="select_color">Выберите цвет</string>
     <string name="edit_profiles_descr">Вы не можете удалить стандартные профили OsmAnd, но вы можете отключить их на предыдущем экране или переместить вниз.</string>
     <string name="edit_profiles">Редактировать профили</string>
     <string name="select_nav_profile_dialog_message">«Тип навигации» определяет способ расчета маршрутов.</string>
@@ -3833,8 +3833,8 @@
 \nНа следующем шаге необходимо выбрать профиль навигации для определения разрешенных дорог и пороговое расстояние, чтобы приблизительно привязать маршрут к дорогам.</string>
     <string name="route_between_points_desc">Выберите способ соединения точек: прямой линией или прокладкой маршрута с выбранным профилем.</string>
     <string name="in_case_of_reverse_direction">При обратном направлении</string>
-    <string name="plan_route_exit_dialog_descr">Вы уверены, что хотите отменить все изменения в запланированном маршруте, закрыв его\?</string>
-    <string name="street_level_imagery">Изображения на уровне улиц</string>
+    <string name="plan_route_exit_dialog_descr">Все изменения будут утеряны. Закрыть план маршрута\?</string>
+    <string name="street_level_imagery">Съёмка уличного уровня</string>
     <string name="shared_string_save_as_gpx">Сохранить как новый файл трека</string>
     <string name="add_segment_to_the_track">Добавить в файл трека</string>
     <string name="shared_string_gpx_files">Треки</string>
