@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.plus.GpxSelectionHelper;
@@ -163,6 +164,18 @@ public class FileUtils {
 			return null;
 		}
 		return dest;
+	}
+
+	public static String createUniqueFileName(@NonNull OsmandApplication app, String name, String dirName, String extension) {
+		String uniqueFileName = name;
+		File dir = app.getAppPath(dirName);
+		File fout = new File(dir, name + extension);
+		int ind = 0;
+		while (fout.exists()) {
+			uniqueFileName = name + "_" + (++ind);
+			fout = new File(dir, uniqueFileName + extension);
+		}
+		return uniqueFileName;
 	}
 
 	public interface RenameCallback {

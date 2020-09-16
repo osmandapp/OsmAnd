@@ -1,6 +1,8 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -18,12 +20,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragmentNew;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.view.GravityDrawable;
 
@@ -155,8 +160,17 @@ public class FavouritePointMenuController extends MenuController {
 
 	@NonNull
 	@Override
-	public String getSubtypeStr() {
-		return fav.getAddress();
+	public CharSequence getSubtypeStr() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !Algorithms.isEmpty(fav.getAddress())) {
+			Typeface typeface = FontCache.getRobotoRegular(mapActivity);
+			SpannableString addressSpannable = new SpannableString(fav.getAddress());
+			addressSpannable.setSpan(new CustomTypefaceSpan(typeface), 0, addressSpannable.length(), 0);
+
+			return addressSpannable;
+		} else {
+			return "";
+		}
 	}
 
 	@Override

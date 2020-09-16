@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
@@ -48,6 +50,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.util.Algorithms;
@@ -97,6 +100,19 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private EditText descriptionEdit;
 	private EditText addressEdit;
 	private int layoutHeightPrevious = 0;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					showExitDialog();
+				}
+			}
+		});
+	}
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
@@ -233,6 +249,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		}
 		if (getAddressInitValue() != null){
 			addressEdit.setText(getAddressInitValue());
+			addressEdit.setSelection(addressEdit.getText().length());
 		}
 
 		descriptionCaption = view.findViewById(R.id.description);
@@ -268,18 +285,21 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 				}
 			}
 		});
+		AndroidUiHelper.updateVisibility(addressCaption, false);
+		addAddressBtn.setText(getAddressInitValue());
 		addAddressBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (addressCaption.getVisibility() != View.VISIBLE) {
 					addressCaption.setVisibility(View.VISIBLE);
 					addAddressBtn.setText(view.getResources().getString(R.string.delete_address));
-					View addressEdit = view.findViewById(R.id.address_edit);
+					TextInputEditText addressEdit = view.findViewById(R.id.address_edit);
 					addressEdit.requestFocus();
+					addressEdit.setSelection(addressEdit.getText().length());
 					AndroidUtils.softKeyboardDelayed(requireActivity(),addressEdit);
 				} else {
 					addressCaption.setVisibility(View.GONE);
-					addAddressBtn.setText(view.getResources().getString(R.string.add_address));
+					addAddressBtn.setText(getAddressTextValue());
 					AndroidUtils.hideSoftKeyboard(requireActivity(), addressEdit);
 					addressEdit.clearFocus();
 				}
@@ -388,13 +408,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			descriptionCaption.setVisibility(View.GONE);
 			addDelDescription.setText(app.getString(R.string.add_description));
 		}
-		if (!addressEdit.getText().toString().isEmpty() || addressEdit.hasFocus()) {
-			addressCaption.setVisibility(View.VISIBLE);
-			addAddressBtn.setText(app.getString(R.string.delete_address));
-		} else {
-			addressCaption.setVisibility(View.GONE);
-			addAddressBtn.setText(app.getString(R.string.add_address));
-		}
+
 	}
 
 	private void createGroupSelector() {
@@ -868,14 +882,28 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					cancelled = true;
-					dismiss();
+					exitEditing();
 				}
 			});
 			dismissDialog.show();
 		} else {
-			cancelled = true;
-			dismiss();
+			exitEditing();
+		}
+	}
+
+	private void exitEditing() {
+		cancelled = true;
+		dismiss();
+		showContextMenu();
+	}
+
+	private void showContextMenu() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			MapContextMenu mapContextMenu = mapActivity.getContextMenu();
+			if (!mapContextMenu.isVisible() && mapContextMenu.isActive()) {
+				mapContextMenu.show();
+			}
 		}
 	}
 

@@ -43,7 +43,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
@@ -57,6 +56,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -67,7 +67,6 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -79,6 +78,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DMS;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.EditTextEx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.LocationParser;
@@ -1498,15 +1498,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		protected Void doInBackground(Void... params) {
 			if (Algorithms.isEmpty(gpx.path)) {
 				if (!Algorithms.isEmpty(fileName)) {
-					final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR);
+					String dirName = IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR;
+					File dir = app.getAppPath(dirName);
 					if (!dir.exists()) {
 						dir.mkdirs();
 					}
-					File fout = new File(dir, fileName + IndexConstants.GPX_FILE_EXT);
-					int ind = 1;
-					while (fout.exists()) {
-						fout = new File(dir, fileName + "_" + (++ind) + IndexConstants.GPX_FILE_EXT);
-					}
+					String uniqueFileName = FileUtils.createUniqueFileName(app, fileName, dirName, IndexConstants.GPX_FILE_EXT);
+					File fout = new File(dir, uniqueFileName + IndexConstants.GPX_FILE_EXT);
 					GPXUtilities.writeGpxFile(fout, gpx);
 				}
 			} else {

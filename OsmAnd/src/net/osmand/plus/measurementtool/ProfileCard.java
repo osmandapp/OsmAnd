@@ -8,6 +8,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -23,7 +25,7 @@ public class ProfileCard extends BaseCard {
 	private ApplicationMode selectedMode;
 	private ProfileCardListener listener;
 
-	public ProfileCard(MapActivity mapActivity, ApplicationMode selectedMode) {
+	public ProfileCard(@NonNull MapActivity mapActivity, @NonNull ApplicationMode selectedMode) {
 		super(mapActivity);
 		this.selectedMode = selectedMode;
 	}
@@ -75,7 +77,10 @@ public class ProfileCard extends BaseCard {
 	}
 
 	private void resetSelected(List<ApplicationMode> modes) {
-		((RadioButton) view.findViewWithTag(selectedMode.getStringKey()).findViewById(R.id.compound_button)).setChecked(true);
+		View profileView = view.findViewWithTag(selectedMode.getStringKey());
+		if (profileView != null) {
+			((RadioButton) profileView.findViewById(R.id.compound_button)).setChecked(true);
+		}
 	}
 
 	private void addProfileView(LinearLayout container, View.OnClickListener onClickListener, Object tag,

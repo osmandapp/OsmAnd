@@ -498,6 +498,7 @@
 	<string name="poi_recycling_magazines">Magazines</string>
 	<string name="poi_recycling_paper_packaging">Paper packaging</string>
 	<string name="poi_recycling_small_appliances">Small appliances</string>
+	<string name="poi_recycling_small_electrical_appliances">Small electrical appliances</string>
 	<string name="poi_recycling_wood">Wood</string>
 	<string name="poi_recycling_books">Books</string>
 	<string name="poi_recycling_shoes">Shoes</string>
@@ -4251,5 +4252,10 @@
 	<string name="poi_departures_board_delay">Delay</string>
 	<string name="poi_departures_board_realtime">Realtime</string>
 	<string name="poi_departures_board_timetable">Timetable</string>
+
+	<string name="poi_beehive">Beehive</string>
+
+	<string name="poi_nuts">Nut store</string>
+
 
 </resources>

@@ -27,7 +27,9 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.ValueHolder;
 import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -55,6 +57,7 @@ import net.osmand.plus.routepreparationmenu.cards.ReverseTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.SelectTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
@@ -66,7 +69,7 @@ import java.io.File;
 import java.util.List;
 
 
-public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener {
+public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener, IRouteInformationListener {
 
 	public static final String TAG = FollowTrackFragment.class.getName();
 
@@ -79,6 +82,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	private GPXFile gpxFile;
 
+	private boolean editingTrack;
 	private boolean selectingTrack;
 	private int menuTitleHeight;
 
@@ -264,12 +268,14 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	@Override
 	public void onResume() {
 		super.onResume();
+		app.getRoutingHelper().addListener(this);
 		MapRouteInfoMenu.followTrackVisible = true;
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		app.getRoutingHelper().removeListener(this);
 		MapRouteInfoMenu.followTrackVisible = false;
 	}
 
@@ -294,9 +300,55 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	@Override
+	protected int applyPosY(int currentY, boolean needCloseMenu, boolean needMapAdjust, int previousMenuState, int newMenuState, int dZoom, boolean animated) {
+		int y = super.applyPosY(currentY, needCloseMenu, needMapAdjust, previousMenuState, newMenuState, dZoom, animated);
+		if (needMapAdjust) {
+			adjustMapPosition(y);
+		}
+		return y;
+	}
+
+	private void adjustMapPosition(int y) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+
+		RoutingHelper rh = app.getRoutingHelper();
+		if (rh.isRoutePlanningMode() && mapActivity.getMapView() != null) {
+			QuadRect rect = mapActivity.getMapRouteInfoMenu().getRouteRect(mapActivity);
+
+			if (gpxFile != null) {
+				QuadRect gpxRect = gpxFile.getRect();
+
+				rect.left = Math.min(rect.left, gpxRect.left);
+				rect.right = Math.max(rect.right, gpxRect.right);
+				rect.top = Math.max(rect.top, gpxRect.top);
+				rect.bottom = Math.min(rect.bottom, gpxRect.bottom);
+			}
+
+			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			int tileBoxWidthPx = 0;
+			int tileBoxHeightPx = 0;
+
+			if (!isPortrait()) {
+				tileBoxWidthPx = tb.getPixWidth() - getWidth();
+			} else {
+				int fHeight = getViewHeight() - y - AndroidUtils.getStatusBarHeight(app);
+				tileBoxHeightPx = tb.getPixHeight() - fHeight;
+			}
+			if (rect.left != 0 && rect.right != 0) {
+				mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
+						tileBoxWidthPx, tileBoxHeightPx, 0);
+			}
+		}
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitTrackAppearanceMode();
+		onDismiss();
 	}
 
 	@Override
@@ -478,6 +530,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	public void openPlanRoute(boolean useAppMode) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && gpxFile != null) {
+			editingTrack = true;
 			QuadRect rect = gpxFile.getRect();
 			TrkSegment segment = gpxFile.getNonEmptyTrkSegment();
 			ActionType actionType = segment == null ? ActionType.ADD_ROUTE_POINTS : ActionType.EDIT_SEGMENT;
@@ -487,7 +540,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (useAppMode) {
 				editingContext.setAppMode(app.getRoutingHelper().getAppMode());
 			}
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true);
+			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true, true);
 		}
 	}
 
@@ -553,5 +606,37 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		} catch (Exception e) {
 			log.error(e);
 		}
+	}
+
+	private void onDismiss() {
+		try {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null && !editingTrack) {
+				if (!mapActivity.isChangingConfigurations()) {
+					mapActivity.getMapRouteInfoMenu().cancelSelectionFromTracks();
+				}
+				mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+			}
+		} catch (Exception e) {
+			log.error(e);
+		}
+	}
+
+	@Override
+	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && newRoute && app.getRoutingHelper().isRoutePlanningMode()) {
+			adjustMapPosition(getHeight());
+		}
+	}
+
+	@Override
+	public void routeWasCancelled() {
+
+	}
+
+	@Override
+	public void routeWasFinished() {
+
 	}
 }

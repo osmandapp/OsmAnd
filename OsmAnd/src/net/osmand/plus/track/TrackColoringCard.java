@@ -17,7 +17,6 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.internal.FlowLayout;
@@ -79,10 +78,10 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 		createColorSelector();
 		updateColorSelector();
 
-		coloringAdapter = new TrackColoringAdapter(appearanceItems);
-		RecyclerView groupRecyclerView = view.findViewById(R.id.recycler_view);
-		groupRecyclerView.setAdapter(coloringAdapter);
-		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
+//		coloringAdapter = new TrackColoringAdapter(appearanceItems);
+//		RecyclerView groupRecyclerView = view.findViewById(R.id.recycler_view);
+//		groupRecyclerView.setAdapter(coloringAdapter);
+//		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), isShowDivider());
 	}
@@ -158,7 +157,7 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 			@Override
 			public void onClick(View v) {
 				updateColorSelector(color, rootView);
-				coloringAdapter.notifyDataSetChanged();
+//				coloringAdapter.notifyDataSetChanged();
 				trackDrawInfo.setColor(color);
 
 				CardListener listener = getListener();

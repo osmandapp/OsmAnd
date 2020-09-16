@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -156,6 +157,15 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 			updateTrackColor();
 		}
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					dismissImmediate();
+					mapActivity.launchPrevActivityIntent();
+				}
+			}
+		});
 	}
 
 	private void updateTrackColor() {

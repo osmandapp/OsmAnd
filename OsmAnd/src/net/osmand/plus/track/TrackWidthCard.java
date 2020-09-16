@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -78,13 +79,14 @@ public class TrackWidthCard extends BaseCard {
 		}
 	}
 
+	@Nullable
 	private AppearanceListItem getSelectedItem() {
 		if (selectedItem == null) {
 			String selectedWidth = trackDrawInfo.getWidth();
 			for (AppearanceListItem item : appearanceItems) {
-				if (Algorithms.objectEquals(item.getValue(), selectedWidth)
+				if (selectedWidth != null && (Algorithms.objectEquals(item.getValue(), selectedWidth)
 						|| Algorithms.isEmpty(selectedWidth) && Algorithms.isEmpty(item.getValue())
-						|| Algorithms.isInt(selectedWidth) && CUSTOM_WIDTH.equals(item.getAttrName())) {
+						|| Algorithms.isInt(selectedWidth) && CUSTOM_WIDTH.equals(item.getAttrName()))) {
 					selectedItem = item;
 					break;
 				}
@@ -113,12 +115,16 @@ public class TrackWidthCard extends BaseCard {
 		titleView.setText(R.string.select_track_width);
 
 		TextView descriptionView = view.findViewById(R.id.description);
-		descriptionView.setText(getSelectedItem().getLocalizedValue());
+		AppearanceListItem item = getSelectedItem();
+		if (item != null) {
+			descriptionView.setText(item.getLocalizedValue());
+		}
 	}
 
 	private void updateCustomWidthSlider() {
 		sliderContainer = view.findViewById(R.id.slider_container);
-		if (CUSTOM_WIDTH.equals(getSelectedItem().getAttrName())) {
+		AppearanceListItem item = getSelectedItem();
+		if (item != null && CUSTOM_WIDTH.equals(item.getAttrName())) {
 			Slider widthSlider = view.findViewById(R.id.width_slider);
 
 			widthSlider.setValueTo(CUSTOM_WIDTH_MAX);
