@@ -1386,7 +1386,7 @@
     <string name="route_descr_select_destination">Задать пункт назначения</string>
     <string name="route_preferences">Предпочтения маршрута</string>
     <string name="route_info">Информация про маршрут</string>
-    <string name="keep_and_add_destination_point">Добавить следующим пунктом назначения</string>
+    <string name="keep_and_add_destination_point">Добавить как новый пункт назначения</string>
     <string name="use_displayed_track_for_navigation">Использовать показанный путь для навигации?</string>
     <string name="calculate_osmand_route_without_internet">Рассчитать сегмент маршрута OsmAnd без интернета</string>
     <string name="gpx_option_calculate_first_last_segment">Рассчитать маршрут OsmAnd для первого и последнего сегмента маршрута</string>
