@@ -3829,7 +3829,7 @@
     <string name="reverse_route">Ruta inversa</string>
     <string name="route_between_points_next_segment_button_desc">Recalcular sólo el siguiente segmento usando el perfil elegido.</string>
     <string name="route_between_points_whole_track_button_desc">Recalcular toda la traza usando el perfil elegido.</string>
-    <string name="route_between_points_desc">Marca cómo conectar los puntos, con una línea recta o calcular una ruta entre ellos con el perfil elegido.</string>
+    <string name="route_between_points_desc">Marca cómo conectar los puntos, con una línea recta o calcular una ruta entre ellos como se detalla a continuación.</string>
     <string name="whole_track">Traza completa</string>
     <string name="next_segment">Siguiente segmento</string>
     <string name="route_between_points_warning_desc">A continuación, ajusta la traza al camino permitido más cercano con un perfil de navegación.</string>
@@ -3889,13 +3889,13 @@
     <string name="number_of_gpx_files_selected_pattern">%s archivo(s) de trazas marcado(s)</string>
     <string name="one_point_error">Añade al menos dos puntos.</string>
     <string name="shared_string_redo">Rehacer</string>
-    <string name="release_3_8">• Se ha actualizado el modo «Planificar ruta»: ahora permite usar diferentes tipos de navegación para cada segmento y adjunta cualquier traza a los caminos
+    <string name="release_3_8">• Se ha actualizado la función «Planificar ruta»: permite utilizar diferentes tipos de navegación por segmento y la inclusión de trazas
 \n
-\n • Nuevas opciones en el aspecto de las trazas: elegir el color, cambiar el grosor de las flechas de dirección y las marcas de inicio/fin.
+\n • Nuevo menú con el aspecto de las trazas: elegir el color, el grosor, mostrar las flechas de dirección y los iconos de inicio/fin.
 \n
-\n • Mejoras en la visibilidad de los nodos de bicicleta
+\n • Mejoras en la visibilidad de los nodos de bicicleta.
 \n
-\n • Menú contextual con información básica para las trazas
+\n • Las trazas ahora se pueden pulsar, contiene un menú contextual con información básica.
 \n
 \n • Algoritmos de búsqueda mejorados
 \n

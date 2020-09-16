@@ -73,4 +73,9 @@
     <string name="unit_of_length_descr">یکاهای طول را تغییر دهید.</string>
     <string name="unit_of_length">یکاهای طول</string>
     <string name="shared_string_appearance">ظاهر</string>
+    <string name="last_response_duration">آخرین پاسخ:٪ 1 $ s پیش</string>
+    <string name="last_update_from_telegram_duration">آخرین به روزرسانی از تلگرام:٪ 1 $ s پیش</string>
+    <string name="last_response_date">آخرین پاسخ: %1$s</string>
+    <string name="last_update_from_telegram_date">آخرین به روز رسانی در تلگرام:%1$s</string>
+    <string name="shared_string_error_short">اشتباه بودن</string>
 </resources>

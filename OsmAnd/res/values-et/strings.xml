@@ -166,7 +166,7 @@
     <string name="quick_action_osmbugs_show">Näita OSM märkmed</string>
     <string name="quick_action_osmbugs_hide">Peida OSM Notes</string>
     <string name="thank_you_for_feedback">Täname sind tagasiside eest</string>
-    <string name="poi_cannot_be_found">Punkti või teed ei leitud.</string>
+    <string name="poi_cannot_be_found">Sõlme või teed ei leidunud.</string>
     <string name="search_no_results_feedback">Otsingutulemused puuduvad\?
 \nJaga tagasisidet</string>
     <string name="increase_search_radius_to">Laienda otsingu raadiust kuni %1$s</string>
@@ -3738,4 +3738,19 @@
     <string name="export_import_quick_actions_with_profiles_promo">Kiirtegevusi saad eksportida või importida koos rakenduse profiilidega.</string>
     <string name="delete_all_actions_message_q">Kas sa oled kindel, et soovid pöördumatult kustutada %d kiirtegevust\?</string>
     <string name="route_between_points_desc">Vali kas soovid ühendada punkte sirge joonega või arvutada nendevahelist teekonda vastavalt oma valitud profiilile.</string>
+    <string name="release_3_8">• Uuendatud teekonnaplaneerija: võimaldab kasutada igal segmendil erinevat liikumisviisi ning radade kaasamist
+\n
+\n • Uus radade kujunduse seadistamise menüü: valida saad värve, joone paksust, suunanoolte kuvamist ning alguse ja lõpu ikoone
+\n
+\n • Rattasõlmede parandatud nähtavus
+\n
+\n • Radasid saad nüüd puudutada, misjärel kuvatakse põhiteabega kontekstimenüü
+\n
+\n • Parandatud on otsingualgoritme
+\n
+\n • Parandatud raja jälgimise valikud navigeerimisel
+\n
+\n • Parandatud on profiili seadistuste impordi ja ekspordiga seotud vead
+\n
+\n</string>
 </resources>

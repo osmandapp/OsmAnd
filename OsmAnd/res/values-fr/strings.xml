@@ -3801,7 +3801,7 @@
     <string name="plan_route_select_track_file_for_open">Sélectionnez un fichier de trace à ouvrir.</string>
     <string name="shared_string_done">Terminé</string>
     <string name="overwrite_track">Remplacer la trace</string>
-    <string name="route_between_points_desc">Sélectionnez comment relier les points : par une ligne droite ou en calculant un itinéraire avec le profil sélectionné.</string>
+    <string name="route_between_points_desc">Sélectionnez comment relier les points : par une ligne droite ou en calculant un itinéraire reliant les points comme indiqué ci-dessous.</string>
     <string name="route_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
     <string name="route_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
     <string name="route_between_points_warning_desc">Ensuite, sélectionnez le profil de navigation pour détecter les routes autorisées et le seuil de distance afin de déplacer votre trace.</string>
@@ -3836,7 +3836,7 @@
     <string name="follow_track">Suivre la trace</string>
     <string name="follow_track_descr">Sélectionner un fichier de trace à suivre</string>
     <string name="select_another_track">Sélectionner une autre trace</string>
-    <string name="navigate_to_track_descr">Naviguez de ma position vers la trace</string>
+    <string name="navigate_to_track_descr">Naviguer de ma position vers la trace</string>
     <string name="nearest_point">Point le plus proche</string>
     <string name="delete_address">Supprimer l\'adresse</string>
     <string name="add_address">Ajouter une adresse</string>

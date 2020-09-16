@@ -3829,7 +3829,7 @@
     <string name="reverse_route">Rota inversa</string>
     <string name="route_between_points_whole_track_button_desc">O trilho inteiro será recalculado a usar o perfil selecionado.</string>
     <string name="route_between_points_next_segment_button_desc">Somente o próximo segmento será recalculado a usar o perfil selecionado.</string>
-    <string name="route_between_points_desc">Selecione como ligar pontos, com uma linha reta ou calcule uma rota entre eles com o perfil selecionado.</string>
+    <string name="route_between_points_desc">Selecione como ligar pontos, por uma linha reta ou a calcular uma rota entre eles como especificado abaixo.</string>
     <string name="whole_track">Trilho inteiro</string>
     <string name="next_segment">Próximo segmento</string>
     <string name="route_between_points_warning_desc">Em seguida, encaixe a sua pista na estrada mais próxima permitida com um dos seus perfis de navegação para usar esta opção.</string>
@@ -3840,7 +3840,7 @@
     <string name="follow_track_descr">Escolha o ficheiro de trilha a seguir</string>
     <string name="import_track_descr">Escolha o ficheiro de trilho a seguir ou importe um do seu aparelho.</string>
     <string name="select_another_track">Selecionar outra trilha</string>
-    <string name="navigate_to_track_descr">Navegue de minha localização até a trilha</string>
+    <string name="navigate_to_track_descr">Navegue de minha posição até ao trilho</string>
     <string name="pass_whole_track_descr">Ponto da trilha para navegar</string>
     <string name="start_of_the_track">Início da pista</string>
     <string name="nearest_point">Ponto próximo</string>
@@ -3888,19 +3888,19 @@
     <string name="shared_string_file_name">Nome do ficheiro</string>
     <string name="number_of_gpx_files_selected_pattern">%s ficheiros de faixa selecionados</string>
     <string name="disable_recording_once_app_killed_descrp">Vai pausar o registo de faixas quando a aplicação for morta (através de aplicações recentes). (indicação de fundo de OsmAnd desaparece da barra de notificação do Android.)</string>
-    <string name="release_3_8">- O modo Rota do Plano Atualizado permite usar diferentes tipos de navegação para cada segmento e anexa qualquer pista às estradas
+    <string name="release_3_8">- Função atualizada de Planear uma rota: permite utilizar diferentes tipos de navegação por segmento e a inclusão de faixas
 \n
-\n - Novas opções de aparência para pistas: selecionar cor, espessura, rodar nas setas de direcção e marcas de início/fim
+\n - Novo menu Aparência para trilhos: selecionar cor, espessura, setas de direção de visualização, ícones de início/fim
 \n
-\n - Melhoria da visibilidade dos nós da bicicleta
+\n - Melhoria da visibilidade dos nós da bicicleta.
 \n
-\n - Menu de contexto para faixas com informações básicas
+\n - Os trilhos agora podem ser tocados, ter menu de contexto com informações básicas.
 \n
 \n - Algoritmos de pesquisa melhorados
 \n
-\n - Opções de faixa de acompanhamento melhoradas na navegação
+\n - Opções de seguir faixas melhoradas na navegação
 \n
-\n - Problemas fixos com as configurações de importação/exportação de perfis
+\n - Problemas com as configurações de importação/exportação de perfis resolvidos
 \n
 \n</string>
 </resources>

@@ -3783,7 +3783,7 @@
     <string name="reverse_route">Ters güzergah</string>
     <string name="route_between_points_whole_track_button_desc">Tüm yol, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
     <string name="route_between_points_next_segment_button_desc">Sadece sonraki bölüm, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
-    <string name="route_between_points_desc">Düz bir çizgi ile noktaları nasıl birleştireceğinizi veya seçili profille aralarında nasıl güzergah hesaplayacağınızı seçin.</string>
+    <string name="route_between_points_desc">Düz bir çizgi ile noktaları nasıl birleştireceğinizi veya aşağıda belirtildiği gibi aralarında nasıl güzergah hesaplayacağınızı seçin.</string>
     <string name="whole_track">Tüm yol</string>
     <string name="next_segment">Sonraki bölüm</string>
     <string name="threshold_distance">Eşik mesafesi</string>
@@ -3814,4 +3814,17 @@
     <string name="save_global_track_interval_descr">Genel yol kaydı için kayıt aralığını seçin (haritadaki seyahat kayıt widget\'ı aracılığıyla etkin).</string>
     <string name="gpx_monitoring_stop">Seyahat kaydetmeyi duraklat</string>
     <string name="gpx_monitoring_start">Seyahat kaydetmeyi devam ettir</string>
+    <string name="nearest_point">En yakın nokta</string>
+    <string name="delete_address">Adres sil</string>
+    <string name="add_address">Adres ekle</string>
+    <string name="access_hint_enter_address">Adres girin</string>
+    <string name="simplified_track_description">Sadece güzergah hattı kaydedilecek, ara noktalar silinecektir.</string>
+    <string name="shared_string_file_name">Dosya adı</string>
+    <string name="system_default_theme">Sistem öntanımlı değeri</string>
+    <string name="all_next_segments">Sonraki tüm bölümler</string>
+    <string name="previous_segment">Önceki bölüm</string>
+    <string name="all_previous_segments">Önceki tüm bölümler</string>
+    <string name="only_selected_segment_recalc">Sadece seçili bölüm, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="all_next_segments_will_be_recalc">Sonraki tüm bölümler, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="all_previous_segments_will_be_recalc">Önceki tüm bölümler, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
 </resources>

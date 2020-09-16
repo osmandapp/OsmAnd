@@ -3834,7 +3834,7 @@
     <string name="simplified_track">Egyszerűsített nyomvonal</string>
     <string name="shared_string_done">Kész</string>
     <string name="shared_string_is_saved">elmentve</string>
-    <string name="route_between_points_desc">Jelölje ki, hogyan legyenek összekötve a pontok: egyenes vonallal vagy a kiválasztott profilnak megfelelően kiszámított útvonallal.</string>
+    <string name="route_between_points_desc">Jelölje ki, hogyan legyenek összekötve a pontok: egyenes vonallal vagy az alábbiak szerint kiszámított útvonallal.</string>
     <string name="whole_track">Teljes nyomvonal</string>
     <string name="monitoring_min_accuracy_descr_remark">Megjegyzés: Ha a GPS közvetlenül a felvétel előtt ki volt kapcsolva, akkor rosszabb lehet az első mért pont pontossága. A kódban ezért szeretnénk majd talán várni egy-két másodpercet egy pont rögzítése előtt (vagy a 3 egymást követő pont közül a legjobbat rögzíteni vagy valami hasonló), de ezt még nem programoztuk le.</string>
     <string name="delete_address">Cím törlése</string>
