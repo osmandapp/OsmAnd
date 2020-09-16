@@ -55,7 +55,9 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 	public void createMenuItems(Bundle savedInstanceState) {
 		if (savedInstanceState != null) {
 			newColor = savedInstanceState.getInt(NEW_SELECTED_COLOR);
-			prevColor = savedInstanceState.getInt(PREV_SELECTED_COLOR);
+			if (savedInstanceState.containsKey(PREV_SELECTED_COLOR)) {
+				prevColor = savedInstanceState.getInt(PREV_SELECTED_COLOR);
+			}
 		} else {
 			Bundle args = getArguments();
 			if (args != null) {

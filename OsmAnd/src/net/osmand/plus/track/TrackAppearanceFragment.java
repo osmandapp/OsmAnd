@@ -7,13 +7,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
@@ -369,11 +369,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
-	protected void onShortClick(View v, MotionEvent event) {
-		if (routeMenuTopShadowAll != null &&
-				AndroidUtils.isPointInsideView(routeMenuTopShadowAll, event.getX(), event.getY())) {
-			adjustMapPosition(getViewY());
-		}
+	protected void onHeaderClick() {
+		adjustMapPosition(getViewY());
 	}
 
 	private void adjustMapPosition(int y) {
@@ -606,7 +603,21 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			trackColoringCard.setListener(this);
 			cardsContainer.addView(trackColoringCard.build(mapActivity));
 
-			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo, this);
+			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo, new OnNeedScrollListener() {
+
+				@Override
+				public void onVerticalScrollNeeded(int y) {
+					View view = trackWidthCard.getView();
+					if (view != null) {
+						int resultYPosition = view.getTop() + y;
+						int dialogHeight = getInnerScrollableHeight();
+						ScrollView scrollView = (ScrollView) getBottomScrollView();
+						if (resultYPosition > (scrollView.getScrollY() + dialogHeight)) {
+							scrollView.smoothScrollTo(0, resultYPosition - dialogHeight);
+						}
+					}
+				}
+			});
 			trackWidthCard.setListener(this);
 			cardsContainer.addView(trackWidthCard.build(mapActivity));
 		}
@@ -645,21 +656,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				mapActivity.getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			} catch (Exception e) {
 				log.error(e);
-			}
-		}
-	}
-
-	@Override
-	public void onNeedVerticalScroll(@NonNull String tag, int y) {
-		if (tag.equals(TrackWidthCard.TAG)) {
-			View trackWidthCardView = trackWidthCard.getView();
-			if (trackWidthCardView == null) return;
-
-			int currentScrollYPosition = getBottomScrollView().getScrollY();
-			int dialogHeight = getInnerScrollableHeight();
-			int resultYPosition = trackWidthCardView.getTop() + y;
-			if (resultYPosition > (currentScrollYPosition + dialogHeight)) {
-				verticalScrollToYPosition(resultYPosition - dialogHeight);
 			}
 		}
 	}
@@ -722,5 +718,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		} else {
 			return R.drawable.ic_action_track_line_thin_direction;
 		}
+	}
+
+	public interface OnNeedScrollListener {
+		void onVerticalScrollNeeded(int y);
 	}
 }

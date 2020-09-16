@@ -14,32 +14,31 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.OnNeedScrollUiAdapter;
-import net.osmand.plus.base.OnVisibilityChangeListener;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
 public class TrackWidthCard extends BaseCard {
-	public final static String TAG = TrackWidthCard.class.getName();
 
 	private final static String CUSTOM_WIDTH = "custom_width";
 	private final static int CUSTOM_WIDTH_MIN = 1;
 	private final static int CUSTOM_WIDTH_MAX = 24;
 
 	private TrackDrawInfo trackDrawInfo;
-	private OnNeedScrollUiAdapter onNeedScrollUiAdapter;
+	private OnNeedScrollListener onNeedScrollListener;
 
 	private AppearanceListItem selectedItem;
 	private List<AppearanceListItem> appearanceItems;
@@ -48,10 +47,10 @@ public class TrackWidthCard extends BaseCard {
 	private View sliderContainer;
 
 	public TrackWidthCard(MapActivity mapActivity, TrackDrawInfo trackDrawInfo,
-	                      OnNeedScrollUiAdapter onNeedScrollUiAdapter) {
+	                      OnNeedScrollListener onNeedScrollListener) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
-		this.onNeedScrollUiAdapter = onNeedScrollUiAdapter;
+		this.onNeedScrollListener = onNeedScrollListener;
 		appearanceItems = getWidthAppearanceItems();
 	}
 
@@ -157,16 +156,14 @@ public class TrackWidthCard extends BaseCard {
 				}
 			});
 			UiUtilities.setupSlider(widthSlider, nightMode, null);
-			AndroidUtils.addVisibilityChangeListener(view, sliderContainer,
-					new OnVisibilityChangeListener() {
-						@Override
-						public void onVisibilityChange(int visibility) {
-							if (visibility == View.VISIBLE) {
-								onNeedScrollUiAdapter.onNeedVerticalScroll(TAG, sliderContainer.getBottom());
-							}
-						}
+			ScrollUtils.addOnGlobalLayoutListener(sliderContainer, new Runnable() {
+				@Override
+				public void run() {
+					if (sliderContainer.getVisibility() == View.VISIBLE) {
+						onNeedScrollListener.onVerticalScrollNeeded(sliderContainer.getBottom());
 					}
-			);
+				}
+			});
 			AndroidUiHelper.updateVisibility(sliderContainer, true);
 		} else {
 			AndroidUiHelper.updateVisibility(sliderContainer, false);
@@ -226,13 +223,6 @@ public class TrackWidthCard extends BaseCard {
 					CardListener listener = getListener();
 					if (listener != null) {
 						listener.onCardPressed(TrackWidthCard.this);
-					}
-
-					if (CUSTOM_WIDTH.equals(selectedItem.getAttrName())
-							&& sliderContainer != null
-							&& onNeedScrollUiAdapter != null
-							&& sliderContainer.getVisibility() == View.VISIBLE) {
-						onNeedScrollUiAdapter.onNeedVerticalScroll(TAG, sliderContainer.getBottom());
 					}
 				}
 			});

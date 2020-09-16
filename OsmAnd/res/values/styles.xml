@@ -793,19 +793,4 @@
         <item name="hintTextColor">?android:textColorSecondary</item>
     </style>
 
-
-    <style name="CompactInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="materialThemeOverlay">@style/ThemeCompactOverlayOutlinedDense</item>
-        <item name="hintEnabled">false</item>
-    </style>
-
-    <style name="ThemeCompactOverlayOutlinedDense">
-        <item name="editTextStyle">@style/CompactTextInputEditTextOutlinedBoxDense</item>
-    </style>
-
-    <style name="CompactTextInputEditTextOutlinedBoxDense" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="android:paddingTop">@dimen/content_padding_half</item>
-        <item name="android:paddingBottom">@dimen/content_padding_half</item>
-    </style>
-
 </resources>
