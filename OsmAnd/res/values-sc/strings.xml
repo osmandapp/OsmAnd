@@ -3887,4 +3887,19 @@
     <string name="shared_string_is_saved">est sarvadu</string>
     <string name="one_point_error">Pro praghere annanghe a su mancu duos puntos.</string>
     <string name="shared_string_redo">Torra a fàghere</string>
+    <string name="release_3_8">• Funtzionalidade de pranificatione de un\'àndala agiornada: permitit de impreare castas diferentes de navigatzione pro segmentu e s\'inclusione de rastas
+\n
+\n • New Appearance menu for tracks: select color, thickness, display direction arrows, start/finish icons
+\n
+\n • Visibilidade megiorada de sos nodos pro sas bitzicletas.
+\n
+\n • Como podes incarcare in sas rastas, e faghende gasi as a abèrrere unu menù de cuntestu cun informatziones de base.
+\n
+\n • Algoritmu de chirca megioradu
+\n
+\n • Optziones pro sighire una rasta durante sa navigatzione megioradas
+\n
+\n • Problemas cun s\'importatzione e s\'esportatzione de sas impostatziones de sos profilos risoltos
+\n
+\n</string>
 </resources>
