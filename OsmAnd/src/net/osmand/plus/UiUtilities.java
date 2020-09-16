@@ -42,6 +42,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.TintableCompoundButton;
 
+import com.google.android.material.slider.LabelFormatter;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -230,8 +231,12 @@ public class UiUtilities {
 	}
 
 	@ColorInt
-	public static int mixTwoColors(@ColorInt int color1, @ColorInt int color2, float amount )
-	{
+	public static int removeAlpha(@ColorInt int color) {
+		return Color.rgb(Color.red(color), Color.green(color), Color.blue(color));
+	}
+
+	@ColorInt
+	public static int mixTwoColors(@ColorInt int color1, @ColorInt int color2, float amount) {
 		final byte ALPHA_CHANNEL = 24;
 		final byte RED_CHANNEL   = 16;
 		final byte GREEN_CHANNEL =  8;
@@ -606,7 +611,7 @@ public class UiUtilities {
 		slider.setTrackHeight(ctx.getResources().getDimensionPixelSize(R.dimen.slider_track_height));
 
 		// label behavior
-		slider.setLabelBehavior(Slider.LABEL_GONE);
+		slider.setLabelBehavior(LabelFormatter.LABEL_GONE);
 	}
 
 	public static void setupSlider(RangeSlider slider, boolean nightMode,
@@ -646,7 +651,7 @@ public class UiUtilities {
 		slider.setTrackHeight(ctx.getResources().getDimensionPixelSize(R.dimen.slider_track_height));
 
 		// label behavior
-		slider.setLabelBehavior(Slider.LABEL_GONE);
+		slider.setLabelBehavior(LabelFormatter.LABEL_GONE);
 	}
 
 	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, @StringRes int buttonTextId) {

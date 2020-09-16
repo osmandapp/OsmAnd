@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,7 +40,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
@@ -81,6 +81,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private TextView addDelDescription;
 	private TextView addAddressBtn;
 	private TextView addToHiddenGroupInfo;
+	private ImageView deleteAddressIcon;
 	private boolean cancelled;
 	private boolean nightMode;
 	@DrawableRes
@@ -167,7 +168,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			}
 		});
 
-		final int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		final int activeColorResId = getActiveColorRes();
 		ImageView toolbarAction = (ImageView) view.findViewById(R.id.toolbar_action);
 		view.findViewById(R.id.background_layout).setBackgroundResource(nightMode
 				? R.color.app_bar_color_dark : R.color.list_background_color_light);
@@ -247,56 +248,69 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		if (getDescriptionInitValue() != null) {
 			descriptionEdit.setText(getDescriptionInitValue());
 		}
-		if (getAddressInitValue() != null){
-			addressEdit.setText(getAddressInitValue());
-			addressEdit.setSelection(addressEdit.getText().length());
-		}
 
 		descriptionCaption = view.findViewById(R.id.description);
 		addressCaption = view.findViewById(R.id.address);
 		addDelDescription = (TextView) view.findViewById(R.id.description_button);
 		addAddressBtn = view.findViewById(R.id.address_button);
+		deleteAddressIcon = view.findViewById(R.id.delete_address_icon);
+		deleteAddressIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_trash_basket_16, activeColorResId));
+
 		addDelDescription.setTextColor(getResources().getColor(activeColorResId));
 		addAddressBtn.setTextColor(getResources().getColor(activeColorResId));
-		addAddressBtn.setCompoundDrawablesWithIntrinsicBounds(
-				app.getUIUtilities().getIcon(R.drawable.ic_action_location_16, activeColorResId),null,null,null);
-		addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
-				app.getUIUtilities().getIcon(R.drawable.ic_action_description_16, activeColorResId),null,null,null);
+		Drawable addressIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_location_16, activeColorResId);
+		addAddressBtn.setCompoundDrawablesWithIntrinsicBounds(addressIcon, null, null, null);
 		addDelDescription.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (descriptionCaption.getVisibility() != View.VISIBLE) {
 					descriptionCaption.setVisibility(View.VISIBLE);
 					addDelDescription.setText(view.getResources().getString(R.string.delete_description));
-					addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
-							app.getUIUtilities().getIcon(R.drawable.ic_action_trash_basket_16,
-									activeColorResId),null,null,null);
 					View descriptionEdit = view.findViewById(R.id.description_edit);
 					descriptionEdit.requestFocus();
 					AndroidUtils.softKeyboardDelayed(getActivity(), descriptionEdit);
 				} else {
 					descriptionCaption.setVisibility(View.GONE);
 					addDelDescription.setText(view.getResources().getString(R.string.add_description));
-					addDelDescription.setCompoundDrawablesWithIntrinsicBounds(
-							app.getUIUtilities().getIcon(R.drawable.ic_action_description_16,
-									activeColorResId),null,null,null);
 					AndroidUtils.hideSoftKeyboard(requireActivity(), descriptionEdit);
 					descriptionEdit.clearFocus();
 				}
+				updateDescriptionIcon();
 			}
 		});
 		AndroidUiHelper.updateVisibility(addressCaption, false);
-		addAddressBtn.setText(getAddressInitValue());
+
+		String addressInitValue = getAddressInitValue();
+		if (!Algorithms.isEmpty(addressInitValue)) {
+			addressEdit.setText(addressInitValue);
+			addAddressBtn.setText(addressInitValue);
+			addressEdit.setSelection(addressInitValue.length());
+			AndroidUiHelper.updateVisibility(deleteAddressIcon, true);
+		} else {
+			addAddressBtn.setText(getString(R.string.add_address));
+			AndroidUiHelper.updateVisibility(deleteAddressIcon, false);
+		}
+
+		deleteAddressIcon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				addressEdit.setText("");
+				addAddressBtn.setText(view.getResources().getString(R.string.add_address));
+				AndroidUiHelper.updateVisibility(addressCaption, false);
+				AndroidUiHelper.updateVisibility(deleteAddressIcon, false);
+			}
+		});
+
+		final View addressRow = view.findViewById(R.id.address_row);
 		addAddressBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (addressCaption.getVisibility() != View.VISIBLE) {
 					addressCaption.setVisibility(View.VISIBLE);
-					addAddressBtn.setText(view.getResources().getString(R.string.delete_address));
-					TextInputEditText addressEdit = view.findViewById(R.id.address_edit);
 					addressEdit.requestFocus();
 					addressEdit.setSelection(addressEdit.getText().length());
-					AndroidUtils.softKeyboardDelayed(requireActivity(),addressEdit);
+					AndroidUtils.softKeyboardDelayed(requireActivity(), addressEdit);
+					AndroidUiHelper.updateVisibility(addressRow, false);
 				} else {
 					addressCaption.setVisibility(View.GONE);
 					addAddressBtn.setText(getAddressTextValue());
@@ -371,6 +385,17 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		return view;
 	}
 
+	private void updateDescriptionIcon() {
+		int iconId;
+		if (descriptionCaption.getVisibility() == View.VISIBLE) {
+			iconId = R.drawable.ic_action_trash_basket_16;
+		} else {
+			iconId = R.drawable.ic_action_description_16;
+		}
+		Drawable icon = app.getUIUtilities().getIcon(iconId, getActiveColorRes());
+		addDelDescription.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+	}
+
 	private void checkEmptyName(Editable name, TextInputLayout nameCaption, View saveButton) {
 		if (name.toString().trim().isEmpty()) {
 			nameCaption.setError(app.getString(R.string.please_provide_point_name_error));
@@ -408,7 +433,20 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 			descriptionCaption.setVisibility(View.GONE);
 			addDelDescription.setText(app.getString(R.string.add_description));
 		}
+		updateDescriptionIcon();
+	}
 
+	boolean isAddressAvailable() {
+		return addressCaption.getVisibility() == View.VISIBLE;
+	}
+
+	boolean isDescriptionAvailable() {
+		return descriptionCaption.getVisibility() == View.VISIBLE;
+	}
+
+	@ColorRes
+	private int getActiveColorRes() {
+		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 	}
 
 	private void createGroupSelector() {

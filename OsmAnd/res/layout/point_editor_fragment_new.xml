@@ -135,6 +135,7 @@
 							android:id="@+id/address_edit"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
+							android:gravity="start"
 							android:maxLines="4"
 							android:minHeight="@dimen/favorites_list_item_height"
 							android:paddingStart="@dimen/content_padding_small"
@@ -147,24 +148,50 @@
 					</com.google.android.material.textfield.TextInputLayout>
 				</LinearLayout>
 
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/address_button"
-					android:layout_width="wrap_content"
-					android:layout_height="@dimen/setting_list_item_small_height"
-					android:layout_marginStart="@dimen/content_padding_half"
-					android:layout_marginLeft="@dimen/content_padding_half"
-					android:layout_marginTop="@dimen/content_padding_small"
-					android:drawablePadding="8dp"
-					android:duplicateParentState="true"
-					android:gravity="center"
-					android:paddingStart="@dimen/content_padding_half"
-					android:paddingLeft="@dimen/content_padding_half"
-					android:paddingEnd="@dimen/content_padding_half"
-					android:paddingRight="@dimen/content_padding_half"
-					android:text="@string/add_address"
-					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
-					tools:text="@string/add_address" />
+				<LinearLayout
+					android:id="@+id/address_row"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/address_button"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding_half"
+						android:layout_marginLeft="@dimen/content_padding_half"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:layout_marginRight="@dimen/content_padding"
+						android:layout_weight="1"
+						android:drawablePadding="8dp"
+						android:duplicateParentState="true"
+						android:gravity="center_vertical"
+						android:minHeight="@dimen/setting_list_item_small_height"
+						android:paddingStart="@dimen/content_padding_half"
+						android:paddingLeft="@dimen/content_padding_half"
+						android:paddingTop="@dimen/content_padding_half"
+						android:paddingEnd="@dimen/content_padding_half"
+						android:paddingRight="@dimen/content_padding_half"
+						android:paddingBottom="@dimen/content_padding_half"
+						android:text="@string/add_address"
+						android:textSize="@dimen/default_desc_text_size"
+						osmand:typeface="@string/font_roboto_medium"
+						tools:text="@string/add_address" />
+
+					<ImageButton
+						android:id="@+id/delete_address_icon"
+						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+						android:layout_width="@dimen/setting_list_item_small_height"
+						android:layout_height="@dimen/setting_list_item_small_height"
+						android:layout_gravity="center_vertical"
+						android:layout_marginStart="@dimen/list_item_button_padding"
+						android:layout_marginLeft="@dimen/list_item_button_padding"
+						android:layout_marginEnd="@dimen/list_item_button_padding"
+						android:layout_marginRight="@dimen/list_item_button_padding"
+						android:contentDescription="@string/delete_address"
+						app:srcCompat="@drawable/ic_action_trash_basket_16" />
+
+				</LinearLayout>
 
 				<View
 					android:layout_width="match_parent"

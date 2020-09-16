@@ -3134,7 +3134,7 @@
     <string name="list_of_installed_plugins">الإضافات المثبتة</string>
     <string name="configure_navigation">تكوين الملاحة</string>
     <string name="general_settings_profile_descr">ثيم التطبيق ، وحدات ، المنطقة</string>
-    <string name="configure_profile">تكوين ملف التعريف</string>
+    <string name="configure_profile">إعداد الوضع</string>
     <string name="screen_alerts_descr">تظهر التنبيهات في أسفل اليسار أثناء التنقل.</string>
     <string name="switch_profile">تبديل الوضع</string>
     <string name="language_and_output">اللغة والإخراج</string>
@@ -3291,7 +3291,7 @@
     <string name="settings_derived_routing_mode_string">وضع المستخدم ، مشتق من:%s</string>
     <string name="routing_profile_ski">تزلج</string>
     <string name="profile_type_descr_string">النوع:%s</string>
-    <string name="profile_type_base_string">ملف التعريف الأساسي</string>
+    <string name="profile_type_base_string">وضع أساسي</string>
     <string name="profile_alert_need_routing_type_title">حدد نوع الملاحة</string>
     <string name="profile_alert_need_routing_type_msg">يرجى تحديد نوع الملاحة للوضع الجديد</string>
     <string name="profile_alert_need_profile_name_title">أدخل اسم الوضع</string>
@@ -3381,7 +3381,7 @@
     <string name="edit_profiles_descr">لا يمكنك حذف أوضاع أوسماند الافتراضية ، ولكن يمكنك تعطيلها في الشاشة السابقة ، أو نقلها إلى الأسفل.</string>
     <string name="edit_profiles">تحرير الأوضاع</string>
     <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على قواعد حسابات المسار.</string>
-    <string name="profile_appearance">مظهر الملف الشخصي</string>
+    <string name="profile_appearance">مظهر الوضع</string>
     <string name="choose_icon_color_name">اختر الايقونة واللون والاسم</string>
     <string name="reorder_profiles">تحرير قائمة الأوضاع</string>
     <string name="selected_profile">الملف الشخصي المحدد</string>
@@ -3532,7 +3532,7 @@
     <string name="select_data_to_import">حدد البيانات التي سيتم استيرادها.</string>
     <string name="shared_string_rendering_style">أسلوب التقديم</string>
     <string name="import_rendering_file">استيراد ملف الrendering</string>
-    <string name="restore_all_profile_settings_descr">ستتم استعادة كافة إعدادات ملف التعريف إلى حالتها الأصلية بعد إنشاء/استيراد هذا الملف الشخصي.</string>
+    <string name="restore_all_profile_settings_descr">ستتم استعادة كافة إعدادات الوضع إلى حالتها الأصلية بعد إنشاء/استيراد هذا الوضع.</string>
     <string name="restore_all_profile_settings">استعادة جميع إعدادات الملف الشخصي؟</string>
     <string name="saving_new_profile">حفظ ملف تعريف جديد</string>
     <string name="profile_backup_failed">لا يمكن عمل نسخة احتياطية من الملف الشخصي.</string>
@@ -3652,28 +3652,28 @@
     <string name="radius_ruler_item">مسطرة البوصلة</string>
     <string name="measure_distance_item">قياس المسافة</string>
     <string name="travel_item">السفر (Wikivoyage و Wikipedia)</string>
-    <string name="map_markers_item">علامات الخريطة</string>
+    <string name="map_markers_item">العلامات</string>
     <string name="favorites_item">المفضلة</string>
     <string name="subscription_osmandlive_item">اشتراك أوسماند لايف</string>
     <string name="osmand_purchases_item">مشتريات أوسماند</string>
     <string name="legend_item_description">دليل رموز الخريطة.</string>
     <string name="navigation_profiles_item">الملفات الشخصية للملاحة</string>
-    <string name="release_3_7">• خرائط جديدة للمنحدرات غير المتصلة بالإنترنت 
-\n 
-\n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال 
-\n 
-\n • تخصيص ترتيب العناصر في قائمة السياق ، تكوين الخريطة ، درج 
-\n 
-\n • ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط 
-\n 
-\n • إنشاء مرشح / خرائط POI الخاصة بك مع مرونة تامة 
-\n 
-\n • تمت إضافة خيارات لاستعادة إعدادات ملفات التعريف المخصصة 
-\n 
-\n • مسارات GPX كاملة من الممرات دعم حركة المرور وتعليمات كاملة 
-\n 
-\n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية 
-\n 
+    <string name="release_3_7">• خرائط جديدة للمنحدرات غير المتصلة بالإنترنت
+\n
+\n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال
+\n
+\n • تخصيص ترتيب العناصر في قائمة السياق ، تكوين الخريطة ، درج
+\n
+\n • ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط
+\n
+\n • إنشاء مرشح / خرائط POI الخاصة بك مع مرونة تامة
+\n
+\n • تمت إضافة خيارات لاستعادة إعدادات الأوضاع المخصصة
+\n
+\n • مسارات GPX كاملة من الممرات دعم حركة المرور وتعليمات كاملة
+\n
+\n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية
+\n
 \n • إصلاح الخلل مع RTL
 \n
 \n</string>
@@ -3691,7 +3691,7 @@
     <string name="quick_action_switch_profile_descr">سيتم تبديل زر الإجراء التسجيل بين التشكيلات الجانبية المحددة.</string>
     <string name="shared_string_add_profile">إضافة ملف تعريف</string>
     <string name="change_application_profile">تغيير ملف تعريف التطبيق</string>
-    <string name="profiles_for_action_not_found">لم يتم العثور على ملفات التعريف المحددة لهذا الإجراء.</string>
+    <string name="profiles_for_action_not_found">لم يتم العثور على الأوضاع المحددة لهذا الإجراء.</string>
     <string name="index_item_world_basemap_detailed">خريطة عامة للعالم (تفصيلية)</string>
     <string name="unsupported_type_error">نوع غير معتمد</string>
     <string name="gpx_parse_error">لم يتم تكوين OsmAnd GPX بشكل جيد ، يرجى الاتصال بفريق الدعم لمزيد من التحقيقات.</string>
@@ -3813,9 +3813,9 @@
     <string name="route_between_points_add_track_desc">حدد ملف المسار الذي سيتم إضافة مقطع جديد إليه.</string>
     <string name="save_as_new_track">حفظ كمسار جديد</string>
     <string name="reverse_route">عكس الطريق</string>
-    <string name="route_between_points_whole_track_button_desc">سيتم إعادة حساب المقطع التالي فقط باستخدام ملف التعريف المحدد.</string>
-    <string name="route_between_points_next_segment_button_desc">سيتم إعادة حساب المقطع التالي فقط باستخدام ملف التعريف المحدد.</string>
-    <string name="route_between_points_desc">حدد كيفية توصيل النقاط، بخط مستقيم، أو حساب مسار بينها مع ملف التعريف المحدد.</string>
+    <string name="route_between_points_whole_track_button_desc">سيتم إعادة حساب المقطع التالي فقط باستخدام الوضع المحدد.</string>
+    <string name="route_between_points_next_segment_button_desc">سيتم إعادة حساب المقطع التالي فقط باستخدام الوضع المحدد.</string>
+    <string name="route_between_points_desc">حدد كيفية توصيل النقاط، بخط مستقيم، أو حساب مسار بينها على النحو المحدد أدناه.</string>
     <string name="whole_track">مسار كامل</string>
     <string name="next_segment">المقطع التالي</string>
     <string name="route_between_points_warning_desc">بعد ذلك ، ألقط مسارك بأقرب طريق مسموح به باستخدام أحد ملفات تعريف التنقل الخاصة بك لاستخدام هذا الخيار.</string>
@@ -3863,7 +3863,7 @@
     <string name="all_next_segments">جميع الأجزاء اللاحقة</string>
     <string name="previous_segment">المقطع السابق</string>
     <string name="all_previous_segments">جميع المقاطع السابقة</string>
-    <string name="only_selected_segment_recalc">سيتم إعادة حساب المقطع المحدد فقط باستخدام ملف التعريف المحدد.</string>
+    <string name="only_selected_segment_recalc">سيتم إعادة حساب المقطع المحدد فقط باستخدام الوضع المحدد.</string>
     <string name="all_next_segments_will_be_recalc">سيتم إعادة حساب كافة الشرائح اللاحقة باستخدام ملف التعريف المحدد.</string>
     <string name="all_previous_segments_will_be_recalc">سيتم إعادة حساب كافة الشرائح السابقة باستخدام ملف التعريف المحدد.</string>
     <string name="open_saved_track">فتح المسار المحفوظ</string>
@@ -3873,19 +3873,19 @@
     <string name="shared_string_file_name">اسم الملف</string>
     <string name="one_point_error">الرجاء إضافة نقطتين على الأقل.</string>
     <string name="shared_string_redo">إعادة</string>
-    <string name="release_3_8">• وضع مخطط المسار المحدث يسمح باستخدام أنواع الملاحة المختلفة لكل جزء ويربط أي مسار بالطرق
+    <string name="release_3_8">• ميزة تخطيط المسار المحدثة: تسمح باستخدام أنواع الملاحة المختلفة لكل جزء وكذا اظافة طرق
 \n
-\n• خيارات المظهر الجديدة للمسارات: تحديد اللون، السماكة ستقوم بتفعيل أسهم التوجيه و علامات البداية والنهاية
+\n• قائمة مظهر جديدة للمسارات: تحديد اللون، السماكة، اظهار أسهم التوجيه، أيقونات الانطلاق والنهاية
 \n
 \n• تحسين رؤية عقد الدراجات
 \n
-\n• قائمة السياق للمسارات بمعلومات أساسية
+\n• المسارات قابلة للنقر عليها الان وقائمة سياق بمعلومات أساسية
 \n
-\n• تحسين خوارزميات البحث
+\n• خوارزميات بحث محسنة
 \n
-\n• تم تحسين خيارات متابعة المسار أثناء الملاحة
+\n• تم تحسين خيارات متابعة المسار خلال الملاحة
 \n
-\n• تم إصلاح المشكلات المتعلقة باستيراد/تصدير إعدادات الملف الشخصي
+\n• تم إصلاح المشكلات المتعلقة باستيراد/تصدير الأوضاع الشخصية
 \n
 \n</string>
 </resources>

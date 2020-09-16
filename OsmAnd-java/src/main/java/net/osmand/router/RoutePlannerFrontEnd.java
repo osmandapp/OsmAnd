@@ -243,6 +243,9 @@ public class RoutePlannerFrontEnd {
 			start = gpxPoints.get(0); 
 		}
 		while (start != null && !gctx.ctx.calculationProgress.isCancelled) {
+			if (Thread.currentThread().isInterrupted()) {
+				return null;
+			}
 			double routeDist = gctx.MAXIMUM_STEP_APPROXIMATION;
 			GpxPoint next = findNextGpxPointWithin(gctx, gpxPoints, start, routeDist);
 			boolean routeFound = false;
@@ -256,7 +259,7 @@ public class RoutePlannerFrontEnd {
 						if (routeFound) {
 							// route is found - cut the end of the route and move to next iteration
 //							start.stepBackRoute = new ArrayList<RouteSegmentResult>();
-//							boolean stepBack = true; 
+//							boolean stepBack = true;
 							boolean stepBack = stepBackAndFindPrevPointInRoute(gctx, gpxPoints, start, next);
 							if (!stepBack) {
 								// not supported case (workaround increase MAXIMUM_STEP_APPROXIMATION)

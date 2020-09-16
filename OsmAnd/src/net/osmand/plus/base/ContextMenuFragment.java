@@ -46,6 +46,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
+import net.osmand.plus.views.controls.SingleTapConfirm;
 
 import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
 
@@ -315,7 +316,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		processScreenHeight(container);
 		minHalfY = getMinHalfY(mapActivity);
 
-		final GestureDetector swipeDetector = new GestureDetector(app, new HorizontalSwipeConfirm(true));
+		final GestureDetector singleTapDetector = new GestureDetector(view.getContext(), new SingleTapConfirm());
+		final GestureDetector swipeDetector = new GestureDetector(view.getContext(), new HorizontalSwipeConfirm(true));
 
 		final OnTouchListener slideTouchListener = new OnTouchListener() {
 			private float dy;
@@ -330,6 +332,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 			private boolean slidingUp;
 			private boolean slidingDown;
 
+			private boolean hasMoved;
+
 			{
 				OsmandApplication app = requireMyApplication();
 				scroller = new OverScroller(app);
@@ -340,7 +344,15 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
+				if (!hasMoved && getHeaderViewHeight() > 0 && event.getY() <= getHeaderViewHeight()) {
+					if (singleTapDetector.onTouchEvent(event)) {
+						moving = false;
+						onHeaderClick();
 
+						recycleVelocityTracker();
+						return true;
+					}
+				}
 				if (!portrait) {
 					if (swipeDetector.onTouchEvent(event)) {
 						dismiss();
@@ -352,6 +364,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 				switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
+						hasMoved = false;
 						mDownY = event.getRawY();
 						dy = event.getY();
 						dyMain = getViewY();
@@ -365,6 +378,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 							moving = true;
 						}
 						if (moving) {
+							hasMoved = true;
 							float y = event.getY();
 							float newY = getViewY() + (y - dy);
 							if (!portrait && newY > topScreenPosY) {
@@ -390,6 +404,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 					case MotionEvent.ACTION_UP:
 						if (moving) {
 							moving = false;
+							hasMoved = false;
 							int currentY = getViewY();
 							int fullScreenTopPosY = getMenuStatePosY(MenuState.FULL_SCREEN);
 							final VelocityTracker velocityTracker = this.velocityTracker;
@@ -417,6 +432,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 						break;
 					case MotionEvent.ACTION_CANCEL:
 						moving = false;
+						hasMoved = false;
 						recycleVelocityTracker();
 						break;
 
@@ -901,6 +917,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 	protected void doAfterMenuStateChange(int previousState, int newState) {
 		runLayoutListener();
+	}
+
+	protected void onHeaderClick() {
+
 	}
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)

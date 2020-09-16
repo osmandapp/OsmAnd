@@ -13,6 +13,7 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
@@ -80,6 +81,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private TrackColoringCard trackColoringCard;
 
 	private ImageView trackIcon;
+	private View buttonsShadow;
+	private View routeMenuTopShadowAll;
+	private View controlButtons;
 
 	@Override
 	public int getMainLayoutId() {
@@ -107,6 +111,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	public TrackDrawInfo getTrackDrawInfo() {
 		return trackDrawInfo;
+	}
+
+	@Override
+	public int getSupportedMenuStatesPortrait() {
+		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
 
 	@Override
@@ -182,13 +191,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			trackIcon = view.findViewById(R.id.track_icon);
-
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					openMenuHeaderOnly();
-				}
-			});
+			buttonsShadow = view.findViewById(R.id.buttons_shadow);
+			controlButtons = view.findViewById(R.id.control_buttons);
+			routeMenuTopShadowAll = view.findViewById(R.id.route_menu_top_shadow_all);
 
 			if (isPortrait()) {
 				updateCardsLayout();
@@ -201,7 +206,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				int widthNoShadow = getLandscapeNoShadowWidth();
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
 				params.gravity = Gravity.BOTTOM | Gravity.START;
-				view.findViewById(R.id.control_buttons).setLayoutParams(params);
+				controlButtons.setLayoutParams(params);
 			}
 			enterTrackAppearanceMode();
 			runLayoutListener();
@@ -211,9 +216,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	@Override
 	protected void calculateLayout(View view, boolean initLayout) {
-		menuTitleHeight = view.findViewById(R.id.route_menu_top_shadow_all).getHeight()
-				+ view.findViewById(R.id.control_buttons).getHeight()
-				- view.findViewById(R.id.buttons_shadow).getHeight();
+		menuTitleHeight = routeMenuTopShadowAll.getHeight()
+				+ controlButtons.getHeight() - buttonsShadow.getHeight();
 		super.calculateLayout(view, initLayout);
 	}
 
@@ -227,6 +231,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	protected void updateMainViewLayout(int posY) {
 		super.updateMainViewLayout(posY);
 		updateStatusBarColor();
+	}
+
+	@Override
+	public boolean shouldShowMapControls(int menuState) {
+		return menuState == MenuState.HEADER_ONLY || menuState == MenuState.HALF_SCREEN;
 	}
 
 	@Override
@@ -325,10 +334,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			if (card instanceof SplitIntervalCard) {
 				SplitIntervalBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), trackDrawInfo, this);
 			} else if (card instanceof TrackColoringCard) {
-				updateAppearanceIcon();
-				if (trackWidthCard != null) {
-					trackWidthCard.updateItems();
-				}
+				updateColorItems();
 			} else if (card instanceof TrackWidthCard) {
 				updateAppearanceIcon();
 			} else if (card instanceof DirectionArrowsCard) {
@@ -343,8 +349,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
-	public void onColorSelected(int prevColor, int newColor) {
+	public void onColorSelected(Integer prevColor, int newColor) {
 		trackColoringCard.onColorSelected(prevColor, newColor);
+		updateColorItems();
 	}
 
 	@Override
@@ -359,6 +366,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private void updateAppearanceIcon() {
 		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), trackDrawInfo.getColor());
 		trackIcon.setImageDrawable(icon);
+	}
+
+	@Override
+	protected void onHeaderClick() {
+		adjustMapPosition(getViewY());
 	}
 
 	private void adjustMapPosition(int y) {
@@ -391,13 +403,21 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		int strokeColor = UiUtilities.getColorWithAlpha(Color.BLACK, 0.7f);
 		Drawable strokeIcon = app.getUIUtilities().getPaintedIcon(strokeIconId, strokeColor);
 
+		Drawable transparencyIcon = getTransparencyIcon(app, widthAttr, color);
 		if (showArrows) {
 			int arrowsIconId = getArrowsIconId(widthAttr);
 			int contrastColor = UiUtilities.getContrastColor(app, color, false);
 			Drawable arrows = app.getUIUtilities().getPaintedIcon(arrowsIconId, contrastColor);
-			return UiUtilities.getLayeredIcon(widthIcon, strokeIcon, arrows);
+			return UiUtilities.getLayeredIcon(transparencyIcon, widthIcon, strokeIcon, arrows);
 		}
-		return UiUtilities.getLayeredIcon(widthIcon, strokeIcon);
+		return UiUtilities.getLayeredIcon(transparencyIcon, widthIcon, strokeIcon);
+	}
+
+	private Drawable getTransparencyIcon(OsmandApplication app, String widthAttr, @ColorInt int color) {
+		int transparencyIconId = getTransparencyIconId(widthAttr);
+		int colorWithoutAlpha = UiUtilities.removeAlpha(color);
+		int transparencyColor = UiUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
+		return app.getUIUtilities().getPaintedIcon(transparencyIconId, transparencyColor);
 	}
 
 	private void updateCardsLayout() {
@@ -465,8 +485,21 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				} else if (scrollY > 0 && bottomContainer.getForeground() == null) {
 					bottomContainer.setForeground(shadowIcon);
 				}
+				updateButtonsShadow();
 			}
 		});
+	}
+
+	private void updateButtonsShadow() {
+		boolean scrollToBottomAvailable = getBottomScrollView().canScrollVertically(1);
+		AndroidUiHelper.updateVisibility(buttonsShadow, scrollToBottomAvailable);
+	}
+
+	private void updateColorItems() {
+		updateAppearanceIcon();
+		if (trackWidthCard != null) {
+			trackWidthCard.updateItems();
+		}
 	}
 
 	private void saveTrackInfo() {
@@ -547,19 +580,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void saveGpx(final GPXFile gpxFile) {
-		new SaveGpxAsyncTask(gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
-			@Override
-			public void gpxSavingStarted() {
-
-			}
-
-			@Override
-			public void gpxSavingFinished(Exception errorMessage) {
-				if (errorMessage == null) {
-					app.showShortToastMessage(R.string.shared_string_track_is_saved, Algorithms.getFileWithoutDirs(gpxFile.path));
-				}
-			}
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		new SaveGpxAsyncTask(gpxFile, null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void setupCards() {
@@ -582,7 +603,21 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			trackColoringCard.setListener(this);
 			cardsContainer.addView(trackColoringCard.build(mapActivity));
 
-			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo);
+			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo, new OnNeedScrollListener() {
+
+				@Override
+				public void onVerticalScrollNeeded(int y) {
+					View view = trackWidthCard.getView();
+					if (view != null) {
+						int resultYPosition = view.getTop() + y;
+						int dialogHeight = getInnerScrollableHeight();
+						ScrollView scrollView = (ScrollView) getBottomScrollView();
+						if (resultYPosition > (scrollView.getScrollY() + dialogHeight)) {
+							scrollView.smoothScrollTo(0, resultYPosition - dialogHeight);
+						}
+					}
+				}
+			});
 			trackWidthCard.setListener(this);
 			cardsContainer.addView(trackWidthCard.build(mapActivity));
 		}
@@ -625,6 +660,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		}
 	}
 
+	public int getInnerScrollableHeight() {
+		int totalScreenHeight = getViewHeight() - getMenuStatePosY(getCurrentMenuState());
+		int frameTotalHeight = routeMenuTopShadowAll.getHeight()
+				+ controlButtons.getHeight() + buttonsShadow.getHeight();
+		return totalScreenHeight - frameTotalHeight;
+	}
+
 	public static boolean showInstance(@NonNull MapActivity mapActivity, TrackAppearanceFragment fragment) {
 		try {
 			mapActivity.getSupportFragmentManager()
@@ -635,6 +677,16 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			return true;
 		} catch (RuntimeException e) {
 			return false;
+		}
+	}
+
+	public static int getTransparencyIconId(String widthAttr) {
+		if (TRACK_WIDTH_BOLD.equals(widthAttr)) {
+			return R.drawable.ic_action_track_line_bold_transparency;
+		} else if (TRACK_WIDTH_MEDIUM.equals(widthAttr)) {
+			return R.drawable.ic_action_track_line_medium_transparency;
+		} else {
+			return R.drawable.ic_action_track_line_thin_transparency;
 		}
 	}
 
@@ -666,5 +718,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		} else {
 			return R.drawable.ic_action_track_line_thin_direction;
 		}
+	}
+
+	public interface OnNeedScrollListener {
+		void onVerticalScrollNeeded(int y);
 	}
 }

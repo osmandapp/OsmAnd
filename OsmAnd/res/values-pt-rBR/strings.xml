@@ -3819,7 +3819,7 @@
     <string name="reverse_route">Rota reversa</string>
     <string name="route_between_points_whole_track_button_desc">A trilha inteira será recalculada usando o perfil selecionado.</string>
     <string name="route_between_points_next_segment_button_desc">Apenas o próximo segmento será recalculado usando o perfil selecionado.</string>
-    <string name="route_between_points_desc">Selecione como conectar pontos, com uma linha reta, ou calcular uma rota entre eles com o perfil selecionado.</string>
+    <string name="route_between_points_desc">Selecione como conectar pontos, por uma linha reta, ou calcular uma rota entre eles conforme especificado abaixo.</string>
     <string name="whole_track">Trilha inteira</string>
     <string name="next_segment">Próximo segmento</string>
     <string name="route_between_points_warning_desc">Para usar esta opção, OsmAnd precisa ajustar sua trilha para as estradas do mapa.
@@ -3849,7 +3849,7 @@
     <string name="follow_track_descr">Escolha o arquivo de trilha a seguir</string>
     <string name="import_track_descr">Escolha o arquivo de trilha a seguir ou importe-o de seu dispositivo.</string>
     <string name="select_another_track">Selecionar outra trilha</string>
-    <string name="navigate_to_track_descr">Navegue de minha localização até a trilha</string>
+    <string name="navigate_to_track_descr">Navegue da minha posição até a trilha</string>
     <string name="pass_whole_track_descr">Ponto da trilha para navegar</string>
     <string name="start_of_the_track">Início da pista</string>
     <string name="nearest_point">Ponto próximo</string>
@@ -3881,13 +3881,13 @@
     <string name="shared_string_is_saved">está salvo</string>
     <string name="one_point_error">Adicione pelo menos dois pontos.</string>
     <string name="shared_string_redo">Refazer</string>
-    <string name="release_3_8">"• O modo de rota de plano atualizado permite o uso de diferentes tipos de navegação para cada segmento e anexa qualquer trilha às estradas
+    <string name="release_3_8">"• Função de planejamento de rota atualizada: permite o uso de diferentes tipos de navegação por segmento e a inclusão de trilhas
 \n
-\n • Novas opções de aparência para trilhas: selecione a cor, a espessura, ative as setas de direção e as marcas de início/fim
+\n  • Novo menu de aparência para trilhas: selecione cor, espessura, setas de direção de exibição, ícones de início / término
 \n
-\n  • Melhor visibilidade dos nós da bicicleta
+\n  • Melhor visibilidade dos nós da bicicleta.
 \n
-\n  • Menu de contexto para trilhas com informações básicas
+\n  • As trilhas agora podem ser tocadas, têm menu de contexto com informações básicas.
 \n
 \n  • Algoritmos de pesquisa aprimorados
 \n

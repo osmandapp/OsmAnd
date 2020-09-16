@@ -61,6 +61,7 @@ import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.profiles.RoutingProfileDataObject;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
@@ -86,6 +87,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
@@ -115,6 +117,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_S
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CHOSEN_PROFILE_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CONTROL_BUTTON_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_NORMAL_PROFILE_TAG;
+import static net.osmand.plus.settings.fragments.NavigationFragment.getRoutingProfiles;
 
 
 public class MapActivityActions implements DialogProvider {
@@ -731,11 +734,11 @@ public class MapActivityActions implements DialogProvider {
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
 
 		String modeDescription;
-		
+
+		Map<String, RoutingProfileDataObject> profilesObjects = getRoutingProfiles(app);
 		for (final ApplicationMode appMode : activeModes) {
 			if (appMode.isCustomProfile()) {
-				modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
-						Algorithms.capitalizeFirstLetterAndLowercase(appMode.getParent().toHumanString()));
+				modeDescription = getCustomProfileDescription(app, appMode, profilesObjects);
 			} else {
 				modeDescription = getString(R.string.profile_type_base_string);
 			}
@@ -1045,8 +1048,8 @@ public class MapActivityActions implements DialogProvider {
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
 		String modeDescription;
 		if (currentMode.isCustomProfile()) {
-			modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
-					Algorithms.capitalizeFirstLetterAndLowercase(currentMode.getParent().toHumanString()));
+			Map<String, RoutingProfileDataObject> profilesObjects = getRoutingProfiles(app);
+			modeDescription = getCustomProfileDescription(app, currentMode, profilesObjects);
 		} else {
 			modeDescription = getString(R.string.profile_type_base_string);
 		}
@@ -1079,6 +1082,21 @@ public class MapActivityActions implements DialogProvider {
 					}
 				})
 				.createItem());
+	}
+
+	private String getCustomProfileDescription(OsmandApplication app, ApplicationMode mode,
+	                                           Map<String, RoutingProfileDataObject> profilesObjects){
+		String	description = getString(R.string.profile_type_custom_string);
+
+		String routingProfileKey = mode.getRoutingProfile();
+		if (!Algorithms.isEmpty(routingProfileKey)) {
+			RoutingProfileDataObject profileDataObject = profilesObjects.get(routingProfileKey);
+			if (profileDataObject != null) {
+				description = String.format(app.getString(R.string.profile_type_descr_string),
+						Algorithms.capitalizeFirstLetterAndLowercase(profileDataObject.getName()));
+			}
+		}
+		return description;
 	}
 
 	public void openIntermediatePointsDialog() {
