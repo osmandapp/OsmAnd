@@ -1080,7 +1080,7 @@
     <string name="edit_tilesource_choose_existing">انتخاب از موارد موجود…</string>
     <string name="maps_define_edit">تعریف/ویرایش…</string>
     <string name="driving_region">منطقهٔ رانندگی</string>
-    <string name="edit_tilesource_elliptic_tile">مرکاتور بیضوی</string>
+    <string name="edit_tilesource_elliptic_tile">فراتابی مرکاتور بیضوی</string>
     <string name="edit_tilesource_url_to_load">نشانی اینترنتی</string>
     <string name="map_magnifier">ذره‌بین نقشه</string>
     <string name="base_world_map">نقشهٔ جهانی پایه</string>
@@ -1411,7 +1411,7 @@
     <string name="traffic_warning_border_control">کنترل مرزی</string>
     <string name="traffic_warning_payment">عوارضی</string>
     <string name="traffic_warning_stop">علامت ایست</string>
-    <string name="traffic_warning_calming">سرعتگیر</string>
+    <string name="traffic_warning_calming">آرام‌سازی ترافیک</string>
     <string name="traffic_warning_speed_camera">دوربین سرعت</string>
     <string name="traffic_warning">هشدار ترافیکی</string>
     <string name="enable_proxy_title">فعال‌کردن پروکسی HTTP</string>
@@ -1645,7 +1645,7 @@
     <string name="no_inet_connection_desc_map">برای دانلود نقشه‌ها لازم است.</string>
     <string name="search_location">در حال جست‌وجوی مکان…</string>
     <string name="storage_free_space">فضای خالی</string>
-    <string name="storage_place_description">ذخیره‌گاه اطلاعات OsmAnd (برای نقشه‌ها، فایل‌های GPX و...): %1$s.</string>
+    <string name="storage_place_description">ذخیره‌گاه دادهٔ OsmAnd (برای نقشه‌ها، فایل‌های رد و...): %1$s.</string>
     <string name="give_permission">اجازهٔ دسترسی</string>
     <string name="allow_access_location">اجازهٔ دسترسی به موقعیتتان را بدهید</string>
     <string name="first_usage_greeting">مسیریابی و کشف جاهای تازه بدون اتصال به اینترنت</string>
@@ -2374,8 +2374,8 @@
     <string name="store_tracks_in_monthly_directories">ذخیرهٔ ردهای ضبط‌شده در پوشه‌های ماهانه</string>
     <string name="store_tracks_in_monthly_directories_descrp">ردهای ضبط‌شده در زیرپوشه‌های ماهانه ذخیره می‌شود (مثلاً ‎۲۰۱۸-۰۱).</string>
     <string name="display_zoom_level">زوم نمایش: %1$s</string>
-    <string name="gpx_no_tracks_title">هنوز فایل GPXای ندارید</string>
-    <string name="gpx_no_tracks_title_folder">همچنین می‌توانید فایل‌های GPX را در این پوشه قرار دهید</string>
+    <string name="gpx_no_tracks_title">هنوز فایل رد (track) ندارید</string>
+    <string name="gpx_no_tracks_title_folder">همچنین می‌توانید فایل‌های رد را در این پوشه قرار دهید</string>
     <string name="rec_split_title">استفاده از تقسیمگر ضبط‌کننده</string>
     <string name="context_menu_item_open_note">ایجاد یادداشت OSM</string>
     <string name="osm_edit_reopened_note">یادداشت OSM بازگشوده</string>
@@ -2919,10 +2919,10 @@
     <string name="routeInfo_road_types_name">نوع جاده‌ها</string>
     <string name="exit_at">ایستگاه پیاده‌شدن</string>
     <string name="sit_on_the_stop">ایستگاه سوارشدن</string>
-    <string name="quick_action_show_hide_gpx_tracks">آشکار/پنهان کردن ردهای GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">دکمه‌ای برای آشکار/پنهان کردن ردهای GPX انتخابی بر روی نقشه.</string>
-    <string name="quick_action_gpx_tracks_hide">پنهان‌کردن ردهای GPX</string>
-    <string name="quick_action_gpx_tracks_show">آشکارکردن ردهای GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">آشکار/پنهان کردن ردها</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">دکمه‌ای برای آشکار/پنهان کردن ردهای انتخابی بر روی نقشه.</string>
+    <string name="quick_action_gpx_tracks_hide">پنهان‌کردن ردها</string>
+    <string name="quick_action_gpx_tracks_show">آشکارکردن ردها</string>
     <string name="release_3_3">• طراحی جدید برای صفحهٔ «مسیریابی»: اضافه‌شدن دکمه‌های خانه و محل کار برای انتخاب مقصد، میانبر «مسیر قبلی»، لیست نشانه‌ها و ردهای GPX فعال، سابقهٔ جست‌وجو 
 \n 
 \n • اطلاعات بیشتر در قسمت «جزئیات مسیر»: نوع جاده‌ها، سطح، شیب، همواری 
@@ -3771,7 +3771,7 @@
 \nیک هفته ۱۰ ۰۸۰ دقیقه است. 
 \nیک ماه ۴۳ ۸۲۹ دقیقه است.</string>
     <string name="tiles_storage_descr">شیوهٔ ذخیره‌سازی کاشی‌های دانلودشده را انتخاب کنید.</string>
-    <string name="default_screen_timeout">زمان خاموشی پیشفرض صفحه</string>
+    <string name="default_screen_timeout">زمان پیشفرض خاموشی صفحه</string>
     <string name="export_import_quick_actions_with_profiles_promo">می‌توانید کنش‌های فوری را همراه با پروفایل‌های برنامه برون‌برد یا درون‌برد کنید.</string>
     <string name="shared_string_delete_all_q">همه حذف شود؟</string>
     <string name="delete_all_actions_message_q">آیا %d کنش فوری را حذف می‌کنید؟ (برگشت‌ناپذیر است)</string>
@@ -3804,7 +3804,7 @@
     <string name="shared_string_uninstall">حذف نصب</string>
     <string name="shared_string_bearing">سویه</string>
     <string name="item_deleted">‏%1$s حذف شد</string>
-    <string name="speed_cameras_restart_descr">برای اینکه دادهٔ دوربین سرعت کاملاً حذف شود، یک بار برنامه را ببندید و باز کنید.</string>
+    <string name="speed_cameras_restart_descr">برای اینکه دادهٔ دوربین سرعت کاملاً حذف شود، برنامه را ببندید و باز کنید.</string>
     <string name="speed_camera_pois">نقاط توجه دوربین سرعت</string>
     <string name="speed_cameras_legal_descr">قانونِ برخی کشورها استفاده از نرم‌افزارهای هشداردهندهٔ دوربین سرعت را ممنوع کرده است. 
 \n
@@ -3814,16 +3814,16 @@
 \n
 \nبا انتخاب %2$s تا زمانی که OsmAnd را دوباره نصب کنید، تمام دادهٔ مربوط به دوربین‌های سرعت (هشدارها، اعلان‌ها، نقاط توجه) حذف می‌شود.</string>
     <string name="speed_cameras_alert">قانونِ برخی از کشورها استفاده از هشداردهندهٔ دوربین سرعت را ممنوع کرده است.</string>
-    <string name="use_volume_buttons_as_zoom_descr">با این گزینه می‌توانید با استفاده از دکمه‌های کم/زیاد صدای دستگاه سطح زوم را کنترل کنید.</string>
+    <string name="use_volume_buttons_as_zoom_descr">با استفاده از دکمه‌های کم/زیاد صدای دستگاه، سطح زوم را کنترل کنید.</string>
     <string name="use_volume_buttons_as_zoom">زوم با دکمه‌های صدا</string>
     <string name="routing_attr_length_name">طول مجاز</string>
     <string name="routing_attr_length_description">طول مجاز خودرو در مسیرها را مشخص کنید.</string>
     <string name="speed_cameras_removed_descr">این دستگاه دوربین‌های سرعت را ندارد.</string>
     <string name="keep_active">فعال بماند</string>
-    <string name="quick_action_remove_next_destination">حذف مقصد بعدی</string>
+    <string name="quick_action_remove_next_destination">حذف نزدیک‌ترین مقصد</string>
     <string name="please_provide_point_name_error">لطفاً نام نقطه را بنویسید</string>
     <string name="search_download_wikipedia_maps">دانلود نقشه‌های ویکی‌پدیا</string>
-    <string name="plugin_wikipedia_description">از ویکی‌پدیا دربارهٔ نقاط توجه اطلاعات کسب کنید. یک راهنمای آفلاین جیبی. کافی است افزونهٔ ویکی‌پدیا را فعال کنید و از مقاله‌ها دربارهٔ چیزهای دوروبرتان لذت ببرید.</string>
+    <string name="plugin_wikipedia_description">از ویکی‌پدیا دربارهٔ نقاط توجه اطلاعات کسب کنید؛ مانند یک راهنمای آفلاین جیبی. کافی است افزونهٔ ویکی‌پدیا را فعال کنید و از مقاله‌های مربوط به چیزهای دوروبرتان لذت ببرید.</string>
     <string name="app_mode_wheelchair">صندلی چرخ‌دار</string>
     <string name="osm_edit_closed_note">یادداشت اُاِس‌اِمی بسته</string>
     <string name="add_hidden_group_info">نقطهٔ اضافه‌شده روی نقشه دیده نمی‌شود، زیرا گروه انتخاب‌شده پنهان است. آن را در «%s» پیدا می‌کنید.</string>
