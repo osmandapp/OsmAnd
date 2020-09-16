@@ -37,6 +37,7 @@ import android.widget.OverScroller;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -108,11 +109,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private InterceptorLinearLayout mainView;
 
 	private View toolbarContainer;
-	private View toolbarView;
-	private ImageView toolbarBackButton;
 	private TextView toolbarTextView;
 	private View topButtonContainer;
-	private LockableScrollView menuScrollView;
 
 	private LinearLayout mainRouteBadgeContainer;
 	private LinearLayout nearbyRoutesLayout;
@@ -123,8 +121,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private TextView localRoutesMoreTv;
 
 	private View zoomButtonsView;
-	private ImageButton zoomInButtonView;
-	private ImageButton zoomOutButtonView;
 
 	private MapContextMenu menu;
 	private OnLayoutChangeListener containerLayoutListener;
@@ -149,7 +145,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private int topScreenPosY;
 	private int bottomToolbarPosY;
 	private int minHalfY;
-	private int shadowHeight;
 	private int zoomPaddingTop;
 
 	private OsmandMapTileView map;
@@ -164,12 +159,31 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private boolean wasDrawerDisabled;
 	private boolean zoomIn;
 
-	private int screenOrientation;
 	private boolean created;
 
 	private boolean transportBadgesCreated;
 
 	private UpdateLocationViewCache updateLocationViewCache;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			boolean enabled = mapActivity.getQuickSearchDialogFragment() == null;
+			mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(enabled) {
+				public void handleOnBackPressed() {
+					if (menu.isVisible() && menu.isClosable()) {
+						if (menu.getCurrentMenuState() != MenuState.HEADER_ONLY && !menu.isLandscapeLayout()) {
+							menu.openMenuHeaderOnly();
+						} else {
+							menu.close();
+						}
+					}
+				}
+			});
+		}
+	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -188,7 +202,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
-		shadowHeight = dpToPx(SHADOW_HEIGHT_TOP_DP);
+		int shadowHeight = dpToPx(SHADOW_HEIGHT_TOP_DP);
 		topScreenPosY = addStatusBarHeightIfNeeded(-shadowHeight);
 		bottomToolbarPosY = addStatusBarHeightIfNeeded(getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar));
 		minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
@@ -204,8 +218,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		mainView = view.findViewById(R.id.context_menu_main);
 
 		toolbarContainer = view.findViewById(R.id.context_menu_toolbar_container);
-		toolbarView = view.findViewById(R.id.context_menu_toolbar);
-		toolbarBackButton = view.findViewById(R.id.context_menu_toolbar_back);
+		ImageView toolbarBackButton = view.findViewById(R.id.context_menu_toolbar_back);
 		toolbarTextView = (TextView) view.findViewById(R.id.context_menu_toolbar_text);
 		updateVisibility(toolbarContainer, 0);
 		toolbarBackButton.setOnClickListener(new View.OnClickListener() {
@@ -510,9 +523,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		// Zoom buttons
 		zoomButtonsView = view.findViewById(R.id.context_menu_zoom_buttons);
-		zoomInButtonView = (ImageButton) view.findViewById(R.id.context_menu_zoom_in_button);
-		zoomOutButtonView = (ImageButton) view.findViewById(R.id.context_menu_zoom_out_button);
 		if (menu.zoomButtonsVisible()) {
+			ImageButton zoomInButtonView = view.findViewById(R.id.context_menu_zoom_in_button);
+			ImageButton zoomOutButtonView = view.findViewById(R.id.context_menu_zoom_out_button);
 			AndroidUtils.updateImageButton(app, zoomInButtonView, R.drawable.ic_zoom_in, R.drawable.ic_zoom_in,
 					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
 			AndroidUtils.updateImageButton(app, zoomOutButtonView, R.drawable.ic_zoom_out, R.drawable.ic_zoom_out,
@@ -2303,4 +2316,3 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		runLayoutListener();
 	}
 }
-

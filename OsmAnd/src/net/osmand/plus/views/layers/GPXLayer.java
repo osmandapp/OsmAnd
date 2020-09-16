@@ -43,11 +43,13 @@ import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackDrawInfo;
@@ -70,6 +72,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -234,7 +237,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
+		List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
+
+		Iterator<SelectedGpxFile> iterator = selectedGPXFiles.iterator();
+		while (iterator.hasNext()) {
+			SelectedGpxFile selectedGpxFile = iterator.next();
+			if (selectedGpxFile.isFollowTrack(view.getApplication()) && !showTrackToFollow()) {
+				iterator.remove();
+			}
+		}
 		cache.clear();
 		if (!selectedGPXFiles.isEmpty()) {
 			drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
@@ -456,12 +467,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		int endX = (int) tileBox.getPixXFromLatLon(end.lat, end.lon);
 		int endY = (int) tileBox.getPixYFromLatLon(end.lat, end.lon);
 
-		QuadRect startRect = calculateRect(startX, startY, startPointIcon.getIntrinsicWidth(), startPointIcon.getIntrinsicHeight());
-		QuadRect endRect = calculateRect(endX, endY, finishPointIcon.getIntrinsicWidth(), finishPointIcon.getIntrinsicHeight());
+		int iconSize = AndroidUtils.dpToPx(view.getContext(), 14);
+		QuadRect startRectWithoutShadow = calculateRect(startX, startY, iconSize, iconSize);
+		QuadRect endRectWithoutShadow = calculateRect(endX, endY, iconSize, iconSize);
 
-		if (QuadRect.intersects(startRect, endRect)) {
-			drawPoint(canvas, startRect, startAndFinishIcon);
+		if (QuadRect.intersects(startRectWithoutShadow, endRectWithoutShadow)) {
+			QuadRect startAndFinishRect = calculateRect(startX, startY, startAndFinishIcon.getIntrinsicWidth(), startAndFinishIcon.getIntrinsicHeight());
+			drawPoint(canvas, startAndFinishRect, startAndFinishIcon);
 		} else {
+			QuadRect startRect = calculateRect(startX, startY, startPointIcon.getIntrinsicWidth(), startPointIcon.getIntrinsicHeight());
+			QuadRect endRect = calculateRect(endX, endY, finishPointIcon.getIntrinsicWidth(), finishPointIcon.getIntrinsicHeight());
 			drawPoint(canvas, startRect, startPointIcon);
 			drawPoint(canvas, endRect, finishPointIcon);
 		}
@@ -710,6 +725,21 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				|| gpxFile.path.equals(trackDrawInfo.getFilePath()));
 	}
 
+	private boolean showTrackToFollow() {
+		if (view.getContext() instanceof MapActivity) {
+			MapActivity mapActivity = (MapActivity) view.getContext();
+			OsmandApplication app = mapActivity.getMyApplication();
+			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapRouteInfoMenu();
+			return !app.getSelectedGpxHelper().shouldHideTrackToFollow()
+					|| routeInfoMenu.isVisible()
+					|| app.getRoutingHelper().isFollowingMode()
+					|| MapRouteInfoMenu.followTrackVisible
+					|| MapRouteInfoMenu.chooseRoutesVisible
+					|| MapRouteInfoMenu.waypointsVisible;
+		}
+		return false;
+	}
+
 	private boolean isPointVisited(WptPt o) {
 		boolean visit = false;
 		String visited = o.getExtensionsToRead().get("VISITED_KEY");
@@ -887,12 +917,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public boolean disableSingleTap() {
-		return false;
+		return isInTrackAppearanceMode();
 	}
 
 	@Override
 	public boolean disableLongPressOnMap() {
-		return false;
+		return isInTrackAppearanceMode();
 	}
 
 	@Override

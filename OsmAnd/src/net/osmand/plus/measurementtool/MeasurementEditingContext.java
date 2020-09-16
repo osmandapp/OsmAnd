@@ -43,7 +43,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
-import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.*;
+import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
 
 public class MeasurementEditingContext {
 
@@ -249,8 +249,10 @@ public class MeasurementEditingContext {
 				Pair<WptPt, WptPt> pair = new Pair<>(points.get(i), points.get(i + 1));
 				RoadSegmentData data = this.roadSegmentData.get(pair);
 				if (data == null) {
-					distance += MapUtils.getDistance(pair.first.getLatitude(), pair.first.getLongitude(),
-							pair.second.getLatitude(), pair.second.getLongitude());
+					if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE || !pair.first.lastPoint || !pair.second.firstPoint) {
+						distance += MapUtils.getDistance(pair.first.getLatitude(), pair.first.getLongitude(),
+								pair.second.getLatitude(), pair.second.getLongitude());
+					}
 				} else {
 					distance += data.getDistance();
 				}
@@ -741,7 +743,7 @@ public class MeasurementEditingContext {
 					locations.add(l);
 				}
 				pair.second.setTrkPtIndex(locations.size() - 1);
-				if (i < size - 2) {
+				if (i < size - 2 && !locations.isEmpty()) {
 					locations.remove(locations.size() - 1);
 				}
 				route.addAll(data.segments);

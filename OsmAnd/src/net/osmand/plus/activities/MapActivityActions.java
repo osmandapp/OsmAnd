@@ -59,7 +59,9 @@ import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.profiles.RoutingProfileDataObject;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
@@ -85,6 +87,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
@@ -114,6 +117,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_S
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CHOSEN_PROFILE_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_CONTROL_BUTTON_TAG;
 import static net.osmand.plus.ContextMenuAdapter.PROFILES_NORMAL_PROFILE_TAG;
+import static net.osmand.plus.settings.fragments.NavigationFragment.getRoutingProfiles;
 
 
 public class MapActivityActions implements DialogProvider {
@@ -293,7 +297,7 @@ public class MapActivityActions implements DialogProvider {
 					dlg.findViewById(R.id.DuplicateFileName).setVisibility(View.VISIBLE);
 				} else {
 					dlg.dismiss();
-					new SaveDirectionsAsyncTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
+					new SaveDirectionsAsyncTask(app, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
 				}
 			}
 		});
@@ -309,33 +313,42 @@ public class MapActivityActions implements DialogProvider {
 		return dlg;
 	}
 
-	private static class SaveDirectionsAsyncTask extends AsyncTask<File, Void, String> {
+	public static class SaveDirectionsAsyncTask extends AsyncTask<File, Void, GPXFile> {
 
 		private final OsmandApplication app;
+		boolean showOnMap;
 
-		public SaveDirectionsAsyncTask(OsmandApplication app) {
+		public SaveDirectionsAsyncTask(OsmandApplication app, boolean showOnMap) {
 			this.app = app;
+			this.showOnMap = showOnMap;
 		}
 
 		@Override
-		protected String doInBackground(File... params) {
+		protected GPXFile doInBackground(File... params) {
 			if (params.length > 0) {
 				File file = params[0];
-				String fileName = file.getName();
-				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName.substring(0,fileName.length()-GPX_FILE_EXT.length()));
-				GPXUtilities.writeGpxFile(file, gpx);
-				return app.getString(R.string.route_successfully_saved_at, file.getName());
+				String fileName = Algorithms.getFileNameWithoutExtension(file);
+				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName);
+				gpx.error = GPXUtilities.writeGpxFile(file, gpx);
+				return gpx;
 			}
 			return null;
 		}
 
 		@Override
-		protected void onPostExecute(String result) {
-			if (result != null) {
+		protected void onPostExecute(GPXFile gpxFile) {
+			if (gpxFile.error == null) {
+				app.getSelectedGpxHelper().selectGpxFile(gpxFile, showOnMap, false);
+				String result = app.getString(R.string.route_successfully_saved_at, gpxFile.tracks.get(0).name);
 				Toast.makeText(app, result, Toast.LENGTH_LONG).show();
+			} else {
+				String errorMessage = gpxFile.error.getMessage();
+				if (errorMessage == null) {
+					errorMessage = app.getString(R.string.error_occurred_saving_gpx);
+				}
+				Toast.makeText(app, errorMessage, Toast.LENGTH_LONG).show();
 			}
 		}
-
 	}
 
 	public void addActionsToAdapter(final double latitude,
@@ -475,6 +488,7 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.avoid_road) {
 					getMyApplication().getAvoidSpecificRoads().addImpassableRoad(mapActivity, new LatLon(latitude, longitude), true, false, null);
 				} else if (standardId == R.string.shared_string_add || standardId == R.string.favourites_context_menu_edit) {
+					mapActivity.getContextMenu().hide();
 					mapActivity.getContextMenu().buttonFavoritePressed();
 				} else if (standardId == R.string.shared_string_marker || standardId == R.string.shared_string_edit) {
 					mapActivity.getContextMenu().buttonWaypointPressed();
@@ -720,11 +734,11 @@ public class MapActivityActions implements DialogProvider {
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
 
 		String modeDescription;
-		
+
+		Map<String, RoutingProfileDataObject> profilesObjects = getRoutingProfiles(app);
 		for (final ApplicationMode appMode : activeModes) {
 			if (appMode.isCustomProfile()) {
-				modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
-						Algorithms.capitalizeFirstLetterAndLowercase(appMode.getParent().toHumanString()));
+				modeDescription = getCustomProfileDescription(app, appMode, profilesObjects);
 			} else {
 				modeDescription = getString(R.string.profile_type_base_string);
 			}
@@ -929,7 +943,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-						MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager());
+						StartPlanRouteBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 						return true;
 					}
 				}).createItem());
@@ -1034,8 +1048,8 @@ public class MapActivityActions implements DialogProvider {
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
 		String modeDescription;
 		if (currentMode.isCustomProfile()) {
-			modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
-					Algorithms.capitalizeFirstLetterAndLowercase(currentMode.getParent().toHumanString()));
+			Map<String, RoutingProfileDataObject> profilesObjects = getRoutingProfiles(app);
+			modeDescription = getCustomProfileDescription(app, currentMode, profilesObjects);
 		} else {
 			modeDescription = getString(R.string.profile_type_base_string);
 		}
@@ -1068,6 +1082,21 @@ public class MapActivityActions implements DialogProvider {
 					}
 				})
 				.createItem());
+	}
+
+	private String getCustomProfileDescription(OsmandApplication app, ApplicationMode mode,
+	                                           Map<String, RoutingProfileDataObject> profilesObjects){
+		String	description = getString(R.string.profile_type_custom_string);
+
+		String routingProfileKey = mode.getRoutingProfile();
+		if (!Algorithms.isEmpty(routingProfileKey)) {
+			RoutingProfileDataObject profileDataObject = profilesObjects.get(routingProfileKey);
+			if (profileDataObject != null) {
+				description = String.format(app.getString(R.string.profile_type_descr_string),
+						Algorithms.capitalizeFirstLetterAndLowercase(profileDataObject.getName()));
+			}
+		}
+		return description;
 	}
 
 	public void openIntermediatePointsDialog() {

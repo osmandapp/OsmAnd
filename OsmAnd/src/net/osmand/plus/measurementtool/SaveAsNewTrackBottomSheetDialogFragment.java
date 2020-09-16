@@ -2,11 +2,14 @@ package net.osmand.plus.measurementtool;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +22,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -33,6 +38,8 @@ import net.osmand.plus.measurementtool.adapter.FolderListAdapter;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
+
 public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SaveAsNewTrackBottomSheetDialogFragment.class.getSimpleName();
@@ -41,12 +48,19 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	public static final String SIMPLIFIED_TRACK_KEY = "simplified_track_key";
 	public static final String FOLDER_NAME_KEY = "folder_name_key";
 	public static final String FILE_NAME_KEY = "file_name_key";
+	public static final String SOURCE_FILE_NAME_KEY = "source_file_name_key";
+	public static final String SOURCE_FOLDER_NAME_KEY = "source_folder_name_key";
+	public static final String SHOW_SIMPLIFIED_BUTTON_KEY = "show_simplified_button_key";
 
 	private boolean showOnMap;
 	private boolean simplifiedTrack;
 	private String fileName;
+	private String sourceFileName;
+	private String sourceFolderName;
 	private String folderName;
 	private boolean rightButtonEnabled = true;
+	private boolean showSimplifiedButton = true;
+	private TextInputLayout nameTextBox;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -59,13 +73,16 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			simplifiedTrack = savedInstanceState.getBoolean(SIMPLIFIED_TRACK_KEY);
 			folderName = savedInstanceState.getString(FOLDER_NAME_KEY);
 			fileName = savedInstanceState.getString(FILE_NAME_KEY);
+			sourceFileName = savedInstanceState.getString(SOURCE_FILE_NAME_KEY);
+			sourceFolderName = savedInstanceState.getString(SOURCE_FOLDER_NAME_KEY);
+			showSimplifiedButton = savedInstanceState.getBoolean(SHOW_SIMPLIFIED_BUTTON_KEY);
 		}
 
-		items.add(new TitleItem(getString(R.string.shared_string_save_as_gpx)));
+		items.add(new TitleItem(getString(R.string.save_as_new_track)));
 
 		View editNameView = View.inflate(UiUtilities.getThemedContext(app, nightMode),
 				R.layout.track_name_edit_text, null);
-		final TextInputLayout nameTextBox = editNameView.findViewById(R.id.name_text_box);
+		nameTextBox = editNameView.findViewById(R.id.name_text_box);
 		nameTextBox.setBoxBackgroundColorResource(R.color.material_text_input_layout_bg);
 		nameTextBox.setHint(app.getString(R.string.ltr_or_rtl_combine_via_colon,
 				app.getString(R.string.shared_string_file_name), "").trim());
@@ -85,7 +102,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				checkEmptyName(s, nameTextBox);
+				checkEmptyName(s.toString());
 			}
 		});
 		BaseBottomSheetItem editFileName = new BaseBottomSheetItem.Builder()
@@ -113,46 +130,38 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 			items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.dialog_content_margin)));
 		}
+
 		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-		int backgroundColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
-				R.attr.activity_background_color);
-		GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
-				R.drawable.bg_select_group_button_outline);
-		if (background != null) {
-			background = (GradientDrawable) background.mutate();
-			background.setStroke(0, Color.TRANSPARENT);
-			background.setColor(backgroundColor);
-		}
-		final BottomSheetItemWithCompoundButton[] simplifiedTrackItem = new BottomSheetItemWithCompoundButton[1];
-		simplifiedTrackItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(simplifiedTrack)
-				.setCompoundButtonColorId(activeColorRes)
-				.setDescription(getString(R.string.simplified_track_description))
-				.setBackground(background)
-				.setTitle(getString(R.string.simplified_track))
-				.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						simplifiedTrack = !simplifiedTrack;
-						simplifiedTrackItem[0].setChecked(simplifiedTrack);
-					}
-				})
-				.create();
-		items.add(simplifiedTrackItem[0]);
 
-		items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.content_padding)));
+		if (showSimplifiedButton) {
+			final BottomSheetItemWithCompoundButton[] simplifiedTrackItem = new BottomSheetItemWithCompoundButton[1];
+			simplifiedTrackItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+					.setChecked(simplifiedTrack)
+					.setCompoundButtonColorId(activeColorRes)
+					.setDescription(getSimplifiedTrackDescription())
+					.setBackground(getBackground(simplifiedTrack))
+					.setTitle(getString(R.string.simplified_track))
+					.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							simplifiedTrack = !simplifiedTrack;
+							simplifiedTrackItem[0].setChecked(simplifiedTrack);
+							AndroidUtils.setBackground(simplifiedTrackItem[0].getView(), getBackground(simplifiedTrack));
+							simplifiedTrackItem[0].setDescription(getSimplifiedTrackDescription());
+						}
+					})
+					.create();
+			items.add(simplifiedTrackItem[0]);
 
-		background = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
-		if (background != null) {
-			background = (GradientDrawable) background.mutate();
-			background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), backgroundColor);
+			items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.content_padding)));
 		}
+
 		final BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setCompoundButtonColorId(activeColorRes)
 				.setChecked(showOnMap)
-				.setBackground(background)
+				.setBackground(getBackground(showOnMap))
 				.setTitle(getString(R.string.shared_string_show_on_map))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
 				.setOnClickListener(new View.OnClickListener() {
@@ -160,6 +169,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 					public void onClick(View v) {
 						showOnMap = !showOnMap;
 						showOnMapItem[0].setChecked(showOnMap);
+						AndroidUtils.setBackground(showOnMapItem[0].getView(), getBackground(showOnMap));
 					}
 				})
 				.create();
@@ -168,11 +178,40 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 	}
 
+	private String getSimplifiedTrackDescription() {
+		return simplifiedTrack ? getString(R.string.simplified_track_description) : "";
+	}
+
+	private Drawable getBackground(boolean checked) {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
+					R.drawable.bg_select_group_button_outline);
+			if (background != null) {
+				int backgroundColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
+						R.attr.activity_background_color);
+				background = (GradientDrawable) background.mutate();
+				if (checked) {
+					background.setStroke(0, Color.TRANSPARENT);
+					background.setColor(backgroundColor);
+				} else {
+					background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), backgroundColor);
+				}
+			}
+			return background;
+		}
+		return null;
+	}
+
 	private FolderListAdapter.FolderListAdapterListener createFolderSelectListener() {
 		return new FolderListAdapter.FolderListAdapterListener() {
 			@Override
 			public void onItemSelected(String item) {
 				folderName = item;
+				EditText editText = nameTextBox.getEditText();
+				if (editText != null) {
+					checkEmptyName(editText.getText().toString());
+				}
 			}
 		};
 	}
@@ -183,15 +222,23 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		outState.putBoolean(SIMPLIFIED_TRACK_KEY, simplifiedTrack);
 		outState.putString(FOLDER_NAME_KEY, folderName);
 		outState.putString(FILE_NAME_KEY, fileName);
+		outState.putString(SOURCE_FILE_NAME_KEY, sourceFileName);
+		outState.putString(SOURCE_FOLDER_NAME_KEY, sourceFolderName);
+		outState.putBoolean(SHOW_SIMPLIFIED_BUTTON_KEY, showSimplifiedButton);
 		super.onSaveInstanceState(outState);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment, String fileName) {
+	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment, String folderName,
+	                                String fileName, boolean showSimplifiedButton, boolean showOnMap) {
 		try {
 			if (!fm.isStateSaved()) {
 				SaveAsNewTrackBottomSheetDialogFragment fragment = new SaveAsNewTrackBottomSheetDialogFragment();
 				fragment.setTargetFragment(targetFragment, 0);
 				fragment.fileName = fileName;
+				fragment.sourceFileName = fileName;
+				fragment.sourceFolderName = folderName;
+				fragment.showSimplifiedButton = showSimplifiedButton;
+				fragment.showOnMap = showOnMap;
 				fragment.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
@@ -210,8 +257,44 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		if (targetFragment instanceof SaveAsNewTrackFragmentListener) {
 			((SaveAsNewTrackFragmentListener) targetFragment).onSaveAsNewTrack(folderName, fileName, showOnMap,
 					simplifiedTrack);
+		} else {
+			renameFile();
 		}
 		dismiss();
+	}
+
+	private void renameFile() {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			File source = getFile(app, sourceFolderName, sourceFileName);
+			File dest = getFile(app, folderName, fileName);
+			if (!source.equals(dest)) {
+				if (dest.exists()) {
+					Toast.makeText(app, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+				} else {
+					if (source.renameTo(dest)) {
+						app.getGpxDbHelper().rename(source, dest);
+					} else {
+						Toast.makeText(app, R.string.file_can_not_be_moved, Toast.LENGTH_LONG).show();
+					}
+				}
+			}
+			GPXUtilities.GPXFile gpxFile = GPXUtilities.loadGPXFile(dest);
+			if (gpxFile.error != null) {
+				return;
+			}
+			app.getSelectedGpxHelper().selectGpxFile(gpxFile, showOnMap, false);
+		}
+	}
+
+	private File getFile(OsmandApplication app, String folderName, String fileName) {
+		File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		File source = dir;
+		if (folderName != null) {
+			source = new File(dir, folderName);
+		}
+		source = new File(source, fileName + IndexConstants.GPX_FILE_EXT);
+		return source;
 	}
 
 	@Override
@@ -219,20 +302,31 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		return rightButtonEnabled;
 	}
 
-	private void checkEmptyName(Editable name, TextInputLayout nameCaption) {
-		String text = name.toString().trim();
+	private void checkEmptyName(String name) {
+		rightButtonEnabled = false;
+		String text = name.trim();
 		if (text.isEmpty()) {
-			nameCaption.setError(getString(R.string.empty_filename));
-			rightButtonEnabled = false;
+			nameTextBox.setError(getString(R.string.empty_filename));
+		} else if (isFileExist(name)) {
+			nameTextBox.setError(getString(R.string.file_with_name_already_exist));
 		} else {
-			nameCaption.setError(null);
+			nameTextBox.setError(null);
 			fileName = text;
 			rightButtonEnabled = true;
 		}
 		updateBottomButtons();
 	}
 
-	interface SaveAsNewTrackFragmentListener {
+	private boolean isFileExist(String name) {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			File file = getFile(app, folderName, name);
+			return file.exists();
+		}
+		return false;
+	}
+
+	public interface SaveAsNewTrackFragmentListener {
 
 		void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack);
 

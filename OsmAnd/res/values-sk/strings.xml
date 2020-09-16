@@ -3780,17 +3780,17 @@
     <string name="quick_action_showhide_mapillary_descr">Prepínač pre zobrazenie alebo skrytie vrstvy Mapillary na mape.</string>
     <string name="shared_string_bearing">Smerovanie</string>
     <string name="item_deleted">%1$s vymazané</string>
-    <string name="speed_cameras_restart_descr">Pre úplné odstránenie údajov o rýchlostných radaroch je potrebný reštart.</string>
+    <string name="speed_cameras_restart_descr">Reštartovať aplikáciu pre úplné odstránenie údajov o rýchlostných radaroch.</string>
     <string name="shared_string_uninstall_and_restart">Odinštalovať a reštartovať</string>
     <string name="shared_string_uninstall">Odinštalovať</string>
     <string name="routing_attr_length_description">Zadajte aká dĺžka vozidla musí byť povolená na trase.</string>
     <string name="routing_attr_length_name">Limit dĺžky</string>
     <string name="speed_cameras_removed_descr">Toto zariadenie neobsahuje rýchlostné radary.</string>
     <string name="app_mode_inline_skates">Kolieskové korčule</string>
-    <string name="use_volume_buttons_as_zoom_descr">Umožní ovládať priblíženie mapy tlačidlami hlasitosti zariadenia.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Ovládať priblíženie mapy tlačidlami hlasitosti zariadenia.</string>
     <string name="use_volume_buttons_as_zoom">Tlačidlá hlasitosti na približovanie</string>
     <string name="lenght_limit_description">Zadajte dĺžku vášho vozidla, pretože na trase môžu byť obmedzenia pre dlhé vozidlá.</string>
-    <string name="quick_action_remove_next_destination">Vymazať ďalší cieľový bod</string>
+    <string name="quick_action_remove_next_destination">Vymazať najbližší cieľový bod</string>
     <string name="please_provide_point_name_error">Prosím zadajte názov pre bod</string>
     <string name="quick_action_remove_next_destination_descr">Aktuálny cieľový bod na trase bude vymazaný. Ak je to posledný cieľ, navigácia sa zastaví.</string>
     <string name="search_download_wikipedia_maps">Stiahnuť mapy Wikipédia</string>
@@ -3800,8 +3800,8 @@
     <string name="app_mode_wheelchair">Invalidný vozík</string>
     <string name="app_mode_wheelchair_forward">Invalidný vozík dopredu</string>
     <string name="app_mode_go_cart">Motokára</string>
-    <string name="osm_edit_closed_note">Zatvorená OSM poznámka</string>
-    <string name="set_working_days_to_continue">Pre pokračovanie musíte zadať pracovné dni</string>
+    <string name="osm_edit_closed_note">OSM poznámka zatvorená</string>
+    <string name="set_working_days_to_continue">Zadať pracovné dni pre pokračovanie</string>
     <string name="route_between_points">Trasa medzi bodmi</string>
     <string name="plan_a_route">Naplánovať trasu</string>
     <string name="add_to_a_track">Pridať do stopy</string>
@@ -3822,25 +3822,23 @@
     <string name="overwrite_track">Prepísať stopu</string>
     <string name="save_as_new_track">Uložiť ako novú stopu</string>
     <string name="reverse_route">Otočiť trasu</string>
-    <string name="rourte_between_points_whole_track_button_desc">Celá stopa bude prepočítaná pomocou zvoleného profilu.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Len nasledujúci úsek bude prepočítaný pomocou zvoleného profilu.</string>
-    <string name="rourte_between_points_desc">Zvoľte ako spojiť body, priamou čiarou alebo vypočítať trasu medzi nimi pomocou zvoleného profilu.</string>
+    <string name="route_between_points_whole_track_button_desc">Celá stopa bude prepočítaná pomocou zvoleného profilu.</string>
+    <string name="route_between_points_next_segment_button_desc">Len nasledujúci úsek bude prepočítaný pomocou zvoleného profilu.</string>
+    <string name="route_between_points_desc">Zvoľte ako spojiť body, priamou čiarou alebo vypočítať trasu medzi nimi ako je určené ďalej.</string>
     <string name="whole_track">Celá stopa</string>
     <string name="next_segment">Ďalší úsek</string>
-    <string name="rourte_between_points_warning_desc">Pre použitie tejto možnosti musí OsmAnd prichytiť vašu stopu na cesty v mape.
-\n
-\n V ďalšom kroku budete musieť zvoliť navigačný profil pre detekciu povolených ciest a hraničnú vzdialenosť pre aproximovanie vašej stopy cestami.</string>
+    <string name="route_between_points_warning_desc">Ďalej, pre použitie tejto možnosti pripojte vašu stopu k najbližšej povolenej ceste s niektorým vaším navigačným profilom.</string>
     <string name="threshold_distance">Hraničná vzdialenosť</string>
     <string name="navigation_profile">Navigačný profil</string>
-    <string name="rourte_between_points_add_track_desc">Zvoľte súbor stopy, pre ktorú bude pridaný nový úsek.</string>
+    <string name="route_between_points_add_track_desc">Zvoľte súbor stopy, pre ktorú bude pridaný nový úsek.</string>
     <string name="street_level_imagery">Snímky z úrovne ulice</string>
-    <string name="plan_route_exit_dialog_descr">Naozaj chcete zatvoriť plánovanie trasy bez uloženia\? Všetky zmeny sa stratia.</string>
+    <string name="plan_route_exit_dialog_descr">Naozaj chcete zahodiť všetky zmeny v plánovanej trasy jej zatvorením\?</string>
     <string name="in_case_of_reverse_direction">V prípade opačného smeru</string>
     <string name="shared_string_gpx_route">Trasa zo stopy</string>
     <string name="context_menu_item_add_waypoint">Pridať prechodný bod stopy</string>
     <string name="follow_track">Nasledovať stopu</string>
     <string name="follow_track_descr">Zvoľte súbor stopy pre nasledovanie</string>
-    <string name="import_track_descr">Zvoľte súbor stopy pre nasledovanie, alebo nejaký importujte.</string>
+    <string name="import_track_descr">Zvoľte súbor stopy pre nasledovanie alebo nejaký importujte z vášho zariadenia.</string>
     <string name="select_another_track">Zvoliť inú stopu</string>
     <string name="navigate_to_track_descr">Navigovať z mojej polohy k stope</string>
     <string name="pass_whole_track_descr">Bod stopy pre navigovanie</string>
@@ -3886,4 +3884,19 @@
     <string name="gpx_monitoring_start">Pokračovať v nahrávaní výletu</string>
     <string name="one_point_error">Prosím pridajte aspoň dva body.</string>
     <string name="shared_string_redo">Vykonať znova</string>
+    <string name="release_3_8">• Vylepšená funkcia plánovania trasy: umožňuje použiť rôzne typy navigácie pre úseky trasy a začlenenie stôp
+\n
+\n • Nové menu pre vzhľad stôp: zvoľte farbu, hrúbku, smerové šípky, ikony štartu a cieľa
+\n
+\n • Zlepšená viditeľnosť bodov pre bicykle.
+\n
+\n • Stopy je teraz možné aktivovať, pre kontextové menu sú základnými údajmi.
+\n
+\n • Zlepšený algoritmus vyhľadávania
+\n
+\n • Zlepšené možnosti nasledovania stopy v navigácii
+\n
+\n • Opravené problému s importom a exportom nastavení profilov
+\n
+\n</string>
 </resources>

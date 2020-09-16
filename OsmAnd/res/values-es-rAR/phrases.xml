@@ -3822,7 +3822,7 @@
     <string name="poi_seamark_water_level_above_mwl">Nivel del agua: por encima del nivel medio del agua</string>
     <string name="poi_seamark_water_level_below_mwl">Nivel del agua: por debajo del nivel medio del agua</string>
     <string name="poi_seamark_obstruction">Obstrucción</string>
-    <string name="poi_drinking_water_refill_yes">Recarga de agua potable: sí</string>
+    <string name="poi_drinking_water_refill_yes">Sí</string>
     <string name="poi_drinking_water_refill_no">Recarga de agua potable: no</string>
     <string name="poi_drinking_water_refill_network">Red de recarga de agua potable</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">Succión</string>
@@ -3841,4 +3841,13 @@
     <string name="poi_borough">Municipio</string>
     <string name="poi_traffic_signals_arrow_no">Flecha: no</string>
     <string name="poi_elevator">Ascensor</string>
+    <string name="poi_departures_board_timetable">A horario</string>
+    <string name="poi_departures_board_realtime">En tiempo real</string>
+    <string name="poi_departures_board_delay">Con retraso</string>
+    <string name="poi_departures_board_yes">Sí</string>
+    <string name="poi_departures_board_no">Tablero de partidas: no</string>
+    <string name="poi_departures_board">Tablero de partidas</string>
+    <string name="poi_drinking_water_refill">Recarga de agua potable</string>
+    <string name="poi_recycling_small_electrical_appliances">Pequeños electrodomésticos</string>
+    <string name="poi_beehive">Panal de abejas</string>
 </resources>

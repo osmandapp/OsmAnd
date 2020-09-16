@@ -3803,7 +3803,7 @@
     <string name="poi_seamark_water_level_above_mwl">Рівень води: вище середнього</string>
     <string name="poi_seamark_water_level_below_mwl">Рівень води: нижче середнього</string>
     <string name="poi_seamark_obstruction">Завада</string>
-    <string name="poi_drinking_water_refill_yes">Поповнення питної води: так</string>
+    <string name="poi_drinking_water_refill_yes">Так</string>
     <string name="poi_drinking_water_refill_no">Поповнення питної води: ні</string>
     <string name="poi_drinking_water_refill_network">Мережа поповнення питної води</string>
     <string name="poi_osmand_fire_hydrant_pressure_pressurized">Під тиском</string>
@@ -3822,4 +3822,13 @@
     <string name="poi_give_box">Подарункова коробка</string>
     <string name="poi_elevator">Ліфт</string>
     <string name="poi_traffic_signals_arrow_no">Стрілка: ні</string>
+    <string name="poi_departures_board_timetable">Розклад</string>
+    <string name="poi_departures_board_realtime">Реальний час</string>
+    <string name="poi_departures_board_delay">Затримка</string>
+    <string name="poi_departures_board_yes">Так</string>
+    <string name="poi_departures_board_no">Дошка відправлень: немає</string>
+    <string name="poi_departures_board">Дошка відправлень</string>
+    <string name="poi_drinking_water_refill">Поповнення питної води</string>
+    <string name="poi_recycling_small_electrical_appliances">Невеликі електроприлади</string>
+    <string name="poi_beehive">Вулик</string>
 </resources>

@@ -3839,4 +3839,17 @@ Lon %2$s</string>
     <string name="shared_string_custom">Personalizado</string>
     <string name="gpx_direction_arrows">Frechas de dirección</string>
     <string name="track_coloring_solid">Sólido</string>
+    <string name="gpx_monitoring_stop">Deter a gravación da viaxe</string>
+    <string name="gpx_monitoring_start">Retomar a gravación da viaxe</string>
+    <string name="system_default_theme">Predefinido do sistema</string>
+    <string name="all_next_segments">Todos os segmentos seguintes</string>
+    <string name="previous_segment">Segmento anterior</string>
+    <string name="all_previous_segments">Todos os segmentos anteriores</string>
+    <string name="only_selected_segment_recalc">Só o segmento marcado será recalculado empregando o perfil escollido.</string>
+    <string name="all_next_segments_will_be_recalc">Todos os segmentos seguintes serán recalculados empregando o perfil escollido.</string>
+    <string name="all_previous_segments_will_be_recalc">Todos os segmentos anteriores serán recalculados empregando o perfil escollido.</string>
+    <string name="open_saved_track">Abrir pista gardada</string>
+    <string name="shared_string_is_saved">está gardado</string>
+    <string name="one_point_error">Engade polo menos dous puntos.</string>
+    <string name="shared_string_redo">Refacer</string>
 </resources>

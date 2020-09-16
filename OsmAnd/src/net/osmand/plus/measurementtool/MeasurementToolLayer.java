@@ -107,6 +107,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		this.tapsDisabled = tapsDisabled;
 	}
 
+	public boolean isTapsDisabled() {
+		return tapsDisabled;
+	}
+
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled && editingCtx.getSelectedPointPosition() == -1) {

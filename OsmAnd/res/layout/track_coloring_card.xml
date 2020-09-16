@@ -21,6 +21,7 @@
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
 		android:paddingTop="@dimen/context_menu_padding_margin_tiny"
+		android:visibility="gone"
 		android:paddingBottom="@dimen/content_padding">
 
 		<androidx.recyclerview.widget.RecyclerView

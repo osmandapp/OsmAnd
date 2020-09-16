@@ -3713,17 +3713,17 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="add_to_a_track">Afegir a una ruta</string>
     <string name="track_show_start_finish_icons">Mostrar icones d\'inici final</string>
     <string name="select_track_width">Triar amplària</string>
-    <string name="rourte_between_points_add_track_desc">Trieu un arxiu de ruta al qual s\'afegirà un nou segment.</string>
-    <string name="rourte_between_points_warning_desc">Per usar aquesta opció OsmAnd ha d\'ajustar la seua ruta a les vies del mapa.
+    <string name="route_between_points_add_track_desc">Trieu un arxiu de ruta al qual s\'afegirà un nou segment.</string>
+    <string name="route_between_points_warning_desc">Per usar aquesta opció OsmAnd ha d\'ajustar la seua ruta a les vies del mapa.
 \n
 \nEn el pas següent cal que elegiu el perfil de navegació per detectar vies permeses i el llindar de distància per aproximar la ruta a les vies.</string>
-    <string name="rourte_between_points_desc">Trieu com connectar els punts, amb una línia recta, o calcular la ruta entre ells d\'acord amb el perfil seleccionat.</string>
+    <string name="route_between_points_desc">Trieu com connectar els punts, amb una línia recta, o calcular la ruta entre ells d\'acord amb el perfil seleccionat.</string>
     <string name="gpx_split_interval_descr">Trieu l\'interval a què les marques de distància o temps sobre la ruta es mostraran.</string>
     <string name="shared_string_custom">Personalitzat</string>
     <string name="save_as_new_track">Desar com a una ruta nova</string>
     <string name="reverse_route">Ruta inversa</string>
-    <string name="rourte_between_points_whole_track_button_desc">La ruta sencera serà recalculada fent ús del perfil seleccionat.</string>
-    <string name="rourte_between_points_next_segment_button_desc">Només el següent segment serà recalculat fent ús del perfil seleccionat.</string>
+    <string name="route_between_points_whole_track_button_desc">La ruta sencera serà recalculada fent ús del perfil seleccionat.</string>
+    <string name="route_between_points_next_segment_button_desc">Només el següent segment serà recalculat fent ús del perfil seleccionat.</string>
     <string name="whole_track">Ruta sencera</string>
     <string name="next_segment">Següent segment</string>
     <string name="threshold_distance">Llindar de distància</string>
@@ -3800,4 +3800,19 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_is_saved">s\'ha desat</string>
     <string name="one_point_error">Afegiu almenys dos punts.</string>
     <string name="shared_string_redo">Torna a fer</string>
+    <string name="keep_screen_off">Manté la pantalla desactivada</string>
+    <string name="app_mode_enduro_motorcycle">Moto enduro</string>
+    <string name="plan_route_exit_dialog_descr">Esteu segur que voleu tancar la ruta planificada sense desar-la\? Perdreu tots els canvis.</string>
+    <string name="add_segment_to_the_track">Afegeix a un fitxer de traces</string>
+    <string name="layer_gpx_layer">Traces</string>
+    <string name="save_track_to_gpx_globally">Enregistra el trajecte a un fitxer GPX</string>
+    <string name="navigate_to_track_descr">Navegua des de la meva ubicació fins a la traça</string>
+    <string name="add_address">Afegeix una adreça</string>
+    <string name="shared_string_file_name">Nom del fitxer</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="disable_recording_once_app_killed_descrp">Aturarà l\'enregistrament de traces quan es mati l\'aplicació (mitjançant aplicacions recents). (La indicació de fons OsmAnd desapareix de la barra de notificacions d\'Android.)</string>
+    <string name="save_global_track_interval_descr">Trieu l\'interval d\'enregistrament general dels desplaçaments (s\'activa mitjançant el giny de gravació del mapa).</string>
+    <string name="simplified_track">Traça simplificada</string>
+    <string name="simplified_track_description">Només es desarà la línia del trajecte, les fites s\'esborraran.</string>
+    <string name="number_of_gpx_files_selected_pattern">%s arxius de traces seleccionats</string>
 </resources>

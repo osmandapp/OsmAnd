@@ -239,7 +239,7 @@
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/description_button"
 					android:layout_width="wrap_content"
-					android:layout_height="@dimen/context_menu_buttons_bottom_height"
+					android:layout_height="@dimen/setting_list_item_small_height"
 					android:layout_marginStart="@dimen/content_padding_half"
 					android:layout_marginLeft="@dimen/content_padding_half"
 					android:drawablePadding="8dp"

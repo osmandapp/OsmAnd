@@ -37,7 +37,7 @@
 				android:layout_height="wrap_content">
 
 				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/no_search_results_description"
+					android:id="@+id/track_title"
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
 					android:layout_gravity="center_vertical"
