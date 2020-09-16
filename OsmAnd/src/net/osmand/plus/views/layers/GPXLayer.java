@@ -467,12 +467,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		int endX = (int) tileBox.getPixXFromLatLon(end.lat, end.lon);
 		int endY = (int) tileBox.getPixYFromLatLon(end.lat, end.lon);
 
-		QuadRect startRect = calculateRect(startX, startY, startPointIcon.getIntrinsicWidth(), startPointIcon.getIntrinsicHeight());
-		QuadRect endRect = calculateRect(endX, endY, finishPointIcon.getIntrinsicWidth(), finishPointIcon.getIntrinsicHeight());
+		int iconSize = AndroidUtils.dpToPx(view.getContext(), 14);
+		QuadRect startRectWithoutShadow = calculateRect(startX, startY, iconSize, iconSize);
+		QuadRect endRectWithoutShadow = calculateRect(endX, endY, iconSize, iconSize);
 
-		if (QuadRect.intersects(startRect, endRect)) {
-			drawPoint(canvas, startRect, startAndFinishIcon);
+		if (QuadRect.intersects(startRectWithoutShadow, endRectWithoutShadow)) {
+			QuadRect startAndFinishRect = calculateRect(startX, startY, startAndFinishIcon.getIntrinsicWidth(), startAndFinishIcon.getIntrinsicHeight());
+			drawPoint(canvas, startAndFinishRect, startAndFinishIcon);
 		} else {
+			QuadRect startRect = calculateRect(startX, startY, startPointIcon.getIntrinsicWidth(), startPointIcon.getIntrinsicHeight());
+			QuadRect endRect = calculateRect(endX, endY, finishPointIcon.getIntrinsicWidth(), finishPointIcon.getIntrinsicHeight());
 			drawPoint(canvas, startRect, startPointIcon);
 			drawPoint(canvas, endRect, finishPointIcon);
 		}
@@ -913,12 +917,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public boolean disableSingleTap() {
-		return false;
+		return isInTrackAppearanceMode();
 	}
 
 	@Override
 	public boolean disableLongPressOnMap() {
-		return false;
+		return isInTrackAppearanceMode();
 	}
 
 	@Override
