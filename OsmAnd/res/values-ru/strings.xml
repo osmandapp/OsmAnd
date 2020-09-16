@@ -1502,7 +1502,7 @@
     <string name="rendering_attr_hideBuildings_name">Строения</string>
     <string name="rendering_attr_hideText_name">Текст</string>
     <string name="rendering_attr_hideWoodScrubs_name">Леса и кустарники</string>
-    <string name="rendering_attr_moreDetailed_name">Более подробно</string>
+    <string name="rendering_attr_moreDetailed_name">Повышенная детализация</string>
     <string name="rendering_attr_lessDetailed_name">Менее подробно</string>
     <string name="rendering_attr_showSurfaceGrade_name">Качество дорог</string>
     <string name="rendering_attr_showSurfaces_name">Тип дорожного покрытия</string>
@@ -3845,7 +3845,7 @@
     <string name="shared_string_gpx_route">Маршрут трека</string>
     <string name="empty_state_my_tracks">Добавить файлы треков</string>
     <string name="empty_state_my_tracks_desc">Импортируйте или запишите файлы треков</string>
-    <string name="context_menu_item_add_waypoint">Добавить путевую точку</string>
+    <string name="context_menu_item_add_waypoint">Добавить точку</string>
     <string name="quick_action_add_gpx">Добавить точку к треку</string>
     <string name="map_widget_monitoring">Запись поездки</string>
     <string name="marker_save_as_track">Сохранить как файл трека</string>
