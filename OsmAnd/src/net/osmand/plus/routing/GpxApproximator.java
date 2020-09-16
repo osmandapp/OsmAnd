@@ -22,6 +22,7 @@ import org.apache.commons.logging.Log;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -44,6 +45,7 @@ public class GpxApproximator {
 
 	private ThreadPoolExecutor singleThreadedExecutor;
 	private GpxApproximationProgressCallback approximationProgress;
+	private Future<?> currentApproximationTask;
 
 	public interface GpxApproximationProgressCallback {
 
@@ -152,7 +154,10 @@ public class GpxApproximator {
 		this.gctx = gctx;
 		startProgress();
 		updateProgress(gctx);
-		singleThreadedExecutor.submit(new Runnable() {
+		if (currentApproximationTask != null) {
+			currentApproximationTask.cancel(true);
+		}
+		currentApproximationTask = singleThreadedExecutor.submit(new Runnable() {
 			@Override
 			public void run() {
 				try {
