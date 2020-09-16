@@ -3878,13 +3878,13 @@
     <string name="route_between_points_add_track_desc">Jelölje ki azt a nyomvonalfájlt, amelyhez az új szakasz hozzáadódjék.</string>
     <string name="show_gpx">Nyomvonalak</string>
     <string name="shared_string_redo">Mégis</string>
-    <string name="release_3_8">• A Tervezett útvonal mód frissítésével különböző navigációtípusok is használathatók az egyes szakaszokhoz, és bármilyen nyomvonal az utakhoz köthető
+    <string name="release_3_8">• Frissített útvonaltervezési funkció: szakaszonként különböző navigációtípusok használhatók és nyomvonalak is beilleszthetők
 \n
-\n • Új megjelenési lehetőségek a nyomvonalakhoz: válassza ki a színt, a vastagságot, kapcsolja be az iránynyilakat és a kezdő / befejező jeleket
+\n • Új megjelenési menü a nyomvonalakhoz: válassza ki a színt, a vastagságot, kapcsolja be az iránynyilakat és a kiindulás / célpont ikonjait
 \n
-\n • A kerékpáros csomópontok jobb láthatósága
+\n • Kerékpáros csomópontok jobb láthatósága
 \n
-\n • Helyi menü a nyomvonalak az alapvető adataival
+\n • Nyomvonalra koppintással megnyíló helyi menü a nyomvonalak az alapvető adataival
 \n
 \n • Továbbfejlesztett keresési algoritmusok
 \n
