@@ -518,9 +518,9 @@
     <string name="gpx_option_reverse_route">Обратное направление GPX</string>
     <string name="gpx_option_destination_point">Использовать текущий пункт назначения</string>
     <string name="gpx_option_from_start_point">Пройти весь путь</string>
-    <string name="switch_to_vector_map_to_see">Для этого региона есть локальные векторные карты.
-\n\t
-\n\tМеню → Настройки карты → Источник карты → Векторные карты.</string>
+    <string name="switch_to_vector_map_to_see">Для этого региона доступны локальные векторные карты. 
+\n\t 
+\n\tДля их использования выберите в \"Меню\" → \"Настройка карты\" → \"Источник карты…\" → \"Векторные карты\".</string>
     <string name="choose_audio_stream">Голосовые инструкции</string>
     <string name="choose_audio_stream_descr">Выберите канал вывода голосовых подсказок.</string>
     <string name="voice_stream_voice_call">Канал голосовых звонков (прерывает автомобильную Bluetooth стереосистему)</string>
@@ -864,7 +864,7 @@
     <string name="map_view_3d">3D вид</string>
     <string name="show_poi_over_map_description">Показать последние использованные POI на карте.</string>
     <string name="show_poi_over_map">Показывать POI</string>
-    <string name="map_tile_source_descr">Выберите ресурс с картами онлайн или в кеше.</string>
+    <string name="map_tile_source_descr">Выберите источник онлайн или кешированных тайлов карты</string>
     <string name="map_tile_source">Растровые карты</string>
     <string name="map_source">Источник карты</string>
     <string name="use_internet">Использовать интернет</string>
@@ -3721,7 +3721,7 @@
     <string name="keep_screen_off">Держать экран отключённым</string>
     <string name="keep_screen_on">Держать экран включённым</string>
     <string name="sqlite_db_file">Файл SQLiteDB</string>
-    <string name="online_map_name_helper_text">Название ресурса с онлайн-картами.</string>
+    <string name="online_map_name_helper_text">Укажите название источника онлайн-карты.</string>
     <string name="online_map_url_helper_text">Введите или вставьте URL онлайн-источника.</string>
     <string name="expire_time">Время устаревания</string>
     <string name="mercator_projection">Проекция Меркатора</string>
@@ -3831,7 +3831,7 @@
     <string name="route_between_points_warning_desc">Для использования данной возможности OsmAnd необходимо привязать ваш трек по дорогам.
 \n
 \nНа следующем шаге необходимо выбрать профиль навигации для определения разрешенных дорог и пороговое расстояние, чтобы приблизительно привязать маршрут к дорогам.</string>
-    <string name="route_between_points_desc">Выберите способ соединения точек: прямой линией или прокладкой маршрута с выбранным профилем.</string>
+    <string name="route_between_points_desc">Выберите способ соединения точек прямой линией или рассчитайте маршрут между ними, как указано ниже.</string>
     <string name="in_case_of_reverse_direction">При обратном направлении</string>
     <string name="plan_route_exit_dialog_descr">Все изменения будут утеряны. Закрыть план маршрута\?</string>
     <string name="street_level_imagery">Съёмка уличного уровня</string>
