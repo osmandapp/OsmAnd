@@ -3609,7 +3609,7 @@
     <string name="routing_attr_length_name">Ліміт даўжыні</string>
     <string name="shared_string_bearing">Арыентацыя</string>
     <string name="item_deleted">Выдалена: %1$s</string>
-    <string name="speed_cameras_restart_descr">Перазапуск патрабуецца для поўнага выдалення даных камер кантролю хуткасці.</string>
+    <string name="speed_cameras_restart_descr">Перазапусціце праграму для поўнага выдалення даных камер кантролю хуткасці.</string>
     <string name="use_volume_buttons_as_zoom_descr">Кіраванне ўзроўнем маштабавання мапы пры дапамозе кнопак рэгулявання гучнасці.</string>
     <string name="plugin_wikipedia_description">Інфармацыя пра славутасці з Вікіпедыі. Гэта ваш кішэнны даведнік - уключыце ўбудову вікіпедыі і чытайце артыкулы пра аб’екты вакол вас.</string>
     <string name="app_mode_enduro_motorcycle">Матацыкл Эндура</string>
@@ -3699,22 +3699,20 @@
     <string name="reverse_route">Зваротны маршрут</string>
     <string name="route_between_points_whole_track_button_desc">Увесь след будзе пералічаны з выкарыстаннем абранага профілю.</string>
     <string name="route_between_points_next_segment_button_desc">Толькі наступны сегмент будзе пералічаны паводле абранага профілю.</string>
-    <string name="route_between_points_desc">Абярыце спосаб злучэння пунктаў. Варыянты: прамая лінія; разлік маршруту паводле абранага профілю.</string>
+    <string name="route_between_points_desc">Абярыце спосаб злучэння пунктаў. Варыянты: прамая лінія; разлік маршруту як вызначана ніжэй.</string>
     <string name="whole_track">Увесь след</string>
     <string name="next_segment">Наступны сегмент</string>
-    <string name="route_between_points_warning_desc">Для выкарыстання гэтага параметру OsmAnd пракладзе ваш след па дарогах.
-\n
-\n Пасля вам патрэбна абраць профіль навігацыі для вызначэння маршруту з улікам параметраў і абмежаванняў гэтага профілю.</string>
+    <string name="route_between_points_warning_desc">Пасля вам патрэбна абраць профіль навігацыі для вызначэння маршруту з улікам параметраў і абмежаванняў гэтага профілю.</string>
     <string name="threshold_distance">Максімальная дыстанцыя</string>
     <string name="navigation_profile">Профіль навігацыі</string>
     <string name="route_between_points_add_track_desc">Абраць файл следу, да якога будзе дададзены новы сегмент.</string>
     <string name="street_level_imagery">Выявы на ўзроўні вуліц</string>
-    <string name="plan_route_exit_dialog_descr">Сапраўды закрыць план маршруту без захавання\? Усе змены страцяцца.</string>
+    <string name="plan_route_exit_dialog_descr">Усе змены страцяцца. Закрыць план маршруту\?</string>
     <string name="in_case_of_reverse_direction">У выпадку адваротнага кірунку</string>
     <string name="shared_string_gpx_route">Маршрут следу</string>
     <string name="follow_track">Кіравацца следу</string>
     <string name="follow_track_descr">Абярыце файл следу</string>
-    <string name="import_track_descr">Абярыце альбо імпартуйце файл следу.</string>
+    <string name="import_track_descr">Абярыце альбо імпартуйце файл следу са сваёй прылады.</string>
     <string name="select_another_track">Абраць іншы след</string>
     <string name="navigate_to_track_descr">Перайдзіце ад маёй пазіцыі да следу</string>
     <string name="pass_whole_track_descr">Пункт следу для навігацыі</string>

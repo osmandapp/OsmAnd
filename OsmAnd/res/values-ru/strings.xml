@@ -73,8 +73,8 @@
     <string name="select_postcode">Поиск почтового индекса</string>
     <string name="quick_action_take_audio_note">Записать аудио</string>
     <string name="quick_action_take_video_note">Записать видео</string>
-    <string name="quick_action_take_photo_note">Фотозаметка</string>
-    <string name="quick_action_add_osm_bug">Заметка OSM</string>
+    <string name="quick_action_take_photo_note">Сделать фото</string>
+    <string name="quick_action_add_osm_bug">Добавить заметку OSM</string>
     <string name="parking_options">Функции парковки</string>
     <string name="full_version_thanks">Благодарим вас за покупку платной версии OsmAnd.</string>
     <string name="do_not_show_startup_messages">Не показывать сообщения при запуске</string>
@@ -233,11 +233,11 @@
     <string name="save_filter">Сохранить фильтр</string>
     <string name="delete_filter">Удалить фильтр</string>
     <string name="new_filter">Новый фильтр</string>
-    <string name="change_markers_position">Изменение позиции</string>
+    <string name="change_markers_position">Изменить положение</string>
     <string name="current_track">Текущий путь</string>
     <string name="use_osm_live_routing">Навигация OsmAnd Live</string>
     <string name="map_widget_battery">Уровень заряда батареи</string>
-    <string name="move_marker_bottom_sheet_title">Переместите карту, чтобы изменить положение маркера</string>
+    <string name="move_marker_bottom_sheet_title">Двигайте карту, чтобы изменить позицию маркера</string>
     <!-- string name="lat_lon_pattern">Широта: %1$.5f Долгота: %2$.5f</string -->
     <string name="map_widget_magnetic_bearing">Магнитный пеленг</string>
     <string name="map_widget_bearing">Курсовой угол</string>
@@ -317,8 +317,8 @@
     <string name="recording_open_external_player">Открыть внешний проигрыватель</string>
     <string name="recording_delete_confirm">Удалить эту запись?</string>
     <string name="recording_unavailable">недоступно</string>
-    <string name="recording_context_menu_arecord">Аудиозаметка</string>
-    <string name="recording_context_menu_vrecord">Видеозаметка</string>
+    <string name="recording_context_menu_arecord">Записать аудио</string>
+    <string name="recording_context_menu_vrecord">Записать видео</string>
     <string name="layer_recordings">Слой аудиозаписей</string>
     <string name="recording_can_not_be_played">Запись не может быть воспроизведена.</string>
     <string name="recording_context_menu_delete">Удалить запись</string>
@@ -466,7 +466,7 @@
     <string name="shared_string_undefined">Неопределённо</string>
     <string name="search_position_map_view">Текущий центр карты</string>
     <string name="select_search_position">Начало:</string>
-    <string name="context_menu_item_search">Поиск рядом</string>
+    <string name="context_menu_item_search">Искать рядом</string>
     <string name="route_successfully_saved_at">Маршрут успешно сохранён в «%1$s».</string>
     <string name="filename_input">Имя файла: </string>
     <string name="file_with_name_already_exist">Файл с таким именем уже существует.</string>
@@ -738,7 +738,7 @@
     <string name="first_time_download">Загрузить детальные карты регионов</string>
     <string name="search_poi_location">Поиск сигнала…</string>
     <string name="search_near_map">Искать вокруг текущего центра карты</string>
-    <string name="search_nearby">Поиск рядом</string>
+    <string name="search_nearby">Искать рядом</string>
     <string name="map_orientation_default">По умолчанию</string>
     <string name="map_orientation_portrait">Портрет</string>
     <string name="map_orientation_landscape">Ландшафт</string>
@@ -2170,7 +2170,7 @@
     <string name="access_disable_wrong_direction_recalc">Не пересчитывать маршрут при обратном направлении движения</string>
     <string name="access_disable_wrong_direction_recalc_descr">Предотвращает автоматический пересчёт маршрута при обратном направлении движения.</string>
     <string name="access_no_destination">Пункт назначения не задан</string>
-    <string name="access_direction_audio_feedback">Звуковая индикация направления</string>
+    <string name="access_direction_audio_feedback">Озвучивать направление</string>
     <string name="access_direction_audio_feedback_descr">Индицировать звуком направление на целевую точку.</string>
     <string name="access_direction_haptic_feedback">Тактильная индикация направления</string>
     <string name="access_direction_haptic_feedback_descr">Индицировать вибрацией направление на целевую точку.</string>
@@ -3846,7 +3846,7 @@
     <string name="empty_state_my_tracks">Добавить файлы треков</string>
     <string name="empty_state_my_tracks_desc">Импортируйте или запишите файлы треков</string>
     <string name="context_menu_item_add_waypoint">Добавить путевую точку</string>
-    <string name="quick_action_add_gpx">Добавить к маршруту</string>
+    <string name="quick_action_add_gpx">Добавить точку к треку</string>
     <string name="map_widget_monitoring">Запись поездки</string>
     <string name="marker_save_as_track">Сохранить как файл трека</string>
     <string name="follow_track">Следовать по маршруту</string>

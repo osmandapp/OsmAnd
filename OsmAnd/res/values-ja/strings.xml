@@ -472,7 +472,7 @@ POIの更新は利用できません</string>
     <string name="poi_dialog_comment_default">POI 変更</string>
     <string name="poi_dialog_other_tags_message">他のタグは全て保存されました</string>
     <string name="default_buttons_commit">コミット</string>
-    <string name="shared_string_clear">削除する</string>
+    <string name="shared_string_clear">削除</string>
     <string name="filter_current_poiButton">フィルタ</string>
     <string name="edit_filter_save_as_menu_item">名前をつけて保存</string>
     <string name="edit_filter_delete_dialog_title">選択したフィルタを削除しますか?</string>
@@ -3820,7 +3820,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_length_name">長さ制限</string>
     <string name="shared_string_bearing">ベアリング</string>
     <string name="item_deleted">%1$sを削除しました</string>
-    <string name="speed_cameras_restart_descr">スピードカメラのデータを完全に削除するには、再起動が必要です。</string>
+    <string name="speed_cameras_restart_descr">アプリを再起動し、すべてのスピードカメラデータを削除します。</string>
     <string name="shared_string_uninstall_and_restart">アンインストールして再起動</string>
     <string name="speed_cameras_removed_descr">このアプリには、スピードカメラに関する情報はありません。</string>
     <string name="app_mode_inline_skates">インラインスケート</string>
@@ -3835,7 +3835,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_gpx_files">経路</string>
     <string name="layer_gpx_layer">経路</string>
     <string name="show_gpx">経路</string>
-    <string name="monitoring_control_start">GPX</string>
+    <string name="monitoring_control_start">REC</string>
     <string name="save_track_to_gpx_globally">GPXファイルへの経路ログ</string>
     <string name="shared_string_gpx_route">ルート経路</string>
     <string name="empty_state_my_tracks">経路ファイルを追加</string>
@@ -3875,13 +3875,13 @@ POIの更新は利用できません</string>
     <string name="open_saved_track">保存した経路を開く</string>
     <string name="one_point_error">少なくとも2つの地点を追加してください。</string>
     <string name="shared_string_redo">繰り返し</string>
-    <string name="release_3_8">• アップデートで追加されたルート計画モードは、セグメントごとに異なるナビゲーションタイプを使用でき、おおまかな指定を実際の道路に沿って反映可能に。
+    <string name="release_3_8">• ルート計画機能を更新 : セグメントごとに異なるナビゲーションタイプを使用し、経路として反映することが可能に
 \n
-\n• 経路の新しい外観オプション : 色、厚さを選択し、方向矢印のオン、マークの開始/終了など
+\n• 経路の新しい外観オプション : 色、太さ、表示方向矢印、開始/終了アイコン選択
 \n
-\n• 自転車ノードの可視性の向上
+\n• 自転車ノードの視認性を向上
 \n
-\n• 基本情報を含む経路のコンテキストメニュー追加
+\n• 経路のタップで、基本情報を含むコンテキストメニューの表示
 \n
 \n• 検索アルゴリズムの改善
 \n
@@ -3890,4 +3890,10 @@ POIの更新は利用できません</string>
 \n• プロファイル設定のインポート/エクスポートに関する問題を修正
 \n
 \n</string>
+    <string name="simplified_track">簡略化された経路</string>
+    <string name="simplified_track_description">ルートライン(経路)のみが保存され、経由地点は削除されます。</string>
+    <string name="number_of_gpx_files_selected_pattern">%s個の経路ファイルが選択されました</string>
+    <string name="shared_string_file_name">ファイル名</string>
+    <string name="disable_recording_once_app_killed_descrp">(最近使用したアプリを介して) OsmAndを終了すると、GPXの記録が一時停止されます(バックグラウンドサービスインジケーターがAndroid通知バーから消えます。)</string>
+    <string name="save_global_track_interval_descr">一般的な経路記録の記録間隔を定義します(マップ画面の\'GPX\'ボタンを使用)</string>
 </resources>
