@@ -570,10 +570,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
 			if (itemId == contextMenuItem.getTitleId()) {
+				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false, null);
 				if (itemId == R.string.shared_string_sort) {
 					item.setIcon(getSortIconId(!sortByName));
 				}
-				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false, null);
 				return true;
 			}
 		}
@@ -954,7 +954,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		@Override
 		protected void onPostExecute(List<GpxInfo> result) {
 			this.result = result;
-			allGpxAdapter.sort();
 			allGpxAdapter.refreshSelected();
 			hideProgressBar();
 			listView.setEmptyView(emptyView);
@@ -974,11 +973,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			Arrays.sort(listFiles, new Comparator<File>() {
 				@Override
 				public int compare(File f1, File f2) {
-					// here we could guess date from file name '2017-08-30 ...' - first part date
-					if (f1.lastModified() == f2.lastModified()) {
+					if (sortByName) {
 						return -f1.getName().compareTo(f2.getName());
+					} else {
+						// here we could guess date from file name '2017-08-30 ...' - first part date
+						if (f1.lastModified() == f2.lastModified()) {
+							return -f1.getName().compareTo(f2.getName());
+						}
+						return -Long.compare(f1.lastModified(), f2.lastModified());
 					}
-					return -Long.compare(f1.lastModified(), f2.lastModified());
 				}
 			});
 			return listFiles;
@@ -995,8 +998,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 
 		private void loadGPXFolder(File mapPath, List<GpxInfo> result, LoadGpxTask loadTask, List<GpxInfo> progress,
-								   String gpxSubfolder) {
-			for (File gpxFile : listFilesSorted(mapPath)) {
+		                           String gpxSubfolder) {
+			File[] listFiles = listFilesSorted(mapPath);
+			for (File gpxFile : listFiles) {
 				if (gpxFile.isDirectory()) {
 					String sub = gpxSubfolder.length() == 0 ? gpxFile.getName() : gpxSubfolder + "/"
 							+ gpxFile.getName();
@@ -1011,7 +1015,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 						loadTask.loadFile(progress.toArray(new GpxInfo[progress.size()]));
 						progress.clear();
 					}
-
 				}
 			}
 		}
@@ -1019,7 +1022,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		public List<GpxInfo> getResult() {
 			return result;
 		}
-
 	}
 
 	protected class GpxIndexesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
@@ -1076,7 +1078,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			Collections.sort(selected, new Comparator<GpxInfo>() {
 				@Override
 				public int compare(GpxInfo i1, GpxInfo i2) {
-					return i1.getName().toLowerCase().compareTo(i2.getName().toLowerCase());
+					if (sortByName) {
+						return i1.getName().toLowerCase().compareTo(i2.getName().toLowerCase());
+					} else {
+						long time1 = i1.file.lastModified();
+						long time2 = i2.file.lastModified();
+						if (time1 == time2) {
+							return i1.getName().toLowerCase().compareTo(i2.getName().toLowerCase());
+						}
+						return -Long.compare(time1, time2);
+					}
 				}
 			});
 		}
