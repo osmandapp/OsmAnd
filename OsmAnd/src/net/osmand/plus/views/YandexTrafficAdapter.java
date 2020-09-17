@@ -25,6 +25,7 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 
 	private final static Log log = PlatformUtil.getLog(MapTileLayer.class);
 	private final static String YANDEX_PREFFIX = ".YandexTraffic_";
+	private final static String YANDEX_BASE_URL = "https://core-jams-rdr.maps.yandex.net";
 	private static final long DELTA = 10 * 60 * 1000;
 	
 	private long lastTimestampUpdated;
@@ -59,11 +60,6 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 	}
 
 	protected void updateTimeStampImpl() {
-		String YANDEX_BASE_URL;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD)
-			YANDEX_BASE_URL = "https://core-jams-rdr.maps.yandex.net";
-		else
-			YANDEX_BASE_URL = "http://core-jams-rdr.maps.yandex.net";
 		if (mTimestamp == null || (System.currentTimeMillis() - lastTimestampUpdated) > DELTA) {
 			log.info("Updating timestamp"); //$NON-NLS-1$
 			try {
