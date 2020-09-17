@@ -3936,6 +3936,9 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> FAVORITES_TAB =
 			new IntPreference("FAVORITES_TAB", 0).makeGlobal().cache();
 
+	public final CommonPreference<Boolean> SORT_TRACKS_BY_NAME
+			= new BooleanPreference("sort_tracks_by_name", true).makeGlobal().cache();
+
 	public final CommonPreference<Integer> OSMAND_THEME =
 			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME) {
 				@Override

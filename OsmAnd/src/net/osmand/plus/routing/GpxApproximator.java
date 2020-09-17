@@ -91,8 +91,8 @@ public class GpxApproximator {
 		this.env = routingHelper.getRoutingEnvironment(ctx, mode, start, end);
 	}
 
-	private GpxRouteApproximation getNewGpxApproximationContext(@Nullable GpxRouteApproximation gctx) {
-		GpxRouteApproximation newContext = gctx != null ? new GpxRouteApproximation(gctx) : new GpxRouteApproximation(env.getCtx());
+	private GpxRouteApproximation getNewGpxApproximationContext() {
+		GpxRouteApproximation newContext = new GpxRouteApproximation(env.getCtx());
 		newContext.ctx.calculationProgress = new RouteCalculationProgress();
 		newContext.MINIMUM_POINT_APPROXIMATION = pointApproximation;
 		return newContext;
@@ -100,7 +100,7 @@ public class GpxApproximator {
 
 	private List<GpxPoint> getPoints() {
 		if (points == null) {
-			points = routingHelper.generateGpxPoints(env, getNewGpxApproximationContext(null), locationsHolder);
+			points = routingHelper.generateGpxPoints(env, getNewGpxApproximationContext(), locationsHolder);
 		}
 		List<GpxPoint> points = new ArrayList<>(this.points.size());
 		for (GpxPoint p : this.points) {
@@ -150,7 +150,7 @@ public class GpxApproximator {
 		if (gctx != null) {
 			gctx.ctx.calculationProgress.isCancelled = true;
 		}
-		final GpxRouteApproximation gctx = getNewGpxApproximationContext(this.gctx);
+		final GpxRouteApproximation gctx = getNewGpxApproximationContext();
 		this.gctx = gctx;
 		startProgress();
 		updateProgress(gctx);

@@ -3181,7 +3181,7 @@
     <string name="quick_action_page_list_descr">Nupp alloleva loendi sirvimiseks.</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM automatiseeritud navigeerimisjuhised) on kaardi- ja navigatsioonirakendus, millel on juurdepääs tasuta, ülemaailmsetele ja kvaliteetsetele OpenStreetMap (OSM) andmetele.
 \n
-\n Naudi hääl- ja optilist navigaatorit, HP-de (huvipunktide) vaatamist, GPX radade loomist ja haldamist, kõrgusjoonte visuaalse kuvamise ja kõrguse teabe kasutamist (lisa kaudu), valikut sõidu, jalgrattasõidu, jalakäijate režiimide, OSM redigeerimise ja palju muu vahel.</string>
+\n Naudi hääl- ja optilist navigaatorit, HP-de (huvipunktide) vaatamist, GPX radade loomist ja haldamist, kõrgusjoonte visuaalse kuvamise ja kõrguse teabe kasutamist (lisa kaudu), valikut sõidu, jalgrattasõidu, jalakäijate režiimide, OSM\'i andmete muutmise ja palju muu vahel.</string>
     <string name="osmand_extended_description_part3">Kaart
 \n • Kuvab HP-d (huvipunktid) sinu ümber
 \n • Kohandab kaarti sinu liikumissuunaga (või kompassiga)
@@ -3557,7 +3557,7 @@
     <string name="use_volume_buttons_as_zoom">Helitugevuse nupud toimivad suumina</string>
     <string name="please_provide_point_name_error">Palun sisestage punkti nimi</string>
     <string name="search_download_wikipedia_maps">Lae alla Vikipeedia kaardid</string>
-    <string name="plugin_wikipedia_description">Hangi huviväärsuste kohta teavet Vikipeediast. See on sinu võrguühenduseta reisiraamat - luba lihtsalt Vikipeedia lisaprogramm ja loe artikleid enda ümber asuvate objektide kohta.</string>
+    <string name="plugin_wikipedia_description">Hangi huviväärsuste kohta teavet Vikipeediast. See on sinu võrguühenduseta reisiraamat - lihtsalt võta kasutusele Vikipeedia lisaprogramm ja loe artikleid enda ümber asuvate objektide kohta.</string>
     <string name="add_hidden_group_info">Kuna valitud grupp on peidetud, siis lisatud punkt ei ole kaardil nähtav. Vajadusel leiad ta „%s“ alt.</string>
     <string name="app_mode_go_cart">Kartauto</string>
     <string name="parking_positions">Parkimiskohad</string>
@@ -3728,7 +3728,7 @@
     <string name="plan_route_trim_before">Kärbi enne</string>
     <string name="attach_to_the_roads">Kinnita teede külge</string>
     <string name="route_between_points_warning_desc">Selle valiku kasutamiseks mõne oma navigeerimisprofiili kasutamisel kinnita oma rada lähimale lubatud teele.</string>
-    <string name="route_between_points_next_segment_button_desc">Valitud profiili alusel arvutatakse uus teekond vaid järgmise segmendi osas.</string>
+    <string name="route_between_points_next_segment_button_desc">Selle valitud profiili alusel arvutatakse uus teekond vaid järgmise segmendi osas.</string>
     <string name="main_actions">Põhitegevused</string>
     <string name="osm_live_payment_subscription_management">Ostu kinnitusel võetakse sinu Google Play kontolt tasu.
 \n
@@ -3737,7 +3737,7 @@
 \nTellimuste haldamiseks ja tühistamiseks ava Google Play seadistused.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Kiirtegevusi saad eksportida või importida koos rakenduse profiilidega.</string>
     <string name="delete_all_actions_message_q">Kas sa oled kindel, et soovid pöördumatult kustutada %d kiirtegevust\?</string>
-    <string name="route_between_points_desc">Vali kas soovid ühendada punkte sirge joonega või arvutada nendevahelist teekonda vastavalt oma valitud profiilile.</string>
+    <string name="route_between_points_desc">Vali kas soovid ühendada punkte sirge joonega või arvutada nendevahelist teekonda selle alusel kuidas järgnevalt on määratud.</string>
     <string name="release_3_8">• Uuendatud teekonnaplaneerija: võimaldab kasutada igal segmendil erinevat liikumisviisi ning radade kaasamist
 \n
 \n • Uus radade kujunduse seadistamise menüü: valida saad värve, joone paksust, suunanoolte kuvamist ning alguse ja lõpu ikoone

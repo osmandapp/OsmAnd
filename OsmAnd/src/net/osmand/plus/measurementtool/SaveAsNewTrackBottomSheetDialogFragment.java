@@ -76,6 +76,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			sourceFileName = savedInstanceState.getString(SOURCE_FILE_NAME_KEY);
 			sourceFolderName = savedInstanceState.getString(SOURCE_FOLDER_NAME_KEY);
 			showSimplifiedButton = savedInstanceState.getBoolean(SHOW_SIMPLIFIED_BUTTON_KEY);
+		} else {
+			folderName = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getName();
 		}
 
 		items.add(new TitleItem(getString(R.string.save_as_new_track)));
@@ -290,7 +292,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	private File getFile(OsmandApplication app, String folderName, String fileName) {
 		File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		File source = dir;
-		if (folderName != null) {
+		if (folderName != null && !dir.getName().equals(folderName)) {
 			source = new File(dir, folderName);
 		}
 		source = new File(source, fileName + IndexConstants.GPX_FILE_EXT);
