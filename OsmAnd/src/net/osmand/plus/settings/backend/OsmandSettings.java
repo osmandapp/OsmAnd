@@ -1866,6 +1866,7 @@ public class OsmandSettings {
 	public final CommonPreference<String> ROUTING_PROFILE = new StringPreference("routing_profile", "").makeProfile().cache();
 
 	{
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.DEFAULT, "base profile");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.CAR, "car");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");

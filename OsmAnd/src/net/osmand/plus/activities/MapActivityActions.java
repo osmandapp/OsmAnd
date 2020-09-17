@@ -733,12 +733,8 @@ public class MapActivityActions implements DialogProvider {
 		String modeDescription;
 		
 		for (final ApplicationMode appMode : activeModes) {
-			if (appMode.isCustomProfile()) {
 				modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
 						Algorithms.capitalizeFirstLetterAndLowercase(appMode.getRoutingProfile()));
-			} else {
-				modeDescription = getString(R.string.profile_type_base_string);
-			}
 
 			int tag = currentMode.equals(appMode) ? PROFILES_CHOSEN_PROFILE_TAG : PROFILES_NORMAL_PROFILE_TAG;
 
@@ -1044,12 +1040,9 @@ public class MapActivityActions implements DialogProvider {
 		//switch profile button
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
 		String modeDescription;
-		if (currentMode.isCustomProfile()) {
 			modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
 					Algorithms.capitalizeFirstLetterAndLowercase(currentMode.getRoutingProfile()));
-		} else {
-			modeDescription = getString(R.string.profile_type_base_string);
-		}
+
 		int icArrowResId = listExpanded ? R.drawable.ic_action_arrow_drop_up : R.drawable.ic_action_arrow_drop_down;
 		final int nextMode = listExpanded ? DRAWER_MODE_NORMAL : DRAWER_MODE_SWITCH_PROFILE;
 		optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.main_menu_drawer_btn_switch_profile)
