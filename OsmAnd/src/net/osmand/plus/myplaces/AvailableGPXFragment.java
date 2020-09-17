@@ -1150,20 +1150,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 
 		public void sort() {
-			for (List<GpxInfo> items : data.values()) {
-				Collections.sort(items, new Comparator<GpxInfo>() {
-					@Override
-					public int compare(GpxInfo i1, GpxInfo i2) {
-						if (sortByName) {
-							return i1.getName().toLowerCase().compareTo(i2.getName().toLowerCase());
-						} else {
-							long modified1 = i1.file.lastModified();
-							long modified2 = i2.file.lastModified();
-							return (modified1 < modified2) ? -1 : ((modified1 == modified2) ? 0 : 1);
-						}
-					}
-				});
-			}
 			Collections.sort(category, new Comparator<String>() {
 				@Override
 				public int compare(String lhs, String rhs) {
