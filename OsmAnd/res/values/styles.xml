@@ -551,11 +551,11 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="DialogButtonStyleLight" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <style name="DialogButtonStyleLight" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/active_color_primary_light</item>
     </style>
 
-    <style name="DialogButtonStyleDark" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <style name="DialogButtonStyleDark" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/active_color_primary_dark</item>
     </style>
 
