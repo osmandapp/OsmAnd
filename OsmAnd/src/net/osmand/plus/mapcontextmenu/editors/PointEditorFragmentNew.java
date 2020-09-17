@@ -817,11 +817,15 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 		hideKeyboard();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			MapContextMenu mapContextMenu = mapActivity.getContextMenu();
 			if (includingMenu) {
 				mapActivity.getSupportFragmentManager().popBackStack();
-				mapActivity.getContextMenu().close();
+				mapContextMenu.close();
 			} else {
 				mapActivity.getSupportFragmentManager().popBackStack();
+				if (!mapContextMenu.isVisible() && mapContextMenu.isActive()) {
+					mapContextMenu.show();
+				}
 			}
 		}
 	}
@@ -932,17 +936,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment {
 	private void exitEditing() {
 		cancelled = true;
 		dismiss();
-		showContextMenu();
-	}
-
-	private void showContextMenu() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			MapContextMenu mapContextMenu = mapActivity.getContextMenu();
-			if (!mapContextMenu.isVisible() && mapContextMenu.isActive()) {
-				mapContextMenu.show();
-			}
-		}
 	}
 
 	private AlertDialog.Builder createWarningDialog(Activity activity, int title, int message, int negButton) {
