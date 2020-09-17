@@ -307,7 +307,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null && helper != null) {
 			if (editor.isNew()) {
-				doAddFavorite(name, category, description, color, backgroundType, iconId);
+				doAddFavorite(name, category, description, address, color, backgroundType, iconId);
 			} else {
 				doEditFavorite(favorite, name, category, description, address, color, backgroundType, iconId, helper);
 			}
@@ -341,7 +341,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 		}
 	}
 
-	private void doAddFavorite(String name, String category, String description, @ColorInt int color,
+	private void doAddFavorite(String name, String category, String description, String address, @ColorInt int color,
 	                           BackgroundType backgroundType, @DrawableRes int iconId) {
 		OsmandApplication app = getMyApplication();
 		FavouritesDbHelper helper = getHelper();
@@ -350,6 +350,7 @@ public class FavoritePointEditorFragmentNew extends PointEditorFragmentNew {
 			favorite.setName(name);
 			favorite.setCategory(category);
 			favorite.setDescription(description);
+			favorite.setAddress(address);
 			favorite.setColor(color);
 			favorite.setBackgroundType(backgroundType);
 			favorite.setIconId(iconId);
