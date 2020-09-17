@@ -738,9 +738,9 @@ public class MapActivityActions implements DialogProvider {
 		Map<String, RoutingProfileDataObject> profilesObjects = getRoutingProfiles(app);
 		for (final ApplicationMode appMode : activeModes) {
 			if (appMode.isCustomProfile()) {
-				modeDescription = getCustomProfileDescription(app, appMode, profilesObjects, getString(R.string.profile_type_custom_string));
+				modeDescription = getProfileDescription(app, appMode, profilesObjects, getString(R.string.profile_type_custom_string));
 			} else {
-				modeDescription = getCustomProfileDescription(app, appMode, profilesObjects, getString(R.string.profile_type_base_string));
+				modeDescription = getProfileDescription(app, appMode, profilesObjects, getString(R.string.profile_type_base_string));
 			}
 
 			int tag = currentMode.equals(appMode) ? PROFILES_CHOSEN_PROFILE_TAG : PROFILES_NORMAL_PROFILE_TAG;
@@ -1049,9 +1049,9 @@ public class MapActivityActions implements DialogProvider {
 		String modeDescription;
 		Map<String, RoutingProfileDataObject> profilesObjects = getRoutingProfiles(app);
 		if (currentMode.isCustomProfile()) {
-			modeDescription = getCustomProfileDescription(app, currentMode, profilesObjects, getString(R.string.profile_type_custom_string));
+			modeDescription = getProfileDescription(app, currentMode, profilesObjects, getString(R.string.profile_type_custom_string));
 		} else {
-			modeDescription = getCustomProfileDescription(app, currentMode, profilesObjects, getString(R.string.profile_type_base_string));
+			modeDescription = getProfileDescription(app, currentMode, profilesObjects, getString(R.string.profile_type_base_string));
 		}
 
 		int icArrowResId = listExpanded ? R.drawable.ic_action_arrow_drop_up : R.drawable.ic_action_arrow_drop_down;
@@ -1085,8 +1085,8 @@ public class MapActivityActions implements DialogProvider {
 				.createItem());
 	}
 
-	private String getCustomProfileDescription(OsmandApplication app, ApplicationMode mode,
-	                                           Map<String, RoutingProfileDataObject> profilesObjects, String defaultDescription){
+	private String getProfileDescription(OsmandApplication app, ApplicationMode mode,
+	                                     Map<String, RoutingProfileDataObject> profilesObjects, String defaultDescription){
 		String	description = defaultDescription;
 
 		String routingProfileKey = mode.getRoutingProfile();
