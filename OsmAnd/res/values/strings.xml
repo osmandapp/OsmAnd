@@ -3251,7 +3251,7 @@
     <string name="tts_language_not_supported">The selected language is not supported by the Android TTS (text-to-speech) engine installed, its preset TTS language will be used instead. Look for another TTS engine in the market?</string>
     <string name="tts_missing_language_data_title">Missing data</string>
     <string name="tts_missing_language_data">Go to the market to download selected language?</string>
-    <string name="gpx_option_reverse_route">Reverse GPX direction</string>
+    <string name="gpx_option_reverse_route">Reverse track direction</string>
     <string name="gpx_option_destination_point">Use current destination</string>
     <string name="gpx_option_from_start_point">Pass along entire track</string>
     <!-- Use ← for RTL languages -->
