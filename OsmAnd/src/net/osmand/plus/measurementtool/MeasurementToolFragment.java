@@ -1037,7 +1037,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			File dir = getMyApplication().getAppPath(GPX_INDEX_DIR);
-			if (folderName != null) {
+			if (folderName != null && !dir.getName().equals(folderName)) {
 				dir = new File(dir, folderName);
 			}
 			fileName += GPX_FILE_EXT;
