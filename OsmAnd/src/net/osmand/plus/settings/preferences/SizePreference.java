@@ -87,7 +87,7 @@ public class SizePreference extends DialogPreference {
 	public CharSequence getSummary() {
 		String summary = entries[0];
 		String persistedString = getValue();
-		if (!persistedString.equals(defaultValue)) {
+		if (!persistedString.equals(defaultValue) && !persistedString.startsWith("0")) {
 			try {
 				final DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
 				persistedString = df.format(Float.parseFloat(persistedString) + 0.01f);
