@@ -149,10 +149,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			underlayLayer.setMap(null);
 		}
 		if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDERLAY &&
-				underlayLayer.getMap() != null) {
+				underlayLayer.getMap() != null || underlayLayer.getMapTileAdapter() != null) {
 			layers.getMapControlsLayer().showTransparencyBar(settings.MAP_TRANSPARENCY, true);
 		} else if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY &&
-				overlayLayer.getMap() != null) {
+				overlayLayer.getMap() != null || overlayLayer.getMapTileAdapter() != null) {
 			layers.getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
 		} else {
 			layers.getMapControlsLayer().hideTransparencyBar();
