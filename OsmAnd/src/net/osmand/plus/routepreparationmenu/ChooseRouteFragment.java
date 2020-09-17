@@ -894,7 +894,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	public void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			File fileDir = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), folderName == null ? "" : folderName);
+			File fileDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+			if (!fileDir.getName().equals(folderName)) {
+				fileDir = new File(fileDir, folderName);
+			}
 			File toSave = new File(fileDir, fileName + GPX_FILE_EXT);
 			new SaveDirectionsAsyncTask(app, showOnMap).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
 		}
