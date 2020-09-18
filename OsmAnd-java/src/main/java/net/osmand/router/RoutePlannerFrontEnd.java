@@ -549,8 +549,10 @@ public class RoutePlannerFrontEnd {
 		if (start != null && start.pnt == null) {
 			gctx.routePointsSearched++;
 			RouteSegmentPoint rsp = findRouteSegment(start.loc.getLatitude(), start.loc.getLongitude(), gctx.ctx, null, false);
-			if (MapUtils.getDistance(rsp.getPreciseLatLon(), start.loc) < distThreshold) {
-				start.pnt = rsp;
+			if (rsp != null) {
+				if (MapUtils.getDistance(rsp.getPreciseLatLon(), start.loc) < distThreshold) {
+					start.pnt = rsp;
+				}
 			}
  		} 
 		if (start != null && start.pnt != null) {
