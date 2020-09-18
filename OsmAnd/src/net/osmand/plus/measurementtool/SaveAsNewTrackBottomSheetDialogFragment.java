@@ -68,6 +68,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		if (app == null) {
 			return;
 		}
+
+		int highlightColorId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
 		if (savedInstanceState != null) {
 			showOnMap = savedInstanceState.getBoolean(SHOW_ON_MAP_KEY);
 			simplifiedTrack = savedInstanceState.getBoolean(SIMPLIFIED_TRACK_KEY);
@@ -85,7 +87,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		View editNameView = View.inflate(UiUtilities.getThemedContext(app, nightMode),
 				R.layout.track_name_edit_text, null);
 		nameTextBox = editNameView.findViewById(R.id.name_text_box);
-		nameTextBox.setBoxBackgroundColorResource(R.color.material_text_input_layout_bg);
+		nameTextBox.setBoxBackgroundColorResource(highlightColorId);
 		nameTextBox.setHint(app.getString(R.string.ltr_or_rtl_combine_via_colon,
 				app.getString(R.string.shared_string_file_name), "").trim());
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
@@ -190,14 +192,16 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			GradientDrawable background = (GradientDrawable) AppCompatResources.getDrawable(app,
 					R.drawable.bg_select_group_button_outline);
 			if (background != null) {
-				int backgroundColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
-						R.attr.activity_background_color);
+				int highlightColor = ContextCompat.getColor(app,nightMode ?
+						R.color.list_background_color_dark : R.color.activity_background_color_light);
+				int strokedColor = AndroidUtils.getColorFromAttr(UiUtilities.getThemedContext(app, nightMode),
+						R.attr.stroked_buttons_and_links_outline);
 				background = (GradientDrawable) background.mutate();
 				if (checked) {
 					background.setStroke(0, Color.TRANSPARENT);
-					background.setColor(backgroundColor);
+					background.setColor(highlightColor);
 				} else {
-					background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), backgroundColor);
+					background.setStroke(app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke), strokedColor);
 				}
 			}
 			return background;
@@ -326,6 +330,11 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			return file.exists();
 		}
 		return false;
+	}
+
+	@Override
+	protected int getBgColorId() {
+		return nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light;
 	}
 
 	public interface SaveAsNewTrackFragmentListener {

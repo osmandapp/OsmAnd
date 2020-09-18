@@ -140,26 +140,6 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 		return getIcon(id, nightMode ? R.color.ctx_menu_direction_color_dark : R.color.map_widget_blue);
 	}
 
-	@Override
-	protected int getBgColorId() {
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
-	}
-
-	@Override
-	protected int getPortraitBgResId() {
-		return nightMode ? R.drawable.bg_additional_menu_dark : R.drawable.bg_bottom_menu_light;
-	}
-
-	@Override
-	protected int getLandscapeTopsidesBgResId() {
-		return nightMode ? R.drawable.bg_additional_menu_topsides_dark : R.drawable.bg_bottom_sheet_topsides_landscape_light;
-	}
-
-	@Override
-	protected int getLandscapeSidesBgResId() {
-		return nightMode ? R.drawable.bg_additional_menu_sides_dark : R.drawable.bg_bottom_sheet_sides_landscape_light;
-	}
-
 	private Drawable getBackgroundIcon(@DrawableRes int resId) {
 		return getIcon(resId, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
 	}
