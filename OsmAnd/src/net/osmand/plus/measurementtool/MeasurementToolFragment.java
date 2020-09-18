@@ -138,6 +138,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean pointsListOpened;
 	private boolean planRouteMode = false;
 	private boolean directionMode = false;
+	private boolean approximationApplied = false;
 	private boolean portrait;
 	private boolean nightMode;
 	private int cachedMapPosition;
@@ -1125,7 +1126,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		final ApplicationMode appMode = editingCtx.getAppMode();
 		if (mapActivity != null) {
 			Drawable icon;
-			if (editingCtx.isTrackSnappedToRoad() || editingCtx.isNewData()) {
+			if (editingCtx.isTrackSnappedToRoad() || editingCtx.isNewData() || approximationApplied) {
 				if (appMode == MeasurementEditingContext.DEFAULT_APP_MODE) {
 					icon = getActiveIcon(R.drawable.ic_action_split_interval);
 				} else {
@@ -2004,8 +2005,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onApplyGpxApproximation() {
+		approximationApplied = true;
 		exitApproximationMode();
 		doAddOrMovePointCommonStuff();
+		updateSnapToRoadControls();
 		if (directionMode) {
 			directionMode = false;
 			MapActivity mapActivity = getMapActivity();
