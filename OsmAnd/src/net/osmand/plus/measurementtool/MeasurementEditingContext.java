@@ -546,7 +546,7 @@ public class MeasurementEditingContext {
 						points.add(pt);
 					}
 				} else {
-					for (int ik = seg.getEndPointIndex(); ik >= seg.getStartPointIndex(); ik--) {
+					for (int ik = seg.getStartPointIndex(); ik >= seg.getEndPointIndex(); ik--) {
 						LatLon l = seg.getPoint(ik);
 						WptPt pt = new WptPt();
 						pt.lat = l.getLatitude();
