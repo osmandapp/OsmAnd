@@ -1633,7 +1633,16 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			String via = generateViaDescription();
 			GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 			if (routeParamsBuilder != null) {
-				String fileName = new File(routeParamsBuilder.getFile().path).getName();
+				GPXFile gpxFile = routeParamsBuilder.getFile();
+				String fileName = null;
+				if (!Algorithms.isEmpty(gpxFile.path)) {
+					fileName = new File(gpxFile.path).getName();
+				} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
+					fileName = gpxFile.tracks.get(0).name;
+				}
+				if (Algorithms.isEmpty(fileName)) {
+					fileName = app.getString(R.string.shared_string_gpx_track);
+				}
 				title.setText(GpxUiHelper.getGpxTitle(fileName));
 				description.setText(R.string.follow_track);
 				buttonDescription.setText(R.string.shared_string_add);
