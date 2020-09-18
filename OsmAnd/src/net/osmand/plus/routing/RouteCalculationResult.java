@@ -341,6 +341,10 @@ public class RouteCalculationResult {
 				LatLon point = s.getPoint(i);
 				n.setLatitude(point.getLatitude());
 				n.setLongitude(point.getLongitude());
+				//FIXME: investigate gpx file
+				if (s.getObject().getPoint31XTile(i) == 0 && s.getObject().getPoint31YTile(i) == 0){
+					break;
+				}
 				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
 					break;
 				}
