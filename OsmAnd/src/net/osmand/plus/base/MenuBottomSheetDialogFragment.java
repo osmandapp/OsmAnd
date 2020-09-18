@@ -3,7 +3,9 @@ package net.osmand.plus.base;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
@@ -207,12 +209,12 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				// 8dp is the shadow height
 				boolean showTopShadow = screenHeight - statusBarHeight - mainView.getHeight() >= AndroidUtils.dpToPx(activity, 8);
 				if (AndroidUiHelper.isOrientationPortrait(activity)) {
-					mainView.setBackgroundResource(showTopShadow ? getPortraitBgResId() : getBgColorId());
+					AndroidUtils.setBackground(mainView, showTopShadow ? getPortraitBg(activity) : getColoredBg(activity));
 					if (!showTopShadow) {
 						mainView.setPadding(0, 0, 0, 0);
 					}
 				} else {
-					mainView.setBackgroundResource(showTopShadow ? getLandscapeTopsidesBgResId() : getLandscapeSidesBgResId());
+					AndroidUtils.setBackground(mainView, showTopShadow ? getLandscapeTopsidesBg(activity) : getLandscapeSidesBg(activity));
 				}
 			}
 		});
@@ -304,19 +306,27 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 	}
 
-	@DrawableRes
-	protected int getPortraitBgResId() {
-		return nightMode ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_menu_light;
+	protected Drawable getColoredBg(@NonNull Context ctx) {
+		int bgColor = ContextCompat.getColor(ctx, getBgColorId());
+		return new ColorDrawable(bgColor);
 	}
 
-	@DrawableRes
-	protected int getLandscapeTopsidesBgResId() {
-		return nightMode ? R.drawable.bg_bottom_sheet_topsides_landscape_dark : R.drawable.bg_bottom_sheet_topsides_landscape_light;
+	protected Drawable getPortraitBg(@NonNull Context ctx) {
+		return createBackgroundDrawable(ctx, R.drawable.bg_contextmenu_shadow_top_light);
 	}
 
-	@DrawableRes
-	protected int getLandscapeSidesBgResId() {
-		return nightMode ? R.drawable.bg_bottom_sheet_sides_landscape_dark : R.drawable.bg_bottom_sheet_sides_landscape_light;
+	protected Drawable getLandscapeTopsidesBg(@NonNull Context ctx) {
+		return createBackgroundDrawable(ctx, R.drawable.bg_shadow_bottomsheet_topsides);
+	}
+
+	protected Drawable getLandscapeSidesBg(@NonNull Context ctx) {
+		return createBackgroundDrawable(ctx, R.drawable.bg_shadow_bottomsheet_sides);
+	}
+
+	private LayerDrawable createBackgroundDrawable(@NonNull Context ctx, @DrawableRes int shadowDrawableResId) {
+		Drawable shadowDrawable = ContextCompat.getDrawable(ctx, shadowDrawableResId);
+		Drawable[] layers = new Drawable[]{shadowDrawable, getColoredBg(ctx)};
+		return new LayerDrawable(layers);
 	}
 
 	protected boolean isNightMode(@NonNull OsmandApplication app) {

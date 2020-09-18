@@ -78,6 +78,7 @@ import net.osmand.plus.measurementtool.command.ReversePointsCommand;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
@@ -107,7 +108,7 @@ import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCo
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
-		SaveAsNewTrackFragmentListener {
+		SaveAsNewTrackFragmentListener, MapControlsLayer.MapControlsThemeInfoProvider {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -137,6 +138,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean pointsListOpened;
 	private boolean planRouteMode = false;
 	private boolean directionMode = false;
+	private boolean approximationApplied = false;
 	private boolean portrait;
 	private boolean nightMode;
 	private int cachedMapPosition;
@@ -317,9 +319,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		mainView.findViewById(R.id.options_button).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				boolean trackSnappedToRoad = editingCtx.isTrackSnappedToRoad() || editingCtx.isNewData() || approximationApplied;
 				OptionsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						MeasurementToolFragment.this,
-						editingCtx.isTrackSnappedToRoad() || editingCtx.isNewData(),
+						trackSnappedToRoad,
 						editingCtx.getAppMode().getStringKey()
 				);
 			}
@@ -529,6 +532,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(TAG);
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 			cachedMapPosition = mapActivity.getMapView().getMapPosition();
 			setDefaultMapPosition();
@@ -539,6 +543,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onPause() {
 		super.onPause();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getMapControlsLayer().removeThemeInfoProviderTag(TAG);
+		}
 		setMapPosition(cachedMapPosition);
 	}
 
@@ -1119,7 +1127,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		final ApplicationMode appMode = editingCtx.getAppMode();
 		if (mapActivity != null) {
 			Drawable icon;
-			if (editingCtx.isTrackSnappedToRoad() || editingCtx.isNewData()) {
+			if (editingCtx.isTrackSnappedToRoad() || editingCtx.isNewData() || approximationApplied) {
 				if (appMode == MeasurementEditingContext.DEFAULT_APP_MODE) {
 					icon = getActiveIcon(R.drawable.ic_action_split_interval);
 				} else {
@@ -1954,12 +1962,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			setupDoneButton(view);
 			View shadow = view.getShadowView();
 			if (shadow != null) {
-				shadow.setVisibility(View.GONE);
+				AndroidUiHelper.updateVisibility(shadow, false);
 			}
 		}
 
 		private void setupDoneButton(TopToolbarView view) {
 			TextView done = view.getSaveView();
+			AndroidUiHelper.updateVisibility(done, isVisible());
+
 			Context ctx = done.getContext();
 			done.setAllCaps(false);
 			ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) done.getLayoutParams();
@@ -1996,8 +2006,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onApplyGpxApproximation() {
+		approximationApplied = true;
 		exitApproximationMode();
 		doAddOrMovePointCommonStuff();
+		updateSnapToRoadControls();
 		if (directionMode) {
 			directionMode = false;
 			MapActivity mapActivity = getMapActivity();
@@ -2051,5 +2063,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			layer.setTapsDisabled(false);
 			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_container);
 		}
+	}
+
+	public boolean isNightModeForMapControls() {
+		return nightMode;
 	}
 }

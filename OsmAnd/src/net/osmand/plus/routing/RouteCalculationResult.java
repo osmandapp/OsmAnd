@@ -337,13 +337,13 @@ public class RouteCalculationResult {
 				tunnelAlarm = null;
 			}
 			while (true) {
+				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
+					break;
+				}
 				Location n = new Location(""); //$NON-NLS-1$
 				LatLon point = s.getPoint(i);
 				n.setLatitude(point.getLatitude());
 				n.setLongitude(point.getLongitude());
-				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
-					break;
-				}
 				if (vls != null && i * 2 + 1 < vls.length) {
 					float h = vls[2 * i + 1];
 					n.setAltitude(h);
@@ -356,10 +356,21 @@ public class RouteCalculationResult {
 					}
 					lastHeight = h;
 				}
+				// FIXME: investigate gpx file
+				if (s.getObject().getPoint31XTile(i) == 0 && s.getObject().getPoint31YTile(i) == 0) {
+					if (locations.size() > 0) {
+						Location prev = locations.get(locations.size() - 1);
+						n.setLatitude(prev.getLatitude());
+						n.setLongitude(prev.getLongitude());
+						if (prev.hasAltitude()) {
+							n.setAltitude(prev.getAltitude());
+						}
+					}
+				}
 				locations.add(n);
 				attachAlarmInfo(alarms, s, i, locations.size());
 				segmentsToPopulate.add(s);
-				if (i == s.getEndPointIndex() ) {
+				if (i == s.getEndPointIndex()) {
 					break;
 				}
 				if (plus) {

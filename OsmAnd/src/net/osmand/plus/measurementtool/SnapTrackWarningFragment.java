@@ -148,7 +148,7 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 			}
 		});
 		UiUtilities.setupDialogButton(nightMode, cancelButton, SECONDARY, R.string.shared_string_cancel);
-		UiUtilities.setupDialogButton(nightMode, applyButton, PRIMARY, R.string.shared_string_apply);
+		UiUtilities.setupDialogButton(nightMode, applyButton, PRIMARY, R.string.shared_string_continue);
 		AndroidUiHelper.updateVisibility(applyButton, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
 	}

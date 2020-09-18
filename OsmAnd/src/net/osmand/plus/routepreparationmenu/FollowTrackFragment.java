@@ -62,6 +62,7 @@ import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.views.layers.MapControlsLayer;
 
 import org.apache.commons.logging.Log;
 
@@ -69,7 +70,8 @@ import java.io.File;
 import java.util.List;
 
 
-public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener, IRouteInformationListener {
+public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener,
+		IRouteInformationListener, MapControlsLayer.MapControlsThemeInfoProvider {
 
 	public static final String TAG = FollowTrackFragment.class.getName();
 
@@ -556,15 +558,15 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
 			}
 		}
 	}
 
 	private void setupButtons(View view) {
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
-		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.route_info_bg));
+		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 
 		View cancelButton = view.findViewById(R.id.dismiss_button);
 		cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -638,5 +640,10 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	@Override
 	public void routeWasFinished() {
 
+	}
+
+	@Override
+	protected String getThemeInfoProviderTag() {
+		return TAG;
 	}
 }

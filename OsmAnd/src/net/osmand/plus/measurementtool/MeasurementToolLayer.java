@@ -182,13 +182,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		if (inMeasurementMode) {
 			lineAttrs.updatePaints(view.getApplication(), settings, tb);
 
-			TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
-			new Renderable.StandardTrack(new ArrayList<>(before.points), 17.2).
-					drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
-
-			TrkSegment after = editingCtx.getAfterTrkSegmentLine();
-			new Renderable.StandardTrack(new ArrayList<>(after.points), 17.2).
-					drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
 			if (editingCtx.isInApproximationMode()) {
 				List<WptPt> originalTrackPointList = editingCtx.getOriginalTrackPointList();
 				if (originalTrackPointList != null) {
@@ -198,6 +191,15 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 							drawSegment(view.getZoom(), lineAttrs.customColorPaint, canvas, tb);
 				}
 			}
+
+			TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
+			new Renderable.StandardTrack(new ArrayList<>(before.points), 17.2).
+					drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
+
+			TrkSegment after = editingCtx.getAfterTrkSegmentLine();
+			new Renderable.StandardTrack(new ArrayList<>(after.points), 17.2).
+					drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
+
 			drawPoints(canvas, tb);
 		}
 	}
@@ -206,7 +208,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		if (inMeasurementMode) {
 			lineAttrs.updatePaints(view.getApplication(), settings, tb);
-			drawBeforeAfterPath(canvas, tb);
+			if (!editingCtx.isInApproximationMode()) {
+				drawBeforeAfterPath(canvas, tb);
+			}
 
 			if (editingCtx.getSelectedPointPosition() == -1) {
 				drawCenterIcon(canvas, tb, settings.isNightMode());
