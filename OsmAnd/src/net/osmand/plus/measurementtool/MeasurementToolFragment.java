@@ -1960,12 +1960,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			setupDoneButton(view);
 			View shadow = view.getShadowView();
 			if (shadow != null) {
-				shadow.setVisibility(View.GONE);
+				AndroidUiHelper.updateVisibility(shadow, false);
 			}
 		}
 
 		private void setupDoneButton(TopToolbarView view) {
 			TextView done = view.getSaveView();
+			AndroidUiHelper.updateVisibility(done, isVisible());
+
 			Context ctx = done.getContext();
 			done.setAllCaps(false);
 			ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) done.getLayoutParams();
