@@ -545,6 +545,7 @@ public class MeasurementEditingContext {
 					WptPt pt = new WptPt();
 					if (pf != null && pf.length > ind * 2 + 1) {
 						pt.ele = pf[ind * 2 + 1];
+
 					}
 					pt.lat = l.getLatitude();
 					pt.lon = l.getLongitude();
