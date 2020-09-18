@@ -23,6 +23,8 @@ public class TracksToFollowCard extends BaseCard {
 
 	private List<GPXInfo> gpxInfoList;
 	private String selectedCategory;
+	private String defaultCategory;
+	private String visibleCategory;
 
 	private GpxTrackAdapter tracksAdapter;
 
@@ -30,6 +32,8 @@ public class TracksToFollowCard extends BaseCard {
 		super(mapActivity);
 		this.gpxInfoList = gpxInfoList;
 		this.selectedCategory = selectedCategory;
+		defaultCategory = app.getString(R.string.shared_string_all);
+		visibleCategory = app.getString(R.string.shared_string_visible);
 		gpxInfoCategories = getGpxInfoCategories();
 	}
 
@@ -62,7 +66,7 @@ public class TracksToFollowCard extends BaseCard {
 		filesRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 		filesRecyclerView.setNestedScrollingEnabled(false);
 
-		tracksAdapter = new GpxTrackAdapter(view.getContext(), gpxInfoList, false);
+		tracksAdapter = new GpxTrackAdapter(view.getContext(), gpxInfoList, false, showFoldersName());
 		tracksAdapter.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {
@@ -88,6 +92,7 @@ public class TracksToFollowCard extends BaseCard {
 			public void onItemSelected(String item) {
 				selectedCategory = item;
 				List<GPXInfo> items = gpxInfoCategories.get(item);
+				tracksAdapter.setShowFolderName(showFoldersName());
 				tracksAdapter.setGpxInfoList(items != null ? items : new ArrayList<GPXInfo>());
 				tracksAdapter.notifyDataSetChanged();
 
@@ -101,17 +106,19 @@ public class TracksToFollowCard extends BaseCard {
 		selectionAdapter.notifyDataSetChanged();
 	}
 
+	private boolean showFoldersName() {
+		return defaultCategory.equals(selectedCategory) || visibleCategory.equals(selectedCategory);
+	}
+
 	private Map<String, List<GPXInfo>> getGpxInfoCategories() {
-		String all = app.getString(R.string.shared_string_all);
-		String visible = app.getString(R.string.shared_string_visible);
 		Map<String, List<GPXInfo>> gpxInfoCategories = new LinkedHashMap<>();
 
-		gpxInfoCategories.put(visible, new ArrayList<GPXInfo>());
-		gpxInfoCategories.put(all, new ArrayList<GPXInfo>());
+		gpxInfoCategories.put(visibleCategory, new ArrayList<GPXInfo>());
+		gpxInfoCategories.put(defaultCategory, new ArrayList<GPXInfo>());
 
 		for (GPXInfo info : gpxInfoList) {
 			if (info.isSelected()) {
-				addGpxInfoCategory(gpxInfoCategories, info, visible);
+				addGpxInfoCategory(gpxInfoCategories, info, visibleCategory);
 			}
 			if (!Algorithms.isEmpty(info.getFileName())) {
 				File file = new File(info.getFileName());
@@ -120,7 +127,7 @@ public class TracksToFollowCard extends BaseCard {
 					addGpxInfoCategory(gpxInfoCategories, info, dirName);
 				}
 			}
-			addGpxInfoCategory(gpxInfoCategories, info, all);
+			addGpxInfoCategory(gpxInfoCategories, info, defaultCategory);
 		}
 
 		return gpxInfoCategories;

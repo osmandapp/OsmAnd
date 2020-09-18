@@ -34,14 +34,17 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 	private LayoutInflater themedInflater;
 	private UiUtilities iconsCache;
 	private List<GPXInfo> gpxInfoList;
-	private boolean showCurrentGpx;
 	private OnItemClickListener onItemClickListener;
 
-	public GpxTrackAdapter(Context ctx, List<GPXInfo> gpxInfoList, boolean showCurrentGpx) {
+	private boolean showFolderName;
+	private boolean showCurrentGpx;
+
+	public GpxTrackAdapter(Context ctx, List<GPXInfo> gpxInfoList, boolean showCurrentGpx, boolean showFolderName) {
 		app = (OsmandApplication) ctx.getApplicationContext();
 		themedInflater = UiUtilities.getInflater(ctx, app.getDaynightHelper().isNightModeForMapControls());
 		iconsCache = app.getUIUtilities();
 		this.gpxInfoList = gpxInfoList;
+		this.showFolderName = showFolderName;
 		this.showCurrentGpx = showCurrentGpx;
 	}
 
@@ -55,6 +58,10 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 
 	public void setShowCurrentGpx(boolean showCurrentGpx) {
 		this.showCurrentGpx = showCurrentGpx;
+	}
+
+	public void setShowFolderName(boolean showFolderName) {
+		this.showFolderName = showFolderName;
 	}
 
 	@NonNull
@@ -82,6 +89,9 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<GpxTrackAdapter.TrackV
 		GPXInfo info = gpxInfoList.get(adapterPosition);
 		GpxDataItem dataItem = getDataItem(info);
 		String itemTitle = GpxUiHelper.getGpxTitle(info.getFileName());
+		if (!showFolderName) {
+			itemTitle = Algorithms.getFileWithoutDirs(itemTitle);
+		}
 		updateGpxInfoView(holder, itemTitle, info, dataItem, currentlyRecordingTrack, app);
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -64,6 +64,7 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 	private Map<String, List<GPXInfo>> gpxInfoMap;
 	private Mode fragmentMode;
 	private String selectedFolder;
+	private String allFilesFolder;
 
 	public void setFragmentMode(Mode fragmentMode) {
 		this.fragmentMode = fragmentMode;
@@ -91,7 +92,7 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 		final File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		collectDirs(gpxDir, dirs);
 		List<String> dirItems = new ArrayList<>();
-		String allFilesFolder = context.getString(R.string.shared_string_all);
+		allFilesFolder = context.getString(R.string.shared_string_all);
 		if (savedInstanceState == null) {
 			selectedFolder = allFilesFolder;
 		}
@@ -116,7 +117,7 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 			gpxList.add(gpxInfo);
 		}
 
-		adapter = new GpxTrackAdapter(requireContext(), allGpxList, isShowCurrentGpx());
+		adapter = new GpxTrackAdapter(requireContext(), allGpxList, isShowCurrentGpx(), showFoldersName());
 		adapter.setAdapterListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {
@@ -157,9 +158,14 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 
 	private void updateFileList(String folderName, HorizontalSelectionAdapter folderAdapter) {
 		List<GPXInfo> gpxInfoList = gpxInfoMap.get(folderName);
+		adapter.setShowFolderName(showFoldersName());
 		adapter.setGpxInfoList(gpxInfoList != null ? gpxInfoList : new ArrayList<GPXInfo>());
 		adapter.notifyDataSetChanged();
 		folderAdapter.notifyDataSetChanged();
+	}
+
+	private boolean showFoldersName() {
+		return allFilesFolder.equals(selectedFolder);
 	}
 
 	private boolean isShowCurrentGpx() {
