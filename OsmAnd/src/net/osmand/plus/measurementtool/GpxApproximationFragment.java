@@ -233,16 +233,16 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
 				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(),
-						R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+						R.color.list_background_color_light, R.color.list_background_color_dark);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(),
-						R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+						R.color.list_background_color_light, R.color.list_background_color_dark);
 			}
 		}
 	}
 
 	private void updateButtons(View view) {
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
-		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.route_info_bg));
+		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -413,6 +413,11 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 				}
 			});
 		}
+	}
+
+	@Override
+	protected String getThemeInfoProviderTag() {
+		return TAG;
 	}
 
 	public interface GpxApproximationFragmentListener {

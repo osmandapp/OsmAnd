@@ -28,6 +28,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewPropertyAnimatorCompat;
 import androidx.core.view.ViewPropertyAnimatorListener;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
@@ -69,8 +71,10 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -133,6 +137,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private boolean forceShowCompass;
 	private LatLon requestedLatLon;
 	private long compassPressed;
+	private Set<String> themeInfoProviderTags = new HashSet<>();
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
@@ -836,7 +841,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void updateControls(@NonNull RotatedTileBox tileBox, DrawSettings drawSettings) {
-		boolean isNight = drawSettings != null && drawSettings.isNightMode();
+		boolean isNight = isNightModeForMapControls(drawSettings);
 		boolean portrait = isPotrait();
 //		int shadw = isNight ? mapActivity.getResources().getColor(R.color.widgettext_shadow_night) :
 //				mapActivity.getResources().getColor(R.color.widgettext_shadow_day);
@@ -914,6 +919,25 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 			mc.update(mapActivity.getMyApplication(), isNight);
 		}
+	}
+
+	private boolean isNightModeForMapControls(DrawSettings drawSettings) {
+		MapControlsThemeInfoProvider themeInfoProvider = getThemeInfoProvider();
+		if (themeInfoProvider != null) {
+			return themeInfoProvider.isNightModeForMapControls();
+		}
+		return drawSettings != null && drawSettings.isNightMode();
+	}
+
+	private MapControlsThemeInfoProvider getThemeInfoProvider() {
+		FragmentManager fm = mapActivity.getSupportFragmentManager();
+		for (String tag : themeInfoProviderTags) {
+			Fragment f = fm.findFragmentByTag(tag);
+			if (f instanceof MapControlsThemeInfoProvider) {
+				return (MapControlsThemeInfoProvider) f;
+			}
+		}
+		return null;
 	}
 
 	public void updateCompass(boolean isNight) {
@@ -1418,5 +1442,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 			}
 		}
+	}
+
+	public void addThemeInfoProviderTag(String tag) {
+		themeInfoProviderTags.add(tag);
+	}
+
+	public void removeThemeInfoProviderTag(String tag) {
+		themeInfoProviderTags.remove(tag);
+	}
+
+	public interface MapControlsThemeInfoProvider {
+		boolean isNightModeForMapControls();
 	}
 }

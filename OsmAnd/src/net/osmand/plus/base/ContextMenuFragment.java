@@ -47,10 +47,12 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
+import net.osmand.plus.views.layers.MapControlsLayer;
 
 import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
 
-public abstract class ContextMenuFragment extends BaseOsmAndFragment {
+public abstract class ContextMenuFragment extends BaseOsmAndFragment
+		implements MapControlsLayer.MapControlsThemeInfoProvider {
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
@@ -174,8 +176,17 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return topView;
 	}
 
+	@Override
+	public boolean isNightModeForMapControls() {
+		return nightMode;
+	}
+
 	public boolean isNightMode() {
 		return nightMode;
+	}
+
+	protected String getThemeInfoProviderTag() {
+		return null;
 	}
 
 	public void updateNightMode() {
@@ -597,6 +608,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();
 			}
+			String tag = getThemeInfoProviderTag();
+			if (tag != null) {
+				mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(tag);
+			}
 		}
 	}
 
@@ -611,8 +626,14 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 			}
 		}
 		MapActivity mapActivity = getMapActivity();
-		if (!wasDrawerDisabled && mapActivity != null) {
-			mapActivity.enableDrawer();
+		if (mapActivity != null) {
+			if (!wasDrawerDisabled) {
+				mapActivity.enableDrawer();
+			}
+			String tag = getThemeInfoProviderTag();
+			if (tag != null) {
+				mapActivity.getMapLayers().getMapControlsLayer().removeThemeInfoProviderTag(tag);
+			}
 		}
 	}
 

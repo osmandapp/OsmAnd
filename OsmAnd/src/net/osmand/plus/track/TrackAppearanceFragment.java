@@ -432,15 +432,15 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
 			}
 		}
 	}
 
 	private void setupButtons(View view) {
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
-		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.route_info_bg));
+		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 		View saveButton = view.findViewById(R.id.right_bottom_button);
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -718,6 +718,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		} else {
 			return R.drawable.ic_action_track_line_thin_direction;
 		}
+	}
+
+	@Override
+	protected String getThemeInfoProviderTag() {
+		return TAG;
 	}
 
 	public interface OnNeedScrollListener {
