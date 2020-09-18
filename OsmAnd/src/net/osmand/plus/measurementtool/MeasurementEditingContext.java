@@ -537,22 +537,19 @@ public class MeasurementEditingContext {
 			List<RouteSegmentResult> segments = new ArrayList<>();
 			for (RouteSegmentResult seg : rp1.routeToTarget) {
 				segments.add(seg);
-				if (seg.isForwardDirection()) {
-					for (int ik = seg.getStartPointIndex(); ik <= seg.getEndPointIndex(); ik++) {
-						LatLon l = seg.getPoint(ik);
-						WptPt pt = new WptPt();
-						pt.lat = l.getLatitude();
-						pt.lon = l.getLongitude();
-						points.add(pt);
+				int ind = seg.getStartPointIndex();
+				boolean plus = seg.isForwardDirection();
+				float[] pf = seg.getObject().calculateHeightArray();
+				while (ind != seg.getEndPointIndex()) {
+					LatLon l = seg.getPoint(ind);
+					WptPt pt = new WptPt();
+					if (pf != null && pf.length > ind * 2 + 1) {
+						pt.ele = pf[ind * 2 + 1];
 					}
-				} else {
-					for (int ik = seg.getEndPointIndex(); ik >= seg.getStartPointIndex(); ik--) {
-						LatLon l = seg.getPoint(ik);
-						WptPt pt = new WptPt();
-						pt.lat = l.getLatitude();
-						pt.lon = l.getLongitude();
-						points.add(pt);
-					}
+					pt.lat = l.getLatitude();
+					pt.lon = l.getLongitude();
+					points.add(pt);
+					ind = plus ? ind + 1 : ind - 1;
 				}
 			}
 			roadSegmentData.put(pair, new RoadSegmentData(appMode, pair.first, pair.second, points, segments));
