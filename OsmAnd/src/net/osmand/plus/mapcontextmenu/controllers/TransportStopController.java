@@ -231,9 +231,13 @@ public class TransportStopController extends MenuController {
 			stopAggregated = new TransportStopAggregated();
 			stopAggregated.setAmenity(amenity);
 			TransportStop nearestStop = null;
+			String amenityName = amenity.getName().toLowerCase();
 			for (TransportStop stop : transportStops) {
 				stop.setTransportStopAggregated(stopAggregated);
-				if ((stop.getName().startsWith(amenity.getName())
+				String stopName = stop.getName().toLowerCase();
+				if (((stopName.startsWith(amenity.getName())
+						|| stopName.contains(amenityName)
+						|| amenityName.contains(stopName))
 						&& (nearestStop == null
 						|| nearestStop.getLocation().equals(stop.getLocation())))
 						|| stop.getLocation().equals(loc)) {
