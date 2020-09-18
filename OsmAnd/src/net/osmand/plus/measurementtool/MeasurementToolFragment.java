@@ -319,9 +319,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		mainView.findViewById(R.id.options_button).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				boolean trackSnappedToRoad = editingCtx.isTrackSnappedToRoad() || editingCtx.isNewData() || approximationApplied;
 				OptionsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						MeasurementToolFragment.this,
-						editingCtx.isTrackSnappedToRoad() || editingCtx.isNewData(),
+						trackSnappedToRoad,
 						editingCtx.getAppMode().getStringKey()
 				);
 			}
