@@ -147,7 +147,7 @@
     <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Souhaitez-vous rechercher d\'autres moteurs de synthèse vocale sur Google Play \? Sinon la langue par défaut sera utilisée.</string>
     <string name="tts_missing_language_data_title">Données manquantes</string>
     <string name="tts_missing_language_data">Souhaitez-vous installer la langue sélectionnée depuis Google Play ?</string>
-    <string name="gpx_option_reverse_route">Inverser l\'itinéraire GPX</string>
+    <string name="gpx_option_reverse_route">Inverser le sens de la trace</string>
     <string name="gpx_option_destination_point">Utiliser la destination en cours</string>
     <string name="gpx_option_from_start_point">Suivre l\'ensemble de la trace</string>
     <string name="switch_to_vector_map_to_see">Cartes vectorielles hors-lignes disponibles pour cette position. 
