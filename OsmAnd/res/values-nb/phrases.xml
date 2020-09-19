@@ -1556,7 +1556,7 @@
     <string name="poi_fire_hydrant_type_pipe">Rør</string>
     <string name="poi_drinking_water_refill_network">Nettverk for påfyll av drikkevann</string>
     <string name="poi_drinking_water_refill_no">Drikkevannspåfylling: Nei</string>
-    <string name="poi_drinking_water_refill_yes">Drikkevannspåfylling: Ja</string>
+    <string name="poi_drinking_water_refill_yes">Ja</string>
     <string name="poi_seamark_water_level_submerged">Vann-nivå: Nedsenket</string>
     <string name="poi_seamark_obstruction">Hindring</string>
     <string name="poi_seamark_water_level_below_mwl">Vann-nivå: Under vanlig vann-nivå</string>

@@ -13,7 +13,7 @@
     <string name="fav_point_emoticons_message">Favorito renomeado a \'%1$s\' para gardar a cadea que contén emoticonas nun ficheiro.</string>
     <string name="print_route">Imprimir o itinerario</string>
     <string name="fav_point_dublicate">Favorito especificado con nome duplicado</string>
-    <string name="traffic_warning_calming">Lomba</string>
+    <string name="traffic_warning_calming">Redutor de velocidade</string>
     <string name="traffic_warning">Aviso do tráfico</string>
     <string name="way_alarms">Avisos de tráfico</string>
     <string name="background_service_is_enabled_question">O servizo en segundo plano do OsmAnd aínda está en execución. Desexas detelo tamén\?</string>
@@ -1878,8 +1878,8 @@ Lon %2$s</string>
     <string name="route_roundabout_short">Colla a %1$d saída e siga</string>
     <string name="upload_poi">Enviar PDI</string>
     <string name="route_calculation">Cálculo da ruta</string>
-    <string name="gpx_no_tracks_title">Aínda non tes ningún ficheiro GPX</string>
-    <string name="gpx_no_tracks_title_folder">Tamén podes engadir ficheiros GPX ó cartafol</string>
+    <string name="gpx_no_tracks_title">Aínda non tes ningún ficheiro de pistas</string>
+    <string name="gpx_no_tracks_title_folder">Tamén podes engadir ficheiros de pistas ó cartafol</string>
     <string name="gpx_add_track">Engadir máis…</string>
     <string name="shared_string_appearance">Aparencia</string>
     <string name="trip_rec_notification_settings">Activar a gravación rápida</string>
@@ -1931,7 +1931,7 @@ Lon %2$s</string>
     <string name="location_not_found">Localización non atopada</string>
     <string name="no_inet_connection">Non hai conexión á Internet</string>
     <string name="storage_free_space">Espazo baleiro</string>
-    <string name="storage_place_description">Almacenamento dos datos do OsmAnd (para mapas, ficheiros GPX, etc.): %1$s.</string>
+    <string name="storage_place_description">Almacenamento dos datos do OsmAnd (para mapas, ficheiros de pistas, etc.): %1$s.</string>
     <string name="give_permission">Fornecer permiso</string>
     <string name="allow_access_location">Permitir acceso á localización</string>
     <string name="first_usage_greeting">Obtén indicacións e descobre lugares novos sen conexión á Internet</string>
@@ -2901,10 +2901,10 @@ Lon %2$s</string>
     <string name="shared_string_swap">Trocar</string>
     <string name="show_more">Amosar máis</string>
     <string name="tracks_on_map">Pistas amosadas</string>
-    <string name="quick_action_show_hide_gpx_tracks">Amosar/agochar pistas GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que amosa ou agocha as pistas GPX escollidas no mapa.</string>
-    <string name="quick_action_gpx_tracks_hide">Agochar pistas GPX</string>
-    <string name="quick_action_gpx_tracks_show">Amosar pistas GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Amosar/agochar pistas</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que amosa ou agocha as pistas escollidas no mapa.</string>
+    <string name="quick_action_gpx_tracks_hide">Agochar pistas</string>
+    <string name="quick_action_gpx_tracks_show">Amosar pistas</string>
     <string name="transfers_size">%1$d transferencias</string>
     <string name="add_start_and_end_points">Engadir orixe e destino</string>
     <string name="route_add_start_point">Engadir punto de comezo</string>
@@ -3804,7 +3804,7 @@ Lon %2$s</string>
 \nEscolle %2$s. Todos os datos relacionados de radares de velocidade: alertas, notificacións e PDI serán eliminados até que o OsmAnd sexa reinstalado de xeito completo.</string>
     <string name="keep_active">Manter activo</string>
     <string name="shared_string_uninstall">Desinstalar</string>
-    <string name="speed_cameras_restart_descr">É necesario reiniciar para eliminar de xeito completo os datos do radar de velocidade.</string>
+    <string name="speed_cameras_restart_descr">Reiniciar para eliminar todos os datos do radar de velocidade.</string>
     <string name="speed_cameras_alert">As alertas de radares de velocidade nalgúns países están prohibidas por lei.</string>
     <string name="shared_string_bearing">Levando</string>
     <string name="item_deleted">%1$s eliminado</string>
@@ -3813,21 +3813,21 @@ Lon %2$s</string>
     <string name="routing_attr_length_name">Límite de lonxitude</string>
     <string name="speed_cameras_removed_descr">Este dispositivo non ten radares de velocidade.</string>
     <string name="app_mode_inline_skates">Patíns en liña</string>
-    <string name="use_volume_buttons_as_zoom_descr">Activar para controlar o nivel de achegamento (zoom) do mapa cos botóns de volume do dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Controlar o nivel de achegamento (zoom) do mapa cos botóns de volume do dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Os botóns de volume mudan o achegamento</string>
     <string name="lenght_limit_description">Fornece a lonxitude do teu vehículo. Algunhas restricións de ruta poden ser aplicadas a vehículos longos.</string>
-    <string name="quick_action_remove_next_destination">Eliminar seguinte punto de destino</string>
+    <string name="quick_action_remove_next_destination">Eliminar punto de destino máis preto</string>
     <string name="please_provide_point_name_error">Fornece un nome para o punto</string>
     <string name="quick_action_remove_next_destination_descr">O punto de destino actual na ruta será eliminado. Se fora o destino, a navegación sería interrompida.</string>
     <string name="search_download_wikipedia_maps">Baixar mapas da Wikipedia</string>
-    <string name="plugin_wikipedia_description">Obter información sobre os puntos de interesse da Wikipédia. É o teu guía de peto sen conexión - só activar o complemento da Wikipédia e desfrutar dos artigos sobre os elementos ó teu redor.</string>
+    <string name="plugin_wikipedia_description">Obter información sobre os puntos de interese da Wikipedia. É o teu guía de peto sen conexión - só activar o complemento da Wikipedia e desfrutar dos artigos sobre os elementos ó teu redor.</string>
     <string name="app_mode_enduro_motorcycle">Enduro</string>
     <string name="app_mode_motor_scooter">Scooter</string>
     <string name="app_mode_wheelchair">Cadeira de rodas</string>
     <string name="app_mode_wheelchair_forward">Cadeira de rodas só cara adiante</string>
     <string name="app_mode_go_cart">Kart</string>
     <string name="osm_edit_closed_note">Nota do OSM pechada</string>
-    <string name="set_working_days_to_continue">Tes que definir os días laborais para continuar</string>
+    <string name="set_working_days_to_continue">Definir os días laborais para continuar</string>
     <string name="route_between_points">Ruta entre puntos</string>
     <string name="plan_a_route">Planificar unha ruta</string>
     <string name="add_to_a_track">Engadir a unha pista</string>
@@ -3852,4 +3852,77 @@ Lon %2$s</string>
     <string name="shared_string_is_saved">está gardado</string>
     <string name="one_point_error">Engade polo menos dous puntos.</string>
     <string name="shared_string_redo">Refacer</string>
+    <string name="release_3_8">• Actualizouse a función \"Planificar ruta\": permite empregar diferentes tipos de navegación por segmento e o engadido de pistas
+\n
+\n • Novo menú coa aparencia das pistas: escoller a cor, o grosor, amosar as frechas de dirección e as iconas de comezo/final.
+\n
+\n • Melloras na visibilidade dos nós de bicicleta.
+\n
+\n • As pistas agora pódense premer, contén un menú con información básica.
+\n
+\n • Algoritmos de procura mellorados
+\n
+\n • Melloras nas opcións de seguimento da navegación
+\n
+\n • Solucionáronse os problemas da importación e exportación nos axustes dos perfís
+\n
+\n</string>
+    <string name="save_track_to_gpx">Gravar a pista de xeito automático ó navegar</string>
+    <string name="plan_route_last_edited">Última edición</string>
+    <string name="plan_route_import_track">Importar pista</string>
+    <string name="plan_route_open_existing_track">Abrir pista existente</string>
+    <string name="plan_route_create_new_route">Crear nova ruta</string>
+    <string name="plan_route_select_track_file_for_open">Seleccionar un ficheiro de pista para abrir.</string>
+    <string name="shared_string_done">Feito</string>
+    <string name="overwrite_track">Substituír pista</string>
+    <string name="save_as_new_track">Gardar coma nova pista</string>
+    <string name="reverse_route">Ruta inversa</string>
+    <string name="route_between_points_whole_track_button_desc">Recalcular toda a pista empregando o perfil escollido.</string>
+    <string name="route_between_points_next_segment_button_desc">Recalcular só o seguinte segmento empregando o perfil escollido.</string>
+    <string name="route_between_points_desc">Marca de que xeito conectar os puntos, cunha liña recta ou calcular unha ruta entre eles como se detalla deseguido.</string>
+    <string name="whole_track">Pista enteira</string>
+    <string name="next_segment">Seguinte segmento</string>
+    <string name="route_between_points_warning_desc">Deseguido, axusta a pista á estrada permitida máis preto cun perfil de navegación.</string>
+    <string name="threshold_distance">Distancia limiar</string>
+    <string name="navigation_profile">Perfil de navegación</string>
+    <string name="route_between_points_add_track_desc">Escolle un ficheiro de pista ó que se engadirá un novo segmento.</string>
+    <string name="street_level_imagery">Imaxes a nivel de rúa</string>
+    <string name="plan_route_exit_dialog_descr">Pechar o plan de ruta sen gardar\?, desbotaranse todas as modificacións.</string>
+    <string name="in_case_of_reverse_direction">En caso de dirección inversa</string>
+    <string name="shared_string_save_as_gpx">Gardar coma novo ficheiro de pista</string>
+    <string name="add_segment_to_the_track">Engadir a un ficheiro de pistas</string>
+    <string name="shared_string_gpx_files">Pistas</string>
+    <string name="layer_gpx_layer">Pistas</string>
+    <string name="show_gpx">Pistas</string>
+    <string name="save_track_to_gpx_globally">Gardar pista en ficheiro GPX</string>
+    <string name="shared_string_gpx_route">Ruta da pista</string>
+    <string name="empty_state_my_tracks">Engadir ficheiros de pista</string>
+    <string name="empty_state_my_tracks_desc">Importar ou gravar ficheiros de pista</string>
+    <string name="context_menu_item_add_waypoint">Engadir punto de referencia da pista</string>
+    <string name="quick_action_add_gpx">Engadir punto de pasaxe da pista</string>
+    <string name="map_widget_monitoring">Gravación da viaxe</string>
+    <string name="marker_save_as_track">Gardar coma ficheiro de pista</string>
+    <string name="follow_track">Seguir pista</string>
+    <string name="follow_track_descr">Escoller o ficheiro da pista a seguir</string>
+    <string name="import_track_descr">Escoller o ficheiro da pista a seguir ou importar dende o dispositivo.</string>
+    <string name="select_another_track">Escoller outra pista</string>
+    <string name="navigate_to_track_descr">Navegar dende a miña posición á pista</string>
+    <string name="pass_whole_track_descr">Punto da pista para navegar</string>
+    <string name="start_of_the_track">Comezo da pista</string>
+    <string name="nearest_point">Punto máis preto</string>
+    <string name="attach_to_the_roads">Unir ás estradas</string>
+    <string name="delete_address">Eliminar enderezo</string>
+    <string name="add_address">Engadir enderezo</string>
+    <string name="access_hint_enter_address">Inserir o enderezo</string>
+    <string name="plan_route_trim_before">Recurtar antes</string>
+    <string name="plan_route_trim_after">Recurtar despois</string>
+    <string name="plan_route_change_route_type_before">Mudar o tipo de ruta anterior</string>
+    <string name="plan_route_change_route_type_after">Mudar o tipo de ruta seguinte</string>
+    <string name="simplified_track">Pista simplificada</string>
+    <string name="simplified_track_description">Só gravarase a liña da ruta, os puntos intermedios serán eliminados.</string>
+    <string name="shared_string_file_name">Nome do ficheiro</string>
+    <string name="number_of_gpx_files_selected_pattern">%s ficheiros de pista seleccionados</string>
+    <string name="monitoring_control_start">Gravar</string>
+    <string name="disable_recording_once_app_killed_descrp">A gravación da pista deterase ó pechar a aplicación (mediante aplicacións recentes). (A indicación de fondo do OsmAnd, desaparecerá da barra de notificacións do Android.)</string>
+    <string name="save_global_track_interval_descr">Especifica o intre de gravación xeral para pistas (habilitado a través do trebello de gravación no mapa).</string>
 </resources>
