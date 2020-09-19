@@ -400,7 +400,7 @@
     <string name="tts_language_not_supported">השפה הנבחרת אינה נתמכת על ידי המנגנון של Android הממיר טקסט לדיבור (TTS) המותקן, ייעשה שימוש בשפת ההמרה במקום. לחפש מנוע המרה אחר של טקסט לדיבור בחנות\?</string>
     <string name="tts_missing_language_data_title">חסרים נתונים</string>
     <string name="tts_missing_language_data">לגשת לחנות להוריד את השפה הנבחרת?</string>
-    <string name="gpx_option_reverse_route">היפוך כיוון ה־GPX</string>
+    <string name="gpx_option_reverse_route">היפוך כיוון המסלול</string>
     <string name="gpx_option_destination_point">שימוש ביעד הנוכחי</string>
     <string name="gpx_option_from_start_point">לעבור לאורך דרך שלמה</string>
     <string name="switch_to_vector_map_to_see">קיימת מפה וקטורית עבור מיקום זה.
