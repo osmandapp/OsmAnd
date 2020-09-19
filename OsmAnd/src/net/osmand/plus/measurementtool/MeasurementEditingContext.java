@@ -517,45 +517,88 @@ public class MeasurementEditingContext {
 		roadSegmentData.clear();
 		List<WptPt> routePoints = new ArrayList<>();
 		List<GpxPoint> gpxPoints = gpxApproximation.finalPoints;
-		for (int i = 0; i < gpxPoints.size() - 1; i++) {
-			GpxPoint rp1 = gpxPoints.get(i);
-			GpxPoint rp2 = gpxPoints.get(i + 1);
-			WptPt p1 = new WptPt();
-			p1.lat = rp1.loc.getLatitude();
-			p1.lon = rp1.loc.getLongitude();
-			p1.setProfileType(mode.getStringKey());
-			if (i == 0) {
-				routePoints.add(p1);
-			}
-			WptPt p2 = new WptPt();
-			p2.lat = rp2.loc.getLatitude();
-			p2.lon = rp2.loc.getLongitude();
-			p2.setProfileType(mode.getStringKey());
-			routePoints.add(p2);
-			Pair<WptPt, WptPt> pair = new Pair<>(p1, p2);
+		for (int i = 0; i < gpxPoints.size(); i++) {
+			GpxPoint gp1 = gpxPoints.get(i);
+			boolean lastGpxPoint = isLastGpxPoint(gpxPoints, i);
 			List<WptPt> points = new ArrayList<>();
 			List<RouteSegmentResult> segments = new ArrayList<>();
-			for (RouteSegmentResult seg : rp1.routeToTarget) {
-				segments.add(seg);
-				int ind = seg.getStartPointIndex();
-				boolean plus = seg.isForwardDirection();
-				float[] pf = seg.getObject().calculateHeightArray();
-				while (ind != seg.getEndPointIndex()) {
-					LatLon l = seg.getPoint(ind);
-					WptPt pt = new WptPt();
-					if (pf != null && pf.length > ind * 2 + 1) {
-						pt.ele = pf[ind * 2 + 1];
-
-					}
-					pt.lat = l.getLatitude();
-					pt.lon = l.getLongitude();
-					points.add(pt);
-					ind = plus ? ind + 1 : ind - 1;
+			for (int k = 0; k < gp1.routeToTarget.size(); k++) {
+				RouteSegmentResult seg = gp1.routeToTarget.get(k);
+				if (seg.getStartPointIndex() != seg.getEndPointIndex()) {
+					segments.add(seg);
 				}
 			}
-			roadSegmentData.put(pair, new RoadSegmentData(appMode, pair.first, pair.second, points, segments));
+			for (int k = 0; k < segments.size(); k++) {
+				RouteSegmentResult seg = segments.get(k);
+				fillPointsArray(points, seg, lastGpxPoint && k == segments.size() - 1);
+			}
+			if (!points.isEmpty()) {
+				WptPt wp1 = new WptPt();
+				wp1.lat = gp1.loc.getLatitude();
+				wp1.lon = gp1.loc.getLongitude();
+				wp1.setProfileType(mode.getStringKey());
+				routePoints.add(wp1);
+				WptPt wp2 = new WptPt();
+				if (lastGpxPoint) {
+					wp2.lat = points.get(points.size() - 1).getLatitude();
+					wp2.lon = points.get(points.size() - 1).getLongitude();
+					routePoints.add(wp2);
+				} else {
+					GpxPoint gp2 = gpxPoints.get(i + 1);
+					wp2.lat = gp2.loc.getLatitude();
+					wp2.lon = gp2.loc.getLongitude();
+				}
+				wp2.setProfileType(mode.getStringKey());
+				Pair<WptPt, WptPt> pair = new Pair<>(wp1, wp2);
+				roadSegmentData.put(pair, new RoadSegmentData(appMode, pair.first, pair.second, points, segments));
+			}
+			if (lastGpxPoint) {
+				break;
+			}
 		}
 		addPoints(routePoints);
+	}
+
+	private boolean isLastGpxPoint(List<GpxPoint> gpxPoints, int index) {
+		if (index == gpxPoints.size() - 1) {
+			return true;
+		} else {
+			for (int i = index + 1; i < gpxPoints.size(); i++) {
+				GpxPoint gp = gpxPoints.get(i);
+				for (int k = 0; k < gp.routeToTarget.size(); k++) {
+					RouteSegmentResult seg = gp.routeToTarget.get(k);
+					if (seg.getStartPointIndex() != seg.getEndPointIndex()) {
+						return false;
+					}
+				}
+
+			}
+		}
+		return true;
+	}
+
+	private void fillPointsArray(List<WptPt> points, RouteSegmentResult seg, boolean includeEndPoint) {
+		int ind = seg.getStartPointIndex();
+		boolean plus = seg.isForwardDirection();
+		float[] heightArray = seg.getObject().calculateHeightArray();
+		while (ind != seg.getEndPointIndex()) {
+			addPointToArray(points, seg, ind, heightArray);
+			ind = plus ? ind + 1 : ind - 1;
+		}
+		if (includeEndPoint) {
+			addPointToArray(points, seg, ind, heightArray);
+		}
+	}
+
+	private void addPointToArray(List<WptPt> points, RouteSegmentResult seg, int index, float[] heightArray) {
+		LatLon l = seg.getPoint(index);
+		WptPt pt = new WptPt();
+		if (heightArray != null && heightArray.length > index * 2 + 1) {
+			pt.ele = heightArray[index * 2 + 1];
+		}
+		pt.lat = l.getLatitude();
+		pt.lon = l.getLongitude();
+		points.add(pt);
 	}
 
 	private int findPointIndex(WptPt point, List<WptPt> points, int firstIndex) {
@@ -740,10 +783,7 @@ public class MeasurementEditingContext {
 					}
 					locations.add(l);
 				}
-				pair.second.setTrkPtIndex(locations.size() - 1);
-				if (i < size - 2 && !locations.isEmpty()) {
-					locations.remove(locations.size() - 1);
-				}
+				pair.second.setTrkPtIndex(i < size - 1 ? locations.size() : locations.size() - 1);
 				route.addAll(data.segments);
 			}
 		}

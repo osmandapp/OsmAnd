@@ -356,17 +356,6 @@ public class RouteCalculationResult {
 					}
 					lastHeight = h;
 				}
-				// FIXME: investigate gpx file
-				if (s.getObject().getPoint31XTile(i) == 0 && s.getObject().getPoint31YTile(i) == 0) {
-					if (locations.size() > 0) {
-						Location prev = locations.get(locations.size() - 1);
-						n.setLatitude(prev.getLatitude());
-						n.setLongitude(prev.getLongitude());
-						if (prev.hasAltitude()) {
-							n.setAltitude(prev.getAltitude());
-						}
-					}
-				}
 				locations.add(n);
 				attachAlarmInfo(alarms, s, i, locations.size());
 				segmentsToPopulate.add(s);
