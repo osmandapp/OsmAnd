@@ -91,7 +91,7 @@
     <string name="transport_search_again">Reinicializar pesquisa de transporte</string>
     <string name="voice">Voz gravada</string>
     <string name="no_vector_map_loaded">Nenhum mapa vetorial foi carregado</string>
-    <string name="gpx_option_reverse_route">Caminho reverso</string>
+    <string name="gpx_option_reverse_route">Inverter a direção do trilho</string>
     <string name="gpx_files_not_found">Nenhum ficheiro GPX encontrado na pasta tracks</string>
     <string name="error_reading_gpx">Não foi possível ler os dados de GPX.</string>
     <string name="vector_data">Mapas vetoriais offline</string>
