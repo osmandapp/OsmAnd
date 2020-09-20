@@ -281,7 +281,7 @@
     <string name="tts_language_not_supported">Zvolený jazyk nie je podporovaný nainštalovaným TTS (text-to-speech) modulom v Androide. Bude použitý jeho prednastavený TTS jazyk. Nájsť iný TTS modul v obchode\?</string>
     <string name="tts_missing_language_data_title">Chýbajúce údaje</string>
     <string name="tts_missing_language_data">Prejsť do obchodu pre stiahnutie zvoleného jazyka?</string>
-    <string name="gpx_option_reverse_route">Obrátiť GPX smerovanie</string>
+    <string name="gpx_option_reverse_route">Obrátiť smer stopy</string>
     <string name="gpx_option_destination_point">Použiť aktuálny cieľový bod</string>
     <string name="gpx_option_from_start_point">Prejsť pozdĺž celej trasy</string>
     <string name="switch_to_vector_map_to_see">Pre túto oblasť je dostupná offline vektorová mapa.
