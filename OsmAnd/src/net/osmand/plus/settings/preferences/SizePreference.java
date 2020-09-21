@@ -7,6 +7,8 @@ import androidx.preference.DialogPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -88,6 +90,9 @@ public class SizePreference extends DialogPreference {
 	public CharSequence getSummary() {
 		String summary = entries[0];
 		String persistedString = getValue();
+		if (StringUtils.isBlank(persistedString)) {
+			return summary;
+		}
 		if (!isPersistedStringEqualsZero(persistedString)) {
 			try {
 				final DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
@@ -104,7 +109,7 @@ public class SizePreference extends DialogPreference {
 	private boolean isPersistedStringEqualsZero(String persistedString) {
 		return new BigDecimal(0).compareTo(new BigDecimal(persistedString)) == 0;
 	}
-	
+
 	public String getValue () {
 		return getPersistedString(defaultValue);
 	}
