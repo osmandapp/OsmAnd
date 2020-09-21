@@ -831,7 +831,7 @@
     <string name="poi_barbecue">Rostilo</string>
     <string name="poi_craft_agricultural_engines">Laborejo de agrokulturaj maŝinoj</string>
     <string name="poi_craft_basket_maker">Laborejo de korbisto</string>
-    <string name="poi_craft_beekeeper">Abelistejo</string>
+    <string name="poi_craft_beekeeper">Abelejo</string>
     <string name="poi_craft_blacksmith">Forĝejo</string>
     <string name="poi_craft_brewery">Bierfarejo</string>
     <string name="poi_craft_boatbuilder">Boat-konstruejo</string>
@@ -849,7 +849,7 @@
     <string name="poi_craft_watchmaker">Poŝ-horloĝistejo</string>
     <string name="poi_craft_insulation">Varmizolaĵistejo</string>
     <string name="poi_craft_jeweller">Laborejo de juvelisto</string>
-    <string name="poi_craft_locksmith">Seruristejo</string>
+    <string name="poi_craft_locksmith">Laborejo de seruristo</string>
     <string name="poi_craft_key_cutter">Ŝlosil-kopiistejo</string>
     <string name="poi_craft_metal_construction">Laborejo de metal-konstruaĵisto</string>
     <string name="poi_craft_optician">Okulvitristejo</string>
@@ -1852,7 +1852,7 @@
     <string name="poi_consulting">Oficejo de konsilado</string>
     <string name="poi_cooperative">Oficejo de kunlaborado</string>
     <string name="poi_office_forestry">Oficejo de arbarkultivo</string>
-    <string name="poi_logistics">Oficejo de provizarto</string>
+    <string name="poi_logistics">Oficejo de ekspedo</string>
     <string name="poi_parish">Oficejo de paroĥo</string>
     <string name="poi_publisher">Oficejo de eldonisto</string>
     <string name="poi_fuel_91ul">benzino 91-oktannombra senplumba</string>
@@ -3031,7 +3031,7 @@
     <string name="poi_feeding_place">Bestonutrejo</string>
     <string name="poi_party">Okazaĵaj-provizoj-vendejo</string>
     <string name="poi_electrical">Elektraĵ-vendejo</string>
-    <string name="poi_locksmith">Seruristejo</string>
+    <string name="poi_locksmith">Laborejo de seruristo</string>
     <string name="poi_lighting">Prilumigad-aparata vendejo</string>
     <string name="poi_lottery">Loteri-bileta kiosko</string>
     <string name="poi_gambling">Hazardludejo</string>
@@ -3719,7 +3719,7 @@
     <string name="poi_craft_bakery">Bakejo (ne vendejo)</string>
     <string name="poi_craft_cabinet_maker">Laborejo de meblisto</string>
     <string name="poi_charge">Pago</string>
-    <string name="poi_pet_grooming">Dombesta beligejo</string>
+    <string name="poi_pet_grooming">Hejmbesta beligejo</string>
     <string name="poi_atm_yes">Bankaŭtomato: jes</string>
     <string name="poi_cash_withdrawal_bank_card">Elpago de mono</string>
     <string name="poi_cash_withdrawal_yes">Elpago de mono: jes</string>

@@ -897,7 +897,7 @@
     <string name="tts_language_not_supported">A lingua escollida é incompatíbel co motor TTS (texto lido a voz) instalado no Android, empregarase a lingua TTS predefinida. Procurar outro motor TTS na tenda de aplicacións\?</string>
     <string name="tts_missing_language_data_title">faltan datos</string>
     <string name="tts_missing_language_data">Ir á tenda de aplicacións para baixar a lingua escollida\?</string>
-    <string name="gpx_option_reverse_route">Inverter a dirección do GPX</string>
+    <string name="gpx_option_reverse_route">Inverter dirección da pista</string>
     <string name="gpx_option_destination_point">Empregar o destino actual</string>
     <string name="gpx_option_from_start_point">Percorrer toda a pista</string>
     <string name="switch_to_vector_map_to_see">Hai un mapa vectorial sen conexión para este sitio. 
@@ -2708,7 +2708,7 @@ Lon %2$s</string>
     <string name="nautical_renderer">Náutico</string>
     <string name="toast_empty_name_error">Localización sen nome</string>
     <string name="tunnel_warning">Túnel adiante</string>
-    <string name="show_tunnels">Túneis</string>
+    <string name="show_tunnels">Túneles</string>
     <string name="download_wikipedia_description">Baixa os artigos da Wikipedia de %1$s para lelos sen conexión.</string>
     <string name="download_wikipedia_label">Baixar datos da Wikipedia</string>
     <string name="open_in_browser_wiki">Abrir artigo en liña</string>

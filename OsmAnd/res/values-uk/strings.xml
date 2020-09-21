@@ -265,7 +265,7 @@
     <string name="tts_language_not_supported">Вибрана мова не підтримується встановленим двигуном Android TTS (текстовим мовленням), замість цього буде використана його попередньо налаштована мова TTS. Шукаєте інший двигун TTS\?</string>
     <string name="tts_missing_language_data_title">Дані відсутні</string>
     <string name="tts_missing_language_data">Перейти в магазин для завантаження обраної мови?</string>
-    <string name="gpx_option_reverse_route">Зворотній напрямок GPX</string>
+    <string name="gpx_option_reverse_route">Зворотний напрямок треку</string>
     <string name="gpx_option_destination_point">Використовувати поточний пункт призначення</string>
     <string name="gpx_option_from_start_point">Пройдіть по усьому треку</string>
     <string name="switch_to_vector_map_to_see">Для цього регіону доступні автономні векторні мапи

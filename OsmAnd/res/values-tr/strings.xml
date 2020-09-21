@@ -937,7 +937,7 @@
     <string name="basemap_missing">Düşük yakınlaştırma seviyelerinde tüm dünyayı kapsayan bir genel bakış elde etmek için ana dünya haritasını indirin.</string>
     <string name="local_index_no_items_to_do">%1$s\'a öğe yok</string>
     <string name="tts_language_not_supported">Seçilen dil yüklü Android TTS (metinden konuşmaya) motoru tarafından desteklenmemektedir, bunun yerine önceden ayarlanmış TTS dili kullanılacak. Mağazada başka bir TTS motoru aramak ister misiniz\?</string>
-    <string name="gpx_option_reverse_route">GPX yönünü tersine çevir</string>
+    <string name="gpx_option_reverse_route">İzlenen yol yönünü tersine çevir</string>
     <string name="switch_to_vector_map_to_see">Bu konum için çevrim dışı vektör haritası. 
 \n\t
 \n\tKullanmak için \'Menü\' → \'Harita Katmanları\' → \'Harita Kaynağı…\' → \'Çevrim dışı vektör haritalar\'.</string>

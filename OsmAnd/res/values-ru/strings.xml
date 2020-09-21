@@ -515,7 +515,7 @@
     <string name="tts_language_not_supported">Выбранный язык не поддерживается установленным движком Android TTS (text-to-speech или текст-в-речь), вместо него будет использоваться предустановленный язык TTS. Посмотреть в Google Play другой TTS\?</string>
     <string name="tts_missing_language_data_title">Данные отсутствуют</string>
     <string name="tts_missing_language_data">Перейти в маркет для загрузки выбранного языка?</string>
-    <string name="gpx_option_reverse_route">Обратное направление GPX</string>
+    <string name="gpx_option_reverse_route">Обратное направление трека</string>
     <string name="gpx_option_destination_point">Использовать текущий пункт назначения</string>
     <string name="gpx_option_from_start_point">Пройти весь путь</string>
     <string name="switch_to_vector_map_to_see">Для этого региона доступны локальные векторные карты. 
@@ -1460,7 +1460,7 @@
     <string name="index_item_world_bitcoin_payments">Мировые пункты обмена bitcoin</string>
     <string name="int_days">дней</string>
     <string name="osmo_connect_menu">Соединение</string>
-    <string name="import_file_favourites">Сохранить данные как трек файл или импортировать путевые точки в избранные\?</string>
+    <string name="import_file_favourites">Сохранить данные как файл трека или импортировать путевые точки в избранные\?</string>
     <string name="rendering_value_pink_name">Розовый</string>
     <string name="rendering_value_brown_name">Коричневый</string>
     <string name="gpx_file_is_empty">Пустой файл GPX</string>
@@ -3830,10 +3830,10 @@
     <string name="whole_track">Весь трек</string>
     <string name="route_between_points_warning_desc">Для использования данной возможности OsmAnd необходимо привязать ваш трек по дорогам.
 \n
-\nНа следующем шаге необходимо выбрать профиль навигации для определения разрешенных дорог и пороговое расстояние, чтобы приблизительно привязать маршрут к дорогам.</string>
+\nНа следующем шаге необходимо выбрать профиль навигации для определения разрешённых дорог и пороговое расстояние, чтобы приблизительно привязать маршрут к дорогам.</string>
     <string name="route_between_points_desc">Выберите способ соединения точек прямой линией или рассчитайте маршрут между ними, как указано ниже.</string>
     <string name="in_case_of_reverse_direction">При обратном направлении</string>
-    <string name="plan_route_exit_dialog_descr">Все изменения будут утеряны. Закрыть план маршрута\?</string>
+    <string name="plan_route_exit_dialog_descr">Все изменения будут утеряны.</string>
     <string name="street_level_imagery">Уличная фотосъёмка</string>
     <string name="shared_string_save_as_gpx">Сохранить как новый файл трека</string>
     <string name="add_segment_to_the_track">Добавить в файл трека</string>
@@ -3870,7 +3870,7 @@
     <string name="simplified_track_description">Будет сохранена только линия маршрута, путевые точки будут удалены.</string>
     <string name="shared_string_file_name">Имя файла</string>
     <string name="number_of_gpx_files_selected_pattern">Выбрано файлов треков: %s</string>
-    <string name="save_global_track_interval_descr">Укажите интервал общей записи трека (включается через виджет «Запись GPX» на карте).</string>
+    <string name="save_global_track_interval_descr">Укажите интервал общей записи трека (включается через виджет «Запись поездки» на карте).</string>
     <string name="gpx_monitoring_stop">Остановить запись</string>
     <string name="gpx_monitoring_start">Возобновить запись поездки</string>
     <string name="system_default_theme">По выбору системы</string>
@@ -3885,9 +3885,9 @@
     <string name="shared_string_is_saved">сохранен</string>
     <string name="one_point_error">Добавьте хотя бы две точки.</string>
     <string name="shared_string_redo">ПОВТОРИТЬ</string>
-    <string name="release_3_8">• Обновленный режим планирования маршрута позволяет использовать разные типы навигации для каждого сегмента и прикрепляет любой трек к дорогам
+    <string name="release_3_8">• Обновлённый режим планирования маршрута позволяет использовать разные типы навигации для каждого сегмента и прикрепляет любой трек к дорогам
 \n
-\n • Новые параметры внешнего вида для треков: выберите цвет, толщину, включите стрелки направления и отметки начала/окончания
+\n • Новые параметры внешнего вида для треков: можно выбрать цвет, толщину, включите стрелки направления и отметки начала/окончания
 \n
 \n • Улучшена видимость велосипедных узлов
 \n

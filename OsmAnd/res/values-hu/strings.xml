@@ -213,7 +213,7 @@
     <string name="tts_language_not_supported">A kijelölt nyelvet az Android TTS (text-to-speech, szövegfelolvasó) rendszere nem támogatja, helyette az előre beállított szövegfelolvasási nyelv lesz használatban. Keresen másik TTS rendszert a Play Áruházban\?</string>
     <string name="tts_missing_language_data_title">Hiányzó adat</string>
     <string name="tts_missing_language_data">Átváltasz az áruházra a kiválasztott nyelv letöltéséhez?</string>
-    <string name="gpx_option_reverse_route">GPX irány megfordítása</string>
+    <string name="gpx_option_reverse_route">Nyomvonal irányának megfordítása</string>
     <string name="gpx_option_destination_point">Jelenlegi célpont használata</string>
     <string name="gpx_option_from_start_point">Végig az egész útvonalon</string>
     <string name="switch_to_vector_map_to_see">Offline vektoros térkép érhető el ezen a helyen.
