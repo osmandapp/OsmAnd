@@ -1031,7 +1031,7 @@
     <string name="clear_intermediate_points">Очистити проміжні точки</string>
     <string name="new_directions_point_dialog">Ви вже задали проміжні точки.</string>
     <string name="context_menu_item_directions_to">Маршрут до</string>
-    <string name="context_menu_item_directions_from">Напрямки від</string>
+    <string name="context_menu_item_directions_from">Напрямок від</string>
     <string name="route_to">До:</string>
     <string name="speak_title">Оголошувати…</string>
     <string name="speak_descr">Налаштувати оголошення назв вулиць, дорожніх обмежень (вимушені зупинки, долішні (лежачі) поліцейські), попередження про камери контролю швидкості, обмеження швидкості.</string>
@@ -3846,7 +3846,7 @@
     <string name="quick_action_add_gpx">Додати шляхову точку треку</string>
     <string name="map_widget_monitoring">Записування подорожі</string>
     <string name="marker_save_as_track">Зберегти як файл треку</string>
-    <string name="follow_track">Стежити за треком</string>
+    <string name="follow_track">Навігація за треком</string>
     <string name="follow_track_descr">Виберіть файл треку для перегляду</string>
     <string name="import_track_descr">Виберіть файл треку для перегляду або імпортуйте його з пристрою.</string>
     <string name="select_another_track">Обрати інший трек</string>
