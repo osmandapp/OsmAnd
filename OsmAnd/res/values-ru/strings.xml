@@ -3833,7 +3833,7 @@
 \nНа следующем шаге необходимо выбрать профиль навигации для определения разрешенных дорог и пороговое расстояние, чтобы приблизительно привязать маршрут к дорогам.</string>
     <string name="route_between_points_desc">Выберите способ соединения точек прямой линией или рассчитайте маршрут между ними, как указано ниже.</string>
     <string name="in_case_of_reverse_direction">При обратном направлении</string>
-    <string name="plan_route_exit_dialog_descr">Все изменения будут утеряны. Закрыть план маршрута\?</string>
+    <string name="plan_route_exit_dialog_descr">Все изменения будут утеряны.</string>
     <string name="street_level_imagery">Уличная фотосъёмка</string>
     <string name="shared_string_save_as_gpx">Сохранить как новый файл трека</string>
     <string name="add_segment_to_the_track">Добавить в файл трека</string>
