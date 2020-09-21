@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -180,8 +181,8 @@ public class FavouritePointMenuController extends MenuController {
 			OsmandApplication app = mapActivity.getMyApplication();
 			FavouritesDbHelper helper = app.getFavorites();
 			String group = fav.getCategory();
-			if (helper.getGroup(group) != null) {
-				Drawable line2icon = helper.getColoredIconForGroup(group);
+			Drawable line2icon = helper.getGroup(group) != null ? helper.getColoredIconForGroup(group) : null;
+			if (line2icon != null) {
 				GravityDrawable gravityIcon = new GravityDrawable(line2icon);
 				gravityIcon.setBoundsFrom(line2icon);
 				return gravityIcon;
