@@ -628,7 +628,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			toolBarController.setTitle(getString(R.string.route_between_points));
 			mapActivity.refreshMap();
 
-			if (editingCtx.isNewData() || editingCtx.hasRoutePoints() || editingCtx.hasRoute() || editingCtx.getPointsCount() < 2) {
+			if (editingCtx.isNewData() || editingCtx.hasRoutePoints() || editingCtx.hasRoute() || editingCtx.getPointsCount() <= 2) {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						this, RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION,
 						editingCtx.getLastCalculationMode() == CalculationMode.NEXT_SEGMENT
@@ -1675,7 +1675,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 								break;
 							case SHOW_IS_SAVED_FRAGMENT:
 								SavedTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-										toSave.getName());
+										toSave.getAbsolutePath());
 								dismiss(mapActivity);
 								break;
 							case SHOW_TOAST:
