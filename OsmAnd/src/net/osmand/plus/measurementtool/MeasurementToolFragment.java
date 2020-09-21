@@ -138,6 +138,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean pointsListOpened;
 	private boolean planRouteMode = false;
 	private boolean directionMode = false;
+	private boolean followTrackMode = false;
 	private boolean approximationApplied = false;
 	private boolean portrait;
 	private boolean nightMode;
@@ -172,6 +173,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private void setDirectionMode(boolean directionMode) {
 		this.directionMode = directionMode;
+	}
+
+	private void setFollowTrackMode(boolean followTrackMode) {
+		this.followTrackMode = followTrackMode;
 	}
 
 	@Override
@@ -441,7 +446,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		toolBarController.setOnSaveViewClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				saveChanges(FinalSaveAction.SHOW_SNACK_BAR_AND_CLOSE, false);
+				if (followTrackMode) {
+					startTrackNavigation();
+				} else {
+					saveChanges(FinalSaveAction.SHOW_SNACK_BAR_AND_CLOSE, false);
+				}
 			}
 		});
 		updateToolbar();
@@ -486,7 +495,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	public boolean isInEditMode() {
-		return !planRouteMode && !editingCtx.isNewData() && !directionMode;
+		return !planRouteMode && !editingCtx.isNewData() && !directionMode && !followTrackMode;
 	}
 
 	public void setFileName(String fileName) {
@@ -628,7 +637,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			toolBarController.setTitle(getString(R.string.route_between_points));
 			mapActivity.refreshMap();
 
-			if (editingCtx.isNewData() || editingCtx.hasRoutePoints() || editingCtx.hasRoute() || editingCtx.getPointsCount() < 2) {
+			if (editingCtx.isNewData() || editingCtx.hasRoutePoints() || editingCtx.hasRoute() || editingCtx.getPointsCount() <= 2) {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 						this, RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION,
 						editingCtx.getLastCalculationMode() == CalculationMode.NEXT_SEGMENT
@@ -749,16 +758,23 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void runNavigation(final GPXFile gpx, final ApplicationMode appMode) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (mapActivity.getMyApplication().getRoutingHelper().isFollowingMode()) {
-				mapActivity.getMapActions().stopNavigationActionConfirm(new Runnable() {
-					@Override
-					public void run() {
-						MapActivity mapActivity = getMapActivity();
-						if (mapActivity != null) {
-							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpx, appMode, null, null, true, true, MenuState.HEADER_ONLY);
+			OsmandApplication app = mapActivity.getMyApplication();
+			if (app.getRoutingHelper().isFollowingMode()) {
+				if (followTrackMode) {
+					mapActivity.getMapActions().setGPXRouteParams(gpx);
+					app.getTargetPointsHelper().updateRouteAndRefresh(true);
+					app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+				} else {
+					mapActivity.getMapActions().stopNavigationActionConfirm(new Runnable() {
+						@Override
+						public void run() {
+							MapActivity mapActivity = getMapActivity();
+							if (mapActivity != null) {
+								mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpx, appMode, null, null, true, true, MenuState.HEADER_ONLY);
+							}
 						}
-					}
-				});
+					});
+				}
 			} else {
 				mapActivity.getMapActions().stopNavigationWithoutConfirm();
 				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpx, appMode, null, null, true, true, MenuState.HEADER_ONLY);
@@ -1675,7 +1691,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 								break;
 							case SHOW_IS_SAVED_FRAGMENT:
 								SavedTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-										toSave.getName());
+										toSave.getAbsolutePath());
 								dismiss(mapActivity);
 								break;
 							case SHOW_TOAST:
@@ -1843,7 +1859,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			cancelAddPointBeforeOrAfterMode();
 			return;
 		}
-		showQuitDialog(hidePointsListFirst);
+		if (followTrackMode) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+				dismiss(mapActivity);
+			}
+		} else {
+			showQuitDialog(hidePointsListFirst);
+		}
 	}
 
 	private void showQuitDialog(boolean hidePointsListFirst) {
@@ -1909,11 +1933,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx,
-	                                   boolean planRoute, boolean directionMode) {
+	                                   boolean followTrackMode) {
 		MeasurementToolFragment fragment = new MeasurementToolFragment();
 		fragment.setEditingCtx(editingCtx);
-		fragment.setPlanRouteMode(planRoute);
-		fragment.setDirectionMode(directionMode);
+		fragment.setFollowTrackMode(followTrackMode);
 		return showFragment(fragment, fragmentManager);
 	}
 
@@ -2010,23 +2033,27 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		exitApproximationMode();
 		doAddOrMovePointCommonStuff();
 		updateSnapToRoadControls();
-		if (directionMode) {
+		if (directionMode || followTrackMode) {
 			directionMode = false;
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				if (editingCtx.hasRoute()) {
-					String trackName = getSuggestedFileName();
-					GPXFile gpx = editingCtx.exportRouteAsGpx(trackName);
-					if (gpx != null) {
-						ApplicationMode appMode = editingCtx.getAppMode();
-						dismiss(mapActivity);
-						runNavigation(gpx, appMode);
-					} else {
-						Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
-					}
+			startTrackNavigation();
+		}
+	}
+
+	private void startTrackNavigation() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (editingCtx.hasRoute()) {
+				String trackName = getSuggestedFileName();
+				GPXFile gpx = editingCtx.exportRouteAsGpx(trackName);
+				if (gpx != null) {
+					ApplicationMode appMode = editingCtx.getAppMode();
+					dismiss(mapActivity);
+					runNavigation(gpx, appMode);
 				} else {
 					Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
 				}
+			} else {
+				Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
