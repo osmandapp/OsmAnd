@@ -542,7 +542,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (useAppMode) {
 				editingContext.setAppMode(app.getRoutingHelper().getAppMode());
 			}
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true, true);
+			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true);
 		}
 	}
 
