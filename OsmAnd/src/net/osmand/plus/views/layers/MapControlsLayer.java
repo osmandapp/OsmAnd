@@ -1068,6 +1068,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
+	public void updateTransparencySlider () {
+		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
+		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
+			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
+				transparencySlider.setValue(settings.MAP_OVERLAY_TRANSPARENCY.get());
+			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
+				transparencySlider.setValue(settings.MAP_TRANSPARENCY.get());
+			}
+		}
+	}
+
 	public void showTransparencyBar(CommonPreference<Integer> transparenPreference,
 	                                boolean isTransparencyBarEnabled) {
 		this.isTransparencyBarEnabled = isTransparencyBarEnabled;
