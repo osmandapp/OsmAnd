@@ -37,7 +37,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -63,6 +62,7 @@ import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.GpxSelectionHelper.SelectGpxTaskListener;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
@@ -82,6 +82,8 @@ import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings.TracksSortByMode;
+import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.io.File;
 import java.text.Collator;
@@ -133,13 +135,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private View footerView;
 	private boolean importing = false;
 	private View emptyView;
-	private GpxSelectionHelper.SelectGpxTaskListener gpxTaskListener;
-	private boolean sortByName;
+	private SelectGpxTaskListener gpxTaskListener;
+	private TracksSortByMode sortByMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		gpxTaskListener = new GpxSelectionHelper.SelectGpxTaskListener() {
+		gpxTaskListener = new SelectGpxTaskListener() {
 			@Override
 			public void gpxSelectionInProgress() {
 				allGpxAdapter.notifyDataSetInvalidated();
@@ -160,13 +162,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Override
-	public void onAttach(Context activity) {
+	public void onAttach(@NonNull Context activity) {
 		super.onAttach(activity);
 		this.app = (OsmandApplication) getActivity().getApplication();
-		sortByName = app.getSettings().SORT_TRACKS_BY_NAME.get();
+		sortByMode = app.getSettings().TRACKS_SORT_BY_MODE.get();
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
-		currentRecording = new GpxInfo(getMyApplication().getSavingTrackHelper().getCurrentGpx(), getString(R.string.shared_string_currently_recording_track));
+		currentRecording = new GpxInfo(app.getSavingTrackHelper().getCurrentGpx(), getString(R.string.shared_string_currently_recording_track));
 		currentRecording.currentlyRecordingTrack = true;
 		asyncLoader = new LoadGpxTask();
 		selectedGpxHelper = ((OsmandApplication) activity.getApplicationContext()).getSelectedGpxHelper();
@@ -502,8 +504,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					addTrack();
 				}else if (itemId == R.string.coordinate_input) {
 					openCoordinatesInput();
-				} else if (itemId == R.string.shared_string_sort) {
-					updateTracksSort();
 				}
 				return true;
 			}
@@ -521,8 +521,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.setIcon(R.drawable.ic_action_delete_dark).setListener(listener).createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_refresh, getActivity())
 				.setIcon(R.drawable.ic_action_refresh_dark).setListener(listener).createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_sort, getActivity())
-				.setIcon(getSortIconId(!sortByName)).setListener(listener).createItem());
 		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			final MenuItem item;
@@ -547,11 +545,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	@DrawableRes
-	private int getSortIconId(boolean sortByName) {
-		return sortByName ? R.drawable.ic_action_sort_by_name : R.drawable.ic_action_list_sort;
-	}
-
 	public void doAction(int actionResId) {
 		if (actionResId == R.string.shared_string_delete) {
 			operationTask = new DeleteGpxTask();
@@ -571,9 +564,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
 			if (itemId == contextMenuItem.getTitleId()) {
 				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false, null);
-				if (itemId == R.string.shared_string_sort) {
-					item.setIcon(getSortIconId(!sortByName));
-				}
 				return true;
 			}
 		}
@@ -973,14 +963,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			Arrays.sort(listFiles, new Comparator<File>() {
 				@Override
 				public int compare(File f1, File f2) {
-					if (sortByName) {
+					if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
+						return f1.getName().compareTo(f2.getName());
+					} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
 						return -f1.getName().compareTo(f2.getName());
 					} else {
 						// here we could guess date from file name '2017-08-30 ...' - first part date
 						if (f1.lastModified() == f2.lastModified()) {
 							return -f1.getName().compareTo(f2.getName());
 						}
-						return -Long.compare(f1.lastModified(), f2.lastModified());
+						return -((f1.lastModified() < f2.lastModified()) ? -1 : ((f1.lastModified() == f2.lastModified()) ? 0 : 1));
 					}
 				}
 			});
@@ -1078,15 +1070,20 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			Collections.sort(selected, new Comparator<GpxInfo>() {
 				@Override
 				public int compare(GpxInfo i1, GpxInfo i2) {
-					if (sortByName) {
+					if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
 						return i1.getName().toLowerCase().compareTo(i2.getName().toLowerCase());
+					} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
+						return -i1.getName().toLowerCase().compareTo(i2.getName().toLowerCase());
 					} else {
+						if (i1.file == null || i2.file == null) {
+							return i1.getName().toLowerCase().compareTo(i2.getName().toLowerCase());
+						}
 						long time1 = i1.file.lastModified();
 						long time2 = i2.file.lastModified();
 						if (time1 == time2) {
 							return i1.getName().toLowerCase().compareTo(i2.getName().toLowerCase());
 						}
-						return -Long.compare(time1, time2);
+						return -((time1 < time2) ? -1 : ((time1 == time2) ? 0 : 1));
 					}
 				}
 			});
