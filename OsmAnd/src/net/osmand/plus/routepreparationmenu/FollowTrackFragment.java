@@ -218,7 +218,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 						reverseTrackCard.setListener(this);
 						cardsContainer.addView(reverseTrackCard.build(mapActivity));
 					}
-					if (!gpxFile.hasRtePt()) {
+					if (!gpxFile.hasRtePt() && !gpxFile.hasRoute()) {
 						cardsContainer.addView(buildDividerView(cardsContainer, true));
 
 						AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
