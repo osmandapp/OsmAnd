@@ -536,7 +536,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			editingCtx.getCommandManager().setMeasurementLayer(mapActivity.getMapLayers().getMeasurementToolLayer());
 			enterMeasurementMode();
 			updateSnapToRoadControls();
-			if (gpxData != null) {
+			if (gpxData != null && addPoints) {
 				if (!isUndoMode()) {
 					List<WptPt> points = gpxData.getGpxFile().getRoutePoints();
 					if (!points.isEmpty()) {
@@ -546,13 +546,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 						}
 					}
 				}
-				if (addPoints) {
-					ActionType actionType = gpxData.getActionType();
-					if (actionType == ActionType.ADD_ROUTE_POINTS) {
-						displayRoutePoints();
-					} else if (actionType == ActionType.EDIT_SEGMENT) {
-						displaySegmentPoints();
-					}
+				ActionType actionType = gpxData.getActionType();
+				if (actionType == ActionType.ADD_ROUTE_POINTS) {
+					displayRoutePoints();
+				} else if (actionType == ActionType.EDIT_SEGMENT) {
+					displaySegmentPoints();
 				}
 			}
 			setMode(UNDO_MODE, false);
@@ -807,7 +805,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void saveChangesOnClick() {
-		saveChanges(FinalSaveAction.SHOW_TOAST, true);
+		if (isFollowTrackMode()) {
+			startTrackNavigation();
+		} else {
+			saveChanges(FinalSaveAction.SHOW_TOAST, true);
+		}
 	}
 
 	@Override
