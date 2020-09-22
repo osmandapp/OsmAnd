@@ -30,34 +30,34 @@ public class RouteTestingTest {
 	private TestEntry te;
 
 
-    public RouteTestingTest(String name, TestEntry te) {
-        this.te = te;
-    }
+	public RouteTestingTest(String name, TestEntry te) {
+		this.te = te;
+	}
 
-    @BeforeClass
-    public static void setUp() throws Exception {
-        RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
-    }
+	@BeforeClass
+	public static void setUp() throws Exception {
+		RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
+	}
 
-    @Parameterized.Parameters(name = "{index}: {0}")
-    public static Iterable<Object[]> data() throws IOException {
-        String fileName = "/test_routing.json";
-        Reader reader = new InputStreamReader(RouteTestingTest.class.getResourceAsStream(fileName));
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
-        ArrayList<Object[]> arrayList = new ArrayList<>();
-        for(TestEntry te : testEntries) {
-        	if(te.isIgnore()) {
-        		continue;
-        	}
-        	arrayList.add(new Object[] {te.getTestName(), te});
-        }
-        reader.close();
-        return arrayList;
+	@Parameterized.Parameters(name = "{index}: {0}")
+	public static Iterable<Object[]> data() throws IOException {
+		String fileName = "/test_routing.json";
+		Reader reader = new InputStreamReader(RouteTestingTest.class.getResourceAsStream(fileName));
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
+		ArrayList<Object[]> arrayList = new ArrayList<>();
+		for (TestEntry te : testEntries) {
+			if (te.isIgnore()) {
+				continue;
+			}
+			arrayList.add(new Object[]{te.getTestName(), te});
+		}
+		reader.close();
+		return arrayList;
 
-    }
+	}
 
-    @Test
+	@Test
 	public void testRouting() throws Exception {
 		String fl = "src/test/resources/Routing_test.obf";
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
@@ -66,15 +66,14 @@ public class RouteTestingTest {
 		BinaryMapIndexReader[] binaryMapIndexReaders;// = { new BinaryMapIndexReader(raf, new File(fl)) };
 		RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
 		Map<String, String> params = te.getParams();
-		if (params.containsKey("map")){
+		if (params.containsKey("map")) {
 			String fl1 = "src/test/resources/" + params.get("map");
 			RandomAccessFile raf1 = new RandomAccessFile(fl1, "r");
 			binaryMapIndexReaders = new BinaryMapIndexReader[]{
 					new BinaryMapIndexReader(raf1, new File(fl1)),
 					new BinaryMapIndexReader(raf, new File(fl))
 			};
-		}
-		else {
+		} else {
 			binaryMapIndexReaders = new BinaryMapIndexReader[]{new BinaryMapIndexReader(raf, new File(fl))};
 		}
 		RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
