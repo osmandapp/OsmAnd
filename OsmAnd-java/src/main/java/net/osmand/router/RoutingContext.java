@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import gnu.trove.procedure.TObjectProcedure;
 import org.apache.commons.logging.Log;
 
 import gnu.trove.iterator.TIntObjectIterator;
@@ -289,7 +290,8 @@ public class RoutingContext {
 								if(excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
 									ts.add(ro);
 								}
-							} else if(excludeNotAllowed != null && ro.getId() > 0){
+							}
+							if(excludeNotAllowed != null && ro.getId() > 0){
 								excludeNotAllowed.add(ro.getId());
 								if(ts.excludedIds == null ){
 									ts.excludedIds = new TLongHashSet();
