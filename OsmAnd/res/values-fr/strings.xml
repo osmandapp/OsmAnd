@@ -3880,4 +3880,7 @@
     <string name="plan_route_change_route_type_after">Modifier le type d’itinéraire après</string>
     <string name="simplified_track_description">Seule la ligne d\'itinéraire sera enregistrée, les points de passage seront supprimés.</string>
     <string name="shared_string_redo">Rétablir</string>
+    <string name="sort_last_modified">Dernière modification</string>
+    <string name="sort_name_descending">Nom : Z – A</string>
+    <string name="sort_name_ascending">Nom : A – Z</string>
 </resources>
