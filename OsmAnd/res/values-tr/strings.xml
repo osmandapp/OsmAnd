@@ -3856,4 +3856,7 @@
 \n • Profil ayarlarının içe/dışa aktarımıyla ilgili sorunlar düzeltildi
 \n
 \n</string>
+    <string name="sort_last_modified">Son değiştirme</string>
+    <string name="sort_name_descending">İsim: Z – A</string>
+    <string name="sort_name_ascending">İsim: A – Z</string>
 </resources>
