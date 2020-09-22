@@ -525,9 +525,7 @@ public class MapActivityActions implements DialogProvider {
 				TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();
 				tg.clearStartPoint(false);
 				Location finishLoc = ps.get(ps.size() - 1);
-				PointDescription point = new PointDescription(PointDescription.POINT_TYPE_LOCATION, result.path, "");
-				point.setName(PointDescription.getSearchAddressStr(mapActivity));
-				tg.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1, point);
+				tg.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1);
 			}
 		}
 	}

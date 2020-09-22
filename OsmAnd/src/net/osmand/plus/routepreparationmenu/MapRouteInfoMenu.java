@@ -1760,8 +1760,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (routeParams != null) {
 				TargetPoint target = app.getTargetPointsHelper().getPointToNavigate();
 				if (target != null) {
-					PointDescription pointDescription = target.getOriginalPointDescription();
-					return pointDescription != null && routeParams.getFile().path.equals(pointDescription.getTypeName());
+					List<Location> points = routeParams.getPoints(app);
+					if (!Algorithms.isEmpty(points)) {
+						Location loc = points.get(points.size() - 1);
+						LatLon latLon = new LatLon(loc.getLatitude(), loc.getLongitude());
+						LatLon targetLatLon = new LatLon(target.getLatitude(), target.getLongitude());
+						return latLon.equals(targetLatLon);
+					}
 				}
 			}
 		}
