@@ -185,7 +185,7 @@
     <string name="legacy_search">Старый поиск</string>
     <string name="show_legacy_search">Показывать старый поиск</string>
     <string name="show_legacy_search_desc">Добавить старый поиск в меню.</string>
-    <string name="routing_attr_allow_motorway_name">Использовать автомагистрали</string>
+    <string name="routing_attr_allow_motorway_name">Разрешить автомагистрали</string>
     <string name="routing_attr_allow_motorway_description">Разрешает автомагистрали.</string>
     <string name="wiki_around">Статьи Википедии рядом</string>
     <string name="search_map_hint">Город или регион</string>
@@ -309,16 +309,16 @@
     <string name="av_video_format">Формат вывода видео</string>
     <string name="av_use_external_recorder_descr">Использовать системное приложение для записи видео.</string>
     <string name="av_use_external_recorder">Использовать системную программу</string>
-    <string name="av_settings_descr">Установка настроек аудио и видео.</string>
+    <string name="av_settings_descr">Параметры записи звука и видео.</string>
     <string name="recording_error">Ошибка записи</string>
     <string name="recording_camera_not_available">Камера недоступна</string>
-    <string name="recording_is_recorded">Аудио/видео записывается. Для остановки нажмите виждет AV.</string>
+    <string name="recording_is_recorded">Идёт запись медиа. Для остановки нажмите на виджет AV.</string>
     <string name="recording_playing">Проигрывается аудио.\n%1$s</string>
     <string name="recording_open_external_player">Открыть внешний проигрыватель</string>
     <string name="recording_delete_confirm">Удалить эту запись?</string>
     <string name="recording_unavailable">недоступно</string>
-    <string name="recording_context_menu_arecord">Записать аудио</string>
-    <string name="recording_context_menu_vrecord">Записать видео</string>
+    <string name="recording_context_menu_arecord">Аудиозаметка</string>
+    <string name="recording_context_menu_vrecord">Видеозаметка</string>
     <string name="layer_recordings">Слой аудиозаписей</string>
     <string name="recording_can_not_be_played">Запись не может быть воспроизведена.</string>
     <string name="recording_context_menu_delete">Удалить запись</string>
@@ -330,8 +330,8 @@
     <string name="map_widget_distancemeasurement">Измерение расстояний</string>
     <string name="audionotes_location_not_defined">Нажмите «Использовать местоположение…» чтобы добавить заметку к данному местоположению.</string>
     <string name="map_widget_audionotes">Аудиозаметки</string>
-    <string name="audionotes_plugin_description">Делайте аудио/фото/видеозаметки во время поездки, используя либо кнопку на карте, либо контекстное меню местоположения.</string>
-    <string name="audionotes_plugin_name">Аудио/видеозаметки</string>
+    <string name="audionotes_plugin_description">Создавайте аудио-, видео- и фотозаметки в поездке, используя виджет или контекстное меню.</string>
+    <string name="audionotes_plugin_name">Медиазаметки</string>
     <string name="index_srtm_parts">частей</string>
     <string name="index_srtm_ele">Линии высот</string>
     <string name="srtm_plugin_name">Контурные линии</string>
@@ -1203,13 +1203,13 @@
     <string name="recording_context_menu_show">Просмотр</string>
     <string name="av_def_action_picture">Сделать фото</string>
     <string name="recording_context_menu_precord">Сделать фото</string>
-    <string name="dropbox_plugin_description">Синхронизация треков и видео/аудиозаметок с вашим аккаунтом Dropbox.</string>
+    <string name="dropbox_plugin_description">Синхронизация треков и медиазаметок с вашим аккаунтом Dropbox.</string>
     <string name="dropbox_plugin_name">Плагин Dropbox</string>
     <string name="osmand_srtm_long_description_1000_chars">Плагин обеспечивает наложение контурных линии и (рельефа) затемняющего слоя, которые будут отображаться поверх стандартных карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.
 \n 
 \nГлобальные данные (между 70° на севере и 70° на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems).</string>
     <string name="recording_photo_description">Фото %1$s %2$s</string>
-    <string name="local_indexes_cat_av">Аудио/видеоданные</string>
+    <string name="local_indexes_cat_av">Медиаданные</string>
     <string name="stop_routing_confirm">Остановить навигацию\?</string>
     <string name="clear_dest_confirm">Вы уверены, что хотите удалить пункт назначения (и промежуточные пункты)?</string>
     <string name="precise_routing_mode">Точный маршрут (альфа)</string>
@@ -1317,8 +1317,8 @@
     <string name="driving_region_us">США</string>
     <string name="driving_region_europe_asia">Европа, Азия, Латинская Америка и тому подобное</string>
     <string name="driving_region_uk">Великобритания, Индия и др.</string>
-    <string name="context_menu_item_directions_to">Маршрут сюда</string>
-    <string name="context_menu_item_directions_from">Маршрут отсюда</string>
+    <string name="context_menu_item_directions_to">Маршрут до этой точки</string>
+    <string name="context_menu_item_directions_from">Маршрут от этой точки</string>
     <string name="driving_region_canada">Канада</string>
     <string name="about_version">Версия:</string>
     <string name="local_index_tile_data_expire">Время действия (в минутах): %1$s</string>
@@ -2624,7 +2624,7 @@
     <string name="one_tap_active_descr">Нажатие на маркер на карте переместит его на первое место в списке активных маркеров, не открывая контекстное меню.</string>
     <string name="one_tap_active">Активация одним нажатием</string>
     <string name="empty_state_av_notes">Делайте заметки!</string>
-    <string name="empty_state_av_notes_desc">Добавьте аудио-, видео- или фотозаметку в любую точку на карте, используя виджет или контекстное меню.</string>
+    <string name="empty_state_av_notes_desc">Добавьте аудио-, видео- или фотозаметки в любую точку на карте, используя виджет или контекстное меню.</string>
     <string name="notes_by_date">Заметки по дате</string>
     <string name="by_date">По дате</string>
     <string name="by_type">По типу</string>
@@ -3061,7 +3061,7 @@
     <string name="shared_string_no_thank_you">Нет, спасибо</string>
     <string name="shared_string_allow">Разрешить</string>
     <string name="profile_name_hint">Имя профиля</string>
-    <string name="nav_type_hint">Тип навигации</string>
+    <string name="nav_type_hint">Режим навигации</string>
     <string name="app_mode_taxi">Такси</string>
     <string name="app_mode_subway">Метро</string>
     <string name="app_mode_horse">Лошадь</string>
@@ -3071,8 +3071,8 @@
     <string name="routing_profile_ski">Лыжи</string>
     <string name="profile_type_descr_string">Тип: %s</string>
     <string name="profile_type_base_string">Базовый профиль</string>
-    <string name="profile_alert_need_routing_type_title">Выберите тип навигации</string>
-    <string name="profile_alert_need_routing_type_msg">Выберите тип навигации для нового профиля</string>
+    <string name="profile_alert_need_routing_type_title">Выберите режим навигации</string>
+    <string name="profile_alert_need_routing_type_msg">Выберите режим навигации для нового профиля</string>
     <string name="profile_alert_need_profile_name_title">Введите имя профиля</string>
     <string name="profile_alert_need_profile_name_msg">Сначала необходимо указать имя профиля.</string>
     <string name="profile_alert_duplicate_name_msg">Уже есть профиль с таким именем</string>
@@ -3087,7 +3087,7 @@
     <string name="profile_alert_delete_msg">Вы действительно хотите удалить профиль «%s»</string>
     <string name="select_base_profile_dialog_title">Выберите профиль для начала</string>
     <string name="select_base_profile_dialog_message">Основывайте свой пользовательский профиль на одном из профилей приложения по умолчанию, это определяет базовые настройки, такие как видимость виджетов по умолчанию и выбор единиц измерения скорости и расстояния. Ниже перечислены профили приложений по умолчанию, а также примеры пользовательских профилей, на которые они могут быть расширены:</string>
-    <string name="select_nav_profile_dialog_title">Выберите тип навигации</string>
+    <string name="select_nav_profile_dialog_title">Выберите режим навигации</string>
     <string name="base_profile_descr_car">Автомобиль, грузовик, мотоцикл</string>
     <string name="base_profile_descr_bicycle">Горный велосипед, мопед, лошадь</string>
     <string name="base_profile_descr_pedestrian">Прогулки, пеший туризм, бег</string>
@@ -3238,7 +3238,7 @@
     <string name="voice_announces">Голосовые подсказки</string>
     <string name="screen_alerts">Экранные оповещения</string>
     <string name="route_parameters_descr">Настройка параметров маршрута</string>
-    <string name="route_parameters">Параметры маршрута</string>
+    <string name="route_parameters">Маршрутизация</string>
     <string name="logcat_buffer">Буфер Logcat</string>
     <string name="plugins_settings">Настройки плагинов</string>
     <string name="language_and_output">Язык и вывод</string>
@@ -3349,7 +3349,7 @@
     <string name="select_color">Выберите цвет</string>
     <string name="edit_profiles_descr">Вы не можете удалить стандартные профили OsmAnd, но вы можете отключить их на предыдущем экране или переместить вниз.</string>
     <string name="edit_profiles">Редактировать профили</string>
-    <string name="select_nav_profile_dialog_message">«Тип навигации» определяет способ расчета маршрутов.</string>
+    <string name="select_nav_profile_dialog_message">Режим навигации определяет правила расчета маршрутов.</string>
     <string name="profile_appearance">Внешний вид профиля</string>
     <string name="choose_icon_color_name">Значок, цвет и имя</string>
     <string name="reorder_profiles">Редактировать список профилей</string>
@@ -3828,9 +3828,7 @@
     <string name="route_between_points_next_segment_button_desc">Профиль будет применён только к следующему сегменту.</string>
     <string name="next_segment">Следующий сегмент</string>
     <string name="whole_track">Весь трек</string>
-    <string name="route_between_points_warning_desc">Для использования данной возможности OsmAnd необходимо привязать ваш трек по дорогам.
-\n
-\nНа следующем шаге необходимо выбрать профиль навигации для определения разрешённых дорог и пороговое расстояние, чтобы приблизительно привязать маршрут к дорогам.</string>
+    <string name="route_between_points_warning_desc">Далее необходимо выбрать профиль навигации для определения порогового расстояния и привязки маршрута к ближайшей разрешённой дороге.</string>
     <string name="route_between_points_desc">Выберите способ соединения точек прямой линией или рассчитайте маршрут между ними, как указано ниже.</string>
     <string name="in_case_of_reverse_direction">При обратном направлении</string>
     <string name="plan_route_exit_dialog_descr">Все изменения будут утеряны.</string>
