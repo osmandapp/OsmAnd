@@ -130,6 +130,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private ArrayAdapter<?> listAdapter;
 	private OnItemClickListener listAdapterOnClickListener;
+	private DashboardStateListener dashboardStateListener;
 
 	private boolean visible = false;
 	private DashboardType visibleType;
@@ -567,7 +568,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		boolean appModeChanged = currentAppMode != previousAppMode;
 
 		boolean refresh = this.visibleType == type && !appModeChanged;
-		previousAppMode = currentAppMode;
+		this.previousAppMode = currentAppMode;
 		this.visibleType = type;
 		DashboardOnMap.staticVisible = visible;
 		DashboardOnMap.staticVisibleType = type;
@@ -657,7 +658,19 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
 			}
 		}
+		notifyDashboardVisibilityStateListener(visible);
 		mapActivity.updateStatusBarColor();
+	}
+
+	private void notifyDashboardVisibilityStateListener(boolean visible) {
+		if (dashboardStateListener != null) {
+			if (visible) {
+				dashboardStateListener.onShowDashboard();
+			} else {
+				dashboardStateListener.onHideDashboard();
+				dashboardStateListener = null;
+			}
+		}
 	}
 
 	public void updateDashboard() {
@@ -705,7 +718,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (visibleType == DashboardType.CONFIGURE_SCREEN) {
 			cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity);
 		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
-			cm = new ConfigureMapMenu().createListAdapter(mapActivity);
+			ConfigureMapMenu configureMapMenu = new ConfigureMapMenu(mapActivity);
+			dashboardStateListener = configureMapMenu;
+			cm = configureMapMenu.createListAdapter(mapActivity);
 		} else if (visibleType == DashboardType.LIST_MENU) {
 			cm = mapActivity.getMapActions().createMainOptionsMenu();
 		} else if (visibleType == DashboardType.ROUTE_PREFERENCES) {
@@ -1314,5 +1329,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	@Override
 	public void routeWasFinished() {
+	}
+
+	public interface DashboardStateListener {
+
+		void onShowDashboard();
+
+		void onHideDashboard();
+
 	}
 }

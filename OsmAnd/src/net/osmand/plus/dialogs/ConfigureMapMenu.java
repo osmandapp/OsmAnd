@@ -37,9 +37,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.render.RendererRegistry.OnChangeRenderingRuleListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings.ListStringPreference;
@@ -98,8 +100,9 @@ import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAI
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
 
-public class ConfigureMapMenu {
+public class ConfigureMapMenu implements DashboardOnMap.DashboardStateListener {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
+	public static final String TAG = ConfigureMapMenu.class.getName();
 	public static final String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
 	public static final String CURRENT_TRACK_COLOR_ATTR = "currentTrackColor";
 	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";
@@ -110,8 +113,15 @@ public class ConfigureMapMenu {
 	private int selectedLanguageIndex;
 	private boolean transliterateNames;
 
+	private MapActivity mapActivity;
+	private ContextMenuAdapter contextMenuAdapter;
+
 	public interface OnClickListener {
 		void onClick();
+	}
+
+	public ConfigureMapMenu(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
 	}
 
 	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
@@ -136,6 +146,7 @@ public class ConfigureMapMenu {
 		adapter.setNightMode(nightMode);
 		createLayersItems(customRules, adapter, ma, themeRes, nightMode);
 		createRenderingAttributeItems(customRules, adapter, ma, themeRes, nightMode);
+		this.contextMenuAdapter = adapter;
 		return adapter;
 	}
 
@@ -273,13 +284,17 @@ public class ConfigureMapMenu {
 		final OsmandSettings settings = app.getSettings();
 		final int selectedProfileColorRes = settings.APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode);
 		final int selectedProfileColor = ContextCompat.getColor(app, selectedProfileColorRes);
+		RendererRegistry rr = app.getRendererRegistry();
+		RenderingRulesStorage storage = rr.getCurrentSelectedRenderer();
+		String renderDescr = getRenderDescr(activity, storage);
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
 				.setId(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_renderer, activity)
 				.setId(MAP_STYLE_ID)
-				.setDescription(getRenderDescr(activity)).setLayout(R.layout.list_item_single_line_descrition_narrow)
+				.setDescription(renderDescr)
+				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_map).setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
@@ -942,13 +957,11 @@ public class ConfigureMapMenu {
 		dialog.show();
 	}
 
-	protected String getRenderDescr(final MapActivity activity) {
-		RendererRegistry rr = activity.getMyApplication().getRendererRegistry();
-		RenderingRulesStorage storage = rr.getCurrentSelectedRenderer();
+	protected String getRenderDescr(Context ctx, RenderingRulesStorage storage) {
 		if (storage == null) {
 			return "";
 		}
-		String translation = RendererRegistry.getTranslatedRendererName(activity, storage.getName());
+		String translation = RendererRegistry.getTranslatedRendererName(ctx, storage.getName());
 		return translation == null ? storage.getName() : translation;
 	}
 
@@ -1107,6 +1120,31 @@ public class ConfigureMapMenu {
 
 			return builder.createItem();
 		}
+	}
+
+	@Override
+	public void onShowDashboard() {
+		getMyApplication().getRendererRegistry()
+				.addOnChangeRenderingRuleListener(TAG, new OnChangeRenderingRuleListener() {
+					@Override
+					public void onRenderingRuleChanged(RenderingRulesStorage currentSelectedRender) {
+						if (contextMenuAdapter != null) {
+							ContextMenuItem item = contextMenuAdapter.getItemById(MAP_STYLE_ID);
+							String renderDescr = getRenderDescr(mapActivity, currentSelectedRender);
+							item.setDescription(renderDescr);
+							contextMenuAdapter.notifyDataSetChanged();
+						}
+					}
+				});
+	}
+
+	@Override
+	public void onHideDashboard() {
+		getMyApplication().getRendererRegistry().removeOnChangeRenderingRuleListener(TAG);
+	}
+
+	private OsmandApplication getMyApplication() {
+		return mapActivity.getMyApplication();
 	}
 
 	private static class StringSpinnerArrayAdapter extends ArrayAdapter<String> {

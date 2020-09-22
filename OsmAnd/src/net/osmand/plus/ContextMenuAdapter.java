@@ -65,6 +65,7 @@ public class ContextMenuAdapter {
 	@LayoutRes
 	private int DEFAULT_LAYOUT_ID = R.layout.list_menu_item_native;
 	List<ContextMenuItem> items = new ArrayList<>();
+	private ArrayAdapter<ContextMenuItem> arrayAdapter;
 	private boolean profileDependent = false;
 	private boolean nightMode;
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
@@ -98,6 +99,15 @@ public class ContextMenuAdapter {
 
 	public ContextMenuItem getItem(int position) {
 		return items.get(position);
+	}
+
+	public ContextMenuItem getItemById(@NonNull String id) {
+		for (ContextMenuItem item : items) {
+			if (id.equals(item.getId())) {
+				return item;
+			}
+		}
+		return null;
 	}
 
 	public List<ContextMenuItem> getItems() {
@@ -192,8 +202,9 @@ public class ContextMenuAdapter {
 			}
 		}
 		items.removeAll(itemsToRemove);
-		return new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
+		this.arrayAdapter = new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
 				items.toArray(new ContextMenuItem[items.size()]), app, lightTheme, changeAppModeListener);
+		return this.arrayAdapter;
 	}
 
 	public class ContextMenuArrayAdapter extends ArrayAdapter<ContextMenuItem> {
@@ -614,6 +625,12 @@ public class ContextMenuAdapter {
 			}
 		}
 		return visible;
+	}
+
+	public void notifyDataSetChanged() {
+		if (this.arrayAdapter != null) {
+			this.arrayAdapter.notifyDataSetChanged();
+		}
 	}
 
 	public static OnItemDeleteAction makeDeleteAction(final OsmandPreference... prefs) {
