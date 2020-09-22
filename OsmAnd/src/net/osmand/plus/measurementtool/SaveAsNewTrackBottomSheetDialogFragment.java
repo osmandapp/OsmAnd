@@ -88,8 +88,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				R.layout.track_name_edit_text, null);
 		nameTextBox = editNameView.findViewById(R.id.name_text_box);
 		nameTextBox.setBoxBackgroundColorResource(highlightColorId);
-		nameTextBox.setHint(app.getString(R.string.ltr_or_rtl_combine_via_colon,
-				app.getString(R.string.shared_string_file_name), "").trim());
+		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_file_name));
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
 				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
 		nameTextBox.setDefaultHintTextColor(colorStateList);
