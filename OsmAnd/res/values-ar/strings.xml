@@ -3888,4 +3888,7 @@
 \n• تم إصلاح المشكلات المتعلقة باستيراد/تصدير الأوضاع الشخصية
 \n
 \n</string>
+    <string name="sort_last_modified">آخر تعديل</string>
+    <string name="sort_name_descending">الاسم: أ – ي</string>
+    <string name="sort_name_ascending">الاسم: أ – ي</string>
 </resources>
