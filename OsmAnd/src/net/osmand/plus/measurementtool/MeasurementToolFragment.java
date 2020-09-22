@@ -1579,7 +1579,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 						if (saveType == SaveType.LINE) {
 							TrkSegment segment = new TrkSegment();
 							if (editingCtx.hasRoute()) {
-								segment.points.addAll(editingCtx.getDistinctRoutePoints());
+								segment.points.addAll(editingCtx.getRoutePoints());
 							} else {
 								segment.points.addAll(before.points);
 								segment.points.addAll(after.points);
@@ -1615,7 +1615,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 							if (saveType == SaveType.LINE) {
 								TrkSegment segment = new TrkSegment();
 								if (editingCtx.hasRoute()) {
-									segment.points.addAll(editingCtx.getDistinctRoutePoints());
+									segment.points.addAll(editingCtx.getRoutePoints());
 								} else {
 									segment.points.addAll(before.points);
 									segment.points.addAll(after.points);

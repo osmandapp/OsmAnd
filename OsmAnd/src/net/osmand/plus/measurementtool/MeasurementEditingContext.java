@@ -749,7 +749,7 @@ public class MeasurementEditingContext {
 		return params;
 	}
 
-	public List<WptPt> getDistinctRoutePoints() {
+	public List<WptPt> getRoutePoints() {
 		List<WptPt> res = new ArrayList<>();
 		List<WptPt> points = new ArrayList<>(before.points);
 		points.addAll(after.points);
@@ -759,9 +759,6 @@ public class MeasurementEditingContext {
 			RoadSegmentData data = this.roadSegmentData.get(pair);
 			if (data != null) {
 				res.addAll(data.points);
-				if (i < size - 2) {
-					res.remove(res.size() - 1);
-				}
 			}
 		}
 		return res;

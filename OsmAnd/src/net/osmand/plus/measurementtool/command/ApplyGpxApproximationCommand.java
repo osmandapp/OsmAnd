@@ -45,6 +45,7 @@ public class ApplyGpxApproximationCommand extends MeasurementModeCommand {
 		if (command instanceof ApplyGpxApproximationCommand) {
 			ApplyGpxApproximationCommand approxCommand = (ApplyGpxApproximationCommand) command;
 			approximation = approxCommand.approximation;
+			mode = approxCommand.mode;
 			applyApproximation();
 			refreshMap();
 			return true;
