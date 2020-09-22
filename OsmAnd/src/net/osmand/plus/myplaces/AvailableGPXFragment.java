@@ -476,11 +476,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		});
 
 		menu.addSubMenu(Menu.NONE, R.string.shared_string_sort, Menu.NONE, R.string.shared_string_sort);
-		SubMenu sortMenu = menu.findItem(R.string.shared_string_sort).getSubMenu();
+		final SubMenu sortMenu = menu.findItem(R.string.shared_string_sort).getSubMenu();
 		mi = sortMenu.getItem();
 		mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		mi.setIcon(getIcon(R.drawable.ic_sort_waypoint_dark, isLightActionBar() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark));
-
+		final int iconColorId = isLightActionBar() ? R.color.active_buttons_and_links_text_light
+				: R.color.active_buttons_and_links_text_dark;
+		mi.setIcon(getIcon(sortByMode.getIconId(), iconColorId));
 		for (final TracksSortByMode mode : TracksSortByMode.values()) {
 			mi = createMenuItem(sortMenu, mode.getNameId(), mode.getNameId(), mode.getIconId(),
 					MenuItem.SHOW_AS_ACTION_ALWAYS, false, R.color.icon_color_default_light);
@@ -488,6 +489,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
 					updateTracksSort(mode);
+					sortMenu.setIcon(getIcon(mode.getIconId(), iconColorId));
 					return false;
 				}
 			});

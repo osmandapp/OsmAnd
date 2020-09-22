@@ -1,8 +1,12 @@
 package net.osmand.plus.measurementtool;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.StringRes;
@@ -22,20 +26,24 @@ import net.osmand.plus.helpers.GpxTrackAdapter.OnItemClickListener;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
+import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
+import static net.osmand.plus.settings.backend.OsmandSettings.*;
 import static net.osmand.util.Algorithms.collectDirs;
 
 public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 
 	enum Mode {
-		OPEN_TRACK(R.string.plan_route_open_existing_track, R.string.plan_route_select_track_file_for_open),
+		OPEN_TRACK(R.string.shared_string_gpx_tracks, R.string.sort_by),
 		ADD_TO_TRACK(R.string.add_to_a_track, R.string.route_between_points_add_track_desc);
 
 		int title;
@@ -65,6 +73,7 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 	private Mode fragmentMode;
 	private String selectedFolder;
 	private String allFilesFolder;
+	TracksSortByMode tracksSortBy = TracksSortByMode.BY_DATE;
 
 	public void setFragmentMode(Mode fragmentMode) {
 		this.fragmentMode = fragmentMode;
@@ -75,18 +84,54 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 	}
 
 	@Override
-	public void createMenuItems(Bundle savedInstanceState) {
+	public void createMenuItems(final Bundle savedInstanceState) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		Context context = requireContext();
-		OsmandApplication app = requiredMyApplication();
+		final OsmandApplication app = requiredMyApplication();
 		mainView = View.inflate(new ContextThemeWrapper(context, themeRes),
 				R.layout.bottom_sheet_plan_route_select_file, null);
 		TextView titleView = mainView.findViewById(R.id.title);
 		titleView.setText(fragmentMode.title);
-		TextView descriptionView = mainView.findViewById(R.id.description);
+		final TextView descriptionView = mainView.findViewById(R.id.description);
 		descriptionView.setText(fragmentMode.description);
 		final RecyclerView filesRecyclerView = mainView.findViewById(R.id.gpx_track_list);
 		filesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+		if (fragmentMode == Mode.OPEN_TRACK) {
+			titleView.setText(AndroidUtils.addColon(app, fragmentMode.title));
+			updateDescription(descriptionView);
+			final ImageButton sortButton = mainView.findViewById(R.id.sort_button);
+			Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark,
+					nightMode
+							? R.color.inactive_buttons_and_links_bg_dark
+							: R.color.inactive_buttons_and_links_bg_light);
+			AndroidUtils.setBackground(sortButton, background);
+			sortButton.setImageResource(tracksSortBy.getIconId());
+			sortButton.setVisibility(View.VISIBLE);
+			sortButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					IconPopupMenu popup = new IconPopupMenu(v.getContext(), v);
+					final Menu menu = popup.getMenu();
+					MenuItem mi;
+					for (final TracksSortByMode mode : TracksSortByMode.values()) {
+						mi = createMenuItem(app, menu, mode.getNameId(), mode.getNameId(), mode.getIconId(),
+								MenuItem.SHOW_AS_ACTION_ALWAYS, false, R.color.icon_color_default_light);
+						mi.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+							@Override
+							public boolean onMenuItemClick(MenuItem item) {
+								tracksSortBy = mode;
+								sortButton.setImageResource(mode.getIconId());
+								updateDescription(descriptionView);
+								sortFileList();
+								adapter.notifyDataSetChanged();
+								return false;
+							}
+						});
+					}
+					popup.show();
+				}
+			});
+		}
 
 		List<File> dirs = new ArrayList<>();
 		final File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
@@ -149,19 +194,64 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 			@Override
 			public void onItemSelected(String item) {
 				selectedFolder = item;
-				updateFileList(item, folderAdapter);
+				updateFileList(folderAdapter);
 			}
 		});
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
-		updateFileList(selectedFolder, folderAdapter);
+		updateFileList(folderAdapter);
 	}
 
-	private void updateFileList(String folderName, HorizontalSelectionAdapter folderAdapter) {
-		List<GPXInfo> gpxInfoList = gpxInfoMap.get(folderName);
+	private void updateDescription(TextView descriptionView) {
+		String string = getString(tracksSortBy.getNameId());
+		descriptionView.setText(String.format(getString(R.string.ltr_or_rtl_combine_via_space),
+				getString(fragmentMode.description),
+				Character.toLowerCase(string.charAt(0)) + string.substring(1)));
+	}
+
+	public MenuItem createMenuItem(OsmandApplication app, Menu m, int id, int titleRes, int iconId, int menuItemType,
+	                               boolean flipIconForRtl, int iconColor) {
+		Drawable d = iconId == 0 ? null : app.getUIUtilities().getIcon(iconId, iconColor);
+		MenuItem menuItem = m.add(0, id, 0, titleRes);
+		if (d != null) {
+			if (flipIconForRtl) {
+				d = AndroidUtils.getDrawableForDirection(app, d);
+			}
+			menuItem.setIcon(d);
+		}
+		return menuItem;
+	}
+
+	private void updateFileList(HorizontalSelectionAdapter folderAdapter) {
+		sortFileList();
 		adapter.setShowFolderName(showFoldersName());
-		adapter.setGpxInfoList(gpxInfoList != null ? gpxInfoList : new ArrayList<GPXInfo>());
 		adapter.notifyDataSetChanged();
 		folderAdapter.notifyDataSetChanged();
+	}
+
+	private void sortFileList() {
+		List<GPXInfo> gpxInfoList = gpxInfoMap.get(selectedFolder);
+		sortSelected(gpxInfoList);
+		adapter.setGpxInfoList(gpxInfoList != null ? gpxInfoList : new ArrayList<GPXInfo>());
+	}
+
+	public void sortSelected(List<GPXInfo> gpxInfoList) {
+		Collections.sort(gpxInfoList, new Comparator<GPXInfo>() {
+			@Override
+			public int compare(GPXInfo i1, GPXInfo i2) {
+				if (tracksSortBy == TracksSortByMode.BY_NAME_ASCENDING) {
+					return i1.getFileName().toLowerCase().compareTo(i2.getFileName().toLowerCase());
+				} else if (tracksSortBy == TracksSortByMode.BY_NAME_DESCENDING) {
+					return -i1.getFileName().toLowerCase().compareTo(i2.getFileName().toLowerCase());
+				} else {
+					long time1 = i1.getLastModified();
+					long time2 = i2.getLastModified();
+					if (time1 == time2) {
+						return i1.getFileName().toLowerCase().compareTo(i2.getFileName().toLowerCase());
+					}
+					return -((time1 < time2) ? -1 : ((time1 == time2) ? 0 : 1));
+				}
+			}
+		});
 	}
 
 	private boolean showFoldersName() {
