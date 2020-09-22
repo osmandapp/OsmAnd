@@ -25,6 +25,13 @@ public class GpxData {
 		this.trkSegment = trkSegment;
 	}
 
+	public GpxData(GPXFile gpxFile, GpxData gpxData) {
+		this.gpxFile = gpxFile;
+		this.rect = gpxData.rect;
+		this.actionType = gpxData.actionType;
+		this.trkSegment = gpxData.trkSegment;
+	}
+
 	public GPXFile getGpxFile() {
 		return gpxFile;
 	}
