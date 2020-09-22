@@ -479,7 +479,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		});
 		snapToRoadBtn.setVisibility(View.VISIBLE);
 
-		initMeasurementMode(gpxData);
+		initMeasurementMode(gpxData, savedInstanceState == null);
 
 		if (savedInstanceState == null) {
 			if (fileName != null) {
@@ -512,7 +512,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		updateSnapToRoadControls();
 	}
 
-	private void initMeasurementMode(GpxData gpxData) {
+	private void initMeasurementMode(GpxData gpxData, boolean addPoints) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			editingCtx.getCommandManager().setMeasurementLayer(mapActivity.getMapLayers().getMeasurementToolLayer());
@@ -526,11 +526,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 						setAppMode(snapToRoadAppMode);
 					}
 				}
-				ActionType actionType = gpxData.getActionType();
-				if (actionType == ActionType.ADD_ROUTE_POINTS) {
-					displayRoutePoints();
-				} else if (actionType == ActionType.EDIT_SEGMENT) {
-					displaySegmentPoints();
+				if (addPoints) {
+					ActionType actionType = gpxData.getActionType();
+					if (actionType == ActionType.ADD_ROUTE_POINTS) {
+						displayRoutePoints();
+					} else if (actionType == ActionType.EDIT_SEGMENT) {
+						displaySegmentPoints();
+					}
 				}
 			}
 		}
@@ -1031,7 +1033,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		ActionType actionType = segment == null ? ActionType.ADD_ROUTE_POINTS : ActionType.EDIT_SEGMENT;
 		GpxData gpxData = new GpxData(gpxFile, rect, actionType, segment);
 		editingCtx.setGpxData(gpxData);
-		initMeasurementMode(gpxData);
+		initMeasurementMode(gpxData, true);
 		QuadRect qr = gpxData.getRect();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {

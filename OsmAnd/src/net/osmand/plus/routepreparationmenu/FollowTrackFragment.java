@@ -349,7 +349,9 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		exitTrackAppearanceMode();
+		if (!editingTrack) {
+			exitTrackAppearanceMode();
+		}
 		onDismiss();
 	}
 
