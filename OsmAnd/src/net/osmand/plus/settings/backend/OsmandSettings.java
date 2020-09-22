@@ -4104,13 +4104,15 @@ public class OsmandSettings {
 	}
 
 	public enum TracksSortByMode {
-		BY_DATE(R.drawable.ic_action_time_start),
-		BY_NAME_ASCENDING(R.drawable.ic_action_sort_by_name_ascending),
-		BY_NAME_DESCENDING(R.drawable.ic_action_sort_by_name_descending);
+		BY_DATE(R.string.sort_last_modified, R.drawable.ic_action_time_start),
+		BY_NAME_ASCENDING(R.string.sort_name_ascending, R.drawable.ic_action_sort_by_name_ascending),
+		BY_NAME_DESCENDING(R.string.sort_name_descending, R.drawable.ic_action_sort_by_name_descending);
 
 		private final int iconId;
+		private final int nameId;
 
-		TracksSortByMode(int iconId) {
+		TracksSortByMode(int nameId, int iconId) {
+			this.nameId = nameId;
 			this.iconId = iconId;
 		}
 
@@ -4120,6 +4122,11 @@ public class OsmandSettings {
 
 		public boolean isByDate() {
 			return this == BY_DATE;
+		}
+
+		@StringRes
+		public int getNameId() {
+			return nameId;
 		}
 
 		@DrawableRes

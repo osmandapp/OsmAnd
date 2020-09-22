@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -83,7 +84,6 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.TracksSortByMode;
-import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.io.File;
 import java.text.Collator;
@@ -436,10 +436,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
 		menu.clear();
-		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark, MenuItem.SHOW_AS_ACTION_ALWAYS
-						| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
+				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 		SearchView searchView = new SearchView(getActivity());
 		FavoritesActivity.updateSearchView(getActivity(), searchView);
 		mi.setActionView(searchView);
@@ -474,6 +474,24 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		});
+
+		menu.addSubMenu(Menu.NONE, R.string.shared_string_sort, Menu.NONE, R.string.shared_string_sort);
+		SubMenu sortMenu = menu.findItem(R.string.shared_string_sort).getSubMenu();
+		mi = sortMenu.getItem();
+		mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		mi.setIcon(getIcon(R.drawable.ic_sort_waypoint_dark, isLightActionBar() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark));
+
+		for (final TracksSortByMode mode : TracksSortByMode.values()) {
+			mi = createMenuItem(sortMenu, mode.getNameId(), mode.getNameId(), mode.getIconId(),
+					MenuItem.SHOW_AS_ACTION_ALWAYS, false, R.color.icon_color_default_light);
+			mi.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					updateTracksSort(mode);
+					return false;
+				}
+			});
+		}
 
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
@@ -574,9 +592,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		((FavoritesActivity) getActivity()).addTrack();
 	}
 
-	private void updateTracksSort() {
-		sortByName = !sortByName;
-		app.getSettings().SORT_TRACKS_BY_NAME.set(sortByName);
+	private void updateTracksSort(TracksSortByMode sortByMode) {
+		this.sortByMode = sortByMode;
+		app.getSettings().TRACKS_SORT_BY_MODE.set(sortByMode);
 		reloadTracks();
 	}
 
