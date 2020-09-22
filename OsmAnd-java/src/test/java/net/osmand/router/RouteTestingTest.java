@@ -15,6 +15,7 @@ import java.util.TreeSet;
 
 import net.osmand.binary.BinaryMapIndexReader;
 
+import net.osmand.data.LatLon;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -62,9 +63,20 @@ public class RouteTestingTest {
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
 
-		BinaryMapIndexReader[] binaryMapIndexReaders = { new BinaryMapIndexReader(raf, new File(fl)) };
+		BinaryMapIndexReader[] binaryMapIndexReaders;// = { new BinaryMapIndexReader(raf, new File(fl)) };
 		RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
 		Map<String, String> params = te.getParams();
+		if (params.containsKey("map")){
+			String fl1 = "src/test/resources/" + params.get("map");
+			RandomAccessFile raf1 = new RandomAccessFile(fl1, "r");
+			binaryMapIndexReaders = new BinaryMapIndexReader[]{
+					new BinaryMapIndexReader(raf1, new File(fl1)),
+					new BinaryMapIndexReader(raf, new File(fl))
+			};
+		}
+		else {
+			binaryMapIndexReaders = new BinaryMapIndexReader[]{new BinaryMapIndexReader(raf, new File(fl))};
+		}
 		RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
 				RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, params);
 		RoutingContext ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
@@ -101,7 +113,5 @@ public class RouteTestingTest {
 		}
 
 	}
-
-
 
 }
