@@ -2406,4 +2406,14 @@
     <string name="poi_recycling_small_electrical_appliances">Küçük elektrikli aletler</string>
     <string name="poi_departures_board">Kalkış bilgileri panosu</string>
     <string name="poi_drinking_water_refill">İçme suyu doldurma</string>
+    <string name="poi_fortification_type_ring_ditch">İstihkam türü: dairesel hendek</string>
+    <string name="poi_fortification_type_sconce">İstihkam türü: küçük set</string>
+    <string name="poi_fortification_type_limes">İstihkam türü: limes</string>
+    <string name="poi_fortification_type_hill_fort">İstihkam türü: tepe kalesi</string>
+    <string name="poi_megalith_type_passage_grave">Megalit türü: geçit mezar</string>
+    <string name="poi_megalith_type_stone_circle">Megalit türü: taş çember</string>
+    <string name="poi_megalith_type_nuraghe">Megalit türü: nuraghe</string>
+    <string name="poi_megalith_type_dolmen">Megalit türü: dolmen</string>
+    <string name="poi_megalith_type_menhir">Megalit türü: menhir</string>
+    <string name="poi_site_type_earthwork">Toprak işi</string>
 </resources>
