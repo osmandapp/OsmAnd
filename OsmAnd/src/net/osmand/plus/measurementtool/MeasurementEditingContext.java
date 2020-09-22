@@ -250,8 +250,14 @@ public class MeasurementEditingContext {
 				RoadSegmentData data = this.roadSegmentData.get(pair);
 				if (data == null) {
 					if (appMode != MeasurementEditingContext.DEFAULT_APP_MODE || !pair.first.lastPoint || !pair.second.firstPoint) {
-						distance += MapUtils.getDistance(pair.first.getLatitude(), pair.first.getLongitude(),
+						double localDist = MapUtils.getDistance(pair.first.getLatitude(), pair.first.getLongitude(),
 								pair.second.getLatitude(), pair.second.getLongitude());
+						if(!Double.isNaN(pair.first.ele) && !Double.isNaN(pair.second.ele) &&
+								pair.first.ele != 0 && pair.second.ele != 0) {
+							double h = Math.abs(pair.first.ele - pair.second.ele);
+							localDist = Math.sqrt(localDist * localDist + h * h);
+						}
+						distance += localDist;
 					}
 				} else {
 					distance += data.getDistance();

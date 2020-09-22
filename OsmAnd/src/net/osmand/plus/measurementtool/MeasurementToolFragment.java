@@ -497,7 +497,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		});
 		snapToRoadBtn.setVisibility(View.VISIBLE);
 
-		initMeasurementMode(gpxData);
+		initMeasurementMode(gpxData, savedInstanceState == null);
 
 		if (savedInstanceState == null) {
 			if (fileName != null) {
@@ -530,7 +530,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		updateSnapToRoadControls();
 	}
 
-	private void initMeasurementMode(GpxData gpxData) {
+	private void initMeasurementMode(GpxData gpxData, boolean addPoints) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			editingCtx.getCommandManager().setMeasurementLayer(mapActivity.getMapLayers().getMeasurementToolLayer());
@@ -546,11 +546,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 						}
 					}
 				}
-				ActionType actionType = gpxData.getActionType();
-				if (actionType == ActionType.ADD_ROUTE_POINTS) {
-					displayRoutePoints();
-				} else if (actionType == ActionType.EDIT_SEGMENT) {
-					displaySegmentPoints();
+				if (addPoints) {
+					ActionType actionType = gpxData.getActionType();
+					if (actionType == ActionType.ADD_ROUTE_POINTS) {
+						displayRoutePoints();
+					} else if (actionType == ActionType.EDIT_SEGMENT) {
+						displaySegmentPoints();
+					}
 				}
 			}
 			setMode(UNDO_MODE, false);
@@ -1048,7 +1050,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public void addNewGpxData(GPXFile gpxFile) {
 		GpxData gpxData = setupGpxData(gpxFile);
-		initMeasurementMode(gpxData);
+		initMeasurementMode(gpxData, true);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && gpxData != null) {
 			QuadRect qr = gpxData.getRect();
