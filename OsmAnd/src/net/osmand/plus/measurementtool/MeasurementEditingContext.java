@@ -474,6 +474,10 @@ public class MeasurementEditingContext {
 			List<RouteSegmentResult> segments = routeImporter.importRoute();
 			List<WptPt> routePoints = gpxData.getGpxFile().getRoutePoints();
 			int prevPointIndex = 0;
+			if (routePoints.isEmpty() && points.size() > 1) {
+				routePoints.add(points.get(0));
+				routePoints.add(points.get(points.size() - 1));
+			}
 			for (int i = 0; i < routePoints.size() - 1; i++) {
 				Pair<WptPt, WptPt> pair = new Pair<>(routePoints.get(i), routePoints.get(i + 1));
 				int startIndex = pair.first.getTrkPtIndex();
