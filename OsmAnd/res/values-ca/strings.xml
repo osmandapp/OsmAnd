@@ -3806,7 +3806,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="add_segment_to_the_track">Afegeix a un fitxer de traces</string>
     <string name="layer_gpx_layer">Traces</string>
     <string name="save_track_to_gpx_globally">Enregistra el trajecte a un fitxer GPX</string>
-    <string name="navigate_to_track_descr">Navegua des de la meva ubicació fins a la traça</string>
+    <string name="navigate_to_track_descr">Navega des de la meva ubicació fins a la traça</string>
     <string name="add_address">Afegeix una adreça</string>
     <string name="shared_string_file_name">Nom del fitxer</string>
     <string name="monitoring_control_start">REC</string>
@@ -3815,4 +3815,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="simplified_track">Traça simplificada</string>
     <string name="simplified_track_description">Només es desarà la línia del trajecte, les fites s\'esborraran.</string>
     <string name="number_of_gpx_files_selected_pattern">%s arxius de traces seleccionats</string>
+    <string name="shared_string_save_as_gpx">Desa en un nou fitxer de traces</string>
+    <string name="show_gpx">Traces</string>
+    <string name="empty_state_my_tracks_desc">Importa o enregistra fitxers de traces</string>
+    <string name="import_track_descr">Trieu un fitxer de traces a seguir o importeu-lo des del dispositiu.</string>
 </resources>

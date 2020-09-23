@@ -923,6 +923,7 @@ public class SearchCoreFactory {
 
 	public static class SearchAmenityByTypeAPI extends SearchBaseAPI {
 		private static final int BBOX_RADIUS = 10000;
+		private static final int BBOX_RADIUS_NEAREST = 1000;
 		private SearchAmenityTypesAPI searchAmenityTypesAPI;
 		private MapPoiTypes types;
 		private AbstractPoiType unselectedPoiType;
@@ -1007,7 +1008,14 @@ public class SearchCoreFactory {
 			}
 			this.nameFilter = nameFilter;
 			if (poiTypeFilter != null) {
-				QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
+				int radius = BBOX_RADIUS;
+				if (phrase.getRadiusLevel() == 1 && poiTypeFilter instanceof CustomSearchPoiFilter) {
+					String name = ((CustomSearchPoiFilter) poiTypeFilter).getFilterId();
+					if ("std_null".equals(name)) {
+						radius = BBOX_RADIUS_NEAREST;
+					}
+				}
+				QuadRect bbox = phrase.getRadiusBBoxToSearch(radius);
 				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
 				Set<String> searchedPois = new TreeSet<>();
 				for (BinaryMapIndexReader r : offlineIndexes) {

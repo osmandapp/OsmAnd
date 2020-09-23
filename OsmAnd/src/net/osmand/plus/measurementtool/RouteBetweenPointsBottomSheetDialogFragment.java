@@ -27,8 +27,8 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.LEFT;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.RIGHT;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.BOTTOM_SHEET_HEIGHT_DP;
 
@@ -136,7 +136,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 
 	public void updateModeButtons() {
 		UiUtilities.updateCustomRadioButtons(getMyApplication(), customRadioButton, nightMode,
-				defaultDialogMode == RouteBetweenPointsDialogMode.SINGLE ? LEFT : RIGHT);
+				defaultDialogMode == RouteBetweenPointsDialogMode.SINGLE ? START : END);
 		btnDescription.setText(getButtonDescr(defaultDialogMode));
 	}
 

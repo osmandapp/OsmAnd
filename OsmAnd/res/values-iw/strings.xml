@@ -400,7 +400,7 @@
     <string name="tts_language_not_supported">השפה הנבחרת אינה נתמכת על ידי המנגנון של Android הממיר טקסט לדיבור (TTS) המותקן, ייעשה שימוש בשפת ההמרה במקום. לחפש מנוע המרה אחר של טקסט לדיבור בחנות\?</string>
     <string name="tts_missing_language_data_title">חסרים נתונים</string>
     <string name="tts_missing_language_data">לגשת לחנות להוריד את השפה הנבחרת?</string>
-    <string name="gpx_option_reverse_route">היפוך כיוון ה־GPX</string>
+    <string name="gpx_option_reverse_route">היפוך כיוון המסלול</string>
     <string name="gpx_option_destination_point">שימוש ביעד הנוכחי</string>
     <string name="gpx_option_from_start_point">לעבור לאורך דרך שלמה</string>
     <string name="switch_to_vector_map_to_see">קיימת מפה וקטורית עבור מיקום זה.
@@ -3838,9 +3838,7 @@
     <string name="route_between_points_whole_track_button_desc">כל המסלול יחושב מחדש באמצעות הפרופיל הנבחר.</string>
     <string name="route_between_points_next_segment_button_desc">רק המקטע הבא יחושב מחודש באמצעות הפרופיל הנבחר.</string>
     <string name="route_between_points_desc">נא לבחור כיצד לחבר נקודות, בקו ישר, או לחבר מסלול ביניהן כפי שצוין להלן.</string>
-    <string name="route_between_points_warning_desc">כדי להשתמש באפשרות זו על OsmAnd להצמיד את המסלול שלך לדרכים שעל המפה.
-\n
-\n בשלב הבא יהיה עליך לבחור בפרופיל ניווט כדי לזהות את הדרכים המורשות ואת סף המרחק כדי להעריך את המסלול שלך ביחס לדרכים.</string>
+    <string name="route_between_points_warning_desc">בשלב הבא עליך להצמיד את הדרך המורשית הקרובה ביותר לאחד מפרופילי הניווט שלך כדי להשתמש באפשרות הזו.</string>
     <string name="street_level_imagery">תמונות ברמת רחוב</string>
     <string name="plan_route_exit_dialog_descr">להתעלם מהשינויים במסלול המתוכנן על ידי סגירתו\?</string>
     <string name="in_case_of_reverse_direction">במקרה של כיוון הפוך</string>
@@ -3893,4 +3891,22 @@
     <string name="shared_string_is_saved">נשמר</string>
     <string name="one_point_error">נא להוסיף שתי נקודות לפחות.</string>
     <string name="shared_string_redo">ביצוע מחדש</string>
+    <string name="release_3_8">• פונקציית תכנון המסלול עודכנה: מאפשרת שימוש בסוגי ניווט שונים לפי מקטע והכללת מסלולית
+\n
+\n • תפריט מראה חדש למסלולים: ניתן לבחור צבע, עובי, להציג חצי כיוון, סמלי התחלה/סיום
+\n
+\n • אופן הצגת שבילי האופניים השתפר.
+\n
+\n • אפשר לגעת במסלולים, יש להם גם תפריט הקשר עם מידע בסיסי.
+\n
+\n • אלגוריתמי החיפוש השתפרו
+\n
+\n • אפשרות המעקב אחר המסלול בניווט השתפרה
+\n
+\n • תוקנו תקלות בייבוא/ייצוא הגדרות פרופיל
+\n
+\n</string>
+    <string name="sort_last_modified">שינוי אחרון</string>
+    <string name="sort_name_descending">שם: ת – א</string>
+    <string name="sort_name_ascending">שם: א – ת</string>
 </resources>

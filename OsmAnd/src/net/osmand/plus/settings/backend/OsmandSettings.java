@@ -2506,6 +2506,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_COORDINATES_WIDGET = new BooleanPreference("show_coordinates_widget", false).makeProfile().cache();
 
 	public final CommonPreference<NotesSortByMode> NOTES_SORT_BY_MODE = new EnumStringPreference<>("notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values());
+	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>("tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference("animate_my_location", true).makeProfile().cache();
 
@@ -3936,9 +3937,6 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> FAVORITES_TAB =
 			new IntPreference("FAVORITES_TAB", 0).makeGlobal().cache();
 
-	public final CommonPreference<Boolean> SORT_TRACKS_BY_NAME
-			= new BooleanPreference("sort_tracks_by_name", true).makeGlobal().cache();
-
 	public final CommonPreference<Integer> OSMAND_THEME =
 			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME) {
 				@Override
@@ -4102,6 +4100,38 @@ public class OsmandSettings {
 
 		public boolean isByDate() {
 			return this == BY_DATE;
+		}
+	}
+
+	public enum TracksSortByMode {
+		BY_DATE(R.string.sort_last_modified, R.drawable.ic_action_time_start),
+		BY_NAME_ASCENDING(R.string.sort_name_ascending, R.drawable.ic_action_sort_by_name_ascending),
+		BY_NAME_DESCENDING(R.string.sort_name_descending, R.drawable.ic_action_sort_by_name_descending);
+
+		private final int iconId;
+		private final int nameId;
+
+		TracksSortByMode(int nameId, int iconId) {
+			this.nameId = nameId;
+			this.iconId = iconId;
+		}
+
+		public boolean isByName() {
+			return this == BY_NAME_ASCENDING || this == BY_NAME_DESCENDING;
+		}
+
+		public boolean isByDate() {
+			return this == BY_DATE;
+		}
+
+		@StringRes
+		public int getNameId() {
+			return nameId;
+		}
+
+		@DrawableRes
+		public int getIconId() {
+			return iconId;
 		}
 	}
 

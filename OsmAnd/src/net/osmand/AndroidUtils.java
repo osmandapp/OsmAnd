@@ -55,6 +55,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -160,6 +161,10 @@ public class AndroidUtils {
 			}
 		}
 		return src;
+	}
+
+	public static String addColon(OsmandApplication app, @StringRes int stringRes) {
+		return app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(stringRes), "").trim();
 	}
 
 	public static Uri getUriForFile(Context context, File file) {

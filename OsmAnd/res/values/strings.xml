@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="sort_name_ascending">Name: A – Z</string>
+    <string name="sort_name_descending">Name: Z – A</string>
+    <string name="sort_last_modified">Last modified</string>
     <string name="release_3_8">
     • Updated "Plan a route" function: allows using different navigation types per segment and the inclusion of tracks\n\n
     • New "Appearance" menu for tracks: select color, thickness, display direction arrows, start/finish icons\n\n

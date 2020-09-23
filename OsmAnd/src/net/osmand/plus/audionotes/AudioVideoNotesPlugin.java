@@ -1430,22 +1430,24 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		getMapActivity().getMyApplication().runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				if (!autofocus) {
-					cam.takePicture(null, null, new JpegPhotoHandler());
-				} else {
-					cam.autoFocus(new Camera.AutoFocusCallback() {
-						@Override
-						public void onAutoFocus(boolean success, Camera camera) {
-							try {
-								cam.takePicture(null, null, new JpegPhotoHandler());
-							} catch (Exception e) {
-								logErr(e);
-								closeRecordingMenu();
-								closeCamera();
-								finishRecording();
+				if (cam != null) {
+					if (!autofocus) {
+						cam.takePicture(null, null, new JpegPhotoHandler());
+					} else {
+						cam.autoFocus(new Camera.AutoFocusCallback() {
+							@Override
+							public void onAutoFocus(boolean success, Camera camera) {
+								try {
+									cam.takePicture(null, null, new JpegPhotoHandler());
+								} catch (Exception e) {
+									logErr(e);
+									closeRecordingMenu();
+									closeCamera();
+									finishRecording();
+								}
 							}
-						}
-					});
+						});
+					}
 				}
 			}
 		}, 200);

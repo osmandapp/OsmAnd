@@ -25,7 +25,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -154,7 +153,7 @@ public class CurrentPositionHelper {
 
 	// single synchronized method
 	private synchronized void processGeocoding(@NonNull Location loc,
-											   @Nullable ResultMatcher<GeocodingResult> geoCoding,
+											   @Nullable final ResultMatcher<GeocodingResult> geoCoding,
 											   boolean storeFound,
 											   boolean allowEmptyNames,
 											   @Nullable final ResultMatcher<RouteDataObject> result,
@@ -164,6 +163,21 @@ public class CurrentPositionHelper {
 											   boolean cancelPreviousSearch) {
 
 		if (cancelPreviousSearch && request != requestNumber.get()) {
+			if (geoCoding != null) {
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						geoCoding.publish(null);
+					}
+				});
+			} else if (result != null) {
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						result.publish(null);
+					}
+				});
+			}
 			return;
 		}
 
@@ -172,9 +186,18 @@ public class CurrentPositionHelper {
 		if (storeFound) {
 			lastAskedLocation = loc;
 			lastFound = gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad();
-		} else if(geoCoding != null) {
-			justifyResult(gr, geoCoding);
-		} else if(result != null) {
+		} else if (geoCoding != null) {
+			try {
+				justifyResult(gr, geoCoding);
+			} catch (Exception e) {
+				app.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							geoCoding.publish(null);
+						}
+					});
+			}
+		} else if (result != null) {
 			app.runInUIThread(new Runnable() {
 				@Override
 				public void run() {

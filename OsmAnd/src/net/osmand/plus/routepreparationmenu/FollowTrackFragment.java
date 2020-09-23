@@ -63,6 +63,7 @@ import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -185,8 +186,18 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 				setupTracksCard();
 			} else {
-				File file = new File(gpxFile.path);
-				GPXInfo gpxInfo = new GPXInfo(gpxFile.path, file.lastModified(), file.length());
+				String fileName = null;
+				File file = null;
+				if (!Algorithms.isEmpty(gpxFile.path)) {
+					file = new File(gpxFile.path);
+					fileName = file.getName();
+				} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
+					fileName = gpxFile.tracks.get(0).name;
+				}
+				if (Algorithms.isEmpty(fileName)) {
+					fileName = app.getString(R.string.shared_string_gpx_track);
+				}
+				GPXInfo gpxInfo = new GPXInfo(fileName, file != null ? file.lastModified() : 0, file != null ? file.length() : 0);
 				TrackEditCard importTrackCard = new TrackEditCard(mapActivity, gpxInfo);
 				importTrackCard.setListener(this);
 				cardsContainer.addView(importTrackCard.build(mapActivity));
@@ -207,7 +218,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 						reverseTrackCard.setListener(this);
 						cardsContainer.addView(reverseTrackCard.build(mapActivity));
 					}
-					if (!gpxFile.hasRtePt()) {
+					if (!gpxFile.hasRtePt() && !gpxFile.hasRoute()) {
 						cardsContainer.addView(buildDividerView(cardsContainer, true));
 
 						AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
@@ -349,7 +360,9 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		exitTrackAppearanceMode();
+		if (!editingTrack) {
+			exitTrackAppearanceMode();
+		}
 		onDismiss();
 	}
 
@@ -542,7 +555,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (useAppMode) {
 				editingContext.setAppMode(app.getRoutingHelper().getAppMode());
 			}
-			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true, true);
+			MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), editingContext, true);
 		}
 	}
 

@@ -257,7 +257,7 @@
     <string name="search_offline_clear_search">Новий пошук</string>
     <string name="map_text_size_descr">Виберіть розмір шрифту для позначень на мапі:</string>
     <string name="map_text_size">Розмір тексту</string>
-    <string name="trace_rendering">Налагоджувальні відомості про відмалювання</string>
+    <string name="trace_rendering">Відомості для зневадження про відмальовування</string>
     <string name="trace_rendering_descr">Відображає плідність відмалювання.</string>
     <string name="installing_new_resources">Розпаковуються нові дані…</string>
     <string name="internet_connection_required_for_online_route">Вибрано мережеву службу навігації, але ви не підключені до Інтернету.</string>
@@ -265,7 +265,7 @@
     <string name="tts_language_not_supported">Вибрана мова не підтримується встановленим двигуном Android TTS (текстовим мовленням), замість цього буде використана його попередньо налаштована мова TTS. Шукаєте інший двигун TTS\?</string>
     <string name="tts_missing_language_data_title">Дані відсутні</string>
     <string name="tts_missing_language_data">Перейти в магазин для завантаження обраної мови?</string>
-    <string name="gpx_option_reverse_route">Зворотній напрямок GPX</string>
+    <string name="gpx_option_reverse_route">Зворотний напрямок треку</string>
     <string name="gpx_option_destination_point">Використовувати поточний пункт призначення</string>
     <string name="gpx_option_from_start_point">Пройдіть по усьому треку</string>
     <string name="switch_to_vector_map_to_see">Для цього регіону доступні автономні векторні мапи
@@ -1031,7 +1031,7 @@
     <string name="clear_intermediate_points">Очистити проміжні точки</string>
     <string name="new_directions_point_dialog">Ви вже задали проміжні точки.</string>
     <string name="context_menu_item_directions_to">Маршрут до</string>
-    <string name="context_menu_item_directions_from">Напрямки від</string>
+    <string name="context_menu_item_directions_from">Напрямок від</string>
     <string name="route_to">До:</string>
     <string name="speak_title">Оголошувати…</string>
     <string name="speak_descr">Налаштувати оголошення назв вулиць, дорожніх обмежень (вимушені зупинки, долішні (лежачі) поліцейські), попередження про камери контролю швидкості, обмеження швидкості.</string>
@@ -1687,7 +1687,7 @@
     <string name="shared_string_trip_recording">Запис подорожі</string>
     <string name="shared_string_navigation">Навігація</string>
     <string name="osmand_running_in_background">Працює у фоновому режимі</string>
-    <string name="favourites_edit_dialog_title">Відомості по закладці</string>
+    <string name="favourites_edit_dialog_title">Відомості про закладки</string>
     <string name="simulate_your_location_stop_descr">Зупинити симуляцію Вашої позиції.</string>
     <string name="looking_up_address">Пошук адреси</string>
     <string name="av_locations">Місця</string>
@@ -3846,7 +3846,7 @@
     <string name="quick_action_add_gpx">Додати шляхову точку треку</string>
     <string name="map_widget_monitoring">Записування подорожі</string>
     <string name="marker_save_as_track">Зберегти як файл треку</string>
-    <string name="follow_track">Стежити за треком</string>
+    <string name="follow_track">Навігація за треком</string>
     <string name="follow_track_descr">Виберіть файл треку для перегляду</string>
     <string name="import_track_descr">Виберіть файл треку для перегляду або імпортуйте його з пристрою.</string>
     <string name="select_another_track">Обрати інший трек</string>
@@ -3887,7 +3887,7 @@
 \n
 \n• Покращено оглядовість велосипедних вузлів
 \n
-\n• На треки тепер можна натискати, є контекстне меню з основною інформацією.
+\n• На треки тепер можна натискати, є контекстне меню з основними подробицями.
 \n
 \n• Вдосконалено алгоритми пошуку
 \n

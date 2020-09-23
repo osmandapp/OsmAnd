@@ -937,7 +937,7 @@
     <string name="basemap_missing">Düşük yakınlaştırma seviyelerinde tüm dünyayı kapsayan bir genel bakış elde etmek için ana dünya haritasını indirin.</string>
     <string name="local_index_no_items_to_do">%1$s\'a öğe yok</string>
     <string name="tts_language_not_supported">Seçilen dil yüklü Android TTS (metinden konuşmaya) motoru tarafından desteklenmemektedir, bunun yerine önceden ayarlanmış TTS dili kullanılacak. Mağazada başka bir TTS motoru aramak ister misiniz\?</string>
-    <string name="gpx_option_reverse_route">GPX yönünü tersine çevir</string>
+    <string name="gpx_option_reverse_route">İzlenen yol yönünü tersine çevir</string>
     <string name="switch_to_vector_map_to_see">Bu konum için çevrim dışı vektör haritası. 
 \n\t
 \n\tKullanmak için \'Menü\' → \'Harita Katmanları\' → \'Harita Kaynağı…\' → \'Çevrim dışı vektör haritalar\'.</string>
@@ -1440,7 +1440,7 @@
     <string name="closing_changeset">Değişiklik listesi kapatılıyor…</string>
     <string name="commiting_node">Düğüm işleniyor …</string>
     <string name="converting_names">Yerel/İngilizce isimler dönüştürülüyor…</string>
-    <string name="previous_run_crashed">Son Osmand çalıştırmak çöktü. Log dosya {0} olduğunu. Sorunu bildirmek ve günlük dosyasını ekleyiniz.</string>
+    <string name="previous_run_crashed">Son OsmAnd çalıştırması çöktü. Günlük kaydı dosyası {0} konumunda. Lütfen sorunu bildirin ve günlük kaydı dosyasını ekleyin.</string>
     <string name="osm_settings_descr">OSM gönderimleri için gereken OpenStreetMap.org (OSM) ayarlarını belirtin.</string>
     <string name="reload_tile">Sayfaya kiremit</string>
     <string name="opening_hours_not_supported">Çalışma saatleri biçimi değiştirilemez.</string>
@@ -3827,4 +3827,36 @@
     <string name="only_selected_segment_recalc">Sadece seçili bölüm, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
     <string name="all_next_segments_will_be_recalc">Sonraki tüm bölümler, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
     <string name="all_previous_segments_will_be_recalc">Önceki tüm bölümler, seçilen profil kullanılarak yeniden hesaplanacaktır.</string>
+    <string name="shared_string_gpx_route">Yol güzergahı</string>
+    <string name="follow_track">Yolu takip et</string>
+    <string name="follow_track_descr">Takip edilecek yol dosyasını seçin</string>
+    <string name="import_track_descr">Takip etmek için yol dosyasını seçin veya cihazınızdan içe aktarın.</string>
+    <string name="select_another_track">Başka bir yol seç</string>
+    <string name="navigate_to_track_descr">Konumumdan yola git</string>
+    <string name="pass_whole_track_descr">Gezinilecek yolun noktası</string>
+    <string name="start_of_the_track">İzlenen yolun başlangıcı</string>
+    <string name="attach_to_the_roads">Yollara ekle</string>
+    <string name="plan_route_trim_before">Öncesinde kırp</string>
+    <string name="plan_route_trim_after">Sonrasında kırp</string>
+    <string name="plan_route_change_route_type_before">Öncesinde güzergah türünü değiştir</string>
+    <string name="plan_route_change_route_type_after">Sonrasında güzergah türünü değiştir</string>
+    <string name="simplified_track">Basitleştirilmiş yol</string>
+    <string name="release_3_8">• Güzergah planlama işlevi güncellendi: her bölüm için farklı navigasyon türlerinin kullanılmasına ve izlenen yolların dahil edilmesine izin veriliyor
+\n
+\n • İzlenen yollar için yeni görünüm menüsü: renk ve kalınlık seçimi, yön oklarının gösterilmesi, başlangıç/bitiş simgeleri
+\n
+\n • Bisiklet düğümlerinin görünürlüğü iyileştirildi.
+\n
+\n • İzlenen yollar artık dokunulabilir, temel bilgiler bulunan içerik menüsüne sahip.
+\n
+\n • Arama algoritmaları iyileştirildi
+\n
+\n • Navigasyonda yol izleme seçenekleri iyileştirildi
+\n
+\n • Profil ayarlarının içe/dışa aktarımıyla ilgili sorunlar düzeltildi
+\n
+\n</string>
+    <string name="sort_last_modified">Son değiştirme</string>
+    <string name="sort_name_descending">İsim: Z – A</string>
+    <string name="sort_name_ascending">İsim: A – Z</string>
 </resources>

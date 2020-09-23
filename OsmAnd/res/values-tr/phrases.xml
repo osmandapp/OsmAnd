@@ -2364,7 +2364,7 @@
     <string name="poi_site_type_megalith">Megalit</string>
     <string name="poi_fire_hydrant_pressure_filter">Basınç</string>
     <string name="poi_drinking_water_refill_no">İçme suyu doldurma: hayır</string>
-    <string name="poi_drinking_water_refill_yes">İçme suyu doldurma: evet</string>
+    <string name="poi_drinking_water_refill_yes">Evet</string>
     <string name="poi_drinking_water_refill_network">İçme suyu doldurma şebekesi</string>
     <string name="poi_material_composite">Malzeme: kompozit</string>
     <string name="poi_material_marble">Malzeme: mermer</string>
@@ -2398,4 +2398,22 @@
     <string name="poi_scooter_yes">Mobilet: evet</string>
     <string name="poi_motorcycle_type_scooter">Mobilet</string>
     <string name="poi_site_type_city">Şehir</string>
+    <string name="poi_site_type_petroglyph">Petroglif</string>
+    <string name="poi_site_type_necropolis">Nekropol</string>
+    <string name="poi_site_type_hut_circle">Yuvarlak kulübe kalıntısı</string>
+    <string name="poi_site_type_settlement">Yerleşim yeri</string>
+    <string name="poi_site_type_fortification">İstihkam</string>
+    <string name="poi_recycling_small_electrical_appliances">Küçük elektrikli aletler</string>
+    <string name="poi_departures_board">Kalkış bilgileri panosu</string>
+    <string name="poi_drinking_water_refill">İçme suyu doldurma</string>
+    <string name="poi_fortification_type_ring_ditch">İstihkam türü: dairesel hendek</string>
+    <string name="poi_fortification_type_sconce">İstihkam türü: küçük set</string>
+    <string name="poi_fortification_type_limes">İstihkam türü: limes</string>
+    <string name="poi_fortification_type_hill_fort">İstihkam türü: tepe kalesi</string>
+    <string name="poi_megalith_type_passage_grave">Megalit türü: geçit mezar</string>
+    <string name="poi_megalith_type_stone_circle">Megalit türü: taş çember</string>
+    <string name="poi_megalith_type_nuraghe">Megalit türü: nuraghe</string>
+    <string name="poi_megalith_type_dolmen">Megalit türü: dolmen</string>
+    <string name="poi_megalith_type_menhir">Megalit türü: menhir</string>
+    <string name="poi_site_type_earthwork">Toprak işi</string>
 </resources>

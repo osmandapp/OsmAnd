@@ -1129,7 +1129,7 @@
     <string name="tts_language_not_supported">El idioma elegido es incompatible con el motor TTS (texto a voz) instalado en Android, se usará el idioma TTS predefinido. ¿Buscar otro motor TTS en la tienda de aplicaciones\?</string>
     <string name="tts_missing_language_data_title">Faltan datos</string>
     <string name="tts_missing_language_data">¿Ir a la tienda de aplicaciones para descargar el idioma elegido?</string>
-    <string name="gpx_option_reverse_route">Invertir la dirección GPX</string>
+    <string name="gpx_option_reverse_route">Invertir la dirección de la traza</string>
     <string name="gpx_option_destination_point">Usar destino actual</string>
     <string name="gpx_option_from_start_point">Pasar a lo largo de la traza completa</string>
     <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta ubicación. 
@@ -3904,4 +3904,7 @@
 \n • Se han solucionado los problemas de la importación y exportación en los ajustes de los perfiles
 \n
 \n</string>
+    <string name="sort_last_modified">Último modificado</string>
+    <string name="sort_name_descending">Nombre: Z – A</string>
+    <string name="sort_name_ascending">Nombre: A – Z</string>
 </resources>
