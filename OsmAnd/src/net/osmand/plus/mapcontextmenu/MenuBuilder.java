@@ -53,6 +53,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.POIMapLayer;
@@ -992,18 +993,10 @@ public class MenuBuilder {
 		if (showNearestWiki && latLon != null) {
 			QuadRect rect = MapUtils.calculateLatLonBbox(
 					latLon.getLatitude(), latLon.getLongitude(), 250);
-			nearestWiki = app.getResourceManager().searchAmenities(
-					new BinaryMapIndexReader.SearchPoiTypeFilter() {
-						@Override
-						public boolean accept(PoiCategory type, String subcategory) {
-							return type != null && type.isWiki();
-						}
+			PoiUIFilter wikiPoiFilter = app.getPoiFilters().getTopWikiPoiFilter();
 
-						@Override
-						public boolean isEmpty() {
-							return false;
-						}
-					}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+			nearestWiki = getAmenities(rect, wikiPoiFilter);
+
 			Collections.sort(nearestWiki, new Comparator<Amenity>() {
 
 				@Override
@@ -1016,8 +1009,7 @@ public class MenuBuilder {
 			Long id = objectId;
 			List<Amenity> wikiList = new ArrayList<>();
 			for (Amenity wiki : nearestWiki) {
-				String lng = wiki.getContentLanguage("content", preferredMapAppLang, "en");
-				if (wiki.getId().equals(id) || (!lng.equals("en") && !lng.equals(preferredMapAppLang))) {
+				if (wiki.getId().equals(id)) {
 					wikiList.add(wiki);
 				}
 			}
@@ -1025,6 +1017,11 @@ public class MenuBuilder {
 			return true;
 		}
 		return false;
+	}
+
+	private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter wikiPoiFilter) {
+		return wikiPoiFilter.searchAmenities(rect.top, rect.left,
+						rect.bottom, rect.right, -1, null);
 	}
 
 	@SuppressWarnings("unchecked")
