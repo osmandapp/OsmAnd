@@ -3899,4 +3899,7 @@
 \n • Исправлены проблемы с импортом/экспортом настроек профиля
 \n
 \n</string>
+    <string name="sort_last_modified">Последнее изменение</string>
+    <string name="sort_name_descending">Имя: Я - А</string>
+    <string name="sort_name_ascending">Имя: А - Я</string>
 </resources>
