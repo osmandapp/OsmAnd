@@ -434,7 +434,7 @@
     <string name="unknown_location">الموقع لم يحدد.</string>
     <string name="modify_transparency">تعديل الشفافية (0 - شفاف ، 255 - معتم )</string>
     <string name="confirm_interrupt_download">إلغاء التحميل؟</string>
-    <string name="first_time_msg">نشكرك على استخدام أوسماند. الكثير من مميزات هذا البرنامج بحاجة إلى بعض البيانات الإقليمية التي يمكنك تحميلها عبر \'إعدادات\'→ \'إدارة البيانات\'. بعد ذلك سوف تكون قادرا على عرض الخرائط، و تحديد العناوين ، والبحث عن النقاط المهمة ، والعثور على وسائل النقل العام .</string>
+    <string name="first_time_msg">نشكرك على استخدام أوسماند. الكثير من مميزات هذا البرنامج بحاجة إلى بعض البيانات الإقليمية التي يمكنك تحميلها عبر \'إعدادات\'← \'إدارة البيانات\'. بعد ذلك سوف تكون قادرا على عرض الخرائط، و تحديد العناوين ، والبحث عن النقاط المهمة ، والعثور على وسائل النقل العام .</string>
     <string name="basemap_was_selected_to_download">خريطة العالم العامة مطلوبة لعمل التطبيق بشكل سليم، وقد حددت للتحميل.</string>
     <string name="select_index_file_to_download">لم يتم العثور على شيء. إذا لم تتمكن من إيجاد منطقتك، يمكنك صنعها بنفسك (انظر http://osmand.net ).</string>
     <string name="auto_zoom_close">إلى مدى قريب \"١٠٠م\"</string>
@@ -721,9 +721,9 @@
     <string name="gpx_option_reverse_route">عكس اتجاه المسار</string>
     <string name="gpx_option_destination_point">استخدم الوجهة الحالية</string>
     <string name="gpx_option_from_start_point">يمر على طول المسار باكمله</string>
-    <string name="switch_to_vector_map_to_see">خريطة التنقل المتوفرة حاليا لهذا الموقع. 
-\n 
-\nلتفعليها \'القائمة\' → \'تكوين الخريطة\' → \'مصدر الخريطة ...\' → \'خرائط متجهة بدون اتصال\'.</string>
+    <string name="switch_to_vector_map_to_see">خريطة التنقل متوفرة حالياً لهذا الموقع.
+\n
+\nلتفعليها \'القائمة\' ← \'ضبط الخريطة\' ← \'مصدر الخريطة\' ← \'الخريطة المحملة\'.</string>
     <string name="choose_audio_stream">مصدر التوجيه الصوتي</string>
     <string name="choose_audio_stream_descr">اختيار قناة لتشغيل التوجيه الصوتي.</string>
     <string name="voice_stream_voice_call">صوت المكالمة الهاتفية ( كما يحاول قطع ستريو بلوتوث السيارة )</string>
@@ -972,7 +972,7 @@
     <string name="shared_string_my_favorites">المفضلة</string>
     <string name="shared_string_tracks">المسارات</string>
     <string name="rendering_category_hide">إخفاء</string>
-    <string name="configure_map">إعداد الخريطة</string>
+    <string name="configure_map">ضبط الخريطة</string>
     <string name="layer_map">مصدر الخريطة…</string>
     <string name="map_source">مصدر الخريطة</string>
     <string name="layer_amenity_label">عرض أسماء المفضلة</string>
@@ -1905,7 +1905,7 @@
     <string name="loading_builds_failed">فشل في الحصول على قائمة إصدارات التطبيق</string>
     <string name="loading_builds">عملية تحميل إصدارات التطبيق جارية …</string>
     <string name="select_build_to_install">حدد إصدار التطبيق للتثبيت</string>
-    <string name="voice_is_not_available_msg">التوجيهات الصوتية غير متوفرة، يرجى الذهاب إلى \"إعدادات\" ← \"عامة\" ← \"التوجيه الصوتي\" وحدد أو حمل حزمة صوت.</string>
+    <string name="voice_is_not_available_msg">التوجيهات الصوتية غير متوفرة، يرجى الذهاب إلى \"إدارة الخرائط\" ← \"تحميلات متاحة\" ← \"التوجيه الصوتي\" وحدد أو حمل حزمة صوت.</string>
     <string name="daynight_descr">اختيار قاعدة تحويل وضع نهار/ ليل.</string>
     <string name="download_files_question">تحميل {0} ملف ({1} مب)؟</string>
     <string name="items_were_selected">{0} عنصر محدد</string>
@@ -2131,7 +2131,7 @@
     <string name="quick_action_poi_hide">إخفاء %1$s</string>
     <string name="quick_action_add_category">إضافة فئة</string>
     <string name="quick_action_add_create_items">إنشاء عناصر</string>
-    <string name="quick_action_add_configure_map">إعداد الخريطة</string>
+    <string name="quick_action_add_configure_map">ضبط الخريطة</string>
     <string name="quick_action_add_navigation">الملاحة</string>
     <string name="quick_action_bug_message">رسالة</string>
     <string name="quick_action_category_descr">حدد الفئة لحفظ المفضلة فيها:</string>
@@ -2753,7 +2753,7 @@
     <string name="purchase_dialog_subtitle">اختر العنصر المناسب</string>
     <string name="shared_string_dont">لا تفعل</string>
     <string name="shared_string_do">افعل</string>
-    <string name="wikivoyage_download_pics_descr">صور المقالة يمكن تحمل للاستخدام بدون اتصال. 
+    <string name="wikivoyage_download_pics_descr">صور المقالة يمكن تحملها للاستخدام بدون اتصال.
 \nدائماً متوفرة في \'اكتشف\'←\'خيارات\'.</string>
     <string name="online_webpage_warning">الصفحة متاحة على الإنترنت فقط. فتح في متصفح الويب؟</string>
     <string name="images_cache">الصور المؤقتة</string>
@@ -3044,20 +3044,20 @@
     <string name="routing_attr_prefer_unpaved_description">تفضيل الطرق الغير معبدة.</string>
     <string name="update_all_maps">تحديث كل الخرائط</string>
     <string name="update_all_maps_q">هل أنت متأكد من رغبتك بتحديث (%1$d) خريطة؟</string>
-    <string name="release_3_5">• تحديث التطبيق وإعدادات الأوضاع: يتم ترتيب الإعدادات الآن حسب النوع. يمكن تخصيص كل وضع بشكل منفصل. 
-\n 
-\n • نافذة جديدة لتنزيل الخريطة المقترحة أثناء تصفح الخرائط 
-\n 
-\n • إصلاحات للنمط الليلي 
-\n 
-\n • إصلاح العديد من مشاكل التوجيه في جميع أنحاء العالم 
-\n 
-\n • خريطة الأساس المحدثة مع شبكة طرق أكثر تفصيلا 
-\n 
-\n • تحديث المناطق التي غمرتها الفيضانات في جميع أنحاء العالم 
-\n 
-\n • توجيه التزلج: إضافة ملف تعريف الارتفاع وتعقيد المسار إلى تفاصيل المسار 
-\n 
+    <string name="release_3_5">• تحديث التطبيق وإعدادات الأوضاع: يتم ترتيب الإعدادات الآن حسب النوع. يمكن تخصيص كل وضع بشكل منفصل.
+\n
+\n • نافذة جديدة لتنزيل الخريطة المقترحة أثناء تصفح الخرائط
+\n
+\n • إصلاحات للنمط الليلي
+\n
+\n • إصلاح العديد من مشاكل التوجيه في جميع أنحاء العالم
+\n
+\n • خريطة الأساس المحدثة مع شبكة طرق أكثر تفصيلا
+\n
+\n • تحديث المناطق التي غمرتها الفيضانات في جميع أنحاء العالم
+\n
+\n • توجيه التزلج: إضافة وضع الارتفاع وتعقيد المسار إلى تفاصيل المسار
+\n
 \n • إصلاحات أخرى
 \n
 \n</string>
@@ -3075,7 +3075,7 @@
     <string name="quick_action_hillshade_hide">إخفاء التضاريس</string>
     <string name="quick_action_show_hide_hillshade">إظهار/إخفاء التضاريس</string>
     <string name="tts_initialization_error">لا يمكن بدء تشغيل أداة تحويل النص إلى كلام.</string>
-    <string name="export_profile">تصدير الملف الشخصي</string>
+    <string name="export_profile">تصدير الوضع</string>
     <string name="exported_osmand_profile">وضع أوسماند: %1$s</string>
     <string name="overwrite_profile_q">الوضع \'%1$s\' موجود بالفعل، هل تريد استبداله؟</string>
     <string name="export_profile_failed">لا يمكن تصدير الوضع.</string>
@@ -3143,7 +3143,7 @@
     <string name="manage_profiles">إدارة أوضاع التطبيق …</string>
     <string name="osmand_settings_descr">لكامل التطبيق</string>
     <string name="osmand_settings">الإعدادات</string>
-    <string name="copy_from_other_profile">نسخة من ملف تعريف آخر</string>
+    <string name="copy_from_other_profile">نسخ من وضع آخر</string>
     <string name="turn_screen_on">قم بتشغيل الشاشة</string>
     <string name="map_during_navigation_info">خريطة أثناء التنقل</string>
     <string name="map_during_navigation">خريطة أثناء التنقل</string>
@@ -3191,7 +3191,7 @@
     <string name="default_speed_setting_title">السرعة الافتراضية</string>
     <string name="default_speed_setting_descr">تغيير إعدادات السرعة الافتراضية</string>
     <string name="minmax_speed_dialog_title">تعيين حد السرعة الأدنى/الأعلى</string>
-    <string name="new_profile">ملف تعريف جديد</string>
+    <string name="new_profile">وضع جديد</string>
     <string name="shared_string_crash">خروج مفاجئ</string>
     <string name="last_launch_crashed">فشل العملية الأخيرة لأوسماند. الرجاء مساعدتنا في التحسين من خلال مشاركة رسالة الخطأ.</string>
     <string name="release_3_4">• أوضاع التطبيق: قم بإنشاء وضع مخصص لاحتياجاتك الخاصة ، باستخدام رمز ولون مخصصين 
@@ -3260,9 +3260,9 @@
     <string name="coordinates_widget">عرض الإحداثيات</string>
     <string name="shared_string_privacy_policy">سياسة الخصوصية</string>
     <string name="help_us_make_osmand_better">ساعدنا في جعل أوسماند أفضل</string>
-    <string name="make_osmand_better_descr">السماح ل OsmAnd بجمع ومعالجة بيانات استخدام التطبيق المجهول. لا يتم جمع بيانات حول موقعك أو المواقع التي تعرضها على الخريطة. 
-\n 
-\nقم بإعدادها في أي وقت لاحق في \'الإعدادات\' → \'الخصوصية والأمان\'.</string>
+    <string name="make_osmand_better_descr">السماح ل OsmAnd بجمع ومعالجة بيانات استخدام التطبيق المجهول. لا يتم جمع بيانات حول موقعك أو المواقع التي تعرضها على الخريطة.
+\n
+\nقم بإعدادها في أي وقت لاحق في \'الإعدادات\' ← \'الخصوصية والأمان\'.</string>
     <string name="choose_data_to_share">اختر نوع البيانات التي تريد مشاركتها:</string>
     <string name="downloaded_maps">الخرائط التي تم تنزيلها</string>
     <string name="visited_screens">الشاشات المزارة</string>
@@ -3301,7 +3301,7 @@
     <string name="profile_alert_cant_delete_base">لايمكن حذف الأوضاع الأساسية</string>
     <string name="profile_alert_need_save_title">حفظ التغييرات</string>
     <string name="profile_alert_need_save_msg">احفظ تغييرات الوضع أولاً</string>
-    <string name="profile_alert_delete_title">حذف الملف الشخصي</string>
+    <string name="profile_alert_delete_title">حذف الوضع</string>
     <string name="profile_alert_delete_msg">هل تريد حذف الوضع \"%s\"</string>
     <string name="select_base_profile_dialog_title">حدد وضع أساسي</string>
     <string name="select_base_profile_dialog_message">إسناد الوضع المخصص الخاص بك إلى أحد أوضاع التطبيق الافتراضية ، يحدد الإعداد الأساسي مثل الرؤية الافتراضية لعناصر واجهة المستخدم ووحدات السرعة والمسافة. وهذه هي أوضاع التطبيق الافتراضية ، إلى جانب أمثلة لأوضاع مخصصة يمكن تمديدها إلى:</string>
@@ -3384,7 +3384,7 @@
     <string name="profile_appearance">مظهر الوضع</string>
     <string name="choose_icon_color_name">اختر الايقونة واللون والاسم</string>
     <string name="reorder_profiles">تحرير قائمة الأوضاع</string>
-    <string name="selected_profile">الملف الشخصي المحدد</string>
+    <string name="selected_profile">الوضع المحدد</string>
     <string name="reset_confirmation_descr">بالضغط على %1$s، ستفقد كل تغييراتك.</string>
     <string name="reset_all_profile_settings_descr">سيتم إعادة ضبط جميع إعدادات الوضع إلى الحالة الافتراضية بعد التثبيت.</string>
     <string name="reset_all_profile_settings">استعادة الضبط الافتراضي؟</string>
@@ -3506,7 +3506,7 @@
     <string name="no_recalculation_setting">تعطيل إعادة الحساب</string>
     <string name="route_recalculation_dist_title">الحد الأدنى من المسافة لإعادة حساب المسار</string>
     <string name="route_recalculation_dist_descr">سيتم إعادة حساب المسار إذا كانت المسافة إلى المسار أطول من المعلمة المحددة</string>
-    <string name="profile_type_custom_string">ملف تعريف مخصص</string>
+    <string name="profile_type_custom_string">وضع مخصص</string>
     <string name="shared_string_angle_param">الزاوية: %s°</string>
     <string name="shared_string_angle">زاوية</string>
     <string name="recalc_angle_dialog_descr">سيتم عرض جزء مستقيم إضافي بين موقعي والمسار المحسوب حتى يتم إعادة حساب المسار</string>
@@ -3533,9 +3533,9 @@
     <string name="shared_string_rendering_style">أسلوب التقديم</string>
     <string name="import_rendering_file">استيراد ملف الrendering</string>
     <string name="restore_all_profile_settings_descr">ستتم استعادة كافة إعدادات الوضع إلى حالتها الأصلية بعد إنشاء/استيراد هذا الوضع.</string>
-    <string name="restore_all_profile_settings">استعادة جميع إعدادات الملف الشخصي؟</string>
-    <string name="saving_new_profile">حفظ ملف تعريف جديد</string>
-    <string name="profile_backup_failed">لا يمكن عمل نسخة احتياطية من الملف الشخصي.</string>
+    <string name="restore_all_profile_settings">استعادة جميع إعدادات الوضع؟</string>
+    <string name="saving_new_profile">حفظ الوضع الجديد</string>
+    <string name="profile_backup_failed">لا يمكن عمل نسخة احتياطية لهذا الوضع.</string>
     <string name="clear_recorded_data_warning">هل أنت متأكد من أنك تريد مسح البيانات المسجلة؟</string>
     <string name="importing_from">استيراد البيانات من %1$s</string>
     <string name="shared_string_importing">استيراد</string>
@@ -3579,7 +3579,7 @@
     <string name="app_mode_ski_snowmobile">الثلج</string>
     <string name="custom_osmand_plugin">ملحق مخصص</string>
     <string name="replace_point_descr">استبدل نقطة أخرى بالحالية.</string>
-    <string name="changes_applied_to_profile">تم تطبيق التغييرات على %1$s ملف تعريف.</string>
+    <string name="changes_applied_to_profile">تم تطبيق التغييرات على %1$s وضع.</string>
     <string name="settings_item_read_error">لايمكن قراءة %1$s.</string>
     <string name="settings_item_write_error">لايمكن كتابة %1$s.</string>
     <string name="settings_item_import_error">تعذر استيراد %1$s.</string>
@@ -3657,7 +3657,7 @@
     <string name="subscription_osmandlive_item">اشتراك أوسماند لايف</string>
     <string name="osmand_purchases_item">مشتريات أوسماند</string>
     <string name="legend_item_description">دليل رموز الخريطة.</string>
-    <string name="navigation_profiles_item">الملفات الشخصية للملاحة</string>
+    <string name="navigation_profiles_item">أوضاع الملاحة</string>
     <string name="release_3_7">• خرائط جديدة للمنحدرات غير المتصلة بالإنترنت
 \n
 \n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال
@@ -3689,8 +3689,8 @@
     <string name="reset_deafult_order">استعادة ترتيب العناصر الافتراضية</string>
     <string name="back_to_editing">عودة إلى التحرير</string>
     <string name="quick_action_switch_profile_descr">سيتم تبديل زر الإجراء التسجيل بين التشكيلات الجانبية المحددة.</string>
-    <string name="shared_string_add_profile">إضافة ملف تعريف</string>
-    <string name="change_application_profile">تغيير ملف تعريف التطبيق</string>
+    <string name="shared_string_add_profile">إضافة وضع</string>
+    <string name="change_application_profile">تغيير الوضع</string>
     <string name="profiles_for_action_not_found">لم يتم العثور على الأوضاع المحددة لهذا الإجراء.</string>
     <string name="index_item_world_basemap_detailed">خريطة عامة للعالم (تفصيلية)</string>
     <string name="unsupported_type_error">نوع غير معتمد</string>
@@ -3809,7 +3809,7 @@
     <string name="plan_route_select_track_file_for_open">حدد المسار للفتح.</string>
     <string name="shared_string_done">تم</string>
     <string name="overwrite_track">الكتابة فوق المسار</string>
-    <string name="navigation_profile">ملف تعريف التنقل</string>
+    <string name="navigation_profile">وضع التنقل</string>
     <string name="route_between_points_add_track_desc">حدد ملف المسار الذي سيتم إضافة مقطع جديد إليه.</string>
     <string name="save_as_new_track">حفظ كمسار جديد</string>
     <string name="reverse_route">عكس الطريق</string>
@@ -3818,7 +3818,7 @@
     <string name="route_between_points_desc">حدد كيفية توصيل النقاط، بخط مستقيم، أو حساب مسار بينها على النحو المحدد أدناه.</string>
     <string name="whole_track">مسار كامل</string>
     <string name="next_segment">المقطع التالي</string>
-    <string name="route_between_points_warning_desc">بعد ذلك ، ألقط مسارك بأقرب طريق مسموح به باستخدام أحد ملفات تعريف التنقل الخاصة بك لاستخدام هذا الخيار.</string>
+    <string name="route_between_points_warning_desc">بعد ذلك ، ألقط مسارك بأقرب طريق مسموح به باستخدام أحد أوضاع التنقل الخاصة بك لاستخدام هذا الخيار.</string>
     <string name="threshold_distance">بداية المسافة</string>
     <string name="street_level_imagery">صور للشارع</string>
     <string name="plan_route_exit_dialog_descr">هل أنت متأكد أنك تريد إغلاق مسار الخطة دون حفظ؟ سوف تفقد كل التغييرات؟</string>
@@ -3864,8 +3864,8 @@
     <string name="previous_segment">المقطع السابق</string>
     <string name="all_previous_segments">جميع المقاطع السابقة</string>
     <string name="only_selected_segment_recalc">سيتم إعادة حساب المقطع المحدد فقط باستخدام الوضع المحدد.</string>
-    <string name="all_next_segments_will_be_recalc">سيتم إعادة حساب كافة الشرائح اللاحقة باستخدام ملف التعريف المحدد.</string>
-    <string name="all_previous_segments_will_be_recalc">سيتم إعادة حساب كافة الشرائح السابقة باستخدام ملف التعريف المحدد.</string>
+    <string name="all_next_segments_will_be_recalc">سيتم إعادة حساب كافة الشرائح اللاحقة باستخدام الوضع المحدد.</string>
+    <string name="all_previous_segments_will_be_recalc">سيتم إعادة حساب كافة الشرائح السابقة باستخدام الوضع المحدد.</string>
     <string name="open_saved_track">فتح المسار المحفوظ</string>
     <string name="shared_string_is_saved">محفوظ</string>
     <string name="simplified_track">مسار مبسط</string>
