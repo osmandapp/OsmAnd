@@ -3,8 +3,6 @@ package net.osmand.plus.measurementtool;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -19,6 +17,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.GpxTrackAdapter;
@@ -26,7 +25,6 @@ import net.osmand.plus.helpers.GpxTrackAdapter.OnItemClickListener;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
-import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.plus.SimplePopUpMenuItemAdapter.*;
 import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 import static net.osmand.plus.settings.backend.OsmandSettings.*;
 import static net.osmand.util.Algorithms.collectDirs;
@@ -73,7 +72,7 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 	private Mode fragmentMode;
 	private String selectedFolder;
 	private String allFilesFolder;
-	TracksSortByMode tracksSortBy = TracksSortByMode.BY_DATE;
+	TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
 
 	public void setFragmentMode(Mode fragmentMode) {
 		this.fragmentMode = fragmentMode;
@@ -105,30 +104,29 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 							? R.color.inactive_buttons_and_links_bg_dark
 							: R.color.inactive_buttons_and_links_bg_light);
 			AndroidUtils.setBackground(sortButton, background);
-			sortButton.setImageResource(tracksSortBy.getIconId());
+			sortButton.setImageResource(sortByMode.getIconId());
 			sortButton.setVisibility(View.VISIBLE);
 			sortButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					IconPopupMenu popup = new IconPopupMenu(v.getContext(), v);
-					final Menu menu = popup.getMenu();
-					MenuItem mi;
+					final List<SimplePopUpMenuItem> items = new ArrayList<>();
 					for (final TracksSortByMode mode : TracksSortByMode.values()) {
-						mi = createMenuItem(app, menu, mode.getNameId(), mode.getNameId(), mode.getIconId(),
-								MenuItem.SHOW_AS_ACTION_ALWAYS, false, R.color.icon_color_default_light);
-						mi.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-							@Override
-							public boolean onMenuItemClick(MenuItem item) {
-								tracksSortBy = mode;
-								sortButton.setImageResource(mode.getIconId());
-								updateDescription(descriptionView);
-								sortFileList();
-								adapter.notifyDataSetChanged();
-								return false;
-							}
-						});
+						items.add(new SimplePopUpMenuItem(
+								getString(mode.getNameId()),
+								app.getUIUtilities().getThemedIcon(mode.getIconId()),
+								new View.OnClickListener() {
+									@Override
+									public void onClick(View v) {
+										sortByMode = mode;
+										sortButton.setImageResource(mode.getIconId());
+										updateDescription(descriptionView);
+										sortFileList();
+										adapter.notifyDataSetChanged();
+									}
+								}, sortByMode == mode
+						));
 					}
-					popup.show();
+					UiUtilities.showPopUpMenu(v, items);
 				}
 			});
 		}
@@ -202,23 +200,10 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 	}
 
 	private void updateDescription(TextView descriptionView) {
-		String string = getString(tracksSortBy.getNameId());
+		String string = getString(sortByMode.getNameId());
 		descriptionView.setText(String.format(getString(R.string.ltr_or_rtl_combine_via_space),
 				getString(fragmentMode.description),
 				Character.toLowerCase(string.charAt(0)) + string.substring(1)));
-	}
-
-	public MenuItem createMenuItem(OsmandApplication app, Menu m, int id, int titleRes, int iconId, int menuItemType,
-	                               boolean flipIconForRtl, int iconColor) {
-		Drawable d = iconId == 0 ? null : app.getUIUtilities().getIcon(iconId, iconColor);
-		MenuItem menuItem = m.add(0, id, 0, titleRes);
-		if (d != null) {
-			if (flipIconForRtl) {
-				d = AndroidUtils.getDrawableForDirection(app, d);
-			}
-			menuItem.setIcon(d);
-		}
-		return menuItem;
 	}
 
 	private void updateFileList(HorizontalSelectionAdapter folderAdapter) {
@@ -238,9 +223,9 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 		Collections.sort(gpxInfoList, new Comparator<GPXInfo>() {
 			@Override
 			public int compare(GPXInfo i1, GPXInfo i2) {
-				if (tracksSortBy == TracksSortByMode.BY_NAME_ASCENDING) {
+				if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
 					return i1.getFileName().toLowerCase().compareTo(i2.getFileName().toLowerCase());
-				} else if (tracksSortBy == TracksSortByMode.BY_NAME_DESCENDING) {
+				} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
 					return -i1.getFileName().toLowerCase().compareTo(i2.getFileName().toLowerCase());
 				} else {
 					long time1 = i1.getLastModified();
