@@ -205,7 +205,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				SelectTrackCard selectTrackCard = new SelectTrackCard(mapActivity);
 				selectTrackCard.setListener(this);
 				cardsContainer.addView(selectTrackCard.build(mapActivity));
-				cardsContainer.addView(buildDividerView(cardsContainer, false));
 
 				ApplicationMode mode = app.getRoutingHelper().getAppMode();
 
@@ -213,13 +212,16 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
 				boolean osmandRouter = mode.getRouteService() == RouteProvider.RouteService.OSMAND;
 				if (rparams != null && osmandRouter) {
-					if (!gpxFile.hasRoute() || gpxFile.hasRtePt()) {
+					boolean showReverseCard = !gpxFile.hasRoute() || gpxFile.hasRtePt();
+					if (showReverseCard) {
+						cardsContainer.addView(buildDividerView(cardsContainer, false));
+
 						ReverseTrackCard reverseTrackCard = new ReverseTrackCard(mapActivity, rparams.isReverse());
 						reverseTrackCard.setListener(this);
 						cardsContainer.addView(reverseTrackCard.build(mapActivity));
 					}
 					if (!gpxFile.hasRtePt() && !gpxFile.hasRoute()) {
-						cardsContainer.addView(buildDividerView(cardsContainer, true));
+						cardsContainer.addView(buildDividerView(cardsContainer, showReverseCard));
 
 						AttachTrackToRoadsCard attachTrackCard = new AttachTrackToRoadsCard(mapActivity);
 						attachTrackCard.setListener(this);
