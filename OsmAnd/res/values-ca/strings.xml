@@ -2911,10 +2911,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="step_by_step">Totes les cruïlles</string>
     <string name="routeInfo_road_types_name">Tipus de carretera</string>
     <string name="exit_at">Sortida a</string>
-    <string name="quick_action_show_hide_gpx_tracks">Mostra/amaga traces GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Un botó per mostrar o amagar les traces GPX seleccionades al mapa.</string>
-    <string name="quick_action_gpx_tracks_hide">Amaga les traces GPX</string>
-    <string name="quick_action_gpx_tracks_show">Mostra les traces GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Mostra/amaga traces</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Un botó per mostrar o amagar les traces seleccionades al mapa.</string>
+    <string name="quick_action_gpx_tracks_hide">Amaga les traces</string>
+    <string name="quick_action_gpx_tracks_show">Mostra les traces</string>
     <string name="sit_on_the_stop">Pugeu a la parada</string>
     <string name="release_3_3">• Nova pantalla \'Adreces\': Mostra els botons de destinació Casa i Feina, drecera de \'ruta anterior\', llista de traces GPX i marcadors actius, historial de cerca
 \n
@@ -3169,7 +3169,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="routing_attr_freeride_policy_name">Fora de pista</string>
     <string name="app_mode_ufo">Ovni</string>
     <string name="app_mode_monowheel">Monocicle</string>
-    <string name="turn_screen_on_sensor_descr">Mogueu la mà a la part superior de la pantalla per a activar-la durant la navegació.</string>
+    <string name="turn_screen_on_sensor_descr">Si moveu la vostra mà per pantalla s\'activarà.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Grau 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Grau 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Grau 3</string>
@@ -3333,7 +3333,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="analytics_pref_title">Estadístiques</string>
     <string name="turn_screen_on_info">Mostra el mapa a la pantalla de blocat durant la navegació.</string>
     <string name="route_parameters_info">Configuració per la navegació en el perfil seleccionat \"%1$s\".</string>
-    <string name="wake_time">Hora d\'activació</string>
+    <string name="wake_time">Retard des de l\'activació</string>
     <string name="units_and_formats">Unitats i formats</string>
     <string name="appearance">Aparença</string>
     <string name="map_look_descr">Aparença del mapa</string>
@@ -3352,7 +3352,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="turn_screen_on">Activa la pantalla</string>
     <string name="map_during_navigation_info">Mapa durant la navegació</string>
     <string name="map_during_navigation">Mapa durant la navegació</string>
-    <string name="vehicle_parameters_descr">Pes, alçada, velocitat</string>
+    <string name="vehicle_parameters_descr">Pes, alçada, llargada, velocitat</string>
     <string name="vehicle_parameters">Paràmetres del vehicle</string>
     <string name="voice_announces_info">Els missatges de veu només es produeixen navegant.</string>
     <string name="voice_announces_descr">Instruccions de navegació i anuncis</string>
@@ -3415,7 +3415,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="selected_profile">Perfil seleccionat</string>
     <string name="quick_action_directions_from_desc">Un botó per establir el punt central de la pantalla com el punt de sortida. Llavors, demanarà seleccionar-la destinació o iniciar el càlcul de la ruta.</string>
     <string name="logcat_buffer">Memòria intermèdia del Logcat</string>
-    <string name="reset_confirmation_descr">Prement %1$s es perdran tots els vostres canvis.</string>
+    <string name="reset_confirmation_descr">Prement %1$s es perden tots els vostres canvis.</string>
     <string name="reset_all_profile_settings_descr">Restableix tota la configuració del perfil als valors predeterminats de la instal·lació.</string>
     <string name="reset_all_profile_settings">Voleu restablir la configuració de tots els perfils\?</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
@@ -3607,7 +3607,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_hidden">Amagat</string>
     <string name="hidden_items_descr">Aquests elements no es mostren al menú, però les opcions o els connectors que representen continuaran funcionant.</string>
     <string name="reset_items_descr">Si s\'amaga la configuració es restablirà al seus valors originals.</string>
-    <string name="main_actions_descr">Les accions principals només contenen 4 botons.</string>
+    <string name="main_actions_descr">Només hi han 4 botons.</string>
     <string name="main_actions">Accions principals</string>
     <string name="move_inside_category">Només podeu moure els elements dins d\'aquesta categoria.</string>
     <string name="developer_plugin">Connector per a desenvolupadors</string>
@@ -3819,4 +3819,17 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="show_gpx">Traces</string>
     <string name="empty_state_my_tracks_desc">Importa o enregistra fitxers de traces</string>
     <string name="import_track_descr">Trieu un fitxer de traces a seguir o importeu-lo des del dispositiu.</string>
+    <string name="osm_authorization_success">L’autorització s’ha realitzat correctament</string>
+    <string name="multimedia_photo_play_sound">So de l\'obturador de la càmera</string>
+    <string name="multimedia_use_system_camera">Utilitza l\'aplicació del sistema</string>
+    <string name="reset_plugin_to_default">Restableix la configuració predeterminada del complement</string>
+    <string name="monitoring_min_distance">Desplaçament mínim</string>
+    <string name="monitoring_min_accuracy">Precisió mínima</string>
+    <string name="monitoring_min_speed">Velocitat mínima</string>
+    <string name="monitoring_notification">Notificació</string>
+    <string name="live_monitoring_adress_descr">Especifiqueu l\'adreça web amb la sintaxi de paràmetres: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitud={4}, velocitat={5}, càrrega={6}.</string>
+    <string name="live_monitoring_adress">Adreça web</string>
+    <string name="sort_last_modified">Darrera modificació</string>
+    <string name="sort_name_descending">Nom: Z - A</string>
+    <string name="sort_name_ascending">Nom: A - Z</string>
 </resources>
