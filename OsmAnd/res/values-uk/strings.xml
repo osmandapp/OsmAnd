@@ -3896,4 +3896,7 @@
 \n• Виправлено вади перенесення налаштувань профілю
 \n
 \n</string>
+    <string name="sort_last_modified">Востаннє змінено</string>
+    <string name="sort_name_descending">За назвою: Я — А</string>
+    <string name="sort_name_ascending">За назвою: А — Я</string>
 </resources>

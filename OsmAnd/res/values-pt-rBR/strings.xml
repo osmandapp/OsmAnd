@@ -3896,4 +3896,7 @@
 \n  • Problemas corrigidos com importação/exportação de configurações de perfil
 \n
 \n"</string>
+    <string name="sort_last_modified">Última modificação</string>
+    <string name="sort_name_descending">Nome: Z – A</string>
+    <string name="sort_name_ascending">Nome: A – Z</string>
 </resources>
