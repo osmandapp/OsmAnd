@@ -1611,7 +1611,7 @@
 \n
 \nللعودة إلى واحدة من أنماط الخريطة التقليدية، ببساطة إما عطل هذا الملحق مرة أخرى أو غير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
-    <string name="active_markers">العلامات النشطة</string>
+    <string name="active_markers">عدد خطوط التوجيه المباشر</string>
     <string name="map_markers">علامات الخريطة</string>
     <string name="routing_attr_avoid_borders_name">تخطي الحدود</string>
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل.</string>
@@ -2499,8 +2499,8 @@
     <string name="do_not_use_animations_descr">لإيقاف تشغيل الخريطة المتحركة.</string>
     <string name="keep_showing_on_map">إبقاء القياس على الخريطة</string>
     <string name="exit_without_saving">خروج بدون الحفظ؟</string>
-    <string name="show_guide_line">خط إلى العلامة</string>
-    <string name="show_arrows_on_the_map">سهم متجه إلى العلامة</string>
+    <string name="show_guide_line">رسم خط توجيه</string>
+    <string name="show_arrows_on_the_map">سهم متجه للهدف</string>
     <string name="show_passed">عرض المتجاوز</string>
     <string name="hide_passed">إخفاء المتجاوز</string>
     <string name="remove_from_map_markers">إزالة من \"علامات الخريطة\"</string>
@@ -2592,7 +2592,7 @@
     <string name="parked_at">توقفت عند</string>
     <string name="add_favourites_group_to_markers_descr">حدد مفضلة لإضافتها إلى العلامات.</string>
     <string name="favourites_group">مجموعة مفضلة</string>
-    <string name="shared_string_two">علامتان</string>
+    <string name="shared_string_two">خطين</string>
     <string name="shared_string_one">علامة</string>
     <string name="osm_recipient_stat">التعديلات %1$s, المبلغ %2$s mBTC</string>
     <string name="osm_recipients_label">مساهمي OSM المستفيدون</string>
@@ -2839,14 +2839,14 @@
 \n• مباشر أوسماند الاشتراك الآن يدعم جميع أوسماند الميزات
 \n
 \n</string-->
-    <string name="one_tap_active">نقرة لتنشيط العلامة</string>
+    <string name="one_tap_active">انقر لتنشيط توجيه الهدف</string>
     <string name="empty_state_av_notes_desc">إضافة ملاحظة صوتية أو فيديو أو صورة لكل نقطة على الخريطة، باستخدام قائمة السياق أو القطعة.</string>
     <string name="looking_for_tracks_with_waypoints">ابحث عن المسارات مع نقاط الطريق</string>
     <string name="add_track_to_markers_descr">حدد مسار لإضافة نقاط الطريق إلى العلامات(يتم سرد المسارات فقط مع نقاط الطريق).</string>
     <string name="empty_state_markers_active_desc">نقرة طويلة أو قصيرة على الأماكن ثم اضغط على زر العلامة.</string>
     <string name="empty_state_markers_groups_desc">يمكنك استيراد المجموعات المفضلة أو نقاط المسار كعلامات.</string>
     <string name="empty_state_markers_history_desc">ستظهر العلامات التي تم تجاوزها على هذه الشاشة.</string>
-    <string name="show_guide_line_descr">خط مباشر من موقعك إلى العلامة النشطة.</string>
+    <string name="show_guide_line_descr">خط مباشر من موقعك إلى الهدف.</string>
     <string name="show_arrows_descr">عرض سهم واحد أو اثنين ليشير إلى اتجاه العلامة النشطة.</string>
     <string name="distance_indication_descr">طريقة عرض المسافة من موقعي إلى العلامات النشطة.</string>
     <string name="active_markers_descr">عدد الأسهم تجاه العلامات النشطة ( للملاحة في الصحراء).</string>
