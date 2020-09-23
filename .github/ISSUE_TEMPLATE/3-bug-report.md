@@ -29,18 +29,18 @@ Please give us the following information so that we can try to **reproduce** you
 <!-- Did this behavior use to work in the previous version? -->
 <!-- ✍️--> Yes, the previous version in which this bug was not present was: ....
 
-##### Description
+### Description
 
 <!-- A clear and concise description of the problem... -->
 
-##### Minimal Reproduction
+##### How to reproduce?
 
 <!--
 If the bug is reproducible, please describe steps below:
 -->
 <!-- ✍️--> 1. Open app, and click on ...
 
-##### Exception or Error
+### Exception or Error
 
 <pre><code>
 <!-- If the issue is accompanied by an exception or an error, please share it below: -->
@@ -48,9 +48,9 @@ If the bug is reproducible, please describe steps below:
 
 </code></pre>
 
-##### Your Environment
+### Your Environment
 
-**OsmAnd Version:**
+OsmAnd Version:
 
 <pre><code>
 <!-- paste version below -->
@@ -58,7 +58,11 @@ If the bug is reproducible, please describe steps below:
 
 </code></pre>
 
-**Device and Android/iOS version:**
+Device and Android/iOS version:
+
+
+Android/iOS version:
+
 
 **Maps used (online or offline):**
 
