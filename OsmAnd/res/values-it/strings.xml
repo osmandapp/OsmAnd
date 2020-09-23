@@ -3900,4 +3900,7 @@
 \n
 \n</string>
     <string name="simplified_track">Traccia semplificata</string>
+    <string name="sort_last_modified">Ultimo modificato</string>
+    <string name="sort_name_descending">Nome: Z – A</string>
+    <string name="sort_name_ascending">Nome: A – Z</string>
 </resources>
