@@ -474,27 +474,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 		});
 
-//		menu.addSubMenu(Menu.NONE, R.string.shared_string_sort, Menu.NONE, R.string.shared_string_sort);
 		inflater.inflate(R.menu.track_sort_menu_item, menu);
 		mi = menu.findItem(R.id.action_sort);
-//		mi = sortMenu.getItem();
 		mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		int iconColorId = isLightActionBar() ? R.color.active_buttons_and_links_text_light
 				: R.color.active_buttons_and_links_text_dark;
 		mi.setIcon(getIcon(sortByMode.getIconId(), iconColorId));
-		final List<SimplePopUpMenuItem> items = new ArrayList<>();
-		for (final TracksSortByMode mode : TracksSortByMode.values()) {
-//			mi = createMenuItem(sortMenu, mode.getNameId(), mode.getNameId(), mode.getIconId(),
-//					MenuItem.SHOW_AS_ACTION_ALWAYS, false, R.color.icon_color_default_light);
-//			mi.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//				@Override
-//				public boolean onMenuItemClick(MenuItem item) {
-//					updateTracksSort(mode);
-//					sortMenu.setIcon(getIcon(mode.getIconId(), iconColorId));
-//					return false;
-//				}
-//			});
-		}
 
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
