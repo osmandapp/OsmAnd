@@ -784,7 +784,7 @@ public class UiUtilities {
 			titles.add(String.valueOf(item.getTitle()));
 			hasIcon = hasIcon || item.getIcon() != null;
 		}
-		float itemWidth = AndroidUtils.getTextMaxWidth(defaultListTextSize, titles) + contentPadding;
+		float itemWidth = AndroidUtils.getTextMaxWidth(defaultListTextSize, titles) + contentPadding * 2;
 		float iconPartWidth = hasIcon ? standardIconSize + contentPaddingHalf : 0;
 		int totalWidth = (int) (Math.max(itemWidth, minWidth) + iconPartWidth);
 
@@ -807,5 +807,20 @@ public class UiUtilities {
 			}
 		});
 		return listPopupWindow;
+	}
+
+	public static void showPopUpMenu(View v, final List<SimplePopUpMenuItemAdapter.SimplePopUpMenuItem> items) {
+		UiUtilities.createListPopupWindow(
+				v.getContext(), v, v.getWidth(), items, new AdapterView.OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						if (position < items.size()) {
+							View.OnClickListener listener = items.get(position).getOnClickListener();
+							if (listener != null) {
+								listener.onClick(view);
+							}
+						}
+					}
+				}).show();
 	}
 }

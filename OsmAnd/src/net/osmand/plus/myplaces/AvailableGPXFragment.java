@@ -19,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -70,7 +69,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.SimplePopUpMenuItemAdapter;
+import net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
@@ -475,24 +474,26 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 		});
 
-		menu.addSubMenu(Menu.NONE, R.string.shared_string_sort, Menu.NONE, R.string.shared_string_sort);
-		final SubMenu sortMenu = menu.findItem(R.string.shared_string_sort).getSubMenu();
-		mi = sortMenu.getItem();
+//		menu.addSubMenu(Menu.NONE, R.string.shared_string_sort, Menu.NONE, R.string.shared_string_sort);
+		inflater.inflate(R.menu.track_sort_menu_item, menu);
+		mi = menu.findItem(R.id.action_sort);
+//		mi = sortMenu.getItem();
 		mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		final int iconColorId = isLightActionBar() ? R.color.active_buttons_and_links_text_light
+		int iconColorId = isLightActionBar() ? R.color.active_buttons_and_links_text_light
 				: R.color.active_buttons_and_links_text_dark;
 		mi.setIcon(getIcon(sortByMode.getIconId(), iconColorId));
+		final List<SimplePopUpMenuItem> items = new ArrayList<>();
 		for (final TracksSortByMode mode : TracksSortByMode.values()) {
-			mi = createMenuItem(sortMenu, mode.getNameId(), mode.getNameId(), mode.getIconId(),
-					MenuItem.SHOW_AS_ACTION_ALWAYS, false, R.color.icon_color_default_light);
-			mi.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					updateTracksSort(mode);
-					sortMenu.setIcon(getIcon(mode.getIconId(), iconColorId));
-					return false;
-				}
-			});
+//			mi = createMenuItem(sortMenu, mode.getNameId(), mode.getNameId(), mode.getIconId(),
+//					MenuItem.SHOW_AS_ACTION_ALWAYS, false, R.color.icon_color_default_light);
+//			mi.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//				@Override
+//				public boolean onMenuItemClick(MenuItem item) {
+//					updateTracksSort(mode);
+//					sortMenu.setIcon(getIcon(mode.getIconId(), iconColorId));
+//					return false;
+//				}
+//			});
 		}
 
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
@@ -578,13 +579,36 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(final MenuItem item) {
 		int itemId = item.getItemId();
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(i);
 			if (itemId == contextMenuItem.getTitleId()) {
 				contextMenuItem.getItemClickListener().onContextMenuClick(null, itemId, i, false, null);
 				return true;
+			}
+		}
+		if (itemId == R.id.action_sort) {
+			Activity activity = getActivity();
+			if (activity != null) {
+				View menuSortItemView = getActivity().findViewById(R.id.action_sort);
+				final List<SimplePopUpMenuItem> items = new ArrayList<>();
+				for (final TracksSortByMode mode : TracksSortByMode.values()) {
+					items.add(new SimplePopUpMenuItem(
+							getString(mode.getNameId()),
+							app.getUIUtilities().getThemedIcon(mode.getIconId()),
+							new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									updateTracksSort(mode);
+									int iconColorId = isLightActionBar() ? R.color.active_buttons_and_links_text_light
+											: R.color.active_buttons_and_links_text_dark;
+									item.setIcon(getIcon(mode.getIconId(), iconColorId));
+								}
+							}, sortByMode == mode
+					));
+				}
+				UiUtilities.showPopUpMenu(menuSortItemView, items);
 			}
 		}
 		return super.onOptionsItemSelected(item);
@@ -1492,10 +1516,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	private void openPopUpMenu(View v, final GpxInfo gpxInfo) {
-		final List<SimplePopUpMenuItemAdapter.SimplePopUpMenuItem> items = new ArrayList<>();
+		final List<SimplePopUpMenuItem> items = new ArrayList<>();
 		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 
-		items.add(new SimplePopUpMenuItemAdapter.SimplePopUpMenuItem(
+		items.add(new SimplePopUpMenuItem(
 				getString(R.string.shared_string_show_on_map),
 				iconsCache.getThemedIcon(R.drawable.ic_show_on_map),
 				new View.OnClickListener() {
@@ -1509,7 +1533,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		GPXTrackAnalysis analysis;
 		if ((analysis = getGpxTrackAnalysis(gpxInfo, app, null)) != null) {
 			if (analysis.totalDistance != 0 && !gpxInfo.currentlyRecordingTrack) {
-				items.add(new SimplePopUpMenuItemAdapter.SimplePopUpMenuItem(
+				items.add(new SimplePopUpMenuItem(
 						getString(R.string.analyze_on_map),
 						iconsCache.getThemedIcon(R.drawable.ic_action_info_dark),
 						new View.OnClickListener() {
@@ -1522,7 +1546,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 		}
 
-		items.add(new SimplePopUpMenuItemAdapter.SimplePopUpMenuItem(
+		items.add(new SimplePopUpMenuItem(
 				getString(R.string.shared_string_move),
 				iconsCache.getThemedIcon(R.drawable.ic_action_folder_stroke),
 				new View.OnClickListener() {
@@ -1533,7 +1557,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				}
 		));
 
-		items.add(new SimplePopUpMenuItemAdapter.SimplePopUpMenuItem(
+		items.add(new SimplePopUpMenuItem(
 				getString(R.string.shared_string_rename),
 				iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark),
 				new View.OnClickListener() {
@@ -1551,7 +1575,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		));
 
 		Drawable shareIcon = iconsCache.getThemedIcon((R.drawable.ic_action_gshare_dark));
-		items.add(new SimplePopUpMenuItemAdapter.SimplePopUpMenuItem(
+		items.add(new SimplePopUpMenuItem(
 				getString(R.string.shared_string_share),
 				AndroidUtils.getDrawableForDirection(app, shareIcon),
 				new View.OnClickListener() {
@@ -1569,7 +1593,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null && osmEditingPlugin.isActive()) {
-			items.add(new SimplePopUpMenuItemAdapter.SimplePopUpMenuItem(
+			items.add(new SimplePopUpMenuItem(
 					getString(R.string.shared_string_export),
 					iconsCache.getThemedIcon(R.drawable.ic_action_export),
 					new View.OnClickListener() {
@@ -1581,7 +1605,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			));
 		}
 
-		items.add(new SimplePopUpMenuItemAdapter.SimplePopUpMenuItem(
+		items.add(new SimplePopUpMenuItem(
 				getString(R.string.shared_string_delete),
 				iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark),
 				new View.OnClickListener() {

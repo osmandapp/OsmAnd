@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.AndroidUtils;
+
 import static net.osmand.plus.SimplePopUpMenuItemAdapter.SimplePopUpMenuItem;
 
 import java.util.List;
@@ -50,6 +52,10 @@ public class SimplePopUpMenuItemAdapter
 			} else {
 				ivIcon.setVisibility(View.GONE);
 			}
+			if (item.selected) {
+				convertView.setBackgroundColor(UiUtilities.getColorWithAlpha(
+						AndroidUtils.getColorFromAttr(getContext(), R.attr.active_color_basic), 0.1f));
+			}
 		}
 		return convertView;
 	}
@@ -64,6 +70,7 @@ public class SimplePopUpMenuItemAdapter
 		private CharSequence title;
 		private Drawable icon;
 		private View.OnClickListener onClickListener;
+		boolean selected;
 
 		public SimplePopUpMenuItem(CharSequence title, Drawable icon) {
 			this.title = title;
@@ -73,6 +80,12 @@ public class SimplePopUpMenuItemAdapter
 		public SimplePopUpMenuItem(CharSequence title, Drawable icon, View.OnClickListener onClickListener) {
 			this(title, icon);
 			this.onClickListener = onClickListener;
+		}
+
+		public SimplePopUpMenuItem(CharSequence title, Drawable icon, View.OnClickListener onClickListener,
+		                           boolean selected) {
+			this(title, icon, onClickListener);
+			this.selected = selected;
 		}
 
 		public CharSequence getTitle() {
