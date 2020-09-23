@@ -11,9 +11,8 @@ about: Report a bug in OsmAnd
 
 ### Your Environment
 OsmAnd Version:
-Device and Android/iOS version:
 Android/iOS version:
-
+Device model:
 
 **Maps used (online or offline):**   
 If you have an issue related to offline maps, tell us the exact name of the map file where the issue occurs and its edition date.
