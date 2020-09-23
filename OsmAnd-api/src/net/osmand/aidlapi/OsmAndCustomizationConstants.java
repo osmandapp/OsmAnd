@@ -4,6 +4,8 @@ public interface OsmAndCustomizationConstants {
 
 	// Navigation Drawer:
 	String DRAWER_ITEM_ID_SCHEME = "drawer.action.";
+	String DRAWER_SWITCH_PROFILE_ID = DRAWER_ITEM_ID_SCHEME + "switch_profile";
+	String DRAWER_CONFIGURE_PROFILE_ID = DRAWER_ITEM_ID_SCHEME + "configure_profile";
 	String DRAWER_DASHBOARD_ID = DRAWER_ITEM_ID_SCHEME + "dashboard";
 	String DRAWER_MAP_MARKERS_ID = DRAWER_ITEM_ID_SCHEME + "map_markers";
 	String DRAWER_MY_PLACES_ID = DRAWER_ITEM_ID_SCHEME + "my_places";
