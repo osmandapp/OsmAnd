@@ -298,7 +298,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		if (folderName != null && !dir.getName().equals(folderName)) {
 			source = new File(dir, folderName);
 		}
-		source = new File(source, fileName);
+		source = new File(source, fileName + IndexConstants.GPX_FILE_EXT);
 		return source;
 	}
 
