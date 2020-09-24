@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -329,7 +330,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		if (app != null) {
 			exportingProfile = true;
 			showExportProgressDialog();
-			File tempDir = getTempDir();
+			File tempDir = FileUtils.getTempDir(app);
 			String fileName = profile.toHumanString();
 			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), prepareSettingsItemsForExport(), true);
 		}
@@ -391,17 +392,9 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	private File getExportFile() {
-		File tempDir = getTempDir();
+		File tempDir = FileUtils.getTempDir(app);
 		String fileName = profile.toHumanString();
 		return new File(tempDir, fileName + IndexConstants.OSMAND_SETTINGS_FILE_EXT);
-	}
-
-	private File getTempDir() {
-		File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
-		if (!tempDir.exists()) {
-			tempDir.mkdirs();
-		}
-		return tempDir;
 	}
 
 	private void shareProfile(@NonNull File file, @NonNull ApplicationMode profile) {

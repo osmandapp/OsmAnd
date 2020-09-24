@@ -205,10 +205,7 @@ public class FileUtils {
 		if (!src.exists()) {
 			return null;
 		}
-		File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
-		if (!tempDir.exists()) {
-			tempDir.mkdirs();
-		}
+		File tempDir = getTempDir(app);
 		File dest = new File(tempDir, src.getName());
 		try {
 			Algorithms.fileCopy(src, dest);
@@ -216,6 +213,14 @@ public class FileUtils {
 			return null;
 		}
 		return dest;
+	}
+
+	public static File getTempDir(OsmandApplication app) {
+		File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+		if (!tempDir.exists()) {
+			tempDir.mkdirs();
+		}
+		return tempDir;
 	}
 
 	public interface RenameCallback {

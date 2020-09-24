@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -2350,11 +2351,8 @@ public class OsmandAidlApi {
 	}
 
 	private int copyFileImpl(String fileName, byte[] filePartData, long startTime, boolean done, String destinationDir) {
-		File file = app.getAppPath(IndexConstants.TEMP_DIR + fileName);
-		File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
-		if (!tempDir.exists()) {
-			tempDir.mkdirs();
-		}
+		File tempDir = FileUtils.getTempDir(app);
+		File file = new File(tempDir, fileName);
 		File destFile = app.getAppPath(destinationDir + fileName);
 		long currentTime = System.currentTimeMillis();
 		try {

@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -715,17 +716,14 @@ public class ImportHelper {
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
-				if (!tempDir.exists()) {
-					tempDir.mkdirs();
-				}
+				File tempDir = FileUtils.getTempDir(app);
 				File dest = new File(tempDir, name);
 				return copyFile(app, dest, uri, true);
 			}
 
 			@Override
 			protected void onPostExecute(String error) {
-				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+				File tempDir = FileUtils.getTempDir(app);
 				final File file = new File(tempDir, name);
 				if (error == null && file.exists()) {
 					app.getSettingsHelper().collectSettings(file, latestChanges, version, new SettingsCollectListener() {
