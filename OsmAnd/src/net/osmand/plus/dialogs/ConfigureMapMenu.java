@@ -100,7 +100,6 @@ import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTE
 
 public class ConfigureMapMenu {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
-	public static final String TAG = ConfigureMapMenu.class.getName();
 	public static final String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
 	public static final String CURRENT_TRACK_COLOR_ATTR = "currentTrackColor";
 	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";

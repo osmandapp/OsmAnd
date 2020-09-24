@@ -361,8 +361,4 @@ public class RendererRegistry {
 	public Map<String, File> getExternalRenderers() {
 		return externalRenderers;
 	}
-
-	public interface OnChangeRenderingRuleListener {
-		void onRenderingRuleChanged(RenderingRulesStorage currentSelectedRender);
-	}
 }
