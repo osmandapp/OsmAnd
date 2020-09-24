@@ -202,9 +202,9 @@ public class ContextMenuAdapter {
 			}
 		}
 		items.removeAll(itemsToRemove);
-		this.arrayAdapter = new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
+		arrayAdapter = new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
 				items.toArray(new ContextMenuItem[items.size()]), app, lightTheme, changeAppModeListener);
-		return this.arrayAdapter;
+		return arrayAdapter;
 	}
 
 	public class ContextMenuArrayAdapter extends ArrayAdapter<ContextMenuItem> {
@@ -628,8 +628,8 @@ public class ContextMenuAdapter {
 	}
 
 	public void notifyDataSetChanged() {
-		if (this.arrayAdapter != null) {
-			this.arrayAdapter.notifyDataSetChanged();
+		if (arrayAdapter != null) {
+			arrayAdapter.notifyDataSetChanged();
 		}
 	}
 

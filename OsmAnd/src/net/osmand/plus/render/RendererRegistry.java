@@ -25,7 +25,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -50,8 +49,7 @@ public class RendererRegistry {
 
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
-	private Map<String, OnChangeRenderingRuleListener> onChangeRenderingRuleListeners = new HashMap<>();
-	
+
 	private Map<String, File> externalRenderers = new LinkedHashMap<String, File>();
 	private Map<String, String> internalRenderers = new LinkedHashMap<String, String>();
 	
@@ -338,20 +336,6 @@ public class RendererRegistry {
 	
 	public void setCurrentSelectedRender(final RenderingRulesStorage currentSelectedRender) {
 		this.currentSelectedRender = currentSelectedRender;
-		notifyChangeRenderRuleListeners();
-	}
-
-	public void notifyChangeRenderRuleListeners() {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				for (OnChangeRenderingRuleListener listener : onChangeRenderingRuleListeners.values()) {
-					if (listener != null) {
-						listener.onRenderingRuleChanged(currentSelectedRender);
-					}
-				}
-			}
-		});
 	}
 
     public void setRendererLoadedEventListener(IRendererLoadedEventListener listener) {
@@ -376,15 +360,6 @@ public class RendererRegistry {
 
 	public Map<String, File> getExternalRenderers() {
 		return externalRenderers;
-	}
-
-	public void addOnChangeRenderingRuleListener(@NonNull String key,
-	                                             @NonNull OnChangeRenderingRuleListener listener) {
-		onChangeRenderingRuleListeners.put(key, listener);
-	}
-
-	public void removeOnChangeRenderingRuleListener(@NonNull String key) {
-		onChangeRenderingRuleListeners.remove(key);
 	}
 
 	public interface OnChangeRenderingRuleListener {

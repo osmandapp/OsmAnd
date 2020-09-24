@@ -37,11 +37,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.render.RendererRegistry.OnChangeRenderingRuleListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings.ListStringPreference;
@@ -100,7 +98,7 @@ import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAI
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
 
-public class ConfigureMapMenu implements DashboardOnMap.DashboardStateListener {
+public class ConfigureMapMenu {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
 	public static final String TAG = ConfigureMapMenu.class.getName();
 	public static final String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
@@ -284,9 +282,7 @@ public class ConfigureMapMenu implements DashboardOnMap.DashboardStateListener {
 		final OsmandSettings settings = app.getSettings();
 		final int selectedProfileColorRes = settings.APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode);
 		final int selectedProfileColor = ContextCompat.getColor(app, selectedProfileColorRes);
-		RendererRegistry rr = app.getRendererRegistry();
-		RenderingRulesStorage storage = rr.getCurrentSelectedRenderer();
-		String renderDescr = getRenderDescr(activity, storage);
+		String renderDescr = getRenderDescr(app);
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
 				.setId(MAP_RENDERING_CATEGORY_ID)
@@ -957,11 +953,13 @@ public class ConfigureMapMenu implements DashboardOnMap.DashboardStateListener {
 		dialog.show();
 	}
 
-	protected String getRenderDescr(Context ctx, RenderingRulesStorage storage) {
+	protected String getRenderDescr(OsmandApplication app) {
+		RendererRegistry rr = app.getRendererRegistry();
+		RenderingRulesStorage storage = rr.getCurrentSelectedRenderer();
 		if (storage == null) {
 			return "";
 		}
-		String translation = RendererRegistry.getTranslatedRendererName(ctx, storage.getName());
+		String translation = RendererRegistry.getTranslatedRendererName(app, storage.getName());
 		return translation == null ? storage.getName() : translation;
 	}
 
@@ -1122,25 +1120,16 @@ public class ConfigureMapMenu implements DashboardOnMap.DashboardStateListener {
 		}
 	}
 
-	@Override
-	public void onShowDashboard() {
-		getMyApplication().getRendererRegistry()
-				.addOnChangeRenderingRuleListener(TAG, new OnChangeRenderingRuleListener() {
-					@Override
-					public void onRenderingRuleChanged(RenderingRulesStorage currentSelectedRender) {
-						if (contextMenuAdapter != null) {
-							ContextMenuItem item = contextMenuAdapter.getItemById(MAP_STYLE_ID);
-							String renderDescr = getRenderDescr(mapActivity, currentSelectedRender);
-							item.setDescription(renderDescr);
-							contextMenuAdapter.notifyDataSetChanged();
-						}
-					}
-				});
-	}
+	public void updateMenuItem(String itemId) {
+		OsmandApplication app = getMyApplication();
+		if (app == null) return;
 
-	@Override
-	public void onHideDashboard() {
-		getMyApplication().getRendererRegistry().removeOnChangeRenderingRuleListener(TAG);
+		if (MAP_STYLE_ID.equals(itemId) && contextMenuAdapter != null) {
+			ContextMenuItem item = contextMenuAdapter.getItemById(MAP_STYLE_ID);
+			String renderDescr = getRenderDescr(app);
+			item.setDescription(renderDescr);
+			contextMenuAdapter.notifyDataSetChanged();
+		}
 	}
 
 	private OsmandApplication getMyApplication() {

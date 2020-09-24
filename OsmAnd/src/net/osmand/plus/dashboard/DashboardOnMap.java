@@ -96,6 +96,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
+
 public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInformationListener {
 	private static final org.apache.commons.logging.Log LOG =
 			PlatformUtil.getLog(DashboardOnMap.class);
@@ -130,7 +132,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private ArrayAdapter<?> listAdapter;
 	private OnItemClickListener listAdapterOnClickListener;
-	private DashboardStateListener dashboardStateListener;
+	private ConfigureMapMenu configureMapMenu;
 
 	private boolean visible = false;
 	private DashboardType visibleType;
@@ -657,20 +659,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				fragment.show(mapActivity.getSupportFragmentManager(), MapillaryFirstDialogFragment.TAG);
 				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
 			}
+
+			deleteTmpReferences();
 		}
-		notifyDashboardVisibilityStateListener(visible);
 		mapActivity.updateStatusBarColor();
 	}
 
-	private void notifyDashboardVisibilityStateListener(boolean visible) {
-		if (dashboardStateListener != null) {
-			if (visible) {
-				dashboardStateListener.onShowDashboard();
-			} else {
-				dashboardStateListener.onHideDashboard();
-				dashboardStateListener = null;
-			}
-		}
+	private void deleteTmpReferences() {
+		configureMapMenu = null;
 	}
 
 	public void updateDashboard() {
@@ -718,8 +714,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (visibleType == DashboardType.CONFIGURE_SCREEN) {
 			cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity);
 		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
-			ConfigureMapMenu configureMapMenu = new ConfigureMapMenu(mapActivity);
-			dashboardStateListener = configureMapMenu;
+			configureMapMenu = new ConfigureMapMenu(mapActivity);
 			cm = configureMapMenu.createListAdapter(mapActivity);
 		} else if (visibleType == DashboardType.LIST_MENU) {
 			cm = mapActivity.getMapActions().createMainOptionsMenu();
@@ -1047,6 +1042,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
+	public void onMapSettingsUpdated() {
+		if (configureMapMenu != null) {
+			configureMapMenu.updateMenuItem(MAP_STYLE_ID);
+		}
+	}
+
 	public void updateLocation(final boolean centerChanged, final boolean locationChanged,
 							   final boolean compassChanged) {
 		if (inLocationUpdate) {
@@ -1329,13 +1330,5 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	@Override
 	public void routeWasFinished() {
-	}
-
-	public interface DashboardStateListener {
-
-		void onShowDashboard();
-
-		void onHideDashboard();
-
 	}
 }
