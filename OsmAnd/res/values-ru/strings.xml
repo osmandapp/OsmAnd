@@ -331,7 +331,7 @@
     <string name="audionotes_location_not_defined">Нажмите «Использовать местоположение…» чтобы добавить заметку к данному местоположению.</string>
     <string name="map_widget_audionotes">Аудиозаметки</string>
     <string name="audionotes_plugin_description">Создавайте аудио-, видео- и фотозаметки в поездке, используя виджет или контекстное меню.</string>
-    <string name="audionotes_plugin_name">Медиазаметки</string>
+    <string name="audionotes_plugin_name">Аудио/видеозаметки</string>
     <string name="index_srtm_parts">частей</string>
     <string name="index_srtm_ele">Линии высот</string>
     <string name="srtm_plugin_name">Контурные линии</string>
@@ -2134,7 +2134,7 @@
     <string name="shared_string_move_up">Переместить ↑</string>
     <string name="shared_string_move_down">Переместить ↓</string>
     <string name="finish_navigation">Завершить навигацию</string>
-    <string name="avoid_road">Исключить из маршрута</string>
+    <string name="avoid_road">Избегать дорог</string>
     <string name="osm_live_user_public_name">Публичное имя</string>
     <string name="osm_live_support_region">Поддерживаемый регион</string>
     <string name="osm_live_enter_user_name">Введите публичное имя</string>
@@ -2885,14 +2885,14 @@
     <string name="lang_gn_py">Гуарани</string>
     <string name="run_full_osmand_msg">Вы используете {0} карту, которая поставляется OsmAnd. Хотите запустить полную версию Osmand\?</string>
     <string name="run_full_osmand_header">Запустить OsmAnd\?</string>
-    <string name="add_destination_point">Добавить точку маршрута</string>
+    <string name="add_destination_point">Задать пункт назначения</string>
     <string name="add_intermediate_point">Добавить промежуточный пункт</string>
     <string name="add_start_point">Установить отправную точку</string>
     <string name="route_way">Путь</string>
     <string name="points_of_interests">Точки интереса (POI)</string>
     <string name="waiting_for_route_calculation">Расчёт маршрута…</string>
     <string name="app_mode_public_transport">Общественный транспорт</string>
-    <string name="avoid_roads_descr">Укажите на карте или в списке ниже, каких дорог следует избегать при навигации:</string>
+    <string name="avoid_roads_descr">Выберите дорогу на карте или из списка ниже, которую вы хотите избежать во время навигации:</string>
     <string name="simulate_navigation">Моделировать навигацию</string>
     <string name="choose_track_file_to_follow">Выберите файл трека для следования</string>
     <string name="voice_announcements">Голосовые подсказки</string>
@@ -3068,7 +3068,7 @@
     <string name="app_mode_horse">Лошадь</string>
     <string name="app_mode_helicopter">Вертолёт</string>
     <string name="osmand_routing_promo">Вы можете добавить собственную модифицированную версию routing.xml в ..osmand/routing</string>
-    <string name="select_icon_profile_dialog_title">Значок</string>
+    <string name="select_icon_profile_dialog_title">Выберите значок</string>
     <string name="routing_profile_ski">Лыжи</string>
     <string name="profile_type_descr_string">Тип: %s</string>
     <string name="profile_type_base_string">Базовый профиль</string>
@@ -3233,13 +3233,13 @@
     <string name="map_during_navigation_info">Карта во время навигации</string>
     <string name="map_during_navigation">Карта во время навигации</string>
     <string name="vehicle_parameters_descr">Скорость движения, размеры, масса транспортного средства</string>
-    <string name="vehicle_parameters">Физические параметры</string>
+    <string name="vehicle_parameters">Параметры транспортного средства</string>
     <string name="voice_announces_info">Голосовые оповещения происходят только во время навигации.</string>
     <string name="voice_announces_descr">Навигационные инструкции и объявления</string>
     <string name="voice_announces">Голосовые подсказки</string>
     <string name="screen_alerts">Экранные оповещения</string>
     <string name="route_parameters_descr">Настройка параметров маршрута</string>
-    <string name="route_parameters">Маршрутизация</string>
+    <string name="route_parameters">Параметры маршрута</string>
     <string name="logcat_buffer">Буфер Logcat</string>
     <string name="plugins_settings">Настройки плагинов</string>
     <string name="language_and_output">Язык и вывод</string>
@@ -3574,7 +3574,7 @@
     <string name="add_description">Добавить описание</string>
     <string name="select_group">Категории</string>
     <string name="shared_string_square">Квадрат</string>
-    <string name="select_shape">Форма</string>
+    <string name="select_shape">Выберите форму</string>
     <string name="shared_string_circle">Круг</string>
     <string name="shared_string_octagon">Восьмиугольник</string>
     <string name="accessibility_announce">Сообщение о доступности</string>
@@ -3820,7 +3820,7 @@
     <string name="plan_route_select_track_file_for_open">Выберите файл трека.</string>
     <string name="shared_string_done">Готово</string>
     <string name="overwrite_track">Перезаписать трек</string>
-    <string name="route_between_points_add_track_desc">Выбрать трек, к которому будет добавлен новый сегмент.</string>
+    <string name="route_between_points_add_track_desc">Выберите трек, к которому будет добавлен новый сегмент.</string>
     <string name="navigation_profile">Профиль</string>
     <string name="threshold_distance">Предельная дистанция</string>
     <string name="save_as_new_track">Сохранить как новый трек</string>
