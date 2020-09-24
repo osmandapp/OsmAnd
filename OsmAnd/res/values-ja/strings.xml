@@ -7,7 +7,7 @@
     <string name="tts_missing_language_data_title">見つからないデータ</string>
     <string name="tts_missing_language_data">選択された言語用のデータはインストールされて
      いません。マーケットに行ってインストールしますか？</string>
-    <string name="gpx_option_reverse_route">GPXルートを反転</string>
+    <string name="gpx_option_reverse_route">経路を反転</string>
     <string name="gpx_option_destination_point">現在の目的地を使用</string>
     <string name="gpx_option_from_start_point">経路全体を通過する</string>
     <string name="switch_to_raster_map_to_see">メニューの[マップダウンロード]などから、この場所のオフラインベクターマップをダウンロードするか『オンラインマップ』プラグインを有効にしてください。</string>
@@ -3842,7 +3842,7 @@ POIの更新は利用できません</string>
     <string name="empty_state_my_tracks_desc">経路ファイルを記録、またはインポートします</string>
     <string name="context_menu_item_add_waypoint">経路・経由地点を追加</string>
     <string name="quick_action_add_gpx">経路・経由地点を追加</string>
-    <string name="attach_to_the_roads">道路に貼り付ける</string>
+    <string name="attach_to_the_roads">道路に沿わせる</string>
     <string name="map_widget_monitoring">旅程の記録</string>
     <string name="marker_save_as_track">経路ファイルとして保存</string>
     <string name="follow_track">経路を辿る</string>
@@ -3897,4 +3897,7 @@ POIの更新は利用できません</string>
     <string name="disable_recording_once_app_killed_descrp">(最近使用したアプリを介して) OsmAndを終了すると、GPXの記録が一時停止されます(バックグラウンドサービスインジケーターがAndroid通知バーから消えます。)</string>
     <string name="save_global_track_interval_descr">一般的な経路記録の記録間隔を定義します(マップ画面の\'GPX\'ボタンを使用)</string>
     <string name="shared_string_is_saved">保存されました</string>
+    <string name="sort_last_modified">最終更新日</string>
+    <string name="sort_name_descending">名称: 降順(Z-A)</string>
+    <string name="sort_name_ascending">名称: 昇順(A-Z)</string>
 </resources>

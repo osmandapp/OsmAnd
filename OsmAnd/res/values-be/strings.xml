@@ -3954,4 +3954,7 @@
 \n • Выпраўлены праблемы з імпартам / экспартам налад профілю
 \n
 \n</string>
+    <string name="sort_last_modified">Апошняя змена</string>
+    <string name="sort_name_descending">Назва: Я — А</string>
+    <string name="sort_name_ascending">Назва: А — Я</string>
 </resources>

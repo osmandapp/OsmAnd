@@ -1324,7 +1324,7 @@
     <string name="gpx_tags_txt">Tags</string>
     <string name="shared_string_description">Beschreibung</string>
     <string name="gpx_monitoring_disabled_warn">Aufzeichnung mit der Schaltfläche \'GPX\' oder unter \'Erweiterungen → Streckenaufzeichnung → Einstellungen\'.</string>
-    <string name="gpx_option_reverse_route">GPX-Route umkehren</string>
+    <string name="gpx_option_reverse_route">Trackrichtung umkehren</string>
     <string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
     <string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
     <string name="gpx_files_not_found">Keine GPX-Dateien im Ordner tracks gefunden</string>
@@ -3907,4 +3907,7 @@
 \n • Probleme beim Import/Export von Profileinstellungen behoben
 \n
 \n</string>
+    <string name="sort_last_modified">Zuletzt geändert</string>
+    <string name="sort_name_descending">Name: Z – A</string>
+    <string name="sort_name_ascending">Name: A – Z</string>
 </resources>

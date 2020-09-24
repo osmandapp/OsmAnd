@@ -105,7 +105,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				checkEmptyName(s.toString());
+				updateFileNameFromEditText(s.toString());
 			}
 		});
 		BaseBottomSheetItem editFileName = new BaseBottomSheetItem.Builder()
@@ -215,7 +215,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				folderName = item;
 				EditText editText = nameTextBox.getEditText();
 				if (editText != null) {
-					checkEmptyName(editText.getText().toString());
+					updateFileNameFromEditText(editText.getText().toString());
 				}
 			}
 		};
@@ -307,7 +307,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		return rightButtonEnabled;
 	}
 
-	private void checkEmptyName(String name) {
+	private void updateFileNameFromEditText(String name) {
 		rightButtonEnabled = false;
 		String text = name.trim();
 		if (text.isEmpty()) {

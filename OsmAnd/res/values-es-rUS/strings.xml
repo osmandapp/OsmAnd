@@ -1129,7 +1129,7 @@
     <string name="tts_language_not_supported">El idioma elegido es incompatible con el motor TTS (texto a voz) instalado en Android, se usará el idioma TTS predefinido. ¿Buscar otro motor TTS en la tienda de aplicaciones\?</string>
     <string name="tts_missing_language_data_title">Faltan datos</string>
     <string name="tts_missing_language_data">¿Ir a la tienda de aplicaciones para descargar el idioma elegido?</string>
-    <string name="gpx_option_reverse_route">Invertir la dirección GPX</string>
+    <string name="gpx_option_reverse_route">Invertir la dirección de la traza</string>
     <string name="gpx_option_destination_point">Usar destino actual</string>
     <string name="gpx_option_from_start_point">Pasar a lo largo de la traza completa</string>
     <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta ubicación. 
@@ -3838,7 +3838,7 @@
     <string name="route_between_points_whole_track_button_desc">Recalcular toda la traza usando el perfil elegido.</string>
     <string name="route_between_points_warning_desc">A continuación, ajusta la traza al camino permitido más cercano con un perfil de navegación.</string>
     <string name="route_between_points_next_segment_button_desc">Recalcular sólo el siguiente segmento usando el perfil elegido.</string>
-    <string name="route_between_points_desc">Marca cómo conectar los puntos, con una línea recta o calcular una ruta entre ellos con el perfil elegido.</string>
+    <string name="route_between_points_desc">Marca cómo conectar los puntos, con una línea recta o calcular una ruta entre ellos como se detalla a continuación.</string>
     <string name="route_between_points_add_track_desc">Elige un archivo de traza al que se añadirá un nuevo segmento.</string>
     <string name="reverse_route">Ruta inversa</string>
     <string name="quick_action_add_gpx">Añadir punto de referencia de la traza</string>
@@ -3886,13 +3886,13 @@
     <string name="add_address">Añadir dirección</string>
     <string name="access_hint_enter_address">Ingresar dirección</string>
     <string name="shared_string_redo">Rehacer</string>
-    <string name="release_3_8">• Se ha actualizado el modo «Planificar ruta»: ahora permite usar diferentes tipos de navegación para cada segmento y adjunta cualquier traza a los caminos
+    <string name="release_3_8">• Se ha actualizado la función «Planificar ruta»: permite utilizar diferentes tipos de navegación por segmento y la inclusión de trazas
 \n
-\n • Nuevas opciones en el aspecto de las trazas: elegir el color, cambiar el grosor de las flechas de dirección y las marcas de inicio/fin.
+\n • Nuevo menú con el aspecto de las trazas: elegir el color, el grosor, mostrar las flechas de dirección y los iconos de inicio/fin.
 \n
-\n • Mejoras en la visibilidad de los nodos de bicicleta
+\n • Mejoras en la visibilidad de los nodos de bicicleta.
 \n
-\n • Menú contextual con información básica para las trazas
+\n • Las trazas ahora se pueden pulsar, contiene un menú contextual con información básica.
 \n
 \n • Algoritmos de búsqueda mejorados
 \n
@@ -3901,4 +3901,7 @@
 \n • Se han solucionado los problemas de la importación y exportación en los ajustes de los perfiles
 \n
 \n</string>
+    <string name="sort_name_descending">Nombre: Z – A</string>
+    <string name="sort_name_ascending">Nombre: A – Z</string>
+    <string name="sort_last_modified">Último modificado</string>
 </resources>

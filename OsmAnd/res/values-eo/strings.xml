@@ -3865,4 +3865,7 @@
     <string name="plan_route_trim_after">Tondi post</string>
     <string name="plan_route_change_route_type_before">Ŝanĝi specon de vojo antaŭ</string>
     <string name="plan_route_change_route_type_after">Ŝanĝi specon de vojo post</string>
+    <string name="sort_last_modified">Antaŭe modifita</string>
+    <string name="sort_name_descending">Nomo: Z – A</string>
+    <string name="sort_name_ascending">Nomo: A – Z</string>
 </resources>
