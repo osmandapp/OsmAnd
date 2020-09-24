@@ -355,12 +355,12 @@
     </style>
 
     <style name="OsmandDarkTheme.NoAnimation">
-        <item name="alertDialogTheme">@style/Theme.AppCompat.Dialog.Alert.NoAnimation</item>
+        <item name="alertDialogTheme">@style/Theme.MaterialComponents.Dialog.Alert.NoAnimation</item>
         <item name="dialog_title_color">@color/marker_red</item>
     </style>
 
     <style name="OsmandLightTheme.NoAnimation">
-        <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.NoAnimation</item>
+        <item name="alertDialogTheme">@style/Theme.MaterialComponents.Light.Dialog.Alert.NoAnimation</item>
     </style>
 
     <style name="CoordinateInputEditText" parent="Widget.AppCompat.EditText">
@@ -543,11 +543,17 @@
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-    <style name="Theme.AppCompat.Dialog.Alert.NoAnimation">
+    <style name="Theme.MaterialComponents.Dialog.Alert.NoAnimation">
+        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleDark</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleDark</item>
+        <item name="buttonBarNeutralButtonStyle">@style/DialogButtonStyleDark</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="Theme.AppCompat.Light.Dialog.Alert.NoAnimation">
+    <style name="Theme.MaterialComponents.Light.Dialog.Alert.NoAnimation">
+        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleLight</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleLight</item>
+        <item name="buttonBarNeutralButtonStyle">@style/DialogButtonStyleLight</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 

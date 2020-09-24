@@ -132,7 +132,7 @@ public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryW
 
 		@Override
 		public double getPointStepPx(double zoomCoef) {
-			return getPointBitmap().getHeight() * DIRECTION_ARROW_DISTANCE_MULTIPLIER * zoomCoef;
+			return getPointBitmap().getHeight() + trackWidth * 1.5f;
 		}
 	}
 }
