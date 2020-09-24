@@ -2065,7 +2065,7 @@
     <string name="rec_split">Разбиение на клипы</string>
     <string name="rec_split_title">Использовать разбиение на клипы</string>
     <string name="rec_split_desc">Циклическая перезапись клипов при превышении заданного объёма хранилища.</string>
-    <string name="switch_start_finish">Обратить пункты отправления и назначения</string>
+    <string name="switch_start_finish">Поменять местами пункты отправления и назначения</string>
     <string name="shared_string_remove">Удалить</string>
     <string name="rendering_attr_hideUnderground_name">Подземные объекты</string>
     <string name="data_is_not_available">Данные недоступны</string>
