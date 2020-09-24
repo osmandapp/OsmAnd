@@ -1140,7 +1140,7 @@
     <string name="sort_by_distance">ترتيب حسب المسافة</string>
     <string name="sort_by_name">ترتيب حسب الاسم</string>
     <string name="show_zoom_buttons_navigation_descr">عرض أزرار التقريب أثناء الملاحة.</string>
-    <string name="select_destination_and_intermediate_points">حدد الوجهات</string>
+    <string name="select_destination_and_intermediate_points">حدد الوجهة</string>
     <string name="shared_string_waypoint">إحداثية</string>
     <string name="rendering_attr_hideHouseNumbers_name">أرقام المنازل</string>
     <string name="confirm_usage_speed_cameras">غير مسموح استخدام تحذيرات كاميرا السرعة بالقانون في العديد من البلدان (ألمانيا وفرنسا، وإيطاليا، وغيرها). أوسماند لا تتحمل أي مسؤولية إذا كنت تنتهك القانون. الرجاء انقر فوق \"نعم\" فقط إذا كنت مؤهلاً استخدام هذه الميزة.</string>
@@ -1390,7 +1390,7 @@
     <string name="app_mode_train">قطار</string>
     <string name="current_track">المسار الحالي</string>
     <string name="map_widget_battery">مستوى البطارية</string>
-    <string name="change_markers_position">تغيير موقع العلامة</string>
+    <string name="change_markers_position">تغيير موقع التوجيه المباشر</string>
     <string name="follow_us">تابعنا</string>
     <string name="access_direction_audio_feedback">اتجاه صدى الصوت</string>
     <string name="use_osm_live_routing">الملاحة عبر أوسماند لايف</string>
@@ -1411,7 +1411,7 @@
     <string name="map_mode">وضع الخريطة</string>
     <string name="rendering_value_thin_name">رقيقة</string>
     <string name="rendering_value_medium_name">متوسط</string>
-    <string name="no_map_markers_found">لم تضف علامات على الخريطة</string>
+    <string name="no_map_markers_found">لم تضف توجيه مباشر على الخريطة</string>
     <string name="no_waypoints_found">لم يتم العثور على نقاط الطريق</string>
     <string name="report">التقرير</string>
     <string name="storage_permission_restart_is_required">سمح الآن للتطبيق بالكتابة على وحدة التخزين الخارجية. الرجاء إعادة تشغيله يدويا.</string>
@@ -1472,7 +1472,7 @@
     <string name="file_name_containes_illegal_char">يحتوي اسم الملف على حرف غير قانوني</string>
     <string name="reports_for">تقرير عن</string>
     <string name="world_maps">خرائط العالم</string>
-    <string name="move_marker_bottom_sheet_title">حرك الخريطة لتغيير مكان العلامة</string>
+    <string name="move_marker_bottom_sheet_title">حرك الخريطة لتغيير مكان التوجيه المباشر</string>
     <!-- string name="lat_lon_pattern">خط العرض: %1$.5f خط الطول: %2$.5f</string -->
     <string name="access_direction_audio_feedback_descr">إشارة صوتية عند اتجاه نقطة الوصول.</string>
     <string name="access_direction_haptic_feedback_descr">اشر عن اتجاه نقطة الهدف بالاهتزاز.</string>
@@ -1591,7 +1591,7 @@
     <string name="shared_string_move_down">حرك للاسفل</string>
     <string name="open_street_map_login_and_pass">اسم مستخدم و كلمة سر OSM</string>
     <string name="osm_live_email_desc">نحن بحاجة اليه لكي نوفر لك معلومات حول المساهمات.</string>
-    <string name="select_map_marker">حدد علامة الخريطة</string>
+    <string name="select_map_marker">حدد توجيه مباشر</string>
     <string name="show_transparency_seekbar">عرض شريط الشفافية</string>
     <string name="download_files_error_not_enough_space">لا توجد مساحة كافية!
 \n {3} MB مطلوب مؤقتا ، {1} ميجا بايت بشكل دائم.
@@ -1607,12 +1607,12 @@
     <string name="route_tl">انعطف يسارا واذهب</string>
     <string name="plugin_nautical_descr">هذا الملحق يوفير خرائط بحرية للزوارق والمراكب الشراعية وأنواع أخرى من الرياضات المائية.
 \n
-\nخريطة خاصة إضافية للتطبيق ستقدم كل علامات الملاحة البحرية سواء داخلية أو شاطئية وكذلك جدول للرموز. وصف كل علامة ملاحة يوفر التفاصيل اللازمة للتعرف عليها ومعانيها (الفئة، الشكل، اللون، التسلسل، المرجع...إلخ.).
+\nخريطة خاصة إضافية للتطبيق ستقدم كل علامات الملاحة البحرية سواء داخلية أو شاطئية وكذلك جدول للرموز. وصف كل وجهة ملاحة يوفر التفاصيل اللازمة للتعرف عليها ومعانيها (الفئة، الشكل، اللون، التسلسل، المرجع...إلخ.).
 \n
 \nللعودة إلى واحدة من أنماط الخريطة التقليدية، ببساطة إما عطل هذا الملحق مرة أخرى أو غير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
     <string name="active_markers">عدد خطوط التوجيه المباشر</string>
-    <string name="map_markers">علامات الخريطة</string>
+    <string name="map_markers">التوجيه المباشر</string>
     <string name="routing_attr_avoid_borders_name">تخطي الحدود</string>
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل.</string>
     <string name="search_categories">الفئات</string>
@@ -1630,10 +1630,10 @@
     <string name="available_maps">الخرائط الموجودة</string>
     <string name="access_shared_string_navigate_up">انتقال للأعلى</string>
     <string name="osm_user_stat">التعديلات %1$s ، الرتبة %2$s ، مجموع التعديلات %3$s</string>
-    <string name="map_marker_1st">العلامة الأولى للخريطة</string>
-    <string name="map_marker_2nd">العلامة الثانية للخريطة</string>
-    <string name="shared_string_add_to_map_markers">إضافة إلى علامات الخريطة</string>
-    <string name="clear_active_markers_q">حذف كافة العلامات النشطة على الخريطة؟</string>
+    <string name="map_marker_1st">التوجيه المباشرالأول للخريطة</string>
+    <string name="map_marker_2nd">التوجيه المباشرالثاني للخريطة</string>
+    <string name="shared_string_add_to_map_markers">إضافة إلى التوجيه المباشر</string>
+    <string name="clear_active_markers_q">حذف كافة التوجيه المباشرالنشط على الخريطة؟</string>
     <string name="map_marker">علامة على الخريطة</string>
     <string name="show_polygons">عرض المضلعات</string>
     <string name="shared_string_status">الحالة</string>
@@ -1750,7 +1750,7 @@
     <string name="update_poi_error_local">خطأ تحيين القائمة المحلية لPOI.</string>
     <string name="context_menu_item_update_poi">تحيين الPOI</string>
     <string name="upload_osm_note_description">قم بتحميل مذكرة OSM الخاصة بك دون الكشف عن هويتك أو باستخدام ملف تعريف OpenStreetMap.org .</string>
-    <string name="add_points_to_map_markers_q">إضافة جميع النقاط إلى علامات الخريطة؟</string>
+    <string name="add_points_to_map_markers_q">إضافة جميع النقاط إلى التوجيه المباشر؟</string>
     <string name="clear_markers_history_q">مسح السجلات ؟</string>
     <string name="rendering_attr_showMtbRoutes_name">إظهار مسارات الدراجة الجبلية</string>
     <string name="clear_updates_proposition_message">يمكنك إزالة التحديثات المحملة والرجوع إلى الإصدار الأصلي للخريطة</string>
@@ -2312,7 +2312,7 @@
     <string name="rendering_attr_depthContours_description">إظهار نقاط ومعالم العمق.</string>
     <string name="auto_split_recording_descr">بدء مقطع جديدة بعد فارق 6 دقائق، مسار جديد بعد فارق 2 ساعة، أو ملف جديد بعد فارق أطول إذا تغير التاريخ.</string>
     <string name="shared_string_paused">متوقف مؤقتاً</string>
-    <string name="route_is_too_long_v2">قد يكون المسار طويلا جداً للحساب. يرجى إضافة وجهات وسطى إذا لم يتم العثور على نتيجة خلال 10 دقائق.</string>
+    <string name="route_is_too_long_v2">قد يكون المسار طويلا جدا للحساب. يرجى إضافة وجهات وسطى إذا لم يتم العثور على نتيجة خلال 10 دقائق.</string>
     <string name="osmand_extended_description_part1">أوسماند(توجيهات OSM للتنقل الآلية) تطبيق خريطة وتنقل مع إمكانية الوصول إلى بيانات (OSM) مجاناً وفي جميع أنحاء العالم، وبجودة عالية
 \n
 \n. استمتع بمستكشف بالصوت والصورة، وعرض POI (نقاط الاهتمام)، إنشاء وإدارة مسارات GPX، استخدام عرض ارتفاع بيانات الخطوط المحيطية (عن طريق الملحق)، اختيار بين نمط القيادة، ركوب الدراجات والمشاة، التعديل على الموقع وغيرها.</string>
@@ -2482,12 +2482,12 @@
     <string name="map_orientation_change_in_accordance_with_speed">عتبة توجيه الخريطة</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">حدد أدناه على أي سرعة يتغير توجيه الخريطة من \'اتجاه الحركة\' إلى \'البوصلة\'.</string>
     <string name="all_markers_moved_to_history">تم نقل جميع العلامات إلى السجل</string>
-    <string name="marker_moved_to_history">تم نقل العلامة إلى السجل</string>
-    <string name="marker_moved_to_active">العلامة نقلت كنشطه</string>
+    <string name="marker_moved_to_history">تم نقل التوجيه المباشرإلى السجل</string>
+    <string name="marker_moved_to_active">انتقل التوجيه المباشر نشط</string>
     <string name="shared_string_list">قائمة</string>
     <string name="shared_string_groups">مجموعات</string>
     <string name="passed">آخر استخدام : %1$s</string>
-    <string name="make_active">تنشيط العلامة</string>
+    <string name="make_active">تنشيط التوجيه المباشر</string>
     <string name="today">اليوم</string>
     <string name="yesterday">أمس</string>
     <string name="last_seven_days">آخر ٧ أيام</string>
@@ -2503,12 +2503,12 @@
     <string name="show_arrows_on_the_map">سهم متجه للهدف</string>
     <string name="show_passed">عرض المتجاوز</string>
     <string name="hide_passed">إخفاء المتجاوز</string>
-    <string name="remove_from_map_markers">إزالة من \"علامات الخريطة\"</string>
+    <string name="remove_from_map_markers">إزالة من \"التوجيه المباشر\"</string>
     <string name="descendingly">تنازلي</string>
     <string name="ascendingly">تصاعدي</string>
     <string name="date_added">تاريخ الإضافة</string>
     <string name="order_by">ترتيب حسب:</string>
-    <string name="marker_show_distance_descr">حدد كيفية الإشارة إلى المسافة والاتجاه لعلامات الخريطة على شاشة الخريطة:</string>
+    <string name="marker_show_distance_descr">حدد كيفية الإشارة إلى المسافة والاتجاه للتوجيه المباشر على شاشة الخريطة:</string>
     <string name="use_location">استخدم الموقع</string>
     <string name="add_location_as_first_point_descr">أضف موقعك كنقطة أولى لتخطيط طريق مثالي.</string>
     <string name="my_location">موقعي</string>
@@ -2536,12 +2536,12 @@
     <string name="show_map">أظهر الخريطة</string>
     <string name="route_is_calculated">تم حساب المسار</string>
     <string name="round_trip">رحلة ذهاب وإياب</string>
-    <string name="plan_route_no_markers_toast">يجب عليك إضافة علامة واحدة على الأقل لاستخدام هذه الوظيفة.</string>
+    <string name="plan_route_no_markers_toast">يجب عليك إضافة توجيه مباشر واحد على الأقل لاستخدام هذه الوظيفة.</string>
     <string name="wrong_format">تنسيق خاطئ</string>
     <string name="enter_new_name">أدخل اسم جديد</string>
     <string name="shared_string_back">عودة</string>
     <string name="shared_string_view">عرض</string>
-    <string name="waypoints_added_to_map_markers">تمت إضافة نقاط الطريق إلى علامات الخريطة</string>
+    <string name="waypoints_added_to_map_markers">تمت إضافة نقاط الطريق إلى التوجيه المباشر للخريطة</string>
     <string name="wrong_input">إدخال خاطئ</string>
     <string name="import_gpx_file_description">يمكن استيرادها كنقاط مفضلة، أو كملف GPX.</string>
     <string name="import_as_gpx">استيراد كملف GPX</string>
@@ -2549,15 +2549,15 @@
     <string name="import_file">استيراد ملف</string>
     <string name="tap_on_map_to_hide_interface_descr">نقرة على الخريطة ستفعل أزرار التحكم والويدجت.</string>
     <string name="tap_on_map_to_hide_interface">شاشة كاملة</string>
-    <string name="mark_passed">علامة مُجتازة</string>
+    <string name="mark_passed">توجيه مباشر مجتاز</string>
     <string name="empty_state_osm_edits">إنشاء أو تعديل عناصر OSM</string>
     <string name="empty_state_osm_edits_descr">قم بإنشاء أو تعديل نقاط الاهتمام OSM ، وفتح ملاحظات OSM أو التعليق عليها ، والمساهمة في ملفات GPX المسجلة.</string>
     <string name="shared_string_deleted">حذف</string>
     <string name="shared_string_edited">مُعدلة</string>
     <string name="shared_string_added">تمت الإضافة</string>
     <string name="modify_the_search_query">تعديل طلب البحث.</string>
-    <string name="marker_activated">تم تنشيط العلامة %s.</string>
-    <string name="one_tap_active_descr">انقر على العلامة في الخريطة لجعلها أعلى العلامات النشطة بدون فتح القائمة.</string>
+    <string name="marker_activated">تم تنشيط التوجيه المباشر%s.</string>
+    <string name="one_tap_active_descr">انقر على التوجيه المباشر في الخريطة لجعله الاعلى بدون فتح القائمة.</string>
     <string name="empty_state_av_notes">تدوين ملاحظات!</string>
     <string name="without_time_limit">بدون حد زمني</string>
     <string name="context_menu_read_full_article">اقرأ المقال كاملا</string>
@@ -2570,22 +2570,22 @@
     <string name="will_open_on">يفتح أبوابه على</string>
     <string name="additional_actions">إجراءات إضافية</string>
     <string name="shared_string_actions">إجراءات</string>
-    <string name="shared_string_marker">علامة</string>
+    <string name="shared_string_marker">خط</string>
     <string name="notes_by_date">الملاحظات حسب التاريخ</string>
     <string name="by_date">حسب التاريخ</string>
     <string name="by_type">حسب النوع</string>
     <string name="shared_string_more_without_dots">المزيد</string>
-    <string name="appearance_on_the_map">العلامة</string>
+    <string name="appearance_on_the_map">المظهر على الخريطة</string>
     <string name="shared_string_gpx_waypoints">نقاط المسار</string>
     <string name="add_group">إضافة مجموعة</string>
-    <string name="empty_state_markers_active">قم بإنشاء علامات على الخريطة !</string>
+    <string name="empty_state_markers_active">قم بإنشاء التوجيه المباشر على الخريطة !</string>
     <string name="empty_state_markers_groups">استيراد مجموعات</string>
     <string name="digits_quantity">عدد الأرقام</string>
     <string name="shared_string_right">اليمين</string>
     <string name="shared_string_left">اليسار</string>
     <string name="shared_string_paste">لصق</string>
     <string name="go_to_next_field">الانتقال إلى الحقل التالي</string>
-    <string name="rename_marker">تعديل تسمية العلامة</string>
+    <string name="rename_marker">إعادة تسمية التوجيه المباشر</string>
     <string name="total_donations">مجموع التبرعات</string>
     <string name="rendering_attr_hidePOILabels_name">تسميات POI</string>
     <string name="shared_string_without_name">بدون اسم</string>
@@ -2593,7 +2593,7 @@
     <string name="add_favourites_group_to_markers_descr">حدد مفضلة لإضافتها إلى العلامات.</string>
     <string name="favourites_group">مجموعة مفضلة</string>
     <string name="shared_string_two">خطين</string>
-    <string name="shared_string_one">علامة</string>
+    <string name="shared_string_one">التوجيه المباشر</string>
     <string name="osm_recipient_stat">التعديلات %1$s, المبلغ %2$s mBTC</string>
     <string name="osm_recipients_label">مساهمي OSM المستفيدون</string>
     <string name="winter_and_ski_renderer">الشتاء و التزحلق</string>
@@ -2693,7 +2693,7 @@
     <string name="download_all">تنزيل الكل</string>
     <string name="shared_string_restart">إعادة تشغيل التطبيق</string>
     <string name="shared_string_bookmark">إشارة مرجعية</string>
-    <string name="waypoints_removed_from_map_markers">نقاط بالطريق تم إزالتها من علامات الخريطة</string>
+    <string name="waypoints_removed_from_map_markers">نقاط بالطريق تم إزالتها من التوجيه المباشر للخريطة</string>
     <string name="powered_by_osmand">بواسطة أوسماند</string>
     <string name="osm_live_plan_pricing">الأسعار والاشتراك</string>
     <string name="osm_live_payment_monthly_title">شهري</string>
@@ -2708,14 +2708,14 @@
     <string name="osm_live_payment_renews_annually">يجدد سنويا</string>
     <string name="osm_live_payment_header">حدد فترة الدفع المناسبة لك:</string>
     <string name="osm_live_payment_contribute_descr">تبرعات مساعدة صندوق رسم الخرائط OSM.</string>
-    <string name="markers_remove_dialog_msg">حذف العلامة \'%s\'؟</string>
-    <string name="edit_map_marker">تعديل العلامة</string>
+    <string name="markers_remove_dialog_msg">حذف التوجيه المباشر \'%s\'؟</string>
+    <string name="edit_map_marker">تعديل التوجيه المباشر</string>
     <string name="search_street">بحث عن شارع</string>
     <string name="start_search_from_city">اختر المدينة أولاً</string>
     <string name="shared_string_restore">استعادة</string>
     <string name="third_party_application">تطبيق من طرف ثالث</string>
-    <string name="keep_passed_markers_descr">عند التفعيل ستبقى العلامات المضافة من مجموعة إحداثيات أو من نقاط طريق على الخريطة عند اختيار \"علامة مُجتازة\". إذا كانت المجموعة غير نشطة ستختفي العلامات من الخريطة.</string>
-    <string name="keep_passed_markers">إبقاء العلامات المتجاوزة على الخريطة</string>
+    <string name="keep_passed_markers_descr">عند التفعيل سيبقى التوجيه المباشر المضاف من مجموعة إحداثيات أو من نقاط طريق على الخريطة عند اختيار \"تجاوز التوجيه المباشر\". إذا كانت المجموعة غير نشطة ستختفي الوجهات المباشرة من الخريطة.</string>
+    <string name="keep_passed_markers">إبقاء التوجيه المباشر المتجاوز على الخريطة</string>
     <string name="more_transport_on_stop_hint">هناك المزيد من وسائل النقل في هذا الموقف.</string>
     <string name="ask_for_location_permission">يرجى إعطاء إذن تحديد الموقع للتطبيق لكي يواصل.</string>
     <string name="thank_you_for_feedback">شكرا على الرد</string>
@@ -2843,11 +2843,11 @@
     <string name="empty_state_av_notes_desc">إضافة ملاحظة صوتية أو فيديو أو صورة لكل نقطة على الخريطة، باستخدام قائمة السياق أو القطعة.</string>
     <string name="looking_for_tracks_with_waypoints">ابحث عن المسارات مع نقاط الطريق</string>
     <string name="add_track_to_markers_descr">حدد مسار لإضافة نقاط الطريق إلى العلامات(يتم سرد المسارات فقط مع نقاط الطريق).</string>
-    <string name="empty_state_markers_active_desc">نقرة طويلة أو قصيرة على الأماكن ثم اضغط على زر العلامة.</string>
+    <string name="empty_state_markers_active_desc">نقرة طويلة أو قصيرة على الأماكن ثم اضغط على زر التوجيه المباشر.</string>
     <string name="empty_state_markers_groups_desc">يمكنك استيراد المجموعات المفضلة أو نقاط المسار كعلامات.</string>
     <string name="empty_state_markers_history_desc">ستظهر العلامات التي تم تجاوزها على هذه الشاشة.</string>
     <string name="show_guide_line_descr">خط مباشر من موقعك إلى الهدف.</string>
-    <string name="show_arrows_descr">عرض سهم واحد أو اثنين ليشير إلى اتجاه العلامة النشطة.</string>
+    <string name="show_arrows_descr">عرض سهم واحد أو اثنين ليشير إلى الوجهة النشطة.</string>
     <string name="distance_indication_descr">طريقة عرض المسافة من موقعي إلى العلامات النشطة.</string>
     <string name="active_markers_descr">عدد الأسهم تجاه العلامات النشطة ( للملاحة في الصحراء).</string>
     <string name="rendering_value_black_name">أسود</string>
