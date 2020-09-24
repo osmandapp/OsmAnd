@@ -215,7 +215,9 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 
 	private void sortFileList() {
 		List<GPXInfo> gpxInfoList = gpxInfoMap.get(selectedFolder);
-		sortSelected(gpxInfoList);
+		if (gpxInfoList != null) {
+			sortSelected(gpxInfoList);
+		}
 		adapter.setGpxInfoList(gpxInfoList != null ? gpxInfoList : new ArrayList<GPXInfo>());
 	}
 
