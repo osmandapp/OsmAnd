@@ -980,7 +980,7 @@
     <string name="rendering_category_details">التفاصيل</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
     <string name="rotate_map_to_bearing">اتجاه الخريطة</string>
-    <string name="rotate_map_bearing_opt">حسب اتجاه الحركة</string>
+    <string name="rotate_map_bearing_opt">اتجاه الحركة في الأعلى</string>
     <string name="rotate_map_none_opt">الشمال في الأعلى</string>
     <string name="rotate_map_compass_opt">حسب البوصلة</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
@@ -3122,7 +3122,7 @@
     <string name="pref_selected_by_default_for_profiles">يتم تحديد هذا الاعداد بشكل افتراضي للأوضاع: %s</string>
     <string name="change_default_settings">تغيير الإعدادات</string>
     <string name="discard_changes">تجاهل التغيير</string>
-    <string name="apply_to_all_profiles">تطبيق علي كافة الأوضاع</string>
+    <string name="apply_to_all_profiles">تطبيق على كافة الأوضاع</string>
     <string name="start_up_message_pref">رسالة البدء</string>
     <string name="analytics_pref_title">تحليل</string>
     <string name="turn_screen_on_info">إظهار الخريطة على شاشة القفل أثناء التنقل.</string>
