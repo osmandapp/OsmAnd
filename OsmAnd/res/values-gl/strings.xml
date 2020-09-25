@@ -3925,4 +3925,7 @@ Lon %2$s</string>
     <string name="monitoring_control_start">Gravar</string>
     <string name="disable_recording_once_app_killed_descrp">A gravación da pista deterase ó pechar a aplicación (mediante aplicacións recentes). (A indicación de fondo do OsmAnd, desaparecerá da barra de notificacións do Android.)</string>
     <string name="save_global_track_interval_descr">Especifica o intre de gravación xeral para pistas (habilitado a través do trebello de gravación no mapa).</string>
+    <string name="sort_last_modified">Última modificación</string>
+    <string name="sort_name_descending">Nome: Z – A</string>
+    <string name="sort_name_ascending">Nome: A – Z</string>
 </resources>
