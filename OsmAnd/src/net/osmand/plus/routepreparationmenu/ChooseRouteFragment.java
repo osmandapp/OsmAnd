@@ -37,6 +37,7 @@ import androidx.viewpager.widget.ViewPager;
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -482,12 +483,18 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 					OsmandApplication app = mapActivity.getMyApplication();
 					GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 
-					String fileName;
-					if (paramsBuilder == null || paramsBuilder.getFile() == null || paramsBuilder.getFile().path == null) {
+					String fileName = null;
+					if (paramsBuilder != null && paramsBuilder.getFile() != null) {
+						GPXFile gpxFile = paramsBuilder.getFile();
+						if (!Algorithms.isEmpty(gpxFile.path)) {
+							fileName = Algorithms.getFileNameWithoutExtension(new File(gpxFile.path).getName());
+						} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
+							fileName = gpxFile.tracks.get(0).name;
+						}
+					}
+					if (Algorithms.isEmpty(fileName)) {
 						String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
 						fileName = FileUtils.createUniqueFileName(app, suggestedName, IndexConstants.GPX_INDEX_DIR, GPX_FILE_EXT);
-					} else {
-						fileName = Algorithms.getFileNameWithoutExtension(new File(paramsBuilder.getFile().path).getName());
 					}
 					SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 							ChooseRouteFragment.this, null, fileName,
