@@ -3744,4 +3744,7 @@
     <string name="shared_string_is_saved">har blitt lagret</string>
     <string name="one_point_error">Legg til minst to punkter.</string>
     <string name="shared_string_redo">Gjør om</string>
+    <string name="sort_last_modified">Sist endret</string>
+    <string name="sort_name_descending">Navn: Å - A</string>
+    <string name="sort_name_ascending">Navn: A - Å</string>
 </resources>
