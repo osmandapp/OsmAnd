@@ -3786,7 +3786,7 @@
     <string name="route_between_points">Itinéraire entre points</string>
     <string name="plan_a_route">Planifier un itinéraire</string>
     <string name="add_to_a_track">Ajouter à une trace</string>
-    <string name="shared_string_custom">Douane</string>
+    <string name="shared_string_custom">Personnalisé</string>
     <string name="add_hidden_group_info">Le point ajouté ne sera pas visible sur la carte car le groupe sélectionné est masqué. Vous pouvez le trouver dans \"%s\".</string>
     <string name="gpx_split_interval_descr">Sélectionnez l\'intervalle d\'affichage sur la trace des marques de distance ou de durée.</string>
     <string name="gpx_split_interval_none_descr">Sélectionner l\'option de découpage : durée ou distance.</string>
@@ -3859,13 +3859,13 @@
     <string name="previous_segment">Segment précédent</string>
     <string name="all_previous_segments">Tous les segments précédents</string>
     <string name="only_selected_segment_recalc">Seul le segment sélectionné sera recalculé avec le profil sélectionné.</string>
-    <string name="release_3_8">• Mise à jour du mode de planification d\'itinéraire autorisant différents types de navigation pour chaque segment et permettant de déplacer n\'importe quelle trace sur les routes
+    <string name="release_3_8">• Mise à jour du mode de planification d\'itinéraire : il autorise différents types de navigation par segment et permet d\'inclure les traces
 \n
-\n• Nouvelles options pour l\'apparence des traces : choix de la couleur et de l\'épaisseur des flèches de direction et affichage des marques de départ et d\'arrivée
+\n• Nouveau menu pour l\'apparence des traces : choix de la couleur, épaisseur, affichage des flèches de direction et icônes de départ et d\'arrivée
 \n
-\n• Amélioration de \"bicycle nodes visibility\"
+\n• Amélioration de la visibilité des nœuds relatifs aux infrastructures cyclistes
 \n
-\n• Nouveau menu contextuel pour les traces affichant des informations basiques
+\n• Les traces peuvent être \"tapées\" pour afficher un menu contextuel avec des informations basiques
 \n
 \n• Amélioration de l\'algorithme de recherche
 \n
