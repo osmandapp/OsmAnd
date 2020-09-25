@@ -72,7 +72,7 @@
     <string name="select_city">Выберите город</string>
     <string name="select_postcode">Поиск почтового индекса</string>
     <string name="quick_action_take_audio_note">Аудио⁣заметка</string>
-    <string name="quick_action_take_video_note">Видео⁣заметка</string>
+    <string name="quick_action_take_video_note">Записать видео</string>
     <string name="quick_action_take_photo_note">Фотозаметка</string>
     <string name="quick_action_add_osm_bug">OSM-заметка</string>
     <string name="parking_options">Функции парковки</string>
@@ -301,8 +301,8 @@
 \nГлобальные данные (между 70° на севере и 70° на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструментом визуализации Terra, флагманского спутника Системы Наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических Систем Японии (J-spacesystems).</string>
     <string name="srtm_paid_version_msg">Рассмотрите возможность покупки плагина «Линии высот» в Google Play, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
-    <string name="av_def_action_video">Видео⁣заметка</string>
-    <string name="av_def_action_audio">Аудио⁣заметка</string>
+    <string name="av_def_action_video">Запись видео</string>
+    <string name="av_def_action_audio">Запись аудио</string>
     <string name="av_widget_action_descr">Действие по умолчанию для виджета:</string>
     <string name="av_widget_action">Действие по умолчанию для виджета</string>
     <string name="av_video_format_descr">Формат вывода видео:</string>
@@ -325,13 +325,13 @@
     <string name="recording_context_menu_play">Проиграть</string>
     <string name="recording_description">Запись %1$s %3$s %2$s</string>
     <string name="recording_default_name">Запись</string>
-    <string name="map_widget_av_notes">Медиазаметки</string>
+    <string name="map_widget_av_notes">Аудиозаметки</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-плагин для линий высот</string>
     <string name="map_widget_distancemeasurement">Измерение расстояний</string>
     <string name="audionotes_location_not_defined">Нажмите «Использовать местоположение…» чтобы добавить заметку к данному местоположению.</string>
     <string name="map_widget_audionotes">Аудиозаметки</string>
     <string name="audionotes_plugin_description">Создавайте аудио-, видео- и фотозаметки в поездке, используя виджет или контекстное меню.</string>
-    <string name="audionotes_plugin_name">Медиазаметки</string>
+    <string name="audionotes_plugin_name">Аудио/видеозаметки</string>
     <string name="index_srtm_parts">частей</string>
     <string name="index_srtm_ele">Линии высот</string>
     <string name="srtm_plugin_name">Контурные линии</string>
@@ -1201,7 +1201,7 @@
     <string name="av_settings">Настройки аудио и видео </string>
     <string name="intermediate_points_change_order">Изменить порядок</string>
     <string name="recording_context_menu_show">Просмотр</string>
-    <string name="av_def_action_picture">Фотозаметка</string>
+    <string name="av_def_action_picture">Сделать фото</string>
     <string name="recording_context_menu_precord">Сделать фото</string>
     <string name="dropbox_plugin_description">Синхронизация треков и медиазаметок с вашим аккаунтом Dropbox.</string>
     <string name="dropbox_plugin_name">Плагин Dropbox</string>
@@ -2134,7 +2134,7 @@
     <string name="shared_string_move_up">Переместить ↑</string>
     <string name="shared_string_move_down">Переместить ↓</string>
     <string name="finish_navigation">Завершить навигацию</string>
-    <string name="avoid_road">Исключить из маршрута</string>
+    <string name="avoid_road">Избегать дорог</string>
     <string name="osm_live_user_public_name">Публичное имя</string>
     <string name="osm_live_support_region">Поддерживаемый регион</string>
     <string name="osm_live_enter_user_name">Введите публичное имя</string>
@@ -2227,10 +2227,9 @@
     <string name="location_not_found">Не удалось определить местоположение</string>
     <string name="first_usage_wizard_desc">OsmAnd определит ваше местоположение и предложит загрузить карты для этой области.</string>
     <string name="search_map">Поиск карт…</string>
-    <string name="search_another_country">Другой регион</string>
+    <string name="search_another_country">Выберите другой регион</string>
     <string name="skip_map_downloading">Пропустить загрузку карт</string>
-    <string name="skip_map_downloading_desc">У вас нет загруженных карт. Вы можете выбрать карту из списка или скачать позже (Меню — %1$s). Для использования без интернета скачайте карту заранее. 
-\nДля работы с картами онлайн включите плагин «Онлайн-карты».</string>
+    <string name="skip_map_downloading_desc">У вас нет загруженных карт. Вы можете загрузить карту из списка или сделать это позже («Меню — %1$s»).</string>
     <string name="si_mi_meters">Мили/метры</string>
     <string name="get_for">Получить за %1$s</string>
     <string name="get_it">Получить</string>
@@ -2671,7 +2670,7 @@
     <string name="shared_string_current">Текущий</string>
     <string name="last_intermediate_dest_description">Добавляет промежуточную остановку</string>
     <string name="first_intermediate_dest_description">Добавляет начальную остановку</string>
-    <string name="subsequent_dest_description">Добавляет в конец точку в качестве нового пункта назначения</string>
+    <string name="subsequent_dest_description">Перемещает пункт назначения и создаёт промежуточную точку</string>
     <string name="show_closed_notes">Показать закрытые заметки</string>
     <string name="switch_osm_notes_visibility_desc">Показать/скрыть заметки OSM на карте.</string>
     <string name="gpx_file_desc">GPX — подходит для экспорта в JOSM и другие OSM редакторы.</string>
@@ -2778,7 +2777,7 @@
     <string name="paid_app">Платное приложение</string>
     <string name="paid_plugin">Платный плагин</string>
     <string name="osmand_team">Команда OsmAnd</string>
-    <string name="maps_you_need_descr">Рекомендации на основе ваших закладок:</string>
+    <string name="maps_you_need_descr">На основе сохранённых вами статей мы рекомендуем вам скачать следующие карты:</string>
     <string name="maps_you_need">Нужные вам карты</string>
     <string name="shared_string_restart">Перезапуск</string>
     <string name="purchase_cancelled_dialog_title">Вы отменили подписку OsmAnd Live</string>
@@ -2885,14 +2884,14 @@
     <string name="lang_gn_py">Гуарани</string>
     <string name="run_full_osmand_msg">Вы используете {0} карту, которая поставляется OsmAnd. Хотите запустить полную версию Osmand\?</string>
     <string name="run_full_osmand_header">Запустить OsmAnd\?</string>
-    <string name="add_destination_point">Добавить точку маршрута</string>
+    <string name="add_destination_point">Задать пункт назначения</string>
     <string name="add_intermediate_point">Добавить промежуточный пункт</string>
     <string name="add_start_point">Установить отправную точку</string>
     <string name="route_way">Путь</string>
     <string name="points_of_interests">Точки интереса (POI)</string>
     <string name="waiting_for_route_calculation">Расчёт маршрута…</string>
     <string name="app_mode_public_transport">Общественный транспорт</string>
-    <string name="avoid_roads_descr">Укажите на карте или в списке ниже, каких дорог следует избегать при навигации:</string>
+    <string name="avoid_roads_descr">Выберите дорогу на карте или из списка ниже, которую вы хотите избежать во время навигации:</string>
     <string name="simulate_navigation">Моделировать навигацию</string>
     <string name="choose_track_file_to_follow">Выберите файл трека для следования</string>
     <string name="voice_announcements">Голосовые подсказки</string>
@@ -3068,7 +3067,7 @@
     <string name="app_mode_horse">Лошадь</string>
     <string name="app_mode_helicopter">Вертолёт</string>
     <string name="osmand_routing_promo">Вы можете добавить собственную модифицированную версию routing.xml в ..osmand/routing</string>
-    <string name="select_icon_profile_dialog_title">Значок</string>
+    <string name="select_icon_profile_dialog_title">Выберите значок</string>
     <string name="routing_profile_ski">Лыжи</string>
     <string name="profile_type_descr_string">Тип: %s</string>
     <string name="profile_type_base_string">Базовый профиль</string>
@@ -3201,7 +3200,7 @@
     <string name="shared_string_example">Пример</string>
     <string name="change_default_settings">Изменить настройки</string>
     <string name="discard_changes">Отменить изменение</string>
-    <string name="apply_to_current_profile">Применить только к профилю «%1$s»</string>
+    <string name="apply_to_current_profile">Применить только к «%1$s»</string>
     <string name="apply_to_all_profiles">Применить ко всем профилям</string>
     <string name="start_up_message_pref">Сообщение при запуске</string>
     <string name="analytics_pref_title">Аналитика</string>
@@ -3233,13 +3232,13 @@
     <string name="map_during_navigation_info">Карта во время навигации</string>
     <string name="map_during_navigation">Карта во время навигации</string>
     <string name="vehicle_parameters_descr">Скорость движения, размеры, масса транспортного средства</string>
-    <string name="vehicle_parameters">Физические параметры</string>
+    <string name="vehicle_parameters">Параметры транспортного средства</string>
     <string name="voice_announces_info">Голосовые оповещения происходят только во время навигации.</string>
     <string name="voice_announces_descr">Навигационные инструкции и объявления</string>
     <string name="voice_announces">Голосовые подсказки</string>
     <string name="screen_alerts">Экранные оповещения</string>
     <string name="route_parameters_descr">Настройка параметров маршрута</string>
-    <string name="route_parameters">Маршрутизация</string>
+    <string name="route_parameters">Параметры маршрута</string>
     <string name="logcat_buffer">Буфер Logcat</string>
     <string name="plugins_settings">Настройки плагинов</string>
     <string name="language_and_output">Язык и вывод</string>
@@ -3466,7 +3465,7 @@
     <string name="export_profile_dialog_description">Вы можете выбрать дополнительные данные для экспорта вместе с профилем.</string>
     <string name="shared_string_app_default_w_val">Приложение по умолчанию (%s)</string>
     <string name="no_recalculation_setting">Не перестраивать</string>
-    <string name="route_recalculation_dist_title">Отклонение для пересчёта</string>
+    <string name="route_recalculation_dist_title">Минимальное отклонение для перестроения маршрута</string>
     <string name="route_recalculation_dist_descr">Маршрут будет пересчитан, если расстояние до него больше заданного параметра</string>
     <string name="profile_type_custom_string">Пользовательский профиль</string>
     <string name="shared_string_angle_param">Угол: %s°</string>
@@ -3550,7 +3549,7 @@
     <string name="items_added">Объекты добавлены</string>
     <string name="shared_string_import_complete">Импорт завершён</string>
     <string name="import_complete_description">Все данные из %1$s импортированы, вы можете использовать кнопки ниже, чтобы открыть соответствующий раздел приложения для управления ими.</string>
-    <string name="recalculate_route_distance_promo">При уходе с маршрута на расстояние, превышающее это значение, маршрут будет перестроен автоматически.</string>
+    <string name="recalculate_route_distance_promo">Маршрут будет пересчитан, если расстояние от маршрута до текущего местоположения больше выбранного значения.</string>
     <string name="select_distance_route_will_recalc">Отклонение, при котором маршрут будет пересчитан.</string>
     <string name="shared_string_legend">Легенда</string>
     <string name="search_offline_geo_error">Невозможно разобрать геоссылку «%s».</string>
@@ -3574,7 +3573,7 @@
     <string name="add_description">Добавить описание</string>
     <string name="select_group">Категории</string>
     <string name="shared_string_square">Квадрат</string>
-    <string name="select_shape">Форма</string>
+    <string name="select_shape">Выберите форму</string>
     <string name="shared_string_circle">Круг</string>
     <string name="shared_string_octagon">Восьмиугольник</string>
     <string name="accessibility_announce">Сообщение о доступности</string>
@@ -3813,14 +3812,14 @@
     <string name="select_track_width">Выберите ширину</string>
     <string name="gpx_direction_arrows">Стрелки направления</string>
     <string name="track_coloring_solid">Сплошной</string>
-    <string name="plan_route_last_edited">Дата изменения</string>
+    <string name="plan_route_last_edited">Последнее изменение</string>
     <string name="plan_route_import_track">Импортировать трек</string>
     <string name="plan_route_open_existing_track">Открыть существующий трек</string>
     <string name="plan_route_create_new_route">Создать новый маршрут</string>
     <string name="plan_route_select_track_file_for_open">Выберите файл трека.</string>
     <string name="shared_string_done">Готово</string>
     <string name="overwrite_track">Перезаписать трек</string>
-    <string name="route_between_points_add_track_desc">Выбрать трек, к которому будет добавлен новый сегмент.</string>
+    <string name="route_between_points_add_track_desc">Выберите трек, к которому будет добавлен новый сегмент.</string>
     <string name="navigation_profile">Профиль</string>
     <string name="threshold_distance">Предельная дистанция</string>
     <string name="save_as_new_track">Сохранить как новый трек</string>
