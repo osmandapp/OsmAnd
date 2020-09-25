@@ -213,7 +213,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
 				boolean osmandRouter = mode.getRouteService() == RouteProvider.RouteService.OSMAND;
 				if (rparams != null && osmandRouter) {
-					boolean showReverseCard = !gpxFile.hasRoute() || gpxFile.hasRtePt();
+					boolean showReverseCard = !routingHelper.isCurrentGPXRouteV2();
 					if (showReverseCard) {
 						cardsContainer.addView(buildDividerView(cardsContainer, false));
 
