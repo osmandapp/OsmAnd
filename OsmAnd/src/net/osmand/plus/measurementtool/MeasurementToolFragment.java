@@ -1521,8 +1521,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private String getSuggestedFileName() {
 		GpxData gpxData = editingCtx.getGpxData();
-		String displayedName;
-		if (gpxData == null) {
+		String displayedName = null;
+		if (gpxData != null) {
+			GPXFile gpxFile = gpxData.getGpxFile();
+			if (!Algorithms.isEmpty(gpxFile.path)) {
+				displayedName = Algorithms.getFileNameWithoutExtension(new File(gpxFile.path).getName());
+			} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
+				displayedName = gpxFile.tracks.get(0).name;
+			}
+		}
+		if (gpxData == null || displayedName == null) {
 			String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
 			displayedName = FileUtils.createUniqueFileName(requireMyApplication(), suggestedName, GPX_INDEX_DIR, GPX_FILE_EXT);
 		} else {

@@ -487,7 +487,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 						String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
 						fileName = FileUtils.createUniqueFileName(app, suggestedName, IndexConstants.GPX_INDEX_DIR, GPX_FILE_EXT);
 					} else {
-						fileName = AndroidUtils.trimExtension(new File(paramsBuilder.getFile().path).getName());
+						fileName = Algorithms.getFileNameWithoutExtension(new File(paramsBuilder.getFile().path).getName());
 					}
 					SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 							ChooseRouteFragment.this, null, fileName,
