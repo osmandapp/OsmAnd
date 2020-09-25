@@ -2482,7 +2482,7 @@
     <string name="map_orientation_change_in_accordance_with_speed">عتبة توجيه الخريطة</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">حدد أدناه على أي سرعة يتغير توجيه الخريطة من \'اتجاه الحركة\' إلى \'البوصلة\'.</string>
     <string name="all_markers_moved_to_history">تم نقل جميع العلامات إلى السجل</string>
-    <string name="marker_moved_to_history">تم نقل التوجيه المباشرإلى السجل</string>
+    <string name="marker_moved_to_history">تم نقل التوجيه المباشر إلى السجل</string>
     <string name="marker_moved_to_active">التوجيه المباشر انتقل كنشط</string>
     <string name="shared_string_list">قائمة</string>
     <string name="shared_string_groups">مجموعات</string>
@@ -2556,7 +2556,7 @@
     <string name="shared_string_edited">مُعدلة</string>
     <string name="shared_string_added">تمت الإضافة</string>
     <string name="modify_the_search_query">تعديل طلب البحث.</string>
-    <string name="marker_activated">تم تنشيط التوجيه المباشر%s.</string>
+    <string name="marker_activated">تم تنشيط التوجيه المباشر %s.</string>
     <string name="one_tap_active_descr">انقر على التوجيه المباشر في الخريطة لجعله الاعلى بدون فتح القائمة.</string>
     <string name="empty_state_av_notes">تدوين ملاحظات!</string>
     <string name="without_time_limit">بدون حد زمني</string>
