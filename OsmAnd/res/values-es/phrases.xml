@@ -3833,4 +3833,16 @@
     <string name="poi_traffic_signals_vibration">Vibración</string>
     <string name="poi_city_block">Manzana</string>
     <string name="poi_traffic_signals_arrow_no">Flecha: no</string>
+    <string name="poi_nuts">Almacén de frutos secos</string>
+    <string name="poi_beehive">Colmena</string>
+    <string name="poi_departures_board_timetable">Horario</string>
+    <string name="poi_departures_board_realtime">Tiempo real</string>
+    <string name="poi_departures_board_delay">Retraso</string>
+    <string name="poi_departures_board_yes">Sí</string>
+    <string name="poi_departures_board_no">Tablero de salidas: no</string>
+    <string name="poi_elevator">Ascensor</string>
+    <string name="poi_borough">Municipio</string>
+    <string name="poi_recycling_small_electrical_appliances">Pequeños electrodomésticos</string>
+    <string name="poi_departures_board">Tablero de salidas</string>
+    <string name="poi_drinking_water_refill">Relleno de agua potable</string>
 </resources>
