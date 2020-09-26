@@ -3868,4 +3868,25 @@
     <string name="sort_last_modified">Antaŭe modifita</string>
     <string name="sort_name_descending">Nomo: Z – A</string>
     <string name="sort_name_ascending">Nomo: A – Z</string>
+    <string name="all_next_segments_will_be_recalc">Ĉiuj sekvaj segmentoj estos rekalkulitaj uzante la elektitan profilon.</string>
+    <string name="all_previous_segments_will_be_recalc">Ĉiuj antaŭaj segmentoj estos rekalkulitaj uzante la elektitan profilon.</string>
+    <string name="open_saved_track">Malfermi konservitan spuron</string>
+    <string name="shared_string_is_saved">estas konservata</string>
+    <string name="one_point_error">Aldonu almenaŭ du punktojn.</string>
+    <string name="shared_string_redo">Refari</string>
+    <string name="release_3_8">• plibonigoj al “plani kurson”: eblo uzi diversajn specojn de navigo por ĉiu segmento aparte kaj ampleksi spurojn
+\n
+\n• nova menuo de aspekto por spuroj: eblo elekti koloron kaj dikecon, montri sagetojn de direkto kaj vidigi komencon/finon de spuro
+\n
+\n• plibonigita videblo de biciklaj nodoj
+\n
+\n• nun eblas frapeti spuron sur la mapo, vidigi ĝian kuntekstan menuon kun bazajn informojn
+\n
+\n• plibonigoj al serĉ‑algoritmojn
+\n
+\n• plibonigoj al la funkcio “sekvi spuron” dum navigi
+\n
+\n• riparitaj problemoj pri en-/el-porti agordojn de profilo
+\n
+\n</string>
 </resources>
