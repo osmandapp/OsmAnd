@@ -977,7 +977,7 @@
     <string name="map_source">مصدر الخريطة</string>
     <string name="layer_amenity_label">عرض أسماء المفضلة</string>
     <string name="map_locale">لغة الخريطة</string>
-    <string name="rendering_category_details">التفاصيل</string>
+    <string name="rendering_category_details">تفاصيل إضافية</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
     <string name="rotate_map_to_bearing">اتجاه الخريطة</string>
     <string name="rotate_map_bearing_opt">اتجاه الحركة في الأعلى</string>
@@ -2081,8 +2081,8 @@
     <string name="rendering_attr_hideWaterPolygons_description">ماء</string>
     <string name="rendering_attr_contourWidth_description">عرض الخطوط الكنتورية</string>
     <string name="rendering_attr_contourWidth_name">عرض الخطوط الكنتورية</string>
-    <string name="rendering_attr_contourDensity_description">كثافة الخط المحيطي</string>
-    <string name="rendering_attr_contourDensity_name">كثافة الخط المحيطي</string>
+    <string name="rendering_attr_contourDensity_description">كثافة الخط الكنتوري</string>
+    <string name="rendering_attr_contourDensity_name">كثافة الخط الكنتوري</string>
     <string name="rendering_value_high_name">عالي</string>
     <string name="rendering_value_medium_w_name">وسط</string>
     <string name="rendering_value_low_name">منخفض</string>
@@ -2126,7 +2126,7 @@
     <string name="quick_action_showhide_favorites_title">عرض/إخفاء المفضلة</string>
     <string name="quick_action_favorites_show">عرض المفضلة</string>
     <string name="quick_action_favorites_hide">إخفاء المفضلة</string>
-    <string name="quick_action_showhide_poi_title">عرض/إخفاء POI</string>
+    <string name="quick_action_showhide_poi_title">عرض/إخفاء نقاط الاهتمام</string>
     <string name="quick_action_poi_show">عرض %1$s</string>
     <string name="quick_action_poi_hide">إخفاء %1$s</string>
     <string name="quick_action_add_category">إضافة فئة</string>
@@ -2279,7 +2279,7 @@
     <string name="quick_action_showhide_osmbugs_descr">زر يظهر أو يخفي ملاحظات OSM على الخريطة.</string>
     <string name="hide_from_zoom_level">إخفاء من مستوى التكبير/التصغير</string>
     <string name="srtm_menu_download_descr">يجب تحميل خريطة الخطوط الكنتورية لهذه المنطقة لعرضها.</string>
-    <string name="show_from_zoom_level">العرض بدءا من مستوى التكبير</string>
+    <string name="show_from_zoom_level">العرض بداية من مستوى التكبير</string>
     <string name="display_zoom_level">عرض مستوى التكبير: %1$s</string>
     <string name="animate_my_location">استقراء موقعي</string>
     <string name="srtm_purchase_header">لمشاهدة خطوط التضاريس على الخريطة، يجب تحميل الملحق أولاً.</string>
@@ -2844,7 +2844,7 @@
     <string name="looking_for_tracks_with_waypoints">ابحث عن المسارات مع نقاط الطريق</string>
     <string name="add_track_to_markers_descr">حدد مسار لإضافة نقاط الطريق إلى العلامات(يتم سرد المسارات فقط مع نقاط الطريق).</string>
     <string name="empty_state_markers_active_desc">نقرة طويلة أو قصيرة على الأماكن ثم اضغط على زر التوجيه المباشر.</string>
-    <string name="empty_state_markers_groups_desc">يمكنك استيراد المجموعات المفضلة أو نقاط المسار كعلامات.</string>
+    <string name="empty_state_markers_groups_desc">يمكنك استيراد المجموعات المفضلة أو نقاط المسار كتوجيه.</string>
     <string name="empty_state_markers_history_desc">ستظهر العلامات التي تم تجاوزها على هذه الشاشة.</string>
     <string name="show_guide_line_descr">خط مباشر من موقعك إلى الهدف.</string>
     <string name="show_arrows_descr">عرض سهم واحد أو اثنين ليشير إلى الوجهة النشطة.</string>
