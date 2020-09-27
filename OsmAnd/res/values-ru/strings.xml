@@ -481,7 +481,7 @@
     <string name="favorite_friends_category">Друзья</string>
     <string name="favorite_places_category">Места</string>
     <string name="shared_string_others">Другое</string>
-    <string name="shared_string_no_thanks">Не нужно</string>
+    <string name="shared_string_no_thanks">Нет, спасибо</string>
     <string name="basemap_missing">Загрузите базовую карту мира, чтобы получить обзор всего мира с низким уровнем масштабирования.</string>
     <string name="vector_data_missing">На устройстве отсутствуют локальные данные. Загрузите их, чтобы использовать приложение без интернета.</string>
     <string name="local_index_gpx_info_show">"
