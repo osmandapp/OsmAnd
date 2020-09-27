@@ -3818,7 +3818,7 @@
     <string name="select_track_width">Seleccionar anchura</string>
     <string name="save_track_to_gpx">Grabar automáticamente la traza durante la navegación</string>
     <string name="plugin_wikipedia_description">Consigue información sobre puntos de interés en Wikipedia. Es tu guía de bolsillo sin conexión. Sólo tienes que activar el complemento de Wikipedia y disfrutar de los artículos sobre los objetos que te rodean.</string>
-    <string name="add_hidden_group_info">El punto agregado no será visible en el mapa, ya que el grupo seleccionado está oculto, puedes encontrarlo en \"% s\".</string>
+    <string name="add_hidden_group_info">El punto agregado no será visible en el mapa, ya que el grupo seleccionado está oculto, puedes encontrarlo en \"%s\".</string>
     <string name="app_mode_enduro_motorcycle">Motocicleta de enduro</string>
     <string name="app_mode_motor_scooter">Moto scooter</string>
     <string name="app_mode_wheelchair">Silla de ruedas</string>
