@@ -955,7 +955,7 @@
     <string name="dropbox_plugin_name">Dropbox kromprogramo</string>
     <string name="intermediate_points_change_order">Ŝanĝi ordon</string>
     <string name="srtm_paid_version_msg">Bonvolu konsideri aĉeti la kromprogramon “nivelkurboj” en la vendejo por subteni ĝian pluan evoluigon.</string>
-    <string name="av_def_action_choose">Je peto\?</string>
+    <string name="av_def_action_choose">Demandi</string>
     <string name="av_def_action_video">Registri videon</string>
     <string name="av_def_action_audio">Registri sonon</string>
     <string name="av_widget_action_descr">Implicita ago de fenestraĵo:</string>
@@ -1417,7 +1417,7 @@
     <string name="tts_language_not_supported">La elektita lingvo ne estas subtenata per la instalita Androida parolsintezilo, la aktuala lingvo de sintezilo estos uzata. Ĉu serĉi alian parolsintezilon en la Vendejo Play\?</string>
     <string name="tts_missing_language_data_title">Mankas datumoj</string>
     <string name="tts_missing_language_data">Ĉu malfermi vendejon por elŝuti elektitan lingvon?</string>
-    <string name="gpx_option_reverse_route">Inversigi direkton de GPX</string>
+    <string name="gpx_option_reverse_route">Inversigi direkton de spuro</string>
     <string name="gpx_option_destination_point">Uzi aktualan celon</string>
     <string name="gpx_option_from_start_point">Iri laŭ tuta kurso</string>
     <string name="switch_to_vector_map_to_see">Eksterreta vektora mapo disponebla por tiu ĉi loko.
@@ -2007,7 +2007,7 @@
     <string name="no_inet_connection_desc_map">Bezonata por elŝuti mapojn.</string>
     <string name="search_location">Determinado de pozicio…</string>
     <string name="storage_free_space">Libera loko</string>
-    <string name="storage_place_description">Dosierujo por datumoj de OsmAnd (por mapoj, GPX-dosieroj, ktp.): %1$s.</string>
+    <string name="storage_place_description">Dosierujo por datumoj de OsmAnd (por mapoj, spuroj, ktp.): %1$s.</string>
     <string name="give_permission">Permesi</string>
     <string name="allow_access_location">Permesi aliron al pozicio</string>
     <string name="first_usage_greeting">Navigi kaj esplori novajn lokojn sen interreta konekto</string>
@@ -2062,8 +2062,8 @@
     <string name="trip_rec_notification_settings">Aktivigi rapidan registradon</string>
     <string name="trip_rec_notification_settings_desc">Montri sisteman sciigon kun eblo ekigi registradon de kurso.</string>
     <string name="shared_string_notifications">Sciigoj</string>
-    <string name="gpx_no_tracks_title">Vi ankoraŭ havas neniujn GPX-dosierojn</string>
-    <string name="gpx_no_tracks_title_folder">Vi ankaŭ povas aldoni GPX-dosierojn al la dosierujo</string>
+    <string name="gpx_no_tracks_title">Vi ankoraŭ havas neniun dosieron de spuro</string>
+    <string name="gpx_no_tracks_title_folder">Vi ankaŭ povas aldoni dosierojn de spurojn al la dosierujo</string>
     <string name="gpx_add_track">Aldoni pli…</string>
     <string name="shared_string_appearance">Aspekto</string>
     <string name="rendering_value_fine_name">Eteta</string>
@@ -2404,7 +2404,7 @@
     <string name="nothing_found">Trovis nenion</string>
     <string name="nothing_found_descr">Ŝanĝu serĉpeton aŭ pliigu radiuson de serĉo.</string>
     <string name="private_access_routing_req">Via celo troviĝas en privata tereno. Ĉu permesi aliron al privataj vojoj por tiu ĉi kurso\?</string>
-    <string name="mapillary">Strat-nivela fotaro</string>
+    <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary-fenestraĵo</string>
     <string name="mapillary_widget_descr">Ebligas rapide kontribui al Mapillary.</string>
     <string name="mapillary_descr">Enretaj strat-nivelaj fotoj por ĉiuj. Esplori lokojn, kunlabori kaj foti la mondon.</string>
@@ -2892,10 +2892,10 @@
     <string name="routeInfo_road_types_name">Specoj de vojoj</string>
     <string name="exit_at">Eliru ĉe</string>
     <string name="sit_on_the_stop">Atendu ĉe haltejo</string>
-    <string name="quick_action_show_hide_gpx_tracks">Montri/kaŝi GPX-spurojn</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Butono por montri/kaŝi elektitajn GPX-spurojn sur la mapo.</string>
-    <string name="quick_action_gpx_tracks_hide">Kaŝi GPX-spurojn</string>
-    <string name="quick_action_gpx_tracks_show">Montri GPX-spurojn</string>
+    <string name="quick_action_show_hide_gpx_tracks">Montri/kaŝi spurojn</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Butono por montri/kaŝi elektitajn spurojn sur la mapo.</string>
+    <string name="quick_action_gpx_tracks_hide">Kaŝi spurojn</string>
+    <string name="quick_action_gpx_tracks_show">Montri spurojn</string>
     <string name="release_3_3">• nova ekrano “navigi”: butonoj por navigi al hejmo aŭ laborejo, butono “antaŭa kurso”, listo de aktivaj GPX-spuroj kaj map-markoj, serĉ-historio
 \n
 \n • pliaj informoj ĉe “detaloj pri kurso”: specoj de vojoj, pavimo, klineco, glateco
@@ -3443,7 +3443,7 @@
     <string name="monitoring_min_speed">Minimuma rapido</string>
     <string name="monitoring_min_accuracy">Minimuma precizo</string>
     <string name="monitoring_min_distance">Minimuma delokiĝo</string>
-    <string name="reset_plugin_to_default">Restarigi implicitajn agordojn de kromprogramo</string>
+    <string name="reset_plugin_to_default">Restarigi implicitajn agordojn de la kromprogramo</string>
     <string name="multimedia_rec_split_title">Dividilo de registraĵoj</string>
     <string name="multimedia_use_system_camera">Uzi sisteman aplikaĵon</string>
     <string name="multimedia_photo_play_sound">Sono de fotilo</string>
@@ -3780,14 +3780,14 @@
     <string name="speed_cameras_alert">Avertoj pri rapidkontroliloj estas kontraŭleĝaj en iuj landoj.</string>
     <string name="shared_string_bearing">Direkto</string>
     <string name="item_deleted">%1$s forigita</string>
-    <string name="speed_cameras_restart_descr">Restarto estas necesa por tute forigi datumojn pri rapidkontroliloj.</string>
+    <string name="speed_cameras_restart_descr">Restartigu la aplikaĵon por forigi ĉiujn datumojn pri rapidkontroliloj.</string>
     <string name="shared_string_uninstall_and_restart">Malinstali kaj restartigi</string>
     <string name="routing_attr_length_description">Difini permesatan longon de veturilo.</string>
     <string name="routing_attr_length_name">Limigo de longo</string>
     <string name="speed_cameras_removed_descr">Tiu ĉi aplikaĵo ne liveras informojn pri rapidkontrolliloj.</string>
     <string name="app_mode_inline_skates">Rulglitiloj</string>
     <string name="use_volume_buttons_as_zoom">Skali per sonfortecaj butonoj</string>
-    <string name="use_volume_buttons_as_zoom_descr">Uzi la butonojn de sonforteco por pli-/mal-grandigi la mapon.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Pligrandigi/malgrandigi la mapon per butonoj de sonforteco.</string>
     <string name="lenght_limit_description">Enigu longon de via veturilo, iuj vojaj limigoj aplikas al longaj veturiloj.</string>
     <string name="quick_action_remove_next_destination">Forigi sekvan celon</string>
     <string name="please_provide_point_name_error">Enigu nomon por la punkto</string>
@@ -3801,7 +3801,7 @@
     <string name="app_mode_go_cart">Gokarto</string>
     <string name="osm_edit_closed_note">Fermita OSM‑rimarko</string>
     <string name="add_hidden_group_info">La aldonita punkto ne estos videbla sur la mapo, ĉar la elektita grupo estas kaŝita, vi povas trovi ĝin en “%s”.</string>
-    <string name="set_working_days_to_continue">Necesas enigi tagojn de malfermo por pluigi</string>
+    <string name="set_working_days_to_continue">Enigu tagojn de malfermo por pluigi</string>
     <string name="route_between_points">Kurso inter punktoj</string>
     <string name="plan_a_route">Plani kurson</string>
     <string name="add_to_a_track">Aldoni al spuro</string>
@@ -3833,7 +3833,7 @@
     <string name="navigation_profile">Profilo de navigo</string>
     <string name="route_between_points_add_track_desc">Elektu dosieron de spuro al kiu nova segmento estos aldonita.</string>
     <string name="street_level_imagery">Strat-nivela fotaro</string>
-    <string name="plan_route_exit_dialog_descr">Ĉu vi certe volas fermi planadon de kurso sen konservi\? Ĉiuj viaj ŝanĝoj perdiĝos.</string>
+    <string name="plan_route_exit_dialog_descr">Ĉu vi certe volas forĵeti ĉiujn ŝanĝojn en la planita kurso per fermi ĝin\?</string>
     <string name="in_case_of_reverse_direction">Kiam en inversa direkto</string>
     <string name="save_track_to_gpx">Aŭtomate registri spuron dum navigi</string>
     <string name="shared_string_save_as_gpx">Konservi kiel novan dosieron de spuro</string>
@@ -3849,7 +3849,7 @@
     <string name="quick_action_add_gpx">Aldoni navigadpunkton al spuro</string>
     <string name="map_widget_monitoring">Registri spuron</string>
     <string name="marker_save_as_track">Konservi kiel dosieron de kurso</string>
-    <string name="import_track_descr">Elekti dosieron de spuro por sekvi aŭ enporti el la aparato.</string>
+    <string name="import_track_descr">Elekti dosieron de spuro por ĝin sekvi aŭ enporti el via aparato.</string>
     <string name="select_another_track">Elekti alian spuron</string>
     <string name="navigate_to_track_descr">Navigi el mia pozicio al la spuro</string>
     <string name="pass_whole_track_descr">Punkto de spuro por navigi</string>
@@ -3876,7 +3876,7 @@
     <string name="shared_string_redo">Refari</string>
     <string name="release_3_8">• plibonigoj al “plani kurson”: eblo uzi diversajn specojn de navigo por ĉiu segmento aparte kaj ampleksi spurojn
 \n
-\n• nova menuo de aspekto por spuroj: eblo elekti koloron kaj dikecon, montri sagetojn de direkto kaj vidigi komencon/finon de spuro
+\n• nova menuo de aspekto por spuroj: eblo elekti koloron kaj dikecon, montri sagetojn de direkto kaj vidigi markojn de komenco/fino de la spuro
 \n
 \n• plibonigita videblo de biciklaj nodoj
 \n
@@ -3889,4 +3889,18 @@
 \n• riparitaj problemoj pri en-/el-porti agordojn de profilo
 \n
 \n</string>
+    <string name="monitoring_control_start">Registri</string>
+    <string name="save_global_track_interval_descr">Elektu la intervalon de registrado por la ĝenerala registrado de spuro (aktivigata per la fenestraĵo “registri spuron” sur la mapo).</string>
+    <string name="simplified_track">Simpligita spuro</string>
+    <string name="simplified_track_description">Nur la linio de kurso estos konservita, la navigadpunktoj estos forigitaj.</string>
+    <string name="shared_string_file_name">Dosiernomo</string>
+    <string name="number_of_gpx_files_selected_pattern">%d dosieroj de spuroj elektitaj</string>
+    <string name="disable_recording_once_app_killed_descrp">Paŭzigos registri spuron je halto de la aplikaĵo (per la menuo de lastaj aplikaĵoj). (Fona emblemo de OsmAnd malaperos de la androida sciiga zono.)</string>
+    <string name="gpx_monitoring_stop">Paŭzigi registri spuron</string>
+    <string name="gpx_monitoring_start">Daŭrigi registri spuron</string>
+    <string name="system_default_theme">Sistema</string>
+    <string name="all_next_segments">Ĉiuj sekvaj segmentoj</string>
+    <string name="previous_segment">Antaŭa segmento</string>
+    <string name="all_previous_segments">Ĉiuj antaŭaj segmentoj</string>
+    <string name="only_selected_segment_recalc">Nur la elektita segmento estos rekalkulita uzante la elektitan profilon.</string>
 </resources>
