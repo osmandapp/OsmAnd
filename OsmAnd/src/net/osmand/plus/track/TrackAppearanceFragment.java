@@ -62,8 +62,9 @@ import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
 public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ColorPickerListener {
 
 	public static final String TAG = TrackAppearanceFragment.class.getName();
-
 	private static final Log log = PlatformUtil.getLog(TrackAppearanceFragment.class);
+
+	private static final String SHOW_START_FINISH_ICONS_INITIAL_VALUE_KEY = "showStartFinishIconsInitialValueKey";
 
 	private OsmandApplication app;
 
@@ -79,6 +80,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private TrackWidthCard trackWidthCard;
 	private SplitIntervalCard splitIntervalCard;
 	private TrackColoringCard trackColoringCard;
+	private boolean showStartFinishIconsInitialValue;
 
 	private ImageView trackIcon;
 	private View buttonsShadow;
@@ -134,9 +136,12 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			if (!selectedGpxFile.isShowCurrentTrack()) {
 				gpxDataItem = app.getGpxDbHelper().getItem(new File(trackDrawInfo.getFilePath()));
 			}
+			showStartFinishIconsInitialValue = savedInstanceState.getBoolean(SHOW_START_FINISH_ICONS_INITIAL_VALUE_KEY,
+					app.getSettings().SHOW_START_FINISH_ICONS.get());
 		} else if (arguments != null) {
 			String gpxFilePath = arguments.getString(TRACK_FILE_NAME);
 			boolean currentRecording = arguments.getBoolean(CURRENT_RECORDING, false);
+			showStartFinishIconsInitialValue = app.getSettings().SHOW_START_FINISH_ICONS.get();
 
 			if (gpxFilePath == null && !currentRecording) {
 				log.error("Required extra '" + TRACK_FILE_NAME + "' is missing");
@@ -152,7 +157,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 			} else {
 				gpxDataItem = app.getGpxDbHelper().getItem(new File(gpxFilePath));
-				trackDrawInfo = new TrackDrawInfo(gpxDataItem, false);
+				trackDrawInfo = new TrackDrawInfo(app, gpxDataItem, false);
 				selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 			}
 			updateTrackColor();
@@ -294,6 +299,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		trackDrawInfo.saveToBundle(outState);
+		outState.putBoolean(SHOW_START_FINISH_ICONS_INITIAL_VALUE_KEY, showStartFinishIconsInitialValue);
 	}
 
 	@Override
@@ -455,6 +461,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			@Override
 			public void onClick(View v) {
 				discardSplitChanges();
+				discardShowStartFinishChanges();
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					activity.onBackPressed();
@@ -520,7 +527,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 		gpxFile.setSplitInterval(trackDrawInfo.getSplitInterval());
 		gpxFile.setShowArrows(trackDrawInfo.isShowArrows());
-		gpxFile.setShowStartFinish(trackDrawInfo.isShowStartFinish());
+		//gpxFile.setShowStartFinish(trackDrawInfo.isShowStartFinish());
 
 		if (gpxFile.showCurrentTrack) {
 			app.getSettings().CURRENT_TRACK_COLOR.set(trackDrawInfo.getColor());
@@ -549,6 +556,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 			applySplit(splitType, timeSplit, distanceSplit);
 		}
+	}
+
+	private void discardShowStartFinishChanges() {
+		app.getSettings().SHOW_START_FINISH_ICONS.set(showStartFinishIconsInitialValue);
 	}
 
 	void applySplit(GpxSplitType splitType, int timeSplit, double distanceSplit) {
@@ -598,6 +609,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			DirectionArrowsCard directionArrowsCard = new DirectionArrowsCard(mapActivity, trackDrawInfo);
 			directionArrowsCard.setListener(this);
 			cardsContainer.addView(directionArrowsCard.build(mapActivity));
+
+			ShowStartFinishCard showStartFinishCard = new ShowStartFinishCard(mapActivity, trackDrawInfo);
+			showStartFinishCard.setListener(this);
+			cardsContainer.addView(showStartFinishCard.build(mapActivity));
 
 			trackColoringCard = new TrackColoringCard(mapActivity, trackDrawInfo, this);
 			trackColoringCard.setListener(this);
