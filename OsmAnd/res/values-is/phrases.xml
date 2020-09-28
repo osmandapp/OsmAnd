@@ -3783,7 +3783,7 @@
     <string name="poi_tactile_paving_incorrect">Rangt</string>
     <string name="poi_traffic_signals_sound_locate">Aðeins þegar má ganga</string>
     <string name="poi_seamark_obstruction">Hindrun</string>
-    <string name="poi_drinking_water_refill_yes">Áfylling drykkjarvatns: já</string>
+    <string name="poi_drinking_water_refill_yes">Já</string>
     <string name="poi_drinking_water_refill_no">Áfylling drykkjarvatns: nei</string>
     <string name="poi_drinking_water_refill_network">Kerfi fyrir áfyllingu drykkjarvatns</string>
     <string name="poi_tactile_paving_contrasted">Mislitt</string>
@@ -3818,4 +3818,13 @@
     <string name="poi_city_block">Götureitur</string>
     <string name="poi_borough">Kaupstaður</string>
     <string name="poi_traffic_signals_arrow_no">Ör: nei</string>
+    <string name="poi_nuts">Verslun með þurrkaða ávexti</string>
+    <string name="poi_beehive">Býflugnabú</string>
+    <string name="poi_departures_board_timetable">Tímatafla</string>
+    <string name="poi_departures_board_realtime">Rauntíma</string>
+    <string name="poi_departures_board_delay">Töf</string>
+    <string name="poi_departures_board_yes">Já</string>
+    <string name="poi_elevator">Lyfta</string>
+    <string name="poi_recycling_small_electrical_appliances">Smærri raftæki</string>
+    <string name="poi_drinking_water_refill">Áfylling drykkjarvatns</string>
 </resources>

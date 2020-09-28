@@ -413,7 +413,7 @@
     <string name="poi_recycling_cardboard">kartonoj</string>
     <string name="poi_recycling_magazines">gazetoj (revuoj)</string>
     <string name="poi_recycling_paper_packaging">paperaj ujoj</string>
-    <string name="poi_recycling_small_appliances">elektronikaj aparatoj etaj</string>
+    <string name="poi_recycling_small_appliances">malgrandaj elektraj aparatoj</string>
     <string name="poi_recycling_wood">ligno</string>
     <string name="poi_recycling_books">libroj</string>
     <string name="poi_recycling_shoes">ŝuoj</string>
@@ -3808,7 +3808,7 @@
     <string name="poi_seamark_water_level_above_mwl">Akv-nivelo: sub la mezuma nivelo de akvo</string>
     <string name="poi_seamark_water_level_below_mwl">Akv-nivelo: super la mezuma nivelo de akvo</string>
     <string name="poi_seamark_obstruction">Baraĵo</string>
-    <string name="poi_drinking_water_refill_yes">Plenigi per trinkebla akvo: jes</string>
+    <string name="poi_drinking_water_refill_yes">jes</string>
     <string name="poi_drinking_water_refill_no">Plenigi per trinkebla akvo: ne</string>
     <string name="poi_drinking_water_refill_network">Plenigi per trinkebla akvo: reto</string>
     <string name="poi_osmand_fire_hydrant_pressure_suction">senprema</string>
@@ -3826,4 +3826,15 @@
     <string name="poi_city_block">Dombloko</string>
     <string name="poi_borough">Suburbo</string>
     <string name="poi_traffic_signals_arrow_no">Sageto: ne</string>
+    <string name="poi_departures_board_yes">jes</string>
+    <string name="poi_departures_board_no">Tabulo de forveturoj: ne</string>
+    <string name="poi_elevator">Lifto</string>
+    <string name="poi_recycling_small_electrical_appliances">malgrandaj elektraj aparatoj</string>
+    <string name="poi_nuts">Nuksa vendejo</string>
+    <string name="poi_beehive">Abelujo</string>
+    <string name="poi_departures_board_timetable">neelektronika</string>
+    <string name="poi_departures_board_realtime">realtempa</string>
+    <string name="poi_departures_board_delay">prokrasto</string>
+    <string name="poi_departures_board">Tabulo de forveturoj</string>
+    <string name="poi_drinking_water_refill">Plenigi per trinkebla akvo</string>
 </resources>

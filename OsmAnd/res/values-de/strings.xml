@@ -3457,7 +3457,7 @@
     <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere Kategorien auswählen.</string>
     <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
     <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen wurden auf den Standardzustand zurückgesetzt.</string>
-    <string name="profile_prefs_reset_successful">Alle Profileinstellungen werden auf die Standardeinstellungen zurückgesetzt.</string>
+    <string name="profile_prefs_reset_successful">Alle Profileinstellungen auf Standard zurückgesetzt.</string>
     <string name="accessibility_announce">Ankündigung</string>
     <string name="select_map_icon_descr">Symbol, das im Ruhezustand angezeigt wird.</string>
     <string name="multimedia_use_system_camera">System-App verwenden</string>

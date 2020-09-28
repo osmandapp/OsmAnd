@@ -29,6 +29,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -40,8 +41,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.dialogs.GpxAppearanceAdapter.getAppearanceItems;
 
 public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 
@@ -131,7 +130,7 @@ public class TrackColoringCard extends BaseCard implements ColorPickerListener {
 		selectColor.addView(createDividerView(selectColor));
 
 		List<Integer> colors = new ArrayList<>();
-		for (AppearanceListItem appearanceListItem : getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_COLOR)) {
+		for (AppearanceListItem appearanceListItem : GpxAppearanceAdapter.getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_COLOR)) {
 			if (!colors.contains(appearanceListItem.getColor())) {
 				colors.add(appearanceListItem.getColor());
 			}

@@ -359,7 +359,7 @@
     <string name="confirm_interrupt_download">Прервать загрузку\?</string>
     <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из интернета с помощью пункта меню «Настройки» → «Управление файлами карт». После загрузки вы сможете просматривать карты, осуществлять поиск адресов, POI и общественного транспорта.</string>
     <string name="basemap_was_selected_to_download">Карта мира, необходимая для обеспечения базовой функциональности, находится в очереди загрузки.</string>
-    <string name="select_index_file_to_download">Ничего не было найдено. Вы можете создать карту самостоятельно (смотрите на osmand.net).</string>
+    <string name="select_index_file_to_download">Ничего не найдено. Если для вашего региона нет карты, вы можете создать её (см. osmand.net).</string>
     <string name="local_indexes_cat_tile">Онлайн и кешированные карты (растровые)</string>
     <string name="local_indexes_cat_map">Стандартные карты (векторные)</string>
     <string name="index_settings_descr">Загрузка и управление локальными файлами карт на вашем устройстве.</string>
@@ -481,7 +481,7 @@
     <string name="favorite_friends_category">Друзья</string>
     <string name="favorite_places_category">Места</string>
     <string name="shared_string_others">Другое</string>
-    <string name="shared_string_no_thanks">Не нужно</string>
+    <string name="shared_string_no_thanks">Нет, спасибо</string>
     <string name="basemap_missing">Загрузите базовую карту мира, чтобы получить обзор всего мира с низким уровнем масштабирования.</string>
     <string name="vector_data_missing">На устройстве отсутствуют локальные данные. Загрузите их, чтобы использовать приложение без интернета.</string>
     <string name="local_index_gpx_info_show">"
@@ -776,7 +776,7 @@
     <string name="favorite">Избранное</string>
     <string name="uploading_data">Отправка данных…</string>
     <string name="uploading">Отправка…</string>
-    <string name="search_nothing_found">По вашему запросу ничего не найдено</string>
+    <string name="search_nothing_found">Ничего не найдено</string>
     <string name="searching">Поиск…</string>
     <string name="searching_address">Поиск адреса…</string>
     <string name="search_osm_nominatim">Поиск адреса в OSM Nominatim</string>
@@ -868,7 +868,7 @@
     <string name="map_tile_source">Растровые карты</string>
     <string name="map_source">Источник карты</string>
     <string name="use_internet">Использовать интернет</string>
-    <string name="show_location">Показать ваше местоположение</string>
+    <string name="show_location">Показать вашу позицию</string>
     <string name="show_gps_coordinates_text">Показать координаты GPS на карте</string>
     <string name="use_internet_to_download_tile">Использовать интернет для загрузки недостающих участков карты</string>
     <string name="app_description">Навигационное приложение</string>
@@ -1043,7 +1043,7 @@
     <string name="osmand_parking_add_event">Добавить напоминание в календарь</string>
     <string name="osmand_parking_time_limit">Время стоянки ограничено</string>
     <string name="osmand_parking_time_no_limit">Время стоянки неограниченно</string>
-    <string name="osmand_parking_position_description">Расположение припаркованного автомобиля. %1$s</string>
+    <string name="osmand_parking_position_description">Расположение припаркованного транспортного средства. %1$s</string>
     <string name="osmand_parking_position_description_add">Забрать автомобиль в:</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
@@ -2710,7 +2710,7 @@
     <string name="use_two_digits_longitude">Использовать двузначную долготу</string>
     <string name="shared_string_travel_guides">Путеводитель</string>
     <string name="waypoints_removed_from_map_markers">Путевые точки удалены из маркеров карты</string>
-    <string name="nothing_found_in_radius">Ничего не найдено:</string>
+    <string name="nothing_found_in_radius">Ничего нет в радиусе</string>
     <string name="select_waypoints_category_description">Добавьте все путевые точки трека или выберите отдельные категории.</string>
     <string name="shared_string_total">Всего</string>
     <string name="shared_string_result">Результат</string>
@@ -2813,7 +2813,7 @@
     <string name="shared_string_world">Мир</string>
     <string name="send_search_query_description">Ваш поисковый запрос будет отправлен: «%1$s», вместе с вашим местоположением.
 \n
-\nПерсональная информация не собирается, собираются только поисковые данные, необходимые для улучшения поиска.</string>
+\nПерсональная информация не собирается, требуются только данные поиска, с целью усовершенствовать поиск.</string>
     <string name="search_no_results_description">Нет результатов?
 \nРасскажите нам об этом.</string>
     <string name="send_search_query">Отправить поисковый запрос?</string>
@@ -3108,7 +3108,7 @@
     <string name="profile_alert_duplicate_name_title">Повторяющееся имя</string>
     <string name="routing_profile_broutrer">BRouter (локально)</string>
     <string name="routing_attr_piste_type_downhill_name">Альпийские/горные лыжи</string>
-    <string name="routing_attr_piste_type_downhill_description">Склоны для катания на альпийских или горных лыжах и доступ к подъёмникам.</string>
+    <string name="routing_attr_piste_type_downhill_description">Склоны для катания и спуска на горных лыжах и доступ к подъёмникам.</string>
     <string name="routing_attr_piste_type_skitour_name">Лыжные туры</string>
     <string name="routing_attr_piste_type_sled_name">Сани</string>
     <string name="routing_attr_piste_type_sled_description">Склоны для катания на санях.</string>
@@ -3342,8 +3342,8 @@
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="desert_render_descr">Для пустынь и других малонаселённых районов. Более детально.</string>
-    <string name="select_navigation_icon">Положение значка при движении</string>
-    <string name="select_map_icon">Положение значка в состоянии покоя</string>
+    <string name="select_navigation_icon">Значок местоположения при движении</string>
+    <string name="select_map_icon">Значок местоположения в состоянии покоя</string>
     <string name="delete_profiles_descr">После нажатия кнопки «Применить» удалённые профили будут полностью потеряны.</string>
     <string name="master_profile">Базовый профиль</string>
     <string name="select_color">Выберите цвет</string>
@@ -3493,8 +3493,8 @@
     <string name="monitoring_prefs_descr">Навигация, точность ведения журнала</string>
     <string name="multimedia_notes_prefs_descr">Размер изображения, качество звука и видео</string>
     <string name="osm_editing_prefs_descr">Логин, пароль, локальное редактирование</string>
-    <string name="accessibility_prefs_descr">Выберите значок, цвет и имя</string>
-    <string name="live_monitoring_descr">Позволяет обмениваться текущим местоположением с помощью записи поездки.</string>
+    <string name="accessibility_prefs_descr">Значок, цвет и название профиля</string>
+    <string name="live_monitoring_descr">Возможность отправки текущего местоположения при записи поездки.</string>
     <string name="live_monitoring">Онлайн-отслеживание</string>
     <string name="save_track_logging_accuracy">Точность ведения журнала</string>
     <string name="tracks_view_descr">Ваши записанные треки находятся в %1$s или папке OsmAnd.</string>
@@ -3526,7 +3526,7 @@
     <string name="routing_profile_direct_to">Прямо-к-точке</string>
     <string name="sort_by_category">Сортировать по категории</string>
     <string name="index_name_antarctica">Антарктида</string>
-    <string name="recalc_angle_dialog_descr">Дополнительный прямой отрезок между моим местоположением и рассчитанным маршрутом будет отображаться до тех пор, пока маршрут не будет пересчитан</string>
+    <string name="recalc_angle_dialog_descr">Прямой отрезок между текущим местоположением и рассчитанным маршрутом будет отображаться, пока маршрут не будет пересчитан</string>
     <string name="shared_string_rendering_style">Стиль отрисовки</string>
     <string name="import_rendering_file">Импорт файла отрисовки</string>
     <string name="restore_all_profile_settings_descr">Все настройки профиля будут восстановлены в исходное состояние после создания/импорта этого профиля.</string>
@@ -3555,7 +3555,7 @@
     <string name="search_offline_geo_error">Невозможно разобрать геоссылку «%s».</string>
     <string name="hillshade_download_description">Для отображения затенения рельефа на карте необходимы дополнительные карты.</string>
     <string name="shared_string_min">Мин.</string>
-    <string name="terrain_empty_state_text">Отображение затенения рельефа или склонов. Подробнее об этих типах карт вы можете прочитать на нашем сайте.</string>
+    <string name="terrain_empty_state_text">Отображение затенения рельефа или карты уклонов. Подробнее об этих типах карт вы можете прочитать на нашем сайте.</string>
     <string name="shared_string_transparency">Прозрачность</string>
     <string name="shared_string_zoom_levels">Уровни масштаба</string>
     <string name="recalculate_route_in_deviation">Пересчитывать маршрут в случае отклонения</string>
@@ -3582,12 +3582,12 @@
     <string name="live_monitoring_adress_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_min_accuracy_descr">В этом случае будут записываться только точки, измеренные с минимальной точностью (в метрах/футах согласно настройкам устройства). Точность — это близость измерений к истинному местоположению и не имеет прямого отношения к точности, подразумевающейся под разбросом повторных замеров.</string>
     <string name="monitoring_min_speed_descr_recommendation">Рекомендация: попробуйте сначала воспользоваться детектором движения через фильтр минимального смещения (B), что может дать лучшие результаты и вы потеряете меньше данных. Если треки остаются шумными на низких скоростях, попробуйте использовать ненулевые значения. Обратите внимание, что некоторые измерения могут вообще не указывать значения скорости (некоторые сетевые методы), и в этом случае ничего не будет записываться.</string>
-    <string name="slope_description">Склон использует цвета для визуализации крутизны.</string>
-    <string name="slope_read_more">Подробнее о склонах можно прочитать в %1$s.</string>
+    <string name="slope_description">Уклон использует цвета для визуализации крутизны рельефа.</string>
+    <string name="slope_read_more">Подробнее об уклонах можно прочитать в %1$s.</string>
     <string name="shared_string_hillshade">Затенение рельефа</string>
     <string name="hillshade_description">Затенение рельефа использует тёмные оттенки для отображения склонов, вершин и низменностей.</string>
     <string name="slope_download_description">Для отображения склонов на карте необходимы дополнительные карты.</string>
-    <string name="download_slope_maps">Склоны</string>
+    <string name="download_slope_maps">Уклоны</string>
     <string name="replace_point_descr">Заменить этой точкой другую.</string>
     <string name="changes_applied_to_profile">Изменения применены к профилю «%1$s».</string>
     <string name="settings_item_read_error">Невозможно прочитать из «%1$s».</string>
@@ -3668,24 +3668,24 @@
     <string name="legend_item_description">Справка по символике карты.</string>
     <string name="favorites_item">Избранное</string>
     <string name="navigation_profiles_item">Профили навигации</string>
-    <string name="release_3_7">• Новые локальные карты склонов 
-\n 
-\n • Полная настройка избранных и путевых точек GPX: пользовательские цвета, значки, формы 
-\n 
-\n • Изменение порядка элементов в контекстном меню, настройках карты и панели 
-\n 
-\n • Википедия как отдельный слой в настройках карты, можно выбрать только нужные языки 
-\n 
-\n • Можно создать собственный очень гибкий фильтр POI/карты 
-\n 
-\n • Добавлены параметры для восстановления настроек пользовательских профилей 
-\n 
-\n • Полные GPX-маршруты в «Навигации» с поддержкой полос движения и подробными инструкциями поворотов 
-\n 
-\n • Исправлены размеры интерфейса на планшетах 
-\n 
-\n • Исправлены ошибки для языков, пишущихся справа налево 
-\n 
+    <string name="release_3_7">• Новые локальные карты уклонов
+\n
+\n • Полная настройка избранных и путевых точек GPX: пользовательские цвета, значки, формы
+\n
+\n • Изменение порядка элементов в контекстном меню, настройках карты и панели
+\n
+\n • Википедия как отдельный слой в настройках карты, можно выбрать только нужные языки
+\n
+\n • Можно создать собственный очень гибкий фильтр POI/карты
+\n
+\n • Добавлены параметры для восстановления настроек пользовательских профилей
+\n
+\n • Полные GPX-маршруты в «Навигации» с поддержкой полос движения и подробными инструкциями поворотов
+\n
+\n • Исправлены размеры интерфейса на планшетах
+\n
+\n • Исправлены ошибки RTL
+\n
 \n</string>
     <string name="additional_actions_descr">Функции, доступные при нажатии кнопки «%1$s».</string>
     <string name="quick_action_transport_hide">Скрыть общественный транспорт</string>

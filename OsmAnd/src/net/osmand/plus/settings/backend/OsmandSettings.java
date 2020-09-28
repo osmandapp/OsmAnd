@@ -2214,6 +2214,8 @@ public class OsmandSettings {
 		}
 	}.makeProfile().cache();
 
+	public final OsmandPreference<Boolean> SHOW_START_FINISH_ICONS = new BooleanPreference("show_start_finish_icons", true).makeGlobal().cache();
+
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference("gpx_routing_calculate_osmand_route", true).makeGlobal().cache();
 //	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference("gpx_routing_calculate_rtept", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC = new BooleanPreference("calc_gpx_route", false).makeGlobal().cache();
