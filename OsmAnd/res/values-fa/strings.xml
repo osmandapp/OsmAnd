@@ -1499,8 +1499,8 @@
     <string name="parking_place_limited">حداکثر زمان پارک تا</string>
     <string name="osmand_parking_time_left">باقی مانده</string>
     <string name="your_edits">ویرایش‌های شما</string>
-    <string name="waypoint_visit_after">بازدیدکردن بعد از</string>
-    <string name="waypoint_visit_before">بازدیدکردن قبل از</string>
+    <string name="waypoint_visit_after">بازدید بعد از</string>
+    <string name="waypoint_visit_before">بازدید قبل از</string>
     <string name="simulate_your_location">شبیه‌سازی موقعیت شما</string>
     <string name="short_location_on_map">عرض %1$s
 \nطول %2$s</string>
@@ -3864,8 +3864,8 @@
 \n</string>
     <string name="plan_route_trim_before">حذفِ قبل</string>
     <string name="plan_route_trim_after">حذفِ بعد</string>
-    <string name="plan_route_change_route_type_before">تغییر نوع مسیرِ بعد از آن</string>
-    <string name="plan_route_change_route_type_after">تغییر نوع مسیرِ قبل از آن</string>
+    <string name="plan_route_change_route_type_before">تغییر نوع مسیرِ بعد آن</string>
+    <string name="plan_route_change_route_type_after">تغییر نوع مسیرِ قبل آن</string>
     <string name="track_coloring_solid">تک‌رنگ</string>
     <string name="lenght_limit_description">طول وسیلهٔ نقلیهٔ خود را مشخص کنید. ممکن است محدودیت‌های مسیر برای وسایل نقلیهٔ طویل اِعمال شود.</string>
     <string name="quick_action_remove_next_destination_descr">مقصد کنونی مسیر حذف خواهد شد. اگر این قرار است مقصد باشد، ناوبری متوقف می‌شود.</string>
