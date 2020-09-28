@@ -55,6 +55,12 @@ public class InAppPurchases {
 			new InAppPurchaseLiveUpdatesAnnualFree()
 	};
 
+	private static final InAppSubscription[] LIVE_UPDATES_HW_FREE = new InAppSubscription[]{
+			new InAppPurchaseLiveUpdatesMonthlyHWFree(),
+			new InAppPurchaseLiveUpdates3MonthsHWFree(),
+			new InAppPurchaseLiveUpdatesAnnualHWFree()
+	};
+
 	private InAppPurchase fullVersion;
 	private InAppPurchase depthContours;
 	private InAppPurchase contourLines;
@@ -65,7 +71,9 @@ public class InAppPurchases {
 
 	InAppPurchases(OsmandApplication ctx) {
 		fullVersion = FULL_VERSION;
-		if (Version.isFreeVersion(ctx)) {
+		if (Version.isHuawei(ctx)) {
+			liveUpdates = new LiveUpdatesInAppPurchasesHWFree();
+		} else if (Version.isFreeVersion(ctx)) {
 			liveUpdates = new LiveUpdatesInAppPurchasesFree();
 		} else {
 			liveUpdates = new LiveUpdatesInAppPurchasesFull();
@@ -264,6 +272,13 @@ public class InAppPurchases {
 
 		public LiveUpdatesInAppPurchasesFree() {
 			super(LIVE_UPDATES_FREE);
+		}
+	}
+
+	public static class LiveUpdatesInAppPurchasesHWFree extends InAppSubscriptionList {
+
+		public LiveUpdatesInAppPurchasesHWFree() {
+			super(LIVE_UPDATES_HW_FREE);
 		}
 	}
 
@@ -943,6 +958,25 @@ public class InAppPurchases {
 		}
 	}
 
+	public static class InAppPurchaseLiveUpdatesMonthlyHWFree extends InAppPurchaseLiveUpdatesMonthly {
+
+		private static final String SKU_LIVE_UPDATES_MONTHLY_HW_FREE = "net.osmand.test.monthly";
+
+		InAppPurchaseLiveUpdatesMonthlyHWFree() {
+			super(SKU_LIVE_UPDATES_MONTHLY_HW_FREE, 1);
+		}
+
+		private InAppPurchaseLiveUpdatesMonthlyHWFree(@NonNull String sku) {
+			super(sku);
+		}
+
+		@Nullable
+		@Override
+		protected InAppSubscription newInstance(@NonNull String sku) {
+			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseLiveUpdatesMonthlyHWFree(sku) : null;
+		}
+	}
+
 	public static abstract class InAppPurchaseLiveUpdates3Months extends InAppSubscription {
 
 		InAppPurchaseLiveUpdates3Months(String skuNoVersion, int version) {
@@ -1024,6 +1058,25 @@ public class InAppPurchases {
 		}
 	}
 
+	public static class InAppPurchaseLiveUpdates3MonthsHWFree extends InAppPurchaseLiveUpdates3Months {
+
+		private static final String SKU_LIVE_UPDATES_3_MONTHS_HW_FREE = "net.osmand.test.3months";
+
+		InAppPurchaseLiveUpdates3MonthsHWFree() {
+			super(SKU_LIVE_UPDATES_3_MONTHS_HW_FREE, 1);
+		}
+
+		private InAppPurchaseLiveUpdates3MonthsHWFree(@NonNull String sku) {
+			super(sku);
+		}
+
+		@Nullable
+		@Override
+		protected InAppSubscription newInstance(@NonNull String sku) {
+			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseLiveUpdates3MonthsHWFree(sku) : null;
+		}
+	}
+
 	public static abstract class InAppPurchaseLiveUpdatesAnnual extends InAppSubscription {
 
 		InAppPurchaseLiveUpdatesAnnual(String skuNoVersion, int version) {
@@ -1102,6 +1155,25 @@ public class InAppPurchases {
 		@Override
 		protected InAppSubscription newInstance(@NonNull String sku) {
 			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseLiveUpdatesAnnualFree(sku) : null;
+		}
+	}
+
+	public static class InAppPurchaseLiveUpdatesAnnualHWFree extends InAppPurchaseLiveUpdatesAnnual {
+
+		private static final String SKU_LIVE_UPDATES_ANNUAL_HW_FREE = "net.osmand.test.annual";
+
+		InAppPurchaseLiveUpdatesAnnualHWFree() {
+			super(SKU_LIVE_UPDATES_ANNUAL_HW_FREE, 1);
+		}
+
+		private InAppPurchaseLiveUpdatesAnnualHWFree(@NonNull String sku) {
+			super(sku);
+		}
+
+		@Nullable
+		@Override
+		protected InAppSubscription newInstance(@NonNull String sku) {
+			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseLiveUpdatesAnnualHWFree(sku) : null;
 		}
 	}
 

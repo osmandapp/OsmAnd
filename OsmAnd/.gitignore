@@ -17,6 +17,7 @@ libs/huawei-*.jar
 huaweidrmlib/
 HwDRM_SDK_*
 drm_strings.xml
+agconnect-services.json
 
 # copy_widget_icons.sh
 res/drawable-large/map_*
