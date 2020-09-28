@@ -3346,7 +3346,7 @@
     <string name="select_map_icon">Значок местоположения в состоянии покоя</string>
     <string name="delete_profiles_descr">После нажатия кнопки «Применить» удалённые профили будут полностью потеряны.</string>
     <string name="master_profile">Базовый профиль</string>
-    <string name="select_color">Цвет</string>
+    <string name="select_color">Выберите цвет</string>
     <string name="edit_profiles_descr">Вы не можете удалить стандартные профили OsmAnd, но вы можете отключить их на предыдущем экране или переместить вниз.</string>
     <string name="edit_profiles">Редактировать профили</string>
     <string name="select_nav_profile_dialog_message">Режим навигации определяет правила расчета маршрутов.</string>
