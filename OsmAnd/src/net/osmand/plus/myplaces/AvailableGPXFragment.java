@@ -606,7 +606,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		this.sortByMode = sortByMode;
 		app.getSettings().TRACKS_SORT_BY_MODE.set(sortByMode);
 		reloadTracks();
-//		allGpxAdapter.sort();
 	}
 
 	private void openCoordinatesInput() {
