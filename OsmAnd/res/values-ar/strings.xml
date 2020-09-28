@@ -1645,7 +1645,7 @@
     <string name="road_blocked">الطريق محظور</string>
     <string name="shared_string_select">تحديد</string>
     <string name="switch_start_finish">اعكس نقطة الانطلاق والوصول</string>
-    <string name="rendering_attr_hideIcons_name">أيقونات POI</string>
+    <string name="rendering_attr_hideIcons_name">أيقونات نقاط الاهتمام</string>
     <string name="shared_string_type">النوع</string>
     <string name="shared_string_not_selected">غير محدد</string>
     <string name="rec_split">قسم مسجل</string>
