@@ -896,7 +896,7 @@
     <string name="manage_profiles">Halda rakenduse profiile…</string>
     <string name="osmand_settings_descr">Jõus kogu rakenduses</string>
     <string name="osmand_settings">OsmAnd seaded</string>
-    <string name="copy_from_other_profile">Kopeeri teiselt profiililt</string>
+    <string name="copy_from_other_profile">Kopeeri teisest profiilist</string>
     <string name="turn_screen_on">Lülita ekraan sisse</string>
     <string name="map_during_navigation_info">Kaart navigeerimise ajal</string>
     <string name="map_during_navigation">Kaart navigeerimise ajal</string>

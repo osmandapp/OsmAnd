@@ -481,7 +481,7 @@
     <string name="favorite_friends_category">Друзья</string>
     <string name="favorite_places_category">Места</string>
     <string name="shared_string_others">Другое</string>
-    <string name="shared_string_no_thanks">Не нужно</string>
+    <string name="shared_string_no_thanks">Нет, спасибо</string>
     <string name="basemap_missing">Загрузите базовую карту мира, чтобы получить обзор всего мира с низким уровнем масштабирования.</string>
     <string name="vector_data_missing">На устройстве отсутствуют локальные данные. Загрузите их, чтобы использовать приложение без интернета.</string>
     <string name="local_index_gpx_info_show">"
@@ -3108,7 +3108,7 @@
     <string name="profile_alert_duplicate_name_title">Повторяющееся имя</string>
     <string name="routing_profile_broutrer">BRouter (локально)</string>
     <string name="routing_attr_piste_type_downhill_name">Альпийские/горные лыжи</string>
-    <string name="routing_attr_piste_type_downhill_description">Склоны для катания на альпийских или горных лыжах и доступ к подъёмникам.</string>
+    <string name="routing_attr_piste_type_downhill_description">Склоны для катания и спуска на горных лыжах и доступ к подъёмникам.</string>
     <string name="routing_attr_piste_type_skitour_name">Лыжные туры</string>
     <string name="routing_attr_piste_type_sled_name">Сани</string>
     <string name="routing_attr_piste_type_sled_description">Склоны для катания на санях.</string>
@@ -3346,7 +3346,7 @@
     <string name="select_map_icon">Значок местоположения в состоянии покоя</string>
     <string name="delete_profiles_descr">После нажатия кнопки «Применить» удалённые профили будут полностью потеряны.</string>
     <string name="master_profile">Базовый профиль</string>
-    <string name="select_color">Цвет</string>
+    <string name="select_color">Выберите цвет</string>
     <string name="edit_profiles_descr">Вы не можете удалить стандартные профили OsmAnd, но вы можете отключить их на предыдущем экране или переместить вниз.</string>
     <string name="edit_profiles">Редактировать профили</string>
     <string name="select_nav_profile_dialog_message">Режим навигации определяет правила расчета маршрутов.</string>
@@ -3555,7 +3555,7 @@
     <string name="search_offline_geo_error">Невозможно разобрать геоссылку «%s».</string>
     <string name="hillshade_download_description">Для отображения затенения рельефа на карте необходимы дополнительные карты.</string>
     <string name="shared_string_min">Мин.</string>
-    <string name="terrain_empty_state_text">Отображение затенения рельефа или склонов. Подробнее об этих типах карт вы можете прочитать на нашем сайте.</string>
+    <string name="terrain_empty_state_text">Отображение затенения рельефа или карты уклонов. Подробнее об этих типах карт вы можете прочитать на нашем сайте.</string>
     <string name="shared_string_transparency">Прозрачность</string>
     <string name="shared_string_zoom_levels">Уровни масштаба</string>
     <string name="recalculate_route_in_deviation">Пересчитывать маршрут в случае отклонения</string>
@@ -3582,12 +3582,12 @@
     <string name="live_monitoring_adress_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_min_accuracy_descr">В этом случае будут записываться только точки, измеренные с минимальной точностью (в метрах/футах согласно настройкам устройства). Точность — это близость измерений к истинному местоположению и не имеет прямого отношения к точности, подразумевающейся под разбросом повторных замеров.</string>
     <string name="monitoring_min_speed_descr_recommendation">Рекомендация: попробуйте сначала воспользоваться детектором движения через фильтр минимального смещения (B), что может дать лучшие результаты и вы потеряете меньше данных. Если треки остаются шумными на низких скоростях, попробуйте использовать ненулевые значения. Обратите внимание, что некоторые измерения могут вообще не указывать значения скорости (некоторые сетевые методы), и в этом случае ничего не будет записываться.</string>
-    <string name="slope_description">Склон использует цвета для визуализации крутизны.</string>
-    <string name="slope_read_more">Подробнее о склонах можно прочитать в %1$s.</string>
+    <string name="slope_description">Уклон использует цвета для визуализации крутизны рельефа.</string>
+    <string name="slope_read_more">Подробнее об уклонах можно прочитать в %1$s.</string>
     <string name="shared_string_hillshade">Затенение рельефа</string>
     <string name="hillshade_description">Затенение рельефа использует тёмные оттенки для отображения склонов, вершин и низменностей.</string>
     <string name="slope_download_description">Для отображения склонов на карте необходимы дополнительные карты.</string>
-    <string name="download_slope_maps">Склоны</string>
+    <string name="download_slope_maps">Уклоны</string>
     <string name="replace_point_descr">Заменить этой точкой другую.</string>
     <string name="changes_applied_to_profile">Изменения применены к профилю «%1$s».</string>
     <string name="settings_item_read_error">Невозможно прочитать из «%1$s».</string>
@@ -3668,24 +3668,24 @@
     <string name="legend_item_description">Справка по символике карты.</string>
     <string name="favorites_item">Избранное</string>
     <string name="navigation_profiles_item">Профили навигации</string>
-    <string name="release_3_7">• Новые локальные карты склонов 
-\n 
-\n • Полная настройка избранных и путевых точек GPX: пользовательские цвета, значки, формы 
-\n 
-\n • Изменение порядка элементов в контекстном меню, настройках карты и панели 
-\n 
-\n • Википедия как отдельный слой в настройках карты, можно выбрать только нужные языки 
-\n 
-\n • Можно создать собственный очень гибкий фильтр POI/карты 
-\n 
-\n • Добавлены параметры для восстановления настроек пользовательских профилей 
-\n 
-\n • Полные GPX-маршруты в «Навигации» с поддержкой полос движения и подробными инструкциями поворотов 
-\n 
-\n • Исправлены размеры интерфейса на планшетах 
-\n 
-\n • Исправлены ошибки для языков, пишущихся справа налево 
-\n 
+    <string name="release_3_7">• Новые локальные карты уклонов
+\n
+\n • Полная настройка избранных и путевых точек GPX: пользовательские цвета, значки, формы
+\n
+\n • Изменение порядка элементов в контекстном меню, настройках карты и панели
+\n
+\n • Википедия как отдельный слой в настройках карты, можно выбрать только нужные языки
+\n
+\n • Можно создать собственный очень гибкий фильтр POI/карты
+\n
+\n • Добавлены параметры для восстановления настроек пользовательских профилей
+\n
+\n • Полные GPX-маршруты в «Навигации» с поддержкой полос движения и подробными инструкциями поворотов
+\n
+\n • Исправлены размеры интерфейса на планшетах
+\n
+\n • Исправлены ошибки RTL
+\n
 \n</string>
     <string name="additional_actions_descr">Функции, доступные при нажатии кнопки «%1$s».</string>
     <string name="quick_action_transport_hide">Скрыть общественный транспорт</string>
