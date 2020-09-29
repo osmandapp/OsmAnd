@@ -3756,8 +3756,8 @@
     <string name="delete_address">Slet adresse</string>
     <string name="add_address">Tilføj adresse</string>
     <string name="access_hint_enter_address">Angiv adresse</string>
-    <string name="plan_route_trim_before">Trim før</string>
-    <string name="plan_route_trim_after">Trim efter</string>
+    <string name="plan_route_trim_before">Trimme før</string>
+    <string name="plan_route_trim_after">Trimme efter</string>
     <string name="plan_route_change_route_type_before">Skift rutetype før</string>
     <string name="plan_route_change_route_type_after">Skift rutetype efter</string>
     <string name="simplified_track">Forenklet spor</string>
@@ -3771,4 +3771,10 @@
     <string name="shared_string_is_saved">er gemt</string>
     <string name="one_point_error">Tilføj mindst to punkter.</string>
     <string name="shared_string_redo">Omgøre</string>
+    <string name="navigate_to_track_descr">Navigere fra position til sporet</string>
+    <string name="pass_whole_track_descr">Punkt på sporet for at navigere</string>
+    <string name="number_of_gpx_files_selected_pattern">%s spor filer valgt</string>
+    <string name="sort_last_modified">Sidst ændret</string>
+    <string name="sort_name_descending">Navn: Z – A</string>
+    <string name="sort_name_ascending">Navn: A – Z</string>
 </resources>
