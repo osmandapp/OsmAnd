@@ -453,7 +453,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						if (segment.points.size() >= 2) {
 							WptPt start = segment.points.get(0);
 							WptPt end = segment.points.get(segment.points.size() - 1);
-							drawStartEndPoints(canvas, tileBox, start, end);
+							drawStartEndPoints(canvas, tileBox, start, selectedGpxFile.isShowCurrentTrack() ? null : end);
 						}
 					}
 				}
@@ -461,24 +461,28 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	private void drawStartEndPoints(Canvas canvas, RotatedTileBox tileBox, WptPt start, WptPt end) {
-		int startX = (int) tileBox.getPixXFromLatLon(start.lat, start.lon);
-		int startY = (int) tileBox.getPixYFromLatLon(start.lat, start.lon);
-		int endX = (int) tileBox.getPixXFromLatLon(end.lat, end.lon);
-		int endY = (int) tileBox.getPixYFromLatLon(end.lat, end.lon);
+	private void drawStartEndPoints(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, @Nullable WptPt start, @Nullable WptPt end) {
+		int startX = start != null ? (int) tileBox.getPixXFromLatLon(start.lat, start.lon) : 0;
+		int startY = start != null ? (int) tileBox.getPixYFromLatLon(start.lat, start.lon) : 0;
+		int endX = end != null ? (int) tileBox.getPixXFromLatLon(end.lat, end.lon) : 0;
+		int endY = end != null ? (int) tileBox.getPixYFromLatLon(end.lat, end.lon) : 0;
 
 		int iconSize = AndroidUtils.dpToPx(view.getContext(), 14);
 		QuadRect startRectWithoutShadow = calculateRect(startX, startY, iconSize, iconSize);
 		QuadRect endRectWithoutShadow = calculateRect(endX, endY, iconSize, iconSize);
 
-		if (QuadRect.intersects(startRectWithoutShadow, endRectWithoutShadow)) {
+		if (start != null && end != null && QuadRect.intersects(startRectWithoutShadow, endRectWithoutShadow)) {
 			QuadRect startAndFinishRect = calculateRect(startX, startY, startAndFinishIcon.getIntrinsicWidth(), startAndFinishIcon.getIntrinsicHeight());
 			drawPoint(canvas, startAndFinishRect, startAndFinishIcon);
 		} else {
-			QuadRect startRect = calculateRect(startX, startY, startPointIcon.getIntrinsicWidth(), startPointIcon.getIntrinsicHeight());
-			QuadRect endRect = calculateRect(endX, endY, finishPointIcon.getIntrinsicWidth(), finishPointIcon.getIntrinsicHeight());
-			drawPoint(canvas, startRect, startPointIcon);
-			drawPoint(canvas, endRect, finishPointIcon);
+			if (start != null) {
+				QuadRect startRect = calculateRect(startX, startY, startPointIcon.getIntrinsicWidth(), startPointIcon.getIntrinsicHeight());
+				drawPoint(canvas, startRect, startPointIcon);
+			}
+			if (end != null) {
+				QuadRect endRect = calculateRect(endX, endY, finishPointIcon.getIntrinsicWidth(), finishPointIcon.getIntrinsicHeight());
+				drawPoint(canvas, endRect, finishPointIcon);
+			}
 		}
 	}
 
@@ -711,6 +715,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private boolean isShowStartFinishForTrack(GPXFile gpxFile) {
+		return view.getApplication().getSettings().SHOW_START_FINISH_ICONS.get();
+		/*
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.isShowStartFinish();
 		} else if (gpxFile.showCurrentTrack) {
@@ -718,6 +724,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			return gpxFile.isShowStartFinish();
 		}
+		*/
 	}
 
 	private boolean hasTrackDrawInfoForTrack(GPXFile gpxFile) {

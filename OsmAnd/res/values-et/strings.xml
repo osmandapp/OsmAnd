@@ -896,7 +896,7 @@
     <string name="manage_profiles">Halda rakenduse profiile…</string>
     <string name="osmand_settings_descr">Jõus kogu rakenduses</string>
     <string name="osmand_settings">OsmAnd seaded</string>
-    <string name="copy_from_other_profile">Kopeeri teiselt profiililt</string>
+    <string name="copy_from_other_profile">Kopeeri teisest profiilist</string>
     <string name="turn_screen_on">Lülita ekraan sisse</string>
     <string name="map_during_navigation_info">Kaart navigeerimise ajal</string>
     <string name="map_during_navigation">Kaart navigeerimise ajal</string>
@@ -1581,7 +1581,7 @@
     <string name="contribution_activity">Paigalda versioon</string>
     <string name="choose_osmand_theme_descr">Kohanda rakenduse välimust.</string>
     <string name="choose_osmand_theme">Rakenduse teema</string>
-    <string name="accessibility_options">Puudega kasutamise valikud</string>
+    <string name="accessibility_options">Erivajadusega kasutamise valikud</string>
     <string name="select_address_activity">Määra aadress</string>
     <string name="favourites_list_activity">Vali lemmik</string>
     <string name="local_openstreetmap_act_title">OSM täiendused</string>
@@ -1849,7 +1849,7 @@
     <string name="show_ruler_level">Kuva joonlaud</string>
     <string name="info_button">Teave</string>
     <string name="back_to_location">Tagasi asukohta</string>
-    <string name="accessibility_mode">Puudega kasutamise režiim</string>
+    <string name="accessibility_mode">Erivajadusega kasutamise režiim</string>
     <string name="accessibility_mode_descr">Lülitab puudega kasutajatele mõeldud funktsioonid.</string>
     <string name="accessibility_default">Android süsteemi seadete kohaselt</string>
     <string name="backToMenu">Tagasi menüüle</string>
@@ -1892,7 +1892,7 @@
     <string name="auto_announce_on">Käivita automaatne teavitamine</string>
     <string name="auto_announce_off">Lõpeta automaatne teavitamine</string>
     <string name="i_am_here">Olen siin</string>
-    <string name="accessibility_preferences_descr">Puudega kasutamise eelistused.</string>
+    <string name="accessibility_preferences_descr">Erivajadusega kasutamisega seotud eelistused.</string>
     <string name="arrival_distance_factor_early">Vara</string>
     <string name="arrival_distance_factor_normally">Normaalne</string>
     <string name="arrival_distance_factor_late">Hilja</string>
@@ -3211,20 +3211,20 @@
 \n • Lae GPX rajad OSM keskkonda üles otse rakendusest
 \n • Lisa huvipunkte ja lae need kohe üles OSM keskkonda (või hiljem internetühenduse tekkides)
 \n</string>
-    <string name="osmand_extended_description_part8">OsmAnd on aktiivselt arendatud avatud lähtekoodiga tarkvara. Kõik saavad rakendusse panustada, teatades vigadest, parandades tõlkeid või kodeerides uusi funktsioone. Lisaks toetub projekt rahalisele toetusele koodide kodeerimiseks ja uute funktsioonide testimiseks. 
-\n Ligikaudne kaardi leviala ja kvaliteet: 
-\n • Lääne-Euroopa: **** 
-\n • Ida-Euroopa: *** 
-\n • Venemaa: *** 
-\n • Põhja-Ameerika: *** 
-\n • Lõuna-Ameerika: ** 
-\n • Aasia: ** 
-\n • Jaapan ja Korea: *** 
-\n • Lähis-Ida: ** 
-\n • Aafrika: ** 
-\n • Antarktika: * 
-\n Enamik maailma riike üle on allalaadimiseks saadaval! 
-\n Hangi oma riigis usaldusväärne navigaator - olgu see siis Prantsusmaa, Saksamaa, Mehhiko, UK, Hispaania, Holland, USA, Venemaa, Brasiilia või mõni muu.</string>
+    <string name="osmand_extended_description_part8">OsmAnd on aktiivselt arendatud avatud lähtekoodiga tarkvara. Kõik saavad rakendusse panustada, teatades vigadest, parandades tõlkeid või luues uut funktsioonaalsust. Lisaks kasutab projekt rahalisele toetuset programmerimiseks ja uute funktsioonide testimiseks.
+\n Ligikaudne kaardi leviala ja kvaliteet:
+\n • Lääne-Euroopa: ****
+\n • Ida-Euroopa: ***
+\n • Venemaa: ***
+\n • Põhja-Ameerika: ***
+\n • Lõuna-Ameerika: **
+\n • Aasia: **
+\n • Jaapan ja Korea: ***
+\n • Lähis-Ida: **
+\n • Aafrika: **
+\n • Antarktika: *
+\n Enamik maailma riike on allalaadimiseks saadaval!
+\n Hangi oma riigi jaoks usaldusväärne kaardirakendus - olgu see siis Prantsusmaa, Saksamaa, Mehhiko, Suurbritannia, Hispaania, Holland, Ameerika Ühendriigid, Venemaa, Brasiilia või mõni muu maa.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd + (OSM automatiseeritud navigeerimisjuhised) on kaardi- ja navigatsioonirakendus, millel on juurdepääs tasuta, ülemaailmsetele ja kvaliteetsetele OpenStreetMap (OSM) andmetele.
 \n Naudi hääl- ja optilist navigeerimist, HP-de (huvipunktide) vaatamist, GPX radade loomist ja haldamist, kasutades kõrgusjoonte visuaalset kuvamist ja kõrgusteavet, valikut autosõidu, jalgrattasõidu, jalakäijate režiimide, OSM\'i andmete muutmuise ja palju muu vahel.
 \n
@@ -3755,4 +3755,11 @@
 \n</string>
     <string name="gpx_monitoring_stop">Peata teekonna salvestamine</string>
     <string name="gpx_monitoring_start">Jätka teekonna salvestamist</string>
+    <string name="accessibility_mode_disabled">Režiim erivajadusega kasutajatele on sinu Android\'i seadmes välja lülitatud.</string>
+    <string name="create_custom_categories_list_promo">Muuda loendi järjestust ja peida kategooriaid. Kõiki muudatusi saad importida või eksportida koos profiilidega.</string>
+    <string name="add_new_custom_category_button_promo">Valides ühe või mitu kategooriat võid lisada uue kohandatud kategooria.</string>
+    <string name="shared_string_routing">Marsruutimine</string>
+    <string name="sort_last_modified">Viimati muudetud</string>
+    <string name="sort_name_descending">Nimi: Z – A</string>
+    <string name="sort_name_ascending">Nimi: A – Z</string>
 </resources>

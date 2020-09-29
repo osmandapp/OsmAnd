@@ -3893,4 +3893,7 @@
 \n • Javítva a profilbeállítások importálásával / exportálásával kapcsolatos problémák
 \n
 \n</string>
+    <string name="sort_last_modified">Utolsó módosítás</string>
+    <string name="sort_name_descending">Név: Z–A</string>
+    <string name="sort_name_ascending">Név: A–Z</string>
 </resources>

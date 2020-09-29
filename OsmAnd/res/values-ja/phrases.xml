@@ -456,7 +456,7 @@
     <string name="poi_monument">モニュメント・記念碑</string>
     <string name="poi_aquarium">水族館</string>
     <string name="poi_attraction">観光名所</string>
-    <string name="poi_charity">チャリティーストア</string>
+    <string name="poi_charity">チャリティーショップ</string>
     <string name="poi_photo">写真屋</string>
     <string name="poi_sailing">セーリング</string>
     <string name="poi_attraction_amusement_ride">遊園地の乗り物</string>
@@ -1248,12 +1248,12 @@
     <string name="poi_tents_yes">許可</string>
     <string name="poi_washing_machine">洗濯機</string>
     <string name="poi_washing_machine_no">洗濯機:無し</string>
-    <string name="poi_car_wash_no">洗車場:無し</string>
+    <string name="poi_car_wash_no">無し</string>
     <string name="poi_compressed_air_filter">エアーコンプレッサー</string>
     <string name="poi_compressed_air_yes">有り</string>
     <string name="poi_compressed_air_no">エアーコンプレッサー:無し</string>
     <string name="poi_self_service_yes">セルフサービス式</string>
-    <string name="poi_self_service_no">セルフサービスではない</string>
+    <string name="poi_self_service_no">無し</string>
     <string name="poi_vacuum_cleaner_filter">掃除機</string>
     <string name="poi_vacuum_cleaner_yes">有り</string>
     <string name="poi_vacuum_cleaner_no">掃除機:無し</string>
@@ -1974,7 +1974,7 @@
     <string name="poi_vending_ice_cream">アイスクリーム</string>
     <string name="poi_vending_sim_cards">SIMカード</string>
     <string name="poi_traffic_signals_sound_yes">有り</string>
-    <string name="poi_traffic_signals_sound_no">無し</string>
+    <string name="poi_traffic_signals_sound_no">横断補助音:無し</string>
     <string name="poi_traffic_signals_sound_walk">歩行許可時のみ</string>
     <string name="poi_resort_type">保養地、援助施設</string>
     <string name="poi_telescope_type">望遠鏡の種類</string>
@@ -3804,7 +3804,22 @@
     <string name="poi_seamark_water_level_below_mwl">水位:平均水位より低め</string>
     <string name="poi_seamark_water_level_above_mwl">水位:平均水位より高め</string>
     <string name="poi_seamark_water_level_floating">水位:浮遊物</string>
-    <string name="poi_drinking_water_refill_network">飲料水補充ネットワーク(所属)</string>
+    <string name="poi_drinking_water_refill_network">給水スポットネットワーク</string>
     <string name="poi_drinking_water_refill_no">飲料水の補充:不可</string>
-    <string name="poi_drinking_water_refill_yes">飲料水の補充:可</string>
+    <string name="poi_drinking_water_refill_yes">可</string>
+    <string name="poi_stands">ブース</string>
+    <string name="poi_recycling_small_electrical_appliances">小型電化製品</string>
+    <string name="poi_departures_board">運行掲示板・時刻表</string>
+    <string name="poi_drinking_water_refill">給水スポットネットワークへの参加有無</string>
+    <string name="poi_traffic_signals_arrow">触覚矢印</string>
+    <string name="poi_traffic_signals_vibration">振動装置</string>
+    <string name="poi_fire_hydrant_pressure_filter">公称圧力</string>
+    <string name="poi_traffic_signals_arrow_no">触覚矢印:無し</string>
+    <string name="poi_traffic_signals_arrow_yes">有り</string>
+    <string name="poi_traffic_signals_vibration_yes">有り</string>
+    <string name="poi_traffic_signals_vibration_no">振動:無し</string>
+    <string name="poi_pump_status_missing_beam">状態:釣瓶・管がない</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">吸引</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">加圧</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">地下水</string>
 </resources>

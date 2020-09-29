@@ -3,8 +3,6 @@ package net.osmand.plus.measurementtool;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -16,9 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Collator;
 import net.osmand.IndexConstants;
+import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.GpxTrackAdapter;
@@ -26,7 +27,6 @@ import net.osmand.plus.helpers.GpxTrackAdapter.OnItemClickListener;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
-import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,11 +36,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.plus.SimplePopUpMenuItemAdapter.*;
 import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 import static net.osmand.plus.settings.backend.OsmandSettings.*;
 import static net.osmand.util.Algorithms.collectDirs;
 
 public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
+
+	private List<File> folders;
+	private HorizontalSelectionAdapter folderAdapter;
+	private GPXInfo currentlyRecording;
 
 	enum Mode {
 		OPEN_TRACK(R.string.shared_string_gpx_tracks, R.string.sort_by),
@@ -73,7 +78,7 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 	private Mode fragmentMode;
 	private String selectedFolder;
 	private String allFilesFolder;
-	TracksSortByMode tracksSortBy = TracksSortByMode.BY_DATE;
+	TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
 
 	public void setFragmentMode(Mode fragmentMode) {
 		this.fragmentMode = fragmentMode;
@@ -99,56 +104,52 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 		if (fragmentMode == Mode.OPEN_TRACK) {
 			titleView.setText(AndroidUtils.addColon(app, fragmentMode.title));
 			updateDescription(descriptionView);
-			final ImageButton sortButton = mainView.findViewById(R.id.sort_button);
-			Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark,
-					nightMode
-							? R.color.inactive_buttons_and_links_bg_dark
-							: R.color.inactive_buttons_and_links_bg_light);
-			AndroidUtils.setBackground(sortButton, background);
-			sortButton.setImageResource(tracksSortBy.getIconId());
-			sortButton.setVisibility(View.VISIBLE);
-			sortButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					IconPopupMenu popup = new IconPopupMenu(v.getContext(), v);
-					final Menu menu = popup.getMenu();
-					MenuItem mi;
-					for (final TracksSortByMode mode : TracksSortByMode.values()) {
-						mi = createMenuItem(app, menu, mode.getNameId(), mode.getNameId(), mode.getIconId(),
-								MenuItem.SHOW_AS_ACTION_ALWAYS, false, R.color.icon_color_default_light);
-						mi.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-							@Override
-							public boolean onMenuItemClick(MenuItem item) {
-								tracksSortBy = mode;
-								sortButton.setImageResource(mode.getIconId());
-								updateDescription(descriptionView);
-								sortFileList();
-								adapter.notifyDataSetChanged();
-								return false;
-							}
-						});
-					}
-					popup.show();
-				}
-			});
 		}
+		final ImageButton sortButton = mainView.findViewById(R.id.sort_button);
+		Drawable background = app.getUIUtilities().getIcon(R.drawable.bg_dash_line_dark,
+				nightMode
+						? R.color.inactive_buttons_and_links_bg_dark
+						: R.color.inactive_buttons_and_links_bg_light);
+		AndroidUtils.setBackground(sortButton, background);
+		sortButton.setImageResource(sortByMode.getIconId());
+		sortButton.setVisibility(View.VISIBLE);
+		sortButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final List<SimplePopUpMenuItem> items = new ArrayList<>();
+				for (final TracksSortByMode mode : TracksSortByMode.values()) {
+					items.add(new SimplePopUpMenuItem(
+							getString(mode.getNameId()),
+							app.getUIUtilities().getThemedIcon(mode.getIconId()),
+							new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									sortByMode = mode;
+									sortButton.setImageResource(mode.getIconId());
+									updateDescription(descriptionView);
+									sortFolderList();
+									folderAdapter.setItems(getFolderNames());
+									folderAdapter.notifyDataSetChanged();
+									sortFileList();
+									adapter.notifyDataSetChanged();
+								}
+							}, sortByMode == mode
+					));
+				}
+				UiUtilities.showPopUpMenu(v, items);
+			}
+		});
 
-		List<File> dirs = new ArrayList<>();
 		final File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		collectDirs(gpxDir, dirs);
-		List<String> dirItems = new ArrayList<>();
+
 		allFilesFolder = context.getString(R.string.shared_string_all);
 		if (savedInstanceState == null) {
 			selectedFolder = allFilesFolder;
 		}
-		dirItems.add(allFilesFolder);
-		for (File dir : dirs) {
-			dirItems.add(dir.getName());
-		}
-
 		final List<GPXInfo> allGpxList = getSortedGPXFilesInfo(gpxDir, null, false);
+		currentlyRecording = new GPXInfo(getString(R.string.shared_string_currently_recording_track), 0, 0);
 		if (isShowCurrentGpx()) {
-			allGpxList.add(0, new GPXInfo(getString(R.string.shared_string_currently_recording_track), 0, 0));
+			allGpxList.add(0, currentlyRecording);
 		}
 		gpxInfoMap = new HashMap<>();
 		gpxInfoMap.put(allFilesFolder, allGpxList);
@@ -186,8 +187,11 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 		final RecyclerView foldersRecyclerView = mainView.findViewById(R.id.folder_list);
 		foldersRecyclerView.setLayoutManager(new LinearLayoutManager(context,
 				RecyclerView.HORIZONTAL, false));
-		final HorizontalSelectionAdapter folderAdapter = new HorizontalSelectionAdapter(app, nightMode);
-		folderAdapter.setItems(dirItems);
+		folderAdapter = new HorizontalSelectionAdapter(app, nightMode);
+		folders = new ArrayList<>();
+		collectDirs(gpxDir, folders);
+		sortFolderList();
+		folderAdapter.setItems(getFolderNames());
 		folderAdapter.setSelectedItem(selectedFolder);
 		foldersRecyclerView.setAdapter(folderAdapter);
 		folderAdapter.setListener(new HorizontalSelectionAdapterListener() {
@@ -201,24 +205,22 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 		updateFileList(folderAdapter);
 	}
 
-	private void updateDescription(TextView descriptionView) {
-		String string = getString(tracksSortBy.getNameId());
-		descriptionView.setText(String.format(getString(R.string.ltr_or_rtl_combine_via_space),
-				getString(fragmentMode.description),
-				Character.toLowerCase(string.charAt(0)) + string.substring(1)));
+	private List<String> getFolderNames() {
+		List<String> folderNames = new ArrayList<>();
+		folderNames.add(allFilesFolder);
+		for (File folder : folders) {
+			folderNames.add(folder.getName());
+		}
+		return folderNames;
 	}
 
-	public MenuItem createMenuItem(OsmandApplication app, Menu m, int id, int titleRes, int iconId, int menuItemType,
-	                               boolean flipIconForRtl, int iconColor) {
-		Drawable d = iconId == 0 ? null : app.getUIUtilities().getIcon(iconId, iconColor);
-		MenuItem menuItem = m.add(0, id, 0, titleRes);
-		if (d != null) {
-			if (flipIconForRtl) {
-				d = AndroidUtils.getDrawableForDirection(app, d);
-			}
-			menuItem.setIcon(d);
+	private void updateDescription(TextView descriptionView) {
+		if (fragmentMode == Mode.OPEN_TRACK) {
+			String string = getString(sortByMode.getNameId());
+			descriptionView.setText(String.format(getString(R.string.ltr_or_rtl_combine_via_space),
+					getString(fragmentMode.description),
+					Character.toLowerCase(string.charAt(0)) + string.substring(1)));
 		}
-		return menuItem;
 	}
 
 	private void updateFileList(HorizontalSelectionAdapter folderAdapter) {
@@ -228,30 +230,58 @@ public class SelectFileBottomSheet extends BottomSheetBehaviourDialogFragment {
 		folderAdapter.notifyDataSetChanged();
 	}
 
-	private void sortFileList() {
-		List<GPXInfo> gpxInfoList = gpxInfoMap.get(selectedFolder);
-		sortSelected(gpxInfoList);
-		adapter.setGpxInfoList(gpxInfoList != null ? gpxInfoList : new ArrayList<GPXInfo>());
-	}
-
-	public void sortSelected(List<GPXInfo> gpxInfoList) {
-		Collections.sort(gpxInfoList, new Comparator<GPXInfo>() {
+	private void sortFolderList() {
+		final Collator collator = OsmAndCollator.primaryCollator();
+		Collections.sort(folders, new Comparator<File>() {
 			@Override
-			public int compare(GPXInfo i1, GPXInfo i2) {
-				if (tracksSortBy == TracksSortByMode.BY_NAME_ASCENDING) {
-					return i1.getFileName().toLowerCase().compareTo(i2.getFileName().toLowerCase());
-				} else if (tracksSortBy == TracksSortByMode.BY_NAME_DESCENDING) {
-					return -i1.getFileName().toLowerCase().compareTo(i2.getFileName().toLowerCase());
+			public int compare(File i1, File i2) {
+				if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
+					return collator.compare(i1.getName(), i2.getName());
+				} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
+					return -collator.compare(i1.getName(), i2.getName());
 				} else {
-					long time1 = i1.getLastModified();
-					long time2 = i2.getLastModified();
+					long time1 = i1.lastModified();
+					long time2 = i2.lastModified();
 					if (time1 == time2) {
-						return i1.getFileName().toLowerCase().compareTo(i2.getFileName().toLowerCase());
+						return collator.compare(i1.getName(), i2.getName());
 					}
 					return -((time1 < time2) ? -1 : ((time1 == time2) ? 0 : 1));
 				}
 			}
 		});
+	}
+
+	private void sortFileList() {
+		List<GPXInfo> gpxInfoList = gpxInfoMap.get(selectedFolder);
+		if (gpxInfoList != null) {
+			sortSelected(gpxInfoList);
+		}
+		adapter.setGpxInfoList(gpxInfoList != null ? gpxInfoList : new ArrayList<GPXInfo>());
+	}
+
+	public void sortSelected(List<GPXInfo> gpxInfoList) {
+		boolean hasRecording = gpxInfoList.remove(currentlyRecording);
+		final Collator collator = OsmAndCollator.primaryCollator();
+		Collections.sort(gpxInfoList, new Comparator<GPXInfo>() {
+			@Override
+			public int compare(GPXInfo i1, GPXInfo i2) {
+				if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
+					return collator.compare(i1.getFileName(), i2.getFileName());
+				} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
+					return -collator.compare(i1.getFileName(), i2.getFileName());
+				} else {
+					long time1 = i1.getLastModified();
+					long time2 = i2.getLastModified();
+					if (time1 == time2) {
+						return collator.compare(i1.getFileName(), i2.getFileName());
+					}
+					return -((time1 < time2) ? -1 : ((time1 == time2) ? 0 : 1));
+				}
+			}
+		});
+		if (hasRecording) {
+			gpxInfoList.add(0, currentlyRecording);
+		}
 	}
 
 	private boolean showFoldersName() {
