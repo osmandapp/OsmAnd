@@ -53,6 +53,11 @@ public class OsmOAuthAuthorizationClient {
         final int THREAD_ID = 10101;
         TrafficStats.setThreadStatsTag(THREAD_ID);
         this.application = application;
+        restoreToken();
+    }
+
+    public String getAccessToken() {
+        return this.accessToken.getToken();
     }
 
     public void performGetRequest(String url,OAuthAsyncRequestCallback<Response> callback) {

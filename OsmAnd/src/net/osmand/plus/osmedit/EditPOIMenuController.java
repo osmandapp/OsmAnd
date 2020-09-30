@@ -14,6 +14,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
+import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
@@ -39,9 +40,16 @@ public class EditPOIMenuController extends MenuController {
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();
 				if (plugin != null && activity != null) {
-					SendPoiDialogFragment sendPoiDialogFragment =
-							SendPoiDialogFragment.createInstance(new OsmPoint[]{getOsmPoint()}, SendPoiDialogFragment.PoiUploaderType.SIMPLE);
-					sendPoiDialogFragment.show(activity.getSupportFragmentManager(), SendPoiDialogFragment.TAG);
+					OsmOAuthAuthorizationClient client = new OsmOAuthAuthorizationClient(activity.getMyApplication());
+					if (client.isValidToken()){
+						new SendPoiDialogFragment.SimpleProgressDialogPoiUploader(activity).
+								showProgressDialog(new OsmPoint[] { getOsmPoint() }, false, false);
+					}
+					else {
+						SendPoiDialogFragment sendPoiDialogFragment =
+								SendPoiDialogFragment.createInstance(new OsmPoint[]{getOsmPoint()}, SendPoiDialogFragment.PoiUploaderType.SIMPLE);
+						sendPoiDialogFragment.show(activity.getSupportFragmentManager(), SendPoiDialogFragment.TAG);
+					}
 				}
 			}
 		};

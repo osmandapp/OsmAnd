@@ -1,6 +1,7 @@
 package net.osmand.plus.osmedit;
 
 import android.content.DialogInterface;
+import android.net.TrafficStats;
 import android.os.AsyncTask;
 
 import net.osmand.osm.edit.Entity;
@@ -43,6 +44,9 @@ public class UploadOpenstreetmapPointAsyncTask
 
 	@Override
 	protected Map<OsmPoint, String> doInBackground(OsmPoint... points) {
+		final int THREAD_ID = 10102;
+		TrafficStats.setThreadStatsTag(THREAD_ID);
+
 		Map<OsmPoint, String> loadErrorsMap = new HashMap<>();
 
 		boolean uploaded = false;

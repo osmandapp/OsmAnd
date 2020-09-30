@@ -21,6 +21,7 @@ import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -119,8 +120,14 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
 			StringBuilder responseBody = new StringBuilder();
 			if (doAuthenticate) {
-				String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
-				connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				OsmOAuthAuthorizationClient client = new OsmOAuthAuthorizationClient(ctx);
+				if (client.isValidToken()){
+					connection.addRequestProperty("Authorization", "OAuth " + client.getAccessToken());
+				}
+				else {
+					String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
+					connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				}
 			}
 			connection.setDoInput(true);
 			if (requestMethod.equals("PUT") || requestMethod.equals("POST") || requestMethod.equals("DELETE")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$

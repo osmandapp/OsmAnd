@@ -18,12 +18,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.scribejava.core.model.OAuthAsyncRequestCallback;
+import com.github.scribejava.core.model.Response;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+
+import java.io.IOException;
 
 public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 	OsmOAuthAuthorizationClient client;
@@ -72,17 +76,54 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 		grp.addPreference(pref);
 
 		final Preference prefOAuth = new Preference(this);
-		prefOAuth.setTitle(R.string.osb_author_dialog_password);
-		prefOAuth.setSummary(R.string.osb_author_dialog_password);
-		prefOAuth.setKey("local_openstreetmap_points");
-		prefOAuth.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				ViewGroup preferenceView = (ViewGroup)getListView().getChildAt(preference.getOrder());
-				client.startOAuth(preferenceView);
-				return true;
-			}
-		});
+		if (client.isValidToken()){
+			prefOAuth.setTitle(R.string.osm_authorization_success);
+			prefOAuth.setSummary(R.string.osm_authorization_success);
+			prefOAuth.setKey("local_openstreetmap_token");
+
+			final Preference prefTestUser = new Preference(this);
+			prefTestUser.setTitle("Test user request");
+			prefTestUser.setSummary("Test user request");
+			prefTestUser.setKey("local_openstreetmap_token");
+			prefTestUser.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+				@Override
+				public boolean onPreferenceClick(Preference preference) {
+					String url = "https://api.openstreetmap.org/api/0.6/user/details";
+					client.performGetRequest(url, new OAuthAsyncRequestCallback<Response>() {
+						@Override
+						public void onCompleted(Response response) {
+							try {
+								Toast.makeText(SettingsOsmEditingActivity.this,
+										"DATA RETRIEVED: " + response.getBody().toString(),Toast.LENGTH_SHORT).show();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+
+						@Override
+						public void onThrowable(Throwable t) {
+							Toast.makeText(SettingsOsmEditingActivity.this,
+									"ERROR happened",Toast.LENGTH_SHORT).show();
+						}
+					});
+					return true;
+				}
+			});
+			grp.addPreference(prefTestUser);
+		}
+		else {
+			prefOAuth.setTitle(R.string.osb_author_dialog_password);
+			prefOAuth.setSummary(R.string.osb_author_dialog_password);
+			prefOAuth.setKey("local_openstreetmap_token");
+			prefOAuth.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+				@Override
+				public boolean onPreferenceClick(Preference preference) {
+					ViewGroup preferenceView = (ViewGroup)getListView().getChildAt(preference.getOrder());
+					client.startOAuth(preferenceView);
+					return true;
+				}
+			});
+		}
 		grp.addPreference(prefOAuth);
     }
 
