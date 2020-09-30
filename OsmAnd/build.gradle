@@ -216,9 +216,13 @@ android {
 
 	buildTypes {
 		debug {
+			buildConfigField "String", "CONSUMER_KEY", "\"Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y\""
+			buildConfigField "String", "CONSUMER_SECRET", "\"lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM\""
 			signingConfig signingConfigs.development
 		}
 		release {
+			buildConfigField "String", "CONSUMER_KEY", "\"Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y\""
+			buildConfigField "String", "CONSUMER_SECRET", "\"lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM\""
 			signingConfig signingConfigs.publishing
 		}
 	}
@@ -564,6 +568,9 @@ dependencies {
 		exclude group: 'com.android.support'
 	}
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
+	implementation('com.github.scribejava:scribejava-apis:7.1.1'){
+		exclude group: "com.fasterxml.jackson.core"
+	}
 
 	huaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')
 	freehuaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')

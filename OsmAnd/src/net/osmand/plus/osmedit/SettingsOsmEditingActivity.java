@@ -3,8 +3,10 @@ package net.osmand.plus.osmedit;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.preference.CheckBoxPreference;
 import android.preference.DialogPreference;
 import android.preference.Preference;
@@ -12,22 +14,34 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationClient;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 
 public class SettingsOsmEditingActivity extends SettingsBaseActivity {
-
+	OsmOAuthAuthorizationClient client;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+				.detectDiskReads()
+				.detectDiskWrites()
+				.detectNetwork()
+				.penaltyLog()
+				.build());
+
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
+
+		client = new OsmOAuthAuthorizationClient(this.getMyApplication());
+
 		getToolbar().setTitle(R.string.osm_settings);
 		@SuppressWarnings("deprecation")
 		PreferenceScreen grp = getPreferenceScreen();
@@ -39,7 +53,7 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 				R.string.offline_edition, R.string.offline_edition_descr);
 		grp.addPreference(poiEdit);
 
-		Preference pref = new Preference(this);
+		final Preference pref = new Preference(this);
 		pref.setTitle(R.string.local_openstreetmap_settings);
 		pref.setSummary(R.string.local_openstreetmap_settings_descr);
 		pref.setKey("local_openstreetmap_points");
@@ -56,6 +70,20 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 			}
 		});
 		grp.addPreference(pref);
+
+		final Preference prefOAuth = new Preference(this);
+		prefOAuth.setTitle(R.string.osb_author_dialog_password);
+		prefOAuth.setSummary(R.string.osb_author_dialog_password);
+		prefOAuth.setKey("local_openstreetmap_points");
+		prefOAuth.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				ViewGroup preferenceView = (ViewGroup)getListView().getChildAt(preference.getOrder());
+				client.startOAuth(preferenceView);
+				return true;
+			}
+		});
+		grp.addPreference(prefOAuth);
     }
 
 	public class OsmLoginDataDialogPreference extends DialogPreference {
@@ -114,6 +142,17 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 		protected void onPostExecute(OsmBugsUtil.OsmBugResult osmBugResult) {
 			String text = osmBugResult.warning != null ? osmBugResult.warning : context.getString(R.string.osm_authorization_success);
 			Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+		}
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		Uri uri = intent.getData();
+		System.out.println("URI=" + uri);
+		if (uri != null && uri.toString().startsWith("osmand-oauth")) {
+			String oauthVerifier = uri.getQueryParameter("oauth_verifier");
+			client.authorize(oauthVerifier);
 		}
 	}
 }
