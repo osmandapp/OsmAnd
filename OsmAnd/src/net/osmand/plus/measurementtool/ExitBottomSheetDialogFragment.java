@@ -28,51 +28,52 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 
 		items.add(new ShortDescriptionItem.Builder()
 				.setDescription(getString(R.string.plan_route_exit_dialog_descr))
-				.setTitle(getString(R.string.exit_without_saving))
+				.setTitle(getString(R.string.
+						exit_without_saving))
 				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
 				.create());
 
 		items.add(new DividerSpaceItem(getContext(),
 				getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin)));
 
-		items.add(new BottomSheetItemButton.Builder()
-				.setButtonType(UiUtilities.DialogButtonType.SECONDARY)
-				.setTitle(getString(R.string.shared_string_exit))
-				.setLayoutId(R.layout.bottom_sheet_button)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment != null) {
-							targetFragment.onActivityResult(REQUEST_CODE, EXIT_RESULT_CODE, null);
-						}
-						dismiss();
-					}
-				})
-				.create());
-
-		items.add(new DividerSpaceItem(getContext(),
-				getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin)));
-
-		items.add(new BottomSheetItemButton.Builder()
-				.setTitle(getString(R.string.shared_string_save))
-				.setLayoutId(R.layout.bottom_sheet_button)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment != null) {
-							targetFragment.onActivityResult(REQUEST_CODE, SAVE_RESULT_CODE, null);
-						}
-						dismiss();
-					}
-				})
-				.create());
 	}
 
 	@Override
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_cancel;
+	}
+
+	@Override
+	protected int getRightBottomButtonTextId() {
+		return R.string.shared_string_save;
+	}
+
+	@Override
+	protected int getThirdBottomButtonTextId() {
+		return R.string.shared_string_exit;
+	}
+
+	@Override
+	protected void onRightBottomButtonClick() {
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment != null) {
+			targetFragment.onActivityResult(REQUEST_CODE, SAVE_RESULT_CODE, null);
+		}
+		dismiss();
+	}
+
+	@Override
+	protected void onThirdBottomButtonClick() {
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment != null) {
+			targetFragment.onActivityResult(REQUEST_CODE, EXIT_RESULT_CODE, null);
+		}
+		dismiss();
+	}
+
+	@Override
+	protected UiUtilities.DialogButtonType getThirdBottomButtonType() {
+		return (UiUtilities.DialogButtonType.SECONDARY);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment) {
