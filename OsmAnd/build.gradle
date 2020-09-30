@@ -542,6 +542,5 @@ dependencies {
 	}
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
 
-	//freehuaweiImplementation 'com.huawei.agconnect:agconnect-core:1.4.1.300'
 	freehuaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
 }
