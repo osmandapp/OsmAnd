@@ -721,9 +721,9 @@
     <string name="gpx_option_reverse_route">عكس اتجاه المسار</string>
     <string name="gpx_option_destination_point">استخدم الوجهة الحالية</string>
     <string name="gpx_option_from_start_point">يمر على طول المسار باكمله</string>
-    <string name="switch_to_vector_map_to_see">خريطة التنقل متوفرة حالياً لهذا الموقع.
+    <string name="switch_to_vector_map_to_see">خريطة التنقل متوفرة لهذا الموقع فعلها عبر
 \n
-\nلتفعليها \'القائمة\' ← \'ضبط الخريطة\' ← \'مصدر الخريطة\' ← \'الخريطة المحملة\'.</string>
+\n\'القائمة\' ← \'ضبط الخريطة\' ← \'مصدر الخريطة\' ← \'الخريطة المحملة\'.</string>
     <string name="choose_audio_stream">مصدر التوجيه الصوتي</string>
     <string name="choose_audio_stream_descr">اختيار قناة لتشغيل التوجيه الصوتي.</string>
     <string name="voice_stream_voice_call">صوت المكالمة الهاتفية ( كما يحاول قطع ستريو بلوتوث السيارة )</string>
@@ -1972,7 +1972,7 @@
     <string name="sd_unmounted">بطاقة الذاكرة غير متاحة. 
 \nلن تكون قادرا على رؤية الخرائط أو العثور على أماكن.</string>
     <string name="sd_mounted_ro">بطاقة الذاكرة في وضع القراءة فقط.
-\n يمكنك فقط مشاهدة الخريطة المحملة مسبقا ولا يمكنك التحميل من الإنترنت.</string>
+\n يمكنك فقط مشاهدة الخريطة المحملة مسبقاً ولا يمكنك التحميل من الإنترنت.</string>
     <string name="route_tshr">انعطف يميناً بشكل حاد</string>
     <string name="route_tshl">انعطف يساراً بشكل حاد</string>
     <string name="route_tu">قم بالدوران وواصل</string>
