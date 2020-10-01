@@ -3553,7 +3553,7 @@
     <string name="profile_type_custom_string">پروفایل سفارشی</string>
     <string name="shared_string_angle_param">زاویه: ‎%s°</string>
     <string name="shared_string_angle">زاویه</string>
-    <string name="recalc_angle_dialog_descr">تا مسیریابی مجدد انجام شود، از موقعیت من تا مسیر محاسبه‌شده پاره‌خط مستقیمی نمایش داده می‌شود</string>
+    <string name="recalc_angle_dialog_descr">تا مسیریابی مجدد انجام نشده، از موقعیت من تا مسیر محاسبه‌شده پاره‌خط مستقیمی نمایش داده می‌شود</string>
     <string name="recalc_angle_dialog_title">کمترین زاویه میان موقعیت من و مسیر</string>
     <string name="shared_string_preparing">آماده‌سازی</string>
     <string name="shared_string_nothing_selected">چیزی انتخاب نشده</string>
@@ -3873,7 +3873,7 @@
     <string name="save_as_new_track">ذخیره به‌عنوان رد جدید</string>
     <string name="reverse_route">برعکس‌کردن مسیر</string>
     <string name="route_between_points_whole_track_button_desc">تمام رد با استفاده از پروفایل انتخابی بازمحاسبه خواهد شد.</string>
-    <string name="route_between_points_next_segment_button_desc">با استفاده از پروفایل انتخابی فقط پارهٔ بعدی بازمحاسبه خواهد شد.</string>
+    <string name="route_between_points_next_segment_button_desc">فقط پارهٔ بعدی با استفاده از پروفایل انتخابی بازمحاسبه خواهد شد.</string>
     <string name="all_next_segments">همهٔ پاره‌های بعدی</string>
     <string name="previous_segment">پارهٔ قبلی</string>
     <string name="all_previous_segments">همهٔ پاره‌های قبلی</string>
