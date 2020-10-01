@@ -20,12 +20,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -56,7 +58,7 @@ import java.util.Map;
 public class DiscountHelper {
 
 	private static final String TAG = "DiscountHelper";
-	//private static final String DISCOUNT_JSON = "discount.json";
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(DiscountHelper.class);
 
 	private static long mLastCheckTime;
 	private static ControllerData mData;
@@ -312,7 +314,11 @@ public class DiscountHelper {
 			if (purchaseHelper != null) {
 				if (url.contains(purchaseHelper.getFullVersion().getSku())) {
 					app.logEvent("in_app_purchase_redirect");
-					purchaseHelper.purchaseFullVersion(mapActivity);
+					try {
+						purchaseHelper.purchaseFullVersion(mapActivity);
+					} catch (UnsupportedOperationException e) {
+						LOG.error("purchaseFullVersion is not supported", e);
+					}
 				} else {
 					for (InAppPurchase p : purchaseHelper.getLiveUpdates().getAllSubscriptions()) {
 						if (url.contains(p.getSku())) {
