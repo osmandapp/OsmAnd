@@ -285,8 +285,8 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 						contextMenuAdapter = mapActivityActions.createMainOptionsMenu();
 						break;
 					case CONFIGURE_MAP:
-						ConfigureMapMenu configureMapMenu = new ConfigureMapMenu((MapActivity) activity);
-						contextMenuAdapter = configureMapMenu.createListAdapter();
+						ConfigureMapMenu configureMapMenu = new ConfigureMapMenu();
+						contextMenuAdapter = configureMapMenu.createListAdapter((MapActivity) activity);
 						break;
 					case CONTEXT_MENU_ACTIONS:
 						MapContextMenu menu = ((MapActivity) activity).getContextMenu();

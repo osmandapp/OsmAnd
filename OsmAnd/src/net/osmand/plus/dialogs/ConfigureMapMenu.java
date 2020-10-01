@@ -110,17 +110,11 @@ public class ConfigureMapMenu {
 	private int selectedLanguageIndex;
 	private boolean transliterateNames;
 
-	private MapActivity ma;
-
 	public interface OnClickListener {
 		void onClick();
 	}
 
-	public ConfigureMapMenu(MapActivity mapActivity) {
-		this.ma = mapActivity;
-	}
-
-	public ContextMenuAdapter createListAdapter() {
+	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
 		OsmandApplication app = ma.getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -133,7 +127,7 @@ public class ConfigureMapMenu {
 		adapter.setChangeAppModeListener(new OnClickListener() {
 			@Override
 			public void onClick() {
-				ma.getDashboard().updateListAdapter(createListAdapter());
+				ma.getDashboard().updateListAdapter(createListAdapter(ma));
 			}
 		});
 		List<RenderingRuleProperty> customRules = getCustomRules(app,
@@ -1122,10 +1116,6 @@ public class ConfigureMapMenu {
 
 			return builder.createItem();
 		}
-	}
-
-	private OsmandApplication getMyApplication() {
-		return ma.getMyApplication();
 	}
 
 	private static class StringSpinnerArrayAdapter extends ArrayAdapter<String> {
