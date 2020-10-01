@@ -38,20 +38,21 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 		boolean hasStyles = styles != null && styles.size() == tx.size();
 		double zoomCoef = tb.getZoomAnimation() > 0 ? (Math.pow(2, tb.getZoomAnimation() + tb.getZoomFloatPart())) : 1f;
-		Bitmap arrow = context.getArrowBitmap();
-		int arrowHeight = arrow.getHeight();
+
+		int startIndex = tx.size() - 2;
 		double defaultPxStep;
-		if (hasStyles && styles.get(0) != null) {
-			defaultPxStep = styles.get(0).getPointStepPx(zoomCoef);
+		if (hasStyles && styles.get(startIndex) != null) {
+			defaultPxStep = styles.get(startIndex).getPointStepPx(zoomCoef);
 		} else {
-			defaultPxStep = arrowHeight * 4f * zoomCoef;
+			Bitmap arrow = context.getArrowBitmap();
+			defaultPxStep = arrow.getHeight() * 4f * zoomCoef;
 		}
 		double pxStep = defaultPxStep;
 		double dist = 0;
 		if (distPixToFinish != 0) {
 			dist = distPixToFinish - pxStep * ((int) (distPixToFinish / pxStep)); // dist < 1
 		}
-		for (int i = tx.size() - 2; i >= 0; i--) {
+		for (int i = startIndex; i >= 0; i--) {
 			GeometryWayStyle<?> style = hasStyles ? styles.get(i) : null;
 			float px = tx.get(i);
 			float py = ty.get(i);
