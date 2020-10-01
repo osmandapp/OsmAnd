@@ -360,8 +360,14 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				}
 			});
 		}
+		View divider = buttonsContainer.findViewById(R.id.buttons_divider);
+		divider.getLayoutParams().height = getFirstDividerHeight();
 		AndroidUiHelper.updateVisibility(rightButton, buttonTextId != DEFAULT_VALUE);
-		AndroidUiHelper.updateVisibility(buttonsContainer.findViewById(R.id.buttons_divider), buttonTextId != DEFAULT_VALUE);
+		AndroidUiHelper.updateVisibility(divider, buttonTextId != DEFAULT_VALUE);
+	}
+
+	protected int getFirstDividerHeight(){
+		return getResources().getDimensionPixelSize(R.dimen.content_padding);
 	}
 
 	private void setupThirdButton() {
@@ -376,8 +382,14 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				}
 			});
 		}
+		View divider = buttonsContainer.findViewById(R.id.buttons_divider_top);
+		divider.getLayoutParams().height = getSecondDividerHeight();
 		AndroidUiHelper.updateVisibility(thirdButton, buttonTextId != DEFAULT_VALUE);
-		AndroidUiHelper.updateVisibility(buttonsContainer.findViewById(R.id.buttons_divider_top), buttonTextId != DEFAULT_VALUE);
+		AndroidUiHelper.updateVisibility(divider, buttonTextId != DEFAULT_VALUE);
+	}
+
+	protected int getSecondDividerHeight(){
+		return getResources().getDimensionPixelSize(R.dimen.content_padding);
 	}
 
 	@ColorRes

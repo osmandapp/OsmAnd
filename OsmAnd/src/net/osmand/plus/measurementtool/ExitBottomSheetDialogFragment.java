@@ -14,6 +14,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -51,6 +52,11 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 	@Override
 	protected int getThirdBottomButtonTextId() {
 		return R.string.shared_string_exit;
+	}
+
+	@Override
+	public int getSecondDividerHeight() {
+		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
 	}
 
 	@Override
