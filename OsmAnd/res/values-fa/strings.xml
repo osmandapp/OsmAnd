@@ -3278,7 +3278,7 @@
     <string name="routing_attr_piste_type_skitour_name">تور اسکی</string>
     <string name="routing_attr_piste_type_skitour_description">مسیرها برای تور اسکی.</string>
     <string name="app_mode_camper">کمپر</string>
-    <string name="app_mode_campervan">ون کمپر</string>
+    <string name="app_mode_campervan">ون کمپر (RV)</string>
     <string name="app_mode_wagon">واگن</string>
     <string name="app_mode_pickup_truck">کامیون پیک‌آپ</string>
     <string name="analytics_pref_title">تحلیل‌ها</string>
@@ -3928,4 +3928,9 @@
     <string name="save_global_track_interval_descr">بازهٔ زمانی برای ضبط رد را انتخاب کنید (که از طریق ابزار ضبط سفر روی نقشه فعال می‌شود).</string>
     <string name="gpx_monitoring_stop">نگه‌داشتن ضبط سفر</string>
     <string name="gpx_monitoring_start">ازسرگیری ضبط سفر</string>
+    <string name="app_mode_inline_skates">اسکیت این‌لاین</string>
+    <string name="app_mode_enduro_motorcycle">موتور پرشی</string>
+    <string name="app_mode_motor_scooter">اسکوتر موتوری</string>
+    <string name="app_mode_wheelchair_forward">ویلچر رو به جلو</string>
+    <string name="threshold_distance">فاصله آستانه</string>
 </resources>
