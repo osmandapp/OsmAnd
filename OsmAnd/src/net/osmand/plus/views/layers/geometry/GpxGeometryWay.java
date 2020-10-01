@@ -48,7 +48,6 @@ public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryW
 		this.arrowColor = arrowColor;
 		this.trackColor = trackColor;
 		this.trackWidth = trackWidth;
-		getContext().setTrackWidth(trackWidth);
 	}
 
 	@NonNull

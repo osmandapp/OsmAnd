@@ -38,8 +38,15 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 		boolean hasStyles = styles != null && styles.size() == tx.size();
 		double zoomCoef = tb.getZoomAnimation() > 0 ? (Math.pow(2, tb.getZoomAnimation() + tb.getZoomFloatPart())) : 1f;
-		double pxStep = context.getPxStep(zoomCoef);
-		double pxStepRegular = context.getPxStepRegular(zoomCoef);
+		Bitmap arrow = context.getArrowBitmap();
+		int arrowHeight = arrow.getHeight();
+		double defaultPxStep;
+		if (hasStyles && styles.get(0) != null) {
+			defaultPxStep = styles.get(0).getPointStepPx(zoomCoef);
+		} else {
+			defaultPxStep = arrowHeight * 4f * zoomCoef;
+		}
+		double pxStep = defaultPxStep;
 		double dist = 0;
 		if (distPixToFinish != 0) {
 			dist = distPixToFinish - pxStep * ((int) (distPixToFinish / pxStep)); // dist < 1
@@ -55,7 +62,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			if (distSegment == 0) {
 				continue;
 			}
-			pxStep = style != null ? style.getPointStepPx(zoomCoef) : pxStepRegular;
+			pxStep = style != null ? style.getPointStepPx(zoomCoef) : defaultPxStep;
 			if (dist >= pxStep) {
 				dist = 0;
 			}
