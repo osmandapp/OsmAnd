@@ -277,10 +277,12 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
 				.setId(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_renderer, activity)
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(MAP_STYLE_ID)
-				.setDescription(getRenderDescr(activity)).setLayout(R.layout.list_item_single_line_descrition_narrow)
-				.setIcon(R.drawable.ic_map).setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setTitleId(R.string.map_widget_renderer, activity)
+				.setLayout(R.layout.list_item_single_line_descrition_narrow)
+				.setIcon(R.drawable.ic_map)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
@@ -290,6 +292,13 @@ public class ConfigureMapMenu {
 					}
 				})
 				.setItemDeleteAction(makeDeleteAction(settings.RENDERER))
+				.setOnUpdateCallback(new ContextMenuItem.OnUpdateCallback() {
+					@Override
+					public void onUpdateMenuItem(ContextMenuItem item) {
+						String renderDescr = getRenderDescr(app);
+						item.setDescription(renderDescr);
+					}
+				})
 				.createItem());
 
 		String description = "";
@@ -942,13 +951,13 @@ public class ConfigureMapMenu {
 		dialog.show();
 	}
 
-	protected String getRenderDescr(final MapActivity activity) {
-		RendererRegistry rr = activity.getMyApplication().getRendererRegistry();
+	protected String getRenderDescr(OsmandApplication app) {
+		RendererRegistry rr = app.getRendererRegistry();
 		RenderingRulesStorage storage = rr.getCurrentSelectedRenderer();
 		if (storage == null) {
 			return "";
 		}
-		String translation = RendererRegistry.getTranslatedRendererName(activity, storage.getName());
+		String translation = RendererRegistry.getTranslatedRendererName(app, storage.getName());
 		return translation == null ? storage.getName() : translation;
 	}
 
