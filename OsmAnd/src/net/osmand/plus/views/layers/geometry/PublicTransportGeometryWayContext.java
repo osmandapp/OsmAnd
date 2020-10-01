@@ -63,6 +63,11 @@ public class PublicTransportGeometryWayContext extends GeometryWayContext {
 	}
 
 	@Override
+	public double getDefaultPxStep(double zoomCoef) {
+		return getArrowBitmap().getHeight() * 1.2f * zoomCoef;
+	}
+
+	@Override
 	protected boolean hasAttrs() {
 		return super.hasAttrs() && attrsPT != null && attrsW != null;
 	}

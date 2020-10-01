@@ -121,4 +121,17 @@ public abstract class GeometryWayContext {
 		return arrowBitmap;
 	}
 
+	public double getPxStep(double zoomCoef) {
+		return getDefaultPxStep(zoomCoef);
+	}
+
+	public double getPxStepRegular(double zoomCoef) {
+		return getDefaultPxStep(zoomCoef);
+	}
+
+	public double getDefaultPxStep(double zoomCoef) {
+		Bitmap arrow = getArrowBitmap();
+		int arrowHeight = arrow.getHeight();
+		return arrowHeight * 4f * zoomCoef;
+	}
 }
