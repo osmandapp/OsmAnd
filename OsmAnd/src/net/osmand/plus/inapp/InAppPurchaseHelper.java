@@ -2,6 +2,7 @@ package net.osmand.plus.inapp;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
@@ -64,6 +65,7 @@ public abstract class InAppPurchaseHelper {
 	protected InAppPurchaseListener uiActivity = null;
 
 	public interface InAppPurchaseListener {
+
 		void onError(InAppPurchaseTaskType taskType, String error);
 
 		void onGetItems();
@@ -75,6 +77,13 @@ public abstract class InAppPurchaseHelper {
 		void dismissProgress(InAppPurchaseTaskType taskType);
 	}
 
+	public interface InAppPurchaseInitCallback {
+
+		void onSuccess();
+
+		void onFail();
+	}
+
 	public enum InAppPurchaseTaskType {
 		REQUEST_INVENTORY,
 		PURCHASE_FULL_VERSION,
@@ -82,9 +91,23 @@ public abstract class InAppPurchaseHelper {
 		PURCHASE_DEPTH_CONTOURS
 	}
 
-	public interface InAppRunnable {
+	public abstract class InAppCommand {
+
+		InAppCommandResultHandler resultHandler;
+
 		// return true if done and false if async task started
-		boolean run(InAppPurchaseHelper helper);
+		abstract void run(InAppPurchaseHelper helper);
+
+		protected void commandDone() {
+			InAppCommandResultHandler resultHandler = this.resultHandler;
+			if (resultHandler != null) {
+				resultHandler.onCommandDone(this);
+			}
+		}
+	}
+
+	public interface InAppCommandResultHandler {
+		void onCommandDone(@NonNull InAppCommand command);
 	}
 
 	public static class PurchaseInfo {
@@ -163,8 +186,9 @@ public abstract class InAppPurchaseHelper {
 	public InAppPurchaseHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
 		isDeveloperVersion = Version.isDeveloperVersion(ctx);
-		purchases = new InAppPurchases(ctx);
 	}
+
+	public abstract void isInAppPurchaseSupported(@NonNull final Activity activity, @Nullable final InAppPurchaseInitCallback callback);
 
 	public boolean hasInventory() {
 		return lastValidationCheckTime != 0;
@@ -181,7 +205,7 @@ public abstract class InAppPurchaseHelper {
 		return false;
 	}
 
-	protected void exec(final @NonNull InAppPurchaseTaskType taskType, final @NonNull InAppRunnable runnable) {
+	protected void exec(final @NonNull InAppPurchaseTaskType taskType, final @NonNull InAppCommand command) {
 		if (isDeveloperVersion || !Version.isGooglePlayEnabled(ctx)) {
 			notifyDismissProgress(taskType);
 			stop(true);
@@ -205,14 +229,20 @@ public abstract class InAppPurchaseHelper {
 		try {
 			processingTask = true;
 			activeTask = taskType;
-			execImpl(taskType, runnable);
+			command.resultHandler = new InAppCommandResultHandler() {
+				@Override
+				public void onCommandDone(@NonNull InAppCommand command) {
+					processingTask = false;
+				}
+			};
+			execImpl(taskType, command);
 		} catch (Exception e) {
 			logError("exec Error", e);
 			stop(true);
 		}
 	}
 
-	protected abstract void execImpl(@NonNull final InAppPurchaseTaskType taskType, @NonNull final InAppRunnable runnable);
+	protected abstract void execImpl(@NonNull final InAppPurchaseTaskType taskType, @NonNull final InAppCommand command);
 
 	public boolean needRequestInventory() {
 		return !inventoryRequested && ((isSubscribedToLiveUpdates(ctx) && Algorithms.isEmpty(ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.get()))
@@ -224,16 +254,16 @@ public abstract class InAppPurchaseHelper {
 		new RequestInventoryTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
-	public abstract void purchaseFullVersion(final Activity activity) throws UnsupportedOperationException;
+	public abstract void purchaseFullVersion(@NonNull final Activity activity) throws UnsupportedOperationException;
 
-	public void purchaseLiveUpdates(Activity activity, String sku, String email, String userName,
+	public void purchaseLiveUpdates(@NonNull Activity activity, String sku, String email, String userName,
 									String countryDownloadName, boolean hideUserName) {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES);
 		new LiveUpdatesPurchaseTask(activity, sku, email, userName, countryDownloadName, hideUserName)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
-	public abstract void purchaseDepthContours(final Activity activity) throws UnsupportedOperationException;
+	public abstract void purchaseDepthContours(@NonNull final Activity activity) throws UnsupportedOperationException;
 
 	@SuppressLint("StaticFieldLeak")
 	private class LiveUpdatesPurchaseTask extends AsyncTask<Void, Void, String> {
@@ -329,8 +359,8 @@ public abstract class InAppPurchaseHelper {
 		}
 	}
 
-	protected abstract InAppRunnable getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity,
-																   final String sku, final String payload) throws UnsupportedOperationException;
+	protected abstract InAppCommand getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity,
+																  final String sku, final String payload) throws UnsupportedOperationException;
 
 	@SuppressLint("StaticFieldLeak")
 	private class RequestInventoryTask extends AsyncTask<Void, Void, String> {
@@ -380,7 +410,7 @@ public abstract class InAppPurchaseHelper {
 		}
 	}
 
-	protected abstract InAppRunnable getRequestInventoryCommand() throws UnsupportedOperationException;
+	protected abstract InAppCommand getRequestInventoryCommand() throws UnsupportedOperationException;
 
 	protected void onSkuDetailsResponseDone(List<PurchaseInfo> purchaseInfoList) {
 		final AndroidNetworkUtils.OnRequestResultListener listener = new AndroidNetworkUtils.OnRequestResultListener() {
@@ -597,6 +627,10 @@ public abstract class InAppPurchaseHelper {
 				listener.onResult("Error");
 			}
 		}
+	}
+
+	public boolean onActivityResult(@NonNull Activity activity, int requestCode, int resultCode, Intent data) {
+		return false;
 	}
 
 	protected void notifyError(InAppPurchaseTaskType taskType, String message) {

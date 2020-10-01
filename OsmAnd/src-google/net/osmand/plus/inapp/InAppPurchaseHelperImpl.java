@@ -13,6 +13,8 @@ import com.android.billingclient.api.SkuDetailsResponseListener;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.inapp.util.BillingManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -49,13 +51,21 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	public InAppPurchaseHelperImpl(OsmandApplication ctx) {
 		super(ctx);
+		purchases = new InAppPurchasesImpl(ctx);
+	}
+
+	@Override
+	public void isInAppPurchaseSupported(@NonNull final Activity activity, @Nullable final InAppPurchaseInitCallback callback) {
+		if (callback != null) {
+			callback.onSuccess();
+		}
 	}
 
 	private BillingManager getBillingManager() {
 		return billingManager;
 	}
 
-	protected void execImpl(@NonNull final InAppPurchaseTaskType taskType, @NonNull final InAppRunnable runnable) {
+	protected void execImpl(@NonNull final InAppPurchaseTaskType taskType, @NonNull final InAppCommand runnable) {
 		billingManager = new BillingManager(ctx, BASE64_ENCODED_PUBLIC_KEY, new BillingManager.BillingUpdatesListener() {
 
 			@Override
@@ -77,7 +87,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					return;
 				}
 
-				processingTask = !runnable.run(InAppPurchaseHelperImpl.this);
+				runnable.run(InAppPurchaseHelperImpl.this);
 			}
 
 			@Override
@@ -114,7 +124,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 							}
 
 							List<String> skuSubscriptions = new ArrayList<>();
-							for (InAppPurchases.InAppSubscription subscription : getInAppPurchases().getAllInAppSubscriptions()) {
+							for (InAppSubscription subscription : getInAppPurchases().getAllInAppSubscriptions()) {
 								skuSubscriptions.add(subscription.getSku());
 							}
 							for (Purchase p : purchases) {
@@ -165,9 +175,9 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	public void purchaseFullVersion(final Activity activity) {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
-		exec(InAppPurchaseTaskType.PURCHASE_FULL_VERSION, new InAppRunnable() {
+		exec(InAppPurchaseTaskType.PURCHASE_FULL_VERSION, new InAppCommand() {
 			@Override
-			public boolean run(InAppPurchaseHelper helper) {
+			public void run(InAppPurchaseHelper helper) {
 				try {
 					SkuDetails skuDetails = getSkuDetails(getFullVersion().getSku());
 					if (skuDetails == null) {
@@ -179,22 +189,21 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					} else {
 						throw new IllegalStateException("BillingManager disposed");
 					}
-					return false;
+					commandDone();
 				} catch (Exception e) {
 					complain("Cannot launch full version purchase!");
 					logError("purchaseFullVersion Error", e);
 					stop(true);
 				}
-				return true;
 			}
 		});
 	}
 
 	public void purchaseDepthContours(final Activity activity) {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS);
-		exec(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS, new InAppRunnable() {
+		exec(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS, new InAppCommand() {
 			@Override
-			public boolean run(InAppPurchaseHelper helper) {
+			public void run(InAppPurchaseHelper helper) {
 				try {
 					SkuDetails skuDetails = getSkuDetails(getDepthContours().getSku());
 					if (skuDetails == null) {
@@ -206,13 +215,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					} else {
 						throw new IllegalStateException("BillingManager disposed");
 					}
-					return false;
+					commandDone();
 				} catch (Exception e) {
 					complain("Cannot launch depth contours purchase!");
 					logError("purchaseDepthContours Error", e);
 					stop(true);
 				}
-				return true;
 			}
 		});
 	}
@@ -295,7 +303,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			 */
 
 			List<String> allOwnedSubscriptionSkus = getAllOwnedSubscriptionSkus();
-			for (InAppPurchases.InAppSubscription s : getLiveUpdates().getAllSubscriptions()) {
+			for (InAppSubscription s : getLiveUpdates().getAllSubscriptions()) {
 				if (hasDetails(s.getSku())) {
 					Purchase purchase = getPurchase(s.getSku());
 					SkuDetails liveUpdatesDetails = getSkuDetails(s.getSku());
@@ -309,9 +317,9 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				Purchase purchase = getPurchase(sku);
 				SkuDetails liveUpdatesDetails = getSkuDetails(sku);
 				if (liveUpdatesDetails != null) {
-					InAppPurchases.InAppSubscription s = getLiveUpdates().upgradeSubscription(sku);
+					InAppSubscription s = getLiveUpdates().upgradeSubscription(sku);
 					if (s == null) {
-						s = new InAppPurchases.InAppPurchaseLiveUpdatesOldSubscription(liveUpdatesDetails);
+						s = new InAppPurchaseLiveUpdatesOldSubscription(liveUpdatesDetails);
 					}
 					fetchInAppPurchase(s, liveUpdatesDetails, purchase);
 				}
@@ -441,21 +449,21 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 		String subscriptionPeriod = skuDetails.getSubscriptionPeriod();
 		if (!Algorithms.isEmpty(subscriptionPeriod)) {
-			if (inAppPurchase instanceof InAppPurchases.InAppSubscription) {
+			if (inAppPurchase instanceof InAppSubscription) {
 				try {
-					((InAppPurchases.InAppSubscription) inAppPurchase).setSubscriptionPeriodString(subscriptionPeriod);
+					((InAppSubscription) inAppPurchase).setSubscriptionPeriodString(subscriptionPeriod);
 				} catch (ParseException e) {
 					LOG.error(e);
 				}
 			}
 		}
-		if (inAppPurchase instanceof InAppPurchases.InAppSubscription) {
+		if (inAppPurchase instanceof InAppSubscription) {
 			String introductoryPrice = skuDetails.getIntroductoryPrice();
 			String introductoryPricePeriod = skuDetails.getIntroductoryPricePeriod();
 			String introductoryPriceCycles = skuDetails.getIntroductoryPriceCycles();
 			long introductoryPriceAmountMicros = skuDetails.getIntroductoryPriceAmountMicros();
 			if (!Algorithms.isEmpty(introductoryPrice)) {
-				InAppPurchases.InAppSubscription s = (InAppPurchases.InAppSubscription) inAppPurchase;
+				InAppSubscription s = (InAppSubscription) inAppPurchase;
 				try {
 					s.setIntroductoryInfo(new InAppPurchases.InAppSubscriptionIntroductoryInfo(s, introductoryPrice,
 							introductoryPriceAmountMicros, introductoryPricePeriod, introductoryPriceCycles));
@@ -466,10 +474,10 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 	}
 
-	protected InAppRunnable getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity, final String sku, final String payload) {
-		return new InAppRunnable() {
+	protected InAppCommand getPurchaseLiveUpdatesCommand(final WeakReference<Activity> activity, final String sku, final String payload) {
+		return new InAppCommand() {
 			@Override
-			public boolean run(InAppPurchaseHelper helper) {
+			public void run(InAppPurchaseHelper helper) {
 				try {
 					Activity a = activity.get();
 					SkuDetails skuDetails = getSkuDetails(sku);
@@ -481,7 +489,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						} else {
 							throw new IllegalStateException("BillingManager disposed");
 						}
-						return false;
+						commandDone();
 					} else {
 						stop(true);
 					}
@@ -489,15 +497,14 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					logError("launchPurchaseFlow Error", e);
 					stop(true);
 				}
-				return true;
 			}
 		};
 	}
 
-	protected InAppRunnable getRequestInventoryCommand() {
-		return new InAppRunnable() {
+	protected InAppCommand getRequestInventoryCommand() {
+		return new InAppCommand() {
 			@Override
-			public boolean run(InAppPurchaseHelper helper) {
+			public void run(InAppPurchaseHelper helper) {
 				logDebug("Setup successful. Querying inventory.");
 				try {
 					BillingManager billingManager = getBillingManager();
@@ -506,13 +513,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					} else {
 						throw new IllegalStateException("BillingManager disposed");
 					}
-					return false;
+					commandDone();
 				} catch (Exception e) {
 					logError("queryInventoryAsync Error", e);
 					notifyDismissProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
 					stop(true);
 				}
-				return true;
 			}
 		};
 	}
