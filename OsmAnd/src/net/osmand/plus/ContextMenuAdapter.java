@@ -100,15 +100,6 @@ public class ContextMenuAdapter {
 		return items.get(position);
 	}
 
-	public ContextMenuItem getItemById(@NonNull String id) {
-		for (ContextMenuItem item : items) {
-			if (id.equals(item.getId())) {
-				return item;
-			}
-		}
-		return null;
-	}
-
 	public List<ContextMenuItem> getItems() {
 		return items;
 	}

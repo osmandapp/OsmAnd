@@ -334,7 +334,7 @@ public class RendererRegistry {
 		return currentSelectedRender;
 	}
 	
-	public void setCurrentSelectedRender(final RenderingRulesStorage currentSelectedRender) {
+	public void setCurrentSelectedRender(RenderingRulesStorage currentSelectedRender) {
 		this.currentSelectedRender = currentSelectedRender;
 	}
 
