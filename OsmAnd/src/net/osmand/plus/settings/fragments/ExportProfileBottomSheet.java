@@ -24,43 +24,27 @@ import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
-import net.osmand.map.ITileSource;
-import net.osmand.map.TileSourceManager;
-import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
-import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.SettingsHelper;
-import net.osmand.plus.settings.backend.SettingsHelper.AvoidRoadsSettingsItem;
-import net.osmand.plus.settings.backend.SettingsHelper.FileSettingsItem;
-import net.osmand.plus.settings.backend.SettingsHelper.MapSourcesSettingsItem;
-import net.osmand.plus.settings.backend.SettingsHelper.PoiUiFiltersSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.ProfileSettingsItem;
-import net.osmand.plus.settings.backend.SettingsHelper.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.SettingsHelper.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
-import net.osmand.plus.settings.fragments.ExportImportSettingsAdapter.Type;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
@@ -73,7 +57,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 
 	private OsmandApplication app;
 	private ApplicationMode profile;
-	private Map<Type, List<?>> dataList = new HashMap<>();
+	private Map<ExportSettingsType, List<?>> dataList = new HashMap<>();
 	private ExportImportSettingsAdapter adapter;
 
 	private SettingsHelper.SettingsExportListener exportListener;
@@ -87,7 +71,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
 		profile = getAppMode();
-		dataList = getAdditionalData();
+		dataList = app.getSettingsHelper().getAdditionalData();
 		if (savedInstanceState != null) {
 			includeAdditionalData = savedInstanceState.getBoolean(INCLUDE_ADDITIONAL_DATA_KEY);
 			exportingProfile = savedInstanceState.getBoolean(EXPORTING_PROFILE_KEY);
@@ -146,7 +130,7 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 					topSwitchDivider.setVisibility(includeAdditionalData ? View.VISIBLE : View.GONE);
 					bottomSwitchDivider.setVisibility(includeAdditionalData ? View.VISIBLE : View.GONE);
 					if (includeAdditionalData) {
-						adapter.updateSettingsList(getAdditionalData());
+						adapter.updateSettingsList(app.getSettingsHelper().getAdditionalData());
 						adapter.selectAll(true);
 					} else {
 						adapter.selectAll(false);
@@ -224,104 +208,11 @@ public class ExportProfileBottomSheet extends BasePreferenceBottomSheet {
 		}
 	}
 
-	private Map<Type, List<?>> getAdditionalData() {
-		Map<Type, List<?>> dataList = new HashMap<>();
-
-
-		QuickActionRegistry registry = app.getQuickActionRegistry();
-		List<QuickAction> actionsList = registry.getQuickActions();
-		if (!actionsList.isEmpty()) {
-			dataList.put(Type.QUICK_ACTIONS, actionsList);
-		}
-
-		List<PoiUIFilter> poiList = app.getPoiFilters().getUserDefinedPoiFilters(false);
-		if (!poiList.isEmpty()) {
-			dataList.put(Type.POI_TYPES, poiList);
-		}
-
-		List<ITileSource> iTileSources = new ArrayList<>();
-		Set<String> tileSourceNames = app.getSettings().getTileSourceEntries(true).keySet();
-		for (String name : tileSourceNames) {
-			File f = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name);
-			if (f != null) {
-				ITileSource template;
-				if (f.getName().endsWith(SQLiteTileSource.EXT)) {
-					template = new SQLiteTileSource(app, f, TileSourceManager.getKnownSourceTemplates());
-				} else {
-					template = TileSourceManager.createTileSourceTemplate(f);
-				}
-				if (template.getUrlTemplate() != null) {
-					iTileSources.add(template);
-				}
-			}
-		}
-		if (!iTileSources.isEmpty()) {
-			dataList.put(Type.MAP_SOURCES, iTileSources);
-		}
-
-		Map<String, File> externalRenderers = app.getRendererRegistry().getExternalRenderers();
-		if (!externalRenderers.isEmpty()) {
-			dataList.put(Type.CUSTOM_RENDER_STYLE, new ArrayList<>(externalRenderers.values()));
-		}
-
-		File routingProfilesFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-		if (routingProfilesFolder.exists() && routingProfilesFolder.isDirectory()) {
-			File[] fl = routingProfilesFolder.listFiles();
-			if (fl != null && fl.length > 0) {
-				dataList.put(Type.CUSTOM_ROUTING, Arrays.asList(fl));
-			}
-		}
-
-		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
-		if (!impassableRoads.isEmpty()) {
-			dataList.put(Type.AVOID_ROADS, new ArrayList<>(impassableRoads.values()));
-		}
-		return dataList;
-	}
-
 	private List<SettingsItem> prepareSettingsItemsForExport() {
 		List<SettingsItem> settingsItems = new ArrayList<>();
 		settingsItems.add(new ProfileSettingsItem(app, profile));
 		if (includeAdditionalData) {
-			settingsItems.addAll(prepareAdditionalSettingsItems());
-		}
-		return settingsItems;
-	}
-
-	private List<SettingsItem> prepareAdditionalSettingsItems() {
-		List<SettingsItem> settingsItems = new ArrayList<>();
-		List<QuickAction> quickActions = new ArrayList<>();
-		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
-		List<ITileSource> tileSourceTemplates = new ArrayList<>();
-		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
-		for (Object object : adapter.getData()) {
-			if (object instanceof QuickAction) {
-				quickActions.add((QuickAction) object);
-			} else if (object instanceof PoiUIFilter) {
-				poiUIFilters.add((PoiUIFilter) object);
-			} else if (object instanceof TileSourceTemplate || object instanceof SQLiteTileSource) {
-				tileSourceTemplates.add((ITileSource) object);
-			} else if (object instanceof File) {
-				try {
-					settingsItems.add(new FileSettingsItem(app, (File) object));
-				} catch (IllegalArgumentException e) {
-					LOG.warn("Trying to export unsuported file type", e);
-				}
-			} else if (object instanceof AvoidRoadInfo) {
-				avoidRoads.add((AvoidRoadInfo) object);
-			}
-		}
-		if (!quickActions.isEmpty()) {
-			settingsItems.add(new QuickActionsSettingsItem(app, quickActions));
-		}
-		if (!poiUIFilters.isEmpty()) {
-			settingsItems.add(new PoiUiFiltersSettingsItem(app, poiUIFilters));
-		}
-		if (!tileSourceTemplates.isEmpty()) {
-			settingsItems.add(new MapSourcesSettingsItem(app, tileSourceTemplates));
-		}
-		if (!avoidRoads.isEmpty()) {
-			settingsItems.add(new AvoidRoadsSettingsItem(app, avoidRoads));
+			settingsItems.addAll(app.getSettingsHelper().prepareAdditionalSettingsItems(adapter.getData()));
 		}
 		return settingsItems;
 	}

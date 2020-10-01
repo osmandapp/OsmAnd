@@ -81,6 +81,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.SettingsHelper;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
@@ -135,6 +136,7 @@ import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_NAME;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_TURN;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DISTANCE;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_IMMINENT;
+import static net.osmand.plus.settings.backend.SettingsHelper.REPLACE_KEY;
 
 public class OsmandAidlApi {
 
@@ -205,7 +207,7 @@ public class OsmandAidlApi {
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
-	private static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[] {
+	private static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
 			ApplicationMode.CAR,
 			ApplicationMode.BICYCLE,
 			ApplicationMode.PEDESTRIAN
@@ -285,7 +287,7 @@ public class OsmandAidlApi {
 	}
 
 	private void initOsmandTelegram() {
-		String[] packages = new String[] {"net.osmand.telegram", "net.osmand.telegram.debug"};
+		String[] packages = new String[]{"net.osmand.telegram", "net.osmand.telegram.debug"};
 		Intent intent = new Intent("net.osmand.telegram.InitApp");
 		for (String pack : packages) {
 			intent.setComponent(new ComponentName(pack, "net.osmand.telegram.InitAppBroadcastReceiver"));
@@ -1016,7 +1018,7 @@ public class OsmandAidlApi {
 				}
 				if (!newName.equals(f.getName()) || !newDescription.equals(f.getDescription()) ||
 						!newCategory.equals(f.getCategory()) || !newAddress.equals(f.getAddress())) {
-					favoritesHelper.editFavouriteName(f, newName, newCategory, newDescription,newAddress);
+					favoritesHelper.editFavouriteName(f, newName, newCategory, newDescription, newAddress);
 				}
 				refreshMap();
 				return true;
@@ -2249,9 +2251,12 @@ public class OsmandAidlApi {
 
 	private Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();
 
-	public boolean importProfile(final Uri profileUri, String latestChanges, int version) {
+	public boolean importProfile(final Uri profileUri, ArrayList<String> settingsTypeKeys, boolean replace,
+	                             String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
+			bundle.putStringArrayList(SettingsHelper.SETTINGS_TYPE_LIST_KEY, settingsTypeKeys);
+			bundle.putBoolean(REPLACE_KEY, replace);
 			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
 			bundle.putInt(SettingsHelper.SETTINGS_VERSION_KEY, version);
 
@@ -2322,6 +2327,25 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_BOTTOM_MARGIN, rightMargin);
 		app.sendBroadcast(intent);
 		return true;
+	}
+
+	public boolean exportProfile(String appModeKey, List<String> settingsTypesKeys) {
+		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
+		if (app != null && appMode != null) {
+			List<ExportSettingsType> settingsTypes = new ArrayList<>();
+			for (String key : settingsTypesKeys) {
+				settingsTypes.add(ExportSettingsType.valueOf(key));
+			}
+			List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
+			settingsItems.add(new SettingsHelper.ProfileSettingsItem(app, appMode));
+			File tempDir = FileUtils.getTempDir(app);
+			String fileName = appMode.toHumanString();
+			SettingsHelper settingsHelper = app.getSettingsHelper();
+			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsHelper.getAdditionalData(), settingsTypes));
+			settingsHelper.exportSettings(tempDir, fileName, null, settingsItems, true);
+			return true;
+		}
+		return false;
 	}
 
 	private static class FileCopyInfo {

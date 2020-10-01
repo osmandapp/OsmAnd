@@ -20,6 +20,8 @@ import net.osmand.aidlapi.mapmarker.UpdateMapMarkerParams;
 
 import net.osmand.aidlapi.calculateroute.CalculateRouteParams;
 
+import net.osmand.aidlapi.profile.ExportProfileParams;
+
 import net.osmand.aidlapi.gpx.ImportGpxParams;
 import net.osmand.aidlapi.gpx.ShowGpxParams;
 import net.osmand.aidlapi.gpx.StartGpxRecordingParams;
@@ -102,6 +104,10 @@ import net.osmand.aidlapi.lock.SetLockStateParams;
 import net.osmand.aidlapi.events.AKeyEventsParams;
 
 import net.osmand.aidlapi.info.AppInfoParams;
+
+import net.osmand.aidlapi.profile.ExportProfileParams;
+import net.osmand.aidlapi.profile.ExportSettingsType;
+
 
 // NOTE: Add new methods at the end of file!!!
 
@@ -867,4 +873,6 @@ interface IOsmAndAidlInterface {
     AppInfoParams getAppInfo();
 
     boolean setMapMargins(in MapMarginsParams params);
+
+    boolean exportProfile(in ExportProfileParams params);
 }

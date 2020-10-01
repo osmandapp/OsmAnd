@@ -1299,7 +1299,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean importProfile(ProfileSettingsParams params) {
 			try {
 				OsmandAidlApi api = getApi("importProfile");
-				return api != null && api.importProfile(params.getProfileSettingsUri(), params.getLatestChanges(), params.getVersion());
+				return api != null && api.importProfile(params.getProfileSettingsUri(), params.getSettingsTypeKeys(),
+						params.isReplace(), params.getLatestChanges(), params.getVersion());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
