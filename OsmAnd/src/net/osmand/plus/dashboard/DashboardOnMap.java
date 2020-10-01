@@ -96,8 +96,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
-
 public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInformationListener {
 	private static final org.apache.commons.logging.Log LOG =
 			PlatformUtil.getLog(DashboardOnMap.class);
@@ -132,7 +130,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private ArrayAdapter<?> listAdapter;
 	private OnItemClickListener listAdapterOnClickListener;
-	private ConfigureMapMenu configureMapMenu;
 
 	private boolean visible = false;
 	private DashboardType visibleType;
@@ -659,14 +656,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				fragment.show(mapActivity.getSupportFragmentManager(), MapillaryFirstDialogFragment.TAG);
 				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
 			}
-
-			deleteTmpReferences();
 		}
 		mapActivity.updateStatusBarColor();
-	}
-
-	private void deleteTmpReferences() {
-		configureMapMenu = null;
 	}
 
 	public void updateDashboard() {
@@ -714,8 +705,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (visibleType == DashboardType.CONFIGURE_SCREEN) {
 			cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity);
 		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
-			configureMapMenu = new ConfigureMapMenu(mapActivity);
-			cm = configureMapMenu.createListAdapter();
+			cm = new ConfigureMapMenu(mapActivity).createListAdapter();
 		} else if (visibleType == DashboardType.LIST_MENU) {
 			cm = mapActivity.getMapActions().createMainOptionsMenu();
 		} else if (visibleType == DashboardType.ROUTE_PREFERENCES) {
@@ -1043,8 +1033,20 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void onMapSettingsUpdated() {
-		if (configureMapMenu != null) {
-			configureMapMenu.updateMenuItem(MAP_STYLE_ID);
+		if (DashboardType.CONFIGURE_MAP.equals(visibleType)) {
+			updateMenuItems();
+		}
+	}
+
+	public void updateMenuItems() {
+		if (listAdapter != null) {
+			for (int i = 0; i < listAdapter.getCount(); i++) {
+				Object o = listAdapter.getItem(i);
+				if (o instanceof ContextMenuItem) {
+					((ContextMenuItem) o).update();
+				}
+			}
+			listAdapter.notifyDataSetChanged();
 		}
 	}
 

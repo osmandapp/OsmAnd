@@ -111,7 +111,6 @@ public class ConfigureMapMenu {
 	private boolean transliterateNames;
 
 	private MapActivity ma;
-	private ContextMenuAdapter contextMenuAdapter;
 
 	public interface OnClickListener {
 		void onClick();
@@ -143,7 +142,6 @@ public class ConfigureMapMenu {
 		adapter.setNightMode(nightMode);
 		createLayersItems(customRules, adapter, ma, themeRes, nightMode);
 		createRenderingAttributeItems(customRules, adapter, ma, themeRes, nightMode);
-		this.contextMenuAdapter = adapter;
 		return adapter;
 	}
 
@@ -281,16 +279,16 @@ public class ConfigureMapMenu {
 		final OsmandSettings settings = app.getSettings();
 		final int selectedProfileColorRes = settings.APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode);
 		final int selectedProfileColor = ContextCompat.getColor(app, selectedProfileColorRes);
-		String renderDescr = getRenderDescr(app);
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
 				.setId(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_renderer, activity)
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(MAP_STYLE_ID)
-				.setDescription(renderDescr)
+				.setTitleId(R.string.map_widget_renderer, activity)
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
-				.setIcon(R.drawable.ic_map).setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setIcon(R.drawable.ic_map)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
@@ -300,6 +298,13 @@ public class ConfigureMapMenu {
 					}
 				})
 				.setItemDeleteAction(makeDeleteAction(settings.RENDERER))
+				.setOnUpdateCallback(new ContextMenuItem.OnUpdateCallback() {
+					@Override
+					public void onUpdateMenuItem(ContextMenuItem item) {
+						String renderDescr = getRenderDescr(app);
+						item.setDescription(renderDescr);
+					}
+				})
 				.createItem());
 
 		String description = "";
@@ -1116,18 +1121,6 @@ public class ConfigureMapMenu {
 			}
 
 			return builder.createItem();
-		}
-	}
-
-	public void updateMenuItem(String itemId) {
-		OsmandApplication app = getMyApplication();
-		if (app == null) return;
-
-		if (MAP_STYLE_ID.equals(itemId) && contextMenuAdapter != null) {
-			ContextMenuItem item = contextMenuAdapter.getItemById(MAP_STYLE_ID);
-			String renderDescr = getRenderDescr(app);
-			item.setDescription(renderDescr);
-			contextMenuAdapter.notifyDataSetChanged();
 		}
 	}
 
