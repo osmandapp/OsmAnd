@@ -30,6 +30,7 @@ import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -131,6 +132,7 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.plus.FavouritesDbHelper.FILE_TO_SAVE;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_LANES;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_NAME;
 import static net.osmand.plus.helpers.ExternalApiHelper.PARAM_NT_DIRECTION_TURN;
@@ -2360,7 +2362,7 @@ public class OsmandAidlApi {
 		}
 	}
 
-	int copyFile(String fileName, byte[] filePartData, long startTime, boolean done) {
+	int copyFileOld(String fileName, byte[] filePartData, long startTime, boolean done) {
 		if (Algorithms.isEmpty(fileName) || filePartData == null) {
 			return COPY_FILE_PARAMS_ERROR;
 		}
@@ -2372,6 +2374,31 @@ public class OsmandAidlApi {
 		} else {
 			return COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 		}
+	}
+
+	int copyFile(String destinationDir, String fileName, byte[] filePartData, long startTime, boolean done) {
+		if (Algorithms.isEmpty(fileName) || filePartData == null) {
+			return COPY_FILE_PARAMS_ERROR;
+		}
+		if (filePartData.length > COPY_FILE_PART_SIZE_LIMIT) {
+			return COPY_FILE_PART_SIZE_LIMIT_ERROR;
+		}
+		int result = copyFileImpl(fileName, filePartData, startTime, done, destinationDir);
+		if (done) {
+			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) && IndexConstants.MAPS_PATH.equals(destinationDir)) {
+				app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
+				app.getDownloadThread().updateLoadedFiles();
+			} else if (fileName.endsWith(IndexConstants.GPX_FILE_EXT)) {
+				if (destinationDir.startsWith(IndexConstants.GPX_INDEX_DIR)
+						&& !FILE_TO_SAVE.equals(fileName)) {
+					GPXUtilities.loadGPXFile(new File(destinationDir, fileName));
+				} else if (destinationDir.isEmpty() && FILE_TO_SAVE.equals(fileName)) {
+					GPXUtilities.loadGPXFile(new File(destinationDir, fileName));
+					app.getFavorites().loadFavorites();
+				}
+			}
+		}
+		return result;
 	}
 
 	private int copyFileImpl(String fileName, byte[] filePartData, long startTime, boolean done, String destinationDir) {
