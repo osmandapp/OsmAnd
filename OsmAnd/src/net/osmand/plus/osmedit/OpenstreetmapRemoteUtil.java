@@ -115,7 +115,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			}
 			else {
 				OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(ctx);
-				client.performRequestWithoutAuth(url,requestMethod,requestBody);
+				Response response = client.performRequestWithoutAuth(url,requestMethod,requestBody);
+				return response.getBody();
 			}
 		} catch (NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
