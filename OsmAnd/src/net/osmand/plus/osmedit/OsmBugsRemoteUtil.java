@@ -5,13 +5,12 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationClient;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.osmedit.OsmPoint.Action;
+import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
-
 import org.apache.commons.logging.Log;
 
 import java.io.FileNotFoundException;
@@ -110,7 +109,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation,
 									boolean anonymous) {
-		OsmOAuthAuthorizationClient client = new OsmOAuthAuthorizationClient(this.app);
+		OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(this.app);
 		OsmBugResult r = new OsmBugResult();
 		try {
 			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
@@ -121,7 +120,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 			if (!anonymous) {
 				if (client.isValidToken()){
-					connection.addRequestProperty("Authorization", "OAuth " + client.getAccessToken());
+					connection.addRequestProperty("Authorization", "OAuth " + client.getClient().getAccessToken().getToken());
 				}
 				else {
 					String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -336,6 +337,8 @@ public class DownloadIndexesThread {
 
 		@Override
 		protected DownloadResources doInBackground(Void... params) {
+			final int THREAD_ID = 10103;
+			TrafficStats.setThreadStatsTag(THREAD_ID);
 			DownloadResources result = null;
 			DownloadOsmandIndexesHelper.IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
 			if (indexFileList != null) {

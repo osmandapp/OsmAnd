@@ -17,20 +17,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.github.scribejava.core.model.OAuthAsyncRequestCallback;
 import com.github.scribejava.core.model.Response;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 
 import java.io.IOException;
 
 public class SettingsOsmEditingActivity extends SettingsBaseActivity {
-	OsmOAuthAuthorizationClient client;
+	OsmOAuthAuthorizationAdapter client;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 
-		client = new OsmOAuthAuthorizationClient(this.getMyApplication());
+		client = new OsmOAuthAuthorizationAdapter(this.getMyApplication());
 
 		getToolbar().setTitle(R.string.osm_settings);
 		@SuppressWarnings("deprecation")
