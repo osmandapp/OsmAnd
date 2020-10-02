@@ -3899,4 +3899,5 @@
     <string name="sort_last_modified">Última modificação</string>
     <string name="sort_name_descending">Nome: Z – A</string>
     <string name="sort_name_ascending">Nome: A – Z</string>
+    <string name="start_finish_icons">Ícones de início/término</string>
 </resources>
