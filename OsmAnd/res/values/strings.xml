@@ -11,6 +11,12 @@
 	Thx - Hardy
 
 -->
+    <string name="osm_edit_logout_success">Logout successful</string>
+    <string name="clear_osm_token">Clear OpenStreetMap OAuth token</string>
+    <string name="test_user_request_description">Test user request</string>
+    <string name="test_user_request">Retrieve current user info</string>
+    <string name="perform_oauth_authorization">Log in via OAuth</string>
+    <string name="perform_oauth_authorization_description">Perform an OAuth Login to use osmedit features</string>
     <string name="sort_name_ascending">Name: A – Z</string>
     <string name="sort_name_descending">Name: Z – A</string>
     <string name="sort_last_modified">Last modified</string>

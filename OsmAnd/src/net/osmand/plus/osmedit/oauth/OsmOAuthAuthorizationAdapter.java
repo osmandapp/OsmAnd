@@ -34,10 +34,18 @@ public class OsmOAuthAuthorizationAdapter {
         return client.isValidToken();
     }
 
+    public void resetToken() {
+        client.setAccessToken(null);
+    }
+
     public void restoreToken() {
         String token = application.getSettings().USER_ACCESS_TOKEN.get();
         String tokenSecret = application.getSettings().USER_ACCESS_TOKEN_SECRET.get();
-        client.setAccessToken(new OAuth1AccessToken(token, tokenSecret));
+        if (!(token.isEmpty() || tokenSecret.isEmpty())) {
+            client.setAccessToken(new OAuth1AccessToken(token, tokenSecret));
+        } else {
+            client.setAccessToken(null);
+        }
     }
 
     public void startOAuth(ViewGroup rootLayout) {

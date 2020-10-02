@@ -81,8 +81,8 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 			prefOAuth.setKey("local_openstreetmap_token");
 
 			final Preference prefTestUser = new Preference(this);
-			prefTestUser.setTitle("Test user request");
-			prefTestUser.setSummary("Test user request");
+			prefTestUser.setTitle(R.string.test_user_request);
+			prefTestUser.setSummary(R.string.test_user_request_description);
 			prefTestUser.setKey("local_openstreetmap_token");
 			prefTestUser.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 				@Override
@@ -92,8 +92,7 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 						@Override
 						public void onCompleted(Response response) {
 							try {
-								Toast.makeText(SettingsOsmEditingActivity.this,
-										"DATA RETRIEVED: " + response.getBody().toString(),Toast.LENGTH_SHORT).show();
+								Toast.makeText(SettingsOsmEditingActivity.this,response.getBody(),Toast.LENGTH_SHORT).show();
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
@@ -108,11 +107,27 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 					return true;
 				}
 			});
-			grp.addPreference(prefTestUser);
+			final Preference prefClearToken = new Preference(this);
+			prefClearToken.setTitle(R.string.shared_string_logoff);
+			prefClearToken.setSummary(R.string.clear_osm_token);
+			prefClearToken.setKey("local_openstreetmap_token");
+			prefClearToken.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+				@Override
+				public boolean onPreferenceClick(Preference preference) {
+					settings.USER_ACCESS_TOKEN.set("");
+					settings.USER_ACCESS_TOKEN_SECRET.set("");
+					client.resetToken();
+					Toast.makeText(SettingsOsmEditingActivity.this, R.string.osm_edit_logout_success, Toast.LENGTH_SHORT).show();
+					finish();
+					startActivity(getIntent());
+					return true;
+				}
+			});
+			grp.addPreference(prefClearToken);
 		}
 		else {
-			prefOAuth.setTitle(R.string.osb_author_dialog_password);
-			prefOAuth.setSummary(R.string.osb_author_dialog_password);
+			prefOAuth.setTitle(R.string.perform_oauth_authorization);
+			prefOAuth.setSummary(R.string.perform_oauth_authorization_description);
 			prefOAuth.setKey("local_openstreetmap_token");
 			prefOAuth.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 				@Override
@@ -193,6 +208,8 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 		if (uri != null && uri.toString().startsWith("osmand-oauth")) {
 			String oauthVerifier = uri.getQueryParameter("oauth_verifier");
 			client.authorize(oauthVerifier);
+			finish();
+			startActivity(getIntent());
 		}
 	}
 }

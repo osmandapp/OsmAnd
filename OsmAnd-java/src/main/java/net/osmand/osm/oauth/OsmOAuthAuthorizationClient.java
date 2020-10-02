@@ -20,7 +20,7 @@ public class OsmOAuthAuthorizationClient {
     OAuth1RequestToken requestToken;
     OAuth1AccessToken accessToken;
 
-    public OsmOAuthAuthorizationClient(String key, String secret){
+    public OsmOAuthAuthorizationClient(String key, String secret) {
         service = new ServiceBuilder(key)
                 .apiSecret(secret)
                 .callback("osmand-oauth://example.com/oauth")
@@ -53,9 +53,13 @@ public class OsmOAuthAuthorizationClient {
         return service;
     }
 
-    public void setAccessToken(OAuth1AccessToken accessToken) { this.accessToken = accessToken; }
-    
-    public OAuth1AccessToken getAccessToken() { return this.accessToken; }
+    public void setAccessToken(OAuth1AccessToken accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public OAuth1AccessToken getAccessToken() {
+        return this.accessToken;
+    }
 
     public Response performRequestWithoutAuth(String url, String requestMethod, String requestBody)
             throws InterruptedException, ExecutionException, IOException {
@@ -88,20 +92,6 @@ public class OsmOAuthAuthorizationClient {
         return service.execute(req);
     }
 
-    private Verb parseRequestMethod(String method) {
-        Verb m = Verb.GET;
-        if (method.equals("POST")) {
-            m = Verb.POST;
-        }
-        if (method.equals("PUT")) {
-            m = Verb.PUT;
-        }
-        if (method.equals("DELETE")) {
-            m = Verb.DELETE;
-        }
-        return m;
-    }
-
     public OAuth1RequestToken startOAuth() {
         try {
             requestToken = service.getRequestToken();
@@ -130,5 +120,19 @@ public class OsmOAuthAuthorizationClient {
 
     public boolean isValidToken() {
         return !(accessToken == null);
+    }
+
+    private Verb parseRequestMethod(String method) {
+        Verb m = Verb.GET;
+        if (method.equals("POST")) {
+            m = Verb.POST;
+        }
+        if (method.equals("PUT")) {
+            m = Verb.PUT;
+        }
+        if (method.equals("DELETE")) {
+            m = Verb.DELETE;
+        }
+        return m;
     }
 }
