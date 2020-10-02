@@ -1954,7 +1954,7 @@
     <string name="use_osm_live_routing">Navigazione OsmAnd Live</string>
     <string name="map_widget_battery">Livello della batteria</string>
     <string name="lang_hu_formal">Ungherese (formale)</string>
-    <string name="current_track">Tracciato attuale</string>
+    <string name="current_track">Traccia attuale</string>
     <string name="change_markers_position">Cambia posizione del marcatore</string>
     <string name="lang_es_us">Spagnolo americano</string>
     <string name="lang_ast">Asturiano</string>
@@ -3620,7 +3620,7 @@
     <string name="index_item_world_basemap_detailed">Mappa mondiale generale (dettagliata)</string>
     <string name="extra_maps_menu_group">Mappe extra</string>
     <string name="download_unsupported_action">Azione non supportata %1$s</string>
-    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="tracker_item">Tracker OsmAnd</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Azione veloce</string>
     <string name="radius_ruler_item">Righello radiale</string>
@@ -3900,7 +3900,7 @@
 \n
 \n</string>
     <string name="simplified_track">Traccia semplificata</string>
-    <string name="sort_last_modified">Ultimo modificato</string>
+    <string name="sort_last_modified">Cronologico</string>
     <string name="sort_name_descending">Nome: Z – A</string>
     <string name="sort_name_ascending">Nome: A – Z</string>
 </resources>

@@ -1190,7 +1190,7 @@ POIの更新は利用できません</string>
     <string name="gpx_info_start_time">"出発時刻: %1$tF, %1$tT "</string>
     <string name="gpx_info_end_time">"到着時刻: %1$tF, %1$tT "</string>
     <string name="gpx_info_average_speed">"平均速度: %1$s "</string>
-    <string name="gpx_info_maximum_speed">"最高速度: %1$s "</string>
+    <string name="gpx_info_maximum_speed">最高速度: %1$s</string>
     <string name="gpx_info_avg_altitude">平均標高: %1$s</string>
     <string name="gpx_info_diff_altitude">標高差: %1$s</string>
     <string name="gpx_info_asc_altitude">上り/下り: %1$s</string>
@@ -1350,7 +1350,7 @@ POIの更新は利用できません</string>
     <string name="wake_on_voice">画面の電源オン設定</string>
     <string name="wake_on_voice_descr">方向転換地点に近づいたらデバイスの画面を(オフの場合指定時間)オンにします</string>
     <string name="shared_string_never">しない</string>
-    <string name="impassable_road">除外する道の指定…</string>
+    <string name="impassable_road">避ける道の指定…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">電車でのルート</string>
     <string name="rendering_attr_tramRoutes_name">路面電車でのルート</string>
     <string name="rendering_attr_shareTaxiRoutes_name">タクシーのルート共有</string>
@@ -1816,7 +1816,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_move_up">上に移動</string>
     <string name="shared_string_move_down">下に移動</string>
     <string name="finish_navigation">ナビゲーションの終了</string>
-    <string name="avoid_road">使用しない道路として指定</string>
+    <string name="avoid_road">避ける道を指定</string>
     <string name="storage_directory_readonly_desc">選択したデータ保存フォルダーが書き込み保護されているため、内部メモリに切り替えました。書き込み可能な保存用ディレクトリを選択してください。</string>
     <string name="storage_directory_shared">共有記憶域</string>
     <string name="full_report">より詳細なレポートは以下サイトにて</string>
@@ -3010,9 +3010,9 @@ POIの更新は利用できません</string>
     <string name="select_icon_profile_dialog_title">アイコン選択</string>
     <string name="profile_type_base_string">基本プロファイル</string>
     <string name="shared_string_icon">アイコン</string>
-    <string name="shared_string_min_speed">最低速度</string>
-    <string name="shared_string_max_speed">最高速度</string>
-    <string name="default_speed_setting_title">標準移動速度</string>
+    <string name="shared_string_min_speed">予想最低速度</string>
+    <string name="shared_string_max_speed">予想最高速度</string>
+    <string name="default_speed_setting_title">予想標準速度</string>
     <string name="default_speed_dialog_msg">すべての道路の移動速度を制限し、種別や制限速度が不明な道路が多い場合の到着時間予測に役立ちます(ルート計算に影響します)</string>
     <string name="app_mode_offroad">オフロード</string>
     <string name="edit_profile_setup_title">プロファイルの個別設定</string>
@@ -3590,7 +3590,7 @@ POIの更新は利用できません</string>
     <string name="create_edit_poi">POIの作成/編集</string>
     <string name="parking_positions">駐車位置</string>
     <string name="add_edit_favorite">お気に入りの追加/編集</string>
-    <string name="reset_deafult_order">アイテム順序をデフォルトに戻す</string>
+    <string name="reset_deafult_order">アイテム順序を初期状態に戻します</string>
     <string name="back_to_editing">編集に戻る</string>
     <string name="quick_action_switch_profile_descr">選択したプロファイルを切り替えるボタンです。</string>
     <string name="shared_string_add_profile">プロファイルの追加</string>
@@ -3667,12 +3667,12 @@ POIの更新は利用できません</string>
     <string name="context_menu_actions">コンテキストメニュー</string>
     <string name="reorder_or_hide_from">項目の並べ替えや非表示するものを指定できます。</string>
     <string name="shared_string_divider">分割</string>
-    <string name="divider_descr">分割線で区切られた部分より下にある項目が適用されます。</string>
+    <string name="divider_descr">ここで指定された項目は、区切り線より下に配置されます。</string>
     <string name="shared_string_hidden">非表示</string>
     <string name="hidden_items_descr">これらの項目はメニューに表示されなくなりますが、オプションやプラグインはそのまま機能します。</string>
     <string name="shared_string_items">項目</string>
     <string name="reset_items_descr">設定を非表示にすると、元の状態にリセットされます。</string>
-    <string name="main_actions_descr">ボタンは4つしかありません。</string>
+    <string name="main_actions_descr">ボタンの数は4つ固定で変更できません。</string>
     <string name="main_actions">主要機能</string>
     <string name="additional_actions_descr">“%1$s”ボタンをタップすると、これらの機能にアクセスできます。</string>
     <string name="move_inside_category">アイテムはこのカテゴリ内でのみ移動できます。</string>
@@ -3794,7 +3794,7 @@ POIの更新は利用できません</string>
 \n
 \n国の法律に基づいて、使用を望むかどうかを決定する必要があります。
 \n
-\n%1$sを選択すると、スピードカメラに関するアラートと警告が表示されます。
+\n%1$sを選択すると、スピードカメラに関するアラートと警告機能を使用できます。
 \n
 \n%2$sを選択すると、スピードカメラに関するすべてのデータ(警告、通知、POI)が、OsmAndの再インストールを行うまで削除されます。</string>
     <string name="keep_active">機能を維持</string>
