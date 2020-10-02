@@ -3586,7 +3586,7 @@
     <string name="slope_read_more">Подробнее об уклонах можно прочитать в %1$s.</string>
     <string name="shared_string_hillshade">Затенение рельефа</string>
     <string name="hillshade_description">Для отображения склонов, вершин и низменностей используются тёмные тени.</string>
-    <string name="slope_download_description">Для отображения склонов требуются дополнительные карты.</string>
+    <string name="slope_download_description">Для отображения уклонов требуются дополнительные карты.</string>
     <string name="download_slope_maps">Уклоны</string>
     <string name="replace_point_descr">Заменить этой точкой другую.</string>
     <string name="changes_applied_to_profile">Изменения применены к профилю «%1$s».</string>
