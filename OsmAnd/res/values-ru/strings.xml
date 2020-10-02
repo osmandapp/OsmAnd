@@ -115,7 +115,7 @@
     <string name="routing_attr_driving_style_balance_name">Сбалансированный</string>
     <string name="routing_attr_driving_style_safety_name">Предпочитать переулки</string>
     <string name="relief_smoothness_factor_descr">Выберите предпочтительный рельеф.</string>
-    <string name="shared_string_slope">Склон</string>
+    <string name="shared_string_slope">Карта уклонов</string>
     <string name="add_new_folder">Добавить новую папку</string>
     <string name="points_delete_multiple_succesful">Точки удалены.</string>
     <string name="points_delete_multiple">Вы уверены, что хотите удалить %1$d точки\?</string>
@@ -368,9 +368,9 @@
     <string name="map_online_data_descr">Использовать онлайн-карты (загрузка и кеширование на SD-карте).</string>
     <string name="shared_string_online_maps">Онлайн-карты</string>
     <string name="online_map_settings_descr">Выберите источник онлайн или кешированных растровых карт.</string>
-    <string name="osmand_rastermaps_plugin_description">Доступ ко множеству онлайн-карт (т. н. тайловых или растровых): от встроенных OSM (как Mapnik), до спутниковых снимков и слоёв специального назначения, таких как карты погоды, климатические, геологические карты, затенения рельефа и др.
+    <string name="osmand_rastermaps_plugin_description">Доступ ко множеству онлайн-карт (т. н. тайловых или растровых): от встроенных OSM (как Mapnik) до спутниковых снимков и слоёв специального назначения, таких как карты погоды, климатические, геологические карты, затенения рельефа и др.
 \n
-\n Любая из этих карт может быть использована в качестве базовой либо как наложение или подложка к другой базовой карте (например стандартной локальной карте OsmAnd). Некоторые элементы векторной карты OsmAnd можно скрыть в меню «Настройки карты».
+\n Любая из этих карт может быть использована как основная или в качестве подложки к другой карте (например стандартной локальной карте OsmAnd). Некоторые элементы векторной карты OsmAnd можно скрыть в меню «Настройки карты».
 \n
 \n Карты можно загрузить непосредственно из интернета или подготовить для использования в автономном режиме (и вручную скопировать в папку данных OsmAnd) в виде базы данных sqlite, которая может быть создана с помощью различных инструментов подготовки карт сторонних производителей.</string>
     <string name="osmand_background_plugin_description">Показывает настройки для включения фонового отслеживания и навигации путём периодического пробуждения устройства GPS (с выключенным экраном).</string>
@@ -518,9 +518,9 @@
     <string name="gpx_option_reverse_route">Обратное направление трека</string>
     <string name="gpx_option_destination_point">Использовать текущий пункт назначения</string>
     <string name="gpx_option_from_start_point">Пройти весь путь</string>
-    <string name="switch_to_vector_map_to_see">Для этого региона доступны локальные векторные карты. 
-\n\t 
-\n\tДля их использования выберите в \"Меню\" → \"Настройка карты\" → \"Источник карты…\" → \"Векторные карты\".</string>
+    <string name="switch_to_vector_map_to_see">Для этого региона есть локальные векторные карты.
+\n\t
+\n\tДля использования выберите их в качестве источника (Меню → Настройка карты → Источник карты → Локальные векторные карты).</string>
     <string name="choose_audio_stream">Голосовые инструкции</string>
     <string name="choose_audio_stream_descr">Выберите канал вывода голосовых подсказок.</string>
     <string name="voice_stream_voice_call">Канал голосовых звонков (прерывает автомобильную Bluetooth стереосистему)</string>
@@ -1205,8 +1205,8 @@
     <string name="recording_context_menu_precord">Сделать фото</string>
     <string name="dropbox_plugin_description">Синхронизация треков и медиазаметок с вашим аккаунтом Dropbox.</string>
     <string name="dropbox_plugin_name">Плагин Dropbox</string>
-    <string name="osmand_srtm_long_description_1000_chars">Плагин обеспечивает наложение контурных линии и (рельефа) затемняющего слоя, которые будут отображаться поверх стандартных карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.
-\n 
+    <string name="osmand_srtm_long_description_1000_chars">Плагин обеспечивает наложение контурных линии и затемняющего слоя (рельефа), которые будут отображаться поверх стандартных карт OsmAnd. Эту функцию оценят спортсмены, туристы, путешественники и все, для кого рельеф местности имеет значение.
+\n
 \nГлобальные данные (между 70° на севере и 70° на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems).</string>
     <string name="recording_photo_description">Фото %1$s %2$s</string>
     <string name="local_indexes_cat_av">Медиаданные</string>
@@ -1227,7 +1227,7 @@
     <string name="access_arrival_time">Время прибытия</string>
     <string name="map_widget_gps_info">Информация GPS</string>
     <string name="max_speed_none">нет</string>
-    <string name="layer_hillshade">Слой рельефа местности</string>
+    <string name="layer_hillshade">Слой затенения рельефа</string>
     <string name="street_name">Название улицы</string>
     <string name="hno">Номер дома</string>
     <string name="download_using_mobile_internet">Нет соединения по Wi-Fi. Использовать текущее интернет-соединение для загрузки\?</string>
@@ -1780,7 +1780,7 @@
 \n
 \nВ случае активации этого вида, стиль карты меняется на «Зимний/лыжный», показывая все детали пейзажа так, как они выглядят зимой. Такой (зимний) вид может быть отменён либо путём деактивации здесь, либо если вы поменяете «Стиль карты» в меню «Настройки карты» на желаемый вид.</string>
     <string name="current_route">Текущий маршрут</string>
-    <string name="welmode_download_maps">Скачать карты</string>
+    <string name="welmode_download_maps">Загрузка карт</string>
     <string name="welcome_select_region">Для правильного отображения дорожных знаков и правил выберите свой регион вождения:</string>
     <string name="welcome_header">Добро пожаловать</string>
     <string name="mark_to_delete">Отметить для удаления</string>
@@ -1905,8 +1905,8 @@
     <string name="shared_string_skip">Пропустить</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="plugin_settings">Плагины</string>
-    <string name="offline_maps_and_navigation">Локальные карты 
-\nи Навигация</string>
+    <string name="offline_maps_and_navigation">Офлайн-карты
+\nи навигация</string>
     <string name="building_number">Номер дома</string>
     <string name="rendering_attr_pisteGrooming_name">Тип лыжной трассы</string>
     <string name="download_live_updates">Автообновления</string>
@@ -2764,7 +2764,7 @@
     <string name="start_editing">Начать редактирование</string>
     <string name="get_unlimited_access">Получить неограниченный доступ</string>
     <string name="welcome_to_open_beta">Добро пожаловать на открытое бета-тестирование</string>
-    <string name="contour_lines_hillshade_maps">Карты горизонталей и карты с отмывкой рельефа</string>
+    <string name="contour_lines_hillshade_maps">Карты горизонталей и затенение рельефа</string>
     <string name="download_wikipedia_description">Скачать статьи Википедии для %1$s, чтобы читать их в автономном режиме.</string>
     <string name="download_wikipedia_label">Загрузка данных Википедии</string>
     <string name="open_in_browser_wiki">Открыть статью в интернете</string>
@@ -3366,7 +3366,7 @@
     <string name="routing_attr_allow_skating_only_description">Маршруты, подготовленные для фристайла или катания только на коньках без классических треков.</string>
     <string name="routing_attr_allow_classic_only_name">Разрешить только классические маршруты</string>
     <string name="routing_attr_allow_classic_only_description">Маршруты, подготовленные только для классического стиля без конькобежных трасс. Сюда входят маршруты, подготовленные небольшим снегоходом с более свободной лыжнёй и трассами, подготовленные вручную лыжниками.</string>
-    <string name="routing_attr_difficulty_preference_description">Предпочитать маршруты заданной сложности, хотя прокладка маршрута по более сложным или лёгким трассам всё же возможна, если они короче.</string>
+    <string name="routing_attr_difficulty_preference_description">Предпочтительный уровень сложности маршрутов. Возможно использование более сложных или лёгких путей, если они короче.</string>
     <string name="turn_screen_on_router">Включать на повороте</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Класс 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Класс 2</string>
@@ -3553,7 +3553,7 @@
     <string name="select_distance_route_will_recalc">Отклонение, при котором маршрут будет пересчитан.</string>
     <string name="shared_string_legend">Легенда</string>
     <string name="search_offline_geo_error">Невозможно разобрать геоссылку «%s».</string>
-    <string name="hillshade_download_description">Для отображения затенения рельефа на карте необходимы дополнительные карты.</string>
+    <string name="hillshade_download_description">Для отображения затенения рельефа требуются дополнительные карты.</string>
     <string name="shared_string_min">Мин.</string>
     <string name="terrain_empty_state_text">Отображение затенения рельефа или карты уклонов. Подробнее об этих типах карт вы можете прочитать на нашем сайте.</string>
     <string name="shared_string_transparency">Прозрачность</string>
@@ -3582,11 +3582,11 @@
     <string name="live_monitoring_adress_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_min_accuracy_descr">В этом случае будут записываться только точки, измеренные с минимальной точностью (в метрах/футах согласно настройкам устройства). Точность — это близость измерений к истинному местоположению и не имеет прямого отношения к точности, подразумевающейся под разбросом повторных замеров.</string>
     <string name="monitoring_min_speed_descr_recommendation">Рекомендация: попробуйте сначала воспользоваться детектором движения через фильтр минимального смещения (B), что может дать лучшие результаты и вы потеряете меньше данных. Если треки остаются шумными на низких скоростях, попробуйте использовать ненулевые значения. Обратите внимание, что некоторые измерения могут вообще не указывать значения скорости (некоторые сетевые методы), и в этом случае ничего не будет записываться.</string>
-    <string name="slope_description">Уклон использует цвета для визуализации крутизны рельефа.</string>
+    <string name="slope_description">Для визуализации крутизны рельефа используются цвета.</string>
     <string name="slope_read_more">Подробнее об уклонах можно прочитать в %1$s.</string>
     <string name="shared_string_hillshade">Затенение рельефа</string>
-    <string name="hillshade_description">Затенение рельефа использует тёмные оттенки для отображения склонов, вершин и низменностей.</string>
-    <string name="slope_download_description">Для отображения склонов на карте необходимы дополнительные карты.</string>
+    <string name="hillshade_description">Для отображения склонов, вершин и низменностей используются тёмные тени.</string>
+    <string name="slope_download_description">Для отображения склонов требуются дополнительные карты.</string>
     <string name="download_slope_maps">Уклоны</string>
     <string name="replace_point_descr">Заменить этой точкой другую.</string>
     <string name="changes_applied_to_profile">Изменения применены к профилю «%1$s».</string>
@@ -3883,17 +3883,17 @@
     <string name="shared_string_is_saved">сохранен</string>
     <string name="one_point_error">Добавьте хотя бы две точки.</string>
     <string name="shared_string_redo">ПОВТОРИТЬ</string>
-    <string name="release_3_8">• Обновлённый режим планирования маршрута позволяет использовать разные типы навигации для каждого сегмента и прикрепляет любой трек к дорогам
+    <string name="release_3_8">• Обновлённая функция планирования маршрута позволяет применять к сегментам разные режимы навигации и настраивать привязку к дорогам
 \n
-\n • Новые параметры внешнего вида для треков: можно выбрать цвет, толщину, включите стрелки направления и отметки начала/окончания
+\n • Новые настройки вида треков: выбор цвета и толщины линии, стрелки направления, метки начала и конца маршрута
 \n
-\n • Улучшена видимость велосипедных узлов
+\n • Повышенная видимость велосипедных узлов
 \n
-\n • Контекстное меню для треков с основной информацией
+\n • Контекстное меню с основной информацией для треков
 \n
 \n • Улучшенные алгоритмы поиска
 \n
-\n • Улучшены параметры следования по треку в навигации
+\n • Улучшенные настройки следования по треку в Навигации
 \n
 \n • Исправлены проблемы с импортом/экспортом настроек профиля
 \n
