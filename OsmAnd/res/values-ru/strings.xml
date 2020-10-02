@@ -171,7 +171,7 @@
     <string name="quick_action_map_source_action">Добавить источник карты</string>
     <string name="quick_action_map_source_switch">Источник карты изменён на «%s».</string>
     <string name="quick_action_btn_tutorial_descr">Удерживайте кнопку для перемещения её по экрану.</string>
-    <string name="rendering_attr_depthContours_description">Показывать контуры и точки глубины.</string>
+    <string name="rendering_attr_depthContours_description">Показывать контуры и точки глубин.</string>
     <string name="rendering_attr_depthContours_name">Контуры морских глубин</string>
     <string name="rendering_attr_contourDensity_description">Частота горизонталей</string>
     <string name="rendering_attr_contourDensity_name">Частота горизонталей</string>
@@ -1739,7 +1739,7 @@
     <string name="shared_string_deselect_all">Отменить выбор всех</string>
     <string name="shared_string_share">Поделиться</string>
     <string name="shared_string_my_places">Мои места</string>
-    <string name="shared_string_my_favorites">Точки</string>
+    <string name="shared_string_my_favorites">Избранные</string>
     <string name="shared_string_tracks">Треки</string>
     <string name="shared_string_currently_recording_track">Текущий трек</string>
     <string name="share_note">Поделиться заметкой</string>
