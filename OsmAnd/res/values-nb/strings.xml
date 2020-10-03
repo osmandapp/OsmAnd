@@ -751,7 +751,7 @@
     <string name="safe_mode">Sikker modus</string>
     <string name="native_library_not_running">Programmet kjører i sikker modus (skru det av i \'Innstillinger\').</string>
     <string name="interrupt_music_descr">Talemeldinger stopper midlertidig musikkavspilling.</string>
-    <string name="interrupt_music">Avbryt musikk</string>
+    <string name="interrupt_music">Sett musikk på pause</string>
     <string name="gpxup_public">Offentlig</string>
     <string name="rendering_attr_appMode_description">Optimaliser kart for</string>
     <string name="rendering_attr_contourLines_description">Vis fra zoom-nivå (krever kotedata):</string>
@@ -3627,7 +3627,7 @@
 \nSkru av ubrukte programtillegg for å skjule alle deres styringskontroller. %1$s.</string>
     <string name="hidden_items_descr">Disse elementene er skjult fra menyen, men de representerte valgene eller programtilleggene vil fortsette å virke.</string>
     <string name="select_wikipedia_article_langs">Velg språkene Wikipedia-artikler skal vises på i kartet. Du kan bytte mellom alle tilgjengelige språk mens du leser artikkelen.</string>
-    <string name="legend_item_description">Veiledning til kartets merking.</string>
+    <string name="legend_item_description">Veiledning til kartets symbolbruk.</string>
     <string name="shared_string_routing">Ruteplanlegging</string>
     <string name="route_recalculation_dist_title">Minsteavstand for å beregne rute på nytt</string>
     <string name="import_duplicates_description">OsmAnd har allerede elementer med samme navn som de i importen.
