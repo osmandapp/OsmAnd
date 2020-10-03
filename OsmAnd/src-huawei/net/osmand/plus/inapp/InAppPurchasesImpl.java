@@ -5,6 +5,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.huawei.hms.iap.entity.ProductInfo;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
@@ -26,8 +28,18 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		fullVersion = FULL_VERSION;
 		depthContours = DEPTH_CONTOURS_FREE;
 		contourLines = CONTOUR_LINES_FREE;
-		liveUpdates = new LiveUpdatesInAppPurchasesFree();
 		inAppPurchases = new InAppPurchase[] { fullVersion, depthContours, contourLines };
+
+		liveUpdates = new LiveUpdatesInAppPurchasesFree();
+		for (InAppSubscription s : liveUpdates.getAllSubscriptions()) {
+			if (s instanceof InAppPurchaseLiveUpdatesMonthly) {
+				if (s.isDiscounted()) {
+					discountedMonthlyLiveUpdates = s;
+				} else {
+					monthlyLiveUpdates = s;
+				}
+			}
+		}
 	}
 
 	@Override
@@ -57,7 +69,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 	private static class InAppPurchaseFullVersion extends InAppPurchase {
 
-		private static final String SKU_FULL_VERSION_PRICE = "osmand_full_version_price";
+		private static final String SKU_FULL_VERSION_PRICE = "net.osmand.huawei.full";
 
 		InAppPurchaseFullVersion() {
 			super(SKU_FULL_VERSION_PRICE);
@@ -71,7 +83,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 	private static class InAppPurchaseDepthContoursFree extends InAppPurchaseDepthContours {
 
-		private static final String SKU_DEPTH_CONTOURS_FREE = "net.osmand.seadepth";
+		private static final String SKU_DEPTH_CONTOURS_FREE = "net.osmand.huawei.seadepth";
 
 		InAppPurchaseDepthContoursFree() {
 			super(SKU_DEPTH_CONTOURS_FREE);
@@ -80,7 +92,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 	private static class InAppPurchaseContourLinesFree extends InAppPurchaseContourLines {
 
-		private static final String SKU_CONTOUR_LINES_FREE = "net.osmand.contourlines";
+		private static final String SKU_CONTOUR_LINES_FREE = "net.osmand.huawei.contourlines";
 
 		InAppPurchaseContourLinesFree() {
 			super(SKU_CONTOUR_LINES_FREE);
@@ -89,7 +101,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 	private static class InAppPurchaseLiveUpdatesMonthlyFree extends InAppPurchaseLiveUpdatesMonthly {
 
-		private static final String SKU_LIVE_UPDATES_MONTHLY_HW_FREE = "net.osmand.test.monthly";
+		private static final String SKU_LIVE_UPDATES_MONTHLY_HW_FREE = "net.osmand.huawei.monthly";
 
 		InAppPurchaseLiveUpdatesMonthlyFree() {
 			super(SKU_LIVE_UPDATES_MONTHLY_HW_FREE, 1);
@@ -108,7 +120,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 	private static class InAppPurchaseLiveUpdates3MonthsFree extends InAppPurchaseLiveUpdates3Months {
 
-		private static final String SKU_LIVE_UPDATES_3_MONTHS_HW_FREE = "net.osmand.test.3months";
+		private static final String SKU_LIVE_UPDATES_3_MONTHS_HW_FREE = "net.osmand.huawei.3months";
 
 		InAppPurchaseLiveUpdates3MonthsFree() {
 			super(SKU_LIVE_UPDATES_3_MONTHS_HW_FREE, 1);
@@ -127,7 +139,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 	private static class InAppPurchaseLiveUpdatesAnnualFree extends InAppPurchaseLiveUpdatesAnnual {
 
-		private static final String SKU_LIVE_UPDATES_ANNUAL_HW_FREE = "net.osmand.test.annual";
+		private static final String SKU_LIVE_UPDATES_ANNUAL_HW_FREE = "net.osmand.huawei.annual";
 
 		InAppPurchaseLiveUpdatesAnnualFree() {
 			super(SKU_LIVE_UPDATES_ANNUAL_HW_FREE, 1);

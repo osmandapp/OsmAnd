@@ -8,6 +8,9 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.huawei.hmf.tasks.OnFailureListener;
+import com.huawei.hmf.tasks.OnSuccessListener;
+import com.huawei.hmf.tasks.Task;
 import com.huawei.hms.iap.Iap;
 import com.huawei.hms.iap.IapClient;
 import com.huawei.hms.iap.entity.InAppPurchaseData;
@@ -18,12 +21,15 @@ import com.huawei.hms.iap.entity.ProductInfo;
 import com.huawei.hms.iap.entity.ProductInfoResult;
 import com.huawei.hms.iap.entity.PurchaseIntentResult;
 import com.huawei.hms.iap.entity.PurchaseResultInfo;
+import com.huawei.hms.iap.entity.StartIapActivityReq;
+import com.huawei.hms.iap.entity.StartIapActivityResult;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
+import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.OsmandSettings.OsmandPreference;
 import net.osmand.util.Algorithms;
@@ -109,33 +115,37 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			public void run(InAppPurchaseHelper helper) {
 				try {
 					ProductInfo productInfo = getProductInfo(productId);
-					IapRequestHelper.createPurchaseIntent(getIapClient(), productInfo.getProductId(),
-							IapClient.PriceType.IN_APP_NONCONSUMABLE, new IapApiCallback<PurchaseIntentResult>() {
-								@Override
-								public void onSuccess(PurchaseIntentResult result) {
-									if (result == null) {
-										logError("result is null");
-									} else {
-										// you should pull up the page to complete the payment process
-										IapRequestHelper.startResolutionForResult(activity, result.getStatus(), Constants.REQ_CODE_BUY_INAPP);
-									}
-									commandDone();
-								}
-
-								@Override
-								public void onFail(Exception e) {
-									int errorCode = ExceptionHandle.handle(activity, e);
-									if (errorCode != ExceptionHandle.SOLVED) {
-										logDebug("createPurchaseIntent, returnCode: " + errorCode);
-										if (OrderStatusCode.ORDER_PRODUCT_OWNED == errorCode) {
-											logError("already own this product");
+					if (productInfo != null) {
+						IapRequestHelper.createPurchaseIntent(getIapClient(), productInfo.getProductId(),
+								IapClient.PriceType.IN_APP_NONCONSUMABLE, new IapApiCallback<PurchaseIntentResult>() {
+									@Override
+									public void onSuccess(PurchaseIntentResult result) {
+										if (result == null) {
+											logError("result is null");
 										} else {
-											logError("unknown error");
+											// you should pull up the page to complete the payment process
+											IapRequestHelper.startResolutionForResult(activity, result.getStatus(), Constants.REQ_CODE_BUY_INAPP);
 										}
+										commandDone();
 									}
-									commandDone();
-								}
-							});
+
+									@Override
+									public void onFail(Exception e) {
+										int errorCode = ExceptionHandle.handle(activity, e);
+										if (errorCode != ExceptionHandle.SOLVED) {
+											logDebug("createPurchaseIntent, returnCode: " + errorCode);
+											if (OrderStatusCode.ORDER_PRODUCT_OWNED == errorCode) {
+												logError("already own this product");
+											} else {
+												logError("unknown error");
+											}
+										}
+										commandDone();
+									}
+								});
+					} else {
+						commandDone();
+					}
 				} catch (Exception e) {
 					complain("Cannot launch full version purchase!");
 					logError("purchaseFullVersion Error", e);
@@ -148,13 +158,42 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	@Override
 	public void purchaseFullVersion(@NonNull final Activity activity) throws UnsupportedOperationException {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
-		exec(InAppPurchaseTaskType.PURCHASE_FULL_VERSION, getPurchaseInAppCommand(activity, ""));
+		exec(InAppPurchaseTaskType.PURCHASE_FULL_VERSION, getPurchaseInAppCommand(activity, purchases.getFullVersion().getSku()));
 	}
 
 	@Override
 	public void purchaseDepthContours(@NonNull final Activity activity) throws UnsupportedOperationException {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS);
-		exec(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS, getPurchaseInAppCommand(activity, ""));
+		exec(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS, getPurchaseInAppCommand(activity, purchases.getDepthContours().getSku()));
+	}
+
+	@Override
+	public void manageSubscription(@NonNull Context ctx, @Nullable String sku) {
+		if (uiActivity != null) {
+			StartIapActivityReq req = new StartIapActivityReq();
+			if (!Algorithms.isEmpty(sku)) {
+				req.setSubscribeProductId(sku);
+				req.setType(StartIapActivityReq.TYPE_SUBSCRIBE_EDIT_ACTIVITY);
+			} else {
+				req.setType(StartIapActivityReq.TYPE_SUBSCRIBE_MANAGER_ACTIVITY);
+			}
+			Task<StartIapActivityResult> task = getIapClient().startIapActivity(req);
+			task.addOnSuccessListener(new OnSuccessListener<StartIapActivityResult>() {
+				@Override
+				public void onSuccess(StartIapActivityResult result) {
+					logDebug("startIapActivity: onSuccess");
+					Activity activity = (Activity) uiActivity;
+					if (result != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+						result.startActivity(activity);
+					}
+				}
+			}).addOnFailureListener(new OnFailureListener() {
+				@Override
+				public void onFailure(Exception e) {
+					logDebug("startIapActivity: onFailure");
+				}
+			});
+		}
 	}
 
 	@Nullable
@@ -286,15 +325,17 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		return new InAppCommand() {
 
 			@Override
+			protected void commandDone() {
+				super.commandDone();
+				inventoryRequested = false;
+			}
+
+			@Override
 			public void run(InAppPurchaseHelper helper) {
 				logDebug("Setup successful. Querying inventory.");
 				try {
 					productInfos = new ArrayList<>();
-					if (uiActivity != null) {
-						obtainOwnedSubscriptions();
-					} else {
-						commandDone();
-					}
+					obtainOwnedSubscriptions();
 				} catch (Exception e) {
 					logError("queryInventoryAsync Error", e);
 					notifyDismissProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
@@ -326,92 +367,95 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			}
 
 			private void obtainOwnedInApps(final String continuationToken) {
-				// Query users' purchased non-consumable products.
-				IapRequestHelper.obtainOwnedPurchases(getIapClient(), IapClient.PriceType.IN_APP_NONCONSUMABLE,
-						continuationToken, new IapApiCallback<OwnedPurchasesResult>() {
-							@Override
-							public void onSuccess(OwnedPurchasesResult result) {
-								ownedInApps.add(result);
-								if (result != null && !TextUtils.isEmpty(result.getContinuationToken())) {
-									obtainOwnedInApps(result.getContinuationToken());
-								} else {
-									obtainSubscriptionsInfo();
+				if (uiActivity != null) {
+					// Query users' purchased non-consumable products.
+					IapRequestHelper.obtainOwnedPurchases(getIapClient(), IapClient.PriceType.IN_APP_NONCONSUMABLE,
+							continuationToken, new IapApiCallback<OwnedPurchasesResult>() {
+								@Override
+								public void onSuccess(OwnedPurchasesResult result) {
+									ownedInApps.add(result);
+									if (result != null && !TextUtils.isEmpty(result.getContinuationToken())) {
+										obtainOwnedInApps(result.getContinuationToken());
+									} else {
+										obtainSubscriptionsInfo();
+									}
 								}
-							}
 
-							@Override
-							public void onFail(Exception e) {
-								logError("obtainOwnedInApps exception", e);
-								ExceptionHandle.handle((Activity) uiActivity, e);
-								commandDone();
-							}
-						});
-
+								@Override
+								public void onFail(Exception e) {
+									logError("obtainOwnedInApps exception", e);
+									ExceptionHandle.handle((Activity) uiActivity, e);
+									commandDone();
+								}
+							});
+				} else {
+					commandDone();
+				}
 			}
 
 			private void obtainSubscriptionsInfo() {
-				Set<String> productIds = new HashSet<>();
-				List<InAppSubscription> subscriptions = purchases.getLiveUpdates().getAllSubscriptions();
-				for (InAppSubscription s : subscriptions) {
-					productIds.add(s.getSku());
-				}
-				productIds.addAll(ownedSubscriptions.getItemList());
-				IapRequestHelper.obtainProductInfo(getIapClient(), new ArrayList<>(productIds),
-						IapClient.PriceType.IN_APP_SUBSCRIPTION, new IapApiCallback<ProductInfoResult>() {
-							@Override
-							public void onSuccess(final ProductInfoResult result) {
-								if (result == null) {
-									logError("obtainSubscriptionsInfo: ProductInfoResult is null");
-									commandDone();
-									return;
+				if (uiActivity != null) {
+					Set<String> productIds = new HashSet<>();
+					List<InAppSubscription> subscriptions = purchases.getLiveUpdates().getAllSubscriptions();
+					for (InAppSubscription s : subscriptions) {
+						productIds.add(s.getSku());
+					}
+					productIds.addAll(ownedSubscriptions.getItemList());
+					IapRequestHelper.obtainProductInfo(getIapClient(), new ArrayList<>(productIds),
+							IapClient.PriceType.IN_APP_SUBSCRIPTION, new IapApiCallback<ProductInfoResult>() {
+								@Override
+								public void onSuccess(final ProductInfoResult result) {
+									if (result != null && result.getProductInfoList() != null) {
+										productInfos.addAll(result.getProductInfoList());
+									}
+									obtainInAppsInfo();
 								}
-								productInfos.addAll(result.getProductInfoList());
-								obtainInAppsInfo();
-							}
 
-							@Override
-							public void onFail(Exception e) {
-								int errorCode = ExceptionHandle.handle((Activity) uiActivity, e);
-								if (ExceptionHandle.SOLVED != errorCode) {
-									LOG.error("Unknown error");
+								@Override
+								public void onFail(Exception e) {
+									int errorCode = ExceptionHandle.handle((Activity) uiActivity, e);
+									if (ExceptionHandle.SOLVED != errorCode) {
+										LOG.error("Unknown error");
+									}
+									commandDone();
 								}
-								commandDone();
-							}
-						});
+							});
+				} else {
+					commandDone();
+				}
 			}
 
 			private void obtainInAppsInfo() {
-				Set<String> productIds = new HashSet<>();
-				for (InAppPurchase purchase : getInAppPurchases().getAllInAppPurchases(false)) {
-					productIds.add(purchase.getSku());
-				}
-				for (OwnedPurchasesResult result : ownedInApps) {
-					productIds.addAll(result.getItemList());
-				}
-				IapRequestHelper.obtainProductInfo(getIapClient(), new ArrayList<>(productIds),
-						IapClient.PriceType.IN_APP_NONCONSUMABLE, new IapApiCallback<ProductInfoResult>() {
-							@Override
-							public void onSuccess(ProductInfoResult result) {
-								if (result == null || result.getProductInfoList() == null) {
-									logError("obtainInAppsInfo: ProductInfoResult is null");
+				if (uiActivity != null) {
+					Set<String> productIds = new HashSet<>();
+					for (InAppPurchase purchase : getInAppPurchases().getAllInAppPurchases(false)) {
+						productIds.add(purchase.getSku());
+					}
+					for (OwnedPurchasesResult result : ownedInApps) {
+						productIds.addAll(result.getItemList());
+					}
+					IapRequestHelper.obtainProductInfo(getIapClient(), new ArrayList<>(productIds),
+							IapClient.PriceType.IN_APP_NONCONSUMABLE, new IapApiCallback<ProductInfoResult>() {
+								@Override
+								public void onSuccess(ProductInfoResult result) {
+									if (result != null && result.getProductInfoList() != null) {
+										productInfos.addAll(result.getProductInfoList());
+									}
+									processInventory();
+								}
+
+								@Override
+								public void onFail(Exception e) {
+									int errorCode = ExceptionHandle.handle((Activity) uiActivity, e);
+									if (ExceptionHandle.SOLVED != errorCode) {
+										LOG.error("Unknown error");
+									}
 									commandDone();
-									return;
 								}
-								productInfos.addAll(result.getProductInfoList());
-
-								processInventory();
-								commandDone();
-							}
-
-							@Override
-							public void onFail(Exception e) {
-								int errorCode = ExceptionHandle.handle((Activity) uiActivity, e);
-								if (ExceptionHandle.SOLVED != errorCode) {
-									LOG.error("Unknown error");
-								}
-								commandDone();
-							}
-						});
+							});
+				} else {
+					commandDone();
+				}
 			}
 
 			private void processInventory() {
@@ -579,17 +623,31 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			if (resultCode == Activity.RESULT_OK) {
 				PurchaseResultInfo result = SubscriptionUtils.getPurchaseResult(activity, data);
 				if (result != null) {
-					if (OrderStatusCode.ORDER_STATE_SUCCESS == result.getReturnCode()) {
-						InAppPurchaseData purchaseData = SubscriptionUtils.getInAppPurchaseData(null,
-								result.getInAppPurchaseData(), result.getInAppDataSignature());
-						if (purchaseData != null) {
-							onPurchaseFinished(purchaseData);
-							succeed = true;
-						} else {
+					switch (result.getReturnCode()) {
+						case OrderStatusCode.ORDER_STATE_CANCEL:
+							logDebug("Purchase cancelled");
+							break;
+						case OrderStatusCode.ORDER_STATE_FAILED:
+							inventoryRequestPending = true;
 							logDebug("Purchase failed");
-						}
-					} else if (OrderStatusCode.ORDER_STATE_CANCEL == result.getReturnCode()) {
-						logDebug("Purchase cancelled");
+							break;
+						case OrderStatusCode.ORDER_PRODUCT_OWNED:
+							inventoryRequestPending = true;
+							logDebug("Product already owned");
+							break;
+						case OrderStatusCode.ORDER_STATE_SUCCESS:
+							inventoryRequestPending = true;
+							InAppPurchaseData purchaseData = SubscriptionUtils.getInAppPurchaseData(null,
+									result.getInAppPurchaseData(), result.getInAppDataSignature());
+							if (purchaseData != null) {
+								onPurchaseFinished(purchaseData);
+								succeed = true;
+							} else {
+								logDebug("Purchase failed");
+							}
+							break;
+						default:
+							break;
 					}
 				} else {
 					logDebug("Purchase failed");
@@ -611,7 +669,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					case OrderStatusCode.ORDER_STATE_CANCEL:
 						logDebug("Order has been canceled");
 						break;
+					case OrderStatusCode.ORDER_STATE_FAILED:
+						inventoryRequestPending = true;
+						logDebug("Order has been failed");
+						break;
 					case OrderStatusCode.ORDER_PRODUCT_OWNED:
+						inventoryRequestPending = true;
 						logDebug("Product already owned");
 						break;
 					case OrderStatusCode.ORDER_STATE_SUCCESS:

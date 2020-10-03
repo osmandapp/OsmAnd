@@ -120,9 +120,8 @@ public class SubscriptionUtils {
 						}
 					} else {
 						Log.e(TAG, "check the data signature fail");
+						return getFailedPurchaseResultInfo();
 					}
-					return getFailedPurchaseResultInfo();
-
 				default:
 					Log.e(TAG, "returnCode: " + returnCode + " , errMsg: " + errMsg);
 					break;

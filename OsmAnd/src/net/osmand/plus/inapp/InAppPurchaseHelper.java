@@ -2,6 +2,7 @@ package net.osmand.plus.inapp;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.TextUtils;
@@ -264,6 +265,8 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	public abstract void purchaseDepthContours(@NonNull final Activity activity) throws UnsupportedOperationException;
+
+	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku);
 
 	@SuppressLint("StaticFieldLeak")
 	private class LiveUpdatesPurchaseTask extends AsyncTask<Void, Void, String> {

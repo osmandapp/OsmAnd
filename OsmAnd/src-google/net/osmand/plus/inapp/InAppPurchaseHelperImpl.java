@@ -226,6 +226,16 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		});
 	}
 
+	@Override
+	public void manageSubscription(@NonNull Context ctx, @Nullable String sku) {
+		String url = "https://play.google.com/store/account/subscriptions?package=" + ctx.getPackageName();
+		if (!Algorithms.isEmpty(sku)) {
+			url += "&sku=" + sku;
+		}
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		ctx.startActivity(intent);
+	}
+
 	@Nullable
 	private SkuDetails getSkuDetails(@NonNull String sku) {
 		List<SkuDetails> skuDetailsList = this.skuDetailsList;
