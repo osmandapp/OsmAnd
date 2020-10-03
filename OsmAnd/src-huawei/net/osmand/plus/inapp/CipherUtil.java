@@ -37,7 +37,7 @@ import java.security.spec.X509EncodedKeySpec;
 public class CipherUtil {
     private static final String TAG = "CipherUtil";
     private static final String SIGN_ALGORITHMS = "SHA256WithRSA";
-    private static final String PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAooen3X9jSWarxugznzzMSvp4zir1Pg6uPOm7fqlLOL0Ix52e5FpeotMx871pQ9hrCkiyFg2e6UxD8IXXjvK6QJQbjNJ2jIfKkCusm90yloSEfvyLeiq5y7zg4+DoPglHi8RxZ9y308YIqnRDoslfGm5DnWa8RKUvFRVRiu1p3FN4SYIa/FWLtS5yygemtqMJi8I14V7xqQ5wExCGeSA6j1/AAWXEwZncJwKn0BTXQSvwVBPBRM5ksgt4q+Sc484ZIbntATyxsUipnEBFxq1OXn5Zw5/vVxUC8RSyDMQ/kC2RaEcFtA1tlIIjIdurbpNg3tyViPfQUQndvOs4nDrFzwIDAQAB";
+    private static final String PUBLIC_KEY = "MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAsB+oH8rYQncwpTqGa0kS/5E725HJrq2sW1ThAZtmorYVi52Yt9PmZvNDz7284ol9C2skrKQR34eIer8Tr7Qqq3mlNo+/LVUpq9sa++kB2glaG6jj5NNjM3w4nVYHFIYkd5AQhodJgmqFvnp2s7r7YmyQVXZSehei5bA1G70Bs+El9cSv9shNNGTCaU3ARUu2hy3Ltkc/ov7/ZYYpiwjbyD3cmoMh9jO1++zztXb2phjv1h9zeJOp1i6HsotZll+c9J4jjV3GhrF+ZJm5WrSzGLDLtwSldRpMZFxrSvAJJstjzhDz3LpUM+nPV3HZ5VQ/xosmwWYmiibo89E1gw8p73NTBXHzuQMJcTJ6vTjD8LeMskpXHZUAGhifmFLGN1LbNP9662ulCV12kIbXuzWCwwi/h0DWqmnjKmLvzc88e4BrGrp2zZUnHz7m15voPG+4cQ3z9+cwS4gEI3SUTiFyQGE539SO/11VkkQAJ8P7du1JFNqQw5ZEW3AoE1iUsp5XAgMBAAE=";
 
     /**
      * the method to check the signature for the data returned from the interface
@@ -65,7 +65,7 @@ public class CipherUtil {
             java.security.Signature signature = java.security.Signature.getInstance(SIGN_ALGORITHMS);
 
             signature.initVerify(pubKey);
-            signature.update(content.getBytes("utf-8"));
+            signature.update(content.getBytes("UTF-8"));
 
             boolean bverify = signature.verify(Base64.decode(sign, Base64.DEFAULT));
             return bverify;

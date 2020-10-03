@@ -73,7 +73,7 @@ public abstract class InAppPurchases {
 	public InAppSubscription getPurchasedMonthlyLiveUpdates() {
 		if (monthlyLiveUpdates.isAnyPurchased()) {
 			return monthlyLiveUpdates;
-		} else if (discountedMonthlyLiveUpdates.isAnyPurchased()) {
+		} else if (discountedMonthlyLiveUpdates != null && discountedMonthlyLiveUpdates.isAnyPurchased()) {
 			return discountedMonthlyLiveUpdates;
 		}
 		return null;
