@@ -126,7 +126,7 @@
     <string name="average_speed">Средняя скорость</string>
     <string name="shared_string_time_moving">Время в движении</string>
     <string name="shared_string_time_span">Общее время</string>
-    <string name="shared_string_max">Макс.</string>
+    <string name="shared_string_max">Максимальная</string>
     <string name="shared_string_start_time">Отправление</string>
     <string name="shared_string_end_time">Прибытие</string>
     <string name="shared_string_color">Цвет</string>
@@ -901,7 +901,7 @@
     <string name="search_address_building_option">Дом</string>
     <string name="search_address_street_option">Пересечение улиц</string>
     <string name="context_menu_item_update_map">Обновить карту</string>
-    <string name="context_menu_item_create_poi">POI</string>
+    <string name="context_menu_item_create_poi">Добавление POI</string>
     <string name="shared_string_yes">Да</string>
     <string name="shared_string_cancel">Отмена</string>
     <string name="shared_string_no">Нет</string>
@@ -1178,7 +1178,7 @@
     <string name="poi_filter_sightseeing">Достопримечательности</string>
     <string name="context_menu_item_last_intermediate_point">Последний промежуточный пункт</string>
     <string name="context_menu_item_first_intermediate_point">Первый промежуточный пункт</string>
-    <string name="add_as_last_destination_point">Последний промежуточный пункт</string>
+    <string name="add_as_last_destination_point">Добавить последним промежуточным пунктом</string>
     <string name="add_as_first_destination_point">Первый промежуточный пункт</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
     <string name="new_destination_point_dialog">Вы уже задали пункт назначения</string>
@@ -1386,7 +1386,7 @@
     <string name="route_descr_select_destination">Задать пункт назначения</string>
     <string name="route_preferences">Предпочтения маршрута</string>
     <string name="route_info">Информация про маршрут</string>
-    <string name="keep_and_add_destination_point">Добавить пункт назначения</string>
+    <string name="keep_and_add_destination_point">Добавить новым пунктом назначения</string>
     <string name="use_displayed_track_for_navigation">Использовать показанный путь для навигации?</string>
     <string name="calculate_osmand_route_without_internet">Рассчитать сегмент маршрута OsmAnd без интернета</string>
     <string name="gpx_option_calculate_first_last_segment">Рассчитать маршрут OsmAnd для первого и последнего сегмента маршрута</string>
@@ -1667,7 +1667,7 @@
     <string name="shared_string_my_location">Моё местоположение</string>
     <string name="gps_status">Статус GPS</string>
     <string name="shared_string_gpx_points">Точки</string>
-    <string name="parking_place">Парковка</string>
+    <string name="parking_place">Место для парковки</string>
     <string name="remove_the_tag">УДАЛИТЬ ТЕГ</string>
     <string name="edit_group">Редактировать группу</string>
     <string name="plugin_install_needs_network">Вам необходимо подключение к сети для установки этого плагина.</string>
@@ -2134,7 +2134,7 @@
     <string name="shared_string_move_up">Переместить ↑</string>
     <string name="shared_string_move_down">Переместить ↓</string>
     <string name="finish_navigation">Завершить навигацию</string>
-    <string name="avoid_road">Избегать</string>
+    <string name="avoid_road">Избегать дорог</string>
     <string name="osm_live_user_public_name">Публичное имя</string>
     <string name="osm_live_support_region">Поддерживаемый регион</string>
     <string name="osm_live_enter_user_name">Введите публичное имя</string>
@@ -2917,7 +2917,7 @@
     <string name="previous_route">Предыдущий маршрут</string>
     <string name="add_destination_query">Сначала задайте пункт назначения</string>
     <string name="shared_string_swap">Поменять</string>
-    <string name="show_more">Ещё</string>
+    <string name="show_more">Показать больше</string>
     <string name="tracks_on_map">Отображаемые треки</string>
     <string name="quick_action_show_hide_gpx_tracks">Показать/скрыть треки</string>
     <string name="quick_action_gpx_tracks_hide">Скрыть треки</string>
