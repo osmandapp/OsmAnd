@@ -13,6 +13,7 @@ import com.android.billingclient.api.SkuDetailsResponseListener;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.inapp.util.BillingManager;
@@ -106,7 +107,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 				if (activeTask == InAppPurchaseTaskType.REQUEST_INVENTORY) {
 					List<String> skuInApps = new ArrayList<>();
-					for (InAppPurchases.InAppPurchase purchase : getInAppPurchases().getAllInAppPurchases(false)) {
+					for (InAppPurchase purchase : getInAppPurchases().getAllInAppPurchases(false)) {
 						skuInApps.add(purchase.getSku());
 					}
 					for (Purchase p : purchases) {
@@ -173,7 +174,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		});
 	}
 
-	public void purchaseFullVersion(final Activity activity) {
+	public void purchaseFullVersion(@NonNull final Activity activity) {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
 		exec(InAppPurchaseTaskType.PURCHASE_FULL_VERSION, new InAppCommand() {
 			@Override
@@ -199,7 +200,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		});
 	}
 
-	public void purchaseDepthContours(final Activity activity) {
+	public void purchaseDepthContours(@NonNull final Activity activity) {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS);
 		exec(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS, new InAppCommand() {
 			@Override
@@ -325,7 +326,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				}
 			}
 
-			InAppPurchases.InAppPurchase fullVersion = getFullVersion();
+			InAppPurchase fullVersion = getFullVersion();
 			if (hasDetails(fullVersion.getSku())) {
 				Purchase purchase = getPurchase(fullVersion.getSku());
 				SkuDetails fullPriceDetails = getSkuDetails(fullVersion.getSku());
@@ -334,7 +335,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				}
 			}
 
-			InAppPurchases.InAppPurchase depthContours = getDepthContours();
+			InAppPurchase depthContours = getDepthContours();
 			if (hasDetails(depthContours.getSku())) {
 				Purchase purchase = getPurchase(depthContours.getSku());
 				SkuDetails depthContoursDetails = getSkuDetails(depthContours.getSku());
@@ -343,7 +344,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				}
 			}
 
-			InAppPurchases.InAppPurchase contourLines = getContourLines();
+			InAppPurchase contourLines = getContourLines();
 			if (hasDetails(contourLines.getSku())) {
 				Purchase purchase = getPurchase(contourLines.getSku());
 				SkuDetails contourLinesDetails = getSkuDetails(contourLines.getSku());
@@ -367,7 +368,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			// Do we have the live updates?
 			boolean subscribedToLiveUpdates = false;
 			List<Purchase> liveUpdatesPurchases = new ArrayList<>();
-			for (InAppPurchases.InAppPurchase p : getLiveUpdates().getAllSubscriptions()) {
+			for (InAppPurchase p : getLiveUpdates().getAllSubscriptions()) {
 				Purchase purchase = getPurchase(p.getSku());
 				if (purchase != null) {
 					liveUpdatesPurchases.add(purchase);
@@ -435,12 +436,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		return new PurchaseInfo(purchase.getSku(), purchase.getOrderId(), purchase.getPurchaseToken());
 	}
 
-	private void fetchInAppPurchase(@NonNull InAppPurchases.InAppPurchase inAppPurchase, @NonNull SkuDetails skuDetails, @Nullable Purchase purchase) {
+	private void fetchInAppPurchase(@NonNull InAppPurchase inAppPurchase, @NonNull SkuDetails skuDetails, @Nullable Purchase purchase) {
 		if (purchase != null) {
-			inAppPurchase.setPurchaseState(InAppPurchases.InAppPurchase.PurchaseState.PURCHASED);
+			inAppPurchase.setPurchaseState(InAppPurchase.PurchaseState.PURCHASED);
 			inAppPurchase.setPurchaseTime(purchase.getPurchaseTime());
 		} else {
-			inAppPurchase.setPurchaseState(InAppPurchases.InAppPurchase.PurchaseState.NOT_PURCHASED);
+			inAppPurchase.setPurchaseState(InAppPurchase.PurchaseState.NOT_PURCHASED);
 		}
 		inAppPurchase.setPrice(skuDetails.getPrice());
 		inAppPurchase.setPriceCurrencyCode(skuDetails.getPriceCurrencyCode());
