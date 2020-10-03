@@ -126,7 +126,7 @@
     <string name="average_speed">Средняя скорость</string>
     <string name="shared_string_time_moving">Время в движении</string>
     <string name="shared_string_time_span">Общее время</string>
-    <string name="shared_string_max">Максимальная</string>
+    <string name="shared_string_max">Макс.</string>
     <string name="shared_string_start_time">Отправление</string>
     <string name="shared_string_end_time">Прибытие</string>
     <string name="shared_string_color">Цвет</string>
