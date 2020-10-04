@@ -28,15 +28,10 @@ android {
 
 	signingConfigs {
 		development {
-			storeFile file('OsmAndHms.jks')
-			keyAlias 'OsmAndHms'
-			keyPassword 'targeting'
-			storePassword 'targeting'
-
-//			storeFile file("../keystores/debug.keystore")
-//			storePassword "android"
-//			keyAlias "androiddebugkey"
-//			keyPassword "android"
+			storeFile file("../keystores/debug.keystore")
+			storePassword "android"
+			keyAlias "androiddebugkey"
+			keyPassword "android"
 		}
 
 		publishing {
@@ -49,13 +44,13 @@ android {
 		publishingHuawei {
 			storeFile file("/var/lib/jenkins/osmand_hw_key")
 			storePassword System.getenv("OSMAND_HW_APK_PASSWORD")
-			keyAlias "OsmAndHms"
+			keyAlias "osmand"
 			keyPassword System.getenv("OSMAND_HW_APK_PASSWORD")
 		}
 	}
 
 	defaultConfig {
-		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 17
+		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 15
 		targetSdkVersion 28
 		versionCode 390
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
