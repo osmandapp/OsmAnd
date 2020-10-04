@@ -40,6 +40,13 @@ android {
 			keyAlias "osmand"
 			keyPassword System.getenv("OSMAND_APK_PASSWORD")
 		}
+
+		publishingHuawei {
+			storeFile file("/var/lib/jenkins/osmand_hw_key")
+			storePassword System.getenv("OSMAND_HW_APK_PASSWORD")
+			keyAlias "osmand"
+			keyPassword System.getenv("OSMAND_HW_APK_PASSWORD")
+		}
 	}
 
 	defaultConfig {
@@ -107,19 +114,23 @@ android {
 		debug {
 			manifest.srcFile "AndroidManifest-debug.xml"
 		}
+		full {
+			java.srcDirs = ["src-google"]
+		}
 		free {
+			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-free.xml"
 		}
 		freedev {
+			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-freedev.xml"
 		}
 		freecustom {
+			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-freecustom.xml"
 		}
-		huawei {
-			manifest.srcFile "AndroidManifest-huawei.xml"
-		}
 		freehuawei {
+			java.srcDirs = ["src-huawei"]
 			manifest.srcFile "AndroidManifest-freehuawei.xml"
 		}
 
@@ -185,21 +196,16 @@ android {
 			dimension "version"
 			applicationId "net.osmand.plus"
 		}
-        fulldev {
-            dimension "version"
-            applicationId "net.osmand.plus"
-            resConfig "en"
-            //resConfigs "xxhdpi", "nodpi"
-        }
-		huawei {
+		fulldev {
 			dimension "version"
-			applicationId "net.osmand.plus.huawei"
+			applicationId "net.osmand.plus"
+			resConfig "en"
+			// resConfigs "xxhdpi", "nodpi"
 		}
 		freehuawei {
 			dimension "version"
 			applicationId "net.osmand.huawei"
 		}
-
 		// CoreVersion
 		legacy {
 			dimension "coreversion"
@@ -222,7 +228,11 @@ android {
 			buildConfigField "boolean", "USE_DEBUG_LIBRARIES", "false"
 		}
 		release {
-			signingConfig signingConfigs.publishing
+			if (gradle.startParameter.taskNames.toString().contains("huawei")) {
+				signingConfig signingConfigs.publishingHuawei
+			} else {
+				signingConfig signingConfigs.publishing
+			}
 		}
 	}
 
@@ -279,44 +289,12 @@ task downloadWorldMiniBasemap {
 	}
 }
 
-task downloadHuaweiDrmZip {
+task setupHuaweiConfig {
 	doLast {
-		ant.get(src: 'https://obs.cn-north-2.myhwclouds.com/hms-ds-wf/sdk/HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'HwDRM_SDK_2.5.2.300_ADT.zip', skipexisting: 'true')
-		ant.unzip(src: 'HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'huaweidrmlib/')
+		if (System.getenv("HUAWEI_SDK_JSON")) {
+			new File("agconnect-services.json").text = System.getenv("HUAWEI_SDK_JSON")
+		}
 	}
-}
-
-task copyHuaweiDrmLibs(type: Copy) {
-	dependsOn downloadHuaweiDrmZip
-	from "huaweidrmlib/HwDRM_SDK_2.5.2.300_ADT/libs"
-	into "libs"
-}
-
-task copyHuaweiDrmValues(type: Copy) {
-	dependsOn downloadHuaweiDrmZip
-	from "huaweidrmlib/HwDRM_SDK_2.5.2.300_ADT/res"
-	into "res"
-}
-
-task downloadPrebuiltHuaweiDrm {
-	dependsOn copyHuaweiDrmLibs, copyHuaweiDrmValues
-}
-
-task cleanHuaweiDrmLibs(type: Delete) {
-	delete "huaweidrmlib"
-	delete fileTree("libs").matching {
-		include "**/huawei-*.jar"
-	}
-}
-
-task cleanHuaweiDrmValues(type: Delete) {
-	delete fileTree("res").matching {
-		include "**/drm_strings.xml"
-	}
-}
-
-task cleanPrebuiltHuaweiDrm {
-	dependsOn cleanHuaweiDrmLibs, cleanHuaweiDrmValues
 }
 
 task collectVoiceAssets(type: Sync) {
@@ -400,8 +378,6 @@ task copyLargePOIIcons(type: Sync) {
 	}
 }
 
-
-
 task copyWidgetIconsXhdpi(type: Sync) {
 	from "res/drawable-xxhdpi/"
 	into "res/drawable-large-xhdpi/"
@@ -448,13 +424,9 @@ task collectExternalResources {
 			copyPoiCategories,
 			downloadWorldMiniBasemap
 
-	Gradle gradle = getGradle()
-	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
-	// Use Drm SDK only for huawei build
+	String tskReqStr = gradle.startParameter.taskNames.toString()
 	if (tskReqStr.contains("huawei")) {
-		dependsOn downloadPrebuiltHuaweiDrm
-	} else {
-		dependsOn cleanPrebuiltHuaweiDrm
+		dependsOn setupHuaweiConfig
 	}
 }
 
@@ -506,9 +478,15 @@ task cleanupDuplicatesInCore() {
 		file("libs/x86_64/libc++_shared.so").renameTo(file("libc++/x86_64/libc++_shared.so"))
 	}
 }
+
 afterEvaluate {
 	android.applicationVariants.all { variant ->
 		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+	}
+	Gradle gradle = getGradle()
+	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
+	if (tskReqStr.contains("huawei")) {
+		apply plugin: 'com.huawei.agconnect'
 	}
 }
 
@@ -518,7 +496,6 @@ task appStart(type: Exec) {
 	// windows
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'      
 }
-
 
 dependencies {
 	implementation project(path: ':OsmAnd-java', configuration: 'android')
@@ -568,6 +545,5 @@ dependencies {
 	}
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
 
-	huaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')
-	freehuaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')
+	freehuaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
 }

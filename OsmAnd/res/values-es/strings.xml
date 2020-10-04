@@ -2006,14 +2006,14 @@
     <string name="no_inet_connection_desc_map">Necesario para descargar mapas.</string>
     <string name="search_location">Buscando la ubicación…</string>
     <string name="storage_free_space">Espacio libre</string>
-    <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, archivos GPX, etc.): %1$s.</string>
+    <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, trazas, etc.): %1$s.</string>
     <string name="give_permission">Conceder permiso</string>
     <string name="allow_access_location">Permitir el acceso a la ubicación</string>
     <string name="first_usage_greeting">Obtenga direcciones y descubra lugares nuevos, sin una conexión a Internet</string>
     <string name="search_my_location">Encontrar mi ubicación</string>
     <string name="no_update_info_desc">Omite la búsqueda de nuevas versiones o descuentos relacionados con OsmAnd.</string>
     <string name="no_update_info">Ocultar nuevas versiones</string>
-    <string name="osm_live_payment_desc">Suscripción mensual. Puede cancelarlo en cualquier momento en Google Play.</string>
+    <string name="osm_live_payment_desc">Suscripción mensual. Puedes cancelarla en cualquier momento en Google Play.</string>
     <string name="donation_to_osm">Donación a la comunidad de OSM</string>
     <string name="donation_to_osm_desc">Parte de tu donación se envía a los contribuidores a OSM. El coste de la suscripción sigue siendo el mismo.</string>
     <string name="osm_live_subscription_desc">La suscripción permite actualizaciones cada hora, día o semana y descargas ilimitadas para los mapas de todo el mundo.</string>
@@ -2029,8 +2029,8 @@
     <string name="upload_poi">Subir PDI</string>
     <string name="route_calculation">Cálculo de la ruta</string>
     <string name="search_map_hint">Ciudad o región</string>
-    <string name="gpx_no_tracks_title">Sin archivos GPX aún</string>
-    <string name="gpx_no_tracks_title_folder">También puedes añadir archivos GPX a la carpeta</string>
+    <string name="gpx_no_tracks_title">No tienes archivos de trazas aún</string>
+    <string name="gpx_no_tracks_title_folder">También puedes añadir archivos de trazas a la carpeta</string>
     <string name="gpx_add_track">Añadir más…</string>
     <string name="shared_string_appearance">Aspecto</string>
     <string name="shared_string_notifications">Notificaciones</string>
@@ -2044,7 +2044,7 @@
     <string name="routing_attr_allow_motorway_name">Usar autopistas</string>
     <string name="routing_attr_allow_motorway_description">Permite usar autopistas.</string>
     <string name="trip_rec_notification_settings">Activar la grabación rápida</string>
-    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite la grabación del viaje.</string>
+    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite empezar la grabación del viaje.</string>
     <string name="shared_string_trip">Viaje</string>
     <string name="shared_string_recorded">Grabado</string>
     <string name="shared_string_record">Grabar</string>
@@ -2417,7 +2417,7 @@
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="shared_string_install">Instalar</string>
     <string name="improve_coverage_mapillary">Mejorar cobertura de fotos con Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Instala Mapillary para añadir una o más fotos a esta ubicación del mapa.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instala Mapillary para añadir fotos a esta ubicación del mapa.</string>
     <string name="online_photos">Fotos en línea</string>
     <string name="mapillary_image">Imagen de Mapillary</string>
     <string name="shared_string_permissions">Permisos</string>
@@ -2492,7 +2492,7 @@
     <string name="sort_by">Ordenar por</string>
     <string name="marker_show_distance_descr">Elige cómo se indica la distancia y dirección a los marcadores del mapa en el mapa:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Umbral de orientación del mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Velocidad a partir de la cual la orientación del mapa cambia de «Dirección del movimiento» a «Dirección de la brújula».</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Selecciona la velocidad a partir de la que la orientación del mapa cambia de «Dirección del movimiento» a «Dirección de la brújula».</string>
     <string name="all_markers_moved_to_history">Todos los marcadores del mapa movidos al historial</string>
     <string name="marker_moved_to_history">Marcador del mapa movido al historial</string>
     <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>
@@ -2601,8 +2601,8 @@
     <string name="one_tap_active_descr">Pulsa un marcador en el mapa para moverlo al primer lugar de los marcadores activos, sin abrir el menú contextual.</string>
     <string name="one_tap_active">Activar «Una pulsación»</string>
     <string name="empty_state_av_notes">¡Toma notas!</string>
-    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el widget o el menú contextual.</string>
-    <string name="notes_by_date">Notas por fecha</string>
+    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto a cualquier punto del mapa, utilizando el control o el menú contextual.</string>
+    <string name="notes_by_date">Notas A/V por fecha</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
     <string name="what_is_here">Aquí hay:</string>
@@ -2954,7 +2954,7 @@
     <string name="rendering_attr_highway_class_motorway_name">Autopista</string>
     <string name="rendering_attr_highway_class_state_road_name">Carretera/ruta estatal</string>
     <string name="rendering_attr_highway_class_road_name">Carretera principal</string>
-    <string name="rendering_attr_highway_class_street_name">Calle residencial</string>
+    <string name="rendering_attr_highway_class_street_name">Calle</string>
     <string name="rendering_attr_highway_class_service_name">Vía de servicio</string>
     <string name="rendering_attr_highway_class_footway_name">Acera</string>
     <string name="rendering_attr_highway_class_track_name">Camino rural</string>
@@ -3847,7 +3847,7 @@
     <string name="threshold_distance">Distancia umbral</string>
     <string name="navigation_profile">Perfil de navegación</string>
     <string name="route_between_points_add_track_desc">Selecciona un archivo de traza al que agregar el nuevo segmento.</string>
-    <string name="street_level_imagery">Imágenes a pie de calle</string>
+    <string name="street_level_imagery">Fotos a pie de calle</string>
     <string name="plan_route_exit_dialog_descr">¿Estás seguro de que quieres descartar todos los cambios en la ruta planeada cerrándola\?</string>
     <string name="in_case_of_reverse_direction">En caso de dirección contraria</string>
     <string name="shared_string_save_as_gpx">Guardar como nuevo archivo de traza</string>

@@ -428,7 +428,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					buttonCancelView.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							manageSubscription(ctx, s.getSku());
+							purchaseHelper.manageSubscription(ctx, s.getSku());
 						}
 					});
 					div.setVisibility(View.VISIBLE);
@@ -536,15 +536,6 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 						settings.BILLING_HIDE_USER_NAME.get());
 			}
 		}
-	}
-
-	private void manageSubscription(@NonNull Context ctx, @Nullable String sku) {
-		String url = "https://play.google.com/store/account/subscriptions?package=" + ctx.getPackageName();
-		if (!Algorithms.isEmpty(sku)) {
-			url += "&sku=" + sku;
-		}
-		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-		startActivity(intent);
 	}
 
 	private ViewGroup buildPlanTypeCard(@NonNull Context ctx, ViewGroup container) {

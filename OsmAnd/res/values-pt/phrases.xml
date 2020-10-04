@@ -3829,4 +3829,5 @@
     <string name="poi_recycling_small_electrical_appliances">Pequenos aparelhos elétricos</string>
     <string name="poi_beehive">Colmeia</string>
     <string name="poi_nuts">Loja de nozes</string>
+    <string name="poi_fuel_lng">GNL</string>
 </resources>
