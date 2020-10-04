@@ -125,6 +125,7 @@ import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.dialogs.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
 
 public class GpxUiHelper {
 
@@ -532,7 +533,8 @@ public class GpxUiHelper {
 							popup.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
 							final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(new ContextThemeWrapper(activity, themeRes),
 									gpxAppearanceParams.containsKey(CURRENT_TRACK_COLOR_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_COLOR_ATTR) : prefColor.get(),
-									GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_WIDTH_COLOR);
+									GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_WIDTH_COLOR,
+									gpxAppearanceParams.containsKey(SHOW_START_FINISH_ATTR) ? "true".equals(gpxAppearanceParams.get(SHOW_START_FINISH_ATTR)) : app.getSettings().SHOW_START_FINISH_ICONS.get(), nightMode);
 							popup.setAdapter(gpxApprAdapter);
 							popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -544,6 +546,8 @@ public class GpxUiHelper {
 											gpxAppearanceParams.put(CURRENT_TRACK_WIDTH_ATTR, item.getValue());
 										} else if (CURRENT_TRACK_COLOR_ATTR.equals(item.getAttrName())) {
 											gpxAppearanceParams.put(CURRENT_TRACK_COLOR_ATTR, item.getValue());
+										} else if (SHOW_START_FINISH_ATTR.equals(item.getAttrName())) {
+											gpxAppearanceParams.put(SHOW_START_FINISH_ATTR, item.getValue());
 										}
 									}
 									popup.dismiss();
@@ -567,9 +571,13 @@ public class GpxUiHelper {
 				public void onClick(DialogInterface dialog, int which) {
 					if (gpxAppearanceParams.size() > 0) {
 						for (Map.Entry<String, String> entry : gpxAppearanceParams.entrySet()) {
-							final OsmandSettings.CommonPreference<String> pref
-									= app.getSettings().getCustomRenderProperty(entry.getKey());
-							pref.set(entry.getValue());
+							if (SHOW_START_FINISH_ATTR.equals(entry.getKey())) {
+								app.getSettings().SHOW_START_FINISH_ICONS.set("true".equals(entry.getValue()));
+							} else {
+								final OsmandSettings.CommonPreference<String> pref
+										= app.getSettings().getCustomRenderProperty(entry.getKey());
+								pref.set(entry.getValue());
+							}
 						}
 						if (activity instanceof MapActivity) {
 							ConfigureMapMenu.refreshMapComplete((MapActivity) activity);

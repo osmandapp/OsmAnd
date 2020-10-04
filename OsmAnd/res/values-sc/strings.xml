@@ -817,7 +817,7 @@
     <string name="rendering_value_car_name">Màchina</string>
     <string name="rendering_value_bicycle_name">Bitzicleta</string>
     <string name="rendering_value_pedestrian_name">A pede</string>
-    <string name="gpx_option_reverse_route">Furria diretzione GPX</string>
+    <string name="gpx_option_reverse_route">Fùrria sa diretzione de sa rasta</string>
     <string name="rotate_map_bearing_opt">Diretzione de sa mòvida</string>
     <string name="show_view_angle">Ammustra diretzione de osservatzione de abbistadura</string>
     <string name="choose_auto_follow_route">Tzentra automaticamente sa mapa</string>
@@ -3829,9 +3829,7 @@
     <string name="route_between_points_desc">Ischerta comente connètere sos puntos: cun una lìnia reta o calculende un\'àndala intre issos comente dislindadu inoghe in suta.</string>
     <string name="whole_track">Rasta intrea</string>
     <string name="next_segment">Segmentu imbeniente</string>
-    <string name="route_between_points_warning_desc">Pro impreare custa optzione OsmAnd tenet bisòngiu de alliniare sa rasta tua a sos caminos de sa mapa.
-\n
-\n In su passu chi benit as a dèpere ischertare su profilu de navigatzione pro rilevare sos caminos permìtidos e su lìmite de distàntzia pro aprossimare sa rasta tua cun sos caminos.</string>
+    <string name="route_between_points_warning_desc">In su passu chi benit liga sa rasta tua a su caminu permìtidu prus a curtzu cun unu de sos profilos de navigatzione tuos pro impreare custa optzione.</string>
     <string name="threshold_distance">Lìmite de distàntzia</string>
     <string name="navigation_profile">Profilu de navigatzione</string>
     <string name="route_between_points_add_track_desc">Ischerta unu documentu de rasta in ue annànghere su segmentu nou.</string>
@@ -3902,4 +3900,8 @@
 \n • Problemas cun s\'importatzione e s\'esportatzione de sas impostatziones de sos profilos risoltos
 \n
 \n</string>
+    <string name="sort_last_modified">Ùrtima modìfica</string>
+    <string name="sort_name_descending">Nùmene: Z – A</string>
+    <string name="sort_name_ascending">Nùmene: A – Z</string>
+    <string name="start_finish_icons">Iconas de incumintzu/fine</string>
 </resources>

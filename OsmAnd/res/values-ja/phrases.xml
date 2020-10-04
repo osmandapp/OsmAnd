@@ -1258,7 +1258,7 @@
     <string name="poi_vacuum_cleaner_yes">有り</string>
     <string name="poi_vacuum_cleaner_no">掃除機:無し</string>
     <string name="poi_amenity_vacuum_cleaner">掃除機</string>
-    <string name="poi_fuel_adblue">アドブルー・尿素水還元剤</string>
+    <string name="poi_fuel_adblue">ディーゼル排気用液(AdBlue・尿素水)</string>
     <string name="poi_drive_through">ドライブスルー</string>
     <string name="poi_drive_through_yes">有り</string>
     <string name="poi_drive_through_no">無し</string>
@@ -3814,4 +3814,24 @@
     <string name="poi_traffic_signals_arrow">触覚矢印</string>
     <string name="poi_traffic_signals_vibration">振動装置</string>
     <string name="poi_fire_hydrant_pressure_filter">公称圧力</string>
+    <string name="poi_traffic_signals_arrow_no">触覚矢印:無し</string>
+    <string name="poi_traffic_signals_arrow_yes">有り</string>
+    <string name="poi_traffic_signals_vibration_yes">有り</string>
+    <string name="poi_traffic_signals_vibration_no">振動:無し</string>
+    <string name="poi_pump_status_missing_beam">状態:釣瓶・管がない</string>
+    <string name="poi_osmand_fire_hydrant_pressure_suction">吸引</string>
+    <string name="poi_osmand_fire_hydrant_pressure_pressurized">加圧</string>
+    <string name="poi_fire_hydrant_style_water_source_groundwater">地下水</string>
+    <string name="poi_nuts">ナッツ専門店</string>
+    <string name="poi_beehive">養蜂箱</string>
+    <string name="poi_departures_board_realtime">リアルタイム時刻表</string>
+    <string name="poi_departures_board_timetable">一般的な時刻表</string>
+    <string name="poi_departures_board_delay">大まかな時刻表</string>
+    <string name="poi_departures_board_yes">有り</string>
+    <string name="poi_departures_board_no">時刻表:無し</string>
+    <string name="poi_elevator">エレベーター</string>
+    <string name="poi_city_block">街区</string>
+    <string name="poi_borough">行政区</string>
+    <string name="poi_give_box">ギブボックス(提供品置場)</string>
+    <string name="poi_fire_hydrant_type_pipe">簡易給水栓</string>
 </resources>

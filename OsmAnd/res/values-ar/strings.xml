@@ -27,7 +27,7 @@
     <string name="shared_string_map">إدارة الخرائط</string>
     <string name="prefer_motorways">تفضل الطرق السريعة</string>
     <string name="prefer_in_routing_title">فضّل…</string>
-    <string name="prefer_in_routing_descr">فضّل الطرق السريعة.</string>
+    <string name="prefer_in_routing_descr">فضل الطرق السريعة.</string>
     <string name="max_speed_none">بدون</string>
     <string name="index_name_openmaps">فتح خرائط الاتحاد الأوروبي</string>
     <string name="local_indexes_cat_av">بيانات الصوت / الفيديو</string>
@@ -46,15 +46,15 @@
     <string name="recording_default_name">تسجيل</string>
     <string name="shared_string_control_stop">إيقاف</string>
     <string name="shared_string_control_start">بدء</string>
-    <string name="osmand_srtm_short_description_80_chars">إضافة أوسماند المحلي للخطوط المحيطية</string>
+    <string name="osmand_srtm_short_description_80_chars">ملحق الخطوط الكنتورية دون اتصال</string>
     <string name="map_widget_distancemeasurement">قياس المسافة</string>
     <string name="map_widget_audionotes">الملاحظة صوتية</string>
     <string name="index_srtm_parts">أجزاء</string>
-    <string name="index_srtm_ele">الخطوط المحيطية (الكنتورية)</string>
-    <string name="srtm_plugin_name">الخطوط المحيطية</string>
+    <string name="index_srtm_ele">الخطوط الكنتورية</string>
+    <string name="srtm_plugin_name">الخطوط الكنتورية</string>
     <string name="download_select_map_types">خرائط أخرى</string>
     <string name="download_roads_only_item">الطرق فقط</string>
-    <string name="download_srtm_maps">خرائط الخطوط المحيطية (الكنتورية)</string>
+    <string name="download_srtm_maps">خرائط الخطوط الكنتورية</string>
     <string name="download_regular_maps">الخرائط العادية</string>
     <string name="rendering_attr_noAdminboundaries_name">الحدود</string>
     <string name="map_widget_max_speed">حد السرعة</string>
@@ -71,7 +71,7 @@
     <string name="new_destination_point_dialog">توجد وجهة سابقة تعمل حاليا :</string>
     <string name="shared_string_target_points">الوجهات</string>
     <string name="btn_advanced_mode">الوضع المتقدم…</string>
-    <string name="poi_filter_parking">موقف سيارات</string>
+    <string name="poi_filter_parking">موقف السيارة</string>
     <string name="poi_filter_emergency">حالة طوارئ</string>
     <string name="poi_filter_public_transport">وسائل النقل العام</string>
     <string name="poi_filter_entertainment">تسلية</string>
@@ -93,7 +93,7 @@
     <string name="screen_is_locked">لفتح قفل الشاشة اضغط على أيقونة القفل</string>
     <string name="map_widget_top_text">اسم الشارع</string>
     <string name="map_widget_reset">إعادة التعيين إلى الافتراضي</string>
-    <string name="map_widget_parking">موقف سيارات</string>
+    <string name="map_widget_parking">موقف السيارة</string>
     <string name="map_widget_speed">السرعة</string>
     <string name="map_widget_distance">الوجهة</string>
     <string name="map_widget_altitude">الارتفاع</string>
@@ -115,7 +115,7 @@
     <string name="gpxup_private">خاص</string>
     <string name="route_kl">الزم اليسار</string>
     <string name="route_kr">الزم اليمين</string>
-    <string name="rendering_attr_contourLines_name">أظهر الخطوط المحيطية (الكنتورية)</string>
+    <string name="rendering_attr_contourLines_name">أظهر الخطوط الكنتورية</string>
     <string name="rendering_attr_hmRendered_name">أظهر المزيد من تفاصيل الخريطة</string>
     <string name="rendering_attr_hmRendered_description">زيادة كمية خريطة التفصيل هو مبين.</string>
     <string name="local_index_routing_data">بيانات التوجيه</string>
@@ -367,7 +367,7 @@
     <string name="day_night_info">مواقيت الشروق والغروب</string>
     <string name="map_widget_vector_attributes">سمات التقديم</string>
     <string name="map_widget_renderer">نمط الخريطة</string>
-    <string name="layer_map_appearance">عرض/إخفاء الاختصارات</string>
+    <string name="layer_map_appearance">الاختصارات</string>
     <string name="map_widget_fluorescent">طرق فلورية</string>
     <string name="map_widget_show_ruler">مسطرة</string>
     <string name="map_widget_view_direction">عرض الاتجاه</string>
@@ -376,7 +376,7 @@
 \n التطبيق في الخلفية</string>
     <string name="bg_service_sleep_mode_on">إيقاف
 \n التشغيل في الخلفية</string>
-    <string name="map_widget_config">عرض/إخفاء الاختصارات</string>
+    <string name="map_widget_config">الاختصارات</string>
     <string name="map_widget_back_to_loc">أين أنا</string>
     <string name="map_widget_lock_screen">اقفل الشاشة</string>
     <string name="map_widget_compass">البوصلة</string>
@@ -410,8 +410,8 @@
     <string name="use_kalman_filter_compass">مرشح كالمان</string>
     <string name="av_photo_play_sound">تشغيل صوت التقاط الصورة</string>
     <string name="use_magnetic_sensor">استخدم الاستشعار المغناطيسي</string>
-    <string name="av_widget_action_descr">عمل الودجة الافتراضي:</string>
-    <string name="av_widget_action">عمل الودجة الافتراضي</string>
+    <string name="av_widget_action_descr">إجراء الأداة الافتراضي:</string>
+    <string name="av_widget_action">إجراء الأداة الافتراضي</string>
     <string name="osmand_parking_position_description">مكان موقف سيارتك. %1$s</string>
     <string name="osmand_parking_position_description_add">أخذ السيارة عند:</string>
     <string name="osmand_parking_pm">مساء</string>
@@ -503,13 +503,13 @@
 \n  * اضغط على أداة القياس لمعرفة المزيد من الإجراءات.</string>
     <string name="layer_hillshade">طبقة التضاريس</string>
     <string name="download_hillshade_maps">طبقة التضاريس</string>
-    <string name="local_indexes_cat_srtm">بيانات الخطوط المحيطية</string>
-    <string name="srtm_paid_version_msg">من فضلك فكر في شراء ملحق الخطوط المحيطية من Google Play لدعم المزيد من التطوير.</string>
-    <string name="srtm_paid_version_title">الخطوط المحيطية</string>
+    <string name="local_indexes_cat_srtm">بيانات الخطوط الكنتورية</string>
+    <string name="srtm_paid_version_msg">من فضلك فكر في شراء ملحق الخطوط الكنتورية من Google Play لدعم المزيد من التطوير.</string>
+    <string name="srtm_paid_version_title">الخطوط الكنتورية</string>
     <string name="recording_playing">جار تشغيل صوت من التّسجيل المحدد. 
 \n%1$s</string>
     <string name="zxing_barcode_scanner_not_found">برنامج ZXing للبحث عن الباركود غيرُ مثبّت. بحث في السّوق ؟</string>
-    <string name="rendering_attr_contourLines_description">مستوى تكبير الخطوط المحيطية:</string>
+    <string name="rendering_attr_contourLines_description">مستوى تكبير الخطوط الكنتورية:</string>
     <string name="back_left">الأيسر الخلفي</string>
     <string name="left">إلى اليسار</string>
     <string name="front_left">الأيسر الأمامي</string>
@@ -560,7 +560,7 @@
     <string name="osmand_srtm_long_description_1000_chars">يوفر هذا الملحق طبقة خط كنتوري وطبقة للتضاريس ظاهرة على الخريطة الأساسية للتطبيق. هذه الوظيفة ستكون محل تقدير من طرف الرياضيين، المتنزهين، الرحالة، وكل من هو مهتم بجمال ورخاء الطبيعة.
 \n
 \nالبيانات العالمية (بين 70 درجة شمالا و70 جنوبا) مبنية حسب قياسات SRTM (مكوك رادار البعثة الطبوغرافية) وASTER (المكوك المتقدم الخاص بالانبعاث الحراري والانعكاس الإشعاعي)، أداة تصوير على متن Terra، القمر الصناعي الرئيسي لنظام رصد الأرض التابع لناسا. ASTER هو جهد تعاوني فيما بين وكالة ناسا، وزارة الاقتصاد اليابانية، التجارة والصناعة (METI)، و أنظمة الفضاء اليابانية (J-spacesystems).</string>
-    <string name="srtm_plugin_description">يوفر هذا الملحق خطوط محيطية وطبقة تضاريس (طبيعية) تظهر على خرائط أوسماند. هذه الوظيفة ستعجب كثيرا الرياضيين، المتجولين، الرحالة، و كل من تهمه بنية التضاريس الطبيعية (يرجى ملاحظة أن بيانات الخطوط المحيطية/أو المساعدة منفصلة ، وتتوفر تنزيلات إضافية بعد تنشيط الملحق.)
+    <string name="srtm_plugin_description">يوفر هذا الملحق خطوط كنتورية وطبقة تضاريس (طبيعية) تظهر على خرائط أوسماند. هذه الوظيفة ستعجب كثيرا الرياضيين، المتجولين، الرحالة، و كل من تهمه بنية التضاريس الطبيعية (يرجى ملاحظة أن بيانات الخطوط الكنتورية/أو المساعدة منفصلة ، وتتوفر تنزيلات إضافية بعد تنشيط الملحق.)
 \nالبيانات العالمية (ما بين 70 درجة شمالاً و70 جنوباً) مبنية على مقاييس SRTM (مكوك رادار البعثة الطبوغرافية) و ASTER (الانبعاث الحراري الفضائي المتقدم والإنعكاس الإشعاعي)، أداة التصوير على متن Terra، القمر الصناعي الرئيسي لنظام رصد الأرض التابع لناسا.
 \n ASTER هو جهد تعاوني بين كل من وكالة ناسا، وزارة الاقتصاد اليابانية، التجارة والصناعة (METI)، ونظم الفضاء اليابانية (J-spacesystems).</string>
     <string name="osmand_long_description_1000_chars">أوسماند (اتجاهات التنقل الآلية OSM) 
@@ -599,9 +599,9 @@
 \n - تشغيل كامل دون إنترنت( خزن خرائط التوجيه أو الخرائط الجزئية المنزلة في ذاكرة الجهاز)
 \n - خرائط التوجيه المدمجة للعالم ككل متاحة لتعمل دون إنترنت
 \n - تحميل غير محدود لخرائط البلدان أو المناطق مباشرة من التطبيق
-\n - ميزة ويكيبيديا المحلية ( قم بتحميل POI لويكيبيديا)، الأمثل لمشاهدة المعالم الأثرية
-\n - يمكن تراكب عدة طبقات للخرائط، ك GPX أو مسارات الملاحة، مواقع ذات الاهتمام (POI)، الأماكن المفضلة، الحدود المحيطية، أماكن توقف النقل العمومي، خرائط إضافية بشفافية قابلة للتعديل
-\n - البحث عن العناوين والأماكن (POI) دون إنترنت
+\n - ميزة ويكيبيديا المحلية ( قم بتحميل نقاط الاهتمام لويكيبيديا)، الأمثل لمشاهدة المعالم الأثرية
+\n - يمكن تراكب عدة طبقات للخرائط، ك GPX أو مسارات الملاحة، مواقع ذات الاهتمام ، الأماكن المفضلة، الحدود الكنتورية، أماكن توقف النقل العمومي، خرائط إضافية بشفافية قابلة للتعديل
+\n - البحث عن العناوين وأماكن الاهتمام دون إنترنت
 \n - تحديد الطريق لمسافات متوسطة المدى
 \n - وضع السيارة، الدراجة والمشاة متوفر مع:
 \n - تبديل اختياري آلي لوضع الرؤية في الليل/النهار
@@ -721,9 +721,9 @@
     <string name="gpx_option_reverse_route">عكس اتجاه المسار</string>
     <string name="gpx_option_destination_point">استخدم الوجهة الحالية</string>
     <string name="gpx_option_from_start_point">يمر على طول المسار باكمله</string>
-    <string name="switch_to_vector_map_to_see">خريطة التنقل متوفرة حالياً لهذا الموقع.
+    <string name="switch_to_vector_map_to_see">خريطة التنقل متوفرة لهذا الموقع فعلها عبر
 \n
-\nلتفعليها \'القائمة\' ← \'ضبط الخريطة\' ← \'مصدر الخريطة\' ← \'الخريطة المحملة\'.</string>
+\n\'القائمة\' ← \'ضبط الخريطة\' ← \'مصدر الخريطة\' ← \'الخريطة المحملة\'.</string>
     <string name="choose_audio_stream">مصدر التوجيه الصوتي</string>
     <string name="choose_audio_stream_descr">اختيار قناة لتشغيل التوجيه الصوتي.</string>
     <string name="voice_stream_voice_call">صوت المكالمة الهاتفية ( كما يحاول قطع ستريو بلوتوث السيارة )</string>
@@ -977,7 +977,7 @@
     <string name="map_source">مصدر الخريطة</string>
     <string name="layer_amenity_label">عرض أسماء المفضلة</string>
     <string name="map_locale">لغة الخريطة</string>
-    <string name="rendering_category_details">التفاصيل</string>
+    <string name="rendering_category_details">تفاصيل إضافية</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
     <string name="rotate_map_to_bearing">اتجاه الخريطة</string>
     <string name="rotate_map_bearing_opt">اتجاه الحركة في الأعلى</string>
@@ -992,7 +992,7 @@
     <string name="record_plugin_name">تسجيل المسار</string>
     <string name="save_track_interval_descr">اختر الفاصل الزمني لتسجيل المسار أثناء الملاحة</string>
     <string name="voice">صوت مسج</string>
-    <string name="get_directions">الملاحة والتوجيه</string>
+    <string name="get_directions">التوجيه مع الطرق</string>
     <string name="show_point_options">استخدام الموقع…</string>
     <string name="favorite">مفضلة</string>
     <string name="speak_favorites">نقاط مفضلة مجاورة</string>
@@ -1071,10 +1071,10 @@
     <string name="impassable_road">تجنب الطرق…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">طرق السكك الحديدية</string>
     <string name="rendering_attr_tramRoutes_name">خطوط الترام</string>
-    <string name="rendering_category_routes">الطرق</string>
+    <string name="rendering_category_routes">المسارات الرياضية</string>
     <string name="rendering_category_transport">وسائل المواصلات</string>
     <string name="rendering_category_others">سمات أخرى للخريطة</string>
-    <string name="map_widget_appearance_rem">العناصر المتبقية</string>
+    <string name="map_widget_appearance_rem">العناصر الاخرى</string>
     <string name="map_widget_top">شريط المعلومات</string>
     <string name="map_widget_right">العدادات على اليمين</string>
     <string name="map_widget_left">العدادات على اليسار</string>
@@ -1177,7 +1177,7 @@
     <string name="traffic_warning_calming">مطب</string>
     <string name="traffic_warning_speed_camera">كاميرا مراقبة السرعة</string>
     <string name="traffic_warning">تنبيه مروري</string>
-    <string name="speak_poi">نقاط الاهتمام المجاورة</string>
+    <string name="speak_poi">نقاط الاهتمام القريبة</string>
     <string name="way_alarms">تنبيهات مرورية</string>
     <string name="save_track_to_gpx_globally_headline">تسجيل المسار حسب الطلب</string>
     <string name="download_additional_maps">حمّل الخرائط المفقودة %1$s (%2$d MB)؟</string>
@@ -1432,7 +1432,7 @@
     <string name="osm_live_header">يُتيحُ لك هذا الاشتراك الحصول على التحديثات كُل ساعة لجميع الخرائط حول العالم. 
 \nجزء من الدخل سيعود إلى مجتمع OSM ويُدفَع لكل مساهمة.
 \nإن كنت تحب أوسماند وOSM وترغب في الدّعم، هذه هي الطريقة المُثلى للقيام بذلك.</string>
-    <string name="map_markers_other">علامات أخرى</string>
+    <string name="map_markers_other">وجهات أخرى</string>
     <string name="upload_anonymously">رفع كمستخدم مجهول</string>
     <string name="upload_osm_note">رفع ملاحظة OSM</string>
     <string name="shared_string_toolbar">شريط الأدوات</string>
@@ -1645,7 +1645,7 @@
     <string name="road_blocked">الطريق محظور</string>
     <string name="shared_string_select">تحديد</string>
     <string name="switch_start_finish">اعكس نقطة الانطلاق والوصول</string>
-    <string name="rendering_attr_hideIcons_name">أيقونات POI</string>
+    <string name="rendering_attr_hideIcons_name">أيقونات نقاط الاهتمام</string>
     <string name="shared_string_type">النوع</string>
     <string name="shared_string_not_selected">غير محدد</string>
     <string name="rec_split">قسم مسجل</string>
@@ -1848,7 +1848,7 @@
     <string name="simulate_initial_startup_descr">وضع علامة تشير إلى بدء تشغيل التطبيق الأولي، أبق جميع الإعدادات الأخرى دون تغيير.</string>
     <string name="region_maps">خرائط على مستوى المنطقة</string>
     <string name="hillshade_layer_disabled">طبقة التضاريس غير مفعلة</string>
-    <string name="srtm_plugin_disabled">الخطوط المحيطية معطلة</string>
+    <string name="srtm_plugin_disabled">الخطوط الكنتورية معطلة</string>
     <string name="nm">ميل بحري</string>
     <string name="nm_h">ميل بحري/س</string>
     <string name="simulate_your_location_descr">إجراء محاكاة تخيلية باستخدام توجيه نشط أو مسار مسجل.</string>
@@ -1925,14 +1925,14 @@
     <string name="poi_namefinder_query_empty">أدخل موضوع البحث لإيجاد POI</string>
     <string name="thanks_yandex_traffic">شكراً Yandex على معلومات حركة المرور.</string>
     <string name="layer_yandex_traffic">حركة مرور Yandex</string>
-    <string name="layer_poi">نقاط الاهتمام POI…</string>
+    <string name="layer_poi">نقاط الاهتمام…</string>
     <string name="context_menu_item_search_poi">بحث عن نقاط الاهتمام</string>
     <string name="use_trackball_descr">استخدم كرة التتبع لتحريك الخريطة.</string>
     <string name="use_trackball">استخدم كرة التعقب</string>
     <string name="route_stops_before">%1$s محطة توقف قبل</string>
     <string name="map_legend">مفتاح الخريطة</string>
     <string name="confirm_download_roadmaps">هل حقا تريد تحميل خريطة الطرق فقط، على الرغم من أنه لديك الخريطة (كاملة)؟</string>
-    <string name="activate_srtm_plugin">يجب تفعيل ملحق الخطوط المحيطية</string>
+    <string name="activate_srtm_plugin">يجب تفعيل ملحق الخطوط الكنتورية</string>
     <string name="transport_search_before">مسار رحلة مسبق</string>
     <string name="transport_to_go_after">مسافة مسبقة</string>
     <string name="transport_to_go_before">المسافة اللاحقة</string>
@@ -1972,7 +1972,7 @@
     <string name="sd_unmounted">بطاقة الذاكرة غير متاحة. 
 \nلن تكون قادرا على رؤية الخرائط أو العثور على أماكن.</string>
     <string name="sd_mounted_ro">بطاقة الذاكرة في وضع القراءة فقط.
-\n يمكنك فقط مشاهدة الخريطة المحملة مسبقا ولا يمكنك التحميل من الإنترنت.</string>
+\n يمكنك فقط مشاهدة الخريطة المحملة مسبقاً ولا يمكنك التحميل من الإنترنت.</string>
     <string name="route_tshr">انعطف يميناً بشكل حاد</string>
     <string name="route_tshl">انعطف يساراً بشكل حاد</string>
     <string name="route_tu">قم بالدوران وواصل</string>
@@ -2040,15 +2040,15 @@
     <string name="subcategories">فئات فرعية</string>
     <string name="translit_names">أسماء بترجمة حرفية</string>
     <string name="translit_name_if_miss">ترجمة حرفية اذا كانت %1$s من الاسم مفقودة</string>
-    <string name="search_hint">أدخل المدينة، العنوان أو اسم POI</string>
+    <string name="search_hint">أدخل المدينة، العنوان أو نقاط الاهتمام</string>
     <string name="christmas_desc">في ارتقاب عطل عيد الميلاد ورأس السنة الجديدة، يمكنك اختيار عرض POI المرتبطة بعيد الميلاد: أشجار عيد الميلاد، أسواق...الخ.</string>
     <string name="christmas_desc_q">عرض POI عيد الميلاد ؟</string>
     <string name="rendering_value_light_brown_name">بني فاتح</string>
     <string name="rendering_value_dark_brown_name">بني غامق</string>
-    <string name="rendering_attr_contourColorScheme_name">نظام ألوان الخطوط المحيطية</string>
+    <string name="rendering_attr_contourColorScheme_name">نظام ألوان الخطوط الكنتورية</string>
     <string name="rendering_attr_surfaceIntegrity_name">سلامة سطح الطرق</string>
     <string name="christmas_poi">POI عيد الميلاد</string>
-    <string name="rendering_attr_contourColorScheme_description">لون الخطوط المحيطية</string>
+    <string name="rendering_attr_contourColorScheme_description">لون الخطوط الكنتورية</string>
     <string name="save_track_min_speed">تسجيل السرعة الأدنى</string>
     <string name="save_track_min_speed_descr">مرشح: لا تسجيل نقاط أقل من هذه السرعة.</string>
     <string name="save_track_min_distance">تسجيل كشف الحركة</string>
@@ -2079,10 +2079,10 @@
     <string name="lang_sr_latn">الصربية (اللاتينية)</string>
     <string name="lang_zh_hk">الصينية (هونج كونج)</string>
     <string name="rendering_attr_hideWaterPolygons_description">ماء</string>
-    <string name="rendering_attr_contourWidth_description">عرض الخطوط المحيطية</string>
-    <string name="rendering_attr_contourWidth_name">عرض الخطوط المحيطية</string>
-    <string name="rendering_attr_contourDensity_description">كثافة الخط المحيطي</string>
-    <string name="rendering_attr_contourDensity_name">كثافة الخط المحيطي</string>
+    <string name="rendering_attr_contourWidth_description">عرض الخطوط الكنتورية</string>
+    <string name="rendering_attr_contourWidth_name">عرض الخطوط الكنتورية</string>
+    <string name="rendering_attr_contourDensity_description">كثافة الخط الكنتوري</string>
+    <string name="rendering_attr_contourDensity_name">كثافة الخط الكنتوري</string>
     <string name="rendering_value_high_name">عالي</string>
     <string name="rendering_value_medium_w_name">وسط</string>
     <string name="rendering_value_low_name">منخفض</string>
@@ -2126,7 +2126,7 @@
     <string name="quick_action_showhide_favorites_title">عرض/إخفاء المفضلة</string>
     <string name="quick_action_favorites_show">عرض المفضلة</string>
     <string name="quick_action_favorites_hide">إخفاء المفضلة</string>
-    <string name="quick_action_showhide_poi_title">عرض/إخفاء POI</string>
+    <string name="quick_action_showhide_poi_title">عرض/إخفاء نقاط الاهتمام</string>
     <string name="quick_action_poi_show">عرض %1$s</string>
     <string name="quick_action_poi_hide">إخفاء %1$s</string>
     <string name="quick_action_add_category">إضافة فئة</string>
@@ -2199,7 +2199,7 @@
     <string name="increase_search_radius">زيادة نصف قطر البحث</string>
     <string name="search_favorites">بحث في المفضلة</string>
     <string name="shared_string_plugin">ملحق</string>
-    <string name="srtm_color_scheme">لون الخطوط المحيطية</string>
+    <string name="srtm_color_scheme">لون الخطوط الكنتورية</string>
     <string name="favorite_group_name">اسم المجموعة</string>
     <string name="change_color">تعديل اللون</string>
     <string name="edit_name">إعادة تسمية</string>
@@ -2278,8 +2278,8 @@
     <string name="private_access_routing_req">الوجهة الخاص بك تقع في منطقة ذات ولوج خاص. هل تسمح بالدخول إلى الطرق الخاصة لهذه الرحلة؟</string>
     <string name="quick_action_showhide_osmbugs_descr">زر يظهر أو يخفي ملاحظات OSM على الخريطة.</string>
     <string name="hide_from_zoom_level">إخفاء من مستوى التكبير/التصغير</string>
-    <string name="srtm_menu_download_descr">يجب تحميل خريطة الخطوط المحيطية (الكنتورية) لهذه المنطقة لعرضها.</string>
-    <string name="show_from_zoom_level">العرض بدءا من مستوى التكبير</string>
+    <string name="srtm_menu_download_descr">يجب تحميل خريطة الخطوط الكنتورية لهذه المنطقة لعرضها.</string>
+    <string name="show_from_zoom_level">العرض بداية من مستوى التكبير</string>
     <string name="display_zoom_level">عرض مستوى التكبير: %1$s</string>
     <string name="animate_my_location">استقراء موقعي</string>
     <string name="srtm_purchase_header">لمشاهدة خطوط التضاريس على الخريطة، يجب تحميل الملحق أولاً.</string>
@@ -2289,12 +2289,12 @@
     <string name="quick_action_replace_destination_desc">زر لجعل الشاشة مركز الوجهة الجديدة ، مع استبدال الوجهة المحددة مسبقا (إن وجدت).</string>
     <string name="improve_coverage_install_mapillary_desc">يمكنك التقاط صور خاصة بك أو سلسلة من الصور وإرفاقها إلى هذا الموقع من الخريطة. للقيام بذلك تحتاج إلى تثبيت تطبيق مابيلاري من Google play.</string>
     <string name="hillshade_menu_download_descr">تحتاج إلى تحميل خريطة تراكب التلال لهذه المنطقة.</string>
-    <string name="hillshade_purchase_header">لمشاهدة التضاريس على الخريطة، تحتاج إلى شراء وتثبيت برنامج الخطوط المحيطية المساعد.</string>
+    <string name="hillshade_purchase_header">لمشاهدة التضاريس على الخريطة، تحتاج إلى شراء وتثبيت برنامج الخطوط الكنتورية المساعد.</string>
     <string name="quick_action_add_first_intermediate_desc">زر لجعل مركز الشاشة أول وجهة وسيطة.</string>
     <string name="no_overlay">بدون طبقة</string>
     <string name="no_underlay">بدون طبقة</string>
     <string name="subscribe_email_desc">اشترك في قائمة البريد الإلكتروني لدينا فيما يخص الخصومات والحصول على 3 تنزيلات خرائط إضافية!</string>
-    <string name="depth_contour_descr">مجموعة من الخرائط التي تحوي نقاط أعماق البحر وخطوطه المحيطية.</string>
+    <string name="depth_contour_descr">مجموعة من الخرائط التي تحوي نقاط أعماق البحر وخطوطه الكنتورية.</string>
     <string name="sea_depth_thanks">شكرا لشراء معالم أعماق البحار</string>
     <string name="index_item_depth_contours_osmand_ext">معالم العمق البحري</string>
     <string name="index_item_depth_points_southern_hemisphere">معالم أعماق البحار في نصف الكرة الجنوبي</string>
@@ -2315,7 +2315,7 @@
     <string name="route_is_too_long_v2">قد يكون المسار طويلا جدا للحساب. يرجى إضافة وجهات وسطى إذا لم يتم العثور على نتيجة خلال 10 دقائق.</string>
     <string name="osmand_extended_description_part1">أوسماند(توجيهات OSM للتنقل الآلية) تطبيق خريطة وتنقل مع إمكانية الوصول إلى بيانات (OSM) مجاناً وفي جميع أنحاء العالم، وبجودة عالية
 \n
-\n. استمتع بمستكشف بالصوت والصورة، وعرض POI (نقاط الاهتمام)، إنشاء وإدارة مسارات GPX، استخدام عرض ارتفاع بيانات الخطوط المحيطية (عن طريق الملحق)، اختيار بين نمط القيادة، ركوب الدراجات والمشاة، التعديل على الموقع وغيرها.</string>
+\n. استمتع بمستكشف بالصوت والصورة، وعرض (نقاط الاهتمام)، إنشاء وإدارة مسارات GPX، استخدام عرض ارتفاع بيانات الخطوط الكنتورية(عن طريق الملحق)، اختيار بين نمط القيادة، ركوب الدراجات والمشاة، التعديل على الموقع وغيرها.</string>
     <string name="osmand_extended_description_part2">التنقل عبر GPS 
 \n• يمكنك أن تختار بين وضع دون اتصال (لا رسوم تجوال عندما تكون في الخارج) أو بالإنترنت (أسرع) 
 \n• التوجيه الصوتي بالتفصيل يوجهك طوال الطريق (مسجل أو مدرج) 
@@ -2344,7 +2344,7 @@
 \n• التنقل في وضع ركوب الدراجات تقترح لك مسار دراجات
 \n• يمكنك مشاهدة سرعتك وارتفاعك
 \n• خيار تسجيل GPX يتيح لك تسجيل رحلتك ومشاركتها
-\n• عبر ملحق إضافي يمكنك عرض الخطوط المحيطية والتضاريس</string>
+\n• عبر ملحق إضافي يمكنك عرض الخطوط الكنتورية والتضاريس</string>
     <string name="osmand_extended_description_part6">المشي، التنزه، جولة في المدينة 
 \n• الخريطة تظهر لك ممرات المشي والتنزه 
 \n• ويكيبيديا سيخبرك الكثير اثناء جولتك وبلغتك المفضلة 
@@ -2367,7 +2367,7 @@
 \nمعظم البلدان في جميع أنحاء العالم متاحة للتحميل! 
 \nاحصل على برنامج تنقل موثوق به في بلدك - سواءاً في فرنسا، ألمانيا، المكسيك، المملكة المتحدة، إسبانيا، هولندا، الولايات المتحدة الأمريكية، روسيا، البرازيل أو أي دولة أخرى.</string>
     <string name="osmand_plus_extended_description_part1">أوسماند بلس (توجيهات OSM للملاحة الآلية) تطبيق خريطة وملاحة مع إمكانية الوصول إلى بيانات الموقع مجاناً وفي جميع أنحاء العالم، وبجودة عالية.
-\nاستمتع بالملاحة بصوت والصورة، عرض النقاط المهمة حولك (POI)، وإنشاء وإدارة مسارات GPX باستخدام معلومات عن تصور وعلو الخطوط المحيطية، خياراً بين القيادة، ركوب الدراجات، وضع المشاة، التعديل على OSM وأكثر من ذلك بكثير.
+\nاستمتع بالملاحة بصوت والصورة، عرض النقاط المهمة حولك (POI)، وإنشاء وإدارة مسارات GPX باستخدام معلومات عن تصور وعلو الخطوط الكنتورية، خياراً بين القيادة، ركوب الدراجات، وضع المشاة، التعديل على OSM وأكثر من ذلك بكثير.
 \n
 \nأوسماند بلس هو إصدار للتطبيق مدفوع الأجر. قبل شرائه، ادعم المشروع، بتمويل لتطوير الميزات الجديدة والحصول على آخر التحديثات.
 \n
@@ -2407,7 +2407,7 @@
 \n • محطات نقل عام اختيارية (حافلات، الترامواي، القطار) بما في ذلك أسماء خطوط النقل
 \n • تسجيل رحلة اختياري إلى ملف GPX محلي أو لخدمة على الإنترنت
 \n • عرض اختياري للسرعة والارتفاع
-\n • عرض الخطوط المحيطية والتضاريس (عن طريق برامج ملحق إضافي)</string>
+\n • عرض الخطوط الكنتورية والتضاريس (عن طريق برامج ملحق إضافي)</string>
     <string name="osmand_plus_extended_description_part7">المساهمة مباشرة في OSM 
 \n• الابلاغ عن الأخطاء في البرنامج 
 \n• رفع مسارات GPX إلى OSM مباشرة من التطبيق 
@@ -2482,7 +2482,7 @@
     <string name="map_orientation_change_in_accordance_with_speed">عتبة توجيه الخريطة</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">حدد أدناه على أي سرعة يتغير توجيه الخريطة من \'اتجاه الحركة\' إلى \'البوصلة\'.</string>
     <string name="all_markers_moved_to_history">تم نقل جميع العلامات إلى السجل</string>
-    <string name="marker_moved_to_history">تم نقل التوجيه المباشرإلى السجل</string>
+    <string name="marker_moved_to_history">تم نقل التوجيه المباشر إلى السجل</string>
     <string name="marker_moved_to_active">التوجيه المباشر انتقل كنشط</string>
     <string name="shared_string_list">قائمة</string>
     <string name="shared_string_groups">مجموعات</string>
@@ -2519,7 +2519,7 @@
     <string name="marker_save_as_track_descr">تصدير علاماتك إلى ملف يمكنك تحديده هنا:</string>
     <string name="move_to_history">نقل إلى السجل</string>
     <string name="group_will_be_removed_after_restart">سيتم إزالة المجموعة بعد إعادة تشغيل التطبيق.</string>
-    <string name="shared_string_markers">العلامات</string>
+    <string name="shared_string_markers">التوجيه المباشر</string>
     <string name="coordinates_format">نمط الإحداثيات</string>
     <string name="use_system_keyboard">لوحة مفاتيح النظام</string>
     <string name="fast_coordinates_input_descr">اختر نسق إدخال الأحداثيات. يمكنك دائماً تغييره بالنقر على خيارات.</string>
@@ -2556,7 +2556,7 @@
     <string name="shared_string_edited">مُعدلة</string>
     <string name="shared_string_added">تمت الإضافة</string>
     <string name="modify_the_search_query">تعديل طلب البحث.</string>
-    <string name="marker_activated">تم تنشيط التوجيه المباشر%s.</string>
+    <string name="marker_activated">تم تنشيط التوجيه المباشر %s.</string>
     <string name="one_tap_active_descr">انقر على التوجيه المباشر في الخريطة لجعله الاعلى بدون فتح القائمة.</string>
     <string name="empty_state_av_notes">تدوين ملاحظات!</string>
     <string name="without_time_limit">بدون حد زمني</string>
@@ -2570,7 +2570,7 @@
     <string name="will_open_on">يفتح أبوابه على</string>
     <string name="additional_actions">إجراءات إضافية</string>
     <string name="shared_string_actions">إجراءات</string>
-    <string name="shared_string_marker">خط</string>
+    <string name="shared_string_marker">توجيه مباشر</string>
     <string name="notes_by_date">الملاحظات حسب التاريخ</string>
     <string name="by_date">حسب التاريخ</string>
     <string name="by_type">حسب النوع</string>
@@ -2666,7 +2666,7 @@
     <string name="wikivoyage_offline">ويكي الرحلات دون اتصال</string>
     <string name="unlimited_downloads">تحميلات غير محدودة</string>
     <string name="wikipedia_offline">ويكيبيديا دون اتصال</string>
-    <string name="contour_lines_hillshade_maps">الخطوط المحيطية والتضاريس</string>
+    <string name="contour_lines_hillshade_maps">الخطوط الكنتورية والتضاريس</string>
     <string name="shared_string_only_with_wifi">على الواي فاي فقط</string>
     <string name="wikivoyage_download_pics">تنزيل الصور</string>
     <string name="shared_string_wifi_only">على الواي فاي فقط</string>
@@ -2822,7 +2822,7 @@
     <string name="nautical_render_descr">للملاحة البحرية. ميزات العوامات ، المنارات ، مجاري الأنهار ، الممرات البحرية وعلامات ، الموانئ ، خدمات علامة مائية ، وملامح العمق.</string>
     <string name="ski_map_render_descr">للتزلج. يتميز بمناطق التزلج ومصاعد التزلج ومسارات التزلج على الجليد وما إلى ذلك. يعتم كائنات الخريطة الثانوية.</string>
     <string name="light_rs_render_descr">أسلوب قيادة بسيط. الوضع الليلي اللطيف ، وخطوط الكنتور ، مقارنة بالطرق ذات اللون البرتقالي ، يعتم الكائنات في الخريطة الثانوية.</string>
-    <string name="topo_render_descr">على النقيض من نمط مصممة أساسا للمشي والتنزه وركوب الدراجات في الطبيعة. قراءة جيدة في الإضاءة الخارجية المعقدة. الميزات الرئيسية: مقارنة الطرق والأجسام الطبيعية، أنواع مختلفة من طرق، والخطوط المحيطية مع إعدادات متقدمة، تفاصيل أكثر في مستويات التكبير/التصغير المقابلة من النمط الافتراضي. يسمح الخيار تكامل سطحي التمييز بين نوعية سطح الطريق. لا يوجد وضع ليلي.</string>
+    <string name="topo_render_descr">على النقيض من نمط مصممة أساسا للمشي والتنزه وركوب الدراجات في الطبيعة. قراءة جيدة في الإضاءة الخارجية المعقدة. الميزات الرئيسية: مقارنة الطرق والأجسام الطبيعية، أنواع مختلفة من طرق، والخطوط الكنتورية مع إعدادات متقدمة، تفاصيل أكثر في مستويات التكبير/التصغير المقابلة من النمط الافتراضي. يسمح الخيار تكامل سطحي التمييز بين نوعية سطح الطريق. لا يوجد وضع ليلي.</string>
     <string name="mapnik_render_descr">الستايل القديم Mapnik الافتراضي جعل ستايل.السمات الرئيسية: الوان متشابهة إلى Mapnik \'الأسلوب.</string>
     <string name="touring_view_render_descr">أسلوب الملاحة مع التباين العالي والحد الأعلى من التفاصيل. يتضمن كل خيارات النمط الافتراضي أوسماند، مع عرض أكبر قدر ممكن من التفاصيل ، ولا سيما الطرق والمسارات وطرق السفر الأخرى. التمييز الواضح بين \"جولة الأطلس\" بين أنواع الطرق. مناسبة للاستخدام النهاري والليلي وفي الهواء الطلق.</string>
     <string name="default_render_descr">أسلوب الغرض العام. تقديم نظافة مبسطة في المدن المكتظة بالسكان. الملامح الرئيسية: خطوط الكنتور ، والطرق ، وجودة السطح ، والقيود المفروضة على الوصول ، ودروع الطريق ، والمسارات التي تظهر وفقاً لمقياس SAC ، وميزات رياضة الماء الأبيض.</string>
@@ -2844,7 +2844,7 @@
     <string name="looking_for_tracks_with_waypoints">ابحث عن المسارات مع نقاط الطريق</string>
     <string name="add_track_to_markers_descr">حدد مسار لإضافة نقاط الطريق إلى العلامات(يتم سرد المسارات فقط مع نقاط الطريق).</string>
     <string name="empty_state_markers_active_desc">نقرة طويلة أو قصيرة على الأماكن ثم اضغط على زر التوجيه المباشر.</string>
-    <string name="empty_state_markers_groups_desc">يمكنك استيراد المجموعات المفضلة أو نقاط المسار كعلامات.</string>
+    <string name="empty_state_markers_groups_desc">يمكنك استيراد المجموعات المفضلة أو نقاط المسار كتوجيه.</string>
     <string name="empty_state_markers_history_desc">ستظهر العلامات التي تم تجاوزها على هذه الشاشة.</string>
     <string name="show_guide_line_descr">خط مباشر من موقعك إلى الهدف.</string>
     <string name="show_arrows_descr">عرض سهم واحد أو اثنين ليشير إلى الوجهة النشطة.</string>
@@ -2962,7 +2962,7 @@
 \n</string-->
     <string name="use_osm_live_public_transport_description">تمكين تغييرات النقل العام أوسماند لايف.</string>
     <string name="use_osm_live_public_transport">أوسماند لايف وسائل النقل العام</string>
-    <string name="routing_attr_avoid_sett_name">تجنب الحصى والطرق المرصوفة</string>
+    <string name="routing_attr_avoid_sett_name">عدم تجنب الحصى والطرق المرصوفة</string>
     <string name="routing_attr_avoid_sett_description">تجنب الحصى والطرق المرصوفة</string>
     <string name="routing_attr_avoid_train_name">بدون قطارات</string>
     <string name="routing_attr_avoid_train_description">تجنب القطارات</string>
@@ -3018,7 +3018,7 @@
     <string name="paste_Osmand_data_folder_path">لصق مسار مجلد بيانات أوسماند</string>
     <string name="change_osmand_data_folder_question">تغيير مجلد التخزين ؟</string>
     <string name="move_maps_to_new_destination">نقل للموقع الجديد</string>
-    <string name="avoid_in_routing_descr_">تجنب بعض الطرق، أو بعض أنواع الطرق</string>
+    <string name="avoid_in_routing_descr_">تجنب بعض الطرق</string>
     <string name="app_mode_utv">جنبًا إلى جنب</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">طريق تلفريك</string>
     <string name="rendering_attr_piste_difficulty_connection_name">اتصال</string>
@@ -3039,7 +3039,7 @@
     <string name="shared_string_memory_used_gb_desc">المستخدم %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">تم استخدام %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">تم استخدام %1$s kB</string>
-    <string name="contour_lines_and_hillshade">الخطوط المحيطية والتضاريس</string>
+    <string name="contour_lines_and_hillshade">الخطوط الكنتورية والتضاريس</string>
     <string name="routing_attr_prefer_unpaved_name">تفضيل الطرق الغير معبدة</string>
     <string name="routing_attr_prefer_unpaved_description">تفضيل الطرق الغير معبدة.</string>
     <string name="update_all_maps">تحديث كل الخرائط</string>
@@ -3066,10 +3066,10 @@
     <string name="routing_attr_driving_style_prefer_unpaved_name">تفضيل الطرق الغير معبدة</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">تفضيل الطرق غير المعبدة عند التوجيه.</string>
     <string name="layer_osm_edits">تحرير خرائط OSM</string>
-    <string name="quick_action_contour_lines_descr">لإظهار أو إخفاء الخطوط المحيطية على الخريطة.</string>
-    <string name="quick_action_contour_lines_show">إظهار الخطوط المحيطية</string>
-    <string name="quick_action_contour_lines_hide">إخفاء الخطوط المحيطية</string>
-    <string name="quick_action_show_hide_contour_lines">إظهار/إخفاء الخطوط المحيطية</string>
+    <string name="quick_action_contour_lines_descr">لإظهار أو إخفاء الخطوط الكنتورية على الخريطة.</string>
+    <string name="quick_action_contour_lines_show">إظهار الخطوط الكنتورية</string>
+    <string name="quick_action_contour_lines_hide">إخفاء الخطوط الكنتورية</string>
+    <string name="quick_action_show_hide_contour_lines">إظهار/إخفاء الخطوط الكنتورية</string>
     <string name="quick_action_hillshade_descr">لإظهار وإخفاء التضاريس على الخريطة.</string>
     <string name="quick_action_hillshade_show">إظهار التضاريس</string>
     <string name="quick_action_hillshade_hide">إخفاء التضاريس</string>
@@ -3804,7 +3804,7 @@
     <string name="track_coloring_solid">صلب</string>
     <string name="plan_route_last_edited">التعديل الأخير</string>
     <string name="plan_route_import_track">استيراد المسار</string>
-    <string name="plan_route_open_existing_track">فتح المسار الموجود</string>
+    <string name="plan_route_open_existing_track">فتح مسار موجود</string>
     <string name="plan_route_create_new_route">إنشاء مسار جديد</string>
     <string name="plan_route_select_track_file_for_open">حدد المسار للفتح.</string>
     <string name="shared_string_done">تم</string>

@@ -896,7 +896,7 @@
     <string name="manage_profiles">Halda rakenduse profiile…</string>
     <string name="osmand_settings_descr">Jõus kogu rakenduses</string>
     <string name="osmand_settings">OsmAnd seaded</string>
-    <string name="copy_from_other_profile">Kopeeri teiselt profiililt</string>
+    <string name="copy_from_other_profile">Kopeeri teisest profiilist</string>
     <string name="turn_screen_on">Lülita ekraan sisse</string>
     <string name="map_during_navigation_info">Kaart navigeerimise ajal</string>
     <string name="map_during_navigation">Kaart navigeerimise ajal</string>
@@ -3497,7 +3497,7 @@
     <string name="custom_color">Kohandatud värv</string>
     <string name="set_working_days_to_continue">Jätkamiseks vali tööpäevad</string>
     <string name="route_between_points">Teekond punktide vahel</string>
-    <string name="plan_a_route">Kavanda teekonda</string>
+    <string name="plan_a_route">Kavanda teekond</string>
     <string name="add_to_a_track">Lisa rajale</string>
     <string name="track_show_start_finish_icons">Näita alguse ja lõpu ikoone</string>
     <string name="select_track_width">Vali laius</string>
@@ -3762,4 +3762,6 @@
     <string name="sort_last_modified">Viimati muudetud</string>
     <string name="sort_name_descending">Nimi: Z – A</string>
     <string name="sort_name_ascending">Nimi: A – Z</string>
+    <string name="screen_timeout">Ekraani väljalülitamine</string>
+    <string name="app_mode_wheelchair_forward">Ratastool edasi</string>
 </resources>

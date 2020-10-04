@@ -3902,4 +3902,5 @@
     <string name="sort_last_modified">Naposledy zmenené</string>
     <string name="sort_name_descending">Názov: Z – A</string>
     <string name="sort_name_ascending">Názov: A – Z</string>
+    <string name="start_finish_icons">Ikony štartu/cieľa</string>
 </resources>

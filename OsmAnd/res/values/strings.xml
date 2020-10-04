@@ -12,6 +12,7 @@
 
 -->
     <string name="contour_lines_thanks">Thank you for purchasing \'Contour lines\'</string>
+    <string name="start_finish_icons">Start/finish icons</string>
     <string name="sort_name_ascending">Name: A – Z</string>
     <string name="sort_name_descending">Name: Z – A</string>
     <string name="sort_last_modified">Last modified</string>

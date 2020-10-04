@@ -361,7 +361,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setTitleId(R.string.shared_string_terrain, mapActivity)
 				.setDescription(app.getString(terrainMode == TerrainMode.HILLSHADE
 						? R.string.shared_string_hillshade
-						: R.string.shared_string_slope))
+						: R.string.download_slope_maps))
 				.setSelected(terrainEnabled)
 				.setColor(terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)

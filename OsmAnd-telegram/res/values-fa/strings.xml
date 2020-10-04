@@ -38,8 +38,8 @@
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile">mi</string>
-    <string name="km">ک‌م</string>
-    <string name="m">متر</string>
+    <string name="km">km</string>
+    <string name="m">m</string>
     <string name="nm">nmi</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>

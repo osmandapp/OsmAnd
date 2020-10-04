@@ -1462,6 +1462,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 
 			protected void onPostExecute(Void result) {
+				DashboardOnMap dashboard = getDashboard();
+				if (dashboard != null) {
+					dashboard.onMapSettingsUpdated();
+				}
 			}
 		}.executeOnExecutor(singleThreadExecutor, (Void) null);
 

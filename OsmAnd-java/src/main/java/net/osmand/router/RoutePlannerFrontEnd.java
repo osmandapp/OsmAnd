@@ -739,7 +739,7 @@ public class RoutePlannerFrontEnd {
 			res = searchRouteImpl(ctx, points, routeDirection);
 		}
 		if (ctx.calculationProgress != null) {
-			ctx.calculationProgress.timeToCalculate += (System.nanoTime() - timeToCalculate);
+			ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
 		}
 		BinaryRoutePlanner.printDebugMemoryInformation(ctx);
 		if (res != null) {
