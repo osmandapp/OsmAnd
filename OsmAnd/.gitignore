@@ -13,10 +13,13 @@ libs/it.unibo.alice.tuprolog-tuprolog-3.2.1.jar
 libs/commons-codec-commons-codec-1.11.jar
 libs/OsmAndCore_android-0.1-SNAPSHOT.jar
 
+# Huawei
 libs/huawei-*.jar
 huaweidrmlib/
 HwDRM_SDK_*
 drm_strings.xml
+agconnect-services.json
+OsmAndHms.jks
 
 # copy_widget_icons.sh
 res/drawable-large/map_*
