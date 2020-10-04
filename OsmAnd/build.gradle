@@ -196,17 +196,16 @@ android {
 			dimension "version"
 			applicationId "net.osmand.plus"
 		}
-        fulldev {
-            dimension "version"
-            applicationId "net.osmand.plus"
-            resConfig "en"
-            //resConfigs "xxhdpi", "nodpi"
-        }
+		fulldev {
+			dimension "version"
+			applicationId "net.osmand.plus"
+			resConfig "en"
+			// resConfigs "xxhdpi", "nodpi"
+		}
 		freehuawei {
 			dimension "version"
 			applicationId "net.osmand.huawei"
 		}
-
 		// CoreVersion
 		legacy {
 			dimension "coreversion"
