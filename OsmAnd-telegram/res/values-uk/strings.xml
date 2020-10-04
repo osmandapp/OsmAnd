@@ -118,7 +118,7 @@
     <string name="shared_string_settings">Налаштування</string>
     <string name="no_location_permission">Застосунок не має дозволу до отримання даних позиціювання.</string>
     <string name="gps_not_available">Будь ласка, увімкніть «Позиціювання» у системних налаштуваннях</string>
-    <string name="osmand_service">Фоновий режим</string>
+    <string name="osmand_service">Режим тла</string>
     <string name="osmand_service_descr">OsmAnd Tracker працює у фоновому режимі з вимкненим екраном.</string>
     <string name="shared_string_distance">Відстань</string>
     <string name="share_location">Поділитися позицією</string>
