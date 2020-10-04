@@ -89,7 +89,8 @@ public abstract class InAppPurchaseHelper {
 		REQUEST_INVENTORY,
 		PURCHASE_FULL_VERSION,
 		PURCHASE_LIVE_UPDATES,
-		PURCHASE_DEPTH_CONTOURS
+		PURCHASE_DEPTH_CONTOURS,
+		PURCHASE_CONTOUR_LINES
 	}
 
 	public abstract class InAppCommand {
@@ -155,6 +156,10 @@ public abstract class InAppPurchaseHelper {
 		return Version.isDeveloperBuild(ctx) || ctx.getSettings().DEPTH_CONTOURS_PURCHASED.get();
 	}
 
+	public static boolean isContourLinesPurchased(@NonNull OsmandApplication ctx) {
+		return Version.isDeveloperBuild(ctx) || ctx.getSettings().CONTOUR_LINES_PURCHASED.get();
+	}
+
 	public InAppPurchases getInAppPurchases() {
 		return purchases;
 	}
@@ -207,7 +212,7 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	protected void exec(final @NonNull InAppPurchaseTaskType taskType, final @NonNull InAppCommand command) {
-		if (isDeveloperVersion || !Version.isGooglePlayEnabled(ctx)) {
+		if (isDeveloperVersion || (!Version.isGooglePlayEnabled(ctx) && !Version.isHuawei(ctx))) {
 			notifyDismissProgress(taskType);
 			stop(true);
 			return;
@@ -265,6 +270,8 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	public abstract void purchaseDepthContours(@NonNull final Activity activity) throws UnsupportedOperationException;
+
+	public abstract void purchaseContourLines(@NonNull final Activity activity) throws UnsupportedOperationException;
 
 	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku);
 
@@ -489,6 +496,17 @@ public abstract class InAppPurchaseHelper {
 
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS);
 			notifyItemPurchased(getDepthContours().getSku(), false);
+			stop(true);
+
+		} else if (info.getSku().equals(getContourLines().getSku())) {
+			// bought contour lines
+			getContourLines().setPurchaseState(PurchaseState.PURCHASED);
+			logDebug("Contours lines purchased.");
+			showToast(ctx.getString(R.string.contour_lines_thanks));
+			ctx.getSettings().CONTOUR_LINES_PURCHASED.set(true);
+
+			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_CONTOUR_LINES);
+			notifyItemPurchased(getContourLines().getSku(), false);
 			stop(true);
 
 		} else {

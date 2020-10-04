@@ -1,6 +1,10 @@
 package net.osmand.plus.inapp;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,11 +17,14 @@ import com.android.billingclient.api.SkuDetailsResponseListener;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.inapp.util.BillingManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -174,6 +181,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		});
 	}
 
+	@Override
 	public void purchaseFullVersion(@NonNull final Activity activity) {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
 		exec(InAppPurchaseTaskType.PURCHASE_FULL_VERSION, new InAppCommand() {
@@ -200,6 +208,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		});
 	}
 
+	@Override
 	public void purchaseDepthContours(@NonNull final Activity activity) {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS);
 		exec(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS, new InAppCommand() {
@@ -224,6 +233,17 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				}
 			}
 		});
+	}
+
+	@Override
+	public void purchaseContourLines(@NonNull Activity activity) throws UnsupportedOperationException {
+		OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		if(plugin == null || plugin.getInstallURL() == null) {
+			Toast.makeText(activity.getApplicationContext(),
+					activity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
+		} else {
+			activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+		}
 	}
 
 	@Override

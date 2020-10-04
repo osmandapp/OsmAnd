@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseInitCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
@@ -54,8 +55,11 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	private void initInAppPurchaseHelper() {
 		deinitInAppPurchaseHelper();
 		if (purchaseHelper == null) {
-			InAppPurchaseHelper purchaseHelper = getMyApplication().getInAppPurchaseHelper();
-			if (isInAppPurchaseAllowed() && isInAppPurchaseSupported(purchaseHelper)) {
+			OsmandApplication app = getMyApplication();
+			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+			if (app.getSettings().isInternetConnectionAvailable()
+					&& isInAppPurchaseAllowed()
+					&& isInAppPurchaseSupported(purchaseHelper)) {
 				this.purchaseHelper = purchaseHelper;
 			}
 		}
@@ -128,13 +132,18 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		}
 	}
 
-	public static void purchaseSrtmPlugin(@NonNull final Activity activity) {
-		OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-		if(plugin == null || plugin.getInstallURL() == null) {
-			Toast.makeText(activity.getApplicationContext(),
-					activity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
-		} else {
-			activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+	public static void purchaseContourLines(@NonNull final Activity activity) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		if (app != null) {
+			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+			if (purchaseHelper != null) {
+				app.logEvent("contour_lines_purchase_redirect");
+				try {
+					purchaseHelper.purchaseContourLines(activity);
+				} catch (UnsupportedOperationException e) {
+					LOG.error("purchaseContourLines is not supported", e);
+				}
+			}
 		}
 	}
 
@@ -201,6 +210,11 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		}
 		onInAppPurchaseItemPurchased(sku);
 		fireInAppPurchaseItemPurchasedOnFragments(fragmentManager, sku, active);
+		if (purchaseHelper != null && purchaseHelper.getContourLines().getSku().equals(sku)) {
+			if (!(this instanceof MapActivity)) {
+				finish();
+			}
+		}
 	}
 
 	public void fireInAppPurchaseItemPurchasedOnFragments(@NonNull FragmentManager fragmentManager,

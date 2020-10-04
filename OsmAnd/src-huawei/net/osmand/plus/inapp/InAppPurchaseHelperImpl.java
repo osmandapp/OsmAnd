@@ -168,6 +168,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
+	public void purchaseContourLines(@NonNull Activity activity) throws UnsupportedOperationException {
+		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_CONTOUR_LINES);
+		exec(InAppPurchaseTaskType.PURCHASE_CONTOUR_LINES, getPurchaseInAppCommand(activity, purchases.getContourLines().getSku()));
+	}
+
+	@Override
 	public void manageSubscription(@NonNull Context ctx, @Nullable String sku) {
 		if (uiActivity != null) {
 			StartIapActivityReq req = new StartIapActivityReq();
@@ -255,7 +261,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 		if (inAppPurchase instanceof InAppSubscription) {
 			String introductoryPrice = productInfo.getSubSpecialPrice();
-			String introductoryPricePeriod = productInfo.getSubSpecialPeriod();
+			String introductoryPricePeriod = productInfo.getSubPeriod();
 			int introductoryPriceCycles = productInfo.getSubSpecialPeriodCycles();
 			long introductoryPriceAmountMicros = productInfo.getSubSpecialPriceMicros();
 			if (!Algorithms.isEmpty(introductoryPrice)) {
@@ -497,7 +503,6 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						fetchInAppPurchase(fullVersion, fullPriceDetails, purchaseData);
 					}
 				}
-
 				InAppPurchase depthContours = getDepthContours();
 				if (hasDetails(depthContours.getSku())) {
 					InAppPurchaseData purchaseData = getPurchaseData(depthContours.getSku());
@@ -506,7 +511,6 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						fetchInAppPurchase(depthContours, depthContoursDetails, purchaseData);
 					}
 				}
-
 				InAppPurchase contourLines = getContourLines();
 				if (hasDetails(contourLines.getSku())) {
 					InAppPurchaseData purchaseData = getPurchaseData(contourLines.getSku());
@@ -516,16 +520,14 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					}
 				}
 
-				InAppPurchaseData fullVersionPurchase = getPurchaseData(fullVersion.getSku());
-				boolean fullVersionPurchased = fullVersionPurchase != null;
-				if (fullVersionPurchased) {
+				if (getPurchaseData(fullVersion.getSku()) != null) {
 					ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 				}
-
-				InAppPurchaseData depthContoursPurchase = getPurchaseData(depthContours.getSku());
-				boolean depthContoursPurchased = depthContoursPurchase != null;
-				if (depthContoursPurchased) {
+				if (getPurchaseData(depthContours.getSku()) != null) {
 					ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
+				}
+				if (getPurchaseData(contourLines.getSku()) != null) {
+					ctx.getSettings().CONTOUR_LINES_PURCHASED.set(true);
 				}
 
 				// Do we have the live updates?
