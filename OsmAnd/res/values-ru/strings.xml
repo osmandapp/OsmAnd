@@ -2801,7 +2801,7 @@
     <string name="off_road_render_descr">Для езды по бездорожью, основано на топографическом стиле (англ. «Topo»), можно использовать с зелёными спутниковыми снимками в качестве подложки. Уменьшенная толщина основных дорог, увеличенная толщина путей, дорожек, велосипедных и других маршрутов.</string>
     <string name="unirs_render_descr">Модификация стиля по умолчанию для увеличения контраста пешеходных и велосипедных дорог. Использует старые цвета Mapnik.</string>
     <string name="get_osmand_live">Получите OsmAnd Live, чтобы разблокировать все функции: ежедневные обновления карт с неограниченной загрузкой, все платные и бесплатные плагины, Википедия, Викигид и многое другое.</string>
-    <string name="access_intermediate_arrival_time">Прибытие в промежуточный пункт</string>
+    <string name="access_intermediate_arrival_time">Промежуточное время прибытия</string>
     <string name="map_widget_intermediate_time">Прибытие в промежуточный пункт</string>
     <string name="quick_action_edit_actions">Редактировать действие</string>
     <string name="error_notification_desc">Пожалуйста, пришлите скриншот этого уведомления на support@osmand.net</string>
