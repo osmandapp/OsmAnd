@@ -1452,7 +1452,7 @@
     <string name="share_route_subject">Маршрут предоставленный через OsmAnd</string>
     <string name="keep_informing_never">При нажатии на стрелку (вручную)</string>
     <string name="keep_informing_descr">Повторять навигационные инструкции с регулярными интервалами.</string>
-    <string name="keep_informing">Повтор инструкций при навигации</string>
+    <string name="keep_informing">Повторять навигационные инструкции</string>
     <string name="arrival_distance">Объявление о прибытии</string>
     <string name="arrival_distance_descr">Как скоро следует сообщать о прибытии?</string>
     <string name="share_fav_subject">Места, отправленные в OsmAnd</string>
@@ -3101,7 +3101,7 @@
     <string name="zoom_by_wunderlinq">Использовать WunderLINQ для контроля</string>
     <string name="shared_string_icon">Значок</string>
     <string name="collected_data">Собранные данные</string>
-    <string name="press_again_to_change_the_map_orientation">Нажмите дважды для смены ориентации карты</string>
+    <string name="press_again_to_change_the_map_orientation">Нажмите ещё раз для смены ориентации карты</string>
     <string name="last_launch_crashed">Последний запуск OsmAnd завершился ошибкой. Пожалуйста, помогите нам улучшить OsmAnd, отправив нам отчёт об ошибке.</string>
     <string name="settings_routing_mode_string">Режим: %s</string>
     <string name="settings_derived_routing_mode_string">Режим пользователя, полученный из: %s</string>
