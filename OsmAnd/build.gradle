@@ -226,10 +226,11 @@ android {
 			signingConfig signingConfigs.development
 		}
 		release {
-			productFlavors.all { flavor ->
-				flavor.signingConfig signingConfigs.publishing
+			if (gradle.startParameter.taskNames.toString().contains("huawei")) {
+				signingConfig signingConfigs.publishingHuawei
+			} else {
+				signingConfig signingConfigs.publishing
 			}
-			productFlavors.freehuawei.signingConfig signingConfigs.publishingHuawei
 		}
 	}
 
