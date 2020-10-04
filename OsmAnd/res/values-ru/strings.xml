@@ -669,7 +669,7 @@
     <string name="vector_data">Локальные векторные карты</string>
     <string name="poi_context_menu_modify">Редактировать POI</string>
     <string name="poi_context_menu_delete">Удалить POI</string>
-    <string name="rotate_map_compass_opt">по компасу</string>
+    <string name="rotate_map_compass_opt">по направлению компаса</string>
     <string name="rotate_map_bearing_opt">по направлению движения</string>
     <string name="rotate_map_none_opt">не вращать (север сверху)</string>
     <string name="rotate_map_to_bearing_descr">Выравнивание карты:</string>
