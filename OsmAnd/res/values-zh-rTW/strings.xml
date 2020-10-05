@@ -3899,4 +3899,5 @@
     <string name="sort_last_modified">最後修改時間</string>
     <string name="sort_name_descending">名稱：Z – A</string>
     <string name="sort_name_ascending">名稱：A – Z</string>
+    <string name="start_finish_icons">開始／結束圖示</string>
 </resources>
