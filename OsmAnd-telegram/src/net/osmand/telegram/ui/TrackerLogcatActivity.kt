@@ -1,4 +1,4 @@
-package net.osmand
+package net.osmand.telegram.ui
 
 import android.os.AsyncTask
 import android.os.Bundle
@@ -9,17 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import java.io.*
 import java.lang.ref.WeakReference
 import java.util.*
-
-private const val LOGCAT_PATH = "logcat.log"
-private const val MAX_BUFFER_LOG = 10000
-private const val SHARE_ID = 0
-private const val LEVEL_ID = 1
-private val log = PlatformUtil.getLog(TrackerLogcatActivity::class.java)
 
 class TrackerLogcatActivity : AppCompatActivity() {
     private var logcatAsyncTask: LogcatAsyncTask? = null
@@ -27,14 +22,12 @@ class TrackerLogcatActivity : AppCompatActivity() {
     private var adapter: LogcatAdapter? = null
     private val LEVELS = arrayOf("D", "I", "W", "E")
     private var filterLevel = 1
-    private var recyclerView: RecyclerView? = null
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val app: TelegramApplication = getApplication() as TelegramApplication
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tracker_logcat)
-
-        log.debug("text to test")
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar).apply {
             navigationIcon = app.uiUtils.getThemedIcon(R.drawable.ic_arrow_back)
@@ -44,7 +37,7 @@ class TrackerLogcatActivity : AppCompatActivity() {
         setupIntermediateProgressBar()
 
         adapter = LogcatAdapter()
-        recyclerView = findViewById<View>(R.id.recycler_view) as RecyclerView?
+        recyclerView = findViewById<View>(R.id.recycler_view) as RecyclerView
         recyclerView!!.layoutManager = LinearLayoutManager(this)
         recyclerView!!.adapter = adapter
     }
@@ -266,5 +259,13 @@ class TrackerLogcatActivity : AppCompatActivity() {
             this.logcatActivity = WeakReference(logcatActivity)
             this.filterLevel = filterLevel
         }
+    }
+
+    companion object {
+        private const val LOGCAT_PATH = "logcat.log"
+        private const val MAX_BUFFER_LOG = 10000
+        private const val SHARE_ID = 0
+        private const val LEVEL_ID = 1
+        private val log = PlatformUtil.getLog(TrackerLogcatActivity::class.java)
     }
 }

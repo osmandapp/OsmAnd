@@ -9,7 +9,7 @@ import android.net.NetworkInfo
 import android.os.Build
 import android.os.Handler
 import net.osmand.PlatformUtil
-import net.osmand.TrackerLogcatActivity
+import net.osmand.telegram.ui.TrackerLogcatActivity
 import net.osmand.telegram.helpers.*
 import net.osmand.telegram.helpers.OsmandAidlHelper.OsmandHelperListener
 import net.osmand.telegram.helpers.OsmandAidlHelper.UpdatesListener

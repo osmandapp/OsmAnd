@@ -14,7 +14,6 @@ import android.widget.*
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import net.osmand.TrackerLogcatActivity
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.TelegramSettings.ListPreference

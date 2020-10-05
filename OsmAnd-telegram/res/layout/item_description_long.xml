@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:ellipsize="end"
-    android:minHeight="@dimen/list_header_with_descr_height"
+    android:minHeight="@dimen/list_description_height"
     android:paddingLeft="@dimen/content_padding_standard"
     android:paddingRight="@dimen/content_padding_standard"
     android:textColor="?android:textColorSecondary"
