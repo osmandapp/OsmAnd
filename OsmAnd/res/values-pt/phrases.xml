@@ -436,7 +436,7 @@
     <string name="poi_telephone_exchange">Central telefônica</string>
     <string name="poi_recycling">Reciclagem</string>
     <string name="poi_recycling_centre">Centro de reciclagem</string>
-    <string name="poi_recycling_container">Contêiner</string>
+    <string name="poi_recycling_container">Contentor</string>
     <string name="poi_recycling_glass">Vidro</string>
     <string name="poi_recycling_paper">Papel</string>
     <string name="poi_recycling_clothes">Roupas</string>
@@ -1775,7 +1775,7 @@
     <string name="poi_vending_toys">Brinquedos</string>
     <string name="poi_vending_ice_cream">Sorvete</string>
     <string name="poi_vending_sim_cards">Cartão SIM</string>
-    <string name="poi_branch">Seção</string>
+    <string name="poi_branch">Secção</string>
     <string name="poi_memorial_war">Memorial de guerra</string>
     <string name="poi_memorial_plaque">Placa comemorativa</string>
     <string name="poi_memorial_statue">Estátua</string>
@@ -2400,7 +2400,7 @@
     <string name="poi_cargo_passengers">Passageiros</string>
     <string name="poi_cargo_vehicle">Veículos</string>
     <string name="poi_cargo_bicycle">Bicicletas</string>
-    <string name="poi_cargo_container">Contêineres</string>
+    <string name="poi_cargo_container">Contentor</string>
     <string name="poi_cargo_hgv">Veículos pesados</string>
     <string name="poi_fitness_station">Academia ao ar livre</string>
     <string name="poi_hackerspace">Hackerspace</string>
@@ -3829,4 +3829,5 @@
     <string name="poi_recycling_small_electrical_appliances">Pequenos aparelhos elétricos</string>
     <string name="poi_beehive">Colmeia</string>
     <string name="poi_nuts">Loja de nozes</string>
+    <string name="poi_fuel_lng">GNL</string>
 </resources>

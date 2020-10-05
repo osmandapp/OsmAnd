@@ -3909,4 +3909,5 @@
     <string name="sort_last_modified">שינוי אחרון</string>
     <string name="sort_name_descending">שם: ת – א</string>
     <string name="sort_name_ascending">שם: א – ת</string>
+    <string name="start_finish_icons">סמלי התחלה/סיום</string>
 </resources>
