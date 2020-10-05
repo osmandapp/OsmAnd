@@ -52,9 +52,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	protected View rightButton;
 	protected View thirdButton;
 
+	private View buttonsShadow;
 	private LinearLayout itemsContainer;
 	private LinearLayout buttonsContainer;
-	protected View buttonsShadow;
 
 	@StringRes
 	protected int dismissButtonStringRes = R.string.shared_string_cancel;
@@ -162,6 +162,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 		final int screenHeight = AndroidUtils.getScreenHeight(activity);
 		final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
+		final int contentHeight = getContentHeight(screenHeight - statusBarHeight);
 
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
@@ -172,7 +173,6 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				} else {
 					obs.removeGlobalOnLayoutListener(this);
 				}
-				final int contentHeight = getContentHeight(screenHeight - statusBarHeight);
 
 				final View contentView = useScrollableItemsContainer() ? mainView.findViewById(R.id.scroll_view) : itemsContainer;
 				if (contentView.getHeight() > contentHeight) {
@@ -201,9 +201,14 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	private int getContentHeight(int availableScreenHeight) {
 		int customHeight = getCustomHeight();
-		int buttonsHeight = 0;
+		int buttonsHeight;
 		if (useVerticalButtons()) {
-			buttonsHeight = AndroidUtils.dpToPx(getContext(), 112);
+			int padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+			int buttonHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_height);
+			buttonsHeight = (buttonHeight + padding) * 2 + getFirstDividerHeight();
+			if (getThirdBottomButtonTextId() != DEFAULT_VALUE) {
+				buttonsHeight += buttonHeight + getSecondDividerHeight();
+			}
 		} else {
 			buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
 		}
@@ -310,10 +315,12 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			}
 			String rightButtonText = getString(rightBottomButtonTextId);
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(activity);
+			int outerPadding = getResources().getDimensionPixelSize(R.dimen.content_padding);
+			int innerPadding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 			int dialogWidth = portrait ? AndroidUtils.getScreenWidth(activity) : getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
-			int measuredTextWidth = AndroidUtils.getTextWidth(getResources().getDimensionPixelSize(R.dimen.default_desc_text_size), rightButtonText);
-			int availableTextWidth = (dialogWidth - AndroidUtils.dpToPx(activity, 96)) / 2;
+			int availableTextWidth = (dialogWidth - (outerPadding * 3 + innerPadding * 4)) / 2;
 
+			int measuredTextWidth = AndroidUtils.getTextWidth(getResources().getDimensionPixelSize(R.dimen.default_desc_text_size), rightButtonText);
 			return measuredTextWidth > availableTextWidth;
 		}
 		return false;
@@ -366,7 +373,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		AndroidUiHelper.updateVisibility(divider, buttonTextId != DEFAULT_VALUE);
 	}
 
-	protected int getFirstDividerHeight(){
+	protected int getFirstDividerHeight() {
 		return getResources().getDimensionPixelSize(R.dimen.content_padding);
 	}
 
@@ -388,7 +395,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		AndroidUiHelper.updateVisibility(divider, buttonTextId != DEFAULT_VALUE);
 	}
 
-	protected int getSecondDividerHeight(){
+	protected int getSecondDividerHeight() {
 		return getResources().getDimensionPixelSize(R.dimen.content_padding);
 	}
 

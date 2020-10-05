@@ -1,7 +1,6 @@
 package net.osmand.plus.measurementtool;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,12 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
-import net.osmand.plus.helpers.AndroidUiHelper;
 
 public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -29,8 +26,7 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 
 		items.add(new ShortDescriptionItem.Builder()
 				.setDescription(getString(R.string.plan_route_exit_dialog_descr))
-				.setTitle(getString(R.string.
-						exit_without_saving))
+				.setTitle(getString(R.string.exit_without_saving))
 				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
 				.create());
 
@@ -56,7 +52,7 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 
 	@Override
 	public int getSecondDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin_large);
+		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
 	}
 
 	@Override
@@ -78,8 +74,8 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 	}
 
 	@Override
-	protected UiUtilities.DialogButtonType getThirdBottomButtonType() {
-		return (UiUtilities.DialogButtonType.SECONDARY);
+	protected DialogButtonType getThirdBottomButtonType() {
+		return (DialogButtonType.SECONDARY);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment) {
