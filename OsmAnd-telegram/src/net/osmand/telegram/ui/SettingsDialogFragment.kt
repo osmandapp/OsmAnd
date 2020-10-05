@@ -14,6 +14,7 @@ import android.widget.*
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import net.osmand.TrackerLogcatActivity
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.TelegramSettings.ListPreference
@@ -211,6 +212,12 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			.setImageDrawable(uiUtils.getActiveIcon(R.drawable.ic_action_help))
 		mainView.findViewById<View>(R.id.help_row).setOnClickListener {
 			DisconnectTelegramBottomSheet.showInstance(childFragmentManager)
+		}
+
+		mainView.findViewById<View>(R.id.logcat_row).setOnClickListener {
+			val intent = Intent(activity, TrackerLogcatActivity::class.java)
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+			app.startActivity(intent)
 		}
 
 		return mainView

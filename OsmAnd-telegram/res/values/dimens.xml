@@ -27,7 +27,7 @@
 	<dimen name="dialog_welcome_title_top_margin">89dp</dimen>
 
 	<dimen name="list_header_height">48dp</dimen>
-	<dimen name="list_header_with_descr_height">42dp</dimen>
+	<dimen name="list_header_with_descr_height">44dp</dimen>
 
 	<dimen name="list_item_height">56dp</dimen>
 	<dimen name="list_item_height_min">48dp</dimen>
