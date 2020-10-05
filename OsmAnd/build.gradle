@@ -46,6 +46,8 @@ android {
 			storePassword System.getenv("OSMAND_HW_APK_PASSWORD")
 			keyAlias "osmand"
 			keyPassword System.getenv("OSMAND_HW_APK_PASSWORD")
+			v1SigningEnabled true
+			v2SigningEnabled true
 		}
 	}
 
