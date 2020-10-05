@@ -3842,4 +3842,14 @@
     <string name="poi_give_box">Donationsboks</string>
     <string name="poi_traffic_signals_arrow_no">Pil: nej</string>
     <string name="poi_elevator">Elevator</string>
+    <string name="poi_nuts">Nøddebutik</string>
+    <string name="poi_beehive">Bikube</string>
+    <string name="poi_departures_board_timetable">Tidsplan</string>
+    <string name="poi_departures_board_realtime">Realtid</string>
+    <string name="poi_departures_board_delay">Forsinkelse</string>
+    <string name="poi_departures_board_yes">Ja</string>
+    <string name="poi_departures_board_no">Afgangstavle: nej</string>
+    <string name="poi_recycling_small_electrical_appliances">Små elektriske apparater</string>
+    <string name="poi_departures_board">Afgangstavle</string>
+    <string name="poi_drinking_water_refill">Genopfyldning af drikkevand</string>
 </resources>

@@ -52,7 +52,7 @@
     <string name="shared_string_plugin">Плагин</string>
     <string name="srtm_purchase_header">Приобретите и установите плагин «Контурные линии» для отображения градуированных вертикальных областей.</string>
     <string name="srtm_color_scheme">Цветовая схема</string>
-    <string name="show_from_zoom_level">Показывать, начиная с уровня масштабирования</string>
+    <string name="show_from_zoom_level">Показывать начиная с масштаба</string>
     <string name="animate_my_location">Анимация моего положения</string>
     <string name="animate_my_location_desc">Включить анимацию прокрутки карты с моим положением во время навигации.</string>
     <string name="display_zoom_level">Масштаб: %1$s</string>
@@ -605,8 +605,8 @@
     <string name="reading_cached_tiles">Чтение кешированных растровых карт…</string>
     <string name="version_index_is_big_for_memory">Недостаточно памяти для локальной карты «{0}»</string>
     <string name="version_index_is_not_supported">Версия локальной карты «{0}» не поддерживается</string>
-    <string name="osmand_routing_experimental">Локальная навигация OsmAnd является экспериментальной функцией и не работает на длинные расстояния более 20 километров. 
-\n 
+    <string name="osmand_routing_experimental">Офлайн навигация OsmAnd является экспериментальной функцией и не работает на длинные расстояния более 20 километров.
+\n
 \nНавигация временно переключена на онлайн-сервис CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Невозможно найти указанную папку.</string>
     <string name="application_dir">Папка хранилища данных</string>
@@ -616,7 +616,7 @@
     <string name="install_selected_build">Установить OsmAnd — {0} из {1} {2} МБ\?</string>
     <string name="loading_builds_failed">Не удалось получить список сборок OsmAnd</string>
     <string name="loading_builds">Загружаются сборки OsmAnd…</string>
-    <string name="select_build_to_install">Выберите сборку OsmAnd для установки</string>
+    <string name="select_build_to_install">Выберите сборку для установки</string>
     <string name="voice_is_not_available_msg">Голосовая навигация недоступна. Перейдите в «Настройки» → «Настройки навигации», выберите профиль → «Голосовые данные» и выберите или загрузите пакет голосовых подсказок.</string>
     <string name="voice_is_not_available_title">Выберите пакет голосовых подсказок</string>
     <string name="trace_rendering_descr">Показывать производительность отрисовки.</string>
@@ -638,7 +638,7 @@
     <string name="fast_route_mode">Самый быстрый маршрут</string>
     <string name="fast_route_mode_descr">Расчёт скоростного маршрута вместо кратчайшего.</string>
     <string name="tiles_to_download_estimated_size">На масштабе {0} загрузить {1} тайлов ({2} МБ)</string>
-    <string name="shared_string_download_map">Загрузить карту</string>
+    <string name="shared_string_download_map">Скачать карту</string>
     <string name="select_max_zoom_preload_area">Наибольший масштаб для предварительной загрузки</string>
     <string name="maps_could_not_be_downloaded">Выбранная карта не может быть загружена</string>
     <string name="continuous_rendering">Непрерывная отрисовка</string>
@@ -1536,10 +1536,10 @@
     <string name="lang_sr">Сербский (кириллица)</string>
     <string name="lang_zh_cn">Китайский (упрощённый)</string>
     <string name="lang_zh_tw">Китайский (традиционный)</string>
-    <string name="rendering_attr_subwayMode_name">Маршруты метро</string>
+    <string name="rendering_attr_subwayMode_name">Линии метро</string>
     <string name="continue_navigation">Продолжить навигацию</string>
     <string name="pause_navigation">Приостановить навигацию</string>
-    <string name="rendering_attr_alpineHiking_description">Визуализация пути по шкале SAC.</string>
+    <string name="rendering_attr_alpineHiking_description">Визуализация маршрута по шкале SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Отрисовка дорог согласно трассам OSMC.</string>
     <string name="arrival_distance_factor_early">Раннее</string>
     <string name="arrival_distance_factor_normally">По умолчанию</string>
@@ -2801,7 +2801,7 @@
     <string name="off_road_render_descr">Для езды по бездорожью, основано на топографическом стиле (англ. «Topo»), можно использовать с зелёными спутниковыми снимками в качестве подложки. Уменьшенная толщина основных дорог, увеличенная толщина путей, дорожек, велосипедных и других маршрутов.</string>
     <string name="unirs_render_descr">Модификация стиля по умолчанию для увеличения контраста пешеходных и велосипедных дорог. Использует старые цвета Mapnik.</string>
     <string name="get_osmand_live">Получите OsmAnd Live, чтобы разблокировать все функции: ежедневные обновления карт с неограниченной загрузкой, все платные и бесплатные плагины, Википедия, Викигид и многое другое.</string>
-    <string name="access_intermediate_arrival_time">Прибытие в промежуточный пункт</string>
+    <string name="access_intermediate_arrival_time">Промежуточное время прибытия</string>
     <string name="map_widget_intermediate_time">Прибытие в промежуточный пункт</string>
     <string name="quick_action_edit_actions">Редактировать действие</string>
     <string name="error_notification_desc">Пожалуйста, пришлите скриншот этого уведомления на support@osmand.net</string>

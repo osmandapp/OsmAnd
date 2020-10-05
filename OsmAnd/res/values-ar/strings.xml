@@ -3891,4 +3891,5 @@
     <string name="sort_last_modified">آخر تعديل</string>
     <string name="sort_name_descending">الاسم: أ – ي</string>
     <string name="sort_name_ascending">الاسم: أ – ي</string>
+    <string name="start_finish_icons">رموز البدء/الانتهاء</string>
 </resources>
