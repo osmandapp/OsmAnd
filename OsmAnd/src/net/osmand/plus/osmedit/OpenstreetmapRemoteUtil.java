@@ -180,7 +180,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
                 id = Long.parseLong(response);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
 		return id;
 	}

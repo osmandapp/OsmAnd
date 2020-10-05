@@ -82,9 +82,9 @@ public class NetworkUtils {
 					}
 					return null;
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					log.error(e);
 				} catch (ExecutionException e) {
-					e.printStackTrace();
+					log.error(e);
 				}
 				return null;
 			}
@@ -166,7 +166,7 @@ public class NetworkUtils {
             Algorithms.closeStream(ous);
             return ous.toByteArray();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return new byte[0];
     }

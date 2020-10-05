@@ -109,7 +109,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation,
 									boolean anonymous) {
-		OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(this.app);
+		OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
 		OsmBugResult r = new OsmBugResult();
 		try {
 			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);

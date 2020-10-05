@@ -19,17 +19,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.github.scribejava.core.model.OAuthAsyncRequestCallback;
 import com.github.scribejava.core.model.Response;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 
 public class SettingsOsmEditingActivity extends SettingsBaseActivity {
-	OsmOAuthAuthorizationAdapter client;
+	private OsmOAuthAuthorizationAdapter client;
+	private static final Log log = PlatformUtil.getLog(SettingsOsmEditingActivity.class);
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,7 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 
-		client = new OsmOAuthAuthorizationAdapter(this.getMyApplication());
+		client = new OsmOAuthAuthorizationAdapter(getMyApplication());
 
 		getToolbar().setTitle(R.string.osm_settings);
 		@SuppressWarnings("deprecation")
@@ -78,12 +81,12 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 		if (client.isValidToken()){
 			prefOAuth.setTitle(R.string.osm_authorization_success);
 			prefOAuth.setSummary(R.string.osm_authorization_success);
-			prefOAuth.setKey("local_openstreetmap_token");
+			prefOAuth.setKey("local_openstreetmap_oauth_success");
 
 			final Preference prefTestUser = new Preference(this);
 			prefTestUser.setTitle(R.string.test_user_request);
 			prefTestUser.setSummary(R.string.test_user_request_description);
-			prefTestUser.setKey("local_openstreetmap_token");
+			prefTestUser.setKey("local_openstreetmap_oauth_user");
 			prefTestUser.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 				@Override
 				public boolean onPreferenceClick(Preference preference) {
@@ -94,7 +97,7 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 							try {
 								Toast.makeText(SettingsOsmEditingActivity.this,response.getBody(),Toast.LENGTH_SHORT).show();
 							} catch (IOException e) {
-								e.printStackTrace();
+								log.error(e);
 							}
 						}
 
@@ -110,7 +113,7 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 			final Preference prefClearToken = new Preference(this);
 			prefClearToken.setTitle(R.string.shared_string_logoff);
 			prefClearToken.setSummary(R.string.clear_osm_token);
-			prefClearToken.setKey("local_openstreetmap_token");
+			prefClearToken.setKey("local_openstreetmap_oauth_clear");
 			prefClearToken.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 				@Override
 				public boolean onPreferenceClick(Preference preference) {
@@ -128,7 +131,7 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 		else {
 			prefOAuth.setTitle(R.string.perform_oauth_authorization);
 			prefOAuth.setSummary(R.string.perform_oauth_authorization_description);
-			prefOAuth.setKey("local_openstreetmap_token");
+			prefOAuth.setKey("local_openstreetmap_oauth_login");
 			prefOAuth.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 				@Override
 				public boolean onPreferenceClick(Preference preference) {

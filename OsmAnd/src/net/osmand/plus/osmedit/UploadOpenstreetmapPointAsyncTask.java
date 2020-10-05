@@ -25,6 +25,7 @@ public class UploadOpenstreetmapPointAsyncTask
 	private OsmEditingPlugin plugin;
 	private final boolean closeChangeSet;
 	private final boolean loadAnonymous;
+	private static final int THREAD_ID = 10102;
 
 	public UploadOpenstreetmapPointAsyncTask(ProgressDialogFragment progress,
 											 OsmEditsUploadListener listener,
@@ -44,7 +45,6 @@ public class UploadOpenstreetmapPointAsyncTask
 
 	@Override
 	protected Map<OsmPoint, String> doInBackground(OsmPoint... points) {
-		final int THREAD_ID = 10102;
 		TrafficStats.setThreadStatsTag(THREAD_ID);
 
 		Map<OsmPoint, String> loadErrorsMap = new HashMap<>();

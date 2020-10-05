@@ -16,11 +16,11 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 public class OsmOAuthAuthorizationAdapter {
-    OsmandApplication application;
-    OsmOAuthAuthorizationClient client = new OsmOAuthAuthorizationClient(BuildConfig.CONSUMER_KEY, BuildConfig.CONSUMER_SECRET);
+    private OsmandApplication application;
+    private OsmOAuthAuthorizationClient client = new OsmOAuthAuthorizationClient(BuildConfig.CONSUMER_KEY, BuildConfig.CONSUMER_SECRET);
+    private static final int THREAD_ID = 10101;
 
     public OsmOAuthAuthorizationAdapter(OsmandApplication application) {
-        final int THREAD_ID = 10101;
         TrafficStats.setThreadStatsTag(THREAD_ID);
         this.application = application;
         restoreToken();

@@ -6,6 +6,8 @@ import com.github.scribejava.core.builder.api.DefaultApi10a;
 import com.github.scribejava.core.builder.api.OAuth1SignatureType;
 import com.github.scribejava.core.model.*;
 import com.github.scribejava.core.oauth.OAuth10aService;
+import net.osmand.PlatformUtil;
+import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -16,9 +18,10 @@ import java.util.concurrent.ExecutionException;
  * @since 2746
  */
 public class OsmOAuthAuthorizationClient {
-    OAuth10aService service;
-    OAuth1RequestToken requestToken;
-    OAuth1AccessToken accessToken;
+    private OAuth1RequestToken requestToken;
+    private OAuth1AccessToken accessToken;
+    private final OAuth10aService service;
+    public final static Log log = PlatformUtil.getLog(OsmOAuthAuthorizationClient.class);
 
     public OsmOAuthAuthorizationClient(String key, String secret) {
         service = new ServiceBuilder(key)
@@ -58,7 +61,7 @@ public class OsmOAuthAuthorizationClient {
     }
 
     public OAuth1AccessToken getAccessToken() {
-        return this.accessToken;
+        return accessToken;
     }
 
     public Response performRequestWithoutAuth(String url, String requestMethod, String requestBody)
@@ -96,11 +99,11 @@ public class OsmOAuthAuthorizationClient {
         try {
             requestToken = service.getRequestToken();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error(e);
         } catch (ExecutionException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return requestToken;
     }
@@ -109,11 +112,11 @@ public class OsmOAuthAuthorizationClient {
         try {
             setAccessToken(service.getAccessToken(requestToken, oauthVerifier));
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error(e);
         } catch (ExecutionException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return accessToken;
     }
