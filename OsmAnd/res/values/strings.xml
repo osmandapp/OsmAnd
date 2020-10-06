@@ -11,6 +11,14 @@
 	Thx - Hardy
 
 -->
+    <string name="use_native_pt_desc">Switch to Java (safe) Public Transport routing calculation</string>
+    <string name="use_native_pt">Native Public Transport development</string>
+    <string name="use_fast_recalculation_desc">Recalculates only the initial part of the route. Can be used for long trips.</string>
+    <string name="disable_complex_routing_descr">Two-phase routing for car navigation.</string>
+    <string name="use_complex_routing">Complex routing</string>
+    <string name="use_live_routing">OsmAnd Live data</string>
+    <string name="use_live_public_transport">OsmAnd Live data</string>
+    <string name="development">Development</string>
     <string name="start_finish_icons">Start/finish icons</string>
     <string name="sort_name_ascending">Name: A – Z</string>
     <string name="sort_name_descending">Name: Z – A</string>
@@ -2463,7 +2471,6 @@
     <string name="speech_rate_descr">Specify the speech rate for text-to-speech.</string>
     <string name="speech_rate">Speech Rate</string>
     <string name="complex_route_calculation_failed">Fast route calculation failed (%s), fallback to slow calculation.</string>
-    <string name="disable_complex_routing_descr">Disable two-phase routing for car navigation.</string>
     <string name="disable_complex_routing">Disable complex routing</string>
     <string name="amenity_type_seamark">Seamark</string>
     <string name="app_modes_choose_descr">Select shown profiles.</string>
@@ -3657,7 +3664,6 @@
     <string name="plugin_install_needs_network">You need to be online to install this plugin.</string>
     <string name="get_plugin">Get</string>
     <string name="use_fast_recalculation">Smart route recalculation</string>
-    <string name="use_fast_recalculation_desc">For long trips, only recalculate the initial part of the route.</string>
     <string name="do_you_like_osmand">Do you like OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">Your opinion and feedback is valued.</string>
     <string name="rate_this_app">Rate this app</string>

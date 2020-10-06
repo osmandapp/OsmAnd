@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.StateChangedListener;
+import net.osmand.plus.Version;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -155,6 +157,60 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		getPreferenceScreen().addPreference(timeConditionalRouting);
 	}
 
+	private void setupOsmLiveForPublicTransportPref() {
+		SwitchPreferenceEx useOsmLiveForPublicTransport = createSwitchPreferenceEx(settings.USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT.getId(),
+		R.string.use_live_public_transport, R.layout.preference_with_descr_dialog_and_switch);
+		useOsmLiveForPublicTransport.setDescription(getString(R.string.use_osm_live_public_transport_description));
+		useOsmLiveForPublicTransport.setSummaryOn(R.string.shared_string_enabled);
+		useOsmLiveForPublicTransport.setSummaryOff(R.string.shared_string_disabled);
+		useOsmLiveForPublicTransport.setIconSpaceReserved(true);
+		getPreferenceScreen().addPreference(useOsmLiveForPublicTransport);
+	}
+
+	private void setupNativePublicTransport() {
+		SwitchPreferenceEx setupNativePublicTransport = createSwitchPreferenceEx(settings.PT_SAFE_MODE.getId(),
+				R.string.use_native_pt, R.layout.preference_with_descr_dialog_and_switch);
+		if (!Version.isBlackberry(app)) {
+			setupNativePublicTransport.setDescription(getString(R.string.use_native_pt_desc));
+			setupNativePublicTransport.setSummaryOn(R.string.shared_string_enabled);
+			setupNativePublicTransport.setSummaryOff(R.string.shared_string_disabled);
+			setupNativePublicTransport.setIconSpaceReserved(true);
+			getPreferenceScreen().addPreference(setupNativePublicTransport);
+		} else {
+			setupNativePublicTransport.setVisible(false);
+		}
+	}
+
+	private void setupOsmLiveForRoutingPref() {
+		SwitchPreferenceEx useOsmLiveForRouting = createSwitchPreferenceEx(settings.USE_OSM_LIVE_FOR_ROUTING.getId(),
+				R.string.use_live_routing, R.layout.preference_with_descr_dialog_and_switch);
+		useOsmLiveForRouting.setDescription(getString(R.string.use_osm_live_routing_description));
+		useOsmLiveForRouting.setSummaryOn(R.string.shared_string_enabled);
+		useOsmLiveForRouting.setSummaryOff(R.string.shared_string_disabled);
+		useOsmLiveForRouting.setIconSpaceReserved(true);
+		getPreferenceScreen().addPreference(useOsmLiveForRouting);
+	}
+
+	private void setupDisableComplexRoutingPref() {
+		SwitchPreferenceEx disableComplexRouting = createSwitchPreferenceEx(settings.DISABLE_COMPLEX_ROUTING.getId(),
+				R.string.use_complex_routing, R.layout.preference_with_descr_dialog_and_switch);
+		disableComplexRouting.setDescription(getString(R.string.disable_complex_routing_descr));
+		disableComplexRouting.setSummaryOn(R.string.shared_string_enabled);
+		disableComplexRouting.setSummaryOff(R.string.shared_string_disabled);
+		disableComplexRouting.setIconSpaceReserved(true);
+		getPreferenceScreen().addPreference(disableComplexRouting);
+	}
+
+	private void setupFastRecalculationPref() {
+		SwitchPreferenceEx useFastRecalculation = createSwitchPreferenceEx(settings.USE_FAST_RECALCULATION.getId(),
+				R.string.use_fast_recalculation, R.layout.preference_with_descr_dialog_and_switch);
+		useFastRecalculation.setDescription(getString(R.string.use_fast_recalculation_desc));
+		useFastRecalculation.setSummaryOn(R.string.shared_string_enabled);
+		useFastRecalculation.setSummaryOff(R.string.shared_string_disabled);
+		useFastRecalculation.setIconSpaceReserved(true);
+		getPreferenceScreen().addPreference(useFastRecalculation);
+	}
+
 	private void setupRoutingPrefs() {
 		OsmandApplication app = getMyApplication();
 		if (app == null) {
@@ -170,7 +226,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		fastRoute.setSummaryOn(R.string.shared_string_on);
 		fastRoute.setSummaryOff(R.string.shared_string_off);
 
-		if (am.getRouteService() == RouteProvider.RouteService.OSMAND){
+		if (am.getRouteService() == RouteProvider.RouteService.OSMAND) {
 			GeneralRouter router = app.getRouter(am);
 			clearParameters();
 			if (router != null) {
@@ -273,6 +329,17 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		setupRouteRecalcHeader(screen);
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
+		addDivider(screen);
+		setupDevelopmentcategoryHeader(screen);
+		if (am.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
+			setupOsmLiveForPublicTransportPref();
+			setupNativePublicTransport();
+		}
+		if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+			setupOsmLiveForRoutingPref();
+			setupDisableComplexRoutingPref();
+		}
+		setupFastRecalculationPref();
 	}
 
 	private void addDivider(PreferenceScreen screen) {
@@ -298,6 +365,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		routingCategory.setLayoutResource(R.layout.preference_category_with_descr);
 		routingCategory.setTitle(R.string.recalculate_route);
 		screen.addPreference(routingCategory);
+	}
+
+	private void setupDevelopmentcategoryHeader (PreferenceScreen screen) {
+		PreferenceCategory developmentCategory = new PreferenceCategory(requireContext());
+		developmentCategory.setLayoutResource(R.layout.preference_category_with_descr);
+		developmentCategory.setTitle(R.string.development);
+		screen.addPreference(developmentCategory);
 	}
 
 	@Override
