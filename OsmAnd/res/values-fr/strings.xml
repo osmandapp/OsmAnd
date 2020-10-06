@@ -3883,4 +3883,6 @@
     <string name="sort_last_modified">Dernière modification</string>
     <string name="sort_name_descending">Nom : Z – A</string>
     <string name="sort_name_ascending">Nom : A – Z</string>
+    <string name="start_finish_icons">Icônes de départ / arrivée</string>
+    <string name="contour_lines_thanks">Merci pour votre achat de \'Courbes de niveaux\'</string>
 </resources>
