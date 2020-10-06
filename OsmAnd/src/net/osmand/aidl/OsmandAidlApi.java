@@ -2352,11 +2352,11 @@ public class OsmandAidlApi {
 			}
 			List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
 			settingsItems.add(new SettingsHelper.ProfileSettingsItem(app, appMode));
-			File tempDir = FileUtils.getTempDir(app);
+			File exportDir = app.getSettings().getExternalStorageDirectory();
 			String fileName = appMode.toHumanString();
 			SettingsHelper settingsHelper = app.getSettingsHelper();
 			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsHelper.getAdditionalData(), settingsTypes));
-			settingsHelper.exportSettings(tempDir, fileName, null, settingsItems, true);
+			settingsHelper.exportSettings(exportDir, fileName, null, settingsItems, true);
 			return true;
 		}
 		return false;
@@ -2403,9 +2403,9 @@ public class OsmandAidlApi {
 			} else if (fileName.endsWith(IndexConstants.GPX_FILE_EXT)) {
 				if (destinationDir.startsWith(IndexConstants.GPX_INDEX_DIR)
 						&& !FILE_TO_SAVE.equals(fileName)) {
-					showGpx(new File(destinationDir, fileName).getName());
+					destinationDir = destinationDir.replaceFirst(IndexConstants.GPX_INDEX_DIR, "");
+					showGpx(new File(destinationDir, fileName).getPath());
 				} else if (destinationDir.isEmpty() && FILE_TO_SAVE.equals(fileName)) {
-					GPXUtilities.loadGPXFile(new File(destinationDir, fileName));
 					app.getFavorites().loadFavorites();
 				}
 			}
