@@ -2882,4 +2882,6 @@
     <string name="poi_boat_motorboat_rental_yes">Motorlu tekneler: evet</string>
     <string name="poi_boat_rental">Tekne kiralama</string>
     <string name="poi_location_entrance">Konum: giriş</string>
+    <string name="poi_forestry_allotment">Yön tabelası: orman tahsisi</string>
+    <string name="poi_forestry_compartment">Yön tabelası: orman bölmesi</string>
 </resources>
