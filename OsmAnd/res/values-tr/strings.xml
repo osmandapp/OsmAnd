@@ -892,7 +892,7 @@
     <string name="only_show">Güzergahı göster</string>
     <string name="follow">Yönlendirmeyi başlatın</string>
     <string name="mark_final_location_first">Lütfen önce hedefi ayarlayın</string>
-    <string name="opening_hours">Açılış saatleri</string>
+    <string name="opening_hours">Çalışma saatleri</string>
     <string name="auth_failed">Yetkilendirme başarısız</string>
     <string name="loading_streets_buildings">Sokaklar/binalar yükleniyor…</string>
     <string name="loading_streets">Sokaklar yükleniyor…</string>
@@ -1374,7 +1374,7 @@
     <string name="opening_at">Açılış</string>
     <string name="closing_at">Kapanış</string>
     <string name="contact_info">İletişim Bilgileri</string>
-    <string name="add_opening_hours">Açılış saatleri ekle</string>
+    <string name="add_opening_hours">Çalışma saatleri ekle</string>
     <string name="poi_dialog_poi_type">POI Türü</string>
     <string name="number_of_rows_in_dash">Dash %1$s satır sayısı</string>
     <string name="please_specify_poi_type">POI türü belirtiniz.</string>

@@ -3425,7 +3425,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">在導航或移動時顯示的圖示。</string>
     <string name="select_map_icon_descr">靜止時顯示的圖示。</string>
-    <string name="logcat_buffer_descr">檢視及分享應用程式的紀錄檔</string>
+    <string name="logcat_buffer_descr">檢查及分享應用程式的詳細紀錄</string>
     <string name="search_offline_geo_error">無法解析地理含義「%s」。</string>
     <string name="tracks_view_descr">您已紀錄的軌跡位於 %1$s，或是 OsmAnd 資料夾。</string>
     <string name="multimedia_notes_view_descr">您的 OSM 註記位於 %1$s。</string>
@@ -3900,4 +3900,5 @@
     <string name="sort_name_descending">名稱：Z – A</string>
     <string name="sort_name_ascending">名稱：A – Z</string>
     <string name="start_finish_icons">開始／結束圖示</string>
+    <string name="contour_lines_thanks">感謝您購買 \'Contour lines\'</string>
 </resources>

@@ -428,7 +428,7 @@
     <string name="no_fav_to_save">Відсутні точки Закладок для збереження</string>
     <string name="shared_string_import">Імпортувати</string>
     <string name="error_occurred_loading_gpx">Не вдалося завантажити GPX.</string>
-    <string name="send_report">Відправити звіт</string>
+    <string name="send_report">Надіслати звіт</string>
     <string name="none_region_found">Не знайдено завантаженої мапи на карті пам\'яті.</string>
     <string name="poi_namefinder_query_empty">Почніть вводити текст для пошуку POI</string>
     <string name="any_poi">Всі</string>
@@ -3431,7 +3431,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок відображається під час навігації чи переміщення.</string>
     <string name="select_map_icon_descr">Значок показано в спокої.</string>
-    <string name="logcat_buffer_descr">Перевіряти та обмінюватися докладними журналами застосунку</string>
+    <string name="logcat_buffer_descr">Переглянути та надіслати докладний журнал застосунку</string>
     <string name="search_offline_geo_error">Не вдалося розібрати метод \'%s\'.</string>
     <string name="permission_is_required">Для використання цього параметра потрібен дозвіл.</string>
     <string name="monitoring_min_speed_descr">Це низькошвидкісний відсічний фільтр, щоб не записувати точки нижче певної швидкості. Це може призвести до плавнішого вигляду записаних треків при перегляді на мапі.</string>
