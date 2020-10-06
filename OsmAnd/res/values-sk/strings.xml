@@ -224,7 +224,7 @@
     <string name="button_upgrade_osmandplus">Aktualizovať OsmAnd+</string>
     <string name="map_version_changed_info">Stiahnite novú verziu aplikácie, aby ste mohli použiť nové mapové súbory.</string>
     <string name="poi_filter_nominatim">Online filter Nominatim</string>
-    <string name="search_position_current_location_search">Hľadám umiestnenie…</string>
+    <string name="search_position_current_location_search">Hľadám polohu…</string>
     <string name="search_position_current_location_found">Moja poloha (nájdená)</string>
     <string name="search_position_address">Adresa…</string>
     <string name="search_position_favorites">Obľúbené miesta…</string>
@@ -325,11 +325,11 @@
     <string name="foot">ft</string>
     <string name="mile_per_hour">mph</string>
     <string name="mile">mi</string>
-    <string name="send_location_way_choose_title">Zdieľať umiestnenie cez</string>
+    <string name="send_location_way_choose_title">Zdieľať polohu cez</string>
     <string name="send_location_sms_pattern">Pozícia: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">Na zobrazenie umiestnenia nasledujte webový odkaz %1$s alebo odkaz androidovského obsahu (intent link) %2$s</string>
-    <string name="send_location">Poslať umiestnenie</string>
-    <string name="context_menu_item_share_location">Zdieľať umiestnenie</string>
+    <string name="send_location">Poslať polohu</string>
+    <string name="context_menu_item_share_location">Zdieľať polohu</string>
     <string name="add_waypoint_dialog_added">GPX bod (waypoint) \"{0}\" pridaný</string>
     <string name="add_waypoint_dialog_title">Pridať waypoint do nahranej GPX stopy</string>
     <string name="amenity_type_administrative">Administratíva</string>
@@ -419,7 +419,7 @@
     <string name="download_type_to_filter">sem zadajte čo chcete nájsť</string>
     <string name="use_high_res_maps">Mapa s vysokým rozlíšením</string>
     <string name="use_high_res_maps_descr">Nerozťahovať (a nerozmazať) mapové dlaždice na obrazovkách s vysokou hustotou bodov.</string>
-    <string name="unknown_location">Umiestnenie zatiaľ nenájdené.</string>
+    <string name="unknown_location">Poloha zatiaľ nezistená.</string>
     <string name="context_menu_item_search_transport">Hľadať hromadnú dopravu</string>
     <string name="transport_searching_transport">Hľadá sa preprava (bez cieľa):</string>
     <string name="transport_searching_route">Hľadá sa preprava ({0} ako cieľ):</string>
@@ -743,7 +743,7 @@
     <string name="osmand_parking_add_event">Pridať pripomienku do aplikácie Kalendár</string>
     <string name="osmand_parking_time_limit">Časovo obmedzené parkovanie</string>
     <string name="osmand_parking_time_no_limit">Časovo neobmedzené parkovanie</string>
-    <string name="osmand_parking_position_description">Umiestnenie vášho zaparkovaného vozidla. %1$s</string>
+    <string name="osmand_parking_position_description">Poloha vášho zaparkovaného vozidla. %1$s</string>
     <string name="osmand_parking_position_description_add">Vyzdvihnúť vozidlo o:</string>
     <string name="osmand_parking_pm">popoludní</string>
     <string name="osmand_parking_am">dopoludnia</string>
@@ -754,7 +754,7 @@
     <string name="context_menu_item_add_parking_point">Označiť ako parkovacie miesto</string>
     <string name="context_menu_item_delete_parking_point">Odstrániť parkovaciu značku</string>
     <string name="starting_point_too_far">Východzí bod je príliš ďaleko od najbližšej cesty.</string>
-    <string name="shared_location">Zdieľané umiestnenie</string>
+    <string name="shared_location">Zdieľaná poloha</string>
     <string name="global_app_allocated_memory_descr">Pridelená pamäť %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Pridelená pamäť</string>
     <string name="native_app_allocated_memory_descr">Celková natívna pamäť pridelená aplikácii %1$s MB (Dalvik %2$s MB, iné %3$s MB).
@@ -886,7 +886,7 @@
 \n 
 \nGlobálne údaje (medzi 70° severne a 70° južne) sú založené na meraní SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), zobrazovacieho nástroja na palube Terra, vlajkového satelitu NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonských vesmírnych systémov (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Meranie vzdialenosti</string>
-    <string name="audionotes_location_not_defined">Stlačte \"Použiť umiestnenie…\" pre pridanie poznámky k polohe.</string>
+    <string name="audionotes_location_not_defined">Stlačte \"Použiť polohu…\" pre pridanie poznámky k polohe.</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Vytvárajte obrazové/zvukové/video poznámky počas výletu, buď tlačidlom na mape alebo v kontextovom menu polohy na mape.</string>
     <string name="audionotes_plugin_name">Audio/video poznámky</string>
@@ -1393,7 +1393,9 @@
 \n 
 \nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
     <string name="plugin_touringview_name">Cestovný mapový pohľad</string>
-    <string name="location_on_map">Umiestnenie:\n Šírka %1$s\n Dĺžka %2$s</string>
+    <string name="location_on_map">Poloha:
+\n Šírka %1$s
+\n Dĺžka %2$s</string>
     <string name="watch">Zobraziť</string>
     <string name="days_behind">dní pozadu</string>
     <string name="rename_failed">Premenovanie zlyhalo.</string>
@@ -2632,7 +2634,7 @@
     <string name="touring_view_renderer">Cestovný pohľad</string>
     <string name="nautical_renderer">Námorný</string>
     <string name="copy_location_name">Kopírovať názov bodu/umiestnenia</string>
-    <string name="toast_empty_name_error">Nepomenované umiestnenie</string>
+    <string name="toast_empty_name_error">Nepomenované miesto</string>
     <string name="show_closed_notes">Zobraziť uzavreté poznámky</string>
     <string name="switch_osm_notes_visibility_desc">Zobraziť/skryť OSM poznámky na mape.</string>
     <string name="gpx_file_desc">GPX - vhodné na export do JOSM a iných editorov OSM.</string>
@@ -3890,17 +3892,18 @@
 \n
 \n • Zlepšená viditeľnosť bodov pre bicykle.
 \n
-\n • Stopy je teraz možné aktivovať, pre kontextové menu sú základnými údajmi.
+\n • Stopy je teraz možné aktivovať a majú kontextové menu so základnými údajmi.
 \n
 \n • Zlepšený algoritmus vyhľadávania
 \n
 \n • Zlepšené možnosti nasledovania stopy v navigácii
 \n
-\n • Opravené problému s importom a exportom nastavení profilov
+\n • Opravené problémy s importom a exportom nastavení profilov
 \n
 \n</string>
     <string name="sort_last_modified">Naposledy zmenené</string>
     <string name="sort_name_descending">Názov: Z – A</string>
     <string name="sort_name_ascending">Názov: A – Z</string>
     <string name="start_finish_icons">Ikony štartu/cieľa</string>
+    <string name="contour_lines_thanks">Ďakujeme za zakúpenie modulu \'Vrstevnice\'</string>
 </resources>
