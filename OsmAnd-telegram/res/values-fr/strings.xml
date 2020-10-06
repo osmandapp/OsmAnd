@@ -267,4 +267,8 @@
     <string name="set_time_description">Définissez l\'heure à laquelle les contacts et groupes sélectionnés verront votre position en temps réel.</string>
     <string name="osmand_connect">OsmAnd connect</string>
     <string name="time_ago">depuis</string>
+    <string name="logcat_buffer">Buffer Logcat</string>
+    <string name="logcat_buffer_descr">Vérifier et partager les logs détaillés de l\'application</string>
+    <string name="shared_string_export">Exporter</string>
+    <string name="send_report">Envoyer le rapport</string>
 </resources>
