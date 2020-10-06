@@ -3277,7 +3277,7 @@
     <string name="map_look">Térképnézet</string>
     <string name="reset_to_default">Alapértelmezés visszaállítása</string>
     <string name="copy_from_other_profile">Másolás egy másik profilból</string>
-    <string name="logcat_buffer">Logcat-puffer</string>
+    <string name="logcat_buffer">Logcat-puffer (hibanapló)</string>
     <string name="shared_string_by_default">Alapértelmezés szerint</string>
     <string name="rendering_attr_piste_type_snow_park_name">Hópark</string>
     <string name="rendering_attr_piste_type_sleigh_name">Lovas szán</string>
@@ -3424,8 +3424,8 @@
     <string name="osm_editing">OSM-szerkesztés</string>
     <string name="osm_edits_view_descr">Az összes még fel nem töltött szerkesztés vagy OSM-hiba megtalálható a %1$s helyen. A már feltöltött pontok nem láthatók az OsmAndban.</string>
     <string name="app_mode_osm">OSM</string>
-    <string name="select_nav_icon_descr">Az ikon navigáció vagy haladás közben jelenik meg.</string>
-    <string name="select_map_icon_descr">Az ikon álló helyzetben jelenik meg.</string>
+    <string name="select_nav_icon_descr">Navigáció vagy haladás közben megjelenő ikon.</string>
+    <string name="select_map_icon_descr">Álló helyzetben megjelenő ikon.</string>
     <string name="logcat_buffer_descr">Az alkalmazás részletes naplóinak ellenőrzése és megosztása</string>
     <string name="permission_is_required">A beállítás használatához engedélyre van szükség.</string>
     <string name="rearrange_categories">Kategóriák átrendezése</string>
@@ -3896,4 +3896,6 @@
     <string name="sort_last_modified">Utolsó módosítás</string>
     <string name="sort_name_descending">Név: Z–A</string>
     <string name="sort_name_ascending">Név: A–Z</string>
+    <string name="start_finish_icons">Kiindulás/érkezés ikonjai</string>
+    <string name="contour_lines_thanks">Köszönjük, hogy megvásárolta a szintvonalbővítményt (Contour lines)</string>
 </resources>
