@@ -84,7 +84,7 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						importHelper.handleGpxImport(gpxFile, fileName, save, useImportDir);
+						importHelper.handleGpxImport(gpxFile, fileName, save, false);
 						dismiss();
 					}
 				})
