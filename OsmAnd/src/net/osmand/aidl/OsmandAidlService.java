@@ -1138,7 +1138,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				if (api == null) {
 					return CANNOT_ACCESS_API_ERROR;
 				}
-				return api.copyFileOld(params.getFileName(), params.getFilePartData(), params.getStartTime(), params.isDone());
+				return api.copyFile(params.getFileName(), params.getFilePartData(), params.getStartTime(), params.isDone());
 			} catch (Exception e) {
 				handleException(e);
 				return UNKNOWN_API_ERROR;
@@ -1299,8 +1299,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean importProfile(ProfileSettingsParams params) {
 			try {
 				OsmandAidlApi api = getApi("importProfile");
-				return api != null && api.importProfile(params.getProfileSettingsUri(), params.getSettingsTypeKeys(),
-						params.isReplace(), params.getLatestChanges(), params.getVersion());
+				return api != null && api.importProfile(params.getProfileSettingsUri(), params.getLatestChanges(),
+						params.getVersion());
 			} catch (Exception e) {
 				handleException(e);
 				return false;

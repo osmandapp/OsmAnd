@@ -106,8 +106,6 @@ import net.osmand.aidlapi.events.AKeyEventsParams;
 import net.osmand.aidlapi.info.AppInfoParams;
 
 import net.osmand.aidlapi.profile.ExportProfileParams;
-import net.osmand.aidlapi.profile.ExportSettingsType;
-
 
 // NOTE: Add new methods at the end of file!!!
 

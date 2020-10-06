@@ -2931,14 +2931,13 @@ public class SettingsHelper {
 		IMPORT
 	}
 
-	public List<SettingsHelper.SettingsItem> getFilteredSettingsItems(Map<ExportSettingsType, List<?>> additionalData,
-	                                                                  List<ExportSettingsType> settingsTypes) {
-		List<SettingsHelper.SettingsItem> settingsItems = new ArrayList<>();
+	public List<SettingsItem> getFilteredSettingsItems(Map<ExportSettingsType, List<?>> additionalData,
+	                                                   List<ExportSettingsType> settingsTypes) {
+		List<SettingsItem> settingsItems = new ArrayList<>();
 		for (ExportSettingsType settingsType : settingsTypes) {
 			List<?> settingsDataObjects = additionalData.get(settingsType);
 			if (settingsDataObjects != null) {
-				settingsItems.addAll(app.getSettingsHelper().prepareAdditionalSettingsItems(
-						new ArrayList<>(settingsDataObjects)));
+				settingsItems.addAll(prepareAdditionalSettingsItems(new ArrayList<>(settingsDataObjects)));
 			}
 		}
 		return settingsItems;

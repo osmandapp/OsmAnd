@@ -267,11 +267,7 @@ public class ImportSettingsFragment extends BaseOsmAndFragment
 				FragmentManager fm = getFragmentManager();
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
-					AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
-						@Override
-						public void onRoutingFilesLoaded() {
-						}
-					});
+					AppInitializer.loadRoutingFiles(app, null);
 					if (fm != null && file != null) {
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
 					}

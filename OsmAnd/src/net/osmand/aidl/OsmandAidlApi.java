@@ -2253,8 +2253,20 @@ public class OsmandAidlApi {
 
 	private Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();
 
-	public boolean importProfile(final Uri profileUri, ArrayList<String> settingsTypeKeys, boolean replace,
-	                             String latestChanges, int version) {
+	public boolean importProfile(final Uri profileUri, String latestChanges, int version) {
+		if (profileUri != null) {
+			Bundle bundle = new Bundle();
+			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
+			bundle.putInt(SettingsHelper.SETTINGS_VERSION_KEY, version);
+
+			MapActivity.launchMapActivityMoveToTop(app, null, profileUri, bundle);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean importProfileV2(final Uri profileUri, ArrayList<String> settingsTypeKeys, boolean replace,
+	                               String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
 			bundle.putStringArrayList(SettingsHelper.SETTINGS_TYPE_LIST_KEY, settingsTypeKeys);
@@ -2362,7 +2374,7 @@ public class OsmandAidlApi {
 		}
 	}
 
-	int copyFileOld(String fileName, byte[] filePartData, long startTime, boolean done) {
+	int copyFile(String fileName, byte[] filePartData, long startTime, boolean done) {
 		if (Algorithms.isEmpty(fileName) || filePartData == null) {
 			return COPY_FILE_PARAMS_ERROR;
 		}
@@ -2376,7 +2388,7 @@ public class OsmandAidlApi {
 		}
 	}
 
-	int copyFile(String destinationDir, String fileName, byte[] filePartData, long startTime, boolean done) {
+	int copyFileV2(String destinationDir, String fileName, byte[] filePartData, long startTime, boolean done) {
 		if (Algorithms.isEmpty(fileName) || filePartData == null) {
 			return COPY_FILE_PARAMS_ERROR;
 		}
@@ -2391,7 +2403,7 @@ public class OsmandAidlApi {
 			} else if (fileName.endsWith(IndexConstants.GPX_FILE_EXT)) {
 				if (destinationDir.startsWith(IndexConstants.GPX_INDEX_DIR)
 						&& !FILE_TO_SAVE.equals(fileName)) {
-					GPXUtilities.loadGPXFile(new File(destinationDir, fileName));
+					showGpx(new File(destinationDir, fileName).getName());
 				} else if (destinationDir.isEmpty() && FILE_TO_SAVE.equals(fileName)) {
 					GPXUtilities.loadGPXFile(new File(destinationDir, fileName));
 					app.getFavorites().loadFavorites();
@@ -2404,7 +2416,7 @@ public class OsmandAidlApi {
 	private int copyFileImpl(String fileName, byte[] filePartData, long startTime, boolean done, String destinationDir) {
 		File tempDir = FileUtils.getTempDir(app);
 		File file = new File(tempDir, fileName);
-		File destFile = app.getAppPath(destinationDir + fileName);
+		File destFile = app.getAppPath(new File(destinationDir, fileName).getPath());
 		long currentTime = System.currentTimeMillis();
 		try {
 			FileCopyInfo info = copyFilesCache.get(fileName);

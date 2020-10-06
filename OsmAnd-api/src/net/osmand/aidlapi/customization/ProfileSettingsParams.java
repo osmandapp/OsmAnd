@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 
 import net.osmand.aidlapi.AidlParams;
-import net.osmand.aidlapi.profile.ExportSettingsType;
+import net.osmand.aidlapi.profile.AExportSettingsType;
 
 import java.util.ArrayList;
 
@@ -20,13 +20,13 @@ public class ProfileSettingsParams extends AidlParams {
 	private Uri profileSettingsUri;
 	private String latestChanges;
 	private int version;
-	ArrayList<String> settingsTypeKeyList = new ArrayList<>();
+	private ArrayList<String> settingsTypeKeyList = new ArrayList<>();
 	boolean replace;
 
-	public ProfileSettingsParams(Uri profileSettingsUri, ArrayList<ExportSettingsType> settingsTypeList, boolean replace,
+	public ProfileSettingsParams(Uri profileSettingsUri, ArrayList<AExportSettingsType> settingsTypeList, boolean replace,
 	                             String latestChanges, int version) {
 		this.profileSettingsUri = profileSettingsUri;
-		for (ExportSettingsType settingsType : settingsTypeList) {
+		for (AExportSettingsType settingsType : settingsTypeList) {
 			settingsTypeKeyList.add(settingsType.name());
 		}
 		this.replace = replace;

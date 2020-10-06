@@ -13,12 +13,12 @@ public class ExportProfileParams extends AidlParams {
 	public static final String PROFILE_KEY = "profile";
 	public static final String SETTINGS_TYPE_KEY = "settings_type";
 	private String profile;
-	ArrayList<String> settingsTypeKeyList = new ArrayList<>();
+	private ArrayList<String> settingsTypeKeyList = new ArrayList<>();
 
-	public ExportProfileParams(String profile, ArrayList<ExportSettingsType> settingsTypeList) {
+	public ExportProfileParams(String profile, ArrayList<AExportSettingsType> settingsTypeList) {
 
 		this.profile = profile;
-		for (ExportSettingsType settingsType : settingsTypeList) {
+		for (AExportSettingsType settingsType : settingsTypeList) {
 			settingsTypeKeyList.add(settingsType.name());
 		}
 	}

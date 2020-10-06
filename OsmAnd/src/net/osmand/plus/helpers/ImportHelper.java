@@ -701,9 +701,7 @@ public class ImportHelper {
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, CallbackWithObject<List<SettingsItem>> callback) {
 		if (extras != null && extras.containsKey(SETTINGS_VERSION_KEY)
-				&& extras.containsKey(REPLACE_KEY)
-				&& extras.containsKey(SETTINGS_LATEST_CHANGES_KEY)
-				&& extras.containsKey(SETTINGS_TYPE_LIST_KEY)) {
+				&& extras.containsKey(SETTINGS_LATEST_CHANGES_KEY)) {
 			int version = extras.getInt(SETTINGS_VERSION_KEY, -1);
 			String latestChanges = extras.getString(SETTINGS_LATEST_CHANGES_KEY);
 			boolean replace = extras.getBoolean(REPLACE_KEY);
@@ -817,11 +815,7 @@ public class ImportHelper {
 				if (mapActivity != null && succeed) {
 					FragmentManager fm = mapActivity.getSupportFragmentManager();
 					app.getRendererRegistry().updateExternalRenderers();
-					AppInitializer.loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
-						@Override
-						public void onRoutingFilesLoaded() {
-						}
-					});
+					AppInitializer.loadRoutingFiles(app, null);
 					if (file != null) {
 						ImportCompleteFragment.showInstance(fm, items, file.getName());
 					}

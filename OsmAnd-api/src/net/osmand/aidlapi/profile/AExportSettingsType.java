@@ -1,6 +1,6 @@
 package net.osmand.aidlapi.profile;
 
-public enum ExportSettingsType {
+public enum AExportSettingsType {
 	PROFILE,
 	QUICK_ACTIONS,
 	POI_TYPES,
