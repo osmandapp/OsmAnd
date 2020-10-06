@@ -85,7 +85,7 @@ public class ExceptionHandle {
                     return SOLVED;
                 default:
                     // handle other error scenarios
-                    showToast(activity, "Order unknown error!");
+                    showToast(activity, "Order unknown error (" + iapApiException.getStatusCode() + ")");
                     return SOLVED;
             }
         } else {
