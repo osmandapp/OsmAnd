@@ -119,6 +119,9 @@ android {
 		full {
 			java.srcDirs = ["src-google"]
 		}
+		fulldev {
+			java.srcDirs = ["src-google"]
+		}
 		free {
 			java.srcDirs = ["src-google"]
 			manifest.srcFile "AndroidManifest-free.xml"
