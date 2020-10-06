@@ -267,4 +267,8 @@
     <string name="last_response_duration">Остання відповідь: %1$s тому</string>
     <string name="duration_ago">%1$s тому</string>
     <string name="shared_string_error_short">ПМЛК</string>
+    <string name="shared_string_export">Експорт</string>
+    <string name="logcat_buffer">Буфер logcat</string>
+    <string name="logcat_buffer_descr">Переглянути та надіслати докладний журнал застосунку</string>
+    <string name="send_report">Надіслати звіт</string>
 </resources>
