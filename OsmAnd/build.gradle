@@ -292,7 +292,7 @@ task downloadWorldMiniBasemap {
 task setupHuaweiConfig {
 	doLast {
 		if (System.getenv("HUAWEI_SDK_JSON")) {
-			new File("agconnect-services.json").text = System.getenv("HUAWEI_SDK_JSON")
+			new File("OsmAnd/agconnect-services.json").text = System.getenv("HUAWEI_SDK_JSON")
 		}
 	}
 }
