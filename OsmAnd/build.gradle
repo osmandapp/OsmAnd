@@ -288,14 +288,6 @@ task downloadWorldMiniBasemap {
 	}
 }
 
-task setupHuaweiConfig {
-	doLast {
-		if (System.getenv("HUAWEI_SDK_JSON")) {
-			file("agconnect-services.json").text = System.getenv("HUAWEI_SDK_JSON")
-		}
-	}
-}
-
 task collectVoiceAssets(type: Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
@@ -422,11 +414,6 @@ task collectExternalResources {
 			copyWidgetIconsXhdpi,
 			copyPoiCategories,
 			downloadWorldMiniBasemap
-
-	String tskReqStr = gradle.startParameter.taskNames.toString()
-	if (tskReqStr.contains("huawei")) {
-		dependsOn setupHuaweiConfig
-	}
 }
 
 // Legacy core build
