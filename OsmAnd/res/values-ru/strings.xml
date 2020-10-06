@@ -3871,7 +3871,7 @@
     <string name="number_of_gpx_files_selected_pattern">Выбрано файлов треков: %s</string>
     <string name="save_global_track_interval_descr">Укажите интервал общей записи трека (включается через виджет «Запись поездки» на карте).</string>
     <string name="gpx_monitoring_stop">Остановить запись</string>
-    <string name="gpx_monitoring_start">Возобновить запись</string>
+    <string name="gpx_monitoring_start">Возобновить запись поездки</string>
     <string name="system_default_theme">По выбору системы</string>
     <string name="all_next_segments">Все последующие сегменты</string>
     <string name="previous_segment">Предыдущий сегмент</string>
