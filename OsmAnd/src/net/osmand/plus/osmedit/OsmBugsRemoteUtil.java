@@ -119,10 +119,9 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			connection.setRequestProperty("User-Agent", Version.getFullVersion(app)); //$NON-NLS-1$
 
 			if (!anonymous) {
-				if (client.isValidToken()){
+				if (client.isValidToken()) {
 					connection.addRequestProperty("Authorization", "OAuth " + client.getClient().getAccessToken().getToken());
-				}
-				else {
+				} else {
 					String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
 					connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}

@@ -82,34 +82,6 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 			prefOAuth.setTitle(R.string.osm_authorization_success);
 			prefOAuth.setSummary(R.string.osm_authorization_success);
 			prefOAuth.setKey("local_openstreetmap_oauth_success");
-
-			final Preference prefTestUser = new Preference(this);
-			prefTestUser.setTitle(R.string.test_user_request);
-			prefTestUser.setSummary(R.string.test_user_request_description);
-			prefTestUser.setKey("local_openstreetmap_oauth_user");
-			prefTestUser.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-				@Override
-				public boolean onPreferenceClick(Preference preference) {
-					String url = "https://api.openstreetmap.org/api/0.6/user/details";
-					client.performGetRequest(url, new OAuthAsyncRequestCallback<Response>() {
-						@Override
-						public void onCompleted(Response response) {
-							try {
-								Toast.makeText(SettingsOsmEditingActivity.this,response.getBody(),Toast.LENGTH_SHORT).show();
-							} catch (IOException e) {
-								log.error(e);
-							}
-						}
-
-						@Override
-						public void onThrowable(Throwable t) {
-							Toast.makeText(SettingsOsmEditingActivity.this,
-									"ERROR happened",Toast.LENGTH_SHORT).show();
-						}
-					});
-					return true;
-				}
-			});
 			final Preference prefClearToken = new Preference(this);
 			prefClearToken.setTitle(R.string.shared_string_logoff);
 			prefClearToken.setSummary(R.string.clear_osm_token);

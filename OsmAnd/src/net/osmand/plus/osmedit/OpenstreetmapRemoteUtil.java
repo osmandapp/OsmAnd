@@ -174,14 +174,14 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
         String response = sendRequest(
                 getSiteApi() + "api/0.6/changeset/create/", "PUT", writer.getBuffer().toString(), ctx.getString(R.string.opening_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$
-        try {
-            if (response != null && response.length() > 0) {
-                log.debug(response);
-                id = Long.parseLong(response);
-            }
-        } catch (Exception e) {
-            log.error(e);
-        }
+		try {
+			if (response != null && response.length() > 0) {
+				log.debug(response);
+				id = Long.parseLong(response);
+			}
+		} catch (Exception e) {
+			log.error(e);
+		}
 		return id;
 	}
 

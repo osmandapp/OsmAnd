@@ -216,13 +216,13 @@ android {
 
 	buildTypes {
 		debug {
-			buildConfigField "String", "CONSUMER_KEY", "\"Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y\""
-			buildConfigField "String", "CONSUMER_SECRET", "\"lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM\""
+			buildConfigField "String", "OSM_OAUTH_CONSUMER_KEY", "\"Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y\""
+			buildConfigField "String", "OSM_OAUTH_CONSUMER_SECRET", "\"lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM\""
 			signingConfig signingConfigs.development
 		}
 		release {
-			buildConfigField "String", "CONSUMER_KEY", "\"Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y\""
-			buildConfigField "String", "CONSUMER_SECRET", "\"lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM\""
+			buildConfigField "String", "OSM_OAUTH_CONSUMER_KEY", "\"Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y\""
+			buildConfigField "String", "OSM_OAUTH_CONSUMER_SECRET", "\"lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM\""
 			signingConfig signingConfigs.publishing
 		}
 	}

@@ -17,7 +17,8 @@ import java.util.concurrent.ExecutionException;
 
 public class OsmOAuthAuthorizationAdapter {
     private OsmandApplication application;
-    private OsmOAuthAuthorizationClient client = new OsmOAuthAuthorizationClient(BuildConfig.CONSUMER_KEY, BuildConfig.CONSUMER_SECRET);
+    private OsmOAuthAuthorizationClient client =
+            new OsmOAuthAuthorizationClient(BuildConfig.OSM_OAUTH_CONSUMER_KEY, BuildConfig.OSM_OAUTH_CONSUMER_SECRET);
     private static final int THREAD_ID = 10101;
 
     public OsmOAuthAuthorizationAdapter(OsmandApplication application) {
