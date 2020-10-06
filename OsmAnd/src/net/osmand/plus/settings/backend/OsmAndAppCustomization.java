@@ -31,7 +31,7 @@ import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.helpers.ImportHelper;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.routing.RouteCalculationResult;
