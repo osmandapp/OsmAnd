@@ -11,6 +11,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitializer.LoadRoutingFilesCallback;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.importfiles.ImportHelper.ImportType;
 import net.osmand.router.RoutingConfiguration.Builder;
@@ -29,26 +30,26 @@ import static net.osmand.plus.AppInitializer.loadRoutingFiles;
 
 class XmlImportTask extends BaseImportAsyncTask<Void, Void, String> {
 
-	private Uri intentUri;
+	private Uri uri;
 	private String destFileName;
 	private ImportType importType;
 	private CallbackWithObject routingCallback;
 
-	public XmlImportTask(@NonNull FragmentActivity activity, @NonNull Uri intentUri,
-	                     @NonNull String fileName, @Nullable CallbackWithObject routingCallback) {
+	public XmlImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
+						 @NonNull String fileName, @Nullable CallbackWithObject routingCallback) {
 		super(activity);
-		this.intentUri = intentUri;
+		this.uri = uri;
 		this.destFileName = fileName;
 		this.routingCallback = routingCallback;
 	}
 
 	@Override
 	protected String doInBackground(Void... voids) {
-		checkImportType();
+		importType = checkImportType(app, uri);
 		if (importType != null) {
 			File dest = getDestinationFile();
 			if (dest != null) {
-				return ImportHelper.copyFile(app, dest, intentUri, true);
+				return ImportHelper.copyFile(app, dest, uri, true);
 			}
 		}
 		return app.getString(R.string.file_import_error, destFileName, app.getString(R.string.unsupported_type_error));
@@ -115,10 +116,11 @@ class XmlImportTask extends BaseImportAsyncTask<Void, Void, String> {
 		return null;
 	}
 
-	private void checkImportType() {
+	protected static ImportType checkImportType(OsmandApplication app, Uri uri) {
+		ImportType importType = null;
 		InputStream is = null;
 		try {
-			is = app.getContentResolver().openInputStream(intentUri);
+			is = app.getContentResolver().openInputStream(uri);
 			if (is != null) {
 				XmlPullParser parser = PlatformUtil.newXMLPullParser();
 				parser.setInput(is, "UTF-8");
@@ -130,6 +132,10 @@ class XmlImportTask extends BaseImportAsyncTask<Void, Void, String> {
 							importType = ImportType.ROUTING;
 						} else if ("renderingStyle".equals(name)) {
 							importType = ImportType.RENDERING;
+						} else if ("gpx".equals(name)) {
+							importType = ImportType.GPX;
+						} else if ("kml".equals(name)) {
+							importType = ImportType.KML;
 						}
 						break;
 					}
@@ -145,5 +151,6 @@ class XmlImportTask extends BaseImportAsyncTask<Void, Void, String> {
 		} finally {
 			Algorithms.closeStream(is);
 		}
+		return importType;
 	}
 }

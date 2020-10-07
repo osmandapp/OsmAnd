@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.importfiles.ImportHelper.ImportType;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -19,6 +20,7 @@ import java.io.OutputStream;
 import static net.osmand.FileUtils.createUniqueFileName;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.MAPS_PATH;
+import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.IndexConstants.TEMP_DIR;
@@ -99,7 +101,13 @@ class UriImportTask extends BaseImportAsyncTask<Void, Void, String> {
 		if (error == null && file.exists()) {
 			Uri tempUri = AndroidUtils.getUriForFile(app, file);
 			if (XML_FILE_SIGNATURE == fileSignature) {
-				importHelper.handleXmlFileImport(tempUri, null, null);
+				ImportType importType = XmlImportTask.checkImportType(app, tempUri);
+				if (importType == ImportType.RENDERING || importType == ImportType.ROUTING) {
+					String name = importType == ImportType.RENDERING ? "renderer" + RENDERER_INDEX_EXT : "router" + ROUTING_FILE_EXT;
+					importHelper.handleXmlFileImport(tempUri, name, null);
+				} else if (importType == ImportType.GPX || importType == ImportType.KML) {
+					importHelper.handleGpxOrFavouritesImport(tempUri, tempFileName, save, useImportDir, false, false);
+				}
 			} else if (OBF_FILE_SIGNATURE == fileSignature) {
 				String name = createUniqueFileName(app, "map", MAPS_PATH, BINARY_MAP_INDEX_EXT);
 				importHelper.handleObfImport(tempUri, name);

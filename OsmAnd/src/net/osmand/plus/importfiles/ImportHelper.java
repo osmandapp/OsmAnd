@@ -87,7 +87,9 @@ public class ImportHelper {
 	public enum ImportType {
 		SETTINGS(OSMAND_SETTINGS_FILE_EXT),
 		ROUTING(ROUTING_FILE_EXT),
-		RENDERING(RENDERER_INDEX_EXT);
+		RENDERING(RENDERER_INDEX_EXT),
+		GPX(GPX_FILE_EXT),
+		KML(KML_SUFFIX);
 
 		ImportType(String extension) {
 			this.extension = extension;
@@ -226,8 +228,8 @@ public class ImportHelper {
 		executeImportTask(new GpxImportTask(this, activity, gpxFile, fileName, save, useImportDir, showInDetailsActivity));
 	}
 
-	private void handleGpxOrFavouritesImport(Uri fileUri, String fileName, boolean save, boolean useImportDir,
-											 boolean forceImportFavourites, boolean forceImportGpx) {
+	protected void handleGpxOrFavouritesImport(Uri fileUri, String fileName, boolean save, boolean useImportDir,
+											   boolean forceImportFavourites, boolean forceImportGpx) {
 		executeImportTask(new GpxOrFavouritesImportTask(this, activity, fileUri, fileName, save, useImportDir, forceImportFavourites, forceImportGpx));
 	}
 
