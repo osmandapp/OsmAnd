@@ -3,7 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="@dimen/bottom_sheet_list_item_height"
+	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
@@ -28,7 +28,7 @@
 		android:layout_marginRight="@dimen/content_padding"
 		android:layout_weight="1"
 		android:ellipsize="end"
-		android:maxLines="2"
+		android:maxLines="4"
 		android:textAppearance="@style/TextAppearance.ListItemTitle"
 		tools:text="Some Title"/>
 
