@@ -215,6 +215,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		if (!TextUtils.isEmpty(getInfoDescription())) {
 			infoDescription.setText(getInfoDescription());
 		}
+		TextViewEx planInfoDescription = (TextViewEx) view.findViewById(R.id.plan_info_description);
+		planInfoDescription.setText(Version.isHuawei(app)
+				? R.string.osm_live_payment_subscription_management_hw : R.string.osm_live_payment_subscription_management);
 		ViewGroup osmLiveCard = buildOsmLiveCard(ctx, cardsContainer);
 		if (osmLiveCard != null) {
 			cardsContainer.addView(osmLiveCard);
